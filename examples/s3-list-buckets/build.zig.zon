@@ -1,0 +1,17 @@
+.{
+    .name = .s3_list_buckets,
+    .version = "0.0.0",
+    .fingerprint = 0xba79dd9b74eef601,
+    .minimum_zig_version = "0.15.2",
+    .dependencies = .{
+        .aws_sdk = .{
+            .url = "git+https://github.com/cloudboss/aws-sdk-zig.git#296c504a89fe96bd8be55d154a0648ead85acbdf",
+            .hash = "aws_sdk-0.0.1-ApQSLzP_Ww9A3D2KVt__Ty1WnqxBKUPsw1A8nyd_KPji",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}
