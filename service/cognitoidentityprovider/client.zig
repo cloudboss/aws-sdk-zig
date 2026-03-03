@@ -120,6 +120,7 @@ const update_user_pool_client = @import("update_user_pool_client.zig");
 const update_user_pool_domain = @import("update_user_pool_domain.zig");
 const verify_software_token = @import("verify_software_token.zig");
 const verify_user_attribute = @import("verify_user_attribute.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -169,7 +170,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn addCustomAttributes(self: *Self, allocator: std.mem.Allocator, input: add_custom_attributes.AddCustomAttributesInput, options: add_custom_attributes.Options) !add_custom_attributes.AddCustomAttributesOutput {
+    pub fn addCustomAttributes(self: *Self, allocator: std.mem.Allocator, input: add_custom_attributes.AddCustomAttributesInput, options: CallOptions) !add_custom_attributes.AddCustomAttributesOutput {
         return add_custom_attributes.execute(self, allocator, input, options);
     }
 
@@ -191,7 +192,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminAddUserToGroup(self: *Self, allocator: std.mem.Allocator, input: admin_add_user_to_group.AdminAddUserToGroupInput, options: admin_add_user_to_group.Options) !admin_add_user_to_group.AdminAddUserToGroupOutput {
+    pub fn adminAddUserToGroup(self: *Self, allocator: std.mem.Allocator, input: admin_add_user_to_group.AdminAddUserToGroupInput, options: CallOptions) !admin_add_user_to_group.AdminAddUserToGroupOutput {
         return admin_add_user_to_group.execute(self, allocator, input, options);
     }
 
@@ -222,7 +223,7 @@ pub const Client = struct {
     /// set
     /// `AllowAdminCreateUserOnly` to `true` in a
     /// `CreateUserPool` or `UpdateUserPool` request.
-    pub fn adminConfirmSignUp(self: *Self, allocator: std.mem.Allocator, input: admin_confirm_sign_up.AdminConfirmSignUpInput, options: admin_confirm_sign_up.Options) !admin_confirm_sign_up.AdminConfirmSignUpOutput {
+    pub fn adminConfirmSignUp(self: *Self, allocator: std.mem.Allocator, input: admin_confirm_sign_up.AdminConfirmSignUpInput, options: CallOptions) !admin_confirm_sign_up.AdminConfirmSignUpOutput {
         return admin_confirm_sign_up.execute(self, allocator, input, options);
     }
 
@@ -291,7 +292,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminCreateUser(self: *Self, allocator: std.mem.Allocator, input: admin_create_user.AdminCreateUserInput, options: admin_create_user.Options) !admin_create_user.AdminCreateUserOutput {
+    pub fn adminCreateUser(self: *Self, allocator: std.mem.Allocator, input: admin_create_user.AdminCreateUserInput, options: CallOptions) !admin_create_user.AdminCreateUserOutput {
         return admin_create_user.execute(self, allocator, input, options);
     }
 
@@ -310,7 +311,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminDeleteUser(self: *Self, allocator: std.mem.Allocator, input: admin_delete_user.AdminDeleteUserInput, options: admin_delete_user.Options) !admin_delete_user.AdminDeleteUserOutput {
+    pub fn adminDeleteUser(self: *Self, allocator: std.mem.Allocator, input: admin_delete_user.AdminDeleteUserInput, options: CallOptions) !admin_delete_user.AdminDeleteUserOutput {
         return admin_delete_user.execute(self, allocator, input, options);
     }
 
@@ -333,7 +334,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminDeleteUserAttributes(self: *Self, allocator: std.mem.Allocator, input: admin_delete_user_attributes.AdminDeleteUserAttributesInput, options: admin_delete_user_attributes.Options) !admin_delete_user_attributes.AdminDeleteUserAttributesOutput {
+    pub fn adminDeleteUserAttributes(self: *Self, allocator: std.mem.Allocator, input: admin_delete_user_attributes.AdminDeleteUserAttributesInput, options: CallOptions) !admin_delete_user_attributes.AdminDeleteUserAttributesOutput {
         return admin_delete_user_attributes.execute(self, allocator, input, options);
     }
 
@@ -385,7 +386,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminDisableProviderForUser(self: *Self, allocator: std.mem.Allocator, input: admin_disable_provider_for_user.AdminDisableProviderForUserInput, options: admin_disable_provider_for_user.Options) !admin_disable_provider_for_user.AdminDisableProviderForUserOutput {
+    pub fn adminDisableProviderForUser(self: *Self, allocator: std.mem.Allocator, input: admin_disable_provider_for_user.AdminDisableProviderForUserInput, options: CallOptions) !admin_disable_provider_for_user.AdminDisableProviderForUserOutput {
         return admin_disable_provider_for_user.execute(self, allocator, input, options);
     }
 
@@ -407,7 +408,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminDisableUser(self: *Self, allocator: std.mem.Allocator, input: admin_disable_user.AdminDisableUserInput, options: admin_disable_user.Options) !admin_disable_user.AdminDisableUserOutput {
+    pub fn adminDisableUser(self: *Self, allocator: std.mem.Allocator, input: admin_disable_user.AdminDisableUserInput, options: CallOptions) !admin_disable_user.AdminDisableUserOutput {
         return admin_disable_user.execute(self, allocator, input, options);
     }
 
@@ -427,7 +428,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminEnableUser(self: *Self, allocator: std.mem.Allocator, input: admin_enable_user.AdminEnableUserInput, options: admin_enable_user.Options) !admin_enable_user.AdminEnableUserOutput {
+    pub fn adminEnableUser(self: *Self, allocator: std.mem.Allocator, input: admin_enable_user.AdminEnableUserInput, options: CallOptions) !admin_enable_user.AdminEnableUserOutput {
         return admin_enable_user.execute(self, allocator, input, options);
     }
 
@@ -452,7 +453,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminForgetDevice(self: *Self, allocator: std.mem.Allocator, input: admin_forget_device.AdminForgetDeviceInput, options: admin_forget_device.Options) !admin_forget_device.AdminForgetDeviceOutput {
+    pub fn adminForgetDevice(self: *Self, allocator: std.mem.Allocator, input: admin_forget_device.AdminForgetDeviceInput, options: CallOptions) !admin_forget_device.AdminForgetDeviceOutput {
         return admin_forget_device.execute(self, allocator, input, options);
     }
 
@@ -474,7 +475,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminGetDevice(self: *Self, allocator: std.mem.Allocator, input: admin_get_device.AdminGetDeviceInput, options: admin_get_device.Options) !admin_get_device.AdminGetDeviceOutput {
+    pub fn adminGetDevice(self: *Self, allocator: std.mem.Allocator, input: admin_get_device.AdminGetDeviceInput, options: CallOptions) !admin_get_device.AdminGetDeviceOutput {
         return admin_get_device.execute(self, allocator, input, options);
     }
 
@@ -499,7 +500,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminGetUser(self: *Self, allocator: std.mem.Allocator, input: admin_get_user.AdminGetUserInput, options: admin_get_user.Options) !admin_get_user.AdminGetUserOutput {
+    pub fn adminGetUser(self: *Self, allocator: std.mem.Allocator, input: admin_get_user.AdminGetUserInput, options: CallOptions) !admin_get_user.AdminGetUserOutput {
         return admin_get_user.execute(self, allocator, input, options);
     }
 
@@ -554,7 +555,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminInitiateAuth(self: *Self, allocator: std.mem.Allocator, input: admin_initiate_auth.AdminInitiateAuthInput, options: admin_initiate_auth.Options) !admin_initiate_auth.AdminInitiateAuthOutput {
+    pub fn adminInitiateAuth(self: *Self, allocator: std.mem.Allocator, input: admin_initiate_auth.AdminInitiateAuthInput, options: CallOptions) !admin_initiate_auth.AdminInitiateAuthOutput {
         return admin_initiate_auth.execute(self, allocator, input, options);
     }
 
@@ -594,7 +595,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminLinkProviderForUser(self: *Self, allocator: std.mem.Allocator, input: admin_link_provider_for_user.AdminLinkProviderForUserInput, options: admin_link_provider_for_user.Options) !admin_link_provider_for_user.AdminLinkProviderForUserOutput {
+    pub fn adminLinkProviderForUser(self: *Self, allocator: std.mem.Allocator, input: admin_link_provider_for_user.AdminLinkProviderForUserInput, options: CallOptions) !admin_link_provider_for_user.AdminLinkProviderForUserOutput {
         return admin_link_provider_for_user.execute(self, allocator, input, options);
     }
 
@@ -621,7 +622,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminListDevices(self: *Self, allocator: std.mem.Allocator, input: admin_list_devices.AdminListDevicesInput, options: admin_list_devices.Options) !admin_list_devices.AdminListDevicesOutput {
+    pub fn adminListDevices(self: *Self, allocator: std.mem.Allocator, input: admin_list_devices.AdminListDevicesInput, options: CallOptions) !admin_list_devices.AdminListDevicesOutput {
         return admin_list_devices.execute(self, allocator, input, options);
     }
 
@@ -646,7 +647,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminListGroupsForUser(self: *Self, allocator: std.mem.Allocator, input: admin_list_groups_for_user.AdminListGroupsForUserInput, options: admin_list_groups_for_user.Options) !admin_list_groups_for_user.AdminListGroupsForUserOutput {
+    pub fn adminListGroupsForUser(self: *Self, allocator: std.mem.Allocator, input: admin_list_groups_for_user.AdminListGroupsForUserInput, options: CallOptions) !admin_list_groups_for_user.AdminListGroupsForUserOutput {
         return admin_list_groups_for_user.execute(self, allocator, input, options);
     }
 
@@ -668,7 +669,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminListUserAuthEvents(self: *Self, allocator: std.mem.Allocator, input: admin_list_user_auth_events.AdminListUserAuthEventsInput, options: admin_list_user_auth_events.Options) !admin_list_user_auth_events.AdminListUserAuthEventsOutput {
+    pub fn adminListUserAuthEvents(self: *Self, allocator: std.mem.Allocator, input: admin_list_user_auth_events.AdminListUserAuthEventsInput, options: CallOptions) !admin_list_user_auth_events.AdminListUserAuthEventsOutput {
         return admin_list_user_auth_events.execute(self, allocator, input, options);
     }
 
@@ -693,7 +694,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminRemoveUserFromGroup(self: *Self, allocator: std.mem.Allocator, input: admin_remove_user_from_group.AdminRemoveUserFromGroupInput, options: admin_remove_user_from_group.Options) !admin_remove_user_from_group.AdminRemoveUserFromGroupOutput {
+    pub fn adminRemoveUserFromGroup(self: *Self, allocator: std.mem.Allocator, input: admin_remove_user_from_group.AdminRemoveUserFromGroupInput, options: CallOptions) !admin_remove_user_from_group.AdminRemoveUserFromGroupOutput {
         return admin_remove_user_from_group.execute(self, allocator, input, options);
     }
 
@@ -752,7 +753,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminResetUserPassword(self: *Self, allocator: std.mem.Allocator, input: admin_reset_user_password.AdminResetUserPasswordInput, options: admin_reset_user_password.Options) !admin_reset_user_password.AdminResetUserPasswordOutput {
+    pub fn adminResetUserPassword(self: *Self, allocator: std.mem.Allocator, input: admin_reset_user_password.AdminResetUserPasswordInput, options: CallOptions) !admin_reset_user_password.AdminResetUserPasswordOutput {
         return admin_reset_user_password.execute(self, allocator, input, options);
     }
 
@@ -810,7 +811,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminRespondToAuthChallenge(self: *Self, allocator: std.mem.Allocator, input: admin_respond_to_auth_challenge.AdminRespondToAuthChallengeInput, options: admin_respond_to_auth_challenge.Options) !admin_respond_to_auth_challenge.AdminRespondToAuthChallengeOutput {
+    pub fn adminRespondToAuthChallenge(self: *Self, allocator: std.mem.Allocator, input: admin_respond_to_auth_challenge.AdminRespondToAuthChallengeInput, options: CallOptions) !admin_respond_to_auth_challenge.AdminRespondToAuthChallengeOutput {
         return admin_respond_to_auth_challenge.execute(self, allocator, input, options);
     }
 
@@ -837,7 +838,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminSetUserMfaPreference(self: *Self, allocator: std.mem.Allocator, input: admin_set_user_mfa_preference.AdminSetUserMFAPreferenceInput, options: admin_set_user_mfa_preference.Options) !admin_set_user_mfa_preference.AdminSetUserMFAPreferenceOutput {
+    pub fn adminSetUserMfaPreference(self: *Self, allocator: std.mem.Allocator, input: admin_set_user_mfa_preference.AdminSetUserMFAPreferenceInput, options: CallOptions) !admin_set_user_mfa_preference.AdminSetUserMFAPreferenceOutput {
         return admin_set_user_mfa_preference.execute(self, allocator, input, options);
     }
 
@@ -896,7 +897,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminSetUserPassword(self: *Self, allocator: std.mem.Allocator, input: admin_set_user_password.AdminSetUserPasswordInput, options: admin_set_user_password.Options) !admin_set_user_password.AdminSetUserPasswordOutput {
+    pub fn adminSetUserPassword(self: *Self, allocator: std.mem.Allocator, input: admin_set_user_password.AdminSetUserPasswordInput, options: CallOptions) !admin_set_user_password.AdminSetUserPasswordOutput {
         return admin_set_user_password.execute(self, allocator, input, options);
     }
 
@@ -918,7 +919,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminSetUserSettings(self: *Self, allocator: std.mem.Allocator, input: admin_set_user_settings.AdminSetUserSettingsInput, options: admin_set_user_settings.Options) !admin_set_user_settings.AdminSetUserSettingsOutput {
+    pub fn adminSetUserSettings(self: *Self, allocator: std.mem.Allocator, input: admin_set_user_settings.AdminSetUserSettingsInput, options: CallOptions) !admin_set_user_settings.AdminSetUserSettingsOutput {
         return admin_set_user_settings.execute(self, allocator, input, options);
     }
 
@@ -955,7 +956,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminUpdateAuthEventFeedback(self: *Self, allocator: std.mem.Allocator, input: admin_update_auth_event_feedback.AdminUpdateAuthEventFeedbackInput, options: admin_update_auth_event_feedback.Options) !admin_update_auth_event_feedback.AdminUpdateAuthEventFeedbackOutput {
+    pub fn adminUpdateAuthEventFeedback(self: *Self, allocator: std.mem.Allocator, input: admin_update_auth_event_feedback.AdminUpdateAuthEventFeedbackInput, options: CallOptions) !admin_update_auth_event_feedback.AdminUpdateAuthEventFeedbackOutput {
         return admin_update_auth_event_feedback.execute(self, allocator, input, options);
     }
 
@@ -985,7 +986,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminUpdateDeviceStatus(self: *Self, allocator: std.mem.Allocator, input: admin_update_device_status.AdminUpdateDeviceStatusInput, options: admin_update_device_status.Options) !admin_update_device_status.AdminUpdateDeviceStatusOutput {
+    pub fn adminUpdateDeviceStatus(self: *Self, allocator: std.mem.Allocator, input: admin_update_device_status.AdminUpdateDeviceStatusInput, options: CallOptions) !admin_update_device_status.AdminUpdateDeviceStatusOutput {
         return admin_update_device_status.execute(self, allocator, input, options);
     }
 
@@ -1044,7 +1045,7 @@ pub const Client = struct {
     /// settings for Amazon Cognito user
     /// pools](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html) in the *Amazon Cognito
     /// Developer Guide*.
-    pub fn adminUpdateUserAttributes(self: *Self, allocator: std.mem.Allocator, input: admin_update_user_attributes.AdminUpdateUserAttributesInput, options: admin_update_user_attributes.Options) !admin_update_user_attributes.AdminUpdateUserAttributesOutput {
+    pub fn adminUpdateUserAttributes(self: *Self, allocator: std.mem.Allocator, input: admin_update_user_attributes.AdminUpdateUserAttributesInput, options: CallOptions) !admin_update_user_attributes.AdminUpdateUserAttributesOutput {
         return admin_update_user_attributes.execute(self, allocator, input, options);
     }
 
@@ -1097,7 +1098,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn adminUserGlobalSignOut(self: *Self, allocator: std.mem.Allocator, input: admin_user_global_sign_out.AdminUserGlobalSignOutInput, options: admin_user_global_sign_out.Options) !admin_user_global_sign_out.AdminUserGlobalSignOutOutput {
+    pub fn adminUserGlobalSignOut(self: *Self, allocator: std.mem.Allocator, input: admin_user_global_sign_out.AdminUserGlobalSignOutInput, options: CallOptions) !admin_user_global_sign_out.AdminUserGlobalSignOutOutput {
         return admin_user_global_sign_out.execute(self, allocator, input, options);
     }
 
@@ -1121,7 +1122,7 @@ pub const Client = struct {
     ///
     /// Authorize this action with a signed-in user's access token. It must include
     /// the scope `aws.cognito.signin.user.admin`.
-    pub fn associateSoftwareToken(self: *Self, allocator: std.mem.Allocator, input: associate_software_token.AssociateSoftwareTokenInput, options: associate_software_token.Options) !associate_software_token.AssociateSoftwareTokenOutput {
+    pub fn associateSoftwareToken(self: *Self, allocator: std.mem.Allocator, input: associate_software_token.AssociateSoftwareTokenInput, options: CallOptions) !associate_software_token.AssociateSoftwareTokenOutput {
         return associate_software_token.execute(self, allocator, input, options);
     }
 
@@ -1138,7 +1139,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn changePassword(self: *Self, allocator: std.mem.Allocator, input: change_password.ChangePasswordInput, options: change_password.Options) !change_password.ChangePasswordOutput {
+    pub fn changePassword(self: *Self, allocator: std.mem.Allocator, input: change_password.ChangePasswordInput, options: CallOptions) !change_password.ChangePasswordOutput {
         return change_password.execute(self, allocator, input, options);
     }
 
@@ -1148,7 +1149,7 @@ pub const Client = struct {
     ///
     /// Authorize this action with a signed-in user's access token. It must include
     /// the scope `aws.cognito.signin.user.admin`.
-    pub fn completeWebAuthnRegistration(self: *Self, allocator: std.mem.Allocator, input: complete_web_authn_registration.CompleteWebAuthnRegistrationInput, options: complete_web_authn_registration.Options) !complete_web_authn_registration.CompleteWebAuthnRegistrationOutput {
+    pub fn completeWebAuthnRegistration(self: *Self, allocator: std.mem.Allocator, input: complete_web_authn_registration.CompleteWebAuthnRegistrationInput, options: CallOptions) !complete_web_authn_registration.CompleteWebAuthnRegistrationOutput {
         return complete_web_authn_registration.execute(self, allocator, input, options);
     }
 
@@ -1173,7 +1174,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn confirmDevice(self: *Self, allocator: std.mem.Allocator, input: confirm_device.ConfirmDeviceInput, options: confirm_device.Options) !confirm_device.ConfirmDeviceOutput {
+    pub fn confirmDevice(self: *Self, allocator: std.mem.Allocator, input: confirm_device.ConfirmDeviceInput, options: CallOptions) !confirm_device.ConfirmDeviceOutput {
         return confirm_device.execute(self, allocator, input, options);
     }
 
@@ -1189,7 +1190,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn confirmForgotPassword(self: *Self, allocator: std.mem.Allocator, input: confirm_forgot_password.ConfirmForgotPasswordInput, options: confirm_forgot_password.Options) !confirm_forgot_password.ConfirmForgotPasswordOutput {
+    pub fn confirmForgotPassword(self: *Self, allocator: std.mem.Allocator, input: confirm_forgot_password.ConfirmForgotPasswordInput, options: CallOptions) !confirm_forgot_password.ConfirmForgotPasswordOutput {
         return confirm_forgot_password.execute(self, allocator, input, options);
     }
 
@@ -1218,7 +1219,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn confirmSignUp(self: *Self, allocator: std.mem.Allocator, input: confirm_sign_up.ConfirmSignUpInput, options: confirm_sign_up.Options) !confirm_sign_up.ConfirmSignUpOutput {
+    pub fn confirmSignUp(self: *Self, allocator: std.mem.Allocator, input: confirm_sign_up.ConfirmSignUpInput, options: CallOptions) !confirm_sign_up.ConfirmSignUpOutput {
         return confirm_sign_up.execute(self, allocator, input, options);
     }
 
@@ -1240,7 +1241,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: create_group.Options) !create_group.CreateGroupOutput {
+    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: CallOptions) !create_group.CreateGroupOutput {
         return create_group.execute(self, allocator, input, options);
     }
 
@@ -1265,7 +1266,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn createIdentityProvider(self: *Self, allocator: std.mem.Allocator, input: create_identity_provider.CreateIdentityProviderInput, options: create_identity_provider.Options) !create_identity_provider.CreateIdentityProviderOutput {
+    pub fn createIdentityProvider(self: *Self, allocator: std.mem.Allocator, input: create_identity_provider.CreateIdentityProviderInput, options: CallOptions) !create_identity_provider.CreateIdentityProviderOutput {
         return create_identity_provider.execute(self, allocator, input, options);
     }
 
@@ -1306,7 +1307,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn createManagedLoginBranding(self: *Self, allocator: std.mem.Allocator, input: create_managed_login_branding.CreateManagedLoginBrandingInput, options: create_managed_login_branding.Options) !create_managed_login_branding.CreateManagedLoginBrandingOutput {
+    pub fn createManagedLoginBranding(self: *Self, allocator: std.mem.Allocator, input: create_managed_login_branding.CreateManagedLoginBrandingInput, options: CallOptions) !create_managed_login_branding.CreateManagedLoginBrandingOutput {
         return create_managed_login_branding.execute(self, allocator, input, options);
     }
 
@@ -1330,7 +1331,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn createResourceServer(self: *Self, allocator: std.mem.Allocator, input: create_resource_server.CreateResourceServerInput, options: create_resource_server.Options) !create_resource_server.CreateResourceServerOutput {
+    pub fn createResourceServer(self: *Self, allocator: std.mem.Allocator, input: create_resource_server.CreateResourceServerInput, options: CallOptions) !create_resource_server.CreateResourceServerOutput {
         return create_resource_server.execute(self, allocator, input, options);
     }
 
@@ -1370,7 +1371,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn createTerms(self: *Self, allocator: std.mem.Allocator, input: create_terms.CreateTermsInput, options: create_terms.Options) !create_terms.CreateTermsOutput {
+    pub fn createTerms(self: *Self, allocator: std.mem.Allocator, input: create_terms.CreateTermsInput, options: CallOptions) !create_terms.CreateTermsOutput {
         return create_terms.execute(self, allocator, input, options);
     }
 
@@ -1392,7 +1393,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn createUserImportJob(self: *Self, allocator: std.mem.Allocator, input: create_user_import_job.CreateUserImportJobInput, options: create_user_import_job.Options) !create_user_import_job.CreateUserImportJobOutput {
+    pub fn createUserImportJob(self: *Self, allocator: std.mem.Allocator, input: create_user_import_job.CreateUserImportJobInput, options: CallOptions) !create_user_import_job.CreateUserImportJobOutput {
         return create_user_import_job.execute(self, allocator, input, options);
     }
 
@@ -1444,7 +1445,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn createUserPool(self: *Self, allocator: std.mem.Allocator, input: create_user_pool.CreateUserPoolInput, options: create_user_pool.Options) !create_user_pool.CreateUserPoolOutput {
+    pub fn createUserPool(self: *Self, allocator: std.mem.Allocator, input: create_user_pool.CreateUserPoolInput, options: CallOptions) !create_user_pool.CreateUserPoolOutput {
         return create_user_pool.execute(self, allocator, input, options);
     }
 
@@ -1473,7 +1474,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn createUserPoolClient(self: *Self, allocator: std.mem.Allocator, input: create_user_pool_client.CreateUserPoolClientInput, options: create_user_pool_client.Options) !create_user_pool_client.CreateUserPoolClientOutput {
+    pub fn createUserPoolClient(self: *Self, allocator: std.mem.Allocator, input: create_user_pool_client.CreateUserPoolClientInput, options: CallOptions) !create_user_pool_client.CreateUserPoolClientOutput {
         return create_user_pool_client.execute(self, allocator, input, options);
     }
 
@@ -1511,7 +1512,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn createUserPoolDomain(self: *Self, allocator: std.mem.Allocator, input: create_user_pool_domain.CreateUserPoolDomainInput, options: create_user_pool_domain.Options) !create_user_pool_domain.CreateUserPoolDomainOutput {
+    pub fn createUserPoolDomain(self: *Self, allocator: std.mem.Allocator, input: create_user_pool_domain.CreateUserPoolDomainInput, options: CallOptions) !create_user_pool_domain.CreateUserPoolDomainOutput {
         return create_user_pool_domain.execute(self, allocator, input, options);
     }
 
@@ -1537,7 +1538,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: delete_group.Options) !delete_group.DeleteGroupOutput {
+    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: CallOptions) !delete_group.DeleteGroupOutput {
         return delete_group.execute(self, allocator, input, options);
     }
 
@@ -1561,7 +1562,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn deleteIdentityProvider(self: *Self, allocator: std.mem.Allocator, input: delete_identity_provider.DeleteIdentityProviderInput, options: delete_identity_provider.Options) !delete_identity_provider.DeleteIdentityProviderOutput {
+    pub fn deleteIdentityProvider(self: *Self, allocator: std.mem.Allocator, input: delete_identity_provider.DeleteIdentityProviderInput, options: CallOptions) !delete_identity_provider.DeleteIdentityProviderOutput {
         return delete_identity_provider.execute(self, allocator, input, options);
     }
 
@@ -1586,7 +1587,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn deleteManagedLoginBranding(self: *Self, allocator: std.mem.Allocator, input: delete_managed_login_branding.DeleteManagedLoginBrandingInput, options: delete_managed_login_branding.Options) !delete_managed_login_branding.DeleteManagedLoginBrandingOutput {
+    pub fn deleteManagedLoginBranding(self: *Self, allocator: std.mem.Allocator, input: delete_managed_login_branding.DeleteManagedLoginBrandingInput, options: CallOptions) !delete_managed_login_branding.DeleteManagedLoginBrandingOutput {
         return delete_managed_login_branding.execute(self, allocator, input, options);
     }
 
@@ -1613,7 +1614,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn deleteResourceServer(self: *Self, allocator: std.mem.Allocator, input: delete_resource_server.DeleteResourceServerInput, options: delete_resource_server.Options) !delete_resource_server.DeleteResourceServerOutput {
+    pub fn deleteResourceServer(self: *Self, allocator: std.mem.Allocator, input: delete_resource_server.DeleteResourceServerInput, options: CallOptions) !delete_resource_server.DeleteResourceServerOutput {
         return delete_resource_server.execute(self, allocator, input, options);
     }
 
@@ -1632,7 +1633,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn deleteTerms(self: *Self, allocator: std.mem.Allocator, input: delete_terms.DeleteTermsInput, options: delete_terms.Options) !delete_terms.DeleteTermsOutput {
+    pub fn deleteTerms(self: *Self, allocator: std.mem.Allocator, input: delete_terms.DeleteTermsInput, options: CallOptions) !delete_terms.DeleteTermsOutput {
         return delete_terms.execute(self, allocator, input, options);
     }
 
@@ -1651,7 +1652,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: delete_user.Options) !delete_user.DeleteUserOutput {
+    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: CallOptions) !delete_user.DeleteUserOutput {
         return delete_user.execute(self, allocator, input, options);
     }
 
@@ -1671,7 +1672,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn deleteUserAttributes(self: *Self, allocator: std.mem.Allocator, input: delete_user_attributes.DeleteUserAttributesInput, options: delete_user_attributes.Options) !delete_user_attributes.DeleteUserAttributesOutput {
+    pub fn deleteUserAttributes(self: *Self, allocator: std.mem.Allocator, input: delete_user_attributes.DeleteUserAttributesInput, options: CallOptions) !delete_user_attributes.DeleteUserAttributesOutput {
         return delete_user_attributes.execute(self, allocator, input, options);
     }
 
@@ -1693,14 +1694,14 @@ pub const Client = struct {
     /// the case of large user pools, the cleanup process might take significant
     /// additional time
     /// before all user data is permanently deleted.
-    pub fn deleteUserPool(self: *Self, allocator: std.mem.Allocator, input: delete_user_pool.DeleteUserPoolInput, options: delete_user_pool.Options) !delete_user_pool.DeleteUserPoolOutput {
+    pub fn deleteUserPool(self: *Self, allocator: std.mem.Allocator, input: delete_user_pool.DeleteUserPoolInput, options: CallOptions) !delete_user_pool.DeleteUserPoolOutput {
         return delete_user_pool.execute(self, allocator, input, options);
     }
 
     /// Deletes a user pool app client. After you delete an app client, users can no
     /// longer
     /// sign in to the associated application.
-    pub fn deleteUserPoolClient(self: *Self, allocator: std.mem.Allocator, input: delete_user_pool_client.DeleteUserPoolClientInput, options: delete_user_pool_client.Options) !delete_user_pool_client.DeleteUserPoolClientOutput {
+    pub fn deleteUserPoolClient(self: *Self, allocator: std.mem.Allocator, input: delete_user_pool_client.DeleteUserPoolClientInput, options: CallOptions) !delete_user_pool_client.DeleteUserPoolClientOutput {
         return delete_user_pool_client.execute(self, allocator, input, options);
     }
 
@@ -1709,7 +1710,7 @@ pub const Client = struct {
     /// delete a user pool domain, your managed login pages and authorization server
     /// are no
     /// longer available.
-    pub fn deleteUserPoolDomain(self: *Self, allocator: std.mem.Allocator, input: delete_user_pool_domain.DeleteUserPoolDomainInput, options: delete_user_pool_domain.Options) !delete_user_pool_domain.DeleteUserPoolDomainOutput {
+    pub fn deleteUserPoolDomain(self: *Self, allocator: std.mem.Allocator, input: delete_user_pool_domain.DeleteUserPoolDomainInput, options: CallOptions) !delete_user_pool_domain.DeleteUserPoolDomainOutput {
         return delete_user_pool_domain.execute(self, allocator, input, options);
     }
 
@@ -1728,35 +1729,35 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn deleteWebAuthnCredential(self: *Self, allocator: std.mem.Allocator, input: delete_web_authn_credential.DeleteWebAuthnCredentialInput, options: delete_web_authn_credential.Options) !delete_web_authn_credential.DeleteWebAuthnCredentialOutput {
+    pub fn deleteWebAuthnCredential(self: *Self, allocator: std.mem.Allocator, input: delete_web_authn_credential.DeleteWebAuthnCredentialInput, options: CallOptions) !delete_web_authn_credential.DeleteWebAuthnCredentialOutput {
         return delete_web_authn_credential.execute(self, allocator, input, options);
     }
 
     /// Given a user pool ID and identity provider (IdP) name, returns details about
     /// the
     /// IdP.
-    pub fn describeIdentityProvider(self: *Self, allocator: std.mem.Allocator, input: describe_identity_provider.DescribeIdentityProviderInput, options: describe_identity_provider.Options) !describe_identity_provider.DescribeIdentityProviderOutput {
+    pub fn describeIdentityProvider(self: *Self, allocator: std.mem.Allocator, input: describe_identity_provider.DescribeIdentityProviderInput, options: CallOptions) !describe_identity_provider.DescribeIdentityProviderOutput {
         return describe_identity_provider.execute(self, allocator, input, options);
     }
 
     /// Given the ID of a managed login branding style, returns detailed information
     /// about the
     /// style.
-    pub fn describeManagedLoginBranding(self: *Self, allocator: std.mem.Allocator, input: describe_managed_login_branding.DescribeManagedLoginBrandingInput, options: describe_managed_login_branding.Options) !describe_managed_login_branding.DescribeManagedLoginBrandingOutput {
+    pub fn describeManagedLoginBranding(self: *Self, allocator: std.mem.Allocator, input: describe_managed_login_branding.DescribeManagedLoginBrandingInput, options: CallOptions) !describe_managed_login_branding.DescribeManagedLoginBrandingOutput {
         return describe_managed_login_branding.execute(self, allocator, input, options);
     }
 
     /// Given the ID of a user pool app client, returns detailed information about
     /// the style
     /// assigned to the app client.
-    pub fn describeManagedLoginBrandingByClient(self: *Self, allocator: std.mem.Allocator, input: describe_managed_login_branding_by_client.DescribeManagedLoginBrandingByClientInput, options: describe_managed_login_branding_by_client.Options) !describe_managed_login_branding_by_client.DescribeManagedLoginBrandingByClientOutput {
+    pub fn describeManagedLoginBrandingByClient(self: *Self, allocator: std.mem.Allocator, input: describe_managed_login_branding_by_client.DescribeManagedLoginBrandingByClientInput, options: CallOptions) !describe_managed_login_branding_by_client.DescribeManagedLoginBrandingByClientOutput {
         return describe_managed_login_branding_by_client.execute(self, allocator, input, options);
     }
 
     /// Describes a resource server. For more information about resource servers,
     /// see [Access control with resource
     /// servers](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-define-resource-servers.html).
-    pub fn describeResourceServer(self: *Self, allocator: std.mem.Allocator, input: describe_resource_server.DescribeResourceServerInput, options: describe_resource_server.Options) !describe_resource_server.DescribeResourceServerOutput {
+    pub fn describeResourceServer(self: *Self, allocator: std.mem.Allocator, input: describe_resource_server.DescribeResourceServerInput, options: CallOptions) !describe_resource_server.DescribeResourceServerOutput {
         return describe_resource_server.execute(self, allocator, input, options);
     }
 
@@ -1768,7 +1769,7 @@ pub const Client = struct {
     /// information about
     /// threat protection, see [Threat
     /// protection](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-threat-protection.html).
-    pub fn describeRiskConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_risk_configuration.DescribeRiskConfigurationInput, options: describe_risk_configuration.Options) !describe_risk_configuration.DescribeRiskConfigurationOutput {
+    pub fn describeRiskConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_risk_configuration.DescribeRiskConfigurationInput, options: CallOptions) !describe_risk_configuration.DescribeRiskConfigurationOutput {
         return describe_risk_configuration.execute(self, allocator, input, options);
     }
 
@@ -1789,14 +1790,14 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn describeTerms(self: *Self, allocator: std.mem.Allocator, input: describe_terms.DescribeTermsInput, options: describe_terms.Options) !describe_terms.DescribeTermsOutput {
+    pub fn describeTerms(self: *Self, allocator: std.mem.Allocator, input: describe_terms.DescribeTermsInput, options: CallOptions) !describe_terms.DescribeTermsOutput {
         return describe_terms.execute(self, allocator, input, options);
     }
 
     /// Describes a user import job. For more information about user CSV import, see
     /// [Importing users from a CSV
     /// file](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-using-import-tool.html).
-    pub fn describeUserImportJob(self: *Self, allocator: std.mem.Allocator, input: describe_user_import_job.DescribeUserImportJobInput, options: describe_user_import_job.Options) !describe_user_import_job.DescribeUserImportJobOutput {
+    pub fn describeUserImportJob(self: *Self, allocator: std.mem.Allocator, input: describe_user_import_job.DescribeUserImportJobInput, options: CallOptions) !describe_user_import_job.DescribeUserImportJobOutput {
         return describe_user_import_job.execute(self, allocator, input, options);
     }
 
@@ -1818,7 +1819,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn describeUserPool(self: *Self, allocator: std.mem.Allocator, input: describe_user_pool.DescribeUserPoolInput, options: describe_user_pool.Options) !describe_user_pool.DescribeUserPoolOutput {
+    pub fn describeUserPool(self: *Self, allocator: std.mem.Allocator, input: describe_user_pool.DescribeUserPoolInput, options: CallOptions) !describe_user_pool.DescribeUserPoolOutput {
         return describe_user_pool.execute(self, allocator, input, options);
     }
 
@@ -1843,7 +1844,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn describeUserPoolClient(self: *Self, allocator: std.mem.Allocator, input: describe_user_pool_client.DescribeUserPoolClientInput, options: describe_user_pool_client.Options) !describe_user_pool_client.DescribeUserPoolClientOutput {
+    pub fn describeUserPoolClient(self: *Self, allocator: std.mem.Allocator, input: describe_user_pool_client.DescribeUserPoolClientInput, options: CallOptions) !describe_user_pool_client.DescribeUserPoolClientOutput {
         return describe_user_pool_client.execute(self, allocator, input, options);
     }
 
@@ -1863,7 +1864,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn describeUserPoolDomain(self: *Self, allocator: std.mem.Allocator, input: describe_user_pool_domain.DescribeUserPoolDomainInput, options: describe_user_pool_domain.Options) !describe_user_pool_domain.DescribeUserPoolDomainOutput {
+    pub fn describeUserPoolDomain(self: *Self, allocator: std.mem.Allocator, input: describe_user_pool_domain.DescribeUserPoolDomainInput, options: CallOptions) !describe_user_pool_domain.DescribeUserPoolDomainOutput {
         return describe_user_pool_domain.execute(self, allocator, input, options);
     }
 
@@ -1884,7 +1885,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn forgetDevice(self: *Self, allocator: std.mem.Allocator, input: forget_device.ForgetDeviceInput, options: forget_device.Options) !forget_device.ForgetDeviceOutput {
+    pub fn forgetDevice(self: *Self, allocator: std.mem.Allocator, input: forget_device.ForgetDeviceInput, options: CallOptions) !forget_device.ForgetDeviceOutput {
         return forget_device.execute(self, allocator, input, options);
     }
 
@@ -1939,7 +1940,7 @@ pub const Client = struct {
     /// settings for Amazon Cognito user
     /// pools](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html) in the *Amazon Cognito
     /// Developer Guide*.
-    pub fn forgotPassword(self: *Self, allocator: std.mem.Allocator, input: forgot_password.ForgotPasswordInput, options: forgot_password.Options) !forgot_password.ForgotPasswordOutput {
+    pub fn forgotPassword(self: *Self, allocator: std.mem.Allocator, input: forgot_password.ForgotPasswordInput, options: CallOptions) !forgot_password.ForgotPasswordOutput {
         return forgot_password.execute(self, allocator, input, options);
     }
 
@@ -1967,7 +1968,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn getCsvHeader(self: *Self, allocator: std.mem.Allocator, input: get_csv_header.GetCSVHeaderInput, options: get_csv_header.Options) !get_csv_header.GetCSVHeaderOutput {
+    pub fn getCsvHeader(self: *Self, allocator: std.mem.Allocator, input: get_csv_header.GetCSVHeaderInput, options: CallOptions) !get_csv_header.GetCSVHeaderOutput {
         return get_csv_header.execute(self, allocator, input, options);
     }
 
@@ -1988,7 +1989,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn getDevice(self: *Self, allocator: std.mem.Allocator, input: get_device.GetDeviceInput, options: get_device.Options) !get_device.GetDeviceOutput {
+    pub fn getDevice(self: *Self, allocator: std.mem.Allocator, input: get_device.GetDeviceInput, options: CallOptions) !get_device.GetDeviceOutput {
         return get_device.execute(self, allocator, input, options);
     }
 
@@ -2011,7 +2012,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn getGroup(self: *Self, allocator: std.mem.Allocator, input: get_group.GetGroupInput, options: get_group.Options) !get_group.GetGroupOutput {
+    pub fn getGroup(self: *Self, allocator: std.mem.Allocator, input: get_group.GetGroupInput, options: CallOptions) !get_group.GetGroupOutput {
         return get_group.execute(self, allocator, input, options);
     }
 
@@ -2019,7 +2020,7 @@ pub const Client = struct {
     /// `examplecorp`, returns information about the user pool configuration for
     /// that IdP. For more information about IdPs, see [Third-party IdP
     /// sign-in](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html).
-    pub fn getIdentityProviderByIdentifier(self: *Self, allocator: std.mem.Allocator, input: get_identity_provider_by_identifier.GetIdentityProviderByIdentifierInput, options: get_identity_provider_by_identifier.Options) !get_identity_provider_by_identifier.GetIdentityProviderByIdentifierOutput {
+    pub fn getIdentityProviderByIdentifier(self: *Self, allocator: std.mem.Allocator, input: get_identity_provider_by_identifier.GetIdentityProviderByIdentifierInput, options: CallOptions) !get_identity_provider_by_identifier.GetIdentityProviderByIdentifierOutput {
         return get_identity_provider_by_identifier.execute(self, allocator, input, options);
     }
 
@@ -2042,7 +2043,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn getLogDeliveryConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_log_delivery_configuration.GetLogDeliveryConfigurationInput, options: get_log_delivery_configuration.Options) !get_log_delivery_configuration.GetLogDeliveryConfigurationOutput {
+    pub fn getLogDeliveryConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_log_delivery_configuration.GetLogDeliveryConfigurationInput, options: CallOptions) !get_log_delivery_configuration.GetLogDeliveryConfigurationOutput {
         return get_log_delivery_configuration.execute(self, allocator, input, options);
     }
 
@@ -2072,7 +2073,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn getSigningCertificate(self: *Self, allocator: std.mem.Allocator, input: get_signing_certificate.GetSigningCertificateInput, options: get_signing_certificate.Options) !get_signing_certificate.GetSigningCertificateOutput {
+    pub fn getSigningCertificate(self: *Self, allocator: std.mem.Allocator, input: get_signing_certificate.GetSigningCertificateInput, options: CallOptions) !get_signing_certificate.GetSigningCertificateOutput {
         return get_signing_certificate.execute(self, allocator, input, options);
     }
 
@@ -2085,7 +2086,7 @@ pub const Client = struct {
     /// rotation is enabled. If refresh token rotation is disabled, issues new ID
     /// and access
     /// tokens only.
-    pub fn getTokensFromRefreshToken(self: *Self, allocator: std.mem.Allocator, input: get_tokens_from_refresh_token.GetTokensFromRefreshTokenInput, options: get_tokens_from_refresh_token.Options) !get_tokens_from_refresh_token.GetTokensFromRefreshTokenOutput {
+    pub fn getTokensFromRefreshToken(self: *Self, allocator: std.mem.Allocator, input: get_tokens_from_refresh_token.GetTokensFromRefreshTokenInput, options: CallOptions) !get_tokens_from_refresh_token.GetTokensFromRefreshTokenOutput {
         return get_tokens_from_refresh_token.execute(self, allocator, input, options);
     }
 
@@ -2099,7 +2100,7 @@ pub const Client = struct {
     /// client or
     /// the user pool. For more information, see [Hosted UI (classic)
     /// branding](https://docs.aws.amazon.com/cognito/latest/developerguide/hosted-ui-classic-branding.html).
-    pub fn getUiCustomization(self: *Self, allocator: std.mem.Allocator, input: get_ui_customization.GetUICustomizationInput, options: get_ui_customization.Options) !get_ui_customization.GetUICustomizationOutput {
+    pub fn getUiCustomization(self: *Self, allocator: std.mem.Allocator, input: get_ui_customization.GetUICustomizationInput, options: CallOptions) !get_ui_customization.GetUICustomizationOutput {
         return get_ui_customization.execute(self, allocator, input, options);
     }
 
@@ -2116,7 +2117,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn getUser(self: *Self, allocator: std.mem.Allocator, input: get_user.GetUserInput, options: get_user.Options) !get_user.GetUserOutput {
+    pub fn getUser(self: *Self, allocator: std.mem.Allocator, input: get_user.GetUserInput, options: CallOptions) !get_user.GetUserOutput {
         return get_user.execute(self, allocator, input, options);
     }
 
@@ -2163,7 +2164,7 @@ pub const Client = struct {
     /// settings for Amazon Cognito user
     /// pools](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html) in the *Amazon Cognito
     /// Developer Guide*.
-    pub fn getUserAttributeVerificationCode(self: *Self, allocator: std.mem.Allocator, input: get_user_attribute_verification_code.GetUserAttributeVerificationCodeInput, options: get_user_attribute_verification_code.Options) !get_user_attribute_verification_code.GetUserAttributeVerificationCodeOutput {
+    pub fn getUserAttributeVerificationCode(self: *Self, allocator: std.mem.Allocator, input: get_user_attribute_verification_code.GetUserAttributeVerificationCodeInput, options: CallOptions) !get_user_attribute_verification_code.GetUserAttributeVerificationCodeOutput {
         return get_user_attribute_verification_code.execute(self, allocator, input, options);
     }
 
@@ -2187,7 +2188,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn getUserAuthFactors(self: *Self, allocator: std.mem.Allocator, input: get_user_auth_factors.GetUserAuthFactorsInput, options: get_user_auth_factors.Options) !get_user_auth_factors.GetUserAuthFactorsOutput {
+    pub fn getUserAuthFactors(self: *Self, allocator: std.mem.Allocator, input: get_user_auth_factors.GetUserAuthFactorsInput, options: CallOptions) !get_user_auth_factors.GetUserAuthFactorsOutput {
         return get_user_auth_factors.execute(self, allocator, input, options);
     }
 
@@ -2219,7 +2220,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn getUserPoolMfaConfig(self: *Self, allocator: std.mem.Allocator, input: get_user_pool_mfa_config.GetUserPoolMfaConfigInput, options: get_user_pool_mfa_config.Options) !get_user_pool_mfa_config.GetUserPoolMfaConfigOutput {
+    pub fn getUserPoolMfaConfig(self: *Self, allocator: std.mem.Allocator, input: get_user_pool_mfa_config.GetUserPoolMfaConfigInput, options: CallOptions) !get_user_pool_mfa_config.GetUserPoolMfaConfigOutput {
         return get_user_pool_mfa_config.execute(self, allocator, input, options);
     }
 
@@ -2270,7 +2271,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn globalSignOut(self: *Self, allocator: std.mem.Allocator, input: global_sign_out.GlobalSignOutInput, options: global_sign_out.Options) !global_sign_out.GlobalSignOutOutput {
+    pub fn globalSignOut(self: *Self, allocator: std.mem.Allocator, input: global_sign_out.GlobalSignOutInput, options: CallOptions) !global_sign_out.GlobalSignOutOutput {
         return global_sign_out.execute(self, allocator, input, options);
     }
 
@@ -2318,7 +2319,7 @@ pub const Client = struct {
     /// settings for Amazon Cognito user
     /// pools](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html) in the *Amazon Cognito
     /// Developer Guide*.
-    pub fn initiateAuth(self: *Self, allocator: std.mem.Allocator, input: initiate_auth.InitiateAuthInput, options: initiate_auth.Options) !initiate_auth.InitiateAuthOutput {
+    pub fn initiateAuth(self: *Self, allocator: std.mem.Allocator, input: initiate_auth.InitiateAuthInput, options: CallOptions) !initiate_auth.InitiateAuthOutput {
         return initiate_auth.execute(self, allocator, input, options);
     }
 
@@ -2339,7 +2340,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn listDevices(self: *Self, allocator: std.mem.Allocator, input: list_devices.ListDevicesInput, options: list_devices.Options) !list_devices.ListDevicesOutput {
+    pub fn listDevices(self: *Self, allocator: std.mem.Allocator, input: list_devices.ListDevicesInput, options: CallOptions) !list_devices.ListDevicesOutput {
         return list_devices.execute(self, allocator, input, options);
     }
 
@@ -2358,7 +2359,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: list_groups.Options) !list_groups.ListGroupsOutput {
+    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: CallOptions) !list_groups.ListGroupsOutput {
         return list_groups.execute(self, allocator, input, options);
     }
 
@@ -2380,7 +2381,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn listIdentityProviders(self: *Self, allocator: std.mem.Allocator, input: list_identity_providers.ListIdentityProvidersInput, options: list_identity_providers.Options) !list_identity_providers.ListIdentityProvidersOutput {
+    pub fn listIdentityProviders(self: *Self, allocator: std.mem.Allocator, input: list_identity_providers.ListIdentityProvidersInput, options: CallOptions) !list_identity_providers.ListIdentityProvidersOutput {
         return list_identity_providers.execute(self, allocator, input, options);
     }
 
@@ -2402,7 +2403,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn listResourceServers(self: *Self, allocator: std.mem.Allocator, input: list_resource_servers.ListResourceServersInput, options: list_resource_servers.Options) !list_resource_servers.ListResourceServersOutput {
+    pub fn listResourceServers(self: *Self, allocator: std.mem.Allocator, input: list_resource_servers.ListResourceServersInput, options: CallOptions) !list_resource_servers.ListResourceServersOutput {
         return list_resource_servers.execute(self, allocator, input, options);
     }
 
@@ -2410,7 +2411,7 @@ pub const Client = struct {
     /// information, see
     /// [Tagging
     /// resources](https://docs.aws.amazon.com/cognito/latest/developerguide/tagging.html).
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -2429,7 +2430,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn listTerms(self: *Self, allocator: std.mem.Allocator, input: list_terms.ListTermsInput, options: list_terms.Options) !list_terms.ListTermsOutput {
+    pub fn listTerms(self: *Self, allocator: std.mem.Allocator, input: list_terms.ListTermsInput, options: CallOptions) !list_terms.ListTermsOutput {
         return list_terms.execute(self, allocator, input, options);
     }
 
@@ -2454,7 +2455,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn listUserImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_user_import_jobs.ListUserImportJobsInput, options: list_user_import_jobs.Options) !list_user_import_jobs.ListUserImportJobsOutput {
+    pub fn listUserImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_user_import_jobs.ListUserImportJobsInput, options: CallOptions) !list_user_import_jobs.ListUserImportJobsOutput {
         return list_user_import_jobs.execute(self, allocator, input, options);
     }
 
@@ -2477,7 +2478,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn listUserPoolClients(self: *Self, allocator: std.mem.Allocator, input: list_user_pool_clients.ListUserPoolClientsInput, options: list_user_pool_clients.Options) !list_user_pool_clients.ListUserPoolClientsOutput {
+    pub fn listUserPoolClients(self: *Self, allocator: std.mem.Allocator, input: list_user_pool_clients.ListUserPoolClientsInput, options: CallOptions) !list_user_pool_clients.ListUserPoolClientsOutput {
         return list_user_pool_clients.execute(self, allocator, input, options);
     }
 
@@ -2497,7 +2498,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn listUserPools(self: *Self, allocator: std.mem.Allocator, input: list_user_pools.ListUserPoolsInput, options: list_user_pools.Options) !list_user_pools.ListUserPoolsOutput {
+    pub fn listUserPools(self: *Self, allocator: std.mem.Allocator, input: list_user_pools.ListUserPoolsInput, options: CallOptions) !list_user_pools.ListUserPoolsOutput {
         return list_user_pools.execute(self, allocator, input, options);
     }
 
@@ -2518,7 +2519,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: list_users.Options) !list_users.ListUsersOutput {
+    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: CallOptions) !list_users.ListUsersOutput {
         return list_users.execute(self, allocator, input, options);
     }
 
@@ -2540,7 +2541,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn listUsersInGroup(self: *Self, allocator: std.mem.Allocator, input: list_users_in_group.ListUsersInGroupInput, options: list_users_in_group.Options) !list_users_in_group.ListUsersInGroupOutput {
+    pub fn listUsersInGroup(self: *Self, allocator: std.mem.Allocator, input: list_users_in_group.ListUsersInGroupInput, options: CallOptions) !list_users_in_group.ListUsersInGroupOutput {
         return list_users_in_group.execute(self, allocator, input, options);
     }
 
@@ -2558,7 +2559,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn listWebAuthnCredentials(self: *Self, allocator: std.mem.Allocator, input: list_web_authn_credentials.ListWebAuthnCredentialsInput, options: list_web_authn_credentials.Options) !list_web_authn_credentials.ListWebAuthnCredentialsOutput {
+    pub fn listWebAuthnCredentials(self: *Self, allocator: std.mem.Allocator, input: list_web_authn_credentials.ListWebAuthnCredentialsInput, options: CallOptions) !list_web_authn_credentials.ListWebAuthnCredentialsOutput {
         return list_web_authn_credentials.execute(self, allocator, input, options);
     }
 
@@ -2606,7 +2607,7 @@ pub const Client = struct {
     /// settings for Amazon Cognito user
     /// pools](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html) in the *Amazon Cognito
     /// Developer Guide*.
-    pub fn resendConfirmationCode(self: *Self, allocator: std.mem.Allocator, input: resend_confirmation_code.ResendConfirmationCodeInput, options: resend_confirmation_code.Options) !resend_confirmation_code.ResendConfirmationCodeOutput {
+    pub fn resendConfirmationCode(self: *Self, allocator: std.mem.Allocator, input: resend_confirmation_code.ResendConfirmationCodeInput, options: CallOptions) !resend_confirmation_code.ResendConfirmationCodeOutput {
         return resend_confirmation_code.execute(self, allocator, input, options);
     }
 
@@ -2660,7 +2661,7 @@ pub const Client = struct {
     /// settings for Amazon Cognito user
     /// pools](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html) in the *Amazon Cognito
     /// Developer Guide*.
-    pub fn respondToAuthChallenge(self: *Self, allocator: std.mem.Allocator, input: respond_to_auth_challenge.RespondToAuthChallengeInput, options: respond_to_auth_challenge.Options) !respond_to_auth_challenge.RespondToAuthChallengeOutput {
+    pub fn respondToAuthChallenge(self: *Self, allocator: std.mem.Allocator, input: respond_to_auth_challenge.RespondToAuthChallengeInput, options: CallOptions) !respond_to_auth_challenge.RespondToAuthChallengeOutput {
         return respond_to_auth_challenge.execute(self, allocator, input, options);
     }
 
@@ -2678,7 +2679,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn revokeToken(self: *Self, allocator: std.mem.Allocator, input: revoke_token.RevokeTokenInput, options: revoke_token.Options) !revoke_token.RevokeTokenOutput {
+    pub fn revokeToken(self: *Self, allocator: std.mem.Allocator, input: revoke_token.RevokeTokenInput, options: CallOptions) !revoke_token.RevokeTokenOutput {
         return revoke_token.execute(self, allocator, input, options);
     }
 
@@ -2689,7 +2690,7 @@ pub const Client = struct {
     /// more information, see [Exporting user
     /// pool
     /// logs](https://docs.aws.amazon.com/cognito/latest/developerguide/exporting-quotas-and-usage.html).
-    pub fn setLogDeliveryConfiguration(self: *Self, allocator: std.mem.Allocator, input: set_log_delivery_configuration.SetLogDeliveryConfigurationInput, options: set_log_delivery_configuration.Options) !set_log_delivery_configuration.SetLogDeliveryConfigurationOutput {
+    pub fn setLogDeliveryConfiguration(self: *Self, allocator: std.mem.Allocator, input: set_log_delivery_configuration.SetLogDeliveryConfigurationInput, options: CallOptions) !set_log_delivery_configuration.SetLogDeliveryConfigurationOutput {
         return set_log_delivery_configuration.execute(self, allocator, input, options);
     }
 
@@ -2715,7 +2716,7 @@ pub const Client = struct {
     /// request. To activate this setting, your user pool must be on the [
     /// Plus
     /// tier](https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html).
-    pub fn setRiskConfiguration(self: *Self, allocator: std.mem.Allocator, input: set_risk_configuration.SetRiskConfigurationInput, options: set_risk_configuration.Options) !set_risk_configuration.SetRiskConfigurationOutput {
+    pub fn setRiskConfiguration(self: *Self, allocator: std.mem.Allocator, input: set_risk_configuration.SetRiskConfigurationInput, options: CallOptions) !set_risk_configuration.SetRiskConfigurationOutput {
         return set_risk_configuration.execute(self, allocator, input, options);
     }
 
@@ -2742,7 +2743,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn setUiCustomization(self: *Self, allocator: std.mem.Allocator, input: set_ui_customization.SetUICustomizationInput, options: set_ui_customization.Options) !set_ui_customization.SetUICustomizationOutput {
+    pub fn setUiCustomization(self: *Self, allocator: std.mem.Allocator, input: set_ui_customization.SetUICustomizationInput, options: CallOptions) !set_ui_customization.SetUICustomizationOutput {
         return set_ui_customization.execute(self, allocator, input, options);
     }
 
@@ -2775,7 +2776,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn setUserMfaPreference(self: *Self, allocator: std.mem.Allocator, input: set_user_mfa_preference.SetUserMFAPreferenceInput, options: set_user_mfa_preference.Options) !set_user_mfa_preference.SetUserMFAPreferenceOutput {
+    pub fn setUserMfaPreference(self: *Self, allocator: std.mem.Allocator, input: set_user_mfa_preference.SetUserMFAPreferenceInput, options: CallOptions) !set_user_mfa_preference.SetUserMFAPreferenceOutput {
         return set_user_mfa_preference.execute(self, allocator, input, options);
     }
 
@@ -2811,7 +2812,7 @@ pub const Client = struct {
     /// settings for Amazon Cognito user
     /// pools](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html) in the *Amazon Cognito
     /// Developer Guide*.
-    pub fn setUserPoolMfaConfig(self: *Self, allocator: std.mem.Allocator, input: set_user_pool_mfa_config.SetUserPoolMfaConfigInput, options: set_user_pool_mfa_config.Options) !set_user_pool_mfa_config.SetUserPoolMfaConfigOutput {
+    pub fn setUserPoolMfaConfig(self: *Self, allocator: std.mem.Allocator, input: set_user_pool_mfa_config.SetUserPoolMfaConfigInput, options: CallOptions) !set_user_pool_mfa_config.SetUserPoolMfaConfigOutput {
         return set_user_pool_mfa_config.execute(self, allocator, input, options);
     }
 
@@ -2831,7 +2832,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn setUserSettings(self: *Self, allocator: std.mem.Allocator, input: set_user_settings.SetUserSettingsInput, options: set_user_settings.Options) !set_user_settings.SetUserSettingsOutput {
+    pub fn setUserSettings(self: *Self, allocator: std.mem.Allocator, input: set_user_settings.SetUserSettingsInput, options: CallOptions) !set_user_settings.SetUserSettingsOutput {
         return set_user_settings.execute(self, allocator, input, options);
     }
 
@@ -2883,7 +2884,7 @@ pub const Client = struct {
     /// exception in
     /// the response, the user is successfully created and is in an `UNCONFIRMED`
     /// state.
-    pub fn signUp(self: *Self, allocator: std.mem.Allocator, input: sign_up.SignUpInput, options: sign_up.Options) !sign_up.SignUpOutput {
+    pub fn signUp(self: *Self, allocator: std.mem.Allocator, input: sign_up.SignUpInput, options: CallOptions) !sign_up.SignUpOutput {
         return sign_up.execute(self, allocator, input, options);
     }
 
@@ -2893,7 +2894,7 @@ pub const Client = struct {
     /// CSV file,
     /// see [Importing users from a CSV
     /// file](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-using-import-tool.html).
-    pub fn startUserImportJob(self: *Self, allocator: std.mem.Allocator, input: start_user_import_job.StartUserImportJobInput, options: start_user_import_job.Options) !start_user_import_job.StartUserImportJobOutput {
+    pub fn startUserImportJob(self: *Self, allocator: std.mem.Allocator, input: start_user_import_job.StartUserImportJobInput, options: CallOptions) !start_user_import_job.StartUserImportJobOutput {
         return start_user_import_job.execute(self, allocator, input, options);
     }
 
@@ -2907,7 +2908,7 @@ pub const Client = struct {
     ///
     /// Authorize this action with a signed-in user's access token. It must include
     /// the scope `aws.cognito.signin.user.admin`.
-    pub fn startWebAuthnRegistration(self: *Self, allocator: std.mem.Allocator, input: start_web_authn_registration.StartWebAuthnRegistrationInput, options: start_web_authn_registration.Options) !start_web_authn_registration.StartWebAuthnRegistrationOutput {
+    pub fn startWebAuthnRegistration(self: *Self, allocator: std.mem.Allocator, input: start_web_authn_registration.StartWebAuthnRegistrationInput, options: CallOptions) !start_web_authn_registration.StartWebAuthnRegistrationOutput {
         return start_web_authn_registration.execute(self, allocator, input, options);
     }
 
@@ -2917,7 +2918,7 @@ pub const Client = struct {
     /// about importing
     /// users from a CSV file, see [Importing users from a CSV
     /// file](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-using-import-tool.html).
-    pub fn stopUserImportJob(self: *Self, allocator: std.mem.Allocator, input: stop_user_import_job.StopUserImportJobInput, options: stop_user_import_job.Options) !stop_user_import_job.StopUserImportJobOutput {
+    pub fn stopUserImportJob(self: *Self, allocator: std.mem.Allocator, input: stop_user_import_job.StopUserImportJobInput, options: CallOptions) !stop_user_import_job.StopUserImportJobOutput {
         return stop_user_import_job.execute(self, allocator, input, options);
     }
 
@@ -2947,12 +2948,12 @@ pub const Client = struct {
     /// You can use this action up to 5 times per second, per account. A user pool
     /// can have as
     /// many as 50 tags.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Given tag IDs that you previously assigned to a user pool, removes them.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -2986,7 +2987,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn updateAuthEventFeedback(self: *Self, allocator: std.mem.Allocator, input: update_auth_event_feedback.UpdateAuthEventFeedbackInput, options: update_auth_event_feedback.Options) !update_auth_event_feedback.UpdateAuthEventFeedbackOutput {
+    pub fn updateAuthEventFeedback(self: *Self, allocator: std.mem.Allocator, input: update_auth_event_feedback.UpdateAuthEventFeedbackInput, options: CallOptions) !update_auth_event_feedback.UpdateAuthEventFeedbackOutput {
         return update_auth_event_feedback.execute(self, allocator, input, options);
     }
 
@@ -3013,7 +3014,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn updateDeviceStatus(self: *Self, allocator: std.mem.Allocator, input: update_device_status.UpdateDeviceStatusInput, options: update_device_status.Options) !update_device_status.UpdateDeviceStatusOutput {
+    pub fn updateDeviceStatus(self: *Self, allocator: std.mem.Allocator, input: update_device_status.UpdateDeviceStatusInput, options: CallOptions) !update_device_status.UpdateDeviceStatusOutput {
         return update_device_status.execute(self, allocator, input, options);
     }
 
@@ -3036,7 +3037,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: update_group.Options) !update_group.UpdateGroupOutput {
+    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: CallOptions) !update_group.UpdateGroupOutput {
         return update_group.execute(self, allocator, input, options);
     }
 
@@ -3062,7 +3063,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn updateIdentityProvider(self: *Self, allocator: std.mem.Allocator, input: update_identity_provider.UpdateIdentityProviderInput, options: update_identity_provider.Options) !update_identity_provider.UpdateIdentityProviderOutput {
+    pub fn updateIdentityProvider(self: *Self, allocator: std.mem.Allocator, input: update_identity_provider.UpdateIdentityProviderInput, options: CallOptions) !update_identity_provider.UpdateIdentityProviderOutput {
         return update_identity_provider.execute(self, allocator, input, options);
     }
 
@@ -3096,7 +3097,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn updateManagedLoginBranding(self: *Self, allocator: std.mem.Allocator, input: update_managed_login_branding.UpdateManagedLoginBrandingInput, options: update_managed_login_branding.Options) !update_managed_login_branding.UpdateManagedLoginBrandingOutput {
+    pub fn updateManagedLoginBranding(self: *Self, allocator: std.mem.Allocator, input: update_managed_login_branding.UpdateManagedLoginBrandingInput, options: CallOptions) !update_managed_login_branding.UpdateManagedLoginBrandingOutput {
         return update_managed_login_branding.execute(self, allocator, input, options);
     }
 
@@ -3121,7 +3122,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn updateResourceServer(self: *Self, allocator: std.mem.Allocator, input: update_resource_server.UpdateResourceServerInput, options: update_resource_server.Options) !update_resource_server.UpdateResourceServerOutput {
+    pub fn updateResourceServer(self: *Self, allocator: std.mem.Allocator, input: update_resource_server.UpdateResourceServerInput, options: CallOptions) !update_resource_server.UpdateResourceServerOutput {
         return update_resource_server.execute(self, allocator, input, options);
     }
 
@@ -3161,7 +3162,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn updateTerms(self: *Self, allocator: std.mem.Allocator, input: update_terms.UpdateTermsInput, options: update_terms.Options) !update_terms.UpdateTermsOutput {
+    pub fn updateTerms(self: *Self, allocator: std.mem.Allocator, input: update_terms.UpdateTermsInput, options: CallOptions) !update_terms.UpdateTermsOutput {
         return update_terms.execute(self, allocator, input, options);
     }
 
@@ -3211,7 +3212,7 @@ pub const Client = struct {
     /// settings for Amazon Cognito user
     /// pools](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html) in the *Amazon Cognito
     /// Developer Guide*.
-    pub fn updateUserAttributes(self: *Self, allocator: std.mem.Allocator, input: update_user_attributes.UpdateUserAttributesInput, options: update_user_attributes.Options) !update_user_attributes.UpdateUserAttributesOutput {
+    pub fn updateUserAttributes(self: *Self, allocator: std.mem.Allocator, input: update_user_attributes.UpdateUserAttributesInput, options: CallOptions) !update_user_attributes.UpdateUserAttributesOutput {
         return update_user_attributes.execute(self, allocator, input, options);
     }
 
@@ -3265,7 +3266,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn updateUserPool(self: *Self, allocator: std.mem.Allocator, input: update_user_pool.UpdateUserPoolInput, options: update_user_pool.Options) !update_user_pool.UpdateUserPoolOutput {
+    pub fn updateUserPool(self: *Self, allocator: std.mem.Allocator, input: update_user_pool.UpdateUserPoolInput, options: CallOptions) !update_user_pool.UpdateUserPoolOutput {
         return update_user_pool.execute(self, allocator, input, options);
     }
 
@@ -3298,7 +3299,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn updateUserPoolClient(self: *Self, allocator: std.mem.Allocator, input: update_user_pool_client.UpdateUserPoolClientInput, options: update_user_pool_client.Options) !update_user_pool_client.UpdateUserPoolClientOutput {
+    pub fn updateUserPoolClient(self: *Self, allocator: std.mem.Allocator, input: update_user_pool_client.UpdateUserPoolClientInput, options: CallOptions) !update_user_pool_client.UpdateUserPoolClientOutput {
         return update_user_pool_client.execute(self, allocator, input, options);
     }
 
@@ -3349,7 +3350,7 @@ pub const Client = struct {
     ///
     /// * [Using the Amazon Cognito user pools API and user pool
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-    pub fn updateUserPoolDomain(self: *Self, allocator: std.mem.Allocator, input: update_user_pool_domain.UpdateUserPoolDomainInput, options: update_user_pool_domain.Options) !update_user_pool_domain.UpdateUserPoolDomainOutput {
+    pub fn updateUserPoolDomain(self: *Self, allocator: std.mem.Allocator, input: update_user_pool_domain.UpdateUserPoolDomainInput, options: CallOptions) !update_user_pool_domain.UpdateUserPoolDomainOutput {
         return update_user_pool_domain.execute(self, allocator, input, options);
     }
 
@@ -3370,7 +3371,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn verifySoftwareToken(self: *Self, allocator: std.mem.Allocator, input: verify_software_token.VerifySoftwareTokenInput, options: verify_software_token.Options) !verify_software_token.VerifySoftwareTokenOutput {
+    pub fn verifySoftwareToken(self: *Self, allocator: std.mem.Allocator, input: verify_software_token.VerifySoftwareTokenInput, options: CallOptions) !verify_software_token.VerifySoftwareTokenOutput {
         return verify_software_token.execute(self, allocator, input, options);
     }
 
@@ -3396,7 +3397,7 @@ pub const Client = struct {
     /// models in
     /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
     /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
-    pub fn verifyUserAttribute(self: *Self, allocator: std.mem.Allocator, input: verify_user_attribute.VerifyUserAttributeInput, options: verify_user_attribute.Options) !verify_user_attribute.VerifyUserAttributeOutput {
+    pub fn verifyUserAttribute(self: *Self, allocator: std.mem.Allocator, input: verify_user_attribute.VerifyUserAttributeInput, options: CallOptions) !verify_user_attribute.VerifyUserAttributeOutput {
         return verify_user_attribute.execute(self, allocator, input, options);
     }
 

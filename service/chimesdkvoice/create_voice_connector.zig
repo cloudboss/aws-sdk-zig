@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VoiceConnectorAwsRegion = @import("voice_connector_aws_region.zig").VoiceConnectorAwsRegion;
 const VoiceConnectorIntegrationType = @import("voice_connector_integration_type.zig").VoiceConnectorIntegrationType;
@@ -83,11 +84,7 @@ pub const CreateVoiceConnectorOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVoiceConnectorInput, options: Options) !CreateVoiceConnectorOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVoiceConnectorInput, options: CallOptions) !CreateVoiceConnectorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

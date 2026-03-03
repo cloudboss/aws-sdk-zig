@@ -37,6 +37,7 @@ const update_bill_estimate = @import("update_bill_estimate.zig");
 const update_bill_scenario = @import("update_bill_scenario.zig");
 const update_preferences = @import("update_preferences.zig");
 const update_workload_estimate = @import("update_workload_estimate.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -75,7 +76,7 @@ pub const Client = struct {
     /// principals, include the permission
     /// `bcm-pricing-calculator:CreateBillScenarioCommitmentModification` in your
     /// policies.
-    pub fn batchCreateBillScenarioCommitmentModification(self: *Self, allocator: std.mem.Allocator, input: batch_create_bill_scenario_commitment_modification.BatchCreateBillScenarioCommitmentModificationInput, options: batch_create_bill_scenario_commitment_modification.Options) !batch_create_bill_scenario_commitment_modification.BatchCreateBillScenarioCommitmentModificationOutput {
+    pub fn batchCreateBillScenarioCommitmentModification(self: *Self, allocator: std.mem.Allocator, input: batch_create_bill_scenario_commitment_modification.BatchCreateBillScenarioCommitmentModificationInput, options: CallOptions) !batch_create_bill_scenario_commitment_modification.BatchCreateBillScenarioCommitmentModificationOutput {
         return batch_create_bill_scenario_commitment_modification.execute(self, allocator, input, options);
     }
 
@@ -87,7 +88,7 @@ pub const Client = struct {
     /// principals, include the permission
     /// `bcm-pricing-calculator:CreateBillScenarioUsageModification` in your
     /// policies.
-    pub fn batchCreateBillScenarioUsageModification(self: *Self, allocator: std.mem.Allocator, input: batch_create_bill_scenario_usage_modification.BatchCreateBillScenarioUsageModificationInput, options: batch_create_bill_scenario_usage_modification.Options) !batch_create_bill_scenario_usage_modification.BatchCreateBillScenarioUsageModificationOutput {
+    pub fn batchCreateBillScenarioUsageModification(self: *Self, allocator: std.mem.Allocator, input: batch_create_bill_scenario_usage_modification.BatchCreateBillScenarioUsageModificationInput, options: CallOptions) !batch_create_bill_scenario_usage_modification.BatchCreateBillScenarioUsageModificationOutput {
         return batch_create_bill_scenario_usage_modification.execute(self, allocator, input, options);
     }
 
@@ -98,7 +99,7 @@ pub const Client = struct {
     /// permission. To authorize this operation for Amazon Web Services principals,
     /// include the permission `bcm-pricing-calculator:CreateWorkloadEstimateUsage`
     /// in your policies.
-    pub fn batchCreateWorkloadEstimateUsage(self: *Self, allocator: std.mem.Allocator, input: batch_create_workload_estimate_usage.BatchCreateWorkloadEstimateUsageInput, options: batch_create_workload_estimate_usage.Options) !batch_create_workload_estimate_usage.BatchCreateWorkloadEstimateUsageOutput {
+    pub fn batchCreateWorkloadEstimateUsage(self: *Self, allocator: std.mem.Allocator, input: batch_create_workload_estimate_usage.BatchCreateWorkloadEstimateUsageInput, options: CallOptions) !batch_create_workload_estimate_usage.BatchCreateWorkloadEstimateUsageOutput {
         return batch_create_workload_estimate_usage.execute(self, allocator, input, options);
     }
 
@@ -113,7 +114,7 @@ pub const Client = struct {
     /// principals, include the permission
     /// `bcm-pricing-calculator:DeleteBillScenarioCommitmentModification` in your
     /// policies.
-    pub fn batchDeleteBillScenarioCommitmentModification(self: *Self, allocator: std.mem.Allocator, input: batch_delete_bill_scenario_commitment_modification.BatchDeleteBillScenarioCommitmentModificationInput, options: batch_delete_bill_scenario_commitment_modification.Options) !batch_delete_bill_scenario_commitment_modification.BatchDeleteBillScenarioCommitmentModificationOutput {
+    pub fn batchDeleteBillScenarioCommitmentModification(self: *Self, allocator: std.mem.Allocator, input: batch_delete_bill_scenario_commitment_modification.BatchDeleteBillScenarioCommitmentModificationInput, options: CallOptions) !batch_delete_bill_scenario_commitment_modification.BatchDeleteBillScenarioCommitmentModificationOutput {
         return batch_delete_bill_scenario_commitment_modification.execute(self, allocator, input, options);
     }
 
@@ -127,7 +128,7 @@ pub const Client = struct {
     /// principals, include the permission
     /// `bcm-pricing-calculator:DeleteBillScenarioUsageModification` in your
     /// policies.
-    pub fn batchDeleteBillScenarioUsageModification(self: *Self, allocator: std.mem.Allocator, input: batch_delete_bill_scenario_usage_modification.BatchDeleteBillScenarioUsageModificationInput, options: batch_delete_bill_scenario_usage_modification.Options) !batch_delete_bill_scenario_usage_modification.BatchDeleteBillScenarioUsageModificationOutput {
+    pub fn batchDeleteBillScenarioUsageModification(self: *Self, allocator: std.mem.Allocator, input: batch_delete_bill_scenario_usage_modification.BatchDeleteBillScenarioUsageModificationInput, options: CallOptions) !batch_delete_bill_scenario_usage_modification.BatchDeleteBillScenarioUsageModificationOutput {
         return batch_delete_bill_scenario_usage_modification.execute(self, allocator, input, options);
     }
 
@@ -140,7 +141,7 @@ pub const Client = struct {
     /// permission. To authorize this operation for Amazon Web Services principals,
     /// include the permission `bcm-pricing-calculator:DeleteWorkloadEstimateUsage`
     /// in your policies.
-    pub fn batchDeleteWorkloadEstimateUsage(self: *Self, allocator: std.mem.Allocator, input: batch_delete_workload_estimate_usage.BatchDeleteWorkloadEstimateUsageInput, options: batch_delete_workload_estimate_usage.Options) !batch_delete_workload_estimate_usage.BatchDeleteWorkloadEstimateUsageOutput {
+    pub fn batchDeleteWorkloadEstimateUsage(self: *Self, allocator: std.mem.Allocator, input: batch_delete_workload_estimate_usage.BatchDeleteWorkloadEstimateUsageInput, options: CallOptions) !batch_delete_workload_estimate_usage.BatchDeleteWorkloadEstimateUsageOutput {
         return batch_delete_workload_estimate_usage.execute(self, allocator, input, options);
     }
 
@@ -152,7 +153,7 @@ pub const Client = struct {
     /// principals, include the permission
     /// `bcm-pricing-calculator:UpdateBillScenarioCommitmentModification` in your
     /// policies.
-    pub fn batchUpdateBillScenarioCommitmentModification(self: *Self, allocator: std.mem.Allocator, input: batch_update_bill_scenario_commitment_modification.BatchUpdateBillScenarioCommitmentModificationInput, options: batch_update_bill_scenario_commitment_modification.Options) !batch_update_bill_scenario_commitment_modification.BatchUpdateBillScenarioCommitmentModificationOutput {
+    pub fn batchUpdateBillScenarioCommitmentModification(self: *Self, allocator: std.mem.Allocator, input: batch_update_bill_scenario_commitment_modification.BatchUpdateBillScenarioCommitmentModificationInput, options: CallOptions) !batch_update_bill_scenario_commitment_modification.BatchUpdateBillScenarioCommitmentModificationOutput {
         return batch_update_bill_scenario_commitment_modification.execute(self, allocator, input, options);
     }
 
@@ -165,7 +166,7 @@ pub const Client = struct {
     /// principals, include the permission
     /// `bcm-pricing-calculator:UpdateBillScenarioUsageModification` in your
     /// policies.
-    pub fn batchUpdateBillScenarioUsageModification(self: *Self, allocator: std.mem.Allocator, input: batch_update_bill_scenario_usage_modification.BatchUpdateBillScenarioUsageModificationInput, options: batch_update_bill_scenario_usage_modification.Options) !batch_update_bill_scenario_usage_modification.BatchUpdateBillScenarioUsageModificationOutput {
+    pub fn batchUpdateBillScenarioUsageModification(self: *Self, allocator: std.mem.Allocator, input: batch_update_bill_scenario_usage_modification.BatchUpdateBillScenarioUsageModificationInput, options: CallOptions) !batch_update_bill_scenario_usage_modification.BatchUpdateBillScenarioUsageModificationOutput {
         return batch_update_bill_scenario_usage_modification.execute(self, allocator, input, options);
     }
 
@@ -176,7 +177,7 @@ pub const Client = struct {
     /// permission. To authorize this operation for Amazon Web Services principals,
     /// include the permission `bcm-pricing-calculator:UpdateWorkloadEstimateUsage`
     /// in your policies.
-    pub fn batchUpdateWorkloadEstimateUsage(self: *Self, allocator: std.mem.Allocator, input: batch_update_workload_estimate_usage.BatchUpdateWorkloadEstimateUsageInput, options: batch_update_workload_estimate_usage.Options) !batch_update_workload_estimate_usage.BatchUpdateWorkloadEstimateUsageOutput {
+    pub fn batchUpdateWorkloadEstimateUsage(self: *Self, allocator: std.mem.Allocator, input: batch_update_workload_estimate_usage.BatchUpdateWorkloadEstimateUsageInput, options: CallOptions) !batch_update_workload_estimate_usage.BatchUpdateWorkloadEstimateUsageOutput {
         return batch_update_workload_estimate_usage.execute(self, allocator, input, options);
     }
 
@@ -188,138 +189,138 @@ pub const Client = struct {
     /// for your consolidated billing family, incorporating all modeled usage and
     /// commitments alongside existing usage and commitments from your most recent
     /// completed anniversary bill, with any applicable discounts applied.
-    pub fn createBillEstimate(self: *Self, allocator: std.mem.Allocator, input: create_bill_estimate.CreateBillEstimateInput, options: create_bill_estimate.Options) !create_bill_estimate.CreateBillEstimateOutput {
+    pub fn createBillEstimate(self: *Self, allocator: std.mem.Allocator, input: create_bill_estimate.CreateBillEstimateInput, options: CallOptions) !create_bill_estimate.CreateBillEstimateOutput {
         return create_bill_estimate.execute(self, allocator, input, options);
     }
 
     /// Creates a new bill scenario to model potential changes to Amazon Web
     /// Services usage and costs.
-    pub fn createBillScenario(self: *Self, allocator: std.mem.Allocator, input: create_bill_scenario.CreateBillScenarioInput, options: create_bill_scenario.Options) !create_bill_scenario.CreateBillScenarioOutput {
+    pub fn createBillScenario(self: *Self, allocator: std.mem.Allocator, input: create_bill_scenario.CreateBillScenarioInput, options: CallOptions) !create_bill_scenario.CreateBillScenarioOutput {
         return create_bill_scenario.execute(self, allocator, input, options);
     }
 
     /// Creates a new workload estimate to model costs for a specific workload.
-    pub fn createWorkloadEstimate(self: *Self, allocator: std.mem.Allocator, input: create_workload_estimate.CreateWorkloadEstimateInput, options: create_workload_estimate.Options) !create_workload_estimate.CreateWorkloadEstimateOutput {
+    pub fn createWorkloadEstimate(self: *Self, allocator: std.mem.Allocator, input: create_workload_estimate.CreateWorkloadEstimateInput, options: CallOptions) !create_workload_estimate.CreateWorkloadEstimateOutput {
         return create_workload_estimate.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing bill estimate.
-    pub fn deleteBillEstimate(self: *Self, allocator: std.mem.Allocator, input: delete_bill_estimate.DeleteBillEstimateInput, options: delete_bill_estimate.Options) !delete_bill_estimate.DeleteBillEstimateOutput {
+    pub fn deleteBillEstimate(self: *Self, allocator: std.mem.Allocator, input: delete_bill_estimate.DeleteBillEstimateInput, options: CallOptions) !delete_bill_estimate.DeleteBillEstimateOutput {
         return delete_bill_estimate.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing bill scenario.
-    pub fn deleteBillScenario(self: *Self, allocator: std.mem.Allocator, input: delete_bill_scenario.DeleteBillScenarioInput, options: delete_bill_scenario.Options) !delete_bill_scenario.DeleteBillScenarioOutput {
+    pub fn deleteBillScenario(self: *Self, allocator: std.mem.Allocator, input: delete_bill_scenario.DeleteBillScenarioInput, options: CallOptions) !delete_bill_scenario.DeleteBillScenarioOutput {
         return delete_bill_scenario.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing workload estimate.
-    pub fn deleteWorkloadEstimate(self: *Self, allocator: std.mem.Allocator, input: delete_workload_estimate.DeleteWorkloadEstimateInput, options: delete_workload_estimate.Options) !delete_workload_estimate.DeleteWorkloadEstimateOutput {
+    pub fn deleteWorkloadEstimate(self: *Self, allocator: std.mem.Allocator, input: delete_workload_estimate.DeleteWorkloadEstimateInput, options: CallOptions) !delete_workload_estimate.DeleteWorkloadEstimateOutput {
         return delete_workload_estimate.execute(self, allocator, input, options);
     }
 
     /// Retrieves details of a specific bill estimate.
-    pub fn getBillEstimate(self: *Self, allocator: std.mem.Allocator, input: get_bill_estimate.GetBillEstimateInput, options: get_bill_estimate.Options) !get_bill_estimate.GetBillEstimateOutput {
+    pub fn getBillEstimate(self: *Self, allocator: std.mem.Allocator, input: get_bill_estimate.GetBillEstimateInput, options: CallOptions) !get_bill_estimate.GetBillEstimateOutput {
         return get_bill_estimate.execute(self, allocator, input, options);
     }
 
     /// Retrieves details of a specific bill scenario.
-    pub fn getBillScenario(self: *Self, allocator: std.mem.Allocator, input: get_bill_scenario.GetBillScenarioInput, options: get_bill_scenario.Options) !get_bill_scenario.GetBillScenarioOutput {
+    pub fn getBillScenario(self: *Self, allocator: std.mem.Allocator, input: get_bill_scenario.GetBillScenarioInput, options: CallOptions) !get_bill_scenario.GetBillScenarioOutput {
         return get_bill_scenario.execute(self, allocator, input, options);
     }
 
     /// Retrieves the current preferences for Pricing Calculator.
-    pub fn getPreferences(self: *Self, allocator: std.mem.Allocator, input: get_preferences.GetPreferencesInput, options: get_preferences.Options) !get_preferences.GetPreferencesOutput {
+    pub fn getPreferences(self: *Self, allocator: std.mem.Allocator, input: get_preferences.GetPreferencesInput, options: CallOptions) !get_preferences.GetPreferencesOutput {
         return get_preferences.execute(self, allocator, input, options);
     }
 
     /// Retrieves details of a specific workload estimate.
-    pub fn getWorkloadEstimate(self: *Self, allocator: std.mem.Allocator, input: get_workload_estimate.GetWorkloadEstimateInput, options: get_workload_estimate.Options) !get_workload_estimate.GetWorkloadEstimateOutput {
+    pub fn getWorkloadEstimate(self: *Self, allocator: std.mem.Allocator, input: get_workload_estimate.GetWorkloadEstimateInput, options: CallOptions) !get_workload_estimate.GetWorkloadEstimateOutput {
         return get_workload_estimate.execute(self, allocator, input, options);
     }
 
     /// Lists the commitments associated with a bill estimate.
-    pub fn listBillEstimateCommitments(self: *Self, allocator: std.mem.Allocator, input: list_bill_estimate_commitments.ListBillEstimateCommitmentsInput, options: list_bill_estimate_commitments.Options) !list_bill_estimate_commitments.ListBillEstimateCommitmentsOutput {
+    pub fn listBillEstimateCommitments(self: *Self, allocator: std.mem.Allocator, input: list_bill_estimate_commitments.ListBillEstimateCommitmentsInput, options: CallOptions) !list_bill_estimate_commitments.ListBillEstimateCommitmentsOutput {
         return list_bill_estimate_commitments.execute(self, allocator, input, options);
     }
 
     /// Lists the input commitment modifications associated with a bill estimate.
-    pub fn listBillEstimateInputCommitmentModifications(self: *Self, allocator: std.mem.Allocator, input: list_bill_estimate_input_commitment_modifications.ListBillEstimateInputCommitmentModificationsInput, options: list_bill_estimate_input_commitment_modifications.Options) !list_bill_estimate_input_commitment_modifications.ListBillEstimateInputCommitmentModificationsOutput {
+    pub fn listBillEstimateInputCommitmentModifications(self: *Self, allocator: std.mem.Allocator, input: list_bill_estimate_input_commitment_modifications.ListBillEstimateInputCommitmentModificationsInput, options: CallOptions) !list_bill_estimate_input_commitment_modifications.ListBillEstimateInputCommitmentModificationsOutput {
         return list_bill_estimate_input_commitment_modifications.execute(self, allocator, input, options);
     }
 
     /// Lists the input usage modifications associated with a bill estimate.
-    pub fn listBillEstimateInputUsageModifications(self: *Self, allocator: std.mem.Allocator, input: list_bill_estimate_input_usage_modifications.ListBillEstimateInputUsageModificationsInput, options: list_bill_estimate_input_usage_modifications.Options) !list_bill_estimate_input_usage_modifications.ListBillEstimateInputUsageModificationsOutput {
+    pub fn listBillEstimateInputUsageModifications(self: *Self, allocator: std.mem.Allocator, input: list_bill_estimate_input_usage_modifications.ListBillEstimateInputUsageModificationsInput, options: CallOptions) !list_bill_estimate_input_usage_modifications.ListBillEstimateInputUsageModificationsOutput {
         return list_bill_estimate_input_usage_modifications.execute(self, allocator, input, options);
     }
 
     /// Lists the line items associated with a bill estimate.
-    pub fn listBillEstimateLineItems(self: *Self, allocator: std.mem.Allocator, input: list_bill_estimate_line_items.ListBillEstimateLineItemsInput, options: list_bill_estimate_line_items.Options) !list_bill_estimate_line_items.ListBillEstimateLineItemsOutput {
+    pub fn listBillEstimateLineItems(self: *Self, allocator: std.mem.Allocator, input: list_bill_estimate_line_items.ListBillEstimateLineItemsInput, options: CallOptions) !list_bill_estimate_line_items.ListBillEstimateLineItemsOutput {
         return list_bill_estimate_line_items.execute(self, allocator, input, options);
     }
 
     /// Lists all bill estimates for the account.
-    pub fn listBillEstimates(self: *Self, allocator: std.mem.Allocator, input: list_bill_estimates.ListBillEstimatesInput, options: list_bill_estimates.Options) !list_bill_estimates.ListBillEstimatesOutput {
+    pub fn listBillEstimates(self: *Self, allocator: std.mem.Allocator, input: list_bill_estimates.ListBillEstimatesInput, options: CallOptions) !list_bill_estimates.ListBillEstimatesOutput {
         return list_bill_estimates.execute(self, allocator, input, options);
     }
 
     /// Lists the commitment modifications associated with a bill scenario.
-    pub fn listBillScenarioCommitmentModifications(self: *Self, allocator: std.mem.Allocator, input: list_bill_scenario_commitment_modifications.ListBillScenarioCommitmentModificationsInput, options: list_bill_scenario_commitment_modifications.Options) !list_bill_scenario_commitment_modifications.ListBillScenarioCommitmentModificationsOutput {
+    pub fn listBillScenarioCommitmentModifications(self: *Self, allocator: std.mem.Allocator, input: list_bill_scenario_commitment_modifications.ListBillScenarioCommitmentModificationsInput, options: CallOptions) !list_bill_scenario_commitment_modifications.ListBillScenarioCommitmentModificationsOutput {
         return list_bill_scenario_commitment_modifications.execute(self, allocator, input, options);
     }
 
     /// Lists the usage modifications associated with a bill scenario.
-    pub fn listBillScenarioUsageModifications(self: *Self, allocator: std.mem.Allocator, input: list_bill_scenario_usage_modifications.ListBillScenarioUsageModificationsInput, options: list_bill_scenario_usage_modifications.Options) !list_bill_scenario_usage_modifications.ListBillScenarioUsageModificationsOutput {
+    pub fn listBillScenarioUsageModifications(self: *Self, allocator: std.mem.Allocator, input: list_bill_scenario_usage_modifications.ListBillScenarioUsageModificationsInput, options: CallOptions) !list_bill_scenario_usage_modifications.ListBillScenarioUsageModificationsOutput {
         return list_bill_scenario_usage_modifications.execute(self, allocator, input, options);
     }
 
     /// Lists all bill scenarios for the account.
-    pub fn listBillScenarios(self: *Self, allocator: std.mem.Allocator, input: list_bill_scenarios.ListBillScenariosInput, options: list_bill_scenarios.Options) !list_bill_scenarios.ListBillScenariosOutput {
+    pub fn listBillScenarios(self: *Self, allocator: std.mem.Allocator, input: list_bill_scenarios.ListBillScenariosInput, options: CallOptions) !list_bill_scenarios.ListBillScenariosOutput {
         return list_bill_scenarios.execute(self, allocator, input, options);
     }
 
     /// Lists all tags associated with a specified resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists the usage associated with a workload estimate.
-    pub fn listWorkloadEstimateUsage(self: *Self, allocator: std.mem.Allocator, input: list_workload_estimate_usage.ListWorkloadEstimateUsageInput, options: list_workload_estimate_usage.Options) !list_workload_estimate_usage.ListWorkloadEstimateUsageOutput {
+    pub fn listWorkloadEstimateUsage(self: *Self, allocator: std.mem.Allocator, input: list_workload_estimate_usage.ListWorkloadEstimateUsageInput, options: CallOptions) !list_workload_estimate_usage.ListWorkloadEstimateUsageOutput {
         return list_workload_estimate_usage.execute(self, allocator, input, options);
     }
 
     /// Lists all workload estimates for the account.
-    pub fn listWorkloadEstimates(self: *Self, allocator: std.mem.Allocator, input: list_workload_estimates.ListWorkloadEstimatesInput, options: list_workload_estimates.Options) !list_workload_estimates.ListWorkloadEstimatesOutput {
+    pub fn listWorkloadEstimates(self: *Self, allocator: std.mem.Allocator, input: list_workload_estimates.ListWorkloadEstimatesInput, options: CallOptions) !list_workload_estimates.ListWorkloadEstimatesOutput {
         return list_workload_estimates.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tags to a specified resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from a specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an existing bill estimate.
-    pub fn updateBillEstimate(self: *Self, allocator: std.mem.Allocator, input: update_bill_estimate.UpdateBillEstimateInput, options: update_bill_estimate.Options) !update_bill_estimate.UpdateBillEstimateOutput {
+    pub fn updateBillEstimate(self: *Self, allocator: std.mem.Allocator, input: update_bill_estimate.UpdateBillEstimateInput, options: CallOptions) !update_bill_estimate.UpdateBillEstimateOutput {
         return update_bill_estimate.execute(self, allocator, input, options);
     }
 
     /// Updates an existing bill scenario.
-    pub fn updateBillScenario(self: *Self, allocator: std.mem.Allocator, input: update_bill_scenario.UpdateBillScenarioInput, options: update_bill_scenario.Options) !update_bill_scenario.UpdateBillScenarioOutput {
+    pub fn updateBillScenario(self: *Self, allocator: std.mem.Allocator, input: update_bill_scenario.UpdateBillScenarioInput, options: CallOptions) !update_bill_scenario.UpdateBillScenarioOutput {
         return update_bill_scenario.execute(self, allocator, input, options);
     }
 
     /// Updates the preferences for Pricing Calculator.
-    pub fn updatePreferences(self: *Self, allocator: std.mem.Allocator, input: update_preferences.UpdatePreferencesInput, options: update_preferences.Options) !update_preferences.UpdatePreferencesOutput {
+    pub fn updatePreferences(self: *Self, allocator: std.mem.Allocator, input: update_preferences.UpdatePreferencesInput, options: CallOptions) !update_preferences.UpdatePreferencesOutput {
         return update_preferences.execute(self, allocator, input, options);
     }
 
     /// Updates an existing workload estimate.
-    pub fn updateWorkloadEstimate(self: *Self, allocator: std.mem.Allocator, input: update_workload_estimate.UpdateWorkloadEstimateInput, options: update_workload_estimate.Options) !update_workload_estimate.UpdateWorkloadEstimateOutput {
+    pub fn updateWorkloadEstimate(self: *Self, allocator: std.mem.Allocator, input: update_workload_estimate.UpdateWorkloadEstimateInput, options: CallOptions) !update_workload_estimate.UpdateWorkloadEstimateOutput {
         return update_workload_estimate.execute(self, allocator, input, options);
     }
 

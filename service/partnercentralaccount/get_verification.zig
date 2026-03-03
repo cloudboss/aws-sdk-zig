@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VerificationType = @import("verification_type.zig").VerificationType;
 const VerificationResponseDetails = @import("verification_response_details.zig").VerificationResponseDetails;
@@ -52,11 +53,7 @@ pub const GetVerificationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetVerificationInput, options: Options) !GetVerificationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetVerificationInput, options: CallOptions) !GetVerificationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

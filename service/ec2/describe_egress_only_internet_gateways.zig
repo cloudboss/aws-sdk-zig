@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const EgressOnlyInternetGateway = @import("egress_only_internet_gateway.zig").EgressOnlyInternetGateway;
@@ -52,11 +53,7 @@ pub const DescribeEgressOnlyInternetGatewaysOutput = struct {
     next_token: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeEgressOnlyInternetGatewaysInput, options: Options) !DescribeEgressOnlyInternetGatewaysOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeEgressOnlyInternetGatewaysInput, options: CallOptions) !DescribeEgressOnlyInternetGatewaysOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

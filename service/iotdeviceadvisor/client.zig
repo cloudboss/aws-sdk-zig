@@ -15,6 +15,7 @@ const stop_suite_run = @import("stop_suite_run.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_suite_definition = @import("update_suite_definition.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -49,7 +50,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [CreateSuiteDefinition](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn createSuiteDefinition(self: *Self, allocator: std.mem.Allocator, input: create_suite_definition.CreateSuiteDefinitionInput, options: create_suite_definition.Options) !create_suite_definition.CreateSuiteDefinitionOutput {
+    pub fn createSuiteDefinition(self: *Self, allocator: std.mem.Allocator, input: create_suite_definition.CreateSuiteDefinitionInput, options: CallOptions) !create_suite_definition.CreateSuiteDefinitionOutput {
         return create_suite_definition.execute(self, allocator, input, options);
     }
 
@@ -57,12 +58,12 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [DeleteSuiteDefinition](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn deleteSuiteDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_suite_definition.DeleteSuiteDefinitionInput, options: delete_suite_definition.Options) !delete_suite_definition.DeleteSuiteDefinitionOutput {
+    pub fn deleteSuiteDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_suite_definition.DeleteSuiteDefinitionInput, options: CallOptions) !delete_suite_definition.DeleteSuiteDefinitionOutput {
         return delete_suite_definition.execute(self, allocator, input, options);
     }
 
     /// Gets information about an Device Advisor endpoint.
-    pub fn getEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_endpoint.GetEndpointInput, options: get_endpoint.Options) !get_endpoint.GetEndpointOutput {
+    pub fn getEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_endpoint.GetEndpointInput, options: CallOptions) !get_endpoint.GetEndpointOutput {
         return get_endpoint.execute(self, allocator, input, options);
     }
 
@@ -70,7 +71,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [GetSuiteDefinition](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn getSuiteDefinition(self: *Self, allocator: std.mem.Allocator, input: get_suite_definition.GetSuiteDefinitionInput, options: get_suite_definition.Options) !get_suite_definition.GetSuiteDefinitionOutput {
+    pub fn getSuiteDefinition(self: *Self, allocator: std.mem.Allocator, input: get_suite_definition.GetSuiteDefinitionInput, options: CallOptions) !get_suite_definition.GetSuiteDefinitionOutput {
         return get_suite_definition.execute(self, allocator, input, options);
     }
 
@@ -78,7 +79,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [GetSuiteRun](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn getSuiteRun(self: *Self, allocator: std.mem.Allocator, input: get_suite_run.GetSuiteRunInput, options: get_suite_run.Options) !get_suite_run.GetSuiteRunOutput {
+    pub fn getSuiteRun(self: *Self, allocator: std.mem.Allocator, input: get_suite_run.GetSuiteRunInput, options: CallOptions) !get_suite_run.GetSuiteRunOutput {
         return get_suite_run.execute(self, allocator, input, options);
     }
 
@@ -87,7 +88,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [GetSuiteRunReport](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn getSuiteRunReport(self: *Self, allocator: std.mem.Allocator, input: get_suite_run_report.GetSuiteRunReportInput, options: get_suite_run_report.Options) !get_suite_run_report.GetSuiteRunReportOutput {
+    pub fn getSuiteRunReport(self: *Self, allocator: std.mem.Allocator, input: get_suite_run_report.GetSuiteRunReportInput, options: CallOptions) !get_suite_run_report.GetSuiteRunReportOutput {
         return get_suite_run_report.execute(self, allocator, input, options);
     }
 
@@ -95,7 +96,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [ListSuiteDefinitions](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn listSuiteDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_suite_definitions.ListSuiteDefinitionsInput, options: list_suite_definitions.Options) !list_suite_definitions.ListSuiteDefinitionsOutput {
+    pub fn listSuiteDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_suite_definitions.ListSuiteDefinitionsInput, options: CallOptions) !list_suite_definitions.ListSuiteDefinitionsOutput {
         return list_suite_definitions.execute(self, allocator, input, options);
     }
 
@@ -105,7 +106,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [ListSuiteRuns](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn listSuiteRuns(self: *Self, allocator: std.mem.Allocator, input: list_suite_runs.ListSuiteRunsInput, options: list_suite_runs.Options) !list_suite_runs.ListSuiteRunsOutput {
+    pub fn listSuiteRuns(self: *Self, allocator: std.mem.Allocator, input: list_suite_runs.ListSuiteRunsInput, options: CallOptions) !list_suite_runs.ListSuiteRunsOutput {
         return list_suite_runs.execute(self, allocator, input, options);
     }
 
@@ -113,7 +114,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [ListTagsForResource](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -121,7 +122,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [StartSuiteRun](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn startSuiteRun(self: *Self, allocator: std.mem.Allocator, input: start_suite_run.StartSuiteRunInput, options: start_suite_run.Options) !start_suite_run.StartSuiteRunOutput {
+    pub fn startSuiteRun(self: *Self, allocator: std.mem.Allocator, input: start_suite_run.StartSuiteRunInput, options: CallOptions) !start_suite_run.StartSuiteRunOutput {
         return start_suite_run.execute(self, allocator, input, options);
     }
 
@@ -129,7 +130,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [StopSuiteRun](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn stopSuiteRun(self: *Self, allocator: std.mem.Allocator, input: stop_suite_run.StopSuiteRunInput, options: stop_suite_run.Options) !stop_suite_run.StopSuiteRunOutput {
+    pub fn stopSuiteRun(self: *Self, allocator: std.mem.Allocator, input: stop_suite_run.StopSuiteRunInput, options: CallOptions) !stop_suite_run.StopSuiteRunOutput {
         return stop_suite_run.execute(self, allocator, input, options);
     }
 
@@ -137,7 +138,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [TagResource](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -145,7 +146,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [UntagResource](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -153,7 +154,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [UpdateSuiteDefinition](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn updateSuiteDefinition(self: *Self, allocator: std.mem.Allocator, input: update_suite_definition.UpdateSuiteDefinitionInput, options: update_suite_definition.Options) !update_suite_definition.UpdateSuiteDefinitionOutput {
+    pub fn updateSuiteDefinition(self: *Self, allocator: std.mem.Allocator, input: update_suite_definition.UpdateSuiteDefinitionInput, options: CallOptions) !update_suite_definition.UpdateSuiteDefinitionOutput {
         return update_suite_definition.execute(self, allocator, input, options);
     }
 

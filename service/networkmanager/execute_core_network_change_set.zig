@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const ExecuteCoreNetworkChangeSetInput = struct {
@@ -20,11 +21,7 @@ pub const ExecuteCoreNetworkChangeSetInput = struct {
 pub const ExecuteCoreNetworkChangeSetOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExecuteCoreNetworkChangeSetInput, options: Options) !ExecuteCoreNetworkChangeSetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExecuteCoreNetworkChangeSetInput, options: CallOptions) !ExecuteCoreNetworkChangeSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

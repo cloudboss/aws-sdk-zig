@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LoadBalancerAttributeName = @import("load_balancer_attribute_name.zig").LoadBalancerAttributeName;
 const Operation = @import("operation.zig").Operation;
@@ -68,11 +69,7 @@ pub const UpdateLoadBalancerAttributeOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLoadBalancerAttributeInput, options: Options) !UpdateLoadBalancerAttributeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLoadBalancerAttributeInput, options: CallOptions) !UpdateLoadBalancerAttributeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MediaAnalysisJobFailureDetails = @import("media_analysis_job_failure_details.zig").MediaAnalysisJobFailureDetails;
 const MediaAnalysisInput = @import("media_analysis_input.zig").MediaAnalysisInput;
@@ -76,11 +77,7 @@ pub const GetMediaAnalysisJobOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetMediaAnalysisJobInput, options: Options) !GetMediaAnalysisJobOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetMediaAnalysisJobInput, options: CallOptions) !GetMediaAnalysisJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

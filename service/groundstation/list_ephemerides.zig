@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EphemerisType = @import("ephemeris_type.zig").EphemerisType;
 const EphemerisStatus = @import("ephemeris_status.zig").EphemerisStatus;
@@ -56,11 +57,7 @@ pub const ListEphemeridesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListEphemeridesInput, options: Options) !ListEphemeridesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListEphemeridesInput, options: CallOptions) !ListEphemeridesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

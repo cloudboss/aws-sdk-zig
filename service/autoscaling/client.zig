@@ -67,6 +67,7 @@ const start_instance_refresh = @import("start_instance_refresh.zig");
 const suspend_processes = @import("suspend_processes.zig");
 const terminate_instance_in_auto_scaling_group = @import("terminate_instance_in_auto_scaling_group.zig");
 const update_auto_scaling_group = @import("update_auto_scaling_group.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -116,7 +117,7 @@ pub const Client = struct {
     /// For more information, see [Detach
     /// or attach
     /// instances](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-detach-attach-instances.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn attachInstances(self: *Self, allocator: std.mem.Allocator, input: attach_instances.AttachInstancesInput, options: attach_instances.Options) !attach_instances.AttachInstancesOutput {
+    pub fn attachInstances(self: *Self, allocator: std.mem.Allocator, input: attach_instances.AttachInstancesInput, options: CallOptions) !attach_instances.AttachInstancesOutput {
         return attach_instances.execute(self, allocator, input, options);
     }
 
@@ -156,7 +157,7 @@ pub const Client = struct {
     /// distribute traffic across the instances in your Auto Scaling
     /// group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    pub fn attachLoadBalancerTargetGroups(self: *Self, allocator: std.mem.Allocator, input: attach_load_balancer_target_groups.AttachLoadBalancerTargetGroupsInput, options: attach_load_balancer_target_groups.Options) !attach_load_balancer_target_groups.AttachLoadBalancerTargetGroupsOutput {
+    pub fn attachLoadBalancerTargetGroups(self: *Self, allocator: std.mem.Allocator, input: attach_load_balancer_target_groups.AttachLoadBalancerTargetGroupsInput, options: CallOptions) !attach_load_balancer_target_groups.AttachLoadBalancerTargetGroupsOutput {
         return attach_load_balancer_target_groups.execute(self, allocator, input, options);
     }
 
@@ -186,7 +187,7 @@ pub const Client = struct {
     /// distribute traffic across the instances in your Auto Scaling
     /// group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    pub fn attachLoadBalancers(self: *Self, allocator: std.mem.Allocator, input: attach_load_balancers.AttachLoadBalancersInput, options: attach_load_balancers.Options) !attach_load_balancers.AttachLoadBalancersOutput {
+    pub fn attachLoadBalancers(self: *Self, allocator: std.mem.Allocator, input: attach_load_balancers.AttachLoadBalancersInput, options: CallOptions) !attach_load_balancers.AttachLoadBalancersOutput {
         return attach_load_balancers.execute(self, allocator, input, options);
     }
 
@@ -215,18 +216,18 @@ pub const Client = struct {
     /// and your Auto Scaling
     /// group. To detach a traffic source from the Auto Scaling group, call the
     /// [DetachTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachTrafficSources.html) API.
-    pub fn attachTrafficSources(self: *Self, allocator: std.mem.Allocator, input: attach_traffic_sources.AttachTrafficSourcesInput, options: attach_traffic_sources.Options) !attach_traffic_sources.AttachTrafficSourcesOutput {
+    pub fn attachTrafficSources(self: *Self, allocator: std.mem.Allocator, input: attach_traffic_sources.AttachTrafficSourcesInput, options: CallOptions) !attach_traffic_sources.AttachTrafficSourcesOutput {
         return attach_traffic_sources.execute(self, allocator, input, options);
     }
 
     /// Deletes one or more scheduled actions for the specified Auto Scaling group.
-    pub fn batchDeleteScheduledAction(self: *Self, allocator: std.mem.Allocator, input: batch_delete_scheduled_action.BatchDeleteScheduledActionInput, options: batch_delete_scheduled_action.Options) !batch_delete_scheduled_action.BatchDeleteScheduledActionOutput {
+    pub fn batchDeleteScheduledAction(self: *Self, allocator: std.mem.Allocator, input: batch_delete_scheduled_action.BatchDeleteScheduledActionInput, options: CallOptions) !batch_delete_scheduled_action.BatchDeleteScheduledActionOutput {
         return batch_delete_scheduled_action.execute(self, allocator, input, options);
     }
 
     /// Creates or updates one or more scheduled scaling actions for an Auto Scaling
     /// group.
-    pub fn batchPutScheduledUpdateGroupAction(self: *Self, allocator: std.mem.Allocator, input: batch_put_scheduled_update_group_action.BatchPutScheduledUpdateGroupActionInput, options: batch_put_scheduled_update_group_action.Options) !batch_put_scheduled_update_group_action.BatchPutScheduledUpdateGroupActionOutput {
+    pub fn batchPutScheduledUpdateGroupAction(self: *Self, allocator: std.mem.Allocator, input: batch_put_scheduled_update_group_action.BatchPutScheduledUpdateGroupActionInput, options: CallOptions) !batch_put_scheduled_update_group_action.BatchPutScheduledUpdateGroupActionOutput {
         return batch_put_scheduled_update_group_action.execute(self, allocator, input, options);
     }
 
@@ -243,7 +244,7 @@ pub const Client = struct {
     /// that it made.
     /// Use the
     /// [RollbackInstanceRefresh](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_RollbackInstanceRefresh.html) API to roll back instead.
-    pub fn cancelInstanceRefresh(self: *Self, allocator: std.mem.Allocator, input: cancel_instance_refresh.CancelInstanceRefreshInput, options: cancel_instance_refresh.Options) !cancel_instance_refresh.CancelInstanceRefreshOutput {
+    pub fn cancelInstanceRefresh(self: *Self, allocator: std.mem.Allocator, input: cancel_instance_refresh.CancelInstanceRefreshInput, options: CallOptions) !cancel_instance_refresh.CancelInstanceRefreshOutput {
         return cancel_instance_refresh.execute(self, allocator, input, options);
     }
 
@@ -284,7 +285,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Complete a lifecycle
     /// action](https://docs.aws.amazon.com/autoscaling/ec2/userguide/completing-lifecycle-hooks.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn completeLifecycleAction(self: *Self, allocator: std.mem.Allocator, input: complete_lifecycle_action.CompleteLifecycleActionInput, options: complete_lifecycle_action.Options) !complete_lifecycle_action.CompleteLifecycleActionOutput {
+    pub fn completeLifecycleAction(self: *Self, allocator: std.mem.Allocator, input: complete_lifecycle_action.CompleteLifecycleActionInput, options: CallOptions) !complete_lifecycle_action.CompleteLifecycleActionOutput {
         return complete_lifecycle_action.execute(self, allocator, input, options);
     }
 
@@ -313,7 +314,7 @@ pub const Client = struct {
     /// that defines weights for the instance types, you must specify these sizes
     /// with the same
     /// units that you use for weighting instances.
-    pub fn createAutoScalingGroup(self: *Self, allocator: std.mem.Allocator, input: create_auto_scaling_group.CreateAutoScalingGroupInput, options: create_auto_scaling_group.Options) !create_auto_scaling_group.CreateAutoScalingGroupOutput {
+    pub fn createAutoScalingGroup(self: *Self, allocator: std.mem.Allocator, input: create_auto_scaling_group.CreateAutoScalingGroupInput, options: CallOptions) !create_auto_scaling_group.CreateAutoScalingGroupOutput {
         return create_auto_scaling_group.execute(self, allocator, input, options);
     }
 
@@ -338,7 +339,7 @@ pub const Client = struct {
     /// Auto Scaling or Amazon EC2.
     /// For information about using launch templates, see [Launch
     /// templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn createLaunchConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_launch_configuration.CreateLaunchConfigurationInput, options: create_launch_configuration.Options) !create_launch_configuration.CreateLaunchConfigurationOutput {
+    pub fn createLaunchConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_launch_configuration.CreateLaunchConfigurationInput, options: CallOptions) !create_launch_configuration.CreateLaunchConfigurationOutput {
         return create_launch_configuration.execute(self, allocator, input, options);
     }
 
@@ -350,7 +351,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Tag Auto Scaling groups and
     /// instances](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn createOrUpdateTags(self: *Self, allocator: std.mem.Allocator, input: create_or_update_tags.CreateOrUpdateTagsInput, options: create_or_update_tags.Options) !create_or_update_tags.CreateOrUpdateTagsOutput {
+    pub fn createOrUpdateTags(self: *Self, allocator: std.mem.Allocator, input: create_or_update_tags.CreateOrUpdateTagsInput, options: CallOptions) !create_or_update_tags.CreateOrUpdateTagsOutput {
         return create_or_update_tags.execute(self, allocator, input, options);
     }
 
@@ -382,7 +383,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Delete your Auto Scaling
     /// infrastructure](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-process-shutdown.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn deleteAutoScalingGroup(self: *Self, allocator: std.mem.Allocator, input: delete_auto_scaling_group.DeleteAutoScalingGroupInput, options: delete_auto_scaling_group.Options) !delete_auto_scaling_group.DeleteAutoScalingGroupOutput {
+    pub fn deleteAutoScalingGroup(self: *Self, allocator: std.mem.Allocator, input: delete_auto_scaling_group.DeleteAutoScalingGroupInput, options: CallOptions) !delete_auto_scaling_group.DeleteAutoScalingGroupOutput {
         return delete_auto_scaling_group.execute(self, allocator, input, options);
     }
 
@@ -391,7 +392,7 @@ pub const Client = struct {
     /// The launch configuration must not be attached to an Auto Scaling group. When
     /// this call
     /// completes, the launch configuration is no longer available for use.
-    pub fn deleteLaunchConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_launch_configuration.DeleteLaunchConfigurationInput, options: delete_launch_configuration.Options) !delete_launch_configuration.DeleteLaunchConfigurationOutput {
+    pub fn deleteLaunchConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_launch_configuration.DeleteLaunchConfigurationInput, options: CallOptions) !delete_launch_configuration.DeleteLaunchConfigurationOutput {
         return delete_launch_configuration.execute(self, allocator, input, options);
     }
 
@@ -400,12 +401,12 @@ pub const Client = struct {
     /// If there are any outstanding lifecycle actions, they are completed first
     /// (`ABANDON` for launching instances, `CONTINUE` for terminating
     /// instances).
-    pub fn deleteLifecycleHook(self: *Self, allocator: std.mem.Allocator, input: delete_lifecycle_hook.DeleteLifecycleHookInput, options: delete_lifecycle_hook.Options) !delete_lifecycle_hook.DeleteLifecycleHookOutput {
+    pub fn deleteLifecycleHook(self: *Self, allocator: std.mem.Allocator, input: delete_lifecycle_hook.DeleteLifecycleHookInput, options: CallOptions) !delete_lifecycle_hook.DeleteLifecycleHookOutput {
         return delete_lifecycle_hook.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified notification.
-    pub fn deleteNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_notification_configuration.DeleteNotificationConfigurationInput, options: delete_notification_configuration.Options) !delete_notification_configuration.DeleteNotificationConfigurationOutput {
+    pub fn deleteNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_notification_configuration.DeleteNotificationConfigurationInput, options: CallOptions) !delete_notification_configuration.DeleteNotificationConfigurationOutput {
         return delete_notification_configuration.execute(self, allocator, input, options);
     }
 
@@ -418,17 +419,17 @@ pub const Client = struct {
     ///
     /// For more information, see [Delete a scaling
     /// policy](https://docs.aws.amazon.com/autoscaling/ec2/userguide/deleting-scaling-policy.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn deletePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_policy.DeletePolicyInput, options: delete_policy.Options) !delete_policy.DeletePolicyOutput {
+    pub fn deletePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_policy.DeletePolicyInput, options: CallOptions) !delete_policy.DeletePolicyOutput {
         return delete_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified scheduled action.
-    pub fn deleteScheduledAction(self: *Self, allocator: std.mem.Allocator, input: delete_scheduled_action.DeleteScheduledActionInput, options: delete_scheduled_action.Options) !delete_scheduled_action.DeleteScheduledActionOutput {
+    pub fn deleteScheduledAction(self: *Self, allocator: std.mem.Allocator, input: delete_scheduled_action.DeleteScheduledActionInput, options: CallOptions) !delete_scheduled_action.DeleteScheduledActionOutput {
         return delete_scheduled_action.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified tags.
-    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: delete_tags.Options) !delete_tags.DeleteTagsOutput {
+    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: CallOptions) !delete_tags.DeleteTagsOutput {
         return delete_tags.execute(self, allocator, input, options);
     }
 
@@ -437,7 +438,7 @@ pub const Client = struct {
     /// For more information, see [Warm pools for
     /// Amazon EC2 Auto
     /// Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn deleteWarmPool(self: *Self, allocator: std.mem.Allocator, input: delete_warm_pool.DeleteWarmPoolInput, options: delete_warm_pool.Options) !delete_warm_pool.DeleteWarmPoolOutput {
+    pub fn deleteWarmPool(self: *Self, allocator: std.mem.Allocator, input: delete_warm_pool.DeleteWarmPoolInput, options: CallOptions) !delete_warm_pool.DeleteWarmPoolOutput {
         return delete_warm_pool.execute(self, allocator, input, options);
     }
 
@@ -451,7 +452,7 @@ pub const Client = struct {
     /// For more information, see [Quotas for
     /// Amazon EC2 Auto
     /// Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-quotas.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn describeAccountLimits(self: *Self, allocator: std.mem.Allocator, input: describe_account_limits.DescribeAccountLimitsInput, options: describe_account_limits.Options) !describe_account_limits.DescribeAccountLimitsOutput {
+    pub fn describeAccountLimits(self: *Self, allocator: std.mem.Allocator, input: describe_account_limits.DescribeAccountLimitsInput, options: CallOptions) !describe_account_limits.DescribeAccountLimitsOutput {
         return describe_account_limits.execute(self, allocator, input, options);
     }
 
@@ -465,7 +466,7 @@ pub const Client = struct {
     /// * `ExactCapacity`
     ///
     /// * `PercentChangeInCapacity`
-    pub fn describeAdjustmentTypes(self: *Self, allocator: std.mem.Allocator, input: describe_adjustment_types.DescribeAdjustmentTypesInput, options: describe_adjustment_types.Options) !describe_adjustment_types.DescribeAdjustmentTypesOutput {
+    pub fn describeAdjustmentTypes(self: *Self, allocator: std.mem.Allocator, input: describe_adjustment_types.DescribeAdjustmentTypesInput, options: CallOptions) !describe_adjustment_types.DescribeAdjustmentTypesOutput {
         return describe_adjustment_types.execute(self, allocator, input, options);
     }
 
@@ -483,18 +484,18 @@ pub const Client = struct {
     /// groups. To retrieve
     /// information about the instances in a warm pool, you must call the
     /// [DescribeWarmPool](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeWarmPool.html) API.
-    pub fn describeAutoScalingGroups(self: *Self, allocator: std.mem.Allocator, input: describe_auto_scaling_groups.DescribeAutoScalingGroupsInput, options: describe_auto_scaling_groups.Options) !describe_auto_scaling_groups.DescribeAutoScalingGroupsOutput {
+    pub fn describeAutoScalingGroups(self: *Self, allocator: std.mem.Allocator, input: describe_auto_scaling_groups.DescribeAutoScalingGroupsInput, options: CallOptions) !describe_auto_scaling_groups.DescribeAutoScalingGroupsOutput {
         return describe_auto_scaling_groups.execute(self, allocator, input, options);
     }
 
     /// Gets information about the Auto Scaling instances in the account and Region.
-    pub fn describeAutoScalingInstances(self: *Self, allocator: std.mem.Allocator, input: describe_auto_scaling_instances.DescribeAutoScalingInstancesInput, options: describe_auto_scaling_instances.Options) !describe_auto_scaling_instances.DescribeAutoScalingInstancesOutput {
+    pub fn describeAutoScalingInstances(self: *Self, allocator: std.mem.Allocator, input: describe_auto_scaling_instances.DescribeAutoScalingInstancesInput, options: CallOptions) !describe_auto_scaling_instances.DescribeAutoScalingInstancesOutput {
         return describe_auto_scaling_instances.execute(self, allocator, input, options);
     }
 
     /// Describes the notification types that are supported by Amazon EC2 Auto
     /// Scaling.
-    pub fn describeAutoScalingNotificationTypes(self: *Self, allocator: std.mem.Allocator, input: describe_auto_scaling_notification_types.DescribeAutoScalingNotificationTypesInput, options: describe_auto_scaling_notification_types.Options) !describe_auto_scaling_notification_types.DescribeAutoScalingNotificationTypesOutput {
+    pub fn describeAutoScalingNotificationTypes(self: *Self, allocator: std.mem.Allocator, input: describe_auto_scaling_notification_types.DescribeAutoScalingNotificationTypesInput, options: CallOptions) !describe_auto_scaling_notification_types.DescribeAutoScalingNotificationTypesOutput {
         return describe_auto_scaling_notification_types.execute(self, allocator, input, options);
     }
 
@@ -517,12 +518,12 @@ pub const Client = struct {
     /// is initiated while an instance refresh is in progress, Amazon EC2 Auto
     /// Scaling also returns information
     /// about the rollback of the instance refresh.
-    pub fn describeInstanceRefreshes(self: *Self, allocator: std.mem.Allocator, input: describe_instance_refreshes.DescribeInstanceRefreshesInput, options: describe_instance_refreshes.Options) !describe_instance_refreshes.DescribeInstanceRefreshesOutput {
+    pub fn describeInstanceRefreshes(self: *Self, allocator: std.mem.Allocator, input: describe_instance_refreshes.DescribeInstanceRefreshesInput, options: CallOptions) !describe_instance_refreshes.DescribeInstanceRefreshesOutput {
         return describe_instance_refreshes.execute(self, allocator, input, options);
     }
 
     /// Gets information about the launch configurations in the account and Region.
-    pub fn describeLaunchConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_launch_configurations.DescribeLaunchConfigurationsInput, options: describe_launch_configurations.Options) !describe_launch_configurations.DescribeLaunchConfigurationsOutput {
+    pub fn describeLaunchConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_launch_configurations.DescribeLaunchConfigurationsInput, options: CallOptions) !describe_launch_configurations.DescribeLaunchConfigurationsOutput {
         return describe_launch_configurations.execute(self, allocator, input, options);
     }
 
@@ -533,13 +534,13 @@ pub const Client = struct {
     /// * `autoscaling:EC2_INSTANCE_LAUNCHING`
     ///
     /// * `autoscaling:EC2_INSTANCE_TERMINATING`
-    pub fn describeLifecycleHookTypes(self: *Self, allocator: std.mem.Allocator, input: describe_lifecycle_hook_types.DescribeLifecycleHookTypesInput, options: describe_lifecycle_hook_types.Options) !describe_lifecycle_hook_types.DescribeLifecycleHookTypesOutput {
+    pub fn describeLifecycleHookTypes(self: *Self, allocator: std.mem.Allocator, input: describe_lifecycle_hook_types.DescribeLifecycleHookTypesInput, options: CallOptions) !describe_lifecycle_hook_types.DescribeLifecycleHookTypesOutput {
         return describe_lifecycle_hook_types.execute(self, allocator, input, options);
     }
 
     /// Gets information about the lifecycle hooks for the specified Auto Scaling
     /// group.
-    pub fn describeLifecycleHooks(self: *Self, allocator: std.mem.Allocator, input: describe_lifecycle_hooks.DescribeLifecycleHooksInput, options: describe_lifecycle_hooks.Options) !describe_lifecycle_hooks.DescribeLifecycleHooksOutput {
+    pub fn describeLifecycleHooks(self: *Self, allocator: std.mem.Allocator, input: describe_lifecycle_hooks.DescribeLifecycleHooksInput, options: CallOptions) !describe_lifecycle_hooks.DescribeLifecycleHooksOutput {
         return describe_lifecycle_hooks.execute(self, allocator, input, options);
     }
 
@@ -591,7 +592,7 @@ pub const Client = struct {
     /// [AttachLoadBalancerTargetGroups](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachLoadBalancerTargetGroups.html), but not for target groups that
     /// were attached by using
     /// [AttachTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html).
-    pub fn describeLoadBalancerTargetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancer_target_groups.DescribeLoadBalancerTargetGroupsInput, options: describe_load_balancer_target_groups.Options) !describe_load_balancer_target_groups.DescribeLoadBalancerTargetGroupsOutput {
+    pub fn describeLoadBalancerTargetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancer_target_groups.DescribeLoadBalancerTargetGroupsInput, options: CallOptions) !describe_load_balancer_target_groups.DescribeLoadBalancerTargetGroupsOutput {
         return describe_load_balancer_target_groups.execute(self, allocator, input, options);
     }
 
@@ -643,24 +644,24 @@ pub const Client = struct {
     /// distribute traffic across the instances in your Auto Scaling
     /// group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    pub fn describeLoadBalancers(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancers.DescribeLoadBalancersInput, options: describe_load_balancers.Options) !describe_load_balancers.DescribeLoadBalancersOutput {
+    pub fn describeLoadBalancers(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancers.DescribeLoadBalancersInput, options: CallOptions) !describe_load_balancers.DescribeLoadBalancersOutput {
         return describe_load_balancers.execute(self, allocator, input, options);
     }
 
     /// Describes the available CloudWatch metrics for Amazon EC2 Auto Scaling.
-    pub fn describeMetricCollectionTypes(self: *Self, allocator: std.mem.Allocator, input: describe_metric_collection_types.DescribeMetricCollectionTypesInput, options: describe_metric_collection_types.Options) !describe_metric_collection_types.DescribeMetricCollectionTypesOutput {
+    pub fn describeMetricCollectionTypes(self: *Self, allocator: std.mem.Allocator, input: describe_metric_collection_types.DescribeMetricCollectionTypesInput, options: CallOptions) !describe_metric_collection_types.DescribeMetricCollectionTypesOutput {
         return describe_metric_collection_types.execute(self, allocator, input, options);
     }
 
     /// Gets information about the Amazon SNS notifications that are configured for
     /// one or more
     /// Auto Scaling groups.
-    pub fn describeNotificationConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_notification_configurations.DescribeNotificationConfigurationsInput, options: describe_notification_configurations.Options) !describe_notification_configurations.DescribeNotificationConfigurationsOutput {
+    pub fn describeNotificationConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_notification_configurations.DescribeNotificationConfigurationsInput, options: CallOptions) !describe_notification_configurations.DescribeNotificationConfigurationsOutput {
         return describe_notification_configurations.execute(self, allocator, input, options);
     }
 
     /// Gets information about the scaling policies in the account and Region.
-    pub fn describePolicies(self: *Self, allocator: std.mem.Allocator, input: describe_policies.DescribePoliciesInput, options: describe_policies.Options) !describe_policies.DescribePoliciesOutput {
+    pub fn describePolicies(self: *Self, allocator: std.mem.Allocator, input: describe_policies.DescribePoliciesInput, options: CallOptions) !describe_policies.DescribePoliciesOutput {
         return describe_policies.execute(self, allocator, input, options);
     }
 
@@ -679,7 +680,7 @@ pub const Client = struct {
     /// failure. For help interpreting the `StatusMessage`, see [Troubleshooting
     /// Amazon EC2 Auto
     /// Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/CHAP_Troubleshooting.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn describeScalingActivities(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_activities.DescribeScalingActivitiesInput, options: describe_scaling_activities.Options) !describe_scaling_activities.DescribeScalingActivitiesOutput {
+    pub fn describeScalingActivities(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_activities.DescribeScalingActivitiesInput, options: CallOptions) !describe_scaling_activities.DescribeScalingActivitiesOutput {
         return describe_scaling_activities.execute(self, allocator, input, options);
     }
 
@@ -687,7 +688,7 @@ pub const Client = struct {
     /// [ResumeProcesses](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_ResumeProcesses.html)
     /// and
     /// [SuspendProcesses](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_SuspendProcesses.html) APIs.
-    pub fn describeScalingProcessTypes(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_process_types.DescribeScalingProcessTypesInput, options: describe_scaling_process_types.Options) !describe_scaling_process_types.DescribeScalingProcessTypesOutput {
+    pub fn describeScalingProcessTypes(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_process_types.DescribeScalingProcessTypesInput, options: CallOptions) !describe_scaling_process_types.DescribeScalingProcessTypesOutput {
         return describe_scaling_process_types.execute(self, allocator, input, options);
     }
 
@@ -699,7 +700,7 @@ pub const Client = struct {
     /// run, call
     /// the
     /// [DescribeScalingActivities](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeScalingActivities.html) API.
-    pub fn describeScheduledActions(self: *Self, allocator: std.mem.Allocator, input: describe_scheduled_actions.DescribeScheduledActionsInput, options: describe_scheduled_actions.Options) !describe_scheduled_actions.DescribeScheduledActionsOutput {
+    pub fn describeScheduledActions(self: *Self, allocator: std.mem.Allocator, input: describe_scheduled_actions.DescribeScheduledActionsInput, options: CallOptions) !describe_scheduled_actions.DescribeScheduledActionsOutput {
         return describe_scheduled_actions.execute(self, allocator, input, options);
     }
 
@@ -718,7 +719,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Tag Auto Scaling groups and
     /// instances](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: describe_tags.Options) !describe_tags.DescribeTagsOutput {
+    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: CallOptions) !describe_tags.DescribeTagsOutput {
         return describe_tags.execute(self, allocator, input, options);
     }
 
@@ -728,7 +729,7 @@ pub const Client = struct {
     /// termination policies for Amazon EC2 Auto
     /// Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    pub fn describeTerminationPolicyTypes(self: *Self, allocator: std.mem.Allocator, input: describe_termination_policy_types.DescribeTerminationPolicyTypesInput, options: describe_termination_policy_types.Options) !describe_termination_policy_types.DescribeTerminationPolicyTypesOutput {
+    pub fn describeTerminationPolicyTypes(self: *Self, allocator: std.mem.Allocator, input: describe_termination_policy_types.DescribeTerminationPolicyTypesInput, options: CallOptions) !describe_termination_policy_types.DescribeTerminationPolicyTypesOutput {
         return describe_termination_policy_types.execute(self, allocator, input, options);
     }
 
@@ -742,7 +743,7 @@ pub const Client = struct {
     /// If you do not provide a traffic source type, then the results include all
     /// the traffic
     /// sources for the specified Auto Scaling group.
-    pub fn describeTrafficSources(self: *Self, allocator: std.mem.Allocator, input: describe_traffic_sources.DescribeTrafficSourcesInput, options: describe_traffic_sources.Options) !describe_traffic_sources.DescribeTrafficSourcesOutput {
+    pub fn describeTrafficSources(self: *Self, allocator: std.mem.Allocator, input: describe_traffic_sources.DescribeTrafficSourcesInput, options: CallOptions) !describe_traffic_sources.DescribeTrafficSourcesOutput {
         return describe_traffic_sources.execute(self, allocator, input, options);
     }
 
@@ -751,7 +752,7 @@ pub const Client = struct {
     /// For more information, see [Warm pools for
     /// Amazon EC2 Auto
     /// Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn describeWarmPool(self: *Self, allocator: std.mem.Allocator, input: describe_warm_pool.DescribeWarmPoolInput, options: describe_warm_pool.Options) !describe_warm_pool.DescribeWarmPoolOutput {
+    pub fn describeWarmPool(self: *Self, allocator: std.mem.Allocator, input: describe_warm_pool.DescribeWarmPoolInput, options: CallOptions) !describe_warm_pool.DescribeWarmPoolOutput {
         return describe_warm_pool.execute(self, allocator, input, options);
     }
 
@@ -774,7 +775,7 @@ pub const Client = struct {
     /// For more information, see [Detach
     /// or attach
     /// instances](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-detach-attach-instances.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn detachInstances(self: *Self, allocator: std.mem.Allocator, input: detach_instances.DetachInstancesInput, options: detach_instances.Options) !detach_instances.DetachInstancesOutput {
+    pub fn detachInstances(self: *Self, allocator: std.mem.Allocator, input: detach_instances.DetachInstancesInput, options: CallOptions) !detach_instances.DetachInstancesOutput {
         return detach_instances.execute(self, allocator, input, options);
     }
 
@@ -800,7 +801,7 @@ pub const Client = struct {
     /// [AttachLoadBalancerTargetGroups](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachLoadBalancerTargetGroups.html), but not for target groups that
     /// were attached by using
     /// [AttachTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html).
-    pub fn detachLoadBalancerTargetGroups(self: *Self, allocator: std.mem.Allocator, input: detach_load_balancer_target_groups.DetachLoadBalancerTargetGroupsInput, options: detach_load_balancer_target_groups.Options) !detach_load_balancer_target_groups.DetachLoadBalancerTargetGroupsOutput {
+    pub fn detachLoadBalancerTargetGroups(self: *Self, allocator: std.mem.Allocator, input: detach_load_balancer_target_groups.DetachLoadBalancerTargetGroupsInput, options: CallOptions) !detach_load_balancer_target_groups.DetachLoadBalancerTargetGroupsOutput {
         return detach_load_balancer_target_groups.execute(self, allocator, input, options);
     }
 
@@ -826,7 +827,7 @@ pub const Client = struct {
     /// can no longer describe the load balancer using the
     /// [DescribeLoadBalancers](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeLoadBalancers.html)
     /// API call. The instances remain running.
-    pub fn detachLoadBalancers(self: *Self, allocator: std.mem.Allocator, input: detach_load_balancers.DetachLoadBalancersInput, options: detach_load_balancers.Options) !detach_load_balancers.DetachLoadBalancersOutput {
+    pub fn detachLoadBalancers(self: *Self, allocator: std.mem.Allocator, input: detach_load_balancers.DetachLoadBalancersInput, options: CallOptions) !detach_load_balancers.DetachLoadBalancersOutput {
         return detach_load_balancers.execute(self, allocator, input, options);
     }
 
@@ -838,12 +839,12 @@ pub const Client = struct {
     /// can no longer describe the traffic source using the
     /// [DescribeTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTrafficSources.html)
     /// API call. The instances continue to run.
-    pub fn detachTrafficSources(self: *Self, allocator: std.mem.Allocator, input: detach_traffic_sources.DetachTrafficSourcesInput, options: detach_traffic_sources.Options) !detach_traffic_sources.DetachTrafficSourcesOutput {
+    pub fn detachTrafficSources(self: *Self, allocator: std.mem.Allocator, input: detach_traffic_sources.DetachTrafficSourcesInput, options: CallOptions) !detach_traffic_sources.DetachTrafficSourcesOutput {
         return detach_traffic_sources.execute(self, allocator, input, options);
     }
 
     /// Disables group metrics collection for the specified Auto Scaling group.
-    pub fn disableMetricsCollection(self: *Self, allocator: std.mem.Allocator, input: disable_metrics_collection.DisableMetricsCollectionInput, options: disable_metrics_collection.Options) !disable_metrics_collection.DisableMetricsCollectionOutput {
+    pub fn disableMetricsCollection(self: *Self, allocator: std.mem.Allocator, input: disable_metrics_collection.DisableMetricsCollectionInput, options: CallOptions) !disable_metrics_collection.DisableMetricsCollectionOutput {
         return disable_metrics_collection.execute(self, allocator, input, options);
     }
 
@@ -857,7 +858,7 @@ pub const Client = struct {
     /// CloudWatch metrics for your Auto Scaling groups and
     /// instances](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    pub fn enableMetricsCollection(self: *Self, allocator: std.mem.Allocator, input: enable_metrics_collection.EnableMetricsCollectionInput, options: enable_metrics_collection.Options) !enable_metrics_collection.EnableMetricsCollectionOutput {
+    pub fn enableMetricsCollection(self: *Self, allocator: std.mem.Allocator, input: enable_metrics_collection.EnableMetricsCollectionInput, options: CallOptions) !enable_metrics_collection.EnableMetricsCollectionOutput {
         return enable_metrics_collection.execute(self, allocator, input, options);
     }
 
@@ -878,14 +879,14 @@ pub const Client = struct {
     /// instances from your Auto Scaling
     /// group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    pub fn enterStandby(self: *Self, allocator: std.mem.Allocator, input: enter_standby.EnterStandbyInput, options: enter_standby.Options) !enter_standby.EnterStandbyOutput {
+    pub fn enterStandby(self: *Self, allocator: std.mem.Allocator, input: enter_standby.EnterStandbyInput, options: CallOptions) !enter_standby.EnterStandbyOutput {
         return enter_standby.execute(self, allocator, input, options);
     }
 
     /// Executes the specified policy. This can be useful for testing the design of
     /// your
     /// scaling policy.
-    pub fn executePolicy(self: *Self, allocator: std.mem.Allocator, input: execute_policy.ExecutePolicyInput, options: execute_policy.Options) !execute_policy.ExecutePolicyOutput {
+    pub fn executePolicy(self: *Self, allocator: std.mem.Allocator, input: execute_policy.ExecutePolicyInput, options: CallOptions) !execute_policy.ExecutePolicyOutput {
         return execute_policy.execute(self, allocator, input, options);
     }
 
@@ -898,7 +899,7 @@ pub const Client = struct {
     /// instances from your Auto Scaling
     /// group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    pub fn exitStandby(self: *Self, allocator: std.mem.Allocator, input: exit_standby.ExitStandbyInput, options: exit_standby.Options) !exit_standby.ExitStandbyOutput {
+    pub fn exitStandby(self: *Self, allocator: std.mem.Allocator, input: exit_standby.ExitStandbyInput, options: CallOptions) !exit_standby.ExitStandbyOutput {
         return exit_standby.execute(self, allocator, input, options);
     }
 
@@ -919,7 +920,7 @@ pub const Client = struct {
     /// For more information, see [Predictive
     /// scaling for Amazon EC2 Auto
     /// Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn getPredictiveScalingForecast(self: *Self, allocator: std.mem.Allocator, input: get_predictive_scaling_forecast.GetPredictiveScalingForecastInput, options: get_predictive_scaling_forecast.Options) !get_predictive_scaling_forecast.GetPredictiveScalingForecastOutput {
+    pub fn getPredictiveScalingForecast(self: *Self, allocator: std.mem.Allocator, input: get_predictive_scaling_forecast.GetPredictiveScalingForecastInput, options: CallOptions) !get_predictive_scaling_forecast.GetPredictiveScalingForecastOutput {
         return get_predictive_scaling_forecast.execute(self, allocator, input, options);
     }
 
@@ -927,7 +928,7 @@ pub const Client = struct {
     /// instance IDs and
     /// other details if launch is successful or error details if launch is
     /// unsuccessful.
-    pub fn launchInstances(self: *Self, allocator: std.mem.Allocator, input: launch_instances.LaunchInstancesInput, options: launch_instances.Options) !launch_instances.LaunchInstancesOutput {
+    pub fn launchInstances(self: *Self, allocator: std.mem.Allocator, input: launch_instances.LaunchInstancesInput, options: CallOptions) !launch_instances.LaunchInstancesOutput {
         return launch_instances.execute(self, allocator, input, options);
     }
 
@@ -979,7 +980,7 @@ pub const Client = struct {
     /// [DescribeLifecycleHooks](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeLifecycleHooks.html) API call. If you are no longer using a lifecycle
     /// hook, you can delete it by calling the
     /// [DeleteLifecycleHook](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeleteLifecycleHook.html) API.
-    pub fn putLifecycleHook(self: *Self, allocator: std.mem.Allocator, input: put_lifecycle_hook.PutLifecycleHookInput, options: put_lifecycle_hook.Options) !put_lifecycle_hook.PutLifecycleHookOutput {
+    pub fn putLifecycleHook(self: *Self, allocator: std.mem.Allocator, input: put_lifecycle_hook.PutLifecycleHookInput, options: CallOptions) !put_lifecycle_hook.PutLifecycleHookOutput {
         return put_lifecycle_hook.execute(self, allocator, input, options);
     }
 
@@ -999,7 +1000,7 @@ pub const Client = struct {
     /// If you exceed your maximum limit of SNS topics, which is 10 per Auto Scaling
     /// group, the call
     /// fails.
-    pub fn putNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_notification_configuration.PutNotificationConfigurationInput, options: put_notification_configuration.Options) !put_notification_configuration.PutNotificationConfigurationOutput {
+    pub fn putNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_notification_configuration.PutNotificationConfigurationInput, options: CallOptions) !put_notification_configuration.PutNotificationConfigurationOutput {
         return put_notification_configuration.execute(self, allocator, input, options);
     }
 
@@ -1022,7 +1023,7 @@ pub const Client = struct {
     /// [DescribePolicies](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribePolicies.html) API call. If you are no longer using a scaling policy,
     /// you can delete it by calling the
     /// [DeletePolicy](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeletePolicy.html) API.
-    pub fn putScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: put_scaling_policy.PutScalingPolicyInput, options: put_scaling_policy.Options) !put_scaling_policy.PutScalingPolicyOutput {
+    pub fn putScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: put_scaling_policy.PutScalingPolicyInput, options: CallOptions) !put_scaling_policy.PutScalingPolicyOutput {
         return put_scaling_policy.execute(self, allocator, input, options);
     }
 
@@ -1041,7 +1042,7 @@ pub const Client = struct {
     /// If you try to schedule your action in the past, Amazon EC2 Auto Scaling
     /// returns an error
     /// message.
-    pub fn putScheduledUpdateGroupAction(self: *Self, allocator: std.mem.Allocator, input: put_scheduled_update_group_action.PutScheduledUpdateGroupActionInput, options: put_scheduled_update_group_action.Options) !put_scheduled_update_group_action.PutScheduledUpdateGroupActionOutput {
+    pub fn putScheduledUpdateGroupAction(self: *Self, allocator: std.mem.Allocator, input: put_scheduled_update_group_action.PutScheduledUpdateGroupActionInput, options: CallOptions) !put_scheduled_update_group_action.PutScheduledUpdateGroupActionOutput {
         return put_scheduled_update_group_action.execute(self, allocator, input, options);
     }
 
@@ -1065,7 +1066,7 @@ pub const Client = struct {
     /// For more information, see [Warm pools for
     /// Amazon EC2 Auto
     /// Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn putWarmPool(self: *Self, allocator: std.mem.Allocator, input: put_warm_pool.PutWarmPoolInput, options: put_warm_pool.Options) !put_warm_pool.PutWarmPoolOutput {
+    pub fn putWarmPool(self: *Self, allocator: std.mem.Allocator, input: put_warm_pool.PutWarmPoolInput, options: CallOptions) !put_warm_pool.PutWarmPoolOutput {
         return put_warm_pool.execute(self, allocator, input, options);
     }
 
@@ -1105,7 +1106,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Amazon EC2 Auto Scaling lifecycle
     /// hooks](https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn recordLifecycleActionHeartbeat(self: *Self, allocator: std.mem.Allocator, input: record_lifecycle_action_heartbeat.RecordLifecycleActionHeartbeatInput, options: record_lifecycle_action_heartbeat.Options) !record_lifecycle_action_heartbeat.RecordLifecycleActionHeartbeatOutput {
+    pub fn recordLifecycleActionHeartbeat(self: *Self, allocator: std.mem.Allocator, input: record_lifecycle_action_heartbeat.RecordLifecycleActionHeartbeatInput, options: CallOptions) !record_lifecycle_action_heartbeat.RecordLifecycleActionHeartbeatOutput {
         return record_lifecycle_action_heartbeat.execute(self, allocator, input, options);
     }
 
@@ -1116,7 +1117,7 @@ pub const Client = struct {
     /// For more information, see [Suspend and resume
     /// Amazon EC2 Auto Scaling
     /// processes](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn resumeProcesses(self: *Self, allocator: std.mem.Allocator, input: resume_processes.ResumeProcessesInput, options: resume_processes.Options) !resume_processes.ResumeProcessesOutput {
+    pub fn resumeProcesses(self: *Self, allocator: std.mem.Allocator, input: resume_processes.ResumeProcessesInput, options: CallOptions) !resume_processes.ResumeProcessesOutput {
         return resume_processes.execute(self, allocator, input, options);
     }
 
@@ -1148,7 +1149,7 @@ pub const Client = struct {
     /// begins replacing instances. You can check the status of this operation
     /// through the
     /// [DescribeInstanceRefreshes](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeInstanceRefreshes.html) API operation.
-    pub fn rollbackInstanceRefresh(self: *Self, allocator: std.mem.Allocator, input: rollback_instance_refresh.RollbackInstanceRefreshInput, options: rollback_instance_refresh.Options) !rollback_instance_refresh.RollbackInstanceRefreshOutput {
+    pub fn rollbackInstanceRefresh(self: *Self, allocator: std.mem.Allocator, input: rollback_instance_refresh.RollbackInstanceRefreshInput, options: CallOptions) !rollback_instance_refresh.RollbackInstanceRefreshOutput {
         return rollback_instance_refresh.execute(self, allocator, input, options);
     }
 
@@ -1161,7 +1162,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Manual
     /// scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-manually.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn setDesiredCapacity(self: *Self, allocator: std.mem.Allocator, input: set_desired_capacity.SetDesiredCapacityInput, options: set_desired_capacity.Options) !set_desired_capacity.SetDesiredCapacityOutput {
+    pub fn setDesiredCapacity(self: *Self, allocator: std.mem.Allocator, input: set_desired_capacity.SetDesiredCapacityInput, options: CallOptions) !set_desired_capacity.SetDesiredCapacityOutput {
         return set_desired_capacity.execute(self, allocator, input, options);
     }
 
@@ -1171,7 +1172,7 @@ pub const Client = struct {
     /// health check for your Auto Scaling
     /// group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/set-up-a-custom-health-check.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    pub fn setInstanceHealth(self: *Self, allocator: std.mem.Allocator, input: set_instance_health.SetInstanceHealthInput, options: set_instance_health.Options) !set_instance_health.SetInstanceHealthOutput {
+    pub fn setInstanceHealth(self: *Self, allocator: std.mem.Allocator, input: set_instance_health.SetInstanceHealthInput, options: CallOptions) !set_instance_health.SetInstanceHealthOutput {
         return set_instance_health.execute(self, allocator, input, options);
     }
 
@@ -1187,7 +1188,7 @@ pub const Client = struct {
     /// If you exceed your maximum limit of instance IDs, which is 50 per Auto
     /// Scaling group, the call
     /// fails.
-    pub fn setInstanceProtection(self: *Self, allocator: std.mem.Allocator, input: set_instance_protection.SetInstanceProtectionInput, options: set_instance_protection.Options) !set_instance_protection.SetInstanceProtectionOutput {
+    pub fn setInstanceProtection(self: *Self, allocator: std.mem.Allocator, input: set_instance_protection.SetInstanceProtectionInput, options: CallOptions) !set_instance_protection.SetInstanceProtectionOutput {
         return set_instance_protection.execute(self, allocator, input, options);
     }
 
@@ -1232,7 +1233,7 @@ pub const Client = struct {
     /// preferences. Otherwise, to roll back an instance refresh before it finishes,
     /// use the
     /// [RollbackInstanceRefresh](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_RollbackInstanceRefresh.html) API.
-    pub fn startInstanceRefresh(self: *Self, allocator: std.mem.Allocator, input: start_instance_refresh.StartInstanceRefreshInput, options: start_instance_refresh.Options) !start_instance_refresh.StartInstanceRefreshOutput {
+    pub fn startInstanceRefresh(self: *Self, allocator: std.mem.Allocator, input: start_instance_refresh.StartInstanceRefreshInput, options: CallOptions) !start_instance_refresh.StartInstanceRefreshOutput {
         return start_instance_refresh.execute(self, allocator, input, options);
     }
 
@@ -1249,7 +1250,7 @@ pub const Client = struct {
     ///
     /// To resume processes that have been suspended, call the
     /// [ResumeProcesses](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_ResumeProcesses.html) API.
-    pub fn suspendProcesses(self: *Self, allocator: std.mem.Allocator, input: suspend_processes.SuspendProcessesInput, options: suspend_processes.Options) !suspend_processes.SuspendProcessesOutput {
+    pub fn suspendProcesses(self: *Self, allocator: std.mem.Allocator, input: suspend_processes.SuspendProcessesInput, options: CallOptions) !suspend_processes.SuspendProcessesOutput {
         return suspend_processes.execute(self, allocator, input, options);
     }
 
@@ -1274,7 +1275,7 @@ pub const Client = struct {
     /// and rebalancing might
     /// terminate instances in other zones. For more information, see [Manual
     /// scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-manually.html) in the *Amazon EC2 Auto Scaling User Guide*.
-    pub fn terminateInstanceInAutoScalingGroup(self: *Self, allocator: std.mem.Allocator, input: terminate_instance_in_auto_scaling_group.TerminateInstanceInAutoScalingGroupInput, options: terminate_instance_in_auto_scaling_group.Options) !terminate_instance_in_auto_scaling_group.TerminateInstanceInAutoScalingGroupOutput {
+    pub fn terminateInstanceInAutoScalingGroup(self: *Self, allocator: std.mem.Allocator, input: terminate_instance_in_auto_scaling_group.TerminateInstanceInAutoScalingGroupInput, options: CallOptions) !terminate_instance_in_auto_scaling_group.TerminateInstanceInAutoScalingGroupOutput {
         return terminate_instance_in_auto_scaling_group.execute(self, allocator, input, options);
     }
 
@@ -1336,7 +1337,7 @@ pub const Client = struct {
     /// [DescribePolicies](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribePolicies.html) API. If the group has scaling
     /// policies, you can update them by calling the
     /// [PutScalingPolicy](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PutScalingPolicy.html) API.
-    pub fn updateAutoScalingGroup(self: *Self, allocator: std.mem.Allocator, input: update_auto_scaling_group.UpdateAutoScalingGroupInput, options: update_auto_scaling_group.Options) !update_auto_scaling_group.UpdateAutoScalingGroupOutput {
+    pub fn updateAutoScalingGroup(self: *Self, allocator: std.mem.Allocator, input: update_auto_scaling_group.UpdateAutoScalingGroupInput, options: CallOptions) !update_auto_scaling_group.UpdateAutoScalingGroupOutput {
         return update_auto_scaling_group.execute(self, allocator, input, options);
     }
 

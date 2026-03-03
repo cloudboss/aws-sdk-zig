@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReplicationGroupStatus = @import("replication_group_status.zig").ReplicationGroupStatus;
 const rs = @import("rs.zig").rs;
@@ -43,11 +44,7 @@ pub const GetKeyspaceOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetKeyspaceInput, options: Options) !GetKeyspaceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetKeyspaceInput, options: CallOptions) !GetKeyspaceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

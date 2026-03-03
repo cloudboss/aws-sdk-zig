@@ -63,6 +63,7 @@ const update_assessment_status = @import("update_assessment_status.zig");
 const update_control = @import("update_control.zig");
 const update_settings = @import("update_settings.zig");
 const validate_assessment_report_integrity = @import("validate_assessment_report_integrity.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -95,28 +96,28 @@ pub const Client = struct {
 
     /// Associates an evidence folder to an assessment report in an Audit Manager
     /// assessment.
-    pub fn associateAssessmentReportEvidenceFolder(self: *Self, allocator: std.mem.Allocator, input: associate_assessment_report_evidence_folder.AssociateAssessmentReportEvidenceFolderInput, options: associate_assessment_report_evidence_folder.Options) !associate_assessment_report_evidence_folder.AssociateAssessmentReportEvidenceFolderOutput {
+    pub fn associateAssessmentReportEvidenceFolder(self: *Self, allocator: std.mem.Allocator, input: associate_assessment_report_evidence_folder.AssociateAssessmentReportEvidenceFolderInput, options: CallOptions) !associate_assessment_report_evidence_folder.AssociateAssessmentReportEvidenceFolderOutput {
         return associate_assessment_report_evidence_folder.execute(self, allocator, input, options);
     }
 
     /// Associates a list of evidence to an assessment report in an Audit Manager
     /// assessment.
-    pub fn batchAssociateAssessmentReportEvidence(self: *Self, allocator: std.mem.Allocator, input: batch_associate_assessment_report_evidence.BatchAssociateAssessmentReportEvidenceInput, options: batch_associate_assessment_report_evidence.Options) !batch_associate_assessment_report_evidence.BatchAssociateAssessmentReportEvidenceOutput {
+    pub fn batchAssociateAssessmentReportEvidence(self: *Self, allocator: std.mem.Allocator, input: batch_associate_assessment_report_evidence.BatchAssociateAssessmentReportEvidenceInput, options: CallOptions) !batch_associate_assessment_report_evidence.BatchAssociateAssessmentReportEvidenceOutput {
         return batch_associate_assessment_report_evidence.execute(self, allocator, input, options);
     }
 
     /// Creates a batch of delegations for an assessment in Audit Manager.
-    pub fn batchCreateDelegationByAssessment(self: *Self, allocator: std.mem.Allocator, input: batch_create_delegation_by_assessment.BatchCreateDelegationByAssessmentInput, options: batch_create_delegation_by_assessment.Options) !batch_create_delegation_by_assessment.BatchCreateDelegationByAssessmentOutput {
+    pub fn batchCreateDelegationByAssessment(self: *Self, allocator: std.mem.Allocator, input: batch_create_delegation_by_assessment.BatchCreateDelegationByAssessmentInput, options: CallOptions) !batch_create_delegation_by_assessment.BatchCreateDelegationByAssessmentOutput {
         return batch_create_delegation_by_assessment.execute(self, allocator, input, options);
     }
 
     /// Deletes a batch of delegations for an assessment in Audit Manager.
-    pub fn batchDeleteDelegationByAssessment(self: *Self, allocator: std.mem.Allocator, input: batch_delete_delegation_by_assessment.BatchDeleteDelegationByAssessmentInput, options: batch_delete_delegation_by_assessment.Options) !batch_delete_delegation_by_assessment.BatchDeleteDelegationByAssessmentOutput {
+    pub fn batchDeleteDelegationByAssessment(self: *Self, allocator: std.mem.Allocator, input: batch_delete_delegation_by_assessment.BatchDeleteDelegationByAssessmentInput, options: CallOptions) !batch_delete_delegation_by_assessment.BatchDeleteDelegationByAssessmentOutput {
         return batch_delete_delegation_by_assessment.execute(self, allocator, input, options);
     }
 
     /// Disassociates a list of evidence from an assessment report in Audit Manager.
-    pub fn batchDisassociateAssessmentReportEvidence(self: *Self, allocator: std.mem.Allocator, input: batch_disassociate_assessment_report_evidence.BatchDisassociateAssessmentReportEvidenceInput, options: batch_disassociate_assessment_report_evidence.Options) !batch_disassociate_assessment_report_evidence.BatchDisassociateAssessmentReportEvidenceOutput {
+    pub fn batchDisassociateAssessmentReportEvidence(self: *Self, allocator: std.mem.Allocator, input: batch_disassociate_assessment_report_evidence.BatchDisassociateAssessmentReportEvidenceInput, options: CallOptions) !batch_disassociate_assessment_report_evidence.BatchDisassociateAssessmentReportEvidenceOutput {
         return batch_disassociate_assessment_report_evidence.execute(self, allocator, input, options);
     }
 
@@ -146,42 +147,42 @@ pub const Client = struct {
     /// and
     /// restrictions for Audit
     /// Manager](https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html).
-    pub fn batchImportEvidenceToAssessmentControl(self: *Self, allocator: std.mem.Allocator, input: batch_import_evidence_to_assessment_control.BatchImportEvidenceToAssessmentControlInput, options: batch_import_evidence_to_assessment_control.Options) !batch_import_evidence_to_assessment_control.BatchImportEvidenceToAssessmentControlOutput {
+    pub fn batchImportEvidenceToAssessmentControl(self: *Self, allocator: std.mem.Allocator, input: batch_import_evidence_to_assessment_control.BatchImportEvidenceToAssessmentControlInput, options: CallOptions) !batch_import_evidence_to_assessment_control.BatchImportEvidenceToAssessmentControlOutput {
         return batch_import_evidence_to_assessment_control.execute(self, allocator, input, options);
     }
 
     /// Creates an assessment in Audit Manager.
-    pub fn createAssessment(self: *Self, allocator: std.mem.Allocator, input: create_assessment.CreateAssessmentInput, options: create_assessment.Options) !create_assessment.CreateAssessmentOutput {
+    pub fn createAssessment(self: *Self, allocator: std.mem.Allocator, input: create_assessment.CreateAssessmentInput, options: CallOptions) !create_assessment.CreateAssessmentOutput {
         return create_assessment.execute(self, allocator, input, options);
     }
 
     /// Creates a custom framework in Audit Manager.
-    pub fn createAssessmentFramework(self: *Self, allocator: std.mem.Allocator, input: create_assessment_framework.CreateAssessmentFrameworkInput, options: create_assessment_framework.Options) !create_assessment_framework.CreateAssessmentFrameworkOutput {
+    pub fn createAssessmentFramework(self: *Self, allocator: std.mem.Allocator, input: create_assessment_framework.CreateAssessmentFrameworkInput, options: CallOptions) !create_assessment_framework.CreateAssessmentFrameworkOutput {
         return create_assessment_framework.execute(self, allocator, input, options);
     }
 
     /// Creates an assessment report for the specified assessment.
-    pub fn createAssessmentReport(self: *Self, allocator: std.mem.Allocator, input: create_assessment_report.CreateAssessmentReportInput, options: create_assessment_report.Options) !create_assessment_report.CreateAssessmentReportOutput {
+    pub fn createAssessmentReport(self: *Self, allocator: std.mem.Allocator, input: create_assessment_report.CreateAssessmentReportInput, options: CallOptions) !create_assessment_report.CreateAssessmentReportOutput {
         return create_assessment_report.execute(self, allocator, input, options);
     }
 
     /// Creates a new custom control in Audit Manager.
-    pub fn createControl(self: *Self, allocator: std.mem.Allocator, input: create_control.CreateControlInput, options: create_control.Options) !create_control.CreateControlOutput {
+    pub fn createControl(self: *Self, allocator: std.mem.Allocator, input: create_control.CreateControlInput, options: CallOptions) !create_control.CreateControlOutput {
         return create_control.execute(self, allocator, input, options);
     }
 
     /// Deletes an assessment in Audit Manager.
-    pub fn deleteAssessment(self: *Self, allocator: std.mem.Allocator, input: delete_assessment.DeleteAssessmentInput, options: delete_assessment.Options) !delete_assessment.DeleteAssessmentOutput {
+    pub fn deleteAssessment(self: *Self, allocator: std.mem.Allocator, input: delete_assessment.DeleteAssessmentInput, options: CallOptions) !delete_assessment.DeleteAssessmentOutput {
         return delete_assessment.execute(self, allocator, input, options);
     }
 
     /// Deletes a custom framework in Audit Manager.
-    pub fn deleteAssessmentFramework(self: *Self, allocator: std.mem.Allocator, input: delete_assessment_framework.DeleteAssessmentFrameworkInput, options: delete_assessment_framework.Options) !delete_assessment_framework.DeleteAssessmentFrameworkOutput {
+    pub fn deleteAssessmentFramework(self: *Self, allocator: std.mem.Allocator, input: delete_assessment_framework.DeleteAssessmentFrameworkInput, options: CallOptions) !delete_assessment_framework.DeleteAssessmentFrameworkOutput {
         return delete_assessment_framework.execute(self, allocator, input, options);
     }
 
     /// Deletes a share request for a custom framework in Audit Manager.
-    pub fn deleteAssessmentFrameworkShare(self: *Self, allocator: std.mem.Allocator, input: delete_assessment_framework_share.DeleteAssessmentFrameworkShareInput, options: delete_assessment_framework_share.Options) !delete_assessment_framework_share.DeleteAssessmentFrameworkShareOutput {
+    pub fn deleteAssessmentFrameworkShare(self: *Self, allocator: std.mem.Allocator, input: delete_assessment_framework_share.DeleteAssessmentFrameworkShareInput, options: CallOptions) !delete_assessment_framework_share.DeleteAssessmentFrameworkShareOutput {
         return delete_assessment_framework_share.execute(self, allocator, input, options);
     }
 
@@ -212,7 +213,7 @@ pub const Client = struct {
     /// [List of Error
     /// Codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList) in the *Amazon Simple Storage Service API
     /// Reference*.
-    pub fn deleteAssessmentReport(self: *Self, allocator: std.mem.Allocator, input: delete_assessment_report.DeleteAssessmentReportInput, options: delete_assessment_report.Options) !delete_assessment_report.DeleteAssessmentReportOutput {
+    pub fn deleteAssessmentReport(self: *Self, allocator: std.mem.Allocator, input: delete_assessment_report.DeleteAssessmentReportInput, options: CallOptions) !delete_assessment_report.DeleteAssessmentReportOutput {
         return delete_assessment_report.execute(self, allocator, input, options);
     }
 
@@ -226,7 +227,7 @@ pub const Client = struct {
     /// includes
     /// assessments that you previously created before you deleted the custom
     /// control.
-    pub fn deleteControl(self: *Self, allocator: std.mem.Allocator, input: delete_control.DeleteControlInput, options: delete_control.Options) !delete_control.DeleteControlOutput {
+    pub fn deleteControl(self: *Self, allocator: std.mem.Allocator, input: delete_control.DeleteControlInput, options: CallOptions) !delete_control.DeleteControlOutput {
         return delete_control.execute(self, allocator, input, options);
     }
 
@@ -241,7 +242,7 @@ pub const Client = struct {
     ///
     /// For more information about data retention, see [Data
     /// Protection](https://docs.aws.amazon.com/audit-manager/latest/userguide/data-protection.html) in the *Audit Manager User Guide*.
-    pub fn deregisterAccount(self: *Self, allocator: std.mem.Allocator, input: deregister_account.DeregisterAccountInput, options: deregister_account.Options) !deregister_account.DeregisterAccountOutput {
+    pub fn deregisterAccount(self: *Self, allocator: std.mem.Allocator, input: deregister_account.DeregisterAccountInput, options: CallOptions) !deregister_account.DeregisterAccountOutput {
         return deregister_account.execute(self, allocator, input, options);
     }
 
@@ -326,58 +327,58 @@ pub const Client = struct {
     /// deregisters Audit Manager, we perform a cleanup for the current delegated
     /// administrator account at the
     /// time of deregistration.
-    pub fn deregisterOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: deregister_organization_admin_account.DeregisterOrganizationAdminAccountInput, options: deregister_organization_admin_account.Options) !deregister_organization_admin_account.DeregisterOrganizationAdminAccountOutput {
+    pub fn deregisterOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: deregister_organization_admin_account.DeregisterOrganizationAdminAccountInput, options: CallOptions) !deregister_organization_admin_account.DeregisterOrganizationAdminAccountOutput {
         return deregister_organization_admin_account.execute(self, allocator, input, options);
     }
 
     /// Disassociates an evidence folder from the specified assessment report in
     /// Audit Manager.
-    pub fn disassociateAssessmentReportEvidenceFolder(self: *Self, allocator: std.mem.Allocator, input: disassociate_assessment_report_evidence_folder.DisassociateAssessmentReportEvidenceFolderInput, options: disassociate_assessment_report_evidence_folder.Options) !disassociate_assessment_report_evidence_folder.DisassociateAssessmentReportEvidenceFolderOutput {
+    pub fn disassociateAssessmentReportEvidenceFolder(self: *Self, allocator: std.mem.Allocator, input: disassociate_assessment_report_evidence_folder.DisassociateAssessmentReportEvidenceFolderInput, options: CallOptions) !disassociate_assessment_report_evidence_folder.DisassociateAssessmentReportEvidenceFolderOutput {
         return disassociate_assessment_report_evidence_folder.execute(self, allocator, input, options);
     }
 
     /// Gets the registration status of an account in Audit Manager.
-    pub fn getAccountStatus(self: *Self, allocator: std.mem.Allocator, input: get_account_status.GetAccountStatusInput, options: get_account_status.Options) !get_account_status.GetAccountStatusOutput {
+    pub fn getAccountStatus(self: *Self, allocator: std.mem.Allocator, input: get_account_status.GetAccountStatusInput, options: CallOptions) !get_account_status.GetAccountStatusOutput {
         return get_account_status.execute(self, allocator, input, options);
     }
 
     /// Gets information about a specified assessment.
-    pub fn getAssessment(self: *Self, allocator: std.mem.Allocator, input: get_assessment.GetAssessmentInput, options: get_assessment.Options) !get_assessment.GetAssessmentOutput {
+    pub fn getAssessment(self: *Self, allocator: std.mem.Allocator, input: get_assessment.GetAssessmentInput, options: CallOptions) !get_assessment.GetAssessmentOutput {
         return get_assessment.execute(self, allocator, input, options);
     }
 
     /// Gets information about a specified framework.
-    pub fn getAssessmentFramework(self: *Self, allocator: std.mem.Allocator, input: get_assessment_framework.GetAssessmentFrameworkInput, options: get_assessment_framework.Options) !get_assessment_framework.GetAssessmentFrameworkOutput {
+    pub fn getAssessmentFramework(self: *Self, allocator: std.mem.Allocator, input: get_assessment_framework.GetAssessmentFrameworkInput, options: CallOptions) !get_assessment_framework.GetAssessmentFrameworkOutput {
         return get_assessment_framework.execute(self, allocator, input, options);
     }
 
     /// Gets the URL of an assessment report in Audit Manager.
-    pub fn getAssessmentReportUrl(self: *Self, allocator: std.mem.Allocator, input: get_assessment_report_url.GetAssessmentReportUrlInput, options: get_assessment_report_url.Options) !get_assessment_report_url.GetAssessmentReportUrlOutput {
+    pub fn getAssessmentReportUrl(self: *Self, allocator: std.mem.Allocator, input: get_assessment_report_url.GetAssessmentReportUrlInput, options: CallOptions) !get_assessment_report_url.GetAssessmentReportUrlOutput {
         return get_assessment_report_url.execute(self, allocator, input, options);
     }
 
     /// Gets a list of changelogs from Audit Manager.
-    pub fn getChangeLogs(self: *Self, allocator: std.mem.Allocator, input: get_change_logs.GetChangeLogsInput, options: get_change_logs.Options) !get_change_logs.GetChangeLogsOutput {
+    pub fn getChangeLogs(self: *Self, allocator: std.mem.Allocator, input: get_change_logs.GetChangeLogsInput, options: CallOptions) !get_change_logs.GetChangeLogsOutput {
         return get_change_logs.execute(self, allocator, input, options);
     }
 
     /// Gets information about a specified control.
-    pub fn getControl(self: *Self, allocator: std.mem.Allocator, input: get_control.GetControlInput, options: get_control.Options) !get_control.GetControlOutput {
+    pub fn getControl(self: *Self, allocator: std.mem.Allocator, input: get_control.GetControlInput, options: CallOptions) !get_control.GetControlOutput {
         return get_control.execute(self, allocator, input, options);
     }
 
     /// Gets a list of delegations from an audit owner to a delegate.
-    pub fn getDelegations(self: *Self, allocator: std.mem.Allocator, input: get_delegations.GetDelegationsInput, options: get_delegations.Options) !get_delegations.GetDelegationsOutput {
+    pub fn getDelegations(self: *Self, allocator: std.mem.Allocator, input: get_delegations.GetDelegationsInput, options: CallOptions) !get_delegations.GetDelegationsOutput {
         return get_delegations.execute(self, allocator, input, options);
     }
 
     /// Gets information about a specified evidence item.
-    pub fn getEvidence(self: *Self, allocator: std.mem.Allocator, input: get_evidence.GetEvidenceInput, options: get_evidence.Options) !get_evidence.GetEvidenceOutput {
+    pub fn getEvidence(self: *Self, allocator: std.mem.Allocator, input: get_evidence.GetEvidenceInput, options: CallOptions) !get_evidence.GetEvidenceOutput {
         return get_evidence.execute(self, allocator, input, options);
     }
 
     /// Gets all evidence from a specified evidence folder in Audit Manager.
-    pub fn getEvidenceByEvidenceFolder(self: *Self, allocator: std.mem.Allocator, input: get_evidence_by_evidence_folder.GetEvidenceByEvidenceFolderInput, options: get_evidence_by_evidence_folder.Options) !get_evidence_by_evidence_folder.GetEvidenceByEvidenceFolderOutput {
+    pub fn getEvidenceByEvidenceFolder(self: *Self, allocator: std.mem.Allocator, input: get_evidence_by_evidence_folder.GetEvidenceByEvidenceFolderInput, options: CallOptions) !get_evidence_by_evidence_folder.GetEvidenceByEvidenceFolderOutput {
         return get_evidence_by_evidence_folder.execute(self, allocator, input, options);
     }
 
@@ -401,41 +402,41 @@ pub const Client = struct {
     /// and
     /// restrictions for Audit
     /// Manager](https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html).
-    pub fn getEvidenceFileUploadUrl(self: *Self, allocator: std.mem.Allocator, input: get_evidence_file_upload_url.GetEvidenceFileUploadUrlInput, options: get_evidence_file_upload_url.Options) !get_evidence_file_upload_url.GetEvidenceFileUploadUrlOutput {
+    pub fn getEvidenceFileUploadUrl(self: *Self, allocator: std.mem.Allocator, input: get_evidence_file_upload_url.GetEvidenceFileUploadUrlInput, options: CallOptions) !get_evidence_file_upload_url.GetEvidenceFileUploadUrlOutput {
         return get_evidence_file_upload_url.execute(self, allocator, input, options);
     }
 
     /// Gets an evidence folder from a specified assessment in Audit Manager.
-    pub fn getEvidenceFolder(self: *Self, allocator: std.mem.Allocator, input: get_evidence_folder.GetEvidenceFolderInput, options: get_evidence_folder.Options) !get_evidence_folder.GetEvidenceFolderOutput {
+    pub fn getEvidenceFolder(self: *Self, allocator: std.mem.Allocator, input: get_evidence_folder.GetEvidenceFolderInput, options: CallOptions) !get_evidence_folder.GetEvidenceFolderOutput {
         return get_evidence_folder.execute(self, allocator, input, options);
     }
 
     /// Gets the evidence folders from a specified assessment in Audit Manager.
-    pub fn getEvidenceFoldersByAssessment(self: *Self, allocator: std.mem.Allocator, input: get_evidence_folders_by_assessment.GetEvidenceFoldersByAssessmentInput, options: get_evidence_folders_by_assessment.Options) !get_evidence_folders_by_assessment.GetEvidenceFoldersByAssessmentOutput {
+    pub fn getEvidenceFoldersByAssessment(self: *Self, allocator: std.mem.Allocator, input: get_evidence_folders_by_assessment.GetEvidenceFoldersByAssessmentInput, options: CallOptions) !get_evidence_folders_by_assessment.GetEvidenceFoldersByAssessmentOutput {
         return get_evidence_folders_by_assessment.execute(self, allocator, input, options);
     }
 
     /// Gets a list of evidence folders that are associated with a specified control
     /// in an
     /// Audit Manager assessment.
-    pub fn getEvidenceFoldersByAssessmentControl(self: *Self, allocator: std.mem.Allocator, input: get_evidence_folders_by_assessment_control.GetEvidenceFoldersByAssessmentControlInput, options: get_evidence_folders_by_assessment_control.Options) !get_evidence_folders_by_assessment_control.GetEvidenceFoldersByAssessmentControlOutput {
+    pub fn getEvidenceFoldersByAssessmentControl(self: *Self, allocator: std.mem.Allocator, input: get_evidence_folders_by_assessment_control.GetEvidenceFoldersByAssessmentControlInput, options: CallOptions) !get_evidence_folders_by_assessment_control.GetEvidenceFoldersByAssessmentControlOutput {
         return get_evidence_folders_by_assessment_control.execute(self, allocator, input, options);
     }
 
     /// Gets the latest analytics data for all your current active assessments.
-    pub fn getInsights(self: *Self, allocator: std.mem.Allocator, input: get_insights.GetInsightsInput, options: get_insights.Options) !get_insights.GetInsightsOutput {
+    pub fn getInsights(self: *Self, allocator: std.mem.Allocator, input: get_insights.GetInsightsInput, options: CallOptions) !get_insights.GetInsightsOutput {
         return get_insights.execute(self, allocator, input, options);
     }
 
     /// Gets the latest analytics data for a specific active assessment.
-    pub fn getInsightsByAssessment(self: *Self, allocator: std.mem.Allocator, input: get_insights_by_assessment.GetInsightsByAssessmentInput, options: get_insights_by_assessment.Options) !get_insights_by_assessment.GetInsightsByAssessmentOutput {
+    pub fn getInsightsByAssessment(self: *Self, allocator: std.mem.Allocator, input: get_insights_by_assessment.GetInsightsByAssessmentInput, options: CallOptions) !get_insights_by_assessment.GetInsightsByAssessmentOutput {
         return get_insights_by_assessment.execute(self, allocator, input, options);
     }
 
     /// Gets the name of the delegated Amazon Web Services administrator account for
     /// a specified
     /// organization.
-    pub fn getOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: get_organization_admin_account.GetOrganizationAdminAccountInput, options: get_organization_admin_account.Options) !get_organization_admin_account.GetOrganizationAdminAccountOutput {
+    pub fn getOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: get_organization_admin_account.GetOrganizationAdminAccountInput, options: CallOptions) !get_organization_admin_account.GetOrganizationAdminAccountOutput {
         return get_organization_admin_account.execute(self, allocator, input, options);
     }
 
@@ -456,12 +457,12 @@ pub const Client = struct {
     /// assessment](https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-collection-issues.html#unable-to-edit-services) in
     /// the *Troubleshooting* section of the Audit Manager user
     /// guide.
-    pub fn getServicesInScope(self: *Self, allocator: std.mem.Allocator, input: get_services_in_scope.GetServicesInScopeInput, options: get_services_in_scope.Options) !get_services_in_scope.GetServicesInScopeOutput {
+    pub fn getServicesInScope(self: *Self, allocator: std.mem.Allocator, input: get_services_in_scope.GetServicesInScopeInput, options: CallOptions) !get_services_in_scope.GetServicesInScopeOutput {
         return get_services_in_scope.execute(self, allocator, input, options);
     }
 
     /// Gets the settings for a specified Amazon Web Services account.
-    pub fn getSettings(self: *Self, allocator: std.mem.Allocator, input: get_settings.GetSettingsInput, options: get_settings.Options) !get_settings.GetSettingsOutput {
+    pub fn getSettings(self: *Self, allocator: std.mem.Allocator, input: get_settings.GetSettingsInput, options: CallOptions) !get_settings.GetSettingsOutput {
         return get_settings.execute(self, allocator, input, options);
     }
 
@@ -475,30 +476,30 @@ pub const Client = struct {
     /// evidence on the
     /// `lastUpdated` date of `controlInsightsByAssessment`. If neither
     /// of these conditions are met, no data is listed for that control.
-    pub fn listAssessmentControlInsightsByControlDomain(self: *Self, allocator: std.mem.Allocator, input: list_assessment_control_insights_by_control_domain.ListAssessmentControlInsightsByControlDomainInput, options: list_assessment_control_insights_by_control_domain.Options) !list_assessment_control_insights_by_control_domain.ListAssessmentControlInsightsByControlDomainOutput {
+    pub fn listAssessmentControlInsightsByControlDomain(self: *Self, allocator: std.mem.Allocator, input: list_assessment_control_insights_by_control_domain.ListAssessmentControlInsightsByControlDomainInput, options: CallOptions) !list_assessment_control_insights_by_control_domain.ListAssessmentControlInsightsByControlDomainOutput {
         return list_assessment_control_insights_by_control_domain.execute(self, allocator, input, options);
     }
 
     /// Returns a list of sent or received share requests for custom frameworks in
     /// Audit Manager.
-    pub fn listAssessmentFrameworkShareRequests(self: *Self, allocator: std.mem.Allocator, input: list_assessment_framework_share_requests.ListAssessmentFrameworkShareRequestsInput, options: list_assessment_framework_share_requests.Options) !list_assessment_framework_share_requests.ListAssessmentFrameworkShareRequestsOutput {
+    pub fn listAssessmentFrameworkShareRequests(self: *Self, allocator: std.mem.Allocator, input: list_assessment_framework_share_requests.ListAssessmentFrameworkShareRequestsInput, options: CallOptions) !list_assessment_framework_share_requests.ListAssessmentFrameworkShareRequestsOutput {
         return list_assessment_framework_share_requests.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the frameworks that are available in the Audit Manager
     /// framework
     /// library.
-    pub fn listAssessmentFrameworks(self: *Self, allocator: std.mem.Allocator, input: list_assessment_frameworks.ListAssessmentFrameworksInput, options: list_assessment_frameworks.Options) !list_assessment_frameworks.ListAssessmentFrameworksOutput {
+    pub fn listAssessmentFrameworks(self: *Self, allocator: std.mem.Allocator, input: list_assessment_frameworks.ListAssessmentFrameworksInput, options: CallOptions) !list_assessment_frameworks.ListAssessmentFrameworksOutput {
         return list_assessment_frameworks.execute(self, allocator, input, options);
     }
 
     /// Returns a list of assessment reports created in Audit Manager.
-    pub fn listAssessmentReports(self: *Self, allocator: std.mem.Allocator, input: list_assessment_reports.ListAssessmentReportsInput, options: list_assessment_reports.Options) !list_assessment_reports.ListAssessmentReportsOutput {
+    pub fn listAssessmentReports(self: *Self, allocator: std.mem.Allocator, input: list_assessment_reports.ListAssessmentReportsInput, options: CallOptions) !list_assessment_reports.ListAssessmentReportsOutput {
         return list_assessment_reports.execute(self, allocator, input, options);
     }
 
     /// Returns a list of current and past assessments from Audit Manager.
-    pub fn listAssessments(self: *Self, allocator: std.mem.Allocator, input: list_assessments.ListAssessmentsInput, options: list_assessments.Options) !list_assessments.ListAssessmentsOutput {
+    pub fn listAssessments(self: *Self, allocator: std.mem.Allocator, input: list_assessments.ListAssessmentsInput, options: CallOptions) !list_assessments.ListAssessmentsOutput {
         return list_assessments.execute(self, allocator, input, options);
     }
 
@@ -520,7 +521,7 @@ pub const Client = struct {
     /// collected evidence on the `lastUpdated` date of
     /// `controlDomainInsights`. If this condition isn’t met, no data is listed
     /// for that control domain.
-    pub fn listControlDomainInsights(self: *Self, allocator: std.mem.Allocator, input: list_control_domain_insights.ListControlDomainInsightsInput, options: list_control_domain_insights.Options) !list_control_domain_insights.ListControlDomainInsightsOutput {
+    pub fn listControlDomainInsights(self: *Self, allocator: std.mem.Allocator, input: list_control_domain_insights.ListControlDomainInsightsInput, options: CallOptions) !list_control_domain_insights.ListControlDomainInsightsOutput {
         return list_control_domain_insights.execute(self, allocator, input, options);
     }
 
@@ -541,7 +542,7 @@ pub const Client = struct {
     /// collected evidence on the `lastUpdated` date of
     /// `controlDomainInsights`. If this condition isn’t met, no data is listed
     /// for that domain.
-    pub fn listControlDomainInsightsByAssessment(self: *Self, allocator: std.mem.Allocator, input: list_control_domain_insights_by_assessment.ListControlDomainInsightsByAssessmentInput, options: list_control_domain_insights_by_assessment.Options) !list_control_domain_insights_by_assessment.ListControlDomainInsightsByAssessmentOutput {
+    pub fn listControlDomainInsightsByAssessment(self: *Self, allocator: std.mem.Allocator, input: list_control_domain_insights_by_assessment.ListControlDomainInsightsByAssessmentInput, options: CallOptions) !list_control_domain_insights_by_assessment.ListControlDomainInsightsByAssessmentOutput {
         return list_control_domain_insights_by_assessment.execute(self, allocator, input, options);
     }
 
@@ -555,40 +556,40 @@ pub const Client = struct {
     /// of
     /// `controlInsightsMetadata`. If neither of these conditions are met, no data
     /// is listed for that control.
-    pub fn listControlInsightsByControlDomain(self: *Self, allocator: std.mem.Allocator, input: list_control_insights_by_control_domain.ListControlInsightsByControlDomainInput, options: list_control_insights_by_control_domain.Options) !list_control_insights_by_control_domain.ListControlInsightsByControlDomainOutput {
+    pub fn listControlInsightsByControlDomain(self: *Self, allocator: std.mem.Allocator, input: list_control_insights_by_control_domain.ListControlInsightsByControlDomainInput, options: CallOptions) !list_control_insights_by_control_domain.ListControlInsightsByControlDomainOutput {
         return list_control_insights_by_control_domain.execute(self, allocator, input, options);
     }
 
     /// Returns a list of controls from Audit Manager.
-    pub fn listControls(self: *Self, allocator: std.mem.Allocator, input: list_controls.ListControlsInput, options: list_controls.Options) !list_controls.ListControlsOutput {
+    pub fn listControls(self: *Self, allocator: std.mem.Allocator, input: list_controls.ListControlsInput, options: CallOptions) !list_controls.ListControlsOutput {
         return list_controls.execute(self, allocator, input, options);
     }
 
     /// Returns a list of keywords that are pre-mapped to the specified control data
     /// source.
-    pub fn listKeywordsForDataSource(self: *Self, allocator: std.mem.Allocator, input: list_keywords_for_data_source.ListKeywordsForDataSourceInput, options: list_keywords_for_data_source.Options) !list_keywords_for_data_source.ListKeywordsForDataSourceOutput {
+    pub fn listKeywordsForDataSource(self: *Self, allocator: std.mem.Allocator, input: list_keywords_for_data_source.ListKeywordsForDataSourceInput, options: CallOptions) !list_keywords_for_data_source.ListKeywordsForDataSourceOutput {
         return list_keywords_for_data_source.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all Audit Manager notifications.
-    pub fn listNotifications(self: *Self, allocator: std.mem.Allocator, input: list_notifications.ListNotificationsInput, options: list_notifications.Options) !list_notifications.ListNotificationsOutput {
+    pub fn listNotifications(self: *Self, allocator: std.mem.Allocator, input: list_notifications.ListNotificationsInput, options: CallOptions) !list_notifications.ListNotificationsOutput {
         return list_notifications.execute(self, allocator, input, options);
     }
 
     /// Returns a list of tags for the specified resource in Audit Manager.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Enables Audit Manager for the specified Amazon Web Services account.
-    pub fn registerAccount(self: *Self, allocator: std.mem.Allocator, input: register_account.RegisterAccountInput, options: register_account.Options) !register_account.RegisterAccountOutput {
+    pub fn registerAccount(self: *Self, allocator: std.mem.Allocator, input: register_account.RegisterAccountInput, options: CallOptions) !register_account.RegisterAccountOutput {
         return register_account.execute(self, allocator, input, options);
     }
 
     /// Enables an Amazon Web Services account within the organization as the
     /// delegated
     /// administrator for Audit Manager.
-    pub fn registerOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: register_organization_admin_account.RegisterOrganizationAdminAccountInput, options: register_organization_admin_account.Options) !register_organization_admin_account.RegisterOrganizationAdminAccountOutput {
+    pub fn registerOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: register_organization_admin_account.RegisterOrganizationAdminAccountInput, options: CallOptions) !register_organization_admin_account.RegisterOrganizationAdminAccountOutput {
         return register_organization_admin_account.execute(self, allocator, input, options);
     }
 
@@ -642,62 +643,62 @@ pub const Client = struct {
     /// standard frameworks are eligible for sharing, see [Framework sharing
     /// eligibility](https://docs.aws.amazon.com/audit-manager/latest/userguide/share-custom-framework-concepts-and-terminology.html#eligibility) in the *Audit Manager User
     /// Guide*.
-    pub fn startAssessmentFrameworkShare(self: *Self, allocator: std.mem.Allocator, input: start_assessment_framework_share.StartAssessmentFrameworkShareInput, options: start_assessment_framework_share.Options) !start_assessment_framework_share.StartAssessmentFrameworkShareOutput {
+    pub fn startAssessmentFrameworkShare(self: *Self, allocator: std.mem.Allocator, input: start_assessment_framework_share.StartAssessmentFrameworkShareInput, options: CallOptions) !start_assessment_framework_share.StartAssessmentFrameworkShareOutput {
         return start_assessment_framework_share.execute(self, allocator, input, options);
     }
 
     /// Tags the specified resource in Audit Manager.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag from a resource in Audit Manager.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Edits an Audit Manager assessment.
-    pub fn updateAssessment(self: *Self, allocator: std.mem.Allocator, input: update_assessment.UpdateAssessmentInput, options: update_assessment.Options) !update_assessment.UpdateAssessmentOutput {
+    pub fn updateAssessment(self: *Self, allocator: std.mem.Allocator, input: update_assessment.UpdateAssessmentInput, options: CallOptions) !update_assessment.UpdateAssessmentOutput {
         return update_assessment.execute(self, allocator, input, options);
     }
 
     /// Updates a control within an assessment in Audit Manager.
-    pub fn updateAssessmentControl(self: *Self, allocator: std.mem.Allocator, input: update_assessment_control.UpdateAssessmentControlInput, options: update_assessment_control.Options) !update_assessment_control.UpdateAssessmentControlOutput {
+    pub fn updateAssessmentControl(self: *Self, allocator: std.mem.Allocator, input: update_assessment_control.UpdateAssessmentControlInput, options: CallOptions) !update_assessment_control.UpdateAssessmentControlOutput {
         return update_assessment_control.execute(self, allocator, input, options);
     }
 
     /// Updates the status of a control set in an Audit Manager assessment.
-    pub fn updateAssessmentControlSetStatus(self: *Self, allocator: std.mem.Allocator, input: update_assessment_control_set_status.UpdateAssessmentControlSetStatusInput, options: update_assessment_control_set_status.Options) !update_assessment_control_set_status.UpdateAssessmentControlSetStatusOutput {
+    pub fn updateAssessmentControlSetStatus(self: *Self, allocator: std.mem.Allocator, input: update_assessment_control_set_status.UpdateAssessmentControlSetStatusInput, options: CallOptions) !update_assessment_control_set_status.UpdateAssessmentControlSetStatusOutput {
         return update_assessment_control_set_status.execute(self, allocator, input, options);
     }
 
     /// Updates a custom framework in Audit Manager.
-    pub fn updateAssessmentFramework(self: *Self, allocator: std.mem.Allocator, input: update_assessment_framework.UpdateAssessmentFrameworkInput, options: update_assessment_framework.Options) !update_assessment_framework.UpdateAssessmentFrameworkOutput {
+    pub fn updateAssessmentFramework(self: *Self, allocator: std.mem.Allocator, input: update_assessment_framework.UpdateAssessmentFrameworkInput, options: CallOptions) !update_assessment_framework.UpdateAssessmentFrameworkOutput {
         return update_assessment_framework.execute(self, allocator, input, options);
     }
 
     /// Updates a share request for a custom framework in Audit Manager.
-    pub fn updateAssessmentFrameworkShare(self: *Self, allocator: std.mem.Allocator, input: update_assessment_framework_share.UpdateAssessmentFrameworkShareInput, options: update_assessment_framework_share.Options) !update_assessment_framework_share.UpdateAssessmentFrameworkShareOutput {
+    pub fn updateAssessmentFrameworkShare(self: *Self, allocator: std.mem.Allocator, input: update_assessment_framework_share.UpdateAssessmentFrameworkShareInput, options: CallOptions) !update_assessment_framework_share.UpdateAssessmentFrameworkShareOutput {
         return update_assessment_framework_share.execute(self, allocator, input, options);
     }
 
     /// Updates the status of an assessment in Audit Manager.
-    pub fn updateAssessmentStatus(self: *Self, allocator: std.mem.Allocator, input: update_assessment_status.UpdateAssessmentStatusInput, options: update_assessment_status.Options) !update_assessment_status.UpdateAssessmentStatusOutput {
+    pub fn updateAssessmentStatus(self: *Self, allocator: std.mem.Allocator, input: update_assessment_status.UpdateAssessmentStatusInput, options: CallOptions) !update_assessment_status.UpdateAssessmentStatusOutput {
         return update_assessment_status.execute(self, allocator, input, options);
     }
 
     /// Updates a custom control in Audit Manager.
-    pub fn updateControl(self: *Self, allocator: std.mem.Allocator, input: update_control.UpdateControlInput, options: update_control.Options) !update_control.UpdateControlOutput {
+    pub fn updateControl(self: *Self, allocator: std.mem.Allocator, input: update_control.UpdateControlInput, options: CallOptions) !update_control.UpdateControlOutput {
         return update_control.execute(self, allocator, input, options);
     }
 
     /// Updates Audit Manager settings for the current account.
-    pub fn updateSettings(self: *Self, allocator: std.mem.Allocator, input: update_settings.UpdateSettingsInput, options: update_settings.Options) !update_settings.UpdateSettingsOutput {
+    pub fn updateSettings(self: *Self, allocator: std.mem.Allocator, input: update_settings.UpdateSettingsInput, options: CallOptions) !update_settings.UpdateSettingsOutput {
         return update_settings.execute(self, allocator, input, options);
     }
 
     /// Validates the integrity of an assessment report in Audit Manager.
-    pub fn validateAssessmentReportIntegrity(self: *Self, allocator: std.mem.Allocator, input: validate_assessment_report_integrity.ValidateAssessmentReportIntegrityInput, options: validate_assessment_report_integrity.Options) !validate_assessment_report_integrity.ValidateAssessmentReportIntegrityOutput {
+    pub fn validateAssessmentReportIntegrity(self: *Self, allocator: std.mem.Allocator, input: validate_assessment_report_integrity.ValidateAssessmentReportIntegrityInput, options: CallOptions) !validate_assessment_report_integrity.ValidateAssessmentReportIntegrityOutput {
         return validate_assessment_report_integrity.execute(self, allocator, input, options);
     }
 

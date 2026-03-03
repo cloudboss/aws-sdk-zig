@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VmwareToAwsTagMapping = @import("vmware_to_aws_tag_mapping.zig").VmwareToAwsTagMapping;
 
@@ -32,11 +33,7 @@ pub const PutHypervisorPropertyMappingsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutHypervisorPropertyMappingsInput, options: Options) !PutHypervisorPropertyMappingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutHypervisorPropertyMappingsInput, options: CallOptions) !PutHypervisorPropertyMappingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Alias = @import("alias.zig").Alias;
 
@@ -32,11 +33,7 @@ pub const DisassociateFileSystemAliasesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateFileSystemAliasesInput, options: Options) !DisassociateFileSystemAliasesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateFileSystemAliasesInput, options: CallOptions) !DisassociateFileSystemAliasesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,21 +2,18 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PosixUser = @import("posix_user.zig").PosixUser;
 const RootDirectory = @import("root_directory.zig").RootDirectory;
 const Tag = @import("tag.zig").Tag;
 const LifeCycleState = @import("life_cycle_state.zig").LifeCycleState;
 
-const CreateAccessPointInput = @import("create_access_point_request.zig").CreateAccessPointRequest;
+pub const CreateAccessPointInput = @import("create_access_point_request.zig").CreateAccessPointRequest;
 
-const CreateAccessPointOutput = @import("access_point_description.zig").AccessPointDescription;
+pub const CreateAccessPointOutput = @import("access_point_description.zig").AccessPointDescription;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAccessPointInput, options: Options) !CreateAccessPointOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAccessPointInput, options: CallOptions) !CreateAccessPointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ClientInfo = @import("client_info.zig").ClientInfo;
 const WorkflowRunStatus = @import("workflow_run_status.zig").WorkflowRunStatus;
@@ -46,11 +47,7 @@ pub const CreateWorkflowRunOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateWorkflowRunInput, options: Options) !CreateWorkflowRunOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateWorkflowRunInput, options: CallOptions) !CreateWorkflowRunOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

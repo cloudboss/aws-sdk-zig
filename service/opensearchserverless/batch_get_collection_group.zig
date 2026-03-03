@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CollectionGroupDetail = @import("collection_group_detail.zig").CollectionGroupDetail;
 const CollectionGroupErrorDetail = @import("collection_group_error_detail.zig").CollectionGroupErrorDetail;
@@ -34,11 +35,7 @@ pub const BatchGetCollectionGroupOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetCollectionGroupInput, options: Options) !BatchGetCollectionGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetCollectionGroupInput, options: CallOptions) !BatchGetCollectionGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

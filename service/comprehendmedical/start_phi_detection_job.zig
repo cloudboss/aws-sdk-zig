@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InputDataConfig = @import("input_data_config.zig").InputDataConfig;
 const LanguageCode = @import("language_code.zig").LanguageCode;
@@ -60,11 +61,7 @@ pub const StartPHIDetectionJobOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartPHIDetectionJobInput, options: Options) !StartPHIDetectionJobOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartPHIDetectionJobInput, options: CallOptions) !StartPHIDetectionJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

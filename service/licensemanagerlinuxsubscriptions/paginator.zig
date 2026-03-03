@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_linux_subscription_instances = @import("list_linux_subscription_instances.zig");
@@ -16,7 +17,7 @@ pub const ListLinuxSubscriptionInstancesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_linux_subscription_instances.Options) !list_linux_subscription_instances.ListLinuxSubscriptionInstancesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_linux_subscription_instances.ListLinuxSubscriptionInstancesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -57,7 +58,7 @@ pub const ListLinuxSubscriptionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_linux_subscriptions.Options) !list_linux_subscriptions.ListLinuxSubscriptionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_linux_subscriptions.ListLinuxSubscriptionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -98,7 +99,7 @@ pub const ListRegisteredSubscriptionProvidersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_registered_subscription_providers.Options) !list_registered_subscription_providers.ListRegisteredSubscriptionProvidersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_registered_subscription_providers.ListRegisteredSubscriptionProvidersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

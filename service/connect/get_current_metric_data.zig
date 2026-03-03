@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CurrentMetric = @import("current_metric.zig").CurrentMetric;
 const Filters = @import("filters.zig").Filters;
@@ -286,11 +287,7 @@ pub const GetCurrentMetricDataOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCurrentMetricDataInput, options: Options) !GetCurrentMetricDataOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCurrentMetricDataInput, options: CallOptions) !GetCurrentMetricDataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Autotune = @import("autotune.zig").Autotune;
 const HyperParameterTrainingJobSummary = @import("hyper_parameter_training_job_summary.zig").HyperParameterTrainingJobSummary;
@@ -113,11 +114,7 @@ pub const DescribeHyperParameterTuningJobOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeHyperParameterTuningJobInput, options: Options) !DescribeHyperParameterTuningJobOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeHyperParameterTuningJobInput, options: CallOptions) !DescribeHyperParameterTuningJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

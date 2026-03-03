@@ -27,6 +27,7 @@ const stop_key_usage = @import("stop_key_usage.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_alias = @import("update_alias.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -79,7 +80,7 @@ pub const Client = struct {
     ///   [EnableDefaultKeyReplicationRegions](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html)
     /// *
     ///   [GetDefaultKeyReplicationRegions](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html)
-    pub fn addKeyReplicationRegions(self: *Self, allocator: std.mem.Allocator, input: add_key_replication_regions.AddKeyReplicationRegionsInput, options: add_key_replication_regions.Options) !add_key_replication_regions.AddKeyReplicationRegionsOutput {
+    pub fn addKeyReplicationRegions(self: *Self, allocator: std.mem.Allocator, input: add_key_replication_regions.AddKeyReplicationRegionsInput, options: CallOptions) !add_key_replication_regions.AddKeyReplicationRegionsOutput {
         return add_key_replication_regions.execute(self, allocator, input, options);
     }
 
@@ -111,7 +112,7 @@ pub const Client = struct {
     ///   [ListAliases](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html)
     /// *
     ///   [UpdateAlias](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html)
-    pub fn createAlias(self: *Self, allocator: std.mem.Allocator, input: create_alias.CreateAliasInput, options: create_alias.Options) !create_alias.CreateAliasOutput {
+    pub fn createAlias(self: *Self, allocator: std.mem.Allocator, input: create_alias.CreateAliasInput, options: CallOptions) !create_alias.CreateAliasOutput {
         return create_alias.execute(self, allocator, input, options);
     }
 
@@ -165,7 +166,7 @@ pub const Client = struct {
     ///   [GetKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetKey.html)
     /// *
     ///   [ListKeys](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListKeys.html)
-    pub fn createKey(self: *Self, allocator: std.mem.Allocator, input: create_key.CreateKeyInput, options: create_key.Options) !create_key.CreateKeyOutput {
+    pub fn createKey(self: *Self, allocator: std.mem.Allocator, input: create_key.CreateKeyInput, options: CallOptions) !create_key.CreateKeyOutput {
         return create_key.execute(self, allocator, input, options);
     }
 
@@ -187,7 +188,7 @@ pub const Client = struct {
     ///   [ListAliases](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html)
     /// *
     ///   [UpdateAlias](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html)
-    pub fn deleteAlias(self: *Self, allocator: std.mem.Allocator, input: delete_alias.DeleteAliasInput, options: delete_alias.Options) !delete_alias.DeleteAliasOutput {
+    pub fn deleteAlias(self: *Self, allocator: std.mem.Allocator, input: delete_alias.DeleteAliasInput, options: CallOptions) !delete_alias.DeleteAliasOutput {
         return delete_alias.execute(self, allocator, input, options);
     }
 
@@ -222,7 +223,7 @@ pub const Client = struct {
     ///   [StartKeyUsage](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StartKeyUsage.html)
     /// *
     ///   [StopKeyUsage](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html)
-    pub fn deleteKey(self: *Self, allocator: std.mem.Allocator, input: delete_key.DeleteKeyInput, options: delete_key.Options) !delete_key.DeleteKeyOutput {
+    pub fn deleteKey(self: *Self, allocator: std.mem.Allocator, input: delete_key.DeleteKeyInput, options: CallOptions) !delete_key.DeleteKeyOutput {
         return delete_key.execute(self, allocator, input, options);
     }
 
@@ -247,7 +248,7 @@ pub const Client = struct {
     ///   [EnableDefaultKeyReplicationRegions](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html)
     /// *
     ///   [GetDefaultKeyReplicationRegions](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html)
-    pub fn disableDefaultKeyReplicationRegions(self: *Self, allocator: std.mem.Allocator, input: disable_default_key_replication_regions.DisableDefaultKeyReplicationRegionsInput, options: disable_default_key_replication_regions.Options) !disable_default_key_replication_regions.DisableDefaultKeyReplicationRegionsOutput {
+    pub fn disableDefaultKeyReplicationRegions(self: *Self, allocator: std.mem.Allocator, input: disable_default_key_replication_regions.DisableDefaultKeyReplicationRegionsInput, options: CallOptions) !disable_default_key_replication_regions.DisableDefaultKeyReplicationRegionsOutput {
         return disable_default_key_replication_regions.execute(self, allocator, input, options);
     }
 
@@ -271,7 +272,7 @@ pub const Client = struct {
     ///   [DisableDefaultKeyReplicationRegions](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html)
     /// *
     ///   [GetDefaultKeyReplicationRegions](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html)
-    pub fn enableDefaultKeyReplicationRegions(self: *Self, allocator: std.mem.Allocator, input: enable_default_key_replication_regions.EnableDefaultKeyReplicationRegionsInput, options: enable_default_key_replication_regions.Options) !enable_default_key_replication_regions.EnableDefaultKeyReplicationRegionsOutput {
+    pub fn enableDefaultKeyReplicationRegions(self: *Self, allocator: std.mem.Allocator, input: enable_default_key_replication_regions.EnableDefaultKeyReplicationRegionsInput, options: CallOptions) !enable_default_key_replication_regions.EnableDefaultKeyReplicationRegionsOutput {
         return enable_default_key_replication_regions.execute(self, allocator, input, options);
     }
 
@@ -445,7 +446,7 @@ pub const Client = struct {
     ///   [GetParametersForExport](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForExport.html)
     /// *
     ///   [ImportKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
-    pub fn exportKey(self: *Self, allocator: std.mem.Allocator, input: export_key.ExportKeyInput, options: export_key.Options) !export_key.ExportKeyOutput {
+    pub fn exportKey(self: *Self, allocator: std.mem.Allocator, input: export_key.ExportKeyInput, options: CallOptions) !export_key.ExportKeyOutput {
         return export_key.execute(self, allocator, input, options);
     }
 
@@ -465,12 +466,12 @@ pub const Client = struct {
     ///   [ListAliases](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html)
     /// *
     ///   [UpdateAlias](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html)
-    pub fn getAlias(self: *Self, allocator: std.mem.Allocator, input: get_alias.GetAliasInput, options: get_alias.Options) !get_alias.GetAliasOutput {
+    pub fn getAlias(self: *Self, allocator: std.mem.Allocator, input: get_alias.GetAliasInput, options: CallOptions) !get_alias.GetAliasOutput {
         return get_alias.execute(self, allocator, input, options);
     }
 
     /// Creates a certificate signing request (CSR) from a key pair.
-    pub fn getCertificateSigningRequest(self: *Self, allocator: std.mem.Allocator, input: get_certificate_signing_request.GetCertificateSigningRequestInput, options: get_certificate_signing_request.Options) !get_certificate_signing_request.GetCertificateSigningRequestOutput {
+    pub fn getCertificateSigningRequest(self: *Self, allocator: std.mem.Allocator, input: get_certificate_signing_request.GetCertificateSigningRequestInput, options: CallOptions) !get_certificate_signing_request.GetCertificateSigningRequestOutput {
         return get_certificate_signing_request.execute(self, allocator, input, options);
     }
 
@@ -491,7 +492,7 @@ pub const Client = struct {
     ///   [EnableDefaultKeyReplicationRegions](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html)
     /// *
     ///   [DisableDefaultKeyReplicationRegions](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html)
-    pub fn getDefaultKeyReplicationRegions(self: *Self, allocator: std.mem.Allocator, input: get_default_key_replication_regions.GetDefaultKeyReplicationRegionsInput, options: get_default_key_replication_regions.Options) !get_default_key_replication_regions.GetDefaultKeyReplicationRegionsOutput {
+    pub fn getDefaultKeyReplicationRegions(self: *Self, allocator: std.mem.Allocator, input: get_default_key_replication_regions.GetDefaultKeyReplicationRegionsInput, options: CallOptions) !get_default_key_replication_regions.GetDefaultKeyReplicationRegionsOutput {
         return get_default_key_replication_regions.execute(self, allocator, input, options);
     }
 
@@ -511,7 +512,7 @@ pub const Client = struct {
     ///   [DeleteKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html)
     /// *
     ///   [ListKeys](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListKeys.html)
-    pub fn getKey(self: *Self, allocator: std.mem.Allocator, input: get_key.GetKeyInput, options: get_key.Options) !get_key.GetKeyOutput {
+    pub fn getKey(self: *Self, allocator: std.mem.Allocator, input: get_key.GetKeyInput, options: CallOptions) !get_key.GetKeyOutput {
         return get_key.execute(self, allocator, input, options);
     }
 
@@ -532,7 +533,7 @@ pub const Client = struct {
     ///   [ExportKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ExportKey.html)
     /// *
     ///   [GetParametersForImport](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html)
-    pub fn getParametersForExport(self: *Self, allocator: std.mem.Allocator, input: get_parameters_for_export.GetParametersForExportInput, options: get_parameters_for_export.Options) !get_parameters_for_export.GetParametersForExportOutput {
+    pub fn getParametersForExport(self: *Self, allocator: std.mem.Allocator, input: get_parameters_for_export.GetParametersForExportInput, options: CallOptions) !get_parameters_for_export.GetParametersForExportOutput {
         return get_parameters_for_export.execute(self, allocator, input, options);
     }
 
@@ -553,7 +554,7 @@ pub const Client = struct {
     ///   [GetParametersForExport](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForExport.html)
     /// *
     ///   [ImportKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
-    pub fn getParametersForImport(self: *Self, allocator: std.mem.Allocator, input: get_parameters_for_import.GetParametersForImportInput, options: get_parameters_for_import.Options) !get_parameters_for_import.GetParametersForImportOutput {
+    pub fn getParametersForImport(self: *Self, allocator: std.mem.Allocator, input: get_parameters_for_import.GetParametersForImportInput, options: CallOptions) !get_parameters_for_import.GetParametersForImportOutput {
         return get_parameters_for_import.execute(self, allocator, input, options);
     }
 
@@ -569,7 +570,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** This operation can't be used across different Amazon
     /// Web Services accounts.
-    pub fn getPublicKeyCertificate(self: *Self, allocator: std.mem.Allocator, input: get_public_key_certificate.GetPublicKeyCertificateInput, options: get_public_key_certificate.Options) !get_public_key_certificate.GetPublicKeyCertificateOutput {
+    pub fn getPublicKeyCertificate(self: *Self, allocator: std.mem.Allocator, input: get_public_key_certificate.GetPublicKeyCertificateInput, options: CallOptions) !get_public_key_certificate.GetPublicKeyCertificateOutput {
         return get_public_key_certificate.execute(self, allocator, input, options);
     }
 
@@ -736,7 +737,7 @@ pub const Client = struct {
     ///   [ExportKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ExportKey.html)
     /// *
     ///   [GetParametersForImport](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html)
-    pub fn importKey(self: *Self, allocator: std.mem.Allocator, input: import_key.ImportKeyInput, options: import_key.Options) !import_key.ImportKeyOutput {
+    pub fn importKey(self: *Self, allocator: std.mem.Allocator, input: import_key.ImportKeyInput, options: CallOptions) !import_key.ImportKeyOutput {
         return import_key.execute(self, allocator, input, options);
     }
 
@@ -765,7 +766,7 @@ pub const Client = struct {
     ///   [GetAlias](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html)
     /// *
     ///   [UpdateAlias](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html)
-    pub fn listAliases(self: *Self, allocator: std.mem.Allocator, input: list_aliases.ListAliasesInput, options: list_aliases.Options) !list_aliases.ListAliasesOutput {
+    pub fn listAliases(self: *Self, allocator: std.mem.Allocator, input: list_aliases.ListAliasesInput, options: CallOptions) !list_aliases.ListAliasesOutput {
         return list_aliases.execute(self, allocator, input, options);
     }
 
@@ -790,7 +791,7 @@ pub const Client = struct {
     ///   [DeleteKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html)
     /// *
     ///   [GetKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetKey.html)
-    pub fn listKeys(self: *Self, allocator: std.mem.Allocator, input: list_keys.ListKeysInput, options: list_keys.Options) !list_keys.ListKeysOutput {
+    pub fn listKeys(self: *Self, allocator: std.mem.Allocator, input: list_keys.ListKeysInput, options: CallOptions) !list_keys.ListKeysOutput {
         return list_keys.execute(self, allocator, input, options);
     }
 
@@ -812,7 +813,7 @@ pub const Client = struct {
     ///   [TagResource](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html)
     /// *
     ///   [UntagResource](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UntagResource.html)
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -838,7 +839,7 @@ pub const Client = struct {
     ///   [AddKeyReplicationRegions](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_AddKeyReplicationRegions.html)
     /// *
     ///   [DisableDefaultKeyReplicationRegions](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html)
-    pub fn removeKeyReplicationRegions(self: *Self, allocator: std.mem.Allocator, input: remove_key_replication_regions.RemoveKeyReplicationRegionsInput, options: remove_key_replication_regions.Options) !remove_key_replication_regions.RemoveKeyReplicationRegionsOutput {
+    pub fn removeKeyReplicationRegions(self: *Self, allocator: std.mem.Allocator, input: remove_key_replication_regions.RemoveKeyReplicationRegionsInput, options: CallOptions) !remove_key_replication_regions.RemoveKeyReplicationRegionsOutput {
         return remove_key_replication_regions.execute(self, allocator, input, options);
     }
 
@@ -861,7 +862,7 @@ pub const Client = struct {
     ///   [StartKeyUsage](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StartKeyUsage.html)
     /// *
     ///   [StopKeyUsage](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html)
-    pub fn restoreKey(self: *Self, allocator: std.mem.Allocator, input: restore_key.RestoreKeyInput, options: restore_key.Options) !restore_key.RestoreKeyOutput {
+    pub fn restoreKey(self: *Self, allocator: std.mem.Allocator, input: restore_key.RestoreKeyInput, options: CallOptions) !restore_key.RestoreKeyOutput {
         return restore_key.execute(self, allocator, input, options);
     }
 
@@ -876,7 +877,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [StopKeyUsage](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html)
-    pub fn startKeyUsage(self: *Self, allocator: std.mem.Allocator, input: start_key_usage.StartKeyUsageInput, options: start_key_usage.Options) !start_key_usage.StartKeyUsageOutput {
+    pub fn startKeyUsage(self: *Self, allocator: std.mem.Allocator, input: start_key_usage.StartKeyUsageInput, options: CallOptions) !start_key_usage.StartKeyUsageOutput {
         return start_key_usage.execute(self, allocator, input, options);
     }
 
@@ -895,7 +896,7 @@ pub const Client = struct {
     ///   [DeleteKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html)
     /// *
     ///   [StartKeyUsage](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StartKeyUsage.html)
-    pub fn stopKeyUsage(self: *Self, allocator: std.mem.Allocator, input: stop_key_usage.StopKeyUsageInput, options: stop_key_usage.Options) !stop_key_usage.StopKeyUsageOutput {
+    pub fn stopKeyUsage(self: *Self, allocator: std.mem.Allocator, input: stop_key_usage.StopKeyUsageInput, options: CallOptions) !stop_key_usage.StopKeyUsageOutput {
         return stop_key_usage.execute(self, allocator, input, options);
     }
 
@@ -920,7 +921,7 @@ pub const Client = struct {
     ///   [ListTagsForResource](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html)
     /// *
     ///   [UntagResource](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UntagResource.html)
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -938,7 +939,7 @@ pub const Client = struct {
     ///   [ListTagsForResource](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html)
     /// *
     ///   [TagResource](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html)
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -961,7 +962,7 @@ pub const Client = struct {
     ///   [GetAlias](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html)
     /// *
     ///   [ListAliases](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html)
-    pub fn updateAlias(self: *Self, allocator: std.mem.Allocator, input: update_alias.UpdateAliasInput, options: update_alias.Options) !update_alias.UpdateAliasOutput {
+    pub fn updateAlias(self: *Self, allocator: std.mem.Allocator, input: update_alias.UpdateAliasInput, options: CallOptions) !update_alias.UpdateAliasOutput {
         return update_alias.execute(self, allocator, input, options);
     }
 

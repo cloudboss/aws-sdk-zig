@@ -2,10 +2,11 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const QueryLanguageVersion = @import("query_language_version.zig").QueryLanguageVersion;
 
-const GetEngineStatusInput = struct {};
+pub const GetEngineStatusInput = struct {};
 
 pub const GetEngineStatusOutput = struct {
     /// Set to the Neptune engine version running on your DB cluster. If this engine
@@ -82,11 +83,7 @@ pub const GetEngineStatusOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetEngineStatusInput, options: Options) !GetEngineStatusOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetEngineStatusInput, options: CallOptions) !GetEngineStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ObjectLockLegalHoldStatus = @import("object_lock_legal_hold_status.zig").ObjectLockLegalHoldStatus;
 const ObjectLockMode = @import("object_lock_mode.zig").ObjectLockMode;
@@ -286,13 +287,9 @@ pub const WriteGetObjectResponseInput = struct {
     version_id: ?[]const u8 = null,
 };
 
-const WriteGetObjectResponseOutput = struct {};
+pub const WriteGetObjectResponseOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: WriteGetObjectResponseInput, options: Options) !WriteGetObjectResponseOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: WriteGetObjectResponseInput, options: CallOptions) !WriteGetObjectResponseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

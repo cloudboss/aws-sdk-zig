@@ -114,6 +114,7 @@ const update_storage_profile = @import("update_storage_profile.zig");
 const update_task = @import("update_task.zig");
 const update_worker = @import("update_worker.zig");
 const update_worker_schedule = @import("update_worker_schedule.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -146,64 +147,64 @@ pub const Client = struct {
     }
 
     /// Assigns a farm membership level to a member.
-    pub fn associateMemberToFarm(self: *Self, allocator: std.mem.Allocator, input: associate_member_to_farm.AssociateMemberToFarmInput, options: associate_member_to_farm.Options) !associate_member_to_farm.AssociateMemberToFarmOutput {
+    pub fn associateMemberToFarm(self: *Self, allocator: std.mem.Allocator, input: associate_member_to_farm.AssociateMemberToFarmInput, options: CallOptions) !associate_member_to_farm.AssociateMemberToFarmOutput {
         return associate_member_to_farm.execute(self, allocator, input, options);
     }
 
     /// Assigns a fleet membership level to a member.
-    pub fn associateMemberToFleet(self: *Self, allocator: std.mem.Allocator, input: associate_member_to_fleet.AssociateMemberToFleetInput, options: associate_member_to_fleet.Options) !associate_member_to_fleet.AssociateMemberToFleetOutput {
+    pub fn associateMemberToFleet(self: *Self, allocator: std.mem.Allocator, input: associate_member_to_fleet.AssociateMemberToFleetInput, options: CallOptions) !associate_member_to_fleet.AssociateMemberToFleetOutput {
         return associate_member_to_fleet.execute(self, allocator, input, options);
     }
 
     /// Assigns a job membership level to a member
-    pub fn associateMemberToJob(self: *Self, allocator: std.mem.Allocator, input: associate_member_to_job.AssociateMemberToJobInput, options: associate_member_to_job.Options) !associate_member_to_job.AssociateMemberToJobOutput {
+    pub fn associateMemberToJob(self: *Self, allocator: std.mem.Allocator, input: associate_member_to_job.AssociateMemberToJobInput, options: CallOptions) !associate_member_to_job.AssociateMemberToJobOutput {
         return associate_member_to_job.execute(self, allocator, input, options);
     }
 
     /// Assigns a queue membership level to a member
-    pub fn associateMemberToQueue(self: *Self, allocator: std.mem.Allocator, input: associate_member_to_queue.AssociateMemberToQueueInput, options: associate_member_to_queue.Options) !associate_member_to_queue.AssociateMemberToQueueOutput {
+    pub fn associateMemberToQueue(self: *Self, allocator: std.mem.Allocator, input: associate_member_to_queue.AssociateMemberToQueueInput, options: CallOptions) !associate_member_to_queue.AssociateMemberToQueueOutput {
         return associate_member_to_queue.execute(self, allocator, input, options);
     }
 
     /// Get Amazon Web Services credentials from the fleet role. The IAM permissions
     /// of the credentials are scoped down to have read-only access.
-    pub fn assumeFleetRoleForRead(self: *Self, allocator: std.mem.Allocator, input: assume_fleet_role_for_read.AssumeFleetRoleForReadInput, options: assume_fleet_role_for_read.Options) !assume_fleet_role_for_read.AssumeFleetRoleForReadOutput {
+    pub fn assumeFleetRoleForRead(self: *Self, allocator: std.mem.Allocator, input: assume_fleet_role_for_read.AssumeFleetRoleForReadInput, options: CallOptions) !assume_fleet_role_for_read.AssumeFleetRoleForReadOutput {
         return assume_fleet_role_for_read.execute(self, allocator, input, options);
     }
 
     /// Get credentials from the fleet role for a worker.
-    pub fn assumeFleetRoleForWorker(self: *Self, allocator: std.mem.Allocator, input: assume_fleet_role_for_worker.AssumeFleetRoleForWorkerInput, options: assume_fleet_role_for_worker.Options) !assume_fleet_role_for_worker.AssumeFleetRoleForWorkerOutput {
+    pub fn assumeFleetRoleForWorker(self: *Self, allocator: std.mem.Allocator, input: assume_fleet_role_for_worker.AssumeFleetRoleForWorkerInput, options: CallOptions) !assume_fleet_role_for_worker.AssumeFleetRoleForWorkerOutput {
         return assume_fleet_role_for_worker.execute(self, allocator, input, options);
     }
 
     /// Gets Amazon Web Services credentials from the queue role. The IAM
     /// permissions of the credentials are scoped down to have read-only access.
-    pub fn assumeQueueRoleForRead(self: *Self, allocator: std.mem.Allocator, input: assume_queue_role_for_read.AssumeQueueRoleForReadInput, options: assume_queue_role_for_read.Options) !assume_queue_role_for_read.AssumeQueueRoleForReadOutput {
+    pub fn assumeQueueRoleForRead(self: *Self, allocator: std.mem.Allocator, input: assume_queue_role_for_read.AssumeQueueRoleForReadInput, options: CallOptions) !assume_queue_role_for_read.AssumeQueueRoleForReadOutput {
         return assume_queue_role_for_read.execute(self, allocator, input, options);
     }
 
     /// Allows a user to assume a role for a queue.
-    pub fn assumeQueueRoleForUser(self: *Self, allocator: std.mem.Allocator, input: assume_queue_role_for_user.AssumeQueueRoleForUserInput, options: assume_queue_role_for_user.Options) !assume_queue_role_for_user.AssumeQueueRoleForUserOutput {
+    pub fn assumeQueueRoleForUser(self: *Self, allocator: std.mem.Allocator, input: assume_queue_role_for_user.AssumeQueueRoleForUserInput, options: CallOptions) !assume_queue_role_for_user.AssumeQueueRoleForUserOutput {
         return assume_queue_role_for_user.execute(self, allocator, input, options);
     }
 
     /// Allows a worker to assume a queue role.
-    pub fn assumeQueueRoleForWorker(self: *Self, allocator: std.mem.Allocator, input: assume_queue_role_for_worker.AssumeQueueRoleForWorkerInput, options: assume_queue_role_for_worker.Options) !assume_queue_role_for_worker.AssumeQueueRoleForWorkerOutput {
+    pub fn assumeQueueRoleForWorker(self: *Self, allocator: std.mem.Allocator, input: assume_queue_role_for_worker.AssumeQueueRoleForWorkerInput, options: CallOptions) !assume_queue_role_for_worker.AssumeQueueRoleForWorkerOutput {
         return assume_queue_role_for_worker.execute(self, allocator, input, options);
     }
 
     /// Get batched job details for a worker.
-    pub fn batchGetJobEntity(self: *Self, allocator: std.mem.Allocator, input: batch_get_job_entity.BatchGetJobEntityInput, options: batch_get_job_entity.Options) !batch_get_job_entity.BatchGetJobEntityOutput {
+    pub fn batchGetJobEntity(self: *Self, allocator: std.mem.Allocator, input: batch_get_job_entity.BatchGetJobEntityInput, options: CallOptions) !batch_get_job_entity.BatchGetJobEntityOutput {
         return batch_get_job_entity.execute(self, allocator, input, options);
     }
 
     /// Copies a job template to an Amazon S3 bucket.
-    pub fn copyJobTemplate(self: *Self, allocator: std.mem.Allocator, input: copy_job_template.CopyJobTemplateInput, options: copy_job_template.Options) !copy_job_template.CopyJobTemplateOutput {
+    pub fn copyJobTemplate(self: *Self, allocator: std.mem.Allocator, input: copy_job_template.CopyJobTemplateInput, options: CallOptions) !copy_job_template.CopyJobTemplateOutput {
         return copy_job_template.execute(self, allocator, input, options);
     }
 
     /// Creates a budget to set spending thresholds for your rendering activity.
-    pub fn createBudget(self: *Self, allocator: std.mem.Allocator, input: create_budget.CreateBudgetInput, options: create_budget.Options) !create_budget.CreateBudgetOutput {
+    pub fn createBudget(self: *Self, allocator: std.mem.Allocator, input: create_budget.CreateBudgetInput, options: CallOptions) !create_budget.CreateBudgetOutput {
         return create_budget.execute(self, allocator, input, options);
     }
 
@@ -211,14 +212,14 @@ pub const Client = struct {
     /// where the components of your renders gather and are pieced together in the
     /// cloud. Farms contain budgets and allow you to enforce permissions. Deadline
     /// Cloud farms are a useful container for large projects.
-    pub fn createFarm(self: *Self, allocator: std.mem.Allocator, input: create_farm.CreateFarmInput, options: create_farm.Options) !create_farm.CreateFarmOutput {
+    pub fn createFarm(self: *Self, allocator: std.mem.Allocator, input: create_farm.CreateFarmInput, options: CallOptions) !create_farm.CreateFarmOutput {
         return create_farm.execute(self, allocator, input, options);
     }
 
     /// Creates a fleet. Fleets gather information relating to compute, or capacity,
     /// for renders within your farms. You can choose to manage your own capacity or
     /// opt to have fleets fully managed by Deadline Cloud.
-    pub fn createFleet(self: *Self, allocator: std.mem.Allocator, input: create_fleet.CreateFleetInput, options: create_fleet.Options) !create_fleet.CreateFleetOutput {
+    pub fn createFleet(self: *Self, allocator: std.mem.Allocator, input: create_fleet.CreateFleetInput, options: CallOptions) !create_fleet.CreateFleetOutput {
         return create_fleet.execute(self, allocator, input, options);
     }
 
@@ -226,13 +227,13 @@ pub const Client = struct {
     /// schedule and run work on available workers. For more information, see
     /// [Deadline Cloud
     /// jobs](https://docs.aws.amazon.com/deadline-cloud/latest/userguide/deadline-cloud-jobs.html).
-    pub fn createJob(self: *Self, allocator: std.mem.Allocator, input: create_job.CreateJobInput, options: create_job.Options) !create_job.CreateJobOutput {
+    pub fn createJob(self: *Self, allocator: std.mem.Allocator, input: create_job.CreateJobInput, options: CallOptions) !create_job.CreateJobOutput {
         return create_job.execute(self, allocator, input, options);
     }
 
     /// Creates a license endpoint to integrate your various licensed software used
     /// for rendering on Deadline Cloud.
-    pub fn createLicenseEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_license_endpoint.CreateLicenseEndpointInput, options: create_license_endpoint.Options) !create_license_endpoint.CreateLicenseEndpointOutput {
+    pub fn createLicenseEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_license_endpoint.CreateLicenseEndpointInput, options: CallOptions) !create_license_endpoint.CreateLicenseEndpointOutput {
         return create_license_endpoint.execute(self, allocator, input, options);
     }
 
@@ -243,7 +244,7 @@ pub const Client = struct {
     ///
     /// You must add the `amountRequirementName` to a step in a job template to
     /// declare the limit requirement.
-    pub fn createLimit(self: *Self, allocator: std.mem.Allocator, input: create_limit.CreateLimitInput, options: create_limit.Options) !create_limit.CreateLimitOutput {
+    pub fn createLimit(self: *Self, allocator: std.mem.Allocator, input: create_limit.CreateLimitInput, options: CallOptions) !create_limit.CreateLimitOutput {
         return create_limit.execute(self, allocator, input, options);
     }
 
@@ -251,24 +252,24 @@ pub const Client = struct {
     /// view your farms, queues, and fleets. After you submit a job, you can track
     /// the progress of the tasks and steps that make up the job, and then download
     /// the job's results.
-    pub fn createMonitor(self: *Self, allocator: std.mem.Allocator, input: create_monitor.CreateMonitorInput, options: create_monitor.Options) !create_monitor.CreateMonitorOutput {
+    pub fn createMonitor(self: *Self, allocator: std.mem.Allocator, input: create_monitor.CreateMonitorInput, options: CallOptions) !create_monitor.CreateMonitorOutput {
         return create_monitor.execute(self, allocator, input, options);
     }
 
     /// Creates a queue to coordinate the order in which jobs run on a farm. A queue
     /// can also specify where to pull resources and indicate where to output
     /// completed jobs.
-    pub fn createQueue(self: *Self, allocator: std.mem.Allocator, input: create_queue.CreateQueueInput, options: create_queue.Options) !create_queue.CreateQueueOutput {
+    pub fn createQueue(self: *Self, allocator: std.mem.Allocator, input: create_queue.CreateQueueInput, options: CallOptions) !create_queue.CreateQueueOutput {
         return create_queue.execute(self, allocator, input, options);
     }
 
     /// Creates an environment for a queue that defines how jobs in the queue run.
-    pub fn createQueueEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_queue_environment.CreateQueueEnvironmentInput, options: create_queue_environment.Options) !create_queue_environment.CreateQueueEnvironmentOutput {
+    pub fn createQueueEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_queue_environment.CreateQueueEnvironmentInput, options: CallOptions) !create_queue_environment.CreateQueueEnvironmentOutput {
         return create_queue_environment.execute(self, allocator, input, options);
     }
 
     /// Creates an association between a queue and a fleet.
-    pub fn createQueueFleetAssociation(self: *Self, allocator: std.mem.Allocator, input: create_queue_fleet_association.CreateQueueFleetAssociationInput, options: create_queue_fleet_association.Options) !create_queue_fleet_association.CreateQueueFleetAssociationOutput {
+    pub fn createQueueFleetAssociation(self: *Self, allocator: std.mem.Allocator, input: create_queue_fleet_association.CreateQueueFleetAssociationInput, options: CallOptions) !create_queue_fleet_association.CreateQueueFleetAssociationOutput {
         return create_queue_fleet_association.execute(self, allocator, input, options);
     }
 
@@ -276,13 +277,13 @@ pub const Client = struct {
     /// all workers for jobs that specify the limit associated with the queue are
     /// subject to the limit. You can't associate two limits with the same
     /// `amountRequirementName` to the same queue.
-    pub fn createQueueLimitAssociation(self: *Self, allocator: std.mem.Allocator, input: create_queue_limit_association.CreateQueueLimitAssociationInput, options: create_queue_limit_association.Options) !create_queue_limit_association.CreateQueueLimitAssociationOutput {
+    pub fn createQueueLimitAssociation(self: *Self, allocator: std.mem.Allocator, input: create_queue_limit_association.CreateQueueLimitAssociationInput, options: CallOptions) !create_queue_limit_association.CreateQueueLimitAssociationOutput {
         return create_queue_limit_association.execute(self, allocator, input, options);
     }
 
     /// Creates a storage profile that specifies the operating system, file type,
     /// and file location of resources used on a farm.
-    pub fn createStorageProfile(self: *Self, allocator: std.mem.Allocator, input: create_storage_profile.CreateStorageProfileInput, options: create_storage_profile.Options) !create_storage_profile.CreateStorageProfileOutput {
+    pub fn createStorageProfile(self: *Self, allocator: std.mem.Allocator, input: create_storage_profile.CreateStorageProfileInput, options: CallOptions) !create_storage_profile.CreateStorageProfileOutput {
         return create_storage_profile.execute(self, allocator, input, options);
     }
 
@@ -298,45 +299,45 @@ pub const Client = struct {
     /// example, if your `maxWorkerCount` is 10 and you currently have 9 workers,
     /// making two quick `CreateWorker` calls might successfully create 2 workers
     /// instead of 1, resulting in 11 total workers.
-    pub fn createWorker(self: *Self, allocator: std.mem.Allocator, input: create_worker.CreateWorkerInput, options: create_worker.Options) !create_worker.CreateWorkerOutput {
+    pub fn createWorker(self: *Self, allocator: std.mem.Allocator, input: create_worker.CreateWorkerInput, options: CallOptions) !create_worker.CreateWorkerOutput {
         return create_worker.execute(self, allocator, input, options);
     }
 
     /// Deletes a budget.
-    pub fn deleteBudget(self: *Self, allocator: std.mem.Allocator, input: delete_budget.DeleteBudgetInput, options: delete_budget.Options) !delete_budget.DeleteBudgetOutput {
+    pub fn deleteBudget(self: *Self, allocator: std.mem.Allocator, input: delete_budget.DeleteBudgetInput, options: CallOptions) !delete_budget.DeleteBudgetOutput {
         return delete_budget.execute(self, allocator, input, options);
     }
 
     /// Deletes a farm.
-    pub fn deleteFarm(self: *Self, allocator: std.mem.Allocator, input: delete_farm.DeleteFarmInput, options: delete_farm.Options) !delete_farm.DeleteFarmOutput {
+    pub fn deleteFarm(self: *Self, allocator: std.mem.Allocator, input: delete_farm.DeleteFarmInput, options: CallOptions) !delete_farm.DeleteFarmOutput {
         return delete_farm.execute(self, allocator, input, options);
     }
 
     /// Deletes a fleet.
-    pub fn deleteFleet(self: *Self, allocator: std.mem.Allocator, input: delete_fleet.DeleteFleetInput, options: delete_fleet.Options) !delete_fleet.DeleteFleetOutput {
+    pub fn deleteFleet(self: *Self, allocator: std.mem.Allocator, input: delete_fleet.DeleteFleetInput, options: CallOptions) !delete_fleet.DeleteFleetOutput {
         return delete_fleet.execute(self, allocator, input, options);
     }
 
     /// Deletes a license endpoint.
-    pub fn deleteLicenseEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_license_endpoint.DeleteLicenseEndpointInput, options: delete_license_endpoint.Options) !delete_license_endpoint.DeleteLicenseEndpointOutput {
+    pub fn deleteLicenseEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_license_endpoint.DeleteLicenseEndpointInput, options: CallOptions) !delete_license_endpoint.DeleteLicenseEndpointOutput {
         return delete_license_endpoint.execute(self, allocator, input, options);
     }
 
     /// Removes a limit from the specified farm. Before you delete a limit you must
     /// use the `DeleteQueueLimitAssociation` operation to remove the association
     /// with any queues.
-    pub fn deleteLimit(self: *Self, allocator: std.mem.Allocator, input: delete_limit.DeleteLimitInput, options: delete_limit.Options) !delete_limit.DeleteLimitOutput {
+    pub fn deleteLimit(self: *Self, allocator: std.mem.Allocator, input: delete_limit.DeleteLimitInput, options: CallOptions) !delete_limit.DeleteLimitOutput {
         return delete_limit.execute(self, allocator, input, options);
     }
 
     /// Deletes a metered product.
-    pub fn deleteMeteredProduct(self: *Self, allocator: std.mem.Allocator, input: delete_metered_product.DeleteMeteredProductInput, options: delete_metered_product.Options) !delete_metered_product.DeleteMeteredProductOutput {
+    pub fn deleteMeteredProduct(self: *Self, allocator: std.mem.Allocator, input: delete_metered_product.DeleteMeteredProductInput, options: CallOptions) !delete_metered_product.DeleteMeteredProductOutput {
         return delete_metered_product.execute(self, allocator, input, options);
     }
 
     /// Removes a Deadline Cloud monitor. After you delete a monitor, you can create
     /// a new one and attach farms to the monitor.
-    pub fn deleteMonitor(self: *Self, allocator: std.mem.Allocator, input: delete_monitor.DeleteMonitorInput, options: delete_monitor.Options) !delete_monitor.DeleteMonitorOutput {
+    pub fn deleteMonitor(self: *Self, allocator: std.mem.Allocator, input: delete_monitor.DeleteMonitorInput, options: CallOptions) !delete_monitor.DeleteMonitorOutput {
         return delete_monitor.execute(self, allocator, input, options);
     }
 
@@ -344,17 +345,17 @@ pub const Client = struct {
     ///
     /// You can't recover the jobs in a queue if you delete the queue. Deleting the
     /// queue also deletes the jobs in that queue.
-    pub fn deleteQueue(self: *Self, allocator: std.mem.Allocator, input: delete_queue.DeleteQueueInput, options: delete_queue.Options) !delete_queue.DeleteQueueOutput {
+    pub fn deleteQueue(self: *Self, allocator: std.mem.Allocator, input: delete_queue.DeleteQueueInput, options: CallOptions) !delete_queue.DeleteQueueOutput {
         return delete_queue.execute(self, allocator, input, options);
     }
 
     /// Deletes a queue environment.
-    pub fn deleteQueueEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_queue_environment.DeleteQueueEnvironmentInput, options: delete_queue_environment.Options) !delete_queue_environment.DeleteQueueEnvironmentOutput {
+    pub fn deleteQueueEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_queue_environment.DeleteQueueEnvironmentInput, options: CallOptions) !delete_queue_environment.DeleteQueueEnvironmentOutput {
         return delete_queue_environment.execute(self, allocator, input, options);
     }
 
     /// Deletes a queue-fleet association.
-    pub fn deleteQueueFleetAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_queue_fleet_association.DeleteQueueFleetAssociationInput, options: delete_queue_fleet_association.Options) !delete_queue_fleet_association.DeleteQueueFleetAssociationOutput {
+    pub fn deleteQueueFleetAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_queue_fleet_association.DeleteQueueFleetAssociationInput, options: CallOptions) !delete_queue_fleet_association.DeleteQueueFleetAssociationOutput {
         return delete_queue_fleet_association.execute(self, allocator, input, options);
     }
 
@@ -364,102 +365,102 @@ pub const Client = struct {
     /// `STOP_LIMIT_USAGE_AND_CANCEL_TASKS`. The status does not change immediately.
     /// Use the `GetQueueLimitAssociation` operation to see if the status changed to
     /// `STOPPED` before deleting the association.
-    pub fn deleteQueueLimitAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_queue_limit_association.DeleteQueueLimitAssociationInput, options: delete_queue_limit_association.Options) !delete_queue_limit_association.DeleteQueueLimitAssociationOutput {
+    pub fn deleteQueueLimitAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_queue_limit_association.DeleteQueueLimitAssociationInput, options: CallOptions) !delete_queue_limit_association.DeleteQueueLimitAssociationOutput {
         return delete_queue_limit_association.execute(self, allocator, input, options);
     }
 
     /// Deletes a storage profile.
-    pub fn deleteStorageProfile(self: *Self, allocator: std.mem.Allocator, input: delete_storage_profile.DeleteStorageProfileInput, options: delete_storage_profile.Options) !delete_storage_profile.DeleteStorageProfileOutput {
+    pub fn deleteStorageProfile(self: *Self, allocator: std.mem.Allocator, input: delete_storage_profile.DeleteStorageProfileInput, options: CallOptions) !delete_storage_profile.DeleteStorageProfileOutput {
         return delete_storage_profile.execute(self, allocator, input, options);
     }
 
     /// Deletes a worker.
-    pub fn deleteWorker(self: *Self, allocator: std.mem.Allocator, input: delete_worker.DeleteWorkerInput, options: delete_worker.Options) !delete_worker.DeleteWorkerOutput {
+    pub fn deleteWorker(self: *Self, allocator: std.mem.Allocator, input: delete_worker.DeleteWorkerInput, options: CallOptions) !delete_worker.DeleteWorkerOutput {
         return delete_worker.execute(self, allocator, input, options);
     }
 
     /// Disassociates a member from a farm.
-    pub fn disassociateMemberFromFarm(self: *Self, allocator: std.mem.Allocator, input: disassociate_member_from_farm.DisassociateMemberFromFarmInput, options: disassociate_member_from_farm.Options) !disassociate_member_from_farm.DisassociateMemberFromFarmOutput {
+    pub fn disassociateMemberFromFarm(self: *Self, allocator: std.mem.Allocator, input: disassociate_member_from_farm.DisassociateMemberFromFarmInput, options: CallOptions) !disassociate_member_from_farm.DisassociateMemberFromFarmOutput {
         return disassociate_member_from_farm.execute(self, allocator, input, options);
     }
 
     /// Disassociates a member from a fleet.
-    pub fn disassociateMemberFromFleet(self: *Self, allocator: std.mem.Allocator, input: disassociate_member_from_fleet.DisassociateMemberFromFleetInput, options: disassociate_member_from_fleet.Options) !disassociate_member_from_fleet.DisassociateMemberFromFleetOutput {
+    pub fn disassociateMemberFromFleet(self: *Self, allocator: std.mem.Allocator, input: disassociate_member_from_fleet.DisassociateMemberFromFleetInput, options: CallOptions) !disassociate_member_from_fleet.DisassociateMemberFromFleetOutput {
         return disassociate_member_from_fleet.execute(self, allocator, input, options);
     }
 
     /// Disassociates a member from a job.
-    pub fn disassociateMemberFromJob(self: *Self, allocator: std.mem.Allocator, input: disassociate_member_from_job.DisassociateMemberFromJobInput, options: disassociate_member_from_job.Options) !disassociate_member_from_job.DisassociateMemberFromJobOutput {
+    pub fn disassociateMemberFromJob(self: *Self, allocator: std.mem.Allocator, input: disassociate_member_from_job.DisassociateMemberFromJobInput, options: CallOptions) !disassociate_member_from_job.DisassociateMemberFromJobOutput {
         return disassociate_member_from_job.execute(self, allocator, input, options);
     }
 
     /// Disassociates a member from a queue.
-    pub fn disassociateMemberFromQueue(self: *Self, allocator: std.mem.Allocator, input: disassociate_member_from_queue.DisassociateMemberFromQueueInput, options: disassociate_member_from_queue.Options) !disassociate_member_from_queue.DisassociateMemberFromQueueOutput {
+    pub fn disassociateMemberFromQueue(self: *Self, allocator: std.mem.Allocator, input: disassociate_member_from_queue.DisassociateMemberFromQueueInput, options: CallOptions) !disassociate_member_from_queue.DisassociateMemberFromQueueOutput {
         return disassociate_member_from_queue.execute(self, allocator, input, options);
     }
 
     /// Get a budget.
-    pub fn getBudget(self: *Self, allocator: std.mem.Allocator, input: get_budget.GetBudgetInput, options: get_budget.Options) !get_budget.GetBudgetOutput {
+    pub fn getBudget(self: *Self, allocator: std.mem.Allocator, input: get_budget.GetBudgetInput, options: CallOptions) !get_budget.GetBudgetOutput {
         return get_budget.execute(self, allocator, input, options);
     }
 
     /// Get a farm.
-    pub fn getFarm(self: *Self, allocator: std.mem.Allocator, input: get_farm.GetFarmInput, options: get_farm.Options) !get_farm.GetFarmOutput {
+    pub fn getFarm(self: *Self, allocator: std.mem.Allocator, input: get_farm.GetFarmInput, options: CallOptions) !get_farm.GetFarmOutput {
         return get_farm.execute(self, allocator, input, options);
     }
 
     /// Get a fleet.
-    pub fn getFleet(self: *Self, allocator: std.mem.Allocator, input: get_fleet.GetFleetInput, options: get_fleet.Options) !get_fleet.GetFleetOutput {
+    pub fn getFleet(self: *Self, allocator: std.mem.Allocator, input: get_fleet.GetFleetInput, options: CallOptions) !get_fleet.GetFleetOutput {
         return get_fleet.execute(self, allocator, input, options);
     }
 
     /// Gets a Deadline Cloud job.
-    pub fn getJob(self: *Self, allocator: std.mem.Allocator, input: get_job.GetJobInput, options: get_job.Options) !get_job.GetJobOutput {
+    pub fn getJob(self: *Self, allocator: std.mem.Allocator, input: get_job.GetJobInput, options: CallOptions) !get_job.GetJobOutput {
         return get_job.execute(self, allocator, input, options);
     }
 
     /// Gets a licence endpoint.
-    pub fn getLicenseEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_license_endpoint.GetLicenseEndpointInput, options: get_license_endpoint.Options) !get_license_endpoint.GetLicenseEndpointOutput {
+    pub fn getLicenseEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_license_endpoint.GetLicenseEndpointInput, options: CallOptions) !get_license_endpoint.GetLicenseEndpointOutput {
         return get_license_endpoint.execute(self, allocator, input, options);
     }
 
     /// Gets information about a specific limit.
-    pub fn getLimit(self: *Self, allocator: std.mem.Allocator, input: get_limit.GetLimitInput, options: get_limit.Options) !get_limit.GetLimitOutput {
+    pub fn getLimit(self: *Self, allocator: std.mem.Allocator, input: get_limit.GetLimitInput, options: CallOptions) !get_limit.GetLimitOutput {
         return get_limit.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified monitor.
-    pub fn getMonitor(self: *Self, allocator: std.mem.Allocator, input: get_monitor.GetMonitorInput, options: get_monitor.Options) !get_monitor.GetMonitorOutput {
+    pub fn getMonitor(self: *Self, allocator: std.mem.Allocator, input: get_monitor.GetMonitorInput, options: CallOptions) !get_monitor.GetMonitorOutput {
         return get_monitor.execute(self, allocator, input, options);
     }
 
     /// Gets a queue.
-    pub fn getQueue(self: *Self, allocator: std.mem.Allocator, input: get_queue.GetQueueInput, options: get_queue.Options) !get_queue.GetQueueOutput {
+    pub fn getQueue(self: *Self, allocator: std.mem.Allocator, input: get_queue.GetQueueInput, options: CallOptions) !get_queue.GetQueueOutput {
         return get_queue.execute(self, allocator, input, options);
     }
 
     /// Gets a queue environment.
-    pub fn getQueueEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_queue_environment.GetQueueEnvironmentInput, options: get_queue_environment.Options) !get_queue_environment.GetQueueEnvironmentOutput {
+    pub fn getQueueEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_queue_environment.GetQueueEnvironmentInput, options: CallOptions) !get_queue_environment.GetQueueEnvironmentOutput {
         return get_queue_environment.execute(self, allocator, input, options);
     }
 
     /// Gets a queue-fleet association.
-    pub fn getQueueFleetAssociation(self: *Self, allocator: std.mem.Allocator, input: get_queue_fleet_association.GetQueueFleetAssociationInput, options: get_queue_fleet_association.Options) !get_queue_fleet_association.GetQueueFleetAssociationOutput {
+    pub fn getQueueFleetAssociation(self: *Self, allocator: std.mem.Allocator, input: get_queue_fleet_association.GetQueueFleetAssociationInput, options: CallOptions) !get_queue_fleet_association.GetQueueFleetAssociationOutput {
         return get_queue_fleet_association.execute(self, allocator, input, options);
     }
 
     /// Gets information about a specific association between a queue and a limit.
-    pub fn getQueueLimitAssociation(self: *Self, allocator: std.mem.Allocator, input: get_queue_limit_association.GetQueueLimitAssociationInput, options: get_queue_limit_association.Options) !get_queue_limit_association.GetQueueLimitAssociationOutput {
+    pub fn getQueueLimitAssociation(self: *Self, allocator: std.mem.Allocator, input: get_queue_limit_association.GetQueueLimitAssociationInput, options: CallOptions) !get_queue_limit_association.GetQueueLimitAssociationOutput {
         return get_queue_limit_association.execute(self, allocator, input, options);
     }
 
     /// Gets a session.
-    pub fn getSession(self: *Self, allocator: std.mem.Allocator, input: get_session.GetSessionInput, options: get_session.Options) !get_session.GetSessionOutput {
+    pub fn getSession(self: *Self, allocator: std.mem.Allocator, input: get_session.GetSessionInput, options: CallOptions) !get_session.GetSessionOutput {
         return get_session.execute(self, allocator, input, options);
     }
 
     /// Gets a session action for the job.
-    pub fn getSessionAction(self: *Self, allocator: std.mem.Allocator, input: get_session_action.GetSessionActionInput, options: get_session_action.Options) !get_session_action.GetSessionActionOutput {
+    pub fn getSessionAction(self: *Self, allocator: std.mem.Allocator, input: get_session_action.GetSessionActionInput, options: CallOptions) !get_session_action.GetSessionActionOutput {
         return get_session_action.execute(self, allocator, input, options);
     }
 
@@ -467,202 +468,202 @@ pub const Client = struct {
     /// `GetSessionStatisticsAggregation` operation, you must first call the
     /// `StartSessionsStatisticsAggregation` operation. Statistics are available for
     /// 1 hour after you call the `StartSessionsStatisticsAggregation` operation.
-    pub fn getSessionsStatisticsAggregation(self: *Self, allocator: std.mem.Allocator, input: get_sessions_statistics_aggregation.GetSessionsStatisticsAggregationInput, options: get_sessions_statistics_aggregation.Options) !get_sessions_statistics_aggregation.GetSessionsStatisticsAggregationOutput {
+    pub fn getSessionsStatisticsAggregation(self: *Self, allocator: std.mem.Allocator, input: get_sessions_statistics_aggregation.GetSessionsStatisticsAggregationInput, options: CallOptions) !get_sessions_statistics_aggregation.GetSessionsStatisticsAggregationOutput {
         return get_sessions_statistics_aggregation.execute(self, allocator, input, options);
     }
 
     /// Gets a step.
-    pub fn getStep(self: *Self, allocator: std.mem.Allocator, input: get_step.GetStepInput, options: get_step.Options) !get_step.GetStepOutput {
+    pub fn getStep(self: *Self, allocator: std.mem.Allocator, input: get_step.GetStepInput, options: CallOptions) !get_step.GetStepOutput {
         return get_step.execute(self, allocator, input, options);
     }
 
     /// Gets a storage profile.
-    pub fn getStorageProfile(self: *Self, allocator: std.mem.Allocator, input: get_storage_profile.GetStorageProfileInput, options: get_storage_profile.Options) !get_storage_profile.GetStorageProfileOutput {
+    pub fn getStorageProfile(self: *Self, allocator: std.mem.Allocator, input: get_storage_profile.GetStorageProfileInput, options: CallOptions) !get_storage_profile.GetStorageProfileOutput {
         return get_storage_profile.execute(self, allocator, input, options);
     }
 
     /// Gets a storage profile for a queue.
-    pub fn getStorageProfileForQueue(self: *Self, allocator: std.mem.Allocator, input: get_storage_profile_for_queue.GetStorageProfileForQueueInput, options: get_storage_profile_for_queue.Options) !get_storage_profile_for_queue.GetStorageProfileForQueueOutput {
+    pub fn getStorageProfileForQueue(self: *Self, allocator: std.mem.Allocator, input: get_storage_profile_for_queue.GetStorageProfileForQueueInput, options: CallOptions) !get_storage_profile_for_queue.GetStorageProfileForQueueOutput {
         return get_storage_profile_for_queue.execute(self, allocator, input, options);
     }
 
     /// Gets a task.
-    pub fn getTask(self: *Self, allocator: std.mem.Allocator, input: get_task.GetTaskInput, options: get_task.Options) !get_task.GetTaskOutput {
+    pub fn getTask(self: *Self, allocator: std.mem.Allocator, input: get_task.GetTaskInput, options: CallOptions) !get_task.GetTaskOutput {
         return get_task.execute(self, allocator, input, options);
     }
 
     /// Gets a worker.
-    pub fn getWorker(self: *Self, allocator: std.mem.Allocator, input: get_worker.GetWorkerInput, options: get_worker.Options) !get_worker.GetWorkerOutput {
+    pub fn getWorker(self: *Self, allocator: std.mem.Allocator, input: get_worker.GetWorkerInput, options: CallOptions) !get_worker.GetWorkerOutput {
         return get_worker.execute(self, allocator, input, options);
     }
 
     /// A list of the available metered products.
-    pub fn listAvailableMeteredProducts(self: *Self, allocator: std.mem.Allocator, input: list_available_metered_products.ListAvailableMeteredProductsInput, options: list_available_metered_products.Options) !list_available_metered_products.ListAvailableMeteredProductsOutput {
+    pub fn listAvailableMeteredProducts(self: *Self, allocator: std.mem.Allocator, input: list_available_metered_products.ListAvailableMeteredProductsInput, options: CallOptions) !list_available_metered_products.ListAvailableMeteredProductsOutput {
         return list_available_metered_products.execute(self, allocator, input, options);
     }
 
     /// A list of budgets in a farm.
-    pub fn listBudgets(self: *Self, allocator: std.mem.Allocator, input: list_budgets.ListBudgetsInput, options: list_budgets.Options) !list_budgets.ListBudgetsOutput {
+    pub fn listBudgets(self: *Self, allocator: std.mem.Allocator, input: list_budgets.ListBudgetsInput, options: CallOptions) !list_budgets.ListBudgetsOutput {
         return list_budgets.execute(self, allocator, input, options);
     }
 
     /// Lists the members of a farm.
-    pub fn listFarmMembers(self: *Self, allocator: std.mem.Allocator, input: list_farm_members.ListFarmMembersInput, options: list_farm_members.Options) !list_farm_members.ListFarmMembersOutput {
+    pub fn listFarmMembers(self: *Self, allocator: std.mem.Allocator, input: list_farm_members.ListFarmMembersInput, options: CallOptions) !list_farm_members.ListFarmMembersOutput {
         return list_farm_members.execute(self, allocator, input, options);
     }
 
     /// Lists farms.
-    pub fn listFarms(self: *Self, allocator: std.mem.Allocator, input: list_farms.ListFarmsInput, options: list_farms.Options) !list_farms.ListFarmsOutput {
+    pub fn listFarms(self: *Self, allocator: std.mem.Allocator, input: list_farms.ListFarmsInput, options: CallOptions) !list_farms.ListFarmsOutput {
         return list_farms.execute(self, allocator, input, options);
     }
 
     /// Lists fleet members.
-    pub fn listFleetMembers(self: *Self, allocator: std.mem.Allocator, input: list_fleet_members.ListFleetMembersInput, options: list_fleet_members.Options) !list_fleet_members.ListFleetMembersOutput {
+    pub fn listFleetMembers(self: *Self, allocator: std.mem.Allocator, input: list_fleet_members.ListFleetMembersInput, options: CallOptions) !list_fleet_members.ListFleetMembersOutput {
         return list_fleet_members.execute(self, allocator, input, options);
     }
 
     /// Lists fleets.
-    pub fn listFleets(self: *Self, allocator: std.mem.Allocator, input: list_fleets.ListFleetsInput, options: list_fleets.Options) !list_fleets.ListFleetsOutput {
+    pub fn listFleets(self: *Self, allocator: std.mem.Allocator, input: list_fleets.ListFleetsInput, options: CallOptions) !list_fleets.ListFleetsOutput {
         return list_fleets.execute(self, allocator, input, options);
     }
 
     /// Lists members on a job.
-    pub fn listJobMembers(self: *Self, allocator: std.mem.Allocator, input: list_job_members.ListJobMembersInput, options: list_job_members.Options) !list_job_members.ListJobMembersOutput {
+    pub fn listJobMembers(self: *Self, allocator: std.mem.Allocator, input: list_job_members.ListJobMembersInput, options: CallOptions) !list_job_members.ListJobMembersOutput {
         return list_job_members.execute(self, allocator, input, options);
     }
 
     /// Lists parameter definitions of a job.
-    pub fn listJobParameterDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_job_parameter_definitions.ListJobParameterDefinitionsInput, options: list_job_parameter_definitions.Options) !list_job_parameter_definitions.ListJobParameterDefinitionsOutput {
+    pub fn listJobParameterDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_job_parameter_definitions.ListJobParameterDefinitionsInput, options: CallOptions) !list_job_parameter_definitions.ListJobParameterDefinitionsOutput {
         return list_job_parameter_definitions.execute(self, allocator, input, options);
     }
 
     /// Lists jobs.
-    pub fn listJobs(self: *Self, allocator: std.mem.Allocator, input: list_jobs.ListJobsInput, options: list_jobs.Options) !list_jobs.ListJobsOutput {
+    pub fn listJobs(self: *Self, allocator: std.mem.Allocator, input: list_jobs.ListJobsInput, options: CallOptions) !list_jobs.ListJobsOutput {
         return list_jobs.execute(self, allocator, input, options);
     }
 
     /// Lists license endpoints.
-    pub fn listLicenseEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_license_endpoints.ListLicenseEndpointsInput, options: list_license_endpoints.Options) !list_license_endpoints.ListLicenseEndpointsOutput {
+    pub fn listLicenseEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_license_endpoints.ListLicenseEndpointsInput, options: CallOptions) !list_license_endpoints.ListLicenseEndpointsOutput {
         return list_license_endpoints.execute(self, allocator, input, options);
     }
 
     /// Gets a list of limits defined in the specified farm.
-    pub fn listLimits(self: *Self, allocator: std.mem.Allocator, input: list_limits.ListLimitsInput, options: list_limits.Options) !list_limits.ListLimitsOutput {
+    pub fn listLimits(self: *Self, allocator: std.mem.Allocator, input: list_limits.ListLimitsInput, options: CallOptions) !list_limits.ListLimitsOutput {
         return list_limits.execute(self, allocator, input, options);
     }
 
     /// Lists metered products.
-    pub fn listMeteredProducts(self: *Self, allocator: std.mem.Allocator, input: list_metered_products.ListMeteredProductsInput, options: list_metered_products.Options) !list_metered_products.ListMeteredProductsOutput {
+    pub fn listMeteredProducts(self: *Self, allocator: std.mem.Allocator, input: list_metered_products.ListMeteredProductsInput, options: CallOptions) !list_metered_products.ListMeteredProductsOutput {
         return list_metered_products.execute(self, allocator, input, options);
     }
 
     /// Gets a list of your monitors in Deadline Cloud.
-    pub fn listMonitors(self: *Self, allocator: std.mem.Allocator, input: list_monitors.ListMonitorsInput, options: list_monitors.Options) !list_monitors.ListMonitorsOutput {
+    pub fn listMonitors(self: *Self, allocator: std.mem.Allocator, input: list_monitors.ListMonitorsInput, options: CallOptions) !list_monitors.ListMonitorsOutput {
         return list_monitors.execute(self, allocator, input, options);
     }
 
     /// Lists queue environments.
-    pub fn listQueueEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_queue_environments.ListQueueEnvironmentsInput, options: list_queue_environments.Options) !list_queue_environments.ListQueueEnvironmentsOutput {
+    pub fn listQueueEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_queue_environments.ListQueueEnvironmentsInput, options: CallOptions) !list_queue_environments.ListQueueEnvironmentsOutput {
         return list_queue_environments.execute(self, allocator, input, options);
     }
 
     /// Lists queue-fleet associations.
-    pub fn listQueueFleetAssociations(self: *Self, allocator: std.mem.Allocator, input: list_queue_fleet_associations.ListQueueFleetAssociationsInput, options: list_queue_fleet_associations.Options) !list_queue_fleet_associations.ListQueueFleetAssociationsOutput {
+    pub fn listQueueFleetAssociations(self: *Self, allocator: std.mem.Allocator, input: list_queue_fleet_associations.ListQueueFleetAssociationsInput, options: CallOptions) !list_queue_fleet_associations.ListQueueFleetAssociationsOutput {
         return list_queue_fleet_associations.execute(self, allocator, input, options);
     }
 
     /// Gets a list of the associations between queues and limits defined in a farm.
-    pub fn listQueueLimitAssociations(self: *Self, allocator: std.mem.Allocator, input: list_queue_limit_associations.ListQueueLimitAssociationsInput, options: list_queue_limit_associations.Options) !list_queue_limit_associations.ListQueueLimitAssociationsOutput {
+    pub fn listQueueLimitAssociations(self: *Self, allocator: std.mem.Allocator, input: list_queue_limit_associations.ListQueueLimitAssociationsInput, options: CallOptions) !list_queue_limit_associations.ListQueueLimitAssociationsOutput {
         return list_queue_limit_associations.execute(self, allocator, input, options);
     }
 
     /// Lists the members in a queue.
-    pub fn listQueueMembers(self: *Self, allocator: std.mem.Allocator, input: list_queue_members.ListQueueMembersInput, options: list_queue_members.Options) !list_queue_members.ListQueueMembersOutput {
+    pub fn listQueueMembers(self: *Self, allocator: std.mem.Allocator, input: list_queue_members.ListQueueMembersInput, options: CallOptions) !list_queue_members.ListQueueMembersOutput {
         return list_queue_members.execute(self, allocator, input, options);
     }
 
     /// Lists queues.
-    pub fn listQueues(self: *Self, allocator: std.mem.Allocator, input: list_queues.ListQueuesInput, options: list_queues.Options) !list_queues.ListQueuesOutput {
+    pub fn listQueues(self: *Self, allocator: std.mem.Allocator, input: list_queues.ListQueuesInput, options: CallOptions) !list_queues.ListQueuesOutput {
         return list_queues.execute(self, allocator, input, options);
     }
 
     /// Lists session actions.
-    pub fn listSessionActions(self: *Self, allocator: std.mem.Allocator, input: list_session_actions.ListSessionActionsInput, options: list_session_actions.Options) !list_session_actions.ListSessionActionsOutput {
+    pub fn listSessionActions(self: *Self, allocator: std.mem.Allocator, input: list_session_actions.ListSessionActionsInput, options: CallOptions) !list_session_actions.ListSessionActionsOutput {
         return list_session_actions.execute(self, allocator, input, options);
     }
 
     /// Lists sessions.
-    pub fn listSessions(self: *Self, allocator: std.mem.Allocator, input: list_sessions.ListSessionsInput, options: list_sessions.Options) !list_sessions.ListSessionsOutput {
+    pub fn listSessions(self: *Self, allocator: std.mem.Allocator, input: list_sessions.ListSessionsInput, options: CallOptions) !list_sessions.ListSessionsOutput {
         return list_sessions.execute(self, allocator, input, options);
     }
 
     /// Lists sessions for a worker.
-    pub fn listSessionsForWorker(self: *Self, allocator: std.mem.Allocator, input: list_sessions_for_worker.ListSessionsForWorkerInput, options: list_sessions_for_worker.Options) !list_sessions_for_worker.ListSessionsForWorkerOutput {
+    pub fn listSessionsForWorker(self: *Self, allocator: std.mem.Allocator, input: list_sessions_for_worker.ListSessionsForWorkerInput, options: CallOptions) !list_sessions_for_worker.ListSessionsForWorkerOutput {
         return list_sessions_for_worker.execute(self, allocator, input, options);
     }
 
     /// Lists step consumers.
-    pub fn listStepConsumers(self: *Self, allocator: std.mem.Allocator, input: list_step_consumers.ListStepConsumersInput, options: list_step_consumers.Options) !list_step_consumers.ListStepConsumersOutput {
+    pub fn listStepConsumers(self: *Self, allocator: std.mem.Allocator, input: list_step_consumers.ListStepConsumersInput, options: CallOptions) !list_step_consumers.ListStepConsumersOutput {
         return list_step_consumers.execute(self, allocator, input, options);
     }
 
     /// Lists the dependencies for a step.
-    pub fn listStepDependencies(self: *Self, allocator: std.mem.Allocator, input: list_step_dependencies.ListStepDependenciesInput, options: list_step_dependencies.Options) !list_step_dependencies.ListStepDependenciesOutput {
+    pub fn listStepDependencies(self: *Self, allocator: std.mem.Allocator, input: list_step_dependencies.ListStepDependenciesInput, options: CallOptions) !list_step_dependencies.ListStepDependenciesOutput {
         return list_step_dependencies.execute(self, allocator, input, options);
     }
 
     /// Lists steps for a job.
-    pub fn listSteps(self: *Self, allocator: std.mem.Allocator, input: list_steps.ListStepsInput, options: list_steps.Options) !list_steps.ListStepsOutput {
+    pub fn listSteps(self: *Self, allocator: std.mem.Allocator, input: list_steps.ListStepsInput, options: CallOptions) !list_steps.ListStepsOutput {
         return list_steps.execute(self, allocator, input, options);
     }
 
     /// Lists storage profiles.
-    pub fn listStorageProfiles(self: *Self, allocator: std.mem.Allocator, input: list_storage_profiles.ListStorageProfilesInput, options: list_storage_profiles.Options) !list_storage_profiles.ListStorageProfilesOutput {
+    pub fn listStorageProfiles(self: *Self, allocator: std.mem.Allocator, input: list_storage_profiles.ListStorageProfilesInput, options: CallOptions) !list_storage_profiles.ListStorageProfilesOutput {
         return list_storage_profiles.execute(self, allocator, input, options);
     }
 
     /// Lists storage profiles for a queue.
-    pub fn listStorageProfilesForQueue(self: *Self, allocator: std.mem.Allocator, input: list_storage_profiles_for_queue.ListStorageProfilesForQueueInput, options: list_storage_profiles_for_queue.Options) !list_storage_profiles_for_queue.ListStorageProfilesForQueueOutput {
+    pub fn listStorageProfilesForQueue(self: *Self, allocator: std.mem.Allocator, input: list_storage_profiles_for_queue.ListStorageProfilesForQueueInput, options: CallOptions) !list_storage_profiles_for_queue.ListStorageProfilesForQueueOutput {
         return list_storage_profiles_for_queue.execute(self, allocator, input, options);
     }
 
     /// Lists tags for a resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists tasks for a job.
-    pub fn listTasks(self: *Self, allocator: std.mem.Allocator, input: list_tasks.ListTasksInput, options: list_tasks.Options) !list_tasks.ListTasksOutput {
+    pub fn listTasks(self: *Self, allocator: std.mem.Allocator, input: list_tasks.ListTasksInput, options: CallOptions) !list_tasks.ListTasksOutput {
         return list_tasks.execute(self, allocator, input, options);
     }
 
     /// Lists workers.
-    pub fn listWorkers(self: *Self, allocator: std.mem.Allocator, input: list_workers.ListWorkersInput, options: list_workers.Options) !list_workers.ListWorkersOutput {
+    pub fn listWorkers(self: *Self, allocator: std.mem.Allocator, input: list_workers.ListWorkersInput, options: CallOptions) !list_workers.ListWorkersOutput {
         return list_workers.execute(self, allocator, input, options);
     }
 
     /// Adds a metered product.
-    pub fn putMeteredProduct(self: *Self, allocator: std.mem.Allocator, input: put_metered_product.PutMeteredProductInput, options: put_metered_product.Options) !put_metered_product.PutMeteredProductOutput {
+    pub fn putMeteredProduct(self: *Self, allocator: std.mem.Allocator, input: put_metered_product.PutMeteredProductInput, options: CallOptions) !put_metered_product.PutMeteredProductOutput {
         return put_metered_product.execute(self, allocator, input, options);
     }
 
     /// Searches for jobs.
-    pub fn searchJobs(self: *Self, allocator: std.mem.Allocator, input: search_jobs.SearchJobsInput, options: search_jobs.Options) !search_jobs.SearchJobsOutput {
+    pub fn searchJobs(self: *Self, allocator: std.mem.Allocator, input: search_jobs.SearchJobsInput, options: CallOptions) !search_jobs.SearchJobsOutput {
         return search_jobs.execute(self, allocator, input, options);
     }
 
     /// Searches for steps.
-    pub fn searchSteps(self: *Self, allocator: std.mem.Allocator, input: search_steps.SearchStepsInput, options: search_steps.Options) !search_steps.SearchStepsOutput {
+    pub fn searchSteps(self: *Self, allocator: std.mem.Allocator, input: search_steps.SearchStepsInput, options: CallOptions) !search_steps.SearchStepsOutput {
         return search_steps.execute(self, allocator, input, options);
     }
 
     /// Searches for tasks.
-    pub fn searchTasks(self: *Self, allocator: std.mem.Allocator, input: search_tasks.SearchTasksInput, options: search_tasks.Options) !search_tasks.SearchTasksOutput {
+    pub fn searchTasks(self: *Self, allocator: std.mem.Allocator, input: search_tasks.SearchTasksInput, options: CallOptions) !search_tasks.SearchTasksOutput {
         return search_tasks.execute(self, allocator, input, options);
     }
 
     /// Searches for workers.
-    pub fn searchWorkers(self: *Self, allocator: std.mem.Allocator, input: search_workers.SearchWorkersInput, options: search_workers.Options) !search_workers.SearchWorkersOutput {
+    pub fn searchWorkers(self: *Self, allocator: std.mem.Allocator, input: search_workers.SearchWorkersInput, options: CallOptions) !search_workers.SearchWorkersOutput {
         return search_workers.execute(self, allocator, input, options);
     }
 
@@ -673,32 +674,32 @@ pub const Client = struct {
     /// `GetSessionsStatisticsAggregation` operation and check the `status` field to
     /// see if an aggregation is running. Statistics are available for 1 hour after
     /// you call the `StartSessionsStatisticsAggregation` operation.
-    pub fn startSessionsStatisticsAggregation(self: *Self, allocator: std.mem.Allocator, input: start_sessions_statistics_aggregation.StartSessionsStatisticsAggregationInput, options: start_sessions_statistics_aggregation.Options) !start_sessions_statistics_aggregation.StartSessionsStatisticsAggregationOutput {
+    pub fn startSessionsStatisticsAggregation(self: *Self, allocator: std.mem.Allocator, input: start_sessions_statistics_aggregation.StartSessionsStatisticsAggregationInput, options: CallOptions) !start_sessions_statistics_aggregation.StartSessionsStatisticsAggregationOutput {
         return start_sessions_statistics_aggregation.execute(self, allocator, input, options);
     }
 
     /// Tags a resource using the resource's ARN and desired tags.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag from a resource using the resource's ARN and tag to remove.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates a budget that sets spending thresholds for rendering activity.
-    pub fn updateBudget(self: *Self, allocator: std.mem.Allocator, input: update_budget.UpdateBudgetInput, options: update_budget.Options) !update_budget.UpdateBudgetOutput {
+    pub fn updateBudget(self: *Self, allocator: std.mem.Allocator, input: update_budget.UpdateBudgetInput, options: CallOptions) !update_budget.UpdateBudgetOutput {
         return update_budget.execute(self, allocator, input, options);
     }
 
     /// Updates a farm.
-    pub fn updateFarm(self: *Self, allocator: std.mem.Allocator, input: update_farm.UpdateFarmInput, options: update_farm.Options) !update_farm.UpdateFarmOutput {
+    pub fn updateFarm(self: *Self, allocator: std.mem.Allocator, input: update_farm.UpdateFarmInput, options: CallOptions) !update_farm.UpdateFarmOutput {
         return update_farm.execute(self, allocator, input, options);
     }
 
     /// Updates a fleet.
-    pub fn updateFleet(self: *Self, allocator: std.mem.Allocator, input: update_fleet.UpdateFleetInput, options: update_fleet.Options) !update_fleet.UpdateFleetOutput {
+    pub fn updateFleet(self: *Self, allocator: std.mem.Allocator, input: update_fleet.UpdateFleetInput, options: CallOptions) !update_fleet.UpdateFleetOutput {
         return update_fleet.execute(self, allocator, input, options);
     }
 
@@ -709,70 +710,70 @@ pub const Client = struct {
     ///
     /// An archived jobs and its steps and tasks are deleted after 120 days. The job
     /// can't be recovered.
-    pub fn updateJob(self: *Self, allocator: std.mem.Allocator, input: update_job.UpdateJobInput, options: update_job.Options) !update_job.UpdateJobOutput {
+    pub fn updateJob(self: *Self, allocator: std.mem.Allocator, input: update_job.UpdateJobInput, options: CallOptions) !update_job.UpdateJobOutput {
         return update_job.execute(self, allocator, input, options);
     }
 
     /// Updates the properties of the specified limit.
-    pub fn updateLimit(self: *Self, allocator: std.mem.Allocator, input: update_limit.UpdateLimitInput, options: update_limit.Options) !update_limit.UpdateLimitOutput {
+    pub fn updateLimit(self: *Self, allocator: std.mem.Allocator, input: update_limit.UpdateLimitInput, options: CallOptions) !update_limit.UpdateLimitOutput {
         return update_limit.execute(self, allocator, input, options);
     }
 
     /// Modifies the settings for a Deadline Cloud monitor. You can modify one or
     /// all of the settings when you call `UpdateMonitor`.
-    pub fn updateMonitor(self: *Self, allocator: std.mem.Allocator, input: update_monitor.UpdateMonitorInput, options: update_monitor.Options) !update_monitor.UpdateMonitorOutput {
+    pub fn updateMonitor(self: *Self, allocator: std.mem.Allocator, input: update_monitor.UpdateMonitorInput, options: CallOptions) !update_monitor.UpdateMonitorOutput {
         return update_monitor.execute(self, allocator, input, options);
     }
 
     /// Updates a queue.
-    pub fn updateQueue(self: *Self, allocator: std.mem.Allocator, input: update_queue.UpdateQueueInput, options: update_queue.Options) !update_queue.UpdateQueueOutput {
+    pub fn updateQueue(self: *Self, allocator: std.mem.Allocator, input: update_queue.UpdateQueueInput, options: CallOptions) !update_queue.UpdateQueueOutput {
         return update_queue.execute(self, allocator, input, options);
     }
 
     /// Updates the queue environment.
-    pub fn updateQueueEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_queue_environment.UpdateQueueEnvironmentInput, options: update_queue_environment.Options) !update_queue_environment.UpdateQueueEnvironmentOutput {
+    pub fn updateQueueEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_queue_environment.UpdateQueueEnvironmentInput, options: CallOptions) !update_queue_environment.UpdateQueueEnvironmentOutput {
         return update_queue_environment.execute(self, allocator, input, options);
     }
 
     /// Updates a queue-fleet association.
-    pub fn updateQueueFleetAssociation(self: *Self, allocator: std.mem.Allocator, input: update_queue_fleet_association.UpdateQueueFleetAssociationInput, options: update_queue_fleet_association.Options) !update_queue_fleet_association.UpdateQueueFleetAssociationOutput {
+    pub fn updateQueueFleetAssociation(self: *Self, allocator: std.mem.Allocator, input: update_queue_fleet_association.UpdateQueueFleetAssociationInput, options: CallOptions) !update_queue_fleet_association.UpdateQueueFleetAssociationOutput {
         return update_queue_fleet_association.execute(self, allocator, input, options);
     }
 
     /// Updates the status of the queue. If you set the status to one of the
     /// `STOP_LIMIT_USAGE*` values, there will be a delay before the status
     /// transitions to the `STOPPED` state.
-    pub fn updateQueueLimitAssociation(self: *Self, allocator: std.mem.Allocator, input: update_queue_limit_association.UpdateQueueLimitAssociationInput, options: update_queue_limit_association.Options) !update_queue_limit_association.UpdateQueueLimitAssociationOutput {
+    pub fn updateQueueLimitAssociation(self: *Self, allocator: std.mem.Allocator, input: update_queue_limit_association.UpdateQueueLimitAssociationInput, options: CallOptions) !update_queue_limit_association.UpdateQueueLimitAssociationOutput {
         return update_queue_limit_association.execute(self, allocator, input, options);
     }
 
     /// Updates a session.
-    pub fn updateSession(self: *Self, allocator: std.mem.Allocator, input: update_session.UpdateSessionInput, options: update_session.Options) !update_session.UpdateSessionOutput {
+    pub fn updateSession(self: *Self, allocator: std.mem.Allocator, input: update_session.UpdateSessionInput, options: CallOptions) !update_session.UpdateSessionOutput {
         return update_session.execute(self, allocator, input, options);
     }
 
     /// Updates a step.
-    pub fn updateStep(self: *Self, allocator: std.mem.Allocator, input: update_step.UpdateStepInput, options: update_step.Options) !update_step.UpdateStepOutput {
+    pub fn updateStep(self: *Self, allocator: std.mem.Allocator, input: update_step.UpdateStepInput, options: CallOptions) !update_step.UpdateStepOutput {
         return update_step.execute(self, allocator, input, options);
     }
 
     /// Updates a storage profile.
-    pub fn updateStorageProfile(self: *Self, allocator: std.mem.Allocator, input: update_storage_profile.UpdateStorageProfileInput, options: update_storage_profile.Options) !update_storage_profile.UpdateStorageProfileOutput {
+    pub fn updateStorageProfile(self: *Self, allocator: std.mem.Allocator, input: update_storage_profile.UpdateStorageProfileInput, options: CallOptions) !update_storage_profile.UpdateStorageProfileOutput {
         return update_storage_profile.execute(self, allocator, input, options);
     }
 
     /// Updates a task.
-    pub fn updateTask(self: *Self, allocator: std.mem.Allocator, input: update_task.UpdateTaskInput, options: update_task.Options) !update_task.UpdateTaskOutput {
+    pub fn updateTask(self: *Self, allocator: std.mem.Allocator, input: update_task.UpdateTaskInput, options: CallOptions) !update_task.UpdateTaskOutput {
         return update_task.execute(self, allocator, input, options);
     }
 
     /// Updates a worker.
-    pub fn updateWorker(self: *Self, allocator: std.mem.Allocator, input: update_worker.UpdateWorkerInput, options: update_worker.Options) !update_worker.UpdateWorkerOutput {
+    pub fn updateWorker(self: *Self, allocator: std.mem.Allocator, input: update_worker.UpdateWorkerInput, options: CallOptions) !update_worker.UpdateWorkerOutput {
         return update_worker.execute(self, allocator, input, options);
     }
 
     /// Updates the schedule for a worker.
-    pub fn updateWorkerSchedule(self: *Self, allocator: std.mem.Allocator, input: update_worker_schedule.UpdateWorkerScheduleInput, options: update_worker_schedule.Options) !update_worker_schedule.UpdateWorkerScheduleOutput {
+    pub fn updateWorkerSchedule(self: *Self, allocator: std.mem.Allocator, input: update_worker_schedule.UpdateWorkerScheduleInput, options: CallOptions) !update_worker_schedule.UpdateWorkerScheduleOutput {
         return update_worker_schedule.execute(self, allocator, input, options);
     }
 

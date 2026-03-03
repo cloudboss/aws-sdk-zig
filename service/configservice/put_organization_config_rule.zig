@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const OrganizationCustomPolicyRuleMetadata = @import("organization_custom_policy_rule_metadata.zig").OrganizationCustomPolicyRuleMetadata;
 const OrganizationCustomRuleMetadata = @import("organization_custom_rule_metadata.zig").OrganizationCustomRuleMetadata;
@@ -59,11 +60,7 @@ pub const PutOrganizationConfigRuleOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutOrganizationConfigRuleInput, options: Options) !PutOrganizationConfigRuleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutOrganizationConfigRuleInput, options: CallOptions) !PutOrganizationConfigRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConfiguredTableAssociation = @import("configured_table_association.zig").ConfiguredTableAssociation;
 
@@ -38,11 +39,7 @@ pub const UpdateConfiguredTableAssociationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateConfiguredTableAssociationInput, options: Options) !UpdateConfiguredTableAssociationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateConfiguredTableAssociationInput, options: CallOptions) !UpdateConfiguredTableAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

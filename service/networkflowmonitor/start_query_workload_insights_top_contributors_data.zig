@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DestinationCategory = @import("destination_category.zig").DestinationCategory;
 const WorkloadInsightsMetric = @import("workload_insights_metric.zig").WorkloadInsightsMetric;
@@ -60,11 +61,7 @@ pub const StartQueryWorkloadInsightsTopContributorsDataOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartQueryWorkloadInsightsTopContributorsDataInput, options: Options) !StartQueryWorkloadInsightsTopContributorsDataOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartQueryWorkloadInsightsTopContributorsDataInput, options: CallOptions) !StartQueryWorkloadInsightsTopContributorsDataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

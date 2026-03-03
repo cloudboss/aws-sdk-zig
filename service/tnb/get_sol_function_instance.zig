@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GetSolVnfInfo = @import("get_sol_vnf_info.zig").GetSolVnfInfo;
 const VnfInstantiationState = @import("vnf_instantiation_state.zig").VnfInstantiationState;
@@ -69,11 +70,7 @@ pub const GetSolFunctionInstanceOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSolFunctionInstanceInput, options: Options) !GetSolFunctionInstanceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSolFunctionInstanceInput, options: CallOptions) !GetSolFunctionInstanceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

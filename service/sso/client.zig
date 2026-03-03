@@ -5,6 +5,7 @@ const get_role_credentials = @import("get_role_credentials.zig");
 const list_account_roles = @import("list_account_roles.zig");
 const list_accounts = @import("list_accounts.zig");
 const logout_ = @import("logout.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -38,12 +39,12 @@ pub const Client = struct {
     /// Returns the STS short-term credentials for a given role name that is
     /// assigned to the
     /// user.
-    pub fn getRoleCredentials(self: *Self, allocator: std.mem.Allocator, input: get_role_credentials.GetRoleCredentialsInput, options: get_role_credentials.Options) !get_role_credentials.GetRoleCredentialsOutput {
+    pub fn getRoleCredentials(self: *Self, allocator: std.mem.Allocator, input: get_role_credentials.GetRoleCredentialsInput, options: CallOptions) !get_role_credentials.GetRoleCredentialsOutput {
         return get_role_credentials.execute(self, allocator, input, options);
     }
 
     /// Lists all roles that are assigned to the user for a given AWS account.
-    pub fn listAccountRoles(self: *Self, allocator: std.mem.Allocator, input: list_account_roles.ListAccountRolesInput, options: list_account_roles.Options) !list_account_roles.ListAccountRolesOutput {
+    pub fn listAccountRoles(self: *Self, allocator: std.mem.Allocator, input: list_account_roles.ListAccountRolesInput, options: CallOptions) !list_account_roles.ListAccountRolesOutput {
         return list_account_roles.execute(self, allocator, input, options);
     }
 
@@ -52,7 +53,7 @@ pub const Client = struct {
     /// administrator of the account. For more information, see [Assign User
     /// Access](https://docs.aws.amazon.com/singlesignon/latest/userguide/useraccess.html#assignusers) in the *IAM Identity Center User Guide*. This operation
     /// returns a paginated response.
-    pub fn listAccounts(self: *Self, allocator: std.mem.Allocator, input: list_accounts.ListAccountsInput, options: list_accounts.Options) !list_accounts.ListAccountsOutput {
+    pub fn listAccounts(self: *Self, allocator: std.mem.Allocator, input: list_accounts.ListAccountsInput, options: CallOptions) !list_accounts.ListAccountsOutput {
         return list_accounts.execute(self, allocator, input, options);
     }
 
@@ -77,7 +78,7 @@ pub const Client = struct {
     /// For more information, see [User
     /// authentications](https://docs.aws.amazon.com/singlesignon/latest/userguide/authconcept.html) in the *IAM Identity Center User
     /// Guide*.
-    pub fn logout(self: *Self, allocator: std.mem.Allocator, input: logout_.LogoutInput, options: logout_.Options) !logout_.LogoutOutput {
+    pub fn logout(self: *Self, allocator: std.mem.Allocator, input: logout_.LogoutInput, options: CallOptions) !logout_.LogoutOutput {
         return logout_.execute(self, allocator, input, options);
     }
 

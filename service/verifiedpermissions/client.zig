@@ -31,6 +31,7 @@ const update_identity_source = @import("update_identity_source.zig");
 const update_policy = @import("update_policy.zig");
 const update_policy_store = @import("update_policy_store.zig");
 const update_policy_template = @import("update_policy_template.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -66,7 +67,7 @@ pub const Client = struct {
     /// The `BatchGetPolicy` operation doesn't have its own IAM permission. To
     /// authorize this operation for Amazon Web Services principals, include the
     /// permission `verifiedpermissions:GetPolicy` in their IAM policies.
-    pub fn batchGetPolicy(self: *Self, allocator: std.mem.Allocator, input: batch_get_policy.BatchGetPolicyInput, options: batch_get_policy.Options) !batch_get_policy.BatchGetPolicyOutput {
+    pub fn batchGetPolicy(self: *Self, allocator: std.mem.Allocator, input: batch_get_policy.BatchGetPolicyInput, options: CallOptions) !batch_get_policy.BatchGetPolicyOutput {
         return batch_get_policy.execute(self, allocator, input, options);
     }
 
@@ -91,7 +92,7 @@ pub const Client = struct {
     /// The `BatchIsAuthorized` operation doesn't have its own IAM permission. To
     /// authorize this operation for Amazon Web Services principals, include the
     /// permission `verifiedpermissions:IsAuthorized` in their IAM policies.
-    pub fn batchIsAuthorized(self: *Self, allocator: std.mem.Allocator, input: batch_is_authorized.BatchIsAuthorizedInput, options: batch_is_authorized.Options) !batch_is_authorized.BatchIsAuthorizedOutput {
+    pub fn batchIsAuthorized(self: *Self, allocator: std.mem.Allocator, input: batch_is_authorized.BatchIsAuthorizedInput, options: CallOptions) !batch_is_authorized.BatchIsAuthorizedOutput {
         return batch_is_authorized.execute(self, allocator, input, options);
     }
 
@@ -115,7 +116,7 @@ pub const Client = struct {
     /// permission. To authorize this operation for Amazon Web Services principals,
     /// include the permission `verifiedpermissions:IsAuthorizedWithToken` in their
     /// IAM policies.
-    pub fn batchIsAuthorizedWithToken(self: *Self, allocator: std.mem.Allocator, input: batch_is_authorized_with_token.BatchIsAuthorizedWithTokenInput, options: batch_is_authorized_with_token.Options) !batch_is_authorized_with_token.BatchIsAuthorizedWithTokenOutput {
+    pub fn batchIsAuthorizedWithToken(self: *Self, allocator: std.mem.Allocator, input: batch_is_authorized_with_token.BatchIsAuthorizedWithTokenInput, options: CallOptions) !batch_is_authorized_with_token.BatchIsAuthorizedWithTokenOutput {
         return batch_is_authorized_with_token.execute(self, allocator, input, options);
     }
 
@@ -144,7 +145,7 @@ pub const Client = struct {
     /// consistent](https://wikipedia.org/wiki/Eventual_consistency) *. It can take
     /// a few seconds for a new or changed element to propagate through the service
     /// and be visible in the results of other Verified Permissions operations.
-    pub fn createIdentitySource(self: *Self, allocator: std.mem.Allocator, input: create_identity_source.CreateIdentitySourceInput, options: create_identity_source.Options) !create_identity_source.CreateIdentitySourceOutput {
+    pub fn createIdentitySource(self: *Self, allocator: std.mem.Allocator, input: create_identity_source.CreateIdentitySourceInput, options: CallOptions) !create_identity_source.CreateIdentitySourceOutput {
         return create_identity_source.execute(self, allocator, input, options);
     }
 
@@ -167,7 +168,7 @@ pub const Client = struct {
     /// consistent](https://wikipedia.org/wiki/Eventual_consistency) *. It can take
     /// a few seconds for a new or changed element to propagate through the service
     /// and be visible in the results of other Verified Permissions operations.
-    pub fn createPolicy(self: *Self, allocator: std.mem.Allocator, input: create_policy.CreatePolicyInput, options: create_policy.Options) !create_policy.CreatePolicyOutput {
+    pub fn createPolicy(self: *Self, allocator: std.mem.Allocator, input: create_policy.CreatePolicyInput, options: CallOptions) !create_policy.CreatePolicyOutput {
         return create_policy.execute(self, allocator, input, options);
     }
 
@@ -181,7 +182,7 @@ pub const Client = struct {
     /// consistent](https://wikipedia.org/wiki/Eventual_consistency) *. It can take
     /// a few seconds for a new or changed element to propagate through the service
     /// and be visible in the results of other Verified Permissions operations.
-    pub fn createPolicyStore(self: *Self, allocator: std.mem.Allocator, input: create_policy_store.CreatePolicyStoreInput, options: create_policy_store.Options) !create_policy_store.CreatePolicyStoreOutput {
+    pub fn createPolicyStore(self: *Self, allocator: std.mem.Allocator, input: create_policy_store.CreatePolicyStoreInput, options: CallOptions) !create_policy_store.CreatePolicyStoreOutput {
         return create_policy_store.execute(self, allocator, input, options);
     }
 
@@ -197,7 +198,7 @@ pub const Client = struct {
     /// consistent](https://wikipedia.org/wiki/Eventual_consistency) *. It can take
     /// a few seconds for a new or changed element to propagate through the service
     /// and be visible in the results of other Verified Permissions operations.
-    pub fn createPolicyTemplate(self: *Self, allocator: std.mem.Allocator, input: create_policy_template.CreatePolicyTemplateInput, options: create_policy_template.Options) !create_policy_template.CreatePolicyTemplateOutput {
+    pub fn createPolicyTemplate(self: *Self, allocator: std.mem.Allocator, input: create_policy_template.CreatePolicyTemplateInput, options: CallOptions) !create_policy_template.CreatePolicyTemplateOutput {
         return create_policy_template.execute(self, allocator, input, options);
     }
 
@@ -206,7 +207,7 @@ pub const Client = struct {
     /// use tokens for identities from that identity source to represent principals
     /// in authorization queries made using
     /// [IsAuthorizedWithToken](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html). operations.
-    pub fn deleteIdentitySource(self: *Self, allocator: std.mem.Allocator, input: delete_identity_source.DeleteIdentitySourceInput, options: delete_identity_source.Options) !delete_identity_source.DeleteIdentitySourceOutput {
+    pub fn deleteIdentitySource(self: *Self, allocator: std.mem.Allocator, input: delete_identity_source.DeleteIdentitySourceInput, options: CallOptions) !delete_identity_source.DeleteIdentitySourceOutput {
         return delete_identity_source.execute(self, allocator, input, options);
     }
 
@@ -214,7 +215,7 @@ pub const Client = struct {
     ///
     /// This operation is idempotent; if you specify a policy that doesn't exist,
     /// the request response returns a successful `HTTP 200` status code.
-    pub fn deletePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_policy.DeletePolicyInput, options: delete_policy.Options) !delete_policy.DeletePolicyOutput {
+    pub fn deletePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_policy.DeletePolicyInput, options: CallOptions) !delete_policy.DeletePolicyOutput {
         return delete_policy.execute(self, allocator, input, options);
     }
 
@@ -223,7 +224,7 @@ pub const Client = struct {
     /// This operation is idempotent. If you specify a policy store that does not
     /// exist, the request response will still return a successful HTTP 200 status
     /// code.
-    pub fn deletePolicyStore(self: *Self, allocator: std.mem.Allocator, input: delete_policy_store.DeletePolicyStoreInput, options: delete_policy_store.Options) !delete_policy_store.DeletePolicyStoreOutput {
+    pub fn deletePolicyStore(self: *Self, allocator: std.mem.Allocator, input: delete_policy_store.DeletePolicyStoreInput, options: CallOptions) !delete_policy_store.DeletePolicyStoreOutput {
         return delete_policy_store.execute(self, allocator, input, options);
     }
 
@@ -232,33 +233,33 @@ pub const Client = struct {
     /// This operation also deletes any policies that were created from the
     /// specified policy template. Those policies are immediately removed from all
     /// future API responses, and are asynchronously deleted from the policy store.
-    pub fn deletePolicyTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_policy_template.DeletePolicyTemplateInput, options: delete_policy_template.Options) !delete_policy_template.DeletePolicyTemplateOutput {
+    pub fn deletePolicyTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_policy_template.DeletePolicyTemplateInput, options: CallOptions) !delete_policy_template.DeletePolicyTemplateOutput {
         return delete_policy_template.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details about the specified identity source.
-    pub fn getIdentitySource(self: *Self, allocator: std.mem.Allocator, input: get_identity_source.GetIdentitySourceInput, options: get_identity_source.Options) !get_identity_source.GetIdentitySourceOutput {
+    pub fn getIdentitySource(self: *Self, allocator: std.mem.Allocator, input: get_identity_source.GetIdentitySourceInput, options: CallOptions) !get_identity_source.GetIdentitySourceOutput {
         return get_identity_source.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the specified policy.
-    pub fn getPolicy(self: *Self, allocator: std.mem.Allocator, input: get_policy.GetPolicyInput, options: get_policy.Options) !get_policy.GetPolicyOutput {
+    pub fn getPolicy(self: *Self, allocator: std.mem.Allocator, input: get_policy.GetPolicyInput, options: CallOptions) !get_policy.GetPolicyOutput {
         return get_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves details about a policy store.
-    pub fn getPolicyStore(self: *Self, allocator: std.mem.Allocator, input: get_policy_store.GetPolicyStoreInput, options: get_policy_store.Options) !get_policy_store.GetPolicyStoreOutput {
+    pub fn getPolicyStore(self: *Self, allocator: std.mem.Allocator, input: get_policy_store.GetPolicyStoreInput, options: CallOptions) !get_policy_store.GetPolicyStoreOutput {
         return get_policy_store.execute(self, allocator, input, options);
     }
 
     /// Retrieve the details for the specified policy template in the specified
     /// policy store.
-    pub fn getPolicyTemplate(self: *Self, allocator: std.mem.Allocator, input: get_policy_template.GetPolicyTemplateInput, options: get_policy_template.Options) !get_policy_template.GetPolicyTemplateOutput {
+    pub fn getPolicyTemplate(self: *Self, allocator: std.mem.Allocator, input: get_policy_template.GetPolicyTemplateInput, options: CallOptions) !get_policy_template.GetPolicyTemplateOutput {
         return get_policy_template.execute(self, allocator, input, options);
     }
 
     /// Retrieve the details for the specified schema in the specified policy store.
-    pub fn getSchema(self: *Self, allocator: std.mem.Allocator, input: get_schema.GetSchemaInput, options: get_schema.Options) !get_schema.GetSchemaOutput {
+    pub fn getSchema(self: *Self, allocator: std.mem.Allocator, input: get_schema.GetSchemaInput, options: CallOptions) !get_schema.GetSchemaOutput {
         return get_schema.execute(self, allocator, input, options);
     }
 
@@ -268,7 +269,7 @@ pub const Client = struct {
     /// is evaluated against all matching policies in the specified policy store.
     /// The result of the decision is either `Allow` or `Deny`, along with a list of
     /// the policies that resulted in the decision.
-    pub fn isAuthorized(self: *Self, allocator: std.mem.Allocator, input: is_authorized.IsAuthorizedInput, options: is_authorized.Options) !is_authorized.IsAuthorizedOutput {
+    pub fn isAuthorized(self: *Self, allocator: std.mem.Allocator, input: is_authorized.IsAuthorizedInput, options: CallOptions) !is_authorized.IsAuthorizedOutput {
         return is_authorized.execute(self, allocator, input, options);
     }
 
@@ -288,37 +289,37 @@ pub const Client = struct {
     /// Tokens from an identity source user continue to be usable until they expire.
     /// Token revocation and resource deletion have no effect on the validity of a
     /// token in your policy store
-    pub fn isAuthorizedWithToken(self: *Self, allocator: std.mem.Allocator, input: is_authorized_with_token.IsAuthorizedWithTokenInput, options: is_authorized_with_token.Options) !is_authorized_with_token.IsAuthorizedWithTokenOutput {
+    pub fn isAuthorizedWithToken(self: *Self, allocator: std.mem.Allocator, input: is_authorized_with_token.IsAuthorizedWithTokenInput, options: CallOptions) !is_authorized_with_token.IsAuthorizedWithTokenOutput {
         return is_authorized_with_token.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of all of the identity sources defined in the
     /// specified policy store.
-    pub fn listIdentitySources(self: *Self, allocator: std.mem.Allocator, input: list_identity_sources.ListIdentitySourcesInput, options: list_identity_sources.Options) !list_identity_sources.ListIdentitySourcesOutput {
+    pub fn listIdentitySources(self: *Self, allocator: std.mem.Allocator, input: list_identity_sources.ListIdentitySourcesInput, options: CallOptions) !list_identity_sources.ListIdentitySourcesOutput {
         return list_identity_sources.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of all policies stored in the specified policy
     /// store.
-    pub fn listPolicies(self: *Self, allocator: std.mem.Allocator, input: list_policies.ListPoliciesInput, options: list_policies.Options) !list_policies.ListPoliciesOutput {
+    pub fn listPolicies(self: *Self, allocator: std.mem.Allocator, input: list_policies.ListPoliciesInput, options: CallOptions) !list_policies.ListPoliciesOutput {
         return list_policies.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of all policy stores in the calling Amazon Web
     /// Services account.
-    pub fn listPolicyStores(self: *Self, allocator: std.mem.Allocator, input: list_policy_stores.ListPolicyStoresInput, options: list_policy_stores.Options) !list_policy_stores.ListPolicyStoresOutput {
+    pub fn listPolicyStores(self: *Self, allocator: std.mem.Allocator, input: list_policy_stores.ListPolicyStoresInput, options: CallOptions) !list_policy_stores.ListPolicyStoresOutput {
         return list_policy_stores.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of all policy templates in the specified policy
     /// store.
-    pub fn listPolicyTemplates(self: *Self, allocator: std.mem.Allocator, input: list_policy_templates.ListPolicyTemplatesInput, options: list_policy_templates.Options) !list_policy_templates.ListPolicyTemplatesOutput {
+    pub fn listPolicyTemplates(self: *Self, allocator: std.mem.Allocator, input: list_policy_templates.ListPolicyTemplatesInput, options: CallOptions) !list_policy_templates.ListPolicyTemplatesOutput {
         return list_policy_templates.execute(self, allocator, input, options);
     }
 
     /// Returns the tags associated with the specified Amazon Verified Permissions
     /// resource. In Verified Permissions, policy stores can be tagged.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -333,7 +334,7 @@ pub const Client = struct {
     /// consistent](https://wikipedia.org/wiki/Eventual_consistency) *. It can take
     /// a few seconds for a new or changed element to propagate through the service
     /// and be visible in the results of other Verified Permissions operations.
-    pub fn putSchema(self: *Self, allocator: std.mem.Allocator, input: put_schema.PutSchemaInput, options: put_schema.Options) !put_schema.PutSchemaOutput {
+    pub fn putSchema(self: *Self, allocator: std.mem.Allocator, input: put_schema.PutSchemaInput, options: CallOptions) !put_schema.PutSchemaOutput {
         return put_schema.execute(self, allocator, input, options);
     }
 
@@ -353,13 +354,13 @@ pub const Client = struct {
     /// the previous value for that tag.
     ///
     /// You can associate as many as 50 tags with a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified Amazon Verified Permissions
     /// resource. In Verified Permissions, policy stores can be tagged.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -371,7 +372,7 @@ pub const Client = struct {
     /// consistent](https://wikipedia.org/wiki/Eventual_consistency) *. It can take
     /// a few seconds for a new or changed element to propagate through the service
     /// and be visible in the results of other Verified Permissions operations.
-    pub fn updateIdentitySource(self: *Self, allocator: std.mem.Allocator, input: update_identity_source.UpdateIdentitySourceInput, options: update_identity_source.Options) !update_identity_source.UpdateIdentitySourceOutput {
+    pub fn updateIdentitySource(self: *Self, allocator: std.mem.Allocator, input: update_identity_source.UpdateIdentitySourceInput, options: CallOptions) !update_identity_source.UpdateIdentitySourceOutput {
         return update_identity_source.execute(self, allocator, input, options);
     }
 
@@ -402,7 +403,7 @@ pub const Client = struct {
     /// consistent](https://wikipedia.org/wiki/Eventual_consistency) *. It can take
     /// a few seconds for a new or changed element to propagate through the service
     /// and be visible in the results of other Verified Permissions operations.
-    pub fn updatePolicy(self: *Self, allocator: std.mem.Allocator, input: update_policy.UpdatePolicyInput, options: update_policy.Options) !update_policy.UpdatePolicyOutput {
+    pub fn updatePolicy(self: *Self, allocator: std.mem.Allocator, input: update_policy.UpdatePolicyInput, options: CallOptions) !update_policy.UpdatePolicyOutput {
         return update_policy.execute(self, allocator, input, options);
     }
 
@@ -412,7 +413,7 @@ pub const Client = struct {
     /// consistent](https://wikipedia.org/wiki/Eventual_consistency) *. It can take
     /// a few seconds for a new or changed element to propagate through the service
     /// and be visible in the results of other Verified Permissions operations.
-    pub fn updatePolicyStore(self: *Self, allocator: std.mem.Allocator, input: update_policy_store.UpdatePolicyStoreInput, options: update_policy_store.Options) !update_policy_store.UpdatePolicyStoreOutput {
+    pub fn updatePolicyStore(self: *Self, allocator: std.mem.Allocator, input: update_policy_store.UpdatePolicyStoreInput, options: CallOptions) !update_policy_store.UpdatePolicyStoreOutput {
         return update_policy_store.execute(self, allocator, input, options);
     }
 
@@ -428,7 +429,7 @@ pub const Client = struct {
     /// consistent](https://wikipedia.org/wiki/Eventual_consistency) *. It can take
     /// a few seconds for a new or changed element to propagate through the service
     /// and be visible in the results of other Verified Permissions operations.
-    pub fn updatePolicyTemplate(self: *Self, allocator: std.mem.Allocator, input: update_policy_template.UpdatePolicyTemplateInput, options: update_policy_template.Options) !update_policy_template.UpdatePolicyTemplateOutput {
+    pub fn updatePolicyTemplate(self: *Self, allocator: std.mem.Allocator, input: update_policy_template.UpdatePolicyTemplateInput, options: CallOptions) !update_policy_template.UpdatePolicyTemplateOutput {
         return update_policy_template.execute(self, allocator, input, options);
     }
 

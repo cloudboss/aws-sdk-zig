@@ -2,10 +2,11 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReportFormatType = @import("report_format_type.zig").ReportFormatType;
 
-const GetCredentialReportInput = struct {};
+pub const GetCredentialReportInput = struct {};
 
 pub const GetCredentialReportOutput = struct {
     /// Contains the credential report. The report is Base64-encoded.
@@ -19,11 +20,7 @@ pub const GetCredentialReportOutput = struct {
     report_format: ?ReportFormatType = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCredentialReportInput, options: Options) !GetCredentialReportOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCredentialReportInput, options: CallOptions) !GetCredentialReportOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

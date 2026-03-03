@@ -64,6 +64,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_organizational_unit = @import("update_organizational_unit.zig");
 const update_policy = @import("update_policy.zig");
 const update_responsibility_transfer = @import("update_responsibility_transfer.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -119,7 +120,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Responding to
     /// invitations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_accept-decline-invite.html) and [Enabling all features](https://docs.aws.amazon.com/organizations/latest/userguide/manage-begin-all-features-standard-migration.html#manage-approve-all-features-invite) in the *Organizations User Guide*.
-    pub fn acceptHandshake(self: *Self, allocator: std.mem.Allocator, input: accept_handshake.AcceptHandshakeInput, options: accept_handshake.Options) !accept_handshake.AcceptHandshakeOutput {
+    pub fn acceptHandshake(self: *Self, allocator: std.mem.Allocator, input: accept_handshake.AcceptHandshakeInput, options: CallOptions) !accept_handshake.AcceptHandshakeOutput {
         return accept_handshake.execute(self, allocator, input, options);
     }
 
@@ -169,7 +170,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn attachPolicy(self: *Self, allocator: std.mem.Allocator, input: attach_policy.AttachPolicyInput, options: attach_policy.Options) !attach_policy.AttachPolicyOutput {
+    pub fn attachPolicy(self: *Self, allocator: std.mem.Allocator, input: attach_policy.AttachPolicyInput, options: CallOptions) !attach_policy.AttachPolicyOutput {
         return attach_policy.execute(self, allocator, input, options);
     }
 
@@ -183,7 +184,7 @@ pub const Client = struct {
     /// You can view canceled handshakes in API responses for 30 days before they
     /// are
     /// deleted.
-    pub fn cancelHandshake(self: *Self, allocator: std.mem.Allocator, input: cancel_handshake.CancelHandshakeInput, options: cancel_handshake.Options) !cancel_handshake.CancelHandshakeOutput {
+    pub fn cancelHandshake(self: *Self, allocator: std.mem.Allocator, input: cancel_handshake.CancelHandshakeInput, options: CallOptions) !cancel_handshake.CancelHandshakeOutput {
         return cancel_handshake.execute(self, allocator, input, options);
     }
 
@@ -242,7 +243,7 @@ pub const Client = struct {
     /// Closing an Amazon Web Services GovCloud (US)
     /// account](https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html) in the *
     /// Amazon Web Services GovCloud User Guide*.
-    pub fn closeAccount(self: *Self, allocator: std.mem.Allocator, input: close_account.CloseAccountInput, options: close_account.Options) !close_account.CloseAccountOutput {
+    pub fn closeAccount(self: *Self, allocator: std.mem.Allocator, input: close_account.CloseAccountInput, options: CallOptions) !close_account.CloseAccountOutput {
         return close_account.execute(self, allocator, input, options);
     }
 
@@ -333,7 +334,7 @@ pub const Client = struct {
     /// [Granting access to
     /// your billing information and
     /// tools](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html#grantaccess).
-    pub fn createAccount(self: *Self, allocator: std.mem.Allocator, input: create_account.CreateAccountInput, options: create_account.Options) !create_account.CreateAccountOutput {
+    pub fn createAccount(self: *Self, allocator: std.mem.Allocator, input: create_account.CreateAccountInput, options: CallOptions) !create_account.CreateAccountOutput {
         return create_account.execute(self, allocator, input, options);
     }
 
@@ -484,7 +485,7 @@ pub const Client = struct {
     /// [Granting
     /// access to your billing information and
     /// tools](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html).
-    pub fn createGovCloudAccount(self: *Self, allocator: std.mem.Allocator, input: create_gov_cloud_account.CreateGovCloudAccountInput, options: create_gov_cloud_account.Options) !create_gov_cloud_account.CreateGovCloudAccountOutput {
+    pub fn createGovCloudAccount(self: *Self, allocator: std.mem.Allocator, input: create_gov_cloud_account.CreateGovCloudAccountInput, options: CallOptions) !create_gov_cloud_account.CreateGovCloudAccountOutput {
         return create_gov_cloud_account.execute(self, allocator, input, options);
     }
 
@@ -508,7 +509,7 @@ pub const Client = struct {
     /// `FeatureSet`
     /// parameter to `CONSOLIDATED_BILLING`, no policy types are enabled by default
     /// and you can't use organization policies.
-    pub fn createOrganization(self: *Self, allocator: std.mem.Allocator, input: create_organization.CreateOrganizationInput, options: create_organization.Options) !create_organization.CreateOrganizationOutput {
+    pub fn createOrganization(self: *Self, allocator: std.mem.Allocator, input: create_organization.CreateOrganizationInput, options: CallOptions) !create_organization.CreateOrganizationOutput {
         return create_organization.execute(self, allocator, input, options);
     }
 
@@ -530,7 +531,7 @@ pub const Client = struct {
     /// `organizations:TagResource` permission.
     ///
     /// You can only call this operation from the management account.
-    pub fn createOrganizationalUnit(self: *Self, allocator: std.mem.Allocator, input: create_organizational_unit.CreateOrganizationalUnitInput, options: create_organizational_unit.Options) !create_organizational_unit.CreateOrganizationalUnitOutput {
+    pub fn createOrganizationalUnit(self: *Self, allocator: std.mem.Allocator, input: create_organizational_unit.CreateOrganizationalUnitInput, options: CallOptions) !create_organizational_unit.CreateOrganizationalUnitOutput {
         return create_organizational_unit.execute(self, allocator, input, options);
     }
 
@@ -547,7 +548,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn createPolicy(self: *Self, allocator: std.mem.Allocator, input: create_policy.CreatePolicyInput, options: create_policy.Options) !create_policy.CreatePolicyOutput {
+    pub fn createPolicy(self: *Self, allocator: std.mem.Allocator, input: create_policy.CreatePolicyInput, options: CallOptions) !create_policy.CreatePolicyOutput {
         return create_policy.execute(self, allocator, input, options);
     }
 
@@ -560,7 +561,7 @@ pub const Client = struct {
     /// You can view canceled handshakes in API responses for 30 days before they
     /// are
     /// deleted.
-    pub fn declineHandshake(self: *Self, allocator: std.mem.Allocator, input: decline_handshake.DeclineHandshakeInput, options: decline_handshake.Options) !decline_handshake.DeclineHandshakeOutput {
+    pub fn declineHandshake(self: *Self, allocator: std.mem.Allocator, input: decline_handshake.DeclineHandshakeInput, options: CallOptions) !decline_handshake.DeclineHandshakeOutput {
         return decline_handshake.execute(self, allocator, input, options);
     }
 
@@ -568,7 +569,7 @@ pub const Client = struct {
     /// credentials
     /// from the management account. The organization must be empty of member
     /// accounts.
-    pub fn deleteOrganization(self: *Self, allocator: std.mem.Allocator, input: delete_organization.DeleteOrganizationInput, options: delete_organization.Options) !delete_organization.DeleteOrganizationOutput {
+    pub fn deleteOrganization(self: *Self, allocator: std.mem.Allocator, input: delete_organization.DeleteOrganizationInput, options: CallOptions) !delete_organization.DeleteOrganizationOutput {
         return delete_organization.execute(self, allocator, input, options);
     }
 
@@ -577,7 +578,7 @@ pub const Client = struct {
     /// all accounts and child OUs from the OU that you want to delete.
     ///
     /// You can only call this operation from the management account.
-    pub fn deleteOrganizationalUnit(self: *Self, allocator: std.mem.Allocator, input: delete_organizational_unit.DeleteOrganizationalUnitInput, options: delete_organizational_unit.Options) !delete_organizational_unit.DeleteOrganizationalUnitOutput {
+    pub fn deleteOrganizationalUnit(self: *Self, allocator: std.mem.Allocator, input: delete_organizational_unit.DeleteOrganizationalUnitInput, options: CallOptions) !delete_organizational_unit.DeleteOrganizationalUnitOutput {
         return delete_organizational_unit.execute(self, allocator, input, options);
     }
 
@@ -588,14 +589,14 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn deletePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_policy.DeletePolicyInput, options: delete_policy.Options) !delete_policy.DeletePolicyOutput {
+    pub fn deletePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_policy.DeletePolicyInput, options: CallOptions) !delete_policy.DeletePolicyOutput {
         return delete_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes the resource policy from your organization.
     ///
     /// You can only call this operation from the management account.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -619,7 +620,7 @@ pub const Client = struct {
     /// Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html) in the *Organizations User Guide.*
     ///
     /// You can only call this operation from the management account.
-    pub fn deregisterDelegatedAdministrator(self: *Self, allocator: std.mem.Allocator, input: deregister_delegated_administrator.DeregisterDelegatedAdministratorInput, options: deregister_delegated_administrator.Options) !deregister_delegated_administrator.DeregisterDelegatedAdministratorOutput {
+    pub fn deregisterDelegatedAdministrator(self: *Self, allocator: std.mem.Allocator, input: deregister_delegated_administrator.DeregisterDelegatedAdministratorInput, options: CallOptions) !deregister_delegated_administrator.DeregisterDelegatedAdministratorOutput {
         return deregister_delegated_administrator.execute(self, allocator, input, options);
     }
 
@@ -627,7 +628,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn describeAccount(self: *Self, allocator: std.mem.Allocator, input: describe_account.DescribeAccountInput, options: describe_account.Options) !describe_account.DescribeAccountOutput {
+    pub fn describeAccount(self: *Self, allocator: std.mem.Allocator, input: describe_account.DescribeAccountInput, options: CallOptions) !describe_account.DescribeAccountOutput {
         return describe_account.execute(self, allocator, input, options);
     }
 
@@ -636,7 +637,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn describeCreateAccountStatus(self: *Self, allocator: std.mem.Allocator, input: describe_create_account_status.DescribeCreateAccountStatusInput, options: describe_create_account_status.Options) !describe_create_account_status.DescribeCreateAccountStatusOutput {
+    pub fn describeCreateAccountStatus(self: *Self, allocator: std.mem.Allocator, input: describe_create_account_status.DescribeCreateAccountStatusInput, options: CallOptions) !describe_create_account_status.DescribeCreateAccountStatusOutput {
         return describe_create_account_status.execute(self, allocator, input, options);
     }
 
@@ -659,7 +660,7 @@ pub const Client = struct {
     /// *Organizations User Guide*.
     ///
     /// You can call this operation from any account in a organization.
-    pub fn describeEffectivePolicy(self: *Self, allocator: std.mem.Allocator, input: describe_effective_policy.DescribeEffectivePolicyInput, options: describe_effective_policy.Options) !describe_effective_policy.DescribeEffectivePolicyOutput {
+    pub fn describeEffectivePolicy(self: *Self, allocator: std.mem.Allocator, input: describe_effective_policy.DescribeEffectivePolicyInput, options: CallOptions) !describe_effective_policy.DescribeEffectivePolicyOutput {
         return describe_effective_policy.execute(self, allocator, input, options);
     }
 
@@ -671,7 +672,7 @@ pub const Client = struct {
     /// handshakes in API Responses for 30 days before they are deleted.
     ///
     /// You can call this operation from any account in a organization.
-    pub fn describeHandshake(self: *Self, allocator: std.mem.Allocator, input: describe_handshake.DescribeHandshakeInput, options: describe_handshake.Options) !describe_handshake.DescribeHandshakeOutput {
+    pub fn describeHandshake(self: *Self, allocator: std.mem.Allocator, input: describe_handshake.DescribeHandshakeInput, options: CallOptions) !describe_handshake.DescribeHandshakeOutput {
         return describe_handshake.execute(self, allocator, input, options);
     }
 
@@ -685,7 +686,7 @@ pub const Client = struct {
     /// it separately at the root level with DisablePolicyType. Use ListRoots to see
     /// the status of policy types for a specified
     /// root.
-    pub fn describeOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_organization.DescribeOrganizationInput, options: describe_organization.Options) !describe_organization.DescribeOrganizationOutput {
+    pub fn describeOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_organization.DescribeOrganizationInput, options: CallOptions) !describe_organization.DescribeOrganizationOutput {
         return describe_organization.execute(self, allocator, input, options);
     }
 
@@ -693,7 +694,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn describeOrganizationalUnit(self: *Self, allocator: std.mem.Allocator, input: describe_organizational_unit.DescribeOrganizationalUnitInput, options: describe_organizational_unit.Options) !describe_organizational_unit.DescribeOrganizationalUnitOutput {
+    pub fn describeOrganizationalUnit(self: *Self, allocator: std.mem.Allocator, input: describe_organizational_unit.DescribeOrganizationalUnitInput, options: CallOptions) !describe_organizational_unit.DescribeOrganizationalUnitOutput {
         return describe_organizational_unit.execute(self, allocator, input, options);
     }
 
@@ -701,7 +702,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn describePolicy(self: *Self, allocator: std.mem.Allocator, input: describe_policy.DescribePolicyInput, options: describe_policy.Options) !describe_policy.DescribePolicyOutput {
+    pub fn describePolicy(self: *Self, allocator: std.mem.Allocator, input: describe_policy.DescribePolicyInput, options: CallOptions) !describe_policy.DescribePolicyOutput {
         return describe_policy.execute(self, allocator, input, options);
     }
 
@@ -709,7 +710,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn describeResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: describe_resource_policy.DescribeResourcePolicyInput, options: describe_resource_policy.Options) !describe_resource_policy.DescribeResourcePolicyOutput {
+    pub fn describeResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: describe_resource_policy.DescribeResourcePolicyInput, options: CallOptions) !describe_resource_policy.DescribeResourcePolicyOutput {
         return describe_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -717,7 +718,7 @@ pub const Client = struct {
     /// between two management accounts where one account designates the other with
     /// specified
     /// responsibilities for their organization.
-    pub fn describeResponsibilityTransfer(self: *Self, allocator: std.mem.Allocator, input: describe_responsibility_transfer.DescribeResponsibilityTransferInput, options: describe_responsibility_transfer.Options) !describe_responsibility_transfer.DescribeResponsibilityTransferOutput {
+    pub fn describeResponsibilityTransfer(self: *Self, allocator: std.mem.Allocator, input: describe_responsibility_transfer.DescribeResponsibilityTransferInput, options: CallOptions) !describe_responsibility_transfer.DescribeResponsibilityTransferOutput {
         return describe_responsibility_transfer.execute(self, allocator, input, options);
     }
 
@@ -744,7 +745,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn detachPolicy(self: *Self, allocator: std.mem.Allocator, input: detach_policy.DetachPolicyInput, options: detach_policy.Options) !detach_policy.DetachPolicyOutput {
+    pub fn detachPolicy(self: *Self, allocator: std.mem.Allocator, input: detach_policy.DetachPolicyInput, options: CallOptions) !detach_policy.DetachPolicyOutput {
         return detach_policy.execute(self, allocator, input, options);
     }
 
@@ -820,7 +821,7 @@ pub const Client = struct {
     /// services](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html) in the *Organizations User Guide*.
     ///
     /// You can only call this operation from the management account.
-    pub fn disableAwsServiceAccess(self: *Self, allocator: std.mem.Allocator, input: disable_aws_service_access.DisableAWSServiceAccessInput, options: disable_aws_service_access.Options) !disable_aws_service_access.DisableAWSServiceAccessOutput {
+    pub fn disableAwsServiceAccess(self: *Self, allocator: std.mem.Allocator, input: disable_aws_service_access.DisableAWSServiceAccessInput, options: CallOptions) !disable_aws_service_access.DisableAWSServiceAccessOutput {
         return disable_aws_service_access.execute(self, allocator, input, options);
     }
 
@@ -847,7 +848,7 @@ pub const Client = struct {
     ///
     /// To view the status of available policy types in the organization, use
     /// ListRoots.
-    pub fn disablePolicyType(self: *Self, allocator: std.mem.Allocator, input: disable_policy_type.DisablePolicyTypeInput, options: disable_policy_type.Options) !disable_policy_type.DisablePolicyTypeOutput {
+    pub fn disablePolicyType(self: *Self, allocator: std.mem.Allocator, input: disable_policy_type.DisablePolicyTypeInput, options: CallOptions) !disable_policy_type.DisablePolicyTypeOutput {
         return disable_policy_type.execute(self, allocator, input, options);
     }
 
@@ -895,7 +896,7 @@ pub const Client = struct {
     /// administrators are aware of this.
     ///
     /// You can only call this operation from the management account.
-    pub fn enableAllFeatures(self: *Self, allocator: std.mem.Allocator, input: enable_all_features.EnableAllFeaturesInput, options: enable_all_features.Options) !enable_all_features.EnableAllFeaturesOutput {
+    pub fn enableAllFeatures(self: *Self, allocator: std.mem.Allocator, input: enable_all_features.EnableAllFeaturesInput, options: CallOptions) !enable_all_features.EnableAllFeaturesOutput {
         return enable_all_features.execute(self, allocator, input, options);
     }
 
@@ -928,7 +929,7 @@ pub const Client = struct {
     /// *Organizations User Guide*.
     ///
     /// You can only call this operation from the management account.
-    pub fn enableAwsServiceAccess(self: *Self, allocator: std.mem.Allocator, input: enable_aws_service_access.EnableAWSServiceAccessInput, options: enable_aws_service_access.Options) !enable_aws_service_access.EnableAWSServiceAccessOutput {
+    pub fn enableAwsServiceAccess(self: *Self, allocator: std.mem.Allocator, input: enable_aws_service_access.EnableAWSServiceAccessInput, options: CallOptions) !enable_aws_service_access.EnableAWSServiceAccessOutput {
         return enable_aws_service_access.execute(self, allocator, input, options);
     }
 
@@ -952,7 +953,7 @@ pub const Client = struct {
     /// organization. To view the status of available policy types in the
     /// organization, use
     /// ListRoots.
-    pub fn enablePolicyType(self: *Self, allocator: std.mem.Allocator, input: enable_policy_type.EnablePolicyTypeInput, options: enable_policy_type.Options) !enable_policy_type.EnablePolicyTypeOutput {
+    pub fn enablePolicyType(self: *Self, allocator: std.mem.Allocator, input: enable_policy_type.EnablePolicyTypeInput, options: CallOptions) !enable_policy_type.EnablePolicyTypeOutput {
         return enable_policy_type.execute(self, allocator, input, options);
     }
 
@@ -976,7 +977,7 @@ pub const Client = struct {
     /// `organizations:TagResource` permission.
     ///
     /// You can only call this operation from the management account.
-    pub fn inviteAccountToOrganization(self: *Self, allocator: std.mem.Allocator, input: invite_account_to_organization.InviteAccountToOrganizationInput, options: invite_account_to_organization.Options) !invite_account_to_organization.InviteAccountToOrganizationOutput {
+    pub fn inviteAccountToOrganization(self: *Self, allocator: std.mem.Allocator, input: invite_account_to_organization.InviteAccountToOrganizationInput, options: CallOptions) !invite_account_to_organization.InviteAccountToOrganizationOutput {
         return invite_account_to_organization.execute(self, allocator, input, options);
     }
 
@@ -987,7 +988,7 @@ pub const Client = struct {
     /// implemented as a Handshake whose details are in the response.
     ///
     /// You can only call this operation from the management account.
-    pub fn inviteOrganizationToTransferResponsibility(self: *Self, allocator: std.mem.Allocator, input: invite_organization_to_transfer_responsibility.InviteOrganizationToTransferResponsibilityInput, options: invite_organization_to_transfer_responsibility.Options) !invite_organization_to_transfer_responsibility.InviteOrganizationToTransferResponsibilityOutput {
+    pub fn inviteOrganizationToTransferResponsibility(self: *Self, allocator: std.mem.Allocator, input: invite_organization_to_transfer_responsibility.InviteOrganizationToTransferResponsibilityInput, options: CallOptions) !invite_organization_to_transfer_responsibility.InviteOrganizationToTransferResponsibilityOutput {
         return invite_organization_to_transfer_responsibility.execute(self, allocator, input, options);
     }
 
@@ -1049,7 +1050,7 @@ pub const Client = struct {
     /// * If you are using an organization principal to call
     /// `LeaveOrganization` across multiple accounts, you can only do
     /// this up to 5 accounts per second in a single organization.
-    pub fn leaveOrganization(self: *Self, allocator: std.mem.Allocator, input: leave_organization.LeaveOrganizationInput, options: leave_organization.Options) !leave_organization.LeaveOrganizationOutput {
+    pub fn leaveOrganization(self: *Self, allocator: std.mem.Allocator, input: leave_organization.LeaveOrganizationInput, options: CallOptions) !leave_organization.LeaveOrganizationOutput {
         return leave_organization.execute(self, allocator, input, options);
     }
 
@@ -1067,7 +1068,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn listAccounts(self: *Self, allocator: std.mem.Allocator, input: list_accounts.ListAccountsInput, options: list_accounts.Options) !list_accounts.ListAccountsOutput {
+    pub fn listAccounts(self: *Self, allocator: std.mem.Allocator, input: list_accounts.ListAccountsInput, options: CallOptions) !list_accounts.ListAccountsOutput {
         return list_accounts.execute(self, allocator, input, options);
     }
 
@@ -1090,7 +1091,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn listAccountsForParent(self: *Self, allocator: std.mem.Allocator, input: list_accounts_for_parent.ListAccountsForParentInput, options: list_accounts_for_parent.Options) !list_accounts_for_parent.ListAccountsForParentOutput {
+    pub fn listAccountsForParent(self: *Self, allocator: std.mem.Allocator, input: list_accounts_for_parent.ListAccountsForParentInput, options: CallOptions) !list_accounts_for_parent.ListAccountsForParentOutput {
         return list_accounts_for_parent.execute(self, allocator, input, options);
     }
 
@@ -1102,7 +1103,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn listAccountsWithInvalidEffectivePolicy(self: *Self, allocator: std.mem.Allocator, input: list_accounts_with_invalid_effective_policy.ListAccountsWithInvalidEffectivePolicyInput, options: list_accounts_with_invalid_effective_policy.Options) !list_accounts_with_invalid_effective_policy.ListAccountsWithInvalidEffectivePolicyOutput {
+    pub fn listAccountsWithInvalidEffectivePolicy(self: *Self, allocator: std.mem.Allocator, input: list_accounts_with_invalid_effective_policy.ListAccountsWithInvalidEffectivePolicyInput, options: CallOptions) !list_accounts_with_invalid_effective_policy.ListAccountsWithInvalidEffectivePolicyOutput {
         return list_accounts_with_invalid_effective_policy.execute(self, allocator, input, options);
     }
 
@@ -1121,7 +1122,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn listAwsServiceAccessForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_aws_service_access_for_organization.ListAWSServiceAccessForOrganizationInput, options: list_aws_service_access_for_organization.Options) !list_aws_service_access_for_organization.ListAWSServiceAccessForOrganizationOutput {
+    pub fn listAwsServiceAccessForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_aws_service_access_for_organization.ListAWSServiceAccessForOrganizationInput, options: CallOptions) !list_aws_service_access_for_organization.ListAWSServiceAccessForOrganizationOutput {
         return list_aws_service_access_for_organization.execute(self, allocator, input, options);
     }
 
@@ -1139,7 +1140,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn listChildren(self: *Self, allocator: std.mem.Allocator, input: list_children.ListChildrenInput, options: list_children.Options) !list_children.ListChildrenOutput {
+    pub fn listChildren(self: *Self, allocator: std.mem.Allocator, input: list_children.ListChildrenInput, options: CallOptions) !list_children.ListChildrenOutput {
         return list_children.execute(self, allocator, input, options);
     }
 
@@ -1156,7 +1157,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn listCreateAccountStatus(self: *Self, allocator: std.mem.Allocator, input: list_create_account_status.ListCreateAccountStatusInput, options: list_create_account_status.Options) !list_create_account_status.ListCreateAccountStatusOutput {
+    pub fn listCreateAccountStatus(self: *Self, allocator: std.mem.Allocator, input: list_create_account_status.ListCreateAccountStatusInput, options: CallOptions) !list_create_account_status.ListCreateAccountStatusOutput {
         return list_create_account_status.execute(self, allocator, input, options);
     }
 
@@ -1166,7 +1167,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn listDelegatedAdministrators(self: *Self, allocator: std.mem.Allocator, input: list_delegated_administrators.ListDelegatedAdministratorsInput, options: list_delegated_administrators.Options) !list_delegated_administrators.ListDelegatedAdministratorsOutput {
+    pub fn listDelegatedAdministrators(self: *Self, allocator: std.mem.Allocator, input: list_delegated_administrators.ListDelegatedAdministratorsInput, options: CallOptions) !list_delegated_administrators.ListDelegatedAdministratorsOutput {
         return list_delegated_administrators.execute(self, allocator, input, options);
     }
 
@@ -1176,7 +1177,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn listDelegatedServicesForAccount(self: *Self, allocator: std.mem.Allocator, input: list_delegated_services_for_account.ListDelegatedServicesForAccountInput, options: list_delegated_services_for_account.Options) !list_delegated_services_for_account.ListDelegatedServicesForAccountOutput {
+    pub fn listDelegatedServicesForAccount(self: *Self, allocator: std.mem.Allocator, input: list_delegated_services_for_account.ListDelegatedServicesForAccountInput, options: CallOptions) !list_delegated_services_for_account.ListDelegatedServicesForAccountOutput {
         return list_delegated_services_for_account.execute(self, allocator, input, options);
     }
 
@@ -1185,7 +1186,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn listEffectivePolicyValidationErrors(self: *Self, allocator: std.mem.Allocator, input: list_effective_policy_validation_errors.ListEffectivePolicyValidationErrorsInput, options: list_effective_policy_validation_errors.Options) !list_effective_policy_validation_errors.ListEffectivePolicyValidationErrorsOutput {
+    pub fn listEffectivePolicyValidationErrors(self: *Self, allocator: std.mem.Allocator, input: list_effective_policy_validation_errors.ListEffectivePolicyValidationErrorsInput, options: CallOptions) !list_effective_policy_validation_errors.ListEffectivePolicyValidationErrorsOutput {
         return list_effective_policy_validation_errors.execute(self, allocator, input, options);
     }
 
@@ -1203,7 +1204,7 @@ pub const Client = struct {
     /// more results are available.
     /// Continue making requests until `NextToken` returns null. A null `NextToken`
     /// value indicates that you have retrieved all available results.
-    pub fn listHandshakesForAccount(self: *Self, allocator: std.mem.Allocator, input: list_handshakes_for_account.ListHandshakesForAccountInput, options: list_handshakes_for_account.Options) !list_handshakes_for_account.ListHandshakesForAccountOutput {
+    pub fn listHandshakesForAccount(self: *Self, allocator: std.mem.Allocator, input: list_handshakes_for_account.ListHandshakesForAccountInput, options: CallOptions) !list_handshakes_for_account.ListHandshakesForAccountOutput {
         return list_handshakes_for_account.execute(self, allocator, input, options);
     }
 
@@ -1222,7 +1223,7 @@ pub const Client = struct {
     /// more results are available.
     /// Continue making requests until `NextToken` returns null. A null `NextToken`
     /// value indicates that you have retrieved all available results.
-    pub fn listHandshakesForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_handshakes_for_organization.ListHandshakesForOrganizationInput, options: list_handshakes_for_organization.Options) !list_handshakes_for_organization.ListHandshakesForOrganizationOutput {
+    pub fn listHandshakesForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_handshakes_for_organization.ListHandshakesForOrganizationInput, options: CallOptions) !list_handshakes_for_organization.ListHandshakesForOrganizationOutput {
         return list_handshakes_for_organization.execute(self, allocator, input, options);
     }
 
@@ -1237,7 +1238,7 @@ pub const Client = struct {
     /// more results are available.
     /// Continue making requests until `NextToken` returns null. A null `NextToken`
     /// value indicates that you have retrieved all available results.
-    pub fn listInboundResponsibilityTransfers(self: *Self, allocator: std.mem.Allocator, input: list_inbound_responsibility_transfers.ListInboundResponsibilityTransfersInput, options: list_inbound_responsibility_transfers.Options) !list_inbound_responsibility_transfers.ListInboundResponsibilityTransfersOutput {
+    pub fn listInboundResponsibilityTransfers(self: *Self, allocator: std.mem.Allocator, input: list_inbound_responsibility_transfers.ListInboundResponsibilityTransfersInput, options: CallOptions) !list_inbound_responsibility_transfers.ListInboundResponsibilityTransfersOutput {
         return list_inbound_responsibility_transfers.execute(self, allocator, input, options);
     }
 
@@ -1253,7 +1254,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn listOrganizationalUnitsForParent(self: *Self, allocator: std.mem.Allocator, input: list_organizational_units_for_parent.ListOrganizationalUnitsForParentInput, options: list_organizational_units_for_parent.Options) !list_organizational_units_for_parent.ListOrganizationalUnitsForParentOutput {
+    pub fn listOrganizationalUnitsForParent(self: *Self, allocator: std.mem.Allocator, input: list_organizational_units_for_parent.ListOrganizationalUnitsForParentInput, options: CallOptions) !list_organizational_units_for_parent.ListOrganizationalUnitsForParentOutput {
         return list_organizational_units_for_parent.execute(self, allocator, input, options);
     }
 
@@ -1269,7 +1270,7 @@ pub const Client = struct {
     /// more results are available.
     /// Continue making requests until `NextToken` returns null. A null `NextToken`
     /// value indicates that you have retrieved all available results.
-    pub fn listOutboundResponsibilityTransfers(self: *Self, allocator: std.mem.Allocator, input: list_outbound_responsibility_transfers.ListOutboundResponsibilityTransfersInput, options: list_outbound_responsibility_transfers.Options) !list_outbound_responsibility_transfers.ListOutboundResponsibilityTransfersOutput {
+    pub fn listOutboundResponsibilityTransfers(self: *Self, allocator: std.mem.Allocator, input: list_outbound_responsibility_transfers.ListOutboundResponsibilityTransfersInput, options: CallOptions) !list_outbound_responsibility_transfers.ListOutboundResponsibilityTransfersOutput {
         return list_outbound_responsibility_transfers.execute(self, allocator, input, options);
     }
 
@@ -1289,7 +1290,7 @@ pub const Client = struct {
     /// account that is a delegated administrator.
     ///
     /// In the current release, a child can have only a single parent.
-    pub fn listParents(self: *Self, allocator: std.mem.Allocator, input: list_parents.ListParentsInput, options: list_parents.Options) !list_parents.ListParentsOutput {
+    pub fn listParents(self: *Self, allocator: std.mem.Allocator, input: list_parents.ListParentsInput, options: CallOptions) !list_parents.ListParentsOutput {
         return list_parents.execute(self, allocator, input, options);
     }
 
@@ -1304,7 +1305,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn listPolicies(self: *Self, allocator: std.mem.Allocator, input: list_policies.ListPoliciesInput, options: list_policies.Options) !list_policies.ListPoliciesOutput {
+    pub fn listPolicies(self: *Self, allocator: std.mem.Allocator, input: list_policies.ListPoliciesInput, options: CallOptions) !list_policies.ListPoliciesOutput {
         return list_policies.execute(self, allocator, input, options);
     }
 
@@ -1322,7 +1323,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn listPoliciesForTarget(self: *Self, allocator: std.mem.Allocator, input: list_policies_for_target.ListPoliciesForTargetInput, options: list_policies_for_target.Options) !list_policies_for_target.ListPoliciesForTargetOutput {
+    pub fn listPoliciesForTarget(self: *Self, allocator: std.mem.Allocator, input: list_policies_for_target.ListPoliciesForTargetInput, options: CallOptions) !list_policies_for_target.ListPoliciesForTargetOutput {
         return list_policies_for_target.execute(self, allocator, input, options);
     }
 
@@ -1347,7 +1348,7 @@ pub const Client = struct {
     /// enabled and disabled in a root. To see the availability of a policy type in
     /// an
     /// organization, use DescribeOrganization.
-    pub fn listRoots(self: *Self, allocator: std.mem.Allocator, input: list_roots.ListRootsInput, options: list_roots.Options) !list_roots.ListRootsOutput {
+    pub fn listRoots(self: *Self, allocator: std.mem.Allocator, input: list_roots.ListRootsInput, options: CallOptions) !list_roots.ListRootsOutput {
         return list_roots.execute(self, allocator, input, options);
     }
 
@@ -1365,7 +1366,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -1382,7 +1383,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn listTargetsForPolicy(self: *Self, allocator: std.mem.Allocator, input: list_targets_for_policy.ListTargetsForPolicyInput, options: list_targets_for_policy.Options) !list_targets_for_policy.ListTargetsForPolicyOutput {
+    pub fn listTargetsForPolicy(self: *Self, allocator: std.mem.Allocator, input: list_targets_for_policy.ListTargetsForPolicyInput, options: CallOptions) !list_targets_for_policy.ListTargetsForPolicyOutput {
         return list_targets_for_policy.execute(self, allocator, input, options);
     }
 
@@ -1391,14 +1392,14 @@ pub const Client = struct {
     /// the specified destination parent root or OU.
     ///
     /// You can only call this operation from the management account.
-    pub fn moveAccount(self: *Self, allocator: std.mem.Allocator, input: move_account.MoveAccountInput, options: move_account.Options) !move_account.MoveAccountOutput {
+    pub fn moveAccount(self: *Self, allocator: std.mem.Allocator, input: move_account.MoveAccountInput, options: CallOptions) !move_account.MoveAccountOutput {
         return move_account.execute(self, allocator, input, options);
     }
 
     /// Creates or updates a resource policy.
     ///
     /// You can only call this operation from the management account..
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -1418,7 +1419,7 @@ pub const Client = struct {
     /// Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html) in the *Organizations User Guide.*
     ///
     /// You can only call this operation from the management account.
-    pub fn registerDelegatedAdministrator(self: *Self, allocator: std.mem.Allocator, input: register_delegated_administrator.RegisterDelegatedAdministratorInput, options: register_delegated_administrator.Options) !register_delegated_administrator.RegisterDelegatedAdministratorOutput {
+    pub fn registerDelegatedAdministrator(self: *Self, allocator: std.mem.Allocator, input: register_delegated_administrator.RegisterDelegatedAdministratorInput, options: CallOptions) !register_delegated_administrator.RegisterDelegatedAdministratorOutput {
         return register_delegated_administrator.execute(self, allocator, input, options);
     }
 
@@ -1455,7 +1456,7 @@ pub const Client = struct {
     /// the account object in the organization are deleted. Amazon Web Services
     /// accounts outside
     /// of an organization do not support tags.
-    pub fn removeAccountFromOrganization(self: *Self, allocator: std.mem.Allocator, input: remove_account_from_organization.RemoveAccountFromOrganizationInput, options: remove_account_from_organization.Options) !remove_account_from_organization.RemoveAccountFromOrganizationOutput {
+    pub fn removeAccountFromOrganization(self: *Self, allocator: std.mem.Allocator, input: remove_account_from_organization.RemoveAccountFromOrganizationInput, options: CallOptions) !remove_account_from_organization.RemoveAccountFromOrganizationOutput {
         return remove_account_from_organization.execute(self, allocator, input, options);
     }
 
@@ -1473,14 +1474,14 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Ends a transfer. A *transfer* is an arrangement between two
     /// management accounts where one account designates the other with specified
     /// responsibilities for their organization.
-    pub fn terminateResponsibilityTransfer(self: *Self, allocator: std.mem.Allocator, input: terminate_responsibility_transfer.TerminateResponsibilityTransferInput, options: terminate_responsibility_transfer.Options) !terminate_responsibility_transfer.TerminateResponsibilityTransferOutput {
+    pub fn terminateResponsibilityTransfer(self: *Self, allocator: std.mem.Allocator, input: terminate_responsibility_transfer.TerminateResponsibilityTransferInput, options: CallOptions) !terminate_responsibility_transfer.TerminateResponsibilityTransferOutput {
         return terminate_responsibility_transfer.execute(self, allocator, input, options);
     }
 
@@ -1498,7 +1499,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -1508,7 +1509,7 @@ pub const Client = struct {
     /// attached.
     ///
     /// You can only call this operation from the management account.
-    pub fn updateOrganizationalUnit(self: *Self, allocator: std.mem.Allocator, input: update_organizational_unit.UpdateOrganizationalUnitInput, options: update_organizational_unit.Options) !update_organizational_unit.UpdateOrganizationalUnitOutput {
+    pub fn updateOrganizationalUnit(self: *Self, allocator: std.mem.Allocator, input: update_organizational_unit.UpdateOrganizationalUnitInput, options: CallOptions) !update_organizational_unit.UpdateOrganizationalUnitOutput {
         return update_organizational_unit.execute(self, allocator, input, options);
     }
 
@@ -1520,7 +1521,7 @@ pub const Client = struct {
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
-    pub fn updatePolicy(self: *Self, allocator: std.mem.Allocator, input: update_policy.UpdatePolicyInput, options: update_policy.Options) !update_policy.UpdatePolicyOutput {
+    pub fn updatePolicy(self: *Self, allocator: std.mem.Allocator, input: update_policy.UpdatePolicyInput, options: CallOptions) !update_policy.UpdatePolicyOutput {
         return update_policy.execute(self, allocator, input, options);
     }
 
@@ -1529,7 +1530,7 @@ pub const Client = struct {
     /// responsibilities for their organization.
     ///
     /// You can update the name assigned to a transfer.
-    pub fn updateResponsibilityTransfer(self: *Self, allocator: std.mem.Allocator, input: update_responsibility_transfer.UpdateResponsibilityTransferInput, options: update_responsibility_transfer.Options) !update_responsibility_transfer.UpdateResponsibilityTransferOutput {
+    pub fn updateResponsibilityTransfer(self: *Self, allocator: std.mem.Allocator, input: update_responsibility_transfer.UpdateResponsibilityTransferInput, options: CallOptions) !update_responsibility_transfer.UpdateResponsibilityTransferOutput {
         return update_responsibility_transfer.execute(self, allocator, input, options);
     }
 

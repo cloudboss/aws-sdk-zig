@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const TransitGatewayPolicyTableEntry = @import("transit_gateway_policy_table_entry.zig").TransitGatewayPolicyTableEntry;
@@ -35,11 +36,7 @@ pub const GetTransitGatewayPolicyTableEntriesOutput = struct {
     transit_gateway_policy_table_entries: ?[]const TransitGatewayPolicyTableEntry = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTransitGatewayPolicyTableEntriesInput, options: Options) !GetTransitGatewayPolicyTableEntriesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTransitGatewayPolicyTableEntriesInput, options: CallOptions) !GetTransitGatewayPolicyTableEntriesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

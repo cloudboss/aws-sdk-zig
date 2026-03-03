@@ -98,6 +98,7 @@ const update_access_grants_location = @import("update_access_grants_location.zig
 const update_job_priority = @import("update_job_priority.zig");
 const update_job_status = @import("update_job_status.zig");
 const update_storage_lens_group = @import("update_storage_lens_group.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -144,7 +145,7 @@ pub const Client = struct {
     ///
     /// You must also have the following permissions: `sso:CreateApplication`,
     /// `sso:PutApplicationGrant`, and `sso:PutApplicationAuthenticationMethod`.
-    pub fn associateAccessGrantsIdentityCenter(self: *Self, allocator: std.mem.Allocator, input: associate_access_grants_identity_center.AssociateAccessGrantsIdentityCenterInput, options: associate_access_grants_identity_center.Options) !associate_access_grants_identity_center.AssociateAccessGrantsIdentityCenterOutput {
+    pub fn associateAccessGrantsIdentityCenter(self: *Self, allocator: std.mem.Allocator, input: associate_access_grants_identity_center.AssociateAccessGrantsIdentityCenterInput, options: CallOptions) !associate_access_grants_identity_center.AssociateAccessGrantsIdentityCenterOutput {
         return associate_access_grants_identity_center.execute(self, allocator, input, options);
     }
 
@@ -166,7 +167,7 @@ pub const Client = struct {
     /// For directory users - `identitystore:DescribeUser`
     ///
     /// For directory groups - `identitystore:DescribeGroup`
-    pub fn createAccessGrant(self: *Self, allocator: std.mem.Allocator, input: create_access_grant.CreateAccessGrantInput, options: create_access_grant.Options) !create_access_grant.CreateAccessGrantOutput {
+    pub fn createAccessGrant(self: *Self, allocator: std.mem.Allocator, input: create_access_grant.CreateAccessGrantInput, options: CallOptions) !create_access_grant.CreateAccessGrantOutput {
         return create_access_grant.execute(self, allocator, input, options);
     }
 
@@ -185,7 +186,7 @@ pub const Client = struct {
     /// instance, you must also have the `sso:DescribeInstance`,
     /// `sso:CreateApplication`, `sso:PutApplicationGrant`, and
     /// `sso:PutApplicationAuthenticationMethod` permissions.
-    pub fn createAccessGrantsInstance(self: *Self, allocator: std.mem.Allocator, input: create_access_grants_instance.CreateAccessGrantsInstanceInput, options: create_access_grants_instance.Options) !create_access_grants_instance.CreateAccessGrantsInstanceOutput {
+    pub fn createAccessGrantsInstance(self: *Self, allocator: std.mem.Allocator, input: create_access_grants_instance.CreateAccessGrantsInstanceInput, options: CallOptions) !create_access_grants_instance.CreateAccessGrantsInstanceOutput {
         return create_access_grants_instance.execute(self, allocator, input, options);
     }
 
@@ -213,7 +214,7 @@ pub const Client = struct {
     ///
     /// You must also have the following permission for the specified IAM role:
     /// `iam:PassRole`
-    pub fn createAccessGrantsLocation(self: *Self, allocator: std.mem.Allocator, input: create_access_grants_location.CreateAccessGrantsLocationInput, options: create_access_grants_location.Options) !create_access_grants_location.CreateAccessGrantsLocationOutput {
+    pub fn createAccessGrantsLocation(self: *Self, allocator: std.mem.Allocator, input: create_access_grants_location.CreateAccessGrantsLocationInput, options: CallOptions) !create_access_grants_location.CreateAccessGrantsLocationOutput {
         return create_access_grants_location.execute(self, allocator, input, options);
     }
 
@@ -259,7 +260,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListAccessPointsForDirectoryBuckets](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForDirectoryBuckets.html)
-    pub fn createAccessPoint(self: *Self, allocator: std.mem.Allocator, input: create_access_point.CreateAccessPointInput, options: create_access_point.Options) !create_access_point.CreateAccessPointOutput {
+    pub fn createAccessPoint(self: *Self, allocator: std.mem.Allocator, input: create_access_point.CreateAccessPointInput, options: CallOptions) !create_access_point.CreateAccessPointOutput {
         return create_access_point.execute(self, allocator, input, options);
     }
 
@@ -281,7 +282,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListAccessPointsForObjectLambda](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html)
-    pub fn createAccessPointForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: create_access_point_for_object_lambda.CreateAccessPointForObjectLambdaInput, options: create_access_point_for_object_lambda.Options) !create_access_point_for_object_lambda.CreateAccessPointForObjectLambdaOutput {
+    pub fn createAccessPointForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: create_access_point_for_object_lambda.CreateAccessPointForObjectLambdaInput, options: CallOptions) !create_access_point_for_object_lambda.CreateAccessPointForObjectLambdaOutput {
         return create_access_point_for_object_lambda.execute(self, allocator, input, options);
     }
 
@@ -336,7 +337,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [PutAccessPointPolicy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html)
-    pub fn createBucket(self: *Self, allocator: std.mem.Allocator, input: create_bucket.CreateBucketInput, options: create_bucket.Options) !create_bucket.CreateBucketOutput {
+    pub fn createBucket(self: *Self, allocator: std.mem.Allocator, input: create_bucket.CreateBucketInput, options: CallOptions) !create_bucket.CreateBucketOutput {
         return create_bucket.execute(self, allocator, input, options);
     }
 
@@ -372,7 +373,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [JobOperation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html)
-    pub fn createJob(self: *Self, allocator: std.mem.Allocator, input: create_job.CreateJobInput, options: create_job.Options) !create_job.CreateJobOutput {
+    pub fn createJob(self: *Self, allocator: std.mem.Allocator, input: create_job.CreateJobInput, options: CallOptions) !create_job.CreateJobOutput {
         return create_job.execute(self, allocator, input, options);
     }
 
@@ -410,7 +411,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListMultiRegionAccessPoints](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html)
-    pub fn createMultiRegionAccessPoint(self: *Self, allocator: std.mem.Allocator, input: create_multi_region_access_point.CreateMultiRegionAccessPointInput, options: create_multi_region_access_point.Options) !create_multi_region_access_point.CreateMultiRegionAccessPointOutput {
+    pub fn createMultiRegionAccessPoint(self: *Self, allocator: std.mem.Allocator, input: create_multi_region_access_point.CreateMultiRegionAccessPointInput, options: CallOptions) !create_multi_region_access_point.CreateMultiRegionAccessPointOutput {
         return create_multi_region_access_point.execute(self, allocator, input, options);
     }
 
@@ -439,7 +440,7 @@ pub const Client = struct {
     /// Storage
     /// Lens error
     /// codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList).
-    pub fn createStorageLensGroup(self: *Self, allocator: std.mem.Allocator, input: create_storage_lens_group.CreateStorageLensGroupInput, options: create_storage_lens_group.Options) !create_storage_lens_group.CreateStorageLensGroupOutput {
+    pub fn createStorageLensGroup(self: *Self, allocator: std.mem.Allocator, input: create_storage_lens_group.CreateStorageLensGroupInput, options: CallOptions) !create_storage_lens_group.CreateStorageLensGroupOutput {
         return create_storage_lens_group.execute(self, allocator, input, options);
     }
 
@@ -450,7 +451,7 @@ pub const Client = struct {
     /// **Permissions**
     ///
     /// You must have the `s3:DeleteAccessGrant` permission to use this operation.
-    pub fn deleteAccessGrant(self: *Self, allocator: std.mem.Allocator, input: delete_access_grant.DeleteAccessGrantInput, options: delete_access_grant.Options) !delete_access_grant.DeleteAccessGrantOutput {
+    pub fn deleteAccessGrant(self: *Self, allocator: std.mem.Allocator, input: delete_access_grant.DeleteAccessGrantInput, options: CallOptions) !delete_access_grant.DeleteAccessGrantOutput {
         return delete_access_grant.execute(self, allocator, input, options);
     }
 
@@ -462,7 +463,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3:DeleteAccessGrantsInstance` permission to use this
     /// operation.
-    pub fn deleteAccessGrantsInstance(self: *Self, allocator: std.mem.Allocator, input: delete_access_grants_instance.DeleteAccessGrantsInstanceInput, options: delete_access_grants_instance.Options) !delete_access_grants_instance.DeleteAccessGrantsInstanceOutput {
+    pub fn deleteAccessGrantsInstance(self: *Self, allocator: std.mem.Allocator, input: delete_access_grants_instance.DeleteAccessGrantsInstanceInput, options: CallOptions) !delete_access_grants_instance.DeleteAccessGrantsInstanceOutput {
         return delete_access_grants_instance.execute(self, allocator, input, options);
     }
 
@@ -475,7 +476,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3:DeleteAccessGrantsInstanceResourcePolicy` permission
     /// to use this operation.
-    pub fn deleteAccessGrantsInstanceResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_access_grants_instance_resource_policy.DeleteAccessGrantsInstanceResourcePolicyInput, options: delete_access_grants_instance_resource_policy.Options) !delete_access_grants_instance_resource_policy.DeleteAccessGrantsInstanceResourcePolicyOutput {
+    pub fn deleteAccessGrantsInstanceResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_access_grants_instance_resource_policy.DeleteAccessGrantsInstanceResourcePolicyInput, options: CallOptions) !delete_access_grants_instance_resource_policy.DeleteAccessGrantsInstanceResourcePolicyOutput {
         return delete_access_grants_instance_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -488,7 +489,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3:DeleteAccessGrantsLocation` permission to use this
     /// operation.
-    pub fn deleteAccessGrantsLocation(self: *Self, allocator: std.mem.Allocator, input: delete_access_grants_location.DeleteAccessGrantsLocationInput, options: delete_access_grants_location.Options) !delete_access_grants_location.DeleteAccessGrantsLocationOutput {
+    pub fn deleteAccessGrantsLocation(self: *Self, allocator: std.mem.Allocator, input: delete_access_grants_location.DeleteAccessGrantsLocationInput, options: CallOptions) !delete_access_grants_location.DeleteAccessGrantsLocationOutput {
         return delete_access_grants_location.execute(self, allocator, input, options);
     }
 
@@ -512,7 +513,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListAccessPoints](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html)
-    pub fn deleteAccessPoint(self: *Self, allocator: std.mem.Allocator, input: delete_access_point.DeleteAccessPointInput, options: delete_access_point.Options) !delete_access_point.DeleteAccessPointOutput {
+    pub fn deleteAccessPoint(self: *Self, allocator: std.mem.Allocator, input: delete_access_point.DeleteAccessPointInput, options: CallOptions) !delete_access_point.DeleteAccessPointOutput {
         return delete_access_point.execute(self, allocator, input, options);
     }
 
@@ -531,7 +532,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListAccessPointsForObjectLambda](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html)
-    pub fn deleteAccessPointForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: delete_access_point_for_object_lambda.DeleteAccessPointForObjectLambdaInput, options: delete_access_point_for_object_lambda.Options) !delete_access_point_for_object_lambda.DeleteAccessPointForObjectLambdaOutput {
+    pub fn deleteAccessPointForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: delete_access_point_for_object_lambda.DeleteAccessPointForObjectLambdaInput, options: CallOptions) !delete_access_point_for_object_lambda.DeleteAccessPointForObjectLambdaOutput {
         return delete_access_point_for_object_lambda.execute(self, allocator, input, options);
     }
 
@@ -552,7 +553,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [GetAccessPointPolicy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html)
-    pub fn deleteAccessPointPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_access_point_policy.DeleteAccessPointPolicyInput, options: delete_access_point_policy.Options) !delete_access_point_policy.DeleteAccessPointPolicyOutput {
+    pub fn deleteAccessPointPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_access_point_policy.DeleteAccessPointPolicyInput, options: CallOptions) !delete_access_point_policy.DeleteAccessPointPolicyOutput {
         return delete_access_point_policy.execute(self, allocator, input, options);
     }
 
@@ -568,7 +569,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [PutAccessPointPolicyForObjectLambda](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicyForObjectLambda.html)
-    pub fn deleteAccessPointPolicyForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: delete_access_point_policy_for_object_lambda.DeleteAccessPointPolicyForObjectLambdaInput, options: delete_access_point_policy_for_object_lambda.Options) !delete_access_point_policy_for_object_lambda.DeleteAccessPointPolicyForObjectLambdaOutput {
+    pub fn deleteAccessPointPolicyForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: delete_access_point_policy_for_object_lambda.DeleteAccessPointPolicyForObjectLambdaInput, options: CallOptions) !delete_access_point_policy_for_object_lambda.DeleteAccessPointPolicyForObjectLambdaOutput {
         return delete_access_point_policy_for_object_lambda.execute(self, allocator, input, options);
     }
 
@@ -582,7 +583,7 @@ pub const Client = struct {
     ///
     /// For information about REST API errors, see [REST error
     /// responses](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses).
-    pub fn deleteAccessPointScope(self: *Self, allocator: std.mem.Allocator, input: delete_access_point_scope.DeleteAccessPointScopeInput, options: delete_access_point_scope.Options) !delete_access_point_scope.DeleteAccessPointScopeOutput {
+    pub fn deleteAccessPointScope(self: *Self, allocator: std.mem.Allocator, input: delete_access_point_scope.DeleteAccessPointScopeInput, options: CallOptions) !delete_access_point_scope.DeleteAccessPointScopeOutput {
         return delete_access_point_scope.execute(self, allocator, input, options);
     }
 
@@ -616,7 +617,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
-    pub fn deleteBucket(self: *Self, allocator: std.mem.Allocator, input: delete_bucket.DeleteBucketInput, options: delete_bucket.Options) !delete_bucket.DeleteBucketOutput {
+    pub fn deleteBucket(self: *Self, allocator: std.mem.Allocator, input: delete_bucket.DeleteBucketInput, options: CallOptions) !delete_bucket.DeleteBucketOutput {
         return delete_bucket.execute(self, allocator, input, options);
     }
 
@@ -661,7 +662,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [GetBucketLifecycleConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html)
-    pub fn deleteBucketLifecycleConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_lifecycle_configuration.DeleteBucketLifecycleConfigurationInput, options: delete_bucket_lifecycle_configuration.Options) !delete_bucket_lifecycle_configuration.DeleteBucketLifecycleConfigurationOutput {
+    pub fn deleteBucketLifecycleConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_lifecycle_configuration.DeleteBucketLifecycleConfigurationInput, options: CallOptions) !delete_bucket_lifecycle_configuration.DeleteBucketLifecycleConfigurationOutput {
         return delete_bucket_lifecycle_configuration.execute(self, allocator, input, options);
     }
 
@@ -716,7 +717,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [PutBucketPolicy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html)
-    pub fn deleteBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_policy.DeleteBucketPolicyInput, options: delete_bucket_policy.Options) !delete_bucket_policy.DeleteBucketPolicyOutput {
+    pub fn deleteBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_policy.DeleteBucketPolicyInput, options: CallOptions) !delete_bucket_policy.DeleteBucketPolicyOutput {
         return delete_bucket_policy.execute(self, allocator, input, options);
     }
 
@@ -767,7 +768,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [GetBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketReplication.html)
-    pub fn deleteBucketReplication(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_replication.DeleteBucketReplicationInput, options: delete_bucket_replication.Options) !delete_bucket_replication.DeleteBucketReplicationOutput {
+    pub fn deleteBucketReplication(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_replication.DeleteBucketReplicationInput, options: CallOptions) !delete_bucket_replication.DeleteBucketReplicationOutput {
         return delete_bucket_replication.execute(self, allocator, input, options);
     }
 
@@ -799,7 +800,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [PutBucketTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html)
-    pub fn deleteBucketTagging(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_tagging.DeleteBucketTaggingInput, options: delete_bucket_tagging.Options) !delete_bucket_tagging.DeleteBucketTaggingOutput {
+    pub fn deleteBucketTagging(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_tagging.DeleteBucketTaggingInput, options: CallOptions) !delete_bucket_tagging.DeleteBucketTaggingOutput {
         return delete_bucket_tagging.execute(self, allocator, input, options);
     }
 
@@ -825,7 +826,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [PutJobTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutJobTagging.html)
-    pub fn deleteJobTagging(self: *Self, allocator: std.mem.Allocator, input: delete_job_tagging.DeleteJobTaggingInput, options: delete_job_tagging.Options) !delete_job_tagging.DeleteJobTaggingOutput {
+    pub fn deleteJobTagging(self: *Self, allocator: std.mem.Allocator, input: delete_job_tagging.DeleteJobTaggingInput, options: CallOptions) !delete_job_tagging.DeleteJobTaggingOutput {
         return delete_job_tagging.execute(self, allocator, input, options);
     }
 
@@ -862,7 +863,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListMultiRegionAccessPoints](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html)
-    pub fn deleteMultiRegionAccessPoint(self: *Self, allocator: std.mem.Allocator, input: delete_multi_region_access_point.DeleteMultiRegionAccessPointInput, options: delete_multi_region_access_point.Options) !delete_multi_region_access_point.DeleteMultiRegionAccessPointOutput {
+    pub fn deleteMultiRegionAccessPoint(self: *Self, allocator: std.mem.Allocator, input: delete_multi_region_access_point.DeleteMultiRegionAccessPointInput, options: CallOptions) !delete_multi_region_access_point.DeleteMultiRegionAccessPointOutput {
         return delete_multi_region_access_point.execute(self, allocator, input, options);
     }
 
@@ -889,7 +890,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [PutPublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html)
-    pub fn deletePublicAccessBlock(self: *Self, allocator: std.mem.Allocator, input: delete_public_access_block.DeletePublicAccessBlockInput, options: delete_public_access_block.Options) !delete_public_access_block.DeletePublicAccessBlockOutput {
+    pub fn deletePublicAccessBlock(self: *Self, allocator: std.mem.Allocator, input: delete_public_access_block.DeletePublicAccessBlockInput, options: CallOptions) !delete_public_access_block.DeletePublicAccessBlockOutput {
         return delete_public_access_block.execute(self, allocator, input, options);
     }
 
@@ -906,7 +907,7 @@ pub const Client = struct {
     /// [Setting permissions to
     /// use Amazon S3 Storage
     /// Lens](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html) in the *Amazon S3 User Guide*.
-    pub fn deleteStorageLensConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_storage_lens_configuration.DeleteStorageLensConfigurationInput, options: delete_storage_lens_configuration.Options) !delete_storage_lens_configuration.DeleteStorageLensConfigurationOutput {
+    pub fn deleteStorageLensConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_storage_lens_configuration.DeleteStorageLensConfigurationInput, options: CallOptions) !delete_storage_lens_configuration.DeleteStorageLensConfigurationOutput {
         return delete_storage_lens_configuration.execute(self, allocator, input, options);
     }
 
@@ -924,7 +925,7 @@ pub const Client = struct {
     /// see [Setting permissions to
     /// use Amazon S3 Storage
     /// Lens](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html) in the *Amazon S3 User Guide*.
-    pub fn deleteStorageLensConfigurationTagging(self: *Self, allocator: std.mem.Allocator, input: delete_storage_lens_configuration_tagging.DeleteStorageLensConfigurationTaggingInput, options: delete_storage_lens_configuration_tagging.Options) !delete_storage_lens_configuration_tagging.DeleteStorageLensConfigurationTaggingOutput {
+    pub fn deleteStorageLensConfigurationTagging(self: *Self, allocator: std.mem.Allocator, input: delete_storage_lens_configuration_tagging.DeleteStorageLensConfigurationTaggingInput, options: CallOptions) !delete_storage_lens_configuration_tagging.DeleteStorageLensConfigurationTaggingOutput {
         return delete_storage_lens_configuration_tagging.execute(self, allocator, input, options);
     }
 
@@ -940,7 +941,7 @@ pub const Client = struct {
     /// Storage
     /// Lens error
     /// codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList).
-    pub fn deleteStorageLensGroup(self: *Self, allocator: std.mem.Allocator, input: delete_storage_lens_group.DeleteStorageLensGroupInput, options: delete_storage_lens_group.Options) !delete_storage_lens_group.DeleteStorageLensGroupOutput {
+    pub fn deleteStorageLensGroup(self: *Self, allocator: std.mem.Allocator, input: delete_storage_lens_group.DeleteStorageLensGroupInput, options: CallOptions) !delete_storage_lens_group.DeleteStorageLensGroupOutput {
         return delete_storage_lens_group.execute(self, allocator, input, options);
     }
 
@@ -967,7 +968,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [UpdateJobStatus](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
-    pub fn describeJob(self: *Self, allocator: std.mem.Allocator, input: describe_job.DescribeJobInput, options: describe_job.Options) !describe_job.DescribeJobOutput {
+    pub fn describeJob(self: *Self, allocator: std.mem.Allocator, input: describe_job.DescribeJobInput, options: CallOptions) !describe_job.DescribeJobOutput {
         return describe_job.execute(self, allocator, input, options);
     }
 
@@ -992,7 +993,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListMultiRegionAccessPoints](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html)
-    pub fn describeMultiRegionAccessPointOperation(self: *Self, allocator: std.mem.Allocator, input: describe_multi_region_access_point_operation.DescribeMultiRegionAccessPointOperationInput, options: describe_multi_region_access_point_operation.Options) !describe_multi_region_access_point_operation.DescribeMultiRegionAccessPointOperationOutput {
+    pub fn describeMultiRegionAccessPointOperation(self: *Self, allocator: std.mem.Allocator, input: describe_multi_region_access_point_operation.DescribeMultiRegionAccessPointOperationInput, options: CallOptions) !describe_multi_region_access_point_operation.DescribeMultiRegionAccessPointOperationOutput {
         return describe_multi_region_access_point_operation.execute(self, allocator, input, options);
     }
 
@@ -1007,7 +1008,7 @@ pub const Client = struct {
     /// **Additional Permissions**
     ///
     /// You must have the `sso:DeleteApplication` permission to use this operation.
-    pub fn dissociateAccessGrantsIdentityCenter(self: *Self, allocator: std.mem.Allocator, input: dissociate_access_grants_identity_center.DissociateAccessGrantsIdentityCenterInput, options: dissociate_access_grants_identity_center.Options) !dissociate_access_grants_identity_center.DissociateAccessGrantsIdentityCenterOutput {
+    pub fn dissociateAccessGrantsIdentityCenter(self: *Self, allocator: std.mem.Allocator, input: dissociate_access_grants_identity_center.DissociateAccessGrantsIdentityCenterInput, options: CallOptions) !dissociate_access_grants_identity_center.DissociateAccessGrantsIdentityCenterOutput {
         return dissociate_access_grants_identity_center.execute(self, allocator, input, options);
     }
 
@@ -1016,7 +1017,7 @@ pub const Client = struct {
     /// **Permissions**
     ///
     /// You must have the `s3:GetAccessGrant` permission to use this operation.
-    pub fn getAccessGrant(self: *Self, allocator: std.mem.Allocator, input: get_access_grant.GetAccessGrantInput, options: get_access_grant.Options) !get_access_grant.GetAccessGrantOutput {
+    pub fn getAccessGrant(self: *Self, allocator: std.mem.Allocator, input: get_access_grant.GetAccessGrantInput, options: CallOptions) !get_access_grant.GetAccessGrantOutput {
         return get_access_grant.execute(self, allocator, input, options);
     }
 
@@ -1029,7 +1030,7 @@ pub const Client = struct {
     ///
     /// `GetAccessGrantsInstance` is not supported for cross-account access. You can
     /// only call the API from the account that owns the S3 Access Grants instance.
-    pub fn getAccessGrantsInstance(self: *Self, allocator: std.mem.Allocator, input: get_access_grants_instance.GetAccessGrantsInstanceInput, options: get_access_grants_instance.Options) !get_access_grants_instance.GetAccessGrantsInstanceOutput {
+    pub fn getAccessGrantsInstance(self: *Self, allocator: std.mem.Allocator, input: get_access_grants_instance.GetAccessGrantsInstanceInput, options: CallOptions) !get_access_grants_instance.GetAccessGrantsInstanceOutput {
         return get_access_grants_instance.execute(self, allocator, input, options);
     }
 
@@ -1044,7 +1045,7 @@ pub const Client = struct {
     ///
     /// The prefix owner account must grant you the following permissions to their
     /// S3 Access Grants instance: `s3:GetAccessGrantsInstanceForPrefix`.
-    pub fn getAccessGrantsInstanceForPrefix(self: *Self, allocator: std.mem.Allocator, input: get_access_grants_instance_for_prefix.GetAccessGrantsInstanceForPrefixInput, options: get_access_grants_instance_for_prefix.Options) !get_access_grants_instance_for_prefix.GetAccessGrantsInstanceForPrefixOutput {
+    pub fn getAccessGrantsInstanceForPrefix(self: *Self, allocator: std.mem.Allocator, input: get_access_grants_instance_for_prefix.GetAccessGrantsInstanceForPrefixInput, options: CallOptions) !get_access_grants_instance_for_prefix.GetAccessGrantsInstanceForPrefixOutput {
         return get_access_grants_instance_for_prefix.execute(self, allocator, input, options);
     }
 
@@ -1054,7 +1055,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3:GetAccessGrantsInstanceResourcePolicy` permission to
     /// use this operation.
-    pub fn getAccessGrantsInstanceResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_access_grants_instance_resource_policy.GetAccessGrantsInstanceResourcePolicyInput, options: get_access_grants_instance_resource_policy.Options) !get_access_grants_instance_resource_policy.GetAccessGrantsInstanceResourcePolicyOutput {
+    pub fn getAccessGrantsInstanceResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_access_grants_instance_resource_policy.GetAccessGrantsInstanceResourcePolicyInput, options: CallOptions) !get_access_grants_instance_resource_policy.GetAccessGrantsInstanceResourcePolicyOutput {
         return get_access_grants_instance_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -1065,7 +1066,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3:GetAccessGrantsLocation` permission to use this
     /// operation.
-    pub fn getAccessGrantsLocation(self: *Self, allocator: std.mem.Allocator, input: get_access_grants_location.GetAccessGrantsLocationInput, options: get_access_grants_location.Options) !get_access_grants_location.GetAccessGrantsLocationOutput {
+    pub fn getAccessGrantsLocation(self: *Self, allocator: std.mem.Allocator, input: get_access_grants_location.GetAccessGrantsLocationInput, options: CallOptions) !get_access_grants_location.GetAccessGrantsLocationOutput {
         return get_access_grants_location.execute(self, allocator, input, options);
     }
 
@@ -1089,7 +1090,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListAccessPoints](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html)
-    pub fn getAccessPoint(self: *Self, allocator: std.mem.Allocator, input: get_access_point.GetAccessPointInput, options: get_access_point.Options) !get_access_point.GetAccessPointOutput {
+    pub fn getAccessPoint(self: *Self, allocator: std.mem.Allocator, input: get_access_point.GetAccessPointInput, options: CallOptions) !get_access_point.GetAccessPointOutput {
         return get_access_point.execute(self, allocator, input, options);
     }
 
@@ -1102,7 +1103,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [PutAccessPointConfigurationForObjectLambda](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointConfigurationForObjectLambda.html)
-    pub fn getAccessPointConfigurationForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: get_access_point_configuration_for_object_lambda.GetAccessPointConfigurationForObjectLambdaInput, options: get_access_point_configuration_for_object_lambda.Options) !get_access_point_configuration_for_object_lambda.GetAccessPointConfigurationForObjectLambdaOutput {
+    pub fn getAccessPointConfigurationForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: get_access_point_configuration_for_object_lambda.GetAccessPointConfigurationForObjectLambdaInput, options: CallOptions) !get_access_point_configuration_for_object_lambda.GetAccessPointConfigurationForObjectLambdaOutput {
         return get_access_point_configuration_for_object_lambda.execute(self, allocator, input, options);
     }
 
@@ -1121,7 +1122,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListAccessPointsForObjectLambda](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html)
-    pub fn getAccessPointForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: get_access_point_for_object_lambda.GetAccessPointForObjectLambdaInput, options: get_access_point_for_object_lambda.Options) !get_access_point_for_object_lambda.GetAccessPointForObjectLambdaOutput {
+    pub fn getAccessPointForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: get_access_point_for_object_lambda.GetAccessPointForObjectLambdaInput, options: CallOptions) !get_access_point_for_object_lambda.GetAccessPointForObjectLambdaOutput {
         return get_access_point_for_object_lambda.execute(self, allocator, input, options);
     }
 
@@ -1134,7 +1135,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteAccessPointPolicy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html)
-    pub fn getAccessPointPolicy(self: *Self, allocator: std.mem.Allocator, input: get_access_point_policy.GetAccessPointPolicyInput, options: get_access_point_policy.Options) !get_access_point_policy.GetAccessPointPolicyOutput {
+    pub fn getAccessPointPolicy(self: *Self, allocator: std.mem.Allocator, input: get_access_point_policy.GetAccessPointPolicyInput, options: CallOptions) !get_access_point_policy.GetAccessPointPolicyOutput {
         return get_access_point_policy.execute(self, allocator, input, options);
     }
 
@@ -1150,7 +1151,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [PutAccessPointPolicyForObjectLambda](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicyForObjectLambda.html)
-    pub fn getAccessPointPolicyForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: get_access_point_policy_for_object_lambda.GetAccessPointPolicyForObjectLambdaInput, options: get_access_point_policy_for_object_lambda.Options) !get_access_point_policy_for_object_lambda.GetAccessPointPolicyForObjectLambdaOutput {
+    pub fn getAccessPointPolicyForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: get_access_point_policy_for_object_lambda.GetAccessPointPolicyForObjectLambdaInput, options: CallOptions) !get_access_point_policy_for_object_lambda.GetAccessPointPolicyForObjectLambdaOutput {
         return get_access_point_policy_for_object_lambda.execute(self, allocator, input, options);
     }
 
@@ -1162,7 +1163,7 @@ pub const Client = struct {
     /// [Managing Data Access with Amazon S3
     /// access
     /// points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html) in the *Amazon S3 User Guide*.
-    pub fn getAccessPointPolicyStatus(self: *Self, allocator: std.mem.Allocator, input: get_access_point_policy_status.GetAccessPointPolicyStatusInput, options: get_access_point_policy_status.Options) !get_access_point_policy_status.GetAccessPointPolicyStatusOutput {
+    pub fn getAccessPointPolicyStatus(self: *Self, allocator: std.mem.Allocator, input: get_access_point_policy_status.GetAccessPointPolicyStatusInput, options: CallOptions) !get_access_point_policy_status.GetAccessPointPolicyStatusOutput {
         return get_access_point_policy_status.execute(self, allocator, input, options);
     }
 
@@ -1170,7 +1171,7 @@ pub const Client = struct {
     ///
     /// Returns the status of the resource policy associated with an Object Lambda
     /// Access Point.
-    pub fn getAccessPointPolicyStatusForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: get_access_point_policy_status_for_object_lambda.GetAccessPointPolicyStatusForObjectLambdaInput, options: get_access_point_policy_status_for_object_lambda.Options) !get_access_point_policy_status_for_object_lambda.GetAccessPointPolicyStatusForObjectLambdaOutput {
+    pub fn getAccessPointPolicyStatusForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: get_access_point_policy_status_for_object_lambda.GetAccessPointPolicyStatusForObjectLambdaInput, options: CallOptions) !get_access_point_policy_status_for_object_lambda.GetAccessPointPolicyStatusForObjectLambdaOutput {
         return get_access_point_policy_status_for_object_lambda.execute(self, allocator, input, options);
     }
 
@@ -1181,7 +1182,7 @@ pub const Client = struct {
     ///
     /// For information about REST API errors, see [REST error
     /// responses](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses).
-    pub fn getAccessPointScope(self: *Self, allocator: std.mem.Allocator, input: get_access_point_scope.GetAccessPointScopeInput, options: get_access_point_scope.Options) !get_access_point_scope.GetAccessPointScopeOutput {
+    pub fn getAccessPointScope(self: *Self, allocator: std.mem.Allocator, input: get_access_point_scope.GetAccessPointScopeInput, options: CallOptions) !get_access_point_scope.GetAccessPointScopeOutput {
         return get_access_point_scope.execute(self, allocator, input, options);
     }
 
@@ -1222,7 +1223,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html)
-    pub fn getBucket(self: *Self, allocator: std.mem.Allocator, input: get_bucket.GetBucketInput, options: get_bucket.Options) !get_bucket.GetBucketOutput {
+    pub fn getBucket(self: *Self, allocator: std.mem.Allocator, input: get_bucket.GetBucketInput, options: CallOptions) !get_bucket.GetBucketOutput {
         return get_bucket.execute(self, allocator, input, options);
     }
 
@@ -1274,7 +1275,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteBucketLifecycleConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html)
-    pub fn getBucketLifecycleConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_bucket_lifecycle_configuration.GetBucketLifecycleConfigurationInput, options: get_bucket_lifecycle_configuration.Options) !get_bucket_lifecycle_configuration.GetBucketLifecycleConfigurationOutput {
+    pub fn getBucketLifecycleConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_bucket_lifecycle_configuration.GetBucketLifecycleConfigurationInput, options: CallOptions) !get_bucket_lifecycle_configuration.GetBucketLifecycleConfigurationOutput {
         return get_bucket_lifecycle_configuration.execute(self, allocator, input, options);
     }
 
@@ -1333,7 +1334,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteBucketPolicy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html)
-    pub fn getBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: get_bucket_policy.GetBucketPolicyInput, options: get_bucket_policy.Options) !get_bucket_policy.GetBucketPolicyOutput {
+    pub fn getBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: get_bucket_policy.GetBucketPolicyInput, options: CallOptions) !get_bucket_policy.GetBucketPolicyOutput {
         return get_bucket_policy.execute(self, allocator, input, options);
     }
 
@@ -1394,7 +1395,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketReplication.html)
-    pub fn getBucketReplication(self: *Self, allocator: std.mem.Allocator, input: get_bucket_replication.GetBucketReplicationInput, options: get_bucket_replication.Options) !get_bucket_replication.GetBucketReplicationOutput {
+    pub fn getBucketReplication(self: *Self, allocator: std.mem.Allocator, input: get_bucket_replication.GetBucketReplicationInput, options: CallOptions) !get_bucket_replication.GetBucketReplicationOutput {
         return get_bucket_replication.execute(self, allocator, input, options);
     }
 
@@ -1433,7 +1434,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteBucketTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html)
-    pub fn getBucketTagging(self: *Self, allocator: std.mem.Allocator, input: get_bucket_tagging.GetBucketTaggingInput, options: get_bucket_tagging.Options) !get_bucket_tagging.GetBucketTaggingOutput {
+    pub fn getBucketTagging(self: *Self, allocator: std.mem.Allocator, input: get_bucket_tagging.GetBucketTaggingInput, options: CallOptions) !get_bucket_tagging.GetBucketTaggingOutput {
         return get_bucket_tagging.execute(self, allocator, input, options);
     }
 
@@ -1479,7 +1480,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [GetBucketLifecycleConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html)
-    pub fn getBucketVersioning(self: *Self, allocator: std.mem.Allocator, input: get_bucket_versioning.GetBucketVersioningInput, options: get_bucket_versioning.Options) !get_bucket_versioning.GetBucketVersioningOutput {
+    pub fn getBucketVersioning(self: *Self, allocator: std.mem.Allocator, input: get_bucket_versioning.GetBucketVersioningInput, options: CallOptions) !get_bucket_versioning.GetBucketVersioningOutput {
         return get_bucket_versioning.execute(self, allocator, input, options);
     }
 
@@ -1497,7 +1498,7 @@ pub const Client = struct {
     /// permissions specified in the trust policy when registering the location:
     /// `sts:AssumeRole`, for directory users or groups `sts:SetContext`, and for
     /// IAM users or roles `sts:SetSourceIdentity`.
-    pub fn getDataAccess(self: *Self, allocator: std.mem.Allocator, input: get_data_access.GetDataAccessInput, options: get_data_access.Options) !get_data_access.GetDataAccessOutput {
+    pub fn getDataAccess(self: *Self, allocator: std.mem.Allocator, input: get_data_access.GetDataAccessInput, options: CallOptions) !get_data_access.GetDataAccessOutput {
         return get_data_access.execute(self, allocator, input, options);
     }
 
@@ -1523,7 +1524,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteJobTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteJobTagging.html)
-    pub fn getJobTagging(self: *Self, allocator: std.mem.Allocator, input: get_job_tagging.GetJobTaggingInput, options: get_job_tagging.Options) !get_job_tagging.GetJobTaggingOutput {
+    pub fn getJobTagging(self: *Self, allocator: std.mem.Allocator, input: get_job_tagging.GetJobTaggingInput, options: CallOptions) !get_job_tagging.GetJobTaggingOutput {
         return get_job_tagging.execute(self, allocator, input, options);
     }
 
@@ -1552,7 +1553,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListMultiRegionAccessPoints](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html)
-    pub fn getMultiRegionAccessPoint(self: *Self, allocator: std.mem.Allocator, input: get_multi_region_access_point.GetMultiRegionAccessPointInput, options: get_multi_region_access_point.Options) !get_multi_region_access_point.GetMultiRegionAccessPointOutput {
+    pub fn getMultiRegionAccessPoint(self: *Self, allocator: std.mem.Allocator, input: get_multi_region_access_point.GetMultiRegionAccessPointInput, options: CallOptions) !get_multi_region_access_point.GetMultiRegionAccessPointOutput {
         return get_multi_region_access_point.execute(self, allocator, input, options);
     }
 
@@ -1576,7 +1577,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [PutMultiRegionAccessPointPolicy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html)
-    pub fn getMultiRegionAccessPointPolicy(self: *Self, allocator: std.mem.Allocator, input: get_multi_region_access_point_policy.GetMultiRegionAccessPointPolicyInput, options: get_multi_region_access_point_policy.Options) !get_multi_region_access_point_policy.GetMultiRegionAccessPointPolicyOutput {
+    pub fn getMultiRegionAccessPointPolicy(self: *Self, allocator: std.mem.Allocator, input: get_multi_region_access_point_policy.GetMultiRegionAccessPointPolicyInput, options: CallOptions) !get_multi_region_access_point_policy.GetMultiRegionAccessPointPolicyOutput {
         return get_multi_region_access_point_policy.execute(self, allocator, input, options);
     }
 
@@ -1601,7 +1602,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [PutMultiRegionAccessPointPolicy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html)
-    pub fn getMultiRegionAccessPointPolicyStatus(self: *Self, allocator: std.mem.Allocator, input: get_multi_region_access_point_policy_status.GetMultiRegionAccessPointPolicyStatusInput, options: get_multi_region_access_point_policy_status.Options) !get_multi_region_access_point_policy_status.GetMultiRegionAccessPointPolicyStatusOutput {
+    pub fn getMultiRegionAccessPointPolicyStatus(self: *Self, allocator: std.mem.Allocator, input: get_multi_region_access_point_policy_status.GetMultiRegionAccessPointPolicyStatusInput, options: CallOptions) !get_multi_region_access_point_policy_status.GetMultiRegionAccessPointPolicyStatusOutput {
         return get_multi_region_access_point_policy_status.execute(self, allocator, input, options);
     }
 
@@ -1624,7 +1625,7 @@ pub const Client = struct {
     /// * `ap-northeast-1`
     ///
     /// * `eu-west-1`
-    pub fn getMultiRegionAccessPointRoutes(self: *Self, allocator: std.mem.Allocator, input: get_multi_region_access_point_routes.GetMultiRegionAccessPointRoutesInput, options: get_multi_region_access_point_routes.Options) !get_multi_region_access_point_routes.GetMultiRegionAccessPointRoutesOutput {
+    pub fn getMultiRegionAccessPointRoutes(self: *Self, allocator: std.mem.Allocator, input: get_multi_region_access_point_routes.GetMultiRegionAccessPointRoutesInput, options: CallOptions) !get_multi_region_access_point_routes.GetMultiRegionAccessPointRoutesOutput {
         return get_multi_region_access_point_routes.execute(self, allocator, input, options);
     }
 
@@ -1646,7 +1647,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [PutPublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html)
-    pub fn getPublicAccessBlock(self: *Self, allocator: std.mem.Allocator, input: get_public_access_block.GetPublicAccessBlockInput, options: get_public_access_block.Options) !get_public_access_block.GetPublicAccessBlockOutput {
+    pub fn getPublicAccessBlock(self: *Self, allocator: std.mem.Allocator, input: get_public_access_block.GetPublicAccessBlockInput, options: CallOptions) !get_public_access_block.GetPublicAccessBlockOutput {
         return get_public_access_block.execute(self, allocator, input, options);
     }
 
@@ -1665,7 +1666,7 @@ pub const Client = struct {
     /// permissions to use Amazon S3 Storage
     /// Lens](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html) in the
     /// *Amazon S3 User Guide*.
-    pub fn getStorageLensConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_storage_lens_configuration.GetStorageLensConfigurationInput, options: get_storage_lens_configuration.Options) !get_storage_lens_configuration.GetStorageLensConfigurationOutput {
+    pub fn getStorageLensConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_storage_lens_configuration.GetStorageLensConfigurationInput, options: CallOptions) !get_storage_lens_configuration.GetStorageLensConfigurationOutput {
         return get_storage_lens_configuration.execute(self, allocator, input, options);
     }
 
@@ -1683,7 +1684,7 @@ pub const Client = struct {
     /// [Setting permissions to
     /// use Amazon S3 Storage
     /// Lens](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html) in the *Amazon S3 User Guide*.
-    pub fn getStorageLensConfigurationTagging(self: *Self, allocator: std.mem.Allocator, input: get_storage_lens_configuration_tagging.GetStorageLensConfigurationTaggingInput, options: get_storage_lens_configuration_tagging.Options) !get_storage_lens_configuration_tagging.GetStorageLensConfigurationTaggingOutput {
+    pub fn getStorageLensConfigurationTagging(self: *Self, allocator: std.mem.Allocator, input: get_storage_lens_configuration_tagging.GetStorageLensConfigurationTaggingInput, options: CallOptions) !get_storage_lens_configuration_tagging.GetStorageLensConfigurationTaggingOutput {
         return get_storage_lens_configuration_tagging.execute(self, allocator, input, options);
     }
 
@@ -1699,7 +1700,7 @@ pub const Client = struct {
     /// Storage
     /// Lens error
     /// codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList).
-    pub fn getStorageLensGroup(self: *Self, allocator: std.mem.Allocator, input: get_storage_lens_group.GetStorageLensGroupInput, options: get_storage_lens_group.Options) !get_storage_lens_group.GetStorageLensGroupOutput {
+    pub fn getStorageLensGroup(self: *Self, allocator: std.mem.Allocator, input: get_storage_lens_group.GetStorageLensGroupInput, options: CallOptions) !get_storage_lens_group.GetStorageLensGroupOutput {
         return get_storage_lens_group.execute(self, allocator, input, options);
     }
 
@@ -1708,7 +1709,7 @@ pub const Client = struct {
     /// **Permissions**
     ///
     /// You must have the `s3:ListAccessGrants` permission to use this operation.
-    pub fn listAccessGrants(self: *Self, allocator: std.mem.Allocator, input: list_access_grants.ListAccessGrantsInput, options: list_access_grants.Options) !list_access_grants.ListAccessGrantsOutput {
+    pub fn listAccessGrants(self: *Self, allocator: std.mem.Allocator, input: list_access_grants.ListAccessGrantsInput, options: CallOptions) !list_access_grants.ListAccessGrantsOutput {
         return list_access_grants.execute(self, allocator, input, options);
     }
 
@@ -1720,7 +1721,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3:ListAccessGrantsInstances` permission to use this
     /// operation.
-    pub fn listAccessGrantsInstances(self: *Self, allocator: std.mem.Allocator, input: list_access_grants_instances.ListAccessGrantsInstancesInput, options: list_access_grants_instances.Options) !list_access_grants_instances.ListAccessGrantsInstancesOutput {
+    pub fn listAccessGrantsInstances(self: *Self, allocator: std.mem.Allocator, input: list_access_grants_instances.ListAccessGrantsInstancesInput, options: CallOptions) !list_access_grants_instances.ListAccessGrantsInstancesOutput {
         return list_access_grants_instances.execute(self, allocator, input, options);
     }
 
@@ -1731,7 +1732,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3:ListAccessGrantsLocations` permission to use this
     /// operation.
-    pub fn listAccessGrantsLocations(self: *Self, allocator: std.mem.Allocator, input: list_access_grants_locations.ListAccessGrantsLocationsInput, options: list_access_grants_locations.Options) !list_access_grants_locations.ListAccessGrantsLocationsOutput {
+    pub fn listAccessGrantsLocations(self: *Self, allocator: std.mem.Allocator, input: list_access_grants_locations.ListAccessGrantsLocationsInput, options: CallOptions) !list_access_grants_locations.ListAccessGrantsLocationsOutput {
         return list_access_grants_locations.execute(self, allocator, input, options);
     }
 
@@ -1767,7 +1768,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [GetAccessPoint](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html)
-    pub fn listAccessPoints(self: *Self, allocator: std.mem.Allocator, input: list_access_points.ListAccessPointsInput, options: list_access_points.Options) !list_access_points.ListAccessPointsOutput {
+    pub fn listAccessPoints(self: *Self, allocator: std.mem.Allocator, input: list_access_points.ListAccessPointsInput, options: CallOptions) !list_access_points.ListAccessPointsOutput {
         return list_access_points.execute(self, allocator, input, options);
     }
 
@@ -1783,7 +1784,7 @@ pub const Client = struct {
     ///
     /// For information about REST API errors, see [REST error
     /// responses](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses).
-    pub fn listAccessPointsForDirectoryBuckets(self: *Self, allocator: std.mem.Allocator, input: list_access_points_for_directory_buckets.ListAccessPointsForDirectoryBucketsInput, options: list_access_points_for_directory_buckets.Options) !list_access_points_for_directory_buckets.ListAccessPointsForDirectoryBucketsOutput {
+    pub fn listAccessPointsForDirectoryBuckets(self: *Self, allocator: std.mem.Allocator, input: list_access_points_for_directory_buckets.ListAccessPointsForDirectoryBucketsInput, options: CallOptions) !list_access_points_for_directory_buckets.ListAccessPointsForDirectoryBucketsOutput {
         return list_access_points_for_directory_buckets.execute(self, allocator, input, options);
     }
 
@@ -1806,7 +1807,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [GetAccessPointForObjectLambda](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html)
-    pub fn listAccessPointsForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: list_access_points_for_object_lambda.ListAccessPointsForObjectLambdaInput, options: list_access_points_for_object_lambda.Options) !list_access_points_for_object_lambda.ListAccessPointsForObjectLambdaOutput {
+    pub fn listAccessPointsForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: list_access_points_for_object_lambda.ListAccessPointsForObjectLambdaInput, options: CallOptions) !list_access_points_for_object_lambda.ListAccessPointsForObjectLambdaOutput {
         return list_access_points_for_object_lambda.execute(self, allocator, input, options);
     }
 
@@ -1828,7 +1829,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3:ListCallerAccessGrants` permission to use this
     /// operation.
-    pub fn listCallerAccessGrants(self: *Self, allocator: std.mem.Allocator, input: list_caller_access_grants.ListCallerAccessGrantsInput, options: list_caller_access_grants.Options) !list_caller_access_grants.ListCallerAccessGrantsOutput {
+    pub fn listCallerAccessGrants(self: *Self, allocator: std.mem.Allocator, input: list_caller_access_grants.ListCallerAccessGrantsInput, options: CallOptions) !list_caller_access_grants.ListCallerAccessGrantsOutput {
         return list_caller_access_grants.execute(self, allocator, input, options);
     }
 
@@ -1857,7 +1858,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [UpdateJobStatus](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
-    pub fn listJobs(self: *Self, allocator: std.mem.Allocator, input: list_jobs.ListJobsInput, options: list_jobs.Options) !list_jobs.ListJobsOutput {
+    pub fn listJobs(self: *Self, allocator: std.mem.Allocator, input: list_jobs.ListJobsInput, options: CallOptions) !list_jobs.ListJobsOutput {
         return list_jobs.execute(self, allocator, input, options);
     }
 
@@ -1889,7 +1890,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [GetMultiRegionAccessPoint](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html)
-    pub fn listMultiRegionAccessPoints(self: *Self, allocator: std.mem.Allocator, input: list_multi_region_access_points.ListMultiRegionAccessPointsInput, options: list_multi_region_access_points.Options) !list_multi_region_access_points.ListMultiRegionAccessPointsOutput {
+    pub fn listMultiRegionAccessPoints(self: *Self, allocator: std.mem.Allocator, input: list_multi_region_access_points.ListMultiRegionAccessPointsInput, options: CallOptions) !list_multi_region_access_points.ListMultiRegionAccessPointsOutput {
         return list_multi_region_access_points.execute(self, allocator, input, options);
     }
 
@@ -1905,7 +1906,7 @@ pub const Client = struct {
     /// S3 on Outposts
     /// endpoint hostname prefix and `x-amz-outpost-id` in your request, see the
     /// [Examples](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples) section.
-    pub fn listRegionalBuckets(self: *Self, allocator: std.mem.Allocator, input: list_regional_buckets.ListRegionalBucketsInput, options: list_regional_buckets.Options) !list_regional_buckets.ListRegionalBucketsOutput {
+    pub fn listRegionalBuckets(self: *Self, allocator: std.mem.Allocator, input: list_regional_buckets.ListRegionalBucketsInput, options: CallOptions) !list_regional_buckets.ListRegionalBucketsOutput {
         return list_regional_buckets.execute(self, allocator, input, options);
     }
 
@@ -1923,7 +1924,7 @@ pub const Client = struct {
     /// [Setting permissions to
     /// use Amazon S3 Storage
     /// Lens](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html) in the *Amazon S3 User Guide*.
-    pub fn listStorageLensConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_storage_lens_configurations.ListStorageLensConfigurationsInput, options: list_storage_lens_configurations.Options) !list_storage_lens_configurations.ListStorageLensConfigurationsOutput {
+    pub fn listStorageLensConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_storage_lens_configurations.ListStorageLensConfigurationsInput, options: CallOptions) !list_storage_lens_configurations.ListStorageLensConfigurationsOutput {
         return list_storage_lens_configurations.execute(self, allocator, input, options);
     }
 
@@ -1939,7 +1940,7 @@ pub const Client = struct {
     /// Storage
     /// Lens error
     /// codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList).
-    pub fn listStorageLensGroups(self: *Self, allocator: std.mem.Allocator, input: list_storage_lens_groups.ListStorageLensGroupsInput, options: list_storage_lens_groups.Options) !list_storage_lens_groups.ListStorageLensGroupsOutput {
+    pub fn listStorageLensGroups(self: *Self, allocator: std.mem.Allocator, input: list_storage_lens_groups.ListStorageLensGroupsInput, options: CallOptions) !list_storage_lens_groups.ListStorageLensGroupsOutput {
         return list_storage_lens_groups.execute(self, allocator, input, options);
     }
 
@@ -1989,7 +1990,7 @@ pub const Client = struct {
     /// For information about S3 Tagging errors, see [List of Amazon S3 Tagging
     /// error
     /// codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList).
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -1999,7 +2000,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3:PutAccessGrantsInstanceResourcePolicy` permission to
     /// use this operation.
-    pub fn putAccessGrantsInstanceResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_access_grants_instance_resource_policy.PutAccessGrantsInstanceResourcePolicyInput, options: put_access_grants_instance_resource_policy.Options) !put_access_grants_instance_resource_policy.PutAccessGrantsInstanceResourcePolicyOutput {
+    pub fn putAccessGrantsInstanceResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_access_grants_instance_resource_policy.PutAccessGrantsInstanceResourcePolicyInput, options: CallOptions) !put_access_grants_instance_resource_policy.PutAccessGrantsInstanceResourcePolicyOutput {
         return put_access_grants_instance_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -2012,7 +2013,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [GetAccessPointConfigurationForObjectLambda](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointConfigurationForObjectLambda.html)
-    pub fn putAccessPointConfigurationForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: put_access_point_configuration_for_object_lambda.PutAccessPointConfigurationForObjectLambdaInput, options: put_access_point_configuration_for_object_lambda.Options) !put_access_point_configuration_for_object_lambda.PutAccessPointConfigurationForObjectLambdaOutput {
+    pub fn putAccessPointConfigurationForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: put_access_point_configuration_for_object_lambda.PutAccessPointConfigurationForObjectLambdaInput, options: CallOptions) !put_access_point_configuration_for_object_lambda.PutAccessPointConfigurationForObjectLambdaOutput {
         return put_access_point_configuration_for_object_lambda.execute(self, allocator, input, options);
     }
 
@@ -2037,7 +2038,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteAccessPointPolicy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html)
-    pub fn putAccessPointPolicy(self: *Self, allocator: std.mem.Allocator, input: put_access_point_policy.PutAccessPointPolicyInput, options: put_access_point_policy.Options) !put_access_point_policy.PutAccessPointPolicyOutput {
+    pub fn putAccessPointPolicy(self: *Self, allocator: std.mem.Allocator, input: put_access_point_policy.PutAccessPointPolicyInput, options: CallOptions) !put_access_point_policy.PutAccessPointPolicyOutput {
         return put_access_point_policy.execute(self, allocator, input, options);
     }
 
@@ -2055,7 +2056,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [GetAccessPointPolicyForObjectLambda](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicyForObjectLambda.html)
-    pub fn putAccessPointPolicyForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: put_access_point_policy_for_object_lambda.PutAccessPointPolicyForObjectLambdaInput, options: put_access_point_policy_for_object_lambda.Options) !put_access_point_policy_for_object_lambda.PutAccessPointPolicyForObjectLambdaOutput {
+    pub fn putAccessPointPolicyForObjectLambda(self: *Self, allocator: std.mem.Allocator, input: put_access_point_policy_for_object_lambda.PutAccessPointPolicyForObjectLambdaInput, options: CallOptions) !put_access_point_policy_for_object_lambda.PutAccessPointPolicyForObjectLambdaOutput {
         return put_access_point_policy_for_object_lambda.execute(self, allocator, input, options);
     }
 
@@ -2071,7 +2072,7 @@ pub const Client = struct {
     ///
     /// For information about REST API errors, see [REST error
     /// responses](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses).
-    pub fn putAccessPointScope(self: *Self, allocator: std.mem.Allocator, input: put_access_point_scope.PutAccessPointScopeInput, options: put_access_point_scope.Options) !put_access_point_scope.PutAccessPointScopeOutput {
+    pub fn putAccessPointScope(self: *Self, allocator: std.mem.Allocator, input: put_access_point_scope.PutAccessPointScopeInput, options: CallOptions) !put_access_point_scope.PutAccessPointScopeOutput {
         return put_access_point_scope.execute(self, allocator, input, options);
     }
 
@@ -2104,7 +2105,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteBucketLifecycleConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html)
-    pub fn putBucketLifecycleConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_bucket_lifecycle_configuration.PutBucketLifecycleConfigurationInput, options: put_bucket_lifecycle_configuration.Options) !put_bucket_lifecycle_configuration.PutBucketLifecycleConfigurationOutput {
+    pub fn putBucketLifecycleConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_bucket_lifecycle_configuration.PutBucketLifecycleConfigurationInput, options: CallOptions) !put_bucket_lifecycle_configuration.PutBucketLifecycleConfigurationOutput {
         return put_bucket_lifecycle_configuration.execute(self, allocator, input, options);
     }
 
@@ -2158,7 +2159,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteBucketPolicy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html)
-    pub fn putBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: put_bucket_policy.PutBucketPolicyInput, options: put_bucket_policy.Options) !put_bucket_policy.PutBucketPolicyOutput {
+    pub fn putBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: put_bucket_policy.PutBucketPolicyInput, options: CallOptions) !put_bucket_policy.PutBucketPolicyOutput {
         return put_bucket_policy.execute(self, allocator, input, options);
     }
 
@@ -2269,7 +2270,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketReplication.html)
-    pub fn putBucketReplication(self: *Self, allocator: std.mem.Allocator, input: put_bucket_replication.PutBucketReplicationInput, options: put_bucket_replication.Options) !put_bucket_replication.PutBucketReplicationOutput {
+    pub fn putBucketReplication(self: *Self, allocator: std.mem.Allocator, input: put_bucket_replication.PutBucketReplicationInput, options: CallOptions) !put_bucket_replication.PutBucketReplicationOutput {
         return put_bucket_replication.execute(self, allocator, input, options);
     }
 
@@ -2352,7 +2353,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteBucketTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html)
-    pub fn putBucketTagging(self: *Self, allocator: std.mem.Allocator, input: put_bucket_tagging.PutBucketTaggingInput, options: put_bucket_tagging.Options) !put_bucket_tagging.PutBucketTaggingOutput {
+    pub fn putBucketTagging(self: *Self, allocator: std.mem.Allocator, input: put_bucket_tagging.PutBucketTaggingInput, options: CallOptions) !put_bucket_tagging.PutBucketTaggingOutput {
         return put_bucket_tagging.execute(self, allocator, input, options);
     }
 
@@ -2426,7 +2427,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [GetBucketLifecycleConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html)
-    pub fn putBucketVersioning(self: *Self, allocator: std.mem.Allocator, input: put_bucket_versioning.PutBucketVersioningInput, options: put_bucket_versioning.Options) !put_bucket_versioning.PutBucketVersioningOutput {
+    pub fn putBucketVersioning(self: *Self, allocator: std.mem.Allocator, input: put_bucket_versioning.PutBucketVersioningInput, options: CallOptions) !put_bucket_versioning.PutBucketVersioningOutput {
         return put_bucket_versioning.execute(self, allocator, input, options);
     }
 
@@ -2487,7 +2488,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteJobTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteJobTagging.html)
-    pub fn putJobTagging(self: *Self, allocator: std.mem.Allocator, input: put_job_tagging.PutJobTaggingInput, options: put_job_tagging.Options) !put_job_tagging.PutJobTaggingOutput {
+    pub fn putJobTagging(self: *Self, allocator: std.mem.Allocator, input: put_job_tagging.PutJobTaggingInput, options: CallOptions) !put_job_tagging.PutJobTaggingOutput {
         return put_job_tagging.execute(self, allocator, input, options);
     }
 
@@ -2514,7 +2515,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [GetMultiRegionAccessPointPolicyStatus](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html)
-    pub fn putMultiRegionAccessPointPolicy(self: *Self, allocator: std.mem.Allocator, input: put_multi_region_access_point_policy.PutMultiRegionAccessPointPolicyInput, options: put_multi_region_access_point_policy.Options) !put_multi_region_access_point_policy.PutMultiRegionAccessPointPolicyOutput {
+    pub fn putMultiRegionAccessPointPolicy(self: *Self, allocator: std.mem.Allocator, input: put_multi_region_access_point_policy.PutMultiRegionAccessPointPolicyInput, options: CallOptions) !put_multi_region_access_point_policy.PutMultiRegionAccessPointPolicyOutput {
         return put_multi_region_access_point_policy.execute(self, allocator, input, options);
     }
 
@@ -2541,7 +2542,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeletePublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html)
-    pub fn putPublicAccessBlock(self: *Self, allocator: std.mem.Allocator, input: put_public_access_block.PutPublicAccessBlockInput, options: put_public_access_block.Options) !put_public_access_block.PutPublicAccessBlockOutput {
+    pub fn putPublicAccessBlock(self: *Self, allocator: std.mem.Allocator, input: put_public_access_block.PutPublicAccessBlockInput, options: CallOptions) !put_public_access_block.PutPublicAccessBlockOutput {
         return put_public_access_block.execute(self, allocator, input, options);
     }
 
@@ -2560,7 +2561,7 @@ pub const Client = struct {
     /// permissions to use Amazon S3 Storage
     /// Lens](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html) in the
     /// *Amazon S3 User Guide*.
-    pub fn putStorageLensConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_storage_lens_configuration.PutStorageLensConfigurationInput, options: put_storage_lens_configuration.Options) !put_storage_lens_configuration.PutStorageLensConfigurationOutput {
+    pub fn putStorageLensConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_storage_lens_configuration.PutStorageLensConfigurationInput, options: CallOptions) !put_storage_lens_configuration.PutStorageLensConfigurationOutput {
         return put_storage_lens_configuration.execute(self, allocator, input, options);
     }
 
@@ -2578,7 +2579,7 @@ pub const Client = struct {
     /// [Setting permissions to
     /// use Amazon S3 Storage
     /// Lens](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html) in the *Amazon S3 User Guide*.
-    pub fn putStorageLensConfigurationTagging(self: *Self, allocator: std.mem.Allocator, input: put_storage_lens_configuration_tagging.PutStorageLensConfigurationTaggingInput, options: put_storage_lens_configuration_tagging.Options) !put_storage_lens_configuration_tagging.PutStorageLensConfigurationTaggingOutput {
+    pub fn putStorageLensConfigurationTagging(self: *Self, allocator: std.mem.Allocator, input: put_storage_lens_configuration_tagging.PutStorageLensConfigurationTaggingInput, options: CallOptions) !put_storage_lens_configuration_tagging.PutStorageLensConfigurationTaggingOutput {
         return put_storage_lens_configuration_tagging.execute(self, allocator, input, options);
     }
 
@@ -2619,7 +2620,7 @@ pub const Client = struct {
     /// * `ap-northeast-1`
     ///
     /// * `eu-west-1`
-    pub fn submitMultiRegionAccessPointRoutes(self: *Self, allocator: std.mem.Allocator, input: submit_multi_region_access_point_routes.SubmitMultiRegionAccessPointRoutesInput, options: submit_multi_region_access_point_routes.Options) !submit_multi_region_access_point_routes.SubmitMultiRegionAccessPointRoutesOutput {
+    pub fn submitMultiRegionAccessPointRoutes(self: *Self, allocator: std.mem.Allocator, input: submit_multi_region_access_point_routes.SubmitMultiRegionAccessPointRoutesInput, options: CallOptions) !submit_multi_region_access_point_routes.SubmitMultiRegionAccessPointRoutesOutput {
         return submit_multi_region_access_point_routes.execute(self, allocator, input, options);
     }
 
@@ -2671,7 +2672,7 @@ pub const Client = struct {
     /// For information about S3 Tagging errors, see [List of Amazon S3 Tagging
     /// error
     /// codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList).
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -2720,7 +2721,7 @@ pub const Client = struct {
     /// For information about S3 Tagging errors, see [List of Amazon S3
     /// Tagging error
     /// codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList).
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -2735,7 +2736,7 @@ pub const Client = struct {
     /// **Additional Permissions**
     ///
     /// You must also have the following permission: `iam:PassRole`
-    pub fn updateAccessGrantsLocation(self: *Self, allocator: std.mem.Allocator, input: update_access_grants_location.UpdateAccessGrantsLocationInput, options: update_access_grants_location.Options) !update_access_grants_location.UpdateAccessGrantsLocationOutput {
+    pub fn updateAccessGrantsLocation(self: *Self, allocator: std.mem.Allocator, input: update_access_grants_location.UpdateAccessGrantsLocationInput, options: CallOptions) !update_access_grants_location.UpdateAccessGrantsLocationOutput {
         return update_access_grants_location.execute(self, allocator, input, options);
     }
 
@@ -2762,7 +2763,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [UpdateJobStatus](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
-    pub fn updateJobPriority(self: *Self, allocator: std.mem.Allocator, input: update_job_priority.UpdateJobPriorityInput, options: update_job_priority.Options) !update_job_priority.UpdateJobPriorityOutput {
+    pub fn updateJobPriority(self: *Self, allocator: std.mem.Allocator, input: update_job_priority.UpdateJobPriorityInput, options: CallOptions) !update_job_priority.UpdateJobPriorityOutput {
         return update_job_priority.execute(self, allocator, input, options);
     }
 
@@ -2790,7 +2791,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [UpdateJobStatus](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
-    pub fn updateJobStatus(self: *Self, allocator: std.mem.Allocator, input: update_job_status.UpdateJobStatusInput, options: update_job_status.Options) !update_job_status.UpdateJobStatusOutput {
+    pub fn updateJobStatus(self: *Self, allocator: std.mem.Allocator, input: update_job_status.UpdateJobStatusInput, options: CallOptions) !update_job_status.UpdateJobStatusOutput {
         return update_job_status.execute(self, allocator, input, options);
     }
 
@@ -2806,7 +2807,7 @@ pub const Client = struct {
     /// Storage
     /// Lens error
     /// codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList).
-    pub fn updateStorageLensGroup(self: *Self, allocator: std.mem.Allocator, input: update_storage_lens_group.UpdateStorageLensGroupInput, options: update_storage_lens_group.Options) !update_storage_lens_group.UpdateStorageLensGroupOutput {
+    pub fn updateStorageLensGroup(self: *Self, allocator: std.mem.Allocator, input: update_storage_lens_group.UpdateStorageLensGroupInput, options: CallOptions) !update_storage_lens_group.UpdateStorageLensGroupOutput {
         return update_storage_lens_group.execute(self, allocator, input, options);
     }
 

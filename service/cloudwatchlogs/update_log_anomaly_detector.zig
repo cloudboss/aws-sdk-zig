@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EvaluationFrequency = @import("evaluation_frequency.zig").EvaluationFrequency;
 
@@ -41,13 +42,9 @@ pub const UpdateLogAnomalyDetectorInput = struct {
     };
 };
 
-const UpdateLogAnomalyDetectorOutput = struct {};
+pub const UpdateLogAnomalyDetectorOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLogAnomalyDetectorInput, options: Options) !UpdateLogAnomalyDetectorOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLogAnomalyDetectorInput, options: CallOptions) !UpdateLogAnomalyDetectorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

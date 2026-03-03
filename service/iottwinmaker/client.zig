@@ -41,6 +41,7 @@ const update_entity = @import("update_entity.zig");
 const update_pricing_plan = @import("update_pricing_plan.zig");
 const update_scene = @import("update_scene.zig");
 const update_workspace = @import("update_workspace.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -72,67 +73,67 @@ pub const Client = struct {
     }
 
     /// Sets values for multiple time series properties.
-    pub fn batchPutPropertyValues(self: *Self, allocator: std.mem.Allocator, input: batch_put_property_values.BatchPutPropertyValuesInput, options: batch_put_property_values.Options) !batch_put_property_values.BatchPutPropertyValuesOutput {
+    pub fn batchPutPropertyValues(self: *Self, allocator: std.mem.Allocator, input: batch_put_property_values.BatchPutPropertyValuesInput, options: CallOptions) !batch_put_property_values.BatchPutPropertyValuesOutput {
         return batch_put_property_values.execute(self, allocator, input, options);
     }
 
     /// Cancels the metadata transfer job.
-    pub fn cancelMetadataTransferJob(self: *Self, allocator: std.mem.Allocator, input: cancel_metadata_transfer_job.CancelMetadataTransferJobInput, options: cancel_metadata_transfer_job.Options) !cancel_metadata_transfer_job.CancelMetadataTransferJobOutput {
+    pub fn cancelMetadataTransferJob(self: *Self, allocator: std.mem.Allocator, input: cancel_metadata_transfer_job.CancelMetadataTransferJobInput, options: CallOptions) !cancel_metadata_transfer_job.CancelMetadataTransferJobOutput {
         return cancel_metadata_transfer_job.execute(self, allocator, input, options);
     }
 
     /// Creates a component type.
-    pub fn createComponentType(self: *Self, allocator: std.mem.Allocator, input: create_component_type.CreateComponentTypeInput, options: create_component_type.Options) !create_component_type.CreateComponentTypeOutput {
+    pub fn createComponentType(self: *Self, allocator: std.mem.Allocator, input: create_component_type.CreateComponentTypeInput, options: CallOptions) !create_component_type.CreateComponentTypeOutput {
         return create_component_type.execute(self, allocator, input, options);
     }
 
     /// Creates an entity.
-    pub fn createEntity(self: *Self, allocator: std.mem.Allocator, input: create_entity.CreateEntityInput, options: create_entity.Options) !create_entity.CreateEntityOutput {
+    pub fn createEntity(self: *Self, allocator: std.mem.Allocator, input: create_entity.CreateEntityInput, options: CallOptions) !create_entity.CreateEntityOutput {
         return create_entity.execute(self, allocator, input, options);
     }
 
     /// Creates a new metadata transfer job.
-    pub fn createMetadataTransferJob(self: *Self, allocator: std.mem.Allocator, input: create_metadata_transfer_job.CreateMetadataTransferJobInput, options: create_metadata_transfer_job.Options) !create_metadata_transfer_job.CreateMetadataTransferJobOutput {
+    pub fn createMetadataTransferJob(self: *Self, allocator: std.mem.Allocator, input: create_metadata_transfer_job.CreateMetadataTransferJobInput, options: CallOptions) !create_metadata_transfer_job.CreateMetadataTransferJobOutput {
         return create_metadata_transfer_job.execute(self, allocator, input, options);
     }
 
     /// Creates a scene.
-    pub fn createScene(self: *Self, allocator: std.mem.Allocator, input: create_scene.CreateSceneInput, options: create_scene.Options) !create_scene.CreateSceneOutput {
+    pub fn createScene(self: *Self, allocator: std.mem.Allocator, input: create_scene.CreateSceneInput, options: CallOptions) !create_scene.CreateSceneOutput {
         return create_scene.execute(self, allocator, input, options);
     }
 
     /// This action creates a SyncJob.
-    pub fn createSyncJob(self: *Self, allocator: std.mem.Allocator, input: create_sync_job.CreateSyncJobInput, options: create_sync_job.Options) !create_sync_job.CreateSyncJobOutput {
+    pub fn createSyncJob(self: *Self, allocator: std.mem.Allocator, input: create_sync_job.CreateSyncJobInput, options: CallOptions) !create_sync_job.CreateSyncJobOutput {
         return create_sync_job.execute(self, allocator, input, options);
     }
 
     /// Creates a workplace.
-    pub fn createWorkspace(self: *Self, allocator: std.mem.Allocator, input: create_workspace.CreateWorkspaceInput, options: create_workspace.Options) !create_workspace.CreateWorkspaceOutput {
+    pub fn createWorkspace(self: *Self, allocator: std.mem.Allocator, input: create_workspace.CreateWorkspaceInput, options: CallOptions) !create_workspace.CreateWorkspaceOutput {
         return create_workspace.execute(self, allocator, input, options);
     }
 
     /// Deletes a component type.
-    pub fn deleteComponentType(self: *Self, allocator: std.mem.Allocator, input: delete_component_type.DeleteComponentTypeInput, options: delete_component_type.Options) !delete_component_type.DeleteComponentTypeOutput {
+    pub fn deleteComponentType(self: *Self, allocator: std.mem.Allocator, input: delete_component_type.DeleteComponentTypeInput, options: CallOptions) !delete_component_type.DeleteComponentTypeOutput {
         return delete_component_type.execute(self, allocator, input, options);
     }
 
     /// Deletes an entity.
-    pub fn deleteEntity(self: *Self, allocator: std.mem.Allocator, input: delete_entity.DeleteEntityInput, options: delete_entity.Options) !delete_entity.DeleteEntityOutput {
+    pub fn deleteEntity(self: *Self, allocator: std.mem.Allocator, input: delete_entity.DeleteEntityInput, options: CallOptions) !delete_entity.DeleteEntityOutput {
         return delete_entity.execute(self, allocator, input, options);
     }
 
     /// Deletes a scene.
-    pub fn deleteScene(self: *Self, allocator: std.mem.Allocator, input: delete_scene.DeleteSceneInput, options: delete_scene.Options) !delete_scene.DeleteSceneOutput {
+    pub fn deleteScene(self: *Self, allocator: std.mem.Allocator, input: delete_scene.DeleteSceneInput, options: CallOptions) !delete_scene.DeleteSceneOutput {
         return delete_scene.execute(self, allocator, input, options);
     }
 
     /// Delete the SyncJob.
-    pub fn deleteSyncJob(self: *Self, allocator: std.mem.Allocator, input: delete_sync_job.DeleteSyncJobInput, options: delete_sync_job.Options) !delete_sync_job.DeleteSyncJobOutput {
+    pub fn deleteSyncJob(self: *Self, allocator: std.mem.Allocator, input: delete_sync_job.DeleteSyncJobInput, options: CallOptions) !delete_sync_job.DeleteSyncJobOutput {
         return delete_sync_job.execute(self, allocator, input, options);
     }
 
     /// Deletes a workspace.
-    pub fn deleteWorkspace(self: *Self, allocator: std.mem.Allocator, input: delete_workspace.DeleteWorkspaceInput, options: delete_workspace.Options) !delete_workspace.DeleteWorkspaceOutput {
+    pub fn deleteWorkspace(self: *Self, allocator: std.mem.Allocator, input: delete_workspace.DeleteWorkspaceInput, options: CallOptions) !delete_workspace.DeleteWorkspaceOutput {
         return delete_workspace.execute(self, allocator, input, options);
     }
 
@@ -144,27 +145,27 @@ pub const Client = struct {
     /// SDK2](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/home.html).
     /// ExecuteQuery will not work with any Amazon Web Services Java SDK version <
     /// 2.x.
-    pub fn executeQuery(self: *Self, allocator: std.mem.Allocator, input: execute_query.ExecuteQueryInput, options: execute_query.Options) !execute_query.ExecuteQueryOutput {
+    pub fn executeQuery(self: *Self, allocator: std.mem.Allocator, input: execute_query.ExecuteQueryInput, options: CallOptions) !execute_query.ExecuteQueryOutput {
         return execute_query.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a component type.
-    pub fn getComponentType(self: *Self, allocator: std.mem.Allocator, input: get_component_type.GetComponentTypeInput, options: get_component_type.Options) !get_component_type.GetComponentTypeOutput {
+    pub fn getComponentType(self: *Self, allocator: std.mem.Allocator, input: get_component_type.GetComponentTypeInput, options: CallOptions) !get_component_type.GetComponentTypeOutput {
         return get_component_type.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about an entity.
-    pub fn getEntity(self: *Self, allocator: std.mem.Allocator, input: get_entity.GetEntityInput, options: get_entity.Options) !get_entity.GetEntityOutput {
+    pub fn getEntity(self: *Self, allocator: std.mem.Allocator, input: get_entity.GetEntityInput, options: CallOptions) !get_entity.GetEntityOutput {
         return get_entity.execute(self, allocator, input, options);
     }
 
     /// Gets a nmetadata transfer job.
-    pub fn getMetadataTransferJob(self: *Self, allocator: std.mem.Allocator, input: get_metadata_transfer_job.GetMetadataTransferJobInput, options: get_metadata_transfer_job.Options) !get_metadata_transfer_job.GetMetadataTransferJobOutput {
+    pub fn getMetadataTransferJob(self: *Self, allocator: std.mem.Allocator, input: get_metadata_transfer_job.GetMetadataTransferJobInput, options: CallOptions) !get_metadata_transfer_job.GetMetadataTransferJobOutput {
         return get_metadata_transfer_job.execute(self, allocator, input, options);
     }
 
     /// Gets the pricing plan.
-    pub fn getPricingPlan(self: *Self, allocator: std.mem.Allocator, input: get_pricing_plan.GetPricingPlanInput, options: get_pricing_plan.Options) !get_pricing_plan.GetPricingPlanOutput {
+    pub fn getPricingPlan(self: *Self, allocator: std.mem.Allocator, input: get_pricing_plan.GetPricingPlanInput, options: CallOptions) !get_pricing_plan.GetPricingPlanOutput {
         return get_pricing_plan.execute(self, allocator, input, options);
     }
 
@@ -173,7 +174,7 @@ pub const Client = struct {
     ///
     /// You must specify a value for either `componentName`,
     /// `componentTypeId`, `entityId`, or `workspaceId`.
-    pub fn getPropertyValue(self: *Self, allocator: std.mem.Allocator, input: get_property_value.GetPropertyValueInput, options: get_property_value.Options) !get_property_value.GetPropertyValueOutput {
+    pub fn getPropertyValue(self: *Self, allocator: std.mem.Allocator, input: get_property_value.GetPropertyValueInput, options: CallOptions) !get_property_value.GetPropertyValueOutput {
         return get_property_value.execute(self, allocator, input, options);
     }
 
@@ -184,107 +185,107 @@ pub const Client = struct {
     /// You must specify a value for `workspaceId`. For entity-specific queries,
     /// specify values for `componentName` and `entityId`. For cross-entity
     /// quries, specify a value for `componentTypeId`.
-    pub fn getPropertyValueHistory(self: *Self, allocator: std.mem.Allocator, input: get_property_value_history.GetPropertyValueHistoryInput, options: get_property_value_history.Options) !get_property_value_history.GetPropertyValueHistoryOutput {
+    pub fn getPropertyValueHistory(self: *Self, allocator: std.mem.Allocator, input: get_property_value_history.GetPropertyValueHistoryInput, options: CallOptions) !get_property_value_history.GetPropertyValueHistoryOutput {
         return get_property_value_history.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a scene.
-    pub fn getScene(self: *Self, allocator: std.mem.Allocator, input: get_scene.GetSceneInput, options: get_scene.Options) !get_scene.GetSceneOutput {
+    pub fn getScene(self: *Self, allocator: std.mem.Allocator, input: get_scene.GetSceneInput, options: CallOptions) !get_scene.GetSceneOutput {
         return get_scene.execute(self, allocator, input, options);
     }
 
     /// Gets the SyncJob.
-    pub fn getSyncJob(self: *Self, allocator: std.mem.Allocator, input: get_sync_job.GetSyncJobInput, options: get_sync_job.Options) !get_sync_job.GetSyncJobOutput {
+    pub fn getSyncJob(self: *Self, allocator: std.mem.Allocator, input: get_sync_job.GetSyncJobInput, options: CallOptions) !get_sync_job.GetSyncJobOutput {
         return get_sync_job.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a workspace.
-    pub fn getWorkspace(self: *Self, allocator: std.mem.Allocator, input: get_workspace.GetWorkspaceInput, options: get_workspace.Options) !get_workspace.GetWorkspaceOutput {
+    pub fn getWorkspace(self: *Self, allocator: std.mem.Allocator, input: get_workspace.GetWorkspaceInput, options: CallOptions) !get_workspace.GetWorkspaceOutput {
         return get_workspace.execute(self, allocator, input, options);
     }
 
     /// Lists all component types in a workspace.
-    pub fn listComponentTypes(self: *Self, allocator: std.mem.Allocator, input: list_component_types.ListComponentTypesInput, options: list_component_types.Options) !list_component_types.ListComponentTypesOutput {
+    pub fn listComponentTypes(self: *Self, allocator: std.mem.Allocator, input: list_component_types.ListComponentTypesInput, options: CallOptions) !list_component_types.ListComponentTypesOutput {
         return list_component_types.execute(self, allocator, input, options);
     }
 
     /// This API lists the components of an entity.
-    pub fn listComponents(self: *Self, allocator: std.mem.Allocator, input: list_components.ListComponentsInput, options: list_components.Options) !list_components.ListComponentsOutput {
+    pub fn listComponents(self: *Self, allocator: std.mem.Allocator, input: list_components.ListComponentsInput, options: CallOptions) !list_components.ListComponentsOutput {
         return list_components.execute(self, allocator, input, options);
     }
 
     /// Lists all entities in a workspace.
-    pub fn listEntities(self: *Self, allocator: std.mem.Allocator, input: list_entities.ListEntitiesInput, options: list_entities.Options) !list_entities.ListEntitiesOutput {
+    pub fn listEntities(self: *Self, allocator: std.mem.Allocator, input: list_entities.ListEntitiesInput, options: CallOptions) !list_entities.ListEntitiesOutput {
         return list_entities.execute(self, allocator, input, options);
     }
 
     /// Lists the metadata transfer jobs.
-    pub fn listMetadataTransferJobs(self: *Self, allocator: std.mem.Allocator, input: list_metadata_transfer_jobs.ListMetadataTransferJobsInput, options: list_metadata_transfer_jobs.Options) !list_metadata_transfer_jobs.ListMetadataTransferJobsOutput {
+    pub fn listMetadataTransferJobs(self: *Self, allocator: std.mem.Allocator, input: list_metadata_transfer_jobs.ListMetadataTransferJobsInput, options: CallOptions) !list_metadata_transfer_jobs.ListMetadataTransferJobsOutput {
         return list_metadata_transfer_jobs.execute(self, allocator, input, options);
     }
 
     /// This API lists the properties of a component.
-    pub fn listProperties(self: *Self, allocator: std.mem.Allocator, input: list_properties.ListPropertiesInput, options: list_properties.Options) !list_properties.ListPropertiesOutput {
+    pub fn listProperties(self: *Self, allocator: std.mem.Allocator, input: list_properties.ListPropertiesInput, options: CallOptions) !list_properties.ListPropertiesOutput {
         return list_properties.execute(self, allocator, input, options);
     }
 
     /// Lists all scenes in a workspace.
-    pub fn listScenes(self: *Self, allocator: std.mem.Allocator, input: list_scenes.ListScenesInput, options: list_scenes.Options) !list_scenes.ListScenesOutput {
+    pub fn listScenes(self: *Self, allocator: std.mem.Allocator, input: list_scenes.ListScenesInput, options: CallOptions) !list_scenes.ListScenesOutput {
         return list_scenes.execute(self, allocator, input, options);
     }
 
     /// List all SyncJobs.
-    pub fn listSyncJobs(self: *Self, allocator: std.mem.Allocator, input: list_sync_jobs.ListSyncJobsInput, options: list_sync_jobs.Options) !list_sync_jobs.ListSyncJobsOutput {
+    pub fn listSyncJobs(self: *Self, allocator: std.mem.Allocator, input: list_sync_jobs.ListSyncJobsInput, options: CallOptions) !list_sync_jobs.ListSyncJobsOutput {
         return list_sync_jobs.execute(self, allocator, input, options);
     }
 
     /// Lists the sync resources.
-    pub fn listSyncResources(self: *Self, allocator: std.mem.Allocator, input: list_sync_resources.ListSyncResourcesInput, options: list_sync_resources.Options) !list_sync_resources.ListSyncResourcesOutput {
+    pub fn listSyncResources(self: *Self, allocator: std.mem.Allocator, input: list_sync_resources.ListSyncResourcesInput, options: CallOptions) !list_sync_resources.ListSyncResourcesOutput {
         return list_sync_resources.execute(self, allocator, input, options);
     }
 
     /// Lists all tags associated with a resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about workspaces in the current account.
-    pub fn listWorkspaces(self: *Self, allocator: std.mem.Allocator, input: list_workspaces.ListWorkspacesInput, options: list_workspaces.Options) !list_workspaces.ListWorkspacesOutput {
+    pub fn listWorkspaces(self: *Self, allocator: std.mem.Allocator, input: list_workspaces.ListWorkspacesInput, options: CallOptions) !list_workspaces.ListWorkspacesOutput {
         return list_workspaces.execute(self, allocator, input, options);
     }
 
     /// Adds tags to a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates information in a component type.
-    pub fn updateComponentType(self: *Self, allocator: std.mem.Allocator, input: update_component_type.UpdateComponentTypeInput, options: update_component_type.Options) !update_component_type.UpdateComponentTypeOutput {
+    pub fn updateComponentType(self: *Self, allocator: std.mem.Allocator, input: update_component_type.UpdateComponentTypeInput, options: CallOptions) !update_component_type.UpdateComponentTypeOutput {
         return update_component_type.execute(self, allocator, input, options);
     }
 
     /// Updates an entity.
-    pub fn updateEntity(self: *Self, allocator: std.mem.Allocator, input: update_entity.UpdateEntityInput, options: update_entity.Options) !update_entity.UpdateEntityOutput {
+    pub fn updateEntity(self: *Self, allocator: std.mem.Allocator, input: update_entity.UpdateEntityInput, options: CallOptions) !update_entity.UpdateEntityOutput {
         return update_entity.execute(self, allocator, input, options);
     }
 
     /// Update the pricing plan.
-    pub fn updatePricingPlan(self: *Self, allocator: std.mem.Allocator, input: update_pricing_plan.UpdatePricingPlanInput, options: update_pricing_plan.Options) !update_pricing_plan.UpdatePricingPlanOutput {
+    pub fn updatePricingPlan(self: *Self, allocator: std.mem.Allocator, input: update_pricing_plan.UpdatePricingPlanInput, options: CallOptions) !update_pricing_plan.UpdatePricingPlanOutput {
         return update_pricing_plan.execute(self, allocator, input, options);
     }
 
     /// Updates a scene.
-    pub fn updateScene(self: *Self, allocator: std.mem.Allocator, input: update_scene.UpdateSceneInput, options: update_scene.Options) !update_scene.UpdateSceneOutput {
+    pub fn updateScene(self: *Self, allocator: std.mem.Allocator, input: update_scene.UpdateSceneInput, options: CallOptions) !update_scene.UpdateSceneOutput {
         return update_scene.execute(self, allocator, input, options);
     }
 
     /// Updates a workspace.
-    pub fn updateWorkspace(self: *Self, allocator: std.mem.Allocator, input: update_workspace.UpdateWorkspaceInput, options: update_workspace.Options) !update_workspace.UpdateWorkspaceOutput {
+    pub fn updateWorkspace(self: *Self, allocator: std.mem.Allocator, input: update_workspace.UpdateWorkspaceInput, options: CallOptions) !update_workspace.UpdateWorkspaceOutput {
         return update_workspace.execute(self, allocator, input, options);
     }
 

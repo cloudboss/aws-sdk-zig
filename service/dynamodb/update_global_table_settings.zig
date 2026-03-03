@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BillingMode = @import("billing_mode.zig").BillingMode;
 const GlobalTableGlobalSecondaryIndexSettingsUpdate = @import("global_table_global_secondary_index_settings_update.zig").GlobalTableGlobalSecondaryIndexSettingsUpdate;
@@ -68,11 +69,7 @@ pub const UpdateGlobalTableSettingsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateGlobalTableSettingsInput, options: Options) !UpdateGlobalTableSettingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateGlobalTableSettingsInput, options: CallOptions) !UpdateGlobalTableSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

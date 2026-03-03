@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Oauth2FlowType = @import("oauth_2_flow_type.zig").Oauth2FlowType;
 const SessionStatus = @import("session_status.zig").SessionStatus;
@@ -84,11 +85,7 @@ pub const GetResourceOauth2TokenOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourceOauth2TokenInput, options: Options) !GetResourceOauth2TokenOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourceOauth2TokenInput, options: CallOptions) !GetResourceOauth2TokenOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

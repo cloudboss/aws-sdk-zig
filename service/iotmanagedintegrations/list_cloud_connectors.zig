@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CloudConnectorType = @import("cloud_connector_type.zig").CloudConnectorType;
 const ConnectorItem = @import("connector_item.zig").ConnectorItem;
@@ -41,11 +42,7 @@ pub const ListCloudConnectorsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCloudConnectorsInput, options: Options) !ListCloudConnectorsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCloudConnectorsInput, options: CallOptions) !ListCloudConnectorsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

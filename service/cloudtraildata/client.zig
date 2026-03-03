@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const put_audit_events = @import("put_audit_events.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -36,7 +37,7 @@ pub const Client = struct {
     /// *payload*) of events that you want CloudTrail to ingest. You
     /// can add up to 100 of these events (or up to 1 MB) per `PutAuditEvents`
     /// request.
-    pub fn putAuditEvents(self: *Self, allocator: std.mem.Allocator, input: put_audit_events.PutAuditEventsInput, options: put_audit_events.Options) !put_audit_events.PutAuditEventsOutput {
+    pub fn putAuditEvents(self: *Self, allocator: std.mem.Allocator, input: put_audit_events.PutAuditEventsInput, options: CallOptions) !put_audit_events.PutAuditEventsOutput {
         return put_audit_events.execute(self, allocator, input, options);
     }
 };

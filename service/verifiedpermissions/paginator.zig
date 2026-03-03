@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_identity_sources = @import("list_identity_sources.zig");
@@ -17,7 +18,7 @@ pub const ListIdentitySourcesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_identity_sources.Options) !list_identity_sources.ListIdentitySourcesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_identity_sources.ListIdentitySourcesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -58,7 +59,7 @@ pub const ListPoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_policies.Options) !list_policies.ListPoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_policies.ListPoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -99,7 +100,7 @@ pub const ListPolicyStoresPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_policy_stores.Options) !list_policy_stores.ListPolicyStoresOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_policy_stores.ListPolicyStoresOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -140,7 +141,7 @@ pub const ListPolicyTemplatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_policy_templates.Options) !list_policy_templates.ListPolicyTemplatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_policy_templates.ListPolicyTemplatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

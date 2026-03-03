@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GeocodeAdditionalFeature = @import("geocode_additional_feature.zig").GeocodeAdditionalFeature;
 const GeocodeFilter = @import("geocode_filter.zig").GeocodeFilter;
@@ -91,11 +92,7 @@ pub const GeocodeOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GeocodeInput, options: Options) !GeocodeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GeocodeInput, options: CallOptions) !GeocodeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

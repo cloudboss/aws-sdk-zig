@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ClusterEndpointEncryptionType = @import("cluster_endpoint_encryption_type.zig").ClusterEndpointEncryptionType;
 const NetworkType = @import("network_type.zig").NetworkType;
@@ -9,15 +10,11 @@ const SSESpecification = @import("sse_specification.zig").SSESpecification;
 const Tag = @import("tag.zig").Tag;
 const Cluster = @import("cluster.zig").Cluster;
 
-const CreateClusterInput = @import("create_cluster_request.zig").CreateClusterRequest;
+pub const CreateClusterInput = @import("create_cluster_request.zig").CreateClusterRequest;
 
-const CreateClusterOutput = @import("create_cluster_response.zig").CreateClusterResponse;
+pub const CreateClusterOutput = @import("create_cluster_response.zig").CreateClusterResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateClusterInput, options: Options) !CreateClusterOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateClusterInput, options: CallOptions) !CreateClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

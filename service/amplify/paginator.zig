@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_apps = @import("list_apps.zig");
@@ -17,7 +18,7 @@ pub const ListAppsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_apps.Options) !list_apps.ListAppsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_apps.ListAppsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -58,7 +59,7 @@ pub const ListBranchesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_branches.Options) !list_branches.ListBranchesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_branches.ListBranchesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -99,7 +100,7 @@ pub const ListDomainAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_domain_associations.Options) !list_domain_associations.ListDomainAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_domain_associations.ListDomainAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -140,7 +141,7 @@ pub const ListJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_jobs.Options) !list_jobs.ListJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_jobs.ListJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

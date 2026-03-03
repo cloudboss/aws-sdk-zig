@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpAddressType = @import("ip_address_type.zig").IpAddressType;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
@@ -73,11 +74,7 @@ pub const CreateInstanceConnectEndpointOutput = struct {
     instance_connect_endpoint: ?Ec2InstanceConnectEndpoint = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateInstanceConnectEndpointInput, options: Options) !CreateInstanceConnectEndpointOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateInstanceConnectEndpointInput, options: CallOptions) !CreateInstanceConnectEndpointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

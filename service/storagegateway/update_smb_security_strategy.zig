@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SMBSecurityStrategy = @import("smb_security_strategy.zig").SMBSecurityStrategy;
 
@@ -53,11 +54,7 @@ pub const UpdateSMBSecurityStrategyOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSMBSecurityStrategyInput, options: Options) !UpdateSMBSecurityStrategyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSMBSecurityStrategyInput, options: CallOptions) !UpdateSMBSecurityStrategyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

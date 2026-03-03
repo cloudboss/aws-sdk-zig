@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const APNSChannelRequest = @import("apns_channel_request.zig").APNSChannelRequest;
 const APNSChannelResponse = @import("apns_channel_response.zig").APNSChannelResponse;
@@ -27,11 +28,7 @@ pub const UpdateApnsChannelOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateApnsChannelInput, options: Options) !UpdateApnsChannelOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateApnsChannelInput, options: CallOptions) !UpdateApnsChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

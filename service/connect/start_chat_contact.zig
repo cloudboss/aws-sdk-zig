@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DisconnectOnCustomerExitParticipantType = @import("disconnect_on_customer_exit_participant_type.zig").DisconnectOnCustomerExitParticipantType;
 const ChatMessage = @import("chat_message.zig").ChatMessage;
@@ -161,11 +162,7 @@ pub const StartChatContactOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartChatContactInput, options: Options) !StartChatContactOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartChatContactInput, options: CallOptions) !StartChatContactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

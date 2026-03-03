@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LogLevel = @import("log_level.zig").LogLevel;
 
@@ -24,11 +25,7 @@ pub const PutResourceLogLevelInput = struct {
 pub const PutResourceLogLevelOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutResourceLogLevelInput, options: Options) !PutResourceLogLevelOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutResourceLogLevelInput, options: CallOptions) !PutResourceLogLevelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

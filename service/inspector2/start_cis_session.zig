@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const StartCisSessionMessage = @import("start_cis_session_message.zig").StartCisSessionMessage;
 
@@ -21,11 +22,7 @@ pub const StartCisSessionInput = struct {
 pub const StartCisSessionOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartCisSessionInput, options: Options) !StartCisSessionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartCisSessionInput, options: CallOptions) !StartCisSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

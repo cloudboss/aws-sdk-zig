@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AdapterVersionDatasetConfig = @import("adapter_version_dataset_config.zig").AdapterVersionDatasetConfig;
 const AdapterVersionEvaluationMetric = @import("adapter_version_evaluation_metric.zig").AdapterVersionEvaluationMetric;
@@ -78,11 +79,7 @@ pub const GetAdapterVersionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAdapterVersionInput, options: Options) !GetAdapterVersionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAdapterVersionInput, options: CallOptions) !GetAdapterVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

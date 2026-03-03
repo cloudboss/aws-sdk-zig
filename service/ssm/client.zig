@@ -147,6 +147,7 @@ const update_ops_metadata = @import("update_ops_metadata.zig");
 const update_patch_baseline = @import("update_patch_baseline.zig");
 const update_resource_data_sync = @import("update_resource_data_sync.zig");
 const update_service_setting = @import("update_service_setting.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -218,7 +219,7 @@ pub const Client = struct {
     /// For more information about using tags with Amazon Elastic Compute Cloud
     /// (Amazon EC2) instances, see [Tag your Amazon EC2
     /// resources](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the *Amazon EC2 User Guide*.
-    pub fn addTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_resource.AddTagsToResourceInput, options: add_tags_to_resource.Options) !add_tags_to_resource.AddTagsToResourceOutput {
+    pub fn addTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_resource.AddTagsToResourceInput, options: CallOptions) !add_tags_to_resource.AddTagsToResourceOutput {
         return add_tags_to_resource.execute(self, allocator, input, options);
     }
 
@@ -227,14 +228,14 @@ pub const Client = struct {
     /// Incident Manager incident or analysis with an OpsItem. Incident Manager and
     /// OpsCenter are tools in
     /// Amazon Web Services Systems Manager.
-    pub fn associateOpsItemRelatedItem(self: *Self, allocator: std.mem.Allocator, input: associate_ops_item_related_item.AssociateOpsItemRelatedItemInput, options: associate_ops_item_related_item.Options) !associate_ops_item_related_item.AssociateOpsItemRelatedItemOutput {
+    pub fn associateOpsItemRelatedItem(self: *Self, allocator: std.mem.Allocator, input: associate_ops_item_related_item.AssociateOpsItemRelatedItemInput, options: CallOptions) !associate_ops_item_related_item.AssociateOpsItemRelatedItemOutput {
         return associate_ops_item_related_item.execute(self, allocator, input, options);
     }
 
     /// Attempts to cancel the command specified by the Command ID. There is no
     /// guarantee that the
     /// command will be terminated and the underlying process stopped.
-    pub fn cancelCommand(self: *Self, allocator: std.mem.Allocator, input: cancel_command.CancelCommandInput, options: cancel_command.Options) !cancel_command.CancelCommandOutput {
+    pub fn cancelCommand(self: *Self, allocator: std.mem.Allocator, input: cancel_command.CancelCommandInput, options: CallOptions) !cancel_command.CancelCommandOutput {
         return cancel_command.execute(self, allocator, input, options);
     }
 
@@ -243,7 +244,7 @@ pub const Client = struct {
     /// the window that haven't already starting running. Tasks already in progress
     /// will continue to
     /// completion.
-    pub fn cancelMaintenanceWindowExecution(self: *Self, allocator: std.mem.Allocator, input: cancel_maintenance_window_execution.CancelMaintenanceWindowExecutionInput, options: cancel_maintenance_window_execution.Options) !cancel_maintenance_window_execution.CancelMaintenanceWindowExecutionOutput {
+    pub fn cancelMaintenanceWindowExecution(self: *Self, allocator: std.mem.Allocator, input: cancel_maintenance_window_execution.CancelMaintenanceWindowExecutionInput, options: CallOptions) !cancel_maintenance_window_execution.CancelMaintenanceWindowExecutionOutput {
         return cancel_maintenance_window_execution.execute(self, allocator, input, options);
     }
 
@@ -263,7 +264,7 @@ pub const Client = struct {
     /// Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and
     /// on-premises servers and VMs that are
     /// configured for Systems Manager are all called *managed nodes*.
-    pub fn createActivation(self: *Self, allocator: std.mem.Allocator, input: create_activation.CreateActivationInput, options: create_activation.Options) !create_activation.CreateActivationOutput {
+    pub fn createActivation(self: *Self, allocator: std.mem.Allocator, input: create_activation.CreateActivationInput, options: CallOptions) !create_activation.CreateActivationOutput {
         return create_activation.execute(self, allocator, input, options);
     }
 
@@ -287,7 +288,7 @@ pub const Client = struct {
     /// installs it. If the software is installed, but the service isn't running,
     /// then the association
     /// might instruct State Manager to start the service.
-    pub fn createAssociation(self: *Self, allocator: std.mem.Allocator, input: create_association.CreateAssociationInput, options: create_association.Options) !create_association.CreateAssociationOutput {
+    pub fn createAssociation(self: *Self, allocator: std.mem.Allocator, input: create_association.CreateAssociationInput, options: CallOptions) !create_association.CreateAssociationOutput {
         return create_association.execute(self, allocator, input, options);
     }
 
@@ -304,7 +305,7 @@ pub const Client = struct {
     /// If you associate a document with a managed node that already has an
     /// associated document, the
     /// system returns the AssociationAlreadyExists exception.
-    pub fn createAssociationBatch(self: *Self, allocator: std.mem.Allocator, input: create_association_batch.CreateAssociationBatchInput, options: create_association_batch.Options) !create_association_batch.CreateAssociationBatchOutput {
+    pub fn createAssociationBatch(self: *Self, allocator: std.mem.Allocator, input: create_association_batch.CreateAssociationBatchInput, options: CallOptions) !create_association_batch.CreateAssociationBatchOutput {
         return create_association_batch.execute(self, allocator, input, options);
     }
 
@@ -316,7 +317,7 @@ pub const Client = struct {
     /// Manager
     /// Documents](https://docs.aws.amazon.com/systems-manager/latest/userguide/documents.html) in the
     /// *Amazon Web Services Systems Manager User Guide*.
-    pub fn createDocument(self: *Self, allocator: std.mem.Allocator, input: create_document.CreateDocumentInput, options: create_document.Options) !create_document.CreateDocumentOutput {
+    pub fn createDocument(self: *Self, allocator: std.mem.Allocator, input: create_document.CreateDocumentInput, options: CallOptions) !create_document.CreateDocumentOutput {
         return create_document.execute(self, allocator, input, options);
     }
 
@@ -333,7 +334,7 @@ pub const Client = struct {
     /// value you specify for `Cutoff` is one hour, no maintenance window tasks can
     /// start
     /// after 5 PM.
-    pub fn createMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: create_maintenance_window.CreateMaintenanceWindowInput, options: create_maintenance_window.Options) !create_maintenance_window.CreateMaintenanceWindowOutput {
+    pub fn createMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: create_maintenance_window.CreateMaintenanceWindowInput, options: CallOptions) !create_maintenance_window.CreateMaintenanceWindowOutput {
         return create_maintenance_window.execute(self, allocator, input, options);
     }
 
@@ -349,14 +350,14 @@ pub const Client = struct {
     /// more information, see [Amazon Web Services Systems Manager
     /// OpsCenter](https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html) in the
     /// *Amazon Web Services Systems Manager User Guide*.
-    pub fn createOpsItem(self: *Self, allocator: std.mem.Allocator, input: create_ops_item.CreateOpsItemInput, options: create_ops_item.Options) !create_ops_item.CreateOpsItemOutput {
+    pub fn createOpsItem(self: *Self, allocator: std.mem.Allocator, input: create_ops_item.CreateOpsItemInput, options: CallOptions) !create_ops_item.CreateOpsItemOutput {
         return create_ops_item.execute(self, allocator, input, options);
     }
 
     /// If you create a new application in Application Manager, Amazon Web Services
     /// Systems Manager calls this API operation to specify
     /// information about the new application, including the application type.
-    pub fn createOpsMetadata(self: *Self, allocator: std.mem.Allocator, input: create_ops_metadata.CreateOpsMetadataInput, options: create_ops_metadata.Options) !create_ops_metadata.CreateOpsMetadataOutput {
+    pub fn createOpsMetadata(self: *Self, allocator: std.mem.Allocator, input: create_ops_metadata.CreateOpsMetadataInput, options: CallOptions) !create_ops_metadata.CreateOpsMetadataOutput {
         return create_ops_metadata.execute(self, allocator, input, options);
     }
 
@@ -365,7 +366,7 @@ pub const Client = struct {
     /// For information about valid key-value pairs in `PatchFilters` for each
     /// supported
     /// operating system type, see PatchFilter.
-    pub fn createPatchBaseline(self: *Self, allocator: std.mem.Allocator, input: create_patch_baseline.CreatePatchBaselineInput, options: create_patch_baseline.Options) !create_patch_baseline.CreatePatchBaselineOutput {
+    pub fn createPatchBaseline(self: *Self, allocator: std.mem.Allocator, input: create_patch_baseline.CreatePatchBaselineInput, options: CallOptions) !create_patch_baseline.CreatePatchBaselineOutput {
         return create_patch_baseline.execute(self, allocator, input, options);
     }
 
@@ -408,7 +409,7 @@ pub const Client = struct {
     /// recommend that you
     /// secure access to the Amazon S3 bucket by creating a restrictive bucket
     /// policy.
-    pub fn createResourceDataSync(self: *Self, allocator: std.mem.Allocator, input: create_resource_data_sync.CreateResourceDataSyncInput, options: create_resource_data_sync.Options) !create_resource_data_sync.CreateResourceDataSyncOutput {
+    pub fn createResourceDataSync(self: *Self, allocator: std.mem.Allocator, input: create_resource_data_sync.CreateResourceDataSyncInput, options: CallOptions) !create_resource_data_sync.CreateResourceDataSyncOutput {
         return create_resource_data_sync.execute(self, allocator, input, options);
     }
 
@@ -418,7 +419,7 @@ pub const Client = struct {
     /// Deleting an activation
     /// doesn't de-register managed nodes. You must manually de-register managed
     /// nodes.
-    pub fn deleteActivation(self: *Self, allocator: std.mem.Allocator, input: delete_activation.DeleteActivationInput, options: delete_activation.Options) !delete_activation.DeleteActivationOutput {
+    pub fn deleteActivation(self: *Self, allocator: std.mem.Allocator, input: delete_activation.DeleteActivationInput, options: CallOptions) !delete_activation.DeleteActivationOutput {
         return delete_activation.execute(self, allocator, input, options);
     }
 
@@ -435,7 +436,7 @@ pub const Client = struct {
     /// you must create a new document with the desired configuration and associate
     /// it with the
     /// node.
-    pub fn deleteAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_association.DeleteAssociationInput, options: delete_association.Options) !delete_association.DeleteAssociationOutput {
+    pub fn deleteAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_association.DeleteAssociationInput, options: CallOptions) !delete_association.DeleteAssociationOutput {
         return delete_association.execute(self, allocator, input, options);
     }
 
@@ -445,7 +446,7 @@ pub const Client = struct {
     ///
     /// Before you delete the document, we recommend that you use DeleteAssociation
     /// to disassociate all managed nodes that are associated with the document.
-    pub fn deleteDocument(self: *Self, allocator: std.mem.Allocator, input: delete_document.DeleteDocumentInput, options: delete_document.Options) !delete_document.DeleteDocumentOutput {
+    pub fn deleteDocument(self: *Self, allocator: std.mem.Allocator, input: delete_document.DeleteDocumentInput, options: CallOptions) !delete_document.DeleteDocumentOutput {
         return delete_document.execute(self, allocator, input, options);
     }
 
@@ -453,12 +454,12 @@ pub const Client = struct {
     /// Inventory type. Deleting
     /// a custom inventory type is also referred to as deleting a custom inventory
     /// schema.
-    pub fn deleteInventory(self: *Self, allocator: std.mem.Allocator, input: delete_inventory.DeleteInventoryInput, options: delete_inventory.Options) !delete_inventory.DeleteInventoryOutput {
+    pub fn deleteInventory(self: *Self, allocator: std.mem.Allocator, input: delete_inventory.DeleteInventoryInput, options: CallOptions) !delete_inventory.DeleteInventoryOutput {
         return delete_inventory.execute(self, allocator, input, options);
     }
 
     /// Deletes a maintenance window.
-    pub fn deleteMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: delete_maintenance_window.DeleteMaintenanceWindowInput, options: delete_maintenance_window.Options) !delete_maintenance_window.DeleteMaintenanceWindowOutput {
+    pub fn deleteMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: delete_maintenance_window.DeleteMaintenanceWindowInput, options: CallOptions) !delete_maintenance_window.DeleteMaintenanceWindowOutput {
         return delete_maintenance_window.execute(self, allocator, input, options);
     }
 
@@ -491,31 +492,31 @@ pub const Client = struct {
     /// [Setting up
     /// OpsCenter to centrally manage OpsItems across
     /// accounts](https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setting-up-cross-account.html) in the *Systems Manager User Guide*.
-    pub fn deleteOpsItem(self: *Self, allocator: std.mem.Allocator, input: delete_ops_item.DeleteOpsItemInput, options: delete_ops_item.Options) !delete_ops_item.DeleteOpsItemOutput {
+    pub fn deleteOpsItem(self: *Self, allocator: std.mem.Allocator, input: delete_ops_item.DeleteOpsItemInput, options: CallOptions) !delete_ops_item.DeleteOpsItemOutput {
         return delete_ops_item.execute(self, allocator, input, options);
     }
 
     /// Delete OpsMetadata related to an application.
-    pub fn deleteOpsMetadata(self: *Self, allocator: std.mem.Allocator, input: delete_ops_metadata.DeleteOpsMetadataInput, options: delete_ops_metadata.Options) !delete_ops_metadata.DeleteOpsMetadataOutput {
+    pub fn deleteOpsMetadata(self: *Self, allocator: std.mem.Allocator, input: delete_ops_metadata.DeleteOpsMetadataInput, options: CallOptions) !delete_ops_metadata.DeleteOpsMetadataOutput {
         return delete_ops_metadata.execute(self, allocator, input, options);
     }
 
     /// Delete a parameter from the system. After deleting a parameter, wait for at
     /// least 30 seconds
     /// to create a parameter with the same name.
-    pub fn deleteParameter(self: *Self, allocator: std.mem.Allocator, input: delete_parameter.DeleteParameterInput, options: delete_parameter.Options) !delete_parameter.DeleteParameterOutput {
+    pub fn deleteParameter(self: *Self, allocator: std.mem.Allocator, input: delete_parameter.DeleteParameterInput, options: CallOptions) !delete_parameter.DeleteParameterOutput {
         return delete_parameter.execute(self, allocator, input, options);
     }
 
     /// Delete a list of parameters. After deleting a parameter, wait for at least
     /// 30 seconds to
     /// create a parameter with the same name.
-    pub fn deleteParameters(self: *Self, allocator: std.mem.Allocator, input: delete_parameters.DeleteParametersInput, options: delete_parameters.Options) !delete_parameters.DeleteParametersOutput {
+    pub fn deleteParameters(self: *Self, allocator: std.mem.Allocator, input: delete_parameters.DeleteParametersInput, options: CallOptions) !delete_parameters.DeleteParametersOutput {
         return delete_parameters.execute(self, allocator, input, options);
     }
 
     /// Deletes a patch baseline.
-    pub fn deletePatchBaseline(self: *Self, allocator: std.mem.Allocator, input: delete_patch_baseline.DeletePatchBaselineInput, options: delete_patch_baseline.Options) !delete_patch_baseline.DeletePatchBaselineOutput {
+    pub fn deletePatchBaseline(self: *Self, allocator: std.mem.Allocator, input: delete_patch_baseline.DeletePatchBaselineInput, options: CallOptions) !delete_patch_baseline.DeletePatchBaselineOutput {
         return delete_patch_baseline.execute(self, allocator, input, options);
     }
 
@@ -524,7 +525,7 @@ pub const Client = struct {
     /// data on managed nodes are no longer synced to or from the target. Deleting a
     /// sync configuration
     /// doesn't delete data.
-    pub fn deleteResourceDataSync(self: *Self, allocator: std.mem.Allocator, input: delete_resource_data_sync.DeleteResourceDataSyncInput, options: delete_resource_data_sync.Options) !delete_resource_data_sync.DeleteResourceDataSyncOutput {
+    pub fn deleteResourceDataSync(self: *Self, allocator: std.mem.Allocator, input: delete_resource_data_sync.DeleteResourceDataSyncInput, options: CallOptions) !delete_resource_data_sync.DeleteResourceDataSyncOutput {
         return delete_resource_data_sync.execute(self, allocator, input, options);
     }
 
@@ -542,7 +543,7 @@ pub const Client = struct {
     /// cross-account sharing of parameters, see [Working with
     /// shared
     /// parameters](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html) in the *Amazon Web Services Systems Manager User Guide*.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -559,22 +560,22 @@ pub const Client = struct {
     /// managed nodes in a hybrid and multicloud
     /// environment](https://docs.aws.amazon.com/systems-manager/latest/userguide/fleet-manager-deregister-hybrid-nodes.html) in the
     /// *Amazon Web Services Systems Manager User Guide*.
-    pub fn deregisterManagedInstance(self: *Self, allocator: std.mem.Allocator, input: deregister_managed_instance.DeregisterManagedInstanceInput, options: deregister_managed_instance.Options) !deregister_managed_instance.DeregisterManagedInstanceOutput {
+    pub fn deregisterManagedInstance(self: *Self, allocator: std.mem.Allocator, input: deregister_managed_instance.DeregisterManagedInstanceInput, options: CallOptions) !deregister_managed_instance.DeregisterManagedInstanceOutput {
         return deregister_managed_instance.execute(self, allocator, input, options);
     }
 
     /// Removes a patch group from a patch baseline.
-    pub fn deregisterPatchBaselineForPatchGroup(self: *Self, allocator: std.mem.Allocator, input: deregister_patch_baseline_for_patch_group.DeregisterPatchBaselineForPatchGroupInput, options: deregister_patch_baseline_for_patch_group.Options) !deregister_patch_baseline_for_patch_group.DeregisterPatchBaselineForPatchGroupOutput {
+    pub fn deregisterPatchBaselineForPatchGroup(self: *Self, allocator: std.mem.Allocator, input: deregister_patch_baseline_for_patch_group.DeregisterPatchBaselineForPatchGroupInput, options: CallOptions) !deregister_patch_baseline_for_patch_group.DeregisterPatchBaselineForPatchGroupOutput {
         return deregister_patch_baseline_for_patch_group.execute(self, allocator, input, options);
     }
 
     /// Removes a target from a maintenance window.
-    pub fn deregisterTargetFromMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: deregister_target_from_maintenance_window.DeregisterTargetFromMaintenanceWindowInput, options: deregister_target_from_maintenance_window.Options) !deregister_target_from_maintenance_window.DeregisterTargetFromMaintenanceWindowOutput {
+    pub fn deregisterTargetFromMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: deregister_target_from_maintenance_window.DeregisterTargetFromMaintenanceWindowInput, options: CallOptions) !deregister_target_from_maintenance_window.DeregisterTargetFromMaintenanceWindowOutput {
         return deregister_target_from_maintenance_window.execute(self, allocator, input, options);
     }
 
     /// Removes a task from a maintenance window.
-    pub fn deregisterTaskFromMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: deregister_task_from_maintenance_window.DeregisterTaskFromMaintenanceWindowInput, options: deregister_task_from_maintenance_window.Options) !deregister_task_from_maintenance_window.DeregisterTaskFromMaintenanceWindowOutput {
+    pub fn deregisterTaskFromMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: deregister_task_from_maintenance_window.DeregisterTaskFromMaintenanceWindowInput, options: CallOptions) !deregister_task_from_maintenance_window.DeregisterTaskFromMaintenanceWindowOutput {
         return deregister_task_from_maintenance_window.execute(self, allocator, input, options);
     }
 
@@ -585,7 +586,7 @@ pub const Client = struct {
     /// the managed nodes in the activation, and the number of nodes registered by
     /// using this
     /// activation.
-    pub fn describeActivations(self: *Self, allocator: std.mem.Allocator, input: describe_activations.DescribeActivationsInput, options: describe_activations.Options) !describe_activations.DescribeActivationsOutput {
+    pub fn describeActivations(self: *Self, allocator: std.mem.Allocator, input: describe_activations.DescribeActivationsInput, options: CallOptions) !describe_activations.DescribeActivationsOutput {
         return describe_activations.execute(self, allocator, input, options);
     }
 
@@ -594,28 +595,28 @@ pub const Client = struct {
     /// association by using the `Targets` parameter, then you must retrieve the
     /// association
     /// by using the association ID.
-    pub fn describeAssociation(self: *Self, allocator: std.mem.Allocator, input: describe_association.DescribeAssociationInput, options: describe_association.Options) !describe_association.DescribeAssociationOutput {
+    pub fn describeAssociation(self: *Self, allocator: std.mem.Allocator, input: describe_association.DescribeAssociationInput, options: CallOptions) !describe_association.DescribeAssociationOutput {
         return describe_association.execute(self, allocator, input, options);
     }
 
     /// Views information about a specific execution of a specific association.
-    pub fn describeAssociationExecutionTargets(self: *Self, allocator: std.mem.Allocator, input: describe_association_execution_targets.DescribeAssociationExecutionTargetsInput, options: describe_association_execution_targets.Options) !describe_association_execution_targets.DescribeAssociationExecutionTargetsOutput {
+    pub fn describeAssociationExecutionTargets(self: *Self, allocator: std.mem.Allocator, input: describe_association_execution_targets.DescribeAssociationExecutionTargetsInput, options: CallOptions) !describe_association_execution_targets.DescribeAssociationExecutionTargetsOutput {
         return describe_association_execution_targets.execute(self, allocator, input, options);
     }
 
     /// Views all executions for a specific association ID.
-    pub fn describeAssociationExecutions(self: *Self, allocator: std.mem.Allocator, input: describe_association_executions.DescribeAssociationExecutionsInput, options: describe_association_executions.Options) !describe_association_executions.DescribeAssociationExecutionsOutput {
+    pub fn describeAssociationExecutions(self: *Self, allocator: std.mem.Allocator, input: describe_association_executions.DescribeAssociationExecutionsInput, options: CallOptions) !describe_association_executions.DescribeAssociationExecutionsOutput {
         return describe_association_executions.execute(self, allocator, input, options);
     }
 
     /// Provides details about all active and terminated Automation executions.
-    pub fn describeAutomationExecutions(self: *Self, allocator: std.mem.Allocator, input: describe_automation_executions.DescribeAutomationExecutionsInput, options: describe_automation_executions.Options) !describe_automation_executions.DescribeAutomationExecutionsOutput {
+    pub fn describeAutomationExecutions(self: *Self, allocator: std.mem.Allocator, input: describe_automation_executions.DescribeAutomationExecutionsInput, options: CallOptions) !describe_automation_executions.DescribeAutomationExecutionsOutput {
         return describe_automation_executions.execute(self, allocator, input, options);
     }
 
     /// Information about all active and terminated step executions in an Automation
     /// workflow.
-    pub fn describeAutomationStepExecutions(self: *Self, allocator: std.mem.Allocator, input: describe_automation_step_executions.DescribeAutomationStepExecutionsInput, options: describe_automation_step_executions.Options) !describe_automation_step_executions.DescribeAutomationStepExecutionsOutput {
+    pub fn describeAutomationStepExecutions(self: *Self, allocator: std.mem.Allocator, input: describe_automation_step_executions.DescribeAutomationStepExecutionsInput, options: CallOptions) !describe_automation_step_executions.DescribeAutomationStepExecutionsOutput {
         return describe_automation_step_executions.execute(self, allocator, input, options);
     }
 
@@ -624,13 +625,13 @@ pub const Client = struct {
     /// Currently, `DescribeAvailablePatches` supports only the Amazon Linux 1,
     /// Amazon
     /// Linux 2, and Windows Server operating systems.
-    pub fn describeAvailablePatches(self: *Self, allocator: std.mem.Allocator, input: describe_available_patches.DescribeAvailablePatchesInput, options: describe_available_patches.Options) !describe_available_patches.DescribeAvailablePatchesOutput {
+    pub fn describeAvailablePatches(self: *Self, allocator: std.mem.Allocator, input: describe_available_patches.DescribeAvailablePatchesInput, options: CallOptions) !describe_available_patches.DescribeAvailablePatchesOutput {
         return describe_available_patches.execute(self, allocator, input, options);
     }
 
     /// Describes the specified Amazon Web Services Systems Manager document (SSM
     /// document).
-    pub fn describeDocument(self: *Self, allocator: std.mem.Allocator, input: describe_document.DescribeDocumentInput, options: describe_document.Options) !describe_document.DescribeDocumentOutput {
+    pub fn describeDocument(self: *Self, allocator: std.mem.Allocator, input: describe_document.DescribeDocumentInput, options: CallOptions) !describe_document.DescribeDocumentOutput {
         return describe_document.execute(self, allocator, input, options);
     }
 
@@ -639,24 +640,24 @@ pub const Client = struct {
     /// document, you are the owner. If a document is shared, it can either be
     /// shared privately (by
     /// specifying a user's Amazon Web Services account ID) or publicly (*All*).
-    pub fn describeDocumentPermission(self: *Self, allocator: std.mem.Allocator, input: describe_document_permission.DescribeDocumentPermissionInput, options: describe_document_permission.Options) !describe_document_permission.DescribeDocumentPermissionOutput {
+    pub fn describeDocumentPermission(self: *Self, allocator: std.mem.Allocator, input: describe_document_permission.DescribeDocumentPermissionInput, options: CallOptions) !describe_document_permission.DescribeDocumentPermissionOutput {
         return describe_document_permission.execute(self, allocator, input, options);
     }
 
     /// All associations for the managed nodes.
-    pub fn describeEffectiveInstanceAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_effective_instance_associations.DescribeEffectiveInstanceAssociationsInput, options: describe_effective_instance_associations.Options) !describe_effective_instance_associations.DescribeEffectiveInstanceAssociationsOutput {
+    pub fn describeEffectiveInstanceAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_effective_instance_associations.DescribeEffectiveInstanceAssociationsInput, options: CallOptions) !describe_effective_instance_associations.DescribeEffectiveInstanceAssociationsOutput {
         return describe_effective_instance_associations.execute(self, allocator, input, options);
     }
 
     /// Retrieves the current effective patches (the patch and the approval state)
     /// for the specified
     /// patch baseline. Applies to patch baselines for Windows only.
-    pub fn describeEffectivePatchesForPatchBaseline(self: *Self, allocator: std.mem.Allocator, input: describe_effective_patches_for_patch_baseline.DescribeEffectivePatchesForPatchBaselineInput, options: describe_effective_patches_for_patch_baseline.Options) !describe_effective_patches_for_patch_baseline.DescribeEffectivePatchesForPatchBaselineOutput {
+    pub fn describeEffectivePatchesForPatchBaseline(self: *Self, allocator: std.mem.Allocator, input: describe_effective_patches_for_patch_baseline.DescribeEffectivePatchesForPatchBaselineInput, options: CallOptions) !describe_effective_patches_for_patch_baseline.DescribeEffectivePatchesForPatchBaselineOutput {
         return describe_effective_patches_for_patch_baseline.execute(self, allocator, input, options);
     }
 
     /// The status of the associations for the managed nodes.
-    pub fn describeInstanceAssociationsStatus(self: *Self, allocator: std.mem.Allocator, input: describe_instance_associations_status.DescribeInstanceAssociationsStatusInput, options: describe_instance_associations_status.Options) !describe_instance_associations_status.DescribeInstanceAssociationsStatusOutput {
+    pub fn describeInstanceAssociationsStatus(self: *Self, allocator: std.mem.Allocator, input: describe_instance_associations_status.DescribeInstanceAssociationsStatusInput, options: CallOptions) !describe_instance_associations_status.DescribeInstanceAssociationsStatusOutput {
         return describe_instance_associations_status.execute(self, allocator, input, options);
     }
 
@@ -678,50 +679,50 @@ pub const Client = struct {
     /// Amazon EC2 instance configured with a Systems Manager Quick Setup host
     /// management configuration or
     /// the role assigned to an on-premises managed node.
-    pub fn describeInstanceInformation(self: *Self, allocator: std.mem.Allocator, input: describe_instance_information.DescribeInstanceInformationInput, options: describe_instance_information.Options) !describe_instance_information.DescribeInstanceInformationOutput {
+    pub fn describeInstanceInformation(self: *Self, allocator: std.mem.Allocator, input: describe_instance_information.DescribeInstanceInformationInput, options: CallOptions) !describe_instance_information.DescribeInstanceInformationOutput {
         return describe_instance_information.execute(self, allocator, input, options);
     }
 
     /// Retrieves the high-level patch state of one or more managed nodes.
-    pub fn describeInstancePatchStates(self: *Self, allocator: std.mem.Allocator, input: describe_instance_patch_states.DescribeInstancePatchStatesInput, options: describe_instance_patch_states.Options) !describe_instance_patch_states.DescribeInstancePatchStatesOutput {
+    pub fn describeInstancePatchStates(self: *Self, allocator: std.mem.Allocator, input: describe_instance_patch_states.DescribeInstancePatchStatesInput, options: CallOptions) !describe_instance_patch_states.DescribeInstancePatchStatesOutput {
         return describe_instance_patch_states.execute(self, allocator, input, options);
     }
 
     /// Retrieves the high-level patch state for the managed nodes in the specified
     /// patch
     /// group.
-    pub fn describeInstancePatchStatesForPatchGroup(self: *Self, allocator: std.mem.Allocator, input: describe_instance_patch_states_for_patch_group.DescribeInstancePatchStatesForPatchGroupInput, options: describe_instance_patch_states_for_patch_group.Options) !describe_instance_patch_states_for_patch_group.DescribeInstancePatchStatesForPatchGroupOutput {
+    pub fn describeInstancePatchStatesForPatchGroup(self: *Self, allocator: std.mem.Allocator, input: describe_instance_patch_states_for_patch_group.DescribeInstancePatchStatesForPatchGroupInput, options: CallOptions) !describe_instance_patch_states_for_patch_group.DescribeInstancePatchStatesForPatchGroupOutput {
         return describe_instance_patch_states_for_patch_group.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the patches on the specified managed node and
     /// their state
     /// relative to the patch baseline being used for the node.
-    pub fn describeInstancePatches(self: *Self, allocator: std.mem.Allocator, input: describe_instance_patches.DescribeInstancePatchesInput, options: describe_instance_patches.Options) !describe_instance_patches.DescribeInstancePatchesOutput {
+    pub fn describeInstancePatches(self: *Self, allocator: std.mem.Allocator, input: describe_instance_patches.DescribeInstancePatchesInput, options: CallOptions) !describe_instance_patches.DescribeInstancePatchesOutput {
         return describe_instance_patches.execute(self, allocator, input, options);
     }
 
     /// An API operation used by the Systems Manager console to display information
     /// about Systems Manager managed
     /// nodes.
-    pub fn describeInstanceProperties(self: *Self, allocator: std.mem.Allocator, input: describe_instance_properties.DescribeInstancePropertiesInput, options: describe_instance_properties.Options) !describe_instance_properties.DescribeInstancePropertiesOutput {
+    pub fn describeInstanceProperties(self: *Self, allocator: std.mem.Allocator, input: describe_instance_properties.DescribeInstancePropertiesInput, options: CallOptions) !describe_instance_properties.DescribeInstancePropertiesOutput {
         return describe_instance_properties.execute(self, allocator, input, options);
     }
 
     /// Describes a specific delete inventory operation.
-    pub fn describeInventoryDeletions(self: *Self, allocator: std.mem.Allocator, input: describe_inventory_deletions.DescribeInventoryDeletionsInput, options: describe_inventory_deletions.Options) !describe_inventory_deletions.DescribeInventoryDeletionsOutput {
+    pub fn describeInventoryDeletions(self: *Self, allocator: std.mem.Allocator, input: describe_inventory_deletions.DescribeInventoryDeletionsInput, options: CallOptions) !describe_inventory_deletions.DescribeInventoryDeletionsOutput {
         return describe_inventory_deletions.execute(self, allocator, input, options);
     }
 
     /// Retrieves the individual task executions (one per target) for a particular
     /// task run as part
     /// of a maintenance window execution.
-    pub fn describeMaintenanceWindowExecutionTaskInvocations(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_window_execution_task_invocations.DescribeMaintenanceWindowExecutionTaskInvocationsInput, options: describe_maintenance_window_execution_task_invocations.Options) !describe_maintenance_window_execution_task_invocations.DescribeMaintenanceWindowExecutionTaskInvocationsOutput {
+    pub fn describeMaintenanceWindowExecutionTaskInvocations(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_window_execution_task_invocations.DescribeMaintenanceWindowExecutionTaskInvocationsInput, options: CallOptions) !describe_maintenance_window_execution_task_invocations.DescribeMaintenanceWindowExecutionTaskInvocationsOutput {
         return describe_maintenance_window_execution_task_invocations.execute(self, allocator, input, options);
     }
 
     /// For a given maintenance window execution, lists the tasks that were run.
-    pub fn describeMaintenanceWindowExecutionTasks(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_window_execution_tasks.DescribeMaintenanceWindowExecutionTasksInput, options: describe_maintenance_window_execution_tasks.Options) !describe_maintenance_window_execution_tasks.DescribeMaintenanceWindowExecutionTasksOutput {
+    pub fn describeMaintenanceWindowExecutionTasks(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_window_execution_tasks.DescribeMaintenanceWindowExecutionTasksInput, options: CallOptions) !describe_maintenance_window_execution_tasks.DescribeMaintenanceWindowExecutionTasksOutput {
         return describe_maintenance_window_execution_tasks.execute(self, allocator, input, options);
     }
 
@@ -730,17 +731,17 @@ pub const Client = struct {
     /// maintenance window was scheduled to be active, and information about tasks
     /// registered and run
     /// with the maintenance window.
-    pub fn describeMaintenanceWindowExecutions(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_window_executions.DescribeMaintenanceWindowExecutionsInput, options: describe_maintenance_window_executions.Options) !describe_maintenance_window_executions.DescribeMaintenanceWindowExecutionsOutput {
+    pub fn describeMaintenanceWindowExecutions(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_window_executions.DescribeMaintenanceWindowExecutionsInput, options: CallOptions) !describe_maintenance_window_executions.DescribeMaintenanceWindowExecutionsOutput {
         return describe_maintenance_window_executions.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about upcoming executions of a maintenance window.
-    pub fn describeMaintenanceWindowSchedule(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_window_schedule.DescribeMaintenanceWindowScheduleInput, options: describe_maintenance_window_schedule.Options) !describe_maintenance_window_schedule.DescribeMaintenanceWindowScheduleOutput {
+    pub fn describeMaintenanceWindowSchedule(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_window_schedule.DescribeMaintenanceWindowScheduleInput, options: CallOptions) !describe_maintenance_window_schedule.DescribeMaintenanceWindowScheduleOutput {
         return describe_maintenance_window_schedule.execute(self, allocator, input, options);
     }
 
     /// Lists the targets registered with the maintenance window.
-    pub fn describeMaintenanceWindowTargets(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_window_targets.DescribeMaintenanceWindowTargetsInput, options: describe_maintenance_window_targets.Options) !describe_maintenance_window_targets.DescribeMaintenanceWindowTargetsOutput {
+    pub fn describeMaintenanceWindowTargets(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_window_targets.DescribeMaintenanceWindowTargetsInput, options: CallOptions) !describe_maintenance_window_targets.DescribeMaintenanceWindowTargetsOutput {
         return describe_maintenance_window_targets.execute(self, allocator, input, options);
     }
 
@@ -752,19 +753,19 @@ pub const Client = struct {
     /// placeholder value of `1`, which may be reported in the response to this
     /// command.
     /// These values don't affect the running of your task and can be ignored.
-    pub fn describeMaintenanceWindowTasks(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_window_tasks.DescribeMaintenanceWindowTasksInput, options: describe_maintenance_window_tasks.Options) !describe_maintenance_window_tasks.DescribeMaintenanceWindowTasksOutput {
+    pub fn describeMaintenanceWindowTasks(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_window_tasks.DescribeMaintenanceWindowTasksInput, options: CallOptions) !describe_maintenance_window_tasks.DescribeMaintenanceWindowTasksOutput {
         return describe_maintenance_window_tasks.execute(self, allocator, input, options);
     }
 
     /// Retrieves the maintenance windows in an Amazon Web Services account.
-    pub fn describeMaintenanceWindows(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_windows.DescribeMaintenanceWindowsInput, options: describe_maintenance_windows.Options) !describe_maintenance_windows.DescribeMaintenanceWindowsOutput {
+    pub fn describeMaintenanceWindows(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_windows.DescribeMaintenanceWindowsInput, options: CallOptions) !describe_maintenance_windows.DescribeMaintenanceWindowsOutput {
         return describe_maintenance_windows.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the maintenance window targets or tasks that a
     /// managed node is
     /// associated with.
-    pub fn describeMaintenanceWindowsForTarget(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_windows_for_target.DescribeMaintenanceWindowsForTargetInput, options: describe_maintenance_windows_for_target.Options) !describe_maintenance_windows_for_target.DescribeMaintenanceWindowsForTargetOutput {
+    pub fn describeMaintenanceWindowsForTarget(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_windows_for_target.DescribeMaintenanceWindowsForTargetInput, options: CallOptions) !describe_maintenance_windows_for_target.DescribeMaintenanceWindowsForTargetOutput {
         return describe_maintenance_windows_for_target.execute(self, allocator, input, options);
     }
 
@@ -781,7 +782,7 @@ pub const Client = struct {
     /// more information, see [Amazon Web Services Systems Manager
     /// OpsCenter](https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html) in the
     /// *Amazon Web Services Systems Manager User Guide*.
-    pub fn describeOpsItems(self: *Self, allocator: std.mem.Allocator, input: describe_ops_items.DescribeOpsItemsInput, options: describe_ops_items.Options) !describe_ops_items.DescribeOpsItemsOutput {
+    pub fn describeOpsItems(self: *Self, allocator: std.mem.Allocator, input: describe_ops_items.DescribeOpsItemsInput, options: CallOptions) !describe_ops_items.DescribeOpsItemsOutput {
         return describe_ops_items.execute(self, allocator, input, options);
     }
 
@@ -812,23 +813,23 @@ pub const Client = struct {
     /// Otherwise,
     /// `DescribeParameters` retrieves whatever the original key alias was
     /// referencing.
-    pub fn describeParameters(self: *Self, allocator: std.mem.Allocator, input: describe_parameters.DescribeParametersInput, options: describe_parameters.Options) !describe_parameters.DescribeParametersOutput {
+    pub fn describeParameters(self: *Self, allocator: std.mem.Allocator, input: describe_parameters.DescribeParametersInput, options: CallOptions) !describe_parameters.DescribeParametersOutput {
         return describe_parameters.execute(self, allocator, input, options);
     }
 
     /// Lists the patch baselines in your Amazon Web Services account.
-    pub fn describePatchBaselines(self: *Self, allocator: std.mem.Allocator, input: describe_patch_baselines.DescribePatchBaselinesInput, options: describe_patch_baselines.Options) !describe_patch_baselines.DescribePatchBaselinesOutput {
+    pub fn describePatchBaselines(self: *Self, allocator: std.mem.Allocator, input: describe_patch_baselines.DescribePatchBaselinesInput, options: CallOptions) !describe_patch_baselines.DescribePatchBaselinesOutput {
         return describe_patch_baselines.execute(self, allocator, input, options);
     }
 
     /// Returns high-level aggregated patch compliance state information for a patch
     /// group.
-    pub fn describePatchGroupState(self: *Self, allocator: std.mem.Allocator, input: describe_patch_group_state.DescribePatchGroupStateInput, options: describe_patch_group_state.Options) !describe_patch_group_state.DescribePatchGroupStateOutput {
+    pub fn describePatchGroupState(self: *Self, allocator: std.mem.Allocator, input: describe_patch_group_state.DescribePatchGroupStateInput, options: CallOptions) !describe_patch_group_state.DescribePatchGroupStateOutput {
         return describe_patch_group_state.execute(self, allocator, input, options);
     }
 
     /// Lists all patch groups that have been registered with patch baselines.
-    pub fn describePatchGroups(self: *Self, allocator: std.mem.Allocator, input: describe_patch_groups.DescribePatchGroupsInput, options: describe_patch_groups.Options) !describe_patch_groups.DescribePatchGroupsOutput {
+    pub fn describePatchGroups(self: *Self, allocator: std.mem.Allocator, input: describe_patch_groups.DescribePatchGroupsInput, options: CallOptions) !describe_patch_groups.DescribePatchGroupsOutput {
         return describe_patch_groups.execute(self, allocator, input, options);
     }
 
@@ -895,14 +896,14 @@ pub const Client = struct {
     ///
     /// Valid properties: `PRODUCT` | `PRODUCT_FAMILY` |
     /// `CLASSIFICATION` | `MSRC_SEVERITY`
-    pub fn describePatchProperties(self: *Self, allocator: std.mem.Allocator, input: describe_patch_properties.DescribePatchPropertiesInput, options: describe_patch_properties.Options) !describe_patch_properties.DescribePatchPropertiesOutput {
+    pub fn describePatchProperties(self: *Self, allocator: std.mem.Allocator, input: describe_patch_properties.DescribePatchPropertiesInput, options: CallOptions) !describe_patch_properties.DescribePatchPropertiesOutput {
         return describe_patch_properties.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of all active sessions (both connected and disconnected) or
     /// terminated
     /// sessions from the past 30 days.
-    pub fn describeSessions(self: *Self, allocator: std.mem.Allocator, input: describe_sessions.DescribeSessionsInput, options: describe_sessions.Options) !describe_sessions.DescribeSessionsOutput {
+    pub fn describeSessions(self: *Self, allocator: std.mem.Allocator, input: describe_sessions.DescribeSessionsInput, options: CallOptions) !describe_sessions.DescribeSessionsOutput {
         return describe_sessions.execute(self, allocator, input, options);
     }
 
@@ -911,17 +912,17 @@ pub const Client = struct {
     /// operation can delete an Incident Manager incident from an OpsItem. Incident
     /// Manager is a tool in
     /// Amazon Web Services Systems Manager.
-    pub fn disassociateOpsItemRelatedItem(self: *Self, allocator: std.mem.Allocator, input: disassociate_ops_item_related_item.DisassociateOpsItemRelatedItemInput, options: disassociate_ops_item_related_item.Options) !disassociate_ops_item_related_item.DisassociateOpsItemRelatedItemOutput {
+    pub fn disassociateOpsItemRelatedItem(self: *Self, allocator: std.mem.Allocator, input: disassociate_ops_item_related_item.DisassociateOpsItemRelatedItemInput, options: CallOptions) !disassociate_ops_item_related_item.DisassociateOpsItemRelatedItemOutput {
         return disassociate_ops_item_related_item.execute(self, allocator, input, options);
     }
 
     /// Returns a credentials set to be used with just-in-time node access.
-    pub fn getAccessToken(self: *Self, allocator: std.mem.Allocator, input: get_access_token.GetAccessTokenInput, options: get_access_token.Options) !get_access_token.GetAccessTokenOutput {
+    pub fn getAccessToken(self: *Self, allocator: std.mem.Allocator, input: get_access_token.GetAccessTokenInput, options: CallOptions) !get_access_token.GetAccessTokenOutput {
         return get_access_token.execute(self, allocator, input, options);
     }
 
     /// Get detailed information about a particular Automation execution.
-    pub fn getAutomationExecution(self: *Self, allocator: std.mem.Allocator, input: get_automation_execution.GetAutomationExecutionInput, options: get_automation_execution.Options) !get_automation_execution.GetAutomationExecutionOutput {
+    pub fn getAutomationExecution(self: *Self, allocator: std.mem.Allocator, input: get_automation_execution.GetAutomationExecutionInput, options: CallOptions) !get_automation_execution.GetAutomationExecutionOutput {
         return get_automation_execution.execute(self, allocator, input, options);
     }
 
@@ -944,7 +945,7 @@ pub const Client = struct {
     /// For more information about Change Calendar, a tool in Amazon Web Services
     /// Systems Manager, see [Amazon Web Services Systems Manager Change
     /// Calendar](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html) in the *Amazon Web Services Systems Manager User Guide*.
-    pub fn getCalendarState(self: *Self, allocator: std.mem.Allocator, input: get_calendar_state.GetCalendarStateInput, options: get_calendar_state.Options) !get_calendar_state.GetCalendarStateOutput {
+    pub fn getCalendarState(self: *Self, allocator: std.mem.Allocator, input: get_calendar_state.GetCalendarStateInput, options: CallOptions) !get_calendar_state.GetCalendarStateOutput {
         return get_calendar_state.execute(self, allocator, input, options);
     }
 
@@ -966,14 +967,14 @@ pub const Client = struct {
     /// ListCommandInvocations. To get the command execution status across managed
     /// nodes,
     /// use ListCommands.
-    pub fn getCommandInvocation(self: *Self, allocator: std.mem.Allocator, input: get_command_invocation.GetCommandInvocationInput, options: get_command_invocation.Options) !get_command_invocation.GetCommandInvocationOutput {
+    pub fn getCommandInvocation(self: *Self, allocator: std.mem.Allocator, input: get_command_invocation.GetCommandInvocationInput, options: CallOptions) !get_command_invocation.GetCommandInvocationOutput {
         return get_command_invocation.execute(self, allocator, input, options);
     }
 
     /// Retrieves the Session Manager connection status for a managed node to
     /// determine whether it is running
     /// and ready to receive Session Manager connections.
-    pub fn getConnectionStatus(self: *Self, allocator: std.mem.Allocator, input: get_connection_status.GetConnectionStatusInput, options: get_connection_status.Options) !get_connection_status.GetConnectionStatusOutput {
+    pub fn getConnectionStatus(self: *Self, allocator: std.mem.Allocator, input: get_connection_status.GetConnectionStatusInput, options: CallOptions) !get_connection_status.GetConnectionStatusOutput {
         return get_connection_status.execute(self, allocator, input, options);
     }
 
@@ -985,7 +986,7 @@ pub const Client = struct {
     /// If you don't specify an operating system value, the default patch baseline
     /// for Windows is
     /// returned.
-    pub fn getDefaultPatchBaseline(self: *Self, allocator: std.mem.Allocator, input: get_default_patch_baseline.GetDefaultPatchBaselineInput, options: get_default_patch_baseline.Options) !get_default_patch_baseline.GetDefaultPatchBaselineOutput {
+    pub fn getDefaultPatchBaseline(self: *Self, allocator: std.mem.Allocator, input: get_default_patch_baseline.GetDefaultPatchBaselineInput, options: CallOptions) !get_default_patch_baseline.GetDefaultPatchBaselineOutput {
         return get_default_patch_baseline.execute(self, allocator, input, options);
     }
 
@@ -1003,56 +1004,56 @@ pub const Client = struct {
     /// or command. For
     /// example, run the command using the `AWS-RunShellScript` document or the
     /// `AWS-RunPowerShellScript` document.
-    pub fn getDeployablePatchSnapshotForInstance(self: *Self, allocator: std.mem.Allocator, input: get_deployable_patch_snapshot_for_instance.GetDeployablePatchSnapshotForInstanceInput, options: get_deployable_patch_snapshot_for_instance.Options) !get_deployable_patch_snapshot_for_instance.GetDeployablePatchSnapshotForInstanceOutput {
+    pub fn getDeployablePatchSnapshotForInstance(self: *Self, allocator: std.mem.Allocator, input: get_deployable_patch_snapshot_for_instance.GetDeployablePatchSnapshotForInstanceInput, options: CallOptions) !get_deployable_patch_snapshot_for_instance.GetDeployablePatchSnapshotForInstanceOutput {
         return get_deployable_patch_snapshot_for_instance.execute(self, allocator, input, options);
     }
 
     /// Gets the contents of the specified Amazon Web Services Systems Manager
     /// document (SSM document).
-    pub fn getDocument(self: *Self, allocator: std.mem.Allocator, input: get_document.GetDocumentInput, options: get_document.Options) !get_document.GetDocumentOutput {
+    pub fn getDocument(self: *Self, allocator: std.mem.Allocator, input: get_document.GetDocumentInput, options: CallOptions) !get_document.GetDocumentOutput {
         return get_document.execute(self, allocator, input, options);
     }
 
     /// Initiates the process of retrieving an existing preview that shows the
     /// effects that running
     /// a specified Automation runbook would have on the targeted resources.
-    pub fn getExecutionPreview(self: *Self, allocator: std.mem.Allocator, input: get_execution_preview.GetExecutionPreviewInput, options: get_execution_preview.Options) !get_execution_preview.GetExecutionPreviewOutput {
+    pub fn getExecutionPreview(self: *Self, allocator: std.mem.Allocator, input: get_execution_preview.GetExecutionPreviewInput, options: CallOptions) !get_execution_preview.GetExecutionPreviewOutput {
         return get_execution_preview.execute(self, allocator, input, options);
     }
 
     /// Query inventory information. This includes managed node status, such as
     /// `Stopped`
     /// or `Terminated`.
-    pub fn getInventory(self: *Self, allocator: std.mem.Allocator, input: get_inventory.GetInventoryInput, options: get_inventory.Options) !get_inventory.GetInventoryOutput {
+    pub fn getInventory(self: *Self, allocator: std.mem.Allocator, input: get_inventory.GetInventoryInput, options: CallOptions) !get_inventory.GetInventoryOutput {
         return get_inventory.execute(self, allocator, input, options);
     }
 
     /// Return a list of inventory type names for the account, or return a list of
     /// attribute names
     /// for a specific Inventory item type.
-    pub fn getInventorySchema(self: *Self, allocator: std.mem.Allocator, input: get_inventory_schema.GetInventorySchemaInput, options: get_inventory_schema.Options) !get_inventory_schema.GetInventorySchemaOutput {
+    pub fn getInventorySchema(self: *Self, allocator: std.mem.Allocator, input: get_inventory_schema.GetInventorySchemaInput, options: CallOptions) !get_inventory_schema.GetInventorySchemaOutput {
         return get_inventory_schema.execute(self, allocator, input, options);
     }
 
     /// Retrieves a maintenance window.
-    pub fn getMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: get_maintenance_window.GetMaintenanceWindowInput, options: get_maintenance_window.Options) !get_maintenance_window.GetMaintenanceWindowOutput {
+    pub fn getMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: get_maintenance_window.GetMaintenanceWindowInput, options: CallOptions) !get_maintenance_window.GetMaintenanceWindowOutput {
         return get_maintenance_window.execute(self, allocator, input, options);
     }
 
     /// Retrieves details about a specific a maintenance window execution.
-    pub fn getMaintenanceWindowExecution(self: *Self, allocator: std.mem.Allocator, input: get_maintenance_window_execution.GetMaintenanceWindowExecutionInput, options: get_maintenance_window_execution.Options) !get_maintenance_window_execution.GetMaintenanceWindowExecutionOutput {
+    pub fn getMaintenanceWindowExecution(self: *Self, allocator: std.mem.Allocator, input: get_maintenance_window_execution.GetMaintenanceWindowExecutionInput, options: CallOptions) !get_maintenance_window_execution.GetMaintenanceWindowExecutionOutput {
         return get_maintenance_window_execution.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details about a specific task run as part of a maintenance
     /// window
     /// execution.
-    pub fn getMaintenanceWindowExecutionTask(self: *Self, allocator: std.mem.Allocator, input: get_maintenance_window_execution_task.GetMaintenanceWindowExecutionTaskInput, options: get_maintenance_window_execution_task.Options) !get_maintenance_window_execution_task.GetMaintenanceWindowExecutionTaskOutput {
+    pub fn getMaintenanceWindowExecutionTask(self: *Self, allocator: std.mem.Allocator, input: get_maintenance_window_execution_task.GetMaintenanceWindowExecutionTaskInput, options: CallOptions) !get_maintenance_window_execution_task.GetMaintenanceWindowExecutionTaskOutput {
         return get_maintenance_window_execution_task.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a specific task running on a specific target.
-    pub fn getMaintenanceWindowExecutionTaskInvocation(self: *Self, allocator: std.mem.Allocator, input: get_maintenance_window_execution_task_invocation.GetMaintenanceWindowExecutionTaskInvocationInput, options: get_maintenance_window_execution_task_invocation.Options) !get_maintenance_window_execution_task_invocation.GetMaintenanceWindowExecutionTaskInvocationOutput {
+    pub fn getMaintenanceWindowExecutionTaskInvocation(self: *Self, allocator: std.mem.Allocator, input: get_maintenance_window_execution_task_invocation.GetMaintenanceWindowExecutionTaskInvocationInput, options: CallOptions) !get_maintenance_window_execution_task_invocation.GetMaintenanceWindowExecutionTaskInvocationOutput {
         return get_maintenance_window_execution_task_invocation.execute(self, allocator, input, options);
     }
 
@@ -1067,7 +1068,7 @@ pub const Client = struct {
     ///
     /// To retrieve a list of tasks in a maintenance window, instead use the
     /// DescribeMaintenanceWindowTasks command.
-    pub fn getMaintenanceWindowTask(self: *Self, allocator: std.mem.Allocator, input: get_maintenance_window_task.GetMaintenanceWindowTaskInput, options: get_maintenance_window_task.Options) !get_maintenance_window_task.GetMaintenanceWindowTaskOutput {
+    pub fn getMaintenanceWindowTask(self: *Self, allocator: std.mem.Allocator, input: get_maintenance_window_task.GetMaintenanceWindowTaskInput, options: CallOptions) !get_maintenance_window_task.GetMaintenanceWindowTaskOutput {
         return get_maintenance_window_task.execute(self, allocator, input, options);
     }
 
@@ -1085,12 +1086,12 @@ pub const Client = struct {
     /// more information, see [Amazon Web Services Systems Manager
     /// OpsCenter](https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html) in the
     /// *Amazon Web Services Systems Manager User Guide*.
-    pub fn getOpsItem(self: *Self, allocator: std.mem.Allocator, input: get_ops_item.GetOpsItemInput, options: get_ops_item.Options) !get_ops_item.GetOpsItemOutput {
+    pub fn getOpsItem(self: *Self, allocator: std.mem.Allocator, input: get_ops_item.GetOpsItemInput, options: CallOptions) !get_ops_item.GetOpsItemOutput {
         return get_ops_item.execute(self, allocator, input, options);
     }
 
     /// View operational metadata related to an application in Application Manager.
-    pub fn getOpsMetadata(self: *Self, allocator: std.mem.Allocator, input: get_ops_metadata.GetOpsMetadataInput, options: get_ops_metadata.Options) !get_ops_metadata.GetOpsMetadataOutput {
+    pub fn getOpsMetadata(self: *Self, allocator: std.mem.Allocator, input: get_ops_metadata.GetOpsMetadataInput, options: CallOptions) !get_ops_metadata.GetOpsMetadataOutput {
         return get_ops_metadata.execute(self, allocator, input, options);
     }
 
@@ -1101,7 +1102,7 @@ pub const Client = struct {
     /// well as information about any Amazon Web Services resource or service
     /// configured to report OpsData to Amazon Web Services Systems Manager
     /// Explorer.
-    pub fn getOpsSummary(self: *Self, allocator: std.mem.Allocator, input: get_ops_summary.GetOpsSummaryInput, options: get_ops_summary.Options) !get_ops_summary.GetOpsSummaryOutput {
+    pub fn getOpsSummary(self: *Self, allocator: std.mem.Allocator, input: get_ops_summary.GetOpsSummaryInput, options: CallOptions) !get_ops_summary.GetOpsSummaryOutput {
         return get_ops_summary.execute(self, allocator, input, options);
     }
 
@@ -1115,7 +1116,7 @@ pub const Client = struct {
     ///
     /// To get information about more than one parameter at a time, use the
     /// GetParameters operation.
-    pub fn getParameter(self: *Self, allocator: std.mem.Allocator, input: get_parameter.GetParameterInput, options: get_parameter.Options) !get_parameter.GetParameterOutput {
+    pub fn getParameter(self: *Self, allocator: std.mem.Allocator, input: get_parameter.GetParameterInput, options: CallOptions) !get_parameter.GetParameterOutput {
         return get_parameter.execute(self, allocator, input, options);
     }
 
@@ -1132,7 +1133,7 @@ pub const Client = struct {
     /// Otherwise,
     /// `GetParameterHistory` retrieves whatever the original key alias was
     /// referencing.
-    pub fn getParameterHistory(self: *Self, allocator: std.mem.Allocator, input: get_parameter_history.GetParameterHistoryInput, options: get_parameter_history.Options) !get_parameter_history.GetParameterHistoryOutput {
+    pub fn getParameterHistory(self: *Self, allocator: std.mem.Allocator, input: get_parameter_history.GetParameterHistoryInput, options: CallOptions) !get_parameter_history.GetParameterHistoryOutput {
         return get_parameter_history.execute(self, allocator, input, options);
     }
 
@@ -1147,7 +1148,7 @@ pub const Client = struct {
     /// beginning or end of a parameter name. If the specified name for a parameter
     /// contains spaces
     /// between characters, the request fails with a `ValidationException` error.
-    pub fn getParameters(self: *Self, allocator: std.mem.Allocator, input: get_parameters.GetParametersInput, options: get_parameters.Options) !get_parameters.GetParametersOutput {
+    pub fn getParameters(self: *Self, allocator: std.mem.Allocator, input: get_parameters.GetParametersInput, options: CallOptions) !get_parameters.GetParametersOutput {
         return get_parameters.execute(self, allocator, input, options);
     }
 
@@ -1170,23 +1171,23 @@ pub const Client = struct {
     /// beginning or end of a parameter name. If the specified name for a parameter
     /// contains spaces
     /// between characters, the request fails with a `ValidationException` error.
-    pub fn getParametersByPath(self: *Self, allocator: std.mem.Allocator, input: get_parameters_by_path.GetParametersByPathInput, options: get_parameters_by_path.Options) !get_parameters_by_path.GetParametersByPathOutput {
+    pub fn getParametersByPath(self: *Self, allocator: std.mem.Allocator, input: get_parameters_by_path.GetParametersByPathInput, options: CallOptions) !get_parameters_by_path.GetParametersByPathOutput {
         return get_parameters_by_path.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a patch baseline.
-    pub fn getPatchBaseline(self: *Self, allocator: std.mem.Allocator, input: get_patch_baseline.GetPatchBaselineInput, options: get_patch_baseline.Options) !get_patch_baseline.GetPatchBaselineOutput {
+    pub fn getPatchBaseline(self: *Self, allocator: std.mem.Allocator, input: get_patch_baseline.GetPatchBaselineInput, options: CallOptions) !get_patch_baseline.GetPatchBaselineOutput {
         return get_patch_baseline.execute(self, allocator, input, options);
     }
 
     /// Retrieves the patch baseline that should be used for the specified patch
     /// group.
-    pub fn getPatchBaselineForPatchGroup(self: *Self, allocator: std.mem.Allocator, input: get_patch_baseline_for_patch_group.GetPatchBaselineForPatchGroupInput, options: get_patch_baseline_for_patch_group.Options) !get_patch_baseline_for_patch_group.GetPatchBaselineForPatchGroupOutput {
+    pub fn getPatchBaselineForPatchGroup(self: *Self, allocator: std.mem.Allocator, input: get_patch_baseline_for_patch_group.GetPatchBaselineForPatchGroupInput, options: CallOptions) !get_patch_baseline_for_patch_group.GetPatchBaselineForPatchGroupOutput {
         return get_patch_baseline_for_patch_group.execute(self, allocator, input, options);
     }
 
     /// Returns an array of the `Policy` object.
-    pub fn getResourcePolicies(self: *Self, allocator: std.mem.Allocator, input: get_resource_policies.GetResourcePoliciesInput, options: get_resource_policies.Options) !get_resource_policies.GetResourcePoliciesOutput {
+    pub fn getResourcePolicies(self: *Self, allocator: std.mem.Allocator, input: get_resource_policies.GetResourcePoliciesInput, options: CallOptions) !get_resource_policies.GetResourcePoliciesOutput {
         return get_resource_policies.execute(self, allocator, input, options);
     }
 
@@ -1213,7 +1214,7 @@ pub const Client = struct {
     /// back to the original value defined by the Amazon Web Services service team.
     ///
     /// Query the current service setting for the Amazon Web Services account.
-    pub fn getServiceSetting(self: *Self, allocator: std.mem.Allocator, input: get_service_setting.GetServiceSettingInput, options: get_service_setting.Options) !get_service_setting.GetServiceSettingOutput {
+    pub fn getServiceSetting(self: *Self, allocator: std.mem.Allocator, input: get_service_setting.GetServiceSettingInput, options: CallOptions) !get_service_setting.GetServiceSettingOutput {
         return get_service_setting.execute(self, allocator, input, options);
     }
 
@@ -1260,12 +1261,12 @@ pub const Client = struct {
     /// the beginning or end of a parameter name. If the specified name for a
     /// parameter contains spaces
     /// between characters, the request fails with a `ValidationException` error.
-    pub fn labelParameterVersion(self: *Self, allocator: std.mem.Allocator, input: label_parameter_version.LabelParameterVersionInput, options: label_parameter_version.Options) !label_parameter_version.LabelParameterVersionOutput {
+    pub fn labelParameterVersion(self: *Self, allocator: std.mem.Allocator, input: label_parameter_version.LabelParameterVersionInput, options: CallOptions) !label_parameter_version.LabelParameterVersionOutput {
         return label_parameter_version.execute(self, allocator, input, options);
     }
 
     /// Retrieves all versions of an association for a specific association ID.
-    pub fn listAssociationVersions(self: *Self, allocator: std.mem.Allocator, input: list_association_versions.ListAssociationVersionsInput, options: list_association_versions.Options) !list_association_versions.ListAssociationVersionsOutput {
+    pub fn listAssociationVersions(self: *Self, allocator: std.mem.Allocator, input: list_association_versions.ListAssociationVersionsInput, options: CallOptions) !list_association_versions.ListAssociationVersionsOutput {
         return list_association_versions.execute(self, allocator, input, options);
     }
 
@@ -1275,7 +1276,7 @@ pub const Client = struct {
     /// managed node by
     /// specifying a filter. State Manager is a tool in Amazon Web Services Systems
     /// Manager.
-    pub fn listAssociations(self: *Self, allocator: std.mem.Allocator, input: list_associations.ListAssociationsInput, options: list_associations.Options) !list_associations.ListAssociationsOutput {
+    pub fn listAssociations(self: *Self, allocator: std.mem.Allocator, input: list_associations.ListAssociationsInput, options: CallOptions) !list_associations.ListAssociationsOutput {
         return list_associations.execute(self, allocator, input, options);
     }
 
@@ -1288,12 +1289,12 @@ pub const Client = struct {
     /// created for each requested managed node ID. `ListCommandInvocations` provide
     /// status
     /// about command execution.
-    pub fn listCommandInvocations(self: *Self, allocator: std.mem.Allocator, input: list_command_invocations.ListCommandInvocationsInput, options: list_command_invocations.Options) !list_command_invocations.ListCommandInvocationsOutput {
+    pub fn listCommandInvocations(self: *Self, allocator: std.mem.Allocator, input: list_command_invocations.ListCommandInvocationsInput, options: CallOptions) !list_command_invocations.ListCommandInvocationsOutput {
         return list_command_invocations.execute(self, allocator, input, options);
     }
 
     /// Lists the commands requested by users of the Amazon Web Services account.
-    pub fn listCommands(self: *Self, allocator: std.mem.Allocator, input: list_commands.ListCommandsInput, options: list_commands.Options) !list_commands.ListCommandsOutput {
+    pub fn listCommands(self: *Self, allocator: std.mem.Allocator, input: list_commands.ListCommandsInput, options: CallOptions) !list_commands.ListCommandsOutput {
         return list_commands.execute(self, allocator, input, options);
     }
 
@@ -1302,7 +1303,7 @@ pub const Client = struct {
     /// different resource types. Currently, you can only specify one resource ID
     /// per call. List results
     /// depend on the criteria specified in the filter.
-    pub fn listComplianceItems(self: *Self, allocator: std.mem.Allocator, input: list_compliance_items.ListComplianceItemsInput, options: list_compliance_items.Options) !list_compliance_items.ListComplianceItemsOutput {
+    pub fn listComplianceItems(self: *Self, allocator: std.mem.Allocator, input: list_compliance_items.ListComplianceItemsInput, options: CallOptions) !list_compliance_items.ListComplianceItemsOutput {
         return list_compliance_items.execute(self, allocator, input, options);
     }
 
@@ -1311,7 +1312,7 @@ pub const Client = struct {
     /// example, this call can return State Manager associations, patches, or custom
     /// compliance types
     /// according to the filter criteria that you specify.
-    pub fn listComplianceSummaries(self: *Self, allocator: std.mem.Allocator, input: list_compliance_summaries.ListComplianceSummariesInput, options: list_compliance_summaries.Options) !list_compliance_summaries.ListComplianceSummariesOutput {
+    pub fn listComplianceSummaries(self: *Self, allocator: std.mem.Allocator, input: list_compliance_summaries.ListComplianceSummariesInput, options: CallOptions) !list_compliance_summaries.ListComplianceSummariesOutput {
         return list_compliance_summaries.execute(self, allocator, input, options);
     }
 
@@ -1325,37 +1326,37 @@ pub const Client = struct {
     ///
     /// Information about approval reviews for a version of a change template in
     /// Change Manager.
-    pub fn listDocumentMetadataHistory(self: *Self, allocator: std.mem.Allocator, input: list_document_metadata_history.ListDocumentMetadataHistoryInput, options: list_document_metadata_history.Options) !list_document_metadata_history.ListDocumentMetadataHistoryOutput {
+    pub fn listDocumentMetadataHistory(self: *Self, allocator: std.mem.Allocator, input: list_document_metadata_history.ListDocumentMetadataHistoryInput, options: CallOptions) !list_document_metadata_history.ListDocumentMetadataHistoryOutput {
         return list_document_metadata_history.execute(self, allocator, input, options);
     }
 
     /// List all versions for a document.
-    pub fn listDocumentVersions(self: *Self, allocator: std.mem.Allocator, input: list_document_versions.ListDocumentVersionsInput, options: list_document_versions.Options) !list_document_versions.ListDocumentVersionsOutput {
+    pub fn listDocumentVersions(self: *Self, allocator: std.mem.Allocator, input: list_document_versions.ListDocumentVersionsInput, options: CallOptions) !list_document_versions.ListDocumentVersionsOutput {
         return list_document_versions.execute(self, allocator, input, options);
     }
 
     /// Returns all Systems Manager (SSM) documents in the current Amazon Web
     /// Services account and Amazon Web Services Region. You can
     /// limit the results of this request by using a filter.
-    pub fn listDocuments(self: *Self, allocator: std.mem.Allocator, input: list_documents.ListDocumentsInput, options: list_documents.Options) !list_documents.ListDocumentsOutput {
+    pub fn listDocuments(self: *Self, allocator: std.mem.Allocator, input: list_documents.ListDocumentsInput, options: CallOptions) !list_documents.ListDocumentsOutput {
         return list_documents.execute(self, allocator, input, options);
     }
 
     /// A list of inventory items returned by the request.
-    pub fn listInventoryEntries(self: *Self, allocator: std.mem.Allocator, input: list_inventory_entries.ListInventoryEntriesInput, options: list_inventory_entries.Options) !list_inventory_entries.ListInventoryEntriesOutput {
+    pub fn listInventoryEntries(self: *Self, allocator: std.mem.Allocator, input: list_inventory_entries.ListInventoryEntriesInput, options: CallOptions) !list_inventory_entries.ListInventoryEntriesOutput {
         return list_inventory_entries.execute(self, allocator, input, options);
     }
 
     /// Takes in filters and returns a list of managed nodes matching the filter
     /// criteria.
-    pub fn listNodes(self: *Self, allocator: std.mem.Allocator, input: list_nodes.ListNodesInput, options: list_nodes.Options) !list_nodes.ListNodesOutput {
+    pub fn listNodes(self: *Self, allocator: std.mem.Allocator, input: list_nodes.ListNodesInput, options: CallOptions) !list_nodes.ListNodesOutput {
         return list_nodes.execute(self, allocator, input, options);
     }
 
     /// Generates a summary of managed instance/node metadata based on the filters
     /// and aggregators
     /// you specify. Results are grouped by the input aggregator you specify.
-    pub fn listNodesSummary(self: *Self, allocator: std.mem.Allocator, input: list_nodes_summary.ListNodesSummaryInput, options: list_nodes_summary.Options) !list_nodes_summary.ListNodesSummaryOutput {
+    pub fn listNodesSummary(self: *Self, allocator: std.mem.Allocator, input: list_nodes_summary.ListNodesSummaryInput, options: CallOptions) !list_nodes_summary.ListNodesSummaryOutput {
         return list_nodes_summary.execute(self, allocator, input, options);
     }
 
@@ -1363,21 +1364,21 @@ pub const Client = struct {
     /// Region and Amazon Web Services account. You can
     /// limit the results to events associated with specific OpsItems by specifying
     /// a filter.
-    pub fn listOpsItemEvents(self: *Self, allocator: std.mem.Allocator, input: list_ops_item_events.ListOpsItemEventsInput, options: list_ops_item_events.Options) !list_ops_item_events.ListOpsItemEventsOutput {
+    pub fn listOpsItemEvents(self: *Self, allocator: std.mem.Allocator, input: list_ops_item_events.ListOpsItemEventsInput, options: CallOptions) !list_ops_item_events.ListOpsItemEventsOutput {
         return list_ops_item_events.execute(self, allocator, input, options);
     }
 
     /// Lists all related-item resources associated with a Systems Manager OpsCenter
     /// OpsItem. OpsCenter is a
     /// tool in Amazon Web Services Systems Manager.
-    pub fn listOpsItemRelatedItems(self: *Self, allocator: std.mem.Allocator, input: list_ops_item_related_items.ListOpsItemRelatedItemsInput, options: list_ops_item_related_items.Options) !list_ops_item_related_items.ListOpsItemRelatedItemsOutput {
+    pub fn listOpsItemRelatedItems(self: *Self, allocator: std.mem.Allocator, input: list_ops_item_related_items.ListOpsItemRelatedItemsInput, options: CallOptions) !list_ops_item_related_items.ListOpsItemRelatedItemsOutput {
         return list_ops_item_related_items.execute(self, allocator, input, options);
     }
 
     /// Amazon Web Services Systems Manager calls this API operation when displaying
     /// all Application Manager OpsMetadata objects or
     /// blobs.
-    pub fn listOpsMetadata(self: *Self, allocator: std.mem.Allocator, input: list_ops_metadata.ListOpsMetadataInput, options: list_ops_metadata.Options) !list_ops_metadata.ListOpsMetadataOutput {
+    pub fn listOpsMetadata(self: *Self, allocator: std.mem.Allocator, input: list_ops_metadata.ListOpsMetadataInput, options: CallOptions) !list_ops_metadata.ListOpsMetadataOutput {
         return list_ops_metadata.execute(self, allocator, input, options);
     }
 
@@ -1386,7 +1387,7 @@ pub const Client = struct {
     /// non-compliant statuses and detailed compliance-item severity counts,
     /// according to the filter
     /// criteria you specify.
-    pub fn listResourceComplianceSummaries(self: *Self, allocator: std.mem.Allocator, input: list_resource_compliance_summaries.ListResourceComplianceSummariesInput, options: list_resource_compliance_summaries.Options) !list_resource_compliance_summaries.ListResourceComplianceSummariesOutput {
+    pub fn listResourceComplianceSummaries(self: *Self, allocator: std.mem.Allocator, input: list_resource_compliance_summaries.ListResourceComplianceSummariesInput, options: CallOptions) !list_resource_compliance_summaries.ListResourceComplianceSummariesOutput {
         return list_resource_compliance_summaries.execute(self, allocator, input, options);
     }
 
@@ -1406,7 +1407,7 @@ pub const Client = struct {
     /// more sync configurations to list, you can request them by specifying the
     /// `NextToken`
     /// returned in the call to the parameter of a subsequent call.
-    pub fn listResourceDataSync(self: *Self, allocator: std.mem.Allocator, input: list_resource_data_sync.ListResourceDataSyncInput, options: list_resource_data_sync.Options) !list_resource_data_sync.ListResourceDataSyncOutput {
+    pub fn listResourceDataSync(self: *Self, allocator: std.mem.Allocator, input: list_resource_data_sync.ListResourceDataSyncInput, options: CallOptions) !list_resource_data_sync.ListResourceDataSyncOutput {
         return list_resource_data_sync.execute(self, allocator, input, options);
     }
 
@@ -1414,7 +1415,7 @@ pub const Client = struct {
     ///
     /// For information about the ID format for each supported resource type, see
     /// AddTagsToResource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -1424,7 +1425,7 @@ pub const Client = struct {
     /// people who can use the document. If
     /// you share a document publicly, you must specify *All* as the account
     /// ID.
-    pub fn modifyDocumentPermission(self: *Self, allocator: std.mem.Allocator, input: modify_document_permission.ModifyDocumentPermissionInput, options: modify_document_permission.Options) !modify_document_permission.ModifyDocumentPermissionOutput {
+    pub fn modifyDocumentPermission(self: *Self, allocator: std.mem.Allocator, input: modify_document_permission.ModifyDocumentPermissionInput, options: CallOptions) !modify_document_permission.ModifyDocumentPermissionOutput {
         return modify_document_permission.execute(self, allocator, input, options);
     }
 
@@ -1486,7 +1487,7 @@ pub const Client = struct {
     ///   was applied to
     /// the resource. Specify the time by using the following format:
     /// `yyyy-MM-dd'T'HH:mm:ss'Z'`
-    pub fn putComplianceItems(self: *Self, allocator: std.mem.Allocator, input: put_compliance_items.PutComplianceItemsInput, options: put_compliance_items.Options) !put_compliance_items.PutComplianceItemsOutput {
+    pub fn putComplianceItems(self: *Self, allocator: std.mem.Allocator, input: put_compliance_items.PutComplianceItemsInput, options: CallOptions) !put_compliance_items.PutComplianceItemsOutput {
         return put_compliance_items.execute(self, allocator, input, options);
     }
 
@@ -1495,12 +1496,12 @@ pub const Client = struct {
     /// inventory item, if it doesn't already exist, or updates an inventory item,
     /// if it does
     /// exist.
-    pub fn putInventory(self: *Self, allocator: std.mem.Allocator, input: put_inventory.PutInventoryInput, options: put_inventory.Options) !put_inventory.PutInventoryOutput {
+    pub fn putInventory(self: *Self, allocator: std.mem.Allocator, input: put_inventory.PutInventoryInput, options: CallOptions) !put_inventory.PutInventoryOutput {
         return put_inventory.execute(self, allocator, input, options);
     }
 
     /// Create or update a parameter in Parameter Store.
-    pub fn putParameter(self: *Self, allocator: std.mem.Allocator, input: put_parameter.PutParameterInput, options: put_parameter.Options) !put_parameter.PutParameterOutput {
+    pub fn putParameter(self: *Self, allocator: std.mem.Allocator, input: put_parameter.PutParameterInput, options: CallOptions) !put_parameter.PutParameterOutput {
         return put_parameter.execute(self, allocator, input, options);
     }
 
@@ -1545,7 +1546,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Sharing a
     /// parameter](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html#share) in the *Amazon Web Services Systems Manager User Guide*
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -1558,27 +1559,27 @@ pub const Client = struct {
     /// `arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0574b43a65ea646ed`
     /// instead of
     /// `pb-0574b43a65ea646ed`.
-    pub fn registerDefaultPatchBaseline(self: *Self, allocator: std.mem.Allocator, input: register_default_patch_baseline.RegisterDefaultPatchBaselineInput, options: register_default_patch_baseline.Options) !register_default_patch_baseline.RegisterDefaultPatchBaselineOutput {
+    pub fn registerDefaultPatchBaseline(self: *Self, allocator: std.mem.Allocator, input: register_default_patch_baseline.RegisterDefaultPatchBaselineInput, options: CallOptions) !register_default_patch_baseline.RegisterDefaultPatchBaselineOutput {
         return register_default_patch_baseline.execute(self, allocator, input, options);
     }
 
     /// Registers a patch baseline for a patch group.
-    pub fn registerPatchBaselineForPatchGroup(self: *Self, allocator: std.mem.Allocator, input: register_patch_baseline_for_patch_group.RegisterPatchBaselineForPatchGroupInput, options: register_patch_baseline_for_patch_group.Options) !register_patch_baseline_for_patch_group.RegisterPatchBaselineForPatchGroupOutput {
+    pub fn registerPatchBaselineForPatchGroup(self: *Self, allocator: std.mem.Allocator, input: register_patch_baseline_for_patch_group.RegisterPatchBaselineForPatchGroupInput, options: CallOptions) !register_patch_baseline_for_patch_group.RegisterPatchBaselineForPatchGroupOutput {
         return register_patch_baseline_for_patch_group.execute(self, allocator, input, options);
     }
 
     /// Registers a target with a maintenance window.
-    pub fn registerTargetWithMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: register_target_with_maintenance_window.RegisterTargetWithMaintenanceWindowInput, options: register_target_with_maintenance_window.Options) !register_target_with_maintenance_window.RegisterTargetWithMaintenanceWindowOutput {
+    pub fn registerTargetWithMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: register_target_with_maintenance_window.RegisterTargetWithMaintenanceWindowInput, options: CallOptions) !register_target_with_maintenance_window.RegisterTargetWithMaintenanceWindowOutput {
         return register_target_with_maintenance_window.execute(self, allocator, input, options);
     }
 
     /// Adds a new task to a maintenance window.
-    pub fn registerTaskWithMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: register_task_with_maintenance_window.RegisterTaskWithMaintenanceWindowInput, options: register_task_with_maintenance_window.Options) !register_task_with_maintenance_window.RegisterTaskWithMaintenanceWindowOutput {
+    pub fn registerTaskWithMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: register_task_with_maintenance_window.RegisterTaskWithMaintenanceWindowInput, options: CallOptions) !register_task_with_maintenance_window.RegisterTaskWithMaintenanceWindowOutput {
         return register_task_with_maintenance_window.execute(self, allocator, input, options);
     }
 
     /// Removes tag keys from the specified resource.
-    pub fn removeTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_resource.RemoveTagsFromResourceInput, options: remove_tags_from_resource.Options) !remove_tags_from_resource.RemoveTagsFromResourceOutput {
+    pub fn removeTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_resource.RemoveTagsFromResourceInput, options: CallOptions) !remove_tags_from_resource.RemoveTagsFromResourceOutput {
         return remove_tags_from_resource.execute(self, allocator, input, options);
     }
 
@@ -1608,7 +1609,7 @@ pub const Client = struct {
     /// Reset the service setting for the account to the default value as
     /// provisioned by the Amazon Web Services
     /// service team.
-    pub fn resetServiceSetting(self: *Self, allocator: std.mem.Allocator, input: reset_service_setting.ResetServiceSettingInput, options: reset_service_setting.Options) !reset_service_setting.ResetServiceSettingOutput {
+    pub fn resetServiceSetting(self: *Self, allocator: std.mem.Allocator, input: reset_service_setting.ResetServiceSettingInput, options: CallOptions) !reset_service_setting.ResetServiceSettingOutput {
         return reset_service_setting.execute(self, allocator, input, options);
     }
 
@@ -1619,36 +1620,36 @@ pub const Client = struct {
     /// This command is primarily for use by client machines to automatically
     /// reconnect during
     /// intermittent network issues. It isn't intended for any other use.
-    pub fn resumeSession(self: *Self, allocator: std.mem.Allocator, input: resume_session.ResumeSessionInput, options: resume_session.Options) !resume_session.ResumeSessionOutput {
+    pub fn resumeSession(self: *Self, allocator: std.mem.Allocator, input: resume_session.ResumeSessionInput, options: CallOptions) !resume_session.ResumeSessionOutput {
         return resume_session.execute(self, allocator, input, options);
     }
 
     /// Sends a signal to an Automation execution to change the current behavior or
     /// status of the
     /// execution.
-    pub fn sendAutomationSignal(self: *Self, allocator: std.mem.Allocator, input: send_automation_signal.SendAutomationSignalInput, options: send_automation_signal.Options) !send_automation_signal.SendAutomationSignalOutput {
+    pub fn sendAutomationSignal(self: *Self, allocator: std.mem.Allocator, input: send_automation_signal.SendAutomationSignalInput, options: CallOptions) !send_automation_signal.SendAutomationSignalOutput {
         return send_automation_signal.execute(self, allocator, input, options);
     }
 
     /// Runs commands on one or more managed nodes.
-    pub fn sendCommand(self: *Self, allocator: std.mem.Allocator, input: send_command.SendCommandInput, options: send_command.Options) !send_command.SendCommandOutput {
+    pub fn sendCommand(self: *Self, allocator: std.mem.Allocator, input: send_command.SendCommandInput, options: CallOptions) !send_command.SendCommandOutput {
         return send_command.execute(self, allocator, input, options);
     }
 
     /// Starts the workflow for just-in-time node access sessions.
-    pub fn startAccessRequest(self: *Self, allocator: std.mem.Allocator, input: start_access_request.StartAccessRequestInput, options: start_access_request.Options) !start_access_request.StartAccessRequestOutput {
+    pub fn startAccessRequest(self: *Self, allocator: std.mem.Allocator, input: start_access_request.StartAccessRequestInput, options: CallOptions) !start_access_request.StartAccessRequestOutput {
         return start_access_request.execute(self, allocator, input, options);
     }
 
     /// Runs an association immediately and only one time. This operation can be
     /// helpful when
     /// troubleshooting associations.
-    pub fn startAssociationsOnce(self: *Self, allocator: std.mem.Allocator, input: start_associations_once.StartAssociationsOnceInput, options: start_associations_once.Options) !start_associations_once.StartAssociationsOnceOutput {
+    pub fn startAssociationsOnce(self: *Self, allocator: std.mem.Allocator, input: start_associations_once.StartAssociationsOnceInput, options: CallOptions) !start_associations_once.StartAssociationsOnceOutput {
         return start_associations_once.execute(self, allocator, input, options);
     }
 
     /// Initiates execution of an Automation runbook.
-    pub fn startAutomationExecution(self: *Self, allocator: std.mem.Allocator, input: start_automation_execution.StartAutomationExecutionInput, options: start_automation_execution.Options) !start_automation_execution.StartAutomationExecutionOutput {
+    pub fn startAutomationExecution(self: *Self, allocator: std.mem.Allocator, input: start_automation_execution.StartAutomationExecutionInput, options: CallOptions) !start_automation_execution.StartAutomationExecutionOutput {
         return start_automation_execution.execute(self, allocator, input, options);
     }
 
@@ -1665,14 +1666,14 @@ pub const Client = struct {
     /// change request run only after all required approvals for the change request
     /// have been
     /// received.
-    pub fn startChangeRequestExecution(self: *Self, allocator: std.mem.Allocator, input: start_change_request_execution.StartChangeRequestExecutionInput, options: start_change_request_execution.Options) !start_change_request_execution.StartChangeRequestExecutionOutput {
+    pub fn startChangeRequestExecution(self: *Self, allocator: std.mem.Allocator, input: start_change_request_execution.StartChangeRequestExecutionInput, options: CallOptions) !start_change_request_execution.StartChangeRequestExecutionOutput {
         return start_change_request_execution.execute(self, allocator, input, options);
     }
 
     /// Initiates the process of creating a preview showing the effects that running
     /// a specified
     /// Automation runbook would have on the targeted resources.
-    pub fn startExecutionPreview(self: *Self, allocator: std.mem.Allocator, input: start_execution_preview.StartExecutionPreviewInput, options: start_execution_preview.Options) !start_execution_preview.StartExecutionPreviewOutput {
+    pub fn startExecutionPreview(self: *Self, allocator: std.mem.Allocator, input: start_execution_preview.StartExecutionPreviewInput, options: CallOptions) !start_execution_preview.StartExecutionPreviewOutput {
         return start_execution_preview.execute(self, allocator, input, options);
     }
 
@@ -1692,19 +1693,19 @@ pub const Client = struct {
     /// Amazon Web Services Tools for PowerShell usage: Start-SSMSession isn't
     /// currently supported by Amazon Web Services Tools
     /// for PowerShell on Windows local machines.
-    pub fn startSession(self: *Self, allocator: std.mem.Allocator, input: start_session.StartSessionInput, options: start_session.Options) !start_session.StartSessionOutput {
+    pub fn startSession(self: *Self, allocator: std.mem.Allocator, input: start_session.StartSessionInput, options: CallOptions) !start_session.StartSessionOutput {
         return start_session.execute(self, allocator, input, options);
     }
 
     /// Stop an Automation that is currently running.
-    pub fn stopAutomationExecution(self: *Self, allocator: std.mem.Allocator, input: stop_automation_execution.StopAutomationExecutionInput, options: stop_automation_execution.Options) !stop_automation_execution.StopAutomationExecutionOutput {
+    pub fn stopAutomationExecution(self: *Self, allocator: std.mem.Allocator, input: stop_automation_execution.StopAutomationExecutionInput, options: CallOptions) !stop_automation_execution.StopAutomationExecutionOutput {
         return stop_automation_execution.execute(self, allocator, input, options);
     }
 
     /// Permanently ends a session and closes the data connection between the
     /// Session Manager client and
     /// SSM Agent on the managed node. A terminated session can't be resumed.
-    pub fn terminateSession(self: *Self, allocator: std.mem.Allocator, input: terminate_session.TerminateSessionInput, options: terminate_session.Options) !terminate_session.TerminateSessionOutput {
+    pub fn terminateSession(self: *Self, allocator: std.mem.Allocator, input: terminate_session.TerminateSessionInput, options: CallOptions) !terminate_session.TerminateSessionOutput {
         return terminate_session.execute(self, allocator, input, options);
     }
 
@@ -1715,7 +1716,7 @@ pub const Client = struct {
     /// beginning or end of a parameter name. If the specified name for a parameter
     /// contains spaces
     /// between characters, the request fails with a `ValidationException` error.
-    pub fn unlabelParameterVersion(self: *Self, allocator: std.mem.Allocator, input: unlabel_parameter_version.UnlabelParameterVersionInput, options: unlabel_parameter_version.Options) !unlabel_parameter_version.UnlabelParameterVersionOutput {
+    pub fn unlabelParameterVersion(self: *Self, allocator: std.mem.Allocator, input: unlabel_parameter_version.UnlabelParameterVersionInput, options: CallOptions) !unlabel_parameter_version.UnlabelParameterVersionOutput {
         return unlabel_parameter_version.execute(self, allocator, input, options);
     }
 
@@ -1748,7 +1749,7 @@ pub const Client = struct {
     /// targets. You can add the `ApplyOnlyAtCronInterval` parameter to run the
     /// association
     /// during the next schedule run.
-    pub fn updateAssociation(self: *Self, allocator: std.mem.Allocator, input: update_association.UpdateAssociationInput, options: update_association.Options) !update_association.UpdateAssociationOutput {
+    pub fn updateAssociation(self: *Self, allocator: std.mem.Allocator, input: update_association.UpdateAssociationInput, options: CallOptions) !update_association.UpdateAssociationOutput {
         return update_association.execute(self, allocator, input, options);
     }
 
@@ -1761,12 +1762,12 @@ pub const Client = struct {
     /// report status updates about your associations and is only used for
     /// associations created with the
     /// `InstanceId` legacy parameter.
-    pub fn updateAssociationStatus(self: *Self, allocator: std.mem.Allocator, input: update_association_status.UpdateAssociationStatusInput, options: update_association_status.Options) !update_association_status.UpdateAssociationStatusOutput {
+    pub fn updateAssociationStatus(self: *Self, allocator: std.mem.Allocator, input: update_association_status.UpdateAssociationStatusInput, options: CallOptions) !update_association_status.UpdateAssociationStatusOutput {
         return update_association_status.execute(self, allocator, input, options);
     }
 
     /// Updates one or more values for an SSM document.
-    pub fn updateDocument(self: *Self, allocator: std.mem.Allocator, input: update_document.UpdateDocumentInput, options: update_document.Options) !update_document.UpdateDocumentOutput {
+    pub fn updateDocument(self: *Self, allocator: std.mem.Allocator, input: update_document.UpdateDocumentInput, options: CallOptions) !update_document.UpdateDocumentOutput {
         return update_document.execute(self, allocator, input, options);
     }
 
@@ -1777,7 +1778,7 @@ pub const Client = struct {
     /// the association unless you previously specifed the
     /// `apply-only-at-cron-interval`
     /// parameter.
-    pub fn updateDocumentDefaultVersion(self: *Self, allocator: std.mem.Allocator, input: update_document_default_version.UpdateDocumentDefaultVersionInput, options: update_document_default_version.Options) !update_document_default_version.UpdateDocumentDefaultVersionOutput {
+    pub fn updateDocumentDefaultVersion(self: *Self, allocator: std.mem.Allocator, input: update_document_default_version.UpdateDocumentDefaultVersionInput, options: CallOptions) !update_document_default_version.UpdateDocumentDefaultVersionOutput {
         return update_document_default_version.execute(self, allocator, input, options);
     }
 
@@ -1792,7 +1793,7 @@ pub const Client = struct {
     /// Updates information related to approval reviews for a specific version of a
     /// change template
     /// in Change Manager.
-    pub fn updateDocumentMetadata(self: *Self, allocator: std.mem.Allocator, input: update_document_metadata.UpdateDocumentMetadataInput, options: update_document_metadata.Options) !update_document_metadata.UpdateDocumentMetadataOutput {
+    pub fn updateDocumentMetadata(self: *Self, allocator: std.mem.Allocator, input: update_document_metadata.UpdateDocumentMetadataInput, options: CallOptions) !update_document_metadata.UpdateDocumentMetadataOutput {
         return update_document_metadata.execute(self, allocator, input, options);
     }
 
@@ -1810,7 +1811,7 @@ pub const Client = struct {
     /// value you specify for `Cutoff` is one hour, no maintenance window tasks can
     /// start
     /// after 5 PM.
-    pub fn updateMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: update_maintenance_window.UpdateMaintenanceWindowInput, options: update_maintenance_window.Options) !update_maintenance_window.UpdateMaintenanceWindowOutput {
+    pub fn updateMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: update_maintenance_window.UpdateMaintenanceWindowInput, options: CallOptions) !update_maintenance_window.UpdateMaintenanceWindowOutput {
         return update_maintenance_window.execute(self, allocator, input, options);
     }
 
@@ -1832,7 +1833,7 @@ pub const Client = struct {
     /// target, and resource group. For more information, see Target.
     ///
     /// If a parameter is null, then the corresponding field isn't modified.
-    pub fn updateMaintenanceWindowTarget(self: *Self, allocator: std.mem.Allocator, input: update_maintenance_window_target.UpdateMaintenanceWindowTargetInput, options: update_maintenance_window_target.Options) !update_maintenance_window_target.UpdateMaintenanceWindowTargetOutput {
+    pub fn updateMaintenanceWindowTarget(self: *Self, allocator: std.mem.Allocator, input: update_maintenance_window_target.UpdateMaintenanceWindowTargetInput, options: CallOptions) !update_maintenance_window_target.UpdateMaintenanceWindowTargetOutput {
         return update_maintenance_window_target.execute(self, allocator, input, options);
     }
 
@@ -1881,7 +1882,7 @@ pub const Client = struct {
     /// maintenance window task and specify only a different `OutputS3BucketName`
     /// value, the
     /// values for `Comment` and `NotificationConfig` are removed.
-    pub fn updateMaintenanceWindowTask(self: *Self, allocator: std.mem.Allocator, input: update_maintenance_window_task.UpdateMaintenanceWindowTaskInput, options: update_maintenance_window_task.Options) !update_maintenance_window_task.UpdateMaintenanceWindowTaskOutput {
+    pub fn updateMaintenanceWindowTask(self: *Self, allocator: std.mem.Allocator, input: update_maintenance_window_task.UpdateMaintenanceWindowTaskInput, options: CallOptions) !update_maintenance_window_task.UpdateMaintenanceWindowTaskOutput {
         return update_maintenance_window_task.execute(self, allocator, input, options);
     }
 
@@ -1891,7 +1892,7 @@ pub const Client = struct {
     /// first
     /// assigned to these hybrid nodes during the activation process. For more
     /// information, see CreateActivation.
-    pub fn updateManagedInstanceRole(self: *Self, allocator: std.mem.Allocator, input: update_managed_instance_role.UpdateManagedInstanceRoleInput, options: update_managed_instance_role.Options) !update_managed_instance_role.UpdateManagedInstanceRoleOutput {
+    pub fn updateManagedInstanceRole(self: *Self, allocator: std.mem.Allocator, input: update_managed_instance_role.UpdateManagedInstanceRoleInput, options: CallOptions) !update_managed_instance_role.UpdateManagedInstanceRoleOutput {
         return update_managed_instance_role.execute(self, allocator, input, options);
     }
 
@@ -1907,13 +1908,13 @@ pub const Client = struct {
     /// more information, see [Amazon Web Services Systems Manager
     /// OpsCenter](https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html) in the
     /// *Amazon Web Services Systems Manager User Guide*.
-    pub fn updateOpsItem(self: *Self, allocator: std.mem.Allocator, input: update_ops_item.UpdateOpsItemInput, options: update_ops_item.Options) !update_ops_item.UpdateOpsItemOutput {
+    pub fn updateOpsItem(self: *Self, allocator: std.mem.Allocator, input: update_ops_item.UpdateOpsItemInput, options: CallOptions) !update_ops_item.UpdateOpsItemOutput {
         return update_ops_item.execute(self, allocator, input, options);
     }
 
     /// Amazon Web Services Systems Manager calls this API operation when you edit
     /// OpsMetadata in Application Manager.
-    pub fn updateOpsMetadata(self: *Self, allocator: std.mem.Allocator, input: update_ops_metadata.UpdateOpsMetadataInput, options: update_ops_metadata.Options) !update_ops_metadata.UpdateOpsMetadataOutput {
+    pub fn updateOpsMetadata(self: *Self, allocator: std.mem.Allocator, input: update_ops_metadata.UpdateOpsMetadataInput, options: CallOptions) !update_ops_metadata.UpdateOpsMetadataOutput {
         return update_ops_metadata.execute(self, allocator, input, options);
     }
 
@@ -1924,7 +1925,7 @@ pub const Client = struct {
     /// For information about valid key-value pairs in `PatchFilters` for each
     /// supported
     /// operating system type, see PatchFilter.
-    pub fn updatePatchBaseline(self: *Self, allocator: std.mem.Allocator, input: update_patch_baseline.UpdatePatchBaselineInput, options: update_patch_baseline.Options) !update_patch_baseline.UpdatePatchBaselineOutput {
+    pub fn updatePatchBaseline(self: *Self, allocator: std.mem.Allocator, input: update_patch_baseline.UpdatePatchBaselineInput, options: CallOptions) !update_patch_baseline.UpdatePatchBaselineOutput {
         return update_patch_baseline.execute(self, allocator, input, options);
     }
 
@@ -1943,7 +1944,7 @@ pub const Client = struct {
     /// This API operation only supports a resource data sync that was created with
     /// a
     /// SyncFromSource `SyncType`.
-    pub fn updateResourceDataSync(self: *Self, allocator: std.mem.Allocator, input: update_resource_data_sync.UpdateResourceDataSyncInput, options: update_resource_data_sync.Options) !update_resource_data_sync.UpdateResourceDataSyncOutput {
+    pub fn updateResourceDataSync(self: *Self, allocator: std.mem.Allocator, input: update_resource_data_sync.UpdateResourceDataSyncInput, options: CallOptions) !update_resource_data_sync.UpdateResourceDataSyncOutput {
         return update_resource_data_sync.execute(self, allocator, input, options);
     }
 
@@ -1971,7 +1972,7 @@ pub const Client = struct {
     /// original value defined by the Amazon Web Services service team.
     ///
     /// Update the service setting for the account.
-    pub fn updateServiceSetting(self: *Self, allocator: std.mem.Allocator, input: update_service_setting.UpdateServiceSettingInput, options: update_service_setting.Options) !update_service_setting.UpdateServiceSettingOutput {
+    pub fn updateServiceSetting(self: *Self, allocator: std.mem.Allocator, input: update_service_setting.UpdateServiceSettingInput, options: CallOptions) !update_service_setting.UpdateServiceSettingOutput {
         return update_service_setting.execute(self, allocator, input, options);
     }
 

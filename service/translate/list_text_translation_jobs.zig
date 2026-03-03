@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TextTranslationJobFilter = @import("text_translation_job_filter.zig").TextTranslationJobFilter;
 const TextTranslationJobProperties = @import("text_translation_job_properties.zig").TextTranslationJobProperties;
@@ -41,11 +42,7 @@ pub const ListTextTranslationJobsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTextTranslationJobsInput, options: Options) !ListTextTranslationJobsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTextTranslationJobsInput, options: CallOptions) !ListTextTranslationJobsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

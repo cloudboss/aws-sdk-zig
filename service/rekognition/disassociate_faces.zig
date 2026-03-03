@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DisassociatedFace = @import("disassociated_face.zig").DisassociatedFace;
 const UnsuccessfulFaceDisassociation = @import("unsuccessful_face_disassociation.zig").UnsuccessfulFaceDisassociation;
@@ -59,11 +60,7 @@ pub const DisassociateFacesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateFacesInput, options: Options) !DisassociateFacesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateFacesInput, options: CallOptions) !DisassociateFacesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

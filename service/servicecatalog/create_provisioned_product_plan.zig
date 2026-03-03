@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProvisionedProductPlanType = @import("provisioned_product_plan_type.zig").ProvisionedProductPlanType;
 const UpdateProvisioningParameter = @import("update_provisioning_parameter.zig").UpdateProvisioningParameter;
@@ -99,11 +100,7 @@ pub const CreateProvisionedProductPlanOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateProvisionedProductPlanInput, options: Options) !CreateProvisionedProductPlanOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateProvisionedProductPlanInput, options: CallOptions) !CreateProvisionedProductPlanOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

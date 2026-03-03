@@ -30,6 +30,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_datasource_packages = @import("update_datasource_packages.zig");
 const update_investigation_state = @import("update_investigation_state.zig");
 const update_organization_configuration = @import("update_organization_configuration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -67,17 +68,17 @@ pub const Client = struct {
     /// The request provides the ARN of behavior graph.
     ///
     /// The member account status in the graph must be `INVITED`.
-    pub fn acceptInvitation(self: *Self, allocator: std.mem.Allocator, input: accept_invitation.AcceptInvitationInput, options: accept_invitation.Options) !accept_invitation.AcceptInvitationOutput {
+    pub fn acceptInvitation(self: *Self, allocator: std.mem.Allocator, input: accept_invitation.AcceptInvitationInput, options: CallOptions) !accept_invitation.AcceptInvitationOutput {
         return accept_invitation.execute(self, allocator, input, options);
     }
 
     /// Gets data source package information for the behavior graph.
-    pub fn batchGetGraphMemberDatasources(self: *Self, allocator: std.mem.Allocator, input: batch_get_graph_member_datasources.BatchGetGraphMemberDatasourcesInput, options: batch_get_graph_member_datasources.Options) !batch_get_graph_member_datasources.BatchGetGraphMemberDatasourcesOutput {
+    pub fn batchGetGraphMemberDatasources(self: *Self, allocator: std.mem.Allocator, input: batch_get_graph_member_datasources.BatchGetGraphMemberDatasourcesInput, options: CallOptions) !batch_get_graph_member_datasources.BatchGetGraphMemberDatasourcesOutput {
         return batch_get_graph_member_datasources.execute(self, allocator, input, options);
     }
 
     /// Gets information on the data source package history for an account.
-    pub fn batchGetMembershipDatasources(self: *Self, allocator: std.mem.Allocator, input: batch_get_membership_datasources.BatchGetMembershipDatasourcesInput, options: batch_get_membership_datasources.Options) !batch_get_membership_datasources.BatchGetMembershipDatasourcesOutput {
+    pub fn batchGetMembershipDatasources(self: *Self, allocator: std.mem.Allocator, input: batch_get_membership_datasources.BatchGetMembershipDatasourcesInput, options: CallOptions) !batch_get_membership_datasources.BatchGetMembershipDatasourcesOutput {
         return batch_get_membership_datasources.execute(self, allocator, input, options);
     }
 
@@ -99,7 +100,7 @@ pub const Client = struct {
     /// it
     /// always returns the same behavior graph ARN. It does not create a new
     /// behavior graph.
-    pub fn createGraph(self: *Self, allocator: std.mem.Allocator, input: create_graph.CreateGraphInput, options: create_graph.Options) !create_graph.CreateGraphOutput {
+    pub fn createGraph(self: *Self, allocator: std.mem.Allocator, input: create_graph.CreateGraphInput, options: CallOptions) !create_graph.CreateGraphOutput {
         return create_graph.execute(self, allocator, input, options);
     }
 
@@ -144,7 +145,7 @@ pub const Client = struct {
     /// includes accounts that were already invited to be member accounts in the
     /// behavior
     /// graph.
-    pub fn createMembers(self: *Self, allocator: std.mem.Allocator, input: create_members.CreateMembersInput, options: create_members.Options) !create_members.CreateMembersOutput {
+    pub fn createMembers(self: *Self, allocator: std.mem.Allocator, input: create_members.CreateMembersInput, options: CallOptions) !create_members.CreateMembersOutput {
         return create_members.execute(self, allocator, input, options);
     }
 
@@ -155,7 +156,7 @@ pub const Client = struct {
     ///
     /// `DeleteGraph` can only be called by the administrator account for a behavior
     /// graph.
-    pub fn deleteGraph(self: *Self, allocator: std.mem.Allocator, input: delete_graph.DeleteGraphInput, options: delete_graph.Options) !delete_graph.DeleteGraphOutput {
+    pub fn deleteGraph(self: *Self, allocator: std.mem.Allocator, input: delete_graph.DeleteGraphInput, options: CallOptions) !delete_graph.DeleteGraphOutput {
         return delete_graph.execute(self, allocator, input, options);
     }
 
@@ -181,7 +182,7 @@ pub const Client = struct {
     /// account from the behavior graph. To disable a behavior graph, the
     /// administrator account
     /// uses the `DeleteGraph` API method.
-    pub fn deleteMembers(self: *Self, allocator: std.mem.Allocator, input: delete_members.DeleteMembersInput, options: delete_members.Options) !delete_members.DeleteMembersOutput {
+    pub fn deleteMembers(self: *Self, allocator: std.mem.Allocator, input: delete_members.DeleteMembersInput, options: CallOptions) !delete_members.DeleteMembersOutput {
         return delete_members.execute(self, allocator, input, options);
     }
 
@@ -193,7 +194,7 @@ pub const Client = struct {
     ///
     /// Can only be called by the Detective administrator account for the
     /// organization.
-    pub fn describeOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_organization_configuration.DescribeOrganizationConfigurationInput, options: describe_organization_configuration.Options) !describe_organization_configuration.DescribeOrganizationConfigurationOutput {
+    pub fn describeOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_organization_configuration.DescribeOrganizationConfigurationInput, options: CallOptions) !describe_organization_configuration.DescribeOrganizationConfigurationOutput {
         return describe_organization_configuration.execute(self, allocator, input, options);
     }
 
@@ -210,7 +211,7 @@ pub const Client = struct {
     /// Organizations API. Removing the delegated administrator account also removes
     /// the Detective administrator account in all Regions, except for Regions where
     /// the Detective administrator account is the organization management account.
-    pub fn disableOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: disable_organization_admin_account.DisableOrganizationAdminAccountInput, options: disable_organization_admin_account.Options) !disable_organization_admin_account.DisableOrganizationAdminAccountOutput {
+    pub fn disableOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: disable_organization_admin_account.DisableOrganizationAdminAccountInput, options: CallOptions) !disable_organization_admin_account.DisableOrganizationAdminAccountOutput {
         return disable_organization_admin_account.execute(self, allocator, input, options);
     }
 
@@ -224,7 +225,7 @@ pub const Client = struct {
     /// administrator account determines which organization accounts to enable or
     /// disable as member
     /// accounts.
-    pub fn disassociateMembership(self: *Self, allocator: std.mem.Allocator, input: disassociate_membership.DisassociateMembershipInput, options: disassociate_membership.Options) !disassociate_membership.DisassociateMembershipOutput {
+    pub fn disassociateMembership(self: *Self, allocator: std.mem.Allocator, input: disassociate_membership.DisassociateMembershipInput, options: CallOptions) !disassociate_membership.DisassociateMembershipOutput {
         return disassociate_membership.execute(self, allocator, input, options);
     }
 
@@ -248,7 +249,7 @@ pub const Client = struct {
     /// make that account the delegated administrator account for Detective. The
     /// organization management account cannot be the delegated administrator
     /// account.
-    pub fn enableOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: enable_organization_admin_account.EnableOrganizationAdminAccountInput, options: enable_organization_admin_account.Options) !enable_organization_admin_account.EnableOrganizationAdminAccountOutput {
+    pub fn enableOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: enable_organization_admin_account.EnableOrganizationAdminAccountInput, options: CallOptions) !enable_organization_admin_account.EnableOrganizationAdminAccountOutput {
         return enable_organization_admin_account.execute(self, allocator, input, options);
     }
 
@@ -258,18 +259,18 @@ pub const Client = struct {
     /// level of confidence) identify malicious activity or a security incident.
     /// `GetInvestigation` returns the investigation results of an investigation for
     /// a behavior graph.
-    pub fn getInvestigation(self: *Self, allocator: std.mem.Allocator, input: get_investigation.GetInvestigationInput, options: get_investigation.Options) !get_investigation.GetInvestigationOutput {
+    pub fn getInvestigation(self: *Self, allocator: std.mem.Allocator, input: get_investigation.GetInvestigationInput, options: CallOptions) !get_investigation.GetInvestigationOutput {
         return get_investigation.execute(self, allocator, input, options);
     }
 
     /// Returns the membership details for specified member accounts for a behavior
     /// graph.
-    pub fn getMembers(self: *Self, allocator: std.mem.Allocator, input: get_members.GetMembersInput, options: get_members.Options) !get_members.GetMembersOutput {
+    pub fn getMembers(self: *Self, allocator: std.mem.Allocator, input: get_members.GetMembersInput, options: CallOptions) !get_members.GetMembersOutput {
         return get_members.execute(self, allocator, input, options);
     }
 
     /// Lists data source packages in the behavior graph.
-    pub fn listDatasourcePackages(self: *Self, allocator: std.mem.Allocator, input: list_datasource_packages.ListDatasourcePackagesInput, options: list_datasource_packages.Options) !list_datasource_packages.ListDatasourcePackagesOutput {
+    pub fn listDatasourcePackages(self: *Self, allocator: std.mem.Allocator, input: list_datasource_packages.ListDatasourcePackagesInput, options: CallOptions) !list_datasource_packages.ListDatasourcePackagesOutput {
         return list_datasource_packages.execute(self, allocator, input, options);
     }
 
@@ -280,14 +281,14 @@ pub const Client = struct {
     /// Because an account can currently only be the administrator of one behavior
     /// graph within
     /// a Region, the results always contain a single behavior graph.
-    pub fn listGraphs(self: *Self, allocator: std.mem.Allocator, input: list_graphs.ListGraphsInput, options: list_graphs.Options) !list_graphs.ListGraphsOutput {
+    pub fn listGraphs(self: *Self, allocator: std.mem.Allocator, input: list_graphs.ListGraphsInput, options: CallOptions) !list_graphs.ListGraphsOutput {
         return list_graphs.execute(self, allocator, input, options);
     }
 
     /// Gets the indicators from an investigation. You can use the information from
     /// the indicators to determine if an IAM user and/or IAM role is involved in an
     /// unusual activity that could indicate malicious behavior and its impact.
-    pub fn listIndicators(self: *Self, allocator: std.mem.Allocator, input: list_indicators.ListIndicatorsInput, options: list_indicators.Options) !list_indicators.ListIndicatorsOutput {
+    pub fn listIndicators(self: *Self, allocator: std.mem.Allocator, input: list_indicators.ListIndicatorsInput, options: CallOptions) !list_indicators.ListIndicatorsOutput {
         return list_indicators.execute(self, allocator, input, options);
     }
 
@@ -299,7 +300,7 @@ pub const Client = struct {
     /// incident.
     /// `ListInvestigations` lists all active Detective
     /// investigations.
-    pub fn listInvestigations(self: *Self, allocator: std.mem.Allocator, input: list_investigations.ListInvestigationsInput, options: list_investigations.Options) !list_investigations.ListInvestigationsOutput {
+    pub fn listInvestigations(self: *Self, allocator: std.mem.Allocator, input: list_investigations.ListInvestigationsInput, options: CallOptions) !list_investigations.ListInvestigationsOutput {
         return list_investigations.execute(self, allocator, input, options);
     }
 
@@ -315,7 +316,7 @@ pub const Client = struct {
     /// invitation. The results also do not include behavior graphs that the member
     /// account
     /// resigned from or was removed from.
-    pub fn listInvitations(self: *Self, allocator: std.mem.Allocator, input: list_invitations.ListInvitationsInput, options: list_invitations.Options) !list_invitations.ListInvitationsOutput {
+    pub fn listInvitations(self: *Self, allocator: std.mem.Allocator, input: list_invitations.ListInvitationsInput, options: CallOptions) !list_invitations.ListInvitationsOutput {
         return list_invitations.execute(self, allocator, input, options);
     }
 
@@ -329,18 +330,18 @@ pub const Client = struct {
     /// accounts
     /// that the Detective administrator account has not enabled as member
     /// accounts.
-    pub fn listMembers(self: *Self, allocator: std.mem.Allocator, input: list_members.ListMembersInput, options: list_members.Options) !list_members.ListMembersOutput {
+    pub fn listMembers(self: *Self, allocator: std.mem.Allocator, input: list_members.ListMembersInput, options: CallOptions) !list_members.ListMembersOutput {
         return list_members.execute(self, allocator, input, options);
     }
 
     /// Returns information about the Detective administrator account for an
     /// organization. Can only be called by the organization management account.
-    pub fn listOrganizationAdminAccounts(self: *Self, allocator: std.mem.Allocator, input: list_organization_admin_accounts.ListOrganizationAdminAccountsInput, options: list_organization_admin_accounts.Options) !list_organization_admin_accounts.ListOrganizationAdminAccountsOutput {
+    pub fn listOrganizationAdminAccounts(self: *Self, allocator: std.mem.Allocator, input: list_organization_admin_accounts.ListOrganizationAdminAccountsInput, options: CallOptions) !list_organization_admin_accounts.ListOrganizationAdminAccountsOutput {
         return list_organization_admin_accounts.execute(self, allocator, input, options);
     }
 
     /// Returns the tag values that are assigned to a behavior graph.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -353,7 +354,7 @@ pub const Client = struct {
     /// organization behavior graph. In the organization behavior graph,
     /// organization accounts do
     /// not receive an invitation.
-    pub fn rejectInvitation(self: *Self, allocator: std.mem.Allocator, input: reject_invitation.RejectInvitationInput, options: reject_invitation.Options) !reject_invitation.RejectInvitationOutput {
+    pub fn rejectInvitation(self: *Self, allocator: std.mem.Allocator, input: reject_invitation.RejectInvitationInput, options: CallOptions) !reject_invitation.RejectInvitationOutput {
         return reject_invitation.execute(self, allocator, input, options);
     }
 
@@ -363,7 +364,7 @@ pub const Client = struct {
     /// level of confidence) identify malicious activity or a security incident.
     /// `StartInvestigation` initiates an investigation on an entity in a behavior
     /// graph.
-    pub fn startInvestigation(self: *Self, allocator: std.mem.Allocator, input: start_investigation.StartInvestigationInput, options: start_investigation.Options) !start_investigation.StartInvestigationOutput {
+    pub fn startInvestigation(self: *Self, allocator: std.mem.Allocator, input: start_investigation.StartInvestigationInput, options: CallOptions) !start_investigation.StartInvestigationOutput {
         return start_investigation.execute(self, allocator, input, options);
     }
 
@@ -378,27 +379,27 @@ pub const Client = struct {
     ///
     /// * If Detective cannot enable the member account, the status remains
     /// `ACCEPTED_BUT_DISABLED`.
-    pub fn startMonitoringMember(self: *Self, allocator: std.mem.Allocator, input: start_monitoring_member.StartMonitoringMemberInput, options: start_monitoring_member.Options) !start_monitoring_member.StartMonitoringMemberOutput {
+    pub fn startMonitoringMember(self: *Self, allocator: std.mem.Allocator, input: start_monitoring_member.StartMonitoringMemberInput, options: CallOptions) !start_monitoring_member.StartMonitoringMemberOutput {
         return start_monitoring_member.execute(self, allocator, input, options);
     }
 
     /// Applies tag values to a behavior graph.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from a behavior graph.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Starts a data source package for the Detective behavior graph.
-    pub fn updateDatasourcePackages(self: *Self, allocator: std.mem.Allocator, input: update_datasource_packages.UpdateDatasourcePackagesInput, options: update_datasource_packages.Options) !update_datasource_packages.UpdateDatasourcePackagesOutput {
+    pub fn updateDatasourcePackages(self: *Self, allocator: std.mem.Allocator, input: update_datasource_packages.UpdateDatasourcePackagesInput, options: CallOptions) !update_datasource_packages.UpdateDatasourcePackagesOutput {
         return update_datasource_packages.execute(self, allocator, input, options);
     }
 
     /// Updates the state of an investigation.
-    pub fn updateInvestigationState(self: *Self, allocator: std.mem.Allocator, input: update_investigation_state.UpdateInvestigationStateInput, options: update_investigation_state.Options) !update_investigation_state.UpdateInvestigationStateOutput {
+    pub fn updateInvestigationState(self: *Self, allocator: std.mem.Allocator, input: update_investigation_state.UpdateInvestigationStateInput, options: CallOptions) !update_investigation_state.UpdateInvestigationStateOutput {
         return update_investigation_state.execute(self, allocator, input, options);
     }
 
@@ -406,7 +407,7 @@ pub const Client = struct {
     /// Region.
     /// Can only be called by the Detective administrator account for the
     /// organization.
-    pub fn updateOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_organization_configuration.UpdateOrganizationConfigurationInput, options: update_organization_configuration.Options) !update_organization_configuration.UpdateOrganizationConfigurationOutput {
+    pub fn updateOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_organization_configuration.UpdateOrganizationConfigurationInput, options: CallOptions) !update_organization_configuration.UpdateOrganizationConfigurationOutput {
         return update_organization_configuration.execute(self, allocator, input, options);
     }
 

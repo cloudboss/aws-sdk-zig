@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TargetDeviceStatus = @import("target_device_status.zig").TargetDeviceStatus;
 
@@ -36,11 +37,7 @@ pub const DeregisterDeviceInput = struct {
 pub const DeregisterDeviceOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterDeviceInput, options: Options) !DeregisterDeviceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterDeviceInput, options: CallOptions) !DeregisterDeviceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tenancy = @import("tenancy.zig").Tenancy;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
@@ -105,11 +106,7 @@ pub const CreateVpcOutput = struct {
     vpc: ?Vpc = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVpcInput, options: Options) !CreateVpcOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVpcInput, options: CallOptions) !CreateVpcOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

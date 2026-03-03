@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const UsageRecord = @import("usage_record.zig").UsageRecord;
 const UsageRecordResult = @import("usage_record_result.zig").UsageRecordResult;
@@ -41,11 +42,7 @@ pub const BatchMeterUsageOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchMeterUsageInput, options: Options) !BatchMeterUsageOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchMeterUsageInput, options: CallOptions) !BatchMeterUsageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

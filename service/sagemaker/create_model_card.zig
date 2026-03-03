@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ModelCardStatus = @import("model_card_status.zig").ModelCardStatus;
 const ModelCardSecurityConfig = @import("model_card_security_config.zig").ModelCardSecurityConfig;
@@ -51,11 +52,7 @@ pub const CreateModelCardOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateModelCardInput, options: Options) !CreateModelCardOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateModelCardInput, options: CallOptions) !CreateModelCardOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VirtualServiceSpec = @import("virtual_service_spec.zig").VirtualServiceSpec;
 const TagRef = @import("tag_ref.zig").TagRef;
@@ -58,11 +59,7 @@ pub const CreateVirtualServiceOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVirtualServiceInput, options: Options) !CreateVirtualServiceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVirtualServiceInput, options: CallOptions) !CreateVirtualServiceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

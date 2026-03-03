@@ -40,6 +40,7 @@ const update_hit_review_status = @import("update_hit_review_status.zig");
 const update_hit_type_of_hit = @import("update_hit_type_of_hit.zig");
 const update_notification_settings = @import("update_notification_settings.zig");
 const update_qualification_type = @import("update_qualification_type.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -78,7 +79,7 @@ pub const Client = struct {
     ///
     /// A successful request for the `AcceptQualificationRequest` operation
     /// returns with no errors and an empty body.
-    pub fn acceptQualificationRequest(self: *Self, allocator: std.mem.Allocator, input: accept_qualification_request.AcceptQualificationRequestInput, options: accept_qualification_request.Options) !accept_qualification_request.AcceptQualificationRequestOutput {
+    pub fn acceptQualificationRequest(self: *Self, allocator: std.mem.Allocator, input: accept_qualification_request.AcceptQualificationRequestInput, options: CallOptions) !accept_qualification_request.AcceptQualificationRequestOutput {
         return accept_qualification_request.execute(self, allocator, input, options);
     }
 
@@ -104,7 +105,7 @@ pub const Client = struct {
     /// This only works on rejected assignments that were submitted within the
     /// previous 30 days
     /// and only if the assignment's related HIT has not been deleted.
-    pub fn approveAssignment(self: *Self, allocator: std.mem.Allocator, input: approve_assignment.ApproveAssignmentInput, options: approve_assignment.Options) !approve_assignment.ApproveAssignmentOutput {
+    pub fn approveAssignment(self: *Self, allocator: std.mem.Allocator, input: approve_assignment.ApproveAssignmentInput, options: CallOptions) !approve_assignment.ApproveAssignmentOutput {
         return approve_assignment.execute(self, allocator, input, options);
     }
 
@@ -129,7 +130,7 @@ pub const Client = struct {
     /// request without affecting the Qualification the Worker already has, reject
     /// the
     /// request with the `RejectQualificationRequest` operation.
-    pub fn associateQualificationWithWorker(self: *Self, allocator: std.mem.Allocator, input: associate_qualification_with_worker.AssociateQualificationWithWorkerInput, options: associate_qualification_with_worker.Options) !associate_qualification_with_worker.AssociateQualificationWithWorkerOutput {
+    pub fn associateQualificationWithWorker(self: *Self, allocator: std.mem.Allocator, input: associate_qualification_with_worker.AssociateQualificationWithWorkerInput, options: CallOptions) !associate_qualification_with_worker.AssociateQualificationWithWorkerOutput {
         return associate_qualification_with_worker.execute(self, allocator, input, options);
     }
 
@@ -152,7 +153,7 @@ pub const Client = struct {
     ///   to extend HITs that were created before July 22, 2015 will result in an
     /// `AWS.MechanicalTurk.HITTooOldForExtension`
     /// exception.
-    pub fn createAdditionalAssignmentsForHit(self: *Self, allocator: std.mem.Allocator, input: create_additional_assignments_for_hit.CreateAdditionalAssignmentsForHITInput, options: create_additional_assignments_for_hit.Options) !create_additional_assignments_for_hit.CreateAdditionalAssignmentsForHITOutput {
+    pub fn createAdditionalAssignmentsForHit(self: *Self, allocator: std.mem.Allocator, input: create_additional_assignments_for_hit.CreateAdditionalAssignmentsForHITInput, options: CallOptions) !create_additional_assignments_for_hit.CreateAdditionalAssignmentsForHITOutput {
         return create_additional_assignments_for_hit.execute(self, allocator, input, options);
     }
 
@@ -182,7 +183,7 @@ pub const Client = struct {
     /// If a HIT is created with 10 or more maximum assignments, there is an
     /// additional fee. For more information, see
     /// [Amazon Mechanical Turk Pricing](https://requester.mturk.com/pricing).
-    pub fn createHit(self: *Self, allocator: std.mem.Allocator, input: create_hit.CreateHITInput, options: create_hit.Options) !create_hit.CreateHITOutput {
+    pub fn createHit(self: *Self, allocator: std.mem.Allocator, input: create_hit.CreateHITInput, options: CallOptions) !create_hit.CreateHITOutput {
         return create_hit.execute(self, allocator, input, options);
     }
 
@@ -192,7 +193,7 @@ pub const Client = struct {
     /// If you register a HIT type with values that match an existing HIT type, the
     /// HIT type
     /// ID of the existing type will be returned.
-    pub fn createHitType(self: *Self, allocator: std.mem.Allocator, input: create_hit_type.CreateHITTypeInput, options: create_hit_type.Options) !create_hit_type.CreateHITTypeOutput {
+    pub fn createHitType(self: *Self, allocator: std.mem.Allocator, input: create_hit_type.CreateHITTypeInput, options: CallOptions) !create_hit_type.CreateHITTypeOutput {
         return create_hit_type.execute(self, allocator, input, options);
     }
 
@@ -213,7 +214,7 @@ pub const Client = struct {
     /// additional fee.
     /// For more information, see [Amazon Mechanical Turk
     /// Pricing](https://requester.mturk.com/pricing).
-    pub fn createHitWithHitType(self: *Self, allocator: std.mem.Allocator, input: create_hit_with_hit_type.CreateHITWithHITTypeInput, options: create_hit_with_hit_type.Options) !create_hit_with_hit_type.CreateHITWithHITTypeOutput {
+    pub fn createHitWithHitType(self: *Self, allocator: std.mem.Allocator, input: create_hit_with_hit_type.CreateHITWithHITTypeInput, options: CallOptions) !create_hit_with_hit_type.CreateHITWithHITTypeOutput {
         return create_hit_with_hit_type.execute(self, allocator, input, options);
     }
 
@@ -222,14 +223,14 @@ pub const Client = struct {
     /// operation creates a new Qualification type, which is represented by a
     /// `QualificationType`
     /// data structure.
-    pub fn createQualificationType(self: *Self, allocator: std.mem.Allocator, input: create_qualification_type.CreateQualificationTypeInput, options: create_qualification_type.Options) !create_qualification_type.CreateQualificationTypeOutput {
+    pub fn createQualificationType(self: *Self, allocator: std.mem.Allocator, input: create_qualification_type.CreateQualificationTypeInput, options: CallOptions) !create_qualification_type.CreateQualificationTypeOutput {
         return create_qualification_type.execute(self, allocator, input, options);
     }
 
     /// The `CreateWorkerBlock` operation allows you to prevent a Worker from
     /// working on your HITs. For example, you can block a Worker who is producing
     /// poor quality work. You can block up to 100,000 Workers.
-    pub fn createWorkerBlock(self: *Self, allocator: std.mem.Allocator, input: create_worker_block.CreateWorkerBlockInput, options: create_worker_block.Options) !create_worker_block.CreateWorkerBlockOutput {
+    pub fn createWorkerBlock(self: *Self, allocator: std.mem.Allocator, input: create_worker_block.CreateWorkerBlockInput, options: CallOptions) !create_worker_block.CreateWorkerBlockOutput {
         return create_worker_block.execute(self, allocator, input, options);
     }
 
@@ -253,7 +254,7 @@ pub const Client = struct {
     ///
     /// * Disposing HITs can improve the performance of operations such as
     ///   ListReviewableHITs and ListHITs.
-    pub fn deleteHit(self: *Self, allocator: std.mem.Allocator, input: delete_hit.DeleteHITInput, options: delete_hit.Options) !delete_hit.DeleteHITOutput {
+    pub fn deleteHit(self: *Self, allocator: std.mem.Allocator, input: delete_hit.DeleteHITInput, options: CallOptions) !delete_hit.DeleteHITOutput {
         return delete_hit.execute(self, allocator, input, options);
     }
 
@@ -274,7 +275,7 @@ pub const Client = struct {
     /// may take up to 48 hours before DeleteQualificationType completes and
     /// the unique name of the Qualification type is available for reuse with
     /// CreateQualificationType.
-    pub fn deleteQualificationType(self: *Self, allocator: std.mem.Allocator, input: delete_qualification_type.DeleteQualificationTypeInput, options: delete_qualification_type.Options) !delete_qualification_type.DeleteQualificationTypeOutput {
+    pub fn deleteQualificationType(self: *Self, allocator: std.mem.Allocator, input: delete_qualification_type.DeleteQualificationTypeInput, options: CallOptions) !delete_qualification_type.DeleteQualificationTypeOutput {
         return delete_qualification_type.execute(self, allocator, input, options);
     }
 
@@ -284,7 +285,7 @@ pub const Client = struct {
     /// If the Worker ID is missing or invalid, this operation fails and returns the
     /// message “WorkerId is invalid.” If the specified Worker is not blocked, this
     /// operation returns successfully.
-    pub fn deleteWorkerBlock(self: *Self, allocator: std.mem.Allocator, input: delete_worker_block.DeleteWorkerBlockInput, options: delete_worker_block.Options) !delete_worker_block.DeleteWorkerBlockOutput {
+    pub fn deleteWorkerBlock(self: *Self, allocator: std.mem.Allocator, input: delete_worker_block.DeleteWorkerBlockInput, options: CallOptions) !delete_worker_block.DeleteWorkerBlockOutput {
         return delete_worker_block.execute(self, allocator, input, options);
     }
 
@@ -293,7 +294,7 @@ pub const Client = struct {
     ///
     /// You can provide a text message explaining why the Qualification was
     /// revoked. The user who had the Qualification can see this message.
-    pub fn disassociateQualificationFromWorker(self: *Self, allocator: std.mem.Allocator, input: disassociate_qualification_from_worker.DisassociateQualificationFromWorkerInput, options: disassociate_qualification_from_worker.Options) !disassociate_qualification_from_worker.DisassociateQualificationFromWorkerOutput {
+    pub fn disassociateQualificationFromWorker(self: *Self, allocator: std.mem.Allocator, input: disassociate_qualification_from_worker.DisassociateQualificationFromWorkerInput, options: CallOptions) !disassociate_qualification_from_worker.DisassociateQualificationFromWorkerOutput {
         return disassociate_qualification_from_worker.execute(self, allocator, input, options);
     }
 
@@ -304,13 +305,13 @@ pub const Client = struct {
     /// Note: If you have enabled AWS Billing and still have a remaining Prepaid
     /// HITs balance, this balance can be viewed on the My Account page in the
     /// Requester console.
-    pub fn getAccountBalance(self: *Self, allocator: std.mem.Allocator, input: get_account_balance.GetAccountBalanceInput, options: get_account_balance.Options) !get_account_balance.GetAccountBalanceOutput {
+    pub fn getAccountBalance(self: *Self, allocator: std.mem.Allocator, input: get_account_balance.GetAccountBalanceInput, options: CallOptions) !get_account_balance.GetAccountBalanceOutput {
         return get_account_balance.execute(self, allocator, input, options);
     }
 
     /// The `GetAssignment` operation retrieves the details of the specified
     /// Assignment.
-    pub fn getAssignment(self: *Self, allocator: std.mem.Allocator, input: get_assignment.GetAssignmentInput, options: get_assignment.Options) !get_assignment.GetAssignmentOutput {
+    pub fn getAssignment(self: *Self, allocator: std.mem.Allocator, input: get_assignment.GetAssignmentInput, options: CallOptions) !get_assignment.GetAssignmentOutput {
         return get_assignment.execute(self, allocator, input, options);
     }
 
@@ -329,12 +330,12 @@ pub const Client = struct {
     /// element to be used for the QuestionForm data structure.
     /// Instead, we recommend that Requesters who want to create HITs asking
     /// Workers to upload files to use Amazon S3.
-    pub fn getFileUploadUrl(self: *Self, allocator: std.mem.Allocator, input: get_file_upload_url.GetFileUploadURLInput, options: get_file_upload_url.Options) !get_file_upload_url.GetFileUploadURLOutput {
+    pub fn getFileUploadUrl(self: *Self, allocator: std.mem.Allocator, input: get_file_upload_url.GetFileUploadURLInput, options: CallOptions) !get_file_upload_url.GetFileUploadURLOutput {
         return get_file_upload_url.execute(self, allocator, input, options);
     }
 
     /// The `GetHIT` operation retrieves the details of the specified HIT.
-    pub fn getHit(self: *Self, allocator: std.mem.Allocator, input: get_hit.GetHITInput, options: get_hit.Options) !get_hit.GetHITOutput {
+    pub fn getHit(self: *Self, allocator: std.mem.Allocator, input: get_hit.GetHITInput, options: CallOptions) !get_hit.GetHITOutput {
         return get_hit.execute(self, allocator, input, options);
     }
 
@@ -350,13 +351,13 @@ pub const Client = struct {
     ///
     /// Only the owner of a Qualification type can query the value of
     /// a Worker's Qualification of that type.
-    pub fn getQualificationScore(self: *Self, allocator: std.mem.Allocator, input: get_qualification_score.GetQualificationScoreInput, options: get_qualification_score.Options) !get_qualification_score.GetQualificationScoreOutput {
+    pub fn getQualificationScore(self: *Self, allocator: std.mem.Allocator, input: get_qualification_score.GetQualificationScoreInput, options: CallOptions) !get_qualification_score.GetQualificationScoreOutput {
         return get_qualification_score.execute(self, allocator, input, options);
     }
 
     /// The `GetQualificationType`operation retrieves information about a
     /// Qualification type using its ID.
-    pub fn getQualificationType(self: *Self, allocator: std.mem.Allocator, input: get_qualification_type.GetQualificationTypeInput, options: get_qualification_type.Options) !get_qualification_type.GetQualificationTypeOutput {
+    pub fn getQualificationType(self: *Self, allocator: std.mem.Allocator, input: get_qualification_type.GetQualificationTypeInput, options: CallOptions) !get_qualification_type.GetQualificationTypeOutput {
         return get_qualification_type.execute(self, allocator, input, options);
     }
 
@@ -385,7 +386,7 @@ pub const Client = struct {
     /// operation returns a single page of results. You can use the
     /// parameters
     /// of the operation to control sorting and pagination.
-    pub fn listAssignmentsForHit(self: *Self, allocator: std.mem.Allocator, input: list_assignments_for_hit.ListAssignmentsForHITInput, options: list_assignments_for_hit.Options) !list_assignments_for_hit.ListAssignmentsForHITOutput {
+    pub fn listAssignmentsForHit(self: *Self, allocator: std.mem.Allocator, input: list_assignments_for_hit.ListAssignmentsForHITInput, options: CallOptions) !list_assignments_for_hit.ListAssignmentsForHITOutput {
         return list_assignments_for_hit.execute(self, allocator, input, options);
     }
 
@@ -393,7 +394,7 @@ pub const Client = struct {
     /// `ListBonusPayments`
     /// operation retrieves the amounts of bonuses you have paid to Workers
     /// for a given HIT or assignment.
-    pub fn listBonusPayments(self: *Self, allocator: std.mem.Allocator, input: list_bonus_payments.ListBonusPaymentsInput, options: list_bonus_payments.Options) !list_bonus_payments.ListBonusPaymentsOutput {
+    pub fn listBonusPayments(self: *Self, allocator: std.mem.Allocator, input: list_bonus_payments.ListBonusPaymentsInput, options: CallOptions) !list_bonus_payments.ListBonusPaymentsOutput {
         return list_bonus_payments.execute(self, allocator, input, options);
     }
 
@@ -402,7 +403,7 @@ pub const Client = struct {
     /// operation returns all of a Requester's HITs. The operation returns
     /// HITs of any status, except for HITs that have been deleted of with
     /// the DeleteHIT operation or that have been auto-deleted.
-    pub fn listHiTs(self: *Self, allocator: std.mem.Allocator, input: list_hi_ts.ListHITsInput, options: list_hi_ts.Options) !list_hi_ts.ListHITsOutput {
+    pub fn listHiTs(self: *Self, allocator: std.mem.Allocator, input: list_hi_ts.ListHITsInput, options: CallOptions) !list_hi_ts.ListHITsOutput {
         return list_hi_ts.execute(self, allocator, input, options);
     }
 
@@ -411,7 +412,7 @@ pub const Client = struct {
     /// The operation returns HITs of any status, except for HITs that have been
     /// deleted
     /// with the `DeleteHIT` operation or that have been auto-deleted.
-    pub fn listHiTsForQualificationType(self: *Self, allocator: std.mem.Allocator, input: list_hi_ts_for_qualification_type.ListHITsForQualificationTypeInput, options: list_hi_ts_for_qualification_type.Options) !list_hi_ts_for_qualification_type.ListHITsForQualificationTypeOutput {
+    pub fn listHiTsForQualificationType(self: *Self, allocator: std.mem.Allocator, input: list_hi_ts_for_qualification_type.ListHITsForQualificationTypeInput, options: CallOptions) !list_hi_ts_for_qualification_type.ListHITsForQualificationTypeOutput {
         return list_hi_ts_for_qualification_type.execute(self, allocator, input, options);
     }
 
@@ -421,7 +422,7 @@ pub const Client = struct {
     /// Qualification type. The owner of the Qualification type calls this
     /// operation to poll for pending requests, and accepts them using the
     /// AcceptQualification operation.
-    pub fn listQualificationRequests(self: *Self, allocator: std.mem.Allocator, input: list_qualification_requests.ListQualificationRequestsInput, options: list_qualification_requests.Options) !list_qualification_requests.ListQualificationRequestsOutput {
+    pub fn listQualificationRequests(self: *Self, allocator: std.mem.Allocator, input: list_qualification_requests.ListQualificationRequestsInput, options: CallOptions) !list_qualification_requests.ListQualificationRequestsOutput {
         return list_qualification_requests.execute(self, allocator, input, options);
     }
 
@@ -429,7 +430,7 @@ pub const Client = struct {
     /// `ListQualificationTypes`
     /// operation returns a list of Qualification types, filtered by
     /// an optional search term.
-    pub fn listQualificationTypes(self: *Self, allocator: std.mem.Allocator, input: list_qualification_types.ListQualificationTypesInput, options: list_qualification_types.Options) !list_qualification_types.ListQualificationTypesOutput {
+    pub fn listQualificationTypes(self: *Self, allocator: std.mem.Allocator, input: list_qualification_types.ListQualificationTypesInput, options: CallOptions) !list_qualification_types.ListQualificationTypesOutput {
         return list_qualification_types.execute(self, allocator, input, options);
     }
 
@@ -441,26 +442,26 @@ pub const Client = struct {
     /// see Review Policies. The ListReviewPolicyResultsForHIT operation can return
     /// results for both
     /// Assignment-level and HIT-level review results.
-    pub fn listReviewPolicyResultsForHit(self: *Self, allocator: std.mem.Allocator, input: list_review_policy_results_for_hit.ListReviewPolicyResultsForHITInput, options: list_review_policy_results_for_hit.Options) !list_review_policy_results_for_hit.ListReviewPolicyResultsForHITOutput {
+    pub fn listReviewPolicyResultsForHit(self: *Self, allocator: std.mem.Allocator, input: list_review_policy_results_for_hit.ListReviewPolicyResultsForHITInput, options: CallOptions) !list_review_policy_results_for_hit.ListReviewPolicyResultsForHITOutput {
         return list_review_policy_results_for_hit.execute(self, allocator, input, options);
     }
 
     /// The `ListReviewableHITs` operation retrieves the HITs with Status equal to
     /// Reviewable or Status equal to Reviewing that belong to the Requester calling
     /// the operation.
-    pub fn listReviewableHiTs(self: *Self, allocator: std.mem.Allocator, input: list_reviewable_hi_ts.ListReviewableHITsInput, options: list_reviewable_hi_ts.Options) !list_reviewable_hi_ts.ListReviewableHITsOutput {
+    pub fn listReviewableHiTs(self: *Self, allocator: std.mem.Allocator, input: list_reviewable_hi_ts.ListReviewableHITsInput, options: CallOptions) !list_reviewable_hi_ts.ListReviewableHITsOutput {
         return list_reviewable_hi_ts.execute(self, allocator, input, options);
     }
 
     /// The `ListWorkersBlocks` operation retrieves a list of Workers who are
     /// blocked from working on your HITs.
-    pub fn listWorkerBlocks(self: *Self, allocator: std.mem.Allocator, input: list_worker_blocks.ListWorkerBlocksInput, options: list_worker_blocks.Options) !list_worker_blocks.ListWorkerBlocksOutput {
+    pub fn listWorkerBlocks(self: *Self, allocator: std.mem.Allocator, input: list_worker_blocks.ListWorkerBlocksInput, options: CallOptions) !list_worker_blocks.ListWorkerBlocksOutput {
         return list_worker_blocks.execute(self, allocator, input, options);
     }
 
     /// The `ListWorkersWithQualificationType` operation returns all of the Workers
     /// that have been associated with a given Qualification type.
-    pub fn listWorkersWithQualificationType(self: *Self, allocator: std.mem.Allocator, input: list_workers_with_qualification_type.ListWorkersWithQualificationTypeInput, options: list_workers_with_qualification_type.Options) !list_workers_with_qualification_type.ListWorkersWithQualificationTypeOutput {
+    pub fn listWorkersWithQualificationType(self: *Self, allocator: std.mem.Allocator, input: list_workers_with_qualification_type.ListWorkersWithQualificationTypeInput, options: CallOptions) !list_workers_with_qualification_type.ListWorkersWithQualificationTypeOutput {
         return list_workers_with_qualification_type.execute(self, allocator, input, options);
     }
 
@@ -472,7 +473,7 @@ pub const Client = struct {
     /// NotifyWorkers operation will send a notification email to a Worker
     /// only if you have previously approved or rejected work from the
     /// Worker.
-    pub fn notifyWorkers(self: *Self, allocator: std.mem.Allocator, input: notify_workers.NotifyWorkersInput, options: notify_workers.Options) !notify_workers.NotifyWorkersOutput {
+    pub fn notifyWorkers(self: *Self, allocator: std.mem.Allocator, input: notify_workers.NotifyWorkersInput, options: CallOptions) !notify_workers.NotifyWorkersOutput {
         return notify_workers.execute(self, allocator, input, options);
     }
 
@@ -486,7 +487,7 @@ pub const Client = struct {
     /// and can improve the quality of the results the Worker submits in the future.
     ///
     /// Only the Requester who created the HIT can reject an assignment for the HIT.
-    pub fn rejectAssignment(self: *Self, allocator: std.mem.Allocator, input: reject_assignment.RejectAssignmentInput, options: reject_assignment.Options) !reject_assignment.RejectAssignmentOutput {
+    pub fn rejectAssignment(self: *Self, allocator: std.mem.Allocator, input: reject_assignment.RejectAssignmentInput, options: CallOptions) !reject_assignment.RejectAssignmentOutput {
         return reject_assignment.execute(self, allocator, input, options);
     }
 
@@ -496,7 +497,7 @@ pub const Client = struct {
     ///
     /// You can provide a text message explaining why the request was
     /// rejected. The Worker who made the request can see this message.
-    pub fn rejectQualificationRequest(self: *Self, allocator: std.mem.Allocator, input: reject_qualification_request.RejectQualificationRequestInput, options: reject_qualification_request.Options) !reject_qualification_request.RejectQualificationRequestOutput {
+    pub fn rejectQualificationRequest(self: *Self, allocator: std.mem.Allocator, input: reject_qualification_request.RejectQualificationRequestInput, options: CallOptions) !reject_qualification_request.RejectQualificationRequestOutput {
         return reject_qualification_request.execute(self, allocator, input, options);
     }
 
@@ -512,7 +513,7 @@ pub const Client = struct {
     /// bonus payments, similar to the HIT listing fee. This operation fails
     /// if your account does not have enough funds to pay for both the bonus
     /// and the fees.
-    pub fn sendBonus(self: *Self, allocator: std.mem.Allocator, input: send_bonus.SendBonusInput, options: send_bonus.Options) !send_bonus.SendBonusOutput {
+    pub fn sendBonus(self: *Self, allocator: std.mem.Allocator, input: send_bonus.SendBonusInput, options: CallOptions) !send_bonus.SendBonusOutput {
         return send_bonus.execute(self, allocator, input, options);
     }
 
@@ -524,14 +525,14 @@ pub const Client = struct {
     /// using the website.
     /// When you call this operation, the service attempts to send the test
     /// notification immediately.
-    pub fn sendTestEventNotification(self: *Self, allocator: std.mem.Allocator, input: send_test_event_notification.SendTestEventNotificationInput, options: send_test_event_notification.Options) !send_test_event_notification.SendTestEventNotificationOutput {
+    pub fn sendTestEventNotification(self: *Self, allocator: std.mem.Allocator, input: send_test_event_notification.SendTestEventNotificationInput, options: CallOptions) !send_test_event_notification.SendTestEventNotificationOutput {
         return send_test_event_notification.execute(self, allocator, input, options);
     }
 
     /// The `UpdateExpirationForHIT` operation allows you update the expiration time
     /// of a HIT.
     /// If you update it to a time in the past, the HIT will be immediately expired.
-    pub fn updateExpirationForHit(self: *Self, allocator: std.mem.Allocator, input: update_expiration_for_hit.UpdateExpirationForHITInput, options: update_expiration_for_hit.Options) !update_expiration_for_hit.UpdateExpirationForHITOutput {
+    pub fn updateExpirationForHit(self: *Self, allocator: std.mem.Allocator, input: update_expiration_for_hit.UpdateExpirationForHITInput, options: CallOptions) !update_expiration_for_hit.UpdateExpirationForHITOutput {
         return update_expiration_for_hit.execute(self, allocator, input, options);
     }
 
@@ -539,7 +540,7 @@ pub const Client = struct {
     /// If the status is Reviewable, this operation can update the status to
     /// Reviewing,
     /// or it can revert a Reviewing HIT back to the Reviewable status.
-    pub fn updateHitReviewStatus(self: *Self, allocator: std.mem.Allocator, input: update_hit_review_status.UpdateHITReviewStatusInput, options: update_hit_review_status.Options) !update_hit_review_status.UpdateHITReviewStatusOutput {
+    pub fn updateHitReviewStatus(self: *Self, allocator: std.mem.Allocator, input: update_hit_review_status.UpdateHITReviewStatusInput, options: CallOptions) !update_hit_review_status.UpdateHITReviewStatusOutput {
         return update_hit_review_status.execute(self, allocator, input, options);
     }
 
@@ -549,7 +550,7 @@ pub const Client = struct {
     /// operation disassociates the HIT from its old HITType properties and
     /// associates it with the new HITType properties. The HIT takes on the
     /// properties of the new HITType in place of the old ones.
-    pub fn updateHitTypeOfHit(self: *Self, allocator: std.mem.Allocator, input: update_hit_type_of_hit.UpdateHITTypeOfHITInput, options: update_hit_type_of_hit.Options) !update_hit_type_of_hit.UpdateHITTypeOfHITOutput {
+    pub fn updateHitTypeOfHit(self: *Self, allocator: std.mem.Allocator, input: update_hit_type_of_hit.UpdateHITTypeOfHITInput, options: CallOptions) !update_hit_type_of_hit.UpdateHITTypeOfHITOutput {
         return update_hit_type_of_hit.execute(self, allocator, input, options);
     }
 
@@ -568,7 +569,7 @@ pub const Client = struct {
     /// To change the Active status of a HIT type's notifications,
     /// the HIT type must already have a notification specification,
     /// or one must be provided in the same call to `UpdateNotificationSettings`.
-    pub fn updateNotificationSettings(self: *Self, allocator: std.mem.Allocator, input: update_notification_settings.UpdateNotificationSettingsInput, options: update_notification_settings.Options) !update_notification_settings.UpdateNotificationSettingsOutput {
+    pub fn updateNotificationSettings(self: *Self, allocator: std.mem.Allocator, input: update_notification_settings.UpdateNotificationSettingsInput, options: CallOptions) !update_notification_settings.UpdateNotificationSettingsOutput {
         return update_notification_settings.execute(self, allocator, input, options);
     }
 
@@ -609,7 +610,7 @@ pub const Client = struct {
     ///
     /// You can also update the AutoGranted and AutoGrantedValue
     /// attributes of the Qualification type.
-    pub fn updateQualificationType(self: *Self, allocator: std.mem.Allocator, input: update_qualification_type.UpdateQualificationTypeInput, options: update_qualification_type.Options) !update_qualification_type.UpdateQualificationTypeOutput {
+    pub fn updateQualificationType(self: *Self, allocator: std.mem.Allocator, input: update_qualification_type.UpdateQualificationTypeInput, options: CallOptions) !update_qualification_type.UpdateQualificationTypeOutput {
         return update_qualification_type.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayMulticastDomainAssociations = @import("transit_gateway_multicast_domain_associations.zig").TransitGatewayMulticastDomainAssociations;
 const serde = @import("serde.zig");
@@ -30,11 +31,7 @@ pub const RejectTransitGatewayMulticastDomainAssociationsOutput = struct {
     associations: ?TransitGatewayMulticastDomainAssociations = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RejectTransitGatewayMulticastDomainAssociationsInput, options: Options) !RejectTransitGatewayMulticastDomainAssociationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RejectTransitGatewayMulticastDomainAssociationsInput, options: CallOptions) !RejectTransitGatewayMulticastDomainAssociationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

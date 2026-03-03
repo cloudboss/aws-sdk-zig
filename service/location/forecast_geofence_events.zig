@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ForecastGeofenceEventsDeviceState = @import("forecast_geofence_events_device_state.zig").ForecastGeofenceEventsDeviceState;
 const DistanceUnit = @import("distance_unit.zig").DistanceUnit;
@@ -84,11 +85,7 @@ pub const ForecastGeofenceEventsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ForecastGeofenceEventsInput, options: Options) !ForecastGeofenceEventsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ForecastGeofenceEventsInput, options: CallOptions) !ForecastGeofenceEventsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContainerFleetBillingType = @import("container_fleet_billing_type.zig").ContainerFleetBillingType;
 const GameSessionCreationLimitPolicy = @import("game_session_creation_limit_policy.zig").GameSessionCreationLimitPolicy;
@@ -274,11 +275,7 @@ pub const CreateContainerFleetOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateContainerFleetInput, options: Options) !CreateContainerFleetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateContainerFleetInput, options: CallOptions) !CreateContainerFleetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

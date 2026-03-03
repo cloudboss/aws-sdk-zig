@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AquaConfigurationStatus = @import("aqua_configuration_status.zig").AquaConfigurationStatus;
 const AquaConfiguration = @import("aqua_configuration.zig").AquaConfiguration;
@@ -22,11 +23,7 @@ pub const ModifyAquaConfigurationOutput = struct {
     aqua_configuration: ?AquaConfiguration = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyAquaConfigurationInput, options: Options) !ModifyAquaConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyAquaConfigurationInput, options: CallOptions) !ModifyAquaConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

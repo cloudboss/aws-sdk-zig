@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_agreement_terms = @import("get_agreement_terms.zig");
@@ -15,7 +16,7 @@ pub const GetAgreementTermsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_agreement_terms.Options) !get_agreement_terms.GetAgreementTermsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_agreement_terms.GetAgreementTermsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const SearchAgreementsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: search_agreements.Options) !search_agreements.SearchAgreementsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !search_agreements.SearchAgreementsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

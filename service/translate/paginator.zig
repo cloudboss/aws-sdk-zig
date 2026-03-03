@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_languages = @import("list_languages.zig");
@@ -17,7 +18,7 @@ pub const ListLanguagesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_languages.Options) !list_languages.ListLanguagesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_languages.ListLanguagesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -58,7 +59,7 @@ pub const ListParallelDataPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_parallel_data.Options) !list_parallel_data.ListParallelDataOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_parallel_data.ListParallelDataOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -99,7 +100,7 @@ pub const ListTerminologiesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_terminologies.Options) !list_terminologies.ListTerminologiesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_terminologies.ListTerminologiesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -140,7 +141,7 @@ pub const ListTextTranslationJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_text_translation_jobs.Options) !list_text_translation_jobs.ListTextTranslationJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_text_translation_jobs.ListTextTranslationJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

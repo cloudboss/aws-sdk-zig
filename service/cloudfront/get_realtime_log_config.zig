@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RealtimeLogConfig = @import("realtime_log_config.zig").RealtimeLogConfig;
 const serde = @import("serde.zig");
@@ -19,11 +20,7 @@ pub const GetRealtimeLogConfigOutput = struct {
     realtime_log_config: ?RealtimeLogConfig = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetRealtimeLogConfigInput, options: Options) !GetRealtimeLogConfigOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetRealtimeLogConfigInput, options: CallOptions) !GetRealtimeLogConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

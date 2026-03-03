@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RecoveryPointCreator = @import("recovery_point_creator.zig").RecoveryPointCreator;
 const Lifecycle = @import("lifecycle.zig").Lifecycle;
@@ -246,11 +247,7 @@ pub const DescribeBackupJobOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeBackupJobInput, options: Options) !DescribeBackupJobOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeBackupJobInput, options: CallOptions) !DescribeBackupJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

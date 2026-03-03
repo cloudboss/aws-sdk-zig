@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DocumentPermissionType = @import("document_permission_type.zig").DocumentPermissionType;
 
@@ -47,11 +48,7 @@ pub const ModifyDocumentPermissionInput = struct {
 pub const ModifyDocumentPermissionOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyDocumentPermissionInput, options: Options) !ModifyDocumentPermissionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyDocumentPermissionInput, options: CallOptions) !ModifyDocumentPermissionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

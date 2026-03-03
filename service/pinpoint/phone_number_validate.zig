@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const NumberValidateRequest = @import("number_validate_request.zig").NumberValidateRequest;
 const NumberValidateResponse = @import("number_validate_response.zig").NumberValidateResponse;
@@ -22,11 +23,7 @@ pub const PhoneNumberValidateOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PhoneNumberValidateInput, options: Options) !PhoneNumberValidateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PhoneNumberValidateInput, options: CallOptions) !PhoneNumberValidateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RecommendedActionUpdate = @import("recommended_action_update.zig").RecommendedActionUpdate;
 const DBRecommendation = @import("db_recommendation.zig").DBRecommendation;
@@ -31,11 +32,7 @@ pub const ModifyDBRecommendationOutput = struct {
     db_recommendation: ?DBRecommendation = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyDBRecommendationInput, options: Options) !ModifyDBRecommendationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyDBRecommendationInput, options: CallOptions) !ModifyDBRecommendationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

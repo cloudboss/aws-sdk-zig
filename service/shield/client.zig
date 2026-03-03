@@ -37,6 +37,7 @@ const update_application_layer_automatic_response = @import("update_application_
 const update_emergency_contact_settings = @import("update_emergency_contact_settings.zig");
 const update_protection_group = @import("update_protection_group.zig");
 const update_subscription = @import("update_subscription.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -77,7 +78,7 @@ pub const Client = struct {
     /// plan](http://aws.amazon.com/premiumsupport/business-support/) or the
     /// [Enterprise Support
     /// plan](http://aws.amazon.com/premiumsupport/enterprise-support/).
-    pub fn associateDrtLogBucket(self: *Self, allocator: std.mem.Allocator, input: associate_drt_log_bucket.AssociateDRTLogBucketInput, options: associate_drt_log_bucket.Options) !associate_drt_log_bucket.AssociateDRTLogBucketOutput {
+    pub fn associateDrtLogBucket(self: *Self, allocator: std.mem.Allocator, input: associate_drt_log_bucket.AssociateDRTLogBucketInput, options: CallOptions) !associate_drt_log_bucket.AssociateDRTLogBucketOutput {
         return associate_drt_log_bucket.execute(self, allocator, input, options);
     }
 
@@ -113,7 +114,7 @@ pub const Client = struct {
     /// plan](http://aws.amazon.com/premiumsupport/business-support/) or the
     /// [Enterprise Support
     /// plan](http://aws.amazon.com/premiumsupport/enterprise-support/).
-    pub fn associateDrtRole(self: *Self, allocator: std.mem.Allocator, input: associate_drt_role.AssociateDRTRoleInput, options: associate_drt_role.Options) !associate_drt_role.AssociateDRTRoleOutput {
+    pub fn associateDrtRole(self: *Self, allocator: std.mem.Allocator, input: associate_drt_role.AssociateDRTRoleInput, options: CallOptions) !associate_drt_role.AssociateDRTRoleOutput {
         return associate_drt_role.execute(self, allocator, input, options);
     }
 
@@ -126,7 +127,7 @@ pub const Client = struct {
     /// Shield Advanced protection. For more information, see [Shield Advanced
     /// Health-Based
     /// Detection](https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option) in the *WAF Developer Guide*.
-    pub fn associateHealthCheck(self: *Self, allocator: std.mem.Allocator, input: associate_health_check.AssociateHealthCheckInput, options: associate_health_check.Options) !associate_health_check.AssociateHealthCheckOutput {
+    pub fn associateHealthCheck(self: *Self, allocator: std.mem.Allocator, input: associate_health_check.AssociateHealthCheckInput, options: CallOptions) !associate_health_check.AssociateHealthCheckOutput {
         return associate_health_check.execute(self, allocator, input, options);
     }
 
@@ -146,7 +147,7 @@ pub const Client = struct {
     /// already defined. If you already have contacts defined and want to use them,
     /// retrieve the list using `DescribeEmergencyContactSettings` and then provide
     /// it to this call.
-    pub fn associateProactiveEngagementDetails(self: *Self, allocator: std.mem.Allocator, input: associate_proactive_engagement_details.AssociateProactiveEngagementDetailsInput, options: associate_proactive_engagement_details.Options) !associate_proactive_engagement_details.AssociateProactiveEngagementDetailsOutput {
+    pub fn associateProactiveEngagementDetails(self: *Self, allocator: std.mem.Allocator, input: associate_proactive_engagement_details.AssociateProactiveEngagementDetailsInput, options: CallOptions) !associate_proactive_engagement_details.AssociateProactiveEngagementDetailsOutput {
         return associate_proactive_engagement_details.execute(self, allocator, input, options);
     }
 
@@ -166,14 +167,14 @@ pub const Client = struct {
     /// Advanced](https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html)
     /// and [Adding Shield Advanced protection to Amazon Web Services
     /// resources](https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html).
-    pub fn createProtection(self: *Self, allocator: std.mem.Allocator, input: create_protection.CreateProtectionInput, options: create_protection.Options) !create_protection.CreateProtectionOutput {
+    pub fn createProtection(self: *Self, allocator: std.mem.Allocator, input: create_protection.CreateProtectionInput, options: CallOptions) !create_protection.CreateProtectionOutput {
         return create_protection.execute(self, allocator, input, options);
     }
 
     /// Creates a grouping of protected resources so they can be handled as a
     /// collective. This resource grouping improves the accuracy of detection and
     /// reduces false positives.
-    pub fn createProtectionGroup(self: *Self, allocator: std.mem.Allocator, input: create_protection_group.CreateProtectionGroupInput, options: create_protection_group.Options) !create_protection_group.CreateProtectionGroupOutput {
+    pub fn createProtectionGroup(self: *Self, allocator: std.mem.Allocator, input: create_protection_group.CreateProtectionGroupInput, options: CallOptions) !create_protection_group.CreateProtectionGroupOutput {
         return create_protection_group.execute(self, allocator, input, options);
     }
 
@@ -186,29 +187,29 @@ pub const Client = struct {
     /// When you initially create a subscription, your subscription is set to be
     /// automatically renewed at the end of the existing subscription period. You
     /// can change this by submitting an `UpdateSubscription` request.
-    pub fn createSubscription(self: *Self, allocator: std.mem.Allocator, input: create_subscription.CreateSubscriptionInput, options: create_subscription.Options) !create_subscription.CreateSubscriptionOutput {
+    pub fn createSubscription(self: *Self, allocator: std.mem.Allocator, input: create_subscription.CreateSubscriptionInput, options: CallOptions) !create_subscription.CreateSubscriptionOutput {
         return create_subscription.execute(self, allocator, input, options);
     }
 
     /// Deletes an Shield Advanced Protection.
-    pub fn deleteProtection(self: *Self, allocator: std.mem.Allocator, input: delete_protection.DeleteProtectionInput, options: delete_protection.Options) !delete_protection.DeleteProtectionOutput {
+    pub fn deleteProtection(self: *Self, allocator: std.mem.Allocator, input: delete_protection.DeleteProtectionInput, options: CallOptions) !delete_protection.DeleteProtectionOutput {
         return delete_protection.execute(self, allocator, input, options);
     }
 
     /// Removes the specified protection group.
-    pub fn deleteProtectionGroup(self: *Self, allocator: std.mem.Allocator, input: delete_protection_group.DeleteProtectionGroupInput, options: delete_protection_group.Options) !delete_protection_group.DeleteProtectionGroupOutput {
+    pub fn deleteProtectionGroup(self: *Self, allocator: std.mem.Allocator, input: delete_protection_group.DeleteProtectionGroupInput, options: CallOptions) !delete_protection_group.DeleteProtectionGroupOutput {
         return delete_protection_group.execute(self, allocator, input, options);
     }
 
     /// Removes Shield Advanced from an account. Shield Advanced requires a 1-year
     /// subscription commitment. You cannot delete a subscription prior to the
     /// completion of that commitment.
-    pub fn deleteSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_subscription.DeleteSubscriptionInput, options: delete_subscription.Options) !delete_subscription.DeleteSubscriptionOutput {
+    pub fn deleteSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_subscription.DeleteSubscriptionInput, options: CallOptions) !delete_subscription.DeleteSubscriptionOutput {
         return delete_subscription.execute(self, allocator, input, options);
     }
 
     /// Describes the details of a DDoS attack.
-    pub fn describeAttack(self: *Self, allocator: std.mem.Allocator, input: describe_attack.DescribeAttackInput, options: describe_attack.Options) !describe_attack.DescribeAttackOutput {
+    pub fn describeAttack(self: *Self, allocator: std.mem.Allocator, input: describe_attack.DescribeAttackInput, options: CallOptions) !describe_attack.DescribeAttackOutput {
         return describe_attack.execute(self, allocator, input, options);
     }
 
@@ -226,36 +227,36 @@ pub const Client = struct {
     ///
     /// The time range indicates the period covered by the attack statistics data
     /// items.
-    pub fn describeAttackStatistics(self: *Self, allocator: std.mem.Allocator, input: describe_attack_statistics.DescribeAttackStatisticsInput, options: describe_attack_statistics.Options) !describe_attack_statistics.DescribeAttackStatisticsOutput {
+    pub fn describeAttackStatistics(self: *Self, allocator: std.mem.Allocator, input: describe_attack_statistics.DescribeAttackStatisticsInput, options: CallOptions) !describe_attack_statistics.DescribeAttackStatisticsOutput {
         return describe_attack_statistics.execute(self, allocator, input, options);
     }
 
     /// Returns the current role and list of Amazon S3 log buckets used by the
     /// Shield Response Team (SRT) to access your Amazon Web Services account while
     /// assisting with attack mitigation.
-    pub fn describeDrtAccess(self: *Self, allocator: std.mem.Allocator, input: describe_drt_access.DescribeDRTAccessInput, options: describe_drt_access.Options) !describe_drt_access.DescribeDRTAccessOutput {
+    pub fn describeDrtAccess(self: *Self, allocator: std.mem.Allocator, input: describe_drt_access.DescribeDRTAccessInput, options: CallOptions) !describe_drt_access.DescribeDRTAccessOutput {
         return describe_drt_access.execute(self, allocator, input, options);
     }
 
     /// A list of email addresses and phone numbers that the Shield Response Team
     /// (SRT) can use to contact you if you have proactive engagement enabled, for
     /// escalations to the SRT and to initiate proactive customer support.
-    pub fn describeEmergencyContactSettings(self: *Self, allocator: std.mem.Allocator, input: describe_emergency_contact_settings.DescribeEmergencyContactSettingsInput, options: describe_emergency_contact_settings.Options) !describe_emergency_contact_settings.DescribeEmergencyContactSettingsOutput {
+    pub fn describeEmergencyContactSettings(self: *Self, allocator: std.mem.Allocator, input: describe_emergency_contact_settings.DescribeEmergencyContactSettingsInput, options: CallOptions) !describe_emergency_contact_settings.DescribeEmergencyContactSettingsOutput {
         return describe_emergency_contact_settings.execute(self, allocator, input, options);
     }
 
     /// Lists the details of a Protection object.
-    pub fn describeProtection(self: *Self, allocator: std.mem.Allocator, input: describe_protection.DescribeProtectionInput, options: describe_protection.Options) !describe_protection.DescribeProtectionOutput {
+    pub fn describeProtection(self: *Self, allocator: std.mem.Allocator, input: describe_protection.DescribeProtectionInput, options: CallOptions) !describe_protection.DescribeProtectionOutput {
         return describe_protection.execute(self, allocator, input, options);
     }
 
     /// Returns the specification for the specified protection group.
-    pub fn describeProtectionGroup(self: *Self, allocator: std.mem.Allocator, input: describe_protection_group.DescribeProtectionGroupInput, options: describe_protection_group.Options) !describe_protection_group.DescribeProtectionGroupOutput {
+    pub fn describeProtectionGroup(self: *Self, allocator: std.mem.Allocator, input: describe_protection_group.DescribeProtectionGroupInput, options: CallOptions) !describe_protection_group.DescribeProtectionGroupOutput {
         return describe_protection_group.execute(self, allocator, input, options);
     }
 
     /// Provides details about the Shield Advanced subscription for an account.
-    pub fn describeSubscription(self: *Self, allocator: std.mem.Allocator, input: describe_subscription.DescribeSubscriptionInput, options: describe_subscription.Options) !describe_subscription.DescribeSubscriptionOutput {
+    pub fn describeSubscription(self: *Self, allocator: std.mem.Allocator, input: describe_subscription.DescribeSubscriptionInput, options: CallOptions) !describe_subscription.DescribeSubscriptionOutput {
         return describe_subscription.execute(self, allocator, input, options);
     }
 
@@ -263,25 +264,25 @@ pub const Client = struct {
     /// feature for the protected resource. This
     /// stops Shield Advanced from creating, verifying, and applying WAF rules for
     /// attacks that it detects for the resource.
-    pub fn disableApplicationLayerAutomaticResponse(self: *Self, allocator: std.mem.Allocator, input: disable_application_layer_automatic_response.DisableApplicationLayerAutomaticResponseInput, options: disable_application_layer_automatic_response.Options) !disable_application_layer_automatic_response.DisableApplicationLayerAutomaticResponseOutput {
+    pub fn disableApplicationLayerAutomaticResponse(self: *Self, allocator: std.mem.Allocator, input: disable_application_layer_automatic_response.DisableApplicationLayerAutomaticResponseInput, options: CallOptions) !disable_application_layer_automatic_response.DisableApplicationLayerAutomaticResponseOutput {
         return disable_application_layer_automatic_response.execute(self, allocator, input, options);
     }
 
     /// Removes authorization from the Shield Response Team (SRT) to notify contacts
     /// about escalations to the SRT and to initiate proactive customer support.
-    pub fn disableProactiveEngagement(self: *Self, allocator: std.mem.Allocator, input: disable_proactive_engagement.DisableProactiveEngagementInput, options: disable_proactive_engagement.Options) !disable_proactive_engagement.DisableProactiveEngagementOutput {
+    pub fn disableProactiveEngagement(self: *Self, allocator: std.mem.Allocator, input: disable_proactive_engagement.DisableProactiveEngagementInput, options: CallOptions) !disable_proactive_engagement.DisableProactiveEngagementOutput {
         return disable_proactive_engagement.execute(self, allocator, input, options);
     }
 
     /// Removes the Shield Response Team's (SRT) access to the specified Amazon S3
     /// bucket containing the logs that you shared previously.
-    pub fn disassociateDrtLogBucket(self: *Self, allocator: std.mem.Allocator, input: disassociate_drt_log_bucket.DisassociateDRTLogBucketInput, options: disassociate_drt_log_bucket.Options) !disassociate_drt_log_bucket.DisassociateDRTLogBucketOutput {
+    pub fn disassociateDrtLogBucket(self: *Self, allocator: std.mem.Allocator, input: disassociate_drt_log_bucket.DisassociateDRTLogBucketInput, options: CallOptions) !disassociate_drt_log_bucket.DisassociateDRTLogBucketOutput {
         return disassociate_drt_log_bucket.execute(self, allocator, input, options);
     }
 
     /// Removes the Shield Response Team's (SRT) access to your Amazon Web Services
     /// account.
-    pub fn disassociateDrtRole(self: *Self, allocator: std.mem.Allocator, input: disassociate_drt_role.DisassociateDRTRoleInput, options: disassociate_drt_role.Options) !disassociate_drt_role.DisassociateDRTRoleOutput {
+    pub fn disassociateDrtRole(self: *Self, allocator: std.mem.Allocator, input: disassociate_drt_role.DisassociateDRTRoleInput, options: CallOptions) !disassociate_drt_role.DisassociateDRTRoleOutput {
         return disassociate_drt_role.execute(self, allocator, input, options);
     }
 
@@ -294,7 +295,7 @@ pub const Client = struct {
     /// it with your Shield Advanced protection. For more information, see [Shield
     /// Advanced Health-Based
     /// Detection](https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option) in the *WAF Developer Guide*.
-    pub fn disassociateHealthCheck(self: *Self, allocator: std.mem.Allocator, input: disassociate_health_check.DisassociateHealthCheckInput, options: disassociate_health_check.Options) !disassociate_health_check.DisassociateHealthCheckOutput {
+    pub fn disassociateHealthCheck(self: *Self, allocator: std.mem.Allocator, input: disassociate_health_check.DisassociateHealthCheckInput, options: CallOptions) !disassociate_health_check.DisassociateHealthCheckOutput {
         return disassociate_health_check.execute(self, allocator, input, options);
     }
 
@@ -326,25 +327,25 @@ pub const Client = struct {
     /// Advanced](https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html). You can also associate the web ACL to the resource through the WAF console or the WAF API, but you must manage Shield Advanced automatic mitigation through Shield Advanced. For information about WAF, see
     /// [WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn enableApplicationLayerAutomaticResponse(self: *Self, allocator: std.mem.Allocator, input: enable_application_layer_automatic_response.EnableApplicationLayerAutomaticResponseInput, options: enable_application_layer_automatic_response.Options) !enable_application_layer_automatic_response.EnableApplicationLayerAutomaticResponseOutput {
+    pub fn enableApplicationLayerAutomaticResponse(self: *Self, allocator: std.mem.Allocator, input: enable_application_layer_automatic_response.EnableApplicationLayerAutomaticResponseInput, options: CallOptions) !enable_application_layer_automatic_response.EnableApplicationLayerAutomaticResponseOutput {
         return enable_application_layer_automatic_response.execute(self, allocator, input, options);
     }
 
     /// Authorizes the Shield Response Team (SRT) to use email and phone to notify
     /// contacts about escalations to the SRT and to initiate proactive customer
     /// support.
-    pub fn enableProactiveEngagement(self: *Self, allocator: std.mem.Allocator, input: enable_proactive_engagement.EnableProactiveEngagementInput, options: enable_proactive_engagement.Options) !enable_proactive_engagement.EnableProactiveEngagementOutput {
+    pub fn enableProactiveEngagement(self: *Self, allocator: std.mem.Allocator, input: enable_proactive_engagement.EnableProactiveEngagementInput, options: CallOptions) !enable_proactive_engagement.EnableProactiveEngagementOutput {
         return enable_proactive_engagement.execute(self, allocator, input, options);
     }
 
     /// Returns the `SubscriptionState`, either `Active` or `Inactive`.
-    pub fn getSubscriptionState(self: *Self, allocator: std.mem.Allocator, input: get_subscription_state.GetSubscriptionStateInput, options: get_subscription_state.Options) !get_subscription_state.GetSubscriptionStateOutput {
+    pub fn getSubscriptionState(self: *Self, allocator: std.mem.Allocator, input: get_subscription_state.GetSubscriptionStateInput, options: CallOptions) !get_subscription_state.GetSubscriptionStateOutput {
         return get_subscription_state.execute(self, allocator, input, options);
     }
 
     /// Returns all ongoing DDoS attacks or all DDoS attacks during a specified time
     /// period.
-    pub fn listAttacks(self: *Self, allocator: std.mem.Allocator, input: list_attacks.ListAttacksInput, options: list_attacks.Options) !list_attacks.ListAttacksOutput {
+    pub fn listAttacks(self: *Self, allocator: std.mem.Allocator, input: list_attacks.ListAttacksInput, options: CallOptions) !list_attacks.ListAttacksOutput {
         return list_attacks.execute(self, allocator, input, options);
     }
 
@@ -352,7 +353,7 @@ pub const Client = struct {
     /// protection groups or you can provide
     /// filtering criteria and retrieve just the subset of protection groups that
     /// match the criteria.
-    pub fn listProtectionGroups(self: *Self, allocator: std.mem.Allocator, input: list_protection_groups.ListProtectionGroupsInput, options: list_protection_groups.Options) !list_protection_groups.ListProtectionGroupsOutput {
+    pub fn listProtectionGroups(self: *Self, allocator: std.mem.Allocator, input: list_protection_groups.ListProtectionGroupsInput, options: CallOptions) !list_protection_groups.ListProtectionGroupsOutput {
         return list_protection_groups.execute(self, allocator, input, options);
     }
 
@@ -360,34 +361,34 @@ pub const Client = struct {
     /// protections or you can provide
     /// filtering criteria and retrieve just the subset of protections that match
     /// the criteria.
-    pub fn listProtections(self: *Self, allocator: std.mem.Allocator, input: list_protections.ListProtectionsInput, options: list_protections.Options) !list_protections.ListProtectionsOutput {
+    pub fn listProtections(self: *Self, allocator: std.mem.Allocator, input: list_protections.ListProtectionsInput, options: CallOptions) !list_protections.ListProtectionsOutput {
         return list_protections.execute(self, allocator, input, options);
     }
 
     /// Retrieves the resources that are included in the protection group.
-    pub fn listResourcesInProtectionGroup(self: *Self, allocator: std.mem.Allocator, input: list_resources_in_protection_group.ListResourcesInProtectionGroupInput, options: list_resources_in_protection_group.Options) !list_resources_in_protection_group.ListResourcesInProtectionGroupOutput {
+    pub fn listResourcesInProtectionGroup(self: *Self, allocator: std.mem.Allocator, input: list_resources_in_protection_group.ListResourcesInProtectionGroupInput, options: CallOptions) !list_resources_in_protection_group.ListResourcesInProtectionGroupOutput {
         return list_resources_in_protection_group.execute(self, allocator, input, options);
     }
 
     /// Gets information about Amazon Web Services tags for a specified Amazon
     /// Resource Name (ARN) in Shield.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Adds or updates tags for a resource in Shield.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from a resource in Shield.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an existing Shield Advanced automatic application layer DDoS
     /// mitigation configuration for the specified resource.
-    pub fn updateApplicationLayerAutomaticResponse(self: *Self, allocator: std.mem.Allocator, input: update_application_layer_automatic_response.UpdateApplicationLayerAutomaticResponseInput, options: update_application_layer_automatic_response.Options) !update_application_layer_automatic_response.UpdateApplicationLayerAutomaticResponseOutput {
+    pub fn updateApplicationLayerAutomaticResponse(self: *Self, allocator: std.mem.Allocator, input: update_application_layer_automatic_response.UpdateApplicationLayerAutomaticResponseInput, options: CallOptions) !update_application_layer_automatic_response.UpdateApplicationLayerAutomaticResponseOutput {
         return update_application_layer_automatic_response.execute(self, allocator, input, options);
     }
 
@@ -395,14 +396,14 @@ pub const Client = struct {
     /// the Shield Response Team (SRT) can use to contact you if you have proactive
     /// engagement enabled, for escalations to the SRT and to initiate proactive
     /// customer support.
-    pub fn updateEmergencyContactSettings(self: *Self, allocator: std.mem.Allocator, input: update_emergency_contact_settings.UpdateEmergencyContactSettingsInput, options: update_emergency_contact_settings.Options) !update_emergency_contact_settings.UpdateEmergencyContactSettingsOutput {
+    pub fn updateEmergencyContactSettings(self: *Self, allocator: std.mem.Allocator, input: update_emergency_contact_settings.UpdateEmergencyContactSettingsInput, options: CallOptions) !update_emergency_contact_settings.UpdateEmergencyContactSettingsOutput {
         return update_emergency_contact_settings.execute(self, allocator, input, options);
     }
 
     /// Updates an existing protection group. A protection group is a grouping of
     /// protected resources so they can be handled as a collective. This resource
     /// grouping improves the accuracy of detection and reduces false positives.
-    pub fn updateProtectionGroup(self: *Self, allocator: std.mem.Allocator, input: update_protection_group.UpdateProtectionGroupInput, options: update_protection_group.Options) !update_protection_group.UpdateProtectionGroupOutput {
+    pub fn updateProtectionGroup(self: *Self, allocator: std.mem.Allocator, input: update_protection_group.UpdateProtectionGroupInput, options: CallOptions) !update_protection_group.UpdateProtectionGroupOutput {
         return update_protection_group.execute(self, allocator, input, options);
     }
 
@@ -412,7 +413,7 @@ pub const Client = struct {
     /// For accounts that are members of an Organizations organization, Shield
     /// Advanced subscriptions are billed against the organization's payer account,
     /// regardless of whether the payer account itself is subscribed.
-    pub fn updateSubscription(self: *Self, allocator: std.mem.Allocator, input: update_subscription.UpdateSubscriptionInput, options: update_subscription.Options) !update_subscription.UpdateSubscriptionOutput {
+    pub fn updateSubscription(self: *Self, allocator: std.mem.Allocator, input: update_subscription.UpdateSubscriptionInput, options: CallOptions) !update_subscription.UpdateSubscriptionOutput {
         return update_subscription.execute(self, allocator, input, options);
     }
 

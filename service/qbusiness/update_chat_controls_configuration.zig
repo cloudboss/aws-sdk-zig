@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BlockedPhrasesConfigurationUpdate = @import("blocked_phrases_configuration_update.zig").BlockedPhrasesConfigurationUpdate;
 const CreatorModeConfiguration = @import("creator_mode_configuration.zig").CreatorModeConfiguration;
@@ -59,11 +60,7 @@ pub const UpdateChatControlsConfigurationInput = struct {
 pub const UpdateChatControlsConfigurationOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateChatControlsConfigurationInput, options: Options) !UpdateChatControlsConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateChatControlsConfigurationInput, options: CallOptions) !UpdateChatControlsConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

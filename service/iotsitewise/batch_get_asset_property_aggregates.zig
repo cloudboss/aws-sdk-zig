@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchGetAssetPropertyAggregatesEntry = @import("batch_get_asset_property_aggregates_entry.zig").BatchGetAssetPropertyAggregatesEntry;
 const BatchGetAssetPropertyAggregatesErrorEntry = @import("batch_get_asset_property_aggregates_error_entry.zig").BatchGetAssetPropertyAggregatesErrorEntry;
@@ -64,11 +65,7 @@ pub const BatchGetAssetPropertyAggregatesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetAssetPropertyAggregatesInput, options: Options) !BatchGetAssetPropertyAggregatesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetAssetPropertyAggregatesInput, options: CallOptions) !BatchGetAssetPropertyAggregatesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

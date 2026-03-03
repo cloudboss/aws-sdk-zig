@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_autonomous_virtual_machines = @import("list_autonomous_virtual_machines.zig");
@@ -24,7 +25,7 @@ pub const ListAutonomousVirtualMachinesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_autonomous_virtual_machines.Options) !list_autonomous_virtual_machines.ListAutonomousVirtualMachinesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_autonomous_virtual_machines.ListAutonomousVirtualMachinesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -65,7 +66,7 @@ pub const ListCloudAutonomousVmClustersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_cloud_autonomous_vm_clusters.Options) !list_cloud_autonomous_vm_clusters.ListCloudAutonomousVmClustersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_cloud_autonomous_vm_clusters.ListCloudAutonomousVmClustersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -106,7 +107,7 @@ pub const ListCloudExadataInfrastructuresPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_cloud_exadata_infrastructures.Options) !list_cloud_exadata_infrastructures.ListCloudExadataInfrastructuresOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_cloud_exadata_infrastructures.ListCloudExadataInfrastructuresOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -147,7 +148,7 @@ pub const ListCloudVmClustersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_cloud_vm_clusters.Options) !list_cloud_vm_clusters.ListCloudVmClustersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_cloud_vm_clusters.ListCloudVmClustersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -188,7 +189,7 @@ pub const ListDbNodesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_db_nodes.Options) !list_db_nodes.ListDbNodesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_db_nodes.ListDbNodesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -229,7 +230,7 @@ pub const ListDbServersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_db_servers.Options) !list_db_servers.ListDbServersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_db_servers.ListDbServersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -270,7 +271,7 @@ pub const ListDbSystemShapesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_db_system_shapes.Options) !list_db_system_shapes.ListDbSystemShapesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_db_system_shapes.ListDbSystemShapesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -311,7 +312,7 @@ pub const ListGiVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_gi_versions.Options) !list_gi_versions.ListGiVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_gi_versions.ListGiVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -352,7 +353,7 @@ pub const ListOdbNetworksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_odb_networks.Options) !list_odb_networks.ListOdbNetworksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_odb_networks.ListOdbNetworksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -393,7 +394,7 @@ pub const ListOdbPeeringConnectionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_odb_peering_connections.Options) !list_odb_peering_connections.ListOdbPeeringConnectionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_odb_peering_connections.ListOdbPeeringConnectionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -434,7 +435,7 @@ pub const ListSystemVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_system_versions.Options) !list_system_versions.ListSystemVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_system_versions.ListSystemVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

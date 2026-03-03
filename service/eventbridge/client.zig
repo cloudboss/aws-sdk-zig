@@ -58,6 +58,7 @@ const update_archive = @import("update_archive.zig");
 const update_connection = @import("update_connection.zig");
 const update_endpoint = @import("update_endpoint.zig");
 const update_event_bus = @import("update_event_bus.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -90,12 +91,12 @@ pub const Client = struct {
     /// Activates a partner event source that has been deactivated. Once activated,
     /// your matching
     /// event bus will start receiving events from the event source.
-    pub fn activateEventSource(self: *Self, allocator: std.mem.Allocator, input: activate_event_source.ActivateEventSourceInput, options: activate_event_source.Options) !activate_event_source.ActivateEventSourceOutput {
+    pub fn activateEventSource(self: *Self, allocator: std.mem.Allocator, input: activate_event_source.ActivateEventSourceInput, options: CallOptions) !activate_event_source.ActivateEventSourceOutput {
         return activate_event_source.execute(self, allocator, input, options);
     }
 
     /// Cancels the specified replay.
-    pub fn cancelReplay(self: *Self, allocator: std.mem.Allocator, input: cancel_replay.CancelReplayInput, options: cancel_replay.Options) !cancel_replay.CancelReplayOutput {
+    pub fn cancelReplay(self: *Self, allocator: std.mem.Allocator, input: cancel_replay.CancelReplayInput, options: CallOptions) !cancel_replay.CancelReplayOutput {
         return cancel_replay.execute(self, allocator, input, options);
     }
 
@@ -109,7 +110,7 @@ pub const Client = struct {
     /// For more information, see [API
     /// destinations](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html) in the
     /// *EventBridge User Guide*.
-    pub fn createApiDestination(self: *Self, allocator: std.mem.Allocator, input: create_api_destination.CreateApiDestinationInput, options: create_api_destination.Options) !create_api_destination.CreateApiDestinationOutput {
+    pub fn createApiDestination(self: *Self, allocator: std.mem.Allocator, input: create_api_destination.CreateApiDestinationInput, options: CallOptions) !create_api_destination.CreateApiDestinationOutput {
         return create_api_destination.execute(self, allocator, input, options);
     }
 
@@ -129,7 +130,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Encrypting
     /// archives](https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html) in the *Amazon EventBridge User Guide*.
-    pub fn createArchive(self: *Self, allocator: std.mem.Allocator, input: create_archive.CreateArchiveInput, options: create_archive.Options) !create_archive.CreateArchiveOutput {
+    pub fn createArchive(self: *Self, allocator: std.mem.Allocator, input: create_archive.CreateArchiveInput, options: CallOptions) !create_archive.CreateArchiveOutput {
         return create_archive.execute(self, allocator, input, options);
     }
 
@@ -139,7 +140,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Connections for endpoint
     /// targets](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-target-connection.html) in the *Amazon EventBridge User Guide*.
-    pub fn createConnection(self: *Self, allocator: std.mem.Allocator, input: create_connection.CreateConnectionInput, options: create_connection.Options) !create_connection.CreateConnectionOutput {
+    pub fn createConnection(self: *Self, allocator: std.mem.Allocator, input: create_connection.CreateConnectionInput, options: CallOptions) !create_connection.CreateConnectionOutput {
         return create_connection.execute(self, allocator, input, options);
     }
 
@@ -154,7 +155,7 @@ pub const Client = struct {
     /// encountered and events will be routed back to the primary Region when the
     /// health check reports
     /// a "healthy" state.
-    pub fn createEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_endpoint.CreateEndpointInput, options: create_endpoint.Options) !create_endpoint.CreateEndpointOutput {
+    pub fn createEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_endpoint.CreateEndpointInput, options: CallOptions) !create_endpoint.CreateEndpointOutput {
         return create_endpoint.execute(self, allocator, input, options);
     }
 
@@ -163,7 +164,7 @@ pub const Client = struct {
     /// use to receive events from your custom applications and services, or it can
     /// be a partner event
     /// bus which can be matched to a partner event source.
-    pub fn createEventBus(self: *Self, allocator: std.mem.Allocator, input: create_event_bus.CreateEventBusInput, options: create_event_bus.Options) !create_event_bus.CreateEventBusOutput {
+    pub fn createEventBus(self: *Self, allocator: std.mem.Allocator, input: create_event_bus.CreateEventBusInput, options: CallOptions) !create_event_bus.CreateEventBusOutput {
         return create_event_bus.execute(self, allocator, input, options);
     }
 
@@ -213,7 +214,7 @@ pub const Client = struct {
     /// The combination of *event_namespace* and
     /// *event_name* should help Amazon Web Services customers decide whether to
     /// create an event bus to receive these events.
-    pub fn createPartnerEventSource(self: *Self, allocator: std.mem.Allocator, input: create_partner_event_source.CreatePartnerEventSourceInput, options: create_partner_event_source.Options) !create_partner_event_source.CreatePartnerEventSourceOutput {
+    pub fn createPartnerEventSource(self: *Self, allocator: std.mem.Allocator, input: create_partner_event_source.CreatePartnerEventSourceInput, options: CallOptions) !create_partner_event_source.CreatePartnerEventSourceOutput {
         return create_partner_event_source.execute(self, allocator, input, options);
     }
 
@@ -227,7 +228,7 @@ pub const Client = struct {
     ///
     /// To activate a deactivated partner event source, use
     /// [ActivateEventSource](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ActivateEventSource.html).
-    pub fn deactivateEventSource(self: *Self, allocator: std.mem.Allocator, input: deactivate_event_source.DeactivateEventSourceInput, options: deactivate_event_source.Options) !deactivate_event_source.DeactivateEventSourceOutput {
+    pub fn deactivateEventSource(self: *Self, allocator: std.mem.Allocator, input: deactivate_event_source.DeactivateEventSourceInput, options: CallOptions) !deactivate_event_source.DeactivateEventSourceOutput {
         return deactivate_event_source.execute(self, allocator, input, options);
     }
 
@@ -235,22 +236,22 @@ pub const Client = struct {
     /// remove the secret
     /// from the connection so you can reuse it without having to create a new
     /// connection.
-    pub fn deauthorizeConnection(self: *Self, allocator: std.mem.Allocator, input: deauthorize_connection.DeauthorizeConnectionInput, options: deauthorize_connection.Options) !deauthorize_connection.DeauthorizeConnectionOutput {
+    pub fn deauthorizeConnection(self: *Self, allocator: std.mem.Allocator, input: deauthorize_connection.DeauthorizeConnectionInput, options: CallOptions) !deauthorize_connection.DeauthorizeConnectionOutput {
         return deauthorize_connection.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified API destination.
-    pub fn deleteApiDestination(self: *Self, allocator: std.mem.Allocator, input: delete_api_destination.DeleteApiDestinationInput, options: delete_api_destination.Options) !delete_api_destination.DeleteApiDestinationOutput {
+    pub fn deleteApiDestination(self: *Self, allocator: std.mem.Allocator, input: delete_api_destination.DeleteApiDestinationInput, options: CallOptions) !delete_api_destination.DeleteApiDestinationOutput {
         return delete_api_destination.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified archive.
-    pub fn deleteArchive(self: *Self, allocator: std.mem.Allocator, input: delete_archive.DeleteArchiveInput, options: delete_archive.Options) !delete_archive.DeleteArchiveOutput {
+    pub fn deleteArchive(self: *Self, allocator: std.mem.Allocator, input: delete_archive.DeleteArchiveInput, options: CallOptions) !delete_archive.DeleteArchiveOutput {
         return delete_archive.execute(self, allocator, input, options);
     }
 
     /// Deletes a connection.
-    pub fn deleteConnection(self: *Self, allocator: std.mem.Allocator, input: delete_connection.DeleteConnectionInput, options: delete_connection.Options) !delete_connection.DeleteConnectionOutput {
+    pub fn deleteConnection(self: *Self, allocator: std.mem.Allocator, input: delete_connection.DeleteConnectionInput, options: CallOptions) !delete_connection.DeleteConnectionOutput {
         return delete_connection.execute(self, allocator, input, options);
     }
 
@@ -260,7 +261,7 @@ pub const Client = struct {
     /// replication](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html) in the *
     /// Amazon EventBridge User Guide*
     /// .
-    pub fn deleteEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_endpoint.DeleteEndpointInput, options: delete_endpoint.Options) !delete_endpoint.DeleteEndpointOutput {
+    pub fn deleteEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_endpoint.DeleteEndpointInput, options: CallOptions) !delete_endpoint.DeleteEndpointOutput {
         return delete_endpoint.execute(self, allocator, input, options);
     }
 
@@ -268,7 +269,7 @@ pub const Client = struct {
     /// associated with
     /// this event bus need to be deleted. You can't delete your account's default
     /// event bus.
-    pub fn deleteEventBus(self: *Self, allocator: std.mem.Allocator, input: delete_event_bus.DeleteEventBusInput, options: delete_event_bus.Options) !delete_event_bus.DeleteEventBusOutput {
+    pub fn deleteEventBus(self: *Self, allocator: std.mem.Allocator, input: delete_event_bus.DeleteEventBusInput, options: CallOptions) !delete_event_bus.DeleteEventBusOutput {
         return delete_event_bus.execute(self, allocator, input, options);
     }
 
@@ -279,7 +280,7 @@ pub const Client = struct {
     /// When you delete an event source, the status of the corresponding partner
     /// event bus in the
     /// Amazon Web Services customer account becomes DELETED.
-    pub fn deletePartnerEventSource(self: *Self, allocator: std.mem.Allocator, input: delete_partner_event_source.DeletePartnerEventSourceInput, options: delete_partner_event_source.Options) !delete_partner_event_source.DeletePartnerEventSourceOutput {
+    pub fn deletePartnerEventSource(self: *Self, allocator: std.mem.Allocator, input: delete_partner_event_source.DeletePartnerEventSourceInput, options: CallOptions) !delete_partner_event_source.DeletePartnerEventSourceOutput {
         return delete_partner_event_source.execute(self, allocator, input, options);
     }
 
@@ -307,22 +308,22 @@ pub const Client = struct {
     /// option, but you should do so only if you are sure the other service is not
     /// still using that
     /// rule.
-    pub fn deleteRule(self: *Self, allocator: std.mem.Allocator, input: delete_rule.DeleteRuleInput, options: delete_rule.Options) !delete_rule.DeleteRuleOutput {
+    pub fn deleteRule(self: *Self, allocator: std.mem.Allocator, input: delete_rule.DeleteRuleInput, options: CallOptions) !delete_rule.DeleteRuleOutput {
         return delete_rule.execute(self, allocator, input, options);
     }
 
     /// Retrieves details about an API destination.
-    pub fn describeApiDestination(self: *Self, allocator: std.mem.Allocator, input: describe_api_destination.DescribeApiDestinationInput, options: describe_api_destination.Options) !describe_api_destination.DescribeApiDestinationOutput {
+    pub fn describeApiDestination(self: *Self, allocator: std.mem.Allocator, input: describe_api_destination.DescribeApiDestinationInput, options: CallOptions) !describe_api_destination.DescribeApiDestinationOutput {
         return describe_api_destination.execute(self, allocator, input, options);
     }
 
     /// Retrieves details about an archive.
-    pub fn describeArchive(self: *Self, allocator: std.mem.Allocator, input: describe_archive.DescribeArchiveInput, options: describe_archive.Options) !describe_archive.DescribeArchiveOutput {
+    pub fn describeArchive(self: *Self, allocator: std.mem.Allocator, input: describe_archive.DescribeArchiveInput, options: CallOptions) !describe_archive.DescribeArchiveOutput {
         return describe_archive.execute(self, allocator, input, options);
     }
 
     /// Retrieves details about a connection.
-    pub fn describeConnection(self: *Self, allocator: std.mem.Allocator, input: describe_connection.DescribeConnectionInput, options: describe_connection.Options) !describe_connection.DescribeConnectionOutput {
+    pub fn describeConnection(self: *Self, allocator: std.mem.Allocator, input: describe_connection.DescribeConnectionInput, options: CallOptions) !describe_connection.DescribeConnectionOutput {
         return describe_connection.execute(self, allocator, input, options);
     }
 
@@ -334,7 +335,7 @@ pub const Client = struct {
     /// *
     /// Amazon EventBridge User Guide*
     /// .
-    pub fn describeEndpoint(self: *Self, allocator: std.mem.Allocator, input: describe_endpoint.DescribeEndpointInput, options: describe_endpoint.Options) !describe_endpoint.DescribeEndpointOutput {
+    pub fn describeEndpoint(self: *Self, allocator: std.mem.Allocator, input: describe_endpoint.DescribeEndpointInput, options: CallOptions) !describe_endpoint.DescribeEndpointOutput {
         return describe_endpoint.execute(self, allocator, input, options);
     }
 
@@ -352,14 +353,14 @@ pub const Client = struct {
     ///
     /// For more information about partner event buses, see
     /// [CreateEventBus](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEventBus.html).
-    pub fn describeEventBus(self: *Self, allocator: std.mem.Allocator, input: describe_event_bus.DescribeEventBusInput, options: describe_event_bus.Options) !describe_event_bus.DescribeEventBusOutput {
+    pub fn describeEventBus(self: *Self, allocator: std.mem.Allocator, input: describe_event_bus.DescribeEventBusInput, options: CallOptions) !describe_event_bus.DescribeEventBusOutput {
         return describe_event_bus.execute(self, allocator, input, options);
     }
 
     /// This operation lists details about a partner event source that is shared
     /// with your
     /// account.
-    pub fn describeEventSource(self: *Self, allocator: std.mem.Allocator, input: describe_event_source.DescribeEventSourceInput, options: describe_event_source.Options) !describe_event_source.DescribeEventSourceOutput {
+    pub fn describeEventSource(self: *Self, allocator: std.mem.Allocator, input: describe_event_source.DescribeEventSourceInput, options: CallOptions) !describe_event_source.DescribeEventSourceOutput {
         return describe_event_source.execute(self, allocator, input, options);
     }
 
@@ -369,7 +370,7 @@ pub const Client = struct {
     /// Instead, Amazon Web Services customers can use
     /// [DescribeEventSource](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DescribeEventSource.html) to see details about a partner event source that is shared with
     /// them.
-    pub fn describePartnerEventSource(self: *Self, allocator: std.mem.Allocator, input: describe_partner_event_source.DescribePartnerEventSourceInput, options: describe_partner_event_source.Options) !describe_partner_event_source.DescribePartnerEventSourceOutput {
+    pub fn describePartnerEventSource(self: *Self, allocator: std.mem.Allocator, input: describe_partner_event_source.DescribePartnerEventSourceInput, options: CallOptions) !describe_partner_event_source.DescribePartnerEventSourceOutput {
         return describe_partner_event_source.execute(self, allocator, input, options);
     }
 
@@ -386,7 +387,7 @@ pub const Client = struct {
     /// for
     /// `EventLastReplayedTime` indicates the time within the specified time range
     /// associated with the last event replayed.
-    pub fn describeReplay(self: *Self, allocator: std.mem.Allocator, input: describe_replay.DescribeReplayInput, options: describe_replay.Options) !describe_replay.DescribeReplayOutput {
+    pub fn describeReplay(self: *Self, allocator: std.mem.Allocator, input: describe_replay.DescribeReplayInput, options: CallOptions) !describe_replay.DescribeReplayOutput {
         return describe_replay.execute(self, allocator, input, options);
     }
 
@@ -396,7 +397,7 @@ pub const Client = struct {
     /// associated with a
     /// rule, use
     /// [ListTargetsByRule](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html).
-    pub fn describeRule(self: *Self, allocator: std.mem.Allocator, input: describe_rule.DescribeRuleInput, options: describe_rule.Options) !describe_rule.DescribeRuleOutput {
+    pub fn describeRule(self: *Self, allocator: std.mem.Allocator, input: describe_rule.DescribeRuleInput, options: CallOptions) !describe_rule.DescribeRuleOutput {
         return describe_rule.execute(self, allocator, input, options);
     }
 
@@ -407,7 +408,7 @@ pub const Client = struct {
     /// When you disable a rule, incoming events might continue to match to the
     /// disabled rule.
     /// Allow a short period of time for changes to take effect.
-    pub fn disableRule(self: *Self, allocator: std.mem.Allocator, input: disable_rule.DisableRuleInput, options: disable_rule.Options) !disable_rule.DisableRuleOutput {
+    pub fn disableRule(self: *Self, allocator: std.mem.Allocator, input: disable_rule.DisableRuleInput, options: CallOptions) !disable_rule.DisableRuleOutput {
         return disable_rule.execute(self, allocator, input, options);
     }
 
@@ -416,24 +417,24 @@ pub const Client = struct {
     /// When you enable a rule, incoming events might not immediately start matching
     /// to a newly
     /// enabled rule. Allow a short period of time for changes to take effect.
-    pub fn enableRule(self: *Self, allocator: std.mem.Allocator, input: enable_rule.EnableRuleInput, options: enable_rule.Options) !enable_rule.EnableRuleOutput {
+    pub fn enableRule(self: *Self, allocator: std.mem.Allocator, input: enable_rule.EnableRuleInput, options: CallOptions) !enable_rule.EnableRuleOutput {
         return enable_rule.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of API destination in the account in the current Region.
-    pub fn listApiDestinations(self: *Self, allocator: std.mem.Allocator, input: list_api_destinations.ListApiDestinationsInput, options: list_api_destinations.Options) !list_api_destinations.ListApiDestinationsOutput {
+    pub fn listApiDestinations(self: *Self, allocator: std.mem.Allocator, input: list_api_destinations.ListApiDestinationsInput, options: CallOptions) !list_api_destinations.ListApiDestinationsOutput {
         return list_api_destinations.execute(self, allocator, input, options);
     }
 
     /// Lists your archives. You can either list all the archives or you can provide
     /// a prefix to
     /// match to the archive names. Filter parameters are exclusive.
-    pub fn listArchives(self: *Self, allocator: std.mem.Allocator, input: list_archives.ListArchivesInput, options: list_archives.Options) !list_archives.ListArchivesOutput {
+    pub fn listArchives(self: *Self, allocator: std.mem.Allocator, input: list_archives.ListArchivesInput, options: CallOptions) !list_archives.ListArchivesOutput {
         return list_archives.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of connections from the account.
-    pub fn listConnections(self: *Self, allocator: std.mem.Allocator, input: list_connections.ListConnectionsInput, options: list_connections.Options) !list_connections.ListConnectionsOutput {
+    pub fn listConnections(self: *Self, allocator: std.mem.Allocator, input: list_connections.ListConnectionsInput, options: CallOptions) !list_connections.ListConnectionsOutput {
         return list_connections.execute(self, allocator, input, options);
     }
 
@@ -445,14 +446,14 @@ pub const Client = struct {
     /// *
     /// Amazon EventBridge User Guide*
     /// .
-    pub fn listEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_endpoints.ListEndpointsInput, options: list_endpoints.Options) !list_endpoints.ListEndpointsOutput {
+    pub fn listEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_endpoints.ListEndpointsInput, options: CallOptions) !list_endpoints.ListEndpointsOutput {
         return list_endpoints.execute(self, allocator, input, options);
     }
 
     /// Lists all the event buses in your account, including the default event bus,
     /// custom event
     /// buses, and partner event buses.
-    pub fn listEventBuses(self: *Self, allocator: std.mem.Allocator, input: list_event_buses.ListEventBusesInput, options: list_event_buses.Options) !list_event_buses.ListEventBusesOutput {
+    pub fn listEventBuses(self: *Self, allocator: std.mem.Allocator, input: list_event_buses.ListEventBusesInput, options: CallOptions) !list_event_buses.ListEventBusesOutput {
         return list_event_buses.execute(self, allocator, input, options);
     }
 
@@ -461,7 +462,7 @@ pub const Client = struct {
     /// Amazon Web Services account. For more information about partner event
     /// sources, see
     /// [CreateEventBus](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEventBus.html).
-    pub fn listEventSources(self: *Self, allocator: std.mem.Allocator, input: list_event_sources.ListEventSourcesInput, options: list_event_sources.Options) !list_event_sources.ListEventSourcesOutput {
+    pub fn listEventSources(self: *Self, allocator: std.mem.Allocator, input: list_event_sources.ListEventSourcesInput, options: CallOptions) !list_event_sources.ListEventSourcesOutput {
         return list_event_sources.execute(self, allocator, input, options);
     }
 
@@ -469,7 +470,7 @@ pub const Client = struct {
     /// account ID that a
     /// particular partner event source name is associated with. This operation is
     /// not used by Amazon Web Services customers.
-    pub fn listPartnerEventSourceAccounts(self: *Self, allocator: std.mem.Allocator, input: list_partner_event_source_accounts.ListPartnerEventSourceAccountsInput, options: list_partner_event_source_accounts.Options) !list_partner_event_source_accounts.ListPartnerEventSourceAccountsOutput {
+    pub fn listPartnerEventSourceAccounts(self: *Self, allocator: std.mem.Allocator, input: list_partner_event_source_accounts.ListPartnerEventSourceAccountsInput, options: CallOptions) !list_partner_event_source_accounts.ListPartnerEventSourceAccountsOutput {
         return list_partner_event_source_accounts.execute(self, allocator, input, options);
     }
 
@@ -477,14 +478,14 @@ pub const Client = struct {
     /// names that
     /// they have created. This operation is not used by Amazon Web Services
     /// customers.
-    pub fn listPartnerEventSources(self: *Self, allocator: std.mem.Allocator, input: list_partner_event_sources.ListPartnerEventSourcesInput, options: list_partner_event_sources.Options) !list_partner_event_sources.ListPartnerEventSourcesOutput {
+    pub fn listPartnerEventSources(self: *Self, allocator: std.mem.Allocator, input: list_partner_event_sources.ListPartnerEventSourcesInput, options: CallOptions) !list_partner_event_sources.ListPartnerEventSourcesOutput {
         return list_partner_event_sources.execute(self, allocator, input, options);
     }
 
     /// Lists your replays. You can either list all the replays or you can provide a
     /// prefix to
     /// match to the replay names. Filter parameters are exclusive.
-    pub fn listReplays(self: *Self, allocator: std.mem.Allocator, input: list_replays.ListReplaysInput, options: list_replays.Options) !list_replays.ListReplaysOutput {
+    pub fn listReplays(self: *Self, allocator: std.mem.Allocator, input: list_replays.ListReplaysInput, options: CallOptions) !list_replays.ListReplaysOutput {
         return list_replays.execute(self, allocator, input, options);
     }
 
@@ -493,7 +494,7 @@ pub const Client = struct {
     /// EventBridge can invoke a specific target in your account.
     ///
     /// The maximum number of results per page for requests is 100.
-    pub fn listRuleNamesByTarget(self: *Self, allocator: std.mem.Allocator, input: list_rule_names_by_target.ListRuleNamesByTargetInput, options: list_rule_names_by_target.Options) !list_rule_names_by_target.ListRuleNamesByTargetOutput {
+    pub fn listRuleNamesByTarget(self: *Self, allocator: std.mem.Allocator, input: list_rule_names_by_target.ListRuleNamesByTargetInput, options: CallOptions) !list_rule_names_by_target.ListRuleNamesByTargetOutput {
         return list_rule_names_by_target.execute(self, allocator, input, options);
     }
 
@@ -507,21 +508,21 @@ pub const Client = struct {
     /// with a rule,
     /// use
     /// [ListTargetsByRule](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html).
-    pub fn listRules(self: *Self, allocator: std.mem.Allocator, input: list_rules.ListRulesInput, options: list_rules.Options) !list_rules.ListRulesOutput {
+    pub fn listRules(self: *Self, allocator: std.mem.Allocator, input: list_rules.ListRulesInput, options: CallOptions) !list_rules.ListRulesOutput {
         return list_rules.execute(self, allocator, input, options);
     }
 
     /// Displays the tags associated with an EventBridge resource. In EventBridge,
     /// rules and event
     /// buses can be tagged.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists the targets assigned to the specified rule.
     ///
     /// The maximum number of results per page for requests is 100.
-    pub fn listTargetsByRule(self: *Self, allocator: std.mem.Allocator, input: list_targets_by_rule.ListTargetsByRuleInput, options: list_targets_by_rule.Options) !list_targets_by_rule.ListTargetsByRuleOutput {
+    pub fn listTargetsByRule(self: *Self, allocator: std.mem.Allocator, input: list_targets_by_rule.ListTargetsByRuleInput, options: CallOptions) !list_targets_by_rule.ListTargetsByRuleOutput {
         return list_targets_by_rule.execute(self, allocator, input, options);
     }
 
@@ -543,7 +544,7 @@ pub const Client = struct {
     /// 9,223,372,036,854,775,807.
     ///
     /// PutEvents will only process nested JSON up to 1000 levels deep.
-    pub fn putEvents(self: *Self, allocator: std.mem.Allocator, input: put_events.PutEventsInput, options: put_events.Options) !put_events.PutEventsOutput {
+    pub fn putEvents(self: *Self, allocator: std.mem.Allocator, input: put_events.PutEventsInput, options: CallOptions) !put_events.PutEventsOutput {
         return put_events.execute(self, allocator, input, options);
     }
 
@@ -554,7 +555,7 @@ pub const Client = struct {
     /// EventBridge PutEvents event
     /// entry
     /// size](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-putevent-size.html) in the *EventBridge User Guide*.
-    pub fn putPartnerEvents(self: *Self, allocator: std.mem.Allocator, input: put_partner_events.PutPartnerEventsInput, options: put_partner_events.Options) !put_partner_events.PutPartnerEventsOutput {
+    pub fn putPartnerEvents(self: *Self, allocator: std.mem.Allocator, input: put_partner_events.PutPartnerEventsInput, options: CallOptions) !put_partner_events.PutPartnerEventsOutput {
         return put_partner_events.execute(self, allocator, input, options);
     }
 
@@ -586,7 +587,7 @@ pub const Client = struct {
     /// Accounts](https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html) in the *Amazon EventBridge User Guide*.
     ///
     /// The permission policy on the event bus cannot exceed 10 KB in size.
-    pub fn putPermission(self: *Self, allocator: std.mem.Allocator, input: put_permission.PutPermissionInput, options: put_permission.Options) !put_permission.PutPermissionOutput {
+    pub fn putPermission(self: *Self, allocator: std.mem.Allocator, input: put_permission.PutPermissionInput, options: CallOptions) !put_permission.PutPermissionOutput {
         return put_permission.execute(self, allocator, input, options);
     }
 
@@ -676,7 +677,7 @@ pub const Client = struct {
     /// [Receiving read-only management events from Amazon Web Services
     /// services](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event-cloudtrail.html#eb-service-event-cloudtrail-management) in the
     /// *EventBridge User Guide*.
-    pub fn putRule(self: *Self, allocator: std.mem.Allocator, input: put_rule.PutRuleInput, options: put_rule.Options) !put_rule.PutRuleOutput {
+    pub fn putRule(self: *Self, allocator: std.mem.Allocator, input: put_rule.PutRuleInput, options: CallOptions) !put_rule.PutRuleOutput {
         return put_rule.execute(self, allocator, input, options);
     }
 
@@ -806,7 +807,7 @@ pub const Client = struct {
     /// time. If that
     /// happens, `FailedEntryCount` is non-zero in the response and each entry in
     /// `FailedEntries` provides the ID of the failed target and the error code.
-    pub fn putTargets(self: *Self, allocator: std.mem.Allocator, input: put_targets.PutTargetsInput, options: put_targets.Options) !put_targets.PutTargetsOutput {
+    pub fn putTargets(self: *Self, allocator: std.mem.Allocator, input: put_targets.PutTargetsInput, options: CallOptions) !put_targets.PutTargetsOutput {
         return put_targets.execute(self, allocator, input, options);
     }
 
@@ -817,7 +818,7 @@ pub const Client = struct {
     /// that you associated with the account when you granted it permission with
     /// `PutPermission`. You can find the `StatementId` by using
     /// [DescribeEventBus](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_DescribeEventBus.html).
-    pub fn removePermission(self: *Self, allocator: std.mem.Allocator, input: remove_permission.RemovePermissionInput, options: remove_permission.Options) !remove_permission.RemovePermissionOutput {
+    pub fn removePermission(self: *Self, allocator: std.mem.Allocator, input: remove_permission.RemovePermissionInput, options: CallOptions) !remove_permission.RemovePermissionOutput {
         return remove_permission.execute(self, allocator, input, options);
     }
 
@@ -840,7 +841,7 @@ pub const Client = struct {
     /// `FailedEntries` provides the ID of the failed target and the error code.
     ///
     /// The maximum number of entries per request is 10.
-    pub fn removeTargets(self: *Self, allocator: std.mem.Allocator, input: remove_targets.RemoveTargetsInput, options: remove_targets.Options) !remove_targets.RemoveTargetsOutput {
+    pub fn removeTargets(self: *Self, allocator: std.mem.Allocator, input: remove_targets.RemoveTargetsInput, options: CallOptions) !remove_targets.RemoveTargetsOutput {
         return remove_targets.execute(self, allocator, input, options);
     }
 
@@ -858,7 +859,7 @@ pub const Client = struct {
     /// indicates the time within the specified time range associated with the last
     /// event
     /// replayed.
-    pub fn startReplay(self: *Self, allocator: std.mem.Allocator, input: start_replay.StartReplayInput, options: start_replay.Options) !start_replay.StartReplayOutput {
+    pub fn startReplay(self: *Self, allocator: std.mem.Allocator, input: start_replay.StartReplayInput, options: CallOptions) !start_replay.StartReplayOutput {
         return start_replay.execute(self, allocator, input, options);
     }
 
@@ -883,7 +884,7 @@ pub const Client = struct {
     /// value that you specify replaces the previous value for that tag.
     ///
     /// You can associate as many as 50 tags with a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -896,28 +897,28 @@ pub const Client = struct {
     /// sure to use the correct ARN characters when creating event patterns so that
     /// they match the ARN
     /// syntax in the event you want to match.
-    pub fn testEventPattern(self: *Self, allocator: std.mem.Allocator, input: test_event_pattern.TestEventPatternInput, options: test_event_pattern.Options) !test_event_pattern.TestEventPatternOutput {
+    pub fn testEventPattern(self: *Self, allocator: std.mem.Allocator, input: test_event_pattern.TestEventPatternInput, options: CallOptions) !test_event_pattern.TestEventPatternOutput {
         return test_event_pattern.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified EventBridge resource. In Amazon
     /// EventBridge, rules and event buses can be tagged.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an API destination.
-    pub fn updateApiDestination(self: *Self, allocator: std.mem.Allocator, input: update_api_destination.UpdateApiDestinationInput, options: update_api_destination.Options) !update_api_destination.UpdateApiDestinationOutput {
+    pub fn updateApiDestination(self: *Self, allocator: std.mem.Allocator, input: update_api_destination.UpdateApiDestinationInput, options: CallOptions) !update_api_destination.UpdateApiDestinationOutput {
         return update_api_destination.execute(self, allocator, input, options);
     }
 
     /// Updates the specified archive.
-    pub fn updateArchive(self: *Self, allocator: std.mem.Allocator, input: update_archive.UpdateArchiveInput, options: update_archive.Options) !update_archive.UpdateArchiveOutput {
+    pub fn updateArchive(self: *Self, allocator: std.mem.Allocator, input: update_archive.UpdateArchiveInput, options: CallOptions) !update_archive.UpdateArchiveOutput {
         return update_archive.execute(self, allocator, input, options);
     }
 
     /// Updates settings for a connection.
-    pub fn updateConnection(self: *Self, allocator: std.mem.Allocator, input: update_connection.UpdateConnectionInput, options: update_connection.Options) !update_connection.UpdateConnectionOutput {
+    pub fn updateConnection(self: *Self, allocator: std.mem.Allocator, input: update_connection.UpdateConnectionInput, options: CallOptions) !update_connection.UpdateConnectionOutput {
         return update_connection.execute(self, allocator, input, options);
     }
 
@@ -928,12 +929,12 @@ pub const Client = struct {
     /// the *
     /// Amazon EventBridge User Guide*
     /// .
-    pub fn updateEndpoint(self: *Self, allocator: std.mem.Allocator, input: update_endpoint.UpdateEndpointInput, options: update_endpoint.Options) !update_endpoint.UpdateEndpointOutput {
+    pub fn updateEndpoint(self: *Self, allocator: std.mem.Allocator, input: update_endpoint.UpdateEndpointInput, options: CallOptions) !update_endpoint.UpdateEndpointOutput {
         return update_endpoint.execute(self, allocator, input, options);
     }
 
     /// Updates the specified event bus.
-    pub fn updateEventBus(self: *Self, allocator: std.mem.Allocator, input: update_event_bus.UpdateEventBusInput, options: update_event_bus.Options) !update_event_bus.UpdateEventBusOutput {
+    pub fn updateEventBus(self: *Self, allocator: std.mem.Allocator, input: update_event_bus.UpdateEventBusInput, options: CallOptions) !update_event_bus.UpdateEventBusOutput {
         return update_event_bus.execute(self, allocator, input, options);
     }
 };

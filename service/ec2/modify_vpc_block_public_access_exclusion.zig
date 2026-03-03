@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InternetGatewayExclusionMode = @import("internet_gateway_exclusion_mode.zig").InternetGatewayExclusionMode;
 const VpcBlockPublicAccessExclusion = @import("vpc_block_public_access_exclusion.zig").VpcBlockPublicAccessExclusion;
@@ -34,11 +35,7 @@ pub const ModifyVpcBlockPublicAccessExclusionOutput = struct {
     vpc_block_public_access_exclusion: ?VpcBlockPublicAccessExclusion = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyVpcBlockPublicAccessExclusionInput, options: Options) !ModifyVpcBlockPublicAccessExclusionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyVpcBlockPublicAccessExclusionInput, options: CallOptions) !ModifyVpcBlockPublicAccessExclusionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

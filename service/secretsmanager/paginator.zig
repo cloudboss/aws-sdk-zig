@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const batch_get_secret_value = @import("batch_get_secret_value.zig");
@@ -16,7 +17,7 @@ pub const BatchGetSecretValuePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: batch_get_secret_value.Options) !batch_get_secret_value.BatchGetSecretValueOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !batch_get_secret_value.BatchGetSecretValueOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -57,7 +58,7 @@ pub const ListSecretVersionIdsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_secret_version_ids.Options) !list_secret_version_ids.ListSecretVersionIdsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_secret_version_ids.ListSecretVersionIdsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -98,7 +99,7 @@ pub const ListSecretsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_secrets.Options) !list_secrets.ListSecretsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_secrets.ListSecretsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

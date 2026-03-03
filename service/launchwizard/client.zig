@@ -16,6 +16,7 @@ const list_workloads = @import("list_workloads.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_deployment = @import("update_deployment.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -49,82 +50,82 @@ pub const Client = struct {
     /// Creates a deployment for the given workload. Deployments created by this
     /// operation are not available in the Launch Wizard console to use the `Clone
     /// deployment` action on.
-    pub fn createDeployment(self: *Self, allocator: std.mem.Allocator, input: create_deployment.CreateDeploymentInput, options: create_deployment.Options) !create_deployment.CreateDeploymentOutput {
+    pub fn createDeployment(self: *Self, allocator: std.mem.Allocator, input: create_deployment.CreateDeploymentInput, options: CallOptions) !create_deployment.CreateDeploymentOutput {
         return create_deployment.execute(self, allocator, input, options);
     }
 
     /// Deletes a deployment.
-    pub fn deleteDeployment(self: *Self, allocator: std.mem.Allocator, input: delete_deployment.DeleteDeploymentInput, options: delete_deployment.Options) !delete_deployment.DeleteDeploymentOutput {
+    pub fn deleteDeployment(self: *Self, allocator: std.mem.Allocator, input: delete_deployment.DeleteDeploymentInput, options: CallOptions) !delete_deployment.DeleteDeploymentOutput {
         return delete_deployment.execute(self, allocator, input, options);
     }
 
     /// Returns information about the deployment.
-    pub fn getDeployment(self: *Self, allocator: std.mem.Allocator, input: get_deployment.GetDeploymentInput, options: get_deployment.Options) !get_deployment.GetDeploymentOutput {
+    pub fn getDeployment(self: *Self, allocator: std.mem.Allocator, input: get_deployment.GetDeploymentInput, options: CallOptions) !get_deployment.GetDeploymentOutput {
         return get_deployment.execute(self, allocator, input, options);
     }
 
     /// Returns information about a deployment pattern version.
-    pub fn getDeploymentPatternVersion(self: *Self, allocator: std.mem.Allocator, input: get_deployment_pattern_version.GetDeploymentPatternVersionInput, options: get_deployment_pattern_version.Options) !get_deployment_pattern_version.GetDeploymentPatternVersionOutput {
+    pub fn getDeploymentPatternVersion(self: *Self, allocator: std.mem.Allocator, input: get_deployment_pattern_version.GetDeploymentPatternVersionInput, options: CallOptions) !get_deployment_pattern_version.GetDeploymentPatternVersionOutput {
         return get_deployment_pattern_version.execute(self, allocator, input, options);
     }
 
     /// Returns information about a workload.
-    pub fn getWorkload(self: *Self, allocator: std.mem.Allocator, input: get_workload.GetWorkloadInput, options: get_workload.Options) !get_workload.GetWorkloadOutput {
+    pub fn getWorkload(self: *Self, allocator: std.mem.Allocator, input: get_workload.GetWorkloadInput, options: CallOptions) !get_workload.GetWorkloadOutput {
         return get_workload.execute(self, allocator, input, options);
     }
 
     /// Returns details for a given workload and deployment pattern, including the
     /// available specifications. You can use the
     /// [ListWorkloads](https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html) operation to discover the available workload names and the [ListWorkloadDeploymentPatterns](https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html) operation to discover the available deployment pattern names of a given workload.
-    pub fn getWorkloadDeploymentPattern(self: *Self, allocator: std.mem.Allocator, input: get_workload_deployment_pattern.GetWorkloadDeploymentPatternInput, options: get_workload_deployment_pattern.Options) !get_workload_deployment_pattern.GetWorkloadDeploymentPatternOutput {
+    pub fn getWorkloadDeploymentPattern(self: *Self, allocator: std.mem.Allocator, input: get_workload_deployment_pattern.GetWorkloadDeploymentPatternInput, options: CallOptions) !get_workload_deployment_pattern.GetWorkloadDeploymentPatternOutput {
         return get_workload_deployment_pattern.execute(self, allocator, input, options);
     }
 
     /// Lists the events of a deployment.
-    pub fn listDeploymentEvents(self: *Self, allocator: std.mem.Allocator, input: list_deployment_events.ListDeploymentEventsInput, options: list_deployment_events.Options) !list_deployment_events.ListDeploymentEventsOutput {
+    pub fn listDeploymentEvents(self: *Self, allocator: std.mem.Allocator, input: list_deployment_events.ListDeploymentEventsInput, options: CallOptions) !list_deployment_events.ListDeploymentEventsOutput {
         return list_deployment_events.execute(self, allocator, input, options);
     }
 
     /// Lists the deployment pattern versions.
-    pub fn listDeploymentPatternVersions(self: *Self, allocator: std.mem.Allocator, input: list_deployment_pattern_versions.ListDeploymentPatternVersionsInput, options: list_deployment_pattern_versions.Options) !list_deployment_pattern_versions.ListDeploymentPatternVersionsOutput {
+    pub fn listDeploymentPatternVersions(self: *Self, allocator: std.mem.Allocator, input: list_deployment_pattern_versions.ListDeploymentPatternVersionsInput, options: CallOptions) !list_deployment_pattern_versions.ListDeploymentPatternVersionsOutput {
         return list_deployment_pattern_versions.execute(self, allocator, input, options);
     }
 
     /// Lists the deployments that have been created.
-    pub fn listDeployments(self: *Self, allocator: std.mem.Allocator, input: list_deployments.ListDeploymentsInput, options: list_deployments.Options) !list_deployments.ListDeploymentsOutput {
+    pub fn listDeployments(self: *Self, allocator: std.mem.Allocator, input: list_deployments.ListDeploymentsInput, options: CallOptions) !list_deployments.ListDeploymentsOutput {
         return list_deployments.execute(self, allocator, input, options);
     }
 
     /// Lists the tags associated with a specified resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists the workload deployment patterns for a given workload name. You can
     /// use the
     /// [ListWorkloads](https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html) operation to discover the available workload names.
-    pub fn listWorkloadDeploymentPatterns(self: *Self, allocator: std.mem.Allocator, input: list_workload_deployment_patterns.ListWorkloadDeploymentPatternsInput, options: list_workload_deployment_patterns.Options) !list_workload_deployment_patterns.ListWorkloadDeploymentPatternsOutput {
+    pub fn listWorkloadDeploymentPatterns(self: *Self, allocator: std.mem.Allocator, input: list_workload_deployment_patterns.ListWorkloadDeploymentPatternsInput, options: CallOptions) !list_workload_deployment_patterns.ListWorkloadDeploymentPatternsOutput {
         return list_workload_deployment_patterns.execute(self, allocator, input, options);
     }
 
     /// Lists the available workload names. You can use the
     /// [ListWorkloadDeploymentPatterns](https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html) operation to discover the available deployment patterns for a given workload.
-    pub fn listWorkloads(self: *Self, allocator: std.mem.Allocator, input: list_workloads.ListWorkloadsInput, options: list_workloads.Options) !list_workloads.ListWorkloadsOutput {
+    pub fn listWorkloads(self: *Self, allocator: std.mem.Allocator, input: list_workloads.ListWorkloadsInput, options: CallOptions) !list_workloads.ListWorkloadsOutput {
         return list_workloads.execute(self, allocator, input, options);
     }
 
     /// Adds the specified tags to the given resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the given resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates a deployment.
-    pub fn updateDeployment(self: *Self, allocator: std.mem.Allocator, input: update_deployment.UpdateDeploymentInput, options: update_deployment.Options) !update_deployment.UpdateDeploymentOutput {
+    pub fn updateDeployment(self: *Self, allocator: std.mem.Allocator, input: update_deployment.UpdateDeploymentInput, options: CallOptions) !update_deployment.UpdateDeploymentOutput {
         return update_deployment.execute(self, allocator, input, options);
     }
 

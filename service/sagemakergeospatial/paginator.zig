@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_earth_observation_jobs = @import("list_earth_observation_jobs.zig");
@@ -17,7 +18,7 @@ pub const ListEarthObservationJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_earth_observation_jobs.Options) !list_earth_observation_jobs.ListEarthObservationJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_earth_observation_jobs.ListEarthObservationJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -58,7 +59,7 @@ pub const ListRasterDataCollectionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_raster_data_collections.Options) !list_raster_data_collections.ListRasterDataCollectionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_raster_data_collections.ListRasterDataCollectionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -99,7 +100,7 @@ pub const ListVectorEnrichmentJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_vector_enrichment_jobs.Options) !list_vector_enrichment_jobs.ListVectorEnrichmentJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_vector_enrichment_jobs.ListVectorEnrichmentJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -140,7 +141,7 @@ pub const SearchRasterDataCollectionPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: search_raster_data_collection.Options) !search_raster_data_collection.SearchRasterDataCollectionOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !search_raster_data_collection.SearchRasterDataCollectionOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

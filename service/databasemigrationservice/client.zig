@@ -120,6 +120,7 @@ const stop_replication = @import("stop_replication.zig");
 const stop_replication_task = @import("stop_replication_task.zig");
 const test_connection = @import("test_connection.zig");
 const update_subscriptions_to_event_bridge = @import("update_subscriptions_to_event_bridge.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -162,14 +163,14 @@ pub const Client = struct {
     /// ](https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html) data
     /// type
     /// description.
-    pub fn addTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_resource.AddTagsToResourceInput, options: add_tags_to_resource.Options) !add_tags_to_resource.AddTagsToResourceOutput {
+    pub fn addTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_resource.AddTagsToResourceInput, options: CallOptions) !add_tags_to_resource.AddTagsToResourceOutput {
         return add_tags_to_resource.execute(self, allocator, input, options);
     }
 
     /// Applies a pending maintenance action to a resource (for example, to a
     /// replication
     /// instance).
-    pub fn applyPendingMaintenanceAction(self: *Self, allocator: std.mem.Allocator, input: apply_pending_maintenance_action.ApplyPendingMaintenanceActionInput, options: apply_pending_maintenance_action.Options) !apply_pending_maintenance_action.ApplyPendingMaintenanceActionOutput {
+    pub fn applyPendingMaintenanceAction(self: *Self, allocator: std.mem.Allocator, input: apply_pending_maintenance_action.ApplyPendingMaintenanceActionInput, options: CallOptions) !apply_pending_maintenance_action.ApplyPendingMaintenanceActionOutput {
         return apply_pending_maintenance_action.execute(self, allocator, input, options);
     }
 
@@ -192,19 +193,19 @@ pub const Client = struct {
     /// unsuccessful actions, you should check for batch errors even when the call
     /// returns an
     /// HTTP status code of `200`.
-    pub fn batchStartRecommendations(self: *Self, allocator: std.mem.Allocator, input: batch_start_recommendations.BatchStartRecommendationsInput, options: batch_start_recommendations.Options) !batch_start_recommendations.BatchStartRecommendationsOutput {
+    pub fn batchStartRecommendations(self: *Self, allocator: std.mem.Allocator, input: batch_start_recommendations.BatchStartRecommendationsInput, options: CallOptions) !batch_start_recommendations.BatchStartRecommendationsOutput {
         return batch_start_recommendations.execute(self, allocator, input, options);
     }
 
     /// Cancels a single metadata model conversion operation that was started with
     /// `StartMetadataModelConversion`.
-    pub fn cancelMetadataModelConversion(self: *Self, allocator: std.mem.Allocator, input: cancel_metadata_model_conversion.CancelMetadataModelConversionInput, options: cancel_metadata_model_conversion.Options) !cancel_metadata_model_conversion.CancelMetadataModelConversionOutput {
+    pub fn cancelMetadataModelConversion(self: *Self, allocator: std.mem.Allocator, input: cancel_metadata_model_conversion.CancelMetadataModelConversionInput, options: CallOptions) !cancel_metadata_model_conversion.CancelMetadataModelConversionOutput {
         return cancel_metadata_model_conversion.execute(self, allocator, input, options);
     }
 
     /// Cancels a single metadata model creation operation that was started with
     /// `StartMetadataModelCreation`.
-    pub fn cancelMetadataModelCreation(self: *Self, allocator: std.mem.Allocator, input: cancel_metadata_model_creation.CancelMetadataModelCreationInput, options: cancel_metadata_model_creation.Options) !cancel_metadata_model_creation.CancelMetadataModelCreationOutput {
+    pub fn cancelMetadataModelCreation(self: *Self, allocator: std.mem.Allocator, input: cancel_metadata_model_creation.CancelMetadataModelCreationInput, options: CallOptions) !cancel_metadata_model_creation.CancelMetadataModelCreationOutput {
         return cancel_metadata_model_creation.execute(self, allocator, input, options);
     }
 
@@ -215,19 +216,19 @@ pub const Client = struct {
     /// running. It also attempts to cancel any individual assessments that are
     /// currently
     /// running.
-    pub fn cancelReplicationTaskAssessmentRun(self: *Self, allocator: std.mem.Allocator, input: cancel_replication_task_assessment_run.CancelReplicationTaskAssessmentRunInput, options: cancel_replication_task_assessment_run.Options) !cancel_replication_task_assessment_run.CancelReplicationTaskAssessmentRunOutput {
+    pub fn cancelReplicationTaskAssessmentRun(self: *Self, allocator: std.mem.Allocator, input: cancel_replication_task_assessment_run.CancelReplicationTaskAssessmentRunInput, options: CallOptions) !cancel_replication_task_assessment_run.CancelReplicationTaskAssessmentRunOutput {
         return cancel_replication_task_assessment_run.execute(self, allocator, input, options);
     }
 
     /// Creates a data migration using the provided settings.
-    pub fn createDataMigration(self: *Self, allocator: std.mem.Allocator, input: create_data_migration.CreateDataMigrationInput, options: create_data_migration.Options) !create_data_migration.CreateDataMigrationOutput {
+    pub fn createDataMigration(self: *Self, allocator: std.mem.Allocator, input: create_data_migration.CreateDataMigrationInput, options: CallOptions) !create_data_migration.CreateDataMigrationOutput {
         return create_data_migration.execute(self, allocator, input, options);
     }
 
     /// Creates a data provider using the provided settings. A data provider stores
     /// a data store
     /// type and location information about your database.
-    pub fn createDataProvider(self: *Self, allocator: std.mem.Allocator, input: create_data_provider.CreateDataProviderInput, options: create_data_provider.Options) !create_data_provider.CreateDataProviderOutput {
+    pub fn createDataProvider(self: *Self, allocator: std.mem.Allocator, input: create_data_provider.CreateDataProviderInput, options: CallOptions) !create_data_provider.CreateDataProviderOutput {
         return create_data_provider.execute(self, allocator, input, options);
     }
 
@@ -242,7 +243,7 @@ pub const Client = struct {
     /// database only when you specify the schema in the table-mapping rules of the
     /// DMS
     /// task.
-    pub fn createEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_endpoint.CreateEndpointInput, options: create_endpoint.Options) !create_endpoint.CreateEndpointOutput {
+    pub fn createEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_endpoint.CreateEndpointInput, options: CallOptions) !create_endpoint.CreateEndpointOutput {
         return create_endpoint.execute(self, allocator, input, options);
     }
 
@@ -266,7 +267,7 @@ pub const Client = struct {
     ///
     /// For more information about DMS events, see [Working with Events and
     /// Notifications](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html) in the *Database Migration Service User Guide.*
-    pub fn createEventSubscription(self: *Self, allocator: std.mem.Allocator, input: create_event_subscription.CreateEventSubscriptionInput, options: create_event_subscription.Options) !create_event_subscription.CreateEventSubscriptionOutput {
+    pub fn createEventSubscription(self: *Self, allocator: std.mem.Allocator, input: create_event_subscription.CreateEventSubscriptionInput, options: CallOptions) !create_event_subscription.CreateEventSubscriptionOutput {
         return create_event_subscription.execute(self, allocator, input, options);
     }
 
@@ -278,12 +279,12 @@ pub const Client = struct {
     /// support](https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html).
     ///
     /// Creates a Fleet Advisor collector using the specified parameters.
-    pub fn createFleetAdvisorCollector(self: *Self, allocator: std.mem.Allocator, input: create_fleet_advisor_collector.CreateFleetAdvisorCollectorInput, options: create_fleet_advisor_collector.Options) !create_fleet_advisor_collector.CreateFleetAdvisorCollectorOutput {
+    pub fn createFleetAdvisorCollector(self: *Self, allocator: std.mem.Allocator, input: create_fleet_advisor_collector.CreateFleetAdvisorCollectorInput, options: CallOptions) !create_fleet_advisor_collector.CreateFleetAdvisorCollectorOutput {
         return create_fleet_advisor_collector.execute(self, allocator, input, options);
     }
 
     /// Creates the instance profile using the specified parameters.
-    pub fn createInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: create_instance_profile.CreateInstanceProfileInput, options: create_instance_profile.Options) !create_instance_profile.CreateInstanceProfileOutput {
+    pub fn createInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: create_instance_profile.CreateInstanceProfileInput, options: CallOptions) !create_instance_profile.CreateInstanceProfileOutput {
         return create_instance_profile.execute(self, allocator, input, options);
     }
 
@@ -293,7 +294,7 @@ pub const Client = struct {
     /// providers
     /// using
     /// [CreateInstanceProfile](https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateInstanceProfile.html) and [CreateDataProvider](https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateDataProvider.html).
-    pub fn createMigrationProject(self: *Self, allocator: std.mem.Allocator, input: create_migration_project.CreateMigrationProjectInput, options: create_migration_project.Options) !create_migration_project.CreateMigrationProjectOutput {
+    pub fn createMigrationProject(self: *Self, allocator: std.mem.Allocator, input: create_migration_project.CreateMigrationProjectInput, options: CallOptions) !create_migration_project.CreateMigrationProjectOutput {
         return create_migration_project.execute(self, allocator, input, options);
     }
 
@@ -302,7 +303,7 @@ pub const Client = struct {
     /// Serverless replication. You can also provide options to validate the
     /// configuration inputs
     /// before you start the replication.
-    pub fn createReplicationConfig(self: *Self, allocator: std.mem.Allocator, input: create_replication_config.CreateReplicationConfigInput, options: create_replication_config.Options) !create_replication_config.CreateReplicationConfigOutput {
+    pub fn createReplicationConfig(self: *Self, allocator: std.mem.Allocator, input: create_replication_config.CreateReplicationConfigInput, options: CallOptions) !create_replication_config.CreateReplicationConfigOutput {
         return create_replication_config.execute(self, allocator, input, options);
     }
 
@@ -323,7 +324,7 @@ pub const Client = struct {
     /// the default
     /// engine version, see [Release
     /// Notes](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReleaseNotes.html).
-    pub fn createReplicationInstance(self: *Self, allocator: std.mem.Allocator, input: create_replication_instance.CreateReplicationInstanceInput, options: create_replication_instance.Options) !create_replication_instance.CreateReplicationInstanceOutput {
+    pub fn createReplicationInstance(self: *Self, allocator: std.mem.Allocator, input: create_replication_instance.CreateReplicationInstanceInput, options: CallOptions) !create_replication_instance.CreateReplicationInstanceOutput {
         return create_replication_instance.execute(self, allocator, input, options);
     }
 
@@ -344,27 +345,27 @@ pub const Client = struct {
     /// [DeleteReplicationSubnetGroup](https://docs.aws.amazon.com/en_us/dms/latest/APIReference/API_DeleteReplicationSubnetGroup.html) action. Optionally, choose Subnet groups in the
     /// DMS console, then choose your subnet group. Next, choose Delete from
     /// Actions.
-    pub fn createReplicationSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: create_replication_subnet_group.CreateReplicationSubnetGroupInput, options: create_replication_subnet_group.Options) !create_replication_subnet_group.CreateReplicationSubnetGroupOutput {
+    pub fn createReplicationSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: create_replication_subnet_group.CreateReplicationSubnetGroupInput, options: CallOptions) !create_replication_subnet_group.CreateReplicationSubnetGroupOutput {
         return create_replication_subnet_group.execute(self, allocator, input, options);
     }
 
     /// Creates a replication task using the specified parameters.
-    pub fn createReplicationTask(self: *Self, allocator: std.mem.Allocator, input: create_replication_task.CreateReplicationTaskInput, options: create_replication_task.Options) !create_replication_task.CreateReplicationTaskOutput {
+    pub fn createReplicationTask(self: *Self, allocator: std.mem.Allocator, input: create_replication_task.CreateReplicationTaskInput, options: CallOptions) !create_replication_task.CreateReplicationTaskOutput {
         return create_replication_task.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified certificate.
-    pub fn deleteCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_certificate.DeleteCertificateInput, options: delete_certificate.Options) !delete_certificate.DeleteCertificateOutput {
+    pub fn deleteCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_certificate.DeleteCertificateInput, options: CallOptions) !delete_certificate.DeleteCertificateOutput {
         return delete_certificate.execute(self, allocator, input, options);
     }
 
     /// Deletes the connection between a replication instance and an endpoint.
-    pub fn deleteConnection(self: *Self, allocator: std.mem.Allocator, input: delete_connection.DeleteConnectionInput, options: delete_connection.Options) !delete_connection.DeleteConnectionOutput {
+    pub fn deleteConnection(self: *Self, allocator: std.mem.Allocator, input: delete_connection.DeleteConnectionInput, options: CallOptions) !delete_connection.DeleteConnectionOutput {
         return delete_connection.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified data migration.
-    pub fn deleteDataMigration(self: *Self, allocator: std.mem.Allocator, input: delete_data_migration.DeleteDataMigrationInput, options: delete_data_migration.Options) !delete_data_migration.DeleteDataMigrationOutput {
+    pub fn deleteDataMigration(self: *Self, allocator: std.mem.Allocator, input: delete_data_migration.DeleteDataMigrationInput, options: CallOptions) !delete_data_migration.DeleteDataMigrationOutput {
         return delete_data_migration.execute(self, allocator, input, options);
     }
 
@@ -373,7 +374,7 @@ pub const Client = struct {
     /// All migration projects associated with the data provider must be deleted or
     /// modified
     /// before you can delete the data provider.
-    pub fn deleteDataProvider(self: *Self, allocator: std.mem.Allocator, input: delete_data_provider.DeleteDataProviderInput, options: delete_data_provider.Options) !delete_data_provider.DeleteDataProviderOutput {
+    pub fn deleteDataProvider(self: *Self, allocator: std.mem.Allocator, input: delete_data_provider.DeleteDataProviderInput, options: CallOptions) !delete_data_provider.DeleteDataProviderOutput {
         return delete_data_provider.execute(self, allocator, input, options);
     }
 
@@ -382,12 +383,12 @@ pub const Client = struct {
     /// All tasks associated with the endpoint must be deleted before you can delete
     /// the
     /// endpoint.
-    pub fn deleteEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_endpoint.DeleteEndpointInput, options: delete_endpoint.Options) !delete_endpoint.DeleteEndpointOutput {
+    pub fn deleteEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_endpoint.DeleteEndpointInput, options: CallOptions) !delete_endpoint.DeleteEndpointOutput {
         return delete_endpoint.execute(self, allocator, input, options);
     }
 
     /// Deletes an DMS event subscription.
-    pub fn deleteEventSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_event_subscription.DeleteEventSubscriptionInput, options: delete_event_subscription.Options) !delete_event_subscription.DeleteEventSubscriptionOutput {
+    pub fn deleteEventSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_event_subscription.DeleteEventSubscriptionInput, options: CallOptions) !delete_event_subscription.DeleteEventSubscriptionOutput {
         return delete_event_subscription.execute(self, allocator, input, options);
     }
 
@@ -399,7 +400,7 @@ pub const Client = struct {
     /// support](https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html).
     ///
     /// Deletes the specified Fleet Advisor collector.
-    pub fn deleteFleetAdvisorCollector(self: *Self, allocator: std.mem.Allocator, input: delete_fleet_advisor_collector.DeleteFleetAdvisorCollectorInput, options: delete_fleet_advisor_collector.Options) !delete_fleet_advisor_collector.DeleteFleetAdvisorCollectorOutput {
+    pub fn deleteFleetAdvisorCollector(self: *Self, allocator: std.mem.Allocator, input: delete_fleet_advisor_collector.DeleteFleetAdvisorCollectorInput, options: CallOptions) !delete_fleet_advisor_collector.DeleteFleetAdvisorCollectorOutput {
         return delete_fleet_advisor_collector.execute(self, allocator, input, options);
     }
 
@@ -411,7 +412,7 @@ pub const Client = struct {
     /// support](https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html).
     ///
     /// Deletes the specified Fleet Advisor collector databases.
-    pub fn deleteFleetAdvisorDatabases(self: *Self, allocator: std.mem.Allocator, input: delete_fleet_advisor_databases.DeleteFleetAdvisorDatabasesInput, options: delete_fleet_advisor_databases.Options) !delete_fleet_advisor_databases.DeleteFleetAdvisorDatabasesOutput {
+    pub fn deleteFleetAdvisorDatabases(self: *Self, allocator: std.mem.Allocator, input: delete_fleet_advisor_databases.DeleteFleetAdvisorDatabasesInput, options: CallOptions) !delete_fleet_advisor_databases.DeleteFleetAdvisorDatabasesOutput {
         return delete_fleet_advisor_databases.execute(self, allocator, input, options);
     }
 
@@ -420,14 +421,14 @@ pub const Client = struct {
     /// All migration projects associated with the instance profile must be deleted
     /// or
     /// modified before you can delete the instance profile.
-    pub fn deleteInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: delete_instance_profile.DeleteInstanceProfileInput, options: delete_instance_profile.Options) !delete_instance_profile.DeleteInstanceProfileOutput {
+    pub fn deleteInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: delete_instance_profile.DeleteInstanceProfileInput, options: CallOptions) !delete_instance_profile.DeleteInstanceProfileOutput {
         return delete_instance_profile.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified migration project.
     ///
     /// The migration project must be closed before you can delete it.
-    pub fn deleteMigrationProject(self: *Self, allocator: std.mem.Allocator, input: delete_migration_project.DeleteMigrationProjectInput, options: delete_migration_project.Options) !delete_migration_project.DeleteMigrationProjectOutput {
+    pub fn deleteMigrationProject(self: *Self, allocator: std.mem.Allocator, input: delete_migration_project.DeleteMigrationProjectInput, options: CallOptions) !delete_migration_project.DeleteMigrationProjectOutput {
         return delete_migration_project.execute(self, allocator, input, options);
     }
 
@@ -438,7 +439,7 @@ pub const Client = struct {
     /// DMS Serverless replication that is ongoing. You can delete the configuration
     /// when the
     /// replication is in a non-RUNNING and non-STARTING state.
-    pub fn deleteReplicationConfig(self: *Self, allocator: std.mem.Allocator, input: delete_replication_config.DeleteReplicationConfigInput, options: delete_replication_config.Options) !delete_replication_config.DeleteReplicationConfigOutput {
+    pub fn deleteReplicationConfig(self: *Self, allocator: std.mem.Allocator, input: delete_replication_config.DeleteReplicationConfigInput, options: CallOptions) !delete_replication_config.DeleteReplicationConfigOutput {
         return delete_replication_config.execute(self, allocator, input, options);
     }
 
@@ -447,17 +448,17 @@ pub const Client = struct {
     /// You must delete any migration tasks that are associated with the replication
     /// instance
     /// before you can delete it.
-    pub fn deleteReplicationInstance(self: *Self, allocator: std.mem.Allocator, input: delete_replication_instance.DeleteReplicationInstanceInput, options: delete_replication_instance.Options) !delete_replication_instance.DeleteReplicationInstanceOutput {
+    pub fn deleteReplicationInstance(self: *Self, allocator: std.mem.Allocator, input: delete_replication_instance.DeleteReplicationInstanceInput, options: CallOptions) !delete_replication_instance.DeleteReplicationInstanceOutput {
         return delete_replication_instance.execute(self, allocator, input, options);
     }
 
     /// Deletes a subnet group.
-    pub fn deleteReplicationSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_replication_subnet_group.DeleteReplicationSubnetGroupInput, options: delete_replication_subnet_group.Options) !delete_replication_subnet_group.DeleteReplicationSubnetGroupOutput {
+    pub fn deleteReplicationSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_replication_subnet_group.DeleteReplicationSubnetGroupInput, options: CallOptions) !delete_replication_subnet_group.DeleteReplicationSubnetGroupOutput {
         return delete_replication_subnet_group.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified replication task.
-    pub fn deleteReplicationTask(self: *Self, allocator: std.mem.Allocator, input: delete_replication_task.DeleteReplicationTaskInput, options: delete_replication_task.Options) !delete_replication_task.DeleteReplicationTaskOutput {
+    pub fn deleteReplicationTask(self: *Self, allocator: std.mem.Allocator, input: delete_replication_task.DeleteReplicationTaskInput, options: CallOptions) !delete_replication_task.DeleteReplicationTaskOutput {
         return delete_replication_task.execute(self, allocator, input, options);
     }
 
@@ -468,7 +469,7 @@ pub const Client = struct {
     /// However, the operation leaves untouched all information about this
     /// assessment run that is
     /// stored in your Amazon S3 bucket.
-    pub fn deleteReplicationTaskAssessmentRun(self: *Self, allocator: std.mem.Allocator, input: delete_replication_task_assessment_run.DeleteReplicationTaskAssessmentRunInput, options: delete_replication_task_assessment_run.Options) !delete_replication_task_assessment_run.DeleteReplicationTaskAssessmentRunOutput {
+    pub fn deleteReplicationTaskAssessmentRun(self: *Self, allocator: std.mem.Allocator, input: delete_replication_task_assessment_run.DeleteReplicationTaskAssessmentRunInput, options: CallOptions) !delete_replication_task_assessment_run.DeleteReplicationTaskAssessmentRunOutput {
         return delete_replication_task_assessment_run.execute(self, allocator, input, options);
     }
 
@@ -485,7 +486,7 @@ pub const Client = struct {
     /// account identifier to name each artifact used by DMS in the given region.
     ///
     /// This command does not take any parameters.
-    pub fn describeAccountAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_account_attributes.DescribeAccountAttributesInput, options: describe_account_attributes.Options) !describe_account_attributes.DescribeAccountAttributesOutput {
+    pub fn describeAccountAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_account_attributes.DescribeAccountAttributesInput, options: CallOptions) !describe_account_attributes.DescribeAccountAttributesOutput {
         return describe_account_attributes.execute(self, allocator, input, options);
     }
 
@@ -521,59 +522,59 @@ pub const Client = struct {
     /// list of
     /// individual assessments that you can specify in an assessment run for the
     /// task.
-    pub fn describeApplicableIndividualAssessments(self: *Self, allocator: std.mem.Allocator, input: describe_applicable_individual_assessments.DescribeApplicableIndividualAssessmentsInput, options: describe_applicable_individual_assessments.Options) !describe_applicable_individual_assessments.DescribeApplicableIndividualAssessmentsOutput {
+    pub fn describeApplicableIndividualAssessments(self: *Self, allocator: std.mem.Allocator, input: describe_applicable_individual_assessments.DescribeApplicableIndividualAssessmentsInput, options: CallOptions) !describe_applicable_individual_assessments.DescribeApplicableIndividualAssessmentsOutput {
         return describe_applicable_individual_assessments.execute(self, allocator, input, options);
     }
 
     /// Provides a description of the certificate.
-    pub fn describeCertificates(self: *Self, allocator: std.mem.Allocator, input: describe_certificates.DescribeCertificatesInput, options: describe_certificates.Options) !describe_certificates.DescribeCertificatesOutput {
+    pub fn describeCertificates(self: *Self, allocator: std.mem.Allocator, input: describe_certificates.DescribeCertificatesInput, options: CallOptions) !describe_certificates.DescribeCertificatesOutput {
         return describe_certificates.execute(self, allocator, input, options);
     }
 
     /// Describes the status of the connections that have been made between the
     /// replication
     /// instance and an endpoint. Connections are created when you test an endpoint.
-    pub fn describeConnections(self: *Self, allocator: std.mem.Allocator, input: describe_connections.DescribeConnectionsInput, options: describe_connections.Options) !describe_connections.DescribeConnectionsOutput {
+    pub fn describeConnections(self: *Self, allocator: std.mem.Allocator, input: describe_connections.DescribeConnectionsInput, options: CallOptions) !describe_connections.DescribeConnectionsOutput {
         return describe_connections.execute(self, allocator, input, options);
     }
 
     /// Returns configuration parameters for a schema conversion project.
-    pub fn describeConversionConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_conversion_configuration.DescribeConversionConfigurationInput, options: describe_conversion_configuration.Options) !describe_conversion_configuration.DescribeConversionConfigurationOutput {
+    pub fn describeConversionConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_conversion_configuration.DescribeConversionConfigurationInput, options: CallOptions) !describe_conversion_configuration.DescribeConversionConfigurationOutput {
         return describe_conversion_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns information about data migrations.
-    pub fn describeDataMigrations(self: *Self, allocator: std.mem.Allocator, input: describe_data_migrations.DescribeDataMigrationsInput, options: describe_data_migrations.Options) !describe_data_migrations.DescribeDataMigrationsOutput {
+    pub fn describeDataMigrations(self: *Self, allocator: std.mem.Allocator, input: describe_data_migrations.DescribeDataMigrationsInput, options: CallOptions) !describe_data_migrations.DescribeDataMigrationsOutput {
         return describe_data_migrations.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of data providers for your account in the current
     /// region.
-    pub fn describeDataProviders(self: *Self, allocator: std.mem.Allocator, input: describe_data_providers.DescribeDataProvidersInput, options: describe_data_providers.Options) !describe_data_providers.DescribeDataProvidersOutput {
+    pub fn describeDataProviders(self: *Self, allocator: std.mem.Allocator, input: describe_data_providers.DescribeDataProvidersInput, options: CallOptions) !describe_data_providers.DescribeDataProvidersOutput {
         return describe_data_providers.execute(self, allocator, input, options);
     }
 
     /// Returns information about the possible endpoint settings available when you
     /// create an
     /// endpoint for a specific database engine.
-    pub fn describeEndpointSettings(self: *Self, allocator: std.mem.Allocator, input: describe_endpoint_settings.DescribeEndpointSettingsInput, options: describe_endpoint_settings.Options) !describe_endpoint_settings.DescribeEndpointSettingsOutput {
+    pub fn describeEndpointSettings(self: *Self, allocator: std.mem.Allocator, input: describe_endpoint_settings.DescribeEndpointSettingsInput, options: CallOptions) !describe_endpoint_settings.DescribeEndpointSettingsOutput {
         return describe_endpoint_settings.execute(self, allocator, input, options);
     }
 
     /// Returns information about the type of endpoints available.
-    pub fn describeEndpointTypes(self: *Self, allocator: std.mem.Allocator, input: describe_endpoint_types.DescribeEndpointTypesInput, options: describe_endpoint_types.Options) !describe_endpoint_types.DescribeEndpointTypesOutput {
+    pub fn describeEndpointTypes(self: *Self, allocator: std.mem.Allocator, input: describe_endpoint_types.DescribeEndpointTypesInput, options: CallOptions) !describe_endpoint_types.DescribeEndpointTypesOutput {
         return describe_endpoint_types.execute(self, allocator, input, options);
     }
 
     /// Returns information about the endpoints for your account in the current
     /// region.
-    pub fn describeEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_endpoints.DescribeEndpointsInput, options: describe_endpoints.Options) !describe_endpoints.DescribeEndpointsOutput {
+    pub fn describeEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_endpoints.DescribeEndpointsInput, options: CallOptions) !describe_endpoints.DescribeEndpointsOutput {
         return describe_endpoints.execute(self, allocator, input, options);
     }
 
     /// Returns information about the replication instance versions used in the
     /// project.
-    pub fn describeEngineVersions(self: *Self, allocator: std.mem.Allocator, input: describe_engine_versions.DescribeEngineVersionsInput, options: describe_engine_versions.Options) !describe_engine_versions.DescribeEngineVersionsOutput {
+    pub fn describeEngineVersions(self: *Self, allocator: std.mem.Allocator, input: describe_engine_versions.DescribeEngineVersionsInput, options: CallOptions) !describe_engine_versions.DescribeEngineVersionsOutput {
         return describe_engine_versions.execute(self, allocator, input, options);
     }
 
@@ -583,7 +584,7 @@ pub const Client = struct {
     /// [Working with Events
     /// and
     /// Notifications](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html) in the *Database Migration Service User Guide.*
-    pub fn describeEventCategories(self: *Self, allocator: std.mem.Allocator, input: describe_event_categories.DescribeEventCategoriesInput, options: describe_event_categories.Options) !describe_event_categories.DescribeEventCategoriesOutput {
+    pub fn describeEventCategories(self: *Self, allocator: std.mem.Allocator, input: describe_event_categories.DescribeEventCategoriesInput, options: CallOptions) !describe_event_categories.DescribeEventCategoriesOutput {
         return describe_event_categories.execute(self, allocator, input, options);
     }
 
@@ -596,7 +597,7 @@ pub const Client = struct {
     /// If you specify `SubscriptionName`, this action lists the description for
     /// that
     /// subscription.
-    pub fn describeEventSubscriptions(self: *Self, allocator: std.mem.Allocator, input: describe_event_subscriptions.DescribeEventSubscriptionsInput, options: describe_event_subscriptions.Options) !describe_event_subscriptions.DescribeEventSubscriptionsOutput {
+    pub fn describeEventSubscriptions(self: *Self, allocator: std.mem.Allocator, input: describe_event_subscriptions.DescribeEventSubscriptionsInput, options: CallOptions) !describe_event_subscriptions.DescribeEventSubscriptionsOutput {
         return describe_event_subscriptions.execute(self, allocator, input, options);
     }
 
@@ -605,7 +606,7 @@ pub const Client = struct {
     /// start and end time. For more information on DMS events, see [Working with
     /// Events and
     /// Notifications](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html) in the *Database Migration Service User Guide.*
-    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: describe_events.Options) !describe_events.DescribeEventsOutput {
+    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: CallOptions) !describe_events.DescribeEventsOutput {
         return describe_events.execute(self, allocator, input, options);
     }
 
@@ -614,7 +615,7 @@ pub const Client = struct {
     /// project. An extension pack is an add-on module that emulates functions
     /// present in a source
     /// database that are required when converting objects to the target database.
-    pub fn describeExtensionPackAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_extension_pack_associations.DescribeExtensionPackAssociationsInput, options: describe_extension_pack_associations.Options) !describe_extension_pack_associations.DescribeExtensionPackAssociationsOutput {
+    pub fn describeExtensionPackAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_extension_pack_associations.DescribeExtensionPackAssociationsInput, options: CallOptions) !describe_extension_pack_associations.DescribeExtensionPackAssociationsOutput {
         return describe_extension_pack_associations.execute(self, allocator, input, options);
     }
 
@@ -626,7 +627,7 @@ pub const Client = struct {
     /// support](https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html).
     ///
     /// Returns a list of the Fleet Advisor collectors in your account.
-    pub fn describeFleetAdvisorCollectors(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_advisor_collectors.DescribeFleetAdvisorCollectorsInput, options: describe_fleet_advisor_collectors.Options) !describe_fleet_advisor_collectors.DescribeFleetAdvisorCollectorsOutput {
+    pub fn describeFleetAdvisorCollectors(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_advisor_collectors.DescribeFleetAdvisorCollectorsInput, options: CallOptions) !describe_fleet_advisor_collectors.DescribeFleetAdvisorCollectorsOutput {
         return describe_fleet_advisor_collectors.execute(self, allocator, input, options);
     }
 
@@ -638,7 +639,7 @@ pub const Client = struct {
     /// support](https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html).
     ///
     /// Returns a list of Fleet Advisor databases in your account.
-    pub fn describeFleetAdvisorDatabases(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_advisor_databases.DescribeFleetAdvisorDatabasesInput, options: describe_fleet_advisor_databases.Options) !describe_fleet_advisor_databases.DescribeFleetAdvisorDatabasesOutput {
+    pub fn describeFleetAdvisorDatabases(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_advisor_databases.DescribeFleetAdvisorDatabasesInput, options: CallOptions) !describe_fleet_advisor_databases.DescribeFleetAdvisorDatabasesOutput {
         return describe_fleet_advisor_databases.execute(self, allocator, input, options);
     }
 
@@ -652,7 +653,7 @@ pub const Client = struct {
     /// Provides descriptions of large-scale assessment (LSA) analyses produced by
     /// your Fleet
     /// Advisor collectors.
-    pub fn describeFleetAdvisorLsaAnalysis(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_advisor_lsa_analysis.DescribeFleetAdvisorLsaAnalysisInput, options: describe_fleet_advisor_lsa_analysis.Options) !describe_fleet_advisor_lsa_analysis.DescribeFleetAdvisorLsaAnalysisOutput {
+    pub fn describeFleetAdvisorLsaAnalysis(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_advisor_lsa_analysis.DescribeFleetAdvisorLsaAnalysisInput, options: CallOptions) !describe_fleet_advisor_lsa_analysis.DescribeFleetAdvisorLsaAnalysisOutput {
         return describe_fleet_advisor_lsa_analysis.execute(self, allocator, input, options);
     }
 
@@ -665,7 +666,7 @@ pub const Client = struct {
     ///
     /// Provides descriptions of the schemas discovered by your Fleet Advisor
     /// collectors.
-    pub fn describeFleetAdvisorSchemaObjectSummary(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_advisor_schema_object_summary.DescribeFleetAdvisorSchemaObjectSummaryInput, options: describe_fleet_advisor_schema_object_summary.Options) !describe_fleet_advisor_schema_object_summary.DescribeFleetAdvisorSchemaObjectSummaryOutput {
+    pub fn describeFleetAdvisorSchemaObjectSummary(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_advisor_schema_object_summary.DescribeFleetAdvisorSchemaObjectSummaryInput, options: CallOptions) !describe_fleet_advisor_schema_object_summary.DescribeFleetAdvisorSchemaObjectSummaryOutput {
         return describe_fleet_advisor_schema_object_summary.execute(self, allocator, input, options);
     }
 
@@ -678,82 +679,82 @@ pub const Client = struct {
     ///
     /// Returns a list of schemas detected by Fleet Advisor Collectors in your
     /// account.
-    pub fn describeFleetAdvisorSchemas(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_advisor_schemas.DescribeFleetAdvisorSchemasInput, options: describe_fleet_advisor_schemas.Options) !describe_fleet_advisor_schemas.DescribeFleetAdvisorSchemasOutput {
+    pub fn describeFleetAdvisorSchemas(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_advisor_schemas.DescribeFleetAdvisorSchemasInput, options: CallOptions) !describe_fleet_advisor_schemas.DescribeFleetAdvisorSchemasOutput {
         return describe_fleet_advisor_schemas.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of instance profiles for your account in the
     /// current
     /// region.
-    pub fn describeInstanceProfiles(self: *Self, allocator: std.mem.Allocator, input: describe_instance_profiles.DescribeInstanceProfilesInput, options: describe_instance_profiles.Options) !describe_instance_profiles.DescribeInstanceProfilesOutput {
+    pub fn describeInstanceProfiles(self: *Self, allocator: std.mem.Allocator, input: describe_instance_profiles.DescribeInstanceProfilesInput, options: CallOptions) !describe_instance_profiles.DescribeInstanceProfilesOutput {
         return describe_instance_profiles.execute(self, allocator, input, options);
     }
 
     /// Gets detailed information about the specified metadata model, including its
     /// definition and corresponding converted objects in the target database if
     /// applicable.
-    pub fn describeMetadataModel(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model.DescribeMetadataModelInput, options: describe_metadata_model.Options) !describe_metadata_model.DescribeMetadataModelOutput {
+    pub fn describeMetadataModel(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model.DescribeMetadataModelInput, options: CallOptions) !describe_metadata_model.DescribeMetadataModelOutput {
         return describe_metadata_model.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of metadata model assessments for your account in
     /// the current
     /// region.
-    pub fn describeMetadataModelAssessments(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_assessments.DescribeMetadataModelAssessmentsInput, options: describe_metadata_model_assessments.Options) !describe_metadata_model_assessments.DescribeMetadataModelAssessmentsOutput {
+    pub fn describeMetadataModelAssessments(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_assessments.DescribeMetadataModelAssessmentsInput, options: CallOptions) !describe_metadata_model_assessments.DescribeMetadataModelAssessmentsOutput {
         return describe_metadata_model_assessments.execute(self, allocator, input, options);
     }
 
     /// Gets a list of child metadata models for the specified metadata model in the
     /// database hierarchy.
-    pub fn describeMetadataModelChildren(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_children.DescribeMetadataModelChildrenInput, options: describe_metadata_model_children.Options) !describe_metadata_model_children.DescribeMetadataModelChildrenOutput {
+    pub fn describeMetadataModelChildren(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_children.DescribeMetadataModelChildrenInput, options: CallOptions) !describe_metadata_model_children.DescribeMetadataModelChildrenOutput {
         return describe_metadata_model_children.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of metadata model conversions for a migration
     /// project.
-    pub fn describeMetadataModelConversions(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_conversions.DescribeMetadataModelConversionsInput, options: describe_metadata_model_conversions.Options) !describe_metadata_model_conversions.DescribeMetadataModelConversionsOutput {
+    pub fn describeMetadataModelConversions(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_conversions.DescribeMetadataModelConversionsInput, options: CallOptions) !describe_metadata_model_conversions.DescribeMetadataModelConversionsOutput {
         return describe_metadata_model_conversions.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of metadata model creation requests for a migration
     /// project.
-    pub fn describeMetadataModelCreations(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_creations.DescribeMetadataModelCreationsInput, options: describe_metadata_model_creations.Options) !describe_metadata_model_creations.DescribeMetadataModelCreationsOutput {
+    pub fn describeMetadataModelCreations(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_creations.DescribeMetadataModelCreationsInput, options: CallOptions) !describe_metadata_model_creations.DescribeMetadataModelCreationsOutput {
         return describe_metadata_model_creations.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of metadata model exports.
-    pub fn describeMetadataModelExportsAsScript(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_exports_as_script.DescribeMetadataModelExportsAsScriptInput, options: describe_metadata_model_exports_as_script.Options) !describe_metadata_model_exports_as_script.DescribeMetadataModelExportsAsScriptOutput {
+    pub fn describeMetadataModelExportsAsScript(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_exports_as_script.DescribeMetadataModelExportsAsScriptInput, options: CallOptions) !describe_metadata_model_exports_as_script.DescribeMetadataModelExportsAsScriptOutput {
         return describe_metadata_model_exports_as_script.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of metadata model exports.
-    pub fn describeMetadataModelExportsToTarget(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_exports_to_target.DescribeMetadataModelExportsToTargetInput, options: describe_metadata_model_exports_to_target.Options) !describe_metadata_model_exports_to_target.DescribeMetadataModelExportsToTargetOutput {
+    pub fn describeMetadataModelExportsToTarget(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_exports_to_target.DescribeMetadataModelExportsToTargetInput, options: CallOptions) !describe_metadata_model_exports_to_target.DescribeMetadataModelExportsToTargetOutput {
         return describe_metadata_model_exports_to_target.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of metadata model imports.
-    pub fn describeMetadataModelImports(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_imports.DescribeMetadataModelImportsInput, options: describe_metadata_model_imports.Options) !describe_metadata_model_imports.DescribeMetadataModelImportsOutput {
+    pub fn describeMetadataModelImports(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_imports.DescribeMetadataModelImportsInput, options: CallOptions) !describe_metadata_model_imports.DescribeMetadataModelImportsOutput {
         return describe_metadata_model_imports.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of migration projects for your account in the
     /// current
     /// region.
-    pub fn describeMigrationProjects(self: *Self, allocator: std.mem.Allocator, input: describe_migration_projects.DescribeMigrationProjectsInput, options: describe_migration_projects.Options) !describe_migration_projects.DescribeMigrationProjectsOutput {
+    pub fn describeMigrationProjects(self: *Self, allocator: std.mem.Allocator, input: describe_migration_projects.DescribeMigrationProjectsInput, options: CallOptions) !describe_migration_projects.DescribeMigrationProjectsOutput {
         return describe_migration_projects.execute(self, allocator, input, options);
     }
 
     /// Returns information about the replication instance types that can be created
     /// in the
     /// specified region.
-    pub fn describeOrderableReplicationInstances(self: *Self, allocator: std.mem.Allocator, input: describe_orderable_replication_instances.DescribeOrderableReplicationInstancesInput, options: describe_orderable_replication_instances.Options) !describe_orderable_replication_instances.DescribeOrderableReplicationInstancesOutput {
+    pub fn describeOrderableReplicationInstances(self: *Self, allocator: std.mem.Allocator, input: describe_orderable_replication_instances.DescribeOrderableReplicationInstancesInput, options: CallOptions) !describe_orderable_replication_instances.DescribeOrderableReplicationInstancesOutput {
         return describe_orderable_replication_instances.execute(self, allocator, input, options);
     }
 
     /// Returns a list of upcoming maintenance events for replication instances in
     /// your account
     /// in the current Region.
-    pub fn describePendingMaintenanceActions(self: *Self, allocator: std.mem.Allocator, input: describe_pending_maintenance_actions.DescribePendingMaintenanceActionsInput, options: describe_pending_maintenance_actions.Options) !describe_pending_maintenance_actions.DescribePendingMaintenanceActionsOutput {
+    pub fn describePendingMaintenanceActions(self: *Self, allocator: std.mem.Allocator, input: describe_pending_maintenance_actions.DescribePendingMaintenanceActionsInput, options: CallOptions) !describe_pending_maintenance_actions.DescribePendingMaintenanceActionsOutput {
         return describe_pending_maintenance_actions.execute(self, allocator, input, options);
     }
 
@@ -767,7 +768,7 @@ pub const Client = struct {
     /// Returns a paginated list of limitations for recommendations of target Amazon
     /// Web Services
     /// engines.
-    pub fn describeRecommendationLimitations(self: *Self, allocator: std.mem.Allocator, input: describe_recommendation_limitations.DescribeRecommendationLimitationsInput, options: describe_recommendation_limitations.Options) !describe_recommendation_limitations.DescribeRecommendationLimitationsOutput {
+    pub fn describeRecommendationLimitations(self: *Self, allocator: std.mem.Allocator, input: describe_recommendation_limitations.DescribeRecommendationLimitationsInput, options: CallOptions) !describe_recommendation_limitations.DescribeRecommendationLimitationsOutput {
         return describe_recommendation_limitations.execute(self, allocator, input, options);
     }
 
@@ -780,43 +781,43 @@ pub const Client = struct {
     ///
     /// Returns a paginated list of target engine recommendations for your source
     /// databases.
-    pub fn describeRecommendations(self: *Self, allocator: std.mem.Allocator, input: describe_recommendations.DescribeRecommendationsInput, options: describe_recommendations.Options) !describe_recommendations.DescribeRecommendationsOutput {
+    pub fn describeRecommendations(self: *Self, allocator: std.mem.Allocator, input: describe_recommendations.DescribeRecommendationsInput, options: CallOptions) !describe_recommendations.DescribeRecommendationsOutput {
         return describe_recommendations.execute(self, allocator, input, options);
     }
 
     /// Returns the status of the RefreshSchemas operation.
-    pub fn describeRefreshSchemasStatus(self: *Self, allocator: std.mem.Allocator, input: describe_refresh_schemas_status.DescribeRefreshSchemasStatusInput, options: describe_refresh_schemas_status.Options) !describe_refresh_schemas_status.DescribeRefreshSchemasStatusOutput {
+    pub fn describeRefreshSchemasStatus(self: *Self, allocator: std.mem.Allocator, input: describe_refresh_schemas_status.DescribeRefreshSchemasStatusInput, options: CallOptions) !describe_refresh_schemas_status.DescribeRefreshSchemasStatusOutput {
         return describe_refresh_schemas_status.execute(self, allocator, input, options);
     }
 
     /// Returns one or more existing DMS Serverless replication configurations as a
     /// list of
     /// structures.
-    pub fn describeReplicationConfigs(self: *Self, allocator: std.mem.Allocator, input: describe_replication_configs.DescribeReplicationConfigsInput, options: describe_replication_configs.Options) !describe_replication_configs.DescribeReplicationConfigsOutput {
+    pub fn describeReplicationConfigs(self: *Self, allocator: std.mem.Allocator, input: describe_replication_configs.DescribeReplicationConfigsInput, options: CallOptions) !describe_replication_configs.DescribeReplicationConfigsOutput {
         return describe_replication_configs.execute(self, allocator, input, options);
     }
 
     /// Returns information about the task logs for the specified task.
-    pub fn describeReplicationInstanceTaskLogs(self: *Self, allocator: std.mem.Allocator, input: describe_replication_instance_task_logs.DescribeReplicationInstanceTaskLogsInput, options: describe_replication_instance_task_logs.Options) !describe_replication_instance_task_logs.DescribeReplicationInstanceTaskLogsOutput {
+    pub fn describeReplicationInstanceTaskLogs(self: *Self, allocator: std.mem.Allocator, input: describe_replication_instance_task_logs.DescribeReplicationInstanceTaskLogsInput, options: CallOptions) !describe_replication_instance_task_logs.DescribeReplicationInstanceTaskLogsOutput {
         return describe_replication_instance_task_logs.execute(self, allocator, input, options);
     }
 
     /// Returns information about replication instances for your account in the
     /// current
     /// region.
-    pub fn describeReplicationInstances(self: *Self, allocator: std.mem.Allocator, input: describe_replication_instances.DescribeReplicationInstancesInput, options: describe_replication_instances.Options) !describe_replication_instances.DescribeReplicationInstancesOutput {
+    pub fn describeReplicationInstances(self: *Self, allocator: std.mem.Allocator, input: describe_replication_instances.DescribeReplicationInstancesInput, options: CallOptions) !describe_replication_instances.DescribeReplicationInstancesOutput {
         return describe_replication_instances.execute(self, allocator, input, options);
     }
 
     /// Returns information about the replication subnet groups.
-    pub fn describeReplicationSubnetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_replication_subnet_groups.DescribeReplicationSubnetGroupsInput, options: describe_replication_subnet_groups.Options) !describe_replication_subnet_groups.DescribeReplicationSubnetGroupsOutput {
+    pub fn describeReplicationSubnetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_replication_subnet_groups.DescribeReplicationSubnetGroupsInput, options: CallOptions) !describe_replication_subnet_groups.DescribeReplicationSubnetGroupsOutput {
         return describe_replication_subnet_groups.execute(self, allocator, input, options);
     }
 
     /// Returns table and schema statistics for one or more provisioned replications
     /// that use a
     /// given DMS Serverless replication configuration.
-    pub fn describeReplicationTableStatistics(self: *Self, allocator: std.mem.Allocator, input: describe_replication_table_statistics.DescribeReplicationTableStatisticsInput, options: describe_replication_table_statistics.Options) !describe_replication_table_statistics.DescribeReplicationTableStatisticsOutput {
+    pub fn describeReplicationTableStatistics(self: *Self, allocator: std.mem.Allocator, input: describe_replication_table_statistics.DescribeReplicationTableStatisticsInput, options: CallOptions) !describe_replication_table_statistics.DescribeReplicationTableStatisticsOutput {
         return describe_replication_table_statistics.execute(self, allocator, input, options);
     }
 
@@ -827,7 +828,7 @@ pub const Client = struct {
     /// For more information about DMS task assessments, see [Creating a task
     /// assessment
     /// report](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html) in the *Database Migration Service User Guide*.
-    pub fn describeReplicationTaskAssessmentResults(self: *Self, allocator: std.mem.Allocator, input: describe_replication_task_assessment_results.DescribeReplicationTaskAssessmentResultsInput, options: describe_replication_task_assessment_results.Options) !describe_replication_task_assessment_results.DescribeReplicationTaskAssessmentResultsOutput {
+    pub fn describeReplicationTaskAssessmentResults(self: *Self, allocator: std.mem.Allocator, input: describe_replication_task_assessment_results.DescribeReplicationTaskAssessmentResultsInput, options: CallOptions) !describe_replication_task_assessment_results.DescribeReplicationTaskAssessmentResultsOutput {
         return describe_replication_task_assessment_results.execute(self, allocator, input, options);
     }
 
@@ -842,7 +843,7 @@ pub const Client = struct {
     /// this
     /// information, see the `DescribeReplicationTaskIndividualAssessments`
     /// operation.
-    pub fn describeReplicationTaskAssessmentRuns(self: *Self, allocator: std.mem.Allocator, input: describe_replication_task_assessment_runs.DescribeReplicationTaskAssessmentRunsInput, options: describe_replication_task_assessment_runs.Options) !describe_replication_task_assessment_runs.DescribeReplicationTaskAssessmentRunsOutput {
+    pub fn describeReplicationTaskAssessmentRuns(self: *Self, allocator: std.mem.Allocator, input: describe_replication_task_assessment_runs.DescribeReplicationTaskAssessmentRunsInput, options: CallOptions) !describe_replication_task_assessment_runs.DescribeReplicationTaskAssessmentRunsOutput {
         return describe_replication_task_assessment_runs.execute(self, allocator, input, options);
     }
 
@@ -851,25 +852,25 @@ pub const Client = struct {
     /// These filter settings can specify a combination of premigration assessment
     /// runs,
     /// migration tasks, and assessment status values.
-    pub fn describeReplicationTaskIndividualAssessments(self: *Self, allocator: std.mem.Allocator, input: describe_replication_task_individual_assessments.DescribeReplicationTaskIndividualAssessmentsInput, options: describe_replication_task_individual_assessments.Options) !describe_replication_task_individual_assessments.DescribeReplicationTaskIndividualAssessmentsOutput {
+    pub fn describeReplicationTaskIndividualAssessments(self: *Self, allocator: std.mem.Allocator, input: describe_replication_task_individual_assessments.DescribeReplicationTaskIndividualAssessmentsInput, options: CallOptions) !describe_replication_task_individual_assessments.DescribeReplicationTaskIndividualAssessmentsOutput {
         return describe_replication_task_individual_assessments.execute(self, allocator, input, options);
     }
 
     /// Returns information about replication tasks for your account in the current
     /// region.
-    pub fn describeReplicationTasks(self: *Self, allocator: std.mem.Allocator, input: describe_replication_tasks.DescribeReplicationTasksInput, options: describe_replication_tasks.Options) !describe_replication_tasks.DescribeReplicationTasksOutput {
+    pub fn describeReplicationTasks(self: *Self, allocator: std.mem.Allocator, input: describe_replication_tasks.DescribeReplicationTasksInput, options: CallOptions) !describe_replication_tasks.DescribeReplicationTasksOutput {
         return describe_replication_tasks.execute(self, allocator, input, options);
     }
 
     /// Provides details on replication progress by returning status information for
     /// one or more
     /// provisioned DMS Serverless replications.
-    pub fn describeReplications(self: *Self, allocator: std.mem.Allocator, input: describe_replications.DescribeReplicationsInput, options: describe_replications.Options) !describe_replications.DescribeReplicationsOutput {
+    pub fn describeReplications(self: *Self, allocator: std.mem.Allocator, input: describe_replications.DescribeReplicationsInput, options: CallOptions) !describe_replications.DescribeReplicationsOutput {
         return describe_replications.execute(self, allocator, input, options);
     }
 
     /// Returns information about the schema for the specified endpoint.
-    pub fn describeSchemas(self: *Self, allocator: std.mem.Allocator, input: describe_schemas.DescribeSchemasInput, options: describe_schemas.Options) !describe_schemas.DescribeSchemasOutput {
+    pub fn describeSchemas(self: *Self, allocator: std.mem.Allocator, input: describe_schemas.DescribeSchemasInput, options: CallOptions) !describe_schemas.DescribeSchemasOutput {
         return describe_schemas.execute(self, allocator, input, options);
     }
 
@@ -882,25 +883,25 @@ pub const Client = struct {
     /// last updated the table statistics record for a table. It does not indicate
     /// the time of the
     /// last update to the table.
-    pub fn describeTableStatistics(self: *Self, allocator: std.mem.Allocator, input: describe_table_statistics.DescribeTableStatisticsInput, options: describe_table_statistics.Options) !describe_table_statistics.DescribeTableStatisticsOutput {
+    pub fn describeTableStatistics(self: *Self, allocator: std.mem.Allocator, input: describe_table_statistics.DescribeTableStatisticsInput, options: CallOptions) !describe_table_statistics.DescribeTableStatisticsOutput {
         return describe_table_statistics.execute(self, allocator, input, options);
     }
 
     /// Saves a copy of a database migration assessment report to your Amazon S3
     /// bucket. DMS can
     /// save your assessment report as a comma-separated value (CSV) or a PDF file.
-    pub fn exportMetadataModelAssessment(self: *Self, allocator: std.mem.Allocator, input: export_metadata_model_assessment.ExportMetadataModelAssessmentInput, options: export_metadata_model_assessment.Options) !export_metadata_model_assessment.ExportMetadataModelAssessmentOutput {
+    pub fn exportMetadataModelAssessment(self: *Self, allocator: std.mem.Allocator, input: export_metadata_model_assessment.ExportMetadataModelAssessmentInput, options: CallOptions) !export_metadata_model_assessment.ExportMetadataModelAssessmentOutput {
         return export_metadata_model_assessment.execute(self, allocator, input, options);
     }
 
     /// Converts source selection rules into their target counterparts for schema
     /// conversion operations.
-    pub fn getTargetSelectionRules(self: *Self, allocator: std.mem.Allocator, input: get_target_selection_rules.GetTargetSelectionRulesInput, options: get_target_selection_rules.Options) !get_target_selection_rules.GetTargetSelectionRulesOutput {
+    pub fn getTargetSelectionRules(self: *Self, allocator: std.mem.Allocator, input: get_target_selection_rules.GetTargetSelectionRulesInput, options: CallOptions) !get_target_selection_rules.GetTargetSelectionRulesOutput {
         return get_target_selection_rules.execute(self, allocator, input, options);
     }
 
     /// Uploads the specified certificate.
-    pub fn importCertificate(self: *Self, allocator: std.mem.Allocator, input: import_certificate.ImportCertificateInput, options: import_certificate.Options) !import_certificate.ImportCertificateOutput {
+    pub fn importCertificate(self: *Self, allocator: std.mem.Allocator, input: import_certificate.ImportCertificateInput, options: CallOptions) !import_certificate.ImportCertificateOutput {
         return import_certificate.execute(self, allocator, input, options);
     }
 
@@ -910,18 +911,18 @@ pub const Client = struct {
     /// `Tag`
     /// ](https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html)
     /// data type description.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Modifies the specified schema conversion configuration using the provided
     /// parameters.
-    pub fn modifyConversionConfiguration(self: *Self, allocator: std.mem.Allocator, input: modify_conversion_configuration.ModifyConversionConfigurationInput, options: modify_conversion_configuration.Options) !modify_conversion_configuration.ModifyConversionConfigurationOutput {
+    pub fn modifyConversionConfiguration(self: *Self, allocator: std.mem.Allocator, input: modify_conversion_configuration.ModifyConversionConfigurationInput, options: CallOptions) !modify_conversion_configuration.ModifyConversionConfigurationOutput {
         return modify_conversion_configuration.execute(self, allocator, input, options);
     }
 
     /// Modifies an existing DMS data migration.
-    pub fn modifyDataMigration(self: *Self, allocator: std.mem.Allocator, input: modify_data_migration.ModifyDataMigrationInput, options: modify_data_migration.Options) !modify_data_migration.ModifyDataMigrationOutput {
+    pub fn modifyDataMigration(self: *Self, allocator: std.mem.Allocator, input: modify_data_migration.ModifyDataMigrationInput, options: CallOptions) !modify_data_migration.ModifyDataMigrationOutput {
         return modify_data_migration.execute(self, allocator, input, options);
     }
 
@@ -930,7 +931,7 @@ pub const Client = struct {
     /// You must remove the data provider from all migration projects before you can
     /// modify
     /// it.
-    pub fn modifyDataProvider(self: *Self, allocator: std.mem.Allocator, input: modify_data_provider.ModifyDataProviderInput, options: modify_data_provider.Options) !modify_data_provider.ModifyDataProviderOutput {
+    pub fn modifyDataProvider(self: *Self, allocator: std.mem.Allocator, input: modify_data_provider.ModifyDataProviderInput, options: CallOptions) !modify_data_provider.ModifyDataProviderOutput {
         return modify_data_provider.execute(self, allocator, input, options);
     }
 
@@ -945,12 +946,12 @@ pub const Client = struct {
     /// database only when you specify the schema in the table-mapping rules of the
     /// DMS
     /// task.
-    pub fn modifyEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_endpoint.ModifyEndpointInput, options: modify_endpoint.Options) !modify_endpoint.ModifyEndpointOutput {
+    pub fn modifyEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_endpoint.ModifyEndpointInput, options: CallOptions) !modify_endpoint.ModifyEndpointOutput {
         return modify_endpoint.execute(self, allocator, input, options);
     }
 
     /// Modifies an existing DMS event notification subscription.
-    pub fn modifyEventSubscription(self: *Self, allocator: std.mem.Allocator, input: modify_event_subscription.ModifyEventSubscriptionInput, options: modify_event_subscription.Options) !modify_event_subscription.ModifyEventSubscriptionOutput {
+    pub fn modifyEventSubscription(self: *Self, allocator: std.mem.Allocator, input: modify_event_subscription.ModifyEventSubscriptionInput, options: CallOptions) !modify_event_subscription.ModifyEventSubscriptionOutput {
         return modify_event_subscription.execute(self, allocator, input, options);
     }
 
@@ -959,14 +960,14 @@ pub const Client = struct {
     /// All migration projects associated with the instance profile must be deleted
     /// or
     /// modified before you can modify the instance profile.
-    pub fn modifyInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: modify_instance_profile.ModifyInstanceProfileInput, options: modify_instance_profile.Options) !modify_instance_profile.ModifyInstanceProfileOutput {
+    pub fn modifyInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: modify_instance_profile.ModifyInstanceProfileInput, options: CallOptions) !modify_instance_profile.ModifyInstanceProfileOutput {
         return modify_instance_profile.execute(self, allocator, input, options);
     }
 
     /// Modifies the specified migration project using the provided parameters.
     ///
     /// The migration project must be closed before you can modify it.
-    pub fn modifyMigrationProject(self: *Self, allocator: std.mem.Allocator, input: modify_migration_project.ModifyMigrationProjectInput, options: modify_migration_project.Options) !modify_migration_project.ModifyMigrationProjectOutput {
+    pub fn modifyMigrationProject(self: *Self, allocator: std.mem.Allocator, input: modify_migration_project.ModifyMigrationProjectInput, options: CallOptions) !modify_migration_project.ModifyMigrationProjectOutput {
         return modify_migration_project.execute(self, allocator, input, options);
     }
 
@@ -985,7 +986,7 @@ pub const Client = struct {
     /// Other run statuses that allow you to run this command include FAILED and
     /// CREATED. A
     /// provisioning state that allows you to run this command is FAILED_PROVISION.
-    pub fn modifyReplicationConfig(self: *Self, allocator: std.mem.Allocator, input: modify_replication_config.ModifyReplicationConfigInput, options: modify_replication_config.Options) !modify_replication_config.ModifyReplicationConfigOutput {
+    pub fn modifyReplicationConfig(self: *Self, allocator: std.mem.Allocator, input: modify_replication_config.ModifyReplicationConfigInput, options: CallOptions) !modify_replication_config.ModifyReplicationConfigOutput {
         return modify_replication_config.execute(self, allocator, input, options);
     }
 
@@ -994,12 +995,12 @@ pub const Client = struct {
     /// parameters by specifying these parameters and the new values in the request.
     ///
     /// Some settings are applied during the maintenance window.
-    pub fn modifyReplicationInstance(self: *Self, allocator: std.mem.Allocator, input: modify_replication_instance.ModifyReplicationInstanceInput, options: modify_replication_instance.Options) !modify_replication_instance.ModifyReplicationInstanceOutput {
+    pub fn modifyReplicationInstance(self: *Self, allocator: std.mem.Allocator, input: modify_replication_instance.ModifyReplicationInstanceInput, options: CallOptions) !modify_replication_instance.ModifyReplicationInstanceOutput {
         return modify_replication_instance.execute(self, allocator, input, options);
     }
 
     /// Modifies the settings for the specified replication subnet group.
-    pub fn modifyReplicationSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: modify_replication_subnet_group.ModifyReplicationSubnetGroupInput, options: modify_replication_subnet_group.Options) !modify_replication_subnet_group.ModifyReplicationSubnetGroupOutput {
+    pub fn modifyReplicationSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: modify_replication_subnet_group.ModifyReplicationSubnetGroupInput, options: CallOptions) !modify_replication_subnet_group.ModifyReplicationSubnetGroupOutput {
         return modify_replication_subnet_group.execute(self, allocator, input, options);
     }
 
@@ -1012,7 +1013,7 @@ pub const Client = struct {
     /// Tasks](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html) in
     /// the
     /// *Database Migration Service User Guide*.
-    pub fn modifyReplicationTask(self: *Self, allocator: std.mem.Allocator, input: modify_replication_task.ModifyReplicationTaskInput, options: modify_replication_task.Options) !modify_replication_task.ModifyReplicationTaskOutput {
+    pub fn modifyReplicationTask(self: *Self, allocator: std.mem.Allocator, input: modify_replication_task.ModifyReplicationTaskInput, options: CallOptions) !modify_replication_task.ModifyReplicationTaskOutput {
         return modify_replication_task.execute(self, allocator, input, options);
     }
 
@@ -1022,14 +1023,14 @@ pub const Client = struct {
     /// instance must
     /// be created with the same or later DMS version as the current replication
     /// instance.
-    pub fn moveReplicationTask(self: *Self, allocator: std.mem.Allocator, input: move_replication_task.MoveReplicationTaskInput, options: move_replication_task.Options) !move_replication_task.MoveReplicationTaskOutput {
+    pub fn moveReplicationTask(self: *Self, allocator: std.mem.Allocator, input: move_replication_task.MoveReplicationTaskInput, options: CallOptions) !move_replication_task.MoveReplicationTaskOutput {
         return move_replication_task.execute(self, allocator, input, options);
     }
 
     /// Reboots a replication instance. Rebooting results in a momentary outage,
     /// until the
     /// replication instance becomes available again.
-    pub fn rebootReplicationInstance(self: *Self, allocator: std.mem.Allocator, input: reboot_replication_instance.RebootReplicationInstanceInput, options: reboot_replication_instance.Options) !reboot_replication_instance.RebootReplicationInstanceOutput {
+    pub fn rebootReplicationInstance(self: *Self, allocator: std.mem.Allocator, input: reboot_replication_instance.RebootReplicationInstanceInput, options: CallOptions) !reboot_replication_instance.RebootReplicationInstanceOutput {
         return reboot_replication_instance.execute(self, allocator, input, options);
     }
 
@@ -1038,7 +1039,7 @@ pub const Client = struct {
     /// can take several minutes. You can check the status of this operation by
     /// calling the
     /// DescribeRefreshSchemasStatus operation.
-    pub fn refreshSchemas(self: *Self, allocator: std.mem.Allocator, input: refresh_schemas.RefreshSchemasInput, options: refresh_schemas.Options) !refresh_schemas.RefreshSchemasOutput {
+    pub fn refreshSchemas(self: *Self, allocator: std.mem.Allocator, input: refresh_schemas.RefreshSchemasInput, options: CallOptions) !refresh_schemas.RefreshSchemasOutput {
         return refresh_schemas.execute(self, allocator, input, options);
     }
 
@@ -1049,7 +1050,7 @@ pub const Client = struct {
     /// You can only use this operation with a task in the RUNNING state, otherwise
     /// the service
     /// will throw an `InvalidResourceStateFault` exception.
-    pub fn reloadReplicationTables(self: *Self, allocator: std.mem.Allocator, input: reload_replication_tables.ReloadReplicationTablesInput, options: reload_replication_tables.Options) !reload_replication_tables.ReloadReplicationTablesOutput {
+    pub fn reloadReplicationTables(self: *Self, allocator: std.mem.Allocator, input: reload_replication_tables.ReloadReplicationTablesInput, options: CallOptions) !reload_replication_tables.ReloadReplicationTablesOutput {
         return reload_replication_tables.execute(self, allocator, input, options);
     }
 
@@ -1058,7 +1059,7 @@ pub const Client = struct {
     /// You can only use this operation with a task in the `RUNNING` state,
     /// otherwise
     /// the service will throw an `InvalidResourceStateFault` exception.
-    pub fn reloadTables(self: *Self, allocator: std.mem.Allocator, input: reload_tables.ReloadTablesInput, options: reload_tables.Options) !reload_tables.ReloadTablesOutput {
+    pub fn reloadTables(self: *Self, allocator: std.mem.Allocator, input: reload_tables.ReloadTablesInput, options: CallOptions) !reload_tables.ReloadTablesOutput {
         return reload_tables.execute(self, allocator, input, options);
     }
 
@@ -1069,7 +1070,7 @@ pub const Client = struct {
     /// ](https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html) data
     /// type
     /// description.
-    pub fn removeTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_resource.RemoveTagsFromResourceInput, options: remove_tags_from_resource.Options) !remove_tags_from_resource.RemoveTagsFromResourceOutput {
+    pub fn removeTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_resource.RemoveTagsFromResourceInput, options: CallOptions) !remove_tags_from_resource.RemoveTagsFromResourceOutput {
         return remove_tags_from_resource.execute(self, allocator, input, options);
     }
 
@@ -1082,12 +1083,12 @@ pub const Client = struct {
     ///
     /// Runs large-scale assessment (LSA) analysis on every Fleet Advisor collector
     /// in your account.
-    pub fn runFleetAdvisorLsaAnalysis(self: *Self, allocator: std.mem.Allocator, input: run_fleet_advisor_lsa_analysis.RunFleetAdvisorLsaAnalysisInput, options: run_fleet_advisor_lsa_analysis.Options) !run_fleet_advisor_lsa_analysis.RunFleetAdvisorLsaAnalysisOutput {
+    pub fn runFleetAdvisorLsaAnalysis(self: *Self, allocator: std.mem.Allocator, input: run_fleet_advisor_lsa_analysis.RunFleetAdvisorLsaAnalysisInput, options: CallOptions) !run_fleet_advisor_lsa_analysis.RunFleetAdvisorLsaAnalysisOutput {
         return run_fleet_advisor_lsa_analysis.execute(self, allocator, input, options);
     }
 
     /// Starts the specified data migration.
-    pub fn startDataMigration(self: *Self, allocator: std.mem.Allocator, input: start_data_migration.StartDataMigrationInput, options: start_data_migration.Options) !start_data_migration.StartDataMigrationOutput {
+    pub fn startDataMigration(self: *Self, allocator: std.mem.Allocator, input: start_data_migration.StartDataMigrationInput, options: CallOptions) !start_data_migration.StartDataMigrationOutput {
         return start_data_migration.execute(self, allocator, input, options);
     }
 
@@ -1096,7 +1097,7 @@ pub const Client = struct {
     /// module that emulates functions present in a source database that are
     /// required when
     /// converting objects to the target database.
-    pub fn startExtensionPackAssociation(self: *Self, allocator: std.mem.Allocator, input: start_extension_pack_association.StartExtensionPackAssociationInput, options: start_extension_pack_association.Options) !start_extension_pack_association.StartExtensionPackAssociationOutput {
+    pub fn startExtensionPackAssociation(self: *Self, allocator: std.mem.Allocator, input: start_extension_pack_association.StartExtensionPackAssociationInput, options: CallOptions) !start_extension_pack_association.StartExtensionPackAssociationOutput {
         return start_extension_pack_association.execute(self, allocator, input, options);
     }
 
@@ -1107,13 +1108,13 @@ pub const Client = struct {
     /// conversion tasks. It also details the action items for database objects that
     /// can't be
     /// converted to the database engine of your target database instance.
-    pub fn startMetadataModelAssessment(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_assessment.StartMetadataModelAssessmentInput, options: start_metadata_model_assessment.Options) !start_metadata_model_assessment.StartMetadataModelAssessmentOutput {
+    pub fn startMetadataModelAssessment(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_assessment.StartMetadataModelAssessmentInput, options: CallOptions) !start_metadata_model_assessment.StartMetadataModelAssessmentOutput {
         return start_metadata_model_assessment.execute(self, allocator, input, options);
     }
 
     /// Converts your source database objects to a format compatible with the target
     /// database.
-    pub fn startMetadataModelConversion(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_conversion.StartMetadataModelConversionInput, options: start_metadata_model_conversion.Options) !start_metadata_model_conversion.StartMetadataModelConversionOutput {
+    pub fn startMetadataModelConversion(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_conversion.StartMetadataModelConversionInput, options: CallOptions) !start_metadata_model_conversion.StartMetadataModelConversionOutput {
         return start_metadata_model_conversion.execute(self, allocator, input, options);
     }
 
@@ -1122,19 +1123,19 @@ pub const Client = struct {
     ///
     /// This action supports only these directions: from SQL Server to Aurora
     /// PostgreSQL, or from SQL Server to RDS for PostgreSQL.
-    pub fn startMetadataModelCreation(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_creation.StartMetadataModelCreationInput, options: start_metadata_model_creation.Options) !start_metadata_model_creation.StartMetadataModelCreationOutput {
+    pub fn startMetadataModelCreation(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_creation.StartMetadataModelCreationInput, options: CallOptions) !start_metadata_model_creation.StartMetadataModelCreationOutput {
         return start_metadata_model_creation.execute(self, allocator, input, options);
     }
 
     /// Saves your converted code to a file as a SQL script, and stores this file on
     /// your Amazon S3
     /// bucket.
-    pub fn startMetadataModelExportAsScript(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_export_as_script.StartMetadataModelExportAsScriptInput, options: start_metadata_model_export_as_script.Options) !start_metadata_model_export_as_script.StartMetadataModelExportAsScriptOutput {
+    pub fn startMetadataModelExportAsScript(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_export_as_script.StartMetadataModelExportAsScriptInput, options: CallOptions) !start_metadata_model_export_as_script.StartMetadataModelExportAsScriptOutput {
         return start_metadata_model_export_as_script.execute(self, allocator, input, options);
     }
 
     /// Applies converted database objects to your target database.
-    pub fn startMetadataModelExportToTarget(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_export_to_target.StartMetadataModelExportToTargetInput, options: start_metadata_model_export_to_target.Options) !start_metadata_model_export_to_target.StartMetadataModelExportToTargetOutput {
+    pub fn startMetadataModelExportToTarget(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_export_to_target.StartMetadataModelExportToTargetInput, options: CallOptions) !start_metadata_model_export_to_target.StartMetadataModelExportToTargetOutput {
         return start_metadata_model_export_to_target.execute(self, allocator, input, options);
     }
 
@@ -1144,7 +1145,7 @@ pub const Client = struct {
     /// This operation uses your project's Amazon S3 bucket as a metadata cache to
     /// improve
     /// performance.
-    pub fn startMetadataModelImport(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_import.StartMetadataModelImportInput, options: start_metadata_model_import.Options) !start_metadata_model_import.StartMetadataModelImportOutput {
+    pub fn startMetadataModelImport(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_import.StartMetadataModelImportInput, options: CallOptions) !start_metadata_model_import.StartMetadataModelImportOutput {
         return start_metadata_model_import.execute(self, allocator, input, options);
     }
 
@@ -1161,7 +1162,7 @@ pub const Client = struct {
     ///
     /// You can create recommendations for multiple source databases using
     /// [BatchStartRecommendations](https://docs.aws.amazon.com/dms/latest/APIReference/API_BatchStartRecommendations.html).
-    pub fn startRecommendations(self: *Self, allocator: std.mem.Allocator, input: start_recommendations.StartRecommendationsInput, options: start_recommendations.Options) !start_recommendations.StartRecommendationsOutput {
+    pub fn startRecommendations(self: *Self, allocator: std.mem.Allocator, input: start_recommendations.StartRecommendationsInput, options: CallOptions) !start_recommendations.StartRecommendationsOutput {
         return start_recommendations.execute(self, allocator, input, options);
     }
 
@@ -1174,7 +1175,7 @@ pub const Client = struct {
     /// to the target endpoint using the server resources that DMS has provisioned
     /// for the DMS
     /// Serverless replication.
-    pub fn startReplication(self: *Self, allocator: std.mem.Allocator, input: start_replication.StartReplicationInput, options: start_replication.Options) !start_replication.StartReplicationOutput {
+    pub fn startReplication(self: *Self, allocator: std.mem.Allocator, input: start_replication.StartReplicationInput, options: CallOptions) !start_replication.StartReplicationOutput {
         return start_replication.execute(self, allocator, input, options);
     }
 
@@ -1183,7 +1184,7 @@ pub const Client = struct {
     /// For more information about DMS tasks, see [Working with Migration Tasks
     /// ](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html) in the
     /// *Database Migration Service User Guide.*
-    pub fn startReplicationTask(self: *Self, allocator: std.mem.Allocator, input: start_replication_task.StartReplicationTaskInput, options: start_replication_task.Options) !start_replication_task.StartReplicationTaskOutput {
+    pub fn startReplicationTask(self: *Self, allocator: std.mem.Allocator, input: start_replication_task.StartReplicationTaskInput, options: CallOptions) !start_replication_task.StartReplicationTaskOutput {
         return start_replication_task.execute(self, allocator, input, options);
     }
 
@@ -1204,7 +1205,7 @@ pub const Client = struct {
     /// For information about DMS task assessments, see [Creating a task assessment
     /// report](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html) in the *Database Migration Service User
     /// Guide*.
-    pub fn startReplicationTaskAssessment(self: *Self, allocator: std.mem.Allocator, input: start_replication_task_assessment.StartReplicationTaskAssessmentInput, options: start_replication_task_assessment.Options) !start_replication_task_assessment.StartReplicationTaskAssessmentOutput {
+    pub fn startReplicationTaskAssessment(self: *Self, allocator: std.mem.Allocator, input: start_replication_task_assessment.StartReplicationTaskAssessmentInput, options: CallOptions) !start_replication_task_assessment.StartReplicationTaskAssessmentOutput {
         return start_replication_task_assessment.execute(self, allocator, input, options);
     }
 
@@ -1221,12 +1222,12 @@ pub const Client = struct {
     /// individual assessment. You can also run the migration task manually after
     /// the assessment
     /// run and its individual assessments complete.
-    pub fn startReplicationTaskAssessmentRun(self: *Self, allocator: std.mem.Allocator, input: start_replication_task_assessment_run.StartReplicationTaskAssessmentRunInput, options: start_replication_task_assessment_run.Options) !start_replication_task_assessment_run.StartReplicationTaskAssessmentRunOutput {
+    pub fn startReplicationTaskAssessmentRun(self: *Self, allocator: std.mem.Allocator, input: start_replication_task_assessment_run.StartReplicationTaskAssessmentRunInput, options: CallOptions) !start_replication_task_assessment_run.StartReplicationTaskAssessmentRunOutput {
         return start_replication_task_assessment_run.execute(self, allocator, input, options);
     }
 
     /// Stops the specified data migration.
-    pub fn stopDataMigration(self: *Self, allocator: std.mem.Allocator, input: stop_data_migration.StopDataMigrationInput, options: stop_data_migration.Options) !stop_data_migration.StopDataMigrationOutput {
+    pub fn stopDataMigration(self: *Self, allocator: std.mem.Allocator, input: stop_data_migration.StopDataMigrationInput, options: CallOptions) !stop_data_migration.StopDataMigrationOutput {
         return stop_data_migration.execute(self, allocator, input, options);
     }
 
@@ -1234,17 +1235,17 @@ pub const Client = struct {
     /// ongoing
     /// DMS Serverless replications. This command doesn't deprovision the stopped
     /// replications.
-    pub fn stopReplication(self: *Self, allocator: std.mem.Allocator, input: stop_replication.StopReplicationInput, options: stop_replication.Options) !stop_replication.StopReplicationOutput {
+    pub fn stopReplication(self: *Self, allocator: std.mem.Allocator, input: stop_replication.StopReplicationInput, options: CallOptions) !stop_replication.StopReplicationOutput {
         return stop_replication.execute(self, allocator, input, options);
     }
 
     /// Stops the replication task.
-    pub fn stopReplicationTask(self: *Self, allocator: std.mem.Allocator, input: stop_replication_task.StopReplicationTaskInput, options: stop_replication_task.Options) !stop_replication_task.StopReplicationTaskOutput {
+    pub fn stopReplicationTask(self: *Self, allocator: std.mem.Allocator, input: stop_replication_task.StopReplicationTaskInput, options: CallOptions) !stop_replication_task.StopReplicationTaskOutput {
         return stop_replication_task.execute(self, allocator, input, options);
     }
 
     /// Tests the connection between the replication instance and the endpoint.
-    pub fn testConnection(self: *Self, allocator: std.mem.Allocator, input: test_connection.TestConnectionInput, options: test_connection.Options) !test_connection.TestConnectionOutput {
+    pub fn testConnection(self: *Self, allocator: std.mem.Allocator, input: test_connection.TestConnectionInput, options: CallOptions) !test_connection.TestConnectionOutput {
         return test_connection.execute(self, allocator, input, options);
     }
 
@@ -1269,7 +1270,7 @@ pub const Client = struct {
     /// account. For more information, see [Migrating event subscriptions to Amazon
     /// EventBridge](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html#CHAP_Events-migrate-to-eventbridge) in the
     /// *Amazon Web Services Database Migration Service User Guide*.
-    pub fn updateSubscriptionsToEventBridge(self: *Self, allocator: std.mem.Allocator, input: update_subscriptions_to_event_bridge.UpdateSubscriptionsToEventBridgeInput, options: update_subscriptions_to_event_bridge.Options) !update_subscriptions_to_event_bridge.UpdateSubscriptionsToEventBridgeOutput {
+    pub fn updateSubscriptionsToEventBridge(self: *Self, allocator: std.mem.Allocator, input: update_subscriptions_to_event_bridge.UpdateSubscriptionsToEventBridgeInput, options: CallOptions) !update_subscriptions_to_event_bridge.UpdateSubscriptionsToEventBridgeOutput {
         return update_subscriptions_to_event_bridge.execute(self, allocator, input, options);
     }
 

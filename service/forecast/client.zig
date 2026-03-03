@@ -64,6 +64,7 @@ const stop_resource = @import("stop_resource.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_dataset_group = @import("update_dataset_group.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -133,7 +134,7 @@ pub const Client = struct {
     ///
     /// When upgrading or retraining a predictor, only specify values for the
     /// `ReferencePredictorArn` and `PredictorName`.
-    pub fn createAutoPredictor(self: *Self, allocator: std.mem.Allocator, input: create_auto_predictor.CreateAutoPredictorInput, options: create_auto_predictor.Options) !create_auto_predictor.CreateAutoPredictorOutput {
+    pub fn createAutoPredictor(self: *Self, allocator: std.mem.Allocator, input: create_auto_predictor.CreateAutoPredictorInput, options: CallOptions) !create_auto_predictor.CreateAutoPredictorOutput {
         return create_auto_predictor.execute(self, allocator, input, options);
     }
 
@@ -183,7 +184,7 @@ pub const Client = struct {
     /// training data. Use the
     /// [DescribeDataset](https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html) operation to get
     /// the status.
-    pub fn createDataset(self: *Self, allocator: std.mem.Allocator, input: create_dataset.CreateDatasetInput, options: create_dataset.Options) !create_dataset.CreateDatasetOutput {
+    pub fn createDataset(self: *Self, allocator: std.mem.Allocator, input: create_dataset.CreateDatasetInput, options: CallOptions) !create_dataset.CreateDatasetOutput {
         return create_dataset.execute(self, allocator, input, options);
     }
 
@@ -205,7 +206,7 @@ pub const Client = struct {
     /// The `Status` of a dataset group must be `ACTIVE` before you can
     /// use the dataset group to create a predictor. To get the status, use the
     /// [DescribeDatasetGroup](https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html) operation.
-    pub fn createDatasetGroup(self: *Self, allocator: std.mem.Allocator, input: create_dataset_group.CreateDatasetGroupInput, options: create_dataset_group.Options) !create_dataset_group.CreateDatasetGroupOutput {
+    pub fn createDatasetGroup(self: *Self, allocator: std.mem.Allocator, input: create_dataset_group.CreateDatasetGroupInput, options: CallOptions) !create_dataset_group.CreateDatasetGroupOutput {
         return create_dataset_group.execute(self, allocator, input, options);
     }
 
@@ -243,7 +244,7 @@ pub const Client = struct {
     /// To get a list of all your dataset import jobs, filtered by specified
     /// criteria, use the
     /// [ListDatasetImportJobs](https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasetImportJobs.html) operation.
-    pub fn createDatasetImportJob(self: *Self, allocator: std.mem.Allocator, input: create_dataset_import_job.CreateDatasetImportJobInput, options: create_dataset_import_job.Options) !create_dataset_import_job.CreateDatasetImportJobOutput {
+    pub fn createDatasetImportJob(self: *Self, allocator: std.mem.Allocator, input: create_dataset_import_job.CreateDatasetImportJobInput, options: CallOptions) !create_dataset_import_job.CreateDatasetImportJobOutput {
         return create_dataset_import_job.execute(self, allocator, input, options);
     }
 
@@ -336,7 +337,7 @@ pub const Client = struct {
     ///
     /// * `EndDateTime` - The last timestamp in the range of time
     /// points.
-    pub fn createExplainability(self: *Self, allocator: std.mem.Allocator, input: create_explainability.CreateExplainabilityInput, options: create_explainability.Options) !create_explainability.CreateExplainabilityOutput {
+    pub fn createExplainability(self: *Self, allocator: std.mem.Allocator, input: create_explainability.CreateExplainabilityInput, options: CallOptions) !create_explainability.CreateExplainabilityOutput {
         return create_explainability.execute(self, allocator, input, options);
     }
 
@@ -353,7 +354,7 @@ pub const Client = struct {
     /// The `Status` of the export job must be `ACTIVE` before you
     /// can access the export in your Amazon S3 bucket. To get the status, use the
     /// DescribeExplainabilityExport operation.
-    pub fn createExplainabilityExport(self: *Self, allocator: std.mem.Allocator, input: create_explainability_export.CreateExplainabilityExportInput, options: create_explainability_export.Options) !create_explainability_export.CreateExplainabilityExportOutput {
+    pub fn createExplainabilityExport(self: *Self, allocator: std.mem.Allocator, input: create_explainability_export.CreateExplainabilityExportInput, options: CallOptions) !create_explainability_export.CreateExplainabilityExportOutput {
         return create_explainability_export.execute(self, allocator, input, options);
     }
 
@@ -389,7 +390,7 @@ pub const Client = struct {
     /// on a subset of time series. Forecast creation is skipped for any time series
     /// that you specify that are not in the input dataset. The forecast export file
     /// will not contain these time series or their forecasted values.
-    pub fn createForecast(self: *Self, allocator: std.mem.Allocator, input: create_forecast.CreateForecastInput, options: create_forecast.Options) !create_forecast.CreateForecastOutput {
+    pub fn createForecast(self: *Self, allocator: std.mem.Allocator, input: create_forecast.CreateForecastInput, options: CallOptions) !create_forecast.CreateForecastOutput {
         return create_forecast.execute(self, allocator, input, options);
     }
 
@@ -416,7 +417,7 @@ pub const Client = struct {
     /// The `Status` of the forecast export job must be `ACTIVE` before
     /// you can access the forecast in your Amazon S3 bucket. To get the status, use
     /// the DescribeForecastExportJob operation.
-    pub fn createForecastExportJob(self: *Self, allocator: std.mem.Allocator, input: create_forecast_export_job.CreateForecastExportJobInput, options: create_forecast_export_job.Options) !create_forecast_export_job.CreateForecastExportJobOutput {
+    pub fn createForecastExportJob(self: *Self, allocator: std.mem.Allocator, input: create_forecast_export_job.CreateForecastExportJobInput, options: CallOptions) !create_forecast_export_job.CreateForecastExportJobOutput {
         return create_forecast_export_job.execute(self, allocator, input, options);
     }
 
@@ -425,7 +426,7 @@ pub const Client = struct {
     /// changes over time.
     /// For more information, see [Predictor
     /// Monitoring](https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring.html).
-    pub fn createMonitor(self: *Self, allocator: std.mem.Allocator, input: create_monitor.CreateMonitorInput, options: create_monitor.Options) !create_monitor.CreateMonitorOutput {
+    pub fn createMonitor(self: *Self, allocator: std.mem.Allocator, input: create_monitor.CreateMonitorInput, options: CallOptions) !create_monitor.CreateMonitorOutput {
         return create_monitor.execute(self, allocator, input, options);
     }
 
@@ -496,7 +497,7 @@ pub const Client = struct {
     /// predictor must be `ACTIVE`, signifying that training has completed. To get
     /// the
     /// status, use the DescribePredictor operation.
-    pub fn createPredictor(self: *Self, allocator: std.mem.Allocator, input: create_predictor.CreatePredictorInput, options: create_predictor.Options) !create_predictor.CreatePredictorOutput {
+    pub fn createPredictor(self: *Self, allocator: std.mem.Allocator, input: create_predictor.CreatePredictorInput, options: CallOptions) !create_predictor.CreatePredictorOutput {
         return create_predictor.execute(self, allocator, input, options);
     }
 
@@ -520,7 +521,7 @@ pub const Client = struct {
     /// The `Status` of the export job must be `ACTIVE` before you
     /// can access the export in your Amazon S3 bucket. To get the status, use the
     /// DescribePredictorBacktestExportJob operation.
-    pub fn createPredictorBacktestExportJob(self: *Self, allocator: std.mem.Allocator, input: create_predictor_backtest_export_job.CreatePredictorBacktestExportJobInput, options: create_predictor_backtest_export_job.Options) !create_predictor_backtest_export_job.CreatePredictorBacktestExportJobOutput {
+    pub fn createPredictorBacktestExportJob(self: *Self, allocator: std.mem.Allocator, input: create_predictor_backtest_export_job.CreatePredictorBacktestExportJobInput, options: CallOptions) !create_predictor_backtest_export_job.CreatePredictorBacktestExportJobOutput {
         return create_predictor_backtest_export_job.execute(self, allocator, input, options);
     }
 
@@ -555,7 +556,7 @@ pub const Client = struct {
     ///
     /// The TimeSeriesSelector object defines the items that you want in the what-if
     /// analysis.
-    pub fn createWhatIfAnalysis(self: *Self, allocator: std.mem.Allocator, input: create_what_if_analysis.CreateWhatIfAnalysisInput, options: create_what_if_analysis.Options) !create_what_if_analysis.CreateWhatIfAnalysisOutput {
+    pub fn createWhatIfAnalysis(self: *Self, allocator: std.mem.Allocator, input: create_what_if_analysis.CreateWhatIfAnalysisInput, options: CallOptions) !create_what_if_analysis.CreateWhatIfAnalysisOutput {
         return create_what_if_analysis.execute(self, allocator, input, options);
     }
 
@@ -563,7 +564,7 @@ pub const Client = struct {
     /// the baseline forecast. Each
     /// what-if forecast incorporates either a replacement dataset or a set of
     /// transformations to the original dataset.
-    pub fn createWhatIfForecast(self: *Self, allocator: std.mem.Allocator, input: create_what_if_forecast.CreateWhatIfForecastInput, options: create_what_if_forecast.Options) !create_what_if_forecast.CreateWhatIfForecastOutput {
+    pub fn createWhatIfForecast(self: *Self, allocator: std.mem.Allocator, input: create_what_if_forecast.CreateWhatIfForecastInput, options: CallOptions) !create_what_if_forecast.CreateWhatIfForecastOutput {
         return create_what_if_forecast.execute(self, allocator, input, options);
     }
 
@@ -591,7 +592,7 @@ pub const Client = struct {
     /// The `Status` of the forecast export job must be `ACTIVE` before
     /// you can access the forecast in your Amazon S3 bucket. To get the status, use
     /// the DescribeWhatIfForecastExport operation.
-    pub fn createWhatIfForecastExport(self: *Self, allocator: std.mem.Allocator, input: create_what_if_forecast_export.CreateWhatIfForecastExportInput, options: create_what_if_forecast_export.Options) !create_what_if_forecast_export.CreateWhatIfForecastExportOutput {
+    pub fn createWhatIfForecastExport(self: *Self, allocator: std.mem.Allocator, input: create_what_if_forecast_export.CreateWhatIfForecastExportInput, options: CallOptions) !create_what_if_forecast_export.CreateWhatIfForecastExportOutput {
         return create_what_if_forecast_export.execute(self, allocator, input, options);
     }
 
@@ -606,7 +607,7 @@ pub const Client = struct {
     /// In order to update the dataset group, use the
     /// [UpdateDatasetGroup](https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html) operation,
     /// omitting the deleted dataset's ARN.
-    pub fn deleteDataset(self: *Self, allocator: std.mem.Allocator, input: delete_dataset.DeleteDatasetInput, options: delete_dataset.Options) !delete_dataset.DeleteDatasetOutput {
+    pub fn deleteDataset(self: *Self, allocator: std.mem.Allocator, input: delete_dataset.DeleteDatasetInput, options: CallOptions) !delete_dataset.DeleteDatasetOutput {
         return delete_dataset.execute(self, allocator, input, options);
     }
 
@@ -618,7 +619,7 @@ pub const Client = struct {
     ///
     /// This operation deletes only the dataset group, not the datasets in the
     /// group.
-    pub fn deleteDatasetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_dataset_group.DeleteDatasetGroupInput, options: delete_dataset_group.Options) !delete_dataset_group.DeleteDatasetGroupOutput {
+    pub fn deleteDatasetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_dataset_group.DeleteDatasetGroupInput, options: CallOptions) !delete_dataset_group.DeleteDatasetGroupOutput {
         return delete_dataset_group.execute(self, allocator, input, options);
     }
 
@@ -629,7 +630,7 @@ pub const Client = struct {
     /// or `CREATE_FAILED`. To get the status, use the
     /// [DescribeDatasetImportJob](https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetImportJob.html)
     /// operation.
-    pub fn deleteDatasetImportJob(self: *Self, allocator: std.mem.Allocator, input: delete_dataset_import_job.DeleteDatasetImportJobInput, options: delete_dataset_import_job.Options) !delete_dataset_import_job.DeleteDatasetImportJobOutput {
+    pub fn deleteDatasetImportJob(self: *Self, allocator: std.mem.Allocator, input: delete_dataset_import_job.DeleteDatasetImportJobInput, options: CallOptions) !delete_dataset_import_job.DeleteDatasetImportJobOutput {
         return delete_dataset_import_job.execute(self, allocator, input, options);
     }
 
@@ -638,12 +639,12 @@ pub const Client = struct {
     /// You can delete only predictor that have a status of `ACTIVE` or
     /// `CREATE_FAILED`. To get the status, use the DescribeExplainability
     /// operation.
-    pub fn deleteExplainability(self: *Self, allocator: std.mem.Allocator, input: delete_explainability.DeleteExplainabilityInput, options: delete_explainability.Options) !delete_explainability.DeleteExplainabilityOutput {
+    pub fn deleteExplainability(self: *Self, allocator: std.mem.Allocator, input: delete_explainability.DeleteExplainabilityInput, options: CallOptions) !delete_explainability.DeleteExplainabilityOutput {
         return delete_explainability.execute(self, allocator, input, options);
     }
 
     /// Deletes an Explainability export.
-    pub fn deleteExplainabilityExport(self: *Self, allocator: std.mem.Allocator, input: delete_explainability_export.DeleteExplainabilityExportInput, options: delete_explainability_export.Options) !delete_explainability_export.DeleteExplainabilityExportOutput {
+    pub fn deleteExplainabilityExport(self: *Self, allocator: std.mem.Allocator, input: delete_explainability_export.DeleteExplainabilityExportInput, options: CallOptions) !delete_explainability_export.DeleteExplainabilityExportOutput {
         return delete_explainability_export.execute(self, allocator, input, options);
     }
 
@@ -654,7 +655,7 @@ pub const Client = struct {
     /// You can't delete a forecast while it is being exported. After a forecast is
     /// deleted, you
     /// can no longer query the forecast.
-    pub fn deleteForecast(self: *Self, allocator: std.mem.Allocator, input: delete_forecast.DeleteForecastInput, options: delete_forecast.Options) !delete_forecast.DeleteForecastOutput {
+    pub fn deleteForecast(self: *Self, allocator: std.mem.Allocator, input: delete_forecast.DeleteForecastInput, options: CallOptions) !delete_forecast.DeleteForecastOutput {
         return delete_forecast.execute(self, allocator, input, options);
     }
 
@@ -662,13 +663,13 @@ pub const Client = struct {
     /// operation. You can delete only export jobs that have a status of `ACTIVE` or
     /// `CREATE_FAILED`. To get the status, use the DescribeForecastExportJob
     /// operation.
-    pub fn deleteForecastExportJob(self: *Self, allocator: std.mem.Allocator, input: delete_forecast_export_job.DeleteForecastExportJobInput, options: delete_forecast_export_job.Options) !delete_forecast_export_job.DeleteForecastExportJobOutput {
+    pub fn deleteForecastExportJob(self: *Self, allocator: std.mem.Allocator, input: delete_forecast_export_job.DeleteForecastExportJobInput, options: CallOptions) !delete_forecast_export_job.DeleteForecastExportJobOutput {
         return delete_forecast_export_job.execute(self, allocator, input, options);
     }
 
     /// Deletes a monitor resource. You can only delete a monitor resource with a
     /// status of `ACTIVE`, `ACTIVE_STOPPED`, `CREATE_FAILED`, or `CREATE_STOPPED`.
-    pub fn deleteMonitor(self: *Self, allocator: std.mem.Allocator, input: delete_monitor.DeleteMonitorInput, options: delete_monitor.Options) !delete_monitor.DeleteMonitorOutput {
+    pub fn deleteMonitor(self: *Self, allocator: std.mem.Allocator, input: delete_monitor.DeleteMonitorInput, options: CallOptions) !delete_monitor.DeleteMonitorOutput {
         return delete_monitor.execute(self, allocator, input, options);
     }
 
@@ -676,12 +677,12 @@ pub const Client = struct {
     /// operations. You can delete only predictor that have a status of
     /// `ACTIVE` or `CREATE_FAILED`. To get the status, use the DescribePredictor
     /// operation.
-    pub fn deletePredictor(self: *Self, allocator: std.mem.Allocator, input: delete_predictor.DeletePredictorInput, options: delete_predictor.Options) !delete_predictor.DeletePredictorOutput {
+    pub fn deletePredictor(self: *Self, allocator: std.mem.Allocator, input: delete_predictor.DeletePredictorInput, options: CallOptions) !delete_predictor.DeletePredictorOutput {
         return delete_predictor.execute(self, allocator, input, options);
     }
 
     /// Deletes a predictor backtest export job.
-    pub fn deletePredictorBacktestExportJob(self: *Self, allocator: std.mem.Allocator, input: delete_predictor_backtest_export_job.DeletePredictorBacktestExportJobInput, options: delete_predictor_backtest_export_job.Options) !delete_predictor_backtest_export_job.DeletePredictorBacktestExportJobOutput {
+    pub fn deletePredictorBacktestExportJob(self: *Self, allocator: std.mem.Allocator, input: delete_predictor_backtest_export_job.DeletePredictorBacktestExportJobInput, options: CallOptions) !delete_predictor_backtest_export_job.DeletePredictorBacktestExportJobOutput {
         return delete_predictor_backtest_export_job.execute(self, allocator, input, options);
     }
 
@@ -711,7 +712,7 @@ pub const Client = struct {
     /// `DeleteResourceTree` will only delete Amazon Forecast resources, and will
     /// not
     /// delete datasets or exported files stored in Amazon S3.
-    pub fn deleteResourceTree(self: *Self, allocator: std.mem.Allocator, input: delete_resource_tree.DeleteResourceTreeInput, options: delete_resource_tree.Options) !delete_resource_tree.DeleteResourceTreeOutput {
+    pub fn deleteResourceTree(self: *Self, allocator: std.mem.Allocator, input: delete_resource_tree.DeleteResourceTreeInput, options: CallOptions) !delete_resource_tree.DeleteResourceTreeOutput {
         return delete_resource_tree.execute(self, allocator, input, options);
     }
 
@@ -722,7 +723,7 @@ pub const Client = struct {
     ///
     /// You can't delete a what-if analysis while any of its forecasts are being
     /// exported.
-    pub fn deleteWhatIfAnalysis(self: *Self, allocator: std.mem.Allocator, input: delete_what_if_analysis.DeleteWhatIfAnalysisInput, options: delete_what_if_analysis.Options) !delete_what_if_analysis.DeleteWhatIfAnalysisOutput {
+    pub fn deleteWhatIfAnalysis(self: *Self, allocator: std.mem.Allocator, input: delete_what_if_analysis.DeleteWhatIfAnalysisInput, options: CallOptions) !delete_what_if_analysis.DeleteWhatIfAnalysisOutput {
         return delete_what_if_analysis.execute(self, allocator, input, options);
     }
 
@@ -733,7 +734,7 @@ pub const Client = struct {
     ///
     /// You can't delete a what-if forecast while it is being exported. After a
     /// what-if forecast is deleted, you can no longer query the what-if analysis.
-    pub fn deleteWhatIfForecast(self: *Self, allocator: std.mem.Allocator, input: delete_what_if_forecast.DeleteWhatIfForecastInput, options: delete_what_if_forecast.Options) !delete_what_if_forecast.DeleteWhatIfForecastOutput {
+    pub fn deleteWhatIfForecast(self: *Self, allocator: std.mem.Allocator, input: delete_what_if_forecast.DeleteWhatIfForecastInput, options: CallOptions) !delete_what_if_forecast.DeleteWhatIfForecastOutput {
         return delete_what_if_forecast.execute(self, allocator, input, options);
     }
 
@@ -742,12 +743,12 @@ pub const Client = struct {
     /// operation. You can delete only what-if forecast exports that have a status
     /// of `ACTIVE` or `CREATE_FAILED`. To get the status, use the
     /// DescribeWhatIfForecastExport operation.
-    pub fn deleteWhatIfForecastExport(self: *Self, allocator: std.mem.Allocator, input: delete_what_if_forecast_export.DeleteWhatIfForecastExportInput, options: delete_what_if_forecast_export.Options) !delete_what_if_forecast_export.DeleteWhatIfForecastExportOutput {
+    pub fn deleteWhatIfForecastExport(self: *Self, allocator: std.mem.Allocator, input: delete_what_if_forecast_export.DeleteWhatIfForecastExportInput, options: CallOptions) !delete_what_if_forecast_export.DeleteWhatIfForecastExportOutput {
         return delete_what_if_forecast_export.execute(self, allocator, input, options);
     }
 
     /// Describes a predictor created using the CreateAutoPredictor operation.
-    pub fn describeAutoPredictor(self: *Self, allocator: std.mem.Allocator, input: describe_auto_predictor.DescribeAutoPredictorInput, options: describe_auto_predictor.Options) !describe_auto_predictor.DescribeAutoPredictorOutput {
+    pub fn describeAutoPredictor(self: *Self, allocator: std.mem.Allocator, input: describe_auto_predictor.DescribeAutoPredictorInput, options: CallOptions) !describe_auto_predictor.DescribeAutoPredictorOutput {
         return describe_auto_predictor.execute(self, allocator, input, options);
     }
 
@@ -763,7 +764,7 @@ pub const Client = struct {
     /// * `LastModificationTime`
     ///
     /// * `Status`
-    pub fn describeDataset(self: *Self, allocator: std.mem.Allocator, input: describe_dataset.DescribeDatasetInput, options: describe_dataset.Options) !describe_dataset.DescribeDatasetOutput {
+    pub fn describeDataset(self: *Self, allocator: std.mem.Allocator, input: describe_dataset.DescribeDatasetInput, options: CallOptions) !describe_dataset.DescribeDatasetOutput {
         return describe_dataset.execute(self, allocator, input, options);
     }
 
@@ -781,7 +782,7 @@ pub const Client = struct {
     /// * `LastModificationTime`
     ///
     /// * `Status`
-    pub fn describeDatasetGroup(self: *Self, allocator: std.mem.Allocator, input: describe_dataset_group.DescribeDatasetGroupInput, options: describe_dataset_group.Options) !describe_dataset_group.DescribeDatasetGroupOutput {
+    pub fn describeDatasetGroup(self: *Self, allocator: std.mem.Allocator, input: describe_dataset_group.DescribeDatasetGroupInput, options: CallOptions) !describe_dataset_group.DescribeDatasetGroupOutput {
         return describe_dataset_group.execute(self, allocator, input, options);
     }
 
@@ -804,19 +805,19 @@ pub const Client = struct {
     /// * `Status`
     ///
     /// * `Message` - If an error occurred, information about the error.
-    pub fn describeDatasetImportJob(self: *Self, allocator: std.mem.Allocator, input: describe_dataset_import_job.DescribeDatasetImportJobInput, options: describe_dataset_import_job.Options) !describe_dataset_import_job.DescribeDatasetImportJobOutput {
+    pub fn describeDatasetImportJob(self: *Self, allocator: std.mem.Allocator, input: describe_dataset_import_job.DescribeDatasetImportJobInput, options: CallOptions) !describe_dataset_import_job.DescribeDatasetImportJobOutput {
         return describe_dataset_import_job.execute(self, allocator, input, options);
     }
 
     /// Describes an Explainability resource created using the CreateExplainability
     /// operation.
-    pub fn describeExplainability(self: *Self, allocator: std.mem.Allocator, input: describe_explainability.DescribeExplainabilityInput, options: describe_explainability.Options) !describe_explainability.DescribeExplainabilityOutput {
+    pub fn describeExplainability(self: *Self, allocator: std.mem.Allocator, input: describe_explainability.DescribeExplainabilityInput, options: CallOptions) !describe_explainability.DescribeExplainabilityOutput {
         return describe_explainability.execute(self, allocator, input, options);
     }
 
     /// Describes an Explainability export created using the
     /// CreateExplainabilityExport operation.
-    pub fn describeExplainabilityExport(self: *Self, allocator: std.mem.Allocator, input: describe_explainability_export.DescribeExplainabilityExportInput, options: describe_explainability_export.Options) !describe_explainability_export.DescribeExplainabilityExportOutput {
+    pub fn describeExplainabilityExport(self: *Self, allocator: std.mem.Allocator, input: describe_explainability_export.DescribeExplainabilityExportInput, options: CallOptions) !describe_explainability_export.DescribeExplainabilityExportOutput {
         return describe_explainability_export.execute(self, allocator, input, options);
     }
 
@@ -836,7 +837,7 @@ pub const Client = struct {
     /// * `Status`
     ///
     /// * `Message` - If an error occurred, information about the error.
-    pub fn describeForecast(self: *Self, allocator: std.mem.Allocator, input: describe_forecast.DescribeForecastInput, options: describe_forecast.Options) !describe_forecast.DescribeForecastOutput {
+    pub fn describeForecast(self: *Self, allocator: std.mem.Allocator, input: describe_forecast.DescribeForecastInput, options: CallOptions) !describe_forecast.DescribeForecastOutput {
         return describe_forecast.execute(self, allocator, input, options);
     }
 
@@ -854,7 +855,7 @@ pub const Client = struct {
     /// * `Status`
     ///
     /// * `Message` - If an error occurred, information about the error.
-    pub fn describeForecastExportJob(self: *Self, allocator: std.mem.Allocator, input: describe_forecast_export_job.DescribeForecastExportJobInput, options: describe_forecast_export_job.Options) !describe_forecast_export_job.DescribeForecastExportJobOutput {
+    pub fn describeForecastExportJob(self: *Self, allocator: std.mem.Allocator, input: describe_forecast_export_job.DescribeForecastExportJobInput, options: CallOptions) !describe_forecast_export_job.DescribeForecastExportJobOutput {
         return describe_forecast_export_job.execute(self, allocator, input, options);
     }
 
@@ -874,7 +875,7 @@ pub const Client = struct {
     /// * `Message`
     ///
     /// * `Status`
-    pub fn describeMonitor(self: *Self, allocator: std.mem.Allocator, input: describe_monitor.DescribeMonitorInput, options: describe_monitor.Options) !describe_monitor.DescribeMonitorOutput {
+    pub fn describeMonitor(self: *Self, allocator: std.mem.Allocator, input: describe_monitor.DescribeMonitorInput, options: CallOptions) !describe_monitor.DescribeMonitorOutput {
         return describe_monitor.execute(self, allocator, input, options);
     }
 
@@ -901,7 +902,7 @@ pub const Client = struct {
     /// * `Status`
     ///
     /// * `Message` - If an error occurred, information about the error.
-    pub fn describePredictor(self: *Self, allocator: std.mem.Allocator, input: describe_predictor.DescribePredictorInput, options: describe_predictor.Options) !describe_predictor.DescribePredictorOutput {
+    pub fn describePredictor(self: *Self, allocator: std.mem.Allocator, input: describe_predictor.DescribePredictorInput, options: CallOptions) !describe_predictor.DescribePredictorOutput {
         return describe_predictor.execute(self, allocator, input, options);
     }
 
@@ -919,7 +920,7 @@ pub const Client = struct {
     /// * `Status`
     ///
     /// * `Message` (if an error occurred)
-    pub fn describePredictorBacktestExportJob(self: *Self, allocator: std.mem.Allocator, input: describe_predictor_backtest_export_job.DescribePredictorBacktestExportJobInput, options: describe_predictor_backtest_export_job.Options) !describe_predictor_backtest_export_job.DescribePredictorBacktestExportJobOutput {
+    pub fn describePredictorBacktestExportJob(self: *Self, allocator: std.mem.Allocator, input: describe_predictor_backtest_export_job.DescribePredictorBacktestExportJobInput, options: CallOptions) !describe_predictor_backtest_export_job.DescribePredictorBacktestExportJobOutput {
         return describe_predictor_backtest_export_job.execute(self, allocator, input, options);
     }
 
@@ -936,7 +937,7 @@ pub const Client = struct {
     /// * `Message` - If an error occurred, information about the error.
     ///
     /// * `Status`
-    pub fn describeWhatIfAnalysis(self: *Self, allocator: std.mem.Allocator, input: describe_what_if_analysis.DescribeWhatIfAnalysisInput, options: describe_what_if_analysis.Options) !describe_what_if_analysis.DescribeWhatIfAnalysisOutput {
+    pub fn describeWhatIfAnalysis(self: *Self, allocator: std.mem.Allocator, input: describe_what_if_analysis.DescribeWhatIfAnalysisInput, options: CallOptions) !describe_what_if_analysis.DescribeWhatIfAnalysisOutput {
         return describe_what_if_analysis.execute(self, allocator, input, options);
     }
 
@@ -953,7 +954,7 @@ pub const Client = struct {
     /// * `Message` - If an error occurred, information about the error.
     ///
     /// * `Status`
-    pub fn describeWhatIfForecast(self: *Self, allocator: std.mem.Allocator, input: describe_what_if_forecast.DescribeWhatIfForecastInput, options: describe_what_if_forecast.Options) !describe_what_if_forecast.DescribeWhatIfForecastOutput {
+    pub fn describeWhatIfForecast(self: *Self, allocator: std.mem.Allocator, input: describe_what_if_forecast.DescribeWhatIfForecastInput, options: CallOptions) !describe_what_if_forecast.DescribeWhatIfForecastOutput {
         return describe_what_if_forecast.execute(self, allocator, input, options);
     }
 
@@ -971,7 +972,7 @@ pub const Client = struct {
     /// * `Message` - If an error occurred, information about the error.
     ///
     /// * `Status`
-    pub fn describeWhatIfForecastExport(self: *Self, allocator: std.mem.Allocator, input: describe_what_if_forecast_export.DescribeWhatIfForecastExportInput, options: describe_what_if_forecast_export.Options) !describe_what_if_forecast_export.DescribeWhatIfForecastExportOutput {
+    pub fn describeWhatIfForecastExport(self: *Self, allocator: std.mem.Allocator, input: describe_what_if_forecast_export.DescribeWhatIfForecastExportInput, options: CallOptions) !describe_what_if_forecast_export.DescribeWhatIfForecastExportOutput {
         return describe_what_if_forecast_export.execute(self, allocator, input, options);
     }
 
@@ -1001,7 +1002,7 @@ pub const Client = struct {
     /// Before you can get accuracy metrics, the `Status` of the predictor must be
     /// `ACTIVE`, signifying that training has completed. To get the status, use the
     /// DescribePredictor operation.
-    pub fn getAccuracyMetrics(self: *Self, allocator: std.mem.Allocator, input: get_accuracy_metrics.GetAccuracyMetricsInput, options: get_accuracy_metrics.Options) !get_accuracy_metrics.GetAccuracyMetricsOutput {
+    pub fn getAccuracyMetrics(self: *Self, allocator: std.mem.Allocator, input: get_accuracy_metrics.GetAccuracyMetricsInput, options: CallOptions) !get_accuracy_metrics.GetAccuracyMetricsOutput {
         return get_accuracy_metrics.execute(self, allocator, input, options);
     }
 
@@ -1014,7 +1015,7 @@ pub const Client = struct {
     /// dataset group ARN with the
     /// [DescribeDatasetGroup](https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html)
     /// operation.
-    pub fn listDatasetGroups(self: *Self, allocator: std.mem.Allocator, input: list_dataset_groups.ListDatasetGroupsInput, options: list_dataset_groups.Options) !list_dataset_groups.ListDatasetGroupsOutput {
+    pub fn listDatasetGroups(self: *Self, allocator: std.mem.Allocator, input: list_dataset_groups.ListDatasetGroupsInput, options: CallOptions) !list_dataset_groups.ListDatasetGroupsOutput {
         return list_dataset_groups.execute(self, allocator, input, options);
     }
 
@@ -1029,7 +1030,7 @@ pub const Client = struct {
     /// operation. You can filter the list by providing an array of
     /// [Filter](https://docs.aws.amazon.com/forecast/latest/dg/API_Filter.html)
     /// objects.
-    pub fn listDatasetImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_dataset_import_jobs.ListDatasetImportJobsInput, options: list_dataset_import_jobs.Options) !list_dataset_import_jobs.ListDatasetImportJobsOutput {
+    pub fn listDatasetImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_dataset_import_jobs.ListDatasetImportJobsInput, options: CallOptions) !list_dataset_import_jobs.ListDatasetImportJobsOutput {
         return list_dataset_import_jobs.execute(self, allocator, input, options);
     }
 
@@ -1039,7 +1040,7 @@ pub const Client = struct {
     /// (ARN), is returned.
     /// To retrieve the complete set of properties, use the ARN with the
     /// [DescribeDataset](https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html) operation.
-    pub fn listDatasets(self: *Self, allocator: std.mem.Allocator, input: list_datasets.ListDatasetsInput, options: list_datasets.Options) !list_datasets.ListDatasetsOutput {
+    pub fn listDatasets(self: *Self, allocator: std.mem.Allocator, input: list_datasets.ListDatasetsInput, options: CallOptions) !list_datasets.ListDatasetsOutput {
         return list_datasets.execute(self, allocator, input, options);
     }
 
@@ -1051,7 +1052,7 @@ pub const Client = struct {
     /// To retrieve the complete set of properties for a particular Explainability
     /// resource,
     /// use the ARN with the DescribeExplainability operation.
-    pub fn listExplainabilities(self: *Self, allocator: std.mem.Allocator, input: list_explainabilities.ListExplainabilitiesInput, options: list_explainabilities.Options) !list_explainabilities.ListExplainabilitiesOutput {
+    pub fn listExplainabilities(self: *Self, allocator: std.mem.Allocator, input: list_explainabilities.ListExplainabilitiesInput, options: CallOptions) !list_explainabilities.ListExplainabilitiesOutput {
         return list_explainabilities.execute(self, allocator, input, options);
     }
 
@@ -1063,7 +1064,7 @@ pub const Client = struct {
     /// To retrieve the complete set of properties for a particular Explainability
     /// export, use
     /// the ARN with the DescribeExplainability operation.
-    pub fn listExplainabilityExports(self: *Self, allocator: std.mem.Allocator, input: list_explainability_exports.ListExplainabilityExportsInput, options: list_explainability_exports.Options) !list_explainability_exports.ListExplainabilityExportsOutput {
+    pub fn listExplainabilityExports(self: *Self, allocator: std.mem.Allocator, input: list_explainability_exports.ListExplainabilityExportsInput, options: CallOptions) !list_explainability_exports.ListExplainabilityExportsOutput {
         return list_explainability_exports.execute(self, allocator, input, options);
     }
 
@@ -1074,7 +1075,7 @@ pub const Client = struct {
     /// (ARN). To retrieve the
     /// complete set of properties, use the ARN with the DescribeForecastExportJob
     /// operation. You can filter the list using an array of Filter objects.
-    pub fn listForecastExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_forecast_export_jobs.ListForecastExportJobsInput, options: list_forecast_export_jobs.Options) !list_forecast_export_jobs.ListForecastExportJobsOutput {
+    pub fn listForecastExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_forecast_export_jobs.ListForecastExportJobsInput, options: CallOptions) !list_forecast_export_jobs.ListForecastExportJobsOutput {
         return list_forecast_export_jobs.execute(self, allocator, input, options);
     }
 
@@ -1085,7 +1086,7 @@ pub const Client = struct {
     /// ARN with the
     /// DescribeForecast operation. You can filter the list using an array of
     /// Filter objects.
-    pub fn listForecasts(self: *Self, allocator: std.mem.Allocator, input: list_forecasts.ListForecastsInput, options: list_forecasts.Options) !list_forecasts.ListForecastsOutput {
+    pub fn listForecasts(self: *Self, allocator: std.mem.Allocator, input: list_forecasts.ListForecastsInput, options: CallOptions) !list_forecasts.ListForecastsOutput {
         return list_forecasts.execute(self, allocator, input, options);
     }
 
@@ -1096,7 +1097,7 @@ pub const Client = struct {
     /// For information about monitoring see predictor-monitoring. For
     /// more information about retrieving monitoring results see [Viewing Monitoring
     /// Results](https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html).
-    pub fn listMonitorEvaluations(self: *Self, allocator: std.mem.Allocator, input: list_monitor_evaluations.ListMonitorEvaluationsInput, options: list_monitor_evaluations.Options) !list_monitor_evaluations.ListMonitorEvaluationsOutput {
+    pub fn listMonitorEvaluations(self: *Self, allocator: std.mem.Allocator, input: list_monitor_evaluations.ListMonitorEvaluationsInput, options: CallOptions) !list_monitor_evaluations.ListMonitorEvaluationsOutput {
         return list_monitor_evaluations.execute(self, allocator, input, options);
     }
 
@@ -1106,7 +1107,7 @@ pub const Client = struct {
     /// (ARN). You
     /// can retrieve a complete set of properties of a monitor resource by specify
     /// the monitor's ARN in the DescribeMonitor operation.
-    pub fn listMonitors(self: *Self, allocator: std.mem.Allocator, input: list_monitors.ListMonitorsInput, options: list_monitors.Options) !list_monitors.ListMonitorsOutput {
+    pub fn listMonitors(self: *Self, allocator: std.mem.Allocator, input: list_monitors.ListMonitorsInput, options: CallOptions) !list_monitors.ListMonitorsOutput {
         return list_monitors.execute(self, allocator, input, options);
     }
 
@@ -1118,7 +1119,7 @@ pub const Client = struct {
     /// To retrieve the complete set of properties for a particular backtest export
     /// job, use
     /// the ARN with the DescribePredictorBacktestExportJob operation.
-    pub fn listPredictorBacktestExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_predictor_backtest_export_jobs.ListPredictorBacktestExportJobsInput, options: list_predictor_backtest_export_jobs.Options) !list_predictor_backtest_export_jobs.ListPredictorBacktestExportJobsOutput {
+    pub fn listPredictorBacktestExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_predictor_backtest_export_jobs.ListPredictorBacktestExportJobsInput, options: CallOptions) !list_predictor_backtest_export_jobs.ListPredictorBacktestExportJobsOutput {
         return list_predictor_backtest_export_jobs.execute(self, allocator, input, options);
     }
 
@@ -1129,12 +1130,12 @@ pub const Client = struct {
     /// You can retrieve the complete set of properties by using the ARN with the
     /// DescribeAutoPredictor and DescribePredictor operations. You
     /// can filter the list using an array of Filter objects.
-    pub fn listPredictors(self: *Self, allocator: std.mem.Allocator, input: list_predictors.ListPredictorsInput, options: list_predictors.Options) !list_predictors.ListPredictorsOutput {
+    pub fn listPredictors(self: *Self, allocator: std.mem.Allocator, input: list_predictors.ListPredictorsInput, options: CallOptions) !list_predictors.ListPredictorsOutput {
         return list_predictors.execute(self, allocator, input, options);
     }
 
     /// Lists the tags for an Amazon Forecast resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -1143,7 +1144,7 @@ pub const Client = struct {
     /// its properties, including its Amazon Resource Name (ARN). You can retrieve
     /// the complete set of properties by using the what-if analysis ARN with the
     /// DescribeWhatIfAnalysis operation.
-    pub fn listWhatIfAnalyses(self: *Self, allocator: std.mem.Allocator, input: list_what_if_analyses.ListWhatIfAnalysesInput, options: list_what_if_analyses.Options) !list_what_if_analyses.ListWhatIfAnalysesOutput {
+    pub fn listWhatIfAnalyses(self: *Self, allocator: std.mem.Allocator, input: list_what_if_analyses.ListWhatIfAnalysesInput, options: CallOptions) !list_what_if_analyses.ListWhatIfAnalysesOutput {
         return list_what_if_analyses.execute(self, allocator, input, options);
     }
 
@@ -1152,7 +1153,7 @@ pub const Client = struct {
     /// operation returns a summary of its properties, including its Amazon Resource
     /// Name (ARN). You can retrieve the complete set of properties by using the
     /// what-if forecast export ARN with the DescribeWhatIfForecastExport operation.
-    pub fn listWhatIfForecastExports(self: *Self, allocator: std.mem.Allocator, input: list_what_if_forecast_exports.ListWhatIfForecastExportsInput, options: list_what_if_forecast_exports.Options) !list_what_if_forecast_exports.ListWhatIfForecastExportsOutput {
+    pub fn listWhatIfForecastExports(self: *Self, allocator: std.mem.Allocator, input: list_what_if_forecast_exports.ListWhatIfForecastExportsInput, options: CallOptions) !list_what_if_forecast_exports.ListWhatIfForecastExportsOutput {
         return list_what_if_forecast_exports.execute(self, allocator, input, options);
     }
 
@@ -1161,12 +1162,12 @@ pub const Client = struct {
     /// its properties, including its Amazon Resource Name (ARN). You can retrieve
     /// the complete set of properties by using the what-if forecast ARN with the
     /// DescribeWhatIfForecast operation.
-    pub fn listWhatIfForecasts(self: *Self, allocator: std.mem.Allocator, input: list_what_if_forecasts.ListWhatIfForecastsInput, options: list_what_if_forecasts.Options) !list_what_if_forecasts.ListWhatIfForecastsOutput {
+    pub fn listWhatIfForecasts(self: *Self, allocator: std.mem.Allocator, input: list_what_if_forecasts.ListWhatIfForecastsInput, options: CallOptions) !list_what_if_forecasts.ListWhatIfForecastsOutput {
         return list_what_if_forecasts.execute(self, allocator, input, options);
     }
 
     /// Resumes a stopped monitor resource.
-    pub fn resumeResource(self: *Self, allocator: std.mem.Allocator, input: resume_resource.ResumeResourceInput, options: resume_resource.Options) !resume_resource.ResumeResourceOutput {
+    pub fn resumeResource(self: *Self, allocator: std.mem.Allocator, input: resume_resource.ResumeResourceInput, options: CallOptions) !resume_resource.ResumeResourceOutput {
         return resume_resource.execute(self, allocator, input, options);
     }
 
@@ -1193,7 +1194,7 @@ pub const Client = struct {
     /// * Explainability Job
     ///
     /// * Explainability Export Job
-    pub fn stopResource(self: *Self, allocator: std.mem.Allocator, input: stop_resource.StopResourceInput, options: stop_resource.Options) !stop_resource.StopResourceOutput {
+    pub fn stopResource(self: *Self, allocator: std.mem.Allocator, input: stop_resource.StopResourceInput, options: CallOptions) !stop_resource.StopResourceOutput {
         return stop_resource.execute(self, allocator, input, options);
     }
 
@@ -1204,12 +1205,12 @@ pub const Client = struct {
     /// changed. When a resource is deleted, the tags associated with that resource
     /// are also
     /// deleted.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -1219,7 +1220,7 @@ pub const Client = struct {
     /// use the dataset group to create a predictor. Use the
     /// [DescribeDatasetGroup](https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html)
     /// operation to get the status.
-    pub fn updateDatasetGroup(self: *Self, allocator: std.mem.Allocator, input: update_dataset_group.UpdateDatasetGroupInput, options: update_dataset_group.Options) !update_dataset_group.UpdateDatasetGroupOutput {
+    pub fn updateDatasetGroup(self: *Self, allocator: std.mem.Allocator, input: update_dataset_group.UpdateDatasetGroupInput, options: CallOptions) !update_dataset_group.UpdateDatasetGroupOutput {
         return update_dataset_group.execute(self, allocator, input, options);
     }
 

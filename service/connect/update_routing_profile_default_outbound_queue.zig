@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const UpdateRoutingProfileDefaultOutboundQueueInput = struct {
@@ -22,13 +23,9 @@ pub const UpdateRoutingProfileDefaultOutboundQueueInput = struct {
     };
 };
 
-const UpdateRoutingProfileDefaultOutboundQueueOutput = struct {};
+pub const UpdateRoutingProfileDefaultOutboundQueueOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRoutingProfileDefaultOutboundQueueInput, options: Options) !UpdateRoutingProfileDefaultOutboundQueueOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRoutingProfileDefaultOutboundQueueInput, options: CallOptions) !UpdateRoutingProfileDefaultOutboundQueueOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

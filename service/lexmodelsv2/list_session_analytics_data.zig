@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AnalyticsSessionFilter = @import("analytics_session_filter.zig").AnalyticsSessionFilter;
 const SessionDataSortBy = @import("session_data_sort_by.zig").SessionDataSortBy;
@@ -78,11 +79,7 @@ pub const ListSessionAnalyticsDataOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSessionAnalyticsDataInput, options: Options) !ListSessionAnalyticsDataOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSessionAnalyticsDataInput, options: CallOptions) !ListSessionAnalyticsDataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

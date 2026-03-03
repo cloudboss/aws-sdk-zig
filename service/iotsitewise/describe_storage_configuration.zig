@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConfigurationStatus = @import("configuration_status.zig").ConfigurationStatus;
 const DisassociatedDataStorageState = @import("disassociated_data_storage_state.zig").DisassociatedDataStorageState;
@@ -83,11 +84,7 @@ pub const DescribeStorageConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeStorageConfigurationInput, options: Options) !DescribeStorageConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeStorageConfigurationInput, options: CallOptions) !DescribeStorageConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

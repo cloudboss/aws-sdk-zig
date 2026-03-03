@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ClientLocation = @import("client_location.zig").ClientLocation;
 const InternetEventStatus = @import("internet_event_status.zig").InternetEventStatus;
@@ -51,11 +52,7 @@ pub const GetInternetEventOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetInternetEventInput, options: Options) !GetInternetEventOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetInternetEventInput, options: CallOptions) !GetInternetEventOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

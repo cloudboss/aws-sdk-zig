@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EncodingConfig = @import("encoding_config.zig").EncodingConfig;
 const FlowSize = @import("flow_size.zig").FlowSize;
@@ -44,13 +45,9 @@ pub const UpdateFlowInput = struct {
     };
 };
 
-const UpdateFlowOutput = @import("update_flow_response.zig").UpdateFlowResponse;
+pub const UpdateFlowOutput = @import("update_flow_response.zig").UpdateFlowResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFlowInput, options: Options) !UpdateFlowOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFlowInput, options: CallOptions) !UpdateFlowOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteProgramManagementAccountInput = struct {
@@ -24,11 +25,7 @@ pub const DeleteProgramManagementAccountInput = struct {
 pub const DeleteProgramManagementAccountOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProgramManagementAccountInput, options: Options) !DeleteProgramManagementAccountOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProgramManagementAccountInput, options: CallOptions) !DeleteProgramManagementAccountOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

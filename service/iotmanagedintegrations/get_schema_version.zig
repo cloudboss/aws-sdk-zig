@@ -2,12 +2,13 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SchemaVersionFormat = @import("schema_version_format.zig").SchemaVersionFormat;
 const SchemaVersionType = @import("schema_version_type.zig").SchemaVersionType;
 const SchemaVersionVisibility = @import("schema_version_visibility.zig").SchemaVersionVisibility;
 
-const GetSchemaVersionInput = @import("get_schema_version_request.zig").GetSchemaVersionRequest;
+pub const GetSchemaVersionInput = @import("get_schema_version_request.zig").GetSchemaVersionRequest;
 
 pub const GetSchemaVersionOutput = struct {
     /// The description of the schema version.
@@ -43,11 +44,7 @@ pub const GetSchemaVersionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSchemaVersionInput, options: Options) !GetSchemaVersionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSchemaVersionInput, options: CallOptions) !GetSchemaVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

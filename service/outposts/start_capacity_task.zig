@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstanceTypeCapacity = @import("instance_type_capacity.zig").InstanceTypeCapacity;
 const InstancesToExclude = @import("instances_to_exclude.zig").InstancesToExclude;
@@ -128,11 +129,7 @@ pub const StartCapacityTaskOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartCapacityTaskInput, options: Options) !StartCapacityTaskOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartCapacityTaskInput, options: CallOptions) !StartCapacityTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

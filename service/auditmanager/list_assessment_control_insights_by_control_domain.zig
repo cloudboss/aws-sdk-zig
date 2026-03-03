@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ControlInsightsMetadataByAssessmentItem = @import("control_insights_metadata_by_assessment_item.zig").ControlInsightsMetadataByAssessmentItem;
 
@@ -50,11 +51,7 @@ pub const ListAssessmentControlInsightsByControlDomainOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAssessmentControlInsightsByControlDomainInput, options: Options) !ListAssessmentControlInsightsByControlDomainOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAssessmentControlInsightsByControlDomainInput, options: CallOptions) !ListAssessmentControlInsightsByControlDomainOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const KxNAS1Configuration = @import("kx_nas1_configuration.zig").KxNAS1Configuration;
 const KxAttachedCluster = @import("kx_attached_cluster.zig").KxAttachedCluster;
@@ -120,11 +121,7 @@ pub const UpdateKxVolumeOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateKxVolumeInput, options: Options) !UpdateKxVolumeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateKxVolumeInput, options: CallOptions) !UpdateKxVolumeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

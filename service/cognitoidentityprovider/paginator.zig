@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const admin_list_groups_for_user = @import("admin_list_groups_for_user.zig");
@@ -22,7 +23,7 @@ pub const AdminListGroupsForUserPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: admin_list_groups_for_user.Options) !admin_list_groups_for_user.AdminListGroupsForUserOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !admin_list_groups_for_user.AdminListGroupsForUserOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -63,7 +64,7 @@ pub const AdminListUserAuthEventsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: admin_list_user_auth_events.Options) !admin_list_user_auth_events.AdminListUserAuthEventsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !admin_list_user_auth_events.AdminListUserAuthEventsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -104,7 +105,7 @@ pub const ListGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_groups.Options) !list_groups.ListGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_groups.ListGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -145,7 +146,7 @@ pub const ListIdentityProvidersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_identity_providers.Options) !list_identity_providers.ListIdentityProvidersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_identity_providers.ListIdentityProvidersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -186,7 +187,7 @@ pub const ListResourceServersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resource_servers.Options) !list_resource_servers.ListResourceServersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resource_servers.ListResourceServersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -227,7 +228,7 @@ pub const ListUserPoolClientsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_user_pool_clients.Options) !list_user_pool_clients.ListUserPoolClientsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_user_pool_clients.ListUserPoolClientsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -268,7 +269,7 @@ pub const ListUserPoolsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_user_pools.Options) !list_user_pools.ListUserPoolsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_user_pools.ListUserPoolsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -309,7 +310,7 @@ pub const ListUsersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_users.Options) !list_users.ListUsersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_users.ListUsersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -350,7 +351,7 @@ pub const ListUsersInGroupPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_users_in_group.Options) !list_users_in_group.ListUsersInGroupOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_users_in_group.ListUsersInGroupOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

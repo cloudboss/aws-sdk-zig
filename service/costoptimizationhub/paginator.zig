@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_efficiency_metrics = @import("list_efficiency_metrics.zig");
@@ -17,7 +18,7 @@ pub const ListEfficiencyMetricsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_efficiency_metrics.Options) !list_efficiency_metrics.ListEfficiencyMetricsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_efficiency_metrics.ListEfficiencyMetricsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -58,7 +59,7 @@ pub const ListEnrollmentStatusesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_enrollment_statuses.Options) !list_enrollment_statuses.ListEnrollmentStatusesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_enrollment_statuses.ListEnrollmentStatusesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -99,7 +100,7 @@ pub const ListRecommendationSummariesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_recommendation_summaries.Options) !list_recommendation_summaries.ListRecommendationSummariesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_recommendation_summaries.ListRecommendationSummariesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -140,7 +141,7 @@ pub const ListRecommendationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_recommendations.Options) !list_recommendations.ListRecommendationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_recommendations.ListRecommendationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

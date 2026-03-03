@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SourceServerActionsRequestFilters = @import("source_server_actions_request_filters.zig").SourceServerActionsRequestFilters;
 const SourceServerActionDocument = @import("source_server_action_document.zig").SourceServerActionDocument;
@@ -47,11 +48,7 @@ pub const ListSourceServerActionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSourceServerActionsInput, options: Options) !ListSourceServerActionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSourceServerActionsInput, options: CallOptions) !ListSourceServerActionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

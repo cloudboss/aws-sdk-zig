@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SummaryMetricConfiguration = @import("summary_metric_configuration.zig").SummaryMetricConfiguration;
 
@@ -17,11 +18,7 @@ pub const UpdateMetricConfigurationInput = struct {
 pub const UpdateMetricConfigurationOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateMetricConfigurationInput, options: Options) !UpdateMetricConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateMetricConfigurationInput, options: CallOptions) !UpdateMetricConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

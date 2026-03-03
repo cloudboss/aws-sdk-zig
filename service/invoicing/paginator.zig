@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_invoice_summaries = @import("list_invoice_summaries.zig");
@@ -16,7 +17,7 @@ pub const ListInvoiceSummariesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_invoice_summaries.Options) !list_invoice_summaries.ListInvoiceSummariesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_invoice_summaries.ListInvoiceSummariesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -57,7 +58,7 @@ pub const ListInvoiceUnitsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_invoice_units.Options) !list_invoice_units.ListInvoiceUnitsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_invoice_units.ListInvoiceUnitsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -98,7 +99,7 @@ pub const ListProcurementPortalPreferencesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_procurement_portal_preferences.Options) !list_procurement_portal_preferences.ListProcurementPortalPreferencesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_procurement_portal_preferences.ListProcurementPortalPreferencesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

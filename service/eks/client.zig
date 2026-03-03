@@ -65,6 +65,7 @@ const update_eks_anywhere_subscription = @import("update_eks_anywhere_subscripti
 const update_nodegroup_config = @import("update_nodegroup_config.zig");
 const update_nodegroup_version = @import("update_nodegroup_version.zig");
 const update_pod_identity_association = @import("update_pod_identity_association.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -101,7 +102,7 @@ pub const Client = struct {
     /// about associating access policies, see [Associating and disassociating
     /// access policies to and from access
     /// entries](https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html) in the *Amazon EKS User Guide*.
-    pub fn associateAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: associate_access_policy.AssociateAccessPolicyInput, options: associate_access_policy.Options) !associate_access_policy.AssociateAccessPolicyOutput {
+    pub fn associateAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: associate_access_policy.AssociateAccessPolicyInput, options: CallOptions) !associate_access_policy.AssociateAccessPolicyOutput {
         return associate_access_policy.execute(self, allocator, input, options);
     }
 
@@ -112,7 +113,7 @@ pub const Client = struct {
     /// encryption enabled. This allows you to implement a defense-in-depth security
     /// strategy
     /// without migrating applications to new Amazon EKS clusters.
-    pub fn associateEncryptionConfig(self: *Self, allocator: std.mem.Allocator, input: associate_encryption_config.AssociateEncryptionConfigInput, options: associate_encryption_config.Options) !associate_encryption_config.AssociateEncryptionConfigOutput {
+    pub fn associateEncryptionConfig(self: *Self, allocator: std.mem.Allocator, input: associate_encryption_config.AssociateEncryptionConfigInput, options: CallOptions) !associate_encryption_config.AssociateEncryptionConfigOutput {
         return associate_encryption_config.execute(self, allocator, input, options);
     }
 
@@ -127,7 +128,7 @@ pub const Client = struct {
     /// the identities using Kubernetes `RoleBinding` and `ClusterRoleBinding`
     /// objects. For more information see [Using RBAC
     /// Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) in the Kubernetes documentation.
-    pub fn associateIdentityProviderConfig(self: *Self, allocator: std.mem.Allocator, input: associate_identity_provider_config.AssociateIdentityProviderConfigInput, options: associate_identity_provider_config.Options) !associate_identity_provider_config.AssociateIdentityProviderConfigOutput {
+    pub fn associateIdentityProviderConfig(self: *Self, allocator: std.mem.Allocator, input: associate_identity_provider_config.AssociateIdentityProviderConfigInput, options: CallOptions) !associate_identity_provider_config.AssociateIdentityProviderConfigOutput {
         return associate_identity_provider_config.execute(self, allocator, input, options);
     }
 
@@ -150,7 +151,7 @@ pub const Client = struct {
     /// For more information about access entries, see [Access
     /// entries](https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html) in the
     /// *Amazon EKS User Guide*.
-    pub fn createAccessEntry(self: *Self, allocator: std.mem.Allocator, input: create_access_entry.CreateAccessEntryInput, options: create_access_entry.Options) !create_access_entry.CreateAccessEntryOutput {
+    pub fn createAccessEntry(self: *Self, allocator: std.mem.Allocator, input: create_access_entry.CreateAccessEntryInput, options: CallOptions) !create_access_entry.CreateAccessEntryOutput {
         return create_access_entry.execute(self, allocator, input, options);
     }
 
@@ -162,7 +163,7 @@ pub const Client = struct {
     /// [Amazon EKS
     /// add-ons](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)
     /// in the *Amazon EKS User Guide*.
-    pub fn createAddon(self: *Self, allocator: std.mem.Allocator, input: create_addon.CreateAddonInput, options: create_addon.Options) !create_addon.CreateAddonOutput {
+    pub fn createAddon(self: *Self, allocator: std.mem.Allocator, input: create_addon.CreateAddonInput, options: CallOptions) !create_addon.CreateAddonOutput {
         return create_addon.execute(self, allocator, input, options);
     }
 
@@ -181,7 +182,7 @@ pub const Client = struct {
     ///
     /// For more information, see [EKS
     /// Capabilities](https://docs.aws.amazon.com/eks/latest/userguide/capabilities.html) in the *Amazon EKS User Guide*.
-    pub fn createCapability(self: *Self, allocator: std.mem.Allocator, input: create_capability.CreateCapabilityInput, options: create_capability.Options) !create_capability.CreateCapabilityOutput {
+    pub fn createCapability(self: *Self, allocator: std.mem.Allocator, input: create_capability.CreateCapabilityInput, options: CallOptions) !create_capability.CreateCapabilityOutput {
         return create_capability.execute(self, allocator, input, options);
     }
 
@@ -249,7 +250,7 @@ pub const Client = struct {
     /// and [Launching Amazon EKS
     /// nodes](https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html)
     /// in the *Amazon EKS User Guide*.
-    pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: create_cluster.Options) !create_cluster.CreateClusterOutput {
+    pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: CallOptions) !create_cluster.CreateClusterOutput {
         return create_cluster.execute(self, allocator, input, options);
     }
 
@@ -260,7 +261,7 @@ pub const Client = struct {
     /// validate support are provisioned in Amazon Web Services License Manager and
     /// the caller account is
     /// granted access to EKS Anywhere Curated Packages.
-    pub fn createEksAnywhereSubscription(self: *Self, allocator: std.mem.Allocator, input: create_eks_anywhere_subscription.CreateEksAnywhereSubscriptionInput, options: create_eks_anywhere_subscription.Options) !create_eks_anywhere_subscription.CreateEksAnywhereSubscriptionOutput {
+    pub fn createEksAnywhereSubscription(self: *Self, allocator: std.mem.Allocator, input: create_eks_anywhere_subscription.CreateEksAnywhereSubscriptionInput, options: CallOptions) !create_eks_anywhere_subscription.CreateEksAnywhereSubscriptionOutput {
         return create_eks_anywhere_subscription.execute(self, allocator, input, options);
     }
 
@@ -312,7 +313,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Fargate
     /// profile](https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html) in the *Amazon EKS User Guide*.
-    pub fn createFargateProfile(self: *Self, allocator: std.mem.Allocator, input: create_fargate_profile.CreateFargateProfileInput, options: create_fargate_profile.Options) !create_fargate_profile.CreateFargateProfileOutput {
+    pub fn createFargateProfile(self: *Self, allocator: std.mem.Allocator, input: create_fargate_profile.CreateFargateProfileInput, options: CallOptions) !create_fargate_profile.CreateFargateProfileOutput {
         return create_fargate_profile.execute(self, allocator, input, options);
     }
 
@@ -348,7 +349,7 @@ pub const Client = struct {
     /// Windows AMI types are only supported for commercial Amazon Web Services
     /// Regions that support
     /// Windows on Amazon EKS.
-    pub fn createNodegroup(self: *Self, allocator: std.mem.Allocator, input: create_nodegroup.CreateNodegroupInput, options: create_nodegroup.Options) !create_nodegroup.CreateNodegroupOutput {
+    pub fn createNodegroup(self: *Self, allocator: std.mem.Allocator, input: create_nodegroup.CreateNodegroupInput, options: CallOptions) !create_nodegroup.CreateNodegroupOutput {
         return create_nodegroup.execute(self, allocator, input, options);
     }
 
@@ -397,7 +398,7 @@ pub const Client = struct {
     /// defined in the
     /// target role, allowing secure access to resources in another Amazon Web
     /// Services account.
-    pub fn createPodIdentityAssociation(self: *Self, allocator: std.mem.Allocator, input: create_pod_identity_association.CreatePodIdentityAssociationInput, options: create_pod_identity_association.Options) !create_pod_identity_association.CreatePodIdentityAssociationOutput {
+    pub fn createPodIdentityAssociation(self: *Self, allocator: std.mem.Allocator, input: create_pod_identity_association.CreatePodIdentityAssociationInput, options: CallOptions) !create_pod_identity_association.CreatePodIdentityAssociationOutput {
         return create_pod_identity_association.execute(self, allocator, input, options);
     }
 
@@ -407,7 +408,7 @@ pub const Client = struct {
     /// cluster to function improperly. If you delete an access entry in error, you
     /// can recreate
     /// it.
-    pub fn deleteAccessEntry(self: *Self, allocator: std.mem.Allocator, input: delete_access_entry.DeleteAccessEntryInput, options: delete_access_entry.Options) !delete_access_entry.DeleteAccessEntryOutput {
+    pub fn deleteAccessEntry(self: *Self, allocator: std.mem.Allocator, input: delete_access_entry.DeleteAccessEntryInput, options: CallOptions) !delete_access_entry.DeleteAccessEntryOutput {
         return delete_access_entry.execute(self, allocator, input, options);
     }
 
@@ -416,7 +417,7 @@ pub const Client = struct {
     /// When you remove an add-on, it's deleted from the cluster. You can always
     /// manually
     /// start an add-on on the cluster using the Kubernetes API.
-    pub fn deleteAddon(self: *Self, allocator: std.mem.Allocator, input: delete_addon.DeleteAddonInput, options: delete_addon.Options) !delete_addon.DeleteAddonOutput {
+    pub fn deleteAddon(self: *Self, allocator: std.mem.Allocator, input: delete_addon.DeleteAddonInput, options: CallOptions) !delete_addon.DeleteAddonOutput {
         return delete_addon.execute(self, allocator, input, options);
     }
 
@@ -430,7 +431,7 @@ pub const Client = struct {
     /// them is no longer available. To delete resources before removing the
     /// capability, use `kubectl delete` or remove them through your GitOps
     /// workflow.
-    pub fn deleteCapability(self: *Self, allocator: std.mem.Allocator, input: delete_capability.DeleteCapabilityInput, options: delete_capability.Options) !delete_capability.DeleteCapabilityOutput {
+    pub fn deleteCapability(self: *Self, allocator: std.mem.Allocator, input: delete_capability.DeleteCapabilityInput, options: CallOptions) !delete_capability.DeleteCapabilityOutput {
         return delete_capability.execute(self, allocator, input, options);
     }
 
@@ -450,7 +451,7 @@ pub const Client = struct {
     /// you
     /// must delete them first. For more information, see `DeleteNodgroup` and
     /// `DeleteFargateProfile`.
-    pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: delete_cluster.Options) !delete_cluster.DeleteClusterOutput {
+    pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: CallOptions) !delete_cluster.DeleteClusterOutput {
         return delete_cluster.execute(self, allocator, input, options);
     }
 
@@ -461,7 +462,7 @@ pub const Client = struct {
     /// only be cancelled within 7 days of creation and are cancelled by creating a
     /// ticket in
     /// the Amazon Web Services Support Center.
-    pub fn deleteEksAnywhereSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_eks_anywhere_subscription.DeleteEksAnywhereSubscriptionInput, options: delete_eks_anywhere_subscription.Options) !delete_eks_anywhere_subscription.DeleteEksAnywhereSubscriptionOutput {
+    pub fn deleteEksAnywhereSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_eks_anywhere_subscription.DeleteEksAnywhereSubscriptionInput, options: CallOptions) !delete_eks_anywhere_subscription.DeleteEksAnywhereSubscriptionOutput {
         return delete_eks_anywhere_subscription.execute(self, allocator, input, options);
     }
 
@@ -479,12 +480,12 @@ pub const Client = struct {
     /// a time. You must wait for a Fargate profile to finish deleting before you
     /// can delete
     /// any other profiles in that cluster.
-    pub fn deleteFargateProfile(self: *Self, allocator: std.mem.Allocator, input: delete_fargate_profile.DeleteFargateProfileInput, options: delete_fargate_profile.Options) !delete_fargate_profile.DeleteFargateProfileOutput {
+    pub fn deleteFargateProfile(self: *Self, allocator: std.mem.Allocator, input: delete_fargate_profile.DeleteFargateProfileInput, options: CallOptions) !delete_fargate_profile.DeleteFargateProfileOutput {
         return delete_fargate_profile.execute(self, allocator, input, options);
     }
 
     /// Deletes a managed node group.
-    pub fn deleteNodegroup(self: *Self, allocator: std.mem.Allocator, input: delete_nodegroup.DeleteNodegroupInput, options: delete_nodegroup.Options) !delete_nodegroup.DeleteNodegroupOutput {
+    pub fn deleteNodegroup(self: *Self, allocator: std.mem.Allocator, input: delete_nodegroup.DeleteNodegroupInput, options: CallOptions) !delete_nodegroup.DeleteNodegroupOutput {
         return delete_nodegroup.execute(self, allocator, input, options);
     }
 
@@ -494,7 +495,7 @@ pub const Client = struct {
     /// session might still be valid until the session expiry. If you need to
     /// immediately revoke the temporary session credentials, then go to the role in
     /// the IAM console.
-    pub fn deletePodIdentityAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_pod_identity_association.DeletePodIdentityAssociationInput, options: delete_pod_identity_association.Options) !delete_pod_identity_association.DeletePodIdentityAssociationOutput {
+    pub fn deletePodIdentityAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_pod_identity_association.DeletePodIdentityAssociationInput, options: CallOptions) !delete_pod_identity_association.DeletePodIdentityAssociationOutput {
         return delete_pod_identity_association.execute(self, allocator, input, options);
     }
 
@@ -505,22 +506,22 @@ pub const Client = struct {
     /// control plane
     /// using the [Amazon EKS
     /// Connector](https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html).
-    pub fn deregisterCluster(self: *Self, allocator: std.mem.Allocator, input: deregister_cluster.DeregisterClusterInput, options: deregister_cluster.Options) !deregister_cluster.DeregisterClusterOutput {
+    pub fn deregisterCluster(self: *Self, allocator: std.mem.Allocator, input: deregister_cluster.DeregisterClusterInput, options: CallOptions) !deregister_cluster.DeregisterClusterOutput {
         return deregister_cluster.execute(self, allocator, input, options);
     }
 
     /// Describes an access entry.
-    pub fn describeAccessEntry(self: *Self, allocator: std.mem.Allocator, input: describe_access_entry.DescribeAccessEntryInput, options: describe_access_entry.Options) !describe_access_entry.DescribeAccessEntryOutput {
+    pub fn describeAccessEntry(self: *Self, allocator: std.mem.Allocator, input: describe_access_entry.DescribeAccessEntryInput, options: CallOptions) !describe_access_entry.DescribeAccessEntryOutput {
         return describe_access_entry.execute(self, allocator, input, options);
     }
 
     /// Describes an Amazon EKS add-on.
-    pub fn describeAddon(self: *Self, allocator: std.mem.Allocator, input: describe_addon.DescribeAddonInput, options: describe_addon.Options) !describe_addon.DescribeAddonOutput {
+    pub fn describeAddon(self: *Self, allocator: std.mem.Allocator, input: describe_addon.DescribeAddonInput, options: CallOptions) !describe_addon.DescribeAddonOutput {
         return describe_addon.execute(self, allocator, input, options);
     }
 
     /// Returns configuration options.
-    pub fn describeAddonConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_addon_configuration.DescribeAddonConfigurationInput, options: describe_addon_configuration.Options) !describe_addon_configuration.DescribeAddonConfigurationOutput {
+    pub fn describeAddonConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_addon_configuration.DescribeAddonConfigurationInput, options: CallOptions) !describe_addon_configuration.DescribeAddonConfigurationOutput {
         return describe_addon_configuration.execute(self, allocator, input, options);
     }
 
@@ -530,14 +531,14 @@ pub const Client = struct {
     /// with, the
     /// `owner`, `publisher`, and the `type` of the add-on
     /// are returned.
-    pub fn describeAddonVersions(self: *Self, allocator: std.mem.Allocator, input: describe_addon_versions.DescribeAddonVersionsInput, options: describe_addon_versions.Options) !describe_addon_versions.DescribeAddonVersionsOutput {
+    pub fn describeAddonVersions(self: *Self, allocator: std.mem.Allocator, input: describe_addon_versions.DescribeAddonVersionsInput, options: CallOptions) !describe_addon_versions.DescribeAddonVersionsOutput {
         return describe_addon_versions.execute(self, allocator, input, options);
     }
 
     /// Returns detailed information about a specific managed capability in your
     /// Amazon EKS cluster, including its current status, configuration, health
     /// information, and any issues that may be affecting its operation.
-    pub fn describeCapability(self: *Self, allocator: std.mem.Allocator, input: describe_capability.DescribeCapabilityInput, options: describe_capability.Options) !describe_capability.DescribeCapabilityOutput {
+    pub fn describeCapability(self: *Self, allocator: std.mem.Allocator, input: describe_capability.DescribeCapabilityInput, options: CallOptions) !describe_capability.DescribeCapabilityOutput {
         return describe_capability.execute(self, allocator, input, options);
     }
 
@@ -553,43 +554,43 @@ pub const Client = struct {
     /// The API server endpoint and certificate authority data aren't available
     /// until the
     /// cluster reaches the `ACTIVE` state.
-    pub fn describeCluster(self: *Self, allocator: std.mem.Allocator, input: describe_cluster.DescribeClusterInput, options: describe_cluster.Options) !describe_cluster.DescribeClusterOutput {
+    pub fn describeCluster(self: *Self, allocator: std.mem.Allocator, input: describe_cluster.DescribeClusterInput, options: CallOptions) !describe_cluster.DescribeClusterOutput {
         return describe_cluster.execute(self, allocator, input, options);
     }
 
     /// Lists available Kubernetes versions for Amazon EKS clusters.
-    pub fn describeClusterVersions(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_versions.DescribeClusterVersionsInput, options: describe_cluster_versions.Options) !describe_cluster_versions.DescribeClusterVersionsOutput {
+    pub fn describeClusterVersions(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_versions.DescribeClusterVersionsInput, options: CallOptions) !describe_cluster_versions.DescribeClusterVersionsOutput {
         return describe_cluster_versions.execute(self, allocator, input, options);
     }
 
     /// Returns descriptive information about a subscription.
-    pub fn describeEksAnywhereSubscription(self: *Self, allocator: std.mem.Allocator, input: describe_eks_anywhere_subscription.DescribeEksAnywhereSubscriptionInput, options: describe_eks_anywhere_subscription.Options) !describe_eks_anywhere_subscription.DescribeEksAnywhereSubscriptionOutput {
+    pub fn describeEksAnywhereSubscription(self: *Self, allocator: std.mem.Allocator, input: describe_eks_anywhere_subscription.DescribeEksAnywhereSubscriptionInput, options: CallOptions) !describe_eks_anywhere_subscription.DescribeEksAnywhereSubscriptionOutput {
         return describe_eks_anywhere_subscription.execute(self, allocator, input, options);
     }
 
     /// Describes an Fargate profile.
-    pub fn describeFargateProfile(self: *Self, allocator: std.mem.Allocator, input: describe_fargate_profile.DescribeFargateProfileInput, options: describe_fargate_profile.Options) !describe_fargate_profile.DescribeFargateProfileOutput {
+    pub fn describeFargateProfile(self: *Self, allocator: std.mem.Allocator, input: describe_fargate_profile.DescribeFargateProfileInput, options: CallOptions) !describe_fargate_profile.DescribeFargateProfileOutput {
         return describe_fargate_profile.execute(self, allocator, input, options);
     }
 
     /// Describes an identity provider configuration.
-    pub fn describeIdentityProviderConfig(self: *Self, allocator: std.mem.Allocator, input: describe_identity_provider_config.DescribeIdentityProviderConfigInput, options: describe_identity_provider_config.Options) !describe_identity_provider_config.DescribeIdentityProviderConfigOutput {
+    pub fn describeIdentityProviderConfig(self: *Self, allocator: std.mem.Allocator, input: describe_identity_provider_config.DescribeIdentityProviderConfigInput, options: CallOptions) !describe_identity_provider_config.DescribeIdentityProviderConfigOutput {
         return describe_identity_provider_config.execute(self, allocator, input, options);
     }
 
     /// Returns details about an insight that you specify using its ID.
-    pub fn describeInsight(self: *Self, allocator: std.mem.Allocator, input: describe_insight.DescribeInsightInput, options: describe_insight.Options) !describe_insight.DescribeInsightOutput {
+    pub fn describeInsight(self: *Self, allocator: std.mem.Allocator, input: describe_insight.DescribeInsightInput, options: CallOptions) !describe_insight.DescribeInsightOutput {
         return describe_insight.execute(self, allocator, input, options);
     }
 
     /// Returns the status of the latest on-demand cluster insights refresh
     /// operation.
-    pub fn describeInsightsRefresh(self: *Self, allocator: std.mem.Allocator, input: describe_insights_refresh.DescribeInsightsRefreshInput, options: describe_insights_refresh.Options) !describe_insights_refresh.DescribeInsightsRefreshOutput {
+    pub fn describeInsightsRefresh(self: *Self, allocator: std.mem.Allocator, input: describe_insights_refresh.DescribeInsightsRefreshInput, options: CallOptions) !describe_insights_refresh.DescribeInsightsRefreshOutput {
         return describe_insights_refresh.execute(self, allocator, input, options);
     }
 
     /// Describes a managed node group.
-    pub fn describeNodegroup(self: *Self, allocator: std.mem.Allocator, input: describe_nodegroup.DescribeNodegroupInput, options: describe_nodegroup.Options) !describe_nodegroup.DescribeNodegroupOutput {
+    pub fn describeNodegroup(self: *Self, allocator: std.mem.Allocator, input: describe_nodegroup.DescribeNodegroupInput, options: CallOptions) !describe_nodegroup.DescribeNodegroupOutput {
         return describe_nodegroup.execute(self, allocator, input, options);
     }
 
@@ -602,7 +603,7 @@ pub const Client = struct {
     /// list the IDs for associations with `ListPodIdentityAssociations` and filter
     /// the
     /// list by namespace or service account.
-    pub fn describePodIdentityAssociation(self: *Self, allocator: std.mem.Allocator, input: describe_pod_identity_association.DescribePodIdentityAssociationInput, options: describe_pod_identity_association.Options) !describe_pod_identity_association.DescribePodIdentityAssociationOutput {
+    pub fn describePodIdentityAssociation(self: *Self, allocator: std.mem.Allocator, input: describe_pod_identity_association.DescribePodIdentityAssociationInput, options: CallOptions) !describe_pod_identity_association.DescribePodIdentityAssociationOutput {
         return describe_pod_identity_association.execute(self, allocator, input, options);
     }
 
@@ -611,12 +612,12 @@ pub const Client = struct {
     /// When the status of the update is `Successful`, the update is complete. If
     /// an update fails, the status is `Failed`, and an error detail explains the
     /// reason for the failure.
-    pub fn describeUpdate(self: *Self, allocator: std.mem.Allocator, input: describe_update.DescribeUpdateInput, options: describe_update.Options) !describe_update.DescribeUpdateOutput {
+    pub fn describeUpdate(self: *Self, allocator: std.mem.Allocator, input: describe_update.DescribeUpdateInput, options: CallOptions) !describe_update.DescribeUpdateOutput {
         return describe_update.execute(self, allocator, input, options);
     }
 
     /// Disassociates an access policy from an access entry.
-    pub fn disassociateAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: disassociate_access_policy.DisassociateAccessPolicyInput, options: disassociate_access_policy.Options) !disassociate_access_policy.DisassociateAccessPolicyOutput {
+    pub fn disassociateAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: disassociate_access_policy.DisassociateAccessPolicyInput, options: CallOptions) !disassociate_access_policy.DisassociateAccessPolicyOutput {
         return disassociate_access_policy.execute(self, allocator, input, options);
     }
 
@@ -627,56 +628,56 @@ pub const Client = struct {
     /// provider can no longer access the cluster. However, you can still access the
     /// cluster
     /// with IAM principals.
-    pub fn disassociateIdentityProviderConfig(self: *Self, allocator: std.mem.Allocator, input: disassociate_identity_provider_config.DisassociateIdentityProviderConfigInput, options: disassociate_identity_provider_config.Options) !disassociate_identity_provider_config.DisassociateIdentityProviderConfigOutput {
+    pub fn disassociateIdentityProviderConfig(self: *Self, allocator: std.mem.Allocator, input: disassociate_identity_provider_config.DisassociateIdentityProviderConfigInput, options: CallOptions) !disassociate_identity_provider_config.DisassociateIdentityProviderConfigOutput {
         return disassociate_identity_provider_config.execute(self, allocator, input, options);
     }
 
     /// Lists the access entries for your cluster.
-    pub fn listAccessEntries(self: *Self, allocator: std.mem.Allocator, input: list_access_entries.ListAccessEntriesInput, options: list_access_entries.Options) !list_access_entries.ListAccessEntriesOutput {
+    pub fn listAccessEntries(self: *Self, allocator: std.mem.Allocator, input: list_access_entries.ListAccessEntriesInput, options: CallOptions) !list_access_entries.ListAccessEntriesOutput {
         return list_access_entries.execute(self, allocator, input, options);
     }
 
     /// Lists the available access policies.
-    pub fn listAccessPolicies(self: *Self, allocator: std.mem.Allocator, input: list_access_policies.ListAccessPoliciesInput, options: list_access_policies.Options) !list_access_policies.ListAccessPoliciesOutput {
+    pub fn listAccessPolicies(self: *Self, allocator: std.mem.Allocator, input: list_access_policies.ListAccessPoliciesInput, options: CallOptions) !list_access_policies.ListAccessPoliciesOutput {
         return list_access_policies.execute(self, allocator, input, options);
     }
 
     /// Lists the installed add-ons.
-    pub fn listAddons(self: *Self, allocator: std.mem.Allocator, input: list_addons.ListAddonsInput, options: list_addons.Options) !list_addons.ListAddonsOutput {
+    pub fn listAddons(self: *Self, allocator: std.mem.Allocator, input: list_addons.ListAddonsInput, options: CallOptions) !list_addons.ListAddonsOutput {
         return list_addons.execute(self, allocator, input, options);
     }
 
     /// Lists the access policies associated with an access entry.
-    pub fn listAssociatedAccessPolicies(self: *Self, allocator: std.mem.Allocator, input: list_associated_access_policies.ListAssociatedAccessPoliciesInput, options: list_associated_access_policies.Options) !list_associated_access_policies.ListAssociatedAccessPoliciesOutput {
+    pub fn listAssociatedAccessPolicies(self: *Self, allocator: std.mem.Allocator, input: list_associated_access_policies.ListAssociatedAccessPoliciesInput, options: CallOptions) !list_associated_access_policies.ListAssociatedAccessPoliciesOutput {
         return list_associated_access_policies.execute(self, allocator, input, options);
     }
 
     /// Lists all managed capabilities in your Amazon EKS cluster. You can use this
     /// operation to get an overview of all capabilities and their current status.
-    pub fn listCapabilities(self: *Self, allocator: std.mem.Allocator, input: list_capabilities.ListCapabilitiesInput, options: list_capabilities.Options) !list_capabilities.ListCapabilitiesOutput {
+    pub fn listCapabilities(self: *Self, allocator: std.mem.Allocator, input: list_capabilities.ListCapabilitiesInput, options: CallOptions) !list_capabilities.ListCapabilitiesOutput {
         return list_capabilities.execute(self, allocator, input, options);
     }
 
     /// Lists the Amazon EKS clusters in your Amazon Web Services account in the
     /// specified Amazon Web Services Region.
-    pub fn listClusters(self: *Self, allocator: std.mem.Allocator, input: list_clusters.ListClustersInput, options: list_clusters.Options) !list_clusters.ListClustersOutput {
+    pub fn listClusters(self: *Self, allocator: std.mem.Allocator, input: list_clusters.ListClustersInput, options: CallOptions) !list_clusters.ListClustersOutput {
         return list_clusters.execute(self, allocator, input, options);
     }
 
     /// Displays the full description of the subscription.
-    pub fn listEksAnywhereSubscriptions(self: *Self, allocator: std.mem.Allocator, input: list_eks_anywhere_subscriptions.ListEksAnywhereSubscriptionsInput, options: list_eks_anywhere_subscriptions.Options) !list_eks_anywhere_subscriptions.ListEksAnywhereSubscriptionsOutput {
+    pub fn listEksAnywhereSubscriptions(self: *Self, allocator: std.mem.Allocator, input: list_eks_anywhere_subscriptions.ListEksAnywhereSubscriptionsInput, options: CallOptions) !list_eks_anywhere_subscriptions.ListEksAnywhereSubscriptionsOutput {
         return list_eks_anywhere_subscriptions.execute(self, allocator, input, options);
     }
 
     /// Lists the Fargate profiles associated with the specified cluster in your
     /// Amazon Web Services
     /// account in the specified Amazon Web Services Region.
-    pub fn listFargateProfiles(self: *Self, allocator: std.mem.Allocator, input: list_fargate_profiles.ListFargateProfilesInput, options: list_fargate_profiles.Options) !list_fargate_profiles.ListFargateProfilesOutput {
+    pub fn listFargateProfiles(self: *Self, allocator: std.mem.Allocator, input: list_fargate_profiles.ListFargateProfilesInput, options: CallOptions) !list_fargate_profiles.ListFargateProfilesOutput {
         return list_fargate_profiles.execute(self, allocator, input, options);
     }
 
     /// Lists the identity provider configurations for your cluster.
-    pub fn listIdentityProviderConfigs(self: *Self, allocator: std.mem.Allocator, input: list_identity_provider_configs.ListIdentityProviderConfigsInput, options: list_identity_provider_configs.Options) !list_identity_provider_configs.ListIdentityProviderConfigsOutput {
+    pub fn listIdentityProviderConfigs(self: *Self, allocator: std.mem.Allocator, input: list_identity_provider_configs.ListIdentityProviderConfigsInput, options: CallOptions) !list_identity_provider_configs.ListIdentityProviderConfigsOutput {
         return list_identity_provider_configs.execute(self, allocator, input, options);
     }
 
@@ -695,7 +696,7 @@ pub const Client = struct {
     /// * `MISCONFIGURATION`: Amazon EKS identifies misconfiguration in your EKS
     /// Hybrid Nodes setup that could impair functionality of your cluster or
     /// workloads. These are called configuration insights.
-    pub fn listInsights(self: *Self, allocator: std.mem.Allocator, input: list_insights.ListInsightsInput, options: list_insights.Options) !list_insights.ListInsightsOutput {
+    pub fn listInsights(self: *Self, allocator: std.mem.Allocator, input: list_insights.ListInsightsInput, options: CallOptions) !list_insights.ListInsightsOutput {
         return list_insights.execute(self, allocator, input, options);
     }
 
@@ -703,26 +704,26 @@ pub const Client = struct {
     /// Amazon Web Services
     /// account in the specified Amazon Web Services Region. Self-managed node
     /// groups aren't listed.
-    pub fn listNodegroups(self: *Self, allocator: std.mem.Allocator, input: list_nodegroups.ListNodegroupsInput, options: list_nodegroups.Options) !list_nodegroups.ListNodegroupsOutput {
+    pub fn listNodegroups(self: *Self, allocator: std.mem.Allocator, input: list_nodegroups.ListNodegroupsInput, options: CallOptions) !list_nodegroups.ListNodegroupsOutput {
         return list_nodegroups.execute(self, allocator, input, options);
     }
 
     /// List the EKS Pod Identity associations in a cluster. You can filter the list
     /// by the namespace that the
     /// association is in or the service account that the association uses.
-    pub fn listPodIdentityAssociations(self: *Self, allocator: std.mem.Allocator, input: list_pod_identity_associations.ListPodIdentityAssociationsInput, options: list_pod_identity_associations.Options) !list_pod_identity_associations.ListPodIdentityAssociationsOutput {
+    pub fn listPodIdentityAssociations(self: *Self, allocator: std.mem.Allocator, input: list_pod_identity_associations.ListPodIdentityAssociationsInput, options: CallOptions) !list_pod_identity_associations.ListPodIdentityAssociationsOutput {
         return list_pod_identity_associations.execute(self, allocator, input, options);
     }
 
     /// List the tags for an Amazon EKS resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists the updates associated with an Amazon EKS resource in your Amazon Web
     /// Services account, in the
     /// specified Amazon Web Services Region.
-    pub fn listUpdates(self: *Self, allocator: std.mem.Allocator, input: list_updates.ListUpdatesInput, options: list_updates.Options) !list_updates.ListUpdatesOutput {
+    pub fn listUpdates(self: *Self, allocator: std.mem.Allocator, input: list_updates.ListUpdatesInput, options: CallOptions) !list_updates.ListUpdatesOutput {
         return list_updates.execute(self, allocator, input, options);
     }
 
@@ -749,13 +750,13 @@ pub const Client = struct {
     /// the connected
     /// cluster will no longer be visible and must be deregistered using
     /// `DeregisterCluster`.
-    pub fn registerCluster(self: *Self, allocator: std.mem.Allocator, input: register_cluster.RegisterClusterInput, options: register_cluster.Options) !register_cluster.RegisterClusterOutput {
+    pub fn registerCluster(self: *Self, allocator: std.mem.Allocator, input: register_cluster.RegisterClusterInput, options: CallOptions) !register_cluster.RegisterClusterOutput {
         return register_cluster.execute(self, allocator, input, options);
     }
 
     /// Initiates an on-demand refresh operation for cluster insights, getting the
     /// latest analysis outside of the standard refresh schedule.
-    pub fn startInsightsRefresh(self: *Self, allocator: std.mem.Allocator, input: start_insights_refresh.StartInsightsRefreshInput, options: start_insights_refresh.Options) !start_insights_refresh.StartInsightsRefreshOutput {
+    pub fn startInsightsRefresh(self: *Self, allocator: std.mem.Allocator, input: start_insights_refresh.StartInsightsRefreshInput, options: CallOptions) !start_insights_refresh.StartInsightsRefreshOutput {
         return start_insights_refresh.execute(self, allocator, input, options);
     }
 
@@ -770,22 +771,22 @@ pub const Client = struct {
     /// cluster with this operation, that tag doesn't automatically propagate to the
     /// subnets and
     /// nodes associated with the cluster.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes specified tags from an Amazon EKS resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an access entry.
-    pub fn updateAccessEntry(self: *Self, allocator: std.mem.Allocator, input: update_access_entry.UpdateAccessEntryInput, options: update_access_entry.Options) !update_access_entry.UpdateAccessEntryOutput {
+    pub fn updateAccessEntry(self: *Self, allocator: std.mem.Allocator, input: update_access_entry.UpdateAccessEntryInput, options: CallOptions) !update_access_entry.UpdateAccessEntryOutput {
         return update_access_entry.execute(self, allocator, input, options);
     }
 
     /// Updates an Amazon EKS add-on.
-    pub fn updateAddon(self: *Self, allocator: std.mem.Allocator, input: update_addon.UpdateAddonInput, options: update_addon.Options) !update_addon.UpdateAddonOutput {
+    pub fn updateAddon(self: *Self, allocator: std.mem.Allocator, input: update_addon.UpdateAddonInput, options: CallOptions) !update_addon.UpdateAddonOutput {
         return update_addon.execute(self, allocator, input, options);
     }
 
@@ -796,7 +797,7 @@ pub const Client = struct {
     /// When you update a capability, Amazon EKS applies the changes and may restart
     /// capability components as needed. The capability remains available during the
     /// update process, but some operations may be temporarily unavailable.
-    pub fn updateCapability(self: *Self, allocator: std.mem.Allocator, input: update_capability.UpdateCapabilityInput, options: update_capability.Options) !update_capability.UpdateCapabilityOutput {
+    pub fn updateCapability(self: *Self, allocator: std.mem.Allocator, input: update_capability.UpdateCapabilityInput, options: CallOptions) !update_capability.UpdateCapabilityOutput {
         return update_capability.execute(self, allocator, input, options);
     }
 
@@ -865,7 +866,7 @@ pub const Client = struct {
     /// an update, the cluster status moves to `UPDATING` (this status transition is
     /// eventually consistent). When the update is complete (either `Failed` or
     /// `Successful`), the cluster status moves to `Active`.
-    pub fn updateClusterConfig(self: *Self, allocator: std.mem.Allocator, input: update_cluster_config.UpdateClusterConfigInput, options: update_cluster_config.Options) !update_cluster_config.UpdateClusterConfigOutput {
+    pub fn updateClusterConfig(self: *Self, allocator: std.mem.Allocator, input: update_cluster_config.UpdateClusterConfigInput, options: CallOptions) !update_cluster_config.UpdateClusterConfigOutput {
         return update_cluster_config.execute(self, allocator, input, options);
     }
 
@@ -888,14 +889,14 @@ pub const Client = struct {
     /// versions must match the cluster's Kubernetes version in order to update the
     /// cluster to a new
     /// Kubernetes version.
-    pub fn updateClusterVersion(self: *Self, allocator: std.mem.Allocator, input: update_cluster_version.UpdateClusterVersionInput, options: update_cluster_version.Options) !update_cluster_version.UpdateClusterVersionOutput {
+    pub fn updateClusterVersion(self: *Self, allocator: std.mem.Allocator, input: update_cluster_version.UpdateClusterVersionInput, options: CallOptions) !update_cluster_version.UpdateClusterVersionOutput {
         return update_cluster_version.execute(self, allocator, input, options);
     }
 
     /// Update an EKS Anywhere Subscription. Only auto renewal and tags can be
     /// updated after
     /// subscription creation.
-    pub fn updateEksAnywhereSubscription(self: *Self, allocator: std.mem.Allocator, input: update_eks_anywhere_subscription.UpdateEksAnywhereSubscriptionInput, options: update_eks_anywhere_subscription.Options) !update_eks_anywhere_subscription.UpdateEksAnywhereSubscriptionOutput {
+    pub fn updateEksAnywhereSubscription(self: *Self, allocator: std.mem.Allocator, input: update_eks_anywhere_subscription.UpdateEksAnywhereSubscriptionInput, options: CallOptions) !update_eks_anywhere_subscription.UpdateEksAnywhereSubscriptionOutput {
         return update_eks_anywhere_subscription.execute(self, allocator, input, options);
     }
 
@@ -908,7 +909,7 @@ pub const Client = struct {
     /// ](https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeUpdate.html) API operation. You can update the Kubernetes labels
     /// and taints for a node group and the scaling and version update
     /// configuration.
-    pub fn updateNodegroupConfig(self: *Self, allocator: std.mem.Allocator, input: update_nodegroup_config.UpdateNodegroupConfigInput, options: update_nodegroup_config.Options) !update_nodegroup_config.UpdateNodegroupConfigOutput {
+    pub fn updateNodegroupConfig(self: *Self, allocator: std.mem.Allocator, input: update_nodegroup_config.UpdateNodegroupConfigInput, options: CallOptions) !update_nodegroup_config.UpdateNodegroupConfigOutput {
         return update_nodegroup_config.execute(self, allocator, input, options);
     }
 
@@ -956,7 +957,7 @@ pub const Client = struct {
     /// update
     /// if Amazon EKS is unable to drain the nodes as a result of a `Pod` disruption
     /// budget issue.
-    pub fn updateNodegroupVersion(self: *Self, allocator: std.mem.Allocator, input: update_nodegroup_version.UpdateNodegroupVersionInput, options: update_nodegroup_version.Options) !update_nodegroup_version.UpdateNodegroupVersionOutput {
+    pub fn updateNodegroupVersion(self: *Self, allocator: std.mem.Allocator, input: update_nodegroup_version.UpdateNodegroupVersionInput, options: CallOptions) !update_nodegroup_version.UpdateNodegroupVersionOutput {
         return update_nodegroup_version.execute(self, allocator, input, options);
     }
 
@@ -991,7 +992,7 @@ pub const Client = struct {
     /// defined in the
     /// target role, allowing secure access to resources in another Amazon Web
     /// Services account.
-    pub fn updatePodIdentityAssociation(self: *Self, allocator: std.mem.Allocator, input: update_pod_identity_association.UpdatePodIdentityAssociationInput, options: update_pod_identity_association.Options) !update_pod_identity_association.UpdatePodIdentityAssociationOutput {
+    pub fn updatePodIdentityAssociation(self: *Self, allocator: std.mem.Allocator, input: update_pod_identity_association.UpdatePodIdentityAssociationInput, options: CallOptions) !update_pod_identity_association.UpdatePodIdentityAssociationOutput {
         return update_pod_identity_association.execute(self, allocator, input, options);
     }
 

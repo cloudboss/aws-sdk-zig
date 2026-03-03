@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_blue_green_deployments = @import("describe_blue_green_deployments.zig");
@@ -54,7 +55,7 @@ pub const DescribeBlueGreenDeploymentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_blue_green_deployments.Options) !describe_blue_green_deployments.DescribeBlueGreenDeploymentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_blue_green_deployments.DescribeBlueGreenDeploymentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -95,7 +96,7 @@ pub const DescribeCertificatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_certificates.Options) !describe_certificates.DescribeCertificatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_certificates.DescribeCertificatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -136,7 +137,7 @@ pub const DescribeDBClusterAutomatedBackupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_cluster_automated_backups.Options) !describe_db_cluster_automated_backups.DescribeDBClusterAutomatedBackupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_cluster_automated_backups.DescribeDBClusterAutomatedBackupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -177,7 +178,7 @@ pub const DescribeDBClusterBacktracksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_cluster_backtracks.Options) !describe_db_cluster_backtracks.DescribeDBClusterBacktracksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_cluster_backtracks.DescribeDBClusterBacktracksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -218,7 +219,7 @@ pub const DescribeDBClusterEndpointsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_cluster_endpoints.Options) !describe_db_cluster_endpoints.DescribeDBClusterEndpointsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_cluster_endpoints.DescribeDBClusterEndpointsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -259,7 +260,7 @@ pub const DescribeDBClusterParameterGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_cluster_parameter_groups.Options) !describe_db_cluster_parameter_groups.DescribeDBClusterParameterGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_cluster_parameter_groups.DescribeDBClusterParameterGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -300,7 +301,7 @@ pub const DescribeDBClusterParametersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_cluster_parameters.Options) !describe_db_cluster_parameters.DescribeDBClusterParametersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_cluster_parameters.DescribeDBClusterParametersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -341,7 +342,7 @@ pub const DescribeDBClusterSnapshotsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_cluster_snapshots.Options) !describe_db_cluster_snapshots.DescribeDBClusterSnapshotsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_cluster_snapshots.DescribeDBClusterSnapshotsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -382,7 +383,7 @@ pub const DescribeDBClustersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_clusters.Options) !describe_db_clusters.DescribeDBClustersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_clusters.DescribeDBClustersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -423,7 +424,7 @@ pub const DescribeDBEngineVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_engine_versions.Options) !describe_db_engine_versions.DescribeDBEngineVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_engine_versions.DescribeDBEngineVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -464,7 +465,7 @@ pub const DescribeDBInstanceAutomatedBackupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_instance_automated_backups.Options) !describe_db_instance_automated_backups.DescribeDBInstanceAutomatedBackupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_instance_automated_backups.DescribeDBInstanceAutomatedBackupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -505,7 +506,7 @@ pub const DescribeDBInstancesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_instances.Options) !describe_db_instances.DescribeDBInstancesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_instances.DescribeDBInstancesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -546,7 +547,7 @@ pub const DescribeDBLogFilesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_log_files.Options) !describe_db_log_files.DescribeDBLogFilesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_log_files.DescribeDBLogFilesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -587,7 +588,7 @@ pub const DescribeDBMajorEngineVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_major_engine_versions.Options) !describe_db_major_engine_versions.DescribeDBMajorEngineVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_major_engine_versions.DescribeDBMajorEngineVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -628,7 +629,7 @@ pub const DescribeDBParameterGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_parameter_groups.Options) !describe_db_parameter_groups.DescribeDBParameterGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_parameter_groups.DescribeDBParameterGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -669,7 +670,7 @@ pub const DescribeDBParametersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_parameters.Options) !describe_db_parameters.DescribeDBParametersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_parameters.DescribeDBParametersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -710,7 +711,7 @@ pub const DescribeDBProxiesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_proxies.Options) !describe_db_proxies.DescribeDBProxiesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_proxies.DescribeDBProxiesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -751,7 +752,7 @@ pub const DescribeDBProxyEndpointsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_proxy_endpoints.Options) !describe_db_proxy_endpoints.DescribeDBProxyEndpointsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_proxy_endpoints.DescribeDBProxyEndpointsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -792,7 +793,7 @@ pub const DescribeDBProxyTargetGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_proxy_target_groups.Options) !describe_db_proxy_target_groups.DescribeDBProxyTargetGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_proxy_target_groups.DescribeDBProxyTargetGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -833,7 +834,7 @@ pub const DescribeDBProxyTargetsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_proxy_targets.Options) !describe_db_proxy_targets.DescribeDBProxyTargetsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_proxy_targets.DescribeDBProxyTargetsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -874,7 +875,7 @@ pub const DescribeDBRecommendationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_recommendations.Options) !describe_db_recommendations.DescribeDBRecommendationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_recommendations.DescribeDBRecommendationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -915,7 +916,7 @@ pub const DescribeDBSecurityGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_security_groups.Options) !describe_db_security_groups.DescribeDBSecurityGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_security_groups.DescribeDBSecurityGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -956,7 +957,7 @@ pub const DescribeDBSnapshotTenantDatabasesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_snapshot_tenant_databases.Options) !describe_db_snapshot_tenant_databases.DescribeDBSnapshotTenantDatabasesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_snapshot_tenant_databases.DescribeDBSnapshotTenantDatabasesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -997,7 +998,7 @@ pub const DescribeDBSnapshotsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_snapshots.Options) !describe_db_snapshots.DescribeDBSnapshotsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_snapshots.DescribeDBSnapshotsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1038,7 +1039,7 @@ pub const DescribeDBSubnetGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_db_subnet_groups.Options) !describe_db_subnet_groups.DescribeDBSubnetGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_db_subnet_groups.DescribeDBSubnetGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1079,7 +1080,7 @@ pub const DescribeEngineDefaultClusterParametersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_engine_default_cluster_parameters.Options) !describe_engine_default_cluster_parameters.DescribeEngineDefaultClusterParametersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_engine_default_cluster_parameters.DescribeEngineDefaultClusterParametersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1120,7 +1121,7 @@ pub const DescribeEngineDefaultParametersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_engine_default_parameters.Options) !describe_engine_default_parameters.DescribeEngineDefaultParametersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_engine_default_parameters.DescribeEngineDefaultParametersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1161,7 +1162,7 @@ pub const DescribeEventSubscriptionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_event_subscriptions.Options) !describe_event_subscriptions.DescribeEventSubscriptionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_event_subscriptions.DescribeEventSubscriptionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1202,7 +1203,7 @@ pub const DescribeEventsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_events.Options) !describe_events.DescribeEventsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_events.DescribeEventsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1243,7 +1244,7 @@ pub const DescribeExportTasksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_export_tasks.Options) !describe_export_tasks.DescribeExportTasksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_export_tasks.DescribeExportTasksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1284,7 +1285,7 @@ pub const DescribeGlobalClustersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_global_clusters.Options) !describe_global_clusters.DescribeGlobalClustersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_global_clusters.DescribeGlobalClustersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1325,7 +1326,7 @@ pub const DescribeIntegrationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_integrations.Options) !describe_integrations.DescribeIntegrationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_integrations.DescribeIntegrationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1366,7 +1367,7 @@ pub const DescribeOptionGroupOptionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_option_group_options.Options) !describe_option_group_options.DescribeOptionGroupOptionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_option_group_options.DescribeOptionGroupOptionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1407,7 +1408,7 @@ pub const DescribeOptionGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_option_groups.Options) !describe_option_groups.DescribeOptionGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_option_groups.DescribeOptionGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1448,7 +1449,7 @@ pub const DescribeOrderableDBInstanceOptionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_orderable_db_instance_options.Options) !describe_orderable_db_instance_options.DescribeOrderableDBInstanceOptionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_orderable_db_instance_options.DescribeOrderableDBInstanceOptionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1489,7 +1490,7 @@ pub const DescribePendingMaintenanceActionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_pending_maintenance_actions.Options) !describe_pending_maintenance_actions.DescribePendingMaintenanceActionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_pending_maintenance_actions.DescribePendingMaintenanceActionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1530,7 +1531,7 @@ pub const DescribeReservedDBInstancesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_reserved_db_instances.Options) !describe_reserved_db_instances.DescribeReservedDBInstancesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_reserved_db_instances.DescribeReservedDBInstancesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1571,7 +1572,7 @@ pub const DescribeReservedDBInstancesOfferingsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_reserved_db_instances_offerings.Options) !describe_reserved_db_instances_offerings.DescribeReservedDBInstancesOfferingsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_reserved_db_instances_offerings.DescribeReservedDBInstancesOfferingsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1612,7 +1613,7 @@ pub const DescribeSourceRegionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_source_regions.Options) !describe_source_regions.DescribeSourceRegionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_source_regions.DescribeSourceRegionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1653,7 +1654,7 @@ pub const DescribeTenantDatabasesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_tenant_databases.Options) !describe_tenant_databases.DescribeTenantDatabasesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_tenant_databases.DescribeTenantDatabasesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1694,7 +1695,7 @@ pub const DownloadDBLogFilePortionPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: download_db_log_file_portion.Options) !download_db_log_file_portion.DownloadDBLogFilePortionOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !download_db_log_file_portion.DownloadDBLogFilePortionOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

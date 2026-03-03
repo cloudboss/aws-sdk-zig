@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SamplingBoostStatisticsDocument = @import("sampling_boost_statistics_document.zig").SamplingBoostStatisticsDocument;
 const SamplingStatisticsDocument = @import("sampling_statistics_document.zig").SamplingStatisticsDocument;
@@ -50,11 +51,7 @@ pub const GetSamplingTargetsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSamplingTargetsInput, options: Options) !GetSamplingTargetsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSamplingTargetsInput, options: CallOptions) !GetSamplingTargetsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

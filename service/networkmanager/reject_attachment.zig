@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Attachment = @import("attachment.zig").Attachment;
 
@@ -23,11 +24,7 @@ pub const RejectAttachmentOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RejectAttachmentInput, options: Options) !RejectAttachmentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RejectAttachmentInput, options: CallOptions) !RejectAttachmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

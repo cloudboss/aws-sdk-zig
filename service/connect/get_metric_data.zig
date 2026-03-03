@@ -2,21 +2,18 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filters = @import("filters.zig").Filters;
 const Grouping = @import("grouping.zig").Grouping;
 const HistoricalMetric = @import("historical_metric.zig").HistoricalMetric;
 const HistoricalMetricResult = @import("historical_metric_result.zig").HistoricalMetricResult;
 
-const GetMetricDataInput = @import("get_metric_data_request.zig").GetMetricDataRequest;
+pub const GetMetricDataInput = @import("get_metric_data_request.zig").GetMetricDataRequest;
 
-const GetMetricDataOutput = @import("get_metric_data_response.zig").GetMetricDataResponse;
+pub const GetMetricDataOutput = @import("get_metric_data_response.zig").GetMetricDataResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetMetricDataInput, options: Options) !GetMetricDataOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetMetricDataInput, options: CallOptions) !GetMetricDataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

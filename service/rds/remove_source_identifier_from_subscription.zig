@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EventSubscription = @import("event_subscription.zig").EventSubscription;
 const serde = @import("serde.zig");
@@ -20,11 +21,7 @@ pub const RemoveSourceIdentifierFromSubscriptionOutput = struct {
     event_subscription: ?EventSubscription = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveSourceIdentifierFromSubscriptionInput, options: Options) !RemoveSourceIdentifierFromSubscriptionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveSourceIdentifierFromSubscriptionInput, options: CallOptions) !RemoveSourceIdentifierFromSubscriptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ClusterForImageFilterCriteria = @import("cluster_for_image_filter_criteria.zig").ClusterForImageFilterCriteria;
 const ClusterInformation = @import("cluster_information.zig").ClusterInformation;
@@ -41,11 +42,7 @@ pub const GetClustersForImageOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetClustersForImageInput, options: Options) !GetClustersForImageOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetClustersForImageInput, options: CallOptions) !GetClustersForImageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_connectors = @import("list_connectors.zig");
@@ -18,7 +19,7 @@ pub const ListConnectorsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_connectors.Options) !list_connectors.ListConnectorsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_connectors.ListConnectorsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -59,7 +60,7 @@ pub const ListDirectoryRegistrationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_directory_registrations.Options) !list_directory_registrations.ListDirectoryRegistrationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_directory_registrations.ListDirectoryRegistrationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -100,7 +101,7 @@ pub const ListServicePrincipalNamesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_service_principal_names.Options) !list_service_principal_names.ListServicePrincipalNamesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_service_principal_names.ListServicePrincipalNamesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -141,7 +142,7 @@ pub const ListTemplateGroupAccessControlEntriesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_template_group_access_control_entries.Options) !list_template_group_access_control_entries.ListTemplateGroupAccessControlEntriesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_template_group_access_control_entries.ListTemplateGroupAccessControlEntriesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -182,7 +183,7 @@ pub const ListTemplatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_templates.Options) !list_templates.ListTemplatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_templates.ListTemplatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const S3Location = @import("s3_location.zig").S3Location;
 const MetricsExportStatusType = @import("metrics_export_status_type.zig").MetricsExportStatusType;
@@ -37,11 +38,7 @@ pub const DescribeMetricsExportOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeMetricsExportInput, options: Options) !DescribeMetricsExportOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeMetricsExportInput, options: CallOptions) !DescribeMetricsExportOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -8,6 +8,7 @@ const reverse_geocode = @import("reverse_geocode.zig");
 const search_nearby = @import("search_nearby.zig");
 const search_text = @import("search_text.zig");
 const suggest_ = @import("suggest.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -47,7 +48,7 @@ pub const Client = struct {
     ///
     /// For more information, see
     /// [Autocomplete](https://docs.aws.amazon.com/location/latest/developerguide/autocomplete.html) in the *Amazon Location Service Developer Guide*.
-    pub fn autocomplete(self: *Self, allocator: std.mem.Allocator, input: autocomplete_.AutocompleteInput, options: autocomplete_.Options) !autocomplete_.AutocompleteOutput {
+    pub fn autocomplete(self: *Self, allocator: std.mem.Allocator, input: autocomplete_.AutocompleteInput, options: CallOptions) !autocomplete_.AutocompleteOutput {
         return autocomplete_.execute(self, allocator, input, options);
     }
 
@@ -60,7 +61,7 @@ pub const Client = struct {
     ///
     /// For more information, see
     /// [Geocode](https://docs.aws.amazon.com/location/latest/developerguide/geocode.html) in the *Amazon Location Service Developer Guide*.
-    pub fn geocode(self: *Self, allocator: std.mem.Allocator, input: geocode_.GeocodeInput, options: geocode_.Options) !geocode_.GeocodeOutput {
+    pub fn geocode(self: *Self, allocator: std.mem.Allocator, input: geocode_.GeocodeInput, options: CallOptions) !geocode_.GeocodeOutput {
         return geocode_.execute(self, allocator, input, options);
     }
 
@@ -69,7 +70,7 @@ pub const Client = struct {
     ///
     /// For more information, see
     /// [GetPlace](https://docs.aws.amazon.com/location/latest/developerguide/get-place.html) in the *Amazon Location Service Developer Guide*.
-    pub fn getPlace(self: *Self, allocator: std.mem.Allocator, input: get_place.GetPlaceInput, options: get_place.Options) !get_place.GetPlaceOutput {
+    pub fn getPlace(self: *Self, allocator: std.mem.Allocator, input: get_place.GetPlaceInput, options: CallOptions) !get_place.GetPlaceOutput {
         return get_place.execute(self, allocator, input, options);
     }
 
@@ -83,7 +84,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Reverse
     /// Geocode](https://docs.aws.amazon.com/location/latest/developerguide/reverse-geocode.html) in the *Amazon Location Service Developer Guide*.
-    pub fn reverseGeocode(self: *Self, allocator: std.mem.Allocator, input: reverse_geocode.ReverseGeocodeInput, options: reverse_geocode.Options) !reverse_geocode.ReverseGeocodeOutput {
+    pub fn reverseGeocode(self: *Self, allocator: std.mem.Allocator, input: reverse_geocode.ReverseGeocodeInput, options: CallOptions) !reverse_geocode.ReverseGeocodeOutput {
         return reverse_geocode.execute(self, allocator, input, options);
     }
 
@@ -96,7 +97,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Search
     /// Nearby](https://docs.aws.amazon.com/location/latest/developerguide/search-nearby.html) in the *Amazon Location Service Developer Guide*.
-    pub fn searchNearby(self: *Self, allocator: std.mem.Allocator, input: search_nearby.SearchNearbyInput, options: search_nearby.Options) !search_nearby.SearchNearbyOutput {
+    pub fn searchNearby(self: *Self, allocator: std.mem.Allocator, input: search_nearby.SearchNearbyInput, options: CallOptions) !search_nearby.SearchNearbyOutput {
         return search_nearby.execute(self, allocator, input, options);
     }
 
@@ -105,7 +106,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Search
     /// Text](https://docs.aws.amazon.com/location/latest/developerguide/search-text.html) in the *Amazon Location Service Developer Guide*.
-    pub fn searchText(self: *Self, allocator: std.mem.Allocator, input: search_text.SearchTextInput, options: search_text.Options) !search_text.SearchTextOutput {
+    pub fn searchText(self: *Self, allocator: std.mem.Allocator, input: search_text.SearchTextInput, options: CallOptions) !search_text.SearchTextOutput {
         return search_text.execute(self, allocator, input, options);
     }
 
@@ -122,7 +123,7 @@ pub const Client = struct {
     ///
     /// For more information, see
     /// [Suggest](https://docs.aws.amazon.com/location/latest/developerguide/suggest.html) in the *Amazon Location Service Developer Guide*.
-    pub fn suggest(self: *Self, allocator: std.mem.Allocator, input: suggest_.SuggestInput, options: suggest_.Options) !suggest_.SuggestOutput {
+    pub fn suggest(self: *Self, allocator: std.mem.Allocator, input: suggest_.SuggestInput, options: CallOptions) !suggest_.SuggestOutput {
         return suggest_.execute(self, allocator, input, options);
     }
 };

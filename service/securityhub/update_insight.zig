@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AwsSecurityFindingFilters = @import("aws_security_finding_filters.zig").AwsSecurityFindingFilters;
 
@@ -29,11 +30,7 @@ pub const UpdateInsightInput = struct {
 pub const UpdateInsightOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateInsightInput, options: Options) !UpdateInsightOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateInsightInput, options: CallOptions) !UpdateInsightOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

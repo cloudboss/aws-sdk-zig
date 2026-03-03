@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Scope = @import("scope.zig").Scope;
 const ManagedRuleGroupVersion = @import("managed_rule_group_version.zig").ManagedRuleGroupVersion;
@@ -73,11 +74,7 @@ pub const ListAvailableManagedRuleGroupVersionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAvailableManagedRuleGroupVersionsInput, options: Options) !ListAvailableManagedRuleGroupVersionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAvailableManagedRuleGroupVersionsInput, options: CallOptions) !ListAvailableManagedRuleGroupVersionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

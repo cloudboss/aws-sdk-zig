@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_channels = @import("list_channels.zig");
@@ -20,7 +21,7 @@ pub const ListChannelsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_channels.Options) !list_channels.ListChannelsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_channels.ListChannelsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -61,7 +62,7 @@ pub const ListPlaybackKeyPairsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_playback_key_pairs.Options) !list_playback_key_pairs.ListPlaybackKeyPairsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_playback_key_pairs.ListPlaybackKeyPairsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -102,7 +103,7 @@ pub const ListPlaybackRestrictionPoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_playback_restriction_policies.Options) !list_playback_restriction_policies.ListPlaybackRestrictionPoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_playback_restriction_policies.ListPlaybackRestrictionPoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -143,7 +144,7 @@ pub const ListRecordingConfigurationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_recording_configurations.Options) !list_recording_configurations.ListRecordingConfigurationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_recording_configurations.ListRecordingConfigurationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -184,7 +185,7 @@ pub const ListStreamKeysPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_stream_keys.Options) !list_stream_keys.ListStreamKeysOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_stream_keys.ListStreamKeysOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -225,7 +226,7 @@ pub const ListStreamSessionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_stream_sessions.Options) !list_stream_sessions.ListStreamSessionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_stream_sessions.ListStreamSessionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -266,7 +267,7 @@ pub const ListStreamsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_streams.Options) !list_streams.ListStreamsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_streams.ListStreamsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

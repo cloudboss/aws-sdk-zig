@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_image_scan_findings = @import("describe_image_scan_findings.zig");
@@ -20,7 +21,7 @@ pub const DescribeImageScanFindingsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_image_scan_findings.Options) !describe_image_scan_findings.DescribeImageScanFindingsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_image_scan_findings.DescribeImageScanFindingsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -61,7 +62,7 @@ pub const DescribeImagesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_images.Options) !describe_images.DescribeImagesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_images.DescribeImagesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -102,7 +103,7 @@ pub const DescribePullThroughCacheRulesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_pull_through_cache_rules.Options) !describe_pull_through_cache_rules.DescribePullThroughCacheRulesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_pull_through_cache_rules.DescribePullThroughCacheRulesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -143,7 +144,7 @@ pub const DescribeRepositoriesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_repositories.Options) !describe_repositories.DescribeRepositoriesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_repositories.DescribeRepositoriesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -184,7 +185,7 @@ pub const DescribeRepositoryCreationTemplatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_repository_creation_templates.Options) !describe_repository_creation_templates.DescribeRepositoryCreationTemplatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_repository_creation_templates.DescribeRepositoryCreationTemplatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -225,7 +226,7 @@ pub const GetLifecyclePolicyPreviewPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_lifecycle_policy_preview.Options) !get_lifecycle_policy_preview.GetLifecyclePolicyPreviewOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_lifecycle_policy_preview.GetLifecyclePolicyPreviewOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -266,7 +267,7 @@ pub const ListImagesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_images.Options) !list_images.ListImagesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_images.ListImagesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_account_attributes = @import("describe_account_attributes.zig");
@@ -35,7 +36,7 @@ pub const DescribeAccountAttributesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_account_attributes.Options) !describe_account_attributes.DescribeAccountAttributesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_account_attributes.DescribeAccountAttributesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -76,7 +77,7 @@ pub const DescribeAccountLimitsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_account_limits.Options) !describe_account_limits.DescribeAccountLimitsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_account_limits.DescribeAccountLimitsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -117,7 +118,7 @@ pub const DescribeConfigurationSetsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_configuration_sets.Options) !describe_configuration_sets.DescribeConfigurationSetsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_configuration_sets.DescribeConfigurationSetsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -158,7 +159,7 @@ pub const DescribeKeywordsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_keywords.Options) !describe_keywords.DescribeKeywordsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_keywords.DescribeKeywordsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -199,7 +200,7 @@ pub const DescribeOptOutListsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_opt_out_lists.Options) !describe_opt_out_lists.DescribeOptOutListsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_opt_out_lists.DescribeOptOutListsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -240,7 +241,7 @@ pub const DescribeOptedOutNumbersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_opted_out_numbers.Options) !describe_opted_out_numbers.DescribeOptedOutNumbersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_opted_out_numbers.DescribeOptedOutNumbersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -281,7 +282,7 @@ pub const DescribePhoneNumbersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_phone_numbers.Options) !describe_phone_numbers.DescribePhoneNumbersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_phone_numbers.DescribePhoneNumbersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -322,7 +323,7 @@ pub const DescribePoolsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_pools.Options) !describe_pools.DescribePoolsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_pools.DescribePoolsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -363,7 +364,7 @@ pub const DescribeProtectConfigurationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_protect_configurations.Options) !describe_protect_configurations.DescribeProtectConfigurationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_protect_configurations.DescribeProtectConfigurationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -404,7 +405,7 @@ pub const DescribeRegistrationAttachmentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_registration_attachments.Options) !describe_registration_attachments.DescribeRegistrationAttachmentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_registration_attachments.DescribeRegistrationAttachmentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -445,7 +446,7 @@ pub const DescribeRegistrationFieldDefinitionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_registration_field_definitions.Options) !describe_registration_field_definitions.DescribeRegistrationFieldDefinitionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_registration_field_definitions.DescribeRegistrationFieldDefinitionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -486,7 +487,7 @@ pub const DescribeRegistrationFieldValuesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_registration_field_values.Options) !describe_registration_field_values.DescribeRegistrationFieldValuesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_registration_field_values.DescribeRegistrationFieldValuesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -527,7 +528,7 @@ pub const DescribeRegistrationSectionDefinitionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_registration_section_definitions.Options) !describe_registration_section_definitions.DescribeRegistrationSectionDefinitionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_registration_section_definitions.DescribeRegistrationSectionDefinitionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -568,7 +569,7 @@ pub const DescribeRegistrationTypeDefinitionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_registration_type_definitions.Options) !describe_registration_type_definitions.DescribeRegistrationTypeDefinitionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_registration_type_definitions.DescribeRegistrationTypeDefinitionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -609,7 +610,7 @@ pub const DescribeRegistrationVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_registration_versions.Options) !describe_registration_versions.DescribeRegistrationVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_registration_versions.DescribeRegistrationVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -650,7 +651,7 @@ pub const DescribeRegistrationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_registrations.Options) !describe_registrations.DescribeRegistrationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_registrations.DescribeRegistrationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -691,7 +692,7 @@ pub const DescribeSenderIdsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_sender_ids.Options) !describe_sender_ids.DescribeSenderIdsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_sender_ids.DescribeSenderIdsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -732,7 +733,7 @@ pub const DescribeSpendLimitsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_spend_limits.Options) !describe_spend_limits.DescribeSpendLimitsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_spend_limits.DescribeSpendLimitsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -773,7 +774,7 @@ pub const DescribeVerifiedDestinationNumbersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_verified_destination_numbers.Options) !describe_verified_destination_numbers.DescribeVerifiedDestinationNumbersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_verified_destination_numbers.DescribeVerifiedDestinationNumbersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -814,7 +815,7 @@ pub const ListPoolOriginationIdentitiesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_pool_origination_identities.Options) !list_pool_origination_identities.ListPoolOriginationIdentitiesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_pool_origination_identities.ListPoolOriginationIdentitiesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -855,7 +856,7 @@ pub const ListProtectConfigurationRuleSetNumberOverridesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_protect_configuration_rule_set_number_overrides.Options) !list_protect_configuration_rule_set_number_overrides.ListProtectConfigurationRuleSetNumberOverridesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_protect_configuration_rule_set_number_overrides.ListProtectConfigurationRuleSetNumberOverridesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -896,7 +897,7 @@ pub const ListRegistrationAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_registration_associations.Options) !list_registration_associations.ListRegistrationAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_registration_associations.ListRegistrationAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

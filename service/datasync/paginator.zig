@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_agents = @import("list_agents.zig");
@@ -18,7 +19,7 @@ pub const ListAgentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_agents.Options) !list_agents.ListAgentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_agents.ListAgentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -59,7 +60,7 @@ pub const ListLocationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_locations.Options) !list_locations.ListLocationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_locations.ListLocationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -100,7 +101,7 @@ pub const ListTagsForResourcePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -141,7 +142,7 @@ pub const ListTaskExecutionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_task_executions.Options) !list_task_executions.ListTaskExecutionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_task_executions.ListTaskExecutionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -182,7 +183,7 @@ pub const ListTasksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_tasks.Options) !list_tasks.ListTasksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_tasks.ListTasksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EmbeddingIdentityType = @import("embedding_identity_type.zig").EmbeddingIdentityType;
 
@@ -115,11 +116,7 @@ pub const GetDashboardEmbedUrlOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDashboardEmbedUrlInput, options: Options) !GetDashboardEmbedUrlOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDashboardEmbedUrlInput, options: CallOptions) !GetDashboardEmbedUrlOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

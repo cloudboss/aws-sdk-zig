@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DeprecatedStatus = @import("deprecated_status.zig").DeprecatedStatus;
 const RegistryType = @import("registry_type.zig").RegistryType;
@@ -81,11 +82,7 @@ pub const ListTypeVersionsOutput = struct {
     type_version_summaries: ?[]const TypeVersionSummary = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTypeVersionsInput, options: Options) !ListTypeVersionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTypeVersionsInput, options: CallOptions) !ListTypeVersionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

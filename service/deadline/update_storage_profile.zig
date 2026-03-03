@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FileSystemLocation = @import("file_system_location.zig").FileSystemLocation;
 const StorageProfileOperatingSystemFamily = @import("storage_profile_operating_system_family.zig").StorageProfileOperatingSystemFamily;
@@ -47,11 +48,7 @@ pub const UpdateStorageProfileInput = struct {
 pub const UpdateStorageProfileOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateStorageProfileInput, options: Options) !UpdateStorageProfileOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateStorageProfileInput, options: CallOptions) !UpdateStorageProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

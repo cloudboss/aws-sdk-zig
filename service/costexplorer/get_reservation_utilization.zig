@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Expression = @import("expression.zig").Expression;
 const Granularity = @import("granularity.zig").Granularity;
@@ -161,11 +162,7 @@ pub const GetReservationUtilizationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetReservationUtilizationInput, options: Options) !GetReservationUtilizationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetReservationUtilizationInput, options: CallOptions) !GetReservationUtilizationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

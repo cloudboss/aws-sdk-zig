@@ -2,21 +2,18 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-const ListDomainNamesInput = struct {};
+pub const ListDomainNamesInput = struct {};
 
 pub const ListDomainNamesOutput = struct {
     /// The names of the search domains owned by an account.
     domain_names: ?[]const aws.map.StringMapEntry = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDomainNamesInput, options: Options) !ListDomainNamesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDomainNamesInput, options: CallOptions) !ListDomainNamesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

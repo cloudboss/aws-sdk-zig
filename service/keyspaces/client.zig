@@ -20,6 +20,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_keyspace = @import("update_keyspace.zig");
 const update_table = @import("update_table.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -59,7 +60,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Create a
     /// keyspace](https://docs.aws.amazon.com/keyspaces/latest/devguide/getting-started.keyspaces.html) in the *Amazon Keyspaces Developer Guide*.
-    pub fn createKeyspace(self: *Self, allocator: std.mem.Allocator, input: create_keyspace.CreateKeyspaceInput, options: create_keyspace.Options) !create_keyspace.CreateKeyspaceOutput {
+    pub fn createKeyspace(self: *Self, allocator: std.mem.Allocator, input: create_keyspace.CreateKeyspaceInput, options: CallOptions) !create_keyspace.CreateKeyspaceOutput {
         return create_keyspace.execute(self, allocator, input, options);
     }
 
@@ -74,7 +75,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Create a
     /// table](https://docs.aws.amazon.com/keyspaces/latest/devguide/getting-started.tables.html) in the *Amazon Keyspaces Developer Guide*.
-    pub fn createTable(self: *Self, allocator: std.mem.Allocator, input: create_table.CreateTableInput, options: create_table.Options) !create_table.CreateTableOutput {
+    pub fn createTable(self: *Self, allocator: std.mem.Allocator, input: create_table.CreateTableInput, options: CallOptions) !create_table.CreateTableOutput {
         return create_table.execute(self, allocator, input, options);
     }
 
@@ -87,12 +88,12 @@ pub const Client = struct {
     /// For more information, see [User-defined types
     /// (UDTs)](https://docs.aws.amazon.com/keyspaces/latest/devguide/udts.html) in
     /// the *Amazon Keyspaces Developer Guide*.
-    pub fn createType(self: *Self, allocator: std.mem.Allocator, input: create_type.CreateTypeInput, options: create_type.Options) !create_type.CreateTypeOutput {
+    pub fn createType(self: *Self, allocator: std.mem.Allocator, input: create_type.CreateTypeInput, options: CallOptions) !create_type.CreateTypeOutput {
         return create_type.execute(self, allocator, input, options);
     }
 
     /// The `DeleteKeyspace` operation deletes a keyspace and all of its tables.
-    pub fn deleteKeyspace(self: *Self, allocator: std.mem.Allocator, input: delete_keyspace.DeleteKeyspaceInput, options: delete_keyspace.Options) !delete_keyspace.DeleteKeyspaceOutput {
+    pub fn deleteKeyspace(self: *Self, allocator: std.mem.Allocator, input: delete_keyspace.DeleteKeyspaceInput, options: CallOptions) !delete_keyspace.DeleteKeyspaceOutput {
         return delete_keyspace.execute(self, allocator, input, options);
     }
 
@@ -104,7 +105,7 @@ pub const Client = struct {
     /// If the specified table does not exist, Amazon Keyspaces returns a
     /// `ResourceNotFoundException`. If the table is already in the `DELETING`
     /// state, no error is returned.
-    pub fn deleteTable(self: *Self, allocator: std.mem.Allocator, input: delete_table.DeleteTableInput, options: delete_table.Options) !delete_table.DeleteTableOutput {
+    pub fn deleteTable(self: *Self, allocator: std.mem.Allocator, input: delete_table.DeleteTableInput, options: CallOptions) !delete_table.DeleteTableOutput {
         return delete_table.execute(self, allocator, input, options);
     }
 
@@ -113,7 +114,7 @@ pub const Client = struct {
     ///
     /// To configure the required permissions, see [Permissions to delete a
     /// UDT](https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-drop) in the *Amazon Keyspaces Developer Guide*.
-    pub fn deleteType(self: *Self, allocator: std.mem.Allocator, input: delete_type.DeleteTypeInput, options: delete_type.Options) !delete_type.DeleteTypeOutput {
+    pub fn deleteType(self: *Self, allocator: std.mem.Allocator, input: delete_type.DeleteTypeInput, options: CallOptions) !delete_type.DeleteTypeOutput {
         return delete_type.execute(self, allocator, input, options);
     }
 
@@ -121,7 +122,7 @@ pub const Client = struct {
     /// the replication strategy, the Amazon Web Services Regions of a multi-Region
     /// keyspace, and the status of newly added Regions after an `UpdateKeyspace`
     /// operation.
-    pub fn getKeyspace(self: *Self, allocator: std.mem.Allocator, input: get_keyspace.GetKeyspaceInput, options: get_keyspace.Options) !get_keyspace.GetKeyspaceOutput {
+    pub fn getKeyspace(self: *Self, allocator: std.mem.Allocator, input: get_keyspace.GetKeyspaceInput, options: CallOptions) !get_keyspace.GetKeyspaceOutput {
         return get_keyspace.execute(self, allocator, input, options);
     }
 
@@ -130,7 +131,7 @@ pub const Client = struct {
     ///
     /// To read table metadata using `GetTable`, the IAM principal needs `Select`
     /// action permissions for the table and the system keyspace.
-    pub fn getTable(self: *Self, allocator: std.mem.Allocator, input: get_table.GetTableInput, options: get_table.Options) !get_table.GetTableOutput {
+    pub fn getTable(self: *Self, allocator: std.mem.Allocator, input: get_table.GetTableInput, options: CallOptions) !get_table.GetTableOutput {
         return get_table.execute(self, allocator, input, options);
     }
 
@@ -152,7 +153,7 @@ pub const Client = struct {
     ///
     /// * `application-autoscaling:DescribeScalableTargets`
     /// * `application-autoscaling:DescribeScalingPolicies`
-    pub fn getTableAutoScalingSettings(self: *Self, allocator: std.mem.Allocator, input: get_table_auto_scaling_settings.GetTableAutoScalingSettingsInput, options: get_table_auto_scaling_settings.Options) !get_table_auto_scaling_settings.GetTableAutoScalingSettingsOutput {
+    pub fn getTableAutoScalingSettings(self: *Self, allocator: std.mem.Allocator, input: get_table_auto_scaling_settings.GetTableAutoScalingSettingsInput, options: CallOptions) !get_table_auto_scaling_settings.GetTableAutoScalingSettingsOutput {
         return get_table_auto_scaling_settings.execute(self, allocator, input, options);
     }
 
@@ -165,12 +166,12 @@ pub const Client = struct {
     /// action permissions for the system keyspace. To configure the required
     /// permissions, see [Permissions to view a
     /// UDT](https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-view) in the *Amazon Keyspaces Developer Guide*.
-    pub fn getType(self: *Self, allocator: std.mem.Allocator, input: get_type.GetTypeInput, options: get_type.Options) !get_type.GetTypeOutput {
+    pub fn getType(self: *Self, allocator: std.mem.Allocator, input: get_type.GetTypeInput, options: CallOptions) !get_type.GetTypeOutput {
         return get_type.execute(self, allocator, input, options);
     }
 
     /// The `ListKeyspaces` operation returns a list of keyspaces.
-    pub fn listKeyspaces(self: *Self, allocator: std.mem.Allocator, input: list_keyspaces.ListKeyspacesInput, options: list_keyspaces.Options) !list_keyspaces.ListKeyspacesOutput {
+    pub fn listKeyspaces(self: *Self, allocator: std.mem.Allocator, input: list_keyspaces.ListKeyspacesInput, options: CallOptions) !list_keyspaces.ListKeyspacesOutput {
         return list_keyspaces.execute(self, allocator, input, options);
     }
 
@@ -179,7 +180,7 @@ pub const Client = struct {
     ///
     /// To read keyspace metadata using `ListTables`, the IAM principal needs
     /// `Select` action permissions for the system keyspace.
-    pub fn listTables(self: *Self, allocator: std.mem.Allocator, input: list_tables.ListTablesInput, options: list_tables.Options) !list_tables.ListTablesOutput {
+    pub fn listTables(self: *Self, allocator: std.mem.Allocator, input: list_tables.ListTablesInput, options: CallOptions) !list_tables.ListTablesOutput {
         return list_tables.execute(self, allocator, input, options);
     }
 
@@ -189,7 +190,7 @@ pub const Client = struct {
     /// To read keyspace metadata using `ListTagsForResource`, the IAM principal
     /// needs `Select` action permissions for the specified resource and the system
     /// keyspace.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -199,7 +200,7 @@ pub const Client = struct {
     /// `Select` action permissions for the system keyspace. To configure the
     /// required permissions, see [Permissions to view a
     /// UDT](https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-view) in the *Amazon Keyspaces Developer Guide*.
-    pub fn listTypes(self: *Self, allocator: std.mem.Allocator, input: list_types.ListTypesInput, options: list_types.Options) !list_types.ListTypesOutput {
+    pub fn listTypes(self: *Self, allocator: std.mem.Allocator, input: list_types.ListTypesInput, options: CallOptions) !list_types.ListTypesOutput {
         return list_types.execute(self, allocator, input, options);
     }
 
@@ -239,7 +240,7 @@ pub const Client = struct {
     ///
     /// * Identity and Access Management (IAM) policies
     /// * Amazon CloudWatch metrics and alarms
-    pub fn restoreTable(self: *Self, allocator: std.mem.Allocator, input: restore_table.RestoreTableInput, options: restore_table.Options) !restore_table.RestoreTableOutput {
+    pub fn restoreTable(self: *Self, allocator: std.mem.Allocator, input: restore_table.RestoreTableInput, options: CallOptions) !restore_table.RestoreTableOutput {
         return restore_table.execute(self, allocator, input, options);
     }
 
@@ -252,12 +253,12 @@ pub const Client = struct {
     /// For IAM policy examples that show how to control access to Amazon Keyspaces
     /// resources based on tags, see [Amazon Keyspaces resource access based on
     /// tags](https://docs.aws.amazon.com/keyspaces/latest/devguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-tags) in the *Amazon Keyspaces Developer Guide*.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the association of tags from a Amazon Keyspaces resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -306,7 +307,7 @@ pub const Client = struct {
     /// For more information, see [Configure the IAM permissions required to add an
     /// Amazon Web Services Region to a
     /// keyspace](https://docs.aws.amazon.com/keyspaces/latest/devguide/howitworks_replication_permissions_addReplica.html) in the *Amazon Keyspaces Developer Guide*.
-    pub fn updateKeyspace(self: *Self, allocator: std.mem.Allocator, input: update_keyspace.UpdateKeyspaceInput, options: update_keyspace.Options) !update_keyspace.UpdateKeyspaceOutput {
+    pub fn updateKeyspace(self: *Self, allocator: std.mem.Allocator, input: update_keyspace.UpdateKeyspaceInput, options: CallOptions) !update_keyspace.UpdateKeyspaceOutput {
         return update_keyspace.execute(self, allocator, input, options);
     }
 
@@ -314,7 +315,7 @@ pub const Client = struct {
     /// example capacity mode, auto scaling, encryption, point-in-time recovery, or
     /// ttl settings. Note that you can only update one specific table setting per
     /// update operation.
-    pub fn updateTable(self: *Self, allocator: std.mem.Allocator, input: update_table.UpdateTableInput, options: update_table.Options) !update_table.UpdateTableOutput {
+    pub fn updateTable(self: *Self, allocator: std.mem.Allocator, input: update_table.UpdateTableInput, options: CallOptions) !update_table.UpdateTableOutput {
         return update_table.execute(self, allocator, input, options);
     }
 

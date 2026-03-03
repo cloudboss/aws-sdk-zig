@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_retained_messages = @import("list_retained_messages.zig");
@@ -14,7 +15,7 @@ pub const ListRetainedMessagesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_retained_messages.Options) !list_retained_messages.ListRetainedMessagesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_retained_messages.ListRetainedMessagesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

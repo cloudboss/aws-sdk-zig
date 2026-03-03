@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_gateway_routes = @import("list_gateway_routes.zig");
@@ -21,7 +22,7 @@ pub const ListGatewayRoutesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_gateway_routes.Options) !list_gateway_routes.ListGatewayRoutesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_gateway_routes.ListGatewayRoutesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -62,7 +63,7 @@ pub const ListMeshesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_meshes.Options) !list_meshes.ListMeshesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_meshes.ListMeshesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -103,7 +104,7 @@ pub const ListRoutesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_routes.Options) !list_routes.ListRoutesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_routes.ListRoutesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -144,7 +145,7 @@ pub const ListTagsForResourcePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -185,7 +186,7 @@ pub const ListVirtualGatewaysPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_virtual_gateways.Options) !list_virtual_gateways.ListVirtualGatewaysOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_virtual_gateways.ListVirtualGatewaysOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -226,7 +227,7 @@ pub const ListVirtualNodesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_virtual_nodes.Options) !list_virtual_nodes.ListVirtualNodesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_virtual_nodes.ListVirtualNodesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -267,7 +268,7 @@ pub const ListVirtualRoutersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_virtual_routers.Options) !list_virtual_routers.ListVirtualRoutersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_virtual_routers.ListVirtualRoutersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -308,7 +309,7 @@ pub const ListVirtualServicesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_virtual_services.Options) !list_virtual_services.ListVirtualServicesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_virtual_services.ListVirtualServicesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

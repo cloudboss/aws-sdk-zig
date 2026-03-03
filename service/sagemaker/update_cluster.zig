@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ClusterAutoScalingConfig = @import("cluster_auto_scaling_config.zig").ClusterAutoScalingConfig;
 const ClusterInstanceGroupSpecification = @import("cluster_instance_group_specification.zig").ClusterInstanceGroupSpecification;
@@ -72,11 +73,7 @@ pub const UpdateClusterOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateClusterInput, options: Options) !UpdateClusterOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateClusterInput, options: CallOptions) !UpdateClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

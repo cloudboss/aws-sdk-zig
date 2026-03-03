@@ -13,6 +13,7 @@ const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_schedule = @import("update_schedule.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -44,17 +45,17 @@ pub const Client = struct {
     }
 
     /// Creates the specified schedule.
-    pub fn createSchedule(self: *Self, allocator: std.mem.Allocator, input: create_schedule.CreateScheduleInput, options: create_schedule.Options) !create_schedule.CreateScheduleOutput {
+    pub fn createSchedule(self: *Self, allocator: std.mem.Allocator, input: create_schedule.CreateScheduleInput, options: CallOptions) !create_schedule.CreateScheduleOutput {
         return create_schedule.execute(self, allocator, input, options);
     }
 
     /// Creates the specified schedule group.
-    pub fn createScheduleGroup(self: *Self, allocator: std.mem.Allocator, input: create_schedule_group.CreateScheduleGroupInput, options: create_schedule_group.Options) !create_schedule_group.CreateScheduleGroupOutput {
+    pub fn createScheduleGroup(self: *Self, allocator: std.mem.Allocator, input: create_schedule_group.CreateScheduleGroupInput, options: CallOptions) !create_schedule_group.CreateScheduleGroupOutput {
         return create_schedule_group.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified schedule.
-    pub fn deleteSchedule(self: *Self, allocator: std.mem.Allocator, input: delete_schedule.DeleteScheduleInput, options: delete_schedule.Options) !delete_schedule.DeleteScheduleOutput {
+    pub fn deleteSchedule(self: *Self, allocator: std.mem.Allocator, input: delete_schedule.DeleteScheduleInput, options: CallOptions) !delete_schedule.DeleteScheduleOutput {
         return delete_schedule.execute(self, allocator, input, options);
     }
 
@@ -68,44 +69,44 @@ pub const Client = struct {
     /// until the schedule group and its associated schedules are deleted.
     ///
     /// This operation is eventually consistent.
-    pub fn deleteScheduleGroup(self: *Self, allocator: std.mem.Allocator, input: delete_schedule_group.DeleteScheduleGroupInput, options: delete_schedule_group.Options) !delete_schedule_group.DeleteScheduleGroupOutput {
+    pub fn deleteScheduleGroup(self: *Self, allocator: std.mem.Allocator, input: delete_schedule_group.DeleteScheduleGroupInput, options: CallOptions) !delete_schedule_group.DeleteScheduleGroupOutput {
         return delete_schedule_group.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified schedule.
-    pub fn getSchedule(self: *Self, allocator: std.mem.Allocator, input: get_schedule.GetScheduleInput, options: get_schedule.Options) !get_schedule.GetScheduleOutput {
+    pub fn getSchedule(self: *Self, allocator: std.mem.Allocator, input: get_schedule.GetScheduleInput, options: CallOptions) !get_schedule.GetScheduleOutput {
         return get_schedule.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified schedule group.
-    pub fn getScheduleGroup(self: *Self, allocator: std.mem.Allocator, input: get_schedule_group.GetScheduleGroupInput, options: get_schedule_group.Options) !get_schedule_group.GetScheduleGroupOutput {
+    pub fn getScheduleGroup(self: *Self, allocator: std.mem.Allocator, input: get_schedule_group.GetScheduleGroupInput, options: CallOptions) !get_schedule_group.GetScheduleGroupOutput {
         return get_schedule_group.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of your schedule groups.
-    pub fn listScheduleGroups(self: *Self, allocator: std.mem.Allocator, input: list_schedule_groups.ListScheduleGroupsInput, options: list_schedule_groups.Options) !list_schedule_groups.ListScheduleGroupsOutput {
+    pub fn listScheduleGroups(self: *Self, allocator: std.mem.Allocator, input: list_schedule_groups.ListScheduleGroupsInput, options: CallOptions) !list_schedule_groups.ListScheduleGroupsOutput {
         return list_schedule_groups.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of your EventBridge Scheduler schedules.
-    pub fn listSchedules(self: *Self, allocator: std.mem.Allocator, input: list_schedules.ListSchedulesInput, options: list_schedules.Options) !list_schedules.ListSchedulesOutput {
+    pub fn listSchedules(self: *Self, allocator: std.mem.Allocator, input: list_schedules.ListSchedulesInput, options: CallOptions) !list_schedules.ListSchedulesOutput {
         return list_schedules.execute(self, allocator, input, options);
     }
 
     /// Lists the tags associated with the Scheduler resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Assigns one or more tags (key-value pairs) to the specified EventBridge
     /// Scheduler resource. You can only assign tags to schedule groups.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified EventBridge Scheduler schedule
     /// group.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -119,7 +120,7 @@ pub const Client = struct {
     /// Before calling this operation, we recommend that you call the `GetSchedule`
     /// API operation and make a note of all optional parameters
     /// for your `UpdateSchedule` call.
-    pub fn updateSchedule(self: *Self, allocator: std.mem.Allocator, input: update_schedule.UpdateScheduleInput, options: update_schedule.Options) !update_schedule.UpdateScheduleOutput {
+    pub fn updateSchedule(self: *Self, allocator: std.mem.Allocator, input: update_schedule.UpdateScheduleInput, options: CallOptions) !update_schedule.UpdateScheduleOutput {
         return update_schedule.execute(self, allocator, input, options);
     }
 

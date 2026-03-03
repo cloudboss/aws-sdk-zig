@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DescribeTrustStoreRevocation = @import("describe_trust_store_revocation.zig").DescribeTrustStoreRevocation;
 const serde = @import("serde.zig");
@@ -31,11 +32,7 @@ pub const DescribeTrustStoreRevocationsOutput = struct {
     trust_store_revocations: ?[]const DescribeTrustStoreRevocation = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTrustStoreRevocationsInput, options: Options) !DescribeTrustStoreRevocationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTrustStoreRevocationsInput, options: CallOptions) !DescribeTrustStoreRevocationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

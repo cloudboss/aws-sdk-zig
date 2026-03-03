@@ -105,6 +105,7 @@ const update_gateway = @import("update_gateway.zig");
 const update_gateway_capability_configuration = @import("update_gateway_capability_configuration.zig");
 const update_portal = @import("update_portal.zig");
 const update_project = @import("update_project.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -141,23 +142,23 @@ pub const Client = struct {
     /// parent asset's model. For more information, see [Associating
     /// assets](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/add-associated-assets.html) in the
     /// *IoT SiteWise User Guide*.
-    pub fn associateAssets(self: *Self, allocator: std.mem.Allocator, input: associate_assets.AssociateAssetsInput, options: associate_assets.Options) !associate_assets.AssociateAssetsOutput {
+    pub fn associateAssets(self: *Self, allocator: std.mem.Allocator, input: associate_assets.AssociateAssetsInput, options: CallOptions) !associate_assets.AssociateAssetsOutput {
         return associate_assets.execute(self, allocator, input, options);
     }
 
     /// Associates a time series (data stream) with an asset property.
-    pub fn associateTimeSeriesToAssetProperty(self: *Self, allocator: std.mem.Allocator, input: associate_time_series_to_asset_property.AssociateTimeSeriesToAssetPropertyInput, options: associate_time_series_to_asset_property.Options) !associate_time_series_to_asset_property.AssociateTimeSeriesToAssetPropertyOutput {
+    pub fn associateTimeSeriesToAssetProperty(self: *Self, allocator: std.mem.Allocator, input: associate_time_series_to_asset_property.AssociateTimeSeriesToAssetPropertyInput, options: CallOptions) !associate_time_series_to_asset_property.AssociateTimeSeriesToAssetPropertyOutput {
         return associate_time_series_to_asset_property.execute(self, allocator, input, options);
     }
 
     /// Associates a group (batch) of assets with an IoT SiteWise Monitor project.
-    pub fn batchAssociateProjectAssets(self: *Self, allocator: std.mem.Allocator, input: batch_associate_project_assets.BatchAssociateProjectAssetsInput, options: batch_associate_project_assets.Options) !batch_associate_project_assets.BatchAssociateProjectAssetsOutput {
+    pub fn batchAssociateProjectAssets(self: *Self, allocator: std.mem.Allocator, input: batch_associate_project_assets.BatchAssociateProjectAssetsInput, options: CallOptions) !batch_associate_project_assets.BatchAssociateProjectAssetsOutput {
         return batch_associate_project_assets.execute(self, allocator, input, options);
     }
 
     /// Disassociates a group (batch) of assets from an IoT SiteWise Monitor
     /// project.
-    pub fn batchDisassociateProjectAssets(self: *Self, allocator: std.mem.Allocator, input: batch_disassociate_project_assets.BatchDisassociateProjectAssetsInput, options: batch_disassociate_project_assets.Options) !batch_disassociate_project_assets.BatchDisassociateProjectAssetsOutput {
+    pub fn batchDisassociateProjectAssets(self: *Self, allocator: std.mem.Allocator, input: batch_disassociate_project_assets.BatchDisassociateProjectAssetsInput, options: CallOptions) !batch_disassociate_project_assets.BatchDisassociateProjectAssetsOutput {
         return batch_disassociate_project_assets.execute(self, allocator, input, options);
     }
 
@@ -166,7 +167,7 @@ pub const Client = struct {
     /// properties. For more information, see [Querying
     /// aggregates](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates) in the
     /// *IoT SiteWise User Guide*.
-    pub fn batchGetAssetPropertyAggregates(self: *Self, allocator: std.mem.Allocator, input: batch_get_asset_property_aggregates.BatchGetAssetPropertyAggregatesInput, options: batch_get_asset_property_aggregates.Options) !batch_get_asset_property_aggregates.BatchGetAssetPropertyAggregatesOutput {
+    pub fn batchGetAssetPropertyAggregates(self: *Self, allocator: std.mem.Allocator, input: batch_get_asset_property_aggregates.BatchGetAssetPropertyAggregatesInput, options: CallOptions) !batch_get_asset_property_aggregates.BatchGetAssetPropertyAggregatesOutput {
         return batch_get_asset_property_aggregates.execute(self, allocator, input, options);
     }
 
@@ -174,7 +175,7 @@ pub const Client = struct {
     /// information, see [Querying
     /// current
     /// values](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values) in the *IoT SiteWise User Guide*.
-    pub fn batchGetAssetPropertyValue(self: *Self, allocator: std.mem.Allocator, input: batch_get_asset_property_value.BatchGetAssetPropertyValueInput, options: batch_get_asset_property_value.Options) !batch_get_asset_property_value.BatchGetAssetPropertyValueOutput {
+    pub fn batchGetAssetPropertyValue(self: *Self, allocator: std.mem.Allocator, input: batch_get_asset_property_value.BatchGetAssetPropertyValueInput, options: CallOptions) !batch_get_asset_property_value.BatchGetAssetPropertyValueOutput {
         return batch_get_asset_property_value.execute(self, allocator, input, options);
     }
 
@@ -182,7 +183,7 @@ pub const Client = struct {
     /// information, see
     /// [Querying historical
     /// values](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values) in the *IoT SiteWise User Guide*.
-    pub fn batchGetAssetPropertyValueHistory(self: *Self, allocator: std.mem.Allocator, input: batch_get_asset_property_value_history.BatchGetAssetPropertyValueHistoryInput, options: batch_get_asset_property_value_history.Options) !batch_get_asset_property_value_history.BatchGetAssetPropertyValueHistoryOutput {
+    pub fn batchGetAssetPropertyValueHistory(self: *Self, allocator: std.mem.Allocator, input: batch_get_asset_property_value_history.BatchGetAssetPropertyValueHistoryInput, options: CallOptions) !batch_get_asset_property_value_history.BatchGetAssetPropertyValueHistoryOutput {
         return batch_get_asset_property_value_history.execute(self, allocator, input, options);
     }
 
@@ -219,7 +220,7 @@ pub const Client = struct {
     /// For more information, see [BatchPutAssetPropertyValue
     /// authorization](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-batchputassetpropertyvalue-action) in the
     /// *IoT SiteWise User Guide*.
-    pub fn batchPutAssetPropertyValue(self: *Self, allocator: std.mem.Allocator, input: batch_put_asset_property_value.BatchPutAssetPropertyValueInput, options: batch_put_asset_property_value.Options) !batch_put_asset_property_value.BatchPutAssetPropertyValueOutput {
+    pub fn batchPutAssetPropertyValue(self: *Self, allocator: std.mem.Allocator, input: batch_put_asset_property_value.BatchPutAssetPropertyValueInput, options: CallOptions) !batch_put_asset_property_value.BatchPutAssetPropertyValueOutput {
         return batch_put_asset_property_value.execute(self, allocator, input, options);
     }
 
@@ -230,7 +231,7 @@ pub const Client = struct {
     ///
     /// Support for access policies that use an SSO Group as the identity is not
     /// supported at this time.
-    pub fn createAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: create_access_policy.CreateAccessPolicyInput, options: create_access_policy.Options) !create_access_policy.CreateAccessPolicyOutput {
+    pub fn createAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: create_access_policy.CreateAccessPolicyInput, options: CallOptions) !create_access_policy.CreateAccessPolicyOutput {
         return create_access_policy.execute(self, allocator, input, options);
     }
 
@@ -238,7 +239,7 @@ pub const Client = struct {
     /// [Creating
     /// assets](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-assets.html) in the
     /// *IoT SiteWise User Guide*.
-    pub fn createAsset(self: *Self, allocator: std.mem.Allocator, input: create_asset.CreateAssetInput, options: create_asset.Options) !create_asset.CreateAssetOutput {
+    pub fn createAsset(self: *Self, allocator: std.mem.Allocator, input: create_asset.CreateAssetInput, options: CallOptions) !create_asset.CreateAssetOutput {
         return create_asset.execute(self, allocator, input, options);
     }
 
@@ -269,7 +270,7 @@ pub const Client = struct {
     /// * **INTERFACE** – An interface is a type of model
     /// that defines a standard structure that can be applied to different asset
     /// models.
-    pub fn createAssetModel(self: *Self, allocator: std.mem.Allocator, input: create_asset_model.CreateAssetModelInput, options: create_asset_model.Options) !create_asset_model.CreateAssetModelOutput {
+    pub fn createAssetModel(self: *Self, allocator: std.mem.Allocator, input: create_asset_model.CreateAssetModelInput, options: CallOptions) !create_asset_model.CreateAssetModelOutput {
         return create_asset_model.execute(self, allocator, input, options);
     }
 
@@ -304,7 +305,7 @@ pub const Client = struct {
     /// To create an inline model, specify the `assetModelCompositeModelProperties`
     /// and
     /// don't include an `composedAssetModelId`.
-    pub fn createAssetModelCompositeModel(self: *Self, allocator: std.mem.Allocator, input: create_asset_model_composite_model.CreateAssetModelCompositeModelInput, options: create_asset_model_composite_model.Options) !create_asset_model_composite_model.CreateAssetModelCompositeModelOutput {
+    pub fn createAssetModelCompositeModel(self: *Self, allocator: std.mem.Allocator, input: create_asset_model_composite_model.CreateAssetModelCompositeModelInput, options: CallOptions) !create_asset_model_composite_model.CreateAssetModelCompositeModelOutput {
         return create_asset_model_composite_model.execute(self, allocator, input, options);
     }
 
@@ -328,22 +329,22 @@ pub const Client = struct {
     /// settings, it does not trigger computations or notifications.
     ///
     /// * Data older than 7 days does not trigger computations or notifications.
-    pub fn createBulkImportJob(self: *Self, allocator: std.mem.Allocator, input: create_bulk_import_job.CreateBulkImportJobInput, options: create_bulk_import_job.Options) !create_bulk_import_job.CreateBulkImportJobOutput {
+    pub fn createBulkImportJob(self: *Self, allocator: std.mem.Allocator, input: create_bulk_import_job.CreateBulkImportJobInput, options: CallOptions) !create_bulk_import_job.CreateBulkImportJobOutput {
         return create_bulk_import_job.execute(self, allocator, input, options);
     }
 
     /// Create a computation model with a configuration and data binding.
-    pub fn createComputationModel(self: *Self, allocator: std.mem.Allocator, input: create_computation_model.CreateComputationModelInput, options: create_computation_model.Options) !create_computation_model.CreateComputationModelOutput {
+    pub fn createComputationModel(self: *Self, allocator: std.mem.Allocator, input: create_computation_model.CreateComputationModelInput, options: CallOptions) !create_computation_model.CreateComputationModelOutput {
         return create_computation_model.execute(self, allocator, input, options);
     }
 
     /// Creates a dashboard in an IoT SiteWise Monitor project.
-    pub fn createDashboard(self: *Self, allocator: std.mem.Allocator, input: create_dashboard.CreateDashboardInput, options: create_dashboard.Options) !create_dashboard.CreateDashboardOutput {
+    pub fn createDashboard(self: *Self, allocator: std.mem.Allocator, input: create_dashboard.CreateDashboardInput, options: CallOptions) !create_dashboard.CreateDashboardOutput {
         return create_dashboard.execute(self, allocator, input, options);
     }
 
     /// Creates a dataset to connect an external datasource.
-    pub fn createDataset(self: *Self, allocator: std.mem.Allocator, input: create_dataset.CreateDatasetInput, options: create_dataset.Options) !create_dataset.CreateDatasetOutput {
+    pub fn createDataset(self: *Self, allocator: std.mem.Allocator, input: create_dataset.CreateDatasetInput, options: CallOptions) !create_dataset.CreateDatasetOutput {
         return create_dataset.execute(self, allocator, input, options);
     }
 
@@ -353,7 +354,7 @@ pub const Client = struct {
     /// data using a
     /// gateway](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html) in the
     /// *IoT SiteWise User Guide*.
-    pub fn createGateway(self: *Self, allocator: std.mem.Allocator, input: create_gateway.CreateGatewayInput, options: create_gateway.Options) !create_gateway.CreateGatewayOutput {
+    pub fn createGateway(self: *Self, allocator: std.mem.Allocator, input: create_gateway.CreateGatewayInput, options: CallOptions) !create_gateway.CreateGatewayOutput {
         return create_gateway.execute(self, allocator, input, options);
     }
 
@@ -365,7 +366,7 @@ pub const Client = struct {
     /// to that
     /// portal. For more information, see [Adding or removing portal
     /// administrators](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/administer-portals.html#portal-change-admins) in the *IoT SiteWise User Guide*.
-    pub fn createPortal(self: *Self, allocator: std.mem.Allocator, input: create_portal.CreatePortalInput, options: create_portal.Options) !create_portal.CreatePortalOutput {
+    pub fn createPortal(self: *Self, allocator: std.mem.Allocator, input: create_portal.CreatePortalInput, options: CallOptions) !create_portal.CreatePortalOutput {
         return create_portal.execute(self, allocator, input, options);
     }
 
@@ -373,7 +374,7 @@ pub const Client = struct {
     ///
     /// Make sure that the project name and description don't contain confidential
     /// information.
-    pub fn createProject(self: *Self, allocator: std.mem.Allocator, input: create_project.CreateProjectInput, options: create_project.Options) !create_project.CreateProjectOutput {
+    pub fn createProject(self: *Self, allocator: std.mem.Allocator, input: create_project.CreateProjectInput, options: CallOptions) !create_project.CreateProjectOutput {
         return create_project.execute(self, allocator, input, options);
     }
 
@@ -382,7 +383,7 @@ pub const Client = struct {
     /// IoT SiteWise Monitor resource. You can use this operation to revoke access
     /// to an IoT SiteWise Monitor
     /// resource.
-    pub fn deleteAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_access_policy.DeleteAccessPolicyInput, options: delete_access_policy.Options) !delete_access_policy.DeleteAccessPolicyOutput {
+    pub fn deleteAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_access_policy.DeleteAccessPolicyInput, options: CallOptions) !delete_access_policy.DeleteAccessPolicyOutput {
         return delete_access_policy.execute(self, allocator, input, options);
     }
 
@@ -393,7 +394,7 @@ pub const Client = struct {
     /// You can't delete an asset that's associated to another asset. For more
     /// information, see
     /// [DisassociateAssets](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DisassociateAssets.html).
-    pub fn deleteAsset(self: *Self, allocator: std.mem.Allocator, input: delete_asset.DeleteAssetInput, options: delete_asset.Options) !delete_asset.DeleteAssetOutput {
+    pub fn deleteAsset(self: *Self, allocator: std.mem.Allocator, input: delete_asset.DeleteAssetInput, options: CallOptions) !delete_asset.DeleteAssetOutput {
         return delete_asset.execute(self, allocator, input, options);
     }
 
@@ -407,7 +408,7 @@ pub const Client = struct {
     /// assets and
     /// models](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html) in the
     /// *IoT SiteWise User Guide*.
-    pub fn deleteAssetModel(self: *Self, allocator: std.mem.Allocator, input: delete_asset_model.DeleteAssetModelInput, options: delete_asset_model.Options) !delete_asset_model.DeleteAssetModelOutput {
+    pub fn deleteAssetModel(self: *Self, allocator: std.mem.Allocator, input: delete_asset_model.DeleteAssetModelInput, options: CallOptions) !delete_asset_model.DeleteAssetModelOutput {
         return delete_asset_model.execute(self, allocator, input, options);
     }
 
@@ -420,46 +421,46 @@ pub const Client = struct {
     /// on the asset model that you want to delete. For more information, see
     /// [Deleting assets and
     /// models](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html) in the *IoT SiteWise User Guide*.
-    pub fn deleteAssetModelCompositeModel(self: *Self, allocator: std.mem.Allocator, input: delete_asset_model_composite_model.DeleteAssetModelCompositeModelInput, options: delete_asset_model_composite_model.Options) !delete_asset_model_composite_model.DeleteAssetModelCompositeModelOutput {
+    pub fn deleteAssetModelCompositeModel(self: *Self, allocator: std.mem.Allocator, input: delete_asset_model_composite_model.DeleteAssetModelCompositeModelInput, options: CallOptions) !delete_asset_model_composite_model.DeleteAssetModelCompositeModelOutput {
         return delete_asset_model_composite_model.execute(self, allocator, input, options);
     }
 
     /// Deletes an interface relationship between an asset model and an interface
     /// asset
     /// model.
-    pub fn deleteAssetModelInterfaceRelationship(self: *Self, allocator: std.mem.Allocator, input: delete_asset_model_interface_relationship.DeleteAssetModelInterfaceRelationshipInput, options: delete_asset_model_interface_relationship.Options) !delete_asset_model_interface_relationship.DeleteAssetModelInterfaceRelationshipOutput {
+    pub fn deleteAssetModelInterfaceRelationship(self: *Self, allocator: std.mem.Allocator, input: delete_asset_model_interface_relationship.DeleteAssetModelInterfaceRelationshipInput, options: CallOptions) !delete_asset_model_interface_relationship.DeleteAssetModelInterfaceRelationshipOutput {
         return delete_asset_model_interface_relationship.execute(self, allocator, input, options);
     }
 
     /// Deletes a computation model. This action can't be undone.
-    pub fn deleteComputationModel(self: *Self, allocator: std.mem.Allocator, input: delete_computation_model.DeleteComputationModelInput, options: delete_computation_model.Options) !delete_computation_model.DeleteComputationModelOutput {
+    pub fn deleteComputationModel(self: *Self, allocator: std.mem.Allocator, input: delete_computation_model.DeleteComputationModelInput, options: CallOptions) !delete_computation_model.DeleteComputationModelOutput {
         return delete_computation_model.execute(self, allocator, input, options);
     }
 
     /// Deletes a dashboard from IoT SiteWise Monitor.
-    pub fn deleteDashboard(self: *Self, allocator: std.mem.Allocator, input: delete_dashboard.DeleteDashboardInput, options: delete_dashboard.Options) !delete_dashboard.DeleteDashboardOutput {
+    pub fn deleteDashboard(self: *Self, allocator: std.mem.Allocator, input: delete_dashboard.DeleteDashboardInput, options: CallOptions) !delete_dashboard.DeleteDashboardOutput {
         return delete_dashboard.execute(self, allocator, input, options);
     }
 
     /// Deletes a dataset. This cannot be undone.
-    pub fn deleteDataset(self: *Self, allocator: std.mem.Allocator, input: delete_dataset.DeleteDatasetInput, options: delete_dataset.Options) !delete_dataset.DeleteDatasetOutput {
+    pub fn deleteDataset(self: *Self, allocator: std.mem.Allocator, input: delete_dataset.DeleteDatasetInput, options: CallOptions) !delete_dataset.DeleteDatasetOutput {
         return delete_dataset.execute(self, allocator, input, options);
     }
 
     /// Deletes a gateway from IoT SiteWise. When you delete a gateway, some of the
     /// gateway's files remain
     /// in your gateway's file system.
-    pub fn deleteGateway(self: *Self, allocator: std.mem.Allocator, input: delete_gateway.DeleteGatewayInput, options: delete_gateway.Options) !delete_gateway.DeleteGatewayOutput {
+    pub fn deleteGateway(self: *Self, allocator: std.mem.Allocator, input: delete_gateway.DeleteGatewayInput, options: CallOptions) !delete_gateway.DeleteGatewayOutput {
         return delete_gateway.execute(self, allocator, input, options);
     }
 
     /// Deletes a portal from IoT SiteWise Monitor.
-    pub fn deletePortal(self: *Self, allocator: std.mem.Allocator, input: delete_portal.DeletePortalInput, options: delete_portal.Options) !delete_portal.DeletePortalOutput {
+    pub fn deletePortal(self: *Self, allocator: std.mem.Allocator, input: delete_portal.DeletePortalInput, options: CallOptions) !delete_portal.DeletePortalOutput {
         return delete_portal.execute(self, allocator, input, options);
     }
 
     /// Deletes a project from IoT SiteWise Monitor.
-    pub fn deleteProject(self: *Self, allocator: std.mem.Allocator, input: delete_project.DeleteProjectInput, options: delete_project.Options) !delete_project.DeleteProjectOutput {
+    pub fn deleteProject(self: *Self, allocator: std.mem.Allocator, input: delete_project.DeleteProjectInput, options: CallOptions) !delete_project.DeleteProjectOutput {
         return delete_project.execute(self, allocator, input, options);
     }
 
@@ -480,24 +481,24 @@ pub const Client = struct {
     /// * The `alias` of the time series.
     ///
     /// * The `assetId` and `propertyId` that identifies the asset property.
-    pub fn deleteTimeSeries(self: *Self, allocator: std.mem.Allocator, input: delete_time_series.DeleteTimeSeriesInput, options: delete_time_series.Options) !delete_time_series.DeleteTimeSeriesOutput {
+    pub fn deleteTimeSeries(self: *Self, allocator: std.mem.Allocator, input: delete_time_series.DeleteTimeSeriesInput, options: CallOptions) !delete_time_series.DeleteTimeSeriesOutput {
         return delete_time_series.execute(self, allocator, input, options);
     }
 
     /// Describes an access policy, which specifies an identity's access to an IoT
     /// SiteWise Monitor portal or
     /// project.
-    pub fn describeAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: describe_access_policy.DescribeAccessPolicyInput, options: describe_access_policy.Options) !describe_access_policy.DescribeAccessPolicyOutput {
+    pub fn describeAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: describe_access_policy.DescribeAccessPolicyInput, options: CallOptions) !describe_access_policy.DescribeAccessPolicyOutput {
         return describe_access_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about an action.
-    pub fn describeAction(self: *Self, allocator: std.mem.Allocator, input: describe_action.DescribeActionInput, options: describe_action.Options) !describe_action.DescribeActionOutput {
+    pub fn describeAction(self: *Self, allocator: std.mem.Allocator, input: describe_action.DescribeActionInput, options: CallOptions) !describe_action.DescribeActionOutput {
         return describe_action.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about an asset.
-    pub fn describeAsset(self: *Self, allocator: std.mem.Allocator, input: describe_asset.DescribeAssetInput, options: describe_asset.Options) !describe_asset.DescribeAssetOutput {
+    pub fn describeAsset(self: *Self, allocator: std.mem.Allocator, input: describe_asset.DescribeAssetInput, options: CallOptions) !describe_asset.DescribeAssetOutput {
         return describe_asset.execute(self, allocator, input, options);
     }
 
@@ -508,7 +509,7 @@ pub const Client = struct {
     /// this is
     /// based on, call
     /// [DescribeAssetModelCompositeModel](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModelCompositeModel.html).
-    pub fn describeAssetCompositeModel(self: *Self, allocator: std.mem.Allocator, input: describe_asset_composite_model.DescribeAssetCompositeModelInput, options: describe_asset_composite_model.Options) !describe_asset_composite_model.DescribeAssetCompositeModelOutput {
+    pub fn describeAssetCompositeModel(self: *Self, allocator: std.mem.Allocator, input: describe_asset_composite_model.DescribeAssetCompositeModelInput, options: CallOptions) !describe_asset_composite_model.DescribeAssetCompositeModelOutput {
         return describe_asset_composite_model.execute(self, allocator, input, options);
     }
 
@@ -517,7 +518,7 @@ pub const Client = struct {
     /// properties, hierarchies, composite models, and any interface relationships
     /// if the asset model
     /// implements interfaces.
-    pub fn describeAssetModel(self: *Self, allocator: std.mem.Allocator, input: describe_asset_model.DescribeAssetModelInput, options: describe_asset_model.Options) !describe_asset_model.DescribeAssetModelOutput {
+    pub fn describeAssetModel(self: *Self, allocator: std.mem.Allocator, input: describe_asset_model.DescribeAssetModelInput, options: CallOptions) !describe_asset_model.DescribeAssetModelOutput {
         return describe_asset_model.execute(self, allocator, input, options);
     }
 
@@ -525,14 +526,14 @@ pub const Client = struct {
     /// asset model
     /// component). For more information, see [Custom composite models
     /// (Components)](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html) in the *IoT SiteWise User Guide*.
-    pub fn describeAssetModelCompositeModel(self: *Self, allocator: std.mem.Allocator, input: describe_asset_model_composite_model.DescribeAssetModelCompositeModelInput, options: describe_asset_model_composite_model.Options) !describe_asset_model_composite_model.DescribeAssetModelCompositeModelOutput {
+    pub fn describeAssetModelCompositeModel(self: *Self, allocator: std.mem.Allocator, input: describe_asset_model_composite_model.DescribeAssetModelCompositeModelInput, options: CallOptions) !describe_asset_model_composite_model.DescribeAssetModelCompositeModelOutput {
         return describe_asset_model_composite_model.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about an interface relationship between an asset model
     /// and an
     /// interface asset model.
-    pub fn describeAssetModelInterfaceRelationship(self: *Self, allocator: std.mem.Allocator, input: describe_asset_model_interface_relationship.DescribeAssetModelInterfaceRelationshipInput, options: describe_asset_model_interface_relationship.Options) !describe_asset_model_interface_relationship.DescribeAssetModelInterfaceRelationshipOutput {
+    pub fn describeAssetModelInterfaceRelationship(self: *Self, allocator: std.mem.Allocator, input: describe_asset_model_interface_relationship.DescribeAssetModelInterfaceRelationshipInput, options: CallOptions) !describe_asset_model_interface_relationship.DescribeAssetModelInterfaceRelationshipOutput {
         return describe_asset_model_interface_relationship.execute(self, allocator, input, options);
     }
 
@@ -548,7 +549,7 @@ pub const Client = struct {
     /// value of an
     /// asset property, use
     /// [GetAssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_GetAssetPropertyValue.html).
-    pub fn describeAssetProperty(self: *Self, allocator: std.mem.Allocator, input: describe_asset_property.DescribeAssetPropertyInput, options: describe_asset_property.Options) !describe_asset_property.DescribeAssetPropertyOutput {
+    pub fn describeAssetProperty(self: *Self, allocator: std.mem.Allocator, input: describe_asset_property.DescribeAssetPropertyInput, options: CallOptions) !describe_asset_property.DescribeAssetPropertyOutput {
         return describe_asset_property.execute(self, allocator, input, options);
     }
 
@@ -556,27 +557,27 @@ pub const Client = struct {
     /// see [Describe
     /// a bulk import job
     /// (CLI)](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html) in the *Amazon Simple Storage Service User Guide*.
-    pub fn describeBulkImportJob(self: *Self, allocator: std.mem.Allocator, input: describe_bulk_import_job.DescribeBulkImportJobInput, options: describe_bulk_import_job.Options) !describe_bulk_import_job.DescribeBulkImportJobOutput {
+    pub fn describeBulkImportJob(self: *Self, allocator: std.mem.Allocator, input: describe_bulk_import_job.DescribeBulkImportJobInput, options: CallOptions) !describe_bulk_import_job.DescribeBulkImportJobOutput {
         return describe_bulk_import_job.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a computation model.
-    pub fn describeComputationModel(self: *Self, allocator: std.mem.Allocator, input: describe_computation_model.DescribeComputationModelInput, options: describe_computation_model.Options) !describe_computation_model.DescribeComputationModelOutput {
+    pub fn describeComputationModel(self: *Self, allocator: std.mem.Allocator, input: describe_computation_model.DescribeComputationModelInput, options: CallOptions) !describe_computation_model.DescribeComputationModelOutput {
         return describe_computation_model.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the execution summary of a computation model.
-    pub fn describeComputationModelExecutionSummary(self: *Self, allocator: std.mem.Allocator, input: describe_computation_model_execution_summary.DescribeComputationModelExecutionSummaryInput, options: describe_computation_model_execution_summary.Options) !describe_computation_model_execution_summary.DescribeComputationModelExecutionSummaryOutput {
+    pub fn describeComputationModelExecutionSummary(self: *Self, allocator: std.mem.Allocator, input: describe_computation_model_execution_summary.DescribeComputationModelExecutionSummaryInput, options: CallOptions) !describe_computation_model_execution_summary.DescribeComputationModelExecutionSummaryOutput {
         return describe_computation_model_execution_summary.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a dashboard.
-    pub fn describeDashboard(self: *Self, allocator: std.mem.Allocator, input: describe_dashboard.DescribeDashboardInput, options: describe_dashboard.Options) !describe_dashboard.DescribeDashboardOutput {
+    pub fn describeDashboard(self: *Self, allocator: std.mem.Allocator, input: describe_dashboard.DescribeDashboardInput, options: CallOptions) !describe_dashboard.DescribeDashboardOutput {
         return describe_dashboard.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a dataset.
-    pub fn describeDataset(self: *Self, allocator: std.mem.Allocator, input: describe_dataset.DescribeDatasetInput, options: describe_dataset.Options) !describe_dataset.DescribeDatasetOutput {
+    pub fn describeDataset(self: *Self, allocator: std.mem.Allocator, input: describe_dataset.DescribeDatasetInput, options: CallOptions) !describe_dataset.DescribeDatasetOutput {
         return describe_dataset.execute(self, allocator, input, options);
     }
 
@@ -585,17 +586,17 @@ pub const Client = struct {
     /// the default or specified Region. For more information, see [Key
     /// management](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html) in the
     /// *IoT SiteWise User Guide*.
-    pub fn describeDefaultEncryptionConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_default_encryption_configuration.DescribeDefaultEncryptionConfigurationInput, options: describe_default_encryption_configuration.Options) !describe_default_encryption_configuration.DescribeDefaultEncryptionConfigurationOutput {
+    pub fn describeDefaultEncryptionConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_default_encryption_configuration.DescribeDefaultEncryptionConfigurationInput, options: CallOptions) !describe_default_encryption_configuration.DescribeDefaultEncryptionConfigurationOutput {
         return describe_default_encryption_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the execution.
-    pub fn describeExecution(self: *Self, allocator: std.mem.Allocator, input: describe_execution.DescribeExecutionInput, options: describe_execution.Options) !describe_execution.DescribeExecutionOutput {
+    pub fn describeExecution(self: *Self, allocator: std.mem.Allocator, input: describe_execution.DescribeExecutionInput, options: CallOptions) !describe_execution.DescribeExecutionOutput {
         return describe_execution.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a gateway.
-    pub fn describeGateway(self: *Self, allocator: std.mem.Allocator, input: describe_gateway.DescribeGatewayInput, options: describe_gateway.Options) !describe_gateway.DescribeGatewayOutput {
+    pub fn describeGateway(self: *Self, allocator: std.mem.Allocator, input: describe_gateway.DescribeGatewayInput, options: CallOptions) !describe_gateway.DescribeGatewayOutput {
         return describe_gateway.execute(self, allocator, input, options);
     }
 
@@ -620,27 +621,27 @@ pub const Client = struct {
     ///
     /// A gateway can have multiple capability configurations with different
     /// namespaces.
-    pub fn describeGatewayCapabilityConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_gateway_capability_configuration.DescribeGatewayCapabilityConfigurationInput, options: describe_gateway_capability_configuration.Options) !describe_gateway_capability_configuration.DescribeGatewayCapabilityConfigurationOutput {
+    pub fn describeGatewayCapabilityConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_gateway_capability_configuration.DescribeGatewayCapabilityConfigurationInput, options: CallOptions) !describe_gateway_capability_configuration.DescribeGatewayCapabilityConfigurationOutput {
         return describe_gateway_capability_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves the current IoT SiteWise logging options.
-    pub fn describeLoggingOptions(self: *Self, allocator: std.mem.Allocator, input: describe_logging_options.DescribeLoggingOptionsInput, options: describe_logging_options.Options) !describe_logging_options.DescribeLoggingOptionsOutput {
+    pub fn describeLoggingOptions(self: *Self, allocator: std.mem.Allocator, input: describe_logging_options.DescribeLoggingOptionsInput, options: CallOptions) !describe_logging_options.DescribeLoggingOptionsOutput {
         return describe_logging_options.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a portal.
-    pub fn describePortal(self: *Self, allocator: std.mem.Allocator, input: describe_portal.DescribePortalInput, options: describe_portal.Options) !describe_portal.DescribePortalOutput {
+    pub fn describePortal(self: *Self, allocator: std.mem.Allocator, input: describe_portal.DescribePortalInput, options: CallOptions) !describe_portal.DescribePortalOutput {
         return describe_portal.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a project.
-    pub fn describeProject(self: *Self, allocator: std.mem.Allocator, input: describe_project.DescribeProjectInput, options: describe_project.Options) !describe_project.DescribeProjectOutput {
+    pub fn describeProject(self: *Self, allocator: std.mem.Allocator, input: describe_project.DescribeProjectInput, options: CallOptions) !describe_project.DescribeProjectOutput {
         return describe_project.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the storage configuration for IoT SiteWise.
-    pub fn describeStorageConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_storage_configuration.DescribeStorageConfigurationInput, options: describe_storage_configuration.Options) !describe_storage_configuration.DescribeStorageConfigurationOutput {
+    pub fn describeStorageConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_storage_configuration.DescribeStorageConfigurationInput, options: CallOptions) !describe_storage_configuration.DescribeStorageConfigurationOutput {
         return describe_storage_configuration.execute(self, allocator, input, options);
     }
 
@@ -657,31 +658,31 @@ pub const Client = struct {
     /// * The `alias` of the time series.
     ///
     /// * The `assetId` and `propertyId` that identifies the asset property.
-    pub fn describeTimeSeries(self: *Self, allocator: std.mem.Allocator, input: describe_time_series.DescribeTimeSeriesInput, options: describe_time_series.Options) !describe_time_series.DescribeTimeSeriesOutput {
+    pub fn describeTimeSeries(self: *Self, allocator: std.mem.Allocator, input: describe_time_series.DescribeTimeSeriesInput, options: CallOptions) !describe_time_series.DescribeTimeSeriesOutput {
         return describe_time_series.execute(self, allocator, input, options);
     }
 
     /// Disassociates a child asset from the given parent asset through a hierarchy
     /// defined in the
     /// parent asset's model.
-    pub fn disassociateAssets(self: *Self, allocator: std.mem.Allocator, input: disassociate_assets.DisassociateAssetsInput, options: disassociate_assets.Options) !disassociate_assets.DisassociateAssetsOutput {
+    pub fn disassociateAssets(self: *Self, allocator: std.mem.Allocator, input: disassociate_assets.DisassociateAssetsInput, options: CallOptions) !disassociate_assets.DisassociateAssetsOutput {
         return disassociate_assets.execute(self, allocator, input, options);
     }
 
     /// Disassociates a time series (data stream) from an asset property.
-    pub fn disassociateTimeSeriesFromAssetProperty(self: *Self, allocator: std.mem.Allocator, input: disassociate_time_series_from_asset_property.DisassociateTimeSeriesFromAssetPropertyInput, options: disassociate_time_series_from_asset_property.Options) !disassociate_time_series_from_asset_property.DisassociateTimeSeriesFromAssetPropertyOutput {
+    pub fn disassociateTimeSeriesFromAssetProperty(self: *Self, allocator: std.mem.Allocator, input: disassociate_time_series_from_asset_property.DisassociateTimeSeriesFromAssetPropertyInput, options: CallOptions) !disassociate_time_series_from_asset_property.DisassociateTimeSeriesFromAssetPropertyOutput {
         return disassociate_time_series_from_asset_property.execute(self, allocator, input, options);
     }
 
     /// Executes an action on a target resource.
-    pub fn executeAction(self: *Self, allocator: std.mem.Allocator, input: execute_action.ExecuteActionInput, options: execute_action.Options) !execute_action.ExecuteActionOutput {
+    pub fn executeAction(self: *Self, allocator: std.mem.Allocator, input: execute_action.ExecuteActionInput, options: CallOptions) !execute_action.ExecuteActionOutput {
         return execute_action.execute(self, allocator, input, options);
     }
 
     /// Run SQL queries to retrieve metadata and time-series data from asset models,
     /// assets,
     /// measurements, metrics, transforms, and aggregates.
-    pub fn executeQuery(self: *Self, allocator: std.mem.Allocator, input: execute_query.ExecuteQueryInput, options: execute_query.Options) !execute_query.ExecuteQueryOutput {
+    pub fn executeQuery(self: *Self, allocator: std.mem.Allocator, input: execute_query.ExecuteQueryInput, options: CallOptions) !execute_query.ExecuteQueryOutput {
         return execute_query.execute(self, allocator, input, options);
     }
 
@@ -697,7 +698,7 @@ pub const Client = struct {
     /// `/company/windfarm/3/turbine/7/temperature`). To define an asset property's
     /// alias, see
     /// [UpdateAssetProperty](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
-    pub fn getAssetPropertyAggregates(self: *Self, allocator: std.mem.Allocator, input: get_asset_property_aggregates.GetAssetPropertyAggregatesInput, options: get_asset_property_aggregates.Options) !get_asset_property_aggregates.GetAssetPropertyAggregatesOutput {
+    pub fn getAssetPropertyAggregates(self: *Self, allocator: std.mem.Allocator, input: get_asset_property_aggregates.GetAssetPropertyAggregatesInput, options: CallOptions) !get_asset_property_aggregates.GetAssetPropertyAggregatesOutput {
         return get_asset_property_aggregates.execute(self, allocator, input, options);
     }
 
@@ -713,7 +714,7 @@ pub const Client = struct {
     /// `/company/windfarm/3/turbine/7/temperature`). To define an asset property's
     /// alias, see
     /// [UpdateAssetProperty](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
-    pub fn getAssetPropertyValue(self: *Self, allocator: std.mem.Allocator, input: get_asset_property_value.GetAssetPropertyValueInput, options: get_asset_property_value.Options) !get_asset_property_value.GetAssetPropertyValueOutput {
+    pub fn getAssetPropertyValue(self: *Self, allocator: std.mem.Allocator, input: get_asset_property_value.GetAssetPropertyValueInput, options: CallOptions) !get_asset_property_value.GetAssetPropertyValueOutput {
         return get_asset_property_value.execute(self, allocator, input, options);
     }
 
@@ -730,7 +731,7 @@ pub const Client = struct {
     /// `/company/windfarm/3/turbine/7/temperature`). To define an asset property's
     /// alias, see
     /// [UpdateAssetProperty](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
-    pub fn getAssetPropertyValueHistory(self: *Self, allocator: std.mem.Allocator, input: get_asset_property_value_history.GetAssetPropertyValueHistoryInput, options: get_asset_property_value_history.Options) !get_asset_property_value_history.GetAssetPropertyValueHistoryOutput {
+    pub fn getAssetPropertyValueHistory(self: *Self, allocator: std.mem.Allocator, input: get_asset_property_value_history.GetAssetPropertyValueHistoryInput, options: CallOptions) !get_asset_property_value_history.GetAssetPropertyValueHistoryOutput {
         return get_asset_property_value_history.execute(self, allocator, input, options);
     }
 
@@ -752,12 +753,12 @@ pub const Client = struct {
     /// `/company/windfarm/3/turbine/7/temperature`). To define an asset property's
     /// alias, see
     /// [UpdateAssetProperty](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
-    pub fn getInterpolatedAssetPropertyValues(self: *Self, allocator: std.mem.Allocator, input: get_interpolated_asset_property_values.GetInterpolatedAssetPropertyValuesInput, options: get_interpolated_asset_property_values.Options) !get_interpolated_asset_property_values.GetInterpolatedAssetPropertyValuesOutput {
+    pub fn getInterpolatedAssetPropertyValues(self: *Self, allocator: std.mem.Allocator, input: get_interpolated_asset_property_values.GetInterpolatedAssetPropertyValuesInput, options: CallOptions) !get_interpolated_asset_property_values.GetInterpolatedAssetPropertyValuesOutput {
         return get_interpolated_asset_property_values.execute(self, allocator, input, options);
     }
 
     /// Invokes SiteWise Assistant to start or continue a conversation.
-    pub fn invokeAssistant(self: *Self, allocator: std.mem.Allocator, input: invoke_assistant.InvokeAssistantInput, options: invoke_assistant.Options) !invoke_assistant.InvokeAssistantOutput {
+    pub fn invokeAssistant(self: *Self, allocator: std.mem.Allocator, input: invoke_assistant.InvokeAssistantInput, options: CallOptions) !invoke_assistant.InvokeAssistantOutput {
         return invoke_assistant.execute(self, allocator, input, options);
     }
 
@@ -765,18 +766,18 @@ pub const Client = struct {
     /// Identity Center user, an IAM Identity Center
     /// group, or an IAM user) or an IoT SiteWise Monitor resource (a portal or
     /// project).
-    pub fn listAccessPolicies(self: *Self, allocator: std.mem.Allocator, input: list_access_policies.ListAccessPoliciesInput, options: list_access_policies.Options) !list_access_policies.ListAccessPoliciesOutput {
+    pub fn listAccessPolicies(self: *Self, allocator: std.mem.Allocator, input: list_access_policies.ListAccessPoliciesInput, options: CallOptions) !list_access_policies.ListAccessPoliciesOutput {
         return list_access_policies.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of actions for a specific target resource.
-    pub fn listActions(self: *Self, allocator: std.mem.Allocator, input: list_actions.ListActionsInput, options: list_actions.Options) !list_actions.ListActionsOutput {
+    pub fn listActions(self: *Self, allocator: std.mem.Allocator, input: list_actions.ListActionsInput, options: CallOptions) !list_actions.ListActionsOutput {
         return list_actions.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of composite models associated with the asset
     /// model
-    pub fn listAssetModelCompositeModels(self: *Self, allocator: std.mem.Allocator, input: list_asset_model_composite_models.ListAssetModelCompositeModelsInput, options: list_asset_model_composite_models.Options) !list_asset_model_composite_models.ListAssetModelCompositeModelsOutput {
+    pub fn listAssetModelCompositeModels(self: *Self, allocator: std.mem.Allocator, input: list_asset_model_composite_models.ListAssetModelCompositeModelsInput, options: CallOptions) !list_asset_model_composite_models.ListAssetModelCompositeModelsOutput {
         return list_asset_model_composite_models.execute(self, allocator, input, options);
     }
 
@@ -784,12 +785,12 @@ pub const Client = struct {
     /// If you update properties associated with the model before you finish listing
     /// all the properties,
     /// you need to start all over again.
-    pub fn listAssetModelProperties(self: *Self, allocator: std.mem.Allocator, input: list_asset_model_properties.ListAssetModelPropertiesInput, options: list_asset_model_properties.Options) !list_asset_model_properties.ListAssetModelPropertiesOutput {
+    pub fn listAssetModelProperties(self: *Self, allocator: std.mem.Allocator, input: list_asset_model_properties.ListAssetModelPropertiesInput, options: CallOptions) !list_asset_model_properties.ListAssetModelPropertiesOutput {
         return list_asset_model_properties.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of summaries of all asset models.
-    pub fn listAssetModels(self: *Self, allocator: std.mem.Allocator, input: list_asset_models.ListAssetModelsInput, options: list_asset_models.Options) !list_asset_models.ListAssetModelsOutput {
+    pub fn listAssetModels(self: *Self, allocator: std.mem.Allocator, input: list_asset_models.ListAssetModelsInput, options: CallOptions) !list_asset_models.ListAssetModelsOutput {
         return list_asset_models.execute(self, allocator, input, options);
     }
 
@@ -797,7 +798,7 @@ pub const Client = struct {
     /// If you update properties associated with the model before you finish listing
     /// all the properties,
     /// you need to start all over again.
-    pub fn listAssetProperties(self: *Self, allocator: std.mem.Allocator, input: list_asset_properties.ListAssetPropertiesInput, options: list_asset_properties.Options) !list_asset_properties.ListAssetPropertiesOutput {
+    pub fn listAssetProperties(self: *Self, allocator: std.mem.Allocator, input: list_asset_properties.ListAssetPropertiesInput, options: CallOptions) !list_asset_properties.ListAssetPropertiesOutput {
         return list_asset_properties.execute(self, allocator, input, options);
     }
 
@@ -806,7 +807,7 @@ pub const Client = struct {
     /// to identify an asset's root asset and all associated assets between that
     /// asset and its
     /// root.
-    pub fn listAssetRelationships(self: *Self, allocator: std.mem.Allocator, input: list_asset_relationships.ListAssetRelationshipsInput, options: list_asset_relationships.Options) !list_asset_relationships.ListAssetRelationshipsOutput {
+    pub fn listAssetRelationships(self: *Self, allocator: std.mem.Allocator, input: list_asset_relationships.ListAssetRelationshipsInput, options: CallOptions) !list_asset_relationships.ListAssetRelationshipsOutput {
         return list_asset_relationships.execute(self, allocator, input, options);
     }
 
@@ -823,7 +824,7 @@ pub const Client = struct {
     /// assets, use
     /// [ListAssetModels](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_ListAssetModels.html) to get all of your asset model IDs. Then, use ListAssets to get all
     /// assets for each asset model.
-    pub fn listAssets(self: *Self, allocator: std.mem.Allocator, input: list_assets.ListAssetsInput, options: list_assets.Options) !list_assets.ListAssetsOutput {
+    pub fn listAssets(self: *Self, allocator: std.mem.Allocator, input: list_assets.ListAssetsInput, options: CallOptions) !list_assets.ListAssetsOutput {
         return list_assets.execute(self, allocator, input, options);
     }
 
@@ -834,7 +835,7 @@ pub const Client = struct {
     /// * `CHILD` - List all child assets associated to the asset.
     ///
     /// * `PARENT` - List the asset's parent asset.
-    pub fn listAssociatedAssets(self: *Self, allocator: std.mem.Allocator, input: list_associated_assets.ListAssociatedAssetsInput, options: list_associated_assets.Options) !list_associated_assets.ListAssociatedAssetsOutput {
+    pub fn listAssociatedAssets(self: *Self, allocator: std.mem.Allocator, input: list_associated_assets.ListAssociatedAssetsInput, options: CallOptions) !list_associated_assets.ListAssociatedAssetsOutput {
         return list_associated_assets.execute(self, allocator, input, options);
     }
 
@@ -842,14 +843,14 @@ pub const Client = struct {
     /// information, see [List bulk
     /// import jobs
     /// (CLI)](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ListBulkImportJobs.html) in the *IoT SiteWise User Guide*.
-    pub fn listBulkImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_bulk_import_jobs.ListBulkImportJobsInput, options: list_bulk_import_jobs.Options) !list_bulk_import_jobs.ListBulkImportJobsOutput {
+    pub fn listBulkImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_bulk_import_jobs.ListBulkImportJobsInput, options: CallOptions) !list_bulk_import_jobs.ListBulkImportJobsOutput {
         return list_bulk_import_jobs.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of composition relationships for an asset model
     /// of type
     /// `COMPONENT_MODEL`.
-    pub fn listCompositionRelationships(self: *Self, allocator: std.mem.Allocator, input: list_composition_relationships.ListCompositionRelationshipsInput, options: list_composition_relationships.Options) !list_composition_relationships.ListCompositionRelationshipsOutput {
+    pub fn listCompositionRelationships(self: *Self, allocator: std.mem.Allocator, input: list_composition_relationships.ListCompositionRelationshipsInput, options: CallOptions) !list_composition_relationships.ListCompositionRelationshipsOutput {
         return list_composition_relationships.execute(self, allocator, input, options);
     }
 
@@ -858,80 +859,80 @@ pub const Client = struct {
     /// specific data bindings are being utilized across the computation models.
     /// This track
     /// dependencies between data sources and computation models.
-    pub fn listComputationModelDataBindingUsages(self: *Self, allocator: std.mem.Allocator, input: list_computation_model_data_binding_usages.ListComputationModelDataBindingUsagesInput, options: list_computation_model_data_binding_usages.Options) !list_computation_model_data_binding_usages.ListComputationModelDataBindingUsagesOutput {
+    pub fn listComputationModelDataBindingUsages(self: *Self, allocator: std.mem.Allocator, input: list_computation_model_data_binding_usages.ListComputationModelDataBindingUsagesInput, options: CallOptions) !list_computation_model_data_binding_usages.ListComputationModelDataBindingUsagesOutput {
         return list_computation_model_data_binding_usages.execute(self, allocator, input, options);
     }
 
     /// Lists all distinct resources that are resolved from the executed actions of
     /// the
     /// computation model.
-    pub fn listComputationModelResolveToResources(self: *Self, allocator: std.mem.Allocator, input: list_computation_model_resolve_to_resources.ListComputationModelResolveToResourcesInput, options: list_computation_model_resolve_to_resources.Options) !list_computation_model_resolve_to_resources.ListComputationModelResolveToResourcesOutput {
+    pub fn listComputationModelResolveToResources(self: *Self, allocator: std.mem.Allocator, input: list_computation_model_resolve_to_resources.ListComputationModelResolveToResourcesInput, options: CallOptions) !list_computation_model_resolve_to_resources.ListComputationModelResolveToResourcesOutput {
         return list_computation_model_resolve_to_resources.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of summaries of all computation models.
-    pub fn listComputationModels(self: *Self, allocator: std.mem.Allocator, input: list_computation_models.ListComputationModelsInput, options: list_computation_models.Options) !list_computation_models.ListComputationModelsOutput {
+    pub fn listComputationModels(self: *Self, allocator: std.mem.Allocator, input: list_computation_models.ListComputationModelsInput, options: CallOptions) !list_computation_models.ListComputationModelsOutput {
         return list_computation_models.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of dashboards for an IoT SiteWise Monitor
     /// project.
-    pub fn listDashboards(self: *Self, allocator: std.mem.Allocator, input: list_dashboards.ListDashboardsInput, options: list_dashboards.Options) !list_dashboards.ListDashboardsOutput {
+    pub fn listDashboards(self: *Self, allocator: std.mem.Allocator, input: list_dashboards.ListDashboardsInput, options: CallOptions) !list_dashboards.ListDashboardsOutput {
         return list_dashboards.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of datasets for a specific target resource.
-    pub fn listDatasets(self: *Self, allocator: std.mem.Allocator, input: list_datasets.ListDatasetsInput, options: list_datasets.Options) !list_datasets.ListDatasetsOutput {
+    pub fn listDatasets(self: *Self, allocator: std.mem.Allocator, input: list_datasets.ListDatasetsInput, options: CallOptions) !list_datasets.ListDatasetsOutput {
         return list_datasets.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of summaries of all executions.
-    pub fn listExecutions(self: *Self, allocator: std.mem.Allocator, input: list_executions.ListExecutionsInput, options: list_executions.Options) !list_executions.ListExecutionsOutput {
+    pub fn listExecutions(self: *Self, allocator: std.mem.Allocator, input: list_executions.ListExecutionsInput, options: CallOptions) !list_executions.ListExecutionsOutput {
         return list_executions.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of gateways.
-    pub fn listGateways(self: *Self, allocator: std.mem.Allocator, input: list_gateways.ListGatewaysInput, options: list_gateways.Options) !list_gateways.ListGatewaysOutput {
+    pub fn listGateways(self: *Self, allocator: std.mem.Allocator, input: list_gateways.ListGatewaysInput, options: CallOptions) !list_gateways.ListGatewaysOutput {
         return list_gateways.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of asset models that have a specific interface
     /// asset model
     /// applied to them.
-    pub fn listInterfaceRelationships(self: *Self, allocator: std.mem.Allocator, input: list_interface_relationships.ListInterfaceRelationshipsInput, options: list_interface_relationships.Options) !list_interface_relationships.ListInterfaceRelationshipsOutput {
+    pub fn listInterfaceRelationships(self: *Self, allocator: std.mem.Allocator, input: list_interface_relationships.ListInterfaceRelationshipsInput, options: CallOptions) !list_interface_relationships.ListInterfaceRelationshipsOutput {
         return list_interface_relationships.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of IoT SiteWise Monitor portals.
-    pub fn listPortals(self: *Self, allocator: std.mem.Allocator, input: list_portals.ListPortalsInput, options: list_portals.Options) !list_portals.ListPortalsOutput {
+    pub fn listPortals(self: *Self, allocator: std.mem.Allocator, input: list_portals.ListPortalsInput, options: CallOptions) !list_portals.ListPortalsOutput {
         return list_portals.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of assets associated with an IoT SiteWise Monitor
     /// project.
-    pub fn listProjectAssets(self: *Self, allocator: std.mem.Allocator, input: list_project_assets.ListProjectAssetsInput, options: list_project_assets.Options) !list_project_assets.ListProjectAssetsOutput {
+    pub fn listProjectAssets(self: *Self, allocator: std.mem.Allocator, input: list_project_assets.ListProjectAssetsInput, options: CallOptions) !list_project_assets.ListProjectAssetsOutput {
         return list_project_assets.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of projects for an IoT SiteWise Monitor portal.
-    pub fn listProjects(self: *Self, allocator: std.mem.Allocator, input: list_projects.ListProjectsInput, options: list_projects.Options) !list_projects.ListProjectsOutput {
+    pub fn listProjects(self: *Self, allocator: std.mem.Allocator, input: list_projects.ListProjectsInput, options: CallOptions) !list_projects.ListProjectsOutput {
         return list_projects.execute(self, allocator, input, options);
     }
 
     /// Retrieves the list of tags for an IoT SiteWise resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of time series (data streams).
-    pub fn listTimeSeries(self: *Self, allocator: std.mem.Allocator, input: list_time_series.ListTimeSeriesInput, options: list_time_series.Options) !list_time_series.ListTimeSeriesOutput {
+    pub fn listTimeSeries(self: *Self, allocator: std.mem.Allocator, input: list_time_series.ListTimeSeriesInput, options: CallOptions) !list_time_series.ListTimeSeriesOutput {
         return list_time_series.execute(self, allocator, input, options);
     }
 
     /// Creates or updates an interface relationship between an asset model and an
     /// interface asset
     /// model. This operation applies an interface to an asset model.
-    pub fn putAssetModelInterfaceRelationship(self: *Self, allocator: std.mem.Allocator, input: put_asset_model_interface_relationship.PutAssetModelInterfaceRelationshipInput, options: put_asset_model_interface_relationship.Options) !put_asset_model_interface_relationship.PutAssetModelInterfaceRelationshipOutput {
+    pub fn putAssetModelInterfaceRelationship(self: *Self, allocator: std.mem.Allocator, input: put_asset_model_interface_relationship.PutAssetModelInterfaceRelationshipInput, options: CallOptions) !put_asset_model_interface_relationship.PutAssetModelInterfaceRelationshipOutput {
         return put_asset_model_interface_relationship.execute(self, allocator, input, options);
     }
 
@@ -940,43 +941,43 @@ pub const Client = struct {
     /// [Key
     /// management](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html) in
     /// the *IoT SiteWise User Guide*.
-    pub fn putDefaultEncryptionConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_default_encryption_configuration.PutDefaultEncryptionConfigurationInput, options: put_default_encryption_configuration.Options) !put_default_encryption_configuration.PutDefaultEncryptionConfigurationOutput {
+    pub fn putDefaultEncryptionConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_default_encryption_configuration.PutDefaultEncryptionConfigurationInput, options: CallOptions) !put_default_encryption_configuration.PutDefaultEncryptionConfigurationOutput {
         return put_default_encryption_configuration.execute(self, allocator, input, options);
     }
 
     /// Sets logging options for IoT SiteWise.
-    pub fn putLoggingOptions(self: *Self, allocator: std.mem.Allocator, input: put_logging_options.PutLoggingOptionsInput, options: put_logging_options.Options) !put_logging_options.PutLoggingOptionsOutput {
+    pub fn putLoggingOptions(self: *Self, allocator: std.mem.Allocator, input: put_logging_options.PutLoggingOptionsInput, options: CallOptions) !put_logging_options.PutLoggingOptionsOutput {
         return put_logging_options.execute(self, allocator, input, options);
     }
 
     /// Configures storage settings for IoT SiteWise.
-    pub fn putStorageConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_storage_configuration.PutStorageConfigurationInput, options: put_storage_configuration.Options) !put_storage_configuration.PutStorageConfigurationOutput {
+    pub fn putStorageConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_storage_configuration.PutStorageConfigurationInput, options: CallOptions) !put_storage_configuration.PutStorageConfigurationOutput {
         return put_storage_configuration.execute(self, allocator, input, options);
     }
 
     /// Adds tags to an IoT SiteWise resource. If a tag already exists for the
     /// resource, this operation
     /// updates the tag's value.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag from an IoT SiteWise resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an existing access policy that specifies an identity's access to an
     /// IoT SiteWise Monitor
     /// portal or project resource.
-    pub fn updateAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: update_access_policy.UpdateAccessPolicyInput, options: update_access_policy.Options) !update_access_policy.UpdateAccessPolicyOutput {
+    pub fn updateAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: update_access_policy.UpdateAccessPolicyInput, options: CallOptions) !update_access_policy.UpdateAccessPolicyOutput {
         return update_access_policy.execute(self, allocator, input, options);
     }
 
     /// Updates an asset's name. For more information, see [Updating assets and
     /// models](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html) in the
     /// *IoT SiteWise User Guide*.
-    pub fn updateAsset(self: *Self, allocator: std.mem.Allocator, input: update_asset.UpdateAssetInput, options: update_asset.Options) !update_asset.UpdateAssetOutput {
+    pub fn updateAsset(self: *Self, allocator: std.mem.Allocator, input: update_asset.UpdateAssetInput, options: CallOptions) !update_asset.UpdateAssetOutput {
         return update_asset.execute(self, allocator, input, options);
     }
 
@@ -1001,7 +1002,7 @@ pub const Client = struct {
     /// * Submit a second `UpdateAssetModel` request that includes the new
     /// property. The new asset property will have the same `name` as the previous
     /// one and IoT SiteWise will generate a new unique `id`.
-    pub fn updateAssetModel(self: *Self, allocator: std.mem.Allocator, input: update_asset_model.UpdateAssetModelInput, options: update_asset_model.Options) !update_asset_model.UpdateAssetModelOutput {
+    pub fn updateAssetModel(self: *Self, allocator: std.mem.Allocator, input: update_asset_model.UpdateAssetModelInput, options: CallOptions) !update_asset_model.UpdateAssetModelOutput {
         return update_asset_model.execute(self, allocator, input, options);
     }
 
@@ -1028,7 +1029,7 @@ pub const Client = struct {
     /// * Submit a second `UpdateAssetModelCompositeModel` request that includes
     /// the new property. The new asset property will have the same `name` as the
     /// previous one and IoT SiteWise will generate a new unique `id`.
-    pub fn updateAssetModelCompositeModel(self: *Self, allocator: std.mem.Allocator, input: update_asset_model_composite_model.UpdateAssetModelCompositeModelInput, options: update_asset_model_composite_model.Options) !update_asset_model_composite_model.UpdateAssetModelCompositeModelOutput {
+    pub fn updateAssetModelCompositeModel(self: *Self, allocator: std.mem.Allocator, input: update_asset_model_composite_model.UpdateAssetModelCompositeModelInput, options: CallOptions) !update_asset_model_composite_model.UpdateAssetModelCompositeModelOutput {
         return update_asset_model_composite_model.execute(self, allocator, input, options);
     }
 
@@ -1040,27 +1041,27 @@ pub const Client = struct {
     /// existing values
     /// in the UpdateAssetProperty request. For more information, see
     /// [DescribeAssetProperty](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetProperty.html).
-    pub fn updateAssetProperty(self: *Self, allocator: std.mem.Allocator, input: update_asset_property.UpdateAssetPropertyInput, options: update_asset_property.Options) !update_asset_property.UpdateAssetPropertyOutput {
+    pub fn updateAssetProperty(self: *Self, allocator: std.mem.Allocator, input: update_asset_property.UpdateAssetPropertyInput, options: CallOptions) !update_asset_property.UpdateAssetPropertyOutput {
         return update_asset_property.execute(self, allocator, input, options);
     }
 
     /// Updates the computation model.
-    pub fn updateComputationModel(self: *Self, allocator: std.mem.Allocator, input: update_computation_model.UpdateComputationModelInput, options: update_computation_model.Options) !update_computation_model.UpdateComputationModelOutput {
+    pub fn updateComputationModel(self: *Self, allocator: std.mem.Allocator, input: update_computation_model.UpdateComputationModelInput, options: CallOptions) !update_computation_model.UpdateComputationModelOutput {
         return update_computation_model.execute(self, allocator, input, options);
     }
 
     /// Updates an IoT SiteWise Monitor dashboard.
-    pub fn updateDashboard(self: *Self, allocator: std.mem.Allocator, input: update_dashboard.UpdateDashboardInput, options: update_dashboard.Options) !update_dashboard.UpdateDashboardOutput {
+    pub fn updateDashboard(self: *Self, allocator: std.mem.Allocator, input: update_dashboard.UpdateDashboardInput, options: CallOptions) !update_dashboard.UpdateDashboardOutput {
         return update_dashboard.execute(self, allocator, input, options);
     }
 
     /// Updates a dataset.
-    pub fn updateDataset(self: *Self, allocator: std.mem.Allocator, input: update_dataset.UpdateDatasetInput, options: update_dataset.Options) !update_dataset.UpdateDatasetOutput {
+    pub fn updateDataset(self: *Self, allocator: std.mem.Allocator, input: update_dataset.UpdateDatasetInput, options: CallOptions) !update_dataset.UpdateDatasetOutput {
         return update_dataset.execute(self, allocator, input, options);
     }
 
     /// Updates a gateway's name.
-    pub fn updateGateway(self: *Self, allocator: std.mem.Allocator, input: update_gateway.UpdateGatewayInput, options: update_gateway.Options) !update_gateway.UpdateGatewayOutput {
+    pub fn updateGateway(self: *Self, allocator: std.mem.Allocator, input: update_gateway.UpdateGatewayInput, options: CallOptions) !update_gateway.UpdateGatewayOutput {
         return update_gateway.execute(self, allocator, input, options);
     }
 
@@ -1090,17 +1091,17 @@ pub const Client = struct {
     ///
     /// A gateway can have multiple capability configurations with different
     /// namespaces.
-    pub fn updateGatewayCapabilityConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_gateway_capability_configuration.UpdateGatewayCapabilityConfigurationInput, options: update_gateway_capability_configuration.Options) !update_gateway_capability_configuration.UpdateGatewayCapabilityConfigurationOutput {
+    pub fn updateGatewayCapabilityConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_gateway_capability_configuration.UpdateGatewayCapabilityConfigurationInput, options: CallOptions) !update_gateway_capability_configuration.UpdateGatewayCapabilityConfigurationOutput {
         return update_gateway_capability_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates an IoT SiteWise Monitor portal.
-    pub fn updatePortal(self: *Self, allocator: std.mem.Allocator, input: update_portal.UpdatePortalInput, options: update_portal.Options) !update_portal.UpdatePortalOutput {
+    pub fn updatePortal(self: *Self, allocator: std.mem.Allocator, input: update_portal.UpdatePortalInput, options: CallOptions) !update_portal.UpdatePortalOutput {
         return update_portal.execute(self, allocator, input, options);
     }
 
     /// Updates an IoT SiteWise Monitor project.
-    pub fn updateProject(self: *Self, allocator: std.mem.Allocator, input: update_project.UpdateProjectInput, options: update_project.Options) !update_project.UpdateProjectOutput {
+    pub fn updateProject(self: *Self, allocator: std.mem.Allocator, input: update_project.UpdateProjectInput, options: CallOptions) !update_project.UpdateProjectOutput {
         return update_project.execute(self, allocator, input, options);
     }
 

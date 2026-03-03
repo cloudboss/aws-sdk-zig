@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LocaleCode = @import("locale_code.zig").LocaleCode;
 const ManagedNotificationChildEventOverview = @import("managed_notification_child_event_overview.zig").ManagedNotificationChildEventOverview;
@@ -63,11 +64,7 @@ pub const ListManagedNotificationChildEventsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListManagedNotificationChildEventsInput, options: Options) !ListManagedNotificationChildEventsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListManagedNotificationChildEventsInput, options: CallOptions) !ListManagedNotificationChildEventsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

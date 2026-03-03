@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const BundleTask = @import("bundle_task.zig").BundleTask;
@@ -53,11 +54,7 @@ pub const DescribeBundleTasksOutput = struct {
     bundle_tasks: ?[]const BundleTask = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeBundleTasksInput, options: Options) !DescribeBundleTasksOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeBundleTasksInput, options: CallOptions) !DescribeBundleTasksOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

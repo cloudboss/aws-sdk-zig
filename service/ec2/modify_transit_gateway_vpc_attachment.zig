@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ModifyTransitGatewayVpcAttachmentRequestOptions = @import("modify_transit_gateway_vpc_attachment_request_options.zig").ModifyTransitGatewayVpcAttachmentRequestOptions;
 const TransitGatewayVpcAttachment = @import("transit_gateway_vpc_attachment.zig").TransitGatewayVpcAttachment;
@@ -34,11 +35,7 @@ pub const ModifyTransitGatewayVpcAttachmentOutput = struct {
     transit_gateway_vpc_attachment: ?TransitGatewayVpcAttachment = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyTransitGatewayVpcAttachmentInput, options: Options) !ModifyTransitGatewayVpcAttachmentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyTransitGatewayVpcAttachmentInput, options: CallOptions) !ModifyTransitGatewayVpcAttachmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

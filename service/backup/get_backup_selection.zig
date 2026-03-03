@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BackupSelection = @import("backup_selection.zig").BackupSelection;
 
@@ -56,11 +57,7 @@ pub const GetBackupSelectionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBackupSelectionInput, options: Options) !GetBackupSelectionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBackupSelectionInput, options: CallOptions) !GetBackupSelectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

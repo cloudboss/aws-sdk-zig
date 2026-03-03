@@ -57,6 +57,7 @@ const update_custom_routing_listener = @import("update_custom_routing_listener.z
 const update_endpoint_group = @import("update_endpoint_group.zig");
 const update_listener = @import("update_listener.zig");
 const withdraw_byoip_cidr = @import("withdraw_byoip_cidr.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -108,7 +109,7 @@ pub const Client = struct {
     /// can receive
     /// traffic, see the [
     /// AllowCustomRoutingTraffic](https://docs.aws.amazon.com/global-accelerator/latest/api/API_AllowCustomRoutingTraffic.html) operation.
-    pub fn addCustomRoutingEndpoints(self: *Self, allocator: std.mem.Allocator, input: add_custom_routing_endpoints.AddCustomRoutingEndpointsInput, options: add_custom_routing_endpoints.Options) !add_custom_routing_endpoints.AddCustomRoutingEndpointsOutput {
+    pub fn addCustomRoutingEndpoints(self: *Self, allocator: std.mem.Allocator, input: add_custom_routing_endpoints.AddCustomRoutingEndpointsInput, options: CallOptions) !add_custom_routing_endpoints.AddCustomRoutingEndpointsOutput {
         return add_custom_routing_endpoints.execute(self, allocator, input, options);
     }
 
@@ -137,7 +138,7 @@ pub const Client = struct {
     /// to Global Accelerator, see [
     /// Endpoints for standard
     /// accelerators](https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints.html) in the *Global Accelerator Developer Guide*.
-    pub fn addEndpoints(self: *Self, allocator: std.mem.Allocator, input: add_endpoints.AddEndpointsInput, options: add_endpoints.Options) !add_endpoints.AddEndpointsOutput {
+    pub fn addEndpoints(self: *Self, allocator: std.mem.Allocator, input: add_endpoints.AddEndpointsInput, options: CallOptions) !add_endpoints.AddEndpointsOutput {
         return add_endpoints.execute(self, allocator, input, options);
     }
 
@@ -154,7 +155,7 @@ pub const Client = struct {
     /// For more information, see [Bring your own
     /// IP addresses
     /// (BYOIP)](https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in the *Global Accelerator Developer Guide*.
-    pub fn advertiseByoipCidr(self: *Self, allocator: std.mem.Allocator, input: advertise_byoip_cidr.AdvertiseByoipCidrInput, options: advertise_byoip_cidr.Options) !advertise_byoip_cidr.AdvertiseByoipCidrOutput {
+    pub fn advertiseByoipCidr(self: *Self, allocator: std.mem.Allocator, input: advertise_byoip_cidr.AdvertiseByoipCidrInput, options: CallOptions) !advertise_byoip_cidr.AdvertiseByoipCidrOutput {
         return advertise_byoip_cidr.execute(self, allocator, input, options);
     }
 
@@ -169,7 +170,7 @@ pub const Client = struct {
     /// After you make changes, you can verify that the updates are complete by
     /// checking the status of your
     /// accelerator: the status changes from IN_PROGRESS to DEPLOYED.
-    pub fn allowCustomRoutingTraffic(self: *Self, allocator: std.mem.Allocator, input: allow_custom_routing_traffic.AllowCustomRoutingTrafficInput, options: allow_custom_routing_traffic.Options) !allow_custom_routing_traffic.AllowCustomRoutingTrafficOutput {
+    pub fn allowCustomRoutingTraffic(self: *Self, allocator: std.mem.Allocator, input: allow_custom_routing_traffic.AllowCustomRoutingTrafficInput, options: CallOptions) !allow_custom_routing_traffic.AllowCustomRoutingTrafficOutput {
         return allow_custom_routing_traffic.execute(self, allocator, input, options);
     }
 
@@ -183,7 +184,7 @@ pub const Client = struct {
     /// US West (Oregon) Region to create, update, or otherwise work with
     /// accelerators. That is, for example, specify `--region us-west-2`
     /// on Amazon Web Services CLI commands.
-    pub fn createAccelerator(self: *Self, allocator: std.mem.Allocator, input: create_accelerator.CreateAcceleratorInput, options: create_accelerator.Options) !create_accelerator.CreateAcceleratorOutput {
+    pub fn createAccelerator(self: *Self, allocator: std.mem.Allocator, input: create_accelerator.CreateAcceleratorInput, options: CallOptions) !create_accelerator.CreateAcceleratorOutput {
         return create_accelerator.execute(self, allocator, input, options);
     }
 
@@ -217,7 +218,7 @@ pub const Client = struct {
     /// Working with cross-account attachments and resources in Global
     /// Accelerator](https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html) in the *
     /// Global Accelerator Developer Guide*.
-    pub fn createCrossAccountAttachment(self: *Self, allocator: std.mem.Allocator, input: create_cross_account_attachment.CreateCrossAccountAttachmentInput, options: create_cross_account_attachment.Options) !create_cross_account_attachment.CreateCrossAccountAttachmentOutput {
+    pub fn createCrossAccountAttachment(self: *Self, allocator: std.mem.Allocator, input: create_cross_account_attachment.CreateCrossAccountAttachmentInput, options: CallOptions) !create_cross_account_attachment.CreateCrossAccountAttachmentOutput {
         return create_cross_account_attachment.execute(self, allocator, input, options);
     }
 
@@ -238,7 +239,7 @@ pub const Client = struct {
     /// US West (Oregon) Region to create, update, or otherwise work with
     /// accelerators. That is, for example, specify `--region us-west-2`
     /// on Amazon Web Services CLI commands.
-    pub fn createCustomRoutingAccelerator(self: *Self, allocator: std.mem.Allocator, input: create_custom_routing_accelerator.CreateCustomRoutingAcceleratorInput, options: create_custom_routing_accelerator.Options) !create_custom_routing_accelerator.CreateCustomRoutingAcceleratorOutput {
+    pub fn createCustomRoutingAccelerator(self: *Self, allocator: std.mem.Allocator, input: create_custom_routing_accelerator.CreateCustomRoutingAcceleratorInput, options: CallOptions) !create_custom_routing_accelerator.CreateCustomRoutingAcceleratorOutput {
         return create_custom_routing_accelerator.execute(self, allocator, input, options);
     }
 
@@ -246,7 +247,7 @@ pub const Client = struct {
     /// accelerator.
     /// An endpoint group is a collection of endpoints in one Amazon Web Services
     /// Region.
-    pub fn createCustomRoutingEndpointGroup(self: *Self, allocator: std.mem.Allocator, input: create_custom_routing_endpoint_group.CreateCustomRoutingEndpointGroupInput, options: create_custom_routing_endpoint_group.Options) !create_custom_routing_endpoint_group.CreateCustomRoutingEndpointGroupOutput {
+    pub fn createCustomRoutingEndpointGroup(self: *Self, allocator: std.mem.Allocator, input: create_custom_routing_endpoint_group.CreateCustomRoutingEndpointGroupInput, options: CallOptions) !create_custom_routing_endpoint_group.CreateCustomRoutingEndpointGroupOutput {
         return create_custom_routing_endpoint_group.execute(self, allocator, input, options);
     }
 
@@ -254,7 +255,7 @@ pub const Client = struct {
     /// routing accelerator.
     /// Connections arrive to assigned static IP addresses on the port range that
     /// you specify.
-    pub fn createCustomRoutingListener(self: *Self, allocator: std.mem.Allocator, input: create_custom_routing_listener.CreateCustomRoutingListenerInput, options: create_custom_routing_listener.Options) !create_custom_routing_listener.CreateCustomRoutingListenerOutput {
+    pub fn createCustomRoutingListener(self: *Self, allocator: std.mem.Allocator, input: create_custom_routing_listener.CreateCustomRoutingListenerInput, options: CallOptions) !create_custom_routing_listener.CreateCustomRoutingListenerOutput {
         return create_custom_routing_listener.execute(self, allocator, input, options);
     }
 
@@ -267,14 +268,14 @@ pub const Client = struct {
     /// to Global Accelerator, see [
     /// Endpoints for standard
     /// accelerators](https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints.html) in the *Global Accelerator Developer Guide*.
-    pub fn createEndpointGroup(self: *Self, allocator: std.mem.Allocator, input: create_endpoint_group.CreateEndpointGroupInput, options: create_endpoint_group.Options) !create_endpoint_group.CreateEndpointGroupOutput {
+    pub fn createEndpointGroup(self: *Self, allocator: std.mem.Allocator, input: create_endpoint_group.CreateEndpointGroupInput, options: CallOptions) !create_endpoint_group.CreateEndpointGroupOutput {
         return create_endpoint_group.execute(self, allocator, input, options);
     }
 
     /// Create a listener to process inbound connections from clients to an
     /// accelerator. Connections arrive to assigned static
     /// IP addresses on a port, port range, or list of port ranges that you specify.
-    pub fn createListener(self: *Self, allocator: std.mem.Allocator, input: create_listener.CreateListenerInput, options: create_listener.Options) !create_listener.CreateListenerOutput {
+    pub fn createListener(self: *Self, allocator: std.mem.Allocator, input: create_listener.CreateListenerInput, options: CallOptions) !create_listener.CreateListenerOutput {
         return create_listener.execute(self, allocator, input, options);
     }
 
@@ -301,7 +302,7 @@ pub const Client = struct {
     /// see [Identity and access
     /// management](https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html) in
     /// the *Global Accelerator Developer Guide*.
-    pub fn deleteAccelerator(self: *Self, allocator: std.mem.Allocator, input: delete_accelerator.DeleteAcceleratorInput, options: delete_accelerator.Options) !delete_accelerator.DeleteAcceleratorOutput {
+    pub fn deleteAccelerator(self: *Self, allocator: std.mem.Allocator, input: delete_accelerator.DeleteAcceleratorInput, options: CallOptions) !delete_accelerator.DeleteAcceleratorOutput {
         return delete_accelerator.execute(self, allocator, input, options);
     }
 
@@ -315,7 +316,7 @@ pub const Client = struct {
     /// Working with cross-account attachments and resources in Global
     /// Accelerator](https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html) in the *
     /// Global Accelerator Developer Guide*.
-    pub fn deleteCrossAccountAttachment(self: *Self, allocator: std.mem.Allocator, input: delete_cross_account_attachment.DeleteCrossAccountAttachmentInput, options: delete_cross_account_attachment.Options) !delete_cross_account_attachment.DeleteCrossAccountAttachmentOutput {
+    pub fn deleteCrossAccountAttachment(self: *Self, allocator: std.mem.Allocator, input: delete_cross_account_attachment.DeleteCrossAccountAttachmentInput, options: CallOptions) !delete_cross_account_attachment.DeleteCrossAccountAttachmentOutput {
         return delete_cross_account_attachment.execute(self, allocator, input, options);
     }
 
@@ -341,27 +342,27 @@ pub const Client = struct {
     /// see [Identity and access
     /// management](https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html) in
     /// the *Global Accelerator Developer Guide*.
-    pub fn deleteCustomRoutingAccelerator(self: *Self, allocator: std.mem.Allocator, input: delete_custom_routing_accelerator.DeleteCustomRoutingAcceleratorInput, options: delete_custom_routing_accelerator.Options) !delete_custom_routing_accelerator.DeleteCustomRoutingAcceleratorOutput {
+    pub fn deleteCustomRoutingAccelerator(self: *Self, allocator: std.mem.Allocator, input: delete_custom_routing_accelerator.DeleteCustomRoutingAcceleratorInput, options: CallOptions) !delete_custom_routing_accelerator.DeleteCustomRoutingAcceleratorOutput {
         return delete_custom_routing_accelerator.execute(self, allocator, input, options);
     }
 
     /// Delete an endpoint group from a listener for a custom routing accelerator.
-    pub fn deleteCustomRoutingEndpointGroup(self: *Self, allocator: std.mem.Allocator, input: delete_custom_routing_endpoint_group.DeleteCustomRoutingEndpointGroupInput, options: delete_custom_routing_endpoint_group.Options) !delete_custom_routing_endpoint_group.DeleteCustomRoutingEndpointGroupOutput {
+    pub fn deleteCustomRoutingEndpointGroup(self: *Self, allocator: std.mem.Allocator, input: delete_custom_routing_endpoint_group.DeleteCustomRoutingEndpointGroupInput, options: CallOptions) !delete_custom_routing_endpoint_group.DeleteCustomRoutingEndpointGroupOutput {
         return delete_custom_routing_endpoint_group.execute(self, allocator, input, options);
     }
 
     /// Delete a listener for a custom routing accelerator.
-    pub fn deleteCustomRoutingListener(self: *Self, allocator: std.mem.Allocator, input: delete_custom_routing_listener.DeleteCustomRoutingListenerInput, options: delete_custom_routing_listener.Options) !delete_custom_routing_listener.DeleteCustomRoutingListenerOutput {
+    pub fn deleteCustomRoutingListener(self: *Self, allocator: std.mem.Allocator, input: delete_custom_routing_listener.DeleteCustomRoutingListenerInput, options: CallOptions) !delete_custom_routing_listener.DeleteCustomRoutingListenerOutput {
         return delete_custom_routing_listener.execute(self, allocator, input, options);
     }
 
     /// Delete an endpoint group from a listener.
-    pub fn deleteEndpointGroup(self: *Self, allocator: std.mem.Allocator, input: delete_endpoint_group.DeleteEndpointGroupInput, options: delete_endpoint_group.Options) !delete_endpoint_group.DeleteEndpointGroupOutput {
+    pub fn deleteEndpointGroup(self: *Self, allocator: std.mem.Allocator, input: delete_endpoint_group.DeleteEndpointGroupInput, options: CallOptions) !delete_endpoint_group.DeleteEndpointGroupOutput {
         return delete_endpoint_group.execute(self, allocator, input, options);
     }
 
     /// Delete a listener from an accelerator.
-    pub fn deleteListener(self: *Self, allocator: std.mem.Allocator, input: delete_listener.DeleteListenerInput, options: delete_listener.Options) !delete_listener.DeleteListenerOutput {
+    pub fn deleteListener(self: *Self, allocator: std.mem.Allocator, input: delete_listener.DeleteListenerInput, options: CallOptions) !delete_listener.DeleteListenerOutput {
         return delete_listener.execute(self, allocator, input, options);
     }
 
@@ -376,7 +377,7 @@ pub const Client = struct {
     /// After you make changes, you can verify that the updates are complete by
     /// checking the status of your
     /// accelerator: the status changes from IN_PROGRESS to DEPLOYED.
-    pub fn denyCustomRoutingTraffic(self: *Self, allocator: std.mem.Allocator, input: deny_custom_routing_traffic.DenyCustomRoutingTrafficInput, options: deny_custom_routing_traffic.Options) !deny_custom_routing_traffic.DenyCustomRoutingTrafficOutput {
+    pub fn denyCustomRoutingTraffic(self: *Self, allocator: std.mem.Allocator, input: deny_custom_routing_traffic.DenyCustomRoutingTrafficInput, options: CallOptions) !deny_custom_routing_traffic.DenyCustomRoutingTrafficOutput {
         return deny_custom_routing_traffic.execute(self, allocator, input, options);
     }
 
@@ -394,70 +395,70 @@ pub const Client = struct {
     /// For more information, see [Bring
     /// your own IP addresses
     /// (BYOIP)](https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in the *Global Accelerator Developer Guide*.
-    pub fn deprovisionByoipCidr(self: *Self, allocator: std.mem.Allocator, input: deprovision_byoip_cidr.DeprovisionByoipCidrInput, options: deprovision_byoip_cidr.Options) !deprovision_byoip_cidr.DeprovisionByoipCidrOutput {
+    pub fn deprovisionByoipCidr(self: *Self, allocator: std.mem.Allocator, input: deprovision_byoip_cidr.DeprovisionByoipCidrInput, options: CallOptions) !deprovision_byoip_cidr.DeprovisionByoipCidrOutput {
         return deprovision_byoip_cidr.execute(self, allocator, input, options);
     }
 
     /// Describe an accelerator.
-    pub fn describeAccelerator(self: *Self, allocator: std.mem.Allocator, input: describe_accelerator.DescribeAcceleratorInput, options: describe_accelerator.Options) !describe_accelerator.DescribeAcceleratorOutput {
+    pub fn describeAccelerator(self: *Self, allocator: std.mem.Allocator, input: describe_accelerator.DescribeAcceleratorInput, options: CallOptions) !describe_accelerator.DescribeAcceleratorOutput {
         return describe_accelerator.execute(self, allocator, input, options);
     }
 
     /// Describe the attributes of an accelerator.
-    pub fn describeAcceleratorAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_accelerator_attributes.DescribeAcceleratorAttributesInput, options: describe_accelerator_attributes.Options) !describe_accelerator_attributes.DescribeAcceleratorAttributesOutput {
+    pub fn describeAcceleratorAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_accelerator_attributes.DescribeAcceleratorAttributesInput, options: CallOptions) !describe_accelerator_attributes.DescribeAcceleratorAttributesOutput {
         return describe_accelerator_attributes.execute(self, allocator, input, options);
     }
 
     /// Gets configuration information about a cross-account attachment.
-    pub fn describeCrossAccountAttachment(self: *Self, allocator: std.mem.Allocator, input: describe_cross_account_attachment.DescribeCrossAccountAttachmentInput, options: describe_cross_account_attachment.Options) !describe_cross_account_attachment.DescribeCrossAccountAttachmentOutput {
+    pub fn describeCrossAccountAttachment(self: *Self, allocator: std.mem.Allocator, input: describe_cross_account_attachment.DescribeCrossAccountAttachmentInput, options: CallOptions) !describe_cross_account_attachment.DescribeCrossAccountAttachmentOutput {
         return describe_cross_account_attachment.execute(self, allocator, input, options);
     }
 
     /// Describe a custom routing accelerator.
-    pub fn describeCustomRoutingAccelerator(self: *Self, allocator: std.mem.Allocator, input: describe_custom_routing_accelerator.DescribeCustomRoutingAcceleratorInput, options: describe_custom_routing_accelerator.Options) !describe_custom_routing_accelerator.DescribeCustomRoutingAcceleratorOutput {
+    pub fn describeCustomRoutingAccelerator(self: *Self, allocator: std.mem.Allocator, input: describe_custom_routing_accelerator.DescribeCustomRoutingAcceleratorInput, options: CallOptions) !describe_custom_routing_accelerator.DescribeCustomRoutingAcceleratorOutput {
         return describe_custom_routing_accelerator.execute(self, allocator, input, options);
     }
 
     /// Describe the attributes of a custom routing accelerator.
-    pub fn describeCustomRoutingAcceleratorAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_custom_routing_accelerator_attributes.DescribeCustomRoutingAcceleratorAttributesInput, options: describe_custom_routing_accelerator_attributes.Options) !describe_custom_routing_accelerator_attributes.DescribeCustomRoutingAcceleratorAttributesOutput {
+    pub fn describeCustomRoutingAcceleratorAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_custom_routing_accelerator_attributes.DescribeCustomRoutingAcceleratorAttributesInput, options: CallOptions) !describe_custom_routing_accelerator_attributes.DescribeCustomRoutingAcceleratorAttributesOutput {
         return describe_custom_routing_accelerator_attributes.execute(self, allocator, input, options);
     }
 
     /// Describe an endpoint group for a custom routing accelerator.
-    pub fn describeCustomRoutingEndpointGroup(self: *Self, allocator: std.mem.Allocator, input: describe_custom_routing_endpoint_group.DescribeCustomRoutingEndpointGroupInput, options: describe_custom_routing_endpoint_group.Options) !describe_custom_routing_endpoint_group.DescribeCustomRoutingEndpointGroupOutput {
+    pub fn describeCustomRoutingEndpointGroup(self: *Self, allocator: std.mem.Allocator, input: describe_custom_routing_endpoint_group.DescribeCustomRoutingEndpointGroupInput, options: CallOptions) !describe_custom_routing_endpoint_group.DescribeCustomRoutingEndpointGroupOutput {
         return describe_custom_routing_endpoint_group.execute(self, allocator, input, options);
     }
 
     /// The description of a listener for a custom routing accelerator.
-    pub fn describeCustomRoutingListener(self: *Self, allocator: std.mem.Allocator, input: describe_custom_routing_listener.DescribeCustomRoutingListenerInput, options: describe_custom_routing_listener.Options) !describe_custom_routing_listener.DescribeCustomRoutingListenerOutput {
+    pub fn describeCustomRoutingListener(self: *Self, allocator: std.mem.Allocator, input: describe_custom_routing_listener.DescribeCustomRoutingListenerInput, options: CallOptions) !describe_custom_routing_listener.DescribeCustomRoutingListenerOutput {
         return describe_custom_routing_listener.execute(self, allocator, input, options);
     }
 
     /// Describe an endpoint group.
-    pub fn describeEndpointGroup(self: *Self, allocator: std.mem.Allocator, input: describe_endpoint_group.DescribeEndpointGroupInput, options: describe_endpoint_group.Options) !describe_endpoint_group.DescribeEndpointGroupOutput {
+    pub fn describeEndpointGroup(self: *Self, allocator: std.mem.Allocator, input: describe_endpoint_group.DescribeEndpointGroupInput, options: CallOptions) !describe_endpoint_group.DescribeEndpointGroupOutput {
         return describe_endpoint_group.execute(self, allocator, input, options);
     }
 
     /// Describe a listener.
-    pub fn describeListener(self: *Self, allocator: std.mem.Allocator, input: describe_listener.DescribeListenerInput, options: describe_listener.Options) !describe_listener.DescribeListenerOutput {
+    pub fn describeListener(self: *Self, allocator: std.mem.Allocator, input: describe_listener.DescribeListenerInput, options: CallOptions) !describe_listener.DescribeListenerOutput {
         return describe_listener.execute(self, allocator, input, options);
     }
 
     /// List the accelerators for an Amazon Web Services account.
-    pub fn listAccelerators(self: *Self, allocator: std.mem.Allocator, input: list_accelerators.ListAcceleratorsInput, options: list_accelerators.Options) !list_accelerators.ListAcceleratorsOutput {
+    pub fn listAccelerators(self: *Self, allocator: std.mem.Allocator, input: list_accelerators.ListAcceleratorsInput, options: CallOptions) !list_accelerators.ListAcceleratorsOutput {
         return list_accelerators.execute(self, allocator, input, options);
     }
 
     /// Lists the IP address ranges that were specified in calls to
     /// [ProvisionByoipCidr](https://docs.aws.amazon.com/global-accelerator/latest/api/ProvisionByoipCidr.html), including
     /// the current state and a history of state changes.
-    pub fn listByoipCidrs(self: *Self, allocator: std.mem.Allocator, input: list_byoip_cidrs.ListByoipCidrsInput, options: list_byoip_cidrs.Options) !list_byoip_cidrs.ListByoipCidrsOutput {
+    pub fn listByoipCidrs(self: *Self, allocator: std.mem.Allocator, input: list_byoip_cidrs.ListByoipCidrsInput, options: CallOptions) !list_byoip_cidrs.ListByoipCidrsOutput {
         return list_byoip_cidrs.execute(self, allocator, input, options);
     }
 
     /// List the cross-account attachments that have been created in Global
     /// Accelerator.
-    pub fn listCrossAccountAttachments(self: *Self, allocator: std.mem.Allocator, input: list_cross_account_attachments.ListCrossAccountAttachmentsInput, options: list_cross_account_attachments.Options) !list_cross_account_attachments.ListCrossAccountAttachmentsOutput {
+    pub fn listCrossAccountAttachments(self: *Self, allocator: std.mem.Allocator, input: list_cross_account_attachments.ListCrossAccountAttachmentsInput, options: CallOptions) !list_cross_account_attachments.ListCrossAccountAttachmentsOutput {
         return list_cross_account_attachments.execute(self, allocator, input, options);
     }
 
@@ -467,28 +468,28 @@ pub const Client = struct {
     /// Working with cross-account attachments and resources in Global
     /// Accelerator](https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html) in the *
     /// Global Accelerator Developer Guide*.
-    pub fn listCrossAccountResourceAccounts(self: *Self, allocator: std.mem.Allocator, input: list_cross_account_resource_accounts.ListCrossAccountResourceAccountsInput, options: list_cross_account_resource_accounts.Options) !list_cross_account_resource_accounts.ListCrossAccountResourceAccountsOutput {
+    pub fn listCrossAccountResourceAccounts(self: *Self, allocator: std.mem.Allocator, input: list_cross_account_resource_accounts.ListCrossAccountResourceAccountsInput, options: CallOptions) !list_cross_account_resource_accounts.ListCrossAccountResourceAccountsOutput {
         return list_cross_account_resource_accounts.execute(self, allocator, input, options);
     }
 
     /// List the cross-account resources available to work with.
-    pub fn listCrossAccountResources(self: *Self, allocator: std.mem.Allocator, input: list_cross_account_resources.ListCrossAccountResourcesInput, options: list_cross_account_resources.Options) !list_cross_account_resources.ListCrossAccountResourcesOutput {
+    pub fn listCrossAccountResources(self: *Self, allocator: std.mem.Allocator, input: list_cross_account_resources.ListCrossAccountResourcesInput, options: CallOptions) !list_cross_account_resources.ListCrossAccountResourcesOutput {
         return list_cross_account_resources.execute(self, allocator, input, options);
     }
 
     /// List the custom routing accelerators for an Amazon Web Services account.
-    pub fn listCustomRoutingAccelerators(self: *Self, allocator: std.mem.Allocator, input: list_custom_routing_accelerators.ListCustomRoutingAcceleratorsInput, options: list_custom_routing_accelerators.Options) !list_custom_routing_accelerators.ListCustomRoutingAcceleratorsOutput {
+    pub fn listCustomRoutingAccelerators(self: *Self, allocator: std.mem.Allocator, input: list_custom_routing_accelerators.ListCustomRoutingAcceleratorsInput, options: CallOptions) !list_custom_routing_accelerators.ListCustomRoutingAcceleratorsOutput {
         return list_custom_routing_accelerators.execute(self, allocator, input, options);
     }
 
     /// List the endpoint groups that are associated with a listener for a custom
     /// routing accelerator.
-    pub fn listCustomRoutingEndpointGroups(self: *Self, allocator: std.mem.Allocator, input: list_custom_routing_endpoint_groups.ListCustomRoutingEndpointGroupsInput, options: list_custom_routing_endpoint_groups.Options) !list_custom_routing_endpoint_groups.ListCustomRoutingEndpointGroupsOutput {
+    pub fn listCustomRoutingEndpointGroups(self: *Self, allocator: std.mem.Allocator, input: list_custom_routing_endpoint_groups.ListCustomRoutingEndpointGroupsInput, options: CallOptions) !list_custom_routing_endpoint_groups.ListCustomRoutingEndpointGroupsOutput {
         return list_custom_routing_endpoint_groups.execute(self, allocator, input, options);
     }
 
     /// List the listeners for a custom routing accelerator.
-    pub fn listCustomRoutingListeners(self: *Self, allocator: std.mem.Allocator, input: list_custom_routing_listeners.ListCustomRoutingListenersInput, options: list_custom_routing_listeners.Options) !list_custom_routing_listeners.ListCustomRoutingListenersOutput {
+    pub fn listCustomRoutingListeners(self: *Self, allocator: std.mem.Allocator, input: list_custom_routing_listeners.ListCustomRoutingListenersInput, options: CallOptions) !list_custom_routing_listeners.ListCustomRoutingListenersOutput {
         return list_custom_routing_listeners.execute(self, allocator, input, options);
     }
 
@@ -511,7 +512,7 @@ pub const Client = struct {
     /// The mappings also include a flag for each destination denoting which
     /// destination IP addresses and
     /// ports are allowed or denied traffic.
-    pub fn listCustomRoutingPortMappings(self: *Self, allocator: std.mem.Allocator, input: list_custom_routing_port_mappings.ListCustomRoutingPortMappingsInput, options: list_custom_routing_port_mappings.Options) !list_custom_routing_port_mappings.ListCustomRoutingPortMappingsOutput {
+    pub fn listCustomRoutingPortMappings(self: *Self, allocator: std.mem.Allocator, input: list_custom_routing_port_mappings.ListCustomRoutingPortMappingsInput, options: CallOptions) !list_custom_routing_port_mappings.ListCustomRoutingPortMappingsOutput {
         return list_custom_routing_port_mappings.execute(self, allocator, input, options);
     }
 
@@ -522,17 +523,17 @@ pub const Client = struct {
     /// span multiple custom routing accelerators in your account, or for scenarios
     /// where you only want to
     /// list the port mappings for a specific destination instance.
-    pub fn listCustomRoutingPortMappingsByDestination(self: *Self, allocator: std.mem.Allocator, input: list_custom_routing_port_mappings_by_destination.ListCustomRoutingPortMappingsByDestinationInput, options: list_custom_routing_port_mappings_by_destination.Options) !list_custom_routing_port_mappings_by_destination.ListCustomRoutingPortMappingsByDestinationOutput {
+    pub fn listCustomRoutingPortMappingsByDestination(self: *Self, allocator: std.mem.Allocator, input: list_custom_routing_port_mappings_by_destination.ListCustomRoutingPortMappingsByDestinationInput, options: CallOptions) !list_custom_routing_port_mappings_by_destination.ListCustomRoutingPortMappingsByDestinationOutput {
         return list_custom_routing_port_mappings_by_destination.execute(self, allocator, input, options);
     }
 
     /// List the endpoint groups that are associated with a listener.
-    pub fn listEndpointGroups(self: *Self, allocator: std.mem.Allocator, input: list_endpoint_groups.ListEndpointGroupsInput, options: list_endpoint_groups.Options) !list_endpoint_groups.ListEndpointGroupsOutput {
+    pub fn listEndpointGroups(self: *Self, allocator: std.mem.Allocator, input: list_endpoint_groups.ListEndpointGroupsInput, options: CallOptions) !list_endpoint_groups.ListEndpointGroupsOutput {
         return list_endpoint_groups.execute(self, allocator, input, options);
     }
 
     /// List the listeners for an accelerator.
-    pub fn listListeners(self: *Self, allocator: std.mem.Allocator, input: list_listeners.ListListenersInput, options: list_listeners.Options) !list_listeners.ListListenersOutput {
+    pub fn listListeners(self: *Self, allocator: std.mem.Allocator, input: list_listeners.ListListenersInput, options: CallOptions) !list_listeners.ListListenersOutput {
         return list_listeners.execute(self, allocator, input, options);
     }
 
@@ -541,7 +542,7 @@ pub const Client = struct {
     /// For more information, see [Tagging
     /// in Global
     /// Accelerator](https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html) in the *Global Accelerator Developer Guide*.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -555,12 +556,12 @@ pub const Client = struct {
     /// For more information, see [Bring your own
     /// IP addresses
     /// (BYOIP)](https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in the *Global Accelerator Developer Guide*.
-    pub fn provisionByoipCidr(self: *Self, allocator: std.mem.Allocator, input: provision_byoip_cidr.ProvisionByoipCidrInput, options: provision_byoip_cidr.Options) !provision_byoip_cidr.ProvisionByoipCidrOutput {
+    pub fn provisionByoipCidr(self: *Self, allocator: std.mem.Allocator, input: provision_byoip_cidr.ProvisionByoipCidrInput, options: CallOptions) !provision_byoip_cidr.ProvisionByoipCidrOutput {
         return provision_byoip_cidr.execute(self, allocator, input, options);
     }
 
     /// Remove endpoints from a custom routing accelerator.
-    pub fn removeCustomRoutingEndpoints(self: *Self, allocator: std.mem.Allocator, input: remove_custom_routing_endpoints.RemoveCustomRoutingEndpointsInput, options: remove_custom_routing_endpoints.Options) !remove_custom_routing_endpoints.RemoveCustomRoutingEndpointsOutput {
+    pub fn removeCustomRoutingEndpoints(self: *Self, allocator: std.mem.Allocator, input: remove_custom_routing_endpoints.RemoveCustomRoutingEndpointsInput, options: CallOptions) !remove_custom_routing_endpoints.RemoveCustomRoutingEndpointsOutput {
         return remove_custom_routing_endpoints.execute(self, allocator, input, options);
     }
 
@@ -584,7 +585,7 @@ pub const Client = struct {
     /// `UpdateEndpointGroup` API operation, Global Accelerator must resolve all of
     /// the endpoints that
     /// remain in the group.
-    pub fn removeEndpoints(self: *Self, allocator: std.mem.Allocator, input: remove_endpoints.RemoveEndpointsInput, options: remove_endpoints.Options) !remove_endpoints.RemoveEndpointsOutput {
+    pub fn removeEndpoints(self: *Self, allocator: std.mem.Allocator, input: remove_endpoints.RemoveEndpointsInput, options: CallOptions) !remove_endpoints.RemoveEndpointsOutput {
         return remove_endpoints.execute(self, allocator, input, options);
     }
 
@@ -593,7 +594,7 @@ pub const Client = struct {
     /// For more information, see [Tagging
     /// in Global
     /// Accelerator](https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html) in the *Global Accelerator Developer Guide*.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -605,7 +606,7 @@ pub const Client = struct {
     /// For more information, see [Tagging
     /// in Global
     /// Accelerator](https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html) in the *Global Accelerator Developer Guide*.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -632,12 +633,12 @@ pub const Client = struct {
     /// US West (Oregon) Region to create, update, or otherwise work with
     /// accelerators. That is, for example, specify `--region us-west-2`
     /// on Amazon Web Services CLI commands.
-    pub fn updateAccelerator(self: *Self, allocator: std.mem.Allocator, input: update_accelerator.UpdateAcceleratorInput, options: update_accelerator.Options) !update_accelerator.UpdateAcceleratorOutput {
+    pub fn updateAccelerator(self: *Self, allocator: std.mem.Allocator, input: update_accelerator.UpdateAcceleratorInput, options: CallOptions) !update_accelerator.UpdateAcceleratorOutput {
         return update_accelerator.execute(self, allocator, input, options);
     }
 
     /// Update the attributes for an accelerator.
-    pub fn updateAcceleratorAttributes(self: *Self, allocator: std.mem.Allocator, input: update_accelerator_attributes.UpdateAcceleratorAttributesInput, options: update_accelerator_attributes.Options) !update_accelerator_attributes.UpdateAcceleratorAttributesOutput {
+    pub fn updateAcceleratorAttributes(self: *Self, allocator: std.mem.Allocator, input: update_accelerator_attributes.UpdateAcceleratorAttributesInput, options: CallOptions) !update_accelerator_attributes.UpdateAcceleratorAttributesOutput {
         return update_accelerator_attributes.execute(self, allocator, input, options);
     }
 
@@ -651,33 +652,33 @@ pub const Client = struct {
     /// Working with cross-account attachments and resources in Global
     /// Accelerator](https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html) in the *
     /// Global Accelerator Developer Guide*.
-    pub fn updateCrossAccountAttachment(self: *Self, allocator: std.mem.Allocator, input: update_cross_account_attachment.UpdateCrossAccountAttachmentInput, options: update_cross_account_attachment.Options) !update_cross_account_attachment.UpdateCrossAccountAttachmentOutput {
+    pub fn updateCrossAccountAttachment(self: *Self, allocator: std.mem.Allocator, input: update_cross_account_attachment.UpdateCrossAccountAttachmentInput, options: CallOptions) !update_cross_account_attachment.UpdateCrossAccountAttachmentOutput {
         return update_cross_account_attachment.execute(self, allocator, input, options);
     }
 
     /// Update a custom routing accelerator.
-    pub fn updateCustomRoutingAccelerator(self: *Self, allocator: std.mem.Allocator, input: update_custom_routing_accelerator.UpdateCustomRoutingAcceleratorInput, options: update_custom_routing_accelerator.Options) !update_custom_routing_accelerator.UpdateCustomRoutingAcceleratorOutput {
+    pub fn updateCustomRoutingAccelerator(self: *Self, allocator: std.mem.Allocator, input: update_custom_routing_accelerator.UpdateCustomRoutingAcceleratorInput, options: CallOptions) !update_custom_routing_accelerator.UpdateCustomRoutingAcceleratorOutput {
         return update_custom_routing_accelerator.execute(self, allocator, input, options);
     }
 
     /// Update the attributes for a custom routing accelerator.
-    pub fn updateCustomRoutingAcceleratorAttributes(self: *Self, allocator: std.mem.Allocator, input: update_custom_routing_accelerator_attributes.UpdateCustomRoutingAcceleratorAttributesInput, options: update_custom_routing_accelerator_attributes.Options) !update_custom_routing_accelerator_attributes.UpdateCustomRoutingAcceleratorAttributesOutput {
+    pub fn updateCustomRoutingAcceleratorAttributes(self: *Self, allocator: std.mem.Allocator, input: update_custom_routing_accelerator_attributes.UpdateCustomRoutingAcceleratorAttributesInput, options: CallOptions) !update_custom_routing_accelerator_attributes.UpdateCustomRoutingAcceleratorAttributesOutput {
         return update_custom_routing_accelerator_attributes.execute(self, allocator, input, options);
     }
 
     /// Update a listener for a custom routing accelerator.
-    pub fn updateCustomRoutingListener(self: *Self, allocator: std.mem.Allocator, input: update_custom_routing_listener.UpdateCustomRoutingListenerInput, options: update_custom_routing_listener.Options) !update_custom_routing_listener.UpdateCustomRoutingListenerOutput {
+    pub fn updateCustomRoutingListener(self: *Self, allocator: std.mem.Allocator, input: update_custom_routing_listener.UpdateCustomRoutingListenerInput, options: CallOptions) !update_custom_routing_listener.UpdateCustomRoutingListenerOutput {
         return update_custom_routing_listener.execute(self, allocator, input, options);
     }
 
     /// Update an endpoint group. A resource must be valid and active when you add
     /// it as an endpoint.
-    pub fn updateEndpointGroup(self: *Self, allocator: std.mem.Allocator, input: update_endpoint_group.UpdateEndpointGroupInput, options: update_endpoint_group.Options) !update_endpoint_group.UpdateEndpointGroupOutput {
+    pub fn updateEndpointGroup(self: *Self, allocator: std.mem.Allocator, input: update_endpoint_group.UpdateEndpointGroupInput, options: CallOptions) !update_endpoint_group.UpdateEndpointGroupOutput {
         return update_endpoint_group.execute(self, allocator, input, options);
     }
 
     /// Update a listener.
-    pub fn updateListener(self: *Self, allocator: std.mem.Allocator, input: update_listener.UpdateListenerInput, options: update_listener.Options) !update_listener.UpdateListenerOutput {
+    pub fn updateListener(self: *Self, allocator: std.mem.Allocator, input: update_listener.UpdateListenerInput, options: CallOptions) !update_listener.UpdateListenerOutput {
         return update_listener.execute(self, allocator, input, options);
     }
 
@@ -693,7 +694,7 @@ pub const Client = struct {
     /// For more information, see [Bring your own
     /// IP addresses
     /// (BYOIP)](https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in the *Global Accelerator Developer Guide*.
-    pub fn withdrawByoipCidr(self: *Self, allocator: std.mem.Allocator, input: withdraw_byoip_cidr.WithdrawByoipCidrInput, options: withdraw_byoip_cidr.Options) !withdraw_byoip_cidr.WithdrawByoipCidrOutput {
+    pub fn withdrawByoipCidr(self: *Self, allocator: std.mem.Allocator, input: withdraw_byoip_cidr.WithdrawByoipCidrInput, options: CallOptions) !withdraw_byoip_cidr.WithdrawByoipCidrOutput {
         return withdraw_byoip_cidr.execute(self, allocator, input, options);
     }
 

@@ -14,6 +14,7 @@ const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_tasks = @import("list_tasks.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -50,20 +51,20 @@ pub const Client = struct {
     ///
     /// A task might still run if it's processed from the queue before the
     /// `CancelTask` operation changes the task's state.
-    pub fn cancelTask(self: *Self, allocator: std.mem.Allocator, input: cancel_task.CancelTaskInput, options: cancel_task.Options) !cancel_task.CancelTaskOutput {
+    pub fn cancelTask(self: *Self, allocator: std.mem.Allocator, input: cancel_task.CancelTaskInput, options: CallOptions) !cancel_task.CancelTaskOutput {
         return cancel_task.execute(self, allocator, input, options);
     }
 
     /// Instructs one or more devices to start a task, such as unlocking or
     /// rebooting.
-    pub fn createTask(self: *Self, allocator: std.mem.Allocator, input: create_task.CreateTaskInput, options: create_task.Options) !create_task.CreateTaskOutput {
+    pub fn createTask(self: *Self, allocator: std.mem.Allocator, input: create_task.CreateTaskInput, options: CallOptions) !create_task.CreateTaskOutput {
         return create_task.execute(self, allocator, input, options);
     }
 
     /// Checks device-specific information, such as the device type, software
     /// version, IP
     /// addresses, and lock status.
-    pub fn describeDevice(self: *Self, allocator: std.mem.Allocator, input: describe_device.DescribeDeviceInput, options: describe_device.Options) !describe_device.DescribeDeviceOutput {
+    pub fn describeDevice(self: *Self, allocator: std.mem.Allocator, input: describe_device.DescribeDeviceInput, options: CallOptions) !describe_device.DescribeDeviceOutput {
         return describe_device.execute(self, allocator, input, options);
     }
 
@@ -71,55 +72,55 @@ pub const Client = struct {
     /// to
     /// `describeDevice`, but the results are sourced from the device cache in the
     /// Amazon Web Services Cloud and include a subset of the available fields.
-    pub fn describeDeviceEc2Instances(self: *Self, allocator: std.mem.Allocator, input: describe_device_ec_2_instances.DescribeDeviceEc2InstancesInput, options: describe_device_ec_2_instances.Options) !describe_device_ec_2_instances.DescribeDeviceEc2InstancesOutput {
+    pub fn describeDeviceEc2Instances(self: *Self, allocator: std.mem.Allocator, input: describe_device_ec_2_instances.DescribeDeviceEc2InstancesInput, options: CallOptions) !describe_device_ec_2_instances.DescribeDeviceEc2InstancesOutput {
         return describe_device_ec_2_instances.execute(self, allocator, input, options);
     }
 
     /// Checks the status of a remote task running on one or more target devices.
-    pub fn describeExecution(self: *Self, allocator: std.mem.Allocator, input: describe_execution.DescribeExecutionInput, options: describe_execution.Options) !describe_execution.DescribeExecutionOutput {
+    pub fn describeExecution(self: *Self, allocator: std.mem.Allocator, input: describe_execution.DescribeExecutionInput, options: CallOptions) !describe_execution.DescribeExecutionOutput {
         return describe_execution.execute(self, allocator, input, options);
     }
 
     /// Checks the metadata for a given task on a device.
-    pub fn describeTask(self: *Self, allocator: std.mem.Allocator, input: describe_task.DescribeTaskInput, options: describe_task.Options) !describe_task.DescribeTaskOutput {
+    pub fn describeTask(self: *Self, allocator: std.mem.Allocator, input: describe_task.DescribeTaskInput, options: CallOptions) !describe_task.DescribeTaskOutput {
         return describe_task.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the Amazon Web Services resources available for a device.
     /// Currently, Amazon EC2 instances are the only supported resource type.
-    pub fn listDeviceResources(self: *Self, allocator: std.mem.Allocator, input: list_device_resources.ListDeviceResourcesInput, options: list_device_resources.Options) !list_device_resources.ListDeviceResourcesOutput {
+    pub fn listDeviceResources(self: *Self, allocator: std.mem.Allocator, input: list_device_resources.ListDeviceResourcesInput, options: CallOptions) !list_device_resources.ListDeviceResourcesOutput {
         return list_device_resources.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all devices on your Amazon Web Services account that have
     /// Amazon Web Services Snow Device Management
     /// enabled in the Amazon Web Services Region where the command is run.
-    pub fn listDevices(self: *Self, allocator: std.mem.Allocator, input: list_devices.ListDevicesInput, options: list_devices.Options) !list_devices.ListDevicesOutput {
+    pub fn listDevices(self: *Self, allocator: std.mem.Allocator, input: list_devices.ListDevicesInput, options: CallOptions) !list_devices.ListDevicesOutput {
         return list_devices.execute(self, allocator, input, options);
     }
 
     /// Returns the status of tasks for one or more target devices.
-    pub fn listExecutions(self: *Self, allocator: std.mem.Allocator, input: list_executions.ListExecutionsInput, options: list_executions.Options) !list_executions.ListExecutionsOutput {
+    pub fn listExecutions(self: *Self, allocator: std.mem.Allocator, input: list_executions.ListExecutionsInput, options: CallOptions) !list_executions.ListExecutionsOutput {
         return list_executions.execute(self, allocator, input, options);
     }
 
     /// Returns a list of tags for a managed device or task.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Returns a list of tasks that can be filtered by state.
-    pub fn listTasks(self: *Self, allocator: std.mem.Allocator, input: list_tasks.ListTasksInput, options: list_tasks.Options) !list_tasks.ListTasksOutput {
+    pub fn listTasks(self: *Self, allocator: std.mem.Allocator, input: list_tasks.ListTasksInput, options: CallOptions) !list_tasks.ListTasksOutput {
         return list_tasks.execute(self, allocator, input, options);
     }
 
     /// Adds or replaces tags on a device or task.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag from a device or task.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

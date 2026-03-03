@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChangeRequestAction = @import("change_request_action.zig").ChangeRequestAction;
 const CollaborationChangeRequest = @import("collaboration_change_request.zig").CollaborationChangeRequest;
@@ -39,11 +40,7 @@ pub const UpdateCollaborationChangeRequestOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCollaborationChangeRequestInput, options: Options) !UpdateCollaborationChangeRequestOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCollaborationChangeRequestInput, options: CallOptions) !UpdateCollaborationChangeRequestOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

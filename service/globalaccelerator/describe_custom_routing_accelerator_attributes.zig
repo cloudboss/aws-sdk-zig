@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CustomRoutingAcceleratorAttributes = @import("custom_routing_accelerator_attributes.zig").CustomRoutingAcceleratorAttributes;
 
@@ -24,11 +25,7 @@ pub const DescribeCustomRoutingAcceleratorAttributesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeCustomRoutingAcceleratorAttributesInput, options: Options) !DescribeCustomRoutingAcceleratorAttributesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeCustomRoutingAcceleratorAttributesInput, options: CallOptions) !DescribeCustomRoutingAcceleratorAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,21 +2,18 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Cluster = @import("cluster.zig").Cluster;
 const serde = @import("serde.zig");
 
-const ResumeClusterInput = @import("resume_cluster_message.zig").ResumeClusterMessage;
+pub const ResumeClusterInput = @import("resume_cluster_message.zig").ResumeClusterMessage;
 
 pub const ResumeClusterOutput = struct {
     cluster: ?Cluster = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ResumeClusterInput, options: Options) !ResumeClusterOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ResumeClusterInput, options: CallOptions) !ResumeClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

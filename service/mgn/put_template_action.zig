@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ActionCategory = @import("action_category.zig").ActionCategory;
 const SsmExternalParameter = @import("ssm_external_parameter.zig").SsmExternalParameter;
@@ -68,13 +69,9 @@ pub const PutTemplateActionInput = struct {
     };
 };
 
-const PutTemplateActionOutput = @import("template_action_document.zig").TemplateActionDocument;
+pub const PutTemplateActionOutput = @import("template_action_document.zig").TemplateActionDocument;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutTemplateActionInput, options: Options) !PutTemplateActionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutTemplateActionInput, options: CallOptions) !PutTemplateActionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

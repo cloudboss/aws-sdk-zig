@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_images = @import("get_images.zig");
@@ -15,7 +16,7 @@ pub const GetImagesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_images.Options) !get_images.GetImagesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_images.GetImagesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const ListFragmentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_fragments.Options) !list_fragments.ListFragmentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_fragments.ListFragmentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

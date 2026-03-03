@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IcmpTypeCode = @import("icmp_type_code.zig").IcmpTypeCode;
 const PortRange = @import("port_range.zig").PortRange;
@@ -61,13 +62,9 @@ pub const ReplaceNetworkAclEntryInput = struct {
     rule_number: i32,
 };
 
-const ReplaceNetworkAclEntryOutput = struct {};
+pub const ReplaceNetworkAclEntryOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ReplaceNetworkAclEntryInput, options: Options) !ReplaceNetworkAclEntryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ReplaceNetworkAclEntryInput, options: CallOptions) !ReplaceNetworkAclEntryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

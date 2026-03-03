@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const QueueFleetAssociationSummary = @import("queue_fleet_association_summary.zig").QueueFleetAssociationSummary;
 
@@ -51,11 +52,7 @@ pub const ListQueueFleetAssociationsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListQueueFleetAssociationsInput, options: Options) !ListQueueFleetAssociationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListQueueFleetAssociationsInput, options: CallOptions) !ListQueueFleetAssociationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

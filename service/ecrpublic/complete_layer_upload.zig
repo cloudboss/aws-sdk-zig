@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const CompleteLayerUploadInput = struct {
@@ -51,11 +52,7 @@ pub const CompleteLayerUploadOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CompleteLayerUploadInput, options: Options) !CompleteLayerUploadOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CompleteLayerUploadInput, options: CallOptions) !CompleteLayerUploadOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

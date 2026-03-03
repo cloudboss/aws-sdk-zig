@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AttachmentType = @import("attachment_type.zig").AttachmentType;
 const AttachmentState = @import("attachment_state.zig").AttachmentState;
@@ -49,11 +50,7 @@ pub const ListAttachmentsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAttachmentsInput, options: Options) !ListAttachmentsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAttachmentsInput, options: CallOptions) !ListAttachmentsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

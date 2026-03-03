@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ExternalFilteringConfiguration = @import("external_filtering_configuration.zig").ExternalFilteringConfiguration;
 const ServiceIntegrationUnion = @import("service_integration_union.zig").ServiceIntegrationUnion;
@@ -62,11 +63,7 @@ pub const CreateLakeFormationIdentityCenterConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLakeFormationIdentityCenterConfigurationInput, options: Options) !CreateLakeFormationIdentityCenterConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLakeFormationIdentityCenterConfigurationInput, options: CallOptions) !CreateLakeFormationIdentityCenterConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

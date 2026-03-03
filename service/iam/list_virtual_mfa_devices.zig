@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const assignmentStatusType = @import("assignment_status_type.zig").assignmentStatusType;
 const VirtualMFADevice = @import("virtual_mfa_device.zig").VirtualMFADevice;
@@ -61,11 +62,7 @@ pub const ListVirtualMFADevicesOutput = struct {
     virtual_mfa_devices: ?[]const VirtualMFADevice = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListVirtualMFADevicesInput, options: Options) !ListVirtualMFADevicesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListVirtualMFADevicesInput, options: CallOptions) !ListVirtualMFADevicesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

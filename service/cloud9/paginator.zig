@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_environment_memberships = @import("describe_environment_memberships.zig");
@@ -15,7 +16,7 @@ pub const DescribeEnvironmentMembershipsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_environment_memberships.Options) !describe_environment_memberships.DescribeEnvironmentMembershipsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_environment_memberships.DescribeEnvironmentMembershipsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const ListEnvironmentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_environments.Options) !list_environments.ListEnvironmentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_environments.ListEnvironmentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

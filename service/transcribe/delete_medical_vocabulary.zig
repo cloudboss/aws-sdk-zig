@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteMedicalVocabularyInput = struct {
@@ -14,13 +15,9 @@ pub const DeleteMedicalVocabularyInput = struct {
     };
 };
 
-const DeleteMedicalVocabularyOutput = struct {};
+pub const DeleteMedicalVocabularyOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMedicalVocabularyInput, options: Options) !DeleteMedicalVocabularyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMedicalVocabularyInput, options: CallOptions) !DeleteMedicalVocabularyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

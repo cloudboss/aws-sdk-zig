@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const ReleaseAddressInput = struct {
@@ -27,13 +28,9 @@ pub const ReleaseAddressInput = struct {
     public_ip: ?[]const u8 = null,
 };
 
-const ReleaseAddressOutput = struct {};
+pub const ReleaseAddressOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ReleaseAddressInput, options: Options) !ReleaseAddressOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ReleaseAddressInput, options: CallOptions) !ReleaseAddressOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

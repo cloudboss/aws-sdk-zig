@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CreateAssociationBatchRequestEntry = @import("create_association_batch_request_entry.zig").CreateAssociationBatchRequestEntry;
 const FailedCreateAssociation = @import("failed_create_association.zig").FailedCreateAssociation;
@@ -29,11 +30,7 @@ pub const CreateAssociationBatchOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAssociationBatchInput, options: Options) !CreateAssociationBatchOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAssociationBatchInput, options: CallOptions) !CreateAssociationBatchOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

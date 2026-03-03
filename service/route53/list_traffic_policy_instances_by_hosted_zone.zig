@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RRType = @import("rr_type.zig").RRType;
 const TrafficPolicyInstance = @import("traffic_policy_instance.zig").TrafficPolicyInstance;
@@ -84,11 +85,7 @@ pub const ListTrafficPolicyInstancesByHostedZoneOutput = struct {
     traffic_policy_instance_type_marker: ?RRType = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTrafficPolicyInstancesByHostedZoneInput, options: Options) !ListTrafficPolicyInstancesByHostedZoneOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTrafficPolicyInstancesByHostedZoneInput, options: CallOptions) !ListTrafficPolicyInstancesByHostedZoneOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

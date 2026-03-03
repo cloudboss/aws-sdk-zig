@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IntegrationError = @import("integration_error.zig").IntegrationError;
 const ZeroETLIntegrationStatus = @import("zero_etl_integration_status.zig").ZeroETLIntegrationStatus;
@@ -19,13 +20,9 @@ pub const ModifyIntegrationInput = struct {
     integration_name: ?[]const u8 = null,
 };
 
-const ModifyIntegrationOutput = @import("integration.zig").Integration;
+pub const ModifyIntegrationOutput = @import("integration.zig").Integration;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyIntegrationInput, options: Options) !ModifyIntegrationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyIntegrationInput, options: CallOptions) !ModifyIntegrationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

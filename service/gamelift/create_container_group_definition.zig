@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContainerGroupType = @import("container_group_type.zig").ContainerGroupType;
 const GameServerContainerDefinitionInput = @import("game_server_container_definition_input.zig").GameServerContainerDefinitionInput;
@@ -113,11 +114,7 @@ pub const CreateContainerGroupDefinitionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateContainerGroupDefinitionInput, options: Options) !CreateContainerGroupDefinitionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateContainerGroupDefinitionInput, options: CallOptions) !CreateContainerGroupDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

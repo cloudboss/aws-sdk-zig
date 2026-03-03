@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IamInstanceProfileSpecification = @import("iam_instance_profile_specification.zig").IamInstanceProfileSpecification;
 const IamInstanceProfileAssociation = @import("iam_instance_profile_association.zig").IamInstanceProfileAssociation;
@@ -20,11 +21,7 @@ pub const ReplaceIamInstanceProfileAssociationOutput = struct {
     iam_instance_profile_association: ?IamInstanceProfileAssociation = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ReplaceIamInstanceProfileAssociationInput, options: Options) !ReplaceIamInstanceProfileAssociationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ReplaceIamInstanceProfileAssociationInput, options: CallOptions) !ReplaceIamInstanceProfileAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

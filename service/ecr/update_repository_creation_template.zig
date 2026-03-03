@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RCTAppliedFor = @import("rct_applied_for.zig").RCTAppliedFor;
 const EncryptionConfigurationForRepositoryCreationTemplate = @import("encryption_configuration_for_repository_creation_template.zig").EncryptionConfigurationForRepositoryCreationTemplate;
@@ -103,11 +104,7 @@ pub const UpdateRepositoryCreationTemplateOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRepositoryCreationTemplateInput, options: Options) !UpdateRepositoryCreationTemplateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRepositoryCreationTemplateInput, options: CallOptions) !UpdateRepositoryCreationTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_job_log_items = @import("describe_job_log_items.zig");
@@ -29,7 +30,7 @@ pub const DescribeJobLogItemsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_job_log_items.Options) !describe_job_log_items.DescribeJobLogItemsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_job_log_items.DescribeJobLogItemsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -70,7 +71,7 @@ pub const DescribeJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_jobs.Options) !describe_jobs.DescribeJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_jobs.DescribeJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -111,7 +112,7 @@ pub const DescribeLaunchConfigurationTemplatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_launch_configuration_templates.Options) !describe_launch_configuration_templates.DescribeLaunchConfigurationTemplatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_launch_configuration_templates.DescribeLaunchConfigurationTemplatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -152,7 +153,7 @@ pub const DescribeReplicationConfigurationTemplatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_replication_configuration_templates.Options) !describe_replication_configuration_templates.DescribeReplicationConfigurationTemplatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_replication_configuration_templates.DescribeReplicationConfigurationTemplatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -193,7 +194,7 @@ pub const DescribeSourceServersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_source_servers.Options) !describe_source_servers.DescribeSourceServersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_source_servers.DescribeSourceServersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -234,7 +235,7 @@ pub const DescribeVcenterClientsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_vcenter_clients.Options) !describe_vcenter_clients.DescribeVcenterClientsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_vcenter_clients.DescribeVcenterClientsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -275,7 +276,7 @@ pub const ListApplicationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_applications.Options) !list_applications.ListApplicationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_applications.ListApplicationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -316,7 +317,7 @@ pub const ListConnectorsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_connectors.Options) !list_connectors.ListConnectorsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_connectors.ListConnectorsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -357,7 +358,7 @@ pub const ListExportErrorsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_export_errors.Options) !list_export_errors.ListExportErrorsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_export_errors.ListExportErrorsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -398,7 +399,7 @@ pub const ListExportsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_exports.Options) !list_exports.ListExportsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_exports.ListExportsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -439,7 +440,7 @@ pub const ListImportErrorsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_import_errors.Options) !list_import_errors.ListImportErrorsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_import_errors.ListImportErrorsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -480,7 +481,7 @@ pub const ListImportsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_imports.Options) !list_imports.ListImportsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_imports.ListImportsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -521,7 +522,7 @@ pub const ListManagedAccountsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_managed_accounts.Options) !list_managed_accounts.ListManagedAccountsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_managed_accounts.ListManagedAccountsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -562,7 +563,7 @@ pub const ListSourceServerActionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_source_server_actions.Options) !list_source_server_actions.ListSourceServerActionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_source_server_actions.ListSourceServerActionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -603,7 +604,7 @@ pub const ListTemplateActionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_template_actions.Options) !list_template_actions.ListTemplateActionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_template_actions.ListTemplateActionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -644,7 +645,7 @@ pub const ListWavesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_waves.Options) !list_waves.ListWavesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_waves.ListWavesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

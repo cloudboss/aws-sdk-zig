@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CurrencyCode = @import("currency_code.zig").CurrencyCode;
 const WorkloadEstimateRateType = @import("workload_estimate_rate_type.zig").WorkloadEstimateRateType;
@@ -61,11 +62,7 @@ pub const GetWorkloadEstimateOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetWorkloadEstimateInput, options: Options) !GetWorkloadEstimateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetWorkloadEstimateInput, options: CallOptions) !GetWorkloadEstimateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -6,6 +6,7 @@ const get_attribute_values = @import("get_attribute_values.zig");
 const get_price_list_file_url = @import("get_price_list_file_url.zig");
 const get_products = @import("get_products.zig");
 const list_price_lists = @import("list_price_lists.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -46,7 +47,7 @@ pub const Client = struct {
     /// available for EC2 are
     /// `volumeType`, `maxIopsVolume`, `operation`,
     /// `locationType`, and `instanceCapacity10xlarge`.
-    pub fn describeServices(self: *Self, allocator: std.mem.Allocator, input: describe_services.DescribeServicesInput, options: describe_services.Options) !describe_services.DescribeServicesOutput {
+    pub fn describeServices(self: *Self, allocator: std.mem.Allocator, input: describe_services.DescribeServicesInput, options: CallOptions) !describe_services.DescribeServicesOutput {
         return describe_services.execute(self, allocator, input, options);
     }
 
@@ -56,7 +57,7 @@ pub const Client = struct {
     /// Definitions](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs)
     /// in the [Billing and Cost Management User
     /// Guide](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html).
-    pub fn getAttributeValues(self: *Self, allocator: std.mem.Allocator, input: get_attribute_values.GetAttributeValuesInput, options: get_attribute_values.Options) !get_attribute_values.GetAttributeValuesOutput {
+    pub fn getAttributeValues(self: *Self, allocator: std.mem.Allocator, input: get_attribute_values.GetAttributeValuesInput, options: CallOptions) !get_attribute_values.GetAttributeValuesOutput {
         return get_attribute_values.execute(self, allocator, input, options);
     }
 
@@ -71,12 +72,12 @@ pub const Client = struct {
     /// URL is based
     /// on the `PriceListArn` and `FileFormat` that you retrieve from the
     /// [ListPriceLists](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html) response.
-    pub fn getPriceListFileUrl(self: *Self, allocator: std.mem.Allocator, input: get_price_list_file_url.GetPriceListFileUrlInput, options: get_price_list_file_url.Options) !get_price_list_file_url.GetPriceListFileUrlOutput {
+    pub fn getPriceListFileUrl(self: *Self, allocator: std.mem.Allocator, input: get_price_list_file_url.GetPriceListFileUrlInput, options: CallOptions) !get_price_list_file_url.GetPriceListFileUrlOutput {
         return get_price_list_file_url.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all products that match the filter criteria.
-    pub fn getProducts(self: *Self, allocator: std.mem.Allocator, input: get_products.GetProductsInput, options: get_products.Options) !get_products.GetProductsOutput {
+    pub fn getProducts(self: *Self, allocator: std.mem.Allocator, input: get_products.GetProductsInput, options: CallOptions) !get_products.GetProductsOutput {
         return get_products.execute(self, allocator, input, options);
     }
 
@@ -96,7 +97,7 @@ pub const Client = struct {
     /// specific Amazon Web Services Region. You can use the `PriceListArn` from the
     /// response to get your preferred Price List files through the
     /// [GetPriceListFileUrl](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetPriceListFileUrl.html) API.
-    pub fn listPriceLists(self: *Self, allocator: std.mem.Allocator, input: list_price_lists.ListPriceListsInput, options: list_price_lists.Options) !list_price_lists.ListPriceListsOutput {
+    pub fn listPriceLists(self: *Self, allocator: std.mem.Allocator, input: list_price_lists.ListPriceListsInput, options: CallOptions) !list_price_lists.ListPriceListsOutput {
         return list_price_lists.execute(self, allocator, input, options);
     }
 

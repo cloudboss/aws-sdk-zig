@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BucketCannedACL = @import("bucket_canned_acl.zig").BucketCannedACL;
 const CreateBucketConfiguration = @import("create_bucket_configuration.zig").CreateBucketConfiguration;
@@ -88,11 +89,7 @@ pub const CreateBucketOutput = struct {
     location: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateBucketInput, options: Options) !CreateBucketOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateBucketInput, options: CallOptions) !CreateBucketOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

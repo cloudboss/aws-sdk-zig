@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_data_lake_sources = @import("get_data_lake_sources.zig");
@@ -17,7 +18,7 @@ pub const GetDataLakeSourcesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_data_lake_sources.Options) !get_data_lake_sources.GetDataLakeSourcesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_data_lake_sources.GetDataLakeSourcesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -58,7 +59,7 @@ pub const ListDataLakeExceptionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_data_lake_exceptions.Options) !list_data_lake_exceptions.ListDataLakeExceptionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_data_lake_exceptions.ListDataLakeExceptionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -99,7 +100,7 @@ pub const ListLogSourcesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_log_sources.Options) !list_log_sources.ListLogSourcesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_log_sources.ListLogSourcesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -140,7 +141,7 @@ pub const ListSubscribersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_subscribers.Options) !list_subscribers.ListSubscribersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_subscribers.ListSubscribersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

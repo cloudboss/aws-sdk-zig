@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CaCertificatesBundleSource = @import("ca_certificates_bundle_source.zig").CaCertificatesBundleSource;
 const TrustStore = @import("trust_store.zig").TrustStore;
@@ -26,11 +27,7 @@ pub const UpdateTrustStoreOutput = struct {
     trust_store: ?TrustStore = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTrustStoreInput, options: Options) !UpdateTrustStoreOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTrustStoreInput, options: CallOptions) !UpdateTrustStoreOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

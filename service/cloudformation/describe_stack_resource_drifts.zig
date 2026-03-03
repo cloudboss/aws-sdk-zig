@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const StackResourceDriftStatus = @import("stack_resource_drift_status.zig").StackResourceDriftStatus;
 const StackResourceDrift = @import("stack_resource_drift.zig").StackResourceDrift;
@@ -74,11 +75,7 @@ pub const DescribeStackResourceDriftsOutput = struct {
     stack_resource_drifts: ?[]const StackResourceDrift = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeStackResourceDriftsInput, options: Options) !DescribeStackResourceDriftsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeStackResourceDriftsInput, options: CallOptions) !DescribeStackResourceDriftsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

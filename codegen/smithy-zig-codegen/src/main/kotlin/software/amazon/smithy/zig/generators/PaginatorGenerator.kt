@@ -97,6 +97,7 @@ class PaginatorGenerator(
             writer.importContainer.addImport("std", "std")
             writer.importContainer.addImport("aws", "aws")
 
+            writer.write("const CallOptions = @import(\"call_options.zig\").CallOptions;")
             writer.write("const Client = @import(\"client.zig\").Client;")
             writer.blankLine()
 
@@ -154,8 +155,8 @@ class PaginatorGenerator(
 
         // next() method
         writer.openBlock(
-            "pub fn next(self: *Self, allocator: std.mem.Allocator, options: \$L.Options) !\$L.\$L {",
-            op.constName, op.constName, op.outputType,
+            "pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !\$L.\$L {",
+            op.constName, op.outputType,
         )
 
         writer.openBlock("if (self.done) {")

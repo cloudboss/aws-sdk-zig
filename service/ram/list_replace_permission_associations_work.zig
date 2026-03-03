@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReplacePermissionAssociationsWorkStatus = @import("replace_permission_associations_work_status.zig").ReplacePermissionAssociationsWorkStatus;
 const ReplacePermissionAssociationsWork = @import("replace_permission_associations_work.zig").ReplacePermissionAssociationsWork;
@@ -67,11 +68,7 @@ pub const ListReplacePermissionAssociationsWorkOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListReplacePermissionAssociationsWorkInput, options: Options) !ListReplacePermissionAssociationsWorkOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListReplacePermissionAssociationsWorkInput, options: CallOptions) !ListReplacePermissionAssociationsWorkOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

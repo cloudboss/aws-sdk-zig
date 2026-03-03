@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DeleteFileEntry = @import("delete_file_entry.zig").DeleteFileEntry;
 const PutFileEntry = @import("put_file_entry.zig").PutFileEntry;
@@ -90,11 +91,7 @@ pub const CreateCommitOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCommitInput, options: Options) !CreateCommitOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCommitInput, options: CallOptions) !CreateCommitOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

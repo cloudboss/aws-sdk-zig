@@ -3,6 +3,7 @@ const std = @import("std");
 
 const send_serial_console_ssh_public_key = @import("send_serial_console_ssh_public_key.zig");
 const send_ssh_public_key = @import("send_ssh_public_key.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -39,7 +40,7 @@ pub const Client = struct {
     /// instance using SSH. For more information, see [EC2 Serial
     /// Console](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-serial-console.html) in
     /// the *Amazon EC2 User Guide*.
-    pub fn sendSerialConsoleSshPublicKey(self: *Self, allocator: std.mem.Allocator, input: send_serial_console_ssh_public_key.SendSerialConsoleSSHPublicKeyInput, options: send_serial_console_ssh_public_key.Options) !send_serial_console_ssh_public_key.SendSerialConsoleSSHPublicKeyOutput {
+    pub fn sendSerialConsoleSshPublicKey(self: *Self, allocator: std.mem.Allocator, input: send_serial_console_ssh_public_key.SendSerialConsoleSSHPublicKeyInput, options: CallOptions) !send_serial_console_ssh_public_key.SendSerialConsoleSSHPublicKeyOutput {
         return send_serial_console_ssh_public_key.execute(self, allocator, input, options);
     }
 
@@ -49,7 +50,7 @@ pub const Client = struct {
     /// your Linux instance using EC2 Instance
     /// Connect](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Connect-using-EC2-Instance-Connect.html) in the *Amazon EC2
     /// User Guide*.
-    pub fn sendSshPublicKey(self: *Self, allocator: std.mem.Allocator, input: send_ssh_public_key.SendSSHPublicKeyInput, options: send_ssh_public_key.Options) !send_ssh_public_key.SendSSHPublicKeyOutput {
+    pub fn sendSshPublicKey(self: *Self, allocator: std.mem.Allocator, input: send_ssh_public_key.SendSSHPublicKeyInput, options: CallOptions) !send_ssh_public_key.SendSSHPublicKeyOutput {
         return send_ssh_public_key.execute(self, allocator, input, options);
     }
 };

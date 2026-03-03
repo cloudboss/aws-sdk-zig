@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SipMediaApplicationLoggingConfiguration = @import("sip_media_application_logging_configuration.zig").SipMediaApplicationLoggingConfiguration;
 
@@ -23,11 +24,7 @@ pub const GetSipMediaApplicationLoggingConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSipMediaApplicationLoggingConfigurationInput, options: Options) !GetSipMediaApplicationLoggingConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSipMediaApplicationLoggingConfigurationInput, options: CallOptions) !GetSipMediaApplicationLoggingConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

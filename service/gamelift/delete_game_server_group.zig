@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GameServerGroupDeleteOption = @import("game_server_group_delete_option.zig").GameServerGroupDeleteOption;
 const GameServerGroup = @import("game_server_group.zig").GameServerGroup;
@@ -43,11 +44,7 @@ pub const DeleteGameServerGroupOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteGameServerGroupInput, options: Options) !DeleteGameServerGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteGameServerGroupInput, options: CallOptions) !DeleteGameServerGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

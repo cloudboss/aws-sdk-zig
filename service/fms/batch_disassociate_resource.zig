@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FailedItem = @import("failed_item.zig").FailedItem;
 
@@ -35,11 +36,7 @@ pub const BatchDisassociateResourceOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDisassociateResourceInput, options: Options) !BatchDisassociateResourceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDisassociateResourceInput, options: CallOptions) !BatchDisassociateResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

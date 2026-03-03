@@ -6,6 +6,7 @@ const describe_object = @import("describe_object.zig");
 const get_object = @import("get_object.zig");
 const list_items = @import("list_items.zig");
 const put_object = @import("put_object.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -37,33 +38,33 @@ pub const Client = struct {
     }
 
     /// Deletes an object at the specified path.
-    pub fn deleteObject(self: *Self, allocator: std.mem.Allocator, input: delete_object.DeleteObjectInput, options: delete_object.Options) !delete_object.DeleteObjectOutput {
+    pub fn deleteObject(self: *Self, allocator: std.mem.Allocator, input: delete_object.DeleteObjectInput, options: CallOptions) !delete_object.DeleteObjectOutput {
         return delete_object.execute(self, allocator, input, options);
     }
 
     /// Gets the headers for an object at the specified path.
-    pub fn describeObject(self: *Self, allocator: std.mem.Allocator, input: describe_object.DescribeObjectInput, options: describe_object.Options) !describe_object.DescribeObjectOutput {
+    pub fn describeObject(self: *Self, allocator: std.mem.Allocator, input: describe_object.DescribeObjectInput, options: CallOptions) !describe_object.DescribeObjectOutput {
         return describe_object.execute(self, allocator, input, options);
     }
 
     /// Downloads the object at the specified path. If the object’s upload
     /// availability is set to `streaming`, AWS Elemental MediaStore downloads the
     /// object even if it’s still uploading the object.
-    pub fn getObject(self: *Self, allocator: std.mem.Allocator, input: get_object.GetObjectInput, options: get_object.Options) !get_object.GetObjectOutput {
+    pub fn getObject(self: *Self, allocator: std.mem.Allocator, input: get_object.GetObjectInput, options: CallOptions) !get_object.GetObjectOutput {
         return get_object.execute(self, allocator, input, options);
     }
 
     /// Provides a list of metadata entries about folders and objects in the
     /// specified
     /// folder.
-    pub fn listItems(self: *Self, allocator: std.mem.Allocator, input: list_items.ListItemsInput, options: list_items.Options) !list_items.ListItemsOutput {
+    pub fn listItems(self: *Self, allocator: std.mem.Allocator, input: list_items.ListItemsInput, options: CallOptions) !list_items.ListItemsOutput {
         return list_items.execute(self, allocator, input, options);
     }
 
     /// Uploads an object to the specified path. Object sizes are limited to 25 MB
     /// for standard upload availability and 10 MB for streaming upload
     /// availability.
-    pub fn putObject(self: *Self, allocator: std.mem.Allocator, input: put_object.PutObjectInput, options: put_object.Options) !put_object.PutObjectOutput {
+    pub fn putObject(self: *Self, allocator: std.mem.Allocator, input: put_object.PutObjectInput, options: CallOptions) !put_object.PutObjectOutput {
         return put_object.execute(self, allocator, input, options);
     }
 

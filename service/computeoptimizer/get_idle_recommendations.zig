@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IdleRecommendationFilter = @import("idle_recommendation_filter.zig").IdleRecommendationFilter;
 const OrderBy = @import("order_by.zig").OrderBy;
@@ -67,11 +68,7 @@ pub const GetIdleRecommendationsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetIdleRecommendationsInput, options: Options) !GetIdleRecommendationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetIdleRecommendationsInput, options: CallOptions) !GetIdleRecommendationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

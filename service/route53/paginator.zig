@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_cidr_blocks = @import("list_cidr_blocks.zig");
@@ -19,7 +20,7 @@ pub const ListCidrBlocksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_cidr_blocks.Options) !list_cidr_blocks.ListCidrBlocksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_cidr_blocks.ListCidrBlocksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -60,7 +61,7 @@ pub const ListCidrCollectionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_cidr_collections.Options) !list_cidr_collections.ListCidrCollectionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_cidr_collections.ListCidrCollectionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -101,7 +102,7 @@ pub const ListCidrLocationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_cidr_locations.Options) !list_cidr_locations.ListCidrLocationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_cidr_locations.ListCidrLocationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -142,7 +143,7 @@ pub const ListHealthChecksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_health_checks.Options) !list_health_checks.ListHealthChecksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_health_checks.ListHealthChecksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -183,7 +184,7 @@ pub const ListHostedZonesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_hosted_zones.Options) !list_hosted_zones.ListHostedZonesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_hosted_zones.ListHostedZonesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -224,7 +225,7 @@ pub const ListQueryLoggingConfigsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_query_logging_configs.Options) !list_query_logging_configs.ListQueryLoggingConfigsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_query_logging_configs.ListQueryLoggingConfigsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

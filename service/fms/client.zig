@@ -43,6 +43,7 @@ const put_protocols_list = @import("put_protocols_list.zig");
 const put_resource_set = @import("put_resource_set.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -83,7 +84,7 @@ pub const Client = struct {
     /// For information about working with Firewall Manager administrator accounts,
     /// see [Managing Firewall Manager
     /// administrators](https://docs.aws.amazon.com/organizations/latest/userguide/fms-administrators.html) in the *Firewall Manager Developer Guide*.
-    pub fn associateAdminAccount(self: *Self, allocator: std.mem.Allocator, input: associate_admin_account.AssociateAdminAccountInput, options: associate_admin_account.Options) !associate_admin_account.AssociateAdminAccountOutput {
+    pub fn associateAdminAccount(self: *Self, allocator: std.mem.Allocator, input: associate_admin_account.AssociateAdminAccountInput, options: CallOptions) !associate_admin_account.AssociateAdminAccountOutput {
         return associate_admin_account.execute(self, allocator, input, options);
     }
 
@@ -91,22 +92,22 @@ pub const Client = struct {
     /// a third-party firewall service. A tenant is an instance of the third-party
     /// firewall service that's associated with your Amazon Web Services customer
     /// account.
-    pub fn associateThirdPartyFirewall(self: *Self, allocator: std.mem.Allocator, input: associate_third_party_firewall.AssociateThirdPartyFirewallInput, options: associate_third_party_firewall.Options) !associate_third_party_firewall.AssociateThirdPartyFirewallOutput {
+    pub fn associateThirdPartyFirewall(self: *Self, allocator: std.mem.Allocator, input: associate_third_party_firewall.AssociateThirdPartyFirewallInput, options: CallOptions) !associate_third_party_firewall.AssociateThirdPartyFirewallOutput {
         return associate_third_party_firewall.execute(self, allocator, input, options);
     }
 
     /// Associate resources to a Firewall Manager resource set.
-    pub fn batchAssociateResource(self: *Self, allocator: std.mem.Allocator, input: batch_associate_resource.BatchAssociateResourceInput, options: batch_associate_resource.Options) !batch_associate_resource.BatchAssociateResourceOutput {
+    pub fn batchAssociateResource(self: *Self, allocator: std.mem.Allocator, input: batch_associate_resource.BatchAssociateResourceInput, options: CallOptions) !batch_associate_resource.BatchAssociateResourceOutput {
         return batch_associate_resource.execute(self, allocator, input, options);
     }
 
     /// Disassociates resources from a Firewall Manager resource set.
-    pub fn batchDisassociateResource(self: *Self, allocator: std.mem.Allocator, input: batch_disassociate_resource.BatchDisassociateResourceInput, options: batch_disassociate_resource.Options) !batch_disassociate_resource.BatchDisassociateResourceOutput {
+    pub fn batchDisassociateResource(self: *Self, allocator: std.mem.Allocator, input: batch_disassociate_resource.BatchDisassociateResourceInput, options: CallOptions) !batch_disassociate_resource.BatchDisassociateResourceOutput {
         return batch_disassociate_resource.execute(self, allocator, input, options);
     }
 
     /// Permanently deletes an Firewall Manager applications list.
-    pub fn deleteAppsList(self: *Self, allocator: std.mem.Allocator, input: delete_apps_list.DeleteAppsListInput, options: delete_apps_list.Options) !delete_apps_list.DeleteAppsListOutput {
+    pub fn deleteAppsList(self: *Self, allocator: std.mem.Allocator, input: delete_apps_list.DeleteAppsListInput, options: CallOptions) !delete_apps_list.DeleteAppsListOutput {
         return delete_apps_list.execute(self, allocator, input, options);
     }
 
@@ -114,22 +115,22 @@ pub const Client = struct {
     /// Simple
     /// Notification Service (SNS) topic that is used to record Firewall Manager SNS
     /// logs.
-    pub fn deleteNotificationChannel(self: *Self, allocator: std.mem.Allocator, input: delete_notification_channel.DeleteNotificationChannelInput, options: delete_notification_channel.Options) !delete_notification_channel.DeleteNotificationChannelOutput {
+    pub fn deleteNotificationChannel(self: *Self, allocator: std.mem.Allocator, input: delete_notification_channel.DeleteNotificationChannelInput, options: CallOptions) !delete_notification_channel.DeleteNotificationChannelOutput {
         return delete_notification_channel.execute(self, allocator, input, options);
     }
 
     /// Permanently deletes an Firewall Manager policy.
-    pub fn deletePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_policy.DeletePolicyInput, options: delete_policy.Options) !delete_policy.DeletePolicyOutput {
+    pub fn deletePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_policy.DeletePolicyInput, options: CallOptions) !delete_policy.DeletePolicyOutput {
         return delete_policy.execute(self, allocator, input, options);
     }
 
     /// Permanently deletes an Firewall Manager protocols list.
-    pub fn deleteProtocolsList(self: *Self, allocator: std.mem.Allocator, input: delete_protocols_list.DeleteProtocolsListInput, options: delete_protocols_list.Options) !delete_protocols_list.DeleteProtocolsListOutput {
+    pub fn deleteProtocolsList(self: *Self, allocator: std.mem.Allocator, input: delete_protocols_list.DeleteProtocolsListInput, options: CallOptions) !delete_protocols_list.DeleteProtocolsListOutput {
         return delete_protocols_list.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified ResourceSet.
-    pub fn deleteResourceSet(self: *Self, allocator: std.mem.Allocator, input: delete_resource_set.DeleteResourceSetInput, options: delete_resource_set.Options) !delete_resource_set.DeleteResourceSetOutput {
+    pub fn deleteResourceSet(self: *Self, allocator: std.mem.Allocator, input: delete_resource_set.DeleteResourceSetInput, options: CallOptions) !delete_resource_set.DeleteResourceSetOutput {
         return delete_resource_set.execute(self, allocator, input, options);
     }
 
@@ -142,7 +143,7 @@ pub const Client = struct {
     /// last out principle. If you are the default administrator, all Firewall
     /// Manager administrators within the organization must first disassociate their
     /// accounts before you can disassociate your account.
-    pub fn disassociateAdminAccount(self: *Self, allocator: std.mem.Allocator, input: disassociate_admin_account.DisassociateAdminAccountInput, options: disassociate_admin_account.Options) !disassociate_admin_account.DisassociateAdminAccountOutput {
+    pub fn disassociateAdminAccount(self: *Self, allocator: std.mem.Allocator, input: disassociate_admin_account.DisassociateAdminAccountInput, options: CallOptions) !disassociate_admin_account.DisassociateAdminAccountOutput {
         return disassociate_admin_account.execute(self, allocator, input, options);
     }
 
@@ -150,25 +151,25 @@ pub const Client = struct {
     /// firewall tenant. When you call `DisassociateThirdPartyFirewall`, the
     /// third-party firewall vendor deletes all of the firewalls that are associated
     /// with the account.
-    pub fn disassociateThirdPartyFirewall(self: *Self, allocator: std.mem.Allocator, input: disassociate_third_party_firewall.DisassociateThirdPartyFirewallInput, options: disassociate_third_party_firewall.Options) !disassociate_third_party_firewall.DisassociateThirdPartyFirewallOutput {
+    pub fn disassociateThirdPartyFirewall(self: *Self, allocator: std.mem.Allocator, input: disassociate_third_party_firewall.DisassociateThirdPartyFirewallInput, options: CallOptions) !disassociate_third_party_firewall.DisassociateThirdPartyFirewallOutput {
         return disassociate_third_party_firewall.execute(self, allocator, input, options);
     }
 
     /// Returns the Organizations account that is associated with Firewall Manager
     /// as the Firewall Manager default administrator.
-    pub fn getAdminAccount(self: *Self, allocator: std.mem.Allocator, input: get_admin_account.GetAdminAccountInput, options: get_admin_account.Options) !get_admin_account.GetAdminAccountOutput {
+    pub fn getAdminAccount(self: *Self, allocator: std.mem.Allocator, input: get_admin_account.GetAdminAccountInput, options: CallOptions) !get_admin_account.GetAdminAccountOutput {
         return get_admin_account.execute(self, allocator, input, options);
     }
 
     /// Returns information about the specified account's administrative scope. The
     /// administrative scope defines the resources that an Firewall Manager
     /// administrator can manage.
-    pub fn getAdminScope(self: *Self, allocator: std.mem.Allocator, input: get_admin_scope.GetAdminScopeInput, options: get_admin_scope.Options) !get_admin_scope.GetAdminScopeOutput {
+    pub fn getAdminScope(self: *Self, allocator: std.mem.Allocator, input: get_admin_scope.GetAdminScopeInput, options: CallOptions) !get_admin_scope.GetAdminScopeOutput {
         return get_admin_scope.execute(self, allocator, input, options);
     }
 
     /// Returns information about the specified Firewall Manager applications list.
-    pub fn getAppsList(self: *Self, allocator: std.mem.Allocator, input: get_apps_list.GetAppsListInput, options: get_apps_list.Options) !get_apps_list.GetAppsListOutput {
+    pub fn getAppsList(self: *Self, allocator: std.mem.Allocator, input: get_apps_list.GetAppsListInput, options: CallOptions) !get_apps_list.GetAppsListOutput {
         return get_apps_list.execute(self, allocator, input, options);
     }
 
@@ -179,19 +180,19 @@ pub const Client = struct {
     ///
     /// The reasons for resources being considered compliant depend on the Firewall
     /// Manager policy type.
-    pub fn getComplianceDetail(self: *Self, allocator: std.mem.Allocator, input: get_compliance_detail.GetComplianceDetailInput, options: get_compliance_detail.Options) !get_compliance_detail.GetComplianceDetailOutput {
+    pub fn getComplianceDetail(self: *Self, allocator: std.mem.Allocator, input: get_compliance_detail.GetComplianceDetailInput, options: CallOptions) !get_compliance_detail.GetComplianceDetailOutput {
         return get_compliance_detail.execute(self, allocator, input, options);
     }
 
     /// Information
     /// about the Amazon Simple Notification Service (SNS) topic that is used to
     /// record Firewall Manager SNS logs.
-    pub fn getNotificationChannel(self: *Self, allocator: std.mem.Allocator, input: get_notification_channel.GetNotificationChannelInput, options: get_notification_channel.Options) !get_notification_channel.GetNotificationChannelOutput {
+    pub fn getNotificationChannel(self: *Self, allocator: std.mem.Allocator, input: get_notification_channel.GetNotificationChannelInput, options: CallOptions) !get_notification_channel.GetNotificationChannelOutput {
         return get_notification_channel.execute(self, allocator, input, options);
     }
 
     /// Returns information about the specified Firewall Manager policy.
-    pub fn getPolicy(self: *Self, allocator: std.mem.Allocator, input: get_policy.GetPolicyInput, options: get_policy.Options) !get_policy.GetPolicyOutput {
+    pub fn getPolicy(self: *Self, allocator: std.mem.Allocator, input: get_policy.GetPolicyInput, options: CallOptions) !get_policy.GetPolicyOutput {
         return get_policy.execute(self, allocator, input, options);
     }
 
@@ -199,29 +200,29 @@ pub const Client = struct {
     /// information
     /// in the event of a potential DDoS attack. Other policy types are currently
     /// unsupported.
-    pub fn getProtectionStatus(self: *Self, allocator: std.mem.Allocator, input: get_protection_status.GetProtectionStatusInput, options: get_protection_status.Options) !get_protection_status.GetProtectionStatusOutput {
+    pub fn getProtectionStatus(self: *Self, allocator: std.mem.Allocator, input: get_protection_status.GetProtectionStatusInput, options: CallOptions) !get_protection_status.GetProtectionStatusOutput {
         return get_protection_status.execute(self, allocator, input, options);
     }
 
     /// Returns information about the specified Firewall Manager protocols list.
-    pub fn getProtocolsList(self: *Self, allocator: std.mem.Allocator, input: get_protocols_list.GetProtocolsListInput, options: get_protocols_list.Options) !get_protocols_list.GetProtocolsListOutput {
+    pub fn getProtocolsList(self: *Self, allocator: std.mem.Allocator, input: get_protocols_list.GetProtocolsListInput, options: CallOptions) !get_protocols_list.GetProtocolsListOutput {
         return get_protocols_list.execute(self, allocator, input, options);
     }
 
     /// Gets information about a specific resource set.
-    pub fn getResourceSet(self: *Self, allocator: std.mem.Allocator, input: get_resource_set.GetResourceSetInput, options: get_resource_set.Options) !get_resource_set.GetResourceSetOutput {
+    pub fn getResourceSet(self: *Self, allocator: std.mem.Allocator, input: get_resource_set.GetResourceSetInput, options: CallOptions) !get_resource_set.GetResourceSetOutput {
         return get_resource_set.execute(self, allocator, input, options);
     }
 
     /// The onboarding status of a Firewall Manager admin account to third-party
     /// firewall vendor tenant.
-    pub fn getThirdPartyFirewallAssociationStatus(self: *Self, allocator: std.mem.Allocator, input: get_third_party_firewall_association_status.GetThirdPartyFirewallAssociationStatusInput, options: get_third_party_firewall_association_status.Options) !get_third_party_firewall_association_status.GetThirdPartyFirewallAssociationStatusOutput {
+    pub fn getThirdPartyFirewallAssociationStatus(self: *Self, allocator: std.mem.Allocator, input: get_third_party_firewall_association_status.GetThirdPartyFirewallAssociationStatusInput, options: CallOptions) !get_third_party_firewall_association_status.GetThirdPartyFirewallAssociationStatusOutput {
         return get_third_party_firewall_association_status.execute(self, allocator, input, options);
     }
 
     /// Retrieves violations for a resource based on the specified Firewall Manager
     /// policy and Amazon Web Services account.
-    pub fn getViolationDetails(self: *Self, allocator: std.mem.Allocator, input: get_violation_details.GetViolationDetailsInput, options: get_violation_details.Options) !get_violation_details.GetViolationDetailsOutput {
+    pub fn getViolationDetails(self: *Self, allocator: std.mem.Allocator, input: get_violation_details.GetViolationDetailsInput, options: CallOptions) !get_violation_details.GetViolationDetailsOutput {
         return get_violation_details.execute(self, allocator, input, options);
     }
 
@@ -231,7 +232,7 @@ pub const Client = struct {
     ///
     /// This operation can be called only from the organization's management
     /// account.
-    pub fn listAdminAccountsForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_admin_accounts_for_organization.ListAdminAccountsForOrganizationInput, options: list_admin_accounts_for_organization.Options) !list_admin_accounts_for_organization.ListAdminAccountsForOrganizationOutput {
+    pub fn listAdminAccountsForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_admin_accounts_for_organization.ListAdminAccountsForOrganizationInput, options: CallOptions) !list_admin_accounts_for_organization.ListAdminAccountsForOrganizationOutput {
         return list_admin_accounts_for_organization.execute(self, allocator, input, options);
     }
 
@@ -240,12 +241,12 @@ pub const Client = struct {
     /// accounts who are managing their account. This operation only returns the
     /// managing administrators that have the requested account within their
     /// AdminScope.
-    pub fn listAdminsManagingAccount(self: *Self, allocator: std.mem.Allocator, input: list_admins_managing_account.ListAdminsManagingAccountInput, options: list_admins_managing_account.Options) !list_admins_managing_account.ListAdminsManagingAccountOutput {
+    pub fn listAdminsManagingAccount(self: *Self, allocator: std.mem.Allocator, input: list_admins_managing_account.ListAdminsManagingAccountInput, options: CallOptions) !list_admins_managing_account.ListAdminsManagingAccountOutput {
         return list_admins_managing_account.execute(self, allocator, input, options);
     }
 
     /// Returns an array of `AppsListDataSummary` objects.
-    pub fn listAppsLists(self: *Self, allocator: std.mem.Allocator, input: list_apps_lists.ListAppsListsInput, options: list_apps_lists.Options) !list_apps_lists.ListAppsListsOutput {
+    pub fn listAppsLists(self: *Self, allocator: std.mem.Allocator, input: list_apps_lists.ListAppsListsInput, options: CallOptions) !list_apps_lists.ListAppsListsOutput {
         return list_apps_lists.execute(self, allocator, input, options);
     }
 
@@ -253,13 +254,13 @@ pub const Client = struct {
     /// `PolicyComplianceStatus` to get a summary of which member accounts are
     /// protected
     /// by the specified policy.
-    pub fn listComplianceStatus(self: *Self, allocator: std.mem.Allocator, input: list_compliance_status.ListComplianceStatusInput, options: list_compliance_status.Options) !list_compliance_status.ListComplianceStatusOutput {
+    pub fn listComplianceStatus(self: *Self, allocator: std.mem.Allocator, input: list_compliance_status.ListComplianceStatusInput, options: CallOptions) !list_compliance_status.ListComplianceStatusOutput {
         return list_compliance_status.execute(self, allocator, input, options);
     }
 
     /// Returns an array of resources in the organization's accounts that are
     /// available to be associated with a resource set.
-    pub fn listDiscoveredResources(self: *Self, allocator: std.mem.Allocator, input: list_discovered_resources.ListDiscoveredResourcesInput, options: list_discovered_resources.Options) !list_discovered_resources.ListDiscoveredResourcesOutput {
+    pub fn listDiscoveredResources(self: *Self, allocator: std.mem.Allocator, input: list_discovered_resources.ListDiscoveredResourcesInput, options: CallOptions) !list_discovered_resources.ListDiscoveredResourcesOutput {
         return list_discovered_resources.execute(self, allocator, input, options);
     }
 
@@ -268,39 +269,39 @@ pub const Client = struct {
     ///
     /// Either an Firewall Manager administrator or the organization's management
     /// account can make this request.
-    pub fn listMemberAccounts(self: *Self, allocator: std.mem.Allocator, input: list_member_accounts.ListMemberAccountsInput, options: list_member_accounts.Options) !list_member_accounts.ListMemberAccountsOutput {
+    pub fn listMemberAccounts(self: *Self, allocator: std.mem.Allocator, input: list_member_accounts.ListMemberAccountsInput, options: CallOptions) !list_member_accounts.ListMemberAccountsOutput {
         return list_member_accounts.execute(self, allocator, input, options);
     }
 
     /// Returns an array of `PolicySummary` objects.
-    pub fn listPolicies(self: *Self, allocator: std.mem.Allocator, input: list_policies.ListPoliciesInput, options: list_policies.Options) !list_policies.ListPoliciesOutput {
+    pub fn listPolicies(self: *Self, allocator: std.mem.Allocator, input: list_policies.ListPoliciesInput, options: CallOptions) !list_policies.ListPoliciesOutput {
         return list_policies.execute(self, allocator, input, options);
     }
 
     /// Returns an array of `ProtocolsListDataSummary` objects.
-    pub fn listProtocolsLists(self: *Self, allocator: std.mem.Allocator, input: list_protocols_lists.ListProtocolsListsInput, options: list_protocols_lists.Options) !list_protocols_lists.ListProtocolsListsOutput {
+    pub fn listProtocolsLists(self: *Self, allocator: std.mem.Allocator, input: list_protocols_lists.ListProtocolsListsInput, options: CallOptions) !list_protocols_lists.ListProtocolsListsOutput {
         return list_protocols_lists.execute(self, allocator, input, options);
     }
 
     /// Returns an array of resources that are currently associated to a resource
     /// set.
-    pub fn listResourceSetResources(self: *Self, allocator: std.mem.Allocator, input: list_resource_set_resources.ListResourceSetResourcesInput, options: list_resource_set_resources.Options) !list_resource_set_resources.ListResourceSetResourcesOutput {
+    pub fn listResourceSetResources(self: *Self, allocator: std.mem.Allocator, input: list_resource_set_resources.ListResourceSetResourcesInput, options: CallOptions) !list_resource_set_resources.ListResourceSetResourcesOutput {
         return list_resource_set_resources.execute(self, allocator, input, options);
     }
 
     /// Returns an array of `ResourceSetSummary` objects.
-    pub fn listResourceSets(self: *Self, allocator: std.mem.Allocator, input: list_resource_sets.ListResourceSetsInput, options: list_resource_sets.Options) !list_resource_sets.ListResourceSetsOutput {
+    pub fn listResourceSets(self: *Self, allocator: std.mem.Allocator, input: list_resource_sets.ListResourceSetsInput, options: CallOptions) !list_resource_sets.ListResourceSetsOutput {
         return list_resource_sets.execute(self, allocator, input, options);
     }
 
     /// Retrieves the list of tags for the specified Amazon Web Services resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of all of the third-party firewall policies that are
     /// associated with the third-party firewall administrator's account.
-    pub fn listThirdPartyFirewallFirewallPolicies(self: *Self, allocator: std.mem.Allocator, input: list_third_party_firewall_firewall_policies.ListThirdPartyFirewallFirewallPoliciesInput, options: list_third_party_firewall_firewall_policies.Options) !list_third_party_firewall_firewall_policies.ListThirdPartyFirewallFirewallPoliciesOutput {
+    pub fn listThirdPartyFirewallFirewallPolicies(self: *Self, allocator: std.mem.Allocator, input: list_third_party_firewall_firewall_policies.ListThirdPartyFirewallFirewallPoliciesInput, options: CallOptions) !list_third_party_firewall_firewall_policies.ListThirdPartyFirewallFirewallPoliciesOutput {
         return list_third_party_firewall_firewall_policies.execute(self, allocator, input, options);
     }
 
@@ -315,12 +316,12 @@ pub const Client = struct {
     /// information about administrator accounts within Organizations, see
     /// [Managing the Amazon Web Services Accounts in Your
     /// Organization](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html).
-    pub fn putAdminAccount(self: *Self, allocator: std.mem.Allocator, input: put_admin_account.PutAdminAccountInput, options: put_admin_account.Options) !put_admin_account.PutAdminAccountOutput {
+    pub fn putAdminAccount(self: *Self, allocator: std.mem.Allocator, input: put_admin_account.PutAdminAccountInput, options: CallOptions) !put_admin_account.PutAdminAccountOutput {
         return put_admin_account.execute(self, allocator, input, options);
     }
 
     /// Creates an Firewall Manager applications list.
-    pub fn putAppsList(self: *Self, allocator: std.mem.Allocator, input: put_apps_list.PutAppsListInput, options: put_apps_list.Options) !put_apps_list.PutAppsListOutput {
+    pub fn putAppsList(self: *Self, allocator: std.mem.Allocator, input: put_apps_list.PutAppsListInput, options: CallOptions) !put_apps_list.PutAppsListOutput {
         return put_apps_list.execute(self, allocator, input, options);
     }
 
@@ -336,7 +337,7 @@ pub const Client = struct {
     /// this role. For information about configuring an SNS access policy, see
     /// [Service roles for Firewall
     /// Manager](https://docs.aws.amazon.com/waf/latest/developerguide/fms-security_iam_service-with-iam.html#fms-security_iam_service-with-iam-roles-service) in the *Firewall Manager Developer Guide*.
-    pub fn putNotificationChannel(self: *Self, allocator: std.mem.Allocator, input: put_notification_channel.PutNotificationChannelInput, options: put_notification_channel.Options) !put_notification_channel.PutNotificationChannelOutput {
+    pub fn putNotificationChannel(self: *Self, allocator: std.mem.Allocator, input: put_notification_channel.PutNotificationChannelInput, options: CallOptions) !put_notification_channel.PutNotificationChannelOutput {
         return put_notification_channel.execute(self, allocator, input, options);
     }
 
@@ -394,12 +395,12 @@ pub const Client = struct {
     /// cloud-centered solution that blocks Zero-Day threats and secures cloud
     /// infrastructures with industry-leading advanced threat prevention, smart web
     /// application firewalls (WAF), and API protection.
-    pub fn putPolicy(self: *Self, allocator: std.mem.Allocator, input: put_policy.PutPolicyInput, options: put_policy.Options) !put_policy.PutPolicyOutput {
+    pub fn putPolicy(self: *Self, allocator: std.mem.Allocator, input: put_policy.PutPolicyInput, options: CallOptions) !put_policy.PutPolicyOutput {
         return put_policy.execute(self, allocator, input, options);
     }
 
     /// Creates an Firewall Manager protocols list.
-    pub fn putProtocolsList(self: *Self, allocator: std.mem.Allocator, input: put_protocols_list.PutProtocolsListInput, options: put_protocols_list.Options) !put_protocols_list.PutProtocolsListOutput {
+    pub fn putProtocolsList(self: *Self, allocator: std.mem.Allocator, input: put_protocols_list.PutProtocolsListInput, options: CallOptions) !put_protocols_list.PutProtocolsListOutput {
         return put_protocols_list.execute(self, allocator, input, options);
     }
 
@@ -407,17 +408,17 @@ pub const Client = struct {
     ///
     /// An Firewall Manager resource set defines the resources to import into an
     /// Firewall Manager policy from another Amazon Web Services service.
-    pub fn putResourceSet(self: *Self, allocator: std.mem.Allocator, input: put_resource_set.PutResourceSetInput, options: put_resource_set.Options) !put_resource_set.PutResourceSetOutput {
+    pub fn putResourceSet(self: *Self, allocator: std.mem.Allocator, input: put_resource_set.PutResourceSetInput, options: CallOptions) !put_resource_set.PutResourceSetOutput {
         return put_resource_set.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tags to an Amazon Web Services resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from an Amazon Web Services resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

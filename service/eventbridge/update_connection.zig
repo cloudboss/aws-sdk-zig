@@ -2,21 +2,18 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConnectionAuthorizationType = @import("connection_authorization_type.zig").ConnectionAuthorizationType;
 const UpdateConnectionAuthRequestParameters = @import("update_connection_auth_request_parameters.zig").UpdateConnectionAuthRequestParameters;
 const ConnectivityResourceParameters = @import("connectivity_resource_parameters.zig").ConnectivityResourceParameters;
 const ConnectionState = @import("connection_state.zig").ConnectionState;
 
-const UpdateConnectionInput = @import("update_connection_request.zig").UpdateConnectionRequest;
+pub const UpdateConnectionInput = @import("update_connection_request.zig").UpdateConnectionRequest;
 
-const UpdateConnectionOutput = @import("update_connection_response.zig").UpdateConnectionResponse;
+pub const UpdateConnectionOutput = @import("update_connection_response.zig").UpdateConnectionResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateConnectionInput, options: Options) !UpdateConnectionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateConnectionInput, options: CallOptions) !UpdateConnectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

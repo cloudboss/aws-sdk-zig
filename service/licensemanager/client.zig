@@ -63,6 +63,7 @@ const update_license_configuration = @import("update_license_configuration.zig")
 const update_license_manager_report_generator = @import("update_license_manager_report_generator.zig");
 const update_license_specifications_for_resource = @import("update_license_specifications_for_resource.zig");
 const update_service_settings = @import("update_service_settings.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -93,18 +94,18 @@ pub const Client = struct {
     }
 
     /// Accepts the specified grant.
-    pub fn acceptGrant(self: *Self, allocator: std.mem.Allocator, input: accept_grant.AcceptGrantInput, options: accept_grant.Options) !accept_grant.AcceptGrantOutput {
+    pub fn acceptGrant(self: *Self, allocator: std.mem.Allocator, input: accept_grant.AcceptGrantInput, options: CallOptions) !accept_grant.AcceptGrantOutput {
         return accept_grant.execute(self, allocator, input, options);
     }
 
     /// Checks in the specified license. Check in a license when it is no longer in
     /// use.
-    pub fn checkInLicense(self: *Self, allocator: std.mem.Allocator, input: check_in_license.CheckInLicenseInput, options: check_in_license.Options) !check_in_license.CheckInLicenseOutput {
+    pub fn checkInLicense(self: *Self, allocator: std.mem.Allocator, input: check_in_license.CheckInLicenseInput, options: CallOptions) !check_in_license.CheckInLicenseOutput {
         return check_in_license.execute(self, allocator, input, options);
     }
 
     /// Checks out the specified license for offline use.
-    pub fn checkoutBorrowLicense(self: *Self, allocator: std.mem.Allocator, input: checkout_borrow_license.CheckoutBorrowLicenseInput, options: checkout_borrow_license.Options) !checkout_borrow_license.CheckoutBorrowLicenseOutput {
+    pub fn checkoutBorrowLicense(self: *Self, allocator: std.mem.Allocator, input: checkout_borrow_license.CheckoutBorrowLicenseInput, options: CallOptions) !checkout_borrow_license.CheckoutBorrowLicenseOutput {
         return checkout_borrow_license.execute(self, allocator, input, options);
     }
 
@@ -113,7 +114,7 @@ pub const Client = struct {
     /// If the account that created the license is the same that is performing the
     /// check out, you must
     /// specify the account as the beneficiary.
-    pub fn checkoutLicense(self: *Self, allocator: std.mem.Allocator, input: checkout_license.CheckoutLicenseInput, options: checkout_license.Options) !checkout_license.CheckoutLicenseOutput {
+    pub fn checkoutLicense(self: *Self, allocator: std.mem.Allocator, input: checkout_license.CheckoutLicenseInput, options: CallOptions) !checkout_license.CheckoutLicenseOutput {
         return checkout_license.execute(self, allocator, input, options);
     }
 
@@ -123,29 +124,29 @@ pub const Client = struct {
     /// organizational unit (OU). For more information, see [Granted licenses in
     /// License
     /// Manager](https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html) in the *License Manager User Guide*.
-    pub fn createGrant(self: *Self, allocator: std.mem.Allocator, input: create_grant.CreateGrantInput, options: create_grant.Options) !create_grant.CreateGrantOutput {
+    pub fn createGrant(self: *Self, allocator: std.mem.Allocator, input: create_grant.CreateGrantInput, options: CallOptions) !create_grant.CreateGrantOutput {
         return create_grant.execute(self, allocator, input, options);
     }
 
     /// Creates a new version of the specified grant. For more information, see
     /// [Granted licenses in License
     /// Manager](https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html) in the *License Manager User Guide*.
-    pub fn createGrantVersion(self: *Self, allocator: std.mem.Allocator, input: create_grant_version.CreateGrantVersionInput, options: create_grant_version.Options) !create_grant_version.CreateGrantVersionOutput {
+    pub fn createGrantVersion(self: *Self, allocator: std.mem.Allocator, input: create_grant_version.CreateGrantVersionInput, options: CallOptions) !create_grant_version.CreateGrantVersionOutput {
         return create_grant_version.execute(self, allocator, input, options);
     }
 
     /// Creates a license.
-    pub fn createLicense(self: *Self, allocator: std.mem.Allocator, input: create_license.CreateLicenseInput, options: create_license.Options) !create_license.CreateLicenseOutput {
+    pub fn createLicense(self: *Self, allocator: std.mem.Allocator, input: create_license.CreateLicenseInput, options: CallOptions) !create_license.CreateLicenseOutput {
         return create_license.execute(self, allocator, input, options);
     }
 
     /// Creates a license asset group.
-    pub fn createLicenseAssetGroup(self: *Self, allocator: std.mem.Allocator, input: create_license_asset_group.CreateLicenseAssetGroupInput, options: create_license_asset_group.Options) !create_license_asset_group.CreateLicenseAssetGroupOutput {
+    pub fn createLicenseAssetGroup(self: *Self, allocator: std.mem.Allocator, input: create_license_asset_group.CreateLicenseAssetGroupInput, options: CallOptions) !create_license_asset_group.CreateLicenseAssetGroupOutput {
         return create_license_asset_group.execute(self, allocator, input, options);
     }
 
     /// Creates a license asset ruleset.
-    pub fn createLicenseAssetRuleset(self: *Self, allocator: std.mem.Allocator, input: create_license_asset_ruleset.CreateLicenseAssetRulesetInput, options: create_license_asset_ruleset.Options) !create_license_asset_ruleset.CreateLicenseAssetRulesetOutput {
+    pub fn createLicenseAssetRuleset(self: *Self, allocator: std.mem.Allocator, input: create_license_asset_ruleset.CreateLicenseAssetRulesetInput, options: CallOptions) !create_license_asset_ruleset.CreateLicenseAssetRulesetOutput {
         return create_license_asset_ruleset.execute(self, allocator, input, options);
     }
 
@@ -161,22 +162,22 @@ pub const Client = struct {
     /// host (how long a
     /// license must be associated with a host), and the number of licenses
     /// purchased and used.
-    pub fn createLicenseConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_license_configuration.CreateLicenseConfigurationInput, options: create_license_configuration.Options) !create_license_configuration.CreateLicenseConfigurationOutput {
+    pub fn createLicenseConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_license_configuration.CreateLicenseConfigurationInput, options: CallOptions) !create_license_configuration.CreateLicenseConfigurationOutput {
         return create_license_configuration.execute(self, allocator, input, options);
     }
 
     /// Creates a new license conversion task.
-    pub fn createLicenseConversionTaskForResource(self: *Self, allocator: std.mem.Allocator, input: create_license_conversion_task_for_resource.CreateLicenseConversionTaskForResourceInput, options: create_license_conversion_task_for_resource.Options) !create_license_conversion_task_for_resource.CreateLicenseConversionTaskForResourceOutput {
+    pub fn createLicenseConversionTaskForResource(self: *Self, allocator: std.mem.Allocator, input: create_license_conversion_task_for_resource.CreateLicenseConversionTaskForResourceInput, options: CallOptions) !create_license_conversion_task_for_resource.CreateLicenseConversionTaskForResourceOutput {
         return create_license_conversion_task_for_resource.execute(self, allocator, input, options);
     }
 
     /// Creates a report generator.
-    pub fn createLicenseManagerReportGenerator(self: *Self, allocator: std.mem.Allocator, input: create_license_manager_report_generator.CreateLicenseManagerReportGeneratorInput, options: create_license_manager_report_generator.Options) !create_license_manager_report_generator.CreateLicenseManagerReportGeneratorOutput {
+    pub fn createLicenseManagerReportGenerator(self: *Self, allocator: std.mem.Allocator, input: create_license_manager_report_generator.CreateLicenseManagerReportGeneratorInput, options: CallOptions) !create_license_manager_report_generator.CreateLicenseManagerReportGeneratorOutput {
         return create_license_manager_report_generator.execute(self, allocator, input, options);
     }
 
     /// Creates a new version of the specified license.
-    pub fn createLicenseVersion(self: *Self, allocator: std.mem.Allocator, input: create_license_version.CreateLicenseVersionInput, options: create_license_version.Options) !create_license_version.CreateLicenseVersionOutput {
+    pub fn createLicenseVersion(self: *Self, allocator: std.mem.Allocator, input: create_license_version.CreateLicenseVersionInput, options: CallOptions) !create_license_version.CreateLicenseVersionOutput {
         return create_license_version.execute(self, allocator, input, options);
     }
 
@@ -187,34 +188,34 @@ pub const Client = struct {
     /// you can call AssumeRoleWithWebIdentity to get role credentials that you can
     /// use to
     /// call License Manager to manage the specified license.
-    pub fn createToken(self: *Self, allocator: std.mem.Allocator, input: create_token.CreateTokenInput, options: create_token.Options) !create_token.CreateTokenOutput {
+    pub fn createToken(self: *Self, allocator: std.mem.Allocator, input: create_token.CreateTokenInput, options: CallOptions) !create_token.CreateTokenOutput {
         return create_token.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified grant.
-    pub fn deleteGrant(self: *Self, allocator: std.mem.Allocator, input: delete_grant.DeleteGrantInput, options: delete_grant.Options) !delete_grant.DeleteGrantOutput {
+    pub fn deleteGrant(self: *Self, allocator: std.mem.Allocator, input: delete_grant.DeleteGrantInput, options: CallOptions) !delete_grant.DeleteGrantOutput {
         return delete_grant.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified license.
-    pub fn deleteLicense(self: *Self, allocator: std.mem.Allocator, input: delete_license.DeleteLicenseInput, options: delete_license.Options) !delete_license.DeleteLicenseOutput {
+    pub fn deleteLicense(self: *Self, allocator: std.mem.Allocator, input: delete_license.DeleteLicenseInput, options: CallOptions) !delete_license.DeleteLicenseOutput {
         return delete_license.execute(self, allocator, input, options);
     }
 
     /// Deletes a license asset group.
-    pub fn deleteLicenseAssetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_license_asset_group.DeleteLicenseAssetGroupInput, options: delete_license_asset_group.Options) !delete_license_asset_group.DeleteLicenseAssetGroupOutput {
+    pub fn deleteLicenseAssetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_license_asset_group.DeleteLicenseAssetGroupInput, options: CallOptions) !delete_license_asset_group.DeleteLicenseAssetGroupOutput {
         return delete_license_asset_group.execute(self, allocator, input, options);
     }
 
     /// Deletes a license asset ruleset.
-    pub fn deleteLicenseAssetRuleset(self: *Self, allocator: std.mem.Allocator, input: delete_license_asset_ruleset.DeleteLicenseAssetRulesetInput, options: delete_license_asset_ruleset.Options) !delete_license_asset_ruleset.DeleteLicenseAssetRulesetOutput {
+    pub fn deleteLicenseAssetRuleset(self: *Self, allocator: std.mem.Allocator, input: delete_license_asset_ruleset.DeleteLicenseAssetRulesetInput, options: CallOptions) !delete_license_asset_ruleset.DeleteLicenseAssetRulesetOutput {
         return delete_license_asset_ruleset.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified license configuration.
     ///
     /// You cannot delete a license configuration that is in use.
-    pub fn deleteLicenseConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_license_configuration.DeleteLicenseConfigurationInput, options: delete_license_configuration.Options) !delete_license_configuration.DeleteLicenseConfigurationOutput {
+    pub fn deleteLicenseConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_license_configuration.DeleteLicenseConfigurationInput, options: CallOptions) !delete_license_configuration.DeleteLicenseConfigurationOutput {
         return delete_license_configuration.execute(self, allocator, input, options);
     }
 
@@ -224,74 +225,74 @@ pub const Client = struct {
     /// future reports.
     /// The action cannot be reversed. It has no effect on the previous reports from
     /// this generator.
-    pub fn deleteLicenseManagerReportGenerator(self: *Self, allocator: std.mem.Allocator, input: delete_license_manager_report_generator.DeleteLicenseManagerReportGeneratorInput, options: delete_license_manager_report_generator.Options) !delete_license_manager_report_generator.DeleteLicenseManagerReportGeneratorOutput {
+    pub fn deleteLicenseManagerReportGenerator(self: *Self, allocator: std.mem.Allocator, input: delete_license_manager_report_generator.DeleteLicenseManagerReportGeneratorInput, options: CallOptions) !delete_license_manager_report_generator.DeleteLicenseManagerReportGeneratorOutput {
         return delete_license_manager_report_generator.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified token. Must be called in the license home Region.
-    pub fn deleteToken(self: *Self, allocator: std.mem.Allocator, input: delete_token.DeleteTokenInput, options: delete_token.Options) !delete_token.DeleteTokenOutput {
+    pub fn deleteToken(self: *Self, allocator: std.mem.Allocator, input: delete_token.DeleteTokenInput, options: CallOptions) !delete_token.DeleteTokenOutput {
         return delete_token.execute(self, allocator, input, options);
     }
 
     /// Extends the expiration date for license consumption.
-    pub fn extendLicenseConsumption(self: *Self, allocator: std.mem.Allocator, input: extend_license_consumption.ExtendLicenseConsumptionInput, options: extend_license_consumption.Options) !extend_license_consumption.ExtendLicenseConsumptionOutput {
+    pub fn extendLicenseConsumption(self: *Self, allocator: std.mem.Allocator, input: extend_license_consumption.ExtendLicenseConsumptionInput, options: CallOptions) !extend_license_consumption.ExtendLicenseConsumptionOutput {
         return extend_license_consumption.execute(self, allocator, input, options);
     }
 
     /// Gets a temporary access token to use with AssumeRoleWithWebIdentity. Access
     /// tokens
     /// are valid for one hour.
-    pub fn getAccessToken(self: *Self, allocator: std.mem.Allocator, input: get_access_token.GetAccessTokenInput, options: get_access_token.Options) !get_access_token.GetAccessTokenOutput {
+    pub fn getAccessToken(self: *Self, allocator: std.mem.Allocator, input: get_access_token.GetAccessTokenInput, options: CallOptions) !get_access_token.GetAccessTokenOutput {
         return get_access_token.execute(self, allocator, input, options);
     }
 
     /// Gets detailed information about the specified grant.
-    pub fn getGrant(self: *Self, allocator: std.mem.Allocator, input: get_grant.GetGrantInput, options: get_grant.Options) !get_grant.GetGrantOutput {
+    pub fn getGrant(self: *Self, allocator: std.mem.Allocator, input: get_grant.GetGrantInput, options: CallOptions) !get_grant.GetGrantOutput {
         return get_grant.execute(self, allocator, input, options);
     }
 
     /// Gets detailed information about the specified license.
-    pub fn getLicense(self: *Self, allocator: std.mem.Allocator, input: get_license.GetLicenseInput, options: get_license.Options) !get_license.GetLicenseOutput {
+    pub fn getLicense(self: *Self, allocator: std.mem.Allocator, input: get_license.GetLicenseInput, options: CallOptions) !get_license.GetLicenseOutput {
         return get_license.execute(self, allocator, input, options);
     }
 
     /// Gets a license asset group.
-    pub fn getLicenseAssetGroup(self: *Self, allocator: std.mem.Allocator, input: get_license_asset_group.GetLicenseAssetGroupInput, options: get_license_asset_group.Options) !get_license_asset_group.GetLicenseAssetGroupOutput {
+    pub fn getLicenseAssetGroup(self: *Self, allocator: std.mem.Allocator, input: get_license_asset_group.GetLicenseAssetGroupInput, options: CallOptions) !get_license_asset_group.GetLicenseAssetGroupOutput {
         return get_license_asset_group.execute(self, allocator, input, options);
     }
 
     /// Gets a license asset ruleset.
-    pub fn getLicenseAssetRuleset(self: *Self, allocator: std.mem.Allocator, input: get_license_asset_ruleset.GetLicenseAssetRulesetInput, options: get_license_asset_ruleset.Options) !get_license_asset_ruleset.GetLicenseAssetRulesetOutput {
+    pub fn getLicenseAssetRuleset(self: *Self, allocator: std.mem.Allocator, input: get_license_asset_ruleset.GetLicenseAssetRulesetInput, options: CallOptions) !get_license_asset_ruleset.GetLicenseAssetRulesetOutput {
         return get_license_asset_ruleset.execute(self, allocator, input, options);
     }
 
     /// Gets detailed information about the specified license configuration.
-    pub fn getLicenseConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_license_configuration.GetLicenseConfigurationInput, options: get_license_configuration.Options) !get_license_configuration.GetLicenseConfigurationOutput {
+    pub fn getLicenseConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_license_configuration.GetLicenseConfigurationInput, options: CallOptions) !get_license_configuration.GetLicenseConfigurationOutput {
         return get_license_configuration.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified license type conversion task.
-    pub fn getLicenseConversionTask(self: *Self, allocator: std.mem.Allocator, input: get_license_conversion_task.GetLicenseConversionTaskInput, options: get_license_conversion_task.Options) !get_license_conversion_task.GetLicenseConversionTaskOutput {
+    pub fn getLicenseConversionTask(self: *Self, allocator: std.mem.Allocator, input: get_license_conversion_task.GetLicenseConversionTaskInput, options: CallOptions) !get_license_conversion_task.GetLicenseConversionTaskOutput {
         return get_license_conversion_task.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified report generator.
-    pub fn getLicenseManagerReportGenerator(self: *Self, allocator: std.mem.Allocator, input: get_license_manager_report_generator.GetLicenseManagerReportGeneratorInput, options: get_license_manager_report_generator.Options) !get_license_manager_report_generator.GetLicenseManagerReportGeneratorOutput {
+    pub fn getLicenseManagerReportGenerator(self: *Self, allocator: std.mem.Allocator, input: get_license_manager_report_generator.GetLicenseManagerReportGeneratorInput, options: CallOptions) !get_license_manager_report_generator.GetLicenseManagerReportGeneratorOutput {
         return get_license_manager_report_generator.execute(self, allocator, input, options);
     }
 
     /// Gets detailed information about the usage of the specified license.
-    pub fn getLicenseUsage(self: *Self, allocator: std.mem.Allocator, input: get_license_usage.GetLicenseUsageInput, options: get_license_usage.Options) !get_license_usage.GetLicenseUsageOutput {
+    pub fn getLicenseUsage(self: *Self, allocator: std.mem.Allocator, input: get_license_usage.GetLicenseUsageInput, options: CallOptions) !get_license_usage.GetLicenseUsageOutput {
         return get_license_usage.execute(self, allocator, input, options);
     }
 
     /// Gets the License Manager settings for the current Region.
-    pub fn getServiceSettings(self: *Self, allocator: std.mem.Allocator, input: get_service_settings.GetServiceSettingsInput, options: get_service_settings.Options) !get_service_settings.GetServiceSettingsOutput {
+    pub fn getServiceSettings(self: *Self, allocator: std.mem.Allocator, input: get_service_settings.GetServiceSettingsInput, options: CallOptions) !get_service_settings.GetServiceSettingsOutput {
         return get_service_settings.execute(self, allocator, input, options);
     }
 
     /// Lists assets for a license asset group.
-    pub fn listAssetsForLicenseAssetGroup(self: *Self, allocator: std.mem.Allocator, input: list_assets_for_license_asset_group.ListAssetsForLicenseAssetGroupInput, options: list_assets_for_license_asset_group.Options) !list_assets_for_license_asset_group.ListAssetsForLicenseAssetGroupOutput {
+    pub fn listAssetsForLicenseAssetGroup(self: *Self, allocator: std.mem.Allocator, input: list_assets_for_license_asset_group.ListAssetsForLicenseAssetGroupInput, options: CallOptions) !list_assets_for_license_asset_group.ListAssetsForLicenseAssetGroupOutput {
         return list_assets_for_license_asset_group.execute(self, allocator, input, options);
     }
 
@@ -302,62 +303,62 @@ pub const Client = struct {
     /// For example, an AMI or a stopped instance might not consume a license
     /// (depending on
     /// the license rules).
-    pub fn listAssociationsForLicenseConfiguration(self: *Self, allocator: std.mem.Allocator, input: list_associations_for_license_configuration.ListAssociationsForLicenseConfigurationInput, options: list_associations_for_license_configuration.Options) !list_associations_for_license_configuration.ListAssociationsForLicenseConfigurationOutput {
+    pub fn listAssociationsForLicenseConfiguration(self: *Self, allocator: std.mem.Allocator, input: list_associations_for_license_configuration.ListAssociationsForLicenseConfigurationInput, options: CallOptions) !list_associations_for_license_configuration.ListAssociationsForLicenseConfigurationOutput {
         return list_associations_for_license_configuration.execute(self, allocator, input, options);
     }
 
     /// Lists the grants distributed for the specified license.
-    pub fn listDistributedGrants(self: *Self, allocator: std.mem.Allocator, input: list_distributed_grants.ListDistributedGrantsInput, options: list_distributed_grants.Options) !list_distributed_grants.ListDistributedGrantsOutput {
+    pub fn listDistributedGrants(self: *Self, allocator: std.mem.Allocator, input: list_distributed_grants.ListDistributedGrantsInput, options: CallOptions) !list_distributed_grants.ListDistributedGrantsOutput {
         return list_distributed_grants.execute(self, allocator, input, options);
     }
 
     /// Lists the license configuration operations that failed.
-    pub fn listFailuresForLicenseConfigurationOperations(self: *Self, allocator: std.mem.Allocator, input: list_failures_for_license_configuration_operations.ListFailuresForLicenseConfigurationOperationsInput, options: list_failures_for_license_configuration_operations.Options) !list_failures_for_license_configuration_operations.ListFailuresForLicenseConfigurationOperationsOutput {
+    pub fn listFailuresForLicenseConfigurationOperations(self: *Self, allocator: std.mem.Allocator, input: list_failures_for_license_configuration_operations.ListFailuresForLicenseConfigurationOperationsInput, options: CallOptions) !list_failures_for_license_configuration_operations.ListFailuresForLicenseConfigurationOperationsOutput {
         return list_failures_for_license_configuration_operations.execute(self, allocator, input, options);
     }
 
     /// Lists license asset groups.
-    pub fn listLicenseAssetGroups(self: *Self, allocator: std.mem.Allocator, input: list_license_asset_groups.ListLicenseAssetGroupsInput, options: list_license_asset_groups.Options) !list_license_asset_groups.ListLicenseAssetGroupsOutput {
+    pub fn listLicenseAssetGroups(self: *Self, allocator: std.mem.Allocator, input: list_license_asset_groups.ListLicenseAssetGroupsInput, options: CallOptions) !list_license_asset_groups.ListLicenseAssetGroupsOutput {
         return list_license_asset_groups.execute(self, allocator, input, options);
     }
 
     /// Lists license asset rulesets.
-    pub fn listLicenseAssetRulesets(self: *Self, allocator: std.mem.Allocator, input: list_license_asset_rulesets.ListLicenseAssetRulesetsInput, options: list_license_asset_rulesets.Options) !list_license_asset_rulesets.ListLicenseAssetRulesetsOutput {
+    pub fn listLicenseAssetRulesets(self: *Self, allocator: std.mem.Allocator, input: list_license_asset_rulesets.ListLicenseAssetRulesetsInput, options: CallOptions) !list_license_asset_rulesets.ListLicenseAssetRulesetsOutput {
         return list_license_asset_rulesets.execute(self, allocator, input, options);
     }
 
     /// Lists the license configurations for your account.
-    pub fn listLicenseConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_license_configurations.ListLicenseConfigurationsInput, options: list_license_configurations.Options) !list_license_configurations.ListLicenseConfigurationsOutput {
+    pub fn listLicenseConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_license_configurations.ListLicenseConfigurationsInput, options: CallOptions) !list_license_configurations.ListLicenseConfigurationsOutput {
         return list_license_configurations.execute(self, allocator, input, options);
     }
 
     /// Lists license configurations for an organization.
-    pub fn listLicenseConfigurationsForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_license_configurations_for_organization.ListLicenseConfigurationsForOrganizationInput, options: list_license_configurations_for_organization.Options) !list_license_configurations_for_organization.ListLicenseConfigurationsForOrganizationOutput {
+    pub fn listLicenseConfigurationsForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_license_configurations_for_organization.ListLicenseConfigurationsForOrganizationInput, options: CallOptions) !list_license_configurations_for_organization.ListLicenseConfigurationsForOrganizationOutput {
         return list_license_configurations_for_organization.execute(self, allocator, input, options);
     }
 
     /// Lists the license type conversion tasks for your account.
-    pub fn listLicenseConversionTasks(self: *Self, allocator: std.mem.Allocator, input: list_license_conversion_tasks.ListLicenseConversionTasksInput, options: list_license_conversion_tasks.Options) !list_license_conversion_tasks.ListLicenseConversionTasksOutput {
+    pub fn listLicenseConversionTasks(self: *Self, allocator: std.mem.Allocator, input: list_license_conversion_tasks.ListLicenseConversionTasksInput, options: CallOptions) !list_license_conversion_tasks.ListLicenseConversionTasksOutput {
         return list_license_conversion_tasks.execute(self, allocator, input, options);
     }
 
     /// Lists the report generators for your account.
-    pub fn listLicenseManagerReportGenerators(self: *Self, allocator: std.mem.Allocator, input: list_license_manager_report_generators.ListLicenseManagerReportGeneratorsInput, options: list_license_manager_report_generators.Options) !list_license_manager_report_generators.ListLicenseManagerReportGeneratorsOutput {
+    pub fn listLicenseManagerReportGenerators(self: *Self, allocator: std.mem.Allocator, input: list_license_manager_report_generators.ListLicenseManagerReportGeneratorsInput, options: CallOptions) !list_license_manager_report_generators.ListLicenseManagerReportGeneratorsOutput {
         return list_license_manager_report_generators.execute(self, allocator, input, options);
     }
 
     /// Describes the license configurations for the specified resource.
-    pub fn listLicenseSpecificationsForResource(self: *Self, allocator: std.mem.Allocator, input: list_license_specifications_for_resource.ListLicenseSpecificationsForResourceInput, options: list_license_specifications_for_resource.Options) !list_license_specifications_for_resource.ListLicenseSpecificationsForResourceOutput {
+    pub fn listLicenseSpecificationsForResource(self: *Self, allocator: std.mem.Allocator, input: list_license_specifications_for_resource.ListLicenseSpecificationsForResourceInput, options: CallOptions) !list_license_specifications_for_resource.ListLicenseSpecificationsForResourceOutput {
         return list_license_specifications_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists all versions of the specified license.
-    pub fn listLicenseVersions(self: *Self, allocator: std.mem.Allocator, input: list_license_versions.ListLicenseVersionsInput, options: list_license_versions.Options) !list_license_versions.ListLicenseVersionsOutput {
+    pub fn listLicenseVersions(self: *Self, allocator: std.mem.Allocator, input: list_license_versions.ListLicenseVersionsInput, options: CallOptions) !list_license_versions.ListLicenseVersionsOutput {
         return list_license_versions.execute(self, allocator, input, options);
     }
 
     /// Lists the licenses for your account.
-    pub fn listLicenses(self: *Self, allocator: std.mem.Allocator, input: list_licenses.ListLicensesInput, options: list_licenses.Options) !list_licenses.ListLicensesOutput {
+    pub fn listLicenses(self: *Self, allocator: std.mem.Allocator, input: list_licenses.ListLicensesInput, options: CallOptions) !list_licenses.ListLicensesOutput {
         return list_licenses.execute(self, allocator, input, options);
     }
 
@@ -366,27 +367,27 @@ pub const Client = struct {
     /// recipient as this Amazon Web Services account, your organization, or an
     /// organizational unit
     /// (OU) to which this member account belongs.
-    pub fn listReceivedGrants(self: *Self, allocator: std.mem.Allocator, input: list_received_grants.ListReceivedGrantsInput, options: list_received_grants.Options) !list_received_grants.ListReceivedGrantsOutput {
+    pub fn listReceivedGrants(self: *Self, allocator: std.mem.Allocator, input: list_received_grants.ListReceivedGrantsInput, options: CallOptions) !list_received_grants.ListReceivedGrantsOutput {
         return list_received_grants.execute(self, allocator, input, options);
     }
 
     /// Lists the grants received for all accounts in the organization.
-    pub fn listReceivedGrantsForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_received_grants_for_organization.ListReceivedGrantsForOrganizationInput, options: list_received_grants_for_organization.Options) !list_received_grants_for_organization.ListReceivedGrantsForOrganizationOutput {
+    pub fn listReceivedGrantsForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_received_grants_for_organization.ListReceivedGrantsForOrganizationInput, options: CallOptions) !list_received_grants_for_organization.ListReceivedGrantsForOrganizationOutput {
         return list_received_grants_for_organization.execute(self, allocator, input, options);
     }
 
     /// Lists received licenses.
-    pub fn listReceivedLicenses(self: *Self, allocator: std.mem.Allocator, input: list_received_licenses.ListReceivedLicensesInput, options: list_received_licenses.Options) !list_received_licenses.ListReceivedLicensesOutput {
+    pub fn listReceivedLicenses(self: *Self, allocator: std.mem.Allocator, input: list_received_licenses.ListReceivedLicensesInput, options: CallOptions) !list_received_licenses.ListReceivedLicensesOutput {
         return list_received_licenses.execute(self, allocator, input, options);
     }
 
     /// Lists the licenses received for all accounts in the organization.
-    pub fn listReceivedLicensesForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_received_licenses_for_organization.ListReceivedLicensesForOrganizationInput, options: list_received_licenses_for_organization.Options) !list_received_licenses_for_organization.ListReceivedLicensesForOrganizationOutput {
+    pub fn listReceivedLicensesForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_received_licenses_for_organization.ListReceivedLicensesForOrganizationInput, options: CallOptions) !list_received_licenses_for_organization.ListReceivedLicensesForOrganizationOutput {
         return list_received_licenses_for_organization.execute(self, allocator, input, options);
     }
 
     /// Lists resources managed using Systems Manager inventory.
-    pub fn listResourceInventory(self: *Self, allocator: std.mem.Allocator, input: list_resource_inventory.ListResourceInventoryInput, options: list_resource_inventory.Options) !list_resource_inventory.ListResourceInventoryOutput {
+    pub fn listResourceInventory(self: *Self, allocator: std.mem.Allocator, input: list_resource_inventory.ListResourceInventoryInput, options: CallOptions) !list_resource_inventory.ListResourceInventoryOutput {
         return list_resource_inventory.execute(self, allocator, input, options);
     }
 
@@ -394,12 +395,12 @@ pub const Client = struct {
     /// tagging support in
     /// License Manager, see the
     /// [TagResource](https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html) operation.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists your tokens.
-    pub fn listTokens(self: *Self, allocator: std.mem.Allocator, input: list_tokens.ListTokensInput, options: list_tokens.Options) !list_tokens.ListTokensOutput {
+    pub fn listTokens(self: *Self, allocator: std.mem.Allocator, input: list_tokens.ListTokensInput, options: CallOptions) !list_tokens.ListTokensOutput {
         return list_tokens.execute(self, allocator, input, options);
     }
 
@@ -408,12 +409,12 @@ pub const Client = struct {
     /// consumption details by resource at a selected point in time. Use this action
     /// to audit the
     /// current license consumption for any license inventory and configuration.
-    pub fn listUsageForLicenseConfiguration(self: *Self, allocator: std.mem.Allocator, input: list_usage_for_license_configuration.ListUsageForLicenseConfigurationInput, options: list_usage_for_license_configuration.Options) !list_usage_for_license_configuration.ListUsageForLicenseConfigurationOutput {
+    pub fn listUsageForLicenseConfiguration(self: *Self, allocator: std.mem.Allocator, input: list_usage_for_license_configuration.ListUsageForLicenseConfigurationInput, options: CallOptions) !list_usage_for_license_configuration.ListUsageForLicenseConfigurationOutput {
         return list_usage_for_license_configuration.execute(self, allocator, input, options);
     }
 
     /// Rejects the specified grant.
-    pub fn rejectGrant(self: *Self, allocator: std.mem.Allocator, input: reject_grant.RejectGrantInput, options: reject_grant.Options) !reject_grant.RejectGrantOutput {
+    pub fn rejectGrant(self: *Self, allocator: std.mem.Allocator, input: reject_grant.RejectGrantInput, options: CallOptions) !reject_grant.RejectGrantOutput {
         return reject_grant.execute(self, allocator, input, options);
     }
 
@@ -428,27 +429,27 @@ pub const Client = struct {
     /// * License configurations
     ///
     /// * Report generators
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates a license asset group.
-    pub fn updateLicenseAssetGroup(self: *Self, allocator: std.mem.Allocator, input: update_license_asset_group.UpdateLicenseAssetGroupInput, options: update_license_asset_group.Options) !update_license_asset_group.UpdateLicenseAssetGroupOutput {
+    pub fn updateLicenseAssetGroup(self: *Self, allocator: std.mem.Allocator, input: update_license_asset_group.UpdateLicenseAssetGroupInput, options: CallOptions) !update_license_asset_group.UpdateLicenseAssetGroupOutput {
         return update_license_asset_group.execute(self, allocator, input, options);
     }
 
     /// Updates a license asset ruleset.
-    pub fn updateLicenseAssetRuleset(self: *Self, allocator: std.mem.Allocator, input: update_license_asset_ruleset.UpdateLicenseAssetRulesetInput, options: update_license_asset_ruleset.Options) !update_license_asset_ruleset.UpdateLicenseAssetRulesetOutput {
+    pub fn updateLicenseAssetRuleset(self: *Self, allocator: std.mem.Allocator, input: update_license_asset_ruleset.UpdateLicenseAssetRulesetInput, options: CallOptions) !update_license_asset_ruleset.UpdateLicenseAssetRulesetOutput {
         return update_license_asset_ruleset.execute(self, allocator, input, options);
     }
 
     /// Modifies the attributes of an existing license configuration.
-    pub fn updateLicenseConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_license_configuration.UpdateLicenseConfigurationInput, options: update_license_configuration.Options) !update_license_configuration.UpdateLicenseConfigurationOutput {
+    pub fn updateLicenseConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_license_configuration.UpdateLicenseConfigurationInput, options: CallOptions) !update_license_configuration.UpdateLicenseConfigurationOutput {
         return update_license_configuration.execute(self, allocator, input, options);
     }
 
@@ -456,7 +457,7 @@ pub const Client = struct {
     ///
     /// After you make changes to a report generator, it starts generating new
     /// reports within 60 minutes of being updated.
-    pub fn updateLicenseManagerReportGenerator(self: *Self, allocator: std.mem.Allocator, input: update_license_manager_report_generator.UpdateLicenseManagerReportGeneratorInput, options: update_license_manager_report_generator.Options) !update_license_manager_report_generator.UpdateLicenseManagerReportGeneratorOutput {
+    pub fn updateLicenseManagerReportGenerator(self: *Self, allocator: std.mem.Allocator, input: update_license_manager_report_generator.UpdateLicenseManagerReportGeneratorInput, options: CallOptions) !update_license_manager_report_generator.UpdateLicenseManagerReportGeneratorOutput {
         return update_license_manager_report_generator.execute(self, allocator, input, options);
     }
 
@@ -468,12 +469,12 @@ pub const Client = struct {
     /// CloudFormation templates,
     /// as they send license configurations to the operation that creates the
     /// resource.
-    pub fn updateLicenseSpecificationsForResource(self: *Self, allocator: std.mem.Allocator, input: update_license_specifications_for_resource.UpdateLicenseSpecificationsForResourceInput, options: update_license_specifications_for_resource.Options) !update_license_specifications_for_resource.UpdateLicenseSpecificationsForResourceOutput {
+    pub fn updateLicenseSpecificationsForResource(self: *Self, allocator: std.mem.Allocator, input: update_license_specifications_for_resource.UpdateLicenseSpecificationsForResourceInput, options: CallOptions) !update_license_specifications_for_resource.UpdateLicenseSpecificationsForResourceOutput {
         return update_license_specifications_for_resource.execute(self, allocator, input, options);
     }
 
     /// Updates License Manager settings for the current Region.
-    pub fn updateServiceSettings(self: *Self, allocator: std.mem.Allocator, input: update_service_settings.UpdateServiceSettingsInput, options: update_service_settings.Options) !update_service_settings.UpdateServiceSettingsOutput {
+    pub fn updateServiceSettings(self: *Self, allocator: std.mem.Allocator, input: update_service_settings.UpdateServiceSettingsInput, options: CallOptions) !update_service_settings.UpdateServiceSettingsOutput {
         return update_service_settings.execute(self, allocator, input, options);
     }
 };

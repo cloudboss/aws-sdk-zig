@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ExportableAutoScalingGroupField = @import("exportable_auto_scaling_group_field.zig").ExportableAutoScalingGroupField;
 const FileFormat = @import("file_format.zig").FileFormat;
@@ -124,11 +125,7 @@ pub const ExportAutoScalingGroupRecommendationsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExportAutoScalingGroupRecommendationsInput, options: Options) !ExportAutoScalingGroupRecommendationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExportAutoScalingGroupRecommendationsInput, options: CallOptions) !ExportAutoScalingGroupRecommendationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

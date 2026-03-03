@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FederationStatus = @import("federation_status.zig").FederationStatus;
 
@@ -29,11 +30,7 @@ pub const DisableFederationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableFederationInput, options: Options) !DisableFederationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableFederationInput, options: CallOptions) !DisableFederationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

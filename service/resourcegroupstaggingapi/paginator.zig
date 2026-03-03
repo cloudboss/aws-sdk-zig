@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_compliance_summary = @import("get_compliance_summary.zig");
@@ -18,7 +19,7 @@ pub const GetComplianceSummaryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_compliance_summary.Options) !get_compliance_summary.GetComplianceSummaryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_compliance_summary.GetComplianceSummaryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -59,7 +60,7 @@ pub const GetResourcesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_resources.Options) !get_resources.GetResourcesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_resources.GetResourcesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -100,7 +101,7 @@ pub const GetTagKeysPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_tag_keys.Options) !get_tag_keys.GetTagKeysOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_tag_keys.GetTagKeysOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -141,7 +142,7 @@ pub const GetTagValuesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_tag_values.Options) !get_tag_values.GetTagValuesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_tag_values.GetTagValuesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -182,7 +183,7 @@ pub const ListRequiredTagsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_required_tags.Options) !list_required_tags.ListRequiredTagsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_required_tags.ListRequiredTagsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

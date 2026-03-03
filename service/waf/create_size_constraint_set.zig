@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SizeConstraintSet = @import("size_constraint_set.zig").SizeConstraintSet;
 
@@ -36,11 +37,7 @@ pub const CreateSizeConstraintSetOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSizeConstraintSetInput, options: Options) !CreateSizeConstraintSetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSizeConstraintSetInput, options: CallOptions) !CreateSizeConstraintSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

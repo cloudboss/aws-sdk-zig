@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_access_sources = @import("list_access_sources.zig");
@@ -22,7 +23,7 @@ pub const ListAccessSourcesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_access_sources.Options) !list_access_sources.ListAccessSourcesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_access_sources.ListAccessSourcesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -63,7 +64,7 @@ pub const ListAccessTokensPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_access_tokens.Options) !list_access_tokens.ListAccessTokensOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_access_tokens.ListAccessTokensOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -104,7 +105,7 @@ pub const ListDNSViewsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_dns_views.Options) !list_dns_views.ListDNSViewsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_dns_views.ListDNSViewsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -145,7 +146,7 @@ pub const ListFirewallDomainListsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_firewall_domain_lists.Options) !list_firewall_domain_lists.ListFirewallDomainListsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_firewall_domain_lists.ListFirewallDomainListsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -186,7 +187,7 @@ pub const ListFirewallDomainsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_firewall_domains.Options) !list_firewall_domains.ListFirewallDomainsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_firewall_domains.ListFirewallDomainsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -227,7 +228,7 @@ pub const ListFirewallRulesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_firewall_rules.Options) !list_firewall_rules.ListFirewallRulesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_firewall_rules.ListFirewallRulesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -268,7 +269,7 @@ pub const ListGlobalResolversPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_global_resolvers.Options) !list_global_resolvers.ListGlobalResolversOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_global_resolvers.ListGlobalResolversOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -309,7 +310,7 @@ pub const ListHostedZoneAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_hosted_zone_associations.Options) !list_hosted_zone_associations.ListHostedZoneAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_hosted_zone_associations.ListHostedZoneAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -350,7 +351,7 @@ pub const ListManagedFirewallDomainListsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_managed_firewall_domain_lists.Options) !list_managed_firewall_domain_lists.ListManagedFirewallDomainListsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_managed_firewall_domain_lists.ListManagedFirewallDomainListsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

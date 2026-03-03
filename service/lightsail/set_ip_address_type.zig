@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpAddressType = @import("ip_address_type.zig").IpAddressType;
 const ResourceType = @import("resource_type.zig").ResourceType;
@@ -63,11 +64,7 @@ pub const SetIpAddressTypeOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetIpAddressTypeInput, options: Options) !SetIpAddressTypeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetIpAddressTypeInput, options: CallOptions) !SetIpAddressTypeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

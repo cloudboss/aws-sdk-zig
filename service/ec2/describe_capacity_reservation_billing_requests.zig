@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const CallerRole = @import("caller_role.zig").CallerRole;
@@ -64,11 +65,7 @@ pub const DescribeCapacityReservationBillingRequestsOutput = struct {
     next_token: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeCapacityReservationBillingRequestsInput, options: Options) !DescribeCapacityReservationBillingRequestsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeCapacityReservationBillingRequestsInput, options: CallOptions) !DescribeCapacityReservationBillingRequestsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccountSource = @import("account_source.zig").AccountSource;
 const ResolutionStrategy = @import("resolution_strategy.zig").ResolutionStrategy;
@@ -84,11 +85,7 @@ pub const CreateAccountPoolOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAccountPoolInput, options: Options) !CreateAccountPoolOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAccountPoolInput, options: CallOptions) !CreateAccountPoolOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

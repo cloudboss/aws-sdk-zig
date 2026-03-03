@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResponseHeadersPolicyType = @import("response_headers_policy_type.zig").ResponseHeadersPolicyType;
 const ResponseHeadersPolicyList = @import("response_headers_policy_list.zig").ResponseHeadersPolicyList;
@@ -33,11 +34,7 @@ pub const ListResponseHeadersPoliciesOutput = struct {
     response_headers_policy_list: ?ResponseHeadersPolicyList = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListResponseHeadersPoliciesInput, options: Options) !ListResponseHeadersPoliciesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListResponseHeadersPoliciesInput, options: CallOptions) !ListResponseHeadersPoliciesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

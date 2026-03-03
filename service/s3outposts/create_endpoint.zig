@@ -2,18 +2,15 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EndpointAccessType = @import("endpoint_access_type.zig").EndpointAccessType;
 
-const CreateEndpointInput = @import("create_endpoint_request.zig").CreateEndpointRequest;
+pub const CreateEndpointInput = @import("create_endpoint_request.zig").CreateEndpointRequest;
 
-const CreateEndpointOutput = @import("create_endpoint_result.zig").CreateEndpointResult;
+pub const CreateEndpointOutput = @import("create_endpoint_result.zig").CreateEndpointResult;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateEndpointInput, options: Options) !CreateEndpointOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateEndpointInput, options: CallOptions) !CreateEndpointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

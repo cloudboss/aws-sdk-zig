@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RestoreTestingSelectionForCreate = @import("restore_testing_selection_for_create.zig").RestoreTestingSelectionForCreate;
 
@@ -67,11 +68,7 @@ pub const CreateRestoreTestingSelectionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateRestoreTestingSelectionInput, options: Options) !CreateRestoreTestingSelectionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateRestoreTestingSelectionInput, options: CallOptions) !CreateRestoreTestingSelectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

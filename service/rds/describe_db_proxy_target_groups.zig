@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const DBProxyTargetGroup = @import("db_proxy_target_group.zig").DBProxyTargetGroup;
@@ -44,11 +45,7 @@ pub const DescribeDBProxyTargetGroupsOutput = struct {
     target_groups: ?[]const DBProxyTargetGroup = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeDBProxyTargetGroupsInput, options: Options) !DescribeDBProxyTargetGroupsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeDBProxyTargetGroupsInput, options: CallOptions) !DescribeDBProxyTargetGroupsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

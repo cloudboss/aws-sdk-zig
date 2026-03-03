@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResourceType = @import("resource_type.zig").ResourceType;
 const TelemetryState = @import("telemetry_state.zig").TelemetryState;
@@ -65,11 +66,7 @@ pub const ListResourceTelemetryForOrganizationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListResourceTelemetryForOrganizationInput, options: Options) !ListResourceTelemetryForOrganizationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListResourceTelemetryForOrganizationInput, options: CallOptions) !ListResourceTelemetryForOrganizationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

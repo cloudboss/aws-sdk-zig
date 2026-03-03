@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const list_realtime_contact_analysis_segments = @import("list_realtime_contact_analysis_segments.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -33,7 +34,7 @@ pub const Client = struct {
     }
 
     /// Provides a list of analysis segments for a real-time analysis session.
-    pub fn listRealtimeContactAnalysisSegments(self: *Self, allocator: std.mem.Allocator, input: list_realtime_contact_analysis_segments.ListRealtimeContactAnalysisSegmentsInput, options: list_realtime_contact_analysis_segments.Options) !list_realtime_contact_analysis_segments.ListRealtimeContactAnalysisSegmentsOutput {
+    pub fn listRealtimeContactAnalysisSegments(self: *Self, allocator: std.mem.Allocator, input: list_realtime_contact_analysis_segments.ListRealtimeContactAnalysisSegmentsInput, options: CallOptions) !list_realtime_contact_analysis_segments.ListRealtimeContactAnalysisSegmentsOutput {
         return list_realtime_contact_analysis_segments.execute(self, allocator, input, options);
     }
 

@@ -9,6 +9,7 @@ const open_tunnel = @import("open_tunnel.zig");
 const rotate_tunnel_access_token = @import("rotate_tunnel_access_token.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -46,7 +47,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [CloseTunnel](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn closeTunnel(self: *Self, allocator: std.mem.Allocator, input: close_tunnel.CloseTunnelInput, options: close_tunnel.Options) !close_tunnel.CloseTunnelOutput {
+    pub fn closeTunnel(self: *Self, allocator: std.mem.Allocator, input: close_tunnel.CloseTunnelInput, options: CallOptions) !close_tunnel.CloseTunnelOutput {
         return close_tunnel.execute(self, allocator, input, options);
     }
 
@@ -54,12 +55,12 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [DescribeTunnel](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn describeTunnel(self: *Self, allocator: std.mem.Allocator, input: describe_tunnel.DescribeTunnelInput, options: describe_tunnel.Options) !describe_tunnel.DescribeTunnelOutput {
+    pub fn describeTunnel(self: *Self, allocator: std.mem.Allocator, input: describe_tunnel.DescribeTunnelInput, options: CallOptions) !describe_tunnel.DescribeTunnelOutput {
         return describe_tunnel.execute(self, allocator, input, options);
     }
 
     /// Lists the tags for the specified resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -69,7 +70,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [ListTunnels](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn listTunnels(self: *Self, allocator: std.mem.Allocator, input: list_tunnels.ListTunnelsInput, options: list_tunnels.Options) !list_tunnels.ListTunnelsOutput {
+    pub fn listTunnels(self: *Self, allocator: std.mem.Allocator, input: list_tunnels.ListTunnelsInput, options: CallOptions) !list_tunnels.ListTunnelsOutput {
         return list_tunnels.execute(self, allocator, input, options);
     }
 
@@ -79,7 +80,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [OpenTunnel](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn openTunnel(self: *Self, allocator: std.mem.Allocator, input: open_tunnel.OpenTunnelInput, options: open_tunnel.Options) !open_tunnel.OpenTunnelOutput {
+    pub fn openTunnel(self: *Self, allocator: std.mem.Allocator, input: open_tunnel.OpenTunnelInput, options: CallOptions) !open_tunnel.OpenTunnelOutput {
         return open_tunnel.execute(self, allocator, input, options);
     }
 
@@ -97,17 +98,17 @@ pub const Client = struct {
     /// rotate the access tokens, the new tokens that are generated can only be used
     /// for the
     /// remaining 8 hours.
-    pub fn rotateTunnelAccessToken(self: *Self, allocator: std.mem.Allocator, input: rotate_tunnel_access_token.RotateTunnelAccessTokenInput, options: rotate_tunnel_access_token.Options) !rotate_tunnel_access_token.RotateTunnelAccessTokenOutput {
+    pub fn rotateTunnelAccessToken(self: *Self, allocator: std.mem.Allocator, input: rotate_tunnel_access_token.RotateTunnelAccessTokenInput, options: CallOptions) !rotate_tunnel_access_token.RotateTunnelAccessTokenOutput {
         return rotate_tunnel_access_token.execute(self, allocator, input, options);
     }
 
     /// A resource tag.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

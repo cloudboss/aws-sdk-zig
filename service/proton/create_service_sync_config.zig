@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RepositoryProvider = @import("repository_provider.zig").RepositoryProvider;
 const ServiceSyncConfig = @import("service_sync_config.zig").ServiceSyncConfig;
@@ -40,11 +41,7 @@ pub const CreateServiceSyncConfigOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateServiceSyncConfigInput, options: Options) !CreateServiceSyncConfigOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateServiceSyncConfigInput, options: CallOptions) !CreateServiceSyncConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

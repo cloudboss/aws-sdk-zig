@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const SendDiagnosticInterruptInput = struct {
@@ -16,13 +17,9 @@ pub const SendDiagnosticInterruptInput = struct {
     instance_id: []const u8,
 };
 
-const SendDiagnosticInterruptOutput = struct {};
+pub const SendDiagnosticInterruptOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendDiagnosticInterruptInput, options: Options) !SendDiagnosticInterruptOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendDiagnosticInterruptInput, options: CallOptions) !SendDiagnosticInterruptOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

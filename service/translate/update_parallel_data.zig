@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ParallelDataConfig = @import("parallel_data_config.zig").ParallelDataConfig;
 const ParallelDataStatus = @import("parallel_data_status.zig").ParallelDataStatus;
@@ -55,11 +56,7 @@ pub const UpdateParallelDataOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateParallelDataInput, options: Options) !UpdateParallelDataOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateParallelDataInput, options: CallOptions) !UpdateParallelDataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

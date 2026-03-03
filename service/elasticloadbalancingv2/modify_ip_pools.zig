@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpamPools = @import("ipam_pools.zig").IpamPools;
 const RemoveIpamPoolEnum = @import("remove_ipam_pool_enum.zig").RemoveIpamPoolEnum;
@@ -23,11 +24,7 @@ pub const ModifyIpPoolsOutput = struct {
     ipam_pools: ?IpamPools = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyIpPoolsInput, options: Options) !ModifyIpPoolsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyIpPoolsInput, options: CallOptions) !ModifyIpPoolsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

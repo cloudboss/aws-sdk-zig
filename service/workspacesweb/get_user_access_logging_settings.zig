@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const UserAccessLoggingSettings = @import("user_access_logging_settings.zig").UserAccessLoggingSettings;
 
@@ -23,11 +24,7 @@ pub const GetUserAccessLoggingSettingsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetUserAccessLoggingSettingsInput, options: Options) !GetUserAccessLoggingSettingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetUserAccessLoggingSettingsInput, options: CallOptions) !GetUserAccessLoggingSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

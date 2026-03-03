@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_application_associations = @import("describe_application_associations.zig");
@@ -19,7 +20,7 @@ pub const DescribeApplicationAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_application_associations.Options) !describe_application_associations.DescribeApplicationAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_application_associations.DescribeApplicationAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -60,7 +61,7 @@ pub const DescribeApplicationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_applications.Options) !describe_applications.DescribeApplicationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_applications.DescribeApplicationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -101,7 +102,7 @@ pub const DescribeWorkspaceBundlesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_workspace_bundles.Options) !describe_workspace_bundles.DescribeWorkspaceBundlesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_workspace_bundles.DescribeWorkspaceBundlesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -142,7 +143,7 @@ pub const DescribeWorkspaceDirectoriesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_workspace_directories.Options) !describe_workspace_directories.DescribeWorkspaceDirectoriesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_workspace_directories.DescribeWorkspaceDirectoriesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -183,7 +184,7 @@ pub const DescribeWorkspacesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_workspaces.Options) !describe_workspaces.DescribeWorkspacesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_workspaces.DescribeWorkspacesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -224,7 +225,7 @@ pub const ListAccountLinksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_account_links.Options) !list_account_links.ListAccountLinksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_account_links.ListAccountLinksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

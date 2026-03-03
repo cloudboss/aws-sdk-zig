@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const KxDataviewListEntry = @import("kx_dataview_list_entry.zig").KxDataviewListEntry;
 
@@ -40,11 +41,7 @@ pub const ListKxDataviewsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListKxDataviewsInput, options: Options) !ListKxDataviewsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListKxDataviewsInput, options: CallOptions) !ListKxDataviewsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

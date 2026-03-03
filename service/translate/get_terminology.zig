@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TerminologyDataFormat = @import("terminology_data_format.zig").TerminologyDataFormat;
 const TerminologyDataLocation = @import("terminology_data_location.zig").TerminologyDataLocation;
@@ -71,11 +72,7 @@ pub const GetTerminologyOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTerminologyInput, options: Options) !GetTerminologyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTerminologyInput, options: CallOptions) !GetTerminologyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

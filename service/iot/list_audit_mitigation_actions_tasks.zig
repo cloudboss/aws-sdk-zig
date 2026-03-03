@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AuditMitigationActionsTaskStatus = @import("audit_mitigation_actions_task_status.zig").AuditMitigationActionsTaskStatus;
 const AuditMitigationActionsTaskMetadata = @import("audit_mitigation_actions_task_metadata.zig").AuditMitigationActionsTaskMetadata;
@@ -56,11 +57,7 @@ pub const ListAuditMitigationActionsTasksOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAuditMitigationActionsTasksInput, options: Options) !ListAuditMitigationActionsTasksOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAuditMitigationActionsTasksInput, options: CallOptions) !ListAuditMitigationActionsTasksOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

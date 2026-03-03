@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SearchForPositionResult = @import("search_for_position_result.zig").SearchForPositionResult;
 const SearchPlaceIndexForPositionSummary = @import("search_place_index_for_position_summary.zig").SearchPlaceIndexForPositionSummary;
@@ -72,11 +73,7 @@ pub const SearchPlaceIndexForPositionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchPlaceIndexForPositionInput, options: Options) !SearchPlaceIndexForPositionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchPlaceIndexForPositionInput, options: CallOptions) !SearchPlaceIndexForPositionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

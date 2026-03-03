@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_signing_jobs = @import("list_signing_jobs.zig");
@@ -16,7 +17,7 @@ pub const ListSigningJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_signing_jobs.Options) !list_signing_jobs.ListSigningJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_signing_jobs.ListSigningJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -57,7 +58,7 @@ pub const ListSigningPlatformsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_signing_platforms.Options) !list_signing_platforms.ListSigningPlatformsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_signing_platforms.ListSigningPlatformsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -98,7 +99,7 @@ pub const ListSigningProfilesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_signing_profiles.Options) !list_signing_profiles.ListSigningProfilesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_signing_profiles.ListSigningProfilesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

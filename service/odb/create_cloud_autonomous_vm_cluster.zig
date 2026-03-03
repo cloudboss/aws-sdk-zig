@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LicenseModel = @import("license_model.zig").LicenseModel;
 const MaintenanceWindow = @import("maintenance_window.zig").MaintenanceWindow;
@@ -109,11 +110,7 @@ pub const CreateCloudAutonomousVmClusterOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCloudAutonomousVmClusterInput, options: Options) !CreateCloudAutonomousVmClusterOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCloudAutonomousVmClusterInput, options: CallOptions) !CreateCloudAutonomousVmClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

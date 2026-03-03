@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LandingZoneSummary = @import("landing_zone_summary.zig").LandingZoneSummary;
 
@@ -33,11 +34,7 @@ pub const ListLandingZonesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListLandingZonesInput, options: Options) !ListLandingZonesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListLandingZonesInput, options: CallOptions) !ListLandingZonesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_tape_archives = @import("describe_tape_archives.zig");
@@ -25,7 +26,7 @@ pub const DescribeTapeArchivesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_tape_archives.Options) !describe_tape_archives.DescribeTapeArchivesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_tape_archives.DescribeTapeArchivesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -66,7 +67,7 @@ pub const DescribeTapeRecoveryPointsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_tape_recovery_points.Options) !describe_tape_recovery_points.DescribeTapeRecoveryPointsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_tape_recovery_points.DescribeTapeRecoveryPointsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -107,7 +108,7 @@ pub const DescribeTapesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_tapes.Options) !describe_tapes.DescribeTapesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_tapes.DescribeTapesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -148,7 +149,7 @@ pub const DescribeVTLDevicesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_vtl_devices.Options) !describe_vtl_devices.DescribeVTLDevicesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_vtl_devices.DescribeVTLDevicesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -189,7 +190,7 @@ pub const ListCacheReportsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_cache_reports.Options) !list_cache_reports.ListCacheReportsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_cache_reports.ListCacheReportsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -230,7 +231,7 @@ pub const ListFileSharesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_file_shares.Options) !list_file_shares.ListFileSharesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_file_shares.ListFileSharesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -271,7 +272,7 @@ pub const ListFileSystemAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_file_system_associations.Options) !list_file_system_associations.ListFileSystemAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_file_system_associations.ListFileSystemAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -312,7 +313,7 @@ pub const ListGatewaysPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_gateways.Options) !list_gateways.ListGatewaysOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_gateways.ListGatewaysOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -353,7 +354,7 @@ pub const ListTagsForResourcePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -394,7 +395,7 @@ pub const ListTapePoolsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_tape_pools.Options) !list_tape_pools.ListTapePoolsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_tape_pools.ListTapePoolsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -435,7 +436,7 @@ pub const ListTapesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_tapes.Options) !list_tapes.ListTapesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_tapes.ListTapesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -476,7 +477,7 @@ pub const ListVolumesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_volumes.Options) !list_volumes.ListVolumesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_volumes.ListVolumesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

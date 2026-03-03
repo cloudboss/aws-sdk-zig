@@ -2,11 +2,12 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SolutionStackDescription = @import("solution_stack_description.zig").SolutionStackDescription;
 const serde = @import("serde.zig");
 
-const ListAvailableSolutionStacksInput = struct {};
+pub const ListAvailableSolutionStacksInput = struct {};
 
 pub const ListAvailableSolutionStacksOutput = struct {
     /// A list of available solution stacks and their SolutionStackDescription.
@@ -16,11 +17,7 @@ pub const ListAvailableSolutionStacksOutput = struct {
     solution_stacks: ?[]const []const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAvailableSolutionStacksInput, options: Options) !ListAvailableSolutionStacksOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAvailableSolutionStacksInput, options: CallOptions) !ListAvailableSolutionStacksOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

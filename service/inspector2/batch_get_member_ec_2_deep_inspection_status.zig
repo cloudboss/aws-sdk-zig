@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MemberAccountEc2DeepInspectionStatusState = @import("member_account_ec_2_deep_inspection_status_state.zig").MemberAccountEc2DeepInspectionStatusState;
 const FailedMemberAccountEc2DeepInspectionStatusState = @import("failed_member_account_ec_2_deep_inspection_status_state.zig").FailedMemberAccountEc2DeepInspectionStatusState;
@@ -34,11 +35,7 @@ pub const BatchGetMemberEc2DeepInspectionStatusOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetMemberEc2DeepInspectionStatusInput, options: Options) !BatchGetMemberEc2DeepInspectionStatusOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetMemberEc2DeepInspectionStatusInput, options: CallOptions) !BatchGetMemberEc2DeepInspectionStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

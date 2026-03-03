@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FlowFilter = @import("flow_filter.zig").FlowFilter;
 const FlowOperationStatus = @import("flow_operation_status.zig").FlowOperationStatus;
@@ -68,11 +69,7 @@ pub const StartFlowCaptureOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartFlowCaptureInput, options: Options) !StartFlowCaptureOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartFlowCaptureInput, options: CallOptions) !StartFlowCaptureOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

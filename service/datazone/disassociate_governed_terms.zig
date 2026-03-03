@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GovernedEntityType = @import("governed_entity_type.zig").GovernedEntityType;
 
@@ -30,11 +31,7 @@ pub const DisassociateGovernedTermsInput = struct {
 pub const DisassociateGovernedTermsOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateGovernedTermsInput, options: Options) !DisassociateGovernedTermsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateGovernedTermsInput, options: CallOptions) !DisassociateGovernedTermsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

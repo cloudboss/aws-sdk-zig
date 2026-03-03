@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CoreNetwork = @import("core_network.zig").CoreNetwork;
 
@@ -23,11 +24,7 @@ pub const DeleteCoreNetworkOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCoreNetworkInput, options: Options) !DeleteCoreNetworkOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCoreNetworkInput, options: CallOptions) !DeleteCoreNetworkOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

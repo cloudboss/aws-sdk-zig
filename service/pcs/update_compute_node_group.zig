@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CustomLaunchTemplate = @import("custom_launch_template.zig").CustomLaunchTemplate;
 const PurchaseOption = @import("purchase_option.zig").PurchaseOption;
@@ -82,11 +83,7 @@ pub const UpdateComputeNodeGroupOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateComputeNodeGroupInput, options: Options) !UpdateComputeNodeGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateComputeNodeGroupInput, options: CallOptions) !UpdateComputeNodeGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VpnConnectionDeviceType = @import("vpn_connection_device_type.zig").VpnConnectionDeviceType;
 const serde = @import("serde.zig");
@@ -49,11 +50,7 @@ pub const GetVpnConnectionDeviceTypesOutput = struct {
     vpn_connection_device_types: ?[]const VpnConnectionDeviceType = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetVpnConnectionDeviceTypesInput, options: Options) !GetVpnConnectionDeviceTypesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetVpnConnectionDeviceTypesInput, options: CallOptions) !GetVpnConnectionDeviceTypesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

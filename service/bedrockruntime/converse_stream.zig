@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GuardrailStreamConfiguration = @import("guardrail_stream_configuration.zig").GuardrailStreamConfiguration;
 const InferenceConfiguration = @import("inference_configuration.zig").InferenceConfiguration;
@@ -125,13 +126,9 @@ pub const ConverseStreamInput = struct {
     };
 };
 
-const ConverseStreamOutput = @import("converse_stream_response.zig").ConverseStreamResponse;
+pub const ConverseStreamOutput = @import("converse_stream_response.zig").ConverseStreamResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ConverseStreamInput, options: Options) !ConverseStreamOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ConverseStreamInput, options: CallOptions) !ConverseStreamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     const alloc = arena.allocator();
 

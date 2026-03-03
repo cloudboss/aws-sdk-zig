@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_durable_execution_history = @import("get_durable_execution_history.zig");
@@ -29,7 +30,7 @@ pub const GetDurableExecutionHistoryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_durable_execution_history.Options) !get_durable_execution_history.GetDurableExecutionHistoryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_durable_execution_history.GetDurableExecutionHistoryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -70,7 +71,7 @@ pub const GetDurableExecutionStatePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_durable_execution_state.Options) !get_durable_execution_state.GetDurableExecutionStateOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_durable_execution_state.GetDurableExecutionStateOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -111,7 +112,7 @@ pub const ListAliasesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_aliases.Options) !list_aliases.ListAliasesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_aliases.ListAliasesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -152,7 +153,7 @@ pub const ListCapacityProvidersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_capacity_providers.Options) !list_capacity_providers.ListCapacityProvidersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_capacity_providers.ListCapacityProvidersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -193,7 +194,7 @@ pub const ListCodeSigningConfigsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_code_signing_configs.Options) !list_code_signing_configs.ListCodeSigningConfigsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_code_signing_configs.ListCodeSigningConfigsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -234,7 +235,7 @@ pub const ListDurableExecutionsByFunctionPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_durable_executions_by_function.Options) !list_durable_executions_by_function.ListDurableExecutionsByFunctionOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_durable_executions_by_function.ListDurableExecutionsByFunctionOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -275,7 +276,7 @@ pub const ListEventSourceMappingsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_event_source_mappings.Options) !list_event_source_mappings.ListEventSourceMappingsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_event_source_mappings.ListEventSourceMappingsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -316,7 +317,7 @@ pub const ListFunctionEventInvokeConfigsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_function_event_invoke_configs.Options) !list_function_event_invoke_configs.ListFunctionEventInvokeConfigsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_function_event_invoke_configs.ListFunctionEventInvokeConfigsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -357,7 +358,7 @@ pub const ListFunctionUrlConfigsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_function_url_configs.Options) !list_function_url_configs.ListFunctionUrlConfigsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_function_url_configs.ListFunctionUrlConfigsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -398,7 +399,7 @@ pub const ListFunctionVersionsByCapacityProviderPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_function_versions_by_capacity_provider.Options) !list_function_versions_by_capacity_provider.ListFunctionVersionsByCapacityProviderOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_function_versions_by_capacity_provider.ListFunctionVersionsByCapacityProviderOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -439,7 +440,7 @@ pub const ListFunctionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_functions.Options) !list_functions.ListFunctionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_functions.ListFunctionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -480,7 +481,7 @@ pub const ListFunctionsByCodeSigningConfigPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_functions_by_code_signing_config.Options) !list_functions_by_code_signing_config.ListFunctionsByCodeSigningConfigOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_functions_by_code_signing_config.ListFunctionsByCodeSigningConfigOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -521,7 +522,7 @@ pub const ListLayerVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_layer_versions.Options) !list_layer_versions.ListLayerVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_layer_versions.ListLayerVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -562,7 +563,7 @@ pub const ListLayersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_layers.Options) !list_layers.ListLayersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_layers.ListLayersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -603,7 +604,7 @@ pub const ListProvisionedConcurrencyConfigsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_provisioned_concurrency_configs.Options) !list_provisioned_concurrency_configs.ListProvisionedConcurrencyConfigsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_provisioned_concurrency_configs.ListProvisionedConcurrencyConfigsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -644,7 +645,7 @@ pub const ListVersionsByFunctionPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_versions_by_function.Options) !list_versions_by_function.ListVersionsByFunctionOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_versions_by_function.ListVersionsByFunctionOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ErrorDetail = @import("error_detail.zig").ErrorDetail;
 const ProfileTaskStatus = @import("profile_task_status.zig").ProfileTaskStatus;
@@ -64,11 +65,7 @@ pub const GetProfileUpdateTaskOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetProfileUpdateTaskInput, options: Options) !GetProfileUpdateTaskOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetProfileUpdateTaskInput, options: CallOptions) !GetProfileUpdateTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

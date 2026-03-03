@@ -16,6 +16,7 @@ const update_autoshift_observer_notification_status = @import("update_autoshift_
 const update_practice_run_configuration = @import("update_practice_run_configuration.zig");
 const update_zonal_autoshift_configuration = @import("update_zonal_autoshift_configuration.zig");
 const update_zonal_shift = @import("update_zonal_shift.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -48,7 +49,7 @@ pub const Client = struct {
 
     /// Cancel an in-progress practice run zonal shift in Amazon Application
     /// Recovery Controller.
-    pub fn cancelPracticeRun(self: *Self, allocator: std.mem.Allocator, input: cancel_practice_run.CancelPracticeRunInput, options: cancel_practice_run.Options) !cancel_practice_run.CancelPracticeRunOutput {
+    pub fn cancelPracticeRun(self: *Self, allocator: std.mem.Allocator, input: cancel_practice_run.CancelPracticeRunInput, options: CallOptions) !cancel_practice_run.CancelPracticeRunOutput {
         return cancel_practice_run.execute(self, allocator, input, options);
     }
 
@@ -58,7 +59,7 @@ pub const Client = struct {
     /// A zonal shift can be one that you've started for a resource in your Amazon
     /// Web Services account in an Amazon Web Services Region, or it can be a zonal
     /// shift started by a practice run with zonal autoshift.
-    pub fn cancelZonalShift(self: *Self, allocator: std.mem.Allocator, input: cancel_zonal_shift.CancelZonalShiftInput, options: cancel_zonal_shift.Options) !cancel_zonal_shift.CancelZonalShiftOutput {
+    pub fn cancelZonalShift(self: *Self, allocator: std.mem.Allocator, input: cancel_zonal_shift.CancelZonalShiftInput, options: CallOptions) !cancel_zonal_shift.CancelZonalShiftOutput {
         return cancel_zonal_shift.execute(self, allocator, input, options);
     }
 
@@ -76,7 +77,7 @@ pub const Client = struct {
     ///
     /// For more information, see [ Considerations when you configure zonal
     /// autoshift](https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.considerations.html) in the Amazon Application Recovery Controller Developer Guide.
-    pub fn createPracticeRunConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_practice_run_configuration.CreatePracticeRunConfigurationInput, options: create_practice_run_configuration.Options) !create_practice_run_configuration.CreatePracticeRunConfigurationOutput {
+    pub fn createPracticeRunConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_practice_run_configuration.CreatePracticeRunConfigurationInput, options: CallOptions) !create_practice_run_configuration.CreatePracticeRunConfigurationOutput {
         return create_practice_run_configuration.execute(self, allocator, input, options);
     }
 
@@ -84,7 +85,7 @@ pub const Client = struct {
     /// a practice run configuration for a resource., you must disable zonal
     /// autoshift for the resource. Practice runs must be configured for zonal
     /// autoshift to be enabled.
-    pub fn deletePracticeRunConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_practice_run_configuration.DeletePracticeRunConfigurationInput, options: delete_practice_run_configuration.Options) !delete_practice_run_configuration.DeletePracticeRunConfigurationOutput {
+    pub fn deletePracticeRunConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_practice_run_configuration.DeletePracticeRunConfigurationInput, options: CallOptions) !delete_practice_run_configuration.DeletePracticeRunConfigurationOutput {
         return delete_practice_run_configuration.execute(self, allocator, input, options);
     }
 
@@ -93,7 +94,7 @@ pub const Client = struct {
     /// an autoshift event for zonal autoshift. The status can be `ENABLED` or
     /// `DISABLED`. When `ENABLED`, a notification is sent when an autoshift is
     /// triggered. When `DISABLED`, notifications are not sent.
-    pub fn getAutoshiftObserverNotificationStatus(self: *Self, allocator: std.mem.Allocator, input: get_autoshift_observer_notification_status.GetAutoshiftObserverNotificationStatusInput, options: get_autoshift_observer_notification_status.Options) !get_autoshift_observer_notification_status.GetAutoshiftObserverNotificationStatusOutput {
+    pub fn getAutoshiftObserverNotificationStatus(self: *Self, allocator: std.mem.Allocator, input: get_autoshift_observer_notification_status.GetAutoshiftObserverNotificationStatusInput, options: CallOptions) !get_autoshift_observer_notification_status.GetAutoshiftObserverNotificationStatusOutput {
         return get_autoshift_observer_notification_status.execute(self, allocator, input, options);
     }
 
@@ -102,14 +103,14 @@ pub const Client = struct {
     /// Region. Resources that are registered for zonal shifts are managed resources
     /// in ARC. You can start zonal shifts and configure zonal autoshift for managed
     /// resources.
-    pub fn getManagedResource(self: *Self, allocator: std.mem.Allocator, input: get_managed_resource.GetManagedResourceInput, options: get_managed_resource.Options) !get_managed_resource.GetManagedResourceOutput {
+    pub fn getManagedResource(self: *Self, allocator: std.mem.Allocator, input: get_managed_resource.GetManagedResourceInput, options: CallOptions) !get_managed_resource.GetManagedResourceOutput {
         return get_managed_resource.execute(self, allocator, input, options);
     }
 
     /// Returns the autoshifts for an Amazon Web Services Region. By default, the
     /// call returns only `ACTIVE` autoshifts. Optionally, you can specify the
     /// `status` parameter to return `COMPLETED` autoshifts.
-    pub fn listAutoshifts(self: *Self, allocator: std.mem.Allocator, input: list_autoshifts.ListAutoshiftsInput, options: list_autoshifts.Options) !list_autoshifts.ListAutoshiftsOutput {
+    pub fn listAutoshifts(self: *Self, allocator: std.mem.Allocator, input: list_autoshifts.ListAutoshiftsInput, options: CallOptions) !list_autoshifts.ListAutoshiftsOutput {
         return list_autoshifts.execute(self, allocator, input, options);
     }
 
@@ -119,7 +120,7 @@ pub const Client = struct {
     /// the zonal autoshift status for the resource, as well as the Amazon Resource
     /// Name (ARN), the Availability Zones that each resource is deployed in, and
     /// the resource name.
-    pub fn listManagedResources(self: *Self, allocator: std.mem.Allocator, input: list_managed_resources.ListManagedResourcesInput, options: list_managed_resources.Options) !list_managed_resources.ListManagedResourcesOutput {
+    pub fn listManagedResources(self: *Self, allocator: std.mem.Allocator, input: list_managed_resources.ListManagedResourcesInput, options: CallOptions) !list_managed_resources.ListManagedResourcesOutput {
         return list_managed_resources.execute(self, allocator, input, options);
     }
 
@@ -131,7 +132,7 @@ pub const Client = struct {
     ///
     /// For more information about listing autoshifts, see
     /// [">ListAutoshifts](https://docs.aws.amazon.com/arc-zonal-shift/latest/api/API_ListAutoshifts.html).
-    pub fn listZonalShifts(self: *Self, allocator: std.mem.Allocator, input: list_zonal_shifts.ListZonalShiftsInput, options: list_zonal_shifts.Options) !list_zonal_shifts.ListZonalShiftsOutput {
+    pub fn listZonalShifts(self: *Self, allocator: std.mem.Allocator, input: list_zonal_shifts.ListZonalShiftsInput, options: CallOptions) !list_zonal_shifts.ListZonalShiftsOutput {
         return list_zonal_shifts.execute(self, allocator, input, options);
     }
 
@@ -143,7 +144,7 @@ pub const Client = struct {
     ///
     /// For more information, see [ Considerations when you configure zonal
     /// autoshift](https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.considerations.html) in the Amazon Application Recovery Controller Developer Guide.
-    pub fn startPracticeRun(self: *Self, allocator: std.mem.Allocator, input: start_practice_run.StartPracticeRunInput, options: start_practice_run.Options) !start_practice_run.StartPracticeRunOutput {
+    pub fn startPracticeRun(self: *Self, allocator: std.mem.Allocator, input: start_practice_run.StartPracticeRunInput, options: CallOptions) !start_practice_run.StartPracticeRunOutput {
         return start_practice_run.execute(self, allocator, input, options);
     }
 
@@ -175,7 +176,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Zonal
     /// shift](https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.html) in the Amazon Application Recovery Controller Developer Guide.
-    pub fn startZonalShift(self: *Self, allocator: std.mem.Allocator, input: start_zonal_shift.StartZonalShiftInput, options: start_zonal_shift.Options) !start_zonal_shift.StartZonalShiftOutput {
+    pub fn startZonalShift(self: *Self, allocator: std.mem.Allocator, input: start_zonal_shift.StartZonalShiftInput, options: CallOptions) !start_zonal_shift.StartZonalShiftOutput {
         return start_zonal_shift.execute(self, allocator, input, options);
     }
 
@@ -190,14 +191,14 @@ pub const Client = struct {
     ///
     /// For more information, see [ Notifications for practice runs and
     /// autoshifts](https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.html#ZAShiftNotification) in the Amazon Application Recovery Controller Developer Guide.
-    pub fn updateAutoshiftObserverNotificationStatus(self: *Self, allocator: std.mem.Allocator, input: update_autoshift_observer_notification_status.UpdateAutoshiftObserverNotificationStatusInput, options: update_autoshift_observer_notification_status.Options) !update_autoshift_observer_notification_status.UpdateAutoshiftObserverNotificationStatusOutput {
+    pub fn updateAutoshiftObserverNotificationStatus(self: *Self, allocator: std.mem.Allocator, input: update_autoshift_observer_notification_status.UpdateAutoshiftObserverNotificationStatusInput, options: CallOptions) !update_autoshift_observer_notification_status.UpdateAutoshiftObserverNotificationStatusOutput {
         return update_autoshift_observer_notification_status.execute(self, allocator, input, options);
     }
 
     /// Update a practice run configuration to change one or more of the following:
     /// add, change, or remove the blocking alarm; change the outcome alarm; or add,
     /// change, or remove blocking dates or time windows.
-    pub fn updatePracticeRunConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_practice_run_configuration.UpdatePracticeRunConfigurationInput, options: update_practice_run_configuration.Options) !update_practice_run_configuration.UpdatePracticeRunConfigurationOutput {
+    pub fn updatePracticeRunConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_practice_run_configuration.UpdatePracticeRunConfigurationInput, options: CallOptions) !update_practice_run_configuration.UpdatePracticeRunConfigurationOutput {
         return update_practice_run_configuration.execute(self, allocator, input, options);
     }
 
@@ -214,14 +215,14 @@ pub const Client = struct {
     /// Availability Zone during events, on your behalf, to help reduce time to
     /// recovery. Traffic is also shifted away for the required weekly practice
     /// runs.
-    pub fn updateZonalAutoshiftConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_zonal_autoshift_configuration.UpdateZonalAutoshiftConfigurationInput, options: update_zonal_autoshift_configuration.Options) !update_zonal_autoshift_configuration.UpdateZonalAutoshiftConfigurationOutput {
+    pub fn updateZonalAutoshiftConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_zonal_autoshift_configuration.UpdateZonalAutoshiftConfigurationInput, options: CallOptions) !update_zonal_autoshift_configuration.UpdateZonalAutoshiftConfigurationOutput {
         return update_zonal_autoshift_configuration.execute(self, allocator, input, options);
     }
 
     /// Update an active zonal shift in Amazon Application Recovery Controller in
     /// your Amazon Web Services account. You can update a zonal shift to set a new
     /// expiration, or edit or replace the comment for the zonal shift.
-    pub fn updateZonalShift(self: *Self, allocator: std.mem.Allocator, input: update_zonal_shift.UpdateZonalShiftInput, options: update_zonal_shift.Options) !update_zonal_shift.UpdateZonalShiftOutput {
+    pub fn updateZonalShift(self: *Self, allocator: std.mem.Allocator, input: update_zonal_shift.UpdateZonalShiftInput, options: CallOptions) !update_zonal_shift.UpdateZonalShiftOutput {
         return update_zonal_shift.execute(self, allocator, input, options);
     }
 

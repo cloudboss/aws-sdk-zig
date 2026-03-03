@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProcessedUpdateAction = @import("processed_update_action.zig").ProcessedUpdateAction;
 const UnprocessedUpdateAction = @import("unprocessed_update_action.zig").UnprocessedUpdateAction;
@@ -26,11 +27,7 @@ pub const BatchStopUpdateActionOutput = struct {
     unprocessed_update_actions: ?[]const UnprocessedUpdateAction = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchStopUpdateActionInput, options: Options) !BatchStopUpdateActionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchStopUpdateActionInput, options: CallOptions) !BatchStopUpdateActionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

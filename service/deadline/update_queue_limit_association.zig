@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const UpdateQueueLimitAssociationStatus = @import("update_queue_limit_association_status.zig").UpdateQueueLimitAssociationStatus;
 
@@ -32,11 +33,7 @@ pub const UpdateQueueLimitAssociationInput = struct {
 pub const UpdateQueueLimitAssociationOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateQueueLimitAssociationInput, options: Options) !UpdateQueueLimitAssociationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateQueueLimitAssociationInput, options: CallOptions) !UpdateQueueLimitAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

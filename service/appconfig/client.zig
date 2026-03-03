@@ -46,6 +46,7 @@ const update_environment = @import("update_environment.zig");
 const update_extension = @import("update_extension.zig");
 const update_extension_association = @import("update_extension_association.zig");
 const validate_configuration = @import("validate_configuration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -85,7 +86,7 @@ pub const Client = struct {
     /// MyMobileApp to organize and manage configuration data for a mobile
     /// application installed by
     /// your users.
-    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: create_application.Options) !create_application.CreateApplicationOutput {
+    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: CallOptions) !create_application.CreateApplicationOutput {
         return create_application.execute(self, allocator, input, options);
     }
 
@@ -125,7 +126,7 @@ pub const Client = struct {
     /// Configuration and a Configuration
     /// Profile](http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile.html) in the *AppConfig
     /// User Guide*.
-    pub fn createConfigurationProfile(self: *Self, allocator: std.mem.Allocator, input: create_configuration_profile.CreateConfigurationProfileInput, options: create_configuration_profile.Options) !create_configuration_profile.CreateConfigurationProfileOutput {
+    pub fn createConfigurationProfile(self: *Self, allocator: std.mem.Allocator, input: create_configuration_profile.CreateConfigurationProfileInput, options: CallOptions) !create_configuration_profile.CreateConfigurationProfileOutput {
         return create_configuration_profile.execute(self, allocator, input, options);
     }
 
@@ -136,7 +137,7 @@ pub const Client = struct {
     /// duration required, a percentage of targets to receive the deployment during
     /// each interval,
     /// an algorithm that defines how percentage grows, and bake time.
-    pub fn createDeploymentStrategy(self: *Self, allocator: std.mem.Allocator, input: create_deployment_strategy.CreateDeploymentStrategyInput, options: create_deployment_strategy.Options) !create_deployment_strategy.CreateDeploymentStrategyOutput {
+    pub fn createDeploymentStrategy(self: *Self, allocator: std.mem.Allocator, input: create_deployment_strategy.CreateDeploymentStrategyInput, options: CallOptions) !create_deployment_strategy.CreateDeploymentStrategyOutput {
         return create_deployment_strategy.execute(self, allocator, input, options);
     }
 
@@ -152,7 +153,7 @@ pub const Client = struct {
     /// configuration deployment. If an alarm is triggered, the system rolls back
     /// the
     /// configuration.
-    pub fn createEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_environment.CreateEnvironmentInput, options: create_environment.Options) !create_environment.CreateEnvironmentOutput {
+    pub fn createEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_environment.CreateEnvironmentInput, options: CallOptions) !create_environment.CreateEnvironmentOutput {
         return create_environment.execute(self, allocator, input, options);
     }
 
@@ -185,7 +186,7 @@ pub const Client = struct {
     ///
     /// For more information about extensions, see [Extending
     /// workflows](https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html) in the *AppConfig User Guide*.
-    pub fn createExtension(self: *Self, allocator: std.mem.Allocator, input: create_extension.CreateExtensionInput, options: create_extension.Options) !create_extension.CreateExtensionOutput {
+    pub fn createExtension(self: *Self, allocator: std.mem.Allocator, input: create_extension.CreateExtensionInput, options: CallOptions) !create_extension.CreateExtensionOutput {
         return create_extension.execute(self, allocator, input, options);
     }
 
@@ -205,7 +206,7 @@ pub const Client = struct {
     /// extensions and
     /// associations, see [Extending
     /// workflows](https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html) in the *AppConfig User Guide*.
-    pub fn createExtensionAssociation(self: *Self, allocator: std.mem.Allocator, input: create_extension_association.CreateExtensionAssociationInput, options: create_extension_association.Options) !create_extension_association.CreateExtensionAssociationOutput {
+    pub fn createExtensionAssociation(self: *Self, allocator: std.mem.Allocator, input: create_extension_association.CreateExtensionAssociationInput, options: CallOptions) !create_extension_association.CreateExtensionAssociationOutput {
         return create_extension_association.execute(self, allocator, input, options);
     }
 
@@ -215,12 +216,12 @@ pub const Client = struct {
     /// for feature flag data. For more information, see [Type reference for
     /// AWS.AppConfig.FeatureFlags](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile-feature-flags.html#appconfig-type-reference-feature-flags) in the
     /// *AppConfig User Guide*.
-    pub fn createHostedConfigurationVersion(self: *Self, allocator: std.mem.Allocator, input: create_hosted_configuration_version.CreateHostedConfigurationVersionInput, options: create_hosted_configuration_version.Options) !create_hosted_configuration_version.CreateHostedConfigurationVersionOutput {
+    pub fn createHostedConfigurationVersion(self: *Self, allocator: std.mem.Allocator, input: create_hosted_configuration_version.CreateHostedConfigurationVersionInput, options: CallOptions) !create_hosted_configuration_version.CreateHostedConfigurationVersionOutput {
         return create_hosted_configuration_version.execute(self, allocator, input, options);
     }
 
     /// Deletes an application.
-    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: delete_application.Options) !delete_application.DeleteApplicationOutput {
+    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: CallOptions) !delete_application.DeleteApplicationOutput {
         return delete_application.execute(self, allocator, input, options);
     }
 
@@ -230,12 +231,12 @@ pub const Client = struct {
     /// profiles,
     /// enable [deletion
     /// protection](https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html).
-    pub fn deleteConfigurationProfile(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_profile.DeleteConfigurationProfileInput, options: delete_configuration_profile.Options) !delete_configuration_profile.DeleteConfigurationProfileOutput {
+    pub fn deleteConfigurationProfile(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_profile.DeleteConfigurationProfileInput, options: CallOptions) !delete_configuration_profile.DeleteConfigurationProfileOutput {
         return delete_configuration_profile.execute(self, allocator, input, options);
     }
 
     /// Deletes a deployment strategy.
-    pub fn deleteDeploymentStrategy(self: *Self, allocator: std.mem.Allocator, input: delete_deployment_strategy.DeleteDeploymentStrategyInput, options: delete_deployment_strategy.Options) !delete_deployment_strategy.DeleteDeploymentStrategyOutput {
+    pub fn deleteDeploymentStrategy(self: *Self, allocator: std.mem.Allocator, input: delete_deployment_strategy.DeleteDeploymentStrategyInput, options: CallOptions) !delete_deployment_strategy.DeleteDeploymentStrategyOutput {
         return delete_deployment_strategy.execute(self, allocator, input, options);
     }
 
@@ -244,37 +245,37 @@ pub const Client = struct {
     /// To prevent users from unintentionally deleting actively-used environments,
     /// enable [deletion
     /// protection](https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html).
-    pub fn deleteEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_environment.DeleteEnvironmentInput, options: delete_environment.Options) !delete_environment.DeleteEnvironmentOutput {
+    pub fn deleteEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_environment.DeleteEnvironmentInput, options: CallOptions) !delete_environment.DeleteEnvironmentOutput {
         return delete_environment.execute(self, allocator, input, options);
     }
 
     /// Deletes an AppConfig extension. You must delete all associations to an
     /// extension before you delete the extension.
-    pub fn deleteExtension(self: *Self, allocator: std.mem.Allocator, input: delete_extension.DeleteExtensionInput, options: delete_extension.Options) !delete_extension.DeleteExtensionOutput {
+    pub fn deleteExtension(self: *Self, allocator: std.mem.Allocator, input: delete_extension.DeleteExtensionInput, options: CallOptions) !delete_extension.DeleteExtensionOutput {
         return delete_extension.execute(self, allocator, input, options);
     }
 
     /// Deletes an extension association. This action doesn't delete extensions
     /// defined in the
     /// association.
-    pub fn deleteExtensionAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_extension_association.DeleteExtensionAssociationInput, options: delete_extension_association.Options) !delete_extension_association.DeleteExtensionAssociationOutput {
+    pub fn deleteExtensionAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_extension_association.DeleteExtensionAssociationInput, options: CallOptions) !delete_extension_association.DeleteExtensionAssociationOutput {
         return delete_extension_association.execute(self, allocator, input, options);
     }
 
     /// Deletes a version of a configuration from the AppConfig hosted configuration
     /// store.
-    pub fn deleteHostedConfigurationVersion(self: *Self, allocator: std.mem.Allocator, input: delete_hosted_configuration_version.DeleteHostedConfigurationVersionInput, options: delete_hosted_configuration_version.Options) !delete_hosted_configuration_version.DeleteHostedConfigurationVersionOutput {
+    pub fn deleteHostedConfigurationVersion(self: *Self, allocator: std.mem.Allocator, input: delete_hosted_configuration_version.DeleteHostedConfigurationVersionInput, options: CallOptions) !delete_hosted_configuration_version.DeleteHostedConfigurationVersionOutput {
         return delete_hosted_configuration_version.execute(self, allocator, input, options);
     }
 
     /// Returns information about the status of the `DeletionProtection`
     /// parameter.
-    pub fn getAccountSettings(self: *Self, allocator: std.mem.Allocator, input: get_account_settings.GetAccountSettingsInput, options: get_account_settings.Options) !get_account_settings.GetAccountSettingsOutput {
+    pub fn getAccountSettings(self: *Self, allocator: std.mem.Allocator, input: get_account_settings.GetAccountSettingsInput, options: CallOptions) !get_account_settings.GetAccountSettingsOutput {
         return get_account_settings.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about an application.
-    pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: get_application.Options) !get_application.GetApplicationOutput {
+    pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: CallOptions) !get_application.GetApplicationOutput {
         return get_application.execute(self, allocator, input, options);
     }
 
@@ -289,17 +290,17 @@ pub const Client = struct {
     ///
     /// * GetConfiguration is a priced call. For more information, see
     /// [Pricing](https://aws.amazon.com/systems-manager/pricing/).
-    pub fn getConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_configuration.GetConfigurationInput, options: get_configuration.Options) !get_configuration.GetConfigurationOutput {
+    pub fn getConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_configuration.GetConfigurationInput, options: CallOptions) !get_configuration.GetConfigurationOutput {
         return get_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a configuration profile.
-    pub fn getConfigurationProfile(self: *Self, allocator: std.mem.Allocator, input: get_configuration_profile.GetConfigurationProfileInput, options: get_configuration_profile.Options) !get_configuration_profile.GetConfigurationProfileOutput {
+    pub fn getConfigurationProfile(self: *Self, allocator: std.mem.Allocator, input: get_configuration_profile.GetConfigurationProfileInput, options: CallOptions) !get_configuration_profile.GetConfigurationProfileOutput {
         return get_configuration_profile.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a configuration deployment.
-    pub fn getDeployment(self: *Self, allocator: std.mem.Allocator, input: get_deployment.GetDeploymentInput, options: get_deployment.Options) !get_deployment.GetDeploymentOutput {
+    pub fn getDeployment(self: *Self, allocator: std.mem.Allocator, input: get_deployment.GetDeploymentInput, options: CallOptions) !get_deployment.GetDeploymentOutput {
         return get_deployment.execute(self, allocator, input, options);
     }
 
@@ -312,7 +313,7 @@ pub const Client = struct {
     /// receive the deployment during each interval, an algorithm that defines how
     /// percentage
     /// grows, and bake time.
-    pub fn getDeploymentStrategy(self: *Self, allocator: std.mem.Allocator, input: get_deployment_strategy.GetDeploymentStrategyInput, options: get_deployment_strategy.Options) !get_deployment_strategy.GetDeploymentStrategyOutput {
+    pub fn getDeploymentStrategy(self: *Self, allocator: std.mem.Allocator, input: get_deployment_strategy.GetDeploymentStrategyInput, options: CallOptions) !get_deployment_strategy.GetDeploymentStrategyOutput {
         return get_deployment_strategy.execute(self, allocator, input, options);
     }
 
@@ -324,57 +325,57 @@ pub const Client = struct {
     /// for an environment. If
     /// an alarm is triggered during a deployment, AppConfig roles back the
     /// configuration.
-    pub fn getEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_environment.GetEnvironmentInput, options: get_environment.Options) !get_environment.GetEnvironmentOutput {
+    pub fn getEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_environment.GetEnvironmentInput, options: CallOptions) !get_environment.GetEnvironmentOutput {
         return get_environment.execute(self, allocator, input, options);
     }
 
     /// Returns information about an AppConfig extension.
-    pub fn getExtension(self: *Self, allocator: std.mem.Allocator, input: get_extension.GetExtensionInput, options: get_extension.Options) !get_extension.GetExtensionOutput {
+    pub fn getExtension(self: *Self, allocator: std.mem.Allocator, input: get_extension.GetExtensionInput, options: CallOptions) !get_extension.GetExtensionOutput {
         return get_extension.execute(self, allocator, input, options);
     }
 
     /// Returns information about an AppConfig extension association. For more
     /// information about extensions and associations, see [Extending
     /// workflows](https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html) in the *AppConfig User Guide*.
-    pub fn getExtensionAssociation(self: *Self, allocator: std.mem.Allocator, input: get_extension_association.GetExtensionAssociationInput, options: get_extension_association.Options) !get_extension_association.GetExtensionAssociationOutput {
+    pub fn getExtensionAssociation(self: *Self, allocator: std.mem.Allocator, input: get_extension_association.GetExtensionAssociationInput, options: CallOptions) !get_extension_association.GetExtensionAssociationOutput {
         return get_extension_association.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a specific configuration version.
-    pub fn getHostedConfigurationVersion(self: *Self, allocator: std.mem.Allocator, input: get_hosted_configuration_version.GetHostedConfigurationVersionInput, options: get_hosted_configuration_version.Options) !get_hosted_configuration_version.GetHostedConfigurationVersionOutput {
+    pub fn getHostedConfigurationVersion(self: *Self, allocator: std.mem.Allocator, input: get_hosted_configuration_version.GetHostedConfigurationVersionInput, options: CallOptions) !get_hosted_configuration_version.GetHostedConfigurationVersionOutput {
         return get_hosted_configuration_version.execute(self, allocator, input, options);
     }
 
     /// Lists all applications in your Amazon Web Services account.
-    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: list_applications.Options) !list_applications.ListApplicationsOutput {
+    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: CallOptions) !list_applications.ListApplicationsOutput {
         return list_applications.execute(self, allocator, input, options);
     }
 
     /// Lists the configuration profiles for an application.
-    pub fn listConfigurationProfiles(self: *Self, allocator: std.mem.Allocator, input: list_configuration_profiles.ListConfigurationProfilesInput, options: list_configuration_profiles.Options) !list_configuration_profiles.ListConfigurationProfilesOutput {
+    pub fn listConfigurationProfiles(self: *Self, allocator: std.mem.Allocator, input: list_configuration_profiles.ListConfigurationProfilesInput, options: CallOptions) !list_configuration_profiles.ListConfigurationProfilesOutput {
         return list_configuration_profiles.execute(self, allocator, input, options);
     }
 
     /// Lists deployment strategies.
-    pub fn listDeploymentStrategies(self: *Self, allocator: std.mem.Allocator, input: list_deployment_strategies.ListDeploymentStrategiesInput, options: list_deployment_strategies.Options) !list_deployment_strategies.ListDeploymentStrategiesOutput {
+    pub fn listDeploymentStrategies(self: *Self, allocator: std.mem.Allocator, input: list_deployment_strategies.ListDeploymentStrategiesInput, options: CallOptions) !list_deployment_strategies.ListDeploymentStrategiesOutput {
         return list_deployment_strategies.execute(self, allocator, input, options);
     }
 
     /// Lists the deployments for an environment in descending deployment number
     /// order.
-    pub fn listDeployments(self: *Self, allocator: std.mem.Allocator, input: list_deployments.ListDeploymentsInput, options: list_deployments.Options) !list_deployments.ListDeploymentsOutput {
+    pub fn listDeployments(self: *Self, allocator: std.mem.Allocator, input: list_deployments.ListDeploymentsInput, options: CallOptions) !list_deployments.ListDeploymentsOutput {
         return list_deployments.execute(self, allocator, input, options);
     }
 
     /// Lists the environments for an application.
-    pub fn listEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_environments.ListEnvironmentsInput, options: list_environments.Options) !list_environments.ListEnvironmentsOutput {
+    pub fn listEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_environments.ListEnvironmentsInput, options: CallOptions) !list_environments.ListEnvironmentsOutput {
         return list_environments.execute(self, allocator, input, options);
     }
 
     /// Lists all AppConfig extension associations in the account. For more
     /// information about extensions and associations, see [Extending
     /// workflows](https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html) in the *AppConfig User Guide*.
-    pub fn listExtensionAssociations(self: *Self, allocator: std.mem.Allocator, input: list_extension_associations.ListExtensionAssociationsInput, options: list_extension_associations.Options) !list_extension_associations.ListExtensionAssociationsOutput {
+    pub fn listExtensionAssociations(self: *Self, allocator: std.mem.Allocator, input: list_extension_associations.ListExtensionAssociationsInput, options: CallOptions) !list_extension_associations.ListExtensionAssociationsOutput {
         return list_extension_associations.execute(self, allocator, input, options);
     }
 
@@ -382,23 +383,23 @@ pub const Client = struct {
     /// the
     /// account. For more information about extensions, see [Extending
     /// workflows](https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html) in the *AppConfig User Guide*.
-    pub fn listExtensions(self: *Self, allocator: std.mem.Allocator, input: list_extensions.ListExtensionsInput, options: list_extensions.Options) !list_extensions.ListExtensionsOutput {
+    pub fn listExtensions(self: *Self, allocator: std.mem.Allocator, input: list_extensions.ListExtensionsInput, options: CallOptions) !list_extensions.ListExtensionsOutput {
         return list_extensions.execute(self, allocator, input, options);
     }
 
     /// Lists configurations stored in the AppConfig hosted configuration store by
     /// version.
-    pub fn listHostedConfigurationVersions(self: *Self, allocator: std.mem.Allocator, input: list_hosted_configuration_versions.ListHostedConfigurationVersionsInput, options: list_hosted_configuration_versions.Options) !list_hosted_configuration_versions.ListHostedConfigurationVersionsOutput {
+    pub fn listHostedConfigurationVersions(self: *Self, allocator: std.mem.Allocator, input: list_hosted_configuration_versions.ListHostedConfigurationVersionsInput, options: CallOptions) !list_hosted_configuration_versions.ListHostedConfigurationVersionsOutput {
         return list_hosted_configuration_versions.execute(self, allocator, input, options);
     }
 
     /// Retrieves the list of key-value tags assigned to the resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Starts a deployment.
-    pub fn startDeployment(self: *Self, allocator: std.mem.Allocator, input: start_deployment.StartDeploymentInput, options: start_deployment.Options) !start_deployment.StartDeploymentOutput {
+    pub fn startDeployment(self: *Self, allocator: std.mem.Allocator, input: start_deployment.StartDeploymentInput, options: CallOptions) !start_deployment.StartDeploymentOutput {
         return start_deployment.execute(self, allocator, input, options);
     }
 
@@ -409,7 +410,7 @@ pub const Client = struct {
     /// will be `ROLLED_BACK`. The status of a completed deployment will be
     /// `REVERTED`. AppConfig only allows a revert within 72 hours of
     /// deployment completion.
-    pub fn stopDeployment(self: *Self, allocator: std.mem.Allocator, input: stop_deployment.StopDeploymentInput, options: stop_deployment.Options) !stop_deployment.StopDeploymentOutput {
+    pub fn stopDeployment(self: *Self, allocator: std.mem.Allocator, input: stop_deployment.StopDeploymentInput, options: CallOptions) !stop_deployment.StopDeploymentOutput {
         return stop_deployment.execute(self, allocator, input, options);
     }
 
@@ -417,44 +418,44 @@ pub const Client = struct {
     /// your AppConfig resources. Each tag consists of a key and an optional value,
     /// both
     /// of which you define. You can specify a maximum of 50 tags for a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes a tag key and value from an AppConfig resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the value of the `DeletionProtection` parameter.
-    pub fn updateAccountSettings(self: *Self, allocator: std.mem.Allocator, input: update_account_settings.UpdateAccountSettingsInput, options: update_account_settings.Options) !update_account_settings.UpdateAccountSettingsOutput {
+    pub fn updateAccountSettings(self: *Self, allocator: std.mem.Allocator, input: update_account_settings.UpdateAccountSettingsInput, options: CallOptions) !update_account_settings.UpdateAccountSettingsOutput {
         return update_account_settings.execute(self, allocator, input, options);
     }
 
     /// Updates an application.
-    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: update_application.Options) !update_application.UpdateApplicationOutput {
+    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: CallOptions) !update_application.UpdateApplicationOutput {
         return update_application.execute(self, allocator, input, options);
     }
 
     /// Updates a configuration profile.
-    pub fn updateConfigurationProfile(self: *Self, allocator: std.mem.Allocator, input: update_configuration_profile.UpdateConfigurationProfileInput, options: update_configuration_profile.Options) !update_configuration_profile.UpdateConfigurationProfileOutput {
+    pub fn updateConfigurationProfile(self: *Self, allocator: std.mem.Allocator, input: update_configuration_profile.UpdateConfigurationProfileInput, options: CallOptions) !update_configuration_profile.UpdateConfigurationProfileOutput {
         return update_configuration_profile.execute(self, allocator, input, options);
     }
 
     /// Updates a deployment strategy.
-    pub fn updateDeploymentStrategy(self: *Self, allocator: std.mem.Allocator, input: update_deployment_strategy.UpdateDeploymentStrategyInput, options: update_deployment_strategy.Options) !update_deployment_strategy.UpdateDeploymentStrategyOutput {
+    pub fn updateDeploymentStrategy(self: *Self, allocator: std.mem.Allocator, input: update_deployment_strategy.UpdateDeploymentStrategyInput, options: CallOptions) !update_deployment_strategy.UpdateDeploymentStrategyOutput {
         return update_deployment_strategy.execute(self, allocator, input, options);
     }
 
     /// Updates an environment.
-    pub fn updateEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_environment.UpdateEnvironmentInput, options: update_environment.Options) !update_environment.UpdateEnvironmentOutput {
+    pub fn updateEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_environment.UpdateEnvironmentInput, options: CallOptions) !update_environment.UpdateEnvironmentOutput {
         return update_environment.execute(self, allocator, input, options);
     }
 
     /// Updates an AppConfig extension. For more information about extensions, see
     /// [Extending
     /// workflows](https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html) in the *AppConfig User Guide*.
-    pub fn updateExtension(self: *Self, allocator: std.mem.Allocator, input: update_extension.UpdateExtensionInput, options: update_extension.Options) !update_extension.UpdateExtensionOutput {
+    pub fn updateExtension(self: *Self, allocator: std.mem.Allocator, input: update_extension.UpdateExtensionInput, options: CallOptions) !update_extension.UpdateExtensionOutput {
         return update_extension.execute(self, allocator, input, options);
     }
 
@@ -462,12 +463,12 @@ pub const Client = struct {
     /// associations, see
     /// [Extending
     /// workflows](https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html) in the *AppConfig User Guide*.
-    pub fn updateExtensionAssociation(self: *Self, allocator: std.mem.Allocator, input: update_extension_association.UpdateExtensionAssociationInput, options: update_extension_association.Options) !update_extension_association.UpdateExtensionAssociationOutput {
+    pub fn updateExtensionAssociation(self: *Self, allocator: std.mem.Allocator, input: update_extension_association.UpdateExtensionAssociationInput, options: CallOptions) !update_extension_association.UpdateExtensionAssociationOutput {
         return update_extension_association.execute(self, allocator, input, options);
     }
 
     /// Uses the validators in a configuration profile to validate a configuration.
-    pub fn validateConfiguration(self: *Self, allocator: std.mem.Allocator, input: validate_configuration.ValidateConfigurationInput, options: validate_configuration.Options) !validate_configuration.ValidateConfigurationOutput {
+    pub fn validateConfiguration(self: *Self, allocator: std.mem.Allocator, input: validate_configuration.ValidateConfigurationInput, options: CallOptions) !validate_configuration.ValidateConfigurationOutput {
         return validate_configuration.execute(self, allocator, input, options);
     }
 

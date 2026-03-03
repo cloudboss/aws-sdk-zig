@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CedarVersion = @import("cedar_version.zig").CedarVersion;
 const DeletionProtection = @import("deletion_protection.zig").DeletionProtection;
@@ -79,11 +80,7 @@ pub const GetPolicyStoreOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetPolicyStoreInput, options: Options) !GetPolicyStoreOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetPolicyStoreInput, options: CallOptions) !GetPolicyStoreOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

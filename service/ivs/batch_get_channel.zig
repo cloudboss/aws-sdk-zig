@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Channel = @import("channel.zig").Channel;
 const BatchError = @import("batch_error.zig").BatchError;
@@ -27,11 +28,7 @@ pub const BatchGetChannelOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetChannelInput, options: Options) !BatchGetChannelOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetChannelInput, options: CallOptions) !BatchGetChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

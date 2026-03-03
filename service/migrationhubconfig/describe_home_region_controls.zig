@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Target = @import("target.zig").Target;
 const HomeRegionControl = @import("home_region_control.zig").HomeRegionControl;
@@ -56,11 +57,7 @@ pub const DescribeHomeRegionControlsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeHomeRegionControlsInput, options: Options) !DescribeHomeRegionControlsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeHomeRegionControlsInput, options: CallOptions) !DescribeHomeRegionControlsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

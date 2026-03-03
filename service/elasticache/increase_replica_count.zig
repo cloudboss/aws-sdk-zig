@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConfigureShard = @import("configure_shard.zig").ConfigureShard;
 const ReplicationGroup = @import("replication_group.zig").ReplicationGroup;
@@ -34,11 +35,7 @@ pub const IncreaseReplicaCountOutput = struct {
     replication_group: ?ReplicationGroup = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: IncreaseReplicaCountInput, options: Options) !IncreaseReplicaCountOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: IncreaseReplicaCountInput, options: CallOptions) !IncreaseReplicaCountOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

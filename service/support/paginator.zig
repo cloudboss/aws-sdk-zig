@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_cases = @import("describe_cases.zig");
@@ -15,7 +16,7 @@ pub const DescribeCasesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_cases.Options) !describe_cases.DescribeCasesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_cases.DescribeCasesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const DescribeCommunicationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_communications.Options) !describe_communications.DescribeCommunicationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_communications.DescribeCommunicationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

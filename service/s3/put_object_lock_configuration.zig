@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const ObjectLockConfiguration = @import("object_lock_configuration.zig").ObjectLockConfiguration;
@@ -53,11 +54,7 @@ pub const PutObjectLockConfigurationOutput = struct {
     request_charged: ?RequestCharged = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutObjectLockConfigurationInput, options: Options) !PutObjectLockConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutObjectLockConfigurationInput, options: CallOptions) !PutObjectLockConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

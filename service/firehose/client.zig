@@ -13,6 +13,7 @@ const stop_delivery_stream_encryption = @import("stop_delivery_stream_encryption
 const tag_delivery_stream = @import("tag_delivery_stream.zig");
 const untag_delivery_stream = @import("untag_delivery_stream.zig");
 const update_destination = @import("update_destination.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -132,7 +133,7 @@ pub const Client = struct {
     /// data. For more
     /// information, see [Grant Firehose Access to an Amazon S3
     /// Destination](https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3) in the *Amazon Firehose Developer Guide*.
-    pub fn createDeliveryStream(self: *Self, allocator: std.mem.Allocator, input: create_delivery_stream.CreateDeliveryStreamInput, options: create_delivery_stream.Options) !create_delivery_stream.CreateDeliveryStreamOutput {
+    pub fn createDeliveryStream(self: *Self, allocator: std.mem.Allocator, input: create_delivery_stream.CreateDeliveryStreamInput, options: CallOptions) !create_delivery_stream.CreateDeliveryStreamOutput {
         return create_delivery_stream.execute(self, allocator, input, options);
     }
 
@@ -161,7 +162,7 @@ pub const Client = struct {
     /// `DELETING` state for several minutes. Therefore, as a best practice,
     /// applications should not wait for streams in the `DELETING` state
     /// to be removed.
-    pub fn deleteDeliveryStream(self: *Self, allocator: std.mem.Allocator, input: delete_delivery_stream.DeleteDeliveryStreamInput, options: delete_delivery_stream.Options) !delete_delivery_stream.DeleteDeliveryStreamOutput {
+    pub fn deleteDeliveryStream(self: *Self, allocator: std.mem.Allocator, input: delete_delivery_stream.DeleteDeliveryStreamInput, options: CallOptions) !delete_delivery_stream.DeleteDeliveryStreamOutput {
         return delete_delivery_stream.execute(self, allocator, input, options);
     }
 
@@ -176,7 +177,7 @@ pub const Client = struct {
     /// If the status is `DELETING_FAILED`, you can force deletion by invoking
     /// DeleteDeliveryStream again but with
     /// DeleteDeliveryStreamInput$AllowForceDelete set to true.
-    pub fn describeDeliveryStream(self: *Self, allocator: std.mem.Allocator, input: describe_delivery_stream.DescribeDeliveryStreamInput, options: describe_delivery_stream.Options) !describe_delivery_stream.DescribeDeliveryStreamOutput {
+    pub fn describeDeliveryStream(self: *Self, allocator: std.mem.Allocator, input: describe_delivery_stream.DescribeDeliveryStreamInput, options: CallOptions) !describe_delivery_stream.DescribeDeliveryStreamOutput {
         return describe_delivery_stream.execute(self, allocator, input, options);
     }
 
@@ -194,14 +195,14 @@ pub const Client = struct {
     /// again and setting the `ExclusiveStartDeliveryStreamName` parameter to the
     /// name
     /// of the last Firehose stream returned in the last call.
-    pub fn listDeliveryStreams(self: *Self, allocator: std.mem.Allocator, input: list_delivery_streams.ListDeliveryStreamsInput, options: list_delivery_streams.Options) !list_delivery_streams.ListDeliveryStreamsOutput {
+    pub fn listDeliveryStreams(self: *Self, allocator: std.mem.Allocator, input: list_delivery_streams.ListDeliveryStreamsInput, options: CallOptions) !list_delivery_streams.ListDeliveryStreamsOutput {
         return list_delivery_streams.execute(self, allocator, input, options);
     }
 
     /// Lists the tags for the specified Firehose stream. This operation has a limit
     /// of five
     /// transactions per second per account.
-    pub fn listTagsForDeliveryStream(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_delivery_stream.ListTagsForDeliveryStreamInput, options: list_tags_for_delivery_stream.Options) !list_tags_for_delivery_stream.ListTagsForDeliveryStreamOutput {
+    pub fn listTagsForDeliveryStream(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_delivery_stream.ListTagsForDeliveryStreamInput, options: CallOptions) !list_tags_for_delivery_stream.ListTagsForDeliveryStreamOutput {
         return list_tags_for_delivery_stream.execute(self, allocator, input, options);
     }
 
@@ -277,7 +278,7 @@ pub const Client = struct {
     /// Don't concatenate two or more base64 strings to form the data fields of your
     /// records.
     /// Instead, concatenate the raw data, then perform base64 encoding.
-    pub fn putRecord(self: *Self, allocator: std.mem.Allocator, input: put_record.PutRecordInput, options: put_record.Options) !put_record.PutRecordOutput {
+    pub fn putRecord(self: *Self, allocator: std.mem.Allocator, input: put_record.PutRecordInput, options: CallOptions) !put_record.PutRecordOutput {
         return put_record.execute(self, allocator, input, options);
     }
 
@@ -384,7 +385,7 @@ pub const Client = struct {
     /// Don't concatenate two or more base64 strings to form the data fields of your
     /// records.
     /// Instead, concatenate the raw data, then perform base64 encoding.
-    pub fn putRecordBatch(self: *Self, allocator: std.mem.Allocator, input: put_record_batch.PutRecordBatchInput, options: put_record_batch.Options) !put_record_batch.PutRecordBatchOutput {
+    pub fn putRecordBatch(self: *Self, allocator: std.mem.Allocator, input: put_record_batch.PutRecordBatchInput, options: CallOptions) !put_record_batch.PutRecordBatchOutput {
         return put_record_batch.execute(self, allocator, input, options);
     }
 
@@ -449,7 +450,7 @@ pub const Client = struct {
     /// `StartDeliveryStreamEncryption` 13 times and
     /// `StopDeliveryStreamEncryption` 12 times for the same Firehose stream in a
     /// 24-hour period.
-    pub fn startDeliveryStreamEncryption(self: *Self, allocator: std.mem.Allocator, input: start_delivery_stream_encryption.StartDeliveryStreamEncryptionInput, options: start_delivery_stream_encryption.Options) !start_delivery_stream_encryption.StartDeliveryStreamEncryptionOutput {
+    pub fn startDeliveryStreamEncryption(self: *Self, allocator: std.mem.Allocator, input: start_delivery_stream_encryption.StartDeliveryStreamEncryptionInput, options: CallOptions) !start_delivery_stream_encryption.StartDeliveryStreamEncryptionOutput {
         return start_delivery_stream_encryption.execute(self, allocator, input, options);
     }
 
@@ -485,7 +486,7 @@ pub const Client = struct {
     /// `StartDeliveryStreamEncryption` 13 times and
     /// `StopDeliveryStreamEncryption` 12 times for the same Firehose stream in a
     /// 24-hour period.
-    pub fn stopDeliveryStreamEncryption(self: *Self, allocator: std.mem.Allocator, input: stop_delivery_stream_encryption.StopDeliveryStreamEncryptionInput, options: stop_delivery_stream_encryption.Options) !stop_delivery_stream_encryption.StopDeliveryStreamEncryptionOutput {
+    pub fn stopDeliveryStreamEncryption(self: *Self, allocator: std.mem.Allocator, input: stop_delivery_stream_encryption.StopDeliveryStreamEncryptionInput, options: CallOptions) !stop_delivery_stream_encryption.StopDeliveryStreamEncryptionOutput {
         return stop_delivery_stream_encryption.execute(self, allocator, input, options);
     }
 
@@ -506,7 +507,7 @@ pub const Client = struct {
     /// Each Firehose stream can have up to 50 tags.
     ///
     /// This operation has a limit of five transactions per second per account.
-    pub fn tagDeliveryStream(self: *Self, allocator: std.mem.Allocator, input: tag_delivery_stream.TagDeliveryStreamInput, options: tag_delivery_stream.Options) !tag_delivery_stream.TagDeliveryStreamOutput {
+    pub fn tagDeliveryStream(self: *Self, allocator: std.mem.Allocator, input: tag_delivery_stream.TagDeliveryStreamInput, options: CallOptions) !tag_delivery_stream.TagDeliveryStreamOutput {
         return tag_delivery_stream.execute(self, allocator, input, options);
     }
 
@@ -517,7 +518,7 @@ pub const Client = struct {
     /// If you specify a tag that doesn't exist, the operation ignores it.
     ///
     /// This operation has a limit of five transactions per second per account.
-    pub fn untagDeliveryStream(self: *Self, allocator: std.mem.Allocator, input: untag_delivery_stream.UntagDeliveryStreamInput, options: untag_delivery_stream.Options) !untag_delivery_stream.UntagDeliveryStreamOutput {
+    pub fn untagDeliveryStream(self: *Self, allocator: std.mem.Allocator, input: untag_delivery_stream.UntagDeliveryStreamInput, options: CallOptions) !untag_delivery_stream.UntagDeliveryStreamOutput {
         return untag_delivery_stream.execute(self, allocator, input, options);
     }
 
@@ -564,7 +565,7 @@ pub const Client = struct {
     /// update is applied successfully, the version ID is updated, and can be
     /// retrieved using DescribeDeliveryStream. Use the new version ID to set
     /// `CurrentDeliveryStreamVersionId` in the next call.
-    pub fn updateDestination(self: *Self, allocator: std.mem.Allocator, input: update_destination.UpdateDestinationInput, options: update_destination.Options) !update_destination.UpdateDestinationOutput {
+    pub fn updateDestination(self: *Self, allocator: std.mem.Allocator, input: update_destination.UpdateDestinationInput, options: CallOptions) !update_destination.UpdateDestinationOutput {
         return update_destination.execute(self, allocator, input, options);
     }
 };

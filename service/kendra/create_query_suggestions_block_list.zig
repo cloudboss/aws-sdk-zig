@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const S3Path = @import("s3_path.zig").S3Path;
 const Tag = @import("tag.zig").Tag;
@@ -70,11 +71,7 @@ pub const CreateQuerySuggestionsBlockListOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateQuerySuggestionsBlockListInput, options: Options) !CreateQuerySuggestionsBlockListOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateQuerySuggestionsBlockListInput, options: CallOptions) !CreateQuerySuggestionsBlockListOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

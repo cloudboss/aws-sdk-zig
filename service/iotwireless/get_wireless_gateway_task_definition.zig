@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const UpdateWirelessGatewayTaskCreate = @import("update_wireless_gateway_task_create.zig").UpdateWirelessGatewayTaskCreate;
 
@@ -38,11 +39,7 @@ pub const GetWirelessGatewayTaskDefinitionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetWirelessGatewayTaskDefinitionInput, options: Options) !GetWirelessGatewayTaskDefinitionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetWirelessGatewayTaskDefinitionInput, options: CallOptions) !GetWirelessGatewayTaskDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

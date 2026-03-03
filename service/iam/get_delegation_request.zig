@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DelegationRequest = @import("delegation_request.zig").DelegationRequest;
 const permissionCheckResultType = @import("permission_check_result_type.zig").permissionCheckResultType;
@@ -61,11 +62,7 @@ pub const GetDelegationRequestOutput = struct {
     permission_check_status: ?permissionCheckStatusType = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDelegationRequestInput, options: Options) !GetDelegationRequestOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDelegationRequestInput, options: CallOptions) !GetDelegationRequestOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

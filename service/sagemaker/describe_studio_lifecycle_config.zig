@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const StudioLifecycleConfigAppType = @import("studio_lifecycle_config_app_type.zig").StudioLifecycleConfigAppType;
 
@@ -47,11 +48,7 @@ pub const DescribeStudioLifecycleConfigOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeStudioLifecycleConfigInput, options: Options) !DescribeStudioLifecycleConfigOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeStudioLifecycleConfigInput, options: CallOptions) !DescribeStudioLifecycleConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

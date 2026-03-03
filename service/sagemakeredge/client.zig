@@ -4,6 +4,7 @@ const std = @import("std");
 const get_deployments = @import("get_deployments.zig");
 const get_device_registration = @import("get_device_registration.zig");
 const send_heartbeat = @import("send_heartbeat.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -34,18 +35,18 @@ pub const Client = struct {
     }
 
     /// Use to get the active deployments from a device.
-    pub fn getDeployments(self: *Self, allocator: std.mem.Allocator, input: get_deployments.GetDeploymentsInput, options: get_deployments.Options) !get_deployments.GetDeploymentsOutput {
+    pub fn getDeployments(self: *Self, allocator: std.mem.Allocator, input: get_deployments.GetDeploymentsInput, options: CallOptions) !get_deployments.GetDeploymentsOutput {
         return get_deployments.execute(self, allocator, input, options);
     }
 
     /// Use to check if a device is registered with SageMaker Edge Manager.
-    pub fn getDeviceRegistration(self: *Self, allocator: std.mem.Allocator, input: get_device_registration.GetDeviceRegistrationInput, options: get_device_registration.Options) !get_device_registration.GetDeviceRegistrationOutput {
+    pub fn getDeviceRegistration(self: *Self, allocator: std.mem.Allocator, input: get_device_registration.GetDeviceRegistrationInput, options: CallOptions) !get_device_registration.GetDeviceRegistrationOutput {
         return get_device_registration.execute(self, allocator, input, options);
     }
 
     /// Use to get the current status of devices registered on SageMaker Edge
     /// Manager.
-    pub fn sendHeartbeat(self: *Self, allocator: std.mem.Allocator, input: send_heartbeat.SendHeartbeatInput, options: send_heartbeat.Options) !send_heartbeat.SendHeartbeatOutput {
+    pub fn sendHeartbeat(self: *Self, allocator: std.mem.Allocator, input: send_heartbeat.SendHeartbeatInput, options: CallOptions) !send_heartbeat.SendHeartbeatOutput {
         return send_heartbeat.execute(self, allocator, input, options);
     }
 };

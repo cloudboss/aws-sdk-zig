@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CaseAttachmentAttributes = @import("case_attachment_attributes.zig").CaseAttachmentAttributes;
 const CaseMetadataEntry = @import("case_metadata_entry.zig").CaseMetadataEntry;
@@ -120,11 +121,7 @@ pub const GetCaseOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCaseInput, options: Options) !GetCaseOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCaseInput, options: CallOptions) !GetCaseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

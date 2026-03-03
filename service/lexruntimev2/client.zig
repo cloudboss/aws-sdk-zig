@@ -7,6 +7,7 @@ const put_session = @import("put_session.zig");
 const recognize_text = @import("recognize_text.zig");
 const recognize_utterance = @import("recognize_utterance.zig");
 const start_conversation = @import("start_conversation.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -53,7 +54,7 @@ pub const Client = struct {
     /// If the locale doesn't exist in the bot, or if the locale hasn't been
     /// enables for the alias, you receive a
     /// `BadRequestException`.
-    pub fn deleteSession(self: *Self, allocator: std.mem.Allocator, input: delete_session.DeleteSessionInput, options: delete_session.Options) !delete_session.DeleteSessionOutput {
+    pub fn deleteSession(self: *Self, allocator: std.mem.Allocator, input: delete_session.DeleteSessionInput, options: CallOptions) !delete_session.DeleteSessionOutput {
         return delete_session.execute(self, allocator, input, options);
     }
 
@@ -68,14 +69,14 @@ pub const Client = struct {
     /// returns a `BadRequestException`. If the locale doesn't exist
     /// or is not enabled for the alias, you receive a
     /// `BadRequestException`.
-    pub fn getSession(self: *Self, allocator: std.mem.Allocator, input: get_session.GetSessionInput, options: get_session.Options) !get_session.GetSessionOutput {
+    pub fn getSession(self: *Self, allocator: std.mem.Allocator, input: get_session.GetSessionInput, options: CallOptions) !get_session.GetSessionOutput {
         return get_session.execute(self, allocator, input, options);
     }
 
     /// Creates a new session or modifies an existing session with an Amazon Lex V2
     /// bot. Use this operation to enable your application to set the state of
     /// the bot.
-    pub fn putSession(self: *Self, allocator: std.mem.Allocator, input: put_session.PutSessionInput, options: put_session.Options) !put_session.PutSessionOutput {
+    pub fn putSession(self: *Self, allocator: std.mem.Allocator, input: put_session.PutSessionInput, options: CallOptions) !put_session.PutSessionOutput {
         return put_session.execute(self, allocator, input, options);
     }
 
@@ -108,7 +109,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Completion
     /// message](https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html).
-    pub fn recognizeText(self: *Self, allocator: std.mem.Allocator, input: recognize_text.RecognizeTextInput, options: recognize_text.Options) !recognize_text.RecognizeTextOutput {
+    pub fn recognizeText(self: *Self, allocator: std.mem.Allocator, input: recognize_text.RecognizeTextInput, options: CallOptions) !recognize_text.RecognizeTextOutput {
         return recognize_text.execute(self, allocator, input, options);
     }
 
@@ -164,7 +165,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Completion
     /// message](https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html).
-    pub fn recognizeUtterance(self: *Self, allocator: std.mem.Allocator, input: recognize_utterance.RecognizeUtteranceInput, options: recognize_utterance.Options) !recognize_utterance.RecognizeUtteranceOutput {
+    pub fn recognizeUtterance(self: *Self, allocator: std.mem.Allocator, input: recognize_utterance.RecognizeUtteranceInput, options: CallOptions) !recognize_utterance.RecognizeUtteranceOutput {
         return recognize_utterance.execute(self, allocator, input, options);
     }
 
@@ -220,7 +221,7 @@ pub const Client = struct {
     ///
     /// * [AWS SDK for Ruby
     ///   V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/runtime.lex.v2-2020-08-07/StartConversation)
-    pub fn startConversation(self: *Self, allocator: std.mem.Allocator, input: start_conversation.StartConversationInput, options: start_conversation.Options) !start_conversation.StartConversationOutput {
+    pub fn startConversation(self: *Self, allocator: std.mem.Allocator, input: start_conversation.StartConversationInput, options: CallOptions) !start_conversation.StartConversationOutput {
         return start_conversation.execute(self, allocator, input, options);
     }
 };

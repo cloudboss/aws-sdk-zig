@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_group_members = @import("list_group_members.zig");
@@ -19,7 +20,7 @@ pub const ListGroupMembersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_group_members.Options) !list_group_members.ListGroupMembersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_group_members.ListGroupMembersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -60,7 +61,7 @@ pub const ListGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_groups.Options) !list_groups.ListGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_groups.ListGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -101,7 +102,7 @@ pub const ListGroupsForMemberPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_groups_for_member.Options) !list_groups_for_member.ListGroupsForMemberOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_groups_for_member.ListGroupsForMemberOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -142,7 +143,7 @@ pub const ListUsersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_users.Options) !list_users.ListUsersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_users.ListUsersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -183,7 +184,7 @@ pub const SearchGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: search_groups.Options) !search_groups.SearchGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !search_groups.SearchGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -224,7 +225,7 @@ pub const SearchUsersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: search_users.Options) !search_users.SearchUsersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !search_users.SearchUsersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

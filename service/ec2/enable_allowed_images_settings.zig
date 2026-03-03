@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AllowedImagesSettingsEnabledState = @import("allowed_images_settings_enabled_state.zig").AllowedImagesSettingsEnabledState;
 
@@ -26,11 +27,7 @@ pub const EnableAllowedImagesSettingsOutput = struct {
     allowed_images_settings_state: ?AllowedImagesSettingsEnabledState = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableAllowedImagesSettingsInput, options: Options) !EnableAllowedImagesSettingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableAllowedImagesSettingsInput, options: CallOptions) !EnableAllowedImagesSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

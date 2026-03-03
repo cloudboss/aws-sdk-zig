@@ -7,6 +7,7 @@ const invoke_data_automation_async = @import("invoke_data_automation_async.zig")
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -37,32 +38,32 @@ pub const Client = struct {
     }
 
     /// API used to get data automation status.
-    pub fn getDataAutomationStatus(self: *Self, allocator: std.mem.Allocator, input: get_data_automation_status.GetDataAutomationStatusInput, options: get_data_automation_status.Options) !get_data_automation_status.GetDataAutomationStatusOutput {
+    pub fn getDataAutomationStatus(self: *Self, allocator: std.mem.Allocator, input: get_data_automation_status.GetDataAutomationStatusInput, options: CallOptions) !get_data_automation_status.GetDataAutomationStatusOutput {
         return get_data_automation_status.execute(self, allocator, input, options);
     }
 
     /// Sync API: Invoke data automation.
-    pub fn invokeDataAutomation(self: *Self, allocator: std.mem.Allocator, input: invoke_data_automation.InvokeDataAutomationInput, options: invoke_data_automation.Options) !invoke_data_automation.InvokeDataAutomationOutput {
+    pub fn invokeDataAutomation(self: *Self, allocator: std.mem.Allocator, input: invoke_data_automation.InvokeDataAutomationInput, options: CallOptions) !invoke_data_automation.InvokeDataAutomationOutput {
         return invoke_data_automation.execute(self, allocator, input, options);
     }
 
     /// Async API: Invoke data automation.
-    pub fn invokeDataAutomationAsync(self: *Self, allocator: std.mem.Allocator, input: invoke_data_automation_async.InvokeDataAutomationAsyncInput, options: invoke_data_automation_async.Options) !invoke_data_automation_async.InvokeDataAutomationAsyncOutput {
+    pub fn invokeDataAutomationAsync(self: *Self, allocator: std.mem.Allocator, input: invoke_data_automation_async.InvokeDataAutomationAsyncInput, options: CallOptions) !invoke_data_automation_async.InvokeDataAutomationAsyncOutput {
         return invoke_data_automation_async.execute(self, allocator, input, options);
     }
 
     /// List tags for an Amazon Bedrock Data Automation resource
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Tag an Amazon Bedrock Data Automation resource
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Untag an Amazon Bedrock Data Automation resource
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 };

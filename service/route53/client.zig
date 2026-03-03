@@ -72,6 +72,7 @@ const update_hosted_zone_comment = @import("update_hosted_zone_comment.zig");
 const update_hosted_zone_features = @import("update_hosted_zone_features.zig");
 const update_traffic_policy_comment = @import("update_traffic_policy_comment.zig");
 const update_traffic_policy_instance = @import("update_traffic_policy_instance.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -106,7 +107,7 @@ pub const Client = struct {
     /// Activates a key-signing key (KSK) so that it can be used for signing by
     /// DNSSEC. This
     /// operation changes the KSK status to `ACTIVE`.
-    pub fn activateKeySigningKey(self: *Self, allocator: std.mem.Allocator, input: activate_key_signing_key.ActivateKeySigningKeyInput, options: activate_key_signing_key.Options) !activate_key_signing_key.ActivateKeySigningKeyOutput {
+    pub fn activateKeySigningKey(self: *Self, allocator: std.mem.Allocator, input: activate_key_signing_key.ActivateKeySigningKeyInput, options: CallOptions) !activate_key_signing_key.ActivateKeySigningKeyOutput {
         return activate_key_signing_key.execute(self, allocator, input, options);
     }
 
@@ -139,7 +140,7 @@ pub const Client = struct {
     /// For more information, see [Access
     /// Management](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
     /// in the *Amazon Web Services General Reference*.
-    pub fn associateVpcWithHostedZone(self: *Self, allocator: std.mem.Allocator, input: associate_vpc_with_hosted_zone.AssociateVPCWithHostedZoneInput, options: associate_vpc_with_hosted_zone.Options) !associate_vpc_with_hosted_zone.AssociateVPCWithHostedZoneOutput {
+    pub fn associateVpcWithHostedZone(self: *Self, allocator: std.mem.Allocator, input: associate_vpc_with_hosted_zone.AssociateVPCWithHostedZoneInput, options: CallOptions) !associate_vpc_with_hosted_zone.AssociateVPCWithHostedZoneOutput {
         return associate_vpc_with_hosted_zone.execute(self, allocator, input, options);
     }
 
@@ -167,7 +168,7 @@ pub const Client = struct {
     ///
     /// * ` DELETE_IF_EXISTS`: Delete an existing CIDR block from the
     /// collection.
-    pub fn changeCidrCollection(self: *Self, allocator: std.mem.Allocator, input: change_cidr_collection.ChangeCidrCollectionInput, options: change_cidr_collection.Options) !change_cidr_collection.ChangeCidrCollectionOutput {
+    pub fn changeCidrCollection(self: *Self, allocator: std.mem.Allocator, input: change_cidr_collection.ChangeCidrCollectionInput, options: CallOptions) !change_cidr_collection.ChangeCidrCollectionOutput {
         return change_cidr_collection.execute(self, allocator, input, options);
     }
 
@@ -279,7 +280,7 @@ pub const Client = struct {
     /// For information about the limits on a `ChangeResourceRecordSets` request,
     /// see
     /// [Limits](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html) in the *Amazon Route 53 Developer Guide*.
-    pub fn changeResourceRecordSets(self: *Self, allocator: std.mem.Allocator, input: change_resource_record_sets.ChangeResourceRecordSetsInput, options: change_resource_record_sets.Options) !change_resource_record_sets.ChangeResourceRecordSetsOutput {
+    pub fn changeResourceRecordSets(self: *Self, allocator: std.mem.Allocator, input: change_resource_record_sets.ChangeResourceRecordSetsInput, options: CallOptions) !change_resource_record_sets.ChangeResourceRecordSetsOutput {
         return change_resource_record_sets.execute(self, allocator, input, options);
     }
 
@@ -288,12 +289,12 @@ pub const Client = struct {
     /// For information about using tags for cost allocation, see [Using Cost
     /// Allocation
     /// Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *Billing and Cost Management User Guide*.
-    pub fn changeTagsForResource(self: *Self, allocator: std.mem.Allocator, input: change_tags_for_resource.ChangeTagsForResourceInput, options: change_tags_for_resource.Options) !change_tags_for_resource.ChangeTagsForResourceOutput {
+    pub fn changeTagsForResource(self: *Self, allocator: std.mem.Allocator, input: change_tags_for_resource.ChangeTagsForResourceInput, options: CallOptions) !change_tags_for_resource.ChangeTagsForResourceOutput {
         return change_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Creates a CIDR collection in the current Amazon Web Services account.
-    pub fn createCidrCollection(self: *Self, allocator: std.mem.Allocator, input: create_cidr_collection.CreateCidrCollectionInput, options: create_cidr_collection.Options) !create_cidr_collection.CreateCidrCollectionOutput {
+    pub fn createCidrCollection(self: *Self, allocator: std.mem.Allocator, input: create_cidr_collection.CreateCidrCollectionInput, options: CallOptions) !create_cidr_collection.CreateCidrCollectionOutput {
         return create_cidr_collection.execute(self, allocator, input, options);
     }
 
@@ -341,7 +342,7 @@ pub const Client = struct {
     /// see the [Amazon
     /// CloudWatch User
     /// Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html).
-    pub fn createHealthCheck(self: *Self, allocator: std.mem.Allocator, input: create_health_check.CreateHealthCheckInput, options: create_health_check.Options) !create_health_check.CreateHealthCheckOutput {
+    pub fn createHealthCheck(self: *Self, allocator: std.mem.Allocator, input: create_health_check.CreateHealthCheckInput, options: CallOptions) !create_health_check.CreateHealthCheckOutput {
         return create_health_check.execute(self, allocator, input, options);
     }
 
@@ -417,14 +418,14 @@ pub const Client = struct {
     /// For more information, see [Access
     /// Management](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
     /// in the *Amazon Web Services General Reference*.
-    pub fn createHostedZone(self: *Self, allocator: std.mem.Allocator, input: create_hosted_zone.CreateHostedZoneInput, options: create_hosted_zone.Options) !create_hosted_zone.CreateHostedZoneOutput {
+    pub fn createHostedZone(self: *Self, allocator: std.mem.Allocator, input: create_hosted_zone.CreateHostedZoneInput, options: CallOptions) !create_hosted_zone.CreateHostedZoneOutput {
         return create_hosted_zone.execute(self, allocator, input, options);
     }
 
     /// Creates a new key-signing key (KSK) associated with a hosted zone. You can
     /// only have
     /// two KSKs per hosted zone.
-    pub fn createKeySigningKey(self: *Self, allocator: std.mem.Allocator, input: create_key_signing_key.CreateKeySigningKeyInput, options: create_key_signing_key.Options) !create_key_signing_key.CreateKeySigningKeyOutput {
+    pub fn createKeySigningKey(self: *Self, allocator: std.mem.Allocator, input: create_key_signing_key.CreateKeySigningKeyInput, options: CallOptions) !create_key_signing_key.CreateKeySigningKeyOutput {
         return create_key_signing_key.execute(self, allocator, input, options);
     }
 
@@ -581,7 +582,7 @@ pub const Client = struct {
     /// If you want Route 53 to stop sending query logs to CloudWatch Logs, delete
     /// the query logging configuration. For more information, see
     /// [DeleteQueryLoggingConfig](https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteQueryLoggingConfig.html).
-    pub fn createQueryLoggingConfig(self: *Self, allocator: std.mem.Allocator, input: create_query_logging_config.CreateQueryLoggingConfigInput, options: create_query_logging_config.Options) !create_query_logging_config.CreateQueryLoggingConfigOutput {
+    pub fn createQueryLoggingConfig(self: *Self, allocator: std.mem.Allocator, input: create_query_logging_config.CreateQueryLoggingConfigInput, options: CallOptions) !create_query_logging_config.CreateQueryLoggingConfigOutput {
         return create_query_logging_config.execute(self, allocator, input, options);
     }
 
@@ -647,7 +648,7 @@ pub const Client = struct {
     /// name
     /// servers, then migrate the hosted zones again to use the reusable delegation
     /// set.
-    pub fn createReusableDelegationSet(self: *Self, allocator: std.mem.Allocator, input: create_reusable_delegation_set.CreateReusableDelegationSetInput, options: create_reusable_delegation_set.Options) !create_reusable_delegation_set.CreateReusableDelegationSetOutput {
+    pub fn createReusableDelegationSet(self: *Self, allocator: std.mem.Allocator, input: create_reusable_delegation_set.CreateReusableDelegationSetInput, options: CallOptions) !create_reusable_delegation_set.CreateReusableDelegationSetOutput {
         return create_reusable_delegation_set.execute(self, allocator, input, options);
     }
 
@@ -655,7 +656,7 @@ pub const Client = struct {
     /// record sets
     /// for one domain name (such as example.com) or one subdomain name (such as
     /// www.example.com).
-    pub fn createTrafficPolicy(self: *Self, allocator: std.mem.Allocator, input: create_traffic_policy.CreateTrafficPolicyInput, options: create_traffic_policy.Options) !create_traffic_policy.CreateTrafficPolicyOutput {
+    pub fn createTrafficPolicy(self: *Self, allocator: std.mem.Allocator, input: create_traffic_policy.CreateTrafficPolicyInput, options: CallOptions) !create_traffic_policy.CreateTrafficPolicyOutput {
         return create_traffic_policy.execute(self, allocator, input, options);
     }
 
@@ -676,7 +677,7 @@ pub const Client = struct {
     /// to confirm that the `CreateTrafficPolicyInstance`
     /// request completed successfully. For more information, see the
     /// `State` response element.
-    pub fn createTrafficPolicyInstance(self: *Self, allocator: std.mem.Allocator, input: create_traffic_policy_instance.CreateTrafficPolicyInstanceInput, options: create_traffic_policy_instance.Options) !create_traffic_policy_instance.CreateTrafficPolicyInstanceOutput {
+    pub fn createTrafficPolicyInstance(self: *Self, allocator: std.mem.Allocator, input: create_traffic_policy_instance.CreateTrafficPolicyInstanceInput, options: CallOptions) !create_traffic_policy_instance.CreateTrafficPolicyInstanceOutput {
         return create_traffic_policy_instance.execute(self, allocator, input, options);
     }
 
@@ -693,7 +694,7 @@ pub const Client = struct {
     /// of a traffic policy. If you reach the limit and need to create another
     /// version, you'll
     /// need to start a new traffic policy.
-    pub fn createTrafficPolicyVersion(self: *Self, allocator: std.mem.Allocator, input: create_traffic_policy_version.CreateTrafficPolicyVersionInput, options: create_traffic_policy_version.Options) !create_traffic_policy_version.CreateTrafficPolicyVersionOutput {
+    pub fn createTrafficPolicyVersion(self: *Self, allocator: std.mem.Allocator, input: create_traffic_policy_version.CreateTrafficPolicyVersionInput, options: CallOptions) !create_traffic_policy_version.CreateTrafficPolicyVersionOutput {
         return create_traffic_policy_version.execute(self, allocator, input, options);
     }
 
@@ -711,21 +712,21 @@ pub const Client = struct {
     /// a hosted zone that you created by using a different account, you must submit
     /// one
     /// authorization request for each VPC.
-    pub fn createVpcAssociationAuthorization(self: *Self, allocator: std.mem.Allocator, input: create_vpc_association_authorization.CreateVPCAssociationAuthorizationInput, options: create_vpc_association_authorization.Options) !create_vpc_association_authorization.CreateVPCAssociationAuthorizationOutput {
+    pub fn createVpcAssociationAuthorization(self: *Self, allocator: std.mem.Allocator, input: create_vpc_association_authorization.CreateVPCAssociationAuthorizationInput, options: CallOptions) !create_vpc_association_authorization.CreateVPCAssociationAuthorizationOutput {
         return create_vpc_association_authorization.execute(self, allocator, input, options);
     }
 
     /// Deactivates a key-signing key (KSK) so that it will not be used for signing
     /// by DNSSEC.
     /// This operation changes the KSK status to `INACTIVE`.
-    pub fn deactivateKeySigningKey(self: *Self, allocator: std.mem.Allocator, input: deactivate_key_signing_key.DeactivateKeySigningKeyInput, options: deactivate_key_signing_key.Options) !deactivate_key_signing_key.DeactivateKeySigningKeyOutput {
+    pub fn deactivateKeySigningKey(self: *Self, allocator: std.mem.Allocator, input: deactivate_key_signing_key.DeactivateKeySigningKeyInput, options: CallOptions) !deactivate_key_signing_key.DeactivateKeySigningKeyOutput {
         return deactivate_key_signing_key.execute(self, allocator, input, options);
     }
 
     /// Deletes a CIDR collection in the current Amazon Web Services account. The
     /// collection
     /// must be empty before it can be deleted.
-    pub fn deleteCidrCollection(self: *Self, allocator: std.mem.Allocator, input: delete_cidr_collection.DeleteCidrCollectionInput, options: delete_cidr_collection.Options) !delete_cidr_collection.DeleteCidrCollectionOutput {
+    pub fn deleteCidrCollection(self: *Self, allocator: std.mem.Allocator, input: delete_cidr_collection.DeleteCidrCollectionInput, options: CallOptions) !delete_cidr_collection.DeleteCidrCollectionOutput {
         return delete_cidr_collection.execute(self, allocator, input, options);
     }
 
@@ -751,7 +752,7 @@ pub const Client = struct {
     /// is deleted automatically when you deregister the instance; there can be a
     /// delay of
     /// several hours before the health check is deleted from Route 53.
-    pub fn deleteHealthCheck(self: *Self, allocator: std.mem.Allocator, input: delete_health_check.DeleteHealthCheckInput, options: delete_health_check.Options) !delete_health_check.DeleteHealthCheckOutput {
+    pub fn deleteHealthCheck(self: *Self, allocator: std.mem.Allocator, input: delete_health_check.DeleteHealthCheckInput, options: CallOptions) !delete_health_check.DeleteHealthCheckOutput {
         return delete_health_check.execute(self, allocator, input, options);
     }
 
@@ -815,7 +816,7 @@ pub const Client = struct {
     ///
     /// * Use the `ListHostedZones` action to get a list of the hosted zones
     /// associated with the current Amazon Web Services account.
-    pub fn deleteHostedZone(self: *Self, allocator: std.mem.Allocator, input: delete_hosted_zone.DeleteHostedZoneInput, options: delete_hosted_zone.Options) !delete_hosted_zone.DeleteHostedZoneOutput {
+    pub fn deleteHostedZone(self: *Self, allocator: std.mem.Allocator, input: delete_hosted_zone.DeleteHostedZoneInput, options: CallOptions) !delete_hosted_zone.DeleteHostedZoneOutput {
         return delete_hosted_zone.execute(self, allocator, input, options);
     }
 
@@ -831,7 +832,7 @@ pub const Client = struct {
     /// Use
     /// [GetDNSSEC](https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetDNSSEC.html) to verify that the KSK is in an `INACTIVE`
     /// status.
-    pub fn deleteKeySigningKey(self: *Self, allocator: std.mem.Allocator, input: delete_key_signing_key.DeleteKeySigningKeyInput, options: delete_key_signing_key.Options) !delete_key_signing_key.DeleteKeySigningKeyOutput {
+    pub fn deleteKeySigningKey(self: *Self, allocator: std.mem.Allocator, input: delete_key_signing_key.DeleteKeySigningKeyInput, options: CallOptions) !delete_key_signing_key.DeleteKeySigningKeyOutput {
         return delete_key_signing_key.execute(self, allocator, input, options);
     }
 
@@ -843,7 +844,7 @@ pub const Client = struct {
     ///
     /// For more information about DNS query logs, see
     /// [CreateQueryLoggingConfig](https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateQueryLoggingConfig.html).
-    pub fn deleteQueryLoggingConfig(self: *Self, allocator: std.mem.Allocator, input: delete_query_logging_config.DeleteQueryLoggingConfigInput, options: delete_query_logging_config.Options) !delete_query_logging_config.DeleteQueryLoggingConfigOutput {
+    pub fn deleteQueryLoggingConfig(self: *Self, allocator: std.mem.Allocator, input: delete_query_logging_config.DeleteQueryLoggingConfigInput, options: CallOptions) !delete_query_logging_config.DeleteQueryLoggingConfigOutput {
         return delete_query_logging_config.execute(self, allocator, input, options);
     }
 
@@ -858,7 +859,7 @@ pub const Client = struct {
     /// submit a
     /// [GetReusableDelegationSet](https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetReusableDelegationSet.html) request and specify the ID of the reusable
     /// delegation set that you want to delete.
-    pub fn deleteReusableDelegationSet(self: *Self, allocator: std.mem.Allocator, input: delete_reusable_delegation_set.DeleteReusableDelegationSetInput, options: delete_reusable_delegation_set.Options) !delete_reusable_delegation_set.DeleteReusableDelegationSetOutput {
+    pub fn deleteReusableDelegationSet(self: *Self, allocator: std.mem.Allocator, input: delete_reusable_delegation_set.DeleteReusableDelegationSetInput, options: CallOptions) !delete_reusable_delegation_set.DeleteReusableDelegationSetOutput {
         return delete_reusable_delegation_set.execute(self, allocator, input, options);
     }
 
@@ -879,7 +880,7 @@ pub const Client = struct {
     ///   policy,
     /// including the traffic policy document, by running
     /// [GetTrafficPolicy](https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetTrafficPolicy.html).
-    pub fn deleteTrafficPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_traffic_policy.DeleteTrafficPolicyInput, options: delete_traffic_policy.Options) !delete_traffic_policy.DeleteTrafficPolicyOutput {
+    pub fn deleteTrafficPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_traffic_policy.DeleteTrafficPolicyInput, options: CallOptions) !delete_traffic_policy.DeleteTrafficPolicyOutput {
         return delete_traffic_policy.execute(self, allocator, input, options);
     }
 
@@ -889,7 +890,7 @@ pub const Client = struct {
     ///
     /// In the Route 53 console, traffic policy instances are known as policy
     /// records.
-    pub fn deleteTrafficPolicyInstance(self: *Self, allocator: std.mem.Allocator, input: delete_traffic_policy_instance.DeleteTrafficPolicyInstanceInput, options: delete_traffic_policy_instance.Options) !delete_traffic_policy_instance.DeleteTrafficPolicyInstanceOutput {
+    pub fn deleteTrafficPolicyInstance(self: *Self, allocator: std.mem.Allocator, input: delete_traffic_policy_instance.DeleteTrafficPolicyInstanceInput, options: CallOptions) !delete_traffic_policy_instance.DeleteTrafficPolicyInstanceOutput {
         return delete_traffic_policy_instance.execute(self, allocator, input, options);
     }
 
@@ -907,14 +908,14 @@ pub const Client = struct {
     /// `DeleteVPCAssociationAuthorization` won't disassociate the VPC from
     /// the hosted zone. If you want to delete an existing association, use
     /// `DisassociateVPCFromHostedZone`.
-    pub fn deleteVpcAssociationAuthorization(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_association_authorization.DeleteVPCAssociationAuthorizationInput, options: delete_vpc_association_authorization.Options) !delete_vpc_association_authorization.DeleteVPCAssociationAuthorizationOutput {
+    pub fn deleteVpcAssociationAuthorization(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_association_authorization.DeleteVPCAssociationAuthorizationInput, options: CallOptions) !delete_vpc_association_authorization.DeleteVPCAssociationAuthorizationOutput {
         return delete_vpc_association_authorization.execute(self, allocator, input, options);
     }
 
     /// Disables DNSSEC signing in a specific hosted zone. This action does not
     /// deactivate any
     /// key-signing keys (KSKs) that are active in the hosted zone.
-    pub fn disableHostedZoneDnssec(self: *Self, allocator: std.mem.Allocator, input: disable_hosted_zone_dnssec.DisableHostedZoneDNSSECInput, options: disable_hosted_zone_dnssec.Options) !disable_hosted_zone_dnssec.DisableHostedZoneDNSSECOutput {
+    pub fn disableHostedZoneDnssec(self: *Self, allocator: std.mem.Allocator, input: disable_hosted_zone_dnssec.DisableHostedZoneDNSSECInput, options: CallOptions) !disable_hosted_zone_dnssec.DisableHostedZoneDNSSECOutput {
         return disable_hosted_zone_dnssec.execute(self, allocator, input, options);
     }
 
@@ -962,12 +963,12 @@ pub const Client = struct {
     /// For more information, see [Access
     /// Management](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
     /// in the *Amazon Web Services General Reference*.
-    pub fn disassociateVpcFromHostedZone(self: *Self, allocator: std.mem.Allocator, input: disassociate_vpc_from_hosted_zone.DisassociateVPCFromHostedZoneInput, options: disassociate_vpc_from_hosted_zone.Options) !disassociate_vpc_from_hosted_zone.DisassociateVPCFromHostedZoneOutput {
+    pub fn disassociateVpcFromHostedZone(self: *Self, allocator: std.mem.Allocator, input: disassociate_vpc_from_hosted_zone.DisassociateVPCFromHostedZoneInput, options: CallOptions) !disassociate_vpc_from_hosted_zone.DisassociateVPCFromHostedZoneOutput {
         return disassociate_vpc_from_hosted_zone.execute(self, allocator, input, options);
     }
 
     /// Enables DNSSEC signing in a specific hosted zone.
-    pub fn enableHostedZoneDnssec(self: *Self, allocator: std.mem.Allocator, input: enable_hosted_zone_dnssec.EnableHostedZoneDNSSECInput, options: enable_hosted_zone_dnssec.Options) !enable_hosted_zone_dnssec.EnableHostedZoneDNSSECOutput {
+    pub fn enableHostedZoneDnssec(self: *Self, allocator: std.mem.Allocator, input: enable_hosted_zone_dnssec.EnableHostedZoneDNSSECInput, options: CallOptions) !enable_hosted_zone_dnssec.EnableHostedZoneDNSSECOutput {
         return enable_hosted_zone_dnssec.execute(self, allocator, input, options);
     }
 
@@ -986,7 +987,7 @@ pub const Client = struct {
     /// the Amazon Web Services Management Console and open the Trusted Advisor
     /// console at
     /// [https://console.aws.amazon.com/trustedadvisor/](https://console.aws.amazon.com/trustedadvisor). Then choose **Service limits** in the navigation pane.
-    pub fn getAccountLimit(self: *Self, allocator: std.mem.Allocator, input: get_account_limit.GetAccountLimitInput, options: get_account_limit.Options) !get_account_limit.GetAccountLimitOutput {
+    pub fn getAccountLimit(self: *Self, allocator: std.mem.Allocator, input: get_account_limit.GetAccountLimitInput, options: CallOptions) !get_account_limit.GetAccountLimitOutput {
         return get_account_limit.execute(self, allocator, input, options);
     }
 
@@ -1001,7 +1002,7 @@ pub const Client = struct {
     ///
     /// * `INSYNC` indicates that the changes have propagated to all Route 53
     /// DNS servers managing the hosted zone.
-    pub fn getChange(self: *Self, allocator: std.mem.Allocator, input: get_change.GetChangeInput, options: get_change.Options) !get_change.GetChangeOutput {
+    pub fn getChange(self: *Self, allocator: std.mem.Allocator, input: get_change.GetChangeInput, options: CallOptions) !get_change.GetChangeOutput {
         return get_change.execute(self, allocator, input, options);
     }
 
@@ -1015,14 +1016,14 @@ pub const Client = struct {
     /// of Amazon Route 53
     /// Servers](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-ip-addresses.html) in the *Amazon Route 53 Developer
     /// Guide*.
-    pub fn getCheckerIpRanges(self: *Self, allocator: std.mem.Allocator, input: get_checker_ip_ranges.GetCheckerIpRangesInput, options: get_checker_ip_ranges.Options) !get_checker_ip_ranges.GetCheckerIpRangesOutput {
+    pub fn getCheckerIpRanges(self: *Self, allocator: std.mem.Allocator, input: get_checker_ip_ranges.GetCheckerIpRangesInput, options: CallOptions) !get_checker_ip_ranges.GetCheckerIpRangesOutput {
         return get_checker_ip_ranges.execute(self, allocator, input, options);
     }
 
     /// Returns information about DNSSEC for a specific hosted zone, including the
     /// key-signing
     /// keys (KSKs) in the hosted zone.
-    pub fn getDnssec(self: *Self, allocator: std.mem.Allocator, input: get_dnssec.GetDNSSECInput, options: get_dnssec.Options) !get_dnssec.GetDNSSECOutput {
+    pub fn getDnssec(self: *Self, allocator: std.mem.Allocator, input: get_dnssec.GetDNSSECInput, options: CallOptions) !get_dnssec.GetDNSSECOutput {
         return get_dnssec.execute(self, allocator, input, options);
     }
 
@@ -1056,23 +1057,23 @@ pub const Client = struct {
     /// code*&subdivisioncode=*subdivision
     /// code*
     /// `
-    pub fn getGeoLocation(self: *Self, allocator: std.mem.Allocator, input: get_geo_location.GetGeoLocationInput, options: get_geo_location.Options) !get_geo_location.GetGeoLocationOutput {
+    pub fn getGeoLocation(self: *Self, allocator: std.mem.Allocator, input: get_geo_location.GetGeoLocationInput, options: CallOptions) !get_geo_location.GetGeoLocationOutput {
         return get_geo_location.execute(self, allocator, input, options);
     }
 
     /// Gets information about a specified health check.
-    pub fn getHealthCheck(self: *Self, allocator: std.mem.Allocator, input: get_health_check.GetHealthCheckInput, options: get_health_check.Options) !get_health_check.GetHealthCheckOutput {
+    pub fn getHealthCheck(self: *Self, allocator: std.mem.Allocator, input: get_health_check.GetHealthCheckInput, options: CallOptions) !get_health_check.GetHealthCheckOutput {
         return get_health_check.execute(self, allocator, input, options);
     }
 
     /// Retrieves the number of health checks that are associated with the current
     /// Amazon Web Services account.
-    pub fn getHealthCheckCount(self: *Self, allocator: std.mem.Allocator, input: get_health_check_count.GetHealthCheckCountInput, options: get_health_check_count.Options) !get_health_check_count.GetHealthCheckCountOutput {
+    pub fn getHealthCheckCount(self: *Self, allocator: std.mem.Allocator, input: get_health_check_count.GetHealthCheckCountInput, options: CallOptions) !get_health_check_count.GetHealthCheckCountOutput {
         return get_health_check_count.execute(self, allocator, input, options);
     }
 
     /// Gets the reason that a specified health check failed most recently.
-    pub fn getHealthCheckLastFailureReason(self: *Self, allocator: std.mem.Allocator, input: get_health_check_last_failure_reason.GetHealthCheckLastFailureReasonInput, options: get_health_check_last_failure_reason.Options) !get_health_check_last_failure_reason.GetHealthCheckLastFailureReasonOutput {
+    pub fn getHealthCheckLastFailureReason(self: *Self, allocator: std.mem.Allocator, input: get_health_check_last_failure_reason.GetHealthCheckLastFailureReasonInput, options: CallOptions) !get_health_check_last_failure_reason.GetHealthCheckLastFailureReasonOutput {
         return get_health_check_last_failure_reason.execute(self, allocator, input, options);
     }
 
@@ -1083,7 +1084,7 @@ pub const Client = struct {
     /// support production use-cases with high query rates that require immediate
     /// and
     /// actionable responses.
-    pub fn getHealthCheckStatus(self: *Self, allocator: std.mem.Allocator, input: get_health_check_status.GetHealthCheckStatusInput, options: get_health_check_status.Options) !get_health_check_status.GetHealthCheckStatusOutput {
+    pub fn getHealthCheckStatus(self: *Self, allocator: std.mem.Allocator, input: get_health_check_status.GetHealthCheckStatusInput, options: CallOptions) !get_health_check_status.GetHealthCheckStatusOutput {
         return get_health_check_status.execute(self, allocator, input, options);
     }
 
@@ -1096,13 +1097,13 @@ pub const Client = struct {
     /// associations by Route 53 Profiles. To get the associations to a Profile,
     /// call the
     /// [ListProfileAssociations](https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53profiles_ListProfileAssociations.html) API.
-    pub fn getHostedZone(self: *Self, allocator: std.mem.Allocator, input: get_hosted_zone.GetHostedZoneInput, options: get_hosted_zone.Options) !get_hosted_zone.GetHostedZoneOutput {
+    pub fn getHostedZone(self: *Self, allocator: std.mem.Allocator, input: get_hosted_zone.GetHostedZoneInput, options: CallOptions) !get_hosted_zone.GetHostedZoneOutput {
         return get_hosted_zone.execute(self, allocator, input, options);
     }
 
     /// Retrieves the number of hosted zones that are associated with the current
     /// Amazon Web Services account.
-    pub fn getHostedZoneCount(self: *Self, allocator: std.mem.Allocator, input: get_hosted_zone_count.GetHostedZoneCountInput, options: get_hosted_zone_count.Options) !get_hosted_zone_count.GetHostedZoneCountOutput {
+    pub fn getHostedZoneCount(self: *Self, allocator: std.mem.Allocator, input: get_hosted_zone_count.GetHostedZoneCountInput, options: CallOptions) !get_hosted_zone_count.GetHostedZoneCountOutput {
         return get_hosted_zone_count.execute(self, allocator, input, options);
     }
 
@@ -1115,7 +1116,7 @@ pub const Client = struct {
     /// *Amazon Route 53 Developer Guide*. To request a higher limit,
     /// [open a
     /// case](https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-route53).
-    pub fn getHostedZoneLimit(self: *Self, allocator: std.mem.Allocator, input: get_hosted_zone_limit.GetHostedZoneLimitInput, options: get_hosted_zone_limit.Options) !get_hosted_zone_limit.GetHostedZoneLimitOutput {
+    pub fn getHostedZoneLimit(self: *Self, allocator: std.mem.Allocator, input: get_hosted_zone_limit.GetHostedZoneLimitInput, options: CallOptions) !get_hosted_zone_limit.GetHostedZoneLimitOutput {
         return get_hosted_zone_limit.execute(self, allocator, input, options);
     }
 
@@ -1124,14 +1125,14 @@ pub const Client = struct {
     /// For more information about DNS query logs, see
     /// [CreateQueryLoggingConfig](https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateQueryLoggingConfig.html) and [Logging DNS
     /// Queries](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html).
-    pub fn getQueryLoggingConfig(self: *Self, allocator: std.mem.Allocator, input: get_query_logging_config.GetQueryLoggingConfigInput, options: get_query_logging_config.Options) !get_query_logging_config.GetQueryLoggingConfigOutput {
+    pub fn getQueryLoggingConfig(self: *Self, allocator: std.mem.Allocator, input: get_query_logging_config.GetQueryLoggingConfigInput, options: CallOptions) !get_query_logging_config.GetQueryLoggingConfigOutput {
         return get_query_logging_config.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a specified reusable delegation set, including
     /// the four
     /// name servers that are assigned to the delegation set.
-    pub fn getReusableDelegationSet(self: *Self, allocator: std.mem.Allocator, input: get_reusable_delegation_set.GetReusableDelegationSetInput, options: get_reusable_delegation_set.Options) !get_reusable_delegation_set.GetReusableDelegationSetOutput {
+    pub fn getReusableDelegationSet(self: *Self, allocator: std.mem.Allocator, input: get_reusable_delegation_set.GetReusableDelegationSetInput, options: CallOptions) !get_reusable_delegation_set.GetReusableDelegationSetOutput {
         return get_reusable_delegation_set.execute(self, allocator, input, options);
     }
 
@@ -1144,7 +1145,7 @@ pub const Client = struct {
     /// *Amazon Route 53 Developer Guide*. To request a higher limit,
     /// [open a
     /// case](https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-route53).
-    pub fn getReusableDelegationSetLimit(self: *Self, allocator: std.mem.Allocator, input: get_reusable_delegation_set_limit.GetReusableDelegationSetLimitInput, options: get_reusable_delegation_set_limit.Options) !get_reusable_delegation_set_limit.GetReusableDelegationSetLimitOutput {
+    pub fn getReusableDelegationSetLimit(self: *Self, allocator: std.mem.Allocator, input: get_reusable_delegation_set_limit.GetReusableDelegationSetLimitInput, options: CallOptions) !get_reusable_delegation_set_limit.GetReusableDelegationSetLimitOutput {
         return get_reusable_delegation_set_limit.execute(self, allocator, input, options);
     }
 
@@ -1154,7 +1155,7 @@ pub const Client = struct {
     /// from
     /// `GetTrafficPolicy`, see
     /// [DeleteTrafficPolicy](https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteTrafficPolicy.html).
-    pub fn getTrafficPolicy(self: *Self, allocator: std.mem.Allocator, input: get_traffic_policy.GetTrafficPolicyInput, options: get_traffic_policy.Options) !get_traffic_policy.GetTrafficPolicyOutput {
+    pub fn getTrafficPolicy(self: *Self, allocator: std.mem.Allocator, input: get_traffic_policy.GetTrafficPolicyInput, options: CallOptions) !get_traffic_policy.GetTrafficPolicyOutput {
         return get_traffic_policy.execute(self, allocator, input, options);
     }
 
@@ -1169,33 +1170,33 @@ pub const Client = struct {
     ///
     /// In the Route 53 console, traffic policy instances are known as policy
     /// records.
-    pub fn getTrafficPolicyInstance(self: *Self, allocator: std.mem.Allocator, input: get_traffic_policy_instance.GetTrafficPolicyInstanceInput, options: get_traffic_policy_instance.Options) !get_traffic_policy_instance.GetTrafficPolicyInstanceOutput {
+    pub fn getTrafficPolicyInstance(self: *Self, allocator: std.mem.Allocator, input: get_traffic_policy_instance.GetTrafficPolicyInstanceInput, options: CallOptions) !get_traffic_policy_instance.GetTrafficPolicyInstanceOutput {
         return get_traffic_policy_instance.execute(self, allocator, input, options);
     }
 
     /// Gets the number of traffic policy instances that are associated with the
     /// current
     /// Amazon Web Services account.
-    pub fn getTrafficPolicyInstanceCount(self: *Self, allocator: std.mem.Allocator, input: get_traffic_policy_instance_count.GetTrafficPolicyInstanceCountInput, options: get_traffic_policy_instance_count.Options) !get_traffic_policy_instance_count.GetTrafficPolicyInstanceCountOutput {
+    pub fn getTrafficPolicyInstanceCount(self: *Self, allocator: std.mem.Allocator, input: get_traffic_policy_instance_count.GetTrafficPolicyInstanceCountInput, options: CallOptions) !get_traffic_policy_instance_count.GetTrafficPolicyInstanceCountOutput {
         return get_traffic_policy_instance_count.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of location objects and their CIDR blocks.
-    pub fn listCidrBlocks(self: *Self, allocator: std.mem.Allocator, input: list_cidr_blocks.ListCidrBlocksInput, options: list_cidr_blocks.Options) !list_cidr_blocks.ListCidrBlocksOutput {
+    pub fn listCidrBlocks(self: *Self, allocator: std.mem.Allocator, input: list_cidr_blocks.ListCidrBlocksInput, options: CallOptions) !list_cidr_blocks.ListCidrBlocksOutput {
         return list_cidr_blocks.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of CIDR collections in the Amazon Web Services
     /// account
     /// (metadata only).
-    pub fn listCidrCollections(self: *Self, allocator: std.mem.Allocator, input: list_cidr_collections.ListCidrCollectionsInput, options: list_cidr_collections.Options) !list_cidr_collections.ListCidrCollectionsOutput {
+    pub fn listCidrCollections(self: *Self, allocator: std.mem.Allocator, input: list_cidr_collections.ListCidrCollectionsInput, options: CallOptions) !list_cidr_collections.ListCidrCollectionsOutput {
         return list_cidr_collections.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of CIDR locations for the given collection
     /// (metadata only,
     /// does not include CIDR blocks).
-    pub fn listCidrLocations(self: *Self, allocator: std.mem.Allocator, input: list_cidr_locations.ListCidrLocationsInput, options: list_cidr_locations.Options) !list_cidr_locations.ListCidrLocationsOutput {
+    pub fn listCidrLocations(self: *Self, allocator: std.mem.Allocator, input: list_cidr_locations.ListCidrLocationsInput, options: CallOptions) !list_cidr_locations.ListCidrLocationsOutput {
         return list_cidr_locations.execute(self, allocator, input, options);
     }
 
@@ -1216,13 +1217,13 @@ pub const Client = struct {
     /// For a list of supported geolocation codes, see the
     /// [GeoLocation](https://docs.aws.amazon.com/Route53/latest/APIReference/API_GeoLocation.html) data
     /// type.
-    pub fn listGeoLocations(self: *Self, allocator: std.mem.Allocator, input: list_geo_locations.ListGeoLocationsInput, options: list_geo_locations.Options) !list_geo_locations.ListGeoLocationsOutput {
+    pub fn listGeoLocations(self: *Self, allocator: std.mem.Allocator, input: list_geo_locations.ListGeoLocationsInput, options: CallOptions) !list_geo_locations.ListGeoLocationsOutput {
         return list_geo_locations.execute(self, allocator, input, options);
     }
 
     /// Retrieve a list of the health checks that are associated with the current
     /// Amazon Web Services account.
-    pub fn listHealthChecks(self: *Self, allocator: std.mem.Allocator, input: list_health_checks.ListHealthChecksInput, options: list_health_checks.Options) !list_health_checks.ListHealthChecksOutput {
+    pub fn listHealthChecks(self: *Self, allocator: std.mem.Allocator, input: list_health_checks.ListHealthChecksInput, options: CallOptions) !list_health_checks.ListHealthChecksOutput {
         return list_health_checks.execute(self, allocator, input, options);
     }
 
@@ -1235,7 +1236,7 @@ pub const Client = struct {
     /// a lot of
     /// hosted zones, you can use the `maxitems` parameter to list them in groups of
     /// up to 100.
-    pub fn listHostedZones(self: *Self, allocator: std.mem.Allocator, input: list_hosted_zones.ListHostedZonesInput, options: list_hosted_zones.Options) !list_hosted_zones.ListHostedZonesOutput {
+    pub fn listHostedZones(self: *Self, allocator: std.mem.Allocator, input: list_hosted_zones.ListHostedZonesInput, options: CallOptions) !list_hosted_zones.ListHostedZonesOutput {
         return list_hosted_zones.execute(self, allocator, input, options);
     }
 
@@ -1302,7 +1303,7 @@ pub const Client = struct {
     /// and specify the value of `NextDNSName` and
     /// `NextHostedZoneId` in the `dnsname` and
     /// `hostedzoneid` parameters, respectively.
-    pub fn listHostedZonesByName(self: *Self, allocator: std.mem.Allocator, input: list_hosted_zones_by_name.ListHostedZonesByNameInput, options: list_hosted_zones_by_name.Options) !list_hosted_zones_by_name.ListHostedZonesByNameOutput {
+    pub fn listHostedZonesByName(self: *Self, allocator: std.mem.Allocator, input: list_hosted_zones_by_name.ListHostedZonesByNameInput, options: CallOptions) !list_hosted_zones_by_name.ListHostedZonesByNameOutput {
         return list_hosted_zones_by_name.execute(self, allocator, input, options);
     }
 
@@ -1349,7 +1350,7 @@ pub const Client = struct {
     /// For more information, see [Access
     /// Management](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
     /// in the *Amazon Web Services General Reference*.
-    pub fn listHostedZonesByVpc(self: *Self, allocator: std.mem.Allocator, input: list_hosted_zones_by_vpc.ListHostedZonesByVPCInput, options: list_hosted_zones_by_vpc.Options) !list_hosted_zones_by_vpc.ListHostedZonesByVPCOutput {
+    pub fn listHostedZonesByVpc(self: *Self, allocator: std.mem.Allocator, input: list_hosted_zones_by_vpc.ListHostedZonesByVPCInput, options: CallOptions) !list_hosted_zones_by_vpc.ListHostedZonesByVPCOutput {
         return list_hosted_zones_by_vpc.execute(self, allocator, input, options);
     }
 
@@ -1364,7 +1365,7 @@ pub const Client = struct {
     /// DNS query logs, appears in [Logging DNS
     /// Queries](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html) in
     /// the *Amazon Route 53 Developer Guide*.
-    pub fn listQueryLoggingConfigs(self: *Self, allocator: std.mem.Allocator, input: list_query_logging_configs.ListQueryLoggingConfigsInput, options: list_query_logging_configs.Options) !list_query_logging_configs.ListQueryLoggingConfigsOutput {
+    pub fn listQueryLoggingConfigs(self: *Self, allocator: std.mem.Allocator, input: list_query_logging_configs.ListQueryLoggingConfigsInput, options: CallOptions) !list_query_logging_configs.ListQueryLoggingConfigsOutput {
         return list_query_logging_configs.execute(self, allocator, input, options);
     }
 
@@ -1443,14 +1444,14 @@ pub const Client = struct {
     /// response. Then submit another `ListResourceRecordSets` request, and specify
     /// those values for `StartRecordName`, `StartRecordType`, and
     /// `StartRecordIdentifier`.
-    pub fn listResourceRecordSets(self: *Self, allocator: std.mem.Allocator, input: list_resource_record_sets.ListResourceRecordSetsInput, options: list_resource_record_sets.Options) !list_resource_record_sets.ListResourceRecordSetsOutput {
+    pub fn listResourceRecordSets(self: *Self, allocator: std.mem.Allocator, input: list_resource_record_sets.ListResourceRecordSetsInput, options: CallOptions) !list_resource_record_sets.ListResourceRecordSetsOutput {
         return list_resource_record_sets.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of the reusable delegation sets that are associated with
     /// the current
     /// Amazon Web Services account.
-    pub fn listReusableDelegationSets(self: *Self, allocator: std.mem.Allocator, input: list_reusable_delegation_sets.ListReusableDelegationSetsInput, options: list_reusable_delegation_sets.Options) !list_reusable_delegation_sets.ListReusableDelegationSetsOutput {
+    pub fn listReusableDelegationSets(self: *Self, allocator: std.mem.Allocator, input: list_reusable_delegation_sets.ListReusableDelegationSetsInput, options: CallOptions) !list_reusable_delegation_sets.ListReusableDelegationSetsOutput {
         return list_reusable_delegation_sets.execute(self, allocator, input, options);
     }
 
@@ -1459,7 +1460,7 @@ pub const Client = struct {
     /// For information about using tags for cost allocation, see [Using Cost
     /// Allocation
     /// Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *Billing and Cost Management User Guide*.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -1468,7 +1469,7 @@ pub const Client = struct {
     /// For information about using tags for cost allocation, see [Using Cost
     /// Allocation
     /// Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *Billing and Cost Management User Guide*.
-    pub fn listTagsForResources(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resources.ListTagsForResourcesInput, options: list_tags_for_resources.Options) !list_tags_for_resources.ListTagsForResourcesOutput {
+    pub fn listTagsForResources(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resources.ListTagsForResourcesInput, options: CallOptions) !list_tags_for_resources.ListTagsForResourcesOutput {
         return list_tags_for_resources.execute(self, allocator, input, options);
     }
 
@@ -1482,7 +1483,7 @@ pub const Client = struct {
     /// from
     /// `ListTrafficPolicies`, see
     /// [DeleteTrafficPolicy](https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteTrafficPolicy.html).
-    pub fn listTrafficPolicies(self: *Self, allocator: std.mem.Allocator, input: list_traffic_policies.ListTrafficPoliciesInput, options: list_traffic_policies.Options) !list_traffic_policies.ListTrafficPoliciesOutput {
+    pub fn listTrafficPolicies(self: *Self, allocator: std.mem.Allocator, input: list_traffic_policies.ListTrafficPoliciesInput, options: CallOptions) !list_traffic_policies.ListTrafficPoliciesOutput {
         return list_traffic_policies.execute(self, allocator, input, options);
     }
 
@@ -1500,7 +1501,7 @@ pub const Client = struct {
     /// policy instances, you can use the `MaxItems` parameter to list them in
     /// groups
     /// of up to 100.
-    pub fn listTrafficPolicyInstances(self: *Self, allocator: std.mem.Allocator, input: list_traffic_policy_instances.ListTrafficPolicyInstancesInput, options: list_traffic_policy_instances.Options) !list_traffic_policy_instances.ListTrafficPolicyInstancesOutput {
+    pub fn listTrafficPolicyInstances(self: *Self, allocator: std.mem.Allocator, input: list_traffic_policy_instances.ListTrafficPolicyInstancesInput, options: CallOptions) !list_traffic_policy_instances.ListTrafficPolicyInstancesOutput {
         return list_traffic_policy_instances.execute(self, allocator, input, options);
     }
 
@@ -1520,7 +1521,7 @@ pub const Client = struct {
     /// policy instances, you can use the `MaxItems` parameter to list them in
     /// groups
     /// of up to 100.
-    pub fn listTrafficPolicyInstancesByHostedZone(self: *Self, allocator: std.mem.Allocator, input: list_traffic_policy_instances_by_hosted_zone.ListTrafficPolicyInstancesByHostedZoneInput, options: list_traffic_policy_instances_by_hosted_zone.Options) !list_traffic_policy_instances_by_hosted_zone.ListTrafficPolicyInstancesByHostedZoneOutput {
+    pub fn listTrafficPolicyInstancesByHostedZone(self: *Self, allocator: std.mem.Allocator, input: list_traffic_policy_instances_by_hosted_zone.ListTrafficPolicyInstancesByHostedZoneInput, options: CallOptions) !list_traffic_policy_instances_by_hosted_zone.ListTrafficPolicyInstancesByHostedZoneOutput {
         return list_traffic_policy_instances_by_hosted_zone.execute(self, allocator, input, options);
     }
 
@@ -1540,7 +1541,7 @@ pub const Client = struct {
     /// policy instances, you can use the `MaxItems` parameter to list them in
     /// groups
     /// of up to 100.
-    pub fn listTrafficPolicyInstancesByPolicy(self: *Self, allocator: std.mem.Allocator, input: list_traffic_policy_instances_by_policy.ListTrafficPolicyInstancesByPolicyInput, options: list_traffic_policy_instances_by_policy.Options) !list_traffic_policy_instances_by_policy.ListTrafficPolicyInstancesByPolicyOutput {
+    pub fn listTrafficPolicyInstancesByPolicy(self: *Self, allocator: std.mem.Allocator, input: list_traffic_policy_instances_by_policy.ListTrafficPolicyInstancesByPolicyInput, options: CallOptions) !list_traffic_policy_instances_by_policy.ListTrafficPolicyInstancesByPolicyOutput {
         return list_traffic_policy_instances_by_policy.execute(self, allocator, input, options);
     }
 
@@ -1548,7 +1549,7 @@ pub const Client = struct {
     ///
     /// Traffic policy versions are listed in numerical order by
     /// `VersionNumber`.
-    pub fn listTrafficPolicyVersions(self: *Self, allocator: std.mem.Allocator, input: list_traffic_policy_versions.ListTrafficPolicyVersionsInput, options: list_traffic_policy_versions.Options) !list_traffic_policy_versions.ListTrafficPolicyVersionsOutput {
+    pub fn listTrafficPolicyVersions(self: *Self, allocator: std.mem.Allocator, input: list_traffic_policy_versions.ListTrafficPolicyVersionsInput, options: CallOptions) !list_traffic_policy_versions.ListTrafficPolicyVersionsOutput {
         return list_traffic_policy_versions.execute(self, allocator, input, options);
     }
 
@@ -1559,7 +1560,7 @@ pub const Client = struct {
     ///
     /// The response includes a `VPCs` element with a `VPC` child
     /// element for each VPC that can be associated with the hosted zone.
-    pub fn listVpcAssociationAuthorizations(self: *Self, allocator: std.mem.Allocator, input: list_vpc_association_authorizations.ListVPCAssociationAuthorizationsInput, options: list_vpc_association_authorizations.Options) !list_vpc_association_authorizations.ListVPCAssociationAuthorizationsOutput {
+    pub fn listVpcAssociationAuthorizations(self: *Self, allocator: std.mem.Allocator, input: list_vpc_association_authorizations.ListVPCAssociationAuthorizationsInput, options: CallOptions) !list_vpc_association_authorizations.ListVPCAssociationAuthorizationsOutput {
         return list_vpc_association_authorizations.execute(self, allocator, input, options);
     }
 
@@ -1577,7 +1578,7 @@ pub const Client = struct {
     /// servers of a subdomain that point to the parent name servers, those will not
     /// be
     /// returned.
-    pub fn testDnsAnswer(self: *Self, allocator: std.mem.Allocator, input: test_dns_answer.TestDNSAnswerInput, options: test_dns_answer.Options) !test_dns_answer.TestDNSAnswerOutput {
+    pub fn testDnsAnswer(self: *Self, allocator: std.mem.Allocator, input: test_dns_answer.TestDNSAnswerInput, options: CallOptions) !test_dns_answer.TestDNSAnswerOutput {
         return test_dns_answer.execute(self, allocator, input, options);
     }
 
@@ -1587,12 +1588,12 @@ pub const Client = struct {
     /// Updating, and Deleting Health
     /// Checks](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html) in the *Amazon Route 53
     /// Developer Guide*.
-    pub fn updateHealthCheck(self: *Self, allocator: std.mem.Allocator, input: update_health_check.UpdateHealthCheckInput, options: update_health_check.Options) !update_health_check.UpdateHealthCheckOutput {
+    pub fn updateHealthCheck(self: *Self, allocator: std.mem.Allocator, input: update_health_check.UpdateHealthCheckInput, options: CallOptions) !update_health_check.UpdateHealthCheckOutput {
         return update_health_check.execute(self, allocator, input, options);
     }
 
     /// Updates the comment for a specified hosted zone.
-    pub fn updateHostedZoneComment(self: *Self, allocator: std.mem.Allocator, input: update_hosted_zone_comment.UpdateHostedZoneCommentInput, options: update_hosted_zone_comment.Options) !update_hosted_zone_comment.UpdateHostedZoneCommentOutput {
+    pub fn updateHostedZoneComment(self: *Self, allocator: std.mem.Allocator, input: update_hosted_zone_comment.UpdateHostedZoneCommentInput, options: CallOptions) !update_hosted_zone_comment.UpdateHostedZoneCommentOutput {
         return update_hosted_zone_comment.execute(self, allocator, input, options);
     }
 
@@ -1602,12 +1603,12 @@ pub const Client = struct {
     ///
     /// Accelerated recovery enables you to update DNS records in your public hosted
     /// zone even when the us-east-1 region is unavailable.
-    pub fn updateHostedZoneFeatures(self: *Self, allocator: std.mem.Allocator, input: update_hosted_zone_features.UpdateHostedZoneFeaturesInput, options: update_hosted_zone_features.Options) !update_hosted_zone_features.UpdateHostedZoneFeaturesOutput {
+    pub fn updateHostedZoneFeatures(self: *Self, allocator: std.mem.Allocator, input: update_hosted_zone_features.UpdateHostedZoneFeaturesInput, options: CallOptions) !update_hosted_zone_features.UpdateHostedZoneFeaturesOutput {
         return update_hosted_zone_features.execute(self, allocator, input, options);
     }
 
     /// Updates the comment for a specified traffic policy version.
-    pub fn updateTrafficPolicyComment(self: *Self, allocator: std.mem.Allocator, input: update_traffic_policy_comment.UpdateTrafficPolicyCommentInput, options: update_traffic_policy_comment.Options) !update_traffic_policy_comment.UpdateTrafficPolicyCommentOutput {
+    pub fn updateTrafficPolicyComment(self: *Self, allocator: std.mem.Allocator, input: update_traffic_policy_comment.UpdateTrafficPolicyCommentInput, options: CallOptions) !update_traffic_policy_comment.UpdateTrafficPolicyCommentOutput {
         return update_traffic_policy_comment.execute(self, allocator, input, options);
     }
 
@@ -1645,7 +1646,7 @@ pub const Client = struct {
     ///
     /// * Route 53 deletes the old group of resource record sets that are associated
     /// with the root resource record set name.
-    pub fn updateTrafficPolicyInstance(self: *Self, allocator: std.mem.Allocator, input: update_traffic_policy_instance.UpdateTrafficPolicyInstanceInput, options: update_traffic_policy_instance.Options) !update_traffic_policy_instance.UpdateTrafficPolicyInstanceOutput {
+    pub fn updateTrafficPolicyInstance(self: *Self, allocator: std.mem.Allocator, input: update_traffic_policy_instance.UpdateTrafficPolicyInstanceInput, options: CallOptions) !update_traffic_policy_instance.UpdateTrafficPolicyInstanceOutput {
         return update_traffic_policy_instance.execute(self, allocator, input, options);
     }
 

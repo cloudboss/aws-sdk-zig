@@ -55,6 +55,7 @@ const update_managed_rule_set_version_expiry_date = @import("update_managed_rule
 const update_regex_pattern_set = @import("update_regex_pattern_set.zig");
 const update_rule_group = @import("update_rule_group.zig");
 const update_web_acl = @import("update_web_acl.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -121,7 +122,7 @@ pub const Client = struct {
     /// * After you add an IP address to an IP set that is in use in a blocking
     ///   rule, the new address might be blocked in one area while still allowed in
     ///   another.
-    pub fn associateWebAcl(self: *Self, allocator: std.mem.Allocator, input: associate_web_acl.AssociateWebACLInput, options: associate_web_acl.Options) !associate_web_acl.AssociateWebACLOutput {
+    pub fn associateWebAcl(self: *Self, allocator: std.mem.Allocator, input: associate_web_acl.AssociateWebACLInput, options: CallOptions) !associate_web_acl.AssociateWebACLOutput {
         return associate_web_acl.execute(self, allocator, input, options);
     }
 
@@ -142,7 +143,7 @@ pub const Client = struct {
     /// web ACL capacity units
     /// (WCU)](https://docs.aws.amazon.com/waf/latest/developerguide/aws-waf-capacity-units.html)
     /// in the *WAF Developer Guide*.
-    pub fn checkCapacity(self: *Self, allocator: std.mem.Allocator, input: check_capacity.CheckCapacityInput, options: check_capacity.Options) !check_capacity.CheckCapacityOutput {
+    pub fn checkCapacity(self: *Self, allocator: std.mem.Allocator, input: check_capacity.CheckCapacityInput, options: CallOptions) !check_capacity.CheckCapacityOutput {
         return check_capacity.execute(self, allocator, input, options);
     }
 
@@ -159,7 +160,7 @@ pub const Client = struct {
     /// You can use a single key for up to 5 domains. After you generate a key, you
     /// can copy it for use in your JavaScript
     /// integration.
-    pub fn createApiKey(self: *Self, allocator: std.mem.Allocator, input: create_api_key.CreateAPIKeyInput, options: create_api_key.Options) !create_api_key.CreateAPIKeyOutput {
+    pub fn createApiKey(self: *Self, allocator: std.mem.Allocator, input: create_api_key.CreateAPIKeyInput, options: CallOptions) !create_api_key.CreateAPIKeyOutput {
         return create_api_key.execute(self, allocator, input, options);
     }
 
@@ -169,14 +170,14 @@ pub const Client = struct {
     /// receiving a lot of requests from a ranges of IP addresses, you can configure
     /// WAF to
     /// block them using an IPSet that lists those IP addresses.
-    pub fn createIpSet(self: *Self, allocator: std.mem.Allocator, input: create_ip_set.CreateIPSetInput, options: create_ip_set.Options) !create_ip_set.CreateIPSetOutput {
+    pub fn createIpSet(self: *Self, allocator: std.mem.Allocator, input: create_ip_set.CreateIPSetInput, options: CallOptions) !create_ip_set.CreateIPSetOutput {
         return create_ip_set.execute(self, allocator, input, options);
     }
 
     /// Creates a RegexPatternSet, which you reference in a
     /// RegexPatternSetReferenceStatement, to have WAF inspect a web request
     /// component for the specified patterns.
-    pub fn createRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: create_regex_pattern_set.CreateRegexPatternSetInput, options: create_regex_pattern_set.Options) !create_regex_pattern_set.CreateRegexPatternSetOutput {
+    pub fn createRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: create_regex_pattern_set.CreateRegexPatternSetInput, options: CallOptions) !create_regex_pattern_set.CreateRegexPatternSetOutput {
         return create_regex_pattern_set.execute(self, allocator, input, options);
     }
 
@@ -187,7 +188,7 @@ pub const Client = struct {
     /// define an immutable capacity limit. If you update a rule group, you must
     /// stay within the capacity. This allows others to reuse the rule group with
     /// confidence in its capacity requirements.
-    pub fn createRuleGroup(self: *Self, allocator: std.mem.Allocator, input: create_rule_group.CreateRuleGroupInput, options: create_rule_group.Options) !create_rule_group.CreateRuleGroupOutput {
+    pub fn createRuleGroup(self: *Self, allocator: std.mem.Allocator, input: create_rule_group.CreateRuleGroupInput, options: CallOptions) !create_rule_group.CreateRuleGroupOutput {
         return create_rule_group.execute(self, allocator, input, options);
     }
 
@@ -204,7 +205,7 @@ pub const Client = struct {
     /// distribution, Amazon API Gateway REST API, Application Load Balancer,
     /// AppSync GraphQL API, Amazon Cognito user pool, App Runner service, Amplify
     /// application, and Amazon Web Services Verified Access instance.
-    pub fn createWebAcl(self: *Self, allocator: std.mem.Allocator, input: create_web_acl.CreateWebACLInput, options: create_web_acl.Options) !create_web_acl.CreateWebACLOutput {
+    pub fn createWebAcl(self: *Self, allocator: std.mem.Allocator, input: create_web_acl.CreateWebACLInput, options: CallOptions) !create_web_acl.CreateWebACLOutput {
         return create_web_acl.execute(self, allocator, input, options);
     }
 
@@ -212,7 +213,7 @@ pub const Client = struct {
     ///
     /// After you delete a key, it can take up to 24 hours for WAF to disallow use
     /// of the key in all regions.
-    pub fn deleteApiKey(self: *Self, allocator: std.mem.Allocator, input: delete_api_key.DeleteAPIKeyInput, options: delete_api_key.Options) !delete_api_key.DeleteAPIKeyOutput {
+    pub fn deleteApiKey(self: *Self, allocator: std.mem.Allocator, input: delete_api_key.DeleteAPIKeyInput, options: CallOptions) !delete_api_key.DeleteAPIKeyOutput {
         return delete_api_key.execute(self, allocator, input, options);
     }
 
@@ -221,34 +222,34 @@ pub const Client = struct {
     ///
     /// You can only use this if `ManagedByFirewallManager` and
     /// `RetrofittedByFirewallManager` are both false in the web ACL.
-    pub fn deleteFirewallManagerRuleGroups(self: *Self, allocator: std.mem.Allocator, input: delete_firewall_manager_rule_groups.DeleteFirewallManagerRuleGroupsInput, options: delete_firewall_manager_rule_groups.Options) !delete_firewall_manager_rule_groups.DeleteFirewallManagerRuleGroupsOutput {
+    pub fn deleteFirewallManagerRuleGroups(self: *Self, allocator: std.mem.Allocator, input: delete_firewall_manager_rule_groups.DeleteFirewallManagerRuleGroupsInput, options: CallOptions) !delete_firewall_manager_rule_groups.DeleteFirewallManagerRuleGroupsOutput {
         return delete_firewall_manager_rule_groups.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified IPSet.
-    pub fn deleteIpSet(self: *Self, allocator: std.mem.Allocator, input: delete_ip_set.DeleteIPSetInput, options: delete_ip_set.Options) !delete_ip_set.DeleteIPSetOutput {
+    pub fn deleteIpSet(self: *Self, allocator: std.mem.Allocator, input: delete_ip_set.DeleteIPSetInput, options: CallOptions) !delete_ip_set.DeleteIPSetOutput {
         return delete_ip_set.execute(self, allocator, input, options);
     }
 
     /// Deletes the LoggingConfiguration from the specified web ACL.
-    pub fn deleteLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_logging_configuration.DeleteLoggingConfigurationInput, options: delete_logging_configuration.Options) !delete_logging_configuration.DeleteLoggingConfigurationOutput {
+    pub fn deleteLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_logging_configuration.DeleteLoggingConfigurationInput, options: CallOptions) !delete_logging_configuration.DeleteLoggingConfigurationOutput {
         return delete_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Permanently deletes an IAM policy from the specified rule group.
     ///
     /// You must be the owner of the rule group to perform this operation.
-    pub fn deletePermissionPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_permission_policy.DeletePermissionPolicyInput, options: delete_permission_policy.Options) !delete_permission_policy.DeletePermissionPolicyOutput {
+    pub fn deletePermissionPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_permission_policy.DeletePermissionPolicyInput, options: CallOptions) !delete_permission_policy.DeletePermissionPolicyOutput {
         return delete_permission_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified RegexPatternSet.
-    pub fn deleteRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: delete_regex_pattern_set.DeleteRegexPatternSetInput, options: delete_regex_pattern_set.Options) !delete_regex_pattern_set.DeleteRegexPatternSetOutput {
+    pub fn deleteRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: delete_regex_pattern_set.DeleteRegexPatternSetInput, options: CallOptions) !delete_regex_pattern_set.DeleteRegexPatternSetOutput {
         return delete_regex_pattern_set.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified RuleGroup.
-    pub fn deleteRuleGroup(self: *Self, allocator: std.mem.Allocator, input: delete_rule_group.DeleteRuleGroupInput, options: delete_rule_group.Options) !delete_rule_group.DeleteRuleGroupOutput {
+    pub fn deleteRuleGroup(self: *Self, allocator: std.mem.Allocator, input: delete_rule_group.DeleteRuleGroupInput, options: CallOptions) !delete_rule_group.DeleteRuleGroupOutput {
         return delete_rule_group.execute(self, allocator, input, options);
     }
 
@@ -278,25 +279,25 @@ pub const Client = struct {
     /// in the *Amazon CloudFront API Reference*.
     ///
     /// * For all other resources, call DisassociateWebACL.
-    pub fn deleteWebAcl(self: *Self, allocator: std.mem.Allocator, input: delete_web_acl.DeleteWebACLInput, options: delete_web_acl.Options) !delete_web_acl.DeleteWebACLOutput {
+    pub fn deleteWebAcl(self: *Self, allocator: std.mem.Allocator, input: delete_web_acl.DeleteWebACLInput, options: CallOptions) !delete_web_acl.DeleteWebACLOutput {
         return delete_web_acl.execute(self, allocator, input, options);
     }
 
     /// Provides high-level information for the Amazon Web Services Managed Rules
     /// rule groups and Amazon Web Services Marketplace managed rule groups.
-    pub fn describeAllManagedProducts(self: *Self, allocator: std.mem.Allocator, input: describe_all_managed_products.DescribeAllManagedProductsInput, options: describe_all_managed_products.Options) !describe_all_managed_products.DescribeAllManagedProductsOutput {
+    pub fn describeAllManagedProducts(self: *Self, allocator: std.mem.Allocator, input: describe_all_managed_products.DescribeAllManagedProductsInput, options: CallOptions) !describe_all_managed_products.DescribeAllManagedProductsOutput {
         return describe_all_managed_products.execute(self, allocator, input, options);
     }
 
     /// Provides high-level information for the managed rule groups owned by a
     /// specific vendor.
-    pub fn describeManagedProductsByVendor(self: *Self, allocator: std.mem.Allocator, input: describe_managed_products_by_vendor.DescribeManagedProductsByVendorInput, options: describe_managed_products_by_vendor.Options) !describe_managed_products_by_vendor.DescribeManagedProductsByVendorOutput {
+    pub fn describeManagedProductsByVendor(self: *Self, allocator: std.mem.Allocator, input: describe_managed_products_by_vendor.DescribeManagedProductsByVendorInput, options: CallOptions) !describe_managed_products_by_vendor.DescribeManagedProductsByVendorOutput {
         return describe_managed_products_by_vendor.execute(self, allocator, input, options);
     }
 
     /// Provides high-level information for a managed rule group, including
     /// descriptions of the rules.
-    pub fn describeManagedRuleGroup(self: *Self, allocator: std.mem.Allocator, input: describe_managed_rule_group.DescribeManagedRuleGroupInput, options: describe_managed_rule_group.Options) !describe_managed_rule_group.DescribeManagedRuleGroupOutput {
+    pub fn describeManagedRuleGroup(self: *Self, allocator: std.mem.Allocator, input: describe_managed_rule_group.DescribeManagedRuleGroupInput, options: CallOptions) !describe_managed_rule_group.DescribeManagedRuleGroupOutput {
         return describe_managed_rule_group.execute(self, allocator, input, options);
     }
 
@@ -314,7 +315,7 @@ pub const Client = struct {
     /// type.
     /// For details, see [Permissions for
     /// DisassociateWebACL](https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-DisassociateWebACL) in the *WAF Developer Guide*.
-    pub fn disassociateWebAcl(self: *Self, allocator: std.mem.Allocator, input: disassociate_web_acl.DisassociateWebACLInput, options: disassociate_web_acl.Options) !disassociate_web_acl.DisassociateWebACLOutput {
+    pub fn disassociateWebAcl(self: *Self, allocator: std.mem.Allocator, input: disassociate_web_acl.DisassociateWebACLInput, options: CallOptions) !disassociate_web_acl.DisassociateWebACLOutput {
         return disassociate_web_acl.execute(self, allocator, input, options);
     }
 
@@ -326,7 +327,7 @@ pub const Client = struct {
     /// requests from a mobile device to WAF. For more information, see
     /// [WAF client application
     /// integration](https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html) in the *WAF Developer Guide*.
-    pub fn generateMobileSdkReleaseUrl(self: *Self, allocator: std.mem.Allocator, input: generate_mobile_sdk_release_url.GenerateMobileSdkReleaseUrlInput, options: generate_mobile_sdk_release_url.Options) !generate_mobile_sdk_release_url.GenerateMobileSdkReleaseUrlOutput {
+    pub fn generateMobileSdkReleaseUrl(self: *Self, allocator: std.mem.Allocator, input: generate_mobile_sdk_release_url.GenerateMobileSdkReleaseUrlInput, options: CallOptions) !generate_mobile_sdk_release_url.GenerateMobileSdkReleaseUrlOutput {
         return generate_mobile_sdk_release_url.execute(self, allocator, input, options);
     }
 
@@ -340,17 +341,17 @@ pub const Client = struct {
     /// For more information about the CAPTCHA JavaScript integration, see [WAF
     /// client application
     /// integration](https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html) in the *WAF Developer Guide*.
-    pub fn getDecryptedApiKey(self: *Self, allocator: std.mem.Allocator, input: get_decrypted_api_key.GetDecryptedAPIKeyInput, options: get_decrypted_api_key.Options) !get_decrypted_api_key.GetDecryptedAPIKeyOutput {
+    pub fn getDecryptedApiKey(self: *Self, allocator: std.mem.Allocator, input: get_decrypted_api_key.GetDecryptedAPIKeyInput, options: CallOptions) !get_decrypted_api_key.GetDecryptedAPIKeyOutput {
         return get_decrypted_api_key.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified IPSet.
-    pub fn getIpSet(self: *Self, allocator: std.mem.Allocator, input: get_ip_set.GetIPSetInput, options: get_ip_set.Options) !get_ip_set.GetIPSetOutput {
+    pub fn getIpSet(self: *Self, allocator: std.mem.Allocator, input: get_ip_set.GetIPSetInput, options: CallOptions) !get_ip_set.GetIPSetOutput {
         return get_ip_set.execute(self, allocator, input, options);
     }
 
     /// Returns the LoggingConfiguration for the specified web ACL.
-    pub fn getLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_logging_configuration.GetLoggingConfigurationInput, options: get_logging_configuration.Options) !get_logging_configuration.GetLoggingConfigurationOutput {
+    pub fn getLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_logging_configuration.GetLoggingConfigurationInput, options: CallOptions) !get_logging_configuration.GetLoggingConfigurationOutput {
         return get_logging_configuration.execute(self, allocator, input, options);
     }
 
@@ -363,7 +364,7 @@ pub const Client = struct {
     /// of your versioned managed rule group offerings for your customers. The APIs
     /// are `ListManagedRuleSets`, `GetManagedRuleSet`, `PutManagedRuleSetVersions`,
     /// and `UpdateManagedRuleSetVersionExpiryDate`.
-    pub fn getManagedRuleSet(self: *Self, allocator: std.mem.Allocator, input: get_managed_rule_set.GetManagedRuleSetInput, options: get_managed_rule_set.Options) !get_managed_rule_set.GetManagedRuleSetOutput {
+    pub fn getManagedRuleSet(self: *Self, allocator: std.mem.Allocator, input: get_managed_rule_set.GetManagedRuleSetInput, options: CallOptions) !get_managed_rule_set.GetManagedRuleSetOutput {
         return get_managed_rule_set.execute(self, allocator, input, options);
     }
 
@@ -376,14 +377,14 @@ pub const Client = struct {
     /// requests from a mobile device to WAF. For more information, see
     /// [WAF client application
     /// integration](https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html) in the *WAF Developer Guide*.
-    pub fn getMobileSdkRelease(self: *Self, allocator: std.mem.Allocator, input: get_mobile_sdk_release.GetMobileSdkReleaseInput, options: get_mobile_sdk_release.Options) !get_mobile_sdk_release.GetMobileSdkReleaseOutput {
+    pub fn getMobileSdkRelease(self: *Self, allocator: std.mem.Allocator, input: get_mobile_sdk_release.GetMobileSdkReleaseInput, options: CallOptions) !get_mobile_sdk_release.GetMobileSdkReleaseOutput {
         return get_mobile_sdk_release.execute(self, allocator, input, options);
     }
 
     /// Returns the IAM policy that is attached to the specified rule group.
     ///
     /// You must be the owner of the rule group to perform this operation.
-    pub fn getPermissionPolicy(self: *Self, allocator: std.mem.Allocator, input: get_permission_policy.GetPermissionPolicyInput, options: get_permission_policy.Options) !get_permission_policy.GetPermissionPolicyOutput {
+    pub fn getPermissionPolicy(self: *Self, allocator: std.mem.Allocator, input: get_permission_policy.GetPermissionPolicyInput, options: CallOptions) !get_permission_policy.GetPermissionPolicyOutput {
         return get_permission_policy.execute(self, allocator, input, options);
     }
 
@@ -419,17 +420,17 @@ pub const Client = struct {
     /// monitors web requests and manages keys for this second usage completely
     /// independent of your
     /// first.
-    pub fn getRateBasedStatementManagedKeys(self: *Self, allocator: std.mem.Allocator, input: get_rate_based_statement_managed_keys.GetRateBasedStatementManagedKeysInput, options: get_rate_based_statement_managed_keys.Options) !get_rate_based_statement_managed_keys.GetRateBasedStatementManagedKeysOutput {
+    pub fn getRateBasedStatementManagedKeys(self: *Self, allocator: std.mem.Allocator, input: get_rate_based_statement_managed_keys.GetRateBasedStatementManagedKeysInput, options: CallOptions) !get_rate_based_statement_managed_keys.GetRateBasedStatementManagedKeysOutput {
         return get_rate_based_statement_managed_keys.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified RegexPatternSet.
-    pub fn getRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: get_regex_pattern_set.GetRegexPatternSetInput, options: get_regex_pattern_set.Options) !get_regex_pattern_set.GetRegexPatternSetOutput {
+    pub fn getRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: get_regex_pattern_set.GetRegexPatternSetInput, options: CallOptions) !get_regex_pattern_set.GetRegexPatternSetOutput {
         return get_regex_pattern_set.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified RuleGroup.
-    pub fn getRuleGroup(self: *Self, allocator: std.mem.Allocator, input: get_rule_group.GetRuleGroupInput, options: get_rule_group.Options) !get_rule_group.GetRuleGroupOutput {
+    pub fn getRuleGroup(self: *Self, allocator: std.mem.Allocator, input: get_rule_group.GetRuleGroupInput, options: CallOptions) !get_rule_group.GetRuleGroupOutput {
         return get_rule_group.execute(self, allocator, input, options);
     }
 
@@ -450,12 +451,12 @@ pub const Client = struct {
     /// an updated time range. This new time range indicates the actual period
     /// during which WAF
     /// selected the requests in the sample.
-    pub fn getSampledRequests(self: *Self, allocator: std.mem.Allocator, input: get_sampled_requests.GetSampledRequestsInput, options: get_sampled_requests.Options) !get_sampled_requests.GetSampledRequestsOutput {
+    pub fn getSampledRequests(self: *Self, allocator: std.mem.Allocator, input: get_sampled_requests.GetSampledRequestsInput, options: CallOptions) !get_sampled_requests.GetSampledRequestsOutput {
         return get_sampled_requests.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified WebACL.
-    pub fn getWebAcl(self: *Self, allocator: std.mem.Allocator, input: get_web_acl.GetWebACLInput, options: get_web_acl.Options) !get_web_acl.GetWebACLOutput {
+    pub fn getWebAcl(self: *Self, allocator: std.mem.Allocator, input: get_web_acl.GetWebACLInput, options: CallOptions) !get_web_acl.GetWebACLOutput {
         return get_web_acl.execute(self, allocator, input, options);
     }
 
@@ -478,7 +479,7 @@ pub const Client = struct {
     /// type.
     /// For details, see [Permissions for
     /// GetWebACLForResource](https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-GetWebACLForResource) in the *WAF Developer Guide*.
-    pub fn getWebAclForResource(self: *Self, allocator: std.mem.Allocator, input: get_web_acl_for_resource.GetWebACLForResourceInput, options: get_web_acl_for_resource.Options) !get_web_acl_for_resource.GetWebACLForResourceOutput {
+    pub fn getWebAclForResource(self: *Self, allocator: std.mem.Allocator, input: get_web_acl_for_resource.GetWebACLForResourceInput, options: CallOptions) !get_web_acl_for_resource.GetWebACLForResourceOutput {
         return get_web_acl_for_resource.execute(self, allocator, input, options);
     }
 
@@ -492,13 +493,13 @@ pub const Client = struct {
     /// For more information about the CAPTCHA JavaScript integration, see [WAF
     /// client application
     /// integration](https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html) in the *WAF Developer Guide*.
-    pub fn listApiKeys(self: *Self, allocator: std.mem.Allocator, input: list_api_keys.ListAPIKeysInput, options: list_api_keys.Options) !list_api_keys.ListAPIKeysOutput {
+    pub fn listApiKeys(self: *Self, allocator: std.mem.Allocator, input: list_api_keys.ListAPIKeysInput, options: CallOptions) !list_api_keys.ListAPIKeysOutput {
         return list_api_keys.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the available versions for the specified managed rule
     /// group.
-    pub fn listAvailableManagedRuleGroupVersions(self: *Self, allocator: std.mem.Allocator, input: list_available_managed_rule_group_versions.ListAvailableManagedRuleGroupVersionsInput, options: list_available_managed_rule_group_versions.Options) !list_available_managed_rule_group_versions.ListAvailableManagedRuleGroupVersionsOutput {
+    pub fn listAvailableManagedRuleGroupVersions(self: *Self, allocator: std.mem.Allocator, input: list_available_managed_rule_group_versions.ListAvailableManagedRuleGroupVersionsInput, options: CallOptions) !list_available_managed_rule_group_versions.ListAvailableManagedRuleGroupVersionsOutput {
         return list_available_managed_rule_group_versions.execute(self, allocator, input, options);
     }
 
@@ -507,18 +508,18 @@ pub const Client = struct {
     /// includes all Amazon Web Services Managed Rules rule groups and all of the
     /// Amazon Web Services Marketplace managed rule groups that you're
     /// subscribed to.
-    pub fn listAvailableManagedRuleGroups(self: *Self, allocator: std.mem.Allocator, input: list_available_managed_rule_groups.ListAvailableManagedRuleGroupsInput, options: list_available_managed_rule_groups.Options) !list_available_managed_rule_groups.ListAvailableManagedRuleGroupsOutput {
+    pub fn listAvailableManagedRuleGroups(self: *Self, allocator: std.mem.Allocator, input: list_available_managed_rule_groups.ListAvailableManagedRuleGroupsInput, options: CallOptions) !list_available_managed_rule_groups.ListAvailableManagedRuleGroupsOutput {
         return list_available_managed_rule_groups.execute(self, allocator, input, options);
     }
 
     /// Retrieves an array of IPSetSummary objects for the IP sets that you
     /// manage.
-    pub fn listIpSets(self: *Self, allocator: std.mem.Allocator, input: list_ip_sets.ListIPSetsInput, options: list_ip_sets.Options) !list_ip_sets.ListIPSetsOutput {
+    pub fn listIpSets(self: *Self, allocator: std.mem.Allocator, input: list_ip_sets.ListIPSetsInput, options: CallOptions) !list_ip_sets.ListIPSetsOutput {
         return list_ip_sets.execute(self, allocator, input, options);
     }
 
     /// Retrieves an array of your LoggingConfiguration objects.
-    pub fn listLoggingConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_logging_configurations.ListLoggingConfigurationsInput, options: list_logging_configurations.Options) !list_logging_configurations.ListLoggingConfigurationsOutput {
+    pub fn listLoggingConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_logging_configurations.ListLoggingConfigurationsInput, options: CallOptions) !list_logging_configurations.ListLoggingConfigurationsOutput {
         return list_logging_configurations.execute(self, allocator, input, options);
     }
 
@@ -531,7 +532,7 @@ pub const Client = struct {
     /// of your versioned managed rule group offerings for your customers. The APIs
     /// are `ListManagedRuleSets`, `GetManagedRuleSet`, `PutManagedRuleSetVersions`,
     /// and `UpdateManagedRuleSetVersionExpiryDate`.
-    pub fn listManagedRuleSets(self: *Self, allocator: std.mem.Allocator, input: list_managed_rule_sets.ListManagedRuleSetsInput, options: list_managed_rule_sets.Options) !list_managed_rule_sets.ListManagedRuleSetsOutput {
+    pub fn listManagedRuleSets(self: *Self, allocator: std.mem.Allocator, input: list_managed_rule_sets.ListManagedRuleSetsInput, options: CallOptions) !list_managed_rule_sets.ListManagedRuleSetsOutput {
         return list_managed_rule_sets.execute(self, allocator, input, options);
     }
 
@@ -544,13 +545,13 @@ pub const Client = struct {
     /// requests from a mobile device to WAF. For more information, see
     /// [WAF client application
     /// integration](https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html) in the *WAF Developer Guide*.
-    pub fn listMobileSdkReleases(self: *Self, allocator: std.mem.Allocator, input: list_mobile_sdk_releases.ListMobileSdkReleasesInput, options: list_mobile_sdk_releases.Options) !list_mobile_sdk_releases.ListMobileSdkReleasesOutput {
+    pub fn listMobileSdkReleases(self: *Self, allocator: std.mem.Allocator, input: list_mobile_sdk_releases.ListMobileSdkReleasesInput, options: CallOptions) !list_mobile_sdk_releases.ListMobileSdkReleasesOutput {
         return list_mobile_sdk_releases.execute(self, allocator, input, options);
     }
 
     /// Retrieves an array of RegexPatternSetSummary objects for the regex
     /// pattern sets that you manage.
-    pub fn listRegexPatternSets(self: *Self, allocator: std.mem.Allocator, input: list_regex_pattern_sets.ListRegexPatternSetsInput, options: list_regex_pattern_sets.Options) !list_regex_pattern_sets.ListRegexPatternSetsOutput {
+    pub fn listRegexPatternSets(self: *Self, allocator: std.mem.Allocator, input: list_regex_pattern_sets.ListRegexPatternSetsInput, options: CallOptions) !list_regex_pattern_sets.ListRegexPatternSetsOutput {
         return list_regex_pattern_sets.execute(self, allocator, input, options);
     }
 
@@ -569,13 +570,13 @@ pub const Client = struct {
     /// type.
     /// For details, see [Permissions for
     /// ListResourcesForWebACL](https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-ListResourcesForWebACL) in the *WAF Developer Guide*.
-    pub fn listResourcesForWebAcl(self: *Self, allocator: std.mem.Allocator, input: list_resources_for_web_acl.ListResourcesForWebACLInput, options: list_resources_for_web_acl.Options) !list_resources_for_web_acl.ListResourcesForWebACLOutput {
+    pub fn listResourcesForWebAcl(self: *Self, allocator: std.mem.Allocator, input: list_resources_for_web_acl.ListResourcesForWebACLInput, options: CallOptions) !list_resources_for_web_acl.ListResourcesForWebACLOutput {
         return list_resources_for_web_acl.execute(self, allocator, input, options);
     }
 
     /// Retrieves an array of RuleGroupSummary objects for the rule groups
     /// that you manage.
-    pub fn listRuleGroups(self: *Self, allocator: std.mem.Allocator, input: list_rule_groups.ListRuleGroupsInput, options: list_rule_groups.Options) !list_rule_groups.ListRuleGroupsOutput {
+    pub fn listRuleGroups(self: *Self, allocator: std.mem.Allocator, input: list_rule_groups.ListRuleGroupsInput, options: CallOptions) !list_rule_groups.ListRuleGroupsOutput {
         return list_rule_groups.execute(self, allocator, input, options);
     }
 
@@ -593,13 +594,13 @@ pub const Client = struct {
     /// groups, IP sets, and regex pattern sets. You can't manage or view tags
     /// through the WAF
     /// console.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Retrieves an array of WebACLSummary objects for the web ACLs that you
     /// manage.
-    pub fn listWebAcLs(self: *Self, allocator: std.mem.Allocator, input: list_web_ac_ls.ListWebACLsInput, options: list_web_ac_ls.Options) !list_web_ac_ls.ListWebACLsOutput {
+    pub fn listWebAcLs(self: *Self, allocator: std.mem.Allocator, input: list_web_ac_ls.ListWebACLsInput, options: CallOptions) !list_web_ac_ls.ListWebACLsOutput {
         return list_web_ac_ls.execute(self, allocator, input, options);
     }
 
@@ -655,7 +656,7 @@ pub const Client = struct {
     /// [Logging web ACL traffic
     /// information](https://docs.aws.amazon.com/waf/latest/developerguide/logging.html)
     /// in the *WAF Developer Guide*.
-    pub fn putLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_logging_configuration.PutLoggingConfigurationInput, options: put_logging_configuration.Options) !put_logging_configuration.PutLoggingConfigurationOutput {
+    pub fn putLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_logging_configuration.PutLoggingConfigurationInput, options: CallOptions) !put_logging_configuration.PutLoggingConfigurationOutput {
         return put_logging_configuration.execute(self, allocator, input, options);
     }
 
@@ -683,7 +684,7 @@ pub const Client = struct {
     ///
     /// To initiate the expiration of a managed rule group version, use
     /// UpdateManagedRuleSetVersionExpiryDate.
-    pub fn putManagedRuleSetVersions(self: *Self, allocator: std.mem.Allocator, input: put_managed_rule_set_versions.PutManagedRuleSetVersionsInput, options: put_managed_rule_set_versions.Options) !put_managed_rule_set_versions.PutManagedRuleSetVersionsOutput {
+    pub fn putManagedRuleSetVersions(self: *Self, allocator: std.mem.Allocator, input: put_managed_rule_set_versions.PutManagedRuleSetVersionsInput, options: CallOptions) !put_managed_rule_set_versions.PutManagedRuleSetVersionsOutput {
         return put_managed_rule_set_versions.execute(self, allocator, input, options);
     }
 
@@ -707,7 +708,7 @@ pub const Client = struct {
     /// and you can reference it in `CreateWebACL` and `UpdateWebACL`.
     /// Rule groups that are shared with you don't appear in your WAF console rule
     /// groups listing.
-    pub fn putPermissionPolicy(self: *Self, allocator: std.mem.Allocator, input: put_permission_policy.PutPermissionPolicyInput, options: put_permission_policy.Options) !put_permission_policy.PutPermissionPolicyOutput {
+    pub fn putPermissionPolicy(self: *Self, allocator: std.mem.Allocator, input: put_permission_policy.PutPermissionPolicyInput, options: CallOptions) !put_permission_policy.PutPermissionPolicyOutput {
         return put_permission_policy.execute(self, allocator, input, options);
     }
 
@@ -726,7 +727,7 @@ pub const Client = struct {
     /// groups, IP sets, and regex pattern sets. You can't manage or view tags
     /// through the WAF
     /// console.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -737,7 +738,7 @@ pub const Client = struct {
     /// value might be "companyA." You can specify one or more tags to add to each
     /// container. You
     /// can add up to 50 tags to each Amazon Web Services resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -776,7 +777,7 @@ pub const Client = struct {
     /// * After you add an IP address to an IP set that is in use in a blocking
     ///   rule, the new address might be blocked in one area while still allowed in
     ///   another.
-    pub fn updateIpSet(self: *Self, allocator: std.mem.Allocator, input: update_ip_set.UpdateIPSetInput, options: update_ip_set.Options) !update_ip_set.UpdateIPSetOutput {
+    pub fn updateIpSet(self: *Self, allocator: std.mem.Allocator, input: update_ip_set.UpdateIPSetInput, options: CallOptions) !update_ip_set.UpdateIPSetOutput {
         return update_ip_set.execute(self, allocator, input, options);
     }
 
@@ -794,7 +795,7 @@ pub const Client = struct {
     /// of your versioned managed rule group offerings for your customers. The APIs
     /// are `ListManagedRuleSets`, `GetManagedRuleSet`, `PutManagedRuleSetVersions`,
     /// and `UpdateManagedRuleSetVersionExpiryDate`.
-    pub fn updateManagedRuleSetVersionExpiryDate(self: *Self, allocator: std.mem.Allocator, input: update_managed_rule_set_version_expiry_date.UpdateManagedRuleSetVersionExpiryDateInput, options: update_managed_rule_set_version_expiry_date.Options) !update_managed_rule_set_version_expiry_date.UpdateManagedRuleSetVersionExpiryDateOutput {
+    pub fn updateManagedRuleSetVersionExpiryDate(self: *Self, allocator: std.mem.Allocator, input: update_managed_rule_set_version_expiry_date.UpdateManagedRuleSetVersionExpiryDateInput, options: CallOptions) !update_managed_rule_set_version_expiry_date.UpdateManagedRuleSetVersionExpiryDateOutput {
         return update_managed_rule_set_version_expiry_date.execute(self, allocator, input, options);
     }
 
@@ -834,7 +835,7 @@ pub const Client = struct {
     /// * After you add an IP address to an IP set that is in use in a blocking
     ///   rule, the new address might be blocked in one area while still allowed in
     ///   another.
-    pub fn updateRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: update_regex_pattern_set.UpdateRegexPatternSetInput, options: update_regex_pattern_set.Options) !update_regex_pattern_set.UpdateRegexPatternSetOutput {
+    pub fn updateRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: update_regex_pattern_set.UpdateRegexPatternSetInput, options: CallOptions) !update_regex_pattern_set.UpdateRegexPatternSetOutput {
         return update_regex_pattern_set.execute(self, allocator, input, options);
     }
 
@@ -879,7 +880,7 @@ pub const Client = struct {
     /// * After you add an IP address to an IP set that is in use in a blocking
     ///   rule, the new address might be blocked in one area while still allowed in
     ///   another.
-    pub fn updateRuleGroup(self: *Self, allocator: std.mem.Allocator, input: update_rule_group.UpdateRuleGroupInput, options: update_rule_group.Options) !update_rule_group.UpdateRuleGroupOutput {
+    pub fn updateRuleGroup(self: *Self, allocator: std.mem.Allocator, input: update_rule_group.UpdateRuleGroupInput, options: CallOptions) !update_rule_group.UpdateRuleGroupOutput {
         return update_rule_group.execute(self, allocator, input, options);
     }
 
@@ -932,7 +933,7 @@ pub const Client = struct {
     /// * After you add an IP address to an IP set that is in use in a blocking
     ///   rule, the new address might be blocked in one area while still allowed in
     ///   another.
-    pub fn updateWebAcl(self: *Self, allocator: std.mem.Allocator, input: update_web_acl.UpdateWebACLInput, options: update_web_acl.Options) !update_web_acl.UpdateWebACLOutput {
+    pub fn updateWebAcl(self: *Self, allocator: std.mem.Allocator, input: update_web_acl.UpdateWebACLInput, options: CallOptions) !update_web_acl.UpdateWebACLOutput {
         return update_web_acl.execute(self, allocator, input, options);
     }
 };

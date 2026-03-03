@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RouteServerBgpOptionsRequest = @import("route_server_bgp_options_request.zig").RouteServerBgpOptionsRequest;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
@@ -35,11 +36,7 @@ pub const CreateRouteServerPeerOutput = struct {
     route_server_peer: ?RouteServerPeer = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateRouteServerPeerInput, options: Options) !CreateRouteServerPeerOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateRouteServerPeerInput, options: CallOptions) !CreateRouteServerPeerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

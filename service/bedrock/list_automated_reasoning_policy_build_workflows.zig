@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AutomatedReasoningPolicyBuildWorkflowSummary = @import("automated_reasoning_policy_build_workflow_summary.zig").AutomatedReasoningPolicyBuildWorkflowSummary;
 
@@ -40,11 +41,7 @@ pub const ListAutomatedReasoningPolicyBuildWorkflowsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAutomatedReasoningPolicyBuildWorkflowsInput, options: Options) !ListAutomatedReasoningPolicyBuildWorkflowsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAutomatedReasoningPolicyBuildWorkflowsInput, options: CallOptions) !ListAutomatedReasoningPolicyBuildWorkflowsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

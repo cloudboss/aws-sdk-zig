@@ -15,6 +15,7 @@ const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const put_recommendation_feedback = @import("put_recommendation_feedback.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -75,7 +76,7 @@ pub const Client = struct {
     /// [Getting started with
     /// CodeGuru
     /// Reviewer](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html) in the *CodeGuru Reviewer User Guide.*
-    pub fn associateRepository(self: *Self, allocator: std.mem.Allocator, input: associate_repository.AssociateRepositoryInput, options: associate_repository.Options) !associate_repository.AssociateRepositoryOutput {
+    pub fn associateRepository(self: *Self, allocator: std.mem.Allocator, input: associate_repository.AssociateRepositoryInput, options: CallOptions) !associate_repository.AssociateRepositoryOutput {
         return associate_repository.execute(self, allocator, input, options);
     }
 
@@ -84,47 +85,47 @@ pub const Client = struct {
     /// `RepositoryAnalysis`. This type of code review analyzes all code under a
     /// specified branch in an associated repository. `PullRequest` code reviews are
     /// automatically triggered by a pull request.
-    pub fn createCodeReview(self: *Self, allocator: std.mem.Allocator, input: create_code_review.CreateCodeReviewInput, options: create_code_review.Options) !create_code_review.CreateCodeReviewOutput {
+    pub fn createCodeReview(self: *Self, allocator: std.mem.Allocator, input: create_code_review.CreateCodeReviewInput, options: CallOptions) !create_code_review.CreateCodeReviewOutput {
         return create_code_review.execute(self, allocator, input, options);
     }
 
     /// Returns the metadata associated with the code review along with its status.
-    pub fn describeCodeReview(self: *Self, allocator: std.mem.Allocator, input: describe_code_review.DescribeCodeReviewInput, options: describe_code_review.Options) !describe_code_review.DescribeCodeReviewOutput {
+    pub fn describeCodeReview(self: *Self, allocator: std.mem.Allocator, input: describe_code_review.DescribeCodeReviewInput, options: CallOptions) !describe_code_review.DescribeCodeReviewOutput {
         return describe_code_review.execute(self, allocator, input, options);
     }
 
     /// Describes the customer feedback for a CodeGuru Reviewer recommendation.
-    pub fn describeRecommendationFeedback(self: *Self, allocator: std.mem.Allocator, input: describe_recommendation_feedback.DescribeRecommendationFeedbackInput, options: describe_recommendation_feedback.Options) !describe_recommendation_feedback.DescribeRecommendationFeedbackOutput {
+    pub fn describeRecommendationFeedback(self: *Self, allocator: std.mem.Allocator, input: describe_recommendation_feedback.DescribeRecommendationFeedbackInput, options: CallOptions) !describe_recommendation_feedback.DescribeRecommendationFeedbackOutput {
         return describe_recommendation_feedback.execute(self, allocator, input, options);
     }
 
     /// Returns a
     /// [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object that contains information about the requested
     /// repository association.
-    pub fn describeRepositoryAssociation(self: *Self, allocator: std.mem.Allocator, input: describe_repository_association.DescribeRepositoryAssociationInput, options: describe_repository_association.Options) !describe_repository_association.DescribeRepositoryAssociationOutput {
+    pub fn describeRepositoryAssociation(self: *Self, allocator: std.mem.Allocator, input: describe_repository_association.DescribeRepositoryAssociationInput, options: CallOptions) !describe_repository_association.DescribeRepositoryAssociationOutput {
         return describe_repository_association.execute(self, allocator, input, options);
     }
 
     /// Removes the association between Amazon CodeGuru Reviewer and a repository.
-    pub fn disassociateRepository(self: *Self, allocator: std.mem.Allocator, input: disassociate_repository.DisassociateRepositoryInput, options: disassociate_repository.Options) !disassociate_repository.DisassociateRepositoryOutput {
+    pub fn disassociateRepository(self: *Self, allocator: std.mem.Allocator, input: disassociate_repository.DisassociateRepositoryInput, options: CallOptions) !disassociate_repository.DisassociateRepositoryOutput {
         return disassociate_repository.execute(self, allocator, input, options);
     }
 
     /// Lists all the code reviews that the customer has created in the past 90
     /// days.
-    pub fn listCodeReviews(self: *Self, allocator: std.mem.Allocator, input: list_code_reviews.ListCodeReviewsInput, options: list_code_reviews.Options) !list_code_reviews.ListCodeReviewsOutput {
+    pub fn listCodeReviews(self: *Self, allocator: std.mem.Allocator, input: list_code_reviews.ListCodeReviewsInput, options: CallOptions) !list_code_reviews.ListCodeReviewsOutput {
         return list_code_reviews.execute(self, allocator, input, options);
     }
 
     /// Returns a list of
     /// [RecommendationFeedbackSummary](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RecommendationFeedbackSummary.html) objects that contain customer recommendation
     /// feedback for all CodeGuru Reviewer users.
-    pub fn listRecommendationFeedback(self: *Self, allocator: std.mem.Allocator, input: list_recommendation_feedback.ListRecommendationFeedbackInput, options: list_recommendation_feedback.Options) !list_recommendation_feedback.ListRecommendationFeedbackOutput {
+    pub fn listRecommendationFeedback(self: *Self, allocator: std.mem.Allocator, input: list_recommendation_feedback.ListRecommendationFeedbackInput, options: CallOptions) !list_recommendation_feedback.ListRecommendationFeedbackOutput {
         return list_recommendation_feedback.execute(self, allocator, input, options);
     }
 
     /// Returns the list of all recommendations for a completed code review.
-    pub fn listRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_recommendations.ListRecommendationsInput, options: list_recommendations.Options) !list_recommendations.ListRecommendationsOutput {
+    pub fn listRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_recommendations.ListRecommendationsInput, options: CallOptions) !list_recommendations.ListRecommendationsOutput {
         return list_recommendations.execute(self, allocator, input, options);
     }
 
@@ -132,29 +133,29 @@ pub const Client = struct {
     /// [RepositoryAssociationSummary](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html) objects that contain summary information about a
     /// repository association. You can filter the returned list by
     /// [ProviderType](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-ProviderType), [Name](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-Name), [State](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-State), and [Owner](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-Owner).
-    pub fn listRepositoryAssociations(self: *Self, allocator: std.mem.Allocator, input: list_repository_associations.ListRepositoryAssociationsInput, options: list_repository_associations.Options) !list_repository_associations.ListRepositoryAssociationsOutput {
+    pub fn listRepositoryAssociations(self: *Self, allocator: std.mem.Allocator, input: list_repository_associations.ListRepositoryAssociationsInput, options: CallOptions) !list_repository_associations.ListRepositoryAssociationsOutput {
         return list_repository_associations.execute(self, allocator, input, options);
     }
 
     /// Returns the list of tags associated with an associated repository resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Stores customer feedback for a CodeGuru Reviewer recommendation. When this
     /// API is called again with
     /// different reactions the previous feedback is overwritten.
-    pub fn putRecommendationFeedback(self: *Self, allocator: std.mem.Allocator, input: put_recommendation_feedback.PutRecommendationFeedbackInput, options: put_recommendation_feedback.Options) !put_recommendation_feedback.PutRecommendationFeedbackOutput {
+    pub fn putRecommendationFeedback(self: *Self, allocator: std.mem.Allocator, input: put_recommendation_feedback.PutRecommendationFeedbackInput, options: CallOptions) !put_recommendation_feedback.PutRecommendationFeedbackOutput {
         return put_recommendation_feedback.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tags to an associated repository.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag from an associated repository.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

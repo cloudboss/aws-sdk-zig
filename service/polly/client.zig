@@ -10,6 +10,7 @@ const list_speech_synthesis_tasks = @import("list_speech_synthesis_tasks.zig");
 const put_lexicon = @import("put_lexicon.zig");
 const start_speech_synthesis_task = @import("start_speech_synthesis_task.zig");
 const synthesize_speech = @import("synthesize_speech.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -47,7 +48,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Managing
     /// Lexicons](https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
-    pub fn deleteLexicon(self: *Self, allocator: std.mem.Allocator, input: delete_lexicon.DeleteLexiconInput, options: delete_lexicon.Options) !delete_lexicon.DeleteLexiconOutput {
+    pub fn deleteLexicon(self: *Self, allocator: std.mem.Allocator, input: delete_lexicon.DeleteLexiconInput, options: CallOptions) !delete_lexicon.DeleteLexiconOutput {
         return delete_lexicon.execute(self, allocator, input, options);
     }
 
@@ -71,14 +72,14 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `polly:DescribeVoices` action.
-    pub fn describeVoices(self: *Self, allocator: std.mem.Allocator, input: describe_voices.DescribeVoicesInput, options: describe_voices.Options) !describe_voices.DescribeVoicesOutput {
+    pub fn describeVoices(self: *Self, allocator: std.mem.Allocator, input: describe_voices.DescribeVoicesInput, options: CallOptions) !describe_voices.DescribeVoicesOutput {
         return describe_voices.execute(self, allocator, input, options);
     }
 
     /// Returns the content of the specified pronunciation lexicon stored
     /// in an Amazon Web Services Region. For more information, see [Managing
     /// Lexicons](https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
-    pub fn getLexicon(self: *Self, allocator: std.mem.Allocator, input: get_lexicon.GetLexiconInput, options: get_lexicon.Options) !get_lexicon.GetLexiconOutput {
+    pub fn getLexicon(self: *Self, allocator: std.mem.Allocator, input: get_lexicon.GetLexiconInput, options: CallOptions) !get_lexicon.GetLexiconOutput {
         return get_lexicon.execute(self, allocator, input, options);
     }
 
@@ -86,21 +87,21 @@ pub const Client = struct {
     /// This object contains information about the given speech synthesis task,
     /// including the status of the task, and a link to the S3 bucket containing
     /// the output of the task.
-    pub fn getSpeechSynthesisTask(self: *Self, allocator: std.mem.Allocator, input: get_speech_synthesis_task.GetSpeechSynthesisTaskInput, options: get_speech_synthesis_task.Options) !get_speech_synthesis_task.GetSpeechSynthesisTaskOutput {
+    pub fn getSpeechSynthesisTask(self: *Self, allocator: std.mem.Allocator, input: get_speech_synthesis_task.GetSpeechSynthesisTaskInput, options: CallOptions) !get_speech_synthesis_task.GetSpeechSynthesisTaskOutput {
         return get_speech_synthesis_task.execute(self, allocator, input, options);
     }
 
     /// Returns a list of pronunciation lexicons stored in an Amazon Web Services
     /// Region. For more information, see [Managing
     /// Lexicons](https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
-    pub fn listLexicons(self: *Self, allocator: std.mem.Allocator, input: list_lexicons.ListLexiconsInput, options: list_lexicons.Options) !list_lexicons.ListLexiconsOutput {
+    pub fn listLexicons(self: *Self, allocator: std.mem.Allocator, input: list_lexicons.ListLexiconsInput, options: CallOptions) !list_lexicons.ListLexiconsOutput {
         return list_lexicons.execute(self, allocator, input, options);
     }
 
     /// Returns a list of SpeechSynthesisTask objects ordered by their
     /// creation date. This operation can filter the tasks by their status, for
     /// example, allowing users to list only tasks that are completed.
-    pub fn listSpeechSynthesisTasks(self: *Self, allocator: std.mem.Allocator, input: list_speech_synthesis_tasks.ListSpeechSynthesisTasksInput, options: list_speech_synthesis_tasks.Options) !list_speech_synthesis_tasks.ListSpeechSynthesisTasksOutput {
+    pub fn listSpeechSynthesisTasks(self: *Self, allocator: std.mem.Allocator, input: list_speech_synthesis_tasks.ListSpeechSynthesisTasksInput, options: CallOptions) !list_speech_synthesis_tasks.ListSpeechSynthesisTasksOutput {
         return list_speech_synthesis_tasks.execute(self, allocator, input, options);
     }
 
@@ -112,7 +113,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Managing
     /// Lexicons](https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
-    pub fn putLexicon(self: *Self, allocator: std.mem.Allocator, input: put_lexicon.PutLexiconInput, options: put_lexicon.Options) !put_lexicon.PutLexiconOutput {
+    pub fn putLexicon(self: *Self, allocator: std.mem.Allocator, input: put_lexicon.PutLexiconInput, options: CallOptions) !put_lexicon.PutLexiconOutput {
         return put_lexicon.execute(self, allocator, input, options);
     }
 
@@ -126,7 +127,7 @@ pub const Client = struct {
     /// will include an identifier of this task as well as the current status. The
     /// `SpeechSynthesisTask` object is available for 72 hours after
     /// starting the asynchronous synthesis task.
-    pub fn startSpeechSynthesisTask(self: *Self, allocator: std.mem.Allocator, input: start_speech_synthesis_task.StartSpeechSynthesisTaskInput, options: start_speech_synthesis_task.Options) !start_speech_synthesis_task.StartSpeechSynthesisTaskOutput {
+    pub fn startSpeechSynthesisTask(self: *Self, allocator: std.mem.Allocator, input: start_speech_synthesis_task.StartSpeechSynthesisTaskInput, options: CallOptions) !start_speech_synthesis_task.StartSpeechSynthesisTaskOutput {
         return start_speech_synthesis_task.execute(self, allocator, input, options);
     }
 
@@ -136,7 +137,7 @@ pub const Client = struct {
     /// all by English voices) unless phoneme mapping is used. For more
     /// information, see [How it
     /// Works](https://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html).
-    pub fn synthesizeSpeech(self: *Self, allocator: std.mem.Allocator, input: synthesize_speech.SynthesizeSpeechInput, options: synthesize_speech.Options) !synthesize_speech.SynthesizeSpeechOutput {
+    pub fn synthesizeSpeech(self: *Self, allocator: std.mem.Allocator, input: synthesize_speech.SynthesizeSpeechInput, options: CallOptions) !synthesize_speech.SynthesizeSpeechOutput {
         return synthesize_speech.execute(self, allocator, input, options);
     }
 

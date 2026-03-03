@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CreateAndAttachS3AccessPointOntapConfiguration = @import("create_and_attach_s3_access_point_ontap_configuration.zig").CreateAndAttachS3AccessPointOntapConfiguration;
 const CreateAndAttachS3AccessPointOpenZFSConfiguration = @import("create_and_attach_s3_access_point_open_zfs_configuration.zig").CreateAndAttachS3AccessPointOpenZFSConfiguration;
@@ -50,11 +51,7 @@ pub const CreateAndAttachS3AccessPointOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAndAttachS3AccessPointInput, options: Options) !CreateAndAttachS3AccessPointOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAndAttachS3AccessPointInput, options: CallOptions) !CreateAndAttachS3AccessPointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const S3Location = @import("s3_location.zig").S3Location;
 const AwsCredentials = @import("aws_credentials.zig").AwsCredentials;
@@ -34,11 +35,7 @@ pub const RequestUploadCredentialsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RequestUploadCredentialsInput, options: Options) !RequestUploadCredentialsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RequestUploadCredentialsInput, options: CallOptions) !RequestUploadCredentialsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

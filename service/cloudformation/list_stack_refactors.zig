@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const StackRefactorExecutionStatus = @import("stack_refactor_execution_status.zig").StackRefactorExecutionStatus;
 const StackRefactorSummary = @import("stack_refactor_summary.zig").StackRefactorSummary;
@@ -54,11 +55,7 @@ pub const ListStackRefactorsOutput = struct {
     stack_refactor_summaries: ?[]const StackRefactorSummary = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListStackRefactorsInput, options: Options) !ListStackRefactorsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListStackRefactorsInput, options: CallOptions) !ListStackRefactorsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

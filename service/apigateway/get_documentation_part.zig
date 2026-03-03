@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DocumentationPartLocation = @import("documentation_part_location.zig").DocumentationPartLocation;
 
@@ -18,13 +19,9 @@ pub const GetDocumentationPartInput = struct {
     };
 };
 
-const GetDocumentationPartOutput = @import("documentation_part.zig").DocumentationPart;
+pub const GetDocumentationPartOutput = @import("documentation_part.zig").DocumentationPart;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDocumentationPartInput, options: Options) !GetDocumentationPartOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDocumentationPartInput, options: CallOptions) !GetDocumentationPartOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

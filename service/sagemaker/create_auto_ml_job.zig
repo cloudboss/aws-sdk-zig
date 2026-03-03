@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AutoMLJobConfig = @import("auto_ml_job_config.zig").AutoMLJobConfig;
 const AutoMLJobObjective = @import("auto_ml_job_objective.zig").AutoMLJobObjective;
@@ -80,11 +81,7 @@ pub const CreateAutoMLJobOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAutoMLJobInput, options: Options) !CreateAutoMLJobOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAutoMLJobInput, options: CallOptions) !CreateAutoMLJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

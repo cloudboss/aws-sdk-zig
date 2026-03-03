@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DisassociateEnvironmentRoleInput = struct {
@@ -25,11 +26,7 @@ pub const DisassociateEnvironmentRoleInput = struct {
 pub const DisassociateEnvironmentRoleOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateEnvironmentRoleInput, options: Options) !DisassociateEnvironmentRoleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateEnvironmentRoleInput, options: CallOptions) !DisassociateEnvironmentRoleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_firewall_configs = @import("list_firewall_configs.zig");
@@ -29,7 +30,7 @@ pub const ListFirewallConfigsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_firewall_configs.Options) !list_firewall_configs.ListFirewallConfigsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_firewall_configs.ListFirewallConfigsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -70,7 +71,7 @@ pub const ListFirewallDomainListsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_firewall_domain_lists.Options) !list_firewall_domain_lists.ListFirewallDomainListsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_firewall_domain_lists.ListFirewallDomainListsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -111,7 +112,7 @@ pub const ListFirewallDomainsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_firewall_domains.Options) !list_firewall_domains.ListFirewallDomainsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_firewall_domains.ListFirewallDomainsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -152,7 +153,7 @@ pub const ListFirewallRuleGroupAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_firewall_rule_group_associations.Options) !list_firewall_rule_group_associations.ListFirewallRuleGroupAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_firewall_rule_group_associations.ListFirewallRuleGroupAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -193,7 +194,7 @@ pub const ListFirewallRuleGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_firewall_rule_groups.Options) !list_firewall_rule_groups.ListFirewallRuleGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_firewall_rule_groups.ListFirewallRuleGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -234,7 +235,7 @@ pub const ListFirewallRulesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_firewall_rules.Options) !list_firewall_rules.ListFirewallRulesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_firewall_rules.ListFirewallRulesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -275,7 +276,7 @@ pub const ListOutpostResolversPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_outpost_resolvers.Options) !list_outpost_resolvers.ListOutpostResolversOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_outpost_resolvers.ListOutpostResolversOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -316,7 +317,7 @@ pub const ListResolverConfigsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resolver_configs.Options) !list_resolver_configs.ListResolverConfigsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resolver_configs.ListResolverConfigsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -357,7 +358,7 @@ pub const ListResolverDnssecConfigsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resolver_dnssec_configs.Options) !list_resolver_dnssec_configs.ListResolverDnssecConfigsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resolver_dnssec_configs.ListResolverDnssecConfigsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -398,7 +399,7 @@ pub const ListResolverEndpointIpAddressesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resolver_endpoint_ip_addresses.Options) !list_resolver_endpoint_ip_addresses.ListResolverEndpointIpAddressesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resolver_endpoint_ip_addresses.ListResolverEndpointIpAddressesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -439,7 +440,7 @@ pub const ListResolverEndpointsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resolver_endpoints.Options) !list_resolver_endpoints.ListResolverEndpointsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resolver_endpoints.ListResolverEndpointsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -480,7 +481,7 @@ pub const ListResolverQueryLogConfigAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resolver_query_log_config_associations.Options) !list_resolver_query_log_config_associations.ListResolverQueryLogConfigAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resolver_query_log_config_associations.ListResolverQueryLogConfigAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -521,7 +522,7 @@ pub const ListResolverQueryLogConfigsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resolver_query_log_configs.Options) !list_resolver_query_log_configs.ListResolverQueryLogConfigsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resolver_query_log_configs.ListResolverQueryLogConfigsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -562,7 +563,7 @@ pub const ListResolverRuleAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resolver_rule_associations.Options) !list_resolver_rule_associations.ListResolverRuleAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resolver_rule_associations.ListResolverRuleAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -603,7 +604,7 @@ pub const ListResolverRulesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resolver_rules.Options) !list_resolver_rules.ListResolverRulesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resolver_rules.ListResolverRulesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -644,7 +645,7 @@ pub const ListTagsForResourcePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

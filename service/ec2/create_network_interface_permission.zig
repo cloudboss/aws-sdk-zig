@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InterfacePermissionType = @import("interface_permission_type.zig").InterfacePermissionType;
 const NetworkInterfacePermission = @import("network_interface_permission.zig").NetworkInterfacePermission;
@@ -33,11 +34,7 @@ pub const CreateNetworkInterfacePermissionOutput = struct {
     interface_permission: ?NetworkInterfacePermission = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateNetworkInterfacePermissionInput, options: Options) !CreateNetworkInterfacePermissionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateNetworkInterfacePermissionInput, options: CallOptions) !CreateNetworkInterfacePermissionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

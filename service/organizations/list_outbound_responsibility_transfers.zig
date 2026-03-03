@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResponsibilityTransferType = @import("responsibility_transfer_type.zig").ResponsibilityTransferType;
 const ResponsibilityTransfer = @import("responsibility_transfer.zig").ResponsibilityTransfer;
@@ -49,11 +50,7 @@ pub const ListOutboundResponsibilityTransfersOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOutboundResponsibilityTransfersInput, options: Options) !ListOutboundResponsibilityTransfersOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOutboundResponsibilityTransfersInput, options: CallOptions) !ListOutboundResponsibilityTransfersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

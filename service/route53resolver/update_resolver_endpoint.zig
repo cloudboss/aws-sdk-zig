@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Protocol = @import("protocol.zig").Protocol;
 const ResolverEndpointType = @import("resolver_endpoint_type.zig").ResolverEndpointType;
@@ -111,11 +112,7 @@ pub const UpdateResolverEndpointOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateResolverEndpointInput, options: Options) !UpdateResolverEndpointOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateResolverEndpointInput, options: CallOptions) !UpdateResolverEndpointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

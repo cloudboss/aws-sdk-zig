@@ -231,6 +231,7 @@ const update_topic_refresh_schedule = @import("update_topic_refresh_schedule.zig
 const update_user = @import("update_user.zig");
 const update_user_custom_permission = @import("update_user_custom_permission.zig");
 const update_vpc_connection = @import("update_vpc_connection.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -262,17 +263,17 @@ pub const Client = struct {
     }
 
     /// Creates new reviewed answers for a Q Topic.
-    pub fn batchCreateTopicReviewedAnswer(self: *Self, allocator: std.mem.Allocator, input: batch_create_topic_reviewed_answer.BatchCreateTopicReviewedAnswerInput, options: batch_create_topic_reviewed_answer.Options) !batch_create_topic_reviewed_answer.BatchCreateTopicReviewedAnswerOutput {
+    pub fn batchCreateTopicReviewedAnswer(self: *Self, allocator: std.mem.Allocator, input: batch_create_topic_reviewed_answer.BatchCreateTopicReviewedAnswerInput, options: CallOptions) !batch_create_topic_reviewed_answer.BatchCreateTopicReviewedAnswerOutput {
         return batch_create_topic_reviewed_answer.execute(self, allocator, input, options);
     }
 
     /// Deletes reviewed answers for Q Topic.
-    pub fn batchDeleteTopicReviewedAnswer(self: *Self, allocator: std.mem.Allocator, input: batch_delete_topic_reviewed_answer.BatchDeleteTopicReviewedAnswerInput, options: batch_delete_topic_reviewed_answer.Options) !batch_delete_topic_reviewed_answer.BatchDeleteTopicReviewedAnswerOutput {
+    pub fn batchDeleteTopicReviewedAnswer(self: *Self, allocator: std.mem.Allocator, input: batch_delete_topic_reviewed_answer.BatchDeleteTopicReviewedAnswerInput, options: CallOptions) !batch_delete_topic_reviewed_answer.BatchDeleteTopicReviewedAnswerOutput {
         return batch_delete_topic_reviewed_answer.execute(self, allocator, input, options);
     }
 
     /// Cancels an ongoing ingestion of data into SPICE.
-    pub fn cancelIngestion(self: *Self, allocator: std.mem.Allocator, input: cancel_ingestion.CancelIngestionInput, options: cancel_ingestion.Options) !cancel_ingestion.CancelIngestionOutput {
+    pub fn cancelIngestion(self: *Self, allocator: std.mem.Allocator, input: cancel_ingestion.CancelIngestionInput, options: CallOptions) !cancel_ingestion.CancelIngestionOutput {
         return cancel_ingestion.execute(self, allocator, input, options);
     }
 
@@ -308,7 +309,7 @@ pub const Client = struct {
     /// [UpdateThemePermissions](https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateThemePermissions.html)
     /// `
     /// API operation.
-    pub fn createAccountCustomization(self: *Self, allocator: std.mem.Allocator, input: create_account_customization.CreateAccountCustomizationInput, options: create_account_customization.Options) !create_account_customization.CreateAccountCustomizationOutput {
+    pub fn createAccountCustomization(self: *Self, allocator: std.mem.Allocator, input: create_account_customization.CreateAccountCustomizationInput, options: CallOptions) !create_account_customization.CreateAccountCustomizationOutput {
         return create_account_customization.execute(self, allocator, input, options);
     }
 
@@ -352,7 +353,7 @@ pub const Client = struct {
     /// access to Amazon Web Services
     /// services](https://docs.aws.amazon.com/quicksight/latest/user/scoping-policies-defaults.html) in the *Amazon Quick Sight
     /// User Guide*.
-    pub fn createAccountSubscription(self: *Self, allocator: std.mem.Allocator, input: create_account_subscription.CreateAccountSubscriptionInput, options: create_account_subscription.Options) !create_account_subscription.CreateAccountSubscriptionOutput {
+    pub fn createAccountSubscription(self: *Self, allocator: std.mem.Allocator, input: create_account_subscription.CreateAccountSubscriptionInput, options: CallOptions) !create_account_subscription.CreateAccountSubscriptionOutput {
         return create_account_subscription.execute(self, allocator, input, options);
     }
 
@@ -361,23 +362,23 @@ pub const Client = struct {
     /// Action connectors support various authentication methods and can be
     /// configured with specific actions from supported connector types
     /// like Amazon S3, Salesforce, JIRA.
-    pub fn createActionConnector(self: *Self, allocator: std.mem.Allocator, input: create_action_connector.CreateActionConnectorInput, options: create_action_connector.Options) !create_action_connector.CreateActionConnectorOutput {
+    pub fn createActionConnector(self: *Self, allocator: std.mem.Allocator, input: create_action_connector.CreateActionConnectorInput, options: CallOptions) !create_action_connector.CreateActionConnectorOutput {
         return create_action_connector.execute(self, allocator, input, options);
     }
 
     /// Creates an analysis in Amazon Quick Sight. Analyses can be created either
     /// from a template or from an `AnalysisDefinition`.
-    pub fn createAnalysis(self: *Self, allocator: std.mem.Allocator, input: create_analysis.CreateAnalysisInput, options: create_analysis.Options) !create_analysis.CreateAnalysisOutput {
+    pub fn createAnalysis(self: *Self, allocator: std.mem.Allocator, input: create_analysis.CreateAnalysisInput, options: CallOptions) !create_analysis.CreateAnalysisOutput {
         return create_analysis.execute(self, allocator, input, options);
     }
 
     /// Creates an Quick Sight brand.
-    pub fn createBrand(self: *Self, allocator: std.mem.Allocator, input: create_brand.CreateBrandInput, options: create_brand.Options) !create_brand.CreateBrandOutput {
+    pub fn createBrand(self: *Self, allocator: std.mem.Allocator, input: create_brand.CreateBrandInput, options: CallOptions) !create_brand.CreateBrandOutput {
         return create_brand.execute(self, allocator, input, options);
     }
 
     /// Creates a custom permissions profile.
-    pub fn createCustomPermissions(self: *Self, allocator: std.mem.Allocator, input: create_custom_permissions.CreateCustomPermissionsInput, options: create_custom_permissions.Options) !create_custom_permissions.CreateCustomPermissionsOutput {
+    pub fn createCustomPermissions(self: *Self, allocator: std.mem.Allocator, input: create_custom_permissions.CreateCustomPermissionsInput, options: CallOptions) !create_custom_permissions.CreateCustomPermissionsOutput {
         return create_custom_permissions.execute(self, allocator, input, options);
     }
 
@@ -395,29 +396,29 @@ pub const Client = struct {
     /// correct permissions, you can create a dashboard from a template that exists
     /// in a
     /// different Amazon Web Services account.
-    pub fn createDashboard(self: *Self, allocator: std.mem.Allocator, input: create_dashboard.CreateDashboardInput, options: create_dashboard.Options) !create_dashboard.CreateDashboardOutput {
+    pub fn createDashboard(self: *Self, allocator: std.mem.Allocator, input: create_dashboard.CreateDashboardInput, options: CallOptions) !create_dashboard.CreateDashboardOutput {
         return create_dashboard.execute(self, allocator, input, options);
     }
 
     /// Creates a dataset. This operation doesn't support datasets that include
     /// uploaded files
     /// as a source.
-    pub fn createDataSet(self: *Self, allocator: std.mem.Allocator, input: create_data_set.CreateDataSetInput, options: create_data_set.Options) !create_data_set.CreateDataSetOutput {
+    pub fn createDataSet(self: *Self, allocator: std.mem.Allocator, input: create_data_set.CreateDataSetInput, options: CallOptions) !create_data_set.CreateDataSetOutput {
         return create_data_set.execute(self, allocator, input, options);
     }
 
     /// Creates a data source.
-    pub fn createDataSource(self: *Self, allocator: std.mem.Allocator, input: create_data_source.CreateDataSourceInput, options: create_data_source.Options) !create_data_source.CreateDataSourceOutput {
+    pub fn createDataSource(self: *Self, allocator: std.mem.Allocator, input: create_data_source.CreateDataSourceInput, options: CallOptions) !create_data_source.CreateDataSourceOutput {
         return create_data_source.execute(self, allocator, input, options);
     }
 
     /// Creates an empty shared folder.
-    pub fn createFolder(self: *Self, allocator: std.mem.Allocator, input: create_folder.CreateFolderInput, options: create_folder.Options) !create_folder.CreateFolderOutput {
+    pub fn createFolder(self: *Self, allocator: std.mem.Allocator, input: create_folder.CreateFolderInput, options: CallOptions) !create_folder.CreateFolderOutput {
         return create_folder.execute(self, allocator, input, options);
     }
 
     /// Adds an asset, such as a dashboard, analysis, or dataset into a folder.
-    pub fn createFolderMembership(self: *Self, allocator: std.mem.Allocator, input: create_folder_membership.CreateFolderMembershipInput, options: create_folder_membership.Options) !create_folder_membership.CreateFolderMembershipOutput {
+    pub fn createFolderMembership(self: *Self, allocator: std.mem.Allocator, input: create_folder_membership.CreateFolderMembershipInput, options: CallOptions) !create_folder_membership.CreateFolderMembershipOutput {
         return create_folder_membership.execute(self, allocator, input, options);
     }
 
@@ -430,12 +431,12 @@ pub const Client = struct {
     /// `.
     ///
     /// The response is a group object.
-    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: create_group.Options) !create_group.CreateGroupOutput {
+    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: CallOptions) !create_group.CreateGroupOutput {
         return create_group.execute(self, allocator, input, options);
     }
 
     /// Adds an Amazon Quick Sight user to an Amazon Quick Sight group.
-    pub fn createGroupMembership(self: *Self, allocator: std.mem.Allocator, input: create_group_membership.CreateGroupMembershipInput, options: create_group_membership.Options) !create_group_membership.CreateGroupMembershipOutput {
+    pub fn createGroupMembership(self: *Self, allocator: std.mem.Allocator, input: create_group_membership.CreateGroupMembershipInput, options: CallOptions) !create_group_membership.CreateGroupMembershipOutput {
         return create_group_membership.execute(self, allocator, input, options);
     }
 
@@ -447,7 +448,7 @@ pub const Client = struct {
     /// account. To avoid overwriting rules in other namespaces, use assignment
     /// names that are
     /// unique.
-    pub fn createIamPolicyAssignment(self: *Self, allocator: std.mem.Allocator, input: create_iam_policy_assignment.CreateIAMPolicyAssignmentInput, options: create_iam_policy_assignment.Options) !create_iam_policy_assignment.CreateIAMPolicyAssignmentOutput {
+    pub fn createIamPolicyAssignment(self: *Self, allocator: std.mem.Allocator, input: create_iam_policy_assignment.CreateIAMPolicyAssignmentInput, options: CallOptions) !create_iam_policy_assignment.CreateIAMPolicyAssignmentOutput {
         return create_iam_policy_assignment.execute(self, allocator, input, options);
     }
 
@@ -464,7 +465,7 @@ pub const Client = struct {
     /// access control. For an example, see [How do I create an IAM policy to
     /// control access to Amazon EC2 resources using
     /// tags?](http://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/) in the Amazon Web Services Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.
-    pub fn createIngestion(self: *Self, allocator: std.mem.Allocator, input: create_ingestion.CreateIngestionInput, options: create_ingestion.Options) !create_ingestion.CreateIngestionOutput {
+    pub fn createIngestion(self: *Self, allocator: std.mem.Allocator, input: create_ingestion.CreateIngestionInput, options: CallOptions) !create_ingestion.CreateIngestionOutput {
         return create_ingestion.execute(self, allocator, input, options);
     }
 
@@ -484,19 +485,19 @@ pub const Client = struct {
     /// limit of 100 namespaces per Amazon Web Services account. To increase your
     /// limit, create a ticket with
     /// Amazon Web Services Support.
-    pub fn createNamespace(self: *Self, allocator: std.mem.Allocator, input: create_namespace.CreateNamespaceInput, options: create_namespace.Options) !create_namespace.CreateNamespaceOutput {
+    pub fn createNamespace(self: *Self, allocator: std.mem.Allocator, input: create_namespace.CreateNamespaceInput, options: CallOptions) !create_namespace.CreateNamespaceOutput {
         return create_namespace.execute(self, allocator, input, options);
     }
 
     /// Creates a refresh schedule for a dataset. You can create up to 5 different
     /// schedules for a single dataset.
-    pub fn createRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: create_refresh_schedule.CreateRefreshScheduleInput, options: create_refresh_schedule.Options) !create_refresh_schedule.CreateRefreshScheduleOutput {
+    pub fn createRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: create_refresh_schedule.CreateRefreshScheduleInput, options: CallOptions) !create_refresh_schedule.CreateRefreshScheduleOutput {
         return create_refresh_schedule.execute(self, allocator, input, options);
     }
 
     /// Use `CreateRoleMembership` to add an existing Quick Sight group to an
     /// existing role.
-    pub fn createRoleMembership(self: *Self, allocator: std.mem.Allocator, input: create_role_membership.CreateRoleMembershipInput, options: create_role_membership.Options) !create_role_membership.CreateRoleMembershipOutput {
+    pub fn createRoleMembership(self: *Self, allocator: std.mem.Allocator, input: create_role_membership.CreateRoleMembershipInput, options: CallOptions) !create_role_membership.CreateRoleMembershipOutput {
         return create_role_membership.execute(self, allocator, input, options);
     }
 
@@ -514,12 +515,12 @@ pub const Client = struct {
     /// with datasets that follow the same schema that was used to create the source
     /// analysis
     /// and template.
-    pub fn createTemplate(self: *Self, allocator: std.mem.Allocator, input: create_template.CreateTemplateInput, options: create_template.Options) !create_template.CreateTemplateOutput {
+    pub fn createTemplate(self: *Self, allocator: std.mem.Allocator, input: create_template.CreateTemplateInput, options: CallOptions) !create_template.CreateTemplateOutput {
         return create_template.execute(self, allocator, input, options);
     }
 
     /// Creates a template alias for a template.
-    pub fn createTemplateAlias(self: *Self, allocator: std.mem.Allocator, input: create_template_alias.CreateTemplateAliasInput, options: create_template_alias.Options) !create_template_alias.CreateTemplateAliasOutput {
+    pub fn createTemplateAlias(self: *Self, allocator: std.mem.Allocator, input: create_template_alias.CreateTemplateAliasInput, options: CallOptions) !create_template_alias.CreateTemplateAliasOutput {
         return create_template_alias.execute(self, allocator, input, options);
     }
 
@@ -529,32 +530,32 @@ pub const Client = struct {
     /// Themes apply to analyses and dashboards. For more information, see [Using
     /// Themes in Amazon Quick
     /// Sight](https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html) in the *Amazon Quick Sight User Guide*.
-    pub fn createTheme(self: *Self, allocator: std.mem.Allocator, input: create_theme.CreateThemeInput, options: create_theme.Options) !create_theme.CreateThemeOutput {
+    pub fn createTheme(self: *Self, allocator: std.mem.Allocator, input: create_theme.CreateThemeInput, options: CallOptions) !create_theme.CreateThemeOutput {
         return create_theme.execute(self, allocator, input, options);
     }
 
     /// Creates a theme alias for a theme.
-    pub fn createThemeAlias(self: *Self, allocator: std.mem.Allocator, input: create_theme_alias.CreateThemeAliasInput, options: create_theme_alias.Options) !create_theme_alias.CreateThemeAliasOutput {
+    pub fn createThemeAlias(self: *Self, allocator: std.mem.Allocator, input: create_theme_alias.CreateThemeAliasInput, options: CallOptions) !create_theme_alias.CreateThemeAliasOutput {
         return create_theme_alias.execute(self, allocator, input, options);
     }
 
     /// Creates a new Q topic.
-    pub fn createTopic(self: *Self, allocator: std.mem.Allocator, input: create_topic.CreateTopicInput, options: create_topic.Options) !create_topic.CreateTopicOutput {
+    pub fn createTopic(self: *Self, allocator: std.mem.Allocator, input: create_topic.CreateTopicInput, options: CallOptions) !create_topic.CreateTopicOutput {
         return create_topic.execute(self, allocator, input, options);
     }
 
     /// Creates a topic refresh schedule.
-    pub fn createTopicRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: create_topic_refresh_schedule.CreateTopicRefreshScheduleInput, options: create_topic_refresh_schedule.Options) !create_topic_refresh_schedule.CreateTopicRefreshScheduleOutput {
+    pub fn createTopicRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: create_topic_refresh_schedule.CreateTopicRefreshScheduleInput, options: CallOptions) !create_topic_refresh_schedule.CreateTopicRefreshScheduleOutput {
         return create_topic_refresh_schedule.execute(self, allocator, input, options);
     }
 
     /// Creates a new VPC connection.
-    pub fn createVpcConnection(self: *Self, allocator: std.mem.Allocator, input: create_vpc_connection.CreateVPCConnectionInput, options: create_vpc_connection.Options) !create_vpc_connection.CreateVPCConnectionOutput {
+    pub fn createVpcConnection(self: *Self, allocator: std.mem.Allocator, input: create_vpc_connection.CreateVPCConnectionInput, options: CallOptions) !create_vpc_connection.CreateVPCConnectionOutput {
         return create_vpc_connection.execute(self, allocator, input, options);
     }
 
     /// Unapplies a custom permissions profile from an account.
-    pub fn deleteAccountCustomPermission(self: *Self, allocator: std.mem.Allocator, input: delete_account_custom_permission.DeleteAccountCustomPermissionInput, options: delete_account_custom_permission.Options) !delete_account_custom_permission.DeleteAccountCustomPermissionOutput {
+    pub fn deleteAccountCustomPermission(self: *Self, allocator: std.mem.Allocator, input: delete_account_custom_permission.DeleteAccountCustomPermissionInput, options: CallOptions) !delete_account_custom_permission.DeleteAccountCustomPermissionOutput {
         return delete_account_custom_permission.execute(self, allocator, input, options);
     }
 
@@ -575,7 +576,7 @@ pub const Client = struct {
     ///
     /// Deletes all Amazon Quick Sight customizations for the specified Amazon Web
     /// Services account and Quick Sight namespace.
-    pub fn deleteAccountCustomization(self: *Self, allocator: std.mem.Allocator, input: delete_account_customization.DeleteAccountCustomizationInput, options: delete_account_customization.Options) !delete_account_customization.DeleteAccountCustomizationOutput {
+    pub fn deleteAccountCustomization(self: *Self, allocator: std.mem.Allocator, input: delete_account_customization.DeleteAccountCustomizationInput, options: CallOptions) !delete_account_customization.DeleteAccountCustomizationOutput {
         return delete_account_customization.execute(self, allocator, input, options);
     }
 
@@ -611,7 +612,7 @@ pub const Client = struct {
     /// this setting and delete your account, call the `UpdateAccountSettings` API
     /// and set the value of the `TerminationProtectionEnabled` parameter to
     /// `False`, then make another call to the `DeleteAccountSubscription` API.
-    pub fn deleteAccountSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_account_subscription.DeleteAccountSubscriptionInput, options: delete_account_subscription.Options) !delete_account_subscription.DeleteAccountSubscriptionOutput {
+    pub fn deleteAccountSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_account_subscription.DeleteAccountSubscriptionInput, options: CallOptions) !delete_account_subscription.DeleteAccountSubscriptionOutput {
         return delete_account_subscription.execute(self, allocator, input, options);
     }
 
@@ -619,7 +620,7 @@ pub const Client = struct {
     /// removes the connector and all its associated configurations. Any resources
     /// currently using this action connector will no longer be able to perform
     /// actions through it.
-    pub fn deleteActionConnector(self: *Self, allocator: std.mem.Allocator, input: delete_action_connector.DeleteActionConnectorInput, options: delete_action_connector.Options) !delete_action_connector.DeleteActionConnectorOutput {
+    pub fn deleteActionConnector(self: *Self, allocator: std.mem.Allocator, input: delete_action_connector.DeleteActionConnectorInput, options: CallOptions) !delete_action_connector.DeleteActionConnectorOutput {
         return delete_action_connector.execute(self, allocator, input, options);
     }
 
@@ -644,7 +645,7 @@ pub const Client = struct {
     /// To access it in the console, restore it. Deleting an analysis doesn't delete
     /// the
     /// dashboards that you publish from it.
-    pub fn deleteAnalysis(self: *Self, allocator: std.mem.Allocator, input: delete_analysis.DeleteAnalysisInput, options: delete_analysis.Options) !delete_analysis.DeleteAnalysisOutput {
+    pub fn deleteAnalysis(self: *Self, allocator: std.mem.Allocator, input: delete_analysis.DeleteAnalysisInput, options: CallOptions) !delete_analysis.DeleteAnalysisOutput {
         return delete_analysis.execute(self, allocator, input, options);
     }
 
@@ -662,70 +663,70 @@ pub const Client = struct {
     /// consider the impact on any applications currently using this brand.
     ///
     /// Deletes an Quick Sight brand.
-    pub fn deleteBrand(self: *Self, allocator: std.mem.Allocator, input: delete_brand.DeleteBrandInput, options: delete_brand.Options) !delete_brand.DeleteBrandOutput {
+    pub fn deleteBrand(self: *Self, allocator: std.mem.Allocator, input: delete_brand.DeleteBrandInput, options: CallOptions) !delete_brand.DeleteBrandOutput {
         return delete_brand.execute(self, allocator, input, options);
     }
 
     /// Deletes a brand assignment.
-    pub fn deleteBrandAssignment(self: *Self, allocator: std.mem.Allocator, input: delete_brand_assignment.DeleteBrandAssignmentInput, options: delete_brand_assignment.Options) !delete_brand_assignment.DeleteBrandAssignmentOutput {
+    pub fn deleteBrandAssignment(self: *Self, allocator: std.mem.Allocator, input: delete_brand_assignment.DeleteBrandAssignmentInput, options: CallOptions) !delete_brand_assignment.DeleteBrandAssignmentOutput {
         return delete_brand_assignment.execute(self, allocator, input, options);
     }
 
     /// Deletes a custom permissions profile.
-    pub fn deleteCustomPermissions(self: *Self, allocator: std.mem.Allocator, input: delete_custom_permissions.DeleteCustomPermissionsInput, options: delete_custom_permissions.Options) !delete_custom_permissions.DeleteCustomPermissionsOutput {
+    pub fn deleteCustomPermissions(self: *Self, allocator: std.mem.Allocator, input: delete_custom_permissions.DeleteCustomPermissionsInput, options: CallOptions) !delete_custom_permissions.DeleteCustomPermissionsOutput {
         return delete_custom_permissions.execute(self, allocator, input, options);
     }
 
     /// Deletes a dashboard.
-    pub fn deleteDashboard(self: *Self, allocator: std.mem.Allocator, input: delete_dashboard.DeleteDashboardInput, options: delete_dashboard.Options) !delete_dashboard.DeleteDashboardOutput {
+    pub fn deleteDashboard(self: *Self, allocator: std.mem.Allocator, input: delete_dashboard.DeleteDashboardInput, options: CallOptions) !delete_dashboard.DeleteDashboardOutput {
         return delete_dashboard.execute(self, allocator, input, options);
     }
 
     /// Deletes a dataset.
-    pub fn deleteDataSet(self: *Self, allocator: std.mem.Allocator, input: delete_data_set.DeleteDataSetInput, options: delete_data_set.Options) !delete_data_set.DeleteDataSetOutput {
+    pub fn deleteDataSet(self: *Self, allocator: std.mem.Allocator, input: delete_data_set.DeleteDataSetInput, options: CallOptions) !delete_data_set.DeleteDataSetOutput {
         return delete_data_set.execute(self, allocator, input, options);
     }
 
     /// Deletes the dataset refresh properties of the dataset.
-    pub fn deleteDataSetRefreshProperties(self: *Self, allocator: std.mem.Allocator, input: delete_data_set_refresh_properties.DeleteDataSetRefreshPropertiesInput, options: delete_data_set_refresh_properties.Options) !delete_data_set_refresh_properties.DeleteDataSetRefreshPropertiesOutput {
+    pub fn deleteDataSetRefreshProperties(self: *Self, allocator: std.mem.Allocator, input: delete_data_set_refresh_properties.DeleteDataSetRefreshPropertiesInput, options: CallOptions) !delete_data_set_refresh_properties.DeleteDataSetRefreshPropertiesOutput {
         return delete_data_set_refresh_properties.execute(self, allocator, input, options);
     }
 
     /// Deletes the data source permanently. This operation breaks all the datasets
     /// that
     /// reference the deleted data source.
-    pub fn deleteDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_data_source.DeleteDataSourceInput, options: delete_data_source.Options) !delete_data_source.DeleteDataSourceOutput {
+    pub fn deleteDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_data_source.DeleteDataSourceInput, options: CallOptions) !delete_data_source.DeleteDataSourceOutput {
         return delete_data_source.execute(self, allocator, input, options);
     }
 
     /// Deletes a linked Amazon Q Business application from an Quick Sight account
-    pub fn deleteDefaultQBusinessApplication(self: *Self, allocator: std.mem.Allocator, input: delete_default_q_business_application.DeleteDefaultQBusinessApplicationInput, options: delete_default_q_business_application.Options) !delete_default_q_business_application.DeleteDefaultQBusinessApplicationOutput {
+    pub fn deleteDefaultQBusinessApplication(self: *Self, allocator: std.mem.Allocator, input: delete_default_q_business_application.DeleteDefaultQBusinessApplicationInput, options: CallOptions) !delete_default_q_business_application.DeleteDefaultQBusinessApplicationOutput {
         return delete_default_q_business_application.execute(self, allocator, input, options);
     }
 
     /// Deletes an empty folder.
-    pub fn deleteFolder(self: *Self, allocator: std.mem.Allocator, input: delete_folder.DeleteFolderInput, options: delete_folder.Options) !delete_folder.DeleteFolderOutput {
+    pub fn deleteFolder(self: *Self, allocator: std.mem.Allocator, input: delete_folder.DeleteFolderInput, options: CallOptions) !delete_folder.DeleteFolderOutput {
         return delete_folder.execute(self, allocator, input, options);
     }
 
     /// Removes an asset, such as a dashboard, analysis, or dataset, from a folder.
-    pub fn deleteFolderMembership(self: *Self, allocator: std.mem.Allocator, input: delete_folder_membership.DeleteFolderMembershipInput, options: delete_folder_membership.Options) !delete_folder_membership.DeleteFolderMembershipOutput {
+    pub fn deleteFolderMembership(self: *Self, allocator: std.mem.Allocator, input: delete_folder_membership.DeleteFolderMembershipInput, options: CallOptions) !delete_folder_membership.DeleteFolderMembershipOutput {
         return delete_folder_membership.execute(self, allocator, input, options);
     }
 
     /// Removes a user group from Amazon Quick Sight.
-    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: delete_group.Options) !delete_group.DeleteGroupOutput {
+    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: CallOptions) !delete_group.DeleteGroupOutput {
         return delete_group.execute(self, allocator, input, options);
     }
 
     /// Removes a user from a group so that the user is no longer a member of the
     /// group.
-    pub fn deleteGroupMembership(self: *Self, allocator: std.mem.Allocator, input: delete_group_membership.DeleteGroupMembershipInput, options: delete_group_membership.Options) !delete_group_membership.DeleteGroupMembershipOutput {
+    pub fn deleteGroupMembership(self: *Self, allocator: std.mem.Allocator, input: delete_group_membership.DeleteGroupMembershipInput, options: CallOptions) !delete_group_membership.DeleteGroupMembershipOutput {
         return delete_group_membership.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing IAM policy assignment.
-    pub fn deleteIamPolicyAssignment(self: *Self, allocator: std.mem.Allocator, input: delete_iam_policy_assignment.DeleteIAMPolicyAssignmentInput, options: delete_iam_policy_assignment.Options) !delete_iam_policy_assignment.DeleteIAMPolicyAssignmentOutput {
+    pub fn deleteIamPolicyAssignment(self: *Self, allocator: std.mem.Allocator, input: delete_iam_policy_assignment.DeleteIAMPolicyAssignmentInput, options: CallOptions) !delete_iam_policy_assignment.DeleteIAMPolicyAssignmentOutput {
         return delete_iam_policy_assignment.execute(self, allocator, input, options);
     }
 
@@ -734,7 +735,7 @@ pub const Client = struct {
     ///
     /// This operation is only supported for Quick Sight accounts that use IAM
     /// Identity Center.
-    pub fn deleteIdentityPropagationConfig(self: *Self, allocator: std.mem.Allocator, input: delete_identity_propagation_config.DeleteIdentityPropagationConfigInput, options: delete_identity_propagation_config.Options) !delete_identity_propagation_config.DeleteIdentityPropagationConfigOutput {
+    pub fn deleteIdentityPropagationConfig(self: *Self, allocator: std.mem.Allocator, input: delete_identity_propagation_config.DeleteIdentityPropagationConfigInput, options: CallOptions) !delete_identity_propagation_config.DeleteIdentityPropagationConfigOutput {
         return delete_identity_propagation_config.execute(self, allocator, input, options);
     }
 
@@ -744,56 +745,56 @@ pub const Client = struct {
     /// datasets and data sources are not
     /// deleted. To delete these assets, you use the API operations for the relevant
     /// asset.
-    pub fn deleteNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_namespace.DeleteNamespaceInput, options: delete_namespace.Options) !delete_namespace.DeleteNamespaceOutput {
+    pub fn deleteNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_namespace.DeleteNamespaceInput, options: CallOptions) !delete_namespace.DeleteNamespaceOutput {
         return delete_namespace.execute(self, allocator, input, options);
     }
 
     /// Deletes a refresh schedule from a dataset.
-    pub fn deleteRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: delete_refresh_schedule.DeleteRefreshScheduleInput, options: delete_refresh_schedule.Options) !delete_refresh_schedule.DeleteRefreshScheduleOutput {
+    pub fn deleteRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: delete_refresh_schedule.DeleteRefreshScheduleInput, options: CallOptions) !delete_refresh_schedule.DeleteRefreshScheduleOutput {
         return delete_refresh_schedule.execute(self, allocator, input, options);
     }
 
     /// Removes custom permissions from the role.
-    pub fn deleteRoleCustomPermission(self: *Self, allocator: std.mem.Allocator, input: delete_role_custom_permission.DeleteRoleCustomPermissionInput, options: delete_role_custom_permission.Options) !delete_role_custom_permission.DeleteRoleCustomPermissionOutput {
+    pub fn deleteRoleCustomPermission(self: *Self, allocator: std.mem.Allocator, input: delete_role_custom_permission.DeleteRoleCustomPermissionInput, options: CallOptions) !delete_role_custom_permission.DeleteRoleCustomPermissionOutput {
         return delete_role_custom_permission.execute(self, allocator, input, options);
     }
 
     /// Removes a group from a role.
-    pub fn deleteRoleMembership(self: *Self, allocator: std.mem.Allocator, input: delete_role_membership.DeleteRoleMembershipInput, options: delete_role_membership.Options) !delete_role_membership.DeleteRoleMembershipOutput {
+    pub fn deleteRoleMembership(self: *Self, allocator: std.mem.Allocator, input: delete_role_membership.DeleteRoleMembershipInput, options: CallOptions) !delete_role_membership.DeleteRoleMembershipOutput {
         return delete_role_membership.execute(self, allocator, input, options);
     }
 
     /// Deletes a template.
-    pub fn deleteTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_template.DeleteTemplateInput, options: delete_template.Options) !delete_template.DeleteTemplateOutput {
+    pub fn deleteTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_template.DeleteTemplateInput, options: CallOptions) !delete_template.DeleteTemplateOutput {
         return delete_template.execute(self, allocator, input, options);
     }
 
     /// Deletes the item that the specified template alias points to. If you provide
     /// a specific
     /// alias, you delete the version of the template that the alias points to.
-    pub fn deleteTemplateAlias(self: *Self, allocator: std.mem.Allocator, input: delete_template_alias.DeleteTemplateAliasInput, options: delete_template_alias.Options) !delete_template_alias.DeleteTemplateAliasOutput {
+    pub fn deleteTemplateAlias(self: *Self, allocator: std.mem.Allocator, input: delete_template_alias.DeleteTemplateAliasInput, options: CallOptions) !delete_template_alias.DeleteTemplateAliasOutput {
         return delete_template_alias.execute(self, allocator, input, options);
     }
 
     /// Deletes a theme.
-    pub fn deleteTheme(self: *Self, allocator: std.mem.Allocator, input: delete_theme.DeleteThemeInput, options: delete_theme.Options) !delete_theme.DeleteThemeOutput {
+    pub fn deleteTheme(self: *Self, allocator: std.mem.Allocator, input: delete_theme.DeleteThemeInput, options: CallOptions) !delete_theme.DeleteThemeOutput {
         return delete_theme.execute(self, allocator, input, options);
     }
 
     /// Deletes the version of the theme that the specified theme alias points to.
     /// If you provide a specific alias, you delete the version of the theme
     /// that the alias points to.
-    pub fn deleteThemeAlias(self: *Self, allocator: std.mem.Allocator, input: delete_theme_alias.DeleteThemeAliasInput, options: delete_theme_alias.Options) !delete_theme_alias.DeleteThemeAliasOutput {
+    pub fn deleteThemeAlias(self: *Self, allocator: std.mem.Allocator, input: delete_theme_alias.DeleteThemeAliasInput, options: CallOptions) !delete_theme_alias.DeleteThemeAliasOutput {
         return delete_theme_alias.execute(self, allocator, input, options);
     }
 
     /// Deletes a topic.
-    pub fn deleteTopic(self: *Self, allocator: std.mem.Allocator, input: delete_topic.DeleteTopicInput, options: delete_topic.Options) !delete_topic.DeleteTopicOutput {
+    pub fn deleteTopic(self: *Self, allocator: std.mem.Allocator, input: delete_topic.DeleteTopicInput, options: CallOptions) !delete_topic.DeleteTopicOutput {
         return delete_topic.execute(self, allocator, input, options);
     }
 
     /// Deletes a topic refresh schedule.
-    pub fn deleteTopicRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: delete_topic_refresh_schedule.DeleteTopicRefreshScheduleInput, options: delete_topic_refresh_schedule.Options) !delete_topic_refresh_schedule.DeleteTopicRefreshScheduleOutput {
+    pub fn deleteTopicRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: delete_topic_refresh_schedule.DeleteTopicRefreshScheduleInput, options: CallOptions) !delete_topic_refresh_schedule.DeleteTopicRefreshScheduleOutput {
         return delete_topic_refresh_schedule.execute(self, allocator, input, options);
     }
 
@@ -801,27 +802,27 @@ pub const Client = struct {
     /// the
     /// IAM user or role that's making the call. The IAM user
     /// isn't deleted as a result of this call.
-    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: delete_user.Options) !delete_user.DeleteUserOutput {
+    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: CallOptions) !delete_user.DeleteUserOutput {
         return delete_user.execute(self, allocator, input, options);
     }
 
     /// Deletes a user identified by its principal ID.
-    pub fn deleteUserByPrincipalId(self: *Self, allocator: std.mem.Allocator, input: delete_user_by_principal_id.DeleteUserByPrincipalIdInput, options: delete_user_by_principal_id.Options) !delete_user_by_principal_id.DeleteUserByPrincipalIdOutput {
+    pub fn deleteUserByPrincipalId(self: *Self, allocator: std.mem.Allocator, input: delete_user_by_principal_id.DeleteUserByPrincipalIdInput, options: CallOptions) !delete_user_by_principal_id.DeleteUserByPrincipalIdOutput {
         return delete_user_by_principal_id.execute(self, allocator, input, options);
     }
 
     /// Deletes a custom permissions profile from a user.
-    pub fn deleteUserCustomPermission(self: *Self, allocator: std.mem.Allocator, input: delete_user_custom_permission.DeleteUserCustomPermissionInput, options: delete_user_custom_permission.Options) !delete_user_custom_permission.DeleteUserCustomPermissionOutput {
+    pub fn deleteUserCustomPermission(self: *Self, allocator: std.mem.Allocator, input: delete_user_custom_permission.DeleteUserCustomPermissionInput, options: CallOptions) !delete_user_custom_permission.DeleteUserCustomPermissionOutput {
         return delete_user_custom_permission.execute(self, allocator, input, options);
     }
 
     /// Deletes a VPC connection.
-    pub fn deleteVpcConnection(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_connection.DeleteVPCConnectionInput, options: delete_vpc_connection.Options) !delete_vpc_connection.DeleteVPCConnectionOutput {
+    pub fn deleteVpcConnection(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_connection.DeleteVPCConnectionInput, options: CallOptions) !delete_vpc_connection.DeleteVPCConnectionOutput {
         return delete_vpc_connection.execute(self, allocator, input, options);
     }
 
     /// Describes the custom permissions profile that is applied to an account.
-    pub fn describeAccountCustomPermission(self: *Self, allocator: std.mem.Allocator, input: describe_account_custom_permission.DescribeAccountCustomPermissionInput, options: describe_account_custom_permission.Options) !describe_account_custom_permission.DescribeAccountCustomPermissionOutput {
+    pub fn describeAccountCustomPermission(self: *Self, allocator: std.mem.Allocator, input: describe_account_custom_permission.DescribeAccountCustomPermissionInput, options: CallOptions) !describe_account_custom_permission.DescribeAccountCustomPermissionOutput {
         return describe_account_custom_permission.execute(self, allocator, input, options);
     }
 
@@ -882,14 +883,14 @@ pub const Client = struct {
     /// Settings that you apply to a namespace override settings that you apply to
     /// an
     /// Amazon Web Services account.
-    pub fn describeAccountCustomization(self: *Self, allocator: std.mem.Allocator, input: describe_account_customization.DescribeAccountCustomizationInput, options: describe_account_customization.Options) !describe_account_customization.DescribeAccountCustomizationOutput {
+    pub fn describeAccountCustomization(self: *Self, allocator: std.mem.Allocator, input: describe_account_customization.DescribeAccountCustomizationInput, options: CallOptions) !describe_account_customization.DescribeAccountCustomizationOutput {
         return describe_account_customization.execute(self, allocator, input, options);
     }
 
     /// Describes the settings that were used when your Quick Sight subscription was
     /// first
     /// created in this Amazon Web Services account.
-    pub fn describeAccountSettings(self: *Self, allocator: std.mem.Allocator, input: describe_account_settings.DescribeAccountSettingsInput, options: describe_account_settings.Options) !describe_account_settings.DescribeAccountSettingsOutput {
+    pub fn describeAccountSettings(self: *Self, allocator: std.mem.Allocator, input: describe_account_settings.DescribeAccountSettingsInput, options: CallOptions) !describe_account_settings.DescribeAccountSettingsOutput {
         return describe_account_settings.execute(self, allocator, input, options);
     }
 
@@ -897,25 +898,25 @@ pub const Client = struct {
     /// Quick Sight account's subscription. A successful API call returns an
     /// `AccountInfo` object that includes an account's name, subscription status,
     /// authentication type, edition, and notification email address.
-    pub fn describeAccountSubscription(self: *Self, allocator: std.mem.Allocator, input: describe_account_subscription.DescribeAccountSubscriptionInput, options: describe_account_subscription.Options) !describe_account_subscription.DescribeAccountSubscriptionOutput {
+    pub fn describeAccountSubscription(self: *Self, allocator: std.mem.Allocator, input: describe_account_subscription.DescribeAccountSubscriptionInput, options: CallOptions) !describe_account_subscription.DescribeAccountSubscriptionOutput {
         return describe_account_subscription.execute(self, allocator, input, options);
     }
 
     /// Retrieves detailed information about an action connector, including its
     /// configuration, authentication settings, enabled actions, and current status.
-    pub fn describeActionConnector(self: *Self, allocator: std.mem.Allocator, input: describe_action_connector.DescribeActionConnectorInput, options: describe_action_connector.Options) !describe_action_connector.DescribeActionConnectorOutput {
+    pub fn describeActionConnector(self: *Self, allocator: std.mem.Allocator, input: describe_action_connector.DescribeActionConnectorInput, options: CallOptions) !describe_action_connector.DescribeActionConnectorOutput {
         return describe_action_connector.execute(self, allocator, input, options);
     }
 
     /// Retrieves the permissions configuration for an action connector, showing
     /// which users, groups, and namespaces have access and what operations they can
     /// perform.
-    pub fn describeActionConnectorPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_action_connector_permissions.DescribeActionConnectorPermissionsInput, options: describe_action_connector_permissions.Options) !describe_action_connector_permissions.DescribeActionConnectorPermissionsOutput {
+    pub fn describeActionConnectorPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_action_connector_permissions.DescribeActionConnectorPermissionsInput, options: CallOptions) !describe_action_connector_permissions.DescribeActionConnectorPermissionsOutput {
         return describe_action_connector_permissions.execute(self, allocator, input, options);
     }
 
     /// Provides a summary of the metadata for an analysis.
-    pub fn describeAnalysis(self: *Self, allocator: std.mem.Allocator, input: describe_analysis.DescribeAnalysisInput, options: describe_analysis.Options) !describe_analysis.DescribeAnalysisOutput {
+    pub fn describeAnalysis(self: *Self, allocator: std.mem.Allocator, input: describe_analysis.DescribeAnalysisInput, options: CallOptions) !describe_analysis.DescribeAnalysisOutput {
         return describe_analysis.execute(self, allocator, input, options);
     }
 
@@ -928,12 +929,12 @@ pub const Client = struct {
     /// [
     /// `DescribeAnalysis`
     /// ](https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeAnalysis.html) instead.
-    pub fn describeAnalysisDefinition(self: *Self, allocator: std.mem.Allocator, input: describe_analysis_definition.DescribeAnalysisDefinitionInput, options: describe_analysis_definition.Options) !describe_analysis_definition.DescribeAnalysisDefinitionOutput {
+    pub fn describeAnalysisDefinition(self: *Self, allocator: std.mem.Allocator, input: describe_analysis_definition.DescribeAnalysisDefinitionInput, options: CallOptions) !describe_analysis_definition.DescribeAnalysisDefinitionOutput {
         return describe_analysis_definition.execute(self, allocator, input, options);
     }
 
     /// Provides the read and write permissions for an analysis.
-    pub fn describeAnalysisPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_analysis_permissions.DescribeAnalysisPermissionsInput, options: describe_analysis_permissions.Options) !describe_analysis_permissions.DescribeAnalysisPermissionsOutput {
+    pub fn describeAnalysisPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_analysis_permissions.DescribeAnalysisPermissionsInput, options: CallOptions) !describe_analysis_permissions.DescribeAnalysisPermissionsOutput {
         return describe_analysis_permissions.execute(self, allocator, input, options);
     }
 
@@ -947,7 +948,7 @@ pub const Client = struct {
     /// `DescribeAssetBundleExportJob` API for a new download URL as needed.
     ///
     /// Job descriptions are available for 14 days after the job starts.
-    pub fn describeAssetBundleExportJob(self: *Self, allocator: std.mem.Allocator, input: describe_asset_bundle_export_job.DescribeAssetBundleExportJobInput, options: describe_asset_bundle_export_job.Options) !describe_asset_bundle_export_job.DescribeAssetBundleExportJobOutput {
+    pub fn describeAssetBundleExportJob(self: *Self, allocator: std.mem.Allocator, input: describe_asset_bundle_export_job.DescribeAssetBundleExportJobInput, options: CallOptions) !describe_asset_bundle_export_job.DescribeAssetBundleExportJobOutput {
         return describe_asset_bundle_export_job.execute(self, allocator, input, options);
     }
 
@@ -956,32 +957,32 @@ pub const Client = struct {
     /// Poll job descriptions after starting a job to know when it has succeeded or
     /// failed. Job
     /// descriptions are available for 14 days after job starts.
-    pub fn describeAssetBundleImportJob(self: *Self, allocator: std.mem.Allocator, input: describe_asset_bundle_import_job.DescribeAssetBundleImportJobInput, options: describe_asset_bundle_import_job.Options) !describe_asset_bundle_import_job.DescribeAssetBundleImportJobOutput {
+    pub fn describeAssetBundleImportJob(self: *Self, allocator: std.mem.Allocator, input: describe_asset_bundle_import_job.DescribeAssetBundleImportJobInput, options: CallOptions) !describe_asset_bundle_import_job.DescribeAssetBundleImportJobOutput {
         return describe_asset_bundle_import_job.execute(self, allocator, input, options);
     }
 
     /// Describes a brand.
-    pub fn describeBrand(self: *Self, allocator: std.mem.Allocator, input: describe_brand.DescribeBrandInput, options: describe_brand.Options) !describe_brand.DescribeBrandOutput {
+    pub fn describeBrand(self: *Self, allocator: std.mem.Allocator, input: describe_brand.DescribeBrandInput, options: CallOptions) !describe_brand.DescribeBrandOutput {
         return describe_brand.execute(self, allocator, input, options);
     }
 
     /// Describes a brand assignment.
-    pub fn describeBrandAssignment(self: *Self, allocator: std.mem.Allocator, input: describe_brand_assignment.DescribeBrandAssignmentInput, options: describe_brand_assignment.Options) !describe_brand_assignment.DescribeBrandAssignmentOutput {
+    pub fn describeBrandAssignment(self: *Self, allocator: std.mem.Allocator, input: describe_brand_assignment.DescribeBrandAssignmentInput, options: CallOptions) !describe_brand_assignment.DescribeBrandAssignmentOutput {
         return describe_brand_assignment.execute(self, allocator, input, options);
     }
 
     /// Describes the published version of the brand.
-    pub fn describeBrandPublishedVersion(self: *Self, allocator: std.mem.Allocator, input: describe_brand_published_version.DescribeBrandPublishedVersionInput, options: describe_brand_published_version.Options) !describe_brand_published_version.DescribeBrandPublishedVersionOutput {
+    pub fn describeBrandPublishedVersion(self: *Self, allocator: std.mem.Allocator, input: describe_brand_published_version.DescribeBrandPublishedVersionInput, options: CallOptions) !describe_brand_published_version.DescribeBrandPublishedVersionOutput {
         return describe_brand_published_version.execute(self, allocator, input, options);
     }
 
     /// Describes a custom permissions profile.
-    pub fn describeCustomPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_custom_permissions.DescribeCustomPermissionsInput, options: describe_custom_permissions.Options) !describe_custom_permissions.DescribeCustomPermissionsOutput {
+    pub fn describeCustomPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_custom_permissions.DescribeCustomPermissionsInput, options: CallOptions) !describe_custom_permissions.DescribeCustomPermissionsOutput {
         return describe_custom_permissions.execute(self, allocator, input, options);
     }
 
     /// Provides a summary for a dashboard.
-    pub fn describeDashboard(self: *Self, allocator: std.mem.Allocator, input: describe_dashboard.DescribeDashboardInput, options: describe_dashboard.Options) !describe_dashboard.DescribeDashboardOutput {
+    pub fn describeDashboard(self: *Self, allocator: std.mem.Allocator, input: describe_dashboard.DescribeDashboardInput, options: CallOptions) !describe_dashboard.DescribeDashboardOutput {
         return describe_dashboard.execute(self, allocator, input, options);
     }
 
@@ -994,12 +995,12 @@ pub const Client = struct {
     /// use the [
     /// `DescribeDashboard`
     /// ](https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeDashboard.html) instead.
-    pub fn describeDashboardDefinition(self: *Self, allocator: std.mem.Allocator, input: describe_dashboard_definition.DescribeDashboardDefinitionInput, options: describe_dashboard_definition.Options) !describe_dashboard_definition.DescribeDashboardDefinitionOutput {
+    pub fn describeDashboardDefinition(self: *Self, allocator: std.mem.Allocator, input: describe_dashboard_definition.DescribeDashboardDefinitionInput, options: CallOptions) !describe_dashboard_definition.DescribeDashboardDefinitionOutput {
         return describe_dashboard_definition.execute(self, allocator, input, options);
     }
 
     /// Describes read and write permissions for a dashboard.
-    pub fn describeDashboardPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_dashboard_permissions.DescribeDashboardPermissionsInput, options: describe_dashboard_permissions.Options) !describe_dashboard_permissions.DescribeDashboardPermissionsOutput {
+    pub fn describeDashboardPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_dashboard_permissions.DescribeDashboardPermissionsInput, options: CallOptions) !describe_dashboard_permissions.DescribeDashboardPermissionsOutput {
         return describe_dashboard_permissions.execute(self, allocator, input, options);
     }
 
@@ -1023,7 +1024,7 @@ pub const Client = struct {
     ///
     /// * Impersonated Quick Sight user doesn't have access to the specified
     ///   dashboard in the job.
-    pub fn describeDashboardSnapshotJob(self: *Self, allocator: std.mem.Allocator, input: describe_dashboard_snapshot_job.DescribeDashboardSnapshotJobInput, options: describe_dashboard_snapshot_job.Options) !describe_dashboard_snapshot_job.DescribeDashboardSnapshotJobOutput {
+    pub fn describeDashboardSnapshotJob(self: *Self, allocator: std.mem.Allocator, input: describe_dashboard_snapshot_job.DescribeDashboardSnapshotJobInput, options: CallOptions) !describe_dashboard_snapshot_job.DescribeDashboardSnapshotJobOutput {
         return describe_dashboard_snapshot_job.execute(self, allocator, input, options);
     }
 
@@ -1074,19 +1075,19 @@ pub const Client = struct {
     ///
     /// * `DATASET_DELETED` - The dataset has been deleted. Verify the dataset
     ///   exists before re-running the job.
-    pub fn describeDashboardSnapshotJobResult(self: *Self, allocator: std.mem.Allocator, input: describe_dashboard_snapshot_job_result.DescribeDashboardSnapshotJobResultInput, options: describe_dashboard_snapshot_job_result.Options) !describe_dashboard_snapshot_job_result.DescribeDashboardSnapshotJobResultOutput {
+    pub fn describeDashboardSnapshotJobResult(self: *Self, allocator: std.mem.Allocator, input: describe_dashboard_snapshot_job_result.DescribeDashboardSnapshotJobResultInput, options: CallOptions) !describe_dashboard_snapshot_job_result.DescribeDashboardSnapshotJobResultOutput {
         return describe_dashboard_snapshot_job_result.execute(self, allocator, input, options);
     }
 
     /// Describes an existing dashboard QA configuration.
-    pub fn describeDashboardsQaConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_dashboards_qa_configuration.DescribeDashboardsQAConfigurationInput, options: describe_dashboards_qa_configuration.Options) !describe_dashboards_qa_configuration.DescribeDashboardsQAConfigurationOutput {
+    pub fn describeDashboardsQaConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_dashboards_qa_configuration.DescribeDashboardsQAConfigurationInput, options: CallOptions) !describe_dashboards_qa_configuration.DescribeDashboardsQAConfigurationOutput {
         return describe_dashboards_qa_configuration.execute(self, allocator, input, options);
     }
 
     /// Describes a dataset. This operation doesn't support datasets that include
     /// uploaded
     /// files as a source.
-    pub fn describeDataSet(self: *Self, allocator: std.mem.Allocator, input: describe_data_set.DescribeDataSetInput, options: describe_data_set.Options) !describe_data_set.DescribeDataSetOutput {
+    pub fn describeDataSet(self: *Self, allocator: std.mem.Allocator, input: describe_data_set.DescribeDataSetInput, options: CallOptions) !describe_data_set.DescribeDataSetOutput {
         return describe_data_set.execute(self, allocator, input, options);
     }
 
@@ -1094,51 +1095,51 @@ pub const Client = struct {
     ///
     /// The permissions resource is
     /// `arn:aws:quicksight:region:aws-account-id:dataset/data-set-id`.
-    pub fn describeDataSetPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_data_set_permissions.DescribeDataSetPermissionsInput, options: describe_data_set_permissions.Options) !describe_data_set_permissions.DescribeDataSetPermissionsOutput {
+    pub fn describeDataSetPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_data_set_permissions.DescribeDataSetPermissionsInput, options: CallOptions) !describe_data_set_permissions.DescribeDataSetPermissionsOutput {
         return describe_data_set_permissions.execute(self, allocator, input, options);
     }
 
     /// Describes the refresh properties of a dataset.
-    pub fn describeDataSetRefreshProperties(self: *Self, allocator: std.mem.Allocator, input: describe_data_set_refresh_properties.DescribeDataSetRefreshPropertiesInput, options: describe_data_set_refresh_properties.Options) !describe_data_set_refresh_properties.DescribeDataSetRefreshPropertiesOutput {
+    pub fn describeDataSetRefreshProperties(self: *Self, allocator: std.mem.Allocator, input: describe_data_set_refresh_properties.DescribeDataSetRefreshPropertiesInput, options: CallOptions) !describe_data_set_refresh_properties.DescribeDataSetRefreshPropertiesOutput {
         return describe_data_set_refresh_properties.execute(self, allocator, input, options);
     }
 
     /// Describes a data source.
-    pub fn describeDataSource(self: *Self, allocator: std.mem.Allocator, input: describe_data_source.DescribeDataSourceInput, options: describe_data_source.Options) !describe_data_source.DescribeDataSourceOutput {
+    pub fn describeDataSource(self: *Self, allocator: std.mem.Allocator, input: describe_data_source.DescribeDataSourceInput, options: CallOptions) !describe_data_source.DescribeDataSourceOutput {
         return describe_data_source.execute(self, allocator, input, options);
     }
 
     /// Describes the resource permissions for a data source.
-    pub fn describeDataSourcePermissions(self: *Self, allocator: std.mem.Allocator, input: describe_data_source_permissions.DescribeDataSourcePermissionsInput, options: describe_data_source_permissions.Options) !describe_data_source_permissions.DescribeDataSourcePermissionsOutput {
+    pub fn describeDataSourcePermissions(self: *Self, allocator: std.mem.Allocator, input: describe_data_source_permissions.DescribeDataSourcePermissionsInput, options: CallOptions) !describe_data_source_permissions.DescribeDataSourcePermissionsOutput {
         return describe_data_source_permissions.execute(self, allocator, input, options);
     }
 
     /// Describes a Amazon Q Business application that is linked to an Quick Sight
     /// account.
-    pub fn describeDefaultQBusinessApplication(self: *Self, allocator: std.mem.Allocator, input: describe_default_q_business_application.DescribeDefaultQBusinessApplicationInput, options: describe_default_q_business_application.Options) !describe_default_q_business_application.DescribeDefaultQBusinessApplicationOutput {
+    pub fn describeDefaultQBusinessApplication(self: *Self, allocator: std.mem.Allocator, input: describe_default_q_business_application.DescribeDefaultQBusinessApplicationInput, options: CallOptions) !describe_default_q_business_application.DescribeDefaultQBusinessApplicationOutput {
         return describe_default_q_business_application.execute(self, allocator, input, options);
     }
 
     /// Describes a folder.
-    pub fn describeFolder(self: *Self, allocator: std.mem.Allocator, input: describe_folder.DescribeFolderInput, options: describe_folder.Options) !describe_folder.DescribeFolderOutput {
+    pub fn describeFolder(self: *Self, allocator: std.mem.Allocator, input: describe_folder.DescribeFolderInput, options: CallOptions) !describe_folder.DescribeFolderOutput {
         return describe_folder.execute(self, allocator, input, options);
     }
 
     /// Describes permissions for a folder.
-    pub fn describeFolderPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_folder_permissions.DescribeFolderPermissionsInput, options: describe_folder_permissions.Options) !describe_folder_permissions.DescribeFolderPermissionsOutput {
+    pub fn describeFolderPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_folder_permissions.DescribeFolderPermissionsInput, options: CallOptions) !describe_folder_permissions.DescribeFolderPermissionsOutput {
         return describe_folder_permissions.execute(self, allocator, input, options);
     }
 
     /// Describes the folder resolved permissions. Permissions consists of both
     /// folder direct permissions and the inherited permissions from the ancestor
     /// folders.
-    pub fn describeFolderResolvedPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_folder_resolved_permissions.DescribeFolderResolvedPermissionsInput, options: describe_folder_resolved_permissions.Options) !describe_folder_resolved_permissions.DescribeFolderResolvedPermissionsOutput {
+    pub fn describeFolderResolvedPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_folder_resolved_permissions.DescribeFolderResolvedPermissionsInput, options: CallOptions) !describe_folder_resolved_permissions.DescribeFolderResolvedPermissionsOutput {
         return describe_folder_resolved_permissions.execute(self, allocator, input, options);
     }
 
     /// Returns an Amazon Quick Sight group's description and Amazon Resource Name
     /// (ARN).
-    pub fn describeGroup(self: *Self, allocator: std.mem.Allocator, input: describe_group.DescribeGroupInput, options: describe_group.Options) !describe_group.DescribeGroupOutput {
+    pub fn describeGroup(self: *Self, allocator: std.mem.Allocator, input: describe_group.DescribeGroupInput, options: CallOptions) !describe_group.DescribeGroupOutput {
         return describe_group.execute(self, allocator, input, options);
     }
 
@@ -1146,68 +1147,68 @@ pub const Client = struct {
     /// member of the specified group. If the user exists and is a member of the
     /// specified
     /// group, an associated `GroupMember` object is returned.
-    pub fn describeGroupMembership(self: *Self, allocator: std.mem.Allocator, input: describe_group_membership.DescribeGroupMembershipInput, options: describe_group_membership.Options) !describe_group_membership.DescribeGroupMembershipOutput {
+    pub fn describeGroupMembership(self: *Self, allocator: std.mem.Allocator, input: describe_group_membership.DescribeGroupMembershipInput, options: CallOptions) !describe_group_membership.DescribeGroupMembershipOutput {
         return describe_group_membership.execute(self, allocator, input, options);
     }
 
     /// Describes an existing IAM policy assignment, as specified by the
     /// assignment name.
-    pub fn describeIamPolicyAssignment(self: *Self, allocator: std.mem.Allocator, input: describe_iam_policy_assignment.DescribeIAMPolicyAssignmentInput, options: describe_iam_policy_assignment.Options) !describe_iam_policy_assignment.DescribeIAMPolicyAssignmentOutput {
+    pub fn describeIamPolicyAssignment(self: *Self, allocator: std.mem.Allocator, input: describe_iam_policy_assignment.DescribeIAMPolicyAssignmentInput, options: CallOptions) !describe_iam_policy_assignment.DescribeIAMPolicyAssignmentOutput {
         return describe_iam_policy_assignment.execute(self, allocator, input, options);
     }
 
     /// Describes a SPICE ingestion.
-    pub fn describeIngestion(self: *Self, allocator: std.mem.Allocator, input: describe_ingestion.DescribeIngestionInput, options: describe_ingestion.Options) !describe_ingestion.DescribeIngestionOutput {
+    pub fn describeIngestion(self: *Self, allocator: std.mem.Allocator, input: describe_ingestion.DescribeIngestionInput, options: CallOptions) !describe_ingestion.DescribeIngestionOutput {
         return describe_ingestion.execute(self, allocator, input, options);
     }
 
     /// Provides a summary and status of IP rules.
-    pub fn describeIpRestriction(self: *Self, allocator: std.mem.Allocator, input: describe_ip_restriction.DescribeIpRestrictionInput, options: describe_ip_restriction.Options) !describe_ip_restriction.DescribeIpRestrictionOutput {
+    pub fn describeIpRestriction(self: *Self, allocator: std.mem.Allocator, input: describe_ip_restriction.DescribeIpRestrictionInput, options: CallOptions) !describe_ip_restriction.DescribeIpRestrictionOutput {
         return describe_ip_restriction.execute(self, allocator, input, options);
     }
 
     /// Describes all customer managed key registrations in a Quick Sight account.
-    pub fn describeKeyRegistration(self: *Self, allocator: std.mem.Allocator, input: describe_key_registration.DescribeKeyRegistrationInput, options: describe_key_registration.Options) !describe_key_registration.DescribeKeyRegistrationOutput {
+    pub fn describeKeyRegistration(self: *Self, allocator: std.mem.Allocator, input: describe_key_registration.DescribeKeyRegistrationInput, options: CallOptions) !describe_key_registration.DescribeKeyRegistrationOutput {
         return describe_key_registration.execute(self, allocator, input, options);
     }
 
     /// Describes the current namespace.
-    pub fn describeNamespace(self: *Self, allocator: std.mem.Allocator, input: describe_namespace.DescribeNamespaceInput, options: describe_namespace.Options) !describe_namespace.DescribeNamespaceOutput {
+    pub fn describeNamespace(self: *Self, allocator: std.mem.Allocator, input: describe_namespace.DescribeNamespaceInput, options: CallOptions) !describe_namespace.DescribeNamespaceOutput {
         return describe_namespace.execute(self, allocator, input, options);
     }
 
     /// Describes a personalization configuration.
-    pub fn describeQPersonalizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_q_personalization_configuration.DescribeQPersonalizationConfigurationInput, options: describe_q_personalization_configuration.Options) !describe_q_personalization_configuration.DescribeQPersonalizationConfigurationOutput {
+    pub fn describeQPersonalizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_q_personalization_configuration.DescribeQPersonalizationConfigurationInput, options: CallOptions) !describe_q_personalization_configuration.DescribeQPersonalizationConfigurationOutput {
         return describe_q_personalization_configuration.execute(self, allocator, input, options);
     }
 
     /// Describes the state of a Quick Sight Q Search configuration.
-    pub fn describeQuickSightQSearchConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_quick_sight_q_search_configuration.DescribeQuickSightQSearchConfigurationInput, options: describe_quick_sight_q_search_configuration.Options) !describe_quick_sight_q_search_configuration.DescribeQuickSightQSearchConfigurationOutput {
+    pub fn describeQuickSightQSearchConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_quick_sight_q_search_configuration.DescribeQuickSightQSearchConfigurationInput, options: CallOptions) !describe_quick_sight_q_search_configuration.DescribeQuickSightQSearchConfigurationOutput {
         return describe_quick_sight_q_search_configuration.execute(self, allocator, input, options);
     }
 
     /// Provides a summary of a refresh schedule.
-    pub fn describeRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: describe_refresh_schedule.DescribeRefreshScheduleInput, options: describe_refresh_schedule.Options) !describe_refresh_schedule.DescribeRefreshScheduleOutput {
+    pub fn describeRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: describe_refresh_schedule.DescribeRefreshScheduleInput, options: CallOptions) !describe_refresh_schedule.DescribeRefreshScheduleOutput {
         return describe_refresh_schedule.execute(self, allocator, input, options);
     }
 
     /// Describes all custom permissions that are mapped to a role.
-    pub fn describeRoleCustomPermission(self: *Self, allocator: std.mem.Allocator, input: describe_role_custom_permission.DescribeRoleCustomPermissionInput, options: describe_role_custom_permission.Options) !describe_role_custom_permission.DescribeRoleCustomPermissionOutput {
+    pub fn describeRoleCustomPermission(self: *Self, allocator: std.mem.Allocator, input: describe_role_custom_permission.DescribeRoleCustomPermissionInput, options: CallOptions) !describe_role_custom_permission.DescribeRoleCustomPermissionOutput {
         return describe_role_custom_permission.execute(self, allocator, input, options);
     }
 
     /// Describes the self-upgrade configuration for a Quick Suite account.
-    pub fn describeSelfUpgradeConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_self_upgrade_configuration.DescribeSelfUpgradeConfigurationInput, options: describe_self_upgrade_configuration.Options) !describe_self_upgrade_configuration.DescribeSelfUpgradeConfigurationOutput {
+    pub fn describeSelfUpgradeConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_self_upgrade_configuration.DescribeSelfUpgradeConfigurationInput, options: CallOptions) !describe_self_upgrade_configuration.DescribeSelfUpgradeConfigurationOutput {
         return describe_self_upgrade_configuration.execute(self, allocator, input, options);
     }
 
     /// Describes a template's metadata.
-    pub fn describeTemplate(self: *Self, allocator: std.mem.Allocator, input: describe_template.DescribeTemplateInput, options: describe_template.Options) !describe_template.DescribeTemplateOutput {
+    pub fn describeTemplate(self: *Self, allocator: std.mem.Allocator, input: describe_template.DescribeTemplateInput, options: CallOptions) !describe_template.DescribeTemplateOutput {
         return describe_template.execute(self, allocator, input, options);
     }
 
     /// Describes the template alias for a template.
-    pub fn describeTemplateAlias(self: *Self, allocator: std.mem.Allocator, input: describe_template_alias.DescribeTemplateAliasInput, options: describe_template_alias.Options) !describe_template_alias.DescribeTemplateAliasOutput {
+    pub fn describeTemplateAlias(self: *Self, allocator: std.mem.Allocator, input: describe_template_alias.DescribeTemplateAliasInput, options: CallOptions) !describe_template_alias.DescribeTemplateAliasOutput {
         return describe_template_alias.execute(self, allocator, input, options);
     }
 
@@ -1220,57 +1221,57 @@ pub const Client = struct {
     /// [
     /// `DescribeTemplate`
     /// ](https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeTemplate.html) instead.
-    pub fn describeTemplateDefinition(self: *Self, allocator: std.mem.Allocator, input: describe_template_definition.DescribeTemplateDefinitionInput, options: describe_template_definition.Options) !describe_template_definition.DescribeTemplateDefinitionOutput {
+    pub fn describeTemplateDefinition(self: *Self, allocator: std.mem.Allocator, input: describe_template_definition.DescribeTemplateDefinitionInput, options: CallOptions) !describe_template_definition.DescribeTemplateDefinitionOutput {
         return describe_template_definition.execute(self, allocator, input, options);
     }
 
     /// Describes read and write permissions on a template.
-    pub fn describeTemplatePermissions(self: *Self, allocator: std.mem.Allocator, input: describe_template_permissions.DescribeTemplatePermissionsInput, options: describe_template_permissions.Options) !describe_template_permissions.DescribeTemplatePermissionsOutput {
+    pub fn describeTemplatePermissions(self: *Self, allocator: std.mem.Allocator, input: describe_template_permissions.DescribeTemplatePermissionsInput, options: CallOptions) !describe_template_permissions.DescribeTemplatePermissionsOutput {
         return describe_template_permissions.execute(self, allocator, input, options);
     }
 
     /// Describes a theme.
-    pub fn describeTheme(self: *Self, allocator: std.mem.Allocator, input: describe_theme.DescribeThemeInput, options: describe_theme.Options) !describe_theme.DescribeThemeOutput {
+    pub fn describeTheme(self: *Self, allocator: std.mem.Allocator, input: describe_theme.DescribeThemeInput, options: CallOptions) !describe_theme.DescribeThemeOutput {
         return describe_theme.execute(self, allocator, input, options);
     }
 
     /// Describes the alias for a theme.
-    pub fn describeThemeAlias(self: *Self, allocator: std.mem.Allocator, input: describe_theme_alias.DescribeThemeAliasInput, options: describe_theme_alias.Options) !describe_theme_alias.DescribeThemeAliasOutput {
+    pub fn describeThemeAlias(self: *Self, allocator: std.mem.Allocator, input: describe_theme_alias.DescribeThemeAliasInput, options: CallOptions) !describe_theme_alias.DescribeThemeAliasOutput {
         return describe_theme_alias.execute(self, allocator, input, options);
     }
 
     /// Describes the read and write permissions for a theme.
-    pub fn describeThemePermissions(self: *Self, allocator: std.mem.Allocator, input: describe_theme_permissions.DescribeThemePermissionsInput, options: describe_theme_permissions.Options) !describe_theme_permissions.DescribeThemePermissionsOutput {
+    pub fn describeThemePermissions(self: *Self, allocator: std.mem.Allocator, input: describe_theme_permissions.DescribeThemePermissionsInput, options: CallOptions) !describe_theme_permissions.DescribeThemePermissionsOutput {
         return describe_theme_permissions.execute(self, allocator, input, options);
     }
 
     /// Describes a topic.
-    pub fn describeTopic(self: *Self, allocator: std.mem.Allocator, input: describe_topic.DescribeTopicInput, options: describe_topic.Options) !describe_topic.DescribeTopicOutput {
+    pub fn describeTopic(self: *Self, allocator: std.mem.Allocator, input: describe_topic.DescribeTopicInput, options: CallOptions) !describe_topic.DescribeTopicOutput {
         return describe_topic.execute(self, allocator, input, options);
     }
 
     /// Describes the permissions of a topic.
-    pub fn describeTopicPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_topic_permissions.DescribeTopicPermissionsInput, options: describe_topic_permissions.Options) !describe_topic_permissions.DescribeTopicPermissionsOutput {
+    pub fn describeTopicPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_topic_permissions.DescribeTopicPermissionsInput, options: CallOptions) !describe_topic_permissions.DescribeTopicPermissionsOutput {
         return describe_topic_permissions.execute(self, allocator, input, options);
     }
 
     /// Describes the status of a topic refresh.
-    pub fn describeTopicRefresh(self: *Self, allocator: std.mem.Allocator, input: describe_topic_refresh.DescribeTopicRefreshInput, options: describe_topic_refresh.Options) !describe_topic_refresh.DescribeTopicRefreshOutput {
+    pub fn describeTopicRefresh(self: *Self, allocator: std.mem.Allocator, input: describe_topic_refresh.DescribeTopicRefreshInput, options: CallOptions) !describe_topic_refresh.DescribeTopicRefreshOutput {
         return describe_topic_refresh.execute(self, allocator, input, options);
     }
 
     /// Deletes a topic refresh schedule.
-    pub fn describeTopicRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: describe_topic_refresh_schedule.DescribeTopicRefreshScheduleInput, options: describe_topic_refresh_schedule.Options) !describe_topic_refresh_schedule.DescribeTopicRefreshScheduleOutput {
+    pub fn describeTopicRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: describe_topic_refresh_schedule.DescribeTopicRefreshScheduleInput, options: CallOptions) !describe_topic_refresh_schedule.DescribeTopicRefreshScheduleOutput {
         return describe_topic_refresh_schedule.execute(self, allocator, input, options);
     }
 
     /// Returns information about a user, given the user name.
-    pub fn describeUser(self: *Self, allocator: std.mem.Allocator, input: describe_user.DescribeUserInput, options: describe_user.Options) !describe_user.DescribeUserOutput {
+    pub fn describeUser(self: *Self, allocator: std.mem.Allocator, input: describe_user.DescribeUserInput, options: CallOptions) !describe_user.DescribeUserOutput {
         return describe_user.execute(self, allocator, input, options);
     }
 
     /// Describes a VPC connection.
-    pub fn describeVpcConnection(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_connection.DescribeVPCConnectionInput, options: describe_vpc_connection.Options) !describe_vpc_connection.DescribeVPCConnectionOutput {
+    pub fn describeVpcConnection(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_connection.DescribeVPCConnectionInput, options: CallOptions) !describe_vpc_connection.DescribeVPCConnectionOutput {
         return describe_vpc_connection.execute(self, allocator, input, options);
     }
 
@@ -1305,7 +1306,7 @@ pub const Client = struct {
     /// demo of the ways you can customize embedding, visit the [Amazon Quick Suite
     /// Developer
     /// Portal](https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html).
-    pub fn generateEmbedUrlForAnonymousUser(self: *Self, allocator: std.mem.Allocator, input: generate_embed_url_for_anonymous_user.GenerateEmbedUrlForAnonymousUserInput, options: generate_embed_url_for_anonymous_user.Options) !generate_embed_url_for_anonymous_user.GenerateEmbedUrlForAnonymousUserOutput {
+    pub fn generateEmbedUrlForAnonymousUser(self: *Self, allocator: std.mem.Allocator, input: generate_embed_url_for_anonymous_user.GenerateEmbedUrlForAnonymousUserInput, options: CallOptions) !generate_embed_url_for_anonymous_user.GenerateEmbedUrlForAnonymousUserOutput {
         return generate_embed_url_for_anonymous_user.execute(self, allocator, input, options);
     }
 
@@ -1342,7 +1343,7 @@ pub const Client = struct {
     /// demo of the ways you can customize embedding, visit the [Amazon Quick Suite
     /// Developer
     /// Portal](https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html).
-    pub fn generateEmbedUrlForRegisteredUser(self: *Self, allocator: std.mem.Allocator, input: generate_embed_url_for_registered_user.GenerateEmbedUrlForRegisteredUserInput, options: generate_embed_url_for_registered_user.Options) !generate_embed_url_for_registered_user.GenerateEmbedUrlForRegisteredUserOutput {
+    pub fn generateEmbedUrlForRegisteredUser(self: *Self, allocator: std.mem.Allocator, input: generate_embed_url_for_registered_user.GenerateEmbedUrlForRegisteredUserInput, options: CallOptions) !generate_embed_url_for_registered_user.GenerateEmbedUrlForRegisteredUserOutput {
         return generate_embed_url_for_registered_user.execute(self, allocator, input, options);
     }
 
@@ -1366,7 +1367,7 @@ pub const Client = struct {
     /// value set to `quicksight:read`. Before you use this action, make sure that
     /// you have configured the relevant Amazon Quick Sight resource and
     /// permissions.
-    pub fn generateEmbedUrlForRegisteredUserWithIdentity(self: *Self, allocator: std.mem.Allocator, input: generate_embed_url_for_registered_user_with_identity.GenerateEmbedUrlForRegisteredUserWithIdentityInput, options: generate_embed_url_for_registered_user_with_identity.Options) !generate_embed_url_for_registered_user_with_identity.GenerateEmbedUrlForRegisteredUserWithIdentityOutput {
+    pub fn generateEmbedUrlForRegisteredUserWithIdentity(self: *Self, allocator: std.mem.Allocator, input: generate_embed_url_for_registered_user_with_identity.GenerateEmbedUrlForRegisteredUserWithIdentityInput, options: CallOptions) !generate_embed_url_for_registered_user_with_identity.GenerateEmbedUrlForRegisteredUserWithIdentityOutput {
         return generate_embed_url_for_registered_user_with_identity.execute(self, allocator, input, options);
     }
 
@@ -1405,18 +1406,18 @@ pub const Client = struct {
     /// demo of the ways you can customize embedding, visit the [Amazon Quick Suite
     /// Developer
     /// Portal](https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html).
-    pub fn getDashboardEmbedUrl(self: *Self, allocator: std.mem.Allocator, input: get_dashboard_embed_url.GetDashboardEmbedUrlInput, options: get_dashboard_embed_url.Options) !get_dashboard_embed_url.GetDashboardEmbedUrlOutput {
+    pub fn getDashboardEmbedUrl(self: *Self, allocator: std.mem.Allocator, input: get_dashboard_embed_url.GetDashboardEmbedUrlInput, options: CallOptions) !get_dashboard_embed_url.GetDashboardEmbedUrlOutput {
         return get_dashboard_embed_url.execute(self, allocator, input, options);
     }
 
     /// Retrieves the metadata of a flow, not including its definition specifying
     /// the steps.
-    pub fn getFlowMetadata(self: *Self, allocator: std.mem.Allocator, input: get_flow_metadata.GetFlowMetadataInput, options: get_flow_metadata.Options) !get_flow_metadata.GetFlowMetadataOutput {
+    pub fn getFlowMetadata(self: *Self, allocator: std.mem.Allocator, input: get_flow_metadata.GetFlowMetadataInput, options: CallOptions) !get_flow_metadata.GetFlowMetadataOutput {
         return get_flow_metadata.execute(self, allocator, input, options);
     }
 
     /// Get permissions for a flow.
-    pub fn getFlowPermissions(self: *Self, allocator: std.mem.Allocator, input: get_flow_permissions.GetFlowPermissionsInput, options: get_flow_permissions.Options) !get_flow_permissions.GetFlowPermissionsOutput {
+    pub fn getFlowPermissions(self: *Self, allocator: std.mem.Allocator, input: get_flow_permissions.GetFlowPermissionsInput, options: CallOptions) !get_flow_permissions.GetFlowPermissionsOutput {
         return get_flow_permissions.execute(self, allocator, input, options);
     }
 
@@ -1483,7 +1484,7 @@ pub const Client = struct {
     /// The assumed role must allow the `sts:SetContext` action in addition to
     /// `sts:AssumeRole` in its trust relationship policy. The trust policy should
     /// include both actions for the principal that will be assuming the role.
-    pub fn getIdentityContext(self: *Self, allocator: std.mem.Allocator, input: get_identity_context.GetIdentityContextInput, options: get_identity_context.Options) !get_identity_context.GetIdentityContextOutput {
+    pub fn getIdentityContext(self: *Self, allocator: std.mem.Allocator, input: get_identity_context.GetIdentityContextInput, options: CallOptions) !get_identity_context.GetIdentityContextOutput {
         return get_identity_context.execute(self, allocator, input, options);
     }
 
@@ -1511,20 +1512,20 @@ pub const Client = struct {
     ///
     /// * [Customizing Access to the Amazon Quick Suite
     ///   Console](https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html)
-    pub fn getSessionEmbedUrl(self: *Self, allocator: std.mem.Allocator, input: get_session_embed_url.GetSessionEmbedUrlInput, options: get_session_embed_url.Options) !get_session_embed_url.GetSessionEmbedUrlOutput {
+    pub fn getSessionEmbedUrl(self: *Self, allocator: std.mem.Allocator, input: get_session_embed_url.GetSessionEmbedUrlInput, options: CallOptions) !get_session_embed_url.GetSessionEmbedUrlOutput {
         return get_session_embed_url.execute(self, allocator, input, options);
     }
 
     /// Lists all action connectors in the specified Amazon Web Services account.
     /// Returns summary information for each connector including its name, type,
     /// creation time, and status.
-    pub fn listActionConnectors(self: *Self, allocator: std.mem.Allocator, input: list_action_connectors.ListActionConnectorsInput, options: list_action_connectors.Options) !list_action_connectors.ListActionConnectorsOutput {
+    pub fn listActionConnectors(self: *Self, allocator: std.mem.Allocator, input: list_action_connectors.ListActionConnectorsInput, options: CallOptions) !list_action_connectors.ListActionConnectorsOutput {
         return list_action_connectors.execute(self, allocator, input, options);
     }
 
     /// Lists Amazon Quick Sight analyses that exist in the specified Amazon Web
     /// Services account.
-    pub fn listAnalyses(self: *Self, allocator: std.mem.Allocator, input: list_analyses.ListAnalysesInput, options: list_analyses.Options) !list_analyses.ListAnalysesOutput {
+    pub fn listAnalyses(self: *Self, allocator: std.mem.Allocator, input: list_analyses.ListAnalysesInput, options: CallOptions) !list_analyses.ListAnalysesOutput {
         return list_analyses.execute(self, allocator, input, options);
     }
 
@@ -1535,7 +1536,7 @@ pub const Client = struct {
     /// the same job ID for multiple jobs, `ListAssetBundleExportJobs` only returns
     /// the
     /// most recent job that uses the repeated job ID.
-    pub fn listAssetBundleExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_asset_bundle_export_jobs.ListAssetBundleExportJobsInput, options: list_asset_bundle_export_jobs.Options) !list_asset_bundle_export_jobs.ListAssetBundleExportJobsOutput {
+    pub fn listAssetBundleExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_asset_bundle_export_jobs.ListAssetBundleExportJobsInput, options: CallOptions) !list_asset_bundle_export_jobs.ListAssetBundleExportJobsOutput {
         return list_asset_bundle_export_jobs.execute(self, allocator, input, options);
     }
 
@@ -1546,28 +1547,28 @@ pub const Client = struct {
     /// the same job ID for multiple jobs, `ListAssetBundleImportJobs` only returns
     /// the
     /// most recent job that uses the repeated job ID.
-    pub fn listAssetBundleImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_asset_bundle_import_jobs.ListAssetBundleImportJobsInput, options: list_asset_bundle_import_jobs.Options) !list_asset_bundle_import_jobs.ListAssetBundleImportJobsOutput {
+    pub fn listAssetBundleImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_asset_bundle_import_jobs.ListAssetBundleImportJobsInput, options: CallOptions) !list_asset_bundle_import_jobs.ListAssetBundleImportJobsOutput {
         return list_asset_bundle_import_jobs.execute(self, allocator, input, options);
     }
 
     /// Lists all brands in an Quick Sight account.
-    pub fn listBrands(self: *Self, allocator: std.mem.Allocator, input: list_brands.ListBrandsInput, options: list_brands.Options) !list_brands.ListBrandsOutput {
+    pub fn listBrands(self: *Self, allocator: std.mem.Allocator, input: list_brands.ListBrandsInput, options: CallOptions) !list_brands.ListBrandsOutput {
         return list_brands.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all the custom permissions profiles.
-    pub fn listCustomPermissions(self: *Self, allocator: std.mem.Allocator, input: list_custom_permissions.ListCustomPermissionsInput, options: list_custom_permissions.Options) !list_custom_permissions.ListCustomPermissionsOutput {
+    pub fn listCustomPermissions(self: *Self, allocator: std.mem.Allocator, input: list_custom_permissions.ListCustomPermissionsInput, options: CallOptions) !list_custom_permissions.ListCustomPermissionsOutput {
         return list_custom_permissions.execute(self, allocator, input, options);
     }
 
     /// Lists all the versions of the dashboards in the Amazon Quick Sight
     /// subscription.
-    pub fn listDashboardVersions(self: *Self, allocator: std.mem.Allocator, input: list_dashboard_versions.ListDashboardVersionsInput, options: list_dashboard_versions.Options) !list_dashboard_versions.ListDashboardVersionsOutput {
+    pub fn listDashboardVersions(self: *Self, allocator: std.mem.Allocator, input: list_dashboard_versions.ListDashboardVersionsInput, options: CallOptions) !list_dashboard_versions.ListDashboardVersionsOutput {
         return list_dashboard_versions.execute(self, allocator, input, options);
     }
 
     /// Lists dashboards in an Amazon Web Services account.
-    pub fn listDashboards(self: *Self, allocator: std.mem.Allocator, input: list_dashboards.ListDashboardsInput, options: list_dashboards.Options) !list_dashboards.ListDashboardsOutput {
+    pub fn listDashboards(self: *Self, allocator: std.mem.Allocator, input: list_dashboards.ListDashboardsInput, options: CallOptions) !list_dashboards.ListDashboardsOutput {
         return list_dashboards.execute(self, allocator, input, options);
     }
 
@@ -1577,50 +1578,50 @@ pub const Client = struct {
     ///
     /// The permissions resource is
     /// `arn:aws:quicksight:region:aws-account-id:dataset/*`.
-    pub fn listDataSets(self: *Self, allocator: std.mem.Allocator, input: list_data_sets.ListDataSetsInput, options: list_data_sets.Options) !list_data_sets.ListDataSetsOutput {
+    pub fn listDataSets(self: *Self, allocator: std.mem.Allocator, input: list_data_sets.ListDataSetsInput, options: CallOptions) !list_data_sets.ListDataSetsOutput {
         return list_data_sets.execute(self, allocator, input, options);
     }
 
     /// Lists data sources in current Amazon Web Services Region that belong to this
     /// Amazon Web Services account.
-    pub fn listDataSources(self: *Self, allocator: std.mem.Allocator, input: list_data_sources.ListDataSourcesInput, options: list_data_sources.Options) !list_data_sources.ListDataSourcesOutput {
+    pub fn listDataSources(self: *Self, allocator: std.mem.Allocator, input: list_data_sources.ListDataSourcesInput, options: CallOptions) !list_data_sources.ListDataSourcesOutput {
         return list_data_sources.execute(self, allocator, input, options);
     }
 
     /// Lists flows in an Amazon Web Services account.
-    pub fn listFlows(self: *Self, allocator: std.mem.Allocator, input: list_flows.ListFlowsInput, options: list_flows.Options) !list_flows.ListFlowsOutput {
+    pub fn listFlows(self: *Self, allocator: std.mem.Allocator, input: list_flows.ListFlowsInput, options: CallOptions) !list_flows.ListFlowsOutput {
         return list_flows.execute(self, allocator, input, options);
     }
 
     /// List all assets (`DASHBOARD`, `ANALYSIS`, and `DATASET`) in a folder.
-    pub fn listFolderMembers(self: *Self, allocator: std.mem.Allocator, input: list_folder_members.ListFolderMembersInput, options: list_folder_members.Options) !list_folder_members.ListFolderMembersOutput {
+    pub fn listFolderMembers(self: *Self, allocator: std.mem.Allocator, input: list_folder_members.ListFolderMembersInput, options: CallOptions) !list_folder_members.ListFolderMembersOutput {
         return list_folder_members.execute(self, allocator, input, options);
     }
 
     /// Lists all folders in an account.
-    pub fn listFolders(self: *Self, allocator: std.mem.Allocator, input: list_folders.ListFoldersInput, options: list_folders.Options) !list_folders.ListFoldersOutput {
+    pub fn listFolders(self: *Self, allocator: std.mem.Allocator, input: list_folders.ListFoldersInput, options: CallOptions) !list_folders.ListFoldersOutput {
         return list_folders.execute(self, allocator, input, options);
     }
 
     /// List all folders that a resource is a member of.
-    pub fn listFoldersForResource(self: *Self, allocator: std.mem.Allocator, input: list_folders_for_resource.ListFoldersForResourceInput, options: list_folders_for_resource.Options) !list_folders_for_resource.ListFoldersForResourceOutput {
+    pub fn listFoldersForResource(self: *Self, allocator: std.mem.Allocator, input: list_folders_for_resource.ListFoldersForResourceInput, options: CallOptions) !list_folders_for_resource.ListFoldersForResourceOutput {
         return list_folders_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists member users in a group.
-    pub fn listGroupMemberships(self: *Self, allocator: std.mem.Allocator, input: list_group_memberships.ListGroupMembershipsInput, options: list_group_memberships.Options) !list_group_memberships.ListGroupMembershipsOutput {
+    pub fn listGroupMemberships(self: *Self, allocator: std.mem.Allocator, input: list_group_memberships.ListGroupMembershipsInput, options: CallOptions) !list_group_memberships.ListGroupMembershipsOutput {
         return list_group_memberships.execute(self, allocator, input, options);
     }
 
     /// Lists all user groups in Amazon Quick Sight.
-    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: list_groups.Options) !list_groups.ListGroupsOutput {
+    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: CallOptions) !list_groups.ListGroupsOutput {
         return list_groups.execute(self, allocator, input, options);
     }
 
     /// Lists the
     /// IAM policy assignments in the current Amazon Quick Sight
     /// account.
-    pub fn listIamPolicyAssignments(self: *Self, allocator: std.mem.Allocator, input: list_iam_policy_assignments.ListIAMPolicyAssignmentsInput, options: list_iam_policy_assignments.Options) !list_iam_policy_assignments.ListIAMPolicyAssignmentsOutput {
+    pub fn listIamPolicyAssignments(self: *Self, allocator: std.mem.Allocator, input: list_iam_policy_assignments.ListIAMPolicyAssignmentsInput, options: CallOptions) !list_iam_policy_assignments.ListIAMPolicyAssignmentsOutput {
         return list_iam_policy_assignments.execute(self, allocator, input, options);
     }
 
@@ -1631,7 +1632,7 @@ pub const Client = struct {
     /// for the IAM policies assigned to the specified user and
     /// group,
     /// or groups that the user belongs to.
-    pub fn listIamPolicyAssignmentsForUser(self: *Self, allocator: std.mem.Allocator, input: list_iam_policy_assignments_for_user.ListIAMPolicyAssignmentsForUserInput, options: list_iam_policy_assignments_for_user.Options) !list_iam_policy_assignments_for_user.ListIAMPolicyAssignmentsForUserOutput {
+    pub fn listIamPolicyAssignmentsForUser(self: *Self, allocator: std.mem.Allocator, input: list_iam_policy_assignments_for_user.ListIAMPolicyAssignmentsForUserInput, options: CallOptions) !list_iam_policy_assignments_for_user.ListIAMPolicyAssignmentsForUserOutput {
         return list_iam_policy_assignments_for_user.execute(self, allocator, input, options);
     }
 
@@ -1640,106 +1641,106 @@ pub const Client = struct {
     ///
     /// This operation is only supported for Quick Sight accounts that use IAM
     /// Identity Center.
-    pub fn listIdentityPropagationConfigs(self: *Self, allocator: std.mem.Allocator, input: list_identity_propagation_configs.ListIdentityPropagationConfigsInput, options: list_identity_propagation_configs.Options) !list_identity_propagation_configs.ListIdentityPropagationConfigsOutput {
+    pub fn listIdentityPropagationConfigs(self: *Self, allocator: std.mem.Allocator, input: list_identity_propagation_configs.ListIdentityPropagationConfigsInput, options: CallOptions) !list_identity_propagation_configs.ListIdentityPropagationConfigsOutput {
         return list_identity_propagation_configs.execute(self, allocator, input, options);
     }
 
     /// Lists the history of SPICE ingestions for a dataset. Limited to 5 TPS per
     /// user and 25 TPS per account.
-    pub fn listIngestions(self: *Self, allocator: std.mem.Allocator, input: list_ingestions.ListIngestionsInput, options: list_ingestions.Options) !list_ingestions.ListIngestionsOutput {
+    pub fn listIngestions(self: *Self, allocator: std.mem.Allocator, input: list_ingestions.ListIngestionsInput, options: CallOptions) !list_ingestions.ListIngestionsOutput {
         return list_ingestions.execute(self, allocator, input, options);
     }
 
     /// Lists the namespaces for the specified Amazon Web Services account. This
     /// operation doesn't list deleted namespaces.
-    pub fn listNamespaces(self: *Self, allocator: std.mem.Allocator, input: list_namespaces.ListNamespacesInput, options: list_namespaces.Options) !list_namespaces.ListNamespacesOutput {
+    pub fn listNamespaces(self: *Self, allocator: std.mem.Allocator, input: list_namespaces.ListNamespacesInput, options: CallOptions) !list_namespaces.ListNamespacesOutput {
         return list_namespaces.execute(self, allocator, input, options);
     }
 
     /// Lists the refresh schedules of a dataset. Each dataset can have up to 5
     /// schedules.
-    pub fn listRefreshSchedules(self: *Self, allocator: std.mem.Allocator, input: list_refresh_schedules.ListRefreshSchedulesInput, options: list_refresh_schedules.Options) !list_refresh_schedules.ListRefreshSchedulesOutput {
+    pub fn listRefreshSchedules(self: *Self, allocator: std.mem.Allocator, input: list_refresh_schedules.ListRefreshSchedulesInput, options: CallOptions) !list_refresh_schedules.ListRefreshSchedulesOutput {
         return list_refresh_schedules.execute(self, allocator, input, options);
     }
 
     /// Lists all groups that are associated with a role.
-    pub fn listRoleMemberships(self: *Self, allocator: std.mem.Allocator, input: list_role_memberships.ListRoleMembershipsInput, options: list_role_memberships.Options) !list_role_memberships.ListRoleMembershipsOutput {
+    pub fn listRoleMemberships(self: *Self, allocator: std.mem.Allocator, input: list_role_memberships.ListRoleMembershipsInput, options: CallOptions) !list_role_memberships.ListRoleMembershipsOutput {
         return list_role_memberships.execute(self, allocator, input, options);
     }
 
     /// Lists all self-upgrade requests for a Quick Suite account.
-    pub fn listSelfUpgrades(self: *Self, allocator: std.mem.Allocator, input: list_self_upgrades.ListSelfUpgradesInput, options: list_self_upgrades.Options) !list_self_upgrades.ListSelfUpgradesOutput {
+    pub fn listSelfUpgrades(self: *Self, allocator: std.mem.Allocator, input: list_self_upgrades.ListSelfUpgradesInput, options: CallOptions) !list_self_upgrades.ListSelfUpgradesOutput {
         return list_self_upgrades.execute(self, allocator, input, options);
     }
 
     /// Lists the tags assigned to a resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists all the aliases of a template.
-    pub fn listTemplateAliases(self: *Self, allocator: std.mem.Allocator, input: list_template_aliases.ListTemplateAliasesInput, options: list_template_aliases.Options) !list_template_aliases.ListTemplateAliasesOutput {
+    pub fn listTemplateAliases(self: *Self, allocator: std.mem.Allocator, input: list_template_aliases.ListTemplateAliasesInput, options: CallOptions) !list_template_aliases.ListTemplateAliasesOutput {
         return list_template_aliases.execute(self, allocator, input, options);
     }
 
     /// Lists all the versions of the templates in the current Amazon Quick Sight
     /// account.
-    pub fn listTemplateVersions(self: *Self, allocator: std.mem.Allocator, input: list_template_versions.ListTemplateVersionsInput, options: list_template_versions.Options) !list_template_versions.ListTemplateVersionsOutput {
+    pub fn listTemplateVersions(self: *Self, allocator: std.mem.Allocator, input: list_template_versions.ListTemplateVersionsInput, options: CallOptions) !list_template_versions.ListTemplateVersionsOutput {
         return list_template_versions.execute(self, allocator, input, options);
     }
 
     /// Lists all the templates in the current Amazon Quick Sight account.
-    pub fn listTemplates(self: *Self, allocator: std.mem.Allocator, input: list_templates.ListTemplatesInput, options: list_templates.Options) !list_templates.ListTemplatesOutput {
+    pub fn listTemplates(self: *Self, allocator: std.mem.Allocator, input: list_templates.ListTemplatesInput, options: CallOptions) !list_templates.ListTemplatesOutput {
         return list_templates.execute(self, allocator, input, options);
     }
 
     /// Lists all the aliases of a theme.
-    pub fn listThemeAliases(self: *Self, allocator: std.mem.Allocator, input: list_theme_aliases.ListThemeAliasesInput, options: list_theme_aliases.Options) !list_theme_aliases.ListThemeAliasesOutput {
+    pub fn listThemeAliases(self: *Self, allocator: std.mem.Allocator, input: list_theme_aliases.ListThemeAliasesInput, options: CallOptions) !list_theme_aliases.ListThemeAliasesOutput {
         return list_theme_aliases.execute(self, allocator, input, options);
     }
 
     /// Lists all the versions of the themes in the current Amazon Web Services
     /// account.
-    pub fn listThemeVersions(self: *Self, allocator: std.mem.Allocator, input: list_theme_versions.ListThemeVersionsInput, options: list_theme_versions.Options) !list_theme_versions.ListThemeVersionsOutput {
+    pub fn listThemeVersions(self: *Self, allocator: std.mem.Allocator, input: list_theme_versions.ListThemeVersionsInput, options: CallOptions) !list_theme_versions.ListThemeVersionsOutput {
         return list_theme_versions.execute(self, allocator, input, options);
     }
 
     /// Lists all the themes in the current Amazon Web Services account.
-    pub fn listThemes(self: *Self, allocator: std.mem.Allocator, input: list_themes.ListThemesInput, options: list_themes.Options) !list_themes.ListThemesOutput {
+    pub fn listThemes(self: *Self, allocator: std.mem.Allocator, input: list_themes.ListThemesInput, options: CallOptions) !list_themes.ListThemesOutput {
         return list_themes.execute(self, allocator, input, options);
     }
 
     /// Lists all of the refresh schedules for a topic.
-    pub fn listTopicRefreshSchedules(self: *Self, allocator: std.mem.Allocator, input: list_topic_refresh_schedules.ListTopicRefreshSchedulesInput, options: list_topic_refresh_schedules.Options) !list_topic_refresh_schedules.ListTopicRefreshSchedulesOutput {
+    pub fn listTopicRefreshSchedules(self: *Self, allocator: std.mem.Allocator, input: list_topic_refresh_schedules.ListTopicRefreshSchedulesInput, options: CallOptions) !list_topic_refresh_schedules.ListTopicRefreshSchedulesOutput {
         return list_topic_refresh_schedules.execute(self, allocator, input, options);
     }
 
     /// Lists all reviewed answers for a Q Topic.
-    pub fn listTopicReviewedAnswers(self: *Self, allocator: std.mem.Allocator, input: list_topic_reviewed_answers.ListTopicReviewedAnswersInput, options: list_topic_reviewed_answers.Options) !list_topic_reviewed_answers.ListTopicReviewedAnswersOutput {
+    pub fn listTopicReviewedAnswers(self: *Self, allocator: std.mem.Allocator, input: list_topic_reviewed_answers.ListTopicReviewedAnswersInput, options: CallOptions) !list_topic_reviewed_answers.ListTopicReviewedAnswersOutput {
         return list_topic_reviewed_answers.execute(self, allocator, input, options);
     }
 
     /// Lists all of the topics within an account.
-    pub fn listTopics(self: *Self, allocator: std.mem.Allocator, input: list_topics.ListTopicsInput, options: list_topics.Options) !list_topics.ListTopicsOutput {
+    pub fn listTopics(self: *Self, allocator: std.mem.Allocator, input: list_topics.ListTopicsInput, options: CallOptions) !list_topics.ListTopicsOutput {
         return list_topics.execute(self, allocator, input, options);
     }
 
     /// Lists the Amazon Quick Sight groups that an Amazon Quick Sight user is a
     /// member of.
-    pub fn listUserGroups(self: *Self, allocator: std.mem.Allocator, input: list_user_groups.ListUserGroupsInput, options: list_user_groups.Options) !list_user_groups.ListUserGroupsOutput {
+    pub fn listUserGroups(self: *Self, allocator: std.mem.Allocator, input: list_user_groups.ListUserGroupsInput, options: CallOptions) !list_user_groups.ListUserGroupsOutput {
         return list_user_groups.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all of the Amazon Quick Sight users belonging to this
     /// account.
-    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: list_users.Options) !list_users.ListUsersOutput {
+    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: CallOptions) !list_users.ListUsersOutput {
         return list_users.execute(self, allocator, input, options);
     }
 
     /// Lists all of the VPC connections in the current set Amazon Web Services
     /// Region of an
     /// Amazon Web Services account.
-    pub fn listVpcConnections(self: *Self, allocator: std.mem.Allocator, input: list_vpc_connections.ListVPCConnectionsInput, options: list_vpc_connections.Options) !list_vpc_connections.ListVPCConnectionsOutput {
+    pub fn listVpcConnections(self: *Self, allocator: std.mem.Allocator, input: list_vpc_connections.ListVPCConnectionsInput, options: CallOptions) !list_vpc_connections.ListVPCConnectionsOutput {
         return list_vpc_connections.execute(self, allocator, input, options);
     }
 
@@ -1754,12 +1755,12 @@ pub const Client = struct {
     /// matching visuals are found, `PredictQnA` uses generative Q&A to provide an
     /// answer. To update the `QSearchStatus`, see
     /// [UpdateQuickSightQSearchConfiguration](https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateQuickSightQSearchConfiguration.html).
-    pub fn predictQaResults(self: *Self, allocator: std.mem.Allocator, input: predict_qa_results.PredictQAResultsInput, options: predict_qa_results.Options) !predict_qa_results.PredictQAResultsOutput {
+    pub fn predictQaResults(self: *Self, allocator: std.mem.Allocator, input: predict_qa_results.PredictQAResultsInput, options: CallOptions) !predict_qa_results.PredictQAResultsOutput {
         return predict_qa_results.execute(self, allocator, input, options);
     }
 
     /// Creates or updates the dataset refresh properties for the dataset.
-    pub fn putDataSetRefreshProperties(self: *Self, allocator: std.mem.Allocator, input: put_data_set_refresh_properties.PutDataSetRefreshPropertiesInput, options: put_data_set_refresh_properties.Options) !put_data_set_refresh_properties.PutDataSetRefreshPropertiesOutput {
+    pub fn putDataSetRefreshProperties(self: *Self, allocator: std.mem.Allocator, input: put_data_set_refresh_properties.PutDataSetRefreshPropertiesInput, options: CallOptions) !put_data_set_refresh_properties.PutDataSetRefreshPropertiesOutput {
         return put_data_set_refresh_properties.execute(self, allocator, input, options);
     }
 
@@ -1773,18 +1774,18 @@ pub const Client = struct {
     /// console. For more information on registering a new user in the Quick Sight
     /// console, see [ Inviting users to access Quick
     /// Sight](https://docs.aws.amazon.com/quicksight/latest/user/managing-users.html#inviting-users).
-    pub fn registerUser(self: *Self, allocator: std.mem.Allocator, input: register_user.RegisterUserInput, options: register_user.Options) !register_user.RegisterUserOutput {
+    pub fn registerUser(self: *Self, allocator: std.mem.Allocator, input: register_user.RegisterUserInput, options: CallOptions) !register_user.RegisterUserOutput {
         return register_user.execute(self, allocator, input, options);
     }
 
     /// Restores an analysis.
-    pub fn restoreAnalysis(self: *Self, allocator: std.mem.Allocator, input: restore_analysis.RestoreAnalysisInput, options: restore_analysis.Options) !restore_analysis.RestoreAnalysisOutput {
+    pub fn restoreAnalysis(self: *Self, allocator: std.mem.Allocator, input: restore_analysis.RestoreAnalysisInput, options: CallOptions) !restore_analysis.RestoreAnalysisOutput {
         return restore_analysis.execute(self, allocator, input, options);
     }
 
     /// Searches for action connectors in the specified Amazon Web Services account
     /// using filters. You can search by connector name, type, or user permissions.
-    pub fn searchActionConnectors(self: *Self, allocator: std.mem.Allocator, input: search_action_connectors.SearchActionConnectorsInput, options: search_action_connectors.Options) !search_action_connectors.SearchActionConnectorsOutput {
+    pub fn searchActionConnectors(self: *Self, allocator: std.mem.Allocator, input: search_action_connectors.SearchActionConnectorsInput, options: CallOptions) !search_action_connectors.SearchActionConnectorsOutput {
         return search_action_connectors.execute(self, allocator, input, options);
     }
 
@@ -1792,7 +1793,7 @@ pub const Client = struct {
     ///
     /// This operation is eventually consistent. The results are best effort and may
     /// not reflect very recent updates and changes.
-    pub fn searchAnalyses(self: *Self, allocator: std.mem.Allocator, input: search_analyses.SearchAnalysesInput, options: search_analyses.Options) !search_analyses.SearchAnalysesOutput {
+    pub fn searchAnalyses(self: *Self, allocator: std.mem.Allocator, input: search_analyses.SearchAnalysesInput, options: CallOptions) !search_analyses.SearchAnalysesOutput {
         return search_analyses.execute(self, allocator, input, options);
     }
 
@@ -1801,40 +1802,40 @@ pub const Client = struct {
     /// This operation is eventually consistent. The results are best effort and may
     /// not
     /// reflect very recent updates and changes.
-    pub fn searchDashboards(self: *Self, allocator: std.mem.Allocator, input: search_dashboards.SearchDashboardsInput, options: search_dashboards.Options) !search_dashboards.SearchDashboardsOutput {
+    pub fn searchDashboards(self: *Self, allocator: std.mem.Allocator, input: search_dashboards.SearchDashboardsInput, options: CallOptions) !search_dashboards.SearchDashboardsOutput {
         return search_dashboards.execute(self, allocator, input, options);
     }
 
     /// Use the `SearchDataSets` operation to search for datasets that belong to an
     /// account.
-    pub fn searchDataSets(self: *Self, allocator: std.mem.Allocator, input: search_data_sets.SearchDataSetsInput, options: search_data_sets.Options) !search_data_sets.SearchDataSetsOutput {
+    pub fn searchDataSets(self: *Self, allocator: std.mem.Allocator, input: search_data_sets.SearchDataSetsInput, options: CallOptions) !search_data_sets.SearchDataSetsOutput {
         return search_data_sets.execute(self, allocator, input, options);
     }
 
     /// Use the `SearchDataSources` operation to search for data sources that
     /// belong to an account.
-    pub fn searchDataSources(self: *Self, allocator: std.mem.Allocator, input: search_data_sources.SearchDataSourcesInput, options: search_data_sources.Options) !search_data_sources.SearchDataSourcesOutput {
+    pub fn searchDataSources(self: *Self, allocator: std.mem.Allocator, input: search_data_sources.SearchDataSourcesInput, options: CallOptions) !search_data_sources.SearchDataSourcesOutput {
         return search_data_sources.execute(self, allocator, input, options);
     }
 
     /// Search for the flows in an Amazon Web Services account.
-    pub fn searchFlows(self: *Self, allocator: std.mem.Allocator, input: search_flows.SearchFlowsInput, options: search_flows.Options) !search_flows.SearchFlowsOutput {
+    pub fn searchFlows(self: *Self, allocator: std.mem.Allocator, input: search_flows.SearchFlowsInput, options: CallOptions) !search_flows.SearchFlowsOutput {
         return search_flows.execute(self, allocator, input, options);
     }
 
     /// Searches the subfolders in a folder.
-    pub fn searchFolders(self: *Self, allocator: std.mem.Allocator, input: search_folders.SearchFoldersInput, options: search_folders.Options) !search_folders.SearchFoldersOutput {
+    pub fn searchFolders(self: *Self, allocator: std.mem.Allocator, input: search_folders.SearchFoldersInput, options: CallOptions) !search_folders.SearchFoldersOutput {
         return search_folders.execute(self, allocator, input, options);
     }
 
     /// Use the `SearchGroups` operation to search groups in a specified Quick Sight
     /// namespace using the supplied filters.
-    pub fn searchGroups(self: *Self, allocator: std.mem.Allocator, input: search_groups.SearchGroupsInput, options: search_groups.Options) !search_groups.SearchGroupsOutput {
+    pub fn searchGroups(self: *Self, allocator: std.mem.Allocator, input: search_groups.SearchGroupsInput, options: CallOptions) !search_groups.SearchGroupsOutput {
         return search_groups.execute(self, allocator, input, options);
     }
 
     /// Searches for any Q topic that exists in an Quick Suite account.
-    pub fn searchTopics(self: *Self, allocator: std.mem.Allocator, input: search_topics.SearchTopicsInput, options: search_topics.Options) !search_topics.SearchTopicsOutput {
+    pub fn searchTopics(self: *Self, allocator: std.mem.Allocator, input: search_topics.SearchTopicsInput, options: CallOptions) !search_topics.SearchTopicsOutput {
         return search_topics.execute(self, allocator, input, options);
     }
 
@@ -1853,7 +1854,7 @@ pub const Client = struct {
     ///
     /// The API caller must have the necessary permissions in their IAM role to
     /// access each resource before the resources can be exported.
-    pub fn startAssetBundleExportJob(self: *Self, allocator: std.mem.Allocator, input: start_asset_bundle_export_job.StartAssetBundleExportJobInput, options: start_asset_bundle_export_job.Options) !start_asset_bundle_export_job.StartAssetBundleExportJobOutput {
+    pub fn startAssetBundleExportJob(self: *Self, allocator: std.mem.Allocator, input: start_asset_bundle_export_job.StartAssetBundleExportJobInput, options: CallOptions) !start_asset_bundle_export_job.StartAssetBundleExportJobOutput {
         return start_asset_bundle_export_job.execute(self, allocator, input, options);
     }
 
@@ -1874,7 +1875,7 @@ pub const Client = struct {
     /// resource type that is contained in the bundle file before the resources can
     /// be
     /// imported.
-    pub fn startAssetBundleImportJob(self: *Self, allocator: std.mem.Allocator, input: start_asset_bundle_import_job.StartAssetBundleImportJobInput, options: start_asset_bundle_import_job.Options) !start_asset_bundle_import_job.StartAssetBundleImportJobOutput {
+    pub fn startAssetBundleImportJob(self: *Self, allocator: std.mem.Allocator, input: start_asset_bundle_import_job.StartAssetBundleImportJobInput, options: CallOptions) !start_asset_bundle_import_job.StartAssetBundleImportJobOutput {
         return start_asset_bundle_import_job.execute(self, allocator, input, options);
     }
 
@@ -2031,7 +2032,7 @@ pub const Client = struct {
     ///   selected formats. For more information about export restrictions, see
     ///   [Customizing access to Amazon Quick Sight
     ///   capabilities](https://docs.aws.amazon.com/quicksuite/latest/userguide/create-custom-permisions-profile.html).
-    pub fn startDashboardSnapshotJob(self: *Self, allocator: std.mem.Allocator, input: start_dashboard_snapshot_job.StartDashboardSnapshotJobInput, options: start_dashboard_snapshot_job.Options) !start_dashboard_snapshot_job.StartDashboardSnapshotJobOutput {
+    pub fn startDashboardSnapshotJob(self: *Self, allocator: std.mem.Allocator, input: start_dashboard_snapshot_job.StartDashboardSnapshotJobInput, options: CallOptions) !start_dashboard_snapshot_job.StartDashboardSnapshotJobOutput {
         return start_dashboard_snapshot_job.execute(self, allocator, input, options);
     }
 
@@ -2044,7 +2045,7 @@ pub const Client = struct {
     /// For more information, see [Scheduling and sending Amazon Quick Sight reports
     /// by
     /// email](https://docs.aws.amazon.com/quicksight/latest/user/sending-reports.html) and [Configuring email report settings for a Amazon Quick Sight dashboard](https://docs.aws.amazon.com/quicksight/latest/user/email-reports-from-dashboard.html) in the *Amazon Quick Sight User Guide*.
-    pub fn startDashboardSnapshotJobSchedule(self: *Self, allocator: std.mem.Allocator, input: start_dashboard_snapshot_job_schedule.StartDashboardSnapshotJobScheduleInput, options: start_dashboard_snapshot_job_schedule.Options) !start_dashboard_snapshot_job_schedule.StartDashboardSnapshotJobScheduleOutput {
+    pub fn startDashboardSnapshotJobSchedule(self: *Self, allocator: std.mem.Allocator, input: start_dashboard_snapshot_job_schedule.StartDashboardSnapshotJobScheduleInput, options: CallOptions) !start_dashboard_snapshot_job_schedule.StartDashboardSnapshotJobScheduleOutput {
         return start_dashboard_snapshot_job_schedule.execute(self, allocator, input, options);
     }
 
@@ -2079,17 +2080,17 @@ pub const Client = struct {
     ///
     /// * Amazon Quick Sight doesn't currently support the tag editor for Resource
     ///   Groups.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag or tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Applies a custom permissions profile to an account.
-    pub fn updateAccountCustomPermission(self: *Self, allocator: std.mem.Allocator, input: update_account_custom_permission.UpdateAccountCustomPermissionInput, options: update_account_custom_permission.Options) !update_account_custom_permission.UpdateAccountCustomPermissionOutput {
+    pub fn updateAccountCustomPermission(self: *Self, allocator: std.mem.Allocator, input: update_account_custom_permission.UpdateAccountCustomPermissionInput, options: CallOptions) !update_account_custom_permission.UpdateAccountCustomPermissionOutput {
         return update_account_custom_permission.execute(self, allocator, input, options);
     }
 
@@ -2103,12 +2104,12 @@ pub const Client = struct {
     /// customizations that apply to an Amazon Web Services account. To find out
     /// which customizations apply, use
     /// the `DescribeAccountCustomization` API operation.
-    pub fn updateAccountCustomization(self: *Self, allocator: std.mem.Allocator, input: update_account_customization.UpdateAccountCustomizationInput, options: update_account_customization.Options) !update_account_customization.UpdateAccountCustomizationOutput {
+    pub fn updateAccountCustomization(self: *Self, allocator: std.mem.Allocator, input: update_account_customization.UpdateAccountCustomizationInput, options: CallOptions) !update_account_customization.UpdateAccountCustomizationOutput {
         return update_account_customization.execute(self, allocator, input, options);
     }
 
     /// Updates the Amazon Quick Sight settings in your Amazon Web Services account.
-    pub fn updateAccountSettings(self: *Self, allocator: std.mem.Allocator, input: update_account_settings.UpdateAccountSettingsInput, options: update_account_settings.Options) !update_account_settings.UpdateAccountSettingsOutput {
+    pub fn updateAccountSettings(self: *Self, allocator: std.mem.Allocator, input: update_account_settings.UpdateAccountSettingsInput, options: CallOptions) !update_account_settings.UpdateAccountSettingsOutput {
         return update_account_settings.execute(self, allocator, input, options);
     }
 
@@ -2117,51 +2118,51 @@ pub const Client = struct {
     /// You can modify the connector's name, description, authentication
     /// configuration, and which actions are enabled. For more information,
     /// [https://docs.aws.amazon.com/quicksuite/latest/userguide/quick-action-auth.html](https://docs.aws.amazon.com/quicksuite/latest/userguide/quick-action-auth.html).
-    pub fn updateActionConnector(self: *Self, allocator: std.mem.Allocator, input: update_action_connector.UpdateActionConnectorInput, options: update_action_connector.Options) !update_action_connector.UpdateActionConnectorOutput {
+    pub fn updateActionConnector(self: *Self, allocator: std.mem.Allocator, input: update_action_connector.UpdateActionConnectorInput, options: CallOptions) !update_action_connector.UpdateActionConnectorOutput {
         return update_action_connector.execute(self, allocator, input, options);
     }
 
     /// Updates the permissions for an action connector by granting or revoking
     /// access for specific users and groups. You can control who can view, use, or
     /// manage the action connector.
-    pub fn updateActionConnectorPermissions(self: *Self, allocator: std.mem.Allocator, input: update_action_connector_permissions.UpdateActionConnectorPermissionsInput, options: update_action_connector_permissions.Options) !update_action_connector_permissions.UpdateActionConnectorPermissionsOutput {
+    pub fn updateActionConnectorPermissions(self: *Self, allocator: std.mem.Allocator, input: update_action_connector_permissions.UpdateActionConnectorPermissionsInput, options: CallOptions) !update_action_connector_permissions.UpdateActionConnectorPermissionsOutput {
         return update_action_connector_permissions.execute(self, allocator, input, options);
     }
 
     /// Updates an analysis in Amazon Quick Sight
-    pub fn updateAnalysis(self: *Self, allocator: std.mem.Allocator, input: update_analysis.UpdateAnalysisInput, options: update_analysis.Options) !update_analysis.UpdateAnalysisOutput {
+    pub fn updateAnalysis(self: *Self, allocator: std.mem.Allocator, input: update_analysis.UpdateAnalysisInput, options: CallOptions) !update_analysis.UpdateAnalysisOutput {
         return update_analysis.execute(self, allocator, input, options);
     }
 
     /// Updates the read and write permissions for an analysis.
-    pub fn updateAnalysisPermissions(self: *Self, allocator: std.mem.Allocator, input: update_analysis_permissions.UpdateAnalysisPermissionsInput, options: update_analysis_permissions.Options) !update_analysis_permissions.UpdateAnalysisPermissionsOutput {
+    pub fn updateAnalysisPermissions(self: *Self, allocator: std.mem.Allocator, input: update_analysis_permissions.UpdateAnalysisPermissionsInput, options: CallOptions) !update_analysis_permissions.UpdateAnalysisPermissionsOutput {
         return update_analysis_permissions.execute(self, allocator, input, options);
     }
 
     /// Updates an Quick Suite application with a token exchange grant. This
     /// operation only supports Quick Suite applications that are registered with
     /// IAM Identity Center.
-    pub fn updateApplicationWithTokenExchangeGrant(self: *Self, allocator: std.mem.Allocator, input: update_application_with_token_exchange_grant.UpdateApplicationWithTokenExchangeGrantInput, options: update_application_with_token_exchange_grant.Options) !update_application_with_token_exchange_grant.UpdateApplicationWithTokenExchangeGrantOutput {
+    pub fn updateApplicationWithTokenExchangeGrant(self: *Self, allocator: std.mem.Allocator, input: update_application_with_token_exchange_grant.UpdateApplicationWithTokenExchangeGrantInput, options: CallOptions) !update_application_with_token_exchange_grant.UpdateApplicationWithTokenExchangeGrantOutput {
         return update_application_with_token_exchange_grant.execute(self, allocator, input, options);
     }
 
     /// Updates a brand.
-    pub fn updateBrand(self: *Self, allocator: std.mem.Allocator, input: update_brand.UpdateBrandInput, options: update_brand.Options) !update_brand.UpdateBrandOutput {
+    pub fn updateBrand(self: *Self, allocator: std.mem.Allocator, input: update_brand.UpdateBrandInput, options: CallOptions) !update_brand.UpdateBrandOutput {
         return update_brand.execute(self, allocator, input, options);
     }
 
     /// Updates a brand assignment.
-    pub fn updateBrandAssignment(self: *Self, allocator: std.mem.Allocator, input: update_brand_assignment.UpdateBrandAssignmentInput, options: update_brand_assignment.Options) !update_brand_assignment.UpdateBrandAssignmentOutput {
+    pub fn updateBrandAssignment(self: *Self, allocator: std.mem.Allocator, input: update_brand_assignment.UpdateBrandAssignmentInput, options: CallOptions) !update_brand_assignment.UpdateBrandAssignmentOutput {
         return update_brand_assignment.execute(self, allocator, input, options);
     }
 
     /// Updates the published version of a brand.
-    pub fn updateBrandPublishedVersion(self: *Self, allocator: std.mem.Allocator, input: update_brand_published_version.UpdateBrandPublishedVersionInput, options: update_brand_published_version.Options) !update_brand_published_version.UpdateBrandPublishedVersionOutput {
+    pub fn updateBrandPublishedVersion(self: *Self, allocator: std.mem.Allocator, input: update_brand_published_version.UpdateBrandPublishedVersionInput, options: CallOptions) !update_brand_published_version.UpdateBrandPublishedVersionOutput {
         return update_brand_published_version.execute(self, allocator, input, options);
     }
 
     /// Updates a custom permissions profile.
-    pub fn updateCustomPermissions(self: *Self, allocator: std.mem.Allocator, input: update_custom_permissions.UpdateCustomPermissionsInput, options: update_custom_permissions.Options) !update_custom_permissions.UpdateCustomPermissionsOutput {
+    pub fn updateCustomPermissions(self: *Self, allocator: std.mem.Allocator, input: update_custom_permissions.UpdateCustomPermissionsInput, options: CallOptions) !update_custom_permissions.UpdateCustomPermissionsOutput {
         return update_custom_permissions.execute(self, allocator, input, options);
     }
 
@@ -2174,34 +2175,34 @@ pub const Client = struct {
     /// using the `
     /// [UpdateDashboardPublishedVersion](https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateDashboardPublishedVersion.html)
     /// ` API operation.
-    pub fn updateDashboard(self: *Self, allocator: std.mem.Allocator, input: update_dashboard.UpdateDashboardInput, options: update_dashboard.Options) !update_dashboard.UpdateDashboardOutput {
+    pub fn updateDashboard(self: *Self, allocator: std.mem.Allocator, input: update_dashboard.UpdateDashboardInput, options: CallOptions) !update_dashboard.UpdateDashboardOutput {
         return update_dashboard.execute(self, allocator, input, options);
     }
 
     /// Updates the linked analyses on a dashboard.
-    pub fn updateDashboardLinks(self: *Self, allocator: std.mem.Allocator, input: update_dashboard_links.UpdateDashboardLinksInput, options: update_dashboard_links.Options) !update_dashboard_links.UpdateDashboardLinksOutput {
+    pub fn updateDashboardLinks(self: *Self, allocator: std.mem.Allocator, input: update_dashboard_links.UpdateDashboardLinksInput, options: CallOptions) !update_dashboard_links.UpdateDashboardLinksOutput {
         return update_dashboard_links.execute(self, allocator, input, options);
     }
 
     /// Updates read and write permissions on a dashboard.
-    pub fn updateDashboardPermissions(self: *Self, allocator: std.mem.Allocator, input: update_dashboard_permissions.UpdateDashboardPermissionsInput, options: update_dashboard_permissions.Options) !update_dashboard_permissions.UpdateDashboardPermissionsOutput {
+    pub fn updateDashboardPermissions(self: *Self, allocator: std.mem.Allocator, input: update_dashboard_permissions.UpdateDashboardPermissionsInput, options: CallOptions) !update_dashboard_permissions.UpdateDashboardPermissionsOutput {
         return update_dashboard_permissions.execute(self, allocator, input, options);
     }
 
     /// Updates the published version of a dashboard.
-    pub fn updateDashboardPublishedVersion(self: *Self, allocator: std.mem.Allocator, input: update_dashboard_published_version.UpdateDashboardPublishedVersionInput, options: update_dashboard_published_version.Options) !update_dashboard_published_version.UpdateDashboardPublishedVersionOutput {
+    pub fn updateDashboardPublishedVersion(self: *Self, allocator: std.mem.Allocator, input: update_dashboard_published_version.UpdateDashboardPublishedVersionInput, options: CallOptions) !update_dashboard_published_version.UpdateDashboardPublishedVersionOutput {
         return update_dashboard_published_version.execute(self, allocator, input, options);
     }
 
     /// Updates a Dashboard QA configuration.
-    pub fn updateDashboardsQaConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_dashboards_qa_configuration.UpdateDashboardsQAConfigurationInput, options: update_dashboards_qa_configuration.Options) !update_dashboards_qa_configuration.UpdateDashboardsQAConfigurationOutput {
+    pub fn updateDashboardsQaConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_dashboards_qa_configuration.UpdateDashboardsQAConfigurationInput, options: CallOptions) !update_dashboards_qa_configuration.UpdateDashboardsQAConfigurationOutput {
         return update_dashboards_qa_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates a dataset. This operation doesn't support datasets that include
     /// uploaded files
     /// as a source. Partial updates are not supported by this operation.
-    pub fn updateDataSet(self: *Self, allocator: std.mem.Allocator, input: update_data_set.UpdateDataSetInput, options: update_data_set.Options) !update_data_set.UpdateDataSetOutput {
+    pub fn updateDataSet(self: *Self, allocator: std.mem.Allocator, input: update_data_set.UpdateDataSetInput, options: CallOptions) !update_data_set.UpdateDataSetOutput {
         return update_data_set.execute(self, allocator, input, options);
     }
 
@@ -2209,43 +2210,43 @@ pub const Client = struct {
     ///
     /// The permissions resource is
     /// `arn:aws:quicksight:region:aws-account-id:dataset/data-set-id`.
-    pub fn updateDataSetPermissions(self: *Self, allocator: std.mem.Allocator, input: update_data_set_permissions.UpdateDataSetPermissionsInput, options: update_data_set_permissions.Options) !update_data_set_permissions.UpdateDataSetPermissionsOutput {
+    pub fn updateDataSetPermissions(self: *Self, allocator: std.mem.Allocator, input: update_data_set_permissions.UpdateDataSetPermissionsInput, options: CallOptions) !update_data_set_permissions.UpdateDataSetPermissionsOutput {
         return update_data_set_permissions.execute(self, allocator, input, options);
     }
 
     /// Updates a data source.
-    pub fn updateDataSource(self: *Self, allocator: std.mem.Allocator, input: update_data_source.UpdateDataSourceInput, options: update_data_source.Options) !update_data_source.UpdateDataSourceOutput {
+    pub fn updateDataSource(self: *Self, allocator: std.mem.Allocator, input: update_data_source.UpdateDataSourceInput, options: CallOptions) !update_data_source.UpdateDataSourceOutput {
         return update_data_source.execute(self, allocator, input, options);
     }
 
     /// Updates the permissions to a data source.
-    pub fn updateDataSourcePermissions(self: *Self, allocator: std.mem.Allocator, input: update_data_source_permissions.UpdateDataSourcePermissionsInput, options: update_data_source_permissions.Options) !update_data_source_permissions.UpdateDataSourcePermissionsOutput {
+    pub fn updateDataSourcePermissions(self: *Self, allocator: std.mem.Allocator, input: update_data_source_permissions.UpdateDataSourcePermissionsInput, options: CallOptions) !update_data_source_permissions.UpdateDataSourcePermissionsOutput {
         return update_data_source_permissions.execute(self, allocator, input, options);
     }
 
     /// Updates a Amazon Q Business application that is linked to a Quick Sight
     /// account.
-    pub fn updateDefaultQBusinessApplication(self: *Self, allocator: std.mem.Allocator, input: update_default_q_business_application.UpdateDefaultQBusinessApplicationInput, options: update_default_q_business_application.Options) !update_default_q_business_application.UpdateDefaultQBusinessApplicationOutput {
+    pub fn updateDefaultQBusinessApplication(self: *Self, allocator: std.mem.Allocator, input: update_default_q_business_application.UpdateDefaultQBusinessApplicationInput, options: CallOptions) !update_default_q_business_application.UpdateDefaultQBusinessApplicationOutput {
         return update_default_q_business_application.execute(self, allocator, input, options);
     }
 
     /// Updates permissions against principals on a flow.
-    pub fn updateFlowPermissions(self: *Self, allocator: std.mem.Allocator, input: update_flow_permissions.UpdateFlowPermissionsInput, options: update_flow_permissions.Options) !update_flow_permissions.UpdateFlowPermissionsOutput {
+    pub fn updateFlowPermissions(self: *Self, allocator: std.mem.Allocator, input: update_flow_permissions.UpdateFlowPermissionsInput, options: CallOptions) !update_flow_permissions.UpdateFlowPermissionsOutput {
         return update_flow_permissions.execute(self, allocator, input, options);
     }
 
     /// Updates the name of a folder.
-    pub fn updateFolder(self: *Self, allocator: std.mem.Allocator, input: update_folder.UpdateFolderInput, options: update_folder.Options) !update_folder.UpdateFolderOutput {
+    pub fn updateFolder(self: *Self, allocator: std.mem.Allocator, input: update_folder.UpdateFolderInput, options: CallOptions) !update_folder.UpdateFolderOutput {
         return update_folder.execute(self, allocator, input, options);
     }
 
     /// Updates permissions of a folder.
-    pub fn updateFolderPermissions(self: *Self, allocator: std.mem.Allocator, input: update_folder_permissions.UpdateFolderPermissionsInput, options: update_folder_permissions.Options) !update_folder_permissions.UpdateFolderPermissionsOutput {
+    pub fn updateFolderPermissions(self: *Self, allocator: std.mem.Allocator, input: update_folder_permissions.UpdateFolderPermissionsInput, options: CallOptions) !update_folder_permissions.UpdateFolderPermissionsOutput {
         return update_folder_permissions.execute(self, allocator, input, options);
     }
 
     /// Changes a group description.
-    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: update_group.Options) !update_group.UpdateGroupOutput {
+    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: CallOptions) !update_group.UpdateGroupOutput {
         return update_group.execute(self, allocator, input, options);
     }
 
@@ -2253,7 +2254,7 @@ pub const Client = struct {
     /// the optional parameter or parameters that are specified in the request. This
     /// overwrites
     /// all of the users included in `Identities`.
-    pub fn updateIamPolicyAssignment(self: *Self, allocator: std.mem.Allocator, input: update_iam_policy_assignment.UpdateIAMPolicyAssignmentInput, options: update_iam_policy_assignment.Options) !update_iam_policy_assignment.UpdateIAMPolicyAssignmentOutput {
+    pub fn updateIamPolicyAssignment(self: *Self, allocator: std.mem.Allocator, input: update_iam_policy_assignment.UpdateIAMPolicyAssignmentInput, options: CallOptions) !update_iam_policy_assignment.UpdateIAMPolicyAssignmentOutput {
         return update_iam_policy_assignment.execute(self, allocator, input, options);
     }
 
@@ -2262,7 +2263,7 @@ pub const Client = struct {
     ///
     /// This operation is only supported for Quick Sight accounts using IAM Identity
     /// Center
-    pub fn updateIdentityPropagationConfig(self: *Self, allocator: std.mem.Allocator, input: update_identity_propagation_config.UpdateIdentityPropagationConfigInput, options: update_identity_propagation_config.Options) !update_identity_propagation_config.UpdateIdentityPropagationConfigOutput {
+    pub fn updateIdentityPropagationConfig(self: *Self, allocator: std.mem.Allocator, input: update_identity_propagation_config.UpdateIdentityPropagationConfigInput, options: CallOptions) !update_identity_propagation_config.UpdateIdentityPropagationConfigOutput {
         return update_identity_propagation_config.execute(self, allocator, input, options);
     }
 
@@ -2271,12 +2272,12 @@ pub const Client = struct {
     /// `VpcIdRestrictionRule`, or `VpcEndpointIdRestrictionRule`. To use this
     /// operation, you must provide the entire map of rules. You can use the
     /// `DescribeIpRestriction` operation to get the current rule map.
-    pub fn updateIpRestriction(self: *Self, allocator: std.mem.Allocator, input: update_ip_restriction.UpdateIpRestrictionInput, options: update_ip_restriction.Options) !update_ip_restriction.UpdateIpRestrictionOutput {
+    pub fn updateIpRestriction(self: *Self, allocator: std.mem.Allocator, input: update_ip_restriction.UpdateIpRestrictionInput, options: CallOptions) !update_ip_restriction.UpdateIpRestrictionOutput {
         return update_ip_restriction.execute(self, allocator, input, options);
     }
 
     /// Updates a customer managed key in a Quick Sight account.
-    pub fn updateKeyRegistration(self: *Self, allocator: std.mem.Allocator, input: update_key_registration.UpdateKeyRegistrationInput, options: update_key_registration.Options) !update_key_registration.UpdateKeyRegistrationOutput {
+    pub fn updateKeyRegistration(self: *Self, allocator: std.mem.Allocator, input: update_key_registration.UpdateKeyRegistrationInput, options: CallOptions) !update_key_registration.UpdateKeyRegistrationOutput {
         return update_key_registration.execute(self, allocator, input, options);
     }
 
@@ -2308,69 +2309,69 @@ pub const Client = struct {
     /// Quick Sight, see [Using Quick Suite with
     /// IAM](https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html) in the *Amazon Quick Sight
     /// User Guide*.
-    pub fn updatePublicSharingSettings(self: *Self, allocator: std.mem.Allocator, input: update_public_sharing_settings.UpdatePublicSharingSettingsInput, options: update_public_sharing_settings.Options) !update_public_sharing_settings.UpdatePublicSharingSettingsOutput {
+    pub fn updatePublicSharingSettings(self: *Self, allocator: std.mem.Allocator, input: update_public_sharing_settings.UpdatePublicSharingSettingsInput, options: CallOptions) !update_public_sharing_settings.UpdatePublicSharingSettingsOutput {
         return update_public_sharing_settings.execute(self, allocator, input, options);
     }
 
     /// Updates a personalization configuration.
-    pub fn updateQPersonalizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_q_personalization_configuration.UpdateQPersonalizationConfigurationInput, options: update_q_personalization_configuration.Options) !update_q_personalization_configuration.UpdateQPersonalizationConfigurationOutput {
+    pub fn updateQPersonalizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_q_personalization_configuration.UpdateQPersonalizationConfigurationInput, options: CallOptions) !update_q_personalization_configuration.UpdateQPersonalizationConfigurationOutput {
         return update_q_personalization_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the state of a Quick Sight Q Search configuration.
-    pub fn updateQuickSightQSearchConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_quick_sight_q_search_configuration.UpdateQuickSightQSearchConfigurationInput, options: update_quick_sight_q_search_configuration.Options) !update_quick_sight_q_search_configuration.UpdateQuickSightQSearchConfigurationOutput {
+    pub fn updateQuickSightQSearchConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_quick_sight_q_search_configuration.UpdateQuickSightQSearchConfigurationInput, options: CallOptions) !update_quick_sight_q_search_configuration.UpdateQuickSightQSearchConfigurationOutput {
         return update_quick_sight_q_search_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates a refresh schedule for a dataset.
-    pub fn updateRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: update_refresh_schedule.UpdateRefreshScheduleInput, options: update_refresh_schedule.Options) !update_refresh_schedule.UpdateRefreshScheduleOutput {
+    pub fn updateRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: update_refresh_schedule.UpdateRefreshScheduleInput, options: CallOptions) !update_refresh_schedule.UpdateRefreshScheduleOutput {
         return update_refresh_schedule.execute(self, allocator, input, options);
     }
 
     /// Updates the custom permissions that are associated with a role.
-    pub fn updateRoleCustomPermission(self: *Self, allocator: std.mem.Allocator, input: update_role_custom_permission.UpdateRoleCustomPermissionInput, options: update_role_custom_permission.Options) !update_role_custom_permission.UpdateRoleCustomPermissionOutput {
+    pub fn updateRoleCustomPermission(self: *Self, allocator: std.mem.Allocator, input: update_role_custom_permission.UpdateRoleCustomPermissionInput, options: CallOptions) !update_role_custom_permission.UpdateRoleCustomPermissionOutput {
         return update_role_custom_permission.execute(self, allocator, input, options);
     }
 
     /// Updates a self-upgrade request for a Quick Suite user by approving, denying,
     /// or verifying the request.
-    pub fn updateSelfUpgrade(self: *Self, allocator: std.mem.Allocator, input: update_self_upgrade.UpdateSelfUpgradeInput, options: update_self_upgrade.Options) !update_self_upgrade.UpdateSelfUpgradeOutput {
+    pub fn updateSelfUpgrade(self: *Self, allocator: std.mem.Allocator, input: update_self_upgrade.UpdateSelfUpgradeInput, options: CallOptions) !update_self_upgrade.UpdateSelfUpgradeOutput {
         return update_self_upgrade.execute(self, allocator, input, options);
     }
 
     /// Updates the self-upgrade configuration for a Quick Suite account.
-    pub fn updateSelfUpgradeConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_self_upgrade_configuration.UpdateSelfUpgradeConfigurationInput, options: update_self_upgrade_configuration.Options) !update_self_upgrade_configuration.UpdateSelfUpgradeConfigurationOutput {
+    pub fn updateSelfUpgradeConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_self_upgrade_configuration.UpdateSelfUpgradeConfigurationInput, options: CallOptions) !update_self_upgrade_configuration.UpdateSelfUpgradeConfigurationOutput {
         return update_self_upgrade_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the SPICE capacity configuration for a Quick Sight account.
-    pub fn updateSpiceCapacityConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_spice_capacity_configuration.UpdateSPICECapacityConfigurationInput, options: update_spice_capacity_configuration.Options) !update_spice_capacity_configuration.UpdateSPICECapacityConfigurationOutput {
+    pub fn updateSpiceCapacityConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_spice_capacity_configuration.UpdateSPICECapacityConfigurationInput, options: CallOptions) !update_spice_capacity_configuration.UpdateSPICECapacityConfigurationOutput {
         return update_spice_capacity_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates a template from an existing Amazon Quick Sight analysis or another
     /// template.
-    pub fn updateTemplate(self: *Self, allocator: std.mem.Allocator, input: update_template.UpdateTemplateInput, options: update_template.Options) !update_template.UpdateTemplateOutput {
+    pub fn updateTemplate(self: *Self, allocator: std.mem.Allocator, input: update_template.UpdateTemplateInput, options: CallOptions) !update_template.UpdateTemplateOutput {
         return update_template.execute(self, allocator, input, options);
     }
 
     /// Updates the template alias of a template.
-    pub fn updateTemplateAlias(self: *Self, allocator: std.mem.Allocator, input: update_template_alias.UpdateTemplateAliasInput, options: update_template_alias.Options) !update_template_alias.UpdateTemplateAliasOutput {
+    pub fn updateTemplateAlias(self: *Self, allocator: std.mem.Allocator, input: update_template_alias.UpdateTemplateAliasInput, options: CallOptions) !update_template_alias.UpdateTemplateAliasOutput {
         return update_template_alias.execute(self, allocator, input, options);
     }
 
     /// Updates the resource permissions for a template.
-    pub fn updateTemplatePermissions(self: *Self, allocator: std.mem.Allocator, input: update_template_permissions.UpdateTemplatePermissionsInput, options: update_template_permissions.Options) !update_template_permissions.UpdateTemplatePermissionsOutput {
+    pub fn updateTemplatePermissions(self: *Self, allocator: std.mem.Allocator, input: update_template_permissions.UpdateTemplatePermissionsInput, options: CallOptions) !update_template_permissions.UpdateTemplatePermissionsOutput {
         return update_template_permissions.execute(self, allocator, input, options);
     }
 
     /// Updates a theme.
-    pub fn updateTheme(self: *Self, allocator: std.mem.Allocator, input: update_theme.UpdateThemeInput, options: update_theme.Options) !update_theme.UpdateThemeOutput {
+    pub fn updateTheme(self: *Self, allocator: std.mem.Allocator, input: update_theme.UpdateThemeInput, options: CallOptions) !update_theme.UpdateThemeOutput {
         return update_theme.execute(self, allocator, input, options);
     }
 
     /// Updates an alias of a theme.
-    pub fn updateThemeAlias(self: *Self, allocator: std.mem.Allocator, input: update_theme_alias.UpdateThemeAliasInput, options: update_theme_alias.Options) !update_theme_alias.UpdateThemeAliasOutput {
+    pub fn updateThemeAlias(self: *Self, allocator: std.mem.Allocator, input: update_theme_alias.UpdateThemeAliasInput, options: CallOptions) !update_theme_alias.UpdateThemeAliasOutput {
         return update_theme_alias.execute(self, allocator, input, options);
     }
 
@@ -2417,37 +2418,37 @@ pub const Client = struct {
     /// * `"quicksight:DescribeThemePermissions"`
     ///
     /// * To specify no permissions, omit the permissions list.
-    pub fn updateThemePermissions(self: *Self, allocator: std.mem.Allocator, input: update_theme_permissions.UpdateThemePermissionsInput, options: update_theme_permissions.Options) !update_theme_permissions.UpdateThemePermissionsOutput {
+    pub fn updateThemePermissions(self: *Self, allocator: std.mem.Allocator, input: update_theme_permissions.UpdateThemePermissionsInput, options: CallOptions) !update_theme_permissions.UpdateThemePermissionsOutput {
         return update_theme_permissions.execute(self, allocator, input, options);
     }
 
     /// Updates a topic.
-    pub fn updateTopic(self: *Self, allocator: std.mem.Allocator, input: update_topic.UpdateTopicInput, options: update_topic.Options) !update_topic.UpdateTopicOutput {
+    pub fn updateTopic(self: *Self, allocator: std.mem.Allocator, input: update_topic.UpdateTopicInput, options: CallOptions) !update_topic.UpdateTopicOutput {
         return update_topic.execute(self, allocator, input, options);
     }
 
     /// Updates the permissions of a topic.
-    pub fn updateTopicPermissions(self: *Self, allocator: std.mem.Allocator, input: update_topic_permissions.UpdateTopicPermissionsInput, options: update_topic_permissions.Options) !update_topic_permissions.UpdateTopicPermissionsOutput {
+    pub fn updateTopicPermissions(self: *Self, allocator: std.mem.Allocator, input: update_topic_permissions.UpdateTopicPermissionsInput, options: CallOptions) !update_topic_permissions.UpdateTopicPermissionsOutput {
         return update_topic_permissions.execute(self, allocator, input, options);
     }
 
     /// Updates a topic refresh schedule.
-    pub fn updateTopicRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: update_topic_refresh_schedule.UpdateTopicRefreshScheduleInput, options: update_topic_refresh_schedule.Options) !update_topic_refresh_schedule.UpdateTopicRefreshScheduleOutput {
+    pub fn updateTopicRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: update_topic_refresh_schedule.UpdateTopicRefreshScheduleInput, options: CallOptions) !update_topic_refresh_schedule.UpdateTopicRefreshScheduleOutput {
         return update_topic_refresh_schedule.execute(self, allocator, input, options);
     }
 
     /// Updates an Amazon Quick Sight user.
-    pub fn updateUser(self: *Self, allocator: std.mem.Allocator, input: update_user.UpdateUserInput, options: update_user.Options) !update_user.UpdateUserOutput {
+    pub fn updateUser(self: *Self, allocator: std.mem.Allocator, input: update_user.UpdateUserInput, options: CallOptions) !update_user.UpdateUserOutput {
         return update_user.execute(self, allocator, input, options);
     }
 
     /// Updates a custom permissions profile for a user.
-    pub fn updateUserCustomPermission(self: *Self, allocator: std.mem.Allocator, input: update_user_custom_permission.UpdateUserCustomPermissionInput, options: update_user_custom_permission.Options) !update_user_custom_permission.UpdateUserCustomPermissionOutput {
+    pub fn updateUserCustomPermission(self: *Self, allocator: std.mem.Allocator, input: update_user_custom_permission.UpdateUserCustomPermissionInput, options: CallOptions) !update_user_custom_permission.UpdateUserCustomPermissionOutput {
         return update_user_custom_permission.execute(self, allocator, input, options);
     }
 
     /// Updates a VPC connection.
-    pub fn updateVpcConnection(self: *Self, allocator: std.mem.Allocator, input: update_vpc_connection.UpdateVPCConnectionInput, options: update_vpc_connection.Options) !update_vpc_connection.UpdateVPCConnectionOutput {
+    pub fn updateVpcConnection(self: *Self, allocator: std.mem.Allocator, input: update_vpc_connection.UpdateVPCConnectionInput, options: CallOptions) !update_vpc_connection.UpdateVPCConnectionOutput {
         return update_vpc_connection.execute(self, allocator, input, options);
     }
 

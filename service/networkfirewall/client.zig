@@ -80,6 +80,7 @@ const update_proxy_rule_priorities = @import("update_proxy_rule_priorities.zig")
 const update_rule_group = @import("update_rule_group.zig");
 const update_subnet_change_protection = @import("update_subnet_change_protection.zig");
 const update_tls_inspection_configuration = @import("update_tls_inspection_configuration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -125,7 +126,7 @@ pub const Client = struct {
     ///
     /// It can take several minutes for the attachment acceptance to complete and
     /// the firewall to become available.
-    pub fn acceptNetworkFirewallTransitGatewayAttachment(self: *Self, allocator: std.mem.Allocator, input: accept_network_firewall_transit_gateway_attachment.AcceptNetworkFirewallTransitGatewayAttachmentInput, options: accept_network_firewall_transit_gateway_attachment.Options) !accept_network_firewall_transit_gateway_attachment.AcceptNetworkFirewallTransitGatewayAttachmentOutput {
+    pub fn acceptNetworkFirewallTransitGatewayAttachment(self: *Self, allocator: std.mem.Allocator, input: accept_network_firewall_transit_gateway_attachment.AcceptNetworkFirewallTransitGatewayAttachmentInput, options: CallOptions) !accept_network_firewall_transit_gateway_attachment.AcceptNetworkFirewallTransitGatewayAttachmentOutput {
         return accept_network_firewall_transit_gateway_attachment.execute(self, allocator, input, options);
     }
 
@@ -137,7 +138,7 @@ pub const Client = struct {
     /// After adding Availability Zones, you must update your transit gateway route
     /// tables to direct traffic through the new firewall endpoints. Use
     /// DescribeFirewall to monitor the status of the new endpoints.
-    pub fn associateAvailabilityZones(self: *Self, allocator: std.mem.Allocator, input: associate_availability_zones.AssociateAvailabilityZonesInput, options: associate_availability_zones.Options) !associate_availability_zones.AssociateAvailabilityZonesOutput {
+    pub fn associateAvailabilityZones(self: *Self, allocator: std.mem.Allocator, input: associate_availability_zones.AssociateAvailabilityZonesInput, options: CallOptions) !associate_availability_zones.AssociateAvailabilityZonesOutput {
         return associate_availability_zones.execute(self, allocator, input, options);
     }
 
@@ -150,7 +151,7 @@ pub const Client = struct {
     /// firewall policy association, and you can use the same firewall policy for
     /// multiple
     /// firewalls.
-    pub fn associateFirewallPolicy(self: *Self, allocator: std.mem.Allocator, input: associate_firewall_policy.AssociateFirewallPolicyInput, options: associate_firewall_policy.Options) !associate_firewall_policy.AssociateFirewallPolicyOutput {
+    pub fn associateFirewallPolicy(self: *Self, allocator: std.mem.Allocator, input: associate_firewall_policy.AssociateFirewallPolicyInput, options: CallOptions) !associate_firewall_policy.AssociateFirewallPolicyOutput {
         return associate_firewall_policy.execute(self, allocator, input, options);
     }
 
@@ -165,7 +166,7 @@ pub const Client = struct {
     /// subnet's Availability Zone, to redirect the traffic that's coming into and
     /// going out of the
     /// zone through the firewall endpoint.
-    pub fn associateSubnets(self: *Self, allocator: std.mem.Allocator, input: associate_subnets.AssociateSubnetsInput, options: associate_subnets.Options) !associate_subnets.AssociateSubnetsOutput {
+    pub fn associateSubnets(self: *Self, allocator: std.mem.Allocator, input: associate_subnets.AssociateSubnetsInput, options: CallOptions) !associate_subnets.AssociateSubnetsOutput {
         return associate_subnets.execute(self, allocator, input, options);
     }
 
@@ -174,7 +175,7 @@ pub const Client = struct {
     /// A Proxy Configuration defines the monitoring and protection behavior for a
     /// Proxy. The details of the behavior are defined in the rule groups that you
     /// add to your configuration.
-    pub fn attachRuleGroupsToProxyConfiguration(self: *Self, allocator: std.mem.Allocator, input: attach_rule_groups_to_proxy_configuration.AttachRuleGroupsToProxyConfigurationInput, options: attach_rule_groups_to_proxy_configuration.Options) !attach_rule_groups_to_proxy_configuration.AttachRuleGroupsToProxyConfigurationOutput {
+    pub fn attachRuleGroupsToProxyConfiguration(self: *Self, allocator: std.mem.Allocator, input: attach_rule_groups_to_proxy_configuration.AttachRuleGroupsToProxyConfigurationInput, options: CallOptions) !attach_rule_groups_to_proxy_configuration.AttachRuleGroupsToProxyConfigurationOutput {
         return attach_rule_groups_to_proxy_configuration.execute(self, allocator, input, options);
     }
 
@@ -202,7 +203,7 @@ pub const Client = struct {
     ///
     /// To generate a report on the last 30 days of traffic monitored by a firewall,
     /// use StartAnalysisReport.
-    pub fn createFirewall(self: *Self, allocator: std.mem.Allocator, input: create_firewall.CreateFirewallInput, options: create_firewall.Options) !create_firewall.CreateFirewallOutput {
+    pub fn createFirewall(self: *Self, allocator: std.mem.Allocator, input: create_firewall.CreateFirewallInput, options: CallOptions) !create_firewall.CreateFirewallOutput {
         return create_firewall.execute(self, allocator, input, options);
     }
 
@@ -214,7 +215,7 @@ pub const Client = struct {
     /// stateless and stateful rule groups and other settings. You can use one
     /// firewall policy for
     /// multiple firewalls.
-    pub fn createFirewallPolicy(self: *Self, allocator: std.mem.Allocator, input: create_firewall_policy.CreateFirewallPolicyInput, options: create_firewall_policy.Options) !create_firewall_policy.CreateFirewallPolicyOutput {
+    pub fn createFirewallPolicy(self: *Self, allocator: std.mem.Allocator, input: create_firewall_policy.CreateFirewallPolicyInput, options: CallOptions) !create_firewall_policy.CreateFirewallPolicyOutput {
         return create_firewall_policy.execute(self, allocator, input, options);
     }
 
@@ -226,7 +227,7 @@ pub const Client = struct {
     /// tagging operations, ListTagsForResource, TagResource, and UntagResource.
     ///
     /// To retrieve information about proxies, use ListProxies and DescribeProxy.
-    pub fn createProxy(self: *Self, allocator: std.mem.Allocator, input: create_proxy.CreateProxyInput, options: create_proxy.Options) !create_proxy.CreateProxyOutput {
+    pub fn createProxy(self: *Self, allocator: std.mem.Allocator, input: create_proxy.CreateProxyInput, options: CallOptions) !create_proxy.CreateProxyOutput {
         return create_proxy.execute(self, allocator, input, options);
     }
 
@@ -242,7 +243,7 @@ pub const Client = struct {
     ///
     /// To retrieve information about proxies, use ListProxyConfigurations and
     /// DescribeProxyConfiguration.
-    pub fn createProxyConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_proxy_configuration.CreateProxyConfigurationInput, options: create_proxy_configuration.Options) !create_proxy_configuration.CreateProxyConfigurationOutput {
+    pub fn createProxyConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_proxy_configuration.CreateProxyConfigurationInput, options: CallOptions) !create_proxy_configuration.CreateProxyConfigurationOutput {
         return create_proxy_configuration.execute(self, allocator, input, options);
     }
 
@@ -260,7 +261,7 @@ pub const Client = struct {
     ///
     /// To retrieve information about individual proxy rules, use
     /// DescribeProxyRuleGroup and DescribeProxyRule.
-    pub fn createProxyRuleGroup(self: *Self, allocator: std.mem.Allocator, input: create_proxy_rule_group.CreateProxyRuleGroupInput, options: create_proxy_rule_group.Options) !create_proxy_rule_group.CreateProxyRuleGroupOutput {
+    pub fn createProxyRuleGroup(self: *Self, allocator: std.mem.Allocator, input: create_proxy_rule_group.CreateProxyRuleGroupInput, options: CallOptions) !create_proxy_rule_group.CreateProxyRuleGroupOutput {
         return create_proxy_rule_group.execute(self, allocator, input, options);
     }
 
@@ -270,7 +271,7 @@ pub const Client = struct {
     ///
     /// To retrieve information about individual proxy rules, use
     /// DescribeProxyRuleGroup and DescribeProxyRule.
-    pub fn createProxyRules(self: *Self, allocator: std.mem.Allocator, input: create_proxy_rules.CreateProxyRulesInput, options: create_proxy_rules.Options) !create_proxy_rules.CreateProxyRulesOutput {
+    pub fn createProxyRules(self: *Self, allocator: std.mem.Allocator, input: create_proxy_rules.CreateProxyRulesInput, options: CallOptions) !create_proxy_rules.CreateProxyRulesOutput {
         return create_proxy_rules.execute(self, allocator, input, options);
     }
 
@@ -280,7 +281,7 @@ pub const Client = struct {
     ///
     /// You provide your rule group specification in your request using either
     /// `RuleGroup` or `Rules`.
-    pub fn createRuleGroup(self: *Self, allocator: std.mem.Allocator, input: create_rule_group.CreateRuleGroupInput, options: create_rule_group.Options) !create_rule_group.CreateRuleGroupOutput {
+    pub fn createRuleGroup(self: *Self, allocator: std.mem.Allocator, input: create_rule_group.CreateRuleGroupInput, options: CallOptions) !create_rule_group.CreateRuleGroupOutput {
         return create_rule_group.execute(self, allocator, input, options);
     }
 
@@ -309,7 +310,7 @@ pub const Client = struct {
     /// SSL/TLS traffic with TLS
     /// inspection
     /// configurations](https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html) in the *Network Firewall Developer Guide*.
-    pub fn createTlsInspectionConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_tls_inspection_configuration.CreateTLSInspectionConfigurationInput, options: create_tls_inspection_configuration.Options) !create_tls_inspection_configuration.CreateTLSInspectionConfigurationOutput {
+    pub fn createTlsInspectionConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_tls_inspection_configuration.CreateTLSInspectionConfigurationInput, options: CallOptions) !create_tls_inspection_configuration.CreateTLSInspectionConfigurationOutput {
         return create_tls_inspection_configuration.execute(self, allocator, input, options);
     }
 
@@ -319,7 +320,7 @@ pub const Client = struct {
     /// after the firewall has been created. You can define a VPC endpoint
     /// association using a different VPC than the one you used in the firewall
     /// specifications.
-    pub fn createVpcEndpointAssociation(self: *Self, allocator: std.mem.Allocator, input: create_vpc_endpoint_association.CreateVpcEndpointAssociationInput, options: create_vpc_endpoint_association.Options) !create_vpc_endpoint_association.CreateVpcEndpointAssociationOutput {
+    pub fn createVpcEndpointAssociation(self: *Self, allocator: std.mem.Allocator, input: create_vpc_endpoint_association.CreateVpcEndpointAssociationInput, options: CallOptions) !create_vpc_endpoint_association.CreateVpcEndpointAssociationOutput {
         return create_vpc_endpoint_association.execute(self, allocator, input, options);
     }
 
@@ -341,12 +342,12 @@ pub const Client = struct {
     /// To delete a firewall, remove the delete protection if you need to using
     /// UpdateFirewallDeleteProtection,
     /// then delete the firewall by calling DeleteFirewall.
-    pub fn deleteFirewall(self: *Self, allocator: std.mem.Allocator, input: delete_firewall.DeleteFirewallInput, options: delete_firewall.Options) !delete_firewall.DeleteFirewallOutput {
+    pub fn deleteFirewall(self: *Self, allocator: std.mem.Allocator, input: delete_firewall.DeleteFirewallInput, options: CallOptions) !delete_firewall.DeleteFirewallOutput {
         return delete_firewall.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified FirewallPolicy.
-    pub fn deleteFirewallPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_firewall_policy.DeleteFirewallPolicyInput, options: delete_firewall_policy.Options) !delete_firewall_policy.DeleteFirewallPolicyOutput {
+    pub fn deleteFirewallPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_firewall_policy.DeleteFirewallPolicyInput, options: CallOptions) !delete_firewall_policy.DeleteFirewallPolicyOutput {
         return delete_firewall_policy.execute(self, allocator, input, options);
     }
 
@@ -358,44 +359,44 @@ pub const Client = struct {
     ///
     /// After you initiate the delete operation, use DescribeFirewall to monitor the
     /// deletion status.
-    pub fn deleteNetworkFirewallTransitGatewayAttachment(self: *Self, allocator: std.mem.Allocator, input: delete_network_firewall_transit_gateway_attachment.DeleteNetworkFirewallTransitGatewayAttachmentInput, options: delete_network_firewall_transit_gateway_attachment.Options) !delete_network_firewall_transit_gateway_attachment.DeleteNetworkFirewallTransitGatewayAttachmentOutput {
+    pub fn deleteNetworkFirewallTransitGatewayAttachment(self: *Self, allocator: std.mem.Allocator, input: delete_network_firewall_transit_gateway_attachment.DeleteNetworkFirewallTransitGatewayAttachmentInput, options: CallOptions) !delete_network_firewall_transit_gateway_attachment.DeleteNetworkFirewallTransitGatewayAttachmentOutput {
         return delete_network_firewall_transit_gateway_attachment.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified Proxy.
     ///
     /// Detaches a Proxy configuration from a NAT Gateway.
-    pub fn deleteProxy(self: *Self, allocator: std.mem.Allocator, input: delete_proxy.DeleteProxyInput, options: delete_proxy.Options) !delete_proxy.DeleteProxyOutput {
+    pub fn deleteProxy(self: *Self, allocator: std.mem.Allocator, input: delete_proxy.DeleteProxyInput, options: CallOptions) !delete_proxy.DeleteProxyOutput {
         return delete_proxy.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified ProxyConfiguration.
-    pub fn deleteProxyConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_proxy_configuration.DeleteProxyConfigurationInput, options: delete_proxy_configuration.Options) !delete_proxy_configuration.DeleteProxyConfigurationOutput {
+    pub fn deleteProxyConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_proxy_configuration.DeleteProxyConfigurationInput, options: CallOptions) !delete_proxy_configuration.DeleteProxyConfigurationOutput {
         return delete_proxy_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified ProxyRuleGroup.
-    pub fn deleteProxyRuleGroup(self: *Self, allocator: std.mem.Allocator, input: delete_proxy_rule_group.DeleteProxyRuleGroupInput, options: delete_proxy_rule_group.Options) !delete_proxy_rule_group.DeleteProxyRuleGroupOutput {
+    pub fn deleteProxyRuleGroup(self: *Self, allocator: std.mem.Allocator, input: delete_proxy_rule_group.DeleteProxyRuleGroupInput, options: CallOptions) !delete_proxy_rule_group.DeleteProxyRuleGroupOutput {
         return delete_proxy_rule_group.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified ProxyRule(s). currently attached to a ProxyRuleGroup
-    pub fn deleteProxyRules(self: *Self, allocator: std.mem.Allocator, input: delete_proxy_rules.DeleteProxyRulesInput, options: delete_proxy_rules.Options) !delete_proxy_rules.DeleteProxyRulesOutput {
+    pub fn deleteProxyRules(self: *Self, allocator: std.mem.Allocator, input: delete_proxy_rules.DeleteProxyRulesInput, options: CallOptions) !delete_proxy_rules.DeleteProxyRulesOutput {
         return delete_proxy_rules.execute(self, allocator, input, options);
     }
 
     /// Deletes a resource policy that you created in a PutResourcePolicy request.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified RuleGroup.
-    pub fn deleteRuleGroup(self: *Self, allocator: std.mem.Allocator, input: delete_rule_group.DeleteRuleGroupInput, options: delete_rule_group.Options) !delete_rule_group.DeleteRuleGroupOutput {
+    pub fn deleteRuleGroup(self: *Self, allocator: std.mem.Allocator, input: delete_rule_group.DeleteRuleGroupInput, options: CallOptions) !delete_rule_group.DeleteRuleGroupOutput {
         return delete_rule_group.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified TLSInspectionConfiguration.
-    pub fn deleteTlsInspectionConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_tls_inspection_configuration.DeleteTLSInspectionConfigurationInput, options: delete_tls_inspection_configuration.Options) !delete_tls_inspection_configuration.DeleteTLSInspectionConfigurationOutput {
+    pub fn deleteTlsInspectionConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_tls_inspection_configuration.DeleteTLSInspectionConfigurationInput, options: CallOptions) !delete_tls_inspection_configuration.DeleteTLSInspectionConfigurationOutput {
         return delete_tls_inspection_configuration.execute(self, allocator, input, options);
     }
 
@@ -411,65 +412,65 @@ pub const Client = struct {
     /// Availability Zone to remove the firewall endpoint for the association. When
     /// the route tables no longer use the firewall endpoint,
     /// you can remove the endpoint association safely.
-    pub fn deleteVpcEndpointAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_endpoint_association.DeleteVpcEndpointAssociationInput, options: delete_vpc_endpoint_association.Options) !delete_vpc_endpoint_association.DeleteVpcEndpointAssociationOutput {
+    pub fn deleteVpcEndpointAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_endpoint_association.DeleteVpcEndpointAssociationInput, options: CallOptions) !delete_vpc_endpoint_association.DeleteVpcEndpointAssociationOutput {
         return delete_vpc_endpoint_association.execute(self, allocator, input, options);
     }
 
     /// Returns the data objects for the specified firewall.
-    pub fn describeFirewall(self: *Self, allocator: std.mem.Allocator, input: describe_firewall.DescribeFirewallInput, options: describe_firewall.Options) !describe_firewall.DescribeFirewallOutput {
+    pub fn describeFirewall(self: *Self, allocator: std.mem.Allocator, input: describe_firewall.DescribeFirewallInput, options: CallOptions) !describe_firewall.DescribeFirewallOutput {
         return describe_firewall.execute(self, allocator, input, options);
     }
 
     /// Returns the high-level information about a firewall, including the
     /// Availability Zones where the Firewall is
     /// currently in use.
-    pub fn describeFirewallMetadata(self: *Self, allocator: std.mem.Allocator, input: describe_firewall_metadata.DescribeFirewallMetadataInput, options: describe_firewall_metadata.Options) !describe_firewall_metadata.DescribeFirewallMetadataOutput {
+    pub fn describeFirewallMetadata(self: *Self, allocator: std.mem.Allocator, input: describe_firewall_metadata.DescribeFirewallMetadataInput, options: CallOptions) !describe_firewall_metadata.DescribeFirewallMetadataOutput {
         return describe_firewall_metadata.execute(self, allocator, input, options);
     }
 
     /// Returns the data objects for the specified firewall policy.
-    pub fn describeFirewallPolicy(self: *Self, allocator: std.mem.Allocator, input: describe_firewall_policy.DescribeFirewallPolicyInput, options: describe_firewall_policy.Options) !describe_firewall_policy.DescribeFirewallPolicyOutput {
+    pub fn describeFirewallPolicy(self: *Self, allocator: std.mem.Allocator, input: describe_firewall_policy.DescribeFirewallPolicyInput, options: CallOptions) !describe_firewall_policy.DescribeFirewallPolicyOutput {
         return describe_firewall_policy.execute(self, allocator, input, options);
     }
 
     /// Returns key information about a specific flow operation.
-    pub fn describeFlowOperation(self: *Self, allocator: std.mem.Allocator, input: describe_flow_operation.DescribeFlowOperationInput, options: describe_flow_operation.Options) !describe_flow_operation.DescribeFlowOperationOutput {
+    pub fn describeFlowOperation(self: *Self, allocator: std.mem.Allocator, input: describe_flow_operation.DescribeFlowOperationInput, options: CallOptions) !describe_flow_operation.DescribeFlowOperationOutput {
         return describe_flow_operation.execute(self, allocator, input, options);
     }
 
     /// Returns the logging configuration for the specified firewall.
-    pub fn describeLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_logging_configuration.DescribeLoggingConfigurationInput, options: describe_logging_configuration.Options) !describe_logging_configuration.DescribeLoggingConfigurationOutput {
+    pub fn describeLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_logging_configuration.DescribeLoggingConfigurationInput, options: CallOptions) !describe_logging_configuration.DescribeLoggingConfigurationOutput {
         return describe_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns the data objects for the specified proxy.
-    pub fn describeProxy(self: *Self, allocator: std.mem.Allocator, input: describe_proxy.DescribeProxyInput, options: describe_proxy.Options) !describe_proxy.DescribeProxyOutput {
+    pub fn describeProxy(self: *Self, allocator: std.mem.Allocator, input: describe_proxy.DescribeProxyInput, options: CallOptions) !describe_proxy.DescribeProxyOutput {
         return describe_proxy.execute(self, allocator, input, options);
     }
 
     /// Returns the data objects for the specified proxy configuration.
-    pub fn describeProxyConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_proxy_configuration.DescribeProxyConfigurationInput, options: describe_proxy_configuration.Options) !describe_proxy_configuration.DescribeProxyConfigurationOutput {
+    pub fn describeProxyConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_proxy_configuration.DescribeProxyConfigurationInput, options: CallOptions) !describe_proxy_configuration.DescribeProxyConfigurationOutput {
         return describe_proxy_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns the data objects for the specified proxy configuration for the
     /// specified proxy rule group.
-    pub fn describeProxyRule(self: *Self, allocator: std.mem.Allocator, input: describe_proxy_rule.DescribeProxyRuleInput, options: describe_proxy_rule.Options) !describe_proxy_rule.DescribeProxyRuleOutput {
+    pub fn describeProxyRule(self: *Self, allocator: std.mem.Allocator, input: describe_proxy_rule.DescribeProxyRuleInput, options: CallOptions) !describe_proxy_rule.DescribeProxyRuleOutput {
         return describe_proxy_rule.execute(self, allocator, input, options);
     }
 
     /// Returns the data objects for the specified proxy rule group.
-    pub fn describeProxyRuleGroup(self: *Self, allocator: std.mem.Allocator, input: describe_proxy_rule_group.DescribeProxyRuleGroupInput, options: describe_proxy_rule_group.Options) !describe_proxy_rule_group.DescribeProxyRuleGroupOutput {
+    pub fn describeProxyRuleGroup(self: *Self, allocator: std.mem.Allocator, input: describe_proxy_rule_group.DescribeProxyRuleGroupInput, options: CallOptions) !describe_proxy_rule_group.DescribeProxyRuleGroupOutput {
         return describe_proxy_rule_group.execute(self, allocator, input, options);
     }
 
     /// Retrieves a resource policy that you created in a PutResourcePolicy request.
-    pub fn describeResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: describe_resource_policy.DescribeResourcePolicyInput, options: describe_resource_policy.Options) !describe_resource_policy.DescribeResourcePolicyOutput {
+    pub fn describeResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: describe_resource_policy.DescribeResourcePolicyInput, options: CallOptions) !describe_resource_policy.DescribeResourcePolicyOutput {
         return describe_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Returns the data objects for the specified rule group.
-    pub fn describeRuleGroup(self: *Self, allocator: std.mem.Allocator, input: describe_rule_group.DescribeRuleGroupInput, options: describe_rule_group.Options) !describe_rule_group.DescribeRuleGroupOutput {
+    pub fn describeRuleGroup(self: *Self, allocator: std.mem.Allocator, input: describe_rule_group.DescribeRuleGroupInput, options: CallOptions) !describe_rule_group.DescribeRuleGroupOutput {
         return describe_rule_group.execute(self, allocator, input, options);
     }
 
@@ -478,7 +479,7 @@ pub const Client = struct {
     /// You can use the information provided in the metadata to retrieve and manage
     /// a rule group.
     /// You can retrieve all objects for a rule group by calling DescribeRuleGroup.
-    pub fn describeRuleGroupMetadata(self: *Self, allocator: std.mem.Allocator, input: describe_rule_group_metadata.DescribeRuleGroupMetadataInput, options: describe_rule_group_metadata.Options) !describe_rule_group_metadata.DescribeRuleGroupMetadataOutput {
+    pub fn describeRuleGroupMetadata(self: *Self, allocator: std.mem.Allocator, input: describe_rule_group_metadata.DescribeRuleGroupMetadataInput, options: CallOptions) !describe_rule_group_metadata.DescribeRuleGroupMetadataOutput {
         return describe_rule_group_metadata.execute(self, allocator, input, options);
     }
 
@@ -492,17 +493,17 @@ pub const Client = struct {
     ///
     /// To modify how threat information appears in summaries, use the
     /// `SummaryConfiguration` parameter in UpdateRuleGroup.
-    pub fn describeRuleGroupSummary(self: *Self, allocator: std.mem.Allocator, input: describe_rule_group_summary.DescribeRuleGroupSummaryInput, options: describe_rule_group_summary.Options) !describe_rule_group_summary.DescribeRuleGroupSummaryOutput {
+    pub fn describeRuleGroupSummary(self: *Self, allocator: std.mem.Allocator, input: describe_rule_group_summary.DescribeRuleGroupSummaryInput, options: CallOptions) !describe_rule_group_summary.DescribeRuleGroupSummaryOutput {
         return describe_rule_group_summary.execute(self, allocator, input, options);
     }
 
     /// Returns the data objects for the specified TLS inspection configuration.
-    pub fn describeTlsInspectionConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_tls_inspection_configuration.DescribeTLSInspectionConfigurationInput, options: describe_tls_inspection_configuration.Options) !describe_tls_inspection_configuration.DescribeTLSInspectionConfigurationOutput {
+    pub fn describeTlsInspectionConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_tls_inspection_configuration.DescribeTLSInspectionConfigurationInput, options: CallOptions) !describe_tls_inspection_configuration.DescribeTLSInspectionConfigurationOutput {
         return describe_tls_inspection_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns the data object for the specified VPC endpoint association.
-    pub fn describeVpcEndpointAssociation(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoint_association.DescribeVpcEndpointAssociationInput, options: describe_vpc_endpoint_association.Options) !describe_vpc_endpoint_association.DescribeVpcEndpointAssociationOutput {
+    pub fn describeVpcEndpointAssociation(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoint_association.DescribeVpcEndpointAssociationInput, options: CallOptions) !describe_vpc_endpoint_association.DescribeVpcEndpointAssociationOutput {
         return describe_vpc_endpoint_association.execute(self, allocator, input, options);
     }
 
@@ -511,7 +512,7 @@ pub const Client = struct {
     /// A Proxy Configuration defines the monitoring and protection behavior for a
     /// Proxy. The details of the behavior are defined in the rule groups that you
     /// add to your configuration.
-    pub fn detachRuleGroupsFromProxyConfiguration(self: *Self, allocator: std.mem.Allocator, input: detach_rule_groups_from_proxy_configuration.DetachRuleGroupsFromProxyConfigurationInput, options: detach_rule_groups_from_proxy_configuration.Options) !detach_rule_groups_from_proxy_configuration.DetachRuleGroupsFromProxyConfigurationOutput {
+    pub fn detachRuleGroupsFromProxyConfiguration(self: *Self, allocator: std.mem.Allocator, input: detach_rule_groups_from_proxy_configuration.DetachRuleGroupsFromProxyConfigurationInput, options: CallOptions) !detach_rule_groups_from_proxy_configuration.DetachRuleGroupsFromProxyConfigurationOutput {
         return detach_rule_groups_from_proxy_configuration.execute(self, allocator, input, options);
     }
 
@@ -526,7 +527,7 @@ pub const Client = struct {
     ///
     /// To verify the status of your Availability Zone changes, use
     /// DescribeFirewall.
-    pub fn disassociateAvailabilityZones(self: *Self, allocator: std.mem.Allocator, input: disassociate_availability_zones.DisassociateAvailabilityZonesInput, options: disassociate_availability_zones.Options) !disassociate_availability_zones.DisassociateAvailabilityZonesOutput {
+    pub fn disassociateAvailabilityZones(self: *Self, allocator: std.mem.Allocator, input: disassociate_availability_zones.DisassociateAvailabilityZonesInput, options: CallOptions) !disassociate_availability_zones.DisassociateAvailabilityZonesOutput {
         return disassociate_availability_zones.execute(self, allocator, input, options);
     }
 
@@ -535,7 +536,7 @@ pub const Client = struct {
     /// firewall endpoints from the subnets and removes any network filtering
     /// protections that the endpoints
     /// were providing.
-    pub fn disassociateSubnets(self: *Self, allocator: std.mem.Allocator, input: disassociate_subnets.DisassociateSubnetsInput, options: disassociate_subnets.Options) !disassociate_subnets.DisassociateSubnetsOutput {
+    pub fn disassociateSubnets(self: *Self, allocator: std.mem.Allocator, input: disassociate_subnets.DisassociateSubnetsInput, options: CallOptions) !disassociate_subnets.DisassociateSubnetsOutput {
         return disassociate_subnets.execute(self, allocator, input, options);
     }
 
@@ -543,13 +544,13 @@ pub const Client = struct {
     /// StartAnalysisReport.
     ///
     /// For more information, see AnalysisTypeReportResult.
-    pub fn getAnalysisReportResults(self: *Self, allocator: std.mem.Allocator, input: get_analysis_report_results.GetAnalysisReportResultsInput, options: get_analysis_report_results.Options) !get_analysis_report_results.GetAnalysisReportResultsOutput {
+    pub fn getAnalysisReportResults(self: *Self, allocator: std.mem.Allocator, input: get_analysis_report_results.GetAnalysisReportResultsInput, options: CallOptions) !get_analysis_report_results.GetAnalysisReportResultsOutput {
         return get_analysis_report_results.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all traffic analysis reports generated within the last 30
     /// days.
-    pub fn listAnalysisReports(self: *Self, allocator: std.mem.Allocator, input: list_analysis_reports.ListAnalysisReportsInput, options: list_analysis_reports.Options) !list_analysis_reports.ListAnalysisReportsOutput {
+    pub fn listAnalysisReports(self: *Self, allocator: std.mem.Allocator, input: list_analysis_reports.ListAnalysisReportsInput, options: CallOptions) !list_analysis_reports.ListAnalysisReportsOutput {
         return list_analysis_reports.execute(self, allocator, input, options);
     }
 
@@ -558,7 +559,7 @@ pub const Client = struct {
     /// your setting for max results and the number of firewall policies, a single
     /// call might not
     /// return the full list.
-    pub fn listFirewallPolicies(self: *Self, allocator: std.mem.Allocator, input: list_firewall_policies.ListFirewallPoliciesInput, options: list_firewall_policies.Options) !list_firewall_policies.ListFirewallPoliciesOutput {
+    pub fn listFirewallPolicies(self: *Self, allocator: std.mem.Allocator, input: list_firewall_policies.ListFirewallPoliciesInput, options: CallOptions) !list_firewall_policies.ListFirewallPoliciesOutput {
         return list_firewall_policies.execute(self, allocator, input, options);
     }
 
@@ -569,7 +570,7 @@ pub const Client = struct {
     /// Depending on your setting for max results and the number of firewalls, a
     /// single call
     /// might not return the full list.
-    pub fn listFirewalls(self: *Self, allocator: std.mem.Allocator, input: list_firewalls.ListFirewallsInput, options: list_firewalls.Options) !list_firewalls.ListFirewallsOutput {
+    pub fn listFirewalls(self: *Self, allocator: std.mem.Allocator, input: list_firewalls.ListFirewallsInput, options: CallOptions) !list_firewalls.ListFirewallsOutput {
         return list_firewalls.execute(self, allocator, input, options);
     }
 
@@ -582,7 +583,7 @@ pub const Client = struct {
     /// stateful or stateless rules.
     /// For traffic to be considered part of a flow, it must share Destination,
     /// DestinationPort, Direction, Protocol, Source, and SourcePort.
-    pub fn listFlowOperationResults(self: *Self, allocator: std.mem.Allocator, input: list_flow_operation_results.ListFlowOperationResultsInput, options: list_flow_operation_results.Options) !list_flow_operation_results.ListFlowOperationResultsOutput {
+    pub fn listFlowOperationResults(self: *Self, allocator: std.mem.Allocator, input: list_flow_operation_results.ListFlowOperationResultsInput, options: CallOptions) !list_flow_operation_results.ListFlowOperationResultsOutput {
         return list_flow_operation_results.execute(self, allocator, input, options);
     }
 
@@ -597,7 +598,7 @@ pub const Client = struct {
     /// stateful or stateless rules.
     /// For traffic to be considered part of a flow, it must share Destination,
     /// DestinationPort, Direction, Protocol, Source, and SourcePort.
-    pub fn listFlowOperations(self: *Self, allocator: std.mem.Allocator, input: list_flow_operations.ListFlowOperationsInput, options: list_flow_operations.Options) !list_flow_operations.ListFlowOperationsOutput {
+    pub fn listFlowOperations(self: *Self, allocator: std.mem.Allocator, input: list_flow_operations.ListFlowOperationsInput, options: CallOptions) !list_flow_operations.ListFlowOperationsOutput {
         return list_flow_operations.execute(self, allocator, input, options);
     }
 
@@ -605,7 +606,7 @@ pub const Client = struct {
     /// your setting for max results and the number of proxies, a single call might
     /// not
     /// return the full list.
-    pub fn listProxies(self: *Self, allocator: std.mem.Allocator, input: list_proxies.ListProxiesInput, options: list_proxies.Options) !list_proxies.ListProxiesOutput {
+    pub fn listProxies(self: *Self, allocator: std.mem.Allocator, input: list_proxies.ListProxiesInput, options: CallOptions) !list_proxies.ListProxiesOutput {
         return list_proxies.execute(self, allocator, input, options);
     }
 
@@ -614,7 +615,7 @@ pub const Client = struct {
     /// your setting for max results and the number of proxy configurations, a
     /// single call might not
     /// return the full list.
-    pub fn listProxyConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_proxy_configurations.ListProxyConfigurationsInput, options: list_proxy_configurations.Options) !list_proxy_configurations.ListProxyConfigurationsOutput {
+    pub fn listProxyConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_proxy_configurations.ListProxyConfigurationsInput, options: CallOptions) !list_proxy_configurations.ListProxyConfigurationsOutput {
         return list_proxy_configurations.execute(self, allocator, input, options);
     }
 
@@ -623,7 +624,7 @@ pub const Client = struct {
     /// your setting for max results and the number of proxy rule groups, a single
     /// call might not
     /// return the full list.
-    pub fn listProxyRuleGroups(self: *Self, allocator: std.mem.Allocator, input: list_proxy_rule_groups.ListProxyRuleGroupsInput, options: list_proxy_rule_groups.Options) !list_proxy_rule_groups.ListProxyRuleGroupsOutput {
+    pub fn listProxyRuleGroups(self: *Self, allocator: std.mem.Allocator, input: list_proxy_rule_groups.ListProxyRuleGroupsInput, options: CallOptions) !list_proxy_rule_groups.ListProxyRuleGroupsOutput {
         return list_proxy_rule_groups.execute(self, allocator, input, options);
     }
 
@@ -632,7 +633,7 @@ pub const Client = struct {
     /// setting for max results and the number of rule groups, a single call might
     /// not return the
     /// full list.
-    pub fn listRuleGroups(self: *Self, allocator: std.mem.Allocator, input: list_rule_groups.ListRuleGroupsInput, options: list_rule_groups.Options) !list_rule_groups.ListRuleGroupsOutput {
+    pub fn listRuleGroups(self: *Self, allocator: std.mem.Allocator, input: list_rule_groups.ListRuleGroupsInput, options: CallOptions) !list_rule_groups.ListRuleGroupsOutput {
         return list_rule_groups.execute(self, allocator, input, options);
     }
 
@@ -649,14 +650,14 @@ pub const Client = struct {
     /// You can tag the Amazon Web Services resources that you manage through
     /// Network Firewall: firewalls, firewall
     /// policies, and rule groups.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Retrieves the metadata for the TLS inspection configurations that you have
     /// defined. Depending on your setting for max results and the number of TLS
     /// inspection configurations, a single call might not return the full list.
-    pub fn listTlsInspectionConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_tls_inspection_configurations.ListTLSInspectionConfigurationsInput, options: list_tls_inspection_configurations.Options) !list_tls_inspection_configurations.ListTLSInspectionConfigurationsOutput {
+    pub fn listTlsInspectionConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_tls_inspection_configurations.ListTLSInspectionConfigurationsInput, options: CallOptions) !list_tls_inspection_configurations.ListTLSInspectionConfigurationsOutput {
         return list_tls_inspection_configurations.execute(self, allocator, input, options);
     }
 
@@ -667,7 +668,7 @@ pub const Client = struct {
     /// Depending on your setting for max results and the number of associations, a
     /// single call
     /// might not return the full list.
-    pub fn listVpcEndpointAssociations(self: *Self, allocator: std.mem.Allocator, input: list_vpc_endpoint_associations.ListVpcEndpointAssociationsInput, options: list_vpc_endpoint_associations.Options) !list_vpc_endpoint_associations.ListVpcEndpointAssociationsOutput {
+    pub fn listVpcEndpointAssociations(self: *Self, allocator: std.mem.Allocator, input: list_vpc_endpoint_associations.ListVpcEndpointAssociationsInput, options: CallOptions) !list_vpc_endpoint_associations.ListVpcEndpointAssociationsOutput {
         return list_vpc_endpoint_associations.execute(self, allocator, input, options);
     }
 
@@ -699,7 +700,7 @@ pub const Client = struct {
     /// For additional information about resource sharing using RAM, see [Resource
     /// Access Manager User
     /// Guide](https://docs.aws.amazon.com/ram/latest/userguide/what-is.html).
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -716,7 +717,7 @@ pub const Client = struct {
     ///
     /// Once rejected, you cannot reverse this action. To establish connectivity,
     /// you must create a new transit gateway-attached firewall.
-    pub fn rejectNetworkFirewallTransitGatewayAttachment(self: *Self, allocator: std.mem.Allocator, input: reject_network_firewall_transit_gateway_attachment.RejectNetworkFirewallTransitGatewayAttachmentInput, options: reject_network_firewall_transit_gateway_attachment.Options) !reject_network_firewall_transit_gateway_attachment.RejectNetworkFirewallTransitGatewayAttachmentOutput {
+    pub fn rejectNetworkFirewallTransitGatewayAttachment(self: *Self, allocator: std.mem.Allocator, input: reject_network_firewall_transit_gateway_attachment.RejectNetworkFirewallTransitGatewayAttachmentInput, options: CallOptions) !reject_network_firewall_transit_gateway_attachment.RejectNetworkFirewallTransitGatewayAttachmentOutput {
         return reject_network_firewall_transit_gateway_attachment.execute(self, allocator, input, options);
     }
 
@@ -725,7 +726,7 @@ pub const Client = struct {
     ///
     /// For information on the contents of a traffic analysis report, see
     /// AnalysisReport.
-    pub fn startAnalysisReport(self: *Self, allocator: std.mem.Allocator, input: start_analysis_report.StartAnalysisReportInput, options: start_analysis_report.Options) !start_analysis_report.StartAnalysisReportOutput {
+    pub fn startAnalysisReport(self: *Self, allocator: std.mem.Allocator, input: start_analysis_report.StartAnalysisReportInput, options: CallOptions) !start_analysis_report.StartAnalysisReportOutput {
         return start_analysis_report.execute(self, allocator, input, options);
     }
 
@@ -745,7 +746,7 @@ pub const Client = struct {
     /// with broad filters, like wide IP ranges.
     /// Instead, we recommend you define more specific criteria with `FlowFilters`,
     /// like narrow IP ranges, ports, or protocols.
-    pub fn startFlowCapture(self: *Self, allocator: std.mem.Allocator, input: start_flow_capture.StartFlowCaptureInput, options: start_flow_capture.Options) !start_flow_capture.StartFlowCaptureOutput {
+    pub fn startFlowCapture(self: *Self, allocator: std.mem.Allocator, input: start_flow_capture.StartFlowCaptureInput, options: CallOptions) !start_flow_capture.StartFlowCaptureOutput {
         return start_flow_capture.execute(self, allocator, input, options);
     }
 
@@ -760,7 +761,7 @@ pub const Client = struct {
     /// temporary increase in midstream traffic metrics. We recommend that you
     /// double check your stream exception policy
     /// before you perform a flush operation.
-    pub fn startFlowFlush(self: *Self, allocator: std.mem.Allocator, input: start_flow_flush.StartFlowFlushInput, options: start_flow_flush.Options) !start_flow_flush.StartFlowFlushOutput {
+    pub fn startFlowFlush(self: *Self, allocator: std.mem.Allocator, input: start_flow_flush.StartFlowFlushInput, options: CallOptions) !start_flow_flush.StartFlowFlushOutput {
         return start_flow_flush.execute(self, allocator, input, options);
     }
 
@@ -776,7 +777,7 @@ pub const Client = struct {
     /// You can tag the Amazon Web Services resources that you manage through
     /// Network Firewall: firewalls, firewall
     /// policies, and rule groups.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -793,7 +794,7 @@ pub const Client = struct {
     /// You can manage tags for the Amazon Web Services resources that you manage
     /// through Network Firewall:
     /// firewalls, firewall policies, and rule groups.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -805,13 +806,13 @@ pub const Client = struct {
     /// When enabled, you must disable this protection before using
     /// AssociateAvailabilityZones or DisassociateAvailabilityZones to modify the
     /// firewall's Availability Zone configuration.
-    pub fn updateAvailabilityZoneChangeProtection(self: *Self, allocator: std.mem.Allocator, input: update_availability_zone_change_protection.UpdateAvailabilityZoneChangeProtectionInput, options: update_availability_zone_change_protection.Options) !update_availability_zone_change_protection.UpdateAvailabilityZoneChangeProtectionOutput {
+    pub fn updateAvailabilityZoneChangeProtection(self: *Self, allocator: std.mem.Allocator, input: update_availability_zone_change_protection.UpdateAvailabilityZoneChangeProtectionInput, options: CallOptions) !update_availability_zone_change_protection.UpdateAvailabilityZoneChangeProtectionOutput {
         return update_availability_zone_change_protection.execute(self, allocator, input, options);
     }
 
     /// Enables specific types of firewall analysis on a specific firewall you
     /// define.
-    pub fn updateFirewallAnalysisSettings(self: *Self, allocator: std.mem.Allocator, input: update_firewall_analysis_settings.UpdateFirewallAnalysisSettingsInput, options: update_firewall_analysis_settings.Options) !update_firewall_analysis_settings.UpdateFirewallAnalysisSettingsOutput {
+    pub fn updateFirewallAnalysisSettings(self: *Self, allocator: std.mem.Allocator, input: update_firewall_analysis_settings.UpdateFirewallAnalysisSettingsInput, options: CallOptions) !update_firewall_analysis_settings.UpdateFirewallAnalysisSettingsOutput {
         return update_firewall_analysis_settings.execute(self, allocator, input, options);
     }
 
@@ -822,25 +823,25 @@ pub const Client = struct {
     /// against deletion. This setting helps protect against accidentally deleting a
     /// firewall
     /// that's in use.
-    pub fn updateFirewallDeleteProtection(self: *Self, allocator: std.mem.Allocator, input: update_firewall_delete_protection.UpdateFirewallDeleteProtectionInput, options: update_firewall_delete_protection.Options) !update_firewall_delete_protection.UpdateFirewallDeleteProtectionOutput {
+    pub fn updateFirewallDeleteProtection(self: *Self, allocator: std.mem.Allocator, input: update_firewall_delete_protection.UpdateFirewallDeleteProtectionInput, options: CallOptions) !update_firewall_delete_protection.UpdateFirewallDeleteProtectionOutput {
         return update_firewall_delete_protection.execute(self, allocator, input, options);
     }
 
     /// Modifies the description for the specified firewall. Use the description to
     /// help you
     /// identify the firewall when you're working with it.
-    pub fn updateFirewallDescription(self: *Self, allocator: std.mem.Allocator, input: update_firewall_description.UpdateFirewallDescriptionInput, options: update_firewall_description.Options) !update_firewall_description.UpdateFirewallDescriptionOutput {
+    pub fn updateFirewallDescription(self: *Self, allocator: std.mem.Allocator, input: update_firewall_description.UpdateFirewallDescriptionInput, options: CallOptions) !update_firewall_description.UpdateFirewallDescriptionOutput {
         return update_firewall_description.execute(self, allocator, input, options);
     }
 
     /// A complex type that contains settings for encryption of your firewall
     /// resources.
-    pub fn updateFirewallEncryptionConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_firewall_encryption_configuration.UpdateFirewallEncryptionConfigurationInput, options: update_firewall_encryption_configuration.Options) !update_firewall_encryption_configuration.UpdateFirewallEncryptionConfigurationOutput {
+    pub fn updateFirewallEncryptionConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_firewall_encryption_configuration.UpdateFirewallEncryptionConfigurationInput, options: CallOptions) !update_firewall_encryption_configuration.UpdateFirewallEncryptionConfigurationOutput {
         return update_firewall_encryption_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the properties of the specified firewall policy.
-    pub fn updateFirewallPolicy(self: *Self, allocator: std.mem.Allocator, input: update_firewall_policy.UpdateFirewallPolicyInput, options: update_firewall_policy.Options) !update_firewall_policy.UpdateFirewallPolicyOutput {
+    pub fn updateFirewallPolicy(self: *Self, allocator: std.mem.Allocator, input: update_firewall_policy.UpdateFirewallPolicyInput, options: CallOptions) !update_firewall_policy.UpdateFirewallPolicyOutput {
         return update_firewall_policy.execute(self, allocator, input, options);
     }
 
@@ -849,7 +850,7 @@ pub const Client = struct {
     /// firewall is protected
     /// from changes. This setting helps protect against accidentally changing a
     /// firewall that's in use.
-    pub fn updateFirewallPolicyChangeProtection(self: *Self, allocator: std.mem.Allocator, input: update_firewall_policy_change_protection.UpdateFirewallPolicyChangeProtectionInput, options: update_firewall_policy_change_protection.Options) !update_firewall_policy_change_protection.UpdateFirewallPolicyChangeProtectionOutput {
+    pub fn updateFirewallPolicyChangeProtection(self: *Self, allocator: std.mem.Allocator, input: update_firewall_policy_change_protection.UpdateFirewallPolicyChangeProtectionInput, options: CallOptions) !update_firewall_policy_change_protection.UpdateFirewallPolicyChangeProtectionOutput {
         return update_firewall_policy_change_protection.execute(self, allocator, input, options);
     }
 
@@ -880,32 +881,32 @@ pub const Client = struct {
     /// `LogDestinationConfig`. To change these settings, delete the existing
     /// `LogDestinationConfig` object and create a new one, using two separate calls
     /// to this update operation.
-    pub fn updateLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_logging_configuration.UpdateLoggingConfigurationInput, options: update_logging_configuration.Options) !update_logging_configuration.UpdateLoggingConfigurationOutput {
+    pub fn updateLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_logging_configuration.UpdateLoggingConfigurationInput, options: CallOptions) !update_logging_configuration.UpdateLoggingConfigurationOutput {
         return update_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the properties of the specified proxy.
-    pub fn updateProxy(self: *Self, allocator: std.mem.Allocator, input: update_proxy.UpdateProxyInput, options: update_proxy.Options) !update_proxy.UpdateProxyOutput {
+    pub fn updateProxy(self: *Self, allocator: std.mem.Allocator, input: update_proxy.UpdateProxyInput, options: CallOptions) !update_proxy.UpdateProxyOutput {
         return update_proxy.execute(self, allocator, input, options);
     }
 
     /// Updates the properties of the specified proxy configuration.
-    pub fn updateProxyConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_proxy_configuration.UpdateProxyConfigurationInput, options: update_proxy_configuration.Options) !update_proxy_configuration.UpdateProxyConfigurationOutput {
+    pub fn updateProxyConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_proxy_configuration.UpdateProxyConfigurationInput, options: CallOptions) !update_proxy_configuration.UpdateProxyConfigurationOutput {
         return update_proxy_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the properties of the specified proxy rule.
-    pub fn updateProxyRule(self: *Self, allocator: std.mem.Allocator, input: update_proxy_rule.UpdateProxyRuleInput, options: update_proxy_rule.Options) !update_proxy_rule.UpdateProxyRuleOutput {
+    pub fn updateProxyRule(self: *Self, allocator: std.mem.Allocator, input: update_proxy_rule.UpdateProxyRuleInput, options: CallOptions) !update_proxy_rule.UpdateProxyRuleOutput {
         return update_proxy_rule.execute(self, allocator, input, options);
     }
 
     /// Updates proxy rule group priorities within a proxy configuration.
-    pub fn updateProxyRuleGroupPriorities(self: *Self, allocator: std.mem.Allocator, input: update_proxy_rule_group_priorities.UpdateProxyRuleGroupPrioritiesInput, options: update_proxy_rule_group_priorities.Options) !update_proxy_rule_group_priorities.UpdateProxyRuleGroupPrioritiesOutput {
+    pub fn updateProxyRuleGroupPriorities(self: *Self, allocator: std.mem.Allocator, input: update_proxy_rule_group_priorities.UpdateProxyRuleGroupPrioritiesInput, options: CallOptions) !update_proxy_rule_group_priorities.UpdateProxyRuleGroupPrioritiesOutput {
         return update_proxy_rule_group_priorities.execute(self, allocator, input, options);
     }
 
     /// Updates proxy rule priorities within a proxy rule group.
-    pub fn updateProxyRulePriorities(self: *Self, allocator: std.mem.Allocator, input: update_proxy_rule_priorities.UpdateProxyRulePrioritiesInput, options: update_proxy_rule_priorities.Options) !update_proxy_rule_priorities.UpdateProxyRulePrioritiesOutput {
+    pub fn updateProxyRulePriorities(self: *Self, allocator: std.mem.Allocator, input: update_proxy_rule_priorities.UpdateProxyRulePrioritiesInput, options: CallOptions) !update_proxy_rule_priorities.UpdateProxyRulePrioritiesOutput {
         return update_proxy_rule_priorities.execute(self, allocator, input, options);
     }
 
@@ -918,11 +919,11 @@ pub const Client = struct {
     /// To update a rule group, first call DescribeRuleGroup to retrieve the
     /// current RuleGroup object, update the object as needed, and then provide
     /// the updated object to this call.
-    pub fn updateRuleGroup(self: *Self, allocator: std.mem.Allocator, input: update_rule_group.UpdateRuleGroupInput, options: update_rule_group.Options) !update_rule_group.UpdateRuleGroupOutput {
+    pub fn updateRuleGroup(self: *Self, allocator: std.mem.Allocator, input: update_rule_group.UpdateRuleGroupInput, options: CallOptions) !update_rule_group.UpdateRuleGroupOutput {
         return update_rule_group.execute(self, allocator, input, options);
     }
 
-    pub fn updateSubnetChangeProtection(self: *Self, allocator: std.mem.Allocator, input: update_subnet_change_protection.UpdateSubnetChangeProtectionInput, options: update_subnet_change_protection.Options) !update_subnet_change_protection.UpdateSubnetChangeProtectionOutput {
+    pub fn updateSubnetChangeProtection(self: *Self, allocator: std.mem.Allocator, input: update_subnet_change_protection.UpdateSubnetChangeProtectionInput, options: CallOptions) !update_subnet_change_protection.UpdateSubnetChangeProtectionOutput {
         return update_subnet_change_protection.execute(self, allocator, input, options);
     }
 
@@ -937,7 +938,7 @@ pub const Client = struct {
     /// current TLSInspectionConfiguration object, update the object as needed, and
     /// then provide
     /// the updated object to this call.
-    pub fn updateTlsInspectionConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_tls_inspection_configuration.UpdateTLSInspectionConfigurationInput, options: update_tls_inspection_configuration.Options) !update_tls_inspection_configuration.UpdateTLSInspectionConfigurationOutput {
+    pub fn updateTlsInspectionConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_tls_inspection_configuration.UpdateTLSInspectionConfigurationInput, options: CallOptions) !update_tls_inspection_configuration.UpdateTLSInspectionConfigurationOutput {
         return update_tls_inspection_configuration.execute(self, allocator, input, options);
     }
 

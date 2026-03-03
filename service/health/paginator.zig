@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_affected_accounts_for_organization = @import("describe_affected_accounts_for_organization.zig");
@@ -20,7 +21,7 @@ pub const DescribeAffectedAccountsForOrganizationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_affected_accounts_for_organization.Options) !describe_affected_accounts_for_organization.DescribeAffectedAccountsForOrganizationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_affected_accounts_for_organization.DescribeAffectedAccountsForOrganizationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -61,7 +62,7 @@ pub const DescribeAffectedEntitiesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_affected_entities.Options) !describe_affected_entities.DescribeAffectedEntitiesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_affected_entities.DescribeAffectedEntitiesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -102,7 +103,7 @@ pub const DescribeAffectedEntitiesForOrganizationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_affected_entities_for_organization.Options) !describe_affected_entities_for_organization.DescribeAffectedEntitiesForOrganizationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_affected_entities_for_organization.DescribeAffectedEntitiesForOrganizationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -143,7 +144,7 @@ pub const DescribeEventAggregatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_event_aggregates.Options) !describe_event_aggregates.DescribeEventAggregatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_event_aggregates.DescribeEventAggregatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -184,7 +185,7 @@ pub const DescribeEventTypesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_event_types.Options) !describe_event_types.DescribeEventTypesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_event_types.DescribeEventTypesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -225,7 +226,7 @@ pub const DescribeEventsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_events.Options) !describe_events.DescribeEventsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_events.DescribeEventsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -266,7 +267,7 @@ pub const DescribeEventsForOrganizationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_events_for_organization.Options) !describe_events_for_organization.DescribeEventsForOrganizationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_events_for_organization.DescribeEventsForOrganizationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

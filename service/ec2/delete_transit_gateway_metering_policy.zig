@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayMeteringPolicy = @import("transit_gateway_metering_policy.zig").TransitGatewayMeteringPolicy;
 const serde = @import("serde.zig");
@@ -23,11 +24,7 @@ pub const DeleteTransitGatewayMeteringPolicyOutput = struct {
     transit_gateway_metering_policy: ?TransitGatewayMeteringPolicy = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTransitGatewayMeteringPolicyInput, options: Options) !DeleteTransitGatewayMeteringPolicyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTransitGatewayMeteringPolicyInput, options: CallOptions) !DeleteTransitGatewayMeteringPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

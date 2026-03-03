@@ -2,18 +2,15 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FirewallDomainListMetadata = @import("firewall_domain_list_metadata.zig").FirewallDomainListMetadata;
 
-const ListFirewallDomainListsInput = @import("list_firewall_domain_lists_request.zig").ListFirewallDomainListsRequest;
+pub const ListFirewallDomainListsInput = @import("list_firewall_domain_lists_request.zig").ListFirewallDomainListsRequest;
 
-const ListFirewallDomainListsOutput = @import("list_firewall_domain_lists_response.zig").ListFirewallDomainListsResponse;
+pub const ListFirewallDomainListsOutput = @import("list_firewall_domain_lists_response.zig").ListFirewallDomainListsResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListFirewallDomainListsInput, options: Options) !ListFirewallDomainListsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListFirewallDomainListsInput, options: CallOptions) !ListFirewallDomainListsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

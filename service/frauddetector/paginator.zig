@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_model_versions = @import("describe_model_versions.zig");
@@ -29,7 +30,7 @@ pub const DescribeModelVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_model_versions.Options) !describe_model_versions.DescribeModelVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_model_versions.DescribeModelVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -70,7 +71,7 @@ pub const GetBatchImportJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_batch_import_jobs.Options) !get_batch_import_jobs.GetBatchImportJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_batch_import_jobs.GetBatchImportJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -111,7 +112,7 @@ pub const GetBatchPredictionJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_batch_prediction_jobs.Options) !get_batch_prediction_jobs.GetBatchPredictionJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_batch_prediction_jobs.GetBatchPredictionJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -152,7 +153,7 @@ pub const GetDetectorsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_detectors.Options) !get_detectors.GetDetectorsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_detectors.GetDetectorsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -193,7 +194,7 @@ pub const GetEntityTypesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_entity_types.Options) !get_entity_types.GetEntityTypesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_entity_types.GetEntityTypesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -234,7 +235,7 @@ pub const GetEventTypesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_event_types.Options) !get_event_types.GetEventTypesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_event_types.GetEventTypesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -275,7 +276,7 @@ pub const GetExternalModelsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_external_models.Options) !get_external_models.GetExternalModelsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_external_models.GetExternalModelsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -316,7 +317,7 @@ pub const GetLabelsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_labels.Options) !get_labels.GetLabelsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_labels.GetLabelsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -357,7 +358,7 @@ pub const GetListElementsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_list_elements.Options) !get_list_elements.GetListElementsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_list_elements.GetListElementsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -398,7 +399,7 @@ pub const GetListsMetadataPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_lists_metadata.Options) !get_lists_metadata.GetListsMetadataOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_lists_metadata.GetListsMetadataOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -439,7 +440,7 @@ pub const GetModelsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_models.Options) !get_models.GetModelsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_models.GetModelsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -480,7 +481,7 @@ pub const GetOutcomesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_outcomes.Options) !get_outcomes.GetOutcomesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_outcomes.GetOutcomesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -521,7 +522,7 @@ pub const GetRulesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_rules.Options) !get_rules.GetRulesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_rules.GetRulesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -562,7 +563,7 @@ pub const GetVariablesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_variables.Options) !get_variables.GetVariablesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_variables.GetVariablesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -603,7 +604,7 @@ pub const ListEventPredictionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_event_predictions.Options) !list_event_predictions.ListEventPredictionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_event_predictions.ListEventPredictionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -644,7 +645,7 @@ pub const ListTagsForResourcePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

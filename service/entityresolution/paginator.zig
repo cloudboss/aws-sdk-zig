@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_id_mapping_jobs = @import("list_id_mapping_jobs.zig");
@@ -20,7 +21,7 @@ pub const ListIdMappingJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_id_mapping_jobs.Options) !list_id_mapping_jobs.ListIdMappingJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_id_mapping_jobs.ListIdMappingJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -61,7 +62,7 @@ pub const ListIdMappingWorkflowsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_id_mapping_workflows.Options) !list_id_mapping_workflows.ListIdMappingWorkflowsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_id_mapping_workflows.ListIdMappingWorkflowsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -102,7 +103,7 @@ pub const ListIdNamespacesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_id_namespaces.Options) !list_id_namespaces.ListIdNamespacesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_id_namespaces.ListIdNamespacesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -143,7 +144,7 @@ pub const ListMatchingJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_matching_jobs.Options) !list_matching_jobs.ListMatchingJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_matching_jobs.ListMatchingJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -184,7 +185,7 @@ pub const ListMatchingWorkflowsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_matching_workflows.Options) !list_matching_workflows.ListMatchingWorkflowsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_matching_workflows.ListMatchingWorkflowsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -225,7 +226,7 @@ pub const ListProviderServicesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_provider_services.Options) !list_provider_services.ListProviderServicesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_provider_services.ListProviderServicesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -266,7 +267,7 @@ pub const ListSchemaMappingsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_schema_mappings.Options) !list_schema_mappings.ListSchemaMappingsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_schema_mappings.ListSchemaMappingsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

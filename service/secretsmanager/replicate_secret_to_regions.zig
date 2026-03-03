@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReplicaRegionType = @import("replica_region_type.zig").ReplicaRegionType;
 const ReplicationStatusType = @import("replication_status_type.zig").ReplicationStatusType;
@@ -38,11 +39,7 @@ pub const ReplicateSecretToRegionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ReplicateSecretToRegionsInput, options: Options) !ReplicateSecretToRegionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ReplicateSecretToRegionsInput, options: CallOptions) !ReplicateSecretToRegionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

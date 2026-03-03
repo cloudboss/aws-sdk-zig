@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const XssMatchSetSummary = @import("xss_match_set_summary.zig").XssMatchSetSummary;
 
@@ -48,11 +49,7 @@ pub const ListXssMatchSetsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListXssMatchSetsInput, options: Options) !ListXssMatchSetsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListXssMatchSetsInput, options: CallOptions) !ListXssMatchSetsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

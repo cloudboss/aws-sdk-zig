@@ -10,6 +10,7 @@ const list_required_tags = @import("list_required_tags.zig");
 const start_report_creation = @import("start_report_creation.zig");
 const tag_resources = @import("tag_resources.zig");
 const untag_resources = @import("untag_resources.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -44,7 +45,7 @@ pub const Client = struct {
     ///
     /// You can call this operation only from the organization's
     /// management account and from the us-east-1 Region.
-    pub fn describeReportCreation(self: *Self, allocator: std.mem.Allocator, input: describe_report_creation.DescribeReportCreationInput, options: describe_report_creation.Options) !describe_report_creation.DescribeReportCreationOutput {
+    pub fn describeReportCreation(self: *Self, allocator: std.mem.Allocator, input: describe_report_creation.DescribeReportCreationInput, options: CallOptions) !describe_report_creation.DescribeReportCreationOutput {
         return describe_report_creation.execute(self, allocator, input, options);
     }
 
@@ -68,7 +69,7 @@ pub const Client = struct {
     /// until you
     /// recieve a `null` value. A null value for `PaginationToken` indicates that
     /// there are no more results waiting to be returned.
-    pub fn getComplianceSummary(self: *Self, allocator: std.mem.Allocator, input: get_compliance_summary.GetComplianceSummaryInput, options: get_compliance_summary.Options) !get_compliance_summary.GetComplianceSummaryOutput {
+    pub fn getComplianceSummary(self: *Self, allocator: std.mem.Allocator, input: get_compliance_summary.GetComplianceSummaryInput, options: CallOptions) !get_compliance_summary.GetComplianceSummaryOutput {
         return get_compliance_summary.execute(self, allocator, input, options);
     }
 
@@ -105,7 +106,7 @@ pub const Client = struct {
     /// query that uses `tag:none`. For more information, see [ Search query syntax
     /// reference for Resource
     /// Explorer](https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html).
-    pub fn getResources(self: *Self, allocator: std.mem.Allocator, input: get_resources.GetResourcesInput, options: get_resources.Options) !get_resources.GetResourcesOutput {
+    pub fn getResources(self: *Self, allocator: std.mem.Allocator, input: get_resources.GetResourcesInput, options: CallOptions) !get_resources.GetResourcesOutput {
         return get_resources.execute(self, allocator, input, options);
     }
 
@@ -122,7 +123,7 @@ pub const Client = struct {
     /// until you
     /// recieve a `null` value. A null value for `PaginationToken` indicates that
     /// there are no more results waiting to be returned.
-    pub fn getTagKeys(self: *Self, allocator: std.mem.Allocator, input: get_tag_keys.GetTagKeysInput, options: get_tag_keys.Options) !get_tag_keys.GetTagKeysOutput {
+    pub fn getTagKeys(self: *Self, allocator: std.mem.Allocator, input: get_tag_keys.GetTagKeysInput, options: CallOptions) !get_tag_keys.GetTagKeysOutput {
         return get_tag_keys.execute(self, allocator, input, options);
     }
 
@@ -139,13 +140,13 @@ pub const Client = struct {
     /// until you
     /// recieve a `null` value. A null value for `PaginationToken` indicates that
     /// there are no more results waiting to be returned.
-    pub fn getTagValues(self: *Self, allocator: std.mem.Allocator, input: get_tag_values.GetTagValuesInput, options: get_tag_values.Options) !get_tag_values.GetTagValuesOutput {
+    pub fn getTagValues(self: *Self, allocator: std.mem.Allocator, input: get_tag_values.GetTagValuesInput, options: CallOptions) !get_tag_values.GetTagValuesOutput {
         return get_tag_values.execute(self, allocator, input, options);
     }
 
     /// Lists the required tags for supported resource types in an Amazon Web
     /// Services account.
-    pub fn listRequiredTags(self: *Self, allocator: std.mem.Allocator, input: list_required_tags.ListRequiredTagsInput, options: list_required_tags.Options) !list_required_tags.ListRequiredTagsOutput {
+    pub fn listRequiredTags(self: *Self, allocator: std.mem.Allocator, input: list_required_tags.ListRequiredTagsInput, options: CallOptions) !list_required_tags.ListRequiredTagsOutput {
         return list_required_tags.execute(self, allocator, input, options);
     }
 
@@ -177,7 +178,7 @@ pub const Client = struct {
     /// policy for report
     /// storage](https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#bucket-policy) in the *Tagging Amazon Web Services Resources and Tag
     /// Editor* user guide.
-    pub fn startReportCreation(self: *Self, allocator: std.mem.Allocator, input: start_report_creation.StartReportCreationInput, options: start_report_creation.Options) !start_report_creation.StartReportCreationOutput {
+    pub fn startReportCreation(self: *Self, allocator: std.mem.Allocator, input: start_report_creation.StartReportCreationInput, options: CallOptions) !start_report_creation.StartReportCreationOutput {
         return start_report_creation.execute(self, allocator, input, options);
     }
 
@@ -249,7 +250,7 @@ pub const Client = struct {
     /// `s3:GetBucketTagging` permission. If the expected minimum permissions
     /// don't work, check the documentation for that service's tagging APIs for more
     /// information.
-    pub fn tagResources(self: *Self, allocator: std.mem.Allocator, input: tag_resources.TagResourcesInput, options: tag_resources.Options) !tag_resources.TagResourcesOutput {
+    pub fn tagResources(self: *Self, allocator: std.mem.Allocator, input: tag_resources.TagResourcesInput, options: CallOptions) !tag_resources.TagResourcesOutput {
         return tag_resources.execute(self, allocator, input, options);
     }
 
@@ -293,7 +294,7 @@ pub const Client = struct {
     /// `glue:GetConnection` permission. If the expected minimum permissions
     /// don't work, check the documentation for that service's tagging APIs for more
     /// information.
-    pub fn untagResources(self: *Self, allocator: std.mem.Allocator, input: untag_resources.UntagResourcesInput, options: untag_resources.Options) !untag_resources.UntagResourcesOutput {
+    pub fn untagResources(self: *Self, allocator: std.mem.Allocator, input: untag_resources.UntagResourcesInput, options: CallOptions) !untag_resources.UntagResourcesOutput {
         return untag_resources.execute(self, allocator, input, options);
     }
 

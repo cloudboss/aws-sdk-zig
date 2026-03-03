@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_scalable_targets = @import("describe_scalable_targets.zig");
@@ -17,7 +18,7 @@ pub const DescribeScalableTargetsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_scalable_targets.Options) !describe_scalable_targets.DescribeScalableTargetsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_scalable_targets.DescribeScalableTargetsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -58,7 +59,7 @@ pub const DescribeScalingActivitiesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_scaling_activities.Options) !describe_scaling_activities.DescribeScalingActivitiesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_scaling_activities.DescribeScalingActivitiesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -99,7 +100,7 @@ pub const DescribeScalingPoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_scaling_policies.Options) !describe_scaling_policies.DescribeScalingPoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_scaling_policies.DescribeScalingPoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -140,7 +141,7 @@ pub const DescribeScheduledActionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_scheduled_actions.Options) !describe_scheduled_actions.DescribeScheduledActionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_scheduled_actions.DescribeScheduledActionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

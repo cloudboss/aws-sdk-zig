@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProtectConfigurationCountryRuleSetInformation = @import("protect_configuration_country_rule_set_information.zig").ProtectConfigurationCountryRuleSetInformation;
 const NumberCapability = @import("number_capability.zig").NumberCapability;
@@ -53,11 +54,7 @@ pub const UpdateProtectConfigurationCountryRuleSetOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateProtectConfigurationCountryRuleSetInput, options: Options) !UpdateProtectConfigurationCountryRuleSetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateProtectConfigurationCountryRuleSetInput, options: CallOptions) !UpdateProtectConfigurationCountryRuleSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

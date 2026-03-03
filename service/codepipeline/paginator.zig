@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_action_executions = @import("list_action_executions.zig");
@@ -21,7 +22,7 @@ pub const ListActionExecutionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_action_executions.Options) !list_action_executions.ListActionExecutionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_action_executions.ListActionExecutionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -62,7 +63,7 @@ pub const ListActionTypesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_action_types.Options) !list_action_types.ListActionTypesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_action_types.ListActionTypesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -103,7 +104,7 @@ pub const ListDeployActionExecutionTargetsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_deploy_action_execution_targets.Options) !list_deploy_action_execution_targets.ListDeployActionExecutionTargetsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_deploy_action_execution_targets.ListDeployActionExecutionTargetsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -144,7 +145,7 @@ pub const ListPipelineExecutionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_pipeline_executions.Options) !list_pipeline_executions.ListPipelineExecutionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_pipeline_executions.ListPipelineExecutionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -185,7 +186,7 @@ pub const ListPipelinesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_pipelines.Options) !list_pipelines.ListPipelinesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_pipelines.ListPipelinesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -226,7 +227,7 @@ pub const ListRuleExecutionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_rule_executions.Options) !list_rule_executions.ListRuleExecutionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_rule_executions.ListRuleExecutionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -267,7 +268,7 @@ pub const ListTagsForResourcePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -308,7 +309,7 @@ pub const ListWebhooksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_webhooks.Options) !list_webhooks.ListWebhooksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_webhooks.ListWebhooksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

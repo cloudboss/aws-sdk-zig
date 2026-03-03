@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_app_block_builder_app_block_associations = @import("describe_app_block_builder_app_block_associations.zig");
@@ -17,7 +18,7 @@ pub const DescribeAppBlockBuilderAppBlockAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_app_block_builder_app_block_associations.Options) !describe_app_block_builder_app_block_associations.DescribeAppBlockBuilderAppBlockAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_app_block_builder_app_block_associations.DescribeAppBlockBuilderAppBlockAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -58,7 +59,7 @@ pub const DescribeAppBlockBuildersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_app_block_builders.Options) !describe_app_block_builders.DescribeAppBlockBuildersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_app_block_builders.DescribeAppBlockBuildersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -99,7 +100,7 @@ pub const DescribeImagePermissionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_image_permissions.Options) !describe_image_permissions.DescribeImagePermissionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_image_permissions.DescribeImagePermissionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -140,7 +141,7 @@ pub const DescribeImagesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_images.Options) !describe_images.DescribeImagesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_images.DescribeImagesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

@@ -38,6 +38,7 @@ const stop_assessment_run = @import("stop_assessment_run.zig");
 const subscribe_to_event = @import("subscribe_to_event.zig");
 const unsubscribe_from_event = @import("unsubscribe_from_event.zig");
 const update_assessment_target = @import("update_assessment_target.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -71,7 +72,7 @@ pub const Client = struct {
     /// Assigns attributes (key and value pairs) to the findings that are specified
     /// by the
     /// ARNs of the findings.
-    pub fn addAttributesToFindings(self: *Self, allocator: std.mem.Allocator, input: add_attributes_to_findings.AddAttributesToFindingsInput, options: add_attributes_to_findings.Options) !add_attributes_to_findings.AddAttributesToFindingsOutput {
+    pub fn addAttributesToFindings(self: *Self, allocator: std.mem.Allocator, input: add_attributes_to_findings.AddAttributesToFindingsInput, options: CallOptions) !add_attributes_to_findings.AddAttributesToFindingsOutput {
         return add_attributes_to_findings.execute(self, allocator, input, options);
     }
 
@@ -90,7 +91,7 @@ pub const Client = struct {
     /// information, see [
     /// Amazon Inspector Assessment
     /// Targets](https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html).
-    pub fn createAssessmentTarget(self: *Self, allocator: std.mem.Allocator, input: create_assessment_target.CreateAssessmentTargetInput, options: create_assessment_target.Options) !create_assessment_target.CreateAssessmentTargetOutput {
+    pub fn createAssessmentTarget(self: *Self, allocator: std.mem.Allocator, input: create_assessment_target.CreateAssessmentTargetInput, options: CallOptions) !create_assessment_target.CreateAssessmentTargetOutput {
         return create_assessment_target.execute(self, allocator, input, options);
     }
 
@@ -101,7 +102,7 @@ pub const Client = struct {
     /// registers a service-linked role to grant Amazon Inspector access to AWS
     /// Services needed to
     /// perform security assessments.
-    pub fn createAssessmentTemplate(self: *Self, allocator: std.mem.Allocator, input: create_assessment_template.CreateAssessmentTemplateInput, options: create_assessment_template.Options) !create_assessment_template.CreateAssessmentTemplateOutput {
+    pub fn createAssessmentTemplate(self: *Self, allocator: std.mem.Allocator, input: create_assessment_template.CreateAssessmentTemplateInput, options: CallOptions) !create_assessment_template.CreateAssessmentTemplateOutput {
         return create_assessment_template.execute(self, allocator, input, options);
     }
 
@@ -110,7 +111,7 @@ pub const Client = struct {
     /// The exclusions preview lists the potential exclusions (ExclusionPreview)
     /// that Inspector can
     /// detect before it runs the assessment.
-    pub fn createExclusionsPreview(self: *Self, allocator: std.mem.Allocator, input: create_exclusions_preview.CreateExclusionsPreviewInput, options: create_exclusions_preview.Options) !create_exclusions_preview.CreateExclusionsPreviewOutput {
+    pub fn createExclusionsPreview(self: *Self, allocator: std.mem.Allocator, input: create_exclusions_preview.CreateExclusionsPreviewInput, options: CallOptions) !create_exclusions_preview.CreateExclusionsPreviewOutput {
         return create_exclusions_preview.execute(self, allocator, input, options);
     }
 
@@ -121,82 +122,82 @@ pub const Client = struct {
     /// target. The created resource group is then used to create an Amazon
     /// Inspector assessment
     /// target. For more information, see CreateAssessmentTarget.
-    pub fn createResourceGroup(self: *Self, allocator: std.mem.Allocator, input: create_resource_group.CreateResourceGroupInput, options: create_resource_group.Options) !create_resource_group.CreateResourceGroupOutput {
+    pub fn createResourceGroup(self: *Self, allocator: std.mem.Allocator, input: create_resource_group.CreateResourceGroupInput, options: CallOptions) !create_resource_group.CreateResourceGroupOutput {
         return create_resource_group.execute(self, allocator, input, options);
     }
 
     /// Deletes the assessment run that is specified by the ARN of the assessment
     /// run.
-    pub fn deleteAssessmentRun(self: *Self, allocator: std.mem.Allocator, input: delete_assessment_run.DeleteAssessmentRunInput, options: delete_assessment_run.Options) !delete_assessment_run.DeleteAssessmentRunOutput {
+    pub fn deleteAssessmentRun(self: *Self, allocator: std.mem.Allocator, input: delete_assessment_run.DeleteAssessmentRunInput, options: CallOptions) !delete_assessment_run.DeleteAssessmentRunOutput {
         return delete_assessment_run.execute(self, allocator, input, options);
     }
 
     /// Deletes the assessment target that is specified by the ARN of the assessment
     /// target.
-    pub fn deleteAssessmentTarget(self: *Self, allocator: std.mem.Allocator, input: delete_assessment_target.DeleteAssessmentTargetInput, options: delete_assessment_target.Options) !delete_assessment_target.DeleteAssessmentTargetOutput {
+    pub fn deleteAssessmentTarget(self: *Self, allocator: std.mem.Allocator, input: delete_assessment_target.DeleteAssessmentTargetInput, options: CallOptions) !delete_assessment_target.DeleteAssessmentTargetOutput {
         return delete_assessment_target.execute(self, allocator, input, options);
     }
 
     /// Deletes the assessment template that is specified by the ARN of the
     /// assessment
     /// template.
-    pub fn deleteAssessmentTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_assessment_template.DeleteAssessmentTemplateInput, options: delete_assessment_template.Options) !delete_assessment_template.DeleteAssessmentTemplateOutput {
+    pub fn deleteAssessmentTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_assessment_template.DeleteAssessmentTemplateInput, options: CallOptions) !delete_assessment_template.DeleteAssessmentTemplateOutput {
         return delete_assessment_template.execute(self, allocator, input, options);
     }
 
     /// Describes the assessment runs that are specified by the ARNs of the
     /// assessment
     /// runs.
-    pub fn describeAssessmentRuns(self: *Self, allocator: std.mem.Allocator, input: describe_assessment_runs.DescribeAssessmentRunsInput, options: describe_assessment_runs.Options) !describe_assessment_runs.DescribeAssessmentRunsOutput {
+    pub fn describeAssessmentRuns(self: *Self, allocator: std.mem.Allocator, input: describe_assessment_runs.DescribeAssessmentRunsInput, options: CallOptions) !describe_assessment_runs.DescribeAssessmentRunsOutput {
         return describe_assessment_runs.execute(self, allocator, input, options);
     }
 
     /// Describes the assessment targets that are specified by the ARNs of the
     /// assessment
     /// targets.
-    pub fn describeAssessmentTargets(self: *Self, allocator: std.mem.Allocator, input: describe_assessment_targets.DescribeAssessmentTargetsInput, options: describe_assessment_targets.Options) !describe_assessment_targets.DescribeAssessmentTargetsOutput {
+    pub fn describeAssessmentTargets(self: *Self, allocator: std.mem.Allocator, input: describe_assessment_targets.DescribeAssessmentTargetsInput, options: CallOptions) !describe_assessment_targets.DescribeAssessmentTargetsOutput {
         return describe_assessment_targets.execute(self, allocator, input, options);
     }
 
     /// Describes the assessment templates that are specified by the ARNs of the
     /// assessment
     /// templates.
-    pub fn describeAssessmentTemplates(self: *Self, allocator: std.mem.Allocator, input: describe_assessment_templates.DescribeAssessmentTemplatesInput, options: describe_assessment_templates.Options) !describe_assessment_templates.DescribeAssessmentTemplatesOutput {
+    pub fn describeAssessmentTemplates(self: *Self, allocator: std.mem.Allocator, input: describe_assessment_templates.DescribeAssessmentTemplatesInput, options: CallOptions) !describe_assessment_templates.DescribeAssessmentTemplatesOutput {
         return describe_assessment_templates.execute(self, allocator, input, options);
     }
 
     /// Describes the IAM role that enables Amazon Inspector to access your AWS
     /// account.
-    pub fn describeCrossAccountAccessRole(self: *Self, allocator: std.mem.Allocator, input: describe_cross_account_access_role.DescribeCrossAccountAccessRoleInput, options: describe_cross_account_access_role.Options) !describe_cross_account_access_role.DescribeCrossAccountAccessRoleOutput {
+    pub fn describeCrossAccountAccessRole(self: *Self, allocator: std.mem.Allocator, input: describe_cross_account_access_role.DescribeCrossAccountAccessRoleInput, options: CallOptions) !describe_cross_account_access_role.DescribeCrossAccountAccessRoleOutput {
         return describe_cross_account_access_role.execute(self, allocator, input, options);
     }
 
     /// Describes the exclusions that are specified by the exclusions' ARNs.
-    pub fn describeExclusions(self: *Self, allocator: std.mem.Allocator, input: describe_exclusions.DescribeExclusionsInput, options: describe_exclusions.Options) !describe_exclusions.DescribeExclusionsOutput {
+    pub fn describeExclusions(self: *Self, allocator: std.mem.Allocator, input: describe_exclusions.DescribeExclusionsInput, options: CallOptions) !describe_exclusions.DescribeExclusionsOutput {
         return describe_exclusions.execute(self, allocator, input, options);
     }
 
     /// Describes the findings that are specified by the ARNs of the findings.
-    pub fn describeFindings(self: *Self, allocator: std.mem.Allocator, input: describe_findings.DescribeFindingsInput, options: describe_findings.Options) !describe_findings.DescribeFindingsOutput {
+    pub fn describeFindings(self: *Self, allocator: std.mem.Allocator, input: describe_findings.DescribeFindingsInput, options: CallOptions) !describe_findings.DescribeFindingsOutput {
         return describe_findings.execute(self, allocator, input, options);
     }
 
     /// Describes the resource groups that are specified by the ARNs of the resource
     /// groups.
-    pub fn describeResourceGroups(self: *Self, allocator: std.mem.Allocator, input: describe_resource_groups.DescribeResourceGroupsInput, options: describe_resource_groups.Options) !describe_resource_groups.DescribeResourceGroupsOutput {
+    pub fn describeResourceGroups(self: *Self, allocator: std.mem.Allocator, input: describe_resource_groups.DescribeResourceGroupsInput, options: CallOptions) !describe_resource_groups.DescribeResourceGroupsOutput {
         return describe_resource_groups.execute(self, allocator, input, options);
     }
 
     /// Describes the rules packages that are specified by the ARNs of the rules
     /// packages.
-    pub fn describeRulesPackages(self: *Self, allocator: std.mem.Allocator, input: describe_rules_packages.DescribeRulesPackagesInput, options: describe_rules_packages.Options) !describe_rules_packages.DescribeRulesPackagesOutput {
+    pub fn describeRulesPackages(self: *Self, allocator: std.mem.Allocator, input: describe_rules_packages.DescribeRulesPackagesInput, options: CallOptions) !describe_rules_packages.DescribeRulesPackagesOutput {
         return describe_rules_packages.execute(self, allocator, input, options);
     }
 
     /// Produces an assessment report that includes detailed and comprehensive
     /// results of a
     /// specified assessment run.
-    pub fn getAssessmentReport(self: *Self, allocator: std.mem.Allocator, input: get_assessment_report.GetAssessmentReportInput, options: get_assessment_report.Options) !get_assessment_report.GetAssessmentReportOutput {
+    pub fn getAssessmentReport(self: *Self, allocator: std.mem.Allocator, input: get_assessment_report.GetAssessmentReportInput, options: CallOptions) !get_assessment_report.GetAssessmentReportOutput {
         return get_assessment_report.execute(self, allocator, input, options);
     }
 
@@ -205,41 +206,41 @@ pub const Client = struct {
     /// the preview token. You can obtain the preview token by running the
     /// CreateExclusionsPreview
     /// API.
-    pub fn getExclusionsPreview(self: *Self, allocator: std.mem.Allocator, input: get_exclusions_preview.GetExclusionsPreviewInput, options: get_exclusions_preview.Options) !get_exclusions_preview.GetExclusionsPreviewOutput {
+    pub fn getExclusionsPreview(self: *Self, allocator: std.mem.Allocator, input: get_exclusions_preview.GetExclusionsPreviewInput, options: CallOptions) !get_exclusions_preview.GetExclusionsPreviewOutput {
         return get_exclusions_preview.execute(self, allocator, input, options);
     }
 
     /// Information about the data that is collected for the specified assessment
     /// run.
-    pub fn getTelemetryMetadata(self: *Self, allocator: std.mem.Allocator, input: get_telemetry_metadata.GetTelemetryMetadataInput, options: get_telemetry_metadata.Options) !get_telemetry_metadata.GetTelemetryMetadataOutput {
+    pub fn getTelemetryMetadata(self: *Self, allocator: std.mem.Allocator, input: get_telemetry_metadata.GetTelemetryMetadataInput, options: CallOptions) !get_telemetry_metadata.GetTelemetryMetadataOutput {
         return get_telemetry_metadata.execute(self, allocator, input, options);
     }
 
     /// Lists the agents of the assessment runs that are specified by the ARNs of
     /// the
     /// assessment runs.
-    pub fn listAssessmentRunAgents(self: *Self, allocator: std.mem.Allocator, input: list_assessment_run_agents.ListAssessmentRunAgentsInput, options: list_assessment_run_agents.Options) !list_assessment_run_agents.ListAssessmentRunAgentsOutput {
+    pub fn listAssessmentRunAgents(self: *Self, allocator: std.mem.Allocator, input: list_assessment_run_agents.ListAssessmentRunAgentsInput, options: CallOptions) !list_assessment_run_agents.ListAssessmentRunAgentsOutput {
         return list_assessment_run_agents.execute(self, allocator, input, options);
     }
 
     /// Lists the assessment runs that correspond to the assessment templates that
     /// are
     /// specified by the ARNs of the assessment templates.
-    pub fn listAssessmentRuns(self: *Self, allocator: std.mem.Allocator, input: list_assessment_runs.ListAssessmentRunsInput, options: list_assessment_runs.Options) !list_assessment_runs.ListAssessmentRunsOutput {
+    pub fn listAssessmentRuns(self: *Self, allocator: std.mem.Allocator, input: list_assessment_runs.ListAssessmentRunsInput, options: CallOptions) !list_assessment_runs.ListAssessmentRunsOutput {
         return list_assessment_runs.execute(self, allocator, input, options);
     }
 
     /// Lists the ARNs of the assessment targets within this AWS account. For more
     /// information about assessment targets, see [Amazon Inspector Assessment
     /// Targets](https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html).
-    pub fn listAssessmentTargets(self: *Self, allocator: std.mem.Allocator, input: list_assessment_targets.ListAssessmentTargetsInput, options: list_assessment_targets.Options) !list_assessment_targets.ListAssessmentTargetsOutput {
+    pub fn listAssessmentTargets(self: *Self, allocator: std.mem.Allocator, input: list_assessment_targets.ListAssessmentTargetsInput, options: CallOptions) !list_assessment_targets.ListAssessmentTargetsOutput {
         return list_assessment_targets.execute(self, allocator, input, options);
     }
 
     /// Lists the assessment templates that correspond to the assessment targets
     /// that are
     /// specified by the ARNs of the assessment targets.
-    pub fn listAssessmentTemplates(self: *Self, allocator: std.mem.Allocator, input: list_assessment_templates.ListAssessmentTemplatesInput, options: list_assessment_templates.Options) !list_assessment_templates.ListAssessmentTemplatesOutput {
+    pub fn listAssessmentTemplates(self: *Self, allocator: std.mem.Allocator, input: list_assessment_templates.ListAssessmentTemplatesInput, options: CallOptions) !list_assessment_templates.ListAssessmentTemplatesOutput {
         return list_assessment_templates.execute(self, allocator, input, options);
     }
 
@@ -247,43 +248,43 @@ pub const Client = struct {
     /// specified by
     /// the ARN of the assessment template. For more information, see
     /// SubscribeToEvent and UnsubscribeFromEvent.
-    pub fn listEventSubscriptions(self: *Self, allocator: std.mem.Allocator, input: list_event_subscriptions.ListEventSubscriptionsInput, options: list_event_subscriptions.Options) !list_event_subscriptions.ListEventSubscriptionsOutput {
+    pub fn listEventSubscriptions(self: *Self, allocator: std.mem.Allocator, input: list_event_subscriptions.ListEventSubscriptionsInput, options: CallOptions) !list_event_subscriptions.ListEventSubscriptionsOutput {
         return list_event_subscriptions.execute(self, allocator, input, options);
     }
 
     /// List exclusions that are generated by the assessment run.
-    pub fn listExclusions(self: *Self, allocator: std.mem.Allocator, input: list_exclusions.ListExclusionsInput, options: list_exclusions.Options) !list_exclusions.ListExclusionsOutput {
+    pub fn listExclusions(self: *Self, allocator: std.mem.Allocator, input: list_exclusions.ListExclusionsInput, options: CallOptions) !list_exclusions.ListExclusionsOutput {
         return list_exclusions.execute(self, allocator, input, options);
     }
 
     /// Lists findings that are generated by the assessment runs that are specified
     /// by the
     /// ARNs of the assessment runs.
-    pub fn listFindings(self: *Self, allocator: std.mem.Allocator, input: list_findings.ListFindingsInput, options: list_findings.Options) !list_findings.ListFindingsOutput {
+    pub fn listFindings(self: *Self, allocator: std.mem.Allocator, input: list_findings.ListFindingsInput, options: CallOptions) !list_findings.ListFindingsOutput {
         return list_findings.execute(self, allocator, input, options);
     }
 
     /// Lists all available Amazon Inspector rules packages.
-    pub fn listRulesPackages(self: *Self, allocator: std.mem.Allocator, input: list_rules_packages.ListRulesPackagesInput, options: list_rules_packages.Options) !list_rules_packages.ListRulesPackagesOutput {
+    pub fn listRulesPackages(self: *Self, allocator: std.mem.Allocator, input: list_rules_packages.ListRulesPackagesInput, options: CallOptions) !list_rules_packages.ListRulesPackagesOutput {
         return list_rules_packages.execute(self, allocator, input, options);
     }
 
     /// Lists all tags associated with an assessment template.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Previews the agents installed on the EC2 instances that are part of the
     /// specified
     /// assessment target.
-    pub fn previewAgents(self: *Self, allocator: std.mem.Allocator, input: preview_agents.PreviewAgentsInput, options: preview_agents.Options) !preview_agents.PreviewAgentsOutput {
+    pub fn previewAgents(self: *Self, allocator: std.mem.Allocator, input: preview_agents.PreviewAgentsInput, options: CallOptions) !preview_agents.PreviewAgentsOutput {
         return preview_agents.execute(self, allocator, input, options);
     }
 
     /// Registers the IAM role that grants Amazon Inspector access to AWS Services
     /// needed to
     /// perform security assessments.
-    pub fn registerCrossAccountAccessRole(self: *Self, allocator: std.mem.Allocator, input: register_cross_account_access_role.RegisterCrossAccountAccessRoleInput, options: register_cross_account_access_role.Options) !register_cross_account_access_role.RegisterCrossAccountAccessRoleOutput {
+    pub fn registerCrossAccountAccessRole(self: *Self, allocator: std.mem.Allocator, input: register_cross_account_access_role.RegisterCrossAccountAccessRoleInput, options: CallOptions) !register_cross_account_access_role.RegisterCrossAccountAccessRoleOutput {
         return register_cross_account_access_role.execute(self, allocator, input, options);
     }
 
@@ -291,14 +292,14 @@ pub const Client = struct {
     /// specified
     /// by the ARNs of the findings where an attribute with the specified key
     /// exists.
-    pub fn removeAttributesFromFindings(self: *Self, allocator: std.mem.Allocator, input: remove_attributes_from_findings.RemoveAttributesFromFindingsInput, options: remove_attributes_from_findings.Options) !remove_attributes_from_findings.RemoveAttributesFromFindingsOutput {
+    pub fn removeAttributesFromFindings(self: *Self, allocator: std.mem.Allocator, input: remove_attributes_from_findings.RemoveAttributesFromFindingsInput, options: CallOptions) !remove_attributes_from_findings.RemoveAttributesFromFindingsOutput {
         return remove_attributes_from_findings.execute(self, allocator, input, options);
     }
 
     /// Sets tags (key and value pairs) to the assessment template that is specified
     /// by the
     /// ARN of the assessment template.
-    pub fn setTagsForResource(self: *Self, allocator: std.mem.Allocator, input: set_tags_for_resource.SetTagsForResourceInput, options: set_tags_for_resource.Options) !set_tags_for_resource.SetTagsForResourceOutput {
+    pub fn setTagsForResource(self: *Self, allocator: std.mem.Allocator, input: set_tags_for_resource.SetTagsForResourceInput, options: CallOptions) !set_tags_for_resource.SetTagsForResourceOutput {
         return set_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -307,26 +308,26 @@ pub const Client = struct {
     /// API to function properly, you must not exceed the limit of running up to 500
     /// concurrent
     /// agents per AWS account.
-    pub fn startAssessmentRun(self: *Self, allocator: std.mem.Allocator, input: start_assessment_run.StartAssessmentRunInput, options: start_assessment_run.Options) !start_assessment_run.StartAssessmentRunOutput {
+    pub fn startAssessmentRun(self: *Self, allocator: std.mem.Allocator, input: start_assessment_run.StartAssessmentRunInput, options: CallOptions) !start_assessment_run.StartAssessmentRunOutput {
         return start_assessment_run.execute(self, allocator, input, options);
     }
 
     /// Stops the assessment run that is specified by the ARN of the assessment
     /// run.
-    pub fn stopAssessmentRun(self: *Self, allocator: std.mem.Allocator, input: stop_assessment_run.StopAssessmentRunInput, options: stop_assessment_run.Options) !stop_assessment_run.StopAssessmentRunOutput {
+    pub fn stopAssessmentRun(self: *Self, allocator: std.mem.Allocator, input: stop_assessment_run.StopAssessmentRunInput, options: CallOptions) !stop_assessment_run.StopAssessmentRunOutput {
         return stop_assessment_run.execute(self, allocator, input, options);
     }
 
     /// Enables the process of sending Amazon Simple Notification Service (SNS)
     /// notifications
     /// about a specified event to a specified SNS topic.
-    pub fn subscribeToEvent(self: *Self, allocator: std.mem.Allocator, input: subscribe_to_event.SubscribeToEventInput, options: subscribe_to_event.Options) !subscribe_to_event.SubscribeToEventOutput {
+    pub fn subscribeToEvent(self: *Self, allocator: std.mem.Allocator, input: subscribe_to_event.SubscribeToEventInput, options: CallOptions) !subscribe_to_event.SubscribeToEventOutput {
         return subscribe_to_event.execute(self, allocator, input, options);
     }
 
     /// Disables the process of sending Amazon Simple Notification Service (SNS)
     /// notifications about a specified event to a specified SNS topic.
-    pub fn unsubscribeFromEvent(self: *Self, allocator: std.mem.Allocator, input: unsubscribe_from_event.UnsubscribeFromEventInput, options: unsubscribe_from_event.Options) !unsubscribe_from_event.UnsubscribeFromEventOutput {
+    pub fn unsubscribeFromEvent(self: *Self, allocator: std.mem.Allocator, input: unsubscribe_from_event.UnsubscribeFromEventInput, options: CallOptions) !unsubscribe_from_event.UnsubscribeFromEventOutput {
         return unsubscribe_from_event.execute(self, allocator, input, options);
     }
 
@@ -336,7 +337,7 @@ pub const Client = struct {
     /// If resourceGroupArn is not specified, all EC2 instances in the current AWS
     /// account
     /// and region are included in the assessment target.
-    pub fn updateAssessmentTarget(self: *Self, allocator: std.mem.Allocator, input: update_assessment_target.UpdateAssessmentTargetInput, options: update_assessment_target.Options) !update_assessment_target.UpdateAssessmentTargetOutput {
+    pub fn updateAssessmentTarget(self: *Self, allocator: std.mem.Allocator, input: update_assessment_target.UpdateAssessmentTargetInput, options: CallOptions) !update_assessment_target.UpdateAssessmentTargetOutput {
         return update_assessment_target.execute(self, allocator, input, options);
     }
 

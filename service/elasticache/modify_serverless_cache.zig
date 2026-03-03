@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CacheUsageLimits = @import("cache_usage_limits.zig").CacheUsageLimits;
 const ServerlessCache = @import("serverless_cache.zig").ServerlessCache;
@@ -65,11 +66,7 @@ pub const ModifyServerlessCacheOutput = struct {
     serverless_cache: ?ServerlessCache = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyServerlessCacheInput, options: Options) !ModifyServerlessCacheOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyServerlessCacheInput, options: CallOptions) !ModifyServerlessCacheOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

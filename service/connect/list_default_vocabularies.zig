@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VocabularyLanguageCode = @import("vocabulary_language_code.zig").VocabularyLanguageCode;
 const DefaultVocabulary = @import("default_vocabulary.zig").DefaultVocabulary;
@@ -47,11 +48,7 @@ pub const ListDefaultVocabulariesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDefaultVocabulariesInput, options: Options) !ListDefaultVocabulariesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDefaultVocabulariesInput, options: CallOptions) !ListDefaultVocabulariesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

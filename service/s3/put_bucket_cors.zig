@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const CORSConfiguration = @import("cors_configuration.zig").CORSConfiguration;
@@ -49,13 +50,9 @@ pub const PutBucketCorsInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 };
 
-const PutBucketCorsOutput = struct {};
+pub const PutBucketCorsOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutBucketCorsInput, options: Options) !PutBucketCorsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutBucketCorsInput, options: CallOptions) !PutBucketCorsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

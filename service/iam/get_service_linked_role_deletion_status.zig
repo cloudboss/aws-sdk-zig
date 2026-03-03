@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DeletionTaskFailureReasonType = @import("deletion_task_failure_reason_type.zig").DeletionTaskFailureReasonType;
 const DeletionTaskStatusType = @import("deletion_task_status_type.zig").DeletionTaskStatusType;
@@ -22,11 +23,7 @@ pub const GetServiceLinkedRoleDeletionStatusOutput = struct {
     status: DeletionTaskStatusType,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetServiceLinkedRoleDeletionStatusInput, options: Options) !GetServiceLinkedRoleDeletionStatusOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetServiceLinkedRoleDeletionStatusInput, options: CallOptions) !GetServiceLinkedRoleDeletionStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

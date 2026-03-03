@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FormInput = @import("form_input.zig").FormInput;
 const PredictionConfiguration = @import("prediction_configuration.zig").PredictionConfiguration;
@@ -143,11 +144,7 @@ pub const CreateAssetRevisionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAssetRevisionInput, options: Options) !CreateAssetRevisionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAssetRevisionInput, options: CallOptions) !CreateAssetRevisionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

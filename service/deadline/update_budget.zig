@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BudgetActionToAdd = @import("budget_action_to_add.zig").BudgetActionToAdd;
 const BudgetActionToRemove = @import("budget_action_to_remove.zig").BudgetActionToRemove;
@@ -70,11 +71,7 @@ pub const UpdateBudgetInput = struct {
 pub const UpdateBudgetOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateBudgetInput, options: Options) !UpdateBudgetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateBudgetInput, options: CallOptions) !UpdateBudgetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

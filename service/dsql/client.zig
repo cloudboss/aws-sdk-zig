@@ -13,6 +13,7 @@ const put_cluster_policy = @import("put_cluster_policy.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_cluster = @import("update_cluster.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -95,62 +96,62 @@ pub const Client = struct {
     ///
     /// * The witness Region specified in `multiRegionProperties.witnessRegion`
     ///   cannot be the same as the cluster's Region.
-    pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: create_cluster.Options) !create_cluster.CreateClusterOutput {
+    pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: CallOptions) !create_cluster.CreateClusterOutput {
         return create_cluster.execute(self, allocator, input, options);
     }
 
     /// Deletes a cluster in Amazon Aurora DSQL.
-    pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: delete_cluster.Options) !delete_cluster.DeleteClusterOutput {
+    pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: CallOptions) !delete_cluster.DeleteClusterOutput {
         return delete_cluster.execute(self, allocator, input, options);
     }
 
     /// Deletes the resource-based policy attached to a cluster. This removes all
     /// access permissions defined by the policy, reverting to default access
     /// controls.
-    pub fn deleteClusterPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_cluster_policy.DeleteClusterPolicyInput, options: delete_cluster_policy.Options) !delete_cluster_policy.DeleteClusterPolicyOutput {
+    pub fn deleteClusterPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_cluster_policy.DeleteClusterPolicyInput, options: CallOptions) !delete_cluster_policy.DeleteClusterPolicyOutput {
         return delete_cluster_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a cluster.
-    pub fn getCluster(self: *Self, allocator: std.mem.Allocator, input: get_cluster.GetClusterInput, options: get_cluster.Options) !get_cluster.GetClusterOutput {
+    pub fn getCluster(self: *Self, allocator: std.mem.Allocator, input: get_cluster.GetClusterInput, options: CallOptions) !get_cluster.GetClusterOutput {
         return get_cluster.execute(self, allocator, input, options);
     }
 
     /// Retrieves the resource-based policy document attached to a cluster. This
     /// policy defines the access permissions and conditions for the cluster.
-    pub fn getClusterPolicy(self: *Self, allocator: std.mem.Allocator, input: get_cluster_policy.GetClusterPolicyInput, options: get_cluster_policy.Options) !get_cluster_policy.GetClusterPolicyOutput {
+    pub fn getClusterPolicy(self: *Self, allocator: std.mem.Allocator, input: get_cluster_policy.GetClusterPolicyInput, options: CallOptions) !get_cluster_policy.GetClusterPolicyOutput {
         return get_cluster_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves the VPC endpoint service name.
-    pub fn getVpcEndpointServiceName(self: *Self, allocator: std.mem.Allocator, input: get_vpc_endpoint_service_name.GetVpcEndpointServiceNameInput, options: get_vpc_endpoint_service_name.Options) !get_vpc_endpoint_service_name.GetVpcEndpointServiceNameOutput {
+    pub fn getVpcEndpointServiceName(self: *Self, allocator: std.mem.Allocator, input: get_vpc_endpoint_service_name.GetVpcEndpointServiceNameInput, options: CallOptions) !get_vpc_endpoint_service_name.GetVpcEndpointServiceNameOutput {
         return get_vpc_endpoint_service_name.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a list of clusters.
-    pub fn listClusters(self: *Self, allocator: std.mem.Allocator, input: list_clusters.ListClustersInput, options: list_clusters.Options) !list_clusters.ListClustersOutput {
+    pub fn listClusters(self: *Self, allocator: std.mem.Allocator, input: list_clusters.ListClustersInput, options: CallOptions) !list_clusters.ListClustersOutput {
         return list_clusters.execute(self, allocator, input, options);
     }
 
     /// Lists all of the tags for a resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Attaches a resource-based policy to a cluster. This policy defines access
     /// permissions and conditions for the cluster, allowing you to control which
     /// principals can perform actions on the cluster.
-    pub fn putClusterPolicy(self: *Self, allocator: std.mem.Allocator, input: put_cluster_policy.PutClusterPolicyInput, options: put_cluster_policy.Options) !put_cluster_policy.PutClusterPolicyOutput {
+    pub fn putClusterPolicy(self: *Self, allocator: std.mem.Allocator, input: put_cluster_policy.PutClusterPolicyInput, options: CallOptions) !put_cluster_policy.PutClusterPolicyOutput {
         return put_cluster_policy.execute(self, allocator, input, options);
     }
 
     /// Tags a resource with a map of key and value pairs.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -217,7 +218,7 @@ pub const Client = struct {
     ///   for both adding and removing peers.
     /// * The `dsql:RemovePeerCluster` permission uses a wildcard ARN pattern to
     ///   simplify permission management during updates.
-    pub fn updateCluster(self: *Self, allocator: std.mem.Allocator, input: update_cluster.UpdateClusterInput, options: update_cluster.Options) !update_cluster.UpdateClusterOutput {
+    pub fn updateCluster(self: *Self, allocator: std.mem.Allocator, input: update_cluster.UpdateClusterInput, options: CallOptions) !update_cluster.UpdateClusterOutput {
         return update_cluster.execute(self, allocator, input, options);
     }
 

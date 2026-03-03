@@ -1,12 +1,19 @@
 pub const Client = @import("client.zig").Client;
+pub const CallOptions = @import("call_options.zig").CallOptions;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
 pub const types = @import("types.zig");
 
-pub const get_clip = @import("get_clip.zig");
-pub const get_dash_streaming_session_url = @import("get_dash_streaming_session_url.zig");
-pub const get_hls_streaming_session_url = @import("get_hls_streaming_session_url.zig");
-pub const get_images = @import("get_images.zig");
-pub const get_media_for_fragment_list = @import("get_media_for_fragment_list.zig");
-pub const list_fragments = @import("list_fragments.zig");
+pub const GetClipInput = @import("get_clip.zig").GetClipInput;
+pub const GetClipOutput = @import("get_clip.zig").GetClipOutput;
+pub const GetDASHStreamingSessionURLInput = @import("get_dash_streaming_session_url.zig").GetDASHStreamingSessionURLInput;
+pub const GetDASHStreamingSessionURLOutput = @import("get_dash_streaming_session_url.zig").GetDASHStreamingSessionURLOutput;
+pub const GetHLSStreamingSessionURLInput = @import("get_hls_streaming_session_url.zig").GetHLSStreamingSessionURLInput;
+pub const GetHLSStreamingSessionURLOutput = @import("get_hls_streaming_session_url.zig").GetHLSStreamingSessionURLOutput;
+pub const GetImagesInput = @import("get_images.zig").GetImagesInput;
+pub const GetImagesOutput = @import("get_images.zig").GetImagesOutput;
+pub const GetMediaForFragmentListInput = @import("get_media_for_fragment_list.zig").GetMediaForFragmentListInput;
+pub const GetMediaForFragmentListOutput = @import("get_media_for_fragment_list.zig").GetMediaForFragmentListOutput;
+pub const ListFragmentsInput = @import("list_fragments.zig").ListFragmentsInput;
+pub const ListFragmentsOutput = @import("list_fragments.zig").ListFragmentsOutput;

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContactFlowModuleState = @import("contact_flow_module_state.zig").ContactFlowModuleState;
 
@@ -34,11 +35,7 @@ pub const UpdateContactFlowModuleMetadataInput = struct {
 pub const UpdateContactFlowModuleMetadataOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateContactFlowModuleMetadataInput, options: Options) !UpdateContactFlowModuleMetadataOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateContactFlowModuleMetadataInput, options: CallOptions) !UpdateContactFlowModuleMetadataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

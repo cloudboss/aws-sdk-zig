@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MarketplaceModelEndpointSummary = @import("marketplace_model_endpoint_summary.zig").MarketplaceModelEndpointSummary;
 
@@ -39,11 +40,7 @@ pub const ListMarketplaceModelEndpointsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMarketplaceModelEndpointsInput, options: Options) !ListMarketplaceModelEndpointsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMarketplaceModelEndpointsInput, options: CallOptions) !ListMarketplaceModelEndpointsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

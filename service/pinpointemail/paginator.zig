@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_dedicated_ips = @import("get_dedicated_ips.zig");
@@ -19,7 +20,7 @@ pub const GetDedicatedIpsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_dedicated_ips.Options) !get_dedicated_ips.GetDedicatedIpsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_dedicated_ips.GetDedicatedIpsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -60,7 +61,7 @@ pub const ListConfigurationSetsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_configuration_sets.Options) !list_configuration_sets.ListConfigurationSetsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_configuration_sets.ListConfigurationSetsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -101,7 +102,7 @@ pub const ListDedicatedIpPoolsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_dedicated_ip_pools.Options) !list_dedicated_ip_pools.ListDedicatedIpPoolsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_dedicated_ip_pools.ListDedicatedIpPoolsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -142,7 +143,7 @@ pub const ListDeliverabilityTestReportsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_deliverability_test_reports.Options) !list_deliverability_test_reports.ListDeliverabilityTestReportsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_deliverability_test_reports.ListDeliverabilityTestReportsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -183,7 +184,7 @@ pub const ListDomainDeliverabilityCampaignsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_domain_deliverability_campaigns.Options) !list_domain_deliverability_campaigns.ListDomainDeliverabilityCampaignsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_domain_deliverability_campaigns.ListDomainDeliverabilityCampaignsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -224,7 +225,7 @@ pub const ListEmailIdentitiesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_email_identities.Options) !list_email_identities.ListEmailIdentitiesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_email_identities.ListEmailIdentitiesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

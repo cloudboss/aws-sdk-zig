@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const create_o_auth_2_token = @import("create_o_auth_2_token.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -71,7 +72,7 @@ pub const Client = struct {
     /// idempotent
     /// (token refresh) and non-idempotent (auth code redemption) flows in a single
     /// endpoint.
-    pub fn createOAuth2Token(self: *Self, allocator: std.mem.Allocator, input: create_o_auth_2_token.CreateOAuth2TokenInput, options: create_o_auth_2_token.Options) !create_o_auth_2_token.CreateOAuth2TokenOutput {
+    pub fn createOAuth2Token(self: *Self, allocator: std.mem.Allocator, input: create_o_auth_2_token.CreateOAuth2TokenInput, options: CallOptions) !create_o_auth_2_token.CreateOAuth2TokenOutput {
         return create_o_auth_2_token.execute(self, allocator, input, options);
     }
 };

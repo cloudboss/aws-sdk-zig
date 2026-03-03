@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FileCache = @import("file_cache.zig").FileCache;
 
@@ -32,11 +33,7 @@ pub const DescribeFileCachesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeFileCachesInput, options: Options) !DescribeFileCachesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeFileCachesInput, options: CallOptions) !DescribeFileCachesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

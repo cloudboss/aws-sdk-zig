@@ -40,6 +40,7 @@ const start_metric_streams = @import("start_metric_streams.zig");
 const stop_metric_streams = @import("stop_metric_streams.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -102,7 +103,7 @@ pub const Client = struct {
     ///
     /// Additionally, the evaluation of composite alarms stops if CloudWatch
     /// detects a cycle in the evaluation path.
-    pub fn deleteAlarms(self: *Self, allocator: std.mem.Allocator, input: delete_alarms.DeleteAlarmsInput, options: delete_alarms.Options) !delete_alarms.DeleteAlarmsOutput {
+    pub fn deleteAlarms(self: *Self, allocator: std.mem.Allocator, input: delete_alarms.DeleteAlarmsInput, options: CallOptions) !delete_alarms.DeleteAlarmsOutput {
         return delete_alarms.execute(self, allocator, input, options);
     }
 
@@ -112,14 +113,14 @@ pub const Client = struct {
     /// detection
     /// model](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Anomaly_Detection_Alarm.html#Delete_Anomaly_Detection_Model) in the *CloudWatch User
     /// Guide*.
-    pub fn deleteAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: delete_anomaly_detector.DeleteAnomalyDetectorInput, options: delete_anomaly_detector.Options) !delete_anomaly_detector.DeleteAnomalyDetectorOutput {
+    pub fn deleteAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: delete_anomaly_detector.DeleteAnomalyDetectorInput, options: CallOptions) !delete_anomaly_detector.DeleteAnomalyDetectorOutput {
         return delete_anomaly_detector.execute(self, allocator, input, options);
     }
 
     /// Deletes all dashboards that you specify. You can specify up to 100
     /// dashboards to
     /// delete. If there is an error during this call, no dashboards are deleted.
-    pub fn deleteDashboards(self: *Self, allocator: std.mem.Allocator, input: delete_dashboards.DeleteDashboardsInput, options: delete_dashboards.Options) !delete_dashboards.DeleteDashboardsOutput {
+    pub fn deleteDashboards(self: *Self, allocator: std.mem.Allocator, input: delete_dashboards.DeleteDashboardsInput, options: CallOptions) !delete_dashboards.DeleteDashboardsOutput {
         return delete_dashboards.execute(self, allocator, input, options);
     }
 
@@ -128,19 +129,19 @@ pub const Client = struct {
     /// If you create a rule, delete it, and then re-create it with the same name,
     /// historical
     /// data from the first time the rule was created might not be available.
-    pub fn deleteInsightRules(self: *Self, allocator: std.mem.Allocator, input: delete_insight_rules.DeleteInsightRulesInput, options: delete_insight_rules.Options) !delete_insight_rules.DeleteInsightRulesOutput {
+    pub fn deleteInsightRules(self: *Self, allocator: std.mem.Allocator, input: delete_insight_rules.DeleteInsightRulesInput, options: CallOptions) !delete_insight_rules.DeleteInsightRulesOutput {
         return delete_insight_rules.execute(self, allocator, input, options);
     }
 
     /// Permanently deletes the metric stream that you specify.
-    pub fn deleteMetricStream(self: *Self, allocator: std.mem.Allocator, input: delete_metric_stream.DeleteMetricStreamInput, options: delete_metric_stream.Options) !delete_metric_stream.DeleteMetricStreamOutput {
+    pub fn deleteMetricStream(self: *Self, allocator: std.mem.Allocator, input: delete_metric_stream.DeleteMetricStreamInput, options: CallOptions) !delete_metric_stream.DeleteMetricStreamOutput {
         return delete_metric_stream.execute(self, allocator, input, options);
     }
 
     /// Returns the information of the current alarm contributors that are in
     /// `ALARM` state. This operation returns details about the individual time
     /// series that contribute to the alarm's state.
-    pub fn describeAlarmContributors(self: *Self, allocator: std.mem.Allocator, input: describe_alarm_contributors.DescribeAlarmContributorsInput, options: describe_alarm_contributors.Options) !describe_alarm_contributors.DescribeAlarmContributorsOutput {
+    pub fn describeAlarmContributors(self: *Self, allocator: std.mem.Allocator, input: describe_alarm_contributors.DescribeAlarmContributorsInput, options: CallOptions) !describe_alarm_contributors.DescribeAlarmContributorsOutput {
         return describe_alarm_contributors.execute(self, allocator, input, options);
     }
 
@@ -157,7 +158,7 @@ pub const Client = struct {
     /// signed on with the `cloudwatch:DescribeAlarmHistory` permission that is
     /// scoped to `*`. You can't return information about composite alarms if your
     /// `cloudwatch:DescribeAlarmHistory` permission has a narrower scope.
-    pub fn describeAlarmHistory(self: *Self, allocator: std.mem.Allocator, input: describe_alarm_history.DescribeAlarmHistoryInput, options: describe_alarm_history.Options) !describe_alarm_history.DescribeAlarmHistoryOutput {
+    pub fn describeAlarmHistory(self: *Self, allocator: std.mem.Allocator, input: describe_alarm_history.DescribeAlarmHistoryInput, options: CallOptions) !describe_alarm_history.DescribeAlarmHistoryOutput {
         return describe_alarm_history.execute(self, allocator, input, options);
     }
 
@@ -170,7 +171,7 @@ pub const Client = struct {
     /// signed on with the `cloudwatch:DescribeAlarms` permission that is scoped to
     /// `*`. You can't return information about composite alarms if your
     /// `cloudwatch:DescribeAlarms` permission has a narrower scope.
-    pub fn describeAlarms(self: *Self, allocator: std.mem.Allocator, input: describe_alarms.DescribeAlarmsInput, options: describe_alarms.Options) !describe_alarms.DescribeAlarmsOutput {
+    pub fn describeAlarms(self: *Self, allocator: std.mem.Allocator, input: describe_alarms.DescribeAlarmsInput, options: CallOptions) !describe_alarms.DescribeAlarmsOutput {
         return describe_alarms.execute(self, allocator, input, options);
     }
 
@@ -183,7 +184,7 @@ pub const Client = struct {
     /// metric. It does not return alarms based on math expressions that use the
     /// specified
     /// metric, or composite alarms that use the specified metric.
-    pub fn describeAlarmsForMetric(self: *Self, allocator: std.mem.Allocator, input: describe_alarms_for_metric.DescribeAlarmsForMetricInput, options: describe_alarms_for_metric.Options) !describe_alarms_for_metric.DescribeAlarmsForMetricOutput {
+    pub fn describeAlarmsForMetric(self: *Self, allocator: std.mem.Allocator, input: describe_alarms_for_metric.DescribeAlarmsForMetricInput, options: CallOptions) !describe_alarms_for_metric.DescribeAlarmsForMetricOutput {
         return describe_alarms_for_metric.execute(self, allocator, input, options);
     }
 
@@ -197,7 +198,7 @@ pub const Client = struct {
     /// adding
     /// `METRIC_MATH` to the `AnomalyDetectorTypes` array. This will
     /// return all metric math anomaly detectors in your account.
-    pub fn describeAnomalyDetectors(self: *Self, allocator: std.mem.Allocator, input: describe_anomaly_detectors.DescribeAnomalyDetectorsInput, options: describe_anomaly_detectors.Options) !describe_anomaly_detectors.DescribeAnomalyDetectorsOutput {
+    pub fn describeAnomalyDetectors(self: *Self, allocator: std.mem.Allocator, input: describe_anomaly_detectors.DescribeAnomalyDetectorsInput, options: CallOptions) !describe_anomaly_detectors.DescribeAnomalyDetectorsOutput {
         return describe_anomaly_detectors.execute(self, allocator, input, options);
     }
 
@@ -206,32 +207,32 @@ pub const Client = struct {
     /// For more information about Contributor Insights, see [Using Contributor
     /// Insights to Analyze High-Cardinality
     /// Data](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html).
-    pub fn describeInsightRules(self: *Self, allocator: std.mem.Allocator, input: describe_insight_rules.DescribeInsightRulesInput, options: describe_insight_rules.Options) !describe_insight_rules.DescribeInsightRulesOutput {
+    pub fn describeInsightRules(self: *Self, allocator: std.mem.Allocator, input: describe_insight_rules.DescribeInsightRulesInput, options: CallOptions) !describe_insight_rules.DescribeInsightRulesOutput {
         return describe_insight_rules.execute(self, allocator, input, options);
     }
 
     /// Disables the actions for the specified alarms. When an alarm's actions are
     /// disabled, the alarm actions do not execute when the alarm state changes.
-    pub fn disableAlarmActions(self: *Self, allocator: std.mem.Allocator, input: disable_alarm_actions.DisableAlarmActionsInput, options: disable_alarm_actions.Options) !disable_alarm_actions.DisableAlarmActionsOutput {
+    pub fn disableAlarmActions(self: *Self, allocator: std.mem.Allocator, input: disable_alarm_actions.DisableAlarmActionsInput, options: CallOptions) !disable_alarm_actions.DisableAlarmActionsOutput {
         return disable_alarm_actions.execute(self, allocator, input, options);
     }
 
     /// Disables the specified Contributor Insights rules. When rules are disabled,
     /// they do
     /// not analyze log groups and do not incur costs.
-    pub fn disableInsightRules(self: *Self, allocator: std.mem.Allocator, input: disable_insight_rules.DisableInsightRulesInput, options: disable_insight_rules.Options) !disable_insight_rules.DisableInsightRulesOutput {
+    pub fn disableInsightRules(self: *Self, allocator: std.mem.Allocator, input: disable_insight_rules.DisableInsightRulesInput, options: CallOptions) !disable_insight_rules.DisableInsightRulesOutput {
         return disable_insight_rules.execute(self, allocator, input, options);
     }
 
     /// Enables the actions for the specified alarms.
-    pub fn enableAlarmActions(self: *Self, allocator: std.mem.Allocator, input: enable_alarm_actions.EnableAlarmActionsInput, options: enable_alarm_actions.Options) !enable_alarm_actions.EnableAlarmActionsOutput {
+    pub fn enableAlarmActions(self: *Self, allocator: std.mem.Allocator, input: enable_alarm_actions.EnableAlarmActionsInput, options: CallOptions) !enable_alarm_actions.EnableAlarmActionsOutput {
         return enable_alarm_actions.execute(self, allocator, input, options);
     }
 
     /// Enables the specified Contributor Insights rules. When rules are enabled,
     /// they
     /// immediately begin analyzing log data.
-    pub fn enableInsightRules(self: *Self, allocator: std.mem.Allocator, input: enable_insight_rules.EnableInsightRulesInput, options: enable_insight_rules.Options) !enable_insight_rules.EnableInsightRulesOutput {
+    pub fn enableInsightRules(self: *Self, allocator: std.mem.Allocator, input: enable_insight_rules.EnableInsightRulesInput, options: CallOptions) !enable_insight_rules.EnableInsightRulesOutput {
         return enable_insight_rules.execute(self, allocator, input, options);
     }
 
@@ -240,7 +241,7 @@ pub const Client = struct {
     /// To copy an existing dashboard, use `GetDashboard`, and then use the data
     /// returned within `DashboardBody` as the template for the new dashboard when
     /// you call `PutDashboard` to create the copy.
-    pub fn getDashboard(self: *Self, allocator: std.mem.Allocator, input: get_dashboard.GetDashboardInput, options: get_dashboard.Options) !get_dashboard.GetDashboardOutput {
+    pub fn getDashboard(self: *Self, allocator: std.mem.Allocator, input: get_dashboard.GetDashboardInput, options: CallOptions) !get_dashboard.GetDashboardOutput {
         return get_dashboard.execute(self, allocator, input, options);
     }
 
@@ -281,7 +282,7 @@ pub const Client = struct {
     ///
     /// * `Average` -- the average value from all contributors during the
     /// time period represented by that data point.
-    pub fn getInsightRuleReport(self: *Self, allocator: std.mem.Allocator, input: get_insight_rule_report.GetInsightRuleReportInput, options: get_insight_rule_report.Options) !get_insight_rule_report.GetInsightRuleReportOutput {
+    pub fn getInsightRuleReport(self: *Self, allocator: std.mem.Allocator, input: get_insight_rule_report.GetInsightRuleReportInput, options: CallOptions) !get_insight_rule_report.GetInsightRuleReportOutput {
         return get_insight_rule_report.execute(self, allocator, input, options);
     }
 
@@ -373,7 +374,7 @@ pub const Client = struct {
     /// (TS[]), and can be used as input for a metric math expression that expects
     /// an array of
     /// time series.
-    pub fn getMetricData(self: *Self, allocator: std.mem.Allocator, input: get_metric_data.GetMetricDataInput, options: get_metric_data.Options) !get_metric_data.GetMetricDataOutput {
+    pub fn getMetricData(self: *Self, allocator: std.mem.Allocator, input: get_metric_data.GetMetricDataInput, options: CallOptions) !get_metric_data.GetMetricDataOutput {
         return get_metric_data.execute(self, allocator, input, options);
     }
 
@@ -450,12 +451,12 @@ pub const Client = struct {
     /// Metrics and Dimensions
     /// Reference](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html) in the *Amazon CloudWatch User
     /// Guide*.
-    pub fn getMetricStatistics(self: *Self, allocator: std.mem.Allocator, input: get_metric_statistics.GetMetricStatisticsInput, options: get_metric_statistics.Options) !get_metric_statistics.GetMetricStatisticsOutput {
+    pub fn getMetricStatistics(self: *Self, allocator: std.mem.Allocator, input: get_metric_statistics.GetMetricStatisticsInput, options: CallOptions) !get_metric_statistics.GetMetricStatisticsOutput {
         return get_metric_statistics.execute(self, allocator, input, options);
     }
 
     /// Returns information about the metric stream that you specify.
-    pub fn getMetricStream(self: *Self, allocator: std.mem.Allocator, input: get_metric_stream.GetMetricStreamInput, options: get_metric_stream.Options) !get_metric_stream.GetMetricStreamOutput {
+    pub fn getMetricStream(self: *Self, allocator: std.mem.Allocator, input: get_metric_stream.GetMetricStreamInput, options: CallOptions) !get_metric_stream.GetMetricStreamOutput {
         return get_metric_stream.execute(self, allocator, input, options);
     }
 
@@ -478,7 +479,7 @@ pub const Client = struct {
     /// * As many as 100 metrics in the graph.
     ///
     /// * Up to 100 KB uncompressed payload.
-    pub fn getMetricWidgetImage(self: *Self, allocator: std.mem.Allocator, input: get_metric_widget_image.GetMetricWidgetImageInput, options: get_metric_widget_image.Options) !get_metric_widget_image.GetMetricWidgetImageOutput {
+    pub fn getMetricWidgetImage(self: *Self, allocator: std.mem.Allocator, input: get_metric_widget_image.GetMetricWidgetImageInput, options: CallOptions) !get_metric_widget_image.GetMetricWidgetImageOutput {
         return get_metric_widget_image.execute(self, allocator, input, options);
     }
 
@@ -491,19 +492,19 @@ pub const Client = struct {
     /// the value you received for `NextToken` in the first call, to receive the
     /// next
     /// 1000 results.
-    pub fn listDashboards(self: *Self, allocator: std.mem.Allocator, input: list_dashboards.ListDashboardsInput, options: list_dashboards.Options) !list_dashboards.ListDashboardsOutput {
+    pub fn listDashboards(self: *Self, allocator: std.mem.Allocator, input: list_dashboards.ListDashboardsInput, options: CallOptions) !list_dashboards.ListDashboardsOutput {
         return list_dashboards.execute(self, allocator, input, options);
     }
 
     /// Returns a list that contains the number of managed Contributor Insights
     /// rules in your
     /// account.
-    pub fn listManagedInsightRules(self: *Self, allocator: std.mem.Allocator, input: list_managed_insight_rules.ListManagedInsightRulesInput, options: list_managed_insight_rules.Options) !list_managed_insight_rules.ListManagedInsightRulesOutput {
+    pub fn listManagedInsightRules(self: *Self, allocator: std.mem.Allocator, input: list_managed_insight_rules.ListManagedInsightRulesInput, options: CallOptions) !list_managed_insight_rules.ListManagedInsightRulesOutput {
         return list_managed_insight_rules.execute(self, allocator, input, options);
     }
 
     /// Returns a list of metric streams in this account.
-    pub fn listMetricStreams(self: *Self, allocator: std.mem.Allocator, input: list_metric_streams.ListMetricStreamsInput, options: list_metric_streams.Options) !list_metric_streams.ListMetricStreamsOutput {
+    pub fn listMetricStreams(self: *Self, allocator: std.mem.Allocator, input: list_metric_streams.ListMetricStreamsInput, options: CallOptions) !list_metric_streams.ListMetricStreamsOutput {
         return list_metric_streams.execute(self, allocator, input, options);
     }
 
@@ -528,14 +529,14 @@ pub const Client = struct {
     /// `ListMetrics` doesn't return information about metrics if those metrics
     /// haven't reported data in the past two weeks. To retrieve those metrics, use
     /// [GetMetricData](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html) or [GetMetricStatistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html).
-    pub fn listMetrics(self: *Self, allocator: std.mem.Allocator, input: list_metrics.ListMetricsInput, options: list_metrics.Options) !list_metrics.ListMetricsOutput {
+    pub fn listMetrics(self: *Self, allocator: std.mem.Allocator, input: list_metrics.ListMetricsInput, options: CallOptions) !list_metrics.ListMetricsOutput {
         return list_metrics.execute(self, allocator, input, options);
     }
 
     /// Displays the tags associated with a CloudWatch resource. Currently, alarms
     /// and
     /// Contributor Insights rules support tagging.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -552,7 +553,7 @@ pub const Client = struct {
     ///
     /// For more information, see [CloudWatch Anomaly
     /// Detection](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html).
-    pub fn putAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: put_anomaly_detector.PutAnomalyDetectorInput, options: put_anomaly_detector.Options) !put_anomaly_detector.PutAnomalyDetectorOutput {
+    pub fn putAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: put_anomaly_detector.PutAnomalyDetectorInput, options: CallOptions) !put_anomaly_detector.PutAnomalyDetectorOutput {
         return put_anomaly_detector.execute(self, allocator, input, options);
     }
 
@@ -629,7 +630,7 @@ pub const Client = struct {
     /// If you are an IAM user, you must have
     /// `iam:CreateServiceLinkedRole` to create a composite alarm that has
     /// Systems Manager OpsItem actions.
-    pub fn putCompositeAlarm(self: *Self, allocator: std.mem.Allocator, input: put_composite_alarm.PutCompositeAlarmInput, options: put_composite_alarm.Options) !put_composite_alarm.PutCompositeAlarmOutput {
+    pub fn putCompositeAlarm(self: *Self, allocator: std.mem.Allocator, input: put_composite_alarm.PutCompositeAlarmInput, options: CallOptions) !put_composite_alarm.PutCompositeAlarmOutput {
         return put_composite_alarm.execute(self, allocator, input, options);
     }
 
@@ -658,7 +659,7 @@ pub const Client = struct {
     /// could also
     /// point console users to the location of the `DashboardBody` script or the
     /// CloudFormation template used to create the dashboard.
-    pub fn putDashboard(self: *Self, allocator: std.mem.Allocator, input: put_dashboard.PutDashboardInput, options: put_dashboard.Options) !put_dashboard.PutDashboardOutput {
+    pub fn putDashboard(self: *Self, allocator: std.mem.Allocator, input: put_dashboard.PutDashboardInput, options: CallOptions) !put_dashboard.PutDashboardOutput {
         return put_dashboard.execute(self, allocator, input, options);
     }
 
@@ -673,7 +674,7 @@ pub const Client = struct {
     /// If you create a rule, delete it, and then re-create it with the same name,
     /// historical
     /// data from the first time the rule was created might not be available.
-    pub fn putInsightRule(self: *Self, allocator: std.mem.Allocator, input: put_insight_rule.PutInsightRuleInput, options: put_insight_rule.Options) !put_insight_rule.PutInsightRuleOutput {
+    pub fn putInsightRule(self: *Self, allocator: std.mem.Allocator, input: put_insight_rule.PutInsightRuleInput, options: CallOptions) !put_insight_rule.PutInsightRuleOutput {
         return put_insight_rule.execute(self, allocator, input, options);
     }
 
@@ -688,7 +689,7 @@ pub const Client = struct {
     /// `DeleteInsightRules`. If a previously created managed rule is currently
     /// disabled, a subsequent call to this API will re-enable it. Use
     /// `ListManagedInsightRules` to describe all available rules.
-    pub fn putManagedInsightRules(self: *Self, allocator: std.mem.Allocator, input: put_managed_insight_rules.PutManagedInsightRulesInput, options: put_managed_insight_rules.Options) !put_managed_insight_rules.PutManagedInsightRulesOutput {
+    pub fn putManagedInsightRules(self: *Self, allocator: std.mem.Allocator, input: put_managed_insight_rules.PutManagedInsightRulesInput, options: CallOptions) !put_managed_insight_rules.PutManagedInsightRulesOutput {
         return put_managed_insight_rules.execute(self, allocator, input, options);
     }
 
@@ -756,7 +757,7 @@ pub const Client = struct {
     /// does not, you must create it following the directions in **Set up a
     /// monitoring account** in [ Cross-account cross-Region CloudWatch
     /// console](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region).
-    pub fn putMetricAlarm(self: *Self, allocator: std.mem.Allocator, input: put_metric_alarm.PutMetricAlarmInput, options: put_metric_alarm.Options) !put_metric_alarm.PutMetricAlarmOutput {
+    pub fn putMetricAlarm(self: *Self, allocator: std.mem.Allocator, input: put_metric_alarm.PutMetricAlarmInput, options: CallOptions) !put_metric_alarm.PutMetricAlarmOutput {
         return put_metric_alarm.execute(self, allocator, input, options);
     }
 
@@ -832,7 +833,7 @@ pub const Client = struct {
     ///
     /// * The `Min` and `Max` are equal, and `Sum`
     /// is equal to `Min` multiplied by `SampleCount`.
-    pub fn putMetricData(self: *Self, allocator: std.mem.Allocator, input: put_metric_data.PutMetricDataInput, options: put_metric_data.Options) !put_metric_data.PutMetricDataOutput {
+    pub fn putMetricData(self: *Self, allocator: std.mem.Allocator, input: put_metric_data.PutMetricDataInput, options: CallOptions) !put_metric_data.PutMetricDataOutput {
         return put_metric_data.execute(self, allocator, input, options);
     }
 
@@ -879,7 +880,7 @@ pub const Client = struct {
     /// from source
     /// accounts in the stream. For more information, see [CloudWatch cross-account
     /// observability](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
-    pub fn putMetricStream(self: *Self, allocator: std.mem.Allocator, input: put_metric_stream.PutMetricStreamInput, options: put_metric_stream.Options) !put_metric_stream.PutMetricStreamOutput {
+    pub fn putMetricStream(self: *Self, allocator: std.mem.Allocator, input: put_metric_stream.PutMetricStreamInput, options: CallOptions) !put_metric_stream.PutMetricStreamOutput {
         return put_metric_stream.execute(self, allocator, input, options);
     }
 
@@ -910,17 +911,17 @@ pub const Client = struct {
     /// If an alarm triggers EC2 Auto Scaling policies or application Auto Scaling
     /// policies, you must include information in the `StateReasonData` parameter to
     /// enable the policy to take the correct action.
-    pub fn setAlarmState(self: *Self, allocator: std.mem.Allocator, input: set_alarm_state.SetAlarmStateInput, options: set_alarm_state.Options) !set_alarm_state.SetAlarmStateOutput {
+    pub fn setAlarmState(self: *Self, allocator: std.mem.Allocator, input: set_alarm_state.SetAlarmStateInput, options: CallOptions) !set_alarm_state.SetAlarmStateOutput {
         return set_alarm_state.execute(self, allocator, input, options);
     }
 
     /// Starts the streaming of metrics for one or more of your metric streams.
-    pub fn startMetricStreams(self: *Self, allocator: std.mem.Allocator, input: start_metric_streams.StartMetricStreamsInput, options: start_metric_streams.Options) !start_metric_streams.StartMetricStreamsOutput {
+    pub fn startMetricStreams(self: *Self, allocator: std.mem.Allocator, input: start_metric_streams.StartMetricStreamsInput, options: CallOptions) !start_metric_streams.StartMetricStreamsOutput {
         return start_metric_streams.execute(self, allocator, input, options);
     }
 
     /// Stops the streaming of metrics for one or more of your metric streams.
-    pub fn stopMetricStreams(self: *Self, allocator: std.mem.Allocator, input: stop_metric_streams.StopMetricStreamsInput, options: stop_metric_streams.Options) !stop_metric_streams.StopMetricStreamsOutput {
+    pub fn stopMetricStreams(self: *Self, allocator: std.mem.Allocator, input: stop_metric_streams.StopMetricStreamsInput, options: CallOptions) !stop_metric_streams.StopMetricStreamsOutput {
         return stop_metric_streams.execute(self, allocator, input, options);
     }
 
@@ -950,12 +951,12 @@ pub const Client = struct {
     /// tag.
     ///
     /// You can associate as many as 50 tags with a CloudWatch resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

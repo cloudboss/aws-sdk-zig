@@ -97,6 +97,7 @@ const update_voice_connector_group = @import("update_voice_connector_group.zig")
 const update_voice_profile = @import("update_voice_profile.zig");
 const update_voice_profile_domain = @import("update_voice_profile_domain.zig");
 const validate_e911_address = @import("validate_e911_address.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -129,13 +130,13 @@ pub const Client = struct {
 
     /// Associates phone numbers with the specified Amazon Chime SDK Voice
     /// Connector.
-    pub fn associatePhoneNumbersWithVoiceConnector(self: *Self, allocator: std.mem.Allocator, input: associate_phone_numbers_with_voice_connector.AssociatePhoneNumbersWithVoiceConnectorInput, options: associate_phone_numbers_with_voice_connector.Options) !associate_phone_numbers_with_voice_connector.AssociatePhoneNumbersWithVoiceConnectorOutput {
+    pub fn associatePhoneNumbersWithVoiceConnector(self: *Self, allocator: std.mem.Allocator, input: associate_phone_numbers_with_voice_connector.AssociatePhoneNumbersWithVoiceConnectorInput, options: CallOptions) !associate_phone_numbers_with_voice_connector.AssociatePhoneNumbersWithVoiceConnectorOutput {
         return associate_phone_numbers_with_voice_connector.execute(self, allocator, input, options);
     }
 
     /// Associates phone numbers with the specified Amazon Chime SDK Voice Connector
     /// group.
-    pub fn associatePhoneNumbersWithVoiceConnectorGroup(self: *Self, allocator: std.mem.Allocator, input: associate_phone_numbers_with_voice_connector_group.AssociatePhoneNumbersWithVoiceConnectorGroupInput, options: associate_phone_numbers_with_voice_connector_group.Options) !associate_phone_numbers_with_voice_connector_group.AssociatePhoneNumbersWithVoiceConnectorGroupOutput {
+    pub fn associatePhoneNumbersWithVoiceConnectorGroup(self: *Self, allocator: std.mem.Allocator, input: associate_phone_numbers_with_voice_connector_group.AssociatePhoneNumbersWithVoiceConnectorGroupInput, options: CallOptions) !associate_phone_numbers_with_voice_connector_group.AssociatePhoneNumbersWithVoiceConnectorGroupOutput {
         return associate_phone_numbers_with_voice_connector_group.execute(self, allocator, input, options);
     }
 
@@ -145,7 +146,7 @@ pub const Client = struct {
     ///
     /// Phone numbers remain in the
     /// **Deletion queue** for 7 days before they are deleted permanently.
-    pub fn batchDeletePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: batch_delete_phone_number.BatchDeletePhoneNumberInput, options: batch_delete_phone_number.Options) !batch_delete_phone_number.BatchDeletePhoneNumberOutput {
+    pub fn batchDeletePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: batch_delete_phone_number.BatchDeletePhoneNumberInput, options: CallOptions) !batch_delete_phone_number.BatchDeletePhoneNumberOutput {
         return batch_delete_phone_number.execute(self, allocator, input, options);
     }
 
@@ -155,21 +156,21 @@ pub const Client = struct {
     /// type, the calling name, or phone name.
     ///
     /// You cannot have a duplicate `phoneNumberId` in a request.
-    pub fn batchUpdatePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: batch_update_phone_number.BatchUpdatePhoneNumberInput, options: batch_update_phone_number.Options) !batch_update_phone_number.BatchUpdatePhoneNumberOutput {
+    pub fn batchUpdatePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: batch_update_phone_number.BatchUpdatePhoneNumberInput, options: CallOptions) !batch_update_phone_number.BatchUpdatePhoneNumberOutput {
         return batch_update_phone_number.execute(self, allocator, input, options);
     }
 
     /// Creates an order for phone numbers to be provisioned. For numbers outside
     /// the U.S., you must use the Amazon Chime SDK SIP media application dial-in
     /// product type.
-    pub fn createPhoneNumberOrder(self: *Self, allocator: std.mem.Allocator, input: create_phone_number_order.CreatePhoneNumberOrderInput, options: create_phone_number_order.Options) !create_phone_number_order.CreatePhoneNumberOrderOutput {
+    pub fn createPhoneNumberOrder(self: *Self, allocator: std.mem.Allocator, input: create_phone_number_order.CreatePhoneNumberOrderInput, options: CallOptions) !create_phone_number_order.CreatePhoneNumberOrderOutput {
         return create_phone_number_order.execute(self, allocator, input, options);
     }
 
     /// Creates a proxy session for the specified Amazon Chime SDK Voice Connector
     /// for
     /// the specified participant phone numbers.
-    pub fn createProxySession(self: *Self, allocator: std.mem.Allocator, input: create_proxy_session.CreateProxySessionInput, options: create_proxy_session.Options) !create_proxy_session.CreateProxySessionOutput {
+    pub fn createProxySession(self: *Self, allocator: std.mem.Allocator, input: create_proxy_session.CreateProxySessionInput, options: CallOptions) !create_proxy_session.CreateProxySessionOutput {
         return create_proxy_session.execute(self, allocator, input, options);
     }
 
@@ -177,14 +178,14 @@ pub const Client = struct {
     /// applications, see [Managing SIP media applications
     /// and
     /// rules](https://docs.aws.amazon.com/chime-sdk/latest/ag/manage-sip-applications.html) in the *Amazon Chime SDK Administrator Guide*.
-    pub fn createSipMediaApplication(self: *Self, allocator: std.mem.Allocator, input: create_sip_media_application.CreateSipMediaApplicationInput, options: create_sip_media_application.Options) !create_sip_media_application.CreateSipMediaApplicationOutput {
+    pub fn createSipMediaApplication(self: *Self, allocator: std.mem.Allocator, input: create_sip_media_application.CreateSipMediaApplicationInput, options: CallOptions) !create_sip_media_application.CreateSipMediaApplicationOutput {
         return create_sip_media_application.execute(self, allocator, input, options);
     }
 
     /// Creates an outbound call to a phone number from the phone number specified
     /// in the request, and it invokes the endpoint of the specified
     /// `sipMediaApplicationId`.
-    pub fn createSipMediaApplicationCall(self: *Self, allocator: std.mem.Allocator, input: create_sip_media_application_call.CreateSipMediaApplicationCallInput, options: create_sip_media_application_call.Options) !create_sip_media_application_call.CreateSipMediaApplicationCallOutput {
+    pub fn createSipMediaApplicationCall(self: *Self, allocator: std.mem.Allocator, input: create_sip_media_application_call.CreateSipMediaApplicationCallInput, options: CallOptions) !create_sip_media_application_call.CreateSipMediaApplicationCallOutput {
         return create_sip_media_application_call.execute(self, allocator, input, options);
     }
 
@@ -193,7 +194,7 @@ pub const Client = struct {
     /// see [Managing SIP media applications
     /// and
     /// rules](https://docs.aws.amazon.com/chime-sdk/latest/ag/manage-sip-applications.html) in the *Amazon Chime SDK Administrator Guide*.
-    pub fn createSipRule(self: *Self, allocator: std.mem.Allocator, input: create_sip_rule.CreateSipRuleInput, options: create_sip_rule.Options) !create_sip_rule.CreateSipRuleOutput {
+    pub fn createSipRule(self: *Self, allocator: std.mem.Allocator, input: create_sip_rule.CreateSipRuleInput, options: CallOptions) !create_sip_rule.CreateSipRuleOutput {
         return create_sip_rule.execute(self, allocator, input, options);
     }
 
@@ -202,7 +203,7 @@ pub const Client = struct {
     /// see [Managing Amazon Chime SDK Voice Connector
     /// groups](https://docs.aws.amazon.com/chime-sdk/latest/ag/voice-connector-groups.html) in the *Amazon Chime SDK
     /// Administrator Guide*.
-    pub fn createVoiceConnector(self: *Self, allocator: std.mem.Allocator, input: create_voice_connector.CreateVoiceConnectorInput, options: create_voice_connector.Options) !create_voice_connector.CreateVoiceConnectorOutput {
+    pub fn createVoiceConnector(self: *Self, allocator: std.mem.Allocator, input: create_voice_connector.CreateVoiceConnectorInput, options: CallOptions) !create_voice_connector.CreateVoiceConnectorOutput {
         return create_voice_connector.execute(self, allocator, input, options);
     }
 
@@ -214,7 +215,7 @@ pub const Client = struct {
     /// You can include Voice Connectors from different AWS Regions in your group.
     /// This creates a fault tolerant mechanism for fallback in case of availability
     /// events.
-    pub fn createVoiceConnectorGroup(self: *Self, allocator: std.mem.Allocator, input: create_voice_connector_group.CreateVoiceConnectorGroupInput, options: create_voice_connector_group.Options) !create_voice_connector_group.CreateVoiceConnectorGroupOutput {
+    pub fn createVoiceConnectorGroup(self: *Self, allocator: std.mem.Allocator, input: create_voice_connector_group.CreateVoiceConnectorGroupInput, options: CallOptions) !create_voice_connector_group.CreateVoiceConnectorGroupOutput {
         return create_voice_connector_group.execute(self, allocator, input, options);
     }
 
@@ -231,7 +232,7 @@ pub const Client = struct {
     /// Amazon Chime SDK Voice
     /// Analytics](https://docs.aws.amazon.com/chime-sdk/latest/dg/pstn-voice-analytics.html)
     /// in the *Amazon Chime SDK Developer Guide*.
-    pub fn createVoiceProfile(self: *Self, allocator: std.mem.Allocator, input: create_voice_profile.CreateVoiceProfileInput, options: create_voice_profile.Options) !create_voice_profile.CreateVoiceProfileOutput {
+    pub fn createVoiceProfile(self: *Self, allocator: std.mem.Allocator, input: create_voice_profile.CreateVoiceProfileInput, options: CallOptions) !create_voice_profile.CreateVoiceProfileOutput {
         return create_voice_profile.execute(self, allocator, input, options);
     }
 
@@ -248,7 +249,7 @@ pub const Client = struct {
     /// SDK Voice
     /// Analytics](https://docs.aws.amazon.com/chime-sdk/latest/dg/pstn-voice-analytics.html)
     /// in the *Amazon Chime SDK Developer Guide*.
-    pub fn createVoiceProfileDomain(self: *Self, allocator: std.mem.Allocator, input: create_voice_profile_domain.CreateVoiceProfileDomainInput, options: create_voice_profile_domain.Options) !create_voice_profile_domain.CreateVoiceProfileDomainOutput {
+    pub fn createVoiceProfileDomain(self: *Self, allocator: std.mem.Allocator, input: create_voice_profile_domain.CreateVoiceProfileDomainInput, options: CallOptions) !create_voice_profile_domain.CreateVoiceProfileDomainOutput {
         return create_voice_profile_domain.execute(self, allocator, input, options);
     }
 
@@ -261,24 +262,24 @@ pub const Client = struct {
     /// Deleted phone numbers remain in the
     /// **Deletion queue** queue for 7 days before
     /// they are deleted permanently.
-    pub fn deletePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: delete_phone_number.DeletePhoneNumberInput, options: delete_phone_number.Options) !delete_phone_number.DeletePhoneNumberOutput {
+    pub fn deletePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: delete_phone_number.DeletePhoneNumberInput, options: CallOptions) !delete_phone_number.DeletePhoneNumberOutput {
         return delete_phone_number.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified proxy session from the specified Amazon Chime SDK
     /// Voice
     /// Connector.
-    pub fn deleteProxySession(self: *Self, allocator: std.mem.Allocator, input: delete_proxy_session.DeleteProxySessionInput, options: delete_proxy_session.Options) !delete_proxy_session.DeleteProxySessionOutput {
+    pub fn deleteProxySession(self: *Self, allocator: std.mem.Allocator, input: delete_proxy_session.DeleteProxySessionInput, options: CallOptions) !delete_proxy_session.DeleteProxySessionOutput {
         return delete_proxy_session.execute(self, allocator, input, options);
     }
 
     /// Deletes a SIP media application.
-    pub fn deleteSipMediaApplication(self: *Self, allocator: std.mem.Allocator, input: delete_sip_media_application.DeleteSipMediaApplicationInput, options: delete_sip_media_application.Options) !delete_sip_media_application.DeleteSipMediaApplicationOutput {
+    pub fn deleteSipMediaApplication(self: *Self, allocator: std.mem.Allocator, input: delete_sip_media_application.DeleteSipMediaApplicationInput, options: CallOptions) !delete_sip_media_application.DeleteSipMediaApplicationOutput {
         return delete_sip_media_application.execute(self, allocator, input, options);
     }
 
     /// Deletes a SIP rule.
-    pub fn deleteSipRule(self: *Self, allocator: std.mem.Allocator, input: delete_sip_rule.DeleteSipRuleInput, options: delete_sip_rule.Options) !delete_sip_rule.DeleteSipRuleOutput {
+    pub fn deleteSipRule(self: *Self, allocator: std.mem.Allocator, input: delete_sip_rule.DeleteSipRuleInput, options: CallOptions) !delete_sip_rule.DeleteSipRuleOutput {
         return delete_sip_rule.execute(self, allocator, input, options);
     }
 
@@ -286,26 +287,26 @@ pub const Client = struct {
     /// with the Amazon Chime SDK Voice Connector must be disassociated from it
     /// before it
     /// can be deleted.
-    pub fn deleteVoiceConnector(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector.DeleteVoiceConnectorInput, options: delete_voice_connector.Options) !delete_voice_connector.DeleteVoiceConnectorOutput {
+    pub fn deleteVoiceConnector(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector.DeleteVoiceConnectorInput, options: CallOptions) !delete_voice_connector.DeleteVoiceConnectorOutput {
         return delete_voice_connector.execute(self, allocator, input, options);
     }
 
     /// Deletes the emergency calling details from the specified Amazon Chime SDK
     /// Voice
     /// Connector.
-    pub fn deleteVoiceConnectorEmergencyCallingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_emergency_calling_configuration.DeleteVoiceConnectorEmergencyCallingConfigurationInput, options: delete_voice_connector_emergency_calling_configuration.Options) !delete_voice_connector_emergency_calling_configuration.DeleteVoiceConnectorEmergencyCallingConfigurationOutput {
+    pub fn deleteVoiceConnectorEmergencyCallingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_emergency_calling_configuration.DeleteVoiceConnectorEmergencyCallingConfigurationInput, options: CallOptions) !delete_voice_connector_emergency_calling_configuration.DeleteVoiceConnectorEmergencyCallingConfigurationOutput {
         return delete_voice_connector_emergency_calling_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes the external systems configuration for a Voice Connector.
-    pub fn deleteVoiceConnectorExternalSystemsConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_external_systems_configuration.DeleteVoiceConnectorExternalSystemsConfigurationInput, options: delete_voice_connector_external_systems_configuration.Options) !delete_voice_connector_external_systems_configuration.DeleteVoiceConnectorExternalSystemsConfigurationOutput {
+    pub fn deleteVoiceConnectorExternalSystemsConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_external_systems_configuration.DeleteVoiceConnectorExternalSystemsConfigurationInput, options: CallOptions) !delete_voice_connector_external_systems_configuration.DeleteVoiceConnectorExternalSystemsConfigurationOutput {
         return delete_voice_connector_external_systems_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Chime SDK Voice Connector group. Any `VoiceConnectorItems`
     /// and phone numbers associated with the group must be removed before it can be
     /// deleted.
-    pub fn deleteVoiceConnectorGroup(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_group.DeleteVoiceConnectorGroupInput, options: delete_voice_connector_group.Options) !delete_voice_connector_group.DeleteVoiceConnectorGroupOutput {
+    pub fn deleteVoiceConnectorGroup(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_group.DeleteVoiceConnectorGroupInput, options: CallOptions) !delete_voice_connector_group.DeleteVoiceConnectorGroupOutput {
         return delete_voice_connector_group.execute(self, allocator, input, options);
     }
 
@@ -314,18 +315,18 @@ pub const Client = struct {
     ///
     /// If emergency calling is configured for the Voice Connector, it must be
     /// deleted prior to deleting the origination settings.
-    pub fn deleteVoiceConnectorOrigination(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_origination.DeleteVoiceConnectorOriginationInput, options: delete_voice_connector_origination.Options) !delete_voice_connector_origination.DeleteVoiceConnectorOriginationOutput {
+    pub fn deleteVoiceConnectorOrigination(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_origination.DeleteVoiceConnectorOriginationInput, options: CallOptions) !delete_voice_connector_origination.DeleteVoiceConnectorOriginationOutput {
         return delete_voice_connector_origination.execute(self, allocator, input, options);
     }
 
     /// Deletes the proxy configuration from the specified Amazon Chime SDK Voice
     /// Connector.
-    pub fn deleteVoiceConnectorProxy(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_proxy.DeleteVoiceConnectorProxyInput, options: delete_voice_connector_proxy.Options) !delete_voice_connector_proxy.DeleteVoiceConnectorProxyOutput {
+    pub fn deleteVoiceConnectorProxy(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_proxy.DeleteVoiceConnectorProxyInput, options: CallOptions) !delete_voice_connector_proxy.DeleteVoiceConnectorProxyOutput {
         return delete_voice_connector_proxy.execute(self, allocator, input, options);
     }
 
     /// Deletes a Voice Connector's streaming configuration.
-    pub fn deleteVoiceConnectorStreamingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_streaming_configuration.DeleteVoiceConnectorStreamingConfigurationInput, options: delete_voice_connector_streaming_configuration.Options) !delete_voice_connector_streaming_configuration.DeleteVoiceConnectorStreamingConfigurationOutput {
+    pub fn deleteVoiceConnectorStreamingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_streaming_configuration.DeleteVoiceConnectorStreamingConfigurationInput, options: CallOptions) !delete_voice_connector_streaming_configuration.DeleteVoiceConnectorStreamingConfigurationOutput {
         return delete_voice_connector_streaming_configuration.execute(self, allocator, input, options);
     }
 
@@ -334,75 +335,75 @@ pub const Client = struct {
     ///
     /// If emergency calling is configured for the Voice Connector, it must be
     /// deleted prior to deleting the termination settings.
-    pub fn deleteVoiceConnectorTermination(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_termination.DeleteVoiceConnectorTerminationInput, options: delete_voice_connector_termination.Options) !delete_voice_connector_termination.DeleteVoiceConnectorTerminationOutput {
+    pub fn deleteVoiceConnectorTermination(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_termination.DeleteVoiceConnectorTerminationInput, options: CallOptions) !delete_voice_connector_termination.DeleteVoiceConnectorTerminationOutput {
         return delete_voice_connector_termination.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified SIP credentials used by your equipment to
     /// authenticate during call termination.
-    pub fn deleteVoiceConnectorTerminationCredentials(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_termination_credentials.DeleteVoiceConnectorTerminationCredentialsInput, options: delete_voice_connector_termination_credentials.Options) !delete_voice_connector_termination_credentials.DeleteVoiceConnectorTerminationCredentialsOutput {
+    pub fn deleteVoiceConnectorTerminationCredentials(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_termination_credentials.DeleteVoiceConnectorTerminationCredentialsInput, options: CallOptions) !delete_voice_connector_termination_credentials.DeleteVoiceConnectorTerminationCredentialsOutput {
         return delete_voice_connector_termination_credentials.execute(self, allocator, input, options);
     }
 
     /// Deletes a voice profile, including its voice print and enrollment data.
     /// WARNING: This action is not reversible.
-    pub fn deleteVoiceProfile(self: *Self, allocator: std.mem.Allocator, input: delete_voice_profile.DeleteVoiceProfileInput, options: delete_voice_profile.Options) !delete_voice_profile.DeleteVoiceProfileOutput {
+    pub fn deleteVoiceProfile(self: *Self, allocator: std.mem.Allocator, input: delete_voice_profile.DeleteVoiceProfileInput, options: CallOptions) !delete_voice_profile.DeleteVoiceProfileOutput {
         return delete_voice_profile.execute(self, allocator, input, options);
     }
 
     /// Deletes all voice profiles in the domain. WARNING: This action is not
     /// reversible.
-    pub fn deleteVoiceProfileDomain(self: *Self, allocator: std.mem.Allocator, input: delete_voice_profile_domain.DeleteVoiceProfileDomainInput, options: delete_voice_profile_domain.Options) !delete_voice_profile_domain.DeleteVoiceProfileDomainOutput {
+    pub fn deleteVoiceProfileDomain(self: *Self, allocator: std.mem.Allocator, input: delete_voice_profile_domain.DeleteVoiceProfileDomainInput, options: CallOptions) !delete_voice_profile_domain.DeleteVoiceProfileDomainOutput {
         return delete_voice_profile_domain.execute(self, allocator, input, options);
     }
 
     /// Disassociates the specified phone numbers from the specified
     /// Amazon Chime SDK Voice Connector.
-    pub fn disassociatePhoneNumbersFromVoiceConnector(self: *Self, allocator: std.mem.Allocator, input: disassociate_phone_numbers_from_voice_connector.DisassociatePhoneNumbersFromVoiceConnectorInput, options: disassociate_phone_numbers_from_voice_connector.Options) !disassociate_phone_numbers_from_voice_connector.DisassociatePhoneNumbersFromVoiceConnectorOutput {
+    pub fn disassociatePhoneNumbersFromVoiceConnector(self: *Self, allocator: std.mem.Allocator, input: disassociate_phone_numbers_from_voice_connector.DisassociatePhoneNumbersFromVoiceConnectorInput, options: CallOptions) !disassociate_phone_numbers_from_voice_connector.DisassociatePhoneNumbersFromVoiceConnectorOutput {
         return disassociate_phone_numbers_from_voice_connector.execute(self, allocator, input, options);
     }
 
     /// Disassociates the specified phone numbers from the specified Amazon Chime
     /// SDK Voice
     /// Connector group.
-    pub fn disassociatePhoneNumbersFromVoiceConnectorGroup(self: *Self, allocator: std.mem.Allocator, input: disassociate_phone_numbers_from_voice_connector_group.DisassociatePhoneNumbersFromVoiceConnectorGroupInput, options: disassociate_phone_numbers_from_voice_connector_group.Options) !disassociate_phone_numbers_from_voice_connector_group.DisassociatePhoneNumbersFromVoiceConnectorGroupOutput {
+    pub fn disassociatePhoneNumbersFromVoiceConnectorGroup(self: *Self, allocator: std.mem.Allocator, input: disassociate_phone_numbers_from_voice_connector_group.DisassociatePhoneNumbersFromVoiceConnectorGroupInput, options: CallOptions) !disassociate_phone_numbers_from_voice_connector_group.DisassociatePhoneNumbersFromVoiceConnectorGroupOutput {
         return disassociate_phone_numbers_from_voice_connector_group.execute(self, allocator, input, options);
     }
 
     /// Retrieves the global settings for the Amazon Chime SDK Voice Connectors in
     /// an AWS account.
-    pub fn getGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: get_global_settings.GetGlobalSettingsInput, options: get_global_settings.Options) !get_global_settings.GetGlobalSettingsOutput {
+    pub fn getGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: get_global_settings.GetGlobalSettingsInput, options: CallOptions) !get_global_settings.GetGlobalSettingsOutput {
         return get_global_settings.execute(self, allocator, input, options);
     }
 
     /// Retrieves details for the specified phone number ID, such as associations,
     /// capabilities, and product type.
-    pub fn getPhoneNumber(self: *Self, allocator: std.mem.Allocator, input: get_phone_number.GetPhoneNumberInput, options: get_phone_number.Options) !get_phone_number.GetPhoneNumberOutput {
+    pub fn getPhoneNumber(self: *Self, allocator: std.mem.Allocator, input: get_phone_number.GetPhoneNumberInput, options: CallOptions) !get_phone_number.GetPhoneNumberOutput {
         return get_phone_number.execute(self, allocator, input, options);
     }
 
     /// Retrieves details for the specified phone number order, such as the order
     /// creation timestamp, phone numbers in E.164 format, product type, and
     /// order status.
-    pub fn getPhoneNumberOrder(self: *Self, allocator: std.mem.Allocator, input: get_phone_number_order.GetPhoneNumberOrderInput, options: get_phone_number_order.Options) !get_phone_number_order.GetPhoneNumberOrderOutput {
+    pub fn getPhoneNumberOrder(self: *Self, allocator: std.mem.Allocator, input: get_phone_number_order.GetPhoneNumberOrderInput, options: CallOptions) !get_phone_number_order.GetPhoneNumberOrderOutput {
         return get_phone_number_order.execute(self, allocator, input, options);
     }
 
     /// Retrieves the phone number settings for the administrator's AWS account,
     /// such as the default outbound calling name.
-    pub fn getPhoneNumberSettings(self: *Self, allocator: std.mem.Allocator, input: get_phone_number_settings.GetPhoneNumberSettingsInput, options: get_phone_number_settings.Options) !get_phone_number_settings.GetPhoneNumberSettingsOutput {
+    pub fn getPhoneNumberSettings(self: *Self, allocator: std.mem.Allocator, input: get_phone_number_settings.GetPhoneNumberSettingsInput, options: CallOptions) !get_phone_number_settings.GetPhoneNumberSettingsOutput {
         return get_phone_number_settings.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified proxy session details for the specified Amazon Chime
     /// SDK Voice Connector.
-    pub fn getProxySession(self: *Self, allocator: std.mem.Allocator, input: get_proxy_session.GetProxySessionInput, options: get_proxy_session.Options) !get_proxy_session.GetProxySessionOutput {
+    pub fn getProxySession(self: *Self, allocator: std.mem.Allocator, input: get_proxy_session.GetProxySessionInput, options: CallOptions) !get_proxy_session.GetProxySessionOutput {
         return get_proxy_session.execute(self, allocator, input, options);
     }
 
     /// Retrieves the information for a SIP media application, including name,
     /// AWS Region, and endpoints.
-    pub fn getSipMediaApplication(self: *Self, allocator: std.mem.Allocator, input: get_sip_media_application.GetSipMediaApplicationInput, options: get_sip_media_application.Options) !get_sip_media_application.GetSipMediaApplicationOutput {
+    pub fn getSipMediaApplication(self: *Self, allocator: std.mem.Allocator, input: get_sip_media_application.GetSipMediaApplicationInput, options: CallOptions) !get_sip_media_application.GetSipMediaApplicationOutput {
         return get_sip_media_application.execute(self, allocator, input, options);
     }
 
@@ -413,49 +414,49 @@ pub const Client = struct {
     /// the [Alexa Smart
     /// Properties](https://developer.amazon.com/en-US/alexa/alexasmartproperties)
     /// page.
-    pub fn getSipMediaApplicationAlexaSkillConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_sip_media_application_alexa_skill_configuration.GetSipMediaApplicationAlexaSkillConfigurationInput, options: get_sip_media_application_alexa_skill_configuration.Options) !get_sip_media_application_alexa_skill_configuration.GetSipMediaApplicationAlexaSkillConfigurationOutput {
+    pub fn getSipMediaApplicationAlexaSkillConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_sip_media_application_alexa_skill_configuration.GetSipMediaApplicationAlexaSkillConfigurationInput, options: CallOptions) !get_sip_media_application_alexa_skill_configuration.GetSipMediaApplicationAlexaSkillConfigurationOutput {
         return get_sip_media_application_alexa_skill_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves the logging configuration for the specified SIP media application.
-    pub fn getSipMediaApplicationLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_sip_media_application_logging_configuration.GetSipMediaApplicationLoggingConfigurationInput, options: get_sip_media_application_logging_configuration.Options) !get_sip_media_application_logging_configuration.GetSipMediaApplicationLoggingConfigurationOutput {
+    pub fn getSipMediaApplicationLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_sip_media_application_logging_configuration.GetSipMediaApplicationLoggingConfigurationInput, options: CallOptions) !get_sip_media_application_logging_configuration.GetSipMediaApplicationLoggingConfigurationOutput {
         return get_sip_media_application_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details of a SIP rule, such as the rule ID, name, triggers,
     /// and
     /// target endpoints.
-    pub fn getSipRule(self: *Self, allocator: std.mem.Allocator, input: get_sip_rule.GetSipRuleInput, options: get_sip_rule.Options) !get_sip_rule.GetSipRuleOutput {
+    pub fn getSipRule(self: *Self, allocator: std.mem.Allocator, input: get_sip_rule.GetSipRuleInput, options: CallOptions) !get_sip_rule.GetSipRuleOutput {
         return get_sip_rule.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details of the specified speaker search task.
-    pub fn getSpeakerSearchTask(self: *Self, allocator: std.mem.Allocator, input: get_speaker_search_task.GetSpeakerSearchTaskInput, options: get_speaker_search_task.Options) !get_speaker_search_task.GetSpeakerSearchTaskOutput {
+    pub fn getSpeakerSearchTask(self: *Self, allocator: std.mem.Allocator, input: get_speaker_search_task.GetSpeakerSearchTaskInput, options: CallOptions) !get_speaker_search_task.GetSpeakerSearchTaskOutput {
         return get_speaker_search_task.execute(self, allocator, input, options);
     }
 
     /// Retrieves details for the specified Amazon Chime SDK Voice Connector, such
     /// as
     /// timestamps,name, outbound host, and encryption requirements.
-    pub fn getVoiceConnector(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector.GetVoiceConnectorInput, options: get_voice_connector.Options) !get_voice_connector.GetVoiceConnectorOutput {
+    pub fn getVoiceConnector(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector.GetVoiceConnectorInput, options: CallOptions) !get_voice_connector.GetVoiceConnectorOutput {
         return get_voice_connector.execute(self, allocator, input, options);
     }
 
     /// Retrieves the emergency calling configuration details for the specified
     /// Voice Connector.
-    pub fn getVoiceConnectorEmergencyCallingConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_emergency_calling_configuration.GetVoiceConnectorEmergencyCallingConfigurationInput, options: get_voice_connector_emergency_calling_configuration.Options) !get_voice_connector_emergency_calling_configuration.GetVoiceConnectorEmergencyCallingConfigurationOutput {
+    pub fn getVoiceConnectorEmergencyCallingConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_emergency_calling_configuration.GetVoiceConnectorEmergencyCallingConfigurationInput, options: CallOptions) !get_voice_connector_emergency_calling_configuration.GetVoiceConnectorEmergencyCallingConfigurationOutput {
         return get_voice_connector_emergency_calling_configuration.execute(self, allocator, input, options);
     }
 
     /// Gets information about an external systems configuration for a Voice
     /// Connector.
-    pub fn getVoiceConnectorExternalSystemsConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_external_systems_configuration.GetVoiceConnectorExternalSystemsConfigurationInput, options: get_voice_connector_external_systems_configuration.Options) !get_voice_connector_external_systems_configuration.GetVoiceConnectorExternalSystemsConfigurationOutput {
+    pub fn getVoiceConnectorExternalSystemsConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_external_systems_configuration.GetVoiceConnectorExternalSystemsConfigurationInput, options: CallOptions) !get_voice_connector_external_systems_configuration.GetVoiceConnectorExternalSystemsConfigurationOutput {
         return get_voice_connector_external_systems_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves details for the specified Amazon Chime SDK Voice Connector group,
     /// such as timestamps,name, and associated `VoiceConnectorItems`.
-    pub fn getVoiceConnectorGroup(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_group.GetVoiceConnectorGroupInput, options: get_voice_connector_group.Options) !get_voice_connector_group.GetVoiceConnectorGroupOutput {
+    pub fn getVoiceConnectorGroup(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_group.GetVoiceConnectorGroupInput, options: CallOptions) !get_voice_connector_group.GetVoiceConnectorGroupOutput {
         return get_voice_connector_group.execute(self, allocator, input, options);
     }
 
@@ -463,19 +464,19 @@ pub const Client = struct {
     /// Connector.
     /// Shows whether SIP message logs are enabled for sending to Amazon CloudWatch
     /// Logs.
-    pub fn getVoiceConnectorLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_logging_configuration.GetVoiceConnectorLoggingConfigurationInput, options: get_voice_connector_logging_configuration.Options) !get_voice_connector_logging_configuration.GetVoiceConnectorLoggingConfigurationOutput {
+    pub fn getVoiceConnectorLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_logging_configuration.GetVoiceConnectorLoggingConfigurationInput, options: CallOptions) !get_voice_connector_logging_configuration.GetVoiceConnectorLoggingConfigurationOutput {
         return get_voice_connector_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves the origination settings for the specified Voice Connector.
-    pub fn getVoiceConnectorOrigination(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_origination.GetVoiceConnectorOriginationInput, options: get_voice_connector_origination.Options) !get_voice_connector_origination.GetVoiceConnectorOriginationOutput {
+    pub fn getVoiceConnectorOrigination(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_origination.GetVoiceConnectorOriginationInput, options: CallOptions) !get_voice_connector_origination.GetVoiceConnectorOriginationOutput {
         return get_voice_connector_origination.execute(self, allocator, input, options);
     }
 
     /// Retrieves the proxy configuration details for the specified Amazon Chime SDK
     /// Voice
     /// Connector.
-    pub fn getVoiceConnectorProxy(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_proxy.GetVoiceConnectorProxyInput, options: get_voice_connector_proxy.Options) !get_voice_connector_proxy.GetVoiceConnectorProxyOutput {
+    pub fn getVoiceConnectorProxy(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_proxy.GetVoiceConnectorProxyInput, options: CallOptions) !get_voice_connector_proxy.GetVoiceConnectorProxyOutput {
         return get_voice_connector_proxy.execute(self, allocator, input, options);
     }
 
@@ -485,12 +486,12 @@ pub const Client = struct {
     /// Amazon
     /// Kinesis. It also shows the retention period, in hours, for the Amazon
     /// Kinesis data.
-    pub fn getVoiceConnectorStreamingConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_streaming_configuration.GetVoiceConnectorStreamingConfigurationInput, options: get_voice_connector_streaming_configuration.Options) !get_voice_connector_streaming_configuration.GetVoiceConnectorStreamingConfigurationOutput {
+    pub fn getVoiceConnectorStreamingConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_streaming_configuration.GetVoiceConnectorStreamingConfigurationInput, options: CallOptions) !get_voice_connector_streaming_configuration.GetVoiceConnectorStreamingConfigurationOutput {
         return get_voice_connector_streaming_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves the termination setting details for the specified Voice Connector.
-    pub fn getVoiceConnectorTermination(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_termination.GetVoiceConnectorTerminationInput, options: get_voice_connector_termination.Options) !get_voice_connector_termination.GetVoiceConnectorTerminationOutput {
+    pub fn getVoiceConnectorTermination(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_termination.GetVoiceConnectorTerminationInput, options: CallOptions) !get_voice_connector_termination.GetVoiceConnectorTerminationOutput {
         return get_voice_connector_termination.execute(self, allocator, input, options);
     }
 
@@ -498,33 +499,33 @@ pub const Client = struct {
     /// was received from your SIP infrastructure for the specified Amazon Chime SDK
     /// Voice
     /// Connector.
-    pub fn getVoiceConnectorTerminationHealth(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_termination_health.GetVoiceConnectorTerminationHealthInput, options: get_voice_connector_termination_health.Options) !get_voice_connector_termination_health.GetVoiceConnectorTerminationHealthOutput {
+    pub fn getVoiceConnectorTerminationHealth(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_termination_health.GetVoiceConnectorTerminationHealthInput, options: CallOptions) !get_voice_connector_termination_health.GetVoiceConnectorTerminationHealthOutput {
         return get_voice_connector_termination_health.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details of the specified voice profile.
-    pub fn getVoiceProfile(self: *Self, allocator: std.mem.Allocator, input: get_voice_profile.GetVoiceProfileInput, options: get_voice_profile.Options) !get_voice_profile.GetVoiceProfileOutput {
+    pub fn getVoiceProfile(self: *Self, allocator: std.mem.Allocator, input: get_voice_profile.GetVoiceProfileInput, options: CallOptions) !get_voice_profile.GetVoiceProfileOutput {
         return get_voice_profile.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details of the specified voice profile domain.
-    pub fn getVoiceProfileDomain(self: *Self, allocator: std.mem.Allocator, input: get_voice_profile_domain.GetVoiceProfileDomainInput, options: get_voice_profile_domain.Options) !get_voice_profile_domain.GetVoiceProfileDomainOutput {
+    pub fn getVoiceProfileDomain(self: *Self, allocator: std.mem.Allocator, input: get_voice_profile_domain.GetVoiceProfileDomainInput, options: CallOptions) !get_voice_profile_domain.GetVoiceProfileDomainOutput {
         return get_voice_profile_domain.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details of a voice tone analysis task.
-    pub fn getVoiceToneAnalysisTask(self: *Self, allocator: std.mem.Allocator, input: get_voice_tone_analysis_task.GetVoiceToneAnalysisTaskInput, options: get_voice_tone_analysis_task.Options) !get_voice_tone_analysis_task.GetVoiceToneAnalysisTaskOutput {
+    pub fn getVoiceToneAnalysisTask(self: *Self, allocator: std.mem.Allocator, input: get_voice_tone_analysis_task.GetVoiceToneAnalysisTaskInput, options: CallOptions) !get_voice_tone_analysis_task.GetVoiceToneAnalysisTaskOutput {
         return get_voice_tone_analysis_task.execute(self, allocator, input, options);
     }
 
     /// Lists the available AWS Regions in which you can create an Amazon Chime SDK
     /// Voice Connector.
-    pub fn listAvailableVoiceConnectorRegions(self: *Self, allocator: std.mem.Allocator, input: list_available_voice_connector_regions.ListAvailableVoiceConnectorRegionsInput, options: list_available_voice_connector_regions.Options) !list_available_voice_connector_regions.ListAvailableVoiceConnectorRegionsOutput {
+    pub fn listAvailableVoiceConnectorRegions(self: *Self, allocator: std.mem.Allocator, input: list_available_voice_connector_regions.ListAvailableVoiceConnectorRegionsInput, options: CallOptions) !list_available_voice_connector_regions.ListAvailableVoiceConnectorRegionsOutput {
         return list_available_voice_connector_regions.execute(self, allocator, input, options);
     }
 
     /// Lists the phone numbers for an administrator's Amazon Chime SDK account.
-    pub fn listPhoneNumberOrders(self: *Self, allocator: std.mem.Allocator, input: list_phone_number_orders.ListPhoneNumberOrdersInput, options: list_phone_number_orders.Options) !list_phone_number_orders.ListPhoneNumberOrdersOutput {
+    pub fn listPhoneNumberOrders(self: *Self, allocator: std.mem.Allocator, input: list_phone_number_orders.ListPhoneNumberOrdersInput, options: CallOptions) !list_phone_number_orders.ListPhoneNumberOrdersOutput {
         return list_phone_number_orders.execute(self, allocator, input, options);
     }
 
@@ -532,61 +533,61 @@ pub const Client = struct {
     /// Amazon Chime SDK user, Amazon Chime SDK Voice Connector, or Amazon Chime SDK
     /// Voice
     /// Connector group.
-    pub fn listPhoneNumbers(self: *Self, allocator: std.mem.Allocator, input: list_phone_numbers.ListPhoneNumbersInput, options: list_phone_numbers.Options) !list_phone_numbers.ListPhoneNumbersOutput {
+    pub fn listPhoneNumbers(self: *Self, allocator: std.mem.Allocator, input: list_phone_numbers.ListPhoneNumbersInput, options: CallOptions) !list_phone_numbers.ListPhoneNumbersOutput {
         return list_phone_numbers.execute(self, allocator, input, options);
     }
 
     /// Lists the proxy sessions for the specified Amazon Chime SDK Voice Connector.
-    pub fn listProxySessions(self: *Self, allocator: std.mem.Allocator, input: list_proxy_sessions.ListProxySessionsInput, options: list_proxy_sessions.Options) !list_proxy_sessions.ListProxySessionsOutput {
+    pub fn listProxySessions(self: *Self, allocator: std.mem.Allocator, input: list_proxy_sessions.ListProxySessionsInput, options: CallOptions) !list_proxy_sessions.ListProxySessionsOutput {
         return list_proxy_sessions.execute(self, allocator, input, options);
     }
 
     /// Lists the SIP media applications under the administrator's AWS account.
-    pub fn listSipMediaApplications(self: *Self, allocator: std.mem.Allocator, input: list_sip_media_applications.ListSipMediaApplicationsInput, options: list_sip_media_applications.Options) !list_sip_media_applications.ListSipMediaApplicationsOutput {
+    pub fn listSipMediaApplications(self: *Self, allocator: std.mem.Allocator, input: list_sip_media_applications.ListSipMediaApplicationsInput, options: CallOptions) !list_sip_media_applications.ListSipMediaApplicationsOutput {
         return list_sip_media_applications.execute(self, allocator, input, options);
     }
 
     /// Lists the SIP rules under the administrator's AWS account.
-    pub fn listSipRules(self: *Self, allocator: std.mem.Allocator, input: list_sip_rules.ListSipRulesInput, options: list_sip_rules.Options) !list_sip_rules.ListSipRulesOutput {
+    pub fn listSipRules(self: *Self, allocator: std.mem.Allocator, input: list_sip_rules.ListSipRulesInput, options: CallOptions) !list_sip_rules.ListSipRulesOutput {
         return list_sip_rules.execute(self, allocator, input, options);
     }
 
     /// Lists the countries that you can order phone numbers from.
-    pub fn listSupportedPhoneNumberCountries(self: *Self, allocator: std.mem.Allocator, input: list_supported_phone_number_countries.ListSupportedPhoneNumberCountriesInput, options: list_supported_phone_number_countries.Options) !list_supported_phone_number_countries.ListSupportedPhoneNumberCountriesOutput {
+    pub fn listSupportedPhoneNumberCountries(self: *Self, allocator: std.mem.Allocator, input: list_supported_phone_number_countries.ListSupportedPhoneNumberCountriesInput, options: CallOptions) !list_supported_phone_number_countries.ListSupportedPhoneNumberCountriesOutput {
         return list_supported_phone_number_countries.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the tags in a given resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists the Amazon Chime SDK Voice Connector groups in the administrator's AWS
     /// account.
-    pub fn listVoiceConnectorGroups(self: *Self, allocator: std.mem.Allocator, input: list_voice_connector_groups.ListVoiceConnectorGroupsInput, options: list_voice_connector_groups.Options) !list_voice_connector_groups.ListVoiceConnectorGroupsOutput {
+    pub fn listVoiceConnectorGroups(self: *Self, allocator: std.mem.Allocator, input: list_voice_connector_groups.ListVoiceConnectorGroupsInput, options: CallOptions) !list_voice_connector_groups.ListVoiceConnectorGroupsOutput {
         return list_voice_connector_groups.execute(self, allocator, input, options);
     }
 
     /// Lists the SIP credentials for the specified Amazon Chime SDK Voice
     /// Connector.
-    pub fn listVoiceConnectorTerminationCredentials(self: *Self, allocator: std.mem.Allocator, input: list_voice_connector_termination_credentials.ListVoiceConnectorTerminationCredentialsInput, options: list_voice_connector_termination_credentials.Options) !list_voice_connector_termination_credentials.ListVoiceConnectorTerminationCredentialsOutput {
+    pub fn listVoiceConnectorTerminationCredentials(self: *Self, allocator: std.mem.Allocator, input: list_voice_connector_termination_credentials.ListVoiceConnectorTerminationCredentialsInput, options: CallOptions) !list_voice_connector_termination_credentials.ListVoiceConnectorTerminationCredentialsOutput {
         return list_voice_connector_termination_credentials.execute(self, allocator, input, options);
     }
 
     /// Lists the Amazon Chime SDK Voice Connectors in the administrators
     /// AWS account.
-    pub fn listVoiceConnectors(self: *Self, allocator: std.mem.Allocator, input: list_voice_connectors.ListVoiceConnectorsInput, options: list_voice_connectors.Options) !list_voice_connectors.ListVoiceConnectorsOutput {
+    pub fn listVoiceConnectors(self: *Self, allocator: std.mem.Allocator, input: list_voice_connectors.ListVoiceConnectorsInput, options: CallOptions) !list_voice_connectors.ListVoiceConnectorsOutput {
         return list_voice_connectors.execute(self, allocator, input, options);
     }
 
     /// Lists the specified voice profile domains in the administrator's AWS
     /// account.
-    pub fn listVoiceProfileDomains(self: *Self, allocator: std.mem.Allocator, input: list_voice_profile_domains.ListVoiceProfileDomainsInput, options: list_voice_profile_domains.Options) !list_voice_profile_domains.ListVoiceProfileDomainsOutput {
+    pub fn listVoiceProfileDomains(self: *Self, allocator: std.mem.Allocator, input: list_voice_profile_domains.ListVoiceProfileDomainsInput, options: CallOptions) !list_voice_profile_domains.ListVoiceProfileDomainsOutput {
         return list_voice_profile_domains.execute(self, allocator, input, options);
     }
 
     /// Lists the voice profiles in a voice profile domain.
-    pub fn listVoiceProfiles(self: *Self, allocator: std.mem.Allocator, input: list_voice_profiles.ListVoiceProfilesInput, options: list_voice_profiles.Options) !list_voice_profiles.ListVoiceProfilesOutput {
+    pub fn listVoiceProfiles(self: *Self, allocator: std.mem.Allocator, input: list_voice_profiles.ListVoiceProfilesInput, options: CallOptions) !list_voice_profiles.ListVoiceProfilesOutput {
         return list_voice_profiles.execute(self, allocator, input, options);
     }
 
@@ -597,63 +598,63 @@ pub const Client = struct {
     /// the [Alexa Smart
     /// Properties](https://developer.amazon.com/en-US/alexa/alexasmartproperties)
     /// page.
-    pub fn putSipMediaApplicationAlexaSkillConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_sip_media_application_alexa_skill_configuration.PutSipMediaApplicationAlexaSkillConfigurationInput, options: put_sip_media_application_alexa_skill_configuration.Options) !put_sip_media_application_alexa_skill_configuration.PutSipMediaApplicationAlexaSkillConfigurationOutput {
+    pub fn putSipMediaApplicationAlexaSkillConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_sip_media_application_alexa_skill_configuration.PutSipMediaApplicationAlexaSkillConfigurationInput, options: CallOptions) !put_sip_media_application_alexa_skill_configuration.PutSipMediaApplicationAlexaSkillConfigurationOutput {
         return put_sip_media_application_alexa_skill_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the logging configuration for the specified SIP media application.
-    pub fn putSipMediaApplicationLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_sip_media_application_logging_configuration.PutSipMediaApplicationLoggingConfigurationInput, options: put_sip_media_application_logging_configuration.Options) !put_sip_media_application_logging_configuration.PutSipMediaApplicationLoggingConfigurationOutput {
+    pub fn putSipMediaApplicationLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_sip_media_application_logging_configuration.PutSipMediaApplicationLoggingConfigurationInput, options: CallOptions) !put_sip_media_application_logging_configuration.PutSipMediaApplicationLoggingConfigurationOutput {
         return put_sip_media_application_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates a Voice Connector's emergency calling configuration.
-    pub fn putVoiceConnectorEmergencyCallingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_emergency_calling_configuration.PutVoiceConnectorEmergencyCallingConfigurationInput, options: put_voice_connector_emergency_calling_configuration.Options) !put_voice_connector_emergency_calling_configuration.PutVoiceConnectorEmergencyCallingConfigurationOutput {
+    pub fn putVoiceConnectorEmergencyCallingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_emergency_calling_configuration.PutVoiceConnectorEmergencyCallingConfigurationInput, options: CallOptions) !put_voice_connector_emergency_calling_configuration.PutVoiceConnectorEmergencyCallingConfigurationOutput {
         return put_voice_connector_emergency_calling_configuration.execute(self, allocator, input, options);
     }
 
     /// Adds an external systems configuration to a Voice Connector.
-    pub fn putVoiceConnectorExternalSystemsConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_external_systems_configuration.PutVoiceConnectorExternalSystemsConfigurationInput, options: put_voice_connector_external_systems_configuration.Options) !put_voice_connector_external_systems_configuration.PutVoiceConnectorExternalSystemsConfigurationOutput {
+    pub fn putVoiceConnectorExternalSystemsConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_external_systems_configuration.PutVoiceConnectorExternalSystemsConfigurationInput, options: CallOptions) !put_voice_connector_external_systems_configuration.PutVoiceConnectorExternalSystemsConfigurationOutput {
         return put_voice_connector_external_systems_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates a Voice Connector's logging configuration.
-    pub fn putVoiceConnectorLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_logging_configuration.PutVoiceConnectorLoggingConfigurationInput, options: put_voice_connector_logging_configuration.Options) !put_voice_connector_logging_configuration.PutVoiceConnectorLoggingConfigurationOutput {
+    pub fn putVoiceConnectorLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_logging_configuration.PutVoiceConnectorLoggingConfigurationInput, options: CallOptions) !put_voice_connector_logging_configuration.PutVoiceConnectorLoggingConfigurationOutput {
         return put_voice_connector_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates a Voice Connector's origination settings.
-    pub fn putVoiceConnectorOrigination(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_origination.PutVoiceConnectorOriginationInput, options: put_voice_connector_origination.Options) !put_voice_connector_origination.PutVoiceConnectorOriginationOutput {
+    pub fn putVoiceConnectorOrigination(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_origination.PutVoiceConnectorOriginationInput, options: CallOptions) !put_voice_connector_origination.PutVoiceConnectorOriginationOutput {
         return put_voice_connector_origination.execute(self, allocator, input, options);
     }
 
     /// Puts the specified proxy configuration to the specified Amazon Chime SDK
     /// Voice Connector.
-    pub fn putVoiceConnectorProxy(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_proxy.PutVoiceConnectorProxyInput, options: put_voice_connector_proxy.Options) !put_voice_connector_proxy.PutVoiceConnectorProxyOutput {
+    pub fn putVoiceConnectorProxy(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_proxy.PutVoiceConnectorProxyInput, options: CallOptions) !put_voice_connector_proxy.PutVoiceConnectorProxyOutput {
         return put_voice_connector_proxy.execute(self, allocator, input, options);
     }
 
     /// Updates a Voice Connector's streaming configuration settings.
-    pub fn putVoiceConnectorStreamingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_streaming_configuration.PutVoiceConnectorStreamingConfigurationInput, options: put_voice_connector_streaming_configuration.Options) !put_voice_connector_streaming_configuration.PutVoiceConnectorStreamingConfigurationOutput {
+    pub fn putVoiceConnectorStreamingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_streaming_configuration.PutVoiceConnectorStreamingConfigurationInput, options: CallOptions) !put_voice_connector_streaming_configuration.PutVoiceConnectorStreamingConfigurationOutput {
         return put_voice_connector_streaming_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates a Voice Connector's termination settings.
-    pub fn putVoiceConnectorTermination(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_termination.PutVoiceConnectorTerminationInput, options: put_voice_connector_termination.Options) !put_voice_connector_termination.PutVoiceConnectorTerminationOutput {
+    pub fn putVoiceConnectorTermination(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_termination.PutVoiceConnectorTerminationInput, options: CallOptions) !put_voice_connector_termination.PutVoiceConnectorTerminationOutput {
         return put_voice_connector_termination.execute(self, allocator, input, options);
     }
 
     /// Updates a Voice Connector's termination credentials.
-    pub fn putVoiceConnectorTerminationCredentials(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_termination_credentials.PutVoiceConnectorTerminationCredentialsInput, options: put_voice_connector_termination_credentials.Options) !put_voice_connector_termination_credentials.PutVoiceConnectorTerminationCredentialsOutput {
+    pub fn putVoiceConnectorTerminationCredentials(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_termination_credentials.PutVoiceConnectorTerminationCredentialsInput, options: CallOptions) !put_voice_connector_termination_credentials.PutVoiceConnectorTerminationCredentialsOutput {
         return put_voice_connector_termination_credentials.execute(self, allocator, input, options);
     }
 
     /// Restores a deleted phone number.
-    pub fn restorePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: restore_phone_number.RestorePhoneNumberInput, options: restore_phone_number.Options) !restore_phone_number.RestorePhoneNumberOutput {
+    pub fn restorePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: restore_phone_number.RestorePhoneNumberInput, options: CallOptions) !restore_phone_number.RestorePhoneNumberOutput {
         return restore_phone_number.execute(self, allocator, input, options);
     }
 
     /// Searches the provisioned phone numbers in an organization.
-    pub fn searchAvailablePhoneNumbers(self: *Self, allocator: std.mem.Allocator, input: search_available_phone_numbers.SearchAvailablePhoneNumbersInput, options: search_available_phone_numbers.Options) !search_available_phone_numbers.SearchAvailablePhoneNumbersOutput {
+    pub fn searchAvailablePhoneNumbers(self: *Self, allocator: std.mem.Allocator, input: search_available_phone_numbers.SearchAvailablePhoneNumbersInput, options: CallOptions) !search_available_phone_numbers.SearchAvailablePhoneNumbersOutput {
         return search_available_phone_numbers.execute(self, allocator, input, options);
     }
 
@@ -664,7 +665,7 @@ pub const Client = struct {
     /// and biometrics laws, and as required under the
     /// [AWS service terms](https://aws.amazon.com/service-terms/) for the Amazon
     /// Chime SDK.
-    pub fn startSpeakerSearchTask(self: *Self, allocator: std.mem.Allocator, input: start_speaker_search_task.StartSpeakerSearchTaskInput, options: start_speaker_search_task.Options) !start_speaker_search_task.StartSpeakerSearchTaskOutput {
+    pub fn startSpeakerSearchTask(self: *Self, allocator: std.mem.Allocator, input: start_speaker_search_task.StartSpeakerSearchTaskInput, options: CallOptions) !start_speaker_search_task.StartSpeakerSearchTaskOutput {
         return start_speaker_search_task.execute(self, allocator, input, options);
     }
 
@@ -679,33 +680,33 @@ pub const Client = struct {
     /// privacy and biometrics laws, and as required under the
     /// [AWS service terms](https://aws.amazon.com/service-terms/) for the Amazon
     /// Chime SDK.
-    pub fn startVoiceToneAnalysisTask(self: *Self, allocator: std.mem.Allocator, input: start_voice_tone_analysis_task.StartVoiceToneAnalysisTaskInput, options: start_voice_tone_analysis_task.Options) !start_voice_tone_analysis_task.StartVoiceToneAnalysisTaskOutput {
+    pub fn startVoiceToneAnalysisTask(self: *Self, allocator: std.mem.Allocator, input: start_voice_tone_analysis_task.StartVoiceToneAnalysisTaskInput, options: CallOptions) !start_voice_tone_analysis_task.StartVoiceToneAnalysisTaskOutput {
         return start_voice_tone_analysis_task.execute(self, allocator, input, options);
     }
 
     /// Stops a speaker search task.
-    pub fn stopSpeakerSearchTask(self: *Self, allocator: std.mem.Allocator, input: stop_speaker_search_task.StopSpeakerSearchTaskInput, options: stop_speaker_search_task.Options) !stop_speaker_search_task.StopSpeakerSearchTaskOutput {
+    pub fn stopSpeakerSearchTask(self: *Self, allocator: std.mem.Allocator, input: stop_speaker_search_task.StopSpeakerSearchTaskInput, options: CallOptions) !stop_speaker_search_task.StopSpeakerSearchTaskOutput {
         return stop_speaker_search_task.execute(self, allocator, input, options);
     }
 
     /// Stops a voice tone analysis task.
-    pub fn stopVoiceToneAnalysisTask(self: *Self, allocator: std.mem.Allocator, input: stop_voice_tone_analysis_task.StopVoiceToneAnalysisTaskInput, options: stop_voice_tone_analysis_task.Options) !stop_voice_tone_analysis_task.StopVoiceToneAnalysisTaskOutput {
+    pub fn stopVoiceToneAnalysisTask(self: *Self, allocator: std.mem.Allocator, input: stop_voice_tone_analysis_task.StopVoiceToneAnalysisTaskInput, options: CallOptions) !stop_voice_tone_analysis_task.StopVoiceToneAnalysisTaskOutput {
         return stop_voice_tone_analysis_task.execute(self, allocator, input, options);
     }
 
     /// Adds a tag to the specified resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates global settings for the Amazon Chime SDK Voice Connectors in an AWS
     /// account.
-    pub fn updateGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: update_global_settings.UpdateGlobalSettingsInput, options: update_global_settings.Options) !update_global_settings.UpdateGlobalSettingsOutput {
+    pub fn updateGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: update_global_settings.UpdateGlobalSettingsInput, options: CallOptions) !update_global_settings.UpdateGlobalSettingsOutput {
         return update_global_settings.execute(self, allocator, input, options);
     }
 
@@ -723,7 +724,7 @@ pub const Client = struct {
     /// updates to outbound calling names must be complete before you can request
     /// another
     /// update.
-    pub fn updatePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: update_phone_number.UpdatePhoneNumberInput, options: update_phone_number.Options) !update_phone_number.UpdatePhoneNumberOutput {
+    pub fn updatePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: update_phone_number.UpdatePhoneNumberInput, options: CallOptions) !update_phone_number.UpdatePhoneNumberOutput {
         return update_phone_number.execute(self, allocator, input, options);
     }
 
@@ -733,18 +734,18 @@ pub const Client = struct {
     /// name once every seven days. Outbound calling names can take up to 72 hours
     /// to
     /// update.
-    pub fn updatePhoneNumberSettings(self: *Self, allocator: std.mem.Allocator, input: update_phone_number_settings.UpdatePhoneNumberSettingsInput, options: update_phone_number_settings.Options) !update_phone_number_settings.UpdatePhoneNumberSettingsOutput {
+    pub fn updatePhoneNumberSettings(self: *Self, allocator: std.mem.Allocator, input: update_phone_number_settings.UpdatePhoneNumberSettingsInput, options: CallOptions) !update_phone_number_settings.UpdatePhoneNumberSettingsOutput {
         return update_phone_number_settings.execute(self, allocator, input, options);
     }
 
     /// Updates the specified proxy session details, such as voice or SMS
     /// capabilities.
-    pub fn updateProxySession(self: *Self, allocator: std.mem.Allocator, input: update_proxy_session.UpdateProxySessionInput, options: update_proxy_session.Options) !update_proxy_session.UpdateProxySessionOutput {
+    pub fn updateProxySession(self: *Self, allocator: std.mem.Allocator, input: update_proxy_session.UpdateProxySessionInput, options: CallOptions) !update_proxy_session.UpdateProxySessionOutput {
         return update_proxy_session.execute(self, allocator, input, options);
     }
 
     /// Updates the details of the specified SIP media application.
-    pub fn updateSipMediaApplication(self: *Self, allocator: std.mem.Allocator, input: update_sip_media_application.UpdateSipMediaApplicationInput, options: update_sip_media_application.Options) !update_sip_media_application.UpdateSipMediaApplicationOutput {
+    pub fn updateSipMediaApplication(self: *Self, allocator: std.mem.Allocator, input: update_sip_media_application.UpdateSipMediaApplicationInput, options: CallOptions) !update_sip_media_application.UpdateSipMediaApplicationOutput {
         return update_sip_media_application.execute(self, allocator, input, options);
     }
 
@@ -753,23 +754,23 @@ pub const Client = struct {
     /// transaction ID in an update request. The Lambda function can then return a
     /// new set
     /// of actions.
-    pub fn updateSipMediaApplicationCall(self: *Self, allocator: std.mem.Allocator, input: update_sip_media_application_call.UpdateSipMediaApplicationCallInput, options: update_sip_media_application_call.Options) !update_sip_media_application_call.UpdateSipMediaApplicationCallOutput {
+    pub fn updateSipMediaApplicationCall(self: *Self, allocator: std.mem.Allocator, input: update_sip_media_application_call.UpdateSipMediaApplicationCallInput, options: CallOptions) !update_sip_media_application_call.UpdateSipMediaApplicationCallOutput {
         return update_sip_media_application_call.execute(self, allocator, input, options);
     }
 
     /// Updates the details of the specified SIP rule.
-    pub fn updateSipRule(self: *Self, allocator: std.mem.Allocator, input: update_sip_rule.UpdateSipRuleInput, options: update_sip_rule.Options) !update_sip_rule.UpdateSipRuleOutput {
+    pub fn updateSipRule(self: *Self, allocator: std.mem.Allocator, input: update_sip_rule.UpdateSipRuleInput, options: CallOptions) !update_sip_rule.UpdateSipRuleOutput {
         return update_sip_rule.execute(self, allocator, input, options);
     }
 
     /// Updates the details for the specified Amazon Chime SDK Voice Connector.
-    pub fn updateVoiceConnector(self: *Self, allocator: std.mem.Allocator, input: update_voice_connector.UpdateVoiceConnectorInput, options: update_voice_connector.Options) !update_voice_connector.UpdateVoiceConnectorOutput {
+    pub fn updateVoiceConnector(self: *Self, allocator: std.mem.Allocator, input: update_voice_connector.UpdateVoiceConnectorInput, options: CallOptions) !update_voice_connector.UpdateVoiceConnectorOutput {
         return update_voice_connector.execute(self, allocator, input, options);
     }
 
     /// Updates the settings for the specified Amazon Chime SDK Voice Connector
     /// group.
-    pub fn updateVoiceConnectorGroup(self: *Self, allocator: std.mem.Allocator, input: update_voice_connector_group.UpdateVoiceConnectorGroupInput, options: update_voice_connector_group.Options) !update_voice_connector_group.UpdateVoiceConnectorGroupOutput {
+    pub fn updateVoiceConnectorGroup(self: *Self, allocator: std.mem.Allocator, input: update_voice_connector_group.UpdateVoiceConnectorGroupInput, options: CallOptions) !update_voice_connector_group.UpdateVoiceConnectorGroupOutput {
         return update_voice_connector_group.execute(self, allocator, input, options);
     }
 
@@ -790,12 +791,12 @@ pub const Client = struct {
     /// consent before using Amazon Chime SDK Voice Insights service, as required
     /// under the terms of your agreement
     /// with AWS governing your use of the service.
-    pub fn updateVoiceProfile(self: *Self, allocator: std.mem.Allocator, input: update_voice_profile.UpdateVoiceProfileInput, options: update_voice_profile.Options) !update_voice_profile.UpdateVoiceProfileOutput {
+    pub fn updateVoiceProfile(self: *Self, allocator: std.mem.Allocator, input: update_voice_profile.UpdateVoiceProfileInput, options: CallOptions) !update_voice_profile.UpdateVoiceProfileOutput {
         return update_voice_profile.execute(self, allocator, input, options);
     }
 
     /// Updates the settings for the specified voice profile domain.
-    pub fn updateVoiceProfileDomain(self: *Self, allocator: std.mem.Allocator, input: update_voice_profile_domain.UpdateVoiceProfileDomainInput, options: update_voice_profile_domain.Options) !update_voice_profile_domain.UpdateVoiceProfileDomainOutput {
+    pub fn updateVoiceProfileDomain(self: *Self, allocator: std.mem.Allocator, input: update_voice_profile_domain.UpdateVoiceProfileDomainInput, options: CallOptions) !update_voice_profile_domain.UpdateVoiceProfileDomainOutput {
         return update_voice_profile_domain.execute(self, allocator, input, options);
     }
 
@@ -806,7 +807,7 @@ pub const Client = struct {
     /// Location Object file that you include in SIP requests. That helps ensure
     /// that addresses
     /// are routed to the appropriate Public Safety Answering Point.
-    pub fn validateE911Address(self: *Self, allocator: std.mem.Allocator, input: validate_e911_address.ValidateE911AddressInput, options: validate_e911_address.Options) !validate_e911_address.ValidateE911AddressOutput {
+    pub fn validateE911Address(self: *Self, allocator: std.mem.Allocator, input: validate_e911_address.ValidateE911AddressInput, options: CallOptions) !validate_e911_address.ValidateE911AddressOutput {
         return validate_e911_address.execute(self, allocator, input, options);
     }
 

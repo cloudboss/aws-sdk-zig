@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CustomerManagedPolicyReference = @import("customer_managed_policy_reference.zig").CustomerManagedPolicyReference;
 
@@ -28,11 +29,7 @@ pub const DetachCustomerManagedPolicyReferenceFromPermissionSetInput = struct {
 pub const DetachCustomerManagedPolicyReferenceFromPermissionSetOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DetachCustomerManagedPolicyReferenceFromPermissionSetInput, options: Options) !DetachCustomerManagedPolicyReferenceFromPermissionSetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DetachCustomerManagedPolicyReferenceFromPermissionSetInput, options: CallOptions) !DetachCustomerManagedPolicyReferenceFromPermissionSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

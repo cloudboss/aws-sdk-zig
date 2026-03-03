@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const DBClusterSnapshot = @import("db_cluster_snapshot.zig").DBClusterSnapshot;
@@ -118,11 +119,7 @@ pub const CopyDBClusterSnapshotOutput = struct {
     db_cluster_snapshot: ?DBClusterSnapshot = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CopyDBClusterSnapshotInput, options: Options) !CopyDBClusterSnapshotOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CopyDBClusterSnapshotInput, options: CallOptions) !CopyDBClusterSnapshotOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AssetModelProperty = @import("asset_model_property.zig").AssetModelProperty;
 const AssetModelVersionType = @import("asset_model_version_type.zig").AssetModelVersionType;
@@ -87,11 +88,7 @@ pub const UpdateAssetModelCompositeModelOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAssetModelCompositeModelInput, options: Options) !UpdateAssetModelCompositeModelOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAssetModelCompositeModelInput, options: CallOptions) !UpdateAssetModelCompositeModelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

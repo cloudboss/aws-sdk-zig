@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const JobQueueDetail = @import("job_queue_detail.zig").JobQueueDetail;
 
@@ -56,11 +57,7 @@ pub const DescribeJobQueuesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeJobQueuesInput, options: Options) !DescribeJobQueuesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeJobQueuesInput, options: CallOptions) !DescribeJobQueuesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

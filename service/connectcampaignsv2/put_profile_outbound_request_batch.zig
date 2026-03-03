@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProfileOutboundRequest = @import("profile_outbound_request.zig").ProfileOutboundRequest;
 const FailedProfileOutboundRequest = @import("failed_profile_outbound_request.zig").FailedProfileOutboundRequest;
@@ -29,11 +30,7 @@ pub const PutProfileOutboundRequestBatchOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutProfileOutboundRequestBatchInput, options: Options) !PutProfileOutboundRequestBatchOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutProfileOutboundRequestBatchInput, options: CallOptions) !PutProfileOutboundRequestBatchOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

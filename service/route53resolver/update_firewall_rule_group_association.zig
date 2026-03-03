@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MutationProtectionStatus = @import("mutation_protection_status.zig").MutationProtectionStatus;
 const FirewallRuleGroupAssociation = @import("firewall_rule_group_association.zig").FirewallRuleGroupAssociation;
@@ -49,11 +50,7 @@ pub const UpdateFirewallRuleGroupAssociationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFirewallRuleGroupAssociationInput, options: Options) !UpdateFirewallRuleGroupAssociationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFirewallRuleGroupAssociationInput, options: CallOptions) !UpdateFirewallRuleGroupAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

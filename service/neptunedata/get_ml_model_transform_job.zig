@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MlResourceDefinition = @import("ml_resource_definition.zig").MlResourceDefinition;
 const MlConfigDefinition = @import("ml_config_definition.zig").MlConfigDefinition;
@@ -46,11 +47,7 @@ pub const GetMLModelTransformJobOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetMLModelTransformJobInput, options: Options) !GetMLModelTransformJobOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetMLModelTransformJobInput, options: CallOptions) !GetMLModelTransformJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

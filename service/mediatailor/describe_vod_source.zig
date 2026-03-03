@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AdBreakOpportunity = @import("ad_break_opportunity.zig").AdBreakOpportunity;
 const HttpPackageConfiguration = @import("http_package_configuration.zig").HttpPackageConfiguration;
@@ -60,11 +61,7 @@ pub const DescribeVodSourceOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeVodSourceInput, options: Options) !DescribeVodSourceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeVodSourceInput, options: CallOptions) !DescribeVodSourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

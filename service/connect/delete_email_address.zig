@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteEmailAddressInput = struct {
@@ -21,11 +22,7 @@ pub const DeleteEmailAddressInput = struct {
 pub const DeleteEmailAddressOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteEmailAddressInput, options: Options) !DeleteEmailAddressOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteEmailAddressInput, options: CallOptions) !DeleteEmailAddressOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

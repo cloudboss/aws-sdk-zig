@@ -142,6 +142,7 @@ const revoke_endpoint_access = @import("revoke_endpoint_access.zig");
 const revoke_snapshot_access = @import("revoke_snapshot_access.zig");
 const rotate_encryption_key = @import("rotate_encryption_key.zig");
 const update_partner_status = @import("update_partner_status.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -176,7 +177,7 @@ pub const Client = struct {
     /// Exchanges a DC1 Reserved Node for a DC2 Reserved Node with no changes to the
     /// configuration (term, payment type, or number of nodes) and no additional
     /// costs.
-    pub fn acceptReservedNodeExchange(self: *Self, allocator: std.mem.Allocator, input: accept_reserved_node_exchange.AcceptReservedNodeExchangeInput, options: accept_reserved_node_exchange.Options) !accept_reserved_node_exchange.AcceptReservedNodeExchangeOutput {
+    pub fn acceptReservedNodeExchange(self: *Self, allocator: std.mem.Allocator, input: accept_reserved_node_exchange.AcceptReservedNodeExchangeInput, options: CallOptions) !accept_reserved_node_exchange.AcceptReservedNodeExchangeOutput {
         return accept_reserved_node_exchange.execute(self, allocator, input, options);
     }
 
@@ -185,7 +186,7 @@ pub const Client = struct {
     /// database.
     /// To complete the integration, you also set up the integration on the partner
     /// website.
-    pub fn addPartner(self: *Self, allocator: std.mem.Allocator, input: add_partner.AddPartnerInput, options: add_partner.Options) !add_partner.AddPartnerOutput {
+    pub fn addPartner(self: *Self, allocator: std.mem.Allocator, input: add_partner.AddPartnerInput, options: CallOptions) !add_partner.AddPartnerOutput {
         return add_partner.execute(self, allocator, input, options);
     }
 
@@ -193,7 +194,7 @@ pub const Client = struct {
     /// account (AssociateEntireAccount) or the specified namespace (ConsumerArn).
     /// If you make this association, the consumer
     /// can consume the datashare.
-    pub fn associateDataShareConsumer(self: *Self, allocator: std.mem.Allocator, input: associate_data_share_consumer.AssociateDataShareConsumerInput, options: associate_data_share_consumer.Options) !associate_data_share_consumer.AssociateDataShareConsumerOutput {
+    pub fn associateDataShareConsumer(self: *Self, allocator: std.mem.Allocator, input: associate_data_share_consumer.AssociateDataShareConsumerInput, options: CallOptions) !associate_data_share_consumer.AssociateDataShareConsumerOutput {
         return associate_data_share_consumer.execute(self, allocator, input, options);
     }
 
@@ -223,7 +224,7 @@ pub const Client = struct {
     /// cluster. For
     /// information about managing security groups, go to [Working with Security
     /// Groups](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html) in the *Amazon Redshift Cluster Management Guide*.
-    pub fn authorizeClusterSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: authorize_cluster_security_group_ingress.AuthorizeClusterSecurityGroupIngressInput, options: authorize_cluster_security_group_ingress.Options) !authorize_cluster_security_group_ingress.AuthorizeClusterSecurityGroupIngressOutput {
+    pub fn authorizeClusterSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: authorize_cluster_security_group_ingress.AuthorizeClusterSecurityGroupIngressInput, options: CallOptions) !authorize_cluster_security_group_ingress.AuthorizeClusterSecurityGroupIngressOutput {
         return authorize_cluster_security_group_ingress.execute(self, allocator, input, options);
     }
 
@@ -232,12 +233,12 @@ pub const Client = struct {
     /// consumer accounts or managing entities. To authorize a datashare for a data
     /// consumer,
     /// the producer account must have the correct access permissions.
-    pub fn authorizeDataShare(self: *Self, allocator: std.mem.Allocator, input: authorize_data_share.AuthorizeDataShareInput, options: authorize_data_share.Options) !authorize_data_share.AuthorizeDataShareOutput {
+    pub fn authorizeDataShare(self: *Self, allocator: std.mem.Allocator, input: authorize_data_share.AuthorizeDataShareInput, options: CallOptions) !authorize_data_share.AuthorizeDataShareOutput {
         return authorize_data_share.execute(self, allocator, input, options);
     }
 
     /// Grants access to a cluster.
-    pub fn authorizeEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: authorize_endpoint_access.AuthorizeEndpointAccessInput, options: authorize_endpoint_access.Options) !authorize_endpoint_access.AuthorizeEndpointAccessOutput {
+    pub fn authorizeEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: authorize_endpoint_access.AuthorizeEndpointAccessInput, options: CallOptions) !authorize_endpoint_access.AuthorizeEndpointAccessOutput {
         return authorize_endpoint_access.execute(self, allocator, input, options);
     }
 
@@ -249,22 +250,22 @@ pub const Client = struct {
     /// [Amazon Redshift
     /// Snapshots](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn authorizeSnapshotAccess(self: *Self, allocator: std.mem.Allocator, input: authorize_snapshot_access.AuthorizeSnapshotAccessInput, options: authorize_snapshot_access.Options) !authorize_snapshot_access.AuthorizeSnapshotAccessOutput {
+    pub fn authorizeSnapshotAccess(self: *Self, allocator: std.mem.Allocator, input: authorize_snapshot_access.AuthorizeSnapshotAccessInput, options: CallOptions) !authorize_snapshot_access.AuthorizeSnapshotAccessOutput {
         return authorize_snapshot_access.execute(self, allocator, input, options);
     }
 
     /// Deletes a set of cluster snapshots.
-    pub fn batchDeleteClusterSnapshots(self: *Self, allocator: std.mem.Allocator, input: batch_delete_cluster_snapshots.BatchDeleteClusterSnapshotsInput, options: batch_delete_cluster_snapshots.Options) !batch_delete_cluster_snapshots.BatchDeleteClusterSnapshotsOutput {
+    pub fn batchDeleteClusterSnapshots(self: *Self, allocator: std.mem.Allocator, input: batch_delete_cluster_snapshots.BatchDeleteClusterSnapshotsInput, options: CallOptions) !batch_delete_cluster_snapshots.BatchDeleteClusterSnapshotsOutput {
         return batch_delete_cluster_snapshots.execute(self, allocator, input, options);
     }
 
     /// Modifies the settings for a set of cluster snapshots.
-    pub fn batchModifyClusterSnapshots(self: *Self, allocator: std.mem.Allocator, input: batch_modify_cluster_snapshots.BatchModifyClusterSnapshotsInput, options: batch_modify_cluster_snapshots.Options) !batch_modify_cluster_snapshots.BatchModifyClusterSnapshotsOutput {
+    pub fn batchModifyClusterSnapshots(self: *Self, allocator: std.mem.Allocator, input: batch_modify_cluster_snapshots.BatchModifyClusterSnapshotsInput, options: CallOptions) !batch_modify_cluster_snapshots.BatchModifyClusterSnapshotsOutput {
         return batch_modify_cluster_snapshots.execute(self, allocator, input, options);
     }
 
     /// Cancels a resize operation for a cluster.
-    pub fn cancelResize(self: *Self, allocator: std.mem.Allocator, input: cancel_resize.CancelResizeInput, options: cancel_resize.Options) !cancel_resize.CancelResizeOutput {
+    pub fn cancelResize(self: *Self, allocator: std.mem.Allocator, input: cancel_resize.CancelResizeInput, options: CallOptions) !cancel_resize.CancelResizeOutput {
         return cancel_resize.execute(self, allocator, input, options);
     }
 
@@ -287,12 +288,12 @@ pub const Client = struct {
     /// [Amazon Redshift
     /// Snapshots](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn copyClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_cluster_snapshot.CopyClusterSnapshotInput, options: copy_cluster_snapshot.Options) !copy_cluster_snapshot.CopyClusterSnapshotOutput {
+    pub fn copyClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_cluster_snapshot.CopyClusterSnapshotInput, options: CallOptions) !copy_cluster_snapshot.CopyClusterSnapshotOutput {
         return copy_cluster_snapshot.execute(self, allocator, input, options);
     }
 
     /// Creates an authentication profile with the specified parameters.
-    pub fn createAuthenticationProfile(self: *Self, allocator: std.mem.Allocator, input: create_authentication_profile.CreateAuthenticationProfileInput, options: create_authentication_profile.Options) !create_authentication_profile.CreateAuthenticationProfileOutput {
+    pub fn createAuthenticationProfile(self: *Self, allocator: std.mem.Allocator, input: create_authentication_profile.CreateAuthenticationProfileInput, options: CallOptions) !create_authentication_profile.CreateAuthenticationProfileOutput {
         return create_authentication_profile.execute(self, allocator, input, options);
     }
 
@@ -328,7 +329,7 @@ pub const Client = struct {
     ///
     /// For more information about VPC BPA, see [Block public access to VPCs and
     /// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html) in the *Amazon VPC User Guide*.
-    pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: create_cluster.Options) !create_cluster.CreateClusterOutput {
+    pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: CallOptions) !create_cluster.CreateClusterOutput {
         return create_cluster.execute(self, allocator, input, options);
     }
 
@@ -348,7 +349,7 @@ pub const Client = struct {
     /// [Amazon Redshift Parameter
     /// Groups](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn createClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: create_cluster_parameter_group.CreateClusterParameterGroupInput, options: create_cluster_parameter_group.Options) !create_cluster_parameter_group.CreateClusterParameterGroupOutput {
+    pub fn createClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: create_cluster_parameter_group.CreateClusterParameterGroupInput, options: CallOptions) !create_cluster_parameter_group.CreateClusterParameterGroupOutput {
         return create_cluster_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -360,7 +361,7 @@ pub const Client = struct {
     /// [Amazon Redshift Cluster Security
     /// Groups](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html) in the
     /// *Amazon Redshift Cluster Management Guide*.
-    pub fn createClusterSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: create_cluster_security_group.CreateClusterSecurityGroupInput, options: create_cluster_security_group.Options) !create_cluster_security_group.CreateClusterSecurityGroupOutput {
+    pub fn createClusterSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: create_cluster_security_group.CreateClusterSecurityGroupInput, options: CallOptions) !create_cluster_security_group.CreateClusterSecurityGroupOutput {
         return create_cluster_security_group.execute(self, allocator, input, options);
     }
 
@@ -372,7 +373,7 @@ pub const Client = struct {
     /// [Amazon Redshift
     /// Snapshots](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn createClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_cluster_snapshot.CreateClusterSnapshotInput, options: create_cluster_snapshot.Options) !create_cluster_snapshot.CreateClusterSnapshotOutput {
+    pub fn createClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_cluster_snapshot.CreateClusterSnapshotInput, options: CallOptions) !create_cluster_snapshot.CreateClusterSnapshotOutput {
         return create_cluster_snapshot.execute(self, allocator, input, options);
     }
 
@@ -386,7 +387,7 @@ pub const Client = struct {
     /// [Amazon Redshift Cluster Subnet
     /// Groups](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html) in the
     /// *Amazon Redshift Cluster Management Guide*.
-    pub fn createClusterSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: create_cluster_subnet_group.CreateClusterSubnetGroupInput, options: create_cluster_subnet_group.Options) !create_cluster_subnet_group.CreateClusterSubnetGroupOutput {
+    pub fn createClusterSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: create_cluster_subnet_group.CreateClusterSubnetGroupInput, options: CallOptions) !create_cluster_subnet_group.CreateClusterSubnetGroupOutput {
         return create_cluster_subnet_group.execute(self, allocator, input, options);
     }
 
@@ -394,12 +395,12 @@ pub const Client = struct {
     /// custom domain name, the
     /// cluster the custom domain is associated with, and the certificate Amazon
     /// Resource Name (ARN).
-    pub fn createCustomDomainAssociation(self: *Self, allocator: std.mem.Allocator, input: create_custom_domain_association.CreateCustomDomainAssociationInput, options: create_custom_domain_association.Options) !create_custom_domain_association.CreateCustomDomainAssociationOutput {
+    pub fn createCustomDomainAssociation(self: *Self, allocator: std.mem.Allocator, input: create_custom_domain_association.CreateCustomDomainAssociationInput, options: CallOptions) !create_custom_domain_association.CreateCustomDomainAssociationOutput {
         return create_custom_domain_association.execute(self, allocator, input, options);
     }
 
     /// Creates a Redshift-managed VPC endpoint.
-    pub fn createEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: create_endpoint_access.CreateEndpointAccessInput, options: create_endpoint_access.Options) !create_endpoint_access.CreateEndpointAccessOutput {
+    pub fn createEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: create_endpoint_access.CreateEndpointAccessInput, options: CallOptions) !create_endpoint_access.CreateEndpointAccessOutput {
         return create_endpoint_access.execute(self, allocator, input, options);
     }
 
@@ -438,7 +439,7 @@ pub const Client = struct {
     /// will be notified of events generated from all Amazon Redshift sources
     /// belonging to your Amazon Web Services account. You must specify a source
     /// type if you specify a source ID.
-    pub fn createEventSubscription(self: *Self, allocator: std.mem.Allocator, input: create_event_subscription.CreateEventSubscriptionInput, options: create_event_subscription.Options) !create_event_subscription.CreateEventSubscriptionOutput {
+    pub fn createEventSubscription(self: *Self, allocator: std.mem.Allocator, input: create_event_subscription.CreateEventSubscriptionInput, options: CallOptions) !create_event_subscription.CreateEventSubscriptionOutput {
         return create_event_subscription.execute(self, allocator, input, options);
     }
 
@@ -457,7 +458,7 @@ pub const Client = struct {
     /// For more information, go to [Hardware Security
     /// Modules](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html#working-with-HSM)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn createHsmClientCertificate(self: *Self, allocator: std.mem.Allocator, input: create_hsm_client_certificate.CreateHsmClientCertificateInput, options: create_hsm_client_certificate.Options) !create_hsm_client_certificate.CreateHsmClientCertificateOutput {
+    pub fn createHsmClientCertificate(self: *Self, allocator: std.mem.Allocator, input: create_hsm_client_certificate.CreateHsmClientCertificateInput, options: CallOptions) !create_hsm_client_certificate.CreateHsmClientCertificateOutput {
         return create_hsm_client_certificate.execute(self, allocator, input, options);
     }
 
@@ -474,17 +475,17 @@ pub const Client = struct {
     /// certificate. For more information, go to [Hardware Security
     /// Modules](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html)
     /// in the Amazon Redshift Cluster Management Guide.
-    pub fn createHsmConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_hsm_configuration.CreateHsmConfigurationInput, options: create_hsm_configuration.Options) !create_hsm_configuration.CreateHsmConfigurationOutput {
+    pub fn createHsmConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_hsm_configuration.CreateHsmConfigurationInput, options: CallOptions) !create_hsm_configuration.CreateHsmConfigurationOutput {
         return create_hsm_configuration.execute(self, allocator, input, options);
     }
 
     /// Creates a zero-ETL integration or S3 event integration with Amazon Redshift.
-    pub fn createIntegration(self: *Self, allocator: std.mem.Allocator, input: create_integration.CreateIntegrationInput, options: create_integration.Options) !create_integration.CreateIntegrationOutput {
+    pub fn createIntegration(self: *Self, allocator: std.mem.Allocator, input: create_integration.CreateIntegrationInput, options: CallOptions) !create_integration.CreateIntegrationOutput {
         return create_integration.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon Redshift application for use with IAM Identity Center.
-    pub fn createRedshiftIdcApplication(self: *Self, allocator: std.mem.Allocator, input: create_redshift_idc_application.CreateRedshiftIdcApplicationInput, options: create_redshift_idc_application.Options) !create_redshift_idc_application.CreateRedshiftIdcApplicationOutput {
+    pub fn createRedshiftIdcApplication(self: *Self, allocator: std.mem.Allocator, input: create_redshift_idc_application.CreateRedshiftIdcApplicationInput, options: CallOptions) !create_redshift_idc_application.CreateRedshiftIdcApplicationOutput {
         return create_redshift_idc_application.execute(self, allocator, input, options);
     }
 
@@ -492,7 +493,7 @@ pub const Client = struct {
     /// Amazon Redshift API action.
     /// For example, you can create a schedule of when to run the `ResizeCluster`
     /// API operation.
-    pub fn createScheduledAction(self: *Self, allocator: std.mem.Allocator, input: create_scheduled_action.CreateScheduledActionInput, options: create_scheduled_action.Options) !create_scheduled_action.CreateScheduledActionOutput {
+    pub fn createScheduledAction(self: *Self, allocator: std.mem.Allocator, input: create_scheduled_action.CreateScheduledActionInput, options: CallOptions) !create_scheduled_action.CreateScheduledActionOutput {
         return create_scheduled_action.execute(self, allocator, input, options);
     }
 
@@ -505,13 +506,13 @@ pub const Client = struct {
     /// [Amazon Redshift Database
     /// Encryption](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn createSnapshotCopyGrant(self: *Self, allocator: std.mem.Allocator, input: create_snapshot_copy_grant.CreateSnapshotCopyGrantInput, options: create_snapshot_copy_grant.Options) !create_snapshot_copy_grant.CreateSnapshotCopyGrantOutput {
+    pub fn createSnapshotCopyGrant(self: *Self, allocator: std.mem.Allocator, input: create_snapshot_copy_grant.CreateSnapshotCopyGrantInput, options: CallOptions) !create_snapshot_copy_grant.CreateSnapshotCopyGrantOutput {
         return create_snapshot_copy_grant.execute(self, allocator, input, options);
     }
 
     /// Create a snapshot schedule that can be associated to a cluster and which
     /// overrides the default system backup schedule.
-    pub fn createSnapshotSchedule(self: *Self, allocator: std.mem.Allocator, input: create_snapshot_schedule.CreateSnapshotScheduleInput, options: create_snapshot_schedule.Options) !create_snapshot_schedule.CreateSnapshotScheduleOutput {
+    pub fn createSnapshotSchedule(self: *Self, allocator: std.mem.Allocator, input: create_snapshot_schedule.CreateSnapshotScheduleInput, options: CallOptions) !create_snapshot_schedule.CreateSnapshotScheduleOutput {
         return create_snapshot_schedule.execute(self, allocator, input, options);
     }
 
@@ -524,24 +525,24 @@ pub const Client = struct {
     /// If you specify a key that already exists for the resource, the value for
     /// that key
     /// will be updated with the new value.
-    pub fn createTags(self: *Self, allocator: std.mem.Allocator, input: create_tags.CreateTagsInput, options: create_tags.Options) !create_tags.CreateTagsOutput {
+    pub fn createTags(self: *Self, allocator: std.mem.Allocator, input: create_tags.CreateTagsInput, options: CallOptions) !create_tags.CreateTagsOutput {
         return create_tags.execute(self, allocator, input, options);
     }
 
     /// Creates a usage limit for a specified Amazon Redshift feature on a cluster.
     /// The usage limit is identified by the returned usage limit identifier.
-    pub fn createUsageLimit(self: *Self, allocator: std.mem.Allocator, input: create_usage_limit.CreateUsageLimitInput, options: create_usage_limit.Options) !create_usage_limit.CreateUsageLimitOutput {
+    pub fn createUsageLimit(self: *Self, allocator: std.mem.Allocator, input: create_usage_limit.CreateUsageLimitInput, options: CallOptions) !create_usage_limit.CreateUsageLimitOutput {
         return create_usage_limit.execute(self, allocator, input, options);
     }
 
     /// From a datashare producer account, removes authorization from the specified
     /// datashare.
-    pub fn deauthorizeDataShare(self: *Self, allocator: std.mem.Allocator, input: deauthorize_data_share.DeauthorizeDataShareInput, options: deauthorize_data_share.Options) !deauthorize_data_share.DeauthorizeDataShareOutput {
+    pub fn deauthorizeDataShare(self: *Self, allocator: std.mem.Allocator, input: deauthorize_data_share.DeauthorizeDataShareInput, options: CallOptions) !deauthorize_data_share.DeauthorizeDataShareOutput {
         return deauthorize_data_share.execute(self, allocator, input, options);
     }
 
     /// Deletes an authentication profile.
-    pub fn deleteAuthenticationProfile(self: *Self, allocator: std.mem.Allocator, input: delete_authentication_profile.DeleteAuthenticationProfileInput, options: delete_authentication_profile.Options) !delete_authentication_profile.DeleteAuthenticationProfileOutput {
+    pub fn deleteAuthenticationProfile(self: *Self, allocator: std.mem.Allocator, input: delete_authentication_profile.DeleteAuthenticationProfileInput, options: CallOptions) !delete_authentication_profile.DeleteAuthenticationProfileOutput {
         return delete_authentication_profile.execute(self, allocator, input, options);
     }
 
@@ -568,7 +569,7 @@ pub const Client = struct {
     /// [Amazon Redshift
     /// Clusters](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: delete_cluster.Options) !delete_cluster.DeleteClusterOutput {
+    pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: CallOptions) !delete_cluster.DeleteClusterOutput {
         return delete_cluster.execute(self, allocator, input, options);
     }
 
@@ -576,7 +577,7 @@ pub const Client = struct {
     ///
     /// You cannot delete a parameter group if it is associated with a
     /// cluster.
-    pub fn deleteClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: delete_cluster_parameter_group.DeleteClusterParameterGroupInput, options: delete_cluster_parameter_group.Options) !delete_cluster_parameter_group.DeleteClusterParameterGroupOutput {
+    pub fn deleteClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: delete_cluster_parameter_group.DeleteClusterParameterGroupInput, options: CallOptions) !delete_cluster_parameter_group.DeleteClusterParameterGroupOutput {
         return delete_cluster_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -589,7 +590,7 @@ pub const Client = struct {
     /// [Amazon Redshift Cluster Security
     /// Groups](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html) in the
     /// *Amazon Redshift Cluster Management Guide*.
-    pub fn deleteClusterSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: delete_cluster_security_group.DeleteClusterSecurityGroupInput, options: delete_cluster_security_group.Options) !delete_cluster_security_group.DeleteClusterSecurityGroupOutput {
+    pub fn deleteClusterSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: delete_cluster_security_group.DeleteClusterSecurityGroupInput, options: CallOptions) !delete_cluster_security_group.DeleteClusterSecurityGroupOutput {
         return delete_cluster_security_group.execute(self, allocator, input, options);
     }
 
@@ -605,106 +606,106 @@ pub const Client = struct {
     /// the snapshot, you must revoke all of the authorizations before you can
     /// delete the
     /// snapshot.
-    pub fn deleteClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_cluster_snapshot.DeleteClusterSnapshotInput, options: delete_cluster_snapshot.Options) !delete_cluster_snapshot.DeleteClusterSnapshotOutput {
+    pub fn deleteClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_cluster_snapshot.DeleteClusterSnapshotInput, options: CallOptions) !delete_cluster_snapshot.DeleteClusterSnapshotOutput {
         return delete_cluster_snapshot.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified cluster subnet group.
-    pub fn deleteClusterSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_cluster_subnet_group.DeleteClusterSubnetGroupInput, options: delete_cluster_subnet_group.Options) !delete_cluster_subnet_group.DeleteClusterSubnetGroupOutput {
+    pub fn deleteClusterSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_cluster_subnet_group.DeleteClusterSubnetGroupInput, options: CallOptions) !delete_cluster_subnet_group.DeleteClusterSubnetGroupOutput {
         return delete_cluster_subnet_group.execute(self, allocator, input, options);
     }
 
     /// Contains information about deleting a custom domain association for a
     /// cluster.
-    pub fn deleteCustomDomainAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_custom_domain_association.DeleteCustomDomainAssociationInput, options: delete_custom_domain_association.Options) !delete_custom_domain_association.DeleteCustomDomainAssociationOutput {
+    pub fn deleteCustomDomainAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_custom_domain_association.DeleteCustomDomainAssociationInput, options: CallOptions) !delete_custom_domain_association.DeleteCustomDomainAssociationOutput {
         return delete_custom_domain_association.execute(self, allocator, input, options);
     }
 
     /// Deletes a Redshift-managed VPC endpoint.
-    pub fn deleteEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: delete_endpoint_access.DeleteEndpointAccessInput, options: delete_endpoint_access.Options) !delete_endpoint_access.DeleteEndpointAccessOutput {
+    pub fn deleteEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: delete_endpoint_access.DeleteEndpointAccessInput, options: CallOptions) !delete_endpoint_access.DeleteEndpointAccessOutput {
         return delete_endpoint_access.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Redshift event notification subscription.
-    pub fn deleteEventSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_event_subscription.DeleteEventSubscriptionInput, options: delete_event_subscription.Options) !delete_event_subscription.DeleteEventSubscriptionOutput {
+    pub fn deleteEventSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_event_subscription.DeleteEventSubscriptionInput, options: CallOptions) !delete_event_subscription.DeleteEventSubscriptionOutput {
         return delete_event_subscription.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified HSM client certificate.
-    pub fn deleteHsmClientCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_hsm_client_certificate.DeleteHsmClientCertificateInput, options: delete_hsm_client_certificate.Options) !delete_hsm_client_certificate.DeleteHsmClientCertificateOutput {
+    pub fn deleteHsmClientCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_hsm_client_certificate.DeleteHsmClientCertificateInput, options: CallOptions) !delete_hsm_client_certificate.DeleteHsmClientCertificateOutput {
         return delete_hsm_client_certificate.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified Amazon Redshift HSM configuration.
-    pub fn deleteHsmConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_hsm_configuration.DeleteHsmConfigurationInput, options: delete_hsm_configuration.Options) !delete_hsm_configuration.DeleteHsmConfigurationOutput {
+    pub fn deleteHsmConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_hsm_configuration.DeleteHsmConfigurationInput, options: CallOptions) !delete_hsm_configuration.DeleteHsmConfigurationOutput {
         return delete_hsm_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes a zero-ETL integration or S3 event integration with Amazon Redshift.
-    pub fn deleteIntegration(self: *Self, allocator: std.mem.Allocator, input: delete_integration.DeleteIntegrationInput, options: delete_integration.Options) !delete_integration.DeleteIntegrationOutput {
+    pub fn deleteIntegration(self: *Self, allocator: std.mem.Allocator, input: delete_integration.DeleteIntegrationInput, options: CallOptions) !delete_integration.DeleteIntegrationOutput {
         return delete_integration.execute(self, allocator, input, options);
     }
 
     /// Deletes a partner integration from a cluster. Data can still flow to the
     /// cluster until the integration is deleted at the partner's website.
-    pub fn deletePartner(self: *Self, allocator: std.mem.Allocator, input: delete_partner.DeletePartnerInput, options: delete_partner.Options) !delete_partner.DeletePartnerOutput {
+    pub fn deletePartner(self: *Self, allocator: std.mem.Allocator, input: delete_partner.DeletePartnerInput, options: CallOptions) !delete_partner.DeletePartnerOutput {
         return delete_partner.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Redshift IAM Identity Center application.
-    pub fn deleteRedshiftIdcApplication(self: *Self, allocator: std.mem.Allocator, input: delete_redshift_idc_application.DeleteRedshiftIdcApplicationInput, options: delete_redshift_idc_application.Options) !delete_redshift_idc_application.DeleteRedshiftIdcApplicationOutput {
+    pub fn deleteRedshiftIdcApplication(self: *Self, allocator: std.mem.Allocator, input: delete_redshift_idc_application.DeleteRedshiftIdcApplicationInput, options: CallOptions) !delete_redshift_idc_application.DeleteRedshiftIdcApplicationOutput {
         return delete_redshift_idc_application.execute(self, allocator, input, options);
     }
 
     /// Deletes the resource policy for a specified resource.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes a scheduled action.
-    pub fn deleteScheduledAction(self: *Self, allocator: std.mem.Allocator, input: delete_scheduled_action.DeleteScheduledActionInput, options: delete_scheduled_action.Options) !delete_scheduled_action.DeleteScheduledActionOutput {
+    pub fn deleteScheduledAction(self: *Self, allocator: std.mem.Allocator, input: delete_scheduled_action.DeleteScheduledActionInput, options: CallOptions) !delete_scheduled_action.DeleteScheduledActionOutput {
         return delete_scheduled_action.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified snapshot copy grant.
-    pub fn deleteSnapshotCopyGrant(self: *Self, allocator: std.mem.Allocator, input: delete_snapshot_copy_grant.DeleteSnapshotCopyGrantInput, options: delete_snapshot_copy_grant.Options) !delete_snapshot_copy_grant.DeleteSnapshotCopyGrantOutput {
+    pub fn deleteSnapshotCopyGrant(self: *Self, allocator: std.mem.Allocator, input: delete_snapshot_copy_grant.DeleteSnapshotCopyGrantInput, options: CallOptions) !delete_snapshot_copy_grant.DeleteSnapshotCopyGrantOutput {
         return delete_snapshot_copy_grant.execute(self, allocator, input, options);
     }
 
     /// Deletes a snapshot schedule.
-    pub fn deleteSnapshotSchedule(self: *Self, allocator: std.mem.Allocator, input: delete_snapshot_schedule.DeleteSnapshotScheduleInput, options: delete_snapshot_schedule.Options) !delete_snapshot_schedule.DeleteSnapshotScheduleOutput {
+    pub fn deleteSnapshotSchedule(self: *Self, allocator: std.mem.Allocator, input: delete_snapshot_schedule.DeleteSnapshotScheduleInput, options: CallOptions) !delete_snapshot_schedule.DeleteSnapshotScheduleOutput {
         return delete_snapshot_schedule.execute(self, allocator, input, options);
     }
 
     /// Deletes tags from a resource. You must provide the ARN of the resource
     /// from which you want to delete the tag or tags.
-    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: delete_tags.Options) !delete_tags.DeleteTagsOutput {
+    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: CallOptions) !delete_tags.DeleteTagsOutput {
         return delete_tags.execute(self, allocator, input, options);
     }
 
     /// Deletes a usage limit from a cluster.
-    pub fn deleteUsageLimit(self: *Self, allocator: std.mem.Allocator, input: delete_usage_limit.DeleteUsageLimitInput, options: delete_usage_limit.Options) !delete_usage_limit.DeleteUsageLimitOutput {
+    pub fn deleteUsageLimit(self: *Self, allocator: std.mem.Allocator, input: delete_usage_limit.DeleteUsageLimitInput, options: CallOptions) !delete_usage_limit.DeleteUsageLimitOutput {
         return delete_usage_limit.execute(self, allocator, input, options);
     }
 
     /// Deregisters a cluster or serverless namespace from the Amazon Web Services
     /// Glue Data Catalog.
-    pub fn deregisterNamespace(self: *Self, allocator: std.mem.Allocator, input: deregister_namespace.DeregisterNamespaceInput, options: deregister_namespace.Options) !deregister_namespace.DeregisterNamespaceOutput {
+    pub fn deregisterNamespace(self: *Self, allocator: std.mem.Allocator, input: deregister_namespace.DeregisterNamespaceInput, options: CallOptions) !deregister_namespace.DeregisterNamespaceOutput {
         return deregister_namespace.execute(self, allocator, input, options);
     }
 
     /// Returns a list of attributes attached to an account
-    pub fn describeAccountAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_account_attributes.DescribeAccountAttributesInput, options: describe_account_attributes.Options) !describe_account_attributes.DescribeAccountAttributesOutput {
+    pub fn describeAccountAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_account_attributes.DescribeAccountAttributesInput, options: CallOptions) !describe_account_attributes.DescribeAccountAttributesOutput {
         return describe_account_attributes.execute(self, allocator, input, options);
     }
 
     /// Describes an authentication profile.
-    pub fn describeAuthenticationProfiles(self: *Self, allocator: std.mem.Allocator, input: describe_authentication_profiles.DescribeAuthenticationProfilesInput, options: describe_authentication_profiles.Options) !describe_authentication_profiles.DescribeAuthenticationProfilesOutput {
+    pub fn describeAuthenticationProfiles(self: *Self, allocator: std.mem.Allocator, input: describe_authentication_profiles.DescribeAuthenticationProfilesInput, options: CallOptions) !describe_authentication_profiles.DescribeAuthenticationProfilesOutput {
         return describe_authentication_profiles.execute(self, allocator, input, options);
     }
 
     /// Returns an array of `ClusterDbRevision` objects.
-    pub fn describeClusterDbRevisions(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_db_revisions.DescribeClusterDbRevisionsInput, options: describe_cluster_db_revisions.Options) !describe_cluster_db_revisions.DescribeClusterDbRevisionsOutput {
+    pub fn describeClusterDbRevisions(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_db_revisions.DescribeClusterDbRevisionsInput, options: CallOptions) !describe_cluster_db_revisions.DescribeClusterDbRevisionsOutput {
         return describe_cluster_db_revisions.execute(self, allocator, input, options);
     }
 
@@ -735,7 +736,7 @@ pub const Client = struct {
     /// are
     /// returned regardless of whether they have tag keys or values associated with
     /// them.
-    pub fn describeClusterParameterGroups(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_parameter_groups.DescribeClusterParameterGroupsInput, options: describe_cluster_parameter_groups.Options) !describe_cluster_parameter_groups.DescribeClusterParameterGroupsOutput {
+    pub fn describeClusterParameterGroups(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_parameter_groups.DescribeClusterParameterGroupsInput, options: CallOptions) !describe_cluster_parameter_groups.DescribeClusterParameterGroupsOutput {
         return describe_cluster_parameter_groups.execute(self, allocator, input, options);
     }
 
@@ -757,7 +758,7 @@ pub const Client = struct {
     /// [Amazon Redshift Parameter
     /// Groups](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn describeClusterParameters(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_parameters.DescribeClusterParametersInput, options: describe_cluster_parameters.Options) !describe_cluster_parameters.DescribeClusterParametersOutput {
+    pub fn describeClusterParameters(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_parameters.DescribeClusterParametersInput, options: CallOptions) !describe_cluster_parameters.DescribeClusterParametersOutput {
         return describe_cluster_parameters.execute(self, allocator, input, options);
     }
 
@@ -784,7 +785,7 @@ pub const Client = struct {
     /// are
     /// returned regardless of whether they have tag keys or values associated with
     /// them.
-    pub fn describeClusterSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_security_groups.DescribeClusterSecurityGroupsInput, options: describe_cluster_security_groups.Options) !describe_cluster_security_groups.DescribeClusterSecurityGroupsOutput {
+    pub fn describeClusterSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_security_groups.DescribeClusterSecurityGroupsInput, options: CallOptions) !describe_cluster_security_groups.DescribeClusterSecurityGroupsOutput {
         return describe_cluster_security_groups.execute(self, allocator, input, options);
     }
 
@@ -811,7 +812,7 @@ pub const Client = struct {
     /// If both tag keys and values are omitted from the request, snapshots are
     /// returned
     /// regardless of whether they have tag keys or values associated with them.
-    pub fn describeClusterSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_snapshots.DescribeClusterSnapshotsInput, options: describe_cluster_snapshots.Options) !describe_cluster_snapshots.DescribeClusterSnapshotsOutput {
+    pub fn describeClusterSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_snapshots.DescribeClusterSnapshotsInput, options: CallOptions) !describe_cluster_snapshots.DescribeClusterSnapshotsOutput {
         return describe_cluster_snapshots.execute(self, allocator, input, options);
     }
 
@@ -832,12 +833,12 @@ pub const Client = struct {
     /// If both tag keys and values are omitted from the request, subnet groups are
     /// returned regardless of whether they have tag keys or values associated with
     /// them.
-    pub fn describeClusterSubnetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_subnet_groups.DescribeClusterSubnetGroupsInput, options: describe_cluster_subnet_groups.Options) !describe_cluster_subnet_groups.DescribeClusterSubnetGroupsOutput {
+    pub fn describeClusterSubnetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_subnet_groups.DescribeClusterSubnetGroupsInput, options: CallOptions) !describe_cluster_subnet_groups.DescribeClusterSubnetGroupsOutput {
         return describe_cluster_subnet_groups.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all the available maintenance tracks.
-    pub fn describeClusterTracks(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_tracks.DescribeClusterTracksInput, options: describe_cluster_tracks.Options) !describe_cluster_tracks.DescribeClusterTracksOutput {
+    pub fn describeClusterTracks(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_tracks.DescribeClusterTracksInput, options: CallOptions) !describe_cluster_tracks.DescribeClusterTracksOutput {
         return describe_cluster_tracks.execute(self, allocator, input, options);
     }
 
@@ -850,7 +851,7 @@ pub const Client = struct {
     /// [Amazon Redshift
     /// Clusters](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn describeClusterVersions(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_versions.DescribeClusterVersionsInput, options: describe_cluster_versions.Options) !describe_cluster_versions.DescribeClusterVersionsOutput {
+    pub fn describeClusterVersions(self: *Self, allocator: std.mem.Allocator, input: describe_cluster_versions.DescribeClusterVersionsInput, options: CallOptions) !describe_cluster_versions.DescribeClusterVersionsOutput {
         return describe_cluster_versions.execute(self, allocator, input, options);
     }
 
@@ -875,31 +876,31 @@ pub const Client = struct {
     /// If both tag keys and values are omitted from the request, clusters are
     /// returned
     /// regardless of whether they have tag keys or values associated with them.
-    pub fn describeClusters(self: *Self, allocator: std.mem.Allocator, input: describe_clusters.DescribeClustersInput, options: describe_clusters.Options) !describe_clusters.DescribeClustersOutput {
+    pub fn describeClusters(self: *Self, allocator: std.mem.Allocator, input: describe_clusters.DescribeClustersInput, options: CallOptions) !describe_clusters.DescribeClustersOutput {
         return describe_clusters.execute(self, allocator, input, options);
     }
 
     /// Contains information about custom domain associations for a cluster.
-    pub fn describeCustomDomainAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_custom_domain_associations.DescribeCustomDomainAssociationsInput, options: describe_custom_domain_associations.Options) !describe_custom_domain_associations.DescribeCustomDomainAssociationsOutput {
+    pub fn describeCustomDomainAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_custom_domain_associations.DescribeCustomDomainAssociationsInput, options: CallOptions) !describe_custom_domain_associations.DescribeCustomDomainAssociationsOutput {
         return describe_custom_domain_associations.execute(self, allocator, input, options);
     }
 
     /// Shows the status of any inbound or outbound datashares available in the
     /// specified
     /// account.
-    pub fn describeDataShares(self: *Self, allocator: std.mem.Allocator, input: describe_data_shares.DescribeDataSharesInput, options: describe_data_shares.Options) !describe_data_shares.DescribeDataSharesOutput {
+    pub fn describeDataShares(self: *Self, allocator: std.mem.Allocator, input: describe_data_shares.DescribeDataSharesInput, options: CallOptions) !describe_data_shares.DescribeDataSharesOutput {
         return describe_data_shares.execute(self, allocator, input, options);
     }
 
     /// Returns a list of datashares where the account identifier being called is a
     /// consumer account identifier.
-    pub fn describeDataSharesForConsumer(self: *Self, allocator: std.mem.Allocator, input: describe_data_shares_for_consumer.DescribeDataSharesForConsumerInput, options: describe_data_shares_for_consumer.Options) !describe_data_shares_for_consumer.DescribeDataSharesForConsumerOutput {
+    pub fn describeDataSharesForConsumer(self: *Self, allocator: std.mem.Allocator, input: describe_data_shares_for_consumer.DescribeDataSharesForConsumerInput, options: CallOptions) !describe_data_shares_for_consumer.DescribeDataSharesForConsumerOutput {
         return describe_data_shares_for_consumer.execute(self, allocator, input, options);
     }
 
     /// Returns a list of datashares when the account identifier being called is a
     /// producer account identifier.
-    pub fn describeDataSharesForProducer(self: *Self, allocator: std.mem.Allocator, input: describe_data_shares_for_producer.DescribeDataSharesForProducerInput, options: describe_data_shares_for_producer.Options) !describe_data_shares_for_producer.DescribeDataSharesForProducerOutput {
+    pub fn describeDataSharesForProducer(self: *Self, allocator: std.mem.Allocator, input: describe_data_shares_for_producer.DescribeDataSharesForProducerInput, options: CallOptions) !describe_data_shares_for_producer.DescribeDataSharesForProducerOutput {
         return describe_data_shares_for_producer.execute(self, allocator, input, options);
     }
 
@@ -910,17 +911,17 @@ pub const Client = struct {
     /// [Amazon Redshift Parameter
     /// Groups](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn describeDefaultClusterParameters(self: *Self, allocator: std.mem.Allocator, input: describe_default_cluster_parameters.DescribeDefaultClusterParametersInput, options: describe_default_cluster_parameters.Options) !describe_default_cluster_parameters.DescribeDefaultClusterParametersOutput {
+    pub fn describeDefaultClusterParameters(self: *Self, allocator: std.mem.Allocator, input: describe_default_cluster_parameters.DescribeDefaultClusterParametersInput, options: CallOptions) !describe_default_cluster_parameters.DescribeDefaultClusterParametersOutput {
         return describe_default_cluster_parameters.execute(self, allocator, input, options);
     }
 
     /// Describes a Redshift-managed VPC endpoint.
-    pub fn describeEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: describe_endpoint_access.DescribeEndpointAccessInput, options: describe_endpoint_access.Options) !describe_endpoint_access.DescribeEndpointAccessOutput {
+    pub fn describeEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: describe_endpoint_access.DescribeEndpointAccessInput, options: CallOptions) !describe_endpoint_access.DescribeEndpointAccessOutput {
         return describe_endpoint_access.execute(self, allocator, input, options);
     }
 
     /// Describes an endpoint authorization.
-    pub fn describeEndpointAuthorization(self: *Self, allocator: std.mem.Allocator, input: describe_endpoint_authorization.DescribeEndpointAuthorizationInput, options: describe_endpoint_authorization.Options) !describe_endpoint_authorization.DescribeEndpointAuthorizationOutput {
+    pub fn describeEndpointAuthorization(self: *Self, allocator: std.mem.Allocator, input: describe_endpoint_authorization.DescribeEndpointAuthorizationInput, options: CallOptions) !describe_endpoint_authorization.DescribeEndpointAuthorizationOutput {
         return describe_endpoint_authorization.execute(self, allocator, input, options);
     }
 
@@ -929,7 +930,7 @@ pub const Client = struct {
     /// source type. For a list of the event categories and source types, go to
     /// [Amazon Redshift Event
     /// Notifications](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html).
-    pub fn describeEventCategories(self: *Self, allocator: std.mem.Allocator, input: describe_event_categories.DescribeEventCategoriesInput, options: describe_event_categories.Options) !describe_event_categories.DescribeEventCategoriesOutput {
+    pub fn describeEventCategories(self: *Self, allocator: std.mem.Allocator, input: describe_event_categories.DescribeEventCategoriesInput, options: CallOptions) !describe_event_categories.DescribeEventCategoriesOutput {
         return describe_event_categories.execute(self, allocator, input, options);
     }
 
@@ -950,7 +951,7 @@ pub const Client = struct {
     /// If both tag keys and values are omitted from the request, subscriptions are
     /// returned regardless of whether they have tag keys or values associated with
     /// them.
-    pub fn describeEventSubscriptions(self: *Self, allocator: std.mem.Allocator, input: describe_event_subscriptions.DescribeEventSubscriptionsInput, options: describe_event_subscriptions.Options) !describe_event_subscriptions.DescribeEventSubscriptionsOutput {
+    pub fn describeEventSubscriptions(self: *Self, allocator: std.mem.Allocator, input: describe_event_subscriptions.DescribeEventSubscriptionsInput, options: CallOptions) !describe_event_subscriptions.DescribeEventSubscriptionsOutput {
         return describe_event_subscriptions.execute(self, allocator, input, options);
     }
 
@@ -961,7 +962,7 @@ pub const Client = struct {
     /// snapshot or parameter group can be obtained by providing the name as a
     /// parameter. By
     /// default, the past hour of events are returned.
-    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: describe_events.Options) !describe_events.DescribeEventsOutput {
+    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: CallOptions) !describe_events.DescribeEventsOutput {
         return describe_events.execute(self, allocator, input, options);
     }
 
@@ -983,7 +984,7 @@ pub const Client = struct {
     /// are returned regardless of whether they have tag keys or values associated
     /// with
     /// them.
-    pub fn describeHsmClientCertificates(self: *Self, allocator: std.mem.Allocator, input: describe_hsm_client_certificates.DescribeHsmClientCertificatesInput, options: describe_hsm_client_certificates.Options) !describe_hsm_client_certificates.DescribeHsmClientCertificatesOutput {
+    pub fn describeHsmClientCertificates(self: *Self, allocator: std.mem.Allocator, input: describe_hsm_client_certificates.DescribeHsmClientCertificatesInput, options: CallOptions) !describe_hsm_client_certificates.DescribeHsmClientCertificatesOutput {
         return describe_hsm_client_certificates.execute(self, allocator, input, options);
     }
 
@@ -1005,32 +1006,32 @@ pub const Client = struct {
     /// are
     /// returned regardless of whether they have tag keys or values associated with
     /// them.
-    pub fn describeHsmConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_hsm_configurations.DescribeHsmConfigurationsInput, options: describe_hsm_configurations.Options) !describe_hsm_configurations.DescribeHsmConfigurationsOutput {
+    pub fn describeHsmConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_hsm_configurations.DescribeHsmConfigurationsInput, options: CallOptions) !describe_hsm_configurations.DescribeHsmConfigurationsOutput {
         return describe_hsm_configurations.execute(self, allocator, input, options);
     }
 
     /// Returns a list of inbound integrations.
-    pub fn describeInboundIntegrations(self: *Self, allocator: std.mem.Allocator, input: describe_inbound_integrations.DescribeInboundIntegrationsInput, options: describe_inbound_integrations.Options) !describe_inbound_integrations.DescribeInboundIntegrationsOutput {
+    pub fn describeInboundIntegrations(self: *Self, allocator: std.mem.Allocator, input: describe_inbound_integrations.DescribeInboundIntegrationsInput, options: CallOptions) !describe_inbound_integrations.DescribeInboundIntegrationsOutput {
         return describe_inbound_integrations.execute(self, allocator, input, options);
     }
 
     /// Describes one or more zero-ETL or S3 event integrations with Amazon
     /// Redshift.
-    pub fn describeIntegrations(self: *Self, allocator: std.mem.Allocator, input: describe_integrations.DescribeIntegrationsInput, options: describe_integrations.Options) !describe_integrations.DescribeIntegrationsOutput {
+    pub fn describeIntegrations(self: *Self, allocator: std.mem.Allocator, input: describe_integrations.DescribeIntegrationsInput, options: CallOptions) !describe_integrations.DescribeIntegrationsOutput {
         return describe_integrations.execute(self, allocator, input, options);
     }
 
     /// Describes whether information, such as queries and connection attempts, is
     /// being
     /// logged for the specified Amazon Redshift cluster.
-    pub fn describeLoggingStatus(self: *Self, allocator: std.mem.Allocator, input: describe_logging_status.DescribeLoggingStatusInput, options: describe_logging_status.Options) !describe_logging_status.DescribeLoggingStatusOutput {
+    pub fn describeLoggingStatus(self: *Self, allocator: std.mem.Allocator, input: describe_logging_status.DescribeLoggingStatusInput, options: CallOptions) !describe_logging_status.DescribeLoggingStatusOutput {
         return describe_logging_status.execute(self, allocator, input, options);
     }
 
     /// Returns properties of possible node configurations such as node type, number
     /// of nodes, and
     /// disk usage for the specified action type.
-    pub fn describeNodeConfigurationOptions(self: *Self, allocator: std.mem.Allocator, input: describe_node_configuration_options.DescribeNodeConfigurationOptionsInput, options: describe_node_configuration_options.Options) !describe_node_configuration_options.DescribeNodeConfigurationOptionsOutput {
+    pub fn describeNodeConfigurationOptions(self: *Self, allocator: std.mem.Allocator, input: describe_node_configuration_options.DescribeNodeConfigurationOptionsInput, options: CallOptions) !describe_node_configuration_options.DescribeNodeConfigurationOptionsOutput {
         return describe_node_configuration_options.execute(self, allocator, input, options);
     }
 
@@ -1049,23 +1050,23 @@ pub const Client = struct {
     /// [Amazon Redshift
     /// Clusters](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn describeOrderableClusterOptions(self: *Self, allocator: std.mem.Allocator, input: describe_orderable_cluster_options.DescribeOrderableClusterOptionsInput, options: describe_orderable_cluster_options.Options) !describe_orderable_cluster_options.DescribeOrderableClusterOptionsOutput {
+    pub fn describeOrderableClusterOptions(self: *Self, allocator: std.mem.Allocator, input: describe_orderable_cluster_options.DescribeOrderableClusterOptionsInput, options: CallOptions) !describe_orderable_cluster_options.DescribeOrderableClusterOptionsOutput {
         return describe_orderable_cluster_options.execute(self, allocator, input, options);
     }
 
     /// Returns information about the partner integrations defined for a cluster.
-    pub fn describePartners(self: *Self, allocator: std.mem.Allocator, input: describe_partners.DescribePartnersInput, options: describe_partners.Options) !describe_partners.DescribePartnersOutput {
+    pub fn describePartners(self: *Self, allocator: std.mem.Allocator, input: describe_partners.DescribePartnersInput, options: CallOptions) !describe_partners.DescribePartnersOutput {
         return describe_partners.execute(self, allocator, input, options);
     }
 
     /// Lists the Amazon Redshift IAM Identity Center applications.
-    pub fn describeRedshiftIdcApplications(self: *Self, allocator: std.mem.Allocator, input: describe_redshift_idc_applications.DescribeRedshiftIdcApplicationsInput, options: describe_redshift_idc_applications.Options) !describe_redshift_idc_applications.DescribeRedshiftIdcApplicationsOutput {
+    pub fn describeRedshiftIdcApplications(self: *Self, allocator: std.mem.Allocator, input: describe_redshift_idc_applications.DescribeRedshiftIdcApplicationsInput, options: CallOptions) !describe_redshift_idc_applications.DescribeRedshiftIdcApplicationsOutput {
         return describe_redshift_idc_applications.execute(self, allocator, input, options);
     }
 
     /// Returns exchange status details and associated metadata for a reserved-node
     /// exchange. Statuses include such values as in progress and requested.
-    pub fn describeReservedNodeExchangeStatus(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_node_exchange_status.DescribeReservedNodeExchangeStatusInput, options: describe_reserved_node_exchange_status.Options) !describe_reserved_node_exchange_status.DescribeReservedNodeExchangeStatusOutput {
+    pub fn describeReservedNodeExchangeStatus(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_node_exchange_status.DescribeReservedNodeExchangeStatusInput, options: CallOptions) !describe_reserved_node_exchange_status.DescribeReservedNodeExchangeStatusOutput {
         return describe_reserved_node_exchange_status.execute(self, allocator, input, options);
     }
 
@@ -1084,12 +1085,12 @@ pub const Client = struct {
     /// [Purchasing Reserved
     /// Nodes](https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn describeReservedNodeOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_node_offerings.DescribeReservedNodeOfferingsInput, options: describe_reserved_node_offerings.Options) !describe_reserved_node_offerings.DescribeReservedNodeOfferingsOutput {
+    pub fn describeReservedNodeOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_node_offerings.DescribeReservedNodeOfferingsInput, options: CallOptions) !describe_reserved_node_offerings.DescribeReservedNodeOfferingsOutput {
         return describe_reserved_node_offerings.execute(self, allocator, input, options);
     }
 
     /// Returns the descriptions of the reserved nodes.
-    pub fn describeReservedNodes(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_nodes.DescribeReservedNodesInput, options: describe_reserved_nodes.Options) !describe_reserved_nodes.DescribeReservedNodesOutput {
+    pub fn describeReservedNodes(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_nodes.DescribeReservedNodesInput, options: CallOptions) !describe_reserved_nodes.DescribeReservedNodesOutput {
         return describe_reserved_nodes.execute(self, allocator, input, options);
     }
 
@@ -1103,12 +1104,12 @@ pub const Client = struct {
     ///
     /// A resize operation can be requested using ModifyCluster and
     /// specifying a different number or type of nodes for the cluster.
-    pub fn describeResize(self: *Self, allocator: std.mem.Allocator, input: describe_resize.DescribeResizeInput, options: describe_resize.Options) !describe_resize.DescribeResizeOutput {
+    pub fn describeResize(self: *Self, allocator: std.mem.Allocator, input: describe_resize.DescribeResizeInput, options: CallOptions) !describe_resize.DescribeResizeOutput {
         return describe_resize.execute(self, allocator, input, options);
     }
 
     /// Describes properties of scheduled actions.
-    pub fn describeScheduledActions(self: *Self, allocator: std.mem.Allocator, input: describe_scheduled_actions.DescribeScheduledActionsInput, options: describe_scheduled_actions.Options) !describe_scheduled_actions.DescribeScheduledActionsOutput {
+    pub fn describeScheduledActions(self: *Self, allocator: std.mem.Allocator, input: describe_scheduled_actions.DescribeScheduledActionsInput, options: CallOptions) !describe_scheduled_actions.DescribeScheduledActionsOutput {
         return describe_scheduled_actions.execute(self, allocator, input, options);
     }
 
@@ -1120,17 +1121,17 @@ pub const Client = struct {
     /// [Amazon Redshift Database
     /// Encryption](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn describeSnapshotCopyGrants(self: *Self, allocator: std.mem.Allocator, input: describe_snapshot_copy_grants.DescribeSnapshotCopyGrantsInput, options: describe_snapshot_copy_grants.Options) !describe_snapshot_copy_grants.DescribeSnapshotCopyGrantsOutput {
+    pub fn describeSnapshotCopyGrants(self: *Self, allocator: std.mem.Allocator, input: describe_snapshot_copy_grants.DescribeSnapshotCopyGrantsInput, options: CallOptions) !describe_snapshot_copy_grants.DescribeSnapshotCopyGrantsOutput {
         return describe_snapshot_copy_grants.execute(self, allocator, input, options);
     }
 
     /// Returns a list of snapshot schedules.
-    pub fn describeSnapshotSchedules(self: *Self, allocator: std.mem.Allocator, input: describe_snapshot_schedules.DescribeSnapshotSchedulesInput, options: describe_snapshot_schedules.Options) !describe_snapshot_schedules.DescribeSnapshotSchedulesOutput {
+    pub fn describeSnapshotSchedules(self: *Self, allocator: std.mem.Allocator, input: describe_snapshot_schedules.DescribeSnapshotSchedulesInput, options: CallOptions) !describe_snapshot_schedules.DescribeSnapshotSchedulesOutput {
         return describe_snapshot_schedules.execute(self, allocator, input, options);
     }
 
     /// Returns account level backups storage size and provisional storage.
-    pub fn describeStorage(self: *Self, allocator: std.mem.Allocator, input: describe_storage.DescribeStorageInput, options: describe_storage.Options) !describe_storage.DescribeStorageOutput {
+    pub fn describeStorage(self: *Self, allocator: std.mem.Allocator, input: describe_storage.DescribeStorageInput, options: CallOptions) !describe_storage.DescribeStorageOutput {
         return describe_storage.execute(self, allocator, input, options);
     }
 
@@ -1142,7 +1143,7 @@ pub const Client = struct {
     /// Otherwise
     /// `DescribeTableRestoreStatus` returns the status of the table specified by
     /// `TableRestoreRequestId`.
-    pub fn describeTableRestoreStatus(self: *Self, allocator: std.mem.Allocator, input: describe_table_restore_status.DescribeTableRestoreStatusInput, options: describe_table_restore_status.Options) !describe_table_restore_status.DescribeTableRestoreStatusOutput {
+    pub fn describeTableRestoreStatus(self: *Self, allocator: std.mem.Allocator, input: describe_table_restore_status.DescribeTableRestoreStatusInput, options: CallOptions) !describe_table_restore_status.DescribeTableRestoreStatusOutput {
         return describe_table_restore_status.execute(self, allocator, input, options);
     }
 
@@ -1174,7 +1175,7 @@ pub const Client = struct {
     /// If both tag keys and values are omitted from the request, resources are
     /// returned
     /// regardless of whether they have tag keys or values associated with them.
-    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: describe_tags.Options) !describe_tags.DescribeTagsOutput {
+    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: CallOptions) !describe_tags.DescribeTagsOutput {
         return describe_tags.execute(self, allocator, input, options);
     }
 
@@ -1196,13 +1197,13 @@ pub const Client = struct {
     /// * If cluster identifier and feature type are provided,
     /// then all usage limit objects for the combination of cluster and feature are
     /// returned.
-    pub fn describeUsageLimits(self: *Self, allocator: std.mem.Allocator, input: describe_usage_limits.DescribeUsageLimitsInput, options: describe_usage_limits.Options) !describe_usage_limits.DescribeUsageLimitsOutput {
+    pub fn describeUsageLimits(self: *Self, allocator: std.mem.Allocator, input: describe_usage_limits.DescribeUsageLimitsInput, options: CallOptions) !describe_usage_limits.DescribeUsageLimitsOutput {
         return describe_usage_limits.execute(self, allocator, input, options);
     }
 
     /// Stops logging information, such as queries and connection attempts, for the
     /// specified Amazon Redshift cluster.
-    pub fn disableLogging(self: *Self, allocator: std.mem.Allocator, input: disable_logging.DisableLoggingInput, options: disable_logging.Options) !disable_logging.DisableLoggingOutput {
+    pub fn disableLogging(self: *Self, allocator: std.mem.Allocator, input: disable_logging.DisableLoggingInput, options: CallOptions) !disable_logging.DisableLoggingOutput {
         return disable_logging.execute(self, allocator, input, options);
     }
 
@@ -1215,32 +1216,32 @@ pub const Client = struct {
     /// from Key Management Service, use DeleteSnapshotCopyGrant to delete the grant
     /// that
     /// grants Amazon Redshift permission to the key in the destination region.
-    pub fn disableSnapshotCopy(self: *Self, allocator: std.mem.Allocator, input: disable_snapshot_copy.DisableSnapshotCopyInput, options: disable_snapshot_copy.Options) !disable_snapshot_copy.DisableSnapshotCopyOutput {
+    pub fn disableSnapshotCopy(self: *Self, allocator: std.mem.Allocator, input: disable_snapshot_copy.DisableSnapshotCopyInput, options: CallOptions) !disable_snapshot_copy.DisableSnapshotCopyOutput {
         return disable_snapshot_copy.execute(self, allocator, input, options);
     }
 
     /// From a datashare consumer account, remove association for the specified
     /// datashare.
-    pub fn disassociateDataShareConsumer(self: *Self, allocator: std.mem.Allocator, input: disassociate_data_share_consumer.DisassociateDataShareConsumerInput, options: disassociate_data_share_consumer.Options) !disassociate_data_share_consumer.DisassociateDataShareConsumerOutput {
+    pub fn disassociateDataShareConsumer(self: *Self, allocator: std.mem.Allocator, input: disassociate_data_share_consumer.DisassociateDataShareConsumerInput, options: CallOptions) !disassociate_data_share_consumer.DisassociateDataShareConsumerOutput {
         return disassociate_data_share_consumer.execute(self, allocator, input, options);
     }
 
     /// Starts logging information, such as queries and connection attempts, for the
     /// specified Amazon Redshift cluster.
-    pub fn enableLogging(self: *Self, allocator: std.mem.Allocator, input: enable_logging.EnableLoggingInput, options: enable_logging.Options) !enable_logging.EnableLoggingOutput {
+    pub fn enableLogging(self: *Self, allocator: std.mem.Allocator, input: enable_logging.EnableLoggingInput, options: CallOptions) !enable_logging.EnableLoggingOutput {
         return enable_logging.execute(self, allocator, input, options);
     }
 
     /// Enables the automatic copy of snapshots from one region to another region
     /// for a
     /// specified cluster.
-    pub fn enableSnapshotCopy(self: *Self, allocator: std.mem.Allocator, input: enable_snapshot_copy.EnableSnapshotCopyInput, options: enable_snapshot_copy.Options) !enable_snapshot_copy.EnableSnapshotCopyOutput {
+    pub fn enableSnapshotCopy(self: *Self, allocator: std.mem.Allocator, input: enable_snapshot_copy.EnableSnapshotCopyInput, options: CallOptions) !enable_snapshot_copy.EnableSnapshotCopyOutput {
         return enable_snapshot_copy.execute(self, allocator, input, options);
     }
 
     /// Fails over the primary compute unit of the specified Multi-AZ cluster to
     /// another Availability Zone.
-    pub fn failoverPrimaryCompute(self: *Self, allocator: std.mem.Allocator, input: failover_primary_compute.FailoverPrimaryComputeInput, options: failover_primary_compute.Options) !failover_primary_compute.FailoverPrimaryComputeOutput {
+    pub fn failoverPrimaryCompute(self: *Self, allocator: std.mem.Allocator, input: failover_primary_compute.FailoverPrimaryComputeInput, options: CallOptions) !failover_primary_compute.FailoverPrimaryComputeOutput {
         return failover_primary_compute.execute(self, allocator, input, options);
     }
 
@@ -1278,7 +1279,7 @@ pub const Client = struct {
     ///
     /// If the `DbName` parameter is specified, the IAM policy must allow access
     /// to the resource `dbname` for the specified database name.
-    pub fn getClusterCredentials(self: *Self, allocator: std.mem.Allocator, input: get_cluster_credentials.GetClusterCredentialsInput, options: get_cluster_credentials.Options) !get_cluster_credentials.GetClusterCredentialsOutput {
+    pub fn getClusterCredentials(self: *Self, allocator: std.mem.Allocator, input: get_cluster_credentials.GetClusterCredentialsInput, options: CallOptions) !get_cluster_credentials.GetClusterCredentialsOutput {
         return get_cluster_credentials.execute(self, allocator, input, options);
     }
 
@@ -1299,7 +1300,7 @@ pub const Client = struct {
     /// (IAM
     /// policies)](https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html) in the
     /// Amazon Redshift Cluster Management Guide.
-    pub fn getClusterCredentialsWithIam(self: *Self, allocator: std.mem.Allocator, input: get_cluster_credentials_with_iam.GetClusterCredentialsWithIAMInput, options: get_cluster_credentials_with_iam.Options) !get_cluster_credentials_with_iam.GetClusterCredentialsWithIAMOutput {
+    pub fn getClusterCredentialsWithIam(self: *Self, allocator: std.mem.Allocator, input: get_cluster_credentials_with_iam.GetClusterCredentialsWithIAMInput, options: CallOptions) !get_cluster_credentials_with_iam.GetClusterCredentialsWithIAMOutput {
         return get_cluster_credentials_with_iam.execute(self, allocator, input, options);
     }
 
@@ -1321,7 +1322,7 @@ pub const Client = struct {
     /// caller is not using enhanced credentials with embedded Amazon Web Services
     /// IAM Identity Center identity, the API will
     /// return an error.
-    pub fn getIdentityCenterAuthToken(self: *Self, allocator: std.mem.Allocator, input: get_identity_center_auth_token.GetIdentityCenterAuthTokenInput, options: get_identity_center_auth_token.Options) !get_identity_center_auth_token.GetIdentityCenterAuthTokenOutput {
+    pub fn getIdentityCenterAuthToken(self: *Self, allocator: std.mem.Allocator, input: get_identity_center_auth_token.GetIdentityCenterAuthTokenInput, options: CallOptions) !get_identity_center_auth_token.GetIdentityCenterAuthTokenOutput {
         return get_identity_center_auth_token.execute(self, allocator, input, options);
     }
 
@@ -1330,37 +1331,37 @@ pub const Client = struct {
     /// offering.
     /// Details include the node type, the price, the node count, and the offering
     /// type.
-    pub fn getReservedNodeExchangeConfigurationOptions(self: *Self, allocator: std.mem.Allocator, input: get_reserved_node_exchange_configuration_options.GetReservedNodeExchangeConfigurationOptionsInput, options: get_reserved_node_exchange_configuration_options.Options) !get_reserved_node_exchange_configuration_options.GetReservedNodeExchangeConfigurationOptionsOutput {
+    pub fn getReservedNodeExchangeConfigurationOptions(self: *Self, allocator: std.mem.Allocator, input: get_reserved_node_exchange_configuration_options.GetReservedNodeExchangeConfigurationOptionsInput, options: CallOptions) !get_reserved_node_exchange_configuration_options.GetReservedNodeExchangeConfigurationOptionsOutput {
         return get_reserved_node_exchange_configuration_options.execute(self, allocator, input, options);
     }
 
     /// Returns an array of DC2 ReservedNodeOfferings that matches the payment type,
     /// term,
     /// and usage price of the given DC1 reserved node.
-    pub fn getReservedNodeExchangeOfferings(self: *Self, allocator: std.mem.Allocator, input: get_reserved_node_exchange_offerings.GetReservedNodeExchangeOfferingsInput, options: get_reserved_node_exchange_offerings.Options) !get_reserved_node_exchange_offerings.GetReservedNodeExchangeOfferingsOutput {
+    pub fn getReservedNodeExchangeOfferings(self: *Self, allocator: std.mem.Allocator, input: get_reserved_node_exchange_offerings.GetReservedNodeExchangeOfferingsInput, options: CallOptions) !get_reserved_node_exchange_offerings.GetReservedNodeExchangeOfferingsOutput {
         return get_reserved_node_exchange_offerings.execute(self, allocator, input, options);
     }
 
     /// Get the resource policy for a specified resource.
-    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
         return get_resource_policy.execute(self, allocator, input, options);
     }
 
     /// List the Amazon Redshift Advisor recommendations for one or multiple Amazon
     /// Redshift clusters in an Amazon Web Services account.
-    pub fn listRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_recommendations.ListRecommendationsInput, options: list_recommendations.Options) !list_recommendations.ListRecommendationsOutput {
+    pub fn listRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_recommendations.ListRecommendationsInput, options: CallOptions) !list_recommendations.ListRecommendationsOutput {
         return list_recommendations.execute(self, allocator, input, options);
     }
 
     /// This operation is retired. Calling this operation does not change AQUA
     /// configuration. Amazon Redshift automatically determines whether to use AQUA
     /// (Advanced Query Accelerator).
-    pub fn modifyAquaConfiguration(self: *Self, allocator: std.mem.Allocator, input: modify_aqua_configuration.ModifyAquaConfigurationInput, options: modify_aqua_configuration.Options) !modify_aqua_configuration.ModifyAquaConfigurationOutput {
+    pub fn modifyAquaConfiguration(self: *Self, allocator: std.mem.Allocator, input: modify_aqua_configuration.ModifyAquaConfigurationInput, options: CallOptions) !modify_aqua_configuration.ModifyAquaConfigurationOutput {
         return modify_aqua_configuration.execute(self, allocator, input, options);
     }
 
     /// Modifies an authentication profile.
-    pub fn modifyAuthenticationProfile(self: *Self, allocator: std.mem.Allocator, input: modify_authentication_profile.ModifyAuthenticationProfileInput, options: modify_authentication_profile.Options) !modify_authentication_profile.ModifyAuthenticationProfileOutput {
+    pub fn modifyAuthenticationProfile(self: *Self, allocator: std.mem.Allocator, input: modify_authentication_profile.ModifyAuthenticationProfileInput, options: CallOptions) !modify_authentication_profile.ModifyAuthenticationProfileOutput {
         return modify_authentication_profile.execute(self, allocator, input, options);
     }
 
@@ -1402,14 +1403,14 @@ pub const Client = struct {
     ///
     /// For more information about VPC BPA, see [Block public access to VPCs and
     /// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html) in the *Amazon VPC User Guide*.
-    pub fn modifyCluster(self: *Self, allocator: std.mem.Allocator, input: modify_cluster.ModifyClusterInput, options: modify_cluster.Options) !modify_cluster.ModifyClusterOutput {
+    pub fn modifyCluster(self: *Self, allocator: std.mem.Allocator, input: modify_cluster.ModifyClusterInput, options: CallOptions) !modify_cluster.ModifyClusterOutput {
         return modify_cluster.execute(self, allocator, input, options);
     }
 
     /// Modifies the database revision of a cluster. The database revision is a
     /// unique
     /// revision of the database running in a cluster.
-    pub fn modifyClusterDbRevision(self: *Self, allocator: std.mem.Allocator, input: modify_cluster_db_revision.ModifyClusterDbRevisionInput, options: modify_cluster_db_revision.Options) !modify_cluster_db_revision.ModifyClusterDbRevisionOutput {
+    pub fn modifyClusterDbRevision(self: *Self, allocator: std.mem.Allocator, input: modify_cluster_db_revision.ModifyClusterDbRevisionInput, options: CallOptions) !modify_cluster_db_revision.ModifyClusterDbRevisionOutput {
         return modify_cluster_db_revision.execute(self, allocator, input, options);
     }
 
@@ -1421,12 +1422,12 @@ pub const Client = struct {
     /// For more information, go to [Quotas and
     /// limits](https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn modifyClusterIamRoles(self: *Self, allocator: std.mem.Allocator, input: modify_cluster_iam_roles.ModifyClusterIamRolesInput, options: modify_cluster_iam_roles.Options) !modify_cluster_iam_roles.ModifyClusterIamRolesOutput {
+    pub fn modifyClusterIamRoles(self: *Self, allocator: std.mem.Allocator, input: modify_cluster_iam_roles.ModifyClusterIamRolesInput, options: CallOptions) !modify_cluster_iam_roles.ModifyClusterIamRolesOutput {
         return modify_cluster_iam_roles.execute(self, allocator, input, options);
     }
 
     /// Modifies the maintenance settings of a cluster.
-    pub fn modifyClusterMaintenance(self: *Self, allocator: std.mem.Allocator, input: modify_cluster_maintenance.ModifyClusterMaintenanceInput, options: modify_cluster_maintenance.Options) !modify_cluster_maintenance.ModifyClusterMaintenanceOutput {
+    pub fn modifyClusterMaintenance(self: *Self, allocator: std.mem.Allocator, input: modify_cluster_maintenance.ModifyClusterMaintenanceInput, options: CallOptions) !modify_cluster_maintenance.ModifyClusterMaintenanceOutput {
         return modify_cluster_maintenance.execute(self, allocator, input, options);
     }
 
@@ -1437,7 +1438,7 @@ pub const Client = struct {
     /// [Amazon Redshift Parameter
     /// Groups](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn modifyClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: modify_cluster_parameter_group.ModifyClusterParameterGroupInput, options: modify_cluster_parameter_group.Options) !modify_cluster_parameter_group.ModifyClusterParameterGroupOutput {
+    pub fn modifyClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: modify_cluster_parameter_group.ModifyClusterParameterGroupInput, options: CallOptions) !modify_cluster_parameter_group.ModifyClusterParameterGroupOutput {
         return modify_cluster_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -1445,12 +1446,12 @@ pub const Client = struct {
     ///
     /// This exanmple modifies the manual retention period setting for a cluster
     /// snapshot.
-    pub fn modifyClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: modify_cluster_snapshot.ModifyClusterSnapshotInput, options: modify_cluster_snapshot.Options) !modify_cluster_snapshot.ModifyClusterSnapshotOutput {
+    pub fn modifyClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: modify_cluster_snapshot.ModifyClusterSnapshotInput, options: CallOptions) !modify_cluster_snapshot.ModifyClusterSnapshotOutput {
         return modify_cluster_snapshot.execute(self, allocator, input, options);
     }
 
     /// Modifies a snapshot schedule for a cluster.
-    pub fn modifyClusterSnapshotSchedule(self: *Self, allocator: std.mem.Allocator, input: modify_cluster_snapshot_schedule.ModifyClusterSnapshotScheduleInput, options: modify_cluster_snapshot_schedule.Options) !modify_cluster_snapshot_schedule.ModifyClusterSnapshotScheduleOutput {
+    pub fn modifyClusterSnapshotSchedule(self: *Self, allocator: std.mem.Allocator, input: modify_cluster_snapshot_schedule.ModifyClusterSnapshotScheduleInput, options: CallOptions) !modify_cluster_snapshot_schedule.ModifyClusterSnapshotScheduleOutput {
         return modify_cluster_snapshot_schedule.execute(self, allocator, input, options);
     }
 
@@ -1479,45 +1480,45 @@ pub const Client = struct {
     ///
     /// For more information about VPC BPA, see [Block public access to VPCs and
     /// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html) in the *Amazon VPC User Guide*.
-    pub fn modifyClusterSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: modify_cluster_subnet_group.ModifyClusterSubnetGroupInput, options: modify_cluster_subnet_group.Options) !modify_cluster_subnet_group.ModifyClusterSubnetGroupOutput {
+    pub fn modifyClusterSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: modify_cluster_subnet_group.ModifyClusterSubnetGroupInput, options: CallOptions) !modify_cluster_subnet_group.ModifyClusterSubnetGroupOutput {
         return modify_cluster_subnet_group.execute(self, allocator, input, options);
     }
 
     /// Contains information for changing a custom domain association.
-    pub fn modifyCustomDomainAssociation(self: *Self, allocator: std.mem.Allocator, input: modify_custom_domain_association.ModifyCustomDomainAssociationInput, options: modify_custom_domain_association.Options) !modify_custom_domain_association.ModifyCustomDomainAssociationOutput {
+    pub fn modifyCustomDomainAssociation(self: *Self, allocator: std.mem.Allocator, input: modify_custom_domain_association.ModifyCustomDomainAssociationInput, options: CallOptions) !modify_custom_domain_association.ModifyCustomDomainAssociationOutput {
         return modify_custom_domain_association.execute(self, allocator, input, options);
     }
 
     /// Modifies a Redshift-managed VPC endpoint.
-    pub fn modifyEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: modify_endpoint_access.ModifyEndpointAccessInput, options: modify_endpoint_access.Options) !modify_endpoint_access.ModifyEndpointAccessOutput {
+    pub fn modifyEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: modify_endpoint_access.ModifyEndpointAccessInput, options: CallOptions) !modify_endpoint_access.ModifyEndpointAccessOutput {
         return modify_endpoint_access.execute(self, allocator, input, options);
     }
 
     /// Modifies an existing Amazon Redshift event notification subscription.
-    pub fn modifyEventSubscription(self: *Self, allocator: std.mem.Allocator, input: modify_event_subscription.ModifyEventSubscriptionInput, options: modify_event_subscription.Options) !modify_event_subscription.ModifyEventSubscriptionOutput {
+    pub fn modifyEventSubscription(self: *Self, allocator: std.mem.Allocator, input: modify_event_subscription.ModifyEventSubscriptionInput, options: CallOptions) !modify_event_subscription.ModifyEventSubscriptionOutput {
         return modify_event_subscription.execute(self, allocator, input, options);
     }
 
     /// Modifies a zero-ETL integration or S3 event integration with Amazon
     /// Redshift.
-    pub fn modifyIntegration(self: *Self, allocator: std.mem.Allocator, input: modify_integration.ModifyIntegrationInput, options: modify_integration.Options) !modify_integration.ModifyIntegrationOutput {
+    pub fn modifyIntegration(self: *Self, allocator: std.mem.Allocator, input: modify_integration.ModifyIntegrationInput, options: CallOptions) !modify_integration.ModifyIntegrationOutput {
         return modify_integration.execute(self, allocator, input, options);
     }
 
     /// Modifies the lakehouse configuration for a cluster. This operation allows
     /// you to manage Amazon Redshift federated permissions and Amazon Web Services
     /// IAM Identity Center trusted identity propagation.
-    pub fn modifyLakehouseConfiguration(self: *Self, allocator: std.mem.Allocator, input: modify_lakehouse_configuration.ModifyLakehouseConfigurationInput, options: modify_lakehouse_configuration.Options) !modify_lakehouse_configuration.ModifyLakehouseConfigurationOutput {
+    pub fn modifyLakehouseConfiguration(self: *Self, allocator: std.mem.Allocator, input: modify_lakehouse_configuration.ModifyLakehouseConfigurationInput, options: CallOptions) !modify_lakehouse_configuration.ModifyLakehouseConfigurationOutput {
         return modify_lakehouse_configuration.execute(self, allocator, input, options);
     }
 
     /// Changes an existing Amazon Redshift IAM Identity Center application.
-    pub fn modifyRedshiftIdcApplication(self: *Self, allocator: std.mem.Allocator, input: modify_redshift_idc_application.ModifyRedshiftIdcApplicationInput, options: modify_redshift_idc_application.Options) !modify_redshift_idc_application.ModifyRedshiftIdcApplicationOutput {
+    pub fn modifyRedshiftIdcApplication(self: *Self, allocator: std.mem.Allocator, input: modify_redshift_idc_application.ModifyRedshiftIdcApplicationInput, options: CallOptions) !modify_redshift_idc_application.ModifyRedshiftIdcApplicationOutput {
         return modify_redshift_idc_application.execute(self, allocator, input, options);
     }
 
     /// Modifies a scheduled action.
-    pub fn modifyScheduledAction(self: *Self, allocator: std.mem.Allocator, input: modify_scheduled_action.ModifyScheduledActionInput, options: modify_scheduled_action.Options) !modify_scheduled_action.ModifyScheduledActionOutput {
+    pub fn modifyScheduledAction(self: *Self, allocator: std.mem.Allocator, input: modify_scheduled_action.ModifyScheduledActionInput, options: CallOptions) !modify_scheduled_action.ModifyScheduledActionOutput {
         return modify_scheduled_action.execute(self, allocator, input, options);
     }
 
@@ -1534,25 +1535,25 @@ pub const Client = struct {
     /// If you set this option, only newly copied manual snapshots have the new
     /// retention
     /// period.
-    pub fn modifySnapshotCopyRetentionPeriod(self: *Self, allocator: std.mem.Allocator, input: modify_snapshot_copy_retention_period.ModifySnapshotCopyRetentionPeriodInput, options: modify_snapshot_copy_retention_period.Options) !modify_snapshot_copy_retention_period.ModifySnapshotCopyRetentionPeriodOutput {
+    pub fn modifySnapshotCopyRetentionPeriod(self: *Self, allocator: std.mem.Allocator, input: modify_snapshot_copy_retention_period.ModifySnapshotCopyRetentionPeriodInput, options: CallOptions) !modify_snapshot_copy_retention_period.ModifySnapshotCopyRetentionPeriodOutput {
         return modify_snapshot_copy_retention_period.execute(self, allocator, input, options);
     }
 
     /// Modifies a snapshot schedule. Any schedule associated with a cluster is
     /// modified
     /// asynchronously.
-    pub fn modifySnapshotSchedule(self: *Self, allocator: std.mem.Allocator, input: modify_snapshot_schedule.ModifySnapshotScheduleInput, options: modify_snapshot_schedule.Options) !modify_snapshot_schedule.ModifySnapshotScheduleOutput {
+    pub fn modifySnapshotSchedule(self: *Self, allocator: std.mem.Allocator, input: modify_snapshot_schedule.ModifySnapshotScheduleInput, options: CallOptions) !modify_snapshot_schedule.ModifySnapshotScheduleOutput {
         return modify_snapshot_schedule.execute(self, allocator, input, options);
     }
 
     /// Modifies a usage limit in a cluster.
     /// You can't modify the feature type or period of a usage limit.
-    pub fn modifyUsageLimit(self: *Self, allocator: std.mem.Allocator, input: modify_usage_limit.ModifyUsageLimitInput, options: modify_usage_limit.Options) !modify_usage_limit.ModifyUsageLimitOutput {
+    pub fn modifyUsageLimit(self: *Self, allocator: std.mem.Allocator, input: modify_usage_limit.ModifyUsageLimitInput, options: CallOptions) !modify_usage_limit.ModifyUsageLimitOutput {
         return modify_usage_limit.execute(self, allocator, input, options);
     }
 
     /// Pauses a cluster.
-    pub fn pauseCluster(self: *Self, allocator: std.mem.Allocator, input: pause_cluster.PauseClusterInput, options: pause_cluster.Options) !pause_cluster.PauseClusterOutput {
+    pub fn pauseCluster(self: *Self, allocator: std.mem.Allocator, input: pause_cluster.PauseClusterInput, options: CallOptions) !pause_cluster.PauseClusterOutput {
         return pause_cluster.execute(self, allocator, input, options);
     }
 
@@ -1569,12 +1570,12 @@ pub const Client = struct {
     /// [Purchasing Reserved
     /// Nodes](https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn purchaseReservedNodeOffering(self: *Self, allocator: std.mem.Allocator, input: purchase_reserved_node_offering.PurchaseReservedNodeOfferingInput, options: purchase_reserved_node_offering.Options) !purchase_reserved_node_offering.PurchaseReservedNodeOfferingOutput {
+    pub fn purchaseReservedNodeOffering(self: *Self, allocator: std.mem.Allocator, input: purchase_reserved_node_offering.PurchaseReservedNodeOfferingInput, options: CallOptions) !purchase_reserved_node_offering.PurchaseReservedNodeOfferingOutput {
         return purchase_reserved_node_offering.execute(self, allocator, input, options);
     }
 
     /// Updates the resource policy for a specified resource.
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -1587,18 +1588,18 @@ pub const Client = struct {
     /// [Amazon Redshift
     /// Clusters](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn rebootCluster(self: *Self, allocator: std.mem.Allocator, input: reboot_cluster.RebootClusterInput, options: reboot_cluster.Options) !reboot_cluster.RebootClusterOutput {
+    pub fn rebootCluster(self: *Self, allocator: std.mem.Allocator, input: reboot_cluster.RebootClusterInput, options: CallOptions) !reboot_cluster.RebootClusterOutput {
         return reboot_cluster.execute(self, allocator, input, options);
     }
 
     /// Registers a cluster or serverless namespace to the Amazon Web Services Glue
     /// Data Catalog.
-    pub fn registerNamespace(self: *Self, allocator: std.mem.Allocator, input: register_namespace.RegisterNamespaceInput, options: register_namespace.Options) !register_namespace.RegisterNamespaceOutput {
+    pub fn registerNamespace(self: *Self, allocator: std.mem.Allocator, input: register_namespace.RegisterNamespaceInput, options: CallOptions) !register_namespace.RegisterNamespaceOutput {
         return register_namespace.execute(self, allocator, input, options);
     }
 
     /// From a datashare consumer account, rejects the specified datashare.
-    pub fn rejectDataShare(self: *Self, allocator: std.mem.Allocator, input: reject_data_share.RejectDataShareInput, options: reject_data_share.Options) !reject_data_share.RejectDataShareOutput {
+    pub fn rejectDataShare(self: *Self, allocator: std.mem.Allocator, input: reject_data_share.RejectDataShareInput, options: CallOptions) !reject_data_share.RejectDataShareOutput {
         return reject_data_share.execute(self, allocator, input, options);
     }
 
@@ -1609,7 +1610,7 @@ pub const Client = struct {
     /// entire parameter group specify the *ResetAllParameters* parameter.
     /// For parameter changes to take effect you must reboot any associated
     /// clusters.
-    pub fn resetClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: reset_cluster_parameter_group.ResetClusterParameterGroupInput, options: reset_cluster_parameter_group.Options) !reset_cluster_parameter_group.ResetClusterParameterGroupOutput {
+    pub fn resetClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: reset_cluster_parameter_group.ResetClusterParameterGroupInput, options: CallOptions) !reset_cluster_parameter_group.ResetClusterParameterGroupOutput {
         return reset_cluster_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -1639,7 +1640,7 @@ pub const Client = struct {
     ///
     /// * The type of nodes that you add must match the node type for the
     /// cluster.
-    pub fn resizeCluster(self: *Self, allocator: std.mem.Allocator, input: resize_cluster.ResizeClusterInput, options: resize_cluster.Options) !resize_cluster.ResizeClusterOutput {
+    pub fn resizeCluster(self: *Self, allocator: std.mem.Allocator, input: resize_cluster.ResizeClusterInput, options: CallOptions) !resize_cluster.ResizeClusterOutput {
         return resize_cluster.execute(self, allocator, input, options);
     }
 
@@ -1684,7 +1685,7 @@ pub const Client = struct {
     /// [Amazon Redshift
     /// Snapshots](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn restoreFromClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: restore_from_cluster_snapshot.RestoreFromClusterSnapshotInput, options: restore_from_cluster_snapshot.Options) !restore_from_cluster_snapshot.RestoreFromClusterSnapshotOutput {
+    pub fn restoreFromClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: restore_from_cluster_snapshot.RestoreFromClusterSnapshotInput, options: CallOptions) !restore_from_cluster_snapshot.RestoreFromClusterSnapshotOutput {
         return restore_from_cluster_snapshot.execute(self, allocator, input, options);
     }
 
@@ -1711,12 +1712,12 @@ pub const Client = struct {
     /// You can't use this operation to restore tables with
     /// [interleaved sort
     /// keys](https://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html#t_Sorting_data-interleaved).
-    pub fn restoreTableFromClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: restore_table_from_cluster_snapshot.RestoreTableFromClusterSnapshotInput, options: restore_table_from_cluster_snapshot.Options) !restore_table_from_cluster_snapshot.RestoreTableFromClusterSnapshotOutput {
+    pub fn restoreTableFromClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: restore_table_from_cluster_snapshot.RestoreTableFromClusterSnapshotInput, options: CallOptions) !restore_table_from_cluster_snapshot.RestoreTableFromClusterSnapshotOutput {
         return restore_table_from_cluster_snapshot.execute(self, allocator, input, options);
     }
 
     /// Resumes a paused cluster.
-    pub fn resumeCluster(self: *Self, allocator: std.mem.Allocator, input: resume_cluster.ResumeClusterInput, options: resume_cluster.Options) !resume_cluster.ResumeClusterOutput {
+    pub fn resumeCluster(self: *Self, allocator: std.mem.Allocator, input: resume_cluster.ResumeClusterInput, options: CallOptions) !resume_cluster.ResumeClusterOutput {
         return resume_cluster.execute(self, allocator, input, options);
     }
 
@@ -1728,12 +1729,12 @@ pub const Client = struct {
     /// [Amazon Redshift Cluster Security
     /// Groups](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html) in the
     /// *Amazon Redshift Cluster Management Guide*.
-    pub fn revokeClusterSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: revoke_cluster_security_group_ingress.RevokeClusterSecurityGroupIngressInput, options: revoke_cluster_security_group_ingress.Options) !revoke_cluster_security_group_ingress.RevokeClusterSecurityGroupIngressOutput {
+    pub fn revokeClusterSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: revoke_cluster_security_group_ingress.RevokeClusterSecurityGroupIngressInput, options: CallOptions) !revoke_cluster_security_group_ingress.RevokeClusterSecurityGroupIngressOutput {
         return revoke_cluster_security_group_ingress.execute(self, allocator, input, options);
     }
 
     /// Revokes access to a cluster.
-    pub fn revokeEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: revoke_endpoint_access.RevokeEndpointAccessInput, options: revoke_endpoint_access.Options) !revoke_endpoint_access.RevokeEndpointAccessOutput {
+    pub fn revokeEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: revoke_endpoint_access.RevokeEndpointAccessInput, options: CallOptions) !revoke_endpoint_access.RevokeEndpointAccessOutput {
         return revoke_endpoint_access.execute(self, allocator, input, options);
     }
 
@@ -1747,17 +1748,17 @@ pub const Client = struct {
     /// [Amazon Redshift
     /// Snapshots](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
     /// in the *Amazon Redshift Cluster Management Guide*.
-    pub fn revokeSnapshotAccess(self: *Self, allocator: std.mem.Allocator, input: revoke_snapshot_access.RevokeSnapshotAccessInput, options: revoke_snapshot_access.Options) !revoke_snapshot_access.RevokeSnapshotAccessOutput {
+    pub fn revokeSnapshotAccess(self: *Self, allocator: std.mem.Allocator, input: revoke_snapshot_access.RevokeSnapshotAccessInput, options: CallOptions) !revoke_snapshot_access.RevokeSnapshotAccessOutput {
         return revoke_snapshot_access.execute(self, allocator, input, options);
     }
 
     /// Rotates the encryption keys for a cluster.
-    pub fn rotateEncryptionKey(self: *Self, allocator: std.mem.Allocator, input: rotate_encryption_key.RotateEncryptionKeyInput, options: rotate_encryption_key.Options) !rotate_encryption_key.RotateEncryptionKeyOutput {
+    pub fn rotateEncryptionKey(self: *Self, allocator: std.mem.Allocator, input: rotate_encryption_key.RotateEncryptionKeyInput, options: CallOptions) !rotate_encryption_key.RotateEncryptionKeyOutput {
         return rotate_encryption_key.execute(self, allocator, input, options);
     }
 
     /// Updates the status of a partner integration.
-    pub fn updatePartnerStatus(self: *Self, allocator: std.mem.Allocator, input: update_partner_status.UpdatePartnerStatusInput, options: update_partner_status.Options) !update_partner_status.UpdatePartnerStatusOutput {
+    pub fn updatePartnerStatus(self: *Self, allocator: std.mem.Allocator, input: update_partner_status.UpdatePartnerStatusInput, options: CallOptions) !update_partner_status.UpdatePartnerStatusOutput {
         return update_partner_status.execute(self, allocator, input, options);
     }
 

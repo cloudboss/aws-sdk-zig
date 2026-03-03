@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PartnerType = @import("partner_type.zig").PartnerType;
 
@@ -21,11 +22,7 @@ pub const DisassociateAwsAccountFromPartnerAccountInput = struct {
 pub const DisassociateAwsAccountFromPartnerAccountOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateAwsAccountFromPartnerAccountInput, options: Options) !DisassociateAwsAccountFromPartnerAccountOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateAwsAccountFromPartnerAccountInput, options: CallOptions) !DisassociateAwsAccountFromPartnerAccountOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

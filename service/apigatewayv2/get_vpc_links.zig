@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VpcLink = @import("vpc_link.zig").VpcLink;
 
@@ -33,11 +34,7 @@ pub const GetVpcLinksOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetVpcLinksInput, options: Options) !GetVpcLinksOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetVpcLinksInput, options: CallOptions) !GetVpcLinksOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AcquiredLimit = @import("acquired_limit.zig").AcquiredLimit;
 const SessionActionDefinition = @import("session_action_definition.zig").SessionActionDefinition;
@@ -86,11 +87,7 @@ pub const GetSessionActionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSessionActionInput, options: Options) !GetSessionActionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSessionActionInput, options: CallOptions) !GetSessionActionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

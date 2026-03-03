@@ -2,19 +2,16 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SqlParameter = @import("sql_parameter.zig").SqlParameter;
 const UpdateResult = @import("update_result.zig").UpdateResult;
 
-const BatchExecuteStatementInput = @import("batch_execute_statement_request.zig").BatchExecuteStatementRequest;
+pub const BatchExecuteStatementInput = @import("batch_execute_statement_request.zig").BatchExecuteStatementRequest;
 
-const BatchExecuteStatementOutput = @import("batch_execute_statement_response.zig").BatchExecuteStatementResponse;
+pub const BatchExecuteStatementOutput = @import("batch_execute_statement_response.zig").BatchExecuteStatementResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchExecuteStatementInput, options: Options) !BatchExecuteStatementOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchExecuteStatementInput, options: CallOptions) !BatchExecuteStatementOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

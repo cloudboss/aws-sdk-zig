@@ -3,6 +3,7 @@ const std = @import("std");
 
 const join_storage_session = @import("join_storage_session.zig");
 const join_storage_session_as_viewer = @import("join_storage_session_as_viewer.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -86,7 +87,7 @@ pub const Client = struct {
     ///
     /// * **Concurrent calls** - Concurrent calls are allowed. An offer is sent once
     ///   per each call.
-    pub fn joinStorageSession(self: *Self, allocator: std.mem.Allocator, input: join_storage_session.JoinStorageSessionInput, options: join_storage_session.Options) !join_storage_session.JoinStorageSessionOutput {
+    pub fn joinStorageSession(self: *Self, allocator: std.mem.Allocator, input: join_storage_session.JoinStorageSessionInput, options: CallOptions) !join_storage_session.JoinStorageSessionOutput {
         return join_storage_session.execute(self, allocator, input, options);
     }
 
@@ -110,7 +111,7 @@ pub const Client = struct {
     /// with ingested WebRTC media. If there’s an existing session with the same
     /// `clientId` that's found in the join session request, the new request takes
     /// precedence.
-    pub fn joinStorageSessionAsViewer(self: *Self, allocator: std.mem.Allocator, input: join_storage_session_as_viewer.JoinStorageSessionAsViewerInput, options: join_storage_session_as_viewer.Options) !join_storage_session_as_viewer.JoinStorageSessionAsViewerOutput {
+    pub fn joinStorageSessionAsViewer(self: *Self, allocator: std.mem.Allocator, input: join_storage_session_as_viewer.JoinStorageSessionAsViewerInput, options: CallOptions) !join_storage_session_as_viewer.JoinStorageSessionAsViewerOutput {
         return join_storage_session_as_viewer.execute(self, allocator, input, options);
     }
 };

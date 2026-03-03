@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const UserDefinedFunctionInput = @import("user_defined_function_input.zig").UserDefinedFunctionInput;
 
@@ -28,11 +29,7 @@ pub const CreateUserDefinedFunctionInput = struct {
 pub const CreateUserDefinedFunctionOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateUserDefinedFunctionInput, options: Options) !CreateUserDefinedFunctionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateUserDefinedFunctionInput, options: CallOptions) !CreateUserDefinedFunctionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

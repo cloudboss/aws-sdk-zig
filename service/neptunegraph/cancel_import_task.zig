@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Format = @import("format.zig").Format;
 const ParquetType = @import("parquet_type.zig").ParquetType;
@@ -54,11 +55,7 @@ pub const CancelImportTaskOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelImportTaskInput, options: Options) !CancelImportTaskOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelImportTaskInput, options: CallOptions) !CancelImportTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

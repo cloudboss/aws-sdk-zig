@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const StorageLensTag = @import("storage_lens_tag.zig").StorageLensTag;
 const serde = @import("serde.zig");
@@ -19,11 +20,7 @@ pub const GetStorageLensConfigurationTaggingOutput = struct {
     tags: ?[]const StorageLensTag = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetStorageLensConfigurationTaggingInput, options: Options) !GetStorageLensConfigurationTaggingOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetStorageLensConfigurationTaggingInput, options: CallOptions) !GetStorageLensConfigurationTaggingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

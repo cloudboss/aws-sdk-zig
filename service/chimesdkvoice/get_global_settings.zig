@@ -2,10 +2,11 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VoiceConnectorSettings = @import("voice_connector_settings.zig").VoiceConnectorSettings;
 
-const GetGlobalSettingsInput = struct {};
+pub const GetGlobalSettingsInput = struct {};
 
 pub const GetGlobalSettingsOutput = struct {
     /// The Voice Connector settings.
@@ -16,11 +17,7 @@ pub const GetGlobalSettingsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetGlobalSettingsInput, options: Options) !GetGlobalSettingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetGlobalSettingsInput, options: CallOptions) !GetGlobalSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

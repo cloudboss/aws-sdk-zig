@@ -72,6 +72,7 @@ const verify_domain_dkim = @import("verify_domain_dkim.zig");
 const verify_domain_identity = @import("verify_domain_identity.zig");
 const verify_email_address = @import("verify_email_address.zig");
 const verify_email_identity = @import("verify_email_identity.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -111,7 +112,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn cloneReceiptRuleSet(self: *Self, allocator: std.mem.Allocator, input: clone_receipt_rule_set.CloneReceiptRuleSetInput, options: clone_receipt_rule_set.Options) !clone_receipt_rule_set.CloneReceiptRuleSetOutput {
+    pub fn cloneReceiptRuleSet(self: *Self, allocator: std.mem.Allocator, input: clone_receipt_rule_set.CloneReceiptRuleSetInput, options: CallOptions) !clone_receipt_rule_set.CloneReceiptRuleSetOutput {
         return clone_receipt_rule_set.execute(self, allocator, input, options);
     }
 
@@ -123,7 +124,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn createConfigurationSet(self: *Self, allocator: std.mem.Allocator, input: create_configuration_set.CreateConfigurationSetInput, options: create_configuration_set.Options) !create_configuration_set.CreateConfigurationSetOutput {
+    pub fn createConfigurationSet(self: *Self, allocator: std.mem.Allocator, input: create_configuration_set.CreateConfigurationSetInput, options: CallOptions) !create_configuration_set.CreateConfigurationSetOutput {
         return create_configuration_set.execute(self, allocator, input, options);
     }
 
@@ -142,7 +143,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn createConfigurationSetEventDestination(self: *Self, allocator: std.mem.Allocator, input: create_configuration_set_event_destination.CreateConfigurationSetEventDestinationInput, options: create_configuration_set_event_destination.Options) !create_configuration_set_event_destination.CreateConfigurationSetEventDestinationOutput {
+    pub fn createConfigurationSetEventDestination(self: *Self, allocator: std.mem.Allocator, input: create_configuration_set_event_destination.CreateConfigurationSetEventDestinationInput, options: CallOptions) !create_configuration_set_event_destination.CreateConfigurationSetEventDestinationOutput {
         return create_configuration_set_event_destination.execute(self, allocator, input, options);
     }
 
@@ -157,7 +158,7 @@ pub const Client = struct {
     /// events. For information about using custom domains, see the [Amazon SES
     /// Developer
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/configure-custom-open-click-domains.html).
-    pub fn createConfigurationSetTrackingOptions(self: *Self, allocator: std.mem.Allocator, input: create_configuration_set_tracking_options.CreateConfigurationSetTrackingOptionsInput, options: create_configuration_set_tracking_options.Options) !create_configuration_set_tracking_options.CreateConfigurationSetTrackingOptionsOutput {
+    pub fn createConfigurationSetTrackingOptions(self: *Self, allocator: std.mem.Allocator, input: create_configuration_set_tracking_options.CreateConfigurationSetTrackingOptionsInput, options: CallOptions) !create_configuration_set_tracking_options.CreateConfigurationSetTrackingOptionsOutput {
         return create_configuration_set_tracking_options.execute(self, allocator, input, options);
     }
 
@@ -169,7 +170,7 @@ pub const Client = struct {
     /// Guide*.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn createCustomVerificationEmailTemplate(self: *Self, allocator: std.mem.Allocator, input: create_custom_verification_email_template.CreateCustomVerificationEmailTemplateInput, options: create_custom_verification_email_template.Options) !create_custom_verification_email_template.CreateCustomVerificationEmailTemplateOutput {
+    pub fn createCustomVerificationEmailTemplate(self: *Self, allocator: std.mem.Allocator, input: create_custom_verification_email_template.CreateCustomVerificationEmailTemplateInput, options: CallOptions) !create_custom_verification_email_template.CreateCustomVerificationEmailTemplateOutput {
         return create_custom_verification_email_template.execute(self, allocator, input, options);
     }
 
@@ -180,7 +181,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn createReceiptFilter(self: *Self, allocator: std.mem.Allocator, input: create_receipt_filter.CreateReceiptFilterInput, options: create_receipt_filter.Options) !create_receipt_filter.CreateReceiptFilterOutput {
+    pub fn createReceiptFilter(self: *Self, allocator: std.mem.Allocator, input: create_receipt_filter.CreateReceiptFilterInput, options: CallOptions) !create_receipt_filter.CreateReceiptFilterOutput {
         return create_receipt_filter.execute(self, allocator, input, options);
     }
 
@@ -191,7 +192,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn createReceiptRule(self: *Self, allocator: std.mem.Allocator, input: create_receipt_rule.CreateReceiptRuleInput, options: create_receipt_rule.Options) !create_receipt_rule.CreateReceiptRuleOutput {
+    pub fn createReceiptRule(self: *Self, allocator: std.mem.Allocator, input: create_receipt_rule.CreateReceiptRuleInput, options: CallOptions) !create_receipt_rule.CreateReceiptRuleOutput {
         return create_receipt_rule.execute(self, allocator, input, options);
     }
 
@@ -202,7 +203,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn createReceiptRuleSet(self: *Self, allocator: std.mem.Allocator, input: create_receipt_rule_set.CreateReceiptRuleSetInput, options: create_receipt_rule_set.Options) !create_receipt_rule_set.CreateReceiptRuleSetOutput {
+    pub fn createReceiptRuleSet(self: *Self, allocator: std.mem.Allocator, input: create_receipt_rule_set.CreateReceiptRuleSetInput, options: CallOptions) !create_receipt_rule_set.CreateReceiptRuleSetOutput {
         return create_receipt_rule_set.execute(self, allocator, input, options);
     }
 
@@ -214,7 +215,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn createTemplate(self: *Self, allocator: std.mem.Allocator, input: create_template.CreateTemplateInput, options: create_template.Options) !create_template.CreateTemplateOutput {
+    pub fn createTemplate(self: *Self, allocator: std.mem.Allocator, input: create_template.CreateTemplateInput, options: CallOptions) !create_template.CreateTemplateOutput {
         return create_template.execute(self, allocator, input, options);
     }
 
@@ -225,7 +226,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn deleteConfigurationSet(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_set.DeleteConfigurationSetInput, options: delete_configuration_set.Options) !delete_configuration_set.DeleteConfigurationSetOutput {
+    pub fn deleteConfigurationSet(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_set.DeleteConfigurationSetInput, options: CallOptions) !delete_configuration_set.DeleteConfigurationSetOutput {
         return delete_configuration_set.execute(self, allocator, input, options);
     }
 
@@ -238,7 +239,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn deleteConfigurationSetEventDestination(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_set_event_destination.DeleteConfigurationSetEventDestinationInput, options: delete_configuration_set_event_destination.Options) !delete_configuration_set_event_destination.DeleteConfigurationSetEventDestinationOutput {
+    pub fn deleteConfigurationSetEventDestination(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_set_event_destination.DeleteConfigurationSetEventDestinationInput, options: CallOptions) !delete_configuration_set_event_destination.DeleteConfigurationSetEventDestinationOutput {
         return delete_configuration_set_event_destination.execute(self, allocator, input, options);
     }
 
@@ -257,7 +258,7 @@ pub const Client = struct {
     /// Deleting this kind of association results in emails sent using the specified
     /// configuration set to capture open and click events using the standard,
     /// Amazon SES-operated domains.
-    pub fn deleteConfigurationSetTrackingOptions(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_set_tracking_options.DeleteConfigurationSetTrackingOptionsInput, options: delete_configuration_set_tracking_options.Options) !delete_configuration_set_tracking_options.DeleteConfigurationSetTrackingOptionsOutput {
+    pub fn deleteConfigurationSetTrackingOptions(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_set_tracking_options.DeleteConfigurationSetTrackingOptionsInput, options: CallOptions) !delete_configuration_set_tracking_options.DeleteConfigurationSetTrackingOptionsOutput {
         return delete_configuration_set_tracking_options.execute(self, allocator, input, options);
     }
 
@@ -269,7 +270,7 @@ pub const Client = struct {
     /// Guide*.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn deleteCustomVerificationEmailTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_custom_verification_email_template.DeleteCustomVerificationEmailTemplateInput, options: delete_custom_verification_email_template.Options) !delete_custom_verification_email_template.DeleteCustomVerificationEmailTemplateOutput {
+    pub fn deleteCustomVerificationEmailTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_custom_verification_email_template.DeleteCustomVerificationEmailTemplateInput, options: CallOptions) !delete_custom_verification_email_template.DeleteCustomVerificationEmailTemplateOutput {
         return delete_custom_verification_email_template.execute(self, allocator, input, options);
     }
 
@@ -278,7 +279,7 @@ pub const Client = struct {
     /// verified identities.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn deleteIdentity(self: *Self, allocator: std.mem.Allocator, input: delete_identity.DeleteIdentityInput, options: delete_identity.Options) !delete_identity.DeleteIdentityOutput {
+    pub fn deleteIdentity(self: *Self, allocator: std.mem.Allocator, input: delete_identity.DeleteIdentityInput, options: CallOptions) !delete_identity.DeleteIdentityOutput {
         return delete_identity.execute(self, allocator, input, options);
     }
 
@@ -300,7 +301,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn deleteIdentityPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_identity_policy.DeleteIdentityPolicyInput, options: delete_identity_policy.Options) !delete_identity_policy.DeleteIdentityPolicyOutput {
+    pub fn deleteIdentityPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_identity_policy.DeleteIdentityPolicyInput, options: CallOptions) !delete_identity_policy.DeleteIdentityPolicyOutput {
         return delete_identity_policy.execute(self, allocator, input, options);
     }
 
@@ -311,7 +312,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn deleteReceiptFilter(self: *Self, allocator: std.mem.Allocator, input: delete_receipt_filter.DeleteReceiptFilterInput, options: delete_receipt_filter.Options) !delete_receipt_filter.DeleteReceiptFilterOutput {
+    pub fn deleteReceiptFilter(self: *Self, allocator: std.mem.Allocator, input: delete_receipt_filter.DeleteReceiptFilterInput, options: CallOptions) !delete_receipt_filter.DeleteReceiptFilterOutput {
         return delete_receipt_filter.execute(self, allocator, input, options);
     }
 
@@ -322,7 +323,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn deleteReceiptRule(self: *Self, allocator: std.mem.Allocator, input: delete_receipt_rule.DeleteReceiptRuleInput, options: delete_receipt_rule.Options) !delete_receipt_rule.DeleteReceiptRuleOutput {
+    pub fn deleteReceiptRule(self: *Self, allocator: std.mem.Allocator, input: delete_receipt_rule.DeleteReceiptRuleInput, options: CallOptions) !delete_receipt_rule.DeleteReceiptRuleOutput {
         return delete_receipt_rule.execute(self, allocator, input, options);
     }
 
@@ -336,20 +337,20 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn deleteReceiptRuleSet(self: *Self, allocator: std.mem.Allocator, input: delete_receipt_rule_set.DeleteReceiptRuleSetInput, options: delete_receipt_rule_set.Options) !delete_receipt_rule_set.DeleteReceiptRuleSetOutput {
+    pub fn deleteReceiptRuleSet(self: *Self, allocator: std.mem.Allocator, input: delete_receipt_rule_set.DeleteReceiptRuleSetInput, options: CallOptions) !delete_receipt_rule_set.DeleteReceiptRuleSetOutput {
         return delete_receipt_rule_set.execute(self, allocator, input, options);
     }
 
     /// Deletes an email template.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn deleteTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_template.DeleteTemplateInput, options: delete_template.Options) !delete_template.DeleteTemplateOutput {
+    pub fn deleteTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_template.DeleteTemplateInput, options: CallOptions) !delete_template.DeleteTemplateOutput {
         return delete_template.execute(self, allocator, input, options);
     }
 
     /// Deprecated. Use the `DeleteIdentity` operation to delete email addresses
     /// and domains.
-    pub fn deleteVerifiedEmailAddress(self: *Self, allocator: std.mem.Allocator, input: delete_verified_email_address.DeleteVerifiedEmailAddressInput, options: delete_verified_email_address.Options) !delete_verified_email_address.DeleteVerifiedEmailAddressOutput {
+    pub fn deleteVerifiedEmailAddress(self: *Self, allocator: std.mem.Allocator, input: delete_verified_email_address.DeleteVerifiedEmailAddressInput, options: CallOptions) !delete_verified_email_address.DeleteVerifiedEmailAddressOutput {
         return delete_verified_email_address.execute(self, allocator, input, options);
     }
 
@@ -362,7 +363,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn describeActiveReceiptRuleSet(self: *Self, allocator: std.mem.Allocator, input: describe_active_receipt_rule_set.DescribeActiveReceiptRuleSetInput, options: describe_active_receipt_rule_set.Options) !describe_active_receipt_rule_set.DescribeActiveReceiptRuleSetOutput {
+    pub fn describeActiveReceiptRuleSet(self: *Self, allocator: std.mem.Allocator, input: describe_active_receipt_rule_set.DescribeActiveReceiptRuleSetInput, options: CallOptions) !describe_active_receipt_rule_set.DescribeActiveReceiptRuleSetOutput {
         return describe_active_receipt_rule_set.execute(self, allocator, input, options);
     }
 
@@ -372,7 +373,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn describeConfigurationSet(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_set.DescribeConfigurationSetInput, options: describe_configuration_set.Options) !describe_configuration_set.DescribeConfigurationSetOutput {
+    pub fn describeConfigurationSet(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_set.DescribeConfigurationSetInput, options: CallOptions) !describe_configuration_set.DescribeConfigurationSetOutput {
         return describe_configuration_set.execute(self, allocator, input, options);
     }
 
@@ -383,7 +384,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn describeReceiptRule(self: *Self, allocator: std.mem.Allocator, input: describe_receipt_rule.DescribeReceiptRuleInput, options: describe_receipt_rule.Options) !describe_receipt_rule.DescribeReceiptRuleOutput {
+    pub fn describeReceiptRule(self: *Self, allocator: std.mem.Allocator, input: describe_receipt_rule.DescribeReceiptRuleInput, options: CallOptions) !describe_receipt_rule.DescribeReceiptRuleOutput {
         return describe_receipt_rule.execute(self, allocator, input, options);
     }
 
@@ -394,7 +395,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn describeReceiptRuleSet(self: *Self, allocator: std.mem.Allocator, input: describe_receipt_rule_set.DescribeReceiptRuleSetInput, options: describe_receipt_rule_set.Options) !describe_receipt_rule_set.DescribeReceiptRuleSetOutput {
+    pub fn describeReceiptRuleSet(self: *Self, allocator: std.mem.Allocator, input: describe_receipt_rule_set.DescribeReceiptRuleSetInput, options: CallOptions) !describe_receipt_rule_set.DescribeReceiptRuleSetOutput {
         return describe_receipt_rule_set.execute(self, allocator, input, options);
     }
 
@@ -402,7 +403,7 @@ pub const Client = struct {
     /// Region.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn getAccountSendingEnabled(self: *Self, allocator: std.mem.Allocator, input: get_account_sending_enabled.GetAccountSendingEnabledInput, options: get_account_sending_enabled.Options) !get_account_sending_enabled.GetAccountSendingEnabledOutput {
+    pub fn getAccountSendingEnabled(self: *Self, allocator: std.mem.Allocator, input: get_account_sending_enabled.GetAccountSendingEnabledInput, options: CallOptions) !get_account_sending_enabled.GetAccountSendingEnabledOutput {
         return get_account_sending_enabled.execute(self, allocator, input, options);
     }
 
@@ -415,7 +416,7 @@ pub const Client = struct {
     /// Guide*.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn getCustomVerificationEmailTemplate(self: *Self, allocator: std.mem.Allocator, input: get_custom_verification_email_template.GetCustomVerificationEmailTemplateInput, options: get_custom_verification_email_template.Options) !get_custom_verification_email_template.GetCustomVerificationEmailTemplateOutput {
+    pub fn getCustomVerificationEmailTemplate(self: *Self, allocator: std.mem.Allocator, input: get_custom_verification_email_template.GetCustomVerificationEmailTemplateInput, options: CallOptions) !get_custom_verification_email_template.GetCustomVerificationEmailTemplateOutput {
         return get_custom_verification_email_template.execute(self, allocator, input, options);
     }
 
@@ -450,7 +451,7 @@ pub const Client = struct {
     /// [Amazon SES
     /// Developer
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy-managing.html).
-    pub fn getIdentityDkimAttributes(self: *Self, allocator: std.mem.Allocator, input: get_identity_dkim_attributes.GetIdentityDkimAttributesInput, options: get_identity_dkim_attributes.Options) !get_identity_dkim_attributes.GetIdentityDkimAttributesOutput {
+    pub fn getIdentityDkimAttributes(self: *Self, allocator: std.mem.Allocator, input: get_identity_dkim_attributes.GetIdentityDkimAttributesInput, options: CallOptions) !get_identity_dkim_attributes.GetIdentityDkimAttributesOutput {
         return get_identity_dkim_attributes.execute(self, allocator, input, options);
     }
 
@@ -461,7 +462,7 @@ pub const Client = struct {
     /// This operation is throttled at one request per second and can only get
     /// custom MAIL
     /// FROM attributes for up to 100 identities at a time.
-    pub fn getIdentityMailFromDomainAttributes(self: *Self, allocator: std.mem.Allocator, input: get_identity_mail_from_domain_attributes.GetIdentityMailFromDomainAttributesInput, options: get_identity_mail_from_domain_attributes.Options) !get_identity_mail_from_domain_attributes.GetIdentityMailFromDomainAttributesOutput {
+    pub fn getIdentityMailFromDomainAttributes(self: *Self, allocator: std.mem.Allocator, input: get_identity_mail_from_domain_attributes.GetIdentityMailFromDomainAttributesInput, options: CallOptions) !get_identity_mail_from_domain_attributes.GetIdentityMailFromDomainAttributesOutput {
         return get_identity_mail_from_domain_attributes.execute(self, allocator, input, options);
     }
 
@@ -477,7 +478,7 @@ pub const Client = struct {
     /// [Amazon SES
     /// Developer
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html).
-    pub fn getIdentityNotificationAttributes(self: *Self, allocator: std.mem.Allocator, input: get_identity_notification_attributes.GetIdentityNotificationAttributesInput, options: get_identity_notification_attributes.Options) !get_identity_notification_attributes.GetIdentityNotificationAttributesOutput {
+    pub fn getIdentityNotificationAttributes(self: *Self, allocator: std.mem.Allocator, input: get_identity_notification_attributes.GetIdentityNotificationAttributesInput, options: CallOptions) !get_identity_notification_attributes.GetIdentityNotificationAttributesOutput {
         return get_identity_notification_attributes.execute(self, allocator, input, options);
     }
 
@@ -499,7 +500,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn getIdentityPolicies(self: *Self, allocator: std.mem.Allocator, input: get_identity_policies.GetIdentityPoliciesInput, options: get_identity_policies.Options) !get_identity_policies.GetIdentityPoliciesOutput {
+    pub fn getIdentityPolicies(self: *Self, allocator: std.mem.Allocator, input: get_identity_policies.GetIdentityPoliciesInput, options: CallOptions) !get_identity_policies.GetIdentityPoliciesOutput {
         return get_identity_policies.execute(self, allocator, input, options);
     }
 
@@ -534,14 +535,14 @@ pub const Client = struct {
     /// This operation is throttled at one request per second and can only get
     /// verification
     /// attributes for up to 100 identities at a time.
-    pub fn getIdentityVerificationAttributes(self: *Self, allocator: std.mem.Allocator, input: get_identity_verification_attributes.GetIdentityVerificationAttributesInput, options: get_identity_verification_attributes.Options) !get_identity_verification_attributes.GetIdentityVerificationAttributesOutput {
+    pub fn getIdentityVerificationAttributes(self: *Self, allocator: std.mem.Allocator, input: get_identity_verification_attributes.GetIdentityVerificationAttributesInput, options: CallOptions) !get_identity_verification_attributes.GetIdentityVerificationAttributesOutput {
         return get_identity_verification_attributes.execute(self, allocator, input, options);
     }
 
     /// Provides the sending limits for the Amazon SES account.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn getSendQuota(self: *Self, allocator: std.mem.Allocator, input: get_send_quota.GetSendQuotaInput, options: get_send_quota.Options) !get_send_quota.GetSendQuotaOutput {
+    pub fn getSendQuota(self: *Self, allocator: std.mem.Allocator, input: get_send_quota.GetSendQuotaInput, options: CallOptions) !get_send_quota.GetSendQuotaOutput {
         return get_send_quota.execute(self, allocator, input, options);
     }
 
@@ -552,7 +553,7 @@ pub const Client = struct {
     /// contains statistics for a 15-minute period of time.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn getSendStatistics(self: *Self, allocator: std.mem.Allocator, input: get_send_statistics.GetSendStatisticsInput, options: get_send_statistics.Options) !get_send_statistics.GetSendStatisticsOutput {
+    pub fn getSendStatistics(self: *Self, allocator: std.mem.Allocator, input: get_send_statistics.GetSendStatisticsInput, options: CallOptions) !get_send_statistics.GetSendStatisticsOutput {
         return get_send_statistics.execute(self, allocator, input, options);
     }
 
@@ -561,7 +562,7 @@ pub const Client = struct {
     /// part) for the template you specify.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn getTemplate(self: *Self, allocator: std.mem.Allocator, input: get_template.GetTemplateInput, options: get_template.Options) !get_template.GetTemplateOutput {
+    pub fn getTemplate(self: *Self, allocator: std.mem.Allocator, input: get_template.GetTemplateInput, options: CallOptions) !get_template.GetTemplateOutput {
         return get_template.execute(self, allocator, input, options);
     }
 
@@ -581,7 +582,7 @@ pub const Client = struct {
     /// then execute the `ListConfigurationSets` operation again, passing the
     /// `NextToken` parameter and the value of the NextToken element to retrieve
     /// additional results.
-    pub fn listConfigurationSets(self: *Self, allocator: std.mem.Allocator, input: list_configuration_sets.ListConfigurationSetsInput, options: list_configuration_sets.Options) !list_configuration_sets.ListConfigurationSetsOutput {
+    pub fn listConfigurationSets(self: *Self, allocator: std.mem.Allocator, input: list_configuration_sets.ListConfigurationSetsInput, options: CallOptions) !list_configuration_sets.ListConfigurationSetsOutput {
         return list_configuration_sets.execute(self, allocator, input, options);
     }
 
@@ -595,7 +596,7 @@ pub const Client = struct {
     /// Guide*.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn listCustomVerificationEmailTemplates(self: *Self, allocator: std.mem.Allocator, input: list_custom_verification_email_templates.ListCustomVerificationEmailTemplatesInput, options: list_custom_verification_email_templates.Options) !list_custom_verification_email_templates.ListCustomVerificationEmailTemplatesOutput {
+    pub fn listCustomVerificationEmailTemplates(self: *Self, allocator: std.mem.Allocator, input: list_custom_verification_email_templates.ListCustomVerificationEmailTemplatesInput, options: CallOptions) !list_custom_verification_email_templates.ListCustomVerificationEmailTemplatesOutput {
         return list_custom_verification_email_templates.execute(self, allocator, input, options);
     }
 
@@ -617,7 +618,7 @@ pub const Client = struct {
     /// original call, then continue to not provide it for successive pagination
     /// calls.
     /// Using this protocol will ensure consistent results.
-    pub fn listIdentities(self: *Self, allocator: std.mem.Allocator, input: list_identities.ListIdentitiesInput, options: list_identities.Options) !list_identities.ListIdentitiesOutput {
+    pub fn listIdentities(self: *Self, allocator: std.mem.Allocator, input: list_identities.ListIdentitiesInput, options: CallOptions) !list_identities.ListIdentitiesOutput {
         return list_identities.execute(self, allocator, input, options);
     }
 
@@ -639,7 +640,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn listIdentityPolicies(self: *Self, allocator: std.mem.Allocator, input: list_identity_policies.ListIdentityPoliciesInput, options: list_identity_policies.Options) !list_identity_policies.ListIdentityPoliciesOutput {
+    pub fn listIdentityPolicies(self: *Self, allocator: std.mem.Allocator, input: list_identity_policies.ListIdentityPoliciesInput, options: CallOptions) !list_identity_policies.ListIdentityPoliciesOutput {
         return list_identity_policies.execute(self, allocator, input, options);
     }
 
@@ -652,7 +653,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn listReceiptFilters(self: *Self, allocator: std.mem.Allocator, input: list_receipt_filters.ListReceiptFiltersInput, options: list_receipt_filters.Options) !list_receipt_filters.ListReceiptFiltersOutput {
+    pub fn listReceiptFilters(self: *Self, allocator: std.mem.Allocator, input: list_receipt_filters.ListReceiptFiltersInput, options: CallOptions) !list_receipt_filters.ListReceiptFiltersOutput {
         return list_receipt_filters.execute(self, allocator, input, options);
     }
 
@@ -668,7 +669,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn listReceiptRuleSets(self: *Self, allocator: std.mem.Allocator, input: list_receipt_rule_sets.ListReceiptRuleSetsInput, options: list_receipt_rule_sets.Options) !list_receipt_rule_sets.ListReceiptRuleSetsOutput {
+    pub fn listReceiptRuleSets(self: *Self, allocator: std.mem.Allocator, input: list_receipt_rule_sets.ListReceiptRuleSetsInput, options: CallOptions) !list_receipt_rule_sets.ListReceiptRuleSetsOutput {
         return list_receipt_rule_sets.execute(self, allocator, input, options);
     }
 
@@ -676,18 +677,18 @@ pub const Client = struct {
     /// Amazon Web Services Region.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn listTemplates(self: *Self, allocator: std.mem.Allocator, input: list_templates.ListTemplatesInput, options: list_templates.Options) !list_templates.ListTemplatesOutput {
+    pub fn listTemplates(self: *Self, allocator: std.mem.Allocator, input: list_templates.ListTemplatesInput, options: CallOptions) !list_templates.ListTemplatesOutput {
         return list_templates.execute(self, allocator, input, options);
     }
 
     /// Deprecated. Use the `ListIdentities` operation to list the email addresses
     /// and domains associated with your account.
-    pub fn listVerifiedEmailAddresses(self: *Self, allocator: std.mem.Allocator, input: list_verified_email_addresses.ListVerifiedEmailAddressesInput, options: list_verified_email_addresses.Options) !list_verified_email_addresses.ListVerifiedEmailAddressesOutput {
+    pub fn listVerifiedEmailAddresses(self: *Self, allocator: std.mem.Allocator, input: list_verified_email_addresses.ListVerifiedEmailAddressesInput, options: CallOptions) !list_verified_email_addresses.ListVerifiedEmailAddressesOutput {
         return list_verified_email_addresses.execute(self, allocator, input, options);
     }
 
     /// Adds or updates the delivery options for a configuration set.
-    pub fn putConfigurationSetDeliveryOptions(self: *Self, allocator: std.mem.Allocator, input: put_configuration_set_delivery_options.PutConfigurationSetDeliveryOptionsInput, options: put_configuration_set_delivery_options.Options) !put_configuration_set_delivery_options.PutConfigurationSetDeliveryOptionsOutput {
+    pub fn putConfigurationSetDeliveryOptions(self: *Self, allocator: std.mem.Allocator, input: put_configuration_set_delivery_options.PutConfigurationSetDeliveryOptionsInput, options: CallOptions) !put_configuration_set_delivery_options.PutConfigurationSetDeliveryOptionsOutput {
         return put_configuration_set_delivery_options.execute(self, allocator, input, options);
     }
 
@@ -707,7 +708,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn putIdentityPolicy(self: *Self, allocator: std.mem.Allocator, input: put_identity_policy.PutIdentityPolicyInput, options: put_identity_policy.Options) !put_identity_policy.PutIdentityPolicyOutput {
+    pub fn putIdentityPolicy(self: *Self, allocator: std.mem.Allocator, input: put_identity_policy.PutIdentityPolicyInput, options: CallOptions) !put_identity_policy.PutIdentityPolicyOutput {
         return put_identity_policy.execute(self, allocator, input, options);
     }
 
@@ -723,7 +724,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn reorderReceiptRuleSet(self: *Self, allocator: std.mem.Allocator, input: reorder_receipt_rule_set.ReorderReceiptRuleSetInput, options: reorder_receipt_rule_set.Options) !reorder_receipt_rule_set.ReorderReceiptRuleSetOutput {
+    pub fn reorderReceiptRuleSet(self: *Self, allocator: std.mem.Allocator, input: reorder_receipt_rule_set.ReorderReceiptRuleSetInput, options: CallOptions) !reorder_receipt_rule_set.ReorderReceiptRuleSetOutput {
         return reorder_receipt_rule_set.execute(self, allocator, input, options);
     }
 
@@ -741,7 +742,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn sendBounce(self: *Self, allocator: std.mem.Allocator, input: send_bounce.SendBounceInput, options: send_bounce.Options) !send_bounce.SendBounceOutput {
+    pub fn sendBounce(self: *Self, allocator: std.mem.Allocator, input: send_bounce.SendBounceInput, options: CallOptions) !send_bounce.SendBounceOutput {
         return send_bounce.execute(self, allocator, input, options);
     }
 
@@ -789,7 +790,7 @@ pub const Client = struct {
     /// * The number of destinations you can contact in a single call can be limited
     ///   by
     /// your account's maximum sending rate.
-    pub fn sendBulkTemplatedEmail(self: *Self, allocator: std.mem.Allocator, input: send_bulk_templated_email.SendBulkTemplatedEmailInput, options: send_bulk_templated_email.Options) !send_bulk_templated_email.SendBulkTemplatedEmailOutput {
+    pub fn sendBulkTemplatedEmail(self: *Self, allocator: std.mem.Allocator, input: send_bulk_templated_email.SendBulkTemplatedEmailInput, options: CallOptions) !send_bulk_templated_email.SendBulkTemplatedEmailOutput {
         return send_bulk_templated_email.execute(self, allocator, input, options);
     }
 
@@ -809,7 +810,7 @@ pub const Client = struct {
     /// Guide*.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn sendCustomVerificationEmail(self: *Self, allocator: std.mem.Allocator, input: send_custom_verification_email.SendCustomVerificationEmailInput, options: send_custom_verification_email.Options) !send_custom_verification_email.SendCustomVerificationEmailOutput {
+    pub fn sendCustomVerificationEmail(self: *Self, allocator: std.mem.Allocator, input: send_custom_verification_email.SendCustomVerificationEmailInput, options: CallOptions) !send_custom_verification_email.SendCustomVerificationEmailOutput {
         return send_custom_verification_email.execute(self, allocator, input, options);
     }
 
@@ -857,7 +858,7 @@ pub const Client = struct {
     /// For more information about sending quotas in Amazon SES, see [Managing Your
     /// Amazon SES Sending
     /// Limits](https://docs.aws.amazon.com/ses/latest/dg/manage-sending-quotas.html) in the *Amazon SES Developer Guide.*
-    pub fn sendEmail(self: *Self, allocator: std.mem.Allocator, input: send_email.SendEmailInput, options: send_email.Options) !send_email.SendEmailOutput {
+    pub fn sendEmail(self: *Self, allocator: std.mem.Allocator, input: send_email.SendEmailInput, options: CallOptions) !send_email.SendEmailOutput {
         return send_email.execute(self, allocator, input, options);
     }
 
@@ -962,7 +963,7 @@ pub const Client = struct {
     /// [Managing Your Amazon SES Sending
     /// Limits](https://docs.aws.amazon.com/ses/latest/dg/manage-sending-quotas.html) in the *Amazon SES Developer
     /// Guide.*
-    pub fn sendRawEmail(self: *Self, allocator: std.mem.Allocator, input: send_raw_email.SendRawEmailInput, options: send_raw_email.Options) !send_raw_email.SendRawEmailOutput {
+    pub fn sendRawEmail(self: *Self, allocator: std.mem.Allocator, input: send_raw_email.SendRawEmailInput, options: CallOptions) !send_raw_email.SendRawEmailOutput {
         return send_raw_email.execute(self, allocator, input, options);
     }
 
@@ -1020,7 +1021,7 @@ pub const Client = struct {
     /// [Sending Personalized Email Using the Amazon SES
     /// API](https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html) in the
     /// *Amazon Simple Email Service Developer Guide*.
-    pub fn sendTemplatedEmail(self: *Self, allocator: std.mem.Allocator, input: send_templated_email.SendTemplatedEmailInput, options: send_templated_email.Options) !send_templated_email.SendTemplatedEmailOutput {
+    pub fn sendTemplatedEmail(self: *Self, allocator: std.mem.Allocator, input: send_templated_email.SendTemplatedEmailInput, options: CallOptions) !send_templated_email.SendTemplatedEmailOutput {
         return send_templated_email.execute(self, allocator, input, options);
     }
 
@@ -1035,7 +1036,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn setActiveReceiptRuleSet(self: *Self, allocator: std.mem.Allocator, input: set_active_receipt_rule_set.SetActiveReceiptRuleSetInput, options: set_active_receipt_rule_set.Options) !set_active_receipt_rule_set.SetActiveReceiptRuleSetOutput {
+    pub fn setActiveReceiptRuleSet(self: *Self, allocator: std.mem.Allocator, input: set_active_receipt_rule_set.SetActiveReceiptRuleSetInput, options: CallOptions) !set_active_receipt_rule_set.SetActiveReceiptRuleSetOutput {
         return set_active_receipt_rule_set.execute(self, allocator, input, options);
     }
 
@@ -1060,7 +1061,7 @@ pub const Client = struct {
     /// For more information about Easy DKIM signing, go to the [Amazon SES
     /// Developer
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html).
-    pub fn setIdentityDkimEnabled(self: *Self, allocator: std.mem.Allocator, input: set_identity_dkim_enabled.SetIdentityDkimEnabledInput, options: set_identity_dkim_enabled.Options) !set_identity_dkim_enabled.SetIdentityDkimEnabledOutput {
+    pub fn setIdentityDkimEnabled(self: *Self, allocator: std.mem.Allocator, input: set_identity_dkim_enabled.SetIdentityDkimEnabledInput, options: CallOptions) !set_identity_dkim_enabled.SetIdentityDkimEnabledOutput {
         return set_identity_dkim_enabled.execute(self, allocator, input, options);
     }
 
@@ -1081,7 +1082,7 @@ pub const Client = struct {
     /// [Amazon SES
     /// Developer
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html).
-    pub fn setIdentityFeedbackForwardingEnabled(self: *Self, allocator: std.mem.Allocator, input: set_identity_feedback_forwarding_enabled.SetIdentityFeedbackForwardingEnabledInput, options: set_identity_feedback_forwarding_enabled.Options) !set_identity_feedback_forwarding_enabled.SetIdentityFeedbackForwardingEnabledOutput {
+    pub fn setIdentityFeedbackForwardingEnabled(self: *Self, allocator: std.mem.Allocator, input: set_identity_feedback_forwarding_enabled.SetIdentityFeedbackForwardingEnabledInput, options: CallOptions) !set_identity_feedback_forwarding_enabled.SetIdentityFeedbackForwardingEnabledOutput {
         return set_identity_feedback_forwarding_enabled.execute(self, allocator, input, options);
     }
 
@@ -1097,7 +1098,7 @@ pub const Client = struct {
     /// [Amazon SES
     /// Developer
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html).
-    pub fn setIdentityHeadersInNotificationsEnabled(self: *Self, allocator: std.mem.Allocator, input: set_identity_headers_in_notifications_enabled.SetIdentityHeadersInNotificationsEnabledInput, options: set_identity_headers_in_notifications_enabled.Options) !set_identity_headers_in_notifications_enabled.SetIdentityHeadersInNotificationsEnabledOutput {
+    pub fn setIdentityHeadersInNotificationsEnabled(self: *Self, allocator: std.mem.Allocator, input: set_identity_headers_in_notifications_enabled.SetIdentityHeadersInNotificationsEnabledInput, options: CallOptions) !set_identity_headers_in_notifications_enabled.SetIdentityHeadersInNotificationsEnabledOutput {
         return set_identity_headers_in_notifications_enabled.execute(self, allocator, input, options);
     }
 
@@ -1114,7 +1115,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/mail-from.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn setIdentityMailFromDomain(self: *Self, allocator: std.mem.Allocator, input: set_identity_mail_from_domain.SetIdentityMailFromDomainInput, options: set_identity_mail_from_domain.Options) !set_identity_mail_from_domain.SetIdentityMailFromDomainOutput {
+    pub fn setIdentityMailFromDomain(self: *Self, allocator: std.mem.Allocator, input: set_identity_mail_from_domain.SetIdentityMailFromDomainInput, options: CallOptions) !set_identity_mail_from_domain.SetIdentityMailFromDomainOutput {
         return set_identity_mail_from_domain.execute(self, allocator, input, options);
     }
 
@@ -1135,7 +1136,7 @@ pub const Client = struct {
     /// For more information about feedback notification, see the [Amazon SES
     /// Developer
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html).
-    pub fn setIdentityNotificationTopic(self: *Self, allocator: std.mem.Allocator, input: set_identity_notification_topic.SetIdentityNotificationTopicInput, options: set_identity_notification_topic.Options) !set_identity_notification_topic.SetIdentityNotificationTopicOutput {
+    pub fn setIdentityNotificationTopic(self: *Self, allocator: std.mem.Allocator, input: set_identity_notification_topic.SetIdentityNotificationTopicInput, options: CallOptions) !set_identity_notification_topic.SetIdentityNotificationTopicOutput {
         return set_identity_notification_topic.execute(self, allocator, input, options);
     }
 
@@ -1146,7 +1147,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn setReceiptRulePosition(self: *Self, allocator: std.mem.Allocator, input: set_receipt_rule_position.SetReceiptRulePositionInput, options: set_receipt_rule_position.Options) !set_receipt_rule_position.SetReceiptRulePositionOutput {
+    pub fn setReceiptRulePosition(self: *Self, allocator: std.mem.Allocator, input: set_receipt_rule_position.SetReceiptRulePositionInput, options: CallOptions) !set_receipt_rule_position.SetReceiptRulePositionOutput {
         return set_receipt_rule_position.execute(self, allocator, input, options);
     }
 
@@ -1155,7 +1156,7 @@ pub const Client = struct {
     /// set of replacement data.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn testRenderTemplate(self: *Self, allocator: std.mem.Allocator, input: test_render_template.TestRenderTemplateInput, options: test_render_template.Options) !test_render_template.TestRenderTemplateOutput {
+    pub fn testRenderTemplate(self: *Self, allocator: std.mem.Allocator, input: test_render_template.TestRenderTemplateInput, options: CallOptions) !test_render_template.TestRenderTemplateOutput {
         return test_render_template.execute(self, allocator, input, options);
     }
 
@@ -1169,7 +1170,7 @@ pub const Client = struct {
     /// thresholds.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn updateAccountSendingEnabled(self: *Self, allocator: std.mem.Allocator, input: update_account_sending_enabled.UpdateAccountSendingEnabledInput, options: update_account_sending_enabled.Options) !update_account_sending_enabled.UpdateAccountSendingEnabledOutput {
+    pub fn updateAccountSendingEnabled(self: *Self, allocator: std.mem.Allocator, input: update_account_sending_enabled.UpdateAccountSendingEnabledInput, options: CallOptions) !update_account_sending_enabled.UpdateAccountSendingEnabledOutput {
         return update_account_sending_enabled.execute(self, allocator, input, options);
     }
 
@@ -1189,7 +1190,7 @@ pub const Client = struct {
     /// (Amazon SNS).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn updateConfigurationSetEventDestination(self: *Self, allocator: std.mem.Allocator, input: update_configuration_set_event_destination.UpdateConfigurationSetEventDestinationInput, options: update_configuration_set_event_destination.Options) !update_configuration_set_event_destination.UpdateConfigurationSetEventDestinationOutput {
+    pub fn updateConfigurationSetEventDestination(self: *Self, allocator: std.mem.Allocator, input: update_configuration_set_event_destination.UpdateConfigurationSetEventDestinationInput, options: CallOptions) !update_configuration_set_event_destination.UpdateConfigurationSetEventDestinationOutput {
         return update_configuration_set_event_destination.execute(self, allocator, input, options);
     }
 
@@ -1202,7 +1203,7 @@ pub const Client = struct {
     /// create alarms when bounce or complaint rates exceed certain thresholds.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn updateConfigurationSetReputationMetricsEnabled(self: *Self, allocator: std.mem.Allocator, input: update_configuration_set_reputation_metrics_enabled.UpdateConfigurationSetReputationMetricsEnabledInput, options: update_configuration_set_reputation_metrics_enabled.Options) !update_configuration_set_reputation_metrics_enabled.UpdateConfigurationSetReputationMetricsEnabledOutput {
+    pub fn updateConfigurationSetReputationMetricsEnabled(self: *Self, allocator: std.mem.Allocator, input: update_configuration_set_reputation_metrics_enabled.UpdateConfigurationSetReputationMetricsEnabledInput, options: CallOptions) !update_configuration_set_reputation_metrics_enabled.UpdateConfigurationSetReputationMetricsEnabledOutput {
         return update_configuration_set_reputation_metrics_enabled.execute(self, allocator, input, options);
     }
 
@@ -1217,7 +1218,7 @@ pub const Client = struct {
     /// thresholds.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn updateConfigurationSetSendingEnabled(self: *Self, allocator: std.mem.Allocator, input: update_configuration_set_sending_enabled.UpdateConfigurationSetSendingEnabledInput, options: update_configuration_set_sending_enabled.Options) !update_configuration_set_sending_enabled.UpdateConfigurationSetSendingEnabledOutput {
+    pub fn updateConfigurationSetSendingEnabled(self: *Self, allocator: std.mem.Allocator, input: update_configuration_set_sending_enabled.UpdateConfigurationSetSendingEnabledInput, options: CallOptions) !update_configuration_set_sending_enabled.UpdateConfigurationSetSendingEnabledOutput {
         return update_configuration_set_sending_enabled.execute(self, allocator, input, options);
     }
 
@@ -1232,7 +1233,7 @@ pub const Client = struct {
     /// events. For information about using custom domains, see the [Amazon SES
     /// Developer
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/configure-custom-open-click-domains.html).
-    pub fn updateConfigurationSetTrackingOptions(self: *Self, allocator: std.mem.Allocator, input: update_configuration_set_tracking_options.UpdateConfigurationSetTrackingOptionsInput, options: update_configuration_set_tracking_options.Options) !update_configuration_set_tracking_options.UpdateConfigurationSetTrackingOptionsOutput {
+    pub fn updateConfigurationSetTrackingOptions(self: *Self, allocator: std.mem.Allocator, input: update_configuration_set_tracking_options.UpdateConfigurationSetTrackingOptionsInput, options: CallOptions) !update_configuration_set_tracking_options.UpdateConfigurationSetTrackingOptionsOutput {
         return update_configuration_set_tracking_options.execute(self, allocator, input, options);
     }
 
@@ -1244,7 +1245,7 @@ pub const Client = struct {
     /// Guide*.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn updateCustomVerificationEmailTemplate(self: *Self, allocator: std.mem.Allocator, input: update_custom_verification_email_template.UpdateCustomVerificationEmailTemplateInput, options: update_custom_verification_email_template.Options) !update_custom_verification_email_template.UpdateCustomVerificationEmailTemplateOutput {
+    pub fn updateCustomVerificationEmailTemplate(self: *Self, allocator: std.mem.Allocator, input: update_custom_verification_email_template.UpdateCustomVerificationEmailTemplateInput, options: CallOptions) !update_custom_verification_email_template.UpdateCustomVerificationEmailTemplateOutput {
         return update_custom_verification_email_template.execute(self, allocator, input, options);
     }
 
@@ -1255,7 +1256,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn updateReceiptRule(self: *Self, allocator: std.mem.Allocator, input: update_receipt_rule.UpdateReceiptRuleInput, options: update_receipt_rule.Options) !update_receipt_rule.UpdateReceiptRuleOutput {
+    pub fn updateReceiptRule(self: *Self, allocator: std.mem.Allocator, input: update_receipt_rule.UpdateReceiptRuleInput, options: CallOptions) !update_receipt_rule.UpdateReceiptRuleOutput {
         return update_receipt_rule.execute(self, allocator, input, options);
     }
 
@@ -1267,7 +1268,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html).
     ///
     /// You can execute this operation no more than once per second.
-    pub fn updateTemplate(self: *Self, allocator: std.mem.Allocator, input: update_template.UpdateTemplateInput, options: update_template.Options) !update_template.UpdateTemplateOutput {
+    pub fn updateTemplate(self: *Self, allocator: std.mem.Allocator, input: update_template.UpdateTemplateInput, options: CallOptions) !update_template.UpdateTemplateOutput {
         return update_template.execute(self, allocator, input, options);
     }
 
@@ -1312,7 +1313,7 @@ pub const Client = struct {
     /// token that's generated by this operation.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn verifyDomainDkim(self: *Self, allocator: std.mem.Allocator, input: verify_domain_dkim.VerifyDomainDkimInput, options: verify_domain_dkim.Options) !verify_domain_dkim.VerifyDomainDkimOutput {
+    pub fn verifyDomainDkim(self: *Self, allocator: std.mem.Allocator, input: verify_domain_dkim.VerifyDomainDkimInput, options: CallOptions) !verify_domain_dkim.VerifyDomainDkimOutput {
         return verify_domain_dkim.execute(self, allocator, input, options);
     }
 
@@ -1325,13 +1326,13 @@ pub const Client = struct {
     /// Guide.*
     ///
     /// You can execute this operation no more than once per second.
-    pub fn verifyDomainIdentity(self: *Self, allocator: std.mem.Allocator, input: verify_domain_identity.VerifyDomainIdentityInput, options: verify_domain_identity.Options) !verify_domain_identity.VerifyDomainIdentityOutput {
+    pub fn verifyDomainIdentity(self: *Self, allocator: std.mem.Allocator, input: verify_domain_identity.VerifyDomainIdentityInput, options: CallOptions) !verify_domain_identity.VerifyDomainIdentityOutput {
         return verify_domain_identity.execute(self, allocator, input, options);
     }
 
     /// Deprecated. Use the `VerifyEmailIdentity` operation to verify a new email
     /// address.
-    pub fn verifyEmailAddress(self: *Self, allocator: std.mem.Allocator, input: verify_email_address.VerifyEmailAddressInput, options: verify_email_address.Options) !verify_email_address.VerifyEmailAddressOutput {
+    pub fn verifyEmailAddress(self: *Self, allocator: std.mem.Allocator, input: verify_email_address.VerifyEmailAddressInput, options: CallOptions) !verify_email_address.VerifyEmailAddressOutput {
         return verify_email_address.execute(self, allocator, input, options);
     }
 
@@ -1342,7 +1343,7 @@ pub const Client = struct {
     /// verification email is sent to the specified address.
     ///
     /// You can execute this operation no more than once per second.
-    pub fn verifyEmailIdentity(self: *Self, allocator: std.mem.Allocator, input: verify_email_identity.VerifyEmailIdentityInput, options: verify_email_identity.Options) !verify_email_identity.VerifyEmailIdentityOutput {
+    pub fn verifyEmailIdentity(self: *Self, allocator: std.mem.Allocator, input: verify_email_identity.VerifyEmailIdentityInput, options: CallOptions) !verify_email_identity.VerifyEmailIdentityOutput {
         return verify_email_identity.execute(self, allocator, input, options);
     }
 

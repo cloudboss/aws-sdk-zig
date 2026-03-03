@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChecksumType = @import("checksum_type.zig").ChecksumType;
 const CompletedMultipartUpload = @import("completed_multipart_upload.zig").CompletedMultipartUpload;
@@ -332,11 +333,7 @@ pub const CompleteMultipartUploadOutput = struct {
     version_id: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CompleteMultipartUploadInput, options: Options) !CompleteMultipartUploadOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CompleteMultipartUploadInput, options: CallOptions) !CompleteMultipartUploadOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

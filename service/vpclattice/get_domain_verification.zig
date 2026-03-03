@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VerificationStatus = @import("verification_status.zig").VerificationStatus;
 const TxtMethodConfig = @import("txt_method_config.zig").TxtMethodConfig;
@@ -54,11 +55,7 @@ pub const GetDomainVerificationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDomainVerificationInput, options: Options) !GetDomainVerificationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDomainVerificationInput, options: CallOptions) !GetDomainVerificationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

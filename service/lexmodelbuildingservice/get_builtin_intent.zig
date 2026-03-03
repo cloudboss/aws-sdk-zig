@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BuiltinIntentSlot = @import("builtin_intent_slot.zig").BuiltinIntentSlot;
 const Locale = @import("locale.zig").Locale;
@@ -36,11 +37,7 @@ pub const GetBuiltinIntentOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBuiltinIntentInput, options: Options) !GetBuiltinIntentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBuiltinIntentInput, options: CallOptions) !GetBuiltinIntentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

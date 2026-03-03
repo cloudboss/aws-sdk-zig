@@ -3,6 +3,7 @@ const std = @import("std");
 
 const generate_data_set = @import("generate_data_set.zig");
 const start_support_data_export = @import("start_support_data_export.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -46,7 +47,7 @@ pub const Client = struct {
     /// permissions for the following actions:
     /// s3:PutObject, s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish,
     /// iam:GetRolePolicy.
-    pub fn generateDataSet(self: *Self, allocator: std.mem.Allocator, input: generate_data_set.GenerateDataSetInput, options: generate_data_set.Options) !generate_data_set.GenerateDataSetOutput {
+    pub fn generateDataSet(self: *Self, allocator: std.mem.Allocator, input: generate_data_set.GenerateDataSetInput, options: CallOptions) !generate_data_set.GenerateDataSetOutput {
         return generate_data_set.execute(self, allocator, input, options);
     }
 
@@ -65,7 +66,7 @@ pub const Client = struct {
     /// permissions for the following actions:
     /// s3:PutObject, s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish,
     /// iam:GetRolePolicy.
-    pub fn startSupportDataExport(self: *Self, allocator: std.mem.Allocator, input: start_support_data_export.StartSupportDataExportInput, options: start_support_data_export.Options) !start_support_data_export.StartSupportDataExportOutput {
+    pub fn startSupportDataExport(self: *Self, allocator: std.mem.Allocator, input: start_support_data_export.StartSupportDataExportInput, options: CallOptions) !start_support_data_export.StartSupportDataExportOutput {
         return start_support_data_export.execute(self, allocator, input, options);
     }
 };

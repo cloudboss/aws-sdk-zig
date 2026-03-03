@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const StepCancellationOption = @import("step_cancellation_option.zig").StepCancellationOption;
 const CancelStepsInfo = @import("cancel_steps_info.zig").CancelStepsInfo;
@@ -36,11 +37,7 @@ pub const CancelStepsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelStepsInput, options: Options) !CancelStepsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelStepsInput, options: CallOptions) !CancelStepsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LakehouseIdcRegistration = @import("lakehouse_idc_registration.zig").LakehouseIdcRegistration;
 const LakehouseRegistration = @import("lakehouse_registration.zig").LakehouseRegistration;
@@ -72,11 +73,7 @@ pub const UpdateLakehouseConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLakehouseConfigurationInput, options: Options) !UpdateLakehouseConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLakehouseConfigurationInput, options: CallOptions) !UpdateLakehouseConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

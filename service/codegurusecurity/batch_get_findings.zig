@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FindingIdentifier = @import("finding_identifier.zig").FindingIdentifier;
 const BatchGetFindingsError = @import("batch_get_findings_error.zig").BatchGetFindingsError;
@@ -32,11 +33,7 @@ pub const BatchGetFindingsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetFindingsInput, options: Options) !BatchGetFindingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetFindingsInput, options: CallOptions) !BatchGetFindingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

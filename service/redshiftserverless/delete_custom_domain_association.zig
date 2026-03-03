@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteCustomDomainAssociationInput = struct {
@@ -20,11 +21,7 @@ pub const DeleteCustomDomainAssociationInput = struct {
 pub const DeleteCustomDomainAssociationOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCustomDomainAssociationInput, options: Options) !DeleteCustomDomainAssociationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCustomDomainAssociationInput, options: CallOptions) !DeleteCustomDomainAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

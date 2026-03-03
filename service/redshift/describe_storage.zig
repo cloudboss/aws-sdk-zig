@@ -2,9 +2,10 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
-const DescribeStorageInput = struct {};
+pub const DescribeStorageInput = struct {};
 
 pub const DescribeStorageOutput = struct {
     /// The total amount of storage currently used for snapshots.
@@ -14,11 +15,7 @@ pub const DescribeStorageOutput = struct {
     total_provisioned_storage_in_mega_bytes: ?f64 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeStorageInput, options: Options) !DescribeStorageOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeStorageInput, options: CallOptions) !DescribeStorageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -25,6 +25,7 @@ const terminate_stream_session = @import("terminate_stream_session.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_application = @import("update_application.zig");
 const update_stream_group = @import("update_stream_group.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -68,7 +69,7 @@ pub const Client = struct {
     /// copies the content files of all associated applications to an internal S3
     /// bucket at each location. This allows Amazon GameLift Streams to host
     /// performant stream sessions.
-    pub fn addStreamGroupLocations(self: *Self, allocator: std.mem.Allocator, input: add_stream_group_locations.AddStreamGroupLocationsInput, options: add_stream_group_locations.Options) !add_stream_group_locations.AddStreamGroupLocationsOutput {
+    pub fn addStreamGroupLocations(self: *Self, allocator: std.mem.Allocator, input: add_stream_group_locations.AddStreamGroupLocationsInput, options: CallOptions) !add_stream_group_locations.AddStreamGroupLocationsOutput {
         return add_stream_group_locations.execute(self, allocator, input, options);
     }
 
@@ -81,7 +82,7 @@ pub const Client = struct {
     /// If a stream group does not already have a linked application, Amazon
     /// GameLift Streams will automatically assign the first application provided in
     /// `ApplicationIdentifiers` as the default.
-    pub fn associateApplications(self: *Self, allocator: std.mem.Allocator, input: associate_applications.AssociateApplicationsInput, options: associate_applications.Options) !associate_applications.AssociateApplicationsOutput {
+    pub fn associateApplications(self: *Self, allocator: std.mem.Allocator, input: associate_applications.AssociateApplicationsInput, options: CallOptions) !associate_applications.AssociateApplicationsOutput {
         return associate_applications.execute(self, allocator, input, options);
     }
 
@@ -102,7 +103,7 @@ pub const Client = struct {
     /// reaches `READY` status, you can use the application to set up stream groups
     /// and start streams. To track application status, call
     /// [GetApplication](https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetApplication.html).
-    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: create_application.Options) !create_application.CreateApplicationOutput {
+    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: CallOptions) !create_application.CreateApplicationOutput {
         return create_application.execute(self, allocator, input, options);
     }
 
@@ -151,7 +152,7 @@ pub const Client = struct {
     /// when they are 365 days old, at which point they can no longer stream
     /// sessions. The exact expiration date is indicated by the date value in the
     /// `ExpiresAt` field.
-    pub fn createStreamGroup(self: *Self, allocator: std.mem.Allocator, input: create_stream_group.CreateStreamGroupInput, options: create_stream_group.Options) !create_stream_group.CreateStreamGroupOutput {
+    pub fn createStreamGroup(self: *Self, allocator: std.mem.Allocator, input: create_stream_group.CreateStreamGroupInput, options: CallOptions) !create_stream_group.CreateStreamGroupOutput {
         return create_stream_group.execute(self, allocator, input, options);
     }
 
@@ -188,7 +189,7 @@ pub const Client = struct {
     /// To begin re-connecting to an existing stream session, specify the stream
     /// group ID and stream session ID that you want to reconnect to, and the signal
     /// request to use with the stream.
-    pub fn createStreamSessionConnection(self: *Self, allocator: std.mem.Allocator, input: create_stream_session_connection.CreateStreamSessionConnectionInput, options: create_stream_session_connection.Options) !create_stream_session_connection.CreateStreamSessionConnectionOutput {
+    pub fn createStreamSessionConnection(self: *Self, allocator: std.mem.Allocator, input: create_stream_session_connection.CreateStreamSessionConnectionInput, options: CallOptions) !create_stream_session_connection.CreateStreamSessionConnectionOutput {
         return create_stream_session_connection.execute(self, allocator, input, options);
     }
 
@@ -215,7 +216,7 @@ pub const Client = struct {
     ///
     /// If any active stream groups exist for this application, this request returns
     /// a `ValidationException`.
-    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: delete_application.Options) !delete_application.DeleteApplicationOutput {
+    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: CallOptions) !delete_application.DeleteApplicationOutput {
         return delete_application.execute(self, allocator, input, options);
     }
 
@@ -226,7 +227,7 @@ pub const Client = struct {
     /// streams from starting. As a best practice, before deleting the stream group,
     /// call
     /// [ListStreamSessions](https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_ListStreamSessions.html) to check for streams in progress and take action to stop them. When you delete a stream group, any application associations referring to that stream group are automatically removed.
-    pub fn deleteStreamGroup(self: *Self, allocator: std.mem.Allocator, input: delete_stream_group.DeleteStreamGroupInput, options: delete_stream_group.Options) !delete_stream_group.DeleteStreamGroupOutput {
+    pub fn deleteStreamGroup(self: *Self, allocator: std.mem.Allocator, input: delete_stream_group.DeleteStreamGroupInput, options: CallOptions) !delete_stream_group.DeleteStreamGroupOutput {
         return delete_stream_group.execute(self, allocator, input, options);
     }
 
@@ -243,7 +244,7 @@ pub const Client = struct {
     /// automatically choose a new default application from the remaining associated
     /// applications. To change which application is the default application, call
     /// [UpdateStreamGroup](https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UpdateStreamGroup.html) and specify a new `DefaultApplicationIdentifier`.
-    pub fn disassociateApplications(self: *Self, allocator: std.mem.Allocator, input: disassociate_applications.DisassociateApplicationsInput, options: disassociate_applications.Options) !disassociate_applications.DisassociateApplicationsOutput {
+    pub fn disassociateApplications(self: *Self, allocator: std.mem.Allocator, input: disassociate_applications.DisassociateApplicationsInput, options: CallOptions) !disassociate_applications.DisassociateApplicationsOutput {
         return disassociate_applications.execute(self, allocator, input, options);
     }
 
@@ -274,7 +275,7 @@ pub const Client = struct {
     /// To verify the status of the exported files, use GetStreamSession.
     ///
     /// To delete the files, delete the object in the S3 bucket.
-    pub fn exportStreamSessionFiles(self: *Self, allocator: std.mem.Allocator, input: export_stream_session_files.ExportStreamSessionFilesInput, options: export_stream_session_files.Options) !export_stream_session_files.ExportStreamSessionFilesOutput {
+    pub fn exportStreamSessionFiles(self: *Self, allocator: std.mem.Allocator, input: export_stream_session_files.ExportStreamSessionFilesInput, options: CallOptions) !export_stream_session_files.ExportStreamSessionFilesOutput {
         return export_stream_session_files.execute(self, allocator, input, options);
     }
 
@@ -282,7 +283,7 @@ pub const Client = struct {
     /// Specify the ID of the application that you want to retrieve. If the
     /// operation is successful, it returns properties for the requested
     /// application.
-    pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: get_application.Options) !get_application.GetApplicationOutput {
+    pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: CallOptions) !get_application.GetApplicationOutput {
         return get_application.execute(self, allocator, input, options);
     }
 
@@ -290,7 +291,7 @@ pub const Client = struct {
     /// Specify the ID of the stream group that you want to retrieve. If the
     /// operation is successful, it returns properties for the requested stream
     /// group.
-    pub fn getStreamGroup(self: *Self, allocator: std.mem.Allocator, input: get_stream_group.GetStreamGroupInput, options: get_stream_group.Options) !get_stream_group.GetStreamGroupOutput {
+    pub fn getStreamGroup(self: *Self, allocator: std.mem.Allocator, input: get_stream_group.GetStreamGroupInput, options: CallOptions) !get_stream_group.GetStreamGroupOutput {
         return get_stream_group.execute(self, allocator, input, options);
     }
 
@@ -298,7 +299,7 @@ pub const Client = struct {
     /// Specify the Amazon Resource Name (ARN) of the stream session that you want
     /// to retrieve and its stream group ARN. If the operation is successful, it
     /// returns properties for the requested resource.
-    pub fn getStreamSession(self: *Self, allocator: std.mem.Allocator, input: get_stream_session.GetStreamSessionInput, options: get_stream_session.Options) !get_stream_session.GetStreamSessionOutput {
+    pub fn getStreamSession(self: *Self, allocator: std.mem.Allocator, input: get_stream_session.GetStreamSessionInput, options: CallOptions) !get_stream_session.GetStreamSessionOutput {
         return get_stream_session.execute(self, allocator, input, options);
     }
 
@@ -306,7 +307,7 @@ pub const Client = struct {
     /// associated with the Amazon Web Services account in use. This operation
     /// returns applications in all statuses, in no particular order. You can
     /// paginate the results as needed.
-    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: list_applications.Options) !list_applications.ListApplicationsOutput {
+    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: CallOptions) !list_applications.ListApplicationsOutput {
         return list_applications.execute(self, allocator, input, options);
     }
 
@@ -314,7 +315,7 @@ pub const Client = struct {
     /// associated with the Amazon Web Services account in use. This operation
     /// returns stream groups in all statuses, in no particular order. You can
     /// paginate the results as needed.
-    pub fn listStreamGroups(self: *Self, allocator: std.mem.Allocator, input: list_stream_groups.ListStreamGroupsInput, options: list_stream_groups.Options) !list_stream_groups.ListStreamGroupsOutput {
+    pub fn listStreamGroups(self: *Self, allocator: std.mem.Allocator, input: list_stream_groups.ListStreamGroupsInput, options: CallOptions) !list_stream_groups.ListStreamGroupsOutput {
         return list_stream_groups.execute(self, allocator, input, options);
     }
 
@@ -325,7 +326,7 @@ pub const Client = struct {
     /// by stream session status. You can paginate the results as needed.
     ///
     /// This operation returns the requested stream sessions in no particular order.
-    pub fn listStreamSessions(self: *Self, allocator: std.mem.Allocator, input: list_stream_sessions.ListStreamSessionsInput, options: list_stream_sessions.Options) !list_stream_sessions.ListStreamSessionsOutput {
+    pub fn listStreamSessions(self: *Self, allocator: std.mem.Allocator, input: list_stream_sessions.ListStreamSessionsInput, options: CallOptions) !list_stream_sessions.ListStreamSessionsOutput {
         return list_stream_sessions.execute(self, allocator, input, options);
     }
 
@@ -341,7 +342,7 @@ pub const Client = struct {
     /// statuses because it's costly. Instead, to check status updates for a
     /// specific stream session, use
     /// [GetStreamSession](https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html).
-    pub fn listStreamSessionsByAccount(self: *Self, allocator: std.mem.Allocator, input: list_stream_sessions_by_account.ListStreamSessionsByAccountInput, options: list_stream_sessions_by_account.Options) !list_stream_sessions_by_account.ListStreamSessionsByAccountOutput {
+    pub fn listStreamSessionsByAccount(self: *Self, allocator: std.mem.Allocator, input: list_stream_sessions_by_account.ListStreamSessionsByAccountInput, options: CallOptions) !list_stream_sessions_by_account.ListStreamSessionsByAccountOutput {
         return list_stream_sessions_by_account.execute(self, allocator, input, options);
     }
 
@@ -356,7 +357,7 @@ pub const Client = struct {
     ///
     /// [ Amazon Web Services Tagging
     /// Strategies](http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -372,7 +373,7 @@ pub const Client = struct {
     /// initially created this stream group, known as the primary location. However,
     /// you can set the stream capacity to zero to avoid incurring costs for
     /// allocated compute resources in that location.
-    pub fn removeStreamGroupLocations(self: *Self, allocator: std.mem.Allocator, input: remove_stream_group_locations.RemoveStreamGroupLocationsInput, options: remove_stream_group_locations.Options) !remove_stream_group_locations.RemoveStreamGroupLocationsOutput {
+    pub fn removeStreamGroupLocations(self: *Self, allocator: std.mem.Allocator, input: remove_stream_group_locations.RemoveStreamGroupLocationsInput, options: CallOptions) !remove_stream_group_locations.RemoveStreamGroupLocationsOutput {
         return remove_stream_group_locations.execute(self, allocator, input, options);
     }
 
@@ -458,7 +459,7 @@ pub const Client = struct {
     /// To reconnect to a stream session after a client disconnects or loses
     /// connection, use
     /// [CreateStreamSessionConnection](https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_CreateStreamSessionConnection.html).
-    pub fn startStreamSession(self: *Self, allocator: std.mem.Allocator, input: start_stream_session.StartStreamSessionInput, options: start_stream_session.Options) !start_stream_session.StartStreamSessionOutput {
+    pub fn startStreamSession(self: *Self, allocator: std.mem.Allocator, input: start_stream_session.StartStreamSessionInput, options: CallOptions) !start_stream_session.StartStreamSessionOutput {
         return start_stream_session.execute(self, allocator, input, options);
     }
 
@@ -477,7 +478,7 @@ pub const Client = struct {
     ///
     /// [ Amazon Web Services Tagging
     /// Strategies](http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -485,14 +486,14 @@ pub const Client = struct {
     /// session status changes to `TERMINATING`. You can terminate a stream session
     /// in any status except `ACTIVATING`. If the stream session is in `ACTIVATING`
     /// status, an exception is thrown.
-    pub fn terminateStreamSession(self: *Self, allocator: std.mem.Allocator, input: terminate_stream_session.TerminateStreamSessionInput, options: terminate_stream_session.Options) !terminate_stream_session.TerminateStreamSessionOutput {
+    pub fn terminateStreamSession(self: *Self, allocator: std.mem.Allocator, input: terminate_stream_session.TerminateStreamSessionInput, options: CallOptions) !terminate_stream_session.TerminateStreamSessionOutput {
         return terminate_stream_session.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from a Amazon GameLift Streams resource. To remove
     /// tags, specify the Amazon GameLift Streams resource and a list of one or more
     /// tags to remove.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -503,7 +504,7 @@ pub const Client = struct {
     /// To update application settings, specify the application ID and provide the
     /// new values. If the operation is successful, it returns the complete updated
     /// set of settings for the application.
-    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: update_application.Options) !update_application.UpdateApplicationOutput {
+    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: CallOptions) !update_application.UpdateApplicationOutput {
         return update_application.execute(self, allocator, input, options);
     }
 
@@ -537,7 +538,7 @@ pub const Client = struct {
     /// (ARN) and provide the new values. If the request is successful, Amazon
     /// GameLift Streams returns the complete updated metadata for the stream group.
     /// Expired stream groups cannot be updated.
-    pub fn updateStreamGroup(self: *Self, allocator: std.mem.Allocator, input: update_stream_group.UpdateStreamGroupInput, options: update_stream_group.Options) !update_stream_group.UpdateStreamGroupOutput {
+    pub fn updateStreamGroup(self: *Self, allocator: std.mem.Allocator, input: update_stream_group.UpdateStreamGroupInput, options: CallOptions) !update_stream_group.UpdateStreamGroupOutput {
         return update_stream_group.execute(self, allocator, input, options);
     }
 

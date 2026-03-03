@@ -39,6 +39,7 @@ const update_virtual_gateway = @import("update_virtual_gateway.zig");
 const update_virtual_node = @import("update_virtual_node.zig");
 const update_virtual_router = @import("update_virtual_router.zig");
 const update_virtual_service = @import("update_virtual_service.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -79,7 +80,7 @@ pub const Client = struct {
     ///
     /// For more information about gateway routes, see [Gateway
     /// routes](https://docs.aws.amazon.com/app-mesh/latest/userguide/gateway-routes.html).
-    pub fn createGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: create_gateway_route.CreateGatewayRouteInput, options: create_gateway_route.Options) !create_gateway_route.CreateGatewayRouteOutput {
+    pub fn createGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: create_gateway_route.CreateGatewayRouteInput, options: CallOptions) !create_gateway_route.CreateGatewayRouteOutput {
         return create_gateway_route.execute(self, allocator, input, options);
     }
 
@@ -95,7 +96,7 @@ pub const Client = struct {
     ///
     /// For more information about service meshes, see [Service
     /// meshes](https://docs.aws.amazon.com/app-mesh/latest/userguide/meshes.html).
-    pub fn createMesh(self: *Self, allocator: std.mem.Allocator, input: create_mesh.CreateMeshInput, options: create_mesh.Options) !create_mesh.CreateMeshOutput {
+    pub fn createMesh(self: *Self, allocator: std.mem.Allocator, input: create_mesh.CreateMeshInput, options: CallOptions) !create_mesh.CreateMeshOutput {
         return create_mesh.execute(self, allocator, input, options);
     }
 
@@ -107,7 +108,7 @@ pub const Client = struct {
     ///
     /// For more information about routes, see
     /// [Routes](https://docs.aws.amazon.com/app-mesh/latest/userguide/routes.html).
-    pub fn createRoute(self: *Self, allocator: std.mem.Allocator, input: create_route.CreateRouteInput, options: create_route.Options) !create_route.CreateRouteOutput {
+    pub fn createRoute(self: *Self, allocator: std.mem.Allocator, input: create_route.CreateRouteInput, options: CallOptions) !create_route.CreateRouteOutput {
         return create_route.execute(self, allocator, input, options);
     }
 
@@ -124,7 +125,7 @@ pub const Client = struct {
     ///
     /// For more information about virtual gateways, see [Virtual
     /// gateways](https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_gateways.html).
-    pub fn createVirtualGateway(self: *Self, allocator: std.mem.Allocator, input: create_virtual_gateway.CreateVirtualGatewayInput, options: create_virtual_gateway.Options) !create_virtual_gateway.CreateVirtualGatewayOutput {
+    pub fn createVirtualGateway(self: *Self, allocator: std.mem.Allocator, input: create_virtual_gateway.CreateVirtualGatewayInput, options: CallOptions) !create_virtual_gateway.CreateVirtualGatewayOutput {
         return create_virtual_gateway.execute(self, allocator, input, options);
     }
 
@@ -166,7 +167,7 @@ pub const Client = struct {
     /// [Envoy
     /// image](https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html) in
     /// the App Mesh User Guide.
-    pub fn createVirtualNode(self: *Self, allocator: std.mem.Allocator, input: create_virtual_node.CreateVirtualNodeInput, options: create_virtual_node.Options) !create_virtual_node.CreateVirtualNodeOutput {
+    pub fn createVirtualNode(self: *Self, allocator: std.mem.Allocator, input: create_virtual_node.CreateVirtualNodeInput, options: CallOptions) !create_virtual_node.CreateVirtualNodeOutput {
         return create_virtual_node.execute(self, allocator, input, options);
     }
 
@@ -183,7 +184,7 @@ pub const Client = struct {
     ///
     /// For more information about virtual routers, see [Virtual
     /// routers](https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html).
-    pub fn createVirtualRouter(self: *Self, allocator: std.mem.Allocator, input: create_virtual_router.CreateVirtualRouterInput, options: create_virtual_router.Options) !create_virtual_router.CreateVirtualRouterOutput {
+    pub fn createVirtualRouter(self: *Self, allocator: std.mem.Allocator, input: create_virtual_router.CreateVirtualRouterInput, options: CallOptions) !create_virtual_router.CreateVirtualRouterOutput {
         return create_virtual_router.execute(self, allocator, input, options);
     }
 
@@ -200,12 +201,12 @@ pub const Client = struct {
     ///
     /// For more information about virtual services, see [Virtual
     /// services](https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html).
-    pub fn createVirtualService(self: *Self, allocator: std.mem.Allocator, input: create_virtual_service.CreateVirtualServiceInput, options: create_virtual_service.Options) !create_virtual_service.CreateVirtualServiceOutput {
+    pub fn createVirtualService(self: *Self, allocator: std.mem.Allocator, input: create_virtual_service.CreateVirtualServiceInput, options: CallOptions) !create_virtual_service.CreateVirtualServiceOutput {
         return create_virtual_service.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing gateway route.
-    pub fn deleteGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: delete_gateway_route.DeleteGatewayRouteInput, options: delete_gateway_route.Options) !delete_gateway_route.DeleteGatewayRouteOutput {
+    pub fn deleteGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: delete_gateway_route.DeleteGatewayRouteInput, options: CallOptions) !delete_gateway_route.DeleteGatewayRouteOutput {
         return delete_gateway_route.execute(self, allocator, input, options);
     }
 
@@ -214,19 +215,19 @@ pub const Client = struct {
     /// You must delete all resources (virtual services, routes, virtual routers,
     /// and virtual
     /// nodes) in the service mesh before you can delete the mesh itself.
-    pub fn deleteMesh(self: *Self, allocator: std.mem.Allocator, input: delete_mesh.DeleteMeshInput, options: delete_mesh.Options) !delete_mesh.DeleteMeshOutput {
+    pub fn deleteMesh(self: *Self, allocator: std.mem.Allocator, input: delete_mesh.DeleteMeshInput, options: CallOptions) !delete_mesh.DeleteMeshOutput {
         return delete_mesh.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing route.
-    pub fn deleteRoute(self: *Self, allocator: std.mem.Allocator, input: delete_route.DeleteRouteInput, options: delete_route.Options) !delete_route.DeleteRouteOutput {
+    pub fn deleteRoute(self: *Self, allocator: std.mem.Allocator, input: delete_route.DeleteRouteInput, options: CallOptions) !delete_route.DeleteRouteOutput {
         return delete_route.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing virtual gateway. You cannot delete a virtual gateway if
     /// any gateway
     /// routes are associated to it.
-    pub fn deleteVirtualGateway(self: *Self, allocator: std.mem.Allocator, input: delete_virtual_gateway.DeleteVirtualGatewayInput, options: delete_virtual_gateway.Options) !delete_virtual_gateway.DeleteVirtualGatewayOutput {
+    pub fn deleteVirtualGateway(self: *Self, allocator: std.mem.Allocator, input: delete_virtual_gateway.DeleteVirtualGatewayInput, options: CallOptions) !delete_virtual_gateway.DeleteVirtualGatewayOutput {
         return delete_virtual_gateway.execute(self, allocator, input, options);
     }
 
@@ -235,7 +236,7 @@ pub const Client = struct {
     /// You must delete any virtual services that list a virtual node as a service
     /// provider
     /// before you can delete the virtual node itself.
-    pub fn deleteVirtualNode(self: *Self, allocator: std.mem.Allocator, input: delete_virtual_node.DeleteVirtualNodeInput, options: delete_virtual_node.Options) !delete_virtual_node.DeleteVirtualNodeOutput {
+    pub fn deleteVirtualNode(self: *Self, allocator: std.mem.Allocator, input: delete_virtual_node.DeleteVirtualNodeInput, options: CallOptions) !delete_virtual_node.DeleteVirtualNodeOutput {
         return delete_virtual_node.execute(self, allocator, input, options);
     }
 
@@ -244,88 +245,88 @@ pub const Client = struct {
     /// You must delete any routes associated with the virtual router before you can
     /// delete the
     /// router itself.
-    pub fn deleteVirtualRouter(self: *Self, allocator: std.mem.Allocator, input: delete_virtual_router.DeleteVirtualRouterInput, options: delete_virtual_router.Options) !delete_virtual_router.DeleteVirtualRouterOutput {
+    pub fn deleteVirtualRouter(self: *Self, allocator: std.mem.Allocator, input: delete_virtual_router.DeleteVirtualRouterInput, options: CallOptions) !delete_virtual_router.DeleteVirtualRouterOutput {
         return delete_virtual_router.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing virtual service.
-    pub fn deleteVirtualService(self: *Self, allocator: std.mem.Allocator, input: delete_virtual_service.DeleteVirtualServiceInput, options: delete_virtual_service.Options) !delete_virtual_service.DeleteVirtualServiceOutput {
+    pub fn deleteVirtualService(self: *Self, allocator: std.mem.Allocator, input: delete_virtual_service.DeleteVirtualServiceInput, options: CallOptions) !delete_virtual_service.DeleteVirtualServiceOutput {
         return delete_virtual_service.execute(self, allocator, input, options);
     }
 
     /// Describes an existing gateway route.
-    pub fn describeGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: describe_gateway_route.DescribeGatewayRouteInput, options: describe_gateway_route.Options) !describe_gateway_route.DescribeGatewayRouteOutput {
+    pub fn describeGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: describe_gateway_route.DescribeGatewayRouteInput, options: CallOptions) !describe_gateway_route.DescribeGatewayRouteOutput {
         return describe_gateway_route.execute(self, allocator, input, options);
     }
 
     /// Describes an existing service mesh.
-    pub fn describeMesh(self: *Self, allocator: std.mem.Allocator, input: describe_mesh.DescribeMeshInput, options: describe_mesh.Options) !describe_mesh.DescribeMeshOutput {
+    pub fn describeMesh(self: *Self, allocator: std.mem.Allocator, input: describe_mesh.DescribeMeshInput, options: CallOptions) !describe_mesh.DescribeMeshOutput {
         return describe_mesh.execute(self, allocator, input, options);
     }
 
     /// Describes an existing route.
-    pub fn describeRoute(self: *Self, allocator: std.mem.Allocator, input: describe_route.DescribeRouteInput, options: describe_route.Options) !describe_route.DescribeRouteOutput {
+    pub fn describeRoute(self: *Self, allocator: std.mem.Allocator, input: describe_route.DescribeRouteInput, options: CallOptions) !describe_route.DescribeRouteOutput {
         return describe_route.execute(self, allocator, input, options);
     }
 
     /// Describes an existing virtual gateway.
-    pub fn describeVirtualGateway(self: *Self, allocator: std.mem.Allocator, input: describe_virtual_gateway.DescribeVirtualGatewayInput, options: describe_virtual_gateway.Options) !describe_virtual_gateway.DescribeVirtualGatewayOutput {
+    pub fn describeVirtualGateway(self: *Self, allocator: std.mem.Allocator, input: describe_virtual_gateway.DescribeVirtualGatewayInput, options: CallOptions) !describe_virtual_gateway.DescribeVirtualGatewayOutput {
         return describe_virtual_gateway.execute(self, allocator, input, options);
     }
 
     /// Describes an existing virtual node.
-    pub fn describeVirtualNode(self: *Self, allocator: std.mem.Allocator, input: describe_virtual_node.DescribeVirtualNodeInput, options: describe_virtual_node.Options) !describe_virtual_node.DescribeVirtualNodeOutput {
+    pub fn describeVirtualNode(self: *Self, allocator: std.mem.Allocator, input: describe_virtual_node.DescribeVirtualNodeInput, options: CallOptions) !describe_virtual_node.DescribeVirtualNodeOutput {
         return describe_virtual_node.execute(self, allocator, input, options);
     }
 
     /// Describes an existing virtual router.
-    pub fn describeVirtualRouter(self: *Self, allocator: std.mem.Allocator, input: describe_virtual_router.DescribeVirtualRouterInput, options: describe_virtual_router.Options) !describe_virtual_router.DescribeVirtualRouterOutput {
+    pub fn describeVirtualRouter(self: *Self, allocator: std.mem.Allocator, input: describe_virtual_router.DescribeVirtualRouterInput, options: CallOptions) !describe_virtual_router.DescribeVirtualRouterOutput {
         return describe_virtual_router.execute(self, allocator, input, options);
     }
 
     /// Describes an existing virtual service.
-    pub fn describeVirtualService(self: *Self, allocator: std.mem.Allocator, input: describe_virtual_service.DescribeVirtualServiceInput, options: describe_virtual_service.Options) !describe_virtual_service.DescribeVirtualServiceOutput {
+    pub fn describeVirtualService(self: *Self, allocator: std.mem.Allocator, input: describe_virtual_service.DescribeVirtualServiceInput, options: CallOptions) !describe_virtual_service.DescribeVirtualServiceOutput {
         return describe_virtual_service.execute(self, allocator, input, options);
     }
 
     /// Returns a list of existing gateway routes that are associated to a virtual
     /// gateway.
-    pub fn listGatewayRoutes(self: *Self, allocator: std.mem.Allocator, input: list_gateway_routes.ListGatewayRoutesInput, options: list_gateway_routes.Options) !list_gateway_routes.ListGatewayRoutesOutput {
+    pub fn listGatewayRoutes(self: *Self, allocator: std.mem.Allocator, input: list_gateway_routes.ListGatewayRoutesInput, options: CallOptions) !list_gateway_routes.ListGatewayRoutesOutput {
         return list_gateway_routes.execute(self, allocator, input, options);
     }
 
     /// Returns a list of existing service meshes.
-    pub fn listMeshes(self: *Self, allocator: std.mem.Allocator, input: list_meshes.ListMeshesInput, options: list_meshes.Options) !list_meshes.ListMeshesOutput {
+    pub fn listMeshes(self: *Self, allocator: std.mem.Allocator, input: list_meshes.ListMeshesInput, options: CallOptions) !list_meshes.ListMeshesOutput {
         return list_meshes.execute(self, allocator, input, options);
     }
 
     /// Returns a list of existing routes in a service mesh.
-    pub fn listRoutes(self: *Self, allocator: std.mem.Allocator, input: list_routes.ListRoutesInput, options: list_routes.Options) !list_routes.ListRoutesOutput {
+    pub fn listRoutes(self: *Self, allocator: std.mem.Allocator, input: list_routes.ListRoutesInput, options: CallOptions) !list_routes.ListRoutesOutput {
         return list_routes.execute(self, allocator, input, options);
     }
 
     /// List the tags for an App Mesh resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Returns a list of existing virtual gateways in a service mesh.
-    pub fn listVirtualGateways(self: *Self, allocator: std.mem.Allocator, input: list_virtual_gateways.ListVirtualGatewaysInput, options: list_virtual_gateways.Options) !list_virtual_gateways.ListVirtualGatewaysOutput {
+    pub fn listVirtualGateways(self: *Self, allocator: std.mem.Allocator, input: list_virtual_gateways.ListVirtualGatewaysInput, options: CallOptions) !list_virtual_gateways.ListVirtualGatewaysOutput {
         return list_virtual_gateways.execute(self, allocator, input, options);
     }
 
     /// Returns a list of existing virtual nodes.
-    pub fn listVirtualNodes(self: *Self, allocator: std.mem.Allocator, input: list_virtual_nodes.ListVirtualNodesInput, options: list_virtual_nodes.Options) !list_virtual_nodes.ListVirtualNodesOutput {
+    pub fn listVirtualNodes(self: *Self, allocator: std.mem.Allocator, input: list_virtual_nodes.ListVirtualNodesInput, options: CallOptions) !list_virtual_nodes.ListVirtualNodesOutput {
         return list_virtual_nodes.execute(self, allocator, input, options);
     }
 
     /// Returns a list of existing virtual routers in a service mesh.
-    pub fn listVirtualRouters(self: *Self, allocator: std.mem.Allocator, input: list_virtual_routers.ListVirtualRoutersInput, options: list_virtual_routers.Options) !list_virtual_routers.ListVirtualRoutersOutput {
+    pub fn listVirtualRouters(self: *Self, allocator: std.mem.Allocator, input: list_virtual_routers.ListVirtualRoutersInput, options: CallOptions) !list_virtual_routers.ListVirtualRoutersOutput {
         return list_virtual_routers.execute(self, allocator, input, options);
     }
 
     /// Returns a list of existing virtual services in a service mesh.
-    pub fn listVirtualServices(self: *Self, allocator: std.mem.Allocator, input: list_virtual_services.ListVirtualServicesInput, options: list_virtual_services.Options) !list_virtual_services.ListVirtualServicesOutput {
+    pub fn listVirtualServices(self: *Self, allocator: std.mem.Allocator, input: list_virtual_services.ListVirtualServicesInput, options: CallOptions) !list_virtual_services.ListVirtualServicesOutput {
         return list_virtual_services.execute(self, allocator, input, options);
     }
 
@@ -336,49 +337,49 @@ pub const Client = struct {
     /// changed. When a resource is deleted, the tags associated with that resource
     /// are also
     /// deleted.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes specified tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an existing gateway route that is associated to a specified virtual
     /// gateway in a
     /// service mesh.
-    pub fn updateGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: update_gateway_route.UpdateGatewayRouteInput, options: update_gateway_route.Options) !update_gateway_route.UpdateGatewayRouteOutput {
+    pub fn updateGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: update_gateway_route.UpdateGatewayRouteInput, options: CallOptions) !update_gateway_route.UpdateGatewayRouteOutput {
         return update_gateway_route.execute(self, allocator, input, options);
     }
 
     /// Updates an existing service mesh.
-    pub fn updateMesh(self: *Self, allocator: std.mem.Allocator, input: update_mesh.UpdateMeshInput, options: update_mesh.Options) !update_mesh.UpdateMeshOutput {
+    pub fn updateMesh(self: *Self, allocator: std.mem.Allocator, input: update_mesh.UpdateMeshInput, options: CallOptions) !update_mesh.UpdateMeshOutput {
         return update_mesh.execute(self, allocator, input, options);
     }
 
     /// Updates an existing route for a specified service mesh and virtual router.
-    pub fn updateRoute(self: *Self, allocator: std.mem.Allocator, input: update_route.UpdateRouteInput, options: update_route.Options) !update_route.UpdateRouteOutput {
+    pub fn updateRoute(self: *Self, allocator: std.mem.Allocator, input: update_route.UpdateRouteInput, options: CallOptions) !update_route.UpdateRouteOutput {
         return update_route.execute(self, allocator, input, options);
     }
 
     /// Updates an existing virtual gateway in a specified service mesh.
-    pub fn updateVirtualGateway(self: *Self, allocator: std.mem.Allocator, input: update_virtual_gateway.UpdateVirtualGatewayInput, options: update_virtual_gateway.Options) !update_virtual_gateway.UpdateVirtualGatewayOutput {
+    pub fn updateVirtualGateway(self: *Self, allocator: std.mem.Allocator, input: update_virtual_gateway.UpdateVirtualGatewayInput, options: CallOptions) !update_virtual_gateway.UpdateVirtualGatewayOutput {
         return update_virtual_gateway.execute(self, allocator, input, options);
     }
 
     /// Updates an existing virtual node in a specified service mesh.
-    pub fn updateVirtualNode(self: *Self, allocator: std.mem.Allocator, input: update_virtual_node.UpdateVirtualNodeInput, options: update_virtual_node.Options) !update_virtual_node.UpdateVirtualNodeOutput {
+    pub fn updateVirtualNode(self: *Self, allocator: std.mem.Allocator, input: update_virtual_node.UpdateVirtualNodeInput, options: CallOptions) !update_virtual_node.UpdateVirtualNodeOutput {
         return update_virtual_node.execute(self, allocator, input, options);
     }
 
     /// Updates an existing virtual router in a specified service mesh.
-    pub fn updateVirtualRouter(self: *Self, allocator: std.mem.Allocator, input: update_virtual_router.UpdateVirtualRouterInput, options: update_virtual_router.Options) !update_virtual_router.UpdateVirtualRouterOutput {
+    pub fn updateVirtualRouter(self: *Self, allocator: std.mem.Allocator, input: update_virtual_router.UpdateVirtualRouterInput, options: CallOptions) !update_virtual_router.UpdateVirtualRouterOutput {
         return update_virtual_router.execute(self, allocator, input, options);
     }
 
     /// Updates an existing virtual service in a specified service mesh.
-    pub fn updateVirtualService(self: *Self, allocator: std.mem.Allocator, input: update_virtual_service.UpdateVirtualServiceInput, options: update_virtual_service.Options) !update_virtual_service.UpdateVirtualServiceOutput {
+    pub fn updateVirtualService(self: *Self, allocator: std.mem.Allocator, input: update_virtual_service.UpdateVirtualServiceInput, options: CallOptions) !update_virtual_service.UpdateVirtualServiceOutput {
         return update_virtual_service.execute(self, allocator, input, options);
     }
 

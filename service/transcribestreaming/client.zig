@@ -6,6 +6,7 @@ const start_call_analytics_stream_transcription = @import("start_call_analytics_
 const start_medical_scribe_stream = @import("start_medical_scribe_stream.zig");
 const start_medical_stream_transcription = @import("start_medical_stream_transcription.zig");
 const start_stream_transcription = @import("start_stream_transcription.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -41,7 +42,7 @@ pub const Client = struct {
     /// in the response. To get the
     /// details of post-stream analytics, including its status, check the
     /// `PostStreamAnalyticsResult` field in the response.
-    pub fn getMedicalScribeStream(self: *Self, allocator: std.mem.Allocator, input: get_medical_scribe_stream.GetMedicalScribeStreamInput, options: get_medical_scribe_stream.Options) !get_medical_scribe_stream.GetMedicalScribeStreamOutput {
+    pub fn getMedicalScribeStream(self: *Self, allocator: std.mem.Allocator, input: get_medical_scribe_stream.GetMedicalScribeStreamInput, options: CallOptions) !get_medical_scribe_stream.GetMedicalScribeStreamOutput {
         return get_medical_scribe_stream.execute(self, allocator, input, options);
     }
 
@@ -62,7 +63,7 @@ pub const Client = struct {
     /// For more information on streaming with Amazon Transcribe, see [Transcribing
     /// streaming
     /// audio](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html).
-    pub fn startCallAnalyticsStreamTranscription(self: *Self, allocator: std.mem.Allocator, input: start_call_analytics_stream_transcription.StartCallAnalyticsStreamTranscriptionInput, options: start_call_analytics_stream_transcription.Options) !start_call_analytics_stream_transcription.StartCallAnalyticsStreamTranscriptionOutput {
+    pub fn startCallAnalyticsStreamTranscription(self: *Self, allocator: std.mem.Allocator, input: start_call_analytics_stream_transcription.StartCallAnalyticsStreamTranscriptionInput, options: CallOptions) !start_call_analytics_stream_transcription.StartCallAnalyticsStreamTranscriptionOutput {
         return start_call_analytics_stream_transcription.execute(self, allocator, input, options);
     }
 
@@ -106,7 +107,7 @@ pub const Client = struct {
     /// Amazon Web Services HealthScribe,
     /// see [Amazon Web Services
     /// HealthScribe](https://docs.aws.amazon.com/transcribe/latest/dg/health-scribe-streaming.html).
-    pub fn startMedicalScribeStream(self: *Self, allocator: std.mem.Allocator, input: start_medical_scribe_stream.StartMedicalScribeStreamInput, options: start_medical_scribe_stream.Options) !start_medical_scribe_stream.StartMedicalScribeStreamOutput {
+    pub fn startMedicalScribeStream(self: *Self, allocator: std.mem.Allocator, input: start_medical_scribe_stream.StartMedicalScribeStreamInput, options: CallOptions) !start_medical_scribe_stream.StartMedicalScribeStreamOutput {
         return start_medical_scribe_stream.execute(self, allocator, input, options);
     }
 
@@ -126,7 +127,7 @@ pub const Client = struct {
     /// [Transcribing
     /// streaming
     /// audio](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html).
-    pub fn startMedicalStreamTranscription(self: *Self, allocator: std.mem.Allocator, input: start_medical_stream_transcription.StartMedicalStreamTranscriptionInput, options: start_medical_stream_transcription.Options) !start_medical_stream_transcription.StartMedicalStreamTranscriptionOutput {
+    pub fn startMedicalStreamTranscription(self: *Self, allocator: std.mem.Allocator, input: start_medical_stream_transcription.StartMedicalStreamTranscriptionInput, options: CallOptions) !start_medical_stream_transcription.StartMedicalStreamTranscriptionOutput {
         return start_medical_stream_transcription.execute(self, allocator, input, options);
     }
 
@@ -145,7 +146,7 @@ pub const Client = struct {
     /// For more information on streaming with Amazon Transcribe, see [Transcribing
     /// streaming
     /// audio](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html).
-    pub fn startStreamTranscription(self: *Self, allocator: std.mem.Allocator, input: start_stream_transcription.StartStreamTranscriptionInput, options: start_stream_transcription.Options) !start_stream_transcription.StartStreamTranscriptionOutput {
+    pub fn startStreamTranscription(self: *Self, allocator: std.mem.Allocator, input: start_stream_transcription.StartStreamTranscriptionInput, options: CallOptions) !start_stream_transcription.StartStreamTranscriptionOutput {
         return start_stream_transcription.execute(self, allocator, input, options);
     }
 };

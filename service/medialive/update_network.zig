@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpPoolUpdateRequest = @import("ip_pool_update_request.zig").IpPoolUpdateRequest;
 const RouteUpdateRequest = @import("route_update_request.zig").RouteUpdateRequest;
@@ -78,11 +79,7 @@ pub const UpdateNetworkOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateNetworkInput, options: Options) !UpdateNetworkOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateNetworkInput, options: CallOptions) !UpdateNetworkOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

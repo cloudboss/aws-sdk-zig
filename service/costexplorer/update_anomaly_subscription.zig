@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AnomalySubscriptionFrequency = @import("anomaly_subscription_frequency.zig").AnomalySubscriptionFrequency;
 const Subscriber = @import("subscriber.zig").Subscriber;
@@ -94,11 +95,7 @@ pub const UpdateAnomalySubscriptionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAnomalySubscriptionInput, options: Options) !UpdateAnomalySubscriptionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAnomalySubscriptionInput, options: CallOptions) !UpdateAnomalySubscriptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

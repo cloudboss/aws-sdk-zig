@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BlockDeviceMapping = @import("block_device_mapping.zig").BlockDeviceMapping;
 const CapacityReservationSpecification = @import("capacity_reservation_specification.zig").CapacityReservationSpecification;
@@ -379,13 +380,9 @@ pub const RunInstancesInput = struct {
     user_data: ?[]const u8 = null,
 };
 
-const RunInstancesOutput = @import("reservation.zig").Reservation;
+pub const RunInstancesOutput = @import("reservation.zig").Reservation;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RunInstancesInput, options: Options) !RunInstancesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RunInstancesInput, options: CallOptions) !RunInstancesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ListInsightsStatusFilter = @import("list_insights_status_filter.zig").ListInsightsStatusFilter;
 const ProactiveOrganizationInsightSummary = @import("proactive_organization_insight_summary.zig").ProactiveOrganizationInsightSummary;
@@ -58,11 +59,7 @@ pub const ListOrganizationInsightsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOrganizationInsightsInput, options: Options) !ListOrganizationInsightsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOrganizationInsightsInput, options: CallOptions) !ListOrganizationInsightsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

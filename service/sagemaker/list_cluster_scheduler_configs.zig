@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SortClusterSchedulerConfigBy = @import("sort_cluster_scheduler_config_by.zig").SortClusterSchedulerConfigBy;
 const SortOrder = @import("sort_order.zig").SortOrder;
@@ -71,11 +72,7 @@ pub const ListClusterSchedulerConfigsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListClusterSchedulerConfigsInput, options: Options) !ListClusterSchedulerConfigsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListClusterSchedulerConfigsInput, options: CallOptions) !ListClusterSchedulerConfigsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

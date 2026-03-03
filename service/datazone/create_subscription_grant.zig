@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AssetTargetNameMap = @import("asset_target_name_map.zig").AssetTargetNameMap;
 const GrantedEntityInput = @import("granted_entity_input.zig").GrantedEntityInput;
@@ -96,11 +97,7 @@ pub const CreateSubscriptionGrantOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSubscriptionGrantInput, options: Options) !CreateSubscriptionGrantOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSubscriptionGrantInput, options: CallOptions) !CreateSubscriptionGrantOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

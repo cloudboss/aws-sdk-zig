@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SipRuleTargetApplication = @import("sip_rule_target_application.zig").SipRuleTargetApplication;
 const SipRuleTriggerType = @import("sip_rule_trigger_type.zig").SipRuleTriggerType;
@@ -52,11 +53,7 @@ pub const CreateSipRuleOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSipRuleInput, options: Options) !CreateSipRuleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSipRuleInput, options: CallOptions) !CreateSipRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

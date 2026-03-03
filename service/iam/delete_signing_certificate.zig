@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteSigningCertificateInput = struct {
@@ -22,13 +23,9 @@ pub const DeleteSigningCertificateInput = struct {
     user_name: ?[]const u8 = null,
 };
 
-const DeleteSigningCertificateOutput = struct {};
+pub const DeleteSigningCertificateOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSigningCertificateInput, options: Options) !DeleteSigningCertificateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSigningCertificateInput, options: CallOptions) !DeleteSigningCertificateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

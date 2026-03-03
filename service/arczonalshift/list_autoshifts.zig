@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AutoshiftExecutionStatus = @import("autoshift_execution_status.zig").AutoshiftExecutionStatus;
 const AutoshiftSummary = @import("autoshift_summary.zig").AutoshiftSummary;
@@ -44,11 +45,7 @@ pub const ListAutoshiftsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAutoshiftsInput, options: Options) !ListAutoshiftsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAutoshiftsInput, options: CallOptions) !ListAutoshiftsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

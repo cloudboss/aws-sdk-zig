@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ExportFilesStatus = @import("export_files_status.zig").ExportFilesStatus;
 const StreamSessionStatus = @import("stream_session_status.zig").StreamSessionStatus;
@@ -51,11 +52,7 @@ pub const ListStreamSessionsByAccountOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListStreamSessionsByAccountInput, options: Options) !ListStreamSessionsByAccountOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListStreamSessionsByAccountInput, options: CallOptions) !ListStreamSessionsByAccountOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

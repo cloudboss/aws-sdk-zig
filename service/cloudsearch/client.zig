@@ -27,6 +27,7 @@ const update_availability_options = @import("update_availability_options.zig");
 const update_domain_endpoint_options = @import("update_domain_endpoint_options.zig");
 const update_scaling_parameters = @import("update_scaling_parameters.zig");
 const update_service_access_policies = @import("update_service_access_policies.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -58,14 +59,14 @@ pub const Client = struct {
 
     /// Indexes the search suggestions. For more information, see [Configuring
     /// Suggesters](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html#configuring-suggesters) in the *Amazon CloudSearch Developer Guide*.
-    pub fn buildSuggesters(self: *Self, allocator: std.mem.Allocator, input: build_suggesters.BuildSuggestersInput, options: build_suggesters.Options) !build_suggesters.BuildSuggestersOutput {
+    pub fn buildSuggesters(self: *Self, allocator: std.mem.Allocator, input: build_suggesters.BuildSuggestersInput, options: CallOptions) !build_suggesters.BuildSuggestersOutput {
         return build_suggesters.execute(self, allocator, input, options);
     }
 
     /// Creates a new search domain. For more information,
     /// see [Creating a Search
     /// Domain](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/creating-domains.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn createDomain(self: *Self, allocator: std.mem.Allocator, input: create_domain.CreateDomainInput, options: create_domain.Options) !create_domain.CreateDomainOutput {
+    pub fn createDomain(self: *Self, allocator: std.mem.Allocator, input: create_domain.CreateDomainInput, options: CallOptions) !create_domain.CreateDomainOutput {
         return create_domain.execute(self, allocator, input, options);
     }
 
@@ -73,7 +74,7 @@ pub const Client = struct {
     /// `text-array` field to define language-specific text processing options. For
     /// more information, see [Configuring Analysis
     /// Schemes](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn defineAnalysisScheme(self: *Self, allocator: std.mem.Allocator, input: define_analysis_scheme.DefineAnalysisSchemeInput, options: define_analysis_scheme.Options) !define_analysis_scheme.DefineAnalysisSchemeOutput {
+    pub fn defineAnalysisScheme(self: *Self, allocator: std.mem.Allocator, input: define_analysis_scheme.DefineAnalysisSchemeInput, options: CallOptions) !define_analysis_scheme.DefineAnalysisSchemeOutput {
         return define_analysis_scheme.execute(self, allocator, input, options);
     }
 
@@ -81,7 +82,7 @@ pub const Client = struct {
     /// expressions and modify existing ones. If the expression exists, the new
     /// configuration replaces the old one. For more information, see [Configuring
     /// Expressions](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn defineExpression(self: *Self, allocator: std.mem.Allocator, input: define_expression.DefineExpressionInput, options: define_expression.Options) !define_expression.DefineExpressionOutput {
+    pub fn defineExpression(self: *Self, allocator: std.mem.Allocator, input: define_expression.DefineExpressionInput, options: CallOptions) !define_expression.DefineExpressionOutput {
         return define_expression.execute(self, allocator, input, options);
     }
 
@@ -93,7 +94,7 @@ pub const Client = struct {
     /// `IndexFieldType`. If the field exists, the new configuration replaces the
     /// old one. For more information, see [Configuring Index
     /// Fields](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn defineIndexField(self: *Self, allocator: std.mem.Allocator, input: define_index_field.DefineIndexFieldInput, options: define_index_field.Options) !define_index_field.DefineIndexFieldOutput {
+    pub fn defineIndexField(self: *Self, allocator: std.mem.Allocator, input: define_index_field.DefineIndexFieldInput, options: CallOptions) !define_index_field.DefineIndexFieldOutput {
         return define_index_field.execute(self, allocator, input, options);
     }
 
@@ -103,13 +104,13 @@ pub const Client = struct {
     /// to search for possible matches and a unique name for the suggester. For more
     /// information, see [Getting Search
     /// Suggestions](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn defineSuggester(self: *Self, allocator: std.mem.Allocator, input: define_suggester.DefineSuggesterInput, options: define_suggester.Options) !define_suggester.DefineSuggesterOutput {
+    pub fn defineSuggester(self: *Self, allocator: std.mem.Allocator, input: define_suggester.DefineSuggesterInput, options: CallOptions) !define_suggester.DefineSuggesterOutput {
         return define_suggester.execute(self, allocator, input, options);
     }
 
     /// Deletes an analysis scheme. For more information, see [Configuring Analysis
     /// Schemes](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn deleteAnalysisScheme(self: *Self, allocator: std.mem.Allocator, input: delete_analysis_scheme.DeleteAnalysisSchemeInput, options: delete_analysis_scheme.Options) !delete_analysis_scheme.DeleteAnalysisSchemeOutput {
+    pub fn deleteAnalysisScheme(self: *Self, allocator: std.mem.Allocator, input: delete_analysis_scheme.DeleteAnalysisSchemeInput, options: CallOptions) !delete_analysis_scheme.DeleteAnalysisSchemeOutput {
         return delete_analysis_scheme.execute(self, allocator, input, options);
     }
 
@@ -117,27 +118,27 @@ pub const Client = struct {
     /// been deleted, it cannot be recovered. For more information,
     /// see [Deleting a Search
     /// Domain](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/deleting-domains.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: delete_domain.Options) !delete_domain.DeleteDomainOutput {
+    pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: CallOptions) !delete_domain.DeleteDomainOutput {
         return delete_domain.execute(self, allocator, input, options);
     }
 
     /// Removes an `Expression` from the search domain. For more information, see
     /// [Configuring
     /// Expressions](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn deleteExpression(self: *Self, allocator: std.mem.Allocator, input: delete_expression.DeleteExpressionInput, options: delete_expression.Options) !delete_expression.DeleteExpressionOutput {
+    pub fn deleteExpression(self: *Self, allocator: std.mem.Allocator, input: delete_expression.DeleteExpressionInput, options: CallOptions) !delete_expression.DeleteExpressionOutput {
         return delete_expression.execute(self, allocator, input, options);
     }
 
     /// Removes an `IndexField` from the search domain. For more information, see
     /// [Configuring Index
     /// Fields](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn deleteIndexField(self: *Self, allocator: std.mem.Allocator, input: delete_index_field.DeleteIndexFieldInput, options: delete_index_field.Options) !delete_index_field.DeleteIndexFieldOutput {
+    pub fn deleteIndexField(self: *Self, allocator: std.mem.Allocator, input: delete_index_field.DeleteIndexFieldInput, options: CallOptions) !delete_index_field.DeleteIndexFieldOutput {
         return delete_index_field.execute(self, allocator, input, options);
     }
 
     /// Deletes a suggester. For more information, see [Getting Search
     /// Suggestions](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn deleteSuggester(self: *Self, allocator: std.mem.Allocator, input: delete_suggester.DeleteSuggesterInput, options: delete_suggester.Options) !delete_suggester.DeleteSuggesterOutput {
+    pub fn deleteSuggester(self: *Self, allocator: std.mem.Allocator, input: delete_suggester.DeleteSuggesterInput, options: CallOptions) !delete_suggester.DeleteSuggesterOutput {
         return delete_suggester.execute(self, allocator, input, options);
     }
 
@@ -148,7 +149,7 @@ pub const Client = struct {
     /// `Deployed` option to `true` to show the active configuration and exclude
     /// pending changes. For more information, see [Configuring Analysis
     /// Schemes](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn describeAnalysisSchemes(self: *Self, allocator: std.mem.Allocator, input: describe_analysis_schemes.DescribeAnalysisSchemesInput, options: describe_analysis_schemes.Options) !describe_analysis_schemes.DescribeAnalysisSchemesOutput {
+    pub fn describeAnalysisSchemes(self: *Self, allocator: std.mem.Allocator, input: describe_analysis_schemes.DescribeAnalysisSchemesInput, options: CallOptions) !describe_analysis_schemes.DescribeAnalysisSchemesOutput {
         return describe_analysis_schemes.execute(self, allocator, input, options);
     }
 
@@ -157,7 +158,7 @@ pub const Client = struct {
     /// to show the active configuration and exclude pending changes. For more
     /// information, see [Configuring Availability
     /// Options](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn describeAvailabilityOptions(self: *Self, allocator: std.mem.Allocator, input: describe_availability_options.DescribeAvailabilityOptionsInput, options: describe_availability_options.Options) !describe_availability_options.DescribeAvailabilityOptionsOutput {
+    pub fn describeAvailabilityOptions(self: *Self, allocator: std.mem.Allocator, input: describe_availability_options.DescribeAvailabilityOptionsInput, options: CallOptions) !describe_availability_options.DescribeAvailabilityOptionsOutput {
         return describe_availability_options.execute(self, allocator, input, options);
     }
 
@@ -165,7 +166,7 @@ pub const Client = struct {
     /// the domain must arrive over HTTPS. For more information, see [Configuring
     /// Domain Endpoint
     /// Options](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn describeDomainEndpointOptions(self: *Self, allocator: std.mem.Allocator, input: describe_domain_endpoint_options.DescribeDomainEndpointOptionsInput, options: describe_domain_endpoint_options.Options) !describe_domain_endpoint_options.DescribeDomainEndpointOptionsOutput {
+    pub fn describeDomainEndpointOptions(self: *Self, allocator: std.mem.Allocator, input: describe_domain_endpoint_options.DescribeDomainEndpointOptionsInput, options: CallOptions) !describe_domain_endpoint_options.DescribeDomainEndpointOptionsOutput {
         return describe_domain_endpoint_options.execute(self, allocator, input, options);
     }
 
@@ -177,7 +178,7 @@ pub const Client = struct {
     /// information,
     /// see [Getting Information about a Search
     /// Domain](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn describeDomains(self: *Self, allocator: std.mem.Allocator, input: describe_domains.DescribeDomainsInput, options: describe_domains.Options) !describe_domains.DescribeDomainsOutput {
+    pub fn describeDomains(self: *Self, allocator: std.mem.Allocator, input: describe_domains.DescribeDomainsInput, options: CallOptions) !describe_domains.DescribeDomainsOutput {
         return describe_domains.execute(self, allocator, input, options);
     }
 
@@ -187,7 +188,7 @@ pub const Client = struct {
     /// `true` to show the active configuration and exclude pending changes. For
     /// more information, see [Configuring
     /// Expressions](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn describeExpressions(self: *Self, allocator: std.mem.Allocator, input: describe_expressions.DescribeExpressionsInput, options: describe_expressions.Options) !describe_expressions.DescribeExpressionsOutput {
+    pub fn describeExpressions(self: *Self, allocator: std.mem.Allocator, input: describe_expressions.DescribeExpressionsInput, options: CallOptions) !describe_expressions.DescribeExpressionsOutput {
         return describe_expressions.execute(self, allocator, input, options);
     }
 
@@ -198,7 +199,7 @@ pub const Client = struct {
     /// more information,
     /// see [Getting Domain
     /// Information](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn describeIndexFields(self: *Self, allocator: std.mem.Allocator, input: describe_index_fields.DescribeIndexFieldsInput, options: describe_index_fields.Options) !describe_index_fields.DescribeIndexFieldsOutput {
+    pub fn describeIndexFields(self: *Self, allocator: std.mem.Allocator, input: describe_index_fields.DescribeIndexFieldsInput, options: CallOptions) !describe_index_fields.DescribeIndexFieldsOutput {
         return describe_index_fields.execute(self, allocator, input, options);
     }
 
@@ -206,7 +207,7 @@ pub const Client = struct {
     /// parameters specify the desired search instance type and replication count.
     /// For more information, see [Configuring Scaling
     /// Options](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn describeScalingParameters(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_parameters.DescribeScalingParametersInput, options: describe_scaling_parameters.Options) !describe_scaling_parameters.DescribeScalingParametersOutput {
+    pub fn describeScalingParameters(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_parameters.DescribeScalingParametersInput, options: CallOptions) !describe_scaling_parameters.DescribeScalingParametersOutput {
         return describe_scaling_parameters.execute(self, allocator, input, options);
     }
 
@@ -216,7 +217,7 @@ pub const Client = struct {
     /// active configuration and exclude pending changes. For more information,
     /// see [Configuring Access for a Search
     /// Domain](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn describeServiceAccessPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_service_access_policies.DescribeServiceAccessPoliciesInput, options: describe_service_access_policies.Options) !describe_service_access_policies.DescribeServiceAccessPoliciesOutput {
+    pub fn describeServiceAccessPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_service_access_policies.DescribeServiceAccessPoliciesInput, options: CallOptions) !describe_service_access_policies.DescribeServiceAccessPoliciesOutput {
         return describe_service_access_policies.execute(self, allocator, input, options);
     }
 
@@ -227,19 +228,19 @@ pub const Client = struct {
     /// to `true` to show the active configuration and exclude pending changes. For
     /// more information, see [Getting Search
     /// Suggestions](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn describeSuggesters(self: *Self, allocator: std.mem.Allocator, input: describe_suggesters.DescribeSuggestersInput, options: describe_suggesters.Options) !describe_suggesters.DescribeSuggestersOutput {
+    pub fn describeSuggesters(self: *Self, allocator: std.mem.Allocator, input: describe_suggesters.DescribeSuggestersInput, options: CallOptions) !describe_suggesters.DescribeSuggestersOutput {
         return describe_suggesters.execute(self, allocator, input, options);
     }
 
     /// Tells the search domain to start indexing its documents using the latest
     /// indexing options. This operation must be invoked to activate options whose
     /// OptionStatus is `RequiresIndexDocuments`.
-    pub fn indexDocuments(self: *Self, allocator: std.mem.Allocator, input: index_documents.IndexDocumentsInput, options: index_documents.Options) !index_documents.IndexDocumentsOutput {
+    pub fn indexDocuments(self: *Self, allocator: std.mem.Allocator, input: index_documents.IndexDocumentsInput, options: CallOptions) !index_documents.IndexDocumentsOutput {
         return index_documents.execute(self, allocator, input, options);
     }
 
     /// Lists all search domains owned by an account.
-    pub fn listDomainNames(self: *Self, allocator: std.mem.Allocator, input: list_domain_names.ListDomainNamesInput, options: list_domain_names.Options) !list_domain_names.ListDomainNamesOutput {
+    pub fn listDomainNames(self: *Self, allocator: std.mem.Allocator, input: list_domain_names.ListDomainNamesInput, options: CallOptions) !list_domain_names.ListDomainNamesOutput {
         return list_domain_names.execute(self, allocator, input, options);
     }
 
@@ -249,7 +250,7 @@ pub const Client = struct {
     /// service disruption. Changes to the Multi-AZ option can take about half an
     /// hour to become active. For more information, see [Configuring Availability
     /// Options](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn updateAvailabilityOptions(self: *Self, allocator: std.mem.Allocator, input: update_availability_options.UpdateAvailabilityOptionsInput, options: update_availability_options.Options) !update_availability_options.UpdateAvailabilityOptionsOutput {
+    pub fn updateAvailabilityOptions(self: *Self, allocator: std.mem.Allocator, input: update_availability_options.UpdateAvailabilityOptionsInput, options: CallOptions) !update_availability_options.UpdateAvailabilityOptionsOutput {
         return update_availability_options.execute(self, allocator, input, options);
     }
 
@@ -257,7 +258,7 @@ pub const Client = struct {
     /// the domain must arrive over HTTPS. For more information, see [Configuring
     /// Domain Endpoint
     /// Options](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn updateDomainEndpointOptions(self: *Self, allocator: std.mem.Allocator, input: update_domain_endpoint_options.UpdateDomainEndpointOptionsInput, options: update_domain_endpoint_options.Options) !update_domain_endpoint_options.UpdateDomainEndpointOptionsOutput {
+    pub fn updateDomainEndpointOptions(self: *Self, allocator: std.mem.Allocator, input: update_domain_endpoint_options.UpdateDomainEndpointOptionsInput, options: CallOptions) !update_domain_endpoint_options.UpdateDomainEndpointOptionsOutput {
         return update_domain_endpoint_options.execute(self, allocator, input, options);
     }
 
@@ -268,7 +269,7 @@ pub const Client = struct {
     /// count. If the Multi-AZ option is enabled, these values control the resources
     /// used per Availability Zone. For more information, see [Configuring Scaling
     /// Options](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn updateScalingParameters(self: *Self, allocator: std.mem.Allocator, input: update_scaling_parameters.UpdateScalingParametersInput, options: update_scaling_parameters.Options) !update_scaling_parameters.UpdateScalingParametersOutput {
+    pub fn updateScalingParameters(self: *Self, allocator: std.mem.Allocator, input: update_scaling_parameters.UpdateScalingParametersInput, options: CallOptions) !update_scaling_parameters.UpdateScalingParametersOutput {
         return update_scaling_parameters.execute(self, allocator, input, options);
     }
 
@@ -277,7 +278,7 @@ pub const Client = struct {
     /// For more information, see [
     /// Configuring Access for an Amazon CloudSearch
     /// Domain](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html).
-    pub fn updateServiceAccessPolicies(self: *Self, allocator: std.mem.Allocator, input: update_service_access_policies.UpdateServiceAccessPoliciesInput, options: update_service_access_policies.Options) !update_service_access_policies.UpdateServiceAccessPoliciesOutput {
+    pub fn updateServiceAccessPolicies(self: *Self, allocator: std.mem.Allocator, input: update_service_access_policies.UpdateServiceAccessPoliciesInput, options: CallOptions) !update_service_access_policies.UpdateServiceAccessPoliciesOutput {
         return update_service_access_policies.execute(self, allocator, input, options);
     }
 };

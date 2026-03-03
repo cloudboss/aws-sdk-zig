@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_dead_letter_source_queues = @import("list_dead_letter_source_queues.zig");
@@ -15,7 +16,7 @@ pub const ListDeadLetterSourceQueuesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_dead_letter_source_queues.Options) !list_dead_letter_source_queues.ListDeadLetterSourceQueuesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_dead_letter_source_queues.ListDeadLetterSourceQueuesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const ListQueuesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_queues.Options) !list_queues.ListQueuesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_queues.ListQueuesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

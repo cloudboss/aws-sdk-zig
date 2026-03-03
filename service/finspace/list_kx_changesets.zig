@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const KxChangesetListEntry = @import("kx_changeset_list_entry.zig").KxChangesetListEntry;
 
@@ -39,11 +40,7 @@ pub const ListKxChangesetsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListKxChangesetsInput, options: Options) !ListKxChangesetsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListKxChangesetsInput, options: CallOptions) !ListKxChangesetsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

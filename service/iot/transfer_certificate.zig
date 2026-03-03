@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const TransferCertificateInput = struct {
@@ -32,11 +33,7 @@ pub const TransferCertificateOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TransferCertificateInput, options: Options) !TransferCertificateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TransferCertificateInput, options: CallOptions) !TransferCertificateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

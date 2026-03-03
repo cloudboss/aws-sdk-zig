@@ -164,6 +164,7 @@ const stop_db_instance_automated_backups_replication = @import("stop_db_instance
 const switchover_blue_green_deployment = @import("switchover_blue_green_deployment.zig");
 const switchover_global_cluster = @import("switchover_global_cluster.zig");
 const switchover_read_replica = @import("switchover_read_replica.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -196,7 +197,7 @@ pub const Client = struct {
     }
 
     /// Associates an Identity and Access Management (IAM) role with a DB cluster.
-    pub fn addRoleToDbCluster(self: *Self, allocator: std.mem.Allocator, input: add_role_to_db_cluster.AddRoleToDBClusterInput, options: add_role_to_db_cluster.Options) !add_role_to_db_cluster.AddRoleToDBClusterOutput {
+    pub fn addRoleToDbCluster(self: *Self, allocator: std.mem.Allocator, input: add_role_to_db_cluster.AddRoleToDBClusterInput, options: CallOptions) !add_role_to_db_cluster.AddRoleToDBClusterOutput {
         return add_role_to_db_cluster.execute(self, allocator, input, options);
     }
 
@@ -207,12 +208,12 @@ pub const Client = struct {
     /// `available`.
     ///
     /// This command doesn't apply to RDS Custom.
-    pub fn addRoleToDbInstance(self: *Self, allocator: std.mem.Allocator, input: add_role_to_db_instance.AddRoleToDBInstanceInput, options: add_role_to_db_instance.Options) !add_role_to_db_instance.AddRoleToDBInstanceOutput {
+    pub fn addRoleToDbInstance(self: *Self, allocator: std.mem.Allocator, input: add_role_to_db_instance.AddRoleToDBInstanceInput, options: CallOptions) !add_role_to_db_instance.AddRoleToDBInstanceOutput {
         return add_role_to_db_instance.execute(self, allocator, input, options);
     }
 
     /// Adds a source identifier to an existing RDS event notification subscription.
-    pub fn addSourceIdentifierToSubscription(self: *Self, allocator: std.mem.Allocator, input: add_source_identifier_to_subscription.AddSourceIdentifierToSubscriptionInput, options: add_source_identifier_to_subscription.Options) !add_source_identifier_to_subscription.AddSourceIdentifierToSubscriptionOutput {
+    pub fn addSourceIdentifierToSubscription(self: *Self, allocator: std.mem.Allocator, input: add_source_identifier_to_subscription.AddSourceIdentifierToSubscriptionInput, options: CallOptions) !add_source_identifier_to_subscription.AddSourceIdentifierToSubscriptionOutput {
         return add_source_identifier_to_subscription.execute(self, allocator, input, options);
     }
 
@@ -223,13 +224,13 @@ pub const Client = struct {
     /// For an overview on tagging your relational database resources, see [Tagging
     /// Amazon RDS
     /// Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) or [Tagging Amazon Aurora and Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html).
-    pub fn addTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_resource.AddTagsToResourceInput, options: add_tags_to_resource.Options) !add_tags_to_resource.AddTagsToResourceOutput {
+    pub fn addTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_resource.AddTagsToResourceInput, options: CallOptions) !add_tags_to_resource.AddTagsToResourceOutput {
         return add_tags_to_resource.execute(self, allocator, input, options);
     }
 
     /// Applies a pending maintenance action to a resource (for example, to a DB
     /// instance).
-    pub fn applyPendingMaintenanceAction(self: *Self, allocator: std.mem.Allocator, input: apply_pending_maintenance_action.ApplyPendingMaintenanceActionInput, options: apply_pending_maintenance_action.Options) !apply_pending_maintenance_action.ApplyPendingMaintenanceActionOutput {
+    pub fn applyPendingMaintenanceAction(self: *Self, allocator: std.mem.Allocator, input: apply_pending_maintenance_action.ApplyPendingMaintenanceActionInput, options: CallOptions) !apply_pending_maintenance_action.ApplyPendingMaintenanceActionOutput {
         return apply_pending_maintenance_action.execute(self, allocator, input, options);
     }
 
@@ -257,7 +258,7 @@ pub const Client = struct {
     /// in the *Amazon EC2 User Guide*, the blog [EC2-Classic Networking is Retiring
     /// – Here’s How to
     /// Prepare](http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/), and [Moving a DB instance not in a VPC into a VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html) in the *Amazon RDS User Guide*.
-    pub fn authorizeDbSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: authorize_db_security_group_ingress.AuthorizeDBSecurityGroupIngressInput, options: authorize_db_security_group_ingress.Options) !authorize_db_security_group_ingress.AuthorizeDBSecurityGroupIngressOutput {
+    pub fn authorizeDbSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: authorize_db_security_group_ingress.AuthorizeDBSecurityGroupIngressInput, options: CallOptions) !authorize_db_security_group_ingress.AuthorizeDBSecurityGroupIngressOutput {
         return authorize_db_security_group_ingress.execute(self, allocator, input, options);
     }
 
@@ -268,14 +269,14 @@ pub const Client = struct {
     /// Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html) in the *Amazon Aurora User Guide*.
     ///
     /// This action applies only to Aurora MySQL DB clusters.
-    pub fn backtrackDbCluster(self: *Self, allocator: std.mem.Allocator, input: backtrack_db_cluster.BacktrackDBClusterInput, options: backtrack_db_cluster.Options) !backtrack_db_cluster.BacktrackDBClusterOutput {
+    pub fn backtrackDbCluster(self: *Self, allocator: std.mem.Allocator, input: backtrack_db_cluster.BacktrackDBClusterInput, options: CallOptions) !backtrack_db_cluster.BacktrackDBClusterOutput {
         return backtrack_db_cluster.execute(self, allocator, input, options);
     }
 
     /// Cancels an export task in progress that is exporting a snapshot or cluster
     /// to Amazon S3. Any data that has already been written to the S3 bucket isn't
     /// removed.
-    pub fn cancelExportTask(self: *Self, allocator: std.mem.Allocator, input: cancel_export_task.CancelExportTaskInput, options: cancel_export_task.Options) !cancel_export_task.CancelExportTaskOutput {
+    pub fn cancelExportTask(self: *Self, allocator: std.mem.Allocator, input: cancel_export_task.CancelExportTaskInput, options: CallOptions) !cancel_export_task.CancelExportTaskOutput {
         return cancel_export_task.execute(self, allocator, input, options);
     }
 
@@ -284,7 +285,7 @@ pub const Client = struct {
     /// You can't copy a default DB cluster parameter group. Instead, create a new
     /// custom DB cluster parameter group, which copies the default parameters and
     /// values for the specified DB cluster parameter group family.
-    pub fn copyDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: copy_db_cluster_parameter_group.CopyDBClusterParameterGroupInput, options: copy_db_cluster_parameter_group.Options) !copy_db_cluster_parameter_group.CopyDBClusterParameterGroupOutput {
+    pub fn copyDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: copy_db_cluster_parameter_group.CopyDBClusterParameterGroupInput, options: CallOptions) !copy_db_cluster_parameter_group.CopyDBClusterParameterGroupOutput {
         return copy_db_cluster_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -325,7 +326,7 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.
-    pub fn copyDbClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_db_cluster_snapshot.CopyDBClusterSnapshotInput, options: copy_db_cluster_snapshot.Options) !copy_db_cluster_snapshot.CopyDBClusterSnapshotOutput {
+    pub fn copyDbClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_db_cluster_snapshot.CopyDBClusterSnapshotInput, options: CallOptions) !copy_db_cluster_snapshot.CopyDBClusterSnapshotOutput {
         return copy_db_cluster_snapshot.execute(self, allocator, input, options);
     }
 
@@ -334,7 +335,7 @@ pub const Client = struct {
     /// You can't copy a default DB parameter group. Instead, create a new custom DB
     /// parameter group, which copies the default parameters and values for the
     /// specified DB parameter group family.
-    pub fn copyDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: copy_db_parameter_group.CopyDBParameterGroupInput, options: copy_db_parameter_group.Options) !copy_db_parameter_group.CopyDBParameterGroupOutput {
+    pub fn copyDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: copy_db_parameter_group.CopyDBParameterGroupInput, options: CallOptions) !copy_db_parameter_group.CopyDBParameterGroupOutput {
         return copy_db_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -350,12 +351,12 @@ pub const Client = struct {
     ///
     /// For more information about copying snapshots, see [Copying a DB
     /// Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot) in the *Amazon RDS User Guide*.
-    pub fn copyDbSnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_db_snapshot.CopyDBSnapshotInput, options: copy_db_snapshot.Options) !copy_db_snapshot.CopyDBSnapshotOutput {
+    pub fn copyDbSnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_db_snapshot.CopyDBSnapshotInput, options: CallOptions) !copy_db_snapshot.CopyDBSnapshotOutput {
         return copy_db_snapshot.execute(self, allocator, input, options);
     }
 
     /// Copies the specified option group.
-    pub fn copyOptionGroup(self: *Self, allocator: std.mem.Allocator, input: copy_option_group.CopyOptionGroupInput, options: copy_option_group.Options) !copy_option_group.CopyOptionGroupOutput {
+    pub fn copyOptionGroup(self: *Self, allocator: std.mem.Allocator, input: copy_option_group.CopyOptionGroupInput, options: CallOptions) !copy_option_group.CopyOptionGroupOutput {
         return copy_option_group.execute(self, allocator, input, options);
     }
 
@@ -377,12 +378,12 @@ pub const Client = struct {
     /// For more information, see [Using Amazon RDS Blue/Green Deployments for
     /// database
     /// updates](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html) in the *Amazon RDS User Guide* and [ Using Amazon RDS Blue/Green Deployments for database updates](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html) in the *Amazon Aurora User Guide*.
-    pub fn createBlueGreenDeployment(self: *Self, allocator: std.mem.Allocator, input: create_blue_green_deployment.CreateBlueGreenDeploymentInput, options: create_blue_green_deployment.Options) !create_blue_green_deployment.CreateBlueGreenDeploymentOutput {
+    pub fn createBlueGreenDeployment(self: *Self, allocator: std.mem.Allocator, input: create_blue_green_deployment.CreateBlueGreenDeploymentInput, options: CallOptions) !create_blue_green_deployment.CreateBlueGreenDeploymentOutput {
         return create_blue_green_deployment.execute(self, allocator, input, options);
     }
 
     /// Creates a custom DB engine version (CEV).
-    pub fn createCustomDbEngineVersion(self: *Self, allocator: std.mem.Allocator, input: create_custom_db_engine_version.CreateCustomDBEngineVersionInput, options: create_custom_db_engine_version.Options) !create_custom_db_engine_version.CreateCustomDBEngineVersionOutput {
+    pub fn createCustomDbEngineVersion(self: *Self, allocator: std.mem.Allocator, input: create_custom_db_engine_version.CreateCustomDBEngineVersionInput, options: CallOptions) !create_custom_db_engine_version.CreateCustomDBEngineVersionOutput {
         return create_custom_db_engine_version.execute(self, allocator, input, options);
     }
 
@@ -403,7 +404,7 @@ pub const Client = struct {
     /// instance as the source. For more information about Multi-AZ DB clusters, see
     /// [Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.
-    pub fn createDbCluster(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster.CreateDBClusterInput, options: create_db_cluster.Options) !create_db_cluster.CreateDBClusterOutput {
+    pub fn createDbCluster(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster.CreateDBClusterInput, options: CallOptions) !create_db_cluster.CreateDBClusterOutput {
         return create_db_cluster.execute(self, allocator, input, options);
     }
 
@@ -411,7 +412,7 @@ pub const Client = struct {
     /// cluster.
     ///
     /// This action applies only to Aurora DB clusters.
-    pub fn createDbClusterEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster_endpoint.CreateDBClusterEndpointInput, options: create_db_cluster_endpoint.Options) !create_db_cluster_endpoint.CreateDBClusterEndpointOutput {
+    pub fn createDbClusterEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster_endpoint.CreateDBClusterEndpointInput, options: CallOptions) !create_db_cluster_endpoint.CreateDBClusterEndpointOutput {
         return create_db_cluster_endpoint.execute(self, allocator, input, options);
     }
 
@@ -452,7 +453,7 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.
-    pub fn createDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster_parameter_group.CreateDBClusterParameterGroupInput, options: create_db_cluster_parameter_group.Options) !create_db_cluster_parameter_group.CreateDBClusterParameterGroupOutput {
+    pub fn createDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster_parameter_group.CreateDBClusterParameterGroupInput, options: CallOptions) !create_db_cluster_parameter_group.CreateDBClusterParameterGroupOutput {
         return create_db_cluster_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -463,7 +464,7 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.
-    pub fn createDbClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster_snapshot.CreateDBClusterSnapshotInput, options: create_db_cluster_snapshot.Options) !create_db_cluster_snapshot.CreateDBClusterSnapshotOutput {
+    pub fn createDbClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster_snapshot.CreateDBClusterSnapshotInput, options: CallOptions) !create_db_cluster_snapshot.CreateDBClusterSnapshotOutput {
         return create_db_cluster_snapshot.execute(self, allocator, input, options);
     }
 
@@ -480,7 +481,7 @@ pub const Client = struct {
     /// For more information about creating a DB instance in an Aurora DB cluster,
     /// see [ Creating an Amazon Aurora DB
     /// cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html) in the *Amazon Aurora User Guide*.
-    pub fn createDbInstance(self: *Self, allocator: std.mem.Allocator, input: create_db_instance.CreateDBInstanceInput, options: create_db_instance.Options) !create_db_instance.CreateDBInstanceOutput {
+    pub fn createDbInstance(self: *Self, allocator: std.mem.Allocator, input: create_db_instance.CreateDBInstanceInput, options: CallOptions) !create_db_instance.CreateDBInstanceOutput {
         return create_db_instance.execute(self, allocator, input, options);
     }
 
@@ -499,7 +500,7 @@ pub const Client = struct {
     /// the source DB instance or cluster, except as specified.
     ///
     /// Your source DB instance or cluster must have backup retention enabled.
-    pub fn createDbInstanceReadReplica(self: *Self, allocator: std.mem.Allocator, input: create_db_instance_read_replica.CreateDBInstanceReadReplicaInput, options: create_db_instance_read_replica.Options) !create_db_instance_read_replica.CreateDBInstanceReadReplicaOutput {
+    pub fn createDbInstanceReadReplica(self: *Self, allocator: std.mem.Allocator, input: create_db_instance_read_replica.CreateDBInstanceReadReplicaInput, options: CallOptions) !create_db_instance_read_replica.CreateDBInstanceReadReplicaOutput {
         return create_db_instance_read_replica.execute(self, allocator, input, options);
     }
 
@@ -515,12 +516,12 @@ pub const Client = struct {
     /// associated settings to take effect.
     ///
     /// This command doesn't apply to RDS Custom.
-    pub fn createDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_parameter_group.CreateDBParameterGroupInput, options: create_db_parameter_group.Options) !create_db_parameter_group.CreateDBParameterGroupOutput {
+    pub fn createDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_parameter_group.CreateDBParameterGroupInput, options: CallOptions) !create_db_parameter_group.CreateDBParameterGroupOutput {
         return create_db_parameter_group.execute(self, allocator, input, options);
     }
 
     /// Creates a new DB proxy.
-    pub fn createDbProxy(self: *Self, allocator: std.mem.Allocator, input: create_db_proxy.CreateDBProxyInput, options: create_db_proxy.Options) !create_db_proxy.CreateDBProxyOutput {
+    pub fn createDbProxy(self: *Self, allocator: std.mem.Allocator, input: create_db_proxy.CreateDBProxyInput, options: CallOptions) !create_db_proxy.CreateDBProxyOutput {
         return create_db_proxy.execute(self, allocator, input, options);
     }
 
@@ -529,7 +530,7 @@ pub const Client = struct {
     /// read/write or read-only access to the DB cluster. You can also use DB proxy
     /// endpoints to access a DB proxy through a different VPC than the proxy's
     /// default VPC.
-    pub fn createDbProxyEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_db_proxy_endpoint.CreateDBProxyEndpointInput, options: create_db_proxy_endpoint.Options) !create_db_proxy_endpoint.CreateDBProxyEndpointOutput {
+    pub fn createDbProxyEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_db_proxy_endpoint.CreateDBProxyEndpointInput, options: CallOptions) !create_db_proxy_endpoint.CreateDBProxyEndpointOutput {
         return create_db_proxy_endpoint.execute(self, allocator, input, options);
     }
 
@@ -546,7 +547,7 @@ pub const Client = struct {
     /// in the *Amazon EC2 User Guide*, the blog [EC2-Classic Networking is Retiring
     /// – Here’s How to
     /// Prepare](http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/), and [Moving a DB instance not in a VPC into a VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html) in the *Amazon RDS User Guide*.
-    pub fn createDbSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_security_group.CreateDBSecurityGroupInput, options: create_db_security_group.Options) !create_db_security_group.CreateDBSecurityGroupOutput {
+    pub fn createDbSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_security_group.CreateDBSecurityGroupInput, options: CallOptions) !create_db_security_group.CreateDBSecurityGroupOutput {
         return create_db_security_group.execute(self, allocator, input, options);
     }
 
@@ -554,19 +555,19 @@ pub const Client = struct {
     /// Aurora Limitless Database to create a DB shard group.
     ///
     /// Valid for: Aurora DB clusters only
-    pub fn createDbShardGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_shard_group.CreateDBShardGroupInput, options: create_db_shard_group.Options) !create_db_shard_group.CreateDBShardGroupOutput {
+    pub fn createDbShardGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_shard_group.CreateDBShardGroupInput, options: CallOptions) !create_db_shard_group.CreateDBShardGroupOutput {
         return create_db_shard_group.execute(self, allocator, input, options);
     }
 
     /// Creates a snapshot of a DB instance. The source DB instance must be in the
     /// `available` or `storage-optimization` state.
-    pub fn createDbSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_db_snapshot.CreateDBSnapshotInput, options: create_db_snapshot.Options) !create_db_snapshot.CreateDBSnapshotOutput {
+    pub fn createDbSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_db_snapshot.CreateDBSnapshotInput, options: CallOptions) !create_db_snapshot.CreateDBSnapshotOutput {
         return create_db_snapshot.execute(self, allocator, input, options);
     }
 
     /// Creates a new DB subnet group. DB subnet groups must contain at least one
     /// subnet in at least two AZs in the Amazon Web Services Region.
-    pub fn createDbSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_subnet_group.CreateDBSubnetGroupInput, options: create_db_subnet_group.Options) !create_db_subnet_group.CreateDBSubnetGroupOutput {
+    pub fn createDbSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_subnet_group.CreateDBSubnetGroupInput, options: CallOptions) !create_db_subnet_group.CreateDBSubnetGroupOutput {
         return create_db_subnet_group.execute(self, allocator, input, options);
     }
 
@@ -598,7 +599,7 @@ pub const Client = struct {
     /// For more information about subscribing to an event for Aurora DB engines,
     /// see [ Subscribing to Amazon RDS event
     /// notification](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Events.Subscribing.html) in the *Amazon Aurora User Guide*.
-    pub fn createEventSubscription(self: *Self, allocator: std.mem.Allocator, input: create_event_subscription.CreateEventSubscriptionInput, options: create_event_subscription.Options) !create_event_subscription.CreateEventSubscriptionOutput {
+    pub fn createEventSubscription(self: *Self, allocator: std.mem.Allocator, input: create_event_subscription.CreateEventSubscriptionInput, options: CallOptions) !create_event_subscription.CreateEventSubscriptionOutput {
         return create_event_subscription.execute(self, allocator, input, options);
     }
 
@@ -614,26 +615,26 @@ pub const Client = struct {
     /// cluster becomes the primary cluster of the global database.
     ///
     /// This operation applies only to Aurora DB clusters.
-    pub fn createGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: create_global_cluster.CreateGlobalClusterInput, options: create_global_cluster.Options) !create_global_cluster.CreateGlobalClusterOutput {
+    pub fn createGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: create_global_cluster.CreateGlobalClusterInput, options: CallOptions) !create_global_cluster.CreateGlobalClusterOutput {
         return create_global_cluster.execute(self, allocator, input, options);
     }
 
     /// Creates a zero-ETL integration with Amazon Redshift.
-    pub fn createIntegration(self: *Self, allocator: std.mem.Allocator, input: create_integration.CreateIntegrationInput, options: create_integration.Options) !create_integration.CreateIntegrationOutput {
+    pub fn createIntegration(self: *Self, allocator: std.mem.Allocator, input: create_integration.CreateIntegrationInput, options: CallOptions) !create_integration.CreateIntegrationOutput {
         return create_integration.execute(self, allocator, input, options);
     }
 
     /// Creates a new option group. You can create up to 20 option groups.
     ///
     /// This command doesn't apply to RDS Custom.
-    pub fn createOptionGroup(self: *Self, allocator: std.mem.Allocator, input: create_option_group.CreateOptionGroupInput, options: create_option_group.Options) !create_option_group.CreateOptionGroupOutput {
+    pub fn createOptionGroup(self: *Self, allocator: std.mem.Allocator, input: create_option_group.CreateOptionGroupInput, options: CallOptions) !create_option_group.CreateOptionGroupOutput {
         return create_option_group.execute(self, allocator, input, options);
     }
 
     /// Creates a tenant database in a DB instance that uses the multi-tenant
     /// configuration. Only RDS for Oracle container database (CDB) instances are
     /// supported.
-    pub fn createTenantDatabase(self: *Self, allocator: std.mem.Allocator, input: create_tenant_database.CreateTenantDatabaseInput, options: create_tenant_database.Options) !create_tenant_database.CreateTenantDatabaseOutput {
+    pub fn createTenantDatabase(self: *Self, allocator: std.mem.Allocator, input: create_tenant_database.CreateTenantDatabaseInput, options: CallOptions) !create_tenant_database.CreateTenantDatabaseOutput {
         return create_tenant_database.execute(self, allocator, input, options);
     }
 
@@ -642,7 +643,7 @@ pub const Client = struct {
     /// For more information, see [Using Amazon RDS Blue/Green Deployments for
     /// database
     /// updates](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html) in the *Amazon RDS User Guide* and [Using Amazon RDS Blue/Green Deployments for database updates](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html) in the *Amazon Aurora User Guide*.
-    pub fn deleteBlueGreenDeployment(self: *Self, allocator: std.mem.Allocator, input: delete_blue_green_deployment.DeleteBlueGreenDeploymentInput, options: delete_blue_green_deployment.Options) !delete_blue_green_deployment.DeleteBlueGreenDeploymentOutput {
+    pub fn deleteBlueGreenDeployment(self: *Self, allocator: std.mem.Allocator, input: delete_blue_green_deployment.DeleteBlueGreenDeploymentInput, options: CallOptions) !delete_blue_green_deployment.DeleteBlueGreenDeploymentOutput {
         return delete_blue_green_deployment.execute(self, allocator, input, options);
     }
 
@@ -666,7 +667,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Deleting a
     /// CEV](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.delete) in the *Amazon RDS User Guide*.
-    pub fn deleteCustomDbEngineVersion(self: *Self, allocator: std.mem.Allocator, input: delete_custom_db_engine_version.DeleteCustomDBEngineVersionInput, options: delete_custom_db_engine_version.Options) !delete_custom_db_engine_version.DeleteCustomDBEngineVersionOutput {
+    pub fn deleteCustomDbEngineVersion(self: *Self, allocator: std.mem.Allocator, input: delete_custom_db_engine_version.DeleteCustomDBEngineVersionInput, options: CallOptions) !delete_custom_db_engine_version.DeleteCustomDBEngineVersionOutput {
         return delete_custom_db_engine_version.execute(self, allocator, input, options);
     }
 
@@ -684,21 +685,21 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.
-    pub fn deleteDbCluster(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster.DeleteDBClusterInput, options: delete_db_cluster.Options) !delete_db_cluster.DeleteDBClusterOutput {
+    pub fn deleteDbCluster(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster.DeleteDBClusterInput, options: CallOptions) !delete_db_cluster.DeleteDBClusterOutput {
         return delete_db_cluster.execute(self, allocator, input, options);
     }
 
     /// Deletes automated backups using the `DbClusterResourceId` value of the
     /// source DB cluster or the Amazon Resource Name (ARN) of the automated
     /// backups.
-    pub fn deleteDbClusterAutomatedBackup(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster_automated_backup.DeleteDBClusterAutomatedBackupInput, options: delete_db_cluster_automated_backup.Options) !delete_db_cluster_automated_backup.DeleteDBClusterAutomatedBackupOutput {
+    pub fn deleteDbClusterAutomatedBackup(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster_automated_backup.DeleteDBClusterAutomatedBackupInput, options: CallOptions) !delete_db_cluster_automated_backup.DeleteDBClusterAutomatedBackupOutput {
         return delete_db_cluster_automated_backup.execute(self, allocator, input, options);
     }
 
     /// Deletes a custom endpoint and removes it from an Amazon Aurora DB cluster.
     ///
     /// This action only applies to Aurora DB clusters.
-    pub fn deleteDbClusterEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster_endpoint.DeleteDBClusterEndpointInput, options: delete_db_cluster_endpoint.Options) !delete_db_cluster_endpoint.DeleteDBClusterEndpointOutput {
+    pub fn deleteDbClusterEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster_endpoint.DeleteDBClusterEndpointInput, options: CallOptions) !delete_db_cluster_endpoint.DeleteDBClusterEndpointOutput {
         return delete_db_cluster_endpoint.execute(self, allocator, input, options);
     }
 
@@ -710,7 +711,7 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.
-    pub fn deleteDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster_parameter_group.DeleteDBClusterParameterGroupInput, options: delete_db_cluster_parameter_group.Options) !delete_db_cluster_parameter_group.DeleteDBClusterParameterGroupOutput {
+    pub fn deleteDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster_parameter_group.DeleteDBClusterParameterGroupInput, options: CallOptions) !delete_db_cluster_parameter_group.DeleteDBClusterParameterGroupOutput {
         return delete_db_cluster_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -724,7 +725,7 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.
-    pub fn deleteDbClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster_snapshot.DeleteDBClusterSnapshotInput, options: delete_db_cluster_snapshot.Options) !delete_db_cluster_snapshot.DeleteDBClusterSnapshotOutput {
+    pub fn deleteDbClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster_snapshot.DeleteDBClusterSnapshotInput, options: CallOptions) !delete_db_cluster_snapshot.DeleteDBClusterSnapshotOutput {
         return delete_db_cluster_snapshot.execute(self, allocator, input, options);
     }
 
@@ -758,24 +759,24 @@ pub const Client = struct {
     /// terminate or delete these resources before you delete the DB instance.
     /// Otherwise, deleting the DB instance and creation of the final snapshot might
     /// fail.
-    pub fn deleteDbInstance(self: *Self, allocator: std.mem.Allocator, input: delete_db_instance.DeleteDBInstanceInput, options: delete_db_instance.Options) !delete_db_instance.DeleteDBInstanceOutput {
+    pub fn deleteDbInstance(self: *Self, allocator: std.mem.Allocator, input: delete_db_instance.DeleteDBInstanceInput, options: CallOptions) !delete_db_instance.DeleteDBInstanceOutput {
         return delete_db_instance.execute(self, allocator, input, options);
     }
 
     /// Deletes automated backups using the `DbiResourceId` value of the source DB
     /// instance or the Amazon Resource Name (ARN) of the automated backups.
-    pub fn deleteDbInstanceAutomatedBackup(self: *Self, allocator: std.mem.Allocator, input: delete_db_instance_automated_backup.DeleteDBInstanceAutomatedBackupInput, options: delete_db_instance_automated_backup.Options) !delete_db_instance_automated_backup.DeleteDBInstanceAutomatedBackupOutput {
+    pub fn deleteDbInstanceAutomatedBackup(self: *Self, allocator: std.mem.Allocator, input: delete_db_instance_automated_backup.DeleteDBInstanceAutomatedBackupInput, options: CallOptions) !delete_db_instance_automated_backup.DeleteDBInstanceAutomatedBackupOutput {
         return delete_db_instance_automated_backup.execute(self, allocator, input, options);
     }
 
     /// Deletes a specified DB parameter group. The DB parameter group to be deleted
     /// can't be associated with any DB instances.
-    pub fn deleteDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_parameter_group.DeleteDBParameterGroupInput, options: delete_db_parameter_group.Options) !delete_db_parameter_group.DeleteDBParameterGroupOutput {
+    pub fn deleteDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_parameter_group.DeleteDBParameterGroupInput, options: CallOptions) !delete_db_parameter_group.DeleteDBParameterGroupOutput {
         return delete_db_parameter_group.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing DB proxy.
-    pub fn deleteDbProxy(self: *Self, allocator: std.mem.Allocator, input: delete_db_proxy.DeleteDBProxyInput, options: delete_db_proxy.Options) !delete_db_proxy.DeleteDBProxyOutput {
+    pub fn deleteDbProxy(self: *Self, allocator: std.mem.Allocator, input: delete_db_proxy.DeleteDBProxyInput, options: CallOptions) !delete_db_proxy.DeleteDBProxyOutput {
         return delete_db_proxy.execute(self, allocator, input, options);
     }
 
@@ -783,7 +784,7 @@ pub const Client = struct {
     /// proxy using the endpoint that you defined. The endpoint that you delete
     /// might have provided capabilities such as read/write or read-only operations,
     /// or using a different VPC than the DB proxy's default VPC.
-    pub fn deleteDbProxyEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_db_proxy_endpoint.DeleteDBProxyEndpointInput, options: delete_db_proxy_endpoint.Options) !delete_db_proxy_endpoint.DeleteDBProxyEndpointOutput {
+    pub fn deleteDbProxyEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_db_proxy_endpoint.DeleteDBProxyEndpointInput, options: CallOptions) !delete_db_proxy_endpoint.DeleteDBProxyEndpointOutput {
         return delete_db_proxy_endpoint.execute(self, allocator, input, options);
     }
 
@@ -799,12 +800,12 @@ pub const Client = struct {
     /// in the *Amazon EC2 User Guide*, the blog [EC2-Classic Networking is Retiring
     /// – Here’s How to
     /// Prepare](http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/), and [Moving a DB instance not in a VPC into a VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html) in the *Amazon RDS User Guide*.
-    pub fn deleteDbSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_security_group.DeleteDBSecurityGroupInput, options: delete_db_security_group.Options) !delete_db_security_group.DeleteDBSecurityGroupOutput {
+    pub fn deleteDbSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_security_group.DeleteDBSecurityGroupInput, options: CallOptions) !delete_db_security_group.DeleteDBSecurityGroupOutput {
         return delete_db_security_group.execute(self, allocator, input, options);
     }
 
     /// Deletes an Aurora Limitless Database DB shard group.
-    pub fn deleteDbShardGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_shard_group.DeleteDBShardGroupInput, options: delete_db_shard_group.Options) !delete_db_shard_group.DeleteDBShardGroupOutput {
+    pub fn deleteDbShardGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_shard_group.DeleteDBShardGroupInput, options: CallOptions) !delete_db_shard_group.DeleteDBShardGroupOutput {
         return delete_db_shard_group.execute(self, allocator, input, options);
     }
 
@@ -812,7 +813,7 @@ pub const Client = struct {
     /// is terminated.
     ///
     /// The DB snapshot must be in the `available` state to be deleted.
-    pub fn deleteDbSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_db_snapshot.DeleteDBSnapshotInput, options: delete_db_snapshot.Options) !delete_db_snapshot.DeleteDBSnapshotOutput {
+    pub fn deleteDbSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_db_snapshot.DeleteDBSnapshotInput, options: CallOptions) !delete_db_snapshot.DeleteDBSnapshotOutput {
         return delete_db_snapshot.execute(self, allocator, input, options);
     }
 
@@ -820,12 +821,12 @@ pub const Client = struct {
     ///
     /// The specified database subnet group must not be associated with any DB
     /// instances.
-    pub fn deleteDbSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_subnet_group.DeleteDBSubnetGroupInput, options: delete_db_subnet_group.Options) !delete_db_subnet_group.DeleteDBSubnetGroupOutput {
+    pub fn deleteDbSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_subnet_group.DeleteDBSubnetGroupInput, options: CallOptions) !delete_db_subnet_group.DeleteDBSubnetGroupOutput {
         return delete_db_subnet_group.execute(self, allocator, input, options);
     }
 
     /// Deletes an RDS event notification subscription.
-    pub fn deleteEventSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_event_subscription.DeleteEventSubscriptionInput, options: delete_event_subscription.Options) !delete_event_subscription.DeleteEventSubscriptionOutput {
+    pub fn deleteEventSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_event_subscription.DeleteEventSubscriptionInput, options: CallOptions) !delete_event_subscription.DeleteEventSubscriptionOutput {
         return delete_event_subscription.execute(self, allocator, input, options);
     }
 
@@ -833,17 +834,17 @@ pub const Client = struct {
     /// already be detached or destroyed first.
     ///
     /// This action only applies to Aurora DB clusters.
-    pub fn deleteGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: delete_global_cluster.DeleteGlobalClusterInput, options: delete_global_cluster.Options) !delete_global_cluster.DeleteGlobalClusterOutput {
+    pub fn deleteGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: delete_global_cluster.DeleteGlobalClusterInput, options: CallOptions) !delete_global_cluster.DeleteGlobalClusterOutput {
         return delete_global_cluster.execute(self, allocator, input, options);
     }
 
     /// Deletes a zero-ETL integration with Amazon Redshift.
-    pub fn deleteIntegration(self: *Self, allocator: std.mem.Allocator, input: delete_integration.DeleteIntegrationInput, options: delete_integration.Options) !delete_integration.DeleteIntegrationOutput {
+    pub fn deleteIntegration(self: *Self, allocator: std.mem.Allocator, input: delete_integration.DeleteIntegrationInput, options: CallOptions) !delete_integration.DeleteIntegrationOutput {
         return delete_integration.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing option group.
-    pub fn deleteOptionGroup(self: *Self, allocator: std.mem.Allocator, input: delete_option_group.DeleteOptionGroupInput, options: delete_option_group.Options) !delete_option_group.DeleteOptionGroupOutput {
+    pub fn deleteOptionGroup(self: *Self, allocator: std.mem.Allocator, input: delete_option_group.DeleteOptionGroupInput, options: CallOptions) !delete_option_group.DeleteOptionGroupOutput {
         return delete_option_group.execute(self, allocator, input, options);
     }
 
@@ -852,13 +853,13 @@ pub const Client = struct {
     ///
     /// You can't delete a tenant database when it is the only tenant in the DB
     /// instance.
-    pub fn deleteTenantDatabase(self: *Self, allocator: std.mem.Allocator, input: delete_tenant_database.DeleteTenantDatabaseInput, options: delete_tenant_database.Options) !delete_tenant_database.DeleteTenantDatabaseOutput {
+    pub fn deleteTenantDatabase(self: *Self, allocator: std.mem.Allocator, input: delete_tenant_database.DeleteTenantDatabaseInput, options: CallOptions) !delete_tenant_database.DeleteTenantDatabaseOutput {
         return delete_tenant_database.execute(self, allocator, input, options);
     }
 
     /// Remove the association between one or more `DBProxyTarget` data structures
     /// and a `DBProxyTargetGroup`.
-    pub fn deregisterDbProxyTargets(self: *Self, allocator: std.mem.Allocator, input: deregister_db_proxy_targets.DeregisterDBProxyTargetsInput, options: deregister_db_proxy_targets.Options) !deregister_db_proxy_targets.DeregisterDBProxyTargetsOutput {
+    pub fn deregisterDbProxyTargets(self: *Self, allocator: std.mem.Allocator, input: deregister_db_proxy_targets.DeregisterDBProxyTargetsInput, options: CallOptions) !deregister_db_proxy_targets.DeregisterDBProxyTargetsOutput {
         return deregister_db_proxy_targets.execute(self, allocator, input, options);
     }
 
@@ -868,7 +869,7 @@ pub const Client = struct {
     /// toward that quota, and the quota's maximum value.
     ///
     /// This command doesn't take any parameters.
-    pub fn describeAccountAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_account_attributes.DescribeAccountAttributesInput, options: describe_account_attributes.Options) !describe_account_attributes.DescribeAccountAttributesOutput {
+    pub fn describeAccountAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_account_attributes.DescribeAccountAttributesInput, options: CallOptions) !describe_account_attributes.DescribeAccountAttributesOutput {
         return describe_account_attributes.execute(self, allocator, input, options);
     }
 
@@ -877,7 +878,7 @@ pub const Client = struct {
     /// For more information, see [Using Amazon RDS Blue/Green Deployments for
     /// database
     /// updates](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html) in the *Amazon RDS User Guide* and [ Using Amazon RDS Blue/Green Deployments for database updates](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html) in the *Amazon Aurora User Guide*.
-    pub fn describeBlueGreenDeployments(self: *Self, allocator: std.mem.Allocator, input: describe_blue_green_deployments.DescribeBlueGreenDeploymentsInput, options: describe_blue_green_deployments.Options) !describe_blue_green_deployments.DescribeBlueGreenDeploymentsOutput {
+    pub fn describeBlueGreenDeployments(self: *Self, allocator: std.mem.Allocator, input: describe_blue_green_deployments.DescribeBlueGreenDeploymentsInput, options: CallOptions) !describe_blue_green_deployments.DescribeBlueGreenDeploymentsOutput {
         return describe_blue_green_deployments.execute(self, allocator, input, options);
     }
 
@@ -886,7 +887,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Using SSL/TLS to encrypt a connection to a DB
     /// instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [ Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.
-    pub fn describeCertificates(self: *Self, allocator: std.mem.Allocator, input: describe_certificates.DescribeCertificatesInput, options: describe_certificates.Options) !describe_certificates.DescribeCertificatesOutput {
+    pub fn describeCertificates(self: *Self, allocator: std.mem.Allocator, input: describe_certificates.DescribeCertificatesInput, options: CallOptions) !describe_certificates.DescribeCertificatesOutput {
         return describe_certificates.execute(self, allocator, input, options);
     }
 
@@ -896,7 +897,7 @@ pub const Client = struct {
     /// `DescribeDBClusterAutomatedBackups` and `DescribeDBClusters` operations.
     ///
     /// All parameters are optional.
-    pub fn describeDbClusterAutomatedBackups(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_automated_backups.DescribeDBClusterAutomatedBackupsInput, options: describe_db_cluster_automated_backups.Options) !describe_db_cluster_automated_backups.DescribeDBClusterAutomatedBackupsOutput {
+    pub fn describeDbClusterAutomatedBackups(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_automated_backups.DescribeDBClusterAutomatedBackupsInput, options: CallOptions) !describe_db_cluster_automated_backups.DescribeDBClusterAutomatedBackupsOutput {
         return describe_db_cluster_automated_backups.execute(self, allocator, input, options);
     }
 
@@ -906,14 +907,14 @@ pub const Client = struct {
     /// Aurora?](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html) in the *Amazon Aurora User Guide*.
     ///
     /// This action only applies to Aurora MySQL DB clusters.
-    pub fn describeDbClusterBacktracks(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_backtracks.DescribeDBClusterBacktracksInput, options: describe_db_cluster_backtracks.Options) !describe_db_cluster_backtracks.DescribeDBClusterBacktracksOutput {
+    pub fn describeDbClusterBacktracks(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_backtracks.DescribeDBClusterBacktracksInput, options: CallOptions) !describe_db_cluster_backtracks.DescribeDBClusterBacktracksOutput {
         return describe_db_cluster_backtracks.execute(self, allocator, input, options);
     }
 
     /// Returns information about endpoints for an Amazon Aurora DB cluster.
     ///
     /// This action only applies to Aurora DB clusters.
-    pub fn describeDbClusterEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_endpoints.DescribeDBClusterEndpointsInput, options: describe_db_cluster_endpoints.Options) !describe_db_cluster_endpoints.DescribeDBClusterEndpointsOutput {
+    pub fn describeDbClusterEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_endpoints.DescribeDBClusterEndpointsInput, options: CallOptions) !describe_db_cluster_endpoints.DescribeDBClusterEndpointsOutput {
         return describe_db_cluster_endpoints.execute(self, allocator, input, options);
     }
 
@@ -926,7 +927,7 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.
-    pub fn describeDbClusterParameterGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_parameter_groups.DescribeDBClusterParameterGroupsInput, options: describe_db_cluster_parameter_groups.Options) !describe_db_cluster_parameter_groups.DescribeDBClusterParameterGroupsOutput {
+    pub fn describeDbClusterParameterGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_parameter_groups.DescribeDBClusterParameterGroupsInput, options: CallOptions) !describe_db_cluster_parameter_groups.DescribeDBClusterParameterGroupsOutput {
         return describe_db_cluster_parameter_groups.execute(self, allocator, input, options);
     }
 
@@ -938,7 +939,7 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.
-    pub fn describeDbClusterParameters(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_parameters.DescribeDBClusterParametersInput, options: describe_db_cluster_parameters.Options) !describe_db_cluster_parameters.DescribeDBClusterParametersOutput {
+    pub fn describeDbClusterParameters(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_parameters.DescribeDBClusterParametersInput, options: CallOptions) !describe_db_cluster_parameters.DescribeDBClusterParametersOutput {
         return describe_db_cluster_parameters.execute(self, allocator, input, options);
     }
 
@@ -956,7 +957,7 @@ pub const Client = struct {
     /// restore a manual DB cluster snapshot, or to make the manual DB cluster
     /// snapshot public or private, use the `ModifyDBClusterSnapshotAttribute` API
     /// action.
-    pub fn describeDbClusterSnapshotAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_snapshot_attributes.DescribeDBClusterSnapshotAttributesInput, options: describe_db_cluster_snapshot_attributes.Options) !describe_db_cluster_snapshot_attributes.DescribeDBClusterSnapshotAttributesOutput {
+    pub fn describeDbClusterSnapshotAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_snapshot_attributes.DescribeDBClusterSnapshotAttributesInput, options: CallOptions) !describe_db_cluster_snapshot_attributes.DescribeDBClusterSnapshotAttributesOutput {
         return describe_db_cluster_snapshot_attributes.execute(self, allocator, input, options);
     }
 
@@ -968,7 +969,7 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.
-    pub fn describeDbClusterSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_snapshots.DescribeDBClusterSnapshotsInput, options: describe_db_cluster_snapshots.Options) !describe_db_cluster_snapshots.DescribeDBClusterSnapshotsOutput {
+    pub fn describeDbClusterSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_snapshots.DescribeDBClusterSnapshotsInput, options: CallOptions) !describe_db_cluster_snapshots.DescribeDBClusterSnapshotsOutput {
         return describe_db_cluster_snapshots.execute(self, allocator, input, options);
     }
 
@@ -983,12 +984,12 @@ pub const Client = struct {
     ///
     /// This operation can also return information for Amazon Neptune DB instances
     /// and Amazon DocumentDB instances.
-    pub fn describeDbClusters(self: *Self, allocator: std.mem.Allocator, input: describe_db_clusters.DescribeDBClustersInput, options: describe_db_clusters.Options) !describe_db_clusters.DescribeDBClustersOutput {
+    pub fn describeDbClusters(self: *Self, allocator: std.mem.Allocator, input: describe_db_clusters.DescribeDBClustersInput, options: CallOptions) !describe_db_clusters.DescribeDBClustersOutput {
         return describe_db_clusters.execute(self, allocator, input, options);
     }
 
     /// Describes the properties of specific versions of DB engines.
-    pub fn describeDbEngineVersions(self: *Self, allocator: std.mem.Allocator, input: describe_db_engine_versions.DescribeDBEngineVersionsInput, options: describe_db_engine_versions.Options) !describe_db_engine_versions.DescribeDBEngineVersionsOutput {
+    pub fn describeDbEngineVersions(self: *Self, allocator: std.mem.Allocator, input: describe_db_engine_versions.DescribeDBEngineVersionsInput, options: CallOptions) !describe_db_engine_versions.DescribeDBEngineVersionsOutput {
         return describe_db_engine_versions.execute(self, allocator, input, options);
     }
 
@@ -999,7 +1000,7 @@ pub const Client = struct {
     /// `DescribeDBInstances` operations.
     ///
     /// All parameters are optional.
-    pub fn describeDbInstanceAutomatedBackups(self: *Self, allocator: std.mem.Allocator, input: describe_db_instance_automated_backups.DescribeDBInstanceAutomatedBackupsInput, options: describe_db_instance_automated_backups.Options) !describe_db_instance_automated_backups.DescribeDBInstanceAutomatedBackupsOutput {
+    pub fn describeDbInstanceAutomatedBackups(self: *Self, allocator: std.mem.Allocator, input: describe_db_instance_automated_backups.DescribeDBInstanceAutomatedBackupsInput, options: CallOptions) !describe_db_instance_automated_backups.DescribeDBInstanceAutomatedBackupsOutput {
         return describe_db_instance_automated_backups.execute(self, allocator, input, options);
     }
 
@@ -1007,59 +1008,59 @@ pub const Client = struct {
     ///
     /// This operation can also return information for Amazon Neptune DB instances
     /// and Amazon DocumentDB instances.
-    pub fn describeDbInstances(self: *Self, allocator: std.mem.Allocator, input: describe_db_instances.DescribeDBInstancesInput, options: describe_db_instances.Options) !describe_db_instances.DescribeDBInstancesOutput {
+    pub fn describeDbInstances(self: *Self, allocator: std.mem.Allocator, input: describe_db_instances.DescribeDBInstancesInput, options: CallOptions) !describe_db_instances.DescribeDBInstancesOutput {
         return describe_db_instances.execute(self, allocator, input, options);
     }
 
     /// Returns a list of DB log files for the DB instance.
     ///
     /// This command doesn't apply to RDS Custom.
-    pub fn describeDbLogFiles(self: *Self, allocator: std.mem.Allocator, input: describe_db_log_files.DescribeDBLogFilesInput, options: describe_db_log_files.Options) !describe_db_log_files.DescribeDBLogFilesOutput {
+    pub fn describeDbLogFiles(self: *Self, allocator: std.mem.Allocator, input: describe_db_log_files.DescribeDBLogFilesInput, options: CallOptions) !describe_db_log_files.DescribeDBLogFilesOutput {
         return describe_db_log_files.execute(self, allocator, input, options);
     }
 
     /// Describes the properties of specific major versions of DB engines.
-    pub fn describeDbMajorEngineVersions(self: *Self, allocator: std.mem.Allocator, input: describe_db_major_engine_versions.DescribeDBMajorEngineVersionsInput, options: describe_db_major_engine_versions.Options) !describe_db_major_engine_versions.DescribeDBMajorEngineVersionsOutput {
+    pub fn describeDbMajorEngineVersions(self: *Self, allocator: std.mem.Allocator, input: describe_db_major_engine_versions.DescribeDBMajorEngineVersionsInput, options: CallOptions) !describe_db_major_engine_versions.DescribeDBMajorEngineVersionsOutput {
         return describe_db_major_engine_versions.execute(self, allocator, input, options);
     }
 
     /// Returns a list of `DBParameterGroup` descriptions. If a
     /// `DBParameterGroupName` is specified, the list will contain only the
     /// description of the specified DB parameter group.
-    pub fn describeDbParameterGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_parameter_groups.DescribeDBParameterGroupsInput, options: describe_db_parameter_groups.Options) !describe_db_parameter_groups.DescribeDBParameterGroupsOutput {
+    pub fn describeDbParameterGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_parameter_groups.DescribeDBParameterGroupsInput, options: CallOptions) !describe_db_parameter_groups.DescribeDBParameterGroupsOutput {
         return describe_db_parameter_groups.execute(self, allocator, input, options);
     }
 
     /// Returns the detailed parameter list for a particular DB parameter group.
-    pub fn describeDbParameters(self: *Self, allocator: std.mem.Allocator, input: describe_db_parameters.DescribeDBParametersInput, options: describe_db_parameters.Options) !describe_db_parameters.DescribeDBParametersOutput {
+    pub fn describeDbParameters(self: *Self, allocator: std.mem.Allocator, input: describe_db_parameters.DescribeDBParametersInput, options: CallOptions) !describe_db_parameters.DescribeDBParametersOutput {
         return describe_db_parameters.execute(self, allocator, input, options);
     }
 
     /// Returns information about DB proxies.
-    pub fn describeDbProxies(self: *Self, allocator: std.mem.Allocator, input: describe_db_proxies.DescribeDBProxiesInput, options: describe_db_proxies.Options) !describe_db_proxies.DescribeDBProxiesOutput {
+    pub fn describeDbProxies(self: *Self, allocator: std.mem.Allocator, input: describe_db_proxies.DescribeDBProxiesInput, options: CallOptions) !describe_db_proxies.DescribeDBProxiesOutput {
         return describe_db_proxies.execute(self, allocator, input, options);
     }
 
     /// Returns information about DB proxy endpoints.
-    pub fn describeDbProxyEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_db_proxy_endpoints.DescribeDBProxyEndpointsInput, options: describe_db_proxy_endpoints.Options) !describe_db_proxy_endpoints.DescribeDBProxyEndpointsOutput {
+    pub fn describeDbProxyEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_db_proxy_endpoints.DescribeDBProxyEndpointsInput, options: CallOptions) !describe_db_proxy_endpoints.DescribeDBProxyEndpointsOutput {
         return describe_db_proxy_endpoints.execute(self, allocator, input, options);
     }
 
     /// Returns information about DB proxy target groups, represented by
     /// `DBProxyTargetGroup` data structures.
-    pub fn describeDbProxyTargetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_proxy_target_groups.DescribeDBProxyTargetGroupsInput, options: describe_db_proxy_target_groups.Options) !describe_db_proxy_target_groups.DescribeDBProxyTargetGroupsOutput {
+    pub fn describeDbProxyTargetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_proxy_target_groups.DescribeDBProxyTargetGroupsInput, options: CallOptions) !describe_db_proxy_target_groups.DescribeDBProxyTargetGroupsOutput {
         return describe_db_proxy_target_groups.execute(self, allocator, input, options);
     }
 
     /// Returns information about `DBProxyTarget` objects. This API supports
     /// pagination.
-    pub fn describeDbProxyTargets(self: *Self, allocator: std.mem.Allocator, input: describe_db_proxy_targets.DescribeDBProxyTargetsInput, options: describe_db_proxy_targets.Options) !describe_db_proxy_targets.DescribeDBProxyTargetsOutput {
+    pub fn describeDbProxyTargets(self: *Self, allocator: std.mem.Allocator, input: describe_db_proxy_targets.DescribeDBProxyTargetsInput, options: CallOptions) !describe_db_proxy_targets.DescribeDBProxyTargetsOutput {
         return describe_db_proxy_targets.execute(self, allocator, input, options);
     }
 
     /// Describes the recommendations to resolve the issues for your DB instances,
     /// DB clusters, and DB parameter groups.
-    pub fn describeDbRecommendations(self: *Self, allocator: std.mem.Allocator, input: describe_db_recommendations.DescribeDBRecommendationsInput, options: describe_db_recommendations.Options) !describe_db_recommendations.DescribeDBRecommendationsOutput {
+    pub fn describeDbRecommendations(self: *Self, allocator: std.mem.Allocator, input: describe_db_recommendations.DescribeDBRecommendationsInput, options: CallOptions) !describe_db_recommendations.DescribeDBRecommendationsOutput {
         return describe_db_recommendations.execute(self, allocator, input, options);
     }
 
@@ -1074,12 +1075,12 @@ pub const Client = struct {
     /// in the *Amazon EC2 User Guide*, the blog [EC2-Classic Networking is Retiring
     /// – Here’s How to
     /// Prepare](http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/), and [Moving a DB instance not in a VPC into a VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html) in the *Amazon RDS User Guide*.
-    pub fn describeDbSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_security_groups.DescribeDBSecurityGroupsInput, options: describe_db_security_groups.Options) !describe_db_security_groups.DescribeDBSecurityGroupsOutput {
+    pub fn describeDbSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_security_groups.DescribeDBSecurityGroupsInput, options: CallOptions) !describe_db_security_groups.DescribeDBSecurityGroupsOutput {
         return describe_db_security_groups.execute(self, allocator, input, options);
     }
 
     /// Describes existing Aurora Limitless Database DB shard groups.
-    pub fn describeDbShardGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_shard_groups.DescribeDBShardGroupsInput, options: describe_db_shard_groups.Options) !describe_db_shard_groups.DescribeDBShardGroupsOutput {
+    pub fn describeDbShardGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_shard_groups.DescribeDBShardGroupsInput, options: CallOptions) !describe_db_shard_groups.DescribeDBShardGroupsOutput {
         return describe_db_shard_groups.execute(self, allocator, input, options);
     }
 
@@ -1096,7 +1097,7 @@ pub const Client = struct {
     /// To add or remove access for an Amazon Web Services account to copy or
     /// restore a manual DB snapshot, or to make the manual DB snapshot public or
     /// private, use the `ModifyDBSnapshotAttribute` API action.
-    pub fn describeDbSnapshotAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_db_snapshot_attributes.DescribeDBSnapshotAttributesInput, options: describe_db_snapshot_attributes.Options) !describe_db_snapshot_attributes.DescribeDBSnapshotAttributesOutput {
+    pub fn describeDbSnapshotAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_db_snapshot_attributes.DescribeDBSnapshotAttributesInput, options: CallOptions) !describe_db_snapshot_attributes.DescribeDBSnapshotAttributesOutput {
         return describe_db_snapshot_attributes.execute(self, allocator, input, options);
     }
 
@@ -1108,12 +1109,12 @@ pub const Client = struct {
     /// before restoring it. You can't directly interact with the tenant databases
     /// in a DB snapshot. If you restore a snapshot that was taken from DB instance
     /// using the multi-tenant configuration, you restore all its tenant databases.
-    pub fn describeDbSnapshotTenantDatabases(self: *Self, allocator: std.mem.Allocator, input: describe_db_snapshot_tenant_databases.DescribeDBSnapshotTenantDatabasesInput, options: describe_db_snapshot_tenant_databases.Options) !describe_db_snapshot_tenant_databases.DescribeDBSnapshotTenantDatabasesOutput {
+    pub fn describeDbSnapshotTenantDatabases(self: *Self, allocator: std.mem.Allocator, input: describe_db_snapshot_tenant_databases.DescribeDBSnapshotTenantDatabasesInput, options: CallOptions) !describe_db_snapshot_tenant_databases.DescribeDBSnapshotTenantDatabasesOutput {
         return describe_db_snapshot_tenant_databases.execute(self, allocator, input, options);
     }
 
     /// Returns information about DB snapshots. This API action supports pagination.
-    pub fn describeDbSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_db_snapshots.DescribeDBSnapshotsInput, options: describe_db_snapshots.Options) !describe_db_snapshots.DescribeDBSnapshotsOutput {
+    pub fn describeDbSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_db_snapshots.DescribeDBSnapshotsInput, options: CallOptions) !describe_db_snapshots.DescribeDBSnapshotsOutput {
         return describe_db_snapshots.execute(self, allocator, input, options);
     }
 
@@ -1123,7 +1124,7 @@ pub const Client = struct {
     ///
     /// For an overview of CIDR ranges, go to the [Wikipedia
     /// Tutorial](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
-    pub fn describeDbSubnetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_subnet_groups.DescribeDBSubnetGroupsInput, options: describe_db_subnet_groups.Options) !describe_db_subnet_groups.DescribeDBSubnetGroupsOutput {
+    pub fn describeDbSubnetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_subnet_groups.DescribeDBSubnetGroupsInput, options: CallOptions) !describe_db_subnet_groups.DescribeDBSubnetGroupsOutput {
         return describe_db_subnet_groups.execute(self, allocator, input, options);
     }
 
@@ -1132,13 +1133,13 @@ pub const Client = struct {
     ///
     /// For more information on Amazon Aurora, see [ What is Amazon
     /// Aurora?](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html) in the *Amazon Aurora User Guide*.
-    pub fn describeEngineDefaultClusterParameters(self: *Self, allocator: std.mem.Allocator, input: describe_engine_default_cluster_parameters.DescribeEngineDefaultClusterParametersInput, options: describe_engine_default_cluster_parameters.Options) !describe_engine_default_cluster_parameters.DescribeEngineDefaultClusterParametersOutput {
+    pub fn describeEngineDefaultClusterParameters(self: *Self, allocator: std.mem.Allocator, input: describe_engine_default_cluster_parameters.DescribeEngineDefaultClusterParametersInput, options: CallOptions) !describe_engine_default_cluster_parameters.DescribeEngineDefaultClusterParametersOutput {
         return describe_engine_default_cluster_parameters.execute(self, allocator, input, options);
     }
 
     /// Returns the default engine and system parameter information for the
     /// specified database engine.
-    pub fn describeEngineDefaultParameters(self: *Self, allocator: std.mem.Allocator, input: describe_engine_default_parameters.DescribeEngineDefaultParametersInput, options: describe_engine_default_parameters.Options) !describe_engine_default_parameters.DescribeEngineDefaultParametersOutput {
+    pub fn describeEngineDefaultParameters(self: *Self, allocator: std.mem.Allocator, input: describe_engine_default_parameters.DescribeEngineDefaultParametersInput, options: CallOptions) !describe_engine_default_parameters.DescribeEngineDefaultParametersOutput {
         return describe_engine_default_parameters.execute(self, allocator, input, options);
     }
 
@@ -1147,7 +1148,7 @@ pub const Client = struct {
     /// event categories and event messages" section of the [ *Amazon RDS User
     /// Guide*
     /// ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.Messages.html) or the [ *Amazon Aurora User Guide* ](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Events.Messages.html).
-    pub fn describeEventCategories(self: *Self, allocator: std.mem.Allocator, input: describe_event_categories.DescribeEventCategoriesInput, options: describe_event_categories.Options) !describe_event_categories.DescribeEventCategoriesOutput {
+    pub fn describeEventCategories(self: *Self, allocator: std.mem.Allocator, input: describe_event_categories.DescribeEventCategoriesInput, options: CallOptions) !describe_event_categories.DescribeEventCategoriesOutput {
         return describe_event_categories.execute(self, allocator, input, options);
     }
 
@@ -1157,7 +1158,7 @@ pub const Client = struct {
     ///
     /// If you specify a `SubscriptionName`, lists the description for that
     /// subscription.
-    pub fn describeEventSubscriptions(self: *Self, allocator: std.mem.Allocator, input: describe_event_subscriptions.DescribeEventSubscriptionsInput, options: describe_event_subscriptions.Options) !describe_event_subscriptions.DescribeEventSubscriptionsOutput {
+    pub fn describeEventSubscriptions(self: *Self, allocator: std.mem.Allocator, input: describe_event_subscriptions.DescribeEventSubscriptionsInput, options: CallOptions) !describe_event_subscriptions.DescribeEventSubscriptionsOutput {
         return describe_event_subscriptions.execute(self, allocator, input, options);
     }
 
@@ -1171,13 +1172,13 @@ pub const Client = struct {
     /// events](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/working-with-events.html) in the *Amazon RDS User Guide* and [Monitoring Amazon Aurora events](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/working-with-events.html) in the *Amazon Aurora User Guide*.
     ///
     /// By default, RDS returns events that were generated in the past hour.
-    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: describe_events.Options) !describe_events.DescribeEventsOutput {
+    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: CallOptions) !describe_events.DescribeEventsOutput {
         return describe_events.execute(self, allocator, input, options);
     }
 
     /// Returns information about a snapshot or cluster export to Amazon S3. This
     /// API operation supports pagination.
-    pub fn describeExportTasks(self: *Self, allocator: std.mem.Allocator, input: describe_export_tasks.DescribeExportTasksInput, options: describe_export_tasks.Options) !describe_export_tasks.DescribeExportTasksOutput {
+    pub fn describeExportTasks(self: *Self, allocator: std.mem.Allocator, input: describe_export_tasks.DescribeExportTasksInput, options: CallOptions) !describe_export_tasks.DescribeExportTasksOutput {
         return describe_export_tasks.execute(self, allocator, input, options);
     }
 
@@ -1188,27 +1189,27 @@ pub const Client = struct {
     /// Aurora?](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html) in the *Amazon Aurora User Guide*.
     ///
     /// This action only applies to Aurora DB clusters.
-    pub fn describeGlobalClusters(self: *Self, allocator: std.mem.Allocator, input: describe_global_clusters.DescribeGlobalClustersInput, options: describe_global_clusters.Options) !describe_global_clusters.DescribeGlobalClustersOutput {
+    pub fn describeGlobalClusters(self: *Self, allocator: std.mem.Allocator, input: describe_global_clusters.DescribeGlobalClustersInput, options: CallOptions) !describe_global_clusters.DescribeGlobalClustersOutput {
         return describe_global_clusters.execute(self, allocator, input, options);
     }
 
     /// Describe one or more zero-ETL integrations with Amazon Redshift.
-    pub fn describeIntegrations(self: *Self, allocator: std.mem.Allocator, input: describe_integrations.DescribeIntegrationsInput, options: describe_integrations.Options) !describe_integrations.DescribeIntegrationsOutput {
+    pub fn describeIntegrations(self: *Self, allocator: std.mem.Allocator, input: describe_integrations.DescribeIntegrationsInput, options: CallOptions) !describe_integrations.DescribeIntegrationsOutput {
         return describe_integrations.execute(self, allocator, input, options);
     }
 
     /// Describes all available options for the specified engine.
-    pub fn describeOptionGroupOptions(self: *Self, allocator: std.mem.Allocator, input: describe_option_group_options.DescribeOptionGroupOptionsInput, options: describe_option_group_options.Options) !describe_option_group_options.DescribeOptionGroupOptionsOutput {
+    pub fn describeOptionGroupOptions(self: *Self, allocator: std.mem.Allocator, input: describe_option_group_options.DescribeOptionGroupOptionsInput, options: CallOptions) !describe_option_group_options.DescribeOptionGroupOptionsOutput {
         return describe_option_group_options.execute(self, allocator, input, options);
     }
 
     /// Describes the available option groups.
-    pub fn describeOptionGroups(self: *Self, allocator: std.mem.Allocator, input: describe_option_groups.DescribeOptionGroupsInput, options: describe_option_groups.Options) !describe_option_groups.DescribeOptionGroupsOutput {
+    pub fn describeOptionGroups(self: *Self, allocator: std.mem.Allocator, input: describe_option_groups.DescribeOptionGroupsInput, options: CallOptions) !describe_option_groups.DescribeOptionGroupsOutput {
         return describe_option_groups.execute(self, allocator, input, options);
     }
 
     /// Describes the orderable DB instance options for a specified DB engine.
-    pub fn describeOrderableDbInstanceOptions(self: *Self, allocator: std.mem.Allocator, input: describe_orderable_db_instance_options.DescribeOrderableDBInstanceOptionsInput, options: describe_orderable_db_instance_options.Options) !describe_orderable_db_instance_options.DescribeOrderableDBInstanceOptionsOutput {
+    pub fn describeOrderableDbInstanceOptions(self: *Self, allocator: std.mem.Allocator, input: describe_orderable_db_instance_options.DescribeOrderableDBInstanceOptionsInput, options: CallOptions) !describe_orderable_db_instance_options.DescribeOrderableDBInstanceOptionsOutput {
         return describe_orderable_db_instance_options.execute(self, allocator, input, options);
     }
 
@@ -1220,18 +1221,18 @@ pub const Client = struct {
     /// visible to all subsequent RDS commands. Keep this in mind when you use
     /// `DescribePendingMaintenanceActions` immediately after using a previous API
     /// command such as `ApplyPendingMaintenanceActions`.
-    pub fn describePendingMaintenanceActions(self: *Self, allocator: std.mem.Allocator, input: describe_pending_maintenance_actions.DescribePendingMaintenanceActionsInput, options: describe_pending_maintenance_actions.Options) !describe_pending_maintenance_actions.DescribePendingMaintenanceActionsOutput {
+    pub fn describePendingMaintenanceActions(self: *Self, allocator: std.mem.Allocator, input: describe_pending_maintenance_actions.DescribePendingMaintenanceActionsInput, options: CallOptions) !describe_pending_maintenance_actions.DescribePendingMaintenanceActionsOutput {
         return describe_pending_maintenance_actions.execute(self, allocator, input, options);
     }
 
     /// Returns information about reserved DB instances for this account, or about a
     /// specified reserved DB instance.
-    pub fn describeReservedDbInstances(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_db_instances.DescribeReservedDBInstancesInput, options: describe_reserved_db_instances.Options) !describe_reserved_db_instances.DescribeReservedDBInstancesOutput {
+    pub fn describeReservedDbInstances(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_db_instances.DescribeReservedDBInstancesInput, options: CallOptions) !describe_reserved_db_instances.DescribeReservedDBInstancesOutput {
         return describe_reserved_db_instances.execute(self, allocator, input, options);
     }
 
     /// Lists available reserved DB instance offerings.
-    pub fn describeReservedDbInstancesOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_db_instances_offerings.DescribeReservedDBInstancesOfferingsInput, options: describe_reserved_db_instances_offerings.Options) !describe_reserved_db_instances_offerings.DescribeReservedDBInstancesOfferingsOutput {
+    pub fn describeReservedDbInstancesOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_db_instances_offerings.DescribeReservedDBInstancesOfferingsInput, options: CallOptions) !describe_reserved_db_instances_offerings.DescribeReservedDBInstancesOfferingsOutput {
         return describe_reserved_db_instances_offerings.execute(self, allocator, input, options);
     }
 
@@ -1247,13 +1248,13 @@ pub const Client = struct {
     /// or all Regions, use the EC2 operation `DescribeRegions`. For more
     /// information, see [
     /// DescribeRegions](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeRegions.html) in the *Amazon EC2 API Reference*.
-    pub fn describeSourceRegions(self: *Self, allocator: std.mem.Allocator, input: describe_source_regions.DescribeSourceRegionsInput, options: describe_source_regions.Options) !describe_source_regions.DescribeSourceRegionsOutput {
+    pub fn describeSourceRegions(self: *Self, allocator: std.mem.Allocator, input: describe_source_regions.DescribeSourceRegionsInput, options: CallOptions) !describe_source_regions.DescribeSourceRegionsOutput {
         return describe_source_regions.execute(self, allocator, input, options);
     }
 
     /// Describes the tenant databases in a DB instance that uses the multi-tenant
     /// configuration. Only RDS for Oracle CDB instances are supported.
-    pub fn describeTenantDatabases(self: *Self, allocator: std.mem.Allocator, input: describe_tenant_databases.DescribeTenantDatabasesInput, options: describe_tenant_databases.Options) !describe_tenant_databases.DescribeTenantDatabasesOutput {
+    pub fn describeTenantDatabases(self: *Self, allocator: std.mem.Allocator, input: describe_tenant_databases.DescribeTenantDatabasesInput, options: CallOptions) !describe_tenant_databases.DescribeTenantDatabasesOutput {
         return describe_tenant_databases.execute(self, allocator, input, options);
     }
 
@@ -1262,7 +1263,7 @@ pub const Client = struct {
     /// when you call `ModifyDBInstance`.
     ///
     /// This command doesn't apply to RDS Custom.
-    pub fn describeValidDbInstanceModifications(self: *Self, allocator: std.mem.Allocator, input: describe_valid_db_instance_modifications.DescribeValidDBInstanceModificationsInput, options: describe_valid_db_instance_modifications.Options) !describe_valid_db_instance_modifications.DescribeValidDBInstanceModificationsOutput {
+    pub fn describeValidDbInstanceModifications(self: *Self, allocator: std.mem.Allocator, input: describe_valid_db_instance_modifications.DescribeValidDBInstanceModificationsInput, options: CallOptions) !describe_valid_db_instance_modifications.DescribeValidDBInstanceModificationsOutput {
         return describe_valid_db_instance_modifications.execute(self, allocator, input, options);
     }
 
@@ -1275,7 +1276,7 @@ pub const Client = struct {
     /// This operation applies only to Aurora Serverless v2 and provisioned DB
     /// clusters. To disable the HTTP endpoint for Aurora Serverless v1 DB clusters,
     /// use the `EnableHttpEndpoint` parameter of the `ModifyDBCluster` operation.
-    pub fn disableHttpEndpoint(self: *Self, allocator: std.mem.Allocator, input: disable_http_endpoint.DisableHttpEndpointInput, options: disable_http_endpoint.Options) !disable_http_endpoint.DisableHttpEndpointOutput {
+    pub fn disableHttpEndpoint(self: *Self, allocator: std.mem.Allocator, input: disable_http_endpoint.DisableHttpEndpointInput, options: CallOptions) !disable_http_endpoint.DisableHttpEndpointOutput {
         return disable_http_endpoint.execute(self, allocator, input, options);
     }
 
@@ -1287,7 +1288,7 @@ pub const Client = struct {
     /// recommend publishing database logs to CloudWatch and then using the
     /// GetLogEvents operation. For more information, see
     /// [GetLogEvents](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html) in the *Amazon CloudWatch Logs API Reference*.
-    pub fn downloadDbLogFilePortion(self: *Self, allocator: std.mem.Allocator, input: download_db_log_file_portion.DownloadDBLogFilePortionInput, options: download_db_log_file_portion.Options) !download_db_log_file_portion.DownloadDBLogFilePortionOutput {
+    pub fn downloadDbLogFilePortion(self: *Self, allocator: std.mem.Allocator, input: download_db_log_file_portion.DownloadDBLogFilePortionInput, options: CallOptions) !download_db_log_file_portion.DownloadDBLogFilePortionOutput {
         return download_db_log_file_portion.execute(self, allocator, input, options);
     }
 
@@ -1304,7 +1305,7 @@ pub const Client = struct {
     /// This operation applies only to Aurora Serverless v2 and provisioned DB
     /// clusters. To enable the HTTP endpoint for Aurora Serverless v1 DB clusters,
     /// use the `EnableHttpEndpoint` parameter of the `ModifyDBCluster` operation.
-    pub fn enableHttpEndpoint(self: *Self, allocator: std.mem.Allocator, input: enable_http_endpoint.EnableHttpEndpointInput, options: enable_http_endpoint.Options) !enable_http_endpoint.EnableHttpEndpointOutput {
+    pub fn enableHttpEndpoint(self: *Self, allocator: std.mem.Allocator, input: enable_http_endpoint.EnableHttpEndpointInput, options: CallOptions) !enable_http_endpoint.EnableHttpEndpointOutput {
         return enable_http_endpoint.execute(self, allocator, input, options);
     }
 
@@ -1335,7 +1336,7 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.
-    pub fn failoverDbCluster(self: *Self, allocator: std.mem.Allocator, input: failover_db_cluster.FailoverDBClusterInput, options: failover_db_cluster.Options) !failover_db_cluster.FailoverDBClusterOutput {
+    pub fn failoverDbCluster(self: *Self, allocator: std.mem.Allocator, input: failover_db_cluster.FailoverDBClusterInput, options: CallOptions) !failover_db_cluster.FailoverDBClusterOutput {
         return failover_db_cluster.execute(self, allocator, input, options);
     }
 
@@ -1380,7 +1381,7 @@ pub const Client = struct {
     /// For more information about switching over an Amazon Aurora global database,
     /// see [Performing switchovers for Aurora global
     /// databases](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-disaster-recovery.managed-failover) in the *Amazon Aurora User Guide*.
-    pub fn failoverGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: failover_global_cluster.FailoverGlobalClusterInput, options: failover_global_cluster.Options) !failover_global_cluster.FailoverGlobalClusterOutput {
+    pub fn failoverGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: failover_global_cluster.FailoverGlobalClusterInput, options: CallOptions) !failover_global_cluster.FailoverGlobalClusterOutput {
         return failover_global_cluster.execute(self, allocator, input, options);
     }
 
@@ -1388,7 +1389,7 @@ pub const Client = struct {
     ///
     /// For an overview on tagging an Amazon RDS resource, see [Tagging Amazon RDS
     /// Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html) in the *Amazon Aurora User Guide*.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -1401,7 +1402,7 @@ pub const Client = struct {
     /// stream](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.Modifying.html) in the *Amazon RDS User Guide*.
     ///
     /// This operation is supported for RDS for Oracle and Microsoft SQL Server.
-    pub fn modifyActivityStream(self: *Self, allocator: std.mem.Allocator, input: modify_activity_stream.ModifyActivityStreamInput, options: modify_activity_stream.Options) !modify_activity_stream.ModifyActivityStreamOutput {
+    pub fn modifyActivityStream(self: *Self, allocator: std.mem.Allocator, input: modify_activity_stream.ModifyActivityStreamInput, options: CallOptions) !modify_activity_stream.ModifyActivityStreamOutput {
         return modify_activity_stream.execute(self, allocator, input, options);
     }
 
@@ -1432,7 +1433,7 @@ pub const Client = struct {
     /// For more information about rotating your SSL/TLS certificate for Aurora DB
     /// engines, see [ Rotating Your SSL/TLS
     /// Certificate](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html) in the *Amazon Aurora User Guide*.
-    pub fn modifyCertificates(self: *Self, allocator: std.mem.Allocator, input: modify_certificates.ModifyCertificatesInput, options: modify_certificates.Options) !modify_certificates.ModifyCertificatesOutput {
+    pub fn modifyCertificates(self: *Self, allocator: std.mem.Allocator, input: modify_certificates.ModifyCertificatesInput, options: CallOptions) !modify_certificates.ModifyCertificatesOutput {
         return modify_certificates.execute(self, allocator, input, options);
     }
 
@@ -1458,7 +1459,7 @@ pub const Client = struct {
     /// v1](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling) in the *Amazon Aurora User Guide*.
     ///
     /// This operation only applies to Aurora Serverless v1 DB clusters.
-    pub fn modifyCurrentDbClusterCapacity(self: *Self, allocator: std.mem.Allocator, input: modify_current_db_cluster_capacity.ModifyCurrentDBClusterCapacityInput, options: modify_current_db_cluster_capacity.Options) !modify_current_db_cluster_capacity.ModifyCurrentDBClusterCapacityOutput {
+    pub fn modifyCurrentDbClusterCapacity(self: *Self, allocator: std.mem.Allocator, input: modify_current_db_cluster_capacity.ModifyCurrentDBClusterCapacityInput, options: CallOptions) !modify_current_db_cluster_capacity.ModifyCurrentDBClusterCapacityOutput {
         return modify_current_db_cluster_capacity.execute(self, allocator, input, options);
     }
 
@@ -1475,7 +1476,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Modifying CEV
     /// status](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.modify) in the *Amazon RDS User Guide*.
-    pub fn modifyCustomDbEngineVersion(self: *Self, allocator: std.mem.Allocator, input: modify_custom_db_engine_version.ModifyCustomDBEngineVersionInput, options: modify_custom_db_engine_version.Options) !modify_custom_db_engine_version.ModifyCustomDBEngineVersionOutput {
+    pub fn modifyCustomDbEngineVersion(self: *Self, allocator: std.mem.Allocator, input: modify_custom_db_engine_version.ModifyCustomDBEngineVersionInput, options: CallOptions) !modify_custom_db_engine_version.ModifyCustomDBEngineVersionOutput {
         return modify_custom_db_engine_version.execute(self, allocator, input, options);
     }
 
@@ -1488,14 +1489,14 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.
-    pub fn modifyDbCluster(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster.ModifyDBClusterInput, options: modify_db_cluster.Options) !modify_db_cluster.ModifyDBClusterOutput {
+    pub fn modifyDbCluster(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster.ModifyDBClusterInput, options: CallOptions) !modify_db_cluster.ModifyDBClusterOutput {
         return modify_db_cluster.execute(self, allocator, input, options);
     }
 
     /// Modifies the properties of an endpoint in an Amazon Aurora DB cluster.
     ///
     /// This operation only applies to Aurora DB clusters.
-    pub fn modifyDbClusterEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster_endpoint.ModifyDBClusterEndpointInput, options: modify_db_cluster_endpoint.Options) !modify_db_cluster_endpoint.ModifyDBClusterEndpointOutput {
+    pub fn modifyDbClusterEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster_endpoint.ModifyDBClusterEndpointInput, options: CallOptions) !modify_db_cluster_endpoint.ModifyDBClusterEndpointOutput {
         return modify_db_cluster_endpoint.execute(self, allocator, input, options);
     }
 
@@ -1518,7 +1519,7 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide.*
-    pub fn modifyDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster_parameter_group.ModifyDBClusterParameterGroupInput, options: modify_db_cluster_parameter_group.Options) !modify_db_cluster_parameter_group.ModifyDBClusterParameterGroupOutput {
+    pub fn modifyDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster_parameter_group.ModifyDBClusterParameterGroupInput, options: CallOptions) !modify_db_cluster_parameter_group.ModifyDBClusterParameterGroupOutput {
         return modify_db_cluster_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -1545,7 +1546,7 @@ pub const Client = struct {
     /// manual DB cluster snapshot, or whether a manual DB cluster snapshot is
     /// public or private, use the DescribeDBClusterSnapshotAttributes API
     /// operation. The accounts are returned as values for the `restore` attribute.
-    pub fn modifyDbClusterSnapshotAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster_snapshot_attribute.ModifyDBClusterSnapshotAttributeInput, options: modify_db_cluster_snapshot_attribute.Options) !modify_db_cluster_snapshot_attribute.ModifyDBClusterSnapshotAttributeOutput {
+    pub fn modifyDbClusterSnapshotAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster_snapshot_attribute.ModifyDBClusterSnapshotAttributeInput, options: CallOptions) !modify_db_cluster_snapshot_attribute.ModifyDBClusterSnapshotAttributeOutput {
         return modify_db_cluster_snapshot_attribute.execute(self, allocator, input, options);
     }
 
@@ -1554,7 +1555,7 @@ pub const Client = struct {
     /// in the request. To learn what modifications you can make to your DB
     /// instance, call `DescribeValidDBInstanceModifications` before you call
     /// `ModifyDBInstance`.
-    pub fn modifyDbInstance(self: *Self, allocator: std.mem.Allocator, input: modify_db_instance.ModifyDBInstanceInput, options: modify_db_instance.Options) !modify_db_instance.ModifyDBInstanceOutput {
+    pub fn modifyDbInstance(self: *Self, allocator: std.mem.Allocator, input: modify_db_instance.ModifyDBInstanceInput, options: CallOptions) !modify_db_instance.ModifyDBInstanceOutput {
         return modify_db_instance.execute(self, allocator, input, options);
     }
 
@@ -1573,35 +1574,35 @@ pub const Client = struct {
     /// parameter. You can use the *Parameter Groups* option of the [Amazon RDS
     /// console](https://console.aws.amazon.com/rds/) or the *DescribeDBParameters*
     /// command to verify that your DB parameter group has been created or modified.
-    pub fn modifyDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_parameter_group.ModifyDBParameterGroupInput, options: modify_db_parameter_group.Options) !modify_db_parameter_group.ModifyDBParameterGroupOutput {
+    pub fn modifyDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_parameter_group.ModifyDBParameterGroupInput, options: CallOptions) !modify_db_parameter_group.ModifyDBParameterGroupOutput {
         return modify_db_parameter_group.execute(self, allocator, input, options);
     }
 
     /// Changes the settings for an existing DB proxy.
-    pub fn modifyDbProxy(self: *Self, allocator: std.mem.Allocator, input: modify_db_proxy.ModifyDBProxyInput, options: modify_db_proxy.Options) !modify_db_proxy.ModifyDBProxyOutput {
+    pub fn modifyDbProxy(self: *Self, allocator: std.mem.Allocator, input: modify_db_proxy.ModifyDBProxyInput, options: CallOptions) !modify_db_proxy.ModifyDBProxyOutput {
         return modify_db_proxy.execute(self, allocator, input, options);
     }
 
     /// Changes the settings for an existing DB proxy endpoint.
-    pub fn modifyDbProxyEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_db_proxy_endpoint.ModifyDBProxyEndpointInput, options: modify_db_proxy_endpoint.Options) !modify_db_proxy_endpoint.ModifyDBProxyEndpointOutput {
+    pub fn modifyDbProxyEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_db_proxy_endpoint.ModifyDBProxyEndpointInput, options: CallOptions) !modify_db_proxy_endpoint.ModifyDBProxyEndpointOutput {
         return modify_db_proxy_endpoint.execute(self, allocator, input, options);
     }
 
     /// Modifies the properties of a `DBProxyTargetGroup`.
-    pub fn modifyDbProxyTargetGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_proxy_target_group.ModifyDBProxyTargetGroupInput, options: modify_db_proxy_target_group.Options) !modify_db_proxy_target_group.ModifyDBProxyTargetGroupOutput {
+    pub fn modifyDbProxyTargetGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_proxy_target_group.ModifyDBProxyTargetGroupInput, options: CallOptions) !modify_db_proxy_target_group.ModifyDBProxyTargetGroupOutput {
         return modify_db_proxy_target_group.execute(self, allocator, input, options);
     }
 
     /// Updates the recommendation status and recommended action status for the
     /// specified recommendation.
-    pub fn modifyDbRecommendation(self: *Self, allocator: std.mem.Allocator, input: modify_db_recommendation.ModifyDBRecommendationInput, options: modify_db_recommendation.Options) !modify_db_recommendation.ModifyDBRecommendationOutput {
+    pub fn modifyDbRecommendation(self: *Self, allocator: std.mem.Allocator, input: modify_db_recommendation.ModifyDBRecommendationInput, options: CallOptions) !modify_db_recommendation.ModifyDBRecommendationOutput {
         return modify_db_recommendation.execute(self, allocator, input, options);
     }
 
     /// Modifies the settings of an Aurora Limitless Database DB shard group. You
     /// can change one or more settings by specifying these parameters and the new
     /// values in the request.
-    pub fn modifyDbShardGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_shard_group.ModifyDBShardGroupInput, options: modify_db_shard_group.Options) !modify_db_shard_group.ModifyDBShardGroupOutput {
+    pub fn modifyDbShardGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_shard_group.ModifyDBShardGroupInput, options: CallOptions) !modify_db_shard_group.ModifyDBShardGroupOutput {
         return modify_db_shard_group.execute(self, allocator, input, options);
     }
 
@@ -1610,7 +1611,7 @@ pub const Client = struct {
     ///
     /// Amazon RDS supports upgrading DB snapshots for MariaDB, MySQL, PostgreSQL,
     /// and Oracle. This operation doesn't apply to RDS Custom or RDS for Db2.
-    pub fn modifyDbSnapshot(self: *Self, allocator: std.mem.Allocator, input: modify_db_snapshot.ModifyDBSnapshotInput, options: modify_db_snapshot.Options) !modify_db_snapshot.ModifyDBSnapshotOutput {
+    pub fn modifyDbSnapshot(self: *Self, allocator: std.mem.Allocator, input: modify_db_snapshot.ModifyDBSnapshotInput, options: CallOptions) !modify_db_snapshot.ModifyDBSnapshotOutput {
         return modify_db_snapshot.execute(self, allocator, input, options);
     }
 
@@ -1637,13 +1638,13 @@ pub const Client = struct {
     /// manual DB snapshot, or whether a manual DB snapshot public or private, use
     /// the DescribeDBSnapshotAttributes API operation. The accounts are returned as
     /// values for the `restore` attribute.
-    pub fn modifyDbSnapshotAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_db_snapshot_attribute.ModifyDBSnapshotAttributeInput, options: modify_db_snapshot_attribute.Options) !modify_db_snapshot_attribute.ModifyDBSnapshotAttributeOutput {
+    pub fn modifyDbSnapshotAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_db_snapshot_attribute.ModifyDBSnapshotAttributeInput, options: CallOptions) !modify_db_snapshot_attribute.ModifyDBSnapshotAttributeOutput {
         return modify_db_snapshot_attribute.execute(self, allocator, input, options);
     }
 
     /// Modifies an existing DB subnet group. DB subnet groups must contain at least
     /// one subnet in at least two AZs in the Amazon Web Services Region.
-    pub fn modifyDbSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_subnet_group.ModifyDBSubnetGroupInput, options: modify_db_subnet_group.Options) !modify_db_subnet_group.ModifyDBSubnetGroupOutput {
+    pub fn modifyDbSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_subnet_group.ModifyDBSubnetGroupInput, options: CallOptions) !modify_db_subnet_group.ModifyDBSubnetGroupOutput {
         return modify_db_subnet_group.execute(self, allocator, input, options);
     }
 
@@ -1655,7 +1656,7 @@ pub const Client = struct {
     /// You can see a list of the event categories for a given source type
     /// (`SourceType`) in
     /// [Events](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html) in the *Amazon RDS User Guide* or by using the `DescribeEventCategories` operation.
-    pub fn modifyEventSubscription(self: *Self, allocator: std.mem.Allocator, input: modify_event_subscription.ModifyEventSubscriptionInput, options: modify_event_subscription.Options) !modify_event_subscription.ModifyEventSubscriptionOutput {
+    pub fn modifyEventSubscription(self: *Self, allocator: std.mem.Allocator, input: modify_event_subscription.ModifyEventSubscriptionInput, options: CallOptions) !modify_event_subscription.ModifyEventSubscriptionOutput {
         return modify_event_subscription.execute(self, allocator, input, options);
     }
 
@@ -1666,17 +1667,17 @@ pub const Client = struct {
     /// Aurora?](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html) in the *Amazon Aurora User Guide*.
     ///
     /// This operation only applies to Aurora global database clusters.
-    pub fn modifyGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: modify_global_cluster.ModifyGlobalClusterInput, options: modify_global_cluster.Options) !modify_global_cluster.ModifyGlobalClusterOutput {
+    pub fn modifyGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: modify_global_cluster.ModifyGlobalClusterInput, options: CallOptions) !modify_global_cluster.ModifyGlobalClusterOutput {
         return modify_global_cluster.execute(self, allocator, input, options);
     }
 
     /// Modifies a zero-ETL integration with Amazon Redshift.
-    pub fn modifyIntegration(self: *Self, allocator: std.mem.Allocator, input: modify_integration.ModifyIntegrationInput, options: modify_integration.Options) !modify_integration.ModifyIntegrationOutput {
+    pub fn modifyIntegration(self: *Self, allocator: std.mem.Allocator, input: modify_integration.ModifyIntegrationInput, options: CallOptions) !modify_integration.ModifyIntegrationOutput {
         return modify_integration.execute(self, allocator, input, options);
     }
 
     /// Modifies an existing option group.
-    pub fn modifyOptionGroup(self: *Self, allocator: std.mem.Allocator, input: modify_option_group.ModifyOptionGroupInput, options: modify_option_group.Options) !modify_option_group.ModifyOptionGroupOutput {
+    pub fn modifyOptionGroup(self: *Self, allocator: std.mem.Allocator, input: modify_option_group.ModifyOptionGroupInput, options: CallOptions) !modify_option_group.ModifyOptionGroupOutput {
         return modify_option_group.execute(self, allocator, input, options);
     }
 
@@ -1684,7 +1685,7 @@ pub const Client = struct {
     /// tenant database name or the master user password. This operation is
     /// supported only for RDS for Oracle CDB instances using the multi-tenant
     /// configuration.
-    pub fn modifyTenantDatabase(self: *Self, allocator: std.mem.Allocator, input: modify_tenant_database.ModifyTenantDatabaseInput, options: modify_tenant_database.Options) !modify_tenant_database.ModifyTenantDatabaseOutput {
+    pub fn modifyTenantDatabase(self: *Self, allocator: std.mem.Allocator, input: modify_tenant_database.ModifyTenantDatabaseInput, options: CallOptions) !modify_tenant_database.ModifyTenantDatabaseOutput {
         return modify_tenant_database.execute(self, allocator, input, options);
     }
 
@@ -1700,17 +1701,17 @@ pub const Client = struct {
     ///   promotion.
     /// * This command doesn't apply to Aurora MySQL, Aurora PostgreSQL, or RDS
     ///   Custom.
-    pub fn promoteReadReplica(self: *Self, allocator: std.mem.Allocator, input: promote_read_replica.PromoteReadReplicaInput, options: promote_read_replica.Options) !promote_read_replica.PromoteReadReplicaOutput {
+    pub fn promoteReadReplica(self: *Self, allocator: std.mem.Allocator, input: promote_read_replica.PromoteReadReplicaInput, options: CallOptions) !promote_read_replica.PromoteReadReplicaOutput {
         return promote_read_replica.execute(self, allocator, input, options);
     }
 
     /// Promotes a read replica DB cluster to a standalone DB cluster.
-    pub fn promoteReadReplicaDbCluster(self: *Self, allocator: std.mem.Allocator, input: promote_read_replica_db_cluster.PromoteReadReplicaDBClusterInput, options: promote_read_replica_db_cluster.Options) !promote_read_replica_db_cluster.PromoteReadReplicaDBClusterOutput {
+    pub fn promoteReadReplicaDbCluster(self: *Self, allocator: std.mem.Allocator, input: promote_read_replica_db_cluster.PromoteReadReplicaDBClusterInput, options: CallOptions) !promote_read_replica_db_cluster.PromoteReadReplicaDBClusterOutput {
         return promote_read_replica_db_cluster.execute(self, allocator, input, options);
     }
 
     /// Purchases a reserved DB instance offering.
-    pub fn purchaseReservedDbInstancesOffering(self: *Self, allocator: std.mem.Allocator, input: purchase_reserved_db_instances_offering.PurchaseReservedDBInstancesOfferingInput, options: purchase_reserved_db_instances_offering.Options) !purchase_reserved_db_instances_offering.PurchaseReservedDBInstancesOfferingOutput {
+    pub fn purchaseReservedDbInstancesOffering(self: *Self, allocator: std.mem.Allocator, input: purchase_reserved_db_instances_offering.PurchaseReservedDBInstancesOfferingInput, options: CallOptions) !purchase_reserved_db_instances_offering.PurchaseReservedDBInstancesOfferingOutput {
         return purchase_reserved_db_instances_offering.execute(self, allocator, input, options);
     }
 
@@ -1727,7 +1728,7 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide.*
-    pub fn rebootDbCluster(self: *Self, allocator: std.mem.Allocator, input: reboot_db_cluster.RebootDBClusterInput, options: reboot_db_cluster.Options) !reboot_db_cluster.RebootDBClusterOutput {
+    pub fn rebootDbCluster(self: *Self, allocator: std.mem.Allocator, input: reboot_db_cluster.RebootDBClusterInput, options: CallOptions) !reboot_db_cluster.RebootDBClusterOutput {
         return reboot_db_cluster.execute(self, allocator, input, options);
     }
 
@@ -1747,7 +1748,7 @@ pub const Client = struct {
     ///
     /// If your DB instance is part of a Multi-AZ DB cluster, you can reboot the DB
     /// cluster with the `RebootDBCluster` operation.
-    pub fn rebootDbInstance(self: *Self, allocator: std.mem.Allocator, input: reboot_db_instance.RebootDBInstanceInput, options: reboot_db_instance.Options) !reboot_db_instance.RebootDBInstanceOutput {
+    pub fn rebootDbInstance(self: *Self, allocator: std.mem.Allocator, input: reboot_db_instance.RebootDBInstanceInput, options: CallOptions) !reboot_db_instance.RebootDBInstanceOutput {
         return reboot_db_instance.execute(self, allocator, input, options);
     }
 
@@ -1756,13 +1757,13 @@ pub const Client = struct {
     /// group for the changes to take effect.
     ///
     /// This operation applies only to Aurora Limitless Database DBb shard groups.
-    pub fn rebootDbShardGroup(self: *Self, allocator: std.mem.Allocator, input: reboot_db_shard_group.RebootDBShardGroupInput, options: reboot_db_shard_group.Options) !reboot_db_shard_group.RebootDBShardGroupOutput {
+    pub fn rebootDbShardGroup(self: *Self, allocator: std.mem.Allocator, input: reboot_db_shard_group.RebootDBShardGroupInput, options: CallOptions) !reboot_db_shard_group.RebootDBShardGroupOutput {
         return reboot_db_shard_group.execute(self, allocator, input, options);
     }
 
     /// Associate one or more `DBProxyTarget` data structures with a
     /// `DBProxyTargetGroup`.
-    pub fn registerDbProxyTargets(self: *Self, allocator: std.mem.Allocator, input: register_db_proxy_targets.RegisterDBProxyTargetsInput, options: register_db_proxy_targets.Options) !register_db_proxy_targets.RegisterDBProxyTargetsOutput {
+    pub fn registerDbProxyTargets(self: *Self, allocator: std.mem.Allocator, input: register_db_proxy_targets.RegisterDBProxyTargetsInput, options: CallOptions) !register_db_proxy_targets.RegisterDBProxyTargetsOutput {
         return register_db_proxy_targets.execute(self, allocator, input, options);
     }
 
@@ -1772,7 +1773,7 @@ pub const Client = struct {
     /// Region.
     ///
     /// This operation only applies to Aurora DB clusters.
-    pub fn removeFromGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: remove_from_global_cluster.RemoveFromGlobalClusterInput, options: remove_from_global_cluster.Options) !remove_from_global_cluster.RemoveFromGlobalClusterOutput {
+    pub fn removeFromGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: remove_from_global_cluster.RemoveFromGlobalClusterInput, options: CallOptions) !remove_from_global_cluster.RemoveFromGlobalClusterOutput {
         return remove_from_global_cluster.execute(self, allocator, input, options);
     }
 
@@ -1784,19 +1785,19 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide.*
-    pub fn removeRoleFromDbCluster(self: *Self, allocator: std.mem.Allocator, input: remove_role_from_db_cluster.RemoveRoleFromDBClusterInput, options: remove_role_from_db_cluster.Options) !remove_role_from_db_cluster.RemoveRoleFromDBClusterOutput {
+    pub fn removeRoleFromDbCluster(self: *Self, allocator: std.mem.Allocator, input: remove_role_from_db_cluster.RemoveRoleFromDBClusterInput, options: CallOptions) !remove_role_from_db_cluster.RemoveRoleFromDBClusterOutput {
         return remove_role_from_db_cluster.execute(self, allocator, input, options);
     }
 
     /// Disassociates an Amazon Web Services Identity and Access Management (IAM)
     /// role from a DB instance.
-    pub fn removeRoleFromDbInstance(self: *Self, allocator: std.mem.Allocator, input: remove_role_from_db_instance.RemoveRoleFromDBInstanceInput, options: remove_role_from_db_instance.Options) !remove_role_from_db_instance.RemoveRoleFromDBInstanceOutput {
+    pub fn removeRoleFromDbInstance(self: *Self, allocator: std.mem.Allocator, input: remove_role_from_db_instance.RemoveRoleFromDBInstanceInput, options: CallOptions) !remove_role_from_db_instance.RemoveRoleFromDBInstanceOutput {
         return remove_role_from_db_instance.execute(self, allocator, input, options);
     }
 
     /// Removes a source identifier from an existing RDS event notification
     /// subscription.
-    pub fn removeSourceIdentifierFromSubscription(self: *Self, allocator: std.mem.Allocator, input: remove_source_identifier_from_subscription.RemoveSourceIdentifierFromSubscriptionInput, options: remove_source_identifier_from_subscription.Options) !remove_source_identifier_from_subscription.RemoveSourceIdentifierFromSubscriptionOutput {
+    pub fn removeSourceIdentifierFromSubscription(self: *Self, allocator: std.mem.Allocator, input: remove_source_identifier_from_subscription.RemoveSourceIdentifierFromSubscriptionInput, options: CallOptions) !remove_source_identifier_from_subscription.RemoveSourceIdentifierFromSubscriptionOutput {
         return remove_source_identifier_from_subscription.execute(self, allocator, input, options);
     }
 
@@ -1804,7 +1805,7 @@ pub const Client = struct {
     ///
     /// For an overview on tagging an Amazon RDS resource, see [Tagging Amazon RDS
     /// Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html) in the *Amazon Aurora User Guide*.
-    pub fn removeTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_resource.RemoveTagsFromResourceInput, options: remove_tags_from_resource.Options) !remove_tags_from_resource.RemoveTagsFromResourceOutput {
+    pub fn removeTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_resource.RemoveTagsFromResourceInput, options: CallOptions) !remove_tags_from_resource.RemoveTagsFromResourceOutput {
         return remove_tags_from_resource.execute(self, allocator, input, options);
     }
 
@@ -1825,7 +1826,7 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide.*
-    pub fn resetDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: reset_db_cluster_parameter_group.ResetDBClusterParameterGroupInput, options: reset_db_cluster_parameter_group.Options) !reset_db_cluster_parameter_group.ResetDBClusterParameterGroupOutput {
+    pub fn resetDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: reset_db_cluster_parameter_group.ResetDBClusterParameterGroupInput, options: CallOptions) !reset_db_cluster_parameter_group.ResetDBClusterParameterGroupOutput {
         return reset_db_cluster_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -1836,7 +1837,7 @@ pub const Client = struct {
     /// When resetting the entire group, dynamic parameters are updated immediately
     /// and static parameters are set to `pending-reboot` to take effect on the next
     /// DB instance restart or `RebootDBInstance` request.
-    pub fn resetDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: reset_db_parameter_group.ResetDBParameterGroupInput, options: reset_db_parameter_group.Options) !reset_db_parameter_group.ResetDBParameterGroupOutput {
+    pub fn resetDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: reset_db_parameter_group.ResetDBParameterGroupInput, options: CallOptions) !reset_db_parameter_group.ResetDBParameterGroupOutput {
         return reset_db_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -1858,7 +1859,7 @@ pub const Client = struct {
     ///
     /// This operation only applies to Aurora DB clusters. The source DB engine must
     /// be MySQL.
-    pub fn restoreDbClusterFromS3(self: *Self, allocator: std.mem.Allocator, input: restore_db_cluster_from_s3.RestoreDBClusterFromS3Input, options: restore_db_cluster_from_s3.Options) !restore_db_cluster_from_s3.RestoreDBClusterFromS3Output {
+    pub fn restoreDbClusterFromS3(self: *Self, allocator: std.mem.Allocator, input: restore_db_cluster_from_s3.RestoreDBClusterFromS3Input, options: CallOptions) !restore_db_cluster_from_s3.RestoreDBClusterFromS3Output {
         return restore_db_cluster_from_s3.execute(self, allocator, input, options);
     }
 
@@ -1880,7 +1881,7 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide.*
-    pub fn restoreDbClusterFromSnapshot(self: *Self, allocator: std.mem.Allocator, input: restore_db_cluster_from_snapshot.RestoreDBClusterFromSnapshotInput, options: restore_db_cluster_from_snapshot.Options) !restore_db_cluster_from_snapshot.RestoreDBClusterFromSnapshotOutput {
+    pub fn restoreDbClusterFromSnapshot(self: *Self, allocator: std.mem.Allocator, input: restore_db_cluster_from_snapshot.RestoreDBClusterFromSnapshotInput, options: CallOptions) !restore_db_cluster_from_snapshot.RestoreDBClusterFromSnapshotOutput {
         return restore_db_cluster_from_snapshot.execute(self, allocator, input, options);
     }
 
@@ -1906,7 +1907,7 @@ pub const Client = struct {
     ///
     /// For more information on Multi-AZ DB clusters, see [ Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide.*
-    pub fn restoreDbClusterToPointInTime(self: *Self, allocator: std.mem.Allocator, input: restore_db_cluster_to_point_in_time.RestoreDBClusterToPointInTimeInput, options: restore_db_cluster_to_point_in_time.Options) !restore_db_cluster_to_point_in_time.RestoreDBClusterToPointInTimeOutput {
+    pub fn restoreDbClusterToPointInTime(self: *Self, allocator: std.mem.Allocator, input: restore_db_cluster_to_point_in_time.RestoreDBClusterToPointInTimeInput, options: CallOptions) !restore_db_cluster_to_point_in_time.RestoreDBClusterToPointInTimeOutput {
         return restore_db_cluster_to_point_in_time.execute(self, allocator, input, options);
     }
 
@@ -1938,7 +1939,7 @@ pub const Client = struct {
     ///
     /// This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For
     /// Aurora, use `RestoreDBClusterFromSnapshot`.
-    pub fn restoreDbInstanceFromDbSnapshot(self: *Self, allocator: std.mem.Allocator, input: restore_db_instance_from_db_snapshot.RestoreDBInstanceFromDBSnapshotInput, options: restore_db_instance_from_db_snapshot.Options) !restore_db_instance_from_db_snapshot.RestoreDBInstanceFromDBSnapshotOutput {
+    pub fn restoreDbInstanceFromDbSnapshot(self: *Self, allocator: std.mem.Allocator, input: restore_db_instance_from_db_snapshot.RestoreDBInstanceFromDBSnapshotInput, options: CallOptions) !restore_db_instance_from_db_snapshot.RestoreDBInstanceFromDBSnapshotOutput {
         return restore_db_instance_from_db_snapshot.execute(self, allocator, input, options);
     }
 
@@ -1950,7 +1951,7 @@ pub const Client = struct {
     /// instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html) in the *Amazon RDS User Guide.*
     ///
     /// This operation doesn't apply to RDS Custom.
-    pub fn restoreDbInstanceFromS3(self: *Self, allocator: std.mem.Allocator, input: restore_db_instance_from_s3.RestoreDBInstanceFromS3Input, options: restore_db_instance_from_s3.Options) !restore_db_instance_from_s3.RestoreDBInstanceFromS3Output {
+    pub fn restoreDbInstanceFromS3(self: *Self, allocator: std.mem.Allocator, input: restore_db_instance_from_s3.RestoreDBInstanceFromS3Input, options: CallOptions) !restore_db_instance_from_s3.RestoreDBInstanceFromS3Output {
         return restore_db_instance_from_s3.execute(self, allocator, input, options);
     }
 
@@ -1969,7 +1970,7 @@ pub const Client = struct {
     ///
     /// This operation doesn't apply to Aurora MySQL and Aurora PostgreSQL. For
     /// Aurora, use `RestoreDBClusterToPointInTime`.
-    pub fn restoreDbInstanceToPointInTime(self: *Self, allocator: std.mem.Allocator, input: restore_db_instance_to_point_in_time.RestoreDBInstanceToPointInTimeInput, options: restore_db_instance_to_point_in_time.Options) !restore_db_instance_to_point_in_time.RestoreDBInstanceToPointInTimeOutput {
+    pub fn restoreDbInstanceToPointInTime(self: *Self, allocator: std.mem.Allocator, input: restore_db_instance_to_point_in_time.RestoreDBInstanceToPointInTimeInput, options: CallOptions) !restore_db_instance_to_point_in_time.RestoreDBInstanceToPointInTimeOutput {
         return restore_db_instance_to_point_in_time.execute(self, allocator, input, options);
     }
 
@@ -1985,14 +1986,14 @@ pub const Client = struct {
     /// in the *Amazon EC2 User Guide*, the blog [EC2-Classic Networking is Retiring
     /// – Here’s How to
     /// Prepare](http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/), and [Moving a DB instance not in a VPC into a VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html) in the *Amazon RDS User Guide*.
-    pub fn revokeDbSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: revoke_db_security_group_ingress.RevokeDBSecurityGroupIngressInput, options: revoke_db_security_group_ingress.Options) !revoke_db_security_group_ingress.RevokeDBSecurityGroupIngressOutput {
+    pub fn revokeDbSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: revoke_db_security_group_ingress.RevokeDBSecurityGroupIngressInput, options: CallOptions) !revoke_db_security_group_ingress.RevokeDBSecurityGroupIngressOutput {
         return revoke_db_security_group_ingress.execute(self, allocator, input, options);
     }
 
     /// Starts a database activity stream to monitor activity on the database. For
     /// more information, see [ Monitoring Amazon Aurora with Database Activity
     /// Streams](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html) in the *Amazon Aurora User Guide* or [ Monitoring Amazon RDS with Database Activity Streams](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html) in the *Amazon RDS User Guide*.
-    pub fn startActivityStream(self: *Self, allocator: std.mem.Allocator, input: start_activity_stream.StartActivityStreamInput, options: start_activity_stream.Options) !start_activity_stream.StartActivityStreamOutput {
+    pub fn startActivityStream(self: *Self, allocator: std.mem.Allocator, input: start_activity_stream.StartActivityStreamInput, options: CallOptions) !start_activity_stream.StartActivityStreamOutput {
         return start_activity_stream.execute(self, allocator, input, options);
     }
 
@@ -2004,7 +2005,7 @@ pub const Client = struct {
     /// Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html) in the *Amazon Aurora User Guide*.
     ///
     /// This operation only applies to Aurora DB clusters.
-    pub fn startDbCluster(self: *Self, allocator: std.mem.Allocator, input: start_db_cluster.StartDBClusterInput, options: start_db_cluster.Options) !start_db_cluster.StartDBClusterOutput {
+    pub fn startDbCluster(self: *Self, allocator: std.mem.Allocator, input: start_db_cluster.StartDBClusterInput, options: CallOptions) !start_db_cluster.StartDBClusterOutput {
         return start_db_cluster.execute(self, allocator, input, options);
     }
 
@@ -2018,7 +2019,7 @@ pub const Client = struct {
     ///
     /// This command doesn't apply to RDS Custom, Aurora MySQL, and Aurora
     /// PostgreSQL. For Aurora DB clusters, use `StartDBCluster` instead.
-    pub fn startDbInstance(self: *Self, allocator: std.mem.Allocator, input: start_db_instance.StartDBInstanceInput, options: start_db_instance.Options) !start_db_instance.StartDBInstanceOutput {
+    pub fn startDbInstance(self: *Self, allocator: std.mem.Allocator, input: start_db_instance.StartDBInstanceInput, options: CallOptions) !start_db_instance.StartDBInstanceOutput {
         return start_db_instance.execute(self, allocator, input, options);
     }
 
@@ -2030,7 +2031,7 @@ pub const Client = struct {
     /// For more information, see [ Replicating Automated Backups to Another Amazon
     /// Web Services
     /// Region](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html) in the *Amazon RDS User Guide.*
-    pub fn startDbInstanceAutomatedBackupsReplication(self: *Self, allocator: std.mem.Allocator, input: start_db_instance_automated_backups_replication.StartDBInstanceAutomatedBackupsReplicationInput, options: start_db_instance_automated_backups_replication.Options) !start_db_instance_automated_backups_replication.StartDBInstanceAutomatedBackupsReplicationOutput {
+    pub fn startDbInstanceAutomatedBackupsReplication(self: *Self, allocator: std.mem.Allocator, input: start_db_instance_automated_backups_replication.StartDBInstanceAutomatedBackupsReplicationInput, options: CallOptions) !start_db_instance_automated_backups_replication.StartDBInstanceAutomatedBackupsReplicationOutput {
         return start_db_instance_automated_backups_replication.execute(self, allocator, input, options);
     }
 
@@ -2049,7 +2050,7 @@ pub const Client = struct {
     /// For more information on exporting DB cluster data, see [Exporting DB cluster
     /// data to Amazon
     /// S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/export-cluster-data.html) in the *Amazon Aurora User Guide*.
-    pub fn startExportTask(self: *Self, allocator: std.mem.Allocator, input: start_export_task.StartExportTaskInput, options: start_export_task.Options) !start_export_task.StartExportTaskOutput {
+    pub fn startExportTask(self: *Self, allocator: std.mem.Allocator, input: start_export_task.StartExportTaskInput, options: CallOptions) !start_export_task.StartExportTaskOutput {
         return start_export_task.execute(self, allocator, input, options);
     }
 
@@ -2059,7 +2060,7 @@ pub const Client = struct {
     ///
     /// For more information, see [ Monitoring Amazon Aurora with Database Activity
     /// Streams](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html) in the *Amazon Aurora User Guide* or [ Monitoring Amazon RDS with Database Activity Streams](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html) in the *Amazon RDS User Guide*.
-    pub fn stopActivityStream(self: *Self, allocator: std.mem.Allocator, input: stop_activity_stream.StopActivityStreamInput, options: stop_activity_stream.Options) !stop_activity_stream.StopActivityStreamOutput {
+    pub fn stopActivityStream(self: *Self, allocator: std.mem.Allocator, input: stop_activity_stream.StopActivityStreamInput, options: CallOptions) !stop_activity_stream.StopActivityStreamOutput {
         return stop_activity_stream.execute(self, allocator, input, options);
     }
 
@@ -2072,7 +2073,7 @@ pub const Client = struct {
     /// Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html) in the *Amazon Aurora User Guide*.
     ///
     /// This operation only applies to Aurora DB clusters.
-    pub fn stopDbCluster(self: *Self, allocator: std.mem.Allocator, input: stop_db_cluster.StopDBClusterInput, options: stop_db_cluster.Options) !stop_db_cluster.StopDBClusterOutput {
+    pub fn stopDbCluster(self: *Self, allocator: std.mem.Allocator, input: stop_db_cluster.StopDBClusterInput, options: CallOptions) !stop_db_cluster.StopDBClusterOutput {
         return stop_db_cluster.execute(self, allocator, input, options);
     }
 
@@ -2087,7 +2088,7 @@ pub const Client = struct {
     ///
     /// This command doesn't apply to RDS Custom, Aurora MySQL, and Aurora
     /// PostgreSQL. For Aurora clusters, use `StopDBCluster` instead.
-    pub fn stopDbInstance(self: *Self, allocator: std.mem.Allocator, input: stop_db_instance.StopDBInstanceInput, options: stop_db_instance.Options) !stop_db_instance.StopDBInstanceOutput {
+    pub fn stopDbInstance(self: *Self, allocator: std.mem.Allocator, input: stop_db_instance.StopDBInstanceInput, options: CallOptions) !stop_db_instance.StopDBInstanceOutput {
         return stop_db_instance.execute(self, allocator, input, options);
     }
 
@@ -2099,7 +2100,7 @@ pub const Client = struct {
     /// For more information, see [ Replicating Automated Backups to Another Amazon
     /// Web Services
     /// Region](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html) in the *Amazon RDS User Guide.*
-    pub fn stopDbInstanceAutomatedBackupsReplication(self: *Self, allocator: std.mem.Allocator, input: stop_db_instance_automated_backups_replication.StopDBInstanceAutomatedBackupsReplicationInput, options: stop_db_instance_automated_backups_replication.Options) !stop_db_instance_automated_backups_replication.StopDBInstanceAutomatedBackupsReplicationOutput {
+    pub fn stopDbInstanceAutomatedBackupsReplication(self: *Self, allocator: std.mem.Allocator, input: stop_db_instance_automated_backups_replication.StopDBInstanceAutomatedBackupsReplicationInput, options: CallOptions) !stop_db_instance_automated_backups_replication.StopDBInstanceAutomatedBackupsReplicationOutput {
         return stop_db_instance_automated_backups_replication.execute(self, allocator, input, options);
     }
 
@@ -2112,7 +2113,7 @@ pub const Client = struct {
     /// For more information, see [Using Amazon RDS Blue/Green Deployments for
     /// database
     /// updates](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html) in the *Amazon RDS User Guide* and [Using Amazon RDS Blue/Green Deployments for database updates](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html) in the *Amazon Aurora User Guide*.
-    pub fn switchoverBlueGreenDeployment(self: *Self, allocator: std.mem.Allocator, input: switchover_blue_green_deployment.SwitchoverBlueGreenDeploymentInput, options: switchover_blue_green_deployment.Options) !switchover_blue_green_deployment.SwitchoverBlueGreenDeploymentOutput {
+    pub fn switchoverBlueGreenDeployment(self: *Self, allocator: std.mem.Allocator, input: switchover_blue_green_deployment.SwitchoverBlueGreenDeploymentInput, options: CallOptions) !switchover_blue_green_deployment.SwitchoverBlueGreenDeploymentOutput {
         return switchover_blue_green_deployment.execute(self, allocator, input, options);
     }
 
@@ -2134,14 +2135,14 @@ pub const Client = struct {
     /// This operation is intended for controlled environments, for operations such
     /// as "regional rotation" or to fall back to the original primary after a
     /// global database failover.
-    pub fn switchoverGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: switchover_global_cluster.SwitchoverGlobalClusterInput, options: switchover_global_cluster.Options) !switchover_global_cluster.SwitchoverGlobalClusterOutput {
+    pub fn switchoverGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: switchover_global_cluster.SwitchoverGlobalClusterInput, options: CallOptions) !switchover_global_cluster.SwitchoverGlobalClusterOutput {
         return switchover_global_cluster.execute(self, allocator, input, options);
     }
 
     /// Switches over an Oracle standby database in an Oracle Data Guard
     /// environment, making it the new primary database. Issue this command in the
     /// Region that hosts the current standby database.
-    pub fn switchoverReadReplica(self: *Self, allocator: std.mem.Allocator, input: switchover_read_replica.SwitchoverReadReplicaInput, options: switchover_read_replica.Options) !switchover_read_replica.SwitchoverReadReplicaOutput {
+    pub fn switchoverReadReplica(self: *Self, allocator: std.mem.Allocator, input: switchover_read_replica.SwitchoverReadReplicaInput, options: CallOptions) !switchover_read_replica.SwitchoverReadReplicaOutput {
         return switchover_read_replica.execute(self, allocator, input, options);
     }
 

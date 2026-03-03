@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_admin_accounts_for_organization = @import("list_admin_accounts_for_organization.zig");
@@ -21,7 +22,7 @@ pub const ListAdminAccountsForOrganizationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_admin_accounts_for_organization.Options) !list_admin_accounts_for_organization.ListAdminAccountsForOrganizationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_admin_accounts_for_organization.ListAdminAccountsForOrganizationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -62,7 +63,7 @@ pub const ListAdminsManagingAccountPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_admins_managing_account.Options) !list_admins_managing_account.ListAdminsManagingAccountOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_admins_managing_account.ListAdminsManagingAccountOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -103,7 +104,7 @@ pub const ListAppsListsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_apps_lists.Options) !list_apps_lists.ListAppsListsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_apps_lists.ListAppsListsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -144,7 +145,7 @@ pub const ListComplianceStatusPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_compliance_status.Options) !list_compliance_status.ListComplianceStatusOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_compliance_status.ListComplianceStatusOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -185,7 +186,7 @@ pub const ListMemberAccountsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_member_accounts.Options) !list_member_accounts.ListMemberAccountsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_member_accounts.ListMemberAccountsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -226,7 +227,7 @@ pub const ListPoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_policies.Options) !list_policies.ListPoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_policies.ListPoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -267,7 +268,7 @@ pub const ListProtocolsListsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_protocols_lists.Options) !list_protocols_lists.ListProtocolsListsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_protocols_lists.ListProtocolsListsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -308,7 +309,7 @@ pub const ListThirdPartyFirewallFirewallPoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_third_party_firewall_firewall_policies.Options) !list_third_party_firewall_firewall_policies.ListThirdPartyFirewallFirewallPoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_third_party_firewall_firewall_policies.ListThirdPartyFirewallFirewallPoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

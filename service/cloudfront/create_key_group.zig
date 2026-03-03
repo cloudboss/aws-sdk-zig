@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const KeyGroupConfig = @import("key_group_config.zig").KeyGroupConfig;
 const KeyGroup = @import("key_group.zig").KeyGroup;
@@ -23,11 +24,7 @@ pub const CreateKeyGroupOutput = struct {
     location: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateKeyGroupInput, options: Options) !CreateKeyGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateKeyGroupInput, options: CallOptions) !CreateKeyGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

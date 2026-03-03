@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchJobIdentifier = @import("batch_job_identifier.zig").BatchJobIdentifier;
 const JobStepRestartMarker = @import("job_step_restart_marker.zig").JobStepRestartMarker;
@@ -83,11 +84,7 @@ pub const GetBatchJobExecutionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBatchJobExecutionInput, options: Options) !GetBatchJobExecutionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBatchJobExecutionInput, options: CallOptions) !GetBatchJobExecutionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

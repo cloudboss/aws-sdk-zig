@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InventoryConfiguration = @import("inventory_configuration.zig").InventoryConfiguration;
 const serde = @import("serde.zig");
@@ -24,11 +25,7 @@ pub const GetBucketInventoryConfigurationOutput = struct {
     inventory_configuration: ?InventoryConfiguration = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketInventoryConfigurationInput, options: Options) !GetBucketInventoryConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketInventoryConfigurationInput, options: CallOptions) !GetBucketInventoryConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccessLevelFilter = @import("access_level_filter.zig").AccessLevelFilter;
 const ListRecordHistorySearchFilter = @import("list_record_history_search_filter.zig").ListRecordHistorySearchFilter;
@@ -51,11 +52,7 @@ pub const ListRecordHistoryOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRecordHistoryInput, options: Options) !ListRecordHistoryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRecordHistoryInput, options: CallOptions) !ListRecordHistoryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

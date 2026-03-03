@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CurrencyCodeValues = @import("currency_code_values.zig").CurrencyCodeValues;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
@@ -63,11 +64,7 @@ pub const PurchaseHostReservationOutput = struct {
     total_upfront_price: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PurchaseHostReservationInput, options: Options) !PurchaseHostReservationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PurchaseHostReservationInput, options: CallOptions) !PurchaseHostReservationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

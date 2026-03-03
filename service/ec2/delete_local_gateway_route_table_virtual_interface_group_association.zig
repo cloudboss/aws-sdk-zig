@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LocalGatewayRouteTableVirtualInterfaceGroupAssociation = @import("local_gateway_route_table_virtual_interface_group_association.zig").LocalGatewayRouteTableVirtualInterfaceGroupAssociation;
 const serde = @import("serde.zig");
@@ -23,11 +24,7 @@ pub const DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput = s
     local_gateway_route_table_virtual_interface_group_association: ?LocalGatewayRouteTableVirtualInterfaceGroupAssociation = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput, options: Options) !DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput, options: CallOptions) !DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

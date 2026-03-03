@@ -14,6 +14,7 @@ const put_resource_policy = @import("put_resource_policy.zig");
 const start_change_set = @import("start_change_set.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -47,7 +48,7 @@ pub const Client = struct {
     /// Returns metadata and content for multiple entities. This is the Batch
     /// version of the `DescribeEntity` API and uses the same IAM permission action
     /// as `DescribeEntity` API.
-    pub fn batchDescribeEntities(self: *Self, allocator: std.mem.Allocator, input: batch_describe_entities.BatchDescribeEntitiesInput, options: batch_describe_entities.Options) !batch_describe_entities.BatchDescribeEntitiesOutput {
+    pub fn batchDescribeEntities(self: *Self, allocator: std.mem.Allocator, input: batch_describe_entities.BatchDescribeEntitiesInput, options: CallOptions) !batch_describe_entities.BatchDescribeEntitiesOutput {
         return batch_describe_entities.execute(self, allocator, input, options);
     }
 
@@ -58,30 +59,30 @@ pub const Client = struct {
     /// can describe a change during the 60-day request history retention period for
     /// API
     /// calls.
-    pub fn cancelChangeSet(self: *Self, allocator: std.mem.Allocator, input: cancel_change_set.CancelChangeSetInput, options: cancel_change_set.Options) !cancel_change_set.CancelChangeSetOutput {
+    pub fn cancelChangeSet(self: *Self, allocator: std.mem.Allocator, input: cancel_change_set.CancelChangeSetInput, options: CallOptions) !cancel_change_set.CancelChangeSetOutput {
         return cancel_change_set.execute(self, allocator, input, options);
     }
 
     /// Deletes a resource-based policy on an entity that is identified by its
     /// resource
     /// ARN.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Provides information about a given change set.
-    pub fn describeChangeSet(self: *Self, allocator: std.mem.Allocator, input: describe_change_set.DescribeChangeSetInput, options: describe_change_set.Options) !describe_change_set.DescribeChangeSetOutput {
+    pub fn describeChangeSet(self: *Self, allocator: std.mem.Allocator, input: describe_change_set.DescribeChangeSetInput, options: CallOptions) !describe_change_set.DescribeChangeSetOutput {
         return describe_change_set.execute(self, allocator, input, options);
     }
 
     /// Returns the metadata and content of the entity.
-    pub fn describeEntity(self: *Self, allocator: std.mem.Allocator, input: describe_entity.DescribeEntityInput, options: describe_entity.Options) !describe_entity.DescribeEntityOutput {
+    pub fn describeEntity(self: *Self, allocator: std.mem.Allocator, input: describe_entity.DescribeEntityInput, options: CallOptions) !describe_entity.DescribeEntityOutput {
         return describe_entity.execute(self, allocator, input, options);
     }
 
     /// Gets a resource-based policy of an entity that is identified by its resource
     /// ARN.
-    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
         return get_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -94,25 +95,25 @@ pub const Client = struct {
     /// You can describe a change during the 60-day request history retention period
     /// for API
     /// calls.
-    pub fn listChangeSets(self: *Self, allocator: std.mem.Allocator, input: list_change_sets.ListChangeSetsInput, options: list_change_sets.Options) !list_change_sets.ListChangeSetsOutput {
+    pub fn listChangeSets(self: *Self, allocator: std.mem.Allocator, input: list_change_sets.ListChangeSetsInput, options: CallOptions) !list_change_sets.ListChangeSetsOutput {
         return list_change_sets.execute(self, allocator, input, options);
     }
 
     /// Provides the list of entities of a given type.
-    pub fn listEntities(self: *Self, allocator: std.mem.Allocator, input: list_entities.ListEntitiesInput, options: list_entities.Options) !list_entities.ListEntitiesOutput {
+    pub fn listEntities(self: *Self, allocator: std.mem.Allocator, input: list_entities.ListEntitiesInput, options: CallOptions) !list_entities.ListEntitiesOutput {
         return list_entities.execute(self, allocator, input, options);
     }
 
     /// Lists all tags that have been added to a resource (either an
     /// [entity](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities) or [change set](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)).
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Attaches a resource-based policy to an entity. Examples of an entity
     /// include:
     /// `AmiProduct` and `ContainerProduct`.
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -144,19 +145,19 @@ pub const Client = struct {
     /// [Python](https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python)
     /// and
     /// [Java](https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main) shapes on GitHub.
-    pub fn startChangeSet(self: *Self, allocator: std.mem.Allocator, input: start_change_set.StartChangeSetInput, options: start_change_set.Options) !start_change_set.StartChangeSetOutput {
+    pub fn startChangeSet(self: *Self, allocator: std.mem.Allocator, input: start_change_set.StartChangeSetInput, options: CallOptions) !start_change_set.StartChangeSetOutput {
         return start_change_set.execute(self, allocator, input, options);
     }
 
     /// Tags a resource (either an
     /// [entity](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities) or [change set](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)).
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag or list of tags from a resource (either an
     /// [entity](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities) or [change set](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)).
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

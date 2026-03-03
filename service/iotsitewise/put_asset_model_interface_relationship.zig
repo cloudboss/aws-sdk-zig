@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PropertyMappingConfiguration = @import("property_mapping_configuration.zig").PropertyMappingConfiguration;
 const AssetModelStatus = @import("asset_model_status.zig").AssetModelStatus;
@@ -59,11 +60,7 @@ pub const PutAssetModelInterfaceRelationshipOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAssetModelInterfaceRelationshipInput, options: Options) !PutAssetModelInterfaceRelationshipOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAssetModelInterfaceRelationshipInput, options: CallOptions) !PutAssetModelInterfaceRelationshipOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

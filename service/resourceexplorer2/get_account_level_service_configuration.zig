@@ -2,10 +2,11 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const OrgConfiguration = @import("org_configuration.zig").OrgConfiguration;
 
-const GetAccountLevelServiceConfigurationInput = struct {};
+pub const GetAccountLevelServiceConfigurationInput = struct {};
 
 pub const GetAccountLevelServiceConfigurationOutput = struct {
     /// Details about the organization, and whether configuration is `ENABLED` or
@@ -17,11 +18,7 @@ pub const GetAccountLevelServiceConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAccountLevelServiceConfigurationInput, options: Options) !GetAccountLevelServiceConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAccountLevelServiceConfigurationInput, options: CallOptions) !GetAccountLevelServiceConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

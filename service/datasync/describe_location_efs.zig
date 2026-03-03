@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Ec2Config = @import("ec_2_config.zig").Ec2Config;
 const EfsInTransitEncryption = @import("efs_in_transit_encryption.zig").EfsInTransitEncryption;
@@ -61,11 +62,7 @@ pub const DescribeLocationEfsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeLocationEfsInput, options: Options) !DescribeLocationEfsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeLocationEfsInput, options: CallOptions) !DescribeLocationEfsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

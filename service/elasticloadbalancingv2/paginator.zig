@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_account_limits = @import("describe_account_limits.zig");
@@ -22,7 +23,7 @@ pub const DescribeAccountLimitsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_account_limits.Options) !describe_account_limits.DescribeAccountLimitsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_account_limits.DescribeAccountLimitsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -63,7 +64,7 @@ pub const DescribeListenerCertificatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_listener_certificates.Options) !describe_listener_certificates.DescribeListenerCertificatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_listener_certificates.DescribeListenerCertificatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -104,7 +105,7 @@ pub const DescribeListenersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_listeners.Options) !describe_listeners.DescribeListenersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_listeners.DescribeListenersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -145,7 +146,7 @@ pub const DescribeLoadBalancersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_load_balancers.Options) !describe_load_balancers.DescribeLoadBalancersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_load_balancers.DescribeLoadBalancersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -186,7 +187,7 @@ pub const DescribeRulesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_rules.Options) !describe_rules.DescribeRulesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_rules.DescribeRulesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -227,7 +228,7 @@ pub const DescribeTargetGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_target_groups.Options) !describe_target_groups.DescribeTargetGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_target_groups.DescribeTargetGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -268,7 +269,7 @@ pub const DescribeTrustStoreAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_trust_store_associations.Options) !describe_trust_store_associations.DescribeTrustStoreAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_trust_store_associations.DescribeTrustStoreAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -309,7 +310,7 @@ pub const DescribeTrustStoreRevocationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_trust_store_revocations.Options) !describe_trust_store_revocations.DescribeTrustStoreRevocationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_trust_store_revocations.DescribeTrustStoreRevocationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -350,7 +351,7 @@ pub const DescribeTrustStoresPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_trust_stores.Options) !describe_trust_stores.DescribeTrustStoresOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_trust_stores.DescribeTrustStoresOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

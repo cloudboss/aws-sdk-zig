@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const IpamPrefixListResolverTarget = @import("ipam_prefix_list_resolver_target.zig").IpamPrefixListResolverTarget;
@@ -45,11 +46,7 @@ pub const DescribeIpamPrefixListResolverTargetsOutput = struct {
     next_token: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeIpamPrefixListResolverTargetsInput, options: Options) !DescribeIpamPrefixListResolverTargetsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeIpamPrefixListResolverTargetsInput, options: CallOptions) !DescribeIpamPrefixListResolverTargetsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

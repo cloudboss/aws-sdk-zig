@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IngressVpcConfiguration = @import("ingress_vpc_configuration.zig").IngressVpcConfiguration;
 const VpcIngressConnection = @import("vpc_ingress_connection.zig").VpcIngressConnection;
@@ -33,11 +34,7 @@ pub const UpdateVpcIngressConnectionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateVpcIngressConnectionInput, options: Options) !UpdateVpcIngressConnectionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateVpcIngressConnectionInput, options: CallOptions) !UpdateVpcIngressConnectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

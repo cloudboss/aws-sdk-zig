@@ -83,6 +83,7 @@ const update_package_scope = @import("update_package_scope.zig");
 const update_scheduled_action = @import("update_scheduled_action.zig");
 const update_vpc_endpoint = @import("update_vpc_endpoint.zig");
 const upgrade_domain = @import("upgrade_domain.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -118,7 +119,7 @@ pub const Client = struct {
     /// cross-cluster search connection request. For more information, see
     /// [Cross-cluster search for Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
-    pub fn acceptInboundConnection(self: *Self, allocator: std.mem.Allocator, input: accept_inbound_connection.AcceptInboundConnectionInput, options: accept_inbound_connection.Options) !accept_inbound_connection.AcceptInboundConnectionOutput {
+    pub fn acceptInboundConnection(self: *Self, allocator: std.mem.Allocator, input: accept_inbound_connection.AcceptInboundConnectionInput, options: CallOptions) !accept_inbound_connection.AcceptInboundConnectionOutput {
         return accept_inbound_connection.execute(self, allocator, input, options);
     }
 
@@ -126,14 +127,14 @@ pub const Client = struct {
     /// information,
     /// see [Creating Amazon OpenSearch Service data source integrations with Amazon
     /// S3](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html).
-    pub fn addDataSource(self: *Self, allocator: std.mem.Allocator, input: add_data_source.AddDataSourceInput, options: add_data_source.Options) !add_data_source.AddDataSourceOutput {
+    pub fn addDataSource(self: *Self, allocator: std.mem.Allocator, input: add_data_source.AddDataSourceInput, options: CallOptions) !add_data_source.AddDataSourceOutput {
         return add_data_source.execute(self, allocator, input, options);
     }
 
     /// Adds a new data source in Amazon OpenSearch Service so that you can perform
     /// direct
     /// queries on external data.
-    pub fn addDirectQueryDataSource(self: *Self, allocator: std.mem.Allocator, input: add_direct_query_data_source.AddDirectQueryDataSourceInput, options: add_direct_query_data_source.Options) !add_direct_query_data_source.AddDirectQueryDataSourceOutput {
+    pub fn addDirectQueryDataSource(self: *Self, allocator: std.mem.Allocator, input: add_direct_query_data_source.AddDirectQueryDataSourceInput, options: CallOptions) !add_direct_query_data_source.AddDirectQueryDataSourceOutput {
         return add_direct_query_data_source.execute(self, allocator, input, options);
     }
 
@@ -145,7 +146,7 @@ pub const Client = struct {
     /// application can have up to 10 tags. For more information, see [Tagging
     /// Amazon OpenSearch Service
     /// resources](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html).
-    pub fn addTags(self: *Self, allocator: std.mem.Allocator, input: add_tags.AddTagsInput, options: add_tags.Options) !add_tags.AddTagsOutput {
+    pub fn addTags(self: *Self, allocator: std.mem.Allocator, input: add_tags.AddTagsInput, options: CallOptions) !add_tags.AddTagsOutput {
         return add_tags.execute(self, allocator, input, options);
     }
 
@@ -154,27 +155,27 @@ pub const Client = struct {
     /// see [Custom packages
     /// for Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
-    pub fn associatePackage(self: *Self, allocator: std.mem.Allocator, input: associate_package.AssociatePackageInput, options: associate_package.Options) !associate_package.AssociatePackageOutput {
+    pub fn associatePackage(self: *Self, allocator: std.mem.Allocator, input: associate_package.AssociatePackageInput, options: CallOptions) !associate_package.AssociatePackageOutput {
         return associate_package.execute(self, allocator, input, options);
     }
 
     /// Operation in the Amazon OpenSearch Service API for associating multiple
     /// packages with
     /// a domain simultaneously.
-    pub fn associatePackages(self: *Self, allocator: std.mem.Allocator, input: associate_packages.AssociatePackagesInput, options: associate_packages.Options) !associate_packages.AssociatePackagesOutput {
+    pub fn associatePackages(self: *Self, allocator: std.mem.Allocator, input: associate_packages.AssociatePackagesInput, options: CallOptions) !associate_packages.AssociatePackagesOutput {
         return associate_packages.execute(self, allocator, input, options);
     }
 
     /// Provides access to an Amazon OpenSearch Service domain through the use of an
     /// interface
     /// VPC endpoint.
-    pub fn authorizeVpcEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: authorize_vpc_endpoint_access.AuthorizeVpcEndpointAccessInput, options: authorize_vpc_endpoint_access.Options) !authorize_vpc_endpoint_access.AuthorizeVpcEndpointAccessOutput {
+    pub fn authorizeVpcEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: authorize_vpc_endpoint_access.AuthorizeVpcEndpointAccessInput, options: CallOptions) !authorize_vpc_endpoint_access.AuthorizeVpcEndpointAccessOutput {
         return authorize_vpc_endpoint_access.execute(self, allocator, input, options);
     }
 
     /// Cancels a pending configuration change on an Amazon OpenSearch Service
     /// domain.
-    pub fn cancelDomainConfigChange(self: *Self, allocator: std.mem.Allocator, input: cancel_domain_config_change.CancelDomainConfigChangeInput, options: cancel_domain_config_change.Options) !cancel_domain_config_change.CancelDomainConfigChangeOutput {
+    pub fn cancelDomainConfigChange(self: *Self, allocator: std.mem.Allocator, input: cancel_domain_config_change.CancelDomainConfigChangeInput, options: CallOptions) !cancel_domain_config_change.CancelDomainConfigChangeOutput {
         return cancel_domain_config_change.execute(self, allocator, input, options);
     }
 
@@ -186,14 +187,14 @@ pub const Client = struct {
     /// information, see [Service
     /// software updates in Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html).
-    pub fn cancelServiceSoftwareUpdate(self: *Self, allocator: std.mem.Allocator, input: cancel_service_software_update.CancelServiceSoftwareUpdateInput, options: cancel_service_software_update.Options) !cancel_service_software_update.CancelServiceSoftwareUpdateOutput {
+    pub fn cancelServiceSoftwareUpdate(self: *Self, allocator: std.mem.Allocator, input: cancel_service_software_update.CancelServiceSoftwareUpdateInput, options: CallOptions) !cancel_service_software_update.CancelServiceSoftwareUpdateOutput {
         return cancel_service_software_update.execute(self, allocator, input, options);
     }
 
     /// Creates an OpenSearch UI application. For more information, see [Using the
     /// OpenSearch user interface in Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application.html).
-    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: create_application.Options) !create_application.CreateApplicationOutput {
+    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: CallOptions) !create_application.CreateApplicationOutput {
         return create_application.execute(self, allocator, input, options);
     }
 
@@ -201,7 +202,7 @@ pub const Client = struct {
     /// [Creating and
     /// managing Amazon OpenSearch Service
     /// domains](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html).
-    pub fn createDomain(self: *Self, allocator: std.mem.Allocator, input: create_domain.CreateDomainInput, options: create_domain.Options) !create_domain.CreateDomainOutput {
+    pub fn createDomain(self: *Self, allocator: std.mem.Allocator, input: create_domain.CreateDomainInput, options: CallOptions) !create_domain.CreateDomainOutput {
         return create_domain.execute(self, allocator, input, options);
     }
 
@@ -213,7 +214,7 @@ pub const Client = struct {
     /// search latency as sparse encodings are stored directly within the index
     /// during indexing. For more information, see [Automatic semantic
     /// enrichment](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/opensearch-semantic-enrichment.html).
-    pub fn createIndex(self: *Self, allocator: std.mem.Allocator, input: create_index.CreateIndexInput, options: create_index.Options) !create_index.CreateIndexOutput {
+    pub fn createIndex(self: *Self, allocator: std.mem.Allocator, input: create_index.CreateIndexInput, options: CallOptions) !create_index.CreateIndexOutput {
         return create_index.execute(self, allocator, input, options);
     }
 
@@ -222,7 +223,7 @@ pub const Client = struct {
     /// to a destination domain. For more information, see [Cross-cluster search
     /// for Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
-    pub fn createOutboundConnection(self: *Self, allocator: std.mem.Allocator, input: create_outbound_connection.CreateOutboundConnectionInput, options: create_outbound_connection.Options) !create_outbound_connection.CreateOutboundConnectionOutput {
+    pub fn createOutboundConnection(self: *Self, allocator: std.mem.Allocator, input: create_outbound_connection.CreateOutboundConnectionInput, options: CallOptions) !create_outbound_connection.CreateOutboundConnectionOutput {
         return create_outbound_connection.execute(self, allocator, input, options);
     }
 
@@ -230,38 +231,38 @@ pub const Client = struct {
     /// information, see [Custom packages
     /// for Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
-    pub fn createPackage(self: *Self, allocator: std.mem.Allocator, input: create_package.CreatePackageInput, options: create_package.Options) !create_package.CreatePackageOutput {
+    pub fn createPackage(self: *Self, allocator: std.mem.Allocator, input: create_package.CreatePackageInput, options: CallOptions) !create_package.CreatePackageOutput {
         return create_package.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon OpenSearch Service-managed VPC endpoint.
-    pub fn createVpcEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_vpc_endpoint.CreateVpcEndpointInput, options: create_vpc_endpoint.Options) !create_vpc_endpoint.CreateVpcEndpointOutput {
+    pub fn createVpcEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_vpc_endpoint.CreateVpcEndpointInput, options: CallOptions) !create_vpc_endpoint.CreateVpcEndpointOutput {
         return create_vpc_endpoint.execute(self, allocator, input, options);
     }
 
     /// Deletes a specified OpenSearch application.
-    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: delete_application.Options) !delete_application.DeleteApplicationOutput {
+    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: CallOptions) !delete_application.DeleteApplicationOutput {
         return delete_application.execute(self, allocator, input, options);
     }
 
     /// Deletes a direct-query data source. For more information, see [Deleting
     /// an Amazon OpenSearch Service data source with Amazon
     /// S3](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-delete.html).
-    pub fn deleteDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_data_source.DeleteDataSourceInput, options: delete_data_source.Options) !delete_data_source.DeleteDataSourceOutput {
+    pub fn deleteDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_data_source.DeleteDataSourceInput, options: CallOptions) !delete_data_source.DeleteDataSourceOutput {
         return delete_data_source.execute(self, allocator, input, options);
     }
 
     /// Deletes a previously configured direct query data source from Amazon
     /// OpenSearch
     /// Service.
-    pub fn deleteDirectQueryDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_direct_query_data_source.DeleteDirectQueryDataSourceInput, options: delete_direct_query_data_source.Options) !delete_direct_query_data_source.DeleteDirectQueryDataSourceOutput {
+    pub fn deleteDirectQueryDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_direct_query_data_source.DeleteDirectQueryDataSourceInput, options: CallOptions) !delete_direct_query_data_source.DeleteDirectQueryDataSourceOutput {
         return delete_direct_query_data_source.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon OpenSearch Service domain and all of its data. You can't
     /// recover a
     /// domain after you delete it.
-    pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: delete_domain.Options) !delete_domain.DeleteDomainOutput {
+    pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: CallOptions) !delete_domain.DeleteDomainOutput {
         return delete_domain.execute(self, allocator, input, options);
     }
 
@@ -270,13 +271,13 @@ pub const Client = struct {
     /// inbound cross-cluster search connection. For more information, see
     /// [Cross-cluster search for Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
-    pub fn deleteInboundConnection(self: *Self, allocator: std.mem.Allocator, input: delete_inbound_connection.DeleteInboundConnectionInput, options: delete_inbound_connection.Options) !delete_inbound_connection.DeleteInboundConnectionOutput {
+    pub fn deleteInboundConnection(self: *Self, allocator: std.mem.Allocator, input: delete_inbound_connection.DeleteInboundConnectionInput, options: CallOptions) !delete_inbound_connection.DeleteInboundConnectionOutput {
         return delete_inbound_connection.execute(self, allocator, input, options);
     }
 
     /// Deletes an OpenSearch index. This operation permanently removes the index
     /// and cannot be undone.
-    pub fn deleteIndex(self: *Self, allocator: std.mem.Allocator, input: delete_index.DeleteIndexInput, options: delete_index.Options) !delete_index.DeleteIndexOutput {
+    pub fn deleteIndex(self: *Self, allocator: std.mem.Allocator, input: delete_index.DeleteIndexInput, options: CallOptions) !delete_index.DeleteIndexOutput {
         return delete_index.execute(self, allocator, input, options);
     }
 
@@ -285,7 +286,7 @@ pub const Client = struct {
     /// outbound cross-cluster search connection. For more information, see
     /// [Cross-cluster search for Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
-    pub fn deleteOutboundConnection(self: *Self, allocator: std.mem.Allocator, input: delete_outbound_connection.DeleteOutboundConnectionInput, options: delete_outbound_connection.Options) !delete_outbound_connection.DeleteOutboundConnectionOutput {
+    pub fn deleteOutboundConnection(self: *Self, allocator: std.mem.Allocator, input: delete_outbound_connection.DeleteOutboundConnectionInput, options: CallOptions) !delete_outbound_connection.DeleteOutboundConnectionOutput {
         return delete_outbound_connection.execute(self, allocator, input, options);
     }
 
@@ -293,19 +294,19 @@ pub const Client = struct {
     /// [Custom packages
     /// for Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
-    pub fn deletePackage(self: *Self, allocator: std.mem.Allocator, input: delete_package.DeletePackageInput, options: delete_package.Options) !delete_package.DeletePackageOutput {
+    pub fn deletePackage(self: *Self, allocator: std.mem.Allocator, input: delete_package.DeletePackageInput, options: CallOptions) !delete_package.DeletePackageOutput {
         return delete_package.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon OpenSearch Service-managed interface VPC endpoint.
-    pub fn deleteVpcEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_endpoint.DeleteVpcEndpointInput, options: delete_vpc_endpoint.Options) !delete_vpc_endpoint.DeleteVpcEndpointOutput {
+    pub fn deleteVpcEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_endpoint.DeleteVpcEndpointInput, options: CallOptions) !delete_vpc_endpoint.DeleteVpcEndpointOutput {
         return delete_vpc_endpoint.execute(self, allocator, input, options);
     }
 
     /// Describes the domain configuration for the specified Amazon OpenSearch
     /// Service domain,
     /// including the domain ID, domain service endpoint, and domain ARN.
-    pub fn describeDomain(self: *Self, allocator: std.mem.Allocator, input: describe_domain.DescribeDomainInput, options: describe_domain.Options) !describe_domain.DescribeDomainOutput {
+    pub fn describeDomain(self: *Self, allocator: std.mem.Allocator, input: describe_domain.DescribeDomainInput, options: CallOptions) !describe_domain.DescribeDomainOutput {
         return describe_domain.execute(self, allocator, input, options);
     }
 
@@ -314,7 +315,7 @@ pub const Client = struct {
     /// Service domain. For more information, see [Auto-Tune for Amazon
     /// OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
-    pub fn describeDomainAutoTunes(self: *Self, allocator: std.mem.Allocator, input: describe_domain_auto_tunes.DescribeDomainAutoTunesInput, options: describe_domain_auto_tunes.Options) !describe_domain_auto_tunes.DescribeDomainAutoTunesOutput {
+    pub fn describeDomainAutoTunes(self: *Self, allocator: std.mem.Allocator, input: describe_domain_auto_tunes.DescribeDomainAutoTunesInput, options: CallOptions) !describe_domain_auto_tunes.DescribeDomainAutoTunesOutput {
         return describe_domain_auto_tunes.execute(self, allocator, input, options);
     }
 
@@ -323,19 +324,19 @@ pub const Client = struct {
     /// OpenSearch Service domain. For more information, see [Making configuration
     /// changes in Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes.html).
-    pub fn describeDomainChangeProgress(self: *Self, allocator: std.mem.Allocator, input: describe_domain_change_progress.DescribeDomainChangeProgressInput, options: describe_domain_change_progress.Options) !describe_domain_change_progress.DescribeDomainChangeProgressOutput {
+    pub fn describeDomainChangeProgress(self: *Self, allocator: std.mem.Allocator, input: describe_domain_change_progress.DescribeDomainChangeProgressInput, options: CallOptions) !describe_domain_change_progress.DescribeDomainChangeProgressOutput {
         return describe_domain_change_progress.execute(self, allocator, input, options);
     }
 
     /// Returns the configuration of an Amazon OpenSearch Service domain.
-    pub fn describeDomainConfig(self: *Self, allocator: std.mem.Allocator, input: describe_domain_config.DescribeDomainConfigInput, options: describe_domain_config.Options) !describe_domain_config.DescribeDomainConfigOutput {
+    pub fn describeDomainConfig(self: *Self, allocator: std.mem.Allocator, input: describe_domain_config.DescribeDomainConfigInput, options: CallOptions) !describe_domain_config.DescribeDomainConfigOutput {
         return describe_domain_config.execute(self, allocator, input, options);
     }
 
     /// Returns information about domain and node health, the standby Availability
     /// Zone,
     /// number of nodes per Availability Zone, and shard count per node.
-    pub fn describeDomainHealth(self: *Self, allocator: std.mem.Allocator, input: describe_domain_health.DescribeDomainHealthInput, options: describe_domain_health.Options) !describe_domain_health.DescribeDomainHealthOutput {
+    pub fn describeDomainHealth(self: *Self, allocator: std.mem.Allocator, input: describe_domain_health.DescribeDomainHealthInput, options: CallOptions) !describe_domain_health.DescribeDomainHealthOutput {
         return describe_domain_health.execute(self, allocator, input, options);
     }
 
@@ -344,14 +345,14 @@ pub const Client = struct {
     /// ultrawarm nodes, Availability Zone(s), standby nodes, node configurations,
     /// and node
     /// states.
-    pub fn describeDomainNodes(self: *Self, allocator: std.mem.Allocator, input: describe_domain_nodes.DescribeDomainNodesInput, options: describe_domain_nodes.Options) !describe_domain_nodes.DescribeDomainNodesOutput {
+    pub fn describeDomainNodes(self: *Self, allocator: std.mem.Allocator, input: describe_domain_nodes.DescribeDomainNodesInput, options: CallOptions) !describe_domain_nodes.DescribeDomainNodesOutput {
         return describe_domain_nodes.execute(self, allocator, input, options);
     }
 
     /// Returns domain configuration information about the specified Amazon
     /// OpenSearch Service
     /// domains.
-    pub fn describeDomains(self: *Self, allocator: std.mem.Allocator, input: describe_domains.DescribeDomainsInput, options: describe_domains.Options) !describe_domains.DescribeDomainsOutput {
+    pub fn describeDomains(self: *Self, allocator: std.mem.Allocator, input: describe_domains.DescribeDomainsInput, options: CallOptions) !describe_domains.DescribeDomainsOutput {
         return describe_domains.execute(self, allocator, input, options);
     }
 
@@ -360,7 +361,7 @@ pub const Client = struct {
     /// Service domain. For more information, see [Determining whether a change will
     /// cause a blue/green
     /// deployment](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#dryrun).
-    pub fn describeDryRunProgress(self: *Self, allocator: std.mem.Allocator, input: describe_dry_run_progress.DescribeDryRunProgressInput, options: describe_dry_run_progress.Options) !describe_dry_run_progress.DescribeDryRunProgressOutput {
+    pub fn describeDryRunProgress(self: *Self, allocator: std.mem.Allocator, input: describe_dry_run_progress.DescribeDryRunProgressInput, options: CallOptions) !describe_dry_run_progress.DescribeDryRunProgressOutput {
         return describe_dry_run_progress.execute(self, allocator, input, options);
     }
 
@@ -369,14 +370,14 @@ pub const Client = struct {
     /// Amazon OpenSearch Service domain. For more information, see [Cross-cluster
     /// search for Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
-    pub fn describeInboundConnections(self: *Self, allocator: std.mem.Allocator, input: describe_inbound_connections.DescribeInboundConnectionsInput, options: describe_inbound_connections.Options) !describe_inbound_connections.DescribeInboundConnectionsOutput {
+    pub fn describeInboundConnections(self: *Self, allocator: std.mem.Allocator, input: describe_inbound_connections.DescribeInboundConnectionsInput, options: CallOptions) !describe_inbound_connections.DescribeInboundConnectionsOutput {
         return describe_inbound_connections.execute(self, allocator, input, options);
     }
 
     /// Describes the instance count, storage, and master node limits for a given
     /// OpenSearch
     /// or Elasticsearch version and instance type.
-    pub fn describeInstanceTypeLimits(self: *Self, allocator: std.mem.Allocator, input: describe_instance_type_limits.DescribeInstanceTypeLimitsInput, options: describe_instance_type_limits.Options) !describe_instance_type_limits.DescribeInstanceTypeLimitsOutput {
+    pub fn describeInstanceTypeLimits(self: *Self, allocator: std.mem.Allocator, input: describe_instance_type_limits.DescribeInstanceTypeLimitsInput, options: CallOptions) !describe_instance_type_limits.DescribeInstanceTypeLimitsOutput {
         return describe_instance_type_limits.execute(self, allocator, input, options);
     }
 
@@ -384,7 +385,7 @@ pub const Client = struct {
     /// OpenSearch Service domain. For more information, see [Cross-cluster search
     /// for Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
-    pub fn describeOutboundConnections(self: *Self, allocator: std.mem.Allocator, input: describe_outbound_connections.DescribeOutboundConnectionsInput, options: describe_outbound_connections.Options) !describe_outbound_connections.DescribeOutboundConnectionsOutput {
+    pub fn describeOutboundConnections(self: *Self, allocator: std.mem.Allocator, input: describe_outbound_connections.DescribeOutboundConnectionsInput, options: CallOptions) !describe_outbound_connections.DescribeOutboundConnectionsOutput {
         return describe_outbound_connections.execute(self, allocator, input, options);
     }
 
@@ -393,7 +394,7 @@ pub const Client = struct {
     /// [Custom packages
     /// for Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
-    pub fn describePackages(self: *Self, allocator: std.mem.Allocator, input: describe_packages.DescribePackagesInput, options: describe_packages.Options) !describe_packages.DescribePackagesOutput {
+    pub fn describePackages(self: *Self, allocator: std.mem.Allocator, input: describe_packages.DescribePackagesInput, options: CallOptions) !describe_packages.DescribePackagesOutput {
         return describe_packages.execute(self, allocator, input, options);
     }
 
@@ -402,7 +403,7 @@ pub const Client = struct {
     /// given Region. For more information, see [Reserved Instances in Amazon
     /// OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ri.html).
-    pub fn describeReservedInstanceOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_instance_offerings.DescribeReservedInstanceOfferingsInput, options: describe_reserved_instance_offerings.Options) !describe_reserved_instance_offerings.DescribeReservedInstanceOfferingsOutput {
+    pub fn describeReservedInstanceOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_instance_offerings.DescribeReservedInstanceOfferingsInput, options: CallOptions) !describe_reserved_instance_offerings.DescribeReservedInstanceOfferingsOutput {
         return describe_reserved_instance_offerings.execute(self, allocator, input, options);
     }
 
@@ -411,12 +412,12 @@ pub const Client = struct {
     /// Region. For more information, see [Reserved Instances in Amazon
     /// OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ri.html).
-    pub fn describeReservedInstances(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_instances.DescribeReservedInstancesInput, options: describe_reserved_instances.Options) !describe_reserved_instances.DescribeReservedInstancesOutput {
+    pub fn describeReservedInstances(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_instances.DescribeReservedInstancesInput, options: CallOptions) !describe_reserved_instances.DescribeReservedInstancesOutput {
         return describe_reserved_instances.execute(self, allocator, input, options);
     }
 
     /// Describes one or more Amazon OpenSearch Service-managed VPC endpoints.
-    pub fn describeVpcEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoints.DescribeVpcEndpointsInput, options: describe_vpc_endpoints.Options) !describe_vpc_endpoints.DescribeVpcEndpointsOutput {
+    pub fn describeVpcEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoints.DescribeVpcEndpointsInput, options: CallOptions) !describe_vpc_endpoints.DescribeVpcEndpointsOutput {
         return describe_vpc_endpoints.execute(self, allocator, input, options);
     }
 
@@ -429,30 +430,30 @@ pub const Client = struct {
     /// see [Custom packages
     /// for Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
-    pub fn dissociatePackage(self: *Self, allocator: std.mem.Allocator, input: dissociate_package.DissociatePackageInput, options: dissociate_package.Options) !dissociate_package.DissociatePackageOutput {
+    pub fn dissociatePackage(self: *Self, allocator: std.mem.Allocator, input: dissociate_package.DissociatePackageInput, options: CallOptions) !dissociate_package.DissociatePackageOutput {
         return dissociate_package.execute(self, allocator, input, options);
     }
 
     /// Dissociates multiple packages from a domain simultaneously.
-    pub fn dissociatePackages(self: *Self, allocator: std.mem.Allocator, input: dissociate_packages.DissociatePackagesInput, options: dissociate_packages.Options) !dissociate_packages.DissociatePackagesOutput {
+    pub fn dissociatePackages(self: *Self, allocator: std.mem.Allocator, input: dissociate_packages.DissociatePackagesInput, options: CallOptions) !dissociate_packages.DissociatePackagesOutput {
         return dissociate_packages.execute(self, allocator, input, options);
     }
 
     /// Retrieves the configuration and status of an existing OpenSearch
     /// application.
-    pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: get_application.Options) !get_application.GetApplicationOutput {
+    pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: CallOptions) !get_application.GetApplicationOutput {
         return get_application.execute(self, allocator, input, options);
     }
 
     /// Returns a map of OpenSearch or Elasticsearch versions and the versions you
     /// can upgrade
     /// them to.
-    pub fn getCompatibleVersions(self: *Self, allocator: std.mem.Allocator, input: get_compatible_versions.GetCompatibleVersionsInput, options: get_compatible_versions.Options) !get_compatible_versions.GetCompatibleVersionsOutput {
+    pub fn getCompatibleVersions(self: *Self, allocator: std.mem.Allocator, input: get_compatible_versions.GetCompatibleVersionsInput, options: CallOptions) !get_compatible_versions.GetCompatibleVersionsOutput {
         return get_compatible_versions.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a direct query data source.
-    pub fn getDataSource(self: *Self, allocator: std.mem.Allocator, input: get_data_source.GetDataSourceInput, options: get_data_source.Options) !get_data_source.GetDataSourceOutput {
+    pub fn getDataSource(self: *Self, allocator: std.mem.Allocator, input: get_data_source.GetDataSourceInput, options: CallOptions) !get_data_source.GetDataSourceOutput {
         return get_data_source.execute(self, allocator, input, options);
     }
 
@@ -461,26 +462,26 @@ pub const Client = struct {
     /// If the default application isn't set, the operation returns a resource not
     /// found
     /// error.
-    pub fn getDefaultApplicationSetting(self: *Self, allocator: std.mem.Allocator, input: get_default_application_setting.GetDefaultApplicationSettingInput, options: get_default_application_setting.Options) !get_default_application_setting.GetDefaultApplicationSettingOutput {
+    pub fn getDefaultApplicationSetting(self: *Self, allocator: std.mem.Allocator, input: get_default_application_setting.GetDefaultApplicationSettingInput, options: CallOptions) !get_default_application_setting.GetDefaultApplicationSettingOutput {
         return get_default_application_setting.execute(self, allocator, input, options);
     }
 
     /// Returns detailed configuration information for a specific direct query data
     /// source in
     /// Amazon OpenSearch Service.
-    pub fn getDirectQueryDataSource(self: *Self, allocator: std.mem.Allocator, input: get_direct_query_data_source.GetDirectQueryDataSourceInput, options: get_direct_query_data_source.Options) !get_direct_query_data_source.GetDirectQueryDataSourceOutput {
+    pub fn getDirectQueryDataSource(self: *Self, allocator: std.mem.Allocator, input: get_direct_query_data_source.GetDirectQueryDataSourceInput, options: CallOptions) !get_direct_query_data_source.GetDirectQueryDataSourceOutput {
         return get_direct_query_data_source.execute(self, allocator, input, options);
     }
 
     /// The status of the maintenance action.
-    pub fn getDomainMaintenanceStatus(self: *Self, allocator: std.mem.Allocator, input: get_domain_maintenance_status.GetDomainMaintenanceStatusInput, options: get_domain_maintenance_status.Options) !get_domain_maintenance_status.GetDomainMaintenanceStatusOutput {
+    pub fn getDomainMaintenanceStatus(self: *Self, allocator: std.mem.Allocator, input: get_domain_maintenance_status.GetDomainMaintenanceStatusInput, options: CallOptions) !get_domain_maintenance_status.GetDomainMaintenanceStatusOutput {
         return get_domain_maintenance_status.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about an OpenSearch index including its schema and
     /// semantic enrichment configuration. Use this operation to view the current
     /// index structure and semantic search settings.
-    pub fn getIndex(self: *Self, allocator: std.mem.Allocator, input: get_index.GetIndexInput, options: get_index.Options) !get_index.GetIndexOutput {
+    pub fn getIndex(self: *Self, allocator: std.mem.Allocator, input: get_index.GetIndexInput, options: CallOptions) !get_index.GetIndexOutput {
         return get_index.execute(self, allocator, input, options);
     }
 
@@ -491,26 +492,26 @@ pub const Client = struct {
     /// information, see [Custom packages for Amazon
     /// OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
-    pub fn getPackageVersionHistory(self: *Self, allocator: std.mem.Allocator, input: get_package_version_history.GetPackageVersionHistoryInput, options: get_package_version_history.Options) !get_package_version_history.GetPackageVersionHistoryOutput {
+    pub fn getPackageVersionHistory(self: *Self, allocator: std.mem.Allocator, input: get_package_version_history.GetPackageVersionHistoryInput, options: CallOptions) !get_package_version_history.GetPackageVersionHistoryOutput {
         return get_package_version_history.execute(self, allocator, input, options);
     }
 
     /// Retrieves the complete history of the last 10 upgrades performed on an
     /// Amazon OpenSearch
     /// Service domain.
-    pub fn getUpgradeHistory(self: *Self, allocator: std.mem.Allocator, input: get_upgrade_history.GetUpgradeHistoryInput, options: get_upgrade_history.Options) !get_upgrade_history.GetUpgradeHistoryOutput {
+    pub fn getUpgradeHistory(self: *Self, allocator: std.mem.Allocator, input: get_upgrade_history.GetUpgradeHistoryInput, options: CallOptions) !get_upgrade_history.GetUpgradeHistoryOutput {
         return get_upgrade_history.execute(self, allocator, input, options);
     }
 
     /// Returns the most recent status of the last upgrade or upgrade eligibility
     /// check performed on
     /// an Amazon OpenSearch Service domain.
-    pub fn getUpgradeStatus(self: *Self, allocator: std.mem.Allocator, input: get_upgrade_status.GetUpgradeStatusInput, options: get_upgrade_status.Options) !get_upgrade_status.GetUpgradeStatusOutput {
+    pub fn getUpgradeStatus(self: *Self, allocator: std.mem.Allocator, input: get_upgrade_status.GetUpgradeStatusInput, options: CallOptions) !get_upgrade_status.GetUpgradeStatusOutput {
         return get_upgrade_status.execute(self, allocator, input, options);
     }
 
     /// Lists all OpenSearch applications under your account.
-    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: list_applications.Options) !list_applications.ListApplicationsOutput {
+    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: CallOptions) !list_applications.ListApplicationsOutput {
         return list_applications.execute(self, allocator, input, options);
     }
 
@@ -519,26 +520,26 @@ pub const Client = struct {
     /// more information, see [Working with
     /// Amazon OpenSearch Service direct queries with Amazon
     /// S3](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3.html).
-    pub fn listDataSources(self: *Self, allocator: std.mem.Allocator, input: list_data_sources.ListDataSourcesInput, options: list_data_sources.Options) !list_data_sources.ListDataSourcesOutput {
+    pub fn listDataSources(self: *Self, allocator: std.mem.Allocator, input: list_data_sources.ListDataSourcesInput, options: CallOptions) !list_data_sources.ListDataSourcesOutput {
         return list_data_sources.execute(self, allocator, input, options);
     }
 
     /// Lists an inventory of all the direct query data sources that you have
     /// configured
     /// within Amazon OpenSearch Service.
-    pub fn listDirectQueryDataSources(self: *Self, allocator: std.mem.Allocator, input: list_direct_query_data_sources.ListDirectQueryDataSourcesInput, options: list_direct_query_data_sources.Options) !list_direct_query_data_sources.ListDirectQueryDataSourcesOutput {
+    pub fn listDirectQueryDataSources(self: *Self, allocator: std.mem.Allocator, input: list_direct_query_data_sources.ListDirectQueryDataSourcesInput, options: CallOptions) !list_direct_query_data_sources.ListDirectQueryDataSourcesOutput {
         return list_direct_query_data_sources.execute(self, allocator, input, options);
     }
 
     /// A list of maintenance actions for the domain.
-    pub fn listDomainMaintenances(self: *Self, allocator: std.mem.Allocator, input: list_domain_maintenances.ListDomainMaintenancesInput, options: list_domain_maintenances.Options) !list_domain_maintenances.ListDomainMaintenancesOutput {
+    pub fn listDomainMaintenances(self: *Self, allocator: std.mem.Allocator, input: list_domain_maintenances.ListDomainMaintenancesInput, options: CallOptions) !list_domain_maintenances.ListDomainMaintenancesOutput {
         return list_domain_maintenances.execute(self, allocator, input, options);
     }
 
     /// Returns the names of all Amazon OpenSearch Service domains owned by the
     /// current user
     /// in the active Region.
-    pub fn listDomainNames(self: *Self, allocator: std.mem.Allocator, input: list_domain_names.ListDomainNamesInput, options: list_domain_names.Options) !list_domain_names.ListDomainNamesOutput {
+    pub fn listDomainNames(self: *Self, allocator: std.mem.Allocator, input: list_domain_names.ListDomainNamesInput, options: CallOptions) !list_domain_names.ListDomainNamesOutput {
         return list_domain_names.execute(self, allocator, input, options);
     }
 
@@ -547,13 +548,13 @@ pub const Client = struct {
     /// information, see [Custom packages
     /// for Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
-    pub fn listDomainsForPackage(self: *Self, allocator: std.mem.Allocator, input: list_domains_for_package.ListDomainsForPackageInput, options: list_domains_for_package.Options) !list_domains_for_package.ListDomainsForPackageOutput {
+    pub fn listDomainsForPackage(self: *Self, allocator: std.mem.Allocator, input: list_domains_for_package.ListDomainsForPackageInput, options: CallOptions) !list_domains_for_package.ListDomainsForPackageOutput {
         return list_domains_for_package.execute(self, allocator, input, options);
     }
 
     /// Lists all instance types and available features for a given OpenSearch or
     /// Elasticsearch version.
-    pub fn listInstanceTypeDetails(self: *Self, allocator: std.mem.Allocator, input: list_instance_type_details.ListInstanceTypeDetailsInput, options: list_instance_type_details.Options) !list_instance_type_details.ListInstanceTypeDetailsOutput {
+    pub fn listInstanceTypeDetails(self: *Self, allocator: std.mem.Allocator, input: list_instance_type_details.ListInstanceTypeDetailsInput, options: CallOptions) !list_instance_type_details.ListInstanceTypeDetailsOutput {
         return list_instance_type_details.execute(self, allocator, input, options);
     }
 
@@ -562,7 +563,7 @@ pub const Client = struct {
     /// information, see [Custom packages
     /// for Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
-    pub fn listPackagesForDomain(self: *Self, allocator: std.mem.Allocator, input: list_packages_for_domain.ListPackagesForDomainInput, options: list_packages_for_domain.Options) !list_packages_for_domain.ListPackagesForDomainOutput {
+    pub fn listPackagesForDomain(self: *Self, allocator: std.mem.Allocator, input: list_packages_for_domain.ListPackagesForDomainInput, options: CallOptions) !list_packages_for_domain.ListPackagesForDomainOutput {
         return list_packages_for_domain.execute(self, allocator, input, options);
     }
 
@@ -571,7 +572,7 @@ pub const Client = struct {
     /// changes can be [service
     /// software
     /// updates](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html) or [blue/green Auto-Tune enhancements](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types).
-    pub fn listScheduledActions(self: *Self, allocator: std.mem.Allocator, input: list_scheduled_actions.ListScheduledActionsInput, options: list_scheduled_actions.Options) !list_scheduled_actions.ListScheduledActionsOutput {
+    pub fn listScheduledActions(self: *Self, allocator: std.mem.Allocator, input: list_scheduled_actions.ListScheduledActionsInput, options: CallOptions) !list_scheduled_actions.ListScheduledActionsOutput {
         return list_scheduled_actions.execute(self, allocator, input, options);
     }
 
@@ -579,14 +580,14 @@ pub const Client = struct {
     /// source, or
     /// application. For more information, see [Tagging Amazon OpenSearch Service
     /// resources](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html).
-    pub fn listTags(self: *Self, allocator: std.mem.Allocator, input: list_tags.ListTagsInput, options: list_tags.Options) !list_tags.ListTagsOutput {
+    pub fn listTags(self: *Self, allocator: std.mem.Allocator, input: list_tags.ListTagsInput, options: CallOptions) !list_tags.ListTagsOutput {
         return list_tags.execute(self, allocator, input, options);
     }
 
     /// Lists all versions of OpenSearch and Elasticsearch that Amazon OpenSearch
     /// Service
     /// supports.
-    pub fn listVersions(self: *Self, allocator: std.mem.Allocator, input: list_versions.ListVersionsInput, options: list_versions.Options) !list_versions.ListVersionsOutput {
+    pub fn listVersions(self: *Self, allocator: std.mem.Allocator, input: list_versions.ListVersionsInput, options: CallOptions) !list_versions.ListVersionsOutput {
         return list_versions.execute(self, allocator, input, options);
     }
 
@@ -595,25 +596,25 @@ pub const Client = struct {
     /// access a given Amazon OpenSearch Service domain through the use of an
     /// interface VPC
     /// endpoint.
-    pub fn listVpcEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: list_vpc_endpoint_access.ListVpcEndpointAccessInput, options: list_vpc_endpoint_access.Options) !list_vpc_endpoint_access.ListVpcEndpointAccessOutput {
+    pub fn listVpcEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: list_vpc_endpoint_access.ListVpcEndpointAccessInput, options: CallOptions) !list_vpc_endpoint_access.ListVpcEndpointAccessOutput {
         return list_vpc_endpoint_access.execute(self, allocator, input, options);
     }
 
     /// Retrieves all Amazon OpenSearch Service-managed VPC endpoints in the current
     /// Amazon Web Services account and Region.
-    pub fn listVpcEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_vpc_endpoints.ListVpcEndpointsInput, options: list_vpc_endpoints.Options) !list_vpc_endpoints.ListVpcEndpointsOutput {
+    pub fn listVpcEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_vpc_endpoints.ListVpcEndpointsInput, options: CallOptions) !list_vpc_endpoints.ListVpcEndpointsOutput {
         return list_vpc_endpoints.execute(self, allocator, input, options);
     }
 
     /// Retrieves all Amazon OpenSearch Service-managed VPC endpoints associated
     /// with a
     /// particular domain.
-    pub fn listVpcEndpointsForDomain(self: *Self, allocator: std.mem.Allocator, input: list_vpc_endpoints_for_domain.ListVpcEndpointsForDomainInput, options: list_vpc_endpoints_for_domain.Options) !list_vpc_endpoints_for_domain.ListVpcEndpointsForDomainOutput {
+    pub fn listVpcEndpointsForDomain(self: *Self, allocator: std.mem.Allocator, input: list_vpc_endpoints_for_domain.ListVpcEndpointsForDomainInput, options: CallOptions) !list_vpc_endpoints_for_domain.ListVpcEndpointsForDomainOutput {
         return list_vpc_endpoints_for_domain.execute(self, allocator, input, options);
     }
 
     /// Allows you to purchase Amazon OpenSearch Service Reserved Instances.
-    pub fn purchaseReservedInstanceOffering(self: *Self, allocator: std.mem.Allocator, input: purchase_reserved_instance_offering.PurchaseReservedInstanceOfferingInput, options: purchase_reserved_instance_offering.Options) !purchase_reserved_instance_offering.PurchaseReservedInstanceOfferingOutput {
+    pub fn purchaseReservedInstanceOffering(self: *Self, allocator: std.mem.Allocator, input: purchase_reserved_instance_offering.PurchaseReservedInstanceOfferingInput, options: CallOptions) !purchase_reserved_instance_offering.PurchaseReservedInstanceOfferingOutput {
         return purchase_reserved_instance_offering.execute(self, allocator, input, options);
     }
 
@@ -623,14 +624,14 @@ pub const Client = struct {
     /// operation to get the current default and then call the
     /// `PutDefaultApplicationSetting` with the current applications ARN and the
     /// `setAsDefault` parameter set to `false`.
-    pub fn putDefaultApplicationSetting(self: *Self, allocator: std.mem.Allocator, input: put_default_application_setting.PutDefaultApplicationSettingInput, options: put_default_application_setting.Options) !put_default_application_setting.PutDefaultApplicationSettingOutput {
+    pub fn putDefaultApplicationSetting(self: *Self, allocator: std.mem.Allocator, input: put_default_application_setting.PutDefaultApplicationSettingInput, options: CallOptions) !put_default_application_setting.PutDefaultApplicationSettingOutput {
         return put_default_application_setting.execute(self, allocator, input, options);
     }
 
     /// Allows the remote Amazon OpenSearch Service domain owner to reject an
     /// inbound
     /// cross-cluster connection request.
-    pub fn rejectInboundConnection(self: *Self, allocator: std.mem.Allocator, input: reject_inbound_connection.RejectInboundConnectionInput, options: reject_inbound_connection.Options) !reject_inbound_connection.RejectInboundConnectionOutput {
+    pub fn rejectInboundConnection(self: *Self, allocator: std.mem.Allocator, input: reject_inbound_connection.RejectInboundConnectionInput, options: CallOptions) !reject_inbound_connection.RejectInboundConnectionOutput {
         return reject_inbound_connection.execute(self, allocator, input, options);
     }
 
@@ -639,14 +640,14 @@ pub const Client = struct {
     /// source, or application. For more information, see [ Tagging Amazon
     /// OpenSearch Service
     /// resources](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains.html#managedomains-awsresorcetagging).
-    pub fn removeTags(self: *Self, allocator: std.mem.Allocator, input: remove_tags.RemoveTagsInput, options: remove_tags.Options) !remove_tags.RemoveTagsOutput {
+    pub fn removeTags(self: *Self, allocator: std.mem.Allocator, input: remove_tags.RemoveTagsInput, options: CallOptions) !remove_tags.RemoveTagsOutput {
         return remove_tags.execute(self, allocator, input, options);
     }
 
     /// Revokes access to an Amazon OpenSearch Service domain that was provided
     /// through an
     /// interface VPC endpoint.
-    pub fn revokeVpcEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: revoke_vpc_endpoint_access.RevokeVpcEndpointAccessInput, options: revoke_vpc_endpoint_access.Options) !revoke_vpc_endpoint_access.RevokeVpcEndpointAccessOutput {
+    pub fn revokeVpcEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: revoke_vpc_endpoint_access.RevokeVpcEndpointAccessInput, options: CallOptions) !revoke_vpc_endpoint_access.RevokeVpcEndpointAccessOutput {
         return revoke_vpc_endpoint_access.execute(self, allocator, input, options);
     }
 
@@ -655,7 +656,7 @@ pub const Client = struct {
     /// node reboot, an Opensearch or Elasticsearch process restart, or a Dashboard
     /// or Kibana
     /// restart.
-    pub fn startDomainMaintenance(self: *Self, allocator: std.mem.Allocator, input: start_domain_maintenance.StartDomainMaintenanceInput, options: start_domain_maintenance.Options) !start_domain_maintenance.StartDomainMaintenanceOutput {
+    pub fn startDomainMaintenance(self: *Self, allocator: std.mem.Allocator, input: start_domain_maintenance.StartDomainMaintenanceInput, options: CallOptions) !start_domain_maintenance.StartDomainMaintenanceOutput {
         return start_domain_maintenance.execute(self, allocator, input, options);
     }
 
@@ -664,34 +665,34 @@ pub const Client = struct {
     /// information, see [Service
     /// software updates in Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html).
-    pub fn startServiceSoftwareUpdate(self: *Self, allocator: std.mem.Allocator, input: start_service_software_update.StartServiceSoftwareUpdateInput, options: start_service_software_update.Options) !start_service_software_update.StartServiceSoftwareUpdateOutput {
+    pub fn startServiceSoftwareUpdate(self: *Self, allocator: std.mem.Allocator, input: start_service_software_update.StartServiceSoftwareUpdateInput, options: CallOptions) !start_service_software_update.StartServiceSoftwareUpdateOutput {
         return start_service_software_update.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration and settings of an existing OpenSearch
     /// application.
-    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: update_application.Options) !update_application.UpdateApplicationOutput {
+    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: CallOptions) !update_application.UpdateApplicationOutput {
         return update_application.execute(self, allocator, input, options);
     }
 
     /// Updates a direct-query data source. For more information, see [Working
     /// with Amazon OpenSearch Service data source integrations with Amazon
     /// S3](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3-creating.html).
-    pub fn updateDataSource(self: *Self, allocator: std.mem.Allocator, input: update_data_source.UpdateDataSourceInput, options: update_data_source.Options) !update_data_source.UpdateDataSourceOutput {
+    pub fn updateDataSource(self: *Self, allocator: std.mem.Allocator, input: update_data_source.UpdateDataSourceInput, options: CallOptions) !update_data_source.UpdateDataSourceOutput {
         return update_data_source.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration or properties of an existing direct query data
     /// source in
     /// Amazon OpenSearch Service.
-    pub fn updateDirectQueryDataSource(self: *Self, allocator: std.mem.Allocator, input: update_direct_query_data_source.UpdateDirectQueryDataSourceInput, options: update_direct_query_data_source.Options) !update_direct_query_data_source.UpdateDirectQueryDataSourceOutput {
+    pub fn updateDirectQueryDataSource(self: *Self, allocator: std.mem.Allocator, input: update_direct_query_data_source.UpdateDirectQueryDataSourceInput, options: CallOptions) !update_direct_query_data_source.UpdateDirectQueryDataSourceOutput {
         return update_direct_query_data_source.execute(self, allocator, input, options);
     }
 
     /// Modifies the cluster configuration of the specified Amazon OpenSearch
     /// Service
     /// domain.
-    pub fn updateDomainConfig(self: *Self, allocator: std.mem.Allocator, input: update_domain_config.UpdateDomainConfigInput, options: update_domain_config.Options) !update_domain_config.UpdateDomainConfigOutput {
+    pub fn updateDomainConfig(self: *Self, allocator: std.mem.Allocator, input: update_domain_config.UpdateDomainConfigInput, options: CallOptions) !update_domain_config.UpdateDomainConfigOutput {
         return update_domain_config.execute(self, allocator, input, options);
     }
 
@@ -699,7 +700,7 @@ pub const Client = struct {
     /// configuration. This operation allows modification of field mappings and
     /// semantic search settings for text fields. Changes to semantic enrichment
     /// configuration will apply to newly ingested documents.
-    pub fn updateIndex(self: *Self, allocator: std.mem.Allocator, input: update_index.UpdateIndexInput, options: update_index.Options) !update_index.UpdateIndexOutput {
+    pub fn updateIndex(self: *Self, allocator: std.mem.Allocator, input: update_index.UpdateIndexInput, options: CallOptions) !update_index.UpdateIndexOutput {
         return update_index.execute(self, allocator, input, options);
     }
 
@@ -707,14 +708,14 @@ pub const Client = struct {
     /// information, see [Custom packages
     /// for Amazon OpenSearch
     /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
-    pub fn updatePackage(self: *Self, allocator: std.mem.Allocator, input: update_package.UpdatePackageInput, options: update_package.Options) !update_package.UpdatePackageOutput {
+    pub fn updatePackage(self: *Self, allocator: std.mem.Allocator, input: update_package.UpdatePackageInput, options: CallOptions) !update_package.UpdatePackageOutput {
         return update_package.execute(self, allocator, input, options);
     }
 
     /// Updates the scope of a package. Scope of the package defines users who can
     /// view and
     /// associate a package.
-    pub fn updatePackageScope(self: *Self, allocator: std.mem.Allocator, input: update_package_scope.UpdatePackageScopeInput, options: update_package_scope.Options) !update_package_scope.UpdatePackageScopeOutput {
+    pub fn updatePackageScope(self: *Self, allocator: std.mem.Allocator, input: update_package_scope.UpdatePackageScopeInput, options: CallOptions) !update_package_scope.UpdatePackageScopeOutput {
         return update_package_scope.execute(self, allocator, input, options);
     }
 
@@ -723,12 +724,12 @@ pub const Client = struct {
     /// a scheduled [service
     /// software
     /// update](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html) or a [blue/green Auto-Tune enhancement](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types).
-    pub fn updateScheduledAction(self: *Self, allocator: std.mem.Allocator, input: update_scheduled_action.UpdateScheduledActionInput, options: update_scheduled_action.Options) !update_scheduled_action.UpdateScheduledActionOutput {
+    pub fn updateScheduledAction(self: *Self, allocator: std.mem.Allocator, input: update_scheduled_action.UpdateScheduledActionInput, options: CallOptions) !update_scheduled_action.UpdateScheduledActionOutput {
         return update_scheduled_action.execute(self, allocator, input, options);
     }
 
     /// Modifies an Amazon OpenSearch Service-managed interface VPC endpoint.
-    pub fn updateVpcEndpoint(self: *Self, allocator: std.mem.Allocator, input: update_vpc_endpoint.UpdateVpcEndpointInput, options: update_vpc_endpoint.Options) !update_vpc_endpoint.UpdateVpcEndpointOutput {
+    pub fn updateVpcEndpoint(self: *Self, allocator: std.mem.Allocator, input: update_vpc_endpoint.UpdateVpcEndpointInput, options: CallOptions) !update_vpc_endpoint.UpdateVpcEndpointOutput {
         return update_vpc_endpoint.execute(self, allocator, input, options);
     }
 
@@ -736,7 +737,7 @@ pub const Client = struct {
     /// perform an
     /// upgrade eligibility check to a compatible version of OpenSearch or
     /// Elasticsearch.
-    pub fn upgradeDomain(self: *Self, allocator: std.mem.Allocator, input: upgrade_domain.UpgradeDomainInput, options: upgrade_domain.Options) !upgrade_domain.UpgradeDomainOutput {
+    pub fn upgradeDomain(self: *Self, allocator: std.mem.Allocator, input: upgrade_domain.UpgradeDomainInput, options: CallOptions) !upgrade_domain.UpgradeDomainOutput {
         return upgrade_domain.execute(self, allocator, input, options);
     }
 

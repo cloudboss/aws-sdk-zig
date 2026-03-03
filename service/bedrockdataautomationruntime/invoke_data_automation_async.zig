@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Blueprint = @import("blueprint.zig").Blueprint;
 const DataAutomationConfiguration = @import("data_automation_configuration.zig").DataAutomationConfiguration;
@@ -61,11 +62,7 @@ pub const InvokeDataAutomationAsyncOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeDataAutomationAsyncInput, options: Options) !InvokeDataAutomationAsyncOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeDataAutomationAsyncInput, options: CallOptions) !InvokeDataAutomationAsyncOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

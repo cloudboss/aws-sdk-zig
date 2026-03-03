@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AssetFilterConfiguration = @import("asset_filter_configuration.zig").AssetFilterConfiguration;
 const FilterStatus = @import("filter_status.zig").FilterStatus;
@@ -86,11 +87,7 @@ pub const CreateAssetFilterOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAssetFilterInput, options: Options) !CreateAssetFilterOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAssetFilterInput, options: CallOptions) !CreateAssetFilterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

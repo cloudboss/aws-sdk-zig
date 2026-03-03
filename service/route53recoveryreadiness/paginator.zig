@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_cell_readiness_summary = @import("get_cell_readiness_summary.zig");
@@ -23,7 +24,7 @@ pub const GetCellReadinessSummaryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_cell_readiness_summary.Options) !get_cell_readiness_summary.GetCellReadinessSummaryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_cell_readiness_summary.GetCellReadinessSummaryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -64,7 +65,7 @@ pub const GetReadinessCheckResourceStatusPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_readiness_check_resource_status.Options) !get_readiness_check_resource_status.GetReadinessCheckResourceStatusOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_readiness_check_resource_status.GetReadinessCheckResourceStatusOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -105,7 +106,7 @@ pub const GetReadinessCheckStatusPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_readiness_check_status.Options) !get_readiness_check_status.GetReadinessCheckStatusOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_readiness_check_status.GetReadinessCheckStatusOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -146,7 +147,7 @@ pub const GetRecoveryGroupReadinessSummaryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_recovery_group_readiness_summary.Options) !get_recovery_group_readiness_summary.GetRecoveryGroupReadinessSummaryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_recovery_group_readiness_summary.GetRecoveryGroupReadinessSummaryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -187,7 +188,7 @@ pub const ListCellsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_cells.Options) !list_cells.ListCellsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_cells.ListCellsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -228,7 +229,7 @@ pub const ListCrossAccountAuthorizationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_cross_account_authorizations.Options) !list_cross_account_authorizations.ListCrossAccountAuthorizationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_cross_account_authorizations.ListCrossAccountAuthorizationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -269,7 +270,7 @@ pub const ListReadinessChecksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_readiness_checks.Options) !list_readiness_checks.ListReadinessChecksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_readiness_checks.ListReadinessChecksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -310,7 +311,7 @@ pub const ListRecoveryGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_recovery_groups.Options) !list_recovery_groups.ListRecoveryGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_recovery_groups.ListRecoveryGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -351,7 +352,7 @@ pub const ListResourceSetsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resource_sets.Options) !list_resource_sets.ListResourceSetsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resource_sets.ListResourceSetsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -392,7 +393,7 @@ pub const ListRulesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_rules.Options) !list_rules.ListRulesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_rules.ListRulesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

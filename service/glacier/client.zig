@@ -34,6 +34,7 @@ const set_vault_access_policy = @import("set_vault_access_policy.zig");
 const set_vault_notifications = @import("set_vault_notifications.zig");
 const upload_archive = @import("upload_archive.zig");
 const upload_multipart_part = @import("upload_multipart_part.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -93,7 +94,7 @@ pub const Client = struct {
     /// Amazon
     /// Glacier](https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html) and [Abort Multipart
     /// Upload](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html) in the *Amazon Glacier Developer Guide*.
-    pub fn abortMultipartUpload(self: *Self, allocator: std.mem.Allocator, input: abort_multipart_upload.AbortMultipartUploadInput, options: abort_multipart_upload.Options) !abort_multipart_upload.AbortMultipartUploadOutput {
+    pub fn abortMultipartUpload(self: *Self, allocator: std.mem.Allocator, input: abort_multipart_upload.AbortMultipartUploadInput, options: CallOptions) !abort_multipart_upload.AbortMultipartUploadOutput {
         return abort_multipart_upload.execute(self, allocator, input, options);
     }
 
@@ -122,7 +123,7 @@ pub const Client = struct {
     /// times, if the vault lock is in the `InProgress` state or if there is no
     /// policy
     /// associated with the vault.
-    pub fn abortVaultLock(self: *Self, allocator: std.mem.Allocator, input: abort_vault_lock.AbortVaultLockInput, options: abort_vault_lock.Options) !abort_vault_lock.AbortVaultLockOutput {
+    pub fn abortVaultLock(self: *Self, allocator: std.mem.Allocator, input: abort_vault_lock.AbortVaultLockInput, options: CallOptions) !abort_vault_lock.AbortVaultLockOutput {
         return abort_vault_lock.execute(self, allocator, input, options);
     }
 
@@ -136,7 +137,7 @@ pub const Client = struct {
     /// will be overwritten. For more information about tags, see [Tagging Amazon
     /// Glacier
     /// Resources](https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html).
-    pub fn addTagsToVault(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_vault.AddTagsToVaultInput, options: add_tags_to_vault.Options) !add_tags_to_vault.AddTagsToVaultOutput {
+    pub fn addTagsToVault(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_vault.AddTagsToVaultInput, options: CallOptions) !add_tags_to_vault.AddTagsToVaultOutput {
         return add_tags_to_vault.execute(self, allocator, input, options);
     }
 
@@ -205,7 +206,7 @@ pub const Client = struct {
     /// Parts (Multipart
     /// Upload)](https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html) and [Complete Multipart
     /// Upload](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-complete-upload.html) in the *Amazon Glacier Developer Guide*.
-    pub fn completeMultipartUpload(self: *Self, allocator: std.mem.Allocator, input: complete_multipart_upload.CompleteMultipartUploadInput, options: complete_multipart_upload.Options) !complete_multipart_upload.CompleteMultipartUploadOutput {
+    pub fn completeMultipartUpload(self: *Self, allocator: std.mem.Allocator, input: complete_multipart_upload.CompleteMultipartUploadInput, options: CallOptions) !complete_multipart_upload.CompleteMultipartUploadOutput {
         return complete_multipart_upload.execute(self, allocator, input, options);
     }
 
@@ -230,7 +231,7 @@ pub const Client = struct {
     /// in the
     /// `InProgress` state, the operation throws an `InvalidParameter`
     /// error.
-    pub fn completeVaultLock(self: *Self, allocator: std.mem.Allocator, input: complete_vault_lock.CompleteVaultLockInput, options: complete_vault_lock.Options) !complete_vault_lock.CompleteVaultLockOutput {
+    pub fn completeVaultLock(self: *Self, allocator: std.mem.Allocator, input: complete_vault_lock.CompleteVaultLockInput, options: CallOptions) !complete_vault_lock.CompleteVaultLockOutput {
         return complete_vault_lock.execute(self, allocator, input, options);
     }
 
@@ -264,7 +265,7 @@ pub const Client = struct {
     /// Amazon
     /// Glacier](https://docs.aws.amazon.com/amazonglacier/latest/dev/creating-vaults.html) and [Create Vault ](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-put.html) in the
     /// *Amazon Glacier Developer Guide*.
-    pub fn createVault(self: *Self, allocator: std.mem.Allocator, input: create_vault.CreateVaultInput, options: create_vault.Options) !create_vault.CreateVaultOutput {
+    pub fn createVault(self: *Self, allocator: std.mem.Allocator, input: create_vault.CreateVaultInput, options: CallOptions) !create_vault.CreateVaultOutput {
         return create_vault.execute(self, allocator, input, options);
     }
 
@@ -304,7 +305,7 @@ pub const Client = struct {
     /// in Amazon
     /// Glacier](https://docs.aws.amazon.com/amazonglacier/latest/dev/deleting-an-archive.html) and [Delete Archive](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-delete.html) in the
     /// *Amazon Glacier Developer Guide*.
-    pub fn deleteArchive(self: *Self, allocator: std.mem.Allocator, input: delete_archive.DeleteArchiveInput, options: delete_archive.Options) !delete_archive.DeleteArchiveOutput {
+    pub fn deleteArchive(self: *Self, allocator: std.mem.Allocator, input: delete_archive.DeleteArchiveInput, options: CallOptions) !delete_archive.DeleteArchiveOutput {
         return delete_archive.execute(self, allocator, input, options);
     }
 
@@ -338,7 +339,7 @@ pub const Client = struct {
     /// Amazon
     /// Glacier](https://docs.aws.amazon.com/amazonglacier/latest/dev/deleting-vaults.html) and [Delete Vault ](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-delete.html) in the
     /// *Amazon Glacier Developer Guide*.
-    pub fn deleteVault(self: *Self, allocator: std.mem.Allocator, input: delete_vault.DeleteVaultInput, options: delete_vault.Options) !delete_vault.DeleteVaultOutput {
+    pub fn deleteVault(self: *Self, allocator: std.mem.Allocator, input: delete_vault.DeleteVaultInput, options: CallOptions) !delete_vault.DeleteVaultOutput {
         return delete_vault.execute(self, allocator, input, options);
     }
 
@@ -356,7 +357,7 @@ pub const Client = struct {
     /// policies, see
     /// [Amazon Glacier Access Control with Vault Access
     /// Policies](https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html).
-    pub fn deleteVaultAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_vault_access_policy.DeleteVaultAccessPolicyInput, options: delete_vault_access_policy.Options) !delete_vault_access_policy.DeleteVaultAccessPolicyOutput {
+    pub fn deleteVaultAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_vault_access_policy.DeleteVaultAccessPolicyInput, options: CallOptions) !delete_vault_access_policy.DeleteVaultAccessPolicyOutput {
         return delete_vault_access_policy.execute(self, allocator, input, options);
     }
 
@@ -383,7 +384,7 @@ pub const Client = struct {
     /// Glacier](https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html) and [Delete Vault
     /// Notification Configuration
     /// ](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-delete.html) in the Amazon Glacier Developer Guide.
-    pub fn deleteVaultNotifications(self: *Self, allocator: std.mem.Allocator, input: delete_vault_notifications.DeleteVaultNotificationsInput, options: delete_vault_notifications.Options) !delete_vault_notifications.DeleteVaultNotificationsOutput {
+    pub fn deleteVaultNotifications(self: *Self, allocator: std.mem.Allocator, input: delete_vault_notifications.DeleteVaultNotificationsInput, options: CallOptions) !delete_vault_notifications.DeleteVaultNotificationsOutput {
         return delete_vault_notifications.execute(self, allocator, input, options);
     }
 
@@ -418,7 +419,7 @@ pub const Client = struct {
     /// see the documentation for the underlying REST API [Describe
     /// Job](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-describe-job-get.html)
     /// in the *Amazon Glacier Developer Guide*.
-    pub fn describeJob(self: *Self, allocator: std.mem.Allocator, input: describe_job.DescribeJobInput, options: describe_job.Options) !describe_job.DescribeJobOutput {
+    pub fn describeJob(self: *Self, allocator: std.mem.Allocator, input: describe_job.DescribeJobInput, options: CallOptions) !describe_job.DescribeJobOutput {
         return describe_job.execute(self, allocator, input, options);
     }
 
@@ -454,7 +455,7 @@ pub const Client = struct {
     /// Amazon
     /// Glacier](https://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html) and [Describe Vault ](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-get.html) in the
     /// *Amazon Glacier Developer Guide*.
-    pub fn describeVault(self: *Self, allocator: std.mem.Allocator, input: describe_vault.DescribeVaultInput, options: describe_vault.Options) !describe_vault.DescribeVaultOutput {
+    pub fn describeVault(self: *Self, allocator: std.mem.Allocator, input: describe_vault.DescribeVaultInput, options: CallOptions) !describe_vault.DescribeVaultOutput {
         return describe_vault.execute(self, allocator, input, options);
     }
 
@@ -464,7 +465,7 @@ pub const Client = struct {
     /// policies, see
     /// [Amazon Glacier Data Retrieval
     /// Policies](https://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html).
-    pub fn getDataRetrievalPolicy(self: *Self, allocator: std.mem.Allocator, input: get_data_retrieval_policy.GetDataRetrievalPolicyInput, options: get_data_retrieval_policy.Options) !get_data_retrieval_policy.GetDataRetrievalPolicyOutput {
+    pub fn getDataRetrievalPolicy(self: *Self, allocator: std.mem.Allocator, input: get_data_retrieval_policy.GetDataRetrievalPolicyInput, options: CallOptions) !get_data_retrieval_policy.GetDataRetrievalPolicyOutput {
         return get_data_retrieval_policy.execute(self, allocator, input, options);
     }
 
@@ -529,7 +530,7 @@ pub const Client = struct {
     /// Vault
     /// Inventory](https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html), [Downloading an
     /// Archive](https://docs.aws.amazon.com/amazonglacier/latest/dev/downloading-an-archive.html), and [Get Job Output ](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-job-output-get.html)
-    pub fn getJobOutput(self: *Self, allocator: std.mem.Allocator, input: get_job_output.GetJobOutputInput, options: get_job_output.Options) !get_job_output.GetJobOutputOutput {
+    pub fn getJobOutput(self: *Self, allocator: std.mem.Allocator, input: get_job_output.GetJobOutputInput, options: CallOptions) !get_job_output.GetJobOutputOutput {
         return get_job_output.execute(self, allocator, input, options);
     }
 
@@ -542,7 +543,7 @@ pub const Client = struct {
     /// access policies, see [Amazon Glacier Access Control
     /// with Vault Access
     /// Policies](https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html).
-    pub fn getVaultAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: get_vault_access_policy.GetVaultAccessPolicyInput, options: get_vault_access_policy.Options) !get_vault_access_policy.GetVaultAccessPolicyOutput {
+    pub fn getVaultAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: get_vault_access_policy.GetVaultAccessPolicyInput, options: CallOptions) !get_vault_access_policy.GetVaultAccessPolicyOutput {
         return get_vault_access_policy.execute(self, allocator, input, options);
     }
 
@@ -574,7 +575,7 @@ pub const Client = struct {
     /// Not found` error. For more information about vault lock policies, [Amazon
     /// Glacier Access Control with Vault Lock
     /// Policies](https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html).
-    pub fn getVaultLock(self: *Self, allocator: std.mem.Allocator, input: get_vault_lock.GetVaultLockInput, options: get_vault_lock.Options) !get_vault_lock.GetVaultLockOutput {
+    pub fn getVaultLock(self: *Self, allocator: std.mem.Allocator, input: get_vault_lock.GetVaultLockInput, options: CallOptions) !get_vault_lock.GetVaultLockOutput {
         return get_vault_lock.execute(self, allocator, input, options);
     }
 
@@ -604,7 +605,7 @@ pub const Client = struct {
     /// Glacier](https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html) and [Get Vault Notification
     /// Configuration
     /// ](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-get.html) in the *Amazon Glacier Developer Guide*.
-    pub fn getVaultNotifications(self: *Self, allocator: std.mem.Allocator, input: get_vault_notifications.GetVaultNotificationsInput, options: get_vault_notifications.Options) !get_vault_notifications.GetVaultNotificationsOutput {
+    pub fn getVaultNotifications(self: *Self, allocator: std.mem.Allocator, input: get_vault_notifications.GetVaultNotificationsInput, options: CallOptions) !get_vault_notifications.GetVaultNotificationsOutput {
         return get_vault_notifications.execute(self, allocator, input, options);
     }
 
@@ -614,7 +615,7 @@ pub const Client = struct {
     /// see the documentation for the underlying REST API [Initiate
     /// a
     /// Job](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html).
-    pub fn initiateJob(self: *Self, allocator: std.mem.Allocator, input: initiate_job.InitiateJobInput, options: initiate_job.Options) !initiate_job.InitiateJobOutput {
+    pub fn initiateJob(self: *Self, allocator: std.mem.Allocator, input: initiate_job.InitiateJobInput, options: CallOptions) !initiate_job.InitiateJobOutput {
         return initiate_job.execute(self, allocator, input, options);
     }
 
@@ -669,7 +670,7 @@ pub const Client = struct {
     /// Parts (Multipart
     /// Upload)](https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html) and [Initiate Multipart
     /// Upload](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-initiate-upload.html) in the *Amazon Glacier Developer Guide*.
-    pub fn initiateMultipartUpload(self: *Self, allocator: std.mem.Allocator, input: initiate_multipart_upload.InitiateMultipartUploadInput, options: initiate_multipart_upload.Options) !initiate_multipart_upload.InitiateMultipartUploadOutput {
+    pub fn initiateMultipartUpload(self: *Self, allocator: std.mem.Allocator, input: initiate_multipart_upload.InitiateMultipartUploadInput, options: CallOptions) !initiate_multipart_upload.InitiateMultipartUploadOutput {
         return initiate_multipart_upload.execute(self, allocator, input, options);
     }
 
@@ -710,7 +711,7 @@ pub const Client = struct {
     /// vault
     /// lock is in the `InProgress` state you must call AbortVaultLock
     /// before you can initiate a new vault lock policy.
-    pub fn initiateVaultLock(self: *Self, allocator: std.mem.Allocator, input: initiate_vault_lock.InitiateVaultLockInput, options: initiate_vault_lock.Options) !initiate_vault_lock.InitiateVaultLockOutput {
+    pub fn initiateVaultLock(self: *Self, allocator: std.mem.Allocator, input: initiate_vault_lock.InitiateVaultLockInput, options: CallOptions) !initiate_vault_lock.InitiateVaultLockOutput {
         return initiate_vault_lock.execute(self, allocator, input, options);
     }
 
@@ -767,7 +768,7 @@ pub const Client = struct {
     /// For more information about using this operation,
     /// see the documentation for the underlying REST API [List
     /// Jobs](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-jobs-get.html).
-    pub fn listJobs(self: *Self, allocator: std.mem.Allocator, input: list_jobs.ListJobsInput, options: list_jobs.Options) !list_jobs.ListJobsOutput {
+    pub fn listJobs(self: *Self, allocator: std.mem.Allocator, input: list_jobs.ListJobsInput, options: CallOptions) !list_jobs.ListJobsOutput {
         return list_jobs.execute(self, allocator, input, options);
     }
 
@@ -812,7 +813,7 @@ pub const Client = struct {
     /// with Archives in Amazon
     /// Glacier](https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html) and [List Multipart Uploads
     /// ](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-uploads.html) in the *Amazon Glacier Developer Guide*.
-    pub fn listMultipartUploads(self: *Self, allocator: std.mem.Allocator, input: list_multipart_uploads.ListMultipartUploadsInput, options: list_multipart_uploads.Options) !list_multipart_uploads.ListMultipartUploadsOutput {
+    pub fn listMultipartUploads(self: *Self, allocator: std.mem.Allocator, input: list_multipart_uploads.ListMultipartUploadsInput, options: CallOptions) !list_multipart_uploads.ListMultipartUploadsOutput {
         return list_multipart_uploads.execute(self, allocator, input, options);
     }
 
@@ -851,13 +852,13 @@ pub const Client = struct {
     /// with Archives in Amazon
     /// Glacier](https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html) and [List Parts](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-parts.html) in the
     /// *Amazon Glacier Developer Guide*.
-    pub fn listParts(self: *Self, allocator: std.mem.Allocator, input: list_parts.ListPartsInput, options: list_parts.Options) !list_parts.ListPartsOutput {
+    pub fn listParts(self: *Self, allocator: std.mem.Allocator, input: list_parts.ListPartsInput, options: CallOptions) !list_parts.ListPartsOutput {
         return list_parts.execute(self, allocator, input, options);
     }
 
     /// This operation lists the provisioned capacity units for the specified AWS
     /// account.
-    pub fn listProvisionedCapacity(self: *Self, allocator: std.mem.Allocator, input: list_provisioned_capacity.ListProvisionedCapacityInput, options: list_provisioned_capacity.Options) !list_provisioned_capacity.ListProvisionedCapacityOutput {
+    pub fn listProvisionedCapacity(self: *Self, allocator: std.mem.Allocator, input: list_provisioned_capacity.ListProvisionedCapacityInput, options: CallOptions) !list_provisioned_capacity.ListProvisionedCapacityOutput {
         return list_provisioned_capacity.execute(self, allocator, input, options);
     }
 
@@ -866,7 +867,7 @@ pub const Client = struct {
     /// map if there are no tags. For more information about tags, see [Tagging
     /// Amazon Glacier
     /// Resources](https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html).
-    pub fn listTagsForVault(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_vault.ListTagsForVaultInput, options: list_tags_for_vault.Options) !list_tags_for_vault.ListTagsForVaultOutput {
+    pub fn listTagsForVault(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_vault.ListTagsForVaultInput, options: CallOptions) !list_tags_for_vault.ListTagsForVaultOutput {
         return list_tags_for_vault.execute(self, allocator, input, options);
     }
 
@@ -900,12 +901,12 @@ pub const Client = struct {
     /// Amazon
     /// Glacier](https://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html) and [List Vaults ](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vaults-get.html) in the
     /// *Amazon Glacier Developer Guide*.
-    pub fn listVaults(self: *Self, allocator: std.mem.Allocator, input: list_vaults.ListVaultsInput, options: list_vaults.Options) !list_vaults.ListVaultsOutput {
+    pub fn listVaults(self: *Self, allocator: std.mem.Allocator, input: list_vaults.ListVaultsInput, options: CallOptions) !list_vaults.ListVaultsOutput {
         return list_vaults.execute(self, allocator, input, options);
     }
 
     /// This operation purchases a provisioned capacity unit for an AWS account.
-    pub fn purchaseProvisionedCapacity(self: *Self, allocator: std.mem.Allocator, input: purchase_provisioned_capacity.PurchaseProvisionedCapacityInput, options: purchase_provisioned_capacity.Options) !purchase_provisioned_capacity.PurchaseProvisionedCapacityOutput {
+    pub fn purchaseProvisionedCapacity(self: *Self, allocator: std.mem.Allocator, input: purchase_provisioned_capacity.PurchaseProvisionedCapacityInput, options: CallOptions) !purchase_provisioned_capacity.PurchaseProvisionedCapacityOutput {
         return purchase_provisioned_capacity.execute(self, allocator, input, options);
     }
 
@@ -916,7 +917,7 @@ pub const Client = struct {
     /// This operation is idempotent. The operation will be successful, even if
     /// there are no tags
     /// attached to the vault.
-    pub fn removeTagsFromVault(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_vault.RemoveTagsFromVaultInput, options: remove_tags_from_vault.Options) !remove_tags_from_vault.RemoveTagsFromVaultOutput {
+    pub fn removeTagsFromVault(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_vault.RemoveTagsFromVaultInput, options: CallOptions) !remove_tags_from_vault.RemoveTagsFromVaultOutput {
         return remove_tags_from_vault.execute(self, allocator, input, options);
     }
 
@@ -932,7 +933,7 @@ pub const Client = struct {
     /// see [Amazon
     /// Glacier Data Retrieval
     /// Policies](https://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html).
-    pub fn setDataRetrievalPolicy(self: *Self, allocator: std.mem.Allocator, input: set_data_retrieval_policy.SetDataRetrievalPolicyInput, options: set_data_retrieval_policy.Options) !set_data_retrieval_policy.SetDataRetrievalPolicyOutput {
+    pub fn setDataRetrievalPolicy(self: *Self, allocator: std.mem.Allocator, input: set_data_retrieval_policy.SetDataRetrievalPolicyInput, options: CallOptions) !set_data_retrieval_policy.SetDataRetrievalPolicyOutput {
         return set_data_retrieval_policy.execute(self, allocator, input, options);
     }
 
@@ -946,7 +947,7 @@ pub const Client = struct {
     /// access policies,
     /// see [Amazon Glacier Access Control with Vault Access
     /// Policies](https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html).
-    pub fn setVaultAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: set_vault_access_policy.SetVaultAccessPolicyInput, options: set_vault_access_policy.Options) !set_vault_access_policy.SetVaultAccessPolicyOutput {
+    pub fn setVaultAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: set_vault_access_policy.SetVaultAccessPolicyInput, options: CallOptions) !set_vault_access_policy.SetVaultAccessPolicyOutput {
         return set_vault_access_policy.execute(self, allocator, input, options);
     }
 
@@ -995,7 +996,7 @@ pub const Client = struct {
     /// Glacier](https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html) and [Set Vault Notification
     /// Configuration
     /// ](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-put.html) in the *Amazon Glacier Developer Guide*.
-    pub fn setVaultNotifications(self: *Self, allocator: std.mem.Allocator, input: set_vault_notifications.SetVaultNotificationsInput, options: set_vault_notifications.Options) !set_vault_notifications.SetVaultNotificationsOutput {
+    pub fn setVaultNotifications(self: *Self, allocator: std.mem.Allocator, input: set_vault_notifications.SetVaultNotificationsInput, options: CallOptions) !set_vault_notifications.SetVaultNotificationsOutput {
         return set_vault_notifications.execute(self, allocator, input, options);
     }
 
@@ -1052,7 +1053,7 @@ pub const Client = struct {
     /// Archive in Amazon
     /// Glacier](https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-an-archive.html) and [Upload Archive](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html) in the
     /// *Amazon Glacier Developer Guide*.
-    pub fn uploadArchive(self: *Self, allocator: std.mem.Allocator, input: upload_archive.UploadArchiveInput, options: upload_archive.Options) !upload_archive.UploadArchiveOutput {
+    pub fn uploadArchive(self: *Self, allocator: std.mem.Allocator, input: upload_archive.UploadArchiveInput, options: CallOptions) !upload_archive.UploadArchiveOutput {
         return upload_archive.execute(self, allocator, input, options);
     }
 
@@ -1118,7 +1119,7 @@ pub const Client = struct {
     /// Parts (Multipart
     /// Upload)](https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html) and [Upload Part ](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-upload-part.html) in the
     /// *Amazon Glacier Developer Guide*.
-    pub fn uploadMultipartPart(self: *Self, allocator: std.mem.Allocator, input: upload_multipart_part.UploadMultipartPartInput, options: upload_multipart_part.Options) !upload_multipart_part.UploadMultipartPartOutput {
+    pub fn uploadMultipartPart(self: *Self, allocator: std.mem.Allocator, input: upload_multipart_part.UploadMultipartPartInput, options: CallOptions) !upload_multipart_part.UploadMultipartPartOutput {
         return upload_multipart_part.execute(self, allocator, input, options);
     }
 

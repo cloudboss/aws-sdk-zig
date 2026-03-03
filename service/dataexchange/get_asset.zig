@@ -2,19 +2,16 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AssetDetails = @import("asset_details.zig").AssetDetails;
 const AssetType = @import("asset_type.zig").AssetType;
 
-const GetAssetInput = @import("get_asset_request.zig").GetAssetRequest;
+pub const GetAssetInput = @import("get_asset_request.zig").GetAssetRequest;
 
-const GetAssetOutput = @import("get_asset_response.zig").GetAssetResponse;
+pub const GetAssetOutput = @import("get_asset_response.zig").GetAssetResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAssetInput, options: Options) !GetAssetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAssetInput, options: CallOptions) !GetAssetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

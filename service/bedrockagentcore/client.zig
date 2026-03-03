@@ -37,6 +37,7 @@ const stop_browser_session = @import("stop_browser_session.zig");
 const stop_code_interpreter_session = @import("stop_code_interpreter_session.zig");
 const stop_runtime_session = @import("stop_runtime_session.zig");
 const update_browser_stream = @import("update_browser_stream.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -69,25 +70,25 @@ pub const Client = struct {
 
     /// Creates multiple memory records in a single batch operation for the
     /// specified memory with custom content.
-    pub fn batchCreateMemoryRecords(self: *Self, allocator: std.mem.Allocator, input: batch_create_memory_records.BatchCreateMemoryRecordsInput, options: batch_create_memory_records.Options) !batch_create_memory_records.BatchCreateMemoryRecordsOutput {
+    pub fn batchCreateMemoryRecords(self: *Self, allocator: std.mem.Allocator, input: batch_create_memory_records.BatchCreateMemoryRecordsInput, options: CallOptions) !batch_create_memory_records.BatchCreateMemoryRecordsOutput {
         return batch_create_memory_records.execute(self, allocator, input, options);
     }
 
     /// Deletes multiple memory records in a single batch operation from the
     /// specified memory.
-    pub fn batchDeleteMemoryRecords(self: *Self, allocator: std.mem.Allocator, input: batch_delete_memory_records.BatchDeleteMemoryRecordsInput, options: batch_delete_memory_records.Options) !batch_delete_memory_records.BatchDeleteMemoryRecordsOutput {
+    pub fn batchDeleteMemoryRecords(self: *Self, allocator: std.mem.Allocator, input: batch_delete_memory_records.BatchDeleteMemoryRecordsInput, options: CallOptions) !batch_delete_memory_records.BatchDeleteMemoryRecordsOutput {
         return batch_delete_memory_records.execute(self, allocator, input, options);
     }
 
     /// Updates multiple memory records with custom content in a single batch
     /// operation within the specified memory.
-    pub fn batchUpdateMemoryRecords(self: *Self, allocator: std.mem.Allocator, input: batch_update_memory_records.BatchUpdateMemoryRecordsInput, options: batch_update_memory_records.Options) !batch_update_memory_records.BatchUpdateMemoryRecordsOutput {
+    pub fn batchUpdateMemoryRecords(self: *Self, allocator: std.mem.Allocator, input: batch_update_memory_records.BatchUpdateMemoryRecordsInput, options: CallOptions) !batch_update_memory_records.BatchUpdateMemoryRecordsOutput {
         return batch_update_memory_records.execute(self, allocator, input, options);
     }
 
     /// Confirms the user authentication session for obtaining OAuth2.0 tokens for a
     /// resource.
-    pub fn completeResourceTokenAuth(self: *Self, allocator: std.mem.Allocator, input: complete_resource_token_auth.CompleteResourceTokenAuthInput, options: complete_resource_token_auth.Options) !complete_resource_token_auth.CompleteResourceTokenAuthOutput {
+    pub fn completeResourceTokenAuth(self: *Self, allocator: std.mem.Allocator, input: complete_resource_token_auth.CompleteResourceTokenAuthInput, options: CallOptions) !complete_resource_token_auth.CompleteResourceTokenAuthOutput {
         return complete_resource_token_auth.execute(self, allocator, input, options);
     }
 
@@ -99,7 +100,7 @@ pub const Client = struct {
     /// permission.
     ///
     /// This operation is subject to request rate limiting.
-    pub fn createEvent(self: *Self, allocator: std.mem.Allocator, input: create_event.CreateEventInput, options: create_event.Options) !create_event.CreateEventOutput {
+    pub fn createEvent(self: *Self, allocator: std.mem.Allocator, input: create_event.CreateEventInput, options: CallOptions) !create_event.CreateEventOutput {
         return create_event.execute(self, allocator, input, options);
     }
 
@@ -108,7 +109,7 @@ pub const Client = struct {
     ///
     /// To use this operation, you must have the `bedrock-agentcore:DeleteEvent`
     /// permission.
-    pub fn deleteEvent(self: *Self, allocator: std.mem.Allocator, input: delete_event.DeleteEventInput, options: delete_event.Options) !delete_event.DeleteEventOutput {
+    pub fn deleteEvent(self: *Self, allocator: std.mem.Allocator, input: delete_event.DeleteEventInput, options: CallOptions) !delete_event.DeleteEventOutput {
         return delete_event.execute(self, allocator, input, options);
     }
 
@@ -117,19 +118,19 @@ pub const Client = struct {
     ///
     /// To use this operation, you must have the
     /// `bedrock-agentcore:DeleteMemoryRecord` permission.
-    pub fn deleteMemoryRecord(self: *Self, allocator: std.mem.Allocator, input: delete_memory_record.DeleteMemoryRecordInput, options: delete_memory_record.Options) !delete_memory_record.DeleteMemoryRecordOutput {
+    pub fn deleteMemoryRecord(self: *Self, allocator: std.mem.Allocator, input: delete_memory_record.DeleteMemoryRecordInput, options: CallOptions) !delete_memory_record.DeleteMemoryRecordOutput {
         return delete_memory_record.execute(self, allocator, input, options);
     }
 
     /// Performs on-demand evaluation of agent traces using a specified evaluator.
     /// This synchronous API accepts traces in OpenTelemetry format and returns
     /// immediate scoring results with detailed explanations.
-    pub fn evaluate(self: *Self, allocator: std.mem.Allocator, input: evaluate_.EvaluateInput, options: evaluate_.Options) !evaluate_.EvaluateOutput {
+    pub fn evaluate(self: *Self, allocator: std.mem.Allocator, input: evaluate_.EvaluateInput, options: CallOptions) !evaluate_.EvaluateOutput {
         return evaluate_.execute(self, allocator, input, options);
     }
 
     /// Retrieves the A2A agent card associated with an AgentCore Runtime agent.
-    pub fn getAgentCard(self: *Self, allocator: std.mem.Allocator, input: get_agent_card.GetAgentCardInput, options: get_agent_card.Options) !get_agent_card.GetAgentCardOutput {
+    pub fn getAgentCard(self: *Self, allocator: std.mem.Allocator, input: get_agent_card.GetAgentCardInput, options: CallOptions) !get_agent_card.GetAgentCardOutput {
         return get_agent_card.execute(self, allocator, input, options);
     }
 
@@ -149,7 +150,7 @@ pub const Client = struct {
     ///   [ListBrowserSessions](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_ListBrowserSessions.html)
     /// *
     ///   [StopBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html)
-    pub fn getBrowserSession(self: *Self, allocator: std.mem.Allocator, input: get_browser_session.GetBrowserSessionInput, options: get_browser_session.Options) !get_browser_session.GetBrowserSessionOutput {
+    pub fn getBrowserSession(self: *Self, allocator: std.mem.Allocator, input: get_browser_session.GetBrowserSessionInput, options: CallOptions) !get_browser_session.GetBrowserSessionOutput {
         return get_browser_session.execute(self, allocator, input, options);
     }
 
@@ -169,7 +170,7 @@ pub const Client = struct {
     ///   [ListCodeInterpreterSessions](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_ListCodeInterpreterSessions.html)
     /// *
     ///   [StopCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopCodeInterpreterSession.html)
-    pub fn getCodeInterpreterSession(self: *Self, allocator: std.mem.Allocator, input: get_code_interpreter_session.GetCodeInterpreterSessionInput, options: get_code_interpreter_session.Options) !get_code_interpreter_session.GetCodeInterpreterSessionOutput {
+    pub fn getCodeInterpreterSession(self: *Self, allocator: std.mem.Allocator, input: get_code_interpreter_session.GetCodeInterpreterSessionInput, options: CallOptions) !get_code_interpreter_session.GetCodeInterpreterSessionOutput {
         return get_code_interpreter_session.execute(self, allocator, input, options);
     }
 
@@ -178,7 +179,7 @@ pub const Client = struct {
     ///
     /// To use this operation, you must have the `bedrock-agentcore:GetEvent`
     /// permission.
-    pub fn getEvent(self: *Self, allocator: std.mem.Allocator, input: get_event.GetEventInput, options: get_event.Options) !get_event.GetEventOutput {
+    pub fn getEvent(self: *Self, allocator: std.mem.Allocator, input: get_event.GetEventInput, options: CallOptions) !get_event.GetEventOutput {
         return get_event.execute(self, allocator, input, options);
     }
 
@@ -186,35 +187,35 @@ pub const Client = struct {
     ///
     /// To use this operation, you must have the `bedrock-agentcore:GetMemoryRecord`
     /// permission.
-    pub fn getMemoryRecord(self: *Self, allocator: std.mem.Allocator, input: get_memory_record.GetMemoryRecordInput, options: get_memory_record.Options) !get_memory_record.GetMemoryRecordOutput {
+    pub fn getMemoryRecord(self: *Self, allocator: std.mem.Allocator, input: get_memory_record.GetMemoryRecordInput, options: CallOptions) !get_memory_record.GetMemoryRecordOutput {
         return get_memory_record.execute(self, allocator, input, options);
     }
 
     /// Retrieves the API key associated with an API key credential provider.
-    pub fn getResourceApiKey(self: *Self, allocator: std.mem.Allocator, input: get_resource_api_key.GetResourceApiKeyInput, options: get_resource_api_key.Options) !get_resource_api_key.GetResourceApiKeyOutput {
+    pub fn getResourceApiKey(self: *Self, allocator: std.mem.Allocator, input: get_resource_api_key.GetResourceApiKeyInput, options: CallOptions) !get_resource_api_key.GetResourceApiKeyOutput {
         return get_resource_api_key.execute(self, allocator, input, options);
     }
 
     /// Returns the OAuth 2.0 token of the provided resource.
-    pub fn getResourceOauth2Token(self: *Self, allocator: std.mem.Allocator, input: get_resource_oauth_2_token.GetResourceOauth2TokenInput, options: get_resource_oauth_2_token.Options) !get_resource_oauth_2_token.GetResourceOauth2TokenOutput {
+    pub fn getResourceOauth2Token(self: *Self, allocator: std.mem.Allocator, input: get_resource_oauth_2_token.GetResourceOauth2TokenInput, options: CallOptions) !get_resource_oauth_2_token.GetResourceOauth2TokenOutput {
         return get_resource_oauth_2_token.execute(self, allocator, input, options);
     }
 
     /// Obtains a workload access token for agentic workloads not acting on behalf
     /// of a user.
-    pub fn getWorkloadAccessToken(self: *Self, allocator: std.mem.Allocator, input: get_workload_access_token.GetWorkloadAccessTokenInput, options: get_workload_access_token.Options) !get_workload_access_token.GetWorkloadAccessTokenOutput {
+    pub fn getWorkloadAccessToken(self: *Self, allocator: std.mem.Allocator, input: get_workload_access_token.GetWorkloadAccessTokenInput, options: CallOptions) !get_workload_access_token.GetWorkloadAccessTokenOutput {
         return get_workload_access_token.execute(self, allocator, input, options);
     }
 
     /// Obtains a workload access token for agentic workloads acting on behalf of a
     /// user, using a JWT token.
-    pub fn getWorkloadAccessTokenForJwt(self: *Self, allocator: std.mem.Allocator, input: get_workload_access_token_for_jwt.GetWorkloadAccessTokenForJWTInput, options: get_workload_access_token_for_jwt.Options) !get_workload_access_token_for_jwt.GetWorkloadAccessTokenForJWTOutput {
+    pub fn getWorkloadAccessTokenForJwt(self: *Self, allocator: std.mem.Allocator, input: get_workload_access_token_for_jwt.GetWorkloadAccessTokenForJWTInput, options: CallOptions) !get_workload_access_token_for_jwt.GetWorkloadAccessTokenForJWTOutput {
         return get_workload_access_token_for_jwt.execute(self, allocator, input, options);
     }
 
     /// Obtains a workload access token for agentic workloads acting on behalf of a
     /// user, using the user's ID.
-    pub fn getWorkloadAccessTokenForUserId(self: *Self, allocator: std.mem.Allocator, input: get_workload_access_token_for_user_id.GetWorkloadAccessTokenForUserIdInput, options: get_workload_access_token_for_user_id.Options) !get_workload_access_token_for_user_id.GetWorkloadAccessTokenForUserIdOutput {
+    pub fn getWorkloadAccessTokenForUserId(self: *Self, allocator: std.mem.Allocator, input: get_workload_access_token_for_user_id.GetWorkloadAccessTokenForUserIdInput, options: CallOptions) !get_workload_access_token_for_user_id.GetWorkloadAccessTokenForUserIdOutput {
         return get_workload_access_token_for_user_id.execute(self, allocator, input, options);
     }
 
@@ -245,7 +246,7 @@ pub const Client = struct {
     /// `X-Amzn-Bedrock-AgentCore-Runtime-User-Id` header, You require permissions
     /// to both actions (`bedrock-agentcore:InvokeAgentRuntime` and
     /// `bedrock-agentcore:InvokeAgentRuntimeForUser`).
-    pub fn invokeAgentRuntime(self: *Self, allocator: std.mem.Allocator, input: invoke_agent_runtime.InvokeAgentRuntimeInput, options: invoke_agent_runtime.Options) !invoke_agent_runtime.InvokeAgentRuntimeOutput {
+    pub fn invokeAgentRuntime(self: *Self, allocator: std.mem.Allocator, input: invoke_agent_runtime.InvokeAgentRuntimeInput, options: CallOptions) !invoke_agent_runtime.InvokeAgentRuntimeOutput {
         return invoke_agent_runtime.execute(self, allocator, input, options);
     }
 
@@ -268,7 +269,7 @@ pub const Client = struct {
     ///   [StartCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartCodeInterpreterSession.html)
     /// *
     ///   [GetCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetCodeInterpreterSession.html)
-    pub fn invokeCodeInterpreter(self: *Self, allocator: std.mem.Allocator, input: invoke_code_interpreter.InvokeCodeInterpreterInput, options: invoke_code_interpreter.Options) !invoke_code_interpreter.InvokeCodeInterpreterOutput {
+    pub fn invokeCodeInterpreter(self: *Self, allocator: std.mem.Allocator, input: invoke_code_interpreter.InvokeCodeInterpreterInput, options: CallOptions) !invoke_code_interpreter.InvokeCodeInterpreterOutput {
         return invoke_code_interpreter.execute(self, allocator, input, options);
     }
 
@@ -277,7 +278,7 @@ pub const Client = struct {
     ///
     /// To use this operation, you must have the `bedrock-agentcore:ListActors`
     /// permission.
-    pub fn listActors(self: *Self, allocator: std.mem.Allocator, input: list_actors.ListActorsInput, options: list_actors.Options) !list_actors.ListActorsOutput {
+    pub fn listActors(self: *Self, allocator: std.mem.Allocator, input: list_actors.ListActorsInput, options: CallOptions) !list_actors.ListActorsOutput {
         return list_actors.execute(self, allocator, input, options);
     }
 
@@ -297,7 +298,7 @@ pub const Client = struct {
     ///   [StartBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartBrowserSession.html)
     /// *
     ///   [GetBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html)
-    pub fn listBrowserSessions(self: *Self, allocator: std.mem.Allocator, input: list_browser_sessions.ListBrowserSessionsInput, options: list_browser_sessions.Options) !list_browser_sessions.ListBrowserSessionsOutput {
+    pub fn listBrowserSessions(self: *Self, allocator: std.mem.Allocator, input: list_browser_sessions.ListBrowserSessionsInput, options: CallOptions) !list_browser_sessions.ListBrowserSessionsOutput {
         return list_browser_sessions.execute(self, allocator, input, options);
     }
 
@@ -319,7 +320,7 @@ pub const Client = struct {
     ///   [StartCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartCodeInterpreterSession.html)
     /// *
     ///   [GetCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetCodeInterpreterSession.html)
-    pub fn listCodeInterpreterSessions(self: *Self, allocator: std.mem.Allocator, input: list_code_interpreter_sessions.ListCodeInterpreterSessionsInput, options: list_code_interpreter_sessions.Options) !list_code_interpreter_sessions.ListCodeInterpreterSessionsOutput {
+    pub fn listCodeInterpreterSessions(self: *Self, allocator: std.mem.Allocator, input: list_code_interpreter_sessions.ListCodeInterpreterSessionsInput, options: CallOptions) !list_code_interpreter_sessions.ListCodeInterpreterSessionsOutput {
         return list_code_interpreter_sessions.execute(self, allocator, input, options);
     }
 
@@ -329,7 +330,7 @@ pub const Client = struct {
     ///
     /// To use this operation, you must have the `bedrock-agentcore:ListEvents`
     /// permission.
-    pub fn listEvents(self: *Self, allocator: std.mem.Allocator, input: list_events.ListEventsInput, options: list_events.Options) !list_events.ListEventsOutput {
+    pub fn listEvents(self: *Self, allocator: std.mem.Allocator, input: list_events.ListEventsInput, options: CallOptions) !list_events.ListEventsOutput {
         return list_events.execute(self, allocator, input, options);
     }
 
@@ -338,7 +339,7 @@ pub const Client = struct {
     ///
     /// To use this operation, you must have the
     /// `bedrock-agentcore:ListMemoryExtractionJobs` permission.
-    pub fn listMemoryExtractionJobs(self: *Self, allocator: std.mem.Allocator, input: list_memory_extraction_jobs.ListMemoryExtractionJobsInput, options: list_memory_extraction_jobs.Options) !list_memory_extraction_jobs.ListMemoryExtractionJobsOutput {
+    pub fn listMemoryExtractionJobs(self: *Self, allocator: std.mem.Allocator, input: list_memory_extraction_jobs.ListMemoryExtractionJobsInput, options: CallOptions) !list_memory_extraction_jobs.ListMemoryExtractionJobsOutput {
         return list_memory_extraction_jobs.execute(self, allocator, input, options);
     }
 
@@ -348,7 +349,7 @@ pub const Client = struct {
     ///
     /// To use this operation, you must have the
     /// `bedrock-agentcore:ListMemoryRecords` permission.
-    pub fn listMemoryRecords(self: *Self, allocator: std.mem.Allocator, input: list_memory_records.ListMemoryRecordsInput, options: list_memory_records.Options) !list_memory_records.ListMemoryRecordsOutput {
+    pub fn listMemoryRecords(self: *Self, allocator: std.mem.Allocator, input: list_memory_records.ListMemoryRecordsInput, options: CallOptions) !list_memory_records.ListMemoryRecordsOutput {
         return list_memory_records.execute(self, allocator, input, options);
     }
 
@@ -358,7 +359,7 @@ pub const Client = struct {
     ///
     /// To use this operation, you must have the `bedrock-agentcore:ListSessions`
     /// permission.
-    pub fn listSessions(self: *Self, allocator: std.mem.Allocator, input: list_sessions.ListSessionsInput, options: list_sessions.Options) !list_sessions.ListSessionsOutput {
+    pub fn listSessions(self: *Self, allocator: std.mem.Allocator, input: list_sessions.ListSessionsInput, options: CallOptions) !list_sessions.ListSessionsOutput {
         return list_sessions.execute(self, allocator, input, options);
     }
 
@@ -368,7 +369,7 @@ pub const Client = struct {
     ///
     /// To use this operation, you must have the
     /// `bedrock-agentcore:RetrieveMemoryRecords` permission.
-    pub fn retrieveMemoryRecords(self: *Self, allocator: std.mem.Allocator, input: retrieve_memory_records.RetrieveMemoryRecordsInput, options: retrieve_memory_records.Options) !retrieve_memory_records.RetrieveMemoryRecordsOutput {
+    pub fn retrieveMemoryRecords(self: *Self, allocator: std.mem.Allocator, input: retrieve_memory_records.RetrieveMemoryRecordsInput, options: CallOptions) !retrieve_memory_records.RetrieveMemoryRecordsOutput {
         return retrieve_memory_records.execute(self, allocator, input, options);
     }
 
@@ -393,7 +394,7 @@ pub const Client = struct {
     ///   [StartBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartBrowserSession.html)
     /// *
     ///   [GetBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html)
-    pub fn saveBrowserSessionProfile(self: *Self, allocator: std.mem.Allocator, input: save_browser_session_profile.SaveBrowserSessionProfileInput, options: save_browser_session_profile.Options) !save_browser_session_profile.SaveBrowserSessionProfileOutput {
+    pub fn saveBrowserSessionProfile(self: *Self, allocator: std.mem.Allocator, input: save_browser_session_profile.SaveBrowserSessionProfileInput, options: CallOptions) !save_browser_session_profile.SaveBrowserSessionProfileOutput {
         return save_browser_session_profile.execute(self, allocator, input, options);
     }
 
@@ -417,7 +418,7 @@ pub const Client = struct {
     ///   [SaveBrowserSessionProfile](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_SaveBrowserSessionProfile.html)
     /// *
     ///   [StopBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html)
-    pub fn startBrowserSession(self: *Self, allocator: std.mem.Allocator, input: start_browser_session.StartBrowserSessionInput, options: start_browser_session.Options) !start_browser_session.StartBrowserSessionOutput {
+    pub fn startBrowserSession(self: *Self, allocator: std.mem.Allocator, input: start_browser_session.StartBrowserSessionInput, options: CallOptions) !start_browser_session.StartBrowserSessionOutput {
         return start_browser_session.execute(self, allocator, input, options);
     }
 
@@ -438,7 +439,7 @@ pub const Client = struct {
     ///   [GetCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetCodeInterpreterSession.html)
     /// *
     ///   [StopCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopCodeInterpreterSession.html)
-    pub fn startCodeInterpreterSession(self: *Self, allocator: std.mem.Allocator, input: start_code_interpreter_session.StartCodeInterpreterSessionInput, options: start_code_interpreter_session.Options) !start_code_interpreter_session.StartCodeInterpreterSessionOutput {
+    pub fn startCodeInterpreterSession(self: *Self, allocator: std.mem.Allocator, input: start_code_interpreter_session.StartCodeInterpreterSessionInput, options: CallOptions) !start_code_interpreter_session.StartCodeInterpreterSessionOutput {
         return start_code_interpreter_session.execute(self, allocator, input, options);
     }
 
@@ -449,7 +450,7 @@ pub const Client = struct {
     ///
     /// To use this operation, you must have the
     /// `bedrock-agentcore:StartMemoryExtractionJob` permission.
-    pub fn startMemoryExtractionJob(self: *Self, allocator: std.mem.Allocator, input: start_memory_extraction_job.StartMemoryExtractionJobInput, options: start_memory_extraction_job.Options) !start_memory_extraction_job.StartMemoryExtractionJobOutput {
+    pub fn startMemoryExtractionJob(self: *Self, allocator: std.mem.Allocator, input: start_memory_extraction_job.StartMemoryExtractionJobInput, options: CallOptions) !start_memory_extraction_job.StartMemoryExtractionJobOutput {
         return start_memory_extraction_job.execute(self, allocator, input, options);
     }
 
@@ -467,7 +468,7 @@ pub const Client = struct {
     ///   [StartBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartBrowserSession.html)
     /// *
     ///   [GetBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html)
-    pub fn stopBrowserSession(self: *Self, allocator: std.mem.Allocator, input: stop_browser_session.StopBrowserSessionInput, options: stop_browser_session.Options) !stop_browser_session.StopBrowserSessionOutput {
+    pub fn stopBrowserSession(self: *Self, allocator: std.mem.Allocator, input: stop_browser_session.StopBrowserSessionInput, options: CallOptions) !stop_browser_session.StopBrowserSessionOutput {
         return stop_browser_session.execute(self, allocator, input, options);
     }
 
@@ -486,18 +487,18 @@ pub const Client = struct {
     ///   [StartCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartCodeInterpreterSession.html)
     /// *
     ///   [GetCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetCodeInterpreterSession.html)
-    pub fn stopCodeInterpreterSession(self: *Self, allocator: std.mem.Allocator, input: stop_code_interpreter_session.StopCodeInterpreterSessionInput, options: stop_code_interpreter_session.Options) !stop_code_interpreter_session.StopCodeInterpreterSessionOutput {
+    pub fn stopCodeInterpreterSession(self: *Self, allocator: std.mem.Allocator, input: stop_code_interpreter_session.StopCodeInterpreterSessionInput, options: CallOptions) !stop_code_interpreter_session.StopCodeInterpreterSessionOutput {
         return stop_code_interpreter_session.execute(self, allocator, input, options);
     }
 
     /// Stops a session that is running in an running AgentCore Runtime agent.
-    pub fn stopRuntimeSession(self: *Self, allocator: std.mem.Allocator, input: stop_runtime_session.StopRuntimeSessionInput, options: stop_runtime_session.Options) !stop_runtime_session.StopRuntimeSessionOutput {
+    pub fn stopRuntimeSession(self: *Self, allocator: std.mem.Allocator, input: stop_runtime_session.StopRuntimeSessionInput, options: CallOptions) !stop_runtime_session.StopRuntimeSessionOutput {
         return stop_runtime_session.execute(self, allocator, input, options);
     }
 
     /// Updates a browser stream. To use this operation, you must have permissions
     /// to perform the bedrock:UpdateBrowserStream action.
-    pub fn updateBrowserStream(self: *Self, allocator: std.mem.Allocator, input: update_browser_stream.UpdateBrowserStreamInput, options: update_browser_stream.Options) !update_browser_stream.UpdateBrowserStreamOutput {
+    pub fn updateBrowserStream(self: *Self, allocator: std.mem.Allocator, input: update_browser_stream.UpdateBrowserStreamInput, options: CallOptions) !update_browser_stream.UpdateBrowserStreamOutput {
         return update_browser_stream.execute(self, allocator, input, options);
     }
 

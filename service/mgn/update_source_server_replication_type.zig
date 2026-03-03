@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReplicationType = @import("replication_type.zig").ReplicationType;
 const SourceServerConnectorAction = @import("source_server_connector_action.zig").SourceServerConnectorAction;
@@ -27,13 +28,9 @@ pub const UpdateSourceServerReplicationTypeInput = struct {
     };
 };
 
-const UpdateSourceServerReplicationTypeOutput = @import("source_server.zig").SourceServer;
+pub const UpdateSourceServerReplicationTypeOutput = @import("source_server.zig").SourceServer;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSourceServerReplicationTypeInput, options: Options) !UpdateSourceServerReplicationTypeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSourceServerReplicationTypeInput, options: CallOptions) !UpdateSourceServerReplicationTypeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

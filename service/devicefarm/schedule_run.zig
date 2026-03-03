@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ScheduleRunConfiguration = @import("schedule_run_configuration.zig").ScheduleRunConfiguration;
 const DeviceSelectionConfiguration = @import("device_selection_configuration.zig").DeviceSelectionConfiguration;
@@ -68,11 +69,7 @@ pub const ScheduleRunOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ScheduleRunInput, options: Options) !ScheduleRunOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ScheduleRunInput, options: CallOptions) !ScheduleRunOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

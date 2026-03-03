@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ListCustomLineItemVersionsFilter = @import("list_custom_line_item_versions_filter.zig").ListCustomLineItemVersionsFilter;
 const CustomLineItemVersionListElement = @import("custom_line_item_version_list_element.zig").CustomLineItemVersionListElement;
@@ -43,11 +44,7 @@ pub const ListCustomLineItemVersionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCustomLineItemVersionsInput, options: Options) !ListCustomLineItemVersionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCustomLineItemVersionsInput, options: CallOptions) !ListCustomLineItemVersionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

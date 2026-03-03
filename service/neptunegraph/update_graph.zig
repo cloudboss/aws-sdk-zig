@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GraphStatus = @import("graph_status.zig").GraphStatus;
 const VectorSearchConfiguration = @import("vector_search_configuration.zig").VectorSearchConfiguration;
@@ -98,11 +99,7 @@ pub const UpdateGraphOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateGraphInput, options: Options) !UpdateGraphOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateGraphInput, options: CallOptions) !UpdateGraphOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

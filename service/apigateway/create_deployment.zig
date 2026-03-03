@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CacheClusterSize = @import("cache_cluster_size.zig").CacheClusterSize;
 const DeploymentCanarySettings = @import("deployment_canary_settings.zig").DeploymentCanarySettings;
@@ -55,13 +56,9 @@ pub const CreateDeploymentInput = struct {
     };
 };
 
-const CreateDeploymentOutput = @import("deployment.zig").Deployment;
+pub const CreateDeploymentOutput = @import("deployment.zig").Deployment;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDeploymentInput, options: Options) !CreateDeploymentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDeploymentInput, options: CallOptions) !CreateDeploymentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

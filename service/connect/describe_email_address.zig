@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AliasConfiguration = @import("alias_configuration.zig").AliasConfiguration;
 
@@ -64,11 +65,7 @@ pub const DescribeEmailAddressOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeEmailAddressInput, options: Options) !DescribeEmailAddressOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeEmailAddressInput, options: CallOptions) !DescribeEmailAddressOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

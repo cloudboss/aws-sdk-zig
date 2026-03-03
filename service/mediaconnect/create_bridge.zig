@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AddEgressGatewayBridgeRequest = @import("add_egress_gateway_bridge_request.zig").AddEgressGatewayBridgeRequest;
 const AddIngressGatewayBridgeRequest = @import("add_ingress_gateway_bridge_request.zig").AddIngressGatewayBridgeRequest;
@@ -55,11 +56,7 @@ pub const CreateBridgeOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateBridgeInput, options: Options) !CreateBridgeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateBridgeInput, options: CallOptions) !CreateBridgeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

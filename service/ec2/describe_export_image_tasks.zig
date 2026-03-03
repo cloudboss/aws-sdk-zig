@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const ExportImageTask = @import("export_image_task.zig").ExportImageTask;
@@ -40,11 +41,7 @@ pub const DescribeExportImageTasksOutput = struct {
     next_token: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeExportImageTasksInput, options: Options) !DescribeExportImageTasksOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeExportImageTasksInput, options: CallOptions) !DescribeExportImageTasksOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

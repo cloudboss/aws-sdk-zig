@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LogTargetType = @import("log_target_type.zig").LogTargetType;
 const LogTargetConfiguration = @import("log_target_configuration.zig").LogTargetConfiguration;
@@ -40,11 +41,7 @@ pub const ListV2LoggingLevelsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListV2LoggingLevelsInput, options: Options) !ListV2LoggingLevelsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListV2LoggingLevelsInput, options: CallOptions) !ListV2LoggingLevelsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FlywheelIterationFilter = @import("flywheel_iteration_filter.zig").FlywheelIterationFilter;
 const FlywheelIterationProperties = @import("flywheel_iteration_properties.zig").FlywheelIterationProperties;
@@ -40,11 +41,7 @@ pub const ListFlywheelIterationHistoryOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListFlywheelIterationHistoryInput, options: Options) !ListFlywheelIterationHistoryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListFlywheelIterationHistoryInput, options: CallOptions) !ListFlywheelIterationHistoryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

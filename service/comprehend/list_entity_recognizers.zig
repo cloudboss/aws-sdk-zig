@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EntityRecognizerFilter = @import("entity_recognizer_filter.zig").EntityRecognizerFilter;
 const EntityRecognizerProperties = @import("entity_recognizer_properties.zig").EntityRecognizerProperties;
@@ -38,11 +39,7 @@ pub const ListEntityRecognizersOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListEntityRecognizersInput, options: Options) !ListEntityRecognizersOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListEntityRecognizersInput, options: CallOptions) !ListEntityRecognizersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

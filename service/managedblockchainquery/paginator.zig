@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_asset_contracts = @import("list_asset_contracts.zig");
@@ -18,7 +19,7 @@ pub const ListAssetContractsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_asset_contracts.Options) !list_asset_contracts.ListAssetContractsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_asset_contracts.ListAssetContractsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -59,7 +60,7 @@ pub const ListFilteredTransactionEventsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_filtered_transaction_events.Options) !list_filtered_transaction_events.ListFilteredTransactionEventsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_filtered_transaction_events.ListFilteredTransactionEventsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -100,7 +101,7 @@ pub const ListTokenBalancesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_token_balances.Options) !list_token_balances.ListTokenBalancesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_token_balances.ListTokenBalancesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -141,7 +142,7 @@ pub const ListTransactionEventsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_transaction_events.Options) !list_transaction_events.ListTransactionEventsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_transaction_events.ListTransactionEventsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -182,7 +183,7 @@ pub const ListTransactionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_transactions.Options) !list_transactions.ListTransactionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_transactions.ListTransactionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

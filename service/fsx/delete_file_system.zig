@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DeleteFileSystemLustreConfiguration = @import("delete_file_system_lustre_configuration.zig").DeleteFileSystemLustreConfiguration;
 const DeleteFileSystemOpenZFSConfiguration = @import("delete_file_system_open_zfs_configuration.zig").DeleteFileSystemOpenZFSConfiguration;
@@ -64,11 +65,7 @@ pub const DeleteFileSystemOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteFileSystemInput, options: Options) !DeleteFileSystemOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteFileSystemInput, options: CallOptions) !DeleteFileSystemOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

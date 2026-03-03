@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AddIpamOperatingRegion = @import("add_ipam_operating_region.zig").AddIpamOperatingRegion;
 const AddIpamOrganizationalUnitExclusion = @import("add_ipam_organizational_unit_exclusion.zig").AddIpamOrganizationalUnitExclusion;
@@ -71,11 +72,7 @@ pub const ModifyIpamResourceDiscoveryOutput = struct {
     ipam_resource_discovery: ?IpamResourceDiscovery = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyIpamResourceDiscoveryInput, options: Options) !ModifyIpamResourceDiscoveryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyIpamResourceDiscoveryInput, options: CallOptions) !ModifyIpamResourceDiscoveryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

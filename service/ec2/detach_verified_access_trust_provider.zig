@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VerifiedAccessInstance = @import("verified_access_instance.zig").VerifiedAccessInstance;
 const VerifiedAccessTrustProvider = @import("verified_access_trust_provider.zig").VerifiedAccessTrustProvider;
@@ -36,11 +37,7 @@ pub const DetachVerifiedAccessTrustProviderOutput = struct {
     verified_access_trust_provider: ?VerifiedAccessTrustProvider = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DetachVerifiedAccessTrustProviderInput, options: Options) !DetachVerifiedAccessTrustProviderOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DetachVerifiedAccessTrustProviderInput, options: CallOptions) !DetachVerifiedAccessTrustProviderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

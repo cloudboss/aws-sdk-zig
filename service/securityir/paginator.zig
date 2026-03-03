@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_case_edits = @import("list_case_edits.zig");
@@ -18,7 +19,7 @@ pub const ListCaseEditsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_case_edits.Options) !list_case_edits.ListCaseEditsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_case_edits.ListCaseEditsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -59,7 +60,7 @@ pub const ListCasesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_cases.Options) !list_cases.ListCasesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_cases.ListCasesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -100,7 +101,7 @@ pub const ListCommentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_comments.Options) !list_comments.ListCommentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_comments.ListCommentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -141,7 +142,7 @@ pub const ListInvestigationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_investigations.Options) !list_investigations.ListInvestigationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_investigations.ListInvestigationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -182,7 +183,7 @@ pub const ListMembershipsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_memberships.Options) !list_memberships.ListMembershipsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_memberships.ListMembershipsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

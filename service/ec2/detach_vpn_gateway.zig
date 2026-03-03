@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DetachVpnGatewayInput = struct {
@@ -19,13 +20,9 @@ pub const DetachVpnGatewayInput = struct {
     vpn_gateway_id: []const u8,
 };
 
-const DetachVpnGatewayOutput = struct {};
+pub const DetachVpnGatewayOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DetachVpnGatewayInput, options: Options) !DetachVpnGatewayOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DetachVpnGatewayInput, options: CallOptions) !DetachVpnGatewayOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TeamsUserIdentity = @import("teams_user_identity.zig").TeamsUserIdentity;
 
@@ -44,11 +45,7 @@ pub const ListMicrosoftTeamsUserIdentitiesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMicrosoftTeamsUserIdentitiesInput, options: Options) !ListMicrosoftTeamsUserIdentitiesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMicrosoftTeamsUserIdentitiesInput, options: CallOptions) !ListMicrosoftTeamsUserIdentitiesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InputPrompt = @import("input_prompt.zig").InputPrompt;
 const OptimizedPromptStream = @import("optimized_prompt_stream.zig").OptimizedPromptStream;
@@ -32,11 +33,7 @@ pub const OptimizePromptOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: OptimizePromptInput, options: Options) !OptimizePromptOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: OptimizePromptInput, options: CallOptions) !OptimizePromptOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     const alloc = arena.allocator();
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CoverageFilterCriteria = @import("coverage_filter_criteria.zig").CoverageFilterCriteria;
 const GroupKey = @import("group_key.zig").GroupKey;
@@ -53,11 +54,7 @@ pub const ListCoverageStatisticsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCoverageStatisticsInput, options: Options) !ListCoverageStatisticsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCoverageStatisticsInput, options: CallOptions) !ListCoverageStatisticsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

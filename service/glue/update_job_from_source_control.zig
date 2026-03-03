@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SourceControlAuthStrategy = @import("source_control_auth_strategy.zig").SourceControlAuthStrategy;
 const SourceControlProvider = @import("source_control_provider.zig").SourceControlProvider;
@@ -61,11 +62,7 @@ pub const UpdateJobFromSourceControlOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateJobFromSourceControlInput, options: Options) !UpdateJobFromSourceControlOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateJobFromSourceControlInput, options: CallOptions) !UpdateJobFromSourceControlOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

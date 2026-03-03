@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ServiceUpdateRequest = @import("service_update_request.zig").ServiceUpdateRequest;
 const Cluster = @import("cluster.zig").Cluster;
@@ -33,11 +34,7 @@ pub const BatchUpdateClusterOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchUpdateClusterInput, options: Options) !BatchUpdateClusterOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchUpdateClusterInput, options: CallOptions) !BatchUpdateClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

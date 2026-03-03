@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AnalyticsMetadataType = @import("analytics_metadata_type.zig").AnalyticsMetadataType;
 const ChallengeNameType = @import("challenge_name_type.zig").ChallengeNameType;
@@ -491,11 +492,7 @@ pub const AdminRespondToAuthChallengeOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminRespondToAuthChallengeInput, options: Options) !AdminRespondToAuthChallengeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminRespondToAuthChallengeInput, options: CallOptions) !AdminRespondToAuthChallengeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

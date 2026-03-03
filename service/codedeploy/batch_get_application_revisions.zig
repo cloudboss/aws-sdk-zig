@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RevisionLocation = @import("revision_location.zig").RevisionLocation;
 const RevisionInfo = @import("revision_info.zig").RevisionInfo;
@@ -40,11 +41,7 @@ pub const BatchGetApplicationRevisionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetApplicationRevisionsInput, options: Options) !BatchGetApplicationRevisionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetApplicationRevisionsInput, options: CallOptions) !BatchGetApplicationRevisionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

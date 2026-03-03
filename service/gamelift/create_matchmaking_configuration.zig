@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BackfillMode = @import("backfill_mode.zig").BackfillMode;
 const FlexMatchMode = @import("flex_match_mode.zig").FlexMatchMode;
@@ -160,11 +161,7 @@ pub const CreateMatchmakingConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMatchmakingConfigurationInput, options: Options) !CreateMatchmakingConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMatchmakingConfigurationInput, options: CallOptions) !CreateMatchmakingConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

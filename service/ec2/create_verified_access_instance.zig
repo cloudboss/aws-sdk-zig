@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const VerifiedAccessInstance = @import("verified_access_instance.zig").VerifiedAccessInstance;
@@ -40,11 +41,7 @@ pub const CreateVerifiedAccessInstanceOutput = struct {
     verified_access_instance: ?VerifiedAccessInstance = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVerifiedAccessInstanceInput, options: Options) !CreateVerifiedAccessInstanceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVerifiedAccessInstanceInput, options: CallOptions) !CreateVerifiedAccessInstanceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

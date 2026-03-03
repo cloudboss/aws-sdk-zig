@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IamFederationConfigOptions = @import("iam_federation_config_options.zig").IamFederationConfigOptions;
 const CreateIamIdentityCenterConfigOptions = @import("create_iam_identity_center_config_options.zig").CreateIamIdentityCenterConfigOptions;
@@ -55,11 +56,7 @@ pub const CreateSecurityConfigOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSecurityConfigInput, options: Options) !CreateSecurityConfigOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSecurityConfigInput, options: CallOptions) !CreateSecurityConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

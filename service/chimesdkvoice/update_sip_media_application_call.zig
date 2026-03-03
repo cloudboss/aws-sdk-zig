@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SipMediaApplicationCall = @import("sip_media_application_call.zig").SipMediaApplicationCall;
 
@@ -32,11 +33,7 @@ pub const UpdateSipMediaApplicationCallOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSipMediaApplicationCallInput, options: Options) !UpdateSipMediaApplicationCallOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSipMediaApplicationCallInput, options: CallOptions) !UpdateSipMediaApplicationCallOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

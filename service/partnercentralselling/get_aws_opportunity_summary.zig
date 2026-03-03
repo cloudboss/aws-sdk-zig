@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AwsOpportunityCustomer = @import("aws_opportunity_customer.zig").AwsOpportunityCustomer;
 const AwsOpportunityInsights = @import("aws_opportunity_insights.zig").AwsOpportunityInsights;
@@ -109,11 +110,7 @@ pub const GetAwsOpportunitySummaryOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAwsOpportunitySummaryInput, options: Options) !GetAwsOpportunitySummaryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAwsOpportunitySummaryInput, options: CallOptions) !GetAwsOpportunitySummaryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

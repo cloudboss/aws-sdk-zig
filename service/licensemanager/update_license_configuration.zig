@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LicenseConfigurationStatus = @import("license_configuration_status.zig").LicenseConfigurationStatus;
 const ProductInformation = @import("product_information.zig").ProductInformation;
@@ -55,11 +56,7 @@ pub const UpdateLicenseConfigurationInput = struct {
 pub const UpdateLicenseConfigurationOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLicenseConfigurationInput, options: Options) !UpdateLicenseConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLicenseConfigurationInput, options: CallOptions) !UpdateLicenseConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

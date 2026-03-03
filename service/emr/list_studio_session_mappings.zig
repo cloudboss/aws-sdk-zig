@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IdentityType = @import("identity_type.zig").IdentityType;
 const SessionMappingSummary = @import("session_mapping_summary.zig").SessionMappingSummary;
@@ -41,11 +42,7 @@ pub const ListStudioSessionMappingsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListStudioSessionMappingsInput, options: Options) !ListStudioSessionMappingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListStudioSessionMappingsInput, options: CallOptions) !ListStudioSessionMappingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

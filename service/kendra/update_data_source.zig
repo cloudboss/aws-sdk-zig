@@ -2,20 +2,17 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DataSourceConfiguration = @import("data_source_configuration.zig").DataSourceConfiguration;
 const CustomDocumentEnrichmentConfiguration = @import("custom_document_enrichment_configuration.zig").CustomDocumentEnrichmentConfiguration;
 const DataSourceVpcConfiguration = @import("data_source_vpc_configuration.zig").DataSourceVpcConfiguration;
 
-const UpdateDataSourceInput = @import("update_data_source_request.zig").UpdateDataSourceRequest;
+pub const UpdateDataSourceInput = @import("update_data_source_request.zig").UpdateDataSourceRequest;
 
-const UpdateDataSourceOutput = struct {};
+pub const UpdateDataSourceOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDataSourceInput, options: Options) !UpdateDataSourceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDataSourceInput, options: CallOptions) !UpdateDataSourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

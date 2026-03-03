@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResourceTag = @import("resource_tag.zig").ResourceTag;
 const LockConfiguration = @import("lock_configuration.zig").LockConfiguration;
@@ -93,11 +94,7 @@ pub const UnlockRuleOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UnlockRuleInput, options: Options) !UnlockRuleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UnlockRuleInput, options: CallOptions) !UnlockRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

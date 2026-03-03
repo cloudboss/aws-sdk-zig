@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const CapacityReservation = @import("capacity_reservation.zig").CapacityReservation;
@@ -43,11 +44,7 @@ pub const CreateCapacityReservationBySplittingOutput = struct {
     source_capacity_reservation: ?CapacityReservation = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCapacityReservationBySplittingInput, options: Options) !CreateCapacityReservationBySplittingOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCapacityReservationBySplittingInput, options: CallOptions) !CreateCapacityReservationBySplittingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

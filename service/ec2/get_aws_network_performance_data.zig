@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DataQuery = @import("data_query.zig").DataQuery;
 const DataResponse = @import("data_response.zig").DataResponse;
@@ -45,11 +46,7 @@ pub const GetAwsNetworkPerformanceDataOutput = struct {
     next_token: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAwsNetworkPerformanceDataInput, options: Options) !GetAwsNetworkPerformanceDataOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAwsNetworkPerformanceDataInput, options: CallOptions) !GetAwsNetworkPerformanceDataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

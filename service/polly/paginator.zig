@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_speech_synthesis_tasks = @import("list_speech_synthesis_tasks.zig");
@@ -14,7 +15,7 @@ pub const ListSpeechSynthesisTasksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_speech_synthesis_tasks.Options) !list_speech_synthesis_tasks.ListSpeechSynthesisTasksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_speech_synthesis_tasks.ListSpeechSynthesisTasksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EnvironmentAccountConnection = @import("environment_account_connection.zig").EnvironmentAccountConnection;
 
@@ -50,11 +51,7 @@ pub const UpdateEnvironmentAccountConnectionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateEnvironmentAccountConnectionInput, options: Options) !UpdateEnvironmentAccountConnectionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateEnvironmentAccountConnectionInput, options: CallOptions) !UpdateEnvironmentAccountConnectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

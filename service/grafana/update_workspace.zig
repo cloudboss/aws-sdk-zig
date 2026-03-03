@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccountAccessType = @import("account_access_type.zig").AccountAccessType;
 const NetworkAccessConfiguration = @import("network_access_configuration.zig").NetworkAccessConfiguration;
@@ -158,11 +159,7 @@ pub const UpdateWorkspaceOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkspaceInput, options: Options) !UpdateWorkspaceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkspaceInput, options: CallOptions) !UpdateWorkspaceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

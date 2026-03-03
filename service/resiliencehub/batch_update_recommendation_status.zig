@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const UpdateRecommendationStatusRequestEntry = @import("update_recommendation_status_request_entry.zig").UpdateRecommendationStatusRequestEntry;
 const BatchUpdateRecommendationStatusFailedEntry = @import("batch_update_recommendation_status_failed_entry.zig").BatchUpdateRecommendationStatusFailedEntry;
@@ -54,11 +55,7 @@ pub const BatchUpdateRecommendationStatusOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchUpdateRecommendationStatusInput, options: Options) !BatchUpdateRecommendationStatusOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchUpdateRecommendationStatusInput, options: CallOptions) !BatchUpdateRecommendationStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

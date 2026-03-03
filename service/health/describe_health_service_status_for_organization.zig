@@ -2,9 +2,10 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
-const DescribeHealthServiceStatusForOrganizationInput = struct {};
+pub const DescribeHealthServiceStatusForOrganizationInput = struct {};
 
 pub const DescribeHealthServiceStatusForOrganizationOutput = struct {
     /// Information about the status of enabling or disabling the Health
@@ -19,11 +20,7 @@ pub const DescribeHealthServiceStatusForOrganizationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeHealthServiceStatusForOrganizationInput, options: Options) !DescribeHealthServiceStatusForOrganizationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeHealthServiceStatusForOrganizationInput, options: CallOptions) !DescribeHealthServiceStatusForOrganizationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

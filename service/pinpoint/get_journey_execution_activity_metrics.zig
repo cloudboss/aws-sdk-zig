@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const JourneyExecutionActivityMetricsResponse = @import("journey_execution_activity_metrics_response.zig").JourneyExecutionActivityMetricsResponse;
 
@@ -43,11 +44,7 @@ pub const GetJourneyExecutionActivityMetricsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetJourneyExecutionActivityMetricsInput, options: Options) !GetJourneyExecutionActivityMetricsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetJourneyExecutionActivityMetricsInput, options: CallOptions) !GetJourneyExecutionActivityMetricsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PublicIpv4PoolRange = @import("public_ipv_4_pool_range.zig").PublicIpv4PoolRange;
 const serde = @import("serde.zig");
@@ -39,11 +40,7 @@ pub const ProvisionPublicIpv4PoolCidrOutput = struct {
     pool_id: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ProvisionPublicIpv4PoolCidrInput, options: Options) !ProvisionPublicIpv4PoolCidrOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ProvisionPublicIpv4PoolCidrInput, options: CallOptions) !ProvisionPublicIpv4PoolCidrOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const KnowledgeBaseSearchType = @import("knowledge_base_search_type.zig").KnowledgeBaseSearchType;
 const QueryCondition = @import("query_condition.zig").QueryCondition;
@@ -64,11 +65,7 @@ pub const QueryAssistantOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: QueryAssistantInput, options: Options) !QueryAssistantOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: QueryAssistantInput, options: CallOptions) !QueryAssistantOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

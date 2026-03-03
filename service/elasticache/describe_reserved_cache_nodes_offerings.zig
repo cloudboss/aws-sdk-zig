@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReservedCacheNodesOffering = @import("reserved_cache_nodes_offering.zig").ReservedCacheNodesOffering;
 const serde = @import("serde.zig");
@@ -232,11 +233,7 @@ pub const DescribeReservedCacheNodesOfferingsOutput = struct {
     reserved_cache_nodes_offerings: ?[]const ReservedCacheNodesOffering = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeReservedCacheNodesOfferingsInput, options: Options) !DescribeReservedCacheNodesOfferingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeReservedCacheNodesOfferingsInput, options: CallOptions) !DescribeReservedCacheNodesOfferingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

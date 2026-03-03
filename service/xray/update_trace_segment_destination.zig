@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TraceSegmentDestination = @import("trace_segment_destination.zig").TraceSegmentDestination;
 const TraceSegmentDestinationStatus = @import("trace_segment_destination_status.zig").TraceSegmentDestinationStatus;
@@ -28,11 +29,7 @@ pub const UpdateTraceSegmentDestinationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTraceSegmentDestinationInput, options: Options) !UpdateTraceSegmentDestinationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTraceSegmentDestinationInput, options: CallOptions) !UpdateTraceSegmentDestinationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

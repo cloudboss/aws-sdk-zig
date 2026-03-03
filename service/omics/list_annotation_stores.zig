@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ListAnnotationStoresFilter = @import("list_annotation_stores_filter.zig").ListAnnotationStoresFilter;
 const AnnotationStoreItem = @import("annotation_store_item.zig").AnnotationStoreItem;
@@ -41,11 +42,7 @@ pub const ListAnnotationStoresOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAnnotationStoresInput, options: Options) !ListAnnotationStoresOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAnnotationStoresInput, options: CallOptions) !ListAnnotationStoresOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

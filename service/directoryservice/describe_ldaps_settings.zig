@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LDAPSType = @import("ldaps_type.zig").LDAPSType;
 const LDAPSSettingInfo = @import("ldaps_setting_info.zig").LDAPSSettingInfo;
@@ -45,11 +46,7 @@ pub const DescribeLDAPSSettingsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeLDAPSSettingsInput, options: Options) !DescribeLDAPSSettingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeLDAPSSettingsInput, options: CallOptions) !DescribeLDAPSSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

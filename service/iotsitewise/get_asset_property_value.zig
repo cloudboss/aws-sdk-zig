@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AssetPropertyValue = @import("asset_property_value.zig").AssetPropertyValue;
 
@@ -37,11 +38,7 @@ pub const GetAssetPropertyValueOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAssetPropertyValueInput, options: Options) !GetAssetPropertyValueOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAssetPropertyValueInput, options: CallOptions) !GetAssetPropertyValueOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -26,6 +26,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_monitor = @import("update_monitor.zig");
 const update_scope = @import("update_scope.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -63,7 +64,7 @@ pub const Client = struct {
     /// informs you whether there were Amazon Web Services network issues for one or
     /// more of the network flows tracked by a monitor, during a time period that
     /// you choose.
-    pub fn createMonitor(self: *Self, allocator: std.mem.Allocator, input: create_monitor.CreateMonitorInput, options: create_monitor.Options) !create_monitor.CreateMonitorOutput {
+    pub fn createMonitor(self: *Self, allocator: std.mem.Allocator, input: create_monitor.CreateMonitorInput, options: CallOptions) !create_monitor.CreateMonitorOutput {
         return create_monitor.execute(self, allocator, input, options);
     }
 
@@ -86,17 +87,17 @@ pub const Client = struct {
     /// * *Target resources*, which are Region-targetIdentifier pairs.
     /// * *Target identifiers*, made up of a targetID (currently always an account
     ///   ID) and a targetType (currently always an account).
-    pub fn createScope(self: *Self, allocator: std.mem.Allocator, input: create_scope.CreateScopeInput, options: create_scope.Options) !create_scope.CreateScopeOutput {
+    pub fn createScope(self: *Self, allocator: std.mem.Allocator, input: create_scope.CreateScopeInput, options: CallOptions) !create_scope.CreateScopeOutput {
         return create_scope.execute(self, allocator, input, options);
     }
 
     /// Deletes a monitor in Network Flow Monitor.
-    pub fn deleteMonitor(self: *Self, allocator: std.mem.Allocator, input: delete_monitor.DeleteMonitorInput, options: delete_monitor.Options) !delete_monitor.DeleteMonitorOutput {
+    pub fn deleteMonitor(self: *Self, allocator: std.mem.Allocator, input: delete_monitor.DeleteMonitorInput, options: CallOptions) !delete_monitor.DeleteMonitorOutput {
         return delete_monitor.execute(self, allocator, input, options);
     }
 
     /// Deletes a scope that has been defined.
-    pub fn deleteScope(self: *Self, allocator: std.mem.Allocator, input: delete_scope.DeleteScopeInput, options: delete_scope.Options) !delete_scope.DeleteScopeOutput {
+    pub fn deleteScope(self: *Self, allocator: std.mem.Allocator, input: delete_scope.DeleteScopeInput, options: CallOptions) !delete_scope.DeleteScopeOutput {
         return delete_scope.execute(self, allocator, input, options);
     }
 
@@ -104,7 +105,7 @@ pub const Client = struct {
     /// name. The information returned includes the Amazon Resource Name (ARN),
     /// create time, modified time, resources included in the monitor, and status
     /// information.
-    pub fn getMonitor(self: *Self, allocator: std.mem.Allocator, input: get_monitor.GetMonitorInput, options: get_monitor.Options) !get_monitor.GetMonitorOutput {
+    pub fn getMonitor(self: *Self, allocator: std.mem.Allocator, input: get_monitor.GetMonitorInput, options: CallOptions) !get_monitor.GetMonitorOutput {
         return get_monitor.execute(self, allocator, input, options);
     }
 
@@ -121,7 +122,7 @@ pub const Client = struct {
     /// values for a specific metric type. Top contributors can be across all
     /// workload insights, for a given scope, or for a specific monitor. Use the
     /// applicable call for the top contributors that you want to be returned.
-    pub fn getQueryResultsMonitorTopContributors(self: *Self, allocator: std.mem.Allocator, input: get_query_results_monitor_top_contributors.GetQueryResultsMonitorTopContributorsInput, options: get_query_results_monitor_top_contributors.Options) !get_query_results_monitor_top_contributors.GetQueryResultsMonitorTopContributorsOutput {
+    pub fn getQueryResultsMonitorTopContributors(self: *Self, allocator: std.mem.Allocator, input: get_query_results_monitor_top_contributors.GetQueryResultsMonitorTopContributorsInput, options: CallOptions) !get_query_results_monitor_top_contributors.GetQueryResultsMonitorTopContributorsOutput {
         return get_query_results_monitor_top_contributors.execute(self, allocator, input, options);
     }
 
@@ -142,7 +143,7 @@ pub const Client = struct {
     /// values for a specific metric type. Top contributors can be across all
     /// workload insights, for a given scope, or for a specific monitor. Use the
     /// applicable call for the top contributors that you want to be returned.
-    pub fn getQueryResultsWorkloadInsightsTopContributors(self: *Self, allocator: std.mem.Allocator, input: get_query_results_workload_insights_top_contributors.GetQueryResultsWorkloadInsightsTopContributorsInput, options: get_query_results_workload_insights_top_contributors.Options) !get_query_results_workload_insights_top_contributors.GetQueryResultsWorkloadInsightsTopContributorsOutput {
+    pub fn getQueryResultsWorkloadInsightsTopContributors(self: *Self, allocator: std.mem.Allocator, input: get_query_results_workload_insights_top_contributors.GetQueryResultsWorkloadInsightsTopContributorsInput, options: CallOptions) !get_query_results_workload_insights_top_contributors.GetQueryResultsWorkloadInsightsTopContributorsOutput {
         return get_query_results_workload_insights_top_contributors.execute(self, allocator, input, options);
     }
 
@@ -166,7 +167,7 @@ pub const Client = struct {
     ///
     /// The top contributor network flows overall are for a specific metric type,
     /// for example, the number of retransmissions.
-    pub fn getQueryResultsWorkloadInsightsTopContributorsData(self: *Self, allocator: std.mem.Allocator, input: get_query_results_workload_insights_top_contributors_data.GetQueryResultsWorkloadInsightsTopContributorsDataInput, options: get_query_results_workload_insights_top_contributors_data.Options) !get_query_results_workload_insights_top_contributors_data.GetQueryResultsWorkloadInsightsTopContributorsDataOutput {
+    pub fn getQueryResultsWorkloadInsightsTopContributorsData(self: *Self, allocator: std.mem.Allocator, input: get_query_results_workload_insights_top_contributors_data.GetQueryResultsWorkloadInsightsTopContributorsDataInput, options: CallOptions) !get_query_results_workload_insights_top_contributors_data.GetQueryResultsWorkloadInsightsTopContributorsDataOutput {
         return get_query_results_workload_insights_top_contributors_data.execute(self, allocator, input, options);
     }
 
@@ -181,7 +182,7 @@ pub const Client = struct {
     ///
     /// When you run a query, use this call to check the status of the query to make
     /// sure that the query has `SUCCEEDED` before you review the results.
-    pub fn getQueryStatusMonitorTopContributors(self: *Self, allocator: std.mem.Allocator, input: get_query_status_monitor_top_contributors.GetQueryStatusMonitorTopContributorsInput, options: get_query_status_monitor_top_contributors.Options) !get_query_status_monitor_top_contributors.GetQueryStatusMonitorTopContributorsOutput {
+    pub fn getQueryStatusMonitorTopContributors(self: *Self, allocator: std.mem.Allocator, input: get_query_status_monitor_top_contributors.GetQueryStatusMonitorTopContributorsInput, options: CallOptions) !get_query_status_monitor_top_contributors.GetQueryStatusMonitorTopContributorsOutput {
         return get_query_status_monitor_top_contributors.execute(self, allocator, input, options);
     }
 
@@ -199,7 +200,7 @@ pub const Client = struct {
     /// values for a specific metric type. Top contributors can be across all
     /// workload insights, for a given scope, or for a specific monitor. Use the
     /// applicable call for the top contributors that you want to be returned.
-    pub fn getQueryStatusWorkloadInsightsTopContributors(self: *Self, allocator: std.mem.Allocator, input: get_query_status_workload_insights_top_contributors.GetQueryStatusWorkloadInsightsTopContributorsInput, options: get_query_status_workload_insights_top_contributors.Options) !get_query_status_workload_insights_top_contributors.GetQueryStatusWorkloadInsightsTopContributorsOutput {
+    pub fn getQueryStatusWorkloadInsightsTopContributors(self: *Self, allocator: std.mem.Allocator, input: get_query_status_workload_insights_top_contributors.GetQueryStatusWorkloadInsightsTopContributorsInput, options: CallOptions) !get_query_status_workload_insights_top_contributors.GetQueryStatusWorkloadInsightsTopContributorsOutput {
         return get_query_status_workload_insights_top_contributors.execute(self, allocator, input, options);
     }
 
@@ -219,29 +220,29 @@ pub const Client = struct {
     ///
     /// The top contributor network flows overall are for a specific metric type,
     /// for example, the number of retransmissions.
-    pub fn getQueryStatusWorkloadInsightsTopContributorsData(self: *Self, allocator: std.mem.Allocator, input: get_query_status_workload_insights_top_contributors_data.GetQueryStatusWorkloadInsightsTopContributorsDataInput, options: get_query_status_workload_insights_top_contributors_data.Options) !get_query_status_workload_insights_top_contributors_data.GetQueryStatusWorkloadInsightsTopContributorsDataOutput {
+    pub fn getQueryStatusWorkloadInsightsTopContributorsData(self: *Self, allocator: std.mem.Allocator, input: get_query_status_workload_insights_top_contributors_data.GetQueryStatusWorkloadInsightsTopContributorsDataInput, options: CallOptions) !get_query_status_workload_insights_top_contributors_data.GetQueryStatusWorkloadInsightsTopContributorsDataOutput {
         return get_query_status_workload_insights_top_contributors_data.execute(self, allocator, input, options);
     }
 
     /// Gets information about a scope, including the name, status, tags, and target
     /// details. The scope in Network Flow Monitor is an account.
-    pub fn getScope(self: *Self, allocator: std.mem.Allocator, input: get_scope.GetScopeInput, options: get_scope.Options) !get_scope.GetScopeOutput {
+    pub fn getScope(self: *Self, allocator: std.mem.Allocator, input: get_scope.GetScopeInput, options: CallOptions) !get_scope.GetScopeOutput {
         return get_scope.execute(self, allocator, input, options);
     }
 
     /// List all monitors in an account. Optionally, you can list only monitors that
     /// have a specific status, by using the `STATUS` parameter.
-    pub fn listMonitors(self: *Self, allocator: std.mem.Allocator, input: list_monitors.ListMonitorsInput, options: list_monitors.Options) !list_monitors.ListMonitorsOutput {
+    pub fn listMonitors(self: *Self, allocator: std.mem.Allocator, input: list_monitors.ListMonitorsInput, options: CallOptions) !list_monitors.ListMonitorsOutput {
         return list_monitors.execute(self, allocator, input, options);
     }
 
     /// List all the scopes for an account.
-    pub fn listScopes(self: *Self, allocator: std.mem.Allocator, input: list_scopes.ListScopesInput, options: list_scopes.Options) !list_scopes.ListScopesOutput {
+    pub fn listScopes(self: *Self, allocator: std.mem.Allocator, input: list_scopes.ListScopesInput, options: CallOptions) !list_scopes.ListScopesOutput {
         return list_scopes.execute(self, allocator, input, options);
     }
 
     /// Returns all the tags for a resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -256,7 +257,7 @@ pub const Client = struct {
     /// values for a specific metric type. Top contributors can be across all
     /// workload insights, for a given scope, or for a specific monitor. Use the
     /// applicable APIs for the top contributors that you want to be returned.
-    pub fn startQueryMonitorTopContributors(self: *Self, allocator: std.mem.Allocator, input: start_query_monitor_top_contributors.StartQueryMonitorTopContributorsInput, options: start_query_monitor_top_contributors.Options) !start_query_monitor_top_contributors.StartQueryMonitorTopContributorsOutput {
+    pub fn startQueryMonitorTopContributors(self: *Self, allocator: std.mem.Allocator, input: start_query_monitor_top_contributors.StartQueryMonitorTopContributorsInput, options: CallOptions) !start_query_monitor_top_contributors.StartQueryMonitorTopContributorsOutput {
         return start_query_monitor_top_contributors.execute(self, allocator, input, options);
     }
 
@@ -271,7 +272,7 @@ pub const Client = struct {
     /// values for a specific metric type. Top contributors can be across all
     /// workload insights, for a given scope, or for a specific monitor. Use the
     /// applicable APIs for the top contributors that you want to be returned.
-    pub fn startQueryWorkloadInsightsTopContributors(self: *Self, allocator: std.mem.Allocator, input: start_query_workload_insights_top_contributors.StartQueryWorkloadInsightsTopContributorsInput, options: start_query_workload_insights_top_contributors.Options) !start_query_workload_insights_top_contributors.StartQueryWorkloadInsightsTopContributorsOutput {
+    pub fn startQueryWorkloadInsightsTopContributors(self: *Self, allocator: std.mem.Allocator, input: start_query_workload_insights_top_contributors.StartQueryWorkloadInsightsTopContributorsInput, options: CallOptions) !start_query_workload_insights_top_contributors.StartQueryWorkloadInsightsTopContributorsOutput {
         return start_query_workload_insights_top_contributors.execute(self, allocator, input, options);
     }
 
@@ -286,7 +287,7 @@ pub const Client = struct {
     /// values for a specific metric type. Top contributors can be across all
     /// workload insights, for a given scope, or for a specific monitor. Use the
     /// applicable call for the top contributors that you want to be returned.
-    pub fn startQueryWorkloadInsightsTopContributorsData(self: *Self, allocator: std.mem.Allocator, input: start_query_workload_insights_top_contributors_data.StartQueryWorkloadInsightsTopContributorsDataInput, options: start_query_workload_insights_top_contributors_data.Options) !start_query_workload_insights_top_contributors_data.StartQueryWorkloadInsightsTopContributorsDataOutput {
+    pub fn startQueryWorkloadInsightsTopContributorsData(self: *Self, allocator: std.mem.Allocator, input: start_query_workload_insights_top_contributors_data.StartQueryWorkloadInsightsTopContributorsDataInput, options: CallOptions) !start_query_workload_insights_top_contributors_data.StartQueryWorkloadInsightsTopContributorsDataOutput {
         return start_query_workload_insights_top_contributors_data.execute(self, allocator, input, options);
     }
 
@@ -297,7 +298,7 @@ pub const Client = struct {
     /// values for a specific metric type. Top contributors can be across all
     /// workload insights, for a given scope, or for a specific monitor. Use the
     /// applicable call for the top contributors that you want to be returned.
-    pub fn stopQueryMonitorTopContributors(self: *Self, allocator: std.mem.Allocator, input: stop_query_monitor_top_contributors.StopQueryMonitorTopContributorsInput, options: stop_query_monitor_top_contributors.Options) !stop_query_monitor_top_contributors.StopQueryMonitorTopContributorsOutput {
+    pub fn stopQueryMonitorTopContributors(self: *Self, allocator: std.mem.Allocator, input: stop_query_monitor_top_contributors.StopQueryMonitorTopContributorsInput, options: CallOptions) !stop_query_monitor_top_contributors.StopQueryMonitorTopContributorsOutput {
         return stop_query_monitor_top_contributors.execute(self, allocator, input, options);
     }
 
@@ -308,7 +309,7 @@ pub const Client = struct {
     /// values for a specific metric type. Top contributors can be across all
     /// workload insights, for a given scope, or for a specific monitor. Use the
     /// applicable call for the top contributors that you want to be returned.
-    pub fn stopQueryWorkloadInsightsTopContributors(self: *Self, allocator: std.mem.Allocator, input: stop_query_workload_insights_top_contributors.StopQueryWorkloadInsightsTopContributorsInput, options: stop_query_workload_insights_top_contributors.Options) !stop_query_workload_insights_top_contributors.StopQueryWorkloadInsightsTopContributorsOutput {
+    pub fn stopQueryWorkloadInsightsTopContributors(self: *Self, allocator: std.mem.Allocator, input: stop_query_workload_insights_top_contributors.StopQueryWorkloadInsightsTopContributorsInput, options: CallOptions) !stop_query_workload_insights_top_contributors.StopQueryWorkloadInsightsTopContributorsOutput {
         return stop_query_workload_insights_top_contributors.execute(self, allocator, input, options);
     }
 
@@ -319,29 +320,29 @@ pub const Client = struct {
     /// values for a specific metric type. Top contributors can be across all
     /// workload insights, for a given scope, or for a specific monitor. Use the
     /// applicable call for the top contributors that you want to be returned.
-    pub fn stopQueryWorkloadInsightsTopContributorsData(self: *Self, allocator: std.mem.Allocator, input: stop_query_workload_insights_top_contributors_data.StopQueryWorkloadInsightsTopContributorsDataInput, options: stop_query_workload_insights_top_contributors_data.Options) !stop_query_workload_insights_top_contributors_data.StopQueryWorkloadInsightsTopContributorsDataOutput {
+    pub fn stopQueryWorkloadInsightsTopContributorsData(self: *Self, allocator: std.mem.Allocator, input: stop_query_workload_insights_top_contributors_data.StopQueryWorkloadInsightsTopContributorsDataInput, options: CallOptions) !stop_query_workload_insights_top_contributors_data.StopQueryWorkloadInsightsTopContributorsDataOutput {
         return stop_query_workload_insights_top_contributors_data.execute(self, allocator, input, options);
     }
 
     /// Adds a tag to a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Update a monitor to add or remove local or remote resources.
-    pub fn updateMonitor(self: *Self, allocator: std.mem.Allocator, input: update_monitor.UpdateMonitorInput, options: update_monitor.Options) !update_monitor.UpdateMonitorOutput {
+    pub fn updateMonitor(self: *Self, allocator: std.mem.Allocator, input: update_monitor.UpdateMonitorInput, options: CallOptions) !update_monitor.UpdateMonitorOutput {
         return update_monitor.execute(self, allocator, input, options);
     }
 
     /// Update a scope to add or remove resources that you want to be available for
     /// Network Flow Monitor to generate metrics for, when you have active agents on
     /// those resources sending metrics reports to the Network Flow Monitor backend.
-    pub fn updateScope(self: *Self, allocator: std.mem.Allocator, input: update_scope.UpdateScopeInput, options: update_scope.Options) !update_scope.UpdateScopeOutput {
+    pub fn updateScope(self: *Self, allocator: std.mem.Allocator, input: update_scope.UpdateScopeInput, options: CallOptions) !update_scope.UpdateScopeOutput {
         return update_scope.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RRType = @import("rr_type.zig").RRType;
 const ResourceRecordSet = @import("resource_record_set.zig").ResourceRecordSet;
@@ -108,11 +109,7 @@ pub const ListResourceRecordSetsOutput = struct {
     resource_record_sets: ?[]const ResourceRecordSet = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListResourceRecordSetsInput, options: Options) !ListResourceRecordSetsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListResourceRecordSetsInput, options: CallOptions) !ListResourceRecordSetsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

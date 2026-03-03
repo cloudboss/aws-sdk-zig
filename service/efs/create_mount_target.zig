@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpAddressType = @import("ip_address_type.zig").IpAddressType;
 const LifeCycleState = @import("life_cycle_state.zig").LifeCycleState;
@@ -60,13 +61,9 @@ pub const CreateMountTargetInput = struct {
     };
 };
 
-const CreateMountTargetOutput = @import("mount_target_description.zig").MountTargetDescription;
+pub const CreateMountTargetOutput = @import("mount_target_description.zig").MountTargetDescription;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMountTargetInput, options: Options) !CreateMountTargetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMountTargetInput, options: CallOptions) !CreateMountTargetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

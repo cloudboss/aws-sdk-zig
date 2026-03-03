@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FeatureDefinition = @import("feature_definition.zig").FeatureDefinition;
 const OfflineStoreConfig = @import("offline_store_config.zig").OfflineStoreConfig;
@@ -129,11 +130,7 @@ pub const CreateFeatureGroupOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateFeatureGroupInput, options: Options) !CreateFeatureGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateFeatureGroupInput, options: CallOptions) !CreateFeatureGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

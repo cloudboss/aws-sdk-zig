@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AssessmentReportType = @import("assessment_report_type.zig").AssessmentReportType;
 const ExportMetadataModelAssessmentResultEntry = @import("export_metadata_model_assessment_result_entry.zig").ExportMetadataModelAssessmentResultEntry;
@@ -40,11 +41,7 @@ pub const ExportMetadataModelAssessmentOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExportMetadataModelAssessmentInput, options: Options) !ExportMetadataModelAssessmentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExportMetadataModelAssessmentInput, options: CallOptions) !ExportMetadataModelAssessmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

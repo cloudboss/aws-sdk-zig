@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DBCluster = @import("db_cluster.zig").DBCluster;
 const serde = @import("serde.zig");
@@ -19,11 +20,7 @@ pub const RebootDBClusterOutput = struct {
     db_cluster: ?DBCluster = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RebootDBClusterInput, options: Options) !RebootDBClusterOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RebootDBClusterInput, options: CallOptions) !RebootDBClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

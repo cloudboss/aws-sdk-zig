@@ -75,6 +75,7 @@ const update_graphql_api = @import("update_graphql_api.zig");
 const update_resolver = @import("update_resolver.zig");
 const update_source_api_association = @import("update_source_api_association.zig");
 const update_type = @import("update_type.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -106,21 +107,21 @@ pub const Client = struct {
     }
 
     /// Maps an endpoint to your custom domain.
-    pub fn associateApi(self: *Self, allocator: std.mem.Allocator, input: associate_api.AssociateApiInput, options: associate_api.Options) !associate_api.AssociateApiOutput {
+    pub fn associateApi(self: *Self, allocator: std.mem.Allocator, input: associate_api.AssociateApiInput, options: CallOptions) !associate_api.AssociateApiOutput {
         return associate_api.execute(self, allocator, input, options);
     }
 
     /// Creates an association between a Merged API and source API using the source
     /// API's
     /// identifier.
-    pub fn associateMergedGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: associate_merged_graphql_api.AssociateMergedGraphqlApiInput, options: associate_merged_graphql_api.Options) !associate_merged_graphql_api.AssociateMergedGraphqlApiOutput {
+    pub fn associateMergedGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: associate_merged_graphql_api.AssociateMergedGraphqlApiInput, options: CallOptions) !associate_merged_graphql_api.AssociateMergedGraphqlApiOutput {
         return associate_merged_graphql_api.execute(self, allocator, input, options);
     }
 
     /// Creates an association between a Merged API and source API using the Merged
     /// API's
     /// identifier.
-    pub fn associateSourceGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: associate_source_graphql_api.AssociateSourceGraphqlApiInput, options: associate_source_graphql_api.Options) !associate_source_graphql_api.AssociateSourceGraphqlApiOutput {
+    pub fn associateSourceGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: associate_source_graphql_api.AssociateSourceGraphqlApiInput, options: CallOptions) !associate_source_graphql_api.AssociateSourceGraphqlApiOutput {
         return associate_source_graphql_api.execute(self, allocator, input, options);
     }
 
@@ -128,32 +129,32 @@ pub const Client = struct {
     /// API with your preferred configuration, such as an Event API that provides
     /// real-time message
     /// publishing and message subscriptions over WebSockets.
-    pub fn createApi(self: *Self, allocator: std.mem.Allocator, input: create_api.CreateApiInput, options: create_api.Options) !create_api.CreateApiOutput {
+    pub fn createApi(self: *Self, allocator: std.mem.Allocator, input: create_api.CreateApiInput, options: CallOptions) !create_api.CreateApiOutput {
         return create_api.execute(self, allocator, input, options);
     }
 
     /// Creates a cache for the GraphQL API.
-    pub fn createApiCache(self: *Self, allocator: std.mem.Allocator, input: create_api_cache.CreateApiCacheInput, options: create_api_cache.Options) !create_api_cache.CreateApiCacheOutput {
+    pub fn createApiCache(self: *Self, allocator: std.mem.Allocator, input: create_api_cache.CreateApiCacheInput, options: CallOptions) !create_api_cache.CreateApiCacheOutput {
         return create_api_cache.execute(self, allocator, input, options);
     }
 
     /// Creates a unique key that you can distribute to clients who invoke your API.
-    pub fn createApiKey(self: *Self, allocator: std.mem.Allocator, input: create_api_key.CreateApiKeyInput, options: create_api_key.Options) !create_api_key.CreateApiKeyOutput {
+    pub fn createApiKey(self: *Self, allocator: std.mem.Allocator, input: create_api_key.CreateApiKeyInput, options: CallOptions) !create_api_key.CreateApiKeyOutput {
         return create_api_key.execute(self, allocator, input, options);
     }
 
     /// Creates a `ChannelNamespace` for an `Api`.
-    pub fn createChannelNamespace(self: *Self, allocator: std.mem.Allocator, input: create_channel_namespace.CreateChannelNamespaceInput, options: create_channel_namespace.Options) !create_channel_namespace.CreateChannelNamespaceOutput {
+    pub fn createChannelNamespace(self: *Self, allocator: std.mem.Allocator, input: create_channel_namespace.CreateChannelNamespaceInput, options: CallOptions) !create_channel_namespace.CreateChannelNamespaceOutput {
         return create_channel_namespace.execute(self, allocator, input, options);
     }
 
     /// Creates a `DataSource` object.
-    pub fn createDataSource(self: *Self, allocator: std.mem.Allocator, input: create_data_source.CreateDataSourceInput, options: create_data_source.Options) !create_data_source.CreateDataSourceOutput {
+    pub fn createDataSource(self: *Self, allocator: std.mem.Allocator, input: create_data_source.CreateDataSourceInput, options: CallOptions) !create_data_source.CreateDataSourceOutput {
         return create_data_source.execute(self, allocator, input, options);
     }
 
     /// Creates a custom `DomainName` object.
-    pub fn createDomainName(self: *Self, allocator: std.mem.Allocator, input: create_domain_name.CreateDomainNameInput, options: create_domain_name.Options) !create_domain_name.CreateDomainNameOutput {
+    pub fn createDomainName(self: *Self, allocator: std.mem.Allocator, input: create_domain_name.CreateDomainNameInput, options: CallOptions) !create_domain_name.CreateDomainNameOutput {
         return create_domain_name.execute(self, allocator, input, options);
     }
 
@@ -162,12 +163,12 @@ pub const Client = struct {
     /// A function is a reusable entity. You can use multiple functions to compose
     /// the resolver
     /// logic.
-    pub fn createFunction(self: *Self, allocator: std.mem.Allocator, input: create_function.CreateFunctionInput, options: create_function.Options) !create_function.CreateFunctionOutput {
+    pub fn createFunction(self: *Self, allocator: std.mem.Allocator, input: create_function.CreateFunctionInput, options: CallOptions) !create_function.CreateFunctionOutput {
         return create_function.execute(self, allocator, input, options);
     }
 
     /// Creates a `GraphqlApi` object.
-    pub fn createGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: create_graphql_api.CreateGraphqlApiInput, options: create_graphql_api.Options) !create_graphql_api.CreateGraphqlApiOutput {
+    pub fn createGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: create_graphql_api.CreateGraphqlApiInput, options: CallOptions) !create_graphql_api.CreateGraphqlApiOutput {
         return create_graphql_api.execute(self, allocator, input, options);
     }
 
@@ -176,81 +177,81 @@ pub const Client = struct {
     /// A resolver converts incoming requests into a format that a data source can
     /// understand,
     /// and converts the data source's responses into GraphQL.
-    pub fn createResolver(self: *Self, allocator: std.mem.Allocator, input: create_resolver.CreateResolverInput, options: create_resolver.Options) !create_resolver.CreateResolverOutput {
+    pub fn createResolver(self: *Self, allocator: std.mem.Allocator, input: create_resolver.CreateResolverInput, options: CallOptions) !create_resolver.CreateResolverOutput {
         return create_resolver.execute(self, allocator, input, options);
     }
 
     /// Creates a `Type` object.
-    pub fn createType(self: *Self, allocator: std.mem.Allocator, input: create_type.CreateTypeInput, options: create_type.Options) !create_type.CreateTypeOutput {
+    pub fn createType(self: *Self, allocator: std.mem.Allocator, input: create_type.CreateTypeInput, options: CallOptions) !create_type.CreateTypeOutput {
         return create_type.execute(self, allocator, input, options);
     }
 
     /// Deletes an `Api` object
-    pub fn deleteApi(self: *Self, allocator: std.mem.Allocator, input: delete_api.DeleteApiInput, options: delete_api.Options) !delete_api.DeleteApiOutput {
+    pub fn deleteApi(self: *Self, allocator: std.mem.Allocator, input: delete_api.DeleteApiInput, options: CallOptions) !delete_api.DeleteApiOutput {
         return delete_api.execute(self, allocator, input, options);
     }
 
     /// Deletes an `ApiCache` object.
-    pub fn deleteApiCache(self: *Self, allocator: std.mem.Allocator, input: delete_api_cache.DeleteApiCacheInput, options: delete_api_cache.Options) !delete_api_cache.DeleteApiCacheOutput {
+    pub fn deleteApiCache(self: *Self, allocator: std.mem.Allocator, input: delete_api_cache.DeleteApiCacheInput, options: CallOptions) !delete_api_cache.DeleteApiCacheOutput {
         return delete_api_cache.execute(self, allocator, input, options);
     }
 
     /// Deletes an API key.
-    pub fn deleteApiKey(self: *Self, allocator: std.mem.Allocator, input: delete_api_key.DeleteApiKeyInput, options: delete_api_key.Options) !delete_api_key.DeleteApiKeyOutput {
+    pub fn deleteApiKey(self: *Self, allocator: std.mem.Allocator, input: delete_api_key.DeleteApiKeyInput, options: CallOptions) !delete_api_key.DeleteApiKeyOutput {
         return delete_api_key.execute(self, allocator, input, options);
     }
 
     /// Deletes a `ChannelNamespace`.
-    pub fn deleteChannelNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_channel_namespace.DeleteChannelNamespaceInput, options: delete_channel_namespace.Options) !delete_channel_namespace.DeleteChannelNamespaceOutput {
+    pub fn deleteChannelNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_channel_namespace.DeleteChannelNamespaceInput, options: CallOptions) !delete_channel_namespace.DeleteChannelNamespaceOutput {
         return delete_channel_namespace.execute(self, allocator, input, options);
     }
 
     /// Deletes a `DataSource` object.
-    pub fn deleteDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_data_source.DeleteDataSourceInput, options: delete_data_source.Options) !delete_data_source.DeleteDataSourceOutput {
+    pub fn deleteDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_data_source.DeleteDataSourceInput, options: CallOptions) !delete_data_source.DeleteDataSourceOutput {
         return delete_data_source.execute(self, allocator, input, options);
     }
 
     /// Deletes a custom `DomainName` object.
-    pub fn deleteDomainName(self: *Self, allocator: std.mem.Allocator, input: delete_domain_name.DeleteDomainNameInput, options: delete_domain_name.Options) !delete_domain_name.DeleteDomainNameOutput {
+    pub fn deleteDomainName(self: *Self, allocator: std.mem.Allocator, input: delete_domain_name.DeleteDomainNameInput, options: CallOptions) !delete_domain_name.DeleteDomainNameOutput {
         return delete_domain_name.execute(self, allocator, input, options);
     }
 
     /// Deletes a `Function`.
-    pub fn deleteFunction(self: *Self, allocator: std.mem.Allocator, input: delete_function.DeleteFunctionInput, options: delete_function.Options) !delete_function.DeleteFunctionOutput {
+    pub fn deleteFunction(self: *Self, allocator: std.mem.Allocator, input: delete_function.DeleteFunctionInput, options: CallOptions) !delete_function.DeleteFunctionOutput {
         return delete_function.execute(self, allocator, input, options);
     }
 
     /// Deletes a `GraphqlApi` object.
-    pub fn deleteGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: delete_graphql_api.DeleteGraphqlApiInput, options: delete_graphql_api.Options) !delete_graphql_api.DeleteGraphqlApiOutput {
+    pub fn deleteGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: delete_graphql_api.DeleteGraphqlApiInput, options: CallOptions) !delete_graphql_api.DeleteGraphqlApiOutput {
         return delete_graphql_api.execute(self, allocator, input, options);
     }
 
     /// Deletes a `Resolver` object.
-    pub fn deleteResolver(self: *Self, allocator: std.mem.Allocator, input: delete_resolver.DeleteResolverInput, options: delete_resolver.Options) !delete_resolver.DeleteResolverOutput {
+    pub fn deleteResolver(self: *Self, allocator: std.mem.Allocator, input: delete_resolver.DeleteResolverInput, options: CallOptions) !delete_resolver.DeleteResolverOutput {
         return delete_resolver.execute(self, allocator, input, options);
     }
 
     /// Deletes a `Type` object.
-    pub fn deleteType(self: *Self, allocator: std.mem.Allocator, input: delete_type.DeleteTypeInput, options: delete_type.Options) !delete_type.DeleteTypeOutput {
+    pub fn deleteType(self: *Self, allocator: std.mem.Allocator, input: delete_type.DeleteTypeInput, options: CallOptions) !delete_type.DeleteTypeOutput {
         return delete_type.execute(self, allocator, input, options);
     }
 
     /// Removes an `ApiAssociation` object from a custom domain.
-    pub fn disassociateApi(self: *Self, allocator: std.mem.Allocator, input: disassociate_api.DisassociateApiInput, options: disassociate_api.Options) !disassociate_api.DisassociateApiOutput {
+    pub fn disassociateApi(self: *Self, allocator: std.mem.Allocator, input: disassociate_api.DisassociateApiInput, options: CallOptions) !disassociate_api.DisassociateApiOutput {
         return disassociate_api.execute(self, allocator, input, options);
     }
 
     /// Deletes an association between a Merged API and source API using the source
     /// API's
     /// identifier and the association ID.
-    pub fn disassociateMergedGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: disassociate_merged_graphql_api.DisassociateMergedGraphqlApiInput, options: disassociate_merged_graphql_api.Options) !disassociate_merged_graphql_api.DisassociateMergedGraphqlApiOutput {
+    pub fn disassociateMergedGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: disassociate_merged_graphql_api.DisassociateMergedGraphqlApiInput, options: CallOptions) !disassociate_merged_graphql_api.DisassociateMergedGraphqlApiOutput {
         return disassociate_merged_graphql_api.execute(self, allocator, input, options);
     }
 
     /// Deletes an association between a Merged API and source API using the Merged
     /// API's
     /// identifier and the association ID.
-    pub fn disassociateSourceGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: disassociate_source_graphql_api.DisassociateSourceGraphqlApiInput, options: disassociate_source_graphql_api.Options) !disassociate_source_graphql_api.DisassociateSourceGraphqlApiOutput {
+    pub fn disassociateSourceGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: disassociate_source_graphql_api.DisassociateSourceGraphqlApiInput, options: CallOptions) !disassociate_source_graphql_api.DisassociateSourceGraphqlApiOutput {
         return disassociate_source_graphql_api.execute(self, allocator, input, options);
     }
 
@@ -265,7 +266,7 @@ pub const Client = struct {
     /// data source operation. The response function interprets responses from the
     /// data source and
     /// maps it to the shape of the GraphQL field output type.
-    pub fn evaluateCode(self: *Self, allocator: std.mem.Allocator, input: evaluate_code.EvaluateCodeInput, options: evaluate_code.Options) !evaluate_code.EvaluateCodeOutput {
+    pub fn evaluateCode(self: *Self, allocator: std.mem.Allocator, input: evaluate_code.EvaluateCodeInput, options: CallOptions) !evaluate_code.EvaluateCodeOutput {
         return evaluate_code.execute(self, allocator, input, options);
     }
 
@@ -283,37 +284,37 @@ pub const Client = struct {
     ///
     /// Mapping templates are written in the Apache Velocity Template Language
     /// (VTL).
-    pub fn evaluateMappingTemplate(self: *Self, allocator: std.mem.Allocator, input: evaluate_mapping_template.EvaluateMappingTemplateInput, options: evaluate_mapping_template.Options) !evaluate_mapping_template.EvaluateMappingTemplateOutput {
+    pub fn evaluateMappingTemplate(self: *Self, allocator: std.mem.Allocator, input: evaluate_mapping_template.EvaluateMappingTemplateInput, options: CallOptions) !evaluate_mapping_template.EvaluateMappingTemplateOutput {
         return evaluate_mapping_template.execute(self, allocator, input, options);
     }
 
     /// Flushes an `ApiCache` object.
-    pub fn flushApiCache(self: *Self, allocator: std.mem.Allocator, input: flush_api_cache.FlushApiCacheInput, options: flush_api_cache.Options) !flush_api_cache.FlushApiCacheOutput {
+    pub fn flushApiCache(self: *Self, allocator: std.mem.Allocator, input: flush_api_cache.FlushApiCacheInput, options: CallOptions) !flush_api_cache.FlushApiCacheOutput {
         return flush_api_cache.execute(self, allocator, input, options);
     }
 
     /// Retrieves an `Api` object.
-    pub fn getApi(self: *Self, allocator: std.mem.Allocator, input: get_api.GetApiInput, options: get_api.Options) !get_api.GetApiOutput {
+    pub fn getApi(self: *Self, allocator: std.mem.Allocator, input: get_api.GetApiInput, options: CallOptions) !get_api.GetApiOutput {
         return get_api.execute(self, allocator, input, options);
     }
 
     /// Retrieves an `ApiAssociation` object.
-    pub fn getApiAssociation(self: *Self, allocator: std.mem.Allocator, input: get_api_association.GetApiAssociationInput, options: get_api_association.Options) !get_api_association.GetApiAssociationOutput {
+    pub fn getApiAssociation(self: *Self, allocator: std.mem.Allocator, input: get_api_association.GetApiAssociationInput, options: CallOptions) !get_api_association.GetApiAssociationOutput {
         return get_api_association.execute(self, allocator, input, options);
     }
 
     /// Retrieves an `ApiCache` object.
-    pub fn getApiCache(self: *Self, allocator: std.mem.Allocator, input: get_api_cache.GetApiCacheInput, options: get_api_cache.Options) !get_api_cache.GetApiCacheOutput {
+    pub fn getApiCache(self: *Self, allocator: std.mem.Allocator, input: get_api_cache.GetApiCacheInput, options: CallOptions) !get_api_cache.GetApiCacheOutput {
         return get_api_cache.execute(self, allocator, input, options);
     }
 
     /// Retrieves the channel namespace for a specified `Api`.
-    pub fn getChannelNamespace(self: *Self, allocator: std.mem.Allocator, input: get_channel_namespace.GetChannelNamespaceInput, options: get_channel_namespace.Options) !get_channel_namespace.GetChannelNamespaceOutput {
+    pub fn getChannelNamespace(self: *Self, allocator: std.mem.Allocator, input: get_channel_namespace.GetChannelNamespaceInput, options: CallOptions) !get_channel_namespace.GetChannelNamespaceOutput {
         return get_channel_namespace.execute(self, allocator, input, options);
     }
 
     /// Retrieves a `DataSource` object.
-    pub fn getDataSource(self: *Self, allocator: std.mem.Allocator, input: get_data_source.GetDataSourceInput, options: get_data_source.Options) !get_data_source.GetDataSourceOutput {
+    pub fn getDataSource(self: *Self, allocator: std.mem.Allocator, input: get_data_source.GetDataSourceInput, options: CallOptions) !get_data_source.GetDataSourceOutput {
         return get_data_source.execute(self, allocator, input, options);
     }
 
@@ -322,54 +323,54 @@ pub const Client = struct {
     /// result of the instrospection will also be returned. If the retrieval fails
     /// the operation,
     /// an error message will be returned instead.
-    pub fn getDataSourceIntrospection(self: *Self, allocator: std.mem.Allocator, input: get_data_source_introspection.GetDataSourceIntrospectionInput, options: get_data_source_introspection.Options) !get_data_source_introspection.GetDataSourceIntrospectionOutput {
+    pub fn getDataSourceIntrospection(self: *Self, allocator: std.mem.Allocator, input: get_data_source_introspection.GetDataSourceIntrospectionInput, options: CallOptions) !get_data_source_introspection.GetDataSourceIntrospectionOutput {
         return get_data_source_introspection.execute(self, allocator, input, options);
     }
 
     /// Retrieves a custom `DomainName` object.
-    pub fn getDomainName(self: *Self, allocator: std.mem.Allocator, input: get_domain_name.GetDomainNameInput, options: get_domain_name.Options) !get_domain_name.GetDomainNameOutput {
+    pub fn getDomainName(self: *Self, allocator: std.mem.Allocator, input: get_domain_name.GetDomainNameInput, options: CallOptions) !get_domain_name.GetDomainNameOutput {
         return get_domain_name.execute(self, allocator, input, options);
     }
 
     /// Get a `Function`.
-    pub fn getFunction(self: *Self, allocator: std.mem.Allocator, input: get_function.GetFunctionInput, options: get_function.Options) !get_function.GetFunctionOutput {
+    pub fn getFunction(self: *Self, allocator: std.mem.Allocator, input: get_function.GetFunctionInput, options: CallOptions) !get_function.GetFunctionOutput {
         return get_function.execute(self, allocator, input, options);
     }
 
     /// Retrieves a `GraphqlApi` object.
-    pub fn getGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: get_graphql_api.GetGraphqlApiInput, options: get_graphql_api.Options) !get_graphql_api.GetGraphqlApiOutput {
+    pub fn getGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: get_graphql_api.GetGraphqlApiInput, options: CallOptions) !get_graphql_api.GetGraphqlApiOutput {
         return get_graphql_api.execute(self, allocator, input, options);
     }
 
     /// Retrieves the list of environmental variable key-value pairs associated with
     /// an API by
     /// its ID value.
-    pub fn getGraphqlApiEnvironmentVariables(self: *Self, allocator: std.mem.Allocator, input: get_graphql_api_environment_variables.GetGraphqlApiEnvironmentVariablesInput, options: get_graphql_api_environment_variables.Options) !get_graphql_api_environment_variables.GetGraphqlApiEnvironmentVariablesOutput {
+    pub fn getGraphqlApiEnvironmentVariables(self: *Self, allocator: std.mem.Allocator, input: get_graphql_api_environment_variables.GetGraphqlApiEnvironmentVariablesInput, options: CallOptions) !get_graphql_api_environment_variables.GetGraphqlApiEnvironmentVariablesOutput {
         return get_graphql_api_environment_variables.execute(self, allocator, input, options);
     }
 
     /// Retrieves the introspection schema for a GraphQL API.
-    pub fn getIntrospectionSchema(self: *Self, allocator: std.mem.Allocator, input: get_introspection_schema.GetIntrospectionSchemaInput, options: get_introspection_schema.Options) !get_introspection_schema.GetIntrospectionSchemaOutput {
+    pub fn getIntrospectionSchema(self: *Self, allocator: std.mem.Allocator, input: get_introspection_schema.GetIntrospectionSchemaInput, options: CallOptions) !get_introspection_schema.GetIntrospectionSchemaOutput {
         return get_introspection_schema.execute(self, allocator, input, options);
     }
 
     /// Retrieves a `Resolver` object.
-    pub fn getResolver(self: *Self, allocator: std.mem.Allocator, input: get_resolver.GetResolverInput, options: get_resolver.Options) !get_resolver.GetResolverOutput {
+    pub fn getResolver(self: *Self, allocator: std.mem.Allocator, input: get_resolver.GetResolverInput, options: CallOptions) !get_resolver.GetResolverOutput {
         return get_resolver.execute(self, allocator, input, options);
     }
 
     /// Retrieves the current status of a schema creation operation.
-    pub fn getSchemaCreationStatus(self: *Self, allocator: std.mem.Allocator, input: get_schema_creation_status.GetSchemaCreationStatusInput, options: get_schema_creation_status.Options) !get_schema_creation_status.GetSchemaCreationStatusOutput {
+    pub fn getSchemaCreationStatus(self: *Self, allocator: std.mem.Allocator, input: get_schema_creation_status.GetSchemaCreationStatusInput, options: CallOptions) !get_schema_creation_status.GetSchemaCreationStatusOutput {
         return get_schema_creation_status.execute(self, allocator, input, options);
     }
 
     /// Retrieves a `SourceApiAssociation` object.
-    pub fn getSourceApiAssociation(self: *Self, allocator: std.mem.Allocator, input: get_source_api_association.GetSourceApiAssociationInput, options: get_source_api_association.Options) !get_source_api_association.GetSourceApiAssociationOutput {
+    pub fn getSourceApiAssociation(self: *Self, allocator: std.mem.Allocator, input: get_source_api_association.GetSourceApiAssociationInput, options: CallOptions) !get_source_api_association.GetSourceApiAssociationOutput {
         return get_source_api_association.execute(self, allocator, input, options);
     }
 
     /// Retrieves a `Type` object.
-    pub fn getType(self: *Self, allocator: std.mem.Allocator, input: get_type.GetTypeInput, options: get_type.Options) !get_type.GetTypeOutput {
+    pub fn getType(self: *Self, allocator: std.mem.Allocator, input: get_type.GetTypeInput, options: CallOptions) !get_type.GetTypeOutput {
         return get_type.execute(self, allocator, input, options);
     }
 
@@ -381,7 +382,7 @@ pub const Client = struct {
     /// safely call
     /// `DeleteApiKey` to manually delete a key before it's automatically
     /// deleted.
-    pub fn listApiKeys(self: *Self, allocator: std.mem.Allocator, input: list_api_keys.ListApiKeysInput, options: list_api_keys.Options) !list_api_keys.ListApiKeysOutput {
+    pub fn listApiKeys(self: *Self, allocator: std.mem.Allocator, input: list_api_keys.ListApiKeysInput, options: CallOptions) !list_api_keys.ListApiKeysOutput {
         return list_api_keys.execute(self, allocator, input, options);
     }
 
@@ -389,7 +390,7 @@ pub const Client = struct {
     ///
     /// `ListApis` returns only the high level API details. For more detailed
     /// information about an API, use `GetApi`.
-    pub fn listApis(self: *Self, allocator: std.mem.Allocator, input: list_apis.ListApisInput, options: list_apis.Options) !list_apis.ListApisOutput {
+    pub fn listApis(self: *Self, allocator: std.mem.Allocator, input: list_apis.ListApisInput, options: CallOptions) !list_apis.ListApisOutput {
         return list_apis.execute(self, allocator, input, options);
     }
 
@@ -397,57 +398,57 @@ pub const Client = struct {
     ///
     /// `ListChannelNamespaces` returns only high level details for the channel
     /// namespace. To retrieve code handlers, use `GetChannelNamespace`.
-    pub fn listChannelNamespaces(self: *Self, allocator: std.mem.Allocator, input: list_channel_namespaces.ListChannelNamespacesInput, options: list_channel_namespaces.Options) !list_channel_namespaces.ListChannelNamespacesOutput {
+    pub fn listChannelNamespaces(self: *Self, allocator: std.mem.Allocator, input: list_channel_namespaces.ListChannelNamespacesInput, options: CallOptions) !list_channel_namespaces.ListChannelNamespacesOutput {
         return list_channel_namespaces.execute(self, allocator, input, options);
     }
 
     /// Lists the data sources for a given API.
-    pub fn listDataSources(self: *Self, allocator: std.mem.Allocator, input: list_data_sources.ListDataSourcesInput, options: list_data_sources.Options) !list_data_sources.ListDataSourcesOutput {
+    pub fn listDataSources(self: *Self, allocator: std.mem.Allocator, input: list_data_sources.ListDataSourcesInput, options: CallOptions) !list_data_sources.ListDataSourcesOutput {
         return list_data_sources.execute(self, allocator, input, options);
     }
 
     /// Lists multiple custom domain names.
-    pub fn listDomainNames(self: *Self, allocator: std.mem.Allocator, input: list_domain_names.ListDomainNamesInput, options: list_domain_names.Options) !list_domain_names.ListDomainNamesOutput {
+    pub fn listDomainNames(self: *Self, allocator: std.mem.Allocator, input: list_domain_names.ListDomainNamesInput, options: CallOptions) !list_domain_names.ListDomainNamesOutput {
         return list_domain_names.execute(self, allocator, input, options);
     }
 
     /// List multiple functions.
-    pub fn listFunctions(self: *Self, allocator: std.mem.Allocator, input: list_functions.ListFunctionsInput, options: list_functions.Options) !list_functions.ListFunctionsOutput {
+    pub fn listFunctions(self: *Self, allocator: std.mem.Allocator, input: list_functions.ListFunctionsInput, options: CallOptions) !list_functions.ListFunctionsOutput {
         return list_functions.execute(self, allocator, input, options);
     }
 
     /// Lists your GraphQL APIs.
-    pub fn listGraphqlApis(self: *Self, allocator: std.mem.Allocator, input: list_graphql_apis.ListGraphqlApisInput, options: list_graphql_apis.Options) !list_graphql_apis.ListGraphqlApisOutput {
+    pub fn listGraphqlApis(self: *Self, allocator: std.mem.Allocator, input: list_graphql_apis.ListGraphqlApisInput, options: CallOptions) !list_graphql_apis.ListGraphqlApisOutput {
         return list_graphql_apis.execute(self, allocator, input, options);
     }
 
     /// Lists the resolvers for a given API and type.
-    pub fn listResolvers(self: *Self, allocator: std.mem.Allocator, input: list_resolvers.ListResolversInput, options: list_resolvers.Options) !list_resolvers.ListResolversOutput {
+    pub fn listResolvers(self: *Self, allocator: std.mem.Allocator, input: list_resolvers.ListResolversInput, options: CallOptions) !list_resolvers.ListResolversOutput {
         return list_resolvers.execute(self, allocator, input, options);
     }
 
     /// List the resolvers that are associated with a specific function.
-    pub fn listResolversByFunction(self: *Self, allocator: std.mem.Allocator, input: list_resolvers_by_function.ListResolversByFunctionInput, options: list_resolvers_by_function.Options) !list_resolvers_by_function.ListResolversByFunctionOutput {
+    pub fn listResolversByFunction(self: *Self, allocator: std.mem.Allocator, input: list_resolvers_by_function.ListResolversByFunctionInput, options: CallOptions) !list_resolvers_by_function.ListResolversByFunctionOutput {
         return list_resolvers_by_function.execute(self, allocator, input, options);
     }
 
     /// Lists the `SourceApiAssociationSummary` data.
-    pub fn listSourceApiAssociations(self: *Self, allocator: std.mem.Allocator, input: list_source_api_associations.ListSourceApiAssociationsInput, options: list_source_api_associations.Options) !list_source_api_associations.ListSourceApiAssociationsOutput {
+    pub fn listSourceApiAssociations(self: *Self, allocator: std.mem.Allocator, input: list_source_api_associations.ListSourceApiAssociationsInput, options: CallOptions) !list_source_api_associations.ListSourceApiAssociationsOutput {
         return list_source_api_associations.execute(self, allocator, input, options);
     }
 
     /// Lists the tags for a resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists the types for a given API.
-    pub fn listTypes(self: *Self, allocator: std.mem.Allocator, input: list_types.ListTypesInput, options: list_types.Options) !list_types.ListTypesOutput {
+    pub fn listTypes(self: *Self, allocator: std.mem.Allocator, input: list_types.ListTypesInput, options: CallOptions) !list_types.ListTypesOutput {
         return list_types.execute(self, allocator, input, options);
     }
 
     /// Lists `Type` objects by the source API association ID.
-    pub fn listTypesByAssociation(self: *Self, allocator: std.mem.Allocator, input: list_types_by_association.ListTypesByAssociationInput, options: list_types_by_association.Options) !list_types_by_association.ListTypesByAssociationOutput {
+    pub fn listTypesByAssociation(self: *Self, allocator: std.mem.Allocator, input: list_types_by_association.ListTypesByAssociationInput, options: CallOptions) !list_types_by_association.ListTypesByAssociationOutput {
         return list_types_by_association.execute(self, allocator, input, options);
     }
 
@@ -493,13 +494,13 @@ pub const Client = struct {
     /// variables will be lost. To avoid this, you must include all existing and new
     /// environmental
     /// variables in the list each time you call this action.
-    pub fn putGraphqlApiEnvironmentVariables(self: *Self, allocator: std.mem.Allocator, input: put_graphql_api_environment_variables.PutGraphqlApiEnvironmentVariablesInput, options: put_graphql_api_environment_variables.Options) !put_graphql_api_environment_variables.PutGraphqlApiEnvironmentVariablesOutput {
+    pub fn putGraphqlApiEnvironmentVariables(self: *Self, allocator: std.mem.Allocator, input: put_graphql_api_environment_variables.PutGraphqlApiEnvironmentVariablesInput, options: CallOptions) !put_graphql_api_environment_variables.PutGraphqlApiEnvironmentVariablesOutput {
         return put_graphql_api_environment_variables.execute(self, allocator, input, options);
     }
 
     /// Creates a new introspection. Returns the `introspectionId` of the new
     /// introspection after its creation.
-    pub fn startDataSourceIntrospection(self: *Self, allocator: std.mem.Allocator, input: start_data_source_introspection.StartDataSourceIntrospectionInput, options: start_data_source_introspection.Options) !start_data_source_introspection.StartDataSourceIntrospectionOutput {
+    pub fn startDataSourceIntrospection(self: *Self, allocator: std.mem.Allocator, input: start_data_source_introspection.StartDataSourceIntrospectionInput, options: CallOptions) !start_data_source_introspection.StartDataSourceIntrospectionOutput {
         return start_data_source_introspection.execute(self, allocator, input, options);
     }
 
@@ -507,80 +508,80 @@ pub const Client = struct {
     ///
     /// This operation is asynchronous. Use to
     /// determine when it has completed.
-    pub fn startSchemaCreation(self: *Self, allocator: std.mem.Allocator, input: start_schema_creation.StartSchemaCreationInput, options: start_schema_creation.Options) !start_schema_creation.StartSchemaCreationOutput {
+    pub fn startSchemaCreation(self: *Self, allocator: std.mem.Allocator, input: start_schema_creation.StartSchemaCreationInput, options: CallOptions) !start_schema_creation.StartSchemaCreationOutput {
         return start_schema_creation.execute(self, allocator, input, options);
     }
 
     /// Initiates a merge operation. Returns a status that shows the result of the
     /// merge
     /// operation.
-    pub fn startSchemaMerge(self: *Self, allocator: std.mem.Allocator, input: start_schema_merge.StartSchemaMergeInput, options: start_schema_merge.Options) !start_schema_merge.StartSchemaMergeOutput {
+    pub fn startSchemaMerge(self: *Self, allocator: std.mem.Allocator, input: start_schema_merge.StartSchemaMergeInput, options: CallOptions) !start_schema_merge.StartSchemaMergeOutput {
         return start_schema_merge.execute(self, allocator, input, options);
     }
 
     /// Tags a resource with user-supplied tags.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Untags a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an `Api`.
-    pub fn updateApi(self: *Self, allocator: std.mem.Allocator, input: update_api.UpdateApiInput, options: update_api.Options) !update_api.UpdateApiOutput {
+    pub fn updateApi(self: *Self, allocator: std.mem.Allocator, input: update_api.UpdateApiInput, options: CallOptions) !update_api.UpdateApiOutput {
         return update_api.execute(self, allocator, input, options);
     }
 
     /// Updates the cache for the GraphQL API.
-    pub fn updateApiCache(self: *Self, allocator: std.mem.Allocator, input: update_api_cache.UpdateApiCacheInput, options: update_api_cache.Options) !update_api_cache.UpdateApiCacheOutput {
+    pub fn updateApiCache(self: *Self, allocator: std.mem.Allocator, input: update_api_cache.UpdateApiCacheInput, options: CallOptions) !update_api_cache.UpdateApiCacheOutput {
         return update_api_cache.execute(self, allocator, input, options);
     }
 
     /// Updates an API key. You can update the key as long as it's not deleted.
-    pub fn updateApiKey(self: *Self, allocator: std.mem.Allocator, input: update_api_key.UpdateApiKeyInput, options: update_api_key.Options) !update_api_key.UpdateApiKeyOutput {
+    pub fn updateApiKey(self: *Self, allocator: std.mem.Allocator, input: update_api_key.UpdateApiKeyInput, options: CallOptions) !update_api_key.UpdateApiKeyOutput {
         return update_api_key.execute(self, allocator, input, options);
     }
 
     /// Updates a `ChannelNamespace` associated with an `Api`.
-    pub fn updateChannelNamespace(self: *Self, allocator: std.mem.Allocator, input: update_channel_namespace.UpdateChannelNamespaceInput, options: update_channel_namespace.Options) !update_channel_namespace.UpdateChannelNamespaceOutput {
+    pub fn updateChannelNamespace(self: *Self, allocator: std.mem.Allocator, input: update_channel_namespace.UpdateChannelNamespaceInput, options: CallOptions) !update_channel_namespace.UpdateChannelNamespaceOutput {
         return update_channel_namespace.execute(self, allocator, input, options);
     }
 
     /// Updates a `DataSource` object.
-    pub fn updateDataSource(self: *Self, allocator: std.mem.Allocator, input: update_data_source.UpdateDataSourceInput, options: update_data_source.Options) !update_data_source.UpdateDataSourceOutput {
+    pub fn updateDataSource(self: *Self, allocator: std.mem.Allocator, input: update_data_source.UpdateDataSourceInput, options: CallOptions) !update_data_source.UpdateDataSourceOutput {
         return update_data_source.execute(self, allocator, input, options);
     }
 
     /// Updates a custom `DomainName` object.
-    pub fn updateDomainName(self: *Self, allocator: std.mem.Allocator, input: update_domain_name.UpdateDomainNameInput, options: update_domain_name.Options) !update_domain_name.UpdateDomainNameOutput {
+    pub fn updateDomainName(self: *Self, allocator: std.mem.Allocator, input: update_domain_name.UpdateDomainNameInput, options: CallOptions) !update_domain_name.UpdateDomainNameOutput {
         return update_domain_name.execute(self, allocator, input, options);
     }
 
     /// Updates a `Function` object.
-    pub fn updateFunction(self: *Self, allocator: std.mem.Allocator, input: update_function.UpdateFunctionInput, options: update_function.Options) !update_function.UpdateFunctionOutput {
+    pub fn updateFunction(self: *Self, allocator: std.mem.Allocator, input: update_function.UpdateFunctionInput, options: CallOptions) !update_function.UpdateFunctionOutput {
         return update_function.execute(self, allocator, input, options);
     }
 
     /// Updates a `GraphqlApi` object.
-    pub fn updateGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: update_graphql_api.UpdateGraphqlApiInput, options: update_graphql_api.Options) !update_graphql_api.UpdateGraphqlApiOutput {
+    pub fn updateGraphqlApi(self: *Self, allocator: std.mem.Allocator, input: update_graphql_api.UpdateGraphqlApiInput, options: CallOptions) !update_graphql_api.UpdateGraphqlApiOutput {
         return update_graphql_api.execute(self, allocator, input, options);
     }
 
     /// Updates a `Resolver` object.
-    pub fn updateResolver(self: *Self, allocator: std.mem.Allocator, input: update_resolver.UpdateResolverInput, options: update_resolver.Options) !update_resolver.UpdateResolverOutput {
+    pub fn updateResolver(self: *Self, allocator: std.mem.Allocator, input: update_resolver.UpdateResolverInput, options: CallOptions) !update_resolver.UpdateResolverOutput {
         return update_resolver.execute(self, allocator, input, options);
     }
 
     /// Updates some of the configuration choices of a particular source API
     /// association.
-    pub fn updateSourceApiAssociation(self: *Self, allocator: std.mem.Allocator, input: update_source_api_association.UpdateSourceApiAssociationInput, options: update_source_api_association.Options) !update_source_api_association.UpdateSourceApiAssociationOutput {
+    pub fn updateSourceApiAssociation(self: *Self, allocator: std.mem.Allocator, input: update_source_api_association.UpdateSourceApiAssociationInput, options: CallOptions) !update_source_api_association.UpdateSourceApiAssociationOutput {
         return update_source_api_association.execute(self, allocator, input, options);
     }
 
     /// Updates a `Type` object.
-    pub fn updateType(self: *Self, allocator: std.mem.Allocator, input: update_type.UpdateTypeInput, options: update_type.Options) !update_type.UpdateTypeOutput {
+    pub fn updateType(self: *Self, allocator: std.mem.Allocator, input: update_type.UpdateTypeInput, options: CallOptions) !update_type.UpdateTypeOutput {
         return update_type.execute(self, allocator, input, options);
     }
 

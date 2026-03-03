@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DataBindingValueFilter = @import("data_binding_value_filter.zig").DataBindingValueFilter;
 const ComputationModelDataBindingUsageSummary = @import("computation_model_data_binding_usage_summary.zig").ComputationModelDataBindingUsageSummary;
@@ -45,11 +46,7 @@ pub const ListComputationModelDataBindingUsagesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListComputationModelDataBindingUsagesInput, options: Options) !ListComputationModelDataBindingUsagesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListComputationModelDataBindingUsagesInput, options: CallOptions) !ListComputationModelDataBindingUsagesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

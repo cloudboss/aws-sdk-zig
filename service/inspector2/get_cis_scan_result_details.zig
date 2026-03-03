@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CisScanResultDetailsFilterCriteria = @import("cis_scan_result_details_filter_criteria.zig").CisScanResultDetailsFilterCriteria;
 const CisScanResultDetailsSortBy = @import("cis_scan_result_details_sort_by.zig").CisScanResultDetailsSortBy;
@@ -64,11 +65,7 @@ pub const GetCisScanResultDetailsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCisScanResultDetailsInput, options: Options) !GetCisScanResultDetailsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCisScanResultDetailsInput, options: CallOptions) !GetCisScanResultDetailsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

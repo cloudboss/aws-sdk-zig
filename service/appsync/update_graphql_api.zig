@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AdditionalAuthenticationProvider = @import("additional_authentication_provider.zig").AdditionalAuthenticationProvider;
 const AuthenticationType = @import("authentication_type.zig").AuthenticationType;
@@ -123,11 +124,7 @@ pub const UpdateGraphqlApiOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateGraphqlApiInput, options: Options) !UpdateGraphqlApiOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateGraphqlApiInput, options: CallOptions) !UpdateGraphqlApiOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

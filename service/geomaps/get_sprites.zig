@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ColorScheme = @import("color_scheme.zig").ColorScheme;
 const MapStyle = @import("map_style.zig").MapStyle;
@@ -66,11 +67,7 @@ pub const GetSpritesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSpritesInput, options: Options) !GetSpritesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSpritesInput, options: CallOptions) !GetSpritesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

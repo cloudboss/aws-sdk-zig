@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RecordOutput = @import("record_output.zig").RecordOutput;
 const EngineWorkflowStatus = @import("engine_workflow_status.zig").EngineWorkflowStatus;
@@ -46,11 +47,7 @@ pub const NotifyUpdateProvisionedProductEngineWorkflowResultInput = struct {
 pub const NotifyUpdateProvisionedProductEngineWorkflowResultOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: NotifyUpdateProvisionedProductEngineWorkflowResultInput, options: Options) !NotifyUpdateProvisionedProductEngineWorkflowResultOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: NotifyUpdateProvisionedProductEngineWorkflowResultInput, options: CallOptions) !NotifyUpdateProvisionedProductEngineWorkflowResultOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_automated_reasoning_policies = @import("list_automated_reasoning_policies.zig");
@@ -31,7 +32,7 @@ pub const ListAutomatedReasoningPoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_automated_reasoning_policies.Options) !list_automated_reasoning_policies.ListAutomatedReasoningPoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_automated_reasoning_policies.ListAutomatedReasoningPoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -72,7 +73,7 @@ pub const ListAutomatedReasoningPolicyBuildWorkflowsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_automated_reasoning_policy_build_workflows.Options) !list_automated_reasoning_policy_build_workflows.ListAutomatedReasoningPolicyBuildWorkflowsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_automated_reasoning_policy_build_workflows.ListAutomatedReasoningPolicyBuildWorkflowsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -113,7 +114,7 @@ pub const ListAutomatedReasoningPolicyTestCasesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_automated_reasoning_policy_test_cases.Options) !list_automated_reasoning_policy_test_cases.ListAutomatedReasoningPolicyTestCasesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_automated_reasoning_policy_test_cases.ListAutomatedReasoningPolicyTestCasesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -154,7 +155,7 @@ pub const ListAutomatedReasoningPolicyTestResultsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_automated_reasoning_policy_test_results.Options) !list_automated_reasoning_policy_test_results.ListAutomatedReasoningPolicyTestResultsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_automated_reasoning_policy_test_results.ListAutomatedReasoningPolicyTestResultsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -195,7 +196,7 @@ pub const ListCustomModelDeploymentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_custom_model_deployments.Options) !list_custom_model_deployments.ListCustomModelDeploymentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_custom_model_deployments.ListCustomModelDeploymentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -236,7 +237,7 @@ pub const ListCustomModelsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_custom_models.Options) !list_custom_models.ListCustomModelsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_custom_models.ListCustomModelsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -277,7 +278,7 @@ pub const ListEnforcedGuardrailsConfigurationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_enforced_guardrails_configuration.Options) !list_enforced_guardrails_configuration.ListEnforcedGuardrailsConfigurationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_enforced_guardrails_configuration.ListEnforcedGuardrailsConfigurationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -318,7 +319,7 @@ pub const ListEvaluationJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_evaluation_jobs.Options) !list_evaluation_jobs.ListEvaluationJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_evaluation_jobs.ListEvaluationJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -359,7 +360,7 @@ pub const ListGuardrailsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_guardrails.Options) !list_guardrails.ListGuardrailsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_guardrails.ListGuardrailsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -400,7 +401,7 @@ pub const ListImportedModelsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_imported_models.Options) !list_imported_models.ListImportedModelsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_imported_models.ListImportedModelsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -441,7 +442,7 @@ pub const ListInferenceProfilesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_inference_profiles.Options) !list_inference_profiles.ListInferenceProfilesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_inference_profiles.ListInferenceProfilesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -482,7 +483,7 @@ pub const ListMarketplaceModelEndpointsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_marketplace_model_endpoints.Options) !list_marketplace_model_endpoints.ListMarketplaceModelEndpointsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_marketplace_model_endpoints.ListMarketplaceModelEndpointsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -523,7 +524,7 @@ pub const ListModelCopyJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_model_copy_jobs.Options) !list_model_copy_jobs.ListModelCopyJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_model_copy_jobs.ListModelCopyJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -564,7 +565,7 @@ pub const ListModelCustomizationJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_model_customization_jobs.Options) !list_model_customization_jobs.ListModelCustomizationJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_model_customization_jobs.ListModelCustomizationJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -605,7 +606,7 @@ pub const ListModelImportJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_model_import_jobs.Options) !list_model_import_jobs.ListModelImportJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_model_import_jobs.ListModelImportJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -646,7 +647,7 @@ pub const ListModelInvocationJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_model_invocation_jobs.Options) !list_model_invocation_jobs.ListModelInvocationJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_model_invocation_jobs.ListModelInvocationJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -687,7 +688,7 @@ pub const ListPromptRoutersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_prompt_routers.Options) !list_prompt_routers.ListPromptRoutersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_prompt_routers.ListPromptRoutersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -728,7 +729,7 @@ pub const ListProvisionedModelThroughputsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_provisioned_model_throughputs.Options) !list_provisioned_model_throughputs.ListProvisionedModelThroughputsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_provisioned_model_throughputs.ListProvisionedModelThroughputsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

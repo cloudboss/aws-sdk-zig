@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DataQualityRuleRecommendationRunFilter = @import("data_quality_rule_recommendation_run_filter.zig").DataQualityRuleRecommendationRunFilter;
 const DataQualityRuleRecommendationRunDescription = @import("data_quality_rule_recommendation_run_description.zig").DataQualityRuleRecommendationRunDescription;
@@ -36,11 +37,7 @@ pub const ListDataQualityRuleRecommendationRunsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDataQualityRuleRecommendationRunsInput, options: Options) !ListDataQualityRuleRecommendationRunsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDataQualityRuleRecommendationRunsInput, options: CallOptions) !ListDataQualityRuleRecommendationRunsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

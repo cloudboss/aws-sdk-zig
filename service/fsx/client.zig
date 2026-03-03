@@ -49,6 +49,7 @@ const update_shared_vpc_configuration = @import("update_shared_vpc_configuration
 const update_snapshot = @import("update_snapshot.zig");
 const update_storage_virtual_machine = @import("update_storage_virtual_machine.zig");
 const update_volume = @import("update_volume.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -97,7 +98,7 @@ pub const Client = struct {
     /// Use the API
     /// operation to monitor the status of the aliases Amazon FSx is
     /// associating with the file system.
-    pub fn associateFileSystemAliases(self: *Self, allocator: std.mem.Allocator, input: associate_file_system_aliases.AssociateFileSystemAliasesInput, options: associate_file_system_aliases.Options) !associate_file_system_aliases.AssociateFileSystemAliasesOutput {
+    pub fn associateFileSystemAliases(self: *Self, allocator: std.mem.Allocator, input: associate_file_system_aliases.AssociateFileSystemAliasesInput, options: CallOptions) !associate_file_system_aliases.AssociateFileSystemAliasesOutput {
         return associate_file_system_aliases.execute(self, allocator, input, options);
     }
 
@@ -116,7 +117,7 @@ pub const Client = struct {
     /// For a release task, Amazon FSx will stop releasing files upon cancellation.
     /// Any files that
     /// have already been released will remain in the released state.
-    pub fn cancelDataRepositoryTask(self: *Self, allocator: std.mem.Allocator, input: cancel_data_repository_task.CancelDataRepositoryTaskInput, options: cancel_data_repository_task.Options) !cancel_data_repository_task.CancelDataRepositoryTaskOutput {
+    pub fn cancelDataRepositoryTask(self: *Self, allocator: std.mem.Allocator, input: cancel_data_repository_task.CancelDataRepositoryTaskInput, options: CallOptions) !cancel_data_repository_task.CancelDataRepositoryTaskOutput {
         return cancel_data_repository_task.execute(self, allocator, input, options);
     }
 
@@ -159,7 +160,7 @@ pub const Client = struct {
     /// Guide*, and [Copying
     /// backups](https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/using-backups.html#copy-backups) in the *Amazon FSx for OpenZFS User
     /// Guide*.
-    pub fn copyBackup(self: *Self, allocator: std.mem.Allocator, input: copy_backup.CopyBackupInput, options: copy_backup.Options) !copy_backup.CopyBackupOutput {
+    pub fn copyBackup(self: *Self, allocator: std.mem.Allocator, input: copy_backup.CopyBackupInput, options: CallOptions) !copy_backup.CopyBackupOutput {
         return copy_backup.execute(self, allocator, input, options);
     }
 
@@ -167,7 +168,7 @@ pub const Client = struct {
     /// OpenZFS file system. For more information, see [on-demand data
     /// replication](https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/on-demand-replication.html) in the Amazon FSx for OpenZFS User
     /// Guide.
-    pub fn copySnapshotAndUpdateVolume(self: *Self, allocator: std.mem.Allocator, input: copy_snapshot_and_update_volume.CopySnapshotAndUpdateVolumeInput, options: copy_snapshot_and_update_volume.Options) !copy_snapshot_and_update_volume.CopySnapshotAndUpdateVolumeOutput {
+    pub fn copySnapshotAndUpdateVolume(self: *Self, allocator: std.mem.Allocator, input: copy_snapshot_and_update_volume.CopySnapshotAndUpdateVolumeInput, options: CallOptions) !copy_snapshot_and_update_volume.CopySnapshotAndUpdateVolumeOutput {
         return copy_snapshot_and_update_volume.execute(self, allocator, input, options);
     }
 
@@ -196,7 +197,7 @@ pub const Client = struct {
     /// * DescribeS3AccessPointAttachments
     ///
     /// * DetachAndDeleteS3AccessPoint
-    pub fn createAndAttachS3AccessPoint(self: *Self, allocator: std.mem.Allocator, input: create_and_attach_s3_access_point.CreateAndAttachS3AccessPointInput, options: create_and_attach_s3_access_point.Options) !create_and_attach_s3_access_point.CreateAndAttachS3AccessPointOutput {
+    pub fn createAndAttachS3AccessPoint(self: *Self, allocator: std.mem.Allocator, input: create_and_attach_s3_access_point.CreateAndAttachS3AccessPointInput, options: CallOptions) !create_and_attach_s3_access_point.CreateAndAttachS3AccessPointOutput {
         return create_and_attach_s3_access_point.execute(self, allocator, input, options);
     }
 
@@ -260,7 +261,7 @@ pub const Client = struct {
     /// still `CREATING`. You can check the backup creation status by calling the
     /// [DescribeBackups](https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeBackups.html) operation, which returns the backup state along with other
     /// information.
-    pub fn createBackup(self: *Self, allocator: std.mem.Allocator, input: create_backup.CreateBackupInput, options: create_backup.Options) !create_backup.CreateBackupOutput {
+    pub fn createBackup(self: *Self, allocator: std.mem.Allocator, input: create_backup.CreateBackupInput, options: CallOptions) !create_backup.CreateBackupOutput {
         return create_backup.execute(self, allocator, input, options);
     }
 
@@ -282,7 +283,7 @@ pub const Client = struct {
     /// `CreateDataRepositoryAssociation` isn't supported
     /// on Amazon File Cache resources. To create a DRA on Amazon File Cache,
     /// use the `CreateFileCache` operation.
-    pub fn createDataRepositoryAssociation(self: *Self, allocator: std.mem.Allocator, input: create_data_repository_association.CreateDataRepositoryAssociationInput, options: create_data_repository_association.Options) !create_data_repository_association.CreateDataRepositoryAssociationOutput {
+    pub fn createDataRepositoryAssociation(self: *Self, allocator: std.mem.Allocator, input: create_data_repository_association.CreateDataRepositoryAssociationInput, options: CallOptions) !create_data_repository_association.CreateDataRepositoryAssociationOutput {
         return create_data_repository_association.execute(self, allocator, input, options);
     }
 
@@ -313,7 +314,7 @@ pub const Client = struct {
     /// To learn more about linking a data repository to your file system, see
     /// [Linking your file system to an S3
     /// bucket](https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-dra-linked-data-repo.html).
-    pub fn createDataRepositoryTask(self: *Self, allocator: std.mem.Allocator, input: create_data_repository_task.CreateDataRepositoryTaskInput, options: create_data_repository_task.Options) !create_data_repository_task.CreateDataRepositoryTaskOutput {
+    pub fn createDataRepositoryTask(self: *Self, allocator: std.mem.Allocator, input: create_data_repository_task.CreateDataRepositoryTaskInput, options: CallOptions) !create_data_repository_task.CreateDataRepositoryTaskOutput {
         return create_data_repository_task.execute(self, allocator, input, options);
     }
 
@@ -338,7 +339,7 @@ pub const Client = struct {
     /// by calling the
     /// [DescribeFileCaches](https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileCaches.html) operation, which returns the cache state
     /// along with other information.
-    pub fn createFileCache(self: *Self, allocator: std.mem.Allocator, input: create_file_cache.CreateFileCacheInput, options: create_file_cache.Options) !create_file_cache.CreateFileCacheOutput {
+    pub fn createFileCache(self: *Self, allocator: std.mem.Allocator, input: create_file_cache.CreateFileCacheInput, options: CallOptions) !create_file_cache.CreateFileCacheOutput {
         return create_file_cache.execute(self, allocator, input, options);
     }
 
@@ -390,7 +391,7 @@ pub const Client = struct {
     /// by calling the
     /// [DescribeFileSystems](https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html) operation, which returns the file system state
     /// along with other information.
-    pub fn createFileSystem(self: *Self, allocator: std.mem.Allocator, input: create_file_system.CreateFileSystemInput, options: create_file_system.Options) !create_file_system.CreateFileSystemOutput {
+    pub fn createFileSystem(self: *Self, allocator: std.mem.Allocator, input: create_file_system.CreateFileSystemInput, options: CallOptions) !create_file_system.CreateFileSystemOutput {
         return create_file_system.execute(self, allocator, input, options);
     }
 
@@ -436,7 +437,7 @@ pub const Client = struct {
     /// creation status by calling the [
     /// DescribeFileSystems](https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html) operation, which returns the file system state along
     /// with other information.
-    pub fn createFileSystemFromBackup(self: *Self, allocator: std.mem.Allocator, input: create_file_system_from_backup.CreateFileSystemFromBackupInput, options: create_file_system_from_backup.Options) !create_file_system_from_backup.CreateFileSystemFromBackupOutput {
+    pub fn createFileSystemFromBackup(self: *Self, allocator: std.mem.Allocator, input: create_file_system_from_backup.CreateFileSystemFromBackupInput, options: CallOptions) !create_file_system_from_backup.CreateFileSystemFromBackupOutput {
         return create_file_system_from_backup.execute(self, allocator, input, options);
     }
 
@@ -477,24 +478,24 @@ pub const Client = struct {
     /// the
     /// [DescribeSnapshots](https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeSnapshots.html) operation, which returns the snapshot state along with
     /// other information.
-    pub fn createSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_snapshot.CreateSnapshotInput, options: create_snapshot.Options) !create_snapshot.CreateSnapshotOutput {
+    pub fn createSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_snapshot.CreateSnapshotInput, options: CallOptions) !create_snapshot.CreateSnapshotOutput {
         return create_snapshot.execute(self, allocator, input, options);
     }
 
     /// Creates a storage virtual machine (SVM) for an Amazon FSx for ONTAP file
     /// system.
-    pub fn createStorageVirtualMachine(self: *Self, allocator: std.mem.Allocator, input: create_storage_virtual_machine.CreateStorageVirtualMachineInput, options: create_storage_virtual_machine.Options) !create_storage_virtual_machine.CreateStorageVirtualMachineOutput {
+    pub fn createStorageVirtualMachine(self: *Self, allocator: std.mem.Allocator, input: create_storage_virtual_machine.CreateStorageVirtualMachineInput, options: CallOptions) !create_storage_virtual_machine.CreateStorageVirtualMachineOutput {
         return create_storage_virtual_machine.execute(self, allocator, input, options);
     }
 
     /// Creates an FSx for ONTAP or Amazon FSx for OpenZFS storage volume.
-    pub fn createVolume(self: *Self, allocator: std.mem.Allocator, input: create_volume.CreateVolumeInput, options: create_volume.Options) !create_volume.CreateVolumeOutput {
+    pub fn createVolume(self: *Self, allocator: std.mem.Allocator, input: create_volume.CreateVolumeInput, options: CallOptions) !create_volume.CreateVolumeOutput {
         return create_volume.execute(self, allocator, input, options);
     }
 
     /// Creates a new Amazon FSx for NetApp ONTAP volume from an
     /// existing Amazon FSx volume backup.
-    pub fn createVolumeFromBackup(self: *Self, allocator: std.mem.Allocator, input: create_volume_from_backup.CreateVolumeFromBackupInput, options: create_volume_from_backup.Options) !create_volume_from_backup.CreateVolumeFromBackupOutput {
+    pub fn createVolumeFromBackup(self: *Self, allocator: std.mem.Allocator, input: create_volume_from_backup.CreateVolumeFromBackupInput, options: CallOptions) !create_volume_from_backup.CreateVolumeFromBackupOutput {
         return create_volume_from_backup.execute(self, allocator, input, options);
     }
 
@@ -507,7 +508,7 @@ pub const Client = struct {
     ///
     /// The data in a deleted backup is also deleted and can't be recovered by any
     /// means.
-    pub fn deleteBackup(self: *Self, allocator: std.mem.Allocator, input: delete_backup.DeleteBackupInput, options: delete_backup.Options) !delete_backup.DeleteBackupOutput {
+    pub fn deleteBackup(self: *Self, allocator: std.mem.Allocator, input: delete_backup.DeleteBackupInput, options: CallOptions) !delete_backup.DeleteBackupOutput {
         return delete_backup.execute(self, allocator, input, options);
     }
 
@@ -518,7 +519,7 @@ pub const Client = struct {
     /// that corresponds to the data repository association. Data repository
     /// associations are supported on all FSx for Lustre 2.12 and 2.15 file
     /// systems, excluding `scratch_1` deployment type.
-    pub fn deleteDataRepositoryAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_data_repository_association.DeleteDataRepositoryAssociationInput, options: delete_data_repository_association.Options) !delete_data_repository_association.DeleteDataRepositoryAssociationOutput {
+    pub fn deleteDataRepositoryAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_data_repository_association.DeleteDataRepositoryAssociationInput, options: CallOptions) !delete_data_repository_association.DeleteDataRepositoryAssociationOutput {
         return delete_data_repository_association.execute(self, allocator, input, options);
     }
 
@@ -536,7 +537,7 @@ pub const Client = struct {
     ///
     /// The data in a deleted cache is also deleted and can't be recovered by
     /// any means.
-    pub fn deleteFileCache(self: *Self, allocator: std.mem.Allocator, input: delete_file_cache.DeleteFileCacheInput, options: delete_file_cache.Options) !delete_file_cache.DeleteFileCacheOutput {
+    pub fn deleteFileCache(self: *Self, allocator: std.mem.Allocator, input: delete_file_cache.DeleteFileCacheInput, options: CallOptions) !delete_file_cache.DeleteFileCacheOutput {
         return delete_file_cache.execute(self, allocator, input, options);
     }
 
@@ -601,7 +602,7 @@ pub const Client = struct {
     ///
     /// The data in a deleted file system is also deleted and can't be recovered by
     /// any means.
-    pub fn deleteFileSystem(self: *Self, allocator: std.mem.Allocator, input: delete_file_system.DeleteFileSystemInput, options: delete_file_system.Options) !delete_file_system.DeleteFileSystemOutput {
+    pub fn deleteFileSystem(self: *Self, allocator: std.mem.Allocator, input: delete_file_system.DeleteFileSystemInput, options: CallOptions) !delete_file_system.DeleteFileSystemOutput {
         return delete_file_system.execute(self, allocator, input, options);
     }
 
@@ -613,7 +614,7 @@ pub const Client = struct {
     ///
     /// The `DeleteSnapshot` operation returns instantly. The snapshot appears with
     /// the lifecycle status of `DELETING` until the deletion is complete.
-    pub fn deleteSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_snapshot.DeleteSnapshotInput, options: delete_snapshot.Options) !delete_snapshot.DeleteSnapshotOutput {
+    pub fn deleteSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_snapshot.DeleteSnapshotInput, options: CallOptions) !delete_snapshot.DeleteSnapshotOutput {
         return delete_snapshot.execute(self, allocator, input, options);
     }
 
@@ -621,13 +622,13 @@ pub const Client = struct {
     /// Prior
     /// to deleting an SVM, you must delete all non-root volumes in the SVM,
     /// otherwise the operation will fail.
-    pub fn deleteStorageVirtualMachine(self: *Self, allocator: std.mem.Allocator, input: delete_storage_virtual_machine.DeleteStorageVirtualMachineInput, options: delete_storage_virtual_machine.Options) !delete_storage_virtual_machine.DeleteStorageVirtualMachineOutput {
+    pub fn deleteStorageVirtualMachine(self: *Self, allocator: std.mem.Allocator, input: delete_storage_virtual_machine.DeleteStorageVirtualMachineInput, options: CallOptions) !delete_storage_virtual_machine.DeleteStorageVirtualMachineOutput {
         return delete_storage_virtual_machine.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS
     /// volume.
-    pub fn deleteVolume(self: *Self, allocator: std.mem.Allocator, input: delete_volume.DeleteVolumeInput, options: delete_volume.Options) !delete_volume.DeleteVolumeOutput {
+    pub fn deleteVolume(self: *Self, allocator: std.mem.Allocator, input: delete_volume.DeleteVolumeInput, options: CallOptions) !delete_volume.DeleteVolumeOutput {
         return delete_volume.execute(self, allocator, input, options);
     }
 
@@ -660,7 +661,7 @@ pub const Client = struct {
     /// * The order of the backups returned in the response of one
     /// `DescribeBackups` call and the order of the backups returned
     /// across the responses of a multi-call iteration is unspecified.
-    pub fn describeBackups(self: *Self, allocator: std.mem.Allocator, input: describe_backups.DescribeBackupsInput, options: describe_backups.Options) !describe_backups.DescribeBackupsOutput {
+    pub fn describeBackups(self: *Self, allocator: std.mem.Allocator, input: describe_backups.DescribeBackupsInput, options: CallOptions) !describe_backups.DescribeBackupsOutput {
         return describe_backups.execute(self, allocator, input, options);
     }
 
@@ -692,7 +693,7 @@ pub const Client = struct {
     /// `NextToken` value is returned in the response. In this case, send a later
     /// request with the `NextToken` request parameter set to the value of
     /// `NextToken` from the last response.
-    pub fn describeDataRepositoryAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_data_repository_associations.DescribeDataRepositoryAssociationsInput, options: describe_data_repository_associations.Options) !describe_data_repository_associations.DescribeDataRepositoryAssociationsOutput {
+    pub fn describeDataRepositoryAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_data_repository_associations.DescribeDataRepositoryAssociationsInput, options: CallOptions) !describe_data_repository_associations.DescribeDataRepositoryAssociationsOutput {
         return describe_data_repository_associations.execute(self, allocator, input, options);
     }
 
@@ -714,7 +715,7 @@ pub const Client = struct {
     /// a `NextToken` value is returned in the response. In this case, send a later
     /// request with the `NextToken` request parameter set to the value of
     /// `NextToken` from the last response.
-    pub fn describeDataRepositoryTasks(self: *Self, allocator: std.mem.Allocator, input: describe_data_repository_tasks.DescribeDataRepositoryTasksInput, options: describe_data_repository_tasks.Options) !describe_data_repository_tasks.DescribeDataRepositoryTasksOutput {
+    pub fn describeDataRepositoryTasks(self: *Self, allocator: std.mem.Allocator, input: describe_data_repository_tasks.DescribeDataRepositoryTasksInput, options: CallOptions) !describe_data_repository_tasks.DescribeDataRepositoryTasksOutput {
         return describe_data_repository_tasks.execute(self, allocator, input, options);
     }
 
@@ -747,7 +748,7 @@ pub const Client = struct {
     /// * The order of caches returned in the response of one
     /// `DescribeFileCaches` call and the order of caches returned
     /// across the responses of a multicall iteration is unspecified.
-    pub fn describeFileCaches(self: *Self, allocator: std.mem.Allocator, input: describe_file_caches.DescribeFileCachesInput, options: describe_file_caches.Options) !describe_file_caches.DescribeFileCachesOutput {
+    pub fn describeFileCaches(self: *Self, allocator: std.mem.Allocator, input: describe_file_caches.DescribeFileCachesInput, options: CallOptions) !describe_file_caches.DescribeFileCachesOutput {
         return describe_file_caches.execute(self, allocator, input, options);
     }
 
@@ -756,7 +757,7 @@ pub const Client = struct {
     /// all DNS aliases that have been associated with and disassociated from the
     /// file system is available in the list of AdministrativeAction
     /// provided in the DescribeFileSystems operation response.
-    pub fn describeFileSystemAliases(self: *Self, allocator: std.mem.Allocator, input: describe_file_system_aliases.DescribeFileSystemAliasesInput, options: describe_file_system_aliases.Options) !describe_file_system_aliases.DescribeFileSystemAliasesOutput {
+    pub fn describeFileSystemAliases(self: *Self, allocator: std.mem.Allocator, input: describe_file_system_aliases.DescribeFileSystemAliasesInput, options: CallOptions) !describe_file_system_aliases.DescribeFileSystemAliasesOutput {
         return describe_file_system_aliases.execute(self, allocator, input, options);
     }
 
@@ -789,7 +790,7 @@ pub const Client = struct {
     /// * The order of file systems returned in the response of one
     /// `DescribeFileSystems` call and the order of file systems returned
     /// across the responses of a multicall iteration is unspecified.
-    pub fn describeFileSystems(self: *Self, allocator: std.mem.Allocator, input: describe_file_systems.DescribeFileSystemsInput, options: describe_file_systems.Options) !describe_file_systems.DescribeFileSystemsOutput {
+    pub fn describeFileSystems(self: *Self, allocator: std.mem.Allocator, input: describe_file_systems.DescribeFileSystemsInput, options: CallOptions) !describe_file_systems.DescribeFileSystemsOutput {
         return describe_file_systems.execute(self, allocator, input, options);
     }
 
@@ -798,7 +799,7 @@ pub const Client = struct {
     /// The requester requires the following permission to perform this action:
     ///
     /// * `fsx:DescribeS3AccessPointAttachments`
-    pub fn describeS3AccessPointAttachments(self: *Self, allocator: std.mem.Allocator, input: describe_s3_access_point_attachments.DescribeS3AccessPointAttachmentsInput, options: describe_s3_access_point_attachments.Options) !describe_s3_access_point_attachments.DescribeS3AccessPointAttachmentsOutput {
+    pub fn describeS3AccessPointAttachments(self: *Self, allocator: std.mem.Allocator, input: describe_s3_access_point_attachments.DescribeS3AccessPointAttachmentsInput, options: CallOptions) !describe_s3_access_point_attachments.DescribeS3AccessPointAttachmentsOutput {
         return describe_s3_access_point_attachments.execute(self, allocator, input, options);
     }
 
@@ -808,7 +809,7 @@ pub const Client = struct {
     /// private cloud (VPC) owner. For more information, see [Creating FSx for ONTAP
     /// file systems in shared
     /// subnets](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/creating-file-systems.html#fsxn-vpc-shared-subnets).
-    pub fn describeSharedVpcConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_shared_vpc_configuration.DescribeSharedVpcConfigurationInput, options: describe_shared_vpc_configuration.Options) !describe_shared_vpc_configuration.DescribeSharedVpcConfigurationOutput {
+    pub fn describeSharedVpcConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_shared_vpc_configuration.DescribeSharedVpcConfigurationInput, options: CallOptions) !describe_shared_vpc_configuration.DescribeSharedVpcConfigurationOutput {
         return describe_shared_vpc_configuration.execute(self, allocator, input, options);
     }
 
@@ -842,19 +843,19 @@ pub const Client = struct {
     /// * The order of snapshots returned in the response of one
     /// `DescribeSnapshots` call and the order of backups returned across
     /// the responses of a multi-call iteration is unspecified.
-    pub fn describeSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_snapshots.DescribeSnapshotsInput, options: describe_snapshots.Options) !describe_snapshots.DescribeSnapshotsOutput {
+    pub fn describeSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_snapshots.DescribeSnapshotsInput, options: CallOptions) !describe_snapshots.DescribeSnapshotsOutput {
         return describe_snapshots.execute(self, allocator, input, options);
     }
 
     /// Describes one or more Amazon FSx for NetApp ONTAP storage virtual machines
     /// (SVMs).
-    pub fn describeStorageVirtualMachines(self: *Self, allocator: std.mem.Allocator, input: describe_storage_virtual_machines.DescribeStorageVirtualMachinesInput, options: describe_storage_virtual_machines.Options) !describe_storage_virtual_machines.DescribeStorageVirtualMachinesOutput {
+    pub fn describeStorageVirtualMachines(self: *Self, allocator: std.mem.Allocator, input: describe_storage_virtual_machines.DescribeStorageVirtualMachinesInput, options: CallOptions) !describe_storage_virtual_machines.DescribeStorageVirtualMachinesOutput {
         return describe_storage_virtual_machines.execute(self, allocator, input, options);
     }
 
     /// Describes one or more Amazon FSx for NetApp ONTAP or Amazon FSx for
     /// OpenZFS volumes.
-    pub fn describeVolumes(self: *Self, allocator: std.mem.Allocator, input: describe_volumes.DescribeVolumesInput, options: describe_volumes.Options) !describe_volumes.DescribeVolumesOutput {
+    pub fn describeVolumes(self: *Self, allocator: std.mem.Allocator, input: describe_volumes.DescribeVolumesInput, options: CallOptions) !describe_volumes.DescribeVolumesOutput {
         return describe_volumes.execute(self, allocator, input, options);
     }
 
@@ -866,7 +867,7 @@ pub const Client = struct {
     /// * `fsx:DetachAndDeleteS3AccessPoint`
     ///
     /// * `s3:DeleteAccessPoint`
-    pub fn detachAndDeleteS3AccessPoint(self: *Self, allocator: std.mem.Allocator, input: detach_and_delete_s3_access_point.DetachAndDeleteS3AccessPointInput, options: detach_and_delete_s3_access_point.Options) !detach_and_delete_s3_access_point.DetachAndDeleteS3AccessPointOutput {
+    pub fn detachAndDeleteS3AccessPoint(self: *Self, allocator: std.mem.Allocator, input: detach_and_delete_s3_access_point.DetachAndDeleteS3AccessPointInput, options: CallOptions) !detach_and_delete_s3_access_point.DetachAndDeleteS3AccessPointOutput {
         return detach_and_delete_s3_access_point.execute(self, allocator, input, options);
     }
 
@@ -884,7 +885,7 @@ pub const Client = struct {
     /// Use the API
     /// operation to monitor the status of the aliases Amazon FSx is
     /// disassociating with the file system.
-    pub fn disassociateFileSystemAliases(self: *Self, allocator: std.mem.Allocator, input: disassociate_file_system_aliases.DisassociateFileSystemAliasesInput, options: disassociate_file_system_aliases.Options) !disassociate_file_system_aliases.DisassociateFileSystemAliasesOutput {
+    pub fn disassociateFileSystemAliases(self: *Self, allocator: std.mem.Allocator, input: disassociate_file_system_aliases.DisassociateFileSystemAliasesInput, options: CallOptions) !disassociate_file_system_aliases.DisassociateFileSystemAliasesOutput {
         return disassociate_file_system_aliases.execute(self, allocator, input, options);
     }
 
@@ -912,19 +913,19 @@ pub const Client = struct {
     /// * The order of tags returned in the response of one
     /// `ListTagsForResource` call and the order of tags returned across
     /// the responses of a multi-call iteration is unspecified.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Releases the file system lock from an Amazon FSx for OpenZFS file
     /// system.
-    pub fn releaseFileSystemNfsV3Locks(self: *Self, allocator: std.mem.Allocator, input: release_file_system_nfs_v3_locks.ReleaseFileSystemNfsV3LocksInput, options: release_file_system_nfs_v3_locks.Options) !release_file_system_nfs_v3_locks.ReleaseFileSystemNfsV3LocksOutput {
+    pub fn releaseFileSystemNfsV3Locks(self: *Self, allocator: std.mem.Allocator, input: release_file_system_nfs_v3_locks.ReleaseFileSystemNfsV3LocksInput, options: CallOptions) !release_file_system_nfs_v3_locks.ReleaseFileSystemNfsV3LocksOutput {
         return release_file_system_nfs_v3_locks.execute(self, allocator, input, options);
     }
 
     /// Returns an Amazon FSx for OpenZFS volume to the state saved by the specified
     /// snapshot.
-    pub fn restoreVolumeFromSnapshot(self: *Self, allocator: std.mem.Allocator, input: restore_volume_from_snapshot.RestoreVolumeFromSnapshotInput, options: restore_volume_from_snapshot.Options) !restore_volume_from_snapshot.RestoreVolumeFromSnapshotOutput {
+    pub fn restoreVolumeFromSnapshot(self: *Self, allocator: std.mem.Allocator, input: restore_volume_from_snapshot.RestoreVolumeFromSnapshotInput, options: CallOptions) !restore_volume_from_snapshot.RestoreVolumeFromSnapshotOutput {
         return restore_volume_from_snapshot.execute(self, allocator, input, options);
     }
 
@@ -932,17 +933,17 @@ pub const Client = struct {
     /// FSx for Windows File Server file system, use this action to
     /// initiate the process of Amazon FSx attempting to reconnect to the file
     /// system.
-    pub fn startMisconfiguredStateRecovery(self: *Self, allocator: std.mem.Allocator, input: start_misconfigured_state_recovery.StartMisconfiguredStateRecoveryInput, options: start_misconfigured_state_recovery.Options) !start_misconfigured_state_recovery.StartMisconfiguredStateRecoveryOutput {
+    pub fn startMisconfiguredStateRecovery(self: *Self, allocator: std.mem.Allocator, input: start_misconfigured_state_recovery.StartMisconfiguredStateRecoveryInput, options: CallOptions) !start_misconfigured_state_recovery.StartMisconfiguredStateRecoveryOutput {
         return start_misconfigured_state_recovery.execute(self, allocator, input, options);
     }
 
     /// Tags an Amazon FSx resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// This action removes a tag from an Amazon FSx resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -950,13 +951,13 @@ pub const Client = struct {
     /// on an Amazon FSx for Lustre file system. Data repository associations
     /// are supported on all FSx for Lustre 2.12 and 2.15 file systems,
     /// excluding `scratch_1` deployment type.
-    pub fn updateDataRepositoryAssociation(self: *Self, allocator: std.mem.Allocator, input: update_data_repository_association.UpdateDataRepositoryAssociationInput, options: update_data_repository_association.Options) !update_data_repository_association.UpdateDataRepositoryAssociationOutput {
+    pub fn updateDataRepositoryAssociation(self: *Self, allocator: std.mem.Allocator, input: update_data_repository_association.UpdateDataRepositoryAssociationInput, options: CallOptions) !update_data_repository_association.UpdateDataRepositoryAssociationOutput {
         return update_data_repository_association.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration of an existing Amazon File Cache resource.
     /// You can update multiple properties in a single request.
-    pub fn updateFileCache(self: *Self, allocator: std.mem.Allocator, input: update_file_cache.UpdateFileCacheInput, options: update_file_cache.Options) !update_file_cache.UpdateFileCacheOutput {
+    pub fn updateFileCache(self: *Self, allocator: std.mem.Allocator, input: update_file_cache.UpdateFileCacheInput, options: CallOptions) !update_file_cache.UpdateFileCacheOutput {
         return update_file_cache.execute(self, allocator, input, options);
     }
 
@@ -1067,7 +1068,7 @@ pub const Client = struct {
     /// * `ThroughputCapacity`
     ///
     /// * `WeeklyMaintenanceStartTime`
-    pub fn updateFileSystem(self: *Self, allocator: std.mem.Allocator, input: update_file_system.UpdateFileSystemInput, options: update_file_system.Options) !update_file_system.UpdateFileSystemOutput {
+    pub fn updateFileSystem(self: *Self, allocator: std.mem.Allocator, input: update_file_system.UpdateFileSystemInput, options: CallOptions) !update_file_system.UpdateFileSystemOutput {
         return update_file_system.execute(self, allocator, input, options);
     }
 
@@ -1086,23 +1087,23 @@ pub const Client = struct {
     /// file systems. For more information, see [Important considerations before
     /// disabling shared VPC support for Multi-AZ file
     /// systems](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/maz-shared-vpc.html#disabling-maz-vpc-sharing).
-    pub fn updateSharedVpcConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_shared_vpc_configuration.UpdateSharedVpcConfigurationInput, options: update_shared_vpc_configuration.Options) !update_shared_vpc_configuration.UpdateSharedVpcConfigurationOutput {
+    pub fn updateSharedVpcConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_shared_vpc_configuration.UpdateSharedVpcConfigurationInput, options: CallOptions) !update_shared_vpc_configuration.UpdateSharedVpcConfigurationOutput {
         return update_shared_vpc_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the name of an Amazon FSx for OpenZFS snapshot.
-    pub fn updateSnapshot(self: *Self, allocator: std.mem.Allocator, input: update_snapshot.UpdateSnapshotInput, options: update_snapshot.Options) !update_snapshot.UpdateSnapshotOutput {
+    pub fn updateSnapshot(self: *Self, allocator: std.mem.Allocator, input: update_snapshot.UpdateSnapshotInput, options: CallOptions) !update_snapshot.UpdateSnapshotOutput {
         return update_snapshot.execute(self, allocator, input, options);
     }
 
     /// Updates an FSx for ONTAP storage virtual machine (SVM).
-    pub fn updateStorageVirtualMachine(self: *Self, allocator: std.mem.Allocator, input: update_storage_virtual_machine.UpdateStorageVirtualMachineInput, options: update_storage_virtual_machine.Options) !update_storage_virtual_machine.UpdateStorageVirtualMachineOutput {
+    pub fn updateStorageVirtualMachine(self: *Self, allocator: std.mem.Allocator, input: update_storage_virtual_machine.UpdateStorageVirtualMachineInput, options: CallOptions) !update_storage_virtual_machine.UpdateStorageVirtualMachineOutput {
         return update_storage_virtual_machine.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration of an Amazon FSx for NetApp ONTAP or Amazon FSx
     /// for OpenZFS volume.
-    pub fn updateVolume(self: *Self, allocator: std.mem.Allocator, input: update_volume.UpdateVolumeInput, options: update_volume.Options) !update_volume.UpdateVolumeOutput {
+    pub fn updateVolume(self: *Self, allocator: std.mem.Allocator, input: update_volume.UpdateVolumeInput, options: CallOptions) !update_volume.UpdateVolumeOutput {
         return update_volume.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LoadBalancer = @import("load_balancer.zig").LoadBalancer;
 
@@ -23,11 +24,7 @@ pub const GetLoadBalancerOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetLoadBalancerInput, options: Options) !GetLoadBalancerOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetLoadBalancerInput, options: CallOptions) !GetLoadBalancerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

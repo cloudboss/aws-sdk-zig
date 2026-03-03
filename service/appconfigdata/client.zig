@@ -3,6 +3,7 @@ const std = @import("std");
 
 const get_latest_configuration = @import("get_latest_configuration.zig");
 const start_configuration_session = @import("start_configuration_session.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -51,7 +52,7 @@ pub const Client = struct {
     ///
     /// * `GetLatestConfiguration` is a priced call. For more information, see
     /// [Pricing](https://aws.amazon.com/systems-manager/pricing/).
-    pub fn getLatestConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_latest_configuration.GetLatestConfigurationInput, options: get_latest_configuration.Options) !get_latest_configuration.GetLatestConfigurationOutput {
+    pub fn getLatestConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_latest_configuration.GetLatestConfigurationInput, options: CallOptions) !get_latest_configuration.GetLatestConfigurationOutput {
         return get_latest_configuration.execute(self, allocator, input, options);
     }
 
@@ -61,7 +62,7 @@ pub const Client = struct {
     /// how to use
     /// it with the GetLatestConfiguration API action, see [Retrieving the
     /// configuration](http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration) in the *AppConfig User Guide*.
-    pub fn startConfigurationSession(self: *Self, allocator: std.mem.Allocator, input: start_configuration_session.StartConfigurationSessionInput, options: start_configuration_session.Options) !start_configuration_session.StartConfigurationSessionOutput {
+    pub fn startConfigurationSession(self: *Self, allocator: std.mem.Allocator, input: start_configuration_session.StartConfigurationSessionInput, options: CallOptions) !start_configuration_session.StartConfigurationSessionOutput {
         return start_configuration_session.execute(self, allocator, input, options);
     }
 };

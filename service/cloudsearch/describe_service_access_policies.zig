@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccessPoliciesStatus = @import("access_policies_status.zig").AccessPoliciesStatus;
 const serde = @import("serde.zig");
@@ -20,11 +21,7 @@ pub const DescribeServiceAccessPoliciesOutput = struct {
     access_policies: ?AccessPoliciesStatus = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeServiceAccessPoliciesInput, options: Options) !DescribeServiceAccessPoliciesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeServiceAccessPoliciesInput, options: CallOptions) !DescribeServiceAccessPoliciesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_changed_blocks = @import("list_changed_blocks.zig");
@@ -15,7 +16,7 @@ pub const ListChangedBlocksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_changed_blocks.Options) !list_changed_blocks.ListChangedBlocksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_changed_blocks.ListChangedBlocksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const ListSnapshotBlocksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_snapshot_blocks.Options) !list_snapshot_blocks.ListSnapshotBlocksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_snapshot_blocks.ListSnapshotBlocksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

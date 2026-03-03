@@ -48,6 +48,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_application = @import("update_application.zig");
 const update_deployment_group = @import("update_deployment_group.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -80,26 +81,26 @@ pub const Client = struct {
     }
 
     /// Adds tags to on-premises instances.
-    pub fn addTagsToOnPremisesInstances(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_on_premises_instances.AddTagsToOnPremisesInstancesInput, options: add_tags_to_on_premises_instances.Options) !add_tags_to_on_premises_instances.AddTagsToOnPremisesInstancesOutput {
+    pub fn addTagsToOnPremisesInstances(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_on_premises_instances.AddTagsToOnPremisesInstancesInput, options: CallOptions) !add_tags_to_on_premises_instances.AddTagsToOnPremisesInstancesOutput {
         return add_tags_to_on_premises_instances.execute(self, allocator, input, options);
     }
 
     /// Gets information about one or more application revisions. The maximum number
     /// of
     /// application revisions that can be returned is 25.
-    pub fn batchGetApplicationRevisions(self: *Self, allocator: std.mem.Allocator, input: batch_get_application_revisions.BatchGetApplicationRevisionsInput, options: batch_get_application_revisions.Options) !batch_get_application_revisions.BatchGetApplicationRevisionsOutput {
+    pub fn batchGetApplicationRevisions(self: *Self, allocator: std.mem.Allocator, input: batch_get_application_revisions.BatchGetApplicationRevisionsInput, options: CallOptions) !batch_get_application_revisions.BatchGetApplicationRevisionsOutput {
         return batch_get_application_revisions.execute(self, allocator, input, options);
     }
 
     /// Gets information about one or more applications. The maximum number of
     /// applications
     /// that can be returned is 100.
-    pub fn batchGetApplications(self: *Self, allocator: std.mem.Allocator, input: batch_get_applications.BatchGetApplicationsInput, options: batch_get_applications.Options) !batch_get_applications.BatchGetApplicationsOutput {
+    pub fn batchGetApplications(self: *Self, allocator: std.mem.Allocator, input: batch_get_applications.BatchGetApplicationsInput, options: CallOptions) !batch_get_applications.BatchGetApplicationsOutput {
         return batch_get_applications.execute(self, allocator, input, options);
     }
 
     /// Gets information about one or more deployment groups.
-    pub fn batchGetDeploymentGroups(self: *Self, allocator: std.mem.Allocator, input: batch_get_deployment_groups.BatchGetDeploymentGroupsInput, options: batch_get_deployment_groups.Options) !batch_get_deployment_groups.BatchGetDeploymentGroupsOutput {
+    pub fn batchGetDeploymentGroups(self: *Self, allocator: std.mem.Allocator, input: batch_get_deployment_groups.BatchGetDeploymentGroupsInput, options: CallOptions) !batch_get_deployment_groups.BatchGetDeploymentGroupsOutput {
         return batch_get_deployment_groups.execute(self, allocator, input, options);
     }
 
@@ -111,7 +112,7 @@ pub const Client = struct {
     /// works with EC2/On-premises and Lambda compute platforms. The newer
     /// `BatchGetDeploymentTargets` works with all compute platforms. The maximum
     /// number of instances that can be returned is 25.
-    pub fn batchGetDeploymentInstances(self: *Self, allocator: std.mem.Allocator, input: batch_get_deployment_instances.BatchGetDeploymentInstancesInput, options: batch_get_deployment_instances.Options) !batch_get_deployment_instances.BatchGetDeploymentInstancesOutput {
+    pub fn batchGetDeploymentInstances(self: *Self, allocator: std.mem.Allocator, input: batch_get_deployment_instances.BatchGetDeploymentInstancesInput, options: CallOptions) !batch_get_deployment_instances.BatchGetDeploymentInstancesOutput {
         return batch_get_deployment_instances.execute(self, allocator, input, options);
     }
 
@@ -134,21 +135,21 @@ pub const Client = struct {
     /// * **CloudFormation**: Information about
     /// targets of blue/green deployments initiated by a CloudFormation stack
     /// update.
-    pub fn batchGetDeploymentTargets(self: *Self, allocator: std.mem.Allocator, input: batch_get_deployment_targets.BatchGetDeploymentTargetsInput, options: batch_get_deployment_targets.Options) !batch_get_deployment_targets.BatchGetDeploymentTargetsOutput {
+    pub fn batchGetDeploymentTargets(self: *Self, allocator: std.mem.Allocator, input: batch_get_deployment_targets.BatchGetDeploymentTargetsInput, options: CallOptions) !batch_get_deployment_targets.BatchGetDeploymentTargetsOutput {
         return batch_get_deployment_targets.execute(self, allocator, input, options);
     }
 
     /// Gets information about one or more deployments. The maximum number of
     /// deployments that
     /// can be returned is 25.
-    pub fn batchGetDeployments(self: *Self, allocator: std.mem.Allocator, input: batch_get_deployments.BatchGetDeploymentsInput, options: batch_get_deployments.Options) !batch_get_deployments.BatchGetDeploymentsOutput {
+    pub fn batchGetDeployments(self: *Self, allocator: std.mem.Allocator, input: batch_get_deployments.BatchGetDeploymentsInput, options: CallOptions) !batch_get_deployments.BatchGetDeploymentsOutput {
         return batch_get_deployments.execute(self, allocator, input, options);
     }
 
     /// Gets information about one or more on-premises instances. The maximum number
     /// of
     /// on-premises instances that can be returned is 25.
-    pub fn batchGetOnPremisesInstances(self: *Self, allocator: std.mem.Allocator, input: batch_get_on_premises_instances.BatchGetOnPremisesInstancesInput, options: batch_get_on_premises_instances.Options) !batch_get_on_premises_instances.BatchGetOnPremisesInstancesOutput {
+    pub fn batchGetOnPremisesInstances(self: *Self, allocator: std.mem.Allocator, input: batch_get_on_premises_instances.BatchGetOnPremisesInstancesInput, options: CallOptions) !batch_get_on_premises_instances.BatchGetOnPremisesInstancesOutput {
         return batch_get_on_premises_instances.execute(self, allocator, input, options);
     }
 
@@ -161,32 +162,32 @@ pub const Client = struct {
     /// instances in the replacement environment with the load balancer, can start
     /// as soon as
     /// all instances have a status of Ready.)
-    pub fn continueDeployment(self: *Self, allocator: std.mem.Allocator, input: continue_deployment.ContinueDeploymentInput, options: continue_deployment.Options) !continue_deployment.ContinueDeploymentOutput {
+    pub fn continueDeployment(self: *Self, allocator: std.mem.Allocator, input: continue_deployment.ContinueDeploymentInput, options: CallOptions) !continue_deployment.ContinueDeploymentOutput {
         return continue_deployment.execute(self, allocator, input, options);
     }
 
     /// Creates an application.
-    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: create_application.Options) !create_application.CreateApplicationOutput {
+    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: CallOptions) !create_application.CreateApplicationOutput {
         return create_application.execute(self, allocator, input, options);
     }
 
     /// Deploys an application revision through the specified deployment group.
-    pub fn createDeployment(self: *Self, allocator: std.mem.Allocator, input: create_deployment.CreateDeploymentInput, options: create_deployment.Options) !create_deployment.CreateDeploymentOutput {
+    pub fn createDeployment(self: *Self, allocator: std.mem.Allocator, input: create_deployment.CreateDeploymentInput, options: CallOptions) !create_deployment.CreateDeploymentOutput {
         return create_deployment.execute(self, allocator, input, options);
     }
 
     /// Creates a deployment configuration.
-    pub fn createDeploymentConfig(self: *Self, allocator: std.mem.Allocator, input: create_deployment_config.CreateDeploymentConfigInput, options: create_deployment_config.Options) !create_deployment_config.CreateDeploymentConfigOutput {
+    pub fn createDeploymentConfig(self: *Self, allocator: std.mem.Allocator, input: create_deployment_config.CreateDeploymentConfigInput, options: CallOptions) !create_deployment_config.CreateDeploymentConfigOutput {
         return create_deployment_config.execute(self, allocator, input, options);
     }
 
     /// Creates a deployment group to which application revisions are deployed.
-    pub fn createDeploymentGroup(self: *Self, allocator: std.mem.Allocator, input: create_deployment_group.CreateDeploymentGroupInput, options: create_deployment_group.Options) !create_deployment_group.CreateDeploymentGroupOutput {
+    pub fn createDeploymentGroup(self: *Self, allocator: std.mem.Allocator, input: create_deployment_group.CreateDeploymentGroupInput, options: CallOptions) !create_deployment_group.CreateDeploymentGroupOutput {
         return create_deployment_group.execute(self, allocator, input, options);
     }
 
     /// Deletes an application.
-    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: delete_application.Options) !delete_application.DeleteApplicationOutput {
+    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: CallOptions) !delete_application.DeleteApplicationOutput {
         return delete_application.execute(self, allocator, input, options);
     }
 
@@ -195,17 +196,17 @@ pub const Client = struct {
     /// A deployment configuration cannot be deleted if it is currently in use.
     /// Predefined
     /// configurations cannot be deleted.
-    pub fn deleteDeploymentConfig(self: *Self, allocator: std.mem.Allocator, input: delete_deployment_config.DeleteDeploymentConfigInput, options: delete_deployment_config.Options) !delete_deployment_config.DeleteDeploymentConfigOutput {
+    pub fn deleteDeploymentConfig(self: *Self, allocator: std.mem.Allocator, input: delete_deployment_config.DeleteDeploymentConfigInput, options: CallOptions) !delete_deployment_config.DeleteDeploymentConfigOutput {
         return delete_deployment_config.execute(self, allocator, input, options);
     }
 
     /// Deletes a deployment group.
-    pub fn deleteDeploymentGroup(self: *Self, allocator: std.mem.Allocator, input: delete_deployment_group.DeleteDeploymentGroupInput, options: delete_deployment_group.Options) !delete_deployment_group.DeleteDeploymentGroupOutput {
+    pub fn deleteDeploymentGroup(self: *Self, allocator: std.mem.Allocator, input: delete_deployment_group.DeleteDeploymentGroupInput, options: CallOptions) !delete_deployment_group.DeleteDeploymentGroupOutput {
         return delete_deployment_group.execute(self, allocator, input, options);
     }
 
     /// Deletes a GitHub account connection.
-    pub fn deleteGitHubAccountToken(self: *Self, allocator: std.mem.Allocator, input: delete_git_hub_account_token.DeleteGitHubAccountTokenInput, options: delete_git_hub_account_token.Options) !delete_git_hub_account_token.DeleteGitHubAccountTokenOutput {
+    pub fn deleteGitHubAccountToken(self: *Self, allocator: std.mem.Allocator, input: delete_git_hub_account_token.DeleteGitHubAccountTokenInput, options: CallOptions) !delete_git_hub_account_token.DeleteGitHubAccountTokenOutput {
         return delete_git_hub_account_token.execute(self, allocator, input, options);
     }
 
@@ -219,22 +220,22 @@ pub const Client = struct {
     /// publicly in case you need to delete resources to comply with General Data
     /// Protection
     /// Regulation (GDPR) requirements.
-    pub fn deleteResourcesByExternalId(self: *Self, allocator: std.mem.Allocator, input: delete_resources_by_external_id.DeleteResourcesByExternalIdInput, options: delete_resources_by_external_id.Options) !delete_resources_by_external_id.DeleteResourcesByExternalIdOutput {
+    pub fn deleteResourcesByExternalId(self: *Self, allocator: std.mem.Allocator, input: delete_resources_by_external_id.DeleteResourcesByExternalIdInput, options: CallOptions) !delete_resources_by_external_id.DeleteResourcesByExternalIdOutput {
         return delete_resources_by_external_id.execute(self, allocator, input, options);
     }
 
     /// Deregisters an on-premises instance.
-    pub fn deregisterOnPremisesInstance(self: *Self, allocator: std.mem.Allocator, input: deregister_on_premises_instance.DeregisterOnPremisesInstanceInput, options: deregister_on_premises_instance.Options) !deregister_on_premises_instance.DeregisterOnPremisesInstanceOutput {
+    pub fn deregisterOnPremisesInstance(self: *Self, allocator: std.mem.Allocator, input: deregister_on_premises_instance.DeregisterOnPremisesInstanceInput, options: CallOptions) !deregister_on_premises_instance.DeregisterOnPremisesInstanceOutput {
         return deregister_on_premises_instance.execute(self, allocator, input, options);
     }
 
     /// Gets information about an application.
-    pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: get_application.Options) !get_application.GetApplicationOutput {
+    pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: CallOptions) !get_application.GetApplicationOutput {
         return get_application.execute(self, allocator, input, options);
     }
 
     /// Gets information about an application revision.
-    pub fn getApplicationRevision(self: *Self, allocator: std.mem.Allocator, input: get_application_revision.GetApplicationRevisionInput, options: get_application_revision.Options) !get_application_revision.GetApplicationRevisionOutput {
+    pub fn getApplicationRevision(self: *Self, allocator: std.mem.Allocator, input: get_application_revision.GetApplicationRevisionInput, options: CallOptions) !get_application_revision.GetApplicationRevisionOutput {
         return get_application_revision.execute(self, allocator, input, options);
     }
 
@@ -244,56 +245,56 @@ pub const Client = struct {
     /// the returned revision is always null. Use `GetApplicationRevision` and
     /// the `sha256` property of the returned `appSpecContent` object
     /// to get the content of the deployment’s AppSpec file.
-    pub fn getDeployment(self: *Self, allocator: std.mem.Allocator, input: get_deployment.GetDeploymentInput, options: get_deployment.Options) !get_deployment.GetDeploymentOutput {
+    pub fn getDeployment(self: *Self, allocator: std.mem.Allocator, input: get_deployment.GetDeploymentInput, options: CallOptions) !get_deployment.GetDeploymentOutput {
         return get_deployment.execute(self, allocator, input, options);
     }
 
     /// Gets information about a deployment configuration.
-    pub fn getDeploymentConfig(self: *Self, allocator: std.mem.Allocator, input: get_deployment_config.GetDeploymentConfigInput, options: get_deployment_config.Options) !get_deployment_config.GetDeploymentConfigOutput {
+    pub fn getDeploymentConfig(self: *Self, allocator: std.mem.Allocator, input: get_deployment_config.GetDeploymentConfigInput, options: CallOptions) !get_deployment_config.GetDeploymentConfigOutput {
         return get_deployment_config.execute(self, allocator, input, options);
     }
 
     /// Gets information about a deployment group.
-    pub fn getDeploymentGroup(self: *Self, allocator: std.mem.Allocator, input: get_deployment_group.GetDeploymentGroupInput, options: get_deployment_group.Options) !get_deployment_group.GetDeploymentGroupOutput {
+    pub fn getDeploymentGroup(self: *Self, allocator: std.mem.Allocator, input: get_deployment_group.GetDeploymentGroupInput, options: CallOptions) !get_deployment_group.GetDeploymentGroupOutput {
         return get_deployment_group.execute(self, allocator, input, options);
     }
 
     /// Gets information about an instance as part of a deployment.
-    pub fn getDeploymentInstance(self: *Self, allocator: std.mem.Allocator, input: get_deployment_instance.GetDeploymentInstanceInput, options: get_deployment_instance.Options) !get_deployment_instance.GetDeploymentInstanceOutput {
+    pub fn getDeploymentInstance(self: *Self, allocator: std.mem.Allocator, input: get_deployment_instance.GetDeploymentInstanceInput, options: CallOptions) !get_deployment_instance.GetDeploymentInstanceOutput {
         return get_deployment_instance.execute(self, allocator, input, options);
     }
 
     /// Returns information about a deployment target.
-    pub fn getDeploymentTarget(self: *Self, allocator: std.mem.Allocator, input: get_deployment_target.GetDeploymentTargetInput, options: get_deployment_target.Options) !get_deployment_target.GetDeploymentTargetOutput {
+    pub fn getDeploymentTarget(self: *Self, allocator: std.mem.Allocator, input: get_deployment_target.GetDeploymentTargetInput, options: CallOptions) !get_deployment_target.GetDeploymentTargetOutput {
         return get_deployment_target.execute(self, allocator, input, options);
     }
 
     /// Gets information about an on-premises instance.
-    pub fn getOnPremisesInstance(self: *Self, allocator: std.mem.Allocator, input: get_on_premises_instance.GetOnPremisesInstanceInput, options: get_on_premises_instance.Options) !get_on_premises_instance.GetOnPremisesInstanceOutput {
+    pub fn getOnPremisesInstance(self: *Self, allocator: std.mem.Allocator, input: get_on_premises_instance.GetOnPremisesInstanceInput, options: CallOptions) !get_on_premises_instance.GetOnPremisesInstanceOutput {
         return get_on_premises_instance.execute(self, allocator, input, options);
     }
 
     /// Lists information about revisions for an application.
-    pub fn listApplicationRevisions(self: *Self, allocator: std.mem.Allocator, input: list_application_revisions.ListApplicationRevisionsInput, options: list_application_revisions.Options) !list_application_revisions.ListApplicationRevisionsOutput {
+    pub fn listApplicationRevisions(self: *Self, allocator: std.mem.Allocator, input: list_application_revisions.ListApplicationRevisionsInput, options: CallOptions) !list_application_revisions.ListApplicationRevisionsOutput {
         return list_application_revisions.execute(self, allocator, input, options);
     }
 
     /// Lists the applications registered with the user or Amazon Web Services
     /// account.
-    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: list_applications.Options) !list_applications.ListApplicationsOutput {
+    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: CallOptions) !list_applications.ListApplicationsOutput {
         return list_applications.execute(self, allocator, input, options);
     }
 
     /// Lists the deployment configurations with the user or Amazon Web Services
     /// account.
-    pub fn listDeploymentConfigs(self: *Self, allocator: std.mem.Allocator, input: list_deployment_configs.ListDeploymentConfigsInput, options: list_deployment_configs.Options) !list_deployment_configs.ListDeploymentConfigsOutput {
+    pub fn listDeploymentConfigs(self: *Self, allocator: std.mem.Allocator, input: list_deployment_configs.ListDeploymentConfigsInput, options: CallOptions) !list_deployment_configs.ListDeploymentConfigsOutput {
         return list_deployment_configs.execute(self, allocator, input, options);
     }
 
     /// Lists the deployment groups for an application registered with the Amazon
     /// Web Services
     /// user or Amazon Web Services account.
-    pub fn listDeploymentGroups(self: *Self, allocator: std.mem.Allocator, input: list_deployment_groups.ListDeploymentGroupsInput, options: list_deployment_groups.Options) !list_deployment_groups.ListDeploymentGroupsOutput {
+    pub fn listDeploymentGroups(self: *Self, allocator: std.mem.Allocator, input: list_deployment_groups.ListDeploymentGroupsInput, options: CallOptions) !list_deployment_groups.ListDeploymentGroupsOutput {
         return list_deployment_groups.execute(self, allocator, input, options);
     }
 
@@ -305,24 +306,24 @@ pub const Client = struct {
     ///
     /// Lists the instance for a deployment associated with the user or Amazon Web
     /// Services account.
-    pub fn listDeploymentInstances(self: *Self, allocator: std.mem.Allocator, input: list_deployment_instances.ListDeploymentInstancesInput, options: list_deployment_instances.Options) !list_deployment_instances.ListDeploymentInstancesOutput {
+    pub fn listDeploymentInstances(self: *Self, allocator: std.mem.Allocator, input: list_deployment_instances.ListDeploymentInstancesInput, options: CallOptions) !list_deployment_instances.ListDeploymentInstancesOutput {
         return list_deployment_instances.execute(self, allocator, input, options);
     }
 
     /// Returns an array of target IDs that are associated a deployment.
-    pub fn listDeploymentTargets(self: *Self, allocator: std.mem.Allocator, input: list_deployment_targets.ListDeploymentTargetsInput, options: list_deployment_targets.Options) !list_deployment_targets.ListDeploymentTargetsOutput {
+    pub fn listDeploymentTargets(self: *Self, allocator: std.mem.Allocator, input: list_deployment_targets.ListDeploymentTargetsInput, options: CallOptions) !list_deployment_targets.ListDeploymentTargetsOutput {
         return list_deployment_targets.execute(self, allocator, input, options);
     }
 
     /// Lists the deployments in a deployment group for an application registered
     /// with the
     /// user or Amazon Web Services account.
-    pub fn listDeployments(self: *Self, allocator: std.mem.Allocator, input: list_deployments.ListDeploymentsInput, options: list_deployments.Options) !list_deployments.ListDeploymentsOutput {
+    pub fn listDeployments(self: *Self, allocator: std.mem.Allocator, input: list_deployments.ListDeploymentsInput, options: CallOptions) !list_deployments.ListDeploymentsOutput {
         return list_deployments.execute(self, allocator, input, options);
     }
 
     /// Lists the names of stored connections to GitHub accounts.
-    pub fn listGitHubAccountTokenNames(self: *Self, allocator: std.mem.Allocator, input: list_git_hub_account_token_names.ListGitHubAccountTokenNamesInput, options: list_git_hub_account_token_names.Options) !list_git_hub_account_token_names.ListGitHubAccountTokenNamesOutput {
+    pub fn listGitHubAccountTokenNames(self: *Self, allocator: std.mem.Allocator, input: list_git_hub_account_token_names.ListGitHubAccountTokenNamesInput, options: CallOptions) !list_git_hub_account_token_names.ListGitHubAccountTokenNamesOutput {
         return list_git_hub_account_token_names.execute(self, allocator, input, options);
     }
 
@@ -333,7 +334,7 @@ pub const Client = struct {
     /// names are listed. To list only registered or deregistered on-premises
     /// instance names,
     /// use the registration status parameter.
-    pub fn listOnPremisesInstances(self: *Self, allocator: std.mem.Allocator, input: list_on_premises_instances.ListOnPremisesInstancesInput, options: list_on_premises_instances.Options) !list_on_premises_instances.ListOnPremisesInstancesOutput {
+    pub fn listOnPremisesInstances(self: *Self, allocator: std.mem.Allocator, input: list_on_premises_instances.ListOnPremisesInstancesInput, options: CallOptions) !list_on_premises_instances.ListOnPremisesInstancesOutput {
         return list_on_premises_instances.execute(self, allocator, input, options);
     }
 
@@ -341,7 +342,7 @@ pub const Client = struct {
     /// Resource
     /// Name (ARN). Tags are used to organize and categorize your CodeDeploy
     /// resources.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -358,12 +359,12 @@ pub const Client = struct {
     /// ](https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-lambda) and
     /// [AppSpec 'hooks' Section for an Amazon ECS
     /// Deployment](https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs).
-    pub fn putLifecycleEventHookExecutionStatus(self: *Self, allocator: std.mem.Allocator, input: put_lifecycle_event_hook_execution_status.PutLifecycleEventHookExecutionStatusInput, options: put_lifecycle_event_hook_execution_status.Options) !put_lifecycle_event_hook_execution_status.PutLifecycleEventHookExecutionStatusOutput {
+    pub fn putLifecycleEventHookExecutionStatus(self: *Self, allocator: std.mem.Allocator, input: put_lifecycle_event_hook_execution_status.PutLifecycleEventHookExecutionStatusInput, options: CallOptions) !put_lifecycle_event_hook_execution_status.PutLifecycleEventHookExecutionStatusOutput {
         return put_lifecycle_event_hook_execution_status.execute(self, allocator, input, options);
     }
 
     /// Registers with CodeDeploy a revision for the specified application.
-    pub fn registerApplicationRevision(self: *Self, allocator: std.mem.Allocator, input: register_application_revision.RegisterApplicationRevisionInput, options: register_application_revision.Options) !register_application_revision.RegisterApplicationRevisionOutput {
+    pub fn registerApplicationRevision(self: *Self, allocator: std.mem.Allocator, input: register_application_revision.RegisterApplicationRevisionInput, options: CallOptions) !register_application_revision.RegisterApplicationRevisionOutput {
         return register_application_revision.execute(self, allocator, input, options);
     }
 
@@ -371,30 +372,30 @@ pub const Client = struct {
     ///
     /// Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the
     /// request. You cannot use both.
-    pub fn registerOnPremisesInstance(self: *Self, allocator: std.mem.Allocator, input: register_on_premises_instance.RegisterOnPremisesInstanceInput, options: register_on_premises_instance.Options) !register_on_premises_instance.RegisterOnPremisesInstanceOutput {
+    pub fn registerOnPremisesInstance(self: *Self, allocator: std.mem.Allocator, input: register_on_premises_instance.RegisterOnPremisesInstanceInput, options: CallOptions) !register_on_premises_instance.RegisterOnPremisesInstanceOutput {
         return register_on_premises_instance.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from one or more on-premises instances.
-    pub fn removeTagsFromOnPremisesInstances(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_on_premises_instances.RemoveTagsFromOnPremisesInstancesInput, options: remove_tags_from_on_premises_instances.Options) !remove_tags_from_on_premises_instances.RemoveTagsFromOnPremisesInstancesOutput {
+    pub fn removeTagsFromOnPremisesInstances(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_on_premises_instances.RemoveTagsFromOnPremisesInstancesInput, options: CallOptions) !remove_tags_from_on_premises_instances.RemoveTagsFromOnPremisesInstancesOutput {
         return remove_tags_from_on_premises_instances.execute(self, allocator, input, options);
     }
 
     /// In a blue/green deployment, overrides any specified wait time and starts
     /// terminating
     /// instances immediately after the traffic routing is complete.
-    pub fn skipWaitTimeForInstanceTermination(self: *Self, allocator: std.mem.Allocator, input: skip_wait_time_for_instance_termination.SkipWaitTimeForInstanceTerminationInput, options: skip_wait_time_for_instance_termination.Options) !skip_wait_time_for_instance_termination.SkipWaitTimeForInstanceTerminationOutput {
+    pub fn skipWaitTimeForInstanceTermination(self: *Self, allocator: std.mem.Allocator, input: skip_wait_time_for_instance_termination.SkipWaitTimeForInstanceTerminationInput, options: CallOptions) !skip_wait_time_for_instance_termination.SkipWaitTimeForInstanceTerminationOutput {
         return skip_wait_time_for_instance_termination.execute(self, allocator, input, options);
     }
 
     /// Attempts to stop an ongoing deployment.
-    pub fn stopDeployment(self: *Self, allocator: std.mem.Allocator, input: stop_deployment.StopDeploymentInput, options: stop_deployment.Options) !stop_deployment.StopDeploymentOutput {
+    pub fn stopDeployment(self: *Self, allocator: std.mem.Allocator, input: stop_deployment.StopDeploymentInput, options: CallOptions) !stop_deployment.StopDeploymentOutput {
         return stop_deployment.execute(self, allocator, input, options);
     }
 
     /// Associates the list of tags in the input `Tags` parameter with the
     /// resource identified by the `ResourceArn` input parameter.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -402,17 +403,17 @@ pub const Client = struct {
     /// the
     /// `ResourceArn` input parameter. The tags are identified by the list of
     /// keys in the `TagKeys` input parameter.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Changes the name of an application.
-    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: update_application.Options) !update_application.UpdateApplicationOutput {
+    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: CallOptions) !update_application.UpdateApplicationOutput {
         return update_application.execute(self, allocator, input, options);
     }
 
     /// Changes information about a deployment group.
-    pub fn updateDeploymentGroup(self: *Self, allocator: std.mem.Allocator, input: update_deployment_group.UpdateDeploymentGroupInput, options: update_deployment_group.Options) !update_deployment_group.UpdateDeploymentGroupOutput {
+    pub fn updateDeploymentGroup(self: *Self, allocator: std.mem.Allocator, input: update_deployment_group.UpdateDeploymentGroupInput, options: CallOptions) !update_deployment_group.UpdateDeploymentGroupOutput {
         return update_deployment_group.execute(self, allocator, input, options);
     }
 

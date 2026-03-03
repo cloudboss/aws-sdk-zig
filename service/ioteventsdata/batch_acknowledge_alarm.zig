@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AcknowledgeAlarmActionRequest = @import("acknowledge_alarm_action_request.zig").AcknowledgeAlarmActionRequest;
 const BatchAlarmActionErrorEntry = @import("batch_alarm_action_error_entry.zig").BatchAlarmActionErrorEntry;
@@ -28,11 +29,7 @@ pub const BatchAcknowledgeAlarmOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchAcknowledgeAlarmInput, options: Options) !BatchAcknowledgeAlarmOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchAcknowledgeAlarmInput, options: CallOptions) !BatchAcknowledgeAlarmOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

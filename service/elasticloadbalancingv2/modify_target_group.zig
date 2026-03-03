@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProtocolEnum = @import("protocol_enum.zig").ProtocolEnum;
 const Matcher = @import("matcher.zig").Matcher;
@@ -79,11 +80,7 @@ pub const ModifyTargetGroupOutput = struct {
     target_groups: ?[]const TargetGroup = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyTargetGroupInput, options: Options) !ModifyTargetGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyTargetGroupInput, options: CallOptions) !ModifyTargetGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

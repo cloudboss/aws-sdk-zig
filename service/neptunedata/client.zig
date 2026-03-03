@@ -44,6 +44,7 @@ const start_loader_job = @import("start_loader_job.zig");
 const start_ml_data_processing_job = @import("start_ml_data_processing_job.zig");
 const start_ml_model_training_job = @import("start_ml_model_training_job.zig");
 const start_ml_model_transform_job = @import("start_ml_model_transform_job.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -80,7 +81,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:CancelQuery](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelquery) IAM action in that cluster.
-    pub fn cancelGremlinQuery(self: *Self, allocator: std.mem.Allocator, input: cancel_gremlin_query.CancelGremlinQueryInput, options: cancel_gremlin_query.Options) !cancel_gremlin_query.CancelGremlinQueryOutput {
+    pub fn cancelGremlinQuery(self: *Self, allocator: std.mem.Allocator, input: cancel_gremlin_query.CancelGremlinQueryInput, options: CallOptions) !cancel_gremlin_query.CancelGremlinQueryOutput {
         return cancel_gremlin_query.execute(self, allocator, input, options);
     }
 
@@ -92,7 +93,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:CancelLoaderJob](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelloaderjob) IAM action in that cluster..
-    pub fn cancelLoaderJob(self: *Self, allocator: std.mem.Allocator, input: cancel_loader_job.CancelLoaderJobInput, options: cancel_loader_job.Options) !cancel_loader_job.CancelLoaderJobOutput {
+    pub fn cancelLoaderJob(self: *Self, allocator: std.mem.Allocator, input: cancel_loader_job.CancelLoaderJobInput, options: CallOptions) !cancel_loader_job.CancelLoaderJobOutput {
         return cancel_loader_job.execute(self, allocator, input, options);
     }
 
@@ -103,7 +104,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:CancelMLDataProcessingJob](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelmldataprocessingjob) IAM action in that cluster.
-    pub fn cancelMlDataProcessingJob(self: *Self, allocator: std.mem.Allocator, input: cancel_ml_data_processing_job.CancelMLDataProcessingJobInput, options: cancel_ml_data_processing_job.Options) !cancel_ml_data_processing_job.CancelMLDataProcessingJobOutput {
+    pub fn cancelMlDataProcessingJob(self: *Self, allocator: std.mem.Allocator, input: cancel_ml_data_processing_job.CancelMLDataProcessingJobInput, options: CallOptions) !cancel_ml_data_processing_job.CancelMLDataProcessingJobOutput {
         return cancel_ml_data_processing_job.execute(self, allocator, input, options);
     }
 
@@ -115,7 +116,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:CancelMLModelTrainingJob](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelmlmodeltrainingjob) IAM action in that cluster.
-    pub fn cancelMlModelTrainingJob(self: *Self, allocator: std.mem.Allocator, input: cancel_ml_model_training_job.CancelMLModelTrainingJobInput, options: cancel_ml_model_training_job.Options) !cancel_ml_model_training_job.CancelMLModelTrainingJobOutput {
+    pub fn cancelMlModelTrainingJob(self: *Self, allocator: std.mem.Allocator, input: cancel_ml_model_training_job.CancelMLModelTrainingJobInput, options: CallOptions) !cancel_ml_model_training_job.CancelMLModelTrainingJobOutput {
         return cancel_ml_model_training_job.execute(self, allocator, input, options);
     }
 
@@ -127,7 +128,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:CancelMLModelTransformJob](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelmlmodeltransformjob) IAM action in that cluster.
-    pub fn cancelMlModelTransformJob(self: *Self, allocator: std.mem.Allocator, input: cancel_ml_model_transform_job.CancelMLModelTransformJobInput, options: cancel_ml_model_transform_job.Options) !cancel_ml_model_transform_job.CancelMLModelTransformJobOutput {
+    pub fn cancelMlModelTransformJob(self: *Self, allocator: std.mem.Allocator, input: cancel_ml_model_transform_job.CancelMLModelTransformJobInput, options: CallOptions) !cancel_ml_model_transform_job.CancelMLModelTransformJobOutput {
         return cancel_ml_model_transform_job.execute(self, allocator, input, options);
     }
 
@@ -138,7 +139,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:CancelQuery](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelquery) IAM action in that cluster.
-    pub fn cancelOpenCypherQuery(self: *Self, allocator: std.mem.Allocator, input: cancel_open_cypher_query.CancelOpenCypherQueryInput, options: cancel_open_cypher_query.Options) !cancel_open_cypher_query.CancelOpenCypherQueryOutput {
+    pub fn cancelOpenCypherQuery(self: *Self, allocator: std.mem.Allocator, input: cancel_open_cypher_query.CancelOpenCypherQueryInput, options: CallOptions) !cancel_open_cypher_query.CancelOpenCypherQueryOutput {
         return cancel_open_cypher_query.execute(self, allocator, input, options);
     }
 
@@ -151,7 +152,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:CreateMLEndpoint](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#createmlendpoint) IAM action in that cluster.
-    pub fn createMlEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_ml_endpoint.CreateMLEndpointInput, options: create_ml_endpoint.Options) !create_ml_endpoint.CreateMLEndpointOutput {
+    pub fn createMlEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_ml_endpoint.CreateMLEndpointInput, options: CallOptions) !create_ml_endpoint.CreateMLEndpointOutput {
         return create_ml_endpoint.execute(self, allocator, input, options);
     }
 
@@ -163,7 +164,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:DeleteMLEndpoint](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletemlendpoint) IAM action in that cluster.
-    pub fn deleteMlEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_ml_endpoint.DeleteMLEndpointInput, options: delete_ml_endpoint.Options) !delete_ml_endpoint.DeleteMLEndpointOutput {
+    pub fn deleteMlEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_ml_endpoint.DeleteMLEndpointInput, options: CallOptions) !delete_ml_endpoint.DeleteMLEndpointOutput {
         return delete_ml_endpoint.execute(self, allocator, input, options);
     }
 
@@ -173,7 +174,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:DeleteStatistics](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletestatistics) IAM action in that cluster.
-    pub fn deletePropertygraphStatistics(self: *Self, allocator: std.mem.Allocator, input: delete_propertygraph_statistics.DeletePropertygraphStatisticsInput, options: delete_propertygraph_statistics.Options) !delete_propertygraph_statistics.DeletePropertygraphStatisticsOutput {
+    pub fn deletePropertygraphStatistics(self: *Self, allocator: std.mem.Allocator, input: delete_propertygraph_statistics.DeletePropertygraphStatisticsInput, options: CallOptions) !delete_propertygraph_statistics.DeletePropertygraphStatisticsOutput {
         return delete_propertygraph_statistics.execute(self, allocator, input, options);
     }
 
@@ -183,7 +184,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:DeleteStatistics](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletestatistics) IAM action in that cluster.
-    pub fn deleteSparqlStatistics(self: *Self, allocator: std.mem.Allocator, input: delete_sparql_statistics.DeleteSparqlStatisticsInput, options: delete_sparql_statistics.Options) !delete_sparql_statistics.DeleteSparqlStatisticsOutput {
+    pub fn deleteSparqlStatistics(self: *Self, allocator: std.mem.Allocator, input: delete_sparql_statistics.DeleteSparqlStatisticsInput, options: CallOptions) !delete_sparql_statistics.DeleteSparqlStatisticsOutput {
         return delete_sparql_statistics.execute(self, allocator, input, options);
     }
 
@@ -201,7 +202,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:ResetDatabase](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#resetdatabase) IAM action in that cluster.
-    pub fn executeFastReset(self: *Self, allocator: std.mem.Allocator, input: execute_fast_reset.ExecuteFastResetInput, options: execute_fast_reset.Options) !execute_fast_reset.ExecuteFastResetOutput {
+    pub fn executeFastReset(self: *Self, allocator: std.mem.Allocator, input: execute_fast_reset.ExecuteFastResetInput, options: CallOptions) !execute_fast_reset.ExecuteFastResetOutput {
         return execute_fast_reset.execute(self, allocator, input, options);
     }
 
@@ -232,7 +233,7 @@ pub const Client = struct {
     ///
     /// Note that the
     /// [neptune-db:QueryLanguage:Gremlin](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys) IAM condition key can be used in the policy document to restrict the use of Gremlin queries (see [Condition keys available in Neptune IAM data-access policy statements](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)).
-    pub fn executeGremlinExplainQuery(self: *Self, allocator: std.mem.Allocator, input: execute_gremlin_explain_query.ExecuteGremlinExplainQueryInput, options: execute_gremlin_explain_query.Options) !execute_gremlin_explain_query.ExecuteGremlinExplainQueryOutput {
+    pub fn executeGremlinExplainQuery(self: *Self, allocator: std.mem.Allocator, input: execute_gremlin_explain_query.ExecuteGremlinExplainQueryInput, options: CallOptions) !execute_gremlin_explain_query.ExecuteGremlinExplainQueryOutput {
         return execute_gremlin_explain_query.execute(self, allocator, input, options);
     }
 
@@ -248,7 +249,7 @@ pub const Client = struct {
     ///
     /// Note that the
     /// [neptune-db:QueryLanguage:Gremlin](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys) IAM condition key can be used in the policy document to restrict the use of Gremlin queries (see [Condition keys available in Neptune IAM data-access policy statements](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)).
-    pub fn executeGremlinProfileQuery(self: *Self, allocator: std.mem.Allocator, input: execute_gremlin_profile_query.ExecuteGremlinProfileQueryInput, options: execute_gremlin_profile_query.Options) !execute_gremlin_profile_query.ExecuteGremlinProfileQueryOutput {
+    pub fn executeGremlinProfileQuery(self: *Self, allocator: std.mem.Allocator, input: execute_gremlin_profile_query.ExecuteGremlinProfileQueryInput, options: CallOptions) !execute_gremlin_profile_query.ExecuteGremlinProfileQueryOutput {
         return execute_gremlin_profile_query.execute(self, allocator, input, options);
     }
 
@@ -274,7 +275,7 @@ pub const Client = struct {
     ///
     /// Note that the
     /// [neptune-db:QueryLanguage:Gremlin](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys) IAM condition key can be used in the policy document to restrict the use of Gremlin queries (see [Condition keys available in Neptune IAM data-access policy statements](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)).
-    pub fn executeGremlinQuery(self: *Self, allocator: std.mem.Allocator, input: execute_gremlin_query.ExecuteGremlinQueryInput, options: execute_gremlin_query.Options) !execute_gremlin_query.ExecuteGremlinQueryOutput {
+    pub fn executeGremlinQuery(self: *Self, allocator: std.mem.Allocator, input: execute_gremlin_query.ExecuteGremlinQueryInput, options: CallOptions) !execute_gremlin_query.ExecuteGremlinQueryOutput {
         return execute_gremlin_query.execute(self, allocator, input, options);
     }
 
@@ -288,7 +289,7 @@ pub const Client = struct {
     ///
     /// Note that the
     /// [neptune-db:QueryLanguage:OpenCypher](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys) IAM condition key can be used in the policy document to restrict the use of openCypher queries (see [Condition keys available in Neptune IAM data-access policy statements](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)).
-    pub fn executeOpenCypherExplainQuery(self: *Self, allocator: std.mem.Allocator, input: execute_open_cypher_explain_query.ExecuteOpenCypherExplainQueryInput, options: execute_open_cypher_explain_query.Options) !execute_open_cypher_explain_query.ExecuteOpenCypherExplainQueryOutput {
+    pub fn executeOpenCypherExplainQuery(self: *Self, allocator: std.mem.Allocator, input: execute_open_cypher_explain_query.ExecuteOpenCypherExplainQueryInput, options: CallOptions) !execute_open_cypher_explain_query.ExecuteOpenCypherExplainQueryOutput {
         return execute_open_cypher_explain_query.execute(self, allocator, input, options);
     }
 
@@ -319,7 +320,7 @@ pub const Client = struct {
     ///
     /// Note also that the
     /// [neptune-db:QueryLanguage:OpenCypher](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys) IAM condition key can be used in the policy document to restrict the use of openCypher queries (see [Condition keys available in Neptune IAM data-access policy statements](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)).
-    pub fn executeOpenCypherQuery(self: *Self, allocator: std.mem.Allocator, input: execute_open_cypher_query.ExecuteOpenCypherQueryInput, options: execute_open_cypher_query.Options) !execute_open_cypher_query.ExecuteOpenCypherQueryOutput {
+    pub fn executeOpenCypherQuery(self: *Self, allocator: std.mem.Allocator, input: execute_open_cypher_query.ExecuteOpenCypherQueryInput, options: CallOptions) !execute_open_cypher_query.ExecuteOpenCypherQueryOutput {
         return execute_open_cypher_query.execute(self, allocator, input, options);
     }
 
@@ -329,7 +330,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:GetEngineStatus](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getenginestatus) IAM action in that cluster.
-    pub fn getEngineStatus(self: *Self, allocator: std.mem.Allocator, input: get_engine_status.GetEngineStatusInput, options: get_engine_status.Options) !get_engine_status.GetEngineStatusOutput {
+    pub fn getEngineStatus(self: *Self, allocator: std.mem.Allocator, input: get_engine_status.GetEngineStatusInput, options: CallOptions) !get_engine_status.GetEngineStatusOutput {
         return get_engine_status.execute(self, allocator, input, options);
     }
 
@@ -342,7 +343,7 @@ pub const Client = struct {
     ///
     /// Note that the
     /// [neptune-db:QueryLanguage:Gremlin](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys) IAM condition key can be used in the policy document to restrict the use of Gremlin queries (see [Condition keys available in Neptune IAM data-access policy statements](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)).
-    pub fn getGremlinQueryStatus(self: *Self, allocator: std.mem.Allocator, input: get_gremlin_query_status.GetGremlinQueryStatusInput, options: get_gremlin_query_status.Options) !get_gremlin_query_status.GetGremlinQueryStatusOutput {
+    pub fn getGremlinQueryStatus(self: *Self, allocator: std.mem.Allocator, input: get_gremlin_query_status.GetGremlinQueryStatusInput, options: CallOptions) !get_gremlin_query_status.GetGremlinQueryStatusOutput {
         return get_gremlin_query_status.execute(self, allocator, input, options);
     }
 
@@ -357,7 +358,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:GetLoaderJobStatus](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getloaderjobstatus) IAM action in that cluster..
-    pub fn getLoaderJobStatus(self: *Self, allocator: std.mem.Allocator, input: get_loader_job_status.GetLoaderJobStatusInput, options: get_loader_job_status.Options) !get_loader_job_status.GetLoaderJobStatusOutput {
+    pub fn getLoaderJobStatus(self: *Self, allocator: std.mem.Allocator, input: get_loader_job_status.GetLoaderJobStatusInput, options: CallOptions) !get_loader_job_status.GetLoaderJobStatusOutput {
         return get_loader_job_status.execute(self, allocator, input, options);
     }
 
@@ -369,7 +370,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:neptune-db:GetMLDataProcessingJobStatus](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getmldataprocessingjobstatus) IAM action in that cluster.
-    pub fn getMlDataProcessingJob(self: *Self, allocator: std.mem.Allocator, input: get_ml_data_processing_job.GetMLDataProcessingJobInput, options: get_ml_data_processing_job.Options) !get_ml_data_processing_job.GetMLDataProcessingJobOutput {
+    pub fn getMlDataProcessingJob(self: *Self, allocator: std.mem.Allocator, input: get_ml_data_processing_job.GetMLDataProcessingJobInput, options: CallOptions) !get_ml_data_processing_job.GetMLDataProcessingJobOutput {
         return get_ml_data_processing_job.execute(self, allocator, input, options);
     }
 
@@ -381,7 +382,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:GetMLEndpointStatus](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getmlendpointstatus) IAM action in that cluster.
-    pub fn getMlEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_ml_endpoint.GetMLEndpointInput, options: get_ml_endpoint.Options) !get_ml_endpoint.GetMLEndpointOutput {
+    pub fn getMlEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_ml_endpoint.GetMLEndpointInput, options: CallOptions) !get_ml_endpoint.GetMLEndpointOutput {
         return get_ml_endpoint.execute(self, allocator, input, options);
     }
 
@@ -393,7 +394,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:GetMLModelTrainingJobStatus](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getmlmodeltrainingjobstatus) IAM action in that cluster.
-    pub fn getMlModelTrainingJob(self: *Self, allocator: std.mem.Allocator, input: get_ml_model_training_job.GetMLModelTrainingJobInput, options: get_ml_model_training_job.Options) !get_ml_model_training_job.GetMLModelTrainingJobOutput {
+    pub fn getMlModelTrainingJob(self: *Self, allocator: std.mem.Allocator, input: get_ml_model_training_job.GetMLModelTrainingJobInput, options: CallOptions) !get_ml_model_training_job.GetMLModelTrainingJobOutput {
         return get_ml_model_training_job.execute(self, allocator, input, options);
     }
 
@@ -405,7 +406,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:GetMLModelTransformJobStatus](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getmlmodeltransformjobstatus) IAM action in that cluster.
-    pub fn getMlModelTransformJob(self: *Self, allocator: std.mem.Allocator, input: get_ml_model_transform_job.GetMLModelTransformJobInput, options: get_ml_model_transform_job.Options) !get_ml_model_transform_job.GetMLModelTransformJobOutput {
+    pub fn getMlModelTransformJob(self: *Self, allocator: std.mem.Allocator, input: get_ml_model_transform_job.GetMLModelTransformJobInput, options: CallOptions) !get_ml_model_transform_job.GetMLModelTransformJobOutput {
         return get_ml_model_transform_job.execute(self, allocator, input, options);
     }
 
@@ -418,7 +419,7 @@ pub const Client = struct {
     ///
     /// Note that the
     /// [neptune-db:QueryLanguage:OpenCypher](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys) IAM condition key can be used in the policy document to restrict the use of openCypher queries (see [Condition keys available in Neptune IAM data-access policy statements](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)).
-    pub fn getOpenCypherQueryStatus(self: *Self, allocator: std.mem.Allocator, input: get_open_cypher_query_status.GetOpenCypherQueryStatusInput, options: get_open_cypher_query_status.Options) !get_open_cypher_query_status.GetOpenCypherQueryStatusOutput {
+    pub fn getOpenCypherQueryStatus(self: *Self, allocator: std.mem.Allocator, input: get_open_cypher_query_status.GetOpenCypherQueryStatusInput, options: CallOptions) !get_open_cypher_query_status.GetOpenCypherQueryStatusOutput {
         return get_open_cypher_query_status.execute(self, allocator, input, options);
     }
 
@@ -428,7 +429,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:GetStatisticsStatus](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getstatisticsstatus) IAM action in that cluster.
-    pub fn getPropertygraphStatistics(self: *Self, allocator: std.mem.Allocator, input: get_propertygraph_statistics.GetPropertygraphStatisticsInput, options: get_propertygraph_statistics.Options) !get_propertygraph_statistics.GetPropertygraphStatisticsOutput {
+    pub fn getPropertygraphStatistics(self: *Self, allocator: std.mem.Allocator, input: get_propertygraph_statistics.GetPropertygraphStatisticsInput, options: CallOptions) !get_propertygraph_statistics.GetPropertygraphStatisticsOutput {
         return get_propertygraph_statistics.execute(self, allocator, input, options);
     }
 
@@ -466,7 +467,7 @@ pub const Client = struct {
     ///
     /// See [Condition keys available in Neptune IAM data-access policy
     /// statements](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)).
-    pub fn getPropertygraphStream(self: *Self, allocator: std.mem.Allocator, input: get_propertygraph_stream.GetPropertygraphStreamInput, options: get_propertygraph_stream.Options) !get_propertygraph_stream.GetPropertygraphStreamOutput {
+    pub fn getPropertygraphStream(self: *Self, allocator: std.mem.Allocator, input: get_propertygraph_stream.GetPropertygraphStreamInput, options: CallOptions) !get_propertygraph_stream.GetPropertygraphStreamOutput {
         return get_propertygraph_stream.execute(self, allocator, input, options);
     }
 
@@ -476,7 +477,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:GetGraphSummary](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getgraphsummary) IAM action in that cluster.
-    pub fn getPropertygraphSummary(self: *Self, allocator: std.mem.Allocator, input: get_propertygraph_summary.GetPropertygraphSummaryInput, options: get_propertygraph_summary.Options) !get_propertygraph_summary.GetPropertygraphSummaryOutput {
+    pub fn getPropertygraphSummary(self: *Self, allocator: std.mem.Allocator, input: get_propertygraph_summary.GetPropertygraphSummaryInput, options: CallOptions) !get_propertygraph_summary.GetPropertygraphSummaryOutput {
         return get_propertygraph_summary.execute(self, allocator, input, options);
     }
 
@@ -486,12 +487,12 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:GetGraphSummary](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getgraphsummary) IAM action in that cluster.
-    pub fn getRdfGraphSummary(self: *Self, allocator: std.mem.Allocator, input: get_rdf_graph_summary.GetRDFGraphSummaryInput, options: get_rdf_graph_summary.Options) !get_rdf_graph_summary.GetRDFGraphSummaryOutput {
+    pub fn getRdfGraphSummary(self: *Self, allocator: std.mem.Allocator, input: get_rdf_graph_summary.GetRDFGraphSummaryInput, options: CallOptions) !get_rdf_graph_summary.GetRDFGraphSummaryOutput {
         return get_rdf_graph_summary.execute(self, allocator, input, options);
     }
 
     /// Gets RDF statistics (SPARQL).
-    pub fn getSparqlStatistics(self: *Self, allocator: std.mem.Allocator, input: get_sparql_statistics.GetSparqlStatisticsInput, options: get_sparql_statistics.Options) !get_sparql_statistics.GetSparqlStatisticsOutput {
+    pub fn getSparqlStatistics(self: *Self, allocator: std.mem.Allocator, input: get_sparql_statistics.GetSparqlStatisticsInput, options: CallOptions) !get_sparql_statistics.GetSparqlStatisticsOutput {
         return get_sparql_statistics.execute(self, allocator, input, options);
     }
 
@@ -516,7 +517,7 @@ pub const Client = struct {
     ///
     /// Note that the
     /// [neptune-db:QueryLanguage:Sparql](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys) IAM condition key can be used in the policy document to restrict the use of SPARQL queries (see [Condition keys available in Neptune IAM data-access policy statements](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)).
-    pub fn getSparqlStream(self: *Self, allocator: std.mem.Allocator, input: get_sparql_stream.GetSparqlStreamInput, options: get_sparql_stream.Options) !get_sparql_stream.GetSparqlStreamOutput {
+    pub fn getSparqlStream(self: *Self, allocator: std.mem.Allocator, input: get_sparql_stream.GetSparqlStreamInput, options: CallOptions) !get_sparql_stream.GetSparqlStreamOutput {
         return get_sparql_stream.execute(self, allocator, input, options);
     }
 
@@ -530,7 +531,7 @@ pub const Client = struct {
     ///
     /// Note that the
     /// [neptune-db:QueryLanguage:Gremlin](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys) IAM condition key can be used in the policy document to restrict the use of Gremlin queries (see [Condition keys available in Neptune IAM data-access policy statements](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)).
-    pub fn listGremlinQueries(self: *Self, allocator: std.mem.Allocator, input: list_gremlin_queries.ListGremlinQueriesInput, options: list_gremlin_queries.Options) !list_gremlin_queries.ListGremlinQueriesOutput {
+    pub fn listGremlinQueries(self: *Self, allocator: std.mem.Allocator, input: list_gremlin_queries.ListGremlinQueriesInput, options: CallOptions) !list_gremlin_queries.ListGremlinQueriesOutput {
         return list_gremlin_queries.execute(self, allocator, input, options);
     }
 
@@ -540,7 +541,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:ListLoaderJobs](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#listloaderjobs) IAM action in that cluster..
-    pub fn listLoaderJobs(self: *Self, allocator: std.mem.Allocator, input: list_loader_jobs.ListLoaderJobsInput, options: list_loader_jobs.Options) !list_loader_jobs.ListLoaderJobsOutput {
+    pub fn listLoaderJobs(self: *Self, allocator: std.mem.Allocator, input: list_loader_jobs.ListLoaderJobsInput, options: CallOptions) !list_loader_jobs.ListLoaderJobsOutput {
         return list_loader_jobs.execute(self, allocator, input, options);
     }
 
@@ -552,7 +553,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:ListMLDataProcessingJobs](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#listmldataprocessingjobs) IAM action in that cluster.
-    pub fn listMlDataProcessingJobs(self: *Self, allocator: std.mem.Allocator, input: list_ml_data_processing_jobs.ListMLDataProcessingJobsInput, options: list_ml_data_processing_jobs.Options) !list_ml_data_processing_jobs.ListMLDataProcessingJobsOutput {
+    pub fn listMlDataProcessingJobs(self: *Self, allocator: std.mem.Allocator, input: list_ml_data_processing_jobs.ListMLDataProcessingJobsInput, options: CallOptions) !list_ml_data_processing_jobs.ListMLDataProcessingJobsOutput {
         return list_ml_data_processing_jobs.execute(self, allocator, input, options);
     }
 
@@ -564,7 +565,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:ListMLEndpoints](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#listmlendpoints) IAM action in that cluster.
-    pub fn listMlEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_ml_endpoints.ListMLEndpointsInput, options: list_ml_endpoints.Options) !list_ml_endpoints.ListMLEndpointsOutput {
+    pub fn listMlEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_ml_endpoints.ListMLEndpointsInput, options: CallOptions) !list_ml_endpoints.ListMLEndpointsOutput {
         return list_ml_endpoints.execute(self, allocator, input, options);
     }
 
@@ -576,7 +577,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:neptune-db:ListMLModelTrainingJobs](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#neptune-db:listmlmodeltrainingjobs) IAM action in that cluster.
-    pub fn listMlModelTrainingJobs(self: *Self, allocator: std.mem.Allocator, input: list_ml_model_training_jobs.ListMLModelTrainingJobsInput, options: list_ml_model_training_jobs.Options) !list_ml_model_training_jobs.ListMLModelTrainingJobsOutput {
+    pub fn listMlModelTrainingJobs(self: *Self, allocator: std.mem.Allocator, input: list_ml_model_training_jobs.ListMLModelTrainingJobsInput, options: CallOptions) !list_ml_model_training_jobs.ListMLModelTrainingJobsOutput {
         return list_ml_model_training_jobs.execute(self, allocator, input, options);
     }
 
@@ -588,7 +589,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:ListMLModelTransformJobs](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#listmlmodeltransformjobs) IAM action in that cluster.
-    pub fn listMlModelTransformJobs(self: *Self, allocator: std.mem.Allocator, input: list_ml_model_transform_jobs.ListMLModelTransformJobsInput, options: list_ml_model_transform_jobs.Options) !list_ml_model_transform_jobs.ListMLModelTransformJobsOutput {
+    pub fn listMlModelTransformJobs(self: *Self, allocator: std.mem.Allocator, input: list_ml_model_transform_jobs.ListMLModelTransformJobsInput, options: CallOptions) !list_ml_model_transform_jobs.ListMLModelTransformJobsOutput {
         return list_ml_model_transform_jobs.execute(self, allocator, input, options);
     }
 
@@ -602,7 +603,7 @@ pub const Client = struct {
     ///
     /// Note that the
     /// [neptune-db:QueryLanguage:OpenCypher](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys) IAM condition key can be used in the policy document to restrict the use of openCypher queries (see [Condition keys available in Neptune IAM data-access policy statements](https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)).
-    pub fn listOpenCypherQueries(self: *Self, allocator: std.mem.Allocator, input: list_open_cypher_queries.ListOpenCypherQueriesInput, options: list_open_cypher_queries.Options) !list_open_cypher_queries.ListOpenCypherQueriesOutput {
+    pub fn listOpenCypherQueries(self: *Self, allocator: std.mem.Allocator, input: list_open_cypher_queries.ListOpenCypherQueriesInput, options: CallOptions) !list_open_cypher_queries.ListOpenCypherQueriesOutput {
         return list_open_cypher_queries.execute(self, allocator, input, options);
     }
 
@@ -612,7 +613,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:ManageStatistics](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#managestatistics) IAM action in that cluster.
-    pub fn managePropertygraphStatistics(self: *Self, allocator: std.mem.Allocator, input: manage_propertygraph_statistics.ManagePropertygraphStatisticsInput, options: manage_propertygraph_statistics.Options) !manage_propertygraph_statistics.ManagePropertygraphStatisticsOutput {
+    pub fn managePropertygraphStatistics(self: *Self, allocator: std.mem.Allocator, input: manage_propertygraph_statistics.ManagePropertygraphStatisticsInput, options: CallOptions) !manage_propertygraph_statistics.ManagePropertygraphStatisticsOutput {
         return manage_propertygraph_statistics.execute(self, allocator, input, options);
     }
 
@@ -622,7 +623,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:ManageStatistics](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#managestatistics) IAM action in that cluster.
-    pub fn manageSparqlStatistics(self: *Self, allocator: std.mem.Allocator, input: manage_sparql_statistics.ManageSparqlStatisticsInput, options: manage_sparql_statistics.Options) !manage_sparql_statistics.ManageSparqlStatisticsOutput {
+    pub fn manageSparqlStatistics(self: *Self, allocator: std.mem.Allocator, input: manage_sparql_statistics.ManageSparqlStatisticsInput, options: CallOptions) !manage_sparql_statistics.ManageSparqlStatisticsOutput {
         return manage_sparql_statistics.execute(self, allocator, input, options);
     }
 
@@ -634,7 +635,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:StartLoaderJob](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#startloaderjob) IAM action in that cluster.
-    pub fn startLoaderJob(self: *Self, allocator: std.mem.Allocator, input: start_loader_job.StartLoaderJobInput, options: start_loader_job.Options) !start_loader_job.StartLoaderJobOutput {
+    pub fn startLoaderJob(self: *Self, allocator: std.mem.Allocator, input: start_loader_job.StartLoaderJobInput, options: CallOptions) !start_loader_job.StartLoaderJobOutput {
         return start_loader_job.execute(self, allocator, input, options);
     }
 
@@ -646,7 +647,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:StartMLModelDataProcessingJob](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#startmlmodeldataprocessingjob) IAM action in that cluster.
-    pub fn startMlDataProcessingJob(self: *Self, allocator: std.mem.Allocator, input: start_ml_data_processing_job.StartMLDataProcessingJobInput, options: start_ml_data_processing_job.Options) !start_ml_data_processing_job.StartMLDataProcessingJobOutput {
+    pub fn startMlDataProcessingJob(self: *Self, allocator: std.mem.Allocator, input: start_ml_data_processing_job.StartMLDataProcessingJobInput, options: CallOptions) !start_ml_data_processing_job.StartMLDataProcessingJobOutput {
         return start_ml_data_processing_job.execute(self, allocator, input, options);
     }
 
@@ -658,7 +659,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:StartMLModelTrainingJob](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#startmlmodeltrainingjob) IAM action in that cluster.
-    pub fn startMlModelTrainingJob(self: *Self, allocator: std.mem.Allocator, input: start_ml_model_training_job.StartMLModelTrainingJobInput, options: start_ml_model_training_job.Options) !start_ml_model_training_job.StartMLModelTrainingJobOutput {
+    pub fn startMlModelTrainingJob(self: *Self, allocator: std.mem.Allocator, input: start_ml_model_training_job.StartMLModelTrainingJobInput, options: CallOptions) !start_ml_model_training_job.StartMLModelTrainingJobOutput {
         return start_ml_model_training_job.execute(self, allocator, input, options);
     }
 
@@ -670,7 +671,7 @@ pub const Client = struct {
     /// authentication enabled, the IAM user or role making the request must have a
     /// policy attached that allows the
     /// [neptune-db:StartMLModelTransformJob](https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#startmlmodeltransformjob) IAM action in that cluster.
-    pub fn startMlModelTransformJob(self: *Self, allocator: std.mem.Allocator, input: start_ml_model_transform_job.StartMLModelTransformJobInput, options: start_ml_model_transform_job.Options) !start_ml_model_transform_job.StartMLModelTransformJobOutput {
+    pub fn startMlModelTransformJob(self: *Self, allocator: std.mem.Allocator, input: start_ml_model_transform_job.StartMLModelTransformJobInput, options: CallOptions) !start_ml_model_transform_job.StartMLModelTransformJobOutput {
         return start_ml_model_transform_job.execute(self, allocator, input, options);
     }
 };

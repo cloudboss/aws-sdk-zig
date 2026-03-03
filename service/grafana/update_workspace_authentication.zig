@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AuthenticationProviderTypes = @import("authentication_provider_types.zig").AuthenticationProviderTypes;
 const SamlConfiguration = @import("saml_configuration.zig").SamlConfiguration;
@@ -45,11 +46,7 @@ pub const UpdateWorkspaceAuthenticationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkspaceAuthenticationInput, options: Options) !UpdateWorkspaceAuthenticationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkspaceAuthenticationInput, options: CallOptions) !UpdateWorkspaceAuthenticationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

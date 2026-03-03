@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MembershipDatasources = @import("membership_datasources.zig").MembershipDatasources;
 const UnprocessedGraph = @import("unprocessed_graph.zig").UnprocessedGraph;
@@ -29,11 +30,7 @@ pub const BatchGetMembershipDatasourcesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetMembershipDatasourcesInput, options: Options) !BatchGetMembershipDatasourcesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetMembershipDatasourcesInput, options: CallOptions) !BatchGetMembershipDatasourcesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

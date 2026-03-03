@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AIGuardrailContentPolicyConfig = @import("ai_guardrail_content_policy_config.zig").AIGuardrailContentPolicyConfig;
 const AIGuardrailContextualGroundingPolicyConfig = @import("ai_guardrail_contextual_grounding_policy_config.zig").AIGuardrailContextualGroundingPolicyConfig;
@@ -79,11 +80,7 @@ pub const UpdateAIGuardrailOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAIGuardrailInput, options: Options) !UpdateAIGuardrailOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAIGuardrailInput, options: CallOptions) !UpdateAIGuardrailOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

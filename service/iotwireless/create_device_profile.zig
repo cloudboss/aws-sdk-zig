@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LoRaWANDeviceProfile = @import("lo_ra_wan_device_profile.zig").LoRaWANDeviceProfile;
 const SidewalkCreateDeviceProfile = @import("sidewalk_create_device_profile.zig").SidewalkCreateDeviceProfile;
@@ -63,11 +64,7 @@ pub const CreateDeviceProfileOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDeviceProfileInput, options: Options) !CreateDeviceProfileOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDeviceProfileInput, options: CallOptions) !CreateDeviceProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

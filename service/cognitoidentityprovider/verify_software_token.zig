@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VerifySoftwareTokenResponseType = @import("verify_software_token_response_type.zig").VerifySoftwareTokenResponseType;
 
@@ -46,11 +47,7 @@ pub const VerifySoftwareTokenOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: VerifySoftwareTokenInput, options: Options) !VerifySoftwareTokenOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: VerifySoftwareTokenInput, options: CallOptions) !VerifySoftwareTokenOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

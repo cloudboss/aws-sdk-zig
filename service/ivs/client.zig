@@ -36,6 +36,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_channel = @import("update_channel.zig");
 const update_playback_restriction_policy = @import("update_playback_restriction_policy.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -67,30 +68,30 @@ pub const Client = struct {
     }
 
     /// Performs GetChannel on multiple ARNs simultaneously.
-    pub fn batchGetChannel(self: *Self, allocator: std.mem.Allocator, input: batch_get_channel.BatchGetChannelInput, options: batch_get_channel.Options) !batch_get_channel.BatchGetChannelOutput {
+    pub fn batchGetChannel(self: *Self, allocator: std.mem.Allocator, input: batch_get_channel.BatchGetChannelInput, options: CallOptions) !batch_get_channel.BatchGetChannelOutput {
         return batch_get_channel.execute(self, allocator, input, options);
     }
 
     /// Performs GetStreamKey on multiple ARNs simultaneously.
-    pub fn batchGetStreamKey(self: *Self, allocator: std.mem.Allocator, input: batch_get_stream_key.BatchGetStreamKeyInput, options: batch_get_stream_key.Options) !batch_get_stream_key.BatchGetStreamKeyOutput {
+    pub fn batchGetStreamKey(self: *Self, allocator: std.mem.Allocator, input: batch_get_stream_key.BatchGetStreamKeyInput, options: CallOptions) !batch_get_stream_key.BatchGetStreamKeyOutput {
         return batch_get_stream_key.execute(self, allocator, input, options);
     }
 
     /// Performs StartViewerSessionRevocation on multiple channel ARN and viewer
     /// ID pairs simultaneously.
-    pub fn batchStartViewerSessionRevocation(self: *Self, allocator: std.mem.Allocator, input: batch_start_viewer_session_revocation.BatchStartViewerSessionRevocationInput, options: batch_start_viewer_session_revocation.Options) !batch_start_viewer_session_revocation.BatchStartViewerSessionRevocationOutput {
+    pub fn batchStartViewerSessionRevocation(self: *Self, allocator: std.mem.Allocator, input: batch_start_viewer_session_revocation.BatchStartViewerSessionRevocationInput, options: CallOptions) !batch_start_viewer_session_revocation.BatchStartViewerSessionRevocationOutput {
         return batch_start_viewer_session_revocation.execute(self, allocator, input, options);
     }
 
     /// Creates a new channel and an associated stream key to start streaming.
-    pub fn createChannel(self: *Self, allocator: std.mem.Allocator, input: create_channel.CreateChannelInput, options: create_channel.Options) !create_channel.CreateChannelOutput {
+    pub fn createChannel(self: *Self, allocator: std.mem.Allocator, input: create_channel.CreateChannelInput, options: CallOptions) !create_channel.CreateChannelOutput {
         return create_channel.execute(self, allocator, input, options);
     }
 
     /// Creates a new playback restriction policy, for constraining playback by
     /// countries and/or
     /// origins.
-    pub fn createPlaybackRestrictionPolicy(self: *Self, allocator: std.mem.Allocator, input: create_playback_restriction_policy.CreatePlaybackRestrictionPolicyInput, options: create_playback_restriction_policy.Options) !create_playback_restriction_policy.CreatePlaybackRestrictionPolicyOutput {
+    pub fn createPlaybackRestrictionPolicy(self: *Self, allocator: std.mem.Allocator, input: create_playback_restriction_policy.CreatePlaybackRestrictionPolicyInput, options: CallOptions) !create_playback_restriction_policy.CreatePlaybackRestrictionPolicyOutput {
         return create_playback_restriction_policy.execute(self, allocator, input, options);
     }
 
@@ -112,7 +113,7 @@ pub const Client = struct {
     /// region as your S3 bucket, delete that recording configuration and create a
     /// new one with an S3
     /// bucket from the correct region.
-    pub fn createRecordingConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_recording_configuration.CreateRecordingConfigurationInput, options: create_recording_configuration.Options) !create_recording_configuration.CreateRecordingConfigurationOutput {
+    pub fn createRecordingConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_recording_configuration.CreateRecordingConfigurationInput, options: CallOptions) !create_recording_configuration.CreateRecordingConfigurationOutput {
         return create_recording_configuration.execute(self, allocator, input, options);
     }
 
@@ -124,7 +125,7 @@ pub const Client = struct {
     /// already exists and
     /// there is a limit of 1 stream key per channel. To reset the stream key on a
     /// channel, use DeleteStreamKey and then CreateStreamKey.
-    pub fn createStreamKey(self: *Self, allocator: std.mem.Allocator, input: create_stream_key.CreateStreamKeyInput, options: create_stream_key.Options) !create_stream_key.CreateStreamKeyOutput {
+    pub fn createStreamKey(self: *Self, allocator: std.mem.Allocator, input: create_stream_key.CreateStreamKeyInput, options: CallOptions) !create_stream_key.CreateStreamKeyOutput {
         return create_stream_key.execute(self, allocator, input, options);
     }
 
@@ -137,7 +138,7 @@ pub const Client = struct {
     /// longer Live), then
     /// call DeleteChannel. (See [ Using EventBridge with Amazon
     /// IVS](https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html).)
-    pub fn deleteChannel(self: *Self, allocator: std.mem.Allocator, input: delete_channel.DeleteChannelInput, options: delete_channel.Options) !delete_channel.DeleteChannelOutput {
+    pub fn deleteChannel(self: *Self, allocator: std.mem.Allocator, input: delete_channel.DeleteChannelInput, options: CallOptions) !delete_channel.DeleteChannelOutput {
         return delete_channel.execute(self, allocator, input, options);
     }
 
@@ -146,12 +147,12 @@ pub const Client = struct {
     /// generated using the key pair’s `privateKey`. For more information, see
     /// [Setting Up Private
     /// Channels](https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html) in the *Amazon IVS User Guide*.
-    pub fn deletePlaybackKeyPair(self: *Self, allocator: std.mem.Allocator, input: delete_playback_key_pair.DeletePlaybackKeyPairInput, options: delete_playback_key_pair.Options) !delete_playback_key_pair.DeletePlaybackKeyPairOutput {
+    pub fn deletePlaybackKeyPair(self: *Self, allocator: std.mem.Allocator, input: delete_playback_key_pair.DeletePlaybackKeyPairInput, options: CallOptions) !delete_playback_key_pair.DeletePlaybackKeyPairOutput {
         return delete_playback_key_pair.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified playback restriction policy.
-    pub fn deletePlaybackRestrictionPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_playback_restriction_policy.DeletePlaybackRestrictionPolicyInput, options: delete_playback_restriction_policy.Options) !delete_playback_restriction_policy.DeletePlaybackRestrictionPolicyOutput {
+    pub fn deletePlaybackRestrictionPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_playback_restriction_policy.DeletePlaybackRestrictionPolicyInput, options: CallOptions) !delete_playback_restriction_policy.DeletePlaybackRestrictionPolicyOutput {
         return delete_playback_restriction_policy.execute(self, allocator, input, options);
     }
 
@@ -164,19 +165,19 @@ pub const Client = struct {
     /// recording configuration, first use UpdateChannel to set the
     /// `recordingConfigurationArn` field to an empty string, then use
     /// DeleteRecordingConfiguration.
-    pub fn deleteRecordingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_recording_configuration.DeleteRecordingConfigurationInput, options: delete_recording_configuration.Options) !delete_recording_configuration.DeleteRecordingConfigurationOutput {
+    pub fn deleteRecordingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_recording_configuration.DeleteRecordingConfigurationInput, options: CallOptions) !delete_recording_configuration.DeleteRecordingConfigurationOutput {
         return delete_recording_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes the stream key for the specified ARN, so it can no longer be used to
     /// stream.
-    pub fn deleteStreamKey(self: *Self, allocator: std.mem.Allocator, input: delete_stream_key.DeleteStreamKeyInput, options: delete_stream_key.Options) !delete_stream_key.DeleteStreamKeyOutput {
+    pub fn deleteStreamKey(self: *Self, allocator: std.mem.Allocator, input: delete_stream_key.DeleteStreamKeyInput, options: CallOptions) !delete_stream_key.DeleteStreamKeyOutput {
         return delete_stream_key.execute(self, allocator, input, options);
     }
 
     /// Gets the channel configuration for the specified channel ARN. See also
     /// BatchGetChannel.
-    pub fn getChannel(self: *Self, allocator: std.mem.Allocator, input: get_channel.GetChannelInput, options: get_channel.Options) !get_channel.GetChannelOutput {
+    pub fn getChannel(self: *Self, allocator: std.mem.Allocator, input: get_channel.GetChannelInput, options: CallOptions) !get_channel.GetChannelOutput {
         return get_channel.execute(self, allocator, input, options);
     }
 
@@ -187,32 +188,32 @@ pub const Client = struct {
     /// information, see [Setting Up Private
     /// Channels](https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html) in the *Amazon IVS User
     /// Guide*.
-    pub fn getPlaybackKeyPair(self: *Self, allocator: std.mem.Allocator, input: get_playback_key_pair.GetPlaybackKeyPairInput, options: get_playback_key_pair.Options) !get_playback_key_pair.GetPlaybackKeyPairOutput {
+    pub fn getPlaybackKeyPair(self: *Self, allocator: std.mem.Allocator, input: get_playback_key_pair.GetPlaybackKeyPairInput, options: CallOptions) !get_playback_key_pair.GetPlaybackKeyPairOutput {
         return get_playback_key_pair.execute(self, allocator, input, options);
     }
 
     /// Gets the specified playback restriction policy.
-    pub fn getPlaybackRestrictionPolicy(self: *Self, allocator: std.mem.Allocator, input: get_playback_restriction_policy.GetPlaybackRestrictionPolicyInput, options: get_playback_restriction_policy.Options) !get_playback_restriction_policy.GetPlaybackRestrictionPolicyOutput {
+    pub fn getPlaybackRestrictionPolicy(self: *Self, allocator: std.mem.Allocator, input: get_playback_restriction_policy.GetPlaybackRestrictionPolicyInput, options: CallOptions) !get_playback_restriction_policy.GetPlaybackRestrictionPolicyOutput {
         return get_playback_restriction_policy.execute(self, allocator, input, options);
     }
 
     /// Gets the recording configuration for the specified ARN.
-    pub fn getRecordingConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_recording_configuration.GetRecordingConfigurationInput, options: get_recording_configuration.Options) !get_recording_configuration.GetRecordingConfigurationOutput {
+    pub fn getRecordingConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_recording_configuration.GetRecordingConfigurationInput, options: CallOptions) !get_recording_configuration.GetRecordingConfigurationOutput {
         return get_recording_configuration.execute(self, allocator, input, options);
     }
 
     /// Gets information about the active (live) stream on a specified channel.
-    pub fn getStream(self: *Self, allocator: std.mem.Allocator, input: get_stream.GetStreamInput, options: get_stream.Options) !get_stream.GetStreamOutput {
+    pub fn getStream(self: *Self, allocator: std.mem.Allocator, input: get_stream.GetStreamInput, options: CallOptions) !get_stream.GetStreamOutput {
         return get_stream.execute(self, allocator, input, options);
     }
 
     /// Gets stream-key information for a specified ARN.
-    pub fn getStreamKey(self: *Self, allocator: std.mem.Allocator, input: get_stream_key.GetStreamKeyInput, options: get_stream_key.Options) !get_stream_key.GetStreamKeyOutput {
+    pub fn getStreamKey(self: *Self, allocator: std.mem.Allocator, input: get_stream_key.GetStreamKeyInput, options: CallOptions) !get_stream_key.GetStreamKeyOutput {
         return get_stream_key.execute(self, allocator, input, options);
     }
 
     /// Gets metadata on a specified stream.
-    pub fn getStreamSession(self: *Self, allocator: std.mem.Allocator, input: get_stream_session.GetStreamSessionInput, options: get_stream_session.Options) !get_stream_session.GetStreamSessionOutput {
+    pub fn getStreamSession(self: *Self, allocator: std.mem.Allocator, input: get_stream_session.GetStreamSessionInput, options: CallOptions) !get_stream_session.GetStreamSessionOutput {
         return get_stream_session.execute(self, allocator, input, options);
     }
 
@@ -223,7 +224,7 @@ pub const Client = struct {
     /// [Setting Up
     /// Private
     /// Channels](https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html) in the *Amazon IVS User Guide*.
-    pub fn importPlaybackKeyPair(self: *Self, allocator: std.mem.Allocator, input: import_playback_key_pair.ImportPlaybackKeyPairInput, options: import_playback_key_pair.Options) !import_playback_key_pair.ImportPlaybackKeyPairOutput {
+    pub fn importPlaybackKeyPair(self: *Self, allocator: std.mem.Allocator, input: import_playback_key_pair.ImportPlaybackKeyPairInput, options: CallOptions) !import_playback_key_pair.ImportPlaybackKeyPairOutput {
         return import_playback_key_pair.execute(self, allocator, input, options);
     }
 
@@ -234,50 +235,50 @@ pub const Client = struct {
     /// or recording-configuration ARN. Filters are mutually exclusive and cannot be
     /// used together. If
     /// you try to use both filters, you will get an error (409 ConflictException).
-    pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: list_channels.Options) !list_channels.ListChannelsOutput {
+    pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: CallOptions) !list_channels.ListChannelsOutput {
         return list_channels.execute(self, allocator, input, options);
     }
 
     /// Gets summary information about playback key pairs. For more information, see
     /// [Setting Up Private
     /// Channels](https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html) in the *Amazon IVS User Guide*.
-    pub fn listPlaybackKeyPairs(self: *Self, allocator: std.mem.Allocator, input: list_playback_key_pairs.ListPlaybackKeyPairsInput, options: list_playback_key_pairs.Options) !list_playback_key_pairs.ListPlaybackKeyPairsOutput {
+    pub fn listPlaybackKeyPairs(self: *Self, allocator: std.mem.Allocator, input: list_playback_key_pairs.ListPlaybackKeyPairsInput, options: CallOptions) !list_playback_key_pairs.ListPlaybackKeyPairsOutput {
         return list_playback_key_pairs.execute(self, allocator, input, options);
     }
 
     /// Gets summary information about playback restriction policies.
-    pub fn listPlaybackRestrictionPolicies(self: *Self, allocator: std.mem.Allocator, input: list_playback_restriction_policies.ListPlaybackRestrictionPoliciesInput, options: list_playback_restriction_policies.Options) !list_playback_restriction_policies.ListPlaybackRestrictionPoliciesOutput {
+    pub fn listPlaybackRestrictionPolicies(self: *Self, allocator: std.mem.Allocator, input: list_playback_restriction_policies.ListPlaybackRestrictionPoliciesInput, options: CallOptions) !list_playback_restriction_policies.ListPlaybackRestrictionPoliciesOutput {
         return list_playback_restriction_policies.execute(self, allocator, input, options);
     }
 
     /// Gets summary information about all recording configurations in your account,
     /// in the
     /// Amazon Web Services region where the API request is processed.
-    pub fn listRecordingConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_recording_configurations.ListRecordingConfigurationsInput, options: list_recording_configurations.Options) !list_recording_configurations.ListRecordingConfigurationsOutput {
+    pub fn listRecordingConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_recording_configurations.ListRecordingConfigurationsInput, options: CallOptions) !list_recording_configurations.ListRecordingConfigurationsOutput {
         return list_recording_configurations.execute(self, allocator, input, options);
     }
 
     /// Gets summary information about stream keys for the specified channel.
-    pub fn listStreamKeys(self: *Self, allocator: std.mem.Allocator, input: list_stream_keys.ListStreamKeysInput, options: list_stream_keys.Options) !list_stream_keys.ListStreamKeysOutput {
+    pub fn listStreamKeys(self: *Self, allocator: std.mem.Allocator, input: list_stream_keys.ListStreamKeysInput, options: CallOptions) !list_stream_keys.ListStreamKeysOutput {
         return list_stream_keys.execute(self, allocator, input, options);
     }
 
     /// Gets a summary of current and previous streams for a specified channel in
     /// your account, in
     /// the AWS region where the API request is processed.
-    pub fn listStreamSessions(self: *Self, allocator: std.mem.Allocator, input: list_stream_sessions.ListStreamSessionsInput, options: list_stream_sessions.Options) !list_stream_sessions.ListStreamSessionsOutput {
+    pub fn listStreamSessions(self: *Self, allocator: std.mem.Allocator, input: list_stream_sessions.ListStreamSessionsInput, options: CallOptions) !list_stream_sessions.ListStreamSessionsOutput {
         return list_stream_sessions.execute(self, allocator, input, options);
     }
 
     /// Gets summary information about live streams in your account, in the Amazon
     /// Web Services
     /// region where the API request is processed.
-    pub fn listStreams(self: *Self, allocator: std.mem.Allocator, input: list_streams.ListStreamsInput, options: list_streams.Options) !list_streams.ListStreamsOutput {
+    pub fn listStreams(self: *Self, allocator: std.mem.Allocator, input: list_streams.ListStreamsInput, options: CallOptions) !list_streams.ListStreamsOutput {
         return list_streams.execute(self, allocator, input, options);
     }
 
     /// Gets information about Amazon Web Services tags for the specified ARN.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -291,7 +292,7 @@ pub const Client = struct {
     /// within a Video
     /// Stream](https://docs.aws.amazon.com/ivs/latest/userguide/metadata.html) in
     /// the *Amazon IVS User Guide*.
-    pub fn putMetadata(self: *Self, allocator: std.mem.Allocator, input: put_metadata.PutMetadataInput, options: put_metadata.Options) !put_metadata.PutMetadataOutput {
+    pub fn putMetadata(self: *Self, allocator: std.mem.Allocator, input: put_metadata.PutMetadataInput, options: CallOptions) !put_metadata.PutMetadataOutput {
         return put_metadata.execute(self, allocator, input, options);
     }
 
@@ -304,7 +305,7 @@ pub const Client = struct {
     /// [Setting Up
     /// Private
     /// Channels](https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html).
-    pub fn startViewerSessionRevocation(self: *Self, allocator: std.mem.Allocator, input: start_viewer_session_revocation.StartViewerSessionRevocationInput, options: start_viewer_session_revocation.Options) !start_viewer_session_revocation.StartViewerSessionRevocationOutput {
+    pub fn startViewerSessionRevocation(self: *Self, allocator: std.mem.Allocator, input: start_viewer_session_revocation.StartViewerSessionRevocationInput, options: CallOptions) !start_viewer_session_revocation.StartViewerSessionRevocationOutput {
         return start_viewer_session_revocation.execute(self, allocator, input, options);
     }
 
@@ -317,18 +318,18 @@ pub const Client = struct {
     /// RTMPS
     /// session, so to stop the stream permanently, you may want to first revoke the
     /// `streamKey` attached to the channel.
-    pub fn stopStream(self: *Self, allocator: std.mem.Allocator, input: stop_stream.StopStreamInput, options: stop_stream.Options) !stop_stream.StopStreamOutput {
+    pub fn stopStream(self: *Self, allocator: std.mem.Allocator, input: stop_stream.StopStreamInput, options: CallOptions) !stop_stream.StopStreamOutput {
         return stop_stream.execute(self, allocator, input, options);
     }
 
     /// Adds or updates tags for the Amazon Web Services resource with the specified
     /// ARN.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from the resource with the specified ARN.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -337,12 +338,12 @@ pub const Client = struct {
     /// ongoing stream, update the channel, and restart the stream for the changes
     /// to take
     /// effect.
-    pub fn updateChannel(self: *Self, allocator: std.mem.Allocator, input: update_channel.UpdateChannelInput, options: update_channel.Options) !update_channel.UpdateChannelOutput {
+    pub fn updateChannel(self: *Self, allocator: std.mem.Allocator, input: update_channel.UpdateChannelInput, options: CallOptions) !update_channel.UpdateChannelOutput {
         return update_channel.execute(self, allocator, input, options);
     }
 
     /// Updates a specified playback restriction policy.
-    pub fn updatePlaybackRestrictionPolicy(self: *Self, allocator: std.mem.Allocator, input: update_playback_restriction_policy.UpdatePlaybackRestrictionPolicyInput, options: update_playback_restriction_policy.Options) !update_playback_restriction_policy.UpdatePlaybackRestrictionPolicyOutput {
+    pub fn updatePlaybackRestrictionPolicy(self: *Self, allocator: std.mem.Allocator, input: update_playback_restriction_policy.UpdatePlaybackRestrictionPolicyInput, options: CallOptions) !update_playback_restriction_policy.UpdatePlaybackRestrictionPolicyOutput {
         return update_playback_restriction_policy.execute(self, allocator, input, options);
     }
 

@@ -52,6 +52,7 @@ const set_ip_address_type = @import("set_ip_address_type.zig");
 const set_rule_priorities = @import("set_rule_priorities.zig");
 const set_security_groups = @import("set_security_groups.zig");
 const set_subnets = @import("set_subnets.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -94,7 +95,7 @@ pub const Client = struct {
     /// For more information, see [SSL
     /// certificates](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/https-listener-certificates.html) in the *Application Load Balancers Guide* or [Server
     /// certificates](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/tls-listener-certificates.html) in the *Network Load Balancers Guide*.
-    pub fn addListenerCertificates(self: *Self, allocator: std.mem.Allocator, input: add_listener_certificates.AddListenerCertificatesInput, options: add_listener_certificates.Options) !add_listener_certificates.AddListenerCertificatesOutput {
+    pub fn addListenerCertificates(self: *Self, allocator: std.mem.Allocator, input: add_listener_certificates.AddListenerCertificatesInput, options: CallOptions) !add_listener_certificates.AddListenerCertificatesOutput {
         return add_listener_certificates.execute(self, allocator, input, options);
     }
 
@@ -107,12 +108,12 @@ pub const Client = struct {
     /// Each tag consists of a key and an optional value. If a resource already has
     /// a tag with the
     /// same key, `AddTags` updates its value.
-    pub fn addTags(self: *Self, allocator: std.mem.Allocator, input: add_tags.AddTagsInput, options: add_tags.Options) !add_tags.AddTagsOutput {
+    pub fn addTags(self: *Self, allocator: std.mem.Allocator, input: add_tags.AddTagsInput, options: CallOptions) !add_tags.AddTagsOutput {
         return add_tags.execute(self, allocator, input, options);
     }
 
     /// Adds the specified revocation file to the specified trust store.
-    pub fn addTrustStoreRevocations(self: *Self, allocator: std.mem.Allocator, input: add_trust_store_revocations.AddTrustStoreRevocationsInput, options: add_trust_store_revocations.Options) !add_trust_store_revocations.AddTrustStoreRevocationsOutput {
+    pub fn addTrustStoreRevocations(self: *Self, allocator: std.mem.Allocator, input: add_trust_store_revocations.AddTrustStoreRevocationsInput, options: CallOptions) !add_trust_store_revocations.AddTrustStoreRevocationsOutput {
         return add_trust_store_revocations.execute(self, allocator, input, options);
     }
 
@@ -138,7 +139,7 @@ pub const Client = struct {
     /// time. If you
     /// attempt to create multiple listeners with the same settings, each call
     /// succeeds.
-    pub fn createListener(self: *Self, allocator: std.mem.Allocator, input: create_listener.CreateListenerInput, options: create_listener.Options) !create_listener.CreateListenerOutput {
+    pub fn createListener(self: *Self, allocator: std.mem.Allocator, input: create_listener.CreateListenerInput, options: CallOptions) !create_listener.CreateListenerOutput {
         return create_listener.execute(self, allocator, input, options);
     }
 
@@ -160,7 +161,7 @@ pub const Client = struct {
     /// time. If you
     /// attempt to create multiple load balancers with the same settings, each call
     /// succeeds.
-    pub fn createLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: create_load_balancer.CreateLoadBalancerInput, options: create_load_balancer.Options) !create_load_balancer.CreateLoadBalancerOutput {
+    pub fn createLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: create_load_balancer.CreateLoadBalancerInput, options: CallOptions) !create_load_balancer.CreateLoadBalancerOutput {
         return create_load_balancer.execute(self, allocator, input, options);
     }
 
@@ -178,7 +179,7 @@ pub const Client = struct {
     /// performed.
     /// For more information, see [Listener
     /// rules](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules) in the *Application Load Balancers Guide*.
-    pub fn createRule(self: *Self, allocator: std.mem.Allocator, input: create_rule.CreateRuleInput, options: create_rule.Options) !create_rule.CreateRuleOutput {
+    pub fn createRule(self: *Self, allocator: std.mem.Allocator, input: create_rule.CreateRuleInput, options: CallOptions) !create_rule.CreateRuleOutput {
         return create_rule.execute(self, allocator, input, options);
     }
 
@@ -202,7 +203,7 @@ pub const Client = struct {
     /// time. If you
     /// attempt to create multiple target groups with the same settings, each call
     /// succeeds.
-    pub fn createTargetGroup(self: *Self, allocator: std.mem.Allocator, input: create_target_group.CreateTargetGroupInput, options: create_target_group.Options) !create_target_group.CreateTargetGroupOutput {
+    pub fn createTargetGroup(self: *Self, allocator: std.mem.Allocator, input: create_target_group.CreateTargetGroupInput, options: CallOptions) !create_target_group.CreateTargetGroupOutput {
         return create_target_group.execute(self, allocator, input, options);
     }
 
@@ -210,7 +211,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Mutual TLS for Application Load
     /// Balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/mutual-authentication.html).
-    pub fn createTrustStore(self: *Self, allocator: std.mem.Allocator, input: create_trust_store.CreateTrustStoreInput, options: create_trust_store.Options) !create_trust_store.CreateTrustStoreOutput {
+    pub fn createTrustStore(self: *Self, allocator: std.mem.Allocator, input: create_trust_store.CreateTrustStoreInput, options: CallOptions) !create_trust_store.CreateTrustStoreOutput {
         return create_trust_store.execute(self, allocator, input, options);
     }
 
@@ -219,7 +220,7 @@ pub const Client = struct {
     /// Alternatively, your listener is deleted when you delete the load balancer to
     /// which it is
     /// attached.
-    pub fn deleteListener(self: *Self, allocator: std.mem.Allocator, input: delete_listener.DeleteListenerInput, options: delete_listener.Options) !delete_listener.DeleteListenerOutput {
+    pub fn deleteListener(self: *Self, allocator: std.mem.Allocator, input: delete_listener.DeleteListenerInput, options: CallOptions) !delete_listener.DeleteListenerOutput {
         return delete_listener.execute(self, allocator, input, options);
     }
 
@@ -236,19 +237,19 @@ pub const Client = struct {
     /// instances continue to run and are still registered to their target groups.
     /// If you no longer
     /// need these EC2 instances, you can stop or terminate them.
-    pub fn deleteLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: delete_load_balancer.DeleteLoadBalancerInput, options: delete_load_balancer.Options) !delete_load_balancer.DeleteLoadBalancerOutput {
+    pub fn deleteLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: delete_load_balancer.DeleteLoadBalancerInput, options: CallOptions) !delete_load_balancer.DeleteLoadBalancerOutput {
         return delete_load_balancer.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified rule.
     ///
     /// You can't delete the default rule.
-    pub fn deleteRule(self: *Self, allocator: std.mem.Allocator, input: delete_rule.DeleteRuleInput, options: delete_rule.Options) !delete_rule.DeleteRuleOutput {
+    pub fn deleteRule(self: *Self, allocator: std.mem.Allocator, input: delete_rule.DeleteRuleInput, options: CallOptions) !delete_rule.DeleteRuleOutput {
         return delete_rule.execute(self, allocator, input, options);
     }
 
     /// Deletes a shared trust store association.
-    pub fn deleteSharedTrustStoreAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_shared_trust_store_association.DeleteSharedTrustStoreAssociationInput, options: delete_shared_trust_store_association.Options) !delete_shared_trust_store_association.DeleteSharedTrustStoreAssociationOutput {
+    pub fn deleteSharedTrustStoreAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_shared_trust_store_association.DeleteSharedTrustStoreAssociationInput, options: CallOptions) !delete_shared_trust_store_association.DeleteSharedTrustStoreAssociationOutput {
         return delete_shared_trust_store_association.execute(self, allocator, input, options);
     }
 
@@ -261,12 +262,12 @@ pub const Client = struct {
     /// registered targets. For example, any EC2 instances continue to run until you
     /// stop or terminate
     /// them.
-    pub fn deleteTargetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_target_group.DeleteTargetGroupInput, options: delete_target_group.Options) !delete_target_group.DeleteTargetGroupOutput {
+    pub fn deleteTargetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_target_group.DeleteTargetGroupInput, options: CallOptions) !delete_target_group.DeleteTargetGroupOutput {
         return delete_target_group.execute(self, allocator, input, options);
     }
 
     /// Deletes a trust store.
-    pub fn deleteTrustStore(self: *Self, allocator: std.mem.Allocator, input: delete_trust_store.DeleteTrustStoreInput, options: delete_trust_store.Options) !delete_trust_store.DeleteTrustStoreOutput {
+    pub fn deleteTrustStore(self: *Self, allocator: std.mem.Allocator, input: delete_trust_store.DeleteTrustStoreInput, options: CallOptions) !delete_trust_store.DeleteTrustStoreOutput {
         return delete_trust_store.execute(self, allocator, input, options);
     }
 
@@ -297,7 +298,7 @@ pub const Client = struct {
     ///
     /// Note: If the specified target does not exist, the action returns
     /// successfully.
-    pub fn deregisterTargets(self: *Self, allocator: std.mem.Allocator, input: deregister_targets.DeregisterTargetsInput, options: deregister_targets.Options) !deregister_targets.DeregisterTargetsOutput {
+    pub fn deregisterTargets(self: *Self, allocator: std.mem.Allocator, input: deregister_targets.DeregisterTargetsInput, options: CallOptions) !deregister_targets.DeregisterTargetsOutput {
         return deregister_targets.execute(self, allocator, input, options);
     }
 
@@ -318,17 +319,17 @@ pub const Client = struct {
     /// * [Quotas for your Gateway
     /// Load
     /// Balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/quotas-limits.html)
-    pub fn describeAccountLimits(self: *Self, allocator: std.mem.Allocator, input: describe_account_limits.DescribeAccountLimitsInput, options: describe_account_limits.Options) !describe_account_limits.DescribeAccountLimitsOutput {
+    pub fn describeAccountLimits(self: *Self, allocator: std.mem.Allocator, input: describe_account_limits.DescribeAccountLimitsInput, options: CallOptions) !describe_account_limits.DescribeAccountLimitsOutput {
         return describe_account_limits.execute(self, allocator, input, options);
     }
 
     /// Describes the capacity reservation status for the specified load balancer.
-    pub fn describeCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_reservation.DescribeCapacityReservationInput, options: describe_capacity_reservation.Options) !describe_capacity_reservation.DescribeCapacityReservationOutput {
+    pub fn describeCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_reservation.DescribeCapacityReservationInput, options: CallOptions) !describe_capacity_reservation.DescribeCapacityReservationOutput {
         return describe_capacity_reservation.execute(self, allocator, input, options);
     }
 
     /// Describes the attributes for the specified listener.
-    pub fn describeListenerAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_listener_attributes.DescribeListenerAttributesInput, options: describe_listener_attributes.Options) !describe_listener_attributes.DescribeListenerAttributesOutput {
+    pub fn describeListenerAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_listener_attributes.DescribeListenerAttributesInput, options: CallOptions) !describe_listener_attributes.DescribeListenerAttributesOutput {
         return describe_listener_attributes.execute(self, allocator, input, options);
     }
 
@@ -346,7 +347,7 @@ pub const Client = struct {
     /// [Server
     /// certificates](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/tls-listener-certificates.html) in the *Network Load Balancers
     /// Guide*.
-    pub fn describeListenerCertificates(self: *Self, allocator: std.mem.Allocator, input: describe_listener_certificates.DescribeListenerCertificatesInput, options: describe_listener_certificates.Options) !describe_listener_certificates.DescribeListenerCertificatesOutput {
+    pub fn describeListenerCertificates(self: *Self, allocator: std.mem.Allocator, input: describe_listener_certificates.DescribeListenerCertificatesInput, options: CallOptions) !describe_listener_certificates.DescribeListenerCertificatesOutput {
         return describe_listener_certificates.execute(self, allocator, input, options);
     }
 
@@ -355,7 +356,7 @@ pub const Client = struct {
     /// Balancer, Network Load Balancer, or Gateway Load Balancer. You must specify
     /// either a load
     /// balancer or one or more listeners.
-    pub fn describeListeners(self: *Self, allocator: std.mem.Allocator, input: describe_listeners.DescribeListenersInput, options: describe_listeners.Options) !describe_listeners.DescribeListenersOutput {
+    pub fn describeListeners(self: *Self, allocator: std.mem.Allocator, input: describe_listeners.DescribeListenersInput, options: CallOptions) !describe_listeners.DescribeListenersOutput {
         return describe_listeners.execute(self, allocator, input, options);
     }
 
@@ -376,19 +377,19 @@ pub const Client = struct {
     /// * [Load balancer
     ///   attributes](https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/gateway-load-balancers.html#load-balancer-attributes) in the *Gateway Load Balancers
     /// Guide*
-    pub fn describeLoadBalancerAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancer_attributes.DescribeLoadBalancerAttributesInput, options: describe_load_balancer_attributes.Options) !describe_load_balancer_attributes.DescribeLoadBalancerAttributesOutput {
+    pub fn describeLoadBalancerAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancer_attributes.DescribeLoadBalancerAttributesInput, options: CallOptions) !describe_load_balancer_attributes.DescribeLoadBalancerAttributesOutput {
         return describe_load_balancer_attributes.execute(self, allocator, input, options);
     }
 
     /// Describes the specified load balancers or all of your load balancers.
-    pub fn describeLoadBalancers(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancers.DescribeLoadBalancersInput, options: describe_load_balancers.Options) !describe_load_balancers.DescribeLoadBalancersOutput {
+    pub fn describeLoadBalancers(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancers.DescribeLoadBalancersInput, options: CallOptions) !describe_load_balancers.DescribeLoadBalancersOutput {
         return describe_load_balancers.execute(self, allocator, input, options);
     }
 
     /// Describes the specified rules or the rules for the specified listener. You
     /// must specify
     /// either a listener or rules.
-    pub fn describeRules(self: *Self, allocator: std.mem.Allocator, input: describe_rules.DescribeRulesInput, options: describe_rules.Options) !describe_rules.DescribeRulesOutput {
+    pub fn describeRules(self: *Self, allocator: std.mem.Allocator, input: describe_rules.DescribeRulesInput, options: CallOptions) !describe_rules.DescribeRulesOutput {
         return describe_rules.execute(self, allocator, input, options);
     }
 
@@ -398,7 +399,7 @@ pub const Client = struct {
     /// policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html) in the *Application Load Balancers Guide* and
     /// [Security
     /// policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/describe-ssl-policies.html) in the *Network Load Balancers Guide*.
-    pub fn describeSslPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_ssl_policies.DescribeSSLPoliciesInput, options: describe_ssl_policies.Options) !describe_ssl_policies.DescribeSSLPoliciesOutput {
+    pub fn describeSslPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_ssl_policies.DescribeSSLPoliciesInput, options: CallOptions) !describe_ssl_policies.DescribeSSLPoliciesOutput {
         return describe_ssl_policies.execute(self, allocator, input, options);
     }
 
@@ -407,7 +408,7 @@ pub const Client = struct {
     /// the tags for one or more Application Load Balancers, Network Load Balancers,
     /// Gateway Load
     /// Balancers, target groups, listeners, or rules.
-    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: describe_tags.Options) !describe_tags.DescribeTagsOutput {
+    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: CallOptions) !describe_tags.DescribeTagsOutput {
         return describe_tags.execute(self, allocator, input, options);
     }
 
@@ -426,7 +427,7 @@ pub const Client = struct {
     /// * [Target group
     ///   attributes](https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/target-groups.html#target-group-attributes) in the *Gateway Load Balancers
     /// Guide*
-    pub fn describeTargetGroupAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_target_group_attributes.DescribeTargetGroupAttributesInput, options: describe_target_group_attributes.Options) !describe_target_group_attributes.DescribeTargetGroupAttributesOutput {
+    pub fn describeTargetGroupAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_target_group_attributes.DescribeTargetGroupAttributesInput, options: CallOptions) !describe_target_group_attributes.DescribeTargetGroupAttributesOutput {
         return describe_target_group_attributes.execute(self, allocator, input, options);
     }
 
@@ -437,34 +438,34 @@ pub const Client = struct {
     /// results: the ARN of the load balancer, the names of one or more target
     /// groups, or the ARNs of
     /// one or more target groups.
-    pub fn describeTargetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_target_groups.DescribeTargetGroupsInput, options: describe_target_groups.Options) !describe_target_groups.DescribeTargetGroupsOutput {
+    pub fn describeTargetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_target_groups.DescribeTargetGroupsInput, options: CallOptions) !describe_target_groups.DescribeTargetGroupsOutput {
         return describe_target_groups.execute(self, allocator, input, options);
     }
 
     /// Describes the health of the specified targets or all of your targets.
-    pub fn describeTargetHealth(self: *Self, allocator: std.mem.Allocator, input: describe_target_health.DescribeTargetHealthInput, options: describe_target_health.Options) !describe_target_health.DescribeTargetHealthOutput {
+    pub fn describeTargetHealth(self: *Self, allocator: std.mem.Allocator, input: describe_target_health.DescribeTargetHealthInput, options: CallOptions) !describe_target_health.DescribeTargetHealthOutput {
         return describe_target_health.execute(self, allocator, input, options);
     }
 
     /// Describes all resources associated with the specified trust store.
-    pub fn describeTrustStoreAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_trust_store_associations.DescribeTrustStoreAssociationsInput, options: describe_trust_store_associations.Options) !describe_trust_store_associations.DescribeTrustStoreAssociationsOutput {
+    pub fn describeTrustStoreAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_trust_store_associations.DescribeTrustStoreAssociationsInput, options: CallOptions) !describe_trust_store_associations.DescribeTrustStoreAssociationsOutput {
         return describe_trust_store_associations.execute(self, allocator, input, options);
     }
 
     /// Describes the revocation files in use by the specified trust store or
     /// revocation
     /// files.
-    pub fn describeTrustStoreRevocations(self: *Self, allocator: std.mem.Allocator, input: describe_trust_store_revocations.DescribeTrustStoreRevocationsInput, options: describe_trust_store_revocations.Options) !describe_trust_store_revocations.DescribeTrustStoreRevocationsOutput {
+    pub fn describeTrustStoreRevocations(self: *Self, allocator: std.mem.Allocator, input: describe_trust_store_revocations.DescribeTrustStoreRevocationsInput, options: CallOptions) !describe_trust_store_revocations.DescribeTrustStoreRevocationsOutput {
         return describe_trust_store_revocations.execute(self, allocator, input, options);
     }
 
     /// Describes all trust stores for the specified account.
-    pub fn describeTrustStores(self: *Self, allocator: std.mem.Allocator, input: describe_trust_stores.DescribeTrustStoresInput, options: describe_trust_stores.Options) !describe_trust_stores.DescribeTrustStoresOutput {
+    pub fn describeTrustStores(self: *Self, allocator: std.mem.Allocator, input: describe_trust_stores.DescribeTrustStoresInput, options: CallOptions) !describe_trust_stores.DescribeTrustStoresOutput {
         return describe_trust_stores.execute(self, allocator, input, options);
     }
 
     /// Retrieves the resource policy for a specified resource.
-    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
         return get_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -472,7 +473,7 @@ pub const Client = struct {
     ///
     /// This action returns a pre-signed S3 URI which is
     /// active for ten minutes.
-    pub fn getTrustStoreCaCertificatesBundle(self: *Self, allocator: std.mem.Allocator, input: get_trust_store_ca_certificates_bundle.GetTrustStoreCaCertificatesBundleInput, options: get_trust_store_ca_certificates_bundle.Options) !get_trust_store_ca_certificates_bundle.GetTrustStoreCaCertificatesBundleOutput {
+    pub fn getTrustStoreCaCertificatesBundle(self: *Self, allocator: std.mem.Allocator, input: get_trust_store_ca_certificates_bundle.GetTrustStoreCaCertificatesBundleInput, options: CallOptions) !get_trust_store_ca_certificates_bundle.GetTrustStoreCaCertificatesBundleOutput {
         return get_trust_store_ca_certificates_bundle.execute(self, allocator, input, options);
     }
 
@@ -480,7 +481,7 @@ pub const Client = struct {
     ///
     /// This action returns a pre-signed S3 URI which is
     /// active for ten minutes.
-    pub fn getTrustStoreRevocationContent(self: *Self, allocator: std.mem.Allocator, input: get_trust_store_revocation_content.GetTrustStoreRevocationContentInput, options: get_trust_store_revocation_content.Options) !get_trust_store_revocation_content.GetTrustStoreRevocationContentOutput {
+    pub fn getTrustStoreRevocationContent(self: *Self, allocator: std.mem.Allocator, input: get_trust_store_revocation_content.GetTrustStoreRevocationContentInput, options: CallOptions) !get_trust_store_revocation_content.GetTrustStoreRevocationContentOutput {
         return get_trust_store_revocation_content.execute(self, allocator, input, options);
     }
 
@@ -489,13 +490,13 @@ pub const Client = struct {
     /// When modifying capacity reservation, you must include at least one
     /// `MinimumLoadBalancerCapacity`
     /// or `ResetCapacityReservation`.
-    pub fn modifyCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: modify_capacity_reservation.ModifyCapacityReservationInput, options: modify_capacity_reservation.Options) !modify_capacity_reservation.ModifyCapacityReservationOutput {
+    pub fn modifyCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: modify_capacity_reservation.ModifyCapacityReservationInput, options: CallOptions) !modify_capacity_reservation.ModifyCapacityReservationOutput {
         return modify_capacity_reservation.execute(self, allocator, input, options);
     }
 
     /// [Application Load Balancers] Modify the IP pool associated to a load
     /// balancer.
-    pub fn modifyIpPools(self: *Self, allocator: std.mem.Allocator, input: modify_ip_pools.ModifyIpPoolsInput, options: modify_ip_pools.Options) !modify_ip_pools.ModifyIpPoolsOutput {
+    pub fn modifyIpPools(self: *Self, allocator: std.mem.Allocator, input: modify_ip_pools.ModifyIpPoolsInput, options: CallOptions) !modify_ip_pools.ModifyIpPoolsOutput {
         return modify_ip_pools.execute(self, allocator, input, options);
     }
 
@@ -514,12 +515,12 @@ pub const Client = struct {
     /// must provide the entire list. For example, to add an action, specify a list
     /// with the current
     /// actions plus the new action.
-    pub fn modifyListener(self: *Self, allocator: std.mem.Allocator, input: modify_listener.ModifyListenerInput, options: modify_listener.Options) !modify_listener.ModifyListenerOutput {
+    pub fn modifyListener(self: *Self, allocator: std.mem.Allocator, input: modify_listener.ModifyListenerInput, options: CallOptions) !modify_listener.ModifyListenerOutput {
         return modify_listener.execute(self, allocator, input, options);
     }
 
     /// Modifies the specified attributes of the specified listener.
-    pub fn modifyListenerAttributes(self: *Self, allocator: std.mem.Allocator, input: modify_listener_attributes.ModifyListenerAttributesInput, options: modify_listener_attributes.Options) !modify_listener_attributes.ModifyListenerAttributesOutput {
+    pub fn modifyListenerAttributes(self: *Self, allocator: std.mem.Allocator, input: modify_listener_attributes.ModifyListenerAttributesInput, options: CallOptions) !modify_listener_attributes.ModifyListenerAttributesOutput {
         return modify_listener_attributes.execute(self, allocator, input, options);
     }
 
@@ -530,7 +531,7 @@ pub const Client = struct {
     /// If any of the specified attributes can't be modified as requested, the call
     /// fails. Any
     /// existing attributes that you do not modify retain their current values.
-    pub fn modifyLoadBalancerAttributes(self: *Self, allocator: std.mem.Allocator, input: modify_load_balancer_attributes.ModifyLoadBalancerAttributesInput, options: modify_load_balancer_attributes.Options) !modify_load_balancer_attributes.ModifyLoadBalancerAttributesOutput {
+    pub fn modifyLoadBalancerAttributes(self: *Self, allocator: std.mem.Allocator, input: modify_load_balancer_attributes.ModifyLoadBalancerAttributesInput, options: CallOptions) !modify_load_balancer_attributes.ModifyLoadBalancerAttributesOutput {
         return modify_load_balancer_attributes.execute(self, allocator, input, options);
     }
 
@@ -543,24 +544,24 @@ pub const Client = struct {
     /// must provide the entire list. For example, to add an action, specify a list
     /// with the current
     /// actions plus the new action.
-    pub fn modifyRule(self: *Self, allocator: std.mem.Allocator, input: modify_rule.ModifyRuleInput, options: modify_rule.Options) !modify_rule.ModifyRuleOutput {
+    pub fn modifyRule(self: *Self, allocator: std.mem.Allocator, input: modify_rule.ModifyRuleInput, options: CallOptions) !modify_rule.ModifyRuleOutput {
         return modify_rule.execute(self, allocator, input, options);
     }
 
     /// Modifies the health checks used when evaluating the health state of the
     /// targets in the
     /// specified target group.
-    pub fn modifyTargetGroup(self: *Self, allocator: std.mem.Allocator, input: modify_target_group.ModifyTargetGroupInput, options: modify_target_group.Options) !modify_target_group.ModifyTargetGroupOutput {
+    pub fn modifyTargetGroup(self: *Self, allocator: std.mem.Allocator, input: modify_target_group.ModifyTargetGroupInput, options: CallOptions) !modify_target_group.ModifyTargetGroupOutput {
         return modify_target_group.execute(self, allocator, input, options);
     }
 
     /// Modifies the specified attributes of the specified target group.
-    pub fn modifyTargetGroupAttributes(self: *Self, allocator: std.mem.Allocator, input: modify_target_group_attributes.ModifyTargetGroupAttributesInput, options: modify_target_group_attributes.Options) !modify_target_group_attributes.ModifyTargetGroupAttributesOutput {
+    pub fn modifyTargetGroupAttributes(self: *Self, allocator: std.mem.Allocator, input: modify_target_group_attributes.ModifyTargetGroupAttributesInput, options: CallOptions) !modify_target_group_attributes.ModifyTargetGroupAttributesOutput {
         return modify_target_group_attributes.execute(self, allocator, input, options);
     }
 
     /// Update the ca certificate bundle for the specified trust store.
-    pub fn modifyTrustStore(self: *Self, allocator: std.mem.Allocator, input: modify_trust_store.ModifyTrustStoreInput, options: modify_trust_store.Options) !modify_trust_store.ModifyTrustStoreOutput {
+    pub fn modifyTrustStore(self: *Self, allocator: std.mem.Allocator, input: modify_trust_store.ModifyTrustStoreInput, options: CallOptions) !modify_trust_store.ModifyTrustStoreOutput {
         return modify_trust_store.execute(self, allocator, input, options);
     }
 
@@ -590,14 +591,14 @@ pub const Client = struct {
     /// * [Register targets for your
     /// Gateway Load
     /// Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/target-group-register-targets.html)
-    pub fn registerTargets(self: *Self, allocator: std.mem.Allocator, input: register_targets.RegisterTargetsInput, options: register_targets.Options) !register_targets.RegisterTargetsOutput {
+    pub fn registerTargets(self: *Self, allocator: std.mem.Allocator, input: register_targets.RegisterTargetsInput, options: CallOptions) !register_targets.RegisterTargetsOutput {
         return register_targets.execute(self, allocator, input, options);
     }
 
     /// Removes the specified certificate from the certificate list for the
     /// specified HTTPS or TLS
     /// listener.
-    pub fn removeListenerCertificates(self: *Self, allocator: std.mem.Allocator, input: remove_listener_certificates.RemoveListenerCertificatesInput, options: remove_listener_certificates.Options) !remove_listener_certificates.RemoveListenerCertificatesOutput {
+    pub fn removeListenerCertificates(self: *Self, allocator: std.mem.Allocator, input: remove_listener_certificates.RemoveListenerCertificatesInput, options: CallOptions) !remove_listener_certificates.RemoveListenerCertificatesOutput {
         return remove_listener_certificates.execute(self, allocator, input, options);
     }
 
@@ -606,18 +607,18 @@ pub const Client = struct {
     /// remove the tags for one or more Application Load Balancers, Network Load
     /// Balancers, Gateway
     /// Load Balancers, target groups, listeners, or rules.
-    pub fn removeTags(self: *Self, allocator: std.mem.Allocator, input: remove_tags.RemoveTagsInput, options: remove_tags.Options) !remove_tags.RemoveTagsOutput {
+    pub fn removeTags(self: *Self, allocator: std.mem.Allocator, input: remove_tags.RemoveTagsInput, options: CallOptions) !remove_tags.RemoveTagsOutput {
         return remove_tags.execute(self, allocator, input, options);
     }
 
     /// Removes the specified revocation file from the specified trust store.
-    pub fn removeTrustStoreRevocations(self: *Self, allocator: std.mem.Allocator, input: remove_trust_store_revocations.RemoveTrustStoreRevocationsInput, options: remove_trust_store_revocations.Options) !remove_trust_store_revocations.RemoveTrustStoreRevocationsOutput {
+    pub fn removeTrustStoreRevocations(self: *Self, allocator: std.mem.Allocator, input: remove_trust_store_revocations.RemoveTrustStoreRevocationsInput, options: CallOptions) !remove_trust_store_revocations.RemoveTrustStoreRevocationsOutput {
         return remove_trust_store_revocations.execute(self, allocator, input, options);
     }
 
     /// Sets the type of IP addresses used by the subnets of the specified load
     /// balancer.
-    pub fn setIpAddressType(self: *Self, allocator: std.mem.Allocator, input: set_ip_address_type.SetIpAddressTypeInput, options: set_ip_address_type.Options) !set_ip_address_type.SetIpAddressTypeOutput {
+    pub fn setIpAddressType(self: *Self, allocator: std.mem.Allocator, input: set_ip_address_type.SetIpAddressTypeInput, options: CallOptions) !set_ip_address_type.SetIpAddressTypeOutput {
         return set_ip_address_type.execute(self, allocator, input, options);
     }
 
@@ -626,7 +627,7 @@ pub const Client = struct {
     /// You can reorder the rules as long as there are no priority conflicts in the
     /// new order. Any
     /// existing rules that you do not specify retain their current priority.
-    pub fn setRulePriorities(self: *Self, allocator: std.mem.Allocator, input: set_rule_priorities.SetRulePrioritiesInput, options: set_rule_priorities.Options) !set_rule_priorities.SetRulePrioritiesOutput {
+    pub fn setRulePriorities(self: *Self, allocator: std.mem.Allocator, input: set_rule_priorities.SetRulePrioritiesInput, options: CallOptions) !set_rule_priorities.SetRulePrioritiesOutput {
         return set_rule_priorities.execute(self, allocator, input, options);
     }
 
@@ -641,7 +642,7 @@ pub const Client = struct {
     /// security group for the load balancer when you created it.
     ///
     /// You can't associate a security group with a Gateway Load Balancer.
-    pub fn setSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: set_security_groups.SetSecurityGroupsInput, options: set_security_groups.Options) !set_security_groups.SetSecurityGroupsOutput {
+    pub fn setSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: set_security_groups.SetSecurityGroupsInput, options: CallOptions) !set_security_groups.SetSecurityGroupsOutput {
         return set_security_groups.execute(self, allocator, input, options);
     }
 
@@ -650,7 +651,7 @@ pub const Client = struct {
     /// Application Load Balancer, Network Load Balancer or Gateway Load Balancer.
     /// The specified subnets
     /// replace the previously enabled subnets.
-    pub fn setSubnets(self: *Self, allocator: std.mem.Allocator, input: set_subnets.SetSubnetsInput, options: set_subnets.Options) !set_subnets.SetSubnetsOutput {
+    pub fn setSubnets(self: *Self, allocator: std.mem.Allocator, input: set_subnets.SetSubnetsInput, options: CallOptions) !set_subnets.SetSubnetsOutput {
         return set_subnets.execute(self, allocator, input, options);
     }
 

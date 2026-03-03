@@ -98,6 +98,7 @@ const start_resource_evaluation = @import("start_resource_evaluation.zig");
 const stop_configuration_recorder = @import("stop_configuration_recorder.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -133,7 +134,7 @@ pub const Client = struct {
     ///
     /// For this operation, the specified configuration recorder must use a
     /// [RecordingStrategy](https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html) that is either `INCLUSION_BY_RESOURCE_TYPES` or `EXCLUSION_BY_RESOURCE_TYPES`.
-    pub fn associateResourceTypes(self: *Self, allocator: std.mem.Allocator, input: associate_resource_types.AssociateResourceTypesInput, options: associate_resource_types.Options) !associate_resource_types.AssociateResourceTypesOutput {
+    pub fn associateResourceTypes(self: *Self, allocator: std.mem.Allocator, input: associate_resource_types.AssociateResourceTypesInput, options: CallOptions) !associate_resource_types.AssociateResourceTypesOutput {
         return associate_resource_types.execute(self, allocator, input, options);
     }
 
@@ -146,7 +147,7 @@ pub const Client = struct {
     /// * The API does not return results for deleted resources.
     ///
     /// * The API does not return tags and relationships.
-    pub fn batchGetAggregateResourceConfig(self: *Self, allocator: std.mem.Allocator, input: batch_get_aggregate_resource_config.BatchGetAggregateResourceConfigInput, options: batch_get_aggregate_resource_config.Options) !batch_get_aggregate_resource_config.BatchGetAggregateResourceConfigOutput {
+    pub fn batchGetAggregateResourceConfig(self: *Self, allocator: std.mem.Allocator, input: batch_get_aggregate_resource_config.BatchGetAggregateResourceConfigInput, options: CallOptions) !batch_get_aggregate_resource_config.BatchGetAggregateResourceConfigOutput {
         return batch_get_aggregate_resource_config.execute(self, allocator, input, options);
     }
 
@@ -163,13 +164,13 @@ pub const Client = struct {
     /// resources. This information is filtered out of the
     /// supplementaryConfiguration section of the API
     /// response.
-    pub fn batchGetResourceConfig(self: *Self, allocator: std.mem.Allocator, input: batch_get_resource_config.BatchGetResourceConfigInput, options: batch_get_resource_config.Options) !batch_get_resource_config.BatchGetResourceConfigOutput {
+    pub fn batchGetResourceConfig(self: *Self, allocator: std.mem.Allocator, input: batch_get_resource_config.BatchGetResourceConfigInput, options: CallOptions) !batch_get_resource_config.BatchGetResourceConfigOutput {
         return batch_get_resource_config.execute(self, allocator, input, options);
     }
 
     /// Deletes the authorization granted to the specified
     /// configuration aggregator account in a specified region.
-    pub fn deleteAggregationAuthorization(self: *Self, allocator: std.mem.Allocator, input: delete_aggregation_authorization.DeleteAggregationAuthorizationInput, options: delete_aggregation_authorization.Options) !delete_aggregation_authorization.DeleteAggregationAuthorizationOutput {
+    pub fn deleteAggregationAuthorization(self: *Self, allocator: std.mem.Allocator, input: delete_aggregation_authorization.DeleteAggregationAuthorizationInput, options: CallOptions) !delete_aggregation_authorization.DeleteAggregationAuthorizationOutput {
         return delete_aggregation_authorization.execute(self, allocator, input, options);
     }
 
@@ -202,13 +203,13 @@ pub const Client = struct {
     /// hour or more to complete. During the time
     /// when recording is disabled for `AWS::Config::ResourceCompliance`, rule
     /// evaluations will not be recorded in the associated resource’s history.
-    pub fn deleteConfigRule(self: *Self, allocator: std.mem.Allocator, input: delete_config_rule.DeleteConfigRuleInput, options: delete_config_rule.Options) !delete_config_rule.DeleteConfigRuleOutput {
+    pub fn deleteConfigRule(self: *Self, allocator: std.mem.Allocator, input: delete_config_rule.DeleteConfigRuleInput, options: CallOptions) !delete_config_rule.DeleteConfigRuleOutput {
         return delete_config_rule.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified configuration aggregator and the
     /// aggregated data associated with the aggregator.
-    pub fn deleteConfigurationAggregator(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_aggregator.DeleteConfigurationAggregatorInput, options: delete_configuration_aggregator.Options) !delete_configuration_aggregator.DeleteConfigurationAggregatorOutput {
+    pub fn deleteConfigurationAggregator(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_aggregator.DeleteConfigurationAggregatorInput, options: CallOptions) !delete_configuration_aggregator.DeleteConfigurationAggregatorOutput {
         return delete_configuration_aggregator.execute(self, allocator, input, options);
     }
 
@@ -220,7 +221,7 @@ pub const Client = struct {
     /// [GetResourceConfigHistory](https://docs.aws.amazon.com/config/latest/APIReference/API_GetResourceConfigHistory.html) operation, but you will not
     /// be able to access this information in the Config console until
     /// you have created a new customer managed configuration recorder.
-    pub fn deleteConfigurationRecorder(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_recorder.DeleteConfigurationRecorderInput, options: delete_configuration_recorder.Options) !delete_configuration_recorder.DeleteConfigurationRecorderOutput {
+    pub fn deleteConfigurationRecorder(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_recorder.DeleteConfigurationRecorderInput, options: CallOptions) !delete_configuration_recorder.DeleteConfigurationRecorderOutput {
         return delete_configuration_recorder.execute(self, allocator, input, options);
     }
 
@@ -249,7 +250,7 @@ pub const Client = struct {
     /// hour or more to complete. During the time
     /// when recording is disabled for `AWS::Config::ResourceCompliance`, rule
     /// evaluations will not be recorded in the associated resource’s history.
-    pub fn deleteConformancePack(self: *Self, allocator: std.mem.Allocator, input: delete_conformance_pack.DeleteConformancePackInput, options: delete_conformance_pack.Options) !delete_conformance_pack.DeleteConformancePackOutput {
+    pub fn deleteConformancePack(self: *Self, allocator: std.mem.Allocator, input: delete_conformance_pack.DeleteConformancePackInput, options: CallOptions) !delete_conformance_pack.DeleteConformancePackOutput {
         return delete_conformance_pack.execute(self, allocator, input, options);
     }
 
@@ -258,7 +259,7 @@ pub const Client = struct {
     /// Before you can delete the delivery channel, you must stop the customer
     /// managed configuration recorder. You can use the StopConfigurationRecorder
     /// operation to stop the customer managed configuration recorder.
-    pub fn deleteDeliveryChannel(self: *Self, allocator: std.mem.Allocator, input: delete_delivery_channel.DeleteDeliveryChannelInput, options: delete_delivery_channel.Options) !delete_delivery_channel.DeleteDeliveryChannelOutput {
+    pub fn deleteDeliveryChannel(self: *Self, allocator: std.mem.Allocator, input: delete_delivery_channel.DeleteDeliveryChannelInput, options: CallOptions) !delete_delivery_channel.DeleteDeliveryChannelOutput {
         return delete_delivery_channel.execute(self, allocator, input, options);
     }
 
@@ -267,7 +268,7 @@ pub const Client = struct {
     /// delete the evaluation results, you can call the StartConfigRulesEvaluation
     /// API to start evaluating
     /// your Amazon Web Services resources against the rule.
-    pub fn deleteEvaluationResults(self: *Self, allocator: std.mem.Allocator, input: delete_evaluation_results.DeleteEvaluationResultsInput, options: delete_evaluation_results.Options) !delete_evaluation_results.DeleteEvaluationResultsOutput {
+    pub fn deleteEvaluationResults(self: *Self, allocator: std.mem.Allocator, input: delete_evaluation_results.DeleteEvaluationResultsInput, options: CallOptions) !delete_evaluation_results.DeleteEvaluationResultsOutput {
         return delete_evaluation_results.execute(self, allocator, input, options);
     }
 
@@ -301,7 +302,7 @@ pub const Client = struct {
     /// hour or more to complete. During the time
     /// when recording is disabled for `AWS::Config::ResourceCompliance`, rule
     /// evaluations will not be recorded in the associated resource’s history.
-    pub fn deleteOrganizationConfigRule(self: *Self, allocator: std.mem.Allocator, input: delete_organization_config_rule.DeleteOrganizationConfigRuleInput, options: delete_organization_config_rule.Options) !delete_organization_config_rule.DeleteOrganizationConfigRuleOutput {
+    pub fn deleteOrganizationConfigRule(self: *Self, allocator: std.mem.Allocator, input: delete_organization_config_rule.DeleteOrganizationConfigRuleInput, options: CallOptions) !delete_organization_config_rule.DeleteOrganizationConfigRuleOutput {
         return delete_organization_config_rule.execute(self, allocator, input, options);
     }
 
@@ -336,18 +337,18 @@ pub const Client = struct {
     /// hour or more to complete. During the time
     /// when recording is disabled for `AWS::Config::ResourceCompliance`, rule
     /// evaluations will not be recorded in the associated resource’s history.
-    pub fn deleteOrganizationConformancePack(self: *Self, allocator: std.mem.Allocator, input: delete_organization_conformance_pack.DeleteOrganizationConformancePackInput, options: delete_organization_conformance_pack.Options) !delete_organization_conformance_pack.DeleteOrganizationConformancePackOutput {
+    pub fn deleteOrganizationConformancePack(self: *Self, allocator: std.mem.Allocator, input: delete_organization_conformance_pack.DeleteOrganizationConformancePackInput, options: CallOptions) !delete_organization_conformance_pack.DeleteOrganizationConformancePackOutput {
         return delete_organization_conformance_pack.execute(self, allocator, input, options);
     }
 
     /// Deletes pending authorization requests for a specified
     /// aggregator account in a specified region.
-    pub fn deletePendingAggregationRequest(self: *Self, allocator: std.mem.Allocator, input: delete_pending_aggregation_request.DeletePendingAggregationRequestInput, options: delete_pending_aggregation_request.Options) !delete_pending_aggregation_request.DeletePendingAggregationRequestOutput {
+    pub fn deletePendingAggregationRequest(self: *Self, allocator: std.mem.Allocator, input: delete_pending_aggregation_request.DeletePendingAggregationRequestInput, options: CallOptions) !delete_pending_aggregation_request.DeletePendingAggregationRequestOutput {
         return delete_pending_aggregation_request.execute(self, allocator, input, options);
     }
 
     /// Deletes the remediation configuration.
-    pub fn deleteRemediationConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_remediation_configuration.DeleteRemediationConfigurationInput, options: delete_remediation_configuration.Options) !delete_remediation_configuration.DeleteRemediationConfigurationOutput {
+    pub fn deleteRemediationConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_remediation_configuration.DeleteRemediationConfigurationInput, options: CallOptions) !delete_remediation_configuration.DeleteRemediationConfigurationOutput {
         return delete_remediation_configuration.execute(self, allocator, input, options);
     }
 
@@ -357,7 +358,7 @@ pub const Client = struct {
     /// remediation action to a specific resource.
     /// Remediation exceptions blocks auto-remediation until the exception is
     /// cleared.
-    pub fn deleteRemediationExceptions(self: *Self, allocator: std.mem.Allocator, input: delete_remediation_exceptions.DeleteRemediationExceptionsInput, options: delete_remediation_exceptions.Options) !delete_remediation_exceptions.DeleteRemediationExceptionsOutput {
+    pub fn deleteRemediationExceptions(self: *Self, allocator: std.mem.Allocator, input: delete_remediation_exceptions.DeleteRemediationExceptionsInput, options: CallOptions) !delete_remediation_exceptions.DeleteRemediationExceptionsOutput {
         return delete_remediation_exceptions.execute(self, allocator, input, options);
     }
 
@@ -365,12 +366,12 @@ pub const Client = struct {
     /// This API records a new ConfigurationItem with a ResourceDeleted status. You
     /// can retrieve the ConfigurationItems recorded for this resource in your
     /// Config History.
-    pub fn deleteResourceConfig(self: *Self, allocator: std.mem.Allocator, input: delete_resource_config.DeleteResourceConfigInput, options: delete_resource_config.Options) !delete_resource_config.DeleteResourceConfigOutput {
+    pub fn deleteResourceConfig(self: *Self, allocator: std.mem.Allocator, input: delete_resource_config.DeleteResourceConfigInput, options: CallOptions) !delete_resource_config.DeleteResourceConfigOutput {
         return delete_resource_config.execute(self, allocator, input, options);
     }
 
     /// Deletes the retention configuration.
-    pub fn deleteRetentionConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_retention_configuration.DeleteRetentionConfigurationInput, options: delete_retention_configuration.Options) !delete_retention_configuration.DeleteRetentionConfigurationOutput {
+    pub fn deleteRetentionConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_retention_configuration.DeleteRetentionConfigurationInput, options: CallOptions) !delete_retention_configuration.DeleteRetentionConfigurationOutput {
         return delete_retention_configuration.execute(self, allocator, input, options);
     }
 
@@ -390,13 +391,13 @@ pub const Client = struct {
     /// configuration recorder and determines whether you receive configuration
     /// items (CIs) in the delivery channel. If the recording scope is internal, you
     /// will not receive CIs in the delivery channel.
-    pub fn deleteServiceLinkedConfigurationRecorder(self: *Self, allocator: std.mem.Allocator, input: delete_service_linked_configuration_recorder.DeleteServiceLinkedConfigurationRecorderInput, options: delete_service_linked_configuration_recorder.Options) !delete_service_linked_configuration_recorder.DeleteServiceLinkedConfigurationRecorderOutput {
+    pub fn deleteServiceLinkedConfigurationRecorder(self: *Self, allocator: std.mem.Allocator, input: delete_service_linked_configuration_recorder.DeleteServiceLinkedConfigurationRecorderInput, options: CallOptions) !delete_service_linked_configuration_recorder.DeleteServiceLinkedConfigurationRecorderOutput {
         return delete_service_linked_configuration_recorder.execute(self, allocator, input, options);
     }
 
     /// Deletes the stored query for a single Amazon Web Services account and a
     /// single Amazon Web Services Region.
-    pub fn deleteStoredQuery(self: *Self, allocator: std.mem.Allocator, input: delete_stored_query.DeleteStoredQueryInput, options: delete_stored_query.Options) !delete_stored_query.DeleteStoredQueryOutput {
+    pub fn deleteStoredQuery(self: *Self, allocator: std.mem.Allocator, input: delete_stored_query.DeleteStoredQueryInput, options: CallOptions) !delete_stored_query.DeleteStoredQueryOutput {
         return delete_stored_query.execute(self, allocator, input, options);
     }
 
@@ -412,7 +413,7 @@ pub const Client = struct {
     ///
     /// * Notification of delivery failure, if the delivery
     /// failed.
-    pub fn deliverConfigSnapshot(self: *Self, allocator: std.mem.Allocator, input: deliver_config_snapshot.DeliverConfigSnapshotInput, options: deliver_config_snapshot.Options) !deliver_config_snapshot.DeliverConfigSnapshotOutput {
+    pub fn deliverConfigSnapshot(self: *Self, allocator: std.mem.Allocator, input: deliver_config_snapshot.DeliverConfigSnapshotInput, options: CallOptions) !deliver_config_snapshot.DeliverConfigSnapshotOutput {
         return deliver_config_snapshot.execute(self, allocator, input, options);
     }
 
@@ -423,7 +424,7 @@ pub const Client = struct {
     /// The results can return an empty result page, but if you
     /// have a `nextToken`, the results are displayed on the next
     /// page.
-    pub fn describeAggregateComplianceByConfigRules(self: *Self, allocator: std.mem.Allocator, input: describe_aggregate_compliance_by_config_rules.DescribeAggregateComplianceByConfigRulesInput, options: describe_aggregate_compliance_by_config_rules.Options) !describe_aggregate_compliance_by_config_rules.DescribeAggregateComplianceByConfigRulesOutput {
+    pub fn describeAggregateComplianceByConfigRules(self: *Self, allocator: std.mem.Allocator, input: describe_aggregate_compliance_by_config_rules.DescribeAggregateComplianceByConfigRulesInput, options: CallOptions) !describe_aggregate_compliance_by_config_rules.DescribeAggregateComplianceByConfigRulesOutput {
         return describe_aggregate_compliance_by_config_rules.execute(self, allocator, input, options);
     }
 
@@ -436,13 +437,13 @@ pub const Client = struct {
     ///
     /// The results can return an empty result page, but if you have a `nextToken`,
     /// the results are displayed on the next page.
-    pub fn describeAggregateComplianceByConformancePacks(self: *Self, allocator: std.mem.Allocator, input: describe_aggregate_compliance_by_conformance_packs.DescribeAggregateComplianceByConformancePacksInput, options: describe_aggregate_compliance_by_conformance_packs.Options) !describe_aggregate_compliance_by_conformance_packs.DescribeAggregateComplianceByConformancePacksOutput {
+    pub fn describeAggregateComplianceByConformancePacks(self: *Self, allocator: std.mem.Allocator, input: describe_aggregate_compliance_by_conformance_packs.DescribeAggregateComplianceByConformancePacksInput, options: CallOptions) !describe_aggregate_compliance_by_conformance_packs.DescribeAggregateComplianceByConformancePacksOutput {
         return describe_aggregate_compliance_by_conformance_packs.execute(self, allocator, input, options);
     }
 
     /// Returns a list of authorizations granted to various aggregator
     /// accounts and regions.
-    pub fn describeAggregationAuthorizations(self: *Self, allocator: std.mem.Allocator, input: describe_aggregation_authorizations.DescribeAggregationAuthorizationsInput, options: describe_aggregation_authorizations.Options) !describe_aggregation_authorizations.DescribeAggregationAuthorizationsOutput {
+    pub fn describeAggregationAuthorizations(self: *Self, allocator: std.mem.Allocator, input: describe_aggregation_authorizations.DescribeAggregationAuthorizationsInput, options: CallOptions) !describe_aggregation_authorizations.DescribeAggregationAuthorizationsOutput {
         return describe_aggregation_authorizations.execute(self, allocator, input, options);
     }
 
@@ -477,7 +478,7 @@ pub const Client = struct {
     /// `NOT_APPLICABLE` for all evaluation results.
     /// This can occur if the resources were deleted or removed from
     /// the rule's scope.
-    pub fn describeComplianceByConfigRule(self: *Self, allocator: std.mem.Allocator, input: describe_compliance_by_config_rule.DescribeComplianceByConfigRuleInput, options: describe_compliance_by_config_rule.Options) !describe_compliance_by_config_rule.DescribeComplianceByConfigRuleOutput {
+    pub fn describeComplianceByConfigRule(self: *Self, allocator: std.mem.Allocator, input: describe_compliance_by_config_rule.DescribeComplianceByConfigRuleInput, options: CallOptions) !describe_compliance_by_config_rule.DescribeComplianceByConfigRuleOutput {
         return describe_compliance_by_config_rule.execute(self, allocator, input, options);
     }
 
@@ -513,7 +514,7 @@ pub const Client = struct {
     /// `NOT_APPLICABLE` for all evaluation results.
     /// This can occur if the resources were deleted or removed from
     /// the rule's scope.
-    pub fn describeComplianceByResource(self: *Self, allocator: std.mem.Allocator, input: describe_compliance_by_resource.DescribeComplianceByResourceInput, options: describe_compliance_by_resource.Options) !describe_compliance_by_resource.DescribeComplianceByResourceOutput {
+    pub fn describeComplianceByResource(self: *Self, allocator: std.mem.Allocator, input: describe_compliance_by_resource.DescribeComplianceByResourceInput, options: CallOptions) !describe_compliance_by_resource.DescribeComplianceByResourceOutput {
         return describe_compliance_by_resource.execute(self, allocator, input, options);
     }
 
@@ -521,12 +522,12 @@ pub const Client = struct {
     /// includes information such as the last time Config invoked the rule, the last
     /// time Config failed to invoke
     /// the rule, and the related error for the last failure.
-    pub fn describeConfigRuleEvaluationStatus(self: *Self, allocator: std.mem.Allocator, input: describe_config_rule_evaluation_status.DescribeConfigRuleEvaluationStatusInput, options: describe_config_rule_evaluation_status.Options) !describe_config_rule_evaluation_status.DescribeConfigRuleEvaluationStatusOutput {
+    pub fn describeConfigRuleEvaluationStatus(self: *Self, allocator: std.mem.Allocator, input: describe_config_rule_evaluation_status.DescribeConfigRuleEvaluationStatusInput, options: CallOptions) !describe_config_rule_evaluation_status.DescribeConfigRuleEvaluationStatusOutput {
         return describe_config_rule_evaluation_status.execute(self, allocator, input, options);
     }
 
     /// Returns details about your Config rules.
-    pub fn describeConfigRules(self: *Self, allocator: std.mem.Allocator, input: describe_config_rules.DescribeConfigRulesInput, options: describe_config_rules.Options) !describe_config_rules.DescribeConfigRulesOutput {
+    pub fn describeConfigRules(self: *Self, allocator: std.mem.Allocator, input: describe_config_rules.DescribeConfigRulesInput, options: CallOptions) !describe_config_rules.DescribeConfigRulesOutput {
         return describe_config_rules.execute(self, allocator, input, options);
     }
 
@@ -534,7 +535,7 @@ pub const Client = struct {
     /// The status includes information about the last time Config verified
     /// authorization between the source account and an aggregator account. In case
     /// of a failure, the status contains the related error code or message.
-    pub fn describeConfigurationAggregatorSourcesStatus(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_aggregator_sources_status.DescribeConfigurationAggregatorSourcesStatusInput, options: describe_configuration_aggregator_sources_status.Options) !describe_configuration_aggregator_sources_status.DescribeConfigurationAggregatorSourcesStatusOutput {
+    pub fn describeConfigurationAggregatorSourcesStatus(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_aggregator_sources_status.DescribeConfigurationAggregatorSourcesStatusInput, options: CallOptions) !describe_configuration_aggregator_sources_status.DescribeConfigurationAggregatorSourcesStatusOutput {
         return describe_configuration_aggregator_sources_status.execute(self, allocator, input, options);
     }
 
@@ -542,7 +543,7 @@ pub const Client = struct {
     /// If the configuration aggregator is not specified, this operation
     /// returns the details for all the configuration aggregators associated
     /// with the account.
-    pub fn describeConfigurationAggregators(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_aggregators.DescribeConfigurationAggregatorsInput, options: describe_configuration_aggregators.Options) !describe_configuration_aggregators.DescribeConfigurationAggregatorsOutput {
+    pub fn describeConfigurationAggregators(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_aggregators.DescribeConfigurationAggregatorsInput, options: CallOptions) !describe_configuration_aggregators.DescribeConfigurationAggregatorsOutput {
         return describe_configuration_aggregators.execute(self, allocator, input, options);
     }
 
@@ -559,7 +560,7 @@ pub const Client = struct {
     ///
     /// When making a request to this operation, you can only specify one
     /// configuration recorder.
-    pub fn describeConfigurationRecorderStatus(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_recorder_status.DescribeConfigurationRecorderStatusInput, options: describe_configuration_recorder_status.Options) !describe_configuration_recorder_status.DescribeConfigurationRecorderStatusOutput {
+    pub fn describeConfigurationRecorderStatus(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_recorder_status.DescribeConfigurationRecorderStatusInput, options: CallOptions) !describe_configuration_recorder_status.DescribeConfigurationRecorderStatusOutput {
         return describe_configuration_recorder_status.execute(self, allocator, input, options);
     }
 
@@ -571,26 +572,26 @@ pub const Client = struct {
     ///
     /// When making a request to this operation, you can only specify one
     /// configuration recorder.
-    pub fn describeConfigurationRecorders(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_recorders.DescribeConfigurationRecordersInput, options: describe_configuration_recorders.Options) !describe_configuration_recorders.DescribeConfigurationRecordersOutput {
+    pub fn describeConfigurationRecorders(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_recorders.DescribeConfigurationRecordersInput, options: CallOptions) !describe_configuration_recorders.DescribeConfigurationRecordersOutput {
         return describe_configuration_recorders.execute(self, allocator, input, options);
     }
 
     /// Returns compliance details for each rule in that conformance pack.
     ///
     /// You must provide exact rule names.
-    pub fn describeConformancePackCompliance(self: *Self, allocator: std.mem.Allocator, input: describe_conformance_pack_compliance.DescribeConformancePackComplianceInput, options: describe_conformance_pack_compliance.Options) !describe_conformance_pack_compliance.DescribeConformancePackComplianceOutput {
+    pub fn describeConformancePackCompliance(self: *Self, allocator: std.mem.Allocator, input: describe_conformance_pack_compliance.DescribeConformancePackComplianceInput, options: CallOptions) !describe_conformance_pack_compliance.DescribeConformancePackComplianceOutput {
         return describe_conformance_pack_compliance.execute(self, allocator, input, options);
     }
 
     /// Provides one or more conformance packs deployment status.
     ///
     /// If there are no conformance packs then you will see an empty result.
-    pub fn describeConformancePackStatus(self: *Self, allocator: std.mem.Allocator, input: describe_conformance_pack_status.DescribeConformancePackStatusInput, options: describe_conformance_pack_status.Options) !describe_conformance_pack_status.DescribeConformancePackStatusOutput {
+    pub fn describeConformancePackStatus(self: *Self, allocator: std.mem.Allocator, input: describe_conformance_pack_status.DescribeConformancePackStatusInput, options: CallOptions) !describe_conformance_pack_status.DescribeConformancePackStatusOutput {
         return describe_conformance_pack_status.execute(self, allocator, input, options);
     }
 
     /// Returns a list of one or more conformance packs.
-    pub fn describeConformancePacks(self: *Self, allocator: std.mem.Allocator, input: describe_conformance_packs.DescribeConformancePacksInput, options: describe_conformance_packs.Options) !describe_conformance_packs.DescribeConformancePacksOutput {
+    pub fn describeConformancePacks(self: *Self, allocator: std.mem.Allocator, input: describe_conformance_packs.DescribeConformancePacksInput, options: CallOptions) !describe_conformance_packs.DescribeConformancePacksOutput {
         return describe_conformance_packs.execute(self, allocator, input, options);
     }
 
@@ -601,7 +602,7 @@ pub const Client = struct {
     ///
     /// Currently, you can specify only one delivery channel per
     /// region in your account.
-    pub fn describeDeliveryChannelStatus(self: *Self, allocator: std.mem.Allocator, input: describe_delivery_channel_status.DescribeDeliveryChannelStatusInput, options: describe_delivery_channel_status.Options) !describe_delivery_channel_status.DescribeDeliveryChannelStatusOutput {
+    pub fn describeDeliveryChannelStatus(self: *Self, allocator: std.mem.Allocator, input: describe_delivery_channel_status.DescribeDeliveryChannelStatusInput, options: CallOptions) !describe_delivery_channel_status.DescribeDeliveryChannelStatusOutput {
         return describe_delivery_channel_status.execute(self, allocator, input, options);
     }
 
@@ -611,7 +612,7 @@ pub const Client = struct {
     ///
     /// Currently, you can specify only one delivery channel per
     /// region in your account.
-    pub fn describeDeliveryChannels(self: *Self, allocator: std.mem.Allocator, input: describe_delivery_channels.DescribeDeliveryChannelsInput, options: describe_delivery_channels.Options) !describe_delivery_channels.DescribeDeliveryChannelsOutput {
+    pub fn describeDeliveryChannels(self: *Self, allocator: std.mem.Allocator, input: describe_delivery_channels.DescribeDeliveryChannelsInput, options: CallOptions) !describe_delivery_channels.DescribeDeliveryChannelsOutput {
         return describe_delivery_channels.execute(self, allocator, input, options);
     }
 
@@ -626,7 +627,7 @@ pub const Client = struct {
     /// Limit and next token are not applicable if you specify organization Config
     /// rule names.
     /// It is only applicable, when you request all the organization Config rules.
-    pub fn describeOrganizationConfigRuleStatuses(self: *Self, allocator: std.mem.Allocator, input: describe_organization_config_rule_statuses.DescribeOrganizationConfigRuleStatusesInput, options: describe_organization_config_rule_statuses.Options) !describe_organization_config_rule_statuses.DescribeOrganizationConfigRuleStatusesOutput {
+    pub fn describeOrganizationConfigRuleStatuses(self: *Self, allocator: std.mem.Allocator, input: describe_organization_config_rule_statuses.DescribeOrganizationConfigRuleStatusesInput, options: CallOptions) !describe_organization_config_rule_statuses.DescribeOrganizationConfigRuleStatusesOutput {
         return describe_organization_config_rule_statuses.execute(self, allocator, input, options);
     }
 
@@ -657,7 +658,7 @@ pub const Client = struct {
     /// the organization-related resource that were deployed from within the account
     /// calling
     /// those APIs.
-    pub fn describeOrganizationConfigRules(self: *Self, allocator: std.mem.Allocator, input: describe_organization_config_rules.DescribeOrganizationConfigRulesInput, options: describe_organization_config_rules.Options) !describe_organization_config_rules.DescribeOrganizationConfigRulesOutput {
+    pub fn describeOrganizationConfigRules(self: *Self, allocator: std.mem.Allocator, input: describe_organization_config_rules.DescribeOrganizationConfigRulesInput, options: CallOptions) !describe_organization_config_rules.DescribeOrganizationConfigRulesOutput {
         return describe_organization_config_rules.execute(self, allocator, input, options);
     }
 
@@ -674,7 +675,7 @@ pub const Client = struct {
     /// conformance pack names.
     /// They are only applicable, when you request all the organization conformance
     /// packs.
-    pub fn describeOrganizationConformancePackStatuses(self: *Self, allocator: std.mem.Allocator, input: describe_organization_conformance_pack_statuses.DescribeOrganizationConformancePackStatusesInput, options: describe_organization_conformance_pack_statuses.Options) !describe_organization_conformance_pack_statuses.DescribeOrganizationConformancePackStatusesOutput {
+    pub fn describeOrganizationConformancePackStatuses(self: *Self, allocator: std.mem.Allocator, input: describe_organization_conformance_pack_statuses.DescribeOrganizationConformancePackStatusesInput, options: CallOptions) !describe_organization_conformance_pack_statuses.DescribeOrganizationConformancePackStatusesOutput {
         return describe_organization_conformance_pack_statuses.execute(self, allocator, input, options);
     }
 
@@ -705,17 +706,17 @@ pub const Client = struct {
     /// the organization-related resource that were deployed from within the account
     /// calling
     /// those APIs.
-    pub fn describeOrganizationConformancePacks(self: *Self, allocator: std.mem.Allocator, input: describe_organization_conformance_packs.DescribeOrganizationConformancePacksInput, options: describe_organization_conformance_packs.Options) !describe_organization_conformance_packs.DescribeOrganizationConformancePacksOutput {
+    pub fn describeOrganizationConformancePacks(self: *Self, allocator: std.mem.Allocator, input: describe_organization_conformance_packs.DescribeOrganizationConformancePacksInput, options: CallOptions) !describe_organization_conformance_packs.DescribeOrganizationConformancePacksOutput {
         return describe_organization_conformance_packs.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all pending aggregation requests.
-    pub fn describePendingAggregationRequests(self: *Self, allocator: std.mem.Allocator, input: describe_pending_aggregation_requests.DescribePendingAggregationRequestsInput, options: describe_pending_aggregation_requests.Options) !describe_pending_aggregation_requests.DescribePendingAggregationRequestsOutput {
+    pub fn describePendingAggregationRequests(self: *Self, allocator: std.mem.Allocator, input: describe_pending_aggregation_requests.DescribePendingAggregationRequestsInput, options: CallOptions) !describe_pending_aggregation_requests.DescribePendingAggregationRequestsOutput {
         return describe_pending_aggregation_requests.execute(self, allocator, input, options);
     }
 
     /// Returns the details of one or more remediation configurations.
-    pub fn describeRemediationConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_remediation_configurations.DescribeRemediationConfigurationsInput, options: describe_remediation_configurations.Options) !describe_remediation_configurations.DescribeRemediationConfigurationsOutput {
+    pub fn describeRemediationConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_remediation_configurations.DescribeRemediationConfigurationsInput, options: CallOptions) !describe_remediation_configurations.DescribeRemediationConfigurationsOutput {
         return describe_remediation_configurations.execute(self, allocator, input, options);
     }
 
@@ -735,7 +736,7 @@ pub const Client = struct {
     ///
     /// Limit and next token are not applicable if you request resources in batch.
     /// It is only applicable, when you request all resources.
-    pub fn describeRemediationExceptions(self: *Self, allocator: std.mem.Allocator, input: describe_remediation_exceptions.DescribeRemediationExceptionsInput, options: describe_remediation_exceptions.Options) !describe_remediation_exceptions.DescribeRemediationExceptionsOutput {
+    pub fn describeRemediationExceptions(self: *Self, allocator: std.mem.Allocator, input: describe_remediation_exceptions.DescribeRemediationExceptionsInput, options: CallOptions) !describe_remediation_exceptions.DescribeRemediationExceptionsOutput {
         return describe_remediation_exceptions.execute(self, allocator, input, options);
     }
 
@@ -744,7 +745,7 @@ pub const Client = struct {
     /// occur, and any error messages for steps that have failed.
     /// When you specify the limit and the next token, you receive a paginated
     /// response.
-    pub fn describeRemediationExecutionStatus(self: *Self, allocator: std.mem.Allocator, input: describe_remediation_execution_status.DescribeRemediationExecutionStatusInput, options: describe_remediation_execution_status.Options) !describe_remediation_execution_status.DescribeRemediationExecutionStatusOutput {
+    pub fn describeRemediationExecutionStatus(self: *Self, allocator: std.mem.Allocator, input: describe_remediation_execution_status.DescribeRemediationExecutionStatusInput, options: CallOptions) !describe_remediation_execution_status.DescribeRemediationExecutionStatusOutput {
         return describe_remediation_execution_status.execute(self, allocator, input, options);
     }
 
@@ -755,7 +756,7 @@ pub const Client = struct {
     ///
     /// Currently, Config supports only one retention
     /// configuration per region in your account.
-    pub fn describeRetentionConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_retention_configurations.DescribeRetentionConfigurationsInput, options: describe_retention_configurations.Options) !describe_retention_configurations.DescribeRetentionConfigurationsOutput {
+    pub fn describeRetentionConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_retention_configurations.DescribeRetentionConfigurationsInput, options: CallOptions) !describe_retention_configurations.DescribeRetentionConfigurationsOutput {
         return describe_retention_configurations.execute(self, allocator, input, options);
     }
 
@@ -764,7 +765,7 @@ pub const Client = struct {
     ///
     /// For this operation, the configuration recorder must use a
     /// [RecordingStrategy](https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html) that is either `INCLUSION_BY_RESOURCE_TYPES` or `EXCLUSION_BY_RESOURCE_TYPES`.
-    pub fn disassociateResourceTypes(self: *Self, allocator: std.mem.Allocator, input: disassociate_resource_types.DisassociateResourceTypesInput, options: disassociate_resource_types.Options) !disassociate_resource_types.DisassociateResourceTypesOutput {
+    pub fn disassociateResourceTypes(self: *Self, allocator: std.mem.Allocator, input: disassociate_resource_types.DisassociateResourceTypesInput, options: CallOptions) !disassociate_resource_types.DisassociateResourceTypesOutput {
         return disassociate_resource_types.execute(self, allocator, input, options);
     }
 
@@ -777,7 +778,7 @@ pub const Client = struct {
     /// The results can return an empty result page. But if you
     /// have a `nextToken`, the results are displayed on the next
     /// page.
-    pub fn getAggregateComplianceDetailsByConfigRule(self: *Self, allocator: std.mem.Allocator, input: get_aggregate_compliance_details_by_config_rule.GetAggregateComplianceDetailsByConfigRuleInput, options: get_aggregate_compliance_details_by_config_rule.Options) !get_aggregate_compliance_details_by_config_rule.GetAggregateComplianceDetailsByConfigRuleOutput {
+    pub fn getAggregateComplianceDetailsByConfigRule(self: *Self, allocator: std.mem.Allocator, input: get_aggregate_compliance_details_by_config_rule.GetAggregateComplianceDetailsByConfigRuleInput, options: CallOptions) !get_aggregate_compliance_details_by_config_rule.GetAggregateComplianceDetailsByConfigRuleOutput {
         return get_aggregate_compliance_details_by_config_rule.execute(self, allocator, input, options);
     }
 
@@ -787,7 +788,7 @@ pub const Client = struct {
     /// The results can return an empty result page, but if you
     /// have a nextToken, the results are displayed on the next
     /// page.
-    pub fn getAggregateConfigRuleComplianceSummary(self: *Self, allocator: std.mem.Allocator, input: get_aggregate_config_rule_compliance_summary.GetAggregateConfigRuleComplianceSummaryInput, options: get_aggregate_config_rule_compliance_summary.Options) !get_aggregate_config_rule_compliance_summary.GetAggregateConfigRuleComplianceSummaryOutput {
+    pub fn getAggregateConfigRuleComplianceSummary(self: *Self, allocator: std.mem.Allocator, input: get_aggregate_config_rule_compliance_summary.GetAggregateConfigRuleComplianceSummaryInput, options: CallOptions) !get_aggregate_config_rule_compliance_summary.GetAggregateConfigRuleComplianceSummaryOutput {
         return get_aggregate_config_rule_compliance_summary.execute(self, allocator, input, options);
     }
 
@@ -798,7 +799,7 @@ pub const Client = struct {
     ///
     /// The results can return an empty result page, but if you have a nextToken,
     /// the results are displayed on the next page.
-    pub fn getAggregateConformancePackComplianceSummary(self: *Self, allocator: std.mem.Allocator, input: get_aggregate_conformance_pack_compliance_summary.GetAggregateConformancePackComplianceSummaryInput, options: get_aggregate_conformance_pack_compliance_summary.Options) !get_aggregate_conformance_pack_compliance_summary.GetAggregateConformancePackComplianceSummaryOutput {
+    pub fn getAggregateConformancePackComplianceSummary(self: *Self, allocator: std.mem.Allocator, input: get_aggregate_conformance_pack_compliance_summary.GetAggregateConformancePackComplianceSummaryInput, options: CallOptions) !get_aggregate_conformance_pack_compliance_summary.GetAggregateConformancePackComplianceSummaryOutput {
         return get_aggregate_conformance_pack_compliance_summary.execute(self, allocator, input, options);
     }
 
@@ -811,7 +812,7 @@ pub const Client = struct {
     /// 12345678910 and region us-east-1.
     /// If the input contains ACCOUNT_ID as a GroupByKey, the API returns resource
     /// counts for all source accounts that are present in your aggregator.
-    pub fn getAggregateDiscoveredResourceCounts(self: *Self, allocator: std.mem.Allocator, input: get_aggregate_discovered_resource_counts.GetAggregateDiscoveredResourceCountsInput, options: get_aggregate_discovered_resource_counts.Options) !get_aggregate_discovered_resource_counts.GetAggregateDiscoveredResourceCountsOutput {
+    pub fn getAggregateDiscoveredResourceCounts(self: *Self, allocator: std.mem.Allocator, input: get_aggregate_discovered_resource_counts.GetAggregateDiscoveredResourceCountsInput, options: CallOptions) !get_aggregate_discovered_resource_counts.GetAggregateDiscoveredResourceCountsOutput {
         return get_aggregate_discovered_resource_counts.execute(self, allocator, input, options);
     }
 
@@ -819,7 +820,7 @@ pub const Client = struct {
     /// a specific source account and region.
     ///
     /// The API does not return results for deleted resources.
-    pub fn getAggregateResourceConfig(self: *Self, allocator: std.mem.Allocator, input: get_aggregate_resource_config.GetAggregateResourceConfigInput, options: get_aggregate_resource_config.Options) !get_aggregate_resource_config.GetAggregateResourceConfigOutput {
+    pub fn getAggregateResourceConfig(self: *Self, allocator: std.mem.Allocator, input: get_aggregate_resource_config.GetAggregateResourceConfigInput, options: CallOptions) !get_aggregate_resource_config.GetAggregateResourceConfigOutput {
         return get_aggregate_resource_config.execute(self, allocator, input, options);
     }
 
@@ -828,7 +829,7 @@ pub const Client = struct {
     /// evaluated by the
     /// rule, when each resource was last evaluated, and whether each
     /// resource complies with the rule.
-    pub fn getComplianceDetailsByConfigRule(self: *Self, allocator: std.mem.Allocator, input: get_compliance_details_by_config_rule.GetComplianceDetailsByConfigRuleInput, options: get_compliance_details_by_config_rule.Options) !get_compliance_details_by_config_rule.GetComplianceDetailsByConfigRuleOutput {
+    pub fn getComplianceDetailsByConfigRule(self: *Self, allocator: std.mem.Allocator, input: get_compliance_details_by_config_rule.GetComplianceDetailsByConfigRuleInput, options: CallOptions) !get_compliance_details_by_config_rule.GetComplianceDetailsByConfigRuleOutput {
         return get_compliance_details_by_config_rule.execute(self, allocator, input, options);
     }
 
@@ -837,13 +838,13 @@ pub const Client = struct {
     /// The results indicate which Config rules were used to evaluate
     /// the resource, when each rule was last invoked, and whether the resource
     /// complies with each rule.
-    pub fn getComplianceDetailsByResource(self: *Self, allocator: std.mem.Allocator, input: get_compliance_details_by_resource.GetComplianceDetailsByResourceInput, options: get_compliance_details_by_resource.Options) !get_compliance_details_by_resource.GetComplianceDetailsByResourceOutput {
+    pub fn getComplianceDetailsByResource(self: *Self, allocator: std.mem.Allocator, input: get_compliance_details_by_resource.GetComplianceDetailsByResourceInput, options: CallOptions) !get_compliance_details_by_resource.GetComplianceDetailsByResourceOutput {
         return get_compliance_details_by_resource.execute(self, allocator, input, options);
     }
 
     /// Returns the number of Config rules that are compliant and
     /// noncompliant, up to a maximum of 25 for each.
-    pub fn getComplianceSummaryByConfigRule(self: *Self, allocator: std.mem.Allocator, input: get_compliance_summary_by_config_rule.GetComplianceSummaryByConfigRuleInput, options: get_compliance_summary_by_config_rule.Options) !get_compliance_summary_by_config_rule.GetComplianceSummaryByConfigRuleOutput {
+    pub fn getComplianceSummaryByConfigRule(self: *Self, allocator: std.mem.Allocator, input: get_compliance_summary_by_config_rule.GetComplianceSummaryByConfigRuleInput, options: CallOptions) !get_compliance_summary_by_config_rule.GetComplianceSummaryByConfigRuleOutput {
         return get_compliance_summary_by_config_rule.execute(self, allocator, input, options);
     }
 
@@ -851,25 +852,25 @@ pub const Client = struct {
     /// number that are noncompliant. You can specify one or more resource
     /// types to get these numbers for each resource type. The maximum
     /// number returned is 100.
-    pub fn getComplianceSummaryByResourceType(self: *Self, allocator: std.mem.Allocator, input: get_compliance_summary_by_resource_type.GetComplianceSummaryByResourceTypeInput, options: get_compliance_summary_by_resource_type.Options) !get_compliance_summary_by_resource_type.GetComplianceSummaryByResourceTypeOutput {
+    pub fn getComplianceSummaryByResourceType(self: *Self, allocator: std.mem.Allocator, input: get_compliance_summary_by_resource_type.GetComplianceSummaryByResourceTypeInput, options: CallOptions) !get_compliance_summary_by_resource_type.GetComplianceSummaryByResourceTypeOutput {
         return get_compliance_summary_by_resource_type.execute(self, allocator, input, options);
     }
 
     /// Returns compliance details of a conformance pack for all Amazon Web Services
     /// resources that are monitered by conformance pack.
-    pub fn getConformancePackComplianceDetails(self: *Self, allocator: std.mem.Allocator, input: get_conformance_pack_compliance_details.GetConformancePackComplianceDetailsInput, options: get_conformance_pack_compliance_details.Options) !get_conformance_pack_compliance_details.GetConformancePackComplianceDetailsOutput {
+    pub fn getConformancePackComplianceDetails(self: *Self, allocator: std.mem.Allocator, input: get_conformance_pack_compliance_details.GetConformancePackComplianceDetailsInput, options: CallOptions) !get_conformance_pack_compliance_details.GetConformancePackComplianceDetailsOutput {
         return get_conformance_pack_compliance_details.execute(self, allocator, input, options);
     }
 
     /// Returns compliance details for the conformance pack based on the cumulative
     /// compliance results of all the rules in that conformance pack.
-    pub fn getConformancePackComplianceSummary(self: *Self, allocator: std.mem.Allocator, input: get_conformance_pack_compliance_summary.GetConformancePackComplianceSummaryInput, options: get_conformance_pack_compliance_summary.Options) !get_conformance_pack_compliance_summary.GetConformancePackComplianceSummaryOutput {
+    pub fn getConformancePackComplianceSummary(self: *Self, allocator: std.mem.Allocator, input: get_conformance_pack_compliance_summary.GetConformancePackComplianceSummaryInput, options: CallOptions) !get_conformance_pack_compliance_summary.GetConformancePackComplianceSummaryOutput {
         return get_conformance_pack_compliance_summary.execute(self, allocator, input, options);
     }
 
     /// Returns the policy definition containing the logic for your Config Custom
     /// Policy rule.
-    pub fn getCustomRulePolicy(self: *Self, allocator: std.mem.Allocator, input: get_custom_rule_policy.GetCustomRulePolicyInput, options: get_custom_rule_policy.Options) !get_custom_rule_policy.GetCustomRulePolicyOutput {
+    pub fn getCustomRulePolicy(self: *Self, allocator: std.mem.Allocator, input: get_custom_rule_policy.GetCustomRulePolicyInput, options: CallOptions) !get_custom_rule_policy.GetCustomRulePolicyOutput {
         return get_custom_rule_policy.execute(self, allocator, input, options);
     }
 
@@ -916,25 +917,25 @@ pub const Client = struct {
     /// It might take a few minutes for Config to record and
     /// count your resources. Wait a few minutes and then retry the
     /// GetDiscoveredResourceCounts action.
-    pub fn getDiscoveredResourceCounts(self: *Self, allocator: std.mem.Allocator, input: get_discovered_resource_counts.GetDiscoveredResourceCountsInput, options: get_discovered_resource_counts.Options) !get_discovered_resource_counts.GetDiscoveredResourceCountsOutput {
+    pub fn getDiscoveredResourceCounts(self: *Self, allocator: std.mem.Allocator, input: get_discovered_resource_counts.GetDiscoveredResourceCountsInput, options: CallOptions) !get_discovered_resource_counts.GetDiscoveredResourceCountsOutput {
         return get_discovered_resource_counts.execute(self, allocator, input, options);
     }
 
     /// Returns detailed status for each member account within an organization for a
     /// given organization Config rule.
-    pub fn getOrganizationConfigRuleDetailedStatus(self: *Self, allocator: std.mem.Allocator, input: get_organization_config_rule_detailed_status.GetOrganizationConfigRuleDetailedStatusInput, options: get_organization_config_rule_detailed_status.Options) !get_organization_config_rule_detailed_status.GetOrganizationConfigRuleDetailedStatusOutput {
+    pub fn getOrganizationConfigRuleDetailedStatus(self: *Self, allocator: std.mem.Allocator, input: get_organization_config_rule_detailed_status.GetOrganizationConfigRuleDetailedStatusInput, options: CallOptions) !get_organization_config_rule_detailed_status.GetOrganizationConfigRuleDetailedStatusOutput {
         return get_organization_config_rule_detailed_status.execute(self, allocator, input, options);
     }
 
     /// Returns detailed status for each member account within an organization for a
     /// given organization conformance pack.
-    pub fn getOrganizationConformancePackDetailedStatus(self: *Self, allocator: std.mem.Allocator, input: get_organization_conformance_pack_detailed_status.GetOrganizationConformancePackDetailedStatusInput, options: get_organization_conformance_pack_detailed_status.Options) !get_organization_conformance_pack_detailed_status.GetOrganizationConformancePackDetailedStatusOutput {
+    pub fn getOrganizationConformancePackDetailedStatus(self: *Self, allocator: std.mem.Allocator, input: get_organization_conformance_pack_detailed_status.GetOrganizationConformancePackDetailedStatusInput, options: CallOptions) !get_organization_conformance_pack_detailed_status.GetOrganizationConformancePackDetailedStatusOutput {
         return get_organization_conformance_pack_detailed_status.execute(self, allocator, input, options);
     }
 
     /// Returns the policy definition containing the logic for your organization
     /// Config Custom Policy rule.
-    pub fn getOrganizationCustomRulePolicy(self: *Self, allocator: std.mem.Allocator, input: get_organization_custom_rule_policy.GetOrganizationCustomRulePolicyInput, options: get_organization_custom_rule_policy.Options) !get_organization_custom_rule_policy.GetOrganizationCustomRulePolicyOutput {
+    pub fn getOrganizationCustomRulePolicy(self: *Self, allocator: std.mem.Allocator, input: get_organization_custom_rule_policy.GetOrganizationCustomRulePolicyInput, options: CallOptions) !get_organization_custom_rule_policy.GetOrganizationCustomRulePolicyOutput {
         return get_organization_custom_rule_policy.execute(self, allocator, input, options);
     }
 
@@ -969,7 +970,7 @@ pub const Client = struct {
     /// smaller than the specified `limit`. In such cases,
     /// you can make another call, using the
     /// `nextToken`.
-    pub fn getResourceConfigHistory(self: *Self, allocator: std.mem.Allocator, input: get_resource_config_history.GetResourceConfigHistoryInput, options: get_resource_config_history.Options) !get_resource_config_history.GetResourceConfigHistoryOutput {
+    pub fn getResourceConfigHistory(self: *Self, allocator: std.mem.Allocator, input: get_resource_config_history.GetResourceConfigHistoryInput, options: CallOptions) !get_resource_config_history.GetResourceConfigHistoryOutput {
         return get_resource_config_history.execute(self, allocator, input, options);
     }
 
@@ -985,12 +986,12 @@ pub const Client = struct {
     /// [GetComplianceDetailsByResource](https://docs.aws.amazon.com/config/latest/APIReference/API_GetComplianceDetailsByResource.html) API.
     /// For more information, see the
     /// [Examples](https://docs.aws.amazon.com/config/latest/APIReference/API_GetResourceEvaluationSummary.html#API_GetResourceEvaluationSummary_Examples) section.
-    pub fn getResourceEvaluationSummary(self: *Self, allocator: std.mem.Allocator, input: get_resource_evaluation_summary.GetResourceEvaluationSummaryInput, options: get_resource_evaluation_summary.Options) !get_resource_evaluation_summary.GetResourceEvaluationSummaryOutput {
+    pub fn getResourceEvaluationSummary(self: *Self, allocator: std.mem.Allocator, input: get_resource_evaluation_summary.GetResourceEvaluationSummaryInput, options: CallOptions) !get_resource_evaluation_summary.GetResourceEvaluationSummaryOutput {
         return get_resource_evaluation_summary.execute(self, allocator, input, options);
     }
 
     /// Returns the details of a specific stored query.
-    pub fn getStoredQuery(self: *Self, allocator: std.mem.Allocator, input: get_stored_query.GetStoredQueryInput, options: get_stored_query.Options) !get_stored_query.GetStoredQueryOutput {
+    pub fn getStoredQuery(self: *Self, allocator: std.mem.Allocator, input: get_stored_query.GetStoredQueryInput, options: CallOptions) !get_stored_query.GetStoredQueryOutput {
         return get_stored_query.execute(self, allocator, input, options);
     }
 
@@ -1004,13 +1005,13 @@ pub const Client = struct {
     /// For example, if the input consists of accountID 12345678910 and the region
     /// is us-east-1 for resource type `AWS::EC2::Instance` then the API returns all
     /// the EC2 instance identifiers of accountID 12345678910 and region us-east-1.
-    pub fn listAggregateDiscoveredResources(self: *Self, allocator: std.mem.Allocator, input: list_aggregate_discovered_resources.ListAggregateDiscoveredResourcesInput, options: list_aggregate_discovered_resources.Options) !list_aggregate_discovered_resources.ListAggregateDiscoveredResourcesOutput {
+    pub fn listAggregateDiscoveredResources(self: *Self, allocator: std.mem.Allocator, input: list_aggregate_discovered_resources.ListAggregateDiscoveredResourcesInput, options: CallOptions) !list_aggregate_discovered_resources.ListAggregateDiscoveredResourcesOutput {
         return list_aggregate_discovered_resources.execute(self, allocator, input, options);
     }
 
     /// Returns a list of configuration recorders depending on the filters you
     /// specify.
-    pub fn listConfigurationRecorders(self: *Self, allocator: std.mem.Allocator, input: list_configuration_recorders.ListConfigurationRecordersInput, options: list_configuration_recorders.Options) !list_configuration_recorders.ListConfigurationRecordersOutput {
+    pub fn listConfigurationRecorders(self: *Self, allocator: std.mem.Allocator, input: list_configuration_recorders.ListConfigurationRecordersInput, options: CallOptions) !list_configuration_recorders.ListConfigurationRecordersOutput {
         return list_configuration_recorders.execute(self, allocator, input, options);
     }
 
@@ -1025,7 +1026,7 @@ pub const Client = struct {
     ///
     /// Conformance packs with no evaluation results will have a compliance score of
     /// `INSUFFICIENT_DATA`.
-    pub fn listConformancePackComplianceScores(self: *Self, allocator: std.mem.Allocator, input: list_conformance_pack_compliance_scores.ListConformancePackComplianceScoresInput, options: list_conformance_pack_compliance_scores.Options) !list_conformance_pack_compliance_scores.ListConformancePackComplianceScoresOutput {
+    pub fn listConformancePackComplianceScores(self: *Self, allocator: std.mem.Allocator, input: list_conformance_pack_compliance_scores.ListConformancePackComplianceScoresInput, options: CallOptions) !list_conformance_pack_compliance_scores.ListConformancePackComplianceScoresOutput {
         return list_conformance_pack_compliance_scores.execute(self, allocator, input, options);
     }
 
@@ -1068,23 +1069,23 @@ pub const Client = struct {
     /// for that stack in Config, even after the stack is deleted. This helps make
     /// sure that Config only
     /// tracks resources that were successfully provisioned.
-    pub fn listDiscoveredResources(self: *Self, allocator: std.mem.Allocator, input: list_discovered_resources.ListDiscoveredResourcesInput, options: list_discovered_resources.Options) !list_discovered_resources.ListDiscoveredResourcesOutput {
+    pub fn listDiscoveredResources(self: *Self, allocator: std.mem.Allocator, input: list_discovered_resources.ListDiscoveredResourcesInput, options: CallOptions) !list_discovered_resources.ListDiscoveredResourcesOutput {
         return list_discovered_resources.execute(self, allocator, input, options);
     }
 
     /// Returns a list of proactive resource evaluations.
-    pub fn listResourceEvaluations(self: *Self, allocator: std.mem.Allocator, input: list_resource_evaluations.ListResourceEvaluationsInput, options: list_resource_evaluations.Options) !list_resource_evaluations.ListResourceEvaluationsOutput {
+    pub fn listResourceEvaluations(self: *Self, allocator: std.mem.Allocator, input: list_resource_evaluations.ListResourceEvaluationsInput, options: CallOptions) !list_resource_evaluations.ListResourceEvaluationsOutput {
         return list_resource_evaluations.execute(self, allocator, input, options);
     }
 
     /// Lists the stored queries for a single Amazon Web Services account and a
     /// single Amazon Web Services Region. The default is 100.
-    pub fn listStoredQueries(self: *Self, allocator: std.mem.Allocator, input: list_stored_queries.ListStoredQueriesInput, options: list_stored_queries.Options) !list_stored_queries.ListStoredQueriesOutput {
+    pub fn listStoredQueries(self: *Self, allocator: std.mem.Allocator, input: list_stored_queries.ListStoredQueriesInput, options: CallOptions) !list_stored_queries.ListStoredQueriesOutput {
         return list_stored_queries.execute(self, allocator, input, options);
     }
 
     /// List the tags for Config resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -1102,7 +1103,7 @@ pub const Client = struct {
     ///
     /// Use
     /// [TagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html) and [UntagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html) to update tags after creation.
-    pub fn putAggregationAuthorization(self: *Self, allocator: std.mem.Allocator, input: put_aggregation_authorization.PutAggregationAuthorizationInput, options: put_aggregation_authorization.Options) !put_aggregation_authorization.PutAggregationAuthorizationOutput {
+    pub fn putAggregationAuthorization(self: *Self, allocator: std.mem.Allocator, input: put_aggregation_authorization.PutAggregationAuthorizationInput, options: CallOptions) !put_aggregation_authorization.PutAggregationAuthorizationOutput {
         return put_aggregation_authorization.execute(self, allocator, input, options);
     }
 
@@ -1173,7 +1174,7 @@ pub const Client = struct {
     ///
     /// Use
     /// [TagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html) and [UntagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html) to update tags after creation.
-    pub fn putConfigRule(self: *Self, allocator: std.mem.Allocator, input: put_config_rule.PutConfigRuleInput, options: put_config_rule.Options) !put_config_rule.PutConfigRuleOutput {
+    pub fn putConfigRule(self: *Self, allocator: std.mem.Allocator, input: put_config_rule.PutConfigRuleInput, options: CallOptions) !put_config_rule.PutConfigRuleOutput {
         return put_config_rule.execute(self, allocator, input, options);
     }
 
@@ -1212,7 +1213,7 @@ pub const Client = struct {
     ///
     /// Use
     /// [TagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html) and [UntagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html) to update tags after creation.
-    pub fn putConfigurationAggregator(self: *Self, allocator: std.mem.Allocator, input: put_configuration_aggregator.PutConfigurationAggregatorInput, options: put_configuration_aggregator.Options) !put_configuration_aggregator.PutConfigurationAggregatorOutput {
+    pub fn putConfigurationAggregator(self: *Self, allocator: std.mem.Allocator, input: put_configuration_aggregator.PutConfigurationAggregatorInput, options: CallOptions) !put_configuration_aggregator.PutConfigurationAggregatorOutput {
         return put_configuration_aggregator.execute(self, allocator, input, options);
     }
 
@@ -1256,7 +1257,7 @@ pub const Client = struct {
     ///
     /// Use
     /// [TagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html) and [UntagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html) to update tags after creation.
-    pub fn putConfigurationRecorder(self: *Self, allocator: std.mem.Allocator, input: put_configuration_recorder.PutConfigurationRecorderInput, options: put_configuration_recorder.Options) !put_configuration_recorder.PutConfigurationRecorderOutput {
+    pub fn putConfigurationRecorder(self: *Self, allocator: std.mem.Allocator, input: put_configuration_recorder.PutConfigurationRecorderInput, options: CallOptions) !put_configuration_recorder.PutConfigurationRecorderOutput {
         return put_configuration_recorder.execute(self, allocator, input, options);
     }
 
@@ -1301,7 +1302,7 @@ pub const Client = struct {
     ///
     /// Use
     /// [TagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html) and [UntagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html) to update tags after creation.
-    pub fn putConformancePack(self: *Self, allocator: std.mem.Allocator, input: put_conformance_pack.PutConformancePackInput, options: put_conformance_pack.Options) !put_conformance_pack.PutConformancePackOutput {
+    pub fn putConformancePack(self: *Self, allocator: std.mem.Allocator, input: put_conformance_pack.PutConformancePackInput, options: CallOptions) !put_conformance_pack.PutConformancePackOutput {
         return put_conformance_pack.execute(self, allocator, input, options);
     }
 
@@ -1320,21 +1321,21 @@ pub const Client = struct {
     ///
     /// You can have only one delivery channel for each account for each Amazon Web
     /// Services Region.
-    pub fn putDeliveryChannel(self: *Self, allocator: std.mem.Allocator, input: put_delivery_channel.PutDeliveryChannelInput, options: put_delivery_channel.Options) !put_delivery_channel.PutDeliveryChannelOutput {
+    pub fn putDeliveryChannel(self: *Self, allocator: std.mem.Allocator, input: put_delivery_channel.PutDeliveryChannelInput, options: CallOptions) !put_delivery_channel.PutDeliveryChannelOutput {
         return put_delivery_channel.execute(self, allocator, input, options);
     }
 
     /// Used by an Lambda function to deliver evaluation results to
     /// Config. This operation is required in every Lambda function
     /// that is invoked by an Config rule.
-    pub fn putEvaluations(self: *Self, allocator: std.mem.Allocator, input: put_evaluations.PutEvaluationsInput, options: put_evaluations.Options) !put_evaluations.PutEvaluationsOutput {
+    pub fn putEvaluations(self: *Self, allocator: std.mem.Allocator, input: put_evaluations.PutEvaluationsInput, options: CallOptions) !put_evaluations.PutEvaluationsOutput {
         return put_evaluations.execute(self, allocator, input, options);
     }
 
     /// Add or updates the evaluations for process checks.
     /// This API checks if the rule is a process check when the name of the Config
     /// rule is provided.
-    pub fn putExternalEvaluation(self: *Self, allocator: std.mem.Allocator, input: put_external_evaluation.PutExternalEvaluationInput, options: put_external_evaluation.Options) !put_external_evaluation.PutExternalEvaluationOutput {
+    pub fn putExternalEvaluation(self: *Self, allocator: std.mem.Allocator, input: put_external_evaluation.PutExternalEvaluationInput, options: CallOptions) !put_external_evaluation.PutExternalEvaluationOutput {
         return put_external_evaluation.execute(self, allocator, input, options);
     }
 
@@ -1403,7 +1404,7 @@ pub const Client = struct {
     /// Make sure to specify one of either `OrganizationCustomPolicyRuleMetadata`
     /// for Custom Policy rules, `OrganizationCustomRuleMetadata` for Custom Lambda
     /// rules, or `OrganizationManagedRuleMetadata` for managed rules.
-    pub fn putOrganizationConfigRule(self: *Self, allocator: std.mem.Allocator, input: put_organization_config_rule.PutOrganizationConfigRuleInput, options: put_organization_config_rule.Options) !put_organization_config_rule.PutOrganizationConfigRuleOutput {
+    pub fn putOrganizationConfigRule(self: *Self, allocator: std.mem.Allocator, input: put_organization_config_rule.PutOrganizationConfigRuleInput, options: CallOptions) !put_organization_config_rule.PutOrganizationConfigRuleOutput {
         return put_organization_config_rule.execute(self, allocator, input, options);
     }
 
@@ -1457,7 +1458,7 @@ pub const Client = struct {
     /// Config sets the state of a conformance pack to CREATE_IN_PROGRESS and
     /// UPDATE_IN_PROGRESS until the conformance pack is created or updated.
     /// You cannot update a conformance pack while it is in this state.
-    pub fn putOrganizationConformancePack(self: *Self, allocator: std.mem.Allocator, input: put_organization_conformance_pack.PutOrganizationConformancePackInput, options: put_organization_conformance_pack.Options) !put_organization_conformance_pack.PutOrganizationConformancePackOutput {
+    pub fn putOrganizationConformancePack(self: *Self, allocator: std.mem.Allocator, input: put_organization_conformance_pack.PutOrganizationConformancePackInput, options: CallOptions) !put_organization_conformance_pack.PutOrganizationConformancePackOutput {
         return put_organization_conformance_pack.execute(self, allocator, input, options);
     }
 
@@ -1506,7 +1507,7 @@ pub const Client = struct {
     /// compliant resources, since the bootstrap processor uses a database that can
     /// have stale evaluation results based on the last known compliance data
     /// snapshot.
-    pub fn putRemediationConfigurations(self: *Self, allocator: std.mem.Allocator, input: put_remediation_configurations.PutRemediationConfigurationsInput, options: put_remediation_configurations.Options) !put_remediation_configurations.PutRemediationConfigurationsOutput {
+    pub fn putRemediationConfigurations(self: *Self, allocator: std.mem.Allocator, input: put_remediation_configurations.PutRemediationConfigurationsInput, options: CallOptions) !put_remediation_configurations.PutRemediationConfigurationsOutput {
         return put_remediation_configurations.execute(self, allocator, input, options);
     }
 
@@ -1566,7 +1567,7 @@ pub const Client = struct {
     /// compliant resources, since the bootstrap processor uses a database that can
     /// have stale evaluation results based on the last known compliance data
     /// snapshot.
-    pub fn putRemediationExceptions(self: *Self, allocator: std.mem.Allocator, input: put_remediation_exceptions.PutRemediationExceptionsInput, options: put_remediation_exceptions.Options) !put_remediation_exceptions.PutRemediationExceptionsOutput {
+    pub fn putRemediationExceptions(self: *Self, allocator: std.mem.Allocator, input: put_remediation_exceptions.PutRemediationExceptionsInput, options: CallOptions) !put_remediation_exceptions.PutRemediationExceptionsOutput {
         return put_remediation_exceptions.execute(self, allocator, input, options);
     }
 
@@ -1586,7 +1587,7 @@ pub const Client = struct {
     ///
     /// Write-only schema properites are not recorded as part of the published
     /// configuration item.
-    pub fn putResourceConfig(self: *Self, allocator: std.mem.Allocator, input: put_resource_config.PutResourceConfigInput, options: put_resource_config.Options) !put_resource_config.PutResourceConfigOutput {
+    pub fn putResourceConfig(self: *Self, allocator: std.mem.Allocator, input: put_resource_config.PutResourceConfigInput, options: CallOptions) !put_resource_config.PutResourceConfigOutput {
         return put_resource_config.execute(self, allocator, input, options);
     }
 
@@ -1601,7 +1602,7 @@ pub const Client = struct {
     ///
     /// Currently, Config supports only one retention
     /// configuration per region in your account.
-    pub fn putRetentionConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_retention_configuration.PutRetentionConfigurationInput, options: put_retention_configuration.Options) !put_retention_configuration.PutRetentionConfigurationOutput {
+    pub fn putRetentionConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_retention_configuration.PutRetentionConfigurationInput, options: CallOptions) !put_retention_configuration.PutRetentionConfigurationOutput {
         return put_retention_configuration.execute(self, allocator, input, options);
     }
 
@@ -1632,7 +1633,7 @@ pub const Client = struct {
     ///
     /// Use
     /// [TagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html) and [UntagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html) to update tags after creation.
-    pub fn putServiceLinkedConfigurationRecorder(self: *Self, allocator: std.mem.Allocator, input: put_service_linked_configuration_recorder.PutServiceLinkedConfigurationRecorderInput, options: put_service_linked_configuration_recorder.Options) !put_service_linked_configuration_recorder.PutServiceLinkedConfigurationRecorderOutput {
+    pub fn putServiceLinkedConfigurationRecorder(self: *Self, allocator: std.mem.Allocator, input: put_service_linked_configuration_recorder.PutServiceLinkedConfigurationRecorderInput, options: CallOptions) !put_service_linked_configuration_recorder.PutServiceLinkedConfigurationRecorderOutput {
         return put_service_linked_configuration_recorder.execute(self, allocator, input, options);
     }
 
@@ -1650,7 +1651,7 @@ pub const Client = struct {
     /// Config will ignore these differences and treat it as an idempotent request
     /// of the previous. In this case, `tags` will not be updated, even if they are
     /// different.
-    pub fn putStoredQuery(self: *Self, allocator: std.mem.Allocator, input: put_stored_query.PutStoredQueryInput, options: put_stored_query.Options) !put_stored_query.PutStoredQueryOutput {
+    pub fn putStoredQuery(self: *Self, allocator: std.mem.Allocator, input: put_stored_query.PutStoredQueryInput, options: CallOptions) !put_stored_query.PutStoredQueryOutput {
         return put_stored_query.execute(self, allocator, input, options);
     }
 
@@ -1675,7 +1676,7 @@ pub const Client = struct {
     /// function; e.g., `SELECT * WHERE resourceType = 'AWS::IAM::Role'`)
     /// and do not specify the `MaxResults` or the `Limit` query parameters, the
     /// default page size is set to 25.
-    pub fn selectAggregateResourceConfig(self: *Self, allocator: std.mem.Allocator, input: select_aggregate_resource_config.SelectAggregateResourceConfigInput, options: select_aggregate_resource_config.Options) !select_aggregate_resource_config.SelectAggregateResourceConfigOutput {
+    pub fn selectAggregateResourceConfig(self: *Self, allocator: std.mem.Allocator, input: select_aggregate_resource_config.SelectAggregateResourceConfigInput, options: CallOptions) !select_aggregate_resource_config.SelectAggregateResourceConfigOutput {
         return select_aggregate_resource_config.execute(self, allocator, input, options);
     }
 
@@ -1687,7 +1688,7 @@ pub const Client = struct {
     /// [
     /// **Query Components**
     /// ](https://docs.aws.amazon.com/config/latest/developerguide/query-components.html) section in the *Config Developer Guide*.
-    pub fn selectResourceConfig(self: *Self, allocator: std.mem.Allocator, input: select_resource_config.SelectResourceConfigInput, options: select_resource_config.Options) !select_resource_config.SelectResourceConfigOutput {
+    pub fn selectResourceConfig(self: *Self, allocator: std.mem.Allocator, input: select_resource_config.SelectResourceConfigInput, options: CallOptions) !select_resource_config.SelectResourceConfigOutput {
         return select_resource_config.execute(self, allocator, input, options);
     }
 
@@ -1731,7 +1732,7 @@ pub const Client = struct {
     ///
     /// * Your custom rule will still run periodic evaluations
     /// every 24 hours.
-    pub fn startConfigRulesEvaluation(self: *Self, allocator: std.mem.Allocator, input: start_config_rules_evaluation.StartConfigRulesEvaluationInput, options: start_config_rules_evaluation.Options) !start_config_rules_evaluation.StartConfigRulesEvaluationOutput {
+    pub fn startConfigRulesEvaluation(self: *Self, allocator: std.mem.Allocator, input: start_config_rules_evaluation.StartConfigRulesEvaluationInput, options: CallOptions) !start_config_rules_evaluation.StartConfigRulesEvaluationOutput {
         return start_config_rules_evaluation.execute(self, allocator, input, options);
     }
 
@@ -1743,7 +1744,7 @@ pub const Client = struct {
     /// successfully start the customer managed configuration recorder. You can use
     /// the
     /// [PutDeliveryChannel](https://docs.aws.amazon.com/config/latest/APIReference/API_PutDeliveryChannel.html) operation to create a delivery channel.
-    pub fn startConfigurationRecorder(self: *Self, allocator: std.mem.Allocator, input: start_configuration_recorder.StartConfigurationRecorderInput, options: start_configuration_recorder.Options) !start_configuration_recorder.StartConfigurationRecorderOutput {
+    pub fn startConfigurationRecorder(self: *Self, allocator: std.mem.Allocator, input: start_configuration_recorder.StartConfigurationRecorderInput, options: CallOptions) !start_configuration_recorder.StartConfigurationRecorderOutput {
         return start_configuration_recorder.execute(self, allocator, input, options);
     }
 
@@ -1754,7 +1755,7 @@ pub const Client = struct {
     /// You can specify up to 100 resource keys per request. An existing
     /// StartRemediationExecution call for the specified resource keys must complete
     /// before you can call the API again.
-    pub fn startRemediationExecution(self: *Self, allocator: std.mem.Allocator, input: start_remediation_execution.StartRemediationExecutionInput, options: start_remediation_execution.Options) !start_remediation_execution.StartRemediationExecutionOutput {
+    pub fn startRemediationExecution(self: *Self, allocator: std.mem.Allocator, input: start_remediation_execution.StartRemediationExecutionInput, options: CallOptions) !start_remediation_execution.StartRemediationExecutionOutput {
         return start_remediation_execution.execute(self, allocator, input, options);
     }
 
@@ -1779,14 +1780,14 @@ pub const Client = struct {
     /// registry](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-view)
     /// and [Amazon Web Services resource and property types
     /// reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) in the CloudFormation User Guide.
-    pub fn startResourceEvaluation(self: *Self, allocator: std.mem.Allocator, input: start_resource_evaluation.StartResourceEvaluationInput, options: start_resource_evaluation.Options) !start_resource_evaluation.StartResourceEvaluationOutput {
+    pub fn startResourceEvaluation(self: *Self, allocator: std.mem.Allocator, input: start_resource_evaluation.StartResourceEvaluationInput, options: CallOptions) !start_resource_evaluation.StartResourceEvaluationOutput {
         return start_resource_evaluation.execute(self, allocator, input, options);
     }
 
     /// Stops the customer managed configuration recorder. The customer managed
     /// configuration recorder will stop recording configuration changes for the
     /// resource types you have specified.
-    pub fn stopConfigurationRecorder(self: *Self, allocator: std.mem.Allocator, input: stop_configuration_recorder.StopConfigurationRecorderInput, options: stop_configuration_recorder.Options) !stop_configuration_recorder.StopConfigurationRecorderOutput {
+    pub fn stopConfigurationRecorder(self: *Self, allocator: std.mem.Allocator, input: stop_configuration_recorder.StopConfigurationRecorderInput, options: CallOptions) !stop_configuration_recorder.StopConfigurationRecorderOutput {
         return stop_configuration_recorder.execute(self, allocator, input, options);
     }
 
@@ -1796,12 +1797,12 @@ pub const Client = struct {
     /// If existing tags are specified, however, then their values will be updated.
     /// When a resource is deleted, the tags associated with that resource are
     /// deleted as well.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes specified tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

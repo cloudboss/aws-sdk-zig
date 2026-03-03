@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpamPolicyAllocationRuleRequest = @import("ipam_policy_allocation_rule_request.zig").IpamPolicyAllocationRuleRequest;
 const IpamPolicyResourceType = @import("ipam_policy_resource_type.zig").IpamPolicyResourceType;
@@ -43,11 +44,7 @@ pub const ModifyIpamPolicyAllocationRulesOutput = struct {
     ipam_policy_document: ?IpamPolicyDocument = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyIpamPolicyAllocationRulesInput, options: Options) !ModifyIpamPolicyAllocationRulesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyIpamPolicyAllocationRulesInput, options: CallOptions) !ModifyIpamPolicyAllocationRulesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

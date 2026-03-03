@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReservedNodeExchangeStatus = @import("reserved_node_exchange_status.zig").ReservedNodeExchangeStatus;
 const serde = @import("serde.zig");
@@ -43,11 +44,7 @@ pub const DescribeReservedNodeExchangeStatusOutput = struct {
     reserved_node_exchange_status_details: ?[]const ReservedNodeExchangeStatus = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeReservedNodeExchangeStatusInput, options: Options) !DescribeReservedNodeExchangeStatusOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeReservedNodeExchangeStatusInput, options: CallOptions) !DescribeReservedNodeExchangeStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

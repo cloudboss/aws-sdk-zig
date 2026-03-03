@@ -15,6 +15,7 @@ const describe_events_for_organization = @import("describe_events_for_organizati
 const describe_health_service_status_for_organization = @import("describe_health_service_status_for_organization.zig");
 const disable_health_service_access_for_organization = @import("disable_health_service_access_for_organization.zig");
 const enable_health_service_access_for_organization = @import("enable_health_service_access_for_organization.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -59,7 +60,7 @@ pub const Client = struct {
     ///
     /// This API operation uses pagination. Specify the `nextToken` parameter in the
     /// next request to return more results.
-    pub fn describeAffectedAccountsForOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_affected_accounts_for_organization.DescribeAffectedAccountsForOrganizationInput, options: describe_affected_accounts_for_organization.Options) !describe_affected_accounts_for_organization.DescribeAffectedAccountsForOrganizationOutput {
+    pub fn describeAffectedAccountsForOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_affected_accounts_for_organization.DescribeAffectedAccountsForOrganizationInput, options: CallOptions) !describe_affected_accounts_for_organization.DescribeAffectedAccountsForOrganizationOutput {
         return describe_affected_accounts_for_organization.execute(self, allocator, input, options);
     }
 
@@ -82,7 +83,7 @@ pub const Client = struct {
     ///   operation to allow or deny access to specific Health events. For more
     /// information, see [Resource- and action-based
     /// conditions](https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions) in the *Health User Guide*.
-    pub fn describeAffectedEntities(self: *Self, allocator: std.mem.Allocator, input: describe_affected_entities.DescribeAffectedEntitiesInput, options: describe_affected_entities.Options) !describe_affected_entities.DescribeAffectedEntitiesOutput {
+    pub fn describeAffectedEntities(self: *Self, allocator: std.mem.Allocator, input: describe_affected_entities.DescribeAffectedEntitiesInput, options: CallOptions) !describe_affected_entities.DescribeAffectedEntitiesOutput {
         return describe_affected_entities.execute(self, allocator, input, options);
     }
 
@@ -109,19 +110,19 @@ pub const Client = struct {
     ///   this operation to allow or deny access to specific Health events. For more
     /// information, see [Resource- and action-based
     /// conditions](https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions) in the *Health User Guide*.
-    pub fn describeAffectedEntitiesForOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_affected_entities_for_organization.DescribeAffectedEntitiesForOrganizationInput, options: describe_affected_entities_for_organization.Options) !describe_affected_entities_for_organization.DescribeAffectedEntitiesForOrganizationOutput {
+    pub fn describeAffectedEntitiesForOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_affected_entities_for_organization.DescribeAffectedEntitiesForOrganizationInput, options: CallOptions) !describe_affected_entities_for_organization.DescribeAffectedEntitiesForOrganizationOutput {
         return describe_affected_entities_for_organization.execute(self, allocator, input, options);
     }
 
     /// Returns the number of entities that are affected by each of the specified
     /// events.
-    pub fn describeEntityAggregates(self: *Self, allocator: std.mem.Allocator, input: describe_entity_aggregates.DescribeEntityAggregatesInput, options: describe_entity_aggregates.Options) !describe_entity_aggregates.DescribeEntityAggregatesOutput {
+    pub fn describeEntityAggregates(self: *Self, allocator: std.mem.Allocator, input: describe_entity_aggregates.DescribeEntityAggregatesInput, options: CallOptions) !describe_entity_aggregates.DescribeEntityAggregatesOutput {
         return describe_entity_aggregates.execute(self, allocator, input, options);
     }
 
     /// Returns a list of entity aggregates for your Organizations that are affected
     /// by each of the specified events.
-    pub fn describeEntityAggregatesForOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_entity_aggregates_for_organization.DescribeEntityAggregatesForOrganizationInput, options: describe_entity_aggregates_for_organization.Options) !describe_entity_aggregates_for_organization.DescribeEntityAggregatesForOrganizationOutput {
+    pub fn describeEntityAggregatesForOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_entity_aggregates_for_organization.DescribeEntityAggregatesForOrganizationInput, options: CallOptions) !describe_entity_aggregates_for_organization.DescribeEntityAggregatesForOrganizationOutput {
         return describe_entity_aggregates_for_organization.execute(self, allocator, input, options);
     }
 
@@ -133,7 +134,7 @@ pub const Client = struct {
     ///
     /// This API operation uses pagination. Specify the `nextToken` parameter in the
     /// next request to return more results.
-    pub fn describeEventAggregates(self: *Self, allocator: std.mem.Allocator, input: describe_event_aggregates.DescribeEventAggregatesInput, options: describe_event_aggregates.Options) !describe_event_aggregates.DescribeEventAggregatesOutput {
+    pub fn describeEventAggregates(self: *Self, allocator: std.mem.Allocator, input: describe_event_aggregates.DescribeEventAggregatesInput, options: CallOptions) !describe_event_aggregates.DescribeEventAggregatesOutput {
         return describe_event_aggregates.execute(self, allocator, input, options);
     }
 
@@ -155,7 +156,7 @@ pub const Client = struct {
     /// operation to allow or deny access to specific Health events. For more
     /// information, see [Resource- and action-based
     /// conditions](https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions) in the *Health User Guide*.
-    pub fn describeEventDetails(self: *Self, allocator: std.mem.Allocator, input: describe_event_details.DescribeEventDetailsInput, options: describe_event_details.Options) !describe_event_details.DescribeEventDetailsOutput {
+    pub fn describeEventDetails(self: *Self, allocator: std.mem.Allocator, input: describe_event_details.DescribeEventDetailsInput, options: CallOptions) !describe_event_details.DescribeEventDetailsOutput {
         return describe_event_details.execute(self, allocator, input, options);
     }
 
@@ -200,7 +201,7 @@ pub const Client = struct {
     /// this operation to allow or deny access to specific Health events. For more
     /// information, see [Resource- and action-based
     /// conditions](https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions) in the *Health User Guide*.
-    pub fn describeEventDetailsForOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_event_details_for_organization.DescribeEventDetailsForOrganizationInput, options: describe_event_details_for_organization.Options) !describe_event_details_for_organization.DescribeEventDetailsForOrganizationOutput {
+    pub fn describeEventDetailsForOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_event_details_for_organization.DescribeEventDetailsForOrganizationInput, options: CallOptions) !describe_event_details_for_organization.DescribeEventDetailsForOrganizationOutput {
         return describe_event_details_for_organization.execute(self, allocator, input, options);
     }
 
@@ -217,7 +218,7 @@ pub const Client = struct {
     ///
     /// This API operation uses pagination. Specify the `nextToken` parameter in the
     /// next request to return more results.
-    pub fn describeEventTypes(self: *Self, allocator: std.mem.Allocator, input: describe_event_types.DescribeEventTypesInput, options: describe_event_types.Options) !describe_event_types.DescribeEventTypesOutput {
+    pub fn describeEventTypes(self: *Self, allocator: std.mem.Allocator, input: describe_event_types.DescribeEventTypesInput, options: CallOptions) !describe_event_types.DescribeEventTypesOutput {
         return describe_event_types.execute(self, allocator, input, options);
     }
 
@@ -248,7 +249,7 @@ pub const Client = struct {
     ///
     /// * This API operation uses pagination. Specify the `nextToken` parameter in
     ///   the next request to return more results.
-    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: describe_events.Options) !describe_events.DescribeEventsOutput {
+    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: CallOptions) !describe_events.DescribeEventsOutput {
         return describe_events.execute(self, allocator, input, options);
     }
 
@@ -287,7 +288,7 @@ pub const Client = struct {
     ///
     /// This API operation uses pagination. Specify the `nextToken` parameter in the
     /// next request to return more results.
-    pub fn describeEventsForOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_events_for_organization.DescribeEventsForOrganizationInput, options: describe_events_for_organization.Options) !describe_events_for_organization.DescribeEventsForOrganizationOutput {
+    pub fn describeEventsForOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_events_for_organization.DescribeEventsForOrganizationInput, options: CallOptions) !describe_events_for_organization.DescribeEventsForOrganizationOutput {
         return describe_events_for_organization.execute(self, allocator, input, options);
     }
 
@@ -296,7 +297,7 @@ pub const Client = struct {
     /// with your organization. To call this operation, you must use the
     /// organization's
     /// management account.
-    pub fn describeHealthServiceStatusForOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_health_service_status_for_organization.DescribeHealthServiceStatusForOrganizationInput, options: describe_health_service_status_for_organization.Options) !describe_health_service_status_for_organization.DescribeHealthServiceStatusForOrganizationOutput {
+    pub fn describeHealthServiceStatusForOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_health_service_status_for_organization.DescribeHealthServiceStatusForOrganizationInput, options: CallOptions) !describe_health_service_status_for_organization.DescribeHealthServiceStatusForOrganizationOutput {
         return describe_health_service_status_for_organization.execute(self, allocator, input, options);
     }
 
@@ -324,7 +325,7 @@ pub const Client = struct {
     /// returns
     /// an error. Health continues to aggregate health events for your
     /// Amazon Web Services account.
-    pub fn disableHealthServiceAccessForOrganization(self: *Self, allocator: std.mem.Allocator, input: disable_health_service_access_for_organization.DisableHealthServiceAccessForOrganizationInput, options: disable_health_service_access_for_organization.Options) !disable_health_service_access_for_organization.DisableHealthServiceAccessForOrganizationOutput {
+    pub fn disableHealthServiceAccessForOrganization(self: *Self, allocator: std.mem.Allocator, input: disable_health_service_access_for_organization.DisableHealthServiceAccessForOrganizationInput, options: CallOptions) !disable_health_service_access_for_organization.DisableHealthServiceAccessForOrganizationOutput {
         return disable_health_service_access_for_organization.execute(self, allocator, input, options);
     }
 
@@ -359,7 +360,7 @@ pub const Client = struct {
     /// Health
     /// events](https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html)
     /// in the *Health User Guide*.
-    pub fn enableHealthServiceAccessForOrganization(self: *Self, allocator: std.mem.Allocator, input: enable_health_service_access_for_organization.EnableHealthServiceAccessForOrganizationInput, options: enable_health_service_access_for_organization.Options) !enable_health_service_access_for_organization.EnableHealthServiceAccessForOrganizationOutput {
+    pub fn enableHealthServiceAccessForOrganization(self: *Self, allocator: std.mem.Allocator, input: enable_health_service_access_for_organization.EnableHealthServiceAccessForOrganizationInput, options: CallOptions) !enable_health_service_access_for_organization.EnableHealthServiceAccessForOrganizationOutput {
         return enable_health_service_access_for_organization.execute(self, allocator, input, options);
     }
 

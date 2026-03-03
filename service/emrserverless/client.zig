@@ -17,6 +17,7 @@ const stop_application = @import("stop_application.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_application = @import("update_application.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -48,23 +49,23 @@ pub const Client = struct {
     }
 
     /// Cancels a job run.
-    pub fn cancelJobRun(self: *Self, allocator: std.mem.Allocator, input: cancel_job_run.CancelJobRunInput, options: cancel_job_run.Options) !cancel_job_run.CancelJobRunOutput {
+    pub fn cancelJobRun(self: *Self, allocator: std.mem.Allocator, input: cancel_job_run.CancelJobRunInput, options: CallOptions) !cancel_job_run.CancelJobRunOutput {
         return cancel_job_run.execute(self, allocator, input, options);
     }
 
     /// Creates an application.
-    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: create_application.Options) !create_application.CreateApplicationOutput {
+    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: CallOptions) !create_application.CreateApplicationOutput {
         return create_application.execute(self, allocator, input, options);
     }
 
     /// Deletes an application. An application has to be in a stopped or created
     /// state in order to be deleted.
-    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: delete_application.Options) !delete_application.DeleteApplicationOutput {
+    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: CallOptions) !delete_application.DeleteApplicationOutput {
         return delete_application.execute(self, allocator, input, options);
     }
 
     /// Displays detailed information about a specified application.
-    pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: get_application.Options) !get_application.GetApplicationOutput {
+    pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: CallOptions) !get_application.GetApplicationOutput {
         return get_application.execute(self, allocator, input, options);
     }
 
@@ -79,50 +80,50 @@ pub const Client = struct {
     /// The URL is valid for one hour after you generate it. To access the
     /// application UI after that hour elapses, you must invoke the API again to
     /// generate a new URL.
-    pub fn getDashboardForJobRun(self: *Self, allocator: std.mem.Allocator, input: get_dashboard_for_job_run.GetDashboardForJobRunInput, options: get_dashboard_for_job_run.Options) !get_dashboard_for_job_run.GetDashboardForJobRunOutput {
+    pub fn getDashboardForJobRun(self: *Self, allocator: std.mem.Allocator, input: get_dashboard_for_job_run.GetDashboardForJobRunInput, options: CallOptions) !get_dashboard_for_job_run.GetDashboardForJobRunOutput {
         return get_dashboard_for_job_run.execute(self, allocator, input, options);
     }
 
     /// Displays detailed information about a job run.
-    pub fn getJobRun(self: *Self, allocator: std.mem.Allocator, input: get_job_run.GetJobRunInput, options: get_job_run.Options) !get_job_run.GetJobRunOutput {
+    pub fn getJobRun(self: *Self, allocator: std.mem.Allocator, input: get_job_run.GetJobRunInput, options: CallOptions) !get_job_run.GetJobRunOutput {
         return get_job_run.execute(self, allocator, input, options);
     }
 
     /// Lists applications based on a set of parameters.
-    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: list_applications.Options) !list_applications.ListApplicationsOutput {
+    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: CallOptions) !list_applications.ListApplicationsOutput {
         return list_applications.execute(self, allocator, input, options);
     }
 
     /// Lists all attempt of a job run.
-    pub fn listJobRunAttempts(self: *Self, allocator: std.mem.Allocator, input: list_job_run_attempts.ListJobRunAttemptsInput, options: list_job_run_attempts.Options) !list_job_run_attempts.ListJobRunAttemptsOutput {
+    pub fn listJobRunAttempts(self: *Self, allocator: std.mem.Allocator, input: list_job_run_attempts.ListJobRunAttemptsInput, options: CallOptions) !list_job_run_attempts.ListJobRunAttemptsOutput {
         return list_job_run_attempts.execute(self, allocator, input, options);
     }
 
     /// Lists job runs based on a set of parameters.
-    pub fn listJobRuns(self: *Self, allocator: std.mem.Allocator, input: list_job_runs.ListJobRunsInput, options: list_job_runs.Options) !list_job_runs.ListJobRunsOutput {
+    pub fn listJobRuns(self: *Self, allocator: std.mem.Allocator, input: list_job_runs.ListJobRunsInput, options: CallOptions) !list_job_runs.ListJobRunsOutput {
         return list_job_runs.execute(self, allocator, input, options);
     }
 
     /// Lists the tags assigned to the resources.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Starts a specified application and initializes initial capacity if
     /// configured.
-    pub fn startApplication(self: *Self, allocator: std.mem.Allocator, input: start_application.StartApplicationInput, options: start_application.Options) !start_application.StartApplicationOutput {
+    pub fn startApplication(self: *Self, allocator: std.mem.Allocator, input: start_application.StartApplicationInput, options: CallOptions) !start_application.StartApplicationOutput {
         return start_application.execute(self, allocator, input, options);
     }
 
     /// Starts a job run.
-    pub fn startJobRun(self: *Self, allocator: std.mem.Allocator, input: start_job_run.StartJobRunInput, options: start_job_run.Options) !start_job_run.StartJobRunOutput {
+    pub fn startJobRun(self: *Self, allocator: std.mem.Allocator, input: start_job_run.StartJobRunInput, options: CallOptions) !start_job_run.StartJobRunOutput {
         return start_job_run.execute(self, allocator, input, options);
     }
 
     /// Stops a specified application and releases initial capacity if configured.
     /// All scheduled and running jobs must be completed or cancelled before
     /// stopping an application.
-    pub fn stopApplication(self: *Self, allocator: std.mem.Allocator, input: stop_application.StopApplicationInput, options: stop_application.Options) !stop_application.StopApplicationOutput {
+    pub fn stopApplication(self: *Self, allocator: std.mem.Allocator, input: stop_application.StopApplicationInput, options: CallOptions) !stop_application.StopApplicationOutput {
         return stop_application.execute(self, allocator, input, options);
     }
 
@@ -132,18 +133,18 @@ pub const Client = struct {
     /// resources by attributes such as purpose, owner, or environment. When you
     /// have many resources of the same type, you can quickly identify a specific
     /// resource based on the tags you've assigned to it.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from resources.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates a specified application. An application has to be in a stopped or
     /// created state in order to be updated.
-    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: update_application.Options) !update_application.UpdateApplicationOutput {
+    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: CallOptions) !update_application.UpdateApplicationOutput {
         return update_application.execute(self, allocator, input, options);
     }
 

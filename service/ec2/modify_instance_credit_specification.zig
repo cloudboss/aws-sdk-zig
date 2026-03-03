@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstanceCreditSpecificationRequest = @import("instance_credit_specification_request.zig").InstanceCreditSpecificationRequest;
 const SuccessfulInstanceCreditSpecificationItem = @import("successful_instance_credit_specification_item.zig").SuccessfulInstanceCreditSpecificationItem;
@@ -37,11 +38,7 @@ pub const ModifyInstanceCreditSpecificationOutput = struct {
     unsuccessful_instance_credit_specifications: ?[]const UnsuccessfulInstanceCreditSpecificationItem = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyInstanceCreditSpecificationInput, options: Options) !ModifyInstanceCreditSpecificationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyInstanceCreditSpecificationInput, options: CallOptions) !ModifyInstanceCreditSpecificationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

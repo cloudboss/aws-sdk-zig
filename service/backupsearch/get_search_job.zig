@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CurrentSearchProgress = @import("current_search_progress.zig").CurrentSearchProgress;
 const ItemFilters = @import("item_filters.zig").ItemFilters;
@@ -94,11 +95,7 @@ pub const GetSearchJobOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSearchJobInput, options: Options) !GetSearchJobOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSearchJobInput, options: CallOptions) !GetSearchJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

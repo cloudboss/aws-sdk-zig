@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const HumanTaskUiStatus = @import("human_task_ui_status.zig").HumanTaskUiStatus;
 const UiTemplateInfo = @import("ui_template_info.zig").UiTemplateInfo;
@@ -42,11 +43,7 @@ pub const DescribeHumanTaskUiOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeHumanTaskUiInput, options: Options) !DescribeHumanTaskUiOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeHumanTaskUiInput, options: CallOptions) !DescribeHumanTaskUiOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

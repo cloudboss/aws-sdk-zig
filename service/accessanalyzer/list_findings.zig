@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Criterion = @import("criterion.zig").Criterion;
 const SortCriteria = @import("sort_criteria.zig").SortCriteria;
@@ -47,11 +48,7 @@ pub const ListFindingsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListFindingsInput, options: Options) !ListFindingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListFindingsInput, options: CallOptions) !ListFindingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

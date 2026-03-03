@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResolverRule = @import("resolver_rule.zig").ResolverRule;
 
@@ -24,11 +25,7 @@ pub const DeleteResolverRuleOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteResolverRuleInput, options: Options) !DeleteResolverRuleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteResolverRuleInput, options: CallOptions) !DeleteResolverRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

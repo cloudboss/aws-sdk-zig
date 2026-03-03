@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const search_devices = @import("search_devices.zig");
@@ -17,7 +18,7 @@ pub const SearchDevicesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: search_devices.Options) !search_devices.SearchDevicesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !search_devices.SearchDevicesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -58,7 +59,7 @@ pub const SearchJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: search_jobs.Options) !search_jobs.SearchJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !search_jobs.SearchJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -99,7 +100,7 @@ pub const SearchQuantumTasksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: search_quantum_tasks.Options) !search_quantum_tasks.SearchQuantumTasksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !search_quantum_tasks.SearchQuantumTasksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -140,7 +141,7 @@ pub const SearchSpendingLimitsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: search_spending_limits.Options) !search_spending_limits.SearchSpendingLimitsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !search_spending_limits.SearchSpendingLimitsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

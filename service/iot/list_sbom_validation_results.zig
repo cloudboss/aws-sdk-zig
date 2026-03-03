@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SbomValidationResult = @import("sbom_validation_result.zig").SbomValidationResult;
 const SbomValidationResultSummary = @import("sbom_validation_result_summary.zig").SbomValidationResultSummary;
@@ -47,11 +48,7 @@ pub const ListSbomValidationResultsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSbomValidationResultsInput, options: Options) !ListSbomValidationResultsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSbomValidationResultsInput, options: CallOptions) !ListSbomValidationResultsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

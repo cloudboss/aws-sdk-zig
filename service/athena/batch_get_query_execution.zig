@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const QueryExecution = @import("query_execution.zig").QueryExecution;
 const UnprocessedQueryExecutionId = @import("unprocessed_query_execution_id.zig").UnprocessedQueryExecutionId;
@@ -28,11 +29,7 @@ pub const BatchGetQueryExecutionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetQueryExecutionInput, options: Options) !BatchGetQueryExecutionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetQueryExecutionInput, options: CallOptions) !BatchGetQueryExecutionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

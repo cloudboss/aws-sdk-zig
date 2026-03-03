@@ -20,6 +20,7 @@ const put_vectors = @import("put_vectors.zig");
 const query_vectors = @import("query_vectors.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -60,7 +61,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3vectors:TagResource` permission in addition to
     /// `s3vectors:CreateIndex` permission to create a vector index with tags.
-    pub fn createIndex(self: *Self, allocator: std.mem.Allocator, input: create_index.CreateIndexInput, options: create_index.Options) !create_index.CreateIndexOutput {
+    pub fn createIndex(self: *Self, allocator: std.mem.Allocator, input: create_index.CreateIndexInput, options: CallOptions) !create_index.CreateIndexOutput {
         return create_index.execute(self, allocator, input, options);
     }
 
@@ -75,7 +76,7 @@ pub const Client = struct {
     /// You must have the `s3vectors:TagResource` permission in addition to
     /// `s3vectors:CreateVectorBucket` permission to create a vector bucket with
     /// tags.
-    pub fn createVectorBucket(self: *Self, allocator: std.mem.Allocator, input: create_vector_bucket.CreateVectorBucketInput, options: create_vector_bucket.Options) !create_vector_bucket.CreateVectorBucketOutput {
+    pub fn createVectorBucket(self: *Self, allocator: std.mem.Allocator, input: create_vector_bucket.CreateVectorBucketInput, options: CallOptions) !create_vector_bucket.CreateVectorBucketOutput {
         return create_vector_bucket.execute(self, allocator, input, options);
     }
 
@@ -86,7 +87,7 @@ pub const Client = struct {
     /// **Permissions**
     ///
     /// You must have the `s3vectors:DeleteIndex` permission to use this operation.
-    pub fn deleteIndex(self: *Self, allocator: std.mem.Allocator, input: delete_index.DeleteIndexInput, options: delete_index.Options) !delete_index.DeleteIndexOutput {
+    pub fn deleteIndex(self: *Self, allocator: std.mem.Allocator, input: delete_index.DeleteIndexInput, options: CallOptions) !delete_index.DeleteIndexOutput {
         return delete_index.execute(self, allocator, input, options);
     }
 
@@ -99,7 +100,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3vectors:DeleteVectorBucket` permission to use this
     /// operation.
-    pub fn deleteVectorBucket(self: *Self, allocator: std.mem.Allocator, input: delete_vector_bucket.DeleteVectorBucketInput, options: delete_vector_bucket.Options) !delete_vector_bucket.DeleteVectorBucketOutput {
+    pub fn deleteVectorBucket(self: *Self, allocator: std.mem.Allocator, input: delete_vector_bucket.DeleteVectorBucketInput, options: CallOptions) !delete_vector_bucket.DeleteVectorBucketOutput {
         return delete_vector_bucket.execute(self, allocator, input, options);
     }
 
@@ -110,7 +111,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3vectors:DeleteVectorBucketPolicy` permission to use
     /// this operation.
-    pub fn deleteVectorBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_vector_bucket_policy.DeleteVectorBucketPolicyInput, options: delete_vector_bucket_policy.Options) !delete_vector_bucket_policy.DeleteVectorBucketPolicyOutput {
+    pub fn deleteVectorBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_vector_bucket_policy.DeleteVectorBucketPolicyInput, options: CallOptions) !delete_vector_bucket_policy.DeleteVectorBucketPolicyOutput {
         return delete_vector_bucket_policy.execute(self, allocator, input, options);
     }
 
@@ -122,7 +123,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3vectors:DeleteVectors` permission to use this
     /// operation.
-    pub fn deleteVectors(self: *Self, allocator: std.mem.Allocator, input: delete_vectors.DeleteVectorsInput, options: delete_vectors.Options) !delete_vectors.DeleteVectorsOutput {
+    pub fn deleteVectors(self: *Self, allocator: std.mem.Allocator, input: delete_vectors.DeleteVectorsInput, options: CallOptions) !delete_vectors.DeleteVectorsOutput {
         return delete_vectors.execute(self, allocator, input, options);
     }
 
@@ -133,7 +134,7 @@ pub const Client = struct {
     /// **Permissions**
     ///
     /// You must have the `s3vectors:GetIndex` permission to use this operation.
-    pub fn getIndex(self: *Self, allocator: std.mem.Allocator, input: get_index.GetIndexInput, options: get_index.Options) !get_index.GetIndexOutput {
+    pub fn getIndex(self: *Self, allocator: std.mem.Allocator, input: get_index.GetIndexInput, options: CallOptions) !get_index.GetIndexOutput {
         return get_index.execute(self, allocator, input, options);
     }
 
@@ -144,7 +145,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3vectors:GetVectorBucket` permission to use this
     /// operation.
-    pub fn getVectorBucket(self: *Self, allocator: std.mem.Allocator, input: get_vector_bucket.GetVectorBucketInput, options: get_vector_bucket.Options) !get_vector_bucket.GetVectorBucketOutput {
+    pub fn getVectorBucket(self: *Self, allocator: std.mem.Allocator, input: get_vector_bucket.GetVectorBucketInput, options: CallOptions) !get_vector_bucket.GetVectorBucketOutput {
         return get_vector_bucket.execute(self, allocator, input, options);
     }
 
@@ -156,7 +157,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3vectors:GetVectorBucketPolicy` permission to use this
     /// operation.
-    pub fn getVectorBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: get_vector_bucket_policy.GetVectorBucketPolicyInput, options: get_vector_bucket_policy.Options) !get_vector_bucket_policy.GetVectorBucketPolicyOutput {
+    pub fn getVectorBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: get_vector_bucket_policy.GetVectorBucketPolicyInput, options: CallOptions) !get_vector_bucket_policy.GetVectorBucketPolicyOutput {
         return get_vector_bucket_policy.execute(self, allocator, input, options);
     }
 
@@ -167,7 +168,7 @@ pub const Client = struct {
     /// **Permissions**
     ///
     /// You must have the `s3vectors:GetVectors` permission to use this operation.
-    pub fn getVectors(self: *Self, allocator: std.mem.Allocator, input: get_vectors.GetVectorsInput, options: get_vectors.Options) !get_vectors.GetVectorsOutput {
+    pub fn getVectors(self: *Self, allocator: std.mem.Allocator, input: get_vectors.GetVectorsInput, options: CallOptions) !get_vectors.GetVectorsOutput {
         return get_vectors.execute(self, allocator, input, options);
     }
 
@@ -178,7 +179,7 @@ pub const Client = struct {
     /// **Permissions**
     ///
     /// You must have the `s3vectors:ListIndexes` permission to use this operation.
-    pub fn listIndexes(self: *Self, allocator: std.mem.Allocator, input: list_indexes.ListIndexesInput, options: list_indexes.Options) !list_indexes.ListIndexesOutput {
+    pub fn listIndexes(self: *Self, allocator: std.mem.Allocator, input: list_indexes.ListIndexesInput, options: CallOptions) !list_indexes.ListIndexesOutput {
         return list_indexes.execute(self, allocator, input, options);
     }
 
@@ -194,7 +195,7 @@ pub const Client = struct {
     ///
     /// For vector buckets and vector indexes, you must have the
     /// `s3vectors:ListTagsForResource` permission to use this operation.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -205,7 +206,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3vectors:ListVectorBuckets` permission to use this
     /// operation.
-    pub fn listVectorBuckets(self: *Self, allocator: std.mem.Allocator, input: list_vector_buckets.ListVectorBucketsInput, options: list_vector_buckets.Options) !list_vector_buckets.ListVectorBucketsOutput {
+    pub fn listVectorBuckets(self: *Self, allocator: std.mem.Allocator, input: list_vector_buckets.ListVectorBucketsInput, options: CallOptions) !list_vector_buckets.ListVectorBucketsOutput {
         return list_vector_buckets.execute(self, allocator, input, options);
     }
 
@@ -231,7 +232,7 @@ pub const Client = struct {
     ///   `s3vectors:ListVectors` and `s3vectors:GetVectors` permissions. The
     ///   request fails with a `403 Forbidden` error if you request vector data or
     ///   metadata without the `s3vectors:GetVectors` permission.
-    pub fn listVectors(self: *Self, allocator: std.mem.Allocator, input: list_vectors.ListVectorsInput, options: list_vectors.Options) !list_vectors.ListVectorsOutput {
+    pub fn listVectors(self: *Self, allocator: std.mem.Allocator, input: list_vectors.ListVectorsInput, options: CallOptions) !list_vectors.ListVectorsOutput {
         return list_vectors.execute(self, allocator, input, options);
     }
 
@@ -243,7 +244,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3vectors:PutVectorBucketPolicy` permission to use this
     /// operation.
-    pub fn putVectorBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: put_vector_bucket_policy.PutVectorBucketPolicyInput, options: put_vector_bucket_policy.Options) !put_vector_bucket_policy.PutVectorBucketPolicyOutput {
+    pub fn putVectorBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: put_vector_bucket_policy.PutVectorBucketPolicyInput, options: CallOptions) !put_vector_bucket_policy.PutVectorBucketPolicyOutput {
         return put_vector_bucket_policy.execute(self, allocator, input, options);
     }
 
@@ -267,7 +268,7 @@ pub const Client = struct {
     /// **Permissions**
     ///
     /// You must have the `s3vectors:PutVectors` permission to use this operation.
-    pub fn putVectors(self: *Self, allocator: std.mem.Allocator, input: put_vectors.PutVectorsInput, options: put_vectors.Options) !put_vectors.PutVectorsOutput {
+    pub fn putVectors(self: *Self, allocator: std.mem.Allocator, input: put_vectors.PutVectorsInput, options: CallOptions) !put_vectors.PutVectorsOutput {
         return put_vectors.execute(self, allocator, input, options);
     }
 
@@ -297,7 +298,7 @@ pub const Client = struct {
     ///   The request fails with a `403 Forbidden error` if you request metadata
     ///   filtering, vector data, or metadata without the `s3vectors:GetVectors`
     ///   permission.
-    pub fn queryVectors(self: *Self, allocator: std.mem.Allocator, input: query_vectors.QueryVectorsInput, options: query_vectors.Options) !query_vectors.QueryVectorsOutput {
+    pub fn queryVectors(self: *Self, allocator: std.mem.Allocator, input: query_vectors.QueryVectorsInput, options: CallOptions) !query_vectors.QueryVectorsOutput {
         return query_vectors.execute(self, allocator, input, options);
     }
 
@@ -314,7 +315,7 @@ pub const Client = struct {
     ///
     /// For vector buckets and vector indexes, you must have the
     /// `s3vectors:TagResource` permission to use this operation.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -329,7 +330,7 @@ pub const Client = struct {
     ///
     /// For vector buckets and vector indexes, you must have the
     /// `s3vectors:UntagResource` permission to use this operation.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

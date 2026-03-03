@@ -11,6 +11,7 @@ const invoke_model_with_bidirectional_stream = @import("invoke_model_with_bidire
 const invoke_model_with_response_stream = @import("invoke_model_with_response_stream.zig");
 const list_async_invokes = @import("list_async_invokes.zig");
 const start_async_invoke = @import("start_async_invoke.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -46,7 +47,7 @@ pub const Client = struct {
     /// For troubleshooting some of the common errors you might encounter when using
     /// the `ApplyGuardrail` API, see [Troubleshooting Amazon Bedrock API Error
     /// Codes](https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html) in the Amazon Bedrock User Guide
-    pub fn applyGuardrail(self: *Self, allocator: std.mem.Allocator, input: apply_guardrail.ApplyGuardrailInput, options: apply_guardrail.Options) !apply_guardrail.ApplyGuardrailOutput {
+    pub fn applyGuardrail(self: *Self, allocator: std.mem.Allocator, input: apply_guardrail.ApplyGuardrailInput, options: CallOptions) !apply_guardrail.ApplyGuardrailOutput {
         return apply_guardrail.execute(self, allocator, input, options);
     }
 
@@ -92,7 +93,7 @@ pub const Client = struct {
     /// For troubleshooting some of the common errors you might encounter when using
     /// the `Converse` API, see [Troubleshooting Amazon Bedrock API Error
     /// Codes](https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html) in the Amazon Bedrock User Guide
-    pub fn converse(self: *Self, allocator: std.mem.Allocator, input: converse_.ConverseInput, options: converse_.Options) !converse_.ConverseOutput {
+    pub fn converse(self: *Self, allocator: std.mem.Allocator, input: converse_.ConverseInput, options: CallOptions) !converse_.ConverseOutput {
         return converse_.execute(self, allocator, input, options);
     }
 
@@ -146,7 +147,7 @@ pub const Client = struct {
     /// For troubleshooting some of the common errors you might encounter when using
     /// the `ConverseStream` API, see [Troubleshooting Amazon Bedrock API Error
     /// Codes](https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html) in the Amazon Bedrock User Guide
-    pub fn converseStream(self: *Self, allocator: std.mem.Allocator, input: converse_stream.ConverseStreamInput, options: converse_stream.Options) !converse_stream.ConverseStreamOutput {
+    pub fn converseStream(self: *Self, allocator: std.mem.Allocator, input: converse_stream.ConverseStreamInput, options: CallOptions) !converse_stream.ConverseStreamOutput {
         return converse_stream.execute(self, allocator, input, options);
     }
 
@@ -176,12 +177,12 @@ pub const Client = struct {
     ///   [InvokeModel](https://docs.aws.amazon.com/bedrock/latest/API/API_runtime_InvokeModel.html) - Sends inference requests to foundation models
     /// *
     ///   [Converse](https://docs.aws.amazon.com/bedrock/latest/API/API_runtime_Converse.html) - Sends conversation-based inference requests to foundation models
-    pub fn countTokens(self: *Self, allocator: std.mem.Allocator, input: count_tokens.CountTokensInput, options: count_tokens.Options) !count_tokens.CountTokensOutput {
+    pub fn countTokens(self: *Self, allocator: std.mem.Allocator, input: count_tokens.CountTokensInput, options: CallOptions) !count_tokens.CountTokensOutput {
         return count_tokens.execute(self, allocator, input, options);
     }
 
     /// Retrieve information about an asynchronous invocation.
-    pub fn getAsyncInvoke(self: *Self, allocator: std.mem.Allocator, input: get_async_invoke.GetAsyncInvokeInput, options: get_async_invoke.Options) !get_async_invoke.GetAsyncInvokeOutput {
+    pub fn getAsyncInvoke(self: *Self, allocator: std.mem.Allocator, input: get_async_invoke.GetAsyncInvokeInput, options: CallOptions) !get_async_invoke.GetAsyncInvokeOutput {
         return get_async_invoke.execute(self, allocator, input, options);
     }
 
@@ -203,7 +204,7 @@ pub const Client = struct {
     /// For troubleshooting some of the common errors you might encounter when using
     /// the `InvokeModel` API, see [Troubleshooting Amazon Bedrock API Error
     /// Codes](https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html) in the Amazon Bedrock User Guide
-    pub fn invokeModel(self: *Self, allocator: std.mem.Allocator, input: invoke_model.InvokeModelInput, options: invoke_model.Options) !invoke_model.InvokeModelOutput {
+    pub fn invokeModel(self: *Self, allocator: std.mem.Allocator, input: invoke_model.InvokeModelInput, options: CallOptions) !invoke_model.InvokeModelOutput {
         return invoke_model.execute(self, allocator, input, options);
     }
 
@@ -217,7 +218,7 @@ pub const Client = struct {
     /// prompt, which will halt the response speech. The model will retain
     /// contextual awareness of the conversation while pivoting to respond to the
     /// new prompt.
-    pub fn invokeModelWithBidirectionalStream(self: *Self, allocator: std.mem.Allocator, input: invoke_model_with_bidirectional_stream.InvokeModelWithBidirectionalStreamInput, options: invoke_model_with_bidirectional_stream.Options) !invoke_model_with_bidirectional_stream.InvokeModelWithBidirectionalStreamOutput {
+    pub fn invokeModelWithBidirectionalStream(self: *Self, allocator: std.mem.Allocator, input: invoke_model_with_bidirectional_stream.InvokeModelWithBidirectionalStreamInput, options: CallOptions) !invoke_model_with_bidirectional_stream.InvokeModelWithBidirectionalStreamOutput {
         return invoke_model_with_bidirectional_stream.execute(self, allocator, input, options);
     }
 
@@ -247,12 +248,12 @@ pub const Client = struct {
     /// the `InvokeModelWithResponseStream` API, see [Troubleshooting Amazon Bedrock
     /// API Error
     /// Codes](https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html) in the Amazon Bedrock User Guide
-    pub fn invokeModelWithResponseStream(self: *Self, allocator: std.mem.Allocator, input: invoke_model_with_response_stream.InvokeModelWithResponseStreamInput, options: invoke_model_with_response_stream.Options) !invoke_model_with_response_stream.InvokeModelWithResponseStreamOutput {
+    pub fn invokeModelWithResponseStream(self: *Self, allocator: std.mem.Allocator, input: invoke_model_with_response_stream.InvokeModelWithResponseStreamInput, options: CallOptions) !invoke_model_with_response_stream.InvokeModelWithResponseStreamOutput {
         return invoke_model_with_response_stream.execute(self, allocator, input, options);
     }
 
     /// Lists asynchronous invocations.
-    pub fn listAsyncInvokes(self: *Self, allocator: std.mem.Allocator, input: list_async_invokes.ListAsyncInvokesInput, options: list_async_invokes.Options) !list_async_invokes.ListAsyncInvokesOutput {
+    pub fn listAsyncInvokes(self: *Self, allocator: std.mem.Allocator, input: list_async_invokes.ListAsyncInvokesInput, options: CallOptions) !list_async_invokes.ListAsyncInvokesOutput {
         return list_async_invokes.execute(self, allocator, input, options);
     }
 
@@ -265,7 +266,7 @@ pub const Client = struct {
     /// `bedrock:InvokeModelWithResponseStream` actions. Doing this also denies
     /// access to the resource through the Converse API actions
     /// ([Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) and [ConverseStream](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html)). For more information see [Deny access for inference on specific models](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference).
-    pub fn startAsyncInvoke(self: *Self, allocator: std.mem.Allocator, input: start_async_invoke.StartAsyncInvokeInput, options: start_async_invoke.Options) !start_async_invoke.StartAsyncInvokeOutput {
+    pub fn startAsyncInvoke(self: *Self, allocator: std.mem.Allocator, input: start_async_invoke.StartAsyncInvokeInput, options: CallOptions) !start_async_invoke.StartAsyncInvokeOutput {
         return start_async_invoke.execute(self, allocator, input, options);
     }
 

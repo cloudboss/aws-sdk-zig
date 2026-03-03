@@ -1,5 +1,6 @@
 package software.amazon.smithy.zig.aws
 
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
@@ -326,12 +327,23 @@ class ServiceGeneratorTest {
     }
 
     @Test
-    fun operationFileContainsOptionsStruct() {
+    fun operationFileImportsCallOptions() {
         val files = generateAndGetFiles()
         val op = files["get_caller_identity.zig"]!!
 
-        assertTrue(op.contains("pub const Options = struct"), "Missing Options struct")
-        assertTrue(op.contains("diagnostic: ?*ServiceError"), "Missing diagnostic field")
+        assertTrue(
+            op.contains("const CallOptions = @import(\"call_options.zig\").CallOptions"),
+            "Missing CallOptions import from call_options.zig",
+        )
+    }
+
+    @Test
+    fun callOptionsFileContainsStruct() {
+        val files = generateAndGetFiles()
+        val options = files["call_options.zig"]!!
+
+        assertTrue(options.contains("pub const CallOptions = struct"), "Missing CallOptions struct")
+        assertTrue(options.contains("diagnostic: ?*errors.ServiceError"), "Missing diagnostic field")
     }
 
     // ---- Root Generator Tests ----
@@ -346,17 +358,30 @@ class ServiceGeneratorTest {
     }
 
     @Test
-    fun rootFileReexportsOperations() {
+    fun rootFileExportsIoTypesAndCallOptions() {
         val files = generateAndGetFiles()
         val root = files["root.zig"]!!
 
-        assertTrue(
+        // Operation modules should NOT be re-exported (use client methods instead)
+        assertFalse(
             root.contains("pub const get_caller_identity = @import(\"get_caller_identity.zig\")"),
-            "Missing get_caller_identity re-export",
+            "root.zig should not re-export operation modules",
+        )
+
+        // I/O types are re-exported from root.zig
+        assertTrue(
+            root.contains("pub const GetCallerIdentityInput = @import(\"get_caller_identity.zig\").GetCallerIdentityInput"),
+            "Missing GetCallerIdentityInput in root.zig",
         )
         assertTrue(
-            root.contains("pub const get_access_key_info = @import(\"get_access_key_info.zig\")"),
-            "Missing get_access_key_info re-export",
+            root.contains("pub const GetCallerIdentityOutput = @import(\"get_caller_identity.zig\").GetCallerIdentityOutput"),
+            "Missing GetCallerIdentityOutput in root.zig",
+        )
+
+        // CallOptions re-exported from root.zig
+        assertTrue(
+            root.contains("pub const CallOptions = @import(\"call_options.zig\").CallOptions"),
+            "Missing CallOptions in root.zig",
         )
     }
 

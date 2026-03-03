@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_slack_channel_configurations = @import("list_slack_channel_configurations.zig");
@@ -15,7 +16,7 @@ pub const ListSlackChannelConfigurationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_slack_channel_configurations.Options) !list_slack_channel_configurations.ListSlackChannelConfigurationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_slack_channel_configurations.ListSlackChannelConfigurationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const ListSlackWorkspaceConfigurationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_slack_workspace_configurations.Options) !list_slack_workspace_configurations.ListSlackWorkspaceConfigurationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_slack_workspace_configurations.ListSlackWorkspaceConfigurationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

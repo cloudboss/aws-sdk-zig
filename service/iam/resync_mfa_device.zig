@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const ResyncMFADeviceInput = struct {
@@ -34,13 +35,9 @@ pub const ResyncMFADeviceInput = struct {
     user_name: []const u8,
 };
 
-const ResyncMFADeviceOutput = struct {};
+pub const ResyncMFADeviceOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ResyncMFADeviceInput, options: Options) !ResyncMFADeviceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ResyncMFADeviceInput, options: CallOptions) !ResyncMFADeviceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

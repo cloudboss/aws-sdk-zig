@@ -82,6 +82,7 @@ const update_resource_profile = @import("update_resource_profile.zig");
 const update_resource_profile_detections = @import("update_resource_profile_detections.zig");
 const update_reveal_configuration = @import("update_reveal_configuration.zig");
 const update_sensitivity_inspection_template = @import("update_sensitivity_inspection_template.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -115,453 +116,453 @@ pub const Client = struct {
 
     /// Accepts an Amazon Macie membership invitation that was received from a
     /// specific account.
-    pub fn acceptInvitation(self: *Self, allocator: std.mem.Allocator, input: accept_invitation.AcceptInvitationInput, options: accept_invitation.Options) !accept_invitation.AcceptInvitationOutput {
+    pub fn acceptInvitation(self: *Self, allocator: std.mem.Allocator, input: accept_invitation.AcceptInvitationInput, options: CallOptions) !accept_invitation.AcceptInvitationOutput {
         return accept_invitation.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about one or more custom data identifiers.
-    pub fn batchGetCustomDataIdentifiers(self: *Self, allocator: std.mem.Allocator, input: batch_get_custom_data_identifiers.BatchGetCustomDataIdentifiersInput, options: batch_get_custom_data_identifiers.Options) !batch_get_custom_data_identifiers.BatchGetCustomDataIdentifiersOutput {
+    pub fn batchGetCustomDataIdentifiers(self: *Self, allocator: std.mem.Allocator, input: batch_get_custom_data_identifiers.BatchGetCustomDataIdentifiersInput, options: CallOptions) !batch_get_custom_data_identifiers.BatchGetCustomDataIdentifiersOutput {
         return batch_get_custom_data_identifiers.execute(self, allocator, input, options);
     }
 
     /// Changes the status of automated sensitive data discovery for one or more
     /// accounts.
-    pub fn batchUpdateAutomatedDiscoveryAccounts(self: *Self, allocator: std.mem.Allocator, input: batch_update_automated_discovery_accounts.BatchUpdateAutomatedDiscoveryAccountsInput, options: batch_update_automated_discovery_accounts.Options) !batch_update_automated_discovery_accounts.BatchUpdateAutomatedDiscoveryAccountsOutput {
+    pub fn batchUpdateAutomatedDiscoveryAccounts(self: *Self, allocator: std.mem.Allocator, input: batch_update_automated_discovery_accounts.BatchUpdateAutomatedDiscoveryAccountsInput, options: CallOptions) !batch_update_automated_discovery_accounts.BatchUpdateAutomatedDiscoveryAccountsOutput {
         return batch_update_automated_discovery_accounts.execute(self, allocator, input, options);
     }
 
     /// Creates and defines the settings for an allow list.
-    pub fn createAllowList(self: *Self, allocator: std.mem.Allocator, input: create_allow_list.CreateAllowListInput, options: create_allow_list.Options) !create_allow_list.CreateAllowListOutput {
+    pub fn createAllowList(self: *Self, allocator: std.mem.Allocator, input: create_allow_list.CreateAllowListInput, options: CallOptions) !create_allow_list.CreateAllowListOutput {
         return create_allow_list.execute(self, allocator, input, options);
     }
 
     /// Creates and defines the settings for a classification job.
-    pub fn createClassificationJob(self: *Self, allocator: std.mem.Allocator, input: create_classification_job.CreateClassificationJobInput, options: create_classification_job.Options) !create_classification_job.CreateClassificationJobOutput {
+    pub fn createClassificationJob(self: *Self, allocator: std.mem.Allocator, input: create_classification_job.CreateClassificationJobInput, options: CallOptions) !create_classification_job.CreateClassificationJobOutput {
         return create_classification_job.execute(self, allocator, input, options);
     }
 
     /// Creates and defines the criteria and other settings for a custom data
     /// identifier.
-    pub fn createCustomDataIdentifier(self: *Self, allocator: std.mem.Allocator, input: create_custom_data_identifier.CreateCustomDataIdentifierInput, options: create_custom_data_identifier.Options) !create_custom_data_identifier.CreateCustomDataIdentifierOutput {
+    pub fn createCustomDataIdentifier(self: *Self, allocator: std.mem.Allocator, input: create_custom_data_identifier.CreateCustomDataIdentifierInput, options: CallOptions) !create_custom_data_identifier.CreateCustomDataIdentifierOutput {
         return create_custom_data_identifier.execute(self, allocator, input, options);
     }
 
     /// Creates and defines the criteria and other settings for a findings filter.
-    pub fn createFindingsFilter(self: *Self, allocator: std.mem.Allocator, input: create_findings_filter.CreateFindingsFilterInput, options: create_findings_filter.Options) !create_findings_filter.CreateFindingsFilterOutput {
+    pub fn createFindingsFilter(self: *Self, allocator: std.mem.Allocator, input: create_findings_filter.CreateFindingsFilterInput, options: CallOptions) !create_findings_filter.CreateFindingsFilterOutput {
         return create_findings_filter.execute(self, allocator, input, options);
     }
 
     /// Sends an Amazon Macie membership invitation to one or more accounts.
-    pub fn createInvitations(self: *Self, allocator: std.mem.Allocator, input: create_invitations.CreateInvitationsInput, options: create_invitations.Options) !create_invitations.CreateInvitationsOutput {
+    pub fn createInvitations(self: *Self, allocator: std.mem.Allocator, input: create_invitations.CreateInvitationsInput, options: CallOptions) !create_invitations.CreateInvitationsOutput {
         return create_invitations.execute(self, allocator, input, options);
     }
 
     /// Associates an account with an Amazon Macie administrator account.
-    pub fn createMember(self: *Self, allocator: std.mem.Allocator, input: create_member.CreateMemberInput, options: create_member.Options) !create_member.CreateMemberOutput {
+    pub fn createMember(self: *Self, allocator: std.mem.Allocator, input: create_member.CreateMemberInput, options: CallOptions) !create_member.CreateMemberOutput {
         return create_member.execute(self, allocator, input, options);
     }
 
     /// Creates sample findings.
-    pub fn createSampleFindings(self: *Self, allocator: std.mem.Allocator, input: create_sample_findings.CreateSampleFindingsInput, options: create_sample_findings.Options) !create_sample_findings.CreateSampleFindingsOutput {
+    pub fn createSampleFindings(self: *Self, allocator: std.mem.Allocator, input: create_sample_findings.CreateSampleFindingsInput, options: CallOptions) !create_sample_findings.CreateSampleFindingsOutput {
         return create_sample_findings.execute(self, allocator, input, options);
     }
 
     /// Declines Amazon Macie membership invitations that were received from
     /// specific accounts.
-    pub fn declineInvitations(self: *Self, allocator: std.mem.Allocator, input: decline_invitations.DeclineInvitationsInput, options: decline_invitations.Options) !decline_invitations.DeclineInvitationsOutput {
+    pub fn declineInvitations(self: *Self, allocator: std.mem.Allocator, input: decline_invitations.DeclineInvitationsInput, options: CallOptions) !decline_invitations.DeclineInvitationsOutput {
         return decline_invitations.execute(self, allocator, input, options);
     }
 
     /// Deletes an allow list.
-    pub fn deleteAllowList(self: *Self, allocator: std.mem.Allocator, input: delete_allow_list.DeleteAllowListInput, options: delete_allow_list.Options) !delete_allow_list.DeleteAllowListOutput {
+    pub fn deleteAllowList(self: *Self, allocator: std.mem.Allocator, input: delete_allow_list.DeleteAllowListInput, options: CallOptions) !delete_allow_list.DeleteAllowListOutput {
         return delete_allow_list.execute(self, allocator, input, options);
     }
 
     /// Soft deletes a custom data identifier.
-    pub fn deleteCustomDataIdentifier(self: *Self, allocator: std.mem.Allocator, input: delete_custom_data_identifier.DeleteCustomDataIdentifierInput, options: delete_custom_data_identifier.Options) !delete_custom_data_identifier.DeleteCustomDataIdentifierOutput {
+    pub fn deleteCustomDataIdentifier(self: *Self, allocator: std.mem.Allocator, input: delete_custom_data_identifier.DeleteCustomDataIdentifierInput, options: CallOptions) !delete_custom_data_identifier.DeleteCustomDataIdentifierOutput {
         return delete_custom_data_identifier.execute(self, allocator, input, options);
     }
 
     /// Deletes a findings filter.
-    pub fn deleteFindingsFilter(self: *Self, allocator: std.mem.Allocator, input: delete_findings_filter.DeleteFindingsFilterInput, options: delete_findings_filter.Options) !delete_findings_filter.DeleteFindingsFilterOutput {
+    pub fn deleteFindingsFilter(self: *Self, allocator: std.mem.Allocator, input: delete_findings_filter.DeleteFindingsFilterInput, options: CallOptions) !delete_findings_filter.DeleteFindingsFilterOutput {
         return delete_findings_filter.execute(self, allocator, input, options);
     }
 
     /// Deletes Amazon Macie membership invitations that were received from specific
     /// accounts.
-    pub fn deleteInvitations(self: *Self, allocator: std.mem.Allocator, input: delete_invitations.DeleteInvitationsInput, options: delete_invitations.Options) !delete_invitations.DeleteInvitationsOutput {
+    pub fn deleteInvitations(self: *Self, allocator: std.mem.Allocator, input: delete_invitations.DeleteInvitationsInput, options: CallOptions) !delete_invitations.DeleteInvitationsOutput {
         return delete_invitations.execute(self, allocator, input, options);
     }
 
     /// Deletes the association between an Amazon Macie administrator account and an
     /// account.
-    pub fn deleteMember(self: *Self, allocator: std.mem.Allocator, input: delete_member.DeleteMemberInput, options: delete_member.Options) !delete_member.DeleteMemberOutput {
+    pub fn deleteMember(self: *Self, allocator: std.mem.Allocator, input: delete_member.DeleteMemberInput, options: CallOptions) !delete_member.DeleteMemberOutput {
         return delete_member.execute(self, allocator, input, options);
     }
 
     /// Retrieves (queries) statistical data and other information about one or more
     /// S3 buckets that Amazon Macie monitors and analyzes for an account.
-    pub fn describeBuckets(self: *Self, allocator: std.mem.Allocator, input: describe_buckets.DescribeBucketsInput, options: describe_buckets.Options) !describe_buckets.DescribeBucketsOutput {
+    pub fn describeBuckets(self: *Self, allocator: std.mem.Allocator, input: describe_buckets.DescribeBucketsInput, options: CallOptions) !describe_buckets.DescribeBucketsOutput {
         return describe_buckets.execute(self, allocator, input, options);
     }
 
     /// Retrieves the status and settings for a classification job.
-    pub fn describeClassificationJob(self: *Self, allocator: std.mem.Allocator, input: describe_classification_job.DescribeClassificationJobInput, options: describe_classification_job.Options) !describe_classification_job.DescribeClassificationJobOutput {
+    pub fn describeClassificationJob(self: *Self, allocator: std.mem.Allocator, input: describe_classification_job.DescribeClassificationJobInput, options: CallOptions) !describe_classification_job.DescribeClassificationJobOutput {
         return describe_classification_job.execute(self, allocator, input, options);
     }
 
     /// Retrieves the Amazon Macie configuration settings for an organization in
     /// Organizations.
-    pub fn describeOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_organization_configuration.DescribeOrganizationConfigurationInput, options: describe_organization_configuration.Options) !describe_organization_configuration.DescribeOrganizationConfigurationOutput {
+    pub fn describeOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_organization_configuration.DescribeOrganizationConfigurationInput, options: CallOptions) !describe_organization_configuration.DescribeOrganizationConfigurationOutput {
         return describe_organization_configuration.execute(self, allocator, input, options);
     }
 
     /// Disables Amazon Macie and deletes all settings and resources for a Macie
     /// account.
-    pub fn disableMacie(self: *Self, allocator: std.mem.Allocator, input: disable_macie.DisableMacieInput, options: disable_macie.Options) !disable_macie.DisableMacieOutput {
+    pub fn disableMacie(self: *Self, allocator: std.mem.Allocator, input: disable_macie.DisableMacieInput, options: CallOptions) !disable_macie.DisableMacieOutput {
         return disable_macie.execute(self, allocator, input, options);
     }
 
     /// Disables an account as the delegated Amazon Macie administrator account for
     /// an organization in Organizations.
-    pub fn disableOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: disable_organization_admin_account.DisableOrganizationAdminAccountInput, options: disable_organization_admin_account.Options) !disable_organization_admin_account.DisableOrganizationAdminAccountOutput {
+    pub fn disableOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: disable_organization_admin_account.DisableOrganizationAdminAccountInput, options: CallOptions) !disable_organization_admin_account.DisableOrganizationAdminAccountOutput {
         return disable_organization_admin_account.execute(self, allocator, input, options);
     }
 
     /// Disassociates a member account from its Amazon Macie administrator account.
-    pub fn disassociateFromAdministratorAccount(self: *Self, allocator: std.mem.Allocator, input: disassociate_from_administrator_account.DisassociateFromAdministratorAccountInput, options: disassociate_from_administrator_account.Options) !disassociate_from_administrator_account.DisassociateFromAdministratorAccountOutput {
+    pub fn disassociateFromAdministratorAccount(self: *Self, allocator: std.mem.Allocator, input: disassociate_from_administrator_account.DisassociateFromAdministratorAccountInput, options: CallOptions) !disassociate_from_administrator_account.DisassociateFromAdministratorAccountOutput {
         return disassociate_from_administrator_account.execute(self, allocator, input, options);
     }
 
     /// (Deprecated) Disassociates a member account from its Amazon Macie
     /// administrator account. This operation has been replaced by the
     /// DisassociateFromAdministratorAccount operation.
-    pub fn disassociateFromMasterAccount(self: *Self, allocator: std.mem.Allocator, input: disassociate_from_master_account.DisassociateFromMasterAccountInput, options: disassociate_from_master_account.Options) !disassociate_from_master_account.DisassociateFromMasterAccountOutput {
+    pub fn disassociateFromMasterAccount(self: *Self, allocator: std.mem.Allocator, input: disassociate_from_master_account.DisassociateFromMasterAccountInput, options: CallOptions) !disassociate_from_master_account.DisassociateFromMasterAccountOutput {
         return disassociate_from_master_account.execute(self, allocator, input, options);
     }
 
     /// Disassociates an Amazon Macie administrator account from a member account.
-    pub fn disassociateMember(self: *Self, allocator: std.mem.Allocator, input: disassociate_member.DisassociateMemberInput, options: disassociate_member.Options) !disassociate_member.DisassociateMemberOutput {
+    pub fn disassociateMember(self: *Self, allocator: std.mem.Allocator, input: disassociate_member.DisassociateMemberInput, options: CallOptions) !disassociate_member.DisassociateMemberOutput {
         return disassociate_member.execute(self, allocator, input, options);
     }
 
     /// Enables Amazon Macie and specifies the configuration settings for a Macie
     /// account.
-    pub fn enableMacie(self: *Self, allocator: std.mem.Allocator, input: enable_macie.EnableMacieInput, options: enable_macie.Options) !enable_macie.EnableMacieOutput {
+    pub fn enableMacie(self: *Self, allocator: std.mem.Allocator, input: enable_macie.EnableMacieInput, options: CallOptions) !enable_macie.EnableMacieOutput {
         return enable_macie.execute(self, allocator, input, options);
     }
 
     /// Designates an account as the delegated Amazon Macie administrator account
     /// for an organization in Organizations.
-    pub fn enableOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: enable_organization_admin_account.EnableOrganizationAdminAccountInput, options: enable_organization_admin_account.Options) !enable_organization_admin_account.EnableOrganizationAdminAccountOutput {
+    pub fn enableOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: enable_organization_admin_account.EnableOrganizationAdminAccountInput, options: CallOptions) !enable_organization_admin_account.EnableOrganizationAdminAccountOutput {
         return enable_organization_admin_account.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the Amazon Macie administrator account for an
     /// account.
-    pub fn getAdministratorAccount(self: *Self, allocator: std.mem.Allocator, input: get_administrator_account.GetAdministratorAccountInput, options: get_administrator_account.Options) !get_administrator_account.GetAdministratorAccountOutput {
+    pub fn getAdministratorAccount(self: *Self, allocator: std.mem.Allocator, input: get_administrator_account.GetAdministratorAccountInput, options: CallOptions) !get_administrator_account.GetAdministratorAccountOutput {
         return get_administrator_account.execute(self, allocator, input, options);
     }
 
     /// Retrieves the settings and status of an allow list.
-    pub fn getAllowList(self: *Self, allocator: std.mem.Allocator, input: get_allow_list.GetAllowListInput, options: get_allow_list.Options) !get_allow_list.GetAllowListOutput {
+    pub fn getAllowList(self: *Self, allocator: std.mem.Allocator, input: get_allow_list.GetAllowListInput, options: CallOptions) !get_allow_list.GetAllowListOutput {
         return get_allow_list.execute(self, allocator, input, options);
     }
 
     /// Retrieves the configuration settings and status of automated sensitive data
     /// discovery for an organization or standalone account.
-    pub fn getAutomatedDiscoveryConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_automated_discovery_configuration.GetAutomatedDiscoveryConfigurationInput, options: get_automated_discovery_configuration.Options) !get_automated_discovery_configuration.GetAutomatedDiscoveryConfigurationOutput {
+    pub fn getAutomatedDiscoveryConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_automated_discovery_configuration.GetAutomatedDiscoveryConfigurationInput, options: CallOptions) !get_automated_discovery_configuration.GetAutomatedDiscoveryConfigurationOutput {
         return get_automated_discovery_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves (queries) aggregated statistical data about all the S3 buckets
     /// that Amazon Macie monitors and analyzes for an account.
-    pub fn getBucketStatistics(self: *Self, allocator: std.mem.Allocator, input: get_bucket_statistics.GetBucketStatisticsInput, options: get_bucket_statistics.Options) !get_bucket_statistics.GetBucketStatisticsOutput {
+    pub fn getBucketStatistics(self: *Self, allocator: std.mem.Allocator, input: get_bucket_statistics.GetBucketStatisticsInput, options: CallOptions) !get_bucket_statistics.GetBucketStatisticsOutput {
         return get_bucket_statistics.execute(self, allocator, input, options);
     }
 
     /// Retrieves the configuration settings for storing data classification
     /// results.
-    pub fn getClassificationExportConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_classification_export_configuration.GetClassificationExportConfigurationInput, options: get_classification_export_configuration.Options) !get_classification_export_configuration.GetClassificationExportConfigurationOutput {
+    pub fn getClassificationExportConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_classification_export_configuration.GetClassificationExportConfigurationInput, options: CallOptions) !get_classification_export_configuration.GetClassificationExportConfigurationOutput {
         return get_classification_export_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves the classification scope settings for an account.
-    pub fn getClassificationScope(self: *Self, allocator: std.mem.Allocator, input: get_classification_scope.GetClassificationScopeInput, options: get_classification_scope.Options) !get_classification_scope.GetClassificationScopeOutput {
+    pub fn getClassificationScope(self: *Self, allocator: std.mem.Allocator, input: get_classification_scope.GetClassificationScopeInput, options: CallOptions) !get_classification_scope.GetClassificationScopeOutput {
         return get_classification_scope.execute(self, allocator, input, options);
     }
 
     /// Retrieves the criteria and other settings for a custom data identifier.
-    pub fn getCustomDataIdentifier(self: *Self, allocator: std.mem.Allocator, input: get_custom_data_identifier.GetCustomDataIdentifierInput, options: get_custom_data_identifier.Options) !get_custom_data_identifier.GetCustomDataIdentifierOutput {
+    pub fn getCustomDataIdentifier(self: *Self, allocator: std.mem.Allocator, input: get_custom_data_identifier.GetCustomDataIdentifierInput, options: CallOptions) !get_custom_data_identifier.GetCustomDataIdentifierOutput {
         return get_custom_data_identifier.execute(self, allocator, input, options);
     }
 
     /// Retrieves (queries) aggregated statistical data about findings.
-    pub fn getFindingStatistics(self: *Self, allocator: std.mem.Allocator, input: get_finding_statistics.GetFindingStatisticsInput, options: get_finding_statistics.Options) !get_finding_statistics.GetFindingStatisticsOutput {
+    pub fn getFindingStatistics(self: *Self, allocator: std.mem.Allocator, input: get_finding_statistics.GetFindingStatisticsInput, options: CallOptions) !get_finding_statistics.GetFindingStatisticsOutput {
         return get_finding_statistics.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details of one or more findings.
-    pub fn getFindings(self: *Self, allocator: std.mem.Allocator, input: get_findings.GetFindingsInput, options: get_findings.Options) !get_findings.GetFindingsOutput {
+    pub fn getFindings(self: *Self, allocator: std.mem.Allocator, input: get_findings.GetFindingsInput, options: CallOptions) !get_findings.GetFindingsOutput {
         return get_findings.execute(self, allocator, input, options);
     }
 
     /// Retrieves the criteria and other settings for a findings filter.
-    pub fn getFindingsFilter(self: *Self, allocator: std.mem.Allocator, input: get_findings_filter.GetFindingsFilterInput, options: get_findings_filter.Options) !get_findings_filter.GetFindingsFilterOutput {
+    pub fn getFindingsFilter(self: *Self, allocator: std.mem.Allocator, input: get_findings_filter.GetFindingsFilterInput, options: CallOptions) !get_findings_filter.GetFindingsFilterOutput {
         return get_findings_filter.execute(self, allocator, input, options);
     }
 
     /// Retrieves the configuration settings for publishing findings to Security
     /// Hub.
-    pub fn getFindingsPublicationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_findings_publication_configuration.GetFindingsPublicationConfigurationInput, options: get_findings_publication_configuration.Options) !get_findings_publication_configuration.GetFindingsPublicationConfigurationOutput {
+    pub fn getFindingsPublicationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_findings_publication_configuration.GetFindingsPublicationConfigurationInput, options: CallOptions) !get_findings_publication_configuration.GetFindingsPublicationConfigurationOutput {
         return get_findings_publication_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves the count of Amazon Macie membership invitations that were
     /// received by an account.
-    pub fn getInvitationsCount(self: *Self, allocator: std.mem.Allocator, input: get_invitations_count.GetInvitationsCountInput, options: get_invitations_count.Options) !get_invitations_count.GetInvitationsCountOutput {
+    pub fn getInvitationsCount(self: *Self, allocator: std.mem.Allocator, input: get_invitations_count.GetInvitationsCountInput, options: CallOptions) !get_invitations_count.GetInvitationsCountOutput {
         return get_invitations_count.execute(self, allocator, input, options);
     }
 
     /// Retrieves the status and configuration settings for an Amazon Macie account.
-    pub fn getMacieSession(self: *Self, allocator: std.mem.Allocator, input: get_macie_session.GetMacieSessionInput, options: get_macie_session.Options) !get_macie_session.GetMacieSessionOutput {
+    pub fn getMacieSession(self: *Self, allocator: std.mem.Allocator, input: get_macie_session.GetMacieSessionInput, options: CallOptions) !get_macie_session.GetMacieSessionOutput {
         return get_macie_session.execute(self, allocator, input, options);
     }
 
     /// (Deprecated) Retrieves information about the Amazon Macie administrator
     /// account for an account. This operation has been replaced by the
     /// GetAdministratorAccount operation.
-    pub fn getMasterAccount(self: *Self, allocator: std.mem.Allocator, input: get_master_account.GetMasterAccountInput, options: get_master_account.Options) !get_master_account.GetMasterAccountOutput {
+    pub fn getMasterAccount(self: *Self, allocator: std.mem.Allocator, input: get_master_account.GetMasterAccountInput, options: CallOptions) !get_master_account.GetMasterAccountOutput {
         return get_master_account.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about an account that's associated with an Amazon
     /// Macie administrator account.
-    pub fn getMember(self: *Self, allocator: std.mem.Allocator, input: get_member.GetMemberInput, options: get_member.Options) !get_member.GetMemberOutput {
+    pub fn getMember(self: *Self, allocator: std.mem.Allocator, input: get_member.GetMemberInput, options: CallOptions) !get_member.GetMemberOutput {
         return get_member.execute(self, allocator, input, options);
     }
 
     /// Retrieves (queries) sensitive data discovery statistics and the sensitivity
     /// score for an S3 bucket.
-    pub fn getResourceProfile(self: *Self, allocator: std.mem.Allocator, input: get_resource_profile.GetResourceProfileInput, options: get_resource_profile.Options) !get_resource_profile.GetResourceProfileOutput {
+    pub fn getResourceProfile(self: *Self, allocator: std.mem.Allocator, input: get_resource_profile.GetResourceProfileInput, options: CallOptions) !get_resource_profile.GetResourceProfileOutput {
         return get_resource_profile.execute(self, allocator, input, options);
     }
 
     /// Retrieves the status and configuration settings for retrieving occurrences
     /// of sensitive data reported by findings.
-    pub fn getRevealConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_reveal_configuration.GetRevealConfigurationInput, options: get_reveal_configuration.Options) !get_reveal_configuration.GetRevealConfigurationOutput {
+    pub fn getRevealConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_reveal_configuration.GetRevealConfigurationInput, options: CallOptions) !get_reveal_configuration.GetRevealConfigurationOutput {
         return get_reveal_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves occurrences of sensitive data reported by a finding.
-    pub fn getSensitiveDataOccurrences(self: *Self, allocator: std.mem.Allocator, input: get_sensitive_data_occurrences.GetSensitiveDataOccurrencesInput, options: get_sensitive_data_occurrences.Options) !get_sensitive_data_occurrences.GetSensitiveDataOccurrencesOutput {
+    pub fn getSensitiveDataOccurrences(self: *Self, allocator: std.mem.Allocator, input: get_sensitive_data_occurrences.GetSensitiveDataOccurrencesInput, options: CallOptions) !get_sensitive_data_occurrences.GetSensitiveDataOccurrencesOutput {
         return get_sensitive_data_occurrences.execute(self, allocator, input, options);
     }
 
     /// Checks whether occurrences of sensitive data can be retrieved for a finding.
-    pub fn getSensitiveDataOccurrencesAvailability(self: *Self, allocator: std.mem.Allocator, input: get_sensitive_data_occurrences_availability.GetSensitiveDataOccurrencesAvailabilityInput, options: get_sensitive_data_occurrences_availability.Options) !get_sensitive_data_occurrences_availability.GetSensitiveDataOccurrencesAvailabilityOutput {
+    pub fn getSensitiveDataOccurrencesAvailability(self: *Self, allocator: std.mem.Allocator, input: get_sensitive_data_occurrences_availability.GetSensitiveDataOccurrencesAvailabilityInput, options: CallOptions) !get_sensitive_data_occurrences_availability.GetSensitiveDataOccurrencesAvailabilityOutput {
         return get_sensitive_data_occurrences_availability.execute(self, allocator, input, options);
     }
 
     /// Retrieves the settings for the sensitivity inspection template for an
     /// account.
-    pub fn getSensitivityInspectionTemplate(self: *Self, allocator: std.mem.Allocator, input: get_sensitivity_inspection_template.GetSensitivityInspectionTemplateInput, options: get_sensitivity_inspection_template.Options) !get_sensitivity_inspection_template.GetSensitivityInspectionTemplateOutput {
+    pub fn getSensitivityInspectionTemplate(self: *Self, allocator: std.mem.Allocator, input: get_sensitivity_inspection_template.GetSensitivityInspectionTemplateInput, options: CallOptions) !get_sensitivity_inspection_template.GetSensitivityInspectionTemplateOutput {
         return get_sensitivity_inspection_template.execute(self, allocator, input, options);
     }
 
     /// Retrieves (queries) quotas and aggregated usage data for one or more
     /// accounts.
-    pub fn getUsageStatistics(self: *Self, allocator: std.mem.Allocator, input: get_usage_statistics.GetUsageStatisticsInput, options: get_usage_statistics.Options) !get_usage_statistics.GetUsageStatisticsOutput {
+    pub fn getUsageStatistics(self: *Self, allocator: std.mem.Allocator, input: get_usage_statistics.GetUsageStatisticsInput, options: CallOptions) !get_usage_statistics.GetUsageStatisticsOutput {
         return get_usage_statistics.execute(self, allocator, input, options);
     }
 
     /// Retrieves (queries) aggregated usage data for an account.
-    pub fn getUsageTotals(self: *Self, allocator: std.mem.Allocator, input: get_usage_totals.GetUsageTotalsInput, options: get_usage_totals.Options) !get_usage_totals.GetUsageTotalsOutput {
+    pub fn getUsageTotals(self: *Self, allocator: std.mem.Allocator, input: get_usage_totals.GetUsageTotalsInput, options: CallOptions) !get_usage_totals.GetUsageTotalsOutput {
         return get_usage_totals.execute(self, allocator, input, options);
     }
 
     /// Retrieves a subset of information about all the allow lists for an account.
-    pub fn listAllowLists(self: *Self, allocator: std.mem.Allocator, input: list_allow_lists.ListAllowListsInput, options: list_allow_lists.Options) !list_allow_lists.ListAllowListsOutput {
+    pub fn listAllowLists(self: *Self, allocator: std.mem.Allocator, input: list_allow_lists.ListAllowListsInput, options: CallOptions) !list_allow_lists.ListAllowListsOutput {
         return list_allow_lists.execute(self, allocator, input, options);
     }
 
     /// Retrieves the status of automated sensitive data discovery for one or more
     /// accounts.
-    pub fn listAutomatedDiscoveryAccounts(self: *Self, allocator: std.mem.Allocator, input: list_automated_discovery_accounts.ListAutomatedDiscoveryAccountsInput, options: list_automated_discovery_accounts.Options) !list_automated_discovery_accounts.ListAutomatedDiscoveryAccountsOutput {
+    pub fn listAutomatedDiscoveryAccounts(self: *Self, allocator: std.mem.Allocator, input: list_automated_discovery_accounts.ListAutomatedDiscoveryAccountsInput, options: CallOptions) !list_automated_discovery_accounts.ListAutomatedDiscoveryAccountsOutput {
         return list_automated_discovery_accounts.execute(self, allocator, input, options);
     }
 
     /// Retrieves a subset of information about one or more classification jobs.
-    pub fn listClassificationJobs(self: *Self, allocator: std.mem.Allocator, input: list_classification_jobs.ListClassificationJobsInput, options: list_classification_jobs.Options) !list_classification_jobs.ListClassificationJobsOutput {
+    pub fn listClassificationJobs(self: *Self, allocator: std.mem.Allocator, input: list_classification_jobs.ListClassificationJobsInput, options: CallOptions) !list_classification_jobs.ListClassificationJobsOutput {
         return list_classification_jobs.execute(self, allocator, input, options);
     }
 
     /// Retrieves a subset of information about the classification scope for an
     /// account.
-    pub fn listClassificationScopes(self: *Self, allocator: std.mem.Allocator, input: list_classification_scopes.ListClassificationScopesInput, options: list_classification_scopes.Options) !list_classification_scopes.ListClassificationScopesOutput {
+    pub fn listClassificationScopes(self: *Self, allocator: std.mem.Allocator, input: list_classification_scopes.ListClassificationScopesInput, options: CallOptions) !list_classification_scopes.ListClassificationScopesOutput {
         return list_classification_scopes.execute(self, allocator, input, options);
     }
 
     /// Retrieves a subset of information about the custom data identifiers for an
     /// account.
-    pub fn listCustomDataIdentifiers(self: *Self, allocator: std.mem.Allocator, input: list_custom_data_identifiers.ListCustomDataIdentifiersInput, options: list_custom_data_identifiers.Options) !list_custom_data_identifiers.ListCustomDataIdentifiersOutput {
+    pub fn listCustomDataIdentifiers(self: *Self, allocator: std.mem.Allocator, input: list_custom_data_identifiers.ListCustomDataIdentifiersInput, options: CallOptions) !list_custom_data_identifiers.ListCustomDataIdentifiersOutput {
         return list_custom_data_identifiers.execute(self, allocator, input, options);
     }
 
     /// Retrieves a subset of information about one or more findings.
-    pub fn listFindings(self: *Self, allocator: std.mem.Allocator, input: list_findings.ListFindingsInput, options: list_findings.Options) !list_findings.ListFindingsOutput {
+    pub fn listFindings(self: *Self, allocator: std.mem.Allocator, input: list_findings.ListFindingsInput, options: CallOptions) !list_findings.ListFindingsOutput {
         return list_findings.execute(self, allocator, input, options);
     }
 
     /// Retrieves a subset of information about all the findings filters for an
     /// account.
-    pub fn listFindingsFilters(self: *Self, allocator: std.mem.Allocator, input: list_findings_filters.ListFindingsFiltersInput, options: list_findings_filters.Options) !list_findings_filters.ListFindingsFiltersOutput {
+    pub fn listFindingsFilters(self: *Self, allocator: std.mem.Allocator, input: list_findings_filters.ListFindingsFiltersInput, options: CallOptions) !list_findings_filters.ListFindingsFiltersOutput {
         return list_findings_filters.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about Amazon Macie membership invitations that were
     /// received by an account.
-    pub fn listInvitations(self: *Self, allocator: std.mem.Allocator, input: list_invitations.ListInvitationsInput, options: list_invitations.Options) !list_invitations.ListInvitationsOutput {
+    pub fn listInvitations(self: *Self, allocator: std.mem.Allocator, input: list_invitations.ListInvitationsInput, options: CallOptions) !list_invitations.ListInvitationsOutput {
         return list_invitations.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about all the managed data identifiers that Amazon
     /// Macie currently provides.
-    pub fn listManagedDataIdentifiers(self: *Self, allocator: std.mem.Allocator, input: list_managed_data_identifiers.ListManagedDataIdentifiersInput, options: list_managed_data_identifiers.Options) !list_managed_data_identifiers.ListManagedDataIdentifiersOutput {
+    pub fn listManagedDataIdentifiers(self: *Self, allocator: std.mem.Allocator, input: list_managed_data_identifiers.ListManagedDataIdentifiersInput, options: CallOptions) !list_managed_data_identifiers.ListManagedDataIdentifiersOutput {
         return list_managed_data_identifiers.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the accounts that are associated with an Amazon
     /// Macie administrator account.
-    pub fn listMembers(self: *Self, allocator: std.mem.Allocator, input: list_members.ListMembersInput, options: list_members.Options) !list_members.ListMembersOutput {
+    pub fn listMembers(self: *Self, allocator: std.mem.Allocator, input: list_members.ListMembersInput, options: CallOptions) !list_members.ListMembersOutput {
         return list_members.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the delegated Amazon Macie administrator account
     /// for an organization in Organizations.
-    pub fn listOrganizationAdminAccounts(self: *Self, allocator: std.mem.Allocator, input: list_organization_admin_accounts.ListOrganizationAdminAccountsInput, options: list_organization_admin_accounts.Options) !list_organization_admin_accounts.ListOrganizationAdminAccountsOutput {
+    pub fn listOrganizationAdminAccounts(self: *Self, allocator: std.mem.Allocator, input: list_organization_admin_accounts.ListOrganizationAdminAccountsInput, options: CallOptions) !list_organization_admin_accounts.ListOrganizationAdminAccountsOutput {
         return list_organization_admin_accounts.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about objects that Amazon Macie selected from an S3
     /// bucket for automated sensitive data discovery.
-    pub fn listResourceProfileArtifacts(self: *Self, allocator: std.mem.Allocator, input: list_resource_profile_artifacts.ListResourceProfileArtifactsInput, options: list_resource_profile_artifacts.Options) !list_resource_profile_artifacts.ListResourceProfileArtifactsOutput {
+    pub fn listResourceProfileArtifacts(self: *Self, allocator: std.mem.Allocator, input: list_resource_profile_artifacts.ListResourceProfileArtifactsInput, options: CallOptions) !list_resource_profile_artifacts.ListResourceProfileArtifactsOutput {
         return list_resource_profile_artifacts.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the types and amount of sensitive data that
     /// Amazon Macie found in an S3 bucket.
-    pub fn listResourceProfileDetections(self: *Self, allocator: std.mem.Allocator, input: list_resource_profile_detections.ListResourceProfileDetectionsInput, options: list_resource_profile_detections.Options) !list_resource_profile_detections.ListResourceProfileDetectionsOutput {
+    pub fn listResourceProfileDetections(self: *Self, allocator: std.mem.Allocator, input: list_resource_profile_detections.ListResourceProfileDetectionsInput, options: CallOptions) !list_resource_profile_detections.ListResourceProfileDetectionsOutput {
         return list_resource_profile_detections.execute(self, allocator, input, options);
     }
 
     /// Retrieves a subset of information about the sensitivity inspection template
     /// for an account.
-    pub fn listSensitivityInspectionTemplates(self: *Self, allocator: std.mem.Allocator, input: list_sensitivity_inspection_templates.ListSensitivityInspectionTemplatesInput, options: list_sensitivity_inspection_templates.Options) !list_sensitivity_inspection_templates.ListSensitivityInspectionTemplatesOutput {
+    pub fn listSensitivityInspectionTemplates(self: *Self, allocator: std.mem.Allocator, input: list_sensitivity_inspection_templates.ListSensitivityInspectionTemplatesInput, options: CallOptions) !list_sensitivity_inspection_templates.ListSensitivityInspectionTemplatesOutput {
         return list_sensitivity_inspection_templates.execute(self, allocator, input, options);
     }
 
     /// Retrieves the tags (keys and values) that are associated with an Amazon
     /// Macie resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Adds or updates the configuration settings for storing data classification
     /// results.
-    pub fn putClassificationExportConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_classification_export_configuration.PutClassificationExportConfigurationInput, options: put_classification_export_configuration.Options) !put_classification_export_configuration.PutClassificationExportConfigurationOutput {
+    pub fn putClassificationExportConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_classification_export_configuration.PutClassificationExportConfigurationInput, options: CallOptions) !put_classification_export_configuration.PutClassificationExportConfigurationOutput {
         return put_classification_export_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration settings for publishing findings to Security Hub.
-    pub fn putFindingsPublicationConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_findings_publication_configuration.PutFindingsPublicationConfigurationInput, options: put_findings_publication_configuration.Options) !put_findings_publication_configuration.PutFindingsPublicationConfigurationOutput {
+    pub fn putFindingsPublicationConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_findings_publication_configuration.PutFindingsPublicationConfigurationInput, options: CallOptions) !put_findings_publication_configuration.PutFindingsPublicationConfigurationOutput {
         return put_findings_publication_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves (queries) statistical data and other information about Amazon Web
     /// Services resources that Amazon Macie monitors and analyzes for an account.
-    pub fn searchResources(self: *Self, allocator: std.mem.Allocator, input: search_resources.SearchResourcesInput, options: search_resources.Options) !search_resources.SearchResourcesOutput {
+    pub fn searchResources(self: *Self, allocator: std.mem.Allocator, input: search_resources.SearchResourcesInput, options: CallOptions) !search_resources.SearchResourcesOutput {
         return search_resources.execute(self, allocator, input, options);
     }
 
     /// Adds or updates one or more tags (keys and values) that are associated with
     /// an Amazon Macie resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Tests criteria for a custom data identifier.
-    pub fn testCustomDataIdentifier(self: *Self, allocator: std.mem.Allocator, input: test_custom_data_identifier.TestCustomDataIdentifierInput, options: test_custom_data_identifier.Options) !test_custom_data_identifier.TestCustomDataIdentifierOutput {
+    pub fn testCustomDataIdentifier(self: *Self, allocator: std.mem.Allocator, input: test_custom_data_identifier.TestCustomDataIdentifierInput, options: CallOptions) !test_custom_data_identifier.TestCustomDataIdentifierOutput {
         return test_custom_data_identifier.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags (keys and values) from an Amazon Macie resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the settings for an allow list.
-    pub fn updateAllowList(self: *Self, allocator: std.mem.Allocator, input: update_allow_list.UpdateAllowListInput, options: update_allow_list.Options) !update_allow_list.UpdateAllowListOutput {
+    pub fn updateAllowList(self: *Self, allocator: std.mem.Allocator, input: update_allow_list.UpdateAllowListInput, options: CallOptions) !update_allow_list.UpdateAllowListOutput {
         return update_allow_list.execute(self, allocator, input, options);
     }
 
     /// Changes the configuration settings and status of automated sensitive data
     /// discovery for an organization or standalone account.
-    pub fn updateAutomatedDiscoveryConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_automated_discovery_configuration.UpdateAutomatedDiscoveryConfigurationInput, options: update_automated_discovery_configuration.Options) !update_automated_discovery_configuration.UpdateAutomatedDiscoveryConfigurationOutput {
+    pub fn updateAutomatedDiscoveryConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_automated_discovery_configuration.UpdateAutomatedDiscoveryConfigurationInput, options: CallOptions) !update_automated_discovery_configuration.UpdateAutomatedDiscoveryConfigurationOutput {
         return update_automated_discovery_configuration.execute(self, allocator, input, options);
     }
 
     /// Changes the status of a classification job.
-    pub fn updateClassificationJob(self: *Self, allocator: std.mem.Allocator, input: update_classification_job.UpdateClassificationJobInput, options: update_classification_job.Options) !update_classification_job.UpdateClassificationJobOutput {
+    pub fn updateClassificationJob(self: *Self, allocator: std.mem.Allocator, input: update_classification_job.UpdateClassificationJobInput, options: CallOptions) !update_classification_job.UpdateClassificationJobOutput {
         return update_classification_job.execute(self, allocator, input, options);
     }
 
     /// Updates the classification scope settings for an account.
-    pub fn updateClassificationScope(self: *Self, allocator: std.mem.Allocator, input: update_classification_scope.UpdateClassificationScopeInput, options: update_classification_scope.Options) !update_classification_scope.UpdateClassificationScopeOutput {
+    pub fn updateClassificationScope(self: *Self, allocator: std.mem.Allocator, input: update_classification_scope.UpdateClassificationScopeInput, options: CallOptions) !update_classification_scope.UpdateClassificationScopeOutput {
         return update_classification_scope.execute(self, allocator, input, options);
     }
 
     /// Updates the criteria and other settings for a findings filter.
-    pub fn updateFindingsFilter(self: *Self, allocator: std.mem.Allocator, input: update_findings_filter.UpdateFindingsFilterInput, options: update_findings_filter.Options) !update_findings_filter.UpdateFindingsFilterOutput {
+    pub fn updateFindingsFilter(self: *Self, allocator: std.mem.Allocator, input: update_findings_filter.UpdateFindingsFilterInput, options: CallOptions) !update_findings_filter.UpdateFindingsFilterOutput {
         return update_findings_filter.execute(self, allocator, input, options);
     }
 
     /// Suspends or re-enables Amazon Macie, or updates the configuration settings
     /// for a Macie account.
-    pub fn updateMacieSession(self: *Self, allocator: std.mem.Allocator, input: update_macie_session.UpdateMacieSessionInput, options: update_macie_session.Options) !update_macie_session.UpdateMacieSessionOutput {
+    pub fn updateMacieSession(self: *Self, allocator: std.mem.Allocator, input: update_macie_session.UpdateMacieSessionInput, options: CallOptions) !update_macie_session.UpdateMacieSessionOutput {
         return update_macie_session.execute(self, allocator, input, options);
     }
 
     /// Enables an Amazon Macie administrator to suspend or re-enable Macie for a
     /// member account.
-    pub fn updateMemberSession(self: *Self, allocator: std.mem.Allocator, input: update_member_session.UpdateMemberSessionInput, options: update_member_session.Options) !update_member_session.UpdateMemberSessionOutput {
+    pub fn updateMemberSession(self: *Self, allocator: std.mem.Allocator, input: update_member_session.UpdateMemberSessionInput, options: CallOptions) !update_member_session.UpdateMemberSessionOutput {
         return update_member_session.execute(self, allocator, input, options);
     }
 
     /// Updates the Amazon Macie configuration settings for an organization in
     /// Organizations.
-    pub fn updateOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_organization_configuration.UpdateOrganizationConfigurationInput, options: update_organization_configuration.Options) !update_organization_configuration.UpdateOrganizationConfigurationOutput {
+    pub fn updateOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_organization_configuration.UpdateOrganizationConfigurationInput, options: CallOptions) !update_organization_configuration.UpdateOrganizationConfigurationOutput {
         return update_organization_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the sensitivity score for an S3 bucket.
-    pub fn updateResourceProfile(self: *Self, allocator: std.mem.Allocator, input: update_resource_profile.UpdateResourceProfileInput, options: update_resource_profile.Options) !update_resource_profile.UpdateResourceProfileOutput {
+    pub fn updateResourceProfile(self: *Self, allocator: std.mem.Allocator, input: update_resource_profile.UpdateResourceProfileInput, options: CallOptions) !update_resource_profile.UpdateResourceProfileOutput {
         return update_resource_profile.execute(self, allocator, input, options);
     }
 
     /// Updates the sensitivity scoring settings for an S3 bucket.
-    pub fn updateResourceProfileDetections(self: *Self, allocator: std.mem.Allocator, input: update_resource_profile_detections.UpdateResourceProfileDetectionsInput, options: update_resource_profile_detections.Options) !update_resource_profile_detections.UpdateResourceProfileDetectionsOutput {
+    pub fn updateResourceProfileDetections(self: *Self, allocator: std.mem.Allocator, input: update_resource_profile_detections.UpdateResourceProfileDetectionsInput, options: CallOptions) !update_resource_profile_detections.UpdateResourceProfileDetectionsOutput {
         return update_resource_profile_detections.execute(self, allocator, input, options);
     }
 
     /// Updates the status and configuration settings for retrieving occurrences of
     /// sensitive data reported by findings.
-    pub fn updateRevealConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_reveal_configuration.UpdateRevealConfigurationInput, options: update_reveal_configuration.Options) !update_reveal_configuration.UpdateRevealConfigurationOutput {
+    pub fn updateRevealConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_reveal_configuration.UpdateRevealConfigurationInput, options: CallOptions) !update_reveal_configuration.UpdateRevealConfigurationOutput {
         return update_reveal_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the settings for the sensitivity inspection template for an account.
-    pub fn updateSensitivityInspectionTemplate(self: *Self, allocator: std.mem.Allocator, input: update_sensitivity_inspection_template.UpdateSensitivityInspectionTemplateInput, options: update_sensitivity_inspection_template.Options) !update_sensitivity_inspection_template.UpdateSensitivityInspectionTemplateOutput {
+    pub fn updateSensitivityInspectionTemplate(self: *Self, allocator: std.mem.Allocator, input: update_sensitivity_inspection_template.UpdateSensitivityInspectionTemplateInput, options: CallOptions) !update_sensitivity_inspection_template.UpdateSensitivityInspectionTemplateOutput {
         return update_sensitivity_inspection_template.execute(self, allocator, input, options);
     }
 

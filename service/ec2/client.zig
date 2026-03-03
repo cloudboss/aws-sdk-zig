@@ -750,6 +750,7 @@ const update_interruptible_capacity_reservation_allocation = @import("update_int
 const update_security_group_rule_descriptions_egress = @import("update_security_group_rule_descriptions_egress.zig");
 const update_security_group_rule_descriptions_ingress = @import("update_security_group_rule_descriptions_ingress.zig");
 const withdraw_byoip_cidr = @import("withdraw_byoip_cidr.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -784,7 +785,7 @@ pub const Client = struct {
     /// Accepts an Elastic IP address transfer. For more information, see [Accept a
     /// transferred Elastic IP
     /// address](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#using-instance-addressing-eips-transfer-accept) in the *Amazon VPC User Guide*.
-    pub fn acceptAddressTransfer(self: *Self, allocator: std.mem.Allocator, input: accept_address_transfer.AcceptAddressTransferInput, options: accept_address_transfer.Options) !accept_address_transfer.AcceptAddressTransferOutput {
+    pub fn acceptAddressTransfer(self: *Self, allocator: std.mem.Allocator, input: accept_address_transfer.AcceptAddressTransferInput, options: CallOptions) !accept_address_transfer.AcceptAddressTransferOutput {
         return accept_address_transfer.execute(self, allocator, input, options);
     }
 
@@ -794,26 +795,26 @@ pub const Client = struct {
     /// for shared
     /// Amazon EC2 Capacity
     /// Reservations](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/assign-billing.html).
-    pub fn acceptCapacityReservationBillingOwnership(self: *Self, allocator: std.mem.Allocator, input: accept_capacity_reservation_billing_ownership.AcceptCapacityReservationBillingOwnershipInput, options: accept_capacity_reservation_billing_ownership.Options) !accept_capacity_reservation_billing_ownership.AcceptCapacityReservationBillingOwnershipOutput {
+    pub fn acceptCapacityReservationBillingOwnership(self: *Self, allocator: std.mem.Allocator, input: accept_capacity_reservation_billing_ownership.AcceptCapacityReservationBillingOwnershipInput, options: CallOptions) !accept_capacity_reservation_billing_ownership.AcceptCapacityReservationBillingOwnershipOutput {
         return accept_capacity_reservation_billing_ownership.execute(self, allocator, input, options);
     }
 
     /// Accepts the Convertible Reserved Instance exchange quote described in the
     /// GetReservedInstancesExchangeQuote call.
-    pub fn acceptReservedInstancesExchangeQuote(self: *Self, allocator: std.mem.Allocator, input: accept_reserved_instances_exchange_quote.AcceptReservedInstancesExchangeQuoteInput, options: accept_reserved_instances_exchange_quote.Options) !accept_reserved_instances_exchange_quote.AcceptReservedInstancesExchangeQuoteOutput {
+    pub fn acceptReservedInstancesExchangeQuote(self: *Self, allocator: std.mem.Allocator, input: accept_reserved_instances_exchange_quote.AcceptReservedInstancesExchangeQuoteInput, options: CallOptions) !accept_reserved_instances_exchange_quote.AcceptReservedInstancesExchangeQuoteOutput {
         return accept_reserved_instances_exchange_quote.execute(self, allocator, input, options);
     }
 
     /// Accepts a request to associate subnets with a transit gateway multicast
     /// domain.
-    pub fn acceptTransitGatewayMulticastDomainAssociations(self: *Self, allocator: std.mem.Allocator, input: accept_transit_gateway_multicast_domain_associations.AcceptTransitGatewayMulticastDomainAssociationsInput, options: accept_transit_gateway_multicast_domain_associations.Options) !accept_transit_gateway_multicast_domain_associations.AcceptTransitGatewayMulticastDomainAssociationsOutput {
+    pub fn acceptTransitGatewayMulticastDomainAssociations(self: *Self, allocator: std.mem.Allocator, input: accept_transit_gateway_multicast_domain_associations.AcceptTransitGatewayMulticastDomainAssociationsInput, options: CallOptions) !accept_transit_gateway_multicast_domain_associations.AcceptTransitGatewayMulticastDomainAssociationsOutput {
         return accept_transit_gateway_multicast_domain_associations.execute(self, allocator, input, options);
     }
 
     /// Accepts a transit gateway peering attachment request. The peering attachment
     /// must be
     /// in the `pendingAcceptance` state.
-    pub fn acceptTransitGatewayPeeringAttachment(self: *Self, allocator: std.mem.Allocator, input: accept_transit_gateway_peering_attachment.AcceptTransitGatewayPeeringAttachmentInput, options: accept_transit_gateway_peering_attachment.Options) !accept_transit_gateway_peering_attachment.AcceptTransitGatewayPeeringAttachmentOutput {
+    pub fn acceptTransitGatewayPeeringAttachment(self: *Self, allocator: std.mem.Allocator, input: accept_transit_gateway_peering_attachment.AcceptTransitGatewayPeeringAttachmentInput, options: CallOptions) !accept_transit_gateway_peering_attachment.AcceptTransitGatewayPeeringAttachmentOutput {
         return accept_transit_gateway_peering_attachment.execute(self, allocator, input, options);
     }
 
@@ -823,12 +824,12 @@ pub const Client = struct {
     /// Use DescribeTransitGatewayVpcAttachments to view your pending VPC attachment
     /// requests.
     /// Use RejectTransitGatewayVpcAttachment to reject a VPC attachment request.
-    pub fn acceptTransitGatewayVpcAttachment(self: *Self, allocator: std.mem.Allocator, input: accept_transit_gateway_vpc_attachment.AcceptTransitGatewayVpcAttachmentInput, options: accept_transit_gateway_vpc_attachment.Options) !accept_transit_gateway_vpc_attachment.AcceptTransitGatewayVpcAttachmentOutput {
+    pub fn acceptTransitGatewayVpcAttachment(self: *Self, allocator: std.mem.Allocator, input: accept_transit_gateway_vpc_attachment.AcceptTransitGatewayVpcAttachmentInput, options: CallOptions) !accept_transit_gateway_vpc_attachment.AcceptTransitGatewayVpcAttachmentOutput {
         return accept_transit_gateway_vpc_attachment.execute(self, allocator, input, options);
     }
 
     /// Accepts connection requests to your VPC endpoint service.
-    pub fn acceptVpcEndpointConnections(self: *Self, allocator: std.mem.Allocator, input: accept_vpc_endpoint_connections.AcceptVpcEndpointConnectionsInput, options: accept_vpc_endpoint_connections.Options) !accept_vpc_endpoint_connections.AcceptVpcEndpointConnectionsOutput {
+    pub fn acceptVpcEndpointConnections(self: *Self, allocator: std.mem.Allocator, input: accept_vpc_endpoint_connections.AcceptVpcEndpointConnectionsInput, options: CallOptions) !accept_vpc_endpoint_connections.AcceptVpcEndpointConnectionsOutput {
         return accept_vpc_endpoint_connections.execute(self, allocator, input, options);
     }
 
@@ -842,7 +843,7 @@ pub const Client = struct {
     /// For an inter-Region VPC peering connection request, you must accept the VPC
     /// peering
     /// connection in the Region of the accepter VPC.
-    pub fn acceptVpcPeeringConnection(self: *Self, allocator: std.mem.Allocator, input: accept_vpc_peering_connection.AcceptVpcPeeringConnectionInput, options: accept_vpc_peering_connection.Options) !accept_vpc_peering_connection.AcceptVpcPeeringConnectionOutput {
+    pub fn acceptVpcPeeringConnection(self: *Self, allocator: std.mem.Allocator, input: accept_vpc_peering_connection.AcceptVpcPeeringConnectionInput, options: CallOptions) !accept_vpc_peering_connection.AcceptVpcPeeringConnectionOutput {
         return accept_vpc_peering_connection.execute(self, allocator, input, options);
     }
 
@@ -865,7 +866,7 @@ pub const Client = struct {
     /// It can take a few minutes before traffic to the specified addresses starts
     /// routing to Amazon Web Services
     /// because of BGP propagation delays.
-    pub fn advertiseByoipCidr(self: *Self, allocator: std.mem.Allocator, input: advertise_byoip_cidr.AdvertiseByoipCidrInput, options: advertise_byoip_cidr.Options) !advertise_byoip_cidr.AdvertiseByoipCidrOutput {
+    pub fn advertiseByoipCidr(self: *Self, allocator: std.mem.Allocator, input: advertise_byoip_cidr.AdvertiseByoipCidrInput, options: CallOptions) !advertise_byoip_cidr.AdvertiseByoipCidrOutput {
         return advertise_byoip_cidr.execute(self, allocator, input, options);
     }
 
@@ -907,7 +908,7 @@ pub const Client = struct {
     /// telecommunication carrier,
     /// to a network interface which resides in a subnet in a Wavelength Zone (for
     /// example an EC2 instance).
-    pub fn allocateAddress(self: *Self, allocator: std.mem.Allocator, input: allocate_address.AllocateAddressInput, options: allocate_address.Options) !allocate_address.AllocateAddressOutput {
+    pub fn allocateAddress(self: *Self, allocator: std.mem.Allocator, input: allocate_address.AllocateAddressInput, options: CallOptions) !allocate_address.AllocateAddressOutput {
         return allocate_address.execute(self, allocator, input, options);
     }
 
@@ -916,7 +917,7 @@ pub const Client = struct {
     /// instance type or instance family, the Availability Zone in which to allocate
     /// the host,
     /// and the number of hosts to allocate.
-    pub fn allocateHosts(self: *Self, allocator: std.mem.Allocator, input: allocate_hosts.AllocateHostsInput, options: allocate_hosts.Options) !allocate_hosts.AllocateHostsOutput {
+    pub fn allocateHosts(self: *Self, allocator: std.mem.Allocator, input: allocate_hosts.AllocateHostsInput, options: CallOptions) !allocate_hosts.AllocateHostsOutput {
         return allocate_hosts.execute(self, allocator, input, options);
     }
 
@@ -931,14 +932,14 @@ pub const Client = struct {
     ///
     /// This action creates an allocation with strong consistency. The returned CIDR
     /// will not overlap with any other allocations from the same pool.
-    pub fn allocateIpamPoolCidr(self: *Self, allocator: std.mem.Allocator, input: allocate_ipam_pool_cidr.AllocateIpamPoolCidrInput, options: allocate_ipam_pool_cidr.Options) !allocate_ipam_pool_cidr.AllocateIpamPoolCidrOutput {
+    pub fn allocateIpamPoolCidr(self: *Self, allocator: std.mem.Allocator, input: allocate_ipam_pool_cidr.AllocateIpamPoolCidrInput, options: CallOptions) !allocate_ipam_pool_cidr.AllocateIpamPoolCidrOutput {
         return allocate_ipam_pool_cidr.execute(self, allocator, input, options);
     }
 
     /// Applies a security group to the association between the target network and
     /// the Client VPN endpoint. This action replaces the existing
     /// security groups with the specified security groups.
-    pub fn applySecurityGroupsToClientVpnTargetNetwork(self: *Self, allocator: std.mem.Allocator, input: apply_security_groups_to_client_vpn_target_network.ApplySecurityGroupsToClientVpnTargetNetworkInput, options: apply_security_groups_to_client_vpn_target_network.Options) !apply_security_groups_to_client_vpn_target_network.ApplySecurityGroupsToClientVpnTargetNetworkOutput {
+    pub fn applySecurityGroupsToClientVpnTargetNetwork(self: *Self, allocator: std.mem.Allocator, input: apply_security_groups_to_client_vpn_target_network.ApplySecurityGroupsToClientVpnTargetNetworkInput, options: CallOptions) !apply_security_groups_to_client_vpn_target_network.ApplySecurityGroupsToClientVpnTargetNetworkOutput {
         return apply_security_groups_to_client_vpn_target_network.execute(self, allocator, input, options);
     }
 
@@ -961,7 +962,7 @@ pub const Client = struct {
     /// count. For
     /// information, see [ Assigning prefixes to network
     /// interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html) in the *Amazon EC2 User Guide*.
-    pub fn assignIpv6Addresses(self: *Self, allocator: std.mem.Allocator, input: assign_ipv_6_addresses.AssignIpv6AddressesInput, options: assign_ipv_6_addresses.Options) !assign_ipv_6_addresses.AssignIpv6AddressesOutput {
+    pub fn assignIpv6Addresses(self: *Self, allocator: std.mem.Allocator, input: assign_ipv_6_addresses.AssignIpv6AddressesInput, options: CallOptions) !assign_ipv_6_addresses.AssignIpv6AddressesOutput {
         return assign_ipv_6_addresses.execute(self, allocator, input, options);
     }
 
@@ -998,7 +999,7 @@ pub const Client = struct {
     /// count. For
     /// information, see [ Assigning prefixes to network
     /// interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html) in the *Amazon EC2 User Guide*.
-    pub fn assignPrivateIpAddresses(self: *Self, allocator: std.mem.Allocator, input: assign_private_ip_addresses.AssignPrivateIpAddressesInput, options: assign_private_ip_addresses.Options) !assign_private_ip_addresses.AssignPrivateIpAddressesOutput {
+    pub fn assignPrivateIpAddresses(self: *Self, allocator: std.mem.Allocator, input: assign_private_ip_addresses.AssignPrivateIpAddressesInput, options: CallOptions) !assign_private_ip_addresses.AssignPrivateIpAddressesOutput {
         return assign_private_ip_addresses.execute(self, allocator, input, options);
     }
 
@@ -1006,7 +1007,7 @@ pub const Client = struct {
     /// information, see
     /// [Work with NAT
     /// gateways](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html) in the *Amazon VPC User Guide*.
-    pub fn assignPrivateNatGatewayAddress(self: *Self, allocator: std.mem.Allocator, input: assign_private_nat_gateway_address.AssignPrivateNatGatewayAddressInput, options: assign_private_nat_gateway_address.Options) !assign_private_nat_gateway_address.AssignPrivateNatGatewayAddressOutput {
+    pub fn assignPrivateNatGatewayAddress(self: *Self, allocator: std.mem.Allocator, input: assign_private_nat_gateway_address.AssignPrivateNatGatewayAddressInput, options: CallOptions) !assign_private_nat_gateway_address.AssignPrivateNatGatewayAddressOutput {
         return assign_private_nat_gateway_address.execute(self, allocator, input, options);
     }
 
@@ -1039,7 +1040,7 @@ pub const Client = struct {
     /// remapped to the same instance. For more information, see the *Elastic IP
     /// Addresses* section of [Amazon EC2
     /// Pricing](http://aws.amazon.com/ec2/pricing/).
-    pub fn associateAddress(self: *Self, allocator: std.mem.Allocator, input: associate_address.AssociateAddressInput, options: associate_address.Options) !associate_address.AssociateAddressOutput {
+    pub fn associateAddress(self: *Self, allocator: std.mem.Allocator, input: associate_address.AssociateAddressInput, options: CallOptions) !associate_address.AssociateAddressOutput {
         return associate_address.execute(self, allocator, input, options);
     }
 
@@ -1051,7 +1052,7 @@ pub const Client = struct {
     /// for shared
     /// Amazon EC2 Capacity
     /// Reservations](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/assign-billing.html).
-    pub fn associateCapacityReservationBillingOwner(self: *Self, allocator: std.mem.Allocator, input: associate_capacity_reservation_billing_owner.AssociateCapacityReservationBillingOwnerInput, options: associate_capacity_reservation_billing_owner.Options) !associate_capacity_reservation_billing_owner.AssociateCapacityReservationBillingOwnerOutput {
+    pub fn associateCapacityReservationBillingOwner(self: *Self, allocator: std.mem.Allocator, input: associate_capacity_reservation_billing_owner.AssociateCapacityReservationBillingOwnerInput, options: CallOptions) !associate_capacity_reservation_billing_owner.AssociateCapacityReservationBillingOwnerOutput {
         return associate_capacity_reservation_billing_owner.execute(self, allocator, input, options);
     }
 
@@ -1066,7 +1067,7 @@ pub const Client = struct {
     /// VPC. To specify a subnet that's in a different VPC, you must first modify
     /// the Client VPN endpoint (ModifyClientVpnEndpoint) and change the VPC that's
     /// associated with it.
-    pub fn associateClientVpnTargetNetwork(self: *Self, allocator: std.mem.Allocator, input: associate_client_vpn_target_network.AssociateClientVpnTargetNetworkInput, options: associate_client_vpn_target_network.Options) !associate_client_vpn_target_network.AssociateClientVpnTargetNetworkOutput {
+    pub fn associateClientVpnTargetNetwork(self: *Self, allocator: std.mem.Allocator, input: associate_client_vpn_target_network.AssociateClientVpnTargetNetworkInput, options: CallOptions) !associate_client_vpn_target_network.AssociateClientVpnTargetNetworkOutput {
         return associate_client_vpn_target_network.execute(self, allocator, input, options);
     }
 
@@ -1083,7 +1084,7 @@ pub const Client = struct {
     /// For more information, see [DHCP option
     /// sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)
     /// in the *Amazon VPC User Guide*.
-    pub fn associateDhcpOptions(self: *Self, allocator: std.mem.Allocator, input: associate_dhcp_options.AssociateDhcpOptionsInput, options: associate_dhcp_options.Options) !associate_dhcp_options.AssociateDhcpOptionsOutput {
+    pub fn associateDhcpOptions(self: *Self, allocator: std.mem.Allocator, input: associate_dhcp_options.AssociateDhcpOptionsInput, options: CallOptions) !associate_dhcp_options.AssociateDhcpOptionsOutput {
         return associate_dhcp_options.execute(self, allocator, input, options);
     }
 
@@ -1112,14 +1113,14 @@ pub const Client = struct {
     /// Grant the role permission to access the certificate and encryption
     /// key](https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy) in the
     /// *Amazon Web Services Nitro Enclaves User Guide*.
-    pub fn associateEnclaveCertificateIamRole(self: *Self, allocator: std.mem.Allocator, input: associate_enclave_certificate_iam_role.AssociateEnclaveCertificateIamRoleInput, options: associate_enclave_certificate_iam_role.Options) !associate_enclave_certificate_iam_role.AssociateEnclaveCertificateIamRoleOutput {
+    pub fn associateEnclaveCertificateIamRole(self: *Self, allocator: std.mem.Allocator, input: associate_enclave_certificate_iam_role.AssociateEnclaveCertificateIamRoleInput, options: CallOptions) !associate_enclave_certificate_iam_role.AssociateEnclaveCertificateIamRoleOutput {
         return associate_enclave_certificate_iam_role.execute(self, allocator, input, options);
     }
 
     /// Associates an IAM instance profile with a running or stopped instance. You
     /// cannot
     /// associate more than one IAM instance profile with an instance.
-    pub fn associateIamInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: associate_iam_instance_profile.AssociateIamInstanceProfileInput, options: associate_iam_instance_profile.Options) !associate_iam_instance_profile.AssociateIamInstanceProfileOutput {
+    pub fn associateIamInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: associate_iam_instance_profile.AssociateIamInstanceProfileInput, options: CallOptions) !associate_iam_instance_profile.AssociateIamInstanceProfileOutput {
         return associate_iam_instance_profile.execute(self, allocator, input, options);
     }
 
@@ -1129,7 +1130,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Define event windows for scheduled
     /// events](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html) in the *Amazon EC2 User Guide*.
-    pub fn associateInstanceEventWindow(self: *Self, allocator: std.mem.Allocator, input: associate_instance_event_window.AssociateInstanceEventWindowInput, options: associate_instance_event_window.Options) !associate_instance_event_window.AssociateInstanceEventWindowOutput {
+    pub fn associateInstanceEventWindow(self: *Self, allocator: std.mem.Allocator, input: associate_instance_event_window.AssociateInstanceEventWindowInput, options: CallOptions) !associate_instance_event_window.AssociateInstanceEventWindowOutput {
         return associate_instance_event_window.execute(self, allocator, input, options);
     }
 
@@ -1142,14 +1143,14 @@ pub const Client = struct {
     /// After the association succeeds, the ASN is eligible for
     /// advertisement. You can view the association with
     /// [DescribeByoipCidrs](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeByoipCidrs.html). You can advertise the CIDR with [AdvertiseByoipCidr](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AdvertiseByoipCidr.html).
-    pub fn associateIpamByoasn(self: *Self, allocator: std.mem.Allocator, input: associate_ipam_byoasn.AssociateIpamByoasnInput, options: associate_ipam_byoasn.Options) !associate_ipam_byoasn.AssociateIpamByoasnOutput {
+    pub fn associateIpamByoasn(self: *Self, allocator: std.mem.Allocator, input: associate_ipam_byoasn.AssociateIpamByoasnInput, options: CallOptions) !associate_ipam_byoasn.AssociateIpamByoasnOutput {
         return associate_ipam_byoasn.execute(self, allocator, input, options);
     }
 
     /// Associates an IPAM resource discovery with an Amazon VPC IPAM. A resource
     /// discovery is an IPAM component that enables IPAM to manage and monitor
     /// resources that belong to the owning account.
-    pub fn associateIpamResourceDiscovery(self: *Self, allocator: std.mem.Allocator, input: associate_ipam_resource_discovery.AssociateIpamResourceDiscoveryInput, options: associate_ipam_resource_discovery.Options) !associate_ipam_resource_discovery.AssociateIpamResourceDiscoveryOutput {
+    pub fn associateIpamResourceDiscovery(self: *Self, allocator: std.mem.Allocator, input: associate_ipam_resource_discovery.AssociateIpamResourceDiscoveryInput, options: CallOptions) !associate_ipam_resource_discovery.AssociateIpamResourceDiscoveryOutput {
         return associate_ipam_resource_discovery.execute(self, allocator, input, options);
     }
 
@@ -1174,7 +1175,7 @@ pub const Client = struct {
     /// about network border groups and EIPs, see [Allocate an Elastic IP
     /// address](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html)
     /// in the *Amazon VPC User Guide*.
-    pub fn associateNatGatewayAddress(self: *Self, allocator: std.mem.Allocator, input: associate_nat_gateway_address.AssociateNatGatewayAddressInput, options: associate_nat_gateway_address.Options) !associate_nat_gateway_address.AssociateNatGatewayAddressOutput {
+    pub fn associateNatGatewayAddress(self: *Self, allocator: std.mem.Allocator, input: associate_nat_gateway_address.AssociateNatGatewayAddressInput, options: CallOptions) !associate_nat_gateway_address.AssociateNatGatewayAddressOutput {
         return associate_nat_gateway_address.execute(self, allocator, input, options);
     }
 
@@ -1185,7 +1186,7 @@ pub const Client = struct {
     ///
     /// For more information see [Dynamic routing in your VPC with VPC Route
     /// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
-    pub fn associateRouteServer(self: *Self, allocator: std.mem.Allocator, input: associate_route_server.AssociateRouteServerInput, options: associate_route_server.Options) !associate_route_server.AssociateRouteServerOutput {
+    pub fn associateRouteServer(self: *Self, allocator: std.mem.Allocator, input: associate_route_server.AssociateRouteServerInput, options: CallOptions) !associate_route_server.AssociateRouteServerOutput {
         return associate_route_server.execute(self, allocator, input, options);
     }
 
@@ -1202,7 +1203,7 @@ pub const Client = struct {
     /// For more information, see [Route
     /// tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) in the
     /// *Amazon VPC User Guide*.
-    pub fn associateRouteTable(self: *Self, allocator: std.mem.Allocator, input: associate_route_table.AssociateRouteTableInput, options: associate_route_table.Options) !associate_route_table.AssociateRouteTableOutput {
+    pub fn associateRouteTable(self: *Self, allocator: std.mem.Allocator, input: associate_route_table.AssociateRouteTableInput, options: CallOptions) !associate_route_table.AssociateRouteTableOutput {
         return associate_route_table.execute(self, allocator, input, options);
     }
 
@@ -1221,14 +1222,14 @@ pub const Client = struct {
     /// * You cannot use this feature with default security groups.
     ///
     /// * You cannot use this feature with the default VPC.
-    pub fn associateSecurityGroupVpc(self: *Self, allocator: std.mem.Allocator, input: associate_security_group_vpc.AssociateSecurityGroupVpcInput, options: associate_security_group_vpc.Options) !associate_security_group_vpc.AssociateSecurityGroupVpcOutput {
+    pub fn associateSecurityGroupVpc(self: *Self, allocator: std.mem.Allocator, input: associate_security_group_vpc.AssociateSecurityGroupVpcInput, options: CallOptions) !associate_security_group_vpc.AssociateSecurityGroupVpcOutput {
         return associate_security_group_vpc.execute(self, allocator, input, options);
     }
 
     /// Associates a CIDR block with your subnet. You can only associate a single
     /// IPv6 CIDR
     /// block with your subnet.
-    pub fn associateSubnetCidrBlock(self: *Self, allocator: std.mem.Allocator, input: associate_subnet_cidr_block.AssociateSubnetCidrBlockInput, options: associate_subnet_cidr_block.Options) !associate_subnet_cidr_block.AssociateSubnetCidrBlockOutput {
+    pub fn associateSubnetCidrBlock(self: *Self, allocator: std.mem.Allocator, input: associate_subnet_cidr_block.AssociateSubnetCidrBlockInput, options: CallOptions) !associate_subnet_cidr_block.AssociateSubnetCidrBlockOutput {
         return associate_subnet_cidr_block.execute(self, allocator, input, options);
     }
 
@@ -1239,20 +1240,20 @@ pub const Client = struct {
     /// add a resource. Use
     /// [DescribeTransitGatewayAttachments](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGatewayAttachments.html)
     /// to see the state of the attachment.
-    pub fn associateTransitGatewayMulticastDomain(self: *Self, allocator: std.mem.Allocator, input: associate_transit_gateway_multicast_domain.AssociateTransitGatewayMulticastDomainInput, options: associate_transit_gateway_multicast_domain.Options) !associate_transit_gateway_multicast_domain.AssociateTransitGatewayMulticastDomainOutput {
+    pub fn associateTransitGatewayMulticastDomain(self: *Self, allocator: std.mem.Allocator, input: associate_transit_gateway_multicast_domain.AssociateTransitGatewayMulticastDomainInput, options: CallOptions) !associate_transit_gateway_multicast_domain.AssociateTransitGatewayMulticastDomainOutput {
         return associate_transit_gateway_multicast_domain.execute(self, allocator, input, options);
     }
 
     /// Associates the specified transit gateway attachment with a transit gateway
     /// policy table.
-    pub fn associateTransitGatewayPolicyTable(self: *Self, allocator: std.mem.Allocator, input: associate_transit_gateway_policy_table.AssociateTransitGatewayPolicyTableInput, options: associate_transit_gateway_policy_table.Options) !associate_transit_gateway_policy_table.AssociateTransitGatewayPolicyTableOutput {
+    pub fn associateTransitGatewayPolicyTable(self: *Self, allocator: std.mem.Allocator, input: associate_transit_gateway_policy_table.AssociateTransitGatewayPolicyTableInput, options: CallOptions) !associate_transit_gateway_policy_table.AssociateTransitGatewayPolicyTableOutput {
         return associate_transit_gateway_policy_table.execute(self, allocator, input, options);
     }
 
     /// Associates the specified attachment with the specified transit gateway route
     /// table. You can
     /// associate only one route table with an attachment.
-    pub fn associateTransitGatewayRouteTable(self: *Self, allocator: std.mem.Allocator, input: associate_transit_gateway_route_table.AssociateTransitGatewayRouteTableInput, options: associate_transit_gateway_route_table.Options) !associate_transit_gateway_route_table.AssociateTransitGatewayRouteTableOutput {
+    pub fn associateTransitGatewayRouteTable(self: *Self, allocator: std.mem.Allocator, input: associate_transit_gateway_route_table.AssociateTransitGatewayRouteTableInput, options: CallOptions) !associate_transit_gateway_route_table.AssociateTransitGatewayRouteTableOutput {
         return associate_transit_gateway_route_table.execute(self, allocator, input, options);
     }
 
@@ -1263,7 +1264,7 @@ pub const Client = struct {
     /// to `trunk`. You must also create a network interface for
     /// each branch network interface that you want to associate with the trunk
     /// network interface.
-    pub fn associateTrunkInterface(self: *Self, allocator: std.mem.Allocator, input: associate_trunk_interface.AssociateTrunkInterfaceInput, options: associate_trunk_interface.Options) !associate_trunk_interface.AssociateTrunkInterfaceOutput {
+    pub fn associateTrunkInterface(self: *Self, allocator: std.mem.Allocator, input: associate_trunk_interface.AssociateTrunkInterfaceInput, options: CallOptions) !associate_trunk_interface.AssociateTrunkInterfaceOutput {
         return associate_trunk_interface.execute(self, allocator, input, options);
     }
 
@@ -1283,7 +1284,7 @@ pub const Client = struct {
     /// restrictions, see [IP addressing for your VPCs and
     /// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html)
     /// in the *Amazon VPC User Guide*.
-    pub fn associateVpcCidrBlock(self: *Self, allocator: std.mem.Allocator, input: associate_vpc_cidr_block.AssociateVpcCidrBlockInput, options: associate_vpc_cidr_block.Options) !associate_vpc_cidr_block.AssociateVpcCidrBlockOutput {
+    pub fn associateVpcCidrBlock(self: *Self, allocator: std.mem.Allocator, input: associate_vpc_cidr_block.AssociateVpcCidrBlockInput, options: CallOptions) !associate_vpc_cidr_block.AssociateVpcCidrBlockOutput {
         return associate_vpc_cidr_block.execute(self, allocator, input, options);
     }
 
@@ -1304,7 +1305,7 @@ pub const Client = struct {
     ///
     /// Linking your instance to a VPC is sometimes referred to as *attaching* your
     /// instance.
-    pub fn attachClassicLinkVpc(self: *Self, allocator: std.mem.Allocator, input: attach_classic_link_vpc.AttachClassicLinkVpcInput, options: attach_classic_link_vpc.Options) !attach_classic_link_vpc.AttachClassicLinkVpcOutput {
+    pub fn attachClassicLinkVpc(self: *Self, allocator: std.mem.Allocator, input: attach_classic_link_vpc.AttachClassicLinkVpcInput, options: CallOptions) !attach_classic_link_vpc.AttachClassicLinkVpcOutput {
         return attach_classic_link_vpc.execute(self, allocator, input, options);
     }
 
@@ -1313,18 +1314,18 @@ pub const Client = struct {
     /// between the internet and the VPC. For more information, see [Internet
     /// gateways](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) in the
     /// *Amazon VPC User Guide*.
-    pub fn attachInternetGateway(self: *Self, allocator: std.mem.Allocator, input: attach_internet_gateway.AttachInternetGatewayInput, options: attach_internet_gateway.Options) !attach_internet_gateway.AttachInternetGatewayOutput {
+    pub fn attachInternetGateway(self: *Self, allocator: std.mem.Allocator, input: attach_internet_gateway.AttachInternetGatewayInput, options: CallOptions) !attach_internet_gateway.AttachInternetGatewayOutput {
         return attach_internet_gateway.execute(self, allocator, input, options);
     }
 
     /// Attaches a network interface to an instance.
-    pub fn attachNetworkInterface(self: *Self, allocator: std.mem.Allocator, input: attach_network_interface.AttachNetworkInterfaceInput, options: attach_network_interface.Options) !attach_network_interface.AttachNetworkInterfaceOutput {
+    pub fn attachNetworkInterface(self: *Self, allocator: std.mem.Allocator, input: attach_network_interface.AttachNetworkInterfaceInput, options: CallOptions) !attach_network_interface.AttachNetworkInterfaceOutput {
         return attach_network_interface.execute(self, allocator, input, options);
     }
 
     /// Attaches the specified Amazon Web Services Verified Access trust provider to
     /// the specified Amazon Web Services Verified Access instance.
-    pub fn attachVerifiedAccessTrustProvider(self: *Self, allocator: std.mem.Allocator, input: attach_verified_access_trust_provider.AttachVerifiedAccessTrustProviderInput, options: attach_verified_access_trust_provider.Options) !attach_verified_access_trust_provider.AttachVerifiedAccessTrustProviderOutput {
+    pub fn attachVerifiedAccessTrustProvider(self: *Self, allocator: std.mem.Allocator, input: attach_verified_access_trust_provider.AttachVerifiedAccessTrustProviderInput, options: CallOptions) !attach_verified_access_trust_provider.AttachVerifiedAccessTrustProviderOutput {
         return attach_verified_access_trust_provider.execute(self, allocator, input, options);
     }
 
@@ -1365,7 +1366,7 @@ pub const Client = struct {
     /// For more information, see [Attach an Amazon EBS volume to an
     /// instance](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-attaching-volume.html) in the
     /// *Amazon EBS User Guide*.
-    pub fn attachVolume(self: *Self, allocator: std.mem.Allocator, input: attach_volume.AttachVolumeInput, options: attach_volume.Options) !attach_volume.AttachVolumeOutput {
+    pub fn attachVolume(self: *Self, allocator: std.mem.Allocator, input: attach_volume.AttachVolumeInput, options: CallOptions) !attach_volume.AttachVolumeOutput {
         return attach_volume.execute(self, allocator, input, options);
     }
 
@@ -1377,7 +1378,7 @@ pub const Client = struct {
     /// VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the
     /// *Amazon Web Services Site-to-Site VPN
     /// User Guide*.
-    pub fn attachVpnGateway(self: *Self, allocator: std.mem.Allocator, input: attach_vpn_gateway.AttachVpnGatewayInput, options: attach_vpn_gateway.Options) !attach_vpn_gateway.AttachVpnGatewayOutput {
+    pub fn attachVpnGateway(self: *Self, allocator: std.mem.Allocator, input: attach_vpn_gateway.AttachVpnGatewayInput, options: CallOptions) !attach_vpn_gateway.AttachVpnGatewayOutput {
         return attach_vpn_gateway.execute(self, allocator, input, options);
     }
 
@@ -1387,7 +1388,7 @@ pub const Client = struct {
     /// authorization rules to
     /// enable clients to access resources in Amazon Web Services or on-premises
     /// networks.
-    pub fn authorizeClientVpnIngress(self: *Self, allocator: std.mem.Allocator, input: authorize_client_vpn_ingress.AuthorizeClientVpnIngressInput, options: authorize_client_vpn_ingress.Options) !authorize_client_vpn_ingress.AuthorizeClientVpnIngressOutput {
+    pub fn authorizeClientVpnIngress(self: *Self, allocator: std.mem.Allocator, input: authorize_client_vpn_ingress.AuthorizeClientVpnIngressInput, options: CallOptions) !authorize_client_vpn_ingress.AuthorizeClientVpnIngressOutput {
         return authorize_client_vpn_ingress.execute(self, allocator, input, options);
     }
 
@@ -1420,7 +1421,7 @@ pub const Client = struct {
     ///
     /// For information about security group quotas, see [Amazon VPC
     /// quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html) in the *Amazon VPC User Guide*.
-    pub fn authorizeSecurityGroupEgress(self: *Self, allocator: std.mem.Allocator, input: authorize_security_group_egress.AuthorizeSecurityGroupEgressInput, options: authorize_security_group_egress.Options) !authorize_security_group_egress.AuthorizeSecurityGroupEgressOutput {
+    pub fn authorizeSecurityGroupEgress(self: *Self, allocator: std.mem.Allocator, input: authorize_security_group_egress.AuthorizeSecurityGroupEgressInput, options: CallOptions) !authorize_security_group_egress.AuthorizeSecurityGroupEgressOutput {
         return authorize_security_group_egress.execute(self, allocator, input, options);
     }
 
@@ -1453,7 +1454,7 @@ pub const Client = struct {
     ///
     /// For more information about security group quotas, see [Amazon VPC
     /// quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html) in the *Amazon VPC User Guide*.
-    pub fn authorizeSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: authorize_security_group_ingress.AuthorizeSecurityGroupIngressInput, options: authorize_security_group_ingress.Options) !authorize_security_group_ingress.AuthorizeSecurityGroupIngressOutput {
+    pub fn authorizeSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: authorize_security_group_ingress.AuthorizeSecurityGroupIngressInput, options: CallOptions) !authorize_security_group_ingress.AuthorizeSecurityGroupIngressOutput {
         return authorize_security_group_ingress.execute(self, allocator, input, options);
     }
 
@@ -1466,12 +1467,12 @@ pub const Client = struct {
     /// This action is not applicable for Linux/Unix instances or Windows instances
     /// that are
     /// backed by Amazon EBS.
-    pub fn bundleInstance(self: *Self, allocator: std.mem.Allocator, input: bundle_instance.BundleInstanceInput, options: bundle_instance.Options) !bundle_instance.BundleInstanceOutput {
+    pub fn bundleInstance(self: *Self, allocator: std.mem.Allocator, input: bundle_instance.BundleInstanceInput, options: CallOptions) !bundle_instance.BundleInstanceOutput {
         return bundle_instance.execute(self, allocator, input, options);
     }
 
     /// Cancels a bundling operation for an instance store-backed Windows instance.
-    pub fn cancelBundleTask(self: *Self, allocator: std.mem.Allocator, input: cancel_bundle_task.CancelBundleTaskInput, options: cancel_bundle_task.Options) !cancel_bundle_task.CancelBundleTaskOutput {
+    pub fn cancelBundleTask(self: *Self, allocator: std.mem.Allocator, input: cancel_bundle_task.CancelBundleTaskInput, options: CallOptions) !cancel_bundle_task.CancelBundleTaskOutput {
         return cancel_bundle_task.execute(self, allocator, input, options);
     }
 
@@ -1505,7 +1506,7 @@ pub const Client = struct {
     /// Instance capacity, or run in any open Capacity Reservation that has matching
     /// attributes
     /// and sufficient capacity.
-    pub fn cancelCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: cancel_capacity_reservation.CancelCapacityReservationInput, options: cancel_capacity_reservation.Options) !cancel_capacity_reservation.CancelCapacityReservationOutput {
+    pub fn cancelCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: cancel_capacity_reservation.CancelCapacityReservationInput, options: CallOptions) !cancel_capacity_reservation.CancelCapacityReservationOutput {
         return cancel_capacity_reservation.execute(self, allocator, input, options);
     }
 
@@ -1520,7 +1521,7 @@ pub const Client = struct {
     /// continue to run in shared capacity.
     ///
     /// * The Fleet stops creating new Capacity Reservations.
-    pub fn cancelCapacityReservationFleets(self: *Self, allocator: std.mem.Allocator, input: cancel_capacity_reservation_fleets.CancelCapacityReservationFleetsInput, options: cancel_capacity_reservation_fleets.Options) !cancel_capacity_reservation_fleets.CancelCapacityReservationFleetsOutput {
+    pub fn cancelCapacityReservationFleets(self: *Self, allocator: std.mem.Allocator, input: cancel_capacity_reservation_fleets.CancelCapacityReservationFleetsInput, options: CallOptions) !cancel_capacity_reservation_fleets.CancelCapacityReservationFleetsOutput {
         return cancel_capacity_reservation_fleets.execute(self, allocator, input, options);
     }
 
@@ -1530,7 +1531,7 @@ pub const Client = struct {
     /// instance. If the conversion is complete or is
     /// in the process of transferring the final disk image, the command fails and
     /// returns an exception.
-    pub fn cancelConversionTask(self: *Self, allocator: std.mem.Allocator, input: cancel_conversion_task.CancelConversionTaskInput, options: cancel_conversion_task.Options) !cancel_conversion_task.CancelConversionTaskOutput {
+    pub fn cancelConversionTask(self: *Self, allocator: std.mem.Allocator, input: cancel_conversion_task.CancelConversionTaskInput, options: CallOptions) !cancel_conversion_task.CancelConversionTaskOutput {
         return cancel_conversion_task.execute(self, allocator, input, options);
     }
 
@@ -1544,7 +1545,7 @@ pub const Client = struct {
     /// declarative
     /// policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative_status-report.html) in the
     /// *Amazon Web Services Organizations User Guide*.
-    pub fn cancelDeclarativePoliciesReport(self: *Self, allocator: std.mem.Allocator, input: cancel_declarative_policies_report.CancelDeclarativePoliciesReportInput, options: cancel_declarative_policies_report.Options) !cancel_declarative_policies_report.CancelDeclarativePoliciesReportOutput {
+    pub fn cancelDeclarativePoliciesReport(self: *Self, allocator: std.mem.Allocator, input: cancel_declarative_policies_report.CancelDeclarativePoliciesReportInput, options: CallOptions) !cancel_declarative_policies_report.CancelDeclarativePoliciesReportOutput {
         return cancel_declarative_policies_report.execute(self, allocator, input, options);
     }
 
@@ -1553,7 +1554,7 @@ pub const Client = struct {
     /// Amazon S3 objects. If the export task is complete or is in the process of
     /// transferring the final disk image, the
     /// command fails and returns an error.
-    pub fn cancelExportTask(self: *Self, allocator: std.mem.Allocator, input: cancel_export_task.CancelExportTaskInput, options: cancel_export_task.Options) !cancel_export_task.CancelExportTaskOutput {
+    pub fn cancelExportTask(self: *Self, allocator: std.mem.Allocator, input: cancel_export_task.CancelExportTaskInput, options: CallOptions) !cancel_export_task.CancelExportTaskOutput {
         return cancel_export_task.execute(self, allocator, input, options);
     }
 
@@ -1562,12 +1563,12 @@ pub const Client = struct {
     /// For more information, see [Cancel having an AMI shared with
     /// your Amazon Web Services
     /// account](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cancel-sharing-an-AMI.html) in the *Amazon EC2 User Guide*.
-    pub fn cancelImageLaunchPermission(self: *Self, allocator: std.mem.Allocator, input: cancel_image_launch_permission.CancelImageLaunchPermissionInput, options: cancel_image_launch_permission.Options) !cancel_image_launch_permission.CancelImageLaunchPermissionOutput {
+    pub fn cancelImageLaunchPermission(self: *Self, allocator: std.mem.Allocator, input: cancel_image_launch_permission.CancelImageLaunchPermissionInput, options: CallOptions) !cancel_image_launch_permission.CancelImageLaunchPermissionOutput {
         return cancel_image_launch_permission.execute(self, allocator, input, options);
     }
 
     /// Cancels an in-process import virtual machine or import snapshot task.
-    pub fn cancelImportTask(self: *Self, allocator: std.mem.Allocator, input: cancel_import_task.CancelImportTaskInput, options: cancel_import_task.Options) !cancel_import_task.CancelImportTaskOutput {
+    pub fn cancelImportTask(self: *Self, allocator: std.mem.Allocator, input: cancel_import_task.CancelImportTaskInput, options: CallOptions) !cancel_import_task.CancelImportTaskOutput {
         return cancel_import_task.execute(self, allocator, input, options);
     }
 
@@ -1576,7 +1577,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Sell in the Reserved Instance
     /// Marketplace](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html) in the *Amazon EC2 User Guide*.
-    pub fn cancelReservedInstancesListing(self: *Self, allocator: std.mem.Allocator, input: cancel_reserved_instances_listing.CancelReservedInstancesListingInput, options: cancel_reserved_instances_listing.Options) !cancel_reserved_instances_listing.CancelReservedInstancesListingOutput {
+    pub fn cancelReservedInstancesListing(self: *Self, allocator: std.mem.Allocator, input: cancel_reserved_instances_listing.CancelReservedInstancesListingInput, options: CallOptions) !cancel_reserved_instances_listing.CancelReservedInstancesListingOutput {
         return cancel_reserved_instances_listing.execute(self, allocator, input, options);
     }
 
@@ -1613,7 +1614,7 @@ pub const Client = struct {
     /// * You can delete up to 100 fleets in a single request. If you exceed the
     ///   specified
     /// number, no fleets are deleted.
-    pub fn cancelSpotFleetRequests(self: *Self, allocator: std.mem.Allocator, input: cancel_spot_fleet_requests.CancelSpotFleetRequestsInput, options: cancel_spot_fleet_requests.Options) !cancel_spot_fleet_requests.CancelSpotFleetRequestsOutput {
+    pub fn cancelSpotFleetRequests(self: *Self, allocator: std.mem.Allocator, input: cancel_spot_fleet_requests.CancelSpotFleetRequestsInput, options: CallOptions) !cancel_spot_fleet_requests.CancelSpotFleetRequestsOutput {
         return cancel_spot_fleet_requests.execute(self, allocator, input, options);
     }
 
@@ -1621,7 +1622,7 @@ pub const Client = struct {
     ///
     /// Canceling a Spot Instance request does not terminate running Spot Instances
     /// associated with the request.
-    pub fn cancelSpotInstanceRequests(self: *Self, allocator: std.mem.Allocator, input: cancel_spot_instance_requests.CancelSpotInstanceRequestsInput, options: cancel_spot_instance_requests.Options) !cancel_spot_instance_requests.CancelSpotInstanceRequestsOutput {
+    pub fn cancelSpotInstanceRequests(self: *Self, allocator: std.mem.Allocator, input: cancel_spot_instance_requests.CancelSpotInstanceRequestsInput, options: CallOptions) !cancel_spot_instance_requests.CancelSpotInstanceRequestsOutput {
         return cancel_spot_instance_requests.execute(self, allocator, input, options);
     }
 
@@ -1630,12 +1631,12 @@ pub const Client = struct {
     /// be used by the owner of the product code. It is useful when a product code
     /// owner must
     /// verify whether another user's instance is eligible for support.
-    pub fn confirmProductInstance(self: *Self, allocator: std.mem.Allocator, input: confirm_product_instance.ConfirmProductInstanceInput, options: confirm_product_instance.Options) !confirm_product_instance.ConfirmProductInstanceOutput {
+    pub fn confirmProductInstance(self: *Self, allocator: std.mem.Allocator, input: confirm_product_instance.ConfirmProductInstanceInput, options: CallOptions) !confirm_product_instance.ConfirmProductInstanceOutput {
         return confirm_product_instance.execute(self, allocator, input, options);
     }
 
     /// Copies the specified Amazon FPGA Image (AFI) to the current Region.
-    pub fn copyFpgaImage(self: *Self, allocator: std.mem.Allocator, input: copy_fpga_image.CopyFpgaImageInput, options: copy_fpga_image.Options) !copy_fpga_image.CopyFpgaImageOutput {
+    pub fn copyFpgaImage(self: *Self, allocator: std.mem.Allocator, input: copy_fpga_image.CopyFpgaImageInput, options: CallOptions) !copy_fpga_image.CopyFpgaImageOutput {
         return copy_fpga_image.execute(self, allocator, input, options);
     }
 
@@ -1717,7 +1718,7 @@ pub const Client = struct {
     /// AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html)
     /// in the
     /// *Amazon EC2 User Guide*.
-    pub fn copyImage(self: *Self, allocator: std.mem.Allocator, input: copy_image.CopyImageInput, options: copy_image.Options) !copy_image.CopyImageOutput {
+    pub fn copyImage(self: *Self, allocator: std.mem.Allocator, input: copy_image.CopyImageInput, options: CallOptions) !copy_image.CopyImageOutput {
         return copy_image.execute(self, allocator, input, options);
     }
 
@@ -1761,7 +1762,7 @@ pub const Client = struct {
     /// For more information, see [Copy an Amazon EBS
     /// snapshot](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copy-snapshot.html) in the
     /// *Amazon EBS User Guide*.
-    pub fn copySnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_snapshot.CopySnapshotInput, options: copy_snapshot.Options) !copy_snapshot.CopySnapshotOutput {
+    pub fn copySnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_snapshot.CopySnapshotInput, options: CallOptions) !copy_snapshot.CopySnapshotOutput {
         return copy_snapshot.execute(self, allocator, input, options);
     }
 
@@ -1771,7 +1772,7 @@ pub const Client = struct {
     /// once it reaches the
     /// `available` state. For more information, see [Copy an Amazon EBS
     /// volume](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copying-volume.html).
-    pub fn copyVolumes(self: *Self, allocator: std.mem.Allocator, input: copy_volumes.CopyVolumesInput, options: copy_volumes.Options) !copy_volumes.CopyVolumesOutput {
+    pub fn copyVolumes(self: *Self, allocator: std.mem.Allocator, input: copy_volumes.CopyVolumesInput, options: CallOptions) !copy_volumes.CopyVolumesOutput {
         return copy_volumes.execute(self, allocator, input, options);
     }
 
@@ -1780,7 +1781,7 @@ pub const Client = struct {
     /// scheduled basis.
     /// The exported data includes metrics for On-Demand, Spot, and Capacity
     /// Reservations usage across your organization.
-    pub fn createCapacityManagerDataExport(self: *Self, allocator: std.mem.Allocator, input: create_capacity_manager_data_export.CreateCapacityManagerDataExportInput, options: create_capacity_manager_data_export.Options) !create_capacity_manager_data_export.CreateCapacityManagerDataExportOutput {
+    pub fn createCapacityManagerDataExport(self: *Self, allocator: std.mem.Allocator, input: create_capacity_manager_data_export.CreateCapacityManagerDataExportInput, options: CallOptions) !create_capacity_manager_data_export.CreateCapacityManagerDataExportOutput {
         return create_capacity_manager_data_export.execute(self, allocator, input, options);
     }
 
@@ -1815,7 +1816,7 @@ pub const Client = struct {
     /// Amazon EC2 Service
     /// Quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn createCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: create_capacity_reservation.CreateCapacityReservationInput, options: create_capacity_reservation.Options) !create_capacity_reservation.CreateCapacityReservationOutput {
+    pub fn createCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: create_capacity_reservation.CreateCapacityReservationInput, options: CallOptions) !create_capacity_reservation.CreateCapacityReservationOutput {
         return create_capacity_reservation.execute(self, allocator, input, options);
     }
 
@@ -1826,7 +1827,7 @@ pub const Client = struct {
     /// Capacity Reservation except for tags. The source Capacity Reservation must
     /// be
     /// `active` and owned by your Amazon Web Services account.
-    pub fn createCapacityReservationBySplitting(self: *Self, allocator: std.mem.Allocator, input: create_capacity_reservation_by_splitting.CreateCapacityReservationBySplittingInput, options: create_capacity_reservation_by_splitting.Options) !create_capacity_reservation_by_splitting.CreateCapacityReservationBySplittingOutput {
+    pub fn createCapacityReservationBySplitting(self: *Self, allocator: std.mem.Allocator, input: create_capacity_reservation_by_splitting.CreateCapacityReservationBySplittingInput, options: CallOptions) !create_capacity_reservation_by_splitting.CreateCapacityReservationBySplittingOutput {
         return create_capacity_reservation_by_splitting.execute(self, allocator, input, options);
     }
 
@@ -1834,14 +1835,14 @@ pub const Client = struct {
     /// Capacity Reservation
     /// Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-cr-fleets.html#create-crfleet) in the
     /// *Amazon EC2 User Guide*.
-    pub fn createCapacityReservationFleet(self: *Self, allocator: std.mem.Allocator, input: create_capacity_reservation_fleet.CreateCapacityReservationFleetInput, options: create_capacity_reservation_fleet.Options) !create_capacity_reservation_fleet.CreateCapacityReservationFleetOutput {
+    pub fn createCapacityReservationFleet(self: *Self, allocator: std.mem.Allocator, input: create_capacity_reservation_fleet.CreateCapacityReservationFleetInput, options: CallOptions) !create_capacity_reservation_fleet.CreateCapacityReservationFleetOutput {
         return create_capacity_reservation_fleet.execute(self, allocator, input, options);
     }
 
     /// Creates a carrier gateway. For more information about carrier gateways, see
     /// [Carrier
     /// gateways](https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#wavelength-carrier-gateway) in the *Amazon Web Services Wavelength Developer Guide*.
-    pub fn createCarrierGateway(self: *Self, allocator: std.mem.Allocator, input: create_carrier_gateway.CreateCarrierGatewayInput, options: create_carrier_gateway.Options) !create_carrier_gateway.CreateCarrierGatewayOutput {
+    pub fn createCarrierGateway(self: *Self, allocator: std.mem.Allocator, input: create_carrier_gateway.CreateCarrierGatewayInput, options: CallOptions) !create_carrier_gateway.CreateCarrierGatewayOutput {
         return create_carrier_gateway.execute(self, allocator, input, options);
     }
 
@@ -1850,7 +1851,7 @@ pub const Client = struct {
     /// enable and manage client VPN sessions. It is the destination endpoint at
     /// which all client VPN sessions
     /// are terminated.
-    pub fn createClientVpnEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_client_vpn_endpoint.CreateClientVpnEndpointInput, options: create_client_vpn_endpoint.Options) !create_client_vpn_endpoint.CreateClientVpnEndpointOutput {
+    pub fn createClientVpnEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_client_vpn_endpoint.CreateClientVpnEndpointInput, options: CallOptions) !create_client_vpn_endpoint.CreateClientVpnEndpointOutput {
         return create_client_vpn_endpoint.execute(self, allocator, input, options);
     }
 
@@ -1858,17 +1859,17 @@ pub const Client = struct {
     /// has a route table that describes the
     /// available destination network routes. Each route in the route table
     /// specifies the path for traﬃc to speciﬁc resources or networks.
-    pub fn createClientVpnRoute(self: *Self, allocator: std.mem.Allocator, input: create_client_vpn_route.CreateClientVpnRouteInput, options: create_client_vpn_route.Options) !create_client_vpn_route.CreateClientVpnRouteOutput {
+    pub fn createClientVpnRoute(self: *Self, allocator: std.mem.Allocator, input: create_client_vpn_route.CreateClientVpnRouteInput, options: CallOptions) !create_client_vpn_route.CreateClientVpnRouteOutput {
         return create_client_vpn_route.execute(self, allocator, input, options);
     }
 
     /// Creates a range of customer-owned IP addresses.
-    pub fn createCoipCidr(self: *Self, allocator: std.mem.Allocator, input: create_coip_cidr.CreateCoipCidrInput, options: create_coip_cidr.Options) !create_coip_cidr.CreateCoipCidrOutput {
+    pub fn createCoipCidr(self: *Self, allocator: std.mem.Allocator, input: create_coip_cidr.CreateCoipCidrInput, options: CallOptions) !create_coip_cidr.CreateCoipCidrOutput {
         return create_coip_cidr.execute(self, allocator, input, options);
     }
 
     /// Creates a pool of customer-owned IP (CoIP) addresses.
-    pub fn createCoipPool(self: *Self, allocator: std.mem.Allocator, input: create_coip_pool.CreateCoipPoolInput, options: create_coip_pool.Options) !create_coip_pool.CreateCoipPoolOutput {
+    pub fn createCoipPool(self: *Self, allocator: std.mem.Allocator, input: create_coip_pool.CreateCoipPoolInput, options: CallOptions) !create_coip_pool.CreateCoipPoolOutput {
         return create_coip_pool.execute(self, allocator, input, options);
     }
 
@@ -1899,7 +1900,7 @@ pub const Client = struct {
     /// returns information about the existing customer gateway; it doesn't create a
     /// new customer
     /// gateway.
-    pub fn createCustomerGateway(self: *Self, allocator: std.mem.Allocator, input: create_customer_gateway.CreateCustomerGatewayInput, options: create_customer_gateway.Options) !create_customer_gateway.CreateCustomerGatewayOutput {
+    pub fn createCustomerGateway(self: *Self, allocator: std.mem.Allocator, input: create_customer_gateway.CreateCustomerGatewayInput, options: CallOptions) !create_customer_gateway.CreateCustomerGatewayOutput {
         return create_customer_gateway.execute(self, allocator, input, options);
     }
 
@@ -1908,7 +1909,7 @@ pub const Client = struct {
     /// default subnet
     /// per Availability Zone. For more information, see [Create a default
     /// subnet](https://docs.aws.amazon.com/vpc/latest/userguide/work-with-default-vpc.html#create-default-subnet) in the *Amazon VPC User Guide*.
-    pub fn createDefaultSubnet(self: *Self, allocator: std.mem.Allocator, input: create_default_subnet.CreateDefaultSubnetInput, options: create_default_subnet.Options) !create_default_subnet.CreateDefaultSubnetOutput {
+    pub fn createDefaultSubnet(self: *Self, allocator: std.mem.Allocator, input: create_default_subnet.CreateDefaultSubnetInput, options: CallOptions) !create_default_subnet.CreateDefaultSubnetOutput {
         return create_default_subnet.execute(self, allocator, input, options);
     }
 
@@ -1923,13 +1924,13 @@ pub const Client = struct {
     /// If you deleted your previous default VPC, you can create a default VPC. You
     /// cannot have
     /// more than one default VPC per Region.
-    pub fn createDefaultVpc(self: *Self, allocator: std.mem.Allocator, input: create_default_vpc.CreateDefaultVpcInput, options: create_default_vpc.Options) !create_default_vpc.CreateDefaultVpcOutput {
+    pub fn createDefaultVpc(self: *Self, allocator: std.mem.Allocator, input: create_default_vpc.CreateDefaultVpcInput, options: CallOptions) !create_default_vpc.CreateDefaultVpcOutput {
         return create_default_vpc.execute(self, allocator, input, options);
     }
 
     /// Delegates ownership of the Amazon EBS root volume for an Apple silicon
     /// Mac instance to an administrative user.
-    pub fn createDelegateMacVolumeOwnershipTask(self: *Self, allocator: std.mem.Allocator, input: create_delegate_mac_volume_ownership_task.CreateDelegateMacVolumeOwnershipTaskInput, options: create_delegate_mac_volume_ownership_task.Options) !create_delegate_mac_volume_ownership_task.CreateDelegateMacVolumeOwnershipTaskOutput {
+    pub fn createDelegateMacVolumeOwnershipTask(self: *Self, allocator: std.mem.Allocator, input: create_delegate_mac_volume_ownership_task.CreateDelegateMacVolumeOwnershipTaskInput, options: CallOptions) !create_delegate_mac_volume_ownership_task.CreateDelegateMacVolumeOwnershipTaskOutput {
         return create_delegate_mac_volume_ownership_task.execute(self, allocator, input, options);
     }
 
@@ -1990,7 +1991,7 @@ pub const Client = struct {
     /// time and avoid frequent
     /// lease renewal requests. Lease renewal typically occurs when half of the
     /// lease time has elapsed.
-    pub fn createDhcpOptions(self: *Self, allocator: std.mem.Allocator, input: create_dhcp_options.CreateDhcpOptionsInput, options: create_dhcp_options.Options) !create_dhcp_options.CreateDhcpOptionsOutput {
+    pub fn createDhcpOptions(self: *Self, allocator: std.mem.Allocator, input: create_dhcp_options.CreateDhcpOptionsInput, options: CallOptions) !create_dhcp_options.CreateDhcpOptionsOutput {
         return create_dhcp_options.execute(self, allocator, input, options);
     }
 
@@ -2001,7 +2002,7 @@ pub const Client = struct {
     /// your VPC to the internet, and prevents hosts outside of your VPC from
     /// initiating an IPv6
     /// connection with your instance.
-    pub fn createEgressOnlyInternetGateway(self: *Self, allocator: std.mem.Allocator, input: create_egress_only_internet_gateway.CreateEgressOnlyInternetGatewayInput, options: create_egress_only_internet_gateway.Options) !create_egress_only_internet_gateway.CreateEgressOnlyInternetGatewayOutput {
+    pub fn createEgressOnlyInternetGateway(self: *Self, allocator: std.mem.Allocator, input: create_egress_only_internet_gateway.CreateEgressOnlyInternetGatewayInput, options: CallOptions) !create_egress_only_internet_gateway.CreateEgressOnlyInternetGatewayOutput {
         return create_egress_only_internet_gateway.execute(self, allocator, input, options);
     }
 
@@ -2016,7 +2017,7 @@ pub const Client = struct {
     /// For more information, see [EC2
     /// Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html)
     /// in the *Amazon EC2 User Guide*.
-    pub fn createFleet(self: *Self, allocator: std.mem.Allocator, input: create_fleet.CreateFleetInput, options: create_fleet.Options) !create_fleet.CreateFleetOutput {
+    pub fn createFleet(self: *Self, allocator: std.mem.Allocator, input: create_fleet.CreateFleetInput, options: CallOptions) !create_fleet.CreateFleetOutput {
         return create_fleet.execute(self, allocator, input, options);
     }
 
@@ -2043,7 +2044,7 @@ pub const Client = struct {
     /// For more information, see [VPC Flow
     /// Logs](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html)
     /// in the *Amazon VPC User Guide*.
-    pub fn createFlowLogs(self: *Self, allocator: std.mem.Allocator, input: create_flow_logs.CreateFlowLogsInput, options: create_flow_logs.Options) !create_flow_logs.CreateFlowLogsOutput {
+    pub fn createFlowLogs(self: *Self, allocator: std.mem.Allocator, input: create_flow_logs.CreateFlowLogsInput, options: CallOptions) !create_flow_logs.CreateFlowLogsOutput {
         return create_flow_logs.execute(self, allocator, input, options);
     }
 
@@ -2058,7 +2059,7 @@ pub const Client = struct {
     /// You can securely deploy an AFI on multiple FPGA-accelerated instances.
     /// For more information, see the [Amazon Web Services FPGA Hardware Development
     /// Kit](https://github.com/aws/aws-fpga/).
-    pub fn createFpgaImage(self: *Self, allocator: std.mem.Allocator, input: create_fpga_image.CreateFpgaImageInput, options: create_fpga_image.Options) !create_fpga_image.CreateFpgaImageOutput {
+    pub fn createFpgaImage(self: *Self, allocator: std.mem.Allocator, input: create_fpga_image.CreateFpgaImageInput, options: CallOptions) !create_fpga_image.CreateFpgaImageOutput {
         return create_fpga_image.execute(self, allocator, input, options);
     }
 
@@ -2089,7 +2090,7 @@ pub const Client = struct {
     /// For more information, see [Create an Amazon EBS-backed
     /// AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html) in
     /// the *Amazon Elastic Compute Cloud User Guide*.
-    pub fn createImage(self: *Self, allocator: std.mem.Allocator, input: create_image.CreateImageInput, options: create_image.Options) !create_image.CreateImageOutput {
+    pub fn createImage(self: *Self, allocator: std.mem.Allocator, input: create_image.CreateImageInput, options: CallOptions) !create_image.CreateImageOutput {
         return create_image.execute(self, allocator, input, options);
     }
 
@@ -2102,7 +2103,7 @@ pub const Client = struct {
     /// For more information, see [View your AMI
     /// usage](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn createImageUsageReport(self: *Self, allocator: std.mem.Allocator, input: create_image_usage_report.CreateImageUsageReportInput, options: create_image_usage_report.Options) !create_image_usage_report.CreateImageUsageReportOutput {
+    pub fn createImageUsageReport(self: *Self, allocator: std.mem.Allocator, input: create_image_usage_report.CreateImageUsageReportInput, options: CallOptions) !create_image_usage_report.CreateImageUsageReportOutput {
         return create_image_usage_report.execute(self, allocator, input, options);
     }
 
@@ -2115,7 +2116,7 @@ pub const Client = struct {
     /// information, see [Connect to your instances using EC2 Instance Connect
     /// Endpoint](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Connect-using-EC2-Instance-Connect-Endpoint.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn createInstanceConnectEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_instance_connect_endpoint.CreateInstanceConnectEndpointInput, options: create_instance_connect_endpoint.Options) !create_instance_connect_endpoint.CreateInstanceConnectEndpointOutput {
+    pub fn createInstanceConnectEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_instance_connect_endpoint.CreateInstanceConnectEndpointInput, options: CallOptions) !create_instance_connect_endpoint.CreateInstanceConnectEndpointOutput {
         return create_instance_connect_endpoint.execute(self, allocator, input, options);
     }
 
@@ -2147,7 +2148,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Define event windows for scheduled
     /// events](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html) in the *Amazon EC2 User Guide*.
-    pub fn createInstanceEventWindow(self: *Self, allocator: std.mem.Allocator, input: create_instance_event_window.CreateInstanceEventWindowInput, options: create_instance_event_window.Options) !create_instance_event_window.CreateInstanceEventWindowOutput {
+    pub fn createInstanceEventWindow(self: *Self, allocator: std.mem.Allocator, input: create_instance_event_window.CreateInstanceEventWindowInput, options: CallOptions) !create_instance_event_window.CreateInstanceEventWindowOutput {
         return create_instance_event_window.execute(self, allocator, input, options);
     }
 
@@ -2158,7 +2159,7 @@ pub const Client = struct {
     /// image formats, and known limitations for the types of instances you can
     /// export, see [Exporting an instance as a VM Using VM
     /// Import/Export](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html) in the *VM Import/Export User Guide*.
-    pub fn createInstanceExportTask(self: *Self, allocator: std.mem.Allocator, input: create_instance_export_task.CreateInstanceExportTaskInput, options: create_instance_export_task.Options) !create_instance_export_task.CreateInstanceExportTaskOutput {
+    pub fn createInstanceExportTask(self: *Self, allocator: std.mem.Allocator, input: create_instance_export_task.CreateInstanceExportTaskInput, options: CallOptions) !create_instance_export_task.CreateInstanceExportTaskOutput {
         return create_instance_export_task.execute(self, allocator, input, options);
     }
 
@@ -2169,7 +2170,7 @@ pub const Client = struct {
     /// For more information, see [Internet
     /// gateways](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) in the
     /// *Amazon VPC User Guide*.
-    pub fn createInternetGateway(self: *Self, allocator: std.mem.Allocator, input: create_internet_gateway.CreateInternetGatewayInput, options: create_internet_gateway.Options) !create_internet_gateway.CreateInternetGatewayOutput {
+    pub fn createInternetGateway(self: *Self, allocator: std.mem.Allocator, input: create_internet_gateway.CreateInternetGatewayInput, options: CallOptions) !create_internet_gateway.CreateInternetGatewayOutput {
         return create_internet_gateway.execute(self, allocator, input, options);
     }
 
@@ -2177,7 +2178,7 @@ pub const Client = struct {
     /// unused instances you want to allocate from your source reservation. This
     /// helps you make unused capacity available for other workloads within your
     /// account while maintaining control to reclaim it.
-    pub fn createInterruptibleCapacityReservationAllocation(self: *Self, allocator: std.mem.Allocator, input: create_interruptible_capacity_reservation_allocation.CreateInterruptibleCapacityReservationAllocationInput, options: create_interruptible_capacity_reservation_allocation.Options) !create_interruptible_capacity_reservation_allocation.CreateInterruptibleCapacityReservationAllocationOutput {
+    pub fn createInterruptibleCapacityReservationAllocation(self: *Self, allocator: std.mem.Allocator, input: create_interruptible_capacity_reservation_allocation.CreateInterruptibleCapacityReservationAllocationInput, options: CallOptions) !create_interruptible_capacity_reservation_allocation.CreateInterruptibleCapacityReservationAllocationOutput {
         return create_interruptible_capacity_reservation_allocation.execute(self, allocator, input, options);
     }
 
@@ -2192,7 +2193,7 @@ pub const Client = struct {
     /// For more information, see [Create an
     /// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html) in the
     /// *Amazon VPC IPAM User Guide*.
-    pub fn createIpam(self: *Self, allocator: std.mem.Allocator, input: create_ipam.CreateIpamInput, options: create_ipam.Options) !create_ipam.CreateIpamOutput {
+    pub fn createIpam(self: *Self, allocator: std.mem.Allocator, input: create_ipam.CreateIpamInput, options: CallOptions) !create_ipam.CreateIpamOutput {
         return create_ipam.execute(self, allocator, input, options);
     }
 
@@ -2202,7 +2203,7 @@ pub const Client = struct {
     /// you can use to prove ownership of an external resource. For example, you can
     /// use a verification token to validate that you control a public IP address
     /// range when you bring an IP address range to Amazon Web Services (BYOIP).
-    pub fn createIpamExternalResourceVerificationToken(self: *Self, allocator: std.mem.Allocator, input: create_ipam_external_resource_verification_token.CreateIpamExternalResourceVerificationTokenInput, options: create_ipam_external_resource_verification_token.Options) !create_ipam_external_resource_verification_token.CreateIpamExternalResourceVerificationTokenOutput {
+    pub fn createIpamExternalResourceVerificationToken(self: *Self, allocator: std.mem.Allocator, input: create_ipam_external_resource_verification_token.CreateIpamExternalResourceVerificationTokenInput, options: CallOptions) !create_ipam_external_resource_verification_token.CreateIpamExternalResourceVerificationTokenOutput {
         return create_ipam_external_resource_verification_token.execute(self, allocator, input, options);
     }
 
@@ -2219,7 +2220,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Define public IPv4 allocation strategy with IPAM
     /// policies](https://docs.aws.amazon.com/vpc/latest/ipam/define-public-ipv4-allocation-strategy-with-ipam-policies.html) in the *Amazon VPC IPAM User Guide*.
-    pub fn createIpamPolicy(self: *Self, allocator: std.mem.Allocator, input: create_ipam_policy.CreateIpamPolicyInput, options: create_ipam_policy.Options) !create_ipam_policy.CreateIpamPolicyOutput {
+    pub fn createIpamPolicy(self: *Self, allocator: std.mem.Allocator, input: create_ipam_policy.CreateIpamPolicyInput, options: CallOptions) !create_ipam_policy.CreateIpamPolicyOutput {
         return create_ipam_policy.execute(self, allocator, input, options);
     }
 
@@ -2232,7 +2233,7 @@ pub const Client = struct {
     /// For more information, see [Create a top-level
     /// pool](https://docs.aws.amazon.com/vpc/latest/ipam/create-top-ipam.html) in
     /// the *Amazon VPC IPAM User Guide*.
-    pub fn createIpamPool(self: *Self, allocator: std.mem.Allocator, input: create_ipam_pool.CreateIpamPoolInput, options: create_ipam_pool.Options) !create_ipam_pool.CreateIpamPoolOutput {
+    pub fn createIpamPool(self: *Self, allocator: std.mem.Allocator, input: create_ipam_pool.CreateIpamPoolInput, options: CallOptions) !create_ipam_pool.CreateIpamPoolOutput {
         return create_ipam_pool.execute(self, allocator, input, options);
     }
 
@@ -2247,7 +2248,7 @@ pub const Client = struct {
     /// For more information about IPAM prefix list resolver, see [Automate prefix
     /// list updates with
     /// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/automate-prefix-list-updates.html) in the *Amazon VPC IPAM User Guide*.
-    pub fn createIpamPrefixListResolver(self: *Self, allocator: std.mem.Allocator, input: create_ipam_prefix_list_resolver.CreateIpamPrefixListResolverInput, options: create_ipam_prefix_list_resolver.Options) !create_ipam_prefix_list_resolver.CreateIpamPrefixListResolverOutput {
+    pub fn createIpamPrefixListResolver(self: *Self, allocator: std.mem.Allocator, input: create_ipam_prefix_list_resolver.CreateIpamPrefixListResolverInput, options: CallOptions) !create_ipam_prefix_list_resolver.CreateIpamPrefixListResolverOutput {
         return create_ipam_prefix_list_resolver.execute(self, allocator, input, options);
     }
 
@@ -2262,14 +2263,14 @@ pub const Client = struct {
     /// For more information about IPAM prefix list resolver, see [Automate prefix
     /// list updates with
     /// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/automate-prefix-list-updates.html) in the *Amazon VPC IPAM User Guide*.
-    pub fn createIpamPrefixListResolverTarget(self: *Self, allocator: std.mem.Allocator, input: create_ipam_prefix_list_resolver_target.CreateIpamPrefixListResolverTargetInput, options: create_ipam_prefix_list_resolver_target.Options) !create_ipam_prefix_list_resolver_target.CreateIpamPrefixListResolverTargetOutput {
+    pub fn createIpamPrefixListResolverTarget(self: *Self, allocator: std.mem.Allocator, input: create_ipam_prefix_list_resolver_target.CreateIpamPrefixListResolverTargetInput, options: CallOptions) !create_ipam_prefix_list_resolver_target.CreateIpamPrefixListResolverTargetOutput {
         return create_ipam_prefix_list_resolver_target.execute(self, allocator, input, options);
     }
 
     /// Creates an IPAM resource discovery. A resource discovery is an IPAM
     /// component that enables IPAM to manage and monitor resources that belong to
     /// the owning account.
-    pub fn createIpamResourceDiscovery(self: *Self, allocator: std.mem.Allocator, input: create_ipam_resource_discovery.CreateIpamResourceDiscoveryInput, options: create_ipam_resource_discovery.Options) !create_ipam_resource_discovery.CreateIpamResourceDiscoveryOutput {
+    pub fn createIpamResourceDiscovery(self: *Self, allocator: std.mem.Allocator, input: create_ipam_resource_discovery.CreateIpamResourceDiscoveryInput, options: CallOptions) !create_ipam_resource_discovery.CreateIpamResourceDiscoveryOutput {
         return create_ipam_resource_discovery.execute(self, allocator, input, options);
     }
 
@@ -2283,7 +2284,7 @@ pub const Client = struct {
     /// For more information, see [Add a
     /// scope](https://docs.aws.amazon.com/vpc/latest/ipam/add-scope-ipam.html) in
     /// the *Amazon VPC IPAM User Guide*.
-    pub fn createIpamScope(self: *Self, allocator: std.mem.Allocator, input: create_ipam_scope.CreateIpamScopeInput, options: create_ipam_scope.Options) !create_ipam_scope.CreateIpamScopeOutput {
+    pub fn createIpamScope(self: *Self, allocator: std.mem.Allocator, input: create_ipam_scope.CreateIpamScopeInput, options: CallOptions) !create_ipam_scope.CreateIpamScopeOutput {
         return create_ipam_scope.execute(self, allocator, input, options);
     }
 
@@ -2307,7 +2308,7 @@ pub const Client = struct {
     /// For more information, see [Amazon EC2 key
     /// pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn createKeyPair(self: *Self, allocator: std.mem.Allocator, input: create_key_pair.CreateKeyPairInput, options: create_key_pair.Options) !create_key_pair.CreateKeyPairOutput {
+    pub fn createKeyPair(self: *Self, allocator: std.mem.Allocator, input: create_key_pair.CreateKeyPairInput, options: CallOptions) !create_key_pair.CreateKeyPairOutput {
         return create_key_pair.execute(self, allocator, input, options);
     }
 
@@ -2329,7 +2330,7 @@ pub const Client = struct {
     /// information, see [Create a launch template from an existing launch
     /// template](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-launch-template.html#create-launch-template-from-existing-launch-template) in the
     /// *Amazon EC2 User Guide*.
-    pub fn createLaunchTemplate(self: *Self, allocator: std.mem.Allocator, input: create_launch_template.CreateLaunchTemplateInput, options: create_launch_template.Options) !create_launch_template.CreateLaunchTemplateOutput {
+    pub fn createLaunchTemplate(self: *Self, allocator: std.mem.Allocator, input: create_launch_template.CreateLaunchTemplateInput, options: CallOptions) !create_launch_template.CreateLaunchTemplateOutput {
         return create_launch_template.execute(self, allocator, input, options);
     }
 
@@ -2353,7 +2354,7 @@ pub const Client = struct {
     /// template (manage launch template
     /// versions)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-launch-template-versions.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn createLaunchTemplateVersion(self: *Self, allocator: std.mem.Allocator, input: create_launch_template_version.CreateLaunchTemplateVersionInput, options: create_launch_template_version.Options) !create_launch_template_version.CreateLaunchTemplateVersionOutput {
+    pub fn createLaunchTemplateVersion(self: *Self, allocator: std.mem.Allocator, input: create_launch_template_version.CreateLaunchTemplateVersionInput, options: CallOptions) !create_launch_template_version.CreateLaunchTemplateVersionOutput {
         return create_launch_template_version.execute(self, allocator, input, options);
     }
 
@@ -2364,32 +2365,32 @@ pub const Client = struct {
     /// * `LocalGatewayVirtualInterfaceGroupId`
     ///
     /// * `NetworkInterfaceId`
-    pub fn createLocalGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: create_local_gateway_route.CreateLocalGatewayRouteInput, options: create_local_gateway_route.Options) !create_local_gateway_route.CreateLocalGatewayRouteOutput {
+    pub fn createLocalGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: create_local_gateway_route.CreateLocalGatewayRouteInput, options: CallOptions) !create_local_gateway_route.CreateLocalGatewayRouteOutput {
         return create_local_gateway_route.execute(self, allocator, input, options);
     }
 
     /// Creates a local gateway route table.
-    pub fn createLocalGatewayRouteTable(self: *Self, allocator: std.mem.Allocator, input: create_local_gateway_route_table.CreateLocalGatewayRouteTableInput, options: create_local_gateway_route_table.Options) !create_local_gateway_route_table.CreateLocalGatewayRouteTableOutput {
+    pub fn createLocalGatewayRouteTable(self: *Self, allocator: std.mem.Allocator, input: create_local_gateway_route_table.CreateLocalGatewayRouteTableInput, options: CallOptions) !create_local_gateway_route_table.CreateLocalGatewayRouteTableOutput {
         return create_local_gateway_route_table.execute(self, allocator, input, options);
     }
 
     /// Creates a local gateway route table virtual interface group association.
-    pub fn createLocalGatewayRouteTableVirtualInterfaceGroupAssociation(self: *Self, allocator: std.mem.Allocator, input: create_local_gateway_route_table_virtual_interface_group_association.CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput, options: create_local_gateway_route_table_virtual_interface_group_association.Options) !create_local_gateway_route_table_virtual_interface_group_association.CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput {
+    pub fn createLocalGatewayRouteTableVirtualInterfaceGroupAssociation(self: *Self, allocator: std.mem.Allocator, input: create_local_gateway_route_table_virtual_interface_group_association.CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput, options: CallOptions) !create_local_gateway_route_table_virtual_interface_group_association.CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput {
         return create_local_gateway_route_table_virtual_interface_group_association.execute(self, allocator, input, options);
     }
 
     /// Associates the specified VPC with the specified local gateway route table.
-    pub fn createLocalGatewayRouteTableVpcAssociation(self: *Self, allocator: std.mem.Allocator, input: create_local_gateway_route_table_vpc_association.CreateLocalGatewayRouteTableVpcAssociationInput, options: create_local_gateway_route_table_vpc_association.Options) !create_local_gateway_route_table_vpc_association.CreateLocalGatewayRouteTableVpcAssociationOutput {
+    pub fn createLocalGatewayRouteTableVpcAssociation(self: *Self, allocator: std.mem.Allocator, input: create_local_gateway_route_table_vpc_association.CreateLocalGatewayRouteTableVpcAssociationInput, options: CallOptions) !create_local_gateway_route_table_vpc_association.CreateLocalGatewayRouteTableVpcAssociationOutput {
         return create_local_gateway_route_table_vpc_association.execute(self, allocator, input, options);
     }
 
     /// Create a virtual interface for a local gateway.
-    pub fn createLocalGatewayVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: create_local_gateway_virtual_interface.CreateLocalGatewayVirtualInterfaceInput, options: create_local_gateway_virtual_interface.Options) !create_local_gateway_virtual_interface.CreateLocalGatewayVirtualInterfaceOutput {
+    pub fn createLocalGatewayVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: create_local_gateway_virtual_interface.CreateLocalGatewayVirtualInterfaceInput, options: CallOptions) !create_local_gateway_virtual_interface.CreateLocalGatewayVirtualInterfaceOutput {
         return create_local_gateway_virtual_interface.execute(self, allocator, input, options);
     }
 
     /// Create a local gateway virtual interface group.
-    pub fn createLocalGatewayVirtualInterfaceGroup(self: *Self, allocator: std.mem.Allocator, input: create_local_gateway_virtual_interface_group.CreateLocalGatewayVirtualInterfaceGroupInput, options: create_local_gateway_virtual_interface_group.Options) !create_local_gateway_virtual_interface_group.CreateLocalGatewayVirtualInterfaceGroupOutput {
+    pub fn createLocalGatewayVirtualInterfaceGroup(self: *Self, allocator: std.mem.Allocator, input: create_local_gateway_virtual_interface_group.CreateLocalGatewayVirtualInterfaceGroupInput, options: CallOptions) !create_local_gateway_virtual_interface_group.CreateLocalGatewayVirtualInterfaceGroupOutput {
         return create_local_gateway_virtual_interface_group.execute(self, allocator, input, options);
     }
 
@@ -2438,13 +2439,13 @@ pub const Client = struct {
     ///
     /// * `MacSystemIntegrityProtectionConfigurationRequest
     ///   "NvramProtections=disabled"`
-    pub fn createMacSystemIntegrityProtectionModificationTask(self: *Self, allocator: std.mem.Allocator, input: create_mac_system_integrity_protection_modification_task.CreateMacSystemIntegrityProtectionModificationTaskInput, options: create_mac_system_integrity_protection_modification_task.Options) !create_mac_system_integrity_protection_modification_task.CreateMacSystemIntegrityProtectionModificationTaskOutput {
+    pub fn createMacSystemIntegrityProtectionModificationTask(self: *Self, allocator: std.mem.Allocator, input: create_mac_system_integrity_protection_modification_task.CreateMacSystemIntegrityProtectionModificationTaskInput, options: CallOptions) !create_mac_system_integrity_protection_modification_task.CreateMacSystemIntegrityProtectionModificationTaskOutput {
         return create_mac_system_integrity_protection_modification_task.execute(self, allocator, input, options);
     }
 
     /// Creates a managed prefix list. You can specify entries for the prefix list.
     /// Each entry consists of a CIDR block and an optional description.
-    pub fn createManagedPrefixList(self: *Self, allocator: std.mem.Allocator, input: create_managed_prefix_list.CreateManagedPrefixListInput, options: create_managed_prefix_list.Options) !create_managed_prefix_list.CreateManagedPrefixListOutput {
+    pub fn createManagedPrefixList(self: *Self, allocator: std.mem.Allocator, input: create_managed_prefix_list.CreateManagedPrefixListInput, options: CallOptions) !create_managed_prefix_list.CreateManagedPrefixListOutput {
         return create_managed_prefix_list.execute(self, allocator, input, options);
     }
 
@@ -2483,7 +2484,7 @@ pub const Client = struct {
     /// Elastic IP
     /// address](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html)
     /// in the *Amazon VPC User Guide*.
-    pub fn createNatGateway(self: *Self, allocator: std.mem.Allocator, input: create_nat_gateway.CreateNatGatewayInput, options: create_nat_gateway.Options) !create_nat_gateway.CreateNatGatewayOutput {
+    pub fn createNatGateway(self: *Self, allocator: std.mem.Allocator, input: create_nat_gateway.CreateNatGatewayInput, options: CallOptions) !create_nat_gateway.CreateNatGatewayOutput {
         return create_nat_gateway.execute(self, allocator, input, options);
     }
 
@@ -2493,7 +2494,7 @@ pub const Client = struct {
     /// For more information, see [Network
     /// ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) in the
     /// *Amazon VPC User Guide*.
-    pub fn createNetworkAcl(self: *Self, allocator: std.mem.Allocator, input: create_network_acl.CreateNetworkAclInput, options: create_network_acl.Options) !create_network_acl.CreateNetworkAclOutput {
+    pub fn createNetworkAcl(self: *Self, allocator: std.mem.Allocator, input: create_network_acl.CreateNetworkAclInput, options: CallOptions) !create_network_acl.CreateNetworkAclOutput {
         return create_network_acl.execute(self, allocator, input, options);
     }
 
@@ -2516,7 +2517,7 @@ pub const Client = struct {
     /// For more information about network ACLs, see [Network
     /// ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html)
     /// in the *Amazon VPC User Guide*.
-    pub fn createNetworkAclEntry(self: *Self, allocator: std.mem.Allocator, input: create_network_acl_entry.CreateNetworkAclEntryInput, options: create_network_acl_entry.Options) !create_network_acl_entry.CreateNetworkAclEntryOutput {
+    pub fn createNetworkAclEntry(self: *Self, allocator: std.mem.Allocator, input: create_network_acl_entry.CreateNetworkAclEntryInput, options: CallOptions) !create_network_acl_entry.CreateNetworkAclEntryOutput {
         return create_network_acl_entry.execute(self, allocator, input, options);
     }
 
@@ -2529,7 +2530,7 @@ pub const Client = struct {
     /// objectives. For more information, see the [Amazon Web Services Network
     /// Access Analyzer
     /// Guide](https://docs.aws.amazon.com/vpc/latest/network-access-analyzer/).
-    pub fn createNetworkInsightsAccessScope(self: *Self, allocator: std.mem.Allocator, input: create_network_insights_access_scope.CreateNetworkInsightsAccessScopeInput, options: create_network_insights_access_scope.Options) !create_network_insights_access_scope.CreateNetworkInsightsAccessScopeOutput {
+    pub fn createNetworkInsightsAccessScope(self: *Self, allocator: std.mem.Allocator, input: create_network_insights_access_scope.CreateNetworkInsightsAccessScopeInput, options: CallOptions) !create_network_insights_access_scope.CreateNetworkInsightsAccessScopeOutput {
         return create_network_insights_access_scope.execute(self, allocator, input, options);
     }
 
@@ -2541,7 +2542,7 @@ pub const Client = struct {
     /// the
     /// [Reachability Analyzer
     /// Guide](https://docs.aws.amazon.com/vpc/latest/reachability/).
-    pub fn createNetworkInsightsPath(self: *Self, allocator: std.mem.Allocator, input: create_network_insights_path.CreateNetworkInsightsPathInput, options: create_network_insights_path.Options) !create_network_insights_path.CreateNetworkInsightsPathOutput {
+    pub fn createNetworkInsightsPath(self: *Self, allocator: std.mem.Allocator, input: create_network_insights_path.CreateNetworkInsightsPathInput, options: CallOptions) !create_network_insights_path.CreateNetworkInsightsPathOutput {
         return create_network_insights_path.execute(self, allocator, input, options);
     }
 
@@ -2554,7 +2555,7 @@ pub const Client = struct {
     /// For more information about network interfaces, see [Elastic network
     /// interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn createNetworkInterface(self: *Self, allocator: std.mem.Allocator, input: create_network_interface.CreateNetworkInterfaceInput, options: create_network_interface.Options) !create_network_interface.CreateNetworkInterfaceOutput {
+    pub fn createNetworkInterface(self: *Self, allocator: std.mem.Allocator, input: create_network_interface.CreateNetworkInterfaceInput, options: CallOptions) !create_network_interface.CreateNetworkInterfaceOutput {
         return create_network_interface.execute(self, allocator, input, options);
     }
 
@@ -2565,7 +2566,7 @@ pub const Client = struct {
     /// You can grant permission to a single Amazon Web Services account only, and
     /// only one
     /// account at a time.
-    pub fn createNetworkInterfacePermission(self: *Self, allocator: std.mem.Allocator, input: create_network_interface_permission.CreateNetworkInterfacePermissionInput, options: create_network_interface_permission.Options) !create_network_interface_permission.CreateNetworkInterfacePermissionOutput {
+    pub fn createNetworkInterfacePermission(self: *Self, allocator: std.mem.Allocator, input: create_network_interface_permission.CreateNetworkInterfacePermissionInput, options: CallOptions) !create_network_interface_permission.CreateNetworkInterfacePermissionOutput {
         return create_network_interface_permission.execute(self, allocator, input, options);
     }
 
@@ -2585,7 +2586,7 @@ pub const Client = struct {
     /// For more information, see [Placement
     /// groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn createPlacementGroup(self: *Self, allocator: std.mem.Allocator, input: create_placement_group.CreatePlacementGroupInput, options: create_placement_group.Options) !create_placement_group.CreatePlacementGroupOutput {
+    pub fn createPlacementGroup(self: *Self, allocator: std.mem.Allocator, input: create_placement_group.CreatePlacementGroupInput, options: CallOptions) !create_placement_group.CreatePlacementGroupOutput {
         return create_placement_group.execute(self, allocator, input, options);
     }
 
@@ -2595,7 +2596,7 @@ pub const Client = struct {
     /// Services, however, use IPAM pools only. To monitor the status of pool
     /// creation, use
     /// [DescribePublicIpv4Pools](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribePublicIpv4Pools.html).
-    pub fn createPublicIpv4Pool(self: *Self, allocator: std.mem.Allocator, input: create_public_ipv_4_pool.CreatePublicIpv4PoolInput, options: create_public_ipv_4_pool.Options) !create_public_ipv_4_pool.CreatePublicIpv4PoolOutput {
+    pub fn createPublicIpv4Pool(self: *Self, allocator: std.mem.Allocator, input: create_public_ipv_4_pool.CreatePublicIpv4PoolInput, options: CallOptions) !create_public_ipv_4_pool.CreatePublicIpv4PoolOutput {
         return create_public_ipv_4_pool.execute(self, allocator, input, options);
     }
 
@@ -2608,7 +2609,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Replace a root
     /// volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replace-root.html) in the *Amazon EC2 User Guide*.
-    pub fn createReplaceRootVolumeTask(self: *Self, allocator: std.mem.Allocator, input: create_replace_root_volume_task.CreateReplaceRootVolumeTaskInput, options: create_replace_root_volume_task.Options) !create_replace_root_volume_task.CreateReplaceRootVolumeTaskOutput {
+    pub fn createReplaceRootVolumeTask(self: *Self, allocator: std.mem.Allocator, input: create_replace_root_volume_task.CreateReplaceRootVolumeTaskInput, options: CallOptions) !create_replace_root_volume_task.CreateReplaceRootVolumeTaskOutput {
         return create_replace_root_volume_task.execute(self, allocator, input, options);
     }
 
@@ -2645,7 +2646,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Sell in the Reserved Instance
     /// Marketplace](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html) in the *Amazon EC2 User Guide*.
-    pub fn createReservedInstancesListing(self: *Self, allocator: std.mem.Allocator, input: create_reserved_instances_listing.CreateReservedInstancesListingInput, options: create_reserved_instances_listing.Options) !create_reserved_instances_listing.CreateReservedInstancesListingOutput {
+    pub fn createReservedInstancesListing(self: *Self, allocator: std.mem.Allocator, input: create_reserved_instances_listing.CreateReservedInstancesListingInput, options: CallOptions) !create_reserved_instances_listing.CreateReservedInstancesListingOutput {
         return create_reserved_instances_listing.execute(self, allocator, input, options);
     }
 
@@ -2661,7 +2662,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Store and restore an AMI using
     /// S3](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html) in the *Amazon EC2 User Guide*.
-    pub fn createRestoreImageTask(self: *Self, allocator: std.mem.Allocator, input: create_restore_image_task.CreateRestoreImageTaskInput, options: create_restore_image_task.Options) !create_restore_image_task.CreateRestoreImageTaskOutput {
+    pub fn createRestoreImageTask(self: *Self, allocator: std.mem.Allocator, input: create_restore_image_task.CreateRestoreImageTaskInput, options: CallOptions) !create_restore_image_task.CreateRestoreImageTaskOutput {
         return create_restore_image_task.execute(self, allocator, input, options);
     }
 
@@ -2689,7 +2690,7 @@ pub const Client = struct {
     /// For more information about route tables, see [Route
     /// tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) in the
     /// *Amazon VPC User Guide*.
-    pub fn createRoute(self: *Self, allocator: std.mem.Allocator, input: create_route.CreateRouteInput, options: create_route.Options) !create_route.CreateRouteOutput {
+    pub fn createRoute(self: *Self, allocator: std.mem.Allocator, input: create_route.CreateRouteInput, options: CallOptions) !create_route.CreateRouteOutput {
         return create_route.execute(self, allocator, input, options);
     }
 
@@ -2718,7 +2719,7 @@ pub const Client = struct {
     ///
     /// For more information see [Dynamic routing in your VPC with VPC Route
     /// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
-    pub fn createRouteServer(self: *Self, allocator: std.mem.Allocator, input: create_route_server.CreateRouteServerInput, options: create_route_server.Options) !create_route_server.CreateRouteServerOutput {
+    pub fn createRouteServer(self: *Self, allocator: std.mem.Allocator, input: create_route_server.CreateRouteServerInput, options: CallOptions) !create_route_server.CreateRouteServerOutput {
         return create_route_server.execute(self, allocator, input, options);
     }
 
@@ -2731,7 +2732,7 @@ pub const Client = struct {
     ///
     /// For more information see [Dynamic routing in your VPC with VPC Route
     /// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
-    pub fn createRouteServerEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_route_server_endpoint.CreateRouteServerEndpointInput, options: create_route_server_endpoint.Options) !create_route_server_endpoint.CreateRouteServerEndpointOutput {
+    pub fn createRouteServerEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_route_server_endpoint.CreateRouteServerEndpointInput, options: CallOptions) !create_route_server_endpoint.CreateRouteServerEndpointOutput {
         return create_route_server_endpoint.execute(self, allocator, input, options);
     }
 
@@ -2750,7 +2751,7 @@ pub const Client = struct {
     ///
     /// For more information see [Dynamic routing in your VPC with VPC Route
     /// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
-    pub fn createRouteServerPeer(self: *Self, allocator: std.mem.Allocator, input: create_route_server_peer.CreateRouteServerPeerInput, options: create_route_server_peer.Options) !create_route_server_peer.CreateRouteServerPeerOutput {
+    pub fn createRouteServerPeer(self: *Self, allocator: std.mem.Allocator, input: create_route_server_peer.CreateRouteServerPeerInput, options: CallOptions) !create_route_server_peer.CreateRouteServerPeerOutput {
         return create_route_server_peer.execute(self, allocator, input, options);
     }
 
@@ -2760,7 +2761,7 @@ pub const Client = struct {
     /// For more information, see [Route
     /// tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) in the
     /// *Amazon VPC User Guide*.
-    pub fn createRouteTable(self: *Self, allocator: std.mem.Allocator, input: create_route_table.CreateRouteTableInput, options: create_route_table.Options) !create_route_table.CreateRouteTableOutput {
+    pub fn createRouteTable(self: *Self, allocator: std.mem.Allocator, input: create_route_table.CreateRouteTableInput, options: CallOptions) !create_route_table.CreateRouteTableOutput {
         return create_route_table.execute(self, allocator, input, options);
     }
 
@@ -2796,7 +2797,7 @@ pub const Client = struct {
     ///
     /// For more information about VPC security group limits, see [Amazon VPC
     /// Limits](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html).
-    pub fn createSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: create_security_group.CreateSecurityGroupInput, options: create_security_group.Options) !create_security_group.CreateSecurityGroupOutput {
+    pub fn createSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: create_security_group.CreateSecurityGroupInput, options: CallOptions) !create_security_group.CreateSecurityGroupOutput {
         return create_security_group.execute(self, allocator, input, options);
     }
 
@@ -2853,7 +2854,7 @@ pub const Client = struct {
     /// see [Amazon EBS
     /// encryption](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html)
     /// in the *Amazon EBS User Guide*.
-    pub fn createSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_snapshot.CreateSnapshotInput, options: create_snapshot.Options) !create_snapshot.CreateSnapshotOutput {
+    pub fn createSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_snapshot.CreateSnapshotInput, options: CallOptions) !create_snapshot.CreateSnapshotOutput {
         return create_snapshot.execute(self, allocator, input, options);
     }
 
@@ -2881,7 +2882,7 @@ pub const Client = struct {
     /// * If the source instance is on an Outpost, you can create the snapshots on
     ///   the same
     /// Outpost or in its parent Amazon Web Services Region.
-    pub fn createSnapshots(self: *Self, allocator: std.mem.Allocator, input: create_snapshots.CreateSnapshotsInput, options: create_snapshots.Options) !create_snapshots.CreateSnapshotsOutput {
+    pub fn createSnapshots(self: *Self, allocator: std.mem.Allocator, input: create_snapshots.CreateSnapshotsInput, options: CallOptions) !create_snapshots.CreateSnapshotsOutput {
         return create_snapshots.execute(self, allocator, input, options);
     }
 
@@ -2892,7 +2893,7 @@ pub const Client = struct {
     /// [Spot Instance data
     /// feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
     /// in the *Amazon EC2 User Guide*.
-    pub fn createSpotDatafeedSubscription(self: *Self, allocator: std.mem.Allocator, input: create_spot_datafeed_subscription.CreateSpotDatafeedSubscriptionInput, options: create_spot_datafeed_subscription.Options) !create_spot_datafeed_subscription.CreateSpotDatafeedSubscriptionOutput {
+    pub fn createSpotDatafeedSubscription(self: *Self, allocator: std.mem.Allocator, input: create_spot_datafeed_subscription.CreateSpotDatafeedSubscriptionInput, options: CallOptions) !create_spot_datafeed_subscription.CreateSpotDatafeedSubscriptionOutput {
         return create_spot_datafeed_subscription.execute(self, allocator, input, options);
     }
 
@@ -2905,7 +2906,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Store and restore an AMI using
     /// S3](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html) in the *Amazon EC2 User Guide*.
-    pub fn createStoreImageTask(self: *Self, allocator: std.mem.Allocator, input: create_store_image_task.CreateStoreImageTaskInput, options: create_store_image_task.Options) !create_store_image_task.CreateStoreImageTaskOutput {
+    pub fn createStoreImageTask(self: *Self, allocator: std.mem.Allocator, input: create_store_image_task.CreateStoreImageTaskInput, options: CallOptions) !create_store_image_task.CreateStoreImageTaskOutput {
         return create_store_image_task.execute(self, allocator, input, options);
     }
 
@@ -2944,7 +2945,7 @@ pub const Client = struct {
     ///
     /// For more information, see
     /// [Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) in the *Amazon VPC User Guide*.
-    pub fn createSubnet(self: *Self, allocator: std.mem.Allocator, input: create_subnet.CreateSubnetInput, options: create_subnet.Options) !create_subnet.CreateSubnetOutput {
+    pub fn createSubnet(self: *Self, allocator: std.mem.Allocator, input: create_subnet.CreateSubnetInput, options: CallOptions) !create_subnet.CreateSubnetOutput {
         return create_subnet.execute(self, allocator, input, options);
     }
 
@@ -2953,7 +2954,7 @@ pub const Client = struct {
     /// in the *Amazon VPC User Guide* and [Manage prefixes
     /// for your network
     /// interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-prefixes.html) in the *Amazon EC2 User Guide*.
-    pub fn createSubnetCidrReservation(self: *Self, allocator: std.mem.Allocator, input: create_subnet_cidr_reservation.CreateSubnetCidrReservationInput, options: create_subnet_cidr_reservation.Options) !create_subnet_cidr_reservation.CreateSubnetCidrReservationOutput {
+    pub fn createSubnetCidrReservation(self: *Self, allocator: std.mem.Allocator, input: create_subnet_cidr_reservation.CreateSubnetCidrReservationInput, options: CallOptions) !create_subnet_cidr_reservation.CreateSubnetCidrReservationOutput {
         return create_subnet_cidr_reservation.execute(self, allocator, input, options);
     }
 
@@ -2973,7 +2974,7 @@ pub const Client = struct {
     /// resource-level permissions for Amazon EC2 API
     /// actions](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-iam-actions-resources.html) in the *Amazon
     /// Elastic Compute Cloud User Guide*.
-    pub fn createTags(self: *Self, allocator: std.mem.Allocator, input: create_tags.CreateTagsInput, options: create_tags.Options) !create_tags.CreateTagsOutput {
+    pub fn createTags(self: *Self, allocator: std.mem.Allocator, input: create_tags.CreateTagsInput, options: CallOptions) !create_tags.CreateTagsOutput {
         return create_tags.execute(self, allocator, input, options);
     }
 
@@ -2988,7 +2989,7 @@ pub const Client = struct {
     /// traffic gets mirrored.
     /// You can also use
     /// [ModifyTrafficMirrorFilterNetworkServices](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyTrafficMirrorFilterNetworkServices.html) to mirror supported network services.
-    pub fn createTrafficMirrorFilter(self: *Self, allocator: std.mem.Allocator, input: create_traffic_mirror_filter.CreateTrafficMirrorFilterInput, options: create_traffic_mirror_filter.Options) !create_traffic_mirror_filter.CreateTrafficMirrorFilterOutput {
+    pub fn createTrafficMirrorFilter(self: *Self, allocator: std.mem.Allocator, input: create_traffic_mirror_filter.CreateTrafficMirrorFilterInput, options: CallOptions) !create_traffic_mirror_filter.CreateTrafficMirrorFilterOutput {
         return create_traffic_mirror_filter.execute(self, allocator, input, options);
     }
 
@@ -2997,7 +2998,7 @@ pub const Client = struct {
     /// A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.
     ///
     /// You need the Traffic Mirror filter ID when you create the rule.
-    pub fn createTrafficMirrorFilterRule(self: *Self, allocator: std.mem.Allocator, input: create_traffic_mirror_filter_rule.CreateTrafficMirrorFilterRuleInput, options: create_traffic_mirror_filter_rule.Options) !create_traffic_mirror_filter_rule.CreateTrafficMirrorFilterRuleOutput {
+    pub fn createTrafficMirrorFilterRule(self: *Self, allocator: std.mem.Allocator, input: create_traffic_mirror_filter_rule.CreateTrafficMirrorFilterRuleInput, options: CallOptions) !create_traffic_mirror_filter_rule.CreateTrafficMirrorFilterRuleOutput {
         return create_traffic_mirror_filter_rule.execute(self, allocator, input, options);
     }
 
@@ -3016,7 +3017,7 @@ pub const Client = struct {
     /// By default, no traffic is mirrored. Use
     /// [CreateTrafficMirrorFilter](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilter.html) to
     /// create filter rules that specify the traffic to mirror.
-    pub fn createTrafficMirrorSession(self: *Self, allocator: std.mem.Allocator, input: create_traffic_mirror_session.CreateTrafficMirrorSessionInput, options: create_traffic_mirror_session.Options) !create_traffic_mirror_session.CreateTrafficMirrorSessionOutput {
+    pub fn createTrafficMirrorSession(self: *Self, allocator: std.mem.Allocator, input: create_traffic_mirror_session.CreateTrafficMirrorSessionInput, options: CallOptions) !create_traffic_mirror_session.CreateTrafficMirrorSessionOutput {
         return create_traffic_mirror_session.execute(self, allocator, input, options);
     }
 
@@ -3033,7 +3034,7 @@ pub const Client = struct {
     ///
     /// To use the target in a Traffic Mirror session, use
     /// [CreateTrafficMirrorSession](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorSession.htm).
-    pub fn createTrafficMirrorTarget(self: *Self, allocator: std.mem.Allocator, input: create_traffic_mirror_target.CreateTrafficMirrorTargetInput, options: create_traffic_mirror_target.Options) !create_traffic_mirror_target.CreateTrafficMirrorTargetOutput {
+    pub fn createTrafficMirrorTarget(self: *Self, allocator: std.mem.Allocator, input: create_traffic_mirror_target.CreateTrafficMirrorTargetInput, options: CallOptions) !create_traffic_mirror_target.CreateTrafficMirrorTargetOutput {
         return create_traffic_mirror_target.execute(self, allocator, input, options);
     }
 
@@ -3063,7 +3064,7 @@ pub const Client = struct {
     /// attachment to a transit gateway route table. If you disable automatic
     /// associations, you can use AssociateTransitGatewayRouteTable to associate a
     /// resource attachment with a transit gateway route table.
-    pub fn createTransitGateway(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway.CreateTransitGatewayInput, options: create_transit_gateway.Options) !create_transit_gateway.CreateTransitGatewayOutput {
+    pub fn createTransitGateway(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway.CreateTransitGatewayInput, options: CallOptions) !create_transit_gateway.CreateTransitGatewayOutput {
         return create_transit_gateway.execute(self, allocator, input, options);
     }
 
@@ -3073,7 +3074,7 @@ pub const Client = struct {
     ///
     /// A Connect attachment uses an existing VPC or Amazon Web Services Direct
     /// Connect attachment as the underlying transport mechanism.
-    pub fn createTransitGatewayConnect(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_connect.CreateTransitGatewayConnectInput, options: create_transit_gateway_connect.Options) !create_transit_gateway_connect.CreateTransitGatewayConnectOutput {
+    pub fn createTransitGatewayConnect(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_connect.CreateTransitGatewayConnectInput, options: CallOptions) !create_transit_gateway_connect.CreateTransitGatewayConnectOutput {
         return create_transit_gateway_connect.execute(self, allocator, input, options);
     }
 
@@ -3087,19 +3088,19 @@ pub const Client = struct {
     /// For more information, see [Connect
     /// peers](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html#tgw-connect-peer)
     /// in the *Amazon Web Services Transit Gateways Guide*.
-    pub fn createTransitGatewayConnectPeer(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_connect_peer.CreateTransitGatewayConnectPeerInput, options: create_transit_gateway_connect_peer.Options) !create_transit_gateway_connect_peer.CreateTransitGatewayConnectPeerOutput {
+    pub fn createTransitGatewayConnectPeer(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_connect_peer.CreateTransitGatewayConnectPeerInput, options: CallOptions) !create_transit_gateway_connect_peer.CreateTransitGatewayConnectPeerOutput {
         return create_transit_gateway_connect_peer.execute(self, allocator, input, options);
     }
 
     /// Creates a metering policy for a transit gateway to track and measure network
     /// traffic.
-    pub fn createTransitGatewayMeteringPolicy(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_metering_policy.CreateTransitGatewayMeteringPolicyInput, options: create_transit_gateway_metering_policy.Options) !create_transit_gateway_metering_policy.CreateTransitGatewayMeteringPolicyOutput {
+    pub fn createTransitGatewayMeteringPolicy(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_metering_policy.CreateTransitGatewayMeteringPolicyInput, options: CallOptions) !create_transit_gateway_metering_policy.CreateTransitGatewayMeteringPolicyOutput {
         return create_transit_gateway_metering_policy.execute(self, allocator, input, options);
     }
 
     /// Creates an entry in a transit gateway metering policy to define traffic
     /// measurement rules.
-    pub fn createTransitGatewayMeteringPolicyEntry(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_metering_policy_entry.CreateTransitGatewayMeteringPolicyEntryInput, options: create_transit_gateway_metering_policy_entry.Options) !create_transit_gateway_metering_policy_entry.CreateTransitGatewayMeteringPolicyEntryOutput {
+    pub fn createTransitGatewayMeteringPolicyEntry(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_metering_policy_entry.CreateTransitGatewayMeteringPolicyEntryInput, options: CallOptions) !create_transit_gateway_metering_policy_entry.CreateTransitGatewayMeteringPolicyEntryOutput {
         return create_transit_gateway_metering_policy_entry.execute(self, allocator, input, options);
     }
 
@@ -3108,7 +3109,7 @@ pub const Client = struct {
     /// The transit gateway must be in the available state before you create a
     /// domain. Use
     /// [DescribeTransitGateways](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGateways.html) to see the state of transit gateway.
-    pub fn createTransitGatewayMulticastDomain(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_multicast_domain.CreateTransitGatewayMulticastDomainInput, options: create_transit_gateway_multicast_domain.Options) !create_transit_gateway_multicast_domain.CreateTransitGatewayMulticastDomainOutput {
+    pub fn createTransitGatewayMulticastDomain(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_multicast_domain.CreateTransitGatewayMulticastDomainInput, options: CallOptions) !create_transit_gateway_multicast_domain.CreateTransitGatewayMulticastDomainOutput {
         return create_transit_gateway_multicast_domain.execute(self, allocator, input, options);
     }
 
@@ -3121,33 +3122,33 @@ pub const Client = struct {
     /// After you create the peering attachment, the owner of the accepter transit
     /// gateway
     /// must accept the attachment request.
-    pub fn createTransitGatewayPeeringAttachment(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_peering_attachment.CreateTransitGatewayPeeringAttachmentInput, options: create_transit_gateway_peering_attachment.Options) !create_transit_gateway_peering_attachment.CreateTransitGatewayPeeringAttachmentOutput {
+    pub fn createTransitGatewayPeeringAttachment(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_peering_attachment.CreateTransitGatewayPeeringAttachmentInput, options: CallOptions) !create_transit_gateway_peering_attachment.CreateTransitGatewayPeeringAttachmentOutput {
         return create_transit_gateway_peering_attachment.execute(self, allocator, input, options);
     }
 
     /// Creates a transit gateway policy table.
-    pub fn createTransitGatewayPolicyTable(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_policy_table.CreateTransitGatewayPolicyTableInput, options: create_transit_gateway_policy_table.Options) !create_transit_gateway_policy_table.CreateTransitGatewayPolicyTableOutput {
+    pub fn createTransitGatewayPolicyTable(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_policy_table.CreateTransitGatewayPolicyTableInput, options: CallOptions) !create_transit_gateway_policy_table.CreateTransitGatewayPolicyTableOutput {
         return create_transit_gateway_policy_table.execute(self, allocator, input, options);
     }
 
     /// Creates a reference (route) to a prefix list in a specified transit gateway
     /// route table.
-    pub fn createTransitGatewayPrefixListReference(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_prefix_list_reference.CreateTransitGatewayPrefixListReferenceInput, options: create_transit_gateway_prefix_list_reference.Options) !create_transit_gateway_prefix_list_reference.CreateTransitGatewayPrefixListReferenceOutput {
+    pub fn createTransitGatewayPrefixListReference(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_prefix_list_reference.CreateTransitGatewayPrefixListReferenceInput, options: CallOptions) !create_transit_gateway_prefix_list_reference.CreateTransitGatewayPrefixListReferenceOutput {
         return create_transit_gateway_prefix_list_reference.execute(self, allocator, input, options);
     }
 
     /// Creates a static route for the specified transit gateway route table.
-    pub fn createTransitGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_route.CreateTransitGatewayRouteInput, options: create_transit_gateway_route.Options) !create_transit_gateway_route.CreateTransitGatewayRouteOutput {
+    pub fn createTransitGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_route.CreateTransitGatewayRouteInput, options: CallOptions) !create_transit_gateway_route.CreateTransitGatewayRouteOutput {
         return create_transit_gateway_route.execute(self, allocator, input, options);
     }
 
     /// Creates a route table for the specified transit gateway.
-    pub fn createTransitGatewayRouteTable(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_route_table.CreateTransitGatewayRouteTableInput, options: create_transit_gateway_route_table.Options) !create_transit_gateway_route_table.CreateTransitGatewayRouteTableOutput {
+    pub fn createTransitGatewayRouteTable(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_route_table.CreateTransitGatewayRouteTableInput, options: CallOptions) !create_transit_gateway_route_table.CreateTransitGatewayRouteTableOutput {
         return create_transit_gateway_route_table.execute(self, allocator, input, options);
     }
 
     /// Advertises a new transit gateway route table.
-    pub fn createTransitGatewayRouteTableAnnouncement(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_route_table_announcement.CreateTransitGatewayRouteTableAnnouncementInput, options: create_transit_gateway_route_table_announcement.Options) !create_transit_gateway_route_table_announcement.CreateTransitGatewayRouteTableAnnouncementOutput {
+    pub fn createTransitGatewayRouteTableAnnouncement(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_route_table_announcement.CreateTransitGatewayRouteTableAnnouncementInput, options: CallOptions) !create_transit_gateway_route_table_announcement.CreateTransitGatewayRouteTableAnnouncementOutput {
         return create_transit_gateway_route_table_announcement.execute(self, allocator, input, options);
     }
 
@@ -3160,13 +3161,13 @@ pub const Client = struct {
     ///
     /// To send VPC traffic to an attached transit gateway, add a route to the VPC
     /// route table using CreateRoute.
-    pub fn createTransitGatewayVpcAttachment(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_vpc_attachment.CreateTransitGatewayVpcAttachmentInput, options: create_transit_gateway_vpc_attachment.Options) !create_transit_gateway_vpc_attachment.CreateTransitGatewayVpcAttachmentOutput {
+    pub fn createTransitGatewayVpcAttachment(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_vpc_attachment.CreateTransitGatewayVpcAttachmentInput, options: CallOptions) !create_transit_gateway_vpc_attachment.CreateTransitGatewayVpcAttachmentOutput {
         return create_transit_gateway_vpc_attachment.execute(self, allocator, input, options);
     }
 
     /// An Amazon Web Services Verified Access endpoint is where you define your
     /// application along with an optional endpoint-level access policy.
-    pub fn createVerifiedAccessEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_verified_access_endpoint.CreateVerifiedAccessEndpointInput, options: create_verified_access_endpoint.Options) !create_verified_access_endpoint.CreateVerifiedAccessEndpointOutput {
+    pub fn createVerifiedAccessEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_verified_access_endpoint.CreateVerifiedAccessEndpointInput, options: CallOptions) !create_verified_access_endpoint.CreateVerifiedAccessEndpointOutput {
         return create_verified_access_endpoint.execute(self, allocator, input, options);
     }
 
@@ -3177,14 +3178,14 @@ pub const Client = struct {
     /// example, you can group all Verified Access instances associated with "sales"
     /// applications together and
     /// use one common Verified Access policy.
-    pub fn createVerifiedAccessGroup(self: *Self, allocator: std.mem.Allocator, input: create_verified_access_group.CreateVerifiedAccessGroupInput, options: create_verified_access_group.Options) !create_verified_access_group.CreateVerifiedAccessGroupOutput {
+    pub fn createVerifiedAccessGroup(self: *Self, allocator: std.mem.Allocator, input: create_verified_access_group.CreateVerifiedAccessGroupInput, options: CallOptions) !create_verified_access_group.CreateVerifiedAccessGroupOutput {
         return create_verified_access_group.execute(self, allocator, input, options);
     }
 
     /// An Amazon Web Services Verified Access instance is a regional entity that
     /// evaluates application requests and grants
     /// access only when your security requirements are met.
-    pub fn createVerifiedAccessInstance(self: *Self, allocator: std.mem.Allocator, input: create_verified_access_instance.CreateVerifiedAccessInstanceInput, options: create_verified_access_instance.Options) !create_verified_access_instance.CreateVerifiedAccessInstanceOutput {
+    pub fn createVerifiedAccessInstance(self: *Self, allocator: std.mem.Allocator, input: create_verified_access_instance.CreateVerifiedAccessInstanceInput, options: CallOptions) !create_verified_access_instance.CreateVerifiedAccessInstanceOutput {
         return create_verified_access_instance.execute(self, allocator, input, options);
     }
 
@@ -3195,7 +3196,7 @@ pub const Client = struct {
     /// information sent by the trust provider is evaluated by Verified Access
     /// before allowing or
     /// denying the application request.
-    pub fn createVerifiedAccessTrustProvider(self: *Self, allocator: std.mem.Allocator, input: create_verified_access_trust_provider.CreateVerifiedAccessTrustProviderInput, options: create_verified_access_trust_provider.Options) !create_verified_access_trust_provider.CreateVerifiedAccessTrustProviderOutput {
+    pub fn createVerifiedAccessTrustProvider(self: *Self, allocator: std.mem.Allocator, input: create_verified_access_trust_provider.CreateVerifiedAccessTrustProviderInput, options: CallOptions) !create_verified_access_trust_provider.CreateVerifiedAccessTrustProviderOutput {
         return create_verified_access_trust_provider.execute(self, allocator, input, options);
     }
 
@@ -3221,7 +3222,7 @@ pub const Client = struct {
     /// For more information, see [Create an Amazon EBS
     /// volume](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-creating-volume.html) in the
     /// *Amazon EBS User Guide*.
-    pub fn createVolume(self: *Self, allocator: std.mem.Allocator, input: create_volume.CreateVolumeInput, options: create_volume.Options) !create_volume.CreateVolumeOutput {
+    pub fn createVolume(self: *Self, allocator: std.mem.Allocator, input: create_volume.CreateVolumeInput, options: CallOptions) !create_volume.CreateVolumeOutput {
         return create_volume.execute(self, allocator, input, options);
     }
 
@@ -3251,7 +3252,7 @@ pub const Client = struct {
     /// configuration
     /// options](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc-options.html) in the
     /// *Amazon VPC User Guide*.
-    pub fn createVpc(self: *Self, allocator: std.mem.Allocator, input: create_vpc.CreateVpcInput, options: create_vpc.Options) !create_vpc.CreateVpcOutput {
+    pub fn createVpc(self: *Self, allocator: std.mem.Allocator, input: create_vpc.CreateVpcInput, options: CallOptions) !create_vpc.CreateVpcOutput {
         return create_vpc.execute(self, allocator, input, options);
     }
 
@@ -3263,7 +3264,7 @@ pub const Client = struct {
     /// exclusions when VPC BPA is turned on. To learn more about VPC BPA, see
     /// [Block public access to VPCs and
     /// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html) in the *Amazon VPC User Guide*.
-    pub fn createVpcBlockPublicAccessExclusion(self: *Self, allocator: std.mem.Allocator, input: create_vpc_block_public_access_exclusion.CreateVpcBlockPublicAccessExclusionInput, options: create_vpc_block_public_access_exclusion.Options) !create_vpc_block_public_access_exclusion.CreateVpcBlockPublicAccessExclusionOutput {
+    pub fn createVpcBlockPublicAccessExclusion(self: *Self, allocator: std.mem.Allocator, input: create_vpc_block_public_access_exclusion.CreateVpcBlockPublicAccessExclusionInput, options: CallOptions) !create_vpc_block_public_access_exclusion.CreateVpcBlockPublicAccessExclusionOutput {
         return create_vpc_block_public_access_exclusion.execute(self, allocator, input, options);
     }
 
@@ -3274,7 +3275,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Enforce VPC encryption in
     /// transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.
-    pub fn createVpcEncryptionControl(self: *Self, allocator: std.mem.Allocator, input: create_vpc_encryption_control.CreateVpcEncryptionControlInput, options: create_vpc_encryption_control.Options) !create_vpc_encryption_control.CreateVpcEncryptionControlOutput {
+    pub fn createVpcEncryptionControl(self: *Self, allocator: std.mem.Allocator, input: create_vpc_encryption_control.CreateVpcEncryptionControlInput, options: CallOptions) !create_vpc_encryption_control.CreateVpcEncryptionControlOutput {
         return create_vpc_encryption_control.execute(self, allocator, input, options);
     }
 
@@ -3287,7 +3288,7 @@ pub const Client = struct {
     /// Amazon Web Services account. For more information, see the [Amazon Web
     /// Services PrivateLink User
     /// Guide](https://docs.aws.amazon.com/vpc/latest/privatelink/).
-    pub fn createVpcEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_vpc_endpoint.CreateVpcEndpointInput, options: create_vpc_endpoint.Options) !create_vpc_endpoint.CreateVpcEndpointOutput {
+    pub fn createVpcEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_vpc_endpoint.CreateVpcEndpointInput, options: CallOptions) !create_vpc_endpoint.CreateVpcEndpointOutput {
         return create_vpc_endpoint.execute(self, allocator, input, options);
     }
 
@@ -3301,7 +3302,7 @@ pub const Client = struct {
     /// the *Amazon SNS Developer Guide*.
     ///
     /// You can create a connection notification for interface endpoints only.
-    pub fn createVpcEndpointConnectionNotification(self: *Self, allocator: std.mem.Allocator, input: create_vpc_endpoint_connection_notification.CreateVpcEndpointConnectionNotificationInput, options: create_vpc_endpoint_connection_notification.Options) !create_vpc_endpoint_connection_notification.CreateVpcEndpointConnectionNotificationOutput {
+    pub fn createVpcEndpointConnectionNotification(self: *Self, allocator: std.mem.Allocator, input: create_vpc_endpoint_connection_notification.CreateVpcEndpointConnectionNotificationInput, options: CallOptions) !create_vpc_endpoint_connection_notification.CreateVpcEndpointConnectionNotificationOutput {
         return create_vpc_endpoint_connection_notification.execute(self, allocator, input, options);
     }
 
@@ -3327,7 +3328,7 @@ pub const Client = struct {
     ///
     /// For more information, see the [Amazon Web Services PrivateLink
     /// Guide](https://docs.aws.amazon.com/vpc/latest/privatelink/).
-    pub fn createVpcEndpointServiceConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_vpc_endpoint_service_configuration.CreateVpcEndpointServiceConfigurationInput, options: create_vpc_endpoint_service_configuration.Options) !create_vpc_endpoint_service_configuration.CreateVpcEndpointServiceConfigurationOutput {
+    pub fn createVpcEndpointServiceConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_vpc_endpoint_service_configuration.CreateVpcEndpointServiceConfigurationInput, options: CallOptions) !create_vpc_endpoint_service_configuration.CreateVpcEndpointServiceConfigurationOutput {
         return create_vpc_endpoint_service_configuration.execute(self, allocator, input, options);
     }
 
@@ -3353,13 +3354,13 @@ pub const Client = struct {
     /// If you create a VPC peering connection request between VPCs with overlapping
     /// CIDR
     /// blocks, the VPC peering connection has a status of `failed`.
-    pub fn createVpcPeeringConnection(self: *Self, allocator: std.mem.Allocator, input: create_vpc_peering_connection.CreateVpcPeeringConnectionInput, options: create_vpc_peering_connection.Options) !create_vpc_peering_connection.CreateVpcPeeringConnectionOutput {
+    pub fn createVpcPeeringConnection(self: *Self, allocator: std.mem.Allocator, input: create_vpc_peering_connection.CreateVpcPeeringConnectionInput, options: CallOptions) !create_vpc_peering_connection.CreateVpcPeeringConnectionOutput {
         return create_vpc_peering_connection.execute(self, allocator, input, options);
     }
 
     /// Creates a VPN concentrator that aggregates multiple VPN connections to a
     /// transit gateway.
-    pub fn createVpnConcentrator(self: *Self, allocator: std.mem.Allocator, input: create_vpn_concentrator.CreateVpnConcentratorInput, options: create_vpn_concentrator.Options) !create_vpn_concentrator.CreateVpnConcentratorOutput {
+    pub fn createVpnConcentrator(self: *Self, allocator: std.mem.Allocator, input: create_vpn_concentrator.CreateVpnConcentratorInput, options: CallOptions) !create_vpn_concentrator.CreateVpnConcentratorOutput {
         return create_vpn_concentrator.execute(self, allocator, input, options);
     }
 
@@ -3392,7 +3393,7 @@ pub const Client = struct {
     /// VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the
     /// *Amazon Web Services Site-to-Site VPN
     /// User Guide*.
-    pub fn createVpnConnection(self: *Self, allocator: std.mem.Allocator, input: create_vpn_connection.CreateVpnConnectionInput, options: create_vpn_connection.Options) !create_vpn_connection.CreateVpnConnectionOutput {
+    pub fn createVpnConnection(self: *Self, allocator: std.mem.Allocator, input: create_vpn_connection.CreateVpnConnectionInput, options: CallOptions) !create_vpn_connection.CreateVpnConnectionOutput {
         return create_vpn_connection.execute(self, allocator, input, options);
     }
 
@@ -3406,7 +3407,7 @@ pub const Client = struct {
     /// VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the
     /// *Amazon Web Services Site-to-Site VPN
     /// User Guide*.
-    pub fn createVpnConnectionRoute(self: *Self, allocator: std.mem.Allocator, input: create_vpn_connection_route.CreateVpnConnectionRouteInput, options: create_vpn_connection_route.Options) !create_vpn_connection_route.CreateVpnConnectionRouteOutput {
+    pub fn createVpnConnectionRoute(self: *Self, allocator: std.mem.Allocator, input: create_vpn_connection_route.CreateVpnConnectionRouteInput, options: CallOptions) !create_vpn_connection_route.CreateVpnConnectionRouteOutput {
         return create_vpn_connection_route.execute(self, allocator, input, options);
     }
 
@@ -3420,14 +3421,14 @@ pub const Client = struct {
     /// VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the
     /// *Amazon Web Services Site-to-Site VPN
     /// User Guide*.
-    pub fn createVpnGateway(self: *Self, allocator: std.mem.Allocator, input: create_vpn_gateway.CreateVpnGatewayInput, options: create_vpn_gateway.Options) !create_vpn_gateway.CreateVpnGatewayOutput {
+    pub fn createVpnGateway(self: *Self, allocator: std.mem.Allocator, input: create_vpn_gateway.CreateVpnGatewayInput, options: CallOptions) !create_vpn_gateway.CreateVpnGatewayOutput {
         return create_vpn_gateway.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing Capacity Manager data export configuration. This stops
     /// future scheduled exports but does not delete previously exported files from
     /// S3.
-    pub fn deleteCapacityManagerDataExport(self: *Self, allocator: std.mem.Allocator, input: delete_capacity_manager_data_export.DeleteCapacityManagerDataExportInput, options: delete_capacity_manager_data_export.Options) !delete_capacity_manager_data_export.DeleteCapacityManagerDataExportOutput {
+    pub fn deleteCapacityManagerDataExport(self: *Self, allocator: std.mem.Allocator, input: delete_capacity_manager_data_export.DeleteCapacityManagerDataExportInput, options: CallOptions) !delete_capacity_manager_data_export.DeleteCapacityManagerDataExportOutput {
         return delete_capacity_manager_data_export.execute(self, allocator, input, options);
     }
 
@@ -3437,14 +3438,14 @@ pub const Client = struct {
     /// Target, the route is a blackhole route. For information about how to delete
     /// a route, see
     /// [DeleteRoute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteRoute.html).
-    pub fn deleteCarrierGateway(self: *Self, allocator: std.mem.Allocator, input: delete_carrier_gateway.DeleteCarrierGatewayInput, options: delete_carrier_gateway.Options) !delete_carrier_gateway.DeleteCarrierGatewayOutput {
+    pub fn deleteCarrierGateway(self: *Self, allocator: std.mem.Allocator, input: delete_carrier_gateway.DeleteCarrierGatewayInput, options: CallOptions) !delete_carrier_gateway.DeleteCarrierGatewayOutput {
         return delete_carrier_gateway.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified Client VPN endpoint. You must disassociate all target
     /// networks before you
     /// can delete a Client VPN endpoint.
-    pub fn deleteClientVpnEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_client_vpn_endpoint.DeleteClientVpnEndpointInput, options: delete_client_vpn_endpoint.Options) !delete_client_vpn_endpoint.DeleteClientVpnEndpointOutput {
+    pub fn deleteClientVpnEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_client_vpn_endpoint.DeleteClientVpnEndpointInput, options: CallOptions) !delete_client_vpn_endpoint.DeleteClientVpnEndpointOutput {
         return delete_client_vpn_endpoint.execute(self, allocator, input, options);
     }
 
@@ -3454,24 +3455,24 @@ pub const Client = struct {
     /// automatically added when associating a subnet. To remove routes that have
     /// been automatically added,
     /// disassociate the target subnet from the Client VPN endpoint.
-    pub fn deleteClientVpnRoute(self: *Self, allocator: std.mem.Allocator, input: delete_client_vpn_route.DeleteClientVpnRouteInput, options: delete_client_vpn_route.Options) !delete_client_vpn_route.DeleteClientVpnRouteOutput {
+    pub fn deleteClientVpnRoute(self: *Self, allocator: std.mem.Allocator, input: delete_client_vpn_route.DeleteClientVpnRouteInput, options: CallOptions) !delete_client_vpn_route.DeleteClientVpnRouteOutput {
         return delete_client_vpn_route.execute(self, allocator, input, options);
     }
 
     /// Deletes a range of customer-owned IP addresses.
-    pub fn deleteCoipCidr(self: *Self, allocator: std.mem.Allocator, input: delete_coip_cidr.DeleteCoipCidrInput, options: delete_coip_cidr.Options) !delete_coip_cidr.DeleteCoipCidrOutput {
+    pub fn deleteCoipCidr(self: *Self, allocator: std.mem.Allocator, input: delete_coip_cidr.DeleteCoipCidrInput, options: CallOptions) !delete_coip_cidr.DeleteCoipCidrOutput {
         return delete_coip_cidr.execute(self, allocator, input, options);
     }
 
     /// Deletes a pool of customer-owned IP (CoIP) addresses.
-    pub fn deleteCoipPool(self: *Self, allocator: std.mem.Allocator, input: delete_coip_pool.DeleteCoipPoolInput, options: delete_coip_pool.Options) !delete_coip_pool.DeleteCoipPoolOutput {
+    pub fn deleteCoipPool(self: *Self, allocator: std.mem.Allocator, input: delete_coip_pool.DeleteCoipPoolInput, options: CallOptions) !delete_coip_pool.DeleteCoipPoolOutput {
         return delete_coip_pool.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified customer gateway. You must delete the VPN connection
     /// before you
     /// can delete the customer gateway.
-    pub fn deleteCustomerGateway(self: *Self, allocator: std.mem.Allocator, input: delete_customer_gateway.DeleteCustomerGatewayInput, options: delete_customer_gateway.Options) !delete_customer_gateway.DeleteCustomerGatewayOutput {
+    pub fn deleteCustomerGateway(self: *Self, allocator: std.mem.Allocator, input: delete_customer_gateway.DeleteCustomerGatewayInput, options: CallOptions) !delete_customer_gateway.DeleteCustomerGatewayOutput {
         return delete_customer_gateway.execute(self, allocator, input, options);
     }
 
@@ -3479,12 +3480,12 @@ pub const Client = struct {
     /// DHCP options before you can delete it. You can disassociate the set of DHCP
     /// options by associating either a new set of options or the default set of
     /// options with the VPC.
-    pub fn deleteDhcpOptions(self: *Self, allocator: std.mem.Allocator, input: delete_dhcp_options.DeleteDhcpOptionsInput, options: delete_dhcp_options.Options) !delete_dhcp_options.DeleteDhcpOptionsOutput {
+    pub fn deleteDhcpOptions(self: *Self, allocator: std.mem.Allocator, input: delete_dhcp_options.DeleteDhcpOptionsInput, options: CallOptions) !delete_dhcp_options.DeleteDhcpOptionsOutput {
         return delete_dhcp_options.execute(self, allocator, input, options);
     }
 
     /// Deletes an egress-only internet gateway.
-    pub fn deleteEgressOnlyInternetGateway(self: *Self, allocator: std.mem.Allocator, input: delete_egress_only_internet_gateway.DeleteEgressOnlyInternetGatewayInput, options: delete_egress_only_internet_gateway.Options) !delete_egress_only_internet_gateway.DeleteEgressOnlyInternetGatewayOutput {
+    pub fn deleteEgressOnlyInternetGateway(self: *Self, allocator: std.mem.Allocator, input: delete_egress_only_internet_gateway.DeleteEgressOnlyInternetGatewayInput, options: CallOptions) !delete_egress_only_internet_gateway.DeleteEgressOnlyInternetGatewayOutput {
         return delete_egress_only_internet_gateway.execute(self, allocator, input, options);
     }
 
@@ -3543,17 +3544,17 @@ pub const Client = struct {
     /// For more information, see [Delete an EC2 Fleet request and the instances
     /// in the
     /// fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/delete-fleet.html) in the *Amazon EC2 User Guide*.
-    pub fn deleteFleets(self: *Self, allocator: std.mem.Allocator, input: delete_fleets.DeleteFleetsInput, options: delete_fleets.Options) !delete_fleets.DeleteFleetsOutput {
+    pub fn deleteFleets(self: *Self, allocator: std.mem.Allocator, input: delete_fleets.DeleteFleetsInput, options: CallOptions) !delete_fleets.DeleteFleetsOutput {
         return delete_fleets.execute(self, allocator, input, options);
     }
 
     /// Deletes one or more flow logs.
-    pub fn deleteFlowLogs(self: *Self, allocator: std.mem.Allocator, input: delete_flow_logs.DeleteFlowLogsInput, options: delete_flow_logs.Options) !delete_flow_logs.DeleteFlowLogsOutput {
+    pub fn deleteFlowLogs(self: *Self, allocator: std.mem.Allocator, input: delete_flow_logs.DeleteFlowLogsInput, options: CallOptions) !delete_flow_logs.DeleteFlowLogsOutput {
         return delete_flow_logs.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified Amazon FPGA Image (AFI).
-    pub fn deleteFpgaImage(self: *Self, allocator: std.mem.Allocator, input: delete_fpga_image.DeleteFpgaImageInput, options: delete_fpga_image.Options) !delete_fpga_image.DeleteFpgaImageOutput {
+    pub fn deleteFpgaImage(self: *Self, allocator: std.mem.Allocator, input: delete_fpga_image.DeleteFpgaImageInput, options: CallOptions) !delete_fpga_image.DeleteFpgaImageOutput {
         return delete_fpga_image.execute(self, allocator, input, options);
     }
 
@@ -3562,12 +3563,12 @@ pub const Client = struct {
     /// For more information, see [View your AMI
     /// usage](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn deleteImageUsageReport(self: *Self, allocator: std.mem.Allocator, input: delete_image_usage_report.DeleteImageUsageReportInput, options: delete_image_usage_report.Options) !delete_image_usage_report.DeleteImageUsageReportOutput {
+    pub fn deleteImageUsageReport(self: *Self, allocator: std.mem.Allocator, input: delete_image_usage_report.DeleteImageUsageReportInput, options: CallOptions) !delete_image_usage_report.DeleteImageUsageReportOutput {
         return delete_image_usage_report.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified EC2 Instance Connect Endpoint.
-    pub fn deleteInstanceConnectEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_instance_connect_endpoint.DeleteInstanceConnectEndpointInput, options: delete_instance_connect_endpoint.Options) !delete_instance_connect_endpoint.DeleteInstanceConnectEndpointOutput {
+    pub fn deleteInstanceConnectEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_instance_connect_endpoint.DeleteInstanceConnectEndpointInput, options: CallOptions) !delete_instance_connect_endpoint.DeleteInstanceConnectEndpointOutput {
         return delete_instance_connect_endpoint.execute(self, allocator, input, options);
     }
 
@@ -3575,14 +3576,14 @@ pub const Client = struct {
     ///
     /// For more information, see [Define event windows for scheduled
     /// events](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html) in the *Amazon EC2 User Guide*.
-    pub fn deleteInstanceEventWindow(self: *Self, allocator: std.mem.Allocator, input: delete_instance_event_window.DeleteInstanceEventWindowInput, options: delete_instance_event_window.Options) !delete_instance_event_window.DeleteInstanceEventWindowOutput {
+    pub fn deleteInstanceEventWindow(self: *Self, allocator: std.mem.Allocator, input: delete_instance_event_window.DeleteInstanceEventWindowInput, options: CallOptions) !delete_instance_event_window.DeleteInstanceEventWindowOutput {
         return delete_instance_event_window.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified internet gateway. You must detach the internet gateway
     /// from the
     /// VPC before you can delete it.
-    pub fn deleteInternetGateway(self: *Self, allocator: std.mem.Allocator, input: delete_internet_gateway.DeleteInternetGatewayInput, options: delete_internet_gateway.Options) !delete_internet_gateway.DeleteInternetGatewayOutput {
+    pub fn deleteInternetGateway(self: *Self, allocator: std.mem.Allocator, input: delete_internet_gateway.DeleteInternetGatewayInput, options: CallOptions) !delete_internet_gateway.DeleteInternetGatewayOutput {
         return delete_internet_gateway.execute(self, allocator, input, options);
     }
 
@@ -3592,7 +3593,7 @@ pub const Client = struct {
     /// For more information, see [Delete an
     /// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/delete-ipam.html) in the
     /// *Amazon VPC IPAM User Guide*.
-    pub fn deleteIpam(self: *Self, allocator: std.mem.Allocator, input: delete_ipam.DeleteIpamInput, options: delete_ipam.Options) !delete_ipam.DeleteIpamOutput {
+    pub fn deleteIpam(self: *Self, allocator: std.mem.Allocator, input: delete_ipam.DeleteIpamInput, options: CallOptions) !delete_ipam.DeleteIpamOutput {
         return delete_ipam.execute(self, allocator, input, options);
     }
 
@@ -3602,7 +3603,7 @@ pub const Client = struct {
     /// you can use to prove ownership of an external resource. For example, you can
     /// use a verification token to validate that you control a public IP address
     /// range when you bring an IP address range to Amazon Web Services (BYOIP).
-    pub fn deleteIpamExternalResourceVerificationToken(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_external_resource_verification_token.DeleteIpamExternalResourceVerificationTokenInput, options: delete_ipam_external_resource_verification_token.Options) !delete_ipam_external_resource_verification_token.DeleteIpamExternalResourceVerificationTokenOutput {
+    pub fn deleteIpamExternalResourceVerificationToken(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_external_resource_verification_token.DeleteIpamExternalResourceVerificationTokenInput, options: CallOptions) !delete_ipam_external_resource_verification_token.DeleteIpamExternalResourceVerificationTokenOutput {
         return delete_ipam_external_resource_verification_token.execute(self, allocator, input, options);
     }
 
@@ -3616,7 +3617,7 @@ pub const Client = struct {
     /// then the services fallback to Amazon-provided IP addresses. A policy can be
     /// applied to an individual Amazon Web Services account or an entity within
     /// Amazon Web Services Organizations.
-    pub fn deleteIpamPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_policy.DeleteIpamPolicyInput, options: delete_ipam_policy.Options) !delete_ipam_policy.DeleteIpamPolicyOutput {
+    pub fn deleteIpamPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_policy.DeleteIpamPolicyInput, options: CallOptions) !delete_ipam_policy.DeleteIpamPolicyOutput {
         return delete_ipam_policy.execute(self, allocator, input, options);
     }
 
@@ -3632,13 +3633,13 @@ pub const Client = struct {
     /// For more information, see [Delete a
     /// pool](https://docs.aws.amazon.com/vpc/latest/ipam/delete-pool-ipam.html) in
     /// the *Amazon VPC IPAM User Guide*.
-    pub fn deleteIpamPool(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_pool.DeleteIpamPoolInput, options: delete_ipam_pool.Options) !delete_ipam_pool.DeleteIpamPoolOutput {
+    pub fn deleteIpamPool(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_pool.DeleteIpamPoolInput, options: CallOptions) !delete_ipam_pool.DeleteIpamPoolOutput {
         return delete_ipam_pool.execute(self, allocator, input, options);
     }
 
     /// Deletes an IPAM prefix list resolver. Before deleting a resolver, you must
     /// first delete all resolver targets associated with it.
-    pub fn deleteIpamPrefixListResolver(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_prefix_list_resolver.DeleteIpamPrefixListResolverInput, options: delete_ipam_prefix_list_resolver.Options) !delete_ipam_prefix_list_resolver.DeleteIpamPrefixListResolverOutput {
+    pub fn deleteIpamPrefixListResolver(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_prefix_list_resolver.DeleteIpamPrefixListResolverInput, options: CallOptions) !delete_ipam_prefix_list_resolver.DeleteIpamPrefixListResolverOutput {
         return delete_ipam_prefix_list_resolver.execute(self, allocator, input, options);
     }
 
@@ -3649,14 +3650,14 @@ pub const Client = struct {
     /// For more information about IPAM prefix list resolver, see [Automate prefix
     /// list updates with
     /// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/automate-prefix-list-updates.html) in the *Amazon VPC IPAM User Guide*.
-    pub fn deleteIpamPrefixListResolverTarget(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_prefix_list_resolver_target.DeleteIpamPrefixListResolverTargetInput, options: delete_ipam_prefix_list_resolver_target.Options) !delete_ipam_prefix_list_resolver_target.DeleteIpamPrefixListResolverTargetOutput {
+    pub fn deleteIpamPrefixListResolverTarget(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_prefix_list_resolver_target.DeleteIpamPrefixListResolverTargetInput, options: CallOptions) !delete_ipam_prefix_list_resolver_target.DeleteIpamPrefixListResolverTargetOutput {
         return delete_ipam_prefix_list_resolver_target.execute(self, allocator, input, options);
     }
 
     /// Deletes an IPAM resource discovery. A resource discovery is an IPAM
     /// component that enables IPAM to manage and monitor resources that belong to
     /// the owning account.
-    pub fn deleteIpamResourceDiscovery(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_resource_discovery.DeleteIpamResourceDiscoveryInput, options: delete_ipam_resource_discovery.Options) !delete_ipam_resource_discovery.DeleteIpamResourceDiscoveryOutput {
+    pub fn deleteIpamResourceDiscovery(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_resource_discovery.DeleteIpamResourceDiscoveryInput, options: CallOptions) !delete_ipam_resource_discovery.DeleteIpamResourceDiscoveryOutput {
         return delete_ipam_resource_discovery.execute(self, allocator, input, options);
     }
 
@@ -3665,18 +3666,18 @@ pub const Client = struct {
     /// For more information, see [Delete a
     /// scope](https://docs.aws.amazon.com/vpc/latest/ipam/delete-scope-ipam.html)
     /// in the *Amazon VPC IPAM User Guide*.
-    pub fn deleteIpamScope(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_scope.DeleteIpamScopeInput, options: delete_ipam_scope.Options) !delete_ipam_scope.DeleteIpamScopeOutput {
+    pub fn deleteIpamScope(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_scope.DeleteIpamScopeInput, options: CallOptions) !delete_ipam_scope.DeleteIpamScopeOutput {
         return delete_ipam_scope.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified key pair, by removing the public key from Amazon EC2.
-    pub fn deleteKeyPair(self: *Self, allocator: std.mem.Allocator, input: delete_key_pair.DeleteKeyPairInput, options: delete_key_pair.Options) !delete_key_pair.DeleteKeyPairOutput {
+    pub fn deleteKeyPair(self: *Self, allocator: std.mem.Allocator, input: delete_key_pair.DeleteKeyPairInput, options: CallOptions) !delete_key_pair.DeleteKeyPairOutput {
         return delete_key_pair.execute(self, allocator, input, options);
     }
 
     /// Deletes a launch template. Deleting a launch template deletes all of its
     /// versions.
-    pub fn deleteLaunchTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_launch_template.DeleteLaunchTemplateInput, options: delete_launch_template.Options) !delete_launch_template.DeleteLaunchTemplateOutput {
+    pub fn deleteLaunchTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_launch_template.DeleteLaunchTemplateInput, options: CallOptions) !delete_launch_template.DeleteLaunchTemplateOutput {
         return delete_launch_template.execute(self, allocator, input, options);
     }
 
@@ -3697,44 +3698,44 @@ pub const Client = struct {
     /// For more information, see [Delete a launch template
     /// version](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/delete-launch-template.html#delete-launch-template-version) in the
     /// *Amazon EC2 User Guide*.
-    pub fn deleteLaunchTemplateVersions(self: *Self, allocator: std.mem.Allocator, input: delete_launch_template_versions.DeleteLaunchTemplateVersionsInput, options: delete_launch_template_versions.Options) !delete_launch_template_versions.DeleteLaunchTemplateVersionsOutput {
+    pub fn deleteLaunchTemplateVersions(self: *Self, allocator: std.mem.Allocator, input: delete_launch_template_versions.DeleteLaunchTemplateVersionsInput, options: CallOptions) !delete_launch_template_versions.DeleteLaunchTemplateVersionsOutput {
         return delete_launch_template_versions.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified route from the specified local gateway route table.
-    pub fn deleteLocalGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: delete_local_gateway_route.DeleteLocalGatewayRouteInput, options: delete_local_gateway_route.Options) !delete_local_gateway_route.DeleteLocalGatewayRouteOutput {
+    pub fn deleteLocalGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: delete_local_gateway_route.DeleteLocalGatewayRouteInput, options: CallOptions) !delete_local_gateway_route.DeleteLocalGatewayRouteOutput {
         return delete_local_gateway_route.execute(self, allocator, input, options);
     }
 
     /// Deletes a local gateway route table.
-    pub fn deleteLocalGatewayRouteTable(self: *Self, allocator: std.mem.Allocator, input: delete_local_gateway_route_table.DeleteLocalGatewayRouteTableInput, options: delete_local_gateway_route_table.Options) !delete_local_gateway_route_table.DeleteLocalGatewayRouteTableOutput {
+    pub fn deleteLocalGatewayRouteTable(self: *Self, allocator: std.mem.Allocator, input: delete_local_gateway_route_table.DeleteLocalGatewayRouteTableInput, options: CallOptions) !delete_local_gateway_route_table.DeleteLocalGatewayRouteTableOutput {
         return delete_local_gateway_route_table.execute(self, allocator, input, options);
     }
 
     /// Deletes a local gateway route table virtual interface group association.
-    pub fn deleteLocalGatewayRouteTableVirtualInterfaceGroupAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_local_gateway_route_table_virtual_interface_group_association.DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput, options: delete_local_gateway_route_table_virtual_interface_group_association.Options) !delete_local_gateway_route_table_virtual_interface_group_association.DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput {
+    pub fn deleteLocalGatewayRouteTableVirtualInterfaceGroupAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_local_gateway_route_table_virtual_interface_group_association.DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput, options: CallOptions) !delete_local_gateway_route_table_virtual_interface_group_association.DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput {
         return delete_local_gateway_route_table_virtual_interface_group_association.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified association between a VPC and local gateway route
     /// table.
-    pub fn deleteLocalGatewayRouteTableVpcAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_local_gateway_route_table_vpc_association.DeleteLocalGatewayRouteTableVpcAssociationInput, options: delete_local_gateway_route_table_vpc_association.Options) !delete_local_gateway_route_table_vpc_association.DeleteLocalGatewayRouteTableVpcAssociationOutput {
+    pub fn deleteLocalGatewayRouteTableVpcAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_local_gateway_route_table_vpc_association.DeleteLocalGatewayRouteTableVpcAssociationInput, options: CallOptions) !delete_local_gateway_route_table_vpc_association.DeleteLocalGatewayRouteTableVpcAssociationOutput {
         return delete_local_gateway_route_table_vpc_association.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified local gateway virtual interface.
-    pub fn deleteLocalGatewayVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: delete_local_gateway_virtual_interface.DeleteLocalGatewayVirtualInterfaceInput, options: delete_local_gateway_virtual_interface.Options) !delete_local_gateway_virtual_interface.DeleteLocalGatewayVirtualInterfaceOutput {
+    pub fn deleteLocalGatewayVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: delete_local_gateway_virtual_interface.DeleteLocalGatewayVirtualInterfaceInput, options: CallOptions) !delete_local_gateway_virtual_interface.DeleteLocalGatewayVirtualInterfaceOutput {
         return delete_local_gateway_virtual_interface.execute(self, allocator, input, options);
     }
 
     /// Delete the specified local gateway interface group.
-    pub fn deleteLocalGatewayVirtualInterfaceGroup(self: *Self, allocator: std.mem.Allocator, input: delete_local_gateway_virtual_interface_group.DeleteLocalGatewayVirtualInterfaceGroupInput, options: delete_local_gateway_virtual_interface_group.Options) !delete_local_gateway_virtual_interface_group.DeleteLocalGatewayVirtualInterfaceGroupOutput {
+    pub fn deleteLocalGatewayVirtualInterfaceGroup(self: *Self, allocator: std.mem.Allocator, input: delete_local_gateway_virtual_interface_group.DeleteLocalGatewayVirtualInterfaceGroupInput, options: CallOptions) !delete_local_gateway_virtual_interface_group.DeleteLocalGatewayVirtualInterfaceGroupOutput {
         return delete_local_gateway_virtual_interface_group.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified managed prefix list. You must first remove all
     /// references to the prefix list in your resources.
-    pub fn deleteManagedPrefixList(self: *Self, allocator: std.mem.Allocator, input: delete_managed_prefix_list.DeleteManagedPrefixListInput, options: delete_managed_prefix_list.Options) !delete_managed_prefix_list.DeleteManagedPrefixListOutput {
+    pub fn deleteManagedPrefixList(self: *Self, allocator: std.mem.Allocator, input: delete_managed_prefix_list.DeleteManagedPrefixListInput, options: CallOptions) !delete_managed_prefix_list.DeleteManagedPrefixListOutput {
         return delete_managed_prefix_list.execute(self, allocator, input, options);
     }
 
@@ -3743,46 +3744,46 @@ pub const Client = struct {
     /// but does not release the address from your account. Deleting a NAT gateway
     /// does not delete any NAT gateway
     /// routes in your route tables.
-    pub fn deleteNatGateway(self: *Self, allocator: std.mem.Allocator, input: delete_nat_gateway.DeleteNatGatewayInput, options: delete_nat_gateway.Options) !delete_nat_gateway.DeleteNatGatewayOutput {
+    pub fn deleteNatGateway(self: *Self, allocator: std.mem.Allocator, input: delete_nat_gateway.DeleteNatGatewayInput, options: CallOptions) !delete_nat_gateway.DeleteNatGatewayOutput {
         return delete_nat_gateway.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified network ACL. You can't delete the ACL if it's
     /// associated with any subnets. You can't delete the default network ACL.
-    pub fn deleteNetworkAcl(self: *Self, allocator: std.mem.Allocator, input: delete_network_acl.DeleteNetworkAclInput, options: delete_network_acl.Options) !delete_network_acl.DeleteNetworkAclOutput {
+    pub fn deleteNetworkAcl(self: *Self, allocator: std.mem.Allocator, input: delete_network_acl.DeleteNetworkAclInput, options: CallOptions) !delete_network_acl.DeleteNetworkAclOutput {
         return delete_network_acl.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified ingress or egress entry (rule) from the specified
     /// network ACL.
-    pub fn deleteNetworkAclEntry(self: *Self, allocator: std.mem.Allocator, input: delete_network_acl_entry.DeleteNetworkAclEntryInput, options: delete_network_acl_entry.Options) !delete_network_acl_entry.DeleteNetworkAclEntryOutput {
+    pub fn deleteNetworkAclEntry(self: *Self, allocator: std.mem.Allocator, input: delete_network_acl_entry.DeleteNetworkAclEntryInput, options: CallOptions) !delete_network_acl_entry.DeleteNetworkAclEntryOutput {
         return delete_network_acl_entry.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified Network Access Scope.
-    pub fn deleteNetworkInsightsAccessScope(self: *Self, allocator: std.mem.Allocator, input: delete_network_insights_access_scope.DeleteNetworkInsightsAccessScopeInput, options: delete_network_insights_access_scope.Options) !delete_network_insights_access_scope.DeleteNetworkInsightsAccessScopeOutput {
+    pub fn deleteNetworkInsightsAccessScope(self: *Self, allocator: std.mem.Allocator, input: delete_network_insights_access_scope.DeleteNetworkInsightsAccessScopeInput, options: CallOptions) !delete_network_insights_access_scope.DeleteNetworkInsightsAccessScopeOutput {
         return delete_network_insights_access_scope.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified Network Access Scope analysis.
-    pub fn deleteNetworkInsightsAccessScopeAnalysis(self: *Self, allocator: std.mem.Allocator, input: delete_network_insights_access_scope_analysis.DeleteNetworkInsightsAccessScopeAnalysisInput, options: delete_network_insights_access_scope_analysis.Options) !delete_network_insights_access_scope_analysis.DeleteNetworkInsightsAccessScopeAnalysisOutput {
+    pub fn deleteNetworkInsightsAccessScopeAnalysis(self: *Self, allocator: std.mem.Allocator, input: delete_network_insights_access_scope_analysis.DeleteNetworkInsightsAccessScopeAnalysisInput, options: CallOptions) !delete_network_insights_access_scope_analysis.DeleteNetworkInsightsAccessScopeAnalysisOutput {
         return delete_network_insights_access_scope_analysis.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified network insights analysis.
-    pub fn deleteNetworkInsightsAnalysis(self: *Self, allocator: std.mem.Allocator, input: delete_network_insights_analysis.DeleteNetworkInsightsAnalysisInput, options: delete_network_insights_analysis.Options) !delete_network_insights_analysis.DeleteNetworkInsightsAnalysisOutput {
+    pub fn deleteNetworkInsightsAnalysis(self: *Self, allocator: std.mem.Allocator, input: delete_network_insights_analysis.DeleteNetworkInsightsAnalysisInput, options: CallOptions) !delete_network_insights_analysis.DeleteNetworkInsightsAnalysisOutput {
         return delete_network_insights_analysis.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified path.
-    pub fn deleteNetworkInsightsPath(self: *Self, allocator: std.mem.Allocator, input: delete_network_insights_path.DeleteNetworkInsightsPathInput, options: delete_network_insights_path.Options) !delete_network_insights_path.DeleteNetworkInsightsPathOutput {
+    pub fn deleteNetworkInsightsPath(self: *Self, allocator: std.mem.Allocator, input: delete_network_insights_path.DeleteNetworkInsightsPathInput, options: CallOptions) !delete_network_insights_path.DeleteNetworkInsightsPathOutput {
         return delete_network_insights_path.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified network interface. You must detach the network
     /// interface before
     /// you can delete it.
-    pub fn deleteNetworkInterface(self: *Self, allocator: std.mem.Allocator, input: delete_network_interface.DeleteNetworkInterfaceInput, options: delete_network_interface.Options) !delete_network_interface.DeleteNetworkInterfaceOutput {
+    pub fn deleteNetworkInterface(self: *Self, allocator: std.mem.Allocator, input: delete_network_interface.DeleteNetworkInterfaceInput, options: CallOptions) !delete_network_interface.DeleteNetworkInterfaceOutput {
         return delete_network_interface.execute(self, allocator, input, options);
     }
 
@@ -3793,7 +3794,7 @@ pub const Client = struct {
     /// network interface to an instance. However, you can force delete the
     /// permission,
     /// regardless of any attachment.
-    pub fn deleteNetworkInterfacePermission(self: *Self, allocator: std.mem.Allocator, input: delete_network_interface_permission.DeleteNetworkInterfacePermissionInput, options: delete_network_interface_permission.Options) !delete_network_interface_permission.DeleteNetworkInterfacePermissionOutput {
+    pub fn deleteNetworkInterfacePermission(self: *Self, allocator: std.mem.Allocator, input: delete_network_interface_permission.DeleteNetworkInterfacePermissionInput, options: CallOptions) !delete_network_interface_permission.DeleteNetworkInterfacePermissionOutput {
         return delete_network_interface_permission.execute(self, allocator, input, options);
     }
 
@@ -3803,7 +3804,7 @@ pub const Client = struct {
     /// information, see
     /// [Placement
     /// groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *Amazon EC2 User Guide*.
-    pub fn deletePlacementGroup(self: *Self, allocator: std.mem.Allocator, input: delete_placement_group.DeletePlacementGroupInput, options: delete_placement_group.Options) !delete_placement_group.DeletePlacementGroupOutput {
+    pub fn deletePlacementGroup(self: *Self, allocator: std.mem.Allocator, input: delete_placement_group.DeletePlacementGroupInput, options: CallOptions) !delete_placement_group.DeletePlacementGroupOutput {
         return delete_placement_group.execute(self, allocator, input, options);
     }
 
@@ -3811,17 +3812,17 @@ pub const Client = struct {
     /// required for the public IPv4 CIDRs that you own and bring to Amazon Web
     /// Services to manage with IPAM. IPv6 addresses you bring to Amazon Web
     /// Services, however, use IPAM pools only.
-    pub fn deletePublicIpv4Pool(self: *Self, allocator: std.mem.Allocator, input: delete_public_ipv_4_pool.DeletePublicIpv4PoolInput, options: delete_public_ipv_4_pool.Options) !delete_public_ipv_4_pool.DeletePublicIpv4PoolOutput {
+    pub fn deletePublicIpv4Pool(self: *Self, allocator: std.mem.Allocator, input: delete_public_ipv_4_pool.DeletePublicIpv4PoolInput, options: CallOptions) !delete_public_ipv_4_pool.DeletePublicIpv4PoolOutput {
         return delete_public_ipv_4_pool.execute(self, allocator, input, options);
     }
 
     /// Deletes the queued purchases for the specified Reserved Instances.
-    pub fn deleteQueuedReservedInstances(self: *Self, allocator: std.mem.Allocator, input: delete_queued_reserved_instances.DeleteQueuedReservedInstancesInput, options: delete_queued_reserved_instances.Options) !delete_queued_reserved_instances.DeleteQueuedReservedInstancesOutput {
+    pub fn deleteQueuedReservedInstances(self: *Self, allocator: std.mem.Allocator, input: delete_queued_reserved_instances.DeleteQueuedReservedInstancesInput, options: CallOptions) !delete_queued_reserved_instances.DeleteQueuedReservedInstancesOutput {
         return delete_queued_reserved_instances.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified route from the specified route table.
-    pub fn deleteRoute(self: *Self, allocator: std.mem.Allocator, input: delete_route.DeleteRouteInput, options: delete_route.Options) !delete_route.DeleteRouteOutput {
+    pub fn deleteRoute(self: *Self, allocator: std.mem.Allocator, input: delete_route.DeleteRouteInput, options: CallOptions) !delete_route.DeleteRouteOutput {
         return delete_route.execute(self, allocator, input, options);
     }
 
@@ -3850,7 +3851,7 @@ pub const Client = struct {
     ///
     /// For more information see [Dynamic routing in your VPC with VPC Route
     /// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
-    pub fn deleteRouteServer(self: *Self, allocator: std.mem.Allocator, input: delete_route_server.DeleteRouteServerInput, options: delete_route_server.Options) !delete_route_server.DeleteRouteServerOutput {
+    pub fn deleteRouteServer(self: *Self, allocator: std.mem.Allocator, input: delete_route_server.DeleteRouteServerInput, options: CallOptions) !delete_route_server.DeleteRouteServerOutput {
         return delete_route_server.execute(self, allocator, input, options);
     }
 
@@ -3860,7 +3861,7 @@ pub const Client = struct {
     /// subnet that facilitates [BGP (Border Gateway
     /// Protocol)](https://en.wikipedia.org/wiki/Border_Gateway_Protocol)
     /// connections between your route server and your BGP peers.
-    pub fn deleteRouteServerEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_route_server_endpoint.DeleteRouteServerEndpointInput, options: delete_route_server_endpoint.Options) !delete_route_server_endpoint.DeleteRouteServerEndpointOutput {
+    pub fn deleteRouteServerEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_route_server_endpoint.DeleteRouteServerEndpointInput, options: CallOptions) !delete_route_server_endpoint.DeleteRouteServerEndpointOutput {
         return delete_route_server_endpoint.execute(self, allocator, input, options);
     }
 
@@ -3876,14 +3877,14 @@ pub const Client = struct {
     /// * Support BGP (Border Gateway Protocol)
     ///
     /// * Can initiate BGP sessions
-    pub fn deleteRouteServerPeer(self: *Self, allocator: std.mem.Allocator, input: delete_route_server_peer.DeleteRouteServerPeerInput, options: delete_route_server_peer.Options) !delete_route_server_peer.DeleteRouteServerPeerOutput {
+    pub fn deleteRouteServerPeer(self: *Self, allocator: std.mem.Allocator, input: delete_route_server_peer.DeleteRouteServerPeerInput, options: CallOptions) !delete_route_server_peer.DeleteRouteServerPeerOutput {
         return delete_route_server_peer.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified route table. You must disassociate the route table
     /// from any subnets before you can delete it. You can't delete the main route
     /// table.
-    pub fn deleteRouteTable(self: *Self, allocator: std.mem.Allocator, input: delete_route_table.DeleteRouteTableInput, options: delete_route_table.Options) !delete_route_table.DeleteRouteTableOutput {
+    pub fn deleteRouteTable(self: *Self, allocator: std.mem.Allocator, input: delete_route_table.DeleteRouteTableInput, options: CallOptions) !delete_route_table.DeleteRouteTableOutput {
         return delete_route_table.execute(self, allocator, input, options);
     }
 
@@ -3894,7 +3895,7 @@ pub const Client = struct {
     /// referenced by another security group in the same VPC, or has a VPC
     /// association, the operation fails with
     /// `DependencyViolation`.
-    pub fn deleteSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: delete_security_group.DeleteSecurityGroupInput, options: delete_security_group.Options) !delete_security_group.DeleteSecurityGroupOutput {
+    pub fn deleteSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: delete_security_group.DeleteSecurityGroupInput, options: CallOptions) !delete_security_group.DeleteSecurityGroupOutput {
         return delete_security_group.execute(self, allocator, input, options);
     }
 
@@ -3917,23 +3918,23 @@ pub const Client = struct {
     /// For more information, see [Delete an Amazon EBS
     /// snapshot](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-deleting-snapshot.html) in the
     /// *Amazon EBS User Guide*.
-    pub fn deleteSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_snapshot.DeleteSnapshotInput, options: delete_snapshot.Options) !delete_snapshot.DeleteSnapshotOutput {
+    pub fn deleteSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_snapshot.DeleteSnapshotInput, options: CallOptions) !delete_snapshot.DeleteSnapshotOutput {
         return delete_snapshot.execute(self, allocator, input, options);
     }
 
     /// Deletes the data feed for Spot Instances.
-    pub fn deleteSpotDatafeedSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_spot_datafeed_subscription.DeleteSpotDatafeedSubscriptionInput, options: delete_spot_datafeed_subscription.Options) !delete_spot_datafeed_subscription.DeleteSpotDatafeedSubscriptionOutput {
+    pub fn deleteSpotDatafeedSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_spot_datafeed_subscription.DeleteSpotDatafeedSubscriptionInput, options: CallOptions) !delete_spot_datafeed_subscription.DeleteSpotDatafeedSubscriptionOutput {
         return delete_spot_datafeed_subscription.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified subnet. You must terminate all running instances in
     /// the subnet before you can delete the subnet.
-    pub fn deleteSubnet(self: *Self, allocator: std.mem.Allocator, input: delete_subnet.DeleteSubnetInput, options: delete_subnet.Options) !delete_subnet.DeleteSubnetOutput {
+    pub fn deleteSubnet(self: *Self, allocator: std.mem.Allocator, input: delete_subnet.DeleteSubnetInput, options: CallOptions) !delete_subnet.DeleteSubnetOutput {
         return delete_subnet.execute(self, allocator, input, options);
     }
 
     /// Deletes a subnet CIDR reservation.
-    pub fn deleteSubnetCidrReservation(self: *Self, allocator: std.mem.Allocator, input: delete_subnet_cidr_reservation.DeleteSubnetCidrReservationInput, options: delete_subnet_cidr_reservation.Options) !delete_subnet_cidr_reservation.DeleteSubnetCidrReservationOutput {
+    pub fn deleteSubnetCidrReservation(self: *Self, allocator: std.mem.Allocator, input: delete_subnet_cidr_reservation.DeleteSubnetCidrReservationInput, options: CallOptions) !delete_subnet_cidr_reservation.DeleteSubnetCidrReservationOutput {
         return delete_subnet_cidr_reservation.execute(self, allocator, input, options);
     }
 
@@ -3944,7 +3945,7 @@ pub const Client = struct {
     /// your Amazon EC2
     /// resources](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the *Amazon Elastic Compute Cloud User
     /// Guide*.
-    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: delete_tags.Options) !delete_tags.DeleteTagsOutput {
+    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: CallOptions) !delete_tags.DeleteTagsOutput {
         return delete_tags.execute(self, allocator, input, options);
     }
 
@@ -3952,17 +3953,17 @@ pub const Client = struct {
     ///
     /// You cannot delete a Traffic Mirror filter that is in use by a Traffic Mirror
     /// session.
-    pub fn deleteTrafficMirrorFilter(self: *Self, allocator: std.mem.Allocator, input: delete_traffic_mirror_filter.DeleteTrafficMirrorFilterInput, options: delete_traffic_mirror_filter.Options) !delete_traffic_mirror_filter.DeleteTrafficMirrorFilterOutput {
+    pub fn deleteTrafficMirrorFilter(self: *Self, allocator: std.mem.Allocator, input: delete_traffic_mirror_filter.DeleteTrafficMirrorFilterInput, options: CallOptions) !delete_traffic_mirror_filter.DeleteTrafficMirrorFilterOutput {
         return delete_traffic_mirror_filter.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified Traffic Mirror rule.
-    pub fn deleteTrafficMirrorFilterRule(self: *Self, allocator: std.mem.Allocator, input: delete_traffic_mirror_filter_rule.DeleteTrafficMirrorFilterRuleInput, options: delete_traffic_mirror_filter_rule.Options) !delete_traffic_mirror_filter_rule.DeleteTrafficMirrorFilterRuleOutput {
+    pub fn deleteTrafficMirrorFilterRule(self: *Self, allocator: std.mem.Allocator, input: delete_traffic_mirror_filter_rule.DeleteTrafficMirrorFilterRuleInput, options: CallOptions) !delete_traffic_mirror_filter_rule.DeleteTrafficMirrorFilterRuleOutput {
         return delete_traffic_mirror_filter_rule.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified Traffic Mirror session.
-    pub fn deleteTrafficMirrorSession(self: *Self, allocator: std.mem.Allocator, input: delete_traffic_mirror_session.DeleteTrafficMirrorSessionInput, options: delete_traffic_mirror_session.Options) !delete_traffic_mirror_session.DeleteTrafficMirrorSessionOutput {
+    pub fn deleteTrafficMirrorSession(self: *Self, allocator: std.mem.Allocator, input: delete_traffic_mirror_session.DeleteTrafficMirrorSessionInput, options: CallOptions) !delete_traffic_mirror_session.DeleteTrafficMirrorSessionOutput {
         return delete_traffic_mirror_session.execute(self, allocator, input, options);
     }
 
@@ -3970,60 +3971,60 @@ pub const Client = struct {
     ///
     /// You cannot delete a Traffic Mirror target that is in use by a Traffic Mirror
     /// session.
-    pub fn deleteTrafficMirrorTarget(self: *Self, allocator: std.mem.Allocator, input: delete_traffic_mirror_target.DeleteTrafficMirrorTargetInput, options: delete_traffic_mirror_target.Options) !delete_traffic_mirror_target.DeleteTrafficMirrorTargetOutput {
+    pub fn deleteTrafficMirrorTarget(self: *Self, allocator: std.mem.Allocator, input: delete_traffic_mirror_target.DeleteTrafficMirrorTargetInput, options: CallOptions) !delete_traffic_mirror_target.DeleteTrafficMirrorTargetOutput {
         return delete_traffic_mirror_target.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified transit gateway.
-    pub fn deleteTransitGateway(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway.DeleteTransitGatewayInput, options: delete_transit_gateway.Options) !delete_transit_gateway.DeleteTransitGatewayOutput {
+    pub fn deleteTransitGateway(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway.DeleteTransitGatewayInput, options: CallOptions) !delete_transit_gateway.DeleteTransitGatewayOutput {
         return delete_transit_gateway.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified Connect attachment. You must first delete any Connect
     /// peers for
     /// the attachment.
-    pub fn deleteTransitGatewayConnect(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_connect.DeleteTransitGatewayConnectInput, options: delete_transit_gateway_connect.Options) !delete_transit_gateway_connect.DeleteTransitGatewayConnectOutput {
+    pub fn deleteTransitGatewayConnect(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_connect.DeleteTransitGatewayConnectInput, options: CallOptions) !delete_transit_gateway_connect.DeleteTransitGatewayConnectOutput {
         return delete_transit_gateway_connect.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified Connect peer.
-    pub fn deleteTransitGatewayConnectPeer(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_connect_peer.DeleteTransitGatewayConnectPeerInput, options: delete_transit_gateway_connect_peer.Options) !delete_transit_gateway_connect_peer.DeleteTransitGatewayConnectPeerOutput {
+    pub fn deleteTransitGatewayConnectPeer(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_connect_peer.DeleteTransitGatewayConnectPeerInput, options: CallOptions) !delete_transit_gateway_connect_peer.DeleteTransitGatewayConnectPeerOutput {
         return delete_transit_gateway_connect_peer.execute(self, allocator, input, options);
     }
 
     /// Deletes a transit gateway metering policy.
-    pub fn deleteTransitGatewayMeteringPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_metering_policy.DeleteTransitGatewayMeteringPolicyInput, options: delete_transit_gateway_metering_policy.Options) !delete_transit_gateway_metering_policy.DeleteTransitGatewayMeteringPolicyOutput {
+    pub fn deleteTransitGatewayMeteringPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_metering_policy.DeleteTransitGatewayMeteringPolicyInput, options: CallOptions) !delete_transit_gateway_metering_policy.DeleteTransitGatewayMeteringPolicyOutput {
         return delete_transit_gateway_metering_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes an entry from a transit gateway metering policy.
-    pub fn deleteTransitGatewayMeteringPolicyEntry(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_metering_policy_entry.DeleteTransitGatewayMeteringPolicyEntryInput, options: delete_transit_gateway_metering_policy_entry.Options) !delete_transit_gateway_metering_policy_entry.DeleteTransitGatewayMeteringPolicyEntryOutput {
+    pub fn deleteTransitGatewayMeteringPolicyEntry(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_metering_policy_entry.DeleteTransitGatewayMeteringPolicyEntryInput, options: CallOptions) !delete_transit_gateway_metering_policy_entry.DeleteTransitGatewayMeteringPolicyEntryOutput {
         return delete_transit_gateway_metering_policy_entry.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified transit gateway multicast domain.
-    pub fn deleteTransitGatewayMulticastDomain(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_multicast_domain.DeleteTransitGatewayMulticastDomainInput, options: delete_transit_gateway_multicast_domain.Options) !delete_transit_gateway_multicast_domain.DeleteTransitGatewayMulticastDomainOutput {
+    pub fn deleteTransitGatewayMulticastDomain(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_multicast_domain.DeleteTransitGatewayMulticastDomainInput, options: CallOptions) !delete_transit_gateway_multicast_domain.DeleteTransitGatewayMulticastDomainOutput {
         return delete_transit_gateway_multicast_domain.execute(self, allocator, input, options);
     }
 
     /// Deletes a transit gateway peering attachment.
-    pub fn deleteTransitGatewayPeeringAttachment(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_peering_attachment.DeleteTransitGatewayPeeringAttachmentInput, options: delete_transit_gateway_peering_attachment.Options) !delete_transit_gateway_peering_attachment.DeleteTransitGatewayPeeringAttachmentOutput {
+    pub fn deleteTransitGatewayPeeringAttachment(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_peering_attachment.DeleteTransitGatewayPeeringAttachmentInput, options: CallOptions) !delete_transit_gateway_peering_attachment.DeleteTransitGatewayPeeringAttachmentOutput {
         return delete_transit_gateway_peering_attachment.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified transit gateway policy table.
-    pub fn deleteTransitGatewayPolicyTable(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_policy_table.DeleteTransitGatewayPolicyTableInput, options: delete_transit_gateway_policy_table.Options) !delete_transit_gateway_policy_table.DeleteTransitGatewayPolicyTableOutput {
+    pub fn deleteTransitGatewayPolicyTable(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_policy_table.DeleteTransitGatewayPolicyTableInput, options: CallOptions) !delete_transit_gateway_policy_table.DeleteTransitGatewayPolicyTableOutput {
         return delete_transit_gateway_policy_table.execute(self, allocator, input, options);
     }
 
     /// Deletes a reference (route) to a prefix list in a specified transit gateway
     /// route table.
-    pub fn deleteTransitGatewayPrefixListReference(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_prefix_list_reference.DeleteTransitGatewayPrefixListReferenceInput, options: delete_transit_gateway_prefix_list_reference.Options) !delete_transit_gateway_prefix_list_reference.DeleteTransitGatewayPrefixListReferenceOutput {
+    pub fn deleteTransitGatewayPrefixListReference(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_prefix_list_reference.DeleteTransitGatewayPrefixListReferenceInput, options: CallOptions) !delete_transit_gateway_prefix_list_reference.DeleteTransitGatewayPrefixListReferenceOutput {
         return delete_transit_gateway_prefix_list_reference.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified route from the specified transit gateway route table.
-    pub fn deleteTransitGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_route.DeleteTransitGatewayRouteInput, options: delete_transit_gateway_route.Options) !delete_transit_gateway_route.DeleteTransitGatewayRouteOutput {
+    pub fn deleteTransitGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_route.DeleteTransitGatewayRouteInput, options: CallOptions) !delete_transit_gateway_route.DeleteTransitGatewayRouteOutput {
         return delete_transit_gateway_route.execute(self, allocator, input, options);
     }
 
@@ -4032,38 +4033,38 @@ pub const Client = struct {
     /// the transit gateway route table, you must first run DisassociateRouteTable
     /// before you can delete the transit gateway route table. This removes any
     /// route tables associated with the transit gateway route table.
-    pub fn deleteTransitGatewayRouteTable(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_route_table.DeleteTransitGatewayRouteTableInput, options: delete_transit_gateway_route_table.Options) !delete_transit_gateway_route_table.DeleteTransitGatewayRouteTableOutput {
+    pub fn deleteTransitGatewayRouteTable(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_route_table.DeleteTransitGatewayRouteTableInput, options: CallOptions) !delete_transit_gateway_route_table.DeleteTransitGatewayRouteTableOutput {
         return delete_transit_gateway_route_table.execute(self, allocator, input, options);
     }
 
     /// Advertises to the transit gateway that a transit gateway route table is
     /// deleted.
-    pub fn deleteTransitGatewayRouteTableAnnouncement(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_route_table_announcement.DeleteTransitGatewayRouteTableAnnouncementInput, options: delete_transit_gateway_route_table_announcement.Options) !delete_transit_gateway_route_table_announcement.DeleteTransitGatewayRouteTableAnnouncementOutput {
+    pub fn deleteTransitGatewayRouteTableAnnouncement(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_route_table_announcement.DeleteTransitGatewayRouteTableAnnouncementInput, options: CallOptions) !delete_transit_gateway_route_table_announcement.DeleteTransitGatewayRouteTableAnnouncementOutput {
         return delete_transit_gateway_route_table_announcement.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified VPC attachment.
-    pub fn deleteTransitGatewayVpcAttachment(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_vpc_attachment.DeleteTransitGatewayVpcAttachmentInput, options: delete_transit_gateway_vpc_attachment.Options) !delete_transit_gateway_vpc_attachment.DeleteTransitGatewayVpcAttachmentOutput {
+    pub fn deleteTransitGatewayVpcAttachment(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_vpc_attachment.DeleteTransitGatewayVpcAttachmentInput, options: CallOptions) !delete_transit_gateway_vpc_attachment.DeleteTransitGatewayVpcAttachmentOutput {
         return delete_transit_gateway_vpc_attachment.execute(self, allocator, input, options);
     }
 
     /// Delete an Amazon Web Services Verified Access endpoint.
-    pub fn deleteVerifiedAccessEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_verified_access_endpoint.DeleteVerifiedAccessEndpointInput, options: delete_verified_access_endpoint.Options) !delete_verified_access_endpoint.DeleteVerifiedAccessEndpointOutput {
+    pub fn deleteVerifiedAccessEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_verified_access_endpoint.DeleteVerifiedAccessEndpointInput, options: CallOptions) !delete_verified_access_endpoint.DeleteVerifiedAccessEndpointOutput {
         return delete_verified_access_endpoint.execute(self, allocator, input, options);
     }
 
     /// Delete an Amazon Web Services Verified Access group.
-    pub fn deleteVerifiedAccessGroup(self: *Self, allocator: std.mem.Allocator, input: delete_verified_access_group.DeleteVerifiedAccessGroupInput, options: delete_verified_access_group.Options) !delete_verified_access_group.DeleteVerifiedAccessGroupOutput {
+    pub fn deleteVerifiedAccessGroup(self: *Self, allocator: std.mem.Allocator, input: delete_verified_access_group.DeleteVerifiedAccessGroupInput, options: CallOptions) !delete_verified_access_group.DeleteVerifiedAccessGroupOutput {
         return delete_verified_access_group.execute(self, allocator, input, options);
     }
 
     /// Delete an Amazon Web Services Verified Access instance.
-    pub fn deleteVerifiedAccessInstance(self: *Self, allocator: std.mem.Allocator, input: delete_verified_access_instance.DeleteVerifiedAccessInstanceInput, options: delete_verified_access_instance.Options) !delete_verified_access_instance.DeleteVerifiedAccessInstanceOutput {
+    pub fn deleteVerifiedAccessInstance(self: *Self, allocator: std.mem.Allocator, input: delete_verified_access_instance.DeleteVerifiedAccessInstanceInput, options: CallOptions) !delete_verified_access_instance.DeleteVerifiedAccessInstanceOutput {
         return delete_verified_access_instance.execute(self, allocator, input, options);
     }
 
     /// Delete an Amazon Web Services Verified Access trust provider.
-    pub fn deleteVerifiedAccessTrustProvider(self: *Self, allocator: std.mem.Allocator, input: delete_verified_access_trust_provider.DeleteVerifiedAccessTrustProviderInput, options: delete_verified_access_trust_provider.Options) !delete_verified_access_trust_provider.DeleteVerifiedAccessTrustProviderOutput {
+    pub fn deleteVerifiedAccessTrustProvider(self: *Self, allocator: std.mem.Allocator, input: delete_verified_access_trust_provider.DeleteVerifiedAccessTrustProviderInput, options: CallOptions) !delete_verified_access_trust_provider.DeleteVerifiedAccessTrustProviderOutput {
         return delete_verified_access_trust_provider.execute(self, allocator, input, options);
     }
 
@@ -4076,7 +4077,7 @@ pub const Client = struct {
     /// For more information, see [Delete an Amazon EBS
     /// volume](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-deleting-volume.html) in the
     /// *Amazon EBS User Guide*.
-    pub fn deleteVolume(self: *Self, allocator: std.mem.Allocator, input: delete_volume.DeleteVolumeInput, options: delete_volume.Options) !delete_volume.DeleteVolumeOutput {
+    pub fn deleteVolume(self: *Self, allocator: std.mem.Allocator, input: delete_volume.DeleteVolumeInput, options: CallOptions) !delete_volume.DeleteVolumeOutput {
         return delete_volume.execute(self, allocator, input, options);
     }
 
@@ -4093,7 +4094,7 @@ pub const Client = struct {
     /// If you created a flow log for the VPC that you are deleting, note that flow
     /// logs for deleted
     /// VPCs are eventually automatically removed.
-    pub fn deleteVpc(self: *Self, allocator: std.mem.Allocator, input: delete_vpc.DeleteVpcInput, options: delete_vpc.Options) !delete_vpc.DeleteVpcOutput {
+    pub fn deleteVpc(self: *Self, allocator: std.mem.Allocator, input: delete_vpc.DeleteVpcInput, options: CallOptions) !delete_vpc.DeleteVpcOutput {
         return delete_vpc.execute(self, allocator, input, options);
     }
 
@@ -4105,7 +4106,7 @@ pub const Client = struct {
     /// exclusions when VPC BPA is turned on. To learn more about VPC BPA, see
     /// [Block public access to VPCs and
     /// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html) in the *Amazon VPC User Guide*.
-    pub fn deleteVpcBlockPublicAccessExclusion(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_block_public_access_exclusion.DeleteVpcBlockPublicAccessExclusionInput, options: delete_vpc_block_public_access_exclusion.Options) !delete_vpc_block_public_access_exclusion.DeleteVpcBlockPublicAccessExclusionOutput {
+    pub fn deleteVpcBlockPublicAccessExclusion(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_block_public_access_exclusion.DeleteVpcBlockPublicAccessExclusionInput, options: CallOptions) !delete_vpc_block_public_access_exclusion.DeleteVpcBlockPublicAccessExclusionOutput {
         return delete_vpc_block_public_access_exclusion.execute(self, allocator, input, options);
     }
 
@@ -4114,12 +4115,12 @@ pub const Client = struct {
     ///
     /// For more information, see [Enforce VPC encryption in
     /// transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.
-    pub fn deleteVpcEncryptionControl(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_encryption_control.DeleteVpcEncryptionControlInput, options: delete_vpc_encryption_control.Options) !delete_vpc_encryption_control.DeleteVpcEncryptionControlOutput {
+    pub fn deleteVpcEncryptionControl(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_encryption_control.DeleteVpcEncryptionControlInput, options: CallOptions) !delete_vpc_encryption_control.DeleteVpcEncryptionControlOutput {
         return delete_vpc_encryption_control.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified VPC endpoint connection notifications.
-    pub fn deleteVpcEndpointConnectionNotifications(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_endpoint_connection_notifications.DeleteVpcEndpointConnectionNotificationsInput, options: delete_vpc_endpoint_connection_notifications.Options) !delete_vpc_endpoint_connection_notifications.DeleteVpcEndpointConnectionNotificationsOutput {
+    pub fn deleteVpcEndpointConnectionNotifications(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_endpoint_connection_notifications.DeleteVpcEndpointConnectionNotificationsInput, options: CallOptions) !delete_vpc_endpoint_connection_notifications.DeleteVpcEndpointConnectionNotificationsOutput {
         return delete_vpc_endpoint_connection_notifications.execute(self, allocator, input, options);
     }
 
@@ -4128,7 +4129,7 @@ pub const Client = struct {
     /// an endpoint service configuration, you must reject any `Available` or
     /// `PendingAcceptance` interface endpoint connections that are attached to
     /// the service.
-    pub fn deleteVpcEndpointServiceConfigurations(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_endpoint_service_configurations.DeleteVpcEndpointServiceConfigurationsInput, options: delete_vpc_endpoint_service_configurations.Options) !delete_vpc_endpoint_service_configurations.DeleteVpcEndpointServiceConfigurationsOutput {
+    pub fn deleteVpcEndpointServiceConfigurations(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_endpoint_service_configurations.DeleteVpcEndpointServiceConfigurationsInput, options: CallOptions) !delete_vpc_endpoint_service_configurations.DeleteVpcEndpointServiceConfigurationsOutput {
         return delete_vpc_endpoint_service_configurations.execute(self, allocator, input, options);
     }
 
@@ -4144,7 +4145,7 @@ pub const Client = struct {
     ///
     /// When you delete an interface endpoint, we delete its endpoint network
     /// interfaces.
-    pub fn deleteVpcEndpoints(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_endpoints.DeleteVpcEndpointsInput, options: delete_vpc_endpoints.Options) !delete_vpc_endpoints.DeleteVpcEndpointsOutput {
+    pub fn deleteVpcEndpoints(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_endpoints.DeleteVpcEndpointsInput, options: CallOptions) !delete_vpc_endpoints.DeleteVpcEndpointsOutput {
         return delete_vpc_endpoints.execute(self, allocator, input, options);
     }
 
@@ -4155,12 +4156,12 @@ pub const Client = struct {
     /// connection in the `pending-acceptance` state. You cannot delete a VPC
     /// peering
     /// connection that's in the `failed` or `rejected` state.
-    pub fn deleteVpcPeeringConnection(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_peering_connection.DeleteVpcPeeringConnectionInput, options: delete_vpc_peering_connection.Options) !delete_vpc_peering_connection.DeleteVpcPeeringConnectionOutput {
+    pub fn deleteVpcPeeringConnection(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_peering_connection.DeleteVpcPeeringConnectionInput, options: CallOptions) !delete_vpc_peering_connection.DeleteVpcPeeringConnectionOutput {
         return delete_vpc_peering_connection.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified VPN concentrator.
-    pub fn deleteVpnConcentrator(self: *Self, allocator: std.mem.Allocator, input: delete_vpn_concentrator.DeleteVpnConcentratorInput, options: delete_vpn_concentrator.Options) !delete_vpn_concentrator.DeleteVpnConcentratorOutput {
+    pub fn deleteVpnConcentrator(self: *Self, allocator: std.mem.Allocator, input: delete_vpn_concentrator.DeleteVpnConcentratorInput, options: CallOptions) !delete_vpn_concentrator.DeleteVpnConcentratorOutput {
         return delete_vpn_concentrator.execute(self, allocator, input, options);
     }
 
@@ -4185,7 +4186,7 @@ pub const Client = struct {
     /// certificates used for the Amazon Web Services-side tunnel endpoints for the
     /// VPN
     /// connection before deleting the VPN connection.
-    pub fn deleteVpnConnection(self: *Self, allocator: std.mem.Allocator, input: delete_vpn_connection.DeleteVpnConnectionInput, options: delete_vpn_connection.Options) !delete_vpn_connection.DeleteVpnConnectionOutput {
+    pub fn deleteVpnConnection(self: *Self, allocator: std.mem.Allocator, input: delete_vpn_connection.DeleteVpnConnectionInput, options: CallOptions) !delete_vpn_connection.DeleteVpnConnectionOutput {
         return delete_vpn_connection.execute(self, allocator, input, options);
     }
 
@@ -4195,7 +4196,7 @@ pub const Client = struct {
     /// route allows
     /// traffic to be routed from the virtual private gateway to the VPN customer
     /// gateway.
-    pub fn deleteVpnConnectionRoute(self: *Self, allocator: std.mem.Allocator, input: delete_vpn_connection_route.DeleteVpnConnectionRouteInput, options: delete_vpn_connection_route.Options) !delete_vpn_connection_route.DeleteVpnConnectionRouteOutput {
+    pub fn deleteVpnConnectionRoute(self: *Self, allocator: std.mem.Allocator, input: delete_vpn_connection_route.DeleteVpnConnectionRouteInput, options: CallOptions) !delete_vpn_connection_route.DeleteVpnConnectionRouteOutput {
         return delete_vpn_connection_route.execute(self, allocator, input, options);
     }
 
@@ -4206,7 +4207,7 @@ pub const Client = struct {
     /// gateway if you plan to delete and recreate the VPN connection between your
     /// VPC and your
     /// network.
-    pub fn deleteVpnGateway(self: *Self, allocator: std.mem.Allocator, input: delete_vpn_gateway.DeleteVpnGatewayInput, options: delete_vpn_gateway.Options) !delete_vpn_gateway.DeleteVpnGatewayOutput {
+    pub fn deleteVpnGateway(self: *Self, allocator: std.mem.Allocator, input: delete_vpn_gateway.DeleteVpnGatewayInput, options: CallOptions) !delete_vpn_gateway.DeleteVpnGatewayOutput {
         return delete_vpn_gateway.execute(self, allocator, input, options);
     }
 
@@ -4218,7 +4219,7 @@ pub const Client = struct {
     /// Before you can release an address range, you must stop advertising it and
     /// you must not
     /// have any IP addresses allocated from its address range.
-    pub fn deprovisionByoipCidr(self: *Self, allocator: std.mem.Allocator, input: deprovision_byoip_cidr.DeprovisionByoipCidrInput, options: deprovision_byoip_cidr.Options) !deprovision_byoip_cidr.DeprovisionByoipCidrOutput {
+    pub fn deprovisionByoipCidr(self: *Self, allocator: std.mem.Allocator, input: deprovision_byoip_cidr.DeprovisionByoipCidrInput, options: CallOptions) !deprovision_byoip_cidr.DeprovisionByoipCidrOutput {
         return deprovision_byoip_cidr.execute(self, allocator, input, options);
     }
 
@@ -4229,7 +4230,7 @@ pub const Client = struct {
     /// For more information, see [Tutorial: Bring your ASN to
     /// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html) in
     /// the *Amazon VPC IPAM guide*.
-    pub fn deprovisionIpamByoasn(self: *Self, allocator: std.mem.Allocator, input: deprovision_ipam_byoasn.DeprovisionIpamByoasnInput, options: deprovision_ipam_byoasn.Options) !deprovision_ipam_byoasn.DeprovisionIpamByoasnOutput {
+    pub fn deprovisionIpamByoasn(self: *Self, allocator: std.mem.Allocator, input: deprovision_ipam_byoasn.DeprovisionIpamByoasnInput, options: CallOptions) !deprovision_ipam_byoasn.DeprovisionIpamByoasnOutput {
         return deprovision_ipam_byoasn.execute(self, allocator, input, options);
     }
 
@@ -4237,12 +4238,12 @@ pub const Client = struct {
     /// from a pool that has a source pool, the CIDR is recycled back into the
     /// source pool. For more information, see [Deprovision pool
     /// CIDRs](https://docs.aws.amazon.com/vpc/latest/ipam/depro-pool-cidr-ipam.html) in the *Amazon VPC IPAM User Guide*.
-    pub fn deprovisionIpamPoolCidr(self: *Self, allocator: std.mem.Allocator, input: deprovision_ipam_pool_cidr.DeprovisionIpamPoolCidrInput, options: deprovision_ipam_pool_cidr.Options) !deprovision_ipam_pool_cidr.DeprovisionIpamPoolCidrOutput {
+    pub fn deprovisionIpamPoolCidr(self: *Self, allocator: std.mem.Allocator, input: deprovision_ipam_pool_cidr.DeprovisionIpamPoolCidrInput, options: CallOptions) !deprovision_ipam_pool_cidr.DeprovisionIpamPoolCidrOutput {
         return deprovision_ipam_pool_cidr.execute(self, allocator, input, options);
     }
 
     /// Deprovision a CIDR from a public IPv4 pool.
-    pub fn deprovisionPublicIpv4PoolCidr(self: *Self, allocator: std.mem.Allocator, input: deprovision_public_ipv_4_pool_cidr.DeprovisionPublicIpv4PoolCidrInput, options: deprovision_public_ipv_4_pool_cidr.Options) !deprovision_public_ipv_4_pool_cidr.DeprovisionPublicIpv4PoolCidrOutput {
+    pub fn deprovisionPublicIpv4PoolCidr(self: *Self, allocator: std.mem.Allocator, input: deprovision_public_ipv_4_pool_cidr.DeprovisionPublicIpv4PoolCidrInput, options: CallOptions) !deprovision_public_ipv_4_pool_cidr.DeprovisionPublicIpv4PoolCidrOutput {
         return deprovision_public_ipv_4_pool_cidr.execute(self, allocator, input, options);
     }
 
@@ -4286,26 +4287,26 @@ pub const Client = struct {
     /// For more information, see [Deregister an Amazon EC2
     /// AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn deregisterImage(self: *Self, allocator: std.mem.Allocator, input: deregister_image.DeregisterImageInput, options: deregister_image.Options) !deregister_image.DeregisterImageOutput {
+    pub fn deregisterImage(self: *Self, allocator: std.mem.Allocator, input: deregister_image.DeregisterImageInput, options: CallOptions) !deregister_image.DeregisterImageOutput {
         return deregister_image.execute(self, allocator, input, options);
     }
 
     /// Deregisters tag keys to prevent tags that have the specified tag keys from
     /// being
     /// included in scheduled event notifications for resources in the Region.
-    pub fn deregisterInstanceEventNotificationAttributes(self: *Self, allocator: std.mem.Allocator, input: deregister_instance_event_notification_attributes.DeregisterInstanceEventNotificationAttributesInput, options: deregister_instance_event_notification_attributes.Options) !deregister_instance_event_notification_attributes.DeregisterInstanceEventNotificationAttributesOutput {
+    pub fn deregisterInstanceEventNotificationAttributes(self: *Self, allocator: std.mem.Allocator, input: deregister_instance_event_notification_attributes.DeregisterInstanceEventNotificationAttributesInput, options: CallOptions) !deregister_instance_event_notification_attributes.DeregisterInstanceEventNotificationAttributesOutput {
         return deregister_instance_event_notification_attributes.execute(self, allocator, input, options);
     }
 
     /// Deregisters the specified members (network interfaces) from the transit
     /// gateway multicast group.
-    pub fn deregisterTransitGatewayMulticastGroupMembers(self: *Self, allocator: std.mem.Allocator, input: deregister_transit_gateway_multicast_group_members.DeregisterTransitGatewayMulticastGroupMembersInput, options: deregister_transit_gateway_multicast_group_members.Options) !deregister_transit_gateway_multicast_group_members.DeregisterTransitGatewayMulticastGroupMembersOutput {
+    pub fn deregisterTransitGatewayMulticastGroupMembers(self: *Self, allocator: std.mem.Allocator, input: deregister_transit_gateway_multicast_group_members.DeregisterTransitGatewayMulticastGroupMembersInput, options: CallOptions) !deregister_transit_gateway_multicast_group_members.DeregisterTransitGatewayMulticastGroupMembersOutput {
         return deregister_transit_gateway_multicast_group_members.execute(self, allocator, input, options);
     }
 
     /// Deregisters the specified sources (network interfaces) from the transit
     /// gateway multicast group.
-    pub fn deregisterTransitGatewayMulticastGroupSources(self: *Self, allocator: std.mem.Allocator, input: deregister_transit_gateway_multicast_group_sources.DeregisterTransitGatewayMulticastGroupSourcesInput, options: deregister_transit_gateway_multicast_group_sources.Options) !deregister_transit_gateway_multicast_group_sources.DeregisterTransitGatewayMulticastGroupSourcesOutput {
+    pub fn deregisterTransitGatewayMulticastGroupSources(self: *Self, allocator: std.mem.Allocator, input: deregister_transit_gateway_multicast_group_sources.DeregisterTransitGatewayMulticastGroupSourcesInput, options: CallOptions) !deregister_transit_gateway_multicast_group_sources.DeregisterTransitGatewayMulticastGroupSourcesOutput {
         return deregister_transit_gateway_multicast_group_sources.execute(self, allocator, input, options);
     }
 
@@ -4337,7 +4338,7 @@ pub const Client = struct {
     /// structures, might vary. Applications should not assume the elements appear
     /// in a
     /// particular order.
-    pub fn describeAccountAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_account_attributes.DescribeAccountAttributesInput, options: describe_account_attributes.Options) !describe_account_attributes.DescribeAccountAttributesOutput {
+    pub fn describeAccountAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_account_attributes.DescribeAccountAttributesInput, options: CallOptions) !describe_account_attributes.DescribeAccountAttributesOutput {
         return describe_account_attributes.execute(self, allocator, input, options);
     }
 
@@ -4355,20 +4356,20 @@ pub const Client = struct {
     /// address returns to the source
     /// account. Accepted transfers are visible to the source account for 14 days
     /// after the transfers have been accepted.
-    pub fn describeAddressTransfers(self: *Self, allocator: std.mem.Allocator, input: describe_address_transfers.DescribeAddressTransfersInput, options: describe_address_transfers.Options) !describe_address_transfers.DescribeAddressTransfersOutput {
+    pub fn describeAddressTransfers(self: *Self, allocator: std.mem.Allocator, input: describe_address_transfers.DescribeAddressTransfersInput, options: CallOptions) !describe_address_transfers.DescribeAddressTransfersOutput {
         return describe_address_transfers.execute(self, allocator, input, options);
     }
 
     /// Describes the specified Elastic IP addresses or all of your Elastic IP
     /// addresses.
-    pub fn describeAddresses(self: *Self, allocator: std.mem.Allocator, input: describe_addresses.DescribeAddressesInput, options: describe_addresses.Options) !describe_addresses.DescribeAddressesOutput {
+    pub fn describeAddresses(self: *Self, allocator: std.mem.Allocator, input: describe_addresses.DescribeAddressesInput, options: CallOptions) !describe_addresses.DescribeAddressesOutput {
         return describe_addresses.execute(self, allocator, input, options);
     }
 
     /// Describes the attributes of the specified Elastic IP addresses. For
     /// requirements, see [Using reverse DNS for email
     /// applications](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS).
-    pub fn describeAddressesAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_addresses_attribute.DescribeAddressesAttributeInput, options: describe_addresses_attribute.Options) !describe_addresses_attribute.DescribeAddressesAttributeOutput {
+    pub fn describeAddressesAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_addresses_attribute.DescribeAddressesAttributeInput, options: CallOptions) !describe_addresses_attribute.DescribeAddressesAttributeOutput {
         return describe_addresses_attribute.execute(self, allocator, input, options);
     }
 
@@ -4393,7 +4394,7 @@ pub const Client = struct {
     /// `subnet-cidr-block-association` | `volume` | `vpc` |
     /// `vpc-cidr-block-association` | `vpc-endpoint` |
     /// `vpc-peering-connection` | `vpn-connection` | `vpn-gateway`.
-    pub fn describeAggregateIdFormat(self: *Self, allocator: std.mem.Allocator, input: describe_aggregate_id_format.DescribeAggregateIdFormatInput, options: describe_aggregate_id_format.Options) !describe_aggregate_id_format.DescribeAggregateIdFormatOutput {
+    pub fn describeAggregateIdFormat(self: *Self, allocator: std.mem.Allocator, input: describe_aggregate_id_format.DescribeAggregateIdFormatInput, options: CallOptions) !describe_aggregate_id_format.DescribeAggregateIdFormatOutput {
         return describe_aggregate_id_format.execute(self, allocator, input, options);
     }
 
@@ -4411,12 +4412,12 @@ pub const Client = struct {
     /// structures, might vary. Applications should not assume the elements appear
     /// in a
     /// particular order.
-    pub fn describeAvailabilityZones(self: *Self, allocator: std.mem.Allocator, input: describe_availability_zones.DescribeAvailabilityZonesInput, options: describe_availability_zones.Options) !describe_availability_zones.DescribeAvailabilityZonesOutput {
+    pub fn describeAvailabilityZones(self: *Self, allocator: std.mem.Allocator, input: describe_availability_zones.DescribeAvailabilityZonesInput, options: CallOptions) !describe_availability_zones.DescribeAvailabilityZonesOutput {
         return describe_availability_zones.execute(self, allocator, input, options);
     }
 
     /// Describes the current Infrastructure Performance metric subscriptions.
-    pub fn describeAwsNetworkPerformanceMetricSubscriptions(self: *Self, allocator: std.mem.Allocator, input: describe_aws_network_performance_metric_subscriptions.DescribeAwsNetworkPerformanceMetricSubscriptionsInput, options: describe_aws_network_performance_metric_subscriptions.Options) !describe_aws_network_performance_metric_subscriptions.DescribeAwsNetworkPerformanceMetricSubscriptionsOutput {
+    pub fn describeAwsNetworkPerformanceMetricSubscriptions(self: *Self, allocator: std.mem.Allocator, input: describe_aws_network_performance_metric_subscriptions.DescribeAwsNetworkPerformanceMetricSubscriptionsInput, options: CallOptions) !describe_aws_network_performance_metric_subscriptions.DescribeAwsNetworkPerformanceMetricSubscriptionsOutput {
         return describe_aws_network_performance_metric_subscriptions.execute(self, allocator, input, options);
     }
 
@@ -4433,28 +4434,28 @@ pub const Client = struct {
     /// structures,
     /// might vary. Applications should not assume the elements appear in a
     /// particular order.
-    pub fn describeBundleTasks(self: *Self, allocator: std.mem.Allocator, input: describe_bundle_tasks.DescribeBundleTasksInput, options: describe_bundle_tasks.Options) !describe_bundle_tasks.DescribeBundleTasksOutput {
+    pub fn describeBundleTasks(self: *Self, allocator: std.mem.Allocator, input: describe_bundle_tasks.DescribeBundleTasksInput, options: CallOptions) !describe_bundle_tasks.DescribeBundleTasksOutput {
         return describe_bundle_tasks.execute(self, allocator, input, options);
     }
 
     /// Describes the IP address ranges that were provisioned for use with Amazon
     /// Web Services resources
     /// through through bring your own IP addresses (BYOIP).
-    pub fn describeByoipCidrs(self: *Self, allocator: std.mem.Allocator, input: describe_byoip_cidrs.DescribeByoipCidrsInput, options: describe_byoip_cidrs.Options) !describe_byoip_cidrs.DescribeByoipCidrsOutput {
+    pub fn describeByoipCidrs(self: *Self, allocator: std.mem.Allocator, input: describe_byoip_cidrs.DescribeByoipCidrsInput, options: CallOptions) !describe_byoip_cidrs.DescribeByoipCidrsOutput {
         return describe_byoip_cidrs.execute(self, allocator, input, options);
     }
 
     /// Describes the events for the specified Capacity Block extension during the
     /// specified
     /// time.
-    pub fn describeCapacityBlockExtensionHistory(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_block_extension_history.DescribeCapacityBlockExtensionHistoryInput, options: describe_capacity_block_extension_history.Options) !describe_capacity_block_extension_history.DescribeCapacityBlockExtensionHistoryOutput {
+    pub fn describeCapacityBlockExtensionHistory(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_block_extension_history.DescribeCapacityBlockExtensionHistoryInput, options: CallOptions) !describe_capacity_block_extension_history.DescribeCapacityBlockExtensionHistoryOutput {
         return describe_capacity_block_extension_history.execute(self, allocator, input, options);
     }
 
     /// Describes Capacity Block extension offerings available for purchase in the
     /// Amazon Web Services
     /// Region that you're currently using.
-    pub fn describeCapacityBlockExtensionOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_block_extension_offerings.DescribeCapacityBlockExtensionOfferingsInput, options: describe_capacity_block_extension_offerings.Options) !describe_capacity_block_extension_offerings.DescribeCapacityBlockExtensionOfferingsOutput {
+    pub fn describeCapacityBlockExtensionOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_block_extension_offerings.DescribeCapacityBlockExtensionOfferingsInput, options: CallOptions) !describe_capacity_block_extension_offerings.DescribeCapacityBlockExtensionOfferingsOutput {
         return describe_capacity_block_extension_offerings.execute(self, allocator, input, options);
     }
 
@@ -4466,26 +4467,26 @@ pub const Client = struct {
     /// To search for an available Capacity Block offering, you specify a
     /// reservation duration
     /// and instance count.
-    pub fn describeCapacityBlockOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_block_offerings.DescribeCapacityBlockOfferingsInput, options: describe_capacity_block_offerings.Options) !describe_capacity_block_offerings.DescribeCapacityBlockOfferingsOutput {
+    pub fn describeCapacityBlockOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_block_offerings.DescribeCapacityBlockOfferingsInput, options: CallOptions) !describe_capacity_block_offerings.DescribeCapacityBlockOfferingsOutput {
         return describe_capacity_block_offerings.execute(self, allocator, input, options);
     }
 
     /// Describes the availability of capacity for the specified Capacity blocks, or
     /// all of your Capacity Blocks.
-    pub fn describeCapacityBlockStatus(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_block_status.DescribeCapacityBlockStatusInput, options: describe_capacity_block_status.Options) !describe_capacity_block_status.DescribeCapacityBlockStatusOutput {
+    pub fn describeCapacityBlockStatus(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_block_status.DescribeCapacityBlockStatusInput, options: CallOptions) !describe_capacity_block_status.DescribeCapacityBlockStatusOutput {
         return describe_capacity_block_status.execute(self, allocator, input, options);
     }
 
     /// Describes details about Capacity Blocks in the Amazon Web Services Region
     /// that you're currently using.
-    pub fn describeCapacityBlocks(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_blocks.DescribeCapacityBlocksInput, options: describe_capacity_blocks.Options) !describe_capacity_blocks.DescribeCapacityBlocksOutput {
+    pub fn describeCapacityBlocks(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_blocks.DescribeCapacityBlocksInput, options: CallOptions) !describe_capacity_blocks.DescribeCapacityBlocksOutput {
         return describe_capacity_blocks.execute(self, allocator, input, options);
     }
 
     /// Describes one or more Capacity Manager data export configurations. Returns
     /// information about export settings, delivery status, and recent export
     /// activity.
-    pub fn describeCapacityManagerDataExports(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_manager_data_exports.DescribeCapacityManagerDataExportsInput, options: describe_capacity_manager_data_exports.Options) !describe_capacity_manager_data_exports.DescribeCapacityManagerDataExportsOutput {
+    pub fn describeCapacityManagerDataExports(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_manager_data_exports.DescribeCapacityManagerDataExportsInput, options: CallOptions) !describe_capacity_manager_data_exports.DescribeCapacityManagerDataExportsOutput {
         return describe_capacity_manager_data_exports.execute(self, allocator, input, options);
     }
 
@@ -4494,12 +4495,12 @@ pub const Client = struct {
     /// Reservation. For more information, see [ Billing assignment for shared
     /// Amazon EC2 Capacity
     /// Reservations](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/transfer-billing.html).
-    pub fn describeCapacityReservationBillingRequests(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_reservation_billing_requests.DescribeCapacityReservationBillingRequestsInput, options: describe_capacity_reservation_billing_requests.Options) !describe_capacity_reservation_billing_requests.DescribeCapacityReservationBillingRequestsOutput {
+    pub fn describeCapacityReservationBillingRequests(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_reservation_billing_requests.DescribeCapacityReservationBillingRequestsInput, options: CallOptions) !describe_capacity_reservation_billing_requests.DescribeCapacityReservationBillingRequestsOutput {
         return describe_capacity_reservation_billing_requests.execute(self, allocator, input, options);
     }
 
     /// Describes one or more Capacity Reservation Fleets.
-    pub fn describeCapacityReservationFleets(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_reservation_fleets.DescribeCapacityReservationFleetsInput, options: describe_capacity_reservation_fleets.Options) !describe_capacity_reservation_fleets.DescribeCapacityReservationFleetsOutput {
+    pub fn describeCapacityReservationFleets(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_reservation_fleets.DescribeCapacityReservationFleetsInput, options: CallOptions) !describe_capacity_reservation_fleets.DescribeCapacityReservationFleetsOutput {
         return describe_capacity_reservation_fleets.execute(self, allocator, input, options);
     }
 
@@ -4535,7 +4536,7 @@ pub const Client = struct {
     /// For more information, see [Amazon EC2
     /// topology](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-topology.html) in
     /// the *Amazon EC2 User Guide*.
-    pub fn describeCapacityReservationTopology(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_reservation_topology.DescribeCapacityReservationTopologyInput, options: describe_capacity_reservation_topology.Options) !describe_capacity_reservation_topology.DescribeCapacityReservationTopologyOutput {
+    pub fn describeCapacityReservationTopology(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_reservation_topology.DescribeCapacityReservationTopologyInput, options: CallOptions) !describe_capacity_reservation_topology.DescribeCapacityReservationTopologyOutput {
         return describe_capacity_reservation_topology.execute(self, allocator, input, options);
     }
 
@@ -4544,12 +4545,12 @@ pub const Client = struct {
     /// Capacity Reservations in the Amazon Web Services Region that you're
     /// currently
     /// using.
-    pub fn describeCapacityReservations(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_reservations.DescribeCapacityReservationsInput, options: describe_capacity_reservations.Options) !describe_capacity_reservations.DescribeCapacityReservationsOutput {
+    pub fn describeCapacityReservations(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_reservations.DescribeCapacityReservationsInput, options: CallOptions) !describe_capacity_reservations.DescribeCapacityReservationsOutput {
         return describe_capacity_reservations.execute(self, allocator, input, options);
     }
 
     /// Describes one or more of your carrier gateways.
-    pub fn describeCarrierGateways(self: *Self, allocator: std.mem.Allocator, input: describe_carrier_gateways.DescribeCarrierGatewaysInput, options: describe_carrier_gateways.Options) !describe_carrier_gateways.DescribeCarrierGatewaysOutput {
+    pub fn describeCarrierGateways(self: *Self, allocator: std.mem.Allocator, input: describe_carrier_gateways.DescribeCarrierGatewaysInput, options: CallOptions) !describe_carrier_gateways.DescribeCarrierGatewaysOutput {
         return describe_carrier_gateways.execute(self, allocator, input, options);
     }
 
@@ -4559,41 +4560,41 @@ pub const Client = struct {
     /// information about EC2-Classic instances linked to a VPC through ClassicLink.
     /// You cannot
     /// use this request to return information about other instances.
-    pub fn describeClassicLinkInstances(self: *Self, allocator: std.mem.Allocator, input: describe_classic_link_instances.DescribeClassicLinkInstancesInput, options: describe_classic_link_instances.Options) !describe_classic_link_instances.DescribeClassicLinkInstancesOutput {
+    pub fn describeClassicLinkInstances(self: *Self, allocator: std.mem.Allocator, input: describe_classic_link_instances.DescribeClassicLinkInstancesInput, options: CallOptions) !describe_classic_link_instances.DescribeClassicLinkInstancesOutput {
         return describe_classic_link_instances.execute(self, allocator, input, options);
     }
 
     /// Describes the authorization rules for a specified Client VPN endpoint.
-    pub fn describeClientVpnAuthorizationRules(self: *Self, allocator: std.mem.Allocator, input: describe_client_vpn_authorization_rules.DescribeClientVpnAuthorizationRulesInput, options: describe_client_vpn_authorization_rules.Options) !describe_client_vpn_authorization_rules.DescribeClientVpnAuthorizationRulesOutput {
+    pub fn describeClientVpnAuthorizationRules(self: *Self, allocator: std.mem.Allocator, input: describe_client_vpn_authorization_rules.DescribeClientVpnAuthorizationRulesInput, options: CallOptions) !describe_client_vpn_authorization_rules.DescribeClientVpnAuthorizationRulesOutput {
         return describe_client_vpn_authorization_rules.execute(self, allocator, input, options);
     }
 
     /// Describes active client connections and connections that have been
     /// terminated within the last 60
     /// minutes for the specified Client VPN endpoint.
-    pub fn describeClientVpnConnections(self: *Self, allocator: std.mem.Allocator, input: describe_client_vpn_connections.DescribeClientVpnConnectionsInput, options: describe_client_vpn_connections.Options) !describe_client_vpn_connections.DescribeClientVpnConnectionsOutput {
+    pub fn describeClientVpnConnections(self: *Self, allocator: std.mem.Allocator, input: describe_client_vpn_connections.DescribeClientVpnConnectionsInput, options: CallOptions) !describe_client_vpn_connections.DescribeClientVpnConnectionsOutput {
         return describe_client_vpn_connections.execute(self, allocator, input, options);
     }
 
     /// Describes one or more Client VPN endpoints in the account.
-    pub fn describeClientVpnEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_client_vpn_endpoints.DescribeClientVpnEndpointsInput, options: describe_client_vpn_endpoints.Options) !describe_client_vpn_endpoints.DescribeClientVpnEndpointsOutput {
+    pub fn describeClientVpnEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_client_vpn_endpoints.DescribeClientVpnEndpointsInput, options: CallOptions) !describe_client_vpn_endpoints.DescribeClientVpnEndpointsOutput {
         return describe_client_vpn_endpoints.execute(self, allocator, input, options);
     }
 
     /// Describes the routes for the specified Client VPN endpoint.
-    pub fn describeClientVpnRoutes(self: *Self, allocator: std.mem.Allocator, input: describe_client_vpn_routes.DescribeClientVpnRoutesInput, options: describe_client_vpn_routes.Options) !describe_client_vpn_routes.DescribeClientVpnRoutesOutput {
+    pub fn describeClientVpnRoutes(self: *Self, allocator: std.mem.Allocator, input: describe_client_vpn_routes.DescribeClientVpnRoutesInput, options: CallOptions) !describe_client_vpn_routes.DescribeClientVpnRoutesOutput {
         return describe_client_vpn_routes.execute(self, allocator, input, options);
     }
 
     /// Describes the target networks associated with the specified Client VPN
     /// endpoint.
-    pub fn describeClientVpnTargetNetworks(self: *Self, allocator: std.mem.Allocator, input: describe_client_vpn_target_networks.DescribeClientVpnTargetNetworksInput, options: describe_client_vpn_target_networks.Options) !describe_client_vpn_target_networks.DescribeClientVpnTargetNetworksOutput {
+    pub fn describeClientVpnTargetNetworks(self: *Self, allocator: std.mem.Allocator, input: describe_client_vpn_target_networks.DescribeClientVpnTargetNetworksInput, options: CallOptions) !describe_client_vpn_target_networks.DescribeClientVpnTargetNetworksOutput {
         return describe_client_vpn_target_networks.execute(self, allocator, input, options);
     }
 
     /// Describes the specified customer-owned address pools or all of your
     /// customer-owned address pools.
-    pub fn describeCoipPools(self: *Self, allocator: std.mem.Allocator, input: describe_coip_pools.DescribeCoipPoolsInput, options: describe_coip_pools.Options) !describe_coip_pools.DescribeCoipPoolsOutput {
+    pub fn describeCoipPools(self: *Self, allocator: std.mem.Allocator, input: describe_coip_pools.DescribeCoipPoolsInput, options: CallOptions) !describe_coip_pools.DescribeCoipPoolsOutput {
         return describe_coip_pools.execute(self, allocator, input, options);
     }
 
@@ -4605,7 +4606,7 @@ pub const Client = struct {
     /// For information about the import manifest referenced by this API action, see
     /// [VM Import
     /// Manifest](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html).
-    pub fn describeConversionTasks(self: *Self, allocator: std.mem.Allocator, input: describe_conversion_tasks.DescribeConversionTasksInput, options: describe_conversion_tasks.Options) !describe_conversion_tasks.DescribeConversionTasksOutput {
+    pub fn describeConversionTasks(self: *Self, allocator: std.mem.Allocator, input: describe_conversion_tasks.DescribeConversionTasksInput, options: CallOptions) !describe_conversion_tasks.DescribeConversionTasksOutput {
         return describe_conversion_tasks.execute(self, allocator, input, options);
     }
 
@@ -4615,7 +4616,7 @@ pub const Client = struct {
     /// VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the
     /// *Amazon Web Services Site-to-Site VPN
     /// User Guide*.
-    pub fn describeCustomerGateways(self: *Self, allocator: std.mem.Allocator, input: describe_customer_gateways.DescribeCustomerGatewaysInput, options: describe_customer_gateways.Options) !describe_customer_gateways.DescribeCustomerGatewaysOutput {
+    pub fn describeCustomerGateways(self: *Self, allocator: std.mem.Allocator, input: describe_customer_gateways.DescribeCustomerGatewaysInput, options: CallOptions) !describe_customer_gateways.DescribeCustomerGatewaysOutput {
         return describe_customer_gateways.execute(self, allocator, input, options);
     }
 
@@ -4636,7 +4637,7 @@ pub const Client = struct {
     /// declarative
     /// policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative_status-report.html) in the
     /// *Amazon Web Services Organizations User Guide*.
-    pub fn describeDeclarativePoliciesReports(self: *Self, allocator: std.mem.Allocator, input: describe_declarative_policies_reports.DescribeDeclarativePoliciesReportsInput, options: describe_declarative_policies_reports.Options) !describe_declarative_policies_reports.DescribeDeclarativePoliciesReportsOutput {
+    pub fn describeDeclarativePoliciesReports(self: *Self, allocator: std.mem.Allocator, input: describe_declarative_policies_reports.DescribeDeclarativePoliciesReportsInput, options: CallOptions) !describe_declarative_policies_reports.DescribeDeclarativePoliciesReportsOutput {
         return describe_declarative_policies_reports.execute(self, allocator, input, options);
     }
 
@@ -4649,7 +4650,7 @@ pub const Client = struct {
     /// For more information, see [DHCP option
     /// sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html) in the
     /// *Amazon VPC User Guide*.
-    pub fn describeDhcpOptions(self: *Self, allocator: std.mem.Allocator, input: describe_dhcp_options.DescribeDhcpOptionsInput, options: describe_dhcp_options.Options) !describe_dhcp_options.DescribeDhcpOptionsOutput {
+    pub fn describeDhcpOptions(self: *Self, allocator: std.mem.Allocator, input: describe_dhcp_options.DescribeDhcpOptionsInput, options: CallOptions) !describe_dhcp_options.DescribeDhcpOptionsOutput {
         return describe_dhcp_options.execute(self, allocator, input, options);
     }
 
@@ -4658,37 +4659,37 @@ pub const Client = struct {
     /// Alternatively, you can specify specific egress-only internet gateway IDs or
     /// filter the results to
     /// include only the egress-only internet gateways that match specific criteria.
-    pub fn describeEgressOnlyInternetGateways(self: *Self, allocator: std.mem.Allocator, input: describe_egress_only_internet_gateways.DescribeEgressOnlyInternetGatewaysInput, options: describe_egress_only_internet_gateways.Options) !describe_egress_only_internet_gateways.DescribeEgressOnlyInternetGatewaysOutput {
+    pub fn describeEgressOnlyInternetGateways(self: *Self, allocator: std.mem.Allocator, input: describe_egress_only_internet_gateways.DescribeEgressOnlyInternetGatewaysInput, options: CallOptions) !describe_egress_only_internet_gateways.DescribeEgressOnlyInternetGatewaysOutput {
         return describe_egress_only_internet_gateways.execute(self, allocator, input, options);
     }
 
     /// Amazon Elastic Graphics reached end of life on January 8, 2024.
     ///
     /// Describes the Elastic Graphics accelerator associated with your instances.
-    pub fn describeElasticGpus(self: *Self, allocator: std.mem.Allocator, input: describe_elastic_gpus.DescribeElasticGpusInput, options: describe_elastic_gpus.Options) !describe_elastic_gpus.DescribeElasticGpusOutput {
+    pub fn describeElasticGpus(self: *Self, allocator: std.mem.Allocator, input: describe_elastic_gpus.DescribeElasticGpusInput, options: CallOptions) !describe_elastic_gpus.DescribeElasticGpusOutput {
         return describe_elastic_gpus.execute(self, allocator, input, options);
     }
 
     /// Describes the specified export image tasks or all of your export image
     /// tasks.
-    pub fn describeExportImageTasks(self: *Self, allocator: std.mem.Allocator, input: describe_export_image_tasks.DescribeExportImageTasksInput, options: describe_export_image_tasks.Options) !describe_export_image_tasks.DescribeExportImageTasksOutput {
+    pub fn describeExportImageTasks(self: *Self, allocator: std.mem.Allocator, input: describe_export_image_tasks.DescribeExportImageTasksInput, options: CallOptions) !describe_export_image_tasks.DescribeExportImageTasksOutput {
         return describe_export_image_tasks.execute(self, allocator, input, options);
     }
 
     /// Describes the specified export instance tasks or all of your export instance
     /// tasks.
-    pub fn describeExportTasks(self: *Self, allocator: std.mem.Allocator, input: describe_export_tasks.DescribeExportTasksInput, options: describe_export_tasks.Options) !describe_export_tasks.DescribeExportTasksOutput {
+    pub fn describeExportTasks(self: *Self, allocator: std.mem.Allocator, input: describe_export_tasks.DescribeExportTasksInput, options: CallOptions) !describe_export_tasks.DescribeExportTasksOutput {
         return describe_export_tasks.execute(self, allocator, input, options);
     }
 
     /// Describe details for Windows AMIs that are configured for Windows fast
     /// launch.
-    pub fn describeFastLaunchImages(self: *Self, allocator: std.mem.Allocator, input: describe_fast_launch_images.DescribeFastLaunchImagesInput, options: describe_fast_launch_images.Options) !describe_fast_launch_images.DescribeFastLaunchImagesOutput {
+    pub fn describeFastLaunchImages(self: *Self, allocator: std.mem.Allocator, input: describe_fast_launch_images.DescribeFastLaunchImagesInput, options: CallOptions) !describe_fast_launch_images.DescribeFastLaunchImagesOutput {
         return describe_fast_launch_images.execute(self, allocator, input, options);
     }
 
     /// Describes the state of fast snapshot restores for your snapshots.
-    pub fn describeFastSnapshotRestores(self: *Self, allocator: std.mem.Allocator, input: describe_fast_snapshot_restores.DescribeFastSnapshotRestoresInput, options: describe_fast_snapshot_restores.Options) !describe_fast_snapshot_restores.DescribeFastSnapshotRestoresOutput {
+    pub fn describeFastSnapshotRestores(self: *Self, allocator: std.mem.Allocator, input: describe_fast_snapshot_restores.DescribeFastSnapshotRestoresInput, options: CallOptions) !describe_fast_snapshot_restores.DescribeFastSnapshotRestoresOutput {
         return describe_fast_snapshot_restores.execute(self, allocator, input, options);
     }
 
@@ -4703,7 +4704,7 @@ pub const Client = struct {
     /// For more information, see [Monitor fleet events using Amazon
     /// EventBridge](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/fleet-monitor.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn describeFleetHistory(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_history.DescribeFleetHistoryInput, options: describe_fleet_history.Options) !describe_fleet_history.DescribeFleetHistoryOutput {
+    pub fn describeFleetHistory(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_history.DescribeFleetHistoryInput, options: CallOptions) !describe_fleet_history.DescribeFleetHistoryOutput {
         return describe_fleet_history.execute(self, allocator, input, options);
     }
 
@@ -4716,7 +4717,7 @@ pub const Client = struct {
     /// For more information, see [Describe your
     /// EC2
     /// Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#monitor-ec2-fleet) in the *Amazon EC2 User Guide*.
-    pub fn describeFleetInstances(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_instances.DescribeFleetInstancesInput, options: describe_fleet_instances.Options) !describe_fleet_instances.DescribeFleetInstancesOutput {
+    pub fn describeFleetInstances(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_instances.DescribeFleetInstancesInput, options: CallOptions) !describe_fleet_instances.DescribeFleetInstancesOutput {
         return describe_fleet_instances.execute(self, allocator, input, options);
     }
 
@@ -4728,7 +4729,7 @@ pub const Client = struct {
     /// For more information, see [Describe your
     /// EC2
     /// Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#monitor-ec2-fleet) in the *Amazon EC2 User Guide*.
-    pub fn describeFleets(self: *Self, allocator: std.mem.Allocator, input: describe_fleets.DescribeFleetsInput, options: describe_fleets.Options) !describe_fleets.DescribeFleetsOutput {
+    pub fn describeFleets(self: *Self, allocator: std.mem.Allocator, input: describe_fleets.DescribeFleetsInput, options: CallOptions) !describe_fleets.DescribeFleetsOutput {
         return describe_fleets.execute(self, allocator, input, options);
     }
 
@@ -4738,12 +4739,12 @@ pub const Client = struct {
     /// For example,
     /// the CloudWatch Logs log group, the Amazon S3 bucket, or the Kinesis Data
     /// Firehose delivery stream.
-    pub fn describeFlowLogs(self: *Self, allocator: std.mem.Allocator, input: describe_flow_logs.DescribeFlowLogsInput, options: describe_flow_logs.Options) !describe_flow_logs.DescribeFlowLogsOutput {
+    pub fn describeFlowLogs(self: *Self, allocator: std.mem.Allocator, input: describe_flow_logs.DescribeFlowLogsInput, options: CallOptions) !describe_flow_logs.DescribeFlowLogsOutput {
         return describe_flow_logs.execute(self, allocator, input, options);
     }
 
     /// Describes the specified attribute of the specified Amazon FPGA Image (AFI).
-    pub fn describeFpgaImageAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_fpga_image_attribute.DescribeFpgaImageAttributeInput, options: describe_fpga_image_attribute.Options) !describe_fpga_image_attribute.DescribeFpgaImageAttributeOutput {
+    pub fn describeFpgaImageAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_fpga_image_attribute.DescribeFpgaImageAttributeInput, options: CallOptions) !describe_fpga_image_attribute.DescribeFpgaImageAttributeOutput {
         return describe_fpga_image_attribute.execute(self, allocator, input, options);
     }
 
@@ -4752,7 +4753,7 @@ pub const Client = struct {
     /// private AFIs that you own, and AFIs owned by other Amazon Web Services
     /// accounts for which you have load
     /// permissions.
-    pub fn describeFpgaImages(self: *Self, allocator: std.mem.Allocator, input: describe_fpga_images.DescribeFpgaImagesInput, options: describe_fpga_images.Options) !describe_fpga_images.DescribeFpgaImagesOutput {
+    pub fn describeFpgaImages(self: *Self, allocator: std.mem.Allocator, input: describe_fpga_images.DescribeFpgaImagesInput, options: CallOptions) !describe_fpga_images.DescribeFpgaImagesOutput {
         return describe_fpga_images.execute(self, allocator, input, options);
     }
 
@@ -4769,13 +4770,13 @@ pub const Client = struct {
     /// information about supported instance types, see [Dedicated
     /// Hosts](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html)
     /// in the *Amazon EC2 User Guide*.
-    pub fn describeHostReservationOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_host_reservation_offerings.DescribeHostReservationOfferingsInput, options: describe_host_reservation_offerings.Options) !describe_host_reservation_offerings.DescribeHostReservationOfferingsOutput {
+    pub fn describeHostReservationOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_host_reservation_offerings.DescribeHostReservationOfferingsInput, options: CallOptions) !describe_host_reservation_offerings.DescribeHostReservationOfferingsOutput {
         return describe_host_reservation_offerings.execute(self, allocator, input, options);
     }
 
     /// Describes reservations that are associated with Dedicated Hosts in your
     /// account.
-    pub fn describeHostReservations(self: *Self, allocator: std.mem.Allocator, input: describe_host_reservations.DescribeHostReservationsInput, options: describe_host_reservations.Options) !describe_host_reservations.DescribeHostReservationsOutput {
+    pub fn describeHostReservations(self: *Self, allocator: std.mem.Allocator, input: describe_host_reservations.DescribeHostReservationsInput, options: CallOptions) !describe_host_reservations.DescribeHostReservationsOutput {
         return describe_host_reservations.execute(self, allocator, input, options);
     }
 
@@ -4786,12 +4787,12 @@ pub const Client = struct {
     /// All listed instances consume capacity on your Dedicated Host. Dedicated
     /// Hosts that have
     /// recently been released are listed with the state `released`.
-    pub fn describeHosts(self: *Self, allocator: std.mem.Allocator, input: describe_hosts.DescribeHostsInput, options: describe_hosts.Options) !describe_hosts.DescribeHostsOutput {
+    pub fn describeHosts(self: *Self, allocator: std.mem.Allocator, input: describe_hosts.DescribeHostsInput, options: CallOptions) !describe_hosts.DescribeHostsOutput {
         return describe_hosts.execute(self, allocator, input, options);
     }
 
     /// Describes your IAM instance profile associations.
-    pub fn describeIamInstanceProfileAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_iam_instance_profile_associations.DescribeIamInstanceProfileAssociationsInput, options: describe_iam_instance_profile_associations.Options) !describe_iam_instance_profile_associations.DescribeIamInstanceProfileAssociationsOutput {
+    pub fn describeIamInstanceProfileAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_iam_instance_profile_associations.DescribeIamInstanceProfileAssociationsInput, options: CallOptions) !describe_iam_instance_profile_associations.DescribeIamInstanceProfileAssociationsOutput {
         return describe_iam_instance_profile_associations.execute(self, allocator, input, options);
     }
 
@@ -4825,7 +4826,7 @@ pub const Client = struct {
     /// provided that they have permission to use the relevant `Describe` command
     /// for the
     /// resource type.
-    pub fn describeIdFormat(self: *Self, allocator: std.mem.Allocator, input: describe_id_format.DescribeIdFormatInput, options: describe_id_format.Options) !describe_id_format.DescribeIdFormatOutput {
+    pub fn describeIdFormat(self: *Self, allocator: std.mem.Allocator, input: describe_id_format.DescribeIdFormatInput, options: CallOptions) !describe_id_format.DescribeIdFormatOutput {
         return describe_id_format.execute(self, allocator, input, options);
     }
 
@@ -4856,7 +4857,7 @@ pub const Client = struct {
     /// These settings apply to the principal specified in the request. They do not
     /// apply to the
     /// principal that makes the request.
-    pub fn describeIdentityIdFormat(self: *Self, allocator: std.mem.Allocator, input: describe_identity_id_format.DescribeIdentityIdFormatInput, options: describe_identity_id_format.Options) !describe_identity_id_format.DescribeIdentityIdFormatOutput {
+    pub fn describeIdentityIdFormat(self: *Self, allocator: std.mem.Allocator, input: describe_identity_id_format.DescribeIdentityIdFormatInput, options: CallOptions) !describe_identity_id_format.DescribeIdentityIdFormatOutput {
         return describe_identity_id_format.execute(self, allocator, input, options);
     }
 
@@ -4868,7 +4869,7 @@ pub const Client = struct {
     /// structures,
     /// might vary. Applications should not assume the elements appear in a
     /// particular order.
-    pub fn describeImageAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_image_attribute.DescribeImageAttributeInput, options: describe_image_attribute.Options) !describe_image_attribute.DescribeImageAttributeOutput {
+    pub fn describeImageAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_image_attribute.DescribeImageAttributeInput, options: CallOptions) !describe_image_attribute.DescribeImageAttributeOutput {
         return describe_image_attribute.execute(self, allocator, input, options);
     }
 
@@ -4878,7 +4879,7 @@ pub const Client = struct {
     /// For more information, see [Identify your resources referencing
     /// specified
     /// AMIs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-ami-references.html) in the *Amazon EC2 User Guide*.
-    pub fn describeImageReferences(self: *Self, allocator: std.mem.Allocator, input: describe_image_references.DescribeImageReferencesInput, options: describe_image_references.Options) !describe_image_references.DescribeImageReferencesOutput {
+    pub fn describeImageReferences(self: *Self, allocator: std.mem.Allocator, input: describe_image_references.DescribeImageReferencesInput, options: CallOptions) !describe_image_references.DescribeImageReferencesOutput {
         return describe_image_references.execute(self, allocator, input, options);
     }
 
@@ -4889,7 +4890,7 @@ pub const Client = struct {
     /// For more information, see [View your AMI
     /// usage](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn describeImageUsageReportEntries(self: *Self, allocator: std.mem.Allocator, input: describe_image_usage_report_entries.DescribeImageUsageReportEntriesInput, options: describe_image_usage_report_entries.Options) !describe_image_usage_report_entries.DescribeImageUsageReportEntriesOutput {
+    pub fn describeImageUsageReportEntries(self: *Self, allocator: std.mem.Allocator, input: describe_image_usage_report_entries.DescribeImageUsageReportEntriesInput, options: CallOptions) !describe_image_usage_report_entries.DescribeImageUsageReportEntriesOutput {
         return describe_image_usage_report_entries.execute(self, allocator, input, options);
     }
 
@@ -4900,7 +4901,7 @@ pub const Client = struct {
     /// For more information, see [View your AMI
     /// usage](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn describeImageUsageReports(self: *Self, allocator: std.mem.Allocator, input: describe_image_usage_reports.DescribeImageUsageReportsInput, options: describe_image_usage_reports.Options) !describe_image_usage_reports.DescribeImageUsageReportsOutput {
+    pub fn describeImageUsageReports(self: *Self, allocator: std.mem.Allocator, input: describe_image_usage_reports.DescribeImageUsageReportsInput, options: CallOptions) !describe_image_usage_reports.DescribeImageUsageReportsOutput {
         return describe_image_usage_reports.execute(self, allocator, input, options);
     }
 
@@ -4949,18 +4950,18 @@ pub const Client = struct {
     /// structures,
     /// might vary. Applications should not assume the elements appear in a
     /// particular order.
-    pub fn describeImages(self: *Self, allocator: std.mem.Allocator, input: describe_images.DescribeImagesInput, options: describe_images.Options) !describe_images.DescribeImagesOutput {
+    pub fn describeImages(self: *Self, allocator: std.mem.Allocator, input: describe_images.DescribeImagesInput, options: CallOptions) !describe_images.DescribeImagesOutput {
         return describe_images.execute(self, allocator, input, options);
     }
 
     /// Displays details about an import virtual machine or import snapshot tasks
     /// that are already created.
-    pub fn describeImportImageTasks(self: *Self, allocator: std.mem.Allocator, input: describe_import_image_tasks.DescribeImportImageTasksInput, options: describe_import_image_tasks.Options) !describe_import_image_tasks.DescribeImportImageTasksOutput {
+    pub fn describeImportImageTasks(self: *Self, allocator: std.mem.Allocator, input: describe_import_image_tasks.DescribeImportImageTasksInput, options: CallOptions) !describe_import_image_tasks.DescribeImportImageTasksOutput {
         return describe_import_image_tasks.execute(self, allocator, input, options);
     }
 
     /// Describes your import snapshot tasks.
-    pub fn describeImportSnapshotTasks(self: *Self, allocator: std.mem.Allocator, input: describe_import_snapshot_tasks.DescribeImportSnapshotTasksInput, options: describe_import_snapshot_tasks.Options) !describe_import_snapshot_tasks.DescribeImportSnapshotTasksOutput {
+    pub fn describeImportSnapshotTasks(self: *Self, allocator: std.mem.Allocator, input: describe_import_snapshot_tasks.DescribeImportSnapshotTasksInput, options: CallOptions) !describe_import_snapshot_tasks.DescribeImportSnapshotTasksOutput {
         return describe_import_snapshot_tasks.execute(self, allocator, input, options);
     }
 
@@ -4969,13 +4970,13 @@ pub const Client = struct {
     /// attribute at a time. Available attributes include SQL license exemption
     /// configuration
     /// for instances registered with the SQL LE service.
-    pub fn describeInstanceAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_instance_attribute.DescribeInstanceAttributeInput, options: describe_instance_attribute.Options) !describe_instance_attribute.DescribeInstanceAttributeOutput {
+    pub fn describeInstanceAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_instance_attribute.DescribeInstanceAttributeInput, options: CallOptions) !describe_instance_attribute.DescribeInstanceAttributeOutput {
         return describe_instance_attribute.execute(self, allocator, input, options);
     }
 
     /// Describes the specified EC2 Instance Connect Endpoints or all EC2 Instance
     /// Connect Endpoints.
-    pub fn describeInstanceConnectEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_instance_connect_endpoints.DescribeInstanceConnectEndpointsInput, options: describe_instance_connect_endpoints.Options) !describe_instance_connect_endpoints.DescribeInstanceConnectEndpointsOutput {
+    pub fn describeInstanceConnectEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_instance_connect_endpoints.DescribeInstanceConnectEndpointsInput, options: CallOptions) !describe_instance_connect_endpoints.DescribeInstanceConnectEndpointsOutput {
         return describe_instance_connect_endpoints.execute(self, allocator, input, options);
     }
 
@@ -5013,14 +5014,14 @@ pub const Client = struct {
     /// For more information, see [Burstable
     /// performance
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide*.
-    pub fn describeInstanceCreditSpecifications(self: *Self, allocator: std.mem.Allocator, input: describe_instance_credit_specifications.DescribeInstanceCreditSpecificationsInput, options: describe_instance_credit_specifications.Options) !describe_instance_credit_specifications.DescribeInstanceCreditSpecificationsOutput {
+    pub fn describeInstanceCreditSpecifications(self: *Self, allocator: std.mem.Allocator, input: describe_instance_credit_specifications.DescribeInstanceCreditSpecificationsInput, options: CallOptions) !describe_instance_credit_specifications.DescribeInstanceCreditSpecificationsOutput {
         return describe_instance_credit_specifications.execute(self, allocator, input, options);
     }
 
     /// Describes the tag keys that are registered to appear in scheduled event
     /// notifications
     /// for resources in the current Region.
-    pub fn describeInstanceEventNotificationAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_instance_event_notification_attributes.DescribeInstanceEventNotificationAttributesInput, options: describe_instance_event_notification_attributes.Options) !describe_instance_event_notification_attributes.DescribeInstanceEventNotificationAttributesOutput {
+    pub fn describeInstanceEventNotificationAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_instance_event_notification_attributes.DescribeInstanceEventNotificationAttributesInput, options: CallOptions) !describe_instance_event_notification_attributes.DescribeInstanceEventNotificationAttributesOutput {
         return describe_instance_event_notification_attributes.execute(self, allocator, input, options);
     }
 
@@ -5040,7 +5041,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Define event windows for scheduled
     /// events](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html) in the *Amazon EC2 User Guide*.
-    pub fn describeInstanceEventWindows(self: *Self, allocator: std.mem.Allocator, input: describe_instance_event_windows.DescribeInstanceEventWindowsInput, options: describe_instance_event_windows.Options) !describe_instance_event_windows.DescribeInstanceEventWindowsOutput {
+    pub fn describeInstanceEventWindows(self: *Self, allocator: std.mem.Allocator, input: describe_instance_event_windows.DescribeInstanceEventWindowsInput, options: CallOptions) !describe_instance_event_windows.DescribeInstanceEventWindowsOutput {
         return describe_instance_event_windows.execute(self, allocator, input, options);
     }
 
@@ -5079,21 +5080,21 @@ pub const Client = struct {
     /// structures,
     /// might vary. Applications should not assume the elements appear in a
     /// particular order.
-    pub fn describeInstanceImageMetadata(self: *Self, allocator: std.mem.Allocator, input: describe_instance_image_metadata.DescribeInstanceImageMetadataInput, options: describe_instance_image_metadata.Options) !describe_instance_image_metadata.DescribeInstanceImageMetadataOutput {
+    pub fn describeInstanceImageMetadata(self: *Self, allocator: std.mem.Allocator, input: describe_instance_image_metadata.DescribeInstanceImageMetadataInput, options: CallOptions) !describe_instance_image_metadata.DescribeInstanceImageMetadataOutput {
         return describe_instance_image_metadata.execute(self, allocator, input, options);
     }
 
     /// Describes the historical SQL Server High Availability states for Amazon EC2
     /// instances that are enabled for Amazon EC2 High Availability for SQL Server
     /// monitoring.
-    pub fn describeInstanceSqlHaHistoryStates(self: *Self, allocator: std.mem.Allocator, input: describe_instance_sql_ha_history_states.DescribeInstanceSqlHaHistoryStatesInput, options: describe_instance_sql_ha_history_states.Options) !describe_instance_sql_ha_history_states.DescribeInstanceSqlHaHistoryStatesOutput {
+    pub fn describeInstanceSqlHaHistoryStates(self: *Self, allocator: std.mem.Allocator, input: describe_instance_sql_ha_history_states.DescribeInstanceSqlHaHistoryStatesInput, options: CallOptions) !describe_instance_sql_ha_history_states.DescribeInstanceSqlHaHistoryStatesOutput {
         return describe_instance_sql_ha_history_states.execute(self, allocator, input, options);
     }
 
     /// Describes the SQL Server High Availability states for Amazon EC2 instances
     /// that are
     /// enabled for Amazon EC2 High Availability for SQL Server monitoring.
-    pub fn describeInstanceSqlHaStates(self: *Self, allocator: std.mem.Allocator, input: describe_instance_sql_ha_states.DescribeInstanceSqlHaStatesInput, options: describe_instance_sql_ha_states.Options) !describe_instance_sql_ha_states.DescribeInstanceSqlHaStatesOutput {
+    pub fn describeInstanceSqlHaStates(self: *Self, allocator: std.mem.Allocator, input: describe_instance_sql_ha_states.DescribeInstanceSqlHaStatesInput, options: CallOptions) !describe_instance_sql_ha_states.DescribeInstanceSqlHaStatesOutput {
         return describe_instance_sql_ha_states.execute(self, allocator, input, options);
     }
 
@@ -5143,7 +5144,7 @@ pub const Client = struct {
     /// structures, might vary. Applications should not assume the elements appear
     /// in a
     /// particular order.
-    pub fn describeInstanceStatus(self: *Self, allocator: std.mem.Allocator, input: describe_instance_status.DescribeInstanceStatusInput, options: describe_instance_status.Options) !describe_instance_status.DescribeInstanceStatusOutput {
+    pub fn describeInstanceStatus(self: *Self, allocator: std.mem.Allocator, input: describe_instance_status.DescribeInstanceStatusInput, options: CallOptions) !describe_instance_status.DescribeInstanceStatusOutput {
         return describe_instance_status.execute(self, allocator, input, options);
     }
 
@@ -5178,7 +5179,7 @@ pub const Client = struct {
     /// For more information, see [Amazon EC2
     /// topology](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-topology.html) in
     /// the *Amazon EC2 User Guide*.
-    pub fn describeInstanceTopology(self: *Self, allocator: std.mem.Allocator, input: describe_instance_topology.DescribeInstanceTopologyInput, options: describe_instance_topology.Options) !describe_instance_topology.DescribeInstanceTopologyOutput {
+    pub fn describeInstanceTopology(self: *Self, allocator: std.mem.Allocator, input: describe_instance_topology.DescribeInstanceTopologyInput, options: CallOptions) !describe_instance_topology.DescribeInstanceTopologyOutput {
         return describe_instance_topology.execute(self, allocator, input, options);
     }
 
@@ -5187,14 +5188,14 @@ pub const Client = struct {
     /// specified, the default is to list the instance types that are offered in the
     /// current
     /// Region.
-    pub fn describeInstanceTypeOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_instance_type_offerings.DescribeInstanceTypeOfferingsInput, options: describe_instance_type_offerings.Options) !describe_instance_type_offerings.DescribeInstanceTypeOfferingsOutput {
+    pub fn describeInstanceTypeOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_instance_type_offerings.DescribeInstanceTypeOfferingsInput, options: CallOptions) !describe_instance_type_offerings.DescribeInstanceTypeOfferingsOutput {
         return describe_instance_type_offerings.execute(self, allocator, input, options);
     }
 
     /// Describes the specified instance types. By default, all instance types for
     /// the current
     /// Region are described. Alternatively, you can filter the results.
-    pub fn describeInstanceTypes(self: *Self, allocator: std.mem.Allocator, input: describe_instance_types.DescribeInstanceTypesInput, options: describe_instance_types.Options) !describe_instance_types.DescribeInstanceTypesOutput {
+    pub fn describeInstanceTypes(self: *Self, allocator: std.mem.Allocator, input: describe_instance_types.DescribeInstanceTypesInput, options: CallOptions) !describe_instance_types.DescribeInstanceTypesOutput {
         return describe_instance_types.execute(self, allocator, input, options);
     }
 
@@ -5253,7 +5254,7 @@ pub const Client = struct {
     /// structures, might vary. Applications should not assume the elements appear
     /// in a
     /// particular order.
-    pub fn describeInstances(self: *Self, allocator: std.mem.Allocator, input: describe_instances.DescribeInstancesInput, options: describe_instances.Options) !describe_instances.DescribeInstancesOutput {
+    pub fn describeInstances(self: *Self, allocator: std.mem.Allocator, input: describe_instances.DescribeInstancesInput, options: CallOptions) !describe_instances.DescribeInstancesOutput {
         return describe_instances.execute(self, allocator, input, options);
     }
 
@@ -5262,7 +5263,7 @@ pub const Client = struct {
     /// Alternatively, you can specify specific internet gateway IDs or filter the
     /// results to
     /// include only the internet gateways that match specific criteria.
-    pub fn describeInternetGateways(self: *Self, allocator: std.mem.Allocator, input: describe_internet_gateways.DescribeInternetGatewaysInput, options: describe_internet_gateways.Options) !describe_internet_gateways.DescribeInternetGatewaysOutput {
+    pub fn describeInternetGateways(self: *Self, allocator: std.mem.Allocator, input: describe_internet_gateways.DescribeInternetGatewaysInput, options: CallOptions) !describe_internet_gateways.DescribeInternetGatewaysOutput {
         return describe_internet_gateways.execute(self, allocator, input, options);
     }
 
@@ -5271,7 +5272,7 @@ pub const Client = struct {
     /// information, see [Tutorial: Bring your ASN to
     /// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html) in
     /// the *Amazon VPC IPAM guide*.
-    pub fn describeIpamByoasn(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_byoasn.DescribeIpamByoasnInput, options: describe_ipam_byoasn.Options) !describe_ipam_byoasn.DescribeIpamByoasnOutput {
+    pub fn describeIpamByoasn(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_byoasn.DescribeIpamByoasnInput, options: CallOptions) !describe_ipam_byoasn.DescribeIpamByoasnOutput {
         return describe_ipam_byoasn.execute(self, allocator, input, options);
     }
 
@@ -5281,7 +5282,7 @@ pub const Client = struct {
     /// you can use to prove ownership of an external resource. For example, you can
     /// use a verification token to validate that you control a public IP address
     /// range when you bring an IP address range to Amazon Web Services (BYOIP).
-    pub fn describeIpamExternalResourceVerificationTokens(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_external_resource_verification_tokens.DescribeIpamExternalResourceVerificationTokensInput, options: describe_ipam_external_resource_verification_tokens.Options) !describe_ipam_external_resource_verification_tokens.DescribeIpamExternalResourceVerificationTokensOutput {
+    pub fn describeIpamExternalResourceVerificationTokens(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_external_resource_verification_tokens.DescribeIpamExternalResourceVerificationTokensInput, options: CallOptions) !describe_ipam_external_resource_verification_tokens.DescribeIpamExternalResourceVerificationTokensOutput {
         return describe_ipam_external_resource_verification_tokens.execute(self, allocator, input, options);
     }
 
@@ -5295,43 +5296,43 @@ pub const Client = struct {
     /// then the services fallback to Amazon-provided IP addresses. A policy can be
     /// applied to an individual Amazon Web Services account or an entity within
     /// Amazon Web Services Organizations.
-    pub fn describeIpamPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_policies.DescribeIpamPoliciesInput, options: describe_ipam_policies.Options) !describe_ipam_policies.DescribeIpamPoliciesOutput {
+    pub fn describeIpamPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_policies.DescribeIpamPoliciesInput, options: CallOptions) !describe_ipam_policies.DescribeIpamPoliciesOutput {
         return describe_ipam_policies.execute(self, allocator, input, options);
     }
 
     /// Get information about your IPAM pools.
-    pub fn describeIpamPools(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_pools.DescribeIpamPoolsInput, options: describe_ipam_pools.Options) !describe_ipam_pools.DescribeIpamPoolsOutput {
+    pub fn describeIpamPools(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_pools.DescribeIpamPoolsInput, options: CallOptions) !describe_ipam_pools.DescribeIpamPoolsOutput {
         return describe_ipam_pools.execute(self, allocator, input, options);
     }
 
     /// Describes one or more IPAM prefix list resolver Targets. Use this operation
     /// to view the configuration and status of resolver targets.
-    pub fn describeIpamPrefixListResolverTargets(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_prefix_list_resolver_targets.DescribeIpamPrefixListResolverTargetsInput, options: describe_ipam_prefix_list_resolver_targets.Options) !describe_ipam_prefix_list_resolver_targets.DescribeIpamPrefixListResolverTargetsOutput {
+    pub fn describeIpamPrefixListResolverTargets(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_prefix_list_resolver_targets.DescribeIpamPrefixListResolverTargetsInput, options: CallOptions) !describe_ipam_prefix_list_resolver_targets.DescribeIpamPrefixListResolverTargetsOutput {
         return describe_ipam_prefix_list_resolver_targets.execute(self, allocator, input, options);
     }
 
     /// Describes one or more IPAM prefix list resolvers. Use this operation to view
     /// the configuration, status, and properties of your resolvers.
-    pub fn describeIpamPrefixListResolvers(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_prefix_list_resolvers.DescribeIpamPrefixListResolversInput, options: describe_ipam_prefix_list_resolvers.Options) !describe_ipam_prefix_list_resolvers.DescribeIpamPrefixListResolversOutput {
+    pub fn describeIpamPrefixListResolvers(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_prefix_list_resolvers.DescribeIpamPrefixListResolversInput, options: CallOptions) !describe_ipam_prefix_list_resolvers.DescribeIpamPrefixListResolversOutput {
         return describe_ipam_prefix_list_resolvers.execute(self, allocator, input, options);
     }
 
     /// Describes IPAM resource discoveries. A resource discovery is an IPAM
     /// component that enables IPAM to manage and monitor resources that belong to
     /// the owning account.
-    pub fn describeIpamResourceDiscoveries(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_resource_discoveries.DescribeIpamResourceDiscoveriesInput, options: describe_ipam_resource_discoveries.Options) !describe_ipam_resource_discoveries.DescribeIpamResourceDiscoveriesOutput {
+    pub fn describeIpamResourceDiscoveries(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_resource_discoveries.DescribeIpamResourceDiscoveriesInput, options: CallOptions) !describe_ipam_resource_discoveries.DescribeIpamResourceDiscoveriesOutput {
         return describe_ipam_resource_discoveries.execute(self, allocator, input, options);
     }
 
     /// Describes resource discovery association with an Amazon VPC IPAM. An
     /// associated resource discovery is a resource discovery that has been
     /// associated with an IPAM..
-    pub fn describeIpamResourceDiscoveryAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_resource_discovery_associations.DescribeIpamResourceDiscoveryAssociationsInput, options: describe_ipam_resource_discovery_associations.Options) !describe_ipam_resource_discovery_associations.DescribeIpamResourceDiscoveryAssociationsOutput {
+    pub fn describeIpamResourceDiscoveryAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_resource_discovery_associations.DescribeIpamResourceDiscoveryAssociationsInput, options: CallOptions) !describe_ipam_resource_discovery_associations.DescribeIpamResourceDiscoveryAssociationsOutput {
         return describe_ipam_resource_discovery_associations.execute(self, allocator, input, options);
     }
 
     /// Get information about your IPAM scopes.
-    pub fn describeIpamScopes(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_scopes.DescribeIpamScopesInput, options: describe_ipam_scopes.Options) !describe_ipam_scopes.DescribeIpamScopesOutput {
+    pub fn describeIpamScopes(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_scopes.DescribeIpamScopesInput, options: CallOptions) !describe_ipam_scopes.DescribeIpamScopesOutput {
         return describe_ipam_scopes.execute(self, allocator, input, options);
     }
 
@@ -5340,12 +5341,12 @@ pub const Client = struct {
     /// For more information, see [What is
     /// IPAM?](https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html) in
     /// the *Amazon VPC IPAM User Guide*.
-    pub fn describeIpams(self: *Self, allocator: std.mem.Allocator, input: describe_ipams.DescribeIpamsInput, options: describe_ipams.Options) !describe_ipams.DescribeIpamsOutput {
+    pub fn describeIpams(self: *Self, allocator: std.mem.Allocator, input: describe_ipams.DescribeIpamsInput, options: CallOptions) !describe_ipams.DescribeIpamsOutput {
         return describe_ipams.execute(self, allocator, input, options);
     }
 
     /// Describes your IPv6 address pools.
-    pub fn describeIpv6Pools(self: *Self, allocator: std.mem.Allocator, input: describe_ipv_6_pools.DescribeIpv6PoolsInput, options: describe_ipv_6_pools.Options) !describe_ipv_6_pools.DescribeIpv6PoolsOutput {
+    pub fn describeIpv6Pools(self: *Self, allocator: std.mem.Allocator, input: describe_ipv_6_pools.DescribeIpv6PoolsInput, options: CallOptions) !describe_ipv_6_pools.DescribeIpv6PoolsOutput {
         return describe_ipv_6_pools.execute(self, allocator, input, options);
     }
 
@@ -5354,7 +5355,7 @@ pub const Client = struct {
     /// For more information about key pairs, see [Amazon EC2 key
     /// pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
     /// in the *Amazon EC2 User Guide*.
-    pub fn describeKeyPairs(self: *Self, allocator: std.mem.Allocator, input: describe_key_pairs.DescribeKeyPairsInput, options: describe_key_pairs.Options) !describe_key_pairs.DescribeKeyPairsOutput {
+    pub fn describeKeyPairs(self: *Self, allocator: std.mem.Allocator, input: describe_key_pairs.DescribeKeyPairsInput, options: CallOptions) !describe_key_pairs.DescribeKeyPairsOutput {
         return describe_key_pairs.execute(self, allocator, input, options);
     }
 
@@ -5365,59 +5366,59 @@ pub const Client = struct {
     /// latest versions or all the default versions of all the launch templates in
     /// your
     /// account.
-    pub fn describeLaunchTemplateVersions(self: *Self, allocator: std.mem.Allocator, input: describe_launch_template_versions.DescribeLaunchTemplateVersionsInput, options: describe_launch_template_versions.Options) !describe_launch_template_versions.DescribeLaunchTemplateVersionsOutput {
+    pub fn describeLaunchTemplateVersions(self: *Self, allocator: std.mem.Allocator, input: describe_launch_template_versions.DescribeLaunchTemplateVersionsInput, options: CallOptions) !describe_launch_template_versions.DescribeLaunchTemplateVersionsOutput {
         return describe_launch_template_versions.execute(self, allocator, input, options);
     }
 
     /// Describes one or more launch templates.
-    pub fn describeLaunchTemplates(self: *Self, allocator: std.mem.Allocator, input: describe_launch_templates.DescribeLaunchTemplatesInput, options: describe_launch_templates.Options) !describe_launch_templates.DescribeLaunchTemplatesOutput {
+    pub fn describeLaunchTemplates(self: *Self, allocator: std.mem.Allocator, input: describe_launch_templates.DescribeLaunchTemplatesInput, options: CallOptions) !describe_launch_templates.DescribeLaunchTemplatesOutput {
         return describe_launch_templates.execute(self, allocator, input, options);
     }
 
     /// Describes the associations between virtual interface groups and local
     /// gateway route tables.
-    pub fn describeLocalGatewayRouteTableVirtualInterfaceGroupAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_local_gateway_route_table_virtual_interface_group_associations.DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput, options: describe_local_gateway_route_table_virtual_interface_group_associations.Options) !describe_local_gateway_route_table_virtual_interface_group_associations.DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsOutput {
+    pub fn describeLocalGatewayRouteTableVirtualInterfaceGroupAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_local_gateway_route_table_virtual_interface_group_associations.DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput, options: CallOptions) !describe_local_gateway_route_table_virtual_interface_group_associations.DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsOutput {
         return describe_local_gateway_route_table_virtual_interface_group_associations.execute(self, allocator, input, options);
     }
 
     /// Describes the specified associations between VPCs and local gateway route
     /// tables.
-    pub fn describeLocalGatewayRouteTableVpcAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_local_gateway_route_table_vpc_associations.DescribeLocalGatewayRouteTableVpcAssociationsInput, options: describe_local_gateway_route_table_vpc_associations.Options) !describe_local_gateway_route_table_vpc_associations.DescribeLocalGatewayRouteTableVpcAssociationsOutput {
+    pub fn describeLocalGatewayRouteTableVpcAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_local_gateway_route_table_vpc_associations.DescribeLocalGatewayRouteTableVpcAssociationsInput, options: CallOptions) !describe_local_gateway_route_table_vpc_associations.DescribeLocalGatewayRouteTableVpcAssociationsOutput {
         return describe_local_gateway_route_table_vpc_associations.execute(self, allocator, input, options);
     }
 
     /// Describes one or more local gateway route tables. By default, all local
     /// gateway route tables are described.
     /// Alternatively, you can filter the results.
-    pub fn describeLocalGatewayRouteTables(self: *Self, allocator: std.mem.Allocator, input: describe_local_gateway_route_tables.DescribeLocalGatewayRouteTablesInput, options: describe_local_gateway_route_tables.Options) !describe_local_gateway_route_tables.DescribeLocalGatewayRouteTablesOutput {
+    pub fn describeLocalGatewayRouteTables(self: *Self, allocator: std.mem.Allocator, input: describe_local_gateway_route_tables.DescribeLocalGatewayRouteTablesInput, options: CallOptions) !describe_local_gateway_route_tables.DescribeLocalGatewayRouteTablesOutput {
         return describe_local_gateway_route_tables.execute(self, allocator, input, options);
     }
 
     /// Describes the specified local gateway virtual interface groups.
-    pub fn describeLocalGatewayVirtualInterfaceGroups(self: *Self, allocator: std.mem.Allocator, input: describe_local_gateway_virtual_interface_groups.DescribeLocalGatewayVirtualInterfaceGroupsInput, options: describe_local_gateway_virtual_interface_groups.Options) !describe_local_gateway_virtual_interface_groups.DescribeLocalGatewayVirtualInterfaceGroupsOutput {
+    pub fn describeLocalGatewayVirtualInterfaceGroups(self: *Self, allocator: std.mem.Allocator, input: describe_local_gateway_virtual_interface_groups.DescribeLocalGatewayVirtualInterfaceGroupsInput, options: CallOptions) !describe_local_gateway_virtual_interface_groups.DescribeLocalGatewayVirtualInterfaceGroupsOutput {
         return describe_local_gateway_virtual_interface_groups.execute(self, allocator, input, options);
     }
 
     /// Describes the specified local gateway virtual interfaces.
-    pub fn describeLocalGatewayVirtualInterfaces(self: *Self, allocator: std.mem.Allocator, input: describe_local_gateway_virtual_interfaces.DescribeLocalGatewayVirtualInterfacesInput, options: describe_local_gateway_virtual_interfaces.Options) !describe_local_gateway_virtual_interfaces.DescribeLocalGatewayVirtualInterfacesOutput {
+    pub fn describeLocalGatewayVirtualInterfaces(self: *Self, allocator: std.mem.Allocator, input: describe_local_gateway_virtual_interfaces.DescribeLocalGatewayVirtualInterfacesInput, options: CallOptions) !describe_local_gateway_virtual_interfaces.DescribeLocalGatewayVirtualInterfacesOutput {
         return describe_local_gateway_virtual_interfaces.execute(self, allocator, input, options);
     }
 
     /// Describes one or more local gateways. By default, all local gateways are
     /// described.
     /// Alternatively, you can filter the results.
-    pub fn describeLocalGateways(self: *Self, allocator: std.mem.Allocator, input: describe_local_gateways.DescribeLocalGatewaysInput, options: describe_local_gateways.Options) !describe_local_gateways.DescribeLocalGatewaysOutput {
+    pub fn describeLocalGateways(self: *Self, allocator: std.mem.Allocator, input: describe_local_gateways.DescribeLocalGatewaysInput, options: CallOptions) !describe_local_gateways.DescribeLocalGatewaysOutput {
         return describe_local_gateways.execute(self, allocator, input, options);
     }
 
     /// Describes the lock status for a snapshot.
-    pub fn describeLockedSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_locked_snapshots.DescribeLockedSnapshotsInput, options: describe_locked_snapshots.Options) !describe_locked_snapshots.DescribeLockedSnapshotsOutput {
+    pub fn describeLockedSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_locked_snapshots.DescribeLockedSnapshotsInput, options: CallOptions) !describe_locked_snapshots.DescribeLockedSnapshotsOutput {
         return describe_locked_snapshots.execute(self, allocator, input, options);
     }
 
     /// Describes the specified EC2 Mac Dedicated Host or all of your EC2 Mac
     /// Dedicated Hosts.
-    pub fn describeMacHosts(self: *Self, allocator: std.mem.Allocator, input: describe_mac_hosts.DescribeMacHostsInput, options: describe_mac_hosts.Options) !describe_mac_hosts.DescribeMacHostsOutput {
+    pub fn describeMacHosts(self: *Self, allocator: std.mem.Allocator, input: describe_mac_hosts.DescribeMacHostsInput, options: CallOptions) !describe_mac_hosts.DescribeMacHostsOutput {
         return describe_mac_hosts.execute(self, allocator, input, options);
     }
 
@@ -5426,13 +5427,13 @@ pub const Client = struct {
     /// task for an Amazon EC2 Mac instance. For more information, see [Configure
     /// SIP for Amazon EC2
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mac-sip-settings.html#mac-sip-configure) in the *Amazon EC2 User Guide*.
-    pub fn describeMacModificationTasks(self: *Self, allocator: std.mem.Allocator, input: describe_mac_modification_tasks.DescribeMacModificationTasksInput, options: describe_mac_modification_tasks.Options) !describe_mac_modification_tasks.DescribeMacModificationTasksOutput {
+    pub fn describeMacModificationTasks(self: *Self, allocator: std.mem.Allocator, input: describe_mac_modification_tasks.DescribeMacModificationTasksInput, options: CallOptions) !describe_mac_modification_tasks.DescribeMacModificationTasksOutput {
         return describe_mac_modification_tasks.execute(self, allocator, input, options);
     }
 
     /// Describes your managed prefix lists and any Amazon Web Services-managed
     /// prefix lists.
-    pub fn describeManagedPrefixLists(self: *Self, allocator: std.mem.Allocator, input: describe_managed_prefix_lists.DescribeManagedPrefixListsInput, options: describe_managed_prefix_lists.Options) !describe_managed_prefix_lists.DescribeManagedPrefixListsOutput {
+    pub fn describeManagedPrefixLists(self: *Self, allocator: std.mem.Allocator, input: describe_managed_prefix_lists.DescribeManagedPrefixListsInput, options: CallOptions) !describe_managed_prefix_lists.DescribeManagedPrefixListsOutput {
         return describe_managed_prefix_lists.execute(self, allocator, input, options);
     }
 
@@ -5442,7 +5443,7 @@ pub const Client = struct {
     /// restored to the EC2-Classic platform.
     /// This request does not return information about any other Elastic IP
     /// addresses in your account.
-    pub fn describeMovingAddresses(self: *Self, allocator: std.mem.Allocator, input: describe_moving_addresses.DescribeMovingAddressesInput, options: describe_moving_addresses.Options) !describe_moving_addresses.DescribeMovingAddressesOutput {
+    pub fn describeMovingAddresses(self: *Self, allocator: std.mem.Allocator, input: describe_moving_addresses.DescribeMovingAddressesInput, options: CallOptions) !describe_moving_addresses.DescribeMovingAddressesOutput {
         return describe_moving_addresses.execute(self, allocator, input, options);
     }
 
@@ -5451,7 +5452,7 @@ pub const Client = struct {
     /// Alternatively, you can specify specific NAT gateway IDs or filter the
     /// results to
     /// include only the NAT gateways that match specific criteria.
-    pub fn describeNatGateways(self: *Self, allocator: std.mem.Allocator, input: describe_nat_gateways.DescribeNatGatewaysInput, options: describe_nat_gateways.Options) !describe_nat_gateways.DescribeNatGatewaysOutput {
+    pub fn describeNatGateways(self: *Self, allocator: std.mem.Allocator, input: describe_nat_gateways.DescribeNatGatewaysInput, options: CallOptions) !describe_nat_gateways.DescribeNatGatewaysOutput {
         return describe_nat_gateways.execute(self, allocator, input, options);
     }
 
@@ -5464,39 +5465,39 @@ pub const Client = struct {
     /// For more information, see [Network
     /// ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) in the
     /// *Amazon VPC User Guide*.
-    pub fn describeNetworkAcls(self: *Self, allocator: std.mem.Allocator, input: describe_network_acls.DescribeNetworkAclsInput, options: describe_network_acls.Options) !describe_network_acls.DescribeNetworkAclsOutput {
+    pub fn describeNetworkAcls(self: *Self, allocator: std.mem.Allocator, input: describe_network_acls.DescribeNetworkAclsInput, options: CallOptions) !describe_network_acls.DescribeNetworkAclsOutput {
         return describe_network_acls.execute(self, allocator, input, options);
     }
 
     /// Describes the specified Network Access Scope analyses.
-    pub fn describeNetworkInsightsAccessScopeAnalyses(self: *Self, allocator: std.mem.Allocator, input: describe_network_insights_access_scope_analyses.DescribeNetworkInsightsAccessScopeAnalysesInput, options: describe_network_insights_access_scope_analyses.Options) !describe_network_insights_access_scope_analyses.DescribeNetworkInsightsAccessScopeAnalysesOutput {
+    pub fn describeNetworkInsightsAccessScopeAnalyses(self: *Self, allocator: std.mem.Allocator, input: describe_network_insights_access_scope_analyses.DescribeNetworkInsightsAccessScopeAnalysesInput, options: CallOptions) !describe_network_insights_access_scope_analyses.DescribeNetworkInsightsAccessScopeAnalysesOutput {
         return describe_network_insights_access_scope_analyses.execute(self, allocator, input, options);
     }
 
     /// Describes the specified Network Access Scopes.
-    pub fn describeNetworkInsightsAccessScopes(self: *Self, allocator: std.mem.Allocator, input: describe_network_insights_access_scopes.DescribeNetworkInsightsAccessScopesInput, options: describe_network_insights_access_scopes.Options) !describe_network_insights_access_scopes.DescribeNetworkInsightsAccessScopesOutput {
+    pub fn describeNetworkInsightsAccessScopes(self: *Self, allocator: std.mem.Allocator, input: describe_network_insights_access_scopes.DescribeNetworkInsightsAccessScopesInput, options: CallOptions) !describe_network_insights_access_scopes.DescribeNetworkInsightsAccessScopesOutput {
         return describe_network_insights_access_scopes.execute(self, allocator, input, options);
     }
 
     /// Describes one or more of your network insights analyses.
-    pub fn describeNetworkInsightsAnalyses(self: *Self, allocator: std.mem.Allocator, input: describe_network_insights_analyses.DescribeNetworkInsightsAnalysesInput, options: describe_network_insights_analyses.Options) !describe_network_insights_analyses.DescribeNetworkInsightsAnalysesOutput {
+    pub fn describeNetworkInsightsAnalyses(self: *Self, allocator: std.mem.Allocator, input: describe_network_insights_analyses.DescribeNetworkInsightsAnalysesInput, options: CallOptions) !describe_network_insights_analyses.DescribeNetworkInsightsAnalysesOutput {
         return describe_network_insights_analyses.execute(self, allocator, input, options);
     }
 
     /// Describes one or more of your paths.
-    pub fn describeNetworkInsightsPaths(self: *Self, allocator: std.mem.Allocator, input: describe_network_insights_paths.DescribeNetworkInsightsPathsInput, options: describe_network_insights_paths.Options) !describe_network_insights_paths.DescribeNetworkInsightsPathsOutput {
+    pub fn describeNetworkInsightsPaths(self: *Self, allocator: std.mem.Allocator, input: describe_network_insights_paths.DescribeNetworkInsightsPathsInput, options: CallOptions) !describe_network_insights_paths.DescribeNetworkInsightsPathsOutput {
         return describe_network_insights_paths.execute(self, allocator, input, options);
     }
 
     /// Describes a network interface attribute. You can specify only one attribute
     /// at a
     /// time.
-    pub fn describeNetworkInterfaceAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_network_interface_attribute.DescribeNetworkInterfaceAttributeInput, options: describe_network_interface_attribute.Options) !describe_network_interface_attribute.DescribeNetworkInterfaceAttributeOutput {
+    pub fn describeNetworkInterfaceAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_network_interface_attribute.DescribeNetworkInterfaceAttributeInput, options: CallOptions) !describe_network_interface_attribute.DescribeNetworkInterfaceAttributeOutput {
         return describe_network_interface_attribute.execute(self, allocator, input, options);
     }
 
     /// Describes the permissions for your network interfaces.
-    pub fn describeNetworkInterfacePermissions(self: *Self, allocator: std.mem.Allocator, input: describe_network_interface_permissions.DescribeNetworkInterfacePermissionsInput, options: describe_network_interface_permissions.Options) !describe_network_interface_permissions.DescribeNetworkInterfacePermissionsOutput {
+    pub fn describeNetworkInterfacePermissions(self: *Self, allocator: std.mem.Allocator, input: describe_network_interface_permissions.DescribeNetworkInterfacePermissionsInput, options: CallOptions) !describe_network_interface_permissions.DescribeNetworkInterfacePermissionsOutput {
         return describe_network_interface_permissions.execute(self, allocator, input, options);
     }
 
@@ -5512,14 +5513,14 @@ pub const Client = struct {
     /// We strongly recommend using only paginated requests. Unpaginated requests
     /// are
     /// susceptible to throttling and timeouts.
-    pub fn describeNetworkInterfaces(self: *Self, allocator: std.mem.Allocator, input: describe_network_interfaces.DescribeNetworkInterfacesInput, options: describe_network_interfaces.Options) !describe_network_interfaces.DescribeNetworkInterfacesOutput {
+    pub fn describeNetworkInterfaces(self: *Self, allocator: std.mem.Allocator, input: describe_network_interfaces.DescribeNetworkInterfacesInput, options: CallOptions) !describe_network_interfaces.DescribeNetworkInterfacesOutput {
         return describe_network_interfaces.execute(self, allocator, input, options);
     }
 
     /// Describes the Outposts link aggregation groups (LAGs).
     ///
     /// LAGs are only available for second-generation Outposts racks at this time.
-    pub fn describeOutpostLags(self: *Self, allocator: std.mem.Allocator, input: describe_outpost_lags.DescribeOutpostLagsInput, options: describe_outpost_lags.Options) !describe_outpost_lags.DescribeOutpostLagsOutput {
+    pub fn describeOutpostLags(self: *Self, allocator: std.mem.Allocator, input: describe_outpost_lags.DescribeOutpostLagsInput, options: CallOptions) !describe_outpost_lags.DescribeOutpostLagsOutput {
         return describe_outpost_lags.execute(self, allocator, input, options);
     }
 
@@ -5534,7 +5535,7 @@ pub const Client = struct {
     /// For more information, see [Placement
     /// groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn describePlacementGroups(self: *Self, allocator: std.mem.Allocator, input: describe_placement_groups.DescribePlacementGroupsInput, options: describe_placement_groups.Options) !describe_placement_groups.DescribePlacementGroupsOutput {
+    pub fn describePlacementGroups(self: *Self, allocator: std.mem.Allocator, input: describe_placement_groups.DescribePlacementGroupsInput, options: CallOptions) !describe_placement_groups.DescribePlacementGroupsOutput {
         return describe_placement_groups.execute(self, allocator, input, options);
     }
 
@@ -5542,7 +5543,7 @@ pub const Client = struct {
     /// which includes the prefix list
     /// name and prefix list ID of the service and the IP address range for the
     /// service.
-    pub fn describePrefixLists(self: *Self, allocator: std.mem.Allocator, input: describe_prefix_lists.DescribePrefixListsInput, options: describe_prefix_lists.Options) !describe_prefix_lists.DescribePrefixListsOutput {
+    pub fn describePrefixLists(self: *Self, allocator: std.mem.Allocator, input: describe_prefix_lists.DescribePrefixListsInput, options: CallOptions) !describe_prefix_lists.DescribePrefixListsOutput {
         return describe_prefix_lists.execute(self, allocator, input, options);
     }
 
@@ -5569,12 +5570,12 @@ pub const Client = struct {
     /// `subnet-cidr-block-association` | `volume` | `vpc`
     /// | `vpc-cidr-block-association` | `vpc-endpoint` |
     /// `vpc-peering-connection` | `vpn-connection` | `vpn-gateway`.
-    pub fn describePrincipalIdFormat(self: *Self, allocator: std.mem.Allocator, input: describe_principal_id_format.DescribePrincipalIdFormatInput, options: describe_principal_id_format.Options) !describe_principal_id_format.DescribePrincipalIdFormatOutput {
+    pub fn describePrincipalIdFormat(self: *Self, allocator: std.mem.Allocator, input: describe_principal_id_format.DescribePrincipalIdFormatInput, options: CallOptions) !describe_principal_id_format.DescribePrincipalIdFormatOutput {
         return describe_principal_id_format.execute(self, allocator, input, options);
     }
 
     /// Describes the specified IPv4 address pools.
-    pub fn describePublicIpv4Pools(self: *Self, allocator: std.mem.Allocator, input: describe_public_ipv_4_pools.DescribePublicIpv4PoolsInput, options: describe_public_ipv_4_pools.Options) !describe_public_ipv_4_pools.DescribePublicIpv4PoolsOutput {
+    pub fn describePublicIpv4Pools(self: *Self, allocator: std.mem.Allocator, input: describe_public_ipv_4_pools.DescribePublicIpv4PoolsInput, options: CallOptions) !describe_public_ipv_4_pools.DescribePublicIpv4PoolsOutput {
         return describe_public_ipv_4_pools.execute(self, allocator, input, options);
     }
 
@@ -5592,14 +5593,14 @@ pub const Client = struct {
     /// structures,
     /// might vary. Applications should not assume the elements appear in a
     /// particular order.
-    pub fn describeRegions(self: *Self, allocator: std.mem.Allocator, input: describe_regions.DescribeRegionsInput, options: describe_regions.Options) !describe_regions.DescribeRegionsOutput {
+    pub fn describeRegions(self: *Self, allocator: std.mem.Allocator, input: describe_regions.DescribeRegionsInput, options: CallOptions) !describe_regions.DescribeRegionsOutput {
         return describe_regions.execute(self, allocator, input, options);
     }
 
     /// Describes a root volume replacement task. For more information, see
     /// [Replace a root
     /// volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replace-root.html) in the *Amazon EC2 User Guide*.
-    pub fn describeReplaceRootVolumeTasks(self: *Self, allocator: std.mem.Allocator, input: describe_replace_root_volume_tasks.DescribeReplaceRootVolumeTasksInput, options: describe_replace_root_volume_tasks.Options) !describe_replace_root_volume_tasks.DescribeReplaceRootVolumeTasksOutput {
+    pub fn describeReplaceRootVolumeTasks(self: *Self, allocator: std.mem.Allocator, input: describe_replace_root_volume_tasks.DescribeReplaceRootVolumeTasksInput, options: CallOptions) !describe_replace_root_volume_tasks.DescribeReplaceRootVolumeTasksOutput {
         return describe_replace_root_volume_tasks.execute(self, allocator, input, options);
     }
 
@@ -5612,7 +5613,7 @@ pub const Client = struct {
     /// structures,
     /// might vary. Applications should not assume the elements appear in a
     /// particular order.
-    pub fn describeReservedInstances(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_instances.DescribeReservedInstancesInput, options: describe_reserved_instances.Options) !describe_reserved_instances.DescribeReservedInstancesOutput {
+    pub fn describeReservedInstances(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_instances.DescribeReservedInstancesInput, options: CallOptions) !describe_reserved_instances.DescribeReservedInstancesOutput {
         return describe_reserved_instances.execute(self, allocator, input, options);
     }
 
@@ -5650,7 +5651,7 @@ pub const Client = struct {
     /// structures,
     /// might vary. Applications should not assume the elements appear in a
     /// particular order.
-    pub fn describeReservedInstancesListings(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_instances_listings.DescribeReservedInstancesListingsInput, options: describe_reserved_instances_listings.Options) !describe_reserved_instances_listings.DescribeReservedInstancesListingsOutput {
+    pub fn describeReservedInstancesListings(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_instances_listings.DescribeReservedInstancesListingsInput, options: CallOptions) !describe_reserved_instances_listings.DescribeReservedInstancesListingsOutput {
         return describe_reserved_instances_listings.execute(self, allocator, input, options);
     }
 
@@ -5670,7 +5671,7 @@ pub const Client = struct {
     /// structures,
     /// might vary. Applications should not assume the elements appear in a
     /// particular order.
-    pub fn describeReservedInstancesModifications(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_instances_modifications.DescribeReservedInstancesModificationsInput, options: describe_reserved_instances_modifications.Options) !describe_reserved_instances_modifications.DescribeReservedInstancesModificationsOutput {
+    pub fn describeReservedInstancesModifications(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_instances_modifications.DescribeReservedInstancesModificationsInput, options: CallOptions) !describe_reserved_instances_modifications.DescribeReservedInstancesModificationsOutput {
         return describe_reserved_instances_modifications.execute(self, allocator, input, options);
     }
 
@@ -5695,7 +5696,7 @@ pub const Client = struct {
     /// structures,
     /// might vary. Applications should not assume the elements appear in a
     /// particular order.
-    pub fn describeReservedInstancesOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_instances_offerings.DescribeReservedInstancesOfferingsInput, options: describe_reserved_instances_offerings.Options) !describe_reserved_instances_offerings.DescribeReservedInstancesOfferingsOutput {
+    pub fn describeReservedInstancesOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_instances_offerings.DescribeReservedInstancesOfferingsInput, options: CallOptions) !describe_reserved_instances_offerings.DescribeReservedInstancesOfferingsOutput {
         return describe_reserved_instances_offerings.execute(self, allocator, input, options);
     }
 
@@ -5708,7 +5709,7 @@ pub const Client = struct {
     ///
     /// For more information see [Dynamic routing in your VPC with VPC Route
     /// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
-    pub fn describeRouteServerEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_route_server_endpoints.DescribeRouteServerEndpointsInput, options: describe_route_server_endpoints.Options) !describe_route_server_endpoints.DescribeRouteServerEndpointsOutput {
+    pub fn describeRouteServerEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_route_server_endpoints.DescribeRouteServerEndpointsInput, options: CallOptions) !describe_route_server_endpoints.DescribeRouteServerEndpointsOutput {
         return describe_route_server_endpoints.execute(self, allocator, input, options);
     }
 
@@ -5727,7 +5728,7 @@ pub const Client = struct {
     ///
     /// For more information see [Dynamic routing in your VPC with VPC Route
     /// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
-    pub fn describeRouteServerPeers(self: *Self, allocator: std.mem.Allocator, input: describe_route_server_peers.DescribeRouteServerPeersInput, options: describe_route_server_peers.Options) !describe_route_server_peers.DescribeRouteServerPeersOutput {
+    pub fn describeRouteServerPeers(self: *Self, allocator: std.mem.Allocator, input: describe_route_server_peers.DescribeRouteServerPeersInput, options: CallOptions) !describe_route_server_peers.DescribeRouteServerPeersOutput {
         return describe_route_server_peers.execute(self, allocator, input, options);
     }
 
@@ -5756,7 +5757,7 @@ pub const Client = struct {
     ///
     /// For more information see [Dynamic routing in your VPC with VPC Route
     /// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
-    pub fn describeRouteServers(self: *Self, allocator: std.mem.Allocator, input: describe_route_servers.DescribeRouteServersInput, options: describe_route_servers.Options) !describe_route_servers.DescribeRouteServersOutput {
+    pub fn describeRouteServers(self: *Self, allocator: std.mem.Allocator, input: describe_route_servers.DescribeRouteServersInput, options: CallOptions) !describe_route_servers.DescribeRouteServersOutput {
         return describe_route_servers.execute(self, allocator, input, options);
     }
 
@@ -5774,7 +5775,7 @@ pub const Client = struct {
     /// For more information, see [Route
     /// tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) in the
     /// *Amazon VPC User Guide*.
-    pub fn describeRouteTables(self: *Self, allocator: std.mem.Allocator, input: describe_route_tables.DescribeRouteTablesInput, options: describe_route_tables.Options) !describe_route_tables.DescribeRouteTablesOutput {
+    pub fn describeRouteTables(self: *Self, allocator: std.mem.Allocator, input: describe_route_tables.DescribeRouteTablesInput, options: CallOptions) !describe_route_tables.DescribeRouteTablesOutput {
         return describe_route_tables.execute(self, allocator, input, options);
     }
 
@@ -5788,40 +5789,40 @@ pub const Client = struct {
     /// After you find a schedule that meets your needs, call
     /// PurchaseScheduledInstances
     /// to purchase Scheduled Instances with that schedule.
-    pub fn describeScheduledInstanceAvailability(self: *Self, allocator: std.mem.Allocator, input: describe_scheduled_instance_availability.DescribeScheduledInstanceAvailabilityInput, options: describe_scheduled_instance_availability.Options) !describe_scheduled_instance_availability.DescribeScheduledInstanceAvailabilityOutput {
+    pub fn describeScheduledInstanceAvailability(self: *Self, allocator: std.mem.Allocator, input: describe_scheduled_instance_availability.DescribeScheduledInstanceAvailabilityInput, options: CallOptions) !describe_scheduled_instance_availability.DescribeScheduledInstanceAvailabilityOutput {
         return describe_scheduled_instance_availability.execute(self, allocator, input, options);
     }
 
     /// Describes the specified Scheduled Instances or all your Scheduled Instances.
-    pub fn describeScheduledInstances(self: *Self, allocator: std.mem.Allocator, input: describe_scheduled_instances.DescribeScheduledInstancesInput, options: describe_scheduled_instances.Options) !describe_scheduled_instances.DescribeScheduledInstancesOutput {
+    pub fn describeScheduledInstances(self: *Self, allocator: std.mem.Allocator, input: describe_scheduled_instances.DescribeScheduledInstancesInput, options: CallOptions) !describe_scheduled_instances.DescribeScheduledInstancesOutput {
         return describe_scheduled_instances.execute(self, allocator, input, options);
     }
 
     /// Describes the VPCs on the other side of a VPC peering or Transit Gateway
     /// connection that are referencing the security groups you've specified in this
     /// request.
-    pub fn describeSecurityGroupReferences(self: *Self, allocator: std.mem.Allocator, input: describe_security_group_references.DescribeSecurityGroupReferencesInput, options: describe_security_group_references.Options) !describe_security_group_references.DescribeSecurityGroupReferencesOutput {
+    pub fn describeSecurityGroupReferences(self: *Self, allocator: std.mem.Allocator, input: describe_security_group_references.DescribeSecurityGroupReferencesInput, options: CallOptions) !describe_security_group_references.DescribeSecurityGroupReferencesOutput {
         return describe_security_group_references.execute(self, allocator, input, options);
     }
 
     /// Describes one or more of your security group rules.
-    pub fn describeSecurityGroupRules(self: *Self, allocator: std.mem.Allocator, input: describe_security_group_rules.DescribeSecurityGroupRulesInput, options: describe_security_group_rules.Options) !describe_security_group_rules.DescribeSecurityGroupRulesOutput {
+    pub fn describeSecurityGroupRules(self: *Self, allocator: std.mem.Allocator, input: describe_security_group_rules.DescribeSecurityGroupRulesInput, options: CallOptions) !describe_security_group_rules.DescribeSecurityGroupRulesOutput {
         return describe_security_group_rules.execute(self, allocator, input, options);
     }
 
     /// Describes security group VPC associations made with
     /// [AssociateSecurityGroupVpc](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateSecurityGroupVpc.html).
-    pub fn describeSecurityGroupVpcAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_security_group_vpc_associations.DescribeSecurityGroupVpcAssociationsInput, options: describe_security_group_vpc_associations.Options) !describe_security_group_vpc_associations.DescribeSecurityGroupVpcAssociationsOutput {
+    pub fn describeSecurityGroupVpcAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_security_group_vpc_associations.DescribeSecurityGroupVpcAssociationsInput, options: CallOptions) !describe_security_group_vpc_associations.DescribeSecurityGroupVpcAssociationsOutput {
         return describe_security_group_vpc_associations.execute(self, allocator, input, options);
     }
 
     /// Describes the specified security groups or all of your security groups.
-    pub fn describeSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: describe_security_groups.DescribeSecurityGroupsInput, options: describe_security_groups.Options) !describe_security_groups.DescribeSecurityGroupsOutput {
+    pub fn describeSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: describe_security_groups.DescribeSecurityGroupsInput, options: CallOptions) !describe_security_groups.DescribeSecurityGroupsOutput {
         return describe_security_groups.execute(self, allocator, input, options);
     }
 
     /// Describes the Outpost service link virtual interfaces.
-    pub fn describeServiceLinkVirtualInterfaces(self: *Self, allocator: std.mem.Allocator, input: describe_service_link_virtual_interfaces.DescribeServiceLinkVirtualInterfacesInput, options: describe_service_link_virtual_interfaces.Options) !describe_service_link_virtual_interfaces.DescribeServiceLinkVirtualInterfacesOutput {
+    pub fn describeServiceLinkVirtualInterfaces(self: *Self, allocator: std.mem.Allocator, input: describe_service_link_virtual_interfaces.DescribeServiceLinkVirtualInterfacesInput, options: CallOptions) !describe_service_link_virtual_interfaces.DescribeServiceLinkVirtualInterfacesOutput {
         return describe_service_link_virtual_interfaces.execute(self, allocator, input, options);
     }
 
@@ -5831,12 +5832,12 @@ pub const Client = struct {
     ///
     /// For more information about EBS snapshots, see [Amazon EBS
     /// snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html) in the *Amazon EBS User Guide*.
-    pub fn describeSnapshotAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_snapshot_attribute.DescribeSnapshotAttributeInput, options: describe_snapshot_attribute.Options) !describe_snapshot_attribute.DescribeSnapshotAttributeOutput {
+    pub fn describeSnapshotAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_snapshot_attribute.DescribeSnapshotAttributeInput, options: CallOptions) !describe_snapshot_attribute.DescribeSnapshotAttributeOutput {
         return describe_snapshot_attribute.execute(self, allocator, input, options);
     }
 
     /// Describes the storage tier status of one or more Amazon EBS snapshots.
-    pub fn describeSnapshotTierStatus(self: *Self, allocator: std.mem.Allocator, input: describe_snapshot_tier_status.DescribeSnapshotTierStatusInput, options: describe_snapshot_tier_status.Options) !describe_snapshot_tier_status.DescribeSnapshotTierStatusOutput {
+    pub fn describeSnapshotTierStatus(self: *Self, allocator: std.mem.Allocator, input: describe_snapshot_tier_status.DescribeSnapshotTierStatusInput, options: CallOptions) !describe_snapshot_tier_status.DescribeSnapshotTierStatusOutput {
         return describe_snapshot_tier_status.execute(self, allocator, input, options);
     }
 
@@ -5904,19 +5905,19 @@ pub const Client = struct {
     /// We strongly recommend using only paginated requests. Unpaginated requests
     /// are
     /// susceptible to throttling and timeouts.
-    pub fn describeSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_snapshots.DescribeSnapshotsInput, options: describe_snapshots.Options) !describe_snapshots.DescribeSnapshotsOutput {
+    pub fn describeSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_snapshots.DescribeSnapshotsInput, options: CallOptions) !describe_snapshots.DescribeSnapshotsOutput {
         return describe_snapshots.execute(self, allocator, input, options);
     }
 
     /// Describes the data feed for Spot Instances. For more information, see [Spot
     /// Instance data
     /// feed](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html) in the *Amazon EC2 User Guide*.
-    pub fn describeSpotDatafeedSubscription(self: *Self, allocator: std.mem.Allocator, input: describe_spot_datafeed_subscription.DescribeSpotDatafeedSubscriptionInput, options: describe_spot_datafeed_subscription.Options) !describe_spot_datafeed_subscription.DescribeSpotDatafeedSubscriptionOutput {
+    pub fn describeSpotDatafeedSubscription(self: *Self, allocator: std.mem.Allocator, input: describe_spot_datafeed_subscription.DescribeSpotDatafeedSubscriptionInput, options: CallOptions) !describe_spot_datafeed_subscription.DescribeSpotDatafeedSubscriptionOutput {
         return describe_spot_datafeed_subscription.execute(self, allocator, input, options);
     }
 
     /// Describes the running instances for the specified Spot Fleet.
-    pub fn describeSpotFleetInstances(self: *Self, allocator: std.mem.Allocator, input: describe_spot_fleet_instances.DescribeSpotFleetInstancesInput, options: describe_spot_fleet_instances.Options) !describe_spot_fleet_instances.DescribeSpotFleetInstancesOutput {
+    pub fn describeSpotFleetInstances(self: *Self, allocator: std.mem.Allocator, input: describe_spot_fleet_instances.DescribeSpotFleetInstancesInput, options: CallOptions) !describe_spot_fleet_instances.DescribeSpotFleetInstancesOutput {
         return describe_spot_fleet_instances.execute(self, allocator, input, options);
     }
 
@@ -5932,7 +5933,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Monitor fleet events using Amazon
     /// EventBridge](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/fleet-monitor.html) in the *Amazon EC2 User Guide*.
-    pub fn describeSpotFleetRequestHistory(self: *Self, allocator: std.mem.Allocator, input: describe_spot_fleet_request_history.DescribeSpotFleetRequestHistoryInput, options: describe_spot_fleet_request_history.Options) !describe_spot_fleet_request_history.DescribeSpotFleetRequestHistoryOutput {
+    pub fn describeSpotFleetRequestHistory(self: *Self, allocator: std.mem.Allocator, input: describe_spot_fleet_request_history.DescribeSpotFleetRequestHistoryInput, options: CallOptions) !describe_spot_fleet_request_history.DescribeSpotFleetRequestHistoryOutput {
         return describe_spot_fleet_request_history.execute(self, allocator, input, options);
     }
 
@@ -5941,7 +5942,7 @@ pub const Client = struct {
     /// Spot Fleet requests are deleted 48 hours after they are canceled and their
     /// instances
     /// are terminated.
-    pub fn describeSpotFleetRequests(self: *Self, allocator: std.mem.Allocator, input: describe_spot_fleet_requests.DescribeSpotFleetRequestsInput, options: describe_spot_fleet_requests.Options) !describe_spot_fleet_requests.DescribeSpotFleetRequestsOutput {
+    pub fn describeSpotFleetRequests(self: *Self, allocator: std.mem.Allocator, input: describe_spot_fleet_requests.DescribeSpotFleetRequestsInput, options: CallOptions) !describe_spot_fleet_requests.DescribeSpotFleetRequestsOutput {
         return describe_spot_fleet_requests.execute(self, allocator, input, options);
     }
 
@@ -5971,7 +5972,7 @@ pub const Client = struct {
     /// Spot Instance requests are deleted four hours after they are canceled and
     /// their instances are
     /// terminated.
-    pub fn describeSpotInstanceRequests(self: *Self, allocator: std.mem.Allocator, input: describe_spot_instance_requests.DescribeSpotInstanceRequestsInput, options: describe_spot_instance_requests.Options) !describe_spot_instance_requests.DescribeSpotInstanceRequestsOutput {
+    pub fn describeSpotInstanceRequests(self: *Self, allocator: std.mem.Allocator, input: describe_spot_instance_requests.DescribeSpotInstanceRequestsInput, options: CallOptions) !describe_spot_instance_requests.DescribeSpotInstanceRequestsOutput {
         return describe_spot_instance_requests.execute(self, allocator, input, options);
     }
 
@@ -5985,7 +5986,7 @@ pub const Client = struct {
     /// instance types within that time range. It also returns the last price change
     /// before the
     /// start time, which is the effective price as of the start time.
-    pub fn describeSpotPriceHistory(self: *Self, allocator: std.mem.Allocator, input: describe_spot_price_history.DescribeSpotPriceHistoryInput, options: describe_spot_price_history.Options) !describe_spot_price_history.DescribeSpotPriceHistoryOutput {
+    pub fn describeSpotPriceHistory(self: *Self, allocator: std.mem.Allocator, input: describe_spot_price_history.DescribeSpotPriceHistoryInput, options: CallOptions) !describe_spot_price_history.DescribeSpotPriceHistoryOutput {
         return describe_spot_price_history.execute(self, allocator, input, options);
     }
 
@@ -6002,7 +6003,7 @@ pub const Client = struct {
     /// gateway security group referencing
     /// feature](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security) has been disabled), or if a
     /// security group VPC association has been disassociated.
-    pub fn describeStaleSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: describe_stale_security_groups.DescribeStaleSecurityGroupsInput, options: describe_stale_security_groups.Options) !describe_stale_security_groups.DescribeStaleSecurityGroupsOutput {
+    pub fn describeStaleSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: describe_stale_security_groups.DescribeStaleSecurityGroupsInput, options: CallOptions) !describe_stale_security_groups.DescribeStaleSecurityGroupsOutput {
         return describe_stale_security_groups.execute(self, allocator, input, options);
     }
 
@@ -6027,7 +6028,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Store and restore an AMI using
     /// S3](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html) in the *Amazon EC2 User Guide*.
-    pub fn describeStoreImageTasks(self: *Self, allocator: std.mem.Allocator, input: describe_store_image_tasks.DescribeStoreImageTasksInput, options: describe_store_image_tasks.Options) !describe_store_image_tasks.DescribeStoreImageTasksOutput {
+    pub fn describeStoreImageTasks(self: *Self, allocator: std.mem.Allocator, input: describe_store_image_tasks.DescribeStoreImageTasksInput, options: CallOptions) !describe_store_image_tasks.DescribeStoreImageTasksOutput {
         return describe_store_image_tasks.execute(self, allocator, input, options);
     }
 
@@ -6038,7 +6039,7 @@ pub const Client = struct {
     /// For more information, see
     /// [Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) in the
     /// *Amazon VPC User Guide*.
-    pub fn describeSubnets(self: *Self, allocator: std.mem.Allocator, input: describe_subnets.DescribeSubnetsInput, options: describe_subnets.Options) !describe_subnets.DescribeSubnetsOutput {
+    pub fn describeSubnets(self: *Self, allocator: std.mem.Allocator, input: describe_subnets.DescribeSubnetsInput, options: CallOptions) !describe_subnets.DescribeSubnetsOutput {
         return describe_subnets.execute(self, allocator, input, options);
     }
 
@@ -6056,28 +6057,28 @@ pub const Client = struct {
     /// structures, might vary. Applications should not assume the elements appear
     /// in a
     /// particular order.
-    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: describe_tags.Options) !describe_tags.DescribeTagsOutput {
+    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: CallOptions) !describe_tags.DescribeTagsOutput {
         return describe_tags.execute(self, allocator, input, options);
     }
 
     /// Describe traffic mirror filters that determine the traffic that is mirrored.
-    pub fn describeTrafficMirrorFilterRules(self: *Self, allocator: std.mem.Allocator, input: describe_traffic_mirror_filter_rules.DescribeTrafficMirrorFilterRulesInput, options: describe_traffic_mirror_filter_rules.Options) !describe_traffic_mirror_filter_rules.DescribeTrafficMirrorFilterRulesOutput {
+    pub fn describeTrafficMirrorFilterRules(self: *Self, allocator: std.mem.Allocator, input: describe_traffic_mirror_filter_rules.DescribeTrafficMirrorFilterRulesInput, options: CallOptions) !describe_traffic_mirror_filter_rules.DescribeTrafficMirrorFilterRulesOutput {
         return describe_traffic_mirror_filter_rules.execute(self, allocator, input, options);
     }
 
     /// Describes one or more Traffic Mirror filters.
-    pub fn describeTrafficMirrorFilters(self: *Self, allocator: std.mem.Allocator, input: describe_traffic_mirror_filters.DescribeTrafficMirrorFiltersInput, options: describe_traffic_mirror_filters.Options) !describe_traffic_mirror_filters.DescribeTrafficMirrorFiltersOutput {
+    pub fn describeTrafficMirrorFilters(self: *Self, allocator: std.mem.Allocator, input: describe_traffic_mirror_filters.DescribeTrafficMirrorFiltersInput, options: CallOptions) !describe_traffic_mirror_filters.DescribeTrafficMirrorFiltersOutput {
         return describe_traffic_mirror_filters.execute(self, allocator, input, options);
     }
 
     /// Describes one or more Traffic Mirror sessions. By default, all Traffic
     /// Mirror sessions are described. Alternatively, you can filter the results.
-    pub fn describeTrafficMirrorSessions(self: *Self, allocator: std.mem.Allocator, input: describe_traffic_mirror_sessions.DescribeTrafficMirrorSessionsInput, options: describe_traffic_mirror_sessions.Options) !describe_traffic_mirror_sessions.DescribeTrafficMirrorSessionsOutput {
+    pub fn describeTrafficMirrorSessions(self: *Self, allocator: std.mem.Allocator, input: describe_traffic_mirror_sessions.DescribeTrafficMirrorSessionsInput, options: CallOptions) !describe_traffic_mirror_sessions.DescribeTrafficMirrorSessionsOutput {
         return describe_traffic_mirror_sessions.execute(self, allocator, input, options);
     }
 
     /// Information about one or more Traffic Mirror targets.
-    pub fn describeTrafficMirrorTargets(self: *Self, allocator: std.mem.Allocator, input: describe_traffic_mirror_targets.DescribeTrafficMirrorTargetsInput, options: describe_traffic_mirror_targets.Options) !describe_traffic_mirror_targets.DescribeTrafficMirrorTargetsOutput {
+    pub fn describeTrafficMirrorTargets(self: *Self, allocator: std.mem.Allocator, input: describe_traffic_mirror_targets.DescribeTrafficMirrorTargetsInput, options: CallOptions) !describe_traffic_mirror_targets.DescribeTrafficMirrorTargetsOutput {
         return describe_traffic_mirror_targets.execute(self, allocator, input, options);
     }
 
@@ -6085,93 +6086,93 @@ pub const Client = struct {
     /// default, all attachments are described.
     /// Alternatively, you can filter the results by attachment ID, attachment
     /// state, resource ID, or resource owner.
-    pub fn describeTransitGatewayAttachments(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_attachments.DescribeTransitGatewayAttachmentsInput, options: describe_transit_gateway_attachments.Options) !describe_transit_gateway_attachments.DescribeTransitGatewayAttachmentsOutput {
+    pub fn describeTransitGatewayAttachments(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_attachments.DescribeTransitGatewayAttachmentsInput, options: CallOptions) !describe_transit_gateway_attachments.DescribeTransitGatewayAttachmentsOutput {
         return describe_transit_gateway_attachments.execute(self, allocator, input, options);
     }
 
     /// Describes one or more Connect peers.
-    pub fn describeTransitGatewayConnectPeers(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_connect_peers.DescribeTransitGatewayConnectPeersInput, options: describe_transit_gateway_connect_peers.Options) !describe_transit_gateway_connect_peers.DescribeTransitGatewayConnectPeersOutput {
+    pub fn describeTransitGatewayConnectPeers(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_connect_peers.DescribeTransitGatewayConnectPeersInput, options: CallOptions) !describe_transit_gateway_connect_peers.DescribeTransitGatewayConnectPeersOutput {
         return describe_transit_gateway_connect_peers.execute(self, allocator, input, options);
     }
 
     /// Describes one or more Connect attachments.
-    pub fn describeTransitGatewayConnects(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_connects.DescribeTransitGatewayConnectsInput, options: describe_transit_gateway_connects.Options) !describe_transit_gateway_connects.DescribeTransitGatewayConnectsOutput {
+    pub fn describeTransitGatewayConnects(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_connects.DescribeTransitGatewayConnectsInput, options: CallOptions) !describe_transit_gateway_connects.DescribeTransitGatewayConnectsOutput {
         return describe_transit_gateway_connects.execute(self, allocator, input, options);
     }
 
     /// Describes one or more transit gateway metering policies.
-    pub fn describeTransitGatewayMeteringPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_metering_policies.DescribeTransitGatewayMeteringPoliciesInput, options: describe_transit_gateway_metering_policies.Options) !describe_transit_gateway_metering_policies.DescribeTransitGatewayMeteringPoliciesOutput {
+    pub fn describeTransitGatewayMeteringPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_metering_policies.DescribeTransitGatewayMeteringPoliciesInput, options: CallOptions) !describe_transit_gateway_metering_policies.DescribeTransitGatewayMeteringPoliciesOutput {
         return describe_transit_gateway_metering_policies.execute(self, allocator, input, options);
     }
 
     /// Describes one or more transit gateway multicast domains.
-    pub fn describeTransitGatewayMulticastDomains(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_multicast_domains.DescribeTransitGatewayMulticastDomainsInput, options: describe_transit_gateway_multicast_domains.Options) !describe_transit_gateway_multicast_domains.DescribeTransitGatewayMulticastDomainsOutput {
+    pub fn describeTransitGatewayMulticastDomains(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_multicast_domains.DescribeTransitGatewayMulticastDomainsInput, options: CallOptions) !describe_transit_gateway_multicast_domains.DescribeTransitGatewayMulticastDomainsOutput {
         return describe_transit_gateway_multicast_domains.execute(self, allocator, input, options);
     }
 
     /// Describes your transit gateway peering attachments.
-    pub fn describeTransitGatewayPeeringAttachments(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_peering_attachments.DescribeTransitGatewayPeeringAttachmentsInput, options: describe_transit_gateway_peering_attachments.Options) !describe_transit_gateway_peering_attachments.DescribeTransitGatewayPeeringAttachmentsOutput {
+    pub fn describeTransitGatewayPeeringAttachments(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_peering_attachments.DescribeTransitGatewayPeeringAttachmentsInput, options: CallOptions) !describe_transit_gateway_peering_attachments.DescribeTransitGatewayPeeringAttachmentsOutput {
         return describe_transit_gateway_peering_attachments.execute(self, allocator, input, options);
     }
 
     /// Describes one or more transit gateway route policy tables.
-    pub fn describeTransitGatewayPolicyTables(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_policy_tables.DescribeTransitGatewayPolicyTablesInput, options: describe_transit_gateway_policy_tables.Options) !describe_transit_gateway_policy_tables.DescribeTransitGatewayPolicyTablesOutput {
+    pub fn describeTransitGatewayPolicyTables(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_policy_tables.DescribeTransitGatewayPolicyTablesInput, options: CallOptions) !describe_transit_gateway_policy_tables.DescribeTransitGatewayPolicyTablesOutput {
         return describe_transit_gateway_policy_tables.execute(self, allocator, input, options);
     }
 
     /// Describes one or more transit gateway route table advertisements.
-    pub fn describeTransitGatewayRouteTableAnnouncements(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_route_table_announcements.DescribeTransitGatewayRouteTableAnnouncementsInput, options: describe_transit_gateway_route_table_announcements.Options) !describe_transit_gateway_route_table_announcements.DescribeTransitGatewayRouteTableAnnouncementsOutput {
+    pub fn describeTransitGatewayRouteTableAnnouncements(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_route_table_announcements.DescribeTransitGatewayRouteTableAnnouncementsInput, options: CallOptions) !describe_transit_gateway_route_table_announcements.DescribeTransitGatewayRouteTableAnnouncementsOutput {
         return describe_transit_gateway_route_table_announcements.execute(self, allocator, input, options);
     }
 
     /// Describes one or more transit gateway route tables. By default, all transit
     /// gateway route tables are described.
     /// Alternatively, you can filter the results.
-    pub fn describeTransitGatewayRouteTables(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_route_tables.DescribeTransitGatewayRouteTablesInput, options: describe_transit_gateway_route_tables.Options) !describe_transit_gateway_route_tables.DescribeTransitGatewayRouteTablesOutput {
+    pub fn describeTransitGatewayRouteTables(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_route_tables.DescribeTransitGatewayRouteTablesInput, options: CallOptions) !describe_transit_gateway_route_tables.DescribeTransitGatewayRouteTablesOutput {
         return describe_transit_gateway_route_tables.execute(self, allocator, input, options);
     }
 
     /// Describes one or more VPC attachments. By default, all VPC attachments are
     /// described.
     /// Alternatively, you can filter the results.
-    pub fn describeTransitGatewayVpcAttachments(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_vpc_attachments.DescribeTransitGatewayVpcAttachmentsInput, options: describe_transit_gateway_vpc_attachments.Options) !describe_transit_gateway_vpc_attachments.DescribeTransitGatewayVpcAttachmentsOutput {
+    pub fn describeTransitGatewayVpcAttachments(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateway_vpc_attachments.DescribeTransitGatewayVpcAttachmentsInput, options: CallOptions) !describe_transit_gateway_vpc_attachments.DescribeTransitGatewayVpcAttachmentsOutput {
         return describe_transit_gateway_vpc_attachments.execute(self, allocator, input, options);
     }
 
     /// Describes one or more transit gateways. By default, all transit gateways are
     /// described. Alternatively, you can
     /// filter the results.
-    pub fn describeTransitGateways(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateways.DescribeTransitGatewaysInput, options: describe_transit_gateways.Options) !describe_transit_gateways.DescribeTransitGatewaysOutput {
+    pub fn describeTransitGateways(self: *Self, allocator: std.mem.Allocator, input: describe_transit_gateways.DescribeTransitGatewaysInput, options: CallOptions) !describe_transit_gateways.DescribeTransitGatewaysOutput {
         return describe_transit_gateways.execute(self, allocator, input, options);
     }
 
     /// Describes one or more network interface trunk associations.
-    pub fn describeTrunkInterfaceAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_trunk_interface_associations.DescribeTrunkInterfaceAssociationsInput, options: describe_trunk_interface_associations.Options) !describe_trunk_interface_associations.DescribeTrunkInterfaceAssociationsOutput {
+    pub fn describeTrunkInterfaceAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_trunk_interface_associations.DescribeTrunkInterfaceAssociationsInput, options: CallOptions) !describe_trunk_interface_associations.DescribeTrunkInterfaceAssociationsOutput {
         return describe_trunk_interface_associations.execute(self, allocator, input, options);
     }
 
     /// Describes the specified Amazon Web Services Verified Access endpoints.
-    pub fn describeVerifiedAccessEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_verified_access_endpoints.DescribeVerifiedAccessEndpointsInput, options: describe_verified_access_endpoints.Options) !describe_verified_access_endpoints.DescribeVerifiedAccessEndpointsOutput {
+    pub fn describeVerifiedAccessEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_verified_access_endpoints.DescribeVerifiedAccessEndpointsInput, options: CallOptions) !describe_verified_access_endpoints.DescribeVerifiedAccessEndpointsOutput {
         return describe_verified_access_endpoints.execute(self, allocator, input, options);
     }
 
     /// Describes the specified Verified Access groups.
-    pub fn describeVerifiedAccessGroups(self: *Self, allocator: std.mem.Allocator, input: describe_verified_access_groups.DescribeVerifiedAccessGroupsInput, options: describe_verified_access_groups.Options) !describe_verified_access_groups.DescribeVerifiedAccessGroupsOutput {
+    pub fn describeVerifiedAccessGroups(self: *Self, allocator: std.mem.Allocator, input: describe_verified_access_groups.DescribeVerifiedAccessGroupsInput, options: CallOptions) !describe_verified_access_groups.DescribeVerifiedAccessGroupsOutput {
         return describe_verified_access_groups.execute(self, allocator, input, options);
     }
 
     /// Describes the specified Amazon Web Services Verified Access instances.
-    pub fn describeVerifiedAccessInstanceLoggingConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_verified_access_instance_logging_configurations.DescribeVerifiedAccessInstanceLoggingConfigurationsInput, options: describe_verified_access_instance_logging_configurations.Options) !describe_verified_access_instance_logging_configurations.DescribeVerifiedAccessInstanceLoggingConfigurationsOutput {
+    pub fn describeVerifiedAccessInstanceLoggingConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_verified_access_instance_logging_configurations.DescribeVerifiedAccessInstanceLoggingConfigurationsInput, options: CallOptions) !describe_verified_access_instance_logging_configurations.DescribeVerifiedAccessInstanceLoggingConfigurationsOutput {
         return describe_verified_access_instance_logging_configurations.execute(self, allocator, input, options);
     }
 
     /// Describes the specified Amazon Web Services Verified Access instances.
-    pub fn describeVerifiedAccessInstances(self: *Self, allocator: std.mem.Allocator, input: describe_verified_access_instances.DescribeVerifiedAccessInstancesInput, options: describe_verified_access_instances.Options) !describe_verified_access_instances.DescribeVerifiedAccessInstancesOutput {
+    pub fn describeVerifiedAccessInstances(self: *Self, allocator: std.mem.Allocator, input: describe_verified_access_instances.DescribeVerifiedAccessInstancesInput, options: CallOptions) !describe_verified_access_instances.DescribeVerifiedAccessInstancesOutput {
         return describe_verified_access_instances.execute(self, allocator, input, options);
     }
 
     /// Describes the specified Amazon Web Services Verified Access trust providers.
-    pub fn describeVerifiedAccessTrustProviders(self: *Self, allocator: std.mem.Allocator, input: describe_verified_access_trust_providers.DescribeVerifiedAccessTrustProvidersInput, options: describe_verified_access_trust_providers.Options) !describe_verified_access_trust_providers.DescribeVerifiedAccessTrustProvidersOutput {
+    pub fn describeVerifiedAccessTrustProviders(self: *Self, allocator: std.mem.Allocator, input: describe_verified_access_trust_providers.DescribeVerifiedAccessTrustProvidersInput, options: CallOptions) !describe_verified_access_trust_providers.DescribeVerifiedAccessTrustProvidersOutput {
         return describe_verified_access_trust_providers.execute(self, allocator, input, options);
     }
 
@@ -6182,7 +6183,7 @@ pub const Client = struct {
     /// For more information about EBS volumes, see [Amazon EBS
     /// volumes](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes.html)
     /// in the *Amazon EBS User Guide*.
-    pub fn describeVolumeAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_volume_attribute.DescribeVolumeAttributeInput, options: describe_volume_attribute.Options) !describe_volume_attribute.DescribeVolumeAttributeOutput {
+    pub fn describeVolumeAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_volume_attribute.DescribeVolumeAttributeInput, options: CallOptions) !describe_volume_attribute.DescribeVolumeAttributeOutput {
         return describe_volume_attribute.execute(self, allocator, input, options);
     }
 
@@ -6245,7 +6246,7 @@ pub const Client = struct {
     /// structures, might vary. Applications should not assume the elements appear
     /// in a
     /// particular order.
-    pub fn describeVolumeStatus(self: *Self, allocator: std.mem.Allocator, input: describe_volume_status.DescribeVolumeStatusInput, options: describe_volume_status.Options) !describe_volume_status.DescribeVolumeStatusOutput {
+    pub fn describeVolumeStatus(self: *Self, allocator: std.mem.Allocator, input: describe_volume_status.DescribeVolumeStatusInput, options: CallOptions) !describe_volume_status.DescribeVolumeStatusOutput {
         return describe_volume_status.execute(self, allocator, input, options);
     }
 
@@ -6268,7 +6269,7 @@ pub const Client = struct {
     /// structures, might vary. Applications should not assume the elements appear
     /// in a
     /// particular order.
-    pub fn describeVolumes(self: *Self, allocator: std.mem.Allocator, input: describe_volumes.DescribeVolumesInput, options: describe_volumes.Options) !describe_volumes.DescribeVolumesOutput {
+    pub fn describeVolumes(self: *Self, allocator: std.mem.Allocator, input: describe_volumes.DescribeVolumesInput, options: CallOptions) !describe_volumes.DescribeVolumesOutput {
         return describe_volumes.execute(self, allocator, input, options);
     }
 
@@ -6278,13 +6279,13 @@ pub const Client = struct {
     /// For more information, see [
     /// Monitor the progress of volume
     /// modifications](https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-modifications.html) in the *Amazon EBS User Guide*.
-    pub fn describeVolumesModifications(self: *Self, allocator: std.mem.Allocator, input: describe_volumes_modifications.DescribeVolumesModificationsInput, options: describe_volumes_modifications.Options) !describe_volumes_modifications.DescribeVolumesModificationsOutput {
+    pub fn describeVolumesModifications(self: *Self, allocator: std.mem.Allocator, input: describe_volumes_modifications.DescribeVolumesModificationsInput, options: CallOptions) !describe_volumes_modifications.DescribeVolumesModificationsOutput {
         return describe_volumes_modifications.execute(self, allocator, input, options);
     }
 
     /// Describes the specified attribute of the specified VPC. You can specify only
     /// one attribute at a time.
-    pub fn describeVpcAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_attribute.DescribeVpcAttributeInput, options: describe_vpc_attribute.Options) !describe_vpc_attribute.DescribeVpcAttributeOutput {
+    pub fn describeVpcAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_attribute.DescribeVpcAttributeInput, options: CallOptions) !describe_vpc_attribute.DescribeVpcAttributeOutput {
         return describe_vpc_attribute.execute(self, allocator, input, options);
     }
 
@@ -6296,7 +6297,7 @@ pub const Client = struct {
     /// exclusions when VPC BPA is turned on. To learn more about VPC BPA, see
     /// [Block public access to VPCs and
     /// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html) in the *Amazon VPC User Guide*.
-    pub fn describeVpcBlockPublicAccessExclusions(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_block_public_access_exclusions.DescribeVpcBlockPublicAccessExclusionsInput, options: describe_vpc_block_public_access_exclusions.Options) !describe_vpc_block_public_access_exclusions.DescribeVpcBlockPublicAccessExclusionsOutput {
+    pub fn describeVpcBlockPublicAccessExclusions(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_block_public_access_exclusions.DescribeVpcBlockPublicAccessExclusionsInput, options: CallOptions) !describe_vpc_block_public_access_exclusions.DescribeVpcBlockPublicAccessExclusionsOutput {
         return describe_vpc_block_public_access_exclusions.execute(self, allocator, input, options);
     }
 
@@ -6306,14 +6307,14 @@ pub const Client = struct {
     /// gateways and egress-only internet gateways. To learn more about VPC BPA, see
     /// [Block public access to VPCs and
     /// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html) in the *Amazon VPC User Guide*.
-    pub fn describeVpcBlockPublicAccessOptions(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_block_public_access_options.DescribeVpcBlockPublicAccessOptionsInput, options: describe_vpc_block_public_access_options.Options) !describe_vpc_block_public_access_options.DescribeVpcBlockPublicAccessOptionsOutput {
+    pub fn describeVpcBlockPublicAccessOptions(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_block_public_access_options.DescribeVpcBlockPublicAccessOptionsInput, options: CallOptions) !describe_vpc_block_public_access_options.DescribeVpcBlockPublicAccessOptionsOutput {
         return describe_vpc_block_public_access_options.execute(self, allocator, input, options);
     }
 
     /// This action is deprecated.
     ///
     /// Describes the ClassicLink status of the specified VPCs.
-    pub fn describeVpcClassicLink(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_classic_link.DescribeVpcClassicLinkInput, options: describe_vpc_classic_link.Options) !describe_vpc_classic_link.DescribeVpcClassicLinkOutput {
+    pub fn describeVpcClassicLink(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_classic_link.DescribeVpcClassicLinkInput, options: CallOptions) !describe_vpc_classic_link.DescribeVpcClassicLinkOutput {
         return describe_vpc_classic_link.execute(self, allocator, input, options);
     }
 
@@ -6328,7 +6329,7 @@ pub const Client = struct {
     /// of an instance in a VPC resolves to its private IP address when addressed
     /// from a linked
     /// EC2-Classic instance.
-    pub fn describeVpcClassicLinkDnsSupport(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_classic_link_dns_support.DescribeVpcClassicLinkDnsSupportInput, options: describe_vpc_classic_link_dns_support.Options) !describe_vpc_classic_link_dns_support.DescribeVpcClassicLinkDnsSupportOutput {
+    pub fn describeVpcClassicLinkDnsSupport(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_classic_link_dns_support.DescribeVpcClassicLinkDnsSupportInput, options: CallOptions) !describe_vpc_classic_link_dns_support.DescribeVpcClassicLinkDnsSupportOutput {
         return describe_vpc_classic_link_dns_support.execute(self, allocator, input, options);
     }
 
@@ -6339,40 +6340,40 @@ pub const Client = struct {
     ///
     /// For more information, see [Enforce VPC encryption in
     /// transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.
-    pub fn describeVpcEncryptionControls(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_encryption_controls.DescribeVpcEncryptionControlsInput, options: describe_vpc_encryption_controls.Options) !describe_vpc_encryption_controls.DescribeVpcEncryptionControlsOutput {
+    pub fn describeVpcEncryptionControls(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_encryption_controls.DescribeVpcEncryptionControlsInput, options: CallOptions) !describe_vpc_encryption_controls.DescribeVpcEncryptionControlsOutput {
         return describe_vpc_encryption_controls.execute(self, allocator, input, options);
     }
 
     /// Describes the VPC resources, VPC endpoint services, Amazon Lattice services,
     /// or service networks
     /// associated with the VPC endpoint.
-    pub fn describeVpcEndpointAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoint_associations.DescribeVpcEndpointAssociationsInput, options: describe_vpc_endpoint_associations.Options) !describe_vpc_endpoint_associations.DescribeVpcEndpointAssociationsOutput {
+    pub fn describeVpcEndpointAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoint_associations.DescribeVpcEndpointAssociationsInput, options: CallOptions) !describe_vpc_endpoint_associations.DescribeVpcEndpointAssociationsOutput {
         return describe_vpc_endpoint_associations.execute(self, allocator, input, options);
     }
 
     /// Describes the connection notifications for VPC endpoints and VPC endpoint
     /// services.
-    pub fn describeVpcEndpointConnectionNotifications(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoint_connection_notifications.DescribeVpcEndpointConnectionNotificationsInput, options: describe_vpc_endpoint_connection_notifications.Options) !describe_vpc_endpoint_connection_notifications.DescribeVpcEndpointConnectionNotificationsOutput {
+    pub fn describeVpcEndpointConnectionNotifications(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoint_connection_notifications.DescribeVpcEndpointConnectionNotificationsInput, options: CallOptions) !describe_vpc_endpoint_connection_notifications.DescribeVpcEndpointConnectionNotificationsOutput {
         return describe_vpc_endpoint_connection_notifications.execute(self, allocator, input, options);
     }
 
     /// Describes the VPC endpoint connections to your VPC endpoint services,
     /// including any
     /// endpoints that are pending your acceptance.
-    pub fn describeVpcEndpointConnections(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoint_connections.DescribeVpcEndpointConnectionsInput, options: describe_vpc_endpoint_connections.Options) !describe_vpc_endpoint_connections.DescribeVpcEndpointConnectionsOutput {
+    pub fn describeVpcEndpointConnections(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoint_connections.DescribeVpcEndpointConnectionsInput, options: CallOptions) !describe_vpc_endpoint_connections.DescribeVpcEndpointConnectionsOutput {
         return describe_vpc_endpoint_connections.execute(self, allocator, input, options);
     }
 
     /// Describes the VPC endpoint service configurations in your account (your
     /// services).
-    pub fn describeVpcEndpointServiceConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoint_service_configurations.DescribeVpcEndpointServiceConfigurationsInput, options: describe_vpc_endpoint_service_configurations.Options) !describe_vpc_endpoint_service_configurations.DescribeVpcEndpointServiceConfigurationsOutput {
+    pub fn describeVpcEndpointServiceConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoint_service_configurations.DescribeVpcEndpointServiceConfigurationsInput, options: CallOptions) !describe_vpc_endpoint_service_configurations.DescribeVpcEndpointServiceConfigurationsOutput {
         return describe_vpc_endpoint_service_configurations.execute(self, allocator, input, options);
     }
 
     /// Describes the principals (service consumers) that are permitted to discover
     /// your VPC
     /// endpoint service. Principal ARNs with path components aren't supported.
-    pub fn describeVpcEndpointServicePermissions(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoint_service_permissions.DescribeVpcEndpointServicePermissionsInput, options: describe_vpc_endpoint_service_permissions.Options) !describe_vpc_endpoint_service_permissions.DescribeVpcEndpointServicePermissionsOutput {
+    pub fn describeVpcEndpointServicePermissions(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoint_service_permissions.DescribeVpcEndpointServicePermissionsInput, options: CallOptions) !describe_vpc_endpoint_service_permissions.DescribeVpcEndpointServicePermissionsOutput {
         return describe_vpc_endpoint_service_permissions.execute(self, allocator, input, options);
     }
 
@@ -6388,7 +6389,7 @@ pub const Client = struct {
     /// consumer uses `us-east-1a` and `us-east-1b`, the response includes
     /// the VPC endpoint services in the common Availability Zone,
     /// `us-east-1a`.
-    pub fn describeVpcEndpointServices(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoint_services.DescribeVpcEndpointServicesInput, options: describe_vpc_endpoint_services.Options) !describe_vpc_endpoint_services.DescribeVpcEndpointServicesOutput {
+    pub fn describeVpcEndpointServices(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoint_services.DescribeVpcEndpointServicesInput, options: CallOptions) !describe_vpc_endpoint_services.DescribeVpcEndpointServicesOutput {
         return describe_vpc_endpoint_services.execute(self, allocator, input, options);
     }
 
@@ -6397,7 +6398,7 @@ pub const Client = struct {
     /// Alternatively, you can specify specific VPC endpoint IDs or filter the
     /// results to
     /// include only the VPC endpoints that match specific criteria.
-    pub fn describeVpcEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoints.DescribeVpcEndpointsInput, options: describe_vpc_endpoints.Options) !describe_vpc_endpoints.DescribeVpcEndpointsOutput {
+    pub fn describeVpcEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_endpoints.DescribeVpcEndpointsInput, options: CallOptions) !describe_vpc_endpoints.DescribeVpcEndpointsOutput {
         return describe_vpc_endpoints.execute(self, allocator, input, options);
     }
 
@@ -6406,19 +6407,19 @@ pub const Client = struct {
     /// Alternatively, you can specify specific VPC peering connection IDs or filter
     /// the results to
     /// include only the VPC peering connections that match specific criteria.
-    pub fn describeVpcPeeringConnections(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_peering_connections.DescribeVpcPeeringConnectionsInput, options: describe_vpc_peering_connections.Options) !describe_vpc_peering_connections.DescribeVpcPeeringConnectionsOutput {
+    pub fn describeVpcPeeringConnections(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_peering_connections.DescribeVpcPeeringConnectionsInput, options: CallOptions) !describe_vpc_peering_connections.DescribeVpcPeeringConnectionsOutput {
         return describe_vpc_peering_connections.execute(self, allocator, input, options);
     }
 
     /// Describes your VPCs. The default is to describe all your VPCs.
     /// Alternatively, you can specify specific VPC IDs or filter the results to
     /// include only the VPCs that match specific criteria.
-    pub fn describeVpcs(self: *Self, allocator: std.mem.Allocator, input: describe_vpcs.DescribeVpcsInput, options: describe_vpcs.Options) !describe_vpcs.DescribeVpcsOutput {
+    pub fn describeVpcs(self: *Self, allocator: std.mem.Allocator, input: describe_vpcs.DescribeVpcsInput, options: CallOptions) !describe_vpcs.DescribeVpcsOutput {
         return describe_vpcs.execute(self, allocator, input, options);
     }
 
     /// Describes one or more of your VPN concentrators.
-    pub fn describeVpnConcentrators(self: *Self, allocator: std.mem.Allocator, input: describe_vpn_concentrators.DescribeVpnConcentratorsInput, options: describe_vpn_concentrators.Options) !describe_vpn_concentrators.DescribeVpnConcentratorsOutput {
+    pub fn describeVpnConcentrators(self: *Self, allocator: std.mem.Allocator, input: describe_vpn_concentrators.DescribeVpnConcentratorsInput, options: CallOptions) !describe_vpn_concentrators.DescribeVpnConcentratorsOutput {
         return describe_vpn_concentrators.execute(self, allocator, input, options);
     }
 
@@ -6428,7 +6429,7 @@ pub const Client = struct {
     /// VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the
     /// *Amazon Web Services Site-to-Site VPN
     /// User Guide*.
-    pub fn describeVpnConnections(self: *Self, allocator: std.mem.Allocator, input: describe_vpn_connections.DescribeVpnConnectionsInput, options: describe_vpn_connections.Options) !describe_vpn_connections.DescribeVpnConnectionsOutput {
+    pub fn describeVpnConnections(self: *Self, allocator: std.mem.Allocator, input: describe_vpn_connections.DescribeVpnConnectionsInput, options: CallOptions) !describe_vpn_connections.DescribeVpnConnectionsOutput {
         return describe_vpn_connections.execute(self, allocator, input, options);
     }
 
@@ -6438,7 +6439,7 @@ pub const Client = struct {
     /// VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the
     /// *Amazon Web Services Site-to-Site VPN
     /// User Guide*.
-    pub fn describeVpnGateways(self: *Self, allocator: std.mem.Allocator, input: describe_vpn_gateways.DescribeVpnGatewaysInput, options: describe_vpn_gateways.Options) !describe_vpn_gateways.DescribeVpnGatewaysOutput {
+    pub fn describeVpnGateways(self: *Self, allocator: std.mem.Allocator, input: describe_vpn_gateways.DescribeVpnGatewaysInput, options: CallOptions) !describe_vpn_gateways.DescribeVpnGatewaysOutput {
         return describe_vpn_gateways.execute(self, allocator, input, options);
     }
 
@@ -6449,7 +6450,7 @@ pub const Client = struct {
     /// the VPC security groups are no longer associated with it. An instance is
     /// automatically unlinked from
     /// a VPC when it's stopped.
-    pub fn detachClassicLinkVpc(self: *Self, allocator: std.mem.Allocator, input: detach_classic_link_vpc.DetachClassicLinkVpcInput, options: detach_classic_link_vpc.Options) !detach_classic_link_vpc.DetachClassicLinkVpcOutput {
+    pub fn detachClassicLinkVpc(self: *Self, allocator: std.mem.Allocator, input: detach_classic_link_vpc.DetachClassicLinkVpcInput, options: CallOptions) !detach_classic_link_vpc.DetachClassicLinkVpcOutput {
         return detach_classic_link_vpc.execute(self, allocator, input, options);
     }
 
@@ -6458,18 +6459,18 @@ pub const Client = struct {
     /// and the VPC. The VPC must not contain any running instances with Elastic IP
     /// addresses or
     /// public IPv4 addresses.
-    pub fn detachInternetGateway(self: *Self, allocator: std.mem.Allocator, input: detach_internet_gateway.DetachInternetGatewayInput, options: detach_internet_gateway.Options) !detach_internet_gateway.DetachInternetGatewayOutput {
+    pub fn detachInternetGateway(self: *Self, allocator: std.mem.Allocator, input: detach_internet_gateway.DetachInternetGatewayInput, options: CallOptions) !detach_internet_gateway.DetachInternetGatewayOutput {
         return detach_internet_gateway.execute(self, allocator, input, options);
     }
 
     /// Detaches a network interface from an instance.
-    pub fn detachNetworkInterface(self: *Self, allocator: std.mem.Allocator, input: detach_network_interface.DetachNetworkInterfaceInput, options: detach_network_interface.Options) !detach_network_interface.DetachNetworkInterfaceOutput {
+    pub fn detachNetworkInterface(self: *Self, allocator: std.mem.Allocator, input: detach_network_interface.DetachNetworkInterfaceInput, options: CallOptions) !detach_network_interface.DetachNetworkInterfaceOutput {
         return detach_network_interface.execute(self, allocator, input, options);
     }
 
     /// Detaches the specified Amazon Web Services Verified Access trust provider
     /// from the specified Amazon Web Services Verified Access instance.
-    pub fn detachVerifiedAccessTrustProvider(self: *Self, allocator: std.mem.Allocator, input: detach_verified_access_trust_provider.DetachVerifiedAccessTrustProviderInput, options: detach_verified_access_trust_provider.Options) !detach_verified_access_trust_provider.DetachVerifiedAccessTrustProviderOutput {
+    pub fn detachVerifiedAccessTrustProvider(self: *Self, allocator: std.mem.Allocator, input: detach_verified_access_trust_provider.DetachVerifiedAccessTrustProviderInput, options: CallOptions) !detach_verified_access_trust_provider.DetachVerifiedAccessTrustProviderOutput {
         return detach_verified_access_trust_provider.execute(self, allocator, input, options);
     }
 
@@ -6499,7 +6500,7 @@ pub const Client = struct {
     /// For more information, see [Detach an Amazon EBS
     /// volume](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-detaching-volume.html) in the
     /// *Amazon EBS User Guide*.
-    pub fn detachVolume(self: *Self, allocator: std.mem.Allocator, input: detach_volume.DetachVolumeInput, options: detach_volume.Options) !detach_volume.DetachVolumeOutput {
+    pub fn detachVolume(self: *Self, allocator: std.mem.Allocator, input: detach_volume.DetachVolumeInput, options: CallOptions) !detach_volume.DetachVolumeOutput {
         return detach_volume.execute(self, allocator, input, options);
     }
 
@@ -6513,14 +6514,14 @@ pub const Client = struct {
     ///
     /// You must wait for the attachment's state to switch to `detached` before you
     /// can delete the VPC or attach a different VPC to the virtual private gateway.
-    pub fn detachVpnGateway(self: *Self, allocator: std.mem.Allocator, input: detach_vpn_gateway.DetachVpnGatewayInput, options: detach_vpn_gateway.Options) !detach_vpn_gateway.DetachVpnGatewayOutput {
+    pub fn detachVpnGateway(self: *Self, allocator: std.mem.Allocator, input: detach_vpn_gateway.DetachVpnGatewayInput, options: CallOptions) !detach_vpn_gateway.DetachVpnGatewayOutput {
         return detach_vpn_gateway.execute(self, allocator, input, options);
     }
 
     /// Disables Elastic IP address transfer. For more information, see [Transfer
     /// Elastic IP
     /// addresses](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#transfer-EIPs-intro) in the *Amazon VPC User Guide*.
-    pub fn disableAddressTransfer(self: *Self, allocator: std.mem.Allocator, input: disable_address_transfer.DisableAddressTransferInput, options: disable_address_transfer.Options) !disable_address_transfer.DisableAddressTransferOutput {
+    pub fn disableAddressTransfer(self: *Self, allocator: std.mem.Allocator, input: disable_address_transfer.DisableAddressTransferInput, options: CallOptions) !disable_address_transfer.DisableAddressTransferOutput {
         return disable_address_transfer.execute(self, allocator, input, options);
     }
 
@@ -6542,19 +6543,19 @@ pub const Client = struct {
     /// Amazon EC2 with Allowed
     /// AMIs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html) in
     /// *Amazon EC2 User Guide*.
-    pub fn disableAllowedImagesSettings(self: *Self, allocator: std.mem.Allocator, input: disable_allowed_images_settings.DisableAllowedImagesSettingsInput, options: disable_allowed_images_settings.Options) !disable_allowed_images_settings.DisableAllowedImagesSettingsOutput {
+    pub fn disableAllowedImagesSettings(self: *Self, allocator: std.mem.Allocator, input: disable_allowed_images_settings.DisableAllowedImagesSettingsInput, options: CallOptions) !disable_allowed_images_settings.DisableAllowedImagesSettingsOutput {
         return disable_allowed_images_settings.execute(self, allocator, input, options);
     }
 
     /// Disables Infrastructure Performance metric subscriptions.
-    pub fn disableAwsNetworkPerformanceMetricSubscription(self: *Self, allocator: std.mem.Allocator, input: disable_aws_network_performance_metric_subscription.DisableAwsNetworkPerformanceMetricSubscriptionInput, options: disable_aws_network_performance_metric_subscription.Options) !disable_aws_network_performance_metric_subscription.DisableAwsNetworkPerformanceMetricSubscriptionOutput {
+    pub fn disableAwsNetworkPerformanceMetricSubscription(self: *Self, allocator: std.mem.Allocator, input: disable_aws_network_performance_metric_subscription.DisableAwsNetworkPerformanceMetricSubscriptionInput, options: CallOptions) !disable_aws_network_performance_metric_subscription.DisableAwsNetworkPerformanceMetricSubscriptionOutput {
         return disable_aws_network_performance_metric_subscription.execute(self, allocator, input, options);
     }
 
     /// Disables EC2 Capacity Manager for your account. This stops data ingestion
     /// and removes access to capacity analytics and optimization recommendations.
     /// Previously collected data is retained but no new data will be processed.
-    pub fn disableCapacityManager(self: *Self, allocator: std.mem.Allocator, input: disable_capacity_manager.DisableCapacityManagerInput, options: disable_capacity_manager.Options) !disable_capacity_manager.DisableCapacityManagerOutput {
+    pub fn disableCapacityManager(self: *Self, allocator: std.mem.Allocator, input: disable_capacity_manager.DisableCapacityManagerInput, options: CallOptions) !disable_capacity_manager.DisableCapacityManagerOutput {
         return disable_capacity_manager.execute(self, allocator, input, options);
     }
 
@@ -6571,7 +6572,7 @@ pub const Client = struct {
     /// For more information, see [Amazon EBS
     /// encryption](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html) in the
     /// *Amazon EBS User Guide*.
-    pub fn disableEbsEncryptionByDefault(self: *Self, allocator: std.mem.Allocator, input: disable_ebs_encryption_by_default.DisableEbsEncryptionByDefaultInput, options: disable_ebs_encryption_by_default.Options) !disable_ebs_encryption_by_default.DisableEbsEncryptionByDefaultOutput {
+    pub fn disableEbsEncryptionByDefault(self: *Self, allocator: std.mem.Allocator, input: disable_ebs_encryption_by_default.DisableEbsEncryptionByDefaultInput, options: CallOptions) !disable_ebs_encryption_by_default.DisableEbsEncryptionByDefaultOutput {
         return disable_ebs_encryption_by_default.execute(self, allocator, input, options);
     }
 
@@ -6586,13 +6587,13 @@ pub const Client = struct {
     /// You can only change these settings for Windows AMIs that you own or that
     /// have been
     /// shared with you.
-    pub fn disableFastLaunch(self: *Self, allocator: std.mem.Allocator, input: disable_fast_launch.DisableFastLaunchInput, options: disable_fast_launch.Options) !disable_fast_launch.DisableFastLaunchOutput {
+    pub fn disableFastLaunch(self: *Self, allocator: std.mem.Allocator, input: disable_fast_launch.DisableFastLaunchInput, options: CallOptions) !disable_fast_launch.DisableFastLaunchOutput {
         return disable_fast_launch.execute(self, allocator, input, options);
     }
 
     /// Disables fast snapshot restores for the specified snapshots in the specified
     /// Availability Zones.
-    pub fn disableFastSnapshotRestores(self: *Self, allocator: std.mem.Allocator, input: disable_fast_snapshot_restores.DisableFastSnapshotRestoresInput, options: disable_fast_snapshot_restores.Options) !disable_fast_snapshot_restores.DisableFastSnapshotRestoresOutput {
+    pub fn disableFastSnapshotRestores(self: *Self, allocator: std.mem.Allocator, input: disable_fast_snapshot_restores.DisableFastSnapshotRestoresInput, options: CallOptions) !disable_fast_snapshot_restores.DisableFastSnapshotRestoresOutput {
         return disable_fast_snapshot_restores.execute(self, allocator, input, options);
     }
 
@@ -6617,7 +6618,7 @@ pub const Client = struct {
     /// For more information, see [Disable an
     /// AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/disable-an-ami.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn disableImage(self: *Self, allocator: std.mem.Allocator, input: disable_image.DisableImageInput, options: disable_image.Options) !disable_image.DisableImageOutput {
+    pub fn disableImage(self: *Self, allocator: std.mem.Allocator, input: disable_image.DisableImageInput, options: CallOptions) !disable_image.DisableImageOutput {
         return disable_image.execute(self, allocator, input, options);
     }
 
@@ -6631,7 +6632,7 @@ pub const Client = struct {
     /// For more information, see [Block
     /// public access to your
     /// AMIs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-public-access-to-amis.html) in the *Amazon EC2 User Guide*.
-    pub fn disableImageBlockPublicAccess(self: *Self, allocator: std.mem.Allocator, input: disable_image_block_public_access.DisableImageBlockPublicAccessInput, options: disable_image_block_public_access.Options) !disable_image_block_public_access.DisableImageBlockPublicAccessOutput {
+    pub fn disableImageBlockPublicAccess(self: *Self, allocator: std.mem.Allocator, input: disable_image_block_public_access.DisableImageBlockPublicAccessInput, options: CallOptions) !disable_image_block_public_access.DisableImageBlockPublicAccessOutput {
         return disable_image_block_public_access.execute(self, allocator, input, options);
     }
 
@@ -6641,7 +6642,7 @@ pub const Client = struct {
     /// AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html)
     /// in the
     /// *Amazon EC2 User Guide*.
-    pub fn disableImageDeprecation(self: *Self, allocator: std.mem.Allocator, input: disable_image_deprecation.DisableImageDeprecationInput, options: disable_image_deprecation.Options) !disable_image_deprecation.DisableImageDeprecationOutput {
+    pub fn disableImageDeprecation(self: *Self, allocator: std.mem.Allocator, input: disable_image_deprecation.DisableImageDeprecationInput, options: CallOptions) !disable_image_deprecation.DisableImageDeprecationOutput {
         return disable_image_deprecation.execute(self, allocator, input, options);
     }
 
@@ -6657,7 +6658,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Protect an Amazon EC2 AMI from
     /// deregistration](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deregistration-protection.html) in the *Amazon EC2 User Guide*.
-    pub fn disableImageDeregistrationProtection(self: *Self, allocator: std.mem.Allocator, input: disable_image_deregistration_protection.DisableImageDeregistrationProtectionInput, options: disable_image_deregistration_protection.Options) !disable_image_deregistration_protection.DisableImageDeregistrationProtectionOutput {
+    pub fn disableImageDeregistrationProtection(self: *Self, allocator: std.mem.Allocator, input: disable_image_deregistration_protection.DisableImageDeregistrationProtectionInput, options: CallOptions) !disable_image_deregistration_protection.DisableImageDeregistrationProtectionOutput {
         return disable_image_deregistration_protection.execute(self, allocator, input, options);
     }
 
@@ -6668,13 +6669,13 @@ pub const Client = struct {
     /// metadata for the instances to determine whether they are active or standby
     /// nodes in the
     /// SQL Server High Availability cluster.
-    pub fn disableInstanceSqlHaStandbyDetections(self: *Self, allocator: std.mem.Allocator, input: disable_instance_sql_ha_standby_detections.DisableInstanceSqlHaStandbyDetectionsInput, options: disable_instance_sql_ha_standby_detections.Options) !disable_instance_sql_ha_standby_detections.DisableInstanceSqlHaStandbyDetectionsOutput {
+    pub fn disableInstanceSqlHaStandbyDetections(self: *Self, allocator: std.mem.Allocator, input: disable_instance_sql_ha_standby_detections.DisableInstanceSqlHaStandbyDetectionsInput, options: CallOptions) !disable_instance_sql_ha_standby_detections.DisableInstanceSqlHaStandbyDetectionsOutput {
         return disable_instance_sql_ha_standby_detections.execute(self, allocator, input, options);
     }
 
     /// Disable the IPAM account. For more information, see [Enable integration with
     /// Organizations](https://docs.aws.amazon.com/vpc/latest/ipam/enable-integ-ipam.html) in the *Amazon VPC IPAM User Guide*.
-    pub fn disableIpamOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: disable_ipam_organization_admin_account.DisableIpamOrganizationAdminAccountInput, options: disable_ipam_organization_admin_account.Options) !disable_ipam_organization_admin_account.DisableIpamOrganizationAdminAccountOutput {
+    pub fn disableIpamOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: disable_ipam_organization_admin_account.DisableIpamOrganizationAdminAccountInput, options: CallOptions) !disable_ipam_organization_admin_account.DisableIpamOrganizationAdminAccountOutput {
         return disable_ipam_organization_admin_account.execute(self, allocator, input, options);
     }
 
@@ -6688,7 +6689,7 @@ pub const Client = struct {
     /// then the services fallback to Amazon-provided IP addresses. A policy can be
     /// applied to an individual Amazon Web Services account or an entity within
     /// Amazon Web Services Organizations.
-    pub fn disableIpamPolicy(self: *Self, allocator: std.mem.Allocator, input: disable_ipam_policy.DisableIpamPolicyInput, options: disable_ipam_policy.Options) !disable_ipam_policy.DisableIpamPolicyOutput {
+    pub fn disableIpamPolicy(self: *Self, allocator: std.mem.Allocator, input: disable_ipam_policy.DisableIpamPolicyInput, options: CallOptions) !disable_ipam_policy.DisableIpamPolicyOutput {
         return disable_ipam_policy.execute(self, allocator, input, options);
     }
 
@@ -6721,7 +6722,7 @@ pub const Client = struct {
     ///
     /// For more information see [Dynamic routing in your VPC with VPC Route
     /// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
-    pub fn disableRouteServerPropagation(self: *Self, allocator: std.mem.Allocator, input: disable_route_server_propagation.DisableRouteServerPropagationInput, options: disable_route_server_propagation.Options) !disable_route_server_propagation.DisableRouteServerPropagationOutput {
+    pub fn disableRouteServerPropagation(self: *Self, allocator: std.mem.Allocator, input: disable_route_server_propagation.DisableRouteServerPropagationInput, options: CallOptions) !disable_route_server_propagation.DisableRouteServerPropagationOutput {
         return disable_route_server_propagation.execute(self, allocator, input, options);
     }
 
@@ -6732,7 +6733,7 @@ pub const Client = struct {
     /// [Manage account access to the EC2 serial
     /// console](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access) in the *Amazon EC2
     /// User Guide*.
-    pub fn disableSerialConsoleAccess(self: *Self, allocator: std.mem.Allocator, input: disable_serial_console_access.DisableSerialConsoleAccessInput, options: disable_serial_console_access.Options) !disable_serial_console_access.DisableSerialConsoleAccessOutput {
+    pub fn disableSerialConsoleAccess(self: *Self, allocator: std.mem.Allocator, input: disable_serial_console_access.DisableSerialConsoleAccessInput, options: CallOptions) !disable_serial_console_access.DisableSerialConsoleAccessOutput {
         return disable_serial_console_access.execute(self, allocator, input, options);
     }
 
@@ -6758,21 +6759,21 @@ pub const Client = struct {
     /// For more information, see [
     /// Block public access for
     /// snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/block-public-access-snapshots.html) in the *Amazon EBS User Guide* .
-    pub fn disableSnapshotBlockPublicAccess(self: *Self, allocator: std.mem.Allocator, input: disable_snapshot_block_public_access.DisableSnapshotBlockPublicAccessInput, options: disable_snapshot_block_public_access.Options) !disable_snapshot_block_public_access.DisableSnapshotBlockPublicAccessOutput {
+    pub fn disableSnapshotBlockPublicAccess(self: *Self, allocator: std.mem.Allocator, input: disable_snapshot_block_public_access.DisableSnapshotBlockPublicAccessInput, options: CallOptions) !disable_snapshot_block_public_access.DisableSnapshotBlockPublicAccessOutput {
         return disable_snapshot_block_public_access.execute(self, allocator, input, options);
     }
 
     /// Disables the specified resource attachment from propagating routes to the
     /// specified
     /// propagation route table.
-    pub fn disableTransitGatewayRouteTablePropagation(self: *Self, allocator: std.mem.Allocator, input: disable_transit_gateway_route_table_propagation.DisableTransitGatewayRouteTablePropagationInput, options: disable_transit_gateway_route_table_propagation.Options) !disable_transit_gateway_route_table_propagation.DisableTransitGatewayRouteTablePropagationOutput {
+    pub fn disableTransitGatewayRouteTablePropagation(self: *Self, allocator: std.mem.Allocator, input: disable_transit_gateway_route_table_propagation.DisableTransitGatewayRouteTablePropagationInput, options: CallOptions) !disable_transit_gateway_route_table_propagation.DisableTransitGatewayRouteTablePropagationOutput {
         return disable_transit_gateway_route_table_propagation.execute(self, allocator, input, options);
     }
 
     /// Disables a virtual private gateway (VGW) from propagating routes to a
     /// specified route
     /// table of a VPC.
-    pub fn disableVgwRoutePropagation(self: *Self, allocator: std.mem.Allocator, input: disable_vgw_route_propagation.DisableVgwRoutePropagationInput, options: disable_vgw_route_propagation.Options) !disable_vgw_route_propagation.DisableVgwRoutePropagationOutput {
+    pub fn disableVgwRoutePropagation(self: *Self, allocator: std.mem.Allocator, input: disable_vgw_route_propagation.DisableVgwRoutePropagationInput, options: CallOptions) !disable_vgw_route_propagation.DisableVgwRoutePropagationOutput {
         return disable_vgw_route_propagation.execute(self, allocator, input, options);
     }
 
@@ -6781,7 +6782,7 @@ pub const Client = struct {
     /// Disables ClassicLink for a VPC. You cannot disable ClassicLink for a VPC
     /// that has EC2-Classic instances
     /// linked to it.
-    pub fn disableVpcClassicLink(self: *Self, allocator: std.mem.Allocator, input: disable_vpc_classic_link.DisableVpcClassicLinkInput, options: disable_vpc_classic_link.Options) !disable_vpc_classic_link.DisableVpcClassicLinkOutput {
+    pub fn disableVpcClassicLink(self: *Self, allocator: std.mem.Allocator, input: disable_vpc_classic_link.DisableVpcClassicLinkInput, options: CallOptions) !disable_vpc_classic_link.DisableVpcClassicLinkOutput {
         return disable_vpc_classic_link.execute(self, allocator, input, options);
     }
 
@@ -6794,7 +6795,7 @@ pub const Client = struct {
     /// in the VPC to which it's linked.
     ///
     /// You must specify a VPC ID in the request.
-    pub fn disableVpcClassicLinkDnsSupport(self: *Self, allocator: std.mem.Allocator, input: disable_vpc_classic_link_dns_support.DisableVpcClassicLinkDnsSupportInput, options: disable_vpc_classic_link_dns_support.Options) !disable_vpc_classic_link_dns_support.DisableVpcClassicLinkDnsSupportOutput {
+    pub fn disableVpcClassicLinkDnsSupport(self: *Self, allocator: std.mem.Allocator, input: disable_vpc_classic_link_dns_support.DisableVpcClassicLinkDnsSupportInput, options: CallOptions) !disable_vpc_classic_link_dns_support.DisableVpcClassicLinkDnsSupportOutput {
         return disable_vpc_classic_link_dns_support.execute(self, allocator, input, options);
     }
 
@@ -6812,7 +6813,7 @@ pub const Client = struct {
     /// * Public IPv4 address is the primary public IPv4 address
     ///
     /// * Network interface only has one remaining public IPv4 address
-    pub fn disassociateAddress(self: *Self, allocator: std.mem.Allocator, input: disassociate_address.DisassociateAddressInput, options: disassociate_address.Options) !disassociate_address.DisassociateAddressOutput {
+    pub fn disassociateAddress(self: *Self, allocator: std.mem.Allocator, input: disassociate_address.DisassociateAddressInput, options: CallOptions) !disassociate_address.DisassociateAddressOutput {
         return disassociate_address.execute(self, allocator, input, options);
     }
 
@@ -6823,7 +6824,7 @@ pub const Client = struct {
     /// For more information, see [Billing assignment for shared
     /// Amazon EC2 Capacity
     /// Reservations](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/assign-billing.html).
-    pub fn disassociateCapacityReservationBillingOwner(self: *Self, allocator: std.mem.Allocator, input: disassociate_capacity_reservation_billing_owner.DisassociateCapacityReservationBillingOwnerInput, options: disassociate_capacity_reservation_billing_owner.Options) !disassociate_capacity_reservation_billing_owner.DisassociateCapacityReservationBillingOwnerOutput {
+    pub fn disassociateCapacityReservationBillingOwner(self: *Self, allocator: std.mem.Allocator, input: disassociate_capacity_reservation_billing_owner.DisassociateCapacityReservationBillingOwnerInput, options: CallOptions) !disassociate_capacity_reservation_billing_owner.DisassociateCapacityReservationBillingOwnerOutput {
         return disassociate_capacity_reservation_billing_owner.execute(self, allocator, input, options);
     }
 
@@ -6838,7 +6839,7 @@ pub const Client = struct {
     /// * New client connections are disallowed
     ///
     /// * The Client VPN endpoint's status changes to `pending-associate`
-    pub fn disassociateClientVpnTargetNetwork(self: *Self, allocator: std.mem.Allocator, input: disassociate_client_vpn_target_network.DisassociateClientVpnTargetNetworkInput, options: disassociate_client_vpn_target_network.Options) !disassociate_client_vpn_target_network.DisassociateClientVpnTargetNetworkOutput {
+    pub fn disassociateClientVpnTargetNetwork(self: *Self, allocator: std.mem.Allocator, input: disassociate_client_vpn_target_network.DisassociateClientVpnTargetNetworkInput, options: CallOptions) !disassociate_client_vpn_target_network.DisassociateClientVpnTargetNetworkOutput {
         return disassociate_client_vpn_target_network.execute(self, allocator, input, options);
     }
 
@@ -6851,7 +6852,7 @@ pub const Client = struct {
     /// KMS key used to encrypt the private key. This effectively revokes the role's
     /// permission
     /// to use the certificate.
-    pub fn disassociateEnclaveCertificateIamRole(self: *Self, allocator: std.mem.Allocator, input: disassociate_enclave_certificate_iam_role.DisassociateEnclaveCertificateIamRoleInput, options: disassociate_enclave_certificate_iam_role.Options) !disassociate_enclave_certificate_iam_role.DisassociateEnclaveCertificateIamRoleOutput {
+    pub fn disassociateEnclaveCertificateIamRole(self: *Self, allocator: std.mem.Allocator, input: disassociate_enclave_certificate_iam_role.DisassociateEnclaveCertificateIamRoleInput, options: CallOptions) !disassociate_enclave_certificate_iam_role.DisassociateEnclaveCertificateIamRoleOutput {
         return disassociate_enclave_certificate_iam_role.execute(self, allocator, input, options);
     }
 
@@ -6859,7 +6860,7 @@ pub const Client = struct {
     ///
     /// Use DescribeIamInstanceProfileAssociations to get the association
     /// ID.
-    pub fn disassociateIamInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: disassociate_iam_instance_profile.DisassociateIamInstanceProfileInput, options: disassociate_iam_instance_profile.Options) !disassociate_iam_instance_profile.DisassociateIamInstanceProfileOutput {
+    pub fn disassociateIamInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: disassociate_iam_instance_profile.DisassociateIamInstanceProfileInput, options: CallOptions) !disassociate_iam_instance_profile.DisassociateIamInstanceProfileOutput {
         return disassociate_iam_instance_profile.execute(self, allocator, input, options);
     }
 
@@ -6867,7 +6868,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Define event windows for scheduled
     /// events](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html) in the *Amazon EC2 User Guide*.
-    pub fn disassociateInstanceEventWindow(self: *Self, allocator: std.mem.Allocator, input: disassociate_instance_event_window.DisassociateInstanceEventWindowInput, options: disassociate_instance_event_window.Options) !disassociate_instance_event_window.DisassociateInstanceEventWindowOutput {
+    pub fn disassociateInstanceEventWindow(self: *Self, allocator: std.mem.Allocator, input: disassociate_instance_event_window.DisassociateInstanceEventWindowInput, options: CallOptions) !disassociate_instance_event_window.DisassociateInstanceEventWindowOutput {
         return disassociate_instance_event_window.execute(self, allocator, input, options);
     }
 
@@ -6877,14 +6878,14 @@ pub const Client = struct {
     /// For more information, see [Tutorial: Bring your ASN to
     /// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html) in
     /// the *Amazon VPC IPAM guide*.
-    pub fn disassociateIpamByoasn(self: *Self, allocator: std.mem.Allocator, input: disassociate_ipam_byoasn.DisassociateIpamByoasnInput, options: disassociate_ipam_byoasn.Options) !disassociate_ipam_byoasn.DisassociateIpamByoasnOutput {
+    pub fn disassociateIpamByoasn(self: *Self, allocator: std.mem.Allocator, input: disassociate_ipam_byoasn.DisassociateIpamByoasnInput, options: CallOptions) !disassociate_ipam_byoasn.DisassociateIpamByoasnOutput {
         return disassociate_ipam_byoasn.execute(self, allocator, input, options);
     }
 
     /// Disassociates a resource discovery from an Amazon VPC IPAM. A resource
     /// discovery is an IPAM component that enables IPAM to manage and monitor
     /// resources that belong to the owning account.
-    pub fn disassociateIpamResourceDiscovery(self: *Self, allocator: std.mem.Allocator, input: disassociate_ipam_resource_discovery.DisassociateIpamResourceDiscoveryInput, options: disassociate_ipam_resource_discovery.Options) !disassociate_ipam_resource_discovery.DisassociateIpamResourceDiscoveryOutput {
+    pub fn disassociateIpamResourceDiscovery(self: *Self, allocator: std.mem.Allocator, input: disassociate_ipam_resource_discovery.DisassociateIpamResourceDiscoveryInput, options: CallOptions) !disassociate_ipam_resource_discovery.DisassociateIpamResourceDiscoveryOutput {
         return disassociate_ipam_resource_discovery.execute(self, allocator, input, options);
     }
 
@@ -6906,7 +6907,7 @@ pub const Client = struct {
     /// connections drain out, the EIPs (and the corresponding private IP addresses
     /// mapped to them)
     /// are released.
-    pub fn disassociateNatGatewayAddress(self: *Self, allocator: std.mem.Allocator, input: disassociate_nat_gateway_address.DisassociateNatGatewayAddressInput, options: disassociate_nat_gateway_address.Options) !disassociate_nat_gateway_address.DisassociateNatGatewayAddressOutput {
+    pub fn disassociateNatGatewayAddress(self: *Self, allocator: std.mem.Allocator, input: disassociate_nat_gateway_address.DisassociateNatGatewayAddressInput, options: CallOptions) !disassociate_nat_gateway_address.DisassociateNatGatewayAddressOutput {
         return disassociate_nat_gateway_address.execute(self, allocator, input, options);
     }
 
@@ -6917,7 +6918,7 @@ pub const Client = struct {
     ///
     /// For more information see [Dynamic routing in your VPC with VPC Route
     /// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
-    pub fn disassociateRouteServer(self: *Self, allocator: std.mem.Allocator, input: disassociate_route_server.DisassociateRouteServerInput, options: disassociate_route_server.Options) !disassociate_route_server.DisassociateRouteServerOutput {
+    pub fn disassociateRouteServer(self: *Self, allocator: std.mem.Allocator, input: disassociate_route_server.DisassociateRouteServerInput, options: CallOptions) !disassociate_route_server.DisassociateRouteServerOutput {
         return disassociate_route_server.execute(self, allocator, input, options);
     }
 
@@ -6929,7 +6930,7 @@ pub const Client = struct {
     /// information
     /// about route tables, see [Route
     /// tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) in the *Amazon VPC User Guide*.
-    pub fn disassociateRouteTable(self: *Self, allocator: std.mem.Allocator, input: disassociate_route_table.DisassociateRouteTableInput, options: disassociate_route_table.Options) !disassociate_route_table.DisassociateRouteTableOutput {
+    pub fn disassociateRouteTable(self: *Self, allocator: std.mem.Allocator, input: disassociate_route_table.DisassociateRouteTableInput, options: CallOptions) !disassociate_route_table.DisassociateRouteTableOutput {
         return disassociate_route_table.execute(self, allocator, input, options);
     }
 
@@ -6940,36 +6941,36 @@ pub const Client = struct {
     /// Note that the disassociation is asynchronous and you can check the status of
     /// the request with
     /// [DescribeSecurityGroupVpcAssociations](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroupVpcAssociations.html).
-    pub fn disassociateSecurityGroupVpc(self: *Self, allocator: std.mem.Allocator, input: disassociate_security_group_vpc.DisassociateSecurityGroupVpcInput, options: disassociate_security_group_vpc.Options) !disassociate_security_group_vpc.DisassociateSecurityGroupVpcOutput {
+    pub fn disassociateSecurityGroupVpc(self: *Self, allocator: std.mem.Allocator, input: disassociate_security_group_vpc.DisassociateSecurityGroupVpcInput, options: CallOptions) !disassociate_security_group_vpc.DisassociateSecurityGroupVpcOutput {
         return disassociate_security_group_vpc.execute(self, allocator, input, options);
     }
 
     /// Disassociates a CIDR block from a subnet. Currently, you can disassociate an
     /// IPv6 CIDR block only. You must detach or delete all gateways and resources
     /// that are associated with the CIDR block before you can disassociate it.
-    pub fn disassociateSubnetCidrBlock(self: *Self, allocator: std.mem.Allocator, input: disassociate_subnet_cidr_block.DisassociateSubnetCidrBlockInput, options: disassociate_subnet_cidr_block.Options) !disassociate_subnet_cidr_block.DisassociateSubnetCidrBlockOutput {
+    pub fn disassociateSubnetCidrBlock(self: *Self, allocator: std.mem.Allocator, input: disassociate_subnet_cidr_block.DisassociateSubnetCidrBlockInput, options: CallOptions) !disassociate_subnet_cidr_block.DisassociateSubnetCidrBlockOutput {
         return disassociate_subnet_cidr_block.execute(self, allocator, input, options);
     }
 
     /// Disassociates the specified subnets from the transit gateway multicast
     /// domain.
-    pub fn disassociateTransitGatewayMulticastDomain(self: *Self, allocator: std.mem.Allocator, input: disassociate_transit_gateway_multicast_domain.DisassociateTransitGatewayMulticastDomainInput, options: disassociate_transit_gateway_multicast_domain.Options) !disassociate_transit_gateway_multicast_domain.DisassociateTransitGatewayMulticastDomainOutput {
+    pub fn disassociateTransitGatewayMulticastDomain(self: *Self, allocator: std.mem.Allocator, input: disassociate_transit_gateway_multicast_domain.DisassociateTransitGatewayMulticastDomainInput, options: CallOptions) !disassociate_transit_gateway_multicast_domain.DisassociateTransitGatewayMulticastDomainOutput {
         return disassociate_transit_gateway_multicast_domain.execute(self, allocator, input, options);
     }
 
     /// Removes the association between an an attachment and a policy table.
-    pub fn disassociateTransitGatewayPolicyTable(self: *Self, allocator: std.mem.Allocator, input: disassociate_transit_gateway_policy_table.DisassociateTransitGatewayPolicyTableInput, options: disassociate_transit_gateway_policy_table.Options) !disassociate_transit_gateway_policy_table.DisassociateTransitGatewayPolicyTableOutput {
+    pub fn disassociateTransitGatewayPolicyTable(self: *Self, allocator: std.mem.Allocator, input: disassociate_transit_gateway_policy_table.DisassociateTransitGatewayPolicyTableInput, options: CallOptions) !disassociate_transit_gateway_policy_table.DisassociateTransitGatewayPolicyTableOutput {
         return disassociate_transit_gateway_policy_table.execute(self, allocator, input, options);
     }
 
     /// Disassociates a resource attachment from a transit gateway route table.
-    pub fn disassociateTransitGatewayRouteTable(self: *Self, allocator: std.mem.Allocator, input: disassociate_transit_gateway_route_table.DisassociateTransitGatewayRouteTableInput, options: disassociate_transit_gateway_route_table.Options) !disassociate_transit_gateway_route_table.DisassociateTransitGatewayRouteTableOutput {
+    pub fn disassociateTransitGatewayRouteTable(self: *Self, allocator: std.mem.Allocator, input: disassociate_transit_gateway_route_table.DisassociateTransitGatewayRouteTableInput, options: CallOptions) !disassociate_transit_gateway_route_table.DisassociateTransitGatewayRouteTableOutput {
         return disassociate_transit_gateway_route_table.execute(self, allocator, input, options);
     }
 
     /// Removes an association between a branch network interface with a trunk
     /// network interface.
-    pub fn disassociateTrunkInterface(self: *Self, allocator: std.mem.Allocator, input: disassociate_trunk_interface.DisassociateTrunkInterfaceInput, options: disassociate_trunk_interface.Options) !disassociate_trunk_interface.DisassociateTrunkInterfaceOutput {
+    pub fn disassociateTrunkInterface(self: *Self, allocator: std.mem.Allocator, input: disassociate_trunk_interface.DisassociateTrunkInterfaceInput, options: CallOptions) !disassociate_trunk_interface.DisassociateTrunkInterfaceOutput {
         return disassociate_trunk_interface.execute(self, allocator, input, options);
     }
 
@@ -6982,14 +6983,14 @@ pub const Client = struct {
     /// You cannot disassociate the CIDR block with which you originally created the
     /// VPC (the
     /// primary CIDR block).
-    pub fn disassociateVpcCidrBlock(self: *Self, allocator: std.mem.Allocator, input: disassociate_vpc_cidr_block.DisassociateVpcCidrBlockInput, options: disassociate_vpc_cidr_block.Options) !disassociate_vpc_cidr_block.DisassociateVpcCidrBlockOutput {
+    pub fn disassociateVpcCidrBlock(self: *Self, allocator: std.mem.Allocator, input: disassociate_vpc_cidr_block.DisassociateVpcCidrBlockInput, options: CallOptions) !disassociate_vpc_cidr_block.DisassociateVpcCidrBlockOutput {
         return disassociate_vpc_cidr_block.execute(self, allocator, input, options);
     }
 
     /// Enables Elastic IP address transfer. For more information, see [Transfer
     /// Elastic IP
     /// addresses](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#transfer-EIPs-intro) in the *Amazon VPC User Guide*.
-    pub fn enableAddressTransfer(self: *Self, allocator: std.mem.Allocator, input: enable_address_transfer.EnableAddressTransferInput, options: enable_address_transfer.Options) !enable_address_transfer.EnableAddressTransferOutput {
+    pub fn enableAddressTransfer(self: *Self, allocator: std.mem.Allocator, input: enable_address_transfer.EnableAddressTransferInput, options: CallOptions) !enable_address_transfer.EnableAddressTransferOutput {
         return enable_address_transfer.execute(self, allocator, input, options);
     }
 
@@ -7025,12 +7026,12 @@ pub const Client = struct {
     /// Amazon EC2 with Allowed
     /// AMIs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html) in
     /// *Amazon EC2 User Guide*.
-    pub fn enableAllowedImagesSettings(self: *Self, allocator: std.mem.Allocator, input: enable_allowed_images_settings.EnableAllowedImagesSettingsInput, options: enable_allowed_images_settings.Options) !enable_allowed_images_settings.EnableAllowedImagesSettingsOutput {
+    pub fn enableAllowedImagesSettings(self: *Self, allocator: std.mem.Allocator, input: enable_allowed_images_settings.EnableAllowedImagesSettingsInput, options: CallOptions) !enable_allowed_images_settings.EnableAllowedImagesSettingsOutput {
         return enable_allowed_images_settings.execute(self, allocator, input, options);
     }
 
     /// Enables Infrastructure Performance subscriptions.
-    pub fn enableAwsNetworkPerformanceMetricSubscription(self: *Self, allocator: std.mem.Allocator, input: enable_aws_network_performance_metric_subscription.EnableAwsNetworkPerformanceMetricSubscriptionInput, options: enable_aws_network_performance_metric_subscription.Options) !enable_aws_network_performance_metric_subscription.EnableAwsNetworkPerformanceMetricSubscriptionOutput {
+    pub fn enableAwsNetworkPerformanceMetricSubscription(self: *Self, allocator: std.mem.Allocator, input: enable_aws_network_performance_metric_subscription.EnableAwsNetworkPerformanceMetricSubscriptionInput, options: CallOptions) !enable_aws_network_performance_metric_subscription.EnableAwsNetworkPerformanceMetricSubscriptionOutput {
         return enable_aws_network_performance_metric_subscription.execute(self, allocator, input, options);
     }
 
@@ -7038,7 +7039,7 @@ pub const Client = struct {
     /// for your EC2 capacity usage across On-Demand, Spot, and Capacity
     /// Reservations.
     /// Initial data processing may take several hours to complete.
-    pub fn enableCapacityManager(self: *Self, allocator: std.mem.Allocator, input: enable_capacity_manager.EnableCapacityManagerInput, options: enable_capacity_manager.Options) !enable_capacity_manager.EnableCapacityManagerOutput {
+    pub fn enableCapacityManager(self: *Self, allocator: std.mem.Allocator, input: enable_capacity_manager.EnableCapacityManagerInput, options: CallOptions) !enable_capacity_manager.EnableCapacityManagerOutput {
         return enable_capacity_manager.execute(self, allocator, input, options);
     }
 
@@ -7060,7 +7061,7 @@ pub const Client = struct {
     /// see [Supported
     /// instance
     /// types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances).
-    pub fn enableEbsEncryptionByDefault(self: *Self, allocator: std.mem.Allocator, input: enable_ebs_encryption_by_default.EnableEbsEncryptionByDefaultInput, options: enable_ebs_encryption_by_default.Options) !enable_ebs_encryption_by_default.EnableEbsEncryptionByDefaultOutput {
+    pub fn enableEbsEncryptionByDefault(self: *Self, allocator: std.mem.Allocator, input: enable_ebs_encryption_by_default.EnableEbsEncryptionByDefaultInput, options: CallOptions) !enable_ebs_encryption_by_default.EnableEbsEncryptionByDefaultOutput {
         return enable_ebs_encryption_by_default.execute(self, allocator, input, options);
     }
 
@@ -7079,7 +7080,7 @@ pub const Client = struct {
     /// You can only change these settings for Windows AMIs that you own or that
     /// have been
     /// shared with you.
-    pub fn enableFastLaunch(self: *Self, allocator: std.mem.Allocator, input: enable_fast_launch.EnableFastLaunchInput, options: enable_fast_launch.Options) !enable_fast_launch.EnableFastLaunchOutput {
+    pub fn enableFastLaunch(self: *Self, allocator: std.mem.Allocator, input: enable_fast_launch.EnableFastLaunchInput, options: CallOptions) !enable_fast_launch.EnableFastLaunchOutput {
         return enable_fast_launch.execute(self, allocator, input, options);
     }
 
@@ -7091,7 +7092,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Amazon EBS fast snapshot
     /// restore](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-fast-snapshot-restore.html) in the *Amazon EBS User Guide*.
-    pub fn enableFastSnapshotRestores(self: *Self, allocator: std.mem.Allocator, input: enable_fast_snapshot_restores.EnableFastSnapshotRestoresInput, options: enable_fast_snapshot_restores.Options) !enable_fast_snapshot_restores.EnableFastSnapshotRestoresOutput {
+    pub fn enableFastSnapshotRestores(self: *Self, allocator: std.mem.Allocator, input: enable_fast_snapshot_restores.EnableFastSnapshotRestoresInput, options: CallOptions) !enable_fast_snapshot_restores.EnableFastSnapshotRestoresOutput {
         return enable_fast_snapshot_restores.execute(self, allocator, input, options);
     }
 
@@ -7110,7 +7111,7 @@ pub const Client = struct {
     /// For more information, see [Disable an Amazon EC2
     /// AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/disable-an-ami.html)
     /// in the *Amazon EC2 User Guide*.
-    pub fn enableImage(self: *Self, allocator: std.mem.Allocator, input: enable_image.EnableImageInput, options: enable_image.Options) !enable_image.EnableImageOutput {
+    pub fn enableImage(self: *Self, allocator: std.mem.Allocator, input: enable_image.EnableImageInput, options: CallOptions) !enable_image.EnableImageOutput {
         return enable_image.execute(self, allocator, input, options);
     }
 
@@ -7128,7 +7129,7 @@ pub const Client = struct {
     /// For more information, see [Block
     /// public access to your
     /// AMIs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-public-access-to-amis.html) in the *Amazon EC2 User Guide*.
-    pub fn enableImageBlockPublicAccess(self: *Self, allocator: std.mem.Allocator, input: enable_image_block_public_access.EnableImageBlockPublicAccessInput, options: enable_image_block_public_access.Options) !enable_image_block_public_access.EnableImageBlockPublicAccessOutput {
+    pub fn enableImageBlockPublicAccess(self: *Self, allocator: std.mem.Allocator, input: enable_image_block_public_access.EnableImageBlockPublicAccessInput, options: CallOptions) !enable_image_block_public_access.EnableImageBlockPublicAccessOutput {
         return enable_image_block_public_access.execute(self, allocator, input, options);
     }
 
@@ -7138,7 +7139,7 @@ pub const Client = struct {
     /// AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html)
     /// in the
     /// *Amazon EC2 User Guide*.
-    pub fn enableImageDeprecation(self: *Self, allocator: std.mem.Allocator, input: enable_image_deprecation.EnableImageDeprecationInput, options: enable_image_deprecation.Options) !enable_image_deprecation.EnableImageDeprecationOutput {
+    pub fn enableImageDeprecation(self: *Self, allocator: std.mem.Allocator, input: enable_image_deprecation.EnableImageDeprecationInput, options: CallOptions) !enable_image_deprecation.EnableImageDeprecationOutput {
         return enable_image_deprecation.execute(self, allocator, input, options);
     }
 
@@ -7152,7 +7153,7 @@ pub const Client = struct {
     /// For more information, see [Protect an
     /// Amazon EC2 AMI from
     /// deregistration](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deregistration-protection.html) in the *Amazon EC2 User Guide*.
-    pub fn enableImageDeregistrationProtection(self: *Self, allocator: std.mem.Allocator, input: enable_image_deregistration_protection.EnableImageDeregistrationProtectionInput, options: enable_image_deregistration_protection.Options) !enable_image_deregistration_protection.EnableImageDeregistrationProtectionOutput {
+    pub fn enableImageDeregistrationProtection(self: *Self, allocator: std.mem.Allocator, input: enable_image_deregistration_protection.EnableImageDeregistrationProtectionInput, options: CallOptions) !enable_image_deregistration_protection.EnableImageDeregistrationProtectionOutput {
         return enable_image_deregistration_protection.execute(self, allocator, input, options);
     }
 
@@ -7175,7 +7176,7 @@ pub const Client = struct {
     /// information, see [
     /// Prerequisites for using SQL Server High Availability instance standby
     /// detection](https://docs.aws.amazon.com/sql-server-ec2/latest/userguide/prerequisites-and-requirements.html).
-    pub fn enableInstanceSqlHaStandbyDetections(self: *Self, allocator: std.mem.Allocator, input: enable_instance_sql_ha_standby_detections.EnableInstanceSqlHaStandbyDetectionsInput, options: enable_instance_sql_ha_standby_detections.Options) !enable_instance_sql_ha_standby_detections.EnableInstanceSqlHaStandbyDetectionsOutput {
+    pub fn enableInstanceSqlHaStandbyDetections(self: *Self, allocator: std.mem.Allocator, input: enable_instance_sql_ha_standby_detections.EnableInstanceSqlHaStandbyDetectionsInput, options: CallOptions) !enable_instance_sql_ha_standby_detections.EnableInstanceSqlHaStandbyDetectionsOutput {
         return enable_instance_sql_ha_standby_detections.execute(self, allocator, input, options);
     }
 
@@ -7183,7 +7184,7 @@ pub const Client = struct {
     /// select the Organizations management account as the IPAM admin account. For
     /// more information, see [Enable integration with
     /// Organizations](https://docs.aws.amazon.com/vpc/latest/ipam/enable-integ-ipam.html) in the *Amazon VPC IPAM User Guide*.
-    pub fn enableIpamOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: enable_ipam_organization_admin_account.EnableIpamOrganizationAdminAccountInput, options: enable_ipam_organization_admin_account.Options) !enable_ipam_organization_admin_account.EnableIpamOrganizationAdminAccountOutput {
+    pub fn enableIpamOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: enable_ipam_organization_admin_account.EnableIpamOrganizationAdminAccountInput, options: CallOptions) !enable_ipam_organization_admin_account.EnableIpamOrganizationAdminAccountOutput {
         return enable_ipam_organization_admin_account.execute(self, allocator, input, options);
     }
 
@@ -7200,7 +7201,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Define public IPv4 allocation strategy with IPAM
     /// policies](https://docs.aws.amazon.com/vpc/latest/ipam/define-public-ipv4-allocation-strategy-with-ipam-policies.html) in the *Amazon VPC IPAM User Guide*.
-    pub fn enableIpamPolicy(self: *Self, allocator: std.mem.Allocator, input: enable_ipam_policy.EnableIpamPolicyInput, options: enable_ipam_policy.Options) !enable_ipam_policy.EnableIpamPolicyOutput {
+    pub fn enableIpamPolicy(self: *Self, allocator: std.mem.Allocator, input: enable_ipam_policy.EnableIpamPolicyInput, options: CallOptions) !enable_ipam_policy.EnableIpamPolicyOutput {
         return enable_ipam_policy.execute(self, allocator, input, options);
     }
 
@@ -7214,7 +7215,7 @@ pub const Client = struct {
     /// a delegated administrator account can run a cross-account analysis using
     /// resources
     /// from the member accounts.
-    pub fn enableReachabilityAnalyzerOrganizationSharing(self: *Self, allocator: std.mem.Allocator, input: enable_reachability_analyzer_organization_sharing.EnableReachabilityAnalyzerOrganizationSharingInput, options: enable_reachability_analyzer_organization_sharing.Options) !enable_reachability_analyzer_organization_sharing.EnableReachabilityAnalyzerOrganizationSharingOutput {
+    pub fn enableReachabilityAnalyzerOrganizationSharing(self: *Self, allocator: std.mem.Allocator, input: enable_reachability_analyzer_organization_sharing.EnableReachabilityAnalyzerOrganizationSharingInput, options: CallOptions) !enable_reachability_analyzer_organization_sharing.EnableReachabilityAnalyzerOrganizationSharingOutput {
         return enable_reachability_analyzer_organization_sharing.execute(self, allocator, input, options);
     }
 
@@ -7226,7 +7227,7 @@ pub const Client = struct {
     ///
     /// For more information see [Dynamic routing in your VPC with VPC Route
     /// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
-    pub fn enableRouteServerPropagation(self: *Self, allocator: std.mem.Allocator, input: enable_route_server_propagation.EnableRouteServerPropagationInput, options: enable_route_server_propagation.Options) !enable_route_server_propagation.EnableRouteServerPropagationOutput {
+    pub fn enableRouteServerPropagation(self: *Self, allocator: std.mem.Allocator, input: enable_route_server_propagation.EnableRouteServerPropagationInput, options: CallOptions) !enable_route_server_propagation.EnableRouteServerPropagationOutput {
         return enable_route_server_propagation.execute(self, allocator, input, options);
     }
 
@@ -7236,7 +7237,7 @@ pub const Client = struct {
     /// information, see [Manage account access to the EC2 serial
     /// console](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access)
     /// in the *Amazon EC2 User Guide*.
-    pub fn enableSerialConsoleAccess(self: *Self, allocator: std.mem.Allocator, input: enable_serial_console_access.EnableSerialConsoleAccessInput, options: enable_serial_console_access.Options) !enable_serial_console_access.EnableSerialConsoleAccessOutput {
+    pub fn enableSerialConsoleAccess(self: *Self, allocator: std.mem.Allocator, input: enable_serial_console_access.EnableSerialConsoleAccessInput, options: CallOptions) !enable_serial_console_access.EnableSerialConsoleAccessOutput {
         return enable_serial_console_access.execute(self, allocator, input, options);
     }
 
@@ -7265,27 +7266,27 @@ pub const Client = struct {
     /// For more information, see [
     /// Block public access for
     /// snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/block-public-access-snapshots.html) in the *Amazon EBS User Guide*.
-    pub fn enableSnapshotBlockPublicAccess(self: *Self, allocator: std.mem.Allocator, input: enable_snapshot_block_public_access.EnableSnapshotBlockPublicAccessInput, options: enable_snapshot_block_public_access.Options) !enable_snapshot_block_public_access.EnableSnapshotBlockPublicAccessOutput {
+    pub fn enableSnapshotBlockPublicAccess(self: *Self, allocator: std.mem.Allocator, input: enable_snapshot_block_public_access.EnableSnapshotBlockPublicAccessInput, options: CallOptions) !enable_snapshot_block_public_access.EnableSnapshotBlockPublicAccessOutput {
         return enable_snapshot_block_public_access.execute(self, allocator, input, options);
     }
 
     /// Enables the specified attachment to propagate routes to the specified
     /// propagation route table.
-    pub fn enableTransitGatewayRouteTablePropagation(self: *Self, allocator: std.mem.Allocator, input: enable_transit_gateway_route_table_propagation.EnableTransitGatewayRouteTablePropagationInput, options: enable_transit_gateway_route_table_propagation.Options) !enable_transit_gateway_route_table_propagation.EnableTransitGatewayRouteTablePropagationOutput {
+    pub fn enableTransitGatewayRouteTablePropagation(self: *Self, allocator: std.mem.Allocator, input: enable_transit_gateway_route_table_propagation.EnableTransitGatewayRouteTablePropagationInput, options: CallOptions) !enable_transit_gateway_route_table_propagation.EnableTransitGatewayRouteTablePropagationOutput {
         return enable_transit_gateway_route_table_propagation.execute(self, allocator, input, options);
     }
 
     /// Enables a virtual private gateway (VGW) to propagate routes to the specified
     /// route
     /// table of a VPC.
-    pub fn enableVgwRoutePropagation(self: *Self, allocator: std.mem.Allocator, input: enable_vgw_route_propagation.EnableVgwRoutePropagationInput, options: enable_vgw_route_propagation.Options) !enable_vgw_route_propagation.EnableVgwRoutePropagationOutput {
+    pub fn enableVgwRoutePropagation(self: *Self, allocator: std.mem.Allocator, input: enable_vgw_route_propagation.EnableVgwRoutePropagationInput, options: CallOptions) !enable_vgw_route_propagation.EnableVgwRoutePropagationOutput {
         return enable_vgw_route_propagation.execute(self, allocator, input, options);
     }
 
     /// Enables I/O operations for a volume that had I/O operations disabled because
     /// the data on
     /// the volume was potentially inconsistent.
-    pub fn enableVolumeIo(self: *Self, allocator: std.mem.Allocator, input: enable_volume_io.EnableVolumeIOInput, options: enable_volume_io.Options) !enable_volume_io.EnableVolumeIOOutput {
+    pub fn enableVolumeIo(self: *Self, allocator: std.mem.Allocator, input: enable_volume_io.EnableVolumeIOInput, options: CallOptions) !enable_volume_io.EnableVolumeIOOutput {
         return enable_volume_io.execute(self, allocator, input, options);
     }
 
@@ -7300,7 +7301,7 @@ pub const Client = struct {
     /// address ranges within the `10.0.0.0/8` IP address range, excluding local
     /// routes for VPCs in the `10.0.0.0/16` and `10.1.0.0/16` IP address
     /// ranges.
-    pub fn enableVpcClassicLink(self: *Self, allocator: std.mem.Allocator, input: enable_vpc_classic_link.EnableVpcClassicLinkInput, options: enable_vpc_classic_link.Options) !enable_vpc_classic_link.EnableVpcClassicLinkOutput {
+    pub fn enableVpcClassicLink(self: *Self, allocator: std.mem.Allocator, input: enable_vpc_classic_link.EnableVpcClassicLinkInput, options: CallOptions) !enable_vpc_classic_link.EnableVpcClassicLinkOutput {
         return enable_vpc_classic_link.execute(self, allocator, input, options);
     }
 
@@ -7317,13 +7318,13 @@ pub const Client = struct {
     /// EC2-Classic instance.
     ///
     /// You must specify a VPC ID in the request.
-    pub fn enableVpcClassicLinkDnsSupport(self: *Self, allocator: std.mem.Allocator, input: enable_vpc_classic_link_dns_support.EnableVpcClassicLinkDnsSupportInput, options: enable_vpc_classic_link_dns_support.Options) !enable_vpc_classic_link_dns_support.EnableVpcClassicLinkDnsSupportOutput {
+    pub fn enableVpcClassicLinkDnsSupport(self: *Self, allocator: std.mem.Allocator, input: enable_vpc_classic_link_dns_support.EnableVpcClassicLinkDnsSupportInput, options: CallOptions) !enable_vpc_classic_link_dns_support.EnableVpcClassicLinkDnsSupportOutput {
         return enable_vpc_classic_link_dns_support.execute(self, allocator, input, options);
     }
 
     /// Downloads the client certificate revocation list for the specified Client
     /// VPN endpoint.
-    pub fn exportClientVpnClientCertificateRevocationList(self: *Self, allocator: std.mem.Allocator, input: export_client_vpn_client_certificate_revocation_list.ExportClientVpnClientCertificateRevocationListInput, options: export_client_vpn_client_certificate_revocation_list.Options) !export_client_vpn_client_certificate_revocation_list.ExportClientVpnClientCertificateRevocationListOutput {
+    pub fn exportClientVpnClientCertificateRevocationList(self: *Self, allocator: std.mem.Allocator, input: export_client_vpn_client_certificate_revocation_list.ExportClientVpnClientCertificateRevocationListInput, options: CallOptions) !export_client_vpn_client_certificate_revocation_list.ExportClientVpnClientCertificateRevocationListOutput {
         return export_client_vpn_client_certificate_revocation_list.execute(self, allocator, input, options);
     }
 
@@ -7332,7 +7333,7 @@ pub const Client = struct {
     /// file includes the Client VPN endpoint and certificate information clients
     /// need to establish a connection
     /// with the Client VPN endpoint.
-    pub fn exportClientVpnClientConfiguration(self: *Self, allocator: std.mem.Allocator, input: export_client_vpn_client_configuration.ExportClientVpnClientConfigurationInput, options: export_client_vpn_client_configuration.Options) !export_client_vpn_client_configuration.ExportClientVpnClientConfigurationOutput {
+    pub fn exportClientVpnClientConfiguration(self: *Self, allocator: std.mem.Allocator, input: export_client_vpn_client_configuration.ExportClientVpnClientConfigurationInput, options: CallOptions) !export_client_vpn_client_configuration.ExportClientVpnClientConfigurationOutput {
         return export_client_vpn_client_configuration.execute(self, allocator, input, options);
     }
 
@@ -7341,7 +7342,7 @@ pub const Client = struct {
     /// directly from an Amazon Machine Image
     /// (AMI)](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport_image.html) in the
     /// *VM Import/Export User Guide*.
-    pub fn exportImage(self: *Self, allocator: std.mem.Allocator, input: export_image.ExportImageInput, options: export_image.Options) !export_image.ExportImageOutput {
+    pub fn exportImage(self: *Self, allocator: std.mem.Allocator, input: export_image.ExportImageInput, options: CallOptions) !export_image.ExportImageOutput {
         return export_image.execute(self, allocator, input, options);
     }
 
@@ -7355,19 +7356,19 @@ pub const Client = struct {
     /// [Export route tables
     /// to Amazon
     /// S3](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-route-tables.html#tgw-export-route-tables) in the *Amazon Web Services Transit Gateways Guide*.
-    pub fn exportTransitGatewayRoutes(self: *Self, allocator: std.mem.Allocator, input: export_transit_gateway_routes.ExportTransitGatewayRoutesInput, options: export_transit_gateway_routes.Options) !export_transit_gateway_routes.ExportTransitGatewayRoutesOutput {
+    pub fn exportTransitGatewayRoutes(self: *Self, allocator: std.mem.Allocator, input: export_transit_gateway_routes.ExportTransitGatewayRoutesInput, options: CallOptions) !export_transit_gateway_routes.ExportTransitGatewayRoutesOutput {
         return export_transit_gateway_routes.execute(self, allocator, input, options);
     }
 
     /// Exports the client configuration for a Verified Access instance.
-    pub fn exportVerifiedAccessInstanceClientConfiguration(self: *Self, allocator: std.mem.Allocator, input: export_verified_access_instance_client_configuration.ExportVerifiedAccessInstanceClientConfigurationInput, options: export_verified_access_instance_client_configuration.Options) !export_verified_access_instance_client_configuration.ExportVerifiedAccessInstanceClientConfigurationOutput {
+    pub fn exportVerifiedAccessInstanceClientConfiguration(self: *Self, allocator: std.mem.Allocator, input: export_verified_access_instance_client_configuration.ExportVerifiedAccessInstanceClientConfigurationInput, options: CallOptions) !export_verified_access_instance_client_configuration.ExportVerifiedAccessInstanceClientConfigurationOutput {
         return export_verified_access_instance_client_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns the currently negotiated security parameters for an active VPN
     /// tunnel, including IKE version, DH groups, encryption algorithms, and
     /// integrity algorithms.
-    pub fn getActiveVpnTunnelStatus(self: *Self, allocator: std.mem.Allocator, input: get_active_vpn_tunnel_status.GetActiveVpnTunnelStatusInput, options: get_active_vpn_tunnel_status.Options) !get_active_vpn_tunnel_status.GetActiveVpnTunnelStatusOutput {
+    pub fn getActiveVpnTunnelStatus(self: *Self, allocator: std.mem.Allocator, input: get_active_vpn_tunnel_status.GetActiveVpnTunnelStatusInput, options: CallOptions) !get_active_vpn_tunnel_status.GetActiveVpnTunnelStatusOutput {
         return get_active_vpn_tunnel_status.execute(self, allocator, input, options);
     }
 
@@ -7385,7 +7386,7 @@ pub const Client = struct {
     /// Amazon EC2 with Allowed
     /// AMIs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html) in
     /// *Amazon EC2 User Guide*.
-    pub fn getAllowedImagesSettings(self: *Self, allocator: std.mem.Allocator, input: get_allowed_images_settings.GetAllowedImagesSettingsInput, options: get_allowed_images_settings.Options) !get_allowed_images_settings.GetAllowedImagesSettingsOutput {
+    pub fn getAllowedImagesSettings(self: *Self, allocator: std.mem.Allocator, input: get_allowed_images_settings.GetAllowedImagesSettingsInput, options: CallOptions) !get_allowed_images_settings.GetAllowedImagesSettingsOutput {
         return get_allowed_images_settings.execute(self, allocator, input, options);
     }
 
@@ -7396,25 +7397,25 @@ pub const Client = struct {
     /// certificate chain, and encrypted private key bundle are stored, and the ARN
     /// of the KMS key
     /// that's used to encrypt the private key.
-    pub fn getAssociatedEnclaveCertificateIamRoles(self: *Self, allocator: std.mem.Allocator, input: get_associated_enclave_certificate_iam_roles.GetAssociatedEnclaveCertificateIamRolesInput, options: get_associated_enclave_certificate_iam_roles.Options) !get_associated_enclave_certificate_iam_roles.GetAssociatedEnclaveCertificateIamRolesOutput {
+    pub fn getAssociatedEnclaveCertificateIamRoles(self: *Self, allocator: std.mem.Allocator, input: get_associated_enclave_certificate_iam_roles.GetAssociatedEnclaveCertificateIamRolesInput, options: CallOptions) !get_associated_enclave_certificate_iam_roles.GetAssociatedEnclaveCertificateIamRolesOutput {
         return get_associated_enclave_certificate_iam_roles.execute(self, allocator, input, options);
     }
 
     /// Gets information about the IPv6 CIDR block associations for a specified IPv6
     /// address pool.
-    pub fn getAssociatedIpv6PoolCidrs(self: *Self, allocator: std.mem.Allocator, input: get_associated_ipv_6_pool_cidrs.GetAssociatedIpv6PoolCidrsInput, options: get_associated_ipv_6_pool_cidrs.Options) !get_associated_ipv_6_pool_cidrs.GetAssociatedIpv6PoolCidrsOutput {
+    pub fn getAssociatedIpv6PoolCidrs(self: *Self, allocator: std.mem.Allocator, input: get_associated_ipv_6_pool_cidrs.GetAssociatedIpv6PoolCidrsInput, options: CallOptions) !get_associated_ipv_6_pool_cidrs.GetAssociatedIpv6PoolCidrsOutput {
         return get_associated_ipv_6_pool_cidrs.execute(self, allocator, input, options);
     }
 
     /// Gets network performance data.
-    pub fn getAwsNetworkPerformanceData(self: *Self, allocator: std.mem.Allocator, input: get_aws_network_performance_data.GetAwsNetworkPerformanceDataInput, options: get_aws_network_performance_data.Options) !get_aws_network_performance_data.GetAwsNetworkPerformanceDataOutput {
+    pub fn getAwsNetworkPerformanceData(self: *Self, allocator: std.mem.Allocator, input: get_aws_network_performance_data.GetAwsNetworkPerformanceDataInput, options: CallOptions) !get_aws_network_performance_data.GetAwsNetworkPerformanceDataOutput {
         return get_aws_network_performance_data.execute(self, allocator, input, options);
     }
 
     /// Retrieves the current configuration and status of EC2 Capacity Manager for
     /// your account, including enablement status, Organizations access settings,
     /// and data ingestion status.
-    pub fn getCapacityManagerAttributes(self: *Self, allocator: std.mem.Allocator, input: get_capacity_manager_attributes.GetCapacityManagerAttributesInput, options: get_capacity_manager_attributes.Options) !get_capacity_manager_attributes.GetCapacityManagerAttributesOutput {
+    pub fn getCapacityManagerAttributes(self: *Self, allocator: std.mem.Allocator, input: get_capacity_manager_attributes.GetCapacityManagerAttributesInput, options: CallOptions) !get_capacity_manager_attributes.GetCapacityManagerAttributesOutput {
         return get_capacity_manager_attributes.execute(self, allocator, input, options);
     }
 
@@ -7422,7 +7423,7 @@ pub const Client = struct {
     /// data for metrics like unused capacity, utilization rates, and costs
     /// across On-Demand, Spot, and Capacity Reservations. Data can be grouped and
     /// filtered by various dimensions such as region, account, and instance family.
-    pub fn getCapacityManagerMetricData(self: *Self, allocator: std.mem.Allocator, input: get_capacity_manager_metric_data.GetCapacityManagerMetricDataInput, options: get_capacity_manager_metric_data.Options) !get_capacity_manager_metric_data.GetCapacityManagerMetricDataOutput {
+    pub fn getCapacityManagerMetricData(self: *Self, allocator: std.mem.Allocator, input: get_capacity_manager_metric_data.GetCapacityManagerMetricDataInput, options: CallOptions) !get_capacity_manager_metric_data.GetCapacityManagerMetricDataOutput {
         return get_capacity_manager_metric_data.execute(self, allocator, input, options);
     }
 
@@ -7430,7 +7431,7 @@ pub const Client = struct {
     /// specified time range. This is useful for discovering what accounts,
     /// regions, instance families, and other dimensions have data available for
     /// filtering and grouping.
-    pub fn getCapacityManagerMetricDimensions(self: *Self, allocator: std.mem.Allocator, input: get_capacity_manager_metric_dimensions.GetCapacityManagerMetricDimensionsInput, options: get_capacity_manager_metric_dimensions.Options) !get_capacity_manager_metric_dimensions.GetCapacityManagerMetricDimensionsOutput {
+    pub fn getCapacityManagerMetricDimensions(self: *Self, allocator: std.mem.Allocator, input: get_capacity_manager_metric_dimensions.GetCapacityManagerMetricDimensionsInput, options: CallOptions) !get_capacity_manager_metric_dimensions.GetCapacityManagerMetricDimensionsOutput {
         return get_capacity_manager_metric_dimensions.execute(self, allocator, input, options);
     }
 
@@ -7441,12 +7442,12 @@ pub const Client = struct {
     /// capacity. If the Capacity
     /// Reservation is not shared, it shows only the Capacity Reservation owner's
     /// usage.
-    pub fn getCapacityReservationUsage(self: *Self, allocator: std.mem.Allocator, input: get_capacity_reservation_usage.GetCapacityReservationUsageInput, options: get_capacity_reservation_usage.Options) !get_capacity_reservation_usage.GetCapacityReservationUsageOutput {
+    pub fn getCapacityReservationUsage(self: *Self, allocator: std.mem.Allocator, input: get_capacity_reservation_usage.GetCapacityReservationUsageInput, options: CallOptions) !get_capacity_reservation_usage.GetCapacityReservationUsageOutput {
         return get_capacity_reservation_usage.execute(self, allocator, input, options);
     }
 
     /// Describes the allocations from the specified customer-owned address pool.
-    pub fn getCoipPoolUsage(self: *Self, allocator: std.mem.Allocator, input: get_coip_pool_usage.GetCoipPoolUsageInput, options: get_coip_pool_usage.Options) !get_coip_pool_usage.GetCoipPoolUsageOutput {
+    pub fn getCoipPoolUsage(self: *Self, allocator: std.mem.Allocator, input: get_coip_pool_usage.GetCoipPoolUsageInput, options: CallOptions) !get_coip_pool_usage.GetCoipPoolUsageOutput {
         return get_coip_pool_usage.execute(self, allocator, input, options);
     }
 
@@ -7461,7 +7462,7 @@ pub const Client = struct {
     /// For more information, see [Instance
     /// console
     /// output](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html#instance-console-console-output) in the *Amazon EC2 User Guide*.
-    pub fn getConsoleOutput(self: *Self, allocator: std.mem.Allocator, input: get_console_output.GetConsoleOutputInput, options: get_console_output.Options) !get_console_output.GetConsoleOutputOutput {
+    pub fn getConsoleOutput(self: *Self, allocator: std.mem.Allocator, input: get_console_output.GetConsoleOutputInput, options: CallOptions) !get_console_output.GetConsoleOutputOutput {
         return get_console_output.execute(self, allocator, input, options);
     }
 
@@ -7472,7 +7473,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Instance console
     /// output](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshoot-unreachable-instance.html#instance-console-console-output) in the *Amazon EC2 User Guide*.
-    pub fn getConsoleScreenshot(self: *Self, allocator: std.mem.Allocator, input: get_console_screenshot.GetConsoleScreenshotInput, options: get_console_screenshot.Options) !get_console_screenshot.GetConsoleScreenshotOutput {
+    pub fn getConsoleScreenshot(self: *Self, allocator: std.mem.Allocator, input: get_console_screenshot.GetConsoleScreenshotInput, options: CallOptions) !get_console_screenshot.GetConsoleScreenshotOutput {
         return get_console_screenshot.execute(self, allocator, input, options);
     }
 
@@ -7491,7 +7492,7 @@ pub const Client = struct {
     /// declarative
     /// policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative_status-report.html) in the
     /// *Amazon Web Services Organizations User Guide*.
-    pub fn getDeclarativePoliciesReportSummary(self: *Self, allocator: std.mem.Allocator, input: get_declarative_policies_report_summary.GetDeclarativePoliciesReportSummaryInput, options: get_declarative_policies_report_summary.Options) !get_declarative_policies_report_summary.GetDeclarativePoliciesReportSummaryOutput {
+    pub fn getDeclarativePoliciesReportSummary(self: *Self, allocator: std.mem.Allocator, input: get_declarative_policies_report_summary.GetDeclarativePoliciesReportSummaryInput, options: CallOptions) !get_declarative_policies_report_summary.GetDeclarativePoliciesReportSummaryOutput {
         return get_declarative_policies_report_summary.execute(self, allocator, input, options);
     }
 
@@ -7502,7 +7503,7 @@ pub const Client = struct {
     /// For more information, see [Burstable
     /// performance
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide*.
-    pub fn getDefaultCreditSpecification(self: *Self, allocator: std.mem.Allocator, input: get_default_credit_specification.GetDefaultCreditSpecificationInput, options: get_default_credit_specification.Options) !get_default_credit_specification.GetDefaultCreditSpecificationOutput {
+    pub fn getDefaultCreditSpecification(self: *Self, allocator: std.mem.Allocator, input: get_default_credit_specification.GetDefaultCreditSpecificationInput, options: CallOptions) !get_default_credit_specification.GetDefaultCreditSpecificationOutput {
         return get_default_credit_specification.execute(self, allocator, input, options);
     }
 
@@ -7512,7 +7513,7 @@ pub const Client = struct {
     /// For more information, see [Amazon EBS
     /// encryption](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html)
     /// in the *Amazon EBS User Guide*.
-    pub fn getEbsDefaultKmsKeyId(self: *Self, allocator: std.mem.Allocator, input: get_ebs_default_kms_key_id.GetEbsDefaultKmsKeyIdInput, options: get_ebs_default_kms_key_id.Options) !get_ebs_default_kms_key_id.GetEbsDefaultKmsKeyIdOutput {
+    pub fn getEbsDefaultKmsKeyId(self: *Self, allocator: std.mem.Allocator, input: get_ebs_default_kms_key_id.GetEbsDefaultKmsKeyIdInput, options: CallOptions) !get_ebs_default_kms_key_id.GetEbsDefaultKmsKeyIdOutput {
         return get_ebs_default_kms_key_id.execute(self, allocator, input, options);
     }
 
@@ -7523,7 +7524,7 @@ pub const Client = struct {
     /// For more information, see [Amazon EBS
     /// encryption](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html)
     /// in the *Amazon EBS User Guide*.
-    pub fn getEbsEncryptionByDefault(self: *Self, allocator: std.mem.Allocator, input: get_ebs_encryption_by_default.GetEbsEncryptionByDefaultInput, options: get_ebs_encryption_by_default.Options) !get_ebs_encryption_by_default.GetEbsEncryptionByDefaultOutput {
+    pub fn getEbsEncryptionByDefault(self: *Self, allocator: std.mem.Allocator, input: get_ebs_encryption_by_default.GetEbsEncryptionByDefaultInput, options: CallOptions) !get_ebs_encryption_by_default.GetEbsEncryptionByDefaultOutput {
         return get_ebs_encryption_by_default.execute(self, allocator, input, options);
     }
 
@@ -7537,7 +7538,7 @@ pub const Client = struct {
     /// then the services fallback to Amazon-provided IP addresses. A policy can be
     /// applied to an individual Amazon Web Services account or an entity within
     /// Amazon Web Services Organizations.
-    pub fn getEnabledIpamPolicy(self: *Self, allocator: std.mem.Allocator, input: get_enabled_ipam_policy.GetEnabledIpamPolicyInput, options: get_enabled_ipam_policy.Options) !get_enabled_ipam_policy.GetEnabledIpamPolicyOutput {
+    pub fn getEnabledIpamPolicy(self: *Self, allocator: std.mem.Allocator, input: get_enabled_ipam_policy.GetEnabledIpamPolicyInput, options: CallOptions) !get_enabled_ipam_policy.GetEnabledIpamPolicyOutput {
         return get_enabled_ipam_policy.execute(self, allocator, input, options);
     }
 
@@ -7561,12 +7562,12 @@ pub const Client = struct {
     ///
     /// `GetFlowLogsIntegrationTemplate` does not support integration between
     /// Amazon Web Services Transit Gateway Flow Logs and Amazon Athena.
-    pub fn getFlowLogsIntegrationTemplate(self: *Self, allocator: std.mem.Allocator, input: get_flow_logs_integration_template.GetFlowLogsIntegrationTemplateInput, options: get_flow_logs_integration_template.Options) !get_flow_logs_integration_template.GetFlowLogsIntegrationTemplateOutput {
+    pub fn getFlowLogsIntegrationTemplate(self: *Self, allocator: std.mem.Allocator, input: get_flow_logs_integration_template.GetFlowLogsIntegrationTemplateInput, options: CallOptions) !get_flow_logs_integration_template.GetFlowLogsIntegrationTemplateOutput {
         return get_flow_logs_integration_template.execute(self, allocator, input, options);
     }
 
     /// Lists the resource groups to which a Capacity Reservation has been added.
-    pub fn getGroupsForCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: get_groups_for_capacity_reservation.GetGroupsForCapacityReservationInput, options: get_groups_for_capacity_reservation.Options) !get_groups_for_capacity_reservation.GetGroupsForCapacityReservationOutput {
+    pub fn getGroupsForCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: get_groups_for_capacity_reservation.GetGroupsForCapacityReservationInput, options: CallOptions) !get_groups_for_capacity_reservation.GetGroupsForCapacityReservationOutput {
         return get_groups_for_capacity_reservation.execute(self, allocator, input, options);
     }
 
@@ -7578,7 +7579,7 @@ pub const Client = struct {
     ///
     /// This is a preview of the PurchaseHostReservation action and does not
     /// result in the offering being purchased.
-    pub fn getHostReservationPurchasePreview(self: *Self, allocator: std.mem.Allocator, input: get_host_reservation_purchase_preview.GetHostReservationPurchasePreviewInput, options: get_host_reservation_purchase_preview.Options) !get_host_reservation_purchase_preview.GetHostReservationPurchasePreviewOutput {
+    pub fn getHostReservationPurchasePreview(self: *Self, allocator: std.mem.Allocator, input: get_host_reservation_purchase_preview.GetHostReservationPurchasePreviewInput, options: CallOptions) !get_host_reservation_purchase_preview.GetHostReservationPurchasePreviewOutput {
         return get_host_reservation_purchase_preview.execute(self, allocator, input, options);
     }
 
@@ -7587,7 +7588,7 @@ pub const Client = struct {
     /// AMI. For more information, see [AMI
     /// ancestry](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-ancestry.html) in
     /// *Amazon EC2 User Guide*.
-    pub fn getImageAncestry(self: *Self, allocator: std.mem.Allocator, input: get_image_ancestry.GetImageAncestryInput, options: get_image_ancestry.Options) !get_image_ancestry.GetImageAncestryOutput {
+    pub fn getImageAncestry(self: *Self, allocator: std.mem.Allocator, input: get_image_ancestry.GetImageAncestryInput, options: CallOptions) !get_image_ancestry.GetImageAncestryOutput {
         return get_image_ancestry.execute(self, allocator, input, options);
     }
 
@@ -7597,7 +7598,7 @@ pub const Client = struct {
     /// For more information, see [Block
     /// public access to your
     /// AMIs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-public-access-to-amis.html) in the *Amazon EC2 User Guide*.
-    pub fn getImageBlockPublicAccessState(self: *Self, allocator: std.mem.Allocator, input: get_image_block_public_access_state.GetImageBlockPublicAccessStateInput, options: get_image_block_public_access_state.Options) !get_image_block_public_access_state.GetImageBlockPublicAccessStateOutput {
+    pub fn getImageBlockPublicAccessState(self: *Self, allocator: std.mem.Allocator, input: get_image_block_public_access_state.GetImageBlockPublicAccessStateInput, options: CallOptions) !get_image_block_public_access_state.GetImageBlockPublicAccessStateOutput {
         return get_image_block_public_access_state.execute(self, allocator, input, options);
     }
 
@@ -7608,13 +7609,13 @@ pub const Client = struct {
     /// For more information, see [Order of precedence for instance metadata
     /// options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence) in the
     /// *Amazon EC2 User Guide*.
-    pub fn getInstanceMetadataDefaults(self: *Self, allocator: std.mem.Allocator, input: get_instance_metadata_defaults.GetInstanceMetadataDefaultsInput, options: get_instance_metadata_defaults.Options) !get_instance_metadata_defaults.GetInstanceMetadataDefaultsOutput {
+    pub fn getInstanceMetadataDefaults(self: *Self, allocator: std.mem.Allocator, input: get_instance_metadata_defaults.GetInstanceMetadataDefaultsInput, options: CallOptions) !get_instance_metadata_defaults.GetInstanceMetadataDefaultsOutput {
         return get_instance_metadata_defaults.execute(self, allocator, input, options);
     }
 
     /// Gets the public endorsement key associated with the Nitro Trusted
     /// Platform Module (NitroTPM) for the specified instance.
-    pub fn getInstanceTpmEkPub(self: *Self, allocator: std.mem.Allocator, input: get_instance_tpm_ek_pub.GetInstanceTpmEkPubInput, options: get_instance_tpm_ek_pub.Options) !get_instance_tpm_ek_pub.GetInstanceTpmEkPubOutput {
+    pub fn getInstanceTpmEkPub(self: *Self, allocator: std.mem.Allocator, input: get_instance_tpm_ek_pub.GetInstanceTpmEkPubInput, options: CallOptions) !get_instance_tpm_ek_pub.GetInstanceTpmEkPubOutput {
         return get_instance_tpm_ek_pub.execute(self, allocator, input, options);
     }
 
@@ -7637,7 +7638,7 @@ pub const Client = struct {
     /// mixed instance groups using attribute-based instance type
     /// selection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
-    pub fn getInstanceTypesFromInstanceRequirements(self: *Self, allocator: std.mem.Allocator, input: get_instance_types_from_instance_requirements.GetInstanceTypesFromInstanceRequirementsInput, options: get_instance_types_from_instance_requirements.Options) !get_instance_types_from_instance_requirements.GetInstanceTypesFromInstanceRequirementsOutput {
+    pub fn getInstanceTypesFromInstanceRequirements(self: *Self, allocator: std.mem.Allocator, input: get_instance_types_from_instance_requirements.GetInstanceTypesFromInstanceRequirementsInput, options: CallOptions) !get_instance_types_from_instance_requirements.GetInstanceTypesFromInstanceRequirementsOutput {
         return get_instance_types_from_instance_requirements.execute(self, allocator, input, options);
     }
 
@@ -7662,14 +7663,14 @@ pub const Client = struct {
     /// For more information, see [UEFI Secure
     /// Boot](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn getInstanceUefiData(self: *Self, allocator: std.mem.Allocator, input: get_instance_uefi_data.GetInstanceUefiDataInput, options: get_instance_uefi_data.Options) !get_instance_uefi_data.GetInstanceUefiDataOutput {
+    pub fn getInstanceUefiData(self: *Self, allocator: std.mem.Allocator, input: get_instance_uefi_data.GetInstanceUefiDataInput, options: CallOptions) !get_instance_uefi_data.GetInstanceUefiDataOutput {
         return get_instance_uefi_data.execute(self, allocator, input, options);
     }
 
     /// Retrieve historical information about a CIDR within an IPAM scope. For more
     /// information, see [View the history of IP
     /// addresses](https://docs.aws.amazon.com/vpc/latest/ipam/view-history-cidr-ipam.html) in the *Amazon VPC IPAM User Guide*.
-    pub fn getIpamAddressHistory(self: *Self, allocator: std.mem.Allocator, input: get_ipam_address_history.GetIpamAddressHistoryInput, options: get_ipam_address_history.Options) !get_ipam_address_history.GetIpamAddressHistoryOutput {
+    pub fn getIpamAddressHistory(self: *Self, allocator: std.mem.Allocator, input: get_ipam_address_history.GetIpamAddressHistoryInput, options: CallOptions) !get_ipam_address_history.GetIpamAddressHistoryOutput {
         return get_ipam_address_history.execute(self, allocator, input, options);
     }
 
@@ -7678,12 +7679,12 @@ pub const Client = struct {
     /// integrated IPAM with Amazon Web Services Organizations, all accounts in the
     /// organization are discovered accounts. Only the IPAM account can get all
     /// discovered accounts in the organization.
-    pub fn getIpamDiscoveredAccounts(self: *Self, allocator: std.mem.Allocator, input: get_ipam_discovered_accounts.GetIpamDiscoveredAccountsInput, options: get_ipam_discovered_accounts.Options) !get_ipam_discovered_accounts.GetIpamDiscoveredAccountsOutput {
+    pub fn getIpamDiscoveredAccounts(self: *Self, allocator: std.mem.Allocator, input: get_ipam_discovered_accounts.GetIpamDiscoveredAccountsInput, options: CallOptions) !get_ipam_discovered_accounts.GetIpamDiscoveredAccountsOutput {
         return get_ipam_discovered_accounts.execute(self, allocator, input, options);
     }
 
     /// Gets the public IP addresses that have been discovered by IPAM.
-    pub fn getIpamDiscoveredPublicAddresses(self: *Self, allocator: std.mem.Allocator, input: get_ipam_discovered_public_addresses.GetIpamDiscoveredPublicAddressesInput, options: get_ipam_discovered_public_addresses.Options) !get_ipam_discovered_public_addresses.GetIpamDiscoveredPublicAddressesOutput {
+    pub fn getIpamDiscoveredPublicAddresses(self: *Self, allocator: std.mem.Allocator, input: get_ipam_discovered_public_addresses.GetIpamDiscoveredPublicAddressesInput, options: CallOptions) !get_ipam_discovered_public_addresses.GetIpamDiscoveredPublicAddressesOutput {
         return get_ipam_discovered_public_addresses.execute(self, allocator, input, options);
     }
 
@@ -7691,7 +7692,7 @@ pub const Client = struct {
     /// discovery. A discovered resource is a resource CIDR monitored under a
     /// resource discovery. The following resources can be discovered: VPCs, Public
     /// IPv4 pools, VPC subnets, and Elastic IP addresses.
-    pub fn getIpamDiscoveredResourceCidrs(self: *Self, allocator: std.mem.Allocator, input: get_ipam_discovered_resource_cidrs.GetIpamDiscoveredResourceCidrsInput, options: get_ipam_discovered_resource_cidrs.Options) !get_ipam_discovered_resource_cidrs.GetIpamDiscoveredResourceCidrsOutput {
+    pub fn getIpamDiscoveredResourceCidrs(self: *Self, allocator: std.mem.Allocator, input: get_ipam_discovered_resource_cidrs.GetIpamDiscoveredResourceCidrsInput, options: CallOptions) !get_ipam_discovered_resource_cidrs.GetIpamDiscoveredResourceCidrsOutput {
         return get_ipam_discovered_resource_cidrs.execute(self, allocator, input, options);
     }
 
@@ -7709,7 +7710,7 @@ pub const Client = struct {
     /// Allocation rules are optional configurations within an IPAM policy that map
     /// Amazon Web Services resource types to specific IPAM pools. If no rules are
     /// defined, the resource types default to using Amazon-provided IP addresses.
-    pub fn getIpamPolicyAllocationRules(self: *Self, allocator: std.mem.Allocator, input: get_ipam_policy_allocation_rules.GetIpamPolicyAllocationRulesInput, options: get_ipam_policy_allocation_rules.Options) !get_ipam_policy_allocation_rules.GetIpamPolicyAllocationRulesOutput {
+    pub fn getIpamPolicyAllocationRules(self: *Self, allocator: std.mem.Allocator, input: get_ipam_policy_allocation_rules.GetIpamPolicyAllocationRulesInput, options: CallOptions) !get_ipam_policy_allocation_rules.GetIpamPolicyAllocationRulesOutput {
         return get_ipam_policy_allocation_rules.execute(self, allocator, input, options);
     }
 
@@ -7727,7 +7728,7 @@ pub const Client = struct {
     /// A target can be an individual Amazon Web Services account or an entity
     /// within an Amazon Web Services Organization to which an IPAM policy can be
     /// applied.
-    pub fn getIpamPolicyOrganizationTargets(self: *Self, allocator: std.mem.Allocator, input: get_ipam_policy_organization_targets.GetIpamPolicyOrganizationTargetsInput, options: get_ipam_policy_organization_targets.Options) !get_ipam_policy_organization_targets.GetIpamPolicyOrganizationTargetsOutput {
+    pub fn getIpamPolicyOrganizationTargets(self: *Self, allocator: std.mem.Allocator, input: get_ipam_policy_organization_targets.GetIpamPolicyOrganizationTargetsInput, options: CallOptions) !get_ipam_policy_organization_targets.GetIpamPolicyOrganizationTargetsOutput {
         return get_ipam_policy_organization_targets.execute(self, allocator, input, options);
     }
 
@@ -7737,26 +7738,26 @@ pub const Client = struct {
     ///
     /// If you use this action after
     /// [AllocateIpamPoolCidr](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateIpamPoolCidr.html) or [ReleaseIpamPoolAllocation](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html), note that all EC2 API actions follow an [eventual consistency](https://docs.aws.amazon.com/ec2/latest/devguide/eventual-consistency.html) model.
-    pub fn getIpamPoolAllocations(self: *Self, allocator: std.mem.Allocator, input: get_ipam_pool_allocations.GetIpamPoolAllocationsInput, options: get_ipam_pool_allocations.Options) !get_ipam_pool_allocations.GetIpamPoolAllocationsOutput {
+    pub fn getIpamPoolAllocations(self: *Self, allocator: std.mem.Allocator, input: get_ipam_pool_allocations.GetIpamPoolAllocationsInput, options: CallOptions) !get_ipam_pool_allocations.GetIpamPoolAllocationsOutput {
         return get_ipam_pool_allocations.execute(self, allocator, input, options);
     }
 
     /// Get the CIDRs provisioned to an IPAM pool.
-    pub fn getIpamPoolCidrs(self: *Self, allocator: std.mem.Allocator, input: get_ipam_pool_cidrs.GetIpamPoolCidrsInput, options: get_ipam_pool_cidrs.Options) !get_ipam_pool_cidrs.GetIpamPoolCidrsOutput {
+    pub fn getIpamPoolCidrs(self: *Self, allocator: std.mem.Allocator, input: get_ipam_pool_cidrs.GetIpamPoolCidrsInput, options: CallOptions) !get_ipam_pool_cidrs.GetIpamPoolCidrsOutput {
         return get_ipam_pool_cidrs.execute(self, allocator, input, options);
     }
 
     /// Retrieves the CIDR selection rules for an IPAM prefix list resolver. Use
     /// this operation to view the business logic that determines which CIDRs are
     /// selected for synchronization with prefix lists.
-    pub fn getIpamPrefixListResolverRules(self: *Self, allocator: std.mem.Allocator, input: get_ipam_prefix_list_resolver_rules.GetIpamPrefixListResolverRulesInput, options: get_ipam_prefix_list_resolver_rules.Options) !get_ipam_prefix_list_resolver_rules.GetIpamPrefixListResolverRulesOutput {
+    pub fn getIpamPrefixListResolverRules(self: *Self, allocator: std.mem.Allocator, input: get_ipam_prefix_list_resolver_rules.GetIpamPrefixListResolverRulesInput, options: CallOptions) !get_ipam_prefix_list_resolver_rules.GetIpamPrefixListResolverRulesOutput {
         return get_ipam_prefix_list_resolver_rules.execute(self, allocator, input, options);
     }
 
     /// Retrieves the CIDR entries for a specific version of an IPAM prefix list
     /// resolver. This shows the actual CIDRs that were selected and synchronized at
     /// a particular point in time.
-    pub fn getIpamPrefixListResolverVersionEntries(self: *Self, allocator: std.mem.Allocator, input: get_ipam_prefix_list_resolver_version_entries.GetIpamPrefixListResolverVersionEntriesInput, options: get_ipam_prefix_list_resolver_version_entries.Options) !get_ipam_prefix_list_resolver_version_entries.GetIpamPrefixListResolverVersionEntriesOutput {
+    pub fn getIpamPrefixListResolverVersionEntries(self: *Self, allocator: std.mem.Allocator, input: get_ipam_prefix_list_resolver_version_entries.GetIpamPrefixListResolverVersionEntriesInput, options: CallOptions) !get_ipam_prefix_list_resolver_version_entries.GetIpamPrefixListResolverVersionEntriesOutput {
         return get_ipam_prefix_list_resolver_version_entries.execute(self, allocator, input, options);
     }
 
@@ -7789,7 +7790,7 @@ pub const Client = struct {
     /// IPAM automatically detects the change and creates a new version.
     ///
     /// **Version 2 CIDRs:** 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16
-    pub fn getIpamPrefixListResolverVersions(self: *Self, allocator: std.mem.Allocator, input: get_ipam_prefix_list_resolver_versions.GetIpamPrefixListResolverVersionsInput, options: get_ipam_prefix_list_resolver_versions.Options) !get_ipam_prefix_list_resolver_versions.GetIpamPrefixListResolverVersionsOutput {
+    pub fn getIpamPrefixListResolverVersions(self: *Self, allocator: std.mem.Allocator, input: get_ipam_prefix_list_resolver_versions.GetIpamPrefixListResolverVersionsInput, options: CallOptions) !get_ipam_prefix_list_resolver_versions.GetIpamPrefixListResolverVersionsOutput {
         return get_ipam_prefix_list_resolver_versions.execute(self, allocator, input, options);
     }
 
@@ -7798,7 +7799,7 @@ pub const Client = struct {
     /// all of the resource discoveries is returned. A resource discovery is an IPAM
     /// component that enables IPAM to manage and monitor resources that belong to
     /// the owning account.
-    pub fn getIpamResourceCidrs(self: *Self, allocator: std.mem.Allocator, input: get_ipam_resource_cidrs.GetIpamResourceCidrsInput, options: get_ipam_resource_cidrs.Options) !get_ipam_resource_cidrs.GetIpamResourceCidrsOutput {
+    pub fn getIpamResourceCidrs(self: *Self, allocator: std.mem.Allocator, input: get_ipam_resource_cidrs.GetIpamResourceCidrsInput, options: CallOptions) !get_ipam_resource_cidrs.GetIpamResourceCidrsOutput {
         return get_ipam_resource_cidrs.execute(self, allocator, input, options);
     }
 
@@ -7814,28 +7815,28 @@ pub const Client = struct {
     /// `DescribeInstanceCreditSpecifications`, `DescribeVolumes`, and
     /// `DescribeInstanceAttribute`.
     /// Or, you can allow `describe*` depending on your instance requirements.
-    pub fn getLaunchTemplateData(self: *Self, allocator: std.mem.Allocator, input: get_launch_template_data.GetLaunchTemplateDataInput, options: get_launch_template_data.Options) !get_launch_template_data.GetLaunchTemplateDataOutput {
+    pub fn getLaunchTemplateData(self: *Self, allocator: std.mem.Allocator, input: get_launch_template_data.GetLaunchTemplateDataInput, options: CallOptions) !get_launch_template_data.GetLaunchTemplateDataOutput {
         return get_launch_template_data.execute(self, allocator, input, options);
     }
 
     /// Gets information about the resources that are associated with the specified
     /// managed prefix list.
-    pub fn getManagedPrefixListAssociations(self: *Self, allocator: std.mem.Allocator, input: get_managed_prefix_list_associations.GetManagedPrefixListAssociationsInput, options: get_managed_prefix_list_associations.Options) !get_managed_prefix_list_associations.GetManagedPrefixListAssociationsOutput {
+    pub fn getManagedPrefixListAssociations(self: *Self, allocator: std.mem.Allocator, input: get_managed_prefix_list_associations.GetManagedPrefixListAssociationsInput, options: CallOptions) !get_managed_prefix_list_associations.GetManagedPrefixListAssociationsOutput {
         return get_managed_prefix_list_associations.execute(self, allocator, input, options);
     }
 
     /// Gets information about the entries for a specified managed prefix list.
-    pub fn getManagedPrefixListEntries(self: *Self, allocator: std.mem.Allocator, input: get_managed_prefix_list_entries.GetManagedPrefixListEntriesInput, options: get_managed_prefix_list_entries.Options) !get_managed_prefix_list_entries.GetManagedPrefixListEntriesOutput {
+    pub fn getManagedPrefixListEntries(self: *Self, allocator: std.mem.Allocator, input: get_managed_prefix_list_entries.GetManagedPrefixListEntriesInput, options: CallOptions) !get_managed_prefix_list_entries.GetManagedPrefixListEntriesOutput {
         return get_managed_prefix_list_entries.execute(self, allocator, input, options);
     }
 
     /// Gets the findings for the specified Network Access Scope analysis.
-    pub fn getNetworkInsightsAccessScopeAnalysisFindings(self: *Self, allocator: std.mem.Allocator, input: get_network_insights_access_scope_analysis_findings.GetNetworkInsightsAccessScopeAnalysisFindingsInput, options: get_network_insights_access_scope_analysis_findings.Options) !get_network_insights_access_scope_analysis_findings.GetNetworkInsightsAccessScopeAnalysisFindingsOutput {
+    pub fn getNetworkInsightsAccessScopeAnalysisFindings(self: *Self, allocator: std.mem.Allocator, input: get_network_insights_access_scope_analysis_findings.GetNetworkInsightsAccessScopeAnalysisFindingsInput, options: CallOptions) !get_network_insights_access_scope_analysis_findings.GetNetworkInsightsAccessScopeAnalysisFindingsOutput {
         return get_network_insights_access_scope_analysis_findings.execute(self, allocator, input, options);
     }
 
     /// Gets the content for the specified Network Access Scope.
-    pub fn getNetworkInsightsAccessScopeContent(self: *Self, allocator: std.mem.Allocator, input: get_network_insights_access_scope_content.GetNetworkInsightsAccessScopeContentInput, options: get_network_insights_access_scope_content.Options) !get_network_insights_access_scope_content.GetNetworkInsightsAccessScopeContentOutput {
+    pub fn getNetworkInsightsAccessScopeContent(self: *Self, allocator: std.mem.Allocator, input: get_network_insights_access_scope_content.GetNetworkInsightsAccessScopeContentInput, options: CallOptions) !get_network_insights_access_scope_content.GetNetworkInsightsAccessScopeContentOutput {
         return get_network_insights_access_scope_content.execute(self, allocator, input, options);
     }
 
@@ -7862,7 +7863,7 @@ pub const Client = struct {
     /// an empty string. We recommend that you wait up to 15 minutes after launching
     /// an instance
     /// before trying to retrieve the generated password.
-    pub fn getPasswordData(self: *Self, allocator: std.mem.Allocator, input: get_password_data.GetPasswordDataInput, options: get_password_data.Options) !get_password_data.GetPasswordDataOutput {
+    pub fn getPasswordData(self: *Self, allocator: std.mem.Allocator, input: get_password_data.GetPasswordDataInput, options: CallOptions) !get_password_data.GetPasswordDataOutput {
         return get_password_data.execute(self, allocator, input, options);
     }
 
@@ -7872,7 +7873,7 @@ pub const Client = struct {
     /// cannot be
     /// performed, the reason is returned in the response. Use
     /// AcceptReservedInstancesExchangeQuote to perform the exchange.
-    pub fn getReservedInstancesExchangeQuote(self: *Self, allocator: std.mem.Allocator, input: get_reserved_instances_exchange_quote.GetReservedInstancesExchangeQuoteInput, options: get_reserved_instances_exchange_quote.Options) !get_reserved_instances_exchange_quote.GetReservedInstancesExchangeQuoteOutput {
+    pub fn getReservedInstancesExchangeQuote(self: *Self, allocator: std.mem.Allocator, input: get_reserved_instances_exchange_quote.GetReservedInstancesExchangeQuoteInput, options: CallOptions) !get_reserved_instances_exchange_quote.GetReservedInstancesExchangeQuoteOutput {
         return get_reserved_instances_exchange_quote.execute(self, allocator, input, options);
     }
 
@@ -7883,7 +7884,7 @@ pub const Client = struct {
     ///
     /// For more information see [Dynamic routing in your VPC with VPC Route
     /// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
-    pub fn getRouteServerAssociations(self: *Self, allocator: std.mem.Allocator, input: get_route_server_associations.GetRouteServerAssociationsInput, options: get_route_server_associations.Options) !get_route_server_associations.GetRouteServerAssociationsOutput {
+    pub fn getRouteServerAssociations(self: *Self, allocator: std.mem.Allocator, input: get_route_server_associations.GetRouteServerAssociationsInput, options: CallOptions) !get_route_server_associations.GetRouteServerAssociationsOutput {
         return get_route_server_associations.execute(self, allocator, input, options);
     }
 
@@ -7914,7 +7915,7 @@ pub const Client = struct {
     /// gateways. To propagate routes into a transit gateway route table, use
     /// [Transit Gateway
     /// Connect](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html).
-    pub fn getRouteServerPropagations(self: *Self, allocator: std.mem.Allocator, input: get_route_server_propagations.GetRouteServerPropagationsInput, options: get_route_server_propagations.Options) !get_route_server_propagations.GetRouteServerPropagationsOutput {
+    pub fn getRouteServerPropagations(self: *Self, allocator: std.mem.Allocator, input: get_route_server_propagations.GetRouteServerPropagationsInput, options: CallOptions) !get_route_server_propagations.GetRouteServerPropagationsOutput {
         return get_route_server_propagations.execute(self, allocator, input, options);
     }
 
@@ -7947,13 +7948,13 @@ pub const Client = struct {
     /// gateways. To propagate routes into a transit gateway route table, use
     /// [Transit Gateway
     /// Connect](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html).
-    pub fn getRouteServerRoutingDatabase(self: *Self, allocator: std.mem.Allocator, input: get_route_server_routing_database.GetRouteServerRoutingDatabaseInput, options: get_route_server_routing_database.Options) !get_route_server_routing_database.GetRouteServerRoutingDatabaseOutput {
+    pub fn getRouteServerRoutingDatabase(self: *Self, allocator: std.mem.Allocator, input: get_route_server_routing_database.GetRouteServerRoutingDatabaseInput, options: CallOptions) !get_route_server_routing_database.GetRouteServerRoutingDatabaseOutput {
         return get_route_server_routing_database.execute(self, allocator, input, options);
     }
 
     /// Gets security groups that can be associated by the Amazon Web Services
     /// account making the request with network interfaces in the specified VPC.
-    pub fn getSecurityGroupsForVpc(self: *Self, allocator: std.mem.Allocator, input: get_security_groups_for_vpc.GetSecurityGroupsForVpcInput, options: get_security_groups_for_vpc.Options) !get_security_groups_for_vpc.GetSecurityGroupsForVpcOutput {
+    pub fn getSecurityGroupsForVpc(self: *Self, allocator: std.mem.Allocator, input: get_security_groups_for_vpc.GetSecurityGroupsForVpcInput, options: CallOptions) !get_security_groups_for_vpc.GetSecurityGroupsForVpcOutput {
         return get_security_groups_for_vpc.execute(self, allocator, input, options);
     }
 
@@ -7964,7 +7965,7 @@ pub const Client = struct {
     /// information, see [Manage account access to the EC2 serial
     /// console](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access) in the *Amazon EC2
     /// User Guide*.
-    pub fn getSerialConsoleAccessStatus(self: *Self, allocator: std.mem.Allocator, input: get_serial_console_access_status.GetSerialConsoleAccessStatusInput, options: get_serial_console_access_status.Options) !get_serial_console_access_status.GetSerialConsoleAccessStatusOutput {
+    pub fn getSerialConsoleAccessStatus(self: *Self, allocator: std.mem.Allocator, input: get_serial_console_access_status.GetSerialConsoleAccessStatusInput, options: CallOptions) !get_serial_console_access_status.GetSerialConsoleAccessStatusOutput {
         return get_serial_console_access_status.execute(self, allocator, input, options);
     }
 
@@ -7974,7 +7975,7 @@ pub const Client = struct {
     /// For more information, see [
     /// Block public access for
     /// snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/block-public-access-snapshots.html) in the *Amazon EBS User Guide*.
-    pub fn getSnapshotBlockPublicAccessState(self: *Self, allocator: std.mem.Allocator, input: get_snapshot_block_public_access_state.GetSnapshotBlockPublicAccessStateInput, options: get_snapshot_block_public_access_state.Options) !get_snapshot_block_public_access_state.GetSnapshotBlockPublicAccessStateOutput {
+    pub fn getSnapshotBlockPublicAccessState(self: *Self, allocator: std.mem.Allocator, input: get_snapshot_block_public_access_state.GetSnapshotBlockPublicAccessStateInput, options: CallOptions) !get_snapshot_block_public_access_state.GetSnapshotBlockPublicAccessStateOutput {
         return get_snapshot_block_public_access_state.execute(self, allocator, input, options);
     }
 
@@ -7991,73 +7992,73 @@ pub const Client = struct {
     /// For more information, see [Spot placement
     /// score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in
     /// the *Amazon EC2 User Guide*.
-    pub fn getSpotPlacementScores(self: *Self, allocator: std.mem.Allocator, input: get_spot_placement_scores.GetSpotPlacementScoresInput, options: get_spot_placement_scores.Options) !get_spot_placement_scores.GetSpotPlacementScoresOutput {
+    pub fn getSpotPlacementScores(self: *Self, allocator: std.mem.Allocator, input: get_spot_placement_scores.GetSpotPlacementScoresInput, options: CallOptions) !get_spot_placement_scores.GetSpotPlacementScoresOutput {
         return get_spot_placement_scores.execute(self, allocator, input, options);
     }
 
     /// Gets information about the subnet CIDR reservations.
-    pub fn getSubnetCidrReservations(self: *Self, allocator: std.mem.Allocator, input: get_subnet_cidr_reservations.GetSubnetCidrReservationsInput, options: get_subnet_cidr_reservations.Options) !get_subnet_cidr_reservations.GetSubnetCidrReservationsOutput {
+    pub fn getSubnetCidrReservations(self: *Self, allocator: std.mem.Allocator, input: get_subnet_cidr_reservations.GetSubnetCidrReservationsInput, options: CallOptions) !get_subnet_cidr_reservations.GetSubnetCidrReservationsOutput {
         return get_subnet_cidr_reservations.execute(self, allocator, input, options);
     }
 
     /// Lists the route tables to which the specified resource attachment propagates
     /// routes.
-    pub fn getTransitGatewayAttachmentPropagations(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_attachment_propagations.GetTransitGatewayAttachmentPropagationsInput, options: get_transit_gateway_attachment_propagations.Options) !get_transit_gateway_attachment_propagations.GetTransitGatewayAttachmentPropagationsOutput {
+    pub fn getTransitGatewayAttachmentPropagations(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_attachment_propagations.GetTransitGatewayAttachmentPropagationsInput, options: CallOptions) !get_transit_gateway_attachment_propagations.GetTransitGatewayAttachmentPropagationsOutput {
         return get_transit_gateway_attachment_propagations.execute(self, allocator, input, options);
     }
 
     /// Retrieves the entries for a transit gateway metering policy.
-    pub fn getTransitGatewayMeteringPolicyEntries(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_metering_policy_entries.GetTransitGatewayMeteringPolicyEntriesInput, options: get_transit_gateway_metering_policy_entries.Options) !get_transit_gateway_metering_policy_entries.GetTransitGatewayMeteringPolicyEntriesOutput {
+    pub fn getTransitGatewayMeteringPolicyEntries(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_metering_policy_entries.GetTransitGatewayMeteringPolicyEntriesInput, options: CallOptions) !get_transit_gateway_metering_policy_entries.GetTransitGatewayMeteringPolicyEntriesOutput {
         return get_transit_gateway_metering_policy_entries.execute(self, allocator, input, options);
     }
 
     /// Gets information about the associations for the transit gateway multicast
     /// domain.
-    pub fn getTransitGatewayMulticastDomainAssociations(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_multicast_domain_associations.GetTransitGatewayMulticastDomainAssociationsInput, options: get_transit_gateway_multicast_domain_associations.Options) !get_transit_gateway_multicast_domain_associations.GetTransitGatewayMulticastDomainAssociationsOutput {
+    pub fn getTransitGatewayMulticastDomainAssociations(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_multicast_domain_associations.GetTransitGatewayMulticastDomainAssociationsInput, options: CallOptions) !get_transit_gateway_multicast_domain_associations.GetTransitGatewayMulticastDomainAssociationsOutput {
         return get_transit_gateway_multicast_domain_associations.execute(self, allocator, input, options);
     }
 
     /// Gets a list of the transit gateway policy table associations.
-    pub fn getTransitGatewayPolicyTableAssociations(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_policy_table_associations.GetTransitGatewayPolicyTableAssociationsInput, options: get_transit_gateway_policy_table_associations.Options) !get_transit_gateway_policy_table_associations.GetTransitGatewayPolicyTableAssociationsOutput {
+    pub fn getTransitGatewayPolicyTableAssociations(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_policy_table_associations.GetTransitGatewayPolicyTableAssociationsInput, options: CallOptions) !get_transit_gateway_policy_table_associations.GetTransitGatewayPolicyTableAssociationsOutput {
         return get_transit_gateway_policy_table_associations.execute(self, allocator, input, options);
     }
 
     /// Returns a list of transit gateway policy table entries.
-    pub fn getTransitGatewayPolicyTableEntries(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_policy_table_entries.GetTransitGatewayPolicyTableEntriesInput, options: get_transit_gateway_policy_table_entries.Options) !get_transit_gateway_policy_table_entries.GetTransitGatewayPolicyTableEntriesOutput {
+    pub fn getTransitGatewayPolicyTableEntries(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_policy_table_entries.GetTransitGatewayPolicyTableEntriesInput, options: CallOptions) !get_transit_gateway_policy_table_entries.GetTransitGatewayPolicyTableEntriesOutput {
         return get_transit_gateway_policy_table_entries.execute(self, allocator, input, options);
     }
 
     /// Gets information about the prefix list references in a specified transit
     /// gateway route table.
-    pub fn getTransitGatewayPrefixListReferences(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_prefix_list_references.GetTransitGatewayPrefixListReferencesInput, options: get_transit_gateway_prefix_list_references.Options) !get_transit_gateway_prefix_list_references.GetTransitGatewayPrefixListReferencesOutput {
+    pub fn getTransitGatewayPrefixListReferences(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_prefix_list_references.GetTransitGatewayPrefixListReferencesInput, options: CallOptions) !get_transit_gateway_prefix_list_references.GetTransitGatewayPrefixListReferencesOutput {
         return get_transit_gateway_prefix_list_references.execute(self, allocator, input, options);
     }
 
     /// Gets information about the associations for the specified transit gateway
     /// route table.
-    pub fn getTransitGatewayRouteTableAssociations(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_route_table_associations.GetTransitGatewayRouteTableAssociationsInput, options: get_transit_gateway_route_table_associations.Options) !get_transit_gateway_route_table_associations.GetTransitGatewayRouteTableAssociationsOutput {
+    pub fn getTransitGatewayRouteTableAssociations(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_route_table_associations.GetTransitGatewayRouteTableAssociationsInput, options: CallOptions) !get_transit_gateway_route_table_associations.GetTransitGatewayRouteTableAssociationsOutput {
         return get_transit_gateway_route_table_associations.execute(self, allocator, input, options);
     }
 
     /// Gets information about the route table propagations for the specified
     /// transit gateway route table.
-    pub fn getTransitGatewayRouteTablePropagations(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_route_table_propagations.GetTransitGatewayRouteTablePropagationsInput, options: get_transit_gateway_route_table_propagations.Options) !get_transit_gateway_route_table_propagations.GetTransitGatewayRouteTablePropagationsOutput {
+    pub fn getTransitGatewayRouteTablePropagations(self: *Self, allocator: std.mem.Allocator, input: get_transit_gateway_route_table_propagations.GetTransitGatewayRouteTablePropagationsInput, options: CallOptions) !get_transit_gateway_route_table_propagations.GetTransitGatewayRouteTablePropagationsOutput {
         return get_transit_gateway_route_table_propagations.execute(self, allocator, input, options);
     }
 
     /// Get the Verified Access policy associated with the endpoint.
-    pub fn getVerifiedAccessEndpointPolicy(self: *Self, allocator: std.mem.Allocator, input: get_verified_access_endpoint_policy.GetVerifiedAccessEndpointPolicyInput, options: get_verified_access_endpoint_policy.Options) !get_verified_access_endpoint_policy.GetVerifiedAccessEndpointPolicyOutput {
+    pub fn getVerifiedAccessEndpointPolicy(self: *Self, allocator: std.mem.Allocator, input: get_verified_access_endpoint_policy.GetVerifiedAccessEndpointPolicyInput, options: CallOptions) !get_verified_access_endpoint_policy.GetVerifiedAccessEndpointPolicyOutput {
         return get_verified_access_endpoint_policy.execute(self, allocator, input, options);
     }
 
     /// Gets the targets for the specified network CIDR endpoint for Verified
     /// Access.
-    pub fn getVerifiedAccessEndpointTargets(self: *Self, allocator: std.mem.Allocator, input: get_verified_access_endpoint_targets.GetVerifiedAccessEndpointTargetsInput, options: get_verified_access_endpoint_targets.Options) !get_verified_access_endpoint_targets.GetVerifiedAccessEndpointTargetsOutput {
+    pub fn getVerifiedAccessEndpointTargets(self: *Self, allocator: std.mem.Allocator, input: get_verified_access_endpoint_targets.GetVerifiedAccessEndpointTargetsInput, options: CallOptions) !get_verified_access_endpoint_targets.GetVerifiedAccessEndpointTargetsOutput {
         return get_verified_access_endpoint_targets.execute(self, allocator, input, options);
     }
 
     /// Shows the contents of the Verified Access policy associated with the group.
-    pub fn getVerifiedAccessGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: get_verified_access_group_policy.GetVerifiedAccessGroupPolicyInput, options: get_verified_access_group_policy.Options) !get_verified_access_group_policy.GetVerifiedAccessGroupPolicyOutput {
+    pub fn getVerifiedAccessGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: get_verified_access_group_policy.GetVerifiedAccessGroupPolicyInput, options: CallOptions) !get_verified_access_group_policy.GetVerifiedAccessGroupPolicyOutput {
         return get_verified_access_group_policy.execute(self, allocator, input, options);
     }
 
@@ -8066,14 +8067,14 @@ pub const Client = struct {
     ///
     /// For more information, see [Enforce VPC encryption in
     /// transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.
-    pub fn getVpcResourcesBlockingEncryptionEnforcement(self: *Self, allocator: std.mem.Allocator, input: get_vpc_resources_blocking_encryption_enforcement.GetVpcResourcesBlockingEncryptionEnforcementInput, options: get_vpc_resources_blocking_encryption_enforcement.Options) !get_vpc_resources_blocking_encryption_enforcement.GetVpcResourcesBlockingEncryptionEnforcementOutput {
+    pub fn getVpcResourcesBlockingEncryptionEnforcement(self: *Self, allocator: std.mem.Allocator, input: get_vpc_resources_blocking_encryption_enforcement.GetVpcResourcesBlockingEncryptionEnforcementInput, options: CallOptions) !get_vpc_resources_blocking_encryption_enforcement.GetVpcResourcesBlockingEncryptionEnforcementOutput {
         return get_vpc_resources_blocking_encryption_enforcement.execute(self, allocator, input, options);
     }
 
     /// Download an Amazon Web Services-provided sample configuration file to be
     /// used with the customer
     /// gateway device specified for your Site-to-Site VPN connection.
-    pub fn getVpnConnectionDeviceSampleConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_vpn_connection_device_sample_configuration.GetVpnConnectionDeviceSampleConfigurationInput, options: get_vpn_connection_device_sample_configuration.Options) !get_vpn_connection_device_sample_configuration.GetVpnConnectionDeviceSampleConfigurationOutput {
+    pub fn getVpnConnectionDeviceSampleConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_vpn_connection_device_sample_configuration.GetVpnConnectionDeviceSampleConfigurationInput, options: CallOptions) !get_vpn_connection_device_sample_configuration.GetVpnConnectionDeviceSampleConfigurationOutput {
         return get_vpn_connection_device_sample_configuration.execute(self, allocator, input, options);
     }
 
@@ -8084,12 +8085,12 @@ pub const Client = struct {
     /// customer gateway
     /// device](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html) in the
     /// *Amazon Web Services Site-to-Site VPN User Guide*.
-    pub fn getVpnConnectionDeviceTypes(self: *Self, allocator: std.mem.Allocator, input: get_vpn_connection_device_types.GetVpnConnectionDeviceTypesInput, options: get_vpn_connection_device_types.Options) !get_vpn_connection_device_types.GetVpnConnectionDeviceTypesOutput {
+    pub fn getVpnConnectionDeviceTypes(self: *Self, allocator: std.mem.Allocator, input: get_vpn_connection_device_types.GetVpnConnectionDeviceTypesInput, options: CallOptions) !get_vpn_connection_device_types.GetVpnConnectionDeviceTypesOutput {
         return get_vpn_connection_device_types.execute(self, allocator, input, options);
     }
 
     /// Get details of available tunnel endpoint maintenance.
-    pub fn getVpnTunnelReplacementStatus(self: *Self, allocator: std.mem.Allocator, input: get_vpn_tunnel_replacement_status.GetVpnTunnelReplacementStatusInput, options: get_vpn_tunnel_replacement_status.Options) !get_vpn_tunnel_replacement_status.GetVpnTunnelReplacementStatusOutput {
+    pub fn getVpnTunnelReplacementStatus(self: *Self, allocator: std.mem.Allocator, input: get_vpn_tunnel_replacement_status.GetVpnTunnelReplacementStatusInput, options: CallOptions) !get_vpn_tunnel_replacement_status.GetVpnTunnelReplacementStatusOutput {
         return get_vpn_tunnel_replacement_status.execute(self, allocator, input, options);
     }
 
@@ -8099,7 +8100,7 @@ pub const Client = struct {
     ///
     /// Uploading a client certificate revocation list resets existing client
     /// connections.
-    pub fn importClientVpnClientCertificateRevocationList(self: *Self, allocator: std.mem.Allocator, input: import_client_vpn_client_certificate_revocation_list.ImportClientVpnClientCertificateRevocationListInput, options: import_client_vpn_client_certificate_revocation_list.Options) !import_client_vpn_client_certificate_revocation_list.ImportClientVpnClientCertificateRevocationListOutput {
+    pub fn importClientVpnClientCertificateRevocationList(self: *Self, allocator: std.mem.Allocator, input: import_client_vpn_client_certificate_revocation_list.ImportClientVpnClientCertificateRevocationListInput, options: CallOptions) !import_client_vpn_client_certificate_revocation_list.ImportClientVpnClientCertificateRevocationListOutput {
         return import_client_vpn_client_certificate_revocation_list.execute(self, allocator, input, options);
     }
 
@@ -8125,7 +8126,7 @@ pub const Client = struct {
     /// For more information, see [Importing a
     /// VM as an image using VM
     /// Import/Export](https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html) in the *VM Import/Export User Guide*.
-    pub fn importImage(self: *Self, allocator: std.mem.Allocator, input: import_image.ImportImageInput, options: import_image.Options) !import_image.ImportImageOutput {
+    pub fn importImage(self: *Self, allocator: std.mem.Allocator, input: import_image.ImportImageInput, options: CallOptions) !import_image.ImportImageOutput {
         return import_image.execute(self, allocator, input, options);
     }
 
@@ -8147,7 +8148,7 @@ pub const Client = struct {
     /// Manifest](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html).
     ///
     /// This API action is not supported by the Command Line Interface (CLI).
-    pub fn importInstance(self: *Self, allocator: std.mem.Allocator, input: import_instance.ImportInstanceInput, options: import_instance.Options) !import_instance.ImportInstanceOutput {
+    pub fn importInstance(self: *Self, allocator: std.mem.Allocator, input: import_instance.ImportInstanceInput, options: CallOptions) !import_instance.ImportInstanceOutput {
         return import_instance.execute(self, allocator, input, options);
     }
 
@@ -8159,7 +8160,7 @@ pub const Client = struct {
     /// For more information about the requirements for importing a key pair, see
     /// [Create a key pair and import the public key to Amazon
     /// EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws) in the *Amazon EC2 User Guide*.
-    pub fn importKeyPair(self: *Self, allocator: std.mem.Allocator, input: import_key_pair.ImportKeyPairInput, options: import_key_pair.Options) !import_key_pair.ImportKeyPairOutput {
+    pub fn importKeyPair(self: *Self, allocator: std.mem.Allocator, input: import_key_pair.ImportKeyPairInput, options: CallOptions) !import_key_pair.ImportKeyPairOutput {
         return import_key_pair.execute(self, allocator, input, options);
     }
 
@@ -8168,7 +8169,7 @@ pub const Client = struct {
     /// For more information, see [Importing a disk as a snapshot using VM
     /// Import/Export](https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-import-snapshot.html) in the
     /// *VM Import/Export User Guide*.
-    pub fn importSnapshot(self: *Self, allocator: std.mem.Allocator, input: import_snapshot.ImportSnapshotInput, options: import_snapshot.Options) !import_snapshot.ImportSnapshotOutput {
+    pub fn importSnapshot(self: *Self, allocator: std.mem.Allocator, input: import_snapshot.ImportSnapshotInput, options: CallOptions) !import_snapshot.ImportSnapshotOutput {
         return import_snapshot.execute(self, allocator, input, options);
     }
 
@@ -8184,7 +8185,7 @@ pub const Client = struct {
     /// Manifest](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html).
     ///
     /// This API action is not supported by the Command Line Interface (CLI).
-    pub fn importVolume(self: *Self, allocator: std.mem.Allocator, input: import_volume.ImportVolumeInput, options: import_volume.Options) !import_volume.ImportVolumeOutput {
+    pub fn importVolume(self: *Self, allocator: std.mem.Allocator, input: import_volume.ImportVolumeInput, options: CallOptions) !import_volume.ImportVolumeOutput {
         return import_volume.execute(self, allocator, input, options);
     }
 
@@ -8193,17 +8194,17 @@ pub const Client = struct {
     /// [Recycle
     /// Bin](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin.html)
     /// in the *Amazon EC2 User Guide*.
-    pub fn listImagesInRecycleBin(self: *Self, allocator: std.mem.Allocator, input: list_images_in_recycle_bin.ListImagesInRecycleBinInput, options: list_images_in_recycle_bin.Options) !list_images_in_recycle_bin.ListImagesInRecycleBinOutput {
+    pub fn listImagesInRecycleBin(self: *Self, allocator: std.mem.Allocator, input: list_images_in_recycle_bin.ListImagesInRecycleBinInput, options: CallOptions) !list_images_in_recycle_bin.ListImagesInRecycleBinOutput {
         return list_images_in_recycle_bin.execute(self, allocator, input, options);
     }
 
     /// Lists one or more snapshots that are currently in the Recycle Bin.
-    pub fn listSnapshotsInRecycleBin(self: *Self, allocator: std.mem.Allocator, input: list_snapshots_in_recycle_bin.ListSnapshotsInRecycleBinInput, options: list_snapshots_in_recycle_bin.Options) !list_snapshots_in_recycle_bin.ListSnapshotsInRecycleBinOutput {
+    pub fn listSnapshotsInRecycleBin(self: *Self, allocator: std.mem.Allocator, input: list_snapshots_in_recycle_bin.ListSnapshotsInRecycleBinInput, options: CallOptions) !list_snapshots_in_recycle_bin.ListSnapshotsInRecycleBinOutput {
         return list_snapshots_in_recycle_bin.execute(self, allocator, input, options);
     }
 
     /// Lists one or more volumes that are currently in the Recycle Bin.
-    pub fn listVolumesInRecycleBin(self: *Self, allocator: std.mem.Allocator, input: list_volumes_in_recycle_bin.ListVolumesInRecycleBinInput, options: list_volumes_in_recycle_bin.Options) !list_volumes_in_recycle_bin.ListVolumesInRecycleBinOutput {
+    pub fn listVolumesInRecycleBin(self: *Self, allocator: std.mem.Allocator, input: list_volumes_in_recycle_bin.ListVolumesInRecycleBinInput, options: CallOptions) !list_volumes_in_recycle_bin.ListVolumesInRecycleBinOutput {
         return list_volumes_in_recycle_bin.execute(self, allocator, input, options);
     }
 
@@ -8227,19 +8228,19 @@ pub const Client = struct {
     /// * If the snapshot is locked in compliance mode and the cooling-off period
     ///   has lapsed, you can
     /// only increase the lock duration or extend the lock expiration date.
-    pub fn lockSnapshot(self: *Self, allocator: std.mem.Allocator, input: lock_snapshot.LockSnapshotInput, options: lock_snapshot.Options) !lock_snapshot.LockSnapshotOutput {
+    pub fn lockSnapshot(self: *Self, allocator: std.mem.Allocator, input: lock_snapshot.LockSnapshotInput, options: CallOptions) !lock_snapshot.LockSnapshotOutput {
         return lock_snapshot.execute(self, allocator, input, options);
     }
 
     /// Modifies an attribute of the specified Elastic IP address. For requirements,
     /// see [Using reverse DNS for email
     /// applications](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS).
-    pub fn modifyAddressAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_address_attribute.ModifyAddressAttributeInput, options: modify_address_attribute.Options) !modify_address_attribute.ModifyAddressAttributeOutput {
+    pub fn modifyAddressAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_address_attribute.ModifyAddressAttributeInput, options: CallOptions) !modify_address_attribute.ModifyAddressAttributeOutput {
         return modify_address_attribute.execute(self, allocator, input, options);
     }
 
     /// Changes the opt-in status of the specified zone group for your account.
-    pub fn modifyAvailabilityZoneGroup(self: *Self, allocator: std.mem.Allocator, input: modify_availability_zone_group.ModifyAvailabilityZoneGroupInput, options: modify_availability_zone_group.Options) !modify_availability_zone_group.ModifyAvailabilityZoneGroupOutput {
+    pub fn modifyAvailabilityZoneGroup(self: *Self, allocator: std.mem.Allocator, input: modify_availability_zone_group.ModifyAvailabilityZoneGroupInput, options: CallOptions) !modify_availability_zone_group.ModifyAvailabilityZoneGroupOutput {
         return modify_availability_zone_group.execute(self, allocator, input, options);
     }
 
@@ -8275,7 +8276,7 @@ pub const Client = struct {
     /// * `expired`, `cancelled`, `unsupported`, or
     /// `failed` state - You can't modify the Capacity Reservation in any
     /// way.
-    pub fn modifyCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: modify_capacity_reservation.ModifyCapacityReservationInput, options: modify_capacity_reservation.Options) !modify_capacity_reservation.ModifyCapacityReservationOutput {
+    pub fn modifyCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: modify_capacity_reservation.ModifyCapacityReservationInput, options: CallOptions) !modify_capacity_reservation.ModifyCapacityReservationOutput {
         return modify_capacity_reservation.execute(self, allocator, input, options);
     }
 
@@ -8290,13 +8291,13 @@ pub const Client = struct {
     /// modify the end date for the Fleet, the end dates for all of the individual
     /// Capacity
     /// Reservations in the Fleet are updated accordingly.
-    pub fn modifyCapacityReservationFleet(self: *Self, allocator: std.mem.Allocator, input: modify_capacity_reservation_fleet.ModifyCapacityReservationFleetInput, options: modify_capacity_reservation_fleet.Options) !modify_capacity_reservation_fleet.ModifyCapacityReservationFleetOutput {
+    pub fn modifyCapacityReservationFleet(self: *Self, allocator: std.mem.Allocator, input: modify_capacity_reservation_fleet.ModifyCapacityReservationFleetInput, options: CallOptions) !modify_capacity_reservation_fleet.ModifyCapacityReservationFleetOutput {
         return modify_capacity_reservation_fleet.execute(self, allocator, input, options);
     }
 
     /// Modifies the specified Client VPN endpoint. Modifying the DNS server resets
     /// existing client connections.
-    pub fn modifyClientVpnEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_client_vpn_endpoint.ModifyClientVpnEndpointInput, options: modify_client_vpn_endpoint.Options) !modify_client_vpn_endpoint.ModifyClientVpnEndpointOutput {
+    pub fn modifyClientVpnEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_client_vpn_endpoint.ModifyClientVpnEndpointInput, options: CallOptions) !modify_client_vpn_endpoint.ModifyClientVpnEndpointOutput {
         return modify_client_vpn_endpoint.execute(self, allocator, input, options);
     }
 
@@ -8323,7 +8324,7 @@ pub const Client = struct {
     /// For more information, see [Burstable
     /// performance
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide*.
-    pub fn modifyDefaultCreditSpecification(self: *Self, allocator: std.mem.Allocator, input: modify_default_credit_specification.ModifyDefaultCreditSpecificationInput, options: modify_default_credit_specification.Options) !modify_default_credit_specification.ModifyDefaultCreditSpecificationOutput {
+    pub fn modifyDefaultCreditSpecification(self: *Self, allocator: std.mem.Allocator, input: modify_default_credit_specification.ModifyDefaultCreditSpecificationInput, options: CallOptions) !modify_default_credit_specification.ModifyDefaultCreditSpecificationOutput {
         return modify_default_credit_specification.execute(self, allocator, input, options);
     }
 
@@ -8343,7 +8344,7 @@ pub const Client = struct {
     /// For more information, see [Amazon EBS
     /// encryption](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html)
     /// in the *Amazon EBS User Guide*.
-    pub fn modifyEbsDefaultKmsKeyId(self: *Self, allocator: std.mem.Allocator, input: modify_ebs_default_kms_key_id.ModifyEbsDefaultKmsKeyIdInput, options: modify_ebs_default_kms_key_id.Options) !modify_ebs_default_kms_key_id.ModifyEbsDefaultKmsKeyIdOutput {
+    pub fn modifyEbsDefaultKmsKeyId(self: *Self, allocator: std.mem.Allocator, input: modify_ebs_default_kms_key_id.ModifyEbsDefaultKmsKeyIdInput, options: CallOptions) !modify_ebs_default_kms_key_id.ModifyEbsDefaultKmsKeyIdOutput {
         return modify_ebs_default_kms_key_id.execute(self, allocator, input, options);
     }
 
@@ -8389,12 +8390,12 @@ pub const Client = struct {
     /// If you are finished with your EC2 Fleet for now, but will use it again
     /// later, you can set the
     /// target capacity to 0.
-    pub fn modifyFleet(self: *Self, allocator: std.mem.Allocator, input: modify_fleet.ModifyFleetInput, options: modify_fleet.Options) !modify_fleet.ModifyFleetOutput {
+    pub fn modifyFleet(self: *Self, allocator: std.mem.Allocator, input: modify_fleet.ModifyFleetInput, options: CallOptions) !modify_fleet.ModifyFleetOutput {
         return modify_fleet.execute(self, allocator, input, options);
     }
 
     /// Modifies the specified attribute of the specified Amazon FPGA Image (AFI).
-    pub fn modifyFpgaImageAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_fpga_image_attribute.ModifyFpgaImageAttributeInput, options: modify_fpga_image_attribute.Options) !modify_fpga_image_attribute.ModifyFpgaImageAttributeOutput {
+    pub fn modifyFpgaImageAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_fpga_image_attribute.ModifyFpgaImageAttributeInput, options: CallOptions) !modify_fpga_image_attribute.ModifyFpgaImageAttributeOutput {
         return modify_fpga_image_attribute.execute(self, allocator, input, options);
     }
 
@@ -8414,7 +8415,7 @@ pub const Client = struct {
     /// either multiple
     /// instance types in an instance family, or to support a specific instance type
     /// only.
-    pub fn modifyHosts(self: *Self, allocator: std.mem.Allocator, input: modify_hosts.ModifyHostsInput, options: modify_hosts.Options) !modify_hosts.ModifyHostsOutput {
+    pub fn modifyHosts(self: *Self, allocator: std.mem.Allocator, input: modify_hosts.ModifyHostsInput, options: CallOptions) !modify_hosts.ModifyHostsOutput {
         return modify_hosts.execute(self, allocator, input, options);
     }
 
@@ -8456,7 +8457,7 @@ pub const Client = struct {
     /// regardless
     /// of these settings and provided that they have permission to use the relevant
     /// `Describe` command for the resource type.
-    pub fn modifyIdFormat(self: *Self, allocator: std.mem.Allocator, input: modify_id_format.ModifyIdFormatInput, options: modify_id_format.Options) !modify_id_format.ModifyIdFormatOutput {
+    pub fn modifyIdFormat(self: *Self, allocator: std.mem.Allocator, input: modify_id_format.ModifyIdFormatInput, options: CallOptions) !modify_id_format.ModifyIdFormatOutput {
         return modify_id_format.execute(self, allocator, input, options);
     }
 
@@ -8497,7 +8498,7 @@ pub const Client = struct {
     /// settings and provided that they have permission to use the relevant
     /// `Describe`
     /// command for the resource type.
-    pub fn modifyIdentityIdFormat(self: *Self, allocator: std.mem.Allocator, input: modify_identity_id_format.ModifyIdentityIdFormatInput, options: modify_identity_id_format.Options) !modify_identity_id_format.ModifyIdentityIdFormatOutput {
+    pub fn modifyIdentityIdFormat(self: *Self, allocator: std.mem.Allocator, input: modify_identity_id_format.ModifyIdentityIdFormatInput, options: CallOptions) !modify_identity_id_format.ModifyIdentityIdFormatOutput {
         return modify_identity_id_format.execute(self, allocator, input, options);
     }
 
@@ -8516,7 +8517,7 @@ pub const Client = struct {
     /// To enable the SriovNetSupport enhanced networking attribute of an image,
     /// enable
     /// SriovNetSupport on an instance and create an AMI from the instance.
-    pub fn modifyImageAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_image_attribute.ModifyImageAttributeInput, options: modify_image_attribute.Options) !modify_image_attribute.ModifyImageAttributeOutput {
+    pub fn modifyImageAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_image_attribute.ModifyImageAttributeInput, options: CallOptions) !modify_image_attribute.ModifyImageAttributeOutput {
         return modify_image_attribute.execute(self, allocator, input, options);
     }
 
@@ -8538,7 +8539,7 @@ pub const Client = struct {
     /// [Modify a stopped
     /// instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn modifyInstanceAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_instance_attribute.ModifyInstanceAttributeInput, options: modify_instance_attribute.Options) !modify_instance_attribute.ModifyInstanceAttributeOutput {
+    pub fn modifyInstanceAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_instance_attribute.ModifyInstanceAttributeInput, options: CallOptions) !modify_instance_attribute.ModifyInstanceAttributeOutput {
         return modify_instance_attribute.execute(self, allocator, input, options);
     }
 
@@ -8547,7 +8548,7 @@ pub const Client = struct {
     /// configure an instance to target a specific Capacity Reservation, run in any
     /// `open` Capacity Reservation with matching attributes, run in On-Demand
     /// Instance capacity, or only run in a Capacity Reservation.
-    pub fn modifyInstanceCapacityReservationAttributes(self: *Self, allocator: std.mem.Allocator, input: modify_instance_capacity_reservation_attributes.ModifyInstanceCapacityReservationAttributesInput, options: modify_instance_capacity_reservation_attributes.Options) !modify_instance_capacity_reservation_attributes.ModifyInstanceCapacityReservationAttributesOutput {
+    pub fn modifyInstanceCapacityReservationAttributes(self: *Self, allocator: std.mem.Allocator, input: modify_instance_capacity_reservation_attributes.ModifyInstanceCapacityReservationAttributesInput, options: CallOptions) !modify_instance_capacity_reservation_attributes.ModifyInstanceCapacityReservationAttributesOutput {
         return modify_instance_capacity_reservation_attributes.execute(self, allocator, input, options);
     }
 
@@ -8557,7 +8558,7 @@ pub const Client = struct {
     /// EC2 Instance Connect
     /// Endpoint](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/modify-ec2-instance-connect-endpoint.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn modifyInstanceConnectEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_instance_connect_endpoint.ModifyInstanceConnectEndpointInput, options: modify_instance_connect_endpoint.Options) !modify_instance_connect_endpoint.ModifyInstanceConnectEndpointOutput {
+    pub fn modifyInstanceConnectEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_instance_connect_endpoint.ModifyInstanceConnectEndpointInput, options: CallOptions) !modify_instance_connect_endpoint.ModifyInstanceConnectEndpointOutput {
         return modify_instance_connect_endpoint.execute(self, allocator, input, options);
     }
 
@@ -8575,7 +8576,7 @@ pub const Client = struct {
     /// information, see
     /// [Supported CPU
     /// options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html) in the *Amazon EC2 User Guide*.
-    pub fn modifyInstanceCpuOptions(self: *Self, allocator: std.mem.Allocator, input: modify_instance_cpu_options.ModifyInstanceCpuOptionsInput, options: modify_instance_cpu_options.Options) !modify_instance_cpu_options.ModifyInstanceCpuOptionsOutput {
+    pub fn modifyInstanceCpuOptions(self: *Self, allocator: std.mem.Allocator, input: modify_instance_cpu_options.ModifyInstanceCpuOptionsInput, options: CallOptions) !modify_instance_cpu_options.ModifyInstanceCpuOptionsOutput {
         return modify_instance_cpu_options.execute(self, allocator, input, options);
     }
 
@@ -8587,12 +8588,12 @@ pub const Client = struct {
     /// For more information, see [Burstable
     /// performance
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide*.
-    pub fn modifyInstanceCreditSpecification(self: *Self, allocator: std.mem.Allocator, input: modify_instance_credit_specification.ModifyInstanceCreditSpecificationInput, options: modify_instance_credit_specification.Options) !modify_instance_credit_specification.ModifyInstanceCreditSpecificationOutput {
+    pub fn modifyInstanceCreditSpecification(self: *Self, allocator: std.mem.Allocator, input: modify_instance_credit_specification.ModifyInstanceCreditSpecificationInput, options: CallOptions) !modify_instance_credit_specification.ModifyInstanceCreditSpecificationOutput {
         return modify_instance_credit_specification.execute(self, allocator, input, options);
     }
 
     /// Modifies the start time for a scheduled Amazon EC2 instance event.
-    pub fn modifyInstanceEventStartTime(self: *Self, allocator: std.mem.Allocator, input: modify_instance_event_start_time.ModifyInstanceEventStartTimeInput, options: modify_instance_event_start_time.Options) !modify_instance_event_start_time.ModifyInstanceEventStartTimeOutput {
+    pub fn modifyInstanceEventStartTime(self: *Self, allocator: std.mem.Allocator, input: modify_instance_event_start_time.ModifyInstanceEventStartTimeInput, options: CallOptions) !modify_instance_event_start_time.ModifyInstanceEventStartTimeOutput {
         return modify_instance_event_start_time.execute(self, allocator, input, options);
     }
 
@@ -8611,7 +8612,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Define event windows for scheduled
     /// events](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html) in the *Amazon EC2 User Guide*.
-    pub fn modifyInstanceEventWindow(self: *Self, allocator: std.mem.Allocator, input: modify_instance_event_window.ModifyInstanceEventWindowInput, options: modify_instance_event_window.Options) !modify_instance_event_window.ModifyInstanceEventWindowOutput {
+    pub fn modifyInstanceEventWindow(self: *Self, allocator: std.mem.Allocator, input: modify_instance_event_window.ModifyInstanceEventWindowInput, options: CallOptions) !modify_instance_event_window.ModifyInstanceEventWindowOutput {
         return modify_instance_event_window.execute(self, allocator, input, options);
     }
 
@@ -8629,7 +8630,7 @@ pub const Client = struct {
     /// that has a pending `system-reboot` event. For more information, see [Enable
     /// or disable reboot
     /// migration](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/schedevents_actions_reboot.html#reboot-migration).
-    pub fn modifyInstanceMaintenanceOptions(self: *Self, allocator: std.mem.Allocator, input: modify_instance_maintenance_options.ModifyInstanceMaintenanceOptionsInput, options: modify_instance_maintenance_options.Options) !modify_instance_maintenance_options.ModifyInstanceMaintenanceOptionsOutput {
+    pub fn modifyInstanceMaintenanceOptions(self: *Self, allocator: std.mem.Allocator, input: modify_instance_maintenance_options.ModifyInstanceMaintenanceOptionsInput, options: CallOptions) !modify_instance_maintenance_options.ModifyInstanceMaintenanceOptionsOutput {
         return modify_instance_maintenance_options.execute(self, allocator, input, options);
     }
 
@@ -8644,7 +8645,7 @@ pub const Client = struct {
     /// for instance metadata
     /// options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence) in the
     /// *Amazon EC2 User Guide*.
-    pub fn modifyInstanceMetadataDefaults(self: *Self, allocator: std.mem.Allocator, input: modify_instance_metadata_defaults.ModifyInstanceMetadataDefaultsInput, options: modify_instance_metadata_defaults.Options) !modify_instance_metadata_defaults.ModifyInstanceMetadataDefaultsOutput {
+    pub fn modifyInstanceMetadataDefaults(self: *Self, allocator: std.mem.Allocator, input: modify_instance_metadata_defaults.ModifyInstanceMetadataDefaultsInput, options: CallOptions) !modify_instance_metadata_defaults.ModifyInstanceMetadataDefaultsOutput {
         return modify_instance_metadata_defaults.execute(self, allocator, input, options);
     }
 
@@ -8662,13 +8663,13 @@ pub const Client = struct {
     /// metadata and user
     /// data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn modifyInstanceMetadataOptions(self: *Self, allocator: std.mem.Allocator, input: modify_instance_metadata_options.ModifyInstanceMetadataOptionsInput, options: modify_instance_metadata_options.Options) !modify_instance_metadata_options.ModifyInstanceMetadataOptionsOutput {
+    pub fn modifyInstanceMetadataOptions(self: *Self, allocator: std.mem.Allocator, input: modify_instance_metadata_options.ModifyInstanceMetadataOptionsInput, options: CallOptions) !modify_instance_metadata_options.ModifyInstanceMetadataOptionsOutput {
         return modify_instance_metadata_options.execute(self, allocator, input, options);
     }
 
     /// Change the configuration of the network performance options for an existing
     /// instance.
-    pub fn modifyInstanceNetworkPerformanceOptions(self: *Self, allocator: std.mem.Allocator, input: modify_instance_network_performance_options.ModifyInstanceNetworkPerformanceOptionsInput, options: modify_instance_network_performance_options.Options) !modify_instance_network_performance_options.ModifyInstanceNetworkPerformanceOptionsOutput {
+    pub fn modifyInstanceNetworkPerformanceOptions(self: *Self, allocator: std.mem.Allocator, input: modify_instance_network_performance_options.ModifyInstanceNetworkPerformanceOptionsInput, options: CallOptions) !modify_instance_network_performance_options.ModifyInstanceNetworkPerformanceOptionsOutput {
         return modify_instance_network_performance_options.execute(self, allocator, input, options);
     }
 
@@ -8697,12 +8698,12 @@ pub const Client = struct {
     /// To modify the host ID, tenancy, placement group, or partition for an
     /// instance, the
     /// instance must be in the `stopped` state.
-    pub fn modifyInstancePlacement(self: *Self, allocator: std.mem.Allocator, input: modify_instance_placement.ModifyInstancePlacementInput, options: modify_instance_placement.Options) !modify_instance_placement.ModifyInstancePlacementOutput {
+    pub fn modifyInstancePlacement(self: *Self, allocator: std.mem.Allocator, input: modify_instance_placement.ModifyInstancePlacementInput, options: CallOptions) !modify_instance_placement.ModifyInstancePlacementOutput {
         return modify_instance_placement.execute(self, allocator, input, options);
     }
 
     /// Modify the configurations of an IPAM.
-    pub fn modifyIpam(self: *Self, allocator: std.mem.Allocator, input: modify_ipam.ModifyIpamInput, options: modify_ipam.Options) !modify_ipam.ModifyIpamOutput {
+    pub fn modifyIpam(self: *Self, allocator: std.mem.Allocator, input: modify_ipam.ModifyIpamInput, options: CallOptions) !modify_ipam.ModifyIpamOutput {
         return modify_ipam.execute(self, allocator, input, options);
     }
 
@@ -8720,7 +8721,7 @@ pub const Client = struct {
     /// Allocation rules are optional configurations within an IPAM policy that map
     /// Amazon Web Services resource types to specific IPAM pools. If no rules are
     /// defined, the resource types default to using Amazon-provided IP addresses.
-    pub fn modifyIpamPolicyAllocationRules(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_policy_allocation_rules.ModifyIpamPolicyAllocationRulesInput, options: modify_ipam_policy_allocation_rules.Options) !modify_ipam_policy_allocation_rules.ModifyIpamPolicyAllocationRulesOutput {
+    pub fn modifyIpamPolicyAllocationRules(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_policy_allocation_rules.ModifyIpamPolicyAllocationRulesInput, options: CallOptions) !modify_ipam_policy_allocation_rules.ModifyIpamPolicyAllocationRulesOutput {
         return modify_ipam_policy_allocation_rules.execute(self, allocator, input, options);
     }
 
@@ -8729,20 +8730,20 @@ pub const Client = struct {
     /// For more information, see [Modify a
     /// pool](https://docs.aws.amazon.com/vpc/latest/ipam/mod-pool-ipam.html) in the
     /// *Amazon VPC IPAM User Guide*.
-    pub fn modifyIpamPool(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_pool.ModifyIpamPoolInput, options: modify_ipam_pool.Options) !modify_ipam_pool.ModifyIpamPoolOutput {
+    pub fn modifyIpamPool(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_pool.ModifyIpamPoolInput, options: CallOptions) !modify_ipam_pool.ModifyIpamPoolOutput {
         return modify_ipam_pool.execute(self, allocator, input, options);
     }
 
     /// Modifies an IPAM prefix list resolver. You can update the description and
     /// CIDR selection rules. Changes to rules will trigger re-evaluation and
     /// potential updates to associated prefix lists.
-    pub fn modifyIpamPrefixListResolver(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_prefix_list_resolver.ModifyIpamPrefixListResolverInput, options: modify_ipam_prefix_list_resolver.Options) !modify_ipam_prefix_list_resolver.ModifyIpamPrefixListResolverOutput {
+    pub fn modifyIpamPrefixListResolver(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_prefix_list_resolver.ModifyIpamPrefixListResolverInput, options: CallOptions) !modify_ipam_prefix_list_resolver.ModifyIpamPrefixListResolverOutput {
         return modify_ipam_prefix_list_resolver.execute(self, allocator, input, options);
     }
 
     /// Modifies an IPAM prefix list resolver target. You can update version
     /// tracking settings and the desired version of the target prefix list.
-    pub fn modifyIpamPrefixListResolverTarget(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_prefix_list_resolver_target.ModifyIpamPrefixListResolverTargetInput, options: modify_ipam_prefix_list_resolver_target.Options) !modify_ipam_prefix_list_resolver_target.ModifyIpamPrefixListResolverTargetOutput {
+    pub fn modifyIpamPrefixListResolverTarget(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_prefix_list_resolver_target.ModifyIpamPrefixListResolverTargetInput, options: CallOptions) !modify_ipam_prefix_list_resolver_target.ModifyIpamPrefixListResolverTargetOutput {
         return modify_ipam_prefix_list_resolver_target.execute(self, allocator, input, options);
     }
 
@@ -8756,19 +8757,19 @@ pub const Client = struct {
     /// scopes](https://docs.aws.amazon.com/vpc/latest/ipam/move-resource-ipam.html)
     /// and [Change the monitoring state of resource
     /// CIDRs](https://docs.aws.amazon.com/vpc/latest/ipam/change-monitoring-state-ipam.html) in the *Amazon VPC IPAM User Guide*.
-    pub fn modifyIpamResourceCidr(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_resource_cidr.ModifyIpamResourceCidrInput, options: modify_ipam_resource_cidr.Options) !modify_ipam_resource_cidr.ModifyIpamResourceCidrOutput {
+    pub fn modifyIpamResourceCidr(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_resource_cidr.ModifyIpamResourceCidrInput, options: CallOptions) !modify_ipam_resource_cidr.ModifyIpamResourceCidrOutput {
         return modify_ipam_resource_cidr.execute(self, allocator, input, options);
     }
 
     /// Modifies a resource discovery. A resource discovery is an IPAM component
     /// that enables IPAM to manage and monitor resources that belong to the owning
     /// account.
-    pub fn modifyIpamResourceDiscovery(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_resource_discovery.ModifyIpamResourceDiscoveryInput, options: modify_ipam_resource_discovery.Options) !modify_ipam_resource_discovery.ModifyIpamResourceDiscoveryOutput {
+    pub fn modifyIpamResourceDiscovery(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_resource_discovery.ModifyIpamResourceDiscoveryInput, options: CallOptions) !modify_ipam_resource_discovery.ModifyIpamResourceDiscoveryOutput {
         return modify_ipam_resource_discovery.execute(self, allocator, input, options);
     }
 
     /// Modify an IPAM scope.
-    pub fn modifyIpamScope(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_scope.ModifyIpamScopeInput, options: modify_ipam_scope.Options) !modify_ipam_scope.ModifyIpamScopeOutput {
+    pub fn modifyIpamScope(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_scope.ModifyIpamScopeInput, options: CallOptions) !modify_ipam_scope.ModifyIpamScopeOutput {
         return modify_ipam_scope.execute(self, allocator, input, options);
     }
 
@@ -8777,12 +8778,12 @@ pub const Client = struct {
     /// set as the default version. When launching an instance, the default version
     /// applies when
     /// a launch template version is not specified.
-    pub fn modifyLaunchTemplate(self: *Self, allocator: std.mem.Allocator, input: modify_launch_template.ModifyLaunchTemplateInput, options: modify_launch_template.Options) !modify_launch_template.ModifyLaunchTemplateOutput {
+    pub fn modifyLaunchTemplate(self: *Self, allocator: std.mem.Allocator, input: modify_launch_template.ModifyLaunchTemplateInput, options: CallOptions) !modify_launch_template.ModifyLaunchTemplateOutput {
         return modify_launch_template.execute(self, allocator, input, options);
     }
 
     /// Modifies the specified local gateway route.
-    pub fn modifyLocalGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: modify_local_gateway_route.ModifyLocalGatewayRouteInput, options: modify_local_gateway_route.Options) !modify_local_gateway_route.ModifyLocalGatewayRouteOutput {
+    pub fn modifyLocalGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: modify_local_gateway_route.ModifyLocalGatewayRouteInput, options: CallOptions) !modify_local_gateway_route.ModifyLocalGatewayRouteOutput {
         return modify_local_gateway_route.execute(self, allocator, input, options);
     }
 
@@ -8795,7 +8796,7 @@ pub const Client = struct {
     /// If you specify a current version number that does not match the true current
     /// version
     /// number, the request fails.
-    pub fn modifyManagedPrefixList(self: *Self, allocator: std.mem.Allocator, input: modify_managed_prefix_list.ModifyManagedPrefixListInput, options: modify_managed_prefix_list.Options) !modify_managed_prefix_list.ModifyManagedPrefixListOutput {
+    pub fn modifyManagedPrefixList(self: *Self, allocator: std.mem.Allocator, input: modify_managed_prefix_list.ModifyManagedPrefixListInput, options: CallOptions) !modify_managed_prefix_list.ModifyManagedPrefixListOutput {
         return modify_managed_prefix_list.execute(self, allocator, input, options);
     }
 
@@ -8804,19 +8805,19 @@ pub const Client = struct {
     /// at a time. You can use this action to attach and detach security groups from
     /// an existing
     /// EC2 instance.
-    pub fn modifyNetworkInterfaceAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_network_interface_attribute.ModifyNetworkInterfaceAttributeInput, options: modify_network_interface_attribute.Options) !modify_network_interface_attribute.ModifyNetworkInterfaceAttributeOutput {
+    pub fn modifyNetworkInterfaceAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_network_interface_attribute.ModifyNetworkInterfaceAttributeInput, options: CallOptions) !modify_network_interface_attribute.ModifyNetworkInterfaceAttributeOutput {
         return modify_network_interface_attribute.execute(self, allocator, input, options);
     }
 
     /// Modifies the options for instance hostnames for the specified instance.
-    pub fn modifyPrivateDnsNameOptions(self: *Self, allocator: std.mem.Allocator, input: modify_private_dns_name_options.ModifyPrivateDnsNameOptionsInput, options: modify_private_dns_name_options.Options) !modify_private_dns_name_options.ModifyPrivateDnsNameOptionsOutput {
+    pub fn modifyPrivateDnsNameOptions(self: *Self, allocator: std.mem.Allocator, input: modify_private_dns_name_options.ModifyPrivateDnsNameOptionsInput, options: CallOptions) !modify_private_dns_name_options.ModifyPrivateDnsNameOptionsOutput {
         return modify_private_dns_name_options.execute(self, allocator, input, options);
     }
 
     /// Modify public hostname options for a network interface. For more
     /// information, see [EC2 instance hostnames, DNS names, and
     /// domains](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *Amazon EC2 User Guide*.
-    pub fn modifyPublicIpDnsNameOptions(self: *Self, allocator: std.mem.Allocator, input: modify_public_ip_dns_name_options.ModifyPublicIpDnsNameOptionsInput, options: modify_public_ip_dns_name_options.Options) !modify_public_ip_dns_name_options.ModifyPublicIpDnsNameOptionsOutput {
+    pub fn modifyPublicIpDnsNameOptions(self: *Self, allocator: std.mem.Allocator, input: modify_public_ip_dns_name_options.ModifyPublicIpDnsNameOptionsInput, options: CallOptions) !modify_public_ip_dns_name_options.ModifyPublicIpDnsNameOptionsOutput {
         return modify_public_ip_dns_name_options.execute(self, allocator, input, options);
     }
 
@@ -8829,7 +8830,7 @@ pub const Client = struct {
     /// For more information, see [Modify Reserved
     /// Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn modifyReservedInstances(self: *Self, allocator: std.mem.Allocator, input: modify_reserved_instances.ModifyReservedInstancesInput, options: modify_reserved_instances.Options) !modify_reserved_instances.ModifyReservedInstancesOutput {
+    pub fn modifyReservedInstances(self: *Self, allocator: std.mem.Allocator, input: modify_reserved_instances.ModifyReservedInstancesInput, options: CallOptions) !modify_reserved_instances.ModifyReservedInstancesOutput {
         return modify_reserved_instances.execute(self, allocator, input, options);
     }
 
@@ -8858,12 +8859,12 @@ pub const Client = struct {
     ///
     /// For more information see [Dynamic routing in your VPC with VPC Route
     /// Server](https://docs.aws.amazon.com/vpc/latest/userguide/dynamic-routing-route-server.html) in the *Amazon VPC User Guide*.
-    pub fn modifyRouteServer(self: *Self, allocator: std.mem.Allocator, input: modify_route_server.ModifyRouteServerInput, options: modify_route_server.Options) !modify_route_server.ModifyRouteServerOutput {
+    pub fn modifyRouteServer(self: *Self, allocator: std.mem.Allocator, input: modify_route_server.ModifyRouteServerInput, options: CallOptions) !modify_route_server.ModifyRouteServerOutput {
         return modify_route_server.execute(self, allocator, input, options);
     }
 
     /// Modifies the rules of a security group.
-    pub fn modifySecurityGroupRules(self: *Self, allocator: std.mem.Allocator, input: modify_security_group_rules.ModifySecurityGroupRulesInput, options: modify_security_group_rules.Options) !modify_security_group_rules.ModifySecurityGroupRulesOutput {
+    pub fn modifySecurityGroupRules(self: *Self, allocator: std.mem.Allocator, input: modify_security_group_rules.ModifySecurityGroupRulesInput, options: CallOptions) !modify_security_group_rules.ModifySecurityGroupRulesOutput {
         return modify_security_group_rules.execute(self, allocator, input, options);
     }
 
@@ -8884,7 +8885,7 @@ pub const Client = struct {
     /// For more information about modifying snapshot permissions, see [Share a
     /// snapshot](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-modifying-snapshot-permissions.html) in the
     /// *Amazon EBS User Guide*.
-    pub fn modifySnapshotAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_snapshot_attribute.ModifySnapshotAttributeInput, options: modify_snapshot_attribute.Options) !modify_snapshot_attribute.ModifySnapshotAttributeOutput {
+    pub fn modifySnapshotAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_snapshot_attribute.ModifySnapshotAttributeInput, options: CallOptions) !modify_snapshot_attribute.ModifySnapshotAttributeOutput {
         return modify_snapshot_attribute.execute(self, allocator, input, options);
     }
 
@@ -8897,7 +8898,7 @@ pub const Client = struct {
     /// tier. For more information, see [Archive Amazon EBS
     /// snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/snapshot-archive.html)
     /// in the *Amazon EBS User Guide*.
-    pub fn modifySnapshotTier(self: *Self, allocator: std.mem.Allocator, input: modify_snapshot_tier.ModifySnapshotTierInput, options: modify_snapshot_tier.Options) !modify_snapshot_tier.ModifySnapshotTierOutput {
+    pub fn modifySnapshotTier(self: *Self, allocator: std.mem.Allocator, input: modify_snapshot_tier.ModifySnapshotTierInput, options: CallOptions) !modify_snapshot_tier.ModifySnapshotTierOutput {
         return modify_snapshot_tier.execute(self, allocator, input, options);
     }
 
@@ -8945,7 +8946,7 @@ pub const Client = struct {
     /// If you are finished with your Spot Fleet for now, but will use it again
     /// later, you can
     /// set the target capacity to 0.
-    pub fn modifySpotFleetRequest(self: *Self, allocator: std.mem.Allocator, input: modify_spot_fleet_request.ModifySpotFleetRequestInput, options: modify_spot_fleet_request.Options) !modify_spot_fleet_request.ModifySpotFleetRequestOutput {
+    pub fn modifySpotFleetRequest(self: *Self, allocator: std.mem.Allocator, input: modify_spot_fleet_request.ModifySpotFleetRequestInput, options: CallOptions) !modify_spot_fleet_request.ModifySpotFleetRequestOutput {
         return modify_spot_fleet_request.execute(self, allocator, input, options);
     }
 
@@ -8969,7 +8970,7 @@ pub const Client = struct {
     ///
     /// * [Outpost
     ///   racks](https://docs.aws.amazon.com/outposts/latest/userguide/how-racks-work.html)
-    pub fn modifySubnetAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_subnet_attribute.ModifySubnetAttributeInput, options: modify_subnet_attribute.Options) !modify_subnet_attribute.ModifySubnetAttributeOutput {
+    pub fn modifySubnetAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_subnet_attribute.ModifySubnetAttributeInput, options: CallOptions) !modify_subnet_attribute.ModifySubnetAttributeOutput {
         return modify_subnet_attribute.execute(self, allocator, input, options);
     }
 
@@ -8982,7 +8983,7 @@ pub const Client = struct {
     /// When you no longer want to mirror network services, use
     /// `RemoveNetworkServices` to remove the network services from the Traffic
     /// Mirror filter.
-    pub fn modifyTrafficMirrorFilterNetworkServices(self: *Self, allocator: std.mem.Allocator, input: modify_traffic_mirror_filter_network_services.ModifyTrafficMirrorFilterNetworkServicesInput, options: modify_traffic_mirror_filter_network_services.Options) !modify_traffic_mirror_filter_network_services.ModifyTrafficMirrorFilterNetworkServicesOutput {
+    pub fn modifyTrafficMirrorFilterNetworkServices(self: *Self, allocator: std.mem.Allocator, input: modify_traffic_mirror_filter_network_services.ModifyTrafficMirrorFilterNetworkServicesInput, options: CallOptions) !modify_traffic_mirror_filter_network_services.ModifyTrafficMirrorFilterNetworkServicesOutput {
         return modify_traffic_mirror_filter_network_services.execute(self, allocator, input, options);
     }
 
@@ -8990,75 +8991,75 @@ pub const Client = struct {
     ///
     /// `DestinationCidrBlock` and `SourceCidrBlock` must both be an IPv4
     /// range or an IPv6 range.
-    pub fn modifyTrafficMirrorFilterRule(self: *Self, allocator: std.mem.Allocator, input: modify_traffic_mirror_filter_rule.ModifyTrafficMirrorFilterRuleInput, options: modify_traffic_mirror_filter_rule.Options) !modify_traffic_mirror_filter_rule.ModifyTrafficMirrorFilterRuleOutput {
+    pub fn modifyTrafficMirrorFilterRule(self: *Self, allocator: std.mem.Allocator, input: modify_traffic_mirror_filter_rule.ModifyTrafficMirrorFilterRuleInput, options: CallOptions) !modify_traffic_mirror_filter_rule.ModifyTrafficMirrorFilterRuleOutput {
         return modify_traffic_mirror_filter_rule.execute(self, allocator, input, options);
     }
 
     /// Modifies a Traffic Mirror session.
-    pub fn modifyTrafficMirrorSession(self: *Self, allocator: std.mem.Allocator, input: modify_traffic_mirror_session.ModifyTrafficMirrorSessionInput, options: modify_traffic_mirror_session.Options) !modify_traffic_mirror_session.ModifyTrafficMirrorSessionOutput {
+    pub fn modifyTrafficMirrorSession(self: *Self, allocator: std.mem.Allocator, input: modify_traffic_mirror_session.ModifyTrafficMirrorSessionInput, options: CallOptions) !modify_traffic_mirror_session.ModifyTrafficMirrorSessionOutput {
         return modify_traffic_mirror_session.execute(self, allocator, input, options);
     }
 
     /// Modifies the specified transit gateway. When you modify a transit gateway,
     /// the modified options are applied to new transit gateway attachments only.
     /// Your existing transit gateway attachments are not modified.
-    pub fn modifyTransitGateway(self: *Self, allocator: std.mem.Allocator, input: modify_transit_gateway.ModifyTransitGatewayInput, options: modify_transit_gateway.Options) !modify_transit_gateway.ModifyTransitGatewayOutput {
+    pub fn modifyTransitGateway(self: *Self, allocator: std.mem.Allocator, input: modify_transit_gateway.ModifyTransitGatewayInput, options: CallOptions) !modify_transit_gateway.ModifyTransitGatewayOutput {
         return modify_transit_gateway.execute(self, allocator, input, options);
     }
 
     /// Modifies a transit gateway metering policy.
-    pub fn modifyTransitGatewayMeteringPolicy(self: *Self, allocator: std.mem.Allocator, input: modify_transit_gateway_metering_policy.ModifyTransitGatewayMeteringPolicyInput, options: modify_transit_gateway_metering_policy.Options) !modify_transit_gateway_metering_policy.ModifyTransitGatewayMeteringPolicyOutput {
+    pub fn modifyTransitGatewayMeteringPolicy(self: *Self, allocator: std.mem.Allocator, input: modify_transit_gateway_metering_policy.ModifyTransitGatewayMeteringPolicyInput, options: CallOptions) !modify_transit_gateway_metering_policy.ModifyTransitGatewayMeteringPolicyOutput {
         return modify_transit_gateway_metering_policy.execute(self, allocator, input, options);
     }
 
     /// Modifies a reference (route) to a prefix list in a specified transit gateway
     /// route table.
-    pub fn modifyTransitGatewayPrefixListReference(self: *Self, allocator: std.mem.Allocator, input: modify_transit_gateway_prefix_list_reference.ModifyTransitGatewayPrefixListReferenceInput, options: modify_transit_gateway_prefix_list_reference.Options) !modify_transit_gateway_prefix_list_reference.ModifyTransitGatewayPrefixListReferenceOutput {
+    pub fn modifyTransitGatewayPrefixListReference(self: *Self, allocator: std.mem.Allocator, input: modify_transit_gateway_prefix_list_reference.ModifyTransitGatewayPrefixListReferenceInput, options: CallOptions) !modify_transit_gateway_prefix_list_reference.ModifyTransitGatewayPrefixListReferenceOutput {
         return modify_transit_gateway_prefix_list_reference.execute(self, allocator, input, options);
     }
 
     /// Modifies the specified VPC attachment.
-    pub fn modifyTransitGatewayVpcAttachment(self: *Self, allocator: std.mem.Allocator, input: modify_transit_gateway_vpc_attachment.ModifyTransitGatewayVpcAttachmentInput, options: modify_transit_gateway_vpc_attachment.Options) !modify_transit_gateway_vpc_attachment.ModifyTransitGatewayVpcAttachmentOutput {
+    pub fn modifyTransitGatewayVpcAttachment(self: *Self, allocator: std.mem.Allocator, input: modify_transit_gateway_vpc_attachment.ModifyTransitGatewayVpcAttachmentInput, options: CallOptions) !modify_transit_gateway_vpc_attachment.ModifyTransitGatewayVpcAttachmentOutput {
         return modify_transit_gateway_vpc_attachment.execute(self, allocator, input, options);
     }
 
     /// Modifies the configuration of the specified Amazon Web Services Verified
     /// Access endpoint.
-    pub fn modifyVerifiedAccessEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_verified_access_endpoint.ModifyVerifiedAccessEndpointInput, options: modify_verified_access_endpoint.Options) !modify_verified_access_endpoint.ModifyVerifiedAccessEndpointOutput {
+    pub fn modifyVerifiedAccessEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_verified_access_endpoint.ModifyVerifiedAccessEndpointInput, options: CallOptions) !modify_verified_access_endpoint.ModifyVerifiedAccessEndpointOutput {
         return modify_verified_access_endpoint.execute(self, allocator, input, options);
     }
 
     /// Modifies the specified Amazon Web Services Verified Access endpoint policy.
-    pub fn modifyVerifiedAccessEndpointPolicy(self: *Self, allocator: std.mem.Allocator, input: modify_verified_access_endpoint_policy.ModifyVerifiedAccessEndpointPolicyInput, options: modify_verified_access_endpoint_policy.Options) !modify_verified_access_endpoint_policy.ModifyVerifiedAccessEndpointPolicyOutput {
+    pub fn modifyVerifiedAccessEndpointPolicy(self: *Self, allocator: std.mem.Allocator, input: modify_verified_access_endpoint_policy.ModifyVerifiedAccessEndpointPolicyInput, options: CallOptions) !modify_verified_access_endpoint_policy.ModifyVerifiedAccessEndpointPolicyOutput {
         return modify_verified_access_endpoint_policy.execute(self, allocator, input, options);
     }
 
     /// Modifies the specified Amazon Web Services Verified Access group
     /// configuration.
-    pub fn modifyVerifiedAccessGroup(self: *Self, allocator: std.mem.Allocator, input: modify_verified_access_group.ModifyVerifiedAccessGroupInput, options: modify_verified_access_group.Options) !modify_verified_access_group.ModifyVerifiedAccessGroupOutput {
+    pub fn modifyVerifiedAccessGroup(self: *Self, allocator: std.mem.Allocator, input: modify_verified_access_group.ModifyVerifiedAccessGroupInput, options: CallOptions) !modify_verified_access_group.ModifyVerifiedAccessGroupOutput {
         return modify_verified_access_group.execute(self, allocator, input, options);
     }
 
     /// Modifies the specified Amazon Web Services Verified Access group policy.
-    pub fn modifyVerifiedAccessGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: modify_verified_access_group_policy.ModifyVerifiedAccessGroupPolicyInput, options: modify_verified_access_group_policy.Options) !modify_verified_access_group_policy.ModifyVerifiedAccessGroupPolicyOutput {
+    pub fn modifyVerifiedAccessGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: modify_verified_access_group_policy.ModifyVerifiedAccessGroupPolicyInput, options: CallOptions) !modify_verified_access_group_policy.ModifyVerifiedAccessGroupPolicyOutput {
         return modify_verified_access_group_policy.execute(self, allocator, input, options);
     }
 
     /// Modifies the configuration of the specified Amazon Web Services Verified
     /// Access instance.
-    pub fn modifyVerifiedAccessInstance(self: *Self, allocator: std.mem.Allocator, input: modify_verified_access_instance.ModifyVerifiedAccessInstanceInput, options: modify_verified_access_instance.Options) !modify_verified_access_instance.ModifyVerifiedAccessInstanceOutput {
+    pub fn modifyVerifiedAccessInstance(self: *Self, allocator: std.mem.Allocator, input: modify_verified_access_instance.ModifyVerifiedAccessInstanceInput, options: CallOptions) !modify_verified_access_instance.ModifyVerifiedAccessInstanceOutput {
         return modify_verified_access_instance.execute(self, allocator, input, options);
     }
 
     /// Modifies the logging configuration for the specified Amazon Web Services
     /// Verified Access instance.
-    pub fn modifyVerifiedAccessInstanceLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: modify_verified_access_instance_logging_configuration.ModifyVerifiedAccessInstanceLoggingConfigurationInput, options: modify_verified_access_instance_logging_configuration.Options) !modify_verified_access_instance_logging_configuration.ModifyVerifiedAccessInstanceLoggingConfigurationOutput {
+    pub fn modifyVerifiedAccessInstanceLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: modify_verified_access_instance_logging_configuration.ModifyVerifiedAccessInstanceLoggingConfigurationInput, options: CallOptions) !modify_verified_access_instance_logging_configuration.ModifyVerifiedAccessInstanceLoggingConfigurationOutput {
         return modify_verified_access_instance_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Modifies the configuration of the specified Amazon Web Services Verified
     /// Access trust provider.
-    pub fn modifyVerifiedAccessTrustProvider(self: *Self, allocator: std.mem.Allocator, input: modify_verified_access_trust_provider.ModifyVerifiedAccessTrustProviderInput, options: modify_verified_access_trust_provider.Options) !modify_verified_access_trust_provider.ModifyVerifiedAccessTrustProviderOutput {
+    pub fn modifyVerifiedAccessTrustProvider(self: *Self, allocator: std.mem.Allocator, input: modify_verified_access_trust_provider.ModifyVerifiedAccessTrustProviderInput, options: CallOptions) !modify_verified_access_trust_provider.ModifyVerifiedAccessTrustProviderOutput {
         return modify_verified_access_trust_provider.execute(self, allocator, input, options);
     }
 
@@ -9096,7 +9097,7 @@ pub const Client = struct {
     /// for that volume are `completed`. If you exceed this limit, you get an error
     /// message
     /// that indicates when you can perform your next modification.
-    pub fn modifyVolume(self: *Self, allocator: std.mem.Allocator, input: modify_volume.ModifyVolumeInput, options: modify_volume.Options) !modify_volume.ModifyVolumeOutput {
+    pub fn modifyVolume(self: *Self, allocator: std.mem.Allocator, input: modify_volume.ModifyVolumeInput, options: CallOptions) !modify_volume.ModifyVolumeOutput {
         return modify_volume.execute(self, allocator, input, options);
     }
 
@@ -9113,12 +9114,12 @@ pub const Client = struct {
     /// You can change the default behavior to resume I/O operations. We recommend
     /// that you change
     /// this only for boot volumes or for volumes that are stateless or disposable.
-    pub fn modifyVolumeAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_volume_attribute.ModifyVolumeAttributeInput, options: modify_volume_attribute.Options) !modify_volume_attribute.ModifyVolumeAttributeOutput {
+    pub fn modifyVolumeAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_volume_attribute.ModifyVolumeAttributeInput, options: CallOptions) !modify_volume_attribute.ModifyVolumeAttributeOutput {
         return modify_volume_attribute.execute(self, allocator, input, options);
     }
 
     /// Modifies the specified attribute of the specified VPC.
-    pub fn modifyVpcAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_attribute.ModifyVpcAttributeInput, options: modify_vpc_attribute.Options) !modify_vpc_attribute.ModifyVpcAttributeOutput {
+    pub fn modifyVpcAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_attribute.ModifyVpcAttributeInput, options: CallOptions) !modify_vpc_attribute.ModifyVpcAttributeOutput {
         return modify_vpc_attribute.execute(self, allocator, input, options);
     }
 
@@ -9128,7 +9129,7 @@ pub const Client = struct {
     /// can create BPA exclusions for VPCs and subnets even when BPA is not enabled
     /// on the account to ensure that there is no traffic disruption to the
     /// exclusions when VPC BPA is turned on.
-    pub fn modifyVpcBlockPublicAccessExclusion(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_block_public_access_exclusion.ModifyVpcBlockPublicAccessExclusionInput, options: modify_vpc_block_public_access_exclusion.Options) !modify_vpc_block_public_access_exclusion.ModifyVpcBlockPublicAccessExclusionOutput {
+    pub fn modifyVpcBlockPublicAccessExclusion(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_block_public_access_exclusion.ModifyVpcBlockPublicAccessExclusionInput, options: CallOptions) !modify_vpc_block_public_access_exclusion.ModifyVpcBlockPublicAccessExclusionOutput {
         return modify_vpc_block_public_access_exclusion.execute(self, allocator, input, options);
     }
 
@@ -9138,7 +9139,7 @@ pub const Client = struct {
     /// and egress-only internet gateways. To learn more about VPC BPA, see [Block
     /// public access to VPCs and
     /// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html) in the *Amazon VPC User Guide*.
-    pub fn modifyVpcBlockPublicAccessOptions(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_block_public_access_options.ModifyVpcBlockPublicAccessOptionsInput, options: modify_vpc_block_public_access_options.Options) !modify_vpc_block_public_access_options.ModifyVpcBlockPublicAccessOptionsOutput {
+    pub fn modifyVpcBlockPublicAccessOptions(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_block_public_access_options.ModifyVpcBlockPublicAccessOptionsInput, options: CallOptions) !modify_vpc_block_public_access_options.ModifyVpcBlockPublicAccessOptionsOutput {
         return modify_vpc_block_public_access_options.execute(self, allocator, input, options);
     }
 
@@ -9148,7 +9149,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Enforce VPC encryption in
     /// transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.
-    pub fn modifyVpcEncryptionControl(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_encryption_control.ModifyVpcEncryptionControlInput, options: modify_vpc_encryption_control.Options) !modify_vpc_encryption_control.ModifyVpcEncryptionControlOutput {
+    pub fn modifyVpcEncryptionControl(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_encryption_control.ModifyVpcEncryptionControlInput, options: CallOptions) !modify_vpc_encryption_control.ModifyVpcEncryptionControlOutput {
         return modify_vpc_encryption_control.execute(self, allocator, input, options);
     }
 
@@ -9158,7 +9159,7 @@ pub const Client = struct {
     /// Balancer). For more information,
     /// see the [Amazon Web Services PrivateLink
     /// Guide](https://docs.aws.amazon.com/vpc/latest/privatelink/).
-    pub fn modifyVpcEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_endpoint.ModifyVpcEndpointInput, options: modify_vpc_endpoint.Options) !modify_vpc_endpoint.ModifyVpcEndpointOutput {
+    pub fn modifyVpcEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_endpoint.ModifyVpcEndpointInput, options: CallOptions) !modify_vpc_endpoint.ModifyVpcEndpointOutput {
         return modify_vpc_endpoint.execute(self, allocator, input, options);
     }
 
@@ -9166,7 +9167,7 @@ pub const Client = struct {
     /// You
     /// can change the SNS topic for the notification, or the events for which to be
     /// notified.
-    pub fn modifyVpcEndpointConnectionNotification(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_endpoint_connection_notification.ModifyVpcEndpointConnectionNotificationInput, options: modify_vpc_endpoint_connection_notification.Options) !modify_vpc_endpoint_connection_notification.ModifyVpcEndpointConnectionNotificationOutput {
+    pub fn modifyVpcEndpointConnectionNotification(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_endpoint_connection_notification.ModifyVpcEndpointConnectionNotificationInput, options: CallOptions) !modify_vpc_endpoint_connection_notification.ModifyVpcEndpointConnectionNotificationOutput {
         return modify_vpc_endpoint_connection_notification.execute(self, allocator, input, options);
     }
 
@@ -9175,12 +9176,12 @@ pub const Client = struct {
     /// If you set or modify the private DNS name, you must prove that you own the
     /// private DNS
     /// domain name.
-    pub fn modifyVpcEndpointServiceConfiguration(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_endpoint_service_configuration.ModifyVpcEndpointServiceConfigurationInput, options: modify_vpc_endpoint_service_configuration.Options) !modify_vpc_endpoint_service_configuration.ModifyVpcEndpointServiceConfigurationOutput {
+    pub fn modifyVpcEndpointServiceConfiguration(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_endpoint_service_configuration.ModifyVpcEndpointServiceConfigurationInput, options: CallOptions) !modify_vpc_endpoint_service_configuration.ModifyVpcEndpointServiceConfigurationOutput {
         return modify_vpc_endpoint_service_configuration.execute(self, allocator, input, options);
     }
 
     /// Modifies the payer responsibility for your VPC endpoint service.
-    pub fn modifyVpcEndpointServicePayerResponsibility(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_endpoint_service_payer_responsibility.ModifyVpcEndpointServicePayerResponsibilityInput, options: modify_vpc_endpoint_service_payer_responsibility.Options) !modify_vpc_endpoint_service_payer_responsibility.ModifyVpcEndpointServicePayerResponsibilityOutput {
+    pub fn modifyVpcEndpointServicePayerResponsibility(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_endpoint_service_payer_responsibility.ModifyVpcEndpointServicePayerResponsibilityInput, options: CallOptions) !modify_vpc_endpoint_service_payer_responsibility.ModifyVpcEndpointServicePayerResponsibilityOutput {
         return modify_vpc_endpoint_service_payer_responsibility.execute(self, allocator, input, options);
     }
 
@@ -9195,7 +9196,7 @@ pub const Client = struct {
     /// public service can send a request to attach an endpoint. If the service does
     /// not require manual approval,
     /// attachments are automatically approved.
-    pub fn modifyVpcEndpointServicePermissions(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_endpoint_service_permissions.ModifyVpcEndpointServicePermissionsInput, options: modify_vpc_endpoint_service_permissions.Options) !modify_vpc_endpoint_service_permissions.ModifyVpcEndpointServicePermissionsOutput {
+    pub fn modifyVpcEndpointServicePermissions(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_endpoint_service_permissions.ModifyVpcEndpointServicePermissionsInput, options: CallOptions) !modify_vpc_endpoint_service_permissions.ModifyVpcEndpointServicePermissionsOutput {
         return modify_vpc_endpoint_service_permissions.execute(self, allocator, input, options);
     }
 
@@ -9222,7 +9223,7 @@ pub const Client = struct {
     /// the
     /// requester for a VPC peering connection, use the
     /// DescribeVpcPeeringConnections command.
-    pub fn modifyVpcPeeringConnectionOptions(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_peering_connection_options.ModifyVpcPeeringConnectionOptionsInput, options: modify_vpc_peering_connection_options.Options) !modify_vpc_peering_connection_options.ModifyVpcPeeringConnectionOptionsOutput {
+    pub fn modifyVpcPeeringConnectionOptions(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_peering_connection_options.ModifyVpcPeeringConnectionOptionsInput, options: CallOptions) !modify_vpc_peering_connection_options.ModifyVpcPeeringConnectionOptionsOutput {
         return modify_vpc_peering_connection_options.execute(self, allocator, input, options);
     }
 
@@ -9239,7 +9240,7 @@ pub const Client = struct {
     /// For more information, see [Dedicated
     /// Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn modifyVpcTenancy(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_tenancy.ModifyVpcTenancyInput, options: modify_vpc_tenancy.Options) !modify_vpc_tenancy.ModifyVpcTenancyOutput {
+    pub fn modifyVpcTenancy(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_tenancy.ModifyVpcTenancyInput, options: CallOptions) !modify_vpc_tenancy.ModifyVpcTenancyOutput {
         return modify_vpc_tenancy.execute(self, allocator, input, options);
     }
 
@@ -9292,7 +9293,7 @@ pub const Client = struct {
     /// Web Services Site-to-Site VPN connection will
     /// be temporarily unavailable for a brief period while we provision the new
     /// endpoints.
-    pub fn modifyVpnConnection(self: *Self, allocator: std.mem.Allocator, input: modify_vpn_connection.ModifyVpnConnectionInput, options: modify_vpn_connection.Options) !modify_vpn_connection.ModifyVpnConnectionOutput {
+    pub fn modifyVpnConnection(self: *Self, allocator: std.mem.Allocator, input: modify_vpn_connection.ModifyVpnConnectionInput, options: CallOptions) !modify_vpn_connection.ModifyVpnConnectionOutput {
         return modify_vpn_connection.execute(self, allocator, input, options);
     }
 
@@ -9305,12 +9306,12 @@ pub const Client = struct {
     /// VPN connection will be temporarily unavailable for a brief period while the
     /// VPN
     /// connection is updated.
-    pub fn modifyVpnConnectionOptions(self: *Self, allocator: std.mem.Allocator, input: modify_vpn_connection_options.ModifyVpnConnectionOptionsInput, options: modify_vpn_connection_options.Options) !modify_vpn_connection_options.ModifyVpnConnectionOptionsOutput {
+    pub fn modifyVpnConnectionOptions(self: *Self, allocator: std.mem.Allocator, input: modify_vpn_connection_options.ModifyVpnConnectionOptionsInput, options: CallOptions) !modify_vpn_connection_options.ModifyVpnConnectionOptionsOutput {
         return modify_vpn_connection_options.execute(self, allocator, input, options);
     }
 
     /// Modifies the VPN tunnel endpoint certificate.
-    pub fn modifyVpnTunnelCertificate(self: *Self, allocator: std.mem.Allocator, input: modify_vpn_tunnel_certificate.ModifyVpnTunnelCertificateInput, options: modify_vpn_tunnel_certificate.Options) !modify_vpn_tunnel_certificate.ModifyVpnTunnelCertificateOutput {
+    pub fn modifyVpnTunnelCertificate(self: *Self, allocator: std.mem.Allocator, input: modify_vpn_tunnel_certificate.ModifyVpnTunnelCertificateInput, options: CallOptions) !modify_vpn_tunnel_certificate.ModifyVpnTunnelCertificateOutput {
         return modify_vpn_tunnel_certificate.execute(self, allocator, input, options);
     }
 
@@ -9322,7 +9323,7 @@ pub const Client = struct {
     /// Site-to-Site VPN
     /// connection](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPNTunnels.html)
     /// in the *Amazon Web Services Site-to-Site VPN User Guide*.
-    pub fn modifyVpnTunnelOptions(self: *Self, allocator: std.mem.Allocator, input: modify_vpn_tunnel_options.ModifyVpnTunnelOptionsInput, options: modify_vpn_tunnel_options.Options) !modify_vpn_tunnel_options.ModifyVpnTunnelOptionsOutput {
+    pub fn modifyVpnTunnelOptions(self: *Self, allocator: std.mem.Allocator, input: modify_vpn_tunnel_options.ModifyVpnTunnelOptionsInput, options: CallOptions) !modify_vpn_tunnel_options.ModifyVpnTunnelOptionsOutput {
         return modify_vpn_tunnel_options.execute(self, allocator, input, options);
     }
 
@@ -9333,7 +9334,7 @@ pub const Client = struct {
     ///
     /// To disable detailed monitoring, see
     /// [UnmonitorInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_UnmonitorInstances.html).
-    pub fn monitorInstances(self: *Self, allocator: std.mem.Allocator, input: monitor_instances.MonitorInstancesInput, options: monitor_instances.Options) !monitor_instances.MonitorInstancesOutput {
+    pub fn monitorInstances(self: *Self, allocator: std.mem.Allocator, input: monitor_instances.MonitorInstancesInput, options: CallOptions) !monitor_instances.MonitorInstancesOutput {
         return monitor_instances.execute(self, allocator, input, options);
     }
 
@@ -9349,7 +9350,7 @@ pub const Client = struct {
     /// address that was
     /// originally allocated for use in the EC2-VPC platform to the EC2-Classic
     /// platform.
-    pub fn moveAddressToVpc(self: *Self, allocator: std.mem.Allocator, input: move_address_to_vpc.MoveAddressToVpcInput, options: move_address_to_vpc.Options) !move_address_to_vpc.MoveAddressToVpcOutput {
+    pub fn moveAddressToVpc(self: *Self, allocator: std.mem.Allocator, input: move_address_to_vpc.MoveAddressToVpcInput, options: CallOptions) !move_address_to_vpc.MoveAddressToVpcOutput {
         return move_address_to_vpc.execute(self, allocator, input, options);
     }
 
@@ -9360,7 +9361,7 @@ pub const Client = struct {
     /// IPAM. If you are bringing a new IP address to Amazon Web Services for the
     /// first time, complete the steps in [Tutorial: BYOIP address CIDRs to
     /// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoip-ipam.html).
-    pub fn moveByoipCidrToIpam(self: *Self, allocator: std.mem.Allocator, input: move_byoip_cidr_to_ipam.MoveByoipCidrToIpamInput, options: move_byoip_cidr_to_ipam.Options) !move_byoip_cidr_to_ipam.MoveByoipCidrToIpamOutput {
+    pub fn moveByoipCidrToIpam(self: *Self, allocator: std.mem.Allocator, input: move_byoip_cidr_to_ipam.MoveByoipCidrToIpamInput, options: CallOptions) !move_byoip_cidr_to_ipam.MoveByoipCidrToIpamOutput {
         return move_byoip_cidr_to_ipam.execute(self, allocator, input, options);
     }
 
@@ -9383,7 +9384,7 @@ pub const Client = struct {
     ///
     /// * Capacity Reservation end time - `At specific time` or
     /// `Manually`.
-    pub fn moveCapacityReservationInstances(self: *Self, allocator: std.mem.Allocator, input: move_capacity_reservation_instances.MoveCapacityReservationInstancesInput, options: move_capacity_reservation_instances.Options) !move_capacity_reservation_instances.MoveCapacityReservationInstancesOutput {
+    pub fn moveCapacityReservationInstances(self: *Self, allocator: std.mem.Allocator, input: move_capacity_reservation_instances.MoveCapacityReservationInstancesInput, options: CallOptions) !move_capacity_reservation_instances.MoveCapacityReservationInstancesOutput {
         return move_capacity_reservation_instances.execute(self, allocator, input, options);
     }
 
@@ -9409,7 +9410,7 @@ pub const Client = struct {
     /// `pending-provision`
     /// to `provisioned`. For more information, see [Onboard your address
     /// range](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/byoip-onboard.html).
-    pub fn provisionByoipCidr(self: *Self, allocator: std.mem.Allocator, input: provision_byoip_cidr.ProvisionByoipCidrInput, options: provision_byoip_cidr.Options) !provision_byoip_cidr.ProvisionByoipCidrOutput {
+    pub fn provisionByoipCidr(self: *Self, allocator: std.mem.Allocator, input: provision_byoip_cidr.ProvisionByoipCidrInput, options: CallOptions) !provision_byoip_cidr.ProvisionByoipCidrOutput {
         return provision_byoip_cidr.execute(self, allocator, input, options);
     }
 
@@ -9419,7 +9420,7 @@ pub const Client = struct {
     /// [Tutorial: Bring your ASN to
     /// IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html) in
     /// the *Amazon VPC IPAM guide*.
-    pub fn provisionIpamByoasn(self: *Self, allocator: std.mem.Allocator, input: provision_ipam_byoasn.ProvisionIpamByoasnInput, options: provision_ipam_byoasn.Options) !provision_ipam_byoasn.ProvisionIpamByoasnOutput {
+    pub fn provisionIpamByoasn(self: *Self, allocator: std.mem.Allocator, input: provision_ipam_byoasn.ProvisionIpamByoasnInput, options: CallOptions) !provision_ipam_byoasn.ProvisionIpamByoasnOutput {
         return provision_ipam_byoasn.execute(self, allocator, input, options);
     }
 
@@ -9430,7 +9431,7 @@ pub const Client = struct {
     /// For more information, see [Provision CIDRs to
     /// pools](https://docs.aws.amazon.com/vpc/latest/ipam/prov-cidr-ipam.html) in
     /// the *Amazon VPC IPAM User Guide*.
-    pub fn provisionIpamPoolCidr(self: *Self, allocator: std.mem.Allocator, input: provision_ipam_pool_cidr.ProvisionIpamPoolCidrInput, options: provision_ipam_pool_cidr.Options) !provision_ipam_pool_cidr.ProvisionIpamPoolCidrOutput {
+    pub fn provisionIpamPoolCidr(self: *Self, allocator: std.mem.Allocator, input: provision_ipam_pool_cidr.ProvisionIpamPoolCidrInput, options: CallOptions) !provision_ipam_pool_cidr.ProvisionIpamPoolCidrOutput {
         return provision_ipam_pool_cidr.execute(self, allocator, input, options);
     }
 
@@ -9439,7 +9440,7 @@ pub const Client = struct {
     /// For more information about IPAM, see [What is
     /// IPAM?](https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html) in
     /// the *Amazon VPC IPAM User Guide*.
-    pub fn provisionPublicIpv4PoolCidr(self: *Self, allocator: std.mem.Allocator, input: provision_public_ipv_4_pool_cidr.ProvisionPublicIpv4PoolCidrInput, options: provision_public_ipv_4_pool_cidr.Options) !provision_public_ipv_4_pool_cidr.ProvisionPublicIpv4PoolCidrOutput {
+    pub fn provisionPublicIpv4PoolCidr(self: *Self, allocator: std.mem.Allocator, input: provision_public_ipv_4_pool_cidr.ProvisionPublicIpv4PoolCidrInput, options: CallOptions) !provision_public_ipv_4_pool_cidr.ProvisionPublicIpv4PoolCidrOutput {
         return provision_public_ipv_4_pool_cidr.execute(self, allocator, input, options);
     }
 
@@ -9448,14 +9449,14 @@ pub const Client = struct {
     /// GPU capacity is available for machine learning (ML) workloads. You must
     /// specify the ID
     /// of the Capacity Block offering you are purchasing.
-    pub fn purchaseCapacityBlock(self: *Self, allocator: std.mem.Allocator, input: purchase_capacity_block.PurchaseCapacityBlockInput, options: purchase_capacity_block.Options) !purchase_capacity_block.PurchaseCapacityBlockOutput {
+    pub fn purchaseCapacityBlock(self: *Self, allocator: std.mem.Allocator, input: purchase_capacity_block.PurchaseCapacityBlockInput, options: CallOptions) !purchase_capacity_block.PurchaseCapacityBlockOutput {
         return purchase_capacity_block.execute(self, allocator, input, options);
     }
 
     /// Purchase the Capacity Block extension for use with your account. You must
     /// specify the
     /// ID of the Capacity Block extension offering you are purchasing.
-    pub fn purchaseCapacityBlockExtension(self: *Self, allocator: std.mem.Allocator, input: purchase_capacity_block_extension.PurchaseCapacityBlockExtensionInput, options: purchase_capacity_block_extension.Options) !purchase_capacity_block_extension.PurchaseCapacityBlockExtensionOutput {
+    pub fn purchaseCapacityBlockExtension(self: *Self, allocator: std.mem.Allocator, input: purchase_capacity_block_extension.PurchaseCapacityBlockExtensionInput, options: CallOptions) !purchase_capacity_block_extension.PurchaseCapacityBlockExtensionOutput {
         return purchase_capacity_block_extension.execute(self, allocator, input, options);
     }
 
@@ -9466,7 +9467,7 @@ pub const Client = struct {
     /// This action results in the specified reservation being purchased and charged
     /// to your
     /// account.
-    pub fn purchaseHostReservation(self: *Self, allocator: std.mem.Allocator, input: purchase_host_reservation.PurchaseHostReservationInput, options: purchase_host_reservation.Options) !purchase_host_reservation.PurchaseHostReservationOutput {
+    pub fn purchaseHostReservation(self: *Self, allocator: std.mem.Allocator, input: purchase_host_reservation.PurchaseHostReservationInput, options: CallOptions) !purchase_host_reservation.PurchaseHostReservationOutput {
         return purchase_host_reservation.execute(self, allocator, input, options);
     }
 
@@ -9486,7 +9487,7 @@ pub const Client = struct {
     /// For more information, see [Reserved
     /// Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html) and [Sell in the Reserved Instance
     /// Marketplace](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html) in the *Amazon EC2 User Guide*.
-    pub fn purchaseReservedInstancesOffering(self: *Self, allocator: std.mem.Allocator, input: purchase_reserved_instances_offering.PurchaseReservedInstancesOfferingInput, options: purchase_reserved_instances_offering.Options) !purchase_reserved_instances_offering.PurchaseReservedInstancesOfferingOutput {
+    pub fn purchaseReservedInstancesOffering(self: *Self, allocator: std.mem.Allocator, input: purchase_reserved_instances_offering.PurchaseReservedInstancesOfferingInput, options: CallOptions) !purchase_reserved_instances_offering.PurchaseReservedInstancesOfferingOutput {
         return purchase_reserved_instances_offering.execute(self, allocator, input, options);
     }
 
@@ -9504,7 +9505,7 @@ pub const Client = struct {
     ///
     /// After you purchase a Scheduled Instance, you can't cancel, modify, or resell
     /// your purchase.
-    pub fn purchaseScheduledInstances(self: *Self, allocator: std.mem.Allocator, input: purchase_scheduled_instances.PurchaseScheduledInstancesInput, options: purchase_scheduled_instances.Options) !purchase_scheduled_instances.PurchaseScheduledInstancesOutput {
+    pub fn purchaseScheduledInstances(self: *Self, allocator: std.mem.Allocator, input: purchase_scheduled_instances.PurchaseScheduledInstancesInput, options: CallOptions) !purchase_scheduled_instances.PurchaseScheduledInstancesOutput {
         return purchase_scheduled_instances.execute(self, allocator, input, options);
     }
 
@@ -9522,7 +9523,7 @@ pub const Client = struct {
     ///
     /// For more information about troubleshooting, see [Troubleshoot an unreachable
     /// instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html) in the *Amazon EC2 User Guide*.
-    pub fn rebootInstances(self: *Self, allocator: std.mem.Allocator, input: reboot_instances.RebootInstancesInput, options: reboot_instances.Options) !reboot_instances.RebootInstancesOutput {
+    pub fn rebootInstances(self: *Self, allocator: std.mem.Allocator, input: reboot_instances.RebootInstancesInput, options: CallOptions) !reboot_instances.RebootInstancesOutput {
         return reboot_instances.execute(self, allocator, input, options);
     }
 
@@ -9594,7 +9595,7 @@ pub const Client = struct {
     /// see [Understand AMI
     /// billing
     /// information](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html) in the *Amazon EC2 User Guide*.
-    pub fn registerImage(self: *Self, allocator: std.mem.Allocator, input: register_image.RegisterImageInput, options: register_image.Options) !register_image.RegisterImageOutput {
+    pub fn registerImage(self: *Self, allocator: std.mem.Allocator, input: register_image.RegisterImageInput, options: CallOptions) !register_image.RegisterImageOutput {
         return register_image.execute(self, allocator, input, options);
     }
 
@@ -9604,7 +9605,7 @@ pub const Client = struct {
     ///
     /// To remove tags, use
     /// [DeregisterInstanceEventNotificationAttributes](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeregisterInstanceEventNotificationAttributes.html).
-    pub fn registerInstanceEventNotificationAttributes(self: *Self, allocator: std.mem.Allocator, input: register_instance_event_notification_attributes.RegisterInstanceEventNotificationAttributesInput, options: register_instance_event_notification_attributes.Options) !register_instance_event_notification_attributes.RegisterInstanceEventNotificationAttributesOutput {
+    pub fn registerInstanceEventNotificationAttributes(self: *Self, allocator: std.mem.Allocator, input: register_instance_event_notification_attributes.RegisterInstanceEventNotificationAttributesInput, options: CallOptions) !register_instance_event_notification_attributes.RegisterInstanceEventNotificationAttributesOutput {
         return register_instance_event_notification_attributes.execute(self, allocator, input, options);
     }
 
@@ -9619,7 +9620,7 @@ pub const Client = struct {
     /// After you add the members, use
     /// [SearchTransitGatewayMulticastGroups](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html) to verify that the members were added
     /// to the transit gateway multicast group.
-    pub fn registerTransitGatewayMulticastGroupMembers(self: *Self, allocator: std.mem.Allocator, input: register_transit_gateway_multicast_group_members.RegisterTransitGatewayMulticastGroupMembersInput, options: register_transit_gateway_multicast_group_members.Options) !register_transit_gateway_multicast_group_members.RegisterTransitGatewayMulticastGroupMembersOutput {
+    pub fn registerTransitGatewayMulticastGroupMembers(self: *Self, allocator: std.mem.Allocator, input: register_transit_gateway_multicast_group_members.RegisterTransitGatewayMulticastGroupMembersInput, options: CallOptions) !register_transit_gateway_multicast_group_members.RegisterTransitGatewayMulticastGroupMembersOutput {
         return register_transit_gateway_multicast_group_members.execute(self, allocator, input, options);
     }
 
@@ -9636,7 +9637,7 @@ pub const Client = struct {
     /// After you add the source, use
     /// [SearchTransitGatewayMulticastGroups](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html) to verify that the source was added to the multicast
     /// group.
-    pub fn registerTransitGatewayMulticastGroupSources(self: *Self, allocator: std.mem.Allocator, input: register_transit_gateway_multicast_group_sources.RegisterTransitGatewayMulticastGroupSourcesInput, options: register_transit_gateway_multicast_group_sources.Options) !register_transit_gateway_multicast_group_sources.RegisterTransitGatewayMulticastGroupSourcesOutput {
+    pub fn registerTransitGatewayMulticastGroupSources(self: *Self, allocator: std.mem.Allocator, input: register_transit_gateway_multicast_group_sources.RegisterTransitGatewayMulticastGroupSourcesInput, options: CallOptions) !register_transit_gateway_multicast_group_sources.RegisterTransitGatewayMulticastGroupSourcesOutput {
         return register_transit_gateway_multicast_group_sources.execute(self, allocator, input, options);
     }
 
@@ -9646,18 +9647,18 @@ pub const Client = struct {
     /// for shared
     /// Amazon EC2 Capacity
     /// Reservations](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/assign-billing.html).
-    pub fn rejectCapacityReservationBillingOwnership(self: *Self, allocator: std.mem.Allocator, input: reject_capacity_reservation_billing_ownership.RejectCapacityReservationBillingOwnershipInput, options: reject_capacity_reservation_billing_ownership.Options) !reject_capacity_reservation_billing_ownership.RejectCapacityReservationBillingOwnershipOutput {
+    pub fn rejectCapacityReservationBillingOwnership(self: *Self, allocator: std.mem.Allocator, input: reject_capacity_reservation_billing_ownership.RejectCapacityReservationBillingOwnershipInput, options: CallOptions) !reject_capacity_reservation_billing_ownership.RejectCapacityReservationBillingOwnershipOutput {
         return reject_capacity_reservation_billing_ownership.execute(self, allocator, input, options);
     }
 
     /// Rejects a request to associate cross-account subnets with a transit gateway
     /// multicast domain.
-    pub fn rejectTransitGatewayMulticastDomainAssociations(self: *Self, allocator: std.mem.Allocator, input: reject_transit_gateway_multicast_domain_associations.RejectTransitGatewayMulticastDomainAssociationsInput, options: reject_transit_gateway_multicast_domain_associations.Options) !reject_transit_gateway_multicast_domain_associations.RejectTransitGatewayMulticastDomainAssociationsOutput {
+    pub fn rejectTransitGatewayMulticastDomainAssociations(self: *Self, allocator: std.mem.Allocator, input: reject_transit_gateway_multicast_domain_associations.RejectTransitGatewayMulticastDomainAssociationsInput, options: CallOptions) !reject_transit_gateway_multicast_domain_associations.RejectTransitGatewayMulticastDomainAssociationsOutput {
         return reject_transit_gateway_multicast_domain_associations.execute(self, allocator, input, options);
     }
 
     /// Rejects a transit gateway peering attachment request.
-    pub fn rejectTransitGatewayPeeringAttachment(self: *Self, allocator: std.mem.Allocator, input: reject_transit_gateway_peering_attachment.RejectTransitGatewayPeeringAttachmentInput, options: reject_transit_gateway_peering_attachment.Options) !reject_transit_gateway_peering_attachment.RejectTransitGatewayPeeringAttachmentOutput {
+    pub fn rejectTransitGatewayPeeringAttachment(self: *Self, allocator: std.mem.Allocator, input: reject_transit_gateway_peering_attachment.RejectTransitGatewayPeeringAttachmentInput, options: CallOptions) !reject_transit_gateway_peering_attachment.RejectTransitGatewayPeeringAttachmentOutput {
         return reject_transit_gateway_peering_attachment.execute(self, allocator, input, options);
     }
 
@@ -9667,12 +9668,12 @@ pub const Client = struct {
     /// Use DescribeTransitGatewayVpcAttachments to view your pending VPC attachment
     /// requests.
     /// Use AcceptTransitGatewayVpcAttachment to accept a VPC attachment request.
-    pub fn rejectTransitGatewayVpcAttachment(self: *Self, allocator: std.mem.Allocator, input: reject_transit_gateway_vpc_attachment.RejectTransitGatewayVpcAttachmentInput, options: reject_transit_gateway_vpc_attachment.Options) !reject_transit_gateway_vpc_attachment.RejectTransitGatewayVpcAttachmentOutput {
+    pub fn rejectTransitGatewayVpcAttachment(self: *Self, allocator: std.mem.Allocator, input: reject_transit_gateway_vpc_attachment.RejectTransitGatewayVpcAttachmentInput, options: CallOptions) !reject_transit_gateway_vpc_attachment.RejectTransitGatewayVpcAttachmentOutput {
         return reject_transit_gateway_vpc_attachment.execute(self, allocator, input, options);
     }
 
     /// Rejects VPC endpoint connection requests to your VPC endpoint service.
-    pub fn rejectVpcEndpointConnections(self: *Self, allocator: std.mem.Allocator, input: reject_vpc_endpoint_connections.RejectVpcEndpointConnectionsInput, options: reject_vpc_endpoint_connections.Options) !reject_vpc_endpoint_connections.RejectVpcEndpointConnectionsOutput {
+    pub fn rejectVpcEndpointConnections(self: *Self, allocator: std.mem.Allocator, input: reject_vpc_endpoint_connections.RejectVpcEndpointConnectionsInput, options: CallOptions) !reject_vpc_endpoint_connections.RejectVpcEndpointConnectionsOutput {
         return reject_vpc_endpoint_connections.execute(self, allocator, input, options);
     }
 
@@ -9683,7 +9684,7 @@ pub const Client = struct {
     /// active VPC peering
     /// connection, or to delete a VPC peering connection request that you
     /// initiated, use DeleteVpcPeeringConnection.
-    pub fn rejectVpcPeeringConnection(self: *Self, allocator: std.mem.Allocator, input: reject_vpc_peering_connection.RejectVpcPeeringConnectionInput, options: reject_vpc_peering_connection.Options) !reject_vpc_peering_connection.RejectVpcPeeringConnectionOutput {
+    pub fn rejectVpcPeeringConnection(self: *Self, allocator: std.mem.Allocator, input: reject_vpc_peering_connection.RejectVpcPeeringConnectionInput, options: CallOptions) !reject_vpc_peering_connection.RejectVpcPeeringConnectionOutput {
         return reject_vpc_peering_connection.execute(self, allocator, input, options);
     }
 
@@ -9710,7 +9711,7 @@ pub const Client = struct {
     /// After you release an Elastic IP address, you might be able to recover it.
     /// For more information, see [Release an Elastic IP
     /// address](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing-eips-releasing.html).
-    pub fn releaseAddress(self: *Self, allocator: std.mem.Allocator, input: release_address.ReleaseAddressInput, options: release_address.Options) !release_address.ReleaseAddressOutput {
+    pub fn releaseAddress(self: *Self, allocator: std.mem.Allocator, input: release_address.ReleaseAddressInput, options: CallOptions) !release_address.ReleaseAddressOutput {
         return release_address.execute(self, allocator, input, options);
     }
 
@@ -9730,7 +9731,7 @@ pub const Client = struct {
     /// Dedicated Hosts. Wait a few minutes and then try again.
     ///
     /// Released hosts still appear in a DescribeHosts response.
-    pub fn releaseHosts(self: *Self, allocator: std.mem.Allocator, input: release_hosts.ReleaseHostsInput, options: release_hosts.Options) !release_hosts.ReleaseHostsOutput {
+    pub fn releaseHosts(self: *Self, allocator: std.mem.Allocator, input: release_hosts.ReleaseHostsInput, options: CallOptions) !release_hosts.ReleaseHostsOutput {
         return release_hosts.execute(self, allocator, input, options);
     }
 
@@ -9743,7 +9744,7 @@ pub const Client = struct {
     ///
     /// All EC2 API actions follow an [eventual
     /// consistency](https://docs.aws.amazon.com/ec2/latest/devguide/eventual-consistency.html) model.
-    pub fn releaseIpamPoolAllocation(self: *Self, allocator: std.mem.Allocator, input: release_ipam_pool_allocation.ReleaseIpamPoolAllocationInput, options: release_ipam_pool_allocation.Options) !release_ipam_pool_allocation.ReleaseIpamPoolAllocationOutput {
+    pub fn releaseIpamPoolAllocation(self: *Self, allocator: std.mem.Allocator, input: release_ipam_pool_allocation.ReleaseIpamPoolAllocationInput, options: CallOptions) !release_ipam_pool_allocation.ReleaseIpamPoolAllocationOutput {
         return release_ipam_pool_allocation.execute(self, allocator, input, options);
     }
 
@@ -9755,7 +9756,7 @@ pub const Client = struct {
     ///
     /// Use DescribeIamInstanceProfileAssociations to get the association
     /// ID.
-    pub fn replaceIamInstanceProfileAssociation(self: *Self, allocator: std.mem.Allocator, input: replace_iam_instance_profile_association.ReplaceIamInstanceProfileAssociationInput, options: replace_iam_instance_profile_association.Options) !replace_iam_instance_profile_association.ReplaceIamInstanceProfileAssociationOutput {
+    pub fn replaceIamInstanceProfileAssociation(self: *Self, allocator: std.mem.Allocator, input: replace_iam_instance_profile_association.ReplaceIamInstanceProfileAssociationInput, options: CallOptions) !replace_iam_instance_profile_association.ReplaceIamInstanceProfileAssociationOutput {
         return replace_iam_instance_profile_association.execute(self, allocator, input, options);
     }
 
@@ -9771,7 +9772,7 @@ pub const Client = struct {
     /// Amazon EC2 with Allowed
     /// AMIs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html) in
     /// *Amazon EC2 User Guide*.
-    pub fn replaceImageCriteriaInAllowedImagesSettings(self: *Self, allocator: std.mem.Allocator, input: replace_image_criteria_in_allowed_images_settings.ReplaceImageCriteriaInAllowedImagesSettingsInput, options: replace_image_criteria_in_allowed_images_settings.Options) !replace_image_criteria_in_allowed_images_settings.ReplaceImageCriteriaInAllowedImagesSettingsOutput {
+    pub fn replaceImageCriteriaInAllowedImagesSettings(self: *Self, allocator: std.mem.Allocator, input: replace_image_criteria_in_allowed_images_settings.ReplaceImageCriteriaInAllowedImagesSettingsInput, options: CallOptions) !replace_image_criteria_in_allowed_images_settings.ReplaceImageCriteriaInAllowedImagesSettingsOutput {
         return replace_image_criteria_in_allowed_images_settings.execute(self, allocator, input, options);
     }
 
@@ -9782,7 +9783,7 @@ pub const Client = struct {
     /// ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) in the *Amazon VPC User Guide*.
     ///
     /// This is an idempotent operation.
-    pub fn replaceNetworkAclAssociation(self: *Self, allocator: std.mem.Allocator, input: replace_network_acl_association.ReplaceNetworkAclAssociationInput, options: replace_network_acl_association.Options) !replace_network_acl_association.ReplaceNetworkAclAssociationOutput {
+    pub fn replaceNetworkAclAssociation(self: *Self, allocator: std.mem.Allocator, input: replace_network_acl_association.ReplaceNetworkAclAssociationInput, options: CallOptions) !replace_network_acl_association.ReplaceNetworkAclAssociationOutput {
         return replace_network_acl_association.execute(self, allocator, input, options);
     }
 
@@ -9790,7 +9791,7 @@ pub const Client = struct {
     /// [Network
     /// ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) in the
     /// *Amazon VPC User Guide*.
-    pub fn replaceNetworkAclEntry(self: *Self, allocator: std.mem.Allocator, input: replace_network_acl_entry.ReplaceNetworkAclEntryInput, options: replace_network_acl_entry.Options) !replace_network_acl_entry.ReplaceNetworkAclEntryOutput {
+    pub fn replaceNetworkAclEntry(self: *Self, allocator: std.mem.Allocator, input: replace_network_acl_entry.ReplaceNetworkAclEntryInput, options: CallOptions) !replace_network_acl_entry.ReplaceNetworkAclEntryOutput {
         return replace_network_acl_entry.execute(self, allocator, input, options);
     }
 
@@ -9805,7 +9806,7 @@ pub const Client = struct {
     /// For more information, see [Route
     /// tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) in the
     /// *Amazon VPC User Guide*.
-    pub fn replaceRoute(self: *Self, allocator: std.mem.Allocator, input: replace_route.ReplaceRouteInput, options: replace_route.Options) !replace_route.ReplaceRouteOutput {
+    pub fn replaceRoute(self: *Self, allocator: std.mem.Allocator, input: replace_route.ReplaceRouteInput, options: CallOptions) !replace_route.ReplaceRouteOutput {
         return replace_route.execute(self, allocator, input, options);
     }
 
@@ -9819,17 +9820,17 @@ pub const Client = struct {
     /// You can also use this operation to change which table is the main route
     /// table in the VPC. Specify the main route table's association ID and the
     /// route table ID of the new main route table.
-    pub fn replaceRouteTableAssociation(self: *Self, allocator: std.mem.Allocator, input: replace_route_table_association.ReplaceRouteTableAssociationInput, options: replace_route_table_association.Options) !replace_route_table_association.ReplaceRouteTableAssociationOutput {
+    pub fn replaceRouteTableAssociation(self: *Self, allocator: std.mem.Allocator, input: replace_route_table_association.ReplaceRouteTableAssociationInput, options: CallOptions) !replace_route_table_association.ReplaceRouteTableAssociationOutput {
         return replace_route_table_association.execute(self, allocator, input, options);
     }
 
     /// Replaces the specified route in the specified transit gateway route table.
-    pub fn replaceTransitGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: replace_transit_gateway_route.ReplaceTransitGatewayRouteInput, options: replace_transit_gateway_route.Options) !replace_transit_gateway_route.ReplaceTransitGatewayRouteOutput {
+    pub fn replaceTransitGatewayRoute(self: *Self, allocator: std.mem.Allocator, input: replace_transit_gateway_route.ReplaceTransitGatewayRouteInput, options: CallOptions) !replace_transit_gateway_route.ReplaceTransitGatewayRouteOutput {
         return replace_transit_gateway_route.execute(self, allocator, input, options);
     }
 
     /// Trigger replacement of specified VPN tunnel.
-    pub fn replaceVpnTunnel(self: *Self, allocator: std.mem.Allocator, input: replace_vpn_tunnel.ReplaceVpnTunnelInput, options: replace_vpn_tunnel.Options) !replace_vpn_tunnel.ReplaceVpnTunnelOutput {
+    pub fn replaceVpnTunnel(self: *Self, allocator: std.mem.Allocator, input: replace_vpn_tunnel.ReplaceVpnTunnelInput, options: CallOptions) !replace_vpn_tunnel.ReplaceVpnTunnelOutput {
         return replace_vpn_tunnel.execute(self, allocator, input, options);
     }
 
@@ -9842,7 +9843,7 @@ pub const Client = struct {
     ///
     /// Use of this action does not change the value returned by
     /// DescribeInstanceStatus.
-    pub fn reportInstanceStatus(self: *Self, allocator: std.mem.Allocator, input: report_instance_status.ReportInstanceStatusInput, options: report_instance_status.Options) !report_instance_status.ReportInstanceStatusOutput {
+    pub fn reportInstanceStatus(self: *Self, allocator: std.mem.Allocator, input: report_instance_status.ReportInstanceStatusInput, options: CallOptions) !report_instance_status.ReportInstanceStatusOutput {
         return report_instance_status.execute(self, allocator, input, options);
     }
 
@@ -9890,7 +9891,7 @@ pub const Client = struct {
     /// is the best Spot request method to
     /// use?](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html#which-spot-request-method-to-use) in the
     /// *Amazon EC2 User Guide*.
-    pub fn requestSpotFleet(self: *Self, allocator: std.mem.Allocator, input: request_spot_fleet.RequestSpotFleetInput, options: request_spot_fleet.Options) !request_spot_fleet.RequestSpotFleetOutput {
+    pub fn requestSpotFleet(self: *Self, allocator: std.mem.Allocator, input: request_spot_fleet.RequestSpotFleetInput, options: CallOptions) !request_spot_fleet.RequestSpotFleetOutput {
         return request_spot_fleet.execute(self, allocator, input, options);
     }
 
@@ -9908,14 +9909,14 @@ pub const Client = struct {
     /// is the best Spot request method to
     /// use?](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html#which-spot-request-method-to-use) in the
     /// *Amazon EC2 User Guide*.
-    pub fn requestSpotInstances(self: *Self, allocator: std.mem.Allocator, input: request_spot_instances.RequestSpotInstancesInput, options: request_spot_instances.Options) !request_spot_instances.RequestSpotInstancesOutput {
+    pub fn requestSpotInstances(self: *Self, allocator: std.mem.Allocator, input: request_spot_instances.RequestSpotInstancesInput, options: CallOptions) !request_spot_instances.RequestSpotInstancesOutput {
         return request_spot_instances.execute(self, allocator, input, options);
     }
 
     /// Resets the attribute of the specified IP address. For requirements, see
     /// [Using reverse DNS for email
     /// applications](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS).
-    pub fn resetAddressAttribute(self: *Self, allocator: std.mem.Allocator, input: reset_address_attribute.ResetAddressAttributeInput, options: reset_address_attribute.Options) !reset_address_attribute.ResetAddressAttributeOutput {
+    pub fn resetAddressAttribute(self: *Self, allocator: std.mem.Allocator, input: reset_address_attribute.ResetAddressAttributeInput, options: CallOptions) !reset_address_attribute.ResetAddressAttributeOutput {
         return reset_address_attribute.execute(self, allocator, input, options);
     }
 
@@ -9930,19 +9931,19 @@ pub const Client = struct {
     /// [Amazon EBS
     /// encryption](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html)
     /// in the *Amazon EBS User Guide*.
-    pub fn resetEbsDefaultKmsKeyId(self: *Self, allocator: std.mem.Allocator, input: reset_ebs_default_kms_key_id.ResetEbsDefaultKmsKeyIdInput, options: reset_ebs_default_kms_key_id.Options) !reset_ebs_default_kms_key_id.ResetEbsDefaultKmsKeyIdOutput {
+    pub fn resetEbsDefaultKmsKeyId(self: *Self, allocator: std.mem.Allocator, input: reset_ebs_default_kms_key_id.ResetEbsDefaultKmsKeyIdInput, options: CallOptions) !reset_ebs_default_kms_key_id.ResetEbsDefaultKmsKeyIdOutput {
         return reset_ebs_default_kms_key_id.execute(self, allocator, input, options);
     }
 
     /// Resets the specified attribute of the specified Amazon FPGA Image (AFI) to
     /// its default value.
     /// You can only reset the load permission attribute.
-    pub fn resetFpgaImageAttribute(self: *Self, allocator: std.mem.Allocator, input: reset_fpga_image_attribute.ResetFpgaImageAttributeInput, options: reset_fpga_image_attribute.Options) !reset_fpga_image_attribute.ResetFpgaImageAttributeOutput {
+    pub fn resetFpgaImageAttribute(self: *Self, allocator: std.mem.Allocator, input: reset_fpga_image_attribute.ResetFpgaImageAttributeInput, options: CallOptions) !reset_fpga_image_attribute.ResetFpgaImageAttributeOutput {
         return reset_fpga_image_attribute.execute(self, allocator, input, options);
     }
 
     /// Resets an attribute of an AMI to its default value.
-    pub fn resetImageAttribute(self: *Self, allocator: std.mem.Allocator, input: reset_image_attribute.ResetImageAttributeInput, options: reset_image_attribute.Options) !reset_image_attribute.ResetImageAttributeOutput {
+    pub fn resetImageAttribute(self: *Self, allocator: std.mem.Allocator, input: reset_image_attribute.ResetImageAttributeInput, options: CallOptions) !reset_image_attribute.ResetImageAttributeOutput {
         return reset_image_attribute.execute(self, allocator, input, options);
     }
 
@@ -9957,14 +9958,14 @@ pub const Client = struct {
     /// more information, see [NAT
     /// instances](https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html) in the
     /// *Amazon VPC User Guide*.
-    pub fn resetInstanceAttribute(self: *Self, allocator: std.mem.Allocator, input: reset_instance_attribute.ResetInstanceAttributeInput, options: reset_instance_attribute.Options) !reset_instance_attribute.ResetInstanceAttributeOutput {
+    pub fn resetInstanceAttribute(self: *Self, allocator: std.mem.Allocator, input: reset_instance_attribute.ResetInstanceAttributeInput, options: CallOptions) !reset_instance_attribute.ResetInstanceAttributeOutput {
         return reset_instance_attribute.execute(self, allocator, input, options);
     }
 
     /// Resets a network interface attribute. You can specify only one attribute at
     /// a
     /// time.
-    pub fn resetNetworkInterfaceAttribute(self: *Self, allocator: std.mem.Allocator, input: reset_network_interface_attribute.ResetNetworkInterfaceAttributeInput, options: reset_network_interface_attribute.Options) !reset_network_interface_attribute.ResetNetworkInterfaceAttributeOutput {
+    pub fn resetNetworkInterfaceAttribute(self: *Self, allocator: std.mem.Allocator, input: reset_network_interface_attribute.ResetNetworkInterfaceAttributeInput, options: CallOptions) !reset_network_interface_attribute.ResetNetworkInterfaceAttributeOutput {
         return reset_network_interface_attribute.execute(self, allocator, input, options);
     }
 
@@ -9973,7 +9974,7 @@ pub const Client = struct {
     /// For more information about modifying snapshot permissions, see [Share a
     /// snapshot](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-modifying-snapshot-permissions.html) in the
     /// *Amazon EBS User Guide*.
-    pub fn resetSnapshotAttribute(self: *Self, allocator: std.mem.Allocator, input: reset_snapshot_attribute.ResetSnapshotAttributeInput, options: reset_snapshot_attribute.Options) !reset_snapshot_attribute.ResetSnapshotAttributeOutput {
+    pub fn resetSnapshotAttribute(self: *Self, allocator: std.mem.Allocator, input: reset_snapshot_attribute.ResetSnapshotAttributeInput, options: CallOptions) !reset_snapshot_attribute.ResetSnapshotAttributeOutput {
         return reset_snapshot_attribute.execute(self, allocator, input, options);
     }
 
@@ -9983,7 +9984,7 @@ pub const Client = struct {
     /// platform back to the EC2-Classic platform. You cannot move an Elastic IP
     /// address that was originally allocated for use in EC2-VPC. The Elastic IP
     /// address must not be associated with an instance or network interface.
-    pub fn restoreAddressToClassic(self: *Self, allocator: std.mem.Allocator, input: restore_address_to_classic.RestoreAddressToClassicInput, options: restore_address_to_classic.Options) !restore_address_to_classic.RestoreAddressToClassicOutput {
+    pub fn restoreAddressToClassic(self: *Self, allocator: std.mem.Allocator, input: restore_address_to_classic.RestoreAddressToClassicInput, options: CallOptions) !restore_address_to_classic.RestoreAddressToClassicOutput {
         return restore_address_to_classic.execute(self, allocator, input, options);
     }
 
@@ -9993,20 +9994,20 @@ pub const Client = struct {
     /// Bin](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin.html)
     /// in the
     /// *Amazon EC2 User Guide*.
-    pub fn restoreImageFromRecycleBin(self: *Self, allocator: std.mem.Allocator, input: restore_image_from_recycle_bin.RestoreImageFromRecycleBinInput, options: restore_image_from_recycle_bin.Options) !restore_image_from_recycle_bin.RestoreImageFromRecycleBinOutput {
+    pub fn restoreImageFromRecycleBin(self: *Self, allocator: std.mem.Allocator, input: restore_image_from_recycle_bin.RestoreImageFromRecycleBinInput, options: CallOptions) !restore_image_from_recycle_bin.RestoreImageFromRecycleBinOutput {
         return restore_image_from_recycle_bin.execute(self, allocator, input, options);
     }
 
     /// Restores the entries from a previous version of a managed prefix list to a
     /// new version of the prefix list.
-    pub fn restoreManagedPrefixListVersion(self: *Self, allocator: std.mem.Allocator, input: restore_managed_prefix_list_version.RestoreManagedPrefixListVersionInput, options: restore_managed_prefix_list_version.Options) !restore_managed_prefix_list_version.RestoreManagedPrefixListVersionOutput {
+    pub fn restoreManagedPrefixListVersion(self: *Self, allocator: std.mem.Allocator, input: restore_managed_prefix_list_version.RestoreManagedPrefixListVersionInput, options: CallOptions) !restore_managed_prefix_list_version.RestoreManagedPrefixListVersionOutput {
         return restore_managed_prefix_list_version.execute(self, allocator, input, options);
     }
 
     /// Restores a snapshot from the Recycle Bin. For more information, see [Restore
     /// snapshots from the Recycle
     /// Bin](https://docs.aws.amazon.com/ebs/latest/userguide/recycle-bin-working-with-snaps.html#recycle-bin-restore-snaps) in the *Amazon EBS User Guide*.
-    pub fn restoreSnapshotFromRecycleBin(self: *Self, allocator: std.mem.Allocator, input: restore_snapshot_from_recycle_bin.RestoreSnapshotFromRecycleBinInput, options: restore_snapshot_from_recycle_bin.Options) !restore_snapshot_from_recycle_bin.RestoreSnapshotFromRecycleBinOutput {
+    pub fn restoreSnapshotFromRecycleBin(self: *Self, allocator: std.mem.Allocator, input: restore_snapshot_from_recycle_bin.RestoreSnapshotFromRecycleBinInput, options: CallOptions) !restore_snapshot_from_recycle_bin.RestoreSnapshotFromRecycleBinOutput {
         return restore_snapshot_from_recycle_bin.execute(self, allocator, input, options);
     }
 
@@ -10020,19 +10021,19 @@ pub const Client = struct {
     /// snapshot](https://docs.aws.amazon.com/ebs/latest/userguide/working-with-snapshot-archiving.html#restore-archived-snapshot) and [
     /// modify the restore period or restore type for a temporarily restored
     /// snapshot](https://docs.aws.amazon.com/ebs/latest/userguide/working-with-snapshot-archiving.html#modify-temp-restore-period) in the *Amazon EBS User Guide*.
-    pub fn restoreSnapshotTier(self: *Self, allocator: std.mem.Allocator, input: restore_snapshot_tier.RestoreSnapshotTierInput, options: restore_snapshot_tier.Options) !restore_snapshot_tier.RestoreSnapshotTierOutput {
+    pub fn restoreSnapshotTier(self: *Self, allocator: std.mem.Allocator, input: restore_snapshot_tier.RestoreSnapshotTierInput, options: CallOptions) !restore_snapshot_tier.RestoreSnapshotTierOutput {
         return restore_snapshot_tier.execute(self, allocator, input, options);
     }
 
     /// Restores a volume from the Recycle Bin. For more information, see [Restore
     /// volumes from the Recycle
     /// Bin](https://docs.aws.amazon.com/ebs/latest/userguide/recycle-bin-working-with-volumes.html#recycle-bin-restore-volumes) in the *Amazon EBS User Guide*.
-    pub fn restoreVolumeFromRecycleBin(self: *Self, allocator: std.mem.Allocator, input: restore_volume_from_recycle_bin.RestoreVolumeFromRecycleBinInput, options: restore_volume_from_recycle_bin.Options) !restore_volume_from_recycle_bin.RestoreVolumeFromRecycleBinOutput {
+    pub fn restoreVolumeFromRecycleBin(self: *Self, allocator: std.mem.Allocator, input: restore_volume_from_recycle_bin.RestoreVolumeFromRecycleBinInput, options: CallOptions) !restore_volume_from_recycle_bin.RestoreVolumeFromRecycleBinOutput {
         return restore_volume_from_recycle_bin.execute(self, allocator, input, options);
     }
 
     /// Removes an ingress authorization rule from a Client VPN endpoint.
-    pub fn revokeClientVpnIngress(self: *Self, allocator: std.mem.Allocator, input: revoke_client_vpn_ingress.RevokeClientVpnIngressInput, options: revoke_client_vpn_ingress.Options) !revoke_client_vpn_ingress.RevokeClientVpnIngressOutput {
+    pub fn revokeClientVpnIngress(self: *Self, allocator: std.mem.Allocator, input: revoke_client_vpn_ingress.RevokeClientVpnIngressInput, options: CallOptions) !revoke_client_vpn_ingress.RevokeClientVpnIngressOutput {
         return revoke_client_vpn_ingress.execute(self, allocator, input, options);
     }
 
@@ -10064,7 +10065,7 @@ pub const Client = struct {
     /// Rule changes are propagated to instances within the security group as
     /// quickly as possible. However,
     /// a small delay might occur.
-    pub fn revokeSecurityGroupEgress(self: *Self, allocator: std.mem.Allocator, input: revoke_security_group_egress.RevokeSecurityGroupEgressInput, options: revoke_security_group_egress.Options) !revoke_security_group_egress.RevokeSecurityGroupEgressOutput {
+    pub fn revokeSecurityGroupEgress(self: *Self, allocator: std.mem.Allocator, input: revoke_security_group_egress.RevokeSecurityGroupEgressInput, options: CallOptions) !revoke_security_group_egress.RevokeSecurityGroupEgressOutput {
         return revoke_security_group_egress.execute(self, allocator, input, options);
     }
 
@@ -10101,7 +10102,7 @@ pub const Client = struct {
     /// Rule changes are propagated to instances within the security group as
     /// quickly as possible.
     /// However, a small delay might occur.
-    pub fn revokeSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: revoke_security_group_ingress.RevokeSecurityGroupIngressInput, options: revoke_security_group_ingress.Options) !revoke_security_group_ingress.RevokeSecurityGroupIngressOutput {
+    pub fn revokeSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: revoke_security_group_ingress.RevokeSecurityGroupIngressInput, options: CallOptions) !revoke_security_group_ingress.RevokeSecurityGroupIngressOutput {
         return revoke_security_group_ingress.execute(self, allocator, input, options);
     }
 
@@ -10168,7 +10169,7 @@ pub const Client = struct {
     /// For troubleshooting, see [What to do if
     /// an instance immediately
     /// terminates](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html), and [Troubleshooting connecting to your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html).
-    pub fn runInstances(self: *Self, allocator: std.mem.Allocator, input: run_instances.RunInstancesInput, options: run_instances.Options) !run_instances.RunInstancesOutput {
+    pub fn runInstances(self: *Self, allocator: std.mem.Allocator, input: run_instances.RunInstancesInput, options: CallOptions) !run_instances.RunInstancesOutput {
         return run_instances.execute(self, allocator, input, options);
     }
 
@@ -10184,23 +10185,23 @@ pub const Client = struct {
     /// Scheduled Instance before the current scheduled time period ends, you can
     /// launch it again
     /// after a few minutes.
-    pub fn runScheduledInstances(self: *Self, allocator: std.mem.Allocator, input: run_scheduled_instances.RunScheduledInstancesInput, options: run_scheduled_instances.Options) !run_scheduled_instances.RunScheduledInstancesOutput {
+    pub fn runScheduledInstances(self: *Self, allocator: std.mem.Allocator, input: run_scheduled_instances.RunScheduledInstancesInput, options: CallOptions) !run_scheduled_instances.RunScheduledInstancesOutput {
         return run_scheduled_instances.execute(self, allocator, input, options);
     }
 
     /// Searches for routes in the specified local gateway route table.
-    pub fn searchLocalGatewayRoutes(self: *Self, allocator: std.mem.Allocator, input: search_local_gateway_routes.SearchLocalGatewayRoutesInput, options: search_local_gateway_routes.Options) !search_local_gateway_routes.SearchLocalGatewayRoutesOutput {
+    pub fn searchLocalGatewayRoutes(self: *Self, allocator: std.mem.Allocator, input: search_local_gateway_routes.SearchLocalGatewayRoutesInput, options: CallOptions) !search_local_gateway_routes.SearchLocalGatewayRoutesOutput {
         return search_local_gateway_routes.execute(self, allocator, input, options);
     }
 
     /// Searches one or more transit gateway multicast groups and returns the group
     /// membership information.
-    pub fn searchTransitGatewayMulticastGroups(self: *Self, allocator: std.mem.Allocator, input: search_transit_gateway_multicast_groups.SearchTransitGatewayMulticastGroupsInput, options: search_transit_gateway_multicast_groups.Options) !search_transit_gateway_multicast_groups.SearchTransitGatewayMulticastGroupsOutput {
+    pub fn searchTransitGatewayMulticastGroups(self: *Self, allocator: std.mem.Allocator, input: search_transit_gateway_multicast_groups.SearchTransitGatewayMulticastGroupsInput, options: CallOptions) !search_transit_gateway_multicast_groups.SearchTransitGatewayMulticastGroupsOutput {
         return search_transit_gateway_multicast_groups.execute(self, allocator, input, options);
     }
 
     /// Searches for routes in the specified transit gateway route table.
-    pub fn searchTransitGatewayRoutes(self: *Self, allocator: std.mem.Allocator, input: search_transit_gateway_routes.SearchTransitGatewayRoutesInput, options: search_transit_gateway_routes.Options) !search_transit_gateway_routes.SearchTransitGatewayRoutesOutput {
+    pub fn searchTransitGatewayRoutes(self: *Self, allocator: std.mem.Allocator, input: search_transit_gateway_routes.SearchTransitGatewayRoutesInput, options: CallOptions) !search_transit_gateway_routes.SearchTransitGatewayRoutesOutput {
         return search_transit_gateway_routes.execute(self, allocator, input, options);
     }
 
@@ -10228,7 +10229,7 @@ pub const Client = struct {
     /// when a kernel panic or stop error occurs, see [Send a diagnostic interrupt
     /// (for advanced
     /// users)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html) in the *Amazon EC2 User Guide*.
-    pub fn sendDiagnosticInterrupt(self: *Self, allocator: std.mem.Allocator, input: send_diagnostic_interrupt.SendDiagnosticInterruptInput, options: send_diagnostic_interrupt.Options) !send_diagnostic_interrupt.SendDiagnosticInterruptOutput {
+    pub fn sendDiagnosticInterrupt(self: *Self, allocator: std.mem.Allocator, input: send_diagnostic_interrupt.SendDiagnosticInterruptInput, options: CallOptions) !send_diagnostic_interrupt.SendDiagnosticInterruptOutput {
         return send_diagnostic_interrupt.execute(self, allocator, input, options);
     }
 
@@ -10286,7 +10287,7 @@ pub const Client = struct {
     /// [Generating the account status report for declarative
     /// policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative_status-report.html) in the
     /// *Amazon Web Services Organizations User Guide*.
-    pub fn startDeclarativePoliciesReport(self: *Self, allocator: std.mem.Allocator, input: start_declarative_policies_report.StartDeclarativePoliciesReportInput, options: start_declarative_policies_report.Options) !start_declarative_policies_report.StartDeclarativePoliciesReportOutput {
+    pub fn startDeclarativePoliciesReport(self: *Self, allocator: std.mem.Allocator, input: start_declarative_policies_report.StartDeclarativePoliciesReportInput, options: CallOptions) !start_declarative_policies_report.StartDeclarativePoliciesReportOutput {
         return start_declarative_policies_report.execute(self, allocator, input, options);
     }
 
@@ -10322,18 +10323,18 @@ pub const Client = struct {
     ///
     /// For more information, see [Stop and start Amazon EC2
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html) in the *Amazon EC2 User Guide*.
-    pub fn startInstances(self: *Self, allocator: std.mem.Allocator, input: start_instances.StartInstancesInput, options: start_instances.Options) !start_instances.StartInstancesOutput {
+    pub fn startInstances(self: *Self, allocator: std.mem.Allocator, input: start_instances.StartInstancesInput, options: CallOptions) !start_instances.StartInstancesOutput {
         return start_instances.execute(self, allocator, input, options);
     }
 
     /// Starts analyzing the specified Network Access Scope.
-    pub fn startNetworkInsightsAccessScopeAnalysis(self: *Self, allocator: std.mem.Allocator, input: start_network_insights_access_scope_analysis.StartNetworkInsightsAccessScopeAnalysisInput, options: start_network_insights_access_scope_analysis.Options) !start_network_insights_access_scope_analysis.StartNetworkInsightsAccessScopeAnalysisOutput {
+    pub fn startNetworkInsightsAccessScopeAnalysis(self: *Self, allocator: std.mem.Allocator, input: start_network_insights_access_scope_analysis.StartNetworkInsightsAccessScopeAnalysisInput, options: CallOptions) !start_network_insights_access_scope_analysis.StartNetworkInsightsAccessScopeAnalysisOutput {
         return start_network_insights_access_scope_analysis.execute(self, allocator, input, options);
     }
 
     /// Starts analyzing the specified path. If the path is reachable, the
     /// operation returns the shortest feasible path.
-    pub fn startNetworkInsightsAnalysis(self: *Self, allocator: std.mem.Allocator, input: start_network_insights_analysis.StartNetworkInsightsAnalysisInput, options: start_network_insights_analysis.Options) !start_network_insights_analysis.StartNetworkInsightsAnalysisOutput {
+    pub fn startNetworkInsightsAnalysis(self: *Self, allocator: std.mem.Allocator, input: start_network_insights_analysis.StartNetworkInsightsAnalysisInput, options: CallOptions) !start_network_insights_analysis.StartNetworkInsightsAnalysisOutput {
         return start_network_insights_analysis.execute(self, allocator, input, options);
     }
 
@@ -10346,7 +10347,7 @@ pub const Client = struct {
     ///
     /// Before the service provider runs this command, they must add a record to the
     /// DNS server.
-    pub fn startVpcEndpointServicePrivateDnsVerification(self: *Self, allocator: std.mem.Allocator, input: start_vpc_endpoint_service_private_dns_verification.StartVpcEndpointServicePrivateDnsVerificationInput, options: start_vpc_endpoint_service_private_dns_verification.Options) !start_vpc_endpoint_service_private_dns_verification.StartVpcEndpointServicePrivateDnsVerificationOutput {
+    pub fn startVpcEndpointServicePrivateDnsVerification(self: *Self, allocator: std.mem.Allocator, input: start_vpc_endpoint_service_private_dns_verification.StartVpcEndpointServicePrivateDnsVerificationInput, options: CallOptions) !start_vpc_endpoint_service_private_dns_verification.StartVpcEndpointServicePrivateDnsVerificationOutput {
         return start_vpc_endpoint_service_private_dns_verification.execute(self, allocator, input, options);
     }
 
@@ -10404,14 +10405,14 @@ pub const Client = struct {
     /// billing.
     ///
     /// You can't stop or hibernate instance store-backed instances.
-    pub fn stopInstances(self: *Self, allocator: std.mem.Allocator, input: stop_instances.StopInstancesInput, options: stop_instances.Options) !stop_instances.StopInstancesOutput {
+    pub fn stopInstances(self: *Self, allocator: std.mem.Allocator, input: stop_instances.StopInstancesInput, options: CallOptions) !stop_instances.StopInstancesOutput {
         return stop_instances.execute(self, allocator, input, options);
     }
 
     /// Terminates active Client VPN endpoint connections. This action can be used
     /// to terminate a specific client connection, or up to five connections
     /// established by a specific user.
-    pub fn terminateClientVpnConnections(self: *Self, allocator: std.mem.Allocator, input: terminate_client_vpn_connections.TerminateClientVpnConnectionsInput, options: terminate_client_vpn_connections.Options) !terminate_client_vpn_connections.TerminateClientVpnConnectionsOutput {
+    pub fn terminateClientVpnConnections(self: *Self, allocator: std.mem.Allocator, input: terminate_client_vpn_connections.TerminateClientVpnConnectionsInput, options: CallOptions) !terminate_client_vpn_connections.TerminateClientVpnConnectionsOutput {
         return terminate_client_vpn_connections.execute(self, allocator, input, options);
     }
 
@@ -10511,21 +10512,21 @@ pub const Client = struct {
     /// [Troubleshooting terminating your
     /// instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesShuttingDown.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn terminateInstances(self: *Self, allocator: std.mem.Allocator, input: terminate_instances.TerminateInstancesInput, options: terminate_instances.Options) !terminate_instances.TerminateInstancesOutput {
+    pub fn terminateInstances(self: *Self, allocator: std.mem.Allocator, input: terminate_instances.TerminateInstancesInput, options: CallOptions) !terminate_instances.TerminateInstancesOutput {
         return terminate_instances.execute(self, allocator, input, options);
     }
 
     /// Unassigns the specified IPv6 addresses or Prefix Delegation prefixes from a
     /// network
     /// interface.
-    pub fn unassignIpv6Addresses(self: *Self, allocator: std.mem.Allocator, input: unassign_ipv_6_addresses.UnassignIpv6AddressesInput, options: unassign_ipv_6_addresses.Options) !unassign_ipv_6_addresses.UnassignIpv6AddressesOutput {
+    pub fn unassignIpv6Addresses(self: *Self, allocator: std.mem.Allocator, input: unassign_ipv_6_addresses.UnassignIpv6AddressesInput, options: CallOptions) !unassign_ipv_6_addresses.UnassignIpv6AddressesOutput {
         return unassign_ipv_6_addresses.execute(self, allocator, input, options);
     }
 
     /// Unassigns the specified secondary private IP addresses or IPv4 Prefix
     /// Delegation
     /// prefixes from a network interface.
-    pub fn unassignPrivateIpAddresses(self: *Self, allocator: std.mem.Allocator, input: unassign_private_ip_addresses.UnassignPrivateIpAddressesInput, options: unassign_private_ip_addresses.Options) !unassign_private_ip_addresses.UnassignPrivateIpAddressesOutput {
+    pub fn unassignPrivateIpAddresses(self: *Self, allocator: std.mem.Allocator, input: unassign_private_ip_addresses.UnassignPrivateIpAddressesInput, options: CallOptions) !unassign_private_ip_addresses.UnassignPrivateIpAddressesOutput {
         return unassign_private_ip_addresses.execute(self, allocator, input, options);
     }
 
@@ -10548,7 +10549,7 @@ pub const Client = struct {
     /// assigned private IP address). After the existing connections drain out, the
     /// private IP
     /// addresses are released.
-    pub fn unassignPrivateNatGatewayAddress(self: *Self, allocator: std.mem.Allocator, input: unassign_private_nat_gateway_address.UnassignPrivateNatGatewayAddressInput, options: unassign_private_nat_gateway_address.Options) !unassign_private_nat_gateway_address.UnassignPrivateNatGatewayAddressOutput {
+    pub fn unassignPrivateNatGatewayAddress(self: *Self, allocator: std.mem.Allocator, input: unassign_private_nat_gateway_address.UnassignPrivateNatGatewayAddressInput, options: CallOptions) !unassign_private_nat_gateway_address.UnassignPrivateNatGatewayAddressOutput {
         return unassign_private_nat_gateway_address.execute(self, allocator, input, options);
     }
 
@@ -10557,7 +10558,7 @@ pub const Client = struct {
     /// but still in the cooling-off period. You can't unlock a snapshot that is
     /// locked in compliance
     /// mode after the cooling-off period has expired.
-    pub fn unlockSnapshot(self: *Self, allocator: std.mem.Allocator, input: unlock_snapshot.UnlockSnapshotInput, options: unlock_snapshot.Options) !unlock_snapshot.UnlockSnapshotOutput {
+    pub fn unlockSnapshot(self: *Self, allocator: std.mem.Allocator, input: unlock_snapshot.UnlockSnapshotInput, options: CallOptions) !unlock_snapshot.UnlockSnapshotOutput {
         return unlock_snapshot.execute(self, allocator, input, options);
     }
 
@@ -10566,7 +10567,7 @@ pub const Client = struct {
     /// your instances and
     /// volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html) in the
     /// *Amazon EC2 User Guide*.
-    pub fn unmonitorInstances(self: *Self, allocator: std.mem.Allocator, input: unmonitor_instances.UnmonitorInstancesInput, options: unmonitor_instances.Options) !unmonitor_instances.UnmonitorInstancesOutput {
+    pub fn unmonitorInstances(self: *Self, allocator: std.mem.Allocator, input: unmonitor_instances.UnmonitorInstancesInput, options: CallOptions) !unmonitor_instances.UnmonitorInstancesOutput {
         return unmonitor_instances.execute(self, allocator, input, options);
     }
 
@@ -10574,14 +10575,14 @@ pub const Client = struct {
     /// controls whether Capacity Manager can aggregate
     /// data from all accounts in your Amazon Web Services Organization or only from
     /// the current account.
-    pub fn updateCapacityManagerOrganizationsAccess(self: *Self, allocator: std.mem.Allocator, input: update_capacity_manager_organizations_access.UpdateCapacityManagerOrganizationsAccessInput, options: update_capacity_manager_organizations_access.Options) !update_capacity_manager_organizations_access.UpdateCapacityManagerOrganizationsAccessOutput {
+    pub fn updateCapacityManagerOrganizationsAccess(self: *Self, allocator: std.mem.Allocator, input: update_capacity_manager_organizations_access.UpdateCapacityManagerOrganizationsAccessInput, options: CallOptions) !update_capacity_manager_organizations_access.UpdateCapacityManagerOrganizationsAccessOutput {
         return update_capacity_manager_organizations_access.execute(self, allocator, input, options);
     }
 
     /// Modifies the number of instances allocated to an interruptible reservation,
     /// allowing you to add more capacity or reclaim capacity to your source
     /// Capacity Reservation.
-    pub fn updateInterruptibleCapacityReservationAllocation(self: *Self, allocator: std.mem.Allocator, input: update_interruptible_capacity_reservation_allocation.UpdateInterruptibleCapacityReservationAllocationInput, options: update_interruptible_capacity_reservation_allocation.Options) !update_interruptible_capacity_reservation_allocation.UpdateInterruptibleCapacityReservationAllocationOutput {
+    pub fn updateInterruptibleCapacityReservationAllocation(self: *Self, allocator: std.mem.Allocator, input: update_interruptible_capacity_reservation_allocation.UpdateInterruptibleCapacityReservationAllocationInput, options: CallOptions) !update_interruptible_capacity_reservation_allocation.UpdateInterruptibleCapacityReservationAllocationOutput {
         return update_interruptible_capacity_reservation_allocation.execute(self, allocator, input, options);
     }
 
@@ -10591,7 +10592,7 @@ pub const Client = struct {
     /// previously. You can remove a description for a security group rule by
     /// omitting the
     /// description parameter in the request.
-    pub fn updateSecurityGroupRuleDescriptionsEgress(self: *Self, allocator: std.mem.Allocator, input: update_security_group_rule_descriptions_egress.UpdateSecurityGroupRuleDescriptionsEgressInput, options: update_security_group_rule_descriptions_egress.Options) !update_security_group_rule_descriptions_egress.UpdateSecurityGroupRuleDescriptionsEgressOutput {
+    pub fn updateSecurityGroupRuleDescriptionsEgress(self: *Self, allocator: std.mem.Allocator, input: update_security_group_rule_descriptions_egress.UpdateSecurityGroupRuleDescriptionsEgressInput, options: CallOptions) !update_security_group_rule_descriptions_egress.UpdateSecurityGroupRuleDescriptionsEgressOutput {
         return update_security_group_rule_descriptions_egress.execute(self, allocator, input, options);
     }
 
@@ -10602,7 +10603,7 @@ pub const Client = struct {
     /// You can remove a description for a security group rule by omitting the
     /// description
     /// parameter in the request.
-    pub fn updateSecurityGroupRuleDescriptionsIngress(self: *Self, allocator: std.mem.Allocator, input: update_security_group_rule_descriptions_ingress.UpdateSecurityGroupRuleDescriptionsIngressInput, options: update_security_group_rule_descriptions_ingress.Options) !update_security_group_rule_descriptions_ingress.UpdateSecurityGroupRuleDescriptionsIngressOutput {
+    pub fn updateSecurityGroupRuleDescriptionsIngress(self: *Self, allocator: std.mem.Allocator, input: update_security_group_rule_descriptions_ingress.UpdateSecurityGroupRuleDescriptionsIngressInput, options: CallOptions) !update_security_group_rule_descriptions_ingress.UpdateSecurityGroupRuleDescriptionsIngressOutput {
         return update_security_group_rule_descriptions_ingress.execute(self, allocator, input, options);
     }
 
@@ -10615,7 +10616,7 @@ pub const Client = struct {
     /// It can take a few minutes before traffic to the specified addresses stops
     /// routing to Amazon Web Services
     /// because of BGP propagation delays.
-    pub fn withdrawByoipCidr(self: *Self, allocator: std.mem.Allocator, input: withdraw_byoip_cidr.WithdrawByoipCidrInput, options: withdraw_byoip_cidr.Options) !withdraw_byoip_cidr.WithdrawByoipCidrOutput {
+    pub fn withdrawByoipCidr(self: *Self, allocator: std.mem.Allocator, input: withdraw_byoip_cidr.WithdrawByoipCidrInput, options: CallOptions) !withdraw_byoip_cidr.WithdrawByoipCidrOutput {
         return withdraw_byoip_cidr.execute(self, allocator, input, options);
     }
 

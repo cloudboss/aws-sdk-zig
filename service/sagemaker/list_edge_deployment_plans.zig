@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ListEdgeDeploymentPlansSortBy = @import("list_edge_deployment_plans_sort_by.zig").ListEdgeDeploymentPlansSortBy;
 const SortOrder = @import("sort_order.zig").SortOrder;
@@ -67,11 +68,7 @@ pub const ListEdgeDeploymentPlansOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListEdgeDeploymentPlansInput, options: Options) !ListEdgeDeploymentPlansOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListEdgeDeploymentPlansInput, options: CallOptions) !ListEdgeDeploymentPlansOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

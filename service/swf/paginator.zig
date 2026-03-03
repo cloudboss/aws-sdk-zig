@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_workflow_execution_history = @import("get_workflow_execution_history.zig");
@@ -20,7 +21,7 @@ pub const GetWorkflowExecutionHistoryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_workflow_execution_history.Options) !get_workflow_execution_history.GetWorkflowExecutionHistoryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_workflow_execution_history.GetWorkflowExecutionHistoryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -61,7 +62,7 @@ pub const ListActivityTypesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_activity_types.Options) !list_activity_types.ListActivityTypesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_activity_types.ListActivityTypesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -102,7 +103,7 @@ pub const ListClosedWorkflowExecutionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_closed_workflow_executions.Options) !list_closed_workflow_executions.ListClosedWorkflowExecutionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_closed_workflow_executions.ListClosedWorkflowExecutionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -143,7 +144,7 @@ pub const ListDomainsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_domains.Options) !list_domains.ListDomainsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_domains.ListDomainsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -184,7 +185,7 @@ pub const ListOpenWorkflowExecutionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_open_workflow_executions.Options) !list_open_workflow_executions.ListOpenWorkflowExecutionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_open_workflow_executions.ListOpenWorkflowExecutionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -225,7 +226,7 @@ pub const ListWorkflowTypesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_workflow_types.Options) !list_workflow_types.ListWorkflowTypesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_workflow_types.ListWorkflowTypesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -266,7 +267,7 @@ pub const PollForDecisionTaskPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: poll_for_decision_task.Options) !poll_for_decision_task.PollForDecisionTaskOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !poll_for_decision_task.PollForDecisionTaskOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

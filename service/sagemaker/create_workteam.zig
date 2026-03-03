@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MemberDefinition = @import("member_definition.zig").MemberDefinition;
 const NotificationConfiguration = @import("notification_configuration.zig").NotificationConfiguration;
@@ -78,11 +79,7 @@ pub const CreateWorkteamOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateWorkteamInput, options: Options) !CreateWorkteamOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateWorkteamInput, options: CallOptions) !CreateWorkteamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

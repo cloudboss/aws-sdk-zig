@@ -27,6 +27,7 @@ const stop_auto_management = @import("stop_auto_management.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_auto_management = @import("update_auto_management.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -63,21 +64,21 @@ pub const Client = struct {
     /// template are automatically applied to the account. You can add a quota
     /// increase request
     /// for any adjustable quota to your template.
-    pub fn associateServiceQuotaTemplate(self: *Self, allocator: std.mem.Allocator, input: associate_service_quota_template.AssociateServiceQuotaTemplateInput, options: associate_service_quota_template.Options) !associate_service_quota_template.AssociateServiceQuotaTemplateOutput {
+    pub fn associateServiceQuotaTemplate(self: *Self, allocator: std.mem.Allocator, input: associate_service_quota_template.AssociateServiceQuotaTemplateInput, options: CallOptions) !associate_service_quota_template.AssociateServiceQuotaTemplateOutput {
         return associate_service_quota_template.execute(self, allocator, input, options);
     }
 
     /// Creates a Support case for an existing quota increase request. This call
     /// only creates
     /// a Support case if the request has a `Pending` status.
-    pub fn createSupportCase(self: *Self, allocator: std.mem.Allocator, input: create_support_case.CreateSupportCaseInput, options: create_support_case.Options) !create_support_case.CreateSupportCaseOutput {
+    pub fn createSupportCase(self: *Self, allocator: std.mem.Allocator, input: create_support_case.CreateSupportCaseInput, options: CallOptions) !create_support_case.CreateSupportCaseOutput {
         return create_support_case.execute(self, allocator, input, options);
     }
 
     /// Deletes the quota increase request for the specified quota from your quota
     /// request
     /// template.
-    pub fn deleteServiceQuotaIncreaseRequestFromTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_service_quota_increase_request_from_template.DeleteServiceQuotaIncreaseRequestFromTemplateInput, options: delete_service_quota_increase_request_from_template.Options) !delete_service_quota_increase_request_from_template.DeleteServiceQuotaIncreaseRequestFromTemplateOutput {
+    pub fn deleteServiceQuotaIncreaseRequestFromTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_service_quota_increase_request_from_template.DeleteServiceQuotaIncreaseRequestFromTemplateInput, options: CallOptions) !delete_service_quota_increase_request_from_template.DeleteServiceQuotaIncreaseRequestFromTemplateOutput {
         return delete_service_quota_increase_request_from_template.execute(self, allocator, input, options);
     }
 
@@ -87,26 +88,26 @@ pub const Client = struct {
     /// in your organization.
     /// Disabling a quota request template does not apply its quota increase
     /// requests.
-    pub fn disassociateServiceQuotaTemplate(self: *Self, allocator: std.mem.Allocator, input: disassociate_service_quota_template.DisassociateServiceQuotaTemplateInput, options: disassociate_service_quota_template.Options) !disassociate_service_quota_template.DisassociateServiceQuotaTemplateOutput {
+    pub fn disassociateServiceQuotaTemplate(self: *Self, allocator: std.mem.Allocator, input: disassociate_service_quota_template.DisassociateServiceQuotaTemplateInput, options: CallOptions) !disassociate_service_quota_template.DisassociateServiceQuotaTemplateOutput {
         return disassociate_service_quota_template.execute(self, allocator, input, options);
     }
 
     /// Retrieves the status of the association for the quota request template.
-    pub fn getAssociationForServiceQuotaTemplate(self: *Self, allocator: std.mem.Allocator, input: get_association_for_service_quota_template.GetAssociationForServiceQuotaTemplateInput, options: get_association_for_service_quota_template.Options) !get_association_for_service_quota_template.GetAssociationForServiceQuotaTemplateOutput {
+    pub fn getAssociationForServiceQuotaTemplate(self: *Self, allocator: std.mem.Allocator, input: get_association_for_service_quota_template.GetAssociationForServiceQuotaTemplateInput, options: CallOptions) !get_association_for_service_quota_template.GetAssociationForServiceQuotaTemplateOutput {
         return get_association_for_service_quota_template.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about your [Service Quotas Automatic
     /// Management](https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html) configuration. Automatic Management monitors your Service Quotas utilization and notifies you before you
     /// run out of your allocated quotas.
-    pub fn getAutoManagementConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_auto_management_configuration.GetAutoManagementConfigurationInput, options: get_auto_management_configuration.Options) !get_auto_management_configuration.GetAutoManagementConfigurationOutput {
+    pub fn getAutoManagementConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_auto_management_configuration.GetAutoManagementConfigurationInput, options: CallOptions) !get_auto_management_configuration.GetAutoManagementConfigurationOutput {
         return get_auto_management_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves the default value for the specified quota. The default value does
     /// not
     /// reflect any quota increases.
-    pub fn getAwsDefaultServiceQuota(self: *Self, allocator: std.mem.Allocator, input: get_aws_default_service_quota.GetAWSDefaultServiceQuotaInput, options: get_aws_default_service_quota.Options) !get_aws_default_service_quota.GetAWSDefaultServiceQuotaOutput {
+    pub fn getAwsDefaultServiceQuota(self: *Self, allocator: std.mem.Allocator, input: get_aws_default_service_quota.GetAWSDefaultServiceQuotaInput, options: CallOptions) !get_aws_default_service_quota.GetAWSDefaultServiceQuotaOutput {
         return get_aws_default_service_quota.execute(self, allocator, input, options);
     }
 
@@ -127,12 +128,12 @@ pub const Client = struct {
     /// parameter to retrieve additional pages of results. Reports are automatically
     /// deleted after
     /// 15 minutes.
-    pub fn getQuotaUtilizationReport(self: *Self, allocator: std.mem.Allocator, input: get_quota_utilization_report.GetQuotaUtilizationReportInput, options: get_quota_utilization_report.Options) !get_quota_utilization_report.GetQuotaUtilizationReportOutput {
+    pub fn getQuotaUtilizationReport(self: *Self, allocator: std.mem.Allocator, input: get_quota_utilization_report.GetQuotaUtilizationReportInput, options: CallOptions) !get_quota_utilization_report.GetQuotaUtilizationReportOutput {
         return get_quota_utilization_report.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the specified quota increase request.
-    pub fn getRequestedServiceQuotaChange(self: *Self, allocator: std.mem.Allocator, input: get_requested_service_quota_change.GetRequestedServiceQuotaChangeInput, options: get_requested_service_quota_change.Options) !get_requested_service_quota_change.GetRequestedServiceQuotaChangeOutput {
+    pub fn getRequestedServiceQuotaChange(self: *Self, allocator: std.mem.Allocator, input: get_requested_service_quota_change.GetRequestedServiceQuotaChangeInput, options: CallOptions) !get_requested_service_quota_change.GetRequestedServiceQuotaChangeOutput {
         return get_requested_service_quota_change.execute(self, allocator, input, options);
     }
 
@@ -141,21 +142,21 @@ pub const Client = struct {
     /// quota. For some quotas, only the default values are available. If the
     /// applied quota
     /// value is not available for a quota, the quota is not retrieved.
-    pub fn getServiceQuota(self: *Self, allocator: std.mem.Allocator, input: get_service_quota.GetServiceQuotaInput, options: get_service_quota.Options) !get_service_quota.GetServiceQuotaOutput {
+    pub fn getServiceQuota(self: *Self, allocator: std.mem.Allocator, input: get_service_quota.GetServiceQuotaInput, options: CallOptions) !get_service_quota.GetServiceQuotaOutput {
         return get_service_quota.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the specified quota increase request in your
     /// quota request
     /// template.
-    pub fn getServiceQuotaIncreaseRequestFromTemplate(self: *Self, allocator: std.mem.Allocator, input: get_service_quota_increase_request_from_template.GetServiceQuotaIncreaseRequestFromTemplateInput, options: get_service_quota_increase_request_from_template.Options) !get_service_quota_increase_request_from_template.GetServiceQuotaIncreaseRequestFromTemplateOutput {
+    pub fn getServiceQuotaIncreaseRequestFromTemplate(self: *Self, allocator: std.mem.Allocator, input: get_service_quota_increase_request_from_template.GetServiceQuotaIncreaseRequestFromTemplateInput, options: CallOptions) !get_service_quota_increase_request_from_template.GetServiceQuotaIncreaseRequestFromTemplateOutput {
         return get_service_quota_increase_request_from_template.execute(self, allocator, input, options);
     }
 
     /// Lists the default values for the quotas for the specified Amazon Web
     /// Services service. A default
     /// value does not reflect any quota increases.
-    pub fn listAwsDefaultServiceQuotas(self: *Self, allocator: std.mem.Allocator, input: list_aws_default_service_quotas.ListAWSDefaultServiceQuotasInput, options: list_aws_default_service_quotas.Options) !list_aws_default_service_quotas.ListAWSDefaultServiceQuotasOutput {
+    pub fn listAwsDefaultServiceQuotas(self: *Self, allocator: std.mem.Allocator, input: list_aws_default_service_quotas.ListAWSDefaultServiceQuotasInput, options: CallOptions) !list_aws_default_service_quotas.ListAWSDefaultServiceQuotasOutput {
         return list_aws_default_service_quotas.execute(self, allocator, input, options);
     }
 
@@ -164,7 +165,7 @@ pub const Client = struct {
     /// responses to return quota requests at either the account level, resource
     /// level, or all
     /// levels. Responses include any open or closed requests within 90 days.
-    pub fn listRequestedServiceQuotaChangeHistory(self: *Self, allocator: std.mem.Allocator, input: list_requested_service_quota_change_history.ListRequestedServiceQuotaChangeHistoryInput, options: list_requested_service_quota_change_history.Options) !list_requested_service_quota_change_history.ListRequestedServiceQuotaChangeHistoryOutput {
+    pub fn listRequestedServiceQuotaChangeHistory(self: *Self, allocator: std.mem.Allocator, input: list_requested_service_quota_change_history.ListRequestedServiceQuotaChangeHistoryInput, options: CallOptions) !list_requested_service_quota_change_history.ListRequestedServiceQuotaChangeHistoryOutput {
         return list_requested_service_quota_change_history.execute(self, allocator, input, options);
     }
 
@@ -172,12 +173,12 @@ pub const Client = struct {
     /// responses to
     /// return quota requests at either the account level, resource level, or all
     /// levels.
-    pub fn listRequestedServiceQuotaChangeHistoryByQuota(self: *Self, allocator: std.mem.Allocator, input: list_requested_service_quota_change_history_by_quota.ListRequestedServiceQuotaChangeHistoryByQuotaInput, options: list_requested_service_quota_change_history_by_quota.Options) !list_requested_service_quota_change_history_by_quota.ListRequestedServiceQuotaChangeHistoryByQuotaOutput {
+    pub fn listRequestedServiceQuotaChangeHistoryByQuota(self: *Self, allocator: std.mem.Allocator, input: list_requested_service_quota_change_history_by_quota.ListRequestedServiceQuotaChangeHistoryByQuotaInput, options: CallOptions) !list_requested_service_quota_change_history_by_quota.ListRequestedServiceQuotaChangeHistoryByQuotaOutput {
         return list_requested_service_quota_change_history_by_quota.execute(self, allocator, input, options);
     }
 
     /// Lists the quota increase requests in the specified quota request template.
-    pub fn listServiceQuotaIncreaseRequestsInTemplate(self: *Self, allocator: std.mem.Allocator, input: list_service_quota_increase_requests_in_template.ListServiceQuotaIncreaseRequestsInTemplateInput, options: list_service_quota_increase_requests_in_template.Options) !list_service_quota_increase_requests_in_template.ListServiceQuotaIncreaseRequestsInTemplateOutput {
+    pub fn listServiceQuotaIncreaseRequestsInTemplate(self: *Self, allocator: std.mem.Allocator, input: list_service_quota_increase_requests_in_template.ListServiceQuotaIncreaseRequestsInTemplateInput, options: CallOptions) !list_service_quota_increase_requests_in_template.ListServiceQuotaIncreaseRequestsInTemplateOutput {
         return list_service_quota_increase_requests_in_template.execute(self, allocator, input, options);
     }
 
@@ -188,30 +189,30 @@ pub const Client = struct {
     /// quota, the quota is not retrieved. Filter responses to return applied quota
     /// values at
     /// either the account level, resource level, or all levels.
-    pub fn listServiceQuotas(self: *Self, allocator: std.mem.Allocator, input: list_service_quotas.ListServiceQuotasInput, options: list_service_quotas.Options) !list_service_quotas.ListServiceQuotasOutput {
+    pub fn listServiceQuotas(self: *Self, allocator: std.mem.Allocator, input: list_service_quotas.ListServiceQuotasInput, options: CallOptions) !list_service_quotas.ListServiceQuotasOutput {
         return list_service_quotas.execute(self, allocator, input, options);
     }
 
     /// Lists the names and codes for the Amazon Web Services services integrated
     /// with Service Quotas.
-    pub fn listServices(self: *Self, allocator: std.mem.Allocator, input: list_services.ListServicesInput, options: list_services.Options) !list_services.ListServicesOutput {
+    pub fn listServices(self: *Self, allocator: std.mem.Allocator, input: list_services.ListServicesInput, options: CallOptions) !list_services.ListServicesOutput {
         return list_services.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the tags assigned to the specified applied quota.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Adds a quota increase request to your quota request template.
-    pub fn putServiceQuotaIncreaseRequestIntoTemplate(self: *Self, allocator: std.mem.Allocator, input: put_service_quota_increase_request_into_template.PutServiceQuotaIncreaseRequestIntoTemplateInput, options: put_service_quota_increase_request_into_template.Options) !put_service_quota_increase_request_into_template.PutServiceQuotaIncreaseRequestIntoTemplateOutput {
+    pub fn putServiceQuotaIncreaseRequestIntoTemplate(self: *Self, allocator: std.mem.Allocator, input: put_service_quota_increase_request_into_template.PutServiceQuotaIncreaseRequestIntoTemplateInput, options: CallOptions) !put_service_quota_increase_request_into_template.PutServiceQuotaIncreaseRequestIntoTemplateOutput {
         return put_service_quota_increase_request_into_template.execute(self, allocator, input, options);
     }
 
     /// Submits a quota increase request for the specified quota at the account or
     /// resource
     /// level.
-    pub fn requestServiceQuotaIncrease(self: *Self, allocator: std.mem.Allocator, input: request_service_quota_increase.RequestServiceQuotaIncreaseInput, options: request_service_quota_increase.Options) !request_service_quota_increase.RequestServiceQuotaIncreaseOutput {
+    pub fn requestServiceQuotaIncrease(self: *Self, allocator: std.mem.Allocator, input: request_service_quota_increase.RequestServiceQuotaIncreaseInput, options: CallOptions) !request_service_quota_increase.RequestServiceQuotaIncreaseOutput {
         return request_service_quota_increase.execute(self, allocator, input, options);
     }
 
@@ -220,7 +221,7 @@ pub const Client = struct {
     /// and excluded quotas configurations. Automatic Management monitors your
     /// Service Quotas utilization and notifies you before you
     /// run out of your allocated quotas.
-    pub fn startAutoManagement(self: *Self, allocator: std.mem.Allocator, input: start_auto_management.StartAutoManagementInput, options: start_auto_management.Options) !start_auto_management.StartAutoManagementOutput {
+    pub fn startAutoManagement(self: *Self, allocator: std.mem.Allocator, input: start_auto_management.StartAutoManagementInput, options: CallOptions) !start_auto_management.StartAutoManagementOutput {
         return start_auto_management.execute(self, allocator, input, options);
     }
 
@@ -235,7 +236,7 @@ pub const Client = struct {
     /// number of quotas in your account. Use the `GetQuotaUtilizationReport`
     /// operation
     /// to check the status and retrieve the results when the report is ready.
-    pub fn startQuotaUtilizationReport(self: *Self, allocator: std.mem.Allocator, input: start_quota_utilization_report.StartQuotaUtilizationReportInput, options: start_quota_utilization_report.Options) !start_quota_utilization_report.StartQuotaUtilizationReportOutput {
+    pub fn startQuotaUtilizationReport(self: *Self, allocator: std.mem.Allocator, input: start_quota_utilization_report.StartQuotaUtilizationReportInput, options: CallOptions) !start_quota_utilization_report.StartQuotaUtilizationReportOutput {
         return start_quota_utilization_report.execute(self, allocator, input, options);
     }
 
@@ -244,21 +245,21 @@ pub const Client = struct {
     /// configurations. Automatic Management monitors your Service Quotas
     /// utilization and notifies you before you
     /// run out of your allocated quotas.
-    pub fn stopAutoManagement(self: *Self, allocator: std.mem.Allocator, input: stop_auto_management.StopAutoManagementInput, options: stop_auto_management.Options) !stop_auto_management.StopAutoManagementOutput {
+    pub fn stopAutoManagement(self: *Self, allocator: std.mem.Allocator, input: stop_auto_management.StopAutoManagementInput, options: CallOptions) !stop_auto_management.StopAutoManagementOutput {
         return stop_auto_management.execute(self, allocator, input, options);
     }
 
     /// Adds tags to the specified applied quota. You can include one or more tags
     /// to add to
     /// the quota.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from the specified applied quota. You can specify one or more
     /// tags to
     /// remove.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -267,7 +268,7 @@ pub const Client = struct {
     /// excluded quotas. Automatic Management monitors your Service Quotas
     /// utilization and notifies you before you
     /// run out of your allocated quotas.
-    pub fn updateAutoManagement(self: *Self, allocator: std.mem.Allocator, input: update_auto_management.UpdateAutoManagementInput, options: update_auto_management.Options) !update_auto_management.UpdateAutoManagementOutput {
+    pub fn updateAutoManagement(self: *Self, allocator: std.mem.Allocator, input: update_auto_management.UpdateAutoManagementInput, options: CallOptions) !update_auto_management.UpdateAutoManagementOutput {
         return update_auto_management.execute(self, allocator, input, options);
     }
 

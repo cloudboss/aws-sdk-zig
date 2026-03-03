@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AudioStream = @import("audio_stream.zig").AudioStream;
 const ContentIdentificationType = @import("content_identification_type.zig").ContentIdentificationType;
@@ -468,11 +469,7 @@ pub const StartStreamTranscriptionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartStreamTranscriptionInput, options: Options) !StartStreamTranscriptionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartStreamTranscriptionInput, options: CallOptions) !StartStreamTranscriptionOutput {
     _ = client;
     _ = allocator;
     _ = input;

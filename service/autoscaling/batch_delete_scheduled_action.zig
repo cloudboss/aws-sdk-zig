@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FailedScheduledUpdateGroupActionRequest = @import("failed_scheduled_update_group_action_request.zig").FailedScheduledUpdateGroupActionRequest;
 const serde = @import("serde.zig");
@@ -22,11 +23,7 @@ pub const BatchDeleteScheduledActionOutput = struct {
     failed_scheduled_actions: ?[]const FailedScheduledUpdateGroupActionRequest = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteScheduledActionInput, options: Options) !BatchDeleteScheduledActionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteScheduledActionInput, options: CallOptions) !BatchDeleteScheduledActionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

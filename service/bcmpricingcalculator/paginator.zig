@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_bill_estimate_commitments = @import("list_bill_estimate_commitments.zig");
@@ -23,7 +24,7 @@ pub const ListBillEstimateCommitmentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_bill_estimate_commitments.Options) !list_bill_estimate_commitments.ListBillEstimateCommitmentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_bill_estimate_commitments.ListBillEstimateCommitmentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -64,7 +65,7 @@ pub const ListBillEstimateInputCommitmentModificationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_bill_estimate_input_commitment_modifications.Options) !list_bill_estimate_input_commitment_modifications.ListBillEstimateInputCommitmentModificationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_bill_estimate_input_commitment_modifications.ListBillEstimateInputCommitmentModificationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -105,7 +106,7 @@ pub const ListBillEstimateInputUsageModificationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_bill_estimate_input_usage_modifications.Options) !list_bill_estimate_input_usage_modifications.ListBillEstimateInputUsageModificationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_bill_estimate_input_usage_modifications.ListBillEstimateInputUsageModificationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -146,7 +147,7 @@ pub const ListBillEstimateLineItemsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_bill_estimate_line_items.Options) !list_bill_estimate_line_items.ListBillEstimateLineItemsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_bill_estimate_line_items.ListBillEstimateLineItemsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -187,7 +188,7 @@ pub const ListBillEstimatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_bill_estimates.Options) !list_bill_estimates.ListBillEstimatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_bill_estimates.ListBillEstimatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -228,7 +229,7 @@ pub const ListBillScenarioCommitmentModificationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_bill_scenario_commitment_modifications.Options) !list_bill_scenario_commitment_modifications.ListBillScenarioCommitmentModificationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_bill_scenario_commitment_modifications.ListBillScenarioCommitmentModificationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -269,7 +270,7 @@ pub const ListBillScenarioUsageModificationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_bill_scenario_usage_modifications.Options) !list_bill_scenario_usage_modifications.ListBillScenarioUsageModificationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_bill_scenario_usage_modifications.ListBillScenarioUsageModificationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -310,7 +311,7 @@ pub const ListBillScenariosPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_bill_scenarios.Options) !list_bill_scenarios.ListBillScenariosOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_bill_scenarios.ListBillScenariosOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -351,7 +352,7 @@ pub const ListWorkloadEstimateUsagePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_workload_estimate_usage.Options) !list_workload_estimate_usage.ListWorkloadEstimateUsageOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_workload_estimate_usage.ListWorkloadEstimateUsageOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -392,7 +393,7 @@ pub const ListWorkloadEstimatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_workload_estimates.Options) !list_workload_estimates.ListWorkloadEstimatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_workload_estimates.ListWorkloadEstimatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

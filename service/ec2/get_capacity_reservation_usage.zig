@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstanceUsage = @import("instance_usage.zig").InstanceUsage;
 const InterruptibleCapacityAllocation = @import("interruptible_capacity_allocation.zig").InterruptibleCapacityAllocation;
@@ -120,11 +121,7 @@ pub const GetCapacityReservationUsageOutput = struct {
     total_instance_count: ?i32 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCapacityReservationUsageInput, options: Options) !GetCapacityReservationUsageOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCapacityReservationUsageInput, options: CallOptions) !GetCapacityReservationUsageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

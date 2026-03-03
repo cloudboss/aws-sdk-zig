@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RoutingStrategyType = @import("routing_strategy_type.zig").RoutingStrategyType;
 const Alias = @import("alias.zig").Alias;
@@ -60,11 +61,7 @@ pub const ListAliasesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAliasesInput, options: Options) !ListAliasesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAliasesInput, options: CallOptions) !ListAliasesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConfiguredTableAssociationAnalysisRulePolicy = @import("configured_table_association_analysis_rule_policy.zig").ConfiguredTableAssociationAnalysisRulePolicy;
 const ConfiguredTableAssociationAnalysisRuleType = @import("configured_table_association_analysis_rule_type.zig").ConfiguredTableAssociationAnalysisRuleType;
@@ -42,11 +43,7 @@ pub const CreateConfiguredTableAssociationAnalysisRuleOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateConfiguredTableAssociationAnalysisRuleInput, options: Options) !CreateConfiguredTableAssociationAnalysisRuleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateConfiguredTableAssociationAnalysisRuleInput, options: CallOptions) !CreateConfiguredTableAssociationAnalysisRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

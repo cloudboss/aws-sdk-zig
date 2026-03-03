@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DocumentMetadata = @import("document_metadata.zig").DocumentMetadata;
 const UploadMetadata = @import("upload_metadata.zig").UploadMetadata;
@@ -57,11 +58,7 @@ pub const InitiateDocumentVersionUploadOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InitiateDocumentVersionUploadInput, options: Options) !InitiateDocumentVersionUploadOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InitiateDocumentVersionUploadInput, options: CallOptions) !InitiateDocumentVersionUploadOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

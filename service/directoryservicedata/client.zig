@@ -18,6 +18,7 @@ const search_groups = @import("search_groups.zig");
 const search_users = @import("search_users.zig");
 const update_group = @import("update_group.zig");
 const update_user = @import("update_user.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -49,37 +50,37 @@ pub const Client = struct {
     }
 
     /// Adds an existing user, group, or computer as a group member.
-    pub fn addGroupMember(self: *Self, allocator: std.mem.Allocator, input: add_group_member.AddGroupMemberInput, options: add_group_member.Options) !add_group_member.AddGroupMemberOutput {
+    pub fn addGroupMember(self: *Self, allocator: std.mem.Allocator, input: add_group_member.AddGroupMemberInput, options: CallOptions) !add_group_member.AddGroupMemberOutput {
         return add_group_member.execute(self, allocator, input, options);
     }
 
     /// Creates a new group.
-    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: create_group.Options) !create_group.CreateGroupOutput {
+    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: CallOptions) !create_group.CreateGroupOutput {
         return create_group.execute(self, allocator, input, options);
     }
 
     /// Creates a new user.
-    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: create_user.Options) !create_user.CreateUserOutput {
+    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: CallOptions) !create_user.CreateUserOutput {
         return create_user.execute(self, allocator, input, options);
     }
 
     /// Deletes a group.
-    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: delete_group.Options) !delete_group.DeleteGroupOutput {
+    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: CallOptions) !delete_group.DeleteGroupOutput {
         return delete_group.execute(self, allocator, input, options);
     }
 
     /// Deletes a user.
-    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: delete_user.Options) !delete_user.DeleteUserOutput {
+    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: CallOptions) !delete_user.DeleteUserOutput {
         return delete_user.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific group.
-    pub fn describeGroup(self: *Self, allocator: std.mem.Allocator, input: describe_group.DescribeGroupInput, options: describe_group.Options) !describe_group.DescribeGroupOutput {
+    pub fn describeGroup(self: *Self, allocator: std.mem.Allocator, input: describe_group.DescribeGroupInput, options: CallOptions) !describe_group.DescribeGroupOutput {
         return describe_group.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific user.
-    pub fn describeUser(self: *Self, allocator: std.mem.Allocator, input: describe_user.DescribeUserInput, options: describe_user.Options) !describe_user.DescribeUserOutput {
+    pub fn describeUser(self: *Self, allocator: std.mem.Allocator, input: describe_user.DescribeUserInput, options: CallOptions) !describe_user.DescribeUserOutput {
         return describe_user.execute(self, allocator, input, options);
     }
 
@@ -88,7 +89,7 @@ pub const Client = struct {
     /// account, see
     /// [ResetUserPassword](https://docs.aws.amazon.com/directoryservice/latest/devguide/API_ResetUserPassword.html)
     /// in the *Directory Service API Reference*.
-    pub fn disableUser(self: *Self, allocator: std.mem.Allocator, input: disable_user.DisableUserInput, options: disable_user.Options) !disable_user.DisableUserOutput {
+    pub fn disableUser(self: *Self, allocator: std.mem.Allocator, input: disable_user.DisableUserInput, options: CallOptions) !disable_user.DisableUserOutput {
         return disable_user.execute(self, allocator, input, options);
     }
 
@@ -104,7 +105,7 @@ pub const Client = struct {
     /// You can also specify a maximum number of return results with the
     /// `MaxResults`
     /// parameter.
-    pub fn listGroupMembers(self: *Self, allocator: std.mem.Allocator, input: list_group_members.ListGroupMembersInput, options: list_group_members.Options) !list_group_members.ListGroupMembersOutput {
+    pub fn listGroupMembers(self: *Self, allocator: std.mem.Allocator, input: list_group_members.ListGroupMembersInput, options: CallOptions) !list_group_members.ListGroupMembersOutput {
         return list_group_members.execute(self, allocator, input, options);
     }
 
@@ -120,7 +121,7 @@ pub const Client = struct {
     /// You can also specify a maximum number of return results with the
     /// `MaxResults`
     /// parameter.
-    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: list_groups.Options) !list_groups.ListGroupsOutput {
+    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: CallOptions) !list_groups.ListGroupsOutput {
         return list_groups.execute(self, allocator, input, options);
     }
 
@@ -136,7 +137,7 @@ pub const Client = struct {
     /// You can also specify a maximum number of return results with the
     /// `MaxResults`
     /// parameter.
-    pub fn listGroupsForMember(self: *Self, allocator: std.mem.Allocator, input: list_groups_for_member.ListGroupsForMemberInput, options: list_groups_for_member.Options) !list_groups_for_member.ListGroupsForMemberOutput {
+    pub fn listGroupsForMember(self: *Self, allocator: std.mem.Allocator, input: list_groups_for_member.ListGroupsForMemberInput, options: CallOptions) !list_groups_for_member.ListGroupsForMemberOutput {
         return list_groups_for_member.execute(self, allocator, input, options);
     }
 
@@ -152,12 +153,12 @@ pub const Client = struct {
     /// You can also specify a maximum number of return results with the
     /// `MaxResults`
     /// parameter.
-    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: list_users.Options) !list_users.ListUsersOutput {
+    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: CallOptions) !list_users.ListUsersOutput {
         return list_users.execute(self, allocator, input, options);
     }
 
     /// Removes a member from a group.
-    pub fn removeGroupMember(self: *Self, allocator: std.mem.Allocator, input: remove_group_member.RemoveGroupMemberInput, options: remove_group_member.Options) !remove_group_member.RemoveGroupMemberOutput {
+    pub fn removeGroupMember(self: *Self, allocator: std.mem.Allocator, input: remove_group_member.RemoveGroupMemberInput, options: CallOptions) !remove_group_member.RemoveGroupMemberOutput {
         return remove_group_member.execute(self, allocator, input, options);
     }
 
@@ -177,7 +178,7 @@ pub const Client = struct {
     /// You can also specify a maximum number of return results with the
     /// `MaxResults`
     /// parameter.
-    pub fn searchGroups(self: *Self, allocator: std.mem.Allocator, input: search_groups.SearchGroupsInput, options: search_groups.Options) !search_groups.SearchGroupsOutput {
+    pub fn searchGroups(self: *Self, allocator: std.mem.Allocator, input: search_groups.SearchGroupsInput, options: CallOptions) !search_groups.SearchGroupsOutput {
         return search_groups.execute(self, allocator, input, options);
     }
 
@@ -197,17 +198,17 @@ pub const Client = struct {
     /// You can also specify a maximum number of return results with the
     /// `MaxResults`
     /// parameter.
-    pub fn searchUsers(self: *Self, allocator: std.mem.Allocator, input: search_users.SearchUsersInput, options: search_users.Options) !search_users.SearchUsersOutput {
+    pub fn searchUsers(self: *Self, allocator: std.mem.Allocator, input: search_users.SearchUsersInput, options: CallOptions) !search_users.SearchUsersOutput {
         return search_users.execute(self, allocator, input, options);
     }
 
     /// Updates group information.
-    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: update_group.Options) !update_group.UpdateGroupOutput {
+    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: CallOptions) !update_group.UpdateGroupOutput {
         return update_group.execute(self, allocator, input, options);
     }
 
     /// Updates user information.
-    pub fn updateUser(self: *Self, allocator: std.mem.Allocator, input: update_user.UpdateUserInput, options: update_user.Options) !update_user.UpdateUserOutput {
+    pub fn updateUser(self: *Self, allocator: std.mem.Allocator, input: update_user.UpdateUserInput, options: CallOptions) !update_user.UpdateUserOutput {
         return update_user.execute(self, allocator, input, options);
     }
 

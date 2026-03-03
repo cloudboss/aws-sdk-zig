@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CustomVocabularyEntryId = @import("custom_vocabulary_entry_id.zig").CustomVocabularyEntryId;
 const FailedCustomVocabularyItem = @import("failed_custom_vocabulary_item.zig").FailedCustomVocabularyItem;
@@ -65,11 +66,7 @@ pub const BatchDeleteCustomVocabularyItemOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteCustomVocabularyItemInput, options: Options) !BatchDeleteCustomVocabularyItemOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteCustomVocabularyItemInput, options: CallOptions) !BatchDeleteCustomVocabularyItemOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

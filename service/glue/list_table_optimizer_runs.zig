@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TableOptimizerType = @import("table_optimizer_type.zig").TableOptimizerType;
 const TableOptimizerRun = @import("table_optimizer_run.zig").TableOptimizerRun;
@@ -61,11 +62,7 @@ pub const ListTableOptimizerRunsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTableOptimizerRunsInput, options: Options) !ListTableOptimizerRunsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTableOptimizerRunsInput, options: CallOptions) !ListTableOptimizerRunsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TableRestoreStatus = @import("table_restore_status.zig").TableRestoreStatus;
 const serde = @import("serde.zig");
@@ -40,11 +41,7 @@ pub const DescribeTableRestoreStatusOutput = struct {
     table_restore_status_details: ?[]const TableRestoreStatus = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTableRestoreStatusInput, options: Options) !DescribeTableRestoreStatusOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTableRestoreStatusInput, options: CallOptions) !DescribeTableRestoreStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

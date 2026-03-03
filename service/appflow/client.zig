@@ -26,6 +26,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_connector_profile = @import("update_connector_profile.zig");
 const update_connector_registration = @import("update_connector_registration.zig");
 const update_flow = @import("update_flow.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -87,7 +88,7 @@ pub const Client = struct {
     /// data processing
     /// charges for Amazon AppFlow apply. For the pricing information, see [Amazon
     /// AppFlow pricing](http://aws.amazon.com/appflow/pricing/).
-    pub fn cancelFlowExecutions(self: *Self, allocator: std.mem.Allocator, input: cancel_flow_executions.CancelFlowExecutionsInput, options: cancel_flow_executions.Options) !cancel_flow_executions.CancelFlowExecutionsOutput {
+    pub fn cancelFlowExecutions(self: *Self, allocator: std.mem.Allocator, input: cancel_flow_executions.CancelFlowExecutionsInput, options: CallOptions) !cancel_flow_executions.CancelFlowExecutionsOutput {
         return cancel_flow_executions.execute(self, allocator, input, options);
     }
 
@@ -101,7 +102,7 @@ pub const Client = struct {
     /// that you
     /// create, you can provide the credentials and properties for only one
     /// connector.
-    pub fn createConnectorProfile(self: *Self, allocator: std.mem.Allocator, input: create_connector_profile.CreateConnectorProfileInput, options: create_connector_profile.Options) !create_connector_profile.CreateConnectorProfileOutput {
+    pub fn createConnectorProfile(self: *Self, allocator: std.mem.Allocator, input: create_connector_profile.CreateConnectorProfileInput, options: CallOptions) !create_connector_profile.CreateConnectorProfileOutput {
         return create_connector_profile.execute(self, allocator, input, options);
     }
 
@@ -114,12 +115,12 @@ pub const Client = struct {
     /// at a time. Amazon AppFlow does not currently support flows to multiple
     /// destinations at
     /// once.
-    pub fn createFlow(self: *Self, allocator: std.mem.Allocator, input: create_flow.CreateFlowInput, options: create_flow.Options) !create_flow.CreateFlowOutput {
+    pub fn createFlow(self: *Self, allocator: std.mem.Allocator, input: create_flow.CreateFlowInput, options: CallOptions) !create_flow.CreateFlowOutput {
         return create_flow.execute(self, allocator, input, options);
     }
 
     /// Enables you to delete an existing connector profile.
-    pub fn deleteConnectorProfile(self: *Self, allocator: std.mem.Allocator, input: delete_connector_profile.DeleteConnectorProfileInput, options: delete_connector_profile.Options) !delete_connector_profile.DeleteConnectorProfileOutput {
+    pub fn deleteConnectorProfile(self: *Self, allocator: std.mem.Allocator, input: delete_connector_profile.DeleteConnectorProfileInput, options: CallOptions) !delete_connector_profile.DeleteConnectorProfileOutput {
         return delete_connector_profile.execute(self, allocator, input, options);
     }
 
@@ -127,7 +128,7 @@ pub const Client = struct {
     /// flow, Amazon AppFlow validates the request by checking the flow
     /// configuration and status. You can
     /// delete flows one at a time.
-    pub fn deleteFlow(self: *Self, allocator: std.mem.Allocator, input: delete_flow.DeleteFlowInput, options: delete_flow.Options) !delete_flow.DeleteFlowOutput {
+    pub fn deleteFlow(self: *Self, allocator: std.mem.Allocator, input: delete_flow.DeleteFlowInput, options: CallOptions) !delete_flow.DeleteFlowOutput {
         return delete_flow.execute(self, allocator, input, options);
     }
 
@@ -136,14 +137,14 @@ pub const Client = struct {
     /// API can be used for custom connectors that are registered in your account
     /// and also for Amazon
     /// authored connectors.
-    pub fn describeConnector(self: *Self, allocator: std.mem.Allocator, input: describe_connector.DescribeConnectorInput, options: describe_connector.Options) !describe_connector.DescribeConnectorOutput {
+    pub fn describeConnector(self: *Self, allocator: std.mem.Allocator, input: describe_connector.DescribeConnectorInput, options: CallOptions) !describe_connector.DescribeConnectorOutput {
         return describe_connector.execute(self, allocator, input, options);
     }
 
     /// Provides details regarding the entity used with the connector, with a
     /// description of the
     /// data model for each field in that entity.
-    pub fn describeConnectorEntity(self: *Self, allocator: std.mem.Allocator, input: describe_connector_entity.DescribeConnectorEntityInput, options: describe_connector_entity.Options) !describe_connector_entity.DescribeConnectorEntityOutput {
+    pub fn describeConnectorEntity(self: *Self, allocator: std.mem.Allocator, input: describe_connector_entity.DescribeConnectorEntityInput, options: CallOptions) !describe_connector_entity.DescribeConnectorEntityOutput {
         return describe_connector_entity.execute(self, allocator, input, options);
     }
 
@@ -155,7 +156,7 @@ pub const Client = struct {
     /// profiles
     /// in a paginated form. If there is no match, this operation returns an empty
     /// list.
-    pub fn describeConnectorProfiles(self: *Self, allocator: std.mem.Allocator, input: describe_connector_profiles.DescribeConnectorProfilesInput, options: describe_connector_profiles.Options) !describe_connector_profiles.DescribeConnectorProfilesOutput {
+    pub fn describeConnectorProfiles(self: *Self, allocator: std.mem.Allocator, input: describe_connector_profiles.DescribeConnectorProfilesInput, options: CallOptions) !describe_connector_profiles.DescribeConnectorProfilesOutput {
         return describe_connector_profiles.execute(self, allocator, input, options);
     }
 
@@ -167,17 +168,17 @@ pub const Client = struct {
     /// contains a `nextToken` object, which can be be passed in to the next call to
     /// the
     /// `DescribeConnectors` API operation to retrieve the next page.
-    pub fn describeConnectors(self: *Self, allocator: std.mem.Allocator, input: describe_connectors.DescribeConnectorsInput, options: describe_connectors.Options) !describe_connectors.DescribeConnectorsOutput {
+    pub fn describeConnectors(self: *Self, allocator: std.mem.Allocator, input: describe_connectors.DescribeConnectorsInput, options: CallOptions) !describe_connectors.DescribeConnectorsOutput {
         return describe_connectors.execute(self, allocator, input, options);
     }
 
     /// Provides a description of the specified flow.
-    pub fn describeFlow(self: *Self, allocator: std.mem.Allocator, input: describe_flow.DescribeFlowInput, options: describe_flow.Options) !describe_flow.DescribeFlowOutput {
+    pub fn describeFlow(self: *Self, allocator: std.mem.Allocator, input: describe_flow.DescribeFlowInput, options: CallOptions) !describe_flow.DescribeFlowOutput {
         return describe_flow.execute(self, allocator, input, options);
     }
 
     /// Fetches the execution history of the flow.
-    pub fn describeFlowExecutionRecords(self: *Self, allocator: std.mem.Allocator, input: describe_flow_execution_records.DescribeFlowExecutionRecordsInput, options: describe_flow_execution_records.Options) !describe_flow_execution_records.DescribeFlowExecutionRecordsOutput {
+    pub fn describeFlowExecutionRecords(self: *Self, allocator: std.mem.Allocator, input: describe_flow_execution_records.DescribeFlowExecutionRecordsInput, options: CallOptions) !describe_flow_execution_records.DescribeFlowExecutionRecordsOutput {
         return describe_flow_execution_records.execute(self, allocator, input, options);
     }
 
@@ -186,7 +187,7 @@ pub const Client = struct {
     /// example, you can query Salesforce for *Account* and
     /// *Opportunity* entities, or query ServiceNow for the
     /// *Incident* entity.
-    pub fn listConnectorEntities(self: *Self, allocator: std.mem.Allocator, input: list_connector_entities.ListConnectorEntitiesInput, options: list_connector_entities.Options) !list_connector_entities.ListConnectorEntitiesOutput {
+    pub fn listConnectorEntities(self: *Self, allocator: std.mem.Allocator, input: list_connector_entities.ListConnectorEntitiesInput, options: CallOptions) !list_connector_entities.ListConnectorEntitiesOutput {
         return list_connector_entities.execute(self, allocator, input, options);
     }
 
@@ -195,17 +196,17 @@ pub const Client = struct {
     /// This API lists only custom connectors registered in this account, not the
     /// Amazon Web Services
     /// authored connectors.
-    pub fn listConnectors(self: *Self, allocator: std.mem.Allocator, input: list_connectors.ListConnectorsInput, options: list_connectors.Options) !list_connectors.ListConnectorsOutput {
+    pub fn listConnectors(self: *Self, allocator: std.mem.Allocator, input: list_connectors.ListConnectorsInput, options: CallOptions) !list_connectors.ListConnectorsOutput {
         return list_connectors.execute(self, allocator, input, options);
     }
 
     /// Lists all of the flows associated with your account.
-    pub fn listFlows(self: *Self, allocator: std.mem.Allocator, input: list_flows.ListFlowsInput, options: list_flows.Options) !list_flows.ListFlowsOutput {
+    pub fn listFlows(self: *Self, allocator: std.mem.Allocator, input: list_flows.ListFlowsInput, options: CallOptions) !list_flows.ListFlowsOutput {
         return list_flows.execute(self, allocator, input, options);
     }
 
     /// Retrieves the tags that are associated with a specified flow.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -214,7 +215,7 @@ pub const Client = struct {
     /// register the connector, you must deploy the associated AWS lambda function
     /// in your
     /// account.
-    pub fn registerConnector(self: *Self, allocator: std.mem.Allocator, input: register_connector.RegisterConnectorInput, options: register_connector.Options) !register_connector.RegisterConnectorOutput {
+    pub fn registerConnector(self: *Self, allocator: std.mem.Allocator, input: register_connector.RegisterConnectorInput, options: CallOptions) !register_connector.RegisterConnectorOutput {
         return register_connector.execute(self, allocator, input, options);
     }
 
@@ -232,7 +233,7 @@ pub const Client = struct {
     /// every hour,
     /// but you can use this action when you want to get the latest metadata right
     /// away.
-    pub fn resetConnectorMetadataCache(self: *Self, allocator: std.mem.Allocator, input: reset_connector_metadata_cache.ResetConnectorMetadataCacheInput, options: reset_connector_metadata_cache.Options) !reset_connector_metadata_cache.ResetConnectorMetadataCacheOutput {
+    pub fn resetConnectorMetadataCache(self: *Self, allocator: std.mem.Allocator, input: reset_connector_metadata_cache.ResetConnectorMetadataCacheInput, options: CallOptions) !reset_connector_metadata_cache.ResetConnectorMetadataCacheOutput {
         return reset_connector_metadata_cache.execute(self, allocator, input, options);
     }
 
@@ -240,7 +241,7 @@ pub const Client = struct {
     /// flow
     /// immediately. For schedule and event-triggered flows, this operation
     /// activates the flow.
-    pub fn startFlow(self: *Self, allocator: std.mem.Allocator, input: start_flow.StartFlowInput, options: start_flow.Options) !start_flow.StartFlowOutput {
+    pub fn startFlow(self: *Self, allocator: std.mem.Allocator, input: start_flow.StartFlowInput, options: CallOptions) !start_flow.StartFlowOutput {
         return start_flow.execute(self, allocator, input, options);
     }
 
@@ -249,29 +250,29 @@ pub const Client = struct {
     /// `unsupportedOperationException` error message. For schedule and
     /// event-triggered
     /// flows, this operation deactivates the flow.
-    pub fn stopFlow(self: *Self, allocator: std.mem.Allocator, input: stop_flow.StopFlowInput, options: stop_flow.Options) !stop_flow.StopFlowOutput {
+    pub fn stopFlow(self: *Self, allocator: std.mem.Allocator, input: stop_flow.StopFlowInput, options: CallOptions) !stop_flow.StopFlowOutput {
         return stop_flow.execute(self, allocator, input, options);
     }
 
     /// Applies a tag to the specified flow.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Unregisters the custom connector registered in your account that matches the
     /// connector
     /// label provided in the request.
-    pub fn unregisterConnector(self: *Self, allocator: std.mem.Allocator, input: unregister_connector.UnregisterConnectorInput, options: unregister_connector.Options) !unregister_connector.UnregisterConnectorOutput {
+    pub fn unregisterConnector(self: *Self, allocator: std.mem.Allocator, input: unregister_connector.UnregisterConnectorInput, options: CallOptions) !unregister_connector.UnregisterConnectorOutput {
         return unregister_connector.execute(self, allocator, input, options);
     }
 
     /// Removes a tag from the specified flow.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates a given connector profile associated with your account.
-    pub fn updateConnectorProfile(self: *Self, allocator: std.mem.Allocator, input: update_connector_profile.UpdateConnectorProfileInput, options: update_connector_profile.Options) !update_connector_profile.UpdateConnectorProfileOutput {
+    pub fn updateConnectorProfile(self: *Self, allocator: std.mem.Allocator, input: update_connector_profile.UpdateConnectorProfileInput, options: CallOptions) !update_connector_profile.UpdateConnectorProfileOutput {
         return update_connector_profile.execute(self, allocator, input, options);
     }
 
@@ -283,12 +284,12 @@ pub const Client = struct {
     ///   connector
     ///
     /// * A new AWS Lambda function that you specify
-    pub fn updateConnectorRegistration(self: *Self, allocator: std.mem.Allocator, input: update_connector_registration.UpdateConnectorRegistrationInput, options: update_connector_registration.Options) !update_connector_registration.UpdateConnectorRegistrationOutput {
+    pub fn updateConnectorRegistration(self: *Self, allocator: std.mem.Allocator, input: update_connector_registration.UpdateConnectorRegistrationInput, options: CallOptions) !update_connector_registration.UpdateConnectorRegistrationOutput {
         return update_connector_registration.execute(self, allocator, input, options);
     }
 
     /// Updates an existing flow.
-    pub fn updateFlow(self: *Self, allocator: std.mem.Allocator, input: update_flow.UpdateFlowInput, options: update_flow.Options) !update_flow.UpdateFlowOutput {
+    pub fn updateFlow(self: *Self, allocator: std.mem.Allocator, input: update_flow.UpdateFlowInput, options: CallOptions) !update_flow.UpdateFlowOutput {
         return update_flow.execute(self, allocator, input, options);
     }
 

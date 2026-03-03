@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const WorkGroupConfigurationUpdates = @import("work_group_configuration_updates.zig").WorkGroupConfigurationUpdates;
 const WorkGroupState = @import("work_group_state.zig").WorkGroupState;
@@ -30,11 +31,7 @@ pub const UpdateWorkGroupInput = struct {
 pub const UpdateWorkGroupOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkGroupInput, options: Options) !UpdateWorkGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkGroupInput, options: CallOptions) !UpdateWorkGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

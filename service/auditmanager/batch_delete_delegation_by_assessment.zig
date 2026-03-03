@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchDeleteDelegationByAssessmentError = @import("batch_delete_delegation_by_assessment_error.zig").BatchDeleteDelegationByAssessmentError;
 
@@ -27,11 +28,7 @@ pub const BatchDeleteDelegationByAssessmentOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteDelegationByAssessmentInput, options: Options) !BatchDeleteDelegationByAssessmentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteDelegationByAssessmentInput, options: CallOptions) !BatchDeleteDelegationByAssessmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

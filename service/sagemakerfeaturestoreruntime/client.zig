@@ -5,6 +5,7 @@ const batch_get_record = @import("batch_get_record.zig");
 const delete_record = @import("delete_record.zig");
 const get_record = @import("get_record.zig");
 const put_record = @import("put_record.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -35,7 +36,7 @@ pub const Client = struct {
     }
 
     /// Retrieves a batch of `Records` from a `FeatureGroup`.
-    pub fn batchGetRecord(self: *Self, allocator: std.mem.Allocator, input: batch_get_record.BatchGetRecordInput, options: batch_get_record.Options) !batch_get_record.BatchGetRecordOutput {
+    pub fn batchGetRecord(self: *Self, allocator: std.mem.Allocator, input: batch_get_record.BatchGetRecordInput, options: CallOptions) !batch_get_record.BatchGetRecordOutput {
         return batch_get_record.execute(self, allocator, input, options);
     }
 
@@ -75,7 +76,7 @@ pub const Client = struct {
     /// hard delete a record from the `OfflineStore` with the Iceberg table format
     /// enabled, see [Delete records from the offline
     /// store](https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-delete-records-offline-store.html#feature-store-delete-records-offline-store).
-    pub fn deleteRecord(self: *Self, allocator: std.mem.Allocator, input: delete_record.DeleteRecordInput, options: delete_record.Options) !delete_record.DeleteRecordOutput {
+    pub fn deleteRecord(self: *Self, allocator: std.mem.Allocator, input: delete_record.DeleteRecordInput, options: CallOptions) !delete_record.DeleteRecordOutput {
         return delete_record.execute(self, allocator, input, options);
     }
 
@@ -83,7 +84,7 @@ pub const Client = struct {
     /// latest records stored in the `OnlineStore` can be retrieved. If no Record
     /// with
     /// `RecordIdentifierValue` is found, then an empty result is returned.
-    pub fn getRecord(self: *Self, allocator: std.mem.Allocator, input: get_record.GetRecordInput, options: get_record.Options) !get_record.GetRecordOutput {
+    pub fn getRecord(self: *Self, allocator: std.mem.Allocator, input: get_record.GetRecordInput, options: CallOptions) !get_record.GetRecordOutput {
         return get_record.execute(self, allocator, input, options);
     }
 
@@ -107,7 +108,7 @@ pub const Client = struct {
     /// is `null` or unspecified, `TtlDuration` is set to the default feature
     /// group level `TtlDuration`. A record level `TtlDuration` supersedes
     /// the group level `TtlDuration`.
-    pub fn putRecord(self: *Self, allocator: std.mem.Allocator, input: put_record.PutRecordInput, options: put_record.Options) !put_record.PutRecordOutput {
+    pub fn putRecord(self: *Self, allocator: std.mem.Allocator, input: put_record.PutRecordInput, options: CallOptions) !put_record.PutRecordOutput {
         return put_record.execute(self, allocator, input, options);
     }
 };

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RepositoryCatalogData = @import("repository_catalog_data.zig").RepositoryCatalogData;
 
@@ -30,11 +31,7 @@ pub const GetRepositoryCatalogDataOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetRepositoryCatalogDataInput, options: Options) !GetRepositoryCatalogDataOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetRepositoryCatalogDataInput, options: CallOptions) !GetRepositoryCatalogDataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

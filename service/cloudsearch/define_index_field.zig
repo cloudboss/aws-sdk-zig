@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IndexField = @import("index_field.zig").IndexField;
 const IndexFieldStatus = @import("index_field_status.zig").IndexFieldStatus;
@@ -18,11 +19,7 @@ pub const DefineIndexFieldOutput = struct {
     index_field: ?IndexFieldStatus = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DefineIndexFieldInput, options: Options) !DefineIndexFieldOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DefineIndexFieldInput, options: CallOptions) !DefineIndexFieldOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

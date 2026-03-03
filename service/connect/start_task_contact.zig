@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TaskAttachment = @import("task_attachment.zig").TaskAttachment;
 const Reference = @import("reference.zig").Reference;
@@ -143,11 +144,7 @@ pub const StartTaskContactOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartTaskContactInput, options: Options) !StartTaskContactOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartTaskContactInput, options: CallOptions) !StartTaskContactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

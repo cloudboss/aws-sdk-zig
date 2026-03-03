@@ -43,6 +43,7 @@ const tag_resource = @import("tag_resource.zig");
 const unsubscribe_ = @import("unsubscribe.zig");
 const untag_resource = @import("untag_resource.zig");
 const verify_sms_sandbox_phone_number = @import("verify_sms_sandbox_phone_number.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -81,7 +82,7 @@ pub const Client = struct {
     /// to
     /// the `AddPermission`, `RemovePermission`, and
     /// `SetTopicAttributes` actions in your IAM policy.
-    pub fn addPermission(self: *Self, allocator: std.mem.Allocator, input: add_permission.AddPermissionInput, options: add_permission.Options) !add_permission.AddPermissionOutput {
+    pub fn addPermission(self: *Self, allocator: std.mem.Allocator, input: add_permission.AddPermissionInput, options: CallOptions) !add_permission.AddPermissionOutput {
         return add_permission.execute(self, allocator, input, options);
     }
 
@@ -93,7 +94,7 @@ pub const Client = struct {
     ///
     /// To resume sending messages, you can opt in the number by using the
     /// `OptInPhoneNumber` action.
-    pub fn checkIfPhoneNumberIsOptedOut(self: *Self, allocator: std.mem.Allocator, input: check_if_phone_number_is_opted_out.CheckIfPhoneNumberIsOptedOutInput, options: check_if_phone_number_is_opted_out.Options) !check_if_phone_number_is_opted_out.CheckIfPhoneNumberIsOptedOutOutput {
+    pub fn checkIfPhoneNumberIsOptedOut(self: *Self, allocator: std.mem.Allocator, input: check_if_phone_number_is_opted_out.CheckIfPhoneNumberIsOptedOutInput, options: CallOptions) !check_if_phone_number_is_opted_out.CheckIfPhoneNumberIsOptedOutOutput {
         return check_if_phone_number_is_opted_out.execute(self, allocator, input, options);
     }
 
@@ -104,7 +105,7 @@ pub const Client = struct {
     /// (ARN). This call
     /// requires an AWS signature only when the `AuthenticateOnUnsubscribe` flag is
     /// set to "true".
-    pub fn confirmSubscription(self: *Self, allocator: std.mem.Allocator, input: confirm_subscription.ConfirmSubscriptionInput, options: confirm_subscription.Options) !confirm_subscription.ConfirmSubscriptionOutput {
+    pub fn confirmSubscription(self: *Self, allocator: std.mem.Allocator, input: confirm_subscription.ConfirmSubscriptionInput, options: CallOptions) !confirm_subscription.ConfirmSubscriptionOutput {
         return confirm_subscription.execute(self, allocator, input, options);
     }
 
@@ -155,7 +156,7 @@ pub const Client = struct {
     ///
     /// You can use the returned `PlatformApplicationArn` as an attribute for the
     /// `CreatePlatformEndpoint` action.
-    pub fn createPlatformApplication(self: *Self, allocator: std.mem.Allocator, input: create_platform_application.CreatePlatformApplicationInput, options: create_platform_application.Options) !create_platform_application.CreatePlatformApplicationOutput {
+    pub fn createPlatformApplication(self: *Self, allocator: std.mem.Allocator, input: create_platform_application.CreatePlatformApplicationInput, options: CallOptions) !create_platform_application.CreatePlatformApplicationOutput {
         return create_platform_application.execute(self, allocator, input, options);
     }
 
@@ -177,7 +178,7 @@ pub const Client = struct {
     /// ChannelId. For
     /// more information, see [Creating an Amazon SNS Endpoint for
     /// Baidu](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html).
-    pub fn createPlatformEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_platform_endpoint.CreatePlatformEndpointInput, options: create_platform_endpoint.Options) !create_platform_endpoint.CreatePlatformEndpointOutput {
+    pub fn createPlatformEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_platform_endpoint.CreatePlatformEndpointInput, options: CallOptions) !create_platform_endpoint.CreatePlatformEndpointOutput {
         return create_platform_endpoint.execute(self, allocator, input, options);
     }
 
@@ -198,7 +199,7 @@ pub const Client = struct {
     /// see [SMS
     /// sandbox](https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) in
     /// the *Amazon SNS Developer Guide*.
-    pub fn createSmsSandboxPhoneNumber(self: *Self, allocator: std.mem.Allocator, input: create_sms_sandbox_phone_number.CreateSMSSandboxPhoneNumberInput, options: create_sms_sandbox_phone_number.Options) !create_sms_sandbox_phone_number.CreateSMSSandboxPhoneNumberOutput {
+    pub fn createSmsSandboxPhoneNumber(self: *Self, allocator: std.mem.Allocator, input: create_sms_sandbox_phone_number.CreateSMSSandboxPhoneNumberInput, options: CallOptions) !create_sms_sandbox_phone_number.CreateSMSSandboxPhoneNumberOutput {
         return create_sms_sandbox_phone_number.execute(self, allocator, input, options);
     }
 
@@ -211,7 +212,7 @@ pub const Client = struct {
     /// idempotent, so if the requester already owns a topic with the specified
     /// name, that
     /// topic's ARN is returned without creating a new topic.
-    pub fn createTopic(self: *Self, allocator: std.mem.Allocator, input: create_topic.CreateTopicInput, options: create_topic.Options) !create_topic.CreateTopicOutput {
+    pub fn createTopic(self: *Self, allocator: std.mem.Allocator, input: create_topic.CreateTopicInput, options: CallOptions) !create_topic.CreateTopicOutput {
         return create_topic.execute(self, allocator, input, options);
     }
 
@@ -223,7 +224,7 @@ pub const Client = struct {
     /// When you delete an endpoint that is also subscribed to a topic, then you
     /// must also
     /// unsubscribe the endpoint from the topic.
-    pub fn deleteEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_endpoint.DeleteEndpointInput, options: delete_endpoint.Options) !delete_endpoint.DeleteEndpointOutput {
+    pub fn deleteEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_endpoint.DeleteEndpointInput, options: CallOptions) !delete_endpoint.DeleteEndpointOutput {
         return delete_endpoint.execute(self, allocator, input, options);
     }
 
@@ -234,7 +235,7 @@ pub const Client = struct {
     /// [Using Amazon SNS
     /// Mobile Push
     /// Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
-    pub fn deletePlatformApplication(self: *Self, allocator: std.mem.Allocator, input: delete_platform_application.DeletePlatformApplicationInput, options: delete_platform_application.Options) !delete_platform_application.DeletePlatformApplicationOutput {
+    pub fn deletePlatformApplication(self: *Self, allocator: std.mem.Allocator, input: delete_platform_application.DeletePlatformApplicationInput, options: CallOptions) !delete_platform_application.DeletePlatformApplicationOutput {
         return delete_platform_application.execute(self, allocator, input, options);
     }
 
@@ -255,7 +256,7 @@ pub const Client = struct {
     /// see [SMS
     /// sandbox](https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) in
     /// the *Amazon SNS Developer Guide*.
-    pub fn deleteSmsSandboxPhoneNumber(self: *Self, allocator: std.mem.Allocator, input: delete_sms_sandbox_phone_number.DeleteSMSSandboxPhoneNumberInput, options: delete_sms_sandbox_phone_number.Options) !delete_sms_sandbox_phone_number.DeleteSMSSandboxPhoneNumberOutput {
+    pub fn deleteSmsSandboxPhoneNumber(self: *Self, allocator: std.mem.Allocator, input: delete_sms_sandbox_phone_number.DeleteSMSSandboxPhoneNumberInput, options: CallOptions) !delete_sms_sandbox_phone_number.DeleteSMSSandboxPhoneNumberOutput {
         return delete_sms_sandbox_phone_number.execute(self, allocator, input, options);
     }
 
@@ -265,13 +266,13 @@ pub const Client = struct {
     /// This action
     /// is idempotent, so deleting a topic that does not exist does not result in an
     /// error.
-    pub fn deleteTopic(self: *Self, allocator: std.mem.Allocator, input: delete_topic.DeleteTopicInput, options: delete_topic.Options) !delete_topic.DeleteTopicOutput {
+    pub fn deleteTopic(self: *Self, allocator: std.mem.Allocator, input: delete_topic.DeleteTopicInput, options: CallOptions) !delete_topic.DeleteTopicOutput {
         return delete_topic.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified inline `DataProtectionPolicy` document that is
     /// stored in the specified Amazon SNS topic.
-    pub fn getDataProtectionPolicy(self: *Self, allocator: std.mem.Allocator, input: get_data_protection_policy.GetDataProtectionPolicyInput, options: get_data_protection_policy.Options) !get_data_protection_policy.GetDataProtectionPolicyOutput {
+    pub fn getDataProtectionPolicy(self: *Self, allocator: std.mem.Allocator, input: get_data_protection_policy.GetDataProtectionPolicyInput, options: CallOptions) !get_data_protection_policy.GetDataProtectionPolicyOutput {
         return get_data_protection_policy.execute(self, allocator, input, options);
     }
 
@@ -280,7 +281,7 @@ pub const Client = struct {
     /// more
     /// information, see [Using Amazon SNS Mobile Push
     /// Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
-    pub fn getEndpointAttributes(self: *Self, allocator: std.mem.Allocator, input: get_endpoint_attributes.GetEndpointAttributesInput, options: get_endpoint_attributes.Options) !get_endpoint_attributes.GetEndpointAttributesOutput {
+    pub fn getEndpointAttributes(self: *Self, allocator: std.mem.Allocator, input: get_endpoint_attributes.GetEndpointAttributesInput, options: CallOptions) !get_endpoint_attributes.GetEndpointAttributesOutput {
         return get_endpoint_attributes.execute(self, allocator, input, options);
     }
 
@@ -290,7 +291,7 @@ pub const Client = struct {
     /// more
     /// information, see [Using Amazon SNS Mobile Push
     /// Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
-    pub fn getPlatformApplicationAttributes(self: *Self, allocator: std.mem.Allocator, input: get_platform_application_attributes.GetPlatformApplicationAttributesInput, options: get_platform_application_attributes.Options) !get_platform_application_attributes.GetPlatformApplicationAttributesOutput {
+    pub fn getPlatformApplicationAttributes(self: *Self, allocator: std.mem.Allocator, input: get_platform_application_attributes.GetPlatformApplicationAttributesInput, options: CallOptions) !get_platform_application_attributes.GetPlatformApplicationAttributesOutput {
         return get_platform_application_attributes.execute(self, allocator, input, options);
     }
 
@@ -298,7 +299,7 @@ pub const Client = struct {
     /// account.
     ///
     /// These settings are set with the `SetSMSAttributes` action.
-    pub fn getSmsAttributes(self: *Self, allocator: std.mem.Allocator, input: get_sms_attributes.GetSMSAttributesInput, options: get_sms_attributes.Options) !get_sms_attributes.GetSMSAttributesOutput {
+    pub fn getSmsAttributes(self: *Self, allocator: std.mem.Allocator, input: get_sms_attributes.GetSMSAttributesInput, options: CallOptions) !get_sms_attributes.GetSMSAttributesOutput {
         return get_sms_attributes.execute(self, allocator, input, options);
     }
 
@@ -319,19 +320,19 @@ pub const Client = struct {
     /// see [SMS
     /// sandbox](https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) in
     /// the *Amazon SNS Developer Guide*.
-    pub fn getSmsSandboxAccountStatus(self: *Self, allocator: std.mem.Allocator, input: get_sms_sandbox_account_status.GetSMSSandboxAccountStatusInput, options: get_sms_sandbox_account_status.Options) !get_sms_sandbox_account_status.GetSMSSandboxAccountStatusOutput {
+    pub fn getSmsSandboxAccountStatus(self: *Self, allocator: std.mem.Allocator, input: get_sms_sandbox_account_status.GetSMSSandboxAccountStatusInput, options: CallOptions) !get_sms_sandbox_account_status.GetSMSSandboxAccountStatusOutput {
         return get_sms_sandbox_account_status.execute(self, allocator, input, options);
     }
 
     /// Returns all of the properties of a subscription.
-    pub fn getSubscriptionAttributes(self: *Self, allocator: std.mem.Allocator, input: get_subscription_attributes.GetSubscriptionAttributesInput, options: get_subscription_attributes.Options) !get_subscription_attributes.GetSubscriptionAttributesOutput {
+    pub fn getSubscriptionAttributes(self: *Self, allocator: std.mem.Allocator, input: get_subscription_attributes.GetSubscriptionAttributesInput, options: CallOptions) !get_subscription_attributes.GetSubscriptionAttributesOutput {
         return get_subscription_attributes.execute(self, allocator, input, options);
     }
 
     /// Returns all of the properties of a topic. Topic properties returned might
     /// differ based
     /// on the authorization of the user.
-    pub fn getTopicAttributes(self: *Self, allocator: std.mem.Allocator, input: get_topic_attributes.GetTopicAttributesInput, options: get_topic_attributes.Options) !get_topic_attributes.GetTopicAttributesOutput {
+    pub fn getTopicAttributes(self: *Self, allocator: std.mem.Allocator, input: get_topic_attributes.GetTopicAttributesInput, options: CallOptions) !get_topic_attributes.GetTopicAttributesOutput {
         return get_topic_attributes.execute(self, allocator, input, options);
     }
 
@@ -350,7 +351,7 @@ pub const Client = struct {
     /// Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
     ///
     /// This action is throttled at 30 transactions per second (TPS).
-    pub fn listEndpointsByPlatformApplication(self: *Self, allocator: std.mem.Allocator, input: list_endpoints_by_platform_application.ListEndpointsByPlatformApplicationInput, options: list_endpoints_by_platform_application.Options) !list_endpoints_by_platform_application.ListEndpointsByPlatformApplicationOutput {
+    pub fn listEndpointsByPlatformApplication(self: *Self, allocator: std.mem.Allocator, input: list_endpoints_by_platform_application.ListEndpointsByPlatformApplicationInput, options: CallOptions) !list_endpoints_by_platform_application.ListEndpointsByPlatformApplicationOutput {
         return list_endpoints_by_platform_application.execute(self, allocator, input, options);
     }
 
@@ -359,7 +360,7 @@ pub const Client = struct {
     /// For more information about origination numbers, see [Origination
     /// numbers](https://docs.aws.amazon.com/sns/latest/dg/channels-sms-originating-identities-origination-numbers.html) in the *Amazon SNS Developer
     /// Guide*.
-    pub fn listOriginationNumbers(self: *Self, allocator: std.mem.Allocator, input: list_origination_numbers.ListOriginationNumbersInput, options: list_origination_numbers.Options) !list_origination_numbers.ListOriginationNumbersOutput {
+    pub fn listOriginationNumbers(self: *Self, allocator: std.mem.Allocator, input: list_origination_numbers.ListOriginationNumbersInput, options: CallOptions) !list_origination_numbers.ListOriginationNumbersOutput {
         return list_origination_numbers.execute(self, allocator, input, options);
     }
 
@@ -375,7 +376,7 @@ pub const Client = struct {
     /// the next page, you call `ListPhoneNumbersOptedOut` again using the
     /// `NextToken` string received from the previous call. When there are no
     /// more records to return, `NextToken` will be null.
-    pub fn listPhoneNumbersOptedOut(self: *Self, allocator: std.mem.Allocator, input: list_phone_numbers_opted_out.ListPhoneNumbersOptedOutInput, options: list_phone_numbers_opted_out.Options) !list_phone_numbers_opted_out.ListPhoneNumbersOptedOutOutput {
+    pub fn listPhoneNumbersOptedOut(self: *Self, allocator: std.mem.Allocator, input: list_phone_numbers_opted_out.ListPhoneNumbersOptedOutInput, options: CallOptions) !list_phone_numbers_opted_out.ListPhoneNumbersOptedOutOutput {
         return list_phone_numbers_opted_out.execute(self, allocator, input, options);
     }
 
@@ -393,7 +394,7 @@ pub const Client = struct {
     /// Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
     ///
     /// This action is throttled at 15 transactions per second (TPS).
-    pub fn listPlatformApplications(self: *Self, allocator: std.mem.Allocator, input: list_platform_applications.ListPlatformApplicationsInput, options: list_platform_applications.Options) !list_platform_applications.ListPlatformApplicationsOutput {
+    pub fn listPlatformApplications(self: *Self, allocator: std.mem.Allocator, input: list_platform_applications.ListPlatformApplicationsInput, options: CallOptions) !list_platform_applications.ListPlatformApplicationsOutput {
         return list_platform_applications.execute(self, allocator, input, options);
     }
 
@@ -414,7 +415,7 @@ pub const Client = struct {
     /// see [SMS
     /// sandbox](https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) in
     /// the *Amazon SNS Developer Guide*.
-    pub fn listSmsSandboxPhoneNumbers(self: *Self, allocator: std.mem.Allocator, input: list_sms_sandbox_phone_numbers.ListSMSSandboxPhoneNumbersInput, options: list_sms_sandbox_phone_numbers.Options) !list_sms_sandbox_phone_numbers.ListSMSSandboxPhoneNumbersOutput {
+    pub fn listSmsSandboxPhoneNumbers(self: *Self, allocator: std.mem.Allocator, input: list_sms_sandbox_phone_numbers.ListSMSSandboxPhoneNumbersInput, options: CallOptions) !list_sms_sandbox_phone_numbers.ListSMSSandboxPhoneNumbersOutput {
         return list_sms_sandbox_phone_numbers.execute(self, allocator, input, options);
     }
 
@@ -425,7 +426,7 @@ pub const Client = struct {
     /// `ListSubscriptions` call to get further results.
     ///
     /// This action is throttled at 30 transactions per second (TPS).
-    pub fn listSubscriptions(self: *Self, allocator: std.mem.Allocator, input: list_subscriptions.ListSubscriptionsInput, options: list_subscriptions.Options) !list_subscriptions.ListSubscriptionsOutput {
+    pub fn listSubscriptions(self: *Self, allocator: std.mem.Allocator, input: list_subscriptions.ListSubscriptionsInput, options: CallOptions) !list_subscriptions.ListSubscriptionsOutput {
         return list_subscriptions.execute(self, allocator, input, options);
     }
 
@@ -436,7 +437,7 @@ pub const Client = struct {
     /// a new `ListSubscriptionsByTopic` call to get further results.
     ///
     /// This action is throttled at 30 transactions per second (TPS).
-    pub fn listSubscriptionsByTopic(self: *Self, allocator: std.mem.Allocator, input: list_subscriptions_by_topic.ListSubscriptionsByTopicInput, options: list_subscriptions_by_topic.Options) !list_subscriptions_by_topic.ListSubscriptionsByTopicOutput {
+    pub fn listSubscriptionsByTopic(self: *Self, allocator: std.mem.Allocator, input: list_subscriptions_by_topic.ListSubscriptionsByTopicInput, options: CallOptions) !list_subscriptions_by_topic.ListSubscriptionsByTopicOutput {
         return list_subscriptions_by_topic.execute(self, allocator, input, options);
     }
 
@@ -444,7 +445,7 @@ pub const Client = struct {
     /// [Amazon SNS Tags](https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html)
     /// in the
     /// *Amazon Simple Notification Service Developer Guide*.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -455,7 +456,7 @@ pub const Client = struct {
     /// further results.
     ///
     /// This action is throttled at 30 transactions per second (TPS).
-    pub fn listTopics(self: *Self, allocator: std.mem.Allocator, input: list_topics.ListTopicsInput, options: list_topics.Options) !list_topics.ListTopicsOutput {
+    pub fn listTopics(self: *Self, allocator: std.mem.Allocator, input: list_topics.ListTopicsInput, options: CallOptions) !list_topics.ListTopicsOutput {
         return list_topics.execute(self, allocator, input, options);
     }
 
@@ -464,7 +465,7 @@ pub const Client = struct {
     /// resume sending SMS messages to the number.
     ///
     /// You can opt in a phone number only once every 30 days.
-    pub fn optInPhoneNumber(self: *Self, allocator: std.mem.Allocator, input: opt_in_phone_number.OptInPhoneNumberInput, options: opt_in_phone_number.Options) !opt_in_phone_number.OptInPhoneNumberOutput {
+    pub fn optInPhoneNumber(self: *Self, allocator: std.mem.Allocator, input: opt_in_phone_number.OptInPhoneNumberInput, options: CallOptions) !opt_in_phone_number.OptInPhoneNumberOutput {
         return opt_in_phone_number.execute(self, allocator, input, options);
     }
 
@@ -496,7 +497,7 @@ pub const Client = struct {
     ///
     /// You can publish messages only to topics and endpoints in the same
     /// Amazon Web Services Region.
-    pub fn publish(self: *Self, allocator: std.mem.Allocator, input: publish_.PublishInput, options: publish_.Options) !publish_.PublishOutput {
+    pub fn publish(self: *Self, allocator: std.mem.Allocator, input: publish_.PublishInput, options: CallOptions) !publish_.PublishOutput {
         return publish_.execute(self, allocator, input, options);
     }
 
@@ -548,14 +549,14 @@ pub const Client = struct {
     ///
     /// When a `messageId` is returned, the batch message is saved, and Amazon SNS
     /// immediately delivers the message to subscribers.
-    pub fn publishBatch(self: *Self, allocator: std.mem.Allocator, input: publish_batch.PublishBatchInput, options: publish_batch.Options) !publish_batch.PublishBatchOutput {
+    pub fn publishBatch(self: *Self, allocator: std.mem.Allocator, input: publish_batch.PublishBatchInput, options: CallOptions) !publish_batch.PublishBatchOutput {
         return publish_batch.execute(self, allocator, input, options);
     }
 
     /// Adds or updates an inline policy document that is stored in the specified
     /// Amazon SNS
     /// topic.
-    pub fn putDataProtectionPolicy(self: *Self, allocator: std.mem.Allocator, input: put_data_protection_policy.PutDataProtectionPolicyInput, options: put_data_protection_policy.Options) !put_data_protection_policy.PutDataProtectionPolicyOutput {
+    pub fn putDataProtectionPolicy(self: *Self, allocator: std.mem.Allocator, input: put_data_protection_policy.PutDataProtectionPolicyInput, options: CallOptions) !put_data_protection_policy.PutDataProtectionPolicyOutput {
         return put_data_protection_policy.execute(self, allocator, input, options);
     }
 
@@ -565,7 +566,7 @@ pub const Client = struct {
     /// to
     /// the `AddPermission`, `RemovePermission`, and
     /// `SetTopicAttributes` actions in your IAM policy.
-    pub fn removePermission(self: *Self, allocator: std.mem.Allocator, input: remove_permission.RemovePermissionInput, options: remove_permission.Options) !remove_permission.RemovePermissionOutput {
+    pub fn removePermission(self: *Self, allocator: std.mem.Allocator, input: remove_permission.RemovePermissionInput, options: CallOptions) !remove_permission.RemovePermissionOutput {
         return remove_permission.execute(self, allocator, input, options);
     }
 
@@ -575,7 +576,7 @@ pub const Client = struct {
     /// more
     /// information, see [Using Amazon SNS Mobile Push
     /// Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
-    pub fn setEndpointAttributes(self: *Self, allocator: std.mem.Allocator, input: set_endpoint_attributes.SetEndpointAttributesInput, options: set_endpoint_attributes.Options) !set_endpoint_attributes.SetEndpointAttributesOutput {
+    pub fn setEndpointAttributes(self: *Self, allocator: std.mem.Allocator, input: set_endpoint_attributes.SetEndpointAttributesInput, options: CallOptions) !set_endpoint_attributes.SetEndpointAttributesOutput {
         return set_endpoint_attributes.execute(self, allocator, input, options);
     }
 
@@ -589,7 +590,7 @@ pub const Client = struct {
     /// Attributes for
     /// Message Delivery
     /// Status](https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html).
-    pub fn setPlatformApplicationAttributes(self: *Self, allocator: std.mem.Allocator, input: set_platform_application_attributes.SetPlatformApplicationAttributesInput, options: set_platform_application_attributes.Options) !set_platform_application_attributes.SetPlatformApplicationAttributesOutput {
+    pub fn setPlatformApplicationAttributes(self: *Self, allocator: std.mem.Allocator, input: set_platform_application_attributes.SetPlatformApplicationAttributesInput, options: CallOptions) !set_platform_application_attributes.SetPlatformApplicationAttributesOutput {
         return set_platform_application_attributes.execute(self, allocator, input, options);
     }
 
@@ -607,13 +608,13 @@ pub const Client = struct {
     /// To use this operation, you must grant the Amazon SNS service principal
     /// (`sns.amazonaws.com`) permission to perform the
     /// `s3:ListBucket` action.
-    pub fn setSmsAttributes(self: *Self, allocator: std.mem.Allocator, input: set_sms_attributes.SetSMSAttributesInput, options: set_sms_attributes.Options) !set_sms_attributes.SetSMSAttributesOutput {
+    pub fn setSmsAttributes(self: *Self, allocator: std.mem.Allocator, input: set_sms_attributes.SetSMSAttributesInput, options: CallOptions) !set_sms_attributes.SetSMSAttributesOutput {
         return set_sms_attributes.execute(self, allocator, input, options);
     }
 
     /// Allows a subscription owner to set an attribute of the subscription to a new
     /// value.
-    pub fn setSubscriptionAttributes(self: *Self, allocator: std.mem.Allocator, input: set_subscription_attributes.SetSubscriptionAttributesInput, options: set_subscription_attributes.Options) !set_subscription_attributes.SetSubscriptionAttributesOutput {
+    pub fn setSubscriptionAttributes(self: *Self, allocator: std.mem.Allocator, input: set_subscription_attributes.SetSubscriptionAttributesInput, options: CallOptions) !set_subscription_attributes.SetSubscriptionAttributesOutput {
         return set_subscription_attributes.execute(self, allocator, input, options);
     }
 
@@ -623,7 +624,7 @@ pub const Client = struct {
     /// to
     /// the `AddPermission`, `RemovePermission`, and
     /// `SetTopicAttributes` actions in your IAM policy.
-    pub fn setTopicAttributes(self: *Self, allocator: std.mem.Allocator, input: set_topic_attributes.SetTopicAttributesInput, options: set_topic_attributes.Options) !set_topic_attributes.SetTopicAttributesOutput {
+    pub fn setTopicAttributes(self: *Self, allocator: std.mem.Allocator, input: set_topic_attributes.SetTopicAttributesInput, options: CallOptions) !set_topic_attributes.SetTopicAttributesOutput {
         return set_topic_attributes.execute(self, allocator, input, options);
     }
 
@@ -637,7 +638,7 @@ pub const Client = struct {
     /// subscription response. Confirmation tokens are valid for two days.
     ///
     /// This action is throttled at 100 transactions per second (TPS).
-    pub fn subscribe(self: *Self, allocator: std.mem.Allocator, input: subscribe_.SubscribeInput, options: subscribe_.Options) !subscribe_.SubscribeOutput {
+    pub fn subscribe(self: *Self, allocator: std.mem.Allocator, input: subscribe_.SubscribeInput, options: CallOptions) !subscribe_.SubscribeOutput {
         return subscribe_.execute(self, allocator, input, options);
     }
 
@@ -662,7 +663,7 @@ pub const Client = struct {
     ///   Amazon Web Services Region. If
     /// your application requires a higher throughput, file a [technical support
     /// request](https://console.aws.amazon.com/support/home#/case/create?issueType=technical).
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -678,7 +679,7 @@ pub const Client = struct {
     /// to the topic if the `Unsubscribe` request was unintended.
     ///
     /// This action is throttled at 100 transactions per second (TPS).
-    pub fn unsubscribe(self: *Self, allocator: std.mem.Allocator, input: unsubscribe_.UnsubscribeInput, options: unsubscribe_.Options) !unsubscribe_.UnsubscribeOutput {
+    pub fn unsubscribe(self: *Self, allocator: std.mem.Allocator, input: unsubscribe_.UnsubscribeInput, options: CallOptions) !unsubscribe_.UnsubscribeOutput {
         return unsubscribe_.execute(self, allocator, input, options);
     }
 
@@ -686,7 +687,7 @@ pub const Client = struct {
     /// [Amazon SNS Tags](https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html)
     /// in the
     /// *Amazon SNS Developer Guide*.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -707,7 +708,7 @@ pub const Client = struct {
     /// see [SMS
     /// sandbox](https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) in
     /// the *Amazon SNS Developer Guide*.
-    pub fn verifySmsSandboxPhoneNumber(self: *Self, allocator: std.mem.Allocator, input: verify_sms_sandbox_phone_number.VerifySMSSandboxPhoneNumberInput, options: verify_sms_sandbox_phone_number.Options) !verify_sms_sandbox_phone_number.VerifySMSSandboxPhoneNumberOutput {
+    pub fn verifySmsSandboxPhoneNumber(self: *Self, allocator: std.mem.Allocator, input: verify_sms_sandbox_phone_number.VerifySMSSandboxPhoneNumberInput, options: CallOptions) !verify_sms_sandbox_phone_number.VerifySMSSandboxPhoneNumberOutput {
         return verify_sms_sandbox_phone_number.execute(self, allocator, input, options);
     }
 

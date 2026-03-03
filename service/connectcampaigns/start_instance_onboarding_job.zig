@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EncryptionConfig = @import("encryption_config.zig").EncryptionConfig;
 const InstanceOnboardingJobStatus = @import("instance_onboarding_job_status.zig").InstanceOnboardingJobStatus;
@@ -25,11 +26,7 @@ pub const StartInstanceOnboardingJobOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartInstanceOnboardingJobInput, options: Options) !StartInstanceOnboardingJobOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartInstanceOnboardingJobInput, options: CallOptions) !StartInstanceOnboardingJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

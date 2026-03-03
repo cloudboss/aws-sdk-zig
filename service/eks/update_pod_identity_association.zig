@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PodIdentityAssociation = @import("pod_identity_association.zig").PodIdentityAssociation;
 
@@ -88,11 +89,7 @@ pub const UpdatePodIdentityAssociationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdatePodIdentityAssociationInput, options: Options) !UpdatePodIdentityAssociationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdatePodIdentityAssociationInput, options: CallOptions) !UpdatePodIdentityAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

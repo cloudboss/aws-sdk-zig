@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FHIRVersion = @import("fhir_version.zig").FHIRVersion;
 const IdentityProviderConfiguration = @import("identity_provider_configuration.zig").IdentityProviderConfiguration;
@@ -70,11 +71,7 @@ pub const CreateFHIRDatastoreOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateFHIRDatastoreInput, options: Options) !CreateFHIRDatastoreOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateFHIRDatastoreInput, options: CallOptions) !CreateFHIRDatastoreOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

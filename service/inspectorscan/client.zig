@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const scan_sbom = @import("scan_sbom.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -40,7 +41,7 @@ pub const Client = struct {
     /// scores are available. Because the output reports both scores, you might
     /// notice a discrepency between them. However, you can triage the severity of
     /// either score depending on the vendor of your choosing.
-    pub fn scanSbom(self: *Self, allocator: std.mem.Allocator, input: scan_sbom.ScanSbomInput, options: scan_sbom.Options) !scan_sbom.ScanSbomOutput {
+    pub fn scanSbom(self: *Self, allocator: std.mem.Allocator, input: scan_sbom.ScanSbomInput, options: CallOptions) !scan_sbom.ScanSbomOutput {
         return scan_sbom.execute(self, allocator, input, options);
     }
 };

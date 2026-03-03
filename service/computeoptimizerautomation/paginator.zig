@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_accounts = @import("list_accounts.zig");
@@ -22,7 +23,7 @@ pub const ListAccountsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_accounts.Options) !list_accounts.ListAccountsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_accounts.ListAccountsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -63,7 +64,7 @@ pub const ListAutomationEventStepsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_automation_event_steps.Options) !list_automation_event_steps.ListAutomationEventStepsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_automation_event_steps.ListAutomationEventStepsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -104,7 +105,7 @@ pub const ListAutomationEventSummariesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_automation_event_summaries.Options) !list_automation_event_summaries.ListAutomationEventSummariesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_automation_event_summaries.ListAutomationEventSummariesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -145,7 +146,7 @@ pub const ListAutomationEventsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_automation_events.Options) !list_automation_events.ListAutomationEventsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_automation_events.ListAutomationEventsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -186,7 +187,7 @@ pub const ListAutomationRulePreviewPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_automation_rule_preview.Options) !list_automation_rule_preview.ListAutomationRulePreviewOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_automation_rule_preview.ListAutomationRulePreviewOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -227,7 +228,7 @@ pub const ListAutomationRulePreviewSummariesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_automation_rule_preview_summaries.Options) !list_automation_rule_preview_summaries.ListAutomationRulePreviewSummariesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_automation_rule_preview_summaries.ListAutomationRulePreviewSummariesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -268,7 +269,7 @@ pub const ListAutomationRulesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_automation_rules.Options) !list_automation_rules.ListAutomationRulesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_automation_rules.ListAutomationRulesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -309,7 +310,7 @@ pub const ListRecommendedActionSummariesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_recommended_action_summaries.Options) !list_recommended_action_summaries.ListRecommendedActionSummariesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_recommended_action_summaries.ListRecommendedActionSummariesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -350,7 +351,7 @@ pub const ListRecommendedActionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_recommended_actions.Options) !list_recommended_actions.ListRecommendedActionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_recommended_actions.ListRecommendedActionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

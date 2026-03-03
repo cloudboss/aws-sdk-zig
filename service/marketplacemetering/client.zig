@@ -5,6 +5,7 @@ const batch_meter_usage = @import("batch_meter_usage.zig");
 const meter_usage = @import("meter_usage.zig");
 const register_usage = @import("register_usage.zig");
 const resolve_customer = @import("resolve_customer.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -72,7 +73,7 @@ pub const Client = struct {
     /// For an example of `BatchMeterUsage`, see [ BatchMeterUsage code
     /// example](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example) in the *Amazon Web Services Marketplace Seller
     /// Guide*.
-    pub fn batchMeterUsage(self: *Self, allocator: std.mem.Allocator, input: batch_meter_usage.BatchMeterUsageInput, options: batch_meter_usage.Options) !batch_meter_usage.BatchMeterUsageOutput {
+    pub fn batchMeterUsage(self: *Self, allocator: std.mem.Allocator, input: batch_meter_usage.BatchMeterUsageInput, options: CallOptions) !batch_meter_usage.BatchMeterUsageOutput {
         return batch_meter_usage.execute(self, allocator, input, options);
     }
 
@@ -146,7 +147,7 @@ pub const Client = struct {
     /// For Amazon Web Services Regions that support `MeterUsage`, see [MeterUsage
     /// Region support for Amazon
     /// EC2](https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#meterusage-region-support-ec2) and [MeterUsage Region support for Amazon ECS and Amazon EKS](https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#meterusage-region-support-ecs-eks).
-    pub fn meterUsage(self: *Self, allocator: std.mem.Allocator, input: meter_usage.MeterUsageInput, options: meter_usage.Options) !meter_usage.MeterUsageOutput {
+    pub fn meterUsage(self: *Self, allocator: std.mem.Allocator, input: meter_usage.MeterUsageInput, options: CallOptions) !meter_usage.MeterUsageOutput {
         return meter_usage.execute(self, allocator, input, options);
     }
 
@@ -202,7 +203,7 @@ pub const Client = struct {
     /// For Amazon Web Services Regions that support `RegisterUsage`, see
     /// [RegisterUsage Region
     /// support](https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#registerusage-region-support).
-    pub fn registerUsage(self: *Self, allocator: std.mem.Allocator, input: register_usage.RegisterUsageInput, options: register_usage.Options) !register_usage.RegisterUsageOutput {
+    pub fn registerUsage(self: *Self, allocator: std.mem.Allocator, input: register_usage.RegisterUsageInput, options: CallOptions) !register_usage.RegisterUsageOutput {
         return register_usage.execute(self, allocator, input, options);
     }
 
@@ -232,7 +233,7 @@ pub const Client = struct {
     /// For Amazon Web Services Regions that support `ResolveCustomer`, see
     /// [ResolveCustomer Region
     /// support](https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#resolvecustomer-region-support).
-    pub fn resolveCustomer(self: *Self, allocator: std.mem.Allocator, input: resolve_customer.ResolveCustomerInput, options: resolve_customer.Options) !resolve_customer.ResolveCustomerOutput {
+    pub fn resolveCustomer(self: *Self, allocator: std.mem.Allocator, input: resolve_customer.ResolveCustomerInput, options: CallOptions) !resolve_customer.ResolveCustomerOutput {
         return resolve_customer.execute(self, allocator, input, options);
     }
 };

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const ObjectEncryption = @import("object_encryption.zig").ObjectEncryption;
@@ -82,11 +83,7 @@ pub const UpdateObjectEncryptionOutput = struct {
     request_charged: ?RequestCharged = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateObjectEncryptionInput, options: Options) !UpdateObjectEncryptionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateObjectEncryptionInput, options: CallOptions) !UpdateObjectEncryptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

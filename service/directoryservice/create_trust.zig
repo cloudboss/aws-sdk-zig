@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SelectiveAuth = @import("selective_auth.zig").SelectiveAuth;
 const TrustDirection = @import("trust_direction.zig").TrustDirection;
@@ -60,11 +61,7 @@ pub const CreateTrustOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTrustInput, options: Options) !CreateTrustOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTrustInput, options: CallOptions) !CreateTrustOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

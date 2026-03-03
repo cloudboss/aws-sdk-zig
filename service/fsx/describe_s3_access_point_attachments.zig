@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const S3AccessPointAttachmentsFilter = @import("s3_access_point_attachments_filter.zig").S3AccessPointAttachmentsFilter;
 const S3AccessPointAttachment = @import("s3_access_point_attachment.zig").S3AccessPointAttachment;
@@ -40,11 +41,7 @@ pub const DescribeS3AccessPointAttachmentsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeS3AccessPointAttachmentsInput, options: Options) !DescribeS3AccessPointAttachmentsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeS3AccessPointAttachmentsInput, options: CallOptions) !DescribeS3AccessPointAttachmentsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

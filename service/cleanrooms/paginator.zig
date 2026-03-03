@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_analysis_templates = @import("list_analysis_templates.zig");
@@ -33,7 +34,7 @@ pub const ListAnalysisTemplatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_analysis_templates.Options) !list_analysis_templates.ListAnalysisTemplatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_analysis_templates.ListAnalysisTemplatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -74,7 +75,7 @@ pub const ListCollaborationAnalysisTemplatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_collaboration_analysis_templates.Options) !list_collaboration_analysis_templates.ListCollaborationAnalysisTemplatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_collaboration_analysis_templates.ListCollaborationAnalysisTemplatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -115,7 +116,7 @@ pub const ListCollaborationChangeRequestsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_collaboration_change_requests.Options) !list_collaboration_change_requests.ListCollaborationChangeRequestsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_collaboration_change_requests.ListCollaborationChangeRequestsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -156,7 +157,7 @@ pub const ListCollaborationConfiguredAudienceModelAssociationsPaginator = struct
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_collaboration_configured_audience_model_associations.Options) !list_collaboration_configured_audience_model_associations.ListCollaborationConfiguredAudienceModelAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_collaboration_configured_audience_model_associations.ListCollaborationConfiguredAudienceModelAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -197,7 +198,7 @@ pub const ListCollaborationIdNamespaceAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_collaboration_id_namespace_associations.Options) !list_collaboration_id_namespace_associations.ListCollaborationIdNamespaceAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_collaboration_id_namespace_associations.ListCollaborationIdNamespaceAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -238,7 +239,7 @@ pub const ListCollaborationPrivacyBudgetTemplatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_collaboration_privacy_budget_templates.Options) !list_collaboration_privacy_budget_templates.ListCollaborationPrivacyBudgetTemplatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_collaboration_privacy_budget_templates.ListCollaborationPrivacyBudgetTemplatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -279,7 +280,7 @@ pub const ListCollaborationPrivacyBudgetsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_collaboration_privacy_budgets.Options) !list_collaboration_privacy_budgets.ListCollaborationPrivacyBudgetsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_collaboration_privacy_budgets.ListCollaborationPrivacyBudgetsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -320,7 +321,7 @@ pub const ListCollaborationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_collaborations.Options) !list_collaborations.ListCollaborationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_collaborations.ListCollaborationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -361,7 +362,7 @@ pub const ListConfiguredAudienceModelAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_configured_audience_model_associations.Options) !list_configured_audience_model_associations.ListConfiguredAudienceModelAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_configured_audience_model_associations.ListConfiguredAudienceModelAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -402,7 +403,7 @@ pub const ListConfiguredTableAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_configured_table_associations.Options) !list_configured_table_associations.ListConfiguredTableAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_configured_table_associations.ListConfiguredTableAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -443,7 +444,7 @@ pub const ListConfiguredTablesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_configured_tables.Options) !list_configured_tables.ListConfiguredTablesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_configured_tables.ListConfiguredTablesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -484,7 +485,7 @@ pub const ListIdMappingTablesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_id_mapping_tables.Options) !list_id_mapping_tables.ListIdMappingTablesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_id_mapping_tables.ListIdMappingTablesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -525,7 +526,7 @@ pub const ListIdNamespaceAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_id_namespace_associations.Options) !list_id_namespace_associations.ListIdNamespaceAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_id_namespace_associations.ListIdNamespaceAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -566,7 +567,7 @@ pub const ListMembersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_members.Options) !list_members.ListMembersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_members.ListMembersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -607,7 +608,7 @@ pub const ListMembershipsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_memberships.Options) !list_memberships.ListMembershipsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_memberships.ListMembershipsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -648,7 +649,7 @@ pub const ListPrivacyBudgetTemplatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_privacy_budget_templates.Options) !list_privacy_budget_templates.ListPrivacyBudgetTemplatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_privacy_budget_templates.ListPrivacyBudgetTemplatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -689,7 +690,7 @@ pub const ListPrivacyBudgetsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_privacy_budgets.Options) !list_privacy_budgets.ListPrivacyBudgetsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_privacy_budgets.ListPrivacyBudgetsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -730,7 +731,7 @@ pub const ListProtectedJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_protected_jobs.Options) !list_protected_jobs.ListProtectedJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_protected_jobs.ListProtectedJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -771,7 +772,7 @@ pub const ListProtectedQueriesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_protected_queries.Options) !list_protected_queries.ListProtectedQueriesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_protected_queries.ListProtectedQueriesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -812,7 +813,7 @@ pub const ListSchemasPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_schemas.Options) !list_schemas.ListSchemasOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_schemas.ListSchemasOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

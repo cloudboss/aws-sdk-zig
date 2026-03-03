@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Ec2InstanceConnectEndpoint = @import("ec_2_instance_connect_endpoint.zig").Ec2InstanceConnectEndpoint;
 const serde = @import("serde.zig");
@@ -23,11 +24,7 @@ pub const DeleteInstanceConnectEndpointOutput = struct {
     instance_connect_endpoint: ?Ec2InstanceConnectEndpoint = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteInstanceConnectEndpointInput, options: Options) !DeleteInstanceConnectEndpointOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteInstanceConnectEndpointInput, options: CallOptions) !DeleteInstanceConnectEndpointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

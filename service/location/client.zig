@@ -61,6 +61,7 @@ const update_place_index = @import("update_place_index.zig");
 const update_route_calculator = @import("update_route_calculator.zig");
 const update_tracker = @import("update_tracker.zig");
 const verify_device_position = @import("verify_device_position.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -100,19 +101,19 @@ pub const Client = struct {
     /// Currently not supported — Cross-account configurations, such as creating
     /// associations between a tracker resource in one account and a geofence
     /// collection in another account.
-    pub fn associateTrackerConsumer(self: *Self, allocator: std.mem.Allocator, input: associate_tracker_consumer.AssociateTrackerConsumerInput, options: associate_tracker_consumer.Options) !associate_tracker_consumer.AssociateTrackerConsumerOutput {
+    pub fn associateTrackerConsumer(self: *Self, allocator: std.mem.Allocator, input: associate_tracker_consumer.AssociateTrackerConsumerInput, options: CallOptions) !associate_tracker_consumer.AssociateTrackerConsumerOutput {
         return associate_tracker_consumer.execute(self, allocator, input, options);
     }
 
     /// Deletes the position history of one or more devices from a tracker resource.
-    pub fn batchDeleteDevicePositionHistory(self: *Self, allocator: std.mem.Allocator, input: batch_delete_device_position_history.BatchDeleteDevicePositionHistoryInput, options: batch_delete_device_position_history.Options) !batch_delete_device_position_history.BatchDeleteDevicePositionHistoryOutput {
+    pub fn batchDeleteDevicePositionHistory(self: *Self, allocator: std.mem.Allocator, input: batch_delete_device_position_history.BatchDeleteDevicePositionHistoryInput, options: CallOptions) !batch_delete_device_position_history.BatchDeleteDevicePositionHistoryOutput {
         return batch_delete_device_position_history.execute(self, allocator, input, options);
     }
 
     /// Deletes a batch of geofences from a geofence collection.
     ///
     /// This operation deletes the resource permanently.
-    pub fn batchDeleteGeofence(self: *Self, allocator: std.mem.Allocator, input: batch_delete_geofence.BatchDeleteGeofenceInput, options: batch_delete_geofence.Options) !batch_delete_geofence.BatchDeleteGeofenceOutput {
+    pub fn batchDeleteGeofence(self: *Self, allocator: std.mem.Allocator, input: batch_delete_geofence.BatchDeleteGeofenceInput, options: CallOptions) !batch_delete_geofence.BatchDeleteGeofenceOutput {
         return batch_delete_geofence.execute(self, allocator, input, options);
     }
 
@@ -137,19 +138,19 @@ pub const Client = struct {
     ///
     /// The `DeviceID` is used as a string to represent the device. You do not need
     /// to have a `Tracker` associated with the `DeviceID`.
-    pub fn batchEvaluateGeofences(self: *Self, allocator: std.mem.Allocator, input: batch_evaluate_geofences.BatchEvaluateGeofencesInput, options: batch_evaluate_geofences.Options) !batch_evaluate_geofences.BatchEvaluateGeofencesOutput {
+    pub fn batchEvaluateGeofences(self: *Self, allocator: std.mem.Allocator, input: batch_evaluate_geofences.BatchEvaluateGeofencesInput, options: CallOptions) !batch_evaluate_geofences.BatchEvaluateGeofencesOutput {
         return batch_evaluate_geofences.execute(self, allocator, input, options);
     }
 
     /// Lists the latest device positions for requested devices.
-    pub fn batchGetDevicePosition(self: *Self, allocator: std.mem.Allocator, input: batch_get_device_position.BatchGetDevicePositionInput, options: batch_get_device_position.Options) !batch_get_device_position.BatchGetDevicePositionOutput {
+    pub fn batchGetDevicePosition(self: *Self, allocator: std.mem.Allocator, input: batch_get_device_position.BatchGetDevicePositionInput, options: CallOptions) !batch_get_device_position.BatchGetDevicePositionOutput {
         return batch_get_device_position.execute(self, allocator, input, options);
     }
 
     /// A batch request for storing geofence geometries into a given geofence
     /// collection, or updates the geometry of an existing geofence if a geofence ID
     /// is included in the request.
-    pub fn batchPutGeofence(self: *Self, allocator: std.mem.Allocator, input: batch_put_geofence.BatchPutGeofenceInput, options: batch_put_geofence.Options) !batch_put_geofence.BatchPutGeofenceOutput {
+    pub fn batchPutGeofence(self: *Self, allocator: std.mem.Allocator, input: batch_put_geofence.BatchPutGeofenceInput, options: CallOptions) !batch_put_geofence.BatchPutGeofenceOutput {
         return batch_put_geofence.execute(self, allocator, input, options);
     }
 
@@ -177,7 +178,7 @@ pub const Client = struct {
     /// less than 15 m. If `PositionFiltering` is set to `AccuracyBased` filtering,
     /// Amazon Location uses the default value `{ "Horizontal": 0}` when accuracy is
     /// not provided on a `DevicePositionUpdate`.
-    pub fn batchUpdateDevicePosition(self: *Self, allocator: std.mem.Allocator, input: batch_update_device_position.BatchUpdateDevicePositionInput, options: batch_update_device_position.Options) !batch_update_device_position.BatchUpdateDevicePositionOutput {
+    pub fn batchUpdateDevicePosition(self: *Self, allocator: std.mem.Allocator, input: batch_update_device_position.BatchUpdateDevicePositionInput, options: CallOptions) !batch_update_device_position.BatchUpdateDevicePositionOutput {
         return batch_update_device_position.execute(self, allocator, input, options);
     }
 
@@ -219,7 +220,7 @@ pub const Client = struct {
     ///
     /// If you specify `walking` for the travel mode and your data provider is Esri,
     /// the start and destination must be within 40km.
-    pub fn calculateRoute(self: *Self, allocator: std.mem.Allocator, input: calculate_route.CalculateRouteInput, options: calculate_route.Options) !calculate_route.CalculateRouteOutput {
+    pub fn calculateRoute(self: *Self, allocator: std.mem.Allocator, input: calculate_route.CalculateRouteInput, options: CallOptions) !calculate_route.CalculateRouteOutput {
         return calculate_route.execute(self, allocator, input, options);
     }
 
@@ -263,12 +264,12 @@ pub const Client = struct {
     /// Specifying both parameters returns a validation error.
     /// * [Specifying a travel
     ///   mode](https://docs.aws.amazon.com/location/previous/developerguide/travel-mode.html) using TravelMode sets the transportation mode used to calculate the routes. This also lets you specify additional route preferences in `CarModeOptions` if traveling by `Car`, or `TruckModeOptions` if traveling by `Truck`.
-    pub fn calculateRouteMatrix(self: *Self, allocator: std.mem.Allocator, input: calculate_route_matrix.CalculateRouteMatrixInput, options: calculate_route_matrix.Options) !calculate_route_matrix.CalculateRouteMatrixOutput {
+    pub fn calculateRouteMatrix(self: *Self, allocator: std.mem.Allocator, input: calculate_route_matrix.CalculateRouteMatrixInput, options: CallOptions) !calculate_route_matrix.CalculateRouteMatrixOutput {
         return calculate_route_matrix.execute(self, allocator, input, options);
     }
 
     /// Creates a geofence collection, which manages and stores geofences.
-    pub fn createGeofenceCollection(self: *Self, allocator: std.mem.Allocator, input: create_geofence_collection.CreateGeofenceCollectionInput, options: create_geofence_collection.Options) !create_geofence_collection.CreateGeofenceCollectionOutput {
+    pub fn createGeofenceCollection(self: *Self, allocator: std.mem.Allocator, input: create_geofence_collection.CreateGeofenceCollectionInput, options: CallOptions) !create_geofence_collection.CreateGeofenceCollectionOutput {
         return create_geofence_collection.execute(self, allocator, input, options);
     }
 
@@ -277,7 +278,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Use API keys to
     /// authenticate](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html) in the *Amazon Location Service Developer Guide*.
-    pub fn createKey(self: *Self, allocator: std.mem.Allocator, input: create_key.CreateKeyInput, options: create_key.Options) !create_key.CreateKeyOutput {
+    pub fn createKey(self: *Self, allocator: std.mem.Allocator, input: create_key.CreateKeyInput, options: CallOptions) !create_key.CreateKeyOutput {
         return create_key.execute(self, allocator, input, options);
     }
 
@@ -303,7 +304,7 @@ pub const Client = struct {
     /// such as delivery vehicles or employees, you must not use Esri as your
     /// geolocation provider. See section 82 of the [Amazon Web Services service
     /// terms](http://aws.amazon.com/service-terms) for more details.
-    pub fn createMap(self: *Self, allocator: std.mem.Allocator, input: create_map.CreateMapInput, options: create_map.Options) !create_map.CreateMapOutput {
+    pub fn createMap(self: *Self, allocator: std.mem.Allocator, input: create_map.CreateMapInput, options: CallOptions) !create_map.CreateMapOutput {
         return create_map.execute(self, allocator, input, options);
     }
 
@@ -333,7 +334,7 @@ pub const Client = struct {
     /// such as delivery vehicles or employees, you must not use Esri as your
     /// geolocation provider. See section 82 of the [Amazon Web Services service
     /// terms](http://aws.amazon.com/service-terms) for more details.
-    pub fn createPlaceIndex(self: *Self, allocator: std.mem.Allocator, input: create_place_index.CreatePlaceIndexInput, options: create_place_index.Options) !create_place_index.CreatePlaceIndexOutput {
+    pub fn createPlaceIndex(self: *Self, allocator: std.mem.Allocator, input: create_place_index.CreatePlaceIndexInput, options: CallOptions) !create_place_index.CreatePlaceIndexOutput {
         return create_place_index.execute(self, allocator, input, options);
     }
 
@@ -363,13 +364,13 @@ pub const Client = struct {
     /// such as delivery vehicles or employees, you must not use Esri as your
     /// geolocation provider. See section 82 of the [Amazon Web Services service
     /// terms](http://aws.amazon.com/service-terms) for more details.
-    pub fn createRouteCalculator(self: *Self, allocator: std.mem.Allocator, input: create_route_calculator.CreateRouteCalculatorInput, options: create_route_calculator.Options) !create_route_calculator.CreateRouteCalculatorOutput {
+    pub fn createRouteCalculator(self: *Self, allocator: std.mem.Allocator, input: create_route_calculator.CreateRouteCalculatorInput, options: CallOptions) !create_route_calculator.CreateRouteCalculatorOutput {
         return create_route_calculator.execute(self, allocator, input, options);
     }
 
     /// Creates a tracker resource in your Amazon Web Services account, which lets
     /// you retrieve current and historical location of devices.
-    pub fn createTracker(self: *Self, allocator: std.mem.Allocator, input: create_tracker.CreateTrackerInput, options: create_tracker.Options) !create_tracker.CreateTrackerOutput {
+    pub fn createTracker(self: *Self, allocator: std.mem.Allocator, input: create_tracker.CreateTrackerInput, options: CallOptions) !create_tracker.CreateTrackerOutput {
         return create_tracker.execute(self, allocator, input, options);
     }
 
@@ -378,7 +379,7 @@ pub const Client = struct {
     /// This operation deletes the resource permanently. If the geofence collection
     /// is the target of a tracker resource, the devices will no longer be
     /// monitored.
-    pub fn deleteGeofenceCollection(self: *Self, allocator: std.mem.Allocator, input: delete_geofence_collection.DeleteGeofenceCollectionInput, options: delete_geofence_collection.Options) !delete_geofence_collection.DeleteGeofenceCollectionOutput {
+    pub fn deleteGeofenceCollection(self: *Self, allocator: std.mem.Allocator, input: delete_geofence_collection.DeleteGeofenceCollectionInput, options: CallOptions) !delete_geofence_collection.DeleteGeofenceCollectionOutput {
         return delete_geofence_collection.execute(self, allocator, input, options);
     }
 
@@ -387,7 +388,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Use API keys to
     /// authenticate](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html) in the *Amazon Location Service Developer Guide*.
-    pub fn deleteKey(self: *Self, allocator: std.mem.Allocator, input: delete_key.DeleteKeyInput, options: delete_key.Options) !delete_key.DeleteKeyOutput {
+    pub fn deleteKey(self: *Self, allocator: std.mem.Allocator, input: delete_key.DeleteKeyInput, options: CallOptions) !delete_key.DeleteKeyOutput {
         return delete_key.execute(self, allocator, input, options);
     }
 
@@ -410,7 +411,7 @@ pub const Client = struct {
     ///
     /// This operation deletes the resource permanently. If the map is being used in
     /// an application, the map may not render.
-    pub fn deleteMap(self: *Self, allocator: std.mem.Allocator, input: delete_map.DeleteMapInput, options: delete_map.Options) !delete_map.DeleteMapOutput {
+    pub fn deleteMap(self: *Self, allocator: std.mem.Allocator, input: delete_map.DeleteMapInput, options: CallOptions) !delete_map.DeleteMapOutput {
         return delete_map.execute(self, allocator, input, options);
     }
 
@@ -433,7 +434,7 @@ pub const Client = struct {
     /// Deletes a place index resource from your Amazon Web Services account.
     ///
     /// This operation deletes the resource permanently.
-    pub fn deletePlaceIndex(self: *Self, allocator: std.mem.Allocator, input: delete_place_index.DeletePlaceIndexInput, options: delete_place_index.Options) !delete_place_index.DeletePlaceIndexOutput {
+    pub fn deletePlaceIndex(self: *Self, allocator: std.mem.Allocator, input: delete_place_index.DeletePlaceIndexInput, options: CallOptions) !delete_place_index.DeletePlaceIndexOutput {
         return delete_place_index.execute(self, allocator, input, options);
     }
 
@@ -456,7 +457,7 @@ pub const Client = struct {
     /// Deletes a route calculator resource from your Amazon Web Services account.
     ///
     /// This operation deletes the resource permanently.
-    pub fn deleteRouteCalculator(self: *Self, allocator: std.mem.Allocator, input: delete_route_calculator.DeleteRouteCalculatorInput, options: delete_route_calculator.Options) !delete_route_calculator.DeleteRouteCalculatorOutput {
+    pub fn deleteRouteCalculator(self: *Self, allocator: std.mem.Allocator, input: delete_route_calculator.DeleteRouteCalculatorInput, options: CallOptions) !delete_route_calculator.DeleteRouteCalculatorOutput {
         return delete_route_calculator.execute(self, allocator, input, options);
     }
 
@@ -465,12 +466,12 @@ pub const Client = struct {
     /// This operation deletes the resource permanently. If the tracker resource is
     /// in use, you may encounter an error. Make sure that the target resource isn't
     /// a dependency for your applications.
-    pub fn deleteTracker(self: *Self, allocator: std.mem.Allocator, input: delete_tracker.DeleteTrackerInput, options: delete_tracker.Options) !delete_tracker.DeleteTrackerOutput {
+    pub fn deleteTracker(self: *Self, allocator: std.mem.Allocator, input: delete_tracker.DeleteTrackerInput, options: CallOptions) !delete_tracker.DeleteTrackerOutput {
         return delete_tracker.execute(self, allocator, input, options);
     }
 
     /// Retrieves the geofence collection details.
-    pub fn describeGeofenceCollection(self: *Self, allocator: std.mem.Allocator, input: describe_geofence_collection.DescribeGeofenceCollectionInput, options: describe_geofence_collection.Options) !describe_geofence_collection.DescribeGeofenceCollectionOutput {
+    pub fn describeGeofenceCollection(self: *Self, allocator: std.mem.Allocator, input: describe_geofence_collection.DescribeGeofenceCollectionInput, options: CallOptions) !describe_geofence_collection.DescribeGeofenceCollectionOutput {
         return describe_geofence_collection.execute(self, allocator, input, options);
     }
 
@@ -478,7 +479,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Use API keys to
     /// authenticate](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html) in the *Amazon Location Service Developer Guide*.
-    pub fn describeKey(self: *Self, allocator: std.mem.Allocator, input: describe_key.DescribeKeyInput, options: describe_key.Options) !describe_key.DescribeKeyOutput {
+    pub fn describeKey(self: *Self, allocator: std.mem.Allocator, input: describe_key.DescribeKeyInput, options: CallOptions) !describe_key.DescribeKeyOutput {
         return describe_key.execute(self, allocator, input, options);
     }
 
@@ -498,7 +499,7 @@ pub const Client = struct {
     ///   Reference](https://docs.aws.amazon.com/location/latest/APIReference/API_Operations_Amazon_Location_Service_Maps_V2.html) or the [Developer Guide](https://docs.aws.amazon.com/location/latest/developerguide/maps.html).
     ///
     /// Retrieves the map resource details.
-    pub fn describeMap(self: *Self, allocator: std.mem.Allocator, input: describe_map.DescribeMapInput, options: describe_map.Options) !describe_map.DescribeMapOutput {
+    pub fn describeMap(self: *Self, allocator: std.mem.Allocator, input: describe_map.DescribeMapInput, options: CallOptions) !describe_map.DescribeMapOutput {
         return describe_map.execute(self, allocator, input, options);
     }
 
@@ -519,7 +520,7 @@ pub const Client = struct {
     ///   Reference](/location/latest/APIReference/API_Operations_Amazon_Location_Service_Places_V2.html) or the [Developer Guide](/location/latest/developerguide/places.html).
     ///
     /// Retrieves the place index resource details.
-    pub fn describePlaceIndex(self: *Self, allocator: std.mem.Allocator, input: describe_place_index.DescribePlaceIndexInput, options: describe_place_index.Options) !describe_place_index.DescribePlaceIndexOutput {
+    pub fn describePlaceIndex(self: *Self, allocator: std.mem.Allocator, input: describe_place_index.DescribePlaceIndexInput, options: CallOptions) !describe_place_index.DescribePlaceIndexOutput {
         return describe_place_index.execute(self, allocator, input, options);
     }
 
@@ -540,12 +541,12 @@ pub const Client = struct {
     ///   Reference](/location/latest/APIReference/API_Operations_Amazon_Location_Service_Routes_V2.html) or the [Developer Guide](/location/latest/developerguide/routes.html).
     ///
     /// Retrieves the route calculator resource details.
-    pub fn describeRouteCalculator(self: *Self, allocator: std.mem.Allocator, input: describe_route_calculator.DescribeRouteCalculatorInput, options: describe_route_calculator.Options) !describe_route_calculator.DescribeRouteCalculatorOutput {
+    pub fn describeRouteCalculator(self: *Self, allocator: std.mem.Allocator, input: describe_route_calculator.DescribeRouteCalculatorInput, options: CallOptions) !describe_route_calculator.DescribeRouteCalculatorOutput {
         return describe_route_calculator.execute(self, allocator, input, options);
     }
 
     /// Retrieves the tracker resource details.
-    pub fn describeTracker(self: *Self, allocator: std.mem.Allocator, input: describe_tracker.DescribeTrackerInput, options: describe_tracker.Options) !describe_tracker.DescribeTrackerOutput {
+    pub fn describeTracker(self: *Self, allocator: std.mem.Allocator, input: describe_tracker.DescribeTrackerInput, options: CallOptions) !describe_tracker.DescribeTrackerOutput {
         return describe_tracker.execute(self, allocator, input, options);
     }
 
@@ -554,7 +555,7 @@ pub const Client = struct {
     ///
     /// Once you unlink a tracker resource from a geofence collection, the tracker
     /// positions will no longer be automatically evaluated against geofences.
-    pub fn disassociateTrackerConsumer(self: *Self, allocator: std.mem.Allocator, input: disassociate_tracker_consumer.DisassociateTrackerConsumerInput, options: disassociate_tracker_consumer.Options) !disassociate_tracker_consumer.DisassociateTrackerConsumerOutput {
+    pub fn disassociateTrackerConsumer(self: *Self, allocator: std.mem.Allocator, input: disassociate_tracker_consumer.DisassociateTrackerConsumerInput, options: CallOptions) !disassociate_tracker_consumer.DisassociateTrackerConsumerOutput {
         return disassociate_tracker_consumer.execute(self, allocator, input, options);
     }
 
@@ -577,14 +578,14 @@ pub const Client = struct {
     ///
     /// Heading direction is not considered in the current version. The API takes a
     /// conservative approach and includes events that can occur for any heading.
-    pub fn forecastGeofenceEvents(self: *Self, allocator: std.mem.Allocator, input: forecast_geofence_events.ForecastGeofenceEventsInput, options: forecast_geofence_events.Options) !forecast_geofence_events.ForecastGeofenceEventsOutput {
+    pub fn forecastGeofenceEvents(self: *Self, allocator: std.mem.Allocator, input: forecast_geofence_events.ForecastGeofenceEventsInput, options: CallOptions) !forecast_geofence_events.ForecastGeofenceEventsOutput {
         return forecast_geofence_events.execute(self, allocator, input, options);
     }
 
     /// Retrieves a device's most recent position according to its sample time.
     ///
     /// Device positions are deleted after 30 days.
-    pub fn getDevicePosition(self: *Self, allocator: std.mem.Allocator, input: get_device_position.GetDevicePositionInput, options: get_device_position.Options) !get_device_position.GetDevicePositionOutput {
+    pub fn getDevicePosition(self: *Self, allocator: std.mem.Allocator, input: get_device_position.GetDevicePositionInput, options: CallOptions) !get_device_position.GetDevicePositionOutput {
         return get_device_position.execute(self, allocator, input, options);
     }
 
@@ -592,7 +593,7 @@ pub const Client = struct {
     /// specified range of time.
     ///
     /// Device positions are deleted after 30 days.
-    pub fn getDevicePositionHistory(self: *Self, allocator: std.mem.Allocator, input: get_device_position_history.GetDevicePositionHistoryInput, options: get_device_position_history.Options) !get_device_position_history.GetDevicePositionHistoryOutput {
+    pub fn getDevicePositionHistory(self: *Self, allocator: std.mem.Allocator, input: get_device_position_history.GetDevicePositionHistoryInput, options: CallOptions) !get_device_position_history.GetDevicePositionHistoryOutput {
         return get_device_position_history.execute(self, allocator, input, options);
     }
 
@@ -600,7 +601,7 @@ pub const Client = struct {
     ///
     /// The returned geometry will always match the geometry format used when the
     /// geofence was created.
-    pub fn getGeofence(self: *Self, allocator: std.mem.Allocator, input: get_geofence.GetGeofenceInput, options: get_geofence.Options) !get_geofence.GetGeofenceOutput {
+    pub fn getGeofence(self: *Self, allocator: std.mem.Allocator, input: get_geofence.GetGeofenceInput, options: CallOptions) !get_geofence.GetGeofenceOutput {
         return get_geofence.execute(self, allocator, input, options);
     }
 
@@ -621,7 +622,7 @@ pub const Client = struct {
     ///   Reference](https://docs.aws.amazon.com/location/latest/APIReference/API_Operations_Amazon_Location_Service_Maps_V2.html) or the [Developer Guide](https://docs.aws.amazon.com/location/latest/developerguide/maps.html).
     ///
     /// Retrieves glyphs used to display labels on a map.
-    pub fn getMapGlyphs(self: *Self, allocator: std.mem.Allocator, input: get_map_glyphs.GetMapGlyphsInput, options: get_map_glyphs.Options) !get_map_glyphs.GetMapGlyphsOutput {
+    pub fn getMapGlyphs(self: *Self, allocator: std.mem.Allocator, input: get_map_glyphs.GetMapGlyphsInput, options: CallOptions) !get_map_glyphs.GetMapGlyphsOutput {
         return get_map_glyphs.execute(self, allocator, input, options);
     }
 
@@ -644,7 +645,7 @@ pub const Client = struct {
     /// Retrieves the sprite sheet corresponding to a map resource. The sprite sheet
     /// is a PNG image paired with a JSON document describing the offsets of
     /// individual icons that will be displayed on a rendered map.
-    pub fn getMapSprites(self: *Self, allocator: std.mem.Allocator, input: get_map_sprites.GetMapSpritesInput, options: get_map_sprites.Options) !get_map_sprites.GetMapSpritesOutput {
+    pub fn getMapSprites(self: *Self, allocator: std.mem.Allocator, input: get_map_sprites.GetMapSpritesInput, options: CallOptions) !get_map_sprites.GetMapSpritesOutput {
         return get_map_sprites.execute(self, allocator, input, options);
     }
 
@@ -670,7 +671,7 @@ pub const Client = struct {
     /// For example, what data to display, what order to display the data in, and
     /// the style for the data. Style descriptors follow the Mapbox Style
     /// Specification.
-    pub fn getMapStyleDescriptor(self: *Self, allocator: std.mem.Allocator, input: get_map_style_descriptor.GetMapStyleDescriptorInput, options: get_map_style_descriptor.Options) !get_map_style_descriptor.GetMapStyleDescriptorOutput {
+    pub fn getMapStyleDescriptor(self: *Self, allocator: std.mem.Allocator, input: get_map_style_descriptor.GetMapStyleDescriptorInput, options: CallOptions) !get_map_style_descriptor.GetMapStyleDescriptorOutput {
         return get_map_style_descriptor.execute(self, allocator, input, options);
     }
 
@@ -698,7 +699,7 @@ pub const Client = struct {
     /// doubles both the X and Y dimensions, so a tile containing data for the
     /// entire world at (0/0/0) will be split into 4 tiles at zoom 1 (1/0/0, 1/0/1,
     /// 1/1/0, 1/1/1).
-    pub fn getMapTile(self: *Self, allocator: std.mem.Allocator, input: get_map_tile.GetMapTileInput, options: get_map_tile.Options) !get_map_tile.GetMapTileOutput {
+    pub fn getMapTile(self: *Self, allocator: std.mem.Allocator, input: get_map_tile.GetMapTileInput, options: CallOptions) !get_map_tile.GetMapTileOutput {
         return get_map_tile.execute(self, allocator, input, options);
     }
 
@@ -734,22 +735,22 @@ pub const Client = struct {
     /// provider and Storage as Intended use, the GetPlace operation is unavailable.
     /// For more information, see [AWS service
     /// terms](http://aws.amazon.com/service-terms).
-    pub fn getPlace(self: *Self, allocator: std.mem.Allocator, input: get_place.GetPlaceInput, options: get_place.Options) !get_place.GetPlaceOutput {
+    pub fn getPlace(self: *Self, allocator: std.mem.Allocator, input: get_place.GetPlaceInput, options: CallOptions) !get_place.GetPlaceOutput {
         return get_place.execute(self, allocator, input, options);
     }
 
     /// A batch request to retrieve all device positions.
-    pub fn listDevicePositions(self: *Self, allocator: std.mem.Allocator, input: list_device_positions.ListDevicePositionsInput, options: list_device_positions.Options) !list_device_positions.ListDevicePositionsOutput {
+    pub fn listDevicePositions(self: *Self, allocator: std.mem.Allocator, input: list_device_positions.ListDevicePositionsInput, options: CallOptions) !list_device_positions.ListDevicePositionsOutput {
         return list_device_positions.execute(self, allocator, input, options);
     }
 
     /// Lists geofence collections in your Amazon Web Services account.
-    pub fn listGeofenceCollections(self: *Self, allocator: std.mem.Allocator, input: list_geofence_collections.ListGeofenceCollectionsInput, options: list_geofence_collections.Options) !list_geofence_collections.ListGeofenceCollectionsOutput {
+    pub fn listGeofenceCollections(self: *Self, allocator: std.mem.Allocator, input: list_geofence_collections.ListGeofenceCollectionsInput, options: CallOptions) !list_geofence_collections.ListGeofenceCollectionsOutput {
         return list_geofence_collections.execute(self, allocator, input, options);
     }
 
     /// Lists geofences stored in a given geofence collection.
-    pub fn listGeofences(self: *Self, allocator: std.mem.Allocator, input: list_geofences.ListGeofencesInput, options: list_geofences.Options) !list_geofences.ListGeofencesOutput {
+    pub fn listGeofences(self: *Self, allocator: std.mem.Allocator, input: list_geofences.ListGeofencesInput, options: CallOptions) !list_geofences.ListGeofencesOutput {
         return list_geofences.execute(self, allocator, input, options);
     }
 
@@ -757,7 +758,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Use API keys to
     /// authenticate](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html) in the *Amazon Location Service Developer Guide*.
-    pub fn listKeys(self: *Self, allocator: std.mem.Allocator, input: list_keys.ListKeysInput, options: list_keys.Options) !list_keys.ListKeysOutput {
+    pub fn listKeys(self: *Self, allocator: std.mem.Allocator, input: list_keys.ListKeysInput, options: CallOptions) !list_keys.ListKeysOutput {
         return list_keys.execute(self, allocator, input, options);
     }
 
@@ -777,7 +778,7 @@ pub const Client = struct {
     ///   Reference](https://docs.aws.amazon.com/location/latest/APIReference/API_Operations_Amazon_Location_Service_Maps_V2.html) or the [Developer Guide](https://docs.aws.amazon.com/location/latest/developerguide/maps.html).
     ///
     /// Lists map resources in your Amazon Web Services account.
-    pub fn listMaps(self: *Self, allocator: std.mem.Allocator, input: list_maps.ListMapsInput, options: list_maps.Options) !list_maps.ListMapsOutput {
+    pub fn listMaps(self: *Self, allocator: std.mem.Allocator, input: list_maps.ListMapsInput, options: CallOptions) !list_maps.ListMapsOutput {
         return list_maps.execute(self, allocator, input, options);
     }
 
@@ -798,7 +799,7 @@ pub const Client = struct {
     ///   Reference](/location/latest/APIReference/API_Operations_Amazon_Location_Service_Places_V2.html) or the [Developer Guide](/location/latest/developerguide/places.html).
     ///
     /// Lists place index resources in your Amazon Web Services account.
-    pub fn listPlaceIndexes(self: *Self, allocator: std.mem.Allocator, input: list_place_indexes.ListPlaceIndexesInput, options: list_place_indexes.Options) !list_place_indexes.ListPlaceIndexesOutput {
+    pub fn listPlaceIndexes(self: *Self, allocator: std.mem.Allocator, input: list_place_indexes.ListPlaceIndexesInput, options: CallOptions) !list_place_indexes.ListPlaceIndexesOutput {
         return list_place_indexes.execute(self, allocator, input, options);
     }
 
@@ -819,31 +820,31 @@ pub const Client = struct {
     ///   Reference](/location/latest/APIReference/API_Operations_Amazon_Location_Service_Routes_V2.html) or the [Developer Guide](/location/latest/developerguide/routes.html).
     ///
     /// Lists route calculator resources in your Amazon Web Services account.
-    pub fn listRouteCalculators(self: *Self, allocator: std.mem.Allocator, input: list_route_calculators.ListRouteCalculatorsInput, options: list_route_calculators.Options) !list_route_calculators.ListRouteCalculatorsOutput {
+    pub fn listRouteCalculators(self: *Self, allocator: std.mem.Allocator, input: list_route_calculators.ListRouteCalculatorsInput, options: CallOptions) !list_route_calculators.ListRouteCalculatorsOutput {
         return list_route_calculators.execute(self, allocator, input, options);
     }
 
     /// Returns a list of tags that are applied to the specified Amazon Location
     /// resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists geofence collections currently associated to the given tracker
     /// resource.
-    pub fn listTrackerConsumers(self: *Self, allocator: std.mem.Allocator, input: list_tracker_consumers.ListTrackerConsumersInput, options: list_tracker_consumers.Options) !list_tracker_consumers.ListTrackerConsumersOutput {
+    pub fn listTrackerConsumers(self: *Self, allocator: std.mem.Allocator, input: list_tracker_consumers.ListTrackerConsumersInput, options: CallOptions) !list_tracker_consumers.ListTrackerConsumersOutput {
         return list_tracker_consumers.execute(self, allocator, input, options);
     }
 
     /// Lists tracker resources in your Amazon Web Services account.
-    pub fn listTrackers(self: *Self, allocator: std.mem.Allocator, input: list_trackers.ListTrackersInput, options: list_trackers.Options) !list_trackers.ListTrackersOutput {
+    pub fn listTrackers(self: *Self, allocator: std.mem.Allocator, input: list_trackers.ListTrackersInput, options: CallOptions) !list_trackers.ListTrackersOutput {
         return list_trackers.execute(self, allocator, input, options);
     }
 
     /// Stores a geofence geometry in a given geofence collection, or updates the
     /// geometry of an existing geofence if a geofence ID is included in the
     /// request.
-    pub fn putGeofence(self: *Self, allocator: std.mem.Allocator, input: put_geofence.PutGeofenceInput, options: put_geofence.Options) !put_geofence.PutGeofenceOutput {
+    pub fn putGeofence(self: *Self, allocator: std.mem.Allocator, input: put_geofence.PutGeofenceInput, options: CallOptions) !put_geofence.PutGeofenceOutput {
         return put_geofence.execute(self, allocator, input, options);
     }
 
@@ -869,7 +870,7 @@ pub const Client = struct {
     ///
     /// Reverse geocodes a given coordinate and returns a legible address. Allows
     /// you to search for Places or points of interest near a given position.
-    pub fn searchPlaceIndexForPosition(self: *Self, allocator: std.mem.Allocator, input: search_place_index_for_position.SearchPlaceIndexForPositionInput, options: search_place_index_for_position.Options) !search_place_index_for_position.SearchPlaceIndexForPositionOutput {
+    pub fn searchPlaceIndexForPosition(self: *Self, allocator: std.mem.Allocator, input: search_place_index_for_position.SearchPlaceIndexForPositionInput, options: CallOptions) !search_place_index_for_position.SearchPlaceIndexForPositionOutput {
         return search_place_index_for_position.execute(self, allocator, input, options);
     }
 
@@ -904,7 +905,7 @@ pub const Client = struct {
     /// `BiasPosition`, or filter results within a bounding box by using
     /// `FilterBBox`. These parameters are mutually exclusive; using both
     /// `BiasPosition` and `FilterBBox` in the same command returns an error.
-    pub fn searchPlaceIndexForSuggestions(self: *Self, allocator: std.mem.Allocator, input: search_place_index_for_suggestions.SearchPlaceIndexForSuggestionsInput, options: search_place_index_for_suggestions.Options) !search_place_index_for_suggestions.SearchPlaceIndexForSuggestionsOutput {
+    pub fn searchPlaceIndexForSuggestions(self: *Self, allocator: std.mem.Allocator, input: search_place_index_for_suggestions.SearchPlaceIndexForSuggestionsInput, options: CallOptions) !search_place_index_for_suggestions.SearchPlaceIndexForSuggestionsOutput {
         return search_place_index_for_suggestions.execute(self, allocator, input, options);
     }
 
@@ -937,7 +938,7 @@ pub const Client = struct {
     /// parameters simultaneously returns an error.
     ///
     /// Search results are returned in order of highest to lowest relevance.
-    pub fn searchPlaceIndexForText(self: *Self, allocator: std.mem.Allocator, input: search_place_index_for_text.SearchPlaceIndexForTextInput, options: search_place_index_for_text.Options) !search_place_index_for_text.SearchPlaceIndexForTextOutput {
+    pub fn searchPlaceIndexForText(self: *Self, allocator: std.mem.Allocator, input: search_place_index_for_text.SearchPlaceIndexForTextInput, options: CallOptions) !search_place_index_for_text.SearchPlaceIndexForTextOutput {
         return search_place_index_for_text.execute(self, allocator, input, options);
     }
 
@@ -956,22 +957,22 @@ pub const Client = struct {
     /// that tag.
     ///
     /// You can associate up to 50 tags with a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified Amazon Location resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the specified properties of a given geofence collection.
-    pub fn updateGeofenceCollection(self: *Self, allocator: std.mem.Allocator, input: update_geofence_collection.UpdateGeofenceCollectionInput, options: update_geofence_collection.Options) !update_geofence_collection.UpdateGeofenceCollectionOutput {
+    pub fn updateGeofenceCollection(self: *Self, allocator: std.mem.Allocator, input: update_geofence_collection.UpdateGeofenceCollectionInput, options: CallOptions) !update_geofence_collection.UpdateGeofenceCollectionOutput {
         return update_geofence_collection.execute(self, allocator, input, options);
     }
 
     /// Updates the specified properties of a given API key resource.
-    pub fn updateKey(self: *Self, allocator: std.mem.Allocator, input: update_key.UpdateKeyInput, options: update_key.Options) !update_key.UpdateKeyOutput {
+    pub fn updateKey(self: *Self, allocator: std.mem.Allocator, input: update_key.UpdateKeyInput, options: CallOptions) !update_key.UpdateKeyOutput {
         return update_key.execute(self, allocator, input, options);
     }
 
@@ -991,7 +992,7 @@ pub const Client = struct {
     ///   Reference](https://docs.aws.amazon.com/location/latest/APIReference/API_Operations_Amazon_Location_Service_Maps_V2.html) or the [Developer Guide](https://docs.aws.amazon.com/location/latest/developerguide/maps.html).
     ///
     /// Updates the specified properties of a given map resource.
-    pub fn updateMap(self: *Self, allocator: std.mem.Allocator, input: update_map.UpdateMapInput, options: update_map.Options) !update_map.UpdateMapOutput {
+    pub fn updateMap(self: *Self, allocator: std.mem.Allocator, input: update_map.UpdateMapInput, options: CallOptions) !update_map.UpdateMapOutput {
         return update_map.execute(self, allocator, input, options);
     }
 
@@ -1012,7 +1013,7 @@ pub const Client = struct {
     ///   Reference](/location/latest/APIReference/API_Operations_Amazon_Location_Service_Places_V2.html) or the [Developer Guide](/location/latest/developerguide/places.html).
     ///
     /// Updates the specified properties of a given place index resource.
-    pub fn updatePlaceIndex(self: *Self, allocator: std.mem.Allocator, input: update_place_index.UpdatePlaceIndexInput, options: update_place_index.Options) !update_place_index.UpdatePlaceIndexOutput {
+    pub fn updatePlaceIndex(self: *Self, allocator: std.mem.Allocator, input: update_place_index.UpdatePlaceIndexInput, options: CallOptions) !update_place_index.UpdatePlaceIndexOutput {
         return update_place_index.execute(self, allocator, input, options);
     }
 
@@ -1033,12 +1034,12 @@ pub const Client = struct {
     ///   Reference](/location/latest/APIReference/API_Operations_Amazon_Location_Service_Routes_V2.html) or the [Developer Guide](/location/latest/developerguide/routes.html).
     ///
     /// Updates the specified properties for a given route calculator resource.
-    pub fn updateRouteCalculator(self: *Self, allocator: std.mem.Allocator, input: update_route_calculator.UpdateRouteCalculatorInput, options: update_route_calculator.Options) !update_route_calculator.UpdateRouteCalculatorOutput {
+    pub fn updateRouteCalculator(self: *Self, allocator: std.mem.Allocator, input: update_route_calculator.UpdateRouteCalculatorInput, options: CallOptions) !update_route_calculator.UpdateRouteCalculatorOutput {
         return update_route_calculator.execute(self, allocator, input, options);
     }
 
     /// Updates the specified properties of a given tracker resource.
-    pub fn updateTracker(self: *Self, allocator: std.mem.Allocator, input: update_tracker.UpdateTrackerInput, options: update_tracker.Options) !update_tracker.UpdateTrackerOutput {
+    pub fn updateTracker(self: *Self, allocator: std.mem.Allocator, input: update_tracker.UpdateTrackerInput, options: CallOptions) !update_tracker.UpdateTrackerOutput {
         return update_tracker.execute(self, allocator, input, options);
     }
 
@@ -1050,7 +1051,7 @@ pub const Client = struct {
     /// verification, and it is available for use by request. To get access to the
     /// SDK, contact [Sales
     /// Support](https://aws.amazon.com/contact-us/sales-support/?pg=locationprice&cta=herobtn).
-    pub fn verifyDevicePosition(self: *Self, allocator: std.mem.Allocator, input: verify_device_position.VerifyDevicePositionInput, options: verify_device_position.Options) !verify_device_position.VerifyDevicePositionOutput {
+    pub fn verifyDevicePosition(self: *Self, allocator: std.mem.Allocator, input: verify_device_position.VerifyDevicePositionInput, options: CallOptions) !verify_device_position.VerifyDevicePositionOutput {
         return verify_device_position.execute(self, allocator, input, options);
     }
 

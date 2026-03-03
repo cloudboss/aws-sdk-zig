@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_channel_handshakes = @import("list_channel_handshakes.zig");
@@ -16,7 +17,7 @@ pub const ListChannelHandshakesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_channel_handshakes.Options) !list_channel_handshakes.ListChannelHandshakesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_channel_handshakes.ListChannelHandshakesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -57,7 +58,7 @@ pub const ListProgramManagementAccountsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_program_management_accounts.Options) !list_program_management_accounts.ListProgramManagementAccountsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_program_management_accounts.ListProgramManagementAccountsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -98,7 +99,7 @@ pub const ListRelationshipsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_relationships.Options) !list_relationships.ListRelationshipsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_relationships.ListRelationshipsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

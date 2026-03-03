@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MaintenanceType = @import("maintenance_type.zig").MaintenanceType;
 const MaintenanceStatus = @import("maintenance_status.zig").MaintenanceStatus;
@@ -48,11 +49,7 @@ pub const GetDomainMaintenanceStatusOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDomainMaintenanceStatusInput, options: Options) !GetDomainMaintenanceStatusOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDomainMaintenanceStatusInput, options: CallOptions) !GetDomainMaintenanceStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

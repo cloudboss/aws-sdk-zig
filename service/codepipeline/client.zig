@@ -45,6 +45,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_action_type = @import("update_action_type.zig");
 const update_pipeline = @import("update_pipeline.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -78,21 +79,21 @@ pub const Client = struct {
     /// Returns information about a specified job and whether that job has been
     /// received by
     /// the job worker. Used for custom actions only.
-    pub fn acknowledgeJob(self: *Self, allocator: std.mem.Allocator, input: acknowledge_job.AcknowledgeJobInput, options: acknowledge_job.Options) !acknowledge_job.AcknowledgeJobOutput {
+    pub fn acknowledgeJob(self: *Self, allocator: std.mem.Allocator, input: acknowledge_job.AcknowledgeJobInput, options: CallOptions) !acknowledge_job.AcknowledgeJobOutput {
         return acknowledge_job.execute(self, allocator, input, options);
     }
 
     /// Confirms a job worker has received the specified job. Used for partner
     /// actions
     /// only.
-    pub fn acknowledgeThirdPartyJob(self: *Self, allocator: std.mem.Allocator, input: acknowledge_third_party_job.AcknowledgeThirdPartyJobInput, options: acknowledge_third_party_job.Options) !acknowledge_third_party_job.AcknowledgeThirdPartyJobOutput {
+    pub fn acknowledgeThirdPartyJob(self: *Self, allocator: std.mem.Allocator, input: acknowledge_third_party_job.AcknowledgeThirdPartyJobInput, options: CallOptions) !acknowledge_third_party_job.AcknowledgeThirdPartyJobOutput {
         return acknowledge_third_party_job.execute(self, allocator, input, options);
     }
 
     /// Creates a new custom action that can be used in all pipelines associated
     /// with the
     /// Amazon Web Services account. Only used for custom actions.
-    pub fn createCustomActionType(self: *Self, allocator: std.mem.Allocator, input: create_custom_action_type.CreateCustomActionTypeInput, options: create_custom_action_type.Options) !create_custom_action_type.CreateCustomActionTypeOutput {
+    pub fn createCustomActionType(self: *Self, allocator: std.mem.Allocator, input: create_custom_action_type.CreateCustomActionTypeInput, options: CallOptions) !create_custom_action_type.CreateCustomActionTypeOutput {
         return create_custom_action_type.execute(self, allocator, input, options);
     }
 
@@ -102,7 +103,7 @@ pub const Client = struct {
     /// or `artifactStores` in your pipeline, but you cannot use both. If you
     /// create a cross-region action in your pipeline, you must use
     /// `artifactStores`.
-    pub fn createPipeline(self: *Self, allocator: std.mem.Allocator, input: create_pipeline.CreatePipelineInput, options: create_pipeline.Options) !create_pipeline.CreatePipelineOutput {
+    pub fn createPipeline(self: *Self, allocator: std.mem.Allocator, input: create_pipeline.CreatePipelineInput, options: CallOptions) !create_pipeline.CreatePipelineOutput {
         return create_pipeline.execute(self, allocator, input, options);
     }
 
@@ -118,12 +119,12 @@ pub const Client = struct {
     /// that is identical to the deleted action, including the original string in
     /// the
     /// version field.
-    pub fn deleteCustomActionType(self: *Self, allocator: std.mem.Allocator, input: delete_custom_action_type.DeleteCustomActionTypeInput, options: delete_custom_action_type.Options) !delete_custom_action_type.DeleteCustomActionTypeOutput {
+    pub fn deleteCustomActionType(self: *Self, allocator: std.mem.Allocator, input: delete_custom_action_type.DeleteCustomActionTypeInput, options: CallOptions) !delete_custom_action_type.DeleteCustomActionTypeOutput {
         return delete_custom_action_type.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified pipeline.
-    pub fn deletePipeline(self: *Self, allocator: std.mem.Allocator, input: delete_pipeline.DeletePipelineInput, options: delete_pipeline.Options) !delete_pipeline.DeletePipelineOutput {
+    pub fn deletePipeline(self: *Self, allocator: std.mem.Allocator, input: delete_pipeline.DeletePipelineInput, options: CallOptions) !delete_pipeline.DeletePipelineOutput {
         return delete_pipeline.execute(self, allocator, input, options);
     }
 
@@ -135,7 +136,7 @@ pub const Client = struct {
     /// deleted webhook is re-created by calling PutWebhook with the same name, it
     /// will have a
     /// different URL.
-    pub fn deleteWebhook(self: *Self, allocator: std.mem.Allocator, input: delete_webhook.DeleteWebhookInput, options: delete_webhook.Options) !delete_webhook.DeleteWebhookOutput {
+    pub fn deleteWebhook(self: *Self, allocator: std.mem.Allocator, input: delete_webhook.DeleteWebhookInput, options: CallOptions) !delete_webhook.DeleteWebhookOutput {
         return delete_webhook.execute(self, allocator, input, options);
     }
 
@@ -143,18 +144,18 @@ pub const Client = struct {
     /// and the external tool with events to be detected. Currently supported only
     /// for webhooks
     /// that target an action type of GitHub.
-    pub fn deregisterWebhookWithThirdParty(self: *Self, allocator: std.mem.Allocator, input: deregister_webhook_with_third_party.DeregisterWebhookWithThirdPartyInput, options: deregister_webhook_with_third_party.Options) !deregister_webhook_with_third_party.DeregisterWebhookWithThirdPartyOutput {
+    pub fn deregisterWebhookWithThirdParty(self: *Self, allocator: std.mem.Allocator, input: deregister_webhook_with_third_party.DeregisterWebhookWithThirdPartyInput, options: CallOptions) !deregister_webhook_with_third_party.DeregisterWebhookWithThirdPartyOutput {
         return deregister_webhook_with_third_party.execute(self, allocator, input, options);
     }
 
     /// Prevents artifacts in a pipeline from transitioning to the next stage in the
     /// pipeline.
-    pub fn disableStageTransition(self: *Self, allocator: std.mem.Allocator, input: disable_stage_transition.DisableStageTransitionInput, options: disable_stage_transition.Options) !disable_stage_transition.DisableStageTransitionOutput {
+    pub fn disableStageTransition(self: *Self, allocator: std.mem.Allocator, input: disable_stage_transition.DisableStageTransitionInput, options: CallOptions) !disable_stage_transition.DisableStageTransitionOutput {
         return disable_stage_transition.execute(self, allocator, input, options);
     }
 
     /// Enables artifacts in a pipeline to transition to a stage in a pipeline.
-    pub fn enableStageTransition(self: *Self, allocator: std.mem.Allocator, input: enable_stage_transition.EnableStageTransitionInput, options: enable_stage_transition.Options) !enable_stage_transition.EnableStageTransitionOutput {
+    pub fn enableStageTransition(self: *Self, allocator: std.mem.Allocator, input: enable_stage_transition.EnableStageTransitionInput, options: CallOptions) !enable_stage_transition.EnableStageTransitionOutput {
         return enable_stage_transition.execute(self, allocator, input, options);
     }
 
@@ -163,7 +164,7 @@ pub const Client = struct {
     /// action is to be used by customers of the external provider. The action can
     /// be created
     /// with any supported integration model.
-    pub fn getActionType(self: *Self, allocator: std.mem.Allocator, input: get_action_type.GetActionTypeInput, options: get_action_type.Options) !get_action_type.GetActionTypeOutput {
+    pub fn getActionType(self: *Self, allocator: std.mem.Allocator, input: get_action_type.GetActionTypeInput, options: CallOptions) !get_action_type.GetActionTypeOutput {
         return get_action_type.execute(self, allocator, input, options);
     }
 
@@ -175,7 +176,7 @@ pub const Client = struct {
     /// access to that S3 bucket for input or output artifacts. This API also
     /// returns any
     /// secret values defined for the action.
-    pub fn getJobDetails(self: *Self, allocator: std.mem.Allocator, input: get_job_details.GetJobDetailsInput, options: get_job_details.Options) !get_job_details.GetJobDetailsOutput {
+    pub fn getJobDetails(self: *Self, allocator: std.mem.Allocator, input: get_job_details.GetJobDetailsInput, options: CallOptions) !get_job_details.GetJobDetailsOutput {
         return get_job_details.execute(self, allocator, input, options);
     }
 
@@ -184,7 +185,7 @@ pub const Client = struct {
     /// return the entire structure of a pipeline in JSON format, which can then be
     /// modified and
     /// used to update the pipeline structure with UpdatePipeline.
-    pub fn getPipeline(self: *Self, allocator: std.mem.Allocator, input: get_pipeline.GetPipelineInput, options: get_pipeline.Options) !get_pipeline.GetPipelineOutput {
+    pub fn getPipeline(self: *Self, allocator: std.mem.Allocator, input: get_pipeline.GetPipelineInput, options: CallOptions) !get_pipeline.GetPipelineOutput {
         return get_pipeline.execute(self, allocator, input, options);
     }
 
@@ -193,7 +194,7 @@ pub const Client = struct {
     /// artifacts, the pipeline execution ID, and the name, version, and status of
     /// the
     /// pipeline.
-    pub fn getPipelineExecution(self: *Self, allocator: std.mem.Allocator, input: get_pipeline_execution.GetPipelineExecutionInput, options: get_pipeline_execution.Options) !get_pipeline_execution.GetPipelineExecutionOutput {
+    pub fn getPipelineExecution(self: *Self, allocator: std.mem.Allocator, input: get_pipeline_execution.GetPipelineExecutionInput, options: CallOptions) !get_pipeline_execution.GetPipelineExecutionOutput {
         return get_pipeline_execution.execute(self, allocator, input, options);
     }
 
@@ -204,7 +205,7 @@ pub const Client = struct {
     /// fields indicate the source revision information, such as the commit ID, for
     /// the
     /// current state.
-    pub fn getPipelineState(self: *Self, allocator: std.mem.Allocator, input: get_pipeline_state.GetPipelineStateInput, options: get_pipeline_state.Options) !get_pipeline_state.GetPipelineStateOutput {
+    pub fn getPipelineState(self: *Self, allocator: std.mem.Allocator, input: get_pipeline_state.GetPipelineStateInput, options: CallOptions) !get_pipeline_state.GetPipelineStateOutput {
         return get_pipeline_state.execute(self, allocator, input, options);
     }
 
@@ -218,23 +219,23 @@ pub const Client = struct {
     /// access to that S3 bucket for input or output artifacts. This API also
     /// returns any
     /// secret values defined for the action.
-    pub fn getThirdPartyJobDetails(self: *Self, allocator: std.mem.Allocator, input: get_third_party_job_details.GetThirdPartyJobDetailsInput, options: get_third_party_job_details.Options) !get_third_party_job_details.GetThirdPartyJobDetailsOutput {
+    pub fn getThirdPartyJobDetails(self: *Self, allocator: std.mem.Allocator, input: get_third_party_job_details.GetThirdPartyJobDetailsInput, options: CallOptions) !get_third_party_job_details.GetThirdPartyJobDetailsOutput {
         return get_third_party_job_details.execute(self, allocator, input, options);
     }
 
     /// Lists the action executions that have occurred in a pipeline.
-    pub fn listActionExecutions(self: *Self, allocator: std.mem.Allocator, input: list_action_executions.ListActionExecutionsInput, options: list_action_executions.Options) !list_action_executions.ListActionExecutionsOutput {
+    pub fn listActionExecutions(self: *Self, allocator: std.mem.Allocator, input: list_action_executions.ListActionExecutionsInput, options: CallOptions) !list_action_executions.ListActionExecutionsOutput {
         return list_action_executions.execute(self, allocator, input, options);
     }
 
     /// Gets a summary of all CodePipeline action types associated with your
     /// account.
-    pub fn listActionTypes(self: *Self, allocator: std.mem.Allocator, input: list_action_types.ListActionTypesInput, options: list_action_types.Options) !list_action_types.ListActionTypesOutput {
+    pub fn listActionTypes(self: *Self, allocator: std.mem.Allocator, input: list_action_types.ListActionTypesInput, options: CallOptions) !list_action_types.ListActionTypesOutput {
         return list_action_types.execute(self, allocator, input, options);
     }
 
     /// Lists the targets for the deploy action.
-    pub fn listDeployActionExecutionTargets(self: *Self, allocator: std.mem.Allocator, input: list_deploy_action_execution_targets.ListDeployActionExecutionTargetsInput, options: list_deploy_action_execution_targets.Options) !list_deploy_action_execution_targets.ListDeployActionExecutionTargetsOutput {
+    pub fn listDeployActionExecutionTargets(self: *Self, allocator: std.mem.Allocator, input: list_deploy_action_execution_targets.ListDeployActionExecutionTargetsInput, options: CallOptions) !list_deploy_action_execution_targets.ListDeployActionExecutionTargetsOutput {
         return list_deploy_action_execution_targets.execute(self, allocator, input, options);
     }
 
@@ -245,19 +246,19 @@ pub const Client = struct {
     /// the operation returns all executions in the current pipeline version
     /// beginning on
     /// February 1, 2024.
-    pub fn listPipelineExecutions(self: *Self, allocator: std.mem.Allocator, input: list_pipeline_executions.ListPipelineExecutionsInput, options: list_pipeline_executions.Options) !list_pipeline_executions.ListPipelineExecutionsOutput {
+    pub fn listPipelineExecutions(self: *Self, allocator: std.mem.Allocator, input: list_pipeline_executions.ListPipelineExecutionsInput, options: CallOptions) !list_pipeline_executions.ListPipelineExecutionsOutput {
         return list_pipeline_executions.execute(self, allocator, input, options);
     }
 
     /// Gets a summary of all of the pipelines associated with your account.
-    pub fn listPipelines(self: *Self, allocator: std.mem.Allocator, input: list_pipelines.ListPipelinesInput, options: list_pipelines.Options) !list_pipelines.ListPipelinesOutput {
+    pub fn listPipelines(self: *Self, allocator: std.mem.Allocator, input: list_pipelines.ListPipelinesInput, options: CallOptions) !list_pipelines.ListPipelinesOutput {
         return list_pipelines.execute(self, allocator, input, options);
     }
 
     /// Lists the rule executions that have occurred in a pipeline configured for
     /// conditions
     /// with rules.
-    pub fn listRuleExecutions(self: *Self, allocator: std.mem.Allocator, input: list_rule_executions.ListRuleExecutionsInput, options: list_rule_executions.Options) !list_rule_executions.ListRuleExecutionsOutput {
+    pub fn listRuleExecutions(self: *Self, allocator: std.mem.Allocator, input: list_rule_executions.ListRuleExecutionsInput, options: CallOptions) !list_rule_executions.ListRuleExecutionsOutput {
         return list_rule_executions.execute(self, allocator, input, options);
     }
 
@@ -266,13 +267,13 @@ pub const Client = struct {
     /// conditions](https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html) and [How do
     /// stage conditions
     /// work?](https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html).For more information about rules, see the [CodePipeline rule reference](https://docs.aws.amazon.com/codepipeline/latest/userguide/rule-reference.html).
-    pub fn listRuleTypes(self: *Self, allocator: std.mem.Allocator, input: list_rule_types.ListRuleTypesInput, options: list_rule_types.Options) !list_rule_types.ListRuleTypesOutput {
+    pub fn listRuleTypes(self: *Self, allocator: std.mem.Allocator, input: list_rule_types.ListRuleTypesInput, options: CallOptions) !list_rule_types.ListRuleTypesOutput {
         return list_rule_types.execute(self, allocator, input, options);
     }
 
     /// Gets the set of key-value pairs (metadata) that are used to manage the
     /// resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -283,7 +284,7 @@ pub const Client = struct {
     /// configuration for each webhook.
     ///
     /// If a secret token was provided, it will be redacted in the response.
-    pub fn listWebhooks(self: *Self, allocator: std.mem.Allocator, input: list_webhooks.ListWebhooksInput, options: list_webhooks.Options) !list_webhooks.ListWebhooksOutput {
+    pub fn listWebhooks(self: *Self, allocator: std.mem.Allocator, input: list_webhooks.ListWebhooksInput, options: CallOptions) !list_webhooks.ListWebhooksOutput {
         return list_webhooks.execute(self, allocator, input, options);
     }
 
@@ -292,7 +293,7 @@ pub const Client = struct {
     /// conditions](https://docs.aws.amazon.com/codepipeline/latest/userguide/stage-conditions.html) and [How do
     /// stage conditions
     /// work?](https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts-how-it-works-conditions.html).
-    pub fn overrideStageCondition(self: *Self, allocator: std.mem.Allocator, input: override_stage_condition.OverrideStageConditionInput, options: override_stage_condition.Options) !override_stage_condition.OverrideStageConditionOutput {
+    pub fn overrideStageCondition(self: *Self, allocator: std.mem.Allocator, input: override_stage_condition.OverrideStageConditionInput, options: CallOptions) !override_stage_condition.OverrideStageConditionOutput {
         return override_stage_condition.execute(self, allocator, input, options);
     }
 
@@ -307,7 +308,7 @@ pub const Client = struct {
     /// access to that S3 bucket for input or output artifacts. This API also
     /// returns any
     /// secret values defined for the action.
-    pub fn pollForJobs(self: *Self, allocator: std.mem.Allocator, input: poll_for_jobs.PollForJobsInput, options: poll_for_jobs.Options) !poll_for_jobs.PollForJobsOutput {
+    pub fn pollForJobs(self: *Self, allocator: std.mem.Allocator, input: poll_for_jobs.PollForJobsInput, options: CallOptions) !poll_for_jobs.PollForJobsOutput {
         return poll_for_jobs.execute(self, allocator, input, options);
     }
 
@@ -319,47 +320,47 @@ pub const Client = struct {
     /// the S3 bucket used to store artifacts for the pipeline, if the action
     /// requires
     /// access to that S3 bucket for input or output artifacts.
-    pub fn pollForThirdPartyJobs(self: *Self, allocator: std.mem.Allocator, input: poll_for_third_party_jobs.PollForThirdPartyJobsInput, options: poll_for_third_party_jobs.Options) !poll_for_third_party_jobs.PollForThirdPartyJobsOutput {
+    pub fn pollForThirdPartyJobs(self: *Self, allocator: std.mem.Allocator, input: poll_for_third_party_jobs.PollForThirdPartyJobsInput, options: CallOptions) !poll_for_third_party_jobs.PollForThirdPartyJobsOutput {
         return poll_for_third_party_jobs.execute(self, allocator, input, options);
     }
 
     /// Provides information to CodePipeline about new revisions to a
     /// source.
-    pub fn putActionRevision(self: *Self, allocator: std.mem.Allocator, input: put_action_revision.PutActionRevisionInput, options: put_action_revision.Options) !put_action_revision.PutActionRevisionOutput {
+    pub fn putActionRevision(self: *Self, allocator: std.mem.Allocator, input: put_action_revision.PutActionRevisionInput, options: CallOptions) !put_action_revision.PutActionRevisionOutput {
         return put_action_revision.execute(self, allocator, input, options);
     }
 
     /// Provides the response to a manual approval request to CodePipeline. Valid
     /// responses include Approved and Rejected.
-    pub fn putApprovalResult(self: *Self, allocator: std.mem.Allocator, input: put_approval_result.PutApprovalResultInput, options: put_approval_result.Options) !put_approval_result.PutApprovalResultOutput {
+    pub fn putApprovalResult(self: *Self, allocator: std.mem.Allocator, input: put_approval_result.PutApprovalResultInput, options: CallOptions) !put_approval_result.PutApprovalResultOutput {
         return put_approval_result.execute(self, allocator, input, options);
     }
 
     /// Represents the failure of a job as returned to the pipeline by a job worker.
     /// Used
     /// for custom actions only.
-    pub fn putJobFailureResult(self: *Self, allocator: std.mem.Allocator, input: put_job_failure_result.PutJobFailureResultInput, options: put_job_failure_result.Options) !put_job_failure_result.PutJobFailureResultOutput {
+    pub fn putJobFailureResult(self: *Self, allocator: std.mem.Allocator, input: put_job_failure_result.PutJobFailureResultInput, options: CallOptions) !put_job_failure_result.PutJobFailureResultOutput {
         return put_job_failure_result.execute(self, allocator, input, options);
     }
 
     /// Represents the success of a job as returned to the pipeline by a job worker.
     /// Used
     /// for custom actions only.
-    pub fn putJobSuccessResult(self: *Self, allocator: std.mem.Allocator, input: put_job_success_result.PutJobSuccessResultInput, options: put_job_success_result.Options) !put_job_success_result.PutJobSuccessResultOutput {
+    pub fn putJobSuccessResult(self: *Self, allocator: std.mem.Allocator, input: put_job_success_result.PutJobSuccessResultInput, options: CallOptions) !put_job_success_result.PutJobSuccessResultOutput {
         return put_job_success_result.execute(self, allocator, input, options);
     }
 
     /// Represents the failure of a third party job as returned to the pipeline by a
     /// job
     /// worker. Used for partner actions only.
-    pub fn putThirdPartyJobFailureResult(self: *Self, allocator: std.mem.Allocator, input: put_third_party_job_failure_result.PutThirdPartyJobFailureResultInput, options: put_third_party_job_failure_result.Options) !put_third_party_job_failure_result.PutThirdPartyJobFailureResultOutput {
+    pub fn putThirdPartyJobFailureResult(self: *Self, allocator: std.mem.Allocator, input: put_third_party_job_failure_result.PutThirdPartyJobFailureResultInput, options: CallOptions) !put_third_party_job_failure_result.PutThirdPartyJobFailureResultOutput {
         return put_third_party_job_failure_result.execute(self, allocator, input, options);
     }
 
     /// Represents the success of a third party job as returned to the pipeline by a
     /// job
     /// worker. Used for partner actions only.
-    pub fn putThirdPartyJobSuccessResult(self: *Self, allocator: std.mem.Allocator, input: put_third_party_job_success_result.PutThirdPartyJobSuccessResultInput, options: put_third_party_job_success_result.Options) !put_third_party_job_success_result.PutThirdPartyJobSuccessResultOutput {
+    pub fn putThirdPartyJobSuccessResult(self: *Self, allocator: std.mem.Allocator, input: put_third_party_job_success_result.PutThirdPartyJobSuccessResultInput, options: CallOptions) !put_third_party_job_success_result.PutThirdPartyJobSuccessResultOutput {
         return put_third_party_job_success_result.execute(self, allocator, input, options);
     }
 
@@ -392,14 +393,14 @@ pub const Client = struct {
     /// multiple webhooks can lead to security vulnerabilities.
     ///
     /// If a secret token was provided, it will be redacted in the response.
-    pub fn putWebhook(self: *Self, allocator: std.mem.Allocator, input: put_webhook.PutWebhookInput, options: put_webhook.Options) !put_webhook.PutWebhookOutput {
+    pub fn putWebhook(self: *Self, allocator: std.mem.Allocator, input: put_webhook.PutWebhookInput, options: CallOptions) !put_webhook.PutWebhookOutput {
         return put_webhook.execute(self, allocator, input, options);
     }
 
     /// Configures a connection between the webhook that was created and the
     /// external tool
     /// with events to be detected.
-    pub fn registerWebhookWithThirdParty(self: *Self, allocator: std.mem.Allocator, input: register_webhook_with_third_party.RegisterWebhookWithThirdPartyInput, options: register_webhook_with_third_party.Options) !register_webhook_with_third_party.RegisterWebhookWithThirdPartyOutput {
+    pub fn registerWebhookWithThirdParty(self: *Self, allocator: std.mem.Allocator, input: register_webhook_with_third_party.RegisterWebhookWithThirdPartyInput, options: CallOptions) !register_webhook_with_third_party.RegisterWebhookWithThirdPartyOutput {
         return register_webhook_with_third_party.execute(self, allocator, input, options);
     }
 
@@ -418,19 +419,19 @@ pub const Client = struct {
     /// can be retried, it must either have all actions failed or some actions
     /// failed and some
     /// succeeded.
-    pub fn retryStageExecution(self: *Self, allocator: std.mem.Allocator, input: retry_stage_execution.RetryStageExecutionInput, options: retry_stage_execution.Options) !retry_stage_execution.RetryStageExecutionOutput {
+    pub fn retryStageExecution(self: *Self, allocator: std.mem.Allocator, input: retry_stage_execution.RetryStageExecutionInput, options: CallOptions) !retry_stage_execution.RetryStageExecutionOutput {
         return retry_stage_execution.execute(self, allocator, input, options);
     }
 
     /// Rolls back a stage execution.
-    pub fn rollbackStage(self: *Self, allocator: std.mem.Allocator, input: rollback_stage.RollbackStageInput, options: rollback_stage.Options) !rollback_stage.RollbackStageOutput {
+    pub fn rollbackStage(self: *Self, allocator: std.mem.Allocator, input: rollback_stage.RollbackStageInput, options: CallOptions) !rollback_stage.RollbackStageOutput {
         return rollback_stage.execute(self, allocator, input, options);
     }
 
     /// Starts the specified pipeline. Specifically, it begins processing the latest
     /// commit
     /// to the source location specified as part of the pipeline.
-    pub fn startPipelineExecution(self: *Self, allocator: std.mem.Allocator, input: start_pipeline_execution.StartPipelineExecutionInput, options: start_pipeline_execution.Options) !start_pipeline_execution.StartPipelineExecutionOutput {
+    pub fn startPipelineExecution(self: *Self, allocator: std.mem.Allocator, input: start_pipeline_execution.StartPipelineExecutionInput, options: CallOptions) !start_pipeline_execution.StartPipelineExecutionOutput {
         return start_pipeline_execution.execute(self, allocator, input, options);
     }
 
@@ -443,19 +444,19 @@ pub const Client = struct {
     /// pipeline execution is in a `Stopping` state. After all in-progress actions
     /// are completed or abandoned, the pipeline execution is in a `Stopped`
     /// state.
-    pub fn stopPipelineExecution(self: *Self, allocator: std.mem.Allocator, input: stop_pipeline_execution.StopPipelineExecutionInput, options: stop_pipeline_execution.Options) !stop_pipeline_execution.StopPipelineExecutionOutput {
+    pub fn stopPipelineExecution(self: *Self, allocator: std.mem.Allocator, input: stop_pipeline_execution.StopPipelineExecutionInput, options: CallOptions) !stop_pipeline_execution.StopPipelineExecutionOutput {
         return stop_pipeline_execution.execute(self, allocator, input, options);
     }
 
     /// Adds to or modifies the tags of the given resource. Tags are metadata that
     /// can be used
     /// to manage a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from an Amazon Web Services resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -465,7 +466,7 @@ pub const Client = struct {
     /// a JSON file
     /// with the action definition and `UpdateActionType` to provide the full
     /// structure.
-    pub fn updateActionType(self: *Self, allocator: std.mem.Allocator, input: update_action_type.UpdateActionTypeInput, options: update_action_type.Options) !update_action_type.UpdateActionTypeOutput {
+    pub fn updateActionType(self: *Self, allocator: std.mem.Allocator, input: update_action_type.UpdateActionTypeInput, options: CallOptions) !update_action_type.UpdateActionTypeOutput {
         return update_action_type.execute(self, allocator, input, options);
     }
 
@@ -475,7 +476,7 @@ pub const Client = struct {
     /// structure of the pipeline. Updating the pipeline increases the version
     /// number of the
     /// pipeline by 1.
-    pub fn updatePipeline(self: *Self, allocator: std.mem.Allocator, input: update_pipeline.UpdatePipelineInput, options: update_pipeline.Options) !update_pipeline.UpdatePipelineOutput {
+    pub fn updatePipeline(self: *Self, allocator: std.mem.Allocator, input: update_pipeline.UpdatePipelineInput, options: CallOptions) !update_pipeline.UpdatePipelineOutput {
         return update_pipeline.execute(self, allocator, input, options);
     }
 

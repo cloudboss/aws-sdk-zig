@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ModifyAdditionalStorageVolume = @import("modify_additional_storage_volume.zig").ModifyAdditionalStorageVolume;
 const AutomationMode = @import("automation_mode.zig").AutomationMode;
@@ -988,11 +989,7 @@ pub const ModifyDBInstanceOutput = struct {
     db_instance: ?DBInstance = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyDBInstanceInput, options: Options) !ModifyDBInstanceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyDBInstanceInput, options: CallOptions) !ModifyDBInstanceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

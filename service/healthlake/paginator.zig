@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_fhir_datastores = @import("list_fhir_datastores.zig");
@@ -16,7 +17,7 @@ pub const ListFHIRDatastoresPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_fhir_datastores.Options) !list_fhir_datastores.ListFHIRDatastoresOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_fhir_datastores.ListFHIRDatastoresOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -57,7 +58,7 @@ pub const ListFHIRExportJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_fhir_export_jobs.Options) !list_fhir_export_jobs.ListFHIRExportJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_fhir_export_jobs.ListFHIRExportJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -98,7 +99,7 @@ pub const ListFHIRImportJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_fhir_import_jobs.Options) !list_fhir_import_jobs.ListFHIRImportJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_fhir_import_jobs.ListFHIRImportJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

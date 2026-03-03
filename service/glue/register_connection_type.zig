@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConnectionPropertiesConfiguration = @import("connection_properties_configuration.zig").ConnectionPropertiesConfiguration;
 const ConnectorAuthenticationConfiguration = @import("connector_authentication_configuration.zig").ConnectorAuthenticationConfiguration;
@@ -58,11 +59,7 @@ pub const RegisterConnectionTypeOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterConnectionTypeInput, options: Options) !RegisterConnectionTypeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterConnectionTypeInput, options: CallOptions) !RegisterConnectionTypeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

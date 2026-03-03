@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AnalysisResult = @import("analysis_result.zig").AnalysisResult;
 
@@ -36,11 +37,7 @@ pub const GetDetectorModelAnalysisResultsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDetectorModelAnalysisResultsInput, options: Options) !GetDetectorModelAnalysisResultsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDetectorModelAnalysisResultsInput, options: CallOptions) !GetDetectorModelAnalysisResultsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

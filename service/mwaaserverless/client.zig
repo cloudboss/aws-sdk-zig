@@ -16,6 +16,7 @@ const stop_workflow_run = @import("stop_workflow_run.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_workflow = @import("update_workflow.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -55,7 +56,7 @@ pub const Client = struct {
     /// Workflows for Apache Airflow Serverless automatically creates the first
     /// version of the workflow and sets up the necessary execution environment with
     /// multi-tenant isolation and security controls.
-    pub fn createWorkflow(self: *Self, allocator: std.mem.Allocator, input: create_workflow.CreateWorkflowInput, options: create_workflow.Options) !create_workflow.CreateWorkflowOutput {
+    pub fn createWorkflow(self: *Self, allocator: std.mem.Allocator, input: create_workflow.CreateWorkflowInput, options: CallOptions) !create_workflow.CreateWorkflowOutput {
         return create_workflow.execute(self, allocator, input, options);
     }
 
@@ -66,7 +67,7 @@ pub const Client = struct {
     /// triggers, and cleaning up execution history. The deletion process respects
     /// the multi-tenant isolation boundaries and ensures that no residual data or
     /// configurations remain that could affect other customers or workflows.
-    pub fn deleteWorkflow(self: *Self, allocator: std.mem.Allocator, input: delete_workflow.DeleteWorkflowInput, options: delete_workflow.Options) !delete_workflow.DeleteWorkflowOutput {
+    pub fn deleteWorkflow(self: *Self, allocator: std.mem.Allocator, input: delete_workflow.DeleteWorkflowInput, options: CallOptions) !delete_workflow.DeleteWorkflowOutput {
         return delete_workflow.execute(self, allocator, input, options);
     }
 
@@ -77,43 +78,43 @@ pub const Client = struct {
     /// with dedicated resources and security boundaries. The service tracks task
     /// execution state, retry attempts, and provides detailed timing and error
     /// information for troubleshooting and monitoring purposes.
-    pub fn getTaskInstance(self: *Self, allocator: std.mem.Allocator, input: get_task_instance.GetTaskInstanceInput, options: get_task_instance.Options) !get_task_instance.GetTaskInstanceOutput {
+    pub fn getTaskInstance(self: *Self, allocator: std.mem.Allocator, input: get_task_instance.GetTaskInstanceInput, options: CallOptions) !get_task_instance.GetTaskInstanceOutput {
         return get_task_instance.execute(self, allocator, input, options);
     }
 
     /// Retrieves detailed information about a workflow, including its
     /// configuration, status, and metadata.
-    pub fn getWorkflow(self: *Self, allocator: std.mem.Allocator, input: get_workflow.GetWorkflowInput, options: get_workflow.Options) !get_workflow.GetWorkflowOutput {
+    pub fn getWorkflow(self: *Self, allocator: std.mem.Allocator, input: get_workflow.GetWorkflowInput, options: CallOptions) !get_workflow.GetWorkflowOutput {
         return get_workflow.execute(self, allocator, input, options);
     }
 
     /// Retrieves detailed information about a specific workflow run, including its
     /// status, execution details, and task instances.
-    pub fn getWorkflowRun(self: *Self, allocator: std.mem.Allocator, input: get_workflow_run.GetWorkflowRunInput, options: get_workflow_run.Options) !get_workflow_run.GetWorkflowRunOutput {
+    pub fn getWorkflowRun(self: *Self, allocator: std.mem.Allocator, input: get_workflow_run.GetWorkflowRunInput, options: CallOptions) !get_workflow_run.GetWorkflowRunOutput {
         return get_workflow_run.execute(self, allocator, input, options);
     }
 
     /// Lists all tags that are associated with a specified Amazon Managed Workflows
     /// for Apache Airflow Serverless resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists all task instances for a specific workflow run, with optional
     /// pagination support.
-    pub fn listTaskInstances(self: *Self, allocator: std.mem.Allocator, input: list_task_instances.ListTaskInstancesInput, options: list_task_instances.Options) !list_task_instances.ListTaskInstancesOutput {
+    pub fn listTaskInstances(self: *Self, allocator: std.mem.Allocator, input: list_task_instances.ListTaskInstancesInput, options: CallOptions) !list_task_instances.ListTaskInstancesOutput {
         return list_task_instances.execute(self, allocator, input, options);
     }
 
     /// Lists all runs for a specified workflow, with optional pagination and
     /// filtering support.
-    pub fn listWorkflowRuns(self: *Self, allocator: std.mem.Allocator, input: list_workflow_runs.ListWorkflowRunsInput, options: list_workflow_runs.Options) !list_workflow_runs.ListWorkflowRunsOutput {
+    pub fn listWorkflowRuns(self: *Self, allocator: std.mem.Allocator, input: list_workflow_runs.ListWorkflowRunsInput, options: CallOptions) !list_workflow_runs.ListWorkflowRunsOutput {
         return list_workflow_runs.execute(self, allocator, input, options);
     }
 
     /// Lists all versions of a specified workflow, with optional pagination
     /// support.
-    pub fn listWorkflowVersions(self: *Self, allocator: std.mem.Allocator, input: list_workflow_versions.ListWorkflowVersionsInput, options: list_workflow_versions.Options) !list_workflow_versions.ListWorkflowVersionsOutput {
+    pub fn listWorkflowVersions(self: *Self, allocator: std.mem.Allocator, input: list_workflow_versions.ListWorkflowVersionsInput, options: CallOptions) !list_workflow_versions.ListWorkflowVersionsOutput {
         return list_workflow_versions.execute(self, allocator, input, options);
     }
 
@@ -125,7 +126,7 @@ pub const Client = struct {
     /// The service implements proper access controls to ensure you can only view
     /// workflows that you have permissions to access, supporting both individual
     /// and team-based workflow management scenarios.
-    pub fn listWorkflows(self: *Self, allocator: std.mem.Allocator, input: list_workflows.ListWorkflowsInput, options: list_workflows.Options) !list_workflows.ListWorkflowsOutput {
+    pub fn listWorkflows(self: *Self, allocator: std.mem.Allocator, input: list_workflows.ListWorkflowsInput, options: CallOptions) !list_workflows.ListWorkflowsOutput {
         return list_workflows.execute(self, allocator, input, options);
     }
 
@@ -136,7 +137,7 @@ pub const Client = struct {
     /// tasks based on the workload. The service handles task isolation, dependency
     /// resolution, and provides comprehensive monitoring and logging throughout the
     /// execution lifecycle.
-    pub fn startWorkflowRun(self: *Self, allocator: std.mem.Allocator, input: start_workflow_run.StartWorkflowRunInput, options: start_workflow_run.Options) !start_workflow_run.StartWorkflowRunOutput {
+    pub fn startWorkflowRun(self: *Self, allocator: std.mem.Allocator, input: start_workflow_run.StartWorkflowRunInput, options: CallOptions) !start_workflow_run.StartWorkflowRunOutput {
         return start_workflow_run.execute(self, allocator, input, options);
     }
 
@@ -147,20 +148,20 @@ pub const Client = struct {
     /// operation transitions the workflow run to a `STOPPING` state and then to
     /// `STOPPED` once all cleanup is complete. In-flight tasks may complete or be
     /// terminated depending on their current execution state.
-    pub fn stopWorkflowRun(self: *Self, allocator: std.mem.Allocator, input: stop_workflow_run.StopWorkflowRunInput, options: stop_workflow_run.Options) !stop_workflow_run.StopWorkflowRunOutput {
+    pub fn stopWorkflowRun(self: *Self, allocator: std.mem.Allocator, input: stop_workflow_run.StopWorkflowRunInput, options: CallOptions) !stop_workflow_run.StopWorkflowRunOutput {
         return stop_workflow_run.execute(self, allocator, input, options);
     }
 
     /// Adds tags to an Amazon Managed Workflows for Apache Airflow Serverless
     /// resource. Tags are key-value pairs that help you organize and categorize
     /// your resources.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from an Amazon Managed Workflows for Apache Airflow Serverless
     /// resource. This operation removes the specified tags from the resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -172,7 +173,7 @@ pub const Client = struct {
     /// only one version is actively scheduled at a time. The update operation
     /// maintains workflow history while providing a clean transition to the new
     /// configuration.
-    pub fn updateWorkflow(self: *Self, allocator: std.mem.Allocator, input: update_workflow.UpdateWorkflowInput, options: update_workflow.Options) !update_workflow.UpdateWorkflowOutput {
+    pub fn updateWorkflow(self: *Self, allocator: std.mem.Allocator, input: update_workflow.UpdateWorkflowInput, options: CallOptions) !update_workflow.UpdateWorkflowOutput {
         return update_workflow.execute(self, allocator, input, options);
     }
 

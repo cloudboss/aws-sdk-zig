@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProductRestEndpointPageSummaryNoBody = @import("product_rest_endpoint_page_summary_no_body.zig").ProductRestEndpointPageSummaryNoBody;
 
@@ -41,11 +42,7 @@ pub const ListProductRestEndpointPagesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListProductRestEndpointPagesInput, options: Options) !ListProductRestEndpointPagesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListProductRestEndpointPagesInput, options: CallOptions) !ListProductRestEndpointPagesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
@@ -18,13 +19,9 @@ pub const UnassignPrivateIpAddressesInput = struct {
     private_ip_addresses: ?[]const []const u8 = null,
 };
 
-const UnassignPrivateIpAddressesOutput = struct {};
+pub const UnassignPrivateIpAddressesOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UnassignPrivateIpAddressesInput, options: Options) !UnassignPrivateIpAddressesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UnassignPrivateIpAddressesInput, options: CallOptions) !UnassignPrivateIpAddressesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

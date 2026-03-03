@@ -23,8 +23,7 @@ test "chain caches and reuses credentials" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    const result = try sts.get_caller_identity.execute(
-        &client,
+    const result = try client.getCallerIdentity(
         arena.allocator(),
         .{},
         .{},

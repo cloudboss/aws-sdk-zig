@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_billing_group_cost_report = @import("get_billing_group_cost_report.zig");
@@ -24,7 +25,7 @@ pub const GetBillingGroupCostReportPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_billing_group_cost_report.Options) !get_billing_group_cost_report.GetBillingGroupCostReportOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_billing_group_cost_report.GetBillingGroupCostReportOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -65,7 +66,7 @@ pub const ListAccountAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_account_associations.Options) !list_account_associations.ListAccountAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_account_associations.ListAccountAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -106,7 +107,7 @@ pub const ListBillingGroupCostReportsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_billing_group_cost_reports.Options) !list_billing_group_cost_reports.ListBillingGroupCostReportsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_billing_group_cost_reports.ListBillingGroupCostReportsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -147,7 +148,7 @@ pub const ListBillingGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_billing_groups.Options) !list_billing_groups.ListBillingGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_billing_groups.ListBillingGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -188,7 +189,7 @@ pub const ListCustomLineItemVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_custom_line_item_versions.Options) !list_custom_line_item_versions.ListCustomLineItemVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_custom_line_item_versions.ListCustomLineItemVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -229,7 +230,7 @@ pub const ListCustomLineItemsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_custom_line_items.Options) !list_custom_line_items.ListCustomLineItemsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_custom_line_items.ListCustomLineItemsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -270,7 +271,7 @@ pub const ListPricingPlansPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_pricing_plans.Options) !list_pricing_plans.ListPricingPlansOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_pricing_plans.ListPricingPlansOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -311,7 +312,7 @@ pub const ListPricingPlansAssociatedWithPricingRulePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_pricing_plans_associated_with_pricing_rule.Options) !list_pricing_plans_associated_with_pricing_rule.ListPricingPlansAssociatedWithPricingRuleOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_pricing_plans_associated_with_pricing_rule.ListPricingPlansAssociatedWithPricingRuleOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -352,7 +353,7 @@ pub const ListPricingRulesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_pricing_rules.Options) !list_pricing_rules.ListPricingRulesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_pricing_rules.ListPricingRulesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -393,7 +394,7 @@ pub const ListPricingRulesAssociatedToPricingPlanPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_pricing_rules_associated_to_pricing_plan.Options) !list_pricing_rules_associated_to_pricing_plan.ListPricingRulesAssociatedToPricingPlanOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_pricing_rules_associated_to_pricing_plan.ListPricingRulesAssociatedToPricingPlanOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -434,7 +435,7 @@ pub const ListResourcesAssociatedToCustomLineItemPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resources_associated_to_custom_line_item.Options) !list_resources_associated_to_custom_line_item.ListResourcesAssociatedToCustomLineItemOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resources_associated_to_custom_line_item.ListResourcesAssociatedToCustomLineItemOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

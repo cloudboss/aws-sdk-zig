@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EdgeOutputConfig = @import("edge_output_config.zig").EdgeOutputConfig;
 const Tag = @import("tag.zig").Tag;
@@ -41,13 +42,9 @@ pub const CreateDeviceFleetInput = struct {
     };
 };
 
-const CreateDeviceFleetOutput = struct {};
+pub const CreateDeviceFleetOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDeviceFleetInput, options: Options) !CreateDeviceFleetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDeviceFleetInput, options: CallOptions) !CreateDeviceFleetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

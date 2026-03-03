@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GroupSharingPreferenceEnum = @import("group_sharing_preference_enum.zig").GroupSharingPreferenceEnum;
 const BillInterval = @import("bill_interval.zig").BillInterval;
@@ -77,11 +78,7 @@ pub const UpdateBillScenarioOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateBillScenarioInput, options: Options) !UpdateBillScenarioOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateBillScenarioInput, options: CallOptions) !UpdateBillScenarioOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

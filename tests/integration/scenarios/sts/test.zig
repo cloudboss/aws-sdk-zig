@@ -14,8 +14,7 @@ test "getCallerIdentity returns account info from LocalStack" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    const result = try sts.get_caller_identity.execute(
-        &client,
+    const result = try client.getCallerIdentity(
         arena.allocator(),
         .{},
         .{},
@@ -43,8 +42,7 @@ test "service error populates diagnostic on invalid action" {
     // when the response is successful (no error case). This at least exercises
     // the full execute -> serialize -> sign -> send -> deserialize path.
     var diagnostic: sts.ServiceError = undefined;
-    const result = try sts.get_caller_identity.execute(
-        &client,
+    const result = try client.getCallerIdentity(
         arena.allocator(),
         .{},
         .{ .diagnostic = &diagnostic },
@@ -66,8 +64,7 @@ test "getSessionToken returns temporary credentials" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    const result = try sts.get_session_token.execute(
-        &client,
+    const result = try client.getSessionToken(
         arena.allocator(),
         .{},
         .{},
@@ -98,8 +95,7 @@ test "getCallerIdentity response fields have expected format" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    const result = try sts.get_caller_identity.execute(
-        &client,
+    const result = try client.getCallerIdentity(
         arena.allocator(),
         .{},
         .{},
@@ -129,8 +125,7 @@ test "GetCallerIdentity account has 12 digit format" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    const result = try sts.get_caller_identity.execute(
-        &client,
+    const result = try client.getCallerIdentity(
         arena.allocator(),
         .{},
         .{},
@@ -153,8 +148,7 @@ test "GetCallerIdentity ARN contains account" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    const result = try sts.get_caller_identity.execute(
-        &client,
+    const result = try client.getCallerIdentity(
         arena.allocator(),
         .{},
         .{},
@@ -178,8 +172,7 @@ test "GetSessionToken credentials differ from source credentials" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    const result = try sts.get_session_token.execute(
-        &client,
+    const result = try client.getSessionToken(
         arena.allocator(),
         .{},
         .{},
@@ -205,16 +198,14 @@ test "GetCallerIdentity returns consistent results across calls" {
     defer arena.deinit();
 
     // First call
-    const result1 = try sts.get_caller_identity.execute(
-        &client,
+    const result1 = try client.getCallerIdentity(
         arena.allocator(),
         .{},
         .{},
     );
 
     // Second call
-    const result2 = try sts.get_caller_identity.execute(
-        &client,
+    const result2 = try client.getCallerIdentity(
         arena.allocator(),
         .{},
         .{},

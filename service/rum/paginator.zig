@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const batch_get_rum_metric_definitions = @import("batch_get_rum_metric_definitions.zig");
@@ -17,7 +18,7 @@ pub const BatchGetRumMetricDefinitionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: batch_get_rum_metric_definitions.Options) !batch_get_rum_metric_definitions.BatchGetRumMetricDefinitionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !batch_get_rum_metric_definitions.BatchGetRumMetricDefinitionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -58,7 +59,7 @@ pub const GetAppMonitorDataPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_app_monitor_data.Options) !get_app_monitor_data.GetAppMonitorDataOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_app_monitor_data.GetAppMonitorDataOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -99,7 +100,7 @@ pub const ListAppMonitorsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_monitors.Options) !list_app_monitors.ListAppMonitorsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_monitors.ListAppMonitorsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -140,7 +141,7 @@ pub const ListRumMetricsDestinationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_rum_metrics_destinations.Options) !list_rum_metrics_destinations.ListRumMetricsDestinationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_rum_metrics_destinations.ListRumMetricsDestinationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

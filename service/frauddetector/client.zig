@@ -74,6 +74,7 @@ const update_model_version_status = @import("update_model_version_status.zig");
 const update_rule_metadata = @import("update_rule_metadata.zig");
 const update_rule_version = @import("update_rule_version.zig");
 const update_variable = @import("update_variable.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -105,37 +106,37 @@ pub const Client = struct {
     }
 
     /// Creates a batch of variables.
-    pub fn batchCreateVariable(self: *Self, allocator: std.mem.Allocator, input: batch_create_variable.BatchCreateVariableInput, options: batch_create_variable.Options) !batch_create_variable.BatchCreateVariableOutput {
+    pub fn batchCreateVariable(self: *Self, allocator: std.mem.Allocator, input: batch_create_variable.BatchCreateVariableInput, options: CallOptions) !batch_create_variable.BatchCreateVariableOutput {
         return batch_create_variable.execute(self, allocator, input, options);
     }
 
     /// Gets a batch of variables.
-    pub fn batchGetVariable(self: *Self, allocator: std.mem.Allocator, input: batch_get_variable.BatchGetVariableInput, options: batch_get_variable.Options) !batch_get_variable.BatchGetVariableOutput {
+    pub fn batchGetVariable(self: *Self, allocator: std.mem.Allocator, input: batch_get_variable.BatchGetVariableInput, options: CallOptions) !batch_get_variable.BatchGetVariableOutput {
         return batch_get_variable.execute(self, allocator, input, options);
     }
 
     /// Cancels an in-progress batch import job.
-    pub fn cancelBatchImportJob(self: *Self, allocator: std.mem.Allocator, input: cancel_batch_import_job.CancelBatchImportJobInput, options: cancel_batch_import_job.Options) !cancel_batch_import_job.CancelBatchImportJobOutput {
+    pub fn cancelBatchImportJob(self: *Self, allocator: std.mem.Allocator, input: cancel_batch_import_job.CancelBatchImportJobInput, options: CallOptions) !cancel_batch_import_job.CancelBatchImportJobOutput {
         return cancel_batch_import_job.execute(self, allocator, input, options);
     }
 
     /// Cancels the specified batch prediction job.
-    pub fn cancelBatchPredictionJob(self: *Self, allocator: std.mem.Allocator, input: cancel_batch_prediction_job.CancelBatchPredictionJobInput, options: cancel_batch_prediction_job.Options) !cancel_batch_prediction_job.CancelBatchPredictionJobOutput {
+    pub fn cancelBatchPredictionJob(self: *Self, allocator: std.mem.Allocator, input: cancel_batch_prediction_job.CancelBatchPredictionJobInput, options: CallOptions) !cancel_batch_prediction_job.CancelBatchPredictionJobOutput {
         return cancel_batch_prediction_job.execute(self, allocator, input, options);
     }
 
     /// Creates a batch import job.
-    pub fn createBatchImportJob(self: *Self, allocator: std.mem.Allocator, input: create_batch_import_job.CreateBatchImportJobInput, options: create_batch_import_job.Options) !create_batch_import_job.CreateBatchImportJobOutput {
+    pub fn createBatchImportJob(self: *Self, allocator: std.mem.Allocator, input: create_batch_import_job.CreateBatchImportJobInput, options: CallOptions) !create_batch_import_job.CreateBatchImportJobOutput {
         return create_batch_import_job.execute(self, allocator, input, options);
     }
 
     /// Creates a batch prediction job.
-    pub fn createBatchPredictionJob(self: *Self, allocator: std.mem.Allocator, input: create_batch_prediction_job.CreateBatchPredictionJobInput, options: create_batch_prediction_job.Options) !create_batch_prediction_job.CreateBatchPredictionJobOutput {
+    pub fn createBatchPredictionJob(self: *Self, allocator: std.mem.Allocator, input: create_batch_prediction_job.CreateBatchPredictionJobInput, options: CallOptions) !create_batch_prediction_job.CreateBatchPredictionJobOutput {
         return create_batch_prediction_job.execute(self, allocator, input, options);
     }
 
     /// Creates a detector version. The detector version starts in a `DRAFT` status.
-    pub fn createDetectorVersion(self: *Self, allocator: std.mem.Allocator, input: create_detector_version.CreateDetectorVersionInput, options: create_detector_version.Options) !create_detector_version.CreateDetectorVersionOutput {
+    pub fn createDetectorVersion(self: *Self, allocator: std.mem.Allocator, input: create_detector_version.CreateDetectorVersionInput, options: CallOptions) !create_detector_version.CreateDetectorVersionOutput {
         return create_detector_version.execute(self, allocator, input, options);
     }
 
@@ -145,38 +146,38 @@ pub const Client = struct {
     /// the input data in a rule that's associated with your detector.
     /// For more information, see
     /// [Lists](https://docs.aws.amazon.com/frauddetector/latest/ug/lists.html).
-    pub fn createList(self: *Self, allocator: std.mem.Allocator, input: create_list.CreateListInput, options: create_list.Options) !create_list.CreateListOutput {
+    pub fn createList(self: *Self, allocator: std.mem.Allocator, input: create_list.CreateListInput, options: CallOptions) !create_list.CreateListOutput {
         return create_list.execute(self, allocator, input, options);
     }
 
     /// Creates a model using the specified model type.
-    pub fn createModel(self: *Self, allocator: std.mem.Allocator, input: create_model.CreateModelInput, options: create_model.Options) !create_model.CreateModelOutput {
+    pub fn createModel(self: *Self, allocator: std.mem.Allocator, input: create_model.CreateModelInput, options: CallOptions) !create_model.CreateModelOutput {
         return create_model.execute(self, allocator, input, options);
     }
 
     /// Creates a version of the model using the specified model type and model id.
-    pub fn createModelVersion(self: *Self, allocator: std.mem.Allocator, input: create_model_version.CreateModelVersionInput, options: create_model_version.Options) !create_model_version.CreateModelVersionOutput {
+    pub fn createModelVersion(self: *Self, allocator: std.mem.Allocator, input: create_model_version.CreateModelVersionInput, options: CallOptions) !create_model_version.CreateModelVersionOutput {
         return create_model_version.execute(self, allocator, input, options);
     }
 
     /// Creates a rule for use with the specified detector.
-    pub fn createRule(self: *Self, allocator: std.mem.Allocator, input: create_rule.CreateRuleInput, options: create_rule.Options) !create_rule.CreateRuleOutput {
+    pub fn createRule(self: *Self, allocator: std.mem.Allocator, input: create_rule.CreateRuleInput, options: CallOptions) !create_rule.CreateRuleOutput {
         return create_rule.execute(self, allocator, input, options);
     }
 
     /// Creates a variable.
-    pub fn createVariable(self: *Self, allocator: std.mem.Allocator, input: create_variable.CreateVariableInput, options: create_variable.Options) !create_variable.CreateVariableOutput {
+    pub fn createVariable(self: *Self, allocator: std.mem.Allocator, input: create_variable.CreateVariableInput, options: CallOptions) !create_variable.CreateVariableOutput {
         return create_variable.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified batch import job ID record. This action does not
     /// delete the data that was batch imported.
-    pub fn deleteBatchImportJob(self: *Self, allocator: std.mem.Allocator, input: delete_batch_import_job.DeleteBatchImportJobInput, options: delete_batch_import_job.Options) !delete_batch_import_job.DeleteBatchImportJobOutput {
+    pub fn deleteBatchImportJob(self: *Self, allocator: std.mem.Allocator, input: delete_batch_import_job.DeleteBatchImportJobInput, options: CallOptions) !delete_batch_import_job.DeleteBatchImportJobOutput {
         return delete_batch_import_job.execute(self, allocator, input, options);
     }
 
     /// Deletes a batch prediction job.
-    pub fn deleteBatchPredictionJob(self: *Self, allocator: std.mem.Allocator, input: delete_batch_prediction_job.DeleteBatchPredictionJobInput, options: delete_batch_prediction_job.Options) !delete_batch_prediction_job.DeleteBatchPredictionJobOutput {
+    pub fn deleteBatchPredictionJob(self: *Self, allocator: std.mem.Allocator, input: delete_batch_prediction_job.DeleteBatchPredictionJobInput, options: CallOptions) !delete_batch_prediction_job.DeleteBatchPredictionJobOutput {
         return delete_batch_prediction_job.execute(self, allocator, input, options);
     }
 
@@ -185,7 +186,7 @@ pub const Client = struct {
     ///
     /// When you delete a detector, Amazon Fraud Detector permanently deletes the
     /// detector and the data is no longer stored in Amazon Fraud Detector.
-    pub fn deleteDetector(self: *Self, allocator: std.mem.Allocator, input: delete_detector.DeleteDetectorInput, options: delete_detector.Options) !delete_detector.DeleteDetectorOutput {
+    pub fn deleteDetector(self: *Self, allocator: std.mem.Allocator, input: delete_detector.DeleteDetectorInput, options: CallOptions) !delete_detector.DeleteDetectorOutput {
         return delete_detector.execute(self, allocator, input, options);
     }
 
@@ -195,7 +196,7 @@ pub const Client = struct {
     /// When you delete a detector version, Amazon Fraud Detector permanently
     /// deletes the detector and the data is no longer stored in Amazon Fraud
     /// Detector.
-    pub fn deleteDetectorVersion(self: *Self, allocator: std.mem.Allocator, input: delete_detector_version.DeleteDetectorVersionInput, options: delete_detector_version.Options) !delete_detector_version.DeleteDetectorVersionOutput {
+    pub fn deleteDetectorVersion(self: *Self, allocator: std.mem.Allocator, input: delete_detector_version.DeleteDetectorVersionInput, options: CallOptions) !delete_detector_version.DeleteDetectorVersionOutput {
         return delete_detector_version.execute(self, allocator, input, options);
     }
 
@@ -205,7 +206,7 @@ pub const Client = struct {
     ///
     /// When you delete an entity type, Amazon Fraud Detector permanently deletes
     /// that entity type and the data is no longer stored in Amazon Fraud Detector.
-    pub fn deleteEntityType(self: *Self, allocator: std.mem.Allocator, input: delete_entity_type.DeleteEntityTypeInput, options: delete_entity_type.Options) !delete_entity_type.DeleteEntityTypeOutput {
+    pub fn deleteEntityType(self: *Self, allocator: std.mem.Allocator, input: delete_entity_type.DeleteEntityTypeInput, options: CallOptions) !delete_entity_type.DeleteEntityTypeOutput {
         return delete_entity_type.execute(self, allocator, input, options);
     }
 
@@ -215,7 +216,7 @@ pub const Client = struct {
     /// event and the event data is no longer stored in Amazon Fraud Detector.
     /// If `deleteAuditHistory` is `True`, event data is available through search
     /// for up to 30 seconds after the delete operation is completed.
-    pub fn deleteEvent(self: *Self, allocator: std.mem.Allocator, input: delete_event.DeleteEventInput, options: delete_event.Options) !delete_event.DeleteEventOutput {
+    pub fn deleteEvent(self: *Self, allocator: std.mem.Allocator, input: delete_event.DeleteEventInput, options: CallOptions) !delete_event.DeleteEventOutput {
         return delete_event.execute(self, allocator, input, options);
     }
 
@@ -225,12 +226,12 @@ pub const Client = struct {
     ///
     /// When you delete an event type, Amazon Fraud Detector permanently deletes
     /// that event type and the data is no longer stored in Amazon Fraud Detector.
-    pub fn deleteEventType(self: *Self, allocator: std.mem.Allocator, input: delete_event_type.DeleteEventTypeInput, options: delete_event_type.Options) !delete_event_type.DeleteEventTypeOutput {
+    pub fn deleteEventType(self: *Self, allocator: std.mem.Allocator, input: delete_event_type.DeleteEventTypeInput, options: CallOptions) !delete_event_type.DeleteEventTypeOutput {
         return delete_event_type.execute(self, allocator, input, options);
     }
 
     /// Deletes all events of a particular event type.
-    pub fn deleteEventsByEventType(self: *Self, allocator: std.mem.Allocator, input: delete_events_by_event_type.DeleteEventsByEventTypeInput, options: delete_events_by_event_type.Options) !delete_events_by_event_type.DeleteEventsByEventTypeOutput {
+    pub fn deleteEventsByEventType(self: *Self, allocator: std.mem.Allocator, input: delete_events_by_event_type.DeleteEventsByEventTypeInput, options: CallOptions) !delete_events_by_event_type.DeleteEventsByEventTypeOutput {
         return delete_events_by_event_type.execute(self, allocator, input, options);
     }
 
@@ -239,7 +240,7 @@ pub const Client = struct {
     /// You can remove an Amazon SageMaker model if it is not associated with a
     /// detector version. Removing a SageMaker model disconnects it from Amazon
     /// Fraud Detector, but the model remains available in SageMaker.
-    pub fn deleteExternalModel(self: *Self, allocator: std.mem.Allocator, input: delete_external_model.DeleteExternalModelInput, options: delete_external_model.Options) !delete_external_model.DeleteExternalModelOutput {
+    pub fn deleteExternalModel(self: *Self, allocator: std.mem.Allocator, input: delete_external_model.DeleteExternalModelInput, options: CallOptions) !delete_external_model.DeleteExternalModelOutput {
         return delete_external_model.execute(self, allocator, input, options);
     }
 
@@ -253,7 +254,7 @@ pub const Client = struct {
     ///
     /// When you delete a label, Amazon Fraud Detector permanently deletes that
     /// label and the data is no longer stored in Amazon Fraud Detector.
-    pub fn deleteLabel(self: *Self, allocator: std.mem.Allocator, input: delete_label.DeleteLabelInput, options: delete_label.Options) !delete_label.DeleteLabelOutput {
+    pub fn deleteLabel(self: *Self, allocator: std.mem.Allocator, input: delete_label.DeleteLabelInput, options: CallOptions) !delete_label.DeleteLabelOutput {
         return delete_label.execute(self, allocator, input, options);
     }
 
@@ -261,7 +262,7 @@ pub const Client = struct {
     ///
     /// When you delete a list, Amazon Fraud Detector permanently deletes that list
     /// and the elements in the list.
-    pub fn deleteList(self: *Self, allocator: std.mem.Allocator, input: delete_list.DeleteListInput, options: delete_list.Options) !delete_list.DeleteListOutput {
+    pub fn deleteList(self: *Self, allocator: std.mem.Allocator, input: delete_list.DeleteListInput, options: CallOptions) !delete_list.DeleteListOutput {
         return delete_list.execute(self, allocator, input, options);
     }
 
@@ -272,7 +273,7 @@ pub const Client = struct {
     ///
     /// When you delete a model, Amazon Fraud Detector permanently deletes that
     /// model and the data is no longer stored in Amazon Fraud Detector.
-    pub fn deleteModel(self: *Self, allocator: std.mem.Allocator, input: delete_model.DeleteModelInput, options: delete_model.Options) !delete_model.DeleteModelOutput {
+    pub fn deleteModel(self: *Self, allocator: std.mem.Allocator, input: delete_model.DeleteModelInput, options: CallOptions) !delete_model.DeleteModelOutput {
         return delete_model.execute(self, allocator, input, options);
     }
 
@@ -284,7 +285,7 @@ pub const Client = struct {
     /// When you delete a model version, Amazon Fraud Detector permanently deletes
     /// that model version and the data is no longer stored in Amazon Fraud
     /// Detector.
-    pub fn deleteModelVersion(self: *Self, allocator: std.mem.Allocator, input: delete_model_version.DeleteModelVersionInput, options: delete_model_version.Options) !delete_model_version.DeleteModelVersionOutput {
+    pub fn deleteModelVersion(self: *Self, allocator: std.mem.Allocator, input: delete_model_version.DeleteModelVersionInput, options: CallOptions) !delete_model_version.DeleteModelVersionOutput {
         return delete_model_version.execute(self, allocator, input, options);
     }
 
@@ -294,7 +295,7 @@ pub const Client = struct {
     ///
     /// When you delete an outcome, Amazon Fraud Detector permanently deletes that
     /// outcome and the data is no longer stored in Amazon Fraud Detector.
-    pub fn deleteOutcome(self: *Self, allocator: std.mem.Allocator, input: delete_outcome.DeleteOutcomeInput, options: delete_outcome.Options) !delete_outcome.DeleteOutcomeOutput {
+    pub fn deleteOutcome(self: *Self, allocator: std.mem.Allocator, input: delete_outcome.DeleteOutcomeInput, options: CallOptions) !delete_outcome.DeleteOutcomeOutput {
         return delete_outcome.execute(self, allocator, input, options);
     }
 
@@ -303,7 +304,7 @@ pub const Client = struct {
     ///
     /// When you delete a rule, Amazon Fraud Detector permanently deletes that rule
     /// and the data is no longer stored in Amazon Fraud Detector.
-    pub fn deleteRule(self: *Self, allocator: std.mem.Allocator, input: delete_rule.DeleteRuleInput, options: delete_rule.Options) !delete_rule.DeleteRuleOutput {
+    pub fn deleteRule(self: *Self, allocator: std.mem.Allocator, input: delete_rule.DeleteRuleInput, options: CallOptions) !delete_rule.DeleteRuleOutput {
         return delete_rule.execute(self, allocator, input, options);
     }
 
@@ -318,19 +319,19 @@ pub const Client = struct {
     ///
     /// When you delete a variable, Amazon Fraud Detector permanently deletes that
     /// variable and the data is no longer stored in Amazon Fraud Detector.
-    pub fn deleteVariable(self: *Self, allocator: std.mem.Allocator, input: delete_variable.DeleteVariableInput, options: delete_variable.Options) !delete_variable.DeleteVariableOutput {
+    pub fn deleteVariable(self: *Self, allocator: std.mem.Allocator, input: delete_variable.DeleteVariableInput, options: CallOptions) !delete_variable.DeleteVariableOutput {
         return delete_variable.execute(self, allocator, input, options);
     }
 
     /// Gets all versions for a specified detector.
-    pub fn describeDetector(self: *Self, allocator: std.mem.Allocator, input: describe_detector.DescribeDetectorInput, options: describe_detector.Options) !describe_detector.DescribeDetectorOutput {
+    pub fn describeDetector(self: *Self, allocator: std.mem.Allocator, input: describe_detector.DescribeDetectorInput, options: CallOptions) !describe_detector.DescribeDetectorOutput {
         return describe_detector.execute(self, allocator, input, options);
     }
 
     /// Gets all of the model versions for the specified model type or for the
     /// specified model type and model ID. You can also get details for a single,
     /// specified model version.
-    pub fn describeModelVersions(self: *Self, allocator: std.mem.Allocator, input: describe_model_versions.DescribeModelVersionsInput, options: describe_model_versions.Options) !describe_model_versions.DescribeModelVersionsOutput {
+    pub fn describeModelVersions(self: *Self, allocator: std.mem.Allocator, input: describe_model_versions.DescribeModelVersionsInput, options: CallOptions) !describe_model_versions.DescribeModelVersionsOutput {
         return describe_model_versions.execute(self, allocator, input, options);
     }
 
@@ -341,7 +342,7 @@ pub const Client = struct {
     /// To get the next page results, provide the pagination token from the
     /// `GetBatchImportJobsResponse` as part of your request.
     /// A null pagination token fetches the records from the beginning.
-    pub fn getBatchImportJobs(self: *Self, allocator: std.mem.Allocator, input: get_batch_import_jobs.GetBatchImportJobsInput, options: get_batch_import_jobs.Options) !get_batch_import_jobs.GetBatchImportJobsOutput {
+    pub fn getBatchImportJobs(self: *Self, allocator: std.mem.Allocator, input: get_batch_import_jobs.GetBatchImportJobsInput, options: CallOptions) !get_batch_import_jobs.GetBatchImportJobsOutput {
         return get_batch_import_jobs.execute(self, allocator, input, options);
     }
 
@@ -351,17 +352,17 @@ pub const Client = struct {
     /// value must be between 1 and 50. To get the next page results, provide the
     /// pagination token from the GetBatchPredictionJobsResponse as part of your
     /// request. A null pagination token fetches the records from the beginning.
-    pub fn getBatchPredictionJobs(self: *Self, allocator: std.mem.Allocator, input: get_batch_prediction_jobs.GetBatchPredictionJobsInput, options: get_batch_prediction_jobs.Options) !get_batch_prediction_jobs.GetBatchPredictionJobsOutput {
+    pub fn getBatchPredictionJobs(self: *Self, allocator: std.mem.Allocator, input: get_batch_prediction_jobs.GetBatchPredictionJobsInput, options: CallOptions) !get_batch_prediction_jobs.GetBatchPredictionJobsOutput {
         return get_batch_prediction_jobs.execute(self, allocator, input, options);
     }
 
     /// Retrieves the status of a `DeleteEventsByEventType` action.
-    pub fn getDeleteEventsByEventTypeStatus(self: *Self, allocator: std.mem.Allocator, input: get_delete_events_by_event_type_status.GetDeleteEventsByEventTypeStatusInput, options: get_delete_events_by_event_type_status.Options) !get_delete_events_by_event_type_status.GetDeleteEventsByEventTypeStatusOutput {
+    pub fn getDeleteEventsByEventTypeStatus(self: *Self, allocator: std.mem.Allocator, input: get_delete_events_by_event_type_status.GetDeleteEventsByEventTypeStatusInput, options: CallOptions) !get_delete_events_by_event_type_status.GetDeleteEventsByEventTypeStatusOutput {
         return get_delete_events_by_event_type_status.execute(self, allocator, input, options);
     }
 
     /// Gets a particular detector version.
-    pub fn getDetectorVersion(self: *Self, allocator: std.mem.Allocator, input: get_detector_version.GetDetectorVersionInput, options: get_detector_version.Options) !get_detector_version.GetDetectorVersionOutput {
+    pub fn getDetectorVersion(self: *Self, allocator: std.mem.Allocator, input: get_detector_version.GetDetectorVersionInput, options: CallOptions) !get_detector_version.GetDetectorVersionOutput {
         return get_detector_version.execute(self, allocator, input, options);
     }
 
@@ -372,7 +373,7 @@ pub const Client = struct {
     /// To get the next page results, provide the pagination token from the
     /// `GetDetectorsResponse` as part of your request. A null pagination token
     /// fetches the records from the beginning.
-    pub fn getDetectors(self: *Self, allocator: std.mem.Allocator, input: get_detectors.GetDetectorsInput, options: get_detectors.Options) !get_detectors.GetDetectorsOutput {
+    pub fn getDetectors(self: *Self, allocator: std.mem.Allocator, input: get_detectors.GetDetectorsInput, options: CallOptions) !get_detectors.GetDetectorsOutput {
         return get_detectors.execute(self, allocator, input, options);
     }
 
@@ -383,26 +384,26 @@ pub const Client = struct {
     /// To get the next page results, provide the pagination token from the
     /// `GetEntityTypesResponse` as part of your request. A null pagination token
     /// fetches the records from the beginning.
-    pub fn getEntityTypes(self: *Self, allocator: std.mem.Allocator, input: get_entity_types.GetEntityTypesInput, options: get_entity_types.Options) !get_entity_types.GetEntityTypesOutput {
+    pub fn getEntityTypes(self: *Self, allocator: std.mem.Allocator, input: get_entity_types.GetEntityTypesInput, options: CallOptions) !get_entity_types.GetEntityTypesOutput {
         return get_entity_types.execute(self, allocator, input, options);
     }
 
     /// Retrieves details of events stored with Amazon Fraud Detector. This action
     /// does not retrieve prediction results.
-    pub fn getEvent(self: *Self, allocator: std.mem.Allocator, input: get_event.GetEventInput, options: get_event.Options) !get_event.GetEventOutput {
+    pub fn getEvent(self: *Self, allocator: std.mem.Allocator, input: get_event.GetEventInput, options: CallOptions) !get_event.GetEventOutput {
         return get_event.execute(self, allocator, input, options);
     }
 
     /// Evaluates an event against a detector version. If a version ID is not
     /// provided, the detector’s (`ACTIVE`) version is used.
-    pub fn getEventPrediction(self: *Self, allocator: std.mem.Allocator, input: get_event_prediction.GetEventPredictionInput, options: get_event_prediction.Options) !get_event_prediction.GetEventPredictionOutput {
+    pub fn getEventPrediction(self: *Self, allocator: std.mem.Allocator, input: get_event_prediction.GetEventPredictionInput, options: CallOptions) !get_event_prediction.GetEventPredictionOutput {
         return get_event_prediction.execute(self, allocator, input, options);
     }
 
     /// Gets details of the past fraud predictions for the specified event ID, event
     /// type, detector ID, and detector version ID that was generated in the
     /// specified time period.
-    pub fn getEventPredictionMetadata(self: *Self, allocator: std.mem.Allocator, input: get_event_prediction_metadata.GetEventPredictionMetadataInput, options: get_event_prediction_metadata.Options) !get_event_prediction_metadata.GetEventPredictionMetadataOutput {
+    pub fn getEventPredictionMetadata(self: *Self, allocator: std.mem.Allocator, input: get_event_prediction_metadata.GetEventPredictionMetadataInput, options: CallOptions) !get_event_prediction_metadata.GetEventPredictionMetadataOutput {
         return get_event_prediction_metadata.execute(self, allocator, input, options);
     }
 
@@ -413,7 +414,7 @@ pub const Client = struct {
     /// To get the next page results, provide the pagination token from the
     /// `GetEventTypesResponse` as part of your request. A null pagination token
     /// fetches the records from the beginning.
-    pub fn getEventTypes(self: *Self, allocator: std.mem.Allocator, input: get_event_types.GetEventTypesInput, options: get_event_types.Options) !get_event_types.GetEventTypesOutput {
+    pub fn getEventTypes(self: *Self, allocator: std.mem.Allocator, input: get_event_types.GetEventTypesInput, options: CallOptions) !get_event_types.GetEventTypesOutput {
         return get_event_types.execute(self, allocator, input, options);
     }
 
@@ -426,13 +427,13 @@ pub const Client = struct {
     /// part
     /// of your request. A null pagination token fetches the records from the
     /// beginning.
-    pub fn getExternalModels(self: *Self, allocator: std.mem.Allocator, input: get_external_models.GetExternalModelsInput, options: get_external_models.Options) !get_external_models.GetExternalModelsOutput {
+    pub fn getExternalModels(self: *Self, allocator: std.mem.Allocator, input: get_external_models.GetExternalModelsInput, options: CallOptions) !get_external_models.GetExternalModelsOutput {
         return get_external_models.execute(self, allocator, input, options);
     }
 
     /// Gets the encryption key if a KMS key has been specified to be used to
     /// encrypt content in Amazon Fraud Detector.
-    pub fn getKmsEncryptionKey(self: *Self, allocator: std.mem.Allocator, input: get_kms_encryption_key.GetKMSEncryptionKeyInput, options: get_kms_encryption_key.Options) !get_kms_encryption_key.GetKMSEncryptionKeyOutput {
+    pub fn getKmsEncryptionKey(self: *Self, allocator: std.mem.Allocator, input: get_kms_encryption_key.GetKMSEncryptionKeyInput, options: CallOptions) !get_kms_encryption_key.GetKMSEncryptionKeyOutput {
         return get_kms_encryption_key.execute(self, allocator, input, options);
     }
 
@@ -444,23 +445,23 @@ pub const Client = struct {
     /// To get the next page results, provide the pagination token from the
     /// `GetGetLabelsResponse` as part of your request. A null pagination token
     /// fetches the records from the beginning.
-    pub fn getLabels(self: *Self, allocator: std.mem.Allocator, input: get_labels.GetLabelsInput, options: get_labels.Options) !get_labels.GetLabelsOutput {
+    pub fn getLabels(self: *Self, allocator: std.mem.Allocator, input: get_labels.GetLabelsInput, options: CallOptions) !get_labels.GetLabelsOutput {
         return get_labels.execute(self, allocator, input, options);
     }
 
     /// Gets all the elements in the specified list.
-    pub fn getListElements(self: *Self, allocator: std.mem.Allocator, input: get_list_elements.GetListElementsInput, options: get_list_elements.Options) !get_list_elements.GetListElementsOutput {
+    pub fn getListElements(self: *Self, allocator: std.mem.Allocator, input: get_list_elements.GetListElementsInput, options: CallOptions) !get_list_elements.GetListElementsOutput {
         return get_list_elements.execute(self, allocator, input, options);
     }
 
     /// Gets the metadata of either all the lists under the account or the specified
     /// list.
-    pub fn getListsMetadata(self: *Self, allocator: std.mem.Allocator, input: get_lists_metadata.GetListsMetadataInput, options: get_lists_metadata.Options) !get_lists_metadata.GetListsMetadataOutput {
+    pub fn getListsMetadata(self: *Self, allocator: std.mem.Allocator, input: get_lists_metadata.GetListsMetadataInput, options: CallOptions) !get_lists_metadata.GetListsMetadataOutput {
         return get_lists_metadata.execute(self, allocator, input, options);
     }
 
     /// Gets the details of the specified model version.
-    pub fn getModelVersion(self: *Self, allocator: std.mem.Allocator, input: get_model_version.GetModelVersionInput, options: get_model_version.Options) !get_model_version.GetModelVersionOutput {
+    pub fn getModelVersion(self: *Self, allocator: std.mem.Allocator, input: get_model_version.GetModelVersionInput, options: CallOptions) !get_model_version.GetModelVersionOutput {
         return get_model_version.execute(self, allocator, input, options);
     }
 
@@ -476,7 +477,7 @@ pub const Client = struct {
     /// To get the next page results, provide the pagination token from the
     /// response as part of your request. A null pagination token
     /// fetches the records from the beginning.
-    pub fn getModels(self: *Self, allocator: std.mem.Allocator, input: get_models.GetModelsInput, options: get_models.Options) !get_models.GetModelsOutput {
+    pub fn getModels(self: *Self, allocator: std.mem.Allocator, input: get_models.GetModelsInput, options: CallOptions) !get_models.GetModelsOutput {
         return get_models.execute(self, allocator, input, options);
     }
 
@@ -487,7 +488,7 @@ pub const Client = struct {
     /// token from the
     /// `GetOutcomesResult` as part of your request. A null pagination token
     /// fetches the records from the beginning.
-    pub fn getOutcomes(self: *Self, allocator: std.mem.Allocator, input: get_outcomes.GetOutcomesInput, options: get_outcomes.Options) !get_outcomes.GetOutcomesOutput {
+    pub fn getOutcomes(self: *Self, allocator: std.mem.Allocator, input: get_outcomes.GetOutcomesInput, options: CallOptions) !get_outcomes.GetOutcomesOutput {
         return get_outcomes.execute(self, allocator, input, options);
     }
 
@@ -501,7 +502,7 @@ pub const Client = struct {
     /// between 50 and 100. To get the next page result, a provide a pagination
     /// token from GetRulesResult as part of your request. Null pagination token
     /// fetches the records from the beginning.
-    pub fn getRules(self: *Self, allocator: std.mem.Allocator, input: get_rules.GetRulesInput, options: get_rules.Options) !get_rules.GetRulesOutput {
+    pub fn getRules(self: *Self, allocator: std.mem.Allocator, input: get_rules.GetRulesInput, options: CallOptions) !get_rules.GetRulesOutput {
         return get_rules.execute(self, allocator, input, options);
     }
 
@@ -513,7 +514,7 @@ pub const Client = struct {
     /// 50 and 100. To get the next page result, a provide a pagination token from
     /// `GetVariablesResult` as part of your request. Null pagination token
     /// fetches the records from the beginning.
-    pub fn getVariables(self: *Self, allocator: std.mem.Allocator, input: get_variables.GetVariablesInput, options: get_variables.Options) !get_variables.GetVariablesOutput {
+    pub fn getVariables(self: *Self, allocator: std.mem.Allocator, input: get_variables.GetVariablesInput, options: CallOptions) !get_variables.GetVariablesOutput {
         return get_variables.execute(self, allocator, input, options);
     }
 
@@ -534,7 +535,7 @@ pub const Client = struct {
     /// the next page results, provide
     /// the `nextToken` from the response as part of your request. A null
     /// `nextToken` fetches the records from the beginning.
-    pub fn listEventPredictions(self: *Self, allocator: std.mem.Allocator, input: list_event_predictions.ListEventPredictionsInput, options: list_event_predictions.Options) !list_event_predictions.ListEventPredictionsOutput {
+    pub fn listEventPredictions(self: *Self, allocator: std.mem.Allocator, input: list_event_predictions.ListEventPredictionsInput, options: CallOptions) !list_event_predictions.ListEventPredictionsOutput {
         return list_event_predictions.execute(self, allocator, input, options);
     }
 
@@ -542,12 +543,12 @@ pub const Client = struct {
     /// the next page results, provide the pagination token from the
     /// response as part of your request. A null pagination token
     /// fetches the records from the beginning.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Creates or updates a detector.
-    pub fn putDetector(self: *Self, allocator: std.mem.Allocator, input: put_detector.PutDetectorInput, options: put_detector.Options) !put_detector.PutDetectorOutput {
+    pub fn putDetector(self: *Self, allocator: std.mem.Allocator, input: put_detector.PutDetectorInput, options: CallOptions) !put_detector.PutDetectorOutput {
         return put_detector.execute(self, allocator, input, options);
     }
 
@@ -555,7 +556,7 @@ pub const Client = struct {
     /// the event. As part of a fraud prediction, you pass the entity ID to indicate
     /// the specific entity who performed the event. An entity type classifies the
     /// entity. Example classifications include customer, merchant, or account.
-    pub fn putEntityType(self: *Self, allocator: std.mem.Allocator, input: put_entity_type.PutEntityTypeInput, options: put_entity_type.Options) !put_entity_type.PutEntityTypeOutput {
+    pub fn putEntityType(self: *Self, allocator: std.mem.Allocator, input: put_entity_type.PutEntityTypeInput, options: CallOptions) !put_entity_type.PutEntityTypeOutput {
         return put_entity_type.execute(self, allocator, input, options);
     }
 
@@ -566,63 +567,63 @@ pub const Client = struct {
     /// the event, the entity performing the event (such as a customer), and the
     /// labels that classify the event. Example event types include online payment
     /// transactions, account registrations, and authentications.
-    pub fn putEventType(self: *Self, allocator: std.mem.Allocator, input: put_event_type.PutEventTypeInput, options: put_event_type.Options) !put_event_type.PutEventTypeOutput {
+    pub fn putEventType(self: *Self, allocator: std.mem.Allocator, input: put_event_type.PutEventTypeInput, options: CallOptions) !put_event_type.PutEventTypeOutput {
         return put_event_type.execute(self, allocator, input, options);
     }
 
     /// Creates or updates an Amazon SageMaker model endpoint. You can also use this
     /// action to update the configuration of the model endpoint, including the IAM
     /// role and/or the mapped variables.
-    pub fn putExternalModel(self: *Self, allocator: std.mem.Allocator, input: put_external_model.PutExternalModelInput, options: put_external_model.Options) !put_external_model.PutExternalModelOutput {
+    pub fn putExternalModel(self: *Self, allocator: std.mem.Allocator, input: put_external_model.PutExternalModelInput, options: CallOptions) !put_external_model.PutExternalModelOutput {
         return put_external_model.execute(self, allocator, input, options);
     }
 
     /// Specifies the KMS key to be used to encrypt content in Amazon Fraud
     /// Detector.
-    pub fn putKmsEncryptionKey(self: *Self, allocator: std.mem.Allocator, input: put_kms_encryption_key.PutKMSEncryptionKeyInput, options: put_kms_encryption_key.Options) !put_kms_encryption_key.PutKMSEncryptionKeyOutput {
+    pub fn putKmsEncryptionKey(self: *Self, allocator: std.mem.Allocator, input: put_kms_encryption_key.PutKMSEncryptionKeyInput, options: CallOptions) !put_kms_encryption_key.PutKMSEncryptionKeyOutput {
         return put_kms_encryption_key.execute(self, allocator, input, options);
     }
 
     /// Creates or updates label. A label classifies an event as fraudulent or
     /// legitimate. Labels are associated with event types and used to train
     /// supervised machine learning models in Amazon Fraud Detector.
-    pub fn putLabel(self: *Self, allocator: std.mem.Allocator, input: put_label.PutLabelInput, options: put_label.Options) !put_label.PutLabelOutput {
+    pub fn putLabel(self: *Self, allocator: std.mem.Allocator, input: put_label.PutLabelInput, options: CallOptions) !put_label.PutLabelOutput {
         return put_label.execute(self, allocator, input, options);
     }
 
     /// Creates or updates an outcome.
-    pub fn putOutcome(self: *Self, allocator: std.mem.Allocator, input: put_outcome.PutOutcomeInput, options: put_outcome.Options) !put_outcome.PutOutcomeOutput {
+    pub fn putOutcome(self: *Self, allocator: std.mem.Allocator, input: put_outcome.PutOutcomeInput, options: CallOptions) !put_outcome.PutOutcomeOutput {
         return put_outcome.execute(self, allocator, input, options);
     }
 
     /// Stores events in Amazon Fraud Detector without generating fraud predictions
     /// for those events. For example, you can use `SendEvent` to upload a
     /// historical dataset, which you can then later use to train a model.
-    pub fn sendEvent(self: *Self, allocator: std.mem.Allocator, input: send_event.SendEventInput, options: send_event.Options) !send_event.SendEventOutput {
+    pub fn sendEvent(self: *Self, allocator: std.mem.Allocator, input: send_event.SendEventInput, options: CallOptions) !send_event.SendEventOutput {
         return send_event.execute(self, allocator, input, options);
     }
 
     /// Assigns tags to a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates a detector version. The detector version attributes that you can
     /// update include models, external model endpoints, rules, rule execution mode,
     /// and description. You can only update a `DRAFT` detector version.
-    pub fn updateDetectorVersion(self: *Self, allocator: std.mem.Allocator, input: update_detector_version.UpdateDetectorVersionInput, options: update_detector_version.Options) !update_detector_version.UpdateDetectorVersionOutput {
+    pub fn updateDetectorVersion(self: *Self, allocator: std.mem.Allocator, input: update_detector_version.UpdateDetectorVersionInput, options: CallOptions) !update_detector_version.UpdateDetectorVersionOutput {
         return update_detector_version.execute(self, allocator, input, options);
     }
 
     /// Updates the detector version's description. You can update the metadata for
     /// any detector version (`DRAFT, ACTIVE,` or
     /// `INACTIVE`).
-    pub fn updateDetectorVersionMetadata(self: *Self, allocator: std.mem.Allocator, input: update_detector_version_metadata.UpdateDetectorVersionMetadataInput, options: update_detector_version_metadata.Options) !update_detector_version_metadata.UpdateDetectorVersionMetadataOutput {
+    pub fn updateDetectorVersionMetadata(self: *Self, allocator: std.mem.Allocator, input: update_detector_version_metadata.UpdateDetectorVersionMetadataInput, options: CallOptions) !update_detector_version_metadata.UpdateDetectorVersionMetadataOutput {
         return update_detector_version_metadata.execute(self, allocator, input, options);
     }
 
@@ -630,22 +631,22 @@ pub const Client = struct {
     /// promotions or
     /// demotions using `UpdateDetectorVersionStatus`: `DRAFT` to `ACTIVE`, `ACTIVE`
     /// to `INACTIVE`, and `INACTIVE` to `ACTIVE`.
-    pub fn updateDetectorVersionStatus(self: *Self, allocator: std.mem.Allocator, input: update_detector_version_status.UpdateDetectorVersionStatusInput, options: update_detector_version_status.Options) !update_detector_version_status.UpdateDetectorVersionStatusOutput {
+    pub fn updateDetectorVersionStatus(self: *Self, allocator: std.mem.Allocator, input: update_detector_version_status.UpdateDetectorVersionStatusInput, options: CallOptions) !update_detector_version_status.UpdateDetectorVersionStatusOutput {
         return update_detector_version_status.execute(self, allocator, input, options);
     }
 
     /// Updates the specified event with a new label.
-    pub fn updateEventLabel(self: *Self, allocator: std.mem.Allocator, input: update_event_label.UpdateEventLabelInput, options: update_event_label.Options) !update_event_label.UpdateEventLabelOutput {
+    pub fn updateEventLabel(self: *Self, allocator: std.mem.Allocator, input: update_event_label.UpdateEventLabelInput, options: CallOptions) !update_event_label.UpdateEventLabelOutput {
         return update_event_label.execute(self, allocator, input, options);
     }
 
     /// Updates a list.
-    pub fn updateList(self: *Self, allocator: std.mem.Allocator, input: update_list.UpdateListInput, options: update_list.Options) !update_list.UpdateListOutput {
+    pub fn updateList(self: *Self, allocator: std.mem.Allocator, input: update_list.UpdateListInput, options: CallOptions) !update_list.UpdateListOutput {
         return update_list.execute(self, allocator, input, options);
     }
 
     /// Updates model description.
-    pub fn updateModel(self: *Self, allocator: std.mem.Allocator, input: update_model.UpdateModelInput, options: update_model.Options) !update_model.UpdateModelOutput {
+    pub fn updateModel(self: *Self, allocator: std.mem.Allocator, input: update_model.UpdateModelInput, options: CallOptions) !update_model.UpdateModelOutput {
         return update_model.execute(self, allocator, input, options);
     }
 
@@ -654,7 +655,7 @@ pub const Client = struct {
     /// model. You can update the training data set location and data access role
     /// attributes using this action. This action creates and trains a new minor
     /// version of the model, for example version 1.01, 1.02, 1.03.
-    pub fn updateModelVersion(self: *Self, allocator: std.mem.Allocator, input: update_model_version.UpdateModelVersionInput, options: update_model_version.Options) !update_model_version.UpdateModelVersionOutput {
+    pub fn updateModelVersion(self: *Self, allocator: std.mem.Allocator, input: update_model_version.UpdateModelVersionInput, options: CallOptions) !update_model_version.UpdateModelVersionOutput {
         return update_model_version.execute(self, allocator, input, options);
     }
 
@@ -667,23 +668,23 @@ pub const Client = struct {
     /// * Change the `TRAINING_COMPLETE` status to `ACTIVE`.
     ///
     /// * Change `ACTIVE` to `INACTIVE`.
-    pub fn updateModelVersionStatus(self: *Self, allocator: std.mem.Allocator, input: update_model_version_status.UpdateModelVersionStatusInput, options: update_model_version_status.Options) !update_model_version_status.UpdateModelVersionStatusOutput {
+    pub fn updateModelVersionStatus(self: *Self, allocator: std.mem.Allocator, input: update_model_version_status.UpdateModelVersionStatusInput, options: CallOptions) !update_model_version_status.UpdateModelVersionStatusOutput {
         return update_model_version_status.execute(self, allocator, input, options);
     }
 
     /// Updates a rule's metadata. The description attribute can be updated.
-    pub fn updateRuleMetadata(self: *Self, allocator: std.mem.Allocator, input: update_rule_metadata.UpdateRuleMetadataInput, options: update_rule_metadata.Options) !update_rule_metadata.UpdateRuleMetadataOutput {
+    pub fn updateRuleMetadata(self: *Self, allocator: std.mem.Allocator, input: update_rule_metadata.UpdateRuleMetadataInput, options: CallOptions) !update_rule_metadata.UpdateRuleMetadataOutput {
         return update_rule_metadata.execute(self, allocator, input, options);
     }
 
     /// Updates a rule version resulting in a new rule version. Updates a rule
     /// version resulting in a new rule version (version 1, 2, 3 ...).
-    pub fn updateRuleVersion(self: *Self, allocator: std.mem.Allocator, input: update_rule_version.UpdateRuleVersionInput, options: update_rule_version.Options) !update_rule_version.UpdateRuleVersionOutput {
+    pub fn updateRuleVersion(self: *Self, allocator: std.mem.Allocator, input: update_rule_version.UpdateRuleVersionInput, options: CallOptions) !update_rule_version.UpdateRuleVersionOutput {
         return update_rule_version.execute(self, allocator, input, options);
     }
 
     /// Updates a variable.
-    pub fn updateVariable(self: *Self, allocator: std.mem.Allocator, input: update_variable.UpdateVariableInput, options: update_variable.Options) !update_variable.UpdateVariableOutput {
+    pub fn updateVariable(self: *Self, allocator: std.mem.Allocator, input: update_variable.UpdateVariableInput, options: CallOptions) !update_variable.UpdateVariableOutput {
         return update_variable.execute(self, allocator, input, options);
     }
 

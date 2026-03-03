@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CompositeComponentTypeRequest = @import("composite_component_type_request.zig").CompositeComponentTypeRequest;
 const FunctionRequest = @import("function_request.zig").FunctionRequest;
@@ -83,11 +84,7 @@ pub const UpdateComponentTypeOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateComponentTypeInput, options: Options) !UpdateComponentTypeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateComponentTypeInput, options: CallOptions) !UpdateComponentTypeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

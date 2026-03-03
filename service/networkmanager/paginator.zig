@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_global_networks = @import("describe_global_networks.zig");
@@ -37,7 +38,7 @@ pub const DescribeGlobalNetworksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_global_networks.Options) !describe_global_networks.DescribeGlobalNetworksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_global_networks.DescribeGlobalNetworksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -78,7 +79,7 @@ pub const GetConnectPeerAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_connect_peer_associations.Options) !get_connect_peer_associations.GetConnectPeerAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_connect_peer_associations.GetConnectPeerAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -119,7 +120,7 @@ pub const GetConnectionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_connections.Options) !get_connections.GetConnectionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_connections.GetConnectionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -160,7 +161,7 @@ pub const GetCoreNetworkChangeEventsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_core_network_change_events.Options) !get_core_network_change_events.GetCoreNetworkChangeEventsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_core_network_change_events.GetCoreNetworkChangeEventsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -201,7 +202,7 @@ pub const GetCoreNetworkChangeSetPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_core_network_change_set.Options) !get_core_network_change_set.GetCoreNetworkChangeSetOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_core_network_change_set.GetCoreNetworkChangeSetOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -242,7 +243,7 @@ pub const GetCustomerGatewayAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_customer_gateway_associations.Options) !get_customer_gateway_associations.GetCustomerGatewayAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_customer_gateway_associations.GetCustomerGatewayAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -283,7 +284,7 @@ pub const GetDevicesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_devices.Options) !get_devices.GetDevicesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_devices.GetDevicesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -324,7 +325,7 @@ pub const GetLinkAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_link_associations.Options) !get_link_associations.GetLinkAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_link_associations.GetLinkAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -365,7 +366,7 @@ pub const GetLinksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_links.Options) !get_links.GetLinksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_links.GetLinksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -406,7 +407,7 @@ pub const GetNetworkResourceCountsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_network_resource_counts.Options) !get_network_resource_counts.GetNetworkResourceCountsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_network_resource_counts.GetNetworkResourceCountsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -447,7 +448,7 @@ pub const GetNetworkResourceRelationshipsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_network_resource_relationships.Options) !get_network_resource_relationships.GetNetworkResourceRelationshipsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_network_resource_relationships.GetNetworkResourceRelationshipsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -488,7 +489,7 @@ pub const GetNetworkResourcesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_network_resources.Options) !get_network_resources.GetNetworkResourcesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_network_resources.GetNetworkResourcesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -529,7 +530,7 @@ pub const GetNetworkTelemetryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_network_telemetry.Options) !get_network_telemetry.GetNetworkTelemetryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_network_telemetry.GetNetworkTelemetryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -570,7 +571,7 @@ pub const GetSitesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_sites.Options) !get_sites.GetSitesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_sites.GetSitesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -611,7 +612,7 @@ pub const GetTransitGatewayConnectPeerAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_transit_gateway_connect_peer_associations.Options) !get_transit_gateway_connect_peer_associations.GetTransitGatewayConnectPeerAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_transit_gateway_connect_peer_associations.GetTransitGatewayConnectPeerAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -652,7 +653,7 @@ pub const GetTransitGatewayRegistrationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_transit_gateway_registrations.Options) !get_transit_gateway_registrations.GetTransitGatewayRegistrationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_transit_gateway_registrations.GetTransitGatewayRegistrationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -693,7 +694,7 @@ pub const ListAttachmentRoutingPolicyAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_attachment_routing_policy_associations.Options) !list_attachment_routing_policy_associations.ListAttachmentRoutingPolicyAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_attachment_routing_policy_associations.ListAttachmentRoutingPolicyAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -734,7 +735,7 @@ pub const ListAttachmentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_attachments.Options) !list_attachments.ListAttachmentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_attachments.ListAttachmentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -775,7 +776,7 @@ pub const ListConnectPeersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_connect_peers.Options) !list_connect_peers.ListConnectPeersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_connect_peers.ListConnectPeersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -816,7 +817,7 @@ pub const ListCoreNetworkPolicyVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_core_network_policy_versions.Options) !list_core_network_policy_versions.ListCoreNetworkPolicyVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_core_network_policy_versions.ListCoreNetworkPolicyVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -857,7 +858,7 @@ pub const ListCoreNetworkPrefixListAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_core_network_prefix_list_associations.Options) !list_core_network_prefix_list_associations.ListCoreNetworkPrefixListAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_core_network_prefix_list_associations.ListCoreNetworkPrefixListAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -898,7 +899,7 @@ pub const ListCoreNetworkRoutingInformationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_core_network_routing_information.Options) !list_core_network_routing_information.ListCoreNetworkRoutingInformationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_core_network_routing_information.ListCoreNetworkRoutingInformationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -939,7 +940,7 @@ pub const ListCoreNetworksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_core_networks.Options) !list_core_networks.ListCoreNetworksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_core_networks.ListCoreNetworksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -980,7 +981,7 @@ pub const ListPeeringsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_peerings.Options) !list_peerings.ListPeeringsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_peerings.ListPeeringsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VectorData = @import("vector_data.zig").VectorData;
 const DistanceMetric = @import("distance_metric.zig").DistanceMetric;
@@ -66,11 +67,7 @@ pub const QueryVectorsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: QueryVectorsInput, options: Options) !QueryVectorsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: QueryVectorsInput, options: CallOptions) !QueryVectorsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

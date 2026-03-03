@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EmailContact = @import("email_contact.zig").EmailContact;
 
@@ -39,11 +40,7 @@ pub const ListEmailContactsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListEmailContactsInput, options: Options) !ListEmailContactsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListEmailContactsInput, options: CallOptions) !ListEmailContactsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

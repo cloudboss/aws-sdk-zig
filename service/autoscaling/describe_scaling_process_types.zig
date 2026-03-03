@@ -2,22 +2,19 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProcessType = @import("process_type.zig").ProcessType;
 const serde = @import("serde.zig");
 
-const DescribeScalingProcessTypesInput = struct {};
+pub const DescribeScalingProcessTypesInput = struct {};
 
 pub const DescribeScalingProcessTypesOutput = struct {
     /// The names of the process types.
     processes: ?[]const ProcessType = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeScalingProcessTypesInput, options: Options) !DescribeScalingProcessTypesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeScalingProcessTypesInput, options: CallOptions) !DescribeScalingProcessTypesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

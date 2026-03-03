@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InvalidTopicReviewedAnswer = @import("invalid_topic_reviewed_answer.zig").InvalidTopicReviewedAnswer;
 const SucceededTopicReviewedAnswer = @import("succeeded_topic_reviewed_answer.zig").SucceededTopicReviewedAnswer;
@@ -55,11 +56,7 @@ pub const BatchDeleteTopicReviewedAnswerOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteTopicReviewedAnswerInput, options: Options) !BatchDeleteTopicReviewedAnswerOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteTopicReviewedAnswerInput, options: CallOptions) !BatchDeleteTopicReviewedAnswerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

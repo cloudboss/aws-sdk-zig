@@ -73,6 +73,7 @@ const update_flow_alias = @import("update_flow_alias.zig");
 const update_knowledge_base = @import("update_knowledge_base.zig");
 const update_prompt = @import("update_prompt.zig");
 const validate_flow_definition = @import("validate_flow_definition.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -104,14 +105,14 @@ pub const Client = struct {
     }
 
     /// Makes an agent a collaborator for another agent.
-    pub fn associateAgentCollaborator(self: *Self, allocator: std.mem.Allocator, input: associate_agent_collaborator.AssociateAgentCollaboratorInput, options: associate_agent_collaborator.Options) !associate_agent_collaborator.AssociateAgentCollaboratorOutput {
+    pub fn associateAgentCollaborator(self: *Self, allocator: std.mem.Allocator, input: associate_agent_collaborator.AssociateAgentCollaboratorInput, options: CallOptions) !associate_agent_collaborator.AssociateAgentCollaboratorOutput {
         return associate_agent_collaborator.execute(self, allocator, input, options);
     }
 
     /// Associates a knowledge base with an agent. If a knowledge base is associated
     /// and its `indexState` is set to `Enabled`, the agent queries the knowledge
     /// base for information to augment its response to the user.
-    pub fn associateAgentKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: associate_agent_knowledge_base.AssociateAgentKnowledgeBaseInput, options: associate_agent_knowledge_base.Options) !associate_agent_knowledge_base.AssociateAgentKnowledgeBaseOutput {
+    pub fn associateAgentKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: associate_agent_knowledge_base.AssociateAgentKnowledgeBaseInput, options: CallOptions) !associate_agent_knowledge_base.AssociateAgentKnowledgeBaseOutput {
         return associate_agent_knowledge_base.execute(self, allocator, input, options);
     }
 
@@ -143,7 +144,7 @@ pub const Client = struct {
     /// * The agent instructions will not be honored if your agent has only one
     ///   knowledge base, uses default prompts, has no action group, and user input
     ///   is disabled.
-    pub fn createAgent(self: *Self, allocator: std.mem.Allocator, input: create_agent.CreateAgentInput, options: create_agent.Options) !create_agent.CreateAgentOutput {
+    pub fn createAgent(self: *Self, allocator: std.mem.Allocator, input: create_agent.CreateAgentInput, options: CallOptions) !create_agent.CreateAgentOutput {
         return create_agent.execute(self, allocator, input, options);
     }
 
@@ -165,12 +166,12 @@ pub const Client = struct {
     /// have enough information to complete the API request, it will invoke this
     /// action group instead and return an
     /// [Observation](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html) reprompting the user for more information.
-    pub fn createAgentActionGroup(self: *Self, allocator: std.mem.Allocator, input: create_agent_action_group.CreateAgentActionGroupInput, options: create_agent_action_group.Options) !create_agent_action_group.CreateAgentActionGroupOutput {
+    pub fn createAgentActionGroup(self: *Self, allocator: std.mem.Allocator, input: create_agent_action_group.CreateAgentActionGroupInput, options: CallOptions) !create_agent_action_group.CreateAgentActionGroupOutput {
         return create_agent_action_group.execute(self, allocator, input, options);
     }
 
     /// Creates an alias of an agent that can be used to deploy the agent.
-    pub fn createAgentAlias(self: *Self, allocator: std.mem.Allocator, input: create_agent_alias.CreateAgentAliasInput, options: create_agent_alias.Options) !create_agent_alias.CreateAgentAliasOutput {
+    pub fn createAgentAlias(self: *Self, allocator: std.mem.Allocator, input: create_agent_alias.CreateAgentAliasInput, options: CallOptions) !create_agent_alias.CreateAgentAliasOutput {
         return create_agent_alias.execute(self, allocator, input, options);
     }
 
@@ -179,7 +180,7 @@ pub const Client = struct {
     ///
     /// You can't change the `chunkingConfiguration` after you create the data
     /// source connector.
-    pub fn createDataSource(self: *Self, allocator: std.mem.Allocator, input: create_data_source.CreateDataSourceInput, options: create_data_source.Options) !create_data_source.CreateDataSourceOutput {
+    pub fn createDataSource(self: *Self, allocator: std.mem.Allocator, input: create_data_source.CreateDataSourceInput, options: CallOptions) !create_data_source.CreateDataSourceOutput {
         return create_data_source.execute(self, allocator, input, options);
     }
 
@@ -188,21 +189,21 @@ pub const Client = struct {
     /// step of the flow, and create connections between the nodes to create paths
     /// to different outputs. For more information, see [How it
     /// works](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-how-it-works.html) and [Create a flow in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-create.html) in the Amazon Bedrock User Guide.
-    pub fn createFlow(self: *Self, allocator: std.mem.Allocator, input: create_flow.CreateFlowInput, options: create_flow.Options) !create_flow.CreateFlowOutput {
+    pub fn createFlow(self: *Self, allocator: std.mem.Allocator, input: create_flow.CreateFlowInput, options: CallOptions) !create_flow.CreateFlowOutput {
         return create_flow.execute(self, allocator, input, options);
     }
 
     /// Creates an alias of a flow for deployment. For more information, see [Deploy
     /// a flow in Amazon
     /// Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-deploy.html) in the Amazon Bedrock User Guide.
-    pub fn createFlowAlias(self: *Self, allocator: std.mem.Allocator, input: create_flow_alias.CreateFlowAliasInput, options: create_flow_alias.Options) !create_flow_alias.CreateFlowAliasOutput {
+    pub fn createFlowAlias(self: *Self, allocator: std.mem.Allocator, input: create_flow_alias.CreateFlowAliasInput, options: CallOptions) !create_flow_alias.CreateFlowAliasOutput {
         return create_flow_alias.execute(self, allocator, input, options);
     }
 
     /// Creates a version of the flow that you can deploy. For more information, see
     /// [Deploy a flow in Amazon
     /// Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-deploy.html) in the Amazon Bedrock User Guide.
-    pub fn createFlowVersion(self: *Self, allocator: std.mem.Allocator, input: create_flow_version.CreateFlowVersionInput, options: create_flow_version.Options) !create_flow_version.CreateFlowVersionOutput {
+    pub fn createFlowVersion(self: *Self, allocator: std.mem.Allocator, input: create_flow_version.CreateFlowVersionInput, options: CallOptions) !create_flow_version.CreateFlowVersionOutput {
         return create_flow_version.execute(self, allocator, input, options);
     }
 
@@ -239,14 +240,14 @@ pub const Client = struct {
     ///   `redisEnterpriseCloudConfiguration` object. For more information, see
     ///   [Create a vector store in Redis Enterprise
     ///   Cloud](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html).
-    pub fn createKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: create_knowledge_base.CreateKnowledgeBaseInput, options: create_knowledge_base.Options) !create_knowledge_base.CreateKnowledgeBaseOutput {
+    pub fn createKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: create_knowledge_base.CreateKnowledgeBaseInput, options: CallOptions) !create_knowledge_base.CreateKnowledgeBaseOutput {
         return create_knowledge_base.execute(self, allocator, input, options);
     }
 
     /// Creates a prompt in your prompt library that you can add to a flow. For more
     /// information, see [Prompt management in Amazon
     /// Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html), [Create a prompt using Prompt management](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html) and [Prompt flows in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows.html) in the Amazon Bedrock User Guide.
-    pub fn createPrompt(self: *Self, allocator: std.mem.Allocator, input: create_prompt.CreatePromptInput, options: create_prompt.Options) !create_prompt.CreatePromptOutput {
+    pub fn createPrompt(self: *Self, allocator: std.mem.Allocator, input: create_prompt.CreatePromptInput, options: CallOptions) !create_prompt.CreatePromptOutput {
         return create_prompt.execute(self, allocator, input, options);
     }
 
@@ -254,47 +255,47 @@ pub const Client = struct {
     /// For more information, see [Deploy prompts using Prompt management by
     /// creating
     /// versions](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html) in the Amazon Bedrock User Guide.
-    pub fn createPromptVersion(self: *Self, allocator: std.mem.Allocator, input: create_prompt_version.CreatePromptVersionInput, options: create_prompt_version.Options) !create_prompt_version.CreatePromptVersionOutput {
+    pub fn createPromptVersion(self: *Self, allocator: std.mem.Allocator, input: create_prompt_version.CreatePromptVersionInput, options: CallOptions) !create_prompt_version.CreatePromptVersionOutput {
         return create_prompt_version.execute(self, allocator, input, options);
     }
 
     /// Deletes an agent.
-    pub fn deleteAgent(self: *Self, allocator: std.mem.Allocator, input: delete_agent.DeleteAgentInput, options: delete_agent.Options) !delete_agent.DeleteAgentOutput {
+    pub fn deleteAgent(self: *Self, allocator: std.mem.Allocator, input: delete_agent.DeleteAgentInput, options: CallOptions) !delete_agent.DeleteAgentOutput {
         return delete_agent.execute(self, allocator, input, options);
     }
 
     /// Deletes an action group in an agent.
-    pub fn deleteAgentActionGroup(self: *Self, allocator: std.mem.Allocator, input: delete_agent_action_group.DeleteAgentActionGroupInput, options: delete_agent_action_group.Options) !delete_agent_action_group.DeleteAgentActionGroupOutput {
+    pub fn deleteAgentActionGroup(self: *Self, allocator: std.mem.Allocator, input: delete_agent_action_group.DeleteAgentActionGroupInput, options: CallOptions) !delete_agent_action_group.DeleteAgentActionGroupOutput {
         return delete_agent_action_group.execute(self, allocator, input, options);
     }
 
     /// Deletes an alias of an agent.
-    pub fn deleteAgentAlias(self: *Self, allocator: std.mem.Allocator, input: delete_agent_alias.DeleteAgentAliasInput, options: delete_agent_alias.Options) !delete_agent_alias.DeleteAgentAliasOutput {
+    pub fn deleteAgentAlias(self: *Self, allocator: std.mem.Allocator, input: delete_agent_alias.DeleteAgentAliasInput, options: CallOptions) !delete_agent_alias.DeleteAgentAliasOutput {
         return delete_agent_alias.execute(self, allocator, input, options);
     }
 
     /// Deletes a version of an agent.
-    pub fn deleteAgentVersion(self: *Self, allocator: std.mem.Allocator, input: delete_agent_version.DeleteAgentVersionInput, options: delete_agent_version.Options) !delete_agent_version.DeleteAgentVersionOutput {
+    pub fn deleteAgentVersion(self: *Self, allocator: std.mem.Allocator, input: delete_agent_version.DeleteAgentVersionInput, options: CallOptions) !delete_agent_version.DeleteAgentVersionOutput {
         return delete_agent_version.execute(self, allocator, input, options);
     }
 
     /// Deletes a data source from a knowledge base.
-    pub fn deleteDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_data_source.DeleteDataSourceInput, options: delete_data_source.Options) !delete_data_source.DeleteDataSourceOutput {
+    pub fn deleteDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_data_source.DeleteDataSourceInput, options: CallOptions) !delete_data_source.DeleteDataSourceOutput {
         return delete_data_source.execute(self, allocator, input, options);
     }
 
     /// Deletes a flow.
-    pub fn deleteFlow(self: *Self, allocator: std.mem.Allocator, input: delete_flow.DeleteFlowInput, options: delete_flow.Options) !delete_flow.DeleteFlowOutput {
+    pub fn deleteFlow(self: *Self, allocator: std.mem.Allocator, input: delete_flow.DeleteFlowInput, options: CallOptions) !delete_flow.DeleteFlowOutput {
         return delete_flow.execute(self, allocator, input, options);
     }
 
     /// Deletes an alias of a flow.
-    pub fn deleteFlowAlias(self: *Self, allocator: std.mem.Allocator, input: delete_flow_alias.DeleteFlowAliasInput, options: delete_flow_alias.Options) !delete_flow_alias.DeleteFlowAliasOutput {
+    pub fn deleteFlowAlias(self: *Self, allocator: std.mem.Allocator, input: delete_flow_alias.DeleteFlowAliasInput, options: CallOptions) !delete_flow_alias.DeleteFlowAliasOutput {
         return delete_flow_alias.execute(self, allocator, input, options);
     }
 
     /// Deletes a version of a flow.
-    pub fn deleteFlowVersion(self: *Self, allocator: std.mem.Allocator, input: delete_flow_version.DeleteFlowVersionInput, options: delete_flow_version.Options) !delete_flow_version.DeleteFlowVersionOutput {
+    pub fn deleteFlowVersion(self: *Self, allocator: std.mem.Allocator, input: delete_flow_version.DeleteFlowVersionInput, options: CallOptions) !delete_flow_version.DeleteFlowVersionOutput {
         return delete_flow_version.execute(self, allocator, input, options);
     }
 
@@ -302,7 +303,7 @@ pub const Client = struct {
     /// disassociate the knowledge base from any agents that it is associated with
     /// by making a
     /// [DisassociateAgentKnowledgeBase](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_DisassociateAgentKnowledgeBase.html) request.
-    pub fn deleteKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: delete_knowledge_base.DeleteKnowledgeBaseInput, options: delete_knowledge_base.Options) !delete_knowledge_base.DeleteKnowledgeBaseOutput {
+    pub fn deleteKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: delete_knowledge_base.DeleteKnowledgeBaseInput, options: CallOptions) !delete_knowledge_base.DeleteKnowledgeBaseOutput {
         return delete_knowledge_base.execute(self, allocator, input, options);
     }
 
@@ -310,7 +311,7 @@ pub const Client = struct {
     /// base that is connected to it. For more information, see [Ingest changes
     /// directly into a knowledge
     /// base](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html) in the Amazon Bedrock User Guide.
-    pub fn deleteKnowledgeBaseDocuments(self: *Self, allocator: std.mem.Allocator, input: delete_knowledge_base_documents.DeleteKnowledgeBaseDocumentsInput, options: delete_knowledge_base_documents.Options) !delete_knowledge_base_documents.DeleteKnowledgeBaseDocumentsOutput {
+    pub fn deleteKnowledgeBaseDocuments(self: *Self, allocator: std.mem.Allocator, input: delete_knowledge_base_documents.DeleteKnowledgeBaseDocumentsInput, options: CallOptions) !delete_knowledge_base_documents.DeleteKnowledgeBaseDocumentsOutput {
         return delete_knowledge_base_documents.execute(self, allocator, input, options);
     }
 
@@ -318,84 +319,84 @@ pub const Client = struct {
     /// `promptVersion` field or not. For more information, see [Delete prompts from
     /// the Prompt management
     /// tool](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-delete.html) and [Delete a version of a prompt from the Prompt management tool](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html#prompt-management-versions-delete.html) in the Amazon Bedrock User Guide.
-    pub fn deletePrompt(self: *Self, allocator: std.mem.Allocator, input: delete_prompt.DeletePromptInput, options: delete_prompt.Options) !delete_prompt.DeletePromptOutput {
+    pub fn deletePrompt(self: *Self, allocator: std.mem.Allocator, input: delete_prompt.DeletePromptInput, options: CallOptions) !delete_prompt.DeletePromptOutput {
         return delete_prompt.execute(self, allocator, input, options);
     }
 
     /// Disassociates an agent collaborator.
-    pub fn disassociateAgentCollaborator(self: *Self, allocator: std.mem.Allocator, input: disassociate_agent_collaborator.DisassociateAgentCollaboratorInput, options: disassociate_agent_collaborator.Options) !disassociate_agent_collaborator.DisassociateAgentCollaboratorOutput {
+    pub fn disassociateAgentCollaborator(self: *Self, allocator: std.mem.Allocator, input: disassociate_agent_collaborator.DisassociateAgentCollaboratorInput, options: CallOptions) !disassociate_agent_collaborator.DisassociateAgentCollaboratorOutput {
         return disassociate_agent_collaborator.execute(self, allocator, input, options);
     }
 
     /// Disassociates a knowledge base from an agent.
-    pub fn disassociateAgentKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: disassociate_agent_knowledge_base.DisassociateAgentKnowledgeBaseInput, options: disassociate_agent_knowledge_base.Options) !disassociate_agent_knowledge_base.DisassociateAgentKnowledgeBaseOutput {
+    pub fn disassociateAgentKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: disassociate_agent_knowledge_base.DisassociateAgentKnowledgeBaseInput, options: CallOptions) !disassociate_agent_knowledge_base.DisassociateAgentKnowledgeBaseOutput {
         return disassociate_agent_knowledge_base.execute(self, allocator, input, options);
     }
 
     /// Gets information about an agent.
-    pub fn getAgent(self: *Self, allocator: std.mem.Allocator, input: get_agent.GetAgentInput, options: get_agent.Options) !get_agent.GetAgentOutput {
+    pub fn getAgent(self: *Self, allocator: std.mem.Allocator, input: get_agent.GetAgentInput, options: CallOptions) !get_agent.GetAgentOutput {
         return get_agent.execute(self, allocator, input, options);
     }
 
     /// Gets information about an action group for an agent.
-    pub fn getAgentActionGroup(self: *Self, allocator: std.mem.Allocator, input: get_agent_action_group.GetAgentActionGroupInput, options: get_agent_action_group.Options) !get_agent_action_group.GetAgentActionGroupOutput {
+    pub fn getAgentActionGroup(self: *Self, allocator: std.mem.Allocator, input: get_agent_action_group.GetAgentActionGroupInput, options: CallOptions) !get_agent_action_group.GetAgentActionGroupOutput {
         return get_agent_action_group.execute(self, allocator, input, options);
     }
 
     /// Gets information about an alias of an agent.
-    pub fn getAgentAlias(self: *Self, allocator: std.mem.Allocator, input: get_agent_alias.GetAgentAliasInput, options: get_agent_alias.Options) !get_agent_alias.GetAgentAliasOutput {
+    pub fn getAgentAlias(self: *Self, allocator: std.mem.Allocator, input: get_agent_alias.GetAgentAliasInput, options: CallOptions) !get_agent_alias.GetAgentAliasOutput {
         return get_agent_alias.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about an agent's collaborator.
-    pub fn getAgentCollaborator(self: *Self, allocator: std.mem.Allocator, input: get_agent_collaborator.GetAgentCollaboratorInput, options: get_agent_collaborator.Options) !get_agent_collaborator.GetAgentCollaboratorOutput {
+    pub fn getAgentCollaborator(self: *Self, allocator: std.mem.Allocator, input: get_agent_collaborator.GetAgentCollaboratorInput, options: CallOptions) !get_agent_collaborator.GetAgentCollaboratorOutput {
         return get_agent_collaborator.execute(self, allocator, input, options);
     }
 
     /// Gets information about a knowledge base associated with an agent.
-    pub fn getAgentKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: get_agent_knowledge_base.GetAgentKnowledgeBaseInput, options: get_agent_knowledge_base.Options) !get_agent_knowledge_base.GetAgentKnowledgeBaseOutput {
+    pub fn getAgentKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: get_agent_knowledge_base.GetAgentKnowledgeBaseInput, options: CallOptions) !get_agent_knowledge_base.GetAgentKnowledgeBaseOutput {
         return get_agent_knowledge_base.execute(self, allocator, input, options);
     }
 
     /// Gets details about a version of an agent.
-    pub fn getAgentVersion(self: *Self, allocator: std.mem.Allocator, input: get_agent_version.GetAgentVersionInput, options: get_agent_version.Options) !get_agent_version.GetAgentVersionOutput {
+    pub fn getAgentVersion(self: *Self, allocator: std.mem.Allocator, input: get_agent_version.GetAgentVersionInput, options: CallOptions) !get_agent_version.GetAgentVersionOutput {
         return get_agent_version.execute(self, allocator, input, options);
     }
 
     /// Gets information about a data source.
-    pub fn getDataSource(self: *Self, allocator: std.mem.Allocator, input: get_data_source.GetDataSourceInput, options: get_data_source.Options) !get_data_source.GetDataSourceOutput {
+    pub fn getDataSource(self: *Self, allocator: std.mem.Allocator, input: get_data_source.GetDataSourceInput, options: CallOptions) !get_data_source.GetDataSourceOutput {
         return get_data_source.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a flow. For more information, see [Manage a flow
     /// in Amazon
     /// Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-manage.html) in the Amazon Bedrock User Guide.
-    pub fn getFlow(self: *Self, allocator: std.mem.Allocator, input: get_flow.GetFlowInput, options: get_flow.Options) !get_flow.GetFlowOutput {
+    pub fn getFlow(self: *Self, allocator: std.mem.Allocator, input: get_flow.GetFlowInput, options: CallOptions) !get_flow.GetFlowOutput {
         return get_flow.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a flow. For more information, see [Deploy a flow
     /// in Amazon
     /// Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-deploy.html) in the Amazon Bedrock User Guide.
-    pub fn getFlowAlias(self: *Self, allocator: std.mem.Allocator, input: get_flow_alias.GetFlowAliasInput, options: get_flow_alias.Options) !get_flow_alias.GetFlowAliasOutput {
+    pub fn getFlowAlias(self: *Self, allocator: std.mem.Allocator, input: get_flow_alias.GetFlowAliasInput, options: CallOptions) !get_flow_alias.GetFlowAliasOutput {
         return get_flow_alias.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a version of a flow. For more information, see
     /// [Deploy a flow in Amazon
     /// Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-deploy.html) in the Amazon Bedrock User Guide.
-    pub fn getFlowVersion(self: *Self, allocator: std.mem.Allocator, input: get_flow_version.GetFlowVersionInput, options: get_flow_version.Options) !get_flow_version.GetFlowVersionOutput {
+    pub fn getFlowVersion(self: *Self, allocator: std.mem.Allocator, input: get_flow_version.GetFlowVersionInput, options: CallOptions) !get_flow_version.GetFlowVersionOutput {
         return get_flow_version.execute(self, allocator, input, options);
     }
 
     /// Gets information about a data ingestion job. Data sources are ingested into
     /// your knowledge base so that Large Language Models (LLMs) can use your data.
-    pub fn getIngestionJob(self: *Self, allocator: std.mem.Allocator, input: get_ingestion_job.GetIngestionJobInput, options: get_ingestion_job.Options) !get_ingestion_job.GetIngestionJobOutput {
+    pub fn getIngestionJob(self: *Self, allocator: std.mem.Allocator, input: get_ingestion_job.GetIngestionJobInput, options: CallOptions) !get_ingestion_job.GetIngestionJobOutput {
         return get_ingestion_job.execute(self, allocator, input, options);
     }
 
     /// Gets information about a knowledge base.
-    pub fn getKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: get_knowledge_base.GetKnowledgeBaseInput, options: get_knowledge_base.Options) !get_knowledge_base.GetKnowledgeBaseOutput {
+    pub fn getKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: get_knowledge_base.GetKnowledgeBaseInput, options: CallOptions) !get_knowledge_base.GetKnowledgeBaseOutput {
         return get_knowledge_base.execute(self, allocator, input, options);
     }
 
@@ -403,7 +404,7 @@ pub const Client = struct {
     /// knowledge base. For more information, see [Ingest changes directly into a
     /// knowledge
     /// base](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html) in the Amazon Bedrock User Guide.
-    pub fn getKnowledgeBaseDocuments(self: *Self, allocator: std.mem.Allocator, input: get_knowledge_base_documents.GetKnowledgeBaseDocumentsInput, options: get_knowledge_base_documents.Options) !get_knowledge_base_documents.GetKnowledgeBaseDocumentsOutput {
+    pub fn getKnowledgeBaseDocuments(self: *Self, allocator: std.mem.Allocator, input: get_knowledge_base_documents.GetKnowledgeBaseDocumentsInput, options: CallOptions) !get_knowledge_base_documents.GetKnowledgeBaseDocumentsOutput {
         return get_knowledge_base_documents.execute(self, allocator, input, options);
     }
 
@@ -412,7 +413,7 @@ pub const Client = struct {
     /// field or not. For more information, see [View information about prompts
     /// using Prompt
     /// management](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-view.html) and [View information about a version of your prompt](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html#prompt-management-versions-view.html) in the Amazon Bedrock User Guide.
-    pub fn getPrompt(self: *Self, allocator: std.mem.Allocator, input: get_prompt.GetPromptInput, options: get_prompt.Options) !get_prompt.GetPromptOutput {
+    pub fn getPrompt(self: *Self, allocator: std.mem.Allocator, input: get_prompt.GetPromptInput, options: CallOptions) !get_prompt.GetPromptOutput {
         return get_prompt.execute(self, allocator, input, options);
     }
 
@@ -421,68 +422,68 @@ pub const Client = struct {
     /// must match the type of the data source that you specify in the header. For
     /// more information, see [Ingest changes directly into a knowledge
     /// base](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html) in the Amazon Bedrock User Guide.
-    pub fn ingestKnowledgeBaseDocuments(self: *Self, allocator: std.mem.Allocator, input: ingest_knowledge_base_documents.IngestKnowledgeBaseDocumentsInput, options: ingest_knowledge_base_documents.Options) !ingest_knowledge_base_documents.IngestKnowledgeBaseDocumentsOutput {
+    pub fn ingestKnowledgeBaseDocuments(self: *Self, allocator: std.mem.Allocator, input: ingest_knowledge_base_documents.IngestKnowledgeBaseDocumentsInput, options: CallOptions) !ingest_knowledge_base_documents.IngestKnowledgeBaseDocumentsOutput {
         return ingest_knowledge_base_documents.execute(self, allocator, input, options);
     }
 
     /// Lists the action groups for an agent and information about each one.
-    pub fn listAgentActionGroups(self: *Self, allocator: std.mem.Allocator, input: list_agent_action_groups.ListAgentActionGroupsInput, options: list_agent_action_groups.Options) !list_agent_action_groups.ListAgentActionGroupsOutput {
+    pub fn listAgentActionGroups(self: *Self, allocator: std.mem.Allocator, input: list_agent_action_groups.ListAgentActionGroupsInput, options: CallOptions) !list_agent_action_groups.ListAgentActionGroupsOutput {
         return list_agent_action_groups.execute(self, allocator, input, options);
     }
 
     /// Lists the aliases of an agent and information about each one.
-    pub fn listAgentAliases(self: *Self, allocator: std.mem.Allocator, input: list_agent_aliases.ListAgentAliasesInput, options: list_agent_aliases.Options) !list_agent_aliases.ListAgentAliasesOutput {
+    pub fn listAgentAliases(self: *Self, allocator: std.mem.Allocator, input: list_agent_aliases.ListAgentAliasesInput, options: CallOptions) !list_agent_aliases.ListAgentAliasesOutput {
         return list_agent_aliases.execute(self, allocator, input, options);
     }
 
     /// Retrieve a list of an agent's collaborators.
-    pub fn listAgentCollaborators(self: *Self, allocator: std.mem.Allocator, input: list_agent_collaborators.ListAgentCollaboratorsInput, options: list_agent_collaborators.Options) !list_agent_collaborators.ListAgentCollaboratorsOutput {
+    pub fn listAgentCollaborators(self: *Self, allocator: std.mem.Allocator, input: list_agent_collaborators.ListAgentCollaboratorsInput, options: CallOptions) !list_agent_collaborators.ListAgentCollaboratorsOutput {
         return list_agent_collaborators.execute(self, allocator, input, options);
     }
 
     /// Lists knowledge bases associated with an agent and information about each
     /// one.
-    pub fn listAgentKnowledgeBases(self: *Self, allocator: std.mem.Allocator, input: list_agent_knowledge_bases.ListAgentKnowledgeBasesInput, options: list_agent_knowledge_bases.Options) !list_agent_knowledge_bases.ListAgentKnowledgeBasesOutput {
+    pub fn listAgentKnowledgeBases(self: *Self, allocator: std.mem.Allocator, input: list_agent_knowledge_bases.ListAgentKnowledgeBasesInput, options: CallOptions) !list_agent_knowledge_bases.ListAgentKnowledgeBasesOutput {
         return list_agent_knowledge_bases.execute(self, allocator, input, options);
     }
 
     /// Lists the versions of an agent and information about each version.
-    pub fn listAgentVersions(self: *Self, allocator: std.mem.Allocator, input: list_agent_versions.ListAgentVersionsInput, options: list_agent_versions.Options) !list_agent_versions.ListAgentVersionsOutput {
+    pub fn listAgentVersions(self: *Self, allocator: std.mem.Allocator, input: list_agent_versions.ListAgentVersionsInput, options: CallOptions) !list_agent_versions.ListAgentVersionsOutput {
         return list_agent_versions.execute(self, allocator, input, options);
     }
 
     /// Lists the agents belonging to an account and information about each agent.
-    pub fn listAgents(self: *Self, allocator: std.mem.Allocator, input: list_agents.ListAgentsInput, options: list_agents.Options) !list_agents.ListAgentsOutput {
+    pub fn listAgents(self: *Self, allocator: std.mem.Allocator, input: list_agents.ListAgentsInput, options: CallOptions) !list_agents.ListAgentsOutput {
         return list_agents.execute(self, allocator, input, options);
     }
 
     /// Lists the data sources in a knowledge base and information about each one.
-    pub fn listDataSources(self: *Self, allocator: std.mem.Allocator, input: list_data_sources.ListDataSourcesInput, options: list_data_sources.Options) !list_data_sources.ListDataSourcesOutput {
+    pub fn listDataSources(self: *Self, allocator: std.mem.Allocator, input: list_data_sources.ListDataSourcesInput, options: CallOptions) !list_data_sources.ListDataSourcesOutput {
         return list_data_sources.execute(self, allocator, input, options);
     }
 
     /// Returns a list of aliases for a flow.
-    pub fn listFlowAliases(self: *Self, allocator: std.mem.Allocator, input: list_flow_aliases.ListFlowAliasesInput, options: list_flow_aliases.Options) !list_flow_aliases.ListFlowAliasesOutput {
+    pub fn listFlowAliases(self: *Self, allocator: std.mem.Allocator, input: list_flow_aliases.ListFlowAliasesInput, options: CallOptions) !list_flow_aliases.ListFlowAliasesOutput {
         return list_flow_aliases.execute(self, allocator, input, options);
     }
 
     /// Returns a list of information about each flow. For more information, see
     /// [Deploy a flow in Amazon
     /// Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-deploy.html) in the Amazon Bedrock User Guide.
-    pub fn listFlowVersions(self: *Self, allocator: std.mem.Allocator, input: list_flow_versions.ListFlowVersionsInput, options: list_flow_versions.Options) !list_flow_versions.ListFlowVersionsOutput {
+    pub fn listFlowVersions(self: *Self, allocator: std.mem.Allocator, input: list_flow_versions.ListFlowVersionsInput, options: CallOptions) !list_flow_versions.ListFlowVersionsOutput {
         return list_flow_versions.execute(self, allocator, input, options);
     }
 
     /// Returns a list of flows and information about each flow. For more
     /// information, see [Manage a flow in Amazon
     /// Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-manage.html) in the Amazon Bedrock User Guide.
-    pub fn listFlows(self: *Self, allocator: std.mem.Allocator, input: list_flows.ListFlowsInput, options: list_flows.Options) !list_flows.ListFlowsOutput {
+    pub fn listFlows(self: *Self, allocator: std.mem.Allocator, input: list_flows.ListFlowsInput, options: CallOptions) !list_flows.ListFlowsOutput {
         return list_flows.execute(self, allocator, input, options);
     }
 
     /// Lists the data ingestion jobs for a data source. The list also includes
     /// information about each job.
-    pub fn listIngestionJobs(self: *Self, allocator: std.mem.Allocator, input: list_ingestion_jobs.ListIngestionJobsInput, options: list_ingestion_jobs.Options) !list_ingestion_jobs.ListIngestionJobsOutput {
+    pub fn listIngestionJobs(self: *Self, allocator: std.mem.Allocator, input: list_ingestion_jobs.ListIngestionJobsInput, options: CallOptions) !list_ingestion_jobs.ListIngestionJobsOutput {
         return list_ingestion_jobs.execute(self, allocator, input, options);
     }
 
@@ -490,13 +491,13 @@ pub const Client = struct {
     /// a knowledge base. For more information, see [Ingest changes directly into a
     /// knowledge
     /// base](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html) in the Amazon Bedrock User Guide.
-    pub fn listKnowledgeBaseDocuments(self: *Self, allocator: std.mem.Allocator, input: list_knowledge_base_documents.ListKnowledgeBaseDocumentsInput, options: list_knowledge_base_documents.Options) !list_knowledge_base_documents.ListKnowledgeBaseDocumentsOutput {
+    pub fn listKnowledgeBaseDocuments(self: *Self, allocator: std.mem.Allocator, input: list_knowledge_base_documents.ListKnowledgeBaseDocumentsInput, options: CallOptions) !list_knowledge_base_documents.ListKnowledgeBaseDocumentsOutput {
         return list_knowledge_base_documents.execute(self, allocator, input, options);
     }
 
     /// Lists the knowledge bases in an account. The list also includesinformation
     /// about each knowledge base.
-    pub fn listKnowledgeBases(self: *Self, allocator: std.mem.Allocator, input: list_knowledge_bases.ListKnowledgeBasesInput, options: list_knowledge_bases.Options) !list_knowledge_bases.ListKnowledgeBasesOutput {
+    pub fn listKnowledgeBases(self: *Self, allocator: std.mem.Allocator, input: list_knowledge_bases.ListKnowledgeBasesInput, options: CallOptions) !list_knowledge_bases.ListKnowledgeBasesOutput {
         return list_knowledge_bases.execute(self, allocator, input, options);
     }
 
@@ -505,75 +506,75 @@ pub const Client = struct {
     /// depending on whether you include the `promptIdentifier` field or not. For
     /// more information, see [View information about prompts using Prompt
     /// management](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-view.html) in the Amazon Bedrock User Guide.
-    pub fn listPrompts(self: *Self, allocator: std.mem.Allocator, input: list_prompts.ListPromptsInput, options: list_prompts.Options) !list_prompts.ListPromptsOutput {
+    pub fn listPrompts(self: *Self, allocator: std.mem.Allocator, input: list_prompts.ListPromptsInput, options: CallOptions) !list_prompts.ListPromptsOutput {
         return list_prompts.execute(self, allocator, input, options);
     }
 
     /// List all the tags for the resource you specify.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Creates a `DRAFT` version of the agent that can be used for internal
     /// testing.
-    pub fn prepareAgent(self: *Self, allocator: std.mem.Allocator, input: prepare_agent.PrepareAgentInput, options: prepare_agent.Options) !prepare_agent.PrepareAgentOutput {
+    pub fn prepareAgent(self: *Self, allocator: std.mem.Allocator, input: prepare_agent.PrepareAgentInput, options: CallOptions) !prepare_agent.PrepareAgentOutput {
         return prepare_agent.execute(self, allocator, input, options);
     }
 
     /// Prepares the `DRAFT` version of a flow so that it can be invoked. For more
     /// information, see [Test a flow in Amazon
     /// Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-test.html) in the Amazon Bedrock User Guide.
-    pub fn prepareFlow(self: *Self, allocator: std.mem.Allocator, input: prepare_flow.PrepareFlowInput, options: prepare_flow.Options) !prepare_flow.PrepareFlowOutput {
+    pub fn prepareFlow(self: *Self, allocator: std.mem.Allocator, input: prepare_flow.PrepareFlowInput, options: CallOptions) !prepare_flow.PrepareFlowOutput {
         return prepare_flow.execute(self, allocator, input, options);
     }
 
     /// Begins a data ingestion job. Data sources are ingested into your knowledge
     /// base so that Large Language Models (LLMs) can use your data.
-    pub fn startIngestionJob(self: *Self, allocator: std.mem.Allocator, input: start_ingestion_job.StartIngestionJobInput, options: start_ingestion_job.Options) !start_ingestion_job.StartIngestionJobOutput {
+    pub fn startIngestionJob(self: *Self, allocator: std.mem.Allocator, input: start_ingestion_job.StartIngestionJobInput, options: CallOptions) !start_ingestion_job.StartIngestionJobOutput {
         return start_ingestion_job.execute(self, allocator, input, options);
     }
 
     /// Stops a currently running data ingestion job. You can send a
     /// `StartIngestionJob` request again to ingest the rest of your data when you
     /// are ready.
-    pub fn stopIngestionJob(self: *Self, allocator: std.mem.Allocator, input: stop_ingestion_job.StopIngestionJobInput, options: stop_ingestion_job.Options) !stop_ingestion_job.StopIngestionJobOutput {
+    pub fn stopIngestionJob(self: *Self, allocator: std.mem.Allocator, input: stop_ingestion_job.StopIngestionJobInput, options: CallOptions) !stop_ingestion_job.StopIngestionJobOutput {
         return stop_ingestion_job.execute(self, allocator, input, options);
     }
 
     /// Associate tags with a resource. For more information, see [Tagging
     /// resources](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html) in the Amazon Bedrock User Guide.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Remove tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration of an agent.
-    pub fn updateAgent(self: *Self, allocator: std.mem.Allocator, input: update_agent.UpdateAgentInput, options: update_agent.Options) !update_agent.UpdateAgentOutput {
+    pub fn updateAgent(self: *Self, allocator: std.mem.Allocator, input: update_agent.UpdateAgentInput, options: CallOptions) !update_agent.UpdateAgentOutput {
         return update_agent.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration for an action group for an agent.
-    pub fn updateAgentActionGroup(self: *Self, allocator: std.mem.Allocator, input: update_agent_action_group.UpdateAgentActionGroupInput, options: update_agent_action_group.Options) !update_agent_action_group.UpdateAgentActionGroupOutput {
+    pub fn updateAgentActionGroup(self: *Self, allocator: std.mem.Allocator, input: update_agent_action_group.UpdateAgentActionGroupInput, options: CallOptions) !update_agent_action_group.UpdateAgentActionGroupOutput {
         return update_agent_action_group.execute(self, allocator, input, options);
     }
 
     /// Updates configurations for an alias of an agent.
-    pub fn updateAgentAlias(self: *Self, allocator: std.mem.Allocator, input: update_agent_alias.UpdateAgentAliasInput, options: update_agent_alias.Options) !update_agent_alias.UpdateAgentAliasOutput {
+    pub fn updateAgentAlias(self: *Self, allocator: std.mem.Allocator, input: update_agent_alias.UpdateAgentAliasInput, options: CallOptions) !update_agent_alias.UpdateAgentAliasOutput {
         return update_agent_alias.execute(self, allocator, input, options);
     }
 
     /// Updates an agent's collaborator.
-    pub fn updateAgentCollaborator(self: *Self, allocator: std.mem.Allocator, input: update_agent_collaborator.UpdateAgentCollaboratorInput, options: update_agent_collaborator.Options) !update_agent_collaborator.UpdateAgentCollaboratorOutput {
+    pub fn updateAgentCollaborator(self: *Self, allocator: std.mem.Allocator, input: update_agent_collaborator.UpdateAgentCollaboratorInput, options: CallOptions) !update_agent_collaborator.UpdateAgentCollaboratorOutput {
         return update_agent_collaborator.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration for a knowledge base that has been associated with
     /// an agent.
-    pub fn updateAgentKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: update_agent_knowledge_base.UpdateAgentKnowledgeBaseInput, options: update_agent_knowledge_base.Options) !update_agent_knowledge_base.UpdateAgentKnowledgeBaseOutput {
+    pub fn updateAgentKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: update_agent_knowledge_base.UpdateAgentKnowledgeBaseInput, options: CallOptions) !update_agent_knowledge_base.UpdateAgentKnowledgeBaseOutput {
         return update_agent_knowledge_base.execute(self, allocator, input, options);
     }
 
@@ -581,14 +582,14 @@ pub const Client = struct {
     ///
     /// You can't change the `chunkingConfiguration` after you create the data
     /// source connector. Specify the existing `chunkingConfiguration`.
-    pub fn updateDataSource(self: *Self, allocator: std.mem.Allocator, input: update_data_source.UpdateDataSourceInput, options: update_data_source.Options) !update_data_source.UpdateDataSourceOutput {
+    pub fn updateDataSource(self: *Self, allocator: std.mem.Allocator, input: update_data_source.UpdateDataSourceInput, options: CallOptions) !update_data_source.UpdateDataSourceOutput {
         return update_data_source.execute(self, allocator, input, options);
     }
 
     /// Modifies a flow. Include both fields that you want to keep and fields that
     /// you want to change. For more information, see [How it
     /// works](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-how-it-works.html) and [Create a flow in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-create.html) in the Amazon Bedrock User Guide.
-    pub fn updateFlow(self: *Self, allocator: std.mem.Allocator, input: update_flow.UpdateFlowInput, options: update_flow.Options) !update_flow.UpdateFlowOutput {
+    pub fn updateFlow(self: *Self, allocator: std.mem.Allocator, input: update_flow.UpdateFlowInput, options: CallOptions) !update_flow.UpdateFlowOutput {
         return update_flow.execute(self, allocator, input, options);
     }
 
@@ -596,7 +597,7 @@ pub const Client = struct {
     /// ones that you want to change. For more information, see [Deploy a flow in
     /// Amazon
     /// Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-deploy.html) in the Amazon Bedrock User Guide.
-    pub fn updateFlowAlias(self: *Self, allocator: std.mem.Allocator, input: update_flow_alias.UpdateFlowAliasInput, options: update_flow_alias.Options) !update_flow_alias.UpdateFlowAliasOutput {
+    pub fn updateFlowAlias(self: *Self, allocator: std.mem.Allocator, input: update_flow_alias.UpdateFlowAliasInput, options: CallOptions) !update_flow_alias.UpdateFlowAliasOutput {
         return update_flow_alias.execute(self, allocator, input, options);
     }
 
@@ -614,7 +615,7 @@ pub const Client = struct {
     /// fields, so you must specify the same configurations as when you created the
     /// knowledge base. You can send a
     /// [GetKnowledgeBase](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetKnowledgeBase.html) request and copy the same configurations.
-    pub fn updateKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: update_knowledge_base.UpdateKnowledgeBaseInput, options: update_knowledge_base.Options) !update_knowledge_base.UpdateKnowledgeBaseOutput {
+    pub fn updateKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: update_knowledge_base.UpdateKnowledgeBaseInput, options: CallOptions) !update_knowledge_base.UpdateKnowledgeBaseOutput {
         return update_knowledge_base.execute(self, allocator, input, options);
     }
 
@@ -622,12 +623,12 @@ pub const Client = struct {
     /// to keep and fields that you want to replace. For more information, see
     /// [Prompt management in Amazon
     /// Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html) and [Edit prompts in your prompt library](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-edit) in the Amazon Bedrock User Guide.
-    pub fn updatePrompt(self: *Self, allocator: std.mem.Allocator, input: update_prompt.UpdatePromptInput, options: update_prompt.Options) !update_prompt.UpdatePromptOutput {
+    pub fn updatePrompt(self: *Self, allocator: std.mem.Allocator, input: update_prompt.UpdatePromptInput, options: CallOptions) !update_prompt.UpdatePromptOutput {
         return update_prompt.execute(self, allocator, input, options);
     }
 
     /// Validates the definition of a flow.
-    pub fn validateFlowDefinition(self: *Self, allocator: std.mem.Allocator, input: validate_flow_definition.ValidateFlowDefinitionInput, options: validate_flow_definition.Options) !validate_flow_definition.ValidateFlowDefinitionOutput {
+    pub fn validateFlowDefinition(self: *Self, allocator: std.mem.Allocator, input: validate_flow_definition.ValidateFlowDefinitionInput, options: CallOptions) !validate_flow_definition.ValidateFlowDefinitionOutput {
         return validate_flow_definition.execute(self, allocator, input, options);
     }
 

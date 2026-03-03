@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MedicalScribeChannelDefinition = @import("medical_scribe_channel_definition.zig").MedicalScribeChannelDefinition;
 const Media = @import("media.zig").Media;
@@ -137,11 +138,7 @@ pub const StartMedicalScribeJobOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartMedicalScribeJobInput, options: Options) !StartMedicalScribeJobOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartMedicalScribeJobInput, options: CallOptions) !StartMedicalScribeJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

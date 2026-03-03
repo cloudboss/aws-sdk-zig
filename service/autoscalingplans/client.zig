@@ -7,6 +7,7 @@ const describe_scaling_plan_resources = @import("describe_scaling_plan_resources
 const describe_scaling_plans = @import("describe_scaling_plans.zig");
 const get_scaling_plan_resource_forecast_data = @import("get_scaling_plan_resource_forecast_data.zig");
 const update_scaling_plan = @import("update_scaling_plan.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -37,7 +38,7 @@ pub const Client = struct {
     }
 
     /// Creates a scaling plan.
-    pub fn createScalingPlan(self: *Self, allocator: std.mem.Allocator, input: create_scaling_plan.CreateScalingPlanInput, options: create_scaling_plan.Options) !create_scaling_plan.CreateScalingPlanOutput {
+    pub fn createScalingPlan(self: *Self, allocator: std.mem.Allocator, input: create_scaling_plan.CreateScalingPlanInput, options: CallOptions) !create_scaling_plan.CreateScalingPlanOutput {
         return create_scaling_plan.execute(self, allocator, input, options);
     }
 
@@ -49,17 +50,17 @@ pub const Client = struct {
     /// If the plan has launched resources or has scaling activities in progress,
     /// you must
     /// delete those resources separately.
-    pub fn deleteScalingPlan(self: *Self, allocator: std.mem.Allocator, input: delete_scaling_plan.DeleteScalingPlanInput, options: delete_scaling_plan.Options) !delete_scaling_plan.DeleteScalingPlanOutput {
+    pub fn deleteScalingPlan(self: *Self, allocator: std.mem.Allocator, input: delete_scaling_plan.DeleteScalingPlanInput, options: CallOptions) !delete_scaling_plan.DeleteScalingPlanOutput {
         return delete_scaling_plan.execute(self, allocator, input, options);
     }
 
     /// Describes the scalable resources in the specified scaling plan.
-    pub fn describeScalingPlanResources(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_plan_resources.DescribeScalingPlanResourcesInput, options: describe_scaling_plan_resources.Options) !describe_scaling_plan_resources.DescribeScalingPlanResourcesOutput {
+    pub fn describeScalingPlanResources(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_plan_resources.DescribeScalingPlanResourcesInput, options: CallOptions) !describe_scaling_plan_resources.DescribeScalingPlanResourcesOutput {
         return describe_scaling_plan_resources.execute(self, allocator, input, options);
     }
 
     /// Describes one or more of your scaling plans.
-    pub fn describeScalingPlans(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_plans.DescribeScalingPlansInput, options: describe_scaling_plans.Options) !describe_scaling_plans.DescribeScalingPlansOutput {
+    pub fn describeScalingPlans(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_plans.DescribeScalingPlansInput, options: CallOptions) !describe_scaling_plans.DescribeScalingPlansOutput {
         return describe_scaling_plans.execute(self, allocator, input, options);
     }
 
@@ -70,7 +71,7 @@ pub const Client = struct {
     /// calculated using historical data points from a specified CloudWatch load
     /// metric. Data points are
     /// available for up to 56 days.
-    pub fn getScalingPlanResourceForecastData(self: *Self, allocator: std.mem.Allocator, input: get_scaling_plan_resource_forecast_data.GetScalingPlanResourceForecastDataInput, options: get_scaling_plan_resource_forecast_data.Options) !get_scaling_plan_resource_forecast_data.GetScalingPlanResourceForecastDataOutput {
+    pub fn getScalingPlanResourceForecastData(self: *Self, allocator: std.mem.Allocator, input: get_scaling_plan_resource_forecast_data.GetScalingPlanResourceForecastDataInput, options: CallOptions) !get_scaling_plan_resource_forecast_data.GetScalingPlanResourceForecastDataOutput {
         return get_scaling_plan_resource_forecast_data.execute(self, allocator, input, options);
     }
 
@@ -79,7 +80,7 @@ pub const Client = struct {
     /// You cannot update a scaling plan if it is in the process of being created,
     /// updated, or
     /// deleted.
-    pub fn updateScalingPlan(self: *Self, allocator: std.mem.Allocator, input: update_scaling_plan.UpdateScalingPlanInput, options: update_scaling_plan.Options) !update_scaling_plan.UpdateScalingPlanOutput {
+    pub fn updateScalingPlan(self: *Self, allocator: std.mem.Allocator, input: update_scaling_plan.UpdateScalingPlanInput, options: CallOptions) !update_scaling_plan.UpdateScalingPlanOutput {
         return update_scaling_plan.execute(self, allocator, input, options);
     }
 };

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const S3AccessConfig = @import("s3_access_config.zig").S3AccessConfig;
 const ETagAlgorithmFamily = @import("e_tag_algorithm_family.zig").ETagAlgorithmFamily;
@@ -100,11 +101,7 @@ pub const UpdateSequenceStoreOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSequenceStoreInput, options: Options) !UpdateSequenceStoreOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSequenceStoreInput, options: CallOptions) !UpdateSequenceStoreOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

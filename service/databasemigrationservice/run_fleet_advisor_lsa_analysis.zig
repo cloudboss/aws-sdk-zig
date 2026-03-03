@@ -2,9 +2,10 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
-const RunFleetAdvisorLsaAnalysisInput = struct {};
+pub const RunFleetAdvisorLsaAnalysisInput = struct {};
 
 pub const RunFleetAdvisorLsaAnalysisOutput = struct {
     /// The ID of the LSA analysis run.
@@ -19,11 +20,7 @@ pub const RunFleetAdvisorLsaAnalysisOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RunFleetAdvisorLsaAnalysisInput, options: Options) !RunFleetAdvisorLsaAnalysisOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RunFleetAdvisorLsaAnalysisInput, options: CallOptions) !RunFleetAdvisorLsaAnalysisOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,21 +2,18 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DataStoreResponse = @import("data_store_response.zig").DataStoreResponse;
 const MatchingResponse = @import("matching_response.zig").MatchingResponse;
 const RuleBasedMatchingResponse = @import("rule_based_matching_response.zig").RuleBasedMatchingResponse;
 const DomainStats = @import("domain_stats.zig").DomainStats;
 
-const GetDomainInput = @import("get_domain_request.zig").GetDomainRequest;
+pub const GetDomainInput = @import("get_domain_request.zig").GetDomainRequest;
 
-const GetDomainOutput = @import("get_domain_response.zig").GetDomainResponse;
+pub const GetDomainOutput = @import("get_domain_response.zig").GetDomainResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDomainInput, options: Options) !GetDomainOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDomainInput, options: CallOptions) !GetDomainOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

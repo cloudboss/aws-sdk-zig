@@ -72,6 +72,7 @@ const update_server = @import("update_server.zig");
 const update_user = @import("update_user.zig");
 const update_web_app = @import("update_web_app.zig");
 const update_web_app_customization = @import("update_web_app_customization.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -109,7 +110,7 @@ pub const Client = struct {
     /// 50,000 users, but only a small fraction might need the ability to transfer
     /// files to the server. An administrator can use `CreateAccess` to limit the
     /// access to the correct set of users who need this ability.
-    pub fn createAccess(self: *Self, allocator: std.mem.Allocator, input: create_access.CreateAccessInput, options: create_access.Options) !create_access.CreateAccessOutput {
+    pub fn createAccess(self: *Self, allocator: std.mem.Allocator, input: create_access.CreateAccessInput, options: CallOptions) !create_access.CreateAccessOutput {
         return create_access.execute(self, allocator, input, options);
     }
 
@@ -124,7 +125,7 @@ pub const Client = struct {
     ///
     /// Specify *either* `BaseDirectory` or `CustomDirectories`, but not both.
     /// Specifying both causes the command to fail.
-    pub fn createAgreement(self: *Self, allocator: std.mem.Allocator, input: create_agreement.CreateAgreementInput, options: create_agreement.Options) !create_agreement.CreateAgreementOutput {
+    pub fn createAgreement(self: *Self, allocator: std.mem.Allocator, input: create_agreement.CreateAgreementInput, options: CallOptions) !create_agreement.CreateAgreementOutput {
         return create_agreement.execute(self, allocator, input, options);
     }
 
@@ -137,12 +138,12 @@ pub const Client = struct {
     ///
     /// You must specify exactly one configuration object: either for AS2
     /// (`As2Config`) or SFTP (`SftpConfig`).
-    pub fn createConnector(self: *Self, allocator: std.mem.Allocator, input: create_connector.CreateConnectorInput, options: create_connector.Options) !create_connector.CreateConnectorOutput {
+    pub fn createConnector(self: *Self, allocator: std.mem.Allocator, input: create_connector.CreateConnectorInput, options: CallOptions) !create_connector.CreateConnectorOutput {
         return create_connector.execute(self, allocator, input, options);
     }
 
     /// Creates the local or partner profile to use for AS2 transfers.
-    pub fn createProfile(self: *Self, allocator: std.mem.Allocator, input: create_profile.CreateProfileInput, options: create_profile.Options) !create_profile.CreateProfileOutput {
+    pub fn createProfile(self: *Self, allocator: std.mem.Allocator, input: create_profile.CreateProfileInput, options: CallOptions) !create_profile.CreateProfileOutput {
         return create_profile.execute(self, allocator, input, options);
     }
 
@@ -151,7 +152,7 @@ pub const Client = struct {
     /// transfer protocol-enabled server or when you work with users, use the
     /// service-generated `ServerId` property that is assigned to the newly created
     /// server.
-    pub fn createServer(self: *Self, allocator: std.mem.Allocator, input: create_server.CreateServerInput, options: create_server.Options) !create_server.CreateServerOutput {
+    pub fn createServer(self: *Self, allocator: std.mem.Allocator, input: create_server.CreateServerInput, options: CallOptions) !create_server.CreateServerOutput {
         return create_server.execute(self, allocator, input, options);
     }
 
@@ -163,7 +164,7 @@ pub const Client = struct {
     /// Access Management (IAM) role. You can also optionally add a session policy,
     /// and assign metadata with tags that can be used to group and search for
     /// users.
-    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: create_user.Options) !create_user.CreateUserOutput {
+    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: CallOptions) !create_user.CreateUserOutput {
         return create_user.execute(self, allocator, input, options);
     }
 
@@ -174,7 +175,7 @@ pub const Client = struct {
     /// For more information about using VPC endpoints with Transfer Family, see
     /// [Create a Transfer Family web app in a
     /// VPC](https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html).
-    pub fn createWebApp(self: *Self, allocator: std.mem.Allocator, input: create_web_app.CreateWebAppInput, options: create_web_app.Options) !create_web_app.CreateWebAppOutput {
+    pub fn createWebApp(self: *Self, allocator: std.mem.Allocator, input: create_web_app.CreateWebAppInput, options: CallOptions) !create_web_app.CreateWebAppOutput {
         return create_web_app.execute(self, allocator, input, options);
     }
 
@@ -183,50 +184,50 @@ pub const Client = struct {
     /// you can associate the workflow created with any transfer servers by
     /// specifying the `workflow-details` field in `CreateServer` and `UpdateServer`
     /// operations.
-    pub fn createWorkflow(self: *Self, allocator: std.mem.Allocator, input: create_workflow.CreateWorkflowInput, options: create_workflow.Options) !create_workflow.CreateWorkflowOutput {
+    pub fn createWorkflow(self: *Self, allocator: std.mem.Allocator, input: create_workflow.CreateWorkflowInput, options: CallOptions) !create_workflow.CreateWorkflowOutput {
         return create_workflow.execute(self, allocator, input, options);
     }
 
     /// Allows you to delete the access specified in the `ServerID` and `ExternalID`
     /// parameters.
-    pub fn deleteAccess(self: *Self, allocator: std.mem.Allocator, input: delete_access.DeleteAccessInput, options: delete_access.Options) !delete_access.DeleteAccessOutput {
+    pub fn deleteAccess(self: *Self, allocator: std.mem.Allocator, input: delete_access.DeleteAccessInput, options: CallOptions) !delete_access.DeleteAccessOutput {
         return delete_access.execute(self, allocator, input, options);
     }
 
     /// Delete the agreement that's specified in the provided `AgreementId`.
-    pub fn deleteAgreement(self: *Self, allocator: std.mem.Allocator, input: delete_agreement.DeleteAgreementInput, options: delete_agreement.Options) !delete_agreement.DeleteAgreementOutput {
+    pub fn deleteAgreement(self: *Self, allocator: std.mem.Allocator, input: delete_agreement.DeleteAgreementInput, options: CallOptions) !delete_agreement.DeleteAgreementOutput {
         return delete_agreement.execute(self, allocator, input, options);
     }
 
     /// Deletes the certificate that's specified in the `CertificateId` parameter.
-    pub fn deleteCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_certificate.DeleteCertificateInput, options: delete_certificate.Options) !delete_certificate.DeleteCertificateOutput {
+    pub fn deleteCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_certificate.DeleteCertificateInput, options: CallOptions) !delete_certificate.DeleteCertificateOutput {
         return delete_certificate.execute(self, allocator, input, options);
     }
 
     /// Deletes the connector that's specified in the provided `ConnectorId`.
-    pub fn deleteConnector(self: *Self, allocator: std.mem.Allocator, input: delete_connector.DeleteConnectorInput, options: delete_connector.Options) !delete_connector.DeleteConnectorOutput {
+    pub fn deleteConnector(self: *Self, allocator: std.mem.Allocator, input: delete_connector.DeleteConnectorInput, options: CallOptions) !delete_connector.DeleteConnectorOutput {
         return delete_connector.execute(self, allocator, input, options);
     }
 
     /// Deletes the host key that's specified in the `HostKeyId` parameter.
-    pub fn deleteHostKey(self: *Self, allocator: std.mem.Allocator, input: delete_host_key.DeleteHostKeyInput, options: delete_host_key.Options) !delete_host_key.DeleteHostKeyOutput {
+    pub fn deleteHostKey(self: *Self, allocator: std.mem.Allocator, input: delete_host_key.DeleteHostKeyInput, options: CallOptions) !delete_host_key.DeleteHostKeyOutput {
         return delete_host_key.execute(self, allocator, input, options);
     }
 
     /// Deletes the profile that's specified in the `ProfileId` parameter.
-    pub fn deleteProfile(self: *Self, allocator: std.mem.Allocator, input: delete_profile.DeleteProfileInput, options: delete_profile.Options) !delete_profile.DeleteProfileOutput {
+    pub fn deleteProfile(self: *Self, allocator: std.mem.Allocator, input: delete_profile.DeleteProfileInput, options: CallOptions) !delete_profile.DeleteProfileOutput {
         return delete_profile.execute(self, allocator, input, options);
     }
 
     /// Deletes the file transfer protocol-enabled server that you specify.
     ///
     /// No response returns from this operation.
-    pub fn deleteServer(self: *Self, allocator: std.mem.Allocator, input: delete_server.DeleteServerInput, options: delete_server.Options) !delete_server.DeleteServerOutput {
+    pub fn deleteServer(self: *Self, allocator: std.mem.Allocator, input: delete_server.DeleteServerInput, options: CallOptions) !delete_server.DeleteServerOutput {
         return delete_server.execute(self, allocator, input, options);
     }
 
     /// Deletes a user's Secure Shell (SSH) public key.
-    pub fn deleteSshPublicKey(self: *Self, allocator: std.mem.Allocator, input: delete_ssh_public_key.DeleteSshPublicKeyInput, options: delete_ssh_public_key.Options) !delete_ssh_public_key.DeleteSshPublicKeyOutput {
+    pub fn deleteSshPublicKey(self: *Self, allocator: std.mem.Allocator, input: delete_ssh_public_key.DeleteSshPublicKeyInput, options: CallOptions) !delete_ssh_public_key.DeleteSshPublicKeyOutput {
         return delete_ssh_public_key.execute(self, allocator, input, options);
     }
 
@@ -236,23 +237,23 @@ pub const Client = struct {
     /// No response returns from this operation.
     ///
     /// When you delete a user from a server, the user's information is lost.
-    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: delete_user.Options) !delete_user.DeleteUserOutput {
+    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: CallOptions) !delete_user.DeleteUserOutput {
         return delete_user.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified web app.
-    pub fn deleteWebApp(self: *Self, allocator: std.mem.Allocator, input: delete_web_app.DeleteWebAppInput, options: delete_web_app.Options) !delete_web_app.DeleteWebAppOutput {
+    pub fn deleteWebApp(self: *Self, allocator: std.mem.Allocator, input: delete_web_app.DeleteWebAppInput, options: CallOptions) !delete_web_app.DeleteWebAppOutput {
         return delete_web_app.execute(self, allocator, input, options);
     }
 
     /// Deletes the `WebAppCustomization` object that corresponds to the web app ID
     /// specified.
-    pub fn deleteWebAppCustomization(self: *Self, allocator: std.mem.Allocator, input: delete_web_app_customization.DeleteWebAppCustomizationInput, options: delete_web_app_customization.Options) !delete_web_app_customization.DeleteWebAppCustomizationOutput {
+    pub fn deleteWebAppCustomization(self: *Self, allocator: std.mem.Allocator, input: delete_web_app_customization.DeleteWebAppCustomizationInput, options: CallOptions) !delete_web_app_customization.DeleteWebAppCustomizationOutput {
         return delete_web_app_customization.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified workflow.
-    pub fn deleteWorkflow(self: *Self, allocator: std.mem.Allocator, input: delete_workflow.DeleteWorkflowInput, options: delete_workflow.Options) !delete_workflow.DeleteWorkflowOutput {
+    pub fn deleteWorkflow(self: *Self, allocator: std.mem.Allocator, input: delete_workflow.DeleteWorkflowInput, options: CallOptions) !delete_workflow.DeleteWorkflowOutput {
         return delete_workflow.execute(self, allocator, input, options);
     }
 
@@ -262,12 +263,12 @@ pub const Client = struct {
     ///
     /// The response from this call returns the properties of the access that is
     /// associated with the `ServerId` value that was specified.
-    pub fn describeAccess(self: *Self, allocator: std.mem.Allocator, input: describe_access.DescribeAccessInput, options: describe_access.Options) !describe_access.DescribeAccessOutput {
+    pub fn describeAccess(self: *Self, allocator: std.mem.Allocator, input: describe_access.DescribeAccessInput, options: CallOptions) !describe_access.DescribeAccessOutput {
         return describe_access.execute(self, allocator, input, options);
     }
 
     /// Describes the agreement that's identified by the `AgreementId`.
-    pub fn describeAgreement(self: *Self, allocator: std.mem.Allocator, input: describe_agreement.DescribeAgreementInput, options: describe_agreement.Options) !describe_agreement.DescribeAgreementOutput {
+    pub fn describeAgreement(self: *Self, allocator: std.mem.Allocator, input: describe_agreement.DescribeAgreementInput, options: CallOptions) !describe_agreement.DescribeAgreementOutput {
         return describe_agreement.execute(self, allocator, input, options);
     }
 
@@ -278,12 +279,12 @@ pub const Client = struct {
     /// of days until the certificate expires based on the `InactiveDate`. The
     /// metric is available in the `AWS/Transfer` namespace and includes the
     /// `CertificateId` as a dimension.
-    pub fn describeCertificate(self: *Self, allocator: std.mem.Allocator, input: describe_certificate.DescribeCertificateInput, options: describe_certificate.Options) !describe_certificate.DescribeCertificateOutput {
+    pub fn describeCertificate(self: *Self, allocator: std.mem.Allocator, input: describe_certificate.DescribeCertificateInput, options: CallOptions) !describe_certificate.DescribeCertificateOutput {
         return describe_certificate.execute(self, allocator, input, options);
     }
 
     /// Describes the connector that's identified by the `ConnectorId.`
-    pub fn describeConnector(self: *Self, allocator: std.mem.Allocator, input: describe_connector.DescribeConnectorInput, options: describe_connector.Options) !describe_connector.DescribeConnectorOutput {
+    pub fn describeConnector(self: *Self, allocator: std.mem.Allocator, input: describe_connector.DescribeConnectorInput, options: CallOptions) !describe_connector.DescribeConnectorOutput {
         return describe_connector.execute(self, allocator, input, options);
     }
 
@@ -295,18 +296,18 @@ pub const Client = struct {
     /// If you provide an ID for an execution that is not in progress, or if the
     /// execution doesn't match the specified workflow ID, you receive a
     /// `ResourceNotFound` exception.
-    pub fn describeExecution(self: *Self, allocator: std.mem.Allocator, input: describe_execution.DescribeExecutionInput, options: describe_execution.Options) !describe_execution.DescribeExecutionOutput {
+    pub fn describeExecution(self: *Self, allocator: std.mem.Allocator, input: describe_execution.DescribeExecutionInput, options: CallOptions) !describe_execution.DescribeExecutionOutput {
         return describe_execution.execute(self, allocator, input, options);
     }
 
     /// Returns the details of the host key that's specified by the `HostKeyId` and
     /// `ServerId`.
-    pub fn describeHostKey(self: *Self, allocator: std.mem.Allocator, input: describe_host_key.DescribeHostKeyInput, options: describe_host_key.Options) !describe_host_key.DescribeHostKeyOutput {
+    pub fn describeHostKey(self: *Self, allocator: std.mem.Allocator, input: describe_host_key.DescribeHostKeyInput, options: CallOptions) !describe_host_key.DescribeHostKeyOutput {
         return describe_host_key.execute(self, allocator, input, options);
     }
 
     /// Returns the details of the profile that's specified by the `ProfileId`.
-    pub fn describeProfile(self: *Self, allocator: std.mem.Allocator, input: describe_profile.DescribeProfileInput, options: describe_profile.Options) !describe_profile.DescribeProfileOutput {
+    pub fn describeProfile(self: *Self, allocator: std.mem.Allocator, input: describe_profile.DescribeProfileInput, options: CallOptions) !describe_profile.DescribeProfileOutput {
         return describe_profile.execute(self, allocator, input, options);
     }
 
@@ -315,7 +316,7 @@ pub const Client = struct {
     /// properties. For more information about security policies, see [Working with
     /// security policies for
     /// servers](https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html) or [Working with security policies for SFTP connectors](https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html).
-    pub fn describeSecurityPolicy(self: *Self, allocator: std.mem.Allocator, input: describe_security_policy.DescribeSecurityPolicyInput, options: describe_security_policy.Options) !describe_security_policy.DescribeSecurityPolicyOutput {
+    pub fn describeSecurityPolicy(self: *Self, allocator: std.mem.Allocator, input: describe_security_policy.DescribeSecurityPolicyInput, options: CallOptions) !describe_security_policy.DescribeSecurityPolicyOutput {
         return describe_security_policy.execute(self, allocator, input, options);
     }
 
@@ -324,7 +325,7 @@ pub const Client = struct {
     ///
     /// The response contains a description of a server's properties. When you set
     /// `EndpointType` to VPC, the response will contain the `EndpointDetails`.
-    pub fn describeServer(self: *Self, allocator: std.mem.Allocator, input: describe_server.DescribeServerInput, options: describe_server.Options) !describe_server.DescribeServerOutput {
+    pub fn describeServer(self: *Self, allocator: std.mem.Allocator, input: describe_server.DescribeServerInput, options: CallOptions) !describe_server.DescribeServerOutput {
         return describe_server.execute(self, allocator, input, options);
     }
 
@@ -333,7 +334,7 @@ pub const Client = struct {
     ///
     /// The response from this call returns the properties of the user associated
     /// with the `ServerId` value that was specified.
-    pub fn describeUser(self: *Self, allocator: std.mem.Allocator, input: describe_user.DescribeUserInput, options: describe_user.Options) !describe_user.DescribeUserOutput {
+    pub fn describeUser(self: *Self, allocator: std.mem.Allocator, input: describe_user.DescribeUserInput, options: CallOptions) !describe_user.DescribeUserOutput {
         return describe_user.execute(self, allocator, input, options);
     }
 
@@ -344,17 +345,17 @@ pub const Client = struct {
     /// For more information about using VPC endpoints with Transfer Family, see
     /// [Create a Transfer Family web app in a
     /// VPC](https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html).
-    pub fn describeWebApp(self: *Self, allocator: std.mem.Allocator, input: describe_web_app.DescribeWebAppInput, options: describe_web_app.Options) !describe_web_app.DescribeWebAppOutput {
+    pub fn describeWebApp(self: *Self, allocator: std.mem.Allocator, input: describe_web_app.DescribeWebAppInput, options: CallOptions) !describe_web_app.DescribeWebAppOutput {
         return describe_web_app.execute(self, allocator, input, options);
     }
 
     /// Describes the web app customization object that's identified by `WebAppId`.
-    pub fn describeWebAppCustomization(self: *Self, allocator: std.mem.Allocator, input: describe_web_app_customization.DescribeWebAppCustomizationInput, options: describe_web_app_customization.Options) !describe_web_app_customization.DescribeWebAppCustomizationOutput {
+    pub fn describeWebAppCustomization(self: *Self, allocator: std.mem.Allocator, input: describe_web_app_customization.DescribeWebAppCustomizationInput, options: CallOptions) !describe_web_app_customization.DescribeWebAppCustomizationOutput {
         return describe_web_app_customization.execute(self, allocator, input, options);
     }
 
     /// Describes the specified workflow.
-    pub fn describeWorkflow(self: *Self, allocator: std.mem.Allocator, input: describe_workflow.DescribeWorkflowInput, options: describe_workflow.Options) !describe_workflow.DescribeWorkflowOutput {
+    pub fn describeWorkflow(self: *Self, allocator: std.mem.Allocator, input: describe_workflow.DescribeWorkflowInput, options: CallOptions) !describe_workflow.DescribeWorkflowOutput {
         return describe_workflow.execute(self, allocator, input, options);
     }
 
@@ -385,12 +386,12 @@ pub const Client = struct {
     ///   provided during certificate import)
     /// * **Statistics:** Minimum, Maximum, Average
     /// * **Frequency:** Published daily
-    pub fn importCertificate(self: *Self, allocator: std.mem.Allocator, input: import_certificate.ImportCertificateInput, options: import_certificate.Options) !import_certificate.ImportCertificateOutput {
+    pub fn importCertificate(self: *Self, allocator: std.mem.Allocator, input: import_certificate.ImportCertificateInput, options: CallOptions) !import_certificate.ImportCertificateOutput {
         return import_certificate.execute(self, allocator, input, options);
     }
 
     /// Adds a host key to the server that's specified by the `ServerId` parameter.
-    pub fn importHostKey(self: *Self, allocator: std.mem.Allocator, input: import_host_key.ImportHostKeyInput, options: import_host_key.Options) !import_host_key.ImportHostKeyOutput {
+    pub fn importHostKey(self: *Self, allocator: std.mem.Allocator, input: import_host_key.ImportHostKeyInput, options: CallOptions) !import_host_key.ImportHostKeyOutput {
         return import_host_key.execute(self, allocator, input, options);
     }
 
@@ -400,12 +401,12 @@ pub const Client = struct {
     ///
     /// The response returns the `UserName` value, the `ServerId` value, and the
     /// name of the `SshPublicKeyId`.
-    pub fn importSshPublicKey(self: *Self, allocator: std.mem.Allocator, input: import_ssh_public_key.ImportSshPublicKeyInput, options: import_ssh_public_key.Options) !import_ssh_public_key.ImportSshPublicKeyOutput {
+    pub fn importSshPublicKey(self: *Self, allocator: std.mem.Allocator, input: import_ssh_public_key.ImportSshPublicKeyInput, options: CallOptions) !import_ssh_public_key.ImportSshPublicKeyOutput {
         return import_ssh_public_key.execute(self, allocator, input, options);
     }
 
     /// Lists the details for all the accesses you have on your server.
-    pub fn listAccesses(self: *Self, allocator: std.mem.Allocator, input: list_accesses.ListAccessesInput, options: list_accesses.Options) !list_accesses.ListAccessesOutput {
+    pub fn listAccesses(self: *Self, allocator: std.mem.Allocator, input: list_accesses.ListAccessesInput, options: CallOptions) !list_accesses.ListAccessesOutput {
         return list_accesses.execute(self, allocator, input, options);
     }
 
@@ -414,7 +415,7 @@ pub const Client = struct {
     /// number, supply a value for the `MaxResults` parameter. If you ran the
     /// command previously and received a value for `NextToken`, you can supply that
     /// value to continue listing agreements from where you left off.
-    pub fn listAgreements(self: *Self, allocator: std.mem.Allocator, input: list_agreements.ListAgreementsInput, options: list_agreements.Options) !list_agreements.ListAgreementsOutput {
+    pub fn listAgreements(self: *Self, allocator: std.mem.Allocator, input: list_agreements.ListAgreementsInput, options: CallOptions) !list_agreements.ListAgreementsOutput {
         return list_agreements.execute(self, allocator, input, options);
     }
 
@@ -423,12 +424,12 @@ pub const Client = struct {
     /// supply a value for the `MaxResults` parameter. If you ran the command
     /// previously and received a value for the `NextToken` parameter, you can
     /// supply that value to continue listing certificates from where you left off.
-    pub fn listCertificates(self: *Self, allocator: std.mem.Allocator, input: list_certificates.ListCertificatesInput, options: list_certificates.Options) !list_certificates.ListCertificatesOutput {
+    pub fn listCertificates(self: *Self, allocator: std.mem.Allocator, input: list_certificates.ListCertificatesInput, options: CallOptions) !list_certificates.ListCertificatesOutput {
         return list_certificates.execute(self, allocator, input, options);
     }
 
     /// Lists the connectors for the specified Region.
-    pub fn listConnectors(self: *Self, allocator: std.mem.Allocator, input: list_connectors.ListConnectorsInput, options: list_connectors.Options) !list_connectors.ListConnectorsOutput {
+    pub fn listConnectors(self: *Self, allocator: std.mem.Allocator, input: list_connectors.ListConnectorsInput, options: CallOptions) !list_connectors.ListConnectorsOutput {
         return list_connectors.execute(self, allocator, input, options);
     }
 
@@ -436,7 +437,7 @@ pub const Client = struct {
     ///
     /// If the specified workflow ID cannot be found, `ListExecutions` returns a
     /// `ResourceNotFound` exception.
-    pub fn listExecutions(self: *Self, allocator: std.mem.Allocator, input: list_executions.ListExecutionsInput, options: list_executions.Options) !list_executions.ListExecutionsOutput {
+    pub fn listExecutions(self: *Self, allocator: std.mem.Allocator, input: list_executions.ListExecutionsInput, options: CallOptions) !list_executions.ListExecutionsOutput {
         return list_executions.execute(self, allocator, input, options);
     }
 
@@ -447,13 +448,13 @@ pub const Client = struct {
     ///
     /// File transfer results are available up to 7 days after an operation has been
     /// requested.
-    pub fn listFileTransferResults(self: *Self, allocator: std.mem.Allocator, input: list_file_transfer_results.ListFileTransferResultsInput, options: list_file_transfer_results.Options) !list_file_transfer_results.ListFileTransferResultsOutput {
+    pub fn listFileTransferResults(self: *Self, allocator: std.mem.Allocator, input: list_file_transfer_results.ListFileTransferResultsInput, options: CallOptions) !list_file_transfer_results.ListFileTransferResultsOutput {
         return list_file_transfer_results.execute(self, allocator, input, options);
     }
 
     /// Returns a list of host keys for the server that's specified by the
     /// `ServerId` parameter.
-    pub fn listHostKeys(self: *Self, allocator: std.mem.Allocator, input: list_host_keys.ListHostKeysInput, options: list_host_keys.Options) !list_host_keys.ListHostKeysOutput {
+    pub fn listHostKeys(self: *Self, allocator: std.mem.Allocator, input: list_host_keys.ListHostKeysInput, options: CallOptions) !list_host_keys.ListHostKeysOutput {
         return list_host_keys.execute(self, allocator, input, options);
     }
 
@@ -461,7 +462,7 @@ pub const Client = struct {
     /// results to a certain number, supply a value for the `MaxResults` parameter.
     /// If you ran the command previously and received a value for `NextToken`, you
     /// can supply that value to continue listing profiles from where you left off.
-    pub fn listProfiles(self: *Self, allocator: std.mem.Allocator, input: list_profiles.ListProfilesInput, options: list_profiles.Options) !list_profiles.ListProfilesOutput {
+    pub fn listProfiles(self: *Self, allocator: std.mem.Allocator, input: list_profiles.ListProfilesInput, options: CallOptions) !list_profiles.ListProfilesOutput {
         return list_profiles.execute(self, allocator, input, options);
     }
 
@@ -469,25 +470,25 @@ pub const Client = struct {
     /// connectors. For more information about security policies, see [Working with
     /// security policies for
     /// servers](https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html) or [Working with security policies for SFTP connectors](https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html).
-    pub fn listSecurityPolicies(self: *Self, allocator: std.mem.Allocator, input: list_security_policies.ListSecurityPoliciesInput, options: list_security_policies.Options) !list_security_policies.ListSecurityPoliciesOutput {
+    pub fn listSecurityPolicies(self: *Self, allocator: std.mem.Allocator, input: list_security_policies.ListSecurityPoliciesInput, options: CallOptions) !list_security_policies.ListSecurityPoliciesOutput {
         return list_security_policies.execute(self, allocator, input, options);
     }
 
     /// Lists the file transfer protocol-enabled servers that are associated with
     /// your Amazon Web Services account.
-    pub fn listServers(self: *Self, allocator: std.mem.Allocator, input: list_servers.ListServersInput, options: list_servers.Options) !list_servers.ListServersOutput {
+    pub fn listServers(self: *Self, allocator: std.mem.Allocator, input: list_servers.ListServersInput, options: CallOptions) !list_servers.ListServersOutput {
         return list_servers.execute(self, allocator, input, options);
     }
 
     /// Lists all of the tags associated with the Amazon Resource Name (ARN) that
     /// you specify. The resource can be a user, server, or role.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists the users for a file transfer protocol-enabled server that you specify
     /// by passing the `ServerId` parameter.
-    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: list_users.Options) !list_users.ListUsersOutput {
+    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: CallOptions) !list_users.ListUsersOutput {
         return list_users.execute(self, allocator, input, options);
     }
 
@@ -498,13 +499,13 @@ pub const Client = struct {
     /// For more information about using VPC endpoints with Transfer Family, see
     /// [Create a Transfer Family web app in a
     /// VPC](https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html).
-    pub fn listWebApps(self: *Self, allocator: std.mem.Allocator, input: list_web_apps.ListWebAppsInput, options: list_web_apps.Options) !list_web_apps.ListWebAppsOutput {
+    pub fn listWebApps(self: *Self, allocator: std.mem.Allocator, input: list_web_apps.ListWebAppsInput, options: CallOptions) !list_web_apps.ListWebAppsOutput {
         return list_web_apps.execute(self, allocator, input, options);
     }
 
     /// Lists all workflows associated with your Amazon Web Services account for
     /// your current region.
-    pub fn listWorkflows(self: *Self, allocator: std.mem.Allocator, input: list_workflows.ListWorkflowsInput, options: list_workflows.Options) !list_workflows.ListWorkflowsOutput {
+    pub fn listWorkflows(self: *Self, allocator: std.mem.Allocator, input: list_workflows.ListWorkflowsInput, options: CallOptions) !list_workflows.ListWorkflowsOutput {
         return list_workflows.execute(self, allocator, input, options);
     }
 
@@ -513,7 +514,7 @@ pub const Client = struct {
     /// The `ExecutionId`, `WorkflowId`, and `Token` are passed to the target
     /// resource during execution of a custom step of a workflow. You must include
     /// those with their callback as well as providing a status.
-    pub fn sendWorkflowStepState(self: *Self, allocator: std.mem.Allocator, input: send_workflow_step_state.SendWorkflowStepStateInput, options: send_workflow_step_state.Options) !send_workflow_step_state.SendWorkflowStepStateOutput {
+    pub fn sendWorkflowStepState(self: *Self, allocator: std.mem.Allocator, input: send_workflow_step_state.SendWorkflowStepStateInput, options: CallOptions) !send_workflow_step_state.SendWorkflowStepStateOutput {
         return send_workflow_step_state.execute(self, allocator, input, options);
     }
 
@@ -548,7 +549,7 @@ pub const Client = struct {
     ///   value is true, you can increase the value provided in the optional
     ///   `max-items` input attribute to be able to list more items (up to the
     ///   maximum allowed list size of 10,000 items).
-    pub fn startDirectoryListing(self: *Self, allocator: std.mem.Allocator, input: start_directory_listing.StartDirectoryListingInput, options: start_directory_listing.Options) !start_directory_listing.StartDirectoryListingOutput {
+    pub fn startDirectoryListing(self: *Self, allocator: std.mem.Allocator, input: start_directory_listing.StartDirectoryListingInput, options: CallOptions) !start_directory_listing.StartDirectoryListingOutput {
         return start_directory_listing.execute(self, allocator, input, options);
     }
 
@@ -569,17 +570,17 @@ pub const Client = struct {
     ///   Services storage, you specify one or more `SendFilePaths` to identify the
     ///   files you want to transfer, and a `RemoteDirectoryPath` to specify the
     ///   destination folder.
-    pub fn startFileTransfer(self: *Self, allocator: std.mem.Allocator, input: start_file_transfer.StartFileTransferInput, options: start_file_transfer.Options) !start_file_transfer.StartFileTransferOutput {
+    pub fn startFileTransfer(self: *Self, allocator: std.mem.Allocator, input: start_file_transfer.StartFileTransferInput, options: CallOptions) !start_file_transfer.StartFileTransferOutput {
         return start_file_transfer.execute(self, allocator, input, options);
     }
 
     /// Deletes a file or directory on the remote SFTP server.
-    pub fn startRemoteDelete(self: *Self, allocator: std.mem.Allocator, input: start_remote_delete.StartRemoteDeleteInput, options: start_remote_delete.Options) !start_remote_delete.StartRemoteDeleteOutput {
+    pub fn startRemoteDelete(self: *Self, allocator: std.mem.Allocator, input: start_remote_delete.StartRemoteDeleteInput, options: CallOptions) !start_remote_delete.StartRemoteDeleteOutput {
         return start_remote_delete.execute(self, allocator, input, options);
     }
 
     /// Moves or renames a file or directory on the remote SFTP server.
-    pub fn startRemoteMove(self: *Self, allocator: std.mem.Allocator, input: start_remote_move.StartRemoteMoveInput, options: start_remote_move.Options) !start_remote_move.StartRemoteMoveOutput {
+    pub fn startRemoteMove(self: *Self, allocator: std.mem.Allocator, input: start_remote_move.StartRemoteMoveInput, options: CallOptions) !start_remote_move.StartRemoteMoveOutput {
         return start_remote_move.execute(self, allocator, input, options);
     }
 
@@ -592,7 +593,7 @@ pub const Client = struct {
     /// `START_FAILED` can indicate an error condition.
     ///
     /// No response is returned from this call.
-    pub fn startServer(self: *Self, allocator: std.mem.Allocator, input: start_server.StartServerInput, options: start_server.Options) !start_server.StartServerOutput {
+    pub fn startServer(self: *Self, allocator: std.mem.Allocator, input: start_server.StartServerInput, options: CallOptions) !start_server.StartServerOutput {
         return start_server.execute(self, allocator, input, options);
     }
 
@@ -609,7 +610,7 @@ pub const Client = struct {
     /// `STOP_FAILED` can indicate an error condition.
     ///
     /// No response is returned from this call.
-    pub fn stopServer(self: *Self, allocator: std.mem.Allocator, input: stop_server.StopServerInput, options: stop_server.Options) !stop_server.StopServerOutput {
+    pub fn stopServer(self: *Self, allocator: std.mem.Allocator, input: stop_server.StopServerInput, options: CallOptions) !stop_server.StopServerOutput {
         return stop_server.execute(self, allocator, input, options);
     }
 
@@ -618,7 +619,7 @@ pub const Client = struct {
     /// entities.
     ///
     /// There is no response returned from this call.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -626,7 +627,7 @@ pub const Client = struct {
     /// recommend that you call this operation to test your ability to transfer
     /// files between local Amazon Web Services storage and a trading partner's SFTP
     /// server.
-    pub fn testConnection(self: *Self, allocator: std.mem.Allocator, input: test_connection.TestConnectionInput, options: test_connection.Options) !test_connection.TestConnectionOutput {
+    pub fn testConnection(self: *Self, allocator: std.mem.Allocator, input: test_connection.TestConnectionInput, options: CallOptions) !test_connection.TestConnectionOutput {
         return test_connection.execute(self, allocator, input, options);
     }
 
@@ -664,7 +665,7 @@ pub const Client = struct {
     /// It is possible your sever is in a different region. You can specify a region
     /// by adding the following: `--region region-code`, such as `--region
     /// us-east-2` to specify a server in **US East (Ohio)**.
-    pub fn testIdentityProvider(self: *Self, allocator: std.mem.Allocator, input: test_identity_provider.TestIdentityProviderInput, options: test_identity_provider.Options) !test_identity_provider.TestIdentityProviderOutput {
+    pub fn testIdentityProvider(self: *Self, allocator: std.mem.Allocator, input: test_identity_provider.TestIdentityProviderInput, options: CallOptions) !test_identity_provider.TestIdentityProviderOutput {
         return test_identity_provider.execute(self, allocator, input, options);
     }
 
@@ -673,13 +674,13 @@ pub const Client = struct {
     /// entities.
     ///
     /// No response is returned from this call.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Allows you to update parameters for the access specified in the `ServerID`
     /// and `ExternalID` parameters.
-    pub fn updateAccess(self: *Self, allocator: std.mem.Allocator, input: update_access.UpdateAccessInput, options: update_access.Options) !update_access.UpdateAccessOutput {
+    pub fn updateAccess(self: *Self, allocator: std.mem.Allocator, input: update_access.UpdateAccessInput, options: CallOptions) !update_access.UpdateAccessOutput {
         return update_access.execute(self, allocator, input, options);
     }
 
@@ -693,32 +694,32 @@ pub const Client = struct {
     /// If you update an agreement from using base directory to custom directories,
     /// the base directory is no longer used. Similarly, if you change from custom
     /// directories to a base directory, the custom directories are no longer used.
-    pub fn updateAgreement(self: *Self, allocator: std.mem.Allocator, input: update_agreement.UpdateAgreementInput, options: update_agreement.Options) !update_agreement.UpdateAgreementOutput {
+    pub fn updateAgreement(self: *Self, allocator: std.mem.Allocator, input: update_agreement.UpdateAgreementInput, options: CallOptions) !update_agreement.UpdateAgreementOutput {
         return update_agreement.execute(self, allocator, input, options);
     }
 
     /// Updates the active and inactive dates for a certificate.
-    pub fn updateCertificate(self: *Self, allocator: std.mem.Allocator, input: update_certificate.UpdateCertificateInput, options: update_certificate.Options) !update_certificate.UpdateCertificateOutput {
+    pub fn updateCertificate(self: *Self, allocator: std.mem.Allocator, input: update_certificate.UpdateCertificateInput, options: CallOptions) !update_certificate.UpdateCertificateOutput {
         return update_certificate.execute(self, allocator, input, options);
     }
 
     /// Updates some of the parameters for an existing connector. Provide the
     /// `ConnectorId` for the connector that you want to update, along with the new
     /// values for the parameters to update.
-    pub fn updateConnector(self: *Self, allocator: std.mem.Allocator, input: update_connector.UpdateConnectorInput, options: update_connector.Options) !update_connector.UpdateConnectorOutput {
+    pub fn updateConnector(self: *Self, allocator: std.mem.Allocator, input: update_connector.UpdateConnectorInput, options: CallOptions) !update_connector.UpdateConnectorOutput {
         return update_connector.execute(self, allocator, input, options);
     }
 
     /// Updates the description for the host key that's specified by the `ServerId`
     /// and `HostKeyId` parameters.
-    pub fn updateHostKey(self: *Self, allocator: std.mem.Allocator, input: update_host_key.UpdateHostKeyInput, options: update_host_key.Options) !update_host_key.UpdateHostKeyOutput {
+    pub fn updateHostKey(self: *Self, allocator: std.mem.Allocator, input: update_host_key.UpdateHostKeyInput, options: CallOptions) !update_host_key.UpdateHostKeyOutput {
         return update_host_key.execute(self, allocator, input, options);
     }
 
     /// Updates some of the parameters for an existing profile. Provide the
     /// `ProfileId` for the profile that you want to update, along with the new
     /// values for the parameters to update.
-    pub fn updateProfile(self: *Self, allocator: std.mem.Allocator, input: update_profile.UpdateProfileInput, options: update_profile.Options) !update_profile.UpdateProfileOutput {
+    pub fn updateProfile(self: *Self, allocator: std.mem.Allocator, input: update_profile.UpdateProfileInput, options: CallOptions) !update_profile.UpdateProfileOutput {
         return update_profile.execute(self, allocator, input, options);
     }
 
@@ -726,7 +727,7 @@ pub const Client = struct {
     /// server has been created.
     ///
     /// The `UpdateServer` call returns the `ServerId` of the server you updated.
-    pub fn updateServer(self: *Self, allocator: std.mem.Allocator, input: update_server.UpdateServerInput, options: update_server.Options) !update_server.UpdateServerOutput {
+    pub fn updateServer(self: *Self, allocator: std.mem.Allocator, input: update_server.UpdateServerInput, options: CallOptions) !update_server.UpdateServerOutput {
         return update_server.execute(self, allocator, input, options);
     }
 
@@ -750,7 +751,7 @@ pub const Client = struct {
     /// ` aws transfer update-user --server-id <server-id> --user-name admin-user
     /// --home-directory-type LOGICAL --home-directory-mappings "[{\"Entry\":\"/\",
     /// \"Target\":\"/test/admin-user\"}]"`
-    pub fn updateUser(self: *Self, allocator: std.mem.Allocator, input: update_user.UpdateUserInput, options: update_user.Options) !update_user.UpdateUserOutput {
+    pub fn updateUser(self: *Self, allocator: std.mem.Allocator, input: update_user.UpdateUserInput, options: CallOptions) !update_user.UpdateUserOutput {
         return update_user.execute(self, allocator, input, options);
     }
 
@@ -760,13 +761,13 @@ pub const Client = struct {
     /// For more information about using VPC endpoints with Transfer Family, see
     /// [Create a Transfer Family web app in a
     /// VPC](https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html).
-    pub fn updateWebApp(self: *Self, allocator: std.mem.Allocator, input: update_web_app.UpdateWebAppInput, options: update_web_app.Options) !update_web_app.UpdateWebAppOutput {
+    pub fn updateWebApp(self: *Self, allocator: std.mem.Allocator, input: update_web_app.UpdateWebAppInput, options: CallOptions) !update_web_app.UpdateWebAppOutput {
         return update_web_app.execute(self, allocator, input, options);
     }
 
     /// Assigns new customization properties to a web app. You can modify the icon
     /// file, logo file, and title.
-    pub fn updateWebAppCustomization(self: *Self, allocator: std.mem.Allocator, input: update_web_app_customization.UpdateWebAppCustomizationInput, options: update_web_app_customization.Options) !update_web_app_customization.UpdateWebAppCustomizationOutput {
+    pub fn updateWebAppCustomization(self: *Self, allocator: std.mem.Allocator, input: update_web_app_customization.UpdateWebAppCustomizationInput, options: CallOptions) !update_web_app_customization.UpdateWebAppCustomizationOutput {
         return update_web_app_customization.execute(self, allocator, input, options);
     }
 

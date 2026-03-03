@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PolicyTypeDescription = @import("policy_type_description.zig").PolicyTypeDescription;
 const serde = @import("serde.zig");
@@ -17,11 +18,7 @@ pub const DescribeLoadBalancerPolicyTypesOutput = struct {
     policy_type_descriptions: ?[]const PolicyTypeDescription = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeLoadBalancerPolicyTypesInput, options: Options) !DescribeLoadBalancerPolicyTypesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeLoadBalancerPolicyTypesInput, options: CallOptions) !DescribeLoadBalancerPolicyTypesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

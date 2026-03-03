@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MeshSpec = @import("mesh_spec.zig").MeshSpec;
 const TagRef = @import("tag_ref.zig").TagRef;
@@ -45,11 +46,7 @@ pub const CreateMeshOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMeshInput, options: Options) !CreateMeshOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMeshInput, options: CallOptions) !CreateMeshOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

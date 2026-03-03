@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Cors = @import("cors.zig").Cors;
 const IpAddressType = @import("ip_address_type.zig").IpAddressType;
@@ -187,11 +188,7 @@ pub const CreateApiOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateApiInput, options: Options) !CreateApiOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateApiInput, options: CallOptions) !CreateApiOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

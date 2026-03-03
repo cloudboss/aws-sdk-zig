@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ApiAssociation = @import("api_association.zig").ApiAssociation;
 
@@ -27,11 +28,7 @@ pub const AssociateApiOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateApiInput, options: Options) !AssociateApiOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateApiInput, options: CallOptions) !AssociateApiOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -93,6 +93,7 @@ const update_mobile_device_access_rule = @import("update_mobile_device_access_ru
 const update_primary_email_address = @import("update_primary_email_address.zig");
 const update_resource = @import("update_resource.zig");
 const update_user = @import("update_user.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -124,19 +125,19 @@ pub const Client = struct {
     }
 
     /// Adds a member (user or group) to the resource's set of delegates.
-    pub fn associateDelegateToResource(self: *Self, allocator: std.mem.Allocator, input: associate_delegate_to_resource.AssociateDelegateToResourceInput, options: associate_delegate_to_resource.Options) !associate_delegate_to_resource.AssociateDelegateToResourceOutput {
+    pub fn associateDelegateToResource(self: *Self, allocator: std.mem.Allocator, input: associate_delegate_to_resource.AssociateDelegateToResourceInput, options: CallOptions) !associate_delegate_to_resource.AssociateDelegateToResourceOutput {
         return associate_delegate_to_resource.execute(self, allocator, input, options);
     }
 
     /// Adds a member (user or group) to the group's set.
-    pub fn associateMemberToGroup(self: *Self, allocator: std.mem.Allocator, input: associate_member_to_group.AssociateMemberToGroupInput, options: associate_member_to_group.Options) !associate_member_to_group.AssociateMemberToGroupOutput {
+    pub fn associateMemberToGroup(self: *Self, allocator: std.mem.Allocator, input: associate_member_to_group.AssociateMemberToGroupInput, options: CallOptions) !associate_member_to_group.AssociateMemberToGroupOutput {
         return associate_member_to_group.execute(self, allocator, input, options);
     }
 
     /// Assumes an impersonation role for the given WorkMail organization. This
     /// method returns an
     /// authentication token you can use to make impersonated calls.
-    pub fn assumeImpersonationRole(self: *Self, allocator: std.mem.Allocator, input: assume_impersonation_role.AssumeImpersonationRoleInput, options: assume_impersonation_role.Options) !assume_impersonation_role.AssumeImpersonationRoleOutput {
+    pub fn assumeImpersonationRole(self: *Self, allocator: std.mem.Allocator, input: assume_impersonation_role.AssumeImpersonationRoleInput, options: CallOptions) !assume_impersonation_role.AssumeImpersonationRoleOutput {
         return assume_impersonation_role.execute(self, allocator, input, options);
     }
 
@@ -145,24 +146,24 @@ pub const Client = struct {
     /// If the mailbox export job is near completion, it might not be possible to
     /// cancel
     /// it.
-    pub fn cancelMailboxExportJob(self: *Self, allocator: std.mem.Allocator, input: cancel_mailbox_export_job.CancelMailboxExportJobInput, options: cancel_mailbox_export_job.Options) !cancel_mailbox_export_job.CancelMailboxExportJobOutput {
+    pub fn cancelMailboxExportJob(self: *Self, allocator: std.mem.Allocator, input: cancel_mailbox_export_job.CancelMailboxExportJobInput, options: CallOptions) !cancel_mailbox_export_job.CancelMailboxExportJobOutput {
         return cancel_mailbox_export_job.execute(self, allocator, input, options);
     }
 
     /// Adds an alias to the set of a given member (user or group) of WorkMail.
-    pub fn createAlias(self: *Self, allocator: std.mem.Allocator, input: create_alias.CreateAliasInput, options: create_alias.Options) !create_alias.CreateAliasOutput {
+    pub fn createAlias(self: *Self, allocator: std.mem.Allocator, input: create_alias.CreateAliasInput, options: CallOptions) !create_alias.CreateAliasOutput {
         return create_alias.execute(self, allocator, input, options);
     }
 
     /// Creates an `AvailabilityConfiguration` for the given WorkMail organization
     /// and domain.
-    pub fn createAvailabilityConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_availability_configuration.CreateAvailabilityConfigurationInput, options: create_availability_configuration.Options) !create_availability_configuration.CreateAvailabilityConfigurationOutput {
+    pub fn createAvailabilityConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_availability_configuration.CreateAvailabilityConfigurationInput, options: CallOptions) !create_availability_configuration.CreateAvailabilityConfigurationOutput {
         return create_availability_configuration.execute(self, allocator, input, options);
     }
 
     /// Creates a group that can be used in WorkMail by calling the
     /// RegisterToWorkMail operation.
-    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: create_group.Options) !create_group.CreateGroupOutput {
+    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: CallOptions) !create_group.CreateGroupOutput {
         return create_group.execute(self, allocator, input, options);
     }
 
@@ -170,7 +171,7 @@ pub const Client = struct {
     /// later in the WorkMail - IdC integration. For more information, see
     /// PutIdentityProviderConfiguration. This action does not affect the
     /// authentication settings for any WorkMail organizations.
-    pub fn createIdentityCenterApplication(self: *Self, allocator: std.mem.Allocator, input: create_identity_center_application.CreateIdentityCenterApplicationInput, options: create_identity_center_application.Options) !create_identity_center_application.CreateIdentityCenterApplicationOutput {
+    pub fn createIdentityCenterApplication(self: *Self, allocator: std.mem.Allocator, input: create_identity_center_application.CreateIdentityCenterApplicationInput, options: CallOptions) !create_identity_center_application.CreateIdentityCenterApplicationOutput {
         return create_identity_center_application.execute(self, allocator, input, options);
     }
 
@@ -181,13 +182,13 @@ pub const Client = struct {
     /// successfully, any
     /// subsequent retries also complete successfully without performing any further
     /// actions.
-    pub fn createImpersonationRole(self: *Self, allocator: std.mem.Allocator, input: create_impersonation_role.CreateImpersonationRoleInput, options: create_impersonation_role.Options) !create_impersonation_role.CreateImpersonationRoleOutput {
+    pub fn createImpersonationRole(self: *Self, allocator: std.mem.Allocator, input: create_impersonation_role.CreateImpersonationRoleInput, options: CallOptions) !create_impersonation_role.CreateImpersonationRoleOutput {
         return create_impersonation_role.execute(self, allocator, input, options);
     }
 
     /// Creates a new mobile device access rule for the specified WorkMail
     /// organization.
-    pub fn createMobileDeviceAccessRule(self: *Self, allocator: std.mem.Allocator, input: create_mobile_device_access_rule.CreateMobileDeviceAccessRuleInput, options: create_mobile_device_access_rule.Options) !create_mobile_device_access_rule.CreateMobileDeviceAccessRuleOutput {
+    pub fn createMobileDeviceAccessRule(self: *Self, allocator: std.mem.Allocator, input: create_mobile_device_access_rule.CreateMobileDeviceAccessRuleInput, options: CallOptions) !create_mobile_device_access_rule.CreateMobileDeviceAccessRuleOutput {
         return create_mobile_device_access_rule.execute(self, allocator, input, options);
     }
 
@@ -213,18 +214,18 @@ pub const Client = struct {
     /// KMS) to encrypt email for your organization. If you don't associate an AWS
     /// KMS key, WorkMail
     /// creates a default, AWS managed key for you.
-    pub fn createOrganization(self: *Self, allocator: std.mem.Allocator, input: create_organization.CreateOrganizationInput, options: create_organization.Options) !create_organization.CreateOrganizationOutput {
+    pub fn createOrganization(self: *Self, allocator: std.mem.Allocator, input: create_organization.CreateOrganizationInput, options: CallOptions) !create_organization.CreateOrganizationOutput {
         return create_organization.execute(self, allocator, input, options);
     }
 
     /// Creates a new WorkMail resource.
-    pub fn createResource(self: *Self, allocator: std.mem.Allocator, input: create_resource.CreateResourceInput, options: create_resource.Options) !create_resource.CreateResourceOutput {
+    pub fn createResource(self: *Self, allocator: std.mem.Allocator, input: create_resource.CreateResourceInput, options: CallOptions) !create_resource.CreateResourceOutput {
         return create_resource.execute(self, allocator, input, options);
     }
 
     /// Creates a user who can be used in WorkMail by calling the RegisterToWorkMail
     /// operation.
-    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: create_user.Options) !create_user.CreateUserOutput {
+    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: CallOptions) !create_user.CreateUserOutput {
         return create_user.execute(self, allocator, input, options);
     }
 
@@ -233,35 +234,35 @@ pub const Client = struct {
     /// Deleting already deleted and non-existing rules does not produce an error.
     /// In those cases, the service sends back an HTTP 200 response with an empty
     /// HTTP body.
-    pub fn deleteAccessControlRule(self: *Self, allocator: std.mem.Allocator, input: delete_access_control_rule.DeleteAccessControlRuleInput, options: delete_access_control_rule.Options) !delete_access_control_rule.DeleteAccessControlRuleOutput {
+    pub fn deleteAccessControlRule(self: *Self, allocator: std.mem.Allocator, input: delete_access_control_rule.DeleteAccessControlRuleInput, options: CallOptions) !delete_access_control_rule.DeleteAccessControlRuleOutput {
         return delete_access_control_rule.execute(self, allocator, input, options);
     }
 
     /// Remove one or more specified aliases from a set of aliases for a given
     /// user.
-    pub fn deleteAlias(self: *Self, allocator: std.mem.Allocator, input: delete_alias.DeleteAliasInput, options: delete_alias.Options) !delete_alias.DeleteAliasOutput {
+    pub fn deleteAlias(self: *Self, allocator: std.mem.Allocator, input: delete_alias.DeleteAliasInput, options: CallOptions) !delete_alias.DeleteAliasOutput {
         return delete_alias.execute(self, allocator, input, options);
     }
 
     /// Deletes the `AvailabilityConfiguration` for the given WorkMail organization
     /// and domain.
-    pub fn deleteAvailabilityConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_availability_configuration.DeleteAvailabilityConfigurationInput, options: delete_availability_configuration.Options) !delete_availability_configuration.DeleteAvailabilityConfigurationOutput {
+    pub fn deleteAvailabilityConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_availability_configuration.DeleteAvailabilityConfigurationInput, options: CallOptions) !delete_availability_configuration.DeleteAvailabilityConfigurationOutput {
         return delete_availability_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes the email monitoring configuration for a specified organization.
-    pub fn deleteEmailMonitoringConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_email_monitoring_configuration.DeleteEmailMonitoringConfigurationInput, options: delete_email_monitoring_configuration.Options) !delete_email_monitoring_configuration.DeleteEmailMonitoringConfigurationOutput {
+    pub fn deleteEmailMonitoringConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_email_monitoring_configuration.DeleteEmailMonitoringConfigurationInput, options: CallOptions) !delete_email_monitoring_configuration.DeleteEmailMonitoringConfigurationOutput {
         return delete_email_monitoring_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes a group from WorkMail.
-    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: delete_group.Options) !delete_group.DeleteGroupOutput {
+    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: CallOptions) !delete_group.DeleteGroupOutput {
         return delete_group.execute(self, allocator, input, options);
     }
 
     /// Deletes the IAM Identity Center application from WorkMail. This action does
     /// not affect the authentication settings for any WorkMail organizations.
-    pub fn deleteIdentityCenterApplication(self: *Self, allocator: std.mem.Allocator, input: delete_identity_center_application.DeleteIdentityCenterApplicationInput, options: delete_identity_center_application.Options) !delete_identity_center_application.DeleteIdentityCenterApplicationOutput {
+    pub fn deleteIdentityCenterApplication(self: *Self, allocator: std.mem.Allocator, input: delete_identity_center_application.DeleteIdentityCenterApplicationInput, options: CallOptions) !delete_identity_center_application.DeleteIdentityCenterApplicationOutput {
         return delete_identity_center_application.execute(self, allocator, input, options);
     }
 
@@ -269,17 +270,17 @@ pub const Client = struct {
     /// continue with the directory as it was before the IdC integration. You might
     /// have to reset your directory passwords and reconfigure your desktop and
     /// mobile email clients.
-    pub fn deleteIdentityProviderConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_identity_provider_configuration.DeleteIdentityProviderConfigurationInput, options: delete_identity_provider_configuration.Options) !delete_identity_provider_configuration.DeleteIdentityProviderConfigurationOutput {
+    pub fn deleteIdentityProviderConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_identity_provider_configuration.DeleteIdentityProviderConfigurationInput, options: CallOptions) !delete_identity_provider_configuration.DeleteIdentityProviderConfigurationOutput {
         return delete_identity_provider_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes an impersonation role for the given WorkMail organization.
-    pub fn deleteImpersonationRole(self: *Self, allocator: std.mem.Allocator, input: delete_impersonation_role.DeleteImpersonationRoleInput, options: delete_impersonation_role.Options) !delete_impersonation_role.DeleteImpersonationRoleOutput {
+    pub fn deleteImpersonationRole(self: *Self, allocator: std.mem.Allocator, input: delete_impersonation_role.DeleteImpersonationRoleInput, options: CallOptions) !delete_impersonation_role.DeleteImpersonationRoleOutput {
         return delete_impersonation_role.execute(self, allocator, input, options);
     }
 
     /// Deletes permissions granted to a member (user or group).
-    pub fn deleteMailboxPermissions(self: *Self, allocator: std.mem.Allocator, input: delete_mailbox_permissions.DeleteMailboxPermissionsInput, options: delete_mailbox_permissions.Options) !delete_mailbox_permissions.DeleteMailboxPermissionsOutput {
+    pub fn deleteMailboxPermissions(self: *Self, allocator: std.mem.Allocator, input: delete_mailbox_permissions.DeleteMailboxPermissionsInput, options: CallOptions) !delete_mailbox_permissions.DeleteMailboxPermissionsOutput {
         return delete_mailbox_permissions.execute(self, allocator, input, options);
     }
 
@@ -289,7 +290,7 @@ pub const Client = struct {
     /// Deleting already deleted and non-existing overrides does not produce an
     /// error. In those cases, the service sends back an HTTP 200 response with an
     /// empty HTTP body.
-    pub fn deleteMobileDeviceAccessOverride(self: *Self, allocator: std.mem.Allocator, input: delete_mobile_device_access_override.DeleteMobileDeviceAccessOverrideInput, options: delete_mobile_device_access_override.Options) !delete_mobile_device_access_override.DeleteMobileDeviceAccessOverrideOutput {
+    pub fn deleteMobileDeviceAccessOverride(self: *Self, allocator: std.mem.Allocator, input: delete_mobile_device_access_override.DeleteMobileDeviceAccessOverrideInput, options: CallOptions) !delete_mobile_device_access_override.DeleteMobileDeviceAccessOverrideOutput {
         return delete_mobile_device_access_override.execute(self, allocator, input, options);
     }
 
@@ -298,7 +299,7 @@ pub const Client = struct {
     /// Deleting already deleted and non-existing rules does not produce an error.
     /// In those cases, the service sends back an HTTP 200 response with an empty
     /// HTTP body.
-    pub fn deleteMobileDeviceAccessRule(self: *Self, allocator: std.mem.Allocator, input: delete_mobile_device_access_rule.DeleteMobileDeviceAccessRuleInput, options: delete_mobile_device_access_rule.Options) !delete_mobile_device_access_rule.DeleteMobileDeviceAccessRuleOutput {
+    pub fn deleteMobileDeviceAccessRule(self: *Self, allocator: std.mem.Allocator, input: delete_mobile_device_access_rule.DeleteMobileDeviceAccessRuleInput, options: CallOptions) !delete_mobile_device_access_rule.DeleteMobileDeviceAccessRuleOutput {
         return delete_mobile_device_access_rule.execute(self, allocator, input, options);
     }
 
@@ -306,22 +307,22 @@ pub const Client = struct {
     /// WorkMail as part of the organization. You can choose whether to delete the
     /// associated directory. For more information, see [Removing an
     /// organization](https://docs.aws.amazon.com/workmail/latest/adminguide/remove_organization.html) in the *WorkMail Administrator Guide*.
-    pub fn deleteOrganization(self: *Self, allocator: std.mem.Allocator, input: delete_organization.DeleteOrganizationInput, options: delete_organization.Options) !delete_organization.DeleteOrganizationOutput {
+    pub fn deleteOrganization(self: *Self, allocator: std.mem.Allocator, input: delete_organization.DeleteOrganizationInput, options: CallOptions) !delete_organization.DeleteOrganizationOutput {
         return delete_organization.execute(self, allocator, input, options);
     }
 
     /// Deletes the Personal Access Token from the provided WorkMail Organization.
-    pub fn deletePersonalAccessToken(self: *Self, allocator: std.mem.Allocator, input: delete_personal_access_token.DeletePersonalAccessTokenInput, options: delete_personal_access_token.Options) !delete_personal_access_token.DeletePersonalAccessTokenOutput {
+    pub fn deletePersonalAccessToken(self: *Self, allocator: std.mem.Allocator, input: delete_personal_access_token.DeletePersonalAccessTokenInput, options: CallOptions) !delete_personal_access_token.DeletePersonalAccessTokenOutput {
         return delete_personal_access_token.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified resource.
-    pub fn deleteResource(self: *Self, allocator: std.mem.Allocator, input: delete_resource.DeleteResourceInput, options: delete_resource.Options) !delete_resource.DeleteResourceOutput {
+    pub fn deleteResource(self: *Self, allocator: std.mem.Allocator, input: delete_resource.DeleteResourceInput, options: CallOptions) !delete_resource.DeleteResourceOutput {
         return delete_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified retention policy from the specified organization.
-    pub fn deleteRetentionPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_retention_policy.DeleteRetentionPolicyInput, options: delete_retention_policy.Options) !delete_retention_policy.DeleteRetentionPolicyOutput {
+    pub fn deleteRetentionPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_retention_policy.DeleteRetentionPolicyInput, options: CallOptions) !delete_retention_policy.DeleteRetentionPolicyOutput {
         return delete_retention_policy.execute(self, allocator, input, options);
     }
 
@@ -333,7 +334,7 @@ pub const Client = struct {
     /// Deleting a user is permanent and cannot be undone. WorkMail archives user
     /// mailboxes for
     /// 30 days before they are permanently removed.
-    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: delete_user.Options) !delete_user.DeleteUserOutput {
+    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: CallOptions) !delete_user.DeleteUserOutput {
         return delete_user.execute(self, allocator, input, options);
     }
 
@@ -342,7 +343,7 @@ pub const Client = struct {
     /// mailboxes for 30 days
     /// before they are permanently removed. The functionality in the console is
     /// *Disable*.
-    pub fn deregisterFromWorkMail(self: *Self, allocator: std.mem.Allocator, input: deregister_from_work_mail.DeregisterFromWorkMailInput, options: deregister_from_work_mail.Options) !deregister_from_work_mail.DeregisterFromWorkMailOutput {
+    pub fn deregisterFromWorkMail(self: *Self, allocator: std.mem.Allocator, input: deregister_from_work_mail.DeregisterFromWorkMailInput, options: CallOptions) !deregister_from_work_mail.DeregisterFromWorkMailOutput {
         return deregister_from_work_mail.execute(self, allocator, input, options);
     }
 
@@ -351,65 +352,65 @@ pub const Client = struct {
     /// applications may use it. You must first
     /// remove any email address used by WorkMail entities before you remove the
     /// domain.
-    pub fn deregisterMailDomain(self: *Self, allocator: std.mem.Allocator, input: deregister_mail_domain.DeregisterMailDomainInput, options: deregister_mail_domain.Options) !deregister_mail_domain.DeregisterMailDomainOutput {
+    pub fn deregisterMailDomain(self: *Self, allocator: std.mem.Allocator, input: deregister_mail_domain.DeregisterMailDomainInput, options: CallOptions) !deregister_mail_domain.DeregisterMailDomainOutput {
         return deregister_mail_domain.execute(self, allocator, input, options);
     }
 
     /// Describes the current email monitoring configuration for a specified
     /// organization.
-    pub fn describeEmailMonitoringConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_email_monitoring_configuration.DescribeEmailMonitoringConfigurationInput, options: describe_email_monitoring_configuration.Options) !describe_email_monitoring_configuration.DescribeEmailMonitoringConfigurationOutput {
+    pub fn describeEmailMonitoringConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_email_monitoring_configuration.DescribeEmailMonitoringConfigurationInput, options: CallOptions) !describe_email_monitoring_configuration.DescribeEmailMonitoringConfigurationOutput {
         return describe_email_monitoring_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns basic details about an entity in WorkMail.
-    pub fn describeEntity(self: *Self, allocator: std.mem.Allocator, input: describe_entity.DescribeEntityInput, options: describe_entity.Options) !describe_entity.DescribeEntityOutput {
+    pub fn describeEntity(self: *Self, allocator: std.mem.Allocator, input: describe_entity.DescribeEntityInput, options: CallOptions) !describe_entity.DescribeEntityOutput {
         return describe_entity.execute(self, allocator, input, options);
     }
 
     /// Returns the data available for the group.
-    pub fn describeGroup(self: *Self, allocator: std.mem.Allocator, input: describe_group.DescribeGroupInput, options: describe_group.Options) !describe_group.DescribeGroupOutput {
+    pub fn describeGroup(self: *Self, allocator: std.mem.Allocator, input: describe_group.DescribeGroupInput, options: CallOptions) !describe_group.DescribeGroupOutput {
         return describe_group.execute(self, allocator, input, options);
     }
 
     /// Returns detailed information on the current IdC setup for the WorkMail
     /// organization.
-    pub fn describeIdentityProviderConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_identity_provider_configuration.DescribeIdentityProviderConfigurationInput, options: describe_identity_provider_configuration.Options) !describe_identity_provider_configuration.DescribeIdentityProviderConfigurationOutput {
+    pub fn describeIdentityProviderConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_identity_provider_configuration.DescribeIdentityProviderConfigurationInput, options: CallOptions) !describe_identity_provider_configuration.DescribeIdentityProviderConfigurationOutput {
         return describe_identity_provider_configuration.execute(self, allocator, input, options);
     }
 
     /// Lists the settings in a DMARC policy for a specified organization.
-    pub fn describeInboundDmarcSettings(self: *Self, allocator: std.mem.Allocator, input: describe_inbound_dmarc_settings.DescribeInboundDmarcSettingsInput, options: describe_inbound_dmarc_settings.Options) !describe_inbound_dmarc_settings.DescribeInboundDmarcSettingsOutput {
+    pub fn describeInboundDmarcSettings(self: *Self, allocator: std.mem.Allocator, input: describe_inbound_dmarc_settings.DescribeInboundDmarcSettingsInput, options: CallOptions) !describe_inbound_dmarc_settings.DescribeInboundDmarcSettingsOutput {
         return describe_inbound_dmarc_settings.execute(self, allocator, input, options);
     }
 
     /// Describes the current status of a mailbox export job.
-    pub fn describeMailboxExportJob(self: *Self, allocator: std.mem.Allocator, input: describe_mailbox_export_job.DescribeMailboxExportJobInput, options: describe_mailbox_export_job.Options) !describe_mailbox_export_job.DescribeMailboxExportJobOutput {
+    pub fn describeMailboxExportJob(self: *Self, allocator: std.mem.Allocator, input: describe_mailbox_export_job.DescribeMailboxExportJobInput, options: CallOptions) !describe_mailbox_export_job.DescribeMailboxExportJobOutput {
         return describe_mailbox_export_job.execute(self, allocator, input, options);
     }
 
     /// Provides more information regarding a given organization based on its
     /// identifier.
-    pub fn describeOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_organization.DescribeOrganizationInput, options: describe_organization.Options) !describe_organization.DescribeOrganizationOutput {
+    pub fn describeOrganization(self: *Self, allocator: std.mem.Allocator, input: describe_organization.DescribeOrganizationInput, options: CallOptions) !describe_organization.DescribeOrganizationOutput {
         return describe_organization.execute(self, allocator, input, options);
     }
 
     /// Returns the data available for the resource.
-    pub fn describeResource(self: *Self, allocator: std.mem.Allocator, input: describe_resource.DescribeResourceInput, options: describe_resource.Options) !describe_resource.DescribeResourceOutput {
+    pub fn describeResource(self: *Self, allocator: std.mem.Allocator, input: describe_resource.DescribeResourceInput, options: CallOptions) !describe_resource.DescribeResourceOutput {
         return describe_resource.execute(self, allocator, input, options);
     }
 
     /// Provides information regarding the user.
-    pub fn describeUser(self: *Self, allocator: std.mem.Allocator, input: describe_user.DescribeUserInput, options: describe_user.Options) !describe_user.DescribeUserOutput {
+    pub fn describeUser(self: *Self, allocator: std.mem.Allocator, input: describe_user.DescribeUserInput, options: CallOptions) !describe_user.DescribeUserOutput {
         return describe_user.execute(self, allocator, input, options);
     }
 
     /// Removes a member from the resource's set of delegates.
-    pub fn disassociateDelegateFromResource(self: *Self, allocator: std.mem.Allocator, input: disassociate_delegate_from_resource.DisassociateDelegateFromResourceInput, options: disassociate_delegate_from_resource.Options) !disassociate_delegate_from_resource.DisassociateDelegateFromResourceOutput {
+    pub fn disassociateDelegateFromResource(self: *Self, allocator: std.mem.Allocator, input: disassociate_delegate_from_resource.DisassociateDelegateFromResourceInput, options: CallOptions) !disassociate_delegate_from_resource.DisassociateDelegateFromResourceOutput {
         return disassociate_delegate_from_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a member from a group.
-    pub fn disassociateMemberFromGroup(self: *Self, allocator: std.mem.Allocator, input: disassociate_member_from_group.DisassociateMemberFromGroupInput, options: disassociate_member_from_group.Options) !disassociate_member_from_group.DisassociateMemberFromGroupOutput {
+    pub fn disassociateMemberFromGroup(self: *Self, allocator: std.mem.Allocator, input: disassociate_member_from_group.DisassociateMemberFromGroupInput, options: CallOptions) !disassociate_member_from_group.DisassociateMemberFromGroupOutput {
         return disassociate_member_from_group.execute(self, allocator, input, options);
     }
 
@@ -418,33 +419,33 @@ pub const Client = struct {
     /// specified IPv4 address, access protocol action, and user ID or impersonation
     /// role ID. You must provide either the user ID or impersonation role ID.
     /// Impersonation role ID can only be used with Action EWS.
-    pub fn getAccessControlEffect(self: *Self, allocator: std.mem.Allocator, input: get_access_control_effect.GetAccessControlEffectInput, options: get_access_control_effect.Options) !get_access_control_effect.GetAccessControlEffectOutput {
+    pub fn getAccessControlEffect(self: *Self, allocator: std.mem.Allocator, input: get_access_control_effect.GetAccessControlEffectInput, options: CallOptions) !get_access_control_effect.GetAccessControlEffectOutput {
         return get_access_control_effect.execute(self, allocator, input, options);
     }
 
     /// Gets the default retention policy details for the specified organization.
-    pub fn getDefaultRetentionPolicy(self: *Self, allocator: std.mem.Allocator, input: get_default_retention_policy.GetDefaultRetentionPolicyInput, options: get_default_retention_policy.Options) !get_default_retention_policy.GetDefaultRetentionPolicyOutput {
+    pub fn getDefaultRetentionPolicy(self: *Self, allocator: std.mem.Allocator, input: get_default_retention_policy.GetDefaultRetentionPolicyInput, options: CallOptions) !get_default_retention_policy.GetDefaultRetentionPolicyOutput {
         return get_default_retention_policy.execute(self, allocator, input, options);
     }
 
     /// Gets the impersonation role details for the given WorkMail organization.
-    pub fn getImpersonationRole(self: *Self, allocator: std.mem.Allocator, input: get_impersonation_role.GetImpersonationRoleInput, options: get_impersonation_role.Options) !get_impersonation_role.GetImpersonationRoleOutput {
+    pub fn getImpersonationRole(self: *Self, allocator: std.mem.Allocator, input: get_impersonation_role.GetImpersonationRoleInput, options: CallOptions) !get_impersonation_role.GetImpersonationRoleOutput {
         return get_impersonation_role.execute(self, allocator, input, options);
     }
 
     /// Tests whether the given impersonation role can impersonate a target user.
-    pub fn getImpersonationRoleEffect(self: *Self, allocator: std.mem.Allocator, input: get_impersonation_role_effect.GetImpersonationRoleEffectInput, options: get_impersonation_role_effect.Options) !get_impersonation_role_effect.GetImpersonationRoleEffectOutput {
+    pub fn getImpersonationRoleEffect(self: *Self, allocator: std.mem.Allocator, input: get_impersonation_role_effect.GetImpersonationRoleEffectInput, options: CallOptions) !get_impersonation_role_effect.GetImpersonationRoleEffectOutput {
         return get_impersonation_role_effect.execute(self, allocator, input, options);
     }
 
     /// Gets details for a mail domain, including domain records required to
     /// configure your domain with recommended security.
-    pub fn getMailDomain(self: *Self, allocator: std.mem.Allocator, input: get_mail_domain.GetMailDomainInput, options: get_mail_domain.Options) !get_mail_domain.GetMailDomainOutput {
+    pub fn getMailDomain(self: *Self, allocator: std.mem.Allocator, input: get_mail_domain.GetMailDomainInput, options: CallOptions) !get_mail_domain.GetMailDomainOutput {
         return get_mail_domain.execute(self, allocator, input, options);
     }
 
     /// Requests a user's mailbox details for a specified organization and user.
-    pub fn getMailboxDetails(self: *Self, allocator: std.mem.Allocator, input: get_mailbox_details.GetMailboxDetailsInput, options: get_mailbox_details.Options) !get_mailbox_details.GetMailboxDetailsOutput {
+    pub fn getMailboxDetails(self: *Self, allocator: std.mem.Allocator, input: get_mailbox_details.GetMailboxDetailsInput, options: CallOptions) !get_mailbox_details.GetMailboxDetailsOutput {
         return get_mailbox_details.execute(self, allocator, input, options);
     }
 
@@ -452,120 +453,120 @@ pub const Client = struct {
     /// attributes of a sample access event. Use this method to test the effects of
     /// the current set of mobile device access
     /// rules for the WorkMail organization for a particular user's attributes.
-    pub fn getMobileDeviceAccessEffect(self: *Self, allocator: std.mem.Allocator, input: get_mobile_device_access_effect.GetMobileDeviceAccessEffectInput, options: get_mobile_device_access_effect.Options) !get_mobile_device_access_effect.GetMobileDeviceAccessEffectOutput {
+    pub fn getMobileDeviceAccessEffect(self: *Self, allocator: std.mem.Allocator, input: get_mobile_device_access_effect.GetMobileDeviceAccessEffectInput, options: CallOptions) !get_mobile_device_access_effect.GetMobileDeviceAccessEffectOutput {
         return get_mobile_device_access_effect.execute(self, allocator, input, options);
     }
 
     /// Gets the mobile device access override for the given WorkMail organization,
     /// user, and device.
-    pub fn getMobileDeviceAccessOverride(self: *Self, allocator: std.mem.Allocator, input: get_mobile_device_access_override.GetMobileDeviceAccessOverrideInput, options: get_mobile_device_access_override.Options) !get_mobile_device_access_override.GetMobileDeviceAccessOverrideOutput {
+    pub fn getMobileDeviceAccessOverride(self: *Self, allocator: std.mem.Allocator, input: get_mobile_device_access_override.GetMobileDeviceAccessOverrideInput, options: CallOptions) !get_mobile_device_access_override.GetMobileDeviceAccessOverrideOutput {
         return get_mobile_device_access_override.execute(self, allocator, input, options);
     }
 
     /// Requests details of a specific Personal Access Token within the WorkMail
     /// organization.
-    pub fn getPersonalAccessTokenMetadata(self: *Self, allocator: std.mem.Allocator, input: get_personal_access_token_metadata.GetPersonalAccessTokenMetadataInput, options: get_personal_access_token_metadata.Options) !get_personal_access_token_metadata.GetPersonalAccessTokenMetadataOutput {
+    pub fn getPersonalAccessTokenMetadata(self: *Self, allocator: std.mem.Allocator, input: get_personal_access_token_metadata.GetPersonalAccessTokenMetadataInput, options: CallOptions) !get_personal_access_token_metadata.GetPersonalAccessTokenMetadataOutput {
         return get_personal_access_token_metadata.execute(self, allocator, input, options);
     }
 
     /// Lists the access control rules for the specified organization.
-    pub fn listAccessControlRules(self: *Self, allocator: std.mem.Allocator, input: list_access_control_rules.ListAccessControlRulesInput, options: list_access_control_rules.Options) !list_access_control_rules.ListAccessControlRulesOutput {
+    pub fn listAccessControlRules(self: *Self, allocator: std.mem.Allocator, input: list_access_control_rules.ListAccessControlRulesInput, options: CallOptions) !list_access_control_rules.ListAccessControlRulesOutput {
         return list_access_control_rules.execute(self, allocator, input, options);
     }
 
     /// Creates a paginated call to list the aliases associated with a given
     /// entity.
-    pub fn listAliases(self: *Self, allocator: std.mem.Allocator, input: list_aliases.ListAliasesInput, options: list_aliases.Options) !list_aliases.ListAliasesOutput {
+    pub fn listAliases(self: *Self, allocator: std.mem.Allocator, input: list_aliases.ListAliasesInput, options: CallOptions) !list_aliases.ListAliasesOutput {
         return list_aliases.execute(self, allocator, input, options);
     }
 
     /// List all the `AvailabilityConfiguration`'s for the given WorkMail
     /// organization.
-    pub fn listAvailabilityConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_availability_configurations.ListAvailabilityConfigurationsInput, options: list_availability_configurations.Options) !list_availability_configurations.ListAvailabilityConfigurationsOutput {
+    pub fn listAvailabilityConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_availability_configurations.ListAvailabilityConfigurationsInput, options: CallOptions) !list_availability_configurations.ListAvailabilityConfigurationsOutput {
         return list_availability_configurations.execute(self, allocator, input, options);
     }
 
     /// Returns an overview of the members of a group. Users and groups can be
     /// members of a
     /// group.
-    pub fn listGroupMembers(self: *Self, allocator: std.mem.Allocator, input: list_group_members.ListGroupMembersInput, options: list_group_members.Options) !list_group_members.ListGroupMembersOutput {
+    pub fn listGroupMembers(self: *Self, allocator: std.mem.Allocator, input: list_group_members.ListGroupMembersInput, options: CallOptions) !list_group_members.ListGroupMembersOutput {
         return list_group_members.execute(self, allocator, input, options);
     }
 
     /// Returns summaries of the organization's groups.
-    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: list_groups.Options) !list_groups.ListGroupsOutput {
+    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: CallOptions) !list_groups.ListGroupsOutput {
         return list_groups.execute(self, allocator, input, options);
     }
 
     /// Returns all the groups to which an entity belongs.
-    pub fn listGroupsForEntity(self: *Self, allocator: std.mem.Allocator, input: list_groups_for_entity.ListGroupsForEntityInput, options: list_groups_for_entity.Options) !list_groups_for_entity.ListGroupsForEntityOutput {
+    pub fn listGroupsForEntity(self: *Self, allocator: std.mem.Allocator, input: list_groups_for_entity.ListGroupsForEntityInput, options: CallOptions) !list_groups_for_entity.ListGroupsForEntityOutput {
         return list_groups_for_entity.execute(self, allocator, input, options);
     }
 
     /// Lists all the impersonation roles for the given WorkMail organization.
-    pub fn listImpersonationRoles(self: *Self, allocator: std.mem.Allocator, input: list_impersonation_roles.ListImpersonationRolesInput, options: list_impersonation_roles.Options) !list_impersonation_roles.ListImpersonationRolesOutput {
+    pub fn listImpersonationRoles(self: *Self, allocator: std.mem.Allocator, input: list_impersonation_roles.ListImpersonationRolesInput, options: CallOptions) !list_impersonation_roles.ListImpersonationRolesOutput {
         return list_impersonation_roles.execute(self, allocator, input, options);
     }
 
     /// Lists the mail domains in a given WorkMail organization.
-    pub fn listMailDomains(self: *Self, allocator: std.mem.Allocator, input: list_mail_domains.ListMailDomainsInput, options: list_mail_domains.Options) !list_mail_domains.ListMailDomainsOutput {
+    pub fn listMailDomains(self: *Self, allocator: std.mem.Allocator, input: list_mail_domains.ListMailDomainsInput, options: CallOptions) !list_mail_domains.ListMailDomainsOutput {
         return list_mail_domains.execute(self, allocator, input, options);
     }
 
     /// Lists the mailbox export jobs started for the specified organization within
     /// the last
     /// seven days.
-    pub fn listMailboxExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_mailbox_export_jobs.ListMailboxExportJobsInput, options: list_mailbox_export_jobs.Options) !list_mailbox_export_jobs.ListMailboxExportJobsOutput {
+    pub fn listMailboxExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_mailbox_export_jobs.ListMailboxExportJobsInput, options: CallOptions) !list_mailbox_export_jobs.ListMailboxExportJobsOutput {
         return list_mailbox_export_jobs.execute(self, allocator, input, options);
     }
 
     /// Lists the mailbox permissions associated with a user, group, or resource
     /// mailbox.
-    pub fn listMailboxPermissions(self: *Self, allocator: std.mem.Allocator, input: list_mailbox_permissions.ListMailboxPermissionsInput, options: list_mailbox_permissions.Options) !list_mailbox_permissions.ListMailboxPermissionsOutput {
+    pub fn listMailboxPermissions(self: *Self, allocator: std.mem.Allocator, input: list_mailbox_permissions.ListMailboxPermissionsInput, options: CallOptions) !list_mailbox_permissions.ListMailboxPermissionsOutput {
         return list_mailbox_permissions.execute(self, allocator, input, options);
     }
 
     /// Lists all the mobile device access overrides for any given combination of
     /// WorkMail organization, user, or device.
-    pub fn listMobileDeviceAccessOverrides(self: *Self, allocator: std.mem.Allocator, input: list_mobile_device_access_overrides.ListMobileDeviceAccessOverridesInput, options: list_mobile_device_access_overrides.Options) !list_mobile_device_access_overrides.ListMobileDeviceAccessOverridesOutput {
+    pub fn listMobileDeviceAccessOverrides(self: *Self, allocator: std.mem.Allocator, input: list_mobile_device_access_overrides.ListMobileDeviceAccessOverridesInput, options: CallOptions) !list_mobile_device_access_overrides.ListMobileDeviceAccessOverridesOutput {
         return list_mobile_device_access_overrides.execute(self, allocator, input, options);
     }
 
     /// Lists the mobile device access rules for the specified WorkMail
     /// organization.
-    pub fn listMobileDeviceAccessRules(self: *Self, allocator: std.mem.Allocator, input: list_mobile_device_access_rules.ListMobileDeviceAccessRulesInput, options: list_mobile_device_access_rules.Options) !list_mobile_device_access_rules.ListMobileDeviceAccessRulesOutput {
+    pub fn listMobileDeviceAccessRules(self: *Self, allocator: std.mem.Allocator, input: list_mobile_device_access_rules.ListMobileDeviceAccessRulesInput, options: CallOptions) !list_mobile_device_access_rules.ListMobileDeviceAccessRulesOutput {
         return list_mobile_device_access_rules.execute(self, allocator, input, options);
     }
 
     /// Returns summaries of the customer's organizations.
-    pub fn listOrganizations(self: *Self, allocator: std.mem.Allocator, input: list_organizations.ListOrganizationsInput, options: list_organizations.Options) !list_organizations.ListOrganizationsOutput {
+    pub fn listOrganizations(self: *Self, allocator: std.mem.Allocator, input: list_organizations.ListOrganizationsInput, options: CallOptions) !list_organizations.ListOrganizationsOutput {
         return list_organizations.execute(self, allocator, input, options);
     }
 
     /// Returns a summary of your Personal Access Tokens.
-    pub fn listPersonalAccessTokens(self: *Self, allocator: std.mem.Allocator, input: list_personal_access_tokens.ListPersonalAccessTokensInput, options: list_personal_access_tokens.Options) !list_personal_access_tokens.ListPersonalAccessTokensOutput {
+    pub fn listPersonalAccessTokens(self: *Self, allocator: std.mem.Allocator, input: list_personal_access_tokens.ListPersonalAccessTokensInput, options: CallOptions) !list_personal_access_tokens.ListPersonalAccessTokensOutput {
         return list_personal_access_tokens.execute(self, allocator, input, options);
     }
 
     /// Lists the delegates associated with a resource. Users and groups can be
     /// resource
     /// delegates and answer requests on behalf of the resource.
-    pub fn listResourceDelegates(self: *Self, allocator: std.mem.Allocator, input: list_resource_delegates.ListResourceDelegatesInput, options: list_resource_delegates.Options) !list_resource_delegates.ListResourceDelegatesOutput {
+    pub fn listResourceDelegates(self: *Self, allocator: std.mem.Allocator, input: list_resource_delegates.ListResourceDelegatesInput, options: CallOptions) !list_resource_delegates.ListResourceDelegatesOutput {
         return list_resource_delegates.execute(self, allocator, input, options);
     }
 
     /// Returns summaries of the organization's resources.
-    pub fn listResources(self: *Self, allocator: std.mem.Allocator, input: list_resources.ListResourcesInput, options: list_resources.Options) !list_resources.ListResourcesOutput {
+    pub fn listResources(self: *Self, allocator: std.mem.Allocator, input: list_resources.ListResourcesInput, options: CallOptions) !list_resources.ListResourcesOutput {
         return list_resources.execute(self, allocator, input, options);
     }
 
     /// Lists the tags applied to an WorkMail organization resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Returns summaries of the organization's users.
-    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: list_users.Options) !list_users.ListUsersOutput {
+    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: CallOptions) !list_users.ListUsersOutput {
         return list_users.execute(self, allocator, input, options);
     }
 
@@ -576,13 +577,13 @@ pub const Client = struct {
     /// actions, user IDs and impersonation IDs. Adding a new rule with the same
     /// name as an existing rule replaces
     /// the older rule.
-    pub fn putAccessControlRule(self: *Self, allocator: std.mem.Allocator, input: put_access_control_rule.PutAccessControlRuleInput, options: put_access_control_rule.Options) !put_access_control_rule.PutAccessControlRuleOutput {
+    pub fn putAccessControlRule(self: *Self, allocator: std.mem.Allocator, input: put_access_control_rule.PutAccessControlRuleInput, options: CallOptions) !put_access_control_rule.PutAccessControlRuleOutput {
         return put_access_control_rule.execute(self, allocator, input, options);
     }
 
     /// Creates or updates the email monitoring configuration for a specified
     /// organization.
-    pub fn putEmailMonitoringConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_email_monitoring_configuration.PutEmailMonitoringConfigurationInput, options: put_email_monitoring_configuration.Options) !put_email_monitoring_configuration.PutEmailMonitoringConfigurationOutput {
+    pub fn putEmailMonitoringConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_email_monitoring_configuration.PutEmailMonitoringConfigurationInput, options: CallOptions) !put_email_monitoring_configuration.PutEmailMonitoringConfigurationOutput {
         return put_email_monitoring_configuration.execute(self, allocator, input, options);
     }
 
@@ -592,30 +593,30 @@ pub const Client = struct {
     /// IdC and manage access to WorkMail mailboxes in a single place. For enhanced
     /// protection, you could enable Multifactor Authentication (MFA) and Personal
     /// Access Tokens.
-    pub fn putIdentityProviderConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_identity_provider_configuration.PutIdentityProviderConfigurationInput, options: put_identity_provider_configuration.Options) !put_identity_provider_configuration.PutIdentityProviderConfigurationOutput {
+    pub fn putIdentityProviderConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_identity_provider_configuration.PutIdentityProviderConfigurationInput, options: CallOptions) !put_identity_provider_configuration.PutIdentityProviderConfigurationOutput {
         return put_identity_provider_configuration.execute(self, allocator, input, options);
     }
 
     /// Enables or disables a DMARC policy for a given organization.
-    pub fn putInboundDmarcSettings(self: *Self, allocator: std.mem.Allocator, input: put_inbound_dmarc_settings.PutInboundDmarcSettingsInput, options: put_inbound_dmarc_settings.Options) !put_inbound_dmarc_settings.PutInboundDmarcSettingsOutput {
+    pub fn putInboundDmarcSettings(self: *Self, allocator: std.mem.Allocator, input: put_inbound_dmarc_settings.PutInboundDmarcSettingsInput, options: CallOptions) !put_inbound_dmarc_settings.PutInboundDmarcSettingsOutput {
         return put_inbound_dmarc_settings.execute(self, allocator, input, options);
     }
 
     /// Sets permissions for a user, group, or resource. This replaces any
     /// pre-existing
     /// permissions.
-    pub fn putMailboxPermissions(self: *Self, allocator: std.mem.Allocator, input: put_mailbox_permissions.PutMailboxPermissionsInput, options: put_mailbox_permissions.Options) !put_mailbox_permissions.PutMailboxPermissionsOutput {
+    pub fn putMailboxPermissions(self: *Self, allocator: std.mem.Allocator, input: put_mailbox_permissions.PutMailboxPermissionsInput, options: CallOptions) !put_mailbox_permissions.PutMailboxPermissionsOutput {
         return put_mailbox_permissions.execute(self, allocator, input, options);
     }
 
     /// Creates or updates a mobile device access override for the given WorkMail
     /// organization, user, and device.
-    pub fn putMobileDeviceAccessOverride(self: *Self, allocator: std.mem.Allocator, input: put_mobile_device_access_override.PutMobileDeviceAccessOverrideInput, options: put_mobile_device_access_override.Options) !put_mobile_device_access_override.PutMobileDeviceAccessOverrideOutput {
+    pub fn putMobileDeviceAccessOverride(self: *Self, allocator: std.mem.Allocator, input: put_mobile_device_access_override.PutMobileDeviceAccessOverrideInput, options: CallOptions) !put_mobile_device_access_override.PutMobileDeviceAccessOverrideOutput {
         return put_mobile_device_access_override.execute(self, allocator, input, options);
     }
 
     /// Puts a retention policy to the specified organization.
-    pub fn putRetentionPolicy(self: *Self, allocator: std.mem.Allocator, input: put_retention_policy.PutRetentionPolicyInput, options: put_retention_policy.Options) !put_retention_policy.PutRetentionPolicyOutput {
+    pub fn putRetentionPolicy(self: *Self, allocator: std.mem.Allocator, input: put_retention_policy.PutRetentionPolicyInput, options: CallOptions) !put_retention_policy.PutRetentionPolicyOutput {
         return put_retention_policy.execute(self, allocator, input, options);
     }
 
@@ -624,7 +625,7 @@ pub const Client = struct {
     /// WorkMail organization, and WorkMail has
     /// permanent permission to use the specified domain for sending your users'
     /// emails.
-    pub fn registerMailDomain(self: *Self, allocator: std.mem.Allocator, input: register_mail_domain.RegisterMailDomainInput, options: register_mail_domain.Options) !register_mail_domain.RegisterMailDomainOutput {
+    pub fn registerMailDomain(self: *Self, allocator: std.mem.Allocator, input: register_mail_domain.RegisterMailDomainInput, options: CallOptions) !register_mail_domain.RegisterMailDomainOutput {
         return register_mail_domain.execute(self, allocator, input, options);
     }
 
@@ -641,12 +642,12 @@ pub const Client = struct {
     /// Users can either be created by calling the CreateUser API operation
     /// or they can be synchronized from your directory. For more information, see
     /// DeregisterFromWorkMail.
-    pub fn registerToWorkMail(self: *Self, allocator: std.mem.Allocator, input: register_to_work_mail.RegisterToWorkMailInput, options: register_to_work_mail.Options) !register_to_work_mail.RegisterToWorkMailOutput {
+    pub fn registerToWorkMail(self: *Self, allocator: std.mem.Allocator, input: register_to_work_mail.RegisterToWorkMailInput, options: CallOptions) !register_to_work_mail.RegisterToWorkMailOutput {
         return register_to_work_mail.execute(self, allocator, input, options);
     }
 
     /// Allows the administrator to reset the password for a user.
-    pub fn resetPassword(self: *Self, allocator: std.mem.Allocator, input: reset_password.ResetPasswordInput, options: reset_password.Options) !reset_password.ResetPasswordOutput {
+    pub fn resetPassword(self: *Self, allocator: std.mem.Allocator, input: reset_password.ResetPasswordInput, options: CallOptions) !reset_password.ResetPasswordOutput {
         return reset_password.execute(self, allocator, input, options);
     }
 
@@ -657,13 +658,13 @@ pub const Client = struct {
     /// bucket. For more information, see [Exporting mailbox
     /// content](https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html) in
     /// the *WorkMail Administrator Guide*.
-    pub fn startMailboxExportJob(self: *Self, allocator: std.mem.Allocator, input: start_mailbox_export_job.StartMailboxExportJobInput, options: start_mailbox_export_job.Options) !start_mailbox_export_job.StartMailboxExportJobOutput {
+    pub fn startMailboxExportJob(self: *Self, allocator: std.mem.Allocator, input: start_mailbox_export_job.StartMailboxExportJobInput, options: CallOptions) !start_mailbox_export_job.StartMailboxExportJobOutput {
         return start_mailbox_export_job.execute(self, allocator, input, options);
     }
 
     /// Applies the specified tags to the specified WorkMailorganization
     /// resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -678,47 +679,47 @@ pub const Client = struct {
     /// `LambdaProvider`) or the `DomainName` parameter. If the
     /// `DomainName` parameter is provided, the configuration stored under the
     /// `DomainName` will be tested.
-    pub fn testAvailabilityConfiguration(self: *Self, allocator: std.mem.Allocator, input: test_availability_configuration.TestAvailabilityConfigurationInput, options: test_availability_configuration.Options) !test_availability_configuration.TestAvailabilityConfigurationOutput {
+    pub fn testAvailabilityConfiguration(self: *Self, allocator: std.mem.Allocator, input: test_availability_configuration.TestAvailabilityConfigurationInput, options: CallOptions) !test_availability_configuration.TestAvailabilityConfigurationOutput {
         return test_availability_configuration.execute(self, allocator, input, options);
     }
 
     /// Untags the specified tags from the specified WorkMail organization
     /// resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an existing `AvailabilityConfiguration` for the given WorkMail
     /// organization and domain.
-    pub fn updateAvailabilityConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_availability_configuration.UpdateAvailabilityConfigurationInput, options: update_availability_configuration.Options) !update_availability_configuration.UpdateAvailabilityConfigurationOutput {
+    pub fn updateAvailabilityConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_availability_configuration.UpdateAvailabilityConfigurationInput, options: CallOptions) !update_availability_configuration.UpdateAvailabilityConfigurationOutput {
         return update_availability_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the default mail domain for an organization. The default mail domain
     /// is used by the WorkMail AWS Console to suggest an email address when
     /// enabling a mail user. You can only have one default domain.
-    pub fn updateDefaultMailDomain(self: *Self, allocator: std.mem.Allocator, input: update_default_mail_domain.UpdateDefaultMailDomainInput, options: update_default_mail_domain.Options) !update_default_mail_domain.UpdateDefaultMailDomainOutput {
+    pub fn updateDefaultMailDomain(self: *Self, allocator: std.mem.Allocator, input: update_default_mail_domain.UpdateDefaultMailDomainInput, options: CallOptions) !update_default_mail_domain.UpdateDefaultMailDomainOutput {
         return update_default_mail_domain.execute(self, allocator, input, options);
     }
 
     /// Updates attributes in a group.
-    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: update_group.Options) !update_group.UpdateGroupOutput {
+    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: CallOptions) !update_group.UpdateGroupOutput {
         return update_group.execute(self, allocator, input, options);
     }
 
     /// Updates an impersonation role for the given WorkMail organization.
-    pub fn updateImpersonationRole(self: *Self, allocator: std.mem.Allocator, input: update_impersonation_role.UpdateImpersonationRoleInput, options: update_impersonation_role.Options) !update_impersonation_role.UpdateImpersonationRoleOutput {
+    pub fn updateImpersonationRole(self: *Self, allocator: std.mem.Allocator, input: update_impersonation_role.UpdateImpersonationRoleInput, options: CallOptions) !update_impersonation_role.UpdateImpersonationRoleOutput {
         return update_impersonation_role.execute(self, allocator, input, options);
     }
 
     /// Updates a user's current mailbox quota for a specified organization and
     /// user.
-    pub fn updateMailboxQuota(self: *Self, allocator: std.mem.Allocator, input: update_mailbox_quota.UpdateMailboxQuotaInput, options: update_mailbox_quota.Options) !update_mailbox_quota.UpdateMailboxQuotaOutput {
+    pub fn updateMailboxQuota(self: *Self, allocator: std.mem.Allocator, input: update_mailbox_quota.UpdateMailboxQuotaInput, options: CallOptions) !update_mailbox_quota.UpdateMailboxQuotaOutput {
         return update_mailbox_quota.execute(self, allocator, input, options);
     }
 
     /// Updates a mobile device access rule for the specified WorkMail organization.
-    pub fn updateMobileDeviceAccessRule(self: *Self, allocator: std.mem.Allocator, input: update_mobile_device_access_rule.UpdateMobileDeviceAccessRuleInput, options: update_mobile_device_access_rule.Options) !update_mobile_device_access_rule.UpdateMobileDeviceAccessRuleOutput {
+    pub fn updateMobileDeviceAccessRule(self: *Self, allocator: std.mem.Allocator, input: update_mobile_device_access_rule.UpdateMobileDeviceAccessRuleInput, options: CallOptions) !update_mobile_device_access_rule.UpdateMobileDeviceAccessRuleOutput {
         return update_mobile_device_access_rule.execute(self, allocator, input, options);
     }
 
@@ -727,7 +728,7 @@ pub const Client = struct {
     /// into the list of aliases (or swapped between an existing alias and the
     /// current primary
     /// email), and the email provided in the input is promoted as the primary.
-    pub fn updatePrimaryEmailAddress(self: *Self, allocator: std.mem.Allocator, input: update_primary_email_address.UpdatePrimaryEmailAddressInput, options: update_primary_email_address.Options) !update_primary_email_address.UpdatePrimaryEmailAddressOutput {
+    pub fn updatePrimaryEmailAddress(self: *Self, allocator: std.mem.Allocator, input: update_primary_email_address.UpdatePrimaryEmailAddressInput, options: CallOptions) !update_primary_email_address.UpdatePrimaryEmailAddressOutput {
         return update_primary_email_address.execute(self, allocator, input, options);
     }
 
@@ -735,7 +736,7 @@ pub const Client = struct {
     /// preceded by
     /// a DescribeResource call. The dataset in the request should be the one
     /// expected when performing another `DescribeResource` call.
-    pub fn updateResource(self: *Self, allocator: std.mem.Allocator, input: update_resource.UpdateResourceInput, options: update_resource.Options) !update_resource.UpdateResourceOutput {
+    pub fn updateResource(self: *Self, allocator: std.mem.Allocator, input: update_resource.UpdateResourceInput, options: CallOptions) !update_resource.UpdateResourceOutput {
         return update_resource.execute(self, allocator, input, options);
     }
 
@@ -743,7 +744,7 @@ pub const Client = struct {
     /// preceded by a
     /// DescribeUser call. The dataset in the request should be the one
     /// expected when performing another `DescribeUser` call.
-    pub fn updateUser(self: *Self, allocator: std.mem.Allocator, input: update_user.UpdateUserInput, options: update_user.Options) !update_user.UpdateUserOutput {
+    pub fn updateUser(self: *Self, allocator: std.mem.Allocator, input: update_user.UpdateUserInput, options: CallOptions) !update_user.UpdateUserOutput {
         return update_user.execute(self, allocator, input, options);
     }
 

@@ -40,6 +40,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_event_rule = @import("update_event_rule.zig");
 const update_notification_configuration = @import("update_notification_configuration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -72,13 +73,13 @@ pub const Client = struct {
 
     /// Associates a delivery
     /// [Channel](https://docs.aws.amazon.com/notifications/latest/userguide/managing-delivery-channels.html) with a particular `NotificationConfiguration`. Supported Channels include Amazon Q Developer in chat applications, the Console Mobile Application, and emails (notifications-contacts).
-    pub fn associateChannel(self: *Self, allocator: std.mem.Allocator, input: associate_channel.AssociateChannelInput, options: associate_channel.Options) !associate_channel.AssociateChannelOutput {
+    pub fn associateChannel(self: *Self, allocator: std.mem.Allocator, input: associate_channel.AssociateChannelInput, options: CallOptions) !associate_channel.AssociateChannelOutput {
         return associate_channel.execute(self, allocator, input, options);
     }
 
     /// Associates an Account Contact with a particular
     /// `ManagedNotificationConfiguration`.
-    pub fn associateManagedNotificationAccountContact(self: *Self, allocator: std.mem.Allocator, input: associate_managed_notification_account_contact.AssociateManagedNotificationAccountContactInput, options: associate_managed_notification_account_contact.Options) !associate_managed_notification_account_contact.AssociateManagedNotificationAccountContactOutput {
+    pub fn associateManagedNotificationAccountContact(self: *Self, allocator: std.mem.Allocator, input: associate_managed_notification_account_contact.AssociateManagedNotificationAccountContactInput, options: CallOptions) !associate_managed_notification_account_contact.AssociateManagedNotificationAccountContactOutput {
         return associate_managed_notification_account_contact.execute(self, allocator, input, options);
     }
 
@@ -87,34 +88,34 @@ pub const Client = struct {
     ///
     /// Supported Channels include Amazon Q Developer in chat applications, the
     /// Console Mobile Application, and emails (notifications-contacts).
-    pub fn associateManagedNotificationAdditionalChannel(self: *Self, allocator: std.mem.Allocator, input: associate_managed_notification_additional_channel.AssociateManagedNotificationAdditionalChannelInput, options: associate_managed_notification_additional_channel.Options) !associate_managed_notification_additional_channel.AssociateManagedNotificationAdditionalChannelOutput {
+    pub fn associateManagedNotificationAdditionalChannel(self: *Self, allocator: std.mem.Allocator, input: associate_managed_notification_additional_channel.AssociateManagedNotificationAdditionalChannelInput, options: CallOptions) !associate_managed_notification_additional_channel.AssociateManagedNotificationAdditionalChannelOutput {
         return associate_managed_notification_additional_channel.execute(self, allocator, input, options);
     }
 
     /// Associates an organizational unit with a notification configuration.
-    pub fn associateOrganizationalUnit(self: *Self, allocator: std.mem.Allocator, input: associate_organizational_unit.AssociateOrganizationalUnitInput, options: associate_organizational_unit.Options) !associate_organizational_unit.AssociateOrganizationalUnitOutput {
+    pub fn associateOrganizationalUnit(self: *Self, allocator: std.mem.Allocator, input: associate_organizational_unit.AssociateOrganizationalUnitInput, options: CallOptions) !associate_organizational_unit.AssociateOrganizationalUnitOutput {
         return associate_organizational_unit.execute(self, allocator, input, options);
     }
 
     /// Creates an [ `EventRule`
     /// ](https://docs.aws.amazon.com/notifications/latest/userguide/glossary.html)
     /// that is associated with a specified `NotificationConfiguration`.
-    pub fn createEventRule(self: *Self, allocator: std.mem.Allocator, input: create_event_rule.CreateEventRuleInput, options: create_event_rule.Options) !create_event_rule.CreateEventRuleOutput {
+    pub fn createEventRule(self: *Self, allocator: std.mem.Allocator, input: create_event_rule.CreateEventRuleInput, options: CallOptions) !create_event_rule.CreateEventRuleOutput {
         return create_event_rule.execute(self, allocator, input, options);
     }
 
     /// Creates a new `NotificationConfiguration`.
-    pub fn createNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_notification_configuration.CreateNotificationConfigurationInput, options: create_notification_configuration.Options) !create_notification_configuration.CreateNotificationConfigurationOutput {
+    pub fn createNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_notification_configuration.CreateNotificationConfigurationInput, options: CallOptions) !create_notification_configuration.CreateNotificationConfigurationOutput {
         return create_notification_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes an `EventRule`.
-    pub fn deleteEventRule(self: *Self, allocator: std.mem.Allocator, input: delete_event_rule.DeleteEventRuleInput, options: delete_event_rule.Options) !delete_event_rule.DeleteEventRuleOutput {
+    pub fn deleteEventRule(self: *Self, allocator: std.mem.Allocator, input: delete_event_rule.DeleteEventRuleInput, options: CallOptions) !delete_event_rule.DeleteEventRuleOutput {
         return delete_event_rule.execute(self, allocator, input, options);
     }
 
     /// Deletes a `NotificationConfiguration`.
-    pub fn deleteNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_notification_configuration.DeleteNotificationConfigurationInput, options: delete_notification_configuration.Options) !delete_notification_configuration.DeleteNotificationConfigurationOutput {
+    pub fn deleteNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_notification_configuration.DeleteNotificationConfigurationInput, options: CallOptions) !delete_notification_configuration.DeleteNotificationConfigurationOutput {
         return delete_notification_configuration.execute(self, allocator, input, options);
     }
 
@@ -124,26 +125,26 @@ pub const Client = struct {
     /// `NotificationEvents` stored in the deregistered `NotificationConfiguration`
     /// are no longer be visible. Recreating a new `NotificationConfiguration` in
     /// the same Region restores access to those `NotificationEvents`.
-    pub fn deregisterNotificationHub(self: *Self, allocator: std.mem.Allocator, input: deregister_notification_hub.DeregisterNotificationHubInput, options: deregister_notification_hub.Options) !deregister_notification_hub.DeregisterNotificationHubOutput {
+    pub fn deregisterNotificationHub(self: *Self, allocator: std.mem.Allocator, input: deregister_notification_hub.DeregisterNotificationHubInput, options: CallOptions) !deregister_notification_hub.DeregisterNotificationHubOutput {
         return deregister_notification_hub.execute(self, allocator, input, options);
     }
 
     /// Disables service trust between User Notifications and Amazon Web Services
     /// Organizations.
-    pub fn disableNotificationsAccessForOrganization(self: *Self, allocator: std.mem.Allocator, input: disable_notifications_access_for_organization.DisableNotificationsAccessForOrganizationInput, options: disable_notifications_access_for_organization.Options) !disable_notifications_access_for_organization.DisableNotificationsAccessForOrganizationOutput {
+    pub fn disableNotificationsAccessForOrganization(self: *Self, allocator: std.mem.Allocator, input: disable_notifications_access_for_organization.DisableNotificationsAccessForOrganizationInput, options: CallOptions) !disable_notifications_access_for_organization.DisableNotificationsAccessForOrganizationOutput {
         return disable_notifications_access_for_organization.execute(self, allocator, input, options);
     }
 
     /// Disassociates a Channel from a specified `NotificationConfiguration`.
     /// Supported Channels include Amazon Q Developer in chat applications, the
     /// Console Mobile Application, and emails (notifications-contacts).
-    pub fn disassociateChannel(self: *Self, allocator: std.mem.Allocator, input: disassociate_channel.DisassociateChannelInput, options: disassociate_channel.Options) !disassociate_channel.DisassociateChannelOutput {
+    pub fn disassociateChannel(self: *Self, allocator: std.mem.Allocator, input: disassociate_channel.DisassociateChannelInput, options: CallOptions) !disassociate_channel.DisassociateChannelOutput {
         return disassociate_channel.execute(self, allocator, input, options);
     }
 
     /// Disassociates an Account Contact with a particular
     /// `ManagedNotificationConfiguration`.
-    pub fn disassociateManagedNotificationAccountContact(self: *Self, allocator: std.mem.Allocator, input: disassociate_managed_notification_account_contact.DisassociateManagedNotificationAccountContactInput, options: disassociate_managed_notification_account_contact.Options) !disassociate_managed_notification_account_contact.DisassociateManagedNotificationAccountContactOutput {
+    pub fn disassociateManagedNotificationAccountContact(self: *Self, allocator: std.mem.Allocator, input: disassociate_managed_notification_account_contact.DisassociateManagedNotificationAccountContactInput, options: CallOptions) !disassociate_managed_notification_account_contact.DisassociateManagedNotificationAccountContactOutput {
         return disassociate_managed_notification_account_contact.execute(self, allocator, input, options);
     }
 
@@ -152,44 +153,44 @@ pub const Client = struct {
     ///
     /// Supported Channels include Amazon Q Developer in chat applications, the
     /// Console Mobile Application, and emails (notifications-contacts).
-    pub fn disassociateManagedNotificationAdditionalChannel(self: *Self, allocator: std.mem.Allocator, input: disassociate_managed_notification_additional_channel.DisassociateManagedNotificationAdditionalChannelInput, options: disassociate_managed_notification_additional_channel.Options) !disassociate_managed_notification_additional_channel.DisassociateManagedNotificationAdditionalChannelOutput {
+    pub fn disassociateManagedNotificationAdditionalChannel(self: *Self, allocator: std.mem.Allocator, input: disassociate_managed_notification_additional_channel.DisassociateManagedNotificationAdditionalChannelInput, options: CallOptions) !disassociate_managed_notification_additional_channel.DisassociateManagedNotificationAdditionalChannelOutput {
         return disassociate_managed_notification_additional_channel.execute(self, allocator, input, options);
     }
 
     /// Removes the association between an organizational unit and a notification
     /// configuration.
-    pub fn disassociateOrganizationalUnit(self: *Self, allocator: std.mem.Allocator, input: disassociate_organizational_unit.DisassociateOrganizationalUnitInput, options: disassociate_organizational_unit.Options) !disassociate_organizational_unit.DisassociateOrganizationalUnitOutput {
+    pub fn disassociateOrganizationalUnit(self: *Self, allocator: std.mem.Allocator, input: disassociate_organizational_unit.DisassociateOrganizationalUnitInput, options: CallOptions) !disassociate_organizational_unit.DisassociateOrganizationalUnitOutput {
         return disassociate_organizational_unit.execute(self, allocator, input, options);
     }
 
     /// Enables service trust between User Notifications and Amazon Web Services
     /// Organizations.
-    pub fn enableNotificationsAccessForOrganization(self: *Self, allocator: std.mem.Allocator, input: enable_notifications_access_for_organization.EnableNotificationsAccessForOrganizationInput, options: enable_notifications_access_for_organization.Options) !enable_notifications_access_for_organization.EnableNotificationsAccessForOrganizationOutput {
+    pub fn enableNotificationsAccessForOrganization(self: *Self, allocator: std.mem.Allocator, input: enable_notifications_access_for_organization.EnableNotificationsAccessForOrganizationInput, options: CallOptions) !enable_notifications_access_for_organization.EnableNotificationsAccessForOrganizationOutput {
         return enable_notifications_access_for_organization.execute(self, allocator, input, options);
     }
 
     /// Returns a specified `EventRule`.
-    pub fn getEventRule(self: *Self, allocator: std.mem.Allocator, input: get_event_rule.GetEventRuleInput, options: get_event_rule.Options) !get_event_rule.GetEventRuleOutput {
+    pub fn getEventRule(self: *Self, allocator: std.mem.Allocator, input: get_event_rule.GetEventRuleInput, options: CallOptions) !get_event_rule.GetEventRuleOutput {
         return get_event_rule.execute(self, allocator, input, options);
     }
 
     /// Returns the child event of a specific given `ManagedNotificationEvent`.
-    pub fn getManagedNotificationChildEvent(self: *Self, allocator: std.mem.Allocator, input: get_managed_notification_child_event.GetManagedNotificationChildEventInput, options: get_managed_notification_child_event.Options) !get_managed_notification_child_event.GetManagedNotificationChildEventOutput {
+    pub fn getManagedNotificationChildEvent(self: *Self, allocator: std.mem.Allocator, input: get_managed_notification_child_event.GetManagedNotificationChildEventInput, options: CallOptions) !get_managed_notification_child_event.GetManagedNotificationChildEventOutput {
         return get_managed_notification_child_event.execute(self, allocator, input, options);
     }
 
     /// Returns a specified `ManagedNotificationConfiguration`.
-    pub fn getManagedNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_managed_notification_configuration.GetManagedNotificationConfigurationInput, options: get_managed_notification_configuration.Options) !get_managed_notification_configuration.GetManagedNotificationConfigurationOutput {
+    pub fn getManagedNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_managed_notification_configuration.GetManagedNotificationConfigurationInput, options: CallOptions) !get_managed_notification_configuration.GetManagedNotificationConfigurationOutput {
         return get_managed_notification_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns a specified `ManagedNotificationEvent`.
-    pub fn getManagedNotificationEvent(self: *Self, allocator: std.mem.Allocator, input: get_managed_notification_event.GetManagedNotificationEventInput, options: get_managed_notification_event.Options) !get_managed_notification_event.GetManagedNotificationEventOutput {
+    pub fn getManagedNotificationEvent(self: *Self, allocator: std.mem.Allocator, input: get_managed_notification_event.GetManagedNotificationEventInput, options: CallOptions) !get_managed_notification_event.GetManagedNotificationEventOutput {
         return get_managed_notification_event.execute(self, allocator, input, options);
     }
 
     /// Returns a specified `NotificationConfiguration`.
-    pub fn getNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_notification_configuration.GetNotificationConfigurationInput, options: get_notification_configuration.Options) !get_notification_configuration.GetNotificationConfigurationOutput {
+    pub fn getNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_notification_configuration.GetNotificationConfigurationInput, options: CallOptions) !get_notification_configuration.GetNotificationConfigurationOutput {
         return get_notification_configuration.execute(self, allocator, input, options);
     }
 
@@ -203,63 +204,63 @@ pub const Client = struct {
     /// we recommend that you make calls in your oldest registered notification hub.
     /// For more information, see [Notification
     /// hubs](https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html) in the *Amazon Web Services User Notifications User Guide*.
-    pub fn getNotificationEvent(self: *Self, allocator: std.mem.Allocator, input: get_notification_event.GetNotificationEventInput, options: get_notification_event.Options) !get_notification_event.GetNotificationEventOutput {
+    pub fn getNotificationEvent(self: *Self, allocator: std.mem.Allocator, input: get_notification_event.GetNotificationEventInput, options: CallOptions) !get_notification_event.GetNotificationEventOutput {
         return get_notification_event.execute(self, allocator, input, options);
     }
 
     /// Returns the AccessStatus of Service Trust Enablement for User Notifications
     /// and Amazon Web Services Organizations.
-    pub fn getNotificationsAccessForOrganization(self: *Self, allocator: std.mem.Allocator, input: get_notifications_access_for_organization.GetNotificationsAccessForOrganizationInput, options: get_notifications_access_for_organization.Options) !get_notifications_access_for_organization.GetNotificationsAccessForOrganizationOutput {
+    pub fn getNotificationsAccessForOrganization(self: *Self, allocator: std.mem.Allocator, input: get_notifications_access_for_organization.GetNotificationsAccessForOrganizationInput, options: CallOptions) !get_notifications_access_for_organization.GetNotificationsAccessForOrganizationOutput {
         return get_notifications_access_for_organization.execute(self, allocator, input, options);
     }
 
     /// Returns a list of Channels for a `NotificationConfiguration`.
-    pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: list_channels.Options) !list_channels.ListChannelsOutput {
+    pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: CallOptions) !list_channels.ListChannelsOutput {
         return list_channels.execute(self, allocator, input, options);
     }
 
     /// Returns a list of `EventRules` according to specified filters, in reverse
     /// chronological order (newest first).
-    pub fn listEventRules(self: *Self, allocator: std.mem.Allocator, input: list_event_rules.ListEventRulesInput, options: list_event_rules.Options) !list_event_rules.ListEventRulesOutput {
+    pub fn listEventRules(self: *Self, allocator: std.mem.Allocator, input: list_event_rules.ListEventRulesInput, options: CallOptions) !list_event_rules.ListEventRulesOutput {
         return list_event_rules.execute(self, allocator, input, options);
     }
 
     /// Returns a list of Account contacts and Channels associated with a
     /// `ManagedNotificationConfiguration`, in paginated format.
-    pub fn listManagedNotificationChannelAssociations(self: *Self, allocator: std.mem.Allocator, input: list_managed_notification_channel_associations.ListManagedNotificationChannelAssociationsInput, options: list_managed_notification_channel_associations.Options) !list_managed_notification_channel_associations.ListManagedNotificationChannelAssociationsOutput {
+    pub fn listManagedNotificationChannelAssociations(self: *Self, allocator: std.mem.Allocator, input: list_managed_notification_channel_associations.ListManagedNotificationChannelAssociationsInput, options: CallOptions) !list_managed_notification_channel_associations.ListManagedNotificationChannelAssociationsOutput {
         return list_managed_notification_channel_associations.execute(self, allocator, input, options);
     }
 
     /// Returns a list of `ManagedNotificationChildEvents` for a specified aggregate
     /// `ManagedNotificationEvent`, ordered by creation time in reverse
     /// chronological order (newest first).
-    pub fn listManagedNotificationChildEvents(self: *Self, allocator: std.mem.Allocator, input: list_managed_notification_child_events.ListManagedNotificationChildEventsInput, options: list_managed_notification_child_events.Options) !list_managed_notification_child_events.ListManagedNotificationChildEventsOutput {
+    pub fn listManagedNotificationChildEvents(self: *Self, allocator: std.mem.Allocator, input: list_managed_notification_child_events.ListManagedNotificationChildEventsInput, options: CallOptions) !list_managed_notification_child_events.ListManagedNotificationChildEventsOutput {
         return list_managed_notification_child_events.execute(self, allocator, input, options);
     }
 
     /// Returns a list of Managed Notification Configurations according to specified
     /// filters, ordered by creation time in reverse chronological order (newest
     /// first).
-    pub fn listManagedNotificationConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_managed_notification_configurations.ListManagedNotificationConfigurationsInput, options: list_managed_notification_configurations.Options) !list_managed_notification_configurations.ListManagedNotificationConfigurationsOutput {
+    pub fn listManagedNotificationConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_managed_notification_configurations.ListManagedNotificationConfigurationsInput, options: CallOptions) !list_managed_notification_configurations.ListManagedNotificationConfigurationsOutput {
         return list_managed_notification_configurations.execute(self, allocator, input, options);
     }
 
     /// Returns a list of Managed Notification Events according to specified
     /// filters, ordered by creation time in reverse chronological order (newest
     /// first).
-    pub fn listManagedNotificationEvents(self: *Self, allocator: std.mem.Allocator, input: list_managed_notification_events.ListManagedNotificationEventsInput, options: list_managed_notification_events.Options) !list_managed_notification_events.ListManagedNotificationEventsOutput {
+    pub fn listManagedNotificationEvents(self: *Self, allocator: std.mem.Allocator, input: list_managed_notification_events.ListManagedNotificationEventsInput, options: CallOptions) !list_managed_notification_events.ListManagedNotificationEventsOutput {
         return list_managed_notification_events.execute(self, allocator, input, options);
     }
 
     /// Returns a list of member accounts associated with a notification
     /// configuration.
-    pub fn listMemberAccounts(self: *Self, allocator: std.mem.Allocator, input: list_member_accounts.ListMemberAccountsInput, options: list_member_accounts.Options) !list_member_accounts.ListMemberAccountsOutput {
+    pub fn listMemberAccounts(self: *Self, allocator: std.mem.Allocator, input: list_member_accounts.ListMemberAccountsInput, options: CallOptions) !list_member_accounts.ListMemberAccountsOutput {
         return list_member_accounts.execute(self, allocator, input, options);
     }
 
     /// Returns a list of abbreviated `NotificationConfigurations` according to
     /// specified filters, in reverse chronological order (newest first).
-    pub fn listNotificationConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_notification_configurations.ListNotificationConfigurationsInput, options: list_notification_configurations.Options) !list_notification_configurations.ListNotificationConfigurationsOutput {
+    pub fn listNotificationConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_notification_configurations.ListNotificationConfigurationsInput, options: CallOptions) !list_notification_configurations.ListNotificationConfigurationsOutput {
         return list_notification_configurations.execute(self, allocator, input, options);
     }
 
@@ -274,18 +275,18 @@ pub const Client = struct {
     /// we recommend that you make calls in your oldest registered notification hub.
     /// For more information, see [Notification
     /// hubs](https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html) in the *Amazon Web Services User Notifications User Guide*.
-    pub fn listNotificationEvents(self: *Self, allocator: std.mem.Allocator, input: list_notification_events.ListNotificationEventsInput, options: list_notification_events.Options) !list_notification_events.ListNotificationEventsOutput {
+    pub fn listNotificationEvents(self: *Self, allocator: std.mem.Allocator, input: list_notification_events.ListNotificationEventsInput, options: CallOptions) !list_notification_events.ListNotificationEventsOutput {
         return list_notification_events.execute(self, allocator, input, options);
     }
 
     /// Returns a list of `NotificationHubs`.
-    pub fn listNotificationHubs(self: *Self, allocator: std.mem.Allocator, input: list_notification_hubs.ListNotificationHubsInput, options: list_notification_hubs.Options) !list_notification_hubs.ListNotificationHubsOutput {
+    pub fn listNotificationHubs(self: *Self, allocator: std.mem.Allocator, input: list_notification_hubs.ListNotificationHubsInput, options: CallOptions) !list_notification_hubs.ListNotificationHubsOutput {
         return list_notification_hubs.execute(self, allocator, input, options);
     }
 
     /// Returns a list of organizational units associated with a notification
     /// configuration.
-    pub fn listOrganizationalUnits(self: *Self, allocator: std.mem.Allocator, input: list_organizational_units.ListOrganizationalUnitsInput, options: list_organizational_units.Options) !list_organizational_units.ListOrganizationalUnitsOutput {
+    pub fn listOrganizationalUnits(self: *Self, allocator: std.mem.Allocator, input: list_organizational_units.ListOrganizationalUnitsInput, options: CallOptions) !list_organizational_units.ListOrganizationalUnitsOutput {
         return list_organizational_units.execute(self, allocator, input, options);
     }
 
@@ -295,7 +296,7 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html) in the *Tagging Amazon Web Services Resources User Guide*.
     ///
     /// This is only supported for `NotificationConfigurations`.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -303,7 +304,7 @@ pub const Client = struct {
     ///
     /// There is a maximum of one `NotificationConfiguration` per Region. You can
     /// have a maximum of 3 `NotificationHub` resources at a time.
-    pub fn registerNotificationHub(self: *Self, allocator: std.mem.Allocator, input: register_notification_hub.RegisterNotificationHubInput, options: register_notification_hub.Options) !register_notification_hub.RegisterNotificationHubOutput {
+    pub fn registerNotificationHub(self: *Self, allocator: std.mem.Allocator, input: register_notification_hub.RegisterNotificationHubInput, options: CallOptions) !register_notification_hub.RegisterNotificationHubOutput {
         return register_notification_hub.execute(self, allocator, input, options);
     }
 
@@ -313,7 +314,7 @@ pub const Client = struct {
     /// resources](https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html) in the *Tagging Amazon Web Services Resources User Guide*.
     ///
     /// This is only supported for `NotificationConfigurations`.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -321,17 +322,17 @@ pub const Client = struct {
     ///
     /// For more information, see [Tagging your Amazon Web Services
     /// resources](https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html) in the *Tagging Amazon Web Services Resources User Guide*.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an existing `EventRule`.
-    pub fn updateEventRule(self: *Self, allocator: std.mem.Allocator, input: update_event_rule.UpdateEventRuleInput, options: update_event_rule.Options) !update_event_rule.UpdateEventRuleOutput {
+    pub fn updateEventRule(self: *Self, allocator: std.mem.Allocator, input: update_event_rule.UpdateEventRuleInput, options: CallOptions) !update_event_rule.UpdateEventRuleOutput {
         return update_event_rule.execute(self, allocator, input, options);
     }
 
     /// Updates a `NotificationConfiguration`.
-    pub fn updateNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_notification_configuration.UpdateNotificationConfigurationInput, options: update_notification_configuration.Options) !update_notification_configuration.UpdateNotificationConfigurationOutput {
+    pub fn updateNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_notification_configuration.UpdateNotificationConfigurationInput, options: CallOptions) !update_notification_configuration.UpdateNotificationConfigurationOutput {
         return update_notification_configuration.execute(self, allocator, input, options);
     }
 

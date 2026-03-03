@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const assume_role_for_pod_identity = @import("assume_role_for_pod_identity.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -40,7 +41,7 @@ pub const Client = struct {
     /// credentials from an EKS Pod Identity association are available in the pod,
     /// the latest versions of the
     /// SDKs use them automatically.
-    pub fn assumeRoleForPodIdentity(self: *Self, allocator: std.mem.Allocator, input: assume_role_for_pod_identity.AssumeRoleForPodIdentityInput, options: assume_role_for_pod_identity.Options) !assume_role_for_pod_identity.AssumeRoleForPodIdentityOutput {
+    pub fn assumeRoleForPodIdentity(self: *Self, allocator: std.mem.Allocator, input: assume_role_for_pod_identity.AssumeRoleForPodIdentityInput, options: CallOptions) !assume_role_for_pod_identity.AssumeRoleForPodIdentityOutput {
         return assume_role_for_pod_identity.execute(self, allocator, input, options);
     }
 };

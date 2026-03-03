@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VerificationStatus = @import("verification_status.zig").VerificationStatus;
 const ProtocolType = @import("protocol_type.zig").ProtocolType;
@@ -119,11 +120,7 @@ pub const GetResourceConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourceConfigurationInput, options: Options) !GetResourceConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourceConfigurationInput, options: CallOptions) !GetResourceConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

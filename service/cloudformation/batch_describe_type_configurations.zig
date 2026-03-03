@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TypeConfigurationIdentifier = @import("type_configuration_identifier.zig").TypeConfigurationIdentifier;
 const BatchDescribeTypeConfigurationsError = @import("batch_describe_type_configurations_error.zig").BatchDescribeTypeConfigurationsError;
@@ -30,11 +31,7 @@ pub const BatchDescribeTypeConfigurationsOutput = struct {
     unprocessed_type_configurations: ?[]const TypeConfigurationIdentifier = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDescribeTypeConfigurationsInput, options: Options) !BatchDescribeTypeConfigurationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDescribeTypeConfigurationsInput, options: CallOptions) !BatchDescribeTypeConfigurationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

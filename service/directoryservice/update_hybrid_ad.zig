@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const HybridAdministratorAccountUpdate = @import("hybrid_administrator_account_update.zig").HybridAdministratorAccountUpdate;
 const HybridCustomerInstancesSettings = @import("hybrid_customer_instances_settings.zig").HybridCustomerInstancesSettings;
@@ -56,11 +57,7 @@ pub const UpdateHybridADOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateHybridADInput, options: Options) !UpdateHybridADOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateHybridADInput, options: CallOptions) !UpdateHybridADOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ImageSetState = @import("image_set_state.zig").ImageSetState;
 const ImageSetWorkflowStatus = @import("image_set_workflow_status.zig").ImageSetWorkflowStatus;
@@ -40,11 +41,7 @@ pub const DeleteImageSetOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteImageSetInput, options: Options) !DeleteImageSetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteImageSetInput, options: CallOptions) !DeleteImageSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

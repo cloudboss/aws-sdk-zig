@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LinkAttributes = @import("link_attributes.zig").LinkAttributes;
 const LinkLogSettings = @import("link_log_settings.zig").LinkLogSettings;
@@ -51,11 +52,7 @@ pub const CreateOutboundExternalLinkOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateOutboundExternalLinkInput, options: Options) !CreateOutboundExternalLinkOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateOutboundExternalLinkInput, options: CallOptions) !CreateOutboundExternalLinkOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

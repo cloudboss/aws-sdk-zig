@@ -91,6 +91,7 @@ const update_stack_instances = @import("update_stack_instances.zig");
 const update_stack_set = @import("update_stack_set.zig");
 const update_termination_protection = @import("update_termination_protection.zig");
 const validate_template = @import("validate_template.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -127,7 +128,7 @@ pub const Client = struct {
     /// and Organizations activated, the management account has permissions to
     /// create
     /// and manage StackSets for your organization.
-    pub fn activateOrganizationsAccess(self: *Self, allocator: std.mem.Allocator, input: activate_organizations_access.ActivateOrganizationsAccessInput, options: activate_organizations_access.Options) !activate_organizations_access.ActivateOrganizationsAccessOutput {
+    pub fn activateOrganizationsAccess(self: *Self, allocator: std.mem.Allocator, input: activate_organizations_access.ActivateOrganizationsAccessInput, options: CallOptions) !activate_organizations_access.ActivateOrganizationsAccessOutput {
         return activate_organizations_access.execute(self, allocator, input, options);
     }
 
@@ -154,7 +155,7 @@ pub const Client = struct {
     /// *CloudFormation User Guide*. For information about creating Hooks, see the
     /// [CloudFormation Hooks User
     /// Guide](https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html).
-    pub fn activateType(self: *Self, allocator: std.mem.Allocator, input: activate_type.ActivateTypeInput, options: activate_type.Options) !activate_type.ActivateTypeOutput {
+    pub fn activateType(self: *Self, allocator: std.mem.Allocator, input: activate_type.ActivateTypeInput, options: CallOptions) !activate_type.ActivateTypeOutput {
         return activate_type.execute(self, allocator, input, options);
     }
 
@@ -166,7 +167,7 @@ pub const Client = struct {
     /// data for extensions in your
     /// account](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html) in the
     /// *CloudFormation User Guide*.
-    pub fn batchDescribeTypeConfigurations(self: *Self, allocator: std.mem.Allocator, input: batch_describe_type_configurations.BatchDescribeTypeConfigurationsInput, options: batch_describe_type_configurations.Options) !batch_describe_type_configurations.BatchDescribeTypeConfigurationsOutput {
+    pub fn batchDescribeTypeConfigurations(self: *Self, allocator: std.mem.Allocator, input: batch_describe_type_configurations.BatchDescribeTypeConfigurationsInput, options: CallOptions) !batch_describe_type_configurations.BatchDescribeTypeConfigurationsOutput {
         return batch_describe_type_configurations.execute(self, allocator, input, options);
     }
 
@@ -175,7 +176,7 @@ pub const Client = struct {
     /// rolls back the update and reverts to the previous stack configuration.
     ///
     /// You can cancel only stacks that are in the `UPDATE_IN_PROGRESS` state.
-    pub fn cancelUpdateStack(self: *Self, allocator: std.mem.Allocator, input: cancel_update_stack.CancelUpdateStackInput, options: cancel_update_stack.Options) !cancel_update_stack.CancelUpdateStackOutput {
+    pub fn cancelUpdateStack(self: *Self, allocator: std.mem.Allocator, input: cancel_update_stack.CancelUpdateStackInput, options: CallOptions) !cancel_update_stack.CancelUpdateStackOutput {
         return cancel_update_stack.execute(self, allocator, input, options);
     }
 
@@ -203,7 +204,7 @@ pub const Client = struct {
     /// information for troubleshooting a failed update rollback, see [Update
     /// rollback
     /// failed](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed).
-    pub fn continueUpdateRollback(self: *Self, allocator: std.mem.Allocator, input: continue_update_rollback.ContinueUpdateRollbackInput, options: continue_update_rollback.Options) !continue_update_rollback.ContinueUpdateRollbackOutput {
+    pub fn continueUpdateRollback(self: *Self, allocator: std.mem.Allocator, input: continue_update_rollback.ContinueUpdateRollbackInput, options: CallOptions) !continue_update_rollback.ContinueUpdateRollbackOutput {
         return continue_update_rollback.execute(self, allocator, input, options);
     }
 
@@ -242,7 +243,7 @@ pub const Client = struct {
     ///
     /// To create a change set for the entire stack hierarchy, set
     /// `IncludeNestedStacks` to `True`.
-    pub fn createChangeSet(self: *Self, allocator: std.mem.Allocator, input: create_change_set.CreateChangeSetInput, options: create_change_set.Options) !create_change_set.CreateChangeSetOutput {
+    pub fn createChangeSet(self: *Self, allocator: std.mem.Allocator, input: create_change_set.CreateChangeSetInput, options: CallOptions) !create_change_set.CreateChangeSetOutput {
         return create_change_set.execute(self, allocator, input, options);
     }
 
@@ -250,7 +251,7 @@ pub const Client = struct {
     /// CloudFormation.
     /// You can check the status of the template generation using the
     /// `DescribeGeneratedTemplate` API action.
-    pub fn createGeneratedTemplate(self: *Self, allocator: std.mem.Allocator, input: create_generated_template.CreateGeneratedTemplateInput, options: create_generated_template.Options) !create_generated_template.CreateGeneratedTemplateOutput {
+    pub fn createGeneratedTemplate(self: *Self, allocator: std.mem.Allocator, input: create_generated_template.CreateGeneratedTemplateInput, options: CallOptions) !create_generated_template.CreateGeneratedTemplateOutput {
         return create_generated_template.execute(self, allocator, input, options);
     }
 
@@ -264,7 +265,7 @@ pub const Client = struct {
     /// resources as a single unit with CloudFormation
     /// stacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in the
     /// *CloudFormation User Guide*.
-    pub fn createStack(self: *Self, allocator: std.mem.Allocator, input: create_stack.CreateStackInput, options: create_stack.Options) !create_stack.CreateStackOutput {
+    pub fn createStack(self: *Self, allocator: std.mem.Allocator, input: create_stack.CreateStackInput, options: CallOptions) !create_stack.CreateStackOutput {
         return create_stack.execute(self, allocator, input, options);
     }
 
@@ -286,19 +287,19 @@ pub const Client = struct {
     ///
     /// * *Parent OU strategy:* If you don't mind exposing the OU
     /// hierarchy, target a parent OU that contains all desired child OUs.
-    pub fn createStackInstances(self: *Self, allocator: std.mem.Allocator, input: create_stack_instances.CreateStackInstancesInput, options: create_stack_instances.Options) !create_stack_instances.CreateStackInstancesOutput {
+    pub fn createStackInstances(self: *Self, allocator: std.mem.Allocator, input: create_stack_instances.CreateStackInstancesInput, options: CallOptions) !create_stack_instances.CreateStackInstancesOutput {
         return create_stack_instances.execute(self, allocator, input, options);
     }
 
     /// Creates a refactor across multiple stacks, with the list of stacks and
     /// resources that are
     /// affected.
-    pub fn createStackRefactor(self: *Self, allocator: std.mem.Allocator, input: create_stack_refactor.CreateStackRefactorInput, options: create_stack_refactor.Options) !create_stack_refactor.CreateStackRefactorOutput {
+    pub fn createStackRefactor(self: *Self, allocator: std.mem.Allocator, input: create_stack_refactor.CreateStackRefactorInput, options: CallOptions) !create_stack_refactor.CreateStackRefactorOutput {
         return create_stack_refactor.execute(self, allocator, input, options);
     }
 
     /// Creates a StackSet.
-    pub fn createStackSet(self: *Self, allocator: std.mem.Allocator, input: create_stack_set.CreateStackSetInput, options: create_stack_set.Options) !create_stack_set.CreateStackSetOutput {
+    pub fn createStackSet(self: *Self, allocator: std.mem.Allocator, input: create_stack_set.CreateStackSetInput, options: CallOptions) !create_stack_set.CreateStackSetOutput {
         return create_stack_set.execute(self, allocator, input, options);
     }
 
@@ -306,7 +307,7 @@ pub const Client = struct {
     /// deactivated,
     /// the management account does not have permissions to create and manage
     /// service-managed StackSets for your organization.
-    pub fn deactivateOrganizationsAccess(self: *Self, allocator: std.mem.Allocator, input: deactivate_organizations_access.DeactivateOrganizationsAccessInput, options: deactivate_organizations_access.Options) !deactivate_organizations_access.DeactivateOrganizationsAccessOutput {
+    pub fn deactivateOrganizationsAccess(self: *Self, allocator: std.mem.Allocator, input: deactivate_organizations_access.DeactivateOrganizationsAccessInput, options: CallOptions) !deactivate_organizations_access.DeactivateOrganizationsAccessOutput {
         return deactivate_organizations_access.execute(self, allocator, input, options);
     }
 
@@ -329,7 +330,7 @@ pub const Client = struct {
     ///
     /// To see which extensions are currently activated, use
     /// [ListTypes](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListTypes.html).
-    pub fn deactivateType(self: *Self, allocator: std.mem.Allocator, input: deactivate_type.DeactivateTypeInput, options: deactivate_type.Options) !deactivate_type.DeactivateTypeOutput {
+    pub fn deactivateType(self: *Self, allocator: std.mem.Allocator, input: deactivate_type.DeactivateTypeInput, options: CallOptions) !deactivate_type.DeactivateTypeOutput {
         return deactivate_type.execute(self, allocator, input, options);
     }
 
@@ -346,12 +347,12 @@ pub const Client = struct {
     /// to the stacks hierarchy and will also delete all change sets for nested
     /// stacks with the status
     /// of `REVIEW_IN_PROGRESS`.
-    pub fn deleteChangeSet(self: *Self, allocator: std.mem.Allocator, input: delete_change_set.DeleteChangeSetInput, options: delete_change_set.Options) !delete_change_set.DeleteChangeSetOutput {
+    pub fn deleteChangeSet(self: *Self, allocator: std.mem.Allocator, input: delete_change_set.DeleteChangeSetInput, options: CallOptions) !delete_change_set.DeleteChangeSetOutput {
         return delete_change_set.execute(self, allocator, input, options);
     }
 
     /// Deleted a generated template.
-    pub fn deleteGeneratedTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_generated_template.DeleteGeneratedTemplateInput, options: delete_generated_template.Options) !delete_generated_template.DeleteGeneratedTemplateOutput {
+    pub fn deleteGeneratedTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_generated_template.DeleteGeneratedTemplateInput, options: CallOptions) !delete_generated_template.DeleteGeneratedTemplateOutput {
         return delete_generated_template.execute(self, allocator, input, options);
     }
 
@@ -363,7 +364,7 @@ pub const Client = struct {
     /// For more information about deleting a stack, see [Delete a stack from
     /// the CloudFormation
     /// console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-delete-stack.html) in the *CloudFormation User Guide*.
-    pub fn deleteStack(self: *Self, allocator: std.mem.Allocator, input: delete_stack.DeleteStackInput, options: delete_stack.Options) !delete_stack.DeleteStackOutput {
+    pub fn deleteStack(self: *Self, allocator: std.mem.Allocator, input: delete_stack.DeleteStackInput, options: CallOptions) !delete_stack.DeleteStackOutput {
         return delete_stack.execute(self, allocator, input, options);
     }
 
@@ -381,7 +382,7 @@ pub const Client = struct {
     ///
     /// * *Parent OU strategy:* If you don't mind exposing the OU
     /// hierarchy, target a parent OU that contains all desired child OUs.
-    pub fn deleteStackInstances(self: *Self, allocator: std.mem.Allocator, input: delete_stack_instances.DeleteStackInstancesInput, options: delete_stack_instances.Options) !delete_stack_instances.DeleteStackInstancesOutput {
+    pub fn deleteStackInstances(self: *Self, allocator: std.mem.Allocator, input: delete_stack_instances.DeleteStackInstancesInput, options: CallOptions) !delete_stack_instances.DeleteStackInstancesOutput {
         return delete_stack_instances.execute(self, allocator, input, options);
     }
 
@@ -389,7 +390,7 @@ pub const Client = struct {
     /// instances must
     /// be deleted. For more information about how to complete this, see
     /// DeleteStackInstances.
-    pub fn deleteStackSet(self: *Self, allocator: std.mem.Allocator, input: delete_stack_set.DeleteStackSetInput, options: delete_stack_set.Options) !delete_stack_set.DeleteStackSetOutput {
+    pub fn deleteStackSet(self: *Self, allocator: std.mem.Allocator, input: delete_stack_set.DeleteStackSetInput, options: CallOptions) !delete_stack_set.DeleteStackSetOutput {
         return delete_stack_set.execute(self, allocator, input, options);
     }
 
@@ -420,7 +421,7 @@ pub const Client = struct {
     /// third-party private extensions from your
     /// account](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private-deregister-extension.html) in the
     /// *CloudFormation User Guide*.
-    pub fn deregisterType(self: *Self, allocator: std.mem.Allocator, input: deregister_type.DeregisterTypeInput, options: deregister_type.Options) !deregister_type.DeregisterTypeOutput {
+    pub fn deregisterType(self: *Self, allocator: std.mem.Allocator, input: deregister_type.DeregisterTypeInput, options: CallOptions) !deregister_type.DeregisterTypeOutput {
         return deregister_type.execute(self, allocator, input, options);
     }
 
@@ -429,7 +430,7 @@ pub const Client = struct {
     /// can create in your account. For more information about account limits, see
     /// [Understand CloudFormation
     /// quotas](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html) in the *CloudFormation User Guide*.
-    pub fn describeAccountLimits(self: *Self, allocator: std.mem.Allocator, input: describe_account_limits.DescribeAccountLimitsInput, options: describe_account_limits.Options) !describe_account_limits.DescribeAccountLimitsOutput {
+    pub fn describeAccountLimits(self: *Self, allocator: std.mem.Allocator, input: describe_account_limits.DescribeAccountLimitsInput, options: CallOptions) !describe_account_limits.DescribeAccountLimitsOutput {
         return describe_account_limits.execute(self, allocator, input, options);
     }
 
@@ -439,14 +440,14 @@ pub const Client = struct {
     /// CloudFormation stacks using change
     /// sets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html) in the
     /// *CloudFormation User Guide*.
-    pub fn describeChangeSet(self: *Self, allocator: std.mem.Allocator, input: describe_change_set.DescribeChangeSetInput, options: describe_change_set.Options) !describe_change_set.DescribeChangeSetOutput {
+    pub fn describeChangeSet(self: *Self, allocator: std.mem.Allocator, input: describe_change_set.DescribeChangeSetInput, options: CallOptions) !describe_change_set.DescribeChangeSetOutput {
         return describe_change_set.execute(self, allocator, input, options);
     }
 
     /// Returns Hook-related information for the change set and a list of changes
     /// that
     /// CloudFormation makes when you run the change set.
-    pub fn describeChangeSetHooks(self: *Self, allocator: std.mem.Allocator, input: describe_change_set_hooks.DescribeChangeSetHooksInput, options: describe_change_set_hooks.Options) !describe_change_set_hooks.DescribeChangeSetHooksOutput {
+    pub fn describeChangeSetHooks(self: *Self, allocator: std.mem.Allocator, input: describe_change_set_hooks.DescribeChangeSetHooksInput, options: CallOptions) !describe_change_set_hooks.DescribeChangeSetHooksOutput {
         return describe_change_set_hooks.execute(self, allocator, input, options);
     }
 
@@ -478,7 +479,7 @@ pub const Client = struct {
     ///
     /// One of `ChangeSetName`, `OperationId` or `StackName`
     /// must be specified as input.
-    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: describe_events.Options) !describe_events.DescribeEventsOutput {
+    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: CallOptions) !describe_events.DescribeEventsOutput {
         return describe_events.execute(self, allocator, input, options);
     }
 
@@ -489,7 +490,7 @@ pub const Client = struct {
     /// or the update of a generated template started with an
     /// `UpdateGeneratedTemplate` API
     /// action.
-    pub fn describeGeneratedTemplate(self: *Self, allocator: std.mem.Allocator, input: describe_generated_template.DescribeGeneratedTemplateInput, options: describe_generated_template.Options) !describe_generated_template.DescribeGeneratedTemplateOutput {
+    pub fn describeGeneratedTemplate(self: *Self, allocator: std.mem.Allocator, input: describe_generated_template.DescribeGeneratedTemplateInput, options: CallOptions) !describe_generated_template.DescribeGeneratedTemplateOutput {
         return describe_generated_template.execute(self, allocator, input, options);
     }
 
@@ -499,7 +500,7 @@ pub const Client = struct {
     /// administrator by using the
     /// `CallAs` parameter. This API can also be called without the `CallAs`
     /// parameter by the management account.
-    pub fn describeOrganizationsAccess(self: *Self, allocator: std.mem.Allocator, input: describe_organizations_access.DescribeOrganizationsAccessInput, options: describe_organizations_access.Options) !describe_organizations_access.DescribeOrganizationsAccessOutput {
+    pub fn describeOrganizationsAccess(self: *Self, allocator: std.mem.Allocator, input: describe_organizations_access.DescribeOrganizationsAccessInput, options: CallOptions) !describe_organizations_access.DescribeOrganizationsAccessOutput {
         return describe_organizations_access.execute(self, allocator, input, options);
     }
 
@@ -518,12 +519,12 @@ pub const Client = struct {
     /// to make them available for public
     /// use](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html) in the
     /// *CloudFormation Command Line Interface (CLI) User Guide*
-    pub fn describePublisher(self: *Self, allocator: std.mem.Allocator, input: describe_publisher.DescribePublisherInput, options: describe_publisher.Options) !describe_publisher.DescribePublisherOutput {
+    pub fn describePublisher(self: *Self, allocator: std.mem.Allocator, input: describe_publisher.DescribePublisherInput, options: CallOptions) !describe_publisher.DescribePublisherOutput {
         return describe_publisher.execute(self, allocator, input, options);
     }
 
     /// Describes details of a resource scan.
-    pub fn describeResourceScan(self: *Self, allocator: std.mem.Allocator, input: describe_resource_scan.DescribeResourceScanInput, options: describe_resource_scan.Options) !describe_resource_scan.DescribeResourceScanOutput {
+    pub fn describeResourceScan(self: *Self, allocator: std.mem.Allocator, input: describe_resource_scan.DescribeResourceScanInput, options: CallOptions) !describe_resource_scan.DescribeResourceScanOutput {
         return describe_resource_scan.execute(self, allocator, input, options);
     }
 
@@ -547,7 +548,7 @@ pub const Client = struct {
     /// DescribeStackResourceDrifts to return drift information about the stack and
     /// its
     /// resources.
-    pub fn describeStackDriftDetectionStatus(self: *Self, allocator: std.mem.Allocator, input: describe_stack_drift_detection_status.DescribeStackDriftDetectionStatusInput, options: describe_stack_drift_detection_status.Options) !describe_stack_drift_detection_status.DescribeStackDriftDetectionStatusOutput {
+    pub fn describeStackDriftDetectionStatus(self: *Self, allocator: std.mem.Allocator, input: describe_stack_drift_detection_status.DescribeStackDriftDetectionStatusInput, options: CallOptions) !describe_stack_drift_detection_status.DescribeStackDriftDetectionStatusOutput {
         return describe_stack_drift_detection_status.execute(self, allocator, input, options);
     }
 
@@ -561,7 +562,7 @@ pub const Client = struct {
     /// You can list events for stacks that have failed to create or have been
     /// deleted by
     /// specifying the unique stack identifier (stack ID).
-    pub fn describeStackEvents(self: *Self, allocator: std.mem.Allocator, input: describe_stack_events.DescribeStackEventsInput, options: describe_stack_events.Options) !describe_stack_events.DescribeStackEventsOutput {
+    pub fn describeStackEvents(self: *Self, allocator: std.mem.Allocator, input: describe_stack_events.DescribeStackEventsInput, options: CallOptions) !describe_stack_events.DescribeStackEventsOutput {
         return describe_stack_events.execute(self, allocator, input, options);
     }
 
@@ -571,12 +572,12 @@ pub const Client = struct {
     ///
     /// For a list of stack instances that are associated with a specific StackSet,
     /// use ListStackInstances.
-    pub fn describeStackInstance(self: *Self, allocator: std.mem.Allocator, input: describe_stack_instance.DescribeStackInstanceInput, options: describe_stack_instance.Options) !describe_stack_instance.DescribeStackInstanceOutput {
+    pub fn describeStackInstance(self: *Self, allocator: std.mem.Allocator, input: describe_stack_instance.DescribeStackInstanceInput, options: CallOptions) !describe_stack_instance.DescribeStackInstanceOutput {
         return describe_stack_instance.execute(self, allocator, input, options);
     }
 
     /// Describes the stack refactor status.
-    pub fn describeStackRefactor(self: *Self, allocator: std.mem.Allocator, input: describe_stack_refactor.DescribeStackRefactorInput, options: describe_stack_refactor.Options) !describe_stack_refactor.DescribeStackRefactorOutput {
+    pub fn describeStackRefactor(self: *Self, allocator: std.mem.Allocator, input: describe_stack_refactor.DescribeStackRefactorInput, options: CallOptions) !describe_stack_refactor.DescribeStackRefactorOutput {
         return describe_stack_refactor.execute(self, allocator, input, options);
     }
 
@@ -585,7 +586,7 @@ pub const Client = struct {
     /// For deleted stacks, DescribeStackResource returns resource information for
     /// up to 90 days
     /// after the stack has been deleted.
-    pub fn describeStackResource(self: *Self, allocator: std.mem.Allocator, input: describe_stack_resource.DescribeStackResourceInput, options: describe_stack_resource.Options) !describe_stack_resource.DescribeStackResourceOutput {
+    pub fn describeStackResource(self: *Self, allocator: std.mem.Allocator, input: describe_stack_resource.DescribeStackResourceInput, options: CallOptions) !describe_stack_resource.DescribeStackResourceOutput {
         return describe_stack_resource.execute(self, allocator, input, options);
     }
 
@@ -608,7 +609,7 @@ pub const Client = struct {
     /// Use DetectStackResourceDrift to detect drift on individual resources, or
     /// DetectStackDrift to detect drift on all supported resources for a given
     /// stack.
-    pub fn describeStackResourceDrifts(self: *Self, allocator: std.mem.Allocator, input: describe_stack_resource_drifts.DescribeStackResourceDriftsInput, options: describe_stack_resource_drifts.Options) !describe_stack_resource_drifts.DescribeStackResourceDriftsOutput {
+    pub fn describeStackResourceDrifts(self: *Self, allocator: std.mem.Allocator, input: describe_stack_resource_drifts.DescribeStackResourceDriftsInput, options: CallOptions) !describe_stack_resource_drifts.DescribeStackResourceDriftsOutput {
         return describe_stack_resource_drifts.execute(self, allocator, input, options);
     }
 
@@ -637,7 +638,7 @@ pub const Client = struct {
     ///
     /// A `ValidationError` is returned if you specify both `StackName`
     /// and `PhysicalResourceId` in the same request.
-    pub fn describeStackResources(self: *Self, allocator: std.mem.Allocator, input: describe_stack_resources.DescribeStackResourcesInput, options: describe_stack_resources.Options) !describe_stack_resources.DescribeStackResourcesOutput {
+    pub fn describeStackResources(self: *Self, allocator: std.mem.Allocator, input: describe_stack_resources.DescribeStackResourcesInput, options: CallOptions) !describe_stack_resources.DescribeStackResourcesOutput {
         return describe_stack_resources.execute(self, allocator, input, options);
     }
 
@@ -645,7 +646,7 @@ pub const Client = struct {
     ///
     /// This API provides *strongly consistent* reads meaning it will always
     /// return the most up-to-date data.
-    pub fn describeStackSet(self: *Self, allocator: std.mem.Allocator, input: describe_stack_set.DescribeStackSetInput, options: describe_stack_set.Options) !describe_stack_set.DescribeStackSetOutput {
+    pub fn describeStackSet(self: *Self, allocator: std.mem.Allocator, input: describe_stack_set.DescribeStackSetInput, options: CallOptions) !describe_stack_set.DescribeStackSetOutput {
         return describe_stack_set.execute(self, allocator, input, options);
     }
 
@@ -653,7 +654,7 @@ pub const Client = struct {
     ///
     /// This API provides *strongly consistent* reads meaning it will always
     /// return the most up-to-date data.
-    pub fn describeStackSetOperation(self: *Self, allocator: std.mem.Allocator, input: describe_stack_set_operation.DescribeStackSetOperationInput, options: describe_stack_set_operation.Options) !describe_stack_set_operation.DescribeStackSetOperationOutput {
+    pub fn describeStackSetOperation(self: *Self, allocator: std.mem.Allocator, input: describe_stack_set_operation.DescribeStackSetOperationInput, options: CallOptions) !describe_stack_set_operation.DescribeStackSetOperationOutput {
         return describe_stack_set_operation.execute(self, allocator, input, options);
     }
 
@@ -666,7 +667,7 @@ pub const Client = struct {
     /// *CloudFormation User Guide*.
     ///
     /// If the stack doesn't exist, a `ValidationError` is returned.
-    pub fn describeStacks(self: *Self, allocator: std.mem.Allocator, input: describe_stacks.DescribeStacksInput, options: describe_stacks.Options) !describe_stacks.DescribeStacksOutput {
+    pub fn describeStacks(self: *Self, allocator: std.mem.Allocator, input: describe_stacks.DescribeStacksInput, options: CallOptions) !describe_stacks.DescribeStacksOutput {
         return describe_stacks.execute(self, allocator, input, options);
     }
 
@@ -683,7 +684,7 @@ pub const Client = struct {
     /// data for extensions in your
     /// account](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html) in the
     /// *CloudFormation User Guide*.
-    pub fn describeType(self: *Self, allocator: std.mem.Allocator, input: describe_type.DescribeTypeInput, options: describe_type.Options) !describe_type.DescribeTypeOutput {
+    pub fn describeType(self: *Self, allocator: std.mem.Allocator, input: describe_type.DescribeTypeInput, options: CallOptions) !describe_type.DescribeTypeOutput {
         return describe_type.execute(self, allocator, input, options);
     }
 
@@ -697,7 +698,7 @@ pub const Client = struct {
     ///
     /// Once the registration request has completed, use DescribeType to return
     /// detailed information about an extension.
-    pub fn describeTypeRegistration(self: *Self, allocator: std.mem.Allocator, input: describe_type_registration.DescribeTypeRegistrationInput, options: describe_type_registration.Options) !describe_type_registration.DescribeTypeRegistrationOutput {
+    pub fn describeTypeRegistration(self: *Self, allocator: std.mem.Allocator, input: describe_type_registration.DescribeTypeRegistrationInput, options: CallOptions) !describe_type_registration.DescribeTypeRegistrationOutput {
         return describe_type_registration.execute(self, allocator, input, options);
     }
 
@@ -739,7 +740,7 @@ pub const Client = struct {
     /// belonging to that stack. Perform `DetectStackDrift` directly on the nested
     /// stack
     /// itself.
-    pub fn detectStackDrift(self: *Self, allocator: std.mem.Allocator, input: detect_stack_drift.DetectStackDriftInput, options: detect_stack_drift.Options) !detect_stack_drift.DetectStackDriftOutput {
+    pub fn detectStackDrift(self: *Self, allocator: std.mem.Allocator, input: detect_stack_drift.DetectStackDriftInput, options: CallOptions) !detect_stack_drift.DetectStackDriftOutput {
         return detect_stack_drift.execute(self, allocator, input, options);
     }
 
@@ -765,7 +766,7 @@ pub const Client = struct {
     /// resources that support drift detection, see [Resource
     /// type support for imports and drift
     /// detection](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html).
-    pub fn detectStackResourceDrift(self: *Self, allocator: std.mem.Allocator, input: detect_stack_resource_drift.DetectStackResourceDriftInput, options: detect_stack_resource_drift.Options) !detect_stack_resource_drift.DetectStackResourceDriftOutput {
+    pub fn detectStackResourceDrift(self: *Self, allocator: std.mem.Allocator, input: detect_stack_resource_drift.DetectStackResourceDriftInput, options: CallOptions) !detect_stack_resource_drift.DetectStackResourceDriftOutput {
         return detect_stack_resource_drift.execute(self, allocator, input, options);
     }
 
@@ -809,7 +810,7 @@ pub const Client = struct {
     /// time.
     ///
     /// To stop a drift detection StackSet operation, use StopStackSetOperation.
-    pub fn detectStackSetDrift(self: *Self, allocator: std.mem.Allocator, input: detect_stack_set_drift.DetectStackSetDriftInput, options: detect_stack_set_drift.Options) !detect_stack_set_drift.DetectStackSetDriftOutput {
+    pub fn detectStackSetDrift(self: *Self, allocator: std.mem.Allocator, input: detect_stack_set_drift.DetectStackSetDriftInput, options: CallOptions) !detect_stack_set_drift.DetectStackSetDriftOutput {
         return detect_stack_set_drift.execute(self, allocator, input, options);
     }
 
@@ -818,7 +819,7 @@ pub const Client = struct {
     /// Monthly Calculator URL with a query string that describes the resources
     /// required to run the
     /// template.
-    pub fn estimateTemplateCost(self: *Self, allocator: std.mem.Allocator, input: estimate_template_cost.EstimateTemplateCostInput, options: estimate_template_cost.Options) !estimate_template_cost.EstimateTemplateCostOutput {
+    pub fn estimateTemplateCost(self: *Self, allocator: std.mem.Allocator, input: estimate_template_cost.EstimateTemplateCostInput, options: CallOptions) !estimate_template_cost.EstimateTemplateCostOutput {
         return estimate_template_cost.execute(self, allocator, input, options);
     }
 
@@ -839,12 +840,12 @@ pub const Client = struct {
     ///
     /// To create a change set for the entire stack hierarchy, `IncludeNestedStacks`
     /// must have been set to `True`.
-    pub fn executeChangeSet(self: *Self, allocator: std.mem.Allocator, input: execute_change_set.ExecuteChangeSetInput, options: execute_change_set.Options) !execute_change_set.ExecuteChangeSetOutput {
+    pub fn executeChangeSet(self: *Self, allocator: std.mem.Allocator, input: execute_change_set.ExecuteChangeSetInput, options: CallOptions) !execute_change_set.ExecuteChangeSetOutput {
         return execute_change_set.execute(self, allocator, input, options);
     }
 
     /// Executes the stack refactor operation.
-    pub fn executeStackRefactor(self: *Self, allocator: std.mem.Allocator, input: execute_stack_refactor.ExecuteStackRefactorInput, options: execute_stack_refactor.Options) !execute_stack_refactor.ExecuteStackRefactorOutput {
+    pub fn executeStackRefactor(self: *Self, allocator: std.mem.Allocator, input: execute_stack_refactor.ExecuteStackRefactorInput, options: CallOptions) !execute_stack_refactor.ExecuteStackRefactorOutput {
         return execute_stack_refactor.execute(self, allocator, input, options);
     }
 
@@ -853,7 +854,7 @@ pub const Client = struct {
     /// template was last in a `Complete` status. If the template has not yet been
     /// in a
     /// `Complete` status then an empty template will be returned.
-    pub fn getGeneratedTemplate(self: *Self, allocator: std.mem.Allocator, input: get_generated_template.GetGeneratedTemplateInput, options: get_generated_template.Options) !get_generated_template.GetGeneratedTemplateOutput {
+    pub fn getGeneratedTemplate(self: *Self, allocator: std.mem.Allocator, input: get_generated_template.GetGeneratedTemplateInput, options: CallOptions) !get_generated_template.GetGeneratedTemplateOutput {
         return get_generated_template.execute(self, allocator, input, options);
     }
 
@@ -867,14 +868,14 @@ pub const Client = struct {
     /// and permissions for encrypting CloudFormation Hooks results at
     /// rest](https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/hooks-kms-key-policy.html) in the
     /// *CloudFormation Hooks User Guide*.
-    pub fn getHookResult(self: *Self, allocator: std.mem.Allocator, input: get_hook_result.GetHookResultInput, options: get_hook_result.Options) !get_hook_result.GetHookResultOutput {
+    pub fn getHookResult(self: *Self, allocator: std.mem.Allocator, input: get_hook_result.GetHookResultInput, options: CallOptions) !get_hook_result.GetHookResultOutput {
         return get_hook_result.execute(self, allocator, input, options);
     }
 
     /// Returns the stack policy for a specified stack. If a stack doesn't have a
     /// policy, a null
     /// value is returned.
-    pub fn getStackPolicy(self: *Self, allocator: std.mem.Allocator, input: get_stack_policy.GetStackPolicyInput, options: get_stack_policy.Options) !get_stack_policy.GetStackPolicyOutput {
+    pub fn getStackPolicy(self: *Self, allocator: std.mem.Allocator, input: get_stack_policy.GetStackPolicyInput, options: CallOptions) !get_stack_policy.GetStackPolicyOutput {
         return get_stack_policy.execute(self, allocator, input, options);
     }
 
@@ -887,7 +888,7 @@ pub const Client = struct {
     /// the stack has been deleted.
     ///
     /// If the template doesn't exist, a `ValidationError` is returned.
-    pub fn getTemplate(self: *Self, allocator: std.mem.Allocator, input: get_template.GetTemplateInput, options: get_template.Options) !get_template.GetTemplateOutput {
+    pub fn getTemplate(self: *Self, allocator: std.mem.Allocator, input: get_template.GetTemplateInput, options: CallOptions) !get_template.GetTemplateOutput {
         return get_template.execute(self, allocator, input, options);
     }
 
@@ -906,7 +907,7 @@ pub const Client = struct {
     /// up to 90 days after the stack has been deleted. If the template doesn't
     /// exist, a
     /// `ValidationError` is returned.
-    pub fn getTemplateSummary(self: *Self, allocator: std.mem.Allocator, input: get_template_summary.GetTemplateSummaryInput, options: get_template_summary.Options) !get_template_summary.GetTemplateSummaryOutput {
+    pub fn getTemplateSummary(self: *Self, allocator: std.mem.Allocator, input: get_template_summary.GetTemplateSummaryInput, options: CallOptions) !get_template_summary.GetTemplateSummaryOutput {
         return get_template_summary.execute(self, allocator, input, options);
     }
 
@@ -917,7 +918,7 @@ pub const Client = struct {
     /// administrator account and Region, by specifying the stack ID of the stack
     /// you intend to
     /// import.
-    pub fn importStacksToStackSet(self: *Self, allocator: std.mem.Allocator, input: import_stacks_to_stack_set.ImportStacksToStackSetInput, options: import_stacks_to_stack_set.Options) !import_stacks_to_stack_set.ImportStacksToStackSetOutput {
+    pub fn importStacksToStackSet(self: *Self, allocator: std.mem.Allocator, input: import_stacks_to_stack_set.ImportStacksToStackSetInput, options: CallOptions) !import_stacks_to_stack_set.ImportStacksToStackSetOutput {
         return import_stacks_to_stack_set.execute(self, allocator, input, options);
     }
 
@@ -925,7 +926,7 @@ pub const Client = struct {
     /// example, CloudFormation
     /// lists change sets that are in the `CREATE_IN_PROGRESS` or
     /// `CREATE_PENDING` state.
-    pub fn listChangeSets(self: *Self, allocator: std.mem.Allocator, input: list_change_sets.ListChangeSetsInput, options: list_change_sets.Options) !list_change_sets.ListChangeSetsOutput {
+    pub fn listChangeSets(self: *Self, allocator: std.mem.Allocator, input: list_change_sets.ListChangeSetsInput, options: CallOptions) !list_change_sets.ListChangeSetsOutput {
         return list_change_sets.execute(self, allocator, input, options);
     }
 
@@ -939,12 +940,12 @@ pub const Client = struct {
     /// For more information, see [Get exported outputs
     /// from a deployed CloudFormation
     /// stack](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html).
-    pub fn listExports(self: *Self, allocator: std.mem.Allocator, input: list_exports.ListExportsInput, options: list_exports.Options) !list_exports.ListExportsOutput {
+    pub fn listExports(self: *Self, allocator: std.mem.Allocator, input: list_exports.ListExportsInput, options: CallOptions) !list_exports.ListExportsOutput {
         return list_exports.execute(self, allocator, input, options);
     }
 
     /// Lists your generated templates in this Region.
-    pub fn listGeneratedTemplates(self: *Self, allocator: std.mem.Allocator, input: list_generated_templates.ListGeneratedTemplatesInput, options: list_generated_templates.Options) !list_generated_templates.ListGeneratedTemplatesOutput {
+    pub fn listGeneratedTemplates(self: *Self, allocator: std.mem.Allocator, input: list_generated_templates.ListGeneratedTemplatesInput, options: CallOptions) !list_generated_templates.ListGeneratedTemplatesOutput {
         return list_generated_templates.execute(self, allocator, input, options);
     }
 
@@ -964,7 +965,7 @@ pub const Client = struct {
     ///
     /// * `TargetId` and `TargetType`: Returns summaries for a specific
     /// Hook invocation target.
-    pub fn listHookResults(self: *Self, allocator: std.mem.Allocator, input: list_hook_results.ListHookResultsInput, options: list_hook_results.Options) !list_hook_results.ListHookResultsOutput {
+    pub fn listHookResults(self: *Self, allocator: std.mem.Allocator, input: list_hook_results.ListHookResultsInput, options: CallOptions) !list_hook_results.ListHookResultsOutput {
         return list_hook_results.execute(self, allocator, input, options);
     }
 
@@ -976,7 +977,7 @@ pub const Client = struct {
     ///
     /// For more information about importing an exported output value, see the
     /// [Fn::ImportValue](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/intrinsic-function-reference-importvalue.html) function.
-    pub fn listImports(self: *Self, allocator: std.mem.Allocator, input: list_imports.ListImportsInput, options: list_imports.Options) !list_imports.ListImportsOutput {
+    pub fn listImports(self: *Self, allocator: std.mem.Allocator, input: list_imports.ListImportsInput, options: CallOptions) !list_imports.ListImportsOutput {
         return list_imports.execute(self, allocator, input, options);
     }
 
@@ -984,7 +985,7 @@ pub const Client = struct {
     /// The response
     /// indicates whether each returned resource is already managed by
     /// CloudFormation.
-    pub fn listResourceScanRelatedResources(self: *Self, allocator: std.mem.Allocator, input: list_resource_scan_related_resources.ListResourceScanRelatedResourcesInput, options: list_resource_scan_related_resources.Options) !list_resource_scan_related_resources.ListResourceScanRelatedResourcesOutput {
+    pub fn listResourceScanRelatedResources(self: *Self, allocator: std.mem.Allocator, input: list_resource_scan_related_resources.ListResourceScanRelatedResourcesInput, options: CallOptions) !list_resource_scan_related_resources.ListResourceScanRelatedResourcesOutput {
         return list_resource_scan_related_resources.execute(self, allocator, input, options);
     }
 
@@ -995,14 +996,14 @@ pub const Client = struct {
     /// specified filters are returned. The response indicates whether each returned
     /// resource is
     /// already managed by CloudFormation.
-    pub fn listResourceScanResources(self: *Self, allocator: std.mem.Allocator, input: list_resource_scan_resources.ListResourceScanResourcesInput, options: list_resource_scan_resources.Options) !list_resource_scan_resources.ListResourceScanResourcesOutput {
+    pub fn listResourceScanResources(self: *Self, allocator: std.mem.Allocator, input: list_resource_scan_resources.ListResourceScanResourcesInput, options: CallOptions) !list_resource_scan_resources.ListResourceScanResourcesOutput {
         return list_resource_scan_resources.execute(self, allocator, input, options);
     }
 
     /// List the resource scans from newest to oldest. By default it will return up
     /// to 10 resource
     /// scans.
-    pub fn listResourceScans(self: *Self, allocator: std.mem.Allocator, input: list_resource_scans.ListResourceScansInput, options: list_resource_scans.Options) !list_resource_scans.ListResourceScansOutput {
+    pub fn listResourceScans(self: *Self, allocator: std.mem.Allocator, input: list_resource_scans.ListResourceScansInput, options: CallOptions) !list_resource_scans.ListResourceScansOutput {
         return list_resource_scans.execute(self, allocator, input, options);
     }
 
@@ -1012,7 +1013,7 @@ pub const Client = struct {
     /// recent drift detection operation. If an operation is in progress, it may
     /// only return partial
     /// results.
-    pub fn listStackInstanceResourceDrifts(self: *Self, allocator: std.mem.Allocator, input: list_stack_instance_resource_drifts.ListStackInstanceResourceDriftsInput, options: list_stack_instance_resource_drifts.Options) !list_stack_instance_resource_drifts.ListStackInstanceResourceDriftsOutput {
+    pub fn listStackInstanceResourceDrifts(self: *Self, allocator: std.mem.Allocator, input: list_stack_instance_resource_drifts.ListStackInstanceResourceDriftsInput, options: CallOptions) !list_stack_instance_resource_drifts.ListStackInstanceResourceDriftsOutput {
         return list_stack_instance_resource_drifts.execute(self, allocator, input, options);
     }
 
@@ -1021,18 +1022,18 @@ pub const Client = struct {
     /// StackSet. You can filter for stack instances that are associated with a
     /// specific Amazon Web Services account
     /// name or Region, or that have a specific status.
-    pub fn listStackInstances(self: *Self, allocator: std.mem.Allocator, input: list_stack_instances.ListStackInstancesInput, options: list_stack_instances.Options) !list_stack_instances.ListStackInstancesOutput {
+    pub fn listStackInstances(self: *Self, allocator: std.mem.Allocator, input: list_stack_instances.ListStackInstancesInput, options: CallOptions) !list_stack_instances.ListStackInstancesOutput {
         return list_stack_instances.execute(self, allocator, input, options);
     }
 
     /// Lists the stack refactor actions that will be taken after calling the
     /// ExecuteStackRefactor action.
-    pub fn listStackRefactorActions(self: *Self, allocator: std.mem.Allocator, input: list_stack_refactor_actions.ListStackRefactorActionsInput, options: list_stack_refactor_actions.Options) !list_stack_refactor_actions.ListStackRefactorActionsOutput {
+    pub fn listStackRefactorActions(self: *Self, allocator: std.mem.Allocator, input: list_stack_refactor_actions.ListStackRefactorActionsInput, options: CallOptions) !list_stack_refactor_actions.ListStackRefactorActionsOutput {
         return list_stack_refactor_actions.execute(self, allocator, input, options);
     }
 
     /// Lists all account stack refactor operations and their statuses.
-    pub fn listStackRefactors(self: *Self, allocator: std.mem.Allocator, input: list_stack_refactors.ListStackRefactorsInput, options: list_stack_refactors.Options) !list_stack_refactors.ListStackRefactorsOutput {
+    pub fn listStackRefactors(self: *Self, allocator: std.mem.Allocator, input: list_stack_refactors.ListStackRefactorsInput, options: CallOptions) !list_stack_refactors.ListStackRefactorsOutput {
         return list_stack_refactors.execute(self, allocator, input, options);
     }
 
@@ -1041,12 +1042,12 @@ pub const Client = struct {
     /// For deleted stacks, ListStackResources returns resource information for up
     /// to 90 days
     /// after the stack has been deleted.
-    pub fn listStackResources(self: *Self, allocator: std.mem.Allocator, input: list_stack_resources.ListStackResourcesInput, options: list_stack_resources.Options) !list_stack_resources.ListStackResourcesOutput {
+    pub fn listStackResources(self: *Self, allocator: std.mem.Allocator, input: list_stack_resources.ListStackResourcesInput, options: CallOptions) !list_stack_resources.ListStackResourcesOutput {
         return list_stack_resources.execute(self, allocator, input, options);
     }
 
     /// Returns summary information about deployment targets for a StackSet.
-    pub fn listStackSetAutoDeploymentTargets(self: *Self, allocator: std.mem.Allocator, input: list_stack_set_auto_deployment_targets.ListStackSetAutoDeploymentTargetsInput, options: list_stack_set_auto_deployment_targets.Options) !list_stack_set_auto_deployment_targets.ListStackSetAutoDeploymentTargetsOutput {
+    pub fn listStackSetAutoDeploymentTargets(self: *Self, allocator: std.mem.Allocator, input: list_stack_set_auto_deployment_targets.ListStackSetAutoDeploymentTargetsInput, options: CallOptions) !list_stack_set_auto_deployment_targets.ListStackSetAutoDeploymentTargetsOutput {
         return list_stack_set_auto_deployment_targets.execute(self, allocator, input, options);
     }
 
@@ -1054,7 +1055,7 @@ pub const Client = struct {
     ///
     /// This API provides *eventually consistent* reads meaning it may take
     /// some time but will eventually return the most up-to-date data.
-    pub fn listStackSetOperationResults(self: *Self, allocator: std.mem.Allocator, input: list_stack_set_operation_results.ListStackSetOperationResultsInput, options: list_stack_set_operation_results.Options) !list_stack_set_operation_results.ListStackSetOperationResultsOutput {
+    pub fn listStackSetOperationResults(self: *Self, allocator: std.mem.Allocator, input: list_stack_set_operation_results.ListStackSetOperationResultsInput, options: CallOptions) !list_stack_set_operation_results.ListStackSetOperationResultsOutput {
         return list_stack_set_operation_results.execute(self, allocator, input, options);
     }
 
@@ -1062,7 +1063,7 @@ pub const Client = struct {
     ///
     /// This API provides *eventually consistent* reads meaning it may take
     /// some time but will eventually return the most up-to-date data.
-    pub fn listStackSetOperations(self: *Self, allocator: std.mem.Allocator, input: list_stack_set_operations.ListStackSetOperationsInput, options: list_stack_set_operations.Options) !list_stack_set_operations.ListStackSetOperationsOutput {
+    pub fn listStackSetOperations(self: *Self, allocator: std.mem.Allocator, input: list_stack_set_operations.ListStackSetOperationsInput, options: CallOptions) !list_stack_set_operations.ListStackSetOperationsOutput {
         return list_stack_set_operations.execute(self, allocator, input, options);
     }
 
@@ -1085,7 +1086,7 @@ pub const Client = struct {
     /// `ListStackSets` returns all StackSets with service-managed permissions in
     /// the
     /// management account.
-    pub fn listStackSets(self: *Self, allocator: std.mem.Allocator, input: list_stack_sets.ListStackSetsInput, options: list_stack_sets.Options) !list_stack_sets.ListStackSetsOutput {
+    pub fn listStackSets(self: *Self, allocator: std.mem.Allocator, input: list_stack_sets.ListStackSetsInput, options: CallOptions) !list_stack_sets.ListStackSetsOutput {
         return list_stack_sets.execute(self, allocator, input, options);
     }
 
@@ -1097,17 +1098,17 @@ pub const Client = struct {
     /// specified, summary information for all stacks is returned (including
     /// existing stacks and
     /// stacks that have been deleted).
-    pub fn listStacks(self: *Self, allocator: std.mem.Allocator, input: list_stacks.ListStacksInput, options: list_stacks.Options) !list_stacks.ListStacksOutput {
+    pub fn listStacks(self: *Self, allocator: std.mem.Allocator, input: list_stacks.ListStacksInput, options: CallOptions) !list_stacks.ListStacksOutput {
         return list_stacks.execute(self, allocator, input, options);
     }
 
     /// Returns a list of registration tokens for the specified extension(s).
-    pub fn listTypeRegistrations(self: *Self, allocator: std.mem.Allocator, input: list_type_registrations.ListTypeRegistrationsInput, options: list_type_registrations.Options) !list_type_registrations.ListTypeRegistrationsOutput {
+    pub fn listTypeRegistrations(self: *Self, allocator: std.mem.Allocator, input: list_type_registrations.ListTypeRegistrationsInput, options: CallOptions) !list_type_registrations.ListTypeRegistrationsOutput {
         return list_type_registrations.execute(self, allocator, input, options);
     }
 
     /// Returns summary information about the versions of an extension.
-    pub fn listTypeVersions(self: *Self, allocator: std.mem.Allocator, input: list_type_versions.ListTypeVersionsInput, options: list_type_versions.Options) !list_type_versions.ListTypeVersionsOutput {
+    pub fn listTypeVersions(self: *Self, allocator: std.mem.Allocator, input: list_type_versions.ListTypeVersionsInput, options: CallOptions) !list_type_versions.ListTypeVersionsOutput {
         return list_type_versions.execute(self, allocator, input, options);
     }
 
@@ -1116,7 +1117,7 @@ pub const Client = struct {
     /// modules, and Hooks as well as all public extensions from Amazon Web Services
     /// and third-party
     /// publishers.
-    pub fn listTypes(self: *Self, allocator: std.mem.Allocator, input: list_types.ListTypesInput, options: list_types.Options) !list_types.ListTypesOutput {
+    pub fn listTypes(self: *Self, allocator: std.mem.Allocator, input: list_types.ListTypesInput, options: CallOptions) !list_types.ListTypesOutput {
         return list_types.execute(self, allocator, input, options);
     }
 
@@ -1133,7 +1134,7 @@ pub const Client = struct {
     /// CloudFormation. For more
     /// information, see
     /// [RegisterPublisher](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html).
-    pub fn publishType(self: *Self, allocator: std.mem.Allocator, input: publish_type.PublishTypeInput, options: publish_type.Options) !publish_type.PublishTypeOutput {
+    pub fn publishType(self: *Self, allocator: std.mem.Allocator, input: publish_type.PublishTypeInput, options: CallOptions) !publish_type.PublishTypeOutput {
         return publish_type.execute(self, allocator, input, options);
     }
 
@@ -1141,7 +1142,7 @@ pub const Client = struct {
     ///
     /// Reserved for use by the [CloudFormation
     /// CLI](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html). Don't use this API in your code.
-    pub fn recordHandlerProgress(self: *Self, allocator: std.mem.Allocator, input: record_handler_progress.RecordHandlerProgressInput, options: record_handler_progress.Options) !record_handler_progress.RecordHandlerProgressOutput {
+    pub fn recordHandlerProgress(self: *Self, allocator: std.mem.Allocator, input: record_handler_progress.RecordHandlerProgressInput, options: CallOptions) !record_handler_progress.RecordHandlerProgressOutput {
         return record_handler_progress.execute(self, allocator, input, options);
     }
 
@@ -1156,7 +1157,7 @@ pub const Client = struct {
     /// [Prerequisite: Registering your account to publish CloudFormation
     /// extensions](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs) in the
     /// *CloudFormation Command Line Interface (CLI) User Guide*.
-    pub fn registerPublisher(self: *Self, allocator: std.mem.Allocator, input: register_publisher.RegisterPublisherInput, options: register_publisher.Options) !register_publisher.RegisterPublisherOutput {
+    pub fn registerPublisher(self: *Self, allocator: std.mem.Allocator, input: register_publisher.RegisterPublisherInput, options: CallOptions) !register_publisher.RegisterPublisherOutput {
         return register_publisher.execute(self, allocator, input, options);
     }
 
@@ -1193,7 +1194,7 @@ pub const Client = struct {
     /// data for extensions in your
     /// account](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html) in the
     /// *CloudFormation User Guide*.
-    pub fn registerType(self: *Self, allocator: std.mem.Allocator, input: register_type.RegisterTypeInput, options: register_type.Options) !register_type.RegisterTypeOutput {
+    pub fn registerType(self: *Self, allocator: std.mem.Allocator, input: register_type.RegisterTypeInput, options: CallOptions) !register_type.RegisterTypeOutput {
         return register_type.execute(self, allocator, input, options);
     }
 
@@ -1219,12 +1220,12 @@ pub const Client = struct {
     /// * `IMPORT_COMPLETE`
     ///
     /// * `IMPORT_ROLLBACK_COMPLETE`
-    pub fn rollbackStack(self: *Self, allocator: std.mem.Allocator, input: rollback_stack.RollbackStackInput, options: rollback_stack.Options) !rollback_stack.RollbackStackOutput {
+    pub fn rollbackStack(self: *Self, allocator: std.mem.Allocator, input: rollback_stack.RollbackStackInput, options: CallOptions) !rollback_stack.RollbackStackOutput {
         return rollback_stack.execute(self, allocator, input, options);
     }
 
     /// Sets a stack policy for a specified stack.
-    pub fn setStackPolicy(self: *Self, allocator: std.mem.Allocator, input: set_stack_policy.SetStackPolicyInput, options: set_stack_policy.Options) !set_stack_policy.SetStackPolicyOutput {
+    pub fn setStackPolicy(self: *Self, allocator: std.mem.Allocator, input: set_stack_policy.SetStackPolicyInput, options: CallOptions) !set_stack_policy.SetStackPolicyOutput {
         return set_stack_policy.execute(self, allocator, input, options);
     }
 
@@ -1255,14 +1256,14 @@ pub const Client = struct {
     /// information about setting the configuration
     /// data for Hooks, see the [CloudFormation Hooks User
     /// Guide](https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html).
-    pub fn setTypeConfiguration(self: *Self, allocator: std.mem.Allocator, input: set_type_configuration.SetTypeConfigurationInput, options: set_type_configuration.Options) !set_type_configuration.SetTypeConfigurationOutput {
+    pub fn setTypeConfiguration(self: *Self, allocator: std.mem.Allocator, input: set_type_configuration.SetTypeConfigurationInput, options: CallOptions) !set_type_configuration.SetTypeConfigurationOutput {
         return set_type_configuration.execute(self, allocator, input, options);
     }
 
     /// Specify the default version of an extension. The default version of an
     /// extension will be
     /// used in CloudFormation operations.
-    pub fn setTypeDefaultVersion(self: *Self, allocator: std.mem.Allocator, input: set_type_default_version.SetTypeDefaultVersionInput, options: set_type_default_version.Options) !set_type_default_version.SetTypeDefaultVersionOutput {
+    pub fn setTypeDefaultVersion(self: *Self, allocator: std.mem.Allocator, input: set_type_default_version.SetTypeDefaultVersionInput, options: CallOptions) !set_type_default_version.SetTypeDefaultVersionOutput {
         return set_type_default_version.execute(self, allocator, input, options);
     }
 
@@ -1276,14 +1277,14 @@ pub const Client = struct {
     /// operation is useful in cases where you want to send signals from anywhere
     /// other than an Amazon EC2
     /// instance.
-    pub fn signalResource(self: *Self, allocator: std.mem.Allocator, input: signal_resource.SignalResourceInput, options: signal_resource.Options) !signal_resource.SignalResourceOutput {
+    pub fn signalResource(self: *Self, allocator: std.mem.Allocator, input: signal_resource.SignalResourceInput, options: CallOptions) !signal_resource.SignalResourceOutput {
         return signal_resource.execute(self, allocator, input, options);
     }
 
     /// Starts a scan of the resources in this account in this Region. You can the
     /// status of a
     /// scan using the `ListResourceScans` API action.
-    pub fn startResourceScan(self: *Self, allocator: std.mem.Allocator, input: start_resource_scan.StartResourceScanInput, options: start_resource_scan.Options) !start_resource_scan.StartResourceScanOutput {
+    pub fn startResourceScan(self: *Self, allocator: std.mem.Allocator, input: start_resource_scan.StartResourceScanInput, options: CallOptions) !start_resource_scan.StartResourceScanOutput {
         return start_resource_scan.execute(self, allocator, input, options);
     }
 
@@ -1292,7 +1293,7 @@ pub const Client = struct {
     /// will cancel all the unstarted stack instance deployments and wait for those
     /// are in-progress to
     /// complete.
-    pub fn stopStackSetOperation(self: *Self, allocator: std.mem.Allocator, input: stop_stack_set_operation.StopStackSetOperationInput, options: stop_stack_set_operation.Options) !stop_stack_set_operation.StopStackSetOperationOutput {
+    pub fn stopStackSetOperation(self: *Self, allocator: std.mem.Allocator, input: stop_stack_set_operation.StopStackSetOperationInput, options: CallOptions) !stop_stack_set_operation.StopStackSetOperationOutput {
         return stop_stack_set_operation.execute(self, allocator, input, options);
     }
 
@@ -1332,7 +1333,7 @@ pub const Client = struct {
     /// to make them available for public
     /// use](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html) in the
     /// *CloudFormation Command Line Interface (CLI) User Guide*.
-    pub fn testType(self: *Self, allocator: std.mem.Allocator, input: test_type.TestTypeInput, options: test_type.Options) !test_type.TestTypeOutput {
+    pub fn testType(self: *Self, allocator: std.mem.Allocator, input: test_type.TestTypeInput, options: CallOptions) !test_type.TestTypeOutput {
         return test_type.execute(self, allocator, input, options);
     }
 
@@ -1342,7 +1343,7 @@ pub const Client = struct {
     /// `UpdateReplacePolicy` settings. You can check the status of the update to
     /// the
     /// generated template using the `DescribeGeneratedTemplate` API action.
-    pub fn updateGeneratedTemplate(self: *Self, allocator: std.mem.Allocator, input: update_generated_template.UpdateGeneratedTemplateInput, options: update_generated_template.Options) !update_generated_template.UpdateGeneratedTemplateOutput {
+    pub fn updateGeneratedTemplate(self: *Self, allocator: std.mem.Allocator, input: update_generated_template.UpdateGeneratedTemplateInput, options: CallOptions) !update_generated_template.UpdateGeneratedTemplateOutput {
         return update_generated_template.execute(self, allocator, input, options);
     }
 
@@ -1360,7 +1361,7 @@ pub const Client = struct {
     /// Amazon Web Services resources as a single unit with CloudFormation
     /// stacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in the
     /// *CloudFormation User Guide*.
-    pub fn updateStack(self: *Self, allocator: std.mem.Allocator, input: update_stack.UpdateStackInput, options: update_stack.Options) !update_stack.UpdateStackOutput {
+    pub fn updateStack(self: *Self, allocator: std.mem.Allocator, input: update_stack.UpdateStackInput, options: CallOptions) !update_stack.UpdateStackOutput {
         return update_stack.execute(self, allocator, input, options);
     }
 
@@ -1403,7 +1404,7 @@ pub const Client = struct {
     ///
     /// * *Parent OU strategy:* If you don't mind exposing the OU
     /// hierarchy, target a parent OU that contains all desired child OUs.
-    pub fn updateStackInstances(self: *Self, allocator: std.mem.Allocator, input: update_stack_instances.UpdateStackInstancesInput, options: update_stack_instances.Options) !update_stack_instances.UpdateStackInstancesOutput {
+    pub fn updateStackInstances(self: *Self, allocator: std.mem.Allocator, input: update_stack_instances.UpdateStackInstancesInput, options: CallOptions) !update_stack_instances.UpdateStackInstancesOutput {
         return update_stack_instances.execute(self, allocator, input, options);
     }
 
@@ -1429,7 +1430,7 @@ pub const Client = struct {
     ///
     /// * *Parent OU strategy:* If you don't mind exposing the OU
     /// hierarchy, target a parent OU that contains all desired child OUs.
-    pub fn updateStackSet(self: *Self, allocator: std.mem.Allocator, input: update_stack_set.UpdateStackSetInput, options: update_stack_set.Options) !update_stack_set.UpdateStackSetOutput {
+    pub fn updateStackSet(self: *Self, allocator: std.mem.Allocator, input: update_stack_set.UpdateStackSetInput, options: CallOptions) !update_stack_set.UpdateStackSetOutput {
         return update_stack_set.execute(self, allocator, input, options);
     }
 
@@ -1446,7 +1447,7 @@ pub const Client = struct {
     /// termination protection is set on the root stack and can't be changed
     /// directly on the nested
     /// stack.
-    pub fn updateTerminationProtection(self: *Self, allocator: std.mem.Allocator, input: update_termination_protection.UpdateTerminationProtectionInput, options: update_termination_protection.Options) !update_termination_protection.UpdateTerminationProtectionOutput {
+    pub fn updateTerminationProtection(self: *Self, allocator: std.mem.Allocator, input: update_termination_protection.UpdateTerminationProtectionInput, options: CallOptions) !update_termination_protection.UpdateTerminationProtectionOutput {
         return update_termination_protection.execute(self, allocator, input, options);
     }
 
@@ -1455,7 +1456,7 @@ pub const Client = struct {
     /// it isn't, CloudFormation checks if the template is valid YAML. If both these
     /// checks fail,
     /// CloudFormation returns a template validation error.
-    pub fn validateTemplate(self: *Self, allocator: std.mem.Allocator, input: validate_template.ValidateTemplateInput, options: validate_template.Options) !validate_template.ValidateTemplateOutput {
+    pub fn validateTemplate(self: *Self, allocator: std.mem.Allocator, input: validate_template.ValidateTemplateInput, options: CallOptions) !validate_template.ValidateTemplateOutput {
         return validate_template.execute(self, allocator, input, options);
     }
 

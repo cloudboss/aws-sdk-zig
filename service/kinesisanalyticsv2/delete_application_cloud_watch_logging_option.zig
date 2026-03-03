@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CloudWatchLoggingOptionDescription = @import("cloud_watch_logging_option_description.zig").CloudWatchLoggingOptionDescription;
 
@@ -61,11 +62,7 @@ pub const DeleteApplicationCloudWatchLoggingOptionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteApplicationCloudWatchLoggingOptionInput, options: Options) !DeleteApplicationCloudWatchLoggingOptionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteApplicationCloudWatchLoggingOptionInput, options: CallOptions) !DeleteApplicationCloudWatchLoggingOptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

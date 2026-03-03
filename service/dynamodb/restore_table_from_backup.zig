@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BillingMode = @import("billing_mode.zig").BillingMode;
 const GlobalSecondaryIndex = @import("global_secondary_index.zig").GlobalSecondaryIndex;
@@ -64,11 +65,7 @@ pub const RestoreTableFromBackupOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RestoreTableFromBackupInput, options: Options) !RestoreTableFromBackupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RestoreTableFromBackupInput, options: CallOptions) !RestoreTableFromBackupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

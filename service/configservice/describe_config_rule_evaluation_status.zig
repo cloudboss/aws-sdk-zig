@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConfigRuleEvaluationStatus = @import("config_rule_evaluation_status.zig").ConfigRuleEvaluationStatus;
 
@@ -50,11 +51,7 @@ pub const DescribeConfigRuleEvaluationStatusOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeConfigRuleEvaluationStatusInput, options: Options) !DescribeConfigRuleEvaluationStatusOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeConfigRuleEvaluationStatusInput, options: CallOptions) !DescribeConfigRuleEvaluationStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

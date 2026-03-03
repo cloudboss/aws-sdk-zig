@@ -19,8 +19,7 @@ test "zest.beforeAll" {
     {
         var arena = std.heap.ArenaAllocator.init(allocator);
         defer arena.deinit();
-        const r = try sqs.create_queue.execute(
-            &shared_client.?,
+        const r = try shared_client.?.createQueue(
             arena.allocator(),
             .{ .queue_name = "sdk-zig-sqs-shared" },
             .{},
@@ -37,8 +36,7 @@ test "zest.afterAll" {
         if (shared_queue_url.len > 0) {
             var arena = std.heap.ArenaAllocator.init(gpa.allocator());
             defer arena.deinit();
-            _ = sqs.delete_queue.execute(
-                c,
+            _ = c.deleteQueue(
                 arena.allocator(),
                 .{ .queue_url = shared_queue_url },
                 .{},
@@ -54,8 +52,7 @@ test "CreateQueue returns queue URL" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const create_result = try sqs.create_queue.execute(
-        client,
+    const create_result = try client.createQueue(
         arena.allocator(),
         .{ .queue_name = "sdk-zig-sqs-create" },
         .{},
@@ -65,8 +62,7 @@ test "CreateQueue returns queue URL" {
         return error.MissingQueueUrl;
     try std.testing.expect(queue_url.len > 0);
 
-    _ = try sqs.delete_queue.execute(
-        client,
+    _ = try client.deleteQueue(
         arena.allocator(),
         .{ .queue_url = queue_url },
         .{},
@@ -78,8 +74,7 @@ test "SendMessage returns message ID with MD5 checksum" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const send_result = try sqs.send_message.execute(
-        client,
+    const send_result = try client.sendMessage(
         arena.allocator(),
         .{
             .queue_url = shared_queue_url,
@@ -92,8 +87,7 @@ test "SendMessage returns message ID with MD5 checksum" {
     try std.testing.expect(send_result.md5_of_message_body != null);
 
     // Drain the sent message so subsequent tests start clean.
-    const recv = try sqs.receive_message.execute(
-        client,
+    const recv = try client.receiveMessage(
         arena.allocator(),
         .{
             .queue_url = shared_queue_url,
@@ -105,8 +99,7 @@ test "SendMessage returns message ID with MD5 checksum" {
     if (recv.messages) |msgs| {
         if (msgs.len > 0) {
             if (msgs[0].receipt_handle) |rh| {
-                _ = try sqs.delete_message.execute(
-                    client,
+                _ = try client.deleteMessage(
                     arena.allocator(),
                     .{
                         .queue_url = shared_queue_url,
@@ -125,15 +118,13 @@ test "ReceiveMessage returns sent message body" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    _ = try sqs.send_message.execute(
-        client,
+    _ = try client.sendMessage(
         arena.allocator(),
         .{ .queue_url = shared_queue_url, .message_body = body },
         .{},
     );
 
-    const recv_result = try sqs.receive_message.execute(
-        client,
+    const recv_result = try client.receiveMessage(
         arena.allocator(),
         .{
             .queue_url = shared_queue_url,
@@ -154,8 +145,7 @@ test "ReceiveMessage returns sent message body" {
     // Clean up the received message.
     const receipt = messages[0].receipt_handle orelse
         return error.MissingReceiptHandle;
-    _ = try sqs.delete_message.execute(
-        client,
+    _ = try client.deleteMessage(
         arena.allocator(),
         .{ .queue_url = shared_queue_url, .receipt_handle = receipt },
         .{},
@@ -167,15 +157,13 @@ test "DeleteMessage removes message from queue" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    _ = try sqs.send_message.execute(
-        client,
+    _ = try client.sendMessage(
         arena.allocator(),
         .{ .queue_url = shared_queue_url, .message_body = "delete-me" },
         .{},
     );
 
-    const recv_result = try sqs.receive_message.execute(
-        client,
+    const recv_result = try client.receiveMessage(
         arena.allocator(),
         .{
             .queue_url = shared_queue_url,
@@ -191,16 +179,14 @@ test "DeleteMessage removes message from queue" {
     const receipt = messages[0].receipt_handle orelse
         return error.MissingReceiptHandle;
 
-    _ = try sqs.delete_message.execute(
-        client,
+    _ = try client.deleteMessage(
         arena.allocator(),
         .{ .queue_url = shared_queue_url, .receipt_handle = receipt },
         .{},
     );
 
     // Verify queue is now empty.
-    const recv2 = try sqs.receive_message.execute(
-        client,
+    const recv2 = try client.receiveMessage(
         arena.allocator(),
         .{
             .queue_url = shared_queue_url,
@@ -220,8 +206,7 @@ test "DeleteQueue removes queue" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const create_result = try sqs.create_queue.execute(
-        client,
+    const create_result = try client.createQueue(
         arena.allocator(),
         .{ .queue_name = "sdk-zig-sqs-delete" },
         .{},
@@ -231,15 +216,14 @@ test "DeleteQueue removes queue" {
         return error.MissingQueueUrl;
 
     {
-        _ = try sqs.delete_queue.execute(
-            client,
+        _ = try client.deleteQueue(
             arena.allocator(),
             .{ .queue_url = queue_url },
             .{},
         );
     }
 
-    const list_result = try sqs.list_queues.execute(client, arena.allocator(), .{}, .{});
+    const list_result = try client.listQueues(arena.allocator(), .{}, .{});
 
     if (list_result.queue_urls) |urls| {
         for (urls) |url| {
@@ -255,8 +239,7 @@ test "SendMessageBatch sends multiple messages in one call" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const create_result = try sqs.create_queue.execute(
-        client,
+    const create_result = try client.createQueue(
         arena.allocator(),
         .{ .queue_name = "sdk-zig-sqs-batch" },
         .{},
@@ -265,8 +248,7 @@ test "SendMessageBatch sends multiple messages in one call" {
     const queue_url = create_result.queue_url orelse
         return error.MissingQueueUrl;
 
-    const batch_result = try sqs.send_message_batch.execute(
-        client,
+    const batch_result = try client.sendMessageBatch(
         arena.allocator(),
         .{
             .queue_url = queue_url,
@@ -307,8 +289,7 @@ test "SendMessageBatch sends multiple messages in one call" {
         return error.MissingSuccessful;
     try std.testing.expectEqual(3, successful.len);
 
-    _ = try sqs.delete_queue.execute(
-        client,
+    _ = try client.deleteQueue(
         arena.allocator(),
         .{ .queue_url = queue_url },
         .{},
@@ -320,8 +301,7 @@ test "GetQueueAttributes returns queue metadata" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const attr_result = try sqs.get_queue_attributes.execute(
-        client,
+    const attr_result = try client.getQueueAttributes(
         arena.allocator(),
         .{
             .queue_url = shared_queue_url,
@@ -338,8 +318,7 @@ test "ListQueues returns created queue URL" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const create_result = try sqs.create_queue.execute(
-        client,
+    const create_result = try client.createQueue(
         arena.allocator(),
         .{ .queue_name = "sdk-zig-sqs-list" },
         .{},
@@ -348,7 +327,7 @@ test "ListQueues returns created queue URL" {
     const queue_url = create_result.queue_url orelse
         return error.MissingQueueUrl;
 
-    const list_result = try sqs.list_queues.execute(client, arena.allocator(), .{}, .{});
+    const list_result = try client.listQueues(arena.allocator(), .{}, .{});
 
     const urls = list_result.queue_urls orelse
         return error.MissingQueueUrls;
@@ -361,8 +340,7 @@ test "ListQueues returns created queue URL" {
     }
     try std.testing.expect(found);
 
-    _ = try sqs.delete_queue.execute(
-        client,
+    _ = try client.deleteQueue(
         arena.allocator(),
         .{ .queue_url = queue_url },
         .{},
@@ -374,8 +352,7 @@ test "ReceiveMessage returns empty when queue is empty" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const create_result = try sqs.create_queue.execute(
-        client,
+    const create_result = try client.createQueue(
         arena.allocator(),
         .{ .queue_name = "sdk-zig-sqs-empty" },
         .{},
@@ -384,8 +361,7 @@ test "ReceiveMessage returns empty when queue is empty" {
     const queue_url = create_result.queue_url orelse
         return error.MissingQueueUrl;
 
-    const recv_result = try sqs.receive_message.execute(
-        client,
+    const recv_result = try client.receiveMessage(
         arena.allocator(),
         .{
             .queue_url = queue_url,
@@ -399,8 +375,7 @@ test "ReceiveMessage returns empty when queue is empty" {
         try std.testing.expectEqual(0, messages.len);
     }
 
-    _ = try sqs.delete_queue.execute(
-        client,
+    _ = try client.deleteQueue(
         arena.allocator(),
         .{ .queue_url = queue_url },
         .{},
@@ -412,8 +387,7 @@ test "GetQueueUrl returns URL for named queue" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const create_result = try sqs.create_queue.execute(
-        client,
+    const create_result = try client.createQueue(
         arena.allocator(),
         .{ .queue_name = "sdk-zig-sqs-geturl" },
         .{},
@@ -422,8 +396,7 @@ test "GetQueueUrl returns URL for named queue" {
     const created_url = create_result.queue_url orelse
         return error.MissingQueueUrl;
 
-    const url_result = try sqs.get_queue_url.execute(
-        client,
+    const url_result = try client.getQueueUrl(
         arena.allocator(),
         .{ .queue_name = "sdk-zig-sqs-geturl" },
         .{},
@@ -433,8 +406,7 @@ test "GetQueueUrl returns URL for named queue" {
         return error.MissingQueueUrl;
     try std.testing.expectEqualStrings(created_url, fetched_url);
 
-    _ = try sqs.delete_queue.execute(
-        client,
+    _ = try client.deleteQueue(
         arena.allocator(),
         .{ .queue_url = created_url },
         .{},
@@ -446,8 +418,7 @@ test "PurgeQueue removes all messages" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const create_result = try sqs.create_queue.execute(
-        client,
+    const create_result = try client.createQueue(
         arena.allocator(),
         .{ .queue_name = "sdk-zig-sqs-purge" },
         .{},
@@ -457,16 +428,14 @@ test "PurgeQueue removes all messages" {
         return error.MissingQueueUrl;
 
     {
-        _ = try sqs.send_message.execute(
-            client,
+        _ = try client.sendMessage(
             arena.allocator(),
             .{ .queue_url = queue_url, .message_body = "purge-1" },
             .{},
         );
     }
     {
-        _ = try sqs.send_message.execute(
-            client,
+        _ = try client.sendMessage(
             arena.allocator(),
             .{ .queue_url = queue_url, .message_body = "purge-2" },
             .{},
@@ -474,16 +443,14 @@ test "PurgeQueue removes all messages" {
     }
 
     {
-        _ = try sqs.purge_queue.execute(
-            client,
+        _ = try client.purgeQueue(
             arena.allocator(),
             .{ .queue_url = queue_url },
             .{},
         );
     }
 
-    const recv = try sqs.receive_message.execute(
-        client,
+    const recv = try client.receiveMessage(
         arena.allocator(),
         .{
             .queue_url = queue_url,
@@ -497,8 +464,7 @@ test "PurgeQueue removes all messages" {
         try std.testing.expectEqual(0, msgs.len);
     }
 
-    _ = try sqs.delete_queue.execute(
-        client,
+    _ = try client.deleteQueue(
         arena.allocator(),
         .{ .queue_url = queue_url },
         .{},
@@ -510,8 +476,7 @@ test "SendMessageBatch returns correct successful count" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const create_result = try sqs.create_queue.execute(
-        client,
+    const create_result = try client.createQueue(
         arena.allocator(),
         .{ .queue_name = "sdk-zig-sqs-batch-count" },
         .{},
@@ -520,8 +485,7 @@ test "SendMessageBatch returns correct successful count" {
     const queue_url = create_result.queue_url orelse
         return error.MissingQueueUrl;
 
-    const batch = try sqs.send_message_batch.execute(
-        client,
+    const batch = try client.sendMessageBatch(
         arena.allocator(),
         .{
             .queue_url = queue_url,
@@ -562,8 +526,7 @@ test "SendMessageBatch returns correct successful count" {
         return error.MissingSuccessful;
     try std.testing.expectEqual(3, successful.len);
 
-    _ = try sqs.delete_queue.execute(
-        client,
+    _ = try client.deleteQueue(
         arena.allocator(),
         .{ .queue_url = queue_url },
         .{},
@@ -575,8 +538,7 @@ test "CreateQueue with attributes sets visibility timeout" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const create_result = try sqs.create_queue.execute(
-        client,
+    const create_result = try client.createQueue(
         arena.allocator(),
         .{
             .queue_name = "sdk-zig-sqs-attrs-create",
@@ -591,8 +553,7 @@ test "CreateQueue with attributes sets visibility timeout" {
         return error.MissingQueueUrl;
     try std.testing.expect(queue_url.len > 0);
 
-    _ = try sqs.delete_queue.execute(
-        client,
+    _ = try client.deleteQueue(
         arena.allocator(),
         .{ .queue_url = queue_url },
         .{},
@@ -604,8 +565,7 @@ test "ChangeMessageVisibility extends visibility timeout" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const create_result = try sqs.create_queue.execute(
-        client,
+    const create_result = try client.createQueue(
         arena.allocator(),
         .{ .queue_name = "sdk-zig-sqs-visibility" },
         .{},
@@ -615,8 +575,7 @@ test "ChangeMessageVisibility extends visibility timeout" {
         return error.MissingQueueUrl;
 
     {
-        _ = try sqs.send_message.execute(
-            client,
+        _ = try client.sendMessage(
             arena.allocator(),
             .{ .queue_url = queue_url, .message_body = "visibility-test" },
             .{},
@@ -624,8 +583,7 @@ test "ChangeMessageVisibility extends visibility timeout" {
     }
 
     // Receive makes the message invisible for the default timeout.
-    const recv1 = try sqs.receive_message.execute(
-        client,
+    const recv1 = try client.receiveMessage(
         arena.allocator(),
         .{
             .queue_url = queue_url,
@@ -642,8 +600,7 @@ test "ChangeMessageVisibility extends visibility timeout" {
 
     // Set visibility timeout to 0 so the message becomes immediately visible.
     {
-        _ = try sqs.change_message_visibility.execute(
-            client,
+        _ = try client.changeMessageVisibility(
             arena.allocator(),
             .{
                 .queue_url = queue_url,
@@ -655,8 +612,7 @@ test "ChangeMessageVisibility extends visibility timeout" {
     }
 
     // The message should be receivable again.
-    const recv2 = try sqs.receive_message.execute(
-        client,
+    const recv2 = try client.receiveMessage(
         arena.allocator(),
         .{
             .queue_url = queue_url,
@@ -674,8 +630,7 @@ test "ChangeMessageVisibility extends visibility timeout" {
     );
 
     {
-        _ = try sqs.delete_queue.execute(
-            client,
+        _ = try client.deleteQueue(
             arena.allocator(),
             .{ .queue_url = queue_url },
             .{},

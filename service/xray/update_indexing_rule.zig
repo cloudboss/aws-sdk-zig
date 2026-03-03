@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IndexingRuleValueUpdate = @import("indexing_rule_value_update.zig").IndexingRuleValueUpdate;
 const IndexingRule = @import("indexing_rule.zig").IndexingRule;
@@ -28,11 +29,7 @@ pub const UpdateIndexingRuleOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateIndexingRuleInput, options: Options) !UpdateIndexingRuleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateIndexingRuleInput, options: CallOptions) !UpdateIndexingRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

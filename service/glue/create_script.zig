@@ -2,20 +2,17 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CodeGenEdge = @import("code_gen_edge.zig").CodeGenEdge;
 const CodeGenNode = @import("code_gen_node.zig").CodeGenNode;
 const Language = @import("language.zig").Language;
 
-const CreateScriptInput = @import("create_script_request.zig").CreateScriptRequest;
+pub const CreateScriptInput = @import("create_script_request.zig").CreateScriptRequest;
 
-const CreateScriptOutput = @import("create_script_response.zig").CreateScriptResponse;
+pub const CreateScriptOutput = @import("create_script_response.zig").CreateScriptResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateScriptInput, options: Options) !CreateScriptOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateScriptInput, options: CallOptions) !CreateScriptOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

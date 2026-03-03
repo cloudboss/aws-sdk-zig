@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ActionType = @import("action_type.zig").ActionType;
 const NodeConfigurationOptionsFilter = @import("node_configuration_options_filter.zig").NodeConfigurationOptionsFilter;
@@ -72,11 +73,7 @@ pub const DescribeNodeConfigurationOptionsOutput = struct {
     node_configuration_option_list: ?[]const NodeConfigurationOption = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeNodeConfigurationOptionsInput, options: Options) !DescribeNodeConfigurationOptionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeNodeConfigurationOptionsInput, options: CallOptions) !DescribeNodeConfigurationOptionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

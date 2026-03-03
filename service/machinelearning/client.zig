@@ -29,6 +29,7 @@ const update_batch_prediction = @import("update_batch_prediction.zig");
 const update_data_source = @import("update_data_source.zig");
 const update_evaluation = @import("update_evaluation.zig");
 const update_ml_model = @import("update_ml_model.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -64,7 +65,7 @@ pub const Client = struct {
     /// and an optional value. If you add a tag using a key that is already
     /// associated with the ML object,
     /// `AddTags` updates the tag's value.
-    pub fn addTags(self: *Self, allocator: std.mem.Allocator, input: add_tags.AddTagsInput, options: add_tags.Options) !add_tags.AddTagsOutput {
+    pub fn addTags(self: *Self, allocator: std.mem.Allocator, input: add_tags.AddTagsInput, options: CallOptions) !add_tags.AddTagsOutput {
         return add_tags.execute(self, allocator, input, options);
     }
 
@@ -86,7 +87,7 @@ pub const Client = struct {
     /// status appears,
     /// the results are available in the location specified by the `OutputUri`
     /// parameter.
-    pub fn createBatchPrediction(self: *Self, allocator: std.mem.Allocator, input: create_batch_prediction.CreateBatchPredictionInput, options: create_batch_prediction.Options) !create_batch_prediction.CreateBatchPredictionOutput {
+    pub fn createBatchPrediction(self: *Self, allocator: std.mem.Allocator, input: create_batch_prediction.CreateBatchPredictionInput, options: CallOptions) !create_batch_prediction.CreateBatchPredictionOutput {
         return create_batch_prediction.execute(self, allocator, input, options);
     }
 
@@ -108,7 +109,7 @@ pub const Client = struct {
     /// If Amazon ML cannot accept the input source, it sets the `Status` parameter
     /// to `FAILED` and includes an error message in the `Message` attribute of the
     /// `GetDataSource` operation response.
-    pub fn createDataSourceFromRds(self: *Self, allocator: std.mem.Allocator, input: create_data_source_from_rds.CreateDataSourceFromRDSInput, options: create_data_source_from_rds.Options) !create_data_source_from_rds.CreateDataSourceFromRDSOutput {
+    pub fn createDataSourceFromRds(self: *Self, allocator: std.mem.Allocator, input: create_data_source_from_rds.CreateDataSourceFromRDSInput, options: CallOptions) !create_data_source_from_rds.CreateDataSourceFromRDSOutput {
         return create_data_source_from_rds.execute(self, allocator, input, options);
     }
 
@@ -156,7 +157,7 @@ pub const Client = struct {
     /// `GetDataSource` for an existing datasource and copy the values to a
     /// `CreateDataSource` call. Change the settings that you want to change and
     /// make sure that all required fields have the appropriate values.
-    pub fn createDataSourceFromRedshift(self: *Self, allocator: std.mem.Allocator, input: create_data_source_from_redshift.CreateDataSourceFromRedshiftInput, options: create_data_source_from_redshift.Options) !create_data_source_from_redshift.CreateDataSourceFromRedshiftOutput {
+    pub fn createDataSourceFromRedshift(self: *Self, allocator: std.mem.Allocator, input: create_data_source_from_redshift.CreateDataSourceFromRedshiftInput, options: CallOptions) !create_data_source_from_redshift.CreateDataSourceFromRedshiftOutput {
         return create_data_source_from_redshift.execute(self, allocator, input, options);
     }
 
@@ -200,7 +201,7 @@ pub const Client = struct {
     /// for example, will it be combined with another variable or will it be split
     /// apart into
     /// word combinations? The recipe provides answers to these questions.
-    pub fn createDataSourceFromS3(self: *Self, allocator: std.mem.Allocator, input: create_data_source_from_s3.CreateDataSourceFromS3Input, options: create_data_source_from_s3.Options) !create_data_source_from_s3.CreateDataSourceFromS3Output {
+    pub fn createDataSourceFromS3(self: *Self, allocator: std.mem.Allocator, input: create_data_source_from_s3.CreateDataSourceFromS3Input, options: CallOptions) !create_data_source_from_s3.CreateDataSourceFromS3Output {
         return create_data_source_from_s3.execute(self, allocator, input, options);
     }
 
@@ -222,7 +223,7 @@ pub const Client = struct {
     ///
     /// You can use the `GetEvaluation` operation to check progress of the
     /// evaluation during the creation operation.
-    pub fn createEvaluation(self: *Self, allocator: std.mem.Allocator, input: create_evaluation.CreateEvaluationInput, options: create_evaluation.Options) !create_evaluation.CreateEvaluationOutput {
+    pub fn createEvaluation(self: *Self, allocator: std.mem.Allocator, input: create_evaluation.CreateEvaluationInput, options: CallOptions) !create_evaluation.CreateEvaluationOutput {
         return create_evaluation.execute(self, allocator, input, options);
     }
 
@@ -246,14 +247,14 @@ pub const Client = struct {
     /// which can be created by setting `ComputeStatistics` to `true` in
     /// `CreateDataSourceFromRDS`, `CreateDataSourceFromS3`, or
     /// `CreateDataSourceFromRedshift` operations.
-    pub fn createMlModel(self: *Self, allocator: std.mem.Allocator, input: create_ml_model.CreateMLModelInput, options: create_ml_model.Options) !create_ml_model.CreateMLModelOutput {
+    pub fn createMlModel(self: *Self, allocator: std.mem.Allocator, input: create_ml_model.CreateMLModelInput, options: CallOptions) !create_ml_model.CreateMLModelOutput {
         return create_ml_model.execute(self, allocator, input, options);
     }
 
     /// Creates a real-time endpoint for the `MLModel`. The endpoint contains the
     /// URI of the `MLModel`; that is, the location to send real-time prediction
     /// requests for the specified `MLModel`.
-    pub fn createRealtimeEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_realtime_endpoint.CreateRealtimeEndpointInput, options: create_realtime_endpoint.Options) !create_realtime_endpoint.CreateRealtimeEndpointOutput {
+    pub fn createRealtimeEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_realtime_endpoint.CreateRealtimeEndpointInput, options: CallOptions) !create_realtime_endpoint.CreateRealtimeEndpointOutput {
         return create_realtime_endpoint.execute(self, allocator, input, options);
     }
 
@@ -266,7 +267,7 @@ pub const Client = struct {
     ///
     /// **Caution:** The result of the `DeleteBatchPrediction` operation is
     /// irreversible.
-    pub fn deleteBatchPrediction(self: *Self, allocator: std.mem.Allocator, input: delete_batch_prediction.DeleteBatchPredictionInput, options: delete_batch_prediction.Options) !delete_batch_prediction.DeleteBatchPredictionOutput {
+    pub fn deleteBatchPrediction(self: *Self, allocator: std.mem.Allocator, input: delete_batch_prediction.DeleteBatchPredictionInput, options: CallOptions) !delete_batch_prediction.DeleteBatchPredictionOutput {
         return delete_batch_prediction.execute(self, allocator, input, options);
     }
 
@@ -277,7 +278,7 @@ pub const Client = struct {
     ///
     /// **Caution:** The results of the `DeleteDataSource` operation are
     /// irreversible.
-    pub fn deleteDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_data_source.DeleteDataSourceInput, options: delete_data_source.Options) !delete_data_source.DeleteDataSourceOutput {
+    pub fn deleteDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_data_source.DeleteDataSourceInput, options: CallOptions) !delete_data_source.DeleteDataSourceOutput {
         return delete_data_source.execute(self, allocator, input, options);
     }
 
@@ -289,7 +290,7 @@ pub const Client = struct {
     ///
     /// **Caution:** The results of the `DeleteEvaluation` operation are
     /// irreversible.
-    pub fn deleteEvaluation(self: *Self, allocator: std.mem.Allocator, input: delete_evaluation.DeleteEvaluationInput, options: delete_evaluation.Options) !delete_evaluation.DeleteEvaluationOutput {
+    pub fn deleteEvaluation(self: *Self, allocator: std.mem.Allocator, input: delete_evaluation.DeleteEvaluationInput, options: CallOptions) !delete_evaluation.DeleteEvaluationOutput {
         return delete_evaluation.execute(self, allocator, input, options);
     }
 
@@ -300,12 +301,12 @@ pub const Client = struct {
     /// DELETED.
     ///
     /// **Caution:** The result of the `DeleteMLModel` operation is irreversible.
-    pub fn deleteMlModel(self: *Self, allocator: std.mem.Allocator, input: delete_ml_model.DeleteMLModelInput, options: delete_ml_model.Options) !delete_ml_model.DeleteMLModelOutput {
+    pub fn deleteMlModel(self: *Self, allocator: std.mem.Allocator, input: delete_ml_model.DeleteMLModelInput, options: CallOptions) !delete_ml_model.DeleteMLModelOutput {
         return delete_ml_model.execute(self, allocator, input, options);
     }
 
     /// Deletes a real time endpoint of an `MLModel`.
-    pub fn deleteRealtimeEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_realtime_endpoint.DeleteRealtimeEndpointInput, options: delete_realtime_endpoint.Options) !delete_realtime_endpoint.DeleteRealtimeEndpointOutput {
+    pub fn deleteRealtimeEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_realtime_endpoint.DeleteRealtimeEndpointInput, options: CallOptions) !delete_realtime_endpoint.DeleteRealtimeEndpointOutput {
         return delete_realtime_endpoint.execute(self, allocator, input, options);
     }
 
@@ -313,42 +314,42 @@ pub const Client = struct {
     /// operation is complete, you can't recover deleted tags.
     ///
     /// If you specify a tag that doesn't exist, Amazon ML ignores it.
-    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: delete_tags.Options) !delete_tags.DeleteTagsOutput {
+    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: CallOptions) !delete_tags.DeleteTagsOutput {
         return delete_tags.execute(self, allocator, input, options);
     }
 
     /// Returns a list of `BatchPrediction` operations that match the search
     /// criteria in the request.
-    pub fn describeBatchPredictions(self: *Self, allocator: std.mem.Allocator, input: describe_batch_predictions.DescribeBatchPredictionsInput, options: describe_batch_predictions.Options) !describe_batch_predictions.DescribeBatchPredictionsOutput {
+    pub fn describeBatchPredictions(self: *Self, allocator: std.mem.Allocator, input: describe_batch_predictions.DescribeBatchPredictionsInput, options: CallOptions) !describe_batch_predictions.DescribeBatchPredictionsOutput {
         return describe_batch_predictions.execute(self, allocator, input, options);
     }
 
     /// Returns a list of `DataSource` that match the search criteria in the
     /// request.
-    pub fn describeDataSources(self: *Self, allocator: std.mem.Allocator, input: describe_data_sources.DescribeDataSourcesInput, options: describe_data_sources.Options) !describe_data_sources.DescribeDataSourcesOutput {
+    pub fn describeDataSources(self: *Self, allocator: std.mem.Allocator, input: describe_data_sources.DescribeDataSourcesInput, options: CallOptions) !describe_data_sources.DescribeDataSourcesOutput {
         return describe_data_sources.execute(self, allocator, input, options);
     }
 
     /// Returns a list of `DescribeEvaluations` that match the search criteria in
     /// the request.
-    pub fn describeEvaluations(self: *Self, allocator: std.mem.Allocator, input: describe_evaluations.DescribeEvaluationsInput, options: describe_evaluations.Options) !describe_evaluations.DescribeEvaluationsOutput {
+    pub fn describeEvaluations(self: *Self, allocator: std.mem.Allocator, input: describe_evaluations.DescribeEvaluationsInput, options: CallOptions) !describe_evaluations.DescribeEvaluationsOutput {
         return describe_evaluations.execute(self, allocator, input, options);
     }
 
     /// Returns a list of `MLModel` that match the search criteria in the request.
-    pub fn describeMlModels(self: *Self, allocator: std.mem.Allocator, input: describe_ml_models.DescribeMLModelsInput, options: describe_ml_models.Options) !describe_ml_models.DescribeMLModelsOutput {
+    pub fn describeMlModels(self: *Self, allocator: std.mem.Allocator, input: describe_ml_models.DescribeMLModelsInput, options: CallOptions) !describe_ml_models.DescribeMLModelsOutput {
         return describe_ml_models.execute(self, allocator, input, options);
     }
 
     /// Describes one or more of the tags for your Amazon ML object.
-    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: describe_tags.Options) !describe_tags.DescribeTagsOutput {
+    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: CallOptions) !describe_tags.DescribeTagsOutput {
         return describe_tags.execute(self, allocator, input, options);
     }
 
     /// Returns a `BatchPrediction` that includes detailed metadata, status, and
     /// data file information for a
     /// `Batch Prediction` request.
-    pub fn getBatchPrediction(self: *Self, allocator: std.mem.Allocator, input: get_batch_prediction.GetBatchPredictionInput, options: get_batch_prediction.Options) !get_batch_prediction.GetBatchPredictionOutput {
+    pub fn getBatchPrediction(self: *Self, allocator: std.mem.Allocator, input: get_batch_prediction.GetBatchPredictionInput, options: CallOptions) !get_batch_prediction.GetBatchPredictionOutput {
         return get_batch_prediction.execute(self, allocator, input, options);
     }
 
@@ -359,13 +360,13 @@ pub const Client = struct {
     /// format
     /// adds the schema description and the list of files pointed to by the
     /// DataSource to the normal format.
-    pub fn getDataSource(self: *Self, allocator: std.mem.Allocator, input: get_data_source.GetDataSourceInput, options: get_data_source.Options) !get_data_source.GetDataSourceOutput {
+    pub fn getDataSource(self: *Self, allocator: std.mem.Allocator, input: get_data_source.GetDataSourceInput, options: CallOptions) !get_data_source.GetDataSourceOutput {
         return get_data_source.execute(self, allocator, input, options);
     }
 
     /// Returns an `Evaluation` that includes metadata as well as the current status
     /// of the `Evaluation`.
-    pub fn getEvaluation(self: *Self, allocator: std.mem.Allocator, input: get_evaluation.GetEvaluationInput, options: get_evaluation.Options) !get_evaluation.GetEvaluationOutput {
+    pub fn getEvaluation(self: *Self, allocator: std.mem.Allocator, input: get_evaluation.GetEvaluationInput, options: CallOptions) !get_evaluation.GetEvaluationOutput {
         return get_evaluation.execute(self, allocator, input, options);
     }
 
@@ -373,7 +374,7 @@ pub const Client = struct {
     /// information, and the current status of the `MLModel`.
     ///
     /// `GetMLModel` provides results in normal or verbose format.
-    pub fn getMlModel(self: *Self, allocator: std.mem.Allocator, input: get_ml_model.GetMLModelInput, options: get_ml_model.Options) !get_ml_model.GetMLModelOutput {
+    pub fn getMlModel(self: *Self, allocator: std.mem.Allocator, input: get_ml_model.GetMLModelInput, options: CallOptions) !get_ml_model.GetMLModelOutput {
         return get_ml_model.execute(self, allocator, input, options);
     }
 
@@ -381,7 +382,7 @@ pub const Client = struct {
     ///
     /// **Note:** Not all response parameters will be populated. Whether a
     /// response parameter is populated depends on the type of model requested.
-    pub fn predict(self: *Self, allocator: std.mem.Allocator, input: predict_.PredictInput, options: predict_.Options) !predict_.PredictOutput {
+    pub fn predict(self: *Self, allocator: std.mem.Allocator, input: predict_.PredictInput, options: CallOptions) !predict_.PredictOutput {
         return predict_.execute(self, allocator, input, options);
     }
 
@@ -389,7 +390,7 @@ pub const Client = struct {
     ///
     /// You can use the `GetBatchPrediction` operation to view the contents of the
     /// updated data element.
-    pub fn updateBatchPrediction(self: *Self, allocator: std.mem.Allocator, input: update_batch_prediction.UpdateBatchPredictionInput, options: update_batch_prediction.Options) !update_batch_prediction.UpdateBatchPredictionOutput {
+    pub fn updateBatchPrediction(self: *Self, allocator: std.mem.Allocator, input: update_batch_prediction.UpdateBatchPredictionInput, options: CallOptions) !update_batch_prediction.UpdateBatchPredictionOutput {
         return update_batch_prediction.execute(self, allocator, input, options);
     }
 
@@ -397,7 +398,7 @@ pub const Client = struct {
     ///
     /// You can use the `GetDataSource` operation to view the contents of the
     /// updated data element.
-    pub fn updateDataSource(self: *Self, allocator: std.mem.Allocator, input: update_data_source.UpdateDataSourceInput, options: update_data_source.Options) !update_data_source.UpdateDataSourceOutput {
+    pub fn updateDataSource(self: *Self, allocator: std.mem.Allocator, input: update_data_source.UpdateDataSourceInput, options: CallOptions) !update_data_source.UpdateDataSourceOutput {
         return update_data_source.execute(self, allocator, input, options);
     }
 
@@ -405,7 +406,7 @@ pub const Client = struct {
     ///
     /// You can use the `GetEvaluation` operation to view the contents of the
     /// updated data element.
-    pub fn updateEvaluation(self: *Self, allocator: std.mem.Allocator, input: update_evaluation.UpdateEvaluationInput, options: update_evaluation.Options) !update_evaluation.UpdateEvaluationOutput {
+    pub fn updateEvaluation(self: *Self, allocator: std.mem.Allocator, input: update_evaluation.UpdateEvaluationInput, options: CallOptions) !update_evaluation.UpdateEvaluationOutput {
         return update_evaluation.execute(self, allocator, input, options);
     }
 
@@ -413,7 +414,7 @@ pub const Client = struct {
     ///
     /// You can use the `GetMLModel` operation to view the contents of the updated
     /// data element.
-    pub fn updateMlModel(self: *Self, allocator: std.mem.Allocator, input: update_ml_model.UpdateMLModelInput, options: update_ml_model.Options) !update_ml_model.UpdateMLModelOutput {
+    pub fn updateMlModel(self: *Self, allocator: std.mem.Allocator, input: update_ml_model.UpdateMLModelInput, options: CallOptions) !update_ml_model.UpdateMLModelOutput {
         return update_ml_model.execute(self, allocator, input, options);
     }
 

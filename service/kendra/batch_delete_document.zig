@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DataSourceSyncJobMetricTarget = @import("data_source_sync_job_metric_target.zig").DataSourceSyncJobMetricTarget;
 const BatchDeleteDocumentResponseFailedDocument = @import("batch_delete_document_response_failed_document.zig").BatchDeleteDocumentResponseFailedDocument;
@@ -34,11 +35,7 @@ pub const BatchDeleteDocumentOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteDocumentInput, options: Options) !BatchDeleteDocumentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteDocumentInput, options: CallOptions) !BatchDeleteDocumentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

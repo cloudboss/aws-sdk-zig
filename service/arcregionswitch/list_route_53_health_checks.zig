@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Route53HealthCheck = @import("route_53_health_check.zig").Route53HealthCheck;
 
@@ -51,11 +52,7 @@ pub const ListRoute53HealthChecksOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRoute53HealthChecksInput, options: Options) !ListRoute53HealthChecksOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRoute53HealthChecksInput, options: CallOptions) !ListRoute53HealthChecksOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

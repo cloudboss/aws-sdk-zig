@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PrivacyBudgetTemplateAutoRefresh = @import("privacy_budget_template_auto_refresh.zig").PrivacyBudgetTemplateAutoRefresh;
 const PrivacyBudgetTemplateParametersInput = @import("privacy_budget_template_parameters_input.zig").PrivacyBudgetTemplateParametersInput;
@@ -54,11 +55,7 @@ pub const CreatePrivacyBudgetTemplateOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreatePrivacyBudgetTemplateInput, options: Options) !CreatePrivacyBudgetTemplateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreatePrivacyBudgetTemplateInput, options: CallOptions) !CreatePrivacyBudgetTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

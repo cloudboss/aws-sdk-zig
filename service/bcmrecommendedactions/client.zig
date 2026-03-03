@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const list_recommended_actions = @import("list_recommended_actions.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -33,7 +34,7 @@ pub const Client = struct {
     }
 
     /// Returns a list of recommended actions that match the filter criteria.
-    pub fn listRecommendedActions(self: *Self, allocator: std.mem.Allocator, input: list_recommended_actions.ListRecommendedActionsInput, options: list_recommended_actions.Options) !list_recommended_actions.ListRecommendedActionsOutput {
+    pub fn listRecommendedActions(self: *Self, allocator: std.mem.Allocator, input: list_recommended_actions.ListRecommendedActionsInput, options: CallOptions) !list_recommended_actions.ListRecommendedActionsOutput {
         return list_recommended_actions.execute(self, allocator, input, options);
     }
 

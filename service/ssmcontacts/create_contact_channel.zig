@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContactChannelAddress = @import("contact_channel_address.zig").ContactChannelAddress;
 const ChannelType = @import("channel_type.zig").ChannelType;
@@ -66,11 +67,7 @@ pub const CreateContactChannelOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateContactChannelInput, options: Options) !CreateContactChannelOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateContactChannelInput, options: CallOptions) !CreateContactChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

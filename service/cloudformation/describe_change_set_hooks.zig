@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChangeSetHook = @import("change_set_hook.zig").ChangeSetHook;
 const ChangeSetHooksStatus = @import("change_set_hooks_status.zig").ChangeSetHooksStatus;
@@ -50,11 +51,7 @@ pub const DescribeChangeSetHooksOutput = struct {
     status: ?ChangeSetHooksStatus = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeChangeSetHooksInput, options: Options) !DescribeChangeSetHooksOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeChangeSetHooksInput, options: CallOptions) !DescribeChangeSetHooksOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

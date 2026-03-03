@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const UserAuthConfig = @import("user_auth_config.zig").UserAuthConfig;
 const DefaultAuthScheme = @import("default_auth_scheme.zig").DefaultAuthScheme;
@@ -113,11 +114,7 @@ pub const CreateDBProxyOutput = struct {
     db_proxy: ?DBProxy = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDBProxyInput, options: Options) !CreateDBProxyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDBProxyInput, options: CallOptions) !CreateDBProxyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -48,6 +48,7 @@ const update_configuration_template = @import("update_configuration_template.zig
 const update_environment = @import("update_environment.zig");
 const update_tags_for_resource = @import("update_tags_for_resource.zig");
 const validate_configuration_settings = @import("validate_configuration_settings.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -80,7 +81,7 @@ pub const Client = struct {
 
     /// Cancels in-progress environment configuration update or application version
     /// deployment.
-    pub fn abortEnvironmentUpdate(self: *Self, allocator: std.mem.Allocator, input: abort_environment_update.AbortEnvironmentUpdateInput, options: abort_environment_update.Options) !abort_environment_update.AbortEnvironmentUpdateOutput {
+    pub fn abortEnvironmentUpdate(self: *Self, allocator: std.mem.Allocator, input: abort_environment_update.AbortEnvironmentUpdateInput, options: CallOptions) !abort_environment_update.AbortEnvironmentUpdateOutput {
         return abort_environment_update.execute(self, allocator, input, options);
     }
 
@@ -89,7 +90,7 @@ pub const Client = struct {
     /// its status is `Scheduled`. Get the status and action ID of a managed action
     /// with
     /// DescribeEnvironmentManagedActions.
-    pub fn applyEnvironmentManagedAction(self: *Self, allocator: std.mem.Allocator, input: apply_environment_managed_action.ApplyEnvironmentManagedActionInput, options: apply_environment_managed_action.Options) !apply_environment_managed_action.ApplyEnvironmentManagedActionOutput {
+    pub fn applyEnvironmentManagedAction(self: *Self, allocator: std.mem.Allocator, input: apply_environment_managed_action.ApplyEnvironmentManagedActionInput, options: CallOptions) !apply_environment_managed_action.ApplyEnvironmentManagedActionOutput {
         return apply_environment_managed_action.execute(self, allocator, input, options);
     }
 
@@ -100,12 +101,12 @@ pub const Client = struct {
     /// calls acting on this environment. For more information, see [Operations
     /// roles](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html) in the
     /// *AWS Elastic Beanstalk Developer Guide*.
-    pub fn associateEnvironmentOperationsRole(self: *Self, allocator: std.mem.Allocator, input: associate_environment_operations_role.AssociateEnvironmentOperationsRoleInput, options: associate_environment_operations_role.Options) !associate_environment_operations_role.AssociateEnvironmentOperationsRoleOutput {
+    pub fn associateEnvironmentOperationsRole(self: *Self, allocator: std.mem.Allocator, input: associate_environment_operations_role.AssociateEnvironmentOperationsRoleInput, options: CallOptions) !associate_environment_operations_role.AssociateEnvironmentOperationsRoleOutput {
         return associate_environment_operations_role.execute(self, allocator, input, options);
     }
 
     /// Checks if the specified CNAME is available.
-    pub fn checkDnsAvailability(self: *Self, allocator: std.mem.Allocator, input: check_dns_availability.CheckDNSAvailabilityInput, options: check_dns_availability.Options) !check_dns_availability.CheckDNSAvailabilityOutput {
+    pub fn checkDnsAvailability(self: *Self, allocator: std.mem.Allocator, input: check_dns_availability.CheckDNSAvailabilityInput, options: CallOptions) !check_dns_availability.CheckDNSAvailabilityOutput {
         return check_dns_availability.execute(self, allocator, input, options);
     }
 
@@ -120,13 +121,13 @@ pub const Client = struct {
     /// `env.yaml`. See [Compose
     /// Environments](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html)
     /// for details.
-    pub fn composeEnvironments(self: *Self, allocator: std.mem.Allocator, input: compose_environments.ComposeEnvironmentsInput, options: compose_environments.Options) !compose_environments.ComposeEnvironmentsOutput {
+    pub fn composeEnvironments(self: *Self, allocator: std.mem.Allocator, input: compose_environments.ComposeEnvironmentsInput, options: CallOptions) !compose_environments.ComposeEnvironmentsOutput {
         return compose_environments.execute(self, allocator, input, options);
     }
 
     /// Creates an application that has one configuration template named `default`
     /// and no application versions.
-    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: create_application.Options) !create_application.CreateApplicationOutput {
+    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: CallOptions) !create_application.CreateApplicationOutput {
         return create_application.execute(self, allocator, input, options);
     }
 
@@ -154,7 +155,7 @@ pub const Client = struct {
     /// you receive an exception when you attempt to launch an environment from the
     /// application
     /// version.
-    pub fn createApplicationVersion(self: *Self, allocator: std.mem.Allocator, input: create_application_version.CreateApplicationVersionInput, options: create_application_version.Options) !create_application_version.CreateApplicationVersionOutput {
+    pub fn createApplicationVersion(self: *Self, allocator: std.mem.Allocator, input: create_application_version.CreateApplicationVersionInput, options: CallOptions) !create_application_version.CreateApplicationVersionOutput {
         return create_application_version.execute(self, allocator, input, options);
     }
 
@@ -176,19 +177,19 @@ pub const Client = struct {
     /// * DescribeConfigurationSettings
     ///
     /// * ListAvailableSolutionStacks
-    pub fn createConfigurationTemplate(self: *Self, allocator: std.mem.Allocator, input: create_configuration_template.CreateConfigurationTemplateInput, options: create_configuration_template.Options) !create_configuration_template.CreateConfigurationTemplateOutput {
+    pub fn createConfigurationTemplate(self: *Self, allocator: std.mem.Allocator, input: create_configuration_template.CreateConfigurationTemplateInput, options: CallOptions) !create_configuration_template.CreateConfigurationTemplateOutput {
         return create_configuration_template.execute(self, allocator, input, options);
     }
 
     /// Launches an AWS Elastic Beanstalk environment for the specified application
     /// using the specified
     /// configuration.
-    pub fn createEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_environment.CreateEnvironmentInput, options: create_environment.Options) !create_environment.CreateEnvironmentOutput {
+    pub fn createEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_environment.CreateEnvironmentInput, options: CallOptions) !create_environment.CreateEnvironmentOutput {
         return create_environment.execute(self, allocator, input, options);
     }
 
     /// Create a new version of your custom platform.
-    pub fn createPlatformVersion(self: *Self, allocator: std.mem.Allocator, input: create_platform_version.CreatePlatformVersionInput, options: create_platform_version.Options) !create_platform_version.CreatePlatformVersionOutput {
+    pub fn createPlatformVersion(self: *Self, allocator: std.mem.Allocator, input: create_platform_version.CreatePlatformVersionInput, options: CallOptions) !create_platform_version.CreatePlatformVersionOutput {
         return create_platform_version.execute(self, allocator, input, options);
     }
 
@@ -201,7 +202,7 @@ pub const Client = struct {
     /// `CreateStorageLocation` still returns the bucket name but does not create a
     /// new
     /// bucket.
-    pub fn createStorageLocation(self: *Self, allocator: std.mem.Allocator, input: create_storage_location.CreateStorageLocationInput, options: create_storage_location.Options) !create_storage_location.CreateStorageLocationOutput {
+    pub fn createStorageLocation(self: *Self, allocator: std.mem.Allocator, input: create_storage_location.CreateStorageLocationInput, options: CallOptions) !create_storage_location.CreateStorageLocationOutput {
         return create_storage_location.execute(self, allocator, input, options);
     }
 
@@ -211,7 +212,7 @@ pub const Client = struct {
     /// bucket.
     ///
     /// You cannot delete an application that has a running environment.
-    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: delete_application.Options) !delete_application.DeleteApplicationOutput {
+    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: CallOptions) !delete_application.DeleteApplicationOutput {
         return delete_application.execute(self, allocator, input, options);
     }
 
@@ -219,7 +220,7 @@ pub const Client = struct {
     ///
     /// You cannot delete an application version that is associated with a running
     /// environment.
-    pub fn deleteApplicationVersion(self: *Self, allocator: std.mem.Allocator, input: delete_application_version.DeleteApplicationVersionInput, options: delete_application_version.Options) !delete_application_version.DeleteApplicationVersionOutput {
+    pub fn deleteApplicationVersion(self: *Self, allocator: std.mem.Allocator, input: delete_application_version.DeleteApplicationVersionInput, options: CallOptions) !delete_application_version.DeleteApplicationVersionOutput {
         return delete_application_version.execute(self, allocator, input, options);
     }
 
@@ -230,7 +231,7 @@ pub const Client = struct {
     /// copy of the template. You can delete or modify the environment's copy of the
     /// template
     /// without affecting the running environment.
-    pub fn deleteConfigurationTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_template.DeleteConfigurationTemplateInput, options: delete_configuration_template.Options) !delete_configuration_template.DeleteConfigurationTemplateOutput {
+    pub fn deleteConfigurationTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_template.DeleteConfigurationTemplateInput, options: CallOptions) !delete_configuration_template.DeleteConfigurationTemplateOutput {
         return delete_configuration_template.execute(self, allocator, input, options);
     }
 
@@ -246,12 +247,12 @@ pub const Client = struct {
     /// deployment is in process or has failed. The draft configuration remains in
     /// existence until it
     /// is deleted with this action.
-    pub fn deleteEnvironmentConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_environment_configuration.DeleteEnvironmentConfigurationInput, options: delete_environment_configuration.Options) !delete_environment_configuration.DeleteEnvironmentConfigurationOutput {
+    pub fn deleteEnvironmentConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_environment_configuration.DeleteEnvironmentConfigurationInput, options: CallOptions) !delete_environment_configuration.DeleteEnvironmentConfigurationOutput {
         return delete_environment_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified version of a custom platform.
-    pub fn deletePlatformVersion(self: *Self, allocator: std.mem.Allocator, input: delete_platform_version.DeletePlatformVersionInput, options: delete_platform_version.Options) !delete_platform_version.DeletePlatformVersionOutput {
+    pub fn deletePlatformVersion(self: *Self, allocator: std.mem.Allocator, input: delete_platform_version.DeletePlatformVersionInput, options: CallOptions) !delete_platform_version.DeletePlatformVersionOutput {
         return delete_platform_version.execute(self, allocator, input, options);
     }
 
@@ -260,17 +261,17 @@ pub const Client = struct {
     /// account.
     ///
     /// The result currently has one set of attributes—resource quotas.
-    pub fn describeAccountAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_account_attributes.DescribeAccountAttributesInput, options: describe_account_attributes.Options) !describe_account_attributes.DescribeAccountAttributesOutput {
+    pub fn describeAccountAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_account_attributes.DescribeAccountAttributesInput, options: CallOptions) !describe_account_attributes.DescribeAccountAttributesOutput {
         return describe_account_attributes.execute(self, allocator, input, options);
     }
 
     /// Retrieve a list of application versions.
-    pub fn describeApplicationVersions(self: *Self, allocator: std.mem.Allocator, input: describe_application_versions.DescribeApplicationVersionsInput, options: describe_application_versions.Options) !describe_application_versions.DescribeApplicationVersionsOutput {
+    pub fn describeApplicationVersions(self: *Self, allocator: std.mem.Allocator, input: describe_application_versions.DescribeApplicationVersionsInput, options: CallOptions) !describe_application_versions.DescribeApplicationVersionsOutput {
         return describe_application_versions.execute(self, allocator, input, options);
     }
 
     /// Returns the descriptions of existing applications.
-    pub fn describeApplications(self: *Self, allocator: std.mem.Allocator, input: describe_applications.DescribeApplicationsInput, options: describe_applications.Options) !describe_applications.DescribeApplicationsOutput {
+    pub fn describeApplications(self: *Self, allocator: std.mem.Allocator, input: describe_applications.DescribeApplicationsInput, options: CallOptions) !describe_applications.DescribeApplicationsOutput {
         return describe_applications.execute(self, allocator, input, options);
     }
 
@@ -281,7 +282,7 @@ pub const Client = struct {
     /// the values the options, their default values, and an indication of the
     /// required action on a
     /// running environment if an option value is changed.
-    pub fn describeConfigurationOptions(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_options.DescribeConfigurationOptionsInput, options: describe_configuration_options.Options) !describe_configuration_options.DescribeConfigurationOptionsOutput {
+    pub fn describeConfigurationOptions(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_options.DescribeConfigurationOptionsInput, options: CallOptions) !describe_configuration_options.DescribeConfigurationOptionsOutput {
         return describe_configuration_options.execute(self, allocator, input, options);
     }
 
@@ -302,7 +303,7 @@ pub const Client = struct {
     /// Related Topics
     ///
     /// * DeleteEnvironmentConfiguration
-    pub fn describeConfigurationSettings(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_settings.DescribeConfigurationSettingsInput, options: describe_configuration_settings.Options) !describe_configuration_settings.DescribeConfigurationSettingsOutput {
+    pub fn describeConfigurationSettings(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_settings.DescribeConfigurationSettingsInput, options: CallOptions) !describe_configuration_settings.DescribeConfigurationSettingsOutput {
         return describe_configuration_settings.execute(self, allocator, input, options);
     }
 
@@ -310,27 +311,27 @@ pub const Client = struct {
     /// The
     /// **DescribeEnvironmentHealth** operation is only available with
     /// AWS Elastic Beanstalk Enhanced Health.
-    pub fn describeEnvironmentHealth(self: *Self, allocator: std.mem.Allocator, input: describe_environment_health.DescribeEnvironmentHealthInput, options: describe_environment_health.Options) !describe_environment_health.DescribeEnvironmentHealthOutput {
+    pub fn describeEnvironmentHealth(self: *Self, allocator: std.mem.Allocator, input: describe_environment_health.DescribeEnvironmentHealthInput, options: CallOptions) !describe_environment_health.DescribeEnvironmentHealthOutput {
         return describe_environment_health.execute(self, allocator, input, options);
     }
 
     /// Lists an environment's completed and failed managed actions.
-    pub fn describeEnvironmentManagedActionHistory(self: *Self, allocator: std.mem.Allocator, input: describe_environment_managed_action_history.DescribeEnvironmentManagedActionHistoryInput, options: describe_environment_managed_action_history.Options) !describe_environment_managed_action_history.DescribeEnvironmentManagedActionHistoryOutput {
+    pub fn describeEnvironmentManagedActionHistory(self: *Self, allocator: std.mem.Allocator, input: describe_environment_managed_action_history.DescribeEnvironmentManagedActionHistoryInput, options: CallOptions) !describe_environment_managed_action_history.DescribeEnvironmentManagedActionHistoryOutput {
         return describe_environment_managed_action_history.execute(self, allocator, input, options);
     }
 
     /// Lists an environment's upcoming and in-progress managed actions.
-    pub fn describeEnvironmentManagedActions(self: *Self, allocator: std.mem.Allocator, input: describe_environment_managed_actions.DescribeEnvironmentManagedActionsInput, options: describe_environment_managed_actions.Options) !describe_environment_managed_actions.DescribeEnvironmentManagedActionsOutput {
+    pub fn describeEnvironmentManagedActions(self: *Self, allocator: std.mem.Allocator, input: describe_environment_managed_actions.DescribeEnvironmentManagedActionsInput, options: CallOptions) !describe_environment_managed_actions.DescribeEnvironmentManagedActionsOutput {
         return describe_environment_managed_actions.execute(self, allocator, input, options);
     }
 
     /// Returns AWS resources for this environment.
-    pub fn describeEnvironmentResources(self: *Self, allocator: std.mem.Allocator, input: describe_environment_resources.DescribeEnvironmentResourcesInput, options: describe_environment_resources.Options) !describe_environment_resources.DescribeEnvironmentResourcesOutput {
+    pub fn describeEnvironmentResources(self: *Self, allocator: std.mem.Allocator, input: describe_environment_resources.DescribeEnvironmentResourcesInput, options: CallOptions) !describe_environment_resources.DescribeEnvironmentResourcesOutput {
         return describe_environment_resources.execute(self, allocator, input, options);
     }
 
     /// Returns descriptions for existing environments.
-    pub fn describeEnvironments(self: *Self, allocator: std.mem.Allocator, input: describe_environments.DescribeEnvironmentsInput, options: describe_environments.Options) !describe_environments.DescribeEnvironmentsOutput {
+    pub fn describeEnvironments(self: *Self, allocator: std.mem.Allocator, input: describe_environments.DescribeEnvironmentsInput, options: CallOptions) !describe_environments.DescribeEnvironmentsOutput {
         return describe_environments.execute(self, allocator, input, options);
     }
 
@@ -338,7 +339,7 @@ pub const Client = struct {
     ///
     /// This action returns the most recent 1,000 events from the specified
     /// `NextToken`.
-    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: describe_events.Options) !describe_events.DescribeEventsOutput {
+    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: CallOptions) !describe_events.DescribeEventsOutput {
         return describe_events.execute(self, allocator, input, options);
     }
 
@@ -346,7 +347,7 @@ pub const Client = struct {
     /// Elastic
     /// Beanstalk. This operation requires [enhanced health
     /// reporting](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html).
-    pub fn describeInstancesHealth(self: *Self, allocator: std.mem.Allocator, input: describe_instances_health.DescribeInstancesHealthInput, options: describe_instances_health.Options) !describe_instances_health.DescribeInstancesHealthOutput {
+    pub fn describeInstancesHealth(self: *Self, allocator: std.mem.Allocator, input: describe_instances_health.DescribeInstancesHealthInput, options: CallOptions) !describe_instances_health.DescribeInstancesHealthOutput {
         return describe_instances_health.execute(self, allocator, input, options);
     }
 
@@ -358,7 +359,7 @@ pub const Client = struct {
     /// [AWS Elastic Beanstalk
     /// Platforms
     /// Glossary](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html).
-    pub fn describePlatformVersion(self: *Self, allocator: std.mem.Allocator, input: describe_platform_version.DescribePlatformVersionInput, options: describe_platform_version.Options) !describe_platform_version.DescribePlatformVersionOutput {
+    pub fn describePlatformVersion(self: *Self, allocator: std.mem.Allocator, input: describe_platform_version.DescribePlatformVersionInput, options: CallOptions) !describe_platform_version.DescribePlatformVersionOutput {
         return describe_platform_version.execute(self, allocator, input, options);
     }
 
@@ -369,14 +370,14 @@ pub const Client = struct {
     /// on this environment. For more information, see [Operations
     /// roles](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html) in the
     /// *AWS Elastic Beanstalk Developer Guide*.
-    pub fn disassociateEnvironmentOperationsRole(self: *Self, allocator: std.mem.Allocator, input: disassociate_environment_operations_role.DisassociateEnvironmentOperationsRoleInput, options: disassociate_environment_operations_role.Options) !disassociate_environment_operations_role.DisassociateEnvironmentOperationsRoleOutput {
+    pub fn disassociateEnvironmentOperationsRole(self: *Self, allocator: std.mem.Allocator, input: disassociate_environment_operations_role.DisassociateEnvironmentOperationsRoleInput, options: CallOptions) !disassociate_environment_operations_role.DisassociateEnvironmentOperationsRoleOutput {
         return disassociate_environment_operations_role.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the available solution stack names, with the public
     /// version first and
     /// then in reverse chronological order.
-    pub fn listAvailableSolutionStacks(self: *Self, allocator: std.mem.Allocator, input: list_available_solution_stacks.ListAvailableSolutionStacksInput, options: list_available_solution_stacks.Options) !list_available_solution_stacks.ListAvailableSolutionStacksOutput {
+    pub fn listAvailableSolutionStacks(self: *Self, allocator: std.mem.Allocator, input: list_available_solution_stacks.ListAvailableSolutionStacksInput, options: CallOptions) !list_available_solution_stacks.ListAvailableSolutionStacksOutput {
         return list_available_solution_stacks.execute(self, allocator, input, options);
     }
 
@@ -388,7 +389,7 @@ pub const Client = struct {
     /// [AWS Elastic Beanstalk
     /// Platforms
     /// Glossary](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html).
-    pub fn listPlatformBranches(self: *Self, allocator: std.mem.Allocator, input: list_platform_branches.ListPlatformBranchesInput, options: list_platform_branches.Options) !list_platform_branches.ListPlatformBranchesOutput {
+    pub fn listPlatformBranches(self: *Self, allocator: std.mem.Allocator, input: list_platform_branches.ListPlatformBranchesInput, options: CallOptions) !list_platform_branches.ListPlatformBranchesOutput {
         return list_platform_branches.execute(self, allocator, input, options);
     }
 
@@ -402,7 +403,7 @@ pub const Client = struct {
     /// [AWS Elastic Beanstalk
     /// Platforms
     /// Glossary](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html).
-    pub fn listPlatformVersions(self: *Self, allocator: std.mem.Allocator, input: list_platform_versions.ListPlatformVersionsInput, options: list_platform_versions.Options) !list_platform_versions.ListPlatformVersionsOutput {
+    pub fn listPlatformVersions(self: *Self, allocator: std.mem.Allocator, input: list_platform_versions.ListPlatformVersionsInput, options: CallOptions) !list_platform_versions.ListPlatformVersionsOutput {
         return list_platform_versions.execute(self, allocator, input, options);
     }
 
@@ -413,14 +414,14 @@ pub const Client = struct {
     /// about resource tagging, see
     /// [Tagging Application
     /// Resources](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-tagging-resources.html).
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes and recreates all of the AWS resources (for example: the Auto
     /// Scaling group,
     /// load balancer, etc.) for a specified environment and forces a restart.
-    pub fn rebuildEnvironment(self: *Self, allocator: std.mem.Allocator, input: rebuild_environment.RebuildEnvironmentInput, options: rebuild_environment.Options) !rebuild_environment.RebuildEnvironmentOutput {
+    pub fn rebuildEnvironment(self: *Self, allocator: std.mem.Allocator, input: rebuild_environment.RebuildEnvironmentInput, options: CallOptions) !rebuild_environment.RebuildEnvironmentOutput {
         return rebuild_environment.execute(self, allocator, input, options);
     }
 
@@ -442,14 +443,14 @@ pub const Client = struct {
     /// Related Topics
     ///
     /// * RetrieveEnvironmentInfo
-    pub fn requestEnvironmentInfo(self: *Self, allocator: std.mem.Allocator, input: request_environment_info.RequestEnvironmentInfoInput, options: request_environment_info.Options) !request_environment_info.RequestEnvironmentInfoOutput {
+    pub fn requestEnvironmentInfo(self: *Self, allocator: std.mem.Allocator, input: request_environment_info.RequestEnvironmentInfoInput, options: CallOptions) !request_environment_info.RequestEnvironmentInfoOutput {
         return request_environment_info.execute(self, allocator, input, options);
     }
 
     /// Causes the environment to restart the application container server running
     /// on each
     /// Amazon EC2 instance.
-    pub fn restartAppServer(self: *Self, allocator: std.mem.Allocator, input: restart_app_server.RestartAppServerInput, options: restart_app_server.Options) !restart_app_server.RestartAppServerOutput {
+    pub fn restartAppServer(self: *Self, allocator: std.mem.Allocator, input: restart_app_server.RestartAppServerInput, options: CallOptions) !restart_app_server.RestartAppServerOutput {
         return restart_app_server.execute(self, allocator, input, options);
     }
 
@@ -459,17 +460,17 @@ pub const Client = struct {
     /// Related Topics
     ///
     /// * RequestEnvironmentInfo
-    pub fn retrieveEnvironmentInfo(self: *Self, allocator: std.mem.Allocator, input: retrieve_environment_info.RetrieveEnvironmentInfoInput, options: retrieve_environment_info.Options) !retrieve_environment_info.RetrieveEnvironmentInfoOutput {
+    pub fn retrieveEnvironmentInfo(self: *Self, allocator: std.mem.Allocator, input: retrieve_environment_info.RetrieveEnvironmentInfoInput, options: CallOptions) !retrieve_environment_info.RetrieveEnvironmentInfoOutput {
         return retrieve_environment_info.execute(self, allocator, input, options);
     }
 
     /// Swaps the CNAMEs of two environments.
-    pub fn swapEnvironmentCnamEs(self: *Self, allocator: std.mem.Allocator, input: swap_environment_cnam_es.SwapEnvironmentCNAMEsInput, options: swap_environment_cnam_es.Options) !swap_environment_cnam_es.SwapEnvironmentCNAMEsOutput {
+    pub fn swapEnvironmentCnamEs(self: *Self, allocator: std.mem.Allocator, input: swap_environment_cnam_es.SwapEnvironmentCNAMEsInput, options: CallOptions) !swap_environment_cnam_es.SwapEnvironmentCNAMEsOutput {
         return swap_environment_cnam_es.execute(self, allocator, input, options);
     }
 
     /// Terminates the specified environment.
-    pub fn terminateEnvironment(self: *Self, allocator: std.mem.Allocator, input: terminate_environment.TerminateEnvironmentInput, options: terminate_environment.Options) !terminate_environment.TerminateEnvironmentOutput {
+    pub fn terminateEnvironment(self: *Self, allocator: std.mem.Allocator, input: terminate_environment.TerminateEnvironmentInput, options: CallOptions) !terminate_environment.TerminateEnvironmentOutput {
         return terminate_environment.execute(self, allocator, input, options);
     }
 
@@ -477,12 +478,12 @@ pub const Client = struct {
     ///
     /// If a property (for example, `description`) is not provided, the value
     /// remains unchanged. To clear these properties, specify an empty string.
-    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: update_application.Options) !update_application.UpdateApplicationOutput {
+    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: CallOptions) !update_application.UpdateApplicationOutput {
         return update_application.execute(self, allocator, input, options);
     }
 
     /// Modifies lifecycle settings for an application.
-    pub fn updateApplicationResourceLifecycle(self: *Self, allocator: std.mem.Allocator, input: update_application_resource_lifecycle.UpdateApplicationResourceLifecycleInput, options: update_application_resource_lifecycle.Options) !update_application_resource_lifecycle.UpdateApplicationResourceLifecycleOutput {
+    pub fn updateApplicationResourceLifecycle(self: *Self, allocator: std.mem.Allocator, input: update_application_resource_lifecycle.UpdateApplicationResourceLifecycleInput, options: CallOptions) !update_application_resource_lifecycle.UpdateApplicationResourceLifecycleOutput {
         return update_application_resource_lifecycle.execute(self, allocator, input, options);
     }
 
@@ -490,7 +491,7 @@ pub const Client = struct {
     ///
     /// If a property (for example, `description`) is not provided, the value
     /// remains unchanged. To clear properties, specify an empty string.
-    pub fn updateApplicationVersion(self: *Self, allocator: std.mem.Allocator, input: update_application_version.UpdateApplicationVersionInput, options: update_application_version.Options) !update_application_version.UpdateApplicationVersionOutput {
+    pub fn updateApplicationVersion(self: *Self, allocator: std.mem.Allocator, input: update_application_version.UpdateApplicationVersionInput, options: CallOptions) !update_application_version.UpdateApplicationVersionOutput {
         return update_application_version.execute(self, allocator, input, options);
     }
 
@@ -504,7 +505,7 @@ pub const Client = struct {
     /// Related Topics
     ///
     /// * DescribeConfigurationOptions
-    pub fn updateConfigurationTemplate(self: *Self, allocator: std.mem.Allocator, input: update_configuration_template.UpdateConfigurationTemplateInput, options: update_configuration_template.Options) !update_configuration_template.UpdateConfigurationTemplateOutput {
+    pub fn updateConfigurationTemplate(self: *Self, allocator: std.mem.Allocator, input: update_configuration_template.UpdateConfigurationTemplateInput, options: CallOptions) !update_configuration_template.UpdateConfigurationTemplateOutput {
         return update_configuration_template.execute(self, allocator, input, options);
     }
 
@@ -524,7 +525,7 @@ pub const Client = struct {
     /// environment returns two setting descriptions with different
     /// `DeploymentStatus`
     /// values.
-    pub fn updateEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_environment.UpdateEnvironmentInput, options: update_environment.Options) !update_environment.UpdateEnvironmentOutput {
+    pub fn updateEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_environment.UpdateEnvironmentInput, options: CallOptions) !update_environment.UpdateEnvironmentOutput {
         return update_environment.execute(self, allocator, input, options);
     }
 
@@ -556,7 +557,7 @@ pub const Client = struct {
     ///
     /// For details about creating a custom user policy, see [Creating a Custom User
     /// Policy](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#AWSHowTo.iam.policies).
-    pub fn updateTagsForResource(self: *Self, allocator: std.mem.Allocator, input: update_tags_for_resource.UpdateTagsForResourceInput, options: update_tags_for_resource.Options) !update_tags_for_resource.UpdateTagsForResourceOutput {
+    pub fn updateTagsForResource(self: *Self, allocator: std.mem.Allocator, input: update_tags_for_resource.UpdateTagsForResourceInput, options: CallOptions) !update_tags_for_resource.UpdateTagsForResourceOutput {
         return update_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -566,7 +567,7 @@ pub const Client = struct {
     /// This action returns a list of messages indicating any errors or warnings
     /// associated
     /// with the selection of option values.
-    pub fn validateConfigurationSettings(self: *Self, allocator: std.mem.Allocator, input: validate_configuration_settings.ValidateConfigurationSettingsInput, options: validate_configuration_settings.Options) !validate_configuration_settings.ValidateConfigurationSettingsOutput {
+    pub fn validateConfigurationSettings(self: *Self, allocator: std.mem.Allocator, input: validate_configuration_settings.ValidateConfigurationSettingsInput, options: CallOptions) !validate_configuration_settings.ValidateConfigurationSettingsOutput {
         return validate_configuration_settings.execute(self, allocator, input, options);
     }
 

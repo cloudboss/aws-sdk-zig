@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReservedCapacitySummary = @import("reserved_capacity_summary.zig").ReservedCapacitySummary;
 const TrainingPlanStatus = @import("training_plan_status.zig").TrainingPlanStatus;
@@ -110,11 +111,7 @@ pub const DescribeTrainingPlanOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTrainingPlanInput, options: Options) !DescribeTrainingPlanOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTrainingPlanInput, options: CallOptions) !DescribeTrainingPlanOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

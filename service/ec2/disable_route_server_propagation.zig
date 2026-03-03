@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RouteServerPropagation = @import("route_server_propagation.zig").RouteServerPropagation;
 const serde = @import("serde.zig");
@@ -26,11 +27,7 @@ pub const DisableRouteServerPropagationOutput = struct {
     route_server_propagation: ?RouteServerPropagation = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableRouteServerPropagationInput, options: Options) !DisableRouteServerPropagationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableRouteServerPropagationInput, options: CallOptions) !DisableRouteServerPropagationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

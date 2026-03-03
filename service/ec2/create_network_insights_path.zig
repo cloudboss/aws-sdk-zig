@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PathRequestFilter = @import("path_request_filter.zig").PathRequestFilter;
 const Protocol = @import("protocol.zig").Protocol;
@@ -64,11 +65,7 @@ pub const CreateNetworkInsightsPathOutput = struct {
     network_insights_path: ?NetworkInsightsPath = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateNetworkInsightsPathInput, options: Options) !CreateNetworkInsightsPathOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateNetworkInsightsPathInput, options: CallOptions) !CreateNetworkInsightsPathOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

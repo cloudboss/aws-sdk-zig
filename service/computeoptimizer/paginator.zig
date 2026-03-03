@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_recommendation_export_jobs = @import("describe_recommendation_export_jobs.zig");
@@ -18,7 +19,7 @@ pub const DescribeRecommendationExportJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_recommendation_export_jobs.Options) !describe_recommendation_export_jobs.DescribeRecommendationExportJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_recommendation_export_jobs.DescribeRecommendationExportJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -59,7 +60,7 @@ pub const GetEnrollmentStatusesForOrganizationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_enrollment_statuses_for_organization.Options) !get_enrollment_statuses_for_organization.GetEnrollmentStatusesForOrganizationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_enrollment_statuses_for_organization.GetEnrollmentStatusesForOrganizationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -100,7 +101,7 @@ pub const GetLambdaFunctionRecommendationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_lambda_function_recommendations.Options) !get_lambda_function_recommendations.GetLambdaFunctionRecommendationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_lambda_function_recommendations.GetLambdaFunctionRecommendationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -141,7 +142,7 @@ pub const GetRecommendationPreferencesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_recommendation_preferences.Options) !get_recommendation_preferences.GetRecommendationPreferencesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_recommendation_preferences.GetRecommendationPreferencesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -182,7 +183,7 @@ pub const GetRecommendationSummariesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_recommendation_summaries.Options) !get_recommendation_summaries.GetRecommendationSummariesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_recommendation_summaries.GetRecommendationSummariesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

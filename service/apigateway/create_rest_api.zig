@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ApiKeySourceType = @import("api_key_source_type.zig").ApiKeySourceType;
 const EndpointAccessMode = @import("endpoint_access_mode.zig").EndpointAccessMode;
@@ -85,13 +86,9 @@ pub const CreateRestApiInput = struct {
     };
 };
 
-const CreateRestApiOutput = @import("rest_api.zig").RestApi;
+pub const CreateRestApiOutput = @import("rest_api.zig").RestApi;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateRestApiInput, options: Options) !CreateRestApiOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateRestApiInput, options: CallOptions) !CreateRestApiOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

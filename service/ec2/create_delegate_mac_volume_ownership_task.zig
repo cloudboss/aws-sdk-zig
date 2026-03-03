@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const MacModificationTask = @import("mac_modification_task.zig").MacModificationTask;
@@ -61,11 +62,7 @@ pub const CreateDelegateMacVolumeOwnershipTaskOutput = struct {
     mac_modification_task: ?MacModificationTask = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDelegateMacVolumeOwnershipTaskInput, options: Options) !CreateDelegateMacVolumeOwnershipTaskOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDelegateMacVolumeOwnershipTaskInput, options: CallOptions) !CreateDelegateMacVolumeOwnershipTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

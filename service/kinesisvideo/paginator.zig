@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_mapped_resource_configuration = @import("describe_mapped_resource_configuration.zig");
@@ -17,7 +18,7 @@ pub const DescribeMappedResourceConfigurationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_mapped_resource_configuration.Options) !describe_mapped_resource_configuration.DescribeMappedResourceConfigurationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_mapped_resource_configuration.DescribeMappedResourceConfigurationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -58,7 +59,7 @@ pub const ListEdgeAgentConfigurationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_edge_agent_configurations.Options) !list_edge_agent_configurations.ListEdgeAgentConfigurationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_edge_agent_configurations.ListEdgeAgentConfigurationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -99,7 +100,7 @@ pub const ListSignalingChannelsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_signaling_channels.Options) !list_signaling_channels.ListSignalingChannelsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_signaling_channels.ListSignalingChannelsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -140,7 +141,7 @@ pub const ListStreamsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_streams.Options) !list_streams.ListStreamsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_streams.ListStreamsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_logging_configurations = @import("list_logging_configurations.zig");
@@ -15,7 +16,7 @@ pub const ListLoggingConfigurationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_logging_configurations.Options) !list_logging_configurations.ListLoggingConfigurationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_logging_configurations.ListLoggingConfigurationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const ListRoomsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_rooms.Options) !list_rooms.ListRoomsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_rooms.ListRoomsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

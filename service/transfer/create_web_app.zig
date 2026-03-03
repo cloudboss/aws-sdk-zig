@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const WebAppEndpointDetails = @import("web_app_endpoint_details.zig").WebAppEndpointDetails;
 const WebAppIdentityProviderDetails = @import("web_app_identity_provider_details.zig").WebAppIdentityProviderDetails;
@@ -64,11 +65,7 @@ pub const CreateWebAppOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateWebAppInput, options: Options) !CreateWebAppOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateWebAppInput, options: CallOptions) !CreateWebAppOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

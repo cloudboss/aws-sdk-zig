@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_custom_verification_email_templates = @import("list_custom_verification_email_templates.zig");
@@ -15,7 +16,7 @@ pub const ListCustomVerificationEmailTemplatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_custom_verification_email_templates.Options) !list_custom_verification_email_templates.ListCustomVerificationEmailTemplatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_custom_verification_email_templates.ListCustomVerificationEmailTemplatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const ListIdentitiesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_identities.Options) !list_identities.ListIdentitiesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_identities.ListIdentitiesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

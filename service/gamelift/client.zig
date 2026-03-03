@@ -119,6 +119,7 @@ const update_matchmaking_configuration = @import("update_matchmaking_configurati
 const update_runtime_configuration = @import("update_runtime_configuration.zig");
 const update_script = @import("update_script.zig");
 const validate_matchmaking_rule_set = @import("validate_matchmaking_rule_set.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -195,7 +196,7 @@ pub const Client = struct {
     /// [
     /// FlexMatch
     /// events](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html) (reference)
-    pub fn acceptMatch(self: *Self, allocator: std.mem.Allocator, input: accept_match.AcceptMatchInput, options: accept_match.Options) !accept_match.AcceptMatchOutput {
+    pub fn acceptMatch(self: *Self, allocator: std.mem.Allocator, input: accept_match.AcceptMatchInput, options: CallOptions) !accept_match.AcceptMatchOutput {
         return accept_match.execute(self, allocator, input, options);
     }
 
@@ -248,7 +249,7 @@ pub const Client = struct {
     ///
     /// [Amazon GameLift Servers FleetIQ
     /// Guide](https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-    pub fn claimGameServer(self: *Self, allocator: std.mem.Allocator, input: claim_game_server.ClaimGameServerInput, options: claim_game_server.Options) !claim_game_server.ClaimGameServerOutput {
+    pub fn claimGameServer(self: *Self, allocator: std.mem.Allocator, input: claim_game_server.ClaimGameServerInput, options: CallOptions) !claim_game_server.ClaimGameServerOutput {
         return claim_game_server.execute(self, allocator, input, options);
     }
 
@@ -285,7 +286,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn createAlias(self: *Self, allocator: std.mem.Allocator, input: create_alias.CreateAliasInput, options: create_alias.Options) !create_alias.CreateAliasOutput {
+    pub fn createAlias(self: *Self, allocator: std.mem.Allocator, input: create_alias.CreateAliasInput, options: CallOptions) !create_alias.CreateAliasOutput {
         return create_alias.execute(self, allocator, input, options);
     }
 
@@ -341,7 +342,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn createBuild(self: *Self, allocator: std.mem.Allocator, input: create_build.CreateBuildInput, options: create_build.Options) !create_build.CreateBuildOutput {
+    pub fn createBuild(self: *Self, allocator: std.mem.Allocator, input: create_build.CreateBuildInput, options: CallOptions) !create_build.CreateBuildOutput {
         return create_build.execute(self, allocator, input, options);
     }
 
@@ -447,7 +448,7 @@ pub const Client = struct {
     /// servers. For guidance, see [
     /// Security best practices for Amazon GameLift
     /// Servers](https://docs.aws.amazon.com/gameliftservers/latest/developerguide/security-best-practices.html).
-    pub fn createContainerFleet(self: *Self, allocator: std.mem.Allocator, input: create_container_fleet.CreateContainerFleetInput, options: create_container_fleet.Options) !create_container_fleet.CreateContainerFleetOutput {
+    pub fn createContainerFleet(self: *Self, allocator: std.mem.Allocator, input: create_container_fleet.CreateContainerFleetInput, options: CallOptions) !create_container_fleet.CreateContainerFleetOutput {
         return create_container_fleet.execute(self, allocator, input, options);
     }
 
@@ -568,7 +569,7 @@ pub const Client = struct {
     /// group definition by
     /// calling
     /// [UpdateContainerGroupDefinition](https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html), and optionally save the update as a new version.
-    pub fn createContainerGroupDefinition(self: *Self, allocator: std.mem.Allocator, input: create_container_group_definition.CreateContainerGroupDefinitionInput, options: create_container_group_definition.Options) !create_container_group_definition.CreateContainerGroupDefinitionOutput {
+    pub fn createContainerGroupDefinition(self: *Self, allocator: std.mem.Allocator, input: create_container_group_definition.CreateContainerGroupDefinitionInput, options: CallOptions) !create_container_group_definition.CreateContainerGroupDefinitionOutput {
         return create_container_group_definition.execute(self, allocator, input, options);
     }
 
@@ -667,7 +668,7 @@ pub const Client = struct {
     ///
     /// [Multi-location
     /// fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-    pub fn createFleet(self: *Self, allocator: std.mem.Allocator, input: create_fleet.CreateFleetInput, options: create_fleet.Options) !create_fleet.CreateFleetOutput {
+    pub fn createFleet(self: *Self, allocator: std.mem.Allocator, input: create_fleet.CreateFleetInput, options: CallOptions) !create_fleet.CreateFleetOutput {
         return create_fleet.execute(self, allocator, input, options);
     }
 
@@ -708,7 +709,7 @@ pub const Client = struct {
     /// [
     /// Amazon GameLift Servers service
     /// locations](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html) for managed hosting.
-    pub fn createFleetLocations(self: *Self, allocator: std.mem.Allocator, input: create_fleet_locations.CreateFleetLocationsInput, options: create_fleet_locations.Options) !create_fleet_locations.CreateFleetLocationsOutput {
+    pub fn createFleetLocations(self: *Self, allocator: std.mem.Allocator, input: create_fleet_locations.CreateFleetLocationsInput, options: CallOptions) !create_fleet_locations.CreateFleetLocationsOutput {
         return create_fleet_locations.execute(self, allocator, input, options);
     }
 
@@ -770,7 +771,7 @@ pub const Client = struct {
     ///
     /// [Amazon GameLift Servers FleetIQ
     /// Guide](https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-    pub fn createGameServerGroup(self: *Self, allocator: std.mem.Allocator, input: create_game_server_group.CreateGameServerGroupInput, options: create_game_server_group.Options) !create_game_server_group.CreateGameServerGroupOutput {
+    pub fn createGameServerGroup(self: *Self, allocator: std.mem.Allocator, input: create_game_server_group.CreateGameServerGroupInput, options: CallOptions) !create_game_server_group.CreateGameServerGroupOutput {
         return create_game_server_group.execute(self, allocator, input, options);
     }
 
@@ -831,7 +832,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn createGameSession(self: *Self, allocator: std.mem.Allocator, input: create_game_session.CreateGameSessionInput, options: create_game_session.Options) !create_game_session.CreateGameSessionOutput {
+    pub fn createGameSession(self: *Self, allocator: std.mem.Allocator, input: create_game_session.CreateGameSessionInput, options: CallOptions) !create_game_session.CreateGameSessionOutput {
         return create_game_session.execute(self, allocator, input, options);
     }
 
@@ -929,14 +930,14 @@ pub const Client = struct {
     /// |
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn createGameSessionQueue(self: *Self, allocator: std.mem.Allocator, input: create_game_session_queue.CreateGameSessionQueueInput, options: create_game_session_queue.Options) !create_game_session_queue.CreateGameSessionQueueOutput {
+    pub fn createGameSessionQueue(self: *Self, allocator: std.mem.Allocator, input: create_game_session_queue.CreateGameSessionQueueInput, options: CallOptions) !create_game_session_queue.CreateGameSessionQueueOutput {
         return create_game_session_queue.execute(self, allocator, input, options);
     }
 
     /// **This API works with the following fleet types:** Anywhere
     ///
     /// Creates a custom location for use in an Anywhere fleet.
-    pub fn createLocation(self: *Self, allocator: std.mem.Allocator, input: create_location.CreateLocationInput, options: create_location.Options) !create_location.CreateLocationOutput {
+    pub fn createLocation(self: *Self, allocator: std.mem.Allocator, input: create_location.CreateLocationInput, options: CallOptions) !create_location.CreateLocationOutput {
         return create_location.execute(self, allocator, input, options);
     }
 
@@ -979,7 +980,7 @@ pub const Client = struct {
     ///
     /// [ Set up FlexMatch event
     /// notification](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)
-    pub fn createMatchmakingConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_matchmaking_configuration.CreateMatchmakingConfigurationInput, options: create_matchmaking_configuration.Options) !create_matchmaking_configuration.CreateMatchmakingConfigurationOutput {
+    pub fn createMatchmakingConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_matchmaking_configuration.CreateMatchmakingConfigurationInput, options: CallOptions) !create_matchmaking_configuration.CreateMatchmakingConfigurationOutput {
         return create_matchmaking_configuration.execute(self, allocator, input, options);
     }
 
@@ -1012,7 +1013,7 @@ pub const Client = struct {
     ///
     /// * [Matchmaking with
     /// FlexMatch](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-intro.html)
-    pub fn createMatchmakingRuleSet(self: *Self, allocator: std.mem.Allocator, input: create_matchmaking_rule_set.CreateMatchmakingRuleSetInput, options: create_matchmaking_rule_set.Options) !create_matchmaking_rule_set.CreateMatchmakingRuleSetOutput {
+    pub fn createMatchmakingRuleSet(self: *Self, allocator: std.mem.Allocator, input: create_matchmaking_rule_set.CreateMatchmakingRuleSetInput, options: CallOptions) !create_matchmaking_rule_set.CreateMatchmakingRuleSetOutput {
         return create_matchmaking_rule_set.execute(self, allocator, input, options);
     }
 
@@ -1044,7 +1045,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn createPlayerSession(self: *Self, allocator: std.mem.Allocator, input: create_player_session.CreatePlayerSessionInput, options: create_player_session.Options) !create_player_session.CreatePlayerSessionOutput {
+    pub fn createPlayerSession(self: *Self, allocator: std.mem.Allocator, input: create_player_session.CreatePlayerSessionInput, options: CallOptions) !create_player_session.CreatePlayerSessionOutput {
         return create_player_session.execute(self, allocator, input, options);
     }
 
@@ -1077,7 +1078,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn createPlayerSessions(self: *Self, allocator: std.mem.Allocator, input: create_player_sessions.CreatePlayerSessionsInput, options: create_player_sessions.Options) !create_player_sessions.CreatePlayerSessionsOutput {
+    pub fn createPlayerSessions(self: *Self, allocator: std.mem.Allocator, input: create_player_sessions.CreatePlayerSessionsInput, options: CallOptions) !create_player_sessions.CreatePlayerSessionsOutput {
         return create_player_sessions.execute(self, allocator, input, options);
     }
 
@@ -1129,7 +1130,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn createScript(self: *Self, allocator: std.mem.Allocator, input: create_script.CreateScriptInput, options: create_script.Options) !create_script.CreateScriptOutput {
+    pub fn createScript(self: *Self, allocator: std.mem.Allocator, input: create_script.CreateScriptInput, options: CallOptions) !create_script.CreateScriptOutput {
         return create_script.execute(self, allocator, input, options);
     }
 
@@ -1180,7 +1181,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn createVpcPeeringAuthorization(self: *Self, allocator: std.mem.Allocator, input: create_vpc_peering_authorization.CreateVpcPeeringAuthorizationInput, options: create_vpc_peering_authorization.Options) !create_vpc_peering_authorization.CreateVpcPeeringAuthorizationOutput {
+    pub fn createVpcPeeringAuthorization(self: *Self, allocator: std.mem.Allocator, input: create_vpc_peering_authorization.CreateVpcPeeringAuthorizationInput, options: CallOptions) !create_vpc_peering_authorization.CreateVpcPeeringAuthorizationOutput {
         return create_vpc_peering_authorization.execute(self, allocator, input, options);
     }
 
@@ -1228,7 +1229,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn createVpcPeeringConnection(self: *Self, allocator: std.mem.Allocator, input: create_vpc_peering_connection.CreateVpcPeeringConnectionInput, options: create_vpc_peering_connection.Options) !create_vpc_peering_connection.CreateVpcPeeringConnectionOutput {
+    pub fn createVpcPeeringConnection(self: *Self, allocator: std.mem.Allocator, input: create_vpc_peering_connection.CreateVpcPeeringConnectionInput, options: CallOptions) !create_vpc_peering_connection.CreateVpcPeeringConnectionOutput {
         return create_vpc_peering_connection.execute(self, allocator, input, options);
     }
 
@@ -1244,7 +1245,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn deleteAlias(self: *Self, allocator: std.mem.Allocator, input: delete_alias.DeleteAliasInput, options: delete_alias.Options) !delete_alias.DeleteAliasOutput {
+    pub fn deleteAlias(self: *Self, allocator: std.mem.Allocator, input: delete_alias.DeleteAliasInput, options: CallOptions) !delete_alias.DeleteAliasOutput {
         return delete_alias.execute(self, allocator, input, options);
     }
 
@@ -1267,7 +1268,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn deleteBuild(self: *Self, allocator: std.mem.Allocator, input: delete_build.DeleteBuildInput, options: delete_build.Options) !delete_build.DeleteBuildOutput {
+    pub fn deleteBuild(self: *Self, allocator: std.mem.Allocator, input: delete_build.DeleteBuildInput, options: CallOptions) !delete_build.DeleteBuildOutput {
         return delete_build.execute(self, allocator, input, options);
     }
 
@@ -1287,7 +1288,7 @@ pub const Client = struct {
     ///
     /// [Setting up Amazon GameLift Servers
     /// Fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-    pub fn deleteContainerFleet(self: *Self, allocator: std.mem.Allocator, input: delete_container_fleet.DeleteContainerFleetInput, options: delete_container_fleet.Options) !delete_container_fleet.DeleteContainerFleetOutput {
+    pub fn deleteContainerFleet(self: *Self, allocator: std.mem.Allocator, input: delete_container_fleet.DeleteContainerFleetInput, options: CallOptions) !delete_container_fleet.DeleteContainerFleetOutput {
         return delete_container_fleet.execute(self, allocator, input, options);
     }
 
@@ -1330,7 +1331,7 @@ pub const Client = struct {
     ///
     /// * [Manage a container group
     ///   definition](https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html)
-    pub fn deleteContainerGroupDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_container_group_definition.DeleteContainerGroupDefinitionInput, options: delete_container_group_definition.Options) !delete_container_group_definition.DeleteContainerGroupDefinitionOutput {
+    pub fn deleteContainerGroupDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_container_group_definition.DeleteContainerGroupDefinitionInput, options: CallOptions) !delete_container_group_definition.DeleteContainerGroupDefinitionOutput {
         return delete_container_group_definition.execute(self, allocator, input, options);
     }
 
@@ -1356,7 +1357,7 @@ pub const Client = struct {
     ///
     /// [Setting up Amazon GameLift Servers
     /// Fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-    pub fn deleteFleet(self: *Self, allocator: std.mem.Allocator, input: delete_fleet.DeleteFleetInput, options: delete_fleet.Options) !delete_fleet.DeleteFleetOutput {
+    pub fn deleteFleet(self: *Self, allocator: std.mem.Allocator, input: delete_fleet.DeleteFleetInput, options: CallOptions) !delete_fleet.DeleteFleetOutput {
         return delete_fleet.execute(self, allocator, input, options);
     }
 
@@ -1380,7 +1381,7 @@ pub const Client = struct {
     ///
     /// [Setting up Amazon GameLift Servers
     /// fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-    pub fn deleteFleetLocations(self: *Self, allocator: std.mem.Allocator, input: delete_fleet_locations.DeleteFleetLocationsInput, options: delete_fleet_locations.Options) !delete_fleet_locations.DeleteFleetLocationsOutput {
+    pub fn deleteFleetLocations(self: *Self, allocator: std.mem.Allocator, input: delete_fleet_locations.DeleteFleetLocationsInput, options: CallOptions) !delete_fleet_locations.DeleteFleetLocationsOutput {
         return delete_fleet_locations.execute(self, allocator, input, options);
     }
 
@@ -1422,7 +1423,7 @@ pub const Client = struct {
     ///
     /// [Amazon GameLift Servers FleetIQ
     /// Guide](https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-    pub fn deleteGameServerGroup(self: *Self, allocator: std.mem.Allocator, input: delete_game_server_group.DeleteGameServerGroupInput, options: delete_game_server_group.Options) !delete_game_server_group.DeleteGameServerGroupOutput {
+    pub fn deleteGameServerGroup(self: *Self, allocator: std.mem.Allocator, input: delete_game_server_group.DeleteGameServerGroupInput, options: CallOptions) !delete_game_server_group.DeleteGameServerGroupOutput {
         return delete_game_server_group.execute(self, allocator, input, options);
     }
 
@@ -1432,7 +1433,7 @@ pub const Client = struct {
     /// unfulfilled
     /// [StartGameSessionPlacement](https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html) requests that reference the queue will fail. To
     /// delete a queue, specify the queue name.
-    pub fn deleteGameSessionQueue(self: *Self, allocator: std.mem.Allocator, input: delete_game_session_queue.DeleteGameSessionQueueInput, options: delete_game_session_queue.Options) !delete_game_session_queue.DeleteGameSessionQueueOutput {
+    pub fn deleteGameSessionQueue(self: *Self, allocator: std.mem.Allocator, input: delete_game_session_queue.DeleteGameSessionQueueInput, options: CallOptions) !delete_game_session_queue.DeleteGameSessionQueueOutput {
         return delete_game_session_queue.execute(self, allocator, input, options);
     }
 
@@ -1445,7 +1446,7 @@ pub const Client = struct {
     /// location and deregister the location if it is in use. For more information,
     /// see
     /// [DeregisterCompute](https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeregisterCompute.html).
-    pub fn deleteLocation(self: *Self, allocator: std.mem.Allocator, input: delete_location.DeleteLocationInput, options: delete_location.Options) !delete_location.DeleteLocationOutput {
+    pub fn deleteLocation(self: *Self, allocator: std.mem.Allocator, input: delete_location.DeleteLocationInput, options: CallOptions) !delete_location.DeleteLocationOutput {
         return delete_location.execute(self, allocator, input, options);
     }
 
@@ -1456,7 +1457,7 @@ pub const Client = struct {
     /// configuration name. A matchmaking configuration cannot be deleted if it is
     /// being used in
     /// any active matchmaking tickets.
-    pub fn deleteMatchmakingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_matchmaking_configuration.DeleteMatchmakingConfigurationInput, options: delete_matchmaking_configuration.Options) !delete_matchmaking_configuration.DeleteMatchmakingConfigurationOutput {
+    pub fn deleteMatchmakingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_matchmaking_configuration.DeleteMatchmakingConfigurationInput, options: CallOptions) !delete_matchmaking_configuration.DeleteMatchmakingConfigurationOutput {
         return delete_matchmaking_configuration.execute(self, allocator, input, options);
     }
 
@@ -1472,7 +1473,7 @@ pub const Client = struct {
     ///
     /// * [Build a rule
     /// set](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
-    pub fn deleteMatchmakingRuleSet(self: *Self, allocator: std.mem.Allocator, input: delete_matchmaking_rule_set.DeleteMatchmakingRuleSetInput, options: delete_matchmaking_rule_set.Options) !delete_matchmaking_rule_set.DeleteMatchmakingRuleSetOutput {
+    pub fn deleteMatchmakingRuleSet(self: *Self, allocator: std.mem.Allocator, input: delete_matchmaking_rule_set.DeleteMatchmakingRuleSetInput, options: CallOptions) !delete_matchmaking_rule_set.DeleteMatchmakingRuleSetOutput {
         return delete_matchmaking_rule_set.execute(self, allocator, input, options);
     }
 
@@ -1487,7 +1488,7 @@ pub const Client = struct {
     /// To temporarily suspend scaling policies, use
     /// [StopFleetActions](https://docs.aws.amazon.com/gamelift/latest/apireference/API_StopFleetActions.html). This operation suspends all policies for the
     /// fleet.
-    pub fn deleteScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_scaling_policy.DeleteScalingPolicyInput, options: delete_scaling_policy.Options) !delete_scaling_policy.DeleteScalingPolicyOutput {
+    pub fn deleteScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_scaling_policy.DeleteScalingPolicyInput, options: CallOptions) !delete_scaling_policy.DeleteScalingPolicyOutput {
         return delete_scaling_policy.execute(self, allocator, input, options);
     }
 
@@ -1516,7 +1517,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn deleteScript(self: *Self, allocator: std.mem.Allocator, input: delete_script.DeleteScriptInput, options: delete_script.Options) !delete_script.DeleteScriptOutput {
+    pub fn deleteScript(self: *Self, allocator: std.mem.Allocator, input: delete_script.DeleteScriptInput, options: CallOptions) !delete_script.DeleteScriptOutput {
         return delete_script.execute(self, allocator, input, options);
     }
 
@@ -1531,7 +1532,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn deleteVpcPeeringAuthorization(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_peering_authorization.DeleteVpcPeeringAuthorizationInput, options: delete_vpc_peering_authorization.Options) !delete_vpc_peering_authorization.DeleteVpcPeeringAuthorizationOutput {
+    pub fn deleteVpcPeeringAuthorization(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_peering_authorization.DeleteVpcPeeringAuthorizationInput, options: CallOptions) !delete_vpc_peering_authorization.DeleteVpcPeeringAuthorizationOutput {
         return delete_vpc_peering_authorization.execute(self, allocator, input, options);
     }
 
@@ -1551,7 +1552,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn deleteVpcPeeringConnection(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_peering_connection.DeleteVpcPeeringConnectionInput, options: delete_vpc_peering_connection.Options) !delete_vpc_peering_connection.DeleteVpcPeeringConnectionOutput {
+    pub fn deleteVpcPeeringConnection(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_peering_connection.DeleteVpcPeeringConnectionInput, options: CallOptions) !delete_vpc_peering_connection.DeleteVpcPeeringConnectionOutput {
         return delete_vpc_peering_connection.execute(self, allocator, input, options);
     }
 
@@ -1567,7 +1568,7 @@ pub const Client = struct {
     ///
     /// To deregister a compute, call this operation from the compute that's being
     /// deregistered and specify the compute name and the fleet ID.
-    pub fn deregisterCompute(self: *Self, allocator: std.mem.Allocator, input: deregister_compute.DeregisterComputeInput, options: deregister_compute.Options) !deregister_compute.DeregisterComputeOutput {
+    pub fn deregisterCompute(self: *Self, allocator: std.mem.Allocator, input: deregister_compute.DeregisterComputeInput, options: CallOptions) !deregister_compute.DeregisterComputeOutput {
         return deregister_compute.execute(self, allocator, input, options);
     }
 
@@ -1588,7 +1589,7 @@ pub const Client = struct {
     ///
     /// [Amazon GameLift Servers FleetIQ
     /// Guide](https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-    pub fn deregisterGameServer(self: *Self, allocator: std.mem.Allocator, input: deregister_game_server.DeregisterGameServerInput, options: deregister_game_server.Options) !deregister_game_server.DeregisterGameServerOutput {
+    pub fn deregisterGameServer(self: *Self, allocator: std.mem.Allocator, input: deregister_game_server.DeregisterGameServerInput, options: CallOptions) !deregister_game_server.DeregisterGameServerOutput {
         return deregister_game_server.execute(self, allocator, input, options);
     }
 
@@ -1606,7 +1607,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn describeAlias(self: *Self, allocator: std.mem.Allocator, input: describe_alias.DescribeAliasInput, options: describe_alias.Options) !describe_alias.DescribeAliasOutput {
+    pub fn describeAlias(self: *Self, allocator: std.mem.Allocator, input: describe_alias.DescribeAliasInput, options: CallOptions) !describe_alias.DescribeAliasOutput {
         return describe_alias.execute(self, allocator, input, options);
     }
 
@@ -1625,7 +1626,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn describeBuild(self: *Self, allocator: std.mem.Allocator, input: describe_build.DescribeBuildInput, options: describe_build.Options) !describe_build.DescribeBuildOutput {
+    pub fn describeBuild(self: *Self, allocator: std.mem.Allocator, input: describe_build.DescribeBuildInput, options: CallOptions) !describe_build.DescribeBuildOutput {
         return describe_build.execute(self, allocator, input, options);
     }
 
@@ -1668,7 +1669,7 @@ pub const Client = struct {
     /// * For an Anywhere fleet, this operation returns information about the
     ///   registered
     /// compute.
-    pub fn describeCompute(self: *Self, allocator: std.mem.Allocator, input: describe_compute.DescribeComputeInput, options: describe_compute.Options) !describe_compute.DescribeComputeOutput {
+    pub fn describeCompute(self: *Self, allocator: std.mem.Allocator, input: describe_compute.DescribeComputeInput, options: CallOptions) !describe_compute.DescribeComputeOutput {
         return describe_compute.execute(self, allocator, input, options);
     }
 
@@ -1696,7 +1697,7 @@ pub const Client = struct {
     /// a request exceeds this limit, the request fails and the error message
     /// contains the
     /// maximum allowed number.
-    pub fn describeContainerFleet(self: *Self, allocator: std.mem.Allocator, input: describe_container_fleet.DescribeContainerFleetInput, options: describe_container_fleet.Options) !describe_container_fleet.DescribeContainerFleetOutput {
+    pub fn describeContainerFleet(self: *Self, allocator: std.mem.Allocator, input: describe_container_fleet.DescribeContainerFleetInput, options: CallOptions) !describe_container_fleet.DescribeContainerFleetOutput {
         return describe_container_fleet.execute(self, allocator, input, options);
     }
 
@@ -1726,7 +1727,7 @@ pub const Client = struct {
     ///
     /// * [Manage a container group
     ///   definition](https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html)
-    pub fn describeContainerGroupDefinition(self: *Self, allocator: std.mem.Allocator, input: describe_container_group_definition.DescribeContainerGroupDefinitionInput, options: describe_container_group_definition.Options) !describe_container_group_definition.DescribeContainerGroupDefinitionOutput {
+    pub fn describeContainerGroupDefinition(self: *Self, allocator: std.mem.Allocator, input: describe_container_group_definition.DescribeContainerGroupDefinitionInput, options: CallOptions) !describe_container_group_definition.DescribeContainerGroupDefinitionOutput {
         return describe_container_group_definition.execute(self, allocator, input, options);
     }
 
@@ -1794,7 +1795,7 @@ pub const Client = struct {
     ///
     /// [Setting up Amazon GameLift Servers
     /// fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-    pub fn describeEc2InstanceLimits(self: *Self, allocator: std.mem.Allocator, input: describe_ec2_instance_limits.DescribeEC2InstanceLimitsInput, options: describe_ec2_instance_limits.Options) !describe_ec2_instance_limits.DescribeEC2InstanceLimitsOutput {
+    pub fn describeEc2InstanceLimits(self: *Self, allocator: std.mem.Allocator, input: describe_ec2_instance_limits.DescribeEC2InstanceLimitsInput, options: CallOptions) !describe_ec2_instance_limits.DescribeEC2InstanceLimitsOutput {
         return describe_ec2_instance_limits.execute(self, allocator, input, options);
     }
 
@@ -1828,7 +1829,7 @@ pub const Client = struct {
     ///
     /// [Setting up Amazon GameLift Servers
     /// fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-    pub fn describeFleetAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_attributes.DescribeFleetAttributesInput, options: describe_fleet_attributes.Options) !describe_fleet_attributes.DescribeFleetAttributesOutput {
+    pub fn describeFleetAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_attributes.DescribeFleetAttributesInput, options: CallOptions) !describe_fleet_attributes.DescribeFleetAttributesOutput {
         return describe_fleet_attributes.execute(self, allocator, input, options);
     }
 
@@ -1874,7 +1875,7 @@ pub const Client = struct {
     ///
     /// [GameLift metrics for
     /// fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
-    pub fn describeFleetCapacity(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_capacity.DescribeFleetCapacityInput, options: describe_fleet_capacity.Options) !describe_fleet_capacity.DescribeFleetCapacityOutput {
+    pub fn describeFleetCapacity(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_capacity.DescribeFleetCapacityInput, options: CallOptions) !describe_fleet_capacity.DescribeFleetCapacityOutput {
         return describe_fleet_capacity.execute(self, allocator, input, options);
     }
 
@@ -1895,7 +1896,7 @@ pub const Client = struct {
     /// **Results**
     ///
     /// If successful, a `FleetDeployment` object is returned.
-    pub fn describeFleetDeployment(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_deployment.DescribeFleetDeploymentInput, options: describe_fleet_deployment.Options) !describe_fleet_deployment.DescribeFleetDeploymentOutput {
+    pub fn describeFleetDeployment(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_deployment.DescribeFleetDeploymentInput, options: CallOptions) !describe_fleet_deployment.DescribeFleetDeploymentOutput {
         return describe_fleet_deployment.execute(self, allocator, input, options);
     }
 
@@ -1919,7 +1920,7 @@ pub const Client = struct {
     ///
     /// [Setting up Amazon GameLift Servers
     /// fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-    pub fn describeFleetEvents(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_events.DescribeFleetEventsInput, options: describe_fleet_events.Options) !describe_fleet_events.DescribeFleetEventsOutput {
+    pub fn describeFleetEvents(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_events.DescribeFleetEventsInput, options: CallOptions) !describe_fleet_events.DescribeFleetEventsOutput {
         return describe_fleet_events.execute(self, allocator, input, options);
     }
 
@@ -1959,7 +1960,7 @@ pub const Client = struct {
     /// [
     /// Amazon GameLift Servers service
     /// locations](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html) for managed hosting
-    pub fn describeFleetLocationAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_location_attributes.DescribeFleetLocationAttributesInput, options: describe_fleet_location_attributes.Options) !describe_fleet_location_attributes.DescribeFleetLocationAttributesOutput {
+    pub fn describeFleetLocationAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_location_attributes.DescribeFleetLocationAttributesInput, options: CallOptions) !describe_fleet_location_attributes.DescribeFleetLocationAttributesOutput {
         return describe_fleet_location_attributes.execute(self, allocator, input, options);
     }
 
@@ -1993,7 +1994,7 @@ pub const Client = struct {
     ///
     /// [GameLift metrics for
     /// fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
-    pub fn describeFleetLocationCapacity(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_location_capacity.DescribeFleetLocationCapacityInput, options: describe_fleet_location_capacity.Options) !describe_fleet_location_capacity.DescribeFleetLocationCapacityOutput {
+    pub fn describeFleetLocationCapacity(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_location_capacity.DescribeFleetLocationCapacityInput, options: CallOptions) !describe_fleet_location_capacity.DescribeFleetLocationCapacityOutput {
         return describe_fleet_location_capacity.execute(self, allocator, input, options);
     }
 
@@ -2023,7 +2024,7 @@ pub const Client = struct {
     ///
     /// [GameLift metrics for
     /// fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
-    pub fn describeFleetLocationUtilization(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_location_utilization.DescribeFleetLocationUtilizationInput, options: describe_fleet_location_utilization.Options) !describe_fleet_location_utilization.DescribeFleetLocationUtilizationOutput {
+    pub fn describeFleetLocationUtilization(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_location_utilization.DescribeFleetLocationUtilizationInput, options: CallOptions) !describe_fleet_location_utilization.DescribeFleetLocationUtilizationOutput {
         return describe_fleet_location_utilization.execute(self, allocator, input, options);
     }
 
@@ -2057,7 +2058,7 @@ pub const Client = struct {
     ///
     /// [Setting up Amazon GameLift Servers
     /// fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-    pub fn describeFleetPortSettings(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_port_settings.DescribeFleetPortSettingsInput, options: describe_fleet_port_settings.Options) !describe_fleet_port_settings.DescribeFleetPortSettingsOutput {
+    pub fn describeFleetPortSettings(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_port_settings.DescribeFleetPortSettingsInput, options: CallOptions) !describe_fleet_port_settings.DescribeFleetPortSettingsOutput {
         return describe_fleet_port_settings.execute(self, allocator, input, options);
     }
 
@@ -2101,7 +2102,7 @@ pub const Client = struct {
     ///
     /// [GameLift Metrics for
     /// Fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
-    pub fn describeFleetUtilization(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_utilization.DescribeFleetUtilizationInput, options: describe_fleet_utilization.Options) !describe_fleet_utilization.DescribeFleetUtilizationOutput {
+    pub fn describeFleetUtilization(self: *Self, allocator: std.mem.Allocator, input: describe_fleet_utilization.DescribeFleetUtilizationInput, options: CallOptions) !describe_fleet_utilization.DescribeFleetUtilizationOutput {
         return describe_fleet_utilization.execute(self, allocator, input, options);
     }
 
@@ -2120,7 +2121,7 @@ pub const Client = struct {
     ///
     /// [Amazon GameLift Servers FleetIQ
     /// Guide](https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-    pub fn describeGameServer(self: *Self, allocator: std.mem.Allocator, input: describe_game_server.DescribeGameServerInput, options: describe_game_server.Options) !describe_game_server.DescribeGameServerOutput {
+    pub fn describeGameServer(self: *Self, allocator: std.mem.Allocator, input: describe_game_server.DescribeGameServerInput, options: CallOptions) !describe_game_server.DescribeGameServerOutput {
         return describe_game_server.execute(self, allocator, input, options);
     }
 
@@ -2143,7 +2144,7 @@ pub const Client = struct {
     ///
     /// [Amazon GameLift Servers FleetIQ
     /// Guide](https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-    pub fn describeGameServerGroup(self: *Self, allocator: std.mem.Allocator, input: describe_game_server_group.DescribeGameServerGroupInput, options: describe_game_server_group.Options) !describe_game_server_group.DescribeGameServerGroupOutput {
+    pub fn describeGameServerGroup(self: *Self, allocator: std.mem.Allocator, input: describe_game_server_group.DescribeGameServerGroupInput, options: CallOptions) !describe_game_server_group.DescribeGameServerGroupOutput {
         return describe_game_server_group.execute(self, allocator, input, options);
     }
 
@@ -2177,7 +2178,7 @@ pub const Client = struct {
     ///
     /// [Amazon GameLift Servers FleetIQ
     /// Guide](https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-    pub fn describeGameServerInstances(self: *Self, allocator: std.mem.Allocator, input: describe_game_server_instances.DescribeGameServerInstancesInput, options: describe_game_server_instances.Options) !describe_game_server_instances.DescribeGameServerInstancesOutput {
+    pub fn describeGameServerInstances(self: *Self, allocator: std.mem.Allocator, input: describe_game_server_instances.DescribeGameServerInstancesInput, options: CallOptions) !describe_game_server_instances.DescribeGameServerInstancesOutput {
         return describe_game_server_instances.execute(self, allocator, input, options);
     }
 
@@ -2221,7 +2222,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn describeGameSessionDetails(self: *Self, allocator: std.mem.Allocator, input: describe_game_session_details.DescribeGameSessionDetailsInput, options: describe_game_session_details.Options) !describe_game_session_details.DescribeGameSessionDetailsOutput {
+    pub fn describeGameSessionDetails(self: *Self, allocator: std.mem.Allocator, input: describe_game_session_details.DescribeGameSessionDetailsInput, options: CallOptions) !describe_game_session_details.DescribeGameSessionDetailsOutput {
         return describe_game_session_details.execute(self, allocator, input, options);
     }
 
@@ -2241,7 +2242,7 @@ pub const Client = struct {
     /// receive notifications from FlexMatch or
     /// queues. Continuously polling with `DescribeGameSessionPlacement` should only
     /// be used for games in development with low game session usage.
-    pub fn describeGameSessionPlacement(self: *Self, allocator: std.mem.Allocator, input: describe_game_session_placement.DescribeGameSessionPlacementInput, options: describe_game_session_placement.Options) !describe_game_session_placement.DescribeGameSessionPlacementOutput {
+    pub fn describeGameSessionPlacement(self: *Self, allocator: std.mem.Allocator, input: describe_game_session_placement.DescribeGameSessionPlacementInput, options: CallOptions) !describe_game_session_placement.DescribeGameSessionPlacementOutput {
         return describe_game_session_placement.execute(self, allocator, input, options);
     }
 
@@ -2260,7 +2261,7 @@ pub const Client = struct {
     /// [
     /// View Your
     /// Queues](https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-console.html)
-    pub fn describeGameSessionQueues(self: *Self, allocator: std.mem.Allocator, input: describe_game_session_queues.DescribeGameSessionQueuesInput, options: describe_game_session_queues.Options) !describe_game_session_queues.DescribeGameSessionQueuesOutput {
+    pub fn describeGameSessionQueues(self: *Self, allocator: std.mem.Allocator, input: describe_game_session_queues.DescribeGameSessionQueuesInput, options: CallOptions) !describe_game_session_queues.DescribeGameSessionQueuesOutput {
         return describe_game_session_queues.execute(self, allocator, input, options);
     }
 
@@ -2314,7 +2315,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn describeGameSessions(self: *Self, allocator: std.mem.Allocator, input: describe_game_sessions.DescribeGameSessionsInput, options: describe_game_sessions.Options) !describe_game_sessions.DescribeGameSessionsOutput {
+    pub fn describeGameSessions(self: *Self, allocator: std.mem.Allocator, input: describe_game_sessions.DescribeGameSessionsInput, options: CallOptions) !describe_game_sessions.DescribeGameSessionsOutput {
         return describe_game_sessions.execute(self, allocator, input, options);
     }
 
@@ -2364,7 +2365,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn describeInstances(self: *Self, allocator: std.mem.Allocator, input: describe_instances.DescribeInstancesInput, options: describe_instances.Options) !describe_instances.DescribeInstancesOutput {
+    pub fn describeInstances(self: *Self, allocator: std.mem.Allocator, input: describe_instances.DescribeInstancesInput, options: CallOptions) !describe_instances.DescribeInstancesOutput {
         return describe_instances.execute(self, allocator, input, options);
     }
 
@@ -2398,7 +2399,7 @@ pub const Client = struct {
     ///
     /// [ Set Up FlexMatch event
     /// notification](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)
-    pub fn describeMatchmaking(self: *Self, allocator: std.mem.Allocator, input: describe_matchmaking.DescribeMatchmakingInput, options: describe_matchmaking.Options) !describe_matchmaking.DescribeMatchmakingOutput {
+    pub fn describeMatchmaking(self: *Self, allocator: std.mem.Allocator, input: describe_matchmaking.DescribeMatchmakingInput, options: CallOptions) !describe_matchmaking.DescribeMatchmakingOutput {
         return describe_matchmaking.execute(self, allocator, input, options);
     }
 
@@ -2421,7 +2422,7 @@ pub const Client = struct {
     ///
     /// [ Setting up FlexMatch
     /// matchmakers](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/matchmaker-build.html)
-    pub fn describeMatchmakingConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_matchmaking_configurations.DescribeMatchmakingConfigurationsInput, options: describe_matchmaking_configurations.Options) !describe_matchmaking_configurations.DescribeMatchmakingConfigurationsOutput {
+    pub fn describeMatchmakingConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_matchmaking_configurations.DescribeMatchmakingConfigurationsInput, options: CallOptions) !describe_matchmaking_configurations.DescribeMatchmakingConfigurationsOutput {
         return describe_matchmaking_configurations.execute(self, allocator, input, options);
     }
 
@@ -2440,7 +2441,7 @@ pub const Client = struct {
     ///
     /// * [Build a rule
     /// set](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
-    pub fn describeMatchmakingRuleSets(self: *Self, allocator: std.mem.Allocator, input: describe_matchmaking_rule_sets.DescribeMatchmakingRuleSetsInput, options: describe_matchmaking_rule_sets.Options) !describe_matchmaking_rule_sets.DescribeMatchmakingRuleSetsOutput {
+    pub fn describeMatchmakingRuleSets(self: *Self, allocator: std.mem.Allocator, input: describe_matchmaking_rule_sets.DescribeMatchmakingRuleSetsInput, options: CallOptions) !describe_matchmaking_rule_sets.DescribeMatchmakingRuleSetsOutput {
         return describe_matchmaking_rule_sets.execute(self, allocator, input, options);
     }
 
@@ -2476,7 +2477,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn describePlayerSessions(self: *Self, allocator: std.mem.Allocator, input: describe_player_sessions.DescribePlayerSessionsInput, options: describe_player_sessions.Options) !describe_player_sessions.DescribePlayerSessionsOutput {
+    pub fn describePlayerSessions(self: *Self, allocator: std.mem.Allocator, input: describe_player_sessions.DescribePlayerSessionsInput, options: CallOptions) !describe_player_sessions.DescribePlayerSessionsOutput {
         return describe_player_sessions.execute(self, allocator, input, options);
     }
 
@@ -2505,7 +2506,7 @@ pub const Client = struct {
     /// [Running multiple
     /// processes on a
     /// fleet](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html)
-    pub fn describeRuntimeConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_runtime_configuration.DescribeRuntimeConfigurationInput, options: describe_runtime_configuration.Options) !describe_runtime_configuration.DescribeRuntimeConfigurationOutput {
+    pub fn describeRuntimeConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_runtime_configuration.DescribeRuntimeConfigurationInput, options: CallOptions) !describe_runtime_configuration.DescribeRuntimeConfigurationOutput {
         return describe_runtime_configuration.execute(self, allocator, input, options);
     }
 
@@ -2524,7 +2525,7 @@ pub const Client = struct {
     /// A fleet may have all of its scaling policies suspended. This operation does
     /// not affect
     /// the status of the scaling policies, which remains ACTIVE.
-    pub fn describeScalingPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_policies.DescribeScalingPoliciesInput, options: describe_scaling_policies.Options) !describe_scaling_policies.DescribeScalingPoliciesOutput {
+    pub fn describeScalingPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_policies.DescribeScalingPoliciesInput, options: CallOptions) !describe_scaling_policies.DescribeScalingPoliciesOutput {
         return describe_scaling_policies.execute(self, allocator, input, options);
     }
 
@@ -2545,7 +2546,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn describeScript(self: *Self, allocator: std.mem.Allocator, input: describe_script.DescribeScriptInput, options: describe_script.Options) !describe_script.DescribeScriptOutput {
+    pub fn describeScript(self: *Self, allocator: std.mem.Allocator, input: describe_script.DescribeScriptInput, options: CallOptions) !describe_script.DescribeScriptOutput {
         return describe_script.execute(self, allocator, input, options);
     }
 
@@ -2561,7 +2562,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn describeVpcPeeringAuthorizations(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_peering_authorizations.DescribeVpcPeeringAuthorizationsInput, options: describe_vpc_peering_authorizations.Options) !describe_vpc_peering_authorizations.DescribeVpcPeeringAuthorizationsOutput {
+    pub fn describeVpcPeeringAuthorizations(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_peering_authorizations.DescribeVpcPeeringAuthorizationsInput, options: CallOptions) !describe_vpc_peering_authorizations.DescribeVpcPeeringAuthorizationsOutput {
         return describe_vpc_peering_authorizations.execute(self, allocator, input, options);
     }
 
@@ -2585,7 +2586,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn describeVpcPeeringConnections(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_peering_connections.DescribeVpcPeeringConnectionsInput, options: describe_vpc_peering_connections.Options) !describe_vpc_peering_connections.DescribeVpcPeeringConnectionsOutput {
+    pub fn describeVpcPeeringConnections(self: *Self, allocator: std.mem.Allocator, input: describe_vpc_peering_connections.DescribeVpcPeeringConnectionsInput, options: CallOptions) !describe_vpc_peering_connections.DescribeVpcPeeringConnectionsOutput {
         return describe_vpc_peering_connections.execute(self, allocator, input, options);
     }
 
@@ -2622,7 +2623,7 @@ pub const Client = struct {
     /// details, see [ Starting a session
     /// (CLI)](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html#sessions-start-cli) in the *Amazon EC2 Systems Manager User
     /// Guide*.
-    pub fn getComputeAccess(self: *Self, allocator: std.mem.Allocator, input: get_compute_access.GetComputeAccessInput, options: get_compute_access.Options) !get_compute_access.GetComputeAccessOutput {
+    pub fn getComputeAccess(self: *Self, allocator: std.mem.Allocator, input: get_compute_access.GetComputeAccessInput, options: CallOptions) !get_compute_access.GetComputeAccessOutput {
         return get_compute_access.execute(self, allocator, input, options);
     }
 
@@ -2664,7 +2665,7 @@ pub const Client = struct {
     /// * [Server SDK
     /// reference
     /// guides](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html) (for version 5.x)
-    pub fn getComputeAuthToken(self: *Self, allocator: std.mem.Allocator, input: get_compute_auth_token.GetComputeAuthTokenInput, options: get_compute_auth_token.Options) !get_compute_auth_token.GetComputeAuthTokenOutput {
+    pub fn getComputeAuthToken(self: *Self, allocator: std.mem.Allocator, input: get_compute_auth_token.GetComputeAuthTokenInput, options: CallOptions) !get_compute_auth_token.GetComputeAuthTokenOutput {
         return get_compute_auth_token.execute(self, allocator, input, options);
     }
 
@@ -2683,7 +2684,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn getGameSessionLogUrl(self: *Self, allocator: std.mem.Allocator, input: get_game_session_log_url.GetGameSessionLogUrlInput, options: get_game_session_log_url.Options) !get_game_session_log_url.GetGameSessionLogUrlOutput {
+    pub fn getGameSessionLogUrl(self: *Self, allocator: std.mem.Allocator, input: get_game_session_log_url.GetGameSessionLogUrlInput, options: CallOptions) !get_game_session_log_url.GetGameSessionLogUrlOutput {
         return get_game_session_log_url.execute(self, allocator, input, options);
     }
 
@@ -2731,7 +2732,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn getInstanceAccess(self: *Self, allocator: std.mem.Allocator, input: get_instance_access.GetInstanceAccessInput, options: get_instance_access.Options) !get_instance_access.GetInstanceAccessOutput {
+    pub fn getInstanceAccess(self: *Self, allocator: std.mem.Allocator, input: get_instance_access.GetInstanceAccessInput, options: CallOptions) !get_instance_access.GetInstanceAccessOutput {
         return get_instance_access.execute(self, allocator, input, options);
     }
 
@@ -2749,7 +2750,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn listAliases(self: *Self, allocator: std.mem.Allocator, input: list_aliases.ListAliasesInput, options: list_aliases.Options) !list_aliases.ListAliasesOutput {
+    pub fn listAliases(self: *Self, allocator: std.mem.Allocator, input: list_aliases.ListAliasesInput, options: CallOptions) !list_aliases.ListAliasesOutput {
         return list_aliases.execute(self, allocator, input, options);
     }
 
@@ -2770,7 +2771,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn listBuilds(self: *Self, allocator: std.mem.Allocator, input: list_builds.ListBuildsInput, options: list_builds.Options) !list_builds.ListBuildsOutput {
+    pub fn listBuilds(self: *Self, allocator: std.mem.Allocator, input: list_builds.ListBuildsInput, options: CallOptions) !list_builds.ListBuildsOutput {
         return list_builds.execute(self, allocator, input, options);
     }
 
@@ -2803,7 +2804,7 @@ pub const Client = struct {
     /// `RegisterCompute`. This includes
     /// `GameLiftServiceSdkEndpoint` or
     /// `GameLiftAgentEndpoint`.
-    pub fn listCompute(self: *Self, allocator: std.mem.Allocator, input: list_compute.ListComputeInput, options: list_compute.Options) !list_compute.ListComputeOutput {
+    pub fn listCompute(self: *Self, allocator: std.mem.Allocator, input: list_compute.ListComputeInput, options: CallOptions) !list_compute.ListComputeOutput {
         return list_compute.execute(self, allocator, input, options);
     }
 
@@ -2838,7 +2839,7 @@ pub const Client = struct {
     /// retrieve.
     ///
     /// Fleet IDs are returned in no particular order.
-    pub fn listContainerFleets(self: *Self, allocator: std.mem.Allocator, input: list_container_fleets.ListContainerFleetsInput, options: list_container_fleets.Options) !list_container_fleets.ListContainerFleetsOutput {
+    pub fn listContainerFleets(self: *Self, allocator: std.mem.Allocator, input: list_container_fleets.ListContainerFleetsInput, options: CallOptions) !list_container_fleets.ListContainerFleetsOutput {
         return list_container_fleets.execute(self, allocator, input, options);
     }
 
@@ -2870,7 +2871,7 @@ pub const Client = struct {
     ///
     /// * [Manage a container group
     ///   definition](https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html)
-    pub fn listContainerGroupDefinitionVersions(self: *Self, allocator: std.mem.Allocator, input: list_container_group_definition_versions.ListContainerGroupDefinitionVersionsInput, options: list_container_group_definition_versions.Options) !list_container_group_definition_versions.ListContainerGroupDefinitionVersionsOutput {
+    pub fn listContainerGroupDefinitionVersions(self: *Self, allocator: std.mem.Allocator, input: list_container_group_definition_versions.ListContainerGroupDefinitionVersionsInput, options: CallOptions) !list_container_group_definition_versions.ListContainerGroupDefinitionVersionsOutput {
         return list_container_group_definition_versions.execute(self, allocator, input, options);
     }
 
@@ -2902,7 +2903,7 @@ pub const Client = struct {
     ///
     /// This operation returns the list of container group definitions in no
     /// particular order.
-    pub fn listContainerGroupDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_container_group_definitions.ListContainerGroupDefinitionsInput, options: list_container_group_definitions.Options) !list_container_group_definitions.ListContainerGroupDefinitionsOutput {
+    pub fn listContainerGroupDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_container_group_definitions.ListContainerGroupDefinitionsInput, options: CallOptions) !list_container_group_definitions.ListContainerGroupDefinitionsOutput {
         return list_container_group_definitions.execute(self, allocator, input, options);
     }
 
@@ -2929,7 +2930,7 @@ pub const Client = struct {
     /// retrieve.
     ///
     /// Deployments are returned starting with the latest.
-    pub fn listFleetDeployments(self: *Self, allocator: std.mem.Allocator, input: list_fleet_deployments.ListFleetDeploymentsInput, options: list_fleet_deployments.Options) !list_fleet_deployments.ListFleetDeploymentsOutput {
+    pub fn listFleetDeployments(self: *Self, allocator: std.mem.Allocator, input: list_fleet_deployments.ListFleetDeploymentsInput, options: CallOptions) !list_fleet_deployments.ListFleetDeploymentsOutput {
         return list_fleet_deployments.execute(self, allocator, input, options);
     }
 
@@ -2966,14 +2967,14 @@ pub const Client = struct {
     /// retrieve.
     ///
     /// Fleet IDs are returned in no particular order.
-    pub fn listFleets(self: *Self, allocator: std.mem.Allocator, input: list_fleets.ListFleetsInput, options: list_fleets.Options) !list_fleets.ListFleetsOutput {
+    pub fn listFleets(self: *Self, allocator: std.mem.Allocator, input: list_fleets.ListFleetsInput, options: CallOptions) !list_fleets.ListFleetsOutput {
         return list_fleets.execute(self, allocator, input, options);
     }
 
     /// **This API works with the following fleet types:** EC2 (FleetIQ)
     ///
     /// Lists a game server groups.
-    pub fn listGameServerGroups(self: *Self, allocator: std.mem.Allocator, input: list_game_server_groups.ListGameServerGroupsInput, options: list_game_server_groups.Options) !list_game_server_groups.ListGameServerGroupsOutput {
+    pub fn listGameServerGroups(self: *Self, allocator: std.mem.Allocator, input: list_game_server_groups.ListGameServerGroupsInput, options: CallOptions) !list_game_server_groups.ListGameServerGroupsOutput {
         return list_game_server_groups.execute(self, allocator, input, options);
     }
 
@@ -2990,7 +2991,7 @@ pub const Client = struct {
     ///
     /// [Amazon GameLift Servers FleetIQ
     /// Guide](https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-    pub fn listGameServers(self: *Self, allocator: std.mem.Allocator, input: list_game_servers.ListGameServersInput, options: list_game_servers.Options) !list_game_servers.ListGameServersOutput {
+    pub fn listGameServers(self: *Self, allocator: std.mem.Allocator, input: list_game_servers.ListGameServersInput, options: CallOptions) !list_game_servers.ListGameServersOutput {
         return list_game_servers.execute(self, allocator, input, options);
     }
 
@@ -3013,7 +3014,7 @@ pub const Client = struct {
     ///
     /// [Service
     /// locations](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html)
-    pub fn listLocations(self: *Self, allocator: std.mem.Allocator, input: list_locations.ListLocationsInput, options: list_locations.Options) !list_locations.ListLocationsOutput {
+    pub fn listLocations(self: *Self, allocator: std.mem.Allocator, input: list_locations.ListLocationsInput, options: CallOptions) !list_locations.ListLocationsOutput {
         return list_locations.execute(self, allocator, input, options);
     }
 
@@ -3032,7 +3033,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn listScripts(self: *Self, allocator: std.mem.Allocator, input: list_scripts.ListScriptsInput, options: list_scripts.Options) !list_scripts.ListScriptsOutput {
+    pub fn listScripts(self: *Self, allocator: std.mem.Allocator, input: list_scripts.ListScriptsInput, options: CallOptions) !list_scripts.ListScriptsOutput {
         return list_scripts.execute(self, allocator, input, options);
     }
 
@@ -3060,7 +3061,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -3168,7 +3169,7 @@ pub const Client = struct {
     /// auto-scaling actions are temporarily suspended, the new policy will be in
     /// force once the
     /// fleet actions are restarted.
-    pub fn putScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: put_scaling_policy.PutScalingPolicyInput, options: put_scaling_policy.Options) !put_scaling_policy.PutScalingPolicyOutput {
+    pub fn putScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: put_scaling_policy.PutScalingPolicyInput, options: CallOptions) !put_scaling_policy.PutScalingPolicyOutput {
         return put_scaling_policy.execute(self, allocator, input, options);
     }
 
@@ -3212,7 +3213,7 @@ pub const Client = struct {
     /// * [Server SDK
     /// reference
     /// guides](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html) (for version 5.x)
-    pub fn registerCompute(self: *Self, allocator: std.mem.Allocator, input: register_compute.RegisterComputeInput, options: register_compute.Options) !register_compute.RegisterComputeOutput {
+    pub fn registerCompute(self: *Self, allocator: std.mem.Allocator, input: register_compute.RegisterComputeInput, options: CallOptions) !register_compute.RegisterComputeOutput {
         return register_compute.execute(self, allocator, input, options);
     }
 
@@ -3245,7 +3246,7 @@ pub const Client = struct {
     ///
     /// [Amazon GameLift Servers FleetIQ
     /// Guide](https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-    pub fn registerGameServer(self: *Self, allocator: std.mem.Allocator, input: register_game_server.RegisterGameServerInput, options: register_game_server.Options) !register_game_server.RegisterGameServerOutput {
+    pub fn registerGameServer(self: *Self, allocator: std.mem.Allocator, input: register_game_server.RegisterGameServerInput, options: CallOptions) !register_game_server.RegisterGameServerOutput {
         return register_game_server.execute(self, allocator, input, options);
     }
 
@@ -3268,7 +3269,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn requestUploadCredentials(self: *Self, allocator: std.mem.Allocator, input: request_upload_credentials.RequestUploadCredentialsInput, options: request_upload_credentials.Options) !request_upload_credentials.RequestUploadCredentialsOutput {
+    pub fn requestUploadCredentials(self: *Self, allocator: std.mem.Allocator, input: request_upload_credentials.RequestUploadCredentialsInput, options: CallOptions) !request_upload_credentials.RequestUploadCredentialsOutput {
         return request_upload_credentials.execute(self, allocator, input, options);
     }
 
@@ -3287,7 +3288,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn resolveAlias(self: *Self, allocator: std.mem.Allocator, input: resolve_alias.ResolveAliasInput, options: resolve_alias.Options) !resolve_alias.ResolveAliasOutput {
+    pub fn resolveAlias(self: *Self, allocator: std.mem.Allocator, input: resolve_alias.ResolveAliasInput, options: CallOptions) !resolve_alias.ResolveAliasOutput {
         return resolve_alias.execute(self, allocator, input, options);
     }
 
@@ -3313,7 +3314,7 @@ pub const Client = struct {
     ///
     /// [Amazon GameLift Servers FleetIQ
     /// Guide](https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-    pub fn resumeGameServerGroup(self: *Self, allocator: std.mem.Allocator, input: resume_game_server_group.ResumeGameServerGroupInput, options: resume_game_server_group.Options) !resume_game_server_group.ResumeGameServerGroupOutput {
+    pub fn resumeGameServerGroup(self: *Self, allocator: std.mem.Allocator, input: resume_game_server_group.ResumeGameServerGroupInput, options: CallOptions) !resume_game_server_group.ResumeGameServerGroupOutput {
         return resume_game_server_group.execute(self, allocator, input, options);
     }
 
@@ -3414,7 +3415,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn searchGameSessions(self: *Self, allocator: std.mem.Allocator, input: search_game_sessions.SearchGameSessionsInput, options: search_game_sessions.Options) !search_game_sessions.SearchGameSessionsOutput {
+    pub fn searchGameSessions(self: *Self, allocator: std.mem.Allocator, input: search_game_sessions.SearchGameSessionsInput, options: CallOptions) !search_game_sessions.SearchGameSessionsOutput {
         return search_game_sessions.execute(self, allocator, input, options);
     }
 
@@ -3446,7 +3447,7 @@ pub const Client = struct {
     ///
     /// [Setting up Amazon GameLift Servers
     /// fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-    pub fn startFleetActions(self: *Self, allocator: std.mem.Allocator, input: start_fleet_actions.StartFleetActionsInput, options: start_fleet_actions.Options) !start_fleet_actions.StartFleetActionsOutput {
+    pub fn startFleetActions(self: *Self, allocator: std.mem.Allocator, input: start_fleet_actions.StartFleetActionsInput, options: CallOptions) !start_fleet_actions.StartFleetActionsOutput {
         return start_fleet_actions.execute(self, allocator, input, options);
     }
 
@@ -3549,7 +3550,7 @@ pub const Client = struct {
     /// setting. If a request times out, you can resubmit the request to the same
     /// queue or try a
     /// different queue.
-    pub fn startGameSessionPlacement(self: *Self, allocator: std.mem.Allocator, input: start_game_session_placement.StartGameSessionPlacementInput, options: start_game_session_placement.Options) !start_game_session_placement.StartGameSessionPlacementOutput {
+    pub fn startGameSessionPlacement(self: *Self, allocator: std.mem.Allocator, input: start_game_session_placement.StartGameSessionPlacementInput, options: CallOptions) !start_game_session_placement.StartGameSessionPlacementOutput {
         return start_game_session_placement.execute(self, allocator, input, options);
     }
 
@@ -3615,7 +3616,7 @@ pub const Client = struct {
     /// [
     /// How Amazon GameLift Servers FlexMatch
     /// works](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/gamelift-match.html)
-    pub fn startMatchBackfill(self: *Self, allocator: std.mem.Allocator, input: start_match_backfill.StartMatchBackfillInput, options: start_match_backfill.Options) !start_match_backfill.StartMatchBackfillOutput {
+    pub fn startMatchBackfill(self: *Self, allocator: std.mem.Allocator, input: start_match_backfill.StartMatchBackfillInput, options: CallOptions) !start_match_backfill.StartMatchBackfillOutput {
         return start_match_backfill.execute(self, allocator, input, options);
     }
 
@@ -3663,7 +3664,7 @@ pub const Client = struct {
     /// [
     /// How Amazon GameLift Servers FlexMatch
     /// works](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/gamelift-match.html)
-    pub fn startMatchmaking(self: *Self, allocator: std.mem.Allocator, input: start_matchmaking.StartMatchmakingInput, options: start_matchmaking.Options) !start_matchmaking.StartMatchmakingOutput {
+    pub fn startMatchmaking(self: *Self, allocator: std.mem.Allocator, input: start_matchmaking.StartMatchmakingInput, options: CallOptions) !start_matchmaking.StartMatchmakingOutput {
         return start_matchmaking.execute(self, allocator, input, options);
     }
 
@@ -3703,7 +3704,7 @@ pub const Client = struct {
     ///
     /// [Setting up Amazon GameLift Servers
     /// Fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-    pub fn stopFleetActions(self: *Self, allocator: std.mem.Allocator, input: stop_fleet_actions.StopFleetActionsInput, options: stop_fleet_actions.Options) !stop_fleet_actions.StopFleetActionsOutput {
+    pub fn stopFleetActions(self: *Self, allocator: std.mem.Allocator, input: stop_fleet_actions.StopFleetActionsInput, options: CallOptions) !stop_fleet_actions.StopFleetActionsOutput {
         return stop_fleet_actions.execute(self, allocator, input, options);
     }
 
@@ -3723,7 +3724,7 @@ pub const Client = struct {
     /// an unneeded
     /// game session by calling
     /// [TerminateGameSession](https://docs.aws.amazon.com/gamelift/latest/apireference/API_TerminateGameSession).
-    pub fn stopGameSessionPlacement(self: *Self, allocator: std.mem.Allocator, input: stop_game_session_placement.StopGameSessionPlacementInput, options: stop_game_session_placement.Options) !stop_game_session_placement.StopGameSessionPlacementOutput {
+    pub fn stopGameSessionPlacement(self: *Self, allocator: std.mem.Allocator, input: stop_game_session_placement.StopGameSessionPlacementInput, options: CallOptions) !stop_game_session_placement.StopGameSessionPlacementOutput {
         return stop_game_session_placement.execute(self, allocator, input, options);
     }
 
@@ -3753,7 +3754,7 @@ pub const Client = struct {
     /// [
     /// Add FlexMatch to a game
     /// client](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
-    pub fn stopMatchmaking(self: *Self, allocator: std.mem.Allocator, input: stop_matchmaking.StopMatchmakingInput, options: stop_matchmaking.Options) !stop_matchmaking.StopMatchmakingOutput {
+    pub fn stopMatchmaking(self: *Self, allocator: std.mem.Allocator, input: stop_matchmaking.StopMatchmakingInput, options: CallOptions) !stop_matchmaking.StopMatchmakingOutput {
         return stop_matchmaking.execute(self, allocator, input, options);
     }
 
@@ -3788,7 +3789,7 @@ pub const Client = struct {
     ///
     /// [Amazon GameLift Servers FleetIQ
     /// Guide](https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-    pub fn suspendGameServerGroup(self: *Self, allocator: std.mem.Allocator, input: suspend_game_server_group.SuspendGameServerGroupInput, options: suspend_game_server_group.Options) !suspend_game_server_group.SuspendGameServerGroupOutput {
+    pub fn suspendGameServerGroup(self: *Self, allocator: std.mem.Allocator, input: suspend_game_server_group.SuspendGameServerGroupInput, options: CallOptions) !suspend_game_server_group.SuspendGameServerGroupOutput {
         return suspend_game_server_group.execute(self, allocator, input, options);
     }
 
@@ -3822,7 +3823,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -3886,7 +3887,7 @@ pub const Client = struct {
     /// ([C#](https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk5-csharp-initsdk.html))
     /// ([Unreal](https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk5-unreal-initsdk.html))
     /// ([Go](https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk-go-initsdk.html))
-    pub fn terminateGameSession(self: *Self, allocator: std.mem.Allocator, input: terminate_game_session.TerminateGameSessionInput, options: terminate_game_session.Options) !terminate_game_session.TerminateGameSessionOutput {
+    pub fn terminateGameSession(self: *Self, allocator: std.mem.Allocator, input: terminate_game_session.TerminateGameSessionInput, options: CallOptions) !terminate_game_session.TerminateGameSessionOutput {
         return terminate_game_session.execute(self, allocator, input, options);
     }
 
@@ -3919,7 +3920,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -3937,7 +3938,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn updateAlias(self: *Self, allocator: std.mem.Allocator, input: update_alias.UpdateAliasInput, options: update_alias.Options) !update_alias.UpdateAliasOutput {
+    pub fn updateAlias(self: *Self, allocator: std.mem.Allocator, input: update_alias.UpdateAliasInput, options: CallOptions) !update_alias.UpdateAliasOutput {
         return update_alias.execute(self, allocator, input, options);
     }
 
@@ -3957,7 +3958,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn updateBuild(self: *Self, allocator: std.mem.Allocator, input: update_build.UpdateBuildInput, options: update_build.Options) !update_build.UpdateBuildOutput {
+    pub fn updateBuild(self: *Self, allocator: std.mem.Allocator, input: update_build.UpdateBuildInput, options: CallOptions) !update_build.UpdateBuildOutput {
         return update_build.execute(self, allocator, input, options);
     }
 
@@ -4025,7 +4026,7 @@ pub const Client = struct {
     /// update request initiates a deployment while another deployment is in
     /// progress, the first
     /// deployment is cancelled.
-    pub fn updateContainerFleet(self: *Self, allocator: std.mem.Allocator, input: update_container_fleet.UpdateContainerFleetInput, options: update_container_fleet.Options) !update_container_fleet.UpdateContainerFleetOutput {
+    pub fn updateContainerFleet(self: *Self, allocator: std.mem.Allocator, input: update_container_fleet.UpdateContainerFleetInput, options: CallOptions) !update_container_fleet.UpdateContainerFleetOutput {
         return update_container_fleet.execute(self, allocator, input, options);
     }
 
@@ -4081,7 +4082,7 @@ pub const Client = struct {
     /// track a fleet's
     /// deployments using
     /// [ListFleetDeployments](https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListFleetDeployments.html).
-    pub fn updateContainerGroupDefinition(self: *Self, allocator: std.mem.Allocator, input: update_container_group_definition.UpdateContainerGroupDefinitionInput, options: update_container_group_definition.Options) !update_container_group_definition.UpdateContainerGroupDefinitionOutput {
+    pub fn updateContainerGroupDefinition(self: *Self, allocator: std.mem.Allocator, input: update_container_group_definition.UpdateContainerGroupDefinitionInput, options: CallOptions) !update_container_group_definition.UpdateContainerGroupDefinitionOutput {
         return update_container_group_definition.execute(self, allocator, input, options);
     }
 
@@ -4110,7 +4111,7 @@ pub const Client = struct {
     ///
     /// [Setting up Amazon GameLift Servers
     /// fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-    pub fn updateFleetAttributes(self: *Self, allocator: std.mem.Allocator, input: update_fleet_attributes.UpdateFleetAttributesInput, options: update_fleet_attributes.Options) !update_fleet_attributes.UpdateFleetAttributesOutput {
+    pub fn updateFleetAttributes(self: *Self, allocator: std.mem.Allocator, input: update_fleet_attributes.UpdateFleetAttributesInput, options: CallOptions) !update_fleet_attributes.UpdateFleetAttributesOutput {
         return update_fleet_attributes.execute(self, allocator, input, options);
     }
 
@@ -4191,7 +4192,7 @@ pub const Client = struct {
     ///
     /// [Scaling fleet
     /// capacity](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-manage-capacity.html)
-    pub fn updateFleetCapacity(self: *Self, allocator: std.mem.Allocator, input: update_fleet_capacity.UpdateFleetCapacityInput, options: update_fleet_capacity.Options) !update_fleet_capacity.UpdateFleetCapacityOutput {
+    pub fn updateFleetCapacity(self: *Self, allocator: std.mem.Allocator, input: update_fleet_capacity.UpdateFleetCapacityInput, options: CallOptions) !update_fleet_capacity.UpdateFleetCapacityOutput {
         return update_fleet_capacity.execute(self, allocator, input, options);
     }
 
@@ -4219,7 +4220,7 @@ pub const Client = struct {
     ///
     /// [Setting up Amazon GameLift Servers
     /// fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-    pub fn updateFleetPortSettings(self: *Self, allocator: std.mem.Allocator, input: update_fleet_port_settings.UpdateFleetPortSettingsInput, options: update_fleet_port_settings.Options) !update_fleet_port_settings.UpdateFleetPortSettingsOutput {
+    pub fn updateFleetPortSettings(self: *Self, allocator: std.mem.Allocator, input: update_fleet_port_settings.UpdateFleetPortSettingsInput, options: CallOptions) !update_fleet_port_settings.UpdateFleetPortSettingsOutput {
         return update_fleet_port_settings.execute(self, allocator, input, options);
     }
 
@@ -4262,7 +4263,7 @@ pub const Client = struct {
     ///
     /// [Amazon GameLift Servers FleetIQ
     /// Guide](https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-    pub fn updateGameServer(self: *Self, allocator: std.mem.Allocator, input: update_game_server.UpdateGameServerInput, options: update_game_server.Options) !update_game_server.UpdateGameServerOutput {
+    pub fn updateGameServer(self: *Self, allocator: std.mem.Allocator, input: update_game_server.UpdateGameServerInput, options: CallOptions) !update_game_server.UpdateGameServerOutput {
         return update_game_server.execute(self, allocator, input, options);
     }
 
@@ -4287,7 +4288,7 @@ pub const Client = struct {
     ///
     /// [Amazon GameLift Servers FleetIQ
     /// Guide](https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-    pub fn updateGameServerGroup(self: *Self, allocator: std.mem.Allocator, input: update_game_server_group.UpdateGameServerGroupInput, options: update_game_server_group.Options) !update_game_server_group.UpdateGameServerGroupOutput {
+    pub fn updateGameServerGroup(self: *Self, allocator: std.mem.Allocator, input: update_game_server_group.UpdateGameServerGroupInput, options: CallOptions) !update_game_server_group.UpdateGameServerGroupOutput {
         return update_game_server_group.execute(self, allocator, input, options);
     }
 
@@ -4303,7 +4304,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn updateGameSession(self: *Self, allocator: std.mem.Allocator, input: update_game_session.UpdateGameSessionInput, options: update_game_session.Options) !update_game_session.UpdateGameSessionOutput {
+    pub fn updateGameSession(self: *Self, allocator: std.mem.Allocator, input: update_game_session.UpdateGameSessionInput, options: CallOptions) !update_game_session.UpdateGameSessionOutput {
         return update_game_session.execute(self, allocator, input, options);
     }
 
@@ -4322,7 +4323,7 @@ pub const Client = struct {
     /// [
     /// Using Multi-Region
     /// Queues](https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html)
-    pub fn updateGameSessionQueue(self: *Self, allocator: std.mem.Allocator, input: update_game_session_queue.UpdateGameSessionQueueInput, options: update_game_session_queue.Options) !update_game_session_queue.UpdateGameSessionQueueOutput {
+    pub fn updateGameSessionQueue(self: *Self, allocator: std.mem.Allocator, input: update_game_session_queue.UpdateGameSessionQueueInput, options: CallOptions) !update_game_session_queue.UpdateGameSessionQueueOutput {
         return update_game_session_queue.execute(self, allocator, input, options);
     }
 
@@ -4338,7 +4339,7 @@ pub const Client = struct {
     ///
     /// [ Design a FlexMatch
     /// matchmaker](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html)
-    pub fn updateMatchmakingConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_matchmaking_configuration.UpdateMatchmakingConfigurationInput, options: update_matchmaking_configuration.Options) !update_matchmaking_configuration.UpdateMatchmakingConfigurationOutput {
+    pub fn updateMatchmakingConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_matchmaking_configuration.UpdateMatchmakingConfigurationInput, options: CallOptions) !update_matchmaking_configuration.UpdateMatchmakingConfigurationOutput {
         return update_matchmaking_configuration.execute(self, allocator, input, options);
     }
 
@@ -4371,7 +4372,7 @@ pub const Client = struct {
     ///
     /// [Setting up Amazon GameLift Servers
     /// fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-    pub fn updateRuntimeConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_runtime_configuration.UpdateRuntimeConfigurationInput, options: update_runtime_configuration.Options) !update_runtime_configuration.UpdateRuntimeConfigurationOutput {
+    pub fn updateRuntimeConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_runtime_configuration.UpdateRuntimeConfigurationInput, options: CallOptions) !update_runtime_configuration.UpdateRuntimeConfigurationOutput {
         return update_runtime_configuration.execute(self, allocator, input, options);
     }
 
@@ -4406,7 +4407,7 @@ pub const Client = struct {
     ///
     /// [All APIs by
     /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
-    pub fn updateScript(self: *Self, allocator: std.mem.Allocator, input: update_script.UpdateScriptInput, options: update_script.Options) !update_script.UpdateScriptOutput {
+    pub fn updateScript(self: *Self, allocator: std.mem.Allocator, input: update_script.UpdateScriptInput, options: CallOptions) !update_script.UpdateScriptOutput {
         return update_script.execute(self, allocator, input, options);
     }
 
@@ -4422,7 +4423,7 @@ pub const Client = struct {
     ///
     /// * [Build a rule
     /// set](https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
-    pub fn validateMatchmakingRuleSet(self: *Self, allocator: std.mem.Allocator, input: validate_matchmaking_rule_set.ValidateMatchmakingRuleSetInput, options: validate_matchmaking_rule_set.Options) !validate_matchmaking_rule_set.ValidateMatchmakingRuleSetOutput {
+    pub fn validateMatchmakingRuleSet(self: *Self, allocator: std.mem.Allocator, input: validate_matchmaking_rule_set.ValidateMatchmakingRuleSetInput, options: CallOptions) !validate_matchmaking_rule_set.ValidateMatchmakingRuleSetOutput {
         return validate_matchmaking_rule_set.execute(self, allocator, input, options);
     }
 

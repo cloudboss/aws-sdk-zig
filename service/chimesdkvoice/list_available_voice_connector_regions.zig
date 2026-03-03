@@ -2,10 +2,11 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VoiceConnectorAwsRegion = @import("voice_connector_aws_region.zig").VoiceConnectorAwsRegion;
 
-const ListAvailableVoiceConnectorRegionsInput = struct {};
+pub const ListAvailableVoiceConnectorRegionsInput = struct {};
 
 pub const ListAvailableVoiceConnectorRegionsOutput = struct {
     /// The list of AWS Regions.
@@ -16,11 +17,7 @@ pub const ListAvailableVoiceConnectorRegionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAvailableVoiceConnectorRegionsInput, options: Options) !ListAvailableVoiceConnectorRegionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAvailableVoiceConnectorRegionsInput, options: CallOptions) !ListAvailableVoiceConnectorRegionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

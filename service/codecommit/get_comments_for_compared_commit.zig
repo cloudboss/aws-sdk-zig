@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CommentsForComparedCommit = @import("comments_for_compared_commit.zig").CommentsForComparedCommit;
 
@@ -51,11 +52,7 @@ pub const GetCommentsForComparedCommitOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCommentsForComparedCommitInput, options: Options) !GetCommentsForComparedCommitOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCommentsForComparedCommitInput, options: CallOptions) !GetCommentsForComparedCommitOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

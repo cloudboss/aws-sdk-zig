@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TimeRange = @import("time_range.zig").TimeRange;
 const DataSourceSyncJobStatus = @import("data_source_sync_job_status.zig").DataSourceSyncJobStatus;
@@ -59,11 +60,7 @@ pub const ListDataSourceSyncJobsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDataSourceSyncJobsInput, options: Options) !ListDataSourceSyncJobsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDataSourceSyncJobsInput, options: CallOptions) !ListDataSourceSyncJobsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

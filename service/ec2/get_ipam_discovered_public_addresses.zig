@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const IpamDiscoveredPublicAddress = @import("ipam_discovered_public_address.zig").IpamDiscoveredPublicAddress;
@@ -44,11 +45,7 @@ pub const GetIpamDiscoveredPublicAddressesOutput = struct {
     oldest_sample_time: ?i64 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetIpamDiscoveredPublicAddressesInput, options: Options) !GetIpamDiscoveredPublicAddressesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetIpamDiscoveredPublicAddressesInput, options: CallOptions) !GetIpamDiscoveredPublicAddressesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

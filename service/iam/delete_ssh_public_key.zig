@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteSSHPublicKeyInput = struct {
@@ -22,13 +23,9 @@ pub const DeleteSSHPublicKeyInput = struct {
     user_name: []const u8,
 };
 
-const DeleteSSHPublicKeyOutput = struct {};
+pub const DeleteSSHPublicKeyOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSSHPublicKeyInput, options: Options) !DeleteSSHPublicKeyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSSHPublicKeyInput, options: CallOptions) !DeleteSSHPublicKeyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

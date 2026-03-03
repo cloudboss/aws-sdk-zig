@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_centralization_rules_for_organization = @import("list_centralization_rules_for_organization.zig");
@@ -20,7 +21,7 @@ pub const ListCentralizationRulesForOrganizationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_centralization_rules_for_organization.Options) !list_centralization_rules_for_organization.ListCentralizationRulesForOrganizationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_centralization_rules_for_organization.ListCentralizationRulesForOrganizationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -61,7 +62,7 @@ pub const ListResourceTelemetryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resource_telemetry.Options) !list_resource_telemetry.ListResourceTelemetryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resource_telemetry.ListResourceTelemetryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -102,7 +103,7 @@ pub const ListResourceTelemetryForOrganizationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resource_telemetry_for_organization.Options) !list_resource_telemetry_for_organization.ListResourceTelemetryForOrganizationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resource_telemetry_for_organization.ListResourceTelemetryForOrganizationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -143,7 +144,7 @@ pub const ListS3TableIntegrationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_s3_table_integrations.Options) !list_s3_table_integrations.ListS3TableIntegrationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_s3_table_integrations.ListS3TableIntegrationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -184,7 +185,7 @@ pub const ListTelemetryPipelinesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_telemetry_pipelines.Options) !list_telemetry_pipelines.ListTelemetryPipelinesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_telemetry_pipelines.ListTelemetryPipelinesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -225,7 +226,7 @@ pub const ListTelemetryRulesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_telemetry_rules.Options) !list_telemetry_rules.ListTelemetryRulesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_telemetry_rules.ListTelemetryRulesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -266,7 +267,7 @@ pub const ListTelemetryRulesForOrganizationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_telemetry_rules_for_organization.Options) !list_telemetry_rules_for_organization.ListTelemetryRulesForOrganizationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_telemetry_rules_for_organization.ListTelemetryRulesForOrganizationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

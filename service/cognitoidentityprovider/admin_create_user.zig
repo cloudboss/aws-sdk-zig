@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DeliveryMediumType = @import("delivery_medium_type.zig").DeliveryMediumType;
 const MessageActionType = @import("message_action_type.zig").MessageActionType;
@@ -214,11 +215,7 @@ pub const AdminCreateUserOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminCreateUserInput, options: Options) !AdminCreateUserOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminCreateUserInput, options: CallOptions) !AdminCreateUserOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

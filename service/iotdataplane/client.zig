@@ -9,6 +9,7 @@ const list_named_shadows_for_thing = @import("list_named_shadows_for_thing.zig")
 const list_retained_messages = @import("list_retained_messages.zig");
 const publish_ = @import("publish.zig");
 const update_thing_shadow = @import("update_thing_shadow.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -42,7 +43,7 @@ pub const Client = struct {
     /// Disconnects a connected MQTT client from Amazon Web Services IoT Core. When
     /// you disconnect a client, Amazon Web Services IoT Core closes the client's
     /// network connection and optionally cleans the session state.
-    pub fn deleteConnection(self: *Self, allocator: std.mem.Allocator, input: delete_connection.DeleteConnectionInput, options: delete_connection.Options) !delete_connection.DeleteConnectionOutput {
+    pub fn deleteConnection(self: *Self, allocator: std.mem.Allocator, input: delete_connection.DeleteConnectionInput, options: CallOptions) !delete_connection.DeleteConnectionOutput {
         return delete_connection.execute(self, allocator, input, options);
     }
 
@@ -53,7 +54,7 @@ pub const Client = struct {
     ///
     /// For more information, see
     /// [DeleteThingShadow](http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html) in the IoT Developer Guide.
-    pub fn deleteThingShadow(self: *Self, allocator: std.mem.Allocator, input: delete_thing_shadow.DeleteThingShadowInput, options: delete_thing_shadow.Options) !delete_thing_shadow.DeleteThingShadowOutput {
+    pub fn deleteThingShadow(self: *Self, allocator: std.mem.Allocator, input: delete_thing_shadow.DeleteThingShadowInput, options: CallOptions) !delete_thing_shadow.DeleteThingShadowOutput {
         return delete_thing_shadow.execute(self, allocator, input, options);
     }
 
@@ -70,7 +71,7 @@ pub const Client = struct {
     /// For more information about messaging costs, see [Amazon Web Services IoT
     /// Core
     /// pricing - Messaging](http://aws.amazon.com/iot-core/pricing/#Messaging).
-    pub fn getRetainedMessage(self: *Self, allocator: std.mem.Allocator, input: get_retained_message.GetRetainedMessageInput, options: get_retained_message.Options) !get_retained_message.GetRetainedMessageOutput {
+    pub fn getRetainedMessage(self: *Self, allocator: std.mem.Allocator, input: get_retained_message.GetRetainedMessageInput, options: CallOptions) !get_retained_message.GetRetainedMessageOutput {
         return get_retained_message.execute(self, allocator, input, options);
     }
 
@@ -82,7 +83,7 @@ pub const Client = struct {
     /// For more information, see
     /// [GetThingShadow](http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html) in the
     /// IoT Developer Guide.
-    pub fn getThingShadow(self: *Self, allocator: std.mem.Allocator, input: get_thing_shadow.GetThingShadowInput, options: get_thing_shadow.Options) !get_thing_shadow.GetThingShadowOutput {
+    pub fn getThingShadow(self: *Self, allocator: std.mem.Allocator, input: get_thing_shadow.GetThingShadowInput, options: CallOptions) !get_thing_shadow.GetThingShadowOutput {
         return get_thing_shadow.execute(self, allocator, input, options);
     }
 
@@ -90,7 +91,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [ListNamedShadowsForThing](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn listNamedShadowsForThing(self: *Self, allocator: std.mem.Allocator, input: list_named_shadows_for_thing.ListNamedShadowsForThingInput, options: list_named_shadows_for_thing.Options) !list_named_shadows_for_thing.ListNamedShadowsForThingOutput {
+    pub fn listNamedShadowsForThing(self: *Self, allocator: std.mem.Allocator, input: list_named_shadows_for_thing.ListNamedShadowsForThingInput, options: CallOptions) !list_named_shadows_for_thing.ListNamedShadowsForThingOutput {
         return list_named_shadows_for_thing.execute(self, allocator, input, options);
     }
 
@@ -113,7 +114,7 @@ pub const Client = struct {
     /// For more information about messaging costs, see [Amazon Web Services IoT
     /// Core
     /// pricing - Messaging](http://aws.amazon.com/iot-core/pricing/#Messaging).
-    pub fn listRetainedMessages(self: *Self, allocator: std.mem.Allocator, input: list_retained_messages.ListRetainedMessagesInput, options: list_retained_messages.Options) !list_retained_messages.ListRetainedMessagesOutput {
+    pub fn listRetainedMessages(self: *Self, allocator: std.mem.Allocator, input: list_retained_messages.ListRetainedMessagesInput, options: CallOptions) !list_retained_messages.ListRetainedMessagesOutput {
         return list_retained_messages.execute(self, allocator, input, options);
     }
 
@@ -131,7 +132,7 @@ pub const Client = struct {
     /// For more information about messaging costs, see [Amazon Web Services IoT
     /// Core
     /// pricing - Messaging](http://aws.amazon.com/iot-core/pricing/#Messaging).
-    pub fn publish(self: *Self, allocator: std.mem.Allocator, input: publish_.PublishInput, options: publish_.Options) !publish_.PublishOutput {
+    pub fn publish(self: *Self, allocator: std.mem.Allocator, input: publish_.PublishInput, options: CallOptions) !publish_.PublishOutput {
         return publish_.execute(self, allocator, input, options);
     }
 
@@ -143,7 +144,7 @@ pub const Client = struct {
     /// For more information, see
     /// [UpdateThingShadow](http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html) in the
     /// IoT Developer Guide.
-    pub fn updateThingShadow(self: *Self, allocator: std.mem.Allocator, input: update_thing_shadow.UpdateThingShadowInput, options: update_thing_shadow.Options) !update_thing_shadow.UpdateThingShadowOutput {
+    pub fn updateThingShadow(self: *Self, allocator: std.mem.Allocator, input: update_thing_shadow.UpdateThingShadowInput, options: CallOptions) !update_thing_shadow.UpdateThingShadowOutput {
         return update_thing_shadow.execute(self, allocator, input, options);
     }
 

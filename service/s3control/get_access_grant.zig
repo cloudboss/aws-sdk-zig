@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccessGrantsLocationConfiguration = @import("access_grants_location_configuration.zig").AccessGrantsLocationConfiguration;
 const Grantee = @import("grantee.zig").Grantee;
@@ -66,11 +67,7 @@ pub const GetAccessGrantOutput = struct {
     permission: ?Permission = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAccessGrantInput, options: Options) !GetAccessGrantOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAccessGrantInput, options: CallOptions) !GetAccessGrantOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

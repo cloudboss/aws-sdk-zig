@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_endpoints = @import("list_endpoints.zig");
@@ -16,7 +17,7 @@ pub const ListEndpointsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_endpoints.Options) !list_endpoints.ListEndpointsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_endpoints.ListEndpointsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -57,7 +58,7 @@ pub const ListOutpostsWithS3Paginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_outposts_with_s3.Options) !list_outposts_with_s3.ListOutpostsWithS3Output {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_outposts_with_s3.ListOutpostsWithS3Output {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -98,7 +99,7 @@ pub const ListSharedEndpointsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_shared_endpoints.Options) !list_shared_endpoints.ListSharedEndpointsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_shared_endpoints.ListSharedEndpointsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

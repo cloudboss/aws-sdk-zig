@@ -40,6 +40,7 @@ const update_max_record_size = @import("update_max_record_size.zig");
 const update_shard_count = @import("update_shard_count.zig");
 const update_stream_mode = @import("update_stream_mode.zig");
 const update_stream_warm_throughput = @import("update_stream_warm_throughput.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -84,7 +85,7 @@ pub const Client = struct {
     ///
     /// AddTagsToStream has a limit of five transactions per second per
     /// account.
-    pub fn addTagsToStream(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_stream.AddTagsToStreamInput, options: add_tags_to_stream.Options) !add_tags_to_stream.AddTagsToStreamOutput {
+    pub fn addTagsToStream(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_stream.AddTagsToStreamInput, options: CallOptions) !add_tags_to_stream.AddTagsToStreamOutput {
         return add_tags_to_stream.execute(self, allocator, input, options);
     }
 
@@ -156,7 +157,7 @@ pub const Client = struct {
     /// The `kinesis:TagResource` permission won’t work to tag streams on creation.
     /// Tags will take effect from the `CREATING` status of the stream, but you
     /// can't make any updates to the tags until the stream is in `ACTIVE` state.
-    pub fn createStream(self: *Self, allocator: std.mem.Allocator, input: create_stream.CreateStreamInput, options: create_stream.Options) !create_stream.CreateStreamOutput {
+    pub fn createStream(self: *Self, allocator: std.mem.Allocator, input: create_stream.CreateStreamInput, options: CallOptions) !create_stream.CreateStreamOutput {
         return create_stream.execute(self, allocator, input, options);
     }
 
@@ -175,7 +176,7 @@ pub const Client = struct {
     /// is 48 hours and is decreased to 24 hours, any data already in the stream
     /// that is older
     /// than 24 hours is inaccessible.
-    pub fn decreaseStreamRetentionPeriod(self: *Self, allocator: std.mem.Allocator, input: decrease_stream_retention_period.DecreaseStreamRetentionPeriodInput, options: decrease_stream_retention_period.Options) !decrease_stream_retention_period.DecreaseStreamRetentionPeriodOutput {
+    pub fn decreaseStreamRetentionPeriod(self: *Self, allocator: std.mem.Allocator, input: decrease_stream_retention_period.DecreaseStreamRetentionPeriodInput, options: CallOptions) !decrease_stream_retention_period.DecreaseStreamRetentionPeriodOutput {
         return decrease_stream_retention_period.execute(self, allocator, input, options);
     }
 
@@ -186,7 +187,7 @@ pub const Client = struct {
     ///
     /// * Consumer pattern:
     ///   `^(arn):aws.*:kinesis:.*:\d{12}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+`
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -221,7 +222,7 @@ pub const Client = struct {
     ///
     /// DeleteStream has a limit of five transactions per second per
     /// account.
-    pub fn deleteStream(self: *Self, allocator: std.mem.Allocator, input: delete_stream.DeleteStreamInput, options: delete_stream.Options) !delete_stream.DeleteStreamOutput {
+    pub fn deleteStream(self: *Self, allocator: std.mem.Allocator, input: delete_stream.DeleteStreamInput, options: CallOptions) !delete_stream.DeleteStreamOutput {
         return delete_stream.execute(self, allocator, input, options);
     }
 
@@ -239,7 +240,7 @@ pub const Client = struct {
     /// description of a consumer contains its name and ARN.
     ///
     /// This operation has a limit of five transactions per second per stream.
-    pub fn deregisterStreamConsumer(self: *Self, allocator: std.mem.Allocator, input: deregister_stream_consumer.DeregisterStreamConsumerInput, options: deregister_stream_consumer.Options) !deregister_stream_consumer.DeregisterStreamConsumerOutput {
+    pub fn deregisterStreamConsumer(self: *Self, allocator: std.mem.Allocator, input: deregister_stream_consumer.DeregisterStreamConsumerInput, options: CallOptions) !deregister_stream_consumer.DeregisterStreamConsumerOutput {
         return deregister_stream_consumer.execute(self, allocator, input, options);
     }
 
@@ -249,7 +250,7 @@ pub const Client = struct {
     ///
     /// This API has a call limit of 5 transactions per second (TPS) for each Amazon
     /// Web Services account. TPS over 5 will initiate the `LimitExceededException`.
-    pub fn describeAccountSettings(self: *Self, allocator: std.mem.Allocator, input: describe_account_settings.DescribeAccountSettingsInput, options: describe_account_settings.Options) !describe_account_settings.DescribeAccountSettingsOutput {
+    pub fn describeAccountSettings(self: *Self, allocator: std.mem.Allocator, input: describe_account_settings.DescribeAccountSettingsInput, options: CallOptions) !describe_account_settings.DescribeAccountSettingsOutput {
         return describe_account_settings.execute(self, allocator, input, options);
     }
 
@@ -260,7 +261,7 @@ pub const Client = struct {
     /// minutes.
     ///
     /// This operation has a limit of one transaction per second per account.
-    pub fn describeLimits(self: *Self, allocator: std.mem.Allocator, input: describe_limits.DescribeLimitsInput, options: describe_limits.Options) !describe_limits.DescribeLimitsOutput {
+    pub fn describeLimits(self: *Self, allocator: std.mem.Allocator, input: describe_limits.DescribeLimitsInput, options: CallOptions) !describe_limits.DescribeLimitsOutput {
         return describe_limits.execute(self, allocator, input, options);
     }
 
@@ -301,7 +302,7 @@ pub const Client = struct {
     /// the oldest shard.
     ///
     /// This operation has a limit of 10 transactions per second per account.
-    pub fn describeStream(self: *Self, allocator: std.mem.Allocator, input: describe_stream.DescribeStreamInput, options: describe_stream.Options) !describe_stream.DescribeStreamOutput {
+    pub fn describeStream(self: *Self, allocator: std.mem.Allocator, input: describe_stream.DescribeStreamInput, options: CallOptions) !describe_stream.DescribeStreamOutput {
         return describe_stream.execute(self, allocator, input, options);
     }
 
@@ -322,7 +323,7 @@ pub const Client = struct {
     ///
     /// When making a cross-account call with `DescribeStreamConsumer`, make sure to
     /// provide the ARN of the consumer.
-    pub fn describeStreamConsumer(self: *Self, allocator: std.mem.Allocator, input: describe_stream_consumer.DescribeStreamConsumerInput, options: describe_stream_consumer.Options) !describe_stream_consumer.DescribeStreamConsumerOutput {
+    pub fn describeStreamConsumer(self: *Self, allocator: std.mem.Allocator, input: describe_stream_consumer.DescribeStreamConsumerInput, options: CallOptions) !describe_stream_consumer.DescribeStreamConsumerOutput {
         return describe_stream_consumer.execute(self, allocator, input, options);
     }
 
@@ -342,7 +343,7 @@ pub const Client = struct {
     ///
     /// DescribeStreamSummary has a limit of 20 transactions per second per
     /// account.
-    pub fn describeStreamSummary(self: *Self, allocator: std.mem.Allocator, input: describe_stream_summary.DescribeStreamSummaryInput, options: describe_stream_summary.Options) !describe_stream_summary.DescribeStreamSummaryOutput {
+    pub fn describeStreamSummary(self: *Self, allocator: std.mem.Allocator, input: describe_stream_summary.DescribeStreamSummaryInput, options: CallOptions) !describe_stream_summary.DescribeStreamSummaryOutput {
         return describe_stream_summary.execute(self, allocator, input, options);
     }
 
@@ -351,7 +352,7 @@ pub const Client = struct {
     /// When invoking this API, you must use either the `StreamARN` or the
     /// `StreamName` parameter, or both. It is recommended that you use the
     /// `StreamARN` input parameter when you invoke this API.
-    pub fn disableEnhancedMonitoring(self: *Self, allocator: std.mem.Allocator, input: disable_enhanced_monitoring.DisableEnhancedMonitoringInput, options: disable_enhanced_monitoring.Options) !disable_enhanced_monitoring.DisableEnhancedMonitoringOutput {
+    pub fn disableEnhancedMonitoring(self: *Self, allocator: std.mem.Allocator, input: disable_enhanced_monitoring.DisableEnhancedMonitoringInput, options: CallOptions) !disable_enhanced_monitoring.DisableEnhancedMonitoringOutput {
         return disable_enhanced_monitoring.execute(self, allocator, input, options);
     }
 
@@ -360,7 +361,7 @@ pub const Client = struct {
     /// When invoking this API, you must use either the `StreamARN` or the
     /// `StreamName` parameter, or both. It is recommended that you use the
     /// `StreamARN` input parameter when you invoke this API.
-    pub fn enableEnhancedMonitoring(self: *Self, allocator: std.mem.Allocator, input: enable_enhanced_monitoring.EnableEnhancedMonitoringInput, options: enable_enhanced_monitoring.Options) !enable_enhanced_monitoring.EnableEnhancedMonitoringOutput {
+    pub fn enableEnhancedMonitoring(self: *Self, allocator: std.mem.Allocator, input: enable_enhanced_monitoring.EnableEnhancedMonitoringInput, options: CallOptions) !enable_enhanced_monitoring.EnableEnhancedMonitoringOutput {
         return enable_enhanced_monitoring.execute(self, allocator, input, options);
     }
 
@@ -447,7 +448,7 @@ pub const Client = struct {
     /// shard or across a stream might have time stamps that are out of order.
     ///
     /// This operation has a limit of five transactions per second per shard.
-    pub fn getRecords(self: *Self, allocator: std.mem.Allocator, input: get_records.GetRecordsInput, options: get_records.Options) !get_records.GetRecordsOutput {
+    pub fn getRecords(self: *Self, allocator: std.mem.Allocator, input: get_records.GetRecordsInput, options: CallOptions) !get_records.GetRecordsOutput {
         return get_records.execute(self, allocator, input, options);
     }
 
@@ -458,7 +459,7 @@ pub const Client = struct {
     ///
     /// * Consumer pattern:
     ///   `^(arn):aws.*:kinesis:.*:\d{12}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+`
-    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
         return get_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -516,7 +517,7 @@ pub const Client = struct {
     ///
     /// GetShardIterator has a limit of five transactions per second per
     /// account per open shard.
-    pub fn getShardIterator(self: *Self, allocator: std.mem.Allocator, input: get_shard_iterator.GetShardIteratorInput, options: get_shard_iterator.Options) !get_shard_iterator.GetShardIteratorOutput {
+    pub fn getShardIterator(self: *Self, allocator: std.mem.Allocator, input: get_shard_iterator.GetShardIteratorInput, options: CallOptions) !get_shard_iterator.GetShardIteratorOutput {
         return get_shard_iterator.execute(self, allocator, input, options);
     }
 
@@ -541,7 +542,7 @@ pub const Client = struct {
     /// period is set to 24 hours and is increased to 168 hours, any data that is
     /// older than 24
     /// hours remains inaccessible to consumer applications.
-    pub fn increaseStreamRetentionPeriod(self: *Self, allocator: std.mem.Allocator, input: increase_stream_retention_period.IncreaseStreamRetentionPeriodInput, options: increase_stream_retention_period.Options) !increase_stream_retention_period.IncreaseStreamRetentionPeriodOutput {
+    pub fn increaseStreamRetentionPeriod(self: *Self, allocator: std.mem.Allocator, input: increase_stream_retention_period.IncreaseStreamRetentionPeriodInput, options: CallOptions) !increase_stream_retention_period.IncreaseStreamRetentionPeriodOutput {
         return increase_stream_retention_period.execute(self, allocator, input, options);
     }
 
@@ -566,7 +567,7 @@ pub const Client = struct {
     /// information, see
     /// [Controlling Access to Amazon Kinesis Data Streams Resources Using
     /// IAM](https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html).
-    pub fn listShards(self: *Self, allocator: std.mem.Allocator, input: list_shards.ListShardsInput, options: list_shards.Options) !list_shards.ListShardsOutput {
+    pub fn listShards(self: *Self, allocator: std.mem.Allocator, input: list_shards.ListShardsInput, options: CallOptions) !list_shards.ListShardsOutput {
         return list_shards.execute(self, allocator, input, options);
     }
 
@@ -575,7 +576,7 @@ pub const Client = struct {
     /// and provides information about each consumer.
     ///
     /// This operation has a limit of 5 transactions per second per stream.
-    pub fn listStreamConsumers(self: *Self, allocator: std.mem.Allocator, input: list_stream_consumers.ListStreamConsumersInput, options: list_stream_consumers.Options) !list_stream_consumers.ListStreamConsumersOutput {
+    pub fn listStreamConsumers(self: *Self, allocator: std.mem.Allocator, input: list_stream_consumers.ListStreamConsumersInput, options: CallOptions) !list_stream_consumers.ListStreamConsumersOutput {
         return list_stream_consumers.execute(self, allocator, input, options);
     }
 
@@ -600,7 +601,7 @@ pub const Client = struct {
     ///
     /// ListStreams has a limit of five transactions per second per
     /// account.
-    pub fn listStreams(self: *Self, allocator: std.mem.Allocator, input: list_streams.ListStreamsInput, options: list_streams.Options) !list_streams.ListStreamsOutput {
+    pub fn listStreams(self: *Self, allocator: std.mem.Allocator, input: list_streams.ListStreamsInput, options: CallOptions) !list_streams.ListStreamsOutput {
         return list_streams.execute(self, allocator, input, options);
     }
 
@@ -611,7 +612,7 @@ pub const Client = struct {
     /// For more information about tagging Kinesis resources, see [Tag your Amazon
     /// Kinesis Data Streams
     /// resources](https://docs.aws.amazon.com/streams/latest/dev/tagging.html).
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -622,7 +623,7 @@ pub const Client = struct {
     /// When invoking this API, you must use either the `StreamARN` or the
     /// `StreamName` parameter, or both. It is recommended that you use the
     /// `StreamARN` input parameter when you invoke this API.
-    pub fn listTagsForStream(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_stream.ListTagsForStreamInput, options: list_tags_for_stream.Options) !list_tags_for_stream.ListTagsForStreamOutput {
+    pub fn listTagsForStream(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_stream.ListTagsForStreamInput, options: CallOptions) !list_tags_for_stream.ListTagsForStreamOutput {
         return list_tags_for_stream.execute(self, allocator, input, options);
     }
 
@@ -682,7 +683,7 @@ pub const Client = struct {
     /// or SplitShard, you receive a `LimitExceededException`.
     ///
     /// `MergeShards` has a limit of five transactions per second per account.
-    pub fn mergeShards(self: *Self, allocator: std.mem.Allocator, input: merge_shards.MergeShardsInput, options: merge_shards.Options) !merge_shards.MergeShardsOutput {
+    pub fn mergeShards(self: *Self, allocator: std.mem.Allocator, input: merge_shards.MergeShardsInput, options: CallOptions) !merge_shards.MergeShardsOutput {
         return merge_shards.execute(self, allocator, input, options);
     }
 
@@ -749,7 +750,7 @@ pub const Client = struct {
     /// are added
     /// to a stream. You can use IncreaseStreamRetentionPeriod or
     /// DecreaseStreamRetentionPeriod to modify this retention period.
-    pub fn putRecord(self: *Self, allocator: std.mem.Allocator, input: put_record.PutRecordInput, options: put_record.Options) !put_record.PutRecordOutput {
+    pub fn putRecord(self: *Self, allocator: std.mem.Allocator, input: put_record.PutRecordInput, options: CallOptions) !put_record.PutRecordOutput {
         return put_record.execute(self, allocator, input, options);
     }
 
@@ -846,7 +847,7 @@ pub const Client = struct {
     /// are added
     /// to a stream. You can use IncreaseStreamRetentionPeriod or
     /// DecreaseStreamRetentionPeriod to modify this retention period.
-    pub fn putRecords(self: *Self, allocator: std.mem.Allocator, input: put_records.PutRecordsInput, options: put_records.Options) !put_records.PutRecordsOutput {
+    pub fn putRecords(self: *Self, allocator: std.mem.Allocator, input: put_records.PutRecordsInput, options: CallOptions) !put_records.PutRecordsOutput {
         return put_records.execute(self, allocator, input, options);
     }
 
@@ -871,7 +872,7 @@ pub const Client = struct {
     /// For more information, see [Controlling Access to Amazon Kinesis Data Streams
     /// Resources Using
     /// IAM](https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html).
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -908,7 +909,7 @@ pub const Client = struct {
     /// more than 5 consumers in a `CREATING` status at the same time. Registering a
     /// 6th consumer while there are 5 in a `CREATING` status results in a
     /// `LimitExceededException`.
-    pub fn registerStreamConsumer(self: *Self, allocator: std.mem.Allocator, input: register_stream_consumer.RegisterStreamConsumerInput, options: register_stream_consumer.Options) !register_stream_consumer.RegisterStreamConsumerOutput {
+    pub fn registerStreamConsumer(self: *Self, allocator: std.mem.Allocator, input: register_stream_consumer.RegisterStreamConsumerInput, options: CallOptions) !register_stream_consumer.RegisterStreamConsumerOutput {
         return register_stream_consumer.execute(self, allocator, input, options);
     }
 
@@ -924,7 +925,7 @@ pub const Client = struct {
     ///
     /// RemoveTagsFromStream has a limit of five transactions per second per
     /// account.
-    pub fn removeTagsFromStream(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_stream.RemoveTagsFromStreamInput, options: remove_tags_from_stream.Options) !remove_tags_from_stream.RemoveTagsFromStreamOutput {
+    pub fn removeTagsFromStream(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_stream.RemoveTagsFromStreamInput, options: CallOptions) !remove_tags_from_stream.RemoveTagsFromStreamOutput {
         return remove_tags_from_stream.execute(self, allocator, input, options);
     }
 
@@ -990,7 +991,7 @@ pub const Client = struct {
     /// `LimitExceededException`.
     ///
     /// `SplitShard` has a limit of five transactions per second per account.
-    pub fn splitShard(self: *Self, allocator: std.mem.Allocator, input: split_shard.SplitShardInput, options: split_shard.Options) !split_shard.SplitShardOutput {
+    pub fn splitShard(self: *Self, allocator: std.mem.Allocator, input: split_shard.SplitShardInput, options: CallOptions) !split_shard.SplitShardOutput {
         return split_shard.execute(self, allocator, input, options);
     }
 
@@ -1021,7 +1022,7 @@ pub const Client = struct {
     /// encryption, you
     /// can verify that encryption is applied by inspecting the API response from
     /// `PutRecord` or `PutRecords`.
-    pub fn startStreamEncryption(self: *Self, allocator: std.mem.Allocator, input: start_stream_encryption.StartStreamEncryptionInput, options: start_stream_encryption.Options) !start_stream_encryption.StartStreamEncryptionOutput {
+    pub fn startStreamEncryption(self: *Self, allocator: std.mem.Allocator, input: start_stream_encryption.StartStreamEncryptionInput, options: CallOptions) !start_stream_encryption.StartStreamEncryptionOutput {
         return start_stream_encryption.execute(self, allocator, input, options);
     }
 
@@ -1052,7 +1053,7 @@ pub const Client = struct {
     /// disabled encryption, you can verify that encryption is not applied by
     /// inspecting the API
     /// response from `PutRecord` or `PutRecords`.
-    pub fn stopStreamEncryption(self: *Self, allocator: std.mem.Allocator, input: stop_stream_encryption.StopStreamEncryptionInput, options: stop_stream_encryption.Options) !stop_stream_encryption.StopStreamEncryptionOutput {
+    pub fn stopStreamEncryption(self: *Self, allocator: std.mem.Allocator, input: stop_stream_encryption.StopStreamEncryptionInput, options: CallOptions) !stop_stream_encryption.StopStreamEncryptionOutput {
         return stop_stream_encryption.execute(self, allocator, input, options);
     }
 
@@ -1089,7 +1090,7 @@ pub const Client = struct {
     /// For an example of how to use this operation, see [Enhanced Fan-Out
     /// Using the Kinesis Data Streams
     /// API](https://docs.aws.amazon.com/streams/latest/dev/building-enhanced-consumers-api.html).
-    pub fn subscribeToShard(self: *Self, allocator: std.mem.Allocator, input: subscribe_to_shard.SubscribeToShardInput, options: subscribe_to_shard.Options) !subscribe_to_shard.SubscribeToShardOutput {
+    pub fn subscribeToShard(self: *Self, allocator: std.mem.Allocator, input: subscribe_to_shard.SubscribeToShardInput, options: CallOptions) !subscribe_to_shard.SubscribeToShardOutput {
         return subscribe_to_shard.execute(self, allocator, input, options);
     }
 
@@ -1097,13 +1098,13 @@ pub const Client = struct {
     /// consisting of a user-defined key and value. Tags can help you manage,
     /// identify, organize, search for, and filter resources. You can assign up to
     /// 50 tags to a Kinesis resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from the specified Kinesis resource. Removed tags are deleted
     /// and can't be recovered after this operation completes successfully.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -1122,14 +1123,14 @@ pub const Client = struct {
     /// * This API has a call limit of 5 transactions per second (TPS) for each
     ///   Amazon Web Services account. TPS over 5 will initiate the
     ///   `LimitExceededException`.
-    pub fn updateAccountSettings(self: *Self, allocator: std.mem.Allocator, input: update_account_settings.UpdateAccountSettingsInput, options: update_account_settings.Options) !update_account_settings.UpdateAccountSettingsOutput {
+    pub fn updateAccountSettings(self: *Self, allocator: std.mem.Allocator, input: update_account_settings.UpdateAccountSettingsInput, options: CallOptions) !update_account_settings.UpdateAccountSettingsOutput {
         return update_account_settings.execute(self, allocator, input, options);
     }
 
     /// This allows you to update the `MaxRecordSize` of a single record that you
     /// can write to, and read from a stream. You can ingest and digest single
     /// records up to 10240 KiB.
-    pub fn updateMaxRecordSize(self: *Self, allocator: std.mem.Allocator, input: update_max_record_size.UpdateMaxRecordSizeInput, options: update_max_record_size.Options) !update_max_record_size.UpdateMaxRecordSizeOutput {
+    pub fn updateMaxRecordSize(self: *Self, allocator: std.mem.Allocator, input: update_max_record_size.UpdateMaxRecordSizeInput, options: CallOptions) !update_max_record_size.UpdateMaxRecordSizeOutput {
         return update_max_record_size.execute(self, allocator, input, options);
     }
 
@@ -1193,7 +1194,7 @@ pub const Client = struct {
     /// Guide*. To request an increase in the call rate limit, the shard limit for
     /// this API, or your overall shard limit, use the [limits
     /// form](https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase&limitType=service-code-kinesis).
-    pub fn updateShardCount(self: *Self, allocator: std.mem.Allocator, input: update_shard_count.UpdateShardCountInput, options: update_shard_count.Options) !update_shard_count.UpdateShardCountOutput {
+    pub fn updateShardCount(self: *Self, allocator: std.mem.Allocator, input: update_shard_count.UpdateShardCountInput, options: CallOptions) !update_shard_count.UpdateShardCountOutput {
         return update_shard_count.execute(self, allocator, input, options);
     }
 
@@ -1208,7 +1209,7 @@ pub const Client = struct {
     /// Once your account has `MinimumThroughputBillingCommitment` enabled, you can
     /// specify the warm throughput in MiB per second that your stream can support
     /// in writes.
-    pub fn updateStreamMode(self: *Self, allocator: std.mem.Allocator, input: update_stream_mode.UpdateStreamModeInput, options: update_stream_mode.Options) !update_stream_mode.UpdateStreamModeOutput {
+    pub fn updateStreamMode(self: *Self, allocator: std.mem.Allocator, input: update_stream_mode.UpdateStreamModeInput, options: CallOptions) !update_stream_mode.UpdateStreamModeOutput {
         return update_stream_mode.execute(self, allocator, input, options);
     }
 
@@ -1248,7 +1249,7 @@ pub const Client = struct {
     /// Guide*. To request an increase in the call rate limit, the shard limit for
     /// this API, or your overall shard limit, use the [limits
     /// form](https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase&limitType=service-code-kinesis).
-    pub fn updateStreamWarmThroughput(self: *Self, allocator: std.mem.Allocator, input: update_stream_warm_throughput.UpdateStreamWarmThroughputInput, options: update_stream_warm_throughput.Options) !update_stream_warm_throughput.UpdateStreamWarmThroughputOutput {
+    pub fn updateStreamWarmThroughput(self: *Self, allocator: std.mem.Allocator, input: update_stream_warm_throughput.UpdateStreamWarmThroughputInput, options: CallOptions) !update_stream_warm_throughput.UpdateStreamWarmThroughputOutput {
         return update_stream_warm_throughput.execute(self, allocator, input, options);
     }
 

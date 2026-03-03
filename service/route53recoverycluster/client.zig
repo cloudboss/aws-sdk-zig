@@ -5,6 +5,7 @@ const get_routing_control_state = @import("get_routing_control_state.zig");
 const list_routing_controls = @import("list_routing_controls.zig");
 const update_routing_control_state = @import("update_routing_control_state.zig");
 const update_routing_control_states = @import("update_routing_control_states.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -71,7 +72,7 @@ pub const Client = struct {
     /// * [Working with
     /// routing controls in Route 53
     /// ARC](https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html)
-    pub fn getRoutingControlState(self: *Self, allocator: std.mem.Allocator, input: get_routing_control_state.GetRoutingControlStateInput, options: get_routing_control_state.Options) !get_routing_control_state.GetRoutingControlStateOutput {
+    pub fn getRoutingControlState(self: *Self, allocator: std.mem.Allocator, input: get_routing_control_state.GetRoutingControlStateInput, options: CallOptions) !get_routing_control_state.GetRoutingControlStateOutput {
         return get_routing_control_state.execute(self, allocator, input, options);
     }
 
@@ -112,7 +113,7 @@ pub const Client = struct {
     /// * [Working with
     /// routing controls in Route 53
     /// ARC](https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html)
-    pub fn listRoutingControls(self: *Self, allocator: std.mem.Allocator, input: list_routing_controls.ListRoutingControlsInput, options: list_routing_controls.Options) !list_routing_controls.ListRoutingControlsOutput {
+    pub fn listRoutingControls(self: *Self, allocator: std.mem.Allocator, input: list_routing_controls.ListRoutingControlsInput, options: CallOptions) !list_routing_controls.ListRoutingControlsOutput {
         return list_routing_controls.execute(self, allocator, input, options);
     }
 
@@ -159,7 +160,7 @@ pub const Client = struct {
     ///
     /// * [Working with routing controls
     ///   overall](https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html)
-    pub fn updateRoutingControlState(self: *Self, allocator: std.mem.Allocator, input: update_routing_control_state.UpdateRoutingControlStateInput, options: update_routing_control_state.Options) !update_routing_control_state.UpdateRoutingControlStateOutput {
+    pub fn updateRoutingControlState(self: *Self, allocator: std.mem.Allocator, input: update_routing_control_state.UpdateRoutingControlStateInput, options: CallOptions) !update_routing_control_state.UpdateRoutingControlStateOutput {
         return update_routing_control_state.execute(self, allocator, input, options);
     }
 
@@ -206,7 +207,7 @@ pub const Client = struct {
     ///
     /// * [Working with routing controls
     ///   overall](https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html)
-    pub fn updateRoutingControlStates(self: *Self, allocator: std.mem.Allocator, input: update_routing_control_states.UpdateRoutingControlStatesInput, options: update_routing_control_states.Options) !update_routing_control_states.UpdateRoutingControlStatesOutput {
+    pub fn updateRoutingControlStates(self: *Self, allocator: std.mem.Allocator, input: update_routing_control_states.UpdateRoutingControlStatesInput, options: CallOptions) !update_routing_control_states.UpdateRoutingControlStatesOutput {
         return update_routing_control_states.execute(self, allocator, input, options);
     }
 

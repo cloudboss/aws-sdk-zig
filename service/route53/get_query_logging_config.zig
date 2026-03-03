@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const QueryLoggingConfig = @import("query_logging_config.zig").QueryLoggingConfig;
 const serde = @import("serde.zig");
@@ -21,11 +22,7 @@ pub const GetQueryLoggingConfigOutput = struct {
     query_logging_config: ?QueryLoggingConfig = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetQueryLoggingConfigInput, options: Options) !GetQueryLoggingConfigOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetQueryLoggingConfigInput, options: CallOptions) !GetQueryLoggingConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

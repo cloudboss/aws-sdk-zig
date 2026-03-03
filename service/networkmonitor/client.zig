@@ -13,6 +13,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_monitor = @import("update_monitor.zig");
 const update_probe = @import("update_probe.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -69,7 +70,7 @@ pub const Client = struct {
     ///
     /// * (Optional) `tags` —Key-value pairs created and assigned to the
     /// probe.
-    pub fn createMonitor(self: *Self, allocator: std.mem.Allocator, input: create_monitor.CreateMonitorInput, options: create_monitor.Options) !create_monitor.CreateMonitorOutput {
+    pub fn createMonitor(self: *Self, allocator: std.mem.Allocator, input: create_monitor.CreateMonitorInput, options: CallOptions) !create_monitor.CreateMonitorOutput {
         return create_monitor.execute(self, allocator, input, options);
     }
 
@@ -80,7 +81,7 @@ pub const Client = struct {
     /// `monitorName` parameter. Run `ListMonitors` to get a list of
     /// monitor names. Note the name of the `monitorName` you want to create the
     /// probe for.
-    pub fn createProbe(self: *Self, allocator: std.mem.Allocator, input: create_probe.CreateProbeInput, options: create_probe.Options) !create_probe.CreateProbeOutput {
+    pub fn createProbe(self: *Self, allocator: std.mem.Allocator, input: create_probe.CreateProbeInput, options: CallOptions) !create_probe.CreateProbeOutput {
         return create_probe.execute(self, allocator, input, options);
     }
 
@@ -88,7 +89,7 @@ pub const Client = struct {
     ///
     /// This action requires the `monitorName` parameter. Run
     /// `ListMonitors` to get a list of monitor names.
-    pub fn deleteMonitor(self: *Self, allocator: std.mem.Allocator, input: delete_monitor.DeleteMonitorInput, options: delete_monitor.Options) !delete_monitor.DeleteMonitorOutput {
+    pub fn deleteMonitor(self: *Self, allocator: std.mem.Allocator, input: delete_monitor.DeleteMonitorInput, options: CallOptions) !delete_monitor.DeleteMonitorOutput {
         return delete_monitor.execute(self, allocator, input, options);
     }
 
@@ -100,7 +101,7 @@ pub const Client = struct {
     /// parameters. Run `ListMonitors` to get a list of monitor names. Run
     /// `GetMonitor` to get a list of probes and probe IDs. You can only delete a
     /// single probe at a time using this action.
-    pub fn deleteProbe(self: *Self, allocator: std.mem.Allocator, input: delete_probe.DeleteProbeInput, options: delete_probe.Options) !delete_probe.DeleteProbeOutput {
+    pub fn deleteProbe(self: *Self, allocator: std.mem.Allocator, input: delete_probe.DeleteProbeInput, options: CallOptions) !delete_probe.DeleteProbeOutput {
         return delete_probe.execute(self, allocator, input, options);
     }
 
@@ -108,7 +109,7 @@ pub const Client = struct {
     ///
     /// This action requires the `monitorName` parameter. Run
     /// `ListMonitors` to get a list of monitor names.
-    pub fn getMonitor(self: *Self, allocator: std.mem.Allocator, input: get_monitor.GetMonitorInput, options: get_monitor.Options) !get_monitor.GetMonitorOutput {
+    pub fn getMonitor(self: *Self, allocator: std.mem.Allocator, input: get_monitor.GetMonitorInput, options: CallOptions) !get_monitor.GetMonitorOutput {
         return get_monitor.execute(self, allocator, input, options);
     }
 
@@ -116,27 +117,27 @@ pub const Client = struct {
     /// `monitorName` and `probeId` parameters. Run
     /// `ListMonitors` to get a list of monitor names. Run
     /// `GetMonitor` to get a list of probes and probe IDs.
-    pub fn getProbe(self: *Self, allocator: std.mem.Allocator, input: get_probe.GetProbeInput, options: get_probe.Options) !get_probe.GetProbeOutput {
+    pub fn getProbe(self: *Self, allocator: std.mem.Allocator, input: get_probe.GetProbeInput, options: CallOptions) !get_probe.GetProbeOutput {
         return get_probe.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all of your monitors.
-    pub fn listMonitors(self: *Self, allocator: std.mem.Allocator, input: list_monitors.ListMonitorsInput, options: list_monitors.Options) !list_monitors.ListMonitorsOutput {
+    pub fn listMonitors(self: *Self, allocator: std.mem.Allocator, input: list_monitors.ListMonitorsInput, options: CallOptions) !list_monitors.ListMonitorsOutput {
         return list_monitors.execute(self, allocator, input, options);
     }
 
     /// Lists the tags assigned to this resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Adds key-value pairs to a monitor or probe.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a key-value pair from a monitor or probe.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -144,7 +145,7 @@ pub const Client = struct {
     /// `aggregationPeriod` of either `30` or `60` seconds.
     /// This action requires the `monitorName` and `probeId` parameter.
     /// Run `ListMonitors` to get a list of monitor names.
-    pub fn updateMonitor(self: *Self, allocator: std.mem.Allocator, input: update_monitor.UpdateMonitorInput, options: update_monitor.Options) !update_monitor.UpdateMonitorOutput {
+    pub fn updateMonitor(self: *Self, allocator: std.mem.Allocator, input: update_monitor.UpdateMonitorInput, options: CallOptions) !update_monitor.UpdateMonitorOutput {
         return update_monitor.execute(self, allocator, input, options);
     }
 
@@ -172,7 +173,7 @@ pub const Client = struct {
     ///
     /// * (Optional) `tags` —Key-value pairs created and assigned to the
     /// probe.
-    pub fn updateProbe(self: *Self, allocator: std.mem.Allocator, input: update_probe.UpdateProbeInput, options: update_probe.Options) !update_probe.UpdateProbeOutput {
+    pub fn updateProbe(self: *Self, allocator: std.mem.Allocator, input: update_probe.UpdateProbeInput, options: CallOptions) !update_probe.UpdateProbeOutput {
         return update_probe.execute(self, allocator, input, options);
     }
 

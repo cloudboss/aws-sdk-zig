@@ -1,12 +1,20 @@
 pub const Client = @import("client.zig").Client;
+pub const CallOptions = @import("call_options.zig").CallOptions;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const types = @import("types.zig");
 
-pub const autocomplete = @import("autocomplete.zig");
-pub const geocode = @import("geocode.zig");
-pub const get_place = @import("get_place.zig");
-pub const reverse_geocode = @import("reverse_geocode.zig");
-pub const search_nearby = @import("search_nearby.zig");
-pub const search_text = @import("search_text.zig");
-pub const suggest = @import("suggest.zig");
+pub const AutocompleteInput = @import("autocomplete.zig").AutocompleteInput;
+pub const AutocompleteOutput = @import("autocomplete.zig").AutocompleteOutput;
+pub const GeocodeInput = @import("geocode.zig").GeocodeInput;
+pub const GeocodeOutput = @import("geocode.zig").GeocodeOutput;
+pub const GetPlaceInput = @import("get_place.zig").GetPlaceInput;
+pub const GetPlaceOutput = @import("get_place.zig").GetPlaceOutput;
+pub const ReverseGeocodeInput = @import("reverse_geocode.zig").ReverseGeocodeInput;
+pub const ReverseGeocodeOutput = @import("reverse_geocode.zig").ReverseGeocodeOutput;
+pub const SearchNearbyInput = @import("search_nearby.zig").SearchNearbyInput;
+pub const SearchNearbyOutput = @import("search_nearby.zig").SearchNearbyOutput;
+pub const SearchTextInput = @import("search_text.zig").SearchTextInput;
+pub const SearchTextOutput = @import("search_text.zig").SearchTextOutput;
+pub const SuggestInput = @import("suggest.zig").SuggestInput;
+pub const SuggestOutput = @import("suggest.zig").SuggestOutput;

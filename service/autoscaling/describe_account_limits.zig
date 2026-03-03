@@ -2,9 +2,10 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
-const DescribeAccountLimitsInput = struct {};
+pub const DescribeAccountLimitsInput = struct {};
 
 pub const DescribeAccountLimitsOutput = struct {
     /// The maximum number of groups allowed for your account. The default is 200
@@ -24,11 +25,7 @@ pub const DescribeAccountLimitsOutput = struct {
     number_of_launch_configurations: ?i32 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeAccountLimitsInput, options: Options) !DescribeAccountLimitsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeAccountLimitsInput, options: CallOptions) !DescribeAccountLimitsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

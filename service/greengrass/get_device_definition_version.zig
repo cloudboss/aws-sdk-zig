@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DeviceDefinitionVersion = @import("device_definition_version.zig").DeviceDefinitionVersion;
 
@@ -59,11 +60,7 @@ pub const GetDeviceDefinitionVersionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDeviceDefinitionVersionInput, options: Options) !GetDeviceDefinitionVersionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDeviceDefinitionVersionInput, options: CallOptions) !GetDeviceDefinitionVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

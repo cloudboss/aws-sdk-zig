@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_billing_views = @import("list_billing_views.zig");
@@ -15,7 +16,7 @@ pub const ListBillingViewsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_billing_views.Options) !list_billing_views.ListBillingViewsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_billing_views.ListBillingViewsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const ListSourceViewsForBillingViewPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_source_views_for_billing_view.Options) !list_source_views_for_billing_view.ListSourceViewsForBillingViewOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_source_views_for_billing_view.ListSourceViewsForBillingViewOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

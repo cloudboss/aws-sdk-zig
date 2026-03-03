@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ComplianceStringFilter = @import("compliance_string_filter.zig").ComplianceStringFilter;
 const ComplianceItem = @import("compliance_item.zig").ComplianceItem;
@@ -54,11 +55,7 @@ pub const ListComplianceItemsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListComplianceItemsInput, options: Options) !ListComplianceItemsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListComplianceItemsInput, options: CallOptions) !ListComplianceItemsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -30,6 +30,7 @@ const remove_tags = @import("remove_tags.zig");
 const set_load_balancer_listener_ssl_certificate = @import("set_load_balancer_listener_ssl_certificate.zig");
 const set_load_balancer_policies_for_backend_server = @import("set_load_balancer_policies_for_backend_server.zig");
 const set_load_balancer_policies_of_listener = @import("set_load_balancer_policies_of_listener.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -71,7 +72,7 @@ pub const Client = struct {
     /// For more information, see [Tag Your Classic Load
     /// Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html)
     /// in the *Classic Load Balancers Guide*.
-    pub fn addTags(self: *Self, allocator: std.mem.Allocator, input: add_tags.AddTagsInput, options: add_tags.Options) !add_tags.AddTagsOutput {
+    pub fn addTags(self: *Self, allocator: std.mem.Allocator, input: add_tags.AddTagsInput, options: CallOptions) !add_tags.AddTagsOutput {
         return add_tags.execute(self, allocator, input, options);
     }
 
@@ -82,7 +83,7 @@ pub const Client = struct {
     /// For more information, see [Security Groups for Load Balancers in a
     /// VPC](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-security-groups)
     /// in the *Classic Load Balancers Guide*.
-    pub fn applySecurityGroupsToLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: apply_security_groups_to_load_balancer.ApplySecurityGroupsToLoadBalancerInput, options: apply_security_groups_to_load_balancer.Options) !apply_security_groups_to_load_balancer.ApplySecurityGroupsToLoadBalancerOutput {
+    pub fn applySecurityGroupsToLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: apply_security_groups_to_load_balancer.ApplySecurityGroupsToLoadBalancerInput, options: CallOptions) !apply_security_groups_to_load_balancer.ApplySecurityGroupsToLoadBalancerOutput {
         return apply_security_groups_to_load_balancer.execute(self, allocator, input, options);
     }
 
@@ -93,7 +94,7 @@ pub const Client = struct {
     /// For more information, see [Add or Remove Subnets for Your Load Balancer in a
     /// VPC](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html)
     /// in the *Classic Load Balancers Guide*.
-    pub fn attachLoadBalancerToSubnets(self: *Self, allocator: std.mem.Allocator, input: attach_load_balancer_to_subnets.AttachLoadBalancerToSubnetsInput, options: attach_load_balancer_to_subnets.Options) !attach_load_balancer_to_subnets.AttachLoadBalancerToSubnetsOutput {
+    pub fn attachLoadBalancerToSubnets(self: *Self, allocator: std.mem.Allocator, input: attach_load_balancer_to_subnets.AttachLoadBalancerToSubnetsInput, options: CallOptions) !attach_load_balancer_to_subnets.AttachLoadBalancerToSubnetsOutput {
         return attach_load_balancer_to_subnets.execute(self, allocator, input, options);
     }
 
@@ -103,7 +104,7 @@ pub const Client = struct {
     /// For more information, see [Configure Health Checks for Your Load
     /// Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html)
     /// in the *Classic Load Balancers Guide*.
-    pub fn configureHealthCheck(self: *Self, allocator: std.mem.Allocator, input: configure_health_check.ConfigureHealthCheckInput, options: configure_health_check.Options) !configure_health_check.ConfigureHealthCheckOutput {
+    pub fn configureHealthCheck(self: *Self, allocator: std.mem.Allocator, input: configure_health_check.ConfigureHealthCheckInput, options: CallOptions) !configure_health_check.ConfigureHealthCheckOutput {
         return configure_health_check.execute(self, allocator, input, options);
     }
 
@@ -127,7 +128,7 @@ pub const Client = struct {
     /// For more information, see [Application-Controlled Session
     /// Stickiness](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application)
     /// in the *Classic Load Balancers Guide*.
-    pub fn createAppCookieStickinessPolicy(self: *Self, allocator: std.mem.Allocator, input: create_app_cookie_stickiness_policy.CreateAppCookieStickinessPolicyInput, options: create_app_cookie_stickiness_policy.Options) !create_app_cookie_stickiness_policy.CreateAppCookieStickinessPolicyOutput {
+    pub fn createAppCookieStickinessPolicy(self: *Self, allocator: std.mem.Allocator, input: create_app_cookie_stickiness_policy.CreateAppCookieStickinessPolicyInput, options: CallOptions) !create_app_cookie_stickiness_policy.CreateAppCookieStickinessPolicyOutput {
         return create_app_cookie_stickiness_policy.execute(self, allocator, input, options);
     }
 
@@ -150,7 +151,7 @@ pub const Client = struct {
     /// For more information, see [Duration-Based Session
     /// Stickiness](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration)
     /// in the *Classic Load Balancers Guide*.
-    pub fn createLbCookieStickinessPolicy(self: *Self, allocator: std.mem.Allocator, input: create_lb_cookie_stickiness_policy.CreateLBCookieStickinessPolicyInput, options: create_lb_cookie_stickiness_policy.Options) !create_lb_cookie_stickiness_policy.CreateLBCookieStickinessPolicyOutput {
+    pub fn createLbCookieStickinessPolicy(self: *Self, allocator: std.mem.Allocator, input: create_lb_cookie_stickiness_policy.CreateLBCookieStickinessPolicyInput, options: CallOptions) !create_lb_cookie_stickiness_policy.CreateLBCookieStickinessPolicyOutput {
         return create_lb_cookie_stickiness_policy.execute(self, allocator, input, options);
     }
 
@@ -172,7 +173,7 @@ pub const Client = struct {
     /// For more information, see [Limits for Your Classic Load
     /// Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html)
     /// in the *Classic Load Balancers Guide*.
-    pub fn createLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: create_load_balancer.CreateLoadBalancerInput, options: create_load_balancer.Options) !create_load_balancer.CreateLoadBalancerOutput {
+    pub fn createLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: create_load_balancer.CreateLoadBalancerInput, options: CallOptions) !create_load_balancer.CreateLoadBalancerOutput {
         return create_load_balancer.execute(self, allocator, input, options);
     }
 
@@ -184,7 +185,7 @@ pub const Client = struct {
     /// For more information, see [Listeners for Your Classic Load
     /// Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html)
     /// in the *Classic Load Balancers Guide*.
-    pub fn createLoadBalancerListeners(self: *Self, allocator: std.mem.Allocator, input: create_load_balancer_listeners.CreateLoadBalancerListenersInput, options: create_load_balancer_listeners.Options) !create_load_balancer_listeners.CreateLoadBalancerListenersOutput {
+    pub fn createLoadBalancerListeners(self: *Self, allocator: std.mem.Allocator, input: create_load_balancer_listeners.CreateLoadBalancerListenersInput, options: CallOptions) !create_load_balancer_listeners.CreateLoadBalancerListenersOutput {
         return create_load_balancer_listeners.execute(self, allocator, input, options);
     }
 
@@ -194,7 +195,7 @@ pub const Client = struct {
     /// Policies are settings that are saved for your load balancer and that can be
     /// applied to the listener or the application server, depending on the policy
     /// type.
-    pub fn createLoadBalancerPolicy(self: *Self, allocator: std.mem.Allocator, input: create_load_balancer_policy.CreateLoadBalancerPolicyInput, options: create_load_balancer_policy.Options) !create_load_balancer_policy.CreateLoadBalancerPolicyOutput {
+    pub fn createLoadBalancerPolicy(self: *Self, allocator: std.mem.Allocator, input: create_load_balancer_policy.CreateLoadBalancerPolicyInput, options: CallOptions) !create_load_balancer_policy.CreateLoadBalancerPolicyOutput {
         return create_load_balancer_policy.execute(self, allocator, input, options);
     }
 
@@ -208,18 +209,18 @@ pub const Client = struct {
     ///
     /// If the load balancer does not exist or has already been deleted, the call to
     /// `DeleteLoadBalancer` still succeeds.
-    pub fn deleteLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: delete_load_balancer.DeleteLoadBalancerInput, options: delete_load_balancer.Options) !delete_load_balancer.DeleteLoadBalancerOutput {
+    pub fn deleteLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: delete_load_balancer.DeleteLoadBalancerInput, options: CallOptions) !delete_load_balancer.DeleteLoadBalancerOutput {
         return delete_load_balancer.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified listeners from the specified load balancer.
-    pub fn deleteLoadBalancerListeners(self: *Self, allocator: std.mem.Allocator, input: delete_load_balancer_listeners.DeleteLoadBalancerListenersInput, options: delete_load_balancer_listeners.Options) !delete_load_balancer_listeners.DeleteLoadBalancerListenersOutput {
+    pub fn deleteLoadBalancerListeners(self: *Self, allocator: std.mem.Allocator, input: delete_load_balancer_listeners.DeleteLoadBalancerListenersInput, options: CallOptions) !delete_load_balancer_listeners.DeleteLoadBalancerListenersOutput {
         return delete_load_balancer_listeners.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified policy from the specified load balancer. This policy
     /// must not be enabled for any listeners.
-    pub fn deleteLoadBalancerPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_load_balancer_policy.DeleteLoadBalancerPolicyInput, options: delete_load_balancer_policy.Options) !delete_load_balancer_policy.DeleteLoadBalancerPolicyOutput {
+    pub fn deleteLoadBalancerPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_load_balancer_policy.DeleteLoadBalancerPolicyInput, options: CallOptions) !delete_load_balancer_policy.DeleteLoadBalancerPolicyOutput {
         return delete_load_balancer_policy.execute(self, allocator, input, options);
     }
 
@@ -233,7 +234,7 @@ pub const Client = struct {
     /// For more information, see [Register or De-Register EC2
     /// Instances](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html)
     /// in the *Classic Load Balancers Guide*.
-    pub fn deregisterInstancesFromLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: deregister_instances_from_load_balancer.DeregisterInstancesFromLoadBalancerInput, options: deregister_instances_from_load_balancer.Options) !deregister_instances_from_load_balancer.DeregisterInstancesFromLoadBalancerOutput {
+    pub fn deregisterInstancesFromLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: deregister_instances_from_load_balancer.DeregisterInstancesFromLoadBalancerInput, options: CallOptions) !deregister_instances_from_load_balancer.DeregisterInstancesFromLoadBalancerOutput {
         return deregister_instances_from_load_balancer.execute(self, allocator, input, options);
     }
 
@@ -243,7 +244,7 @@ pub const Client = struct {
     /// For more information, see [Limits for Your Classic Load
     /// Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html)
     /// in the *Classic Load Balancers Guide*.
-    pub fn describeAccountLimits(self: *Self, allocator: std.mem.Allocator, input: describe_account_limits.DescribeAccountLimitsInput, options: describe_account_limits.Options) !describe_account_limits.DescribeAccountLimitsOutput {
+    pub fn describeAccountLimits(self: *Self, allocator: std.mem.Allocator, input: describe_account_limits.DescribeAccountLimitsInput, options: CallOptions) !describe_account_limits.DescribeAccountLimitsOutput {
         return describe_account_limits.execute(self, allocator, input, options);
     }
 
@@ -253,12 +254,12 @@ pub const Client = struct {
     /// instances are specified, their state is returned even if they are no longer
     /// registered with the load balancer. The state of terminated instances is not
     /// returned.
-    pub fn describeInstanceHealth(self: *Self, allocator: std.mem.Allocator, input: describe_instance_health.DescribeInstanceHealthInput, options: describe_instance_health.Options) !describe_instance_health.DescribeInstanceHealthOutput {
+    pub fn describeInstanceHealth(self: *Self, allocator: std.mem.Allocator, input: describe_instance_health.DescribeInstanceHealthInput, options: CallOptions) !describe_instance_health.DescribeInstanceHealthOutput {
         return describe_instance_health.execute(self, allocator, input, options);
     }
 
     /// Describes the attributes for the specified load balancer.
-    pub fn describeLoadBalancerAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancer_attributes.DescribeLoadBalancerAttributesInput, options: describe_load_balancer_attributes.Options) !describe_load_balancer_attributes.DescribeLoadBalancerAttributesOutput {
+    pub fn describeLoadBalancerAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancer_attributes.DescribeLoadBalancerAttributesInput, options: CallOptions) !describe_load_balancer_attributes.DescribeLoadBalancerAttributesOutput {
         return describe_load_balancer_attributes.execute(self, allocator, input, options);
     }
 
@@ -271,7 +272,7 @@ pub const Client = struct {
     /// If you don't specify a load balancer name, the action returns descriptions
     /// of the specified sample policies, or descriptions of all sample policies.
     /// The names of the sample policies have the `ELBSample-` prefix.
-    pub fn describeLoadBalancerPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancer_policies.DescribeLoadBalancerPoliciesInput, options: describe_load_balancer_policies.Options) !describe_load_balancer_policies.DescribeLoadBalancerPoliciesOutput {
+    pub fn describeLoadBalancerPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancer_policies.DescribeLoadBalancerPoliciesInput, options: CallOptions) !describe_load_balancer_policies.DescribeLoadBalancerPoliciesOutput {
         return describe_load_balancer_policies.execute(self, allocator, input, options);
     }
 
@@ -288,18 +289,18 @@ pub const Client = struct {
     /// Then, depending on the policy type, use either
     /// SetLoadBalancerPoliciesOfListener or
     /// SetLoadBalancerPoliciesForBackendServer to set the policy.
-    pub fn describeLoadBalancerPolicyTypes(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancer_policy_types.DescribeLoadBalancerPolicyTypesInput, options: describe_load_balancer_policy_types.Options) !describe_load_balancer_policy_types.DescribeLoadBalancerPolicyTypesOutput {
+    pub fn describeLoadBalancerPolicyTypes(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancer_policy_types.DescribeLoadBalancerPolicyTypesInput, options: CallOptions) !describe_load_balancer_policy_types.DescribeLoadBalancerPolicyTypesOutput {
         return describe_load_balancer_policy_types.execute(self, allocator, input, options);
     }
 
     /// Describes the specified the load balancers. If no load balancers are
     /// specified, the call describes all of your load balancers.
-    pub fn describeLoadBalancers(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancers.DescribeLoadBalancersInput, options: describe_load_balancers.Options) !describe_load_balancers.DescribeLoadBalancersOutput {
+    pub fn describeLoadBalancers(self: *Self, allocator: std.mem.Allocator, input: describe_load_balancers.DescribeLoadBalancersInput, options: CallOptions) !describe_load_balancers.DescribeLoadBalancersOutput {
         return describe_load_balancers.execute(self, allocator, input, options);
     }
 
     /// Describes the tags associated with the specified load balancers.
-    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: describe_tags.Options) !describe_tags.DescribeTagsOutput {
+    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: CallOptions) !describe_tags.DescribeTagsOutput {
         return describe_tags.execute(self, allocator, input, options);
     }
 
@@ -310,7 +311,7 @@ pub const Client = struct {
     /// balancer
     /// in the removed subnet go into the `OutOfService` state. Then,
     /// the load balancer balances the traffic among the remaining routable subnets.
-    pub fn detachLoadBalancerFromSubnets(self: *Self, allocator: std.mem.Allocator, input: detach_load_balancer_from_subnets.DetachLoadBalancerFromSubnetsInput, options: detach_load_balancer_from_subnets.Options) !detach_load_balancer_from_subnets.DetachLoadBalancerFromSubnetsOutput {
+    pub fn detachLoadBalancerFromSubnets(self: *Self, allocator: std.mem.Allocator, input: detach_load_balancer_from_subnets.DetachLoadBalancerFromSubnetsInput, options: CallOptions) !detach_load_balancer_from_subnets.DetachLoadBalancerFromSubnetsOutput {
         return detach_load_balancer_from_subnets.execute(self, allocator, input, options);
     }
 
@@ -331,7 +332,7 @@ pub const Client = struct {
     /// For more information, see [Add or Remove Availability
     /// Zones](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html)
     /// in the *Classic Load Balancers Guide*.
-    pub fn disableAvailabilityZonesForLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: disable_availability_zones_for_load_balancer.DisableAvailabilityZonesForLoadBalancerInput, options: disable_availability_zones_for_load_balancer.Options) !disable_availability_zones_for_load_balancer.DisableAvailabilityZonesForLoadBalancerOutput {
+    pub fn disableAvailabilityZonesForLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: disable_availability_zones_for_load_balancer.DisableAvailabilityZonesForLoadBalancerInput, options: CallOptions) !disable_availability_zones_for_load_balancer.DisableAvailabilityZonesForLoadBalancerOutput {
         return disable_availability_zones_for_load_balancer.execute(self, allocator, input, options);
     }
 
@@ -347,7 +348,7 @@ pub const Client = struct {
     /// Availability
     /// Zones](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html)
     /// in the *Classic Load Balancers Guide*.
-    pub fn enableAvailabilityZonesForLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: enable_availability_zones_for_load_balancer.EnableAvailabilityZonesForLoadBalancerInput, options: enable_availability_zones_for_load_balancer.Options) !enable_availability_zones_for_load_balancer.EnableAvailabilityZonesForLoadBalancerOutput {
+    pub fn enableAvailabilityZonesForLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: enable_availability_zones_for_load_balancer.EnableAvailabilityZonesForLoadBalancerInput, options: CallOptions) !enable_availability_zones_for_load_balancer.EnableAvailabilityZonesForLoadBalancerOutput {
         return enable_availability_zones_for_load_balancer.execute(self, allocator, input, options);
     }
 
@@ -374,7 +375,7 @@ pub const Client = struct {
     ///
     /// * [Idle Connection
     ///   Timeout](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html)
-    pub fn modifyLoadBalancerAttributes(self: *Self, allocator: std.mem.Allocator, input: modify_load_balancer_attributes.ModifyLoadBalancerAttributesInput, options: modify_load_balancer_attributes.Options) !modify_load_balancer_attributes.ModifyLoadBalancerAttributesOutput {
+    pub fn modifyLoadBalancerAttributes(self: *Self, allocator: std.mem.Allocator, input: modify_load_balancer_attributes.ModifyLoadBalancerAttributesInput, options: CallOptions) !modify_load_balancer_attributes.ModifyLoadBalancerAttributesOutput {
         return modify_load_balancer_attributes.execute(self, allocator, input, options);
     }
 
@@ -405,12 +406,12 @@ pub const Client = struct {
     /// For more information, see [Register or De-Register EC2
     /// Instances](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html)
     /// in the *Classic Load Balancers Guide*.
-    pub fn registerInstancesWithLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: register_instances_with_load_balancer.RegisterInstancesWithLoadBalancerInput, options: register_instances_with_load_balancer.Options) !register_instances_with_load_balancer.RegisterInstancesWithLoadBalancerOutput {
+    pub fn registerInstancesWithLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: register_instances_with_load_balancer.RegisterInstancesWithLoadBalancerInput, options: CallOptions) !register_instances_with_load_balancer.RegisterInstancesWithLoadBalancerOutput {
         return register_instances_with_load_balancer.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified load balancer.
-    pub fn removeTags(self: *Self, allocator: std.mem.Allocator, input: remove_tags.RemoveTagsInput, options: remove_tags.Options) !remove_tags.RemoveTagsOutput {
+    pub fn removeTags(self: *Self, allocator: std.mem.Allocator, input: remove_tags.RemoveTagsInput, options: CallOptions) !remove_tags.RemoveTagsOutput {
         return remove_tags.execute(self, allocator, input, options);
     }
 
@@ -422,7 +423,7 @@ pub const Client = struct {
     /// [Replace the SSL Certificate for Your Load
     /// Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html)
     /// in the *Classic Load Balancers Guide*.
-    pub fn setLoadBalancerListenerSslCertificate(self: *Self, allocator: std.mem.Allocator, input: set_load_balancer_listener_ssl_certificate.SetLoadBalancerListenerSSLCertificateInput, options: set_load_balancer_listener_ssl_certificate.Options) !set_load_balancer_listener_ssl_certificate.SetLoadBalancerListenerSSLCertificateOutput {
+    pub fn setLoadBalancerListenerSslCertificate(self: *Self, allocator: std.mem.Allocator, input: set_load_balancer_listener_ssl_certificate.SetLoadBalancerListenerSSLCertificateInput, options: CallOptions) !set_load_balancer_listener_ssl_certificate.SetLoadBalancerListenerSSLCertificateOutput {
         return set_load_balancer_listener_ssl_certificate.execute(self, allocator, input, options);
     }
 
@@ -449,7 +450,7 @@ pub const Client = struct {
     /// [Configure Proxy Protocol
     /// Support](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html)
     /// in the *Classic Load Balancers Guide*.
-    pub fn setLoadBalancerPoliciesForBackendServer(self: *Self, allocator: std.mem.Allocator, input: set_load_balancer_policies_for_backend_server.SetLoadBalancerPoliciesForBackendServerInput, options: set_load_balancer_policies_for_backend_server.Options) !set_load_balancer_policies_for_backend_server.SetLoadBalancerPoliciesForBackendServerOutput {
+    pub fn setLoadBalancerPoliciesForBackendServer(self: *Self, allocator: std.mem.Allocator, input: set_load_balancer_policies_for_backend_server.SetLoadBalancerPoliciesForBackendServerInput, options: CallOptions) !set_load_balancer_policies_for_backend_server.SetLoadBalancerPoliciesForBackendServerOutput {
         return set_load_balancer_policies_for_backend_server.execute(self, allocator, input, options);
     }
 
@@ -467,7 +468,7 @@ pub const Client = struct {
     /// [Application-Controlled Session
     /// Stickiness](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application)
     /// in the *Classic Load Balancers Guide*.
-    pub fn setLoadBalancerPoliciesOfListener(self: *Self, allocator: std.mem.Allocator, input: set_load_balancer_policies_of_listener.SetLoadBalancerPoliciesOfListenerInput, options: set_load_balancer_policies_of_listener.Options) !set_load_balancer_policies_of_listener.SetLoadBalancerPoliciesOfListenerOutput {
+    pub fn setLoadBalancerPoliciesOfListener(self: *Self, allocator: std.mem.Allocator, input: set_load_balancer_policies_of_listener.SetLoadBalancerPoliciesOfListenerInput, options: CallOptions) !set_load_balancer_policies_of_listener.SetLoadBalancerPoliciesOfListenerOutput {
         return set_load_balancer_policies_of_listener.execute(self, allocator, input, options);
     }
 

@@ -12,6 +12,7 @@ const get_delegated_access_token = @import("get_delegated_access_token.zig");
 const get_federation_token = @import("get_federation_token.zig");
 const get_session_token = @import("get_session_token.zig");
 const get_web_identity_token = @import("get_web_identity_token.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -175,7 +176,7 @@ pub const Client = struct {
     /// The `TokenCode` is the time-based one-time password (TOTP) that the MFA
     /// device
     /// produces.
-    pub fn assumeRole(self: *Self, allocator: std.mem.Allocator, input: assume_role.AssumeRoleInput, options: assume_role.Options) !assume_role.AssumeRoleOutput {
+    pub fn assumeRole(self: *Self, allocator: std.mem.Allocator, input: assume_role.AssumeRoleInput, options: CallOptions) !assume_role.AssumeRoleOutput {
         return assume_role.execute(self, allocator, input, options);
     }
 
@@ -358,7 +359,7 @@ pub const Client = struct {
     /// * [Creating a Role for SAML 2.0
     ///   Federation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_saml.html) in the
     /// *IAM User Guide*.
-    pub fn assumeRoleWithSaml(self: *Self, allocator: std.mem.Allocator, input: assume_role_with_saml.AssumeRoleWithSAMLInput, options: assume_role_with_saml.Options) !assume_role_with_saml.AssumeRoleWithSAMLOutput {
+    pub fn assumeRoleWithSaml(self: *Self, allocator: std.mem.Allocator, input: assume_role_with_saml.AssumeRoleWithSAMLInput, options: CallOptions) !assume_role_with_saml.AssumeRoleWithSAMLOutput {
         return assume_role_with_saml.execute(self, allocator, input, options);
     }
 
@@ -543,7 +544,7 @@ pub const Client = struct {
     /// show how to use the information from these providers to get and use
     /// temporary
     /// security credentials.
-    pub fn assumeRoleWithWebIdentity(self: *Self, allocator: std.mem.Allocator, input: assume_role_with_web_identity.AssumeRoleWithWebIdentityInput, options: assume_role_with_web_identity.Options) !assume_role_with_web_identity.AssumeRoleWithWebIdentityOutput {
+    pub fn assumeRoleWithWebIdentity(self: *Self, allocator: std.mem.Allocator, input: assume_role_with_web_identity.AssumeRoleWithWebIdentityInput, options: CallOptions) !assume_role_with_web_identity.AssumeRoleWithWebIdentityOutput {
         return assume_role_with_web_identity.execute(self, allocator, input, options);
     }
 
@@ -581,7 +582,7 @@ pub const Client = struct {
     /// In addition, you can use [service control
     /// policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html) (SCPs) to manage and limit permissions in your organization. See [General examples](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_examples_general.html) in the *Organizations User
     /// Guide* for more information on SCPs.
-    pub fn assumeRoot(self: *Self, allocator: std.mem.Allocator, input: assume_root.AssumeRootInput, options: assume_root.Options) !assume_root.AssumeRootOutput {
+    pub fn assumeRoot(self: *Self, allocator: std.mem.Allocator, input: assume_root.AssumeRootInput, options: CallOptions) !assume_root.AssumeRootOutput {
         return assume_root.execute(self, allocator, input, options);
     }
 
@@ -628,7 +629,7 @@ pub const Client = struct {
     /// * The requested resource.
     ///
     /// * The values of condition keys in the context of the user's request.
-    pub fn decodeAuthorizationMessage(self: *Self, allocator: std.mem.Allocator, input: decode_authorization_message.DecodeAuthorizationMessageInput, options: decode_authorization_message.Options) !decode_authorization_message.DecodeAuthorizationMessageOutput {
+    pub fn decodeAuthorizationMessage(self: *Self, allocator: std.mem.Allocator, input: decode_authorization_message.DecodeAuthorizationMessageInput, options: CallOptions) !decode_authorization_message.DecodeAuthorizationMessageOutput {
         return decode_authorization_message.execute(self, allocator, input, options);
     }
 
@@ -660,7 +661,7 @@ pub const Client = struct {
     /// operation.
     /// Providing a deleted access key might return an error that the key doesn't
     /// exist.
-    pub fn getAccessKeyInfo(self: *Self, allocator: std.mem.Allocator, input: get_access_key_info.GetAccessKeyInfoInput, options: get_access_key_info.Options) !get_access_key_info.GetAccessKeyInfoOutput {
+    pub fn getAccessKeyInfo(self: *Self, allocator: std.mem.Allocator, input: get_access_key_info.GetAccessKeyInfoInput, options: CallOptions) !get_access_key_info.GetAccessKeyInfoOutput {
         return get_access_key_info.execute(self, allocator, input, options);
     }
 
@@ -676,7 +677,7 @@ pub const Client = struct {
     /// denied. To view an example response, see [I Am Not Authorized to Perform:
     /// iam:DeleteVirtualMFADevice](https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_access-denied-delete-mfa) in the
     /// *IAM User Guide*.
-    pub fn getCallerIdentity(self: *Self, allocator: std.mem.Allocator, input: get_caller_identity.GetCallerIdentityInput, options: get_caller_identity.Options) !get_caller_identity.GetCallerIdentityOutput {
+    pub fn getCallerIdentity(self: *Self, allocator: std.mem.Allocator, input: get_caller_identity.GetCallerIdentityInput, options: CallOptions) !get_caller_identity.GetCallerIdentityOutput {
         return get_caller_identity.execute(self, allocator, input, options);
     }
 
@@ -687,7 +688,7 @@ pub const Client = struct {
     /// a specific principal based on a trade-in token, enabling delegation of
     /// access to Amazon Web Services
     /// resources.
-    pub fn getDelegatedAccessToken(self: *Self, allocator: std.mem.Allocator, input: get_delegated_access_token.GetDelegatedAccessTokenInput, options: get_delegated_access_token.Options) !get_delegated_access_token.GetDelegatedAccessTokenOutput {
+    pub fn getDelegatedAccessToken(self: *Self, allocator: std.mem.Allocator, input: get_delegated_access_token.GetDelegatedAccessTokenInput, options: CallOptions) !get_delegated_access_token.GetDelegatedAccessTokenOutput {
         return get_delegated_access_token.execute(self, allocator, input, options);
     }
 
@@ -827,7 +828,7 @@ pub const Client = struct {
     /// and `department` are not saved as separate tags, and the session tag passed
     /// in
     /// the request takes precedence over the user tag.
-    pub fn getFederationToken(self: *Self, allocator: std.mem.Allocator, input: get_federation_token.GetFederationTokenInput, options: get_federation_token.Options) !get_federation_token.GetFederationTokenOutput {
+    pub fn getFederationToken(self: *Self, allocator: std.mem.Allocator, input: get_federation_token.GetFederationTokenInput, options: CallOptions) !get_federation_token.GetFederationTokenOutput {
         return get_federation_token.execute(self, allocator, input, options);
     }
 
@@ -907,7 +908,7 @@ pub const Client = struct {
     /// Credentials for Users in Untrusted
     /// Environments](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getsessiontoken) in the
     /// *IAM User Guide*.
-    pub fn getSessionToken(self: *Self, allocator: std.mem.Allocator, input: get_session_token.GetSessionTokenInput, options: get_session_token.Options) !get_session_token.GetSessionTokenOutput {
+    pub fn getSessionToken(self: *Self, allocator: std.mem.Allocator, input: get_session_token.GetSessionTokenInput, options: CallOptions) !get_session_token.GetSessionTokenOutput {
         return get_session_token.execute(self, allocator, input, options);
     }
 
@@ -917,7 +918,7 @@ pub const Client = struct {
     /// support OIDC discovery.
     /// The token is signed by Amazon Web Services STS and can be publicly verified
     /// using the verification keys published at the issuer's JWKS endpoint.
-    pub fn getWebIdentityToken(self: *Self, allocator: std.mem.Allocator, input: get_web_identity_token.GetWebIdentityTokenInput, options: get_web_identity_token.Options) !get_web_identity_token.GetWebIdentityTokenOutput {
+    pub fn getWebIdentityToken(self: *Self, allocator: std.mem.Allocator, input: get_web_identity_token.GetWebIdentityTokenInput, options: CallOptions) !get_web_identity_token.GetWebIdentityTokenOutput {
         return get_web_identity_token.execute(self, allocator, input, options);
     }
 

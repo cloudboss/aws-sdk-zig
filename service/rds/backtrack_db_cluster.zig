@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const BacktrackDBClusterInput = struct {
@@ -45,13 +46,9 @@ pub const BacktrackDBClusterInput = struct {
     use_earliest_time_on_point_in_time_unavailable: ?bool = null,
 };
 
-const BacktrackDBClusterOutput = @import("db_cluster_backtrack.zig").DBClusterBacktrack;
+pub const BacktrackDBClusterOutput = @import("db_cluster_backtrack.zig").DBClusterBacktrack;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BacktrackDBClusterInput, options: Options) !BacktrackDBClusterOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BacktrackDBClusterInput, options: CallOptions) !BacktrackDBClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

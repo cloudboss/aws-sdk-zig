@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_discoverers = @import("list_discoverers.zig");
@@ -18,7 +19,7 @@ pub const ListDiscoverersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_discoverers.Options) !list_discoverers.ListDiscoverersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_discoverers.ListDiscoverersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -59,7 +60,7 @@ pub const ListRegistriesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_registries.Options) !list_registries.ListRegistriesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_registries.ListRegistriesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -100,7 +101,7 @@ pub const ListSchemaVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_schema_versions.Options) !list_schema_versions.ListSchemaVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_schema_versions.ListSchemaVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -141,7 +142,7 @@ pub const ListSchemasPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_schemas.Options) !list_schemas.ListSchemasOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_schemas.ListSchemasOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -182,7 +183,7 @@ pub const SearchSchemasPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: search_schemas.Options) !search_schemas.SearchSchemasOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !search_schemas.SearchSchemasOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

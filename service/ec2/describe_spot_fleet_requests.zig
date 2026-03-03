@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SpotFleetRequestConfig = @import("spot_fleet_request_config.zig").SpotFleetRequestConfig;
 const serde = @import("serde.zig");
@@ -40,11 +41,7 @@ pub const DescribeSpotFleetRequestsOutput = struct {
     spot_fleet_request_configs: ?[]const SpotFleetRequestConfig = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeSpotFleetRequestsInput, options: Options) !DescribeSpotFleetRequestsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeSpotFleetRequestsInput, options: CallOptions) !DescribeSpotFleetRequestsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

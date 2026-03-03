@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EncryptionType = @import("encryption_type.zig").EncryptionType;
 const ConfigurationStatus = @import("configuration_status.zig").ConfigurationStatus;
@@ -41,11 +42,7 @@ pub const PutDefaultEncryptionConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDefaultEncryptionConfigurationInput, options: Options) !PutDefaultEncryptionConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDefaultEncryptionConfigurationInput, options: CallOptions) !PutDefaultEncryptionConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

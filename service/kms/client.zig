@@ -54,6 +54,7 @@ const update_key_description = @import("update_key_description.zig");
 const update_primary_region = @import("update_primary_region.zig");
 const verify_ = @import("verify.zig");
 const verify_mac = @import("verify_mac.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -110,7 +111,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn cancelKeyDeletion(self: *Self, allocator: std.mem.Allocator, input: cancel_key_deletion.CancelKeyDeletionInput, options: cancel_key_deletion.Options) !cancel_key_deletion.CancelKeyDeletionOutput {
+    pub fn cancelKeyDeletion(self: *Self, allocator: std.mem.Allocator, input: cancel_key_deletion.CancelKeyDeletionInput, options: CallOptions) !cancel_key_deletion.CancelKeyDeletionOutput {
         return cancel_key_deletion.execute(self, allocator, input, options);
     }
 
@@ -231,7 +232,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn connectCustomKeyStore(self: *Self, allocator: std.mem.Allocator, input: connect_custom_key_store.ConnectCustomKeyStoreInput, options: connect_custom_key_store.Options) !connect_custom_key_store.ConnectCustomKeyStoreOutput {
+    pub fn connectCustomKeyStore(self: *Self, allocator: std.mem.Allocator, input: connect_custom_key_store.ConnectCustomKeyStoreInput, options: CallOptions) !connect_custom_key_store.ConnectCustomKeyStoreOutput {
         return connect_custom_key_store.execute(self, allocator, input, options);
     }
 
@@ -300,7 +301,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn createAlias(self: *Self, allocator: std.mem.Allocator, input: create_alias.CreateAliasInput, options: create_alias.Options) !create_alias.CreateAliasOutput {
+    pub fn createAlias(self: *Self, allocator: std.mem.Allocator, input: create_alias.CreateAliasInput, options: CallOptions) !create_alias.CreateAliasOutput {
         return create_alias.execute(self, allocator, input, options);
     }
 
@@ -404,7 +405,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn createCustomKeyStore(self: *Self, allocator: std.mem.Allocator, input: create_custom_key_store.CreateCustomKeyStoreInput, options: create_custom_key_store.Options) !create_custom_key_store.CreateCustomKeyStoreOutput {
+    pub fn createCustomKeyStore(self: *Self, allocator: std.mem.Allocator, input: create_custom_key_store.CreateCustomKeyStoreInput, options: CallOptions) !create_custom_key_store.CreateCustomKeyStoreOutput {
         return create_custom_key_store.execute(self, allocator, input, options);
     }
 
@@ -480,7 +481,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn createGrant(self: *Self, allocator: std.mem.Allocator, input: create_grant.CreateGrantInput, options: create_grant.Options) !create_grant.CreateGrantOutput {
+    pub fn createGrant(self: *Self, allocator: std.mem.Allocator, input: create_grant.CreateGrantInput, options: CallOptions) !create_grant.CreateGrantOutput {
         return create_grant.execute(self, allocator, input, options);
     }
 
@@ -716,7 +717,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn createKey(self: *Self, allocator: std.mem.Allocator, input: create_key.CreateKeyInput, options: create_key.Options) !create_key.CreateKeyOutput {
+    pub fn createKey(self: *Self, allocator: std.mem.Allocator, input: create_key.CreateKeyInput, options: CallOptions) !create_key.CreateKeyOutput {
         return create_key.execute(self, allocator, input, options);
     }
 
@@ -825,7 +826,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn decrypt(self: *Self, allocator: std.mem.Allocator, input: decrypt_.DecryptInput, options: decrypt_.Options) !decrypt_.DecryptOutput {
+    pub fn decrypt(self: *Self, allocator: std.mem.Allocator, input: decrypt_.DecryptInput, options: CallOptions) !decrypt_.DecryptOutput {
         return decrypt_.execute(self, allocator, input, options);
     }
 
@@ -876,7 +877,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn deleteAlias(self: *Self, allocator: std.mem.Allocator, input: delete_alias.DeleteAliasInput, options: delete_alias.Options) !delete_alias.DeleteAliasOutput {
+    pub fn deleteAlias(self: *Self, allocator: std.mem.Allocator, input: delete_alias.DeleteAliasInput, options: CallOptions) !delete_alias.DeleteAliasOutput {
         return delete_alias.execute(self, allocator, input, options);
     }
 
@@ -948,7 +949,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn deleteCustomKeyStore(self: *Self, allocator: std.mem.Allocator, input: delete_custom_key_store.DeleteCustomKeyStoreInput, options: delete_custom_key_store.Options) !delete_custom_key_store.DeleteCustomKeyStoreOutput {
+    pub fn deleteCustomKeyStore(self: *Self, allocator: std.mem.Allocator, input: delete_custom_key_store.DeleteCustomKeyStoreInput, options: CallOptions) !delete_custom_key_store.DeleteCustomKeyStoreOutput {
         return delete_custom_key_store.execute(self, allocator, input, options);
     }
 
@@ -999,7 +1000,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn deleteImportedKeyMaterial(self: *Self, allocator: std.mem.Allocator, input: delete_imported_key_material.DeleteImportedKeyMaterialInput, options: delete_imported_key_material.Options) !delete_imported_key_material.DeleteImportedKeyMaterialOutput {
+    pub fn deleteImportedKeyMaterial(self: *Self, allocator: std.mem.Allocator, input: delete_imported_key_material.DeleteImportedKeyMaterialInput, options: CallOptions) !delete_imported_key_material.DeleteImportedKeyMaterialOutput {
         return delete_imported_key_material.execute(self, allocator, input, options);
     }
 
@@ -1103,7 +1104,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn deriveSharedSecret(self: *Self, allocator: std.mem.Allocator, input: derive_shared_secret.DeriveSharedSecretInput, options: derive_shared_secret.Options) !derive_shared_secret.DeriveSharedSecretOutput {
+    pub fn deriveSharedSecret(self: *Self, allocator: std.mem.Allocator, input: derive_shared_secret.DeriveSharedSecretInput, options: CallOptions) !derive_shared_secret.DeriveSharedSecretOutput {
         return derive_shared_secret.execute(self, allocator, input, options);
     }
 
@@ -1174,7 +1175,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn describeCustomKeyStores(self: *Self, allocator: std.mem.Allocator, input: describe_custom_key_stores.DescribeCustomKeyStoresInput, options: describe_custom_key_stores.Options) !describe_custom_key_stores.DescribeCustomKeyStoresOutput {
+    pub fn describeCustomKeyStores(self: *Self, allocator: std.mem.Allocator, input: describe_custom_key_stores.DescribeCustomKeyStoresInput, options: CallOptions) !describe_custom_key_stores.DescribeCustomKeyStoresOutput {
         return describe_custom_key_stores.execute(self, allocator, input, options);
     }
 
@@ -1253,7 +1254,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn describeKey(self: *Self, allocator: std.mem.Allocator, input: describe_key.DescribeKeyInput, options: describe_key.Options) !describe_key.DescribeKeyOutput {
+    pub fn describeKey(self: *Self, allocator: std.mem.Allocator, input: describe_key.DescribeKeyInput, options: CallOptions) !describe_key.DescribeKeyOutput {
         return describe_key.execute(self, allocator, input, options);
     }
 
@@ -1283,7 +1284,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn disableKey(self: *Self, allocator: std.mem.Allocator, input: disable_key.DisableKeyInput, options: disable_key.Options) !disable_key.DisableKeyOutput {
+    pub fn disableKey(self: *Self, allocator: std.mem.Allocator, input: disable_key.DisableKeyInput, options: CallOptions) !disable_key.DisableKeyOutput {
         return disable_key.execute(self, allocator, input, options);
     }
 
@@ -1331,7 +1332,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn disableKeyRotation(self: *Self, allocator: std.mem.Allocator, input: disable_key_rotation.DisableKeyRotationInput, options: disable_key_rotation.Options) !disable_key_rotation.DisableKeyRotationOutput {
+    pub fn disableKeyRotation(self: *Self, allocator: std.mem.Allocator, input: disable_key_rotation.DisableKeyRotationInput, options: CallOptions) !disable_key_rotation.DisableKeyRotationOutput {
         return disable_key_rotation.execute(self, allocator, input, options);
     }
 
@@ -1388,7 +1389,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn disconnectCustomKeyStore(self: *Self, allocator: std.mem.Allocator, input: disconnect_custom_key_store.DisconnectCustomKeyStoreInput, options: disconnect_custom_key_store.Options) !disconnect_custom_key_store.DisconnectCustomKeyStoreOutput {
+    pub fn disconnectCustomKeyStore(self: *Self, allocator: std.mem.Allocator, input: disconnect_custom_key_store.DisconnectCustomKeyStoreInput, options: CallOptions) !disconnect_custom_key_store.DisconnectCustomKeyStoreOutput {
         return disconnect_custom_key_store.execute(self, allocator, input, options);
     }
 
@@ -1414,7 +1415,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn enableKey(self: *Self, allocator: std.mem.Allocator, input: enable_key.EnableKeyInput, options: enable_key.Options) !enable_key.EnableKeyOutput {
+    pub fn enableKey(self: *Self, allocator: std.mem.Allocator, input: enable_key.EnableKeyInput, options: CallOptions) !enable_key.EnableKeyOutput {
         return enable_key.execute(self, allocator, input, options);
     }
 
@@ -1494,7 +1495,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn enableKeyRotation(self: *Self, allocator: std.mem.Allocator, input: enable_key_rotation.EnableKeyRotationInput, options: enable_key_rotation.Options) !enable_key_rotation.EnableKeyRotationOutput {
+    pub fn enableKeyRotation(self: *Self, allocator: std.mem.Allocator, input: enable_key_rotation.EnableKeyRotationInput, options: CallOptions) !enable_key_rotation.EnableKeyRotationOutput {
         return enable_key_rotation.execute(self, allocator, input, options);
     }
 
@@ -1590,7 +1591,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn encrypt(self: *Self, allocator: std.mem.Allocator, input: encrypt_.EncryptInput, options: encrypt_.Options) !encrypt_.EncryptOutput {
+    pub fn encrypt(self: *Self, allocator: std.mem.Allocator, input: encrypt_.EncryptInput, options: CallOptions) !encrypt_.EncryptOutput {
         return encrypt_.execute(self, allocator, input, options);
     }
 
@@ -1720,7 +1721,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn generateDataKey(self: *Self, allocator: std.mem.Allocator, input: generate_data_key.GenerateDataKeyInput, options: generate_data_key.Options) !generate_data_key.GenerateDataKeyOutput {
+    pub fn generateDataKey(self: *Self, allocator: std.mem.Allocator, input: generate_data_key.GenerateDataKeyInput, options: CallOptions) !generate_data_key.GenerateDataKeyOutput {
         return generate_data_key.execute(self, allocator, input, options);
     }
 
@@ -1839,7 +1840,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn generateDataKeyPair(self: *Self, allocator: std.mem.Allocator, input: generate_data_key_pair.GenerateDataKeyPairInput, options: generate_data_key_pair.Options) !generate_data_key_pair.GenerateDataKeyPairOutput {
+    pub fn generateDataKeyPair(self: *Self, allocator: std.mem.Allocator, input: generate_data_key_pair.GenerateDataKeyPairInput, options: CallOptions) !generate_data_key_pair.GenerateDataKeyPairOutput {
         return generate_data_key_pair.execute(self, allocator, input, options);
     }
 
@@ -1924,7 +1925,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn generateDataKeyPairWithoutPlaintext(self: *Self, allocator: std.mem.Allocator, input: generate_data_key_pair_without_plaintext.GenerateDataKeyPairWithoutPlaintextInput, options: generate_data_key_pair_without_plaintext.Options) !generate_data_key_pair_without_plaintext.GenerateDataKeyPairWithoutPlaintextOutput {
+    pub fn generateDataKeyPairWithoutPlaintext(self: *Self, allocator: std.mem.Allocator, input: generate_data_key_pair_without_plaintext.GenerateDataKeyPairWithoutPlaintextInput, options: CallOptions) !generate_data_key_pair_without_plaintext.GenerateDataKeyPairWithoutPlaintextOutput {
         return generate_data_key_pair_without_plaintext.execute(self, allocator, input, options);
     }
 
@@ -2022,7 +2023,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn generateDataKeyWithoutPlaintext(self: *Self, allocator: std.mem.Allocator, input: generate_data_key_without_plaintext.GenerateDataKeyWithoutPlaintextInput, options: generate_data_key_without_plaintext.Options) !generate_data_key_without_plaintext.GenerateDataKeyWithoutPlaintextOutput {
+    pub fn generateDataKeyWithoutPlaintext(self: *Self, allocator: std.mem.Allocator, input: generate_data_key_without_plaintext.GenerateDataKeyWithoutPlaintextInput, options: CallOptions) !generate_data_key_without_plaintext.GenerateDataKeyWithoutPlaintextOutput {
         return generate_data_key_without_plaintext.execute(self, allocator, input, options);
     }
 
@@ -2075,7 +2076,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn generateMac(self: *Self, allocator: std.mem.Allocator, input: generate_mac.GenerateMacInput, options: generate_mac.Options) !generate_mac.GenerateMacOutput {
+    pub fn generateMac(self: *Self, allocator: std.mem.Allocator, input: generate_mac.GenerateMacInput, options: CallOptions) !generate_mac.GenerateMacOutput {
         return generate_mac.execute(self, allocator, input, options);
     }
 
@@ -2120,7 +2121,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn generateRandom(self: *Self, allocator: std.mem.Allocator, input: generate_random.GenerateRandomInput, options: generate_random.Options) !generate_random.GenerateRandomOutput {
+    pub fn generateRandom(self: *Self, allocator: std.mem.Allocator, input: generate_random.GenerateRandomInput, options: CallOptions) !generate_random.GenerateRandomOutput {
         return generate_random.execute(self, allocator, input, options);
     }
 
@@ -2138,7 +2139,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn getKeyPolicy(self: *Self, allocator: std.mem.Allocator, input: get_key_policy.GetKeyPolicyInput, options: get_key_policy.Options) !get_key_policy.GetKeyPolicyOutput {
+    pub fn getKeyPolicy(self: *Self, allocator: std.mem.Allocator, input: get_key_policy.GetKeyPolicyInput, options: CallOptions) !get_key_policy.GetKeyPolicyOutput {
         return get_key_policy.execute(self, allocator, input, options);
     }
 
@@ -2217,7 +2218,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn getKeyRotationStatus(self: *Self, allocator: std.mem.Allocator, input: get_key_rotation_status.GetKeyRotationStatusInput, options: get_key_rotation_status.Options) !get_key_rotation_status.GetKeyRotationStatusOutput {
+    pub fn getKeyRotationStatus(self: *Self, allocator: std.mem.Allocator, input: get_key_rotation_status.GetKeyRotationStatusInput, options: CallOptions) !get_key_rotation_status.GetKeyRotationStatusOutput {
         return get_key_rotation_status.execute(self, allocator, input, options);
     }
 
@@ -2306,7 +2307,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn getParametersForImport(self: *Self, allocator: std.mem.Allocator, input: get_parameters_for_import.GetParametersForImportInput, options: get_parameters_for_import.Options) !get_parameters_for_import.GetParametersForImportOutput {
+    pub fn getParametersForImport(self: *Self, allocator: std.mem.Allocator, input: get_parameters_for_import.GetParametersForImportInput, options: CallOptions) !get_parameters_for_import.GetParametersForImportOutput {
         return get_parameters_for_import.execute(self, allocator, input, options);
     }
 
@@ -2382,7 +2383,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn getPublicKey(self: *Self, allocator: std.mem.Allocator, input: get_public_key.GetPublicKeyInput, options: get_public_key.Options) !get_public_key.GetPublicKeyOutput {
+    pub fn getPublicKey(self: *Self, allocator: std.mem.Allocator, input: get_public_key.GetPublicKeyInput, options: CallOptions) !get_public_key.GetPublicKeyOutput {
         return get_public_key.execute(self, allocator, input, options);
     }
 
@@ -2544,7 +2545,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn importKeyMaterial(self: *Self, allocator: std.mem.Allocator, input: import_key_material.ImportKeyMaterialInput, options: import_key_material.Options) !import_key_material.ImportKeyMaterialOutput {
+    pub fn importKeyMaterial(self: *Self, allocator: std.mem.Allocator, input: import_key_material.ImportKeyMaterialInput, options: CallOptions) !import_key_material.ImportKeyMaterialOutput {
         return import_key_material.execute(self, allocator, input, options);
     }
 
@@ -2596,7 +2597,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn listAliases(self: *Self, allocator: std.mem.Allocator, input: list_aliases.ListAliasesInput, options: list_aliases.Options) !list_aliases.ListAliasesOutput {
+    pub fn listAliases(self: *Self, allocator: std.mem.Allocator, input: list_aliases.ListAliasesInput, options: CallOptions) !list_aliases.ListAliasesOutput {
         return list_aliases.execute(self, allocator, input, options);
     }
 
@@ -2646,7 +2647,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn listGrants(self: *Self, allocator: std.mem.Allocator, input: list_grants.ListGrantsInput, options: list_grants.Options) !list_grants.ListGrantsOutput {
+    pub fn listGrants(self: *Self, allocator: std.mem.Allocator, input: list_grants.ListGrantsInput, options: CallOptions) !list_grants.ListGrantsOutput {
         return list_grants.execute(self, allocator, input, options);
     }
 
@@ -2671,7 +2672,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn listKeyPolicies(self: *Self, allocator: std.mem.Allocator, input: list_key_policies.ListKeyPoliciesInput, options: list_key_policies.Options) !list_key_policies.ListKeyPoliciesOutput {
+    pub fn listKeyPolicies(self: *Self, allocator: std.mem.Allocator, input: list_key_policies.ListKeyPoliciesInput, options: CallOptions) !list_key_policies.ListKeyPoliciesOutput {
         return list_key_policies.execute(self, allocator, input, options);
     }
 
@@ -2713,7 +2714,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn listKeyRotations(self: *Self, allocator: std.mem.Allocator, input: list_key_rotations.ListKeyRotationsInput, options: list_key_rotations.Options) !list_key_rotations.ListKeyRotationsOutput {
+    pub fn listKeyRotations(self: *Self, allocator: std.mem.Allocator, input: list_key_rotations.ListKeyRotationsInput, options: CallOptions) !list_key_rotations.ListKeyRotationsOutput {
         return list_key_rotations.execute(self, allocator, input, options);
     }
 
@@ -2739,7 +2740,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn listKeys(self: *Self, allocator: std.mem.Allocator, input: list_keys.ListKeysInput, options: list_keys.Options) !list_keys.ListKeysOutput {
+    pub fn listKeys(self: *Self, allocator: std.mem.Allocator, input: list_keys.ListKeysInput, options: CallOptions) !list_keys.ListKeysOutput {
         return list_keys.execute(self, allocator, input, options);
     }
 
@@ -2772,7 +2773,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn listResourceTags(self: *Self, allocator: std.mem.Allocator, input: list_resource_tags.ListResourceTagsInput, options: list_resource_tags.Options) !list_resource_tags.ListResourceTagsOutput {
+    pub fn listResourceTags(self: *Self, allocator: std.mem.Allocator, input: list_resource_tags.ListResourceTagsInput, options: CallOptions) !list_resource_tags.ListResourceTagsOutput {
         return list_resource_tags.execute(self, allocator, input, options);
     }
 
@@ -2834,7 +2835,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn listRetirableGrants(self: *Self, allocator: std.mem.Allocator, input: list_retirable_grants.ListRetirableGrantsInput, options: list_retirable_grants.Options) !list_retirable_grants.ListRetirableGrantsOutput {
+    pub fn listRetirableGrants(self: *Self, allocator: std.mem.Allocator, input: list_retirable_grants.ListRetirableGrantsInput, options: CallOptions) !list_retirable_grants.ListRetirableGrantsOutput {
         return list_retirable_grants.execute(self, allocator, input, options);
     }
 
@@ -2862,7 +2863,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn putKeyPolicy(self: *Self, allocator: std.mem.Allocator, input: put_key_policy.PutKeyPolicyInput, options: put_key_policy.Options) !put_key_policy.PutKeyPolicyOutput {
+    pub fn putKeyPolicy(self: *Self, allocator: std.mem.Allocator, input: put_key_policy.PutKeyPolicyInput, options: CallOptions) !put_key_policy.PutKeyPolicyOutput {
         return put_key_policy.execute(self, allocator, input, options);
     }
 
@@ -2977,7 +2978,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn reEncrypt(self: *Self, allocator: std.mem.Allocator, input: re_encrypt.ReEncryptInput, options: re_encrypt.Options) !re_encrypt.ReEncryptOutput {
+    pub fn reEncrypt(self: *Self, allocator: std.mem.Allocator, input: re_encrypt.ReEncryptInput, options: CallOptions) !re_encrypt.ReEncryptOutput {
         return re_encrypt.execute(self, allocator, input, options);
     }
 
@@ -3082,7 +3083,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn replicateKey(self: *Self, allocator: std.mem.Allocator, input: replicate_key.ReplicateKeyInput, options: replicate_key.Options) !replicate_key.ReplicateKeyOutput {
+    pub fn replicateKey(self: *Self, allocator: std.mem.Allocator, input: replicate_key.ReplicateKeyInput, options: CallOptions) !replicate_key.ReplicateKeyOutput {
         return replicate_key.execute(self, allocator, input, options);
     }
 
@@ -3131,7 +3132,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn retireGrant(self: *Self, allocator: std.mem.Allocator, input: retire_grant.RetireGrantInput, options: retire_grant.Options) !retire_grant.RetireGrantOutput {
+    pub fn retireGrant(self: *Self, allocator: std.mem.Allocator, input: retire_grant.RetireGrantInput, options: CallOptions) !retire_grant.RetireGrantOutput {
         return retire_grant.execute(self, allocator, input, options);
     }
 
@@ -3182,7 +3183,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn revokeGrant(self: *Self, allocator: std.mem.Allocator, input: revoke_grant.RevokeGrantInput, options: revoke_grant.Options) !revoke_grant.RevokeGrantOutput {
+    pub fn revokeGrant(self: *Self, allocator: std.mem.Allocator, input: revoke_grant.RevokeGrantInput, options: CallOptions) !revoke_grant.RevokeGrantOutput {
         return revoke_grant.execute(self, allocator, input, options);
     }
 
@@ -3264,7 +3265,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn rotateKeyOnDemand(self: *Self, allocator: std.mem.Allocator, input: rotate_key_on_demand.RotateKeyOnDemandInput, options: rotate_key_on_demand.Options) !rotate_key_on_demand.RotateKeyOnDemandOutput {
+    pub fn rotateKeyOnDemand(self: *Self, allocator: std.mem.Allocator, input: rotate_key_on_demand.RotateKeyOnDemandInput, options: CallOptions) !rotate_key_on_demand.RotateKeyOnDemandOutput {
         return rotate_key_on_demand.execute(self, allocator, input, options);
     }
 
@@ -3350,7 +3351,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn scheduleKeyDeletion(self: *Self, allocator: std.mem.Allocator, input: schedule_key_deletion.ScheduleKeyDeletionInput, options: schedule_key_deletion.Options) !schedule_key_deletion.ScheduleKeyDeletionOutput {
+    pub fn scheduleKeyDeletion(self: *Self, allocator: std.mem.Allocator, input: schedule_key_deletion.ScheduleKeyDeletionInput, options: CallOptions) !schedule_key_deletion.ScheduleKeyDeletionOutput {
         return schedule_key_deletion.execute(self, allocator, input, options);
     }
 
@@ -3426,7 +3427,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn sign(self: *Self, allocator: std.mem.Allocator, input: sign_.SignInput, options: sign_.Options) !sign_.SignOutput {
+    pub fn sign(self: *Self, allocator: std.mem.Allocator, input: sign_.SignInput, options: CallOptions) !sign_.SignOutput {
         return sign_.execute(self, allocator, input, options);
     }
 
@@ -3486,7 +3487,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -3537,7 +3538,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -3610,7 +3611,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn updateAlias(self: *Self, allocator: std.mem.Allocator, input: update_alias.UpdateAliasInput, options: update_alias.Options) !update_alias.UpdateAliasOutput {
+    pub fn updateAlias(self: *Self, allocator: std.mem.Allocator, input: update_alias.UpdateAliasInput, options: CallOptions) !update_alias.UpdateAliasOutput {
         return update_alias.execute(self, allocator, input, options);
     }
 
@@ -3725,7 +3726,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn updateCustomKeyStore(self: *Self, allocator: std.mem.Allocator, input: update_custom_key_store.UpdateCustomKeyStoreInput, options: update_custom_key_store.Options) !update_custom_key_store.UpdateCustomKeyStoreOutput {
+    pub fn updateCustomKeyStore(self: *Self, allocator: std.mem.Allocator, input: update_custom_key_store.UpdateCustomKeyStoreInput, options: CallOptions) !update_custom_key_store.UpdateCustomKeyStoreOutput {
         return update_custom_key_store.execute(self, allocator, input, options);
     }
 
@@ -3753,7 +3754,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn updateKeyDescription(self: *Self, allocator: std.mem.Allocator, input: update_key_description.UpdateKeyDescriptionInput, options: update_key_description.Options) !update_key_description.UpdateKeyDescriptionOutput {
+    pub fn updateKeyDescription(self: *Self, allocator: std.mem.Allocator, input: update_key_description.UpdateKeyDescriptionInput, options: CallOptions) !update_key_description.UpdateKeyDescriptionOutput {
         return update_key_description.execute(self, allocator, input, options);
     }
 
@@ -3848,7 +3849,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn updatePrimaryRegion(self: *Self, allocator: std.mem.Allocator, input: update_primary_region.UpdatePrimaryRegionInput, options: update_primary_region.Options) !update_primary_region.UpdatePrimaryRegionOutput {
+    pub fn updatePrimaryRegion(self: *Self, allocator: std.mem.Allocator, input: update_primary_region.UpdatePrimaryRegionInput, options: CallOptions) !update_primary_region.UpdatePrimaryRegionOutput {
         return update_primary_region.execute(self, allocator, input, options);
     }
 
@@ -3916,7 +3917,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn verify(self: *Self, allocator: std.mem.Allocator, input: verify_.VerifyInput, options: verify_.Options) !verify_.VerifyOutput {
+    pub fn verify(self: *Self, allocator: std.mem.Allocator, input: verify_.VerifyInput, options: CallOptions) !verify_.VerifyOutput {
         return verify_.execute(self, allocator, input, options);
     }
 
@@ -3959,7 +3960,7 @@ pub const Client = struct {
     /// **Eventual consistency**: The KMS API follows an eventual consistency model.
     /// For more information, see [KMS eventual
     /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
-    pub fn verifyMac(self: *Self, allocator: std.mem.Allocator, input: verify_mac.VerifyMacInput, options: verify_mac.Options) !verify_mac.VerifyMacOutput {
+    pub fn verifyMac(self: *Self, allocator: std.mem.Allocator, input: verify_mac.VerifyMacInput, options: CallOptions) !verify_mac.VerifyMacOutput {
         return verify_mac.execute(self, allocator, input, options);
     }
 

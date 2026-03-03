@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RegistrationStatus = @import("registration_status.zig").RegistrationStatus;
 const WorkflowTypeInfo = @import("workflow_type_info.zig").WorkflowTypeInfo;
@@ -68,11 +69,7 @@ pub const ListWorkflowTypesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListWorkflowTypesInput, options: Options) !ListWorkflowTypesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListWorkflowTypesInput, options: CallOptions) !ListWorkflowTypesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

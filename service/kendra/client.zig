@@ -67,6 +67,7 @@ const update_index = @import("update_index.zig");
 const update_query_suggestions_block_list = @import("update_query_suggestions_block_list.zig");
 const update_query_suggestions_config = @import("update_query_suggestions_config.zig");
 const update_thesaurus = @import("update_thesaurus.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -104,7 +105,7 @@ pub const Client = struct {
     /// experience, see [Building
     /// a search experience with no
     /// code](https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
-    pub fn associateEntitiesToExperience(self: *Self, allocator: std.mem.Allocator, input: associate_entities_to_experience.AssociateEntitiesToExperienceInput, options: associate_entities_to_experience.Options) !associate_entities_to_experience.AssociateEntitiesToExperienceOutput {
+    pub fn associateEntitiesToExperience(self: *Self, allocator: std.mem.Allocator, input: associate_entities_to_experience.AssociateEntitiesToExperienceInput, options: CallOptions) !associate_entities_to_experience.AssociateEntitiesToExperienceOutput {
         return associate_entities_to_experience.execute(self, allocator, input, options);
     }
 
@@ -116,7 +117,7 @@ pub const Client = struct {
     /// search application experience, see [Building
     /// a search experience with no
     /// code](https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
-    pub fn associatePersonasToEntities(self: *Self, allocator: std.mem.Allocator, input: associate_personas_to_entities.AssociatePersonasToEntitiesInput, options: associate_personas_to_entities.Options) !associate_personas_to_entities.AssociatePersonasToEntitiesOutput {
+    pub fn associatePersonasToEntities(self: *Self, allocator: std.mem.Allocator, input: associate_personas_to_entities.AssociatePersonasToEntitiesInput, options: CallOptions) !associate_personas_to_entities.AssociatePersonasToEntitiesOutput {
         return associate_personas_to_entities.execute(self, allocator, input, options);
     }
 
@@ -135,7 +136,7 @@ pub const Client = struct {
     ///
     /// Deleting documents from an index using `BatchDeleteDocument` could take up
     /// to an hour or more, depending on the number of documents you want to delete.
-    pub fn batchDeleteDocument(self: *Self, allocator: std.mem.Allocator, input: batch_delete_document.BatchDeleteDocumentInput, options: batch_delete_document.Options) !batch_delete_document.BatchDeleteDocumentOutput {
+    pub fn batchDeleteDocument(self: *Self, allocator: std.mem.Allocator, input: batch_delete_document.BatchDeleteDocumentInput, options: CallOptions) !batch_delete_document.BatchDeleteDocumentOutput {
         return batch_delete_document.execute(self, allocator, input, options);
     }
 
@@ -143,7 +144,7 @@ pub const Client = struct {
     /// above all other results for certain queries. If there's an exact match of a
     /// query, then one or more specific documents are featured in the search
     /// results.
-    pub fn batchDeleteFeaturedResultsSet(self: *Self, allocator: std.mem.Allocator, input: batch_delete_featured_results_set.BatchDeleteFeaturedResultsSetInput, options: batch_delete_featured_results_set.Options) !batch_delete_featured_results_set.BatchDeleteFeaturedResultsSetOutput {
+    pub fn batchDeleteFeaturedResultsSet(self: *Self, allocator: std.mem.Allocator, input: batch_delete_featured_results_set.BatchDeleteFeaturedResultsSetInput, options: CallOptions) !batch_delete_featured_results_set.BatchDeleteFeaturedResultsSetOutput {
         return batch_delete_featured_results_set.execute(self, allocator, input, options);
     }
 
@@ -159,7 +160,7 @@ pub const Client = struct {
     /// You can also use the `BatchGetDocumentStatus` API to check the status of
     /// the [
     /// BatchDeleteDocument](https://docs.aws.amazon.com/kendra/latest/dg/API_BatchDeleteDocument.html) API. When a document is deleted from the index, Amazon Kendra returns `NOT_FOUND` as the status.
-    pub fn batchGetDocumentStatus(self: *Self, allocator: std.mem.Allocator, input: batch_get_document_status.BatchGetDocumentStatusInput, options: batch_get_document_status.Options) !batch_get_document_status.BatchGetDocumentStatusOutput {
+    pub fn batchGetDocumentStatus(self: *Self, allocator: std.mem.Allocator, input: batch_get_document_status.BatchGetDocumentStatusInput, options: CallOptions) !batch_get_document_status.BatchGetDocumentStatusOutput {
         return batch_get_document_status.execute(self, allocator, input, options);
     }
 
@@ -185,7 +186,7 @@ pub const Client = struct {
     /// [Adding files
     /// directly to an
     /// index](https://docs.aws.amazon.com/kendra/latest/dg/in-adding-binary-doc.html).
-    pub fn batchPutDocument(self: *Self, allocator: std.mem.Allocator, input: batch_put_document.BatchPutDocumentInput, options: batch_put_document.Options) !batch_put_document.BatchPutDocumentOutput {
+    pub fn batchPutDocument(self: *Self, allocator: std.mem.Allocator, input: batch_put_document.BatchPutDocumentInput, options: CallOptions) !batch_put_document.BatchPutDocumentOutput {
         return batch_put_document.execute(self, allocator, input, options);
     }
 
@@ -200,7 +201,7 @@ pub const Client = struct {
     ///
     /// `ClearQuerySuggestions` is currently not supported in the
     /// Amazon Web Services GovCloud (US-West) region.
-    pub fn clearQuerySuggestions(self: *Self, allocator: std.mem.Allocator, input: clear_query_suggestions.ClearQuerySuggestionsInput, options: clear_query_suggestions.Options) !clear_query_suggestions.ClearQuerySuggestionsOutput {
+    pub fn clearQuerySuggestions(self: *Self, allocator: std.mem.Allocator, input: clear_query_suggestions.ClearQuerySuggestionsInput, options: CallOptions) !clear_query_suggestions.ClearQuerySuggestionsOutput {
         return clear_query_suggestions.execute(self, allocator, input, options);
     }
 
@@ -247,7 +248,7 @@ pub const Client = struct {
     /// `CreateAccessControlConfiguration` for an Amazon Kendra Gen AI Enterprise
     /// Edition index. Amazon Kendra will return a `ValidationException` error for a
     /// `Gen_AI_ENTERPRISE_EDITION` index.
-    pub fn createAccessControlConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_access_control_configuration.CreateAccessControlConfigurationInput, options: create_access_control_configuration.Options) !create_access_control_configuration.CreateAccessControlConfigurationOutput {
+    pub fn createAccessControlConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_access_control_configuration.CreateAccessControlConfigurationInput, options: CallOptions) !create_access_control_configuration.CreateAccessControlConfigurationOutput {
         return create_access_control_configuration.execute(self, allocator, input, options);
     }
 
@@ -268,7 +269,7 @@ pub const Client = struct {
     /// example of creating an index and data source using the Java SDK, see
     /// [Getting started with Java
     /// SDK](https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html).
-    pub fn createDataSource(self: *Self, allocator: std.mem.Allocator, input: create_data_source.CreateDataSourceInput, options: create_data_source.Options) !create_data_source.CreateDataSourceOutput {
+    pub fn createDataSource(self: *Self, allocator: std.mem.Allocator, input: create_data_source.CreateDataSourceInput, options: CallOptions) !create_data_source.CreateDataSourceOutput {
         return create_data_source.execute(self, allocator, input, options);
     }
 
@@ -279,7 +280,7 @@ pub const Client = struct {
     /// see [Building a
     /// search experience with no
     /// code](https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
-    pub fn createExperience(self: *Self, allocator: std.mem.Allocator, input: create_experience.CreateExperienceInput, options: create_experience.Options) !create_experience.CreateExperienceOutput {
+    pub fn createExperience(self: *Self, allocator: std.mem.Allocator, input: create_experience.CreateExperienceInput, options: CallOptions) !create_experience.CreateExperienceOutput {
         return create_experience.execute(self, allocator, input, options);
     }
 
@@ -292,7 +293,7 @@ pub const Client = struct {
     /// For an example of adding an FAQ to an index using Python and Java SDKs, see
     /// [Using your FAQ
     /// file](https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html#using-faq-file).
-    pub fn createFaq(self: *Self, allocator: std.mem.Allocator, input: create_faq.CreateFaqInput, options: create_faq.Options) !create_faq.CreateFaqOutput {
+    pub fn createFaq(self: *Self, allocator: std.mem.Allocator, input: create_faq.CreateFaqInput, options: CallOptions) !create_faq.CreateFaqOutput {
         return create_faq.execute(self, allocator, input, options);
     }
 
@@ -310,7 +311,7 @@ pub const Client = struct {
     /// to
     /// increase this limit by contacting
     /// [Support](http://aws.amazon.com/contact-us/).
-    pub fn createFeaturedResultsSet(self: *Self, allocator: std.mem.Allocator, input: create_featured_results_set.CreateFeaturedResultsSetInput, options: create_featured_results_set.Options) !create_featured_results_set.CreateFeaturedResultsSetOutput {
+    pub fn createFeaturedResultsSet(self: *Self, allocator: std.mem.Allocator, input: create_featured_results_set.CreateFeaturedResultsSetInput, options: CallOptions) !create_featured_results_set.CreateFeaturedResultsSetOutput {
         return create_featured_results_set.execute(self, allocator, input, options);
     }
 
@@ -331,7 +332,7 @@ pub const Client = struct {
     /// example of creating an index and data source using the Java SDK, see
     /// [Getting started with Java
     /// SDK](https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html).
-    pub fn createIndex(self: *Self, allocator: std.mem.Allocator, input: create_index.CreateIndexInput, options: create_index.Options) !create_index.CreateIndexOutput {
+    pub fn createIndex(self: *Self, allocator: std.mem.Allocator, input: create_index.CreateIndexInput, options: CallOptions) !create_index.CreateIndexOutput {
         return create_index.execute(self, allocator, input, options);
     }
 
@@ -356,7 +357,7 @@ pub const Client = struct {
     /// Python SDK, see [Query
     /// suggestions block
     /// list](https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#query-suggestions-blocklist).
-    pub fn createQuerySuggestionsBlockList(self: *Self, allocator: std.mem.Allocator, input: create_query_suggestions_block_list.CreateQuerySuggestionsBlockListInput, options: create_query_suggestions_block_list.Options) !create_query_suggestions_block_list.CreateQuerySuggestionsBlockListOutput {
+    pub fn createQuerySuggestionsBlockList(self: *Self, allocator: std.mem.Allocator, input: create_query_suggestions_block_list.CreateQuerySuggestionsBlockListInput, options: CallOptions) !create_query_suggestions_block_list.CreateQuerySuggestionsBlockListOutput {
         return create_query_suggestions_block_list.execute(self, allocator, input, options);
     }
 
@@ -367,7 +368,7 @@ pub const Client = struct {
     /// [Adding
     /// custom synonyms to an
     /// index](https://docs.aws.amazon.com/kendra/latest/dg/index-synonyms-adding-thesaurus-file.html).
-    pub fn createThesaurus(self: *Self, allocator: std.mem.Allocator, input: create_thesaurus.CreateThesaurusInput, options: create_thesaurus.Options) !create_thesaurus.CreateThesaurusOutput {
+    pub fn createThesaurus(self: *Self, allocator: std.mem.Allocator, input: create_thesaurus.CreateThesaurusInput, options: CallOptions) !create_thesaurus.CreateThesaurusOutput {
         return create_thesaurus.execute(self, allocator, input, options);
     }
 
@@ -378,7 +379,7 @@ pub const Client = struct {
     /// useful for user context filtering, where search results are filtered based
     /// on the user
     /// or their group access to documents.
-    pub fn deleteAccessControlConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_access_control_configuration.DeleteAccessControlConfigurationInput, options: delete_access_control_configuration.Options) !delete_access_control_configuration.DeleteAccessControlConfigurationOutput {
+    pub fn deleteAccessControlConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_access_control_configuration.DeleteAccessControlConfigurationInput, options: CallOptions) !delete_access_control_configuration.DeleteAccessControlConfigurationOutput {
         return delete_access_control_configuration.execute(self, allocator, input, options);
     }
 
@@ -395,7 +396,7 @@ pub const Client = struct {
     /// from a data source could take up to an hour or more, depending on the number
     /// of documents you
     /// want to delete.
-    pub fn deleteDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_data_source.DeleteDataSourceInput, options: delete_data_source.Options) !delete_data_source.DeleteDataSourceOutput {
+    pub fn deleteDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_data_source.DeleteDataSourceInput, options: CallOptions) !delete_data_source.DeleteDataSourceOutput {
         return delete_data_source.execute(self, allocator, input, options);
     }
 
@@ -404,12 +405,12 @@ pub const Client = struct {
     /// creating a search application experience, see [Building a search
     /// experience with no
     /// code](https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
-    pub fn deleteExperience(self: *Self, allocator: std.mem.Allocator, input: delete_experience.DeleteExperienceInput, options: delete_experience.Options) !delete_experience.DeleteExperienceOutput {
+    pub fn deleteExperience(self: *Self, allocator: std.mem.Allocator, input: delete_experience.DeleteExperienceInput, options: CallOptions) !delete_experience.DeleteExperienceOutput {
         return delete_experience.execute(self, allocator, input, options);
     }
 
     /// Removes a FAQ from an index.
-    pub fn deleteFaq(self: *Self, allocator: std.mem.Allocator, input: delete_faq.DeleteFaqInput, options: delete_faq.Options) !delete_faq.DeleteFaqOutput {
+    pub fn deleteFaq(self: *Self, allocator: std.mem.Allocator, input: delete_faq.DeleteFaqInput, options: CallOptions) !delete_faq.DeleteFaqOutput {
         return delete_faq.execute(self, allocator, input, options);
     }
 
@@ -418,7 +419,7 @@ pub const Client = struct {
     /// being deleted. While the index is being deleted, the `Status` field returned
     /// by a
     /// call to the `DescribeIndex` API is set to `DELETING`.
-    pub fn deleteIndex(self: *Self, allocator: std.mem.Allocator, input: delete_index.DeleteIndexInput, options: delete_index.Options) !delete_index.DeleteIndexOutput {
+    pub fn deleteIndex(self: *Self, allocator: std.mem.Allocator, input: delete_index.DeleteIndexInput, options: CallOptions) !delete_index.DeleteIndexOutput {
         return delete_index.execute(self, allocator, input, options);
     }
 
@@ -442,7 +443,7 @@ pub const Client = struct {
     ///
     /// `DeletePrincipalMapping` is currently not supported in the Amazon Web
     /// Services GovCloud (US-West) region.
-    pub fn deletePrincipalMapping(self: *Self, allocator: std.mem.Allocator, input: delete_principal_mapping.DeletePrincipalMappingInput, options: delete_principal_mapping.Options) !delete_principal_mapping.DeletePrincipalMappingOutput {
+    pub fn deletePrincipalMapping(self: *Self, allocator: std.mem.Allocator, input: delete_principal_mapping.DeletePrincipalMappingInput, options: CallOptions) !delete_principal_mapping.DeletePrincipalMappingOutput {
         return delete_principal_mapping.execute(self, allocator, input, options);
     }
 
@@ -454,12 +455,12 @@ pub const Client = struct {
     ///
     /// `DeleteQuerySuggestionsBlockList` is currently not supported in the
     /// Amazon Web Services GovCloud (US-West) region.
-    pub fn deleteQuerySuggestionsBlockList(self: *Self, allocator: std.mem.Allocator, input: delete_query_suggestions_block_list.DeleteQuerySuggestionsBlockListInput, options: delete_query_suggestions_block_list.Options) !delete_query_suggestions_block_list.DeleteQuerySuggestionsBlockListOutput {
+    pub fn deleteQuerySuggestionsBlockList(self: *Self, allocator: std.mem.Allocator, input: delete_query_suggestions_block_list.DeleteQuerySuggestionsBlockListInput, options: CallOptions) !delete_query_suggestions_block_list.DeleteQuerySuggestionsBlockListOutput {
         return delete_query_suggestions_block_list.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Kendra thesaurus.
-    pub fn deleteThesaurus(self: *Self, allocator: std.mem.Allocator, input: delete_thesaurus.DeleteThesaurusInput, options: delete_thesaurus.Options) !delete_thesaurus.DeleteThesaurusOutput {
+    pub fn deleteThesaurus(self: *Self, allocator: std.mem.Allocator, input: delete_thesaurus.DeleteThesaurusInput, options: CallOptions) !delete_thesaurus.DeleteThesaurusOutput {
         return delete_thesaurus.execute(self, allocator, input, options);
     }
 
@@ -470,12 +471,12 @@ pub const Client = struct {
     /// documents. This is useful for user context filtering, where search results
     /// are filtered
     /// based on the user or their group access to documents.
-    pub fn describeAccessControlConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_access_control_configuration.DescribeAccessControlConfigurationInput, options: describe_access_control_configuration.Options) !describe_access_control_configuration.DescribeAccessControlConfigurationOutput {
+    pub fn describeAccessControlConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_access_control_configuration.DescribeAccessControlConfigurationInput, options: CallOptions) !describe_access_control_configuration.DescribeAccessControlConfigurationOutput {
         return describe_access_control_configuration.execute(self, allocator, input, options);
     }
 
     /// Gets information about an Amazon Kendra data source connector.
-    pub fn describeDataSource(self: *Self, allocator: std.mem.Allocator, input: describe_data_source.DescribeDataSourceInput, options: describe_data_source.Options) !describe_data_source.DescribeDataSourceOutput {
+    pub fn describeDataSource(self: *Self, allocator: std.mem.Allocator, input: describe_data_source.DescribeDataSourceInput, options: CallOptions) !describe_data_source.DescribeDataSourceOutput {
         return describe_data_source.execute(self, allocator, input, options);
     }
 
@@ -485,12 +486,12 @@ pub const Client = struct {
     /// see [Building
     /// a search experience with no
     /// code](https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
-    pub fn describeExperience(self: *Self, allocator: std.mem.Allocator, input: describe_experience.DescribeExperienceInput, options: describe_experience.Options) !describe_experience.DescribeExperienceOutput {
+    pub fn describeExperience(self: *Self, allocator: std.mem.Allocator, input: describe_experience.DescribeExperienceInput, options: CallOptions) !describe_experience.DescribeExperienceOutput {
         return describe_experience.execute(self, allocator, input, options);
     }
 
     /// Gets information about a FAQ.
-    pub fn describeFaq(self: *Self, allocator: std.mem.Allocator, input: describe_faq.DescribeFaqInput, options: describe_faq.Options) !describe_faq.DescribeFaqOutput {
+    pub fn describeFaq(self: *Self, allocator: std.mem.Allocator, input: describe_faq.DescribeFaqInput, options: CallOptions) !describe_faq.DescribeFaqOutput {
         return describe_faq.execute(self, allocator, input, options);
     }
 
@@ -499,12 +500,12 @@ pub const Client = struct {
     /// above all other results for certain queries. If there's an exact match of a
     /// query,
     /// then one or more specific documents are featured in the search results.
-    pub fn describeFeaturedResultsSet(self: *Self, allocator: std.mem.Allocator, input: describe_featured_results_set.DescribeFeaturedResultsSetInput, options: describe_featured_results_set.Options) !describe_featured_results_set.DescribeFeaturedResultsSetOutput {
+    pub fn describeFeaturedResultsSet(self: *Self, allocator: std.mem.Allocator, input: describe_featured_results_set.DescribeFeaturedResultsSetInput, options: CallOptions) !describe_featured_results_set.DescribeFeaturedResultsSetOutput {
         return describe_featured_results_set.execute(self, allocator, input, options);
     }
 
     /// Gets information about an Amazon Kendra index.
-    pub fn describeIndex(self: *Self, allocator: std.mem.Allocator, input: describe_index.DescribeIndexInput, options: describe_index.Options) !describe_index.DescribeIndexOutput {
+    pub fn describeIndex(self: *Self, allocator: std.mem.Allocator, input: describe_index.DescribeIndexInput, options: CallOptions) !describe_index.DescribeIndexOutput {
         return describe_index.execute(self, allocator, input, options);
     }
 
@@ -521,7 +522,7 @@ pub const Client = struct {
     ///
     /// `DescribePrincipalMapping` is currently not supported in the Amazon Web
     /// Services GovCloud (US-West) region.
-    pub fn describePrincipalMapping(self: *Self, allocator: std.mem.Allocator, input: describe_principal_mapping.DescribePrincipalMappingInput, options: describe_principal_mapping.Options) !describe_principal_mapping.DescribePrincipalMappingOutput {
+    pub fn describePrincipalMapping(self: *Self, allocator: std.mem.Allocator, input: describe_principal_mapping.DescribePrincipalMappingInput, options: CallOptions) !describe_principal_mapping.DescribePrincipalMappingOutput {
         return describe_principal_mapping.execute(self, allocator, input, options);
     }
 
@@ -533,7 +534,7 @@ pub const Client = struct {
     ///
     /// `DescribeQuerySuggestionsBlockList` is currently not supported in the
     /// Amazon Web Services GovCloud (US-West) region.
-    pub fn describeQuerySuggestionsBlockList(self: *Self, allocator: std.mem.Allocator, input: describe_query_suggestions_block_list.DescribeQuerySuggestionsBlockListInput, options: describe_query_suggestions_block_list.Options) !describe_query_suggestions_block_list.DescribeQuerySuggestionsBlockListOutput {
+    pub fn describeQuerySuggestionsBlockList(self: *Self, allocator: std.mem.Allocator, input: describe_query_suggestions_block_list.DescribeQuerySuggestionsBlockListInput, options: CallOptions) !describe_query_suggestions_block_list.DescribeQuerySuggestionsBlockListOutput {
         return describe_query_suggestions_block_list.execute(self, allocator, input, options);
     }
 
@@ -544,12 +545,12 @@ pub const Client = struct {
     ///
     /// `DescribeQuerySuggestionsConfig` is currently not supported in the
     /// Amazon Web Services GovCloud (US-West) region.
-    pub fn describeQuerySuggestionsConfig(self: *Self, allocator: std.mem.Allocator, input: describe_query_suggestions_config.DescribeQuerySuggestionsConfigInput, options: describe_query_suggestions_config.Options) !describe_query_suggestions_config.DescribeQuerySuggestionsConfigOutput {
+    pub fn describeQuerySuggestionsConfig(self: *Self, allocator: std.mem.Allocator, input: describe_query_suggestions_config.DescribeQuerySuggestionsConfigInput, options: CallOptions) !describe_query_suggestions_config.DescribeQuerySuggestionsConfigOutput {
         return describe_query_suggestions_config.execute(self, allocator, input, options);
     }
 
     /// Gets information about an Amazon Kendra thesaurus.
-    pub fn describeThesaurus(self: *Self, allocator: std.mem.Allocator, input: describe_thesaurus.DescribeThesaurusInput, options: describe_thesaurus.Options) !describe_thesaurus.DescribeThesaurusOutput {
+    pub fn describeThesaurus(self: *Self, allocator: std.mem.Allocator, input: describe_thesaurus.DescribeThesaurusInput, options: CallOptions) !describe_thesaurus.DescribeThesaurusOutput {
         return describe_thesaurus.execute(self, allocator, input, options);
     }
 
@@ -560,7 +561,7 @@ pub const Client = struct {
     /// application experience, see [Building
     /// a search experience with no
     /// code](https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
-    pub fn disassociateEntitiesFromExperience(self: *Self, allocator: std.mem.Allocator, input: disassociate_entities_from_experience.DisassociateEntitiesFromExperienceInput, options: disassociate_entities_from_experience.Options) !disassociate_entities_from_experience.DisassociateEntitiesFromExperienceOutput {
+    pub fn disassociateEntitiesFromExperience(self: *Self, allocator: std.mem.Allocator, input: disassociate_entities_from_experience.DisassociateEntitiesFromExperienceInput, options: CallOptions) !disassociate_entities_from_experience.DisassociateEntitiesFromExperienceOutput {
         return disassociate_entities_from_experience.execute(self, allocator, input, options);
     }
 
@@ -572,7 +573,7 @@ pub const Client = struct {
     /// search application experience, see [Building a
     /// search experience with no
     /// code](https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
-    pub fn disassociatePersonasFromEntities(self: *Self, allocator: std.mem.Allocator, input: disassociate_personas_from_entities.DisassociatePersonasFromEntitiesInput, options: disassociate_personas_from_entities.Options) !disassociate_personas_from_entities.DisassociatePersonasFromEntitiesOutput {
+    pub fn disassociatePersonasFromEntities(self: *Self, allocator: std.mem.Allocator, input: disassociate_personas_from_entities.DisassociatePersonasFromEntitiesInput, options: CallOptions) !disassociate_personas_from_entities.DisassociatePersonasFromEntitiesOutput {
         return disassociate_personas_from_entities.execute(self, allocator, input, options);
     }
 
@@ -580,14 +581,14 @@ pub const Client = struct {
     ///
     /// `GetQuerySuggestions` is currently not supported in the
     /// Amazon Web Services GovCloud (US-West) region.
-    pub fn getQuerySuggestions(self: *Self, allocator: std.mem.Allocator, input: get_query_suggestions.GetQuerySuggestionsInput, options: get_query_suggestions.Options) !get_query_suggestions.GetQuerySuggestionsOutput {
+    pub fn getQuerySuggestions(self: *Self, allocator: std.mem.Allocator, input: get_query_suggestions.GetQuerySuggestionsInput, options: CallOptions) !get_query_suggestions.GetQuerySuggestionsOutput {
         return get_query_suggestions.execute(self, allocator, input, options);
     }
 
     /// Retrieves search metrics data. The data provides a snapshot of how your
     /// users interact
     /// with your search application and how effective the application is.
-    pub fn getSnapshots(self: *Self, allocator: std.mem.Allocator, input: get_snapshots.GetSnapshotsInput, options: get_snapshots.Options) !get_snapshots.GetSnapshotsOutput {
+    pub fn getSnapshots(self: *Self, allocator: std.mem.Allocator, input: get_snapshots.GetSnapshotsInput, options: CallOptions) !get_snapshots.GetSnapshotsOutput {
         return get_snapshots.execute(self, allocator, input, options);
     }
 
@@ -597,23 +598,23 @@ pub const Client = struct {
     /// filtering,
     /// where search results are filtered based on the user or their group access to
     /// documents.
-    pub fn listAccessControlConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_access_control_configurations.ListAccessControlConfigurationsInput, options: list_access_control_configurations.Options) !list_access_control_configurations.ListAccessControlConfigurationsOutput {
+    pub fn listAccessControlConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_access_control_configurations.ListAccessControlConfigurationsInput, options: CallOptions) !list_access_control_configurations.ListAccessControlConfigurationsOutput {
         return list_access_control_configurations.execute(self, allocator, input, options);
     }
 
     /// Gets statistics about synchronizing a data source connector.
-    pub fn listDataSourceSyncJobs(self: *Self, allocator: std.mem.Allocator, input: list_data_source_sync_jobs.ListDataSourceSyncJobsInput, options: list_data_source_sync_jobs.Options) !list_data_source_sync_jobs.ListDataSourceSyncJobsOutput {
+    pub fn listDataSourceSyncJobs(self: *Self, allocator: std.mem.Allocator, input: list_data_source_sync_jobs.ListDataSourceSyncJobsInput, options: CallOptions) !list_data_source_sync_jobs.ListDataSourceSyncJobsOutput {
         return list_data_source_sync_jobs.execute(self, allocator, input, options);
     }
 
     /// Lists the data source connectors that you have created.
-    pub fn listDataSources(self: *Self, allocator: std.mem.Allocator, input: list_data_sources.ListDataSourcesInput, options: list_data_sources.Options) !list_data_sources.ListDataSourcesOutput {
+    pub fn listDataSources(self: *Self, allocator: std.mem.Allocator, input: list_data_sources.ListDataSourcesInput, options: CallOptions) !list_data_sources.ListDataSourcesOutput {
         return list_data_sources.execute(self, allocator, input, options);
     }
 
     /// Lists specific permissions of users and groups with access to your
     /// Amazon Kendra experience.
-    pub fn listEntityPersonas(self: *Self, allocator: std.mem.Allocator, input: list_entity_personas.ListEntityPersonasInput, options: list_entity_personas.Options) !list_entity_personas.ListEntityPersonasOutput {
+    pub fn listEntityPersonas(self: *Self, allocator: std.mem.Allocator, input: list_entity_personas.ListEntityPersonasInput, options: CallOptions) !list_entity_personas.ListEntityPersonasOutput {
         return list_entity_personas.execute(self, allocator, input, options);
     }
 
@@ -624,7 +625,7 @@ pub const Client = struct {
     /// application experience, see [Building
     /// a search experience with no
     /// code](https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
-    pub fn listExperienceEntities(self: *Self, allocator: std.mem.Allocator, input: list_experience_entities.ListExperienceEntitiesInput, options: list_experience_entities.Options) !list_experience_entities.ListExperienceEntitiesOutput {
+    pub fn listExperienceEntities(self: *Self, allocator: std.mem.Allocator, input: list_experience_entities.ListExperienceEntitiesInput, options: CallOptions) !list_experience_entities.ListExperienceEntitiesOutput {
         return list_experience_entities.execute(self, allocator, input, options);
     }
 
@@ -635,12 +636,12 @@ pub const Client = struct {
     /// experience, see [Building a
     /// search experience with no
     /// code](https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
-    pub fn listExperiences(self: *Self, allocator: std.mem.Allocator, input: list_experiences.ListExperiencesInput, options: list_experiences.Options) !list_experiences.ListExperiencesOutput {
+    pub fn listExperiences(self: *Self, allocator: std.mem.Allocator, input: list_experiences.ListExperiencesInput, options: CallOptions) !list_experiences.ListExperiencesOutput {
         return list_experiences.execute(self, allocator, input, options);
     }
 
     /// Gets a list of FAQs associated with an index.
-    pub fn listFaqs(self: *Self, allocator: std.mem.Allocator, input: list_faqs.ListFaqsInput, options: list_faqs.Options) !list_faqs.ListFaqsOutput {
+    pub fn listFaqs(self: *Self, allocator: std.mem.Allocator, input: list_faqs.ListFaqsInput, options: CallOptions) !list_faqs.ListFaqsOutput {
         return list_faqs.execute(self, allocator, input, options);
     }
 
@@ -649,7 +650,7 @@ pub const Client = struct {
     /// match
     /// of a query, then one or more specific documents are featured in the search
     /// results.
-    pub fn listFeaturedResultsSets(self: *Self, allocator: std.mem.Allocator, input: list_featured_results_sets.ListFeaturedResultsSetsInput, options: list_featured_results_sets.Options) !list_featured_results_sets.ListFeaturedResultsSetsOutput {
+    pub fn listFeaturedResultsSets(self: *Self, allocator: std.mem.Allocator, input: list_featured_results_sets.ListFeaturedResultsSetsInput, options: CallOptions) !list_featured_results_sets.ListFeaturedResultsSetsOutput {
         return list_featured_results_sets.execute(self, allocator, input, options);
     }
 
@@ -659,12 +660,12 @@ pub const Client = struct {
     ///
     /// `ListGroupsOlderThanOrderingId` is currently not supported in the Amazon Web
     /// Services GovCloud (US-West) region.
-    pub fn listGroupsOlderThanOrderingId(self: *Self, allocator: std.mem.Allocator, input: list_groups_older_than_ordering_id.ListGroupsOlderThanOrderingIdInput, options: list_groups_older_than_ordering_id.Options) !list_groups_older_than_ordering_id.ListGroupsOlderThanOrderingIdOutput {
+    pub fn listGroupsOlderThanOrderingId(self: *Self, allocator: std.mem.Allocator, input: list_groups_older_than_ordering_id.ListGroupsOlderThanOrderingIdInput, options: CallOptions) !list_groups_older_than_ordering_id.ListGroupsOlderThanOrderingIdOutput {
         return list_groups_older_than_ordering_id.execute(self, allocator, input, options);
     }
 
     /// Lists the Amazon Kendra indexes that you created.
-    pub fn listIndices(self: *Self, allocator: std.mem.Allocator, input: list_indices.ListIndicesInput, options: list_indices.Options) !list_indices.ListIndicesOutput {
+    pub fn listIndices(self: *Self, allocator: std.mem.Allocator, input: list_indices.ListIndicesInput, options: CallOptions) !list_indices.ListIndicesOutput {
         return list_indices.execute(self, allocator, input, options);
     }
 
@@ -677,19 +678,19 @@ pub const Client = struct {
     ///
     /// `ListQuerySuggestionsBlockLists` is currently not supported in the
     /// Amazon Web Services GovCloud (US-West) region.
-    pub fn listQuerySuggestionsBlockLists(self: *Self, allocator: std.mem.Allocator, input: list_query_suggestions_block_lists.ListQuerySuggestionsBlockListsInput, options: list_query_suggestions_block_lists.Options) !list_query_suggestions_block_lists.ListQuerySuggestionsBlockListsOutput {
+    pub fn listQuerySuggestionsBlockLists(self: *Self, allocator: std.mem.Allocator, input: list_query_suggestions_block_lists.ListQuerySuggestionsBlockListsInput, options: CallOptions) !list_query_suggestions_block_lists.ListQuerySuggestionsBlockListsOutput {
         return list_query_suggestions_block_lists.execute(self, allocator, input, options);
     }
 
     /// Gets a list of tags associated with a resource. Indexes, FAQs, data sources,
     /// and
     /// other resources can have tags associated with them.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists the thesauri for an index.
-    pub fn listThesauri(self: *Self, allocator: std.mem.Allocator, input: list_thesauri.ListThesauriInput, options: list_thesauri.Options) !list_thesauri.ListThesauriOutput {
+    pub fn listThesauri(self: *Self, allocator: std.mem.Allocator, input: list_thesauri.ListThesauriInput, options: CallOptions) !list_thesauri.ListThesauriOutput {
         return list_thesauri.execute(self, allocator, input, options);
     }
 
@@ -716,7 +717,7 @@ pub const Client = struct {
     ///
     /// If more than five `PUT` actions for a group are currently processing, a
     /// validation exception is thrown.
-    pub fn putPrincipalMapping(self: *Self, allocator: std.mem.Allocator, input: put_principal_mapping.PutPrincipalMappingInput, options: put_principal_mapping.Options) !put_principal_mapping.PutPrincipalMappingOutput {
+    pub fn putPrincipalMapping(self: *Self, allocator: std.mem.Allocator, input: put_principal_mapping.PutPrincipalMappingInput, options: CallOptions) !put_principal_mapping.PutPrincipalMappingOutput {
         return put_principal_mapping.execute(self, allocator, input, options);
     }
 
@@ -764,7 +765,7 @@ pub const Client = struct {
     /// using an Amazon Kendra Gen AI Enterprise Edition index and you try to use
     /// `USER_TOKEN` to configure user context policy, Amazon Kendra returns a
     /// `ValidationException` error.
-    pub fn query(self: *Self, allocator: std.mem.Allocator, input: query_.QueryInput, options: query_.Options) !query_.QueryOutput {
+    pub fn query(self: *Self, allocator: std.mem.Allocator, input: query_.QueryInput, options: CallOptions) !query_.QueryOutput {
         return query_.execute(self, allocator, input, options);
     }
 
@@ -817,7 +818,7 @@ pub const Client = struct {
     /// use
     /// `USER_TOKEN` to configure user context policy, Amazon Kendra returns a
     /// `ValidationException` error.
-    pub fn retrieve(self: *Self, allocator: std.mem.Allocator, input: retrieve_.RetrieveInput, options: retrieve_.Options) !retrieve_.RetrieveOutput {
+    pub fn retrieve(self: *Self, allocator: std.mem.Allocator, input: retrieve_.RetrieveInput, options: CallOptions) !retrieve_.RetrieveOutput {
         return retrieve_.execute(self, allocator, input, options);
     }
 
@@ -831,14 +832,14 @@ pub const Client = struct {
     /// documents from your data source respository could take up to an hour or
     /// more, depending on
     /// the number of documents to sync.
-    pub fn startDataSourceSyncJob(self: *Self, allocator: std.mem.Allocator, input: start_data_source_sync_job.StartDataSourceSyncJobInput, options: start_data_source_sync_job.Options) !start_data_source_sync_job.StartDataSourceSyncJobOutput {
+    pub fn startDataSourceSyncJob(self: *Self, allocator: std.mem.Allocator, input: start_data_source_sync_job.StartDataSourceSyncJobInput, options: CallOptions) !start_data_source_sync_job.StartDataSourceSyncJobOutput {
         return start_data_source_sync_job.execute(self, allocator, input, options);
     }
 
     /// Stops a synchronization job that is currently running. You can't stop a
     /// scheduled
     /// synchronization job.
-    pub fn stopDataSourceSyncJob(self: *Self, allocator: std.mem.Allocator, input: stop_data_source_sync_job.StopDataSourceSyncJobInput, options: stop_data_source_sync_job.Options) !stop_data_source_sync_job.StopDataSourceSyncJobOutput {
+    pub fn stopDataSourceSyncJob(self: *Self, allocator: std.mem.Allocator, input: stop_data_source_sync_job.StopDataSourceSyncJobInput, options: CallOptions) !stop_data_source_sync_job.StopDataSourceSyncJobOutput {
         return stop_data_source_sync_job.execute(self, allocator, input, options);
     }
 
@@ -847,19 +848,19 @@ pub const Client = struct {
     ///
     /// `SubmitFeedback` is currently not supported in the
     /// Amazon Web Services GovCloud (US-West) region.
-    pub fn submitFeedback(self: *Self, allocator: std.mem.Allocator, input: submit_feedback.SubmitFeedbackInput, options: submit_feedback.Options) !submit_feedback.SubmitFeedbackOutput {
+    pub fn submitFeedback(self: *Self, allocator: std.mem.Allocator, input: submit_feedback.SubmitFeedbackInput, options: CallOptions) !submit_feedback.SubmitFeedbackOutput {
         return submit_feedback.execute(self, allocator, input, options);
     }
 
     /// Adds the specified tag to the specified index, FAQ, data source, or other
     /// resource. If
     /// the tag already exists, the existing value is replaced with the new value.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag from an index, FAQ, data source, or other resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -903,12 +904,12 @@ pub const Client = struct {
     /// `CreateAccessControlConfiguration` for an Amazon Kendra Gen AI Enterprise
     /// Edition index. Amazon Kendra will return a `ValidationException` error for a
     /// `Gen_AI_ENTERPRISE_EDITION` index.
-    pub fn updateAccessControlConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_access_control_configuration.UpdateAccessControlConfigurationInput, options: update_access_control_configuration.Options) !update_access_control_configuration.UpdateAccessControlConfigurationOutput {
+    pub fn updateAccessControlConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_access_control_configuration.UpdateAccessControlConfigurationInput, options: CallOptions) !update_access_control_configuration.UpdateAccessControlConfigurationOutput {
         return update_access_control_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates an Amazon Kendra data source connector.
-    pub fn updateDataSource(self: *Self, allocator: std.mem.Allocator, input: update_data_source.UpdateDataSourceInput, options: update_data_source.Options) !update_data_source.UpdateDataSourceOutput {
+    pub fn updateDataSource(self: *Self, allocator: std.mem.Allocator, input: update_data_source.UpdateDataSourceInput, options: CallOptions) !update_data_source.UpdateDataSourceOutput {
         return update_data_source.execute(self, allocator, input, options);
     }
 
@@ -917,7 +918,7 @@ pub const Client = struct {
     /// creating a search application experience, see [Building a
     /// search experience with no
     /// code](https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
-    pub fn updateExperience(self: *Self, allocator: std.mem.Allocator, input: update_experience.UpdateExperienceInput, options: update_experience.Options) !update_experience.UpdateExperienceOutput {
+    pub fn updateExperience(self: *Self, allocator: std.mem.Allocator, input: update_experience.UpdateExperienceInput, options: CallOptions) !update_experience.UpdateExperienceOutput {
         return update_experience.execute(self, allocator, input, options);
     }
 
@@ -928,12 +929,12 @@ pub const Client = struct {
     /// for featuring in the results. If a query contains an exact match of a query,
     /// then one
     /// or more specific documents are featured in the search results.
-    pub fn updateFeaturedResultsSet(self: *Self, allocator: std.mem.Allocator, input: update_featured_results_set.UpdateFeaturedResultsSetInput, options: update_featured_results_set.Options) !update_featured_results_set.UpdateFeaturedResultsSetOutput {
+    pub fn updateFeaturedResultsSet(self: *Self, allocator: std.mem.Allocator, input: update_featured_results_set.UpdateFeaturedResultsSetInput, options: CallOptions) !update_featured_results_set.UpdateFeaturedResultsSetOutput {
         return update_featured_results_set.execute(self, allocator, input, options);
     }
 
     /// Updates an Amazon Kendra index.
-    pub fn updateIndex(self: *Self, allocator: std.mem.Allocator, input: update_index.UpdateIndexInput, options: update_index.Options) !update_index.UpdateIndexOutput {
+    pub fn updateIndex(self: *Self, allocator: std.mem.Allocator, input: update_index.UpdateIndexInput, options: CallOptions) !update_index.UpdateIndexOutput {
         return update_index.execute(self, allocator, input, options);
     }
 
@@ -952,7 +953,7 @@ pub const Client = struct {
     ///
     /// `UpdateQuerySuggestionsBlockList` is currently not supported in the
     /// Amazon Web Services GovCloud (US-West) region.
-    pub fn updateQuerySuggestionsBlockList(self: *Self, allocator: std.mem.Allocator, input: update_query_suggestions_block_list.UpdateQuerySuggestionsBlockListInput, options: update_query_suggestions_block_list.Options) !update_query_suggestions_block_list.UpdateQuerySuggestionsBlockListOutput {
+    pub fn updateQuerySuggestionsBlockList(self: *Self, allocator: std.mem.Allocator, input: update_query_suggestions_block_list.UpdateQuerySuggestionsBlockListInput, options: CallOptions) !update_query_suggestions_block_list.UpdateQuerySuggestionsBlockListOutput {
         return update_query_suggestions_block_list.execute(self, allocator, input, options);
     }
 
@@ -972,12 +973,12 @@ pub const Client = struct {
     ///
     /// `UpdateQuerySuggestionsConfig` is currently not supported in the
     /// Amazon Web Services GovCloud (US-West) region.
-    pub fn updateQuerySuggestionsConfig(self: *Self, allocator: std.mem.Allocator, input: update_query_suggestions_config.UpdateQuerySuggestionsConfigInput, options: update_query_suggestions_config.Options) !update_query_suggestions_config.UpdateQuerySuggestionsConfigOutput {
+    pub fn updateQuerySuggestionsConfig(self: *Self, allocator: std.mem.Allocator, input: update_query_suggestions_config.UpdateQuerySuggestionsConfigInput, options: CallOptions) !update_query_suggestions_config.UpdateQuerySuggestionsConfigOutput {
         return update_query_suggestions_config.execute(self, allocator, input, options);
     }
 
     /// Updates a thesaurus for an index.
-    pub fn updateThesaurus(self: *Self, allocator: std.mem.Allocator, input: update_thesaurus.UpdateThesaurusInput, options: update_thesaurus.Options) !update_thesaurus.UpdateThesaurusOutput {
+    pub fn updateThesaurus(self: *Self, allocator: std.mem.Allocator, input: update_thesaurus.UpdateThesaurusInput, options: CallOptions) !update_thesaurus.UpdateThesaurusOutput {
         return update_thesaurus.execute(self, allocator, input, options);
     }
 

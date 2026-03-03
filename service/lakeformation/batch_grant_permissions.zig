@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchPermissionsRequestEntry = @import("batch_permissions_request_entry.zig").BatchPermissionsRequestEntry;
 const BatchPermissionsFailureEntry = @import("batch_permissions_failure_entry.zig").BatchPermissionsFailureEntry;
@@ -32,11 +33,7 @@ pub const BatchGrantPermissionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGrantPermissionsInput, options: Options) !BatchGrantPermissionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGrantPermissionsInput, options: CallOptions) !BatchGrantPermissionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

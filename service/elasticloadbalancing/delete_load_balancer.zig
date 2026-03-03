@@ -2,17 +2,14 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
-const DeleteLoadBalancerInput = @import("delete_access_point_input.zig").DeleteAccessPointInput;
+pub const DeleteLoadBalancerInput = @import("delete_access_point_input.zig").DeleteAccessPointInput;
 
-const DeleteLoadBalancerOutput = @import("delete_access_point_output.zig").DeleteAccessPointOutput;
+pub const DeleteLoadBalancerOutput = @import("delete_access_point_output.zig").DeleteAccessPointOutput;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLoadBalancerInput, options: Options) !DeleteLoadBalancerOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLoadBalancerInput, options: CallOptions) !DeleteLoadBalancerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

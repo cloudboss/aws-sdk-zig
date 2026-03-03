@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CrossAccountConfiguration = @import("cross_account_configuration.zig").CrossAccountConfiguration;
 const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
@@ -85,11 +86,7 @@ pub const GetInvestigationGroupOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetInvestigationGroupInput, options: Options) !GetInvestigationGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetInvestigationGroupInput, options: CallOptions) !GetInvestigationGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const S3BucketSource = @import("s3_bucket_source.zig").S3BucketSource;
 const ImportTask = @import("import_task.zig").ImportTask;
@@ -32,11 +33,7 @@ pub const StartImportOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartImportInput, options: Options) !StartImportOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartImportInput, options: CallOptions) !StartImportOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

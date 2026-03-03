@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const NotebookInstanceLifecycleHook = @import("notebook_instance_lifecycle_hook.zig").NotebookInstanceLifecycleHook;
 const Tag = @import("tag.zig").Tag;
@@ -42,11 +43,7 @@ pub const CreateNotebookInstanceLifecycleConfigOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateNotebookInstanceLifecycleConfigInput, options: Options) !CreateNotebookInstanceLifecycleConfigOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateNotebookInstanceLifecycleConfigInput, options: CallOptions) !CreateNotebookInstanceLifecycleConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

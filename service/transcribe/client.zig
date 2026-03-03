@@ -44,6 +44,7 @@ const update_call_analytics_category = @import("update_call_analytics_category.z
 const update_medical_vocabulary = @import("update_medical_vocabulary.zig");
 const update_vocabulary = @import("update_vocabulary.zig");
 const update_vocabulary_filter = @import("update_vocabulary_filter.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -102,7 +103,7 @@ pub const Client = struct {
     /// transcriptions](https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html) and [Creating categories for
     /// real-time
     /// transcriptions](https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html).
-    pub fn createCallAnalyticsCategory(self: *Self, allocator: std.mem.Allocator, input: create_call_analytics_category.CreateCallAnalyticsCategoryInput, options: create_call_analytics_category.Options) !create_call_analytics_category.CreateCallAnalyticsCategoryOutput {
+    pub fn createCallAnalyticsCategory(self: *Self, allocator: std.mem.Allocator, input: create_call_analytics_category.CreateCallAnalyticsCategoryInput, options: CallOptions) !create_call_analytics_category.CreateCallAnalyticsCategoryOutput {
         return create_call_analytics_category.execute(self, allocator, input, options);
     }
 
@@ -119,7 +120,7 @@ pub const Client = struct {
     /// * The language of your model
     ///
     /// * A unique name for your model
-    pub fn createLanguageModel(self: *Self, allocator: std.mem.Allocator, input: create_language_model.CreateLanguageModelInput, options: create_language_model.Options) !create_language_model.CreateLanguageModelOutput {
+    pub fn createLanguageModel(self: *Self, allocator: std.mem.Allocator, input: create_language_model.CreateLanguageModelInput, options: CallOptions) !create_language_model.CreateLanguageModelOutput {
         return create_language_model.execute(self, allocator, input, options);
     }
 
@@ -143,7 +144,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Custom
     /// vocabularies](https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html).
-    pub fn createMedicalVocabulary(self: *Self, allocator: std.mem.Allocator, input: create_medical_vocabulary.CreateMedicalVocabularyInput, options: create_medical_vocabulary.Options) !create_medical_vocabulary.CreateMedicalVocabularyOutput {
+    pub fn createMedicalVocabulary(self: *Self, allocator: std.mem.Allocator, input: create_medical_vocabulary.CreateMedicalVocabularyInput, options: CallOptions) !create_medical_vocabulary.CreateMedicalVocabularyOutput {
         return create_medical_vocabulary.execute(self, allocator, input, options);
     }
 
@@ -167,7 +168,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Custom
     /// vocabularies](https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html).
-    pub fn createVocabulary(self: *Self, allocator: std.mem.Allocator, input: create_vocabulary.CreateVocabularyInput, options: create_vocabulary.Options) !create_vocabulary.CreateVocabularyOutput {
+    pub fn createVocabulary(self: *Self, allocator: std.mem.Allocator, input: create_vocabulary.CreateVocabularyInput, options: CallOptions) !create_vocabulary.CreateVocabularyOutput {
         return create_vocabulary.execute(self, allocator, input, options);
     }
 
@@ -188,7 +189,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Vocabulary
     /// filtering](https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html).
-    pub fn createVocabularyFilter(self: *Self, allocator: std.mem.Allocator, input: create_vocabulary_filter.CreateVocabularyFilterInput, options: create_vocabulary_filter.Options) !create_vocabulary_filter.CreateVocabularyFilterOutput {
+    pub fn createVocabularyFilter(self: *Self, allocator: std.mem.Allocator, input: create_vocabulary_filter.CreateVocabularyFilterInput, options: CallOptions) !create_vocabulary_filter.CreateVocabularyFilterOutput {
         return create_vocabulary_filter.execute(self, allocator, input, options);
     }
 
@@ -196,7 +197,7 @@ pub const Client = struct {
     /// of the
     /// category you want to delete using `CategoryName`. Category names are case
     /// sensitive.
-    pub fn deleteCallAnalyticsCategory(self: *Self, allocator: std.mem.Allocator, input: delete_call_analytics_category.DeleteCallAnalyticsCategoryInput, options: delete_call_analytics_category.Options) !delete_call_analytics_category.DeleteCallAnalyticsCategoryOutput {
+    pub fn deleteCallAnalyticsCategory(self: *Self, allocator: std.mem.Allocator, input: delete_call_analytics_category.DeleteCallAnalyticsCategoryInput, options: CallOptions) !delete_call_analytics_category.DeleteCallAnalyticsCategoryOutput {
         return delete_call_analytics_category.execute(self, allocator, input, options);
     }
 
@@ -204,7 +205,7 @@ pub const Client = struct {
     /// job you
     /// want to delete using `CallAnalyticsJobName`. Job names are case
     /// sensitive.
-    pub fn deleteCallAnalyticsJob(self: *Self, allocator: std.mem.Allocator, input: delete_call_analytics_job.DeleteCallAnalyticsJobInput, options: delete_call_analytics_job.Options) !delete_call_analytics_job.DeleteCallAnalyticsJobOutput {
+    pub fn deleteCallAnalyticsJob(self: *Self, allocator: std.mem.Allocator, input: delete_call_analytics_job.DeleteCallAnalyticsJobInput, options: CallOptions) !delete_call_analytics_job.DeleteCallAnalyticsJobOutput {
         return delete_call_analytics_job.execute(self, allocator, input, options);
     }
 
@@ -212,14 +213,14 @@ pub const Client = struct {
     /// the
     /// language model you want to delete using `ModelName`. custom language model
     /// names are case sensitive.
-    pub fn deleteLanguageModel(self: *Self, allocator: std.mem.Allocator, input: delete_language_model.DeleteLanguageModelInput, options: delete_language_model.Options) !delete_language_model.DeleteLanguageModelOutput {
+    pub fn deleteLanguageModel(self: *Self, allocator: std.mem.Allocator, input: delete_language_model.DeleteLanguageModelInput, options: CallOptions) !delete_language_model.DeleteLanguageModelOutput {
         return delete_language_model.execute(self, allocator, input, options);
     }
 
     /// Deletes a Medical Scribe job. To use this operation, specify the name of the
     /// job you want to delete using `MedicalScribeJobName`. Job names are
     /// case sensitive.
-    pub fn deleteMedicalScribeJob(self: *Self, allocator: std.mem.Allocator, input: delete_medical_scribe_job.DeleteMedicalScribeJobInput, options: delete_medical_scribe_job.Options) !delete_medical_scribe_job.DeleteMedicalScribeJobOutput {
+    pub fn deleteMedicalScribeJob(self: *Self, allocator: std.mem.Allocator, input: delete_medical_scribe_job.DeleteMedicalScribeJobInput, options: CallOptions) !delete_medical_scribe_job.DeleteMedicalScribeJobOutput {
         return delete_medical_scribe_job.execute(self, allocator, input, options);
     }
 
@@ -227,7 +228,7 @@ pub const Client = struct {
     /// of the
     /// job you want to delete using `MedicalTranscriptionJobName`. Job names are
     /// case sensitive.
-    pub fn deleteMedicalTranscriptionJob(self: *Self, allocator: std.mem.Allocator, input: delete_medical_transcription_job.DeleteMedicalTranscriptionJobInput, options: delete_medical_transcription_job.Options) !delete_medical_transcription_job.DeleteMedicalTranscriptionJobOutput {
+    pub fn deleteMedicalTranscriptionJob(self: *Self, allocator: std.mem.Allocator, input: delete_medical_transcription_job.DeleteMedicalTranscriptionJobInput, options: CallOptions) !delete_medical_transcription_job.DeleteMedicalTranscriptionJobOutput {
         return delete_medical_transcription_job.execute(self, allocator, input, options);
     }
 
@@ -235,7 +236,7 @@ pub const Client = struct {
     /// of the
     /// custom vocabulary you want to delete using `VocabularyName`. Custom
     /// vocabulary names are case sensitive.
-    pub fn deleteMedicalVocabulary(self: *Self, allocator: std.mem.Allocator, input: delete_medical_vocabulary.DeleteMedicalVocabularyInput, options: delete_medical_vocabulary.Options) !delete_medical_vocabulary.DeleteMedicalVocabularyOutput {
+    pub fn deleteMedicalVocabulary(self: *Self, allocator: std.mem.Allocator, input: delete_medical_vocabulary.DeleteMedicalVocabularyInput, options: CallOptions) !delete_medical_vocabulary.DeleteMedicalVocabularyOutput {
         return delete_medical_vocabulary.execute(self, allocator, input, options);
     }
 
@@ -243,7 +244,7 @@ pub const Client = struct {
     /// job you
     /// want to delete using `TranscriptionJobName`. Job names are case
     /// sensitive.
-    pub fn deleteTranscriptionJob(self: *Self, allocator: std.mem.Allocator, input: delete_transcription_job.DeleteTranscriptionJobInput, options: delete_transcription_job.Options) !delete_transcription_job.DeleteTranscriptionJobOutput {
+    pub fn deleteTranscriptionJob(self: *Self, allocator: std.mem.Allocator, input: delete_transcription_job.DeleteTranscriptionJobInput, options: CallOptions) !delete_transcription_job.DeleteTranscriptionJobOutput {
         return delete_transcription_job.execute(self, allocator, input, options);
     }
 
@@ -252,7 +253,7 @@ pub const Client = struct {
     /// vocabulary you want to delete using `VocabularyName`. Custom vocabulary
     /// names
     /// are case sensitive.
-    pub fn deleteVocabulary(self: *Self, allocator: std.mem.Allocator, input: delete_vocabulary.DeleteVocabularyInput, options: delete_vocabulary.Options) !delete_vocabulary.DeleteVocabularyOutput {
+    pub fn deleteVocabulary(self: *Self, allocator: std.mem.Allocator, input: delete_vocabulary.DeleteVocabularyInput, options: CallOptions) !delete_vocabulary.DeleteVocabularyOutput {
         return delete_vocabulary.execute(self, allocator, input, options);
     }
 
@@ -260,7 +261,7 @@ pub const Client = struct {
     /// of the
     /// custom vocabulary filter you want to delete using `VocabularyFilterName`.
     /// Custom vocabulary filter names are case sensitive.
-    pub fn deleteVocabularyFilter(self: *Self, allocator: std.mem.Allocator, input: delete_vocabulary_filter.DeleteVocabularyFilterInput, options: delete_vocabulary_filter.Options) !delete_vocabulary_filter.DeleteVocabularyFilterOutput {
+    pub fn deleteVocabularyFilter(self: *Self, allocator: std.mem.Allocator, input: delete_vocabulary_filter.DeleteVocabularyFilterInput, options: CallOptions) !delete_vocabulary_filter.DeleteVocabularyFilterOutput {
         return delete_vocabulary_filter.execute(self, allocator, input, options);
     }
 
@@ -277,14 +278,14 @@ pub const Client = struct {
     /// successful,
     /// you can use `DescribeLanguageModel` to help identify the reason for this
     /// failure.
-    pub fn describeLanguageModel(self: *Self, allocator: std.mem.Allocator, input: describe_language_model.DescribeLanguageModelInput, options: describe_language_model.Options) !describe_language_model.DescribeLanguageModelOutput {
+    pub fn describeLanguageModel(self: *Self, allocator: std.mem.Allocator, input: describe_language_model.DescribeLanguageModelInput, options: CallOptions) !describe_language_model.DescribeLanguageModelOutput {
         return describe_language_model.execute(self, allocator, input, options);
     }
 
     /// Provides information about the specified Call Analytics category.
     ///
     /// To get a list of your Call Analytics categories, use the operation.
-    pub fn getCallAnalyticsCategory(self: *Self, allocator: std.mem.Allocator, input: get_call_analytics_category.GetCallAnalyticsCategoryInput, options: get_call_analytics_category.Options) !get_call_analytics_category.GetCallAnalyticsCategoryOutput {
+    pub fn getCallAnalyticsCategory(self: *Self, allocator: std.mem.Allocator, input: get_call_analytics_category.GetCallAnalyticsCategoryInput, options: CallOptions) !get_call_analytics_category.GetCallAnalyticsCategoryOutput {
         return get_call_analytics_category.execute(self, allocator, input, options);
     }
 
@@ -306,7 +307,7 @@ pub const Client = struct {
     /// file at the location specified in `RedactedMediaFileUri`.
     ///
     /// To get a list of your Call Analytics jobs, use the operation.
-    pub fn getCallAnalyticsJob(self: *Self, allocator: std.mem.Allocator, input: get_call_analytics_job.GetCallAnalyticsJobInput, options: get_call_analytics_job.Options) !get_call_analytics_job.GetCallAnalyticsJobOutput {
+    pub fn getCallAnalyticsJob(self: *Self, allocator: std.mem.Allocator, input: get_call_analytics_job.GetCallAnalyticsJobInput, options: CallOptions) !get_call_analytics_job.GetCallAnalyticsJobOutput {
         return get_call_analytics_job.execute(self, allocator, input, options);
     }
 
@@ -321,7 +322,7 @@ pub const Client = struct {
     /// failed.
     ///
     /// To get a list of your Medical Scribe jobs, use the operation.
-    pub fn getMedicalScribeJob(self: *Self, allocator: std.mem.Allocator, input: get_medical_scribe_job.GetMedicalScribeJobInput, options: get_medical_scribe_job.Options) !get_medical_scribe_job.GetMedicalScribeJobOutput {
+    pub fn getMedicalScribeJob(self: *Self, allocator: std.mem.Allocator, input: get_medical_scribe_job.GetMedicalScribeJobInput, options: CallOptions) !get_medical_scribe_job.GetMedicalScribeJobOutput {
         return get_medical_scribe_job.execute(self, allocator, input, options);
     }
 
@@ -335,7 +336,7 @@ pub const Client = struct {
     /// failed.
     ///
     /// To get a list of your medical transcription jobs, use the operation.
-    pub fn getMedicalTranscriptionJob(self: *Self, allocator: std.mem.Allocator, input: get_medical_transcription_job.GetMedicalTranscriptionJobInput, options: get_medical_transcription_job.Options) !get_medical_transcription_job.GetMedicalTranscriptionJobOutput {
+    pub fn getMedicalTranscriptionJob(self: *Self, allocator: std.mem.Allocator, input: get_medical_transcription_job.GetMedicalTranscriptionJobInput, options: CallOptions) !get_medical_transcription_job.GetMedicalTranscriptionJobOutput {
         return get_medical_transcription_job.execute(self, allocator, input, options);
     }
 
@@ -347,7 +348,7 @@ pub const Client = struct {
     /// `FailureReason` provides details on why your vocabulary failed.
     ///
     /// To get a list of your custom medical vocabularies, use the operation.
-    pub fn getMedicalVocabulary(self: *Self, allocator: std.mem.Allocator, input: get_medical_vocabulary.GetMedicalVocabularyInput, options: get_medical_vocabulary.Options) !get_medical_vocabulary.GetMedicalVocabularyOutput {
+    pub fn getMedicalVocabulary(self: *Self, allocator: std.mem.Allocator, input: get_medical_vocabulary.GetMedicalVocabularyInput, options: CallOptions) !get_medical_vocabulary.GetMedicalVocabularyOutput {
         return get_medical_vocabulary.execute(self, allocator, input, options);
     }
 
@@ -365,7 +366,7 @@ pub const Client = struct {
     /// specified in `RedactedTranscriptFileUri`.
     ///
     /// To get a list of your transcription jobs, use the operation.
-    pub fn getTranscriptionJob(self: *Self, allocator: std.mem.Allocator, input: get_transcription_job.GetTranscriptionJobInput, options: get_transcription_job.Options) !get_transcription_job.GetTranscriptionJobOutput {
+    pub fn getTranscriptionJob(self: *Self, allocator: std.mem.Allocator, input: get_transcription_job.GetTranscriptionJobInput, options: CallOptions) !get_transcription_job.GetTranscriptionJobOutput {
         return get_transcription_job.execute(self, allocator, input, options);
     }
 
@@ -378,14 +379,14 @@ pub const Client = struct {
     /// failed.
     ///
     /// To get a list of your custom vocabularies, use the operation.
-    pub fn getVocabulary(self: *Self, allocator: std.mem.Allocator, input: get_vocabulary.GetVocabularyInput, options: get_vocabulary.Options) !get_vocabulary.GetVocabularyOutput {
+    pub fn getVocabulary(self: *Self, allocator: std.mem.Allocator, input: get_vocabulary.GetVocabularyInput, options: CallOptions) !get_vocabulary.GetVocabularyOutput {
         return get_vocabulary.execute(self, allocator, input, options);
     }
 
     /// Provides information about the specified custom vocabulary filter.
     ///
     /// To get a list of your custom vocabulary filters, use the operation.
-    pub fn getVocabularyFilter(self: *Self, allocator: std.mem.Allocator, input: get_vocabulary_filter.GetVocabularyFilterInput, options: get_vocabulary_filter.Options) !get_vocabulary_filter.GetVocabularyFilterOutput {
+    pub fn getVocabularyFilter(self: *Self, allocator: std.mem.Allocator, input: get_vocabulary_filter.GetVocabularyFilterInput, options: CallOptions) !get_vocabulary_filter.GetVocabularyFilterOutput {
         return get_vocabulary_filter.execute(self, allocator, input, options);
     }
 
@@ -395,7 +396,7 @@ pub const Client = struct {
     ///
     /// To get detailed information about a specific Call Analytics category, use
     /// the operation.
-    pub fn listCallAnalyticsCategories(self: *Self, allocator: std.mem.Allocator, input: list_call_analytics_categories.ListCallAnalyticsCategoriesInput, options: list_call_analytics_categories.Options) !list_call_analytics_categories.ListCallAnalyticsCategoriesOutput {
+    pub fn listCallAnalyticsCategories(self: *Self, allocator: std.mem.Allocator, input: list_call_analytics_categories.ListCallAnalyticsCategoriesInput, options: CallOptions) !list_call_analytics_categories.ListCallAnalyticsCategoriesOutput {
         return list_call_analytics_categories.execute(self, allocator, input, options);
     }
 
@@ -405,7 +406,7 @@ pub const Client = struct {
     ///
     /// To get detailed information about a specific Call Analytics job, use the
     /// operation.
-    pub fn listCallAnalyticsJobs(self: *Self, allocator: std.mem.Allocator, input: list_call_analytics_jobs.ListCallAnalyticsJobsInput, options: list_call_analytics_jobs.Options) !list_call_analytics_jobs.ListCallAnalyticsJobsOutput {
+    pub fn listCallAnalyticsJobs(self: *Self, allocator: std.mem.Allocator, input: list_call_analytics_jobs.ListCallAnalyticsJobsInput, options: CallOptions) !list_call_analytics_jobs.ListCallAnalyticsJobsOutput {
         return list_call_analytics_jobs.execute(self, allocator, input, options);
     }
 
@@ -415,7 +416,7 @@ pub const Client = struct {
     ///
     /// To get detailed information about a specific custom language model, use the
     /// operation.
-    pub fn listLanguageModels(self: *Self, allocator: std.mem.Allocator, input: list_language_models.ListLanguageModelsInput, options: list_language_models.Options) !list_language_models.ListLanguageModelsOutput {
+    pub fn listLanguageModels(self: *Self, allocator: std.mem.Allocator, input: list_language_models.ListLanguageModelsInput, options: CallOptions) !list_language_models.ListLanguageModelsOutput {
         return list_language_models.execute(self, allocator, input, options);
     }
 
@@ -425,7 +426,7 @@ pub const Client = struct {
     ///
     /// To get detailed information about a specific Medical Scribe job, use the
     /// operation.
-    pub fn listMedicalScribeJobs(self: *Self, allocator: std.mem.Allocator, input: list_medical_scribe_jobs.ListMedicalScribeJobsInput, options: list_medical_scribe_jobs.Options) !list_medical_scribe_jobs.ListMedicalScribeJobsOutput {
+    pub fn listMedicalScribeJobs(self: *Self, allocator: std.mem.Allocator, input: list_medical_scribe_jobs.ListMedicalScribeJobsInput, options: CallOptions) !list_medical_scribe_jobs.ListMedicalScribeJobsOutput {
         return list_medical_scribe_jobs.execute(self, allocator, input, options);
     }
 
@@ -435,7 +436,7 @@ pub const Client = struct {
     ///
     /// To get detailed information about a specific medical transcription job, use
     /// the operation.
-    pub fn listMedicalTranscriptionJobs(self: *Self, allocator: std.mem.Allocator, input: list_medical_transcription_jobs.ListMedicalTranscriptionJobsInput, options: list_medical_transcription_jobs.Options) !list_medical_transcription_jobs.ListMedicalTranscriptionJobsOutput {
+    pub fn listMedicalTranscriptionJobs(self: *Self, allocator: std.mem.Allocator, input: list_medical_transcription_jobs.ListMedicalTranscriptionJobsInput, options: CallOptions) !list_medical_transcription_jobs.ListMedicalTranscriptionJobsOutput {
         return list_medical_transcription_jobs.execute(self, allocator, input, options);
     }
 
@@ -445,7 +446,7 @@ pub const Client = struct {
     ///
     /// To get detailed information about a specific custom medical vocabulary, use
     /// the operation.
-    pub fn listMedicalVocabularies(self: *Self, allocator: std.mem.Allocator, input: list_medical_vocabularies.ListMedicalVocabulariesInput, options: list_medical_vocabularies.Options) !list_medical_vocabularies.ListMedicalVocabulariesOutput {
+    pub fn listMedicalVocabularies(self: *Self, allocator: std.mem.Allocator, input: list_medical_vocabularies.ListMedicalVocabulariesInput, options: CallOptions) !list_medical_vocabularies.ListMedicalVocabulariesOutput {
         return list_medical_vocabularies.execute(self, allocator, input, options);
     }
 
@@ -455,7 +456,7 @@ pub const Client = struct {
     ///
     /// To learn more about using tags with Amazon Transcribe, refer to [Tagging
     /// resources](https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -465,7 +466,7 @@ pub const Client = struct {
     ///
     /// To get detailed information about a specific transcription job, use the
     /// operation.
-    pub fn listTranscriptionJobs(self: *Self, allocator: std.mem.Allocator, input: list_transcription_jobs.ListTranscriptionJobsInput, options: list_transcription_jobs.Options) !list_transcription_jobs.ListTranscriptionJobsOutput {
+    pub fn listTranscriptionJobs(self: *Self, allocator: std.mem.Allocator, input: list_transcription_jobs.ListTranscriptionJobsInput, options: CallOptions) !list_transcription_jobs.ListTranscriptionJobsOutput {
         return list_transcription_jobs.execute(self, allocator, input, options);
     }
 
@@ -475,7 +476,7 @@ pub const Client = struct {
     ///
     /// To get detailed information about a specific custom vocabulary, use the
     /// operation.
-    pub fn listVocabularies(self: *Self, allocator: std.mem.Allocator, input: list_vocabularies.ListVocabulariesInput, options: list_vocabularies.Options) !list_vocabularies.ListVocabulariesOutput {
+    pub fn listVocabularies(self: *Self, allocator: std.mem.Allocator, input: list_vocabularies.ListVocabulariesInput, options: CallOptions) !list_vocabularies.ListVocabulariesOutput {
         return list_vocabularies.execute(self, allocator, input, options);
     }
 
@@ -485,7 +486,7 @@ pub const Client = struct {
     ///
     /// To get detailed information about a specific custom vocabulary filter, use
     /// the operation.
-    pub fn listVocabularyFilters(self: *Self, allocator: std.mem.Allocator, input: list_vocabulary_filters.ListVocabularyFiltersInput, options: list_vocabulary_filters.Options) !list_vocabulary_filters.ListVocabularyFiltersOutput {
+    pub fn listVocabularyFilters(self: *Self, allocator: std.mem.Allocator, input: list_vocabulary_filters.ListVocabularyFiltersInput, options: CallOptions) !list_vocabulary_filters.ListVocabularyFiltersOutput {
         return list_vocabulary_filters.execute(self, allocator, input, options);
     }
 
@@ -548,7 +549,7 @@ pub const Client = struct {
     /// audio, you
     /// can find your redacted media at the location specified in the
     /// `RedactedMediaFileUri` field of your response.
-    pub fn startCallAnalyticsJob(self: *Self, allocator: std.mem.Allocator, input: start_call_analytics_job.StartCallAnalyticsJobInput, options: start_call_analytics_job.Options) !start_call_analytics_job.StartCallAnalyticsJobOutput {
+    pub fn startCallAnalyticsJob(self: *Self, allocator: std.mem.Allocator, input: start_call_analytics_job.StartCallAnalyticsJobInput, options: CallOptions) !start_call_analytics_job.StartCallAnalyticsJobOutput {
         return start_call_analytics_job.execute(self, allocator, input, options);
     }
 
@@ -594,7 +595,7 @@ pub const Client = struct {
     /// * `ChannelDefinitions`: A `MedicalScribeChannelDefinitions` array should be
     ///   set if and only if the `ChannelIdentification`
     /// value of `Settings` is set to true.
-    pub fn startMedicalScribeJob(self: *Self, allocator: std.mem.Allocator, input: start_medical_scribe_job.StartMedicalScribeJobInput, options: start_medical_scribe_job.Options) !start_medical_scribe_job.StartMedicalScribeJobOutput {
+    pub fn startMedicalScribeJob(self: *Self, allocator: std.mem.Allocator, input: start_medical_scribe_job.StartMedicalScribeJobInput, options: CallOptions) !start_medical_scribe_job.StartMedicalScribeJobOutput {
         return start_medical_scribe_job.execute(self, allocator, input, options);
     }
 
@@ -641,7 +642,7 @@ pub const Client = struct {
     ///
     /// * `Type`: Choose whether your audio is a conversation or a
     /// dictation.
-    pub fn startMedicalTranscriptionJob(self: *Self, allocator: std.mem.Allocator, input: start_medical_transcription_job.StartMedicalTranscriptionJobInput, options: start_medical_transcription_job.Options) !start_medical_transcription_job.StartMedicalTranscriptionJobOutput {
+    pub fn startMedicalTranscriptionJob(self: *Self, allocator: std.mem.Allocator, input: start_medical_transcription_job.StartMedicalTranscriptionJobInput, options: CallOptions) !start_medical_transcription_job.StartMedicalTranscriptionJobOutput {
         return start_medical_transcription_job.execute(self, allocator, input, options);
     }
 
@@ -675,7 +676,7 @@ pub const Client = struct {
     /// media, use either `IdentifyLanguage` or
     /// `IdentifyMultipleLanguages` and let Amazon Transcribe identify
     /// the languages for you.
-    pub fn startTranscriptionJob(self: *Self, allocator: std.mem.Allocator, input: start_transcription_job.StartTranscriptionJobInput, options: start_transcription_job.Options) !start_transcription_job.StartTranscriptionJobOutput {
+    pub fn startTranscriptionJob(self: *Self, allocator: std.mem.Allocator, input: start_transcription_job.StartTranscriptionJobInput, options: CallOptions) !start_transcription_job.StartTranscriptionJobOutput {
         return start_transcription_job.execute(self, allocator, input, options);
     }
 
@@ -685,7 +686,7 @@ pub const Client = struct {
     ///
     /// To learn more about using tags with Amazon Transcribe, refer to [Tagging
     /// resources](https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -693,7 +694,7 @@ pub const Client = struct {
     ///
     /// If you include `UntagResource` in your request, you must also include
     /// `ResourceArn` and `TagKeys`.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -704,7 +705,7 @@ pub const Client = struct {
     /// category.
     ///
     /// To create a new category, see .
-    pub fn updateCallAnalyticsCategory(self: *Self, allocator: std.mem.Allocator, input: update_call_analytics_category.UpdateCallAnalyticsCategoryInput, options: update_call_analytics_category.Options) !update_call_analytics_category.UpdateCallAnalyticsCategoryOutput {
+    pub fn updateCallAnalyticsCategory(self: *Self, allocator: std.mem.Allocator, input: update_call_analytics_category.UpdateCallAnalyticsCategoryInput, options: CallOptions) !update_call_analytics_category.UpdateCallAnalyticsCategoryOutput {
         return update_call_analytics_category.execute(self, allocator, input, options);
     }
 
@@ -713,7 +714,7 @@ pub const Client = struct {
     /// overwrites all existing information with your new values; you cannot append
     /// new terms
     /// onto an existing custom vocabulary.
-    pub fn updateMedicalVocabulary(self: *Self, allocator: std.mem.Allocator, input: update_medical_vocabulary.UpdateMedicalVocabularyInput, options: update_medical_vocabulary.Options) !update_medical_vocabulary.UpdateMedicalVocabularyOutput {
+    pub fn updateMedicalVocabulary(self: *Self, allocator: std.mem.Allocator, input: update_medical_vocabulary.UpdateMedicalVocabularyInput, options: CallOptions) !update_medical_vocabulary.UpdateMedicalVocabularyOutput {
         return update_medical_vocabulary.execute(self, allocator, input, options);
     }
 
@@ -722,7 +723,7 @@ pub const Client = struct {
     /// existing information with your new values; you cannot append new terms onto
     /// an existing
     /// custom vocabulary.
-    pub fn updateVocabulary(self: *Self, allocator: std.mem.Allocator, input: update_vocabulary.UpdateVocabularyInput, options: update_vocabulary.Options) !update_vocabulary.UpdateVocabularyOutput {
+    pub fn updateVocabulary(self: *Self, allocator: std.mem.Allocator, input: update_vocabulary.UpdateVocabularyInput, options: CallOptions) !update_vocabulary.UpdateVocabularyOutput {
         return update_vocabulary.execute(self, allocator, input, options);
     }
 
@@ -731,7 +732,7 @@ pub const Client = struct {
     /// you provide overwrites all previous entries; you cannot append new terms
     /// onto an
     /// existing custom vocabulary filter.
-    pub fn updateVocabularyFilter(self: *Self, allocator: std.mem.Allocator, input: update_vocabulary_filter.UpdateVocabularyFilterInput, options: update_vocabulary_filter.Options) !update_vocabulary_filter.UpdateVocabularyFilterOutput {
+    pub fn updateVocabularyFilter(self: *Self, allocator: std.mem.Allocator, input: update_vocabulary_filter.UpdateVocabularyFilterInput, options: CallOptions) !update_vocabulary_filter.UpdateVocabularyFilterOutput {
         return update_vocabulary_filter.execute(self, allocator, input, options);
     }
 

@@ -13,6 +13,7 @@ const start_search_result_export_job = @import("start_search_result_export_job.z
 const stop_search_job = @import("stop_search_job.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -44,7 +45,7 @@ pub const Client = struct {
     }
 
     /// This operation retrieves metadata of a search job, including its progress.
-    pub fn getSearchJob(self: *Self, allocator: std.mem.Allocator, input: get_search_job.GetSearchJobInput, options: get_search_job.Options) !get_search_job.GetSearchJobOutput {
+    pub fn getSearchJob(self: *Self, allocator: std.mem.Allocator, input: get_search_job.GetSearchJobInput, options: CallOptions) !get_search_job.GetSearchJobOutput {
         return get_search_job.execute(self, allocator, input, options);
     }
 
@@ -55,7 +56,7 @@ pub const Client = struct {
     ///
     /// An export job allows you to retain results of a search beyond the search
     /// job's scheduled retention of 7 days.
-    pub fn getSearchResultExportJob(self: *Self, allocator: std.mem.Allocator, input: get_search_result_export_job.GetSearchResultExportJobInput, options: get_search_result_export_job.Options) !get_search_result_export_job.GetSearchResultExportJobOutput {
+    pub fn getSearchResultExportJob(self: *Self, allocator: std.mem.Allocator, input: get_search_result_export_job.GetSearchResultExportJobInput, options: CallOptions) !get_search_result_export_job.GetSearchResultExportJobOutput {
         return get_search_result_export_job.execute(self, allocator, input, options);
     }
 
@@ -70,28 +71,28 @@ pub const Client = struct {
     /// Only recovery points with a backup index that has a status of `ACTIVE` will
     /// be included in search results. If the index has any other status, its status
     /// will be displayed along with a status message.
-    pub fn listSearchJobBackups(self: *Self, allocator: std.mem.Allocator, input: list_search_job_backups.ListSearchJobBackupsInput, options: list_search_job_backups.Options) !list_search_job_backups.ListSearchJobBackupsOutput {
+    pub fn listSearchJobBackups(self: *Self, allocator: std.mem.Allocator, input: list_search_job_backups.ListSearchJobBackupsInput, options: CallOptions) !list_search_job_backups.ListSearchJobBackupsOutput {
         return list_search_job_backups.execute(self, allocator, input, options);
     }
 
     /// This operation returns a list of a specified search job.
-    pub fn listSearchJobResults(self: *Self, allocator: std.mem.Allocator, input: list_search_job_results.ListSearchJobResultsInput, options: list_search_job_results.Options) !list_search_job_results.ListSearchJobResultsOutput {
+    pub fn listSearchJobResults(self: *Self, allocator: std.mem.Allocator, input: list_search_job_results.ListSearchJobResultsInput, options: CallOptions) !list_search_job_results.ListSearchJobResultsOutput {
         return list_search_job_results.execute(self, allocator, input, options);
     }
 
     /// This operation returns a list of search jobs belonging to an account.
-    pub fn listSearchJobs(self: *Self, allocator: std.mem.Allocator, input: list_search_jobs.ListSearchJobsInput, options: list_search_jobs.Options) !list_search_jobs.ListSearchJobsOutput {
+    pub fn listSearchJobs(self: *Self, allocator: std.mem.Allocator, input: list_search_jobs.ListSearchJobsInput, options: CallOptions) !list_search_jobs.ListSearchJobsOutput {
         return list_search_jobs.execute(self, allocator, input, options);
     }
 
     /// This operation exports search results of a search job to a specified
     /// destination S3 bucket.
-    pub fn listSearchResultExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_search_result_export_jobs.ListSearchResultExportJobsInput, options: list_search_result_export_jobs.Options) !list_search_result_export_jobs.ListSearchResultExportJobsOutput {
+    pub fn listSearchResultExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_search_result_export_jobs.ListSearchResultExportJobsInput, options: CallOptions) !list_search_result_export_jobs.ListSearchResultExportJobsOutput {
         return list_search_result_export_jobs.execute(self, allocator, input, options);
     }
 
     /// This operation returns the tags for a resource type.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -99,30 +100,30 @@ pub const Client = struct {
     /// by SearchScope and items filtered by ItemFilters.
     ///
     /// You can optionally include ClientToken, EncryptionKeyArn, Name, and/or Tags.
-    pub fn startSearchJob(self: *Self, allocator: std.mem.Allocator, input: start_search_job.StartSearchJobInput, options: start_search_job.Options) !start_search_job.StartSearchJobOutput {
+    pub fn startSearchJob(self: *Self, allocator: std.mem.Allocator, input: start_search_job.StartSearchJobInput, options: CallOptions) !start_search_job.StartSearchJobOutput {
         return start_search_job.execute(self, allocator, input, options);
     }
 
     /// This operations starts a job to export the results of search job to a
     /// designated S3 bucket.
-    pub fn startSearchResultExportJob(self: *Self, allocator: std.mem.Allocator, input: start_search_result_export_job.StartSearchResultExportJobInput, options: start_search_result_export_job.Options) !start_search_result_export_job.StartSearchResultExportJobOutput {
+    pub fn startSearchResultExportJob(self: *Self, allocator: std.mem.Allocator, input: start_search_result_export_job.StartSearchResultExportJobInput, options: CallOptions) !start_search_result_export_job.StartSearchResultExportJobOutput {
         return start_search_result_export_job.execute(self, allocator, input, options);
     }
 
     /// This operations ends a search job.
     ///
     /// Only a search job with a status of `RUNNING` can be stopped.
-    pub fn stopSearchJob(self: *Self, allocator: std.mem.Allocator, input: stop_search_job.StopSearchJobInput, options: stop_search_job.Options) !stop_search_job.StopSearchJobOutput {
+    pub fn stopSearchJob(self: *Self, allocator: std.mem.Allocator, input: stop_search_job.StopSearchJobInput, options: CallOptions) !stop_search_job.StopSearchJobOutput {
         return stop_search_job.execute(self, allocator, input, options);
     }
 
     /// This operation puts tags on the resource you indicate.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// This operation removes tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

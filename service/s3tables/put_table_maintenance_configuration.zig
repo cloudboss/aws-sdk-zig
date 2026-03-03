@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TableMaintenanceType = @import("table_maintenance_type.zig").TableMaintenanceType;
 const TableMaintenanceConfigurationValue = @import("table_maintenance_configuration_value.zig").TableMaintenanceConfigurationValue;
@@ -32,13 +33,9 @@ pub const PutTableMaintenanceConfigurationInput = struct {
     };
 };
 
-const PutTableMaintenanceConfigurationOutput = struct {};
+pub const PutTableMaintenanceConfigurationOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutTableMaintenanceConfigurationInput, options: Options) !PutTableMaintenanceConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutTableMaintenanceConfigurationInput, options: CallOptions) !PutTableMaintenanceConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

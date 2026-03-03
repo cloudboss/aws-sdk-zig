@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AttachmentStatus = @import("attachment_status.zig").AttachmentStatus;
 const AttachmentUploadErrorReason = @import("attachment_upload_error_reason.zig").AttachmentUploadErrorReason;
@@ -46,11 +47,7 @@ pub const DeleteRegistrationAttachmentOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRegistrationAttachmentInput, options: Options) !DeleteRegistrationAttachmentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRegistrationAttachmentInput, options: CallOptions) !DeleteRegistrationAttachmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

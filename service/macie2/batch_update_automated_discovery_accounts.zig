@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AutomatedDiscoveryAccountUpdate = @import("automated_discovery_account_update.zig").AutomatedDiscoveryAccountUpdate;
 const AutomatedDiscoveryAccountUpdateError = @import("automated_discovery_account_update_error.zig").AutomatedDiscoveryAccountUpdateError;
@@ -29,11 +30,7 @@ pub const BatchUpdateAutomatedDiscoveryAccountsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchUpdateAutomatedDiscoveryAccountsInput, options: Options) !BatchUpdateAutomatedDiscoveryAccountsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchUpdateAutomatedDiscoveryAccountsInput, options: CallOptions) !BatchUpdateAutomatedDiscoveryAccountsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

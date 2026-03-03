@@ -2,20 +2,17 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagResourceType = @import("tag_resource_type.zig").TagResourceType;
 const ResourceTagSet = @import("resource_tag_set.zig").ResourceTagSet;
 const serde = @import("serde.zig");
 
-const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
 
-const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: Options) !ListTagsForResourceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

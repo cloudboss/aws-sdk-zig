@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChildPolicy = @import("child_policy.zig").ChildPolicy;
 
@@ -57,13 +58,9 @@ pub const TerminateWorkflowExecutionInput = struct {
     };
 };
 
-const TerminateWorkflowExecutionOutput = struct {};
+pub const TerminateWorkflowExecutionOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TerminateWorkflowExecutionInput, options: Options) !TerminateWorkflowExecutionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TerminateWorkflowExecutionInput, options: CallOptions) !TerminateWorkflowExecutionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

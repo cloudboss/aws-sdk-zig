@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const StartRequest = @import("start_request.zig").StartRequest;
 const FailedWorkspaceChangeRequest = @import("failed_workspace_change_request.zig").FailedWorkspaceChangeRequest;
@@ -24,11 +25,7 @@ pub const StartWorkspacesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartWorkspacesInput, options: Options) !StartWorkspacesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartWorkspacesInput, options: CallOptions) !StartWorkspacesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CacheBehavior = @import("cache_behavior.zig").CacheBehavior;
 const RunCacheStatus = @import("run_cache_status.zig").RunCacheStatus;
@@ -82,11 +83,7 @@ pub const CreateRunCacheOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateRunCacheInput, options: Options) !CreateRunCacheOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateRunCacheInput, options: CallOptions) !CreateRunCacheOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

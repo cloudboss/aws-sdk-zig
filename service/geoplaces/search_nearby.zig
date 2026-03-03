@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SearchNearbyAdditionalFeature = @import("search_nearby_additional_feature.zig").SearchNearbyAdditionalFeature;
 const SearchNearbyFilter = @import("search_nearby_filter.zig").SearchNearbyFilter;
@@ -98,11 +99,7 @@ pub const SearchNearbyOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchNearbyInput, options: Options) !SearchNearbyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchNearbyInput, options: CallOptions) !SearchNearbyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

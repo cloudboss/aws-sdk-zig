@@ -2,18 +2,15 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GroupStatusDetail = @import("group_status_detail.zig").GroupStatusDetail;
 
-const GetGroupInput = @import("get_group_request.zig").GetGroupRequest;
+pub const GetGroupInput = @import("get_group_request.zig").GetGroupRequest;
 
-const GetGroupOutput = @import("get_group_response.zig").GetGroupResponse;
+pub const GetGroupOutput = @import("get_group_response.zig").GetGroupResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetGroupInput, options: Options) !GetGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetGroupInput, options: CallOptions) !GetGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

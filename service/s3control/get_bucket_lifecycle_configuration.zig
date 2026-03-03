@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LifecycleRule = @import("lifecycle_rule.zig").LifecycleRule;
 const serde = @import("serde.zig");
@@ -24,13 +25,9 @@ pub const GetBucketLifecycleConfigurationInput = struct {
     bucket: []const u8,
 };
 
-const GetBucketLifecycleConfigurationOutput = @import("get_bucket_lifecycle_configuration_result.zig").GetBucketLifecycleConfigurationResult;
+pub const GetBucketLifecycleConfigurationOutput = @import("get_bucket_lifecycle_configuration_result.zig").GetBucketLifecycleConfigurationResult;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketLifecycleConfigurationInput, options: Options) !GetBucketLifecycleConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketLifecycleConfigurationInput, options: CallOptions) !GetBucketLifecycleConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

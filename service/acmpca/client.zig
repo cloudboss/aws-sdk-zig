@@ -24,6 +24,7 @@ const revoke_certificate = @import("revoke_certificate.zig");
 const tag_certificate_authority = @import("tag_certificate_authority.zig");
 const untag_certificate_authority = @import("untag_certificate_authority.zig");
 const update_certificate_authority = @import("update_certificate_authority.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -79,7 +80,7 @@ pub const Client = struct {
     /// Amazon Web Services Private CA assets that are stored in Amazon S3 can be
     /// protected with encryption. For more information, see [Encrypting Your
     /// CRLs](https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#crl-encryption).
-    pub fn createCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: create_certificate_authority.CreateCertificateAuthorityInput, options: create_certificate_authority.Options) !create_certificate_authority.CreateCertificateAuthorityOutput {
+    pub fn createCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: create_certificate_authority.CreateCertificateAuthorityInput, options: CallOptions) !create_certificate_authority.CreateCertificateAuthorityOutput {
         return create_certificate_authority.execute(self, allocator, input, options);
     }
 
@@ -98,7 +99,7 @@ pub const Client = struct {
     /// Reports](https://docs.aws.amazon.com/privateca/latest/userguide/PcaAuditReport.html#audit-report-encryption).
     ///
     /// You can generate a maximum of one report every 30 minutes.
-    pub fn createCertificateAuthorityAuditReport(self: *Self, allocator: std.mem.Allocator, input: create_certificate_authority_audit_report.CreateCertificateAuthorityAuditReportInput, options: create_certificate_authority_audit_report.Options) !create_certificate_authority_audit_report.CreateCertificateAuthorityAuditReportOutput {
+    pub fn createCertificateAuthorityAuditReport(self: *Self, allocator: std.mem.Allocator, input: create_certificate_authority_audit_report.CreateCertificateAuthorityAuditReportInput, options: CallOptions) !create_certificate_authority_audit_report.CreateCertificateAuthorityAuditReportOutput {
         return create_certificate_authority_audit_report.execute(self, allocator, input, options);
     }
 
@@ -121,7 +122,7 @@ pub const Client = struct {
     ///   cross-account issuance and renewals. For more information, see [Using a
     ///   Resource Based Policy with Amazon Web Services Private
     ///   CA](https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html).
-    pub fn createPermission(self: *Self, allocator: std.mem.Allocator, input: create_permission.CreatePermissionInput, options: create_permission.Options) !create_permission.CreatePermissionOutput {
+    pub fn createPermission(self: *Self, allocator: std.mem.Allocator, input: create_permission.CreatePermissionInput, options: CallOptions) !create_permission.CreatePermissionOutput {
         return create_permission.execute(self, allocator, input, options);
     }
 
@@ -155,7 +156,7 @@ pub const Client = struct {
     /// status is set to `DELETED` and the CA can be restored. A private CA deleted
     /// in the `CREATING` or `FAILED` state has no assigned restoration period and
     /// cannot be restored.
-    pub fn deleteCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: delete_certificate_authority.DeleteCertificateAuthorityInput, options: delete_certificate_authority.Options) !delete_certificate_authority.DeleteCertificateAuthorityOutput {
+    pub fn deleteCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: delete_certificate_authority.DeleteCertificateAuthorityInput, options: CallOptions) !delete_certificate_authority.DeleteCertificateAuthorityOutput {
         return delete_certificate_authority.execute(self, allocator, input, options);
     }
 
@@ -181,7 +182,7 @@ pub const Client = struct {
     ///   cross-account issuance and renewals. For more information, see [Using a
     ///   Resource Based Policy with Amazon Web Services Private
     ///   CA](https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html).
-    pub fn deletePermission(self: *Self, allocator: std.mem.Allocator, input: delete_permission.DeletePermissionInput, options: delete_permission.Options) !delete_permission.DeletePermissionOutput {
+    pub fn deletePermission(self: *Self, allocator: std.mem.Allocator, input: delete_permission.DeletePermissionInput, options: CallOptions) !delete_permission.DeletePermissionOutput {
         return delete_permission.execute(self, allocator, input, options);
     }
 
@@ -216,7 +217,7 @@ pub const Client = struct {
     /// * Updates made in Amazon Web Services Resource Manager (RAM) are reflected
     ///   in policies. For more information, see [Attach a Policy for Cross-Account
     ///   Access](https://docs.aws.amazon.com/privateca/latest/userguide/pca-ram.html).
-    pub fn deletePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_policy.DeletePolicyInput, options: delete_policy.Options) !delete_policy.DeletePolicyOutput {
+    pub fn deletePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_policy.DeletePolicyInput, options: CallOptions) !delete_policy.DeletePolicyOutput {
         return delete_policy.execute(self, allocator, input, options);
     }
 
@@ -241,20 +242,20 @@ pub const Client = struct {
     /// * `DELETED` - Your private CA is within the restoration period, after which
     ///   it is permanently deleted. The length of time remaining in the CA's
     ///   restoration period is also included in this action's output.
-    pub fn describeCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: describe_certificate_authority.DescribeCertificateAuthorityInput, options: describe_certificate_authority.Options) !describe_certificate_authority.DescribeCertificateAuthorityOutput {
+    pub fn describeCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: describe_certificate_authority.DescribeCertificateAuthorityInput, options: CallOptions) !describe_certificate_authority.DescribeCertificateAuthorityOutput {
         return describe_certificate_authority.execute(self, allocator, input, options);
     }
 
     /// Lists information about a specific audit report created by calling the
     /// [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) action. Audit information is created every time the certificate authority (CA) private key is used. The private key is used when you call the [IssueCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html) action or the [RevokeCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html) action.
-    pub fn describeCertificateAuthorityAuditReport(self: *Self, allocator: std.mem.Allocator, input: describe_certificate_authority_audit_report.DescribeCertificateAuthorityAuditReportInput, options: describe_certificate_authority_audit_report.Options) !describe_certificate_authority_audit_report.DescribeCertificateAuthorityAuditReportOutput {
+    pub fn describeCertificateAuthorityAuditReport(self: *Self, allocator: std.mem.Allocator, input: describe_certificate_authority_audit_report.DescribeCertificateAuthorityAuditReportInput, options: CallOptions) !describe_certificate_authority_audit_report.DescribeCertificateAuthorityAuditReportOutput {
         return describe_certificate_authority_audit_report.execute(self, allocator, input, options);
     }
 
     /// Retrieves a certificate from your private CA or one that has been shared
     /// with you. The ARN of the certificate is returned when you call the
     /// [IssueCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html) action. You must specify both the ARN of your private CA and the ARN of the issued certificate when calling the **GetCertificate** action. You can retrieve the certificate if it is in the **ISSUED**, **EXPIRED**, or **REVOKED** state. You can call the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) action to create a report that contains information about all of the certificates issued and revoked by your private CA.
-    pub fn getCertificate(self: *Self, allocator: std.mem.Allocator, input: get_certificate.GetCertificateInput, options: get_certificate.Options) !get_certificate.GetCertificateOutput {
+    pub fn getCertificate(self: *Self, allocator: std.mem.Allocator, input: get_certificate.GetCertificateInput, options: CallOptions) !get_certificate.GetCertificateOutput {
         return get_certificate.execute(self, allocator, input, options);
     }
 
@@ -262,14 +263,14 @@ pub const Client = struct {
     /// authority (CA) or one that has been shared with you. Both the certificate
     /// and the chain are base64 PEM-encoded. The chain does not include the CA
     /// certificate. Each certificate in the chain signs the one before it.
-    pub fn getCertificateAuthorityCertificate(self: *Self, allocator: std.mem.Allocator, input: get_certificate_authority_certificate.GetCertificateAuthorityCertificateInput, options: get_certificate_authority_certificate.Options) !get_certificate_authority_certificate.GetCertificateAuthorityCertificateOutput {
+    pub fn getCertificateAuthorityCertificate(self: *Self, allocator: std.mem.Allocator, input: get_certificate_authority_certificate.GetCertificateAuthorityCertificateInput, options: CallOptions) !get_certificate_authority_certificate.GetCertificateAuthorityCertificateOutput {
         return get_certificate_authority_certificate.execute(self, allocator, input, options);
     }
 
     /// Retrieves the certificate signing request (CSR) for your private certificate
     /// authority (CA). The CSR is created when you call the
     /// [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html) action. Sign the CSR with your Amazon Web Services Private CA-hosted or on-premises root or subordinate CA. Then import the signed certificate back into Amazon Web Services Private CA by calling the [ImportCertificateAuthorityCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html) action. The CSR is returned as a base64 PEM-encoded string.
-    pub fn getCertificateAuthorityCsr(self: *Self, allocator: std.mem.Allocator, input: get_certificate_authority_csr.GetCertificateAuthorityCsrInput, options: get_certificate_authority_csr.Options) !get_certificate_authority_csr.GetCertificateAuthorityCsrOutput {
+    pub fn getCertificateAuthorityCsr(self: *Self, allocator: std.mem.Allocator, input: get_certificate_authority_csr.GetCertificateAuthorityCsrInput, options: CallOptions) !get_certificate_authority_csr.GetCertificateAuthorityCsrOutput {
         return get_certificate_authority_csr.execute(self, allocator, input, options);
     }
 
@@ -297,7 +298,7 @@ pub const Client = struct {
     /// * Updates made in Amazon Web Services Resource Manager (RAM) are reflected
     ///   in policies. For more information, see [Attach a Policy for Cross-Account
     ///   Access](https://docs.aws.amazon.com/privateca/latest/userguide/pca-ram.html).
-    pub fn getPolicy(self: *Self, allocator: std.mem.Allocator, input: get_policy.GetPolicyInput, options: get_policy.Options) !get_policy.GetPolicyOutput {
+    pub fn getPolicy(self: *Self, allocator: std.mem.Allocator, input: get_policy.GetPolicyInput, options: CallOptions) !get_policy.GetPolicyOutput {
         return get_policy.execute(self, allocator, input, options);
     }
 
@@ -370,7 +371,7 @@ pub const Client = struct {
     /// Amazon Web Services Private Certificate Authority will also reject any other
     /// extension marked as critical not contained on the preceding list of allowed
     /// extensions.
-    pub fn importCertificateAuthorityCertificate(self: *Self, allocator: std.mem.Allocator, input: import_certificate_authority_certificate.ImportCertificateAuthorityCertificateInput, options: import_certificate_authority_certificate.Options) !import_certificate_authority_certificate.ImportCertificateAuthorityCertificateOutput {
+    pub fn importCertificateAuthorityCertificate(self: *Self, allocator: std.mem.Allocator, input: import_certificate_authority_certificate.ImportCertificateAuthorityCertificateInput, options: CallOptions) !import_certificate_authority_certificate.ImportCertificateAuthorityCertificateOutput {
         return import_certificate_authority_certificate.execute(self, allocator, input, options);
     }
 
@@ -383,13 +384,13 @@ pub const Client = struct {
     /// You cannot use the ACM **ListCertificateAuthorities** action to retrieve the
     /// ARNs of the certificates that you issue by using Amazon Web Services Private
     /// CA.
-    pub fn issueCertificate(self: *Self, allocator: std.mem.Allocator, input: issue_certificate.IssueCertificateInput, options: issue_certificate.Options) !issue_certificate.IssueCertificateOutput {
+    pub fn issueCertificate(self: *Self, allocator: std.mem.Allocator, input: issue_certificate.IssueCertificateInput, options: CallOptions) !issue_certificate.IssueCertificateOutput {
         return issue_certificate.execute(self, allocator, input, options);
     }
 
     /// Lists the private certificate authorities that you created by using the
     /// [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html) action.
-    pub fn listCertificateAuthorities(self: *Self, allocator: std.mem.Allocator, input: list_certificate_authorities.ListCertificateAuthoritiesInput, options: list_certificate_authorities.Options) !list_certificate_authorities.ListCertificateAuthoritiesOutput {
+    pub fn listCertificateAuthorities(self: *Self, allocator: std.mem.Allocator, input: list_certificate_authorities.ListCertificateAuthoritiesInput, options: CallOptions) !list_certificate_authorities.ListCertificateAuthoritiesOutput {
         return list_certificate_authorities.execute(self, allocator, input, options);
     }
 
@@ -413,7 +414,7 @@ pub const Client = struct {
     ///   cross-account issuance and renewals. For more information, see [Using a
     ///   Resource Based Policy with Amazon Web Services Private
     ///   CA](https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html).
-    pub fn listPermissions(self: *Self, allocator: std.mem.Allocator, input: list_permissions.ListPermissionsInput, options: list_permissions.Options) !list_permissions.ListPermissionsOutput {
+    pub fn listPermissions(self: *Self, allocator: std.mem.Allocator, input: list_permissions.ListPermissionsInput, options: CallOptions) !list_permissions.ListPermissionsOutput {
         return list_permissions.execute(self, allocator, input, options);
     }
 
@@ -422,7 +423,7 @@ pub const Client = struct {
     /// organize your CAs. Each tag consists of a key and an optional value. Call
     /// the
     /// [TagCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_TagCertificateAuthority.html) action to add one or more tags to your CA. Call the [UntagCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_UntagCertificateAuthority.html) action to remove tags.
-    pub fn listTags(self: *Self, allocator: std.mem.Allocator, input: list_tags.ListTagsInput, options: list_tags.Options) !list_tags.ListTagsOutput {
+    pub fn listTags(self: *Self, allocator: std.mem.Allocator, input: list_tags.ListTagsInput, options: CallOptions) !list_tags.ListTagsOutput {
         return list_tags.execute(self, allocator, input, options);
     }
 
@@ -453,7 +454,7 @@ pub const Client = struct {
     /// * Updates made in Amazon Web Services Resource Manager (RAM) are reflected
     ///   in policies. For more information, see [Attach a Policy for Cross-Account
     ///   Access](https://docs.aws.amazon.com/privateca/latest/userguide/pca-ram.html).
-    pub fn putPolicy(self: *Self, allocator: std.mem.Allocator, input: put_policy.PutPolicyInput, options: put_policy.Options) !put_policy.PutPolicyOutput {
+    pub fn putPolicy(self: *Self, allocator: std.mem.Allocator, input: put_policy.PutPolicyInput, options: CallOptions) !put_policy.PutPolicyOutput {
         return put_policy.execute(self, allocator, input, options);
     }
 
@@ -461,7 +462,7 @@ pub const Client = struct {
     /// can restore a CA during the period that you defined in the
     /// **PermanentDeletionTimeInDays** parameter of the
     /// [DeleteCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeleteCertificateAuthority.html) action. Currently, you can specify 7 to 30 days. If you did not specify a **PermanentDeletionTimeInDays** value, by default you can restore the CA at any time in a 30 day period. You can check the time remaining in the restoration period of a private CA in the `DELETED` state by calling the [DescribeCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_DescribeCertificateAuthority.html) or [ListCertificateAuthorities](https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html) actions. The status of a restored CA is set to its pre-deletion status when the **RestoreCertificateAuthority** action returns. To change its status to `ACTIVE`, call the [UpdateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html) action. If the private CA was in the `PENDING_CERTIFICATE` state at deletion, you must use the [ImportCertificateAuthorityCertificate](https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html) action to import a certificate authority into the private CA before it can be activated. You cannot restore a CA after the restoration period has ended.
-    pub fn restoreCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: restore_certificate_authority.RestoreCertificateAuthorityInput, options: restore_certificate_authority.Options) !restore_certificate_authority.RestoreCertificateAuthorityOutput {
+    pub fn restoreCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: restore_certificate_authority.RestoreCertificateAuthorityInput, options: CallOptions) !restore_certificate_authority.RestoreCertificateAuthorityOutput {
         return restore_certificate_authority.execute(self, allocator, input, options);
     }
 
@@ -488,7 +489,7 @@ pub const Client = struct {
     /// [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html).
     ///
     /// You cannot revoke a root CA self-signed certificate.
-    pub fn revokeCertificate(self: *Self, allocator: std.mem.Allocator, input: revoke_certificate.RevokeCertificateInput, options: revoke_certificate.Options) !revoke_certificate.RevokeCertificateOutput {
+    pub fn revokeCertificate(self: *Self, allocator: std.mem.Allocator, input: revoke_certificate.RevokeCertificateInput, options: CallOptions) !revoke_certificate.RevokeCertificateOutput {
         return revoke_certificate.execute(self, allocator, input, options);
     }
 
@@ -507,7 +508,7 @@ pub const Client = struct {
     /// `CreateCertificateAuthority` action and explicitly allow tagging. For more
     /// information, see [Attaching tags to a CA at the time of
     /// creation](https://docs.aws.amazon.com/privateca/latest/userguide/auth-InlinePolicies.html#policy-tag-ca).
-    pub fn tagCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: tag_certificate_authority.TagCertificateAuthorityInput, options: tag_certificate_authority.Options) !tag_certificate_authority.TagCertificateAuthorityOutput {
+    pub fn tagCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: tag_certificate_authority.TagCertificateAuthorityInput, options: CallOptions) !tag_certificate_authority.TagCertificateAuthorityOutput {
         return tag_certificate_authority.execute(self, allocator, input, options);
     }
 
@@ -517,7 +518,7 @@ pub const Client = struct {
     /// the tag is removed only if it is associated with the specified value. To add
     /// tags to a private CA, use the
     /// [TagCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_TagCertificateAuthority.html). Call the [ListTags](https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListTags.html) action to see what tags are associated with your CA.
-    pub fn untagCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: untag_certificate_authority.UntagCertificateAuthorityInput, options: untag_certificate_authority.Options) !untag_certificate_authority.UntagCertificateAuthorityOutput {
+    pub fn untagCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: untag_certificate_authority.UntagCertificateAuthorityInput, options: CallOptions) !untag_certificate_authority.UntagCertificateAuthorityOutput {
         return untag_certificate_authority.execute(self, allocator, input, options);
     }
 
@@ -532,7 +533,7 @@ pub const Client = struct {
     /// exception is thrown. For more information, see [Access policies for CRLs in
     /// Amazon
     /// S3](https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies).
-    pub fn updateCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: update_certificate_authority.UpdateCertificateAuthorityInput, options: update_certificate_authority.Options) !update_certificate_authority.UpdateCertificateAuthorityOutput {
+    pub fn updateCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: update_certificate_authority.UpdateCertificateAuthorityInput, options: CallOptions) !update_certificate_authority.UpdateCertificateAuthorityOutput {
         return update_certificate_authority.execute(self, allocator, input, options);
     }
 

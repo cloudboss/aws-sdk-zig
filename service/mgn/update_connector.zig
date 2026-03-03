@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConnectorSsmCommandConfig = @import("connector_ssm_command_config.zig").ConnectorSsmCommandConfig;
 
@@ -22,13 +23,9 @@ pub const UpdateConnectorInput = struct {
     };
 };
 
-const UpdateConnectorOutput = @import("connector.zig").Connector;
+pub const UpdateConnectorOutput = @import("connector.zig").Connector;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateConnectorInput, options: Options) !UpdateConnectorOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateConnectorInput, options: CallOptions) !UpdateConnectorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

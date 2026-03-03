@@ -32,6 +32,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_media_insights_pipeline_configuration = @import("update_media_insights_pipeline_configuration.zig");
 const update_media_insights_pipeline_status = @import("update_media_insights_pipeline_status.zig");
 const update_media_pipeline_kinesis_video_stream_pool = @import("update_media_pipeline_kinesis_video_stream_pool.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -63,28 +64,28 @@ pub const Client = struct {
     }
 
     /// Creates a media pipeline.
-    pub fn createMediaCapturePipeline(self: *Self, allocator: std.mem.Allocator, input: create_media_capture_pipeline.CreateMediaCapturePipelineInput, options: create_media_capture_pipeline.Options) !create_media_capture_pipeline.CreateMediaCapturePipelineOutput {
+    pub fn createMediaCapturePipeline(self: *Self, allocator: std.mem.Allocator, input: create_media_capture_pipeline.CreateMediaCapturePipelineInput, options: CallOptions) !create_media_capture_pipeline.CreateMediaCapturePipelineOutput {
         return create_media_capture_pipeline.execute(self, allocator, input, options);
     }
 
     /// Creates a media concatenation pipeline.
-    pub fn createMediaConcatenationPipeline(self: *Self, allocator: std.mem.Allocator, input: create_media_concatenation_pipeline.CreateMediaConcatenationPipelineInput, options: create_media_concatenation_pipeline.Options) !create_media_concatenation_pipeline.CreateMediaConcatenationPipelineOutput {
+    pub fn createMediaConcatenationPipeline(self: *Self, allocator: std.mem.Allocator, input: create_media_concatenation_pipeline.CreateMediaConcatenationPipelineInput, options: CallOptions) !create_media_concatenation_pipeline.CreateMediaConcatenationPipelineOutput {
         return create_media_concatenation_pipeline.execute(self, allocator, input, options);
     }
 
     /// Creates a media insights pipeline.
-    pub fn createMediaInsightsPipeline(self: *Self, allocator: std.mem.Allocator, input: create_media_insights_pipeline.CreateMediaInsightsPipelineInput, options: create_media_insights_pipeline.Options) !create_media_insights_pipeline.CreateMediaInsightsPipelineOutput {
+    pub fn createMediaInsightsPipeline(self: *Self, allocator: std.mem.Allocator, input: create_media_insights_pipeline.CreateMediaInsightsPipelineInput, options: CallOptions) !create_media_insights_pipeline.CreateMediaInsightsPipelineOutput {
         return create_media_insights_pipeline.execute(self, allocator, input, options);
     }
 
     /// A structure that contains the static configurations for a media insights
     /// pipeline.
-    pub fn createMediaInsightsPipelineConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_media_insights_pipeline_configuration.CreateMediaInsightsPipelineConfigurationInput, options: create_media_insights_pipeline_configuration.Options) !create_media_insights_pipeline_configuration.CreateMediaInsightsPipelineConfigurationOutput {
+    pub fn createMediaInsightsPipelineConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_media_insights_pipeline_configuration.CreateMediaInsightsPipelineConfigurationInput, options: CallOptions) !create_media_insights_pipeline_configuration.CreateMediaInsightsPipelineConfigurationOutput {
         return create_media_insights_pipeline_configuration.execute(self, allocator, input, options);
     }
 
     /// Creates a media live connector pipeline in an Amazon Chime SDK meeting.
-    pub fn createMediaLiveConnectorPipeline(self: *Self, allocator: std.mem.Allocator, input: create_media_live_connector_pipeline.CreateMediaLiveConnectorPipelineInput, options: create_media_live_connector_pipeline.Options) !create_media_live_connector_pipeline.CreateMediaLiveConnectorPipelineOutput {
+    pub fn createMediaLiveConnectorPipeline(self: *Self, allocator: std.mem.Allocator, input: create_media_live_connector_pipeline.CreateMediaLiveConnectorPipelineInput, options: CallOptions) !create_media_live_connector_pipeline.CreateMediaLiveConnectorPipelineOutput {
         return create_media_live_connector_pipeline.execute(self, allocator, input, options);
     }
 
@@ -114,87 +115,87 @@ pub const Client = struct {
     /// [Specify which AWS Regions your account can
     /// use](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#rande-manage-enable.html),
     /// in the *AWS Account Management Reference Guide*.
-    pub fn createMediaPipelineKinesisVideoStreamPool(self: *Self, allocator: std.mem.Allocator, input: create_media_pipeline_kinesis_video_stream_pool.CreateMediaPipelineKinesisVideoStreamPoolInput, options: create_media_pipeline_kinesis_video_stream_pool.Options) !create_media_pipeline_kinesis_video_stream_pool.CreateMediaPipelineKinesisVideoStreamPoolOutput {
+    pub fn createMediaPipelineKinesisVideoStreamPool(self: *Self, allocator: std.mem.Allocator, input: create_media_pipeline_kinesis_video_stream_pool.CreateMediaPipelineKinesisVideoStreamPoolInput, options: CallOptions) !create_media_pipeline_kinesis_video_stream_pool.CreateMediaPipelineKinesisVideoStreamPoolOutput {
         return create_media_pipeline_kinesis_video_stream_pool.execute(self, allocator, input, options);
     }
 
     /// Creates a streaming media pipeline.
-    pub fn createMediaStreamPipeline(self: *Self, allocator: std.mem.Allocator, input: create_media_stream_pipeline.CreateMediaStreamPipelineInput, options: create_media_stream_pipeline.Options) !create_media_stream_pipeline.CreateMediaStreamPipelineOutput {
+    pub fn createMediaStreamPipeline(self: *Self, allocator: std.mem.Allocator, input: create_media_stream_pipeline.CreateMediaStreamPipelineInput, options: CallOptions) !create_media_stream_pipeline.CreateMediaStreamPipelineOutput {
         return create_media_stream_pipeline.execute(self, allocator, input, options);
     }
 
     /// Deletes the media pipeline.
-    pub fn deleteMediaCapturePipeline(self: *Self, allocator: std.mem.Allocator, input: delete_media_capture_pipeline.DeleteMediaCapturePipelineInput, options: delete_media_capture_pipeline.Options) !delete_media_capture_pipeline.DeleteMediaCapturePipelineOutput {
+    pub fn deleteMediaCapturePipeline(self: *Self, allocator: std.mem.Allocator, input: delete_media_capture_pipeline.DeleteMediaCapturePipelineInput, options: CallOptions) !delete_media_capture_pipeline.DeleteMediaCapturePipelineOutput {
         return delete_media_capture_pipeline.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified configuration settings.
-    pub fn deleteMediaInsightsPipelineConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_media_insights_pipeline_configuration.DeleteMediaInsightsPipelineConfigurationInput, options: delete_media_insights_pipeline_configuration.Options) !delete_media_insights_pipeline_configuration.DeleteMediaInsightsPipelineConfigurationOutput {
+    pub fn deleteMediaInsightsPipelineConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_media_insights_pipeline_configuration.DeleteMediaInsightsPipelineConfigurationInput, options: CallOptions) !delete_media_insights_pipeline_configuration.DeleteMediaInsightsPipelineConfigurationOutput {
         return delete_media_insights_pipeline_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes the media pipeline.
-    pub fn deleteMediaPipeline(self: *Self, allocator: std.mem.Allocator, input: delete_media_pipeline.DeleteMediaPipelineInput, options: delete_media_pipeline.Options) !delete_media_pipeline.DeleteMediaPipelineOutput {
+    pub fn deleteMediaPipeline(self: *Self, allocator: std.mem.Allocator, input: delete_media_pipeline.DeleteMediaPipelineInput, options: CallOptions) !delete_media_pipeline.DeleteMediaPipelineOutput {
         return delete_media_pipeline.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Kinesis Video Stream pool.
-    pub fn deleteMediaPipelineKinesisVideoStreamPool(self: *Self, allocator: std.mem.Allocator, input: delete_media_pipeline_kinesis_video_stream_pool.DeleteMediaPipelineKinesisVideoStreamPoolInput, options: delete_media_pipeline_kinesis_video_stream_pool.Options) !delete_media_pipeline_kinesis_video_stream_pool.DeleteMediaPipelineKinesisVideoStreamPoolOutput {
+    pub fn deleteMediaPipelineKinesisVideoStreamPool(self: *Self, allocator: std.mem.Allocator, input: delete_media_pipeline_kinesis_video_stream_pool.DeleteMediaPipelineKinesisVideoStreamPoolInput, options: CallOptions) !delete_media_pipeline_kinesis_video_stream_pool.DeleteMediaPipelineKinesisVideoStreamPoolOutput {
         return delete_media_pipeline_kinesis_video_stream_pool.execute(self, allocator, input, options);
     }
 
     /// Gets an existing media pipeline.
-    pub fn getMediaCapturePipeline(self: *Self, allocator: std.mem.Allocator, input: get_media_capture_pipeline.GetMediaCapturePipelineInput, options: get_media_capture_pipeline.Options) !get_media_capture_pipeline.GetMediaCapturePipelineOutput {
+    pub fn getMediaCapturePipeline(self: *Self, allocator: std.mem.Allocator, input: get_media_capture_pipeline.GetMediaCapturePipelineInput, options: CallOptions) !get_media_capture_pipeline.GetMediaCapturePipelineOutput {
         return get_media_capture_pipeline.execute(self, allocator, input, options);
     }
 
     /// Gets the configuration settings for a media insights pipeline.
-    pub fn getMediaInsightsPipelineConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_media_insights_pipeline_configuration.GetMediaInsightsPipelineConfigurationInput, options: get_media_insights_pipeline_configuration.Options) !get_media_insights_pipeline_configuration.GetMediaInsightsPipelineConfigurationOutput {
+    pub fn getMediaInsightsPipelineConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_media_insights_pipeline_configuration.GetMediaInsightsPipelineConfigurationInput, options: CallOptions) !get_media_insights_pipeline_configuration.GetMediaInsightsPipelineConfigurationOutput {
         return get_media_insights_pipeline_configuration.execute(self, allocator, input, options);
     }
 
     /// Gets an existing media pipeline.
-    pub fn getMediaPipeline(self: *Self, allocator: std.mem.Allocator, input: get_media_pipeline.GetMediaPipelineInput, options: get_media_pipeline.Options) !get_media_pipeline.GetMediaPipelineOutput {
+    pub fn getMediaPipeline(self: *Self, allocator: std.mem.Allocator, input: get_media_pipeline.GetMediaPipelineInput, options: CallOptions) !get_media_pipeline.GetMediaPipelineOutput {
         return get_media_pipeline.execute(self, allocator, input, options);
     }
 
     /// Gets an Kinesis video stream pool.
-    pub fn getMediaPipelineKinesisVideoStreamPool(self: *Self, allocator: std.mem.Allocator, input: get_media_pipeline_kinesis_video_stream_pool.GetMediaPipelineKinesisVideoStreamPoolInput, options: get_media_pipeline_kinesis_video_stream_pool.Options) !get_media_pipeline_kinesis_video_stream_pool.GetMediaPipelineKinesisVideoStreamPoolOutput {
+    pub fn getMediaPipelineKinesisVideoStreamPool(self: *Self, allocator: std.mem.Allocator, input: get_media_pipeline_kinesis_video_stream_pool.GetMediaPipelineKinesisVideoStreamPoolInput, options: CallOptions) !get_media_pipeline_kinesis_video_stream_pool.GetMediaPipelineKinesisVideoStreamPoolOutput {
         return get_media_pipeline_kinesis_video_stream_pool.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details of the specified speaker search task.
-    pub fn getSpeakerSearchTask(self: *Self, allocator: std.mem.Allocator, input: get_speaker_search_task.GetSpeakerSearchTaskInput, options: get_speaker_search_task.Options) !get_speaker_search_task.GetSpeakerSearchTaskOutput {
+    pub fn getSpeakerSearchTask(self: *Self, allocator: std.mem.Allocator, input: get_speaker_search_task.GetSpeakerSearchTaskInput, options: CallOptions) !get_speaker_search_task.GetSpeakerSearchTaskOutput {
         return get_speaker_search_task.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details of a voice tone analysis task.
-    pub fn getVoiceToneAnalysisTask(self: *Self, allocator: std.mem.Allocator, input: get_voice_tone_analysis_task.GetVoiceToneAnalysisTaskInput, options: get_voice_tone_analysis_task.Options) !get_voice_tone_analysis_task.GetVoiceToneAnalysisTaskOutput {
+    pub fn getVoiceToneAnalysisTask(self: *Self, allocator: std.mem.Allocator, input: get_voice_tone_analysis_task.GetVoiceToneAnalysisTaskInput, options: CallOptions) !get_voice_tone_analysis_task.GetVoiceToneAnalysisTaskOutput {
         return get_voice_tone_analysis_task.execute(self, allocator, input, options);
     }
 
     /// Returns a list of media pipelines.
-    pub fn listMediaCapturePipelines(self: *Self, allocator: std.mem.Allocator, input: list_media_capture_pipelines.ListMediaCapturePipelinesInput, options: list_media_capture_pipelines.Options) !list_media_capture_pipelines.ListMediaCapturePipelinesOutput {
+    pub fn listMediaCapturePipelines(self: *Self, allocator: std.mem.Allocator, input: list_media_capture_pipelines.ListMediaCapturePipelinesInput, options: CallOptions) !list_media_capture_pipelines.ListMediaCapturePipelinesOutput {
         return list_media_capture_pipelines.execute(self, allocator, input, options);
     }
 
     /// Lists the available media insights pipeline configurations.
-    pub fn listMediaInsightsPipelineConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_media_insights_pipeline_configurations.ListMediaInsightsPipelineConfigurationsInput, options: list_media_insights_pipeline_configurations.Options) !list_media_insights_pipeline_configurations.ListMediaInsightsPipelineConfigurationsOutput {
+    pub fn listMediaInsightsPipelineConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_media_insights_pipeline_configurations.ListMediaInsightsPipelineConfigurationsInput, options: CallOptions) !list_media_insights_pipeline_configurations.ListMediaInsightsPipelineConfigurationsOutput {
         return list_media_insights_pipeline_configurations.execute(self, allocator, input, options);
     }
 
     /// Lists the video stream pools in the media pipeline.
-    pub fn listMediaPipelineKinesisVideoStreamPools(self: *Self, allocator: std.mem.Allocator, input: list_media_pipeline_kinesis_video_stream_pools.ListMediaPipelineKinesisVideoStreamPoolsInput, options: list_media_pipeline_kinesis_video_stream_pools.Options) !list_media_pipeline_kinesis_video_stream_pools.ListMediaPipelineKinesisVideoStreamPoolsOutput {
+    pub fn listMediaPipelineKinesisVideoStreamPools(self: *Self, allocator: std.mem.Allocator, input: list_media_pipeline_kinesis_video_stream_pools.ListMediaPipelineKinesisVideoStreamPoolsInput, options: CallOptions) !list_media_pipeline_kinesis_video_stream_pools.ListMediaPipelineKinesisVideoStreamPoolsOutput {
         return list_media_pipeline_kinesis_video_stream_pools.execute(self, allocator, input, options);
     }
 
     /// Returns a list of media pipelines.
-    pub fn listMediaPipelines(self: *Self, allocator: std.mem.Allocator, input: list_media_pipelines.ListMediaPipelinesInput, options: list_media_pipelines.Options) !list_media_pipelines.ListMediaPipelinesOutput {
+    pub fn listMediaPipelines(self: *Self, allocator: std.mem.Allocator, input: list_media_pipelines.ListMediaPipelinesInput, options: CallOptions) !list_media_pipelines.ListMediaPipelinesOutput {
         return list_media_pipelines.execute(self, allocator, input, options);
     }
 
     /// Lists the tags available for a media pipeline.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -205,7 +206,7 @@ pub const Client = struct {
     /// and biometrics laws, and as required under the
     /// [AWS service terms](https://aws.amazon.com/service-terms/) for the Amazon
     /// Chime SDK.
-    pub fn startSpeakerSearchTask(self: *Self, allocator: std.mem.Allocator, input: start_speaker_search_task.StartSpeakerSearchTaskInput, options: start_speaker_search_task.Options) !start_speaker_search_task.StartSpeakerSearchTaskOutput {
+    pub fn startSpeakerSearchTask(self: *Self, allocator: std.mem.Allocator, input: start_speaker_search_task.StartSpeakerSearchTaskInput, options: CallOptions) !start_speaker_search_task.StartSpeakerSearchTaskOutput {
         return start_speaker_search_task.execute(self, allocator, input, options);
     }
 
@@ -220,43 +221,43 @@ pub const Client = struct {
     /// privacy and biometrics laws, and as required under the
     /// [AWS service terms](https://aws.amazon.com/service-terms/) for the Amazon
     /// Chime SDK.
-    pub fn startVoiceToneAnalysisTask(self: *Self, allocator: std.mem.Allocator, input: start_voice_tone_analysis_task.StartVoiceToneAnalysisTaskInput, options: start_voice_tone_analysis_task.Options) !start_voice_tone_analysis_task.StartVoiceToneAnalysisTaskOutput {
+    pub fn startVoiceToneAnalysisTask(self: *Self, allocator: std.mem.Allocator, input: start_voice_tone_analysis_task.StartVoiceToneAnalysisTaskInput, options: CallOptions) !start_voice_tone_analysis_task.StartVoiceToneAnalysisTaskOutput {
         return start_voice_tone_analysis_task.execute(self, allocator, input, options);
     }
 
     /// Stops a speaker search task.
-    pub fn stopSpeakerSearchTask(self: *Self, allocator: std.mem.Allocator, input: stop_speaker_search_task.StopSpeakerSearchTaskInput, options: stop_speaker_search_task.Options) !stop_speaker_search_task.StopSpeakerSearchTaskOutput {
+    pub fn stopSpeakerSearchTask(self: *Self, allocator: std.mem.Allocator, input: stop_speaker_search_task.StopSpeakerSearchTaskInput, options: CallOptions) !stop_speaker_search_task.StopSpeakerSearchTaskOutput {
         return stop_speaker_search_task.execute(self, allocator, input, options);
     }
 
     /// Stops a voice tone analysis task.
-    pub fn stopVoiceToneAnalysisTask(self: *Self, allocator: std.mem.Allocator, input: stop_voice_tone_analysis_task.StopVoiceToneAnalysisTaskInput, options: stop_voice_tone_analysis_task.Options) !stop_voice_tone_analysis_task.StopVoiceToneAnalysisTaskOutput {
+    pub fn stopVoiceToneAnalysisTask(self: *Self, allocator: std.mem.Allocator, input: stop_voice_tone_analysis_task.StopVoiceToneAnalysisTaskInput, options: CallOptions) !stop_voice_tone_analysis_task.StopVoiceToneAnalysisTaskOutput {
         return stop_voice_tone_analysis_task.execute(self, allocator, input, options);
     }
 
     /// The ARN of the media pipeline that you want to tag. Consists of the
     /// pipeline's endpoint region, resource ID, and pipeline ID.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes any tags from a media pipeline.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the media insights pipeline's configuration settings.
-    pub fn updateMediaInsightsPipelineConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_media_insights_pipeline_configuration.UpdateMediaInsightsPipelineConfigurationInput, options: update_media_insights_pipeline_configuration.Options) !update_media_insights_pipeline_configuration.UpdateMediaInsightsPipelineConfigurationOutput {
+    pub fn updateMediaInsightsPipelineConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_media_insights_pipeline_configuration.UpdateMediaInsightsPipelineConfigurationInput, options: CallOptions) !update_media_insights_pipeline_configuration.UpdateMediaInsightsPipelineConfigurationOutput {
         return update_media_insights_pipeline_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the status of a media insights pipeline.
-    pub fn updateMediaInsightsPipelineStatus(self: *Self, allocator: std.mem.Allocator, input: update_media_insights_pipeline_status.UpdateMediaInsightsPipelineStatusInput, options: update_media_insights_pipeline_status.Options) !update_media_insights_pipeline_status.UpdateMediaInsightsPipelineStatusOutput {
+    pub fn updateMediaInsightsPipelineStatus(self: *Self, allocator: std.mem.Allocator, input: update_media_insights_pipeline_status.UpdateMediaInsightsPipelineStatusInput, options: CallOptions) !update_media_insights_pipeline_status.UpdateMediaInsightsPipelineStatusOutput {
         return update_media_insights_pipeline_status.execute(self, allocator, input, options);
     }
 
     /// Updates an Amazon Kinesis Video Stream pool in a media pipeline.
-    pub fn updateMediaPipelineKinesisVideoStreamPool(self: *Self, allocator: std.mem.Allocator, input: update_media_pipeline_kinesis_video_stream_pool.UpdateMediaPipelineKinesisVideoStreamPoolInput, options: update_media_pipeline_kinesis_video_stream_pool.Options) !update_media_pipeline_kinesis_video_stream_pool.UpdateMediaPipelineKinesisVideoStreamPoolOutput {
+    pub fn updateMediaPipelineKinesisVideoStreamPool(self: *Self, allocator: std.mem.Allocator, input: update_media_pipeline_kinesis_video_stream_pool.UpdateMediaPipelineKinesisVideoStreamPoolInput, options: CallOptions) !update_media_pipeline_kinesis_video_stream_pool.UpdateMediaPipelineKinesisVideoStreamPoolOutput {
         return update_media_pipeline_kinesis_video_stream_pool.execute(self, allocator, input, options);
     }
 

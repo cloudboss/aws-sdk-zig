@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InferenceExperimentDataStorageConfig = @import("inference_experiment_data_storage_config.zig").InferenceExperimentDataStorageConfig;
 const ModelVariantConfig = @import("model_variant_config.zig").ModelVariantConfig;
@@ -55,11 +56,7 @@ pub const UpdateInferenceExperimentOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateInferenceExperimentInput, options: Options) !UpdateInferenceExperimentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateInferenceExperimentInput, options: CallOptions) !UpdateInferenceExperimentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

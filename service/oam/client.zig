@@ -16,6 +16,7 @@ const put_sink_policy = @import("put_sink_policy.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_link = @import("update_link.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -63,7 +64,7 @@ pub const Client = struct {
     /// Each monitoring account can be linked to as many as 100,000 source accounts.
     ///
     /// Each source account can be linked to as many as five monitoring accounts.
-    pub fn createLink(self: *Self, allocator: std.mem.Allocator, input: create_link.CreateLinkInput, options: create_link.Options) !create_link.CreateLinkOutput {
+    pub fn createLink(self: *Self, allocator: std.mem.Allocator, input: create_link.CreateLinkInput, options: CallOptions) !create_link.CreateLinkOutput {
         return create_link.execute(self, allocator, input, options);
     }
 
@@ -78,19 +79,19 @@ pub const Client = struct {
     ///
     /// Each account can contain one sink per Region. If you delete a sink, you can
     /// then create a new one in that Region.
-    pub fn createSink(self: *Self, allocator: std.mem.Allocator, input: create_sink.CreateSinkInput, options: create_sink.Options) !create_sink.CreateSinkOutput {
+    pub fn createSink(self: *Self, allocator: std.mem.Allocator, input: create_sink.CreateSinkInput, options: CallOptions) !create_sink.CreateSinkOutput {
         return create_sink.execute(self, allocator, input, options);
     }
 
     /// Deletes a link between a monitoring account sink and a source account. You
     /// must run this operation in the source account.
-    pub fn deleteLink(self: *Self, allocator: std.mem.Allocator, input: delete_link.DeleteLinkInput, options: delete_link.Options) !delete_link.DeleteLinkOutput {
+    pub fn deleteLink(self: *Self, allocator: std.mem.Allocator, input: delete_link.DeleteLinkInput, options: CallOptions) !delete_link.DeleteLinkOutput {
         return delete_link.execute(self, allocator, input, options);
     }
 
     /// Deletes a sink. You must delete all links to a sink before you can delete
     /// that sink.
-    pub fn deleteSink(self: *Self, allocator: std.mem.Allocator, input: delete_sink.DeleteSinkInput, options: delete_sink.Options) !delete_sink.DeleteSinkOutput {
+    pub fn deleteSink(self: *Self, allocator: std.mem.Allocator, input: delete_sink.DeleteSinkInput, options: CallOptions) !delete_sink.DeleteSinkOutput {
         return delete_sink.execute(self, allocator, input, options);
     }
 
@@ -99,7 +100,7 @@ pub const Client = struct {
     /// To use this operation, provide the link ARN. To retrieve a list of link
     /// ARNs, use
     /// [ListLinks](https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListLinks.html).
-    pub fn getLink(self: *Self, allocator: std.mem.Allocator, input: get_link.GetLinkInput, options: get_link.Options) !get_link.GetLinkOutput {
+    pub fn getLink(self: *Self, allocator: std.mem.Allocator, input: get_link.GetLinkInput, options: CallOptions) !get_link.GetLinkOutput {
         return get_link.execute(self, allocator, input, options);
     }
 
@@ -108,14 +109,14 @@ pub const Client = struct {
     /// To use this operation, provide the sink ARN. To retrieve a list of sink
     /// ARNs, use
     /// [ListSinks](https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListSinks.html).
-    pub fn getSink(self: *Self, allocator: std.mem.Allocator, input: get_sink.GetSinkInput, options: get_sink.Options) !get_sink.GetSinkOutput {
+    pub fn getSink(self: *Self, allocator: std.mem.Allocator, input: get_sink.GetSinkInput, options: CallOptions) !get_sink.GetSinkOutput {
         return get_sink.execute(self, allocator, input, options);
     }
 
     /// Returns the current sink policy attached to this sink. The sink policy
     /// specifies what accounts can attach to this sink as source accounts, and what
     /// types of data they can share.
-    pub fn getSinkPolicy(self: *Self, allocator: std.mem.Allocator, input: get_sink_policy.GetSinkPolicyInput, options: get_sink_policy.Options) !get_sink_policy.GetSinkPolicyOutput {
+    pub fn getSinkPolicy(self: *Self, allocator: std.mem.Allocator, input: get_sink_policy.GetSinkPolicyInput, options: CallOptions) !get_sink_policy.GetSinkPolicyOutput {
         return get_sink_policy.execute(self, allocator, input, options);
     }
 
@@ -128,7 +129,7 @@ pub const Client = struct {
     ///
     /// To find a list of links for one source account, use
     /// [ListLinks](https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListLinks.html).
-    pub fn listAttachedLinks(self: *Self, allocator: std.mem.Allocator, input: list_attached_links.ListAttachedLinksInput, options: list_attached_links.Options) !list_attached_links.ListAttachedLinksOutput {
+    pub fn listAttachedLinks(self: *Self, allocator: std.mem.Allocator, input: list_attached_links.ListAttachedLinksInput, options: CallOptions) !list_attached_links.ListAttachedLinksOutput {
         return list_attached_links.execute(self, allocator, input, options);
     }
 
@@ -137,19 +138,19 @@ pub const Client = struct {
     ///
     /// To find a list of links for one monitoring account sink, use
     /// [ListAttachedLinks](https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListAttachedLinks.html) from within the monitoring account.
-    pub fn listLinks(self: *Self, allocator: std.mem.Allocator, input: list_links.ListLinksInput, options: list_links.Options) !list_links.ListLinksOutput {
+    pub fn listLinks(self: *Self, allocator: std.mem.Allocator, input: list_links.ListLinksInput, options: CallOptions) !list_links.ListLinksOutput {
         return list_links.execute(self, allocator, input, options);
     }
 
     /// Use this operation in a monitoring account to return the list of sinks
     /// created in that account.
-    pub fn listSinks(self: *Self, allocator: std.mem.Allocator, input: list_sinks.ListSinksInput, options: list_sinks.Options) !list_sinks.ListSinksOutput {
+    pub fn listSinks(self: *Self, allocator: std.mem.Allocator, input: list_sinks.ListSinksInput, options: CallOptions) !list_sinks.ListSinksOutput {
         return list_sinks.execute(self, allocator, input, options);
     }
 
     /// Displays the tags associated with a resource. Both sinks and links support
     /// tagging.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -173,7 +174,7 @@ pub const Client = struct {
     ///
     /// See the examples in this section to see how to specify permitted source
     /// accounts and data types.
-    pub fn putSinkPolicy(self: *Self, allocator: std.mem.Allocator, input: put_sink_policy.PutSinkPolicyInput, options: put_sink_policy.Options) !put_sink_policy.PutSinkPolicyOutput {
+    pub fn putSinkPolicy(self: *Self, allocator: std.mem.Allocator, input: put_sink_policy.PutSinkPolicyInput, options: CallOptions) !put_sink_policy.PutSinkPolicyOutput {
         return put_sink_policy.execute(self, allocator, input, options);
     }
 
@@ -199,7 +200,7 @@ pub const Client = struct {
     /// untag links and sinks you must have the `oam:ResourceTag` permission. The
     /// `iam:ResourceTag` permission does not allow you to tag and untag links and
     /// sinks.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -209,7 +210,7 @@ pub const Client = struct {
     /// untag links and sinks you must have the `oam:ResourceTag` permission. The
     /// `iam:TagResource` permission does not allow you to tag and untag links and
     /// sinks.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -223,7 +224,7 @@ pub const Client = struct {
     ///
     /// To update the list of tags associated with the sink, use
     /// [TagResource](https://docs.aws.amazon.com/OAM/latest/APIReference/API_TagResource.html).
-    pub fn updateLink(self: *Self, allocator: std.mem.Allocator, input: update_link.UpdateLinkInput, options: update_link.Options) !update_link.UpdateLinkOutput {
+    pub fn updateLink(self: *Self, allocator: std.mem.Allocator, input: update_link.UpdateLinkInput, options: CallOptions) !update_link.UpdateLinkOutput {
         return update_link.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MultiplexSettings = @import("multiplex_settings.zig").MultiplexSettings;
 const Multiplex = @import("multiplex.zig").Multiplex;
@@ -42,11 +43,7 @@ pub const CreateMultiplexOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMultiplexInput, options: Options) !CreateMultiplexOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMultiplexInput, options: CallOptions) !CreateMultiplexOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

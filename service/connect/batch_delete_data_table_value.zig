@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DataTableDeleteValueIdentifier = @import("data_table_delete_value_identifier.zig").DataTableDeleteValueIdentifier;
 const BatchDeleteDataTableValueFailureResult = @import("batch_delete_data_table_value_failure_result.zig").BatchDeleteDataTableValueFailureResult;
@@ -42,11 +43,7 @@ pub const BatchDeleteDataTableValueOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteDataTableValueInput, options: Options) !BatchDeleteDataTableValueOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteDataTableValueInput, options: CallOptions) !BatchDeleteDataTableValueOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

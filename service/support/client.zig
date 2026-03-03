@@ -17,6 +17,7 @@ const describe_trusted_advisor_check_summaries = @import("describe_trusted_advis
 const describe_trusted_advisor_checks = @import("describe_trusted_advisor_checks.zig");
 const refresh_trusted_advisor_check = @import("refresh_trusted_advisor_check.zig");
 const resolve_case = @import("resolve_case.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -64,7 +65,7 @@ pub const Client = struct {
     /// `SubscriptionRequiredException` error message appears. For
     /// information about changing your support plan, see [Amazon Web Services
     /// Support](http://aws.amazon.com/premiumsupport/).
-    pub fn addAttachmentsToSet(self: *Self, allocator: std.mem.Allocator, input: add_attachments_to_set.AddAttachmentsToSetInput, options: add_attachments_to_set.Options) !add_attachments_to_set.AddAttachmentsToSetOutput {
+    pub fn addAttachmentsToSet(self: *Self, allocator: std.mem.Allocator, input: add_attachments_to_set.AddAttachmentsToSetInput, options: CallOptions) !add_attachments_to_set.AddAttachmentsToSetOutput {
         return add_attachments_to_set.execute(self, allocator, input, options);
     }
 
@@ -86,7 +87,7 @@ pub const Client = struct {
     /// `SubscriptionRequiredException` error message appears. For
     /// information about changing your support plan, see [Amazon Web Services
     /// Support](http://aws.amazon.com/premiumsupport/).
-    pub fn addCommunicationToCase(self: *Self, allocator: std.mem.Allocator, input: add_communication_to_case.AddCommunicationToCaseInput, options: add_communication_to_case.Options) !add_communication_to_case.AddCommunicationToCaseOutput {
+    pub fn addCommunicationToCase(self: *Self, allocator: std.mem.Allocator, input: add_communication_to_case.AddCommunicationToCaseInput, options: CallOptions) !add_communication_to_case.AddCommunicationToCaseOutput {
         return add_communication_to_case.execute(self, allocator, input, options);
     }
 
@@ -127,7 +128,7 @@ pub const Client = struct {
     /// `SubscriptionRequiredException` error message appears. For
     /// information about changing your support plan, see [Amazon Web Services
     /// Support](http://aws.amazon.com/premiumsupport/).
-    pub fn createCase(self: *Self, allocator: std.mem.Allocator, input: create_case.CreateCaseInput, options: create_case.Options) !create_case.CreateCaseOutput {
+    pub fn createCase(self: *Self, allocator: std.mem.Allocator, input: create_case.CreateCaseInput, options: CallOptions) !create_case.CreateCaseOutput {
         return create_case.execute(self, allocator, input, options);
     }
 
@@ -150,7 +151,7 @@ pub const Client = struct {
     /// `SubscriptionRequiredException` error message appears. For
     /// information about changing your support plan, see [Amazon Web Services
     /// Support](http://aws.amazon.com/premiumsupport/).
-    pub fn describeAttachment(self: *Self, allocator: std.mem.Allocator, input: describe_attachment.DescribeAttachmentInput, options: describe_attachment.Options) !describe_attachment.DescribeAttachmentOutput {
+    pub fn describeAttachment(self: *Self, allocator: std.mem.Allocator, input: describe_attachment.DescribeAttachmentInput, options: CallOptions) !describe_attachment.DescribeAttachmentOutput {
         return describe_attachment.execute(self, allocator, input, options);
     }
 
@@ -183,7 +184,7 @@ pub const Client = struct {
     /// `SubscriptionRequiredException` error message appears. For
     /// information about changing your support plan, see [Amazon Web Services
     /// Support](http://aws.amazon.com/premiumsupport/).
-    pub fn describeCases(self: *Self, allocator: std.mem.Allocator, input: describe_cases.DescribeCasesInput, options: describe_cases.Options) !describe_cases.DescribeCasesOutput {
+    pub fn describeCases(self: *Self, allocator: std.mem.Allocator, input: describe_cases.DescribeCasesInput, options: CallOptions) !describe_cases.DescribeCasesOutput {
         return describe_cases.execute(self, allocator, input, options);
     }
 
@@ -212,7 +213,7 @@ pub const Client = struct {
     /// `SubscriptionRequiredException` error message appears. For
     /// information about changing your support plan, see [Amazon Web Services
     /// Support](http://aws.amazon.com/premiumsupport/).
-    pub fn describeCommunications(self: *Self, allocator: std.mem.Allocator, input: describe_communications.DescribeCommunicationsInput, options: describe_communications.Options) !describe_communications.DescribeCommunicationsOutput {
+    pub fn describeCommunications(self: *Self, allocator: std.mem.Allocator, input: describe_communications.DescribeCommunicationsInput, options: CallOptions) !describe_communications.DescribeCommunicationsOutput {
         return describe_communications.execute(self, allocator, input, options);
     }
 
@@ -232,7 +233,7 @@ pub const Client = struct {
     /// `SubscriptionRequiredException` error message appears. For
     /// information about changing your support plan, see [Amazon Web Services
     /// Support](http://aws.amazon.com/premiumsupport/).
-    pub fn describeCreateCaseOptions(self: *Self, allocator: std.mem.Allocator, input: describe_create_case_options.DescribeCreateCaseOptionsInput, options: describe_create_case_options.Options) !describe_create_case_options.DescribeCreateCaseOptionsOutput {
+    pub fn describeCreateCaseOptions(self: *Self, allocator: std.mem.Allocator, input: describe_create_case_options.DescribeCreateCaseOptionsInput, options: CallOptions) !describe_create_case_options.DescribeCreateCaseOptionsOutput {
         return describe_create_case_options.execute(self, allocator, input, options);
     }
 
@@ -261,7 +262,7 @@ pub const Client = struct {
     /// `SubscriptionRequiredException` error message appears. For
     /// information about changing your support plan, see [Amazon Web Services
     /// Support](http://aws.amazon.com/premiumsupport/).
-    pub fn describeServices(self: *Self, allocator: std.mem.Allocator, input: describe_services.DescribeServicesInput, options: describe_services.Options) !describe_services.DescribeServicesOutput {
+    pub fn describeServices(self: *Self, allocator: std.mem.Allocator, input: describe_services.DescribeServicesInput, options: CallOptions) !describe_services.DescribeServicesOutput {
         return describe_services.execute(self, allocator, input, options);
     }
 
@@ -280,7 +281,7 @@ pub const Client = struct {
     /// `SubscriptionRequiredException` error message appears. For
     /// information about changing your support plan, see [Amazon Web Services
     /// Support](http://aws.amazon.com/premiumsupport/).
-    pub fn describeSeverityLevels(self: *Self, allocator: std.mem.Allocator, input: describe_severity_levels.DescribeSeverityLevelsInput, options: describe_severity_levels.Options) !describe_severity_levels.DescribeSeverityLevelsOutput {
+    pub fn describeSeverityLevels(self: *Self, allocator: std.mem.Allocator, input: describe_severity_levels.DescribeSeverityLevelsInput, options: CallOptions) !describe_severity_levels.DescribeSeverityLevelsOutput {
         return describe_severity_levels.execute(self, allocator, input, options);
     }
 
@@ -298,7 +299,7 @@ pub const Client = struct {
     /// `SubscriptionRequiredException` error message appears. For
     /// information about changing your support plan, see [Amazon Web Services
     /// Support](http://aws.amazon.com/premiumsupport/).
-    pub fn describeSupportedLanguages(self: *Self, allocator: std.mem.Allocator, input: describe_supported_languages.DescribeSupportedLanguagesInput, options: describe_supported_languages.Options) !describe_supported_languages.DescribeSupportedLanguagesOutput {
+    pub fn describeSupportedLanguages(self: *Self, allocator: std.mem.Allocator, input: describe_supported_languages.DescribeSupportedLanguagesInput, options: CallOptions) !describe_supported_languages.DescribeSupportedLanguagesOutput {
         return describe_supported_languages.execute(self, allocator, input, options);
     }
 
@@ -330,7 +331,7 @@ pub const Client = struct {
     /// endpoints don't support the Trusted Advisor operations. For more
     /// information, see [About the Amazon Web Services Support
     /// API](https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint) in the *Amazon Web Services Support User Guide*.
-    pub fn describeTrustedAdvisorCheckRefreshStatuses(self: *Self, allocator: std.mem.Allocator, input: describe_trusted_advisor_check_refresh_statuses.DescribeTrustedAdvisorCheckRefreshStatusesInput, options: describe_trusted_advisor_check_refresh_statuses.Options) !describe_trusted_advisor_check_refresh_statuses.DescribeTrustedAdvisorCheckRefreshStatusesOutput {
+    pub fn describeTrustedAdvisorCheckRefreshStatuses(self: *Self, allocator: std.mem.Allocator, input: describe_trusted_advisor_check_refresh_statuses.DescribeTrustedAdvisorCheckRefreshStatusesInput, options: CallOptions) !describe_trusted_advisor_check_refresh_statuses.DescribeTrustedAdvisorCheckRefreshStatusesOutput {
         return describe_trusted_advisor_check_refresh_statuses.execute(self, allocator, input, options);
     }
 
@@ -377,7 +378,7 @@ pub const Client = struct {
     /// endpoints don't support the Trusted Advisor operations. For more
     /// information, see [About the Amazon Web Services Support
     /// API](https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint) in the *Amazon Web Services Support User Guide*.
-    pub fn describeTrustedAdvisorCheckResult(self: *Self, allocator: std.mem.Allocator, input: describe_trusted_advisor_check_result.DescribeTrustedAdvisorCheckResultInput, options: describe_trusted_advisor_check_result.Options) !describe_trusted_advisor_check_result.DescribeTrustedAdvisorCheckResultOutput {
+    pub fn describeTrustedAdvisorCheckResult(self: *Self, allocator: std.mem.Allocator, input: describe_trusted_advisor_check_result.DescribeTrustedAdvisorCheckResultInput, options: CallOptions) !describe_trusted_advisor_check_result.DescribeTrustedAdvisorCheckResultOutput {
         return describe_trusted_advisor_check_result.execute(self, allocator, input, options);
     }
 
@@ -406,7 +407,7 @@ pub const Client = struct {
     /// endpoints don't support the Trusted Advisor operations. For more
     /// information, see [About the Amazon Web Services Support
     /// API](https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint) in the *Amazon Web Services Support User Guide*.
-    pub fn describeTrustedAdvisorCheckSummaries(self: *Self, allocator: std.mem.Allocator, input: describe_trusted_advisor_check_summaries.DescribeTrustedAdvisorCheckSummariesInput, options: describe_trusted_advisor_check_summaries.Options) !describe_trusted_advisor_check_summaries.DescribeTrustedAdvisorCheckSummariesOutput {
+    pub fn describeTrustedAdvisorCheckSummaries(self: *Self, allocator: std.mem.Allocator, input: describe_trusted_advisor_check_summaries.DescribeTrustedAdvisorCheckSummariesInput, options: CallOptions) !describe_trusted_advisor_check_summaries.DescribeTrustedAdvisorCheckSummariesOutput {
         return describe_trusted_advisor_check_summaries.execute(self, allocator, input, options);
     }
 
@@ -438,7 +439,7 @@ pub const Client = struct {
     /// endpoints don't support the Trusted Advisor operations. For more
     /// information, see [About the Amazon Web Services Support
     /// API](https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint) in the *Amazon Web Services Support User Guide*.
-    pub fn describeTrustedAdvisorChecks(self: *Self, allocator: std.mem.Allocator, input: describe_trusted_advisor_checks.DescribeTrustedAdvisorChecksInput, options: describe_trusted_advisor_checks.Options) !describe_trusted_advisor_checks.DescribeTrustedAdvisorChecksOutput {
+    pub fn describeTrustedAdvisorChecks(self: *Self, allocator: std.mem.Allocator, input: describe_trusted_advisor_checks.DescribeTrustedAdvisorChecksInput, options: CallOptions) !describe_trusted_advisor_checks.DescribeTrustedAdvisorChecksOutput {
         return describe_trusted_advisor_checks.execute(self, allocator, input, options);
     }
 
@@ -471,7 +472,7 @@ pub const Client = struct {
     /// endpoints don't support the Trusted Advisor operations. For more
     /// information, see [About the Amazon Web Services Support
     /// API](https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint) in the *Amazon Web Services Support User Guide*.
-    pub fn refreshTrustedAdvisorCheck(self: *Self, allocator: std.mem.Allocator, input: refresh_trusted_advisor_check.RefreshTrustedAdvisorCheckInput, options: refresh_trusted_advisor_check.Options) !refresh_trusted_advisor_check.RefreshTrustedAdvisorCheckOutput {
+    pub fn refreshTrustedAdvisorCheck(self: *Self, allocator: std.mem.Allocator, input: refresh_trusted_advisor_check.RefreshTrustedAdvisorCheckInput, options: CallOptions) !refresh_trusted_advisor_check.RefreshTrustedAdvisorCheckOutput {
         return refresh_trusted_advisor_check.execute(self, allocator, input, options);
     }
 
@@ -488,7 +489,7 @@ pub const Client = struct {
     /// `SubscriptionRequiredException` error message appears. For
     /// information about changing your support plan, see [Amazon Web Services
     /// Support](http://aws.amazon.com/premiumsupport/).
-    pub fn resolveCase(self: *Self, allocator: std.mem.Allocator, input: resolve_case.ResolveCaseInput, options: resolve_case.Options) !resolve_case.ResolveCaseOutput {
+    pub fn resolveCase(self: *Self, allocator: std.mem.Allocator, input: resolve_case.ResolveCaseInput, options: CallOptions) !resolve_case.ResolveCaseOutput {
         return resolve_case.execute(self, allocator, input, options);
     }
 

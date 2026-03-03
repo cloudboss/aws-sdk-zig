@@ -14,6 +14,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_environment = @import("update_environment.zig");
 const update_environment_membership = @import("update_environment_membership.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -52,7 +53,7 @@ pub const Client = struct {
     /// Cloud9 can continue to use the service as normal.
     /// [Learn
     /// more"](http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/)
-    pub fn createEnvironmentEc2(self: *Self, allocator: std.mem.Allocator, input: create_environment_ec2.CreateEnvironmentEC2Input, options: create_environment_ec2.Options) !create_environment_ec2.CreateEnvironmentEC2Output {
+    pub fn createEnvironmentEc2(self: *Self, allocator: std.mem.Allocator, input: create_environment_ec2.CreateEnvironmentEC2Input, options: CallOptions) !create_environment_ec2.CreateEnvironmentEC2Output {
         return create_environment_ec2.execute(self, allocator, input, options);
     }
 
@@ -62,7 +63,7 @@ pub const Client = struct {
     /// Cloud9 can continue to use the service as normal.
     /// [Learn
     /// more"](http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/)
-    pub fn createEnvironmentMembership(self: *Self, allocator: std.mem.Allocator, input: create_environment_membership.CreateEnvironmentMembershipInput, options: create_environment_membership.Options) !create_environment_membership.CreateEnvironmentMembershipOutput {
+    pub fn createEnvironmentMembership(self: *Self, allocator: std.mem.Allocator, input: create_environment_membership.CreateEnvironmentMembershipInput, options: CallOptions) !create_environment_membership.CreateEnvironmentMembershipOutput {
         return create_environment_membership.execute(self, allocator, input, options);
     }
 
@@ -74,7 +75,7 @@ pub const Client = struct {
     /// Cloud9 can continue to use the service as normal.
     /// [Learn
     /// more"](http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/)
-    pub fn deleteEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_environment.DeleteEnvironmentInput, options: delete_environment.Options) !delete_environment.DeleteEnvironmentOutput {
+    pub fn deleteEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_environment.DeleteEnvironmentInput, options: CallOptions) !delete_environment.DeleteEnvironmentOutput {
         return delete_environment.execute(self, allocator, input, options);
     }
 
@@ -84,7 +85,7 @@ pub const Client = struct {
     /// Cloud9 can continue to use the service as normal.
     /// [Learn
     /// more"](http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/)
-    pub fn deleteEnvironmentMembership(self: *Self, allocator: std.mem.Allocator, input: delete_environment_membership.DeleteEnvironmentMembershipInput, options: delete_environment_membership.Options) !delete_environment_membership.DeleteEnvironmentMembershipOutput {
+    pub fn deleteEnvironmentMembership(self: *Self, allocator: std.mem.Allocator, input: delete_environment_membership.DeleteEnvironmentMembershipInput, options: CallOptions) !delete_environment_membership.DeleteEnvironmentMembershipOutput {
         return delete_environment_membership.execute(self, allocator, input, options);
     }
 
@@ -95,7 +96,7 @@ pub const Client = struct {
     /// Cloud9 can continue to use the service as normal.
     /// [Learn
     /// more"](http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/)
-    pub fn describeEnvironmentMemberships(self: *Self, allocator: std.mem.Allocator, input: describe_environment_memberships.DescribeEnvironmentMembershipsInput, options: describe_environment_memberships.Options) !describe_environment_memberships.DescribeEnvironmentMembershipsOutput {
+    pub fn describeEnvironmentMemberships(self: *Self, allocator: std.mem.Allocator, input: describe_environment_memberships.DescribeEnvironmentMembershipsInput, options: CallOptions) !describe_environment_memberships.DescribeEnvironmentMembershipsOutput {
         return describe_environment_memberships.execute(self, allocator, input, options);
     }
 
@@ -105,7 +106,7 @@ pub const Client = struct {
     /// Cloud9 can continue to use the service as normal.
     /// [Learn
     /// more"](http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/)
-    pub fn describeEnvironmentStatus(self: *Self, allocator: std.mem.Allocator, input: describe_environment_status.DescribeEnvironmentStatusInput, options: describe_environment_status.Options) !describe_environment_status.DescribeEnvironmentStatusOutput {
+    pub fn describeEnvironmentStatus(self: *Self, allocator: std.mem.Allocator, input: describe_environment_status.DescribeEnvironmentStatusInput, options: CallOptions) !describe_environment_status.DescribeEnvironmentStatusOutput {
         return describe_environment_status.execute(self, allocator, input, options);
     }
 
@@ -115,7 +116,7 @@ pub const Client = struct {
     /// Cloud9 can continue to use the service as normal.
     /// [Learn
     /// more"](http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/)
-    pub fn describeEnvironments(self: *Self, allocator: std.mem.Allocator, input: describe_environments.DescribeEnvironmentsInput, options: describe_environments.Options) !describe_environments.DescribeEnvironmentsOutput {
+    pub fn describeEnvironments(self: *Self, allocator: std.mem.Allocator, input: describe_environments.DescribeEnvironmentsInput, options: CallOptions) !describe_environments.DescribeEnvironmentsOutput {
         return describe_environments.execute(self, allocator, input, options);
     }
 
@@ -130,7 +131,7 @@ pub const Client = struct {
     /// Cloud9 can continue to use the service as normal.
     /// [Learn
     /// more"](http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/)
-    pub fn listEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_environments.ListEnvironmentsInput, options: list_environments.Options) !list_environments.ListEnvironmentsOutput {
+    pub fn listEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_environments.ListEnvironmentsInput, options: CallOptions) !list_environments.ListEnvironmentsOutput {
         return list_environments.execute(self, allocator, input, options);
     }
 
@@ -140,7 +141,7 @@ pub const Client = struct {
     /// Cloud9 can continue to use the service as normal.
     /// [Learn
     /// more"](http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/)
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -153,7 +154,7 @@ pub const Client = struct {
     ///
     /// Tags that you add to an Cloud9 environment by using this method will NOT be
     /// automatically propagated to underlying resources.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -163,7 +164,7 @@ pub const Client = struct {
     /// Cloud9 can continue to use the service as normal.
     /// [Learn
     /// more"](http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/)
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -173,7 +174,7 @@ pub const Client = struct {
     /// Cloud9 can continue to use the service as normal.
     /// [Learn
     /// more"](http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/)
-    pub fn updateEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_environment.UpdateEnvironmentInput, options: update_environment.Options) !update_environment.UpdateEnvironmentOutput {
+    pub fn updateEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_environment.UpdateEnvironmentInput, options: CallOptions) !update_environment.UpdateEnvironmentOutput {
         return update_environment.execute(self, allocator, input, options);
     }
 
@@ -185,7 +186,7 @@ pub const Client = struct {
     /// Cloud9 can continue to use the service as normal.
     /// [Learn
     /// more"](http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/)
-    pub fn updateEnvironmentMembership(self: *Self, allocator: std.mem.Allocator, input: update_environment_membership.UpdateEnvironmentMembershipInput, options: update_environment_membership.Options) !update_environment_membership.UpdateEnvironmentMembershipOutput {
+    pub fn updateEnvironmentMembership(self: *Self, allocator: std.mem.Allocator, input: update_environment_membership.UpdateEnvironmentMembershipInput, options: CallOptions) !update_environment_membership.UpdateEnvironmentMembershipOutput {
         return update_environment_membership.execute(self, allocator, input, options);
     }
 

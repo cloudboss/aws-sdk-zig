@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_merge_conflicts = @import("describe_merge_conflicts.zig");
@@ -27,7 +28,7 @@ pub const DescribeMergeConflictsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_merge_conflicts.Options) !describe_merge_conflicts.DescribeMergeConflictsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_merge_conflicts.DescribeMergeConflictsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -68,7 +69,7 @@ pub const DescribePullRequestEventsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_pull_request_events.Options) !describe_pull_request_events.DescribePullRequestEventsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_pull_request_events.DescribePullRequestEventsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -109,7 +110,7 @@ pub const GetCommentReactionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_comment_reactions.Options) !get_comment_reactions.GetCommentReactionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_comment_reactions.GetCommentReactionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -150,7 +151,7 @@ pub const GetCommentsForComparedCommitPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_comments_for_compared_commit.Options) !get_comments_for_compared_commit.GetCommentsForComparedCommitOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_comments_for_compared_commit.GetCommentsForComparedCommitOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -191,7 +192,7 @@ pub const GetCommentsForPullRequestPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_comments_for_pull_request.Options) !get_comments_for_pull_request.GetCommentsForPullRequestOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_comments_for_pull_request.GetCommentsForPullRequestOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -232,7 +233,7 @@ pub const GetDifferencesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_differences.Options) !get_differences.GetDifferencesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_differences.GetDifferencesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -273,7 +274,7 @@ pub const GetMergeConflictsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_merge_conflicts.Options) !get_merge_conflicts.GetMergeConflictsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_merge_conflicts.GetMergeConflictsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -314,7 +315,7 @@ pub const ListApprovalRuleTemplatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_approval_rule_templates.Options) !list_approval_rule_templates.ListApprovalRuleTemplatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_approval_rule_templates.ListApprovalRuleTemplatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -355,7 +356,7 @@ pub const ListAssociatedApprovalRuleTemplatesForRepositoryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_associated_approval_rule_templates_for_repository.Options) !list_associated_approval_rule_templates_for_repository.ListAssociatedApprovalRuleTemplatesForRepositoryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_associated_approval_rule_templates_for_repository.ListAssociatedApprovalRuleTemplatesForRepositoryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -396,7 +397,7 @@ pub const ListBranchesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_branches.Options) !list_branches.ListBranchesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_branches.ListBranchesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -437,7 +438,7 @@ pub const ListFileCommitHistoryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_file_commit_history.Options) !list_file_commit_history.ListFileCommitHistoryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_file_commit_history.ListFileCommitHistoryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -478,7 +479,7 @@ pub const ListPullRequestsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_pull_requests.Options) !list_pull_requests.ListPullRequestsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_pull_requests.ListPullRequestsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -519,7 +520,7 @@ pub const ListRepositoriesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_repositories.Options) !list_repositories.ListRepositoriesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_repositories.ListRepositoriesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -560,7 +561,7 @@ pub const ListRepositoriesForApprovalRuleTemplatePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_repositories_for_approval_rule_template.Options) !list_repositories_for_approval_rule_template.ListRepositoriesForApprovalRuleTemplateOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_repositories_for_approval_rule_template.ListRepositoriesForApprovalRuleTemplateOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

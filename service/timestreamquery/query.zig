@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const QueryInsights = @import("query_insights.zig").QueryInsights;
 const ColumnInfo = @import("column_info.zig").ColumnInfo;
@@ -9,7 +10,7 @@ const QueryInsightsResponse = @import("query_insights_response.zig").QueryInsigh
 const QueryStatus = @import("query_status.zig").QueryStatus;
 const Row = @import("row.zig").Row;
 
-const QueryInput = @import("query_request.zig").QueryRequest;
+pub const QueryInput = @import("query_request.zig").QueryRequest;
 
 pub const QueryOutput = struct {
     /// The column data types of the returned result set.
@@ -43,11 +44,7 @@ pub const QueryOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: QueryInput, options: Options) !QueryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: QueryInput, options: CallOptions) !QueryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

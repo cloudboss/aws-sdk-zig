@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchPredictionFilterVariable = @import("batch_prediction_filter_variable.zig").BatchPredictionFilterVariable;
 const SortOrder = @import("sort_order.zig").SortOrder;
@@ -123,11 +124,7 @@ pub const DescribeBatchPredictionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeBatchPredictionsInput, options: Options) !DescribeBatchPredictionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeBatchPredictionsInput, options: CallOptions) !DescribeBatchPredictionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

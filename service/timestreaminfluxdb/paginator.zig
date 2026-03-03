@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_db_clusters = @import("list_db_clusters.zig");
@@ -17,7 +18,7 @@ pub const ListDbClustersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_db_clusters.Options) !list_db_clusters.ListDbClustersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_db_clusters.ListDbClustersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -58,7 +59,7 @@ pub const ListDbInstancesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_db_instances.Options) !list_db_instances.ListDbInstancesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_db_instances.ListDbInstancesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -99,7 +100,7 @@ pub const ListDbInstancesForClusterPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_db_instances_for_cluster.Options) !list_db_instances_for_cluster.ListDbInstancesForClusterOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_db_instances_for_cluster.ListDbInstancesForClusterOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -140,7 +141,7 @@ pub const ListDbParameterGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_db_parameter_groups.Options) !list_db_parameter_groups.ListDbParameterGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_db_parameter_groups.ListDbParameterGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

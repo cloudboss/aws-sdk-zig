@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstanceBandwidthWeighting = @import("instance_bandwidth_weighting.zig").InstanceBandwidthWeighting;
 
@@ -45,11 +46,7 @@ pub const ModifyInstanceNetworkPerformanceOptionsOutput = struct {
     instance_id: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyInstanceNetworkPerformanceOptionsInput, options: Options) !ModifyInstanceNetworkPerformanceOptionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyInstanceNetworkPerformanceOptionsInput, options: CallOptions) !ModifyInstanceNetworkPerformanceOptionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

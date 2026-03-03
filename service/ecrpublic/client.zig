@@ -24,6 +24,7 @@ const set_repository_policy = @import("set_repository_policy.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const upload_layer_part = @import("upload_layer_part.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -65,7 +66,7 @@ pub const Client = struct {
     /// This operation is used by the Amazon ECR proxy and is not generally used by
     /// customers for pulling and pushing images. In most cases, you should use the
     /// `docker` CLI to pull, tag, and push images.
-    pub fn batchCheckLayerAvailability(self: *Self, allocator: std.mem.Allocator, input: batch_check_layer_availability.BatchCheckLayerAvailabilityInput, options: batch_check_layer_availability.Options) !batch_check_layer_availability.BatchCheckLayerAvailabilityOutput {
+    pub fn batchCheckLayerAvailability(self: *Self, allocator: std.mem.Allocator, input: batch_check_layer_availability.BatchCheckLayerAvailabilityInput, options: CallOptions) !batch_check_layer_availability.BatchCheckLayerAvailabilityOutput {
         return batch_check_layer_availability.execute(self, allocator, input, options);
     }
 
@@ -82,7 +83,7 @@ pub const Client = struct {
     /// You can completely delete an image (and all of its tags) by specifying the
     /// digest of the
     /// image in your request.
-    pub fn batchDeleteImage(self: *Self, allocator: std.mem.Allocator, input: batch_delete_image.BatchDeleteImageInput, options: batch_delete_image.Options) !batch_delete_image.BatchDeleteImageOutput {
+    pub fn batchDeleteImage(self: *Self, allocator: std.mem.Allocator, input: batch_delete_image.BatchDeleteImageInput, options: CallOptions) !batch_delete_image.BatchDeleteImageOutput {
         return batch_delete_image.execute(self, allocator, input, options);
     }
 
@@ -99,14 +100,14 @@ pub const Client = struct {
     /// This operation is used by the Amazon ECR proxy and is not generally used by
     /// customers for pulling and pushing images. In most cases, you should use the
     /// `docker` CLI to pull, tag, and push images.
-    pub fn completeLayerUpload(self: *Self, allocator: std.mem.Allocator, input: complete_layer_upload.CompleteLayerUploadInput, options: complete_layer_upload.Options) !complete_layer_upload.CompleteLayerUploadOutput {
+    pub fn completeLayerUpload(self: *Self, allocator: std.mem.Allocator, input: complete_layer_upload.CompleteLayerUploadInput, options: CallOptions) !complete_layer_upload.CompleteLayerUploadOutput {
         return complete_layer_upload.execute(self, allocator, input, options);
     }
 
     /// Creates a repository in a public registry. For more information, see [Amazon
     /// ECR
     /// repositories](https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html) in the *Amazon Elastic Container Registry User Guide*.
-    pub fn createRepository(self: *Self, allocator: std.mem.Allocator, input: create_repository.CreateRepositoryInput, options: create_repository.Options) !create_repository.CreateRepositoryOutput {
+    pub fn createRepository(self: *Self, allocator: std.mem.Allocator, input: create_repository.CreateRepositoryInput, options: CallOptions) !create_repository.CreateRepositoryOutput {
         return create_repository.execute(self, allocator, input, options);
     }
 
@@ -116,18 +117,18 @@ pub const Client = struct {
     /// option.
     /// This option deletes all images on your behalf before deleting the
     /// repository.
-    pub fn deleteRepository(self: *Self, allocator: std.mem.Allocator, input: delete_repository.DeleteRepositoryInput, options: delete_repository.Options) !delete_repository.DeleteRepositoryOutput {
+    pub fn deleteRepository(self: *Self, allocator: std.mem.Allocator, input: delete_repository.DeleteRepositoryInput, options: CallOptions) !delete_repository.DeleteRepositoryOutput {
         return delete_repository.execute(self, allocator, input, options);
     }
 
     /// Deletes the repository policy that's associated with the specified
     /// repository.
-    pub fn deleteRepositoryPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_repository_policy.DeleteRepositoryPolicyInput, options: delete_repository_policy.Options) !delete_repository_policy.DeleteRepositoryPolicyOutput {
+    pub fn deleteRepositoryPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_repository_policy.DeleteRepositoryPolicyInput, options: CallOptions) !delete_repository_policy.DeleteRepositoryPolicyOutput {
         return delete_repository_policy.execute(self, allocator, input, options);
     }
 
     /// Returns the image tag details for a repository in a public registry.
-    pub fn describeImageTags(self: *Self, allocator: std.mem.Allocator, input: describe_image_tags.DescribeImageTagsInput, options: describe_image_tags.Options) !describe_image_tags.DescribeImageTagsOutput {
+    pub fn describeImageTags(self: *Self, allocator: std.mem.Allocator, input: describe_image_tags.DescribeImageTagsInput, options: CallOptions) !describe_image_tags.DescribeImageTagsOutput {
         return describe_image_tags.execute(self, allocator, input, options);
     }
 
@@ -140,17 +141,17 @@ pub const Client = struct {
     /// command shows the uncompressed image size. Therefore, it might return a
     /// larger image
     /// size than the image sizes that are returned by DescribeImages.
-    pub fn describeImages(self: *Self, allocator: std.mem.Allocator, input: describe_images.DescribeImagesInput, options: describe_images.Options) !describe_images.DescribeImagesOutput {
+    pub fn describeImages(self: *Self, allocator: std.mem.Allocator, input: describe_images.DescribeImagesInput, options: CallOptions) !describe_images.DescribeImagesOutput {
         return describe_images.execute(self, allocator, input, options);
     }
 
     /// Returns details for a public registry.
-    pub fn describeRegistries(self: *Self, allocator: std.mem.Allocator, input: describe_registries.DescribeRegistriesInput, options: describe_registries.Options) !describe_registries.DescribeRegistriesOutput {
+    pub fn describeRegistries(self: *Self, allocator: std.mem.Allocator, input: describe_registries.DescribeRegistriesInput, options: CallOptions) !describe_registries.DescribeRegistriesOutput {
         return describe_registries.execute(self, allocator, input, options);
     }
 
     /// Describes repositories that are in a public registry.
-    pub fn describeRepositories(self: *Self, allocator: std.mem.Allocator, input: describe_repositories.DescribeRepositoriesInput, options: describe_repositories.Options) !describe_repositories.DescribeRepositoriesOutput {
+    pub fn describeRepositories(self: *Self, allocator: std.mem.Allocator, input: describe_repositories.DescribeRepositoriesInput, options: CallOptions) !describe_repositories.DescribeRepositoriesOutput {
         return describe_repositories.execute(self, allocator, input, options);
     }
 
@@ -161,24 +162,24 @@ pub const Client = struct {
     /// API requires
     /// the `ecr-public:GetAuthorizationToken` and
     /// `sts:GetServiceBearerToken` permissions.
-    pub fn getAuthorizationToken(self: *Self, allocator: std.mem.Allocator, input: get_authorization_token.GetAuthorizationTokenInput, options: get_authorization_token.Options) !get_authorization_token.GetAuthorizationTokenOutput {
+    pub fn getAuthorizationToken(self: *Self, allocator: std.mem.Allocator, input: get_authorization_token.GetAuthorizationTokenInput, options: CallOptions) !get_authorization_token.GetAuthorizationTokenOutput {
         return get_authorization_token.execute(self, allocator, input, options);
     }
 
     /// Retrieves catalog metadata for a public registry.
-    pub fn getRegistryCatalogData(self: *Self, allocator: std.mem.Allocator, input: get_registry_catalog_data.GetRegistryCatalogDataInput, options: get_registry_catalog_data.Options) !get_registry_catalog_data.GetRegistryCatalogDataOutput {
+    pub fn getRegistryCatalogData(self: *Self, allocator: std.mem.Allocator, input: get_registry_catalog_data.GetRegistryCatalogDataInput, options: CallOptions) !get_registry_catalog_data.GetRegistryCatalogDataOutput {
         return get_registry_catalog_data.execute(self, allocator, input, options);
     }
 
     /// Retrieve catalog metadata for a repository in a public registry. This
     /// metadata is
     /// displayed publicly in the Amazon ECR Public Gallery.
-    pub fn getRepositoryCatalogData(self: *Self, allocator: std.mem.Allocator, input: get_repository_catalog_data.GetRepositoryCatalogDataInput, options: get_repository_catalog_data.Options) !get_repository_catalog_data.GetRepositoryCatalogDataOutput {
+    pub fn getRepositoryCatalogData(self: *Self, allocator: std.mem.Allocator, input: get_repository_catalog_data.GetRepositoryCatalogDataInput, options: CallOptions) !get_repository_catalog_data.GetRepositoryCatalogDataOutput {
         return get_repository_catalog_data.execute(self, allocator, input, options);
     }
 
     /// Retrieves the repository policy for the specified repository.
-    pub fn getRepositoryPolicy(self: *Self, allocator: std.mem.Allocator, input: get_repository_policy.GetRepositoryPolicyInput, options: get_repository_policy.Options) !get_repository_policy.GetRepositoryPolicyOutput {
+    pub fn getRepositoryPolicy(self: *Self, allocator: std.mem.Allocator, input: get_repository_policy.GetRepositoryPolicyInput, options: CallOptions) !get_repository_policy.GetRepositoryPolicyOutput {
         return get_repository_policy.execute(self, allocator, input, options);
     }
 
@@ -193,12 +194,12 @@ pub const Client = struct {
     /// This operation is used by the Amazon ECR proxy and is not generally used by
     /// customers for pulling and pushing images. In most cases, you should use the
     /// `docker` CLI to pull, tag, and push images.
-    pub fn initiateLayerUpload(self: *Self, allocator: std.mem.Allocator, input: initiate_layer_upload.InitiateLayerUploadInput, options: initiate_layer_upload.Options) !initiate_layer_upload.InitiateLayerUploadOutput {
+    pub fn initiateLayerUpload(self: *Self, allocator: std.mem.Allocator, input: initiate_layer_upload.InitiateLayerUploadInput, options: CallOptions) !initiate_layer_upload.InitiateLayerUploadOutput {
         return initiate_layer_upload.execute(self, allocator, input, options);
     }
 
     /// List the tags for an Amazon ECR Public resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -214,17 +215,17 @@ pub const Client = struct {
     /// This operation is used by the Amazon ECR proxy and is not generally used by
     /// customers for pulling and pushing images. In most cases, you should use the
     /// `docker` CLI to pull, tag, and push images.
-    pub fn putImage(self: *Self, allocator: std.mem.Allocator, input: put_image.PutImageInput, options: put_image.Options) !put_image.PutImageOutput {
+    pub fn putImage(self: *Self, allocator: std.mem.Allocator, input: put_image.PutImageInput, options: CallOptions) !put_image.PutImageOutput {
         return put_image.execute(self, allocator, input, options);
     }
 
     /// Create or update the catalog data for a public registry.
-    pub fn putRegistryCatalogData(self: *Self, allocator: std.mem.Allocator, input: put_registry_catalog_data.PutRegistryCatalogDataInput, options: put_registry_catalog_data.Options) !put_registry_catalog_data.PutRegistryCatalogDataOutput {
+    pub fn putRegistryCatalogData(self: *Self, allocator: std.mem.Allocator, input: put_registry_catalog_data.PutRegistryCatalogDataInput, options: CallOptions) !put_registry_catalog_data.PutRegistryCatalogDataOutput {
         return put_registry_catalog_data.execute(self, allocator, input, options);
     }
 
     /// Creates or updates the catalog data for a repository in a public registry.
-    pub fn putRepositoryCatalogData(self: *Self, allocator: std.mem.Allocator, input: put_repository_catalog_data.PutRepositoryCatalogDataInput, options: put_repository_catalog_data.Options) !put_repository_catalog_data.PutRepositoryCatalogDataOutput {
+    pub fn putRepositoryCatalogData(self: *Self, allocator: std.mem.Allocator, input: put_repository_catalog_data.PutRepositoryCatalogDataInput, options: CallOptions) !put_repository_catalog_data.PutRepositoryCatalogDataOutput {
         return put_repository_catalog_data.execute(self, allocator, input, options);
     }
 
@@ -232,7 +233,7 @@ pub const Client = struct {
     /// access
     /// permissions. For more information, see [Amazon ECR Repository
     /// Policies](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html) in the *Amazon Elastic Container Registry User Guide*.
-    pub fn setRepositoryPolicy(self: *Self, allocator: std.mem.Allocator, input: set_repository_policy.SetRepositoryPolicyInput, options: set_repository_policy.Options) !set_repository_policy.SetRepositoryPolicyOutput {
+    pub fn setRepositoryPolicy(self: *Self, allocator: std.mem.Allocator, input: set_repository_policy.SetRepositoryPolicyInput, options: CallOptions) !set_repository_policy.SetRepositoryPolicyOutput {
         return set_repository_policy.execute(self, allocator, input, options);
     }
 
@@ -243,12 +244,12 @@ pub const Client = struct {
     /// changed. When a resource is deleted, the tags associated with that resource
     /// are also
     /// deleted.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes specified tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -263,7 +264,7 @@ pub const Client = struct {
     /// This operation is used by the Amazon ECR proxy and is not generally used by
     /// customers for pulling and pushing images. In most cases, you should use the
     /// `docker` CLI to pull, tag, and push images.
-    pub fn uploadLayerPart(self: *Self, allocator: std.mem.Allocator, input: upload_layer_part.UploadLayerPartInput, options: upload_layer_part.Options) !upload_layer_part.UploadLayerPartOutput {
+    pub fn uploadLayerPart(self: *Self, allocator: std.mem.Allocator, input: upload_layer_part.UploadLayerPartInput, options: CallOptions) !upload_layer_part.UploadLayerPartOutput {
         return upload_layer_part.execute(self, allocator, input, options);
     }
 

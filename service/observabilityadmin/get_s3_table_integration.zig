@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Encryption = @import("encryption.zig").Encryption;
 const IntegrationStatus = @import("integration_status.zig").IntegrationStatus;
@@ -46,11 +47,7 @@ pub const GetS3TableIntegrationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetS3TableIntegrationInput, options: Options) !GetS3TableIntegrationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetS3TableIntegrationInput, options: CallOptions) !GetS3TableIntegrationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const GetMethodResponseInput = struct {
@@ -25,13 +26,9 @@ pub const GetMethodResponseInput = struct {
     };
 };
 
-const GetMethodResponseOutput = @import("method_response.zig").MethodResponse;
+pub const GetMethodResponseOutput = @import("method_response.zig").MethodResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetMethodResponseInput, options: Options) !GetMethodResponseOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetMethodResponseInput, options: CallOptions) !GetMethodResponseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

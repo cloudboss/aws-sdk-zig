@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_dimension_keys = @import("describe_dimension_keys.zig");
@@ -18,7 +19,7 @@ pub const DescribeDimensionKeysPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_dimension_keys.Options) !describe_dimension_keys.DescribeDimensionKeysOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_dimension_keys.DescribeDimensionKeysOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -59,7 +60,7 @@ pub const GetResourceMetricsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_resource_metrics.Options) !get_resource_metrics.GetResourceMetricsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_resource_metrics.GetResourceMetricsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -100,7 +101,7 @@ pub const ListAvailableResourceDimensionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_available_resource_dimensions.Options) !list_available_resource_dimensions.ListAvailableResourceDimensionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_available_resource_dimensions.ListAvailableResourceDimensionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -141,7 +142,7 @@ pub const ListAvailableResourceMetricsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_available_resource_metrics.Options) !list_available_resource_metrics.ListAvailableResourceMetricsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_available_resource_metrics.ListAvailableResourceMetricsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -182,7 +183,7 @@ pub const ListPerformanceAnalysisReportsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_performance_analysis_reports.Options) !list_performance_analysis_reports.ListPerformanceAnalysisReportsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_performance_analysis_reports.ListPerformanceAnalysisReportsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

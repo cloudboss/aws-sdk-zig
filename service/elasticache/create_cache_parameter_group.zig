@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const CacheParameterGroup = @import("cache_parameter_group.zig").CacheParameterGroup;
@@ -33,11 +34,7 @@ pub const CreateCacheParameterGroupOutput = struct {
     cache_parameter_group: ?CacheParameterGroup = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCacheParameterGroupInput, options: Options) !CreateCacheParameterGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCacheParameterGroupInput, options: CallOptions) !CreateCacheParameterGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

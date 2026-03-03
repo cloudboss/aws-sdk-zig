@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SCApplicationAttributes = @import("sc_application_attributes.zig").SCApplicationAttributes;
 const DataProviderDescriptorDefinition = @import("data_provider_descriptor_definition.zig").DataProviderDescriptorDefinition;
@@ -66,11 +67,7 @@ pub const CreateMigrationProjectOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMigrationProjectInput, options: Options) !CreateMigrationProjectOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMigrationProjectInput, options: CallOptions) !CreateMigrationProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

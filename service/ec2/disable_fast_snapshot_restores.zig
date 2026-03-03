@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DisableFastSnapshotRestoreSuccessItem = @import("disable_fast_snapshot_restore_success_item.zig").DisableFastSnapshotRestoreSuccessItem;
 const DisableFastSnapshotRestoreErrorItem = @import("disable_fast_snapshot_restore_error_item.zig").DisableFastSnapshotRestoreErrorItem;
@@ -41,11 +42,7 @@ pub const DisableFastSnapshotRestoresOutput = struct {
     unsuccessful: ?[]const DisableFastSnapshotRestoreErrorItem = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableFastSnapshotRestoresInput, options: Options) !DisableFastSnapshotRestoresOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableFastSnapshotRestoresInput, options: CallOptions) !DisableFastSnapshotRestoresOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

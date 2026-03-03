@@ -97,6 +97,7 @@ const update_smb_local_groups = @import("update_smb_local_groups.zig");
 const update_smb_security_strategy = @import("update_smb_security_strategy.zig");
 const update_snapshot_schedule = @import("update_snapshot_schedule.zig");
 const update_vtl_device_type = @import("update_vtl_device_type.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -139,7 +140,7 @@ pub const Client = struct {
     /// UpdateGatewayInformation.
     ///
     /// You must turn on the gateway VM before you can activate your gateway.
-    pub fn activateGateway(self: *Self, allocator: std.mem.Allocator, input: activate_gateway.ActivateGatewayInput, options: activate_gateway.Options) !activate_gateway.ActivateGatewayOutput {
+    pub fn activateGateway(self: *Self, allocator: std.mem.Allocator, input: activate_gateway.ActivateGatewayInput, options: CallOptions) !activate_gateway.ActivateGatewayOutput {
         return activate_gateway.execute(self, allocator, input, options);
     }
 
@@ -152,7 +153,7 @@ pub const Client = struct {
     /// In the request, you specify the gateway Amazon Resource Name (ARN) to which
     /// you want to
     /// add cache, and one or more disk IDs that you want to configure as cache.
-    pub fn addCache(self: *Self, allocator: std.mem.Allocator, input: add_cache.AddCacheInput, options: add_cache.Options) !add_cache.AddCacheOutput {
+    pub fn addCache(self: *Self, allocator: std.mem.Allocator, input: add_cache.AddCacheInput, options: CallOptions) !add_cache.AddCacheOutput {
         return add_cache.execute(self, allocator, input, options);
     }
 
@@ -178,7 +179,7 @@ pub const Client = struct {
     /// You can create a maximum of 50 tags for each resource. Virtual tapes and
     /// storage volumes
     /// that are recovered to a new gateway maintain their tags.
-    pub fn addTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_resource.AddTagsToResourceInput, options: add_tags_to_resource.Options) !add_tags_to_resource.AddTagsToResourceOutput {
+    pub fn addTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_resource.AddTagsToResourceInput, options: CallOptions) !add_tags_to_resource.AddTagsToResourceOutput {
         return add_tags_to_resource.execute(self, allocator, input, options);
     }
 
@@ -193,7 +194,7 @@ pub const Client = struct {
     /// add upload buffer, and one or more disk IDs that you want to configure as
     /// upload
     /// buffer.
-    pub fn addUploadBuffer(self: *Self, allocator: std.mem.Allocator, input: add_upload_buffer.AddUploadBufferInput, options: add_upload_buffer.Options) !add_upload_buffer.AddUploadBufferOutput {
+    pub fn addUploadBuffer(self: *Self, allocator: std.mem.Allocator, input: add_upload_buffer.AddUploadBufferInput, options: CallOptions) !add_upload_buffer.AddUploadBufferOutput {
         return add_upload_buffer.execute(self, allocator, input, options);
     }
 
@@ -213,7 +214,7 @@ pub const Client = struct {
     /// add working storage, and one or more disk IDs that you want to configure as
     /// working
     /// storage.
-    pub fn addWorkingStorage(self: *Self, allocator: std.mem.Allocator, input: add_working_storage.AddWorkingStorageInput, options: add_working_storage.Options) !add_working_storage.AddWorkingStorageOutput {
+    pub fn addWorkingStorage(self: *Self, allocator: std.mem.Allocator, input: add_working_storage.AddWorkingStorageInput, options: CallOptions) !add_working_storage.AddWorkingStorageOutput {
         return add_working_storage.execute(self, allocator, input, options);
     }
 
@@ -224,7 +225,7 @@ pub const Client = struct {
     /// to eject the tape, the tape is archived directly into the S3 storage class
     /// (S3 Glacier or
     /// S3 Glacier Deep Archive) that corresponds to the pool.
-    pub fn assignTapePool(self: *Self, allocator: std.mem.Allocator, input: assign_tape_pool.AssignTapePoolInput, options: assign_tape_pool.Options) !assign_tape_pool.AssignTapePoolOutput {
+    pub fn assignTapePool(self: *Self, allocator: std.mem.Allocator, input: assign_tape_pool.AssignTapePoolInput, options: CallOptions) !assign_tape_pool.AssignTapePoolOutput {
         return assign_tape_pool.execute(self, allocator, input, options);
     }
 
@@ -234,7 +235,7 @@ pub const Client = struct {
     /// available for access through the gateway. This operation only supports the
     /// FSx File Gateway
     /// type.
-    pub fn associateFileSystem(self: *Self, allocator: std.mem.Allocator, input: associate_file_system.AssociateFileSystemInput, options: associate_file_system.Options) !associate_file_system.AssociateFileSystemOutput {
+    pub fn associateFileSystem(self: *Self, allocator: std.mem.Allocator, input: associate_file_system.AssociateFileSystemInput, options: CallOptions) !associate_file_system.AssociateFileSystemOutput {
         return associate_file_system.execute(self, allocator, input, options);
     }
 
@@ -246,7 +247,7 @@ pub const Client = struct {
     /// to move your
     /// volumes from an on-premises gateway to a gateway hosted on an Amazon EC2
     /// instance.
-    pub fn attachVolume(self: *Self, allocator: std.mem.Allocator, input: attach_volume.AttachVolumeInput, options: attach_volume.Options) !attach_volume.AttachVolumeOutput {
+    pub fn attachVolume(self: *Self, allocator: std.mem.Allocator, input: attach_volume.AttachVolumeInput, options: CallOptions) !attach_volume.AttachVolumeOutput {
         return attach_volume.execute(self, allocator, input, options);
     }
 
@@ -254,7 +255,7 @@ pub const Client = struct {
     /// the archiving
     /// process is initiated. This operation is only supported in the tape gateway
     /// type.
-    pub fn cancelArchival(self: *Self, allocator: std.mem.Allocator, input: cancel_archival.CancelArchivalInput, options: cancel_archival.Options) !cancel_archival.CancelArchivalOutput {
+    pub fn cancelArchival(self: *Self, allocator: std.mem.Allocator, input: cancel_archival.CancelArchivalInput, options: CallOptions) !cancel_archival.CancelArchivalOutput {
         return cancel_archival.execute(self, allocator, input, options);
     }
 
@@ -267,7 +268,7 @@ pub const Client = struct {
     /// attempt to cancel is in FAILED, ERROR, or COMPLETED state, the cancel
     /// operation returns an
     /// error.
-    pub fn cancelCacheReport(self: *Self, allocator: std.mem.Allocator, input: cancel_cache_report.CancelCacheReportInput, options: cancel_cache_report.Options) !cancel_cache_report.CancelCacheReportOutput {
+    pub fn cancelCacheReport(self: *Self, allocator: std.mem.Allocator, input: cancel_cache_report.CancelCacheReportInput, options: CallOptions) !cancel_cache_report.CancelCacheReportOutput {
         return cancel_cache_report.execute(self, allocator, input, options);
     }
 
@@ -276,7 +277,7 @@ pub const Client = struct {
     /// the retrieval process is initiated. The virtual tape is returned to the VTS.
     /// This operation
     /// is only supported in the tape gateway type.
-    pub fn cancelRetrieval(self: *Self, allocator: std.mem.Allocator, input: cancel_retrieval.CancelRetrievalInput, options: cancel_retrieval.Options) !cancel_retrieval.CancelRetrievalOutput {
+    pub fn cancelRetrieval(self: *Self, allocator: std.mem.Allocator, input: cancel_retrieval.CancelRetrievalInput, options: CallOptions) !cancel_retrieval.CancelRetrievalOutput {
         return cancel_retrieval.execute(self, allocator, input, options);
     }
 
@@ -303,7 +304,7 @@ pub const Client = struct {
     /// existing volume’s latest recovery point. The `VolumeSizeInBytes` value must
     /// be
     /// equal to or larger than the size of the copied volume, in bytes.
-    pub fn createCachediScsiVolume(self: *Self, allocator: std.mem.Allocator, input: create_cachedi_scsi_volume.CreateCachediSCSIVolumeInput, options: create_cachedi_scsi_volume.Options) !create_cachedi_scsi_volume.CreateCachediSCSIVolumeOutput {
+    pub fn createCachediScsiVolume(self: *Self, allocator: std.mem.Allocator, input: create_cachedi_scsi_volume.CreateCachediSCSIVolumeInput, options: CallOptions) !create_cachedi_scsi_volume.CreateCachediSCSIVolumeOutput {
         return create_cachedi_scsi_volume.execute(self, allocator, input, options);
     }
 
@@ -331,7 +332,7 @@ pub const Client = struct {
     ///
     /// S3 File Gateways do not support creating hard or symbolic links on a file
     /// share.
-    pub fn createNfsFileShare(self: *Self, allocator: std.mem.Allocator, input: create_nfs_file_share.CreateNFSFileShareInput, options: create_nfs_file_share.Options) !create_nfs_file_share.CreateNFSFileShareOutput {
+    pub fn createNfsFileShare(self: *Self, allocator: std.mem.Allocator, input: create_nfs_file_share.CreateNFSFileShareInput, options: CallOptions) !create_nfs_file_share.CreateNFSFileShareOutput {
         return create_nfs_file_share.execute(self, allocator, input, options);
     }
 
@@ -359,7 +360,7 @@ pub const Client = struct {
     ///
     /// File gateways don't support creating hard or symbolic links on a file
     /// share.
-    pub fn createSmbFileShare(self: *Self, allocator: std.mem.Allocator, input: create_smb_file_share.CreateSMBFileShareInput, options: create_smb_file_share.Options) !create_smb_file_share.CreateSMBFileShareOutput {
+    pub fn createSmbFileShare(self: *Self, allocator: std.mem.Allocator, input: create_smb_file_share.CreateSMBFileShareInput, options: CallOptions) !create_smb_file_share.CreateSMBFileShareOutput {
         return create_smb_file_share.execute(self, allocator, input, options);
     }
 
@@ -401,7 +402,7 @@ pub const Client = struct {
     /// Volume and snapshot IDs are changing to a longer length ID format. For more
     /// information, see the important note on the
     /// [Welcome](https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html) page.
-    pub fn createSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_snapshot.CreateSnapshotInput, options: create_snapshot.Options) !create_snapshot.CreateSnapshotOutput {
+    pub fn createSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_snapshot.CreateSnapshotInput, options: CallOptions) !create_snapshot.CreateSnapshotOutput {
         return create_snapshot.execute(self, allocator, input, options);
     }
 
@@ -433,7 +434,7 @@ pub const Client = struct {
     /// or
     /// [DeleteSnapshot](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html) in the *Amazon Elastic Compute Cloud API
     /// Reference*.
-    pub fn createSnapshotFromVolumeRecoveryPoint(self: *Self, allocator: std.mem.Allocator, input: create_snapshot_from_volume_recovery_point.CreateSnapshotFromVolumeRecoveryPointInput, options: create_snapshot_from_volume_recovery_point.Options) !create_snapshot_from_volume_recovery_point.CreateSnapshotFromVolumeRecoveryPointOutput {
+    pub fn createSnapshotFromVolumeRecoveryPoint(self: *Self, allocator: std.mem.Allocator, input: create_snapshot_from_volume_recovery_point.CreateSnapshotFromVolumeRecoveryPointInput, options: CallOptions) !create_snapshot_from_volume_recovery_point.CreateSnapshotFromVolumeRecoveryPointOutput {
         return create_snapshot_from_volume_recovery_point.execute(self, allocator, input, options);
     }
 
@@ -456,14 +457,14 @@ pub const Client = struct {
     /// information such as the volume Amazon Resource Name (ARN), its size, and the
     /// iSCSI target
     /// ARN that initiators can use to connect to the volume target.
-    pub fn createStorediScsiVolume(self: *Self, allocator: std.mem.Allocator, input: create_storedi_scsi_volume.CreateStorediSCSIVolumeInput, options: create_storedi_scsi_volume.Options) !create_storedi_scsi_volume.CreateStorediSCSIVolumeOutput {
+    pub fn createStorediScsiVolume(self: *Self, allocator: std.mem.Allocator, input: create_storedi_scsi_volume.CreateStorediSCSIVolumeInput, options: CallOptions) !create_storedi_scsi_volume.CreateStorediSCSIVolumeOutput {
         return create_storedi_scsi_volume.execute(self, allocator, input, options);
     }
 
     /// Creates a new custom tape pool. You can use custom tape pool to enable tape
     /// retention
     /// lock on tapes that are archived in the custom pool.
-    pub fn createTapePool(self: *Self, allocator: std.mem.Allocator, input: create_tape_pool.CreateTapePoolInput, options: create_tape_pool.Options) !create_tape_pool.CreateTapePoolOutput {
+    pub fn createTapePool(self: *Self, allocator: std.mem.Allocator, input: create_tape_pool.CreateTapePoolInput, options: CallOptions) !create_tape_pool.CreateTapePoolOutput {
         return create_tape_pool.execute(self, allocator, input, options);
     }
 
@@ -478,7 +479,7 @@ pub const Client = struct {
     /// Cache storage must be allocated to the gateway before you can create a
     /// virtual tape.
     /// Use the AddCache operation to add cache storage to a gateway.
-    pub fn createTapeWithBarcode(self: *Self, allocator: std.mem.Allocator, input: create_tape_with_barcode.CreateTapeWithBarcodeInput, options: create_tape_with_barcode.Options) !create_tape_with_barcode.CreateTapeWithBarcodeOutput {
+    pub fn createTapeWithBarcode(self: *Self, allocator: std.mem.Allocator, input: create_tape_with_barcode.CreateTapeWithBarcodeInput, options: CallOptions) !create_tape_with_barcode.CreateTapeWithBarcodeOutput {
         return create_tape_with_barcode.execute(self, allocator, input, options);
     }
 
@@ -489,7 +490,7 @@ pub const Client = struct {
     /// Cache storage must be allocated to the gateway before you can create virtual
     /// tapes.
     /// Use the AddCache operation to add cache storage to a gateway.
-    pub fn createTapes(self: *Self, allocator: std.mem.Allocator, input: create_tapes.CreateTapesInput, options: create_tapes.Options) !create_tapes.CreateTapesOutput {
+    pub fn createTapes(self: *Self, allocator: std.mem.Allocator, input: create_tapes.CreateTapesInput, options: CallOptions) !create_tapes.CreateTapesOutput {
         return create_tapes.execute(self, allocator, input, options);
     }
 
@@ -498,7 +499,7 @@ pub const Client = struct {
     /// virtual tapes must be created manually. Use the Amazon Resource Name (ARN)
     /// of the gateway
     /// in your request to remove the policy.
-    pub fn deleteAutomaticTapeCreationPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_automatic_tape_creation_policy.DeleteAutomaticTapeCreationPolicyInput, options: delete_automatic_tape_creation_policy.Options) !delete_automatic_tape_creation_policy.DeleteAutomaticTapeCreationPolicyOutput {
+    pub fn deleteAutomaticTapeCreationPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_automatic_tape_creation_policy.DeleteAutomaticTapeCreationPolicyInput, options: CallOptions) !delete_automatic_tape_creation_policy.DeleteAutomaticTapeCreationPolicyOutput {
         return delete_automatic_tape_creation_policy.execute(self, allocator, input, options);
     }
 
@@ -511,7 +512,7 @@ pub const Client = struct {
     /// Amazon Resource Name (ARN) of the gateway in your request. This operation is
     /// supported only
     /// for the stored volume, cached volume, and tape gateway types.
-    pub fn deleteBandwidthRateLimit(self: *Self, allocator: std.mem.Allocator, input: delete_bandwidth_rate_limit.DeleteBandwidthRateLimitInput, options: delete_bandwidth_rate_limit.Options) !delete_bandwidth_rate_limit.DeleteBandwidthRateLimitOutput {
+    pub fn deleteBandwidthRateLimit(self: *Self, allocator: std.mem.Allocator, input: delete_bandwidth_rate_limit.DeleteBandwidthRateLimitInput, options: CallOptions) !delete_bandwidth_rate_limit.DeleteBandwidthRateLimitOutput {
         return delete_bandwidth_rate_limit.execute(self, allocator, input, options);
     }
 
@@ -524,7 +525,7 @@ pub const Client = struct {
     ///
     /// `DeleteCacheReport` does not delete the report object from your Amazon S3
     /// bucket.
-    pub fn deleteCacheReport(self: *Self, allocator: std.mem.Allocator, input: delete_cache_report.DeleteCacheReportInput, options: delete_cache_report.Options) !delete_cache_report.DeleteCacheReportOutput {
+    pub fn deleteCacheReport(self: *Self, allocator: std.mem.Allocator, input: delete_cache_report.DeleteCacheReportInput, options: CallOptions) !delete_cache_report.DeleteCacheReportOutput {
         return delete_cache_report.execute(self, allocator, input, options);
     }
 
@@ -533,14 +534,14 @@ pub const Client = struct {
     /// iSCSI target and initiator pair. This operation is supported in volume and
     /// tape gateway
     /// types.
-    pub fn deleteChapCredentials(self: *Self, allocator: std.mem.Allocator, input: delete_chap_credentials.DeleteChapCredentialsInput, options: delete_chap_credentials.Options) !delete_chap_credentials.DeleteChapCredentialsOutput {
+    pub fn deleteChapCredentials(self: *Self, allocator: std.mem.Allocator, input: delete_chap_credentials.DeleteChapCredentialsInput, options: CallOptions) !delete_chap_credentials.DeleteChapCredentialsOutput {
         return delete_chap_credentials.execute(self, allocator, input, options);
     }
 
     /// Deletes a file share from an S3 File Gateway. This operation is only
     /// supported for S3
     /// File Gateways.
-    pub fn deleteFileShare(self: *Self, allocator: std.mem.Allocator, input: delete_file_share.DeleteFileShareInput, options: delete_file_share.Options) !delete_file_share.DeleteFileShareOutput {
+    pub fn deleteFileShare(self: *Self, allocator: std.mem.Allocator, input: delete_file_share.DeleteFileShareInput, options: CallOptions) !delete_file_share.DeleteFileShareOutput {
         return delete_file_share.execute(self, allocator, input, options);
     }
 
@@ -570,7 +571,7 @@ pub const Client = struct {
     /// information, see the
     /// [Storage Gateway detail
     /// page](http://aws.amazon.com/storagegateway).
-    pub fn deleteGateway(self: *Self, allocator: std.mem.Allocator, input: delete_gateway.DeleteGatewayInput, options: delete_gateway.Options) !delete_gateway.DeleteGatewayOutput {
+    pub fn deleteGateway(self: *Self, allocator: std.mem.Allocator, input: delete_gateway.DeleteGatewayInput, options: CallOptions) !delete_gateway.DeleteGatewayOutput {
         return delete_gateway.execute(self, allocator, input, options);
     }
 
@@ -591,21 +592,21 @@ pub const Client = struct {
     /// go to
     /// [DescribeSnapshots](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html)
     /// in the *Amazon Elastic Compute Cloud API Reference*.
-    pub fn deleteSnapshotSchedule(self: *Self, allocator: std.mem.Allocator, input: delete_snapshot_schedule.DeleteSnapshotScheduleInput, options: delete_snapshot_schedule.Options) !delete_snapshot_schedule.DeleteSnapshotScheduleOutput {
+    pub fn deleteSnapshotSchedule(self: *Self, allocator: std.mem.Allocator, input: delete_snapshot_schedule.DeleteSnapshotScheduleInput, options: CallOptions) !delete_snapshot_schedule.DeleteSnapshotScheduleOutput {
         return delete_snapshot_schedule.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified virtual tape. This operation is only supported in the
     /// tape gateway
     /// type.
-    pub fn deleteTape(self: *Self, allocator: std.mem.Allocator, input: delete_tape.DeleteTapeInput, options: delete_tape.Options) !delete_tape.DeleteTapeOutput {
+    pub fn deleteTape(self: *Self, allocator: std.mem.Allocator, input: delete_tape.DeleteTapeInput, options: CallOptions) !delete_tape.DeleteTapeOutput {
         return delete_tape.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified virtual tape from the virtual tape shelf (VTS). This
     /// operation is
     /// only supported in the tape gateway type.
-    pub fn deleteTapeArchive(self: *Self, allocator: std.mem.Allocator, input: delete_tape_archive.DeleteTapeArchiveInput, options: delete_tape_archive.Options) !delete_tape_archive.DeleteTapeArchiveOutput {
+    pub fn deleteTapeArchive(self: *Self, allocator: std.mem.Allocator, input: delete_tape_archive.DeleteTapeArchiveInput, options: CallOptions) !delete_tape_archive.DeleteTapeArchiveOutput {
         return delete_tape_archive.execute(self, allocator, input, options);
     }
 
@@ -614,7 +615,7 @@ pub const Client = struct {
     /// in the pool and if there are no automatic tape creation policies that
     /// reference the custom
     /// tape pool.
-    pub fn deleteTapePool(self: *Self, allocator: std.mem.Allocator, input: delete_tape_pool.DeleteTapePoolInput, options: delete_tape_pool.Options) !delete_tape_pool.DeleteTapePoolOutput {
+    pub fn deleteTapePool(self: *Self, allocator: std.mem.Allocator, input: delete_tape_pool.DeleteTapePoolInput, options: CallOptions) !delete_tape_pool.DeleteTapePoolOutput {
         return delete_tape_pool.execute(self, allocator, input, options);
     }
 
@@ -639,7 +640,7 @@ pub const Client = struct {
     /// In the request, you must provide the Amazon Resource Name (ARN) of the
     /// storage volume
     /// you want to delete.
-    pub fn deleteVolume(self: *Self, allocator: std.mem.Allocator, input: delete_volume.DeleteVolumeInput, options: delete_volume.Options) !delete_volume.DeleteVolumeOutput {
+    pub fn deleteVolume(self: *Self, allocator: std.mem.Allocator, input: delete_volume.DeleteVolumeInput, options: CallOptions) !delete_volume.DeleteVolumeOutput {
         return delete_volume.execute(self, allocator, input, options);
     }
 
@@ -648,7 +649,7 @@ pub const Client = struct {
     /// performed on the host in a cluster. If a test isn't performed, the status
     /// and start
     /// time in the response would be null.
-    pub fn describeAvailabilityMonitorTest(self: *Self, allocator: std.mem.Allocator, input: describe_availability_monitor_test.DescribeAvailabilityMonitorTestInput, options: describe_availability_monitor_test.Options) !describe_availability_monitor_test.DescribeAvailabilityMonitorTestOutput {
+    pub fn describeAvailabilityMonitorTest(self: *Self, allocator: std.mem.Allocator, input: describe_availability_monitor_test.DescribeAvailabilityMonitorTestInput, options: CallOptions) !describe_availability_monitor_test.DescribeAvailabilityMonitorTestOutput {
         return describe_availability_monitor_test.execute(self, allocator, input, options);
     }
 
@@ -667,7 +668,7 @@ pub const Client = struct {
     /// response body. To specify which gateway to describe, use the Amazon Resource
     /// Name (ARN) of
     /// the gateway in your request.
-    pub fn describeBandwidthRateLimit(self: *Self, allocator: std.mem.Allocator, input: describe_bandwidth_rate_limit.DescribeBandwidthRateLimitInput, options: describe_bandwidth_rate_limit.Options) !describe_bandwidth_rate_limit.DescribeBandwidthRateLimitOutput {
+    pub fn describeBandwidthRateLimit(self: *Self, allocator: std.mem.Allocator, input: describe_bandwidth_rate_limit.DescribeBandwidthRateLimitInput, options: CallOptions) !describe_bandwidth_rate_limit.DescribeBandwidthRateLimitOutput {
         return describe_bandwidth_rate_limit.execute(self, allocator, input, options);
     }
 
@@ -699,7 +700,7 @@ pub const Client = struct {
     /// returns an empty response. To specify which gateway to describe, use the
     /// Amazon Resource
     /// Name (ARN) of the gateway in your request.
-    pub fn describeBandwidthRateLimitSchedule(self: *Self, allocator: std.mem.Allocator, input: describe_bandwidth_rate_limit_schedule.DescribeBandwidthRateLimitScheduleInput, options: describe_bandwidth_rate_limit_schedule.Options) !describe_bandwidth_rate_limit_schedule.DescribeBandwidthRateLimitScheduleOutput {
+    pub fn describeBandwidthRateLimitSchedule(self: *Self, allocator: std.mem.Allocator, input: describe_bandwidth_rate_limit_schedule.DescribeBandwidthRateLimitScheduleInput, options: CallOptions) !describe_bandwidth_rate_limit_schedule.DescribeBandwidthRateLimitScheduleOutput {
         return describe_bandwidth_rate_limit_schedule.execute(self, allocator, input, options);
     }
 
@@ -710,14 +711,14 @@ pub const Client = struct {
     /// The response includes disk IDs that are configured as cache, and it includes
     /// the amount
     /// of cache allocated and used.
-    pub fn describeCache(self: *Self, allocator: std.mem.Allocator, input: describe_cache.DescribeCacheInput, options: describe_cache.Options) !describe_cache.DescribeCacheOutput {
+    pub fn describeCache(self: *Self, allocator: std.mem.Allocator, input: describe_cache.DescribeCacheInput, options: CallOptions) !describe_cache.DescribeCacheOutput {
         return describe_cache.execute(self, allocator, input, options);
     }
 
     /// Returns information about the specified cache report, including completion
     /// status and
     /// generation progress.
-    pub fn describeCacheReport(self: *Self, allocator: std.mem.Allocator, input: describe_cache_report.DescribeCacheReportInput, options: describe_cache_report.Options) !describe_cache_report.DescribeCacheReportOutput {
+    pub fn describeCacheReport(self: *Self, allocator: std.mem.Allocator, input: describe_cache_report.DescribeCacheReportInput, options: CallOptions) !describe_cache_report.DescribeCacheReportOutput {
         return describe_cache_report.execute(self, allocator, input, options);
     }
 
@@ -730,7 +731,7 @@ pub const Client = struct {
     /// Storage Gateway returns volume information sorted by volume Amazon Resource
     /// Name
     /// (ARN).
-    pub fn describeCachediScsiVolumes(self: *Self, allocator: std.mem.Allocator, input: describe_cachedi_scsi_volumes.DescribeCachediSCSIVolumesInput, options: describe_cachedi_scsi_volumes.Options) !describe_cachedi_scsi_volumes.DescribeCachediSCSIVolumesOutput {
+    pub fn describeCachediScsiVolumes(self: *Self, allocator: std.mem.Allocator, input: describe_cachedi_scsi_volumes.DescribeCachediSCSIVolumesInput, options: CallOptions) !describe_cachedi_scsi_volumes.DescribeCachediSCSIVolumesOutput {
         return describe_cachedi_scsi_volumes.execute(self, allocator, input, options);
     }
 
@@ -739,14 +740,14 @@ pub const Client = struct {
     /// information for a specified iSCSI target, one for each target-initiator
     /// pair. This
     /// operation is supported in the volume and tape gateway types.
-    pub fn describeChapCredentials(self: *Self, allocator: std.mem.Allocator, input: describe_chap_credentials.DescribeChapCredentialsInput, options: describe_chap_credentials.Options) !describe_chap_credentials.DescribeChapCredentialsOutput {
+    pub fn describeChapCredentials(self: *Self, allocator: std.mem.Allocator, input: describe_chap_credentials.DescribeChapCredentialsInput, options: CallOptions) !describe_chap_credentials.DescribeChapCredentialsOutput {
         return describe_chap_credentials.execute(self, allocator, input, options);
     }
 
     /// Gets the file system association information. This operation is only
     /// supported for FSx
     /// File Gateways.
-    pub fn describeFileSystemAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_file_system_associations.DescribeFileSystemAssociationsInput, options: describe_file_system_associations.Options) !describe_file_system_associations.DescribeFileSystemAssociationsOutput {
+    pub fn describeFileSystemAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_file_system_associations.DescribeFileSystemAssociationsInput, options: CallOptions) !describe_file_system_associations.DescribeFileSystemAssociationsOutput {
         return describe_file_system_associations.execute(self, allocator, input, options);
     }
 
@@ -755,7 +756,7 @@ pub const Client = struct {
     /// status, and software version. To specify which gateway to describe, use the
     /// Amazon Resource
     /// Name (ARN) of the gateway in your request.
-    pub fn describeGatewayInformation(self: *Self, allocator: std.mem.Allocator, input: describe_gateway_information.DescribeGatewayInformationInput, options: describe_gateway_information.Options) !describe_gateway_information.DescribeGatewayInformationOutput {
+    pub fn describeGatewayInformation(self: *Self, allocator: std.mem.Allocator, input: describe_gateway_information.DescribeGatewayInformationInput, options: CallOptions) !describe_gateway_information.DescribeGatewayInformationOutput {
         return describe_gateway_information.execute(self, allocator, input, options);
     }
 
@@ -764,28 +765,28 @@ pub const Client = struct {
     /// monthly or weekly cadence, specific day and time to begin maintenance, and
     /// which types of
     /// updates to apply. Time values returned are for the gateway's time zone.
-    pub fn describeMaintenanceStartTime(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_start_time.DescribeMaintenanceStartTimeInput, options: describe_maintenance_start_time.Options) !describe_maintenance_start_time.DescribeMaintenanceStartTimeOutput {
+    pub fn describeMaintenanceStartTime(self: *Self, allocator: std.mem.Allocator, input: describe_maintenance_start_time.DescribeMaintenanceStartTimeInput, options: CallOptions) !describe_maintenance_start_time.DescribeMaintenanceStartTimeOutput {
         return describe_maintenance_start_time.execute(self, allocator, input, options);
     }
 
     /// Gets a description for one or more Network File System (NFS) file shares
     /// from an S3 File
     /// Gateway. This operation is only supported for S3 File Gateways.
-    pub fn describeNfsFileShares(self: *Self, allocator: std.mem.Allocator, input: describe_nfs_file_shares.DescribeNFSFileSharesInput, options: describe_nfs_file_shares.Options) !describe_nfs_file_shares.DescribeNFSFileSharesOutput {
+    pub fn describeNfsFileShares(self: *Self, allocator: std.mem.Allocator, input: describe_nfs_file_shares.DescribeNFSFileSharesInput, options: CallOptions) !describe_nfs_file_shares.DescribeNFSFileSharesOutput {
         return describe_nfs_file_shares.execute(self, allocator, input, options);
     }
 
     /// Gets a description for one or more Server Message Block (SMB) file shares
     /// from a S3 File
     /// Gateway. This operation is only supported for S3 File Gateways.
-    pub fn describeSmbFileShares(self: *Self, allocator: std.mem.Allocator, input: describe_smb_file_shares.DescribeSMBFileSharesInput, options: describe_smb_file_shares.Options) !describe_smb_file_shares.DescribeSMBFileSharesOutput {
+    pub fn describeSmbFileShares(self: *Self, allocator: std.mem.Allocator, input: describe_smb_file_shares.DescribeSMBFileSharesInput, options: CallOptions) !describe_smb_file_shares.DescribeSMBFileSharesOutput {
         return describe_smb_file_shares.execute(self, allocator, input, options);
     }
 
     /// Gets a description of a Server Message Block (SMB) file share settings from
     /// a file
     /// gateway. This operation is only supported for file gateways.
-    pub fn describeSmbSettings(self: *Self, allocator: std.mem.Allocator, input: describe_smb_settings.DescribeSMBSettingsInput, options: describe_smb_settings.Options) !describe_smb_settings.DescribeSMBSettingsOutput {
+    pub fn describeSmbSettings(self: *Self, allocator: std.mem.Allocator, input: describe_smb_settings.DescribeSMBSettingsInput, options: CallOptions) !describe_smb_settings.DescribeSMBSettingsOutput {
         return describe_smb_settings.execute(self, allocator, input, options);
     }
 
@@ -796,7 +797,7 @@ pub const Client = struct {
     /// volume. This operation is only supported in the cached volume and stored
     /// volume
     /// types.
-    pub fn describeSnapshotSchedule(self: *Self, allocator: std.mem.Allocator, input: describe_snapshot_schedule.DescribeSnapshotScheduleInput, options: describe_snapshot_schedule.Options) !describe_snapshot_schedule.DescribeSnapshotScheduleOutput {
+    pub fn describeSnapshotSchedule(self: *Self, allocator: std.mem.Allocator, input: describe_snapshot_schedule.DescribeSnapshotScheduleInput, options: CallOptions) !describe_snapshot_schedule.DescribeSnapshotScheduleOutput {
         return describe_snapshot_schedule.execute(self, allocator, input, options);
     }
 
@@ -806,7 +807,7 @@ pub const Client = struct {
     /// Storage Gateway returns volume information sorted by volume ARNs. This
     /// operation is only
     /// supported in stored volume gateway type.
-    pub fn describeStorediScsiVolumes(self: *Self, allocator: std.mem.Allocator, input: describe_storedi_scsi_volumes.DescribeStorediSCSIVolumesInput, options: describe_storedi_scsi_volumes.Options) !describe_storedi_scsi_volumes.DescribeStorediSCSIVolumesOutput {
+    pub fn describeStorediScsiVolumes(self: *Self, allocator: std.mem.Allocator, input: describe_storedi_scsi_volumes.DescribeStorediSCSIVolumesInput, options: CallOptions) !describe_storedi_scsi_volumes.DescribeStorediSCSIVolumesOutput {
         return describe_storedi_scsi_volumes.execute(self, allocator, input, options);
     }
 
@@ -817,7 +818,7 @@ pub const Client = struct {
     /// If a specific `TapeARN` is not specified, Storage Gateway returns a
     /// description of all virtual tapes found in the VTS associated with your
     /// account.
-    pub fn describeTapeArchives(self: *Self, allocator: std.mem.Allocator, input: describe_tape_archives.DescribeTapeArchivesInput, options: describe_tape_archives.Options) !describe_tape_archives.DescribeTapeArchivesOutput {
+    pub fn describeTapeArchives(self: *Self, allocator: std.mem.Allocator, input: describe_tape_archives.DescribeTapeArchivesInput, options: CallOptions) !describe_tape_archives.DescribeTapeArchivesOutput {
         return describe_tape_archives.execute(self, allocator, input, options);
     }
 
@@ -832,7 +833,7 @@ pub const Client = struct {
     /// points can be recovered to a new gateway. This operation is only supported
     /// in the tape
     /// gateway type.
-    pub fn describeTapeRecoveryPoints(self: *Self, allocator: std.mem.Allocator, input: describe_tape_recovery_points.DescribeTapeRecoveryPointsInput, options: describe_tape_recovery_points.Options) !describe_tape_recovery_points.DescribeTapeRecoveryPointsOutput {
+    pub fn describeTapeRecoveryPoints(self: *Self, allocator: std.mem.Allocator, input: describe_tape_recovery_points.DescribeTapeRecoveryPointsInput, options: CallOptions) !describe_tape_recovery_points.DescribeTapeRecoveryPointsOutput {
         return describe_tape_recovery_points.execute(self, allocator, input, options);
     }
 
@@ -852,7 +853,7 @@ pub const Client = struct {
     /// truncated, the response includes a `Marker` field. You can use this
     /// `Marker` value in your subsequent request to retrieve the next set of
     /// tapes.
-    pub fn describeTapes(self: *Self, allocator: std.mem.Allocator, input: describe_tapes.DescribeTapesInput, options: describe_tapes.Options) !describe_tapes.DescribeTapesOutput {
+    pub fn describeTapes(self: *Self, allocator: std.mem.Allocator, input: describe_tapes.DescribeTapesInput, options: CallOptions) !describe_tapes.DescribeTapesOutput {
         return describe_tapes.execute(self, allocator, input, options);
     }
 
@@ -863,7 +864,7 @@ pub const Client = struct {
     /// The response includes disk IDs that are configured as upload buffer space,
     /// and it
     /// includes the amount of upload buffer space allocated and used.
-    pub fn describeUploadBuffer(self: *Self, allocator: std.mem.Allocator, input: describe_upload_buffer.DescribeUploadBufferInput, options: describe_upload_buffer.Options) !describe_upload_buffer.DescribeUploadBufferOutput {
+    pub fn describeUploadBuffer(self: *Self, allocator: std.mem.Allocator, input: describe_upload_buffer.DescribeUploadBufferInput, options: CallOptions) !describe_upload_buffer.DescribeUploadBufferOutput {
         return describe_upload_buffer.execute(self, allocator, input, options);
     }
 
@@ -872,7 +873,7 @@ pub const Client = struct {
     /// gateway. In the response, Storage Gateway returns VTL device information.
     ///
     /// This operation is only supported in the tape gateway type.
-    pub fn describeVtlDevices(self: *Self, allocator: std.mem.Allocator, input: describe_vtl_devices.DescribeVTLDevicesInput, options: describe_vtl_devices.Options) !describe_vtl_devices.DescribeVTLDevicesOutput {
+    pub fn describeVtlDevices(self: *Self, allocator: std.mem.Allocator, input: describe_vtl_devices.DescribeVTLDevicesInput, options: CallOptions) !describe_vtl_devices.DescribeVTLDevicesOutput {
         return describe_vtl_devices.execute(self, allocator, input, options);
     }
 
@@ -889,7 +890,7 @@ pub const Client = struct {
     /// The response includes disk IDs that are configured as working storage, and
     /// it includes
     /// the amount of working storage allocated and used.
-    pub fn describeWorkingStorage(self: *Self, allocator: std.mem.Allocator, input: describe_working_storage.DescribeWorkingStorageInput, options: describe_working_storage.Options) !describe_working_storage.DescribeWorkingStorageOutput {
+    pub fn describeWorkingStorage(self: *Self, allocator: std.mem.Allocator, input: describe_working_storage.DescribeWorkingStorageInput, options: CallOptions) !describe_working_storage.DescribeWorkingStorageOutput {
         return describe_working_storage.execute(self, allocator, input, options);
     }
 
@@ -902,7 +903,7 @@ pub const Client = struct {
     /// move your volumes from an on-premises gateway to a gateway hosted on an
     /// Amazon EC2
     /// instance. This operation is only supported in the volume gateway type.
-    pub fn detachVolume(self: *Self, allocator: std.mem.Allocator, input: detach_volume.DetachVolumeInput, options: detach_volume.Options) !detach_volume.DetachVolumeOutput {
+    pub fn detachVolume(self: *Self, allocator: std.mem.Allocator, input: detach_volume.DetachVolumeInput, options: CallOptions) !detach_volume.DetachVolumeOutput {
         return detach_volume.execute(self, allocator, input, options);
     }
 
@@ -916,7 +917,7 @@ pub const Client = struct {
     /// operation is only supported in the tape gateway type.
     ///
     /// After a gateway is disabled, it cannot be enabled.
-    pub fn disableGateway(self: *Self, allocator: std.mem.Allocator, input: disable_gateway.DisableGatewayInput, options: disable_gateway.Options) !disable_gateway.DisableGatewayOutput {
+    pub fn disableGateway(self: *Self, allocator: std.mem.Allocator, input: disable_gateway.DisableGatewayInput, options: CallOptions) !disable_gateway.DisableGatewayOutput {
         return disable_gateway.execute(self, allocator, input, options);
     }
 
@@ -925,7 +926,7 @@ pub const Client = struct {
     /// disassociation process finishes, the gateway can no longer access the Amazon
     /// FSx
     /// file system. This operation is only supported in the FSx File Gateway type.
-    pub fn disassociateFileSystem(self: *Self, allocator: std.mem.Allocator, input: disassociate_file_system.DisassociateFileSystemInput, options: disassociate_file_system.Options) !disassociate_file_system.DisassociateFileSystemOutput {
+    pub fn disassociateFileSystem(self: *Self, allocator: std.mem.Allocator, input: disassociate_file_system.DisassociateFileSystemInput, options: CallOptions) !disassociate_file_system.DisassociateFileSystemOutput {
         return disassociate_file_system.execute(self, allocator, input, options);
     }
 
@@ -949,7 +950,7 @@ pub const Client = struct {
     /// upload have been exhausted, and if your business need outweighs the
     /// potential data
     /// loss.
-    pub fn evictFilesFailingUpload(self: *Self, allocator: std.mem.Allocator, input: evict_files_failing_upload.EvictFilesFailingUploadInput, options: evict_files_failing_upload.Options) !evict_files_failing_upload.EvictFilesFailingUploadOutput {
+    pub fn evictFilesFailingUpload(self: *Self, allocator: std.mem.Allocator, input: evict_files_failing_upload.EvictFilesFailingUploadInput, options: CallOptions) !evict_files_failing_upload.EvictFilesFailingUploadOutput {
         return evict_files_failing_upload.execute(self, allocator, input, options);
     }
 
@@ -968,7 +969,7 @@ pub const Client = struct {
     /// To create the gateway's computer account in an organizational unit other
     /// than the
     /// default, you must specify the organizational unit when joining the domain.
-    pub fn joinDomain(self: *Self, allocator: std.mem.Allocator, input: join_domain.JoinDomainInput, options: join_domain.Options) !join_domain.JoinDomainOutput {
+    pub fn joinDomain(self: *Self, allocator: std.mem.Allocator, input: join_domain.JoinDomainInput, options: CallOptions) !join_domain.JoinDomainOutput {
         return join_domain.execute(self, allocator, input, options);
     }
 
@@ -977,7 +978,7 @@ pub const Client = struct {
     /// creation policies for the gateway, it returns an empty list.
     ///
     /// This operation is only supported for tape gateways.
-    pub fn listAutomaticTapeCreationPolicies(self: *Self, allocator: std.mem.Allocator, input: list_automatic_tape_creation_policies.ListAutomaticTapeCreationPoliciesInput, options: list_automatic_tape_creation_policies.Options) !list_automatic_tape_creation_policies.ListAutomaticTapeCreationPoliciesOutput {
+    pub fn listAutomaticTapeCreationPolicies(self: *Self, allocator: std.mem.Allocator, input: list_automatic_tape_creation_policies.ListAutomaticTapeCreationPoliciesInput, options: CallOptions) !list_automatic_tape_creation_policies.ListAutomaticTapeCreationPoliciesOutput {
         return list_automatic_tape_creation_policies.execute(self, allocator, input, options);
     }
 
@@ -987,7 +988,7 @@ pub const Client = struct {
     /// the
     /// `DescribeCacheReport` action, such as report name, status, completion
     /// progress, start time, end time, filters, and tags.
-    pub fn listCacheReports(self: *Self, allocator: std.mem.Allocator, input: list_cache_reports.ListCacheReportsInput, options: list_cache_reports.Options) !list_cache_reports.ListCacheReportsOutput {
+    pub fn listCacheReports(self: *Self, allocator: std.mem.Allocator, input: list_cache_reports.ListCacheReportsInput, options: CallOptions) !list_cache_reports.ListCacheReportsOutput {
         return list_cache_reports.execute(self, allocator, input, options);
     }
 
@@ -996,7 +997,7 @@ pub const Client = struct {
     /// shares that belong to the calling Amazon Web Services account. This
     /// operation is only
     /// supported for S3 File Gateways.
-    pub fn listFileShares(self: *Self, allocator: std.mem.Allocator, input: list_file_shares.ListFileSharesInput, options: list_file_shares.Options) !list_file_shares.ListFileSharesOutput {
+    pub fn listFileShares(self: *Self, allocator: std.mem.Allocator, input: list_file_shares.ListFileSharesInput, options: CallOptions) !list_file_shares.ListFileSharesOutput {
         return list_file_shares.execute(self, allocator, input, options);
     }
 
@@ -1005,7 +1006,7 @@ pub const Client = struct {
     /// summary of a file system association. This operation is only supported for
     /// FSx File
     /// Gateways.
-    pub fn listFileSystemAssociations(self: *Self, allocator: std.mem.Allocator, input: list_file_system_associations.ListFileSystemAssociationsInput, options: list_file_system_associations.Options) !list_file_system_associations.ListFileSystemAssociationsOutput {
+    pub fn listFileSystemAssociations(self: *Self, allocator: std.mem.Allocator, input: list_file_system_associations.ListFileSystemAssociationsInput, options: CallOptions) !list_file_system_associations.ListFileSystemAssociationsOutput {
         return list_file_system_associations.execute(self, allocator, input, options);
     }
 
@@ -1026,7 +1027,7 @@ pub const Client = struct {
     /// only a truncated list of your gateways), the response contains a marker that
     /// you can
     /// specify in your next request to fetch the next page of gateways.
-    pub fn listGateways(self: *Self, allocator: std.mem.Allocator, input: list_gateways.ListGatewaysInput, options: list_gateways.Options) !list_gateways.ListGatewaysOutput {
+    pub fn listGateways(self: *Self, allocator: std.mem.Allocator, input: list_gateways.ListGatewaysInput, options: CallOptions) !list_gateways.ListGatewaysOutput {
         return list_gateways.execute(self, allocator, input, options);
     }
 
@@ -1045,14 +1046,14 @@ pub const Client = struct {
     /// (the disk node is occupied by a disk that has incorrect metadata or the disk
     /// content is
     /// corrupted).
-    pub fn listLocalDisks(self: *Self, allocator: std.mem.Allocator, input: list_local_disks.ListLocalDisksInput, options: list_local_disks.Options) !list_local_disks.ListLocalDisksOutput {
+    pub fn listLocalDisks(self: *Self, allocator: std.mem.Allocator, input: list_local_disks.ListLocalDisksInput, options: CallOptions) !list_local_disks.ListLocalDisksOutput {
         return list_local_disks.execute(self, allocator, input, options);
     }
 
     /// Lists the tags that have been added to the specified resource. This
     /// operation is
     /// supported in storage gateways of all types.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -1068,7 +1069,7 @@ pub const Client = struct {
     /// tape pools returned in the response is truncated, the response includes a
     /// `Marker` element that you can use in your subsequent request to retrieve the
     /// next set of tape pools.
-    pub fn listTapePools(self: *Self, allocator: std.mem.Allocator, input: list_tape_pools.ListTapePoolsInput, options: list_tape_pools.Options) !list_tape_pools.ListTapePoolsOutput {
+    pub fn listTapePools(self: *Self, allocator: std.mem.Allocator, input: list_tape_pools.ListTapePoolsInput, options: CallOptions) !list_tape_pools.ListTapePoolsOutput {
         return list_tape_pools.execute(self, allocator, input, options);
     }
 
@@ -1090,7 +1091,7 @@ pub const Client = struct {
     /// subsequent request to retrieve the next set of tapes. This operation is only
     /// supported in
     /// the tape gateway type.
-    pub fn listTapes(self: *Self, allocator: std.mem.Allocator, input: list_tapes.ListTapesInput, options: list_tapes.Options) !list_tapes.ListTapesOutput {
+    pub fn listTapes(self: *Self, allocator: std.mem.Allocator, input: list_tapes.ListTapesInput, options: CallOptions) !list_tapes.ListTapesOutput {
         return list_tapes.execute(self, allocator, input, options);
     }
 
@@ -1099,7 +1100,7 @@ pub const Client = struct {
     /// determine whether a volume is being used or not. This operation is only
     /// supported in the
     /// cached volume and stored volume gateway types.
-    pub fn listVolumeInitiators(self: *Self, allocator: std.mem.Allocator, input: list_volume_initiators.ListVolumeInitiatorsInput, options: list_volume_initiators.Options) !list_volume_initiators.ListVolumeInitiatorsOutput {
+    pub fn listVolumeInitiators(self: *Self, allocator: std.mem.Allocator, input: list_volume_initiators.ListVolumeInitiatorsInput, options: CallOptions) !list_volume_initiators.ListVolumeInitiatorsOutput {
         return list_volume_initiators.execute(self, allocator, input, options);
     }
 
@@ -1114,7 +1115,7 @@ pub const Client = struct {
     /// clone a new cached volume from a source volume. To create a snapshot from a
     /// volume recovery
     /// point use the CreateSnapshotFromVolumeRecoveryPoint operation.
-    pub fn listVolumeRecoveryPoints(self: *Self, allocator: std.mem.Allocator, input: list_volume_recovery_points.ListVolumeRecoveryPointsInput, options: list_volume_recovery_points.Options) !list_volume_recovery_points.ListVolumeRecoveryPointsOutput {
+    pub fn listVolumeRecoveryPoints(self: *Self, allocator: std.mem.Allocator, input: list_volume_recovery_points.ListVolumeRecoveryPointsInput, options: CallOptions) !list_volume_recovery_points.ListVolumeRecoveryPointsOutput {
         return list_volume_recovery_points.execute(self, allocator, input, options);
     }
 
@@ -1135,7 +1136,7 @@ pub const Client = struct {
     /// subsequent request to retrieve the next set of volumes. This operation is
     /// only supported in
     /// the cached volume and stored volume gateway types.
-    pub fn listVolumes(self: *Self, allocator: std.mem.Allocator, input: list_volumes.ListVolumesInput, options: list_volumes.Options) !list_volumes.ListVolumesOutput {
+    pub fn listVolumes(self: *Self, allocator: std.mem.Allocator, input: list_volumes.ListVolumesInput, options: CallOptions) !list_volumes.ListVolumesOutput {
         return list_volumes.execute(self, allocator, input, options);
     }
 
@@ -1157,7 +1158,7 @@ pub const Client = struct {
     /// file upload
     /// notification](https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification) in the *Amazon S3 File Gateway User
     /// Guide*.
-    pub fn notifyWhenUploaded(self: *Self, allocator: std.mem.Allocator, input: notify_when_uploaded.NotifyWhenUploadedInput, options: notify_when_uploaded.Options) !notify_when_uploaded.NotifyWhenUploadedOutput {
+    pub fn notifyWhenUploaded(self: *Self, allocator: std.mem.Allocator, input: notify_when_uploaded.NotifyWhenUploadedInput, options: CallOptions) !notify_when_uploaded.NotifyWhenUploadedOutput {
         return notify_when_uploaded.execute(self, allocator, input, options);
     }
 
@@ -1217,14 +1218,14 @@ pub const Client = struct {
     /// notified about file
     /// operations](https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification) in the *Amazon S3 File Gateway User
     /// Guide*.
-    pub fn refreshCache(self: *Self, allocator: std.mem.Allocator, input: refresh_cache.RefreshCacheInput, options: refresh_cache.Options) !refresh_cache.RefreshCacheOutput {
+    pub fn refreshCache(self: *Self, allocator: std.mem.Allocator, input: refresh_cache.RefreshCacheInput, options: CallOptions) !refresh_cache.RefreshCacheOutput {
         return refresh_cache.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified resource. This operation is
     /// supported in
     /// storage gateways of all types.
-    pub fn removeTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_resource.RemoveTagsFromResourceInput, options: remove_tags_from_resource.Options) !remove_tags_from_resource.RemoveTagsFromResourceOutput {
+    pub fn removeTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_resource.RemoveTagsFromResourceInput, options: CallOptions) !remove_tags_from_resource.RemoveTagsFromResourceOutput {
         return remove_tags_from_resource.execute(self, allocator, input, options);
     }
 
@@ -1247,7 +1248,7 @@ pub const Client = struct {
     /// be no configured cache disks left in the gateway, so you must configure at
     /// least one new
     /// cache disk for your gateway to function properly.
-    pub fn resetCache(self: *Self, allocator: std.mem.Allocator, input: reset_cache.ResetCacheInput, options: reset_cache.Options) !reset_cache.ResetCacheOutput {
+    pub fn resetCache(self: *Self, allocator: std.mem.Allocator, input: reset_cache.ResetCacheInput, options: CallOptions) !reset_cache.ResetCacheOutput {
         return reset_cache.execute(self, allocator, input, options);
     }
 
@@ -1264,7 +1265,7 @@ pub const Client = struct {
     /// another gateway. You must archive the tape again before you can retrieve it
     /// to another
     /// gateway. This operation is only supported in the tape gateway type.
-    pub fn retrieveTapeArchive(self: *Self, allocator: std.mem.Allocator, input: retrieve_tape_archive.RetrieveTapeArchiveInput, options: retrieve_tape_archive.Options) !retrieve_tape_archive.RetrieveTapeArchiveOutput {
+    pub fn retrieveTapeArchive(self: *Self, allocator: std.mem.Allocator, input: retrieve_tape_archive.RetrieveTapeArchiveInput, options: CallOptions) !retrieve_tape_archive.RetrieveTapeArchiveOutput {
         return retrieve_tape_archive.execute(self, allocator, input, options);
     }
 
@@ -1282,7 +1283,7 @@ pub const Client = struct {
     /// read-only. The virtual tape can be retrieved to only a tape gateway. There
     /// is no charge
     /// for retrieving recovery points.
-    pub fn retrieveTapeRecoveryPoint(self: *Self, allocator: std.mem.Allocator, input: retrieve_tape_recovery_point.RetrieveTapeRecoveryPointInput, options: retrieve_tape_recovery_point.Options) !retrieve_tape_recovery_point.RetrieveTapeRecoveryPointOutput {
+    pub fn retrieveTapeRecoveryPoint(self: *Self, allocator: std.mem.Allocator, input: retrieve_tape_recovery_point.RetrieveTapeRecoveryPointInput, options: CallOptions) !retrieve_tape_recovery_point.RetrieveTapeRecoveryPointOutput {
         return retrieve_tape_recovery_point.execute(self, allocator, input, options);
     }
 
@@ -1292,14 +1293,14 @@ pub const Client = struct {
     /// recommend that you
     /// set a new password. You don't need to know the default password to set a new
     /// password.
-    pub fn setLocalConsolePassword(self: *Self, allocator: std.mem.Allocator, input: set_local_console_password.SetLocalConsolePasswordInput, options: set_local_console_password.Options) !set_local_console_password.SetLocalConsolePasswordOutput {
+    pub fn setLocalConsolePassword(self: *Self, allocator: std.mem.Allocator, input: set_local_console_password.SetLocalConsolePasswordInput, options: CallOptions) !set_local_console_password.SetLocalConsolePasswordOutput {
         return set_local_console_password.execute(self, allocator, input, options);
     }
 
     /// Sets the password for the guest user `smbguest`. The `smbguest`
     /// user is the user when the authentication method for the file share is set to
     /// `GuestAccess`. This operation only supported for S3 File Gateways
-    pub fn setSmbGuestPassword(self: *Self, allocator: std.mem.Allocator, input: set_smb_guest_password.SetSMBGuestPasswordInput, options: set_smb_guest_password.Options) !set_smb_guest_password.SetSMBGuestPasswordOutput {
+    pub fn setSmbGuestPassword(self: *Self, allocator: std.mem.Allocator, input: set_smb_guest_password.SetSMBGuestPasswordInput, options: CallOptions) !set_smb_guest_password.SetSMBGuestPasswordOutput {
         return set_smb_guest_password.execute(self, allocator, input, options);
     }
 
@@ -1334,7 +1335,7 @@ pub const Client = struct {
     /// If do not intend to use the gateway again, you must delete the gateway
     /// (using DeleteGateway) to no longer pay software charges associated with the
     /// gateway.
-    pub fn shutdownGateway(self: *Self, allocator: std.mem.Allocator, input: shutdown_gateway.ShutdownGatewayInput, options: shutdown_gateway.Options) !shutdown_gateway.ShutdownGatewayOutput {
+    pub fn shutdownGateway(self: *Self, allocator: std.mem.Allocator, input: shutdown_gateway.ShutdownGatewayInput, options: CallOptions) !shutdown_gateway.ShutdownGatewayOutput {
         return shutdown_gateway.execute(self, allocator, input, options);
     }
 
@@ -1347,7 +1348,7 @@ pub const Client = struct {
     /// `DescribeAvailabilityMonitorTest` API.
     ///
     /// Starting this test will cause your gateway to go offline for a brief period.
-    pub fn startAvailabilityMonitorTest(self: *Self, allocator: std.mem.Allocator, input: start_availability_monitor_test.StartAvailabilityMonitorTestInput, options: start_availability_monitor_test.Options) !start_availability_monitor_test.StartAvailabilityMonitorTestOutput {
+    pub fn startAvailabilityMonitorTest(self: *Self, allocator: std.mem.Allocator, input: start_availability_monitor_test.StartAvailabilityMonitorTestInput, options: CallOptions) !start_availability_monitor_test.StartAvailabilityMonitorTestOutput {
         return start_availability_monitor_test.execute(self, allocator, input, options);
     }
 
@@ -1386,7 +1387,7 @@ pub const Client = struct {
     ///
     /// * You must specify at least one value for `InclusionFilters` or
     /// `ExclusionFilters` in the request.
-    pub fn startCacheReport(self: *Self, allocator: std.mem.Allocator, input: start_cache_report.StartCacheReportInput, options: start_cache_report.Options) !start_cache_report.StartCacheReportOutput {
+    pub fn startCacheReport(self: *Self, allocator: std.mem.Allocator, input: start_cache_report.StartCacheReportInput, options: CallOptions) !start_cache_report.StartCacheReportOutput {
         return start_cache_report.execute(self, allocator, input, options);
     }
 
@@ -1406,7 +1407,7 @@ pub const Client = struct {
     /// To specify which gateway to start, use the Amazon Resource Name (ARN) of the
     /// gateway in
     /// your request.
-    pub fn startGateway(self: *Self, allocator: std.mem.Allocator, input: start_gateway.StartGatewayInput, options: start_gateway.Options) !start_gateway.StartGatewayOutput {
+    pub fn startGateway(self: *Self, allocator: std.mem.Allocator, input: start_gateway.StartGatewayInput, options: CallOptions) !start_gateway.StartGatewayOutput {
         return start_gateway.execute(self, allocator, input, options);
     }
 
@@ -1419,7 +1420,7 @@ pub const Client = struct {
     /// By default, there is no automatic tape creation policy.
     ///
     /// A gateway can have only one automatic tape creation policy.
-    pub fn updateAutomaticTapeCreationPolicy(self: *Self, allocator: std.mem.Allocator, input: update_automatic_tape_creation_policy.UpdateAutomaticTapeCreationPolicyInput, options: update_automatic_tape_creation_policy.Options) !update_automatic_tape_creation_policy.UpdateAutomaticTapeCreationPolicyOutput {
+    pub fn updateAutomaticTapeCreationPolicy(self: *Self, allocator: std.mem.Allocator, input: update_automatic_tape_creation_policy.UpdateAutomaticTapeCreationPolicyInput, options: CallOptions) !update_automatic_tape_creation_policy.UpdateAutomaticTapeCreationPolicyOutput {
         return update_automatic_tape_creation_policy.execute(self, allocator, input, options);
     }
 
@@ -1441,7 +1442,7 @@ pub const Client = struct {
     /// To specify which gateway to update, use the Amazon Resource Name (ARN) of
     /// the gateway in
     /// your request.
-    pub fn updateBandwidthRateLimit(self: *Self, allocator: std.mem.Allocator, input: update_bandwidth_rate_limit.UpdateBandwidthRateLimitInput, options: update_bandwidth_rate_limit.Options) !update_bandwidth_rate_limit.UpdateBandwidthRateLimitOutput {
+    pub fn updateBandwidthRateLimit(self: *Self, allocator: std.mem.Allocator, input: update_bandwidth_rate_limit.UpdateBandwidthRateLimitInput, options: CallOptions) !update_bandwidth_rate_limit.UpdateBandwidthRateLimitOutput {
         return update_bandwidth_rate_limit.execute(self, allocator, input, options);
     }
 
@@ -1456,7 +1457,7 @@ pub const Client = struct {
     /// bandwidth rate limits for upload only. FSx file gateways do not support
     /// bandwidth rate
     /// limits.
-    pub fn updateBandwidthRateLimitSchedule(self: *Self, allocator: std.mem.Allocator, input: update_bandwidth_rate_limit_schedule.UpdateBandwidthRateLimitScheduleInput, options: update_bandwidth_rate_limit_schedule.Options) !update_bandwidth_rate_limit_schedule.UpdateBandwidthRateLimitScheduleOutput {
+    pub fn updateBandwidthRateLimitSchedule(self: *Self, allocator: std.mem.Allocator, input: update_bandwidth_rate_limit_schedule.UpdateBandwidthRateLimitScheduleInput, options: CallOptions) !update_bandwidth_rate_limit_schedule.UpdateBandwidthRateLimitScheduleOutput {
         return update_bandwidth_rate_limit_schedule.execute(self, allocator, input, options);
     }
 
@@ -1471,14 +1472,14 @@ pub const Client = struct {
     /// When you update CHAP credentials, all existing connections on the target are
     /// closed
     /// and initiators must reconnect with the new credentials.
-    pub fn updateChapCredentials(self: *Self, allocator: std.mem.Allocator, input: update_chap_credentials.UpdateChapCredentialsInput, options: update_chap_credentials.Options) !update_chap_credentials.UpdateChapCredentialsOutput {
+    pub fn updateChapCredentials(self: *Self, allocator: std.mem.Allocator, input: update_chap_credentials.UpdateChapCredentialsInput, options: CallOptions) !update_chap_credentials.UpdateChapCredentialsOutput {
         return update_chap_credentials.execute(self, allocator, input, options);
     }
 
     /// Updates a file system association. This operation is only supported in the
     /// FSx File
     /// Gateways.
-    pub fn updateFileSystemAssociation(self: *Self, allocator: std.mem.Allocator, input: update_file_system_association.UpdateFileSystemAssociationInput, options: update_file_system_association.Options) !update_file_system_association.UpdateFileSystemAssociationOutput {
+    pub fn updateFileSystemAssociation(self: *Self, allocator: std.mem.Allocator, input: update_file_system_association.UpdateFileSystemAssociationInput, options: CallOptions) !update_file_system_association.UpdateFileSystemAssociationOutput {
         return update_file_system_association.execute(self, allocator, input, options);
     }
 
@@ -1492,7 +1493,7 @@ pub const Client = struct {
     /// gateway ID rather than the gateway name. However, changing the name of the
     /// gateway has
     /// no effect on the gateway's ARN.
-    pub fn updateGatewayInformation(self: *Self, allocator: std.mem.Allocator, input: update_gateway_information.UpdateGatewayInformationInput, options: update_gateway_information.Options) !update_gateway_information.UpdateGatewayInformationOutput {
+    pub fn updateGatewayInformation(self: *Self, allocator: std.mem.Allocator, input: update_gateway_information.UpdateGatewayInformationInput, options: CallOptions) !update_gateway_information.UpdateGatewayInformationOutput {
         return update_gateway_information.execute(self, allocator, input, options);
     }
 
@@ -1514,7 +1515,7 @@ pub const Client = struct {
     /// Windows and
     /// Linux, see [Customizing your Windows iSCSI
     /// settings](https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorWindowsClient.html#CustomizeWindowsiSCSISettings) and [Customizing your Linux iSCSI settings](https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings), respectively.
-    pub fn updateGatewaySoftwareNow(self: *Self, allocator: std.mem.Allocator, input: update_gateway_software_now.UpdateGatewaySoftwareNowInput, options: update_gateway_software_now.Options) !update_gateway_software_now.UpdateGatewaySoftwareNowOutput {
+    pub fn updateGatewaySoftwareNow(self: *Self, allocator: std.mem.Allocator, input: update_gateway_software_now.UpdateGatewaySoftwareNowInput, options: CallOptions) !update_gateway_software_now.UpdateGatewaySoftwareNowOutput {
         return update_gateway_software_now.execute(self, allocator, input, options);
     }
 
@@ -1542,7 +1543,7 @@ pub const Client = struct {
     /// where the brief disruptions caused by updating the gateway could critically
     /// impact your
     /// deployment.
-    pub fn updateMaintenanceStartTime(self: *Self, allocator: std.mem.Allocator, input: update_maintenance_start_time.UpdateMaintenanceStartTimeInput, options: update_maintenance_start_time.Options) !update_maintenance_start_time.UpdateMaintenanceStartTimeOutput {
+    pub fn updateMaintenanceStartTime(self: *Self, allocator: std.mem.Allocator, input: update_maintenance_start_time.UpdateMaintenanceStartTimeInput, options: CallOptions) !update_maintenance_start_time.UpdateMaintenanceStartTimeOutput {
         return update_maintenance_start_time.execute(self, allocator, input, options);
     }
 
@@ -1564,7 +1565,7 @@ pub const Client = struct {
     /// * Squash settings
     ///
     /// * Write status of your file share
-    pub fn updateNfsFileShare(self: *Self, allocator: std.mem.Allocator, input: update_nfs_file_share.UpdateNFSFileShareInput, options: update_nfs_file_share.Options) !update_nfs_file_share.UpdateNFSFileShareOutput {
+    pub fn updateNfsFileShare(self: *Self, allocator: std.mem.Allocator, input: update_nfs_file_share.UpdateNFSFileShareInput, options: CallOptions) !update_nfs_file_share.UpdateNFSFileShareOutput {
         return update_nfs_file_share.execute(self, allocator, input, options);
     }
 
@@ -1590,21 +1591,21 @@ pub const Client = struct {
     ///
     /// File gateways don't support creating hard or symbolic links on a file
     /// share.
-    pub fn updateSmbFileShare(self: *Self, allocator: std.mem.Allocator, input: update_smb_file_share.UpdateSMBFileShareInput, options: update_smb_file_share.Options) !update_smb_file_share.UpdateSMBFileShareOutput {
+    pub fn updateSmbFileShare(self: *Self, allocator: std.mem.Allocator, input: update_smb_file_share.UpdateSMBFileShareInput, options: CallOptions) !update_smb_file_share.UpdateSMBFileShareOutput {
         return update_smb_file_share.execute(self, allocator, input, options);
     }
 
     /// Controls whether the shares on an S3 File Gateway are visible in a net view
     /// or browse
     /// list. The operation is only supported for S3 File Gateways.
-    pub fn updateSmbFileShareVisibility(self: *Self, allocator: std.mem.Allocator, input: update_smb_file_share_visibility.UpdateSMBFileShareVisibilityInput, options: update_smb_file_share_visibility.Options) !update_smb_file_share_visibility.UpdateSMBFileShareVisibilityOutput {
+    pub fn updateSmbFileShareVisibility(self: *Self, allocator: std.mem.Allocator, input: update_smb_file_share_visibility.UpdateSMBFileShareVisibilityInput, options: CallOptions) !update_smb_file_share_visibility.UpdateSMBFileShareVisibilityOutput {
         return update_smb_file_share_visibility.execute(self, allocator, input, options);
     }
 
     /// Updates the list of Active Directory users and groups that have special
     /// permissions for
     /// SMB file shares on the gateway.
-    pub fn updateSmbLocalGroups(self: *Self, allocator: std.mem.Allocator, input: update_smb_local_groups.UpdateSMBLocalGroupsInput, options: update_smb_local_groups.Options) !update_smb_local_groups.UpdateSMBLocalGroupsOutput {
+    pub fn updateSmbLocalGroups(self: *Self, allocator: std.mem.Allocator, input: update_smb_local_groups.UpdateSMBLocalGroupsInput, options: CallOptions) !update_smb_local_groups.UpdateSMBLocalGroupsOutput {
         return update_smb_local_groups.execute(self, allocator, input, options);
     }
 
@@ -1618,7 +1619,7 @@ pub const Client = struct {
     /// File Gateway User Guide*.
     ///
     /// A higher security strategy level can affect performance of the gateway.
-    pub fn updateSmbSecurityStrategy(self: *Self, allocator: std.mem.Allocator, input: update_smb_security_strategy.UpdateSMBSecurityStrategyInput, options: update_smb_security_strategy.Options) !update_smb_security_strategy.UpdateSMBSecurityStrategyOutput {
+    pub fn updateSmbSecurityStrategy(self: *Self, allocator: std.mem.Allocator, input: update_smb_security_strategy.UpdateSMBSecurityStrategyInput, options: CallOptions) !update_smb_security_strategy.UpdateSMBSecurityStrategyOutput {
         return update_smb_security_strategy.execute(self, allocator, input, options);
     }
 
@@ -1637,7 +1638,7 @@ pub const Client = struct {
     /// update, and the schedule information, including when you want the snapshot
     /// to begin on a
     /// day and the frequency (in hours) of snapshots.
-    pub fn updateSnapshotSchedule(self: *Self, allocator: std.mem.Allocator, input: update_snapshot_schedule.UpdateSnapshotScheduleInput, options: update_snapshot_schedule.Options) !update_snapshot_schedule.UpdateSnapshotScheduleOutput {
+    pub fn updateSnapshotSchedule(self: *Self, allocator: std.mem.Allocator, input: update_snapshot_schedule.UpdateSnapshotScheduleInput, options: CallOptions) !update_snapshot_schedule.UpdateSnapshotScheduleOutput {
         return update_snapshot_schedule.execute(self, allocator, input, options);
     }
 
@@ -1648,7 +1649,7 @@ pub const Client = struct {
     /// a different type of medium changer after a tape gateway is activated. This
     /// operation is
     /// only supported in the tape gateway type.
-    pub fn updateVtlDeviceType(self: *Self, allocator: std.mem.Allocator, input: update_vtl_device_type.UpdateVTLDeviceTypeInput, options: update_vtl_device_type.Options) !update_vtl_device_type.UpdateVTLDeviceTypeOutput {
+    pub fn updateVtlDeviceType(self: *Self, allocator: std.mem.Allocator, input: update_vtl_device_type.UpdateVTLDeviceTypeInput, options: CallOptions) !update_vtl_device_type.UpdateVTLDeviceTypeOutput {
         return update_vtl_device_type.execute(self, allocator, input, options);
     }
 

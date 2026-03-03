@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContainerProvider = @import("container_provider.zig").ContainerProvider;
 
@@ -47,11 +48,7 @@ pub const CreateVirtualClusterOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVirtualClusterInput, options: Options) !CreateVirtualClusterOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVirtualClusterInput, options: CallOptions) !CreateVirtualClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

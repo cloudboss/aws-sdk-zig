@@ -22,6 +22,7 @@ const start_access_logging = @import("start_access_logging.zig");
 const stop_access_logging = @import("stop_access_logging.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -55,7 +56,7 @@ pub const Client = struct {
     /// Creates a storage container to hold objects. A container is similar to a
     /// bucket in
     /// the Amazon S3 service.
-    pub fn createContainer(self: *Self, allocator: std.mem.Allocator, input: create_container.CreateContainerInput, options: create_container.Options) !create_container.CreateContainerOutput {
+    pub fn createContainer(self: *Self, allocator: std.mem.Allocator, input: create_container.CreateContainerInput, options: CallOptions) !create_container.CreateContainerOutput {
         return create_container.execute(self, allocator, input, options);
     }
 
@@ -63,12 +64,12 @@ pub const Client = struct {
     /// request, delete any objects in the container or in any folders in the
     /// container. You can
     /// delete only empty containers.
-    pub fn deleteContainer(self: *Self, allocator: std.mem.Allocator, input: delete_container.DeleteContainerInput, options: delete_container.Options) !delete_container.DeleteContainerOutput {
+    pub fn deleteContainer(self: *Self, allocator: std.mem.Allocator, input: delete_container.DeleteContainerInput, options: CallOptions) !delete_container.DeleteContainerOutput {
         return delete_container.execute(self, allocator, input, options);
     }
 
     /// Deletes the access policy that is associated with the specified container.
-    pub fn deleteContainerPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_container_policy.DeleteContainerPolicyInput, options: delete_container_policy.Options) !delete_container_policy.DeleteContainerPolicyOutput {
+    pub fn deleteContainerPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_container_policy.DeleteContainerPolicyInput, options: CallOptions) !delete_container_policy.DeleteContainerPolicyOutput {
         return delete_container_policy.execute(self, allocator, input, options);
     }
 
@@ -80,20 +81,20 @@ pub const Client = struct {
     /// `MediaStore:DeleteCorsPolicy` action. The container owner has this
     /// permission
     /// by default and can grant this permission to others.
-    pub fn deleteCorsPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_cors_policy.DeleteCorsPolicyInput, options: delete_cors_policy.Options) !delete_cors_policy.DeleteCorsPolicyOutput {
+    pub fn deleteCorsPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_cors_policy.DeleteCorsPolicyInput, options: CallOptions) !delete_cors_policy.DeleteCorsPolicyOutput {
         return delete_cors_policy.execute(self, allocator, input, options);
     }
 
     /// Removes an object lifecycle policy from a container. It takes up to 20
     /// minutes for the change to take effect.
-    pub fn deleteLifecyclePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_lifecycle_policy.DeleteLifecyclePolicyInput, options: delete_lifecycle_policy.Options) !delete_lifecycle_policy.DeleteLifecyclePolicyOutput {
+    pub fn deleteLifecyclePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_lifecycle_policy.DeleteLifecyclePolicyInput, options: CallOptions) !delete_lifecycle_policy.DeleteLifecyclePolicyOutput {
         return delete_lifecycle_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes the metric policy that is associated with the specified container.
     /// If there is no metric policy associated with the container, MediaStore
     /// doesn't send metrics to CloudWatch.
-    pub fn deleteMetricPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_metric_policy.DeleteMetricPolicyInput, options: delete_metric_policy.Options) !delete_metric_policy.DeleteMetricPolicyOutput {
+    pub fn deleteMetricPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_metric_policy.DeleteMetricPolicyInput, options: CallOptions) !delete_metric_policy.DeleteMetricPolicyOutput {
         return delete_metric_policy.execute(self, allocator, input, options);
     }
 
@@ -107,7 +108,7 @@ pub const Client = struct {
     /// `Container` object based on `ContainerName`. To return all
     /// `Container` objects that are associated with a specified AWS account, use
     /// ListContainers.
-    pub fn describeContainer(self: *Self, allocator: std.mem.Allocator, input: describe_container.DescribeContainerInput, options: describe_container.Options) !describe_container.DescribeContainerOutput {
+    pub fn describeContainer(self: *Self, allocator: std.mem.Allocator, input: describe_container.DescribeContainerInput, options: CallOptions) !describe_container.DescribeContainerOutput {
         return describe_container.execute(self, allocator, input, options);
     }
 
@@ -116,7 +117,7 @@ pub const Client = struct {
     /// data that is included in an access policy, see the [AWS Identity and Access
     /// Management User
     /// Guide](https://aws.amazon.com/documentation/iam/).
-    pub fn getContainerPolicy(self: *Self, allocator: std.mem.Allocator, input: get_container_policy.GetContainerPolicyInput, options: get_container_policy.Options) !get_container_policy.GetContainerPolicyOutput {
+    pub fn getContainerPolicy(self: *Self, allocator: std.mem.Allocator, input: get_container_policy.GetContainerPolicyInput, options: CallOptions) !get_container_policy.GetContainerPolicyOutput {
         return get_container_policy.execute(self, allocator, input, options);
     }
 
@@ -127,17 +128,17 @@ pub const Client = struct {
     /// To use this operation, you must have permission to perform the
     /// `MediaStore:GetCorsPolicy` action. By default, the container owner has this
     /// permission and can grant it to others.
-    pub fn getCorsPolicy(self: *Self, allocator: std.mem.Allocator, input: get_cors_policy.GetCorsPolicyInput, options: get_cors_policy.Options) !get_cors_policy.GetCorsPolicyOutput {
+    pub fn getCorsPolicy(self: *Self, allocator: std.mem.Allocator, input: get_cors_policy.GetCorsPolicyInput, options: CallOptions) !get_cors_policy.GetCorsPolicyOutput {
         return get_cors_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves the object lifecycle policy that is assigned to a container.
-    pub fn getLifecyclePolicy(self: *Self, allocator: std.mem.Allocator, input: get_lifecycle_policy.GetLifecyclePolicyInput, options: get_lifecycle_policy.Options) !get_lifecycle_policy.GetLifecyclePolicyOutput {
+    pub fn getLifecyclePolicy(self: *Self, allocator: std.mem.Allocator, input: get_lifecycle_policy.GetLifecyclePolicyInput, options: CallOptions) !get_lifecycle_policy.GetLifecyclePolicyOutput {
         return get_lifecycle_policy.execute(self, allocator, input, options);
     }
 
     /// Returns the metric policy for the specified container.
-    pub fn getMetricPolicy(self: *Self, allocator: std.mem.Allocator, input: get_metric_policy.GetMetricPolicyInput, options: get_metric_policy.Options) !get_metric_policy.GetMetricPolicyOutput {
+    pub fn getMetricPolicy(self: *Self, allocator: std.mem.Allocator, input: get_metric_policy.GetMetricPolicyInput, options: CallOptions) !get_metric_policy.GetMetricPolicyOutput {
         return get_metric_policy.execute(self, allocator, input, options);
     }
 
@@ -155,12 +156,12 @@ pub const Client = struct {
     ///
     /// See also DescribeContainer, which gets the properties of one
     /// container.
-    pub fn listContainers(self: *Self, allocator: std.mem.Allocator, input: list_containers.ListContainersInput, options: list_containers.Options) !list_containers.ListContainersOutput {
+    pub fn listContainers(self: *Self, allocator: std.mem.Allocator, input: list_containers.ListContainersInput, options: CallOptions) !list_containers.ListContainersOutput {
         return list_containers.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the tags assigned to the specified container.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -176,7 +177,7 @@ pub const Client = struct {
     /// you enter `PutContainerPolicy` twice, the second command modifies the
     /// existing
     /// policy.
-    pub fn putContainerPolicy(self: *Self, allocator: std.mem.Allocator, input: put_container_policy.PutContainerPolicyInput, options: put_container_policy.Options) !put_container_policy.PutContainerPolicyOutput {
+    pub fn putContainerPolicy(self: *Self, allocator: std.mem.Allocator, input: put_container_policy.PutContainerPolicyInput, options: CallOptions) !put_container_policy.PutContainerPolicyOutput {
         return put_container_policy.execute(self, allocator, input, options);
     }
 
@@ -202,7 +203,7 @@ pub const Client = struct {
     /// To learn more about CORS, see [Cross-Origin Resource Sharing (CORS) in AWS
     /// Elemental
     /// MediaStore](https://docs.aws.amazon.com/mediastore/latest/ug/cors-policy.html).
-    pub fn putCorsPolicy(self: *Self, allocator: std.mem.Allocator, input: put_cors_policy.PutCorsPolicyInput, options: put_cors_policy.Options) !put_cors_policy.PutCorsPolicyOutput {
+    pub fn putCorsPolicy(self: *Self, allocator: std.mem.Allocator, input: put_cors_policy.PutCorsPolicyInput, options: CallOptions) !put_cors_policy.PutCorsPolicyOutput {
         return put_cors_policy.execute(self, allocator, input, options);
     }
 
@@ -214,28 +215,28 @@ pub const Client = struct {
     /// For information about how to construct an object lifecycle policy, see
     /// [Components of an Object Lifecycle
     /// Policy](https://docs.aws.amazon.com/mediastore/latest/ug/policies-object-lifecycle-components.html).
-    pub fn putLifecyclePolicy(self: *Self, allocator: std.mem.Allocator, input: put_lifecycle_policy.PutLifecyclePolicyInput, options: put_lifecycle_policy.Options) !put_lifecycle_policy.PutLifecyclePolicyOutput {
+    pub fn putLifecyclePolicy(self: *Self, allocator: std.mem.Allocator, input: put_lifecycle_policy.PutLifecyclePolicyInput, options: CallOptions) !put_lifecycle_policy.PutLifecyclePolicyOutput {
         return put_lifecycle_policy.execute(self, allocator, input, options);
     }
 
     /// The metric policy that you want to add to the container. A metric policy
     /// allows AWS Elemental MediaStore to send metrics to Amazon CloudWatch. It
     /// takes up to 20 minutes for the new policy to take effect.
-    pub fn putMetricPolicy(self: *Self, allocator: std.mem.Allocator, input: put_metric_policy.PutMetricPolicyInput, options: put_metric_policy.Options) !put_metric_policy.PutMetricPolicyOutput {
+    pub fn putMetricPolicy(self: *Self, allocator: std.mem.Allocator, input: put_metric_policy.PutMetricPolicyInput, options: CallOptions) !put_metric_policy.PutMetricPolicyOutput {
         return put_metric_policy.execute(self, allocator, input, options);
     }
 
     /// Starts access logging on the specified container. When you enable access
     /// logging on a container, MediaStore delivers access logs for objects stored
     /// in that container to Amazon CloudWatch Logs.
-    pub fn startAccessLogging(self: *Self, allocator: std.mem.Allocator, input: start_access_logging.StartAccessLoggingInput, options: start_access_logging.Options) !start_access_logging.StartAccessLoggingOutput {
+    pub fn startAccessLogging(self: *Self, allocator: std.mem.Allocator, input: start_access_logging.StartAccessLoggingInput, options: CallOptions) !start_access_logging.StartAccessLoggingOutput {
         return start_access_logging.execute(self, allocator, input, options);
     }
 
     /// Stops access logging on the specified container. When you stop access
     /// logging on a container, MediaStore stops sending access logs to Amazon
     /// CloudWatch Logs. These access logs are not saved and are not retrievable.
-    pub fn stopAccessLogging(self: *Self, allocator: std.mem.Allocator, input: stop_access_logging.StopAccessLoggingInput, options: stop_access_logging.Options) !stop_access_logging.StopAccessLoggingOutput {
+    pub fn stopAccessLogging(self: *Self, allocator: std.mem.Allocator, input: stop_access_logging.StopAccessLoggingInput, options: CallOptions) !stop_access_logging.StopAccessLoggingOutput {
         return stop_access_logging.execute(self, allocator, input, options);
     }
 
@@ -246,13 +247,13 @@ pub const Client = struct {
     /// tags to each container. For more information about tagging, including naming
     /// and usage conventions, see [Tagging Resources in
     /// MediaStore](https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html).
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from the specified container. You can specify one or more tags
     /// to remove.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

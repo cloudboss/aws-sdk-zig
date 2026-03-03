@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TypedLinkFacetAttributeUpdate = @import("typed_link_facet_attribute_update.zig").TypedLinkFacetAttributeUpdate;
 
@@ -42,11 +43,7 @@ pub const UpdateTypedLinkFacetInput = struct {
 pub const UpdateTypedLinkFacetOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTypedLinkFacetInput, options: Options) !UpdateTypedLinkFacetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTypedLinkFacetInput, options: CallOptions) !UpdateTypedLinkFacetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

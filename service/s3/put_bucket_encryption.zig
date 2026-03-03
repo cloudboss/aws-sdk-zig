@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const ServerSideEncryptionConfiguration = @import("server_side_encryption_configuration.zig").ServerSideEncryptionConfiguration;
@@ -63,13 +64,9 @@ pub const PutBucketEncryptionInput = struct {
     server_side_encryption_configuration: ServerSideEncryptionConfiguration,
 };
 
-const PutBucketEncryptionOutput = struct {};
+pub const PutBucketEncryptionOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutBucketEncryptionInput, options: Options) !PutBucketEncryptionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutBucketEncryptionInput, options: CallOptions) !PutBucketEncryptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

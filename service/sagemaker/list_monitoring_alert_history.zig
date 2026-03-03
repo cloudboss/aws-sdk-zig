@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MonitoringAlertHistorySortKey = @import("monitoring_alert_history_sort_key.zig").MonitoringAlertHistorySortKey;
 const SortOrder = @import("sort_order.zig").SortOrder;
@@ -66,11 +67,7 @@ pub const ListMonitoringAlertHistoryOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMonitoringAlertHistoryInput, options: Options) !ListMonitoringAlertHistoryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMonitoringAlertHistoryInput, options: CallOptions) !ListMonitoringAlertHistoryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const GetUsagePlanKeyInput = struct {
@@ -19,13 +20,9 @@ pub const GetUsagePlanKeyInput = struct {
     };
 };
 
-const GetUsagePlanKeyOutput = @import("usage_plan_key.zig").UsagePlanKey;
+pub const GetUsagePlanKeyOutput = @import("usage_plan_key.zig").UsagePlanKey;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetUsagePlanKeyInput, options: Options) !GetUsagePlanKeyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetUsagePlanKeyInput, options: CallOptions) !GetUsagePlanKeyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

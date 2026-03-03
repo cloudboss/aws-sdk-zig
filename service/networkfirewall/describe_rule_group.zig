@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RuleGroupType = @import("rule_group_type.zig").RuleGroupType;
 const RuleGroup = @import("rule_group.zig").RuleGroup;
@@ -81,11 +82,7 @@ pub const DescribeRuleGroupOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeRuleGroupInput, options: Options) !DescribeRuleGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeRuleGroupInput, options: CallOptions) !DescribeRuleGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

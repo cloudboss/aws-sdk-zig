@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CustomPluginContentType = @import("custom_plugin_content_type.zig").CustomPluginContentType;
 const CustomPluginLocation = @import("custom_plugin_location.zig").CustomPluginLocation;
@@ -53,11 +54,7 @@ pub const CreateCustomPluginOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCustomPluginInput, options: Options) !CreateCustomPluginOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCustomPluginInput, options: CallOptions) !CreateCustomPluginOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

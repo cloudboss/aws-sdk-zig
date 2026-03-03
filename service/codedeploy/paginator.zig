@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_application_revisions = @import("list_application_revisions.zig");
@@ -19,7 +20,7 @@ pub const ListApplicationRevisionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_application_revisions.Options) !list_application_revisions.ListApplicationRevisionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_application_revisions.ListApplicationRevisionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -60,7 +61,7 @@ pub const ListApplicationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_applications.Options) !list_applications.ListApplicationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_applications.ListApplicationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -101,7 +102,7 @@ pub const ListDeploymentConfigsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_deployment_configs.Options) !list_deployment_configs.ListDeploymentConfigsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_deployment_configs.ListDeploymentConfigsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -142,7 +143,7 @@ pub const ListDeploymentGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_deployment_groups.Options) !list_deployment_groups.ListDeploymentGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_deployment_groups.ListDeploymentGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -183,7 +184,7 @@ pub const ListDeploymentInstancesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_deployment_instances.Options) !list_deployment_instances.ListDeploymentInstancesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_deployment_instances.ListDeploymentInstancesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -224,7 +225,7 @@ pub const ListDeploymentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_deployments.Options) !list_deployments.ListDeploymentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_deployments.ListDeploymentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

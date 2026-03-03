@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AlternateContactType = @import("alternate_contact_type.zig").AlternateContactType;
 const AlternateContact = @import("alternate_contact.zig").AlternateContact;
@@ -44,11 +45,7 @@ pub const GetAlternateContactOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAlternateContactInput, options: Options) !GetAlternateContactOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAlternateContactInput, options: CallOptions) !GetAlternateContactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

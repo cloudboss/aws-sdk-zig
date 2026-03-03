@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MetadataValue = @import("metadata_value.zig").MetadataValue;
 const Tag = @import("tag.zig").Tag;
@@ -45,11 +46,7 @@ pub const CreateOpsMetadataOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateOpsMetadataInput, options: Options) !CreateOpsMetadataOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateOpsMetadataInput, options: CallOptions) !CreateOpsMetadataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

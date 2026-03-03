@@ -1,12 +1,19 @@
 pub const Client = @import("client.zig").Client;
+pub const CallOptions = @import("call_options.zig").CallOptions;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
 pub const types = @import("types.zig");
 
-pub const complete_snapshot = @import("complete_snapshot.zig");
-pub const get_snapshot_block = @import("get_snapshot_block.zig");
-pub const list_changed_blocks = @import("list_changed_blocks.zig");
-pub const list_snapshot_blocks = @import("list_snapshot_blocks.zig");
-pub const put_snapshot_block = @import("put_snapshot_block.zig");
-pub const start_snapshot = @import("start_snapshot.zig");
+pub const CompleteSnapshotInput = @import("complete_snapshot.zig").CompleteSnapshotInput;
+pub const CompleteSnapshotOutput = @import("complete_snapshot.zig").CompleteSnapshotOutput;
+pub const GetSnapshotBlockInput = @import("get_snapshot_block.zig").GetSnapshotBlockInput;
+pub const GetSnapshotBlockOutput = @import("get_snapshot_block.zig").GetSnapshotBlockOutput;
+pub const ListChangedBlocksInput = @import("list_changed_blocks.zig").ListChangedBlocksInput;
+pub const ListChangedBlocksOutput = @import("list_changed_blocks.zig").ListChangedBlocksOutput;
+pub const ListSnapshotBlocksInput = @import("list_snapshot_blocks.zig").ListSnapshotBlocksInput;
+pub const ListSnapshotBlocksOutput = @import("list_snapshot_blocks.zig").ListSnapshotBlocksOutput;
+pub const PutSnapshotBlockInput = @import("put_snapshot_block.zig").PutSnapshotBlockInput;
+pub const PutSnapshotBlockOutput = @import("put_snapshot_block.zig").PutSnapshotBlockOutput;
+pub const StartSnapshotInput = @import("start_snapshot.zig").StartSnapshotInput;
+pub const StartSnapshotOutput = @import("start_snapshot.zig").StartSnapshotOutput;

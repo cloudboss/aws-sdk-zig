@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_applied_schema_arns = @import("list_applied_schema_arns.zig");
@@ -32,7 +33,7 @@ pub const ListAppliedSchemaArnsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_applied_schema_arns.Options) !list_applied_schema_arns.ListAppliedSchemaArnsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_applied_schema_arns.ListAppliedSchemaArnsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -73,7 +74,7 @@ pub const ListAttachedIndicesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_attached_indices.Options) !list_attached_indices.ListAttachedIndicesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_attached_indices.ListAttachedIndicesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -114,7 +115,7 @@ pub const ListDevelopmentSchemaArnsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_development_schema_arns.Options) !list_development_schema_arns.ListDevelopmentSchemaArnsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_development_schema_arns.ListDevelopmentSchemaArnsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -155,7 +156,7 @@ pub const ListDirectoriesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_directories.Options) !list_directories.ListDirectoriesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_directories.ListDirectoriesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -196,7 +197,7 @@ pub const ListFacetAttributesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_facet_attributes.Options) !list_facet_attributes.ListFacetAttributesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_facet_attributes.ListFacetAttributesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -237,7 +238,7 @@ pub const ListFacetNamesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_facet_names.Options) !list_facet_names.ListFacetNamesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_facet_names.ListFacetNamesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -278,7 +279,7 @@ pub const ListIndexPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_index.Options) !list_index.ListIndexOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_index.ListIndexOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -319,7 +320,7 @@ pub const ListManagedSchemaArnsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_managed_schema_arns.Options) !list_managed_schema_arns.ListManagedSchemaArnsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_managed_schema_arns.ListManagedSchemaArnsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -360,7 +361,7 @@ pub const ListObjectAttributesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_object_attributes.Options) !list_object_attributes.ListObjectAttributesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_object_attributes.ListObjectAttributesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -401,7 +402,7 @@ pub const ListObjectChildrenPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_object_children.Options) !list_object_children.ListObjectChildrenOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_object_children.ListObjectChildrenOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -442,7 +443,7 @@ pub const ListObjectParentPathsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_object_parent_paths.Options) !list_object_parent_paths.ListObjectParentPathsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_object_parent_paths.ListObjectParentPathsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -483,7 +484,7 @@ pub const ListObjectParentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_object_parents.Options) !list_object_parents.ListObjectParentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_object_parents.ListObjectParentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -524,7 +525,7 @@ pub const ListObjectPoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_object_policies.Options) !list_object_policies.ListObjectPoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_object_policies.ListObjectPoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -565,7 +566,7 @@ pub const ListPolicyAttachmentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_policy_attachments.Options) !list_policy_attachments.ListPolicyAttachmentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_policy_attachments.ListPolicyAttachmentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -606,7 +607,7 @@ pub const ListPublishedSchemaArnsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_published_schema_arns.Options) !list_published_schema_arns.ListPublishedSchemaArnsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_published_schema_arns.ListPublishedSchemaArnsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -647,7 +648,7 @@ pub const ListTagsForResourcePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -688,7 +689,7 @@ pub const ListTypedLinkFacetAttributesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_typed_link_facet_attributes.Options) !list_typed_link_facet_attributes.ListTypedLinkFacetAttributesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_typed_link_facet_attributes.ListTypedLinkFacetAttributesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -729,7 +730,7 @@ pub const ListTypedLinkFacetNamesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_typed_link_facet_names.Options) !list_typed_link_facet_names.ListTypedLinkFacetNamesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_typed_link_facet_names.ListTypedLinkFacetNamesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -770,7 +771,7 @@ pub const LookupPolicyPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: lookup_policy.Options) !lookup_policy.LookupPolicyOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !lookup_policy.LookupPolicyOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

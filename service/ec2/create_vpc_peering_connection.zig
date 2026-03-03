@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const VpcPeeringConnection = @import("vpc_peering_connection.zig").VpcPeeringConnection;
@@ -45,11 +46,7 @@ pub const CreateVpcPeeringConnectionOutput = struct {
     vpc_peering_connection: ?VpcPeeringConnection = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVpcPeeringConnectionInput, options: Options) !CreateVpcPeeringConnectionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVpcPeeringConnectionInput, options: CallOptions) !CreateVpcPeeringConnectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -24,6 +24,7 @@ const submit_feedback = @import("submit_feedback.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_profiling_group = @import("update_profiling_group.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -55,13 +56,13 @@ pub const Client = struct {
     }
 
     /// Add up to 2 anomaly notifications channels for a profiling group.
-    pub fn addNotificationChannels(self: *Self, allocator: std.mem.Allocator, input: add_notification_channels.AddNotificationChannelsInput, options: add_notification_channels.Options) !add_notification_channels.AddNotificationChannelsOutput {
+    pub fn addNotificationChannels(self: *Self, allocator: std.mem.Allocator, input: add_notification_channels.AddNotificationChannelsInput, options: CallOptions) !add_notification_channels.AddNotificationChannelsOutput {
         return add_notification_channels.execute(self, allocator, input, options);
     }
 
     /// Returns the time series of values for a requested list
     /// of frame metrics from a time period.
-    pub fn batchGetFrameMetricData(self: *Self, allocator: std.mem.Allocator, input: batch_get_frame_metric_data.BatchGetFrameMetricDataInput, options: batch_get_frame_metric_data.Options) !batch_get_frame_metric_data.BatchGetFrameMetricDataOutput {
+    pub fn batchGetFrameMetricData(self: *Self, allocator: std.mem.Allocator, input: batch_get_frame_metric_data.BatchGetFrameMetricDataInput, options: CallOptions) !batch_get_frame_metric_data.BatchGetFrameMetricDataOutput {
         return batch_get_frame_metric_data.execute(self, allocator, input, options);
     }
 
@@ -69,17 +70,17 @@ pub const Client = struct {
     /// configuration updates. For example, `ConfigureAgent` can be used
     /// to tell an agent whether to profile or not and for how long to return
     /// profiling data.
-    pub fn configureAgent(self: *Self, allocator: std.mem.Allocator, input: configure_agent.ConfigureAgentInput, options: configure_agent.Options) !configure_agent.ConfigureAgentOutput {
+    pub fn configureAgent(self: *Self, allocator: std.mem.Allocator, input: configure_agent.ConfigureAgentInput, options: CallOptions) !configure_agent.ConfigureAgentOutput {
         return configure_agent.execute(self, allocator, input, options);
     }
 
     /// Creates a profiling group.
-    pub fn createProfilingGroup(self: *Self, allocator: std.mem.Allocator, input: create_profiling_group.CreateProfilingGroupInput, options: create_profiling_group.Options) !create_profiling_group.CreateProfilingGroupOutput {
+    pub fn createProfilingGroup(self: *Self, allocator: std.mem.Allocator, input: create_profiling_group.CreateProfilingGroupInput, options: CallOptions) !create_profiling_group.CreateProfilingGroupOutput {
         return create_profiling_group.execute(self, allocator, input, options);
     }
 
     /// Deletes a profiling group.
-    pub fn deleteProfilingGroup(self: *Self, allocator: std.mem.Allocator, input: delete_profiling_group.DeleteProfilingGroupInput, options: delete_profiling_group.Options) !delete_profiling_group.DeleteProfilingGroupOutput {
+    pub fn deleteProfilingGroup(self: *Self, allocator: std.mem.Allocator, input: delete_profiling_group.DeleteProfilingGroupInput, options: CallOptions) !delete_profiling_group.DeleteProfilingGroupOutput {
         return delete_profiling_group.execute(self, allocator, input, options);
     }
 
@@ -87,7 +88,7 @@ pub const Client = struct {
     /// `ProfilingGroupDescription`
     /// ](https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
     /// object that contains information about the requested profiling group.
-    pub fn describeProfilingGroup(self: *Self, allocator: std.mem.Allocator, input: describe_profiling_group.DescribeProfilingGroupInput, options: describe_profiling_group.Options) !describe_profiling_group.DescribeProfilingGroupOutput {
+    pub fn describeProfilingGroup(self: *Self, allocator: std.mem.Allocator, input: describe_profiling_group.DescribeProfilingGroupInput, options: CallOptions) !describe_profiling_group.DescribeProfilingGroupOutput {
         return describe_profiling_group.execute(self, allocator, input, options);
     }
 
@@ -97,18 +98,18 @@ pub const Client = struct {
     /// ](https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html)
     /// objects that contain analysis results for all profiling groups in your AWS
     /// account.
-    pub fn getFindingsReportAccountSummary(self: *Self, allocator: std.mem.Allocator, input: get_findings_report_account_summary.GetFindingsReportAccountSummaryInput, options: get_findings_report_account_summary.Options) !get_findings_report_account_summary.GetFindingsReportAccountSummaryOutput {
+    pub fn getFindingsReportAccountSummary(self: *Self, allocator: std.mem.Allocator, input: get_findings_report_account_summary.GetFindingsReportAccountSummaryInput, options: CallOptions) !get_findings_report_account_summary.GetFindingsReportAccountSummaryOutput {
         return get_findings_report_account_summary.execute(self, allocator, input, options);
     }
 
     /// Get the current configuration for anomaly notifications for a profiling
     /// group.
-    pub fn getNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_notification_configuration.GetNotificationConfigurationInput, options: get_notification_configuration.Options) !get_notification_configuration.GetNotificationConfigurationOutput {
+    pub fn getNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_notification_configuration.GetNotificationConfigurationInput, options: CallOptions) !get_notification_configuration.GetNotificationConfigurationOutput {
         return get_notification_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns the JSON-formatted resource-based policy on a profiling group.
-    pub fn getPolicy(self: *Self, allocator: std.mem.Allocator, input: get_policy.GetPolicyInput, options: get_policy.Options) !get_policy.GetPolicyOutput {
+    pub fn getPolicy(self: *Self, allocator: std.mem.Allocator, input: get_policy.GetPolicyInput, options: CallOptions) !get_policy.GetPolicyOutput {
         return get_policy.execute(self, allocator, input, options);
     }
 
@@ -167,7 +168,7 @@ pub const Client = struct {
     /// profiles are
     /// from 00:15 and 00:25, then the aggregated profiles from 00:15 to 00:20 are
     /// returned.
-    pub fn getProfile(self: *Self, allocator: std.mem.Allocator, input: get_profile.GetProfileInput, options: get_profile.Options) !get_profile.GetProfileOutput {
+    pub fn getProfile(self: *Self, allocator: std.mem.Allocator, input: get_profile.GetProfileInput, options: CallOptions) !get_profile.GetProfileOutput {
         return get_profile.execute(self, allocator, input, options);
     }
 
@@ -183,19 +184,19 @@ pub const Client = struct {
     /// objects that contains details about anomalies detected in the profiling
     /// group for the same time period is also
     /// returned.
-    pub fn getRecommendations(self: *Self, allocator: std.mem.Allocator, input: get_recommendations.GetRecommendationsInput, options: get_recommendations.Options) !get_recommendations.GetRecommendationsOutput {
+    pub fn getRecommendations(self: *Self, allocator: std.mem.Allocator, input: get_recommendations.GetRecommendationsInput, options: CallOptions) !get_recommendations.GetRecommendationsOutput {
         return get_recommendations.execute(self, allocator, input, options);
     }
 
     /// List the available reports for a given profiling group and time range.
-    pub fn listFindingsReports(self: *Self, allocator: std.mem.Allocator, input: list_findings_reports.ListFindingsReportsInput, options: list_findings_reports.Options) !list_findings_reports.ListFindingsReportsOutput {
+    pub fn listFindingsReports(self: *Self, allocator: std.mem.Allocator, input: list_findings_reports.ListFindingsReportsInput, options: CallOptions) !list_findings_reports.ListFindingsReportsOutput {
         return list_findings_reports.execute(self, allocator, input, options);
     }
 
     /// Lists the start times of the available aggregated profiles of a profiling
     /// group
     /// for an aggregation period within the specified time range.
-    pub fn listProfileTimes(self: *Self, allocator: std.mem.Allocator, input: list_profile_times.ListProfileTimesInput, options: list_profile_times.Options) !list_profile_times.ListProfileTimesOutput {
+    pub fn listProfileTimes(self: *Self, allocator: std.mem.Allocator, input: list_profile_times.ListProfileTimesInput, options: CallOptions) !list_profile_times.ListProfileTimesOutput {
         return list_profile_times.execute(self, allocator, input, options);
     }
 
@@ -204,12 +205,12 @@ pub const Client = struct {
     /// `ProfilingGroupDescription`
     /// ](https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
     /// objects.
-    pub fn listProfilingGroups(self: *Self, allocator: std.mem.Allocator, input: list_profiling_groups.ListProfilingGroupsInput, options: list_profiling_groups.Options) !list_profiling_groups.ListProfilingGroupsOutput {
+    pub fn listProfilingGroups(self: *Self, allocator: std.mem.Allocator, input: list_profiling_groups.ListProfilingGroupsInput, options: CallOptions) !list_profiling_groups.ListProfilingGroupsOutput {
         return list_profiling_groups.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the tags that are assigned to a specified resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -219,7 +220,7 @@ pub const Client = struct {
     /// [
     /// `GetProfile`
     /// ](https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_GetProfile.html).
-    pub fn postAgentProfile(self: *Self, allocator: std.mem.Allocator, input: post_agent_profile.PostAgentProfileInput, options: post_agent_profile.Options) !post_agent_profile.PostAgentProfileOutput {
+    pub fn postAgentProfile(self: *Self, allocator: std.mem.Allocator, input: post_agent_profile.PostAgentProfileInput, options: CallOptions) !post_agent_profile.PostAgentProfileOutput {
         return post_agent_profile.execute(self, allocator, input, options);
     }
 
@@ -247,12 +248,12 @@ pub const Client = struct {
     /// which revision of the resource-based policy to add the permissions to.
     ///
     /// The response contains the profiling group's JSON-formatted resource policy.
-    pub fn putPermission(self: *Self, allocator: std.mem.Allocator, input: put_permission.PutPermissionInput, options: put_permission.Options) !put_permission.PutPermissionOutput {
+    pub fn putPermission(self: *Self, allocator: std.mem.Allocator, input: put_permission.PutPermissionInput, options: CallOptions) !put_permission.PutPermissionOutput {
         return put_permission.execute(self, allocator, input, options);
     }
 
     /// Remove one anomaly notifications channel for a profiling group.
-    pub fn removeNotificationChannel(self: *Self, allocator: std.mem.Allocator, input: remove_notification_channel.RemoveNotificationChannelInput, options: remove_notification_channel.Options) !remove_notification_channel.RemoveNotificationChannelOutput {
+    pub fn removeNotificationChannel(self: *Self, allocator: std.mem.Allocator, input: remove_notification_channel.RemoveNotificationChannelInput, options: CallOptions) !remove_notification_channel.RemoveNotificationChannelOutput {
         return remove_notification_channel.execute(self, allocator, input, options);
     }
 
@@ -268,29 +269,29 @@ pub const Client = struct {
     /// ](https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html), and [
     /// `PostAgentProfile`
     /// ](https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html).
-    pub fn removePermission(self: *Self, allocator: std.mem.Allocator, input: remove_permission.RemovePermissionInput, options: remove_permission.Options) !remove_permission.RemovePermissionOutput {
+    pub fn removePermission(self: *Self, allocator: std.mem.Allocator, input: remove_permission.RemovePermissionInput, options: CallOptions) !remove_permission.RemovePermissionOutput {
         return remove_permission.execute(self, allocator, input, options);
     }
 
     /// Sends feedback to CodeGuru Profiler about whether the anomaly detected by
     /// the analysis is
     /// useful or not.
-    pub fn submitFeedback(self: *Self, allocator: std.mem.Allocator, input: submit_feedback.SubmitFeedbackInput, options: submit_feedback.Options) !submit_feedback.SubmitFeedbackOutput {
+    pub fn submitFeedback(self: *Self, allocator: std.mem.Allocator, input: submit_feedback.SubmitFeedbackInput, options: CallOptions) !submit_feedback.SubmitFeedbackOutput {
         return submit_feedback.execute(self, allocator, input, options);
     }
 
     /// Use to assign one or more tags to a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Use to remove one or more tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates a profiling group.
-    pub fn updateProfilingGroup(self: *Self, allocator: std.mem.Allocator, input: update_profiling_group.UpdateProfilingGroupInput, options: update_profiling_group.Options) !update_profiling_group.UpdateProfilingGroupOutput {
+    pub fn updateProfilingGroup(self: *Self, allocator: std.mem.Allocator, input: update_profiling_group.UpdateProfilingGroupInput, options: CallOptions) !update_profiling_group.UpdateProfilingGroupOutput {
         return update_profiling_group.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CapacityLimit = @import("capacity_limit.zig").CapacityLimit;
 const ServiceEnvironmentType = @import("service_environment_type.zig").ServiceEnvironmentType;
@@ -53,11 +54,7 @@ pub const CreateServiceEnvironmentOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateServiceEnvironmentInput, options: Options) !CreateServiceEnvironmentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateServiceEnvironmentInput, options: CallOptions) !CreateServiceEnvironmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

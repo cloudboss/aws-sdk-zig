@@ -1,12 +1,19 @@
 pub const Client = @import("client.zig").Client;
+pub const CallOptions = @import("call_options.zig").CallOptions;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
 pub const types = @import("types.zig");
 
-pub const delete_report_definition = @import("delete_report_definition.zig");
-pub const get_report_definition = @import("get_report_definition.zig");
-pub const import_application_usage = @import("import_application_usage.zig");
-pub const list_report_definitions = @import("list_report_definitions.zig");
-pub const put_report_definition = @import("put_report_definition.zig");
-pub const update_report_definition = @import("update_report_definition.zig");
+pub const DeleteReportDefinitionInput = @import("delete_report_definition.zig").DeleteReportDefinitionInput;
+pub const DeleteReportDefinitionOutput = @import("delete_report_definition.zig").DeleteReportDefinitionOutput;
+pub const GetReportDefinitionInput = @import("get_report_definition.zig").GetReportDefinitionInput;
+pub const GetReportDefinitionOutput = @import("get_report_definition.zig").GetReportDefinitionOutput;
+pub const ImportApplicationUsageInput = @import("import_application_usage.zig").ImportApplicationUsageInput;
+pub const ImportApplicationUsageOutput = @import("import_application_usage.zig").ImportApplicationUsageOutput;
+pub const ListReportDefinitionsInput = @import("list_report_definitions.zig").ListReportDefinitionsInput;
+pub const ListReportDefinitionsOutput = @import("list_report_definitions.zig").ListReportDefinitionsOutput;
+pub const PutReportDefinitionInput = @import("put_report_definition.zig").PutReportDefinitionInput;
+pub const PutReportDefinitionOutput = @import("put_report_definition.zig").PutReportDefinitionOutput;
+pub const UpdateReportDefinitionInput = @import("update_report_definition.zig").UpdateReportDefinitionInput;
+pub const UpdateReportDefinitionOutput = @import("update_report_definition.zig").UpdateReportDefinitionOutput;

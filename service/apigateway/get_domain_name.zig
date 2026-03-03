@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DomainNameStatus = @import("domain_name_status.zig").DomainNameStatus;
 const EndpointAccessMode = @import("endpoint_access_mode.zig").EndpointAccessMode;
@@ -24,13 +25,9 @@ pub const GetDomainNameInput = struct {
     };
 };
 
-const GetDomainNameOutput = @import("domain_name.zig").DomainName;
+pub const GetDomainNameOutput = @import("domain_name.zig").DomainName;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDomainNameInput, options: Options) !GetDomainNameOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDomainNameInput, options: CallOptions) !GetDomainNameOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

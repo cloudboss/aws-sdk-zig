@@ -9,6 +9,7 @@ const get_resource_request_status = @import("get_resource_request_status.zig");
 const list_resource_requests = @import("list_resource_requests.zig");
 const list_resources = @import("list_resources.zig");
 const update_resource = @import("update_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -47,7 +48,7 @@ pub const Client = struct {
     ///
     /// Only resource operations requests with a status of `PENDING` or
     /// `IN_PROGRESS` can be canceled.
-    pub fn cancelResourceRequest(self: *Self, allocator: std.mem.Allocator, input: cancel_resource_request.CancelResourceRequestInput, options: cancel_resource_request.Options) !cancel_resource_request.CancelResourceRequestOutput {
+    pub fn cancelResourceRequest(self: *Self, allocator: std.mem.Allocator, input: cancel_resource_request.CancelResourceRequestInput, options: CallOptions) !cancel_resource_request.CancelResourceRequestOutput {
         return cancel_resource_request.execute(self, allocator, input, options);
     }
 
@@ -59,7 +60,7 @@ pub const Client = struct {
     /// request by calling
     /// [GetResourceRequestStatus](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html) using the `RequestToken` of the
     /// `ProgressEvent` type returned by `CreateResource`.
-    pub fn createResource(self: *Self, allocator: std.mem.Allocator, input: create_resource.CreateResourceInput, options: create_resource.Options) !create_resource.CreateResourceOutput {
+    pub fn createResource(self: *Self, allocator: std.mem.Allocator, input: create_resource.CreateResourceInput, options: CallOptions) !create_resource.CreateResourceOutput {
         return create_resource.execute(self, allocator, input, options);
     }
 
@@ -71,7 +72,7 @@ pub const Client = struct {
     /// request by calling
     /// [GetResourceRequestStatus](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html) using the `RequestToken` of the
     /// `ProgressEvent` returned by `DeleteResource`.
-    pub fn deleteResource(self: *Self, allocator: std.mem.Allocator, input: delete_resource.DeleteResourceInput, options: delete_resource.Options) !delete_resource.DeleteResourceOutput {
+    pub fn deleteResource(self: *Self, allocator: std.mem.Allocator, input: delete_resource.DeleteResourceInput, options: CallOptions) !delete_resource.DeleteResourceOutput {
         return delete_resource.execute(self, allocator, input, options);
     }
 
@@ -84,7 +85,7 @@ pub const Client = struct {
     /// your account
     /// and Amazon Web Services Region, whether those resources were provisioned
     /// using Cloud Control API.
-    pub fn getResource(self: *Self, allocator: std.mem.Allocator, input: get_resource.GetResourceInput, options: get_resource.Options) !get_resource.GetResourceOutput {
+    pub fn getResource(self: *Self, allocator: std.mem.Allocator, input: get_resource.GetResourceInput, options: CallOptions) !get_resource.GetResourceOutput {
         return get_resource.execute(self, allocator, input, options);
     }
 
@@ -93,7 +94,7 @@ pub const Client = struct {
     /// [Tracking the progress of resource operation
     /// requests](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-track) in the
     /// *Amazon Web Services Cloud Control API User Guide*.
-    pub fn getResourceRequestStatus(self: *Self, allocator: std.mem.Allocator, input: get_resource_request_status.GetResourceRequestStatusInput, options: get_resource_request_status.Options) !get_resource_request_status.GetResourceRequestStatusOutput {
+    pub fn getResourceRequestStatus(self: *Self, allocator: std.mem.Allocator, input: get_resource_request_status.GetResourceRequestStatusInput, options: CallOptions) !get_resource_request_status.GetResourceRequestStatusOutput {
         return get_resource_request_status.execute(self, allocator, input, options);
     }
 
@@ -104,7 +105,7 @@ pub const Client = struct {
     /// *Amazon Web Services Cloud Control API User Guide*.
     ///
     /// Resource operation requests expire after 7 days.
-    pub fn listResourceRequests(self: *Self, allocator: std.mem.Allocator, input: list_resource_requests.ListResourceRequestsInput, options: list_resource_requests.Options) !list_resource_requests.ListResourceRequestsOutput {
+    pub fn listResourceRequests(self: *Self, allocator: std.mem.Allocator, input: list_resource_requests.ListResourceRequestsInput, options: CallOptions) !list_resource_requests.ListResourceRequestsOutput {
         return list_resource_requests.execute(self, allocator, input, options);
     }
 
@@ -116,7 +117,7 @@ pub const Client = struct {
     /// your account and
     /// Amazon Web Services Region, whether those resources were provisioned using
     /// Cloud Control API.
-    pub fn listResources(self: *Self, allocator: std.mem.Allocator, input: list_resources.ListResourcesInput, options: list_resources.Options) !list_resources.ListResourcesOutput {
+    pub fn listResources(self: *Self, allocator: std.mem.Allocator, input: list_resources.ListResourcesInput, options: CallOptions) !list_resources.ListResourcesOutput {
         return list_resources.execute(self, allocator, input, options);
     }
 
@@ -143,7 +144,7 @@ pub const Client = struct {
     /// the related
     /// topic for the resource in the [Resource and property types
     /// reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) in the *CloudFormation Users Guide*.
-    pub fn updateResource(self: *Self, allocator: std.mem.Allocator, input: update_resource.UpdateResourceInput, options: update_resource.Options) !update_resource.UpdateResourceOutput {
+    pub fn updateResource(self: *Self, allocator: std.mem.Allocator, input: update_resource.UpdateResourceInput, options: CallOptions) !update_resource.UpdateResourceOutput {
         return update_resource.execute(self, allocator, input, options);
     }
 

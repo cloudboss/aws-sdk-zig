@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SlotTypeMetadata = @import("slot_type_metadata.zig").SlotTypeMetadata;
 
@@ -45,11 +46,7 @@ pub const GetSlotTypeVersionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSlotTypeVersionsInput, options: Options) !GetSlotTypeVersionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSlotTypeVersionsInput, options: CallOptions) !GetSlotTypeVersionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DisableImportFindingsForProductInput = struct {
@@ -16,11 +17,7 @@ pub const DisableImportFindingsForProductInput = struct {
 pub const DisableImportFindingsForProductOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableImportFindingsForProductInput, options: Options) !DisableImportFindingsForProductOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableImportFindingsForProductInput, options: CallOptions) !DisableImportFindingsForProductOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

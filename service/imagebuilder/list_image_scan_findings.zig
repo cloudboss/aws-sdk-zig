@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ImageScanFindingsFilter = @import("image_scan_findings_filter.zig").ImageScanFindingsFilter;
 const ImageScanFinding = @import("image_scan_finding.zig").ImageScanFinding;
@@ -57,11 +58,7 @@ pub const ListImageScanFindingsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListImageScanFindingsInput, options: Options) !ListImageScanFindingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListImageScanFindingsInput, options: CallOptions) !ListImageScanFindingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

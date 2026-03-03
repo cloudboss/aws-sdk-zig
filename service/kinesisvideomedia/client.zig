@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const get_media = @import("get_media.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -79,7 +80,7 @@ pub const Client = struct {
     /// For more information, see the **Errors** section at the
     /// bottom of this topic, as well as [Common
     /// Errors](https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html).
-    pub fn getMedia(self: *Self, allocator: std.mem.Allocator, input: get_media.GetMediaInput, options: get_media.Options) !get_media.GetMediaOutput {
+    pub fn getMedia(self: *Self, allocator: std.mem.Allocator, input: get_media.GetMediaInput, options: CallOptions) !get_media.GetMediaOutput {
         return get_media.execute(self, allocator, input, options);
     }
 };

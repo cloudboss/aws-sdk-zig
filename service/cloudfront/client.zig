@@ -168,6 +168,7 @@ const update_streaming_distribution = @import("update_streaming_distribution.zig
 const update_trust_store = @import("update_trust_store.zig");
 const update_vpc_origin = @import("update_vpc_origin.zig");
 const verify_dns_configuration = @import("verify_dns_configuration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -222,17 +223,17 @@ pub const Client = struct {
     /// see [Moving an alternate domain name to a different standard distribution or
     /// distribution
     /// tenant](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move) in the *Amazon CloudFront Developer Guide*.
-    pub fn associateAlias(self: *Self, allocator: std.mem.Allocator, input: associate_alias.AssociateAliasInput, options: associate_alias.Options) !associate_alias.AssociateAliasOutput {
+    pub fn associateAlias(self: *Self, allocator: std.mem.Allocator, input: associate_alias.AssociateAliasInput, options: CallOptions) !associate_alias.AssociateAliasOutput {
         return associate_alias.execute(self, allocator, input, options);
     }
 
     /// Associates the WAF web ACL with a distribution tenant.
-    pub fn associateDistributionTenantWebAcl(self: *Self, allocator: std.mem.Allocator, input: associate_distribution_tenant_web_acl.AssociateDistributionTenantWebACLInput, options: associate_distribution_tenant_web_acl.Options) !associate_distribution_tenant_web_acl.AssociateDistributionTenantWebACLOutput {
+    pub fn associateDistributionTenantWebAcl(self: *Self, allocator: std.mem.Allocator, input: associate_distribution_tenant_web_acl.AssociateDistributionTenantWebACLInput, options: CallOptions) !associate_distribution_tenant_web_acl.AssociateDistributionTenantWebACLOutput {
         return associate_distribution_tenant_web_acl.execute(self, allocator, input, options);
     }
 
     /// Associates the WAF web ACL with a distribution.
-    pub fn associateDistributionWebAcl(self: *Self, allocator: std.mem.Allocator, input: associate_distribution_web_acl.AssociateDistributionWebACLInput, options: associate_distribution_web_acl.Options) !associate_distribution_web_acl.AssociateDistributionWebACLOutput {
+    pub fn associateDistributionWebAcl(self: *Self, allocator: std.mem.Allocator, input: associate_distribution_web_acl.AssociateDistributionWebACLInput, options: CallOptions) !associate_distribution_web_acl.AssociateDistributionWebACLOutput {
         return associate_distribution_web_acl.execute(self, allocator, input, options);
     }
 
@@ -254,12 +255,12 @@ pub const Client = struct {
     ///   [CreateDistribution](https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateDistribution.html)
     /// *
     ///   [CopyDistribution](https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CopyDistribution.html)
-    pub fn copyDistribution(self: *Self, allocator: std.mem.Allocator, input: copy_distribution.CopyDistributionInput, options: copy_distribution.Options) !copy_distribution.CopyDistributionOutput {
+    pub fn copyDistribution(self: *Self, allocator: std.mem.Allocator, input: copy_distribution.CopyDistributionInput, options: CallOptions) !copy_distribution.CopyDistributionOutput {
         return copy_distribution.execute(self, allocator, input, options);
     }
 
     /// Creates an Anycast static IP list.
-    pub fn createAnycastIpList(self: *Self, allocator: std.mem.Allocator, input: create_anycast_ip_list.CreateAnycastIpListInput, options: create_anycast_ip_list.Options) !create_anycast_ip_list.CreateAnycastIpListOutput {
+    pub fn createAnycastIpList(self: *Self, allocator: std.mem.Allocator, input: create_anycast_ip_list.CreateAnycastIpListInput, options: CallOptions) !create_anycast_ip_list.CreateAnycastIpListOutput {
         return create_anycast_ip_list.execute(self, allocator, input, options);
     }
 
@@ -288,7 +289,7 @@ pub const Client = struct {
     ///
     /// For more information about cache policies, see [Controlling the cache
     /// key](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html) in the *Amazon CloudFront Developer Guide*.
-    pub fn createCachePolicy(self: *Self, allocator: std.mem.Allocator, input: create_cache_policy.CreateCachePolicyInput, options: create_cache_policy.Options) !create_cache_policy.CreateCachePolicyOutput {
+    pub fn createCachePolicy(self: *Self, allocator: std.mem.Allocator, input: create_cache_policy.CreateCachePolicyInput, options: CallOptions) !create_cache_policy.CreateCachePolicyOutput {
         return create_cache_policy.execute(self, allocator, input, options);
     }
 
@@ -298,17 +299,17 @@ pub const Client = struct {
     /// information about how to use origin access identities, see [Serving Private
     /// Content through
     /// CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) in the *Amazon CloudFront Developer Guide*.
-    pub fn createCloudFrontOriginAccessIdentity(self: *Self, allocator: std.mem.Allocator, input: create_cloud_front_origin_access_identity.CreateCloudFrontOriginAccessIdentityInput, options: create_cloud_front_origin_access_identity.Options) !create_cloud_front_origin_access_identity.CreateCloudFrontOriginAccessIdentityOutput {
+    pub fn createCloudFrontOriginAccessIdentity(self: *Self, allocator: std.mem.Allocator, input: create_cloud_front_origin_access_identity.CreateCloudFrontOriginAccessIdentityInput, options: CallOptions) !create_cloud_front_origin_access_identity.CreateCloudFrontOriginAccessIdentityOutput {
         return create_cloud_front_origin_access_identity.execute(self, allocator, input, options);
     }
 
     /// Creates a connection function.
-    pub fn createConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: create_connection_function.CreateConnectionFunctionInput, options: create_connection_function.Options) !create_connection_function.CreateConnectionFunctionOutput {
+    pub fn createConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: create_connection_function.CreateConnectionFunctionInput, options: CallOptions) !create_connection_function.CreateConnectionFunctionOutput {
         return create_connection_function.execute(self, allocator, input, options);
     }
 
     /// Creates a connection group.
-    pub fn createConnectionGroup(self: *Self, allocator: std.mem.Allocator, input: create_connection_group.CreateConnectionGroupInput, options: create_connection_group.Options) !create_connection_group.CreateConnectionGroupOutput {
+    pub fn createConnectionGroup(self: *Self, allocator: std.mem.Allocator, input: create_connection_group.CreateConnectionGroupInput, options: CallOptions) !create_connection_group.CreateConnectionGroupOutput {
         return create_connection_group.execute(self, allocator, input, options);
     }
 
@@ -324,17 +325,17 @@ pub const Client = struct {
     /// This workflow enables you to test changes to a distribution's configuration
     /// before moving all of your domain's production traffic to the new
     /// configuration.
-    pub fn createContinuousDeploymentPolicy(self: *Self, allocator: std.mem.Allocator, input: create_continuous_deployment_policy.CreateContinuousDeploymentPolicyInput, options: create_continuous_deployment_policy.Options) !create_continuous_deployment_policy.CreateContinuousDeploymentPolicyOutput {
+    pub fn createContinuousDeploymentPolicy(self: *Self, allocator: std.mem.Allocator, input: create_continuous_deployment_policy.CreateContinuousDeploymentPolicyInput, options: CallOptions) !create_continuous_deployment_policy.CreateContinuousDeploymentPolicyOutput {
         return create_continuous_deployment_policy.execute(self, allocator, input, options);
     }
 
     /// Creates a CloudFront distribution.
-    pub fn createDistribution(self: *Self, allocator: std.mem.Allocator, input: create_distribution.CreateDistributionInput, options: create_distribution.Options) !create_distribution.CreateDistributionOutput {
+    pub fn createDistribution(self: *Self, allocator: std.mem.Allocator, input: create_distribution.CreateDistributionInput, options: CallOptions) !create_distribution.CreateDistributionOutput {
         return create_distribution.execute(self, allocator, input, options);
     }
 
     /// Creates a distribution tenant.
-    pub fn createDistributionTenant(self: *Self, allocator: std.mem.Allocator, input: create_distribution_tenant.CreateDistributionTenantInput, options: create_distribution_tenant.Options) !create_distribution_tenant.CreateDistributionTenantOutput {
+    pub fn createDistributionTenant(self: *Self, allocator: std.mem.Allocator, input: create_distribution_tenant.CreateDistributionTenantInput, options: CallOptions) !create_distribution_tenant.CreateDistributionTenantOutput {
         return create_distribution_tenant.execute(self, allocator, input, options);
     }
 
@@ -345,17 +346,17 @@ pub const Client = struct {
     ///   [CreateDistribution](https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateDistribution.html)
     /// *
     ///   [TagResource](https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_TagResource.html)
-    pub fn createDistributionWithTags(self: *Self, allocator: std.mem.Allocator, input: create_distribution_with_tags.CreateDistributionWithTagsInput, options: create_distribution_with_tags.Options) !create_distribution_with_tags.CreateDistributionWithTagsOutput {
+    pub fn createDistributionWithTags(self: *Self, allocator: std.mem.Allocator, input: create_distribution_with_tags.CreateDistributionWithTagsInput, options: CallOptions) !create_distribution_with_tags.CreateDistributionWithTagsOutput {
         return create_distribution_with_tags.execute(self, allocator, input, options);
     }
 
     /// Create a new field-level encryption configuration.
-    pub fn createFieldLevelEncryptionConfig(self: *Self, allocator: std.mem.Allocator, input: create_field_level_encryption_config.CreateFieldLevelEncryptionConfigInput, options: create_field_level_encryption_config.Options) !create_field_level_encryption_config.CreateFieldLevelEncryptionConfigOutput {
+    pub fn createFieldLevelEncryptionConfig(self: *Self, allocator: std.mem.Allocator, input: create_field_level_encryption_config.CreateFieldLevelEncryptionConfigInput, options: CallOptions) !create_field_level_encryption_config.CreateFieldLevelEncryptionConfigOutput {
         return create_field_level_encryption_config.execute(self, allocator, input, options);
     }
 
     /// Create a field-level encryption profile.
-    pub fn createFieldLevelEncryptionProfile(self: *Self, allocator: std.mem.Allocator, input: create_field_level_encryption_profile.CreateFieldLevelEncryptionProfileInput, options: create_field_level_encryption_profile.Options) !create_field_level_encryption_profile.CreateFieldLevelEncryptionProfileOutput {
+    pub fn createFieldLevelEncryptionProfile(self: *Self, allocator: std.mem.Allocator, input: create_field_level_encryption_profile.CreateFieldLevelEncryptionProfileInput, options: CallOptions) !create_field_level_encryption_profile.CreateFieldLevelEncryptionProfileOutput {
         return create_field_level_encryption_profile.execute(self, allocator, input, options);
     }
 
@@ -373,20 +374,20 @@ pub const Client = struct {
     /// `PublishFunction` to copy the function from the `DEVELOPMENT` stage to
     /// `LIVE`. When it's live, you can attach the function to a distribution's
     /// cache behavior, using the function's ARN.
-    pub fn createFunction(self: *Self, allocator: std.mem.Allocator, input: create_function.CreateFunctionInput, options: create_function.Options) !create_function.CreateFunctionOutput {
+    pub fn createFunction(self: *Self, allocator: std.mem.Allocator, input: create_function.CreateFunctionInput, options: CallOptions) !create_function.CreateFunctionOutput {
         return create_function.execute(self, allocator, input, options);
     }
 
     /// Create a new invalidation. For more information, see [Invalidating
     /// files](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html) in the *Amazon CloudFront Developer Guide*.
-    pub fn createInvalidation(self: *Self, allocator: std.mem.Allocator, input: create_invalidation.CreateInvalidationInput, options: create_invalidation.Options) !create_invalidation.CreateInvalidationOutput {
+    pub fn createInvalidation(self: *Self, allocator: std.mem.Allocator, input: create_invalidation.CreateInvalidationInput, options: CallOptions) !create_invalidation.CreateInvalidationOutput {
         return create_invalidation.execute(self, allocator, input, options);
     }
 
     /// Creates an invalidation for a distribution tenant. For more information, see
     /// [Invalidating
     /// files](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html) in the *Amazon CloudFront Developer Guide*.
-    pub fn createInvalidationForDistributionTenant(self: *Self, allocator: std.mem.Allocator, input: create_invalidation_for_distribution_tenant.CreateInvalidationForDistributionTenantInput, options: create_invalidation_for_distribution_tenant.Options) !create_invalidation_for_distribution_tenant.CreateInvalidationForDistributionTenantOutput {
+    pub fn createInvalidationForDistributionTenant(self: *Self, allocator: std.mem.Allocator, input: create_invalidation_for_distribution_tenant.CreateInvalidationForDistributionTenantInput, options: CallOptions) !create_invalidation_for_distribution_tenant.CreateInvalidationForDistributionTenantOutput {
         return create_invalidation_for_distribution_tenant.execute(self, allocator, input, options);
     }
 
@@ -402,7 +403,7 @@ pub const Client = struct {
     /// cookie contains information about which public key CloudFront should use to
     /// verify the signature. For more information, see [Serving private
     /// content](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) in the *Amazon CloudFront Developer Guide*.
-    pub fn createKeyGroup(self: *Self, allocator: std.mem.Allocator, input: create_key_group.CreateKeyGroupInput, options: create_key_group.Options) !create_key_group.CreateKeyGroupOutput {
+    pub fn createKeyGroup(self: *Self, allocator: std.mem.Allocator, input: create_key_group.CreateKeyGroupInput, options: CallOptions) !create_key_group.CreateKeyGroupOutput {
         return create_key_group.execute(self, allocator, input, options);
     }
 
@@ -410,7 +411,7 @@ pub const Client = struct {
     /// account, the key value store names must be unique. You can also import key
     /// value store data in JSON format from an S3 bucket by providing a valid
     /// `ImportSource` that you own.
-    pub fn createKeyValueStore(self: *Self, allocator: std.mem.Allocator, input: create_key_value_store.CreateKeyValueStoreInput, options: create_key_value_store.Options) !create_key_value_store.CreateKeyValueStoreOutput {
+    pub fn createKeyValueStore(self: *Self, allocator: std.mem.Allocator, input: create_key_value_store.CreateKeyValueStoreInput, options: CallOptions) !create_key_value_store.CreateKeyValueStoreOutput {
         return create_key_value_store.execute(self, allocator, input, options);
     }
 
@@ -419,7 +420,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Viewing additional CloudFront distribution
     /// metrics](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/viewing-cloudfront-metrics.html#monitoring-console.distributions-additional) in the *Amazon CloudFront Developer Guide*.
-    pub fn createMonitoringSubscription(self: *Self, allocator: std.mem.Allocator, input: create_monitoring_subscription.CreateMonitoringSubscriptionInput, options: create_monitoring_subscription.Options) !create_monitoring_subscription.CreateMonitoringSubscriptionOutput {
+    pub fn createMonitoringSubscription(self: *Self, allocator: std.mem.Allocator, input: create_monitoring_subscription.CreateMonitoringSubscriptionInput, options: CallOptions) !create_monitoring_subscription.CreateMonitoringSubscriptionOutput {
         return create_monitoring_subscription.execute(self, allocator, input, options);
     }
 
@@ -434,7 +435,7 @@ pub const Client = struct {
     /// For more information about using a CloudFront origin access control, see
     /// [Restricting access to an Amazon Web Services
     /// origin](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html) in the *Amazon CloudFront Developer Guide*.
-    pub fn createOriginAccessControl(self: *Self, allocator: std.mem.Allocator, input: create_origin_access_control.CreateOriginAccessControlInput, options: create_origin_access_control.Options) !create_origin_access_control.CreateOriginAccessControlOutput {
+    pub fn createOriginAccessControl(self: *Self, allocator: std.mem.Allocator, input: create_origin_access_control.CreateOriginAccessControlInput, options: CallOptions) !create_origin_access_control.CreateOriginAccessControlOutput {
         return create_origin_access_control.execute(self, allocator, input, options);
     }
 
@@ -461,14 +462,14 @@ pub const Client = struct {
     ///
     /// For more information about origin request policies, see [Controlling origin
     /// requests](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html) in the *Amazon CloudFront Developer Guide*.
-    pub fn createOriginRequestPolicy(self: *Self, allocator: std.mem.Allocator, input: create_origin_request_policy.CreateOriginRequestPolicyInput, options: create_origin_request_policy.Options) !create_origin_request_policy.CreateOriginRequestPolicyOutput {
+    pub fn createOriginRequestPolicy(self: *Self, allocator: std.mem.Allocator, input: create_origin_request_policy.CreateOriginRequestPolicyInput, options: CallOptions) !create_origin_request_policy.CreateOriginRequestPolicyOutput {
         return create_origin_request_policy.execute(self, allocator, input, options);
     }
 
     /// Uploads a public key to CloudFront that you can use with [signed URLs and
     /// signed
     /// cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html), or with [field-level encryption](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).
-    pub fn createPublicKey(self: *Self, allocator: std.mem.Allocator, input: create_public_key.CreatePublicKeyInput, options: create_public_key.Options) !create_public_key.CreatePublicKeyOutput {
+    pub fn createPublicKey(self: *Self, allocator: std.mem.Allocator, input: create_public_key.CreatePublicKeyInput, options: CallOptions) !create_public_key.CreatePublicKeyOutput {
         return create_public_key.execute(self, allocator, input, options);
     }
 
@@ -480,7 +481,7 @@ pub const Client = struct {
     ///
     /// For more information about real-time log configurations, see [Real-time
     /// logs](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html) in the *Amazon CloudFront Developer Guide*.
-    pub fn createRealtimeLogConfig(self: *Self, allocator: std.mem.Allocator, input: create_realtime_log_config.CreateRealtimeLogConfigInput, options: create_realtime_log_config.Options) !create_realtime_log_config.CreateRealtimeLogConfigOutput {
+    pub fn createRealtimeLogConfig(self: *Self, allocator: std.mem.Allocator, input: create_realtime_log_config.CreateRealtimeLogConfigInput, options: CallOptions) !create_realtime_log_config.CreateRealtimeLogConfigOutput {
         return create_realtime_log_config.execute(self, allocator, input, options);
     }
 
@@ -499,7 +500,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Adding or removing HTTP headers in CloudFront
     /// responses](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/modifying-response-headers.html) in the *Amazon CloudFront Developer Guide*.
-    pub fn createResponseHeadersPolicy(self: *Self, allocator: std.mem.Allocator, input: create_response_headers_policy.CreateResponseHeadersPolicyInput, options: create_response_headers_policy.Options) !create_response_headers_policy.CreateResponseHeadersPolicyOutput {
+    pub fn createResponseHeadersPolicy(self: *Self, allocator: std.mem.Allocator, input: create_response_headers_policy.CreateResponseHeadersPolicyInput, options: CallOptions) !create_response_headers_policy.CreateResponseHeadersPolicyOutput {
         return create_response_headers_policy.execute(self, allocator, input, options);
     }
 
@@ -507,7 +508,7 @@ pub const Client = struct {
     /// protocol (RTMP) distributions on December 31, 2020. For more information,
     /// [read the announcement](http://forums.aws.amazon.com/ann.jspa?annID=7356) on
     /// the Amazon CloudFront discussion forum.
-    pub fn createStreamingDistribution(self: *Self, allocator: std.mem.Allocator, input: create_streaming_distribution.CreateStreamingDistributionInput, options: create_streaming_distribution.Options) !create_streaming_distribution.CreateStreamingDistributionOutput {
+    pub fn createStreamingDistribution(self: *Self, allocator: std.mem.Allocator, input: create_streaming_distribution.CreateStreamingDistributionInput, options: CallOptions) !create_streaming_distribution.CreateStreamingDistributionOutput {
         return create_streaming_distribution.execute(self, allocator, input, options);
     }
 
@@ -515,22 +516,22 @@ pub const Client = struct {
     /// protocol (RTMP) distributions on December 31, 2020. For more information,
     /// [read the announcement](http://forums.aws.amazon.com/ann.jspa?annID=7356) on
     /// the Amazon CloudFront discussion forum.
-    pub fn createStreamingDistributionWithTags(self: *Self, allocator: std.mem.Allocator, input: create_streaming_distribution_with_tags.CreateStreamingDistributionWithTagsInput, options: create_streaming_distribution_with_tags.Options) !create_streaming_distribution_with_tags.CreateStreamingDistributionWithTagsOutput {
+    pub fn createStreamingDistributionWithTags(self: *Self, allocator: std.mem.Allocator, input: create_streaming_distribution_with_tags.CreateStreamingDistributionWithTagsInput, options: CallOptions) !create_streaming_distribution_with_tags.CreateStreamingDistributionWithTagsOutput {
         return create_streaming_distribution_with_tags.execute(self, allocator, input, options);
     }
 
     /// Creates a trust store.
-    pub fn createTrustStore(self: *Self, allocator: std.mem.Allocator, input: create_trust_store.CreateTrustStoreInput, options: create_trust_store.Options) !create_trust_store.CreateTrustStoreOutput {
+    pub fn createTrustStore(self: *Self, allocator: std.mem.Allocator, input: create_trust_store.CreateTrustStoreInput, options: CallOptions) !create_trust_store.CreateTrustStoreOutput {
         return create_trust_store.execute(self, allocator, input, options);
     }
 
     /// Create an Amazon CloudFront VPC origin.
-    pub fn createVpcOrigin(self: *Self, allocator: std.mem.Allocator, input: create_vpc_origin.CreateVpcOriginInput, options: create_vpc_origin.Options) !create_vpc_origin.CreateVpcOriginOutput {
+    pub fn createVpcOrigin(self: *Self, allocator: std.mem.Allocator, input: create_vpc_origin.CreateVpcOriginInput, options: CallOptions) !create_vpc_origin.CreateVpcOriginOutput {
         return create_vpc_origin.execute(self, allocator, input, options);
     }
 
     /// Deletes an Anycast static IP list.
-    pub fn deleteAnycastIpList(self: *Self, allocator: std.mem.Allocator, input: delete_anycast_ip_list.DeleteAnycastIpListInput, options: delete_anycast_ip_list.Options) !delete_anycast_ip_list.DeleteAnycastIpListOutput {
+    pub fn deleteAnycastIpList(self: *Self, allocator: std.mem.Allocator, input: delete_anycast_ip_list.DeleteAnycastIpListInput, options: CallOptions) !delete_anycast_ip_list.DeleteAnycastIpListOutput {
         return delete_anycast_ip_list.execute(self, allocator, input, options);
     }
 
@@ -543,22 +544,22 @@ pub const Client = struct {
     /// To delete a cache policy, you must provide the policy's identifier and
     /// version. To get these values, you can use `ListCachePolicies` or
     /// `GetCachePolicy`.
-    pub fn deleteCachePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_cache_policy.DeleteCachePolicyInput, options: delete_cache_policy.Options) !delete_cache_policy.DeleteCachePolicyOutput {
+    pub fn deleteCachePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_cache_policy.DeleteCachePolicyInput, options: CallOptions) !delete_cache_policy.DeleteCachePolicyOutput {
         return delete_cache_policy.execute(self, allocator, input, options);
     }
 
     /// Delete an origin access identity.
-    pub fn deleteCloudFrontOriginAccessIdentity(self: *Self, allocator: std.mem.Allocator, input: delete_cloud_front_origin_access_identity.DeleteCloudFrontOriginAccessIdentityInput, options: delete_cloud_front_origin_access_identity.Options) !delete_cloud_front_origin_access_identity.DeleteCloudFrontOriginAccessIdentityOutput {
+    pub fn deleteCloudFrontOriginAccessIdentity(self: *Self, allocator: std.mem.Allocator, input: delete_cloud_front_origin_access_identity.DeleteCloudFrontOriginAccessIdentityInput, options: CallOptions) !delete_cloud_front_origin_access_identity.DeleteCloudFrontOriginAccessIdentityOutput {
         return delete_cloud_front_origin_access_identity.execute(self, allocator, input, options);
     }
 
     /// Deletes a connection function.
-    pub fn deleteConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: delete_connection_function.DeleteConnectionFunctionInput, options: delete_connection_function.Options) !delete_connection_function.DeleteConnectionFunctionOutput {
+    pub fn deleteConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: delete_connection_function.DeleteConnectionFunctionInput, options: CallOptions) !delete_connection_function.DeleteConnectionFunctionOutput {
         return delete_connection_function.execute(self, allocator, input, options);
     }
 
     /// Deletes a connection group.
-    pub fn deleteConnectionGroup(self: *Self, allocator: std.mem.Allocator, input: delete_connection_group.DeleteConnectionGroupInput, options: delete_connection_group.Options) !delete_connection_group.DeleteConnectionGroupOutput {
+    pub fn deleteConnectionGroup(self: *Self, allocator: std.mem.Allocator, input: delete_connection_group.DeleteConnectionGroupInput, options: CallOptions) !delete_connection_group.DeleteConnectionGroupOutput {
         return delete_connection_group.execute(self, allocator, input, options);
     }
 
@@ -567,7 +568,7 @@ pub const Client = struct {
     /// You cannot delete a continuous deployment policy that's attached to a
     /// primary distribution. First update your distribution to remove the
     /// continuous deployment policy, then you can delete the policy.
-    pub fn deleteContinuousDeploymentPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_continuous_deployment_policy.DeleteContinuousDeploymentPolicyInput, options: delete_continuous_deployment_policy.Options) !delete_continuous_deployment_policy.DeleteContinuousDeploymentPolicyOutput {
+    pub fn deleteContinuousDeploymentPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_continuous_deployment_policy.DeleteContinuousDeploymentPolicyInput, options: CallOptions) !delete_continuous_deployment_policy.DeleteContinuousDeploymentPolicyOutput {
         return delete_continuous_deployment_policy.execute(self, allocator, input, options);
     }
 
@@ -576,7 +577,7 @@ pub const Client = struct {
     /// Before you can delete a distribution, you must disable it, which requires
     /// permission to update the distribution. Once deleted, a distribution cannot
     /// be recovered.
-    pub fn deleteDistribution(self: *Self, allocator: std.mem.Allocator, input: delete_distribution.DeleteDistributionInput, options: delete_distribution.Options) !delete_distribution.DeleteDistributionOutput {
+    pub fn deleteDistribution(self: *Self, allocator: std.mem.Allocator, input: delete_distribution.DeleteDistributionInput, options: CallOptions) !delete_distribution.DeleteDistributionOutput {
         return delete_distribution.execute(self, allocator, input, options);
     }
 
@@ -585,17 +586,17 @@ pub const Client = struct {
     ///
     /// To delete a distribution tenant, you must first disable the distribution
     /// tenant by using the `UpdateDistributionTenant` API operation.
-    pub fn deleteDistributionTenant(self: *Self, allocator: std.mem.Allocator, input: delete_distribution_tenant.DeleteDistributionTenantInput, options: delete_distribution_tenant.Options) !delete_distribution_tenant.DeleteDistributionTenantOutput {
+    pub fn deleteDistributionTenant(self: *Self, allocator: std.mem.Allocator, input: delete_distribution_tenant.DeleteDistributionTenantInput, options: CallOptions) !delete_distribution_tenant.DeleteDistributionTenantOutput {
         return delete_distribution_tenant.execute(self, allocator, input, options);
     }
 
     /// Remove a field-level encryption configuration.
-    pub fn deleteFieldLevelEncryptionConfig(self: *Self, allocator: std.mem.Allocator, input: delete_field_level_encryption_config.DeleteFieldLevelEncryptionConfigInput, options: delete_field_level_encryption_config.Options) !delete_field_level_encryption_config.DeleteFieldLevelEncryptionConfigOutput {
+    pub fn deleteFieldLevelEncryptionConfig(self: *Self, allocator: std.mem.Allocator, input: delete_field_level_encryption_config.DeleteFieldLevelEncryptionConfigInput, options: CallOptions) !delete_field_level_encryption_config.DeleteFieldLevelEncryptionConfigOutput {
         return delete_field_level_encryption_config.execute(self, allocator, input, options);
     }
 
     /// Remove a field-level encryption profile.
-    pub fn deleteFieldLevelEncryptionProfile(self: *Self, allocator: std.mem.Allocator, input: delete_field_level_encryption_profile.DeleteFieldLevelEncryptionProfileInput, options: delete_field_level_encryption_profile.Options) !delete_field_level_encryption_profile.DeleteFieldLevelEncryptionProfileOutput {
+    pub fn deleteFieldLevelEncryptionProfile(self: *Self, allocator: std.mem.Allocator, input: delete_field_level_encryption_profile.DeleteFieldLevelEncryptionProfileInput, options: CallOptions) !delete_field_level_encryption_profile.DeleteFieldLevelEncryptionProfileOutput {
         return delete_field_level_encryption_profile.execute(self, allocator, input, options);
     }
 
@@ -608,7 +609,7 @@ pub const Client = struct {
     /// To delete a function, you must provide the function's name and version
     /// (`ETag` value). To get these values, you can use `ListFunctions` and
     /// `DescribeFunction`.
-    pub fn deleteFunction(self: *Self, allocator: std.mem.Allocator, input: delete_function.DeleteFunctionInput, options: delete_function.Options) !delete_function.DeleteFunctionOutput {
+    pub fn deleteFunction(self: *Self, allocator: std.mem.Allocator, input: delete_function.DeleteFunctionInput, options: CallOptions) !delete_function.DeleteFunctionOutput {
         return delete_function.execute(self, allocator, input, options);
     }
 
@@ -621,18 +622,18 @@ pub const Client = struct {
     /// To delete a key group, you must provide the key group's identifier and
     /// version. To get these values, use `ListKeyGroups` followed by `GetKeyGroup`
     /// or `GetKeyGroupConfig`.
-    pub fn deleteKeyGroup(self: *Self, allocator: std.mem.Allocator, input: delete_key_group.DeleteKeyGroupInput, options: delete_key_group.Options) !delete_key_group.DeleteKeyGroupOutput {
+    pub fn deleteKeyGroup(self: *Self, allocator: std.mem.Allocator, input: delete_key_group.DeleteKeyGroupInput, options: CallOptions) !delete_key_group.DeleteKeyGroupOutput {
         return delete_key_group.execute(self, allocator, input, options);
     }
 
     /// Specifies the key value store to delete.
-    pub fn deleteKeyValueStore(self: *Self, allocator: std.mem.Allocator, input: delete_key_value_store.DeleteKeyValueStoreInput, options: delete_key_value_store.Options) !delete_key_value_store.DeleteKeyValueStoreOutput {
+    pub fn deleteKeyValueStore(self: *Self, allocator: std.mem.Allocator, input: delete_key_value_store.DeleteKeyValueStoreInput, options: CallOptions) !delete_key_value_store.DeleteKeyValueStoreOutput {
         return delete_key_value_store.execute(self, allocator, input, options);
     }
 
     /// Disables additional CloudWatch metrics for the specified CloudFront
     /// distribution.
-    pub fn deleteMonitoringSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_monitoring_subscription.DeleteMonitoringSubscriptionInput, options: delete_monitoring_subscription.Options) !delete_monitoring_subscription.DeleteMonitoringSubscriptionOutput {
+    pub fn deleteMonitoringSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_monitoring_subscription.DeleteMonitoringSubscriptionInput, options: CallOptions) !delete_monitoring_subscription.DeleteMonitoringSubscriptionOutput {
         return delete_monitoring_subscription.execute(self, allocator, input, options);
     }
 
@@ -641,7 +642,7 @@ pub const Client = struct {
     /// You cannot delete an origin access control if it's in use. First, update all
     /// distributions to remove the origin access control from all origins, then
     /// delete the origin access control.
-    pub fn deleteOriginAccessControl(self: *Self, allocator: std.mem.Allocator, input: delete_origin_access_control.DeleteOriginAccessControlInput, options: delete_origin_access_control.Options) !delete_origin_access_control.DeleteOriginAccessControlOutput {
+    pub fn deleteOriginAccessControl(self: *Self, allocator: std.mem.Allocator, input: delete_origin_access_control.DeleteOriginAccessControlInput, options: CallOptions) !delete_origin_access_control.DeleteOriginAccessControlOutput {
         return delete_origin_access_control.execute(self, allocator, input, options);
     }
 
@@ -654,12 +655,12 @@ pub const Client = struct {
     /// To delete an origin request policy, you must provide the policy's identifier
     /// and version. To get the identifier, you can use `ListOriginRequestPolicies`
     /// or `GetOriginRequestPolicy`.
-    pub fn deleteOriginRequestPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_origin_request_policy.DeleteOriginRequestPolicyInput, options: delete_origin_request_policy.Options) !delete_origin_request_policy.DeleteOriginRequestPolicyOutput {
+    pub fn deleteOriginRequestPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_origin_request_policy.DeleteOriginRequestPolicyInput, options: CallOptions) !delete_origin_request_policy.DeleteOriginRequestPolicyOutput {
         return delete_origin_request_policy.execute(self, allocator, input, options);
     }
 
     /// Remove a public key you previously added to CloudFront.
-    pub fn deletePublicKey(self: *Self, allocator: std.mem.Allocator, input: delete_public_key.DeletePublicKeyInput, options: delete_public_key.Options) !delete_public_key.DeletePublicKeyOutput {
+    pub fn deletePublicKey(self: *Self, allocator: std.mem.Allocator, input: delete_public_key.DeletePublicKeyInput, options: CallOptions) !delete_public_key.DeletePublicKeyOutput {
         return delete_public_key.execute(self, allocator, input, options);
     }
 
@@ -674,12 +675,12 @@ pub const Client = struct {
     /// name or its Amazon Resource Name (ARN). You must provide at least one. If
     /// you provide both, CloudFront uses the name to identify the real-time log
     /// configuration to delete.
-    pub fn deleteRealtimeLogConfig(self: *Self, allocator: std.mem.Allocator, input: delete_realtime_log_config.DeleteRealtimeLogConfigInput, options: delete_realtime_log_config.Options) !delete_realtime_log_config.DeleteRealtimeLogConfigOutput {
+    pub fn deleteRealtimeLogConfig(self: *Self, allocator: std.mem.Allocator, input: delete_realtime_log_config.DeleteRealtimeLogConfigInput, options: CallOptions) !delete_realtime_log_config.DeleteRealtimeLogConfigOutput {
         return delete_realtime_log_config.execute(self, allocator, input, options);
     }
 
     /// Deletes the resource policy attached to the CloudFront resource.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -692,7 +693,7 @@ pub const Client = struct {
     /// To delete a response headers policy, you must provide the policy's
     /// identifier and version. To get these values, you can use
     /// `ListResponseHeadersPolicies` or `GetResponseHeadersPolicy`.
-    pub fn deleteResponseHeadersPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_response_headers_policy.DeleteResponseHeadersPolicyInput, options: delete_response_headers_policy.Options) !delete_response_headers_policy.DeleteResponseHeadersPolicyOutput {
+    pub fn deleteResponseHeadersPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_response_headers_policy.DeleteResponseHeadersPolicyInput, options: CallOptions) !delete_response_headers_policy.DeleteResponseHeadersPolicyOutput {
         return delete_response_headers_policy.execute(self, allocator, input, options);
     }
 
@@ -728,22 +729,22 @@ pub const Client = struct {
     /// For information about deleting a distribution using the CloudFront console,
     /// see [Deleting a
     /// Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html) in the *Amazon CloudFront Developer Guide*.
-    pub fn deleteStreamingDistribution(self: *Self, allocator: std.mem.Allocator, input: delete_streaming_distribution.DeleteStreamingDistributionInput, options: delete_streaming_distribution.Options) !delete_streaming_distribution.DeleteStreamingDistributionOutput {
+    pub fn deleteStreamingDistribution(self: *Self, allocator: std.mem.Allocator, input: delete_streaming_distribution.DeleteStreamingDistributionInput, options: CallOptions) !delete_streaming_distribution.DeleteStreamingDistributionOutput {
         return delete_streaming_distribution.execute(self, allocator, input, options);
     }
 
     /// Deletes a trust store.
-    pub fn deleteTrustStore(self: *Self, allocator: std.mem.Allocator, input: delete_trust_store.DeleteTrustStoreInput, options: delete_trust_store.Options) !delete_trust_store.DeleteTrustStoreOutput {
+    pub fn deleteTrustStore(self: *Self, allocator: std.mem.Allocator, input: delete_trust_store.DeleteTrustStoreInput, options: CallOptions) !delete_trust_store.DeleteTrustStoreOutput {
         return delete_trust_store.execute(self, allocator, input, options);
     }
 
     /// Delete an Amazon CloudFront VPC origin.
-    pub fn deleteVpcOrigin(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_origin.DeleteVpcOriginInput, options: delete_vpc_origin.Options) !delete_vpc_origin.DeleteVpcOriginOutput {
+    pub fn deleteVpcOrigin(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_origin.DeleteVpcOriginInput, options: CallOptions) !delete_vpc_origin.DeleteVpcOriginOutput {
         return delete_vpc_origin.execute(self, allocator, input, options);
     }
 
     /// Describes a connection function.
-    pub fn describeConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: describe_connection_function.DescribeConnectionFunctionInput, options: describe_connection_function.Options) !describe_connection_function.DescribeConnectionFunctionOutput {
+    pub fn describeConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: describe_connection_function.DescribeConnectionFunctionInput, options: CallOptions) !describe_connection_function.DescribeConnectionFunctionOutput {
         return describe_connection_function.execute(self, allocator, input, options);
     }
 
@@ -753,27 +754,27 @@ pub const Client = struct {
     /// To get configuration information and metadata about a function, you must
     /// provide the function's name and stage. To get these values, you can use
     /// `ListFunctions`.
-    pub fn describeFunction(self: *Self, allocator: std.mem.Allocator, input: describe_function.DescribeFunctionInput, options: describe_function.Options) !describe_function.DescribeFunctionOutput {
+    pub fn describeFunction(self: *Self, allocator: std.mem.Allocator, input: describe_function.DescribeFunctionInput, options: CallOptions) !describe_function.DescribeFunctionOutput {
         return describe_function.execute(self, allocator, input, options);
     }
 
     /// Specifies the key value store and its configuration.
-    pub fn describeKeyValueStore(self: *Self, allocator: std.mem.Allocator, input: describe_key_value_store.DescribeKeyValueStoreInput, options: describe_key_value_store.Options) !describe_key_value_store.DescribeKeyValueStoreOutput {
+    pub fn describeKeyValueStore(self: *Self, allocator: std.mem.Allocator, input: describe_key_value_store.DescribeKeyValueStoreInput, options: CallOptions) !describe_key_value_store.DescribeKeyValueStoreOutput {
         return describe_key_value_store.execute(self, allocator, input, options);
     }
 
     /// Disassociates a distribution tenant from the WAF web ACL.
-    pub fn disassociateDistributionTenantWebAcl(self: *Self, allocator: std.mem.Allocator, input: disassociate_distribution_tenant_web_acl.DisassociateDistributionTenantWebACLInput, options: disassociate_distribution_tenant_web_acl.Options) !disassociate_distribution_tenant_web_acl.DisassociateDistributionTenantWebACLOutput {
+    pub fn disassociateDistributionTenantWebAcl(self: *Self, allocator: std.mem.Allocator, input: disassociate_distribution_tenant_web_acl.DisassociateDistributionTenantWebACLInput, options: CallOptions) !disassociate_distribution_tenant_web_acl.DisassociateDistributionTenantWebACLOutput {
         return disassociate_distribution_tenant_web_acl.execute(self, allocator, input, options);
     }
 
     /// Disassociates a distribution from the WAF web ACL.
-    pub fn disassociateDistributionWebAcl(self: *Self, allocator: std.mem.Allocator, input: disassociate_distribution_web_acl.DisassociateDistributionWebACLInput, options: disassociate_distribution_web_acl.Options) !disassociate_distribution_web_acl.DisassociateDistributionWebACLOutput {
+    pub fn disassociateDistributionWebAcl(self: *Self, allocator: std.mem.Allocator, input: disassociate_distribution_web_acl.DisassociateDistributionWebACLInput, options: CallOptions) !disassociate_distribution_web_acl.DisassociateDistributionWebACLOutput {
         return disassociate_distribution_web_acl.execute(self, allocator, input, options);
     }
 
     /// Gets an Anycast static IP list.
-    pub fn getAnycastIpList(self: *Self, allocator: std.mem.Allocator, input: get_anycast_ip_list.GetAnycastIpListInput, options: get_anycast_ip_list.Options) !get_anycast_ip_list.GetAnycastIpListOutput {
+    pub fn getAnycastIpList(self: *Self, allocator: std.mem.Allocator, input: get_anycast_ip_list.GetAnycastIpListInput, options: CallOptions) !get_anycast_ip_list.GetAnycastIpListOutput {
         return get_anycast_ip_list.execute(self, allocator, input, options);
     }
 
@@ -787,7 +788,7 @@ pub const Client = struct {
     /// policy's identifier using `ListDistributions` or `GetDistribution`. If the
     /// cache policy is not attached to a cache behavior, you can get the identifier
     /// using `ListCachePolicies`.
-    pub fn getCachePolicy(self: *Self, allocator: std.mem.Allocator, input: get_cache_policy.GetCachePolicyInput, options: get_cache_policy.Options) !get_cache_policy.GetCachePolicyOutput {
+    pub fn getCachePolicy(self: *Self, allocator: std.mem.Allocator, input: get_cache_policy.GetCachePolicyInput, options: CallOptions) !get_cache_policy.GetCachePolicyOutput {
         return get_cache_policy.execute(self, allocator, input, options);
     }
 
@@ -798,84 +799,84 @@ pub const Client = struct {
     /// behavior, you can get the policy's identifier using `ListDistributions` or
     /// `GetDistribution`. If the cache policy is not attached to a cache behavior,
     /// you can get the identifier using `ListCachePolicies`.
-    pub fn getCachePolicyConfig(self: *Self, allocator: std.mem.Allocator, input: get_cache_policy_config.GetCachePolicyConfigInput, options: get_cache_policy_config.Options) !get_cache_policy_config.GetCachePolicyConfigOutput {
+    pub fn getCachePolicyConfig(self: *Self, allocator: std.mem.Allocator, input: get_cache_policy_config.GetCachePolicyConfigInput, options: CallOptions) !get_cache_policy_config.GetCachePolicyConfigOutput {
         return get_cache_policy_config.execute(self, allocator, input, options);
     }
 
     /// Get the information about an origin access identity.
-    pub fn getCloudFrontOriginAccessIdentity(self: *Self, allocator: std.mem.Allocator, input: get_cloud_front_origin_access_identity.GetCloudFrontOriginAccessIdentityInput, options: get_cloud_front_origin_access_identity.Options) !get_cloud_front_origin_access_identity.GetCloudFrontOriginAccessIdentityOutput {
+    pub fn getCloudFrontOriginAccessIdentity(self: *Self, allocator: std.mem.Allocator, input: get_cloud_front_origin_access_identity.GetCloudFrontOriginAccessIdentityInput, options: CallOptions) !get_cloud_front_origin_access_identity.GetCloudFrontOriginAccessIdentityOutput {
         return get_cloud_front_origin_access_identity.execute(self, allocator, input, options);
     }
 
     /// Get the configuration information about an origin access identity.
-    pub fn getCloudFrontOriginAccessIdentityConfig(self: *Self, allocator: std.mem.Allocator, input: get_cloud_front_origin_access_identity_config.GetCloudFrontOriginAccessIdentityConfigInput, options: get_cloud_front_origin_access_identity_config.Options) !get_cloud_front_origin_access_identity_config.GetCloudFrontOriginAccessIdentityConfigOutput {
+    pub fn getCloudFrontOriginAccessIdentityConfig(self: *Self, allocator: std.mem.Allocator, input: get_cloud_front_origin_access_identity_config.GetCloudFrontOriginAccessIdentityConfigInput, options: CallOptions) !get_cloud_front_origin_access_identity_config.GetCloudFrontOriginAccessIdentityConfigOutput {
         return get_cloud_front_origin_access_identity_config.execute(self, allocator, input, options);
     }
 
     /// Gets a connection function.
-    pub fn getConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: get_connection_function.GetConnectionFunctionInput, options: get_connection_function.Options) !get_connection_function.GetConnectionFunctionOutput {
+    pub fn getConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: get_connection_function.GetConnectionFunctionInput, options: CallOptions) !get_connection_function.GetConnectionFunctionOutput {
         return get_connection_function.execute(self, allocator, input, options);
     }
 
     /// Gets information about a connection group.
-    pub fn getConnectionGroup(self: *Self, allocator: std.mem.Allocator, input: get_connection_group.GetConnectionGroupInput, options: get_connection_group.Options) !get_connection_group.GetConnectionGroupOutput {
+    pub fn getConnectionGroup(self: *Self, allocator: std.mem.Allocator, input: get_connection_group.GetConnectionGroupInput, options: CallOptions) !get_connection_group.GetConnectionGroupOutput {
         return get_connection_group.execute(self, allocator, input, options);
     }
 
     /// Gets information about a connection group by using the endpoint that you
     /// specify.
-    pub fn getConnectionGroupByRoutingEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_connection_group_by_routing_endpoint.GetConnectionGroupByRoutingEndpointInput, options: get_connection_group_by_routing_endpoint.Options) !get_connection_group_by_routing_endpoint.GetConnectionGroupByRoutingEndpointOutput {
+    pub fn getConnectionGroupByRoutingEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_connection_group_by_routing_endpoint.GetConnectionGroupByRoutingEndpointInput, options: CallOptions) !get_connection_group_by_routing_endpoint.GetConnectionGroupByRoutingEndpointOutput {
         return get_connection_group_by_routing_endpoint.execute(self, allocator, input, options);
     }
 
     /// Gets a continuous deployment policy, including metadata (the policy's
     /// identifier and the date and time when the policy was last modified).
-    pub fn getContinuousDeploymentPolicy(self: *Self, allocator: std.mem.Allocator, input: get_continuous_deployment_policy.GetContinuousDeploymentPolicyInput, options: get_continuous_deployment_policy.Options) !get_continuous_deployment_policy.GetContinuousDeploymentPolicyOutput {
+    pub fn getContinuousDeploymentPolicy(self: *Self, allocator: std.mem.Allocator, input: get_continuous_deployment_policy.GetContinuousDeploymentPolicyInput, options: CallOptions) !get_continuous_deployment_policy.GetContinuousDeploymentPolicyOutput {
         return get_continuous_deployment_policy.execute(self, allocator, input, options);
     }
 
     /// Gets configuration information about a continuous deployment policy.
-    pub fn getContinuousDeploymentPolicyConfig(self: *Self, allocator: std.mem.Allocator, input: get_continuous_deployment_policy_config.GetContinuousDeploymentPolicyConfigInput, options: get_continuous_deployment_policy_config.Options) !get_continuous_deployment_policy_config.GetContinuousDeploymentPolicyConfigOutput {
+    pub fn getContinuousDeploymentPolicyConfig(self: *Self, allocator: std.mem.Allocator, input: get_continuous_deployment_policy_config.GetContinuousDeploymentPolicyConfigInput, options: CallOptions) !get_continuous_deployment_policy_config.GetContinuousDeploymentPolicyConfigOutput {
         return get_continuous_deployment_policy_config.execute(self, allocator, input, options);
     }
 
     /// Get the information about a distribution.
-    pub fn getDistribution(self: *Self, allocator: std.mem.Allocator, input: get_distribution.GetDistributionInput, options: get_distribution.Options) !get_distribution.GetDistributionOutput {
+    pub fn getDistribution(self: *Self, allocator: std.mem.Allocator, input: get_distribution.GetDistributionInput, options: CallOptions) !get_distribution.GetDistributionOutput {
         return get_distribution.execute(self, allocator, input, options);
     }
 
     /// Get the configuration information about a distribution.
-    pub fn getDistributionConfig(self: *Self, allocator: std.mem.Allocator, input: get_distribution_config.GetDistributionConfigInput, options: get_distribution_config.Options) !get_distribution_config.GetDistributionConfigOutput {
+    pub fn getDistributionConfig(self: *Self, allocator: std.mem.Allocator, input: get_distribution_config.GetDistributionConfigInput, options: CallOptions) !get_distribution_config.GetDistributionConfigOutput {
         return get_distribution_config.execute(self, allocator, input, options);
     }
 
     /// Gets information about a distribution tenant.
-    pub fn getDistributionTenant(self: *Self, allocator: std.mem.Allocator, input: get_distribution_tenant.GetDistributionTenantInput, options: get_distribution_tenant.Options) !get_distribution_tenant.GetDistributionTenantOutput {
+    pub fn getDistributionTenant(self: *Self, allocator: std.mem.Allocator, input: get_distribution_tenant.GetDistributionTenantInput, options: CallOptions) !get_distribution_tenant.GetDistributionTenantOutput {
         return get_distribution_tenant.execute(self, allocator, input, options);
     }
 
     /// Gets information about a distribution tenant by the associated domain.
-    pub fn getDistributionTenantByDomain(self: *Self, allocator: std.mem.Allocator, input: get_distribution_tenant_by_domain.GetDistributionTenantByDomainInput, options: get_distribution_tenant_by_domain.Options) !get_distribution_tenant_by_domain.GetDistributionTenantByDomainOutput {
+    pub fn getDistributionTenantByDomain(self: *Self, allocator: std.mem.Allocator, input: get_distribution_tenant_by_domain.GetDistributionTenantByDomainInput, options: CallOptions) !get_distribution_tenant_by_domain.GetDistributionTenantByDomainOutput {
         return get_distribution_tenant_by_domain.execute(self, allocator, input, options);
     }
 
     /// Get the field-level encryption configuration information.
-    pub fn getFieldLevelEncryption(self: *Self, allocator: std.mem.Allocator, input: get_field_level_encryption.GetFieldLevelEncryptionInput, options: get_field_level_encryption.Options) !get_field_level_encryption.GetFieldLevelEncryptionOutput {
+    pub fn getFieldLevelEncryption(self: *Self, allocator: std.mem.Allocator, input: get_field_level_encryption.GetFieldLevelEncryptionInput, options: CallOptions) !get_field_level_encryption.GetFieldLevelEncryptionOutput {
         return get_field_level_encryption.execute(self, allocator, input, options);
     }
 
     /// Get the field-level encryption configuration information.
-    pub fn getFieldLevelEncryptionConfig(self: *Self, allocator: std.mem.Allocator, input: get_field_level_encryption_config.GetFieldLevelEncryptionConfigInput, options: get_field_level_encryption_config.Options) !get_field_level_encryption_config.GetFieldLevelEncryptionConfigOutput {
+    pub fn getFieldLevelEncryptionConfig(self: *Self, allocator: std.mem.Allocator, input: get_field_level_encryption_config.GetFieldLevelEncryptionConfigInput, options: CallOptions) !get_field_level_encryption_config.GetFieldLevelEncryptionConfigOutput {
         return get_field_level_encryption_config.execute(self, allocator, input, options);
     }
 
     /// Get the field-level encryption profile information.
-    pub fn getFieldLevelEncryptionProfile(self: *Self, allocator: std.mem.Allocator, input: get_field_level_encryption_profile.GetFieldLevelEncryptionProfileInput, options: get_field_level_encryption_profile.Options) !get_field_level_encryption_profile.GetFieldLevelEncryptionProfileOutput {
+    pub fn getFieldLevelEncryptionProfile(self: *Self, allocator: std.mem.Allocator, input: get_field_level_encryption_profile.GetFieldLevelEncryptionProfileInput, options: CallOptions) !get_field_level_encryption_profile.GetFieldLevelEncryptionProfileOutput {
         return get_field_level_encryption_profile.execute(self, allocator, input, options);
     }
 
     /// Get the field-level encryption profile configuration information.
-    pub fn getFieldLevelEncryptionProfileConfig(self: *Self, allocator: std.mem.Allocator, input: get_field_level_encryption_profile_config.GetFieldLevelEncryptionProfileConfigInput, options: get_field_level_encryption_profile_config.Options) !get_field_level_encryption_profile_config.GetFieldLevelEncryptionProfileConfigOutput {
+    pub fn getFieldLevelEncryptionProfileConfig(self: *Self, allocator: std.mem.Allocator, input: get_field_level_encryption_profile_config.GetFieldLevelEncryptionProfileConfigInput, options: CallOptions) !get_field_level_encryption_profile_config.GetFieldLevelEncryptionProfileConfigOutput {
         return get_field_level_encryption_profile_config.execute(self, allocator, input, options);
     }
 
@@ -884,17 +885,17 @@ pub const Client = struct {
     ///
     /// To get a function's code, you must provide the function's name and stage. To
     /// get these values, you can use `ListFunctions`.
-    pub fn getFunction(self: *Self, allocator: std.mem.Allocator, input: get_function.GetFunctionInput, options: get_function.Options) !get_function.GetFunctionOutput {
+    pub fn getFunction(self: *Self, allocator: std.mem.Allocator, input: get_function.GetFunctionInput, options: CallOptions) !get_function.GetFunctionOutput {
         return get_function.execute(self, allocator, input, options);
     }
 
     /// Get the information about an invalidation.
-    pub fn getInvalidation(self: *Self, allocator: std.mem.Allocator, input: get_invalidation.GetInvalidationInput, options: get_invalidation.Options) !get_invalidation.GetInvalidationOutput {
+    pub fn getInvalidation(self: *Self, allocator: std.mem.Allocator, input: get_invalidation.GetInvalidationInput, options: CallOptions) !get_invalidation.GetInvalidationOutput {
         return get_invalidation.execute(self, allocator, input, options);
     }
 
     /// Gets information about a specific invalidation for a distribution tenant.
-    pub fn getInvalidationForDistributionTenant(self: *Self, allocator: std.mem.Allocator, input: get_invalidation_for_distribution_tenant.GetInvalidationForDistributionTenantInput, options: get_invalidation_for_distribution_tenant.Options) !get_invalidation_for_distribution_tenant.GetInvalidationForDistributionTenantOutput {
+    pub fn getInvalidationForDistributionTenant(self: *Self, allocator: std.mem.Allocator, input: get_invalidation_for_distribution_tenant.GetInvalidationForDistributionTenantInput, options: CallOptions) !get_invalidation_for_distribution_tenant.GetInvalidationForDistributionTenantOutput {
         return get_invalidation_for_distribution_tenant.execute(self, allocator, input, options);
     }
 
@@ -906,7 +907,7 @@ pub const Client = struct {
     /// group's identifier using `ListDistributions` or `GetDistribution`. If the
     /// key group is not referenced in a cache behavior, you can get the identifier
     /// using `ListKeyGroups`.
-    pub fn getKeyGroup(self: *Self, allocator: std.mem.Allocator, input: get_key_group.GetKeyGroupInput, options: get_key_group.Options) !get_key_group.GetKeyGroupOutput {
+    pub fn getKeyGroup(self: *Self, allocator: std.mem.Allocator, input: get_key_group.GetKeyGroupInput, options: CallOptions) !get_key_group.GetKeyGroupOutput {
         return get_key_group.execute(self, allocator, input, options);
     }
 
@@ -917,28 +918,28 @@ pub const Client = struct {
     /// behavior, you can get the key group's identifier using `ListDistributions`
     /// or `GetDistribution`. If the key group is not referenced in a cache
     /// behavior, you can get the identifier using `ListKeyGroups`.
-    pub fn getKeyGroupConfig(self: *Self, allocator: std.mem.Allocator, input: get_key_group_config.GetKeyGroupConfigInput, options: get_key_group_config.Options) !get_key_group_config.GetKeyGroupConfigOutput {
+    pub fn getKeyGroupConfig(self: *Self, allocator: std.mem.Allocator, input: get_key_group_config.GetKeyGroupConfigInput, options: CallOptions) !get_key_group_config.GetKeyGroupConfigOutput {
         return get_key_group_config.execute(self, allocator, input, options);
     }
 
     /// Gets details about the CloudFront managed ACM certificate.
-    pub fn getManagedCertificateDetails(self: *Self, allocator: std.mem.Allocator, input: get_managed_certificate_details.GetManagedCertificateDetailsInput, options: get_managed_certificate_details.Options) !get_managed_certificate_details.GetManagedCertificateDetailsOutput {
+    pub fn getManagedCertificateDetails(self: *Self, allocator: std.mem.Allocator, input: get_managed_certificate_details.GetManagedCertificateDetailsInput, options: CallOptions) !get_managed_certificate_details.GetManagedCertificateDetailsOutput {
         return get_managed_certificate_details.execute(self, allocator, input, options);
     }
 
     /// Gets information about whether additional CloudWatch metrics are enabled for
     /// the specified CloudFront distribution.
-    pub fn getMonitoringSubscription(self: *Self, allocator: std.mem.Allocator, input: get_monitoring_subscription.GetMonitoringSubscriptionInput, options: get_monitoring_subscription.Options) !get_monitoring_subscription.GetMonitoringSubscriptionOutput {
+    pub fn getMonitoringSubscription(self: *Self, allocator: std.mem.Allocator, input: get_monitoring_subscription.GetMonitoringSubscriptionInput, options: CallOptions) !get_monitoring_subscription.GetMonitoringSubscriptionOutput {
         return get_monitoring_subscription.execute(self, allocator, input, options);
     }
 
     /// Gets a CloudFront origin access control, including its unique identifier.
-    pub fn getOriginAccessControl(self: *Self, allocator: std.mem.Allocator, input: get_origin_access_control.GetOriginAccessControlInput, options: get_origin_access_control.Options) !get_origin_access_control.GetOriginAccessControlOutput {
+    pub fn getOriginAccessControl(self: *Self, allocator: std.mem.Allocator, input: get_origin_access_control.GetOriginAccessControlInput, options: CallOptions) !get_origin_access_control.GetOriginAccessControlOutput {
         return get_origin_access_control.execute(self, allocator, input, options);
     }
 
     /// Gets a CloudFront origin access control configuration.
-    pub fn getOriginAccessControlConfig(self: *Self, allocator: std.mem.Allocator, input: get_origin_access_control_config.GetOriginAccessControlConfigInput, options: get_origin_access_control_config.Options) !get_origin_access_control_config.GetOriginAccessControlConfigOutput {
+    pub fn getOriginAccessControlConfig(self: *Self, allocator: std.mem.Allocator, input: get_origin_access_control_config.GetOriginAccessControlConfigInput, options: CallOptions) !get_origin_access_control_config.GetOriginAccessControlConfigOutput {
         return get_origin_access_control_config.execute(self, allocator, input, options);
     }
 
@@ -952,7 +953,7 @@ pub const Client = struct {
     /// you can get the policy's identifier using `ListDistributions` or
     /// `GetDistribution`. If the origin request policy is not attached to a cache
     /// behavior, you can get the identifier using `ListOriginRequestPolicies`.
-    pub fn getOriginRequestPolicy(self: *Self, allocator: std.mem.Allocator, input: get_origin_request_policy.GetOriginRequestPolicyInput, options: get_origin_request_policy.Options) !get_origin_request_policy.GetOriginRequestPolicyOutput {
+    pub fn getOriginRequestPolicy(self: *Self, allocator: std.mem.Allocator, input: get_origin_request_policy.GetOriginRequestPolicyInput, options: CallOptions) !get_origin_request_policy.GetOriginRequestPolicyOutput {
         return get_origin_request_policy.execute(self, allocator, input, options);
     }
 
@@ -964,17 +965,17 @@ pub const Client = struct {
     /// `ListDistributions` or `GetDistribution`. If the origin request policy is
     /// not attached to a cache behavior, you can get the identifier using
     /// `ListOriginRequestPolicies`.
-    pub fn getOriginRequestPolicyConfig(self: *Self, allocator: std.mem.Allocator, input: get_origin_request_policy_config.GetOriginRequestPolicyConfigInput, options: get_origin_request_policy_config.Options) !get_origin_request_policy_config.GetOriginRequestPolicyConfigOutput {
+    pub fn getOriginRequestPolicyConfig(self: *Self, allocator: std.mem.Allocator, input: get_origin_request_policy_config.GetOriginRequestPolicyConfigInput, options: CallOptions) !get_origin_request_policy_config.GetOriginRequestPolicyConfigOutput {
         return get_origin_request_policy_config.execute(self, allocator, input, options);
     }
 
     /// Gets a public key.
-    pub fn getPublicKey(self: *Self, allocator: std.mem.Allocator, input: get_public_key.GetPublicKeyInput, options: get_public_key.Options) !get_public_key.GetPublicKeyOutput {
+    pub fn getPublicKey(self: *Self, allocator: std.mem.Allocator, input: get_public_key.GetPublicKeyInput, options: CallOptions) !get_public_key.GetPublicKeyOutput {
         return get_public_key.execute(self, allocator, input, options);
     }
 
     /// Gets a public key configuration.
-    pub fn getPublicKeyConfig(self: *Self, allocator: std.mem.Allocator, input: get_public_key_config.GetPublicKeyConfigInput, options: get_public_key_config.Options) !get_public_key_config.GetPublicKeyConfigOutput {
+    pub fn getPublicKeyConfig(self: *Self, allocator: std.mem.Allocator, input: get_public_key_config.GetPublicKeyConfigInput, options: CallOptions) !get_public_key_config.GetPublicKeyConfigOutput {
         return get_public_key_config.execute(self, allocator, input, options);
     }
 
@@ -984,13 +985,13 @@ pub const Client = struct {
     /// name or its Amazon Resource Name (ARN). You must provide at least one. If
     /// you provide both, CloudFront uses the name to identify the real-time log
     /// configuration to get.
-    pub fn getRealtimeLogConfig(self: *Self, allocator: std.mem.Allocator, input: get_realtime_log_config.GetRealtimeLogConfigInput, options: get_realtime_log_config.Options) !get_realtime_log_config.GetRealtimeLogConfigOutput {
+    pub fn getRealtimeLogConfig(self: *Self, allocator: std.mem.Allocator, input: get_realtime_log_config.GetRealtimeLogConfigInput, options: CallOptions) !get_realtime_log_config.GetRealtimeLogConfigOutput {
         return get_realtime_log_config.execute(self, allocator, input, options);
     }
 
     /// Retrieves the resource policy for the specified CloudFront resource that you
     /// own and have shared.
-    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
         return get_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -1002,7 +1003,7 @@ pub const Client = struct {
     /// behavior, you can get the policy's identifier using `ListDistributions` or
     /// `GetDistribution`. If the response headers policy is not attached to a cache
     /// behavior, you can get the identifier using `ListResponseHeadersPolicies`.
-    pub fn getResponseHeadersPolicy(self: *Self, allocator: std.mem.Allocator, input: get_response_headers_policy.GetResponseHeadersPolicyInput, options: get_response_headers_policy.Options) !get_response_headers_policy.GetResponseHeadersPolicyOutput {
+    pub fn getResponseHeadersPolicy(self: *Self, allocator: std.mem.Allocator, input: get_response_headers_policy.GetResponseHeadersPolicyInput, options: CallOptions) !get_response_headers_policy.GetResponseHeadersPolicyOutput {
         return get_response_headers_policy.execute(self, allocator, input, options);
     }
 
@@ -1014,33 +1015,33 @@ pub const Client = struct {
     /// `ListDistributions` or `GetDistribution`. If the response headers policy is
     /// not attached to a cache behavior, you can get the identifier using
     /// `ListResponseHeadersPolicies`.
-    pub fn getResponseHeadersPolicyConfig(self: *Self, allocator: std.mem.Allocator, input: get_response_headers_policy_config.GetResponseHeadersPolicyConfigInput, options: get_response_headers_policy_config.Options) !get_response_headers_policy_config.GetResponseHeadersPolicyConfigOutput {
+    pub fn getResponseHeadersPolicyConfig(self: *Self, allocator: std.mem.Allocator, input: get_response_headers_policy_config.GetResponseHeadersPolicyConfigInput, options: CallOptions) !get_response_headers_policy_config.GetResponseHeadersPolicyConfigOutput {
         return get_response_headers_policy_config.execute(self, allocator, input, options);
     }
 
     /// Gets information about a specified RTMP distribution, including the
     /// distribution configuration.
-    pub fn getStreamingDistribution(self: *Self, allocator: std.mem.Allocator, input: get_streaming_distribution.GetStreamingDistributionInput, options: get_streaming_distribution.Options) !get_streaming_distribution.GetStreamingDistributionOutput {
+    pub fn getStreamingDistribution(self: *Self, allocator: std.mem.Allocator, input: get_streaming_distribution.GetStreamingDistributionInput, options: CallOptions) !get_streaming_distribution.GetStreamingDistributionOutput {
         return get_streaming_distribution.execute(self, allocator, input, options);
     }
 
     /// Get the configuration information about a streaming distribution.
-    pub fn getStreamingDistributionConfig(self: *Self, allocator: std.mem.Allocator, input: get_streaming_distribution_config.GetStreamingDistributionConfigInput, options: get_streaming_distribution_config.Options) !get_streaming_distribution_config.GetStreamingDistributionConfigOutput {
+    pub fn getStreamingDistributionConfig(self: *Self, allocator: std.mem.Allocator, input: get_streaming_distribution_config.GetStreamingDistributionConfigInput, options: CallOptions) !get_streaming_distribution_config.GetStreamingDistributionConfigOutput {
         return get_streaming_distribution_config.execute(self, allocator, input, options);
     }
 
     /// Gets a trust store.
-    pub fn getTrustStore(self: *Self, allocator: std.mem.Allocator, input: get_trust_store.GetTrustStoreInput, options: get_trust_store.Options) !get_trust_store.GetTrustStoreOutput {
+    pub fn getTrustStore(self: *Self, allocator: std.mem.Allocator, input: get_trust_store.GetTrustStoreInput, options: CallOptions) !get_trust_store.GetTrustStoreOutput {
         return get_trust_store.execute(self, allocator, input, options);
     }
 
     /// Get the details of an Amazon CloudFront VPC origin.
-    pub fn getVpcOrigin(self: *Self, allocator: std.mem.Allocator, input: get_vpc_origin.GetVpcOriginInput, options: get_vpc_origin.Options) !get_vpc_origin.GetVpcOriginOutput {
+    pub fn getVpcOrigin(self: *Self, allocator: std.mem.Allocator, input: get_vpc_origin.GetVpcOriginInput, options: CallOptions) !get_vpc_origin.GetVpcOriginOutput {
         return get_vpc_origin.execute(self, allocator, input, options);
     }
 
     /// Lists your Anycast static IP lists.
-    pub fn listAnycastIpLists(self: *Self, allocator: std.mem.Allocator, input: list_anycast_ip_lists.ListAnycastIpListsInput, options: list_anycast_ip_lists.Options) !list_anycast_ip_lists.ListAnycastIpListsOutput {
+    pub fn listAnycastIpLists(self: *Self, allocator: std.mem.Allocator, input: list_anycast_ip_lists.ListAnycastIpListsInput, options: CallOptions) !list_anycast_ip_lists.ListAnycastIpListsOutput {
         return list_anycast_ip_lists.execute(self, allocator, input, options);
     }
 
@@ -1056,12 +1057,12 @@ pub const Client = struct {
     /// next page of items, send a subsequent request that specifies the
     /// `NextMarker` value from the current response as the `Marker` value in the
     /// subsequent request.
-    pub fn listCachePolicies(self: *Self, allocator: std.mem.Allocator, input: list_cache_policies.ListCachePoliciesInput, options: list_cache_policies.Options) !list_cache_policies.ListCachePoliciesOutput {
+    pub fn listCachePolicies(self: *Self, allocator: std.mem.Allocator, input: list_cache_policies.ListCachePoliciesInput, options: CallOptions) !list_cache_policies.ListCachePoliciesOutput {
         return list_cache_policies.execute(self, allocator, input, options);
     }
 
     /// Lists origin access identities.
-    pub fn listCloudFrontOriginAccessIdentities(self: *Self, allocator: std.mem.Allocator, input: list_cloud_front_origin_access_identities.ListCloudFrontOriginAccessIdentitiesInput, options: list_cloud_front_origin_access_identities.Options) !list_cloud_front_origin_access_identities.ListCloudFrontOriginAccessIdentitiesOutput {
+    pub fn listCloudFrontOriginAccessIdentities(self: *Self, allocator: std.mem.Allocator, input: list_cloud_front_origin_access_identities.ListCloudFrontOriginAccessIdentitiesInput, options: CallOptions) !list_cloud_front_origin_access_identities.ListCloudFrontOriginAccessIdentitiesOutput {
         return list_cloud_front_origin_access_identities.execute(self, allocator, input, options);
     }
 
@@ -1103,17 +1104,17 @@ pub const Client = struct {
     /// next page of items, send a subsequent request that specifies the
     /// `NextMarker` value from the current response as the `Marker` value in the
     /// subsequent request.
-    pub fn listConflictingAliases(self: *Self, allocator: std.mem.Allocator, input: list_conflicting_aliases.ListConflictingAliasesInput, options: list_conflicting_aliases.Options) !list_conflicting_aliases.ListConflictingAliasesOutput {
+    pub fn listConflictingAliases(self: *Self, allocator: std.mem.Allocator, input: list_conflicting_aliases.ListConflictingAliasesInput, options: CallOptions) !list_conflicting_aliases.ListConflictingAliasesOutput {
         return list_conflicting_aliases.execute(self, allocator, input, options);
     }
 
     /// Lists connection functions.
-    pub fn listConnectionFunctions(self: *Self, allocator: std.mem.Allocator, input: list_connection_functions.ListConnectionFunctionsInput, options: list_connection_functions.Options) !list_connection_functions.ListConnectionFunctionsOutput {
+    pub fn listConnectionFunctions(self: *Self, allocator: std.mem.Allocator, input: list_connection_functions.ListConnectionFunctionsInput, options: CallOptions) !list_connection_functions.ListConnectionFunctionsOutput {
         return list_connection_functions.execute(self, allocator, input, options);
     }
 
     /// Lists the connection groups in your Amazon Web Services account.
-    pub fn listConnectionGroups(self: *Self, allocator: std.mem.Allocator, input: list_connection_groups.ListConnectionGroupsInput, options: list_connection_groups.Options) !list_connection_groups.ListConnectionGroupsOutput {
+    pub fn listConnectionGroups(self: *Self, allocator: std.mem.Allocator, input: list_connection_groups.ListConnectionGroupsInput, options: CallOptions) !list_connection_groups.ListConnectionGroupsOutput {
         return list_connection_groups.execute(self, allocator, input, options);
     }
 
@@ -1126,12 +1127,12 @@ pub const Client = struct {
     /// next page of items, send a subsequent request that specifies the
     /// `NextMarker` value from the current response as the `Marker` value in the
     /// subsequent request.
-    pub fn listContinuousDeploymentPolicies(self: *Self, allocator: std.mem.Allocator, input: list_continuous_deployment_policies.ListContinuousDeploymentPoliciesInput, options: list_continuous_deployment_policies.Options) !list_continuous_deployment_policies.ListContinuousDeploymentPoliciesOutput {
+    pub fn listContinuousDeploymentPolicies(self: *Self, allocator: std.mem.Allocator, input: list_continuous_deployment_policies.ListContinuousDeploymentPoliciesInput, options: CallOptions) !list_continuous_deployment_policies.ListContinuousDeploymentPoliciesOutput {
         return list_continuous_deployment_policies.execute(self, allocator, input, options);
     }
 
     /// Lists the distribution tenants in your Amazon Web Services account.
-    pub fn listDistributionTenants(self: *Self, allocator: std.mem.Allocator, input: list_distribution_tenants.ListDistributionTenantsInput, options: list_distribution_tenants.Options) !list_distribution_tenants.ListDistributionTenantsOutput {
+    pub fn listDistributionTenants(self: *Self, allocator: std.mem.Allocator, input: list_distribution_tenants.ListDistributionTenantsInput, options: CallOptions) !list_distribution_tenants.ListDistributionTenantsOutput {
         return list_distribution_tenants.execute(self, allocator, input, options);
     }
 
@@ -1139,18 +1140,18 @@ pub const Client = struct {
     ///
     /// You must specify either the `CertificateArn` parameter or `WebACLArn`
     /// parameter, but not both in the same request.
-    pub fn listDistributionTenantsByCustomization(self: *Self, allocator: std.mem.Allocator, input: list_distribution_tenants_by_customization.ListDistributionTenantsByCustomizationInput, options: list_distribution_tenants_by_customization.Options) !list_distribution_tenants_by_customization.ListDistributionTenantsByCustomizationOutput {
+    pub fn listDistributionTenantsByCustomization(self: *Self, allocator: std.mem.Allocator, input: list_distribution_tenants_by_customization.ListDistributionTenantsByCustomizationInput, options: CallOptions) !list_distribution_tenants_by_customization.ListDistributionTenantsByCustomizationOutput {
         return list_distribution_tenants_by_customization.execute(self, allocator, input, options);
     }
 
     /// List CloudFront distributions.
-    pub fn listDistributions(self: *Self, allocator: std.mem.Allocator, input: list_distributions.ListDistributionsInput, options: list_distributions.Options) !list_distributions.ListDistributionsOutput {
+    pub fn listDistributions(self: *Self, allocator: std.mem.Allocator, input: list_distributions.ListDistributionsInput, options: CallOptions) !list_distributions.ListDistributionsOutput {
         return list_distributions.execute(self, allocator, input, options);
     }
 
     /// Lists the distributions in your account that are associated with the
     /// specified `AnycastIpListId`.
-    pub fn listDistributionsByAnycastIpListId(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_anycast_ip_list_id.ListDistributionsByAnycastIpListIdInput, options: list_distributions_by_anycast_ip_list_id.Options) !list_distributions_by_anycast_ip_list_id.ListDistributionsByAnycastIpListIdOutput {
+    pub fn listDistributionsByAnycastIpListId(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_anycast_ip_list_id.ListDistributionsByAnycastIpListIdInput, options: CallOptions) !list_distributions_by_anycast_ip_list_id.ListDistributionsByAnycastIpListIdOutput {
         return list_distributions_by_anycast_ip_list_id.execute(self, allocator, input, options);
     }
 
@@ -1163,17 +1164,17 @@ pub const Client = struct {
     /// next page of items, send a subsequent request that specifies the
     /// `NextMarker` value from the current response as the `Marker` value in the
     /// subsequent request.
-    pub fn listDistributionsByCachePolicyId(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_cache_policy_id.ListDistributionsByCachePolicyIdInput, options: list_distributions_by_cache_policy_id.Options) !list_distributions_by_cache_policy_id.ListDistributionsByCachePolicyIdOutput {
+    pub fn listDistributionsByCachePolicyId(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_cache_policy_id.ListDistributionsByCachePolicyIdInput, options: CallOptions) !list_distributions_by_cache_policy_id.ListDistributionsByCachePolicyIdOutput {
         return list_distributions_by_cache_policy_id.execute(self, allocator, input, options);
     }
 
     /// Lists distributions by connection function.
-    pub fn listDistributionsByConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_connection_function.ListDistributionsByConnectionFunctionInput, options: list_distributions_by_connection_function.Options) !list_distributions_by_connection_function.ListDistributionsByConnectionFunctionOutput {
+    pub fn listDistributionsByConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_connection_function.ListDistributionsByConnectionFunctionInput, options: CallOptions) !list_distributions_by_connection_function.ListDistributionsByConnectionFunctionOutput {
         return list_distributions_by_connection_function.execute(self, allocator, input, options);
     }
 
     /// Lists the distributions by the connection mode that you specify.
-    pub fn listDistributionsByConnectionMode(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_connection_mode.ListDistributionsByConnectionModeInput, options: list_distributions_by_connection_mode.Options) !list_distributions_by_connection_mode.ListDistributionsByConnectionModeOutput {
+    pub fn listDistributionsByConnectionMode(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_connection_mode.ListDistributionsByConnectionModeInput, options: CallOptions) !list_distributions_by_connection_mode.ListDistributionsByConnectionModeOutput {
         return list_distributions_by_connection_mode.execute(self, allocator, input, options);
     }
 
@@ -1186,7 +1187,7 @@ pub const Client = struct {
     /// next page of items, send a subsequent request that specifies the
     /// `NextMarker` value from the current response as the `Marker` value in the
     /// subsequent request.
-    pub fn listDistributionsByKeyGroup(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_key_group.ListDistributionsByKeyGroupInput, options: list_distributions_by_key_group.Options) !list_distributions_by_key_group.ListDistributionsByKeyGroupOutput {
+    pub fn listDistributionsByKeyGroup(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_key_group.ListDistributionsByKeyGroupInput, options: CallOptions) !list_distributions_by_key_group.ListDistributionsByKeyGroupOutput {
         return list_distributions_by_key_group.execute(self, allocator, input, options);
     }
 
@@ -1199,13 +1200,13 @@ pub const Client = struct {
     /// next page of items, send a subsequent request that specifies the
     /// `NextMarker` value from the current response as the `Marker` value in the
     /// subsequent request.
-    pub fn listDistributionsByOriginRequestPolicyId(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_origin_request_policy_id.ListDistributionsByOriginRequestPolicyIdInput, options: list_distributions_by_origin_request_policy_id.Options) !list_distributions_by_origin_request_policy_id.ListDistributionsByOriginRequestPolicyIdOutput {
+    pub fn listDistributionsByOriginRequestPolicyId(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_origin_request_policy_id.ListDistributionsByOriginRequestPolicyIdInput, options: CallOptions) !list_distributions_by_origin_request_policy_id.ListDistributionsByOriginRequestPolicyIdOutput {
         return list_distributions_by_origin_request_policy_id.execute(self, allocator, input, options);
     }
 
     /// Lists the CloudFront distributions that are associated with the specified
     /// resource that you own.
-    pub fn listDistributionsByOwnedResource(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_owned_resource.ListDistributionsByOwnedResourceInput, options: list_distributions_by_owned_resource.Options) !list_distributions_by_owned_resource.ListDistributionsByOwnedResourceOutput {
+    pub fn listDistributionsByOwnedResource(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_owned_resource.ListDistributionsByOwnedResourceInput, options: CallOptions) !list_distributions_by_owned_resource.ListDistributionsByOwnedResourceOutput {
         return list_distributions_by_owned_resource.execute(self, allocator, input, options);
     }
 
@@ -1223,7 +1224,7 @@ pub const Client = struct {
     /// next page of items, send a subsequent request that specifies the
     /// `NextMarker` value from the current response as the `Marker` value in the
     /// subsequent request.
-    pub fn listDistributionsByRealtimeLogConfig(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_realtime_log_config.ListDistributionsByRealtimeLogConfigInput, options: list_distributions_by_realtime_log_config.Options) !list_distributions_by_realtime_log_config.ListDistributionsByRealtimeLogConfigOutput {
+    pub fn listDistributionsByRealtimeLogConfig(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_realtime_log_config.ListDistributionsByRealtimeLogConfigInput, options: CallOptions) !list_distributions_by_realtime_log_config.ListDistributionsByRealtimeLogConfigOutput {
         return list_distributions_by_realtime_log_config.execute(self, allocator, input, options);
     }
 
@@ -1236,22 +1237,22 @@ pub const Client = struct {
     /// next page of items, send a subsequent request that specifies the
     /// `NextMarker` value from the current response as the `Marker` value in the
     /// subsequent request.
-    pub fn listDistributionsByResponseHeadersPolicyId(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_response_headers_policy_id.ListDistributionsByResponseHeadersPolicyIdInput, options: list_distributions_by_response_headers_policy_id.Options) !list_distributions_by_response_headers_policy_id.ListDistributionsByResponseHeadersPolicyIdOutput {
+    pub fn listDistributionsByResponseHeadersPolicyId(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_response_headers_policy_id.ListDistributionsByResponseHeadersPolicyIdInput, options: CallOptions) !list_distributions_by_response_headers_policy_id.ListDistributionsByResponseHeadersPolicyIdOutput {
         return list_distributions_by_response_headers_policy_id.execute(self, allocator, input, options);
     }
 
     /// Lists distributions by trust store.
-    pub fn listDistributionsByTrustStore(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_trust_store.ListDistributionsByTrustStoreInput, options: list_distributions_by_trust_store.Options) !list_distributions_by_trust_store.ListDistributionsByTrustStoreOutput {
+    pub fn listDistributionsByTrustStore(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_trust_store.ListDistributionsByTrustStoreInput, options: CallOptions) !list_distributions_by_trust_store.ListDistributionsByTrustStoreOutput {
         return list_distributions_by_trust_store.execute(self, allocator, input, options);
     }
 
     /// List CloudFront distributions by their VPC origin ID.
-    pub fn listDistributionsByVpcOriginId(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_vpc_origin_id.ListDistributionsByVpcOriginIdInput, options: list_distributions_by_vpc_origin_id.Options) !list_distributions_by_vpc_origin_id.ListDistributionsByVpcOriginIdOutput {
+    pub fn listDistributionsByVpcOriginId(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_vpc_origin_id.ListDistributionsByVpcOriginIdInput, options: CallOptions) !list_distributions_by_vpc_origin_id.ListDistributionsByVpcOriginIdOutput {
         return list_distributions_by_vpc_origin_id.execute(self, allocator, input, options);
     }
 
     /// List the distributions that are associated with a specified WAF web ACL.
-    pub fn listDistributionsByWebAclId(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_web_acl_id.ListDistributionsByWebACLIdInput, options: list_distributions_by_web_acl_id.Options) !list_distributions_by_web_acl_id.ListDistributionsByWebACLIdOutput {
+    pub fn listDistributionsByWebAclId(self: *Self, allocator: std.mem.Allocator, input: list_distributions_by_web_acl_id.ListDistributionsByWebACLIdInput, options: CallOptions) !list_distributions_by_web_acl_id.ListDistributionsByWebACLIdOutput {
         return list_distributions_by_web_acl_id.execute(self, allocator, input, options);
     }
 
@@ -1291,19 +1292,19 @@ pub const Client = struct {
     /// next page of items, send a subsequent request that specifies the
     /// `NextMarker` value from the current response as the `Marker` value in the
     /// subsequent request.
-    pub fn listDomainConflicts(self: *Self, allocator: std.mem.Allocator, input: list_domain_conflicts.ListDomainConflictsInput, options: list_domain_conflicts.Options) !list_domain_conflicts.ListDomainConflictsOutput {
+    pub fn listDomainConflicts(self: *Self, allocator: std.mem.Allocator, input: list_domain_conflicts.ListDomainConflictsInput, options: CallOptions) !list_domain_conflicts.ListDomainConflictsOutput {
         return list_domain_conflicts.execute(self, allocator, input, options);
     }
 
     /// List all field-level encryption configurations that have been created in
     /// CloudFront for this account.
-    pub fn listFieldLevelEncryptionConfigs(self: *Self, allocator: std.mem.Allocator, input: list_field_level_encryption_configs.ListFieldLevelEncryptionConfigsInput, options: list_field_level_encryption_configs.Options) !list_field_level_encryption_configs.ListFieldLevelEncryptionConfigsOutput {
+    pub fn listFieldLevelEncryptionConfigs(self: *Self, allocator: std.mem.Allocator, input: list_field_level_encryption_configs.ListFieldLevelEncryptionConfigsInput, options: CallOptions) !list_field_level_encryption_configs.ListFieldLevelEncryptionConfigsOutput {
         return list_field_level_encryption_configs.execute(self, allocator, input, options);
     }
 
     /// Request a list of field-level encryption profiles that have been created in
     /// CloudFront for this account.
-    pub fn listFieldLevelEncryptionProfiles(self: *Self, allocator: std.mem.Allocator, input: list_field_level_encryption_profiles.ListFieldLevelEncryptionProfilesInput, options: list_field_level_encryption_profiles.Options) !list_field_level_encryption_profiles.ListFieldLevelEncryptionProfilesOutput {
+    pub fn listFieldLevelEncryptionProfiles(self: *Self, allocator: std.mem.Allocator, input: list_field_level_encryption_profiles.ListFieldLevelEncryptionProfilesInput, options: CallOptions) !list_field_level_encryption_profiles.ListFieldLevelEncryptionProfilesOutput {
         return list_field_level_encryption_profiles.execute(self, allocator, input, options);
     }
 
@@ -1318,17 +1319,17 @@ pub const Client = struct {
     /// next page of items, send a subsequent request that specifies the
     /// `NextMarker` value from the current response as the `Marker` value in the
     /// subsequent request.
-    pub fn listFunctions(self: *Self, allocator: std.mem.Allocator, input: list_functions.ListFunctionsInput, options: list_functions.Options) !list_functions.ListFunctionsOutput {
+    pub fn listFunctions(self: *Self, allocator: std.mem.Allocator, input: list_functions.ListFunctionsInput, options: CallOptions) !list_functions.ListFunctionsOutput {
         return list_functions.execute(self, allocator, input, options);
     }
 
     /// Lists invalidation batches.
-    pub fn listInvalidations(self: *Self, allocator: std.mem.Allocator, input: list_invalidations.ListInvalidationsInput, options: list_invalidations.Options) !list_invalidations.ListInvalidationsOutput {
+    pub fn listInvalidations(self: *Self, allocator: std.mem.Allocator, input: list_invalidations.ListInvalidationsInput, options: CallOptions) !list_invalidations.ListInvalidationsOutput {
         return list_invalidations.execute(self, allocator, input, options);
     }
 
     /// Lists the invalidations for a distribution tenant.
-    pub fn listInvalidationsForDistributionTenant(self: *Self, allocator: std.mem.Allocator, input: list_invalidations_for_distribution_tenant.ListInvalidationsForDistributionTenantInput, options: list_invalidations_for_distribution_tenant.Options) !list_invalidations_for_distribution_tenant.ListInvalidationsForDistributionTenantOutput {
+    pub fn listInvalidationsForDistributionTenant(self: *Self, allocator: std.mem.Allocator, input: list_invalidations_for_distribution_tenant.ListInvalidationsForDistributionTenantInput, options: CallOptions) !list_invalidations_for_distribution_tenant.ListInvalidationsForDistributionTenantOutput {
         return list_invalidations_for_distribution_tenant.execute(self, allocator, input, options);
     }
 
@@ -1340,12 +1341,12 @@ pub const Client = struct {
     /// next page of items, send a subsequent request that specifies the
     /// `NextMarker` value from the current response as the `Marker` value in the
     /// subsequent request.
-    pub fn listKeyGroups(self: *Self, allocator: std.mem.Allocator, input: list_key_groups.ListKeyGroupsInput, options: list_key_groups.Options) !list_key_groups.ListKeyGroupsOutput {
+    pub fn listKeyGroups(self: *Self, allocator: std.mem.Allocator, input: list_key_groups.ListKeyGroupsInput, options: CallOptions) !list_key_groups.ListKeyGroupsOutput {
         return list_key_groups.execute(self, allocator, input, options);
     }
 
     /// Specifies the key value stores to list.
-    pub fn listKeyValueStores(self: *Self, allocator: std.mem.Allocator, input: list_key_value_stores.ListKeyValueStoresInput, options: list_key_value_stores.Options) !list_key_value_stores.ListKeyValueStoresOutput {
+    pub fn listKeyValueStores(self: *Self, allocator: std.mem.Allocator, input: list_key_value_stores.ListKeyValueStoresInput, options: CallOptions) !list_key_value_stores.ListKeyValueStoresOutput {
         return list_key_value_stores.execute(self, allocator, input, options);
     }
 
@@ -1361,7 +1362,7 @@ pub const Client = struct {
     /// If you're not using origin access controls for your Amazon Web Services
     /// account, the `ListOriginAccessControls` operation doesn't return the `Items`
     /// element in the response.
-    pub fn listOriginAccessControls(self: *Self, allocator: std.mem.Allocator, input: list_origin_access_controls.ListOriginAccessControlsInput, options: list_origin_access_controls.Options) !list_origin_access_controls.ListOriginAccessControlsOutput {
+    pub fn listOriginAccessControls(self: *Self, allocator: std.mem.Allocator, input: list_origin_access_controls.ListOriginAccessControlsInput, options: CallOptions) !list_origin_access_controls.ListOriginAccessControlsOutput {
         return list_origin_access_controls.execute(self, allocator, input, options);
     }
 
@@ -1377,12 +1378,12 @@ pub const Client = struct {
     /// next page of items, send a subsequent request that specifies the
     /// `NextMarker` value from the current response as the `Marker` value in the
     /// subsequent request.
-    pub fn listOriginRequestPolicies(self: *Self, allocator: std.mem.Allocator, input: list_origin_request_policies.ListOriginRequestPoliciesInput, options: list_origin_request_policies.Options) !list_origin_request_policies.ListOriginRequestPoliciesOutput {
+    pub fn listOriginRequestPolicies(self: *Self, allocator: std.mem.Allocator, input: list_origin_request_policies.ListOriginRequestPoliciesInput, options: CallOptions) !list_origin_request_policies.ListOriginRequestPoliciesOutput {
         return list_origin_request_policies.execute(self, allocator, input, options);
     }
 
     /// List all public keys that have been added to CloudFront for this account.
-    pub fn listPublicKeys(self: *Self, allocator: std.mem.Allocator, input: list_public_keys.ListPublicKeysInput, options: list_public_keys.Options) !list_public_keys.ListPublicKeysOutput {
+    pub fn listPublicKeys(self: *Self, allocator: std.mem.Allocator, input: list_public_keys.ListPublicKeysInput, options: CallOptions) !list_public_keys.ListPublicKeysOutput {
         return list_public_keys.execute(self, allocator, input, options);
     }
 
@@ -1394,7 +1395,7 @@ pub const Client = struct {
     /// next page of items, send a subsequent request that specifies the
     /// `NextMarker` value from the current response as the `Marker` value in the
     /// subsequent request.
-    pub fn listRealtimeLogConfigs(self: *Self, allocator: std.mem.Allocator, input: list_realtime_log_configs.ListRealtimeLogConfigsInput, options: list_realtime_log_configs.Options) !list_realtime_log_configs.ListRealtimeLogConfigsOutput {
+    pub fn listRealtimeLogConfigs(self: *Self, allocator: std.mem.Allocator, input: list_realtime_log_configs.ListRealtimeLogConfigsInput, options: CallOptions) !list_realtime_log_configs.ListRealtimeLogConfigsOutput {
         return list_realtime_log_configs.execute(self, allocator, input, options);
     }
 
@@ -1410,33 +1411,33 @@ pub const Client = struct {
     /// next page of items, send a subsequent request that specifies the
     /// `NextMarker` value from the current response as the `Marker` value in the
     /// subsequent request.
-    pub fn listResponseHeadersPolicies(self: *Self, allocator: std.mem.Allocator, input: list_response_headers_policies.ListResponseHeadersPoliciesInput, options: list_response_headers_policies.Options) !list_response_headers_policies.ListResponseHeadersPoliciesOutput {
+    pub fn listResponseHeadersPolicies(self: *Self, allocator: std.mem.Allocator, input: list_response_headers_policies.ListResponseHeadersPoliciesInput, options: CallOptions) !list_response_headers_policies.ListResponseHeadersPoliciesOutput {
         return list_response_headers_policies.execute(self, allocator, input, options);
     }
 
     /// List streaming distributions.
-    pub fn listStreamingDistributions(self: *Self, allocator: std.mem.Allocator, input: list_streaming_distributions.ListStreamingDistributionsInput, options: list_streaming_distributions.Options) !list_streaming_distributions.ListStreamingDistributionsOutput {
+    pub fn listStreamingDistributions(self: *Self, allocator: std.mem.Allocator, input: list_streaming_distributions.ListStreamingDistributionsInput, options: CallOptions) !list_streaming_distributions.ListStreamingDistributionsOutput {
         return list_streaming_distributions.execute(self, allocator, input, options);
     }
 
     /// List tags for a CloudFront resource. For more information, see [Tagging a
     /// distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/tagging.html) in the *Amazon CloudFront Developer Guide*.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists trust stores.
-    pub fn listTrustStores(self: *Self, allocator: std.mem.Allocator, input: list_trust_stores.ListTrustStoresInput, options: list_trust_stores.Options) !list_trust_stores.ListTrustStoresOutput {
+    pub fn listTrustStores(self: *Self, allocator: std.mem.Allocator, input: list_trust_stores.ListTrustStoresInput, options: CallOptions) !list_trust_stores.ListTrustStoresOutput {
         return list_trust_stores.execute(self, allocator, input, options);
     }
 
     /// List the CloudFront VPC origins in your account.
-    pub fn listVpcOrigins(self: *Self, allocator: std.mem.Allocator, input: list_vpc_origins.ListVpcOriginsInput, options: list_vpc_origins.Options) !list_vpc_origins.ListVpcOriginsOutput {
+    pub fn listVpcOrigins(self: *Self, allocator: std.mem.Allocator, input: list_vpc_origins.ListVpcOriginsInput, options: CallOptions) !list_vpc_origins.ListVpcOriginsOutput {
         return list_vpc_origins.execute(self, allocator, input, options);
     }
 
     /// Publishes a connection function.
-    pub fn publishConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: publish_connection_function.PublishConnectionFunctionInput, options: publish_connection_function.Options) !publish_connection_function.PublishConnectionFunctionOutput {
+    pub fn publishConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: publish_connection_function.PublishConnectionFunctionInput, options: CallOptions) !publish_connection_function.PublishConnectionFunctionOutput {
         return publish_connection_function.execute(self, allocator, input, options);
     }
 
@@ -1452,23 +1453,23 @@ pub const Client = struct {
     /// To publish a function, you must provide the function's name and version
     /// (`ETag` value). To get these values, you can use `ListFunctions` and
     /// `DescribeFunction`.
-    pub fn publishFunction(self: *Self, allocator: std.mem.Allocator, input: publish_function.PublishFunctionInput, options: publish_function.Options) !publish_function.PublishFunctionOutput {
+    pub fn publishFunction(self: *Self, allocator: std.mem.Allocator, input: publish_function.PublishFunctionInput, options: CallOptions) !publish_function.PublishFunctionOutput {
         return publish_function.execute(self, allocator, input, options);
     }
 
     /// Creates a resource control policy for a given CloudFront resource.
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Add tags to a CloudFront resource. For more information, see [Tagging a
     /// distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/tagging.html) in the *Amazon CloudFront Developer Guide*.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Tests a connection function.
-    pub fn testConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: test_connection_function.TestConnectionFunctionInput, options: test_connection_function.Options) !test_connection_function.TestConnectionFunctionOutput {
+    pub fn testConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: test_connection_function.TestConnectionFunctionInput, options: CallOptions) !test_connection_function.TestConnectionFunctionOutput {
         return test_connection_function.execute(self, allocator, input, options);
     }
 
@@ -1486,18 +1487,18 @@ pub const Client = struct {
     /// To test a function, you provide the function's name and version (`ETag`
     /// value) along with the event object. To get the function's name and version,
     /// you can use `ListFunctions` and `DescribeFunction`.
-    pub fn testFunction(self: *Self, allocator: std.mem.Allocator, input: test_function.TestFunctionInput, options: test_function.Options) !test_function.TestFunctionOutput {
+    pub fn testFunction(self: *Self, allocator: std.mem.Allocator, input: test_function.TestFunctionInput, options: CallOptions) !test_function.TestFunctionOutput {
         return test_function.execute(self, allocator, input, options);
     }
 
     /// Remove tags from a CloudFront resource. For more information, see [Tagging a
     /// distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/tagging.html) in the *Amazon CloudFront Developer Guide*.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an Anycast static IP list.
-    pub fn updateAnycastIpList(self: *Self, allocator: std.mem.Allocator, input: update_anycast_ip_list.UpdateAnycastIpListInput, options: update_anycast_ip_list.Options) !update_anycast_ip_list.UpdateAnycastIpListOutput {
+    pub fn updateAnycastIpList(self: *Self, allocator: std.mem.Allocator, input: update_anycast_ip_list.UpdateAnycastIpListInput, options: CallOptions) !update_anycast_ip_list.UpdateAnycastIpListOutput {
         return update_anycast_ip_list.execute(self, allocator, input, options);
     }
 
@@ -1518,22 +1519,22 @@ pub const Client = struct {
     /// least the duration specified in the cache policy's minimum TTL, even if the
     /// `Cache-Control: no-cache`, `no-store`, or `private` directives are present
     /// in the origin headers.
-    pub fn updateCachePolicy(self: *Self, allocator: std.mem.Allocator, input: update_cache_policy.UpdateCachePolicyInput, options: update_cache_policy.Options) !update_cache_policy.UpdateCachePolicyOutput {
+    pub fn updateCachePolicy(self: *Self, allocator: std.mem.Allocator, input: update_cache_policy.UpdateCachePolicyInput, options: CallOptions) !update_cache_policy.UpdateCachePolicyOutput {
         return update_cache_policy.execute(self, allocator, input, options);
     }
 
     /// Update an origin access identity.
-    pub fn updateCloudFrontOriginAccessIdentity(self: *Self, allocator: std.mem.Allocator, input: update_cloud_front_origin_access_identity.UpdateCloudFrontOriginAccessIdentityInput, options: update_cloud_front_origin_access_identity.Options) !update_cloud_front_origin_access_identity.UpdateCloudFrontOriginAccessIdentityOutput {
+    pub fn updateCloudFrontOriginAccessIdentity(self: *Self, allocator: std.mem.Allocator, input: update_cloud_front_origin_access_identity.UpdateCloudFrontOriginAccessIdentityInput, options: CallOptions) !update_cloud_front_origin_access_identity.UpdateCloudFrontOriginAccessIdentityOutput {
         return update_cloud_front_origin_access_identity.execute(self, allocator, input, options);
     }
 
     /// Updates a connection function.
-    pub fn updateConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: update_connection_function.UpdateConnectionFunctionInput, options: update_connection_function.Options) !update_connection_function.UpdateConnectionFunctionOutput {
+    pub fn updateConnectionFunction(self: *Self, allocator: std.mem.Allocator, input: update_connection_function.UpdateConnectionFunctionInput, options: CallOptions) !update_connection_function.UpdateConnectionFunctionOutput {
         return update_connection_function.execute(self, allocator, input, options);
     }
 
     /// Updates a connection group.
-    pub fn updateConnectionGroup(self: *Self, allocator: std.mem.Allocator, input: update_connection_group.UpdateConnectionGroupInput, options: update_connection_group.Options) !update_connection_group.UpdateConnectionGroupOutput {
+    pub fn updateConnectionGroup(self: *Self, allocator: std.mem.Allocator, input: update_connection_group.UpdateConnectionGroupInput, options: CallOptions) !update_connection_group.UpdateConnectionGroupOutput {
         return update_connection_group.execute(self, allocator, input, options);
     }
 
@@ -1554,7 +1555,7 @@ pub const Client = struct {
     /// * Use `UpdateContinuousDeploymentPolicy`, providing the entire continuous
     ///   deployment policy configuration, including the fields that you modified
     ///   and those that you didn't.
-    pub fn updateContinuousDeploymentPolicy(self: *Self, allocator: std.mem.Allocator, input: update_continuous_deployment_policy.UpdateContinuousDeploymentPolicyInput, options: update_continuous_deployment_policy.Options) !update_continuous_deployment_policy.UpdateContinuousDeploymentPolicyOutput {
+    pub fn updateContinuousDeploymentPolicy(self: *Self, allocator: std.mem.Allocator, input: update_continuous_deployment_policy.UpdateContinuousDeploymentPolicyInput, options: CallOptions) !update_continuous_deployment_policy.UpdateContinuousDeploymentPolicyOutput {
         return update_continuous_deployment_policy.execute(self, allocator, input, options);
     }
 
@@ -1581,12 +1582,12 @@ pub const Client = struct {
     ///   The values that you specify in an `UpdateDistribution` request are not
     ///   merged into your existing configuration. Make sure to include all fields:
     ///   the ones that you modified and also the ones that you didn't.
-    pub fn updateDistribution(self: *Self, allocator: std.mem.Allocator, input: update_distribution.UpdateDistributionInput, options: update_distribution.Options) !update_distribution.UpdateDistributionOutput {
+    pub fn updateDistribution(self: *Self, allocator: std.mem.Allocator, input: update_distribution.UpdateDistributionInput, options: CallOptions) !update_distribution.UpdateDistributionOutput {
         return update_distribution.execute(self, allocator, input, options);
     }
 
     /// Updates a distribution tenant.
-    pub fn updateDistributionTenant(self: *Self, allocator: std.mem.Allocator, input: update_distribution_tenant.UpdateDistributionTenantInput, options: update_distribution_tenant.Options) !update_distribution_tenant.UpdateDistributionTenantOutput {
+    pub fn updateDistributionTenant(self: *Self, allocator: std.mem.Allocator, input: update_distribution_tenant.UpdateDistributionTenantInput, options: CallOptions) !update_distribution_tenant.UpdateDistributionTenantOutput {
         return update_distribution_tenant.execute(self, allocator, input, options);
     }
 
@@ -1610,7 +1611,7 @@ pub const Client = struct {
     ///   [GetDistribution](https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html)
     /// *
     ///   [UpdateDistribution](https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html)
-    pub fn updateDistributionWithStagingConfig(self: *Self, allocator: std.mem.Allocator, input: update_distribution_with_staging_config.UpdateDistributionWithStagingConfigInput, options: update_distribution_with_staging_config.Options) !update_distribution_with_staging_config.UpdateDistributionWithStagingConfigOutput {
+    pub fn updateDistributionWithStagingConfig(self: *Self, allocator: std.mem.Allocator, input: update_distribution_with_staging_config.UpdateDistributionWithStagingConfigInput, options: CallOptions) !update_distribution_with_staging_config.UpdateDistributionWithStagingConfigOutput {
         return update_distribution_with_staging_config.execute(self, allocator, input, options);
     }
 
@@ -1633,17 +1634,17 @@ pub const Client = struct {
     /// complete, and other restrictions, see [Moving an alternate domain name to a
     /// different standard distribution or distribution
     /// tenant](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move) in the *Amazon CloudFront Developer Guide*.
-    pub fn updateDomainAssociation(self: *Self, allocator: std.mem.Allocator, input: update_domain_association.UpdateDomainAssociationInput, options: update_domain_association.Options) !update_domain_association.UpdateDomainAssociationOutput {
+    pub fn updateDomainAssociation(self: *Self, allocator: std.mem.Allocator, input: update_domain_association.UpdateDomainAssociationInput, options: CallOptions) !update_domain_association.UpdateDomainAssociationOutput {
         return update_domain_association.execute(self, allocator, input, options);
     }
 
     /// Update a field-level encryption configuration.
-    pub fn updateFieldLevelEncryptionConfig(self: *Self, allocator: std.mem.Allocator, input: update_field_level_encryption_config.UpdateFieldLevelEncryptionConfigInput, options: update_field_level_encryption_config.Options) !update_field_level_encryption_config.UpdateFieldLevelEncryptionConfigOutput {
+    pub fn updateFieldLevelEncryptionConfig(self: *Self, allocator: std.mem.Allocator, input: update_field_level_encryption_config.UpdateFieldLevelEncryptionConfigInput, options: CallOptions) !update_field_level_encryption_config.UpdateFieldLevelEncryptionConfigOutput {
         return update_field_level_encryption_config.execute(self, allocator, input, options);
     }
 
     /// Update a field-level encryption profile.
-    pub fn updateFieldLevelEncryptionProfile(self: *Self, allocator: std.mem.Allocator, input: update_field_level_encryption_profile.UpdateFieldLevelEncryptionProfileInput, options: update_field_level_encryption_profile.Options) !update_field_level_encryption_profile.UpdateFieldLevelEncryptionProfileOutput {
+    pub fn updateFieldLevelEncryptionProfile(self: *Self, allocator: std.mem.Allocator, input: update_field_level_encryption_profile.UpdateFieldLevelEncryptionProfileInput, options: CallOptions) !update_field_level_encryption_profile.UpdateFieldLevelEncryptionProfileOutput {
         return update_field_level_encryption_profile.execute(self, allocator, input, options);
     }
 
@@ -1655,7 +1656,7 @@ pub const Client = struct {
     /// To update a function, you provide the function's name and version (`ETag`
     /// value) along with the updated function code. To get the name and version,
     /// you can use `ListFunctions` and `DescribeFunction`.
-    pub fn updateFunction(self: *Self, allocator: std.mem.Allocator, input: update_function.UpdateFunctionInput, options: update_function.Options) !update_function.UpdateFunctionOutput {
+    pub fn updateFunction(self: *Self, allocator: std.mem.Allocator, input: update_function.UpdateFunctionInput, options: CallOptions) !update_function.UpdateFunctionOutput {
         return update_function.execute(self, allocator, input, options);
     }
 
@@ -1670,17 +1671,17 @@ pub const Client = struct {
     ///   example, add or remove public key IDs.
     /// * Call `UpdateKeyGroup` with the entire key group object, including the
     ///   fields that you modified and those that you didn't.
-    pub fn updateKeyGroup(self: *Self, allocator: std.mem.Allocator, input: update_key_group.UpdateKeyGroupInput, options: update_key_group.Options) !update_key_group.UpdateKeyGroupOutput {
+    pub fn updateKeyGroup(self: *Self, allocator: std.mem.Allocator, input: update_key_group.UpdateKeyGroupInput, options: CallOptions) !update_key_group.UpdateKeyGroupOutput {
         return update_key_group.execute(self, allocator, input, options);
     }
 
     /// Specifies the key value store to update.
-    pub fn updateKeyValueStore(self: *Self, allocator: std.mem.Allocator, input: update_key_value_store.UpdateKeyValueStoreInput, options: update_key_value_store.Options) !update_key_value_store.UpdateKeyValueStoreOutput {
+    pub fn updateKeyValueStore(self: *Self, allocator: std.mem.Allocator, input: update_key_value_store.UpdateKeyValueStoreInput, options: CallOptions) !update_key_value_store.UpdateKeyValueStoreOutput {
         return update_key_value_store.execute(self, allocator, input, options);
     }
 
     /// Updates a CloudFront origin access control.
-    pub fn updateOriginAccessControl(self: *Self, allocator: std.mem.Allocator, input: update_origin_access_control.UpdateOriginAccessControlInput, options: update_origin_access_control.Options) !update_origin_access_control.UpdateOriginAccessControlOutput {
+    pub fn updateOriginAccessControl(self: *Self, allocator: std.mem.Allocator, input: update_origin_access_control.UpdateOriginAccessControlInput, options: CallOptions) !update_origin_access_control.UpdateOriginAccessControlOutput {
         return update_origin_access_control.execute(self, allocator, input, options);
     }
 
@@ -1697,13 +1698,13 @@ pub const Client = struct {
     /// * Call `UpdateOriginRequestPolicy` by providing the entire origin request
     ///   policy configuration, including the fields that you modified and those
     ///   that you didn't.
-    pub fn updateOriginRequestPolicy(self: *Self, allocator: std.mem.Allocator, input: update_origin_request_policy.UpdateOriginRequestPolicyInput, options: update_origin_request_policy.Options) !update_origin_request_policy.UpdateOriginRequestPolicyOutput {
+    pub fn updateOriginRequestPolicy(self: *Self, allocator: std.mem.Allocator, input: update_origin_request_policy.UpdateOriginRequestPolicyInput, options: CallOptions) !update_origin_request_policy.UpdateOriginRequestPolicyOutput {
         return update_origin_request_policy.execute(self, allocator, input, options);
     }
 
     /// Update public key information. Note that the only value you can change is
     /// the comment.
-    pub fn updatePublicKey(self: *Self, allocator: std.mem.Allocator, input: update_public_key.UpdatePublicKeyInput, options: update_public_key.Options) !update_public_key.UpdatePublicKeyOutput {
+    pub fn updatePublicKey(self: *Self, allocator: std.mem.Allocator, input: update_public_key.UpdatePublicKeyInput, options: CallOptions) !update_public_key.UpdatePublicKeyOutput {
         return update_public_key.execute(self, allocator, input, options);
     }
 
@@ -1722,7 +1723,7 @@ pub const Client = struct {
     ///   and those that you didn't.
     ///
     /// You cannot update a real-time log configuration's `Name` or `ARN`.
-    pub fn updateRealtimeLogConfig(self: *Self, allocator: std.mem.Allocator, input: update_realtime_log_config.UpdateRealtimeLogConfigInput, options: update_realtime_log_config.Options) !update_realtime_log_config.UpdateRealtimeLogConfigOutput {
+    pub fn updateRealtimeLogConfig(self: *Self, allocator: std.mem.Allocator, input: update_realtime_log_config.UpdateRealtimeLogConfigInput, options: CallOptions) !update_realtime_log_config.UpdateRealtimeLogConfigOutput {
         return update_realtime_log_config.execute(self, allocator, input, options);
     }
 
@@ -1739,22 +1740,22 @@ pub const Client = struct {
     /// * Call `UpdateResponseHeadersPolicy`, providing the entire response headers
     ///   policy configuration, including the fields that you modified and those
     ///   that you didn't.
-    pub fn updateResponseHeadersPolicy(self: *Self, allocator: std.mem.Allocator, input: update_response_headers_policy.UpdateResponseHeadersPolicyInput, options: update_response_headers_policy.Options) !update_response_headers_policy.UpdateResponseHeadersPolicyOutput {
+    pub fn updateResponseHeadersPolicy(self: *Self, allocator: std.mem.Allocator, input: update_response_headers_policy.UpdateResponseHeadersPolicyInput, options: CallOptions) !update_response_headers_policy.UpdateResponseHeadersPolicyOutput {
         return update_response_headers_policy.execute(self, allocator, input, options);
     }
 
     /// Update a streaming distribution.
-    pub fn updateStreamingDistribution(self: *Self, allocator: std.mem.Allocator, input: update_streaming_distribution.UpdateStreamingDistributionInput, options: update_streaming_distribution.Options) !update_streaming_distribution.UpdateStreamingDistributionOutput {
+    pub fn updateStreamingDistribution(self: *Self, allocator: std.mem.Allocator, input: update_streaming_distribution.UpdateStreamingDistributionInput, options: CallOptions) !update_streaming_distribution.UpdateStreamingDistributionOutput {
         return update_streaming_distribution.execute(self, allocator, input, options);
     }
 
     /// Updates a trust store.
-    pub fn updateTrustStore(self: *Self, allocator: std.mem.Allocator, input: update_trust_store.UpdateTrustStoreInput, options: update_trust_store.Options) !update_trust_store.UpdateTrustStoreOutput {
+    pub fn updateTrustStore(self: *Self, allocator: std.mem.Allocator, input: update_trust_store.UpdateTrustStoreInput, options: CallOptions) !update_trust_store.UpdateTrustStoreOutput {
         return update_trust_store.execute(self, allocator, input, options);
     }
 
     /// Update an Amazon CloudFront VPC origin in your account.
-    pub fn updateVpcOrigin(self: *Self, allocator: std.mem.Allocator, input: update_vpc_origin.UpdateVpcOriginInput, options: update_vpc_origin.Options) !update_vpc_origin.UpdateVpcOriginOutput {
+    pub fn updateVpcOrigin(self: *Self, allocator: std.mem.Allocator, input: update_vpc_origin.UpdateVpcOriginInput, options: CallOptions) !update_vpc_origin.UpdateVpcOriginOutput {
         return update_vpc_origin.execute(self, allocator, input, options);
     }
 
@@ -1762,7 +1763,7 @@ pub const Client = struct {
     /// checks whether your domain name points to the correct routing endpoint of
     /// the connection group, such as d111111abcdef8.cloudfront.net. You can use
     /// this API operation to troubleshoot and resolve DNS configuration issues.
-    pub fn verifyDnsConfiguration(self: *Self, allocator: std.mem.Allocator, input: verify_dns_configuration.VerifyDnsConfigurationInput, options: verify_dns_configuration.Options) !verify_dns_configuration.VerifyDnsConfigurationOutput {
+    pub fn verifyDnsConfiguration(self: *Self, allocator: std.mem.Allocator, input: verify_dns_configuration.VerifyDnsConfigurationInput, options: CallOptions) !verify_dns_configuration.VerifyDnsConfigurationOutput {
         return verify_dns_configuration.execute(self, allocator, input, options);
     }
 

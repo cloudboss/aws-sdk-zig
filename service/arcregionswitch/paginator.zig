@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_plan_evaluation_status = @import("get_plan_evaluation_status.zig");
@@ -21,7 +22,7 @@ pub const GetPlanEvaluationStatusPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_plan_evaluation_status.Options) !get_plan_evaluation_status.GetPlanEvaluationStatusOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_plan_evaluation_status.GetPlanEvaluationStatusOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -62,7 +63,7 @@ pub const GetPlanExecutionPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_plan_execution.Options) !get_plan_execution.GetPlanExecutionOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_plan_execution.GetPlanExecutionOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -103,7 +104,7 @@ pub const ListPlanExecutionEventsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_plan_execution_events.Options) !list_plan_execution_events.ListPlanExecutionEventsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_plan_execution_events.ListPlanExecutionEventsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -144,7 +145,7 @@ pub const ListPlanExecutionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_plan_executions.Options) !list_plan_executions.ListPlanExecutionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_plan_executions.ListPlanExecutionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -185,7 +186,7 @@ pub const ListPlansPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_plans.Options) !list_plans.ListPlansOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_plans.ListPlansOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -226,7 +227,7 @@ pub const ListPlansInRegionPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_plans_in_region.Options) !list_plans_in_region.ListPlansInRegionOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_plans_in_region.ListPlansInRegionOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -267,7 +268,7 @@ pub const ListRoute53HealthChecksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_route_53_health_checks.Options) !list_route_53_health_checks.ListRoute53HealthChecksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_route_53_health_checks.ListRoute53HealthChecksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -308,7 +309,7 @@ pub const ListRoute53HealthChecksInRegionPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_route_53_health_checks_in_region.Options) !list_route_53_health_checks_in_region.ListRoute53HealthChecksInRegionOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_route_53_health_checks_in_region.ListRoute53HealthChecksInRegionOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

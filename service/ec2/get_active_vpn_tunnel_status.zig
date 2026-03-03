@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ActiveVpnTunnelStatus = @import("active_vpn_tunnel_status.zig").ActiveVpnTunnelStatus;
 const serde = @import("serde.zig");
@@ -24,11 +25,7 @@ pub const GetActiveVpnTunnelStatusOutput = struct {
     active_vpn_tunnel_status: ?ActiveVpnTunnelStatus = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetActiveVpnTunnelStatusInput, options: Options) !GetActiveVpnTunnelStatusOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetActiveVpnTunnelStatusInput, options: CallOptions) !GetActiveVpnTunnelStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

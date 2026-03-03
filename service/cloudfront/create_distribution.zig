@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DistributionConfig = @import("distribution_config.zig").DistributionConfig;
 const Distribution = @import("distribution.zig").Distribution;
@@ -23,11 +24,7 @@ pub const CreateDistributionOutput = struct {
     location: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDistributionInput, options: Options) !CreateDistributionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDistributionInput, options: CallOptions) !CreateDistributionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

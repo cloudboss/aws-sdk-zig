@@ -19,6 +19,7 @@ const put_resource_policy = @import("put_resource_policy.zig");
 const restore_backup = @import("restore_backup.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -53,7 +54,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// backup in a different Amazon Web Services account.
-    pub fn copyBackupToRegion(self: *Self, allocator: std.mem.Allocator, input: copy_backup_to_region.CopyBackupToRegionInput, options: copy_backup_to_region.Options) !copy_backup_to_region.CopyBackupToRegionOutput {
+    pub fn copyBackupToRegion(self: *Self, allocator: std.mem.Allocator, input: copy_backup_to_region.CopyBackupToRegionInput, options: CallOptions) !copy_backup_to_region.CopyBackupToRegionOutput {
         return copy_backup_to_region.execute(self, allocator, input, options);
     }
 
@@ -62,7 +63,7 @@ pub const Client = struct {
     /// **Cross-account use:** Yes. To perform this operation with an CloudHSM
     /// backup in a different AWS account, specify the full backup
     /// ARN in the value of the SourceBackupId parameter.
-    pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: create_cluster.Options) !create_cluster.CreateClusterOutput {
+    pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: CallOptions) !create_cluster.CreateClusterOutput {
         return create_cluster.execute(self, allocator, input, options);
     }
 
@@ -71,7 +72,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// cluster in a different Amazon Web Service account.
-    pub fn createHsm(self: *Self, allocator: std.mem.Allocator, input: create_hsm.CreateHsmInput, options: create_hsm.Options) !create_hsm.CreateHsmOutput {
+    pub fn createHsm(self: *Self, allocator: std.mem.Allocator, input: create_hsm.CreateHsmInput, options: CallOptions) !create_hsm.CreateHsmOutput {
         return create_hsm.execute(self, allocator, input, options);
     }
 
@@ -82,7 +83,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// backup in a different Amazon Web Services account.
-    pub fn deleteBackup(self: *Self, allocator: std.mem.Allocator, input: delete_backup.DeleteBackupInput, options: delete_backup.Options) !delete_backup.DeleteBackupOutput {
+    pub fn deleteBackup(self: *Self, allocator: std.mem.Allocator, input: delete_backup.DeleteBackupInput, options: CallOptions) !delete_backup.DeleteBackupOutput {
         return delete_backup.execute(self, allocator, input, options);
     }
 
@@ -93,7 +94,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// cluster in a different Amazon Web Services account.
-    pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: delete_cluster.Options) !delete_cluster.DeleteClusterOutput {
+    pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: CallOptions) !delete_cluster.DeleteClusterOutput {
         return delete_cluster.execute(self, allocator, input, options);
     }
 
@@ -106,7 +107,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// hsm in a different Amazon Web Services account.
-    pub fn deleteHsm(self: *Self, allocator: std.mem.Allocator, input: delete_hsm.DeleteHsmInput, options: delete_hsm.Options) !delete_hsm.DeleteHsmOutput {
+    pub fn deleteHsm(self: *Self, allocator: std.mem.Allocator, input: delete_hsm.DeleteHsmInput, options: CallOptions) !delete_hsm.DeleteHsmOutput {
         return delete_hsm.execute(self, allocator, input, options);
     }
 
@@ -118,7 +119,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// resource in a different Amazon Web Services account.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -137,7 +138,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** Yes. Customers can describe backups in other Amazon
     /// Web Services accounts that are shared with them.
-    pub fn describeBackups(self: *Self, allocator: std.mem.Allocator, input: describe_backups.DescribeBackupsInput, options: describe_backups.Options) !describe_backups.DescribeBackupsOutput {
+    pub fn describeBackups(self: *Self, allocator: std.mem.Allocator, input: describe_backups.DescribeBackupsInput, options: CallOptions) !describe_backups.DescribeBackupsOutput {
         return describe_backups.execute(self, allocator, input, options);
     }
 
@@ -154,7 +155,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on CloudHSM
     /// clusters in a different Amazon Web Services account.
-    pub fn describeClusters(self: *Self, allocator: std.mem.Allocator, input: describe_clusters.DescribeClustersInput, options: describe_clusters.Options) !describe_clusters.DescribeClustersOutput {
+    pub fn describeClusters(self: *Self, allocator: std.mem.Allocator, input: describe_clusters.DescribeClustersInput, options: CallOptions) !describe_clusters.DescribeClustersOutput {
         return describe_clusters.execute(self, allocator, input, options);
     }
 
@@ -162,7 +163,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// resource in a different Amazon Web Services account.
-    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
         return get_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -176,7 +177,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// cluster in a different Amazon Web Services account.
-    pub fn initializeCluster(self: *Self, allocator: std.mem.Allocator, input: initialize_cluster.InitializeClusterInput, options: initialize_cluster.Options) !initialize_cluster.InitializeClusterOutput {
+    pub fn initializeCluster(self: *Self, allocator: std.mem.Allocator, input: initialize_cluster.InitializeClusterInput, options: CallOptions) !initialize_cluster.InitializeClusterOutput {
         return initialize_cluster.execute(self, allocator, input, options);
     }
 
@@ -193,7 +194,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// resource in a different Amazon Web Services account.
-    pub fn listTags(self: *Self, allocator: std.mem.Allocator, input: list_tags.ListTagsInput, options: list_tags.Options) !list_tags.ListTagsOutput {
+    pub fn listTags(self: *Self, allocator: std.mem.Allocator, input: list_tags.ListTagsInput, options: CallOptions) !list_tags.ListTagsOutput {
         return list_tags.execute(self, allocator, input, options);
     }
 
@@ -201,7 +202,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// backup in a different Amazon Web Services account.
-    pub fn modifyBackupAttributes(self: *Self, allocator: std.mem.Allocator, input: modify_backup_attributes.ModifyBackupAttributesInput, options: modify_backup_attributes.Options) !modify_backup_attributes.ModifyBackupAttributesOutput {
+    pub fn modifyBackupAttributes(self: *Self, allocator: std.mem.Allocator, input: modify_backup_attributes.ModifyBackupAttributesInput, options: CallOptions) !modify_backup_attributes.ModifyBackupAttributesOutput {
         return modify_backup_attributes.execute(self, allocator, input, options);
     }
 
@@ -209,7 +210,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// cluster in a different Amazon Web Services account.
-    pub fn modifyCluster(self: *Self, allocator: std.mem.Allocator, input: modify_cluster.ModifyClusterInput, options: modify_cluster.Options) !modify_cluster.ModifyClusterOutput {
+    pub fn modifyCluster(self: *Self, allocator: std.mem.Allocator, input: modify_cluster.ModifyClusterInput, options: CallOptions) !modify_cluster.ModifyClusterOutput {
         return modify_cluster.execute(self, allocator, input, options);
     }
 
@@ -242,7 +243,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// resource in a different Amazon Web Services account.
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -252,7 +253,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// backup in a different Amazon Web Services account.
-    pub fn restoreBackup(self: *Self, allocator: std.mem.Allocator, input: restore_backup.RestoreBackupInput, options: restore_backup.Options) !restore_backup.RestoreBackupOutput {
+    pub fn restoreBackup(self: *Self, allocator: std.mem.Allocator, input: restore_backup.RestoreBackupInput, options: CallOptions) !restore_backup.RestoreBackupOutput {
         return restore_backup.execute(self, allocator, input, options);
     }
 
@@ -260,7 +261,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// resource in a different Amazon Web Services account.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -268,7 +269,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use:** No. You cannot perform this operation on an CloudHSM
     /// resource in a different Amazon Web Services account.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

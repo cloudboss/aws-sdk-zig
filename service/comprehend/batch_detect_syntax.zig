@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SyntaxLanguageCode = @import("syntax_language_code.zig").SyntaxLanguageCode;
 const BatchItemError = @import("batch_item_error.zig").BatchItemError;
@@ -50,11 +51,7 @@ pub const BatchDetectSyntaxOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDetectSyntaxInput, options: Options) !BatchDetectSyntaxOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDetectSyntaxInput, options: CallOptions) !BatchDetectSyntaxOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

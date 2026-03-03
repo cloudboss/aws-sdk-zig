@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PipelineMetadata = @import("pipeline_metadata.zig").PipelineMetadata;
 const PipelineDeclaration = @import("pipeline_declaration.zig").PipelineDeclaration;
@@ -39,11 +40,7 @@ pub const GetPipelineOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetPipelineInput, options: Options) !GetPipelineOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetPipelineInput, options: CallOptions) !GetPipelineOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

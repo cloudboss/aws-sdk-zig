@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DatasourcePackageIngestDetail = @import("datasource_package_ingest_detail.zig").DatasourcePackageIngestDetail;
 
@@ -43,11 +44,7 @@ pub const ListDatasourcePackagesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDatasourcePackagesInput, options: Options) !ListDatasourcePackagesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDatasourcePackagesInput, options: CallOptions) !ListDatasourcePackagesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

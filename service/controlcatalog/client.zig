@@ -7,6 +7,7 @@ const list_control_mappings = @import("list_control_mappings.zig");
 const list_controls = @import("list_controls.zig");
 const list_domains = @import("list_domains.zig");
 const list_objectives = @import("list_objectives.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -47,7 +48,7 @@ pub const Client = struct {
     /// field do not show the `DeployableRegions` field, because it does not apply.
     /// Controls that have the value `REGIONAL` in the `Scope` field return a value
     /// for the `DeployableRegions` field, as shown in the example.
-    pub fn getControl(self: *Self, allocator: std.mem.Allocator, input: get_control.GetControlInput, options: get_control.Options) !get_control.GetControlOutput {
+    pub fn getControl(self: *Self, allocator: std.mem.Allocator, input: get_control.GetControlInput, options: CallOptions) !get_control.GetControlOutput {
         return get_control.execute(self, allocator, input, options);
     }
 
@@ -57,14 +58,14 @@ pub const Client = struct {
     /// You can apply an optional filter to see common controls that have a specific
     /// objective. If you don’t provide a filter, the operation returns all common
     /// controls.
-    pub fn listCommonControls(self: *Self, allocator: std.mem.Allocator, input: list_common_controls.ListCommonControlsInput, options: list_common_controls.Options) !list_common_controls.ListCommonControlsOutput {
+    pub fn listCommonControls(self: *Self, allocator: std.mem.Allocator, input: list_common_controls.ListCommonControlsInput, options: CallOptions) !list_common_controls.ListCommonControlsOutput {
         return list_common_controls.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of control mappings from the Control Catalog.
     /// Control mappings show relationships between controls and other entities,
     /// such as common controls or compliance frameworks.
-    pub fn listControlMappings(self: *Self, allocator: std.mem.Allocator, input: list_control_mappings.ListControlMappingsInput, options: list_control_mappings.Options) !list_control_mappings.ListControlMappingsOutput {
+    pub fn listControlMappings(self: *Self, allocator: std.mem.Allocator, input: list_control_mappings.ListControlMappingsInput, options: CallOptions) !list_control_mappings.ListControlMappingsOutput {
         return list_control_mappings.execute(self, allocator, input, options);
     }
 
@@ -72,12 +73,12 @@ pub const Client = struct {
     /// library. Allows you to discover available controls. The list of controls is
     /// given as structures of type *controlSummary*. The ARN is returned in the
     /// global *controlcatalog* format, as shown in the examples.
-    pub fn listControls(self: *Self, allocator: std.mem.Allocator, input: list_controls.ListControlsInput, options: list_controls.Options) !list_controls.ListControlsOutput {
+    pub fn listControls(self: *Self, allocator: std.mem.Allocator, input: list_controls.ListControlsInput, options: CallOptions) !list_controls.ListControlsOutput {
         return list_controls.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of domains from the Control Catalog.
-    pub fn listDomains(self: *Self, allocator: std.mem.Allocator, input: list_domains.ListDomainsInput, options: list_domains.Options) !list_domains.ListDomainsOutput {
+    pub fn listDomains(self: *Self, allocator: std.mem.Allocator, input: list_domains.ListDomainsInput, options: CallOptions) !list_domains.ListDomainsOutput {
         return list_domains.execute(self, allocator, input, options);
     }
 
@@ -86,7 +87,7 @@ pub const Client = struct {
     /// You can apply an optional filter to see the objectives that belong to a
     /// specific domain. If you don’t provide a filter, the operation returns all
     /// objectives.
-    pub fn listObjectives(self: *Self, allocator: std.mem.Allocator, input: list_objectives.ListObjectivesInput, options: list_objectives.Options) !list_objectives.ListObjectivesOutput {
+    pub fn listObjectives(self: *Self, allocator: std.mem.Allocator, input: list_objectives.ListObjectivesInput, options: CallOptions) !list_objectives.ListObjectivesOutput {
         return list_objectives.execute(self, allocator, input, options);
     }
 

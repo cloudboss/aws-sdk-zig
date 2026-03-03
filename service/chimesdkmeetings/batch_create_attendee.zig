@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CreateAttendeeRequestItem = @import("create_attendee_request_item.zig").CreateAttendeeRequestItem;
 const Attendee = @import("attendee.zig").Attendee;
@@ -34,11 +35,7 @@ pub const BatchCreateAttendeeOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchCreateAttendeeInput, options: Options) !BatchCreateAttendeeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchCreateAttendeeInput, options: CallOptions) !BatchCreateAttendeeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

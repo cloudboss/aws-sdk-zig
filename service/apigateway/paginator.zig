@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_api_keys = @import("get_api_keys.zig");
@@ -25,7 +26,7 @@ pub const GetApiKeysPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_api_keys.Options) !get_api_keys.GetApiKeysOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_api_keys.GetApiKeysOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -66,7 +67,7 @@ pub const GetBasePathMappingsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_base_path_mappings.Options) !get_base_path_mappings.GetBasePathMappingsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_base_path_mappings.GetBasePathMappingsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -107,7 +108,7 @@ pub const GetClientCertificatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_client_certificates.Options) !get_client_certificates.GetClientCertificatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_client_certificates.GetClientCertificatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -148,7 +149,7 @@ pub const GetDeploymentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_deployments.Options) !get_deployments.GetDeploymentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_deployments.GetDeploymentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -189,7 +190,7 @@ pub const GetDomainNamesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_domain_names.Options) !get_domain_names.GetDomainNamesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_domain_names.GetDomainNamesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -230,7 +231,7 @@ pub const GetModelsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_models.Options) !get_models.GetModelsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_models.GetModelsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -271,7 +272,7 @@ pub const GetResourcesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_resources.Options) !get_resources.GetResourcesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_resources.GetResourcesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -312,7 +313,7 @@ pub const GetRestApisPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_rest_apis.Options) !get_rest_apis.GetRestApisOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_rest_apis.GetRestApisOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -353,7 +354,7 @@ pub const GetUsagePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_usage.Options) !get_usage.GetUsageOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_usage.GetUsageOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -394,7 +395,7 @@ pub const GetUsagePlanKeysPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_usage_plan_keys.Options) !get_usage_plan_keys.GetUsagePlanKeysOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_usage_plan_keys.GetUsagePlanKeysOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -435,7 +436,7 @@ pub const GetUsagePlansPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_usage_plans.Options) !get_usage_plans.GetUsagePlansOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_usage_plans.GetUsagePlansOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -476,7 +477,7 @@ pub const GetVpcLinksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_vpc_links.Options) !get_vpc_links.GetVpcLinksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_vpc_links.GetVpcLinksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

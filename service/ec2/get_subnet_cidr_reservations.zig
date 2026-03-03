@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const SubnetCidrReservation = @import("subnet_cidr_reservation.zig").SubnetCidrReservation;
@@ -57,11 +58,7 @@ pub const GetSubnetCidrReservationsOutput = struct {
     subnet_ipv_6_cidr_reservations: ?[]const SubnetCidrReservation = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSubnetCidrReservationsInput, options: Options) !GetSubnetCidrReservationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSubnetCidrReservationsInput, options: CallOptions) !GetSubnetCidrReservationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

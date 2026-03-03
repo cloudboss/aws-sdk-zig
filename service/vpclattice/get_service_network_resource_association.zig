@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DnsEntry = @import("dns_entry.zig").DnsEntry;
 const VerificationStatus = @import("verification_status.zig").VerificationStatus;
@@ -104,11 +105,7 @@ pub const GetServiceNetworkResourceAssociationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetServiceNetworkResourceAssociationInput, options: Options) !GetServiceNetworkResourceAssociationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetServiceNetworkResourceAssociationInput, options: CallOptions) !GetServiceNetworkResourceAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

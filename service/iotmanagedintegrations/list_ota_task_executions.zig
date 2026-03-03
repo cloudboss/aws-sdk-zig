@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const OtaTaskExecutionSummaries = @import("ota_task_execution_summaries.zig").OtaTaskExecutionSummaries;
 
@@ -35,11 +36,7 @@ pub const ListOtaTaskExecutionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOtaTaskExecutionsInput, options: Options) !ListOtaTaskExecutionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOtaTaskExecutionsInput, options: CallOptions) !ListOtaTaskExecutionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

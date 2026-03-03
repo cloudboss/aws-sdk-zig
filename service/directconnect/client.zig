@@ -64,6 +64,7 @@ const update_direct_connect_gateway = @import("update_direct_connect_gateway.zig
 const update_direct_connect_gateway_association = @import("update_direct_connect_gateway_association.zig");
 const update_lag = @import("update_lag.zig");
 const update_virtual_interface_attributes = @import("update_virtual_interface_attributes.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -95,7 +96,7 @@ pub const Client = struct {
 
     /// Accepts a proposal request to attach a virtual private gateway or transit
     /// gateway to a Direct Connect gateway.
-    pub fn acceptDirectConnectGatewayAssociationProposal(self: *Self, allocator: std.mem.Allocator, input: accept_direct_connect_gateway_association_proposal.AcceptDirectConnectGatewayAssociationProposalInput, options: accept_direct_connect_gateway_association_proposal.Options) !accept_direct_connect_gateway_association_proposal.AcceptDirectConnectGatewayAssociationProposalOutput {
+    pub fn acceptDirectConnectGatewayAssociationProposal(self: *Self, allocator: std.mem.Allocator, input: accept_direct_connect_gateway_association_proposal.AcceptDirectConnectGatewayAssociationProposalInput, options: CallOptions) !accept_direct_connect_gateway_association_proposal.AcceptDirectConnectGatewayAssociationProposalOutput {
         return accept_direct_connect_gateway_association_proposal.execute(self, allocator, input, options);
     }
 
@@ -107,7 +108,7 @@ pub const Client = struct {
     /// hosted connection on the specified interconnect.
     ///
     /// Intended for use by Direct Connect Partners only.
-    pub fn allocateConnectionOnInterconnect(self: *Self, allocator: std.mem.Allocator, input: allocate_connection_on_interconnect.AllocateConnectionOnInterconnectInput, options: allocate_connection_on_interconnect.Options) !allocate_connection_on_interconnect.AllocateConnectionOnInterconnectOutput {
+    pub fn allocateConnectionOnInterconnect(self: *Self, allocator: std.mem.Allocator, input: allocate_connection_on_interconnect.AllocateConnectionOnInterconnectInput, options: CallOptions) !allocate_connection_on_interconnect.AllocateConnectionOnInterconnectOutput {
         return allocate_connection_on_interconnect.execute(self, allocator, input, options);
     }
 
@@ -122,7 +123,7 @@ pub const Client = struct {
     /// the specified capacity.
     ///
     /// Intended for use by Direct Connect Partners only.
-    pub fn allocateHostedConnection(self: *Self, allocator: std.mem.Allocator, input: allocate_hosted_connection.AllocateHostedConnectionInput, options: allocate_hosted_connection.Options) !allocate_hosted_connection.AllocateHostedConnectionOutput {
+    pub fn allocateHostedConnection(self: *Self, allocator: std.mem.Allocator, input: allocate_hosted_connection.AllocateHostedConnectionInput, options: CallOptions) !allocate_hosted_connection.AllocateHostedConnectionOutput {
         return allocate_hosted_connection.execute(self, allocator, input, options);
     }
 
@@ -133,7 +134,7 @@ pub const Client = struct {
     /// using ConfirmPrivateVirtualInterface.
     /// Until then, the virtual interface is in the `Confirming` state and is not
     /// available to handle traffic.
-    pub fn allocatePrivateVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: allocate_private_virtual_interface.AllocatePrivateVirtualInterfaceInput, options: allocate_private_virtual_interface.Options) !allocate_private_virtual_interface.AllocatePrivateVirtualInterfaceOutput {
+    pub fn allocatePrivateVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: allocate_private_virtual_interface.AllocatePrivateVirtualInterfaceInput, options: CallOptions) !allocate_private_virtual_interface.AllocatePrivateVirtualInterfaceOutput {
         return allocate_private_virtual_interface.execute(self, allocator, input, options);
     }
 
@@ -151,7 +152,7 @@ pub const Client = struct {
     /// When creating an IPv6 public virtual interface, omit the Amazon address and
     /// customer address. IPv6 addresses are automatically assigned from
     /// the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.
-    pub fn allocatePublicVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: allocate_public_virtual_interface.AllocatePublicVirtualInterfaceInput, options: allocate_public_virtual_interface.Options) !allocate_public_virtual_interface.AllocatePublicVirtualInterfaceOutput {
+    pub fn allocatePublicVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: allocate_public_virtual_interface.AllocatePublicVirtualInterfaceInput, options: CallOptions) !allocate_public_virtual_interface.AllocatePublicVirtualInterfaceOutput {
         return allocate_public_virtual_interface.execute(self, allocator, input, options);
     }
 
@@ -166,7 +167,7 @@ pub const Client = struct {
     /// owner using ConfirmTransitVirtualInterface. Until this step has been
     /// completed, the transit virtual interface is in the `requested` state and is
     /// not available to handle traffic.
-    pub fn allocateTransitVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: allocate_transit_virtual_interface.AllocateTransitVirtualInterfaceInput, options: allocate_transit_virtual_interface.Options) !allocate_transit_virtual_interface.AllocateTransitVirtualInterfaceOutput {
+    pub fn allocateTransitVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: allocate_transit_virtual_interface.AllocateTransitVirtualInterfaceInput, options: CallOptions) !allocate_transit_virtual_interface.AllocateTransitVirtualInterfaceOutput {
         return allocate_transit_virtual_interface.execute(self, allocator, input, options);
     }
 
@@ -196,7 +197,7 @@ pub const Client = struct {
     /// LAG. If the interconnect was originally associated with a different LAG, the
     /// hosted
     /// connections remain associated with the original LAG.
-    pub fn associateConnectionWithLag(self: *Self, allocator: std.mem.Allocator, input: associate_connection_with_lag.AssociateConnectionWithLagInput, options: associate_connection_with_lag.Options) !associate_connection_with_lag.AssociateConnectionWithLagOutput {
+    pub fn associateConnectionWithLag(self: *Self, allocator: std.mem.Allocator, input: associate_connection_with_lag.AssociateConnectionWithLagInput, options: CallOptions) !associate_connection_with_lag.AssociateConnectionWithLagOutput {
         return associate_connection_with_lag.execute(self, allocator, input, options);
     }
 
@@ -211,7 +212,7 @@ pub const Client = struct {
     /// as it is being migrated.
     ///
     /// Intended for use by Direct Connect Partners only.
-    pub fn associateHostedConnection(self: *Self, allocator: std.mem.Allocator, input: associate_hosted_connection.AssociateHostedConnectionInput, options: associate_hosted_connection.Options) !associate_hosted_connection.AssociateHostedConnectionOutput {
+    pub fn associateHostedConnection(self: *Self, allocator: std.mem.Allocator, input: associate_hosted_connection.AssociateHostedConnectionInput, options: CallOptions) !associate_hosted_connection.AssociateHostedConnectionOutput {
         return associate_hosted_connection.execute(self, allocator, input, options);
     }
 
@@ -224,7 +225,7 @@ pub const Client = struct {
     /// For information about MAC Security (MACsec) key considerations, see [MACsec
     /// pre-shared CKN/CAK key considerations
     /// ](https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-key-consideration) in the *Direct Connect User Guide*.
-    pub fn associateMacSecKey(self: *Self, allocator: std.mem.Allocator, input: associate_mac_sec_key.AssociateMacSecKeyInput, options: associate_mac_sec_key.Options) !associate_mac_sec_key.AssociateMacSecKeyOutput {
+    pub fn associateMacSecKey(self: *Self, allocator: std.mem.Allocator, input: associate_mac_sec_key.AssociateMacSecKeyInput, options: CallOptions) !associate_mac_sec_key.AssociateMacSecKeyOutput {
         return associate_mac_sec_key.execute(self, allocator, input, options);
     }
 
@@ -247,7 +248,7 @@ pub const Client = struct {
     /// interface is currently associated. Additionally, the requester must own the
     /// connection
     /// or LAG for the association.
-    pub fn associateVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: associate_virtual_interface.AssociateVirtualInterfaceInput, options: associate_virtual_interface.Options) !associate_virtual_interface.AssociateVirtualInterfaceOutput {
+    pub fn associateVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: associate_virtual_interface.AssociateVirtualInterfaceInput, options: CallOptions) !associate_virtual_interface.AssociateVirtualInterfaceOutput {
         return associate_virtual_interface.execute(self, allocator, input, options);
     }
 
@@ -257,13 +258,13 @@ pub const Client = struct {
     /// and
     /// remains in this state until the owner confirms creation of the hosted
     /// connection.
-    pub fn confirmConnection(self: *Self, allocator: std.mem.Allocator, input: confirm_connection.ConfirmConnectionInput, options: confirm_connection.Options) !confirm_connection.ConfirmConnectionOutput {
+    pub fn confirmConnection(self: *Self, allocator: std.mem.Allocator, input: confirm_connection.ConfirmConnectionInput, options: CallOptions) !confirm_connection.ConfirmConnectionOutput {
         return confirm_connection.execute(self, allocator, input, options);
     }
 
     /// The confirmation of the terms of agreement when creating the connection/link
     /// aggregation group (LAG).
-    pub fn confirmCustomerAgreement(self: *Self, allocator: std.mem.Allocator, input: confirm_customer_agreement.ConfirmCustomerAgreementInput, options: confirm_customer_agreement.Options) !confirm_customer_agreement.ConfirmCustomerAgreementOutput {
+    pub fn confirmCustomerAgreement(self: *Self, allocator: std.mem.Allocator, input: confirm_customer_agreement.ConfirmCustomerAgreementInput, options: CallOptions) !confirm_customer_agreement.ConfirmCustomerAgreementOutput {
         return confirm_customer_agreement.execute(self, allocator, input, options);
     }
 
@@ -274,7 +275,7 @@ pub const Client = struct {
     /// created and attached to the specified virtual private gateway or Direct
     /// Connect gateway, and is
     /// made available to handle traffic.
-    pub fn confirmPrivateVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: confirm_private_virtual_interface.ConfirmPrivateVirtualInterfaceInput, options: confirm_private_virtual_interface.Options) !confirm_private_virtual_interface.ConfirmPrivateVirtualInterfaceOutput {
+    pub fn confirmPrivateVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: confirm_private_virtual_interface.ConfirmPrivateVirtualInterfaceInput, options: CallOptions) !confirm_private_virtual_interface.ConfirmPrivateVirtualInterfaceOutput {
         return confirm_private_virtual_interface.execute(self, allocator, input, options);
     }
 
@@ -284,7 +285,7 @@ pub const Client = struct {
     /// After the virtual interface owner makes this call, the specified virtual
     /// interface is
     /// created and made available to handle traffic.
-    pub fn confirmPublicVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: confirm_public_virtual_interface.ConfirmPublicVirtualInterfaceInput, options: confirm_public_virtual_interface.Options) !confirm_public_virtual_interface.ConfirmPublicVirtualInterfaceOutput {
+    pub fn confirmPublicVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: confirm_public_virtual_interface.ConfirmPublicVirtualInterfaceInput, options: CallOptions) !confirm_public_virtual_interface.ConfirmPublicVirtualInterfaceOutput {
         return confirm_public_virtual_interface.execute(self, allocator, input, options);
     }
 
@@ -294,7 +295,7 @@ pub const Client = struct {
     /// After the owner of the transit virtual interface makes this call, the
     /// specified transit virtual interface is created and made available to handle
     /// traffic.
-    pub fn confirmTransitVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: confirm_transit_virtual_interface.ConfirmTransitVirtualInterfaceInput, options: confirm_transit_virtual_interface.Options) !confirm_transit_virtual_interface.ConfirmTransitVirtualInterfaceOutput {
+    pub fn confirmTransitVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: confirm_transit_virtual_interface.ConfirmTransitVirtualInterfaceInput, options: CallOptions) !confirm_transit_virtual_interface.ConfirmTransitVirtualInterfaceOutput {
         return confirm_transit_virtual_interface.execute(self, allocator, input, options);
     }
 
@@ -327,7 +328,7 @@ pub const Client = struct {
     ///
     /// For a public virtual interface, the Autonomous System Number (ASN) must be
     /// private or already on the allow list for the virtual interface.
-    pub fn createBgpPeer(self: *Self, allocator: std.mem.Allocator, input: create_bgp_peer.CreateBGPPeerInput, options: create_bgp_peer.Options) !create_bgp_peer.CreateBGPPeerOutput {
+    pub fn createBgpPeer(self: *Self, allocator: std.mem.Allocator, input: create_bgp_peer.CreateBGPPeerInput, options: CallOptions) !create_bgp_peer.CreateBGPPeerOutput {
         return create_bgp_peer.execute(self, allocator, input, options);
     }
 
@@ -348,7 +349,7 @@ pub const Client = struct {
     /// same Direct Connect endpoint that hosts the specified LAG. If there are no
     /// available ports on the endpoint,
     /// the request fails and no connection is created.
-    pub fn createConnection(self: *Self, allocator: std.mem.Allocator, input: create_connection.CreateConnectionInput, options: create_connection.Options) !create_connection.CreateConnectionOutput {
+    pub fn createConnection(self: *Self, allocator: std.mem.Allocator, input: create_connection.CreateConnectionInput, options: CallOptions) !create_connection.CreateConnectionOutput {
         return create_connection.execute(self, allocator, input, options);
     }
 
@@ -363,7 +364,7 @@ pub const Client = struct {
     /// connect to a VPC in any Region, regardless of the Region in which the
     /// virtual interfaces
     /// are located, and pass traffic between them.
-    pub fn createDirectConnectGateway(self: *Self, allocator: std.mem.Allocator, input: create_direct_connect_gateway.CreateDirectConnectGatewayInput, options: create_direct_connect_gateway.Options) !create_direct_connect_gateway.CreateDirectConnectGatewayOutput {
+    pub fn createDirectConnectGateway(self: *Self, allocator: std.mem.Allocator, input: create_direct_connect_gateway.CreateDirectConnectGatewayInput, options: CallOptions) !create_direct_connect_gateway.CreateDirectConnectGatewayOutput {
         return create_direct_connect_gateway.execute(self, allocator, input, options);
     }
 
@@ -371,7 +372,7 @@ pub const Client = struct {
     /// private gateway. The virtual
     /// private gateway must be attached to a VPC and must not be associated with
     /// another Direct Connect gateway.
-    pub fn createDirectConnectGatewayAssociation(self: *Self, allocator: std.mem.Allocator, input: create_direct_connect_gateway_association.CreateDirectConnectGatewayAssociationInput, options: create_direct_connect_gateway_association.Options) !create_direct_connect_gateway_association.CreateDirectConnectGatewayAssociationOutput {
+    pub fn createDirectConnectGatewayAssociation(self: *Self, allocator: std.mem.Allocator, input: create_direct_connect_gateway_association.CreateDirectConnectGatewayAssociationInput, options: CallOptions) !create_direct_connect_gateway_association.CreateDirectConnectGatewayAssociationOutput {
         return create_direct_connect_gateway_association.execute(self, allocator, input, options);
     }
 
@@ -380,7 +381,7 @@ pub const Client = struct {
     ///
     /// You can associate a Direct Connect gateway and virtual private gateway or
     /// transit gateway that is owned by any Amazon Web Services account.
-    pub fn createDirectConnectGatewayAssociationProposal(self: *Self, allocator: std.mem.Allocator, input: create_direct_connect_gateway_association_proposal.CreateDirectConnectGatewayAssociationProposalInput, options: create_direct_connect_gateway_association_proposal.Options) !create_direct_connect_gateway_association_proposal.CreateDirectConnectGatewayAssociationProposalOutput {
+    pub fn createDirectConnectGatewayAssociationProposal(self: *Self, allocator: std.mem.Allocator, input: create_direct_connect_gateway_association_proposal.CreateDirectConnectGatewayAssociationProposalInput, options: CallOptions) !create_direct_connect_gateway_association_proposal.CreateDirectConnectGatewayAssociationProposalOutput {
         return create_direct_connect_gateway_association_proposal.execute(self, allocator, input, options);
     }
 
@@ -414,7 +415,7 @@ pub const Client = struct {
     /// them by the Direct Connect Partner.
     ///
     /// Intended for use by Direct Connect Partners only.
-    pub fn createInterconnect(self: *Self, allocator: std.mem.Allocator, input: create_interconnect.CreateInterconnectInput, options: create_interconnect.Options) !create_interconnect.CreateInterconnectOutput {
+    pub fn createInterconnect(self: *Self, allocator: std.mem.Allocator, input: create_interconnect.CreateInterconnectInput, options: CallOptions) !create_interconnect.CreateInterconnectOutput {
         return create_interconnect.execute(self, allocator, input, options);
     }
 
@@ -453,7 +454,7 @@ pub const Client = struct {
     /// automatically enabled to host sub-connections. For a LAG owned by a partner,
     /// any associated virtual
     /// interfaces cannot be directly configured.
-    pub fn createLag(self: *Self, allocator: std.mem.Allocator, input: create_lag.CreateLagInput, options: create_lag.Options) !create_lag.CreateLagOutput {
+    pub fn createLag(self: *Self, allocator: std.mem.Allocator, input: create_lag.CreateLagInput, options: CallOptions) !create_lag.CreateLagOutput {
         return create_lag.execute(self, allocator, input, options);
     }
 
@@ -477,7 +478,7 @@ pub const Client = struct {
     /// supports jumbo
     /// frames, call DescribeConnections. To check whether your virtual
     /// interface supports jumbo frames, call DescribeVirtualInterfaces.
-    pub fn createPrivateVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: create_private_virtual_interface.CreatePrivateVirtualInterfaceInput, options: create_private_virtual_interface.Options) !create_private_virtual_interface.CreatePrivateVirtualInterfaceOutput {
+    pub fn createPrivateVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: create_private_virtual_interface.CreatePrivateVirtualInterfaceInput, options: CallOptions) !create_private_virtual_interface.CreatePrivateVirtualInterfaceOutput {
         return create_private_virtual_interface.execute(self, allocator, input, options);
     }
 
@@ -490,7 +491,7 @@ pub const Client = struct {
     /// leave the `customer`
     /// and `amazon` address fields blank to use auto-assigned IPv6 space. Custom
     /// IPv6 addresses are not supported.
-    pub fn createPublicVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: create_public_virtual_interface.CreatePublicVirtualInterfaceInput, options: create_public_virtual_interface.Options) !create_public_virtual_interface.CreatePublicVirtualInterfaceOutput {
+    pub fn createPublicVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: create_public_virtual_interface.CreatePublicVirtualInterfaceInput, options: CallOptions) !create_public_virtual_interface.CreatePublicVirtualInterfaceOutput {
         return create_public_virtual_interface.execute(self, allocator, input, options);
     }
 
@@ -516,7 +517,7 @@ pub const Client = struct {
     /// to 30 seconds. To check whether your connection supports jumbo frames, call
     /// DescribeConnections. To check whether your virtual interface supports jumbo
     /// frames, call DescribeVirtualInterfaces.
-    pub fn createTransitVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: create_transit_virtual_interface.CreateTransitVirtualInterfaceInput, options: create_transit_virtual_interface.Options) !create_transit_virtual_interface.CreateTransitVirtualInterfaceOutput {
+    pub fn createTransitVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: create_transit_virtual_interface.CreateTransitVirtualInterfaceInput, options: CallOptions) !create_transit_virtual_interface.CreateTransitVirtualInterfaceOutput {
         return create_transit_virtual_interface.execute(self, allocator, input, options);
     }
 
@@ -524,7 +525,7 @@ pub const Client = struct {
     /// specified customer address and ASN.
     ///
     /// You cannot delete the last BGP peer from a virtual interface.
-    pub fn deleteBgpPeer(self: *Self, allocator: std.mem.Allocator, input: delete_bgp_peer.DeleteBGPPeerInput, options: delete_bgp_peer.Options) !delete_bgp_peer.DeleteBGPPeerOutput {
+    pub fn deleteBgpPeer(self: *Self, allocator: std.mem.Allocator, input: delete_bgp_peer.DeleteBGPPeerInput, options: CallOptions) !delete_bgp_peer.DeleteBGPPeerOutput {
         return delete_bgp_peer.execute(self, allocator, input, options);
     }
 
@@ -535,7 +536,7 @@ pub const Client = struct {
     /// If you are partnering with any third parties to connect with the Direct
     /// Connect location,
     /// you must cancel your service with them separately.
-    pub fn deleteConnection(self: *Self, allocator: std.mem.Allocator, input: delete_connection.DeleteConnectionInput, options: delete_connection.Options) !delete_connection.DeleteConnectionOutput {
+    pub fn deleteConnection(self: *Self, allocator: std.mem.Allocator, input: delete_connection.DeleteConnectionInput, options: CallOptions) !delete_connection.DeleteConnectionOutput {
         return delete_connection.execute(self, allocator, input, options);
     }
 
@@ -544,7 +545,7 @@ pub const Client = struct {
     /// attached to the Direct Connect gateway and disassociate all virtual private
     /// gateways associated
     /// with the Direct Connect gateway.
-    pub fn deleteDirectConnectGateway(self: *Self, allocator: std.mem.Allocator, input: delete_direct_connect_gateway.DeleteDirectConnectGatewayInput, options: delete_direct_connect_gateway.Options) !delete_direct_connect_gateway.DeleteDirectConnectGatewayOutput {
+    pub fn deleteDirectConnectGateway(self: *Self, allocator: std.mem.Allocator, input: delete_direct_connect_gateway.DeleteDirectConnectGatewayInput, options: CallOptions) !delete_direct_connect_gateway.DeleteDirectConnectGatewayOutput {
         return delete_direct_connect_gateway.execute(self, allocator, input, options);
     }
 
@@ -555,13 +556,13 @@ pub const Client = struct {
     /// Alternatively, if you own virtual gateway and a Direct Connect gateway
     /// association, you can specify the `virtualGatewayId` and
     /// `directConnectGatewayId` to delete an association.
-    pub fn deleteDirectConnectGatewayAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_direct_connect_gateway_association.DeleteDirectConnectGatewayAssociationInput, options: delete_direct_connect_gateway_association.Options) !delete_direct_connect_gateway_association.DeleteDirectConnectGatewayAssociationOutput {
+    pub fn deleteDirectConnectGatewayAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_direct_connect_gateway_association.DeleteDirectConnectGatewayAssociationInput, options: CallOptions) !delete_direct_connect_gateway_association.DeleteDirectConnectGatewayAssociationOutput {
         return delete_direct_connect_gateway_association.execute(self, allocator, input, options);
     }
 
     /// Deletes the association proposal request between the specified Direct
     /// Connect gateway and virtual private gateway or transit gateway.
-    pub fn deleteDirectConnectGatewayAssociationProposal(self: *Self, allocator: std.mem.Allocator, input: delete_direct_connect_gateway_association_proposal.DeleteDirectConnectGatewayAssociationProposalInput, options: delete_direct_connect_gateway_association_proposal.Options) !delete_direct_connect_gateway_association_proposal.DeleteDirectConnectGatewayAssociationProposalOutput {
+    pub fn deleteDirectConnectGatewayAssociationProposal(self: *Self, allocator: std.mem.Allocator, input: delete_direct_connect_gateway_association_proposal.DeleteDirectConnectGatewayAssociationProposalInput, options: CallOptions) !delete_direct_connect_gateway_association_proposal.DeleteDirectConnectGatewayAssociationProposalOutput {
         return delete_direct_connect_gateway_association_proposal.execute(self, allocator, input, options);
     }
 
@@ -569,19 +570,19 @@ pub const Client = struct {
     ///
     /// Intended for use
     /// by Direct Connect Partners only.
-    pub fn deleteInterconnect(self: *Self, allocator: std.mem.Allocator, input: delete_interconnect.DeleteInterconnectInput, options: delete_interconnect.Options) !delete_interconnect.DeleteInterconnectOutput {
+    pub fn deleteInterconnect(self: *Self, allocator: std.mem.Allocator, input: delete_interconnect.DeleteInterconnectInput, options: CallOptions) !delete_interconnect.DeleteInterconnectOutput {
         return delete_interconnect.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified link aggregation group (LAG). You cannot delete a LAG
     /// if it has active
     /// virtual interfaces or hosted connections.
-    pub fn deleteLag(self: *Self, allocator: std.mem.Allocator, input: delete_lag.DeleteLagInput, options: delete_lag.Options) !delete_lag.DeleteLagOutput {
+    pub fn deleteLag(self: *Self, allocator: std.mem.Allocator, input: delete_lag.DeleteLagInput, options: CallOptions) !delete_lag.DeleteLagOutput {
         return delete_lag.execute(self, allocator, input, options);
     }
 
     /// Deletes a virtual interface.
-    pub fn deleteVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: delete_virtual_interface.DeleteVirtualInterfaceInput, options: delete_virtual_interface.Options) !delete_virtual_interface.DeleteVirtualInterfaceOutput {
+    pub fn deleteVirtualInterface(self: *Self, allocator: std.mem.Allocator, input: delete_virtual_interface.DeleteVirtualInterfaceInput, options: CallOptions) !delete_virtual_interface.DeleteVirtualInterfaceOutput {
         return delete_virtual_interface.execute(self, allocator, input, options);
     }
 
@@ -596,12 +597,12 @@ pub const Client = struct {
     /// see [Requesting Cross Connects
     /// at Direct Connect
     /// Locations](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html) in the *Direct Connect User Guide*.
-    pub fn describeConnectionLoa(self: *Self, allocator: std.mem.Allocator, input: describe_connection_loa.DescribeConnectionLoaInput, options: describe_connection_loa.Options) !describe_connection_loa.DescribeConnectionLoaOutput {
+    pub fn describeConnectionLoa(self: *Self, allocator: std.mem.Allocator, input: describe_connection_loa.DescribeConnectionLoaInput, options: CallOptions) !describe_connection_loa.DescribeConnectionLoaOutput {
         return describe_connection_loa.execute(self, allocator, input, options);
     }
 
     /// Displays the specified connection or all connections in this Region.
-    pub fn describeConnections(self: *Self, allocator: std.mem.Allocator, input: describe_connections.DescribeConnectionsInput, options: describe_connections.Options) !describe_connections.DescribeConnectionsOutput {
+    pub fn describeConnections(self: *Self, allocator: std.mem.Allocator, input: describe_connections.DescribeConnectionsInput, options: CallOptions) !describe_connections.DescribeConnectionsOutput {
         return describe_connections.execute(self, allocator, input, options);
     }
 
@@ -611,19 +612,19 @@ pub const Client = struct {
     /// interconnect.
     ///
     /// Intended for use by Direct Connect Partners only.
-    pub fn describeConnectionsOnInterconnect(self: *Self, allocator: std.mem.Allocator, input: describe_connections_on_interconnect.DescribeConnectionsOnInterconnectInput, options: describe_connections_on_interconnect.Options) !describe_connections_on_interconnect.DescribeConnectionsOnInterconnectOutput {
+    pub fn describeConnectionsOnInterconnect(self: *Self, allocator: std.mem.Allocator, input: describe_connections_on_interconnect.DescribeConnectionsOnInterconnectInput, options: CallOptions) !describe_connections_on_interconnect.DescribeConnectionsOnInterconnectOutput {
         return describe_connections_on_interconnect.execute(self, allocator, input, options);
     }
 
     /// Get and view a list of customer agreements, along with their signed status
     /// and whether the customer is an NNIPartner, NNIPartnerV2, or a nonPartner.
-    pub fn describeCustomerMetadata(self: *Self, allocator: std.mem.Allocator, input: describe_customer_metadata.DescribeCustomerMetadataInput, options: describe_customer_metadata.Options) !describe_customer_metadata.DescribeCustomerMetadataOutput {
+    pub fn describeCustomerMetadata(self: *Self, allocator: std.mem.Allocator, input: describe_customer_metadata.DescribeCustomerMetadataInput, options: CallOptions) !describe_customer_metadata.DescribeCustomerMetadataOutput {
         return describe_customer_metadata.execute(self, allocator, input, options);
     }
 
     /// Describes one or more association proposals for connection between a virtual
     /// private gateway or transit gateway and a Direct Connect gateway.
-    pub fn describeDirectConnectGatewayAssociationProposals(self: *Self, allocator: std.mem.Allocator, input: describe_direct_connect_gateway_association_proposals.DescribeDirectConnectGatewayAssociationProposalsInput, options: describe_direct_connect_gateway_association_proposals.Options) !describe_direct_connect_gateway_association_proposals.DescribeDirectConnectGatewayAssociationProposalsOutput {
+    pub fn describeDirectConnectGatewayAssociationProposals(self: *Self, allocator: std.mem.Allocator, input: describe_direct_connect_gateway_association_proposals.DescribeDirectConnectGatewayAssociationProposalsInput, options: CallOptions) !describe_direct_connect_gateway_association_proposals.DescribeDirectConnectGatewayAssociationProposalsOutput {
         return describe_direct_connect_gateway_association_proposals.execute(self, allocator, input, options);
     }
 
@@ -663,7 +664,7 @@ pub const Client = struct {
     ///
     /// The response contains the Cloud WAN core network ID that the Direct Connect
     /// gateway is associated to.
-    pub fn describeDirectConnectGatewayAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_direct_connect_gateway_associations.DescribeDirectConnectGatewayAssociationsInput, options: describe_direct_connect_gateway_associations.Options) !describe_direct_connect_gateway_associations.DescribeDirectConnectGatewayAssociationsOutput {
+    pub fn describeDirectConnectGatewayAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_direct_connect_gateway_associations.DescribeDirectConnectGatewayAssociationsInput, options: CallOptions) !describe_direct_connect_gateway_associations.DescribeDirectConnectGatewayAssociationsOutput {
         return describe_direct_connect_gateway_associations.execute(self, allocator, input, options);
     }
 
@@ -677,13 +678,13 @@ pub const Client = struct {
     /// interface. If you specify both,
     /// the response contains the attachment between the Direct Connect gateway and
     /// the virtual interface.
-    pub fn describeDirectConnectGatewayAttachments(self: *Self, allocator: std.mem.Allocator, input: describe_direct_connect_gateway_attachments.DescribeDirectConnectGatewayAttachmentsInput, options: describe_direct_connect_gateway_attachments.Options) !describe_direct_connect_gateway_attachments.DescribeDirectConnectGatewayAttachmentsOutput {
+    pub fn describeDirectConnectGatewayAttachments(self: *Self, allocator: std.mem.Allocator, input: describe_direct_connect_gateway_attachments.DescribeDirectConnectGatewayAttachmentsInput, options: CallOptions) !describe_direct_connect_gateway_attachments.DescribeDirectConnectGatewayAttachmentsOutput {
         return describe_direct_connect_gateway_attachments.execute(self, allocator, input, options);
     }
 
     /// Lists all your Direct Connect gateways or only the specified Direct Connect
     /// gateway. Deleted Direct Connect gateways are not returned.
-    pub fn describeDirectConnectGateways(self: *Self, allocator: std.mem.Allocator, input: describe_direct_connect_gateways.DescribeDirectConnectGatewaysInput, options: describe_direct_connect_gateways.Options) !describe_direct_connect_gateways.DescribeDirectConnectGatewaysOutput {
+    pub fn describeDirectConnectGateways(self: *Self, allocator: std.mem.Allocator, input: describe_direct_connect_gateways.DescribeDirectConnectGatewaysInput, options: CallOptions) !describe_direct_connect_gateways.DescribeDirectConnectGatewaysOutput {
         return describe_direct_connect_gateways.execute(self, allocator, input, options);
     }
 
@@ -691,7 +692,7 @@ pub const Client = struct {
     /// interconnect or link aggregation group (LAG).
     ///
     /// Intended for use by Direct Connect Partners only.
-    pub fn describeHostedConnections(self: *Self, allocator: std.mem.Allocator, input: describe_hosted_connections.DescribeHostedConnectionsInput, options: describe_hosted_connections.Options) !describe_hosted_connections.DescribeHostedConnectionsOutput {
+    pub fn describeHostedConnections(self: *Self, allocator: std.mem.Allocator, input: describe_hosted_connections.DescribeHostedConnectionsInput, options: CallOptions) !describe_hosted_connections.DescribeHostedConnectionsOutput {
         return describe_hosted_connections.execute(self, allocator, input, options);
     }
 
@@ -705,18 +706,18 @@ pub const Client = struct {
     /// For more information, see [Requesting Cross Connects at Direct Connect
     /// Locations](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html)
     /// in the *Direct Connect User Guide*.
-    pub fn describeInterconnectLoa(self: *Self, allocator: std.mem.Allocator, input: describe_interconnect_loa.DescribeInterconnectLoaInput, options: describe_interconnect_loa.Options) !describe_interconnect_loa.DescribeInterconnectLoaOutput {
+    pub fn describeInterconnectLoa(self: *Self, allocator: std.mem.Allocator, input: describe_interconnect_loa.DescribeInterconnectLoaInput, options: CallOptions) !describe_interconnect_loa.DescribeInterconnectLoaOutput {
         return describe_interconnect_loa.execute(self, allocator, input, options);
     }
 
     /// Lists the interconnects owned by the Amazon Web Services account or only the
     /// specified interconnect.
-    pub fn describeInterconnects(self: *Self, allocator: std.mem.Allocator, input: describe_interconnects.DescribeInterconnectsInput, options: describe_interconnects.Options) !describe_interconnects.DescribeInterconnectsOutput {
+    pub fn describeInterconnects(self: *Self, allocator: std.mem.Allocator, input: describe_interconnects.DescribeInterconnectsInput, options: CallOptions) !describe_interconnects.DescribeInterconnectsOutput {
         return describe_interconnects.execute(self, allocator, input, options);
     }
 
     /// Describes all your link aggregation groups (LAG) or the specified LAG.
-    pub fn describeLags(self: *Self, allocator: std.mem.Allocator, input: describe_lags.DescribeLagsInput, options: describe_lags.Options) !describe_lags.DescribeLagsOutput {
+    pub fn describeLags(self: *Self, allocator: std.mem.Allocator, input: describe_lags.DescribeLagsInput, options: CallOptions) !describe_lags.DescribeLagsOutput {
         return describe_lags.execute(self, allocator, input, options);
     }
 
@@ -729,24 +730,24 @@ pub const Client = struct {
     /// more information, see [Requesting Cross Connects at Direct Connect
     /// Locations](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html)
     /// in the *Direct Connect User Guide*.
-    pub fn describeLoa(self: *Self, allocator: std.mem.Allocator, input: describe_loa.DescribeLoaInput, options: describe_loa.Options) !describe_loa.DescribeLoaOutput {
+    pub fn describeLoa(self: *Self, allocator: std.mem.Allocator, input: describe_loa.DescribeLoaInput, options: CallOptions) !describe_loa.DescribeLoaOutput {
         return describe_loa.execute(self, allocator, input, options);
     }
 
     /// Lists the Direct Connect locations in the current Amazon Web Services
     /// Region. These are the locations that can be selected when calling
     /// CreateConnection or CreateInterconnect.
-    pub fn describeLocations(self: *Self, allocator: std.mem.Allocator, input: describe_locations.DescribeLocationsInput, options: describe_locations.Options) !describe_locations.DescribeLocationsOutput {
+    pub fn describeLocations(self: *Self, allocator: std.mem.Allocator, input: describe_locations.DescribeLocationsInput, options: CallOptions) !describe_locations.DescribeLocationsOutput {
         return describe_locations.execute(self, allocator, input, options);
     }
 
     /// Details about the router.
-    pub fn describeRouterConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_router_configuration.DescribeRouterConfigurationInput, options: describe_router_configuration.Options) !describe_router_configuration.DescribeRouterConfigurationOutput {
+    pub fn describeRouterConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_router_configuration.DescribeRouterConfigurationInput, options: CallOptions) !describe_router_configuration.DescribeRouterConfigurationOutput {
         return describe_router_configuration.execute(self, allocator, input, options);
     }
 
     /// Describes the tags associated with the specified Direct Connect resources.
-    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: describe_tags.Options) !describe_tags.DescribeTagsOutput {
+    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: CallOptions) !describe_tags.DescribeTagsOutput {
         return describe_tags.execute(self, allocator, input, options);
     }
 
@@ -757,7 +758,7 @@ pub const Client = struct {
     ///
     /// You can create one or more Direct Connect private virtual interfaces linked
     /// to a virtual private gateway.
-    pub fn describeVirtualGateways(self: *Self, allocator: std.mem.Allocator, input: describe_virtual_gateways.DescribeVirtualGatewaysInput, options: describe_virtual_gateways.Options) !describe_virtual_gateways.DescribeVirtualGatewaysOutput {
+    pub fn describeVirtualGateways(self: *Self, allocator: std.mem.Allocator, input: describe_virtual_gateways.DescribeVirtualGatewaysInput, options: CallOptions) !describe_virtual_gateways.DescribeVirtualGatewaysOutput {
         return describe_virtual_gateways.execute(self, allocator, input, options);
     }
 
@@ -779,7 +780,7 @@ pub const Client = struct {
     /// * If you're using `asnLong`, the response returns a value of `0` (zero) for
     ///   the `asn` attribute because it exceeds the highest ASN value of
     ///   2,147,483,647 that it can support
-    pub fn describeVirtualInterfaces(self: *Self, allocator: std.mem.Allocator, input: describe_virtual_interfaces.DescribeVirtualInterfacesInput, options: describe_virtual_interfaces.Options) !describe_virtual_interfaces.DescribeVirtualInterfacesOutput {
+    pub fn describeVirtualInterfaces(self: *Self, allocator: std.mem.Allocator, input: describe_virtual_interfaces.DescribeVirtualInterfacesInput, options: CallOptions) !describe_virtual_interfaces.DescribeVirtualInterfacesOutput {
         return describe_virtual_interfaces.execute(self, allocator, input, options);
     }
 
@@ -801,18 +802,18 @@ pub const Client = struct {
     /// member of the LAG. If all connections are disassociated, the LAG continues
     /// to exist as
     /// an empty LAG with no physical connections.
-    pub fn disassociateConnectionFromLag(self: *Self, allocator: std.mem.Allocator, input: disassociate_connection_from_lag.DisassociateConnectionFromLagInput, options: disassociate_connection_from_lag.Options) !disassociate_connection_from_lag.DisassociateConnectionFromLagOutput {
+    pub fn disassociateConnectionFromLag(self: *Self, allocator: std.mem.Allocator, input: disassociate_connection_from_lag.DisassociateConnectionFromLagInput, options: CallOptions) !disassociate_connection_from_lag.DisassociateConnectionFromLagOutput {
         return disassociate_connection_from_lag.execute(self, allocator, input, options);
     }
 
     /// Removes the association between a MAC Security (MACsec) security key and a
     /// Direct Connect connection.
-    pub fn disassociateMacSecKey(self: *Self, allocator: std.mem.Allocator, input: disassociate_mac_sec_key.DisassociateMacSecKeyInput, options: disassociate_mac_sec_key.Options) !disassociate_mac_sec_key.DisassociateMacSecKeyOutput {
+    pub fn disassociateMacSecKey(self: *Self, allocator: std.mem.Allocator, input: disassociate_mac_sec_key.DisassociateMacSecKeyInput, options: CallOptions) !disassociate_mac_sec_key.DisassociateMacSecKeyOutput {
         return disassociate_mac_sec_key.execute(self, allocator, input, options);
     }
 
     /// Lists the virtual interface failover test history.
-    pub fn listVirtualInterfaceTestHistory(self: *Self, allocator: std.mem.Allocator, input: list_virtual_interface_test_history.ListVirtualInterfaceTestHistoryInput, options: list_virtual_interface_test_history.Options) !list_virtual_interface_test_history.ListVirtualInterfaceTestHistoryOutput {
+    pub fn listVirtualInterfaceTestHistory(self: *Self, allocator: std.mem.Allocator, input: list_virtual_interface_test_history.ListVirtualInterfaceTestHistoryInput, options: CallOptions) !list_virtual_interface_test_history.ListVirtualInterfaceTestHistoryOutput {
         return list_virtual_interface_test_history.execute(self, allocator, input, options);
     }
 
@@ -828,12 +829,12 @@ pub const Client = struct {
     ///
     /// If you need to stop the test before the test interval completes, use
     /// [StopBgpFailoverTest](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_StopBgpFailoverTest.html).
-    pub fn startBgpFailoverTest(self: *Self, allocator: std.mem.Allocator, input: start_bgp_failover_test.StartBgpFailoverTestInput, options: start_bgp_failover_test.Options) !start_bgp_failover_test.StartBgpFailoverTestOutput {
+    pub fn startBgpFailoverTest(self: *Self, allocator: std.mem.Allocator, input: start_bgp_failover_test.StartBgpFailoverTestInput, options: CallOptions) !start_bgp_failover_test.StartBgpFailoverTestOutput {
         return start_bgp_failover_test.execute(self, allocator, input, options);
     }
 
     /// Stops the virtual interface failover test.
-    pub fn stopBgpFailoverTest(self: *Self, allocator: std.mem.Allocator, input: stop_bgp_failover_test.StopBgpFailoverTestInput, options: stop_bgp_failover_test.Options) !stop_bgp_failover_test.StopBgpFailoverTestOutput {
+    pub fn stopBgpFailoverTest(self: *Self, allocator: std.mem.Allocator, input: stop_bgp_failover_test.StopBgpFailoverTestInput, options: CallOptions) !stop_bgp_failover_test.StopBgpFailoverTestOutput {
         return stop_bgp_failover_test.execute(self, allocator, input, options);
     }
 
@@ -842,12 +843,12 @@ pub const Client = struct {
     ///
     /// Each tag consists of a key and an optional value. If a tag with the same key
     /// is already associated with the resource, this action updates its value.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified Direct Connect resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -858,19 +859,19 @@ pub const Client = struct {
     /// * The connection name
     ///
     /// * The connection's MAC Security (MACsec) encryption mode.
-    pub fn updateConnection(self: *Self, allocator: std.mem.Allocator, input: update_connection.UpdateConnectionInput, options: update_connection.Options) !update_connection.UpdateConnectionOutput {
+    pub fn updateConnection(self: *Self, allocator: std.mem.Allocator, input: update_connection.UpdateConnectionInput, options: CallOptions) !update_connection.UpdateConnectionOutput {
         return update_connection.execute(self, allocator, input, options);
     }
 
     /// Updates the name of a current Direct Connect gateway.
-    pub fn updateDirectConnectGateway(self: *Self, allocator: std.mem.Allocator, input: update_direct_connect_gateway.UpdateDirectConnectGatewayInput, options: update_direct_connect_gateway.Options) !update_direct_connect_gateway.UpdateDirectConnectGatewayOutput {
+    pub fn updateDirectConnectGateway(self: *Self, allocator: std.mem.Allocator, input: update_direct_connect_gateway.UpdateDirectConnectGatewayInput, options: CallOptions) !update_direct_connect_gateway.UpdateDirectConnectGatewayOutput {
         return update_direct_connect_gateway.execute(self, allocator, input, options);
     }
 
     /// Updates the specified attributes of the Direct Connect gateway association.
     ///
     /// Add or remove prefixes from the association.
-    pub fn updateDirectConnectGatewayAssociation(self: *Self, allocator: std.mem.Allocator, input: update_direct_connect_gateway_association.UpdateDirectConnectGatewayAssociationInput, options: update_direct_connect_gateway_association.Options) !update_direct_connect_gateway_association.UpdateDirectConnectGatewayAssociationOutput {
+    pub fn updateDirectConnectGatewayAssociation(self: *Self, allocator: std.mem.Allocator, input: update_direct_connect_gateway_association.UpdateDirectConnectGatewayAssociationInput, options: CallOptions) !update_direct_connect_gateway_association.UpdateDirectConnectGatewayAssociationOutput {
         return update_direct_connect_gateway_association.execute(self, allocator, input, options);
     }
 
@@ -895,7 +896,7 @@ pub const Client = struct {
     /// that the new value does not cause the LAG to fall below the threshold and
     /// become
     /// non-operational.
-    pub fn updateLag(self: *Self, allocator: std.mem.Allocator, input: update_lag.UpdateLagInput, options: update_lag.Options) !update_lag.UpdateLagOutput {
+    pub fn updateLag(self: *Self, allocator: std.mem.Allocator, input: update_lag.UpdateLagInput, options: CallOptions) !update_lag.UpdateLagOutput {
         return update_lag.execute(self, allocator, input, options);
     }
 
@@ -911,7 +912,7 @@ pub const Client = struct {
     /// supports jumbo
     /// frames, call DescribeConnections. To check whether your virtual
     /// interface supports jumbo frames, call DescribeVirtualInterfaces.
-    pub fn updateVirtualInterfaceAttributes(self: *Self, allocator: std.mem.Allocator, input: update_virtual_interface_attributes.UpdateVirtualInterfaceAttributesInput, options: update_virtual_interface_attributes.Options) !update_virtual_interface_attributes.UpdateVirtualInterfaceAttributesOutput {
+    pub fn updateVirtualInterfaceAttributes(self: *Self, allocator: std.mem.Allocator, input: update_virtual_interface_attributes.UpdateVirtualInterfaceAttributesInput, options: CallOptions) !update_virtual_interface_attributes.UpdateVirtualInterfaceAttributesOutput {
         return update_virtual_interface_attributes.execute(self, allocator, input, options);
     }
 };

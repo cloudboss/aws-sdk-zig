@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteHsmClientCertificateInput = struct {
@@ -9,13 +10,9 @@ pub const DeleteHsmClientCertificateInput = struct {
     hsm_client_certificate_identifier: []const u8,
 };
 
-const DeleteHsmClientCertificateOutput = struct {};
+pub const DeleteHsmClientCertificateOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteHsmClientCertificateInput, options: Options) !DeleteHsmClientCertificateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteHsmClientCertificateInput, options: CallOptions) !DeleteHsmClientCertificateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

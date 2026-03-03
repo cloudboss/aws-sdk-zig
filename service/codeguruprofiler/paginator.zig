@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_findings_report_account_summary = @import("get_findings_report_account_summary.zig");
@@ -17,7 +18,7 @@ pub const GetFindingsReportAccountSummaryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_findings_report_account_summary.Options) !get_findings_report_account_summary.GetFindingsReportAccountSummaryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_findings_report_account_summary.GetFindingsReportAccountSummaryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -58,7 +59,7 @@ pub const ListFindingsReportsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_findings_reports.Options) !list_findings_reports.ListFindingsReportsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_findings_reports.ListFindingsReportsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -99,7 +100,7 @@ pub const ListProfileTimesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_profile_times.Options) !list_profile_times.ListProfileTimesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_profile_times.ListProfileTimesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -140,7 +141,7 @@ pub const ListProfilingGroupsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_profiling_groups.Options) !list_profiling_groups.ListProfilingGroupsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_profiling_groups.ListProfilingGroupsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

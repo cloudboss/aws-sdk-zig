@@ -23,6 +23,7 @@ const start_recommendation_report_generation = @import("start_recommendation_rep
 const stop_assessment = @import("stop_assessment.zig");
 const update_application_component_config = @import("update_application_component_config.zig");
 const update_server_config = @import("update_server_config.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -54,117 +55,117 @@ pub const Client = struct {
     }
 
     /// Retrieves details about an application component.
-    pub fn getApplicationComponentDetails(self: *Self, allocator: std.mem.Allocator, input: get_application_component_details.GetApplicationComponentDetailsInput, options: get_application_component_details.Options) !get_application_component_details.GetApplicationComponentDetailsOutput {
+    pub fn getApplicationComponentDetails(self: *Self, allocator: std.mem.Allocator, input: get_application_component_details.GetApplicationComponentDetailsInput, options: CallOptions) !get_application_component_details.GetApplicationComponentDetailsOutput {
         return get_application_component_details.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of all the recommended strategies and tools for an
     /// application component
     /// running on a server.
-    pub fn getApplicationComponentStrategies(self: *Self, allocator: std.mem.Allocator, input: get_application_component_strategies.GetApplicationComponentStrategiesInput, options: get_application_component_strategies.Options) !get_application_component_strategies.GetApplicationComponentStrategiesOutput {
+    pub fn getApplicationComponentStrategies(self: *Self, allocator: std.mem.Allocator, input: get_application_component_strategies.GetApplicationComponentStrategiesInput, options: CallOptions) !get_application_component_strategies.GetApplicationComponentStrategiesOutput {
         return get_application_component_strategies.execute(self, allocator, input, options);
     }
 
     /// Retrieves the status of an on-going assessment.
-    pub fn getAssessment(self: *Self, allocator: std.mem.Allocator, input: get_assessment.GetAssessmentInput, options: get_assessment.Options) !get_assessment.GetAssessmentOutput {
+    pub fn getAssessment(self: *Self, allocator: std.mem.Allocator, input: get_assessment.GetAssessmentInput, options: CallOptions) !get_assessment.GetAssessmentOutput {
         return get_assessment.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details about a specific import task.
-    pub fn getImportFileTask(self: *Self, allocator: std.mem.Allocator, input: get_import_file_task.GetImportFileTaskInput, options: get_import_file_task.Options) !get_import_file_task.GetImportFileTaskOutput {
+    pub fn getImportFileTask(self: *Self, allocator: std.mem.Allocator, input: get_import_file_task.GetImportFileTaskInput, options: CallOptions) !get_import_file_task.GetImportFileTaskOutput {
         return get_import_file_task.execute(self, allocator, input, options);
     }
 
     /// Retrieve the latest ID of a specific assessment task.
-    pub fn getLatestAssessmentId(self: *Self, allocator: std.mem.Allocator, input: get_latest_assessment_id.GetLatestAssessmentIdInput, options: get_latest_assessment_id.Options) !get_latest_assessment_id.GetLatestAssessmentIdOutput {
+    pub fn getLatestAssessmentId(self: *Self, allocator: std.mem.Allocator, input: get_latest_assessment_id.GetLatestAssessmentIdInput, options: CallOptions) !get_latest_assessment_id.GetLatestAssessmentIdOutput {
         return get_latest_assessment_id.execute(self, allocator, input, options);
     }
 
     /// Retrieves your migration and modernization preferences.
-    pub fn getPortfolioPreferences(self: *Self, allocator: std.mem.Allocator, input: get_portfolio_preferences.GetPortfolioPreferencesInput, options: get_portfolio_preferences.Options) !get_portfolio_preferences.GetPortfolioPreferencesOutput {
+    pub fn getPortfolioPreferences(self: *Self, allocator: std.mem.Allocator, input: get_portfolio_preferences.GetPortfolioPreferencesInput, options: CallOptions) !get_portfolio_preferences.GetPortfolioPreferencesOutput {
         return get_portfolio_preferences.execute(self, allocator, input, options);
     }
 
     /// Retrieves overall summary including the number of servers to rehost and the
     /// overall
     /// number of anti-patterns.
-    pub fn getPortfolioSummary(self: *Self, allocator: std.mem.Allocator, input: get_portfolio_summary.GetPortfolioSummaryInput, options: get_portfolio_summary.Options) !get_portfolio_summary.GetPortfolioSummaryOutput {
+    pub fn getPortfolioSummary(self: *Self, allocator: std.mem.Allocator, input: get_portfolio_summary.GetPortfolioSummaryInput, options: CallOptions) !get_portfolio_summary.GetPortfolioSummaryOutput {
         return get_portfolio_summary.execute(self, allocator, input, options);
     }
 
     /// Retrieves detailed information about the specified recommendation report.
-    pub fn getRecommendationReportDetails(self: *Self, allocator: std.mem.Allocator, input: get_recommendation_report_details.GetRecommendationReportDetailsInput, options: get_recommendation_report_details.Options) !get_recommendation_report_details.GetRecommendationReportDetailsOutput {
+    pub fn getRecommendationReportDetails(self: *Self, allocator: std.mem.Allocator, input: get_recommendation_report_details.GetRecommendationReportDetailsInput, options: CallOptions) !get_recommendation_report_details.GetRecommendationReportDetailsOutput {
         return get_recommendation_report_details.execute(self, allocator, input, options);
     }
 
     /// Retrieves detailed information about a specified server.
-    pub fn getServerDetails(self: *Self, allocator: std.mem.Allocator, input: get_server_details.GetServerDetailsInput, options: get_server_details.Options) !get_server_details.GetServerDetailsOutput {
+    pub fn getServerDetails(self: *Self, allocator: std.mem.Allocator, input: get_server_details.GetServerDetailsInput, options: CallOptions) !get_server_details.GetServerDetailsOutput {
         return get_server_details.execute(self, allocator, input, options);
     }
 
     /// Retrieves recommended strategies and tools for the specified server.
-    pub fn getServerStrategies(self: *Self, allocator: std.mem.Allocator, input: get_server_strategies.GetServerStrategiesInput, options: get_server_strategies.Options) !get_server_strategies.GetServerStrategiesOutput {
+    pub fn getServerStrategies(self: *Self, allocator: std.mem.Allocator, input: get_server_strategies.GetServerStrategiesInput, options: CallOptions) !get_server_strategies.GetServerStrategiesOutput {
         return get_server_strategies.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of all the servers fetched from customer vCenter using
     /// Strategy Recommendation Collector.
-    pub fn listAnalyzableServers(self: *Self, allocator: std.mem.Allocator, input: list_analyzable_servers.ListAnalyzableServersInput, options: list_analyzable_servers.Options) !list_analyzable_servers.ListAnalyzableServersOutput {
+    pub fn listAnalyzableServers(self: *Self, allocator: std.mem.Allocator, input: list_analyzable_servers.ListAnalyzableServersInput, options: CallOptions) !list_analyzable_servers.ListAnalyzableServersOutput {
         return list_analyzable_servers.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of all the application components (processes).
-    pub fn listApplicationComponents(self: *Self, allocator: std.mem.Allocator, input: list_application_components.ListApplicationComponentsInput, options: list_application_components.Options) !list_application_components.ListApplicationComponentsOutput {
+    pub fn listApplicationComponents(self: *Self, allocator: std.mem.Allocator, input: list_application_components.ListApplicationComponentsInput, options: CallOptions) !list_application_components.ListApplicationComponentsOutput {
         return list_application_components.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of all the installed collectors.
-    pub fn listCollectors(self: *Self, allocator: std.mem.Allocator, input: list_collectors.ListCollectorsInput, options: list_collectors.Options) !list_collectors.ListCollectorsOutput {
+    pub fn listCollectors(self: *Self, allocator: std.mem.Allocator, input: list_collectors.ListCollectorsInput, options: CallOptions) !list_collectors.ListCollectorsOutput {
         return list_collectors.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of all the imports performed.
-    pub fn listImportFileTask(self: *Self, allocator: std.mem.Allocator, input: list_import_file_task.ListImportFileTaskInput, options: list_import_file_task.Options) !list_import_file_task.ListImportFileTaskOutput {
+    pub fn listImportFileTask(self: *Self, allocator: std.mem.Allocator, input: list_import_file_task.ListImportFileTaskInput, options: CallOptions) !list_import_file_task.ListImportFileTaskOutput {
         return list_import_file_task.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all the servers.
-    pub fn listServers(self: *Self, allocator: std.mem.Allocator, input: list_servers.ListServersInput, options: list_servers.Options) !list_servers.ListServersOutput {
+    pub fn listServers(self: *Self, allocator: std.mem.Allocator, input: list_servers.ListServersInput, options: CallOptions) !list_servers.ListServersOutput {
         return list_servers.execute(self, allocator, input, options);
     }
 
     /// Saves the specified migration and modernization preferences.
-    pub fn putPortfolioPreferences(self: *Self, allocator: std.mem.Allocator, input: put_portfolio_preferences.PutPortfolioPreferencesInput, options: put_portfolio_preferences.Options) !put_portfolio_preferences.PutPortfolioPreferencesOutput {
+    pub fn putPortfolioPreferences(self: *Self, allocator: std.mem.Allocator, input: put_portfolio_preferences.PutPortfolioPreferencesInput, options: CallOptions) !put_portfolio_preferences.PutPortfolioPreferencesOutput {
         return put_portfolio_preferences.execute(self, allocator, input, options);
     }
 
     /// Starts the assessment of an on-premises environment.
-    pub fn startAssessment(self: *Self, allocator: std.mem.Allocator, input: start_assessment.StartAssessmentInput, options: start_assessment.Options) !start_assessment.StartAssessmentOutput {
+    pub fn startAssessment(self: *Self, allocator: std.mem.Allocator, input: start_assessment.StartAssessmentInput, options: CallOptions) !start_assessment.StartAssessmentOutput {
         return start_assessment.execute(self, allocator, input, options);
     }
 
     /// Starts a file import.
-    pub fn startImportFileTask(self: *Self, allocator: std.mem.Allocator, input: start_import_file_task.StartImportFileTaskInput, options: start_import_file_task.Options) !start_import_file_task.StartImportFileTaskOutput {
+    pub fn startImportFileTask(self: *Self, allocator: std.mem.Allocator, input: start_import_file_task.StartImportFileTaskInput, options: CallOptions) !start_import_file_task.StartImportFileTaskOutput {
         return start_import_file_task.execute(self, allocator, input, options);
     }
 
     /// Starts generating a recommendation report.
-    pub fn startRecommendationReportGeneration(self: *Self, allocator: std.mem.Allocator, input: start_recommendation_report_generation.StartRecommendationReportGenerationInput, options: start_recommendation_report_generation.Options) !start_recommendation_report_generation.StartRecommendationReportGenerationOutput {
+    pub fn startRecommendationReportGeneration(self: *Self, allocator: std.mem.Allocator, input: start_recommendation_report_generation.StartRecommendationReportGenerationInput, options: CallOptions) !start_recommendation_report_generation.StartRecommendationReportGenerationOutput {
         return start_recommendation_report_generation.execute(self, allocator, input, options);
     }
 
     /// Stops the assessment of an on-premises environment.
-    pub fn stopAssessment(self: *Self, allocator: std.mem.Allocator, input: stop_assessment.StopAssessmentInput, options: stop_assessment.Options) !stop_assessment.StopAssessmentOutput {
+    pub fn stopAssessment(self: *Self, allocator: std.mem.Allocator, input: stop_assessment.StopAssessmentInput, options: CallOptions) !stop_assessment.StopAssessmentOutput {
         return stop_assessment.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration of an application component.
-    pub fn updateApplicationComponentConfig(self: *Self, allocator: std.mem.Allocator, input: update_application_component_config.UpdateApplicationComponentConfigInput, options: update_application_component_config.Options) !update_application_component_config.UpdateApplicationComponentConfigOutput {
+    pub fn updateApplicationComponentConfig(self: *Self, allocator: std.mem.Allocator, input: update_application_component_config.UpdateApplicationComponentConfigInput, options: CallOptions) !update_application_component_config.UpdateApplicationComponentConfigOutput {
         return update_application_component_config.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration of the specified server.
-    pub fn updateServerConfig(self: *Self, allocator: std.mem.Allocator, input: update_server_config.UpdateServerConfigInput, options: update_server_config.Options) !update_server_config.UpdateServerConfigOutput {
+    pub fn updateServerConfig(self: *Self, allocator: std.mem.Allocator, input: update_server_config.UpdateServerConfigInput, options: CallOptions) !update_server_config.UpdateServerConfigOutput {
         return update_server_config.execute(self, allocator, input, options);
     }
 

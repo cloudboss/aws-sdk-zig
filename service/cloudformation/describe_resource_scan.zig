@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ScanFilter = @import("scan_filter.zig").ScanFilter;
 const ResourceScanStatus = @import("resource_scan_status.zig").ResourceScanStatus;
@@ -94,11 +95,7 @@ pub const DescribeResourceScanOutput = struct {
     status_reason: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeResourceScanInput, options: Options) !DescribeResourceScanOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeResourceScanInput, options: CallOptions) !DescribeResourceScanOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

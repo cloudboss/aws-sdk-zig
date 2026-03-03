@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const PutRolePolicyInput = struct {
@@ -48,13 +49,9 @@ pub const PutRolePolicyInput = struct {
     role_name: []const u8,
 };
 
-const PutRolePolicyOutput = struct {};
+pub const PutRolePolicyOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutRolePolicyInput, options: Options) !PutRolePolicyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutRolePolicyInput, options: CallOptions) !PutRolePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

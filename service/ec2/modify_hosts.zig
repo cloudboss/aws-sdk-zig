@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AutoPlacement = @import("auto_placement.zig").AutoPlacement;
 const HostMaintenance = @import("host_maintenance.zig").HostMaintenance;
@@ -64,11 +65,7 @@ pub const ModifyHostsOutput = struct {
     unsuccessful: ?[]const UnsuccessfulItem = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyHostsInput, options: Options) !ModifyHostsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyHostsInput, options: CallOptions) !ModifyHostsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

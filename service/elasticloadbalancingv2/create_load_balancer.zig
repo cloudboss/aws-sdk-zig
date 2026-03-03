@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EnablePrefixForIpv6SourceNatEnum = @import("enable_prefix_for_ipv_6_source_nat_enum.zig").EnablePrefixForIpv6SourceNatEnum;
 const IpAddressType = @import("ip_address_type.zig").IpAddressType;
@@ -139,11 +140,7 @@ pub const CreateLoadBalancerOutput = struct {
     load_balancers: ?[]const LoadBalancer = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLoadBalancerInput, options: Options) !CreateLoadBalancerOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLoadBalancerInput, options: CallOptions) !CreateLoadBalancerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

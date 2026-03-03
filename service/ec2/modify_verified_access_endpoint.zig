@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ModifyVerifiedAccessEndpointCidrOptions = @import("modify_verified_access_endpoint_cidr_options.zig").ModifyVerifiedAccessEndpointCidrOptions;
 const ModifyVerifiedAccessEndpointLoadBalancerOptions = @import("modify_verified_access_endpoint_load_balancer_options.zig").ModifyVerifiedAccessEndpointLoadBalancerOptions;
@@ -52,11 +53,7 @@ pub const ModifyVerifiedAccessEndpointOutput = struct {
     verified_access_endpoint: ?VerifiedAccessEndpoint = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyVerifiedAccessEndpointInput, options: Options) !ModifyVerifiedAccessEndpointOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyVerifiedAccessEndpointInput, options: CallOptions) !ModifyVerifiedAccessEndpointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

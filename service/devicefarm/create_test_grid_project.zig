@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TestGridVpcConfig = @import("test_grid_vpc_config.zig").TestGridVpcConfig;
 const TestGridProject = @import("test_grid_project.zig").TestGridProject;
@@ -32,11 +33,7 @@ pub const CreateTestGridProjectOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTestGridProjectInput, options: Options) !CreateTestGridProjectOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTestGridProjectInput, options: CallOptions) !CreateTestGridProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

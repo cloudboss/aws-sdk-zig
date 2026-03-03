@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SystemInstanceFilter = @import("system_instance_filter.zig").SystemInstanceFilter;
 const SystemInstanceSummary = @import("system_instance_summary.zig").SystemInstanceSummary;
@@ -44,11 +45,7 @@ pub const SearchSystemInstancesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchSystemInstancesInput, options: Options) !SearchSystemInstancesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchSystemInstancesInput, options: CallOptions) !SearchSystemInstancesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

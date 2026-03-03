@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CustomDNSServer = @import("custom_dns_server.zig").CustomDNSServer;
 const TransitGatewayConfiguration = @import("transit_gateway_configuration.zig").TransitGatewayConfiguration;
@@ -103,11 +104,7 @@ pub const UpdateKxEnvironmentNetworkOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateKxEnvironmentNetworkInput, options: Options) !UpdateKxEnvironmentNetworkOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateKxEnvironmentNetworkInput, options: CallOptions) !UpdateKxEnvironmentNetworkOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CapacityManagerStatus = @import("capacity_manager_status.zig").CapacityManagerStatus;
 
@@ -26,11 +27,7 @@ pub const DisableCapacityManagerOutput = struct {
     organizations_access: ?bool = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableCapacityManagerInput, options: Options) !DisableCapacityManagerOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableCapacityManagerInput, options: CallOptions) !DisableCapacityManagerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

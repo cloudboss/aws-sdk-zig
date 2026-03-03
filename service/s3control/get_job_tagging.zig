@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const S3Tag = @import("s3_tag.zig").S3Tag;
 const serde = @import("serde.zig");
@@ -20,11 +21,7 @@ pub const GetJobTaggingOutput = struct {
     tags: ?[]const S3Tag = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetJobTaggingInput, options: Options) !GetJobTaggingOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetJobTaggingInput, options: CallOptions) !GetJobTaggingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

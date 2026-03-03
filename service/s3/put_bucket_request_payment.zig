@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const RequestPaymentConfiguration = @import("request_payment_configuration.zig").RequestPaymentConfiguration;
@@ -45,13 +46,9 @@ pub const PutBucketRequestPaymentInput = struct {
     request_payment_configuration: RequestPaymentConfiguration,
 };
 
-const PutBucketRequestPaymentOutput = struct {};
+pub const PutBucketRequestPaymentOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutBucketRequestPaymentInput, options: Options) !PutBucketRequestPaymentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutBucketRequestPaymentInput, options: CallOptions) !PutBucketRequestPaymentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

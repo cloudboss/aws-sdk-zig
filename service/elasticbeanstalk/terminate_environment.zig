@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EnvironmentLink = @import("environment_link.zig").EnvironmentLink;
 const EnvironmentHealth = @import("environment_health.zig").EnvironmentHealth;
@@ -53,13 +54,9 @@ pub const TerminateEnvironmentInput = struct {
     terminate_resources: ?bool = null,
 };
 
-const TerminateEnvironmentOutput = @import("environment_description.zig").EnvironmentDescription;
+pub const TerminateEnvironmentOutput = @import("environment_description.zig").EnvironmentDescription;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TerminateEnvironmentInput, options: Options) !TerminateEnvironmentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TerminateEnvironmentInput, options: CallOptions) !TerminateEnvironmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

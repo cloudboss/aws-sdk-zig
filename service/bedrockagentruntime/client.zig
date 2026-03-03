@@ -32,6 +32,7 @@ const stop_flow_execution = @import("stop_flow_execution.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_session = @import("update_session.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -76,7 +77,7 @@ pub const Client = struct {
     ///   [ListSessions](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListSessions.html)
     /// *
     ///   [GetSession](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetSession.html)
-    pub fn createInvocation(self: *Self, allocator: std.mem.Allocator, input: create_invocation.CreateInvocationInput, options: create_invocation.Options) !create_invocation.CreateInvocationOutput {
+    pub fn createInvocation(self: *Self, allocator: std.mem.Allocator, input: create_invocation.CreateInvocationInput, options: CallOptions) !create_invocation.CreateInvocationOutput {
         return create_invocation.execute(self, allocator, input, options);
     }
 
@@ -109,19 +110,19 @@ pub const Client = struct {
     ///   [EndSession](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_EndSession.html)
     /// *
     ///   [DeleteSession](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_DeleteSession.html)
-    pub fn createSession(self: *Self, allocator: std.mem.Allocator, input: create_session.CreateSessionInput, options: create_session.Options) !create_session.CreateSessionOutput {
+    pub fn createSession(self: *Self, allocator: std.mem.Allocator, input: create_session.CreateSessionInput, options: CallOptions) !create_session.CreateSessionOutput {
         return create_session.execute(self, allocator, input, options);
     }
 
     /// Deletes memory from the specified memory identifier.
-    pub fn deleteAgentMemory(self: *Self, allocator: std.mem.Allocator, input: delete_agent_memory.DeleteAgentMemoryInput, options: delete_agent_memory.Options) !delete_agent_memory.DeleteAgentMemoryOutput {
+    pub fn deleteAgentMemory(self: *Self, allocator: std.mem.Allocator, input: delete_agent_memory.DeleteAgentMemoryInput, options: CallOptions) !delete_agent_memory.DeleteAgentMemoryOutput {
         return delete_agent_memory.execute(self, allocator, input, options);
     }
 
     /// Deletes a session that you ended. You can't delete a session with an
     /// `ACTIVE` status. To delete an active session, you must first end it with the
     /// [EndSession](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_EndSession.html) API operation. For more information about sessions, see [Store and retrieve conversation history and context with Amazon Bedrock sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
-    pub fn deleteSession(self: *Self, allocator: std.mem.Allocator, input: delete_session.DeleteSessionInput, options: delete_session.Options) !delete_session.DeleteSessionOutput {
+    pub fn deleteSession(self: *Self, allocator: std.mem.Allocator, input: delete_session.DeleteSessionInput, options: CallOptions) !delete_session.DeleteSessionOutput {
         return delete_session.execute(self, allocator, input, options);
     }
 
@@ -130,19 +131,19 @@ pub const Client = struct {
     /// DeleteSession API operation. For more information about sessions, see [Store
     /// and retrieve conversation history and context with Amazon Bedrock
     /// sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
-    pub fn endSession(self: *Self, allocator: std.mem.Allocator, input: end_session.EndSessionInput, options: end_session.Options) !end_session.EndSessionOutput {
+    pub fn endSession(self: *Self, allocator: std.mem.Allocator, input: end_session.EndSessionInput, options: CallOptions) !end_session.EndSessionOutput {
         return end_session.execute(self, allocator, input, options);
     }
 
     /// Generates an SQL query from a natural language query. For more information,
     /// see [Generate a query for structured
     /// data](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-generate-query.html) in the Amazon Bedrock User Guide.
-    pub fn generateQuery(self: *Self, allocator: std.mem.Allocator, input: generate_query.GenerateQueryInput, options: generate_query.Options) !generate_query.GenerateQueryOutput {
+    pub fn generateQuery(self: *Self, allocator: std.mem.Allocator, input: generate_query.GenerateQueryInput, options: CallOptions) !generate_query.GenerateQueryOutput {
         return generate_query.execute(self, allocator, input, options);
     }
 
     /// Gets the sessions stored in the memory of the agent.
-    pub fn getAgentMemory(self: *Self, allocator: std.mem.Allocator, input: get_agent_memory.GetAgentMemoryInput, options: get_agent_memory.Options) !get_agent_memory.GetAgentMemoryOutput {
+    pub fn getAgentMemory(self: *Self, allocator: std.mem.Allocator, input: get_agent_memory.GetAgentMemoryInput, options: CallOptions) !get_agent_memory.GetAgentMemoryOutput {
         return get_agent_memory.execute(self, allocator, input, options);
     }
 
@@ -154,13 +155,13 @@ pub const Client = struct {
     ///
     /// Flow executions is in preview release for Amazon Bedrock and is subject to
     /// change.
-    pub fn getExecutionFlowSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_execution_flow_snapshot.GetExecutionFlowSnapshotInput, options: get_execution_flow_snapshot.Options) !get_execution_flow_snapshot.GetExecutionFlowSnapshotOutput {
+    pub fn getExecutionFlowSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_execution_flow_snapshot.GetExecutionFlowSnapshotInput, options: CallOptions) !get_execution_flow_snapshot.GetExecutionFlowSnapshotOutput {
         return get_execution_flow_snapshot.execute(self, allocator, input, options);
     }
 
     /// Retrieves details about a specific flow execution, including its status,
     /// start and end times, and any errors that occurred during execution.
-    pub fn getFlowExecution(self: *Self, allocator: std.mem.Allocator, input: get_flow_execution.GetFlowExecutionInput, options: get_flow_execution.Options) !get_flow_execution.GetFlowExecutionOutput {
+    pub fn getFlowExecution(self: *Self, allocator: std.mem.Allocator, input: get_flow_execution.GetFlowExecutionInput, options: CallOptions) !get_flow_execution.GetFlowExecutionOutput {
         return get_flow_execution.execute(self, allocator, input, options);
     }
 
@@ -168,7 +169,7 @@ pub const Client = struct {
     /// a session. For more information about sessions, see [Store and retrieve
     /// conversation history and context with Amazon Bedrock
     /// sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
-    pub fn getInvocationStep(self: *Self, allocator: std.mem.Allocator, input: get_invocation_step.GetInvocationStepInput, options: get_invocation_step.Options) !get_invocation_step.GetInvocationStepOutput {
+    pub fn getInvocationStep(self: *Self, allocator: std.mem.Allocator, input: get_invocation_step.GetInvocationStepInput, options: CallOptions) !get_invocation_step.GetInvocationStepOutput {
         return get_invocation_step.execute(self, allocator, input, options);
     }
 
@@ -176,7 +177,7 @@ pub const Client = struct {
     /// sessions, see [Store and retrieve conversation history and context with
     /// Amazon Bedrock
     /// sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
-    pub fn getSession(self: *Self, allocator: std.mem.Allocator, input: get_session.GetSessionInput, options: get_session.Options) !get_session.GetSessionOutput {
+    pub fn getSession(self: *Self, allocator: std.mem.Allocator, input: get_session.GetSessionInput, options: CallOptions) !get_session.GetSessionOutput {
         return get_session.execute(self, allocator, input, options);
     }
 
@@ -207,7 +208,7 @@ pub const Client = struct {
     ///   returns parameters for the action, elicited from the user, in the
     ///   `returnControl` field.
     /// * Errors are also surfaced in the response.
-    pub fn invokeAgent(self: *Self, allocator: std.mem.Allocator, input: invoke_agent.InvokeAgentInput, options: invoke_agent.Options) !invoke_agent.InvokeAgentOutput {
+    pub fn invokeAgent(self: *Self, allocator: std.mem.Allocator, input: invoke_agent.InvokeAgentInput, options: CallOptions) !invoke_agent.InvokeAgentOutput {
         return invoke_agent.execute(self, allocator, input, options);
     }
 
@@ -218,7 +219,7 @@ pub const Client = struct {
     ///
     /// The CLI doesn't support streaming operations in Amazon Bedrock, including
     /// `InvokeFlow`.
-    pub fn invokeFlow(self: *Self, allocator: std.mem.Allocator, input: invoke_flow.InvokeFlowInput, options: invoke_flow.Options) !invoke_flow.InvokeFlowOutput {
+    pub fn invokeFlow(self: *Self, allocator: std.mem.Allocator, input: invoke_flow.InvokeFlowInput, options: CallOptions) !invoke_flow.InvokeFlowOutput {
         return invoke_flow.execute(self, allocator, input, options);
     }
 
@@ -240,7 +241,7 @@ pub const Client = struct {
     /// * The agent instructions will not be honored if your agent has only one
     ///   knowledge base, uses default prompts, has no action group, and user input
     ///   is disabled.
-    pub fn invokeInlineAgent(self: *Self, allocator: std.mem.Allocator, input: invoke_inline_agent.InvokeInlineAgentInput, options: invoke_inline_agent.Options) !invoke_inline_agent.InvokeInlineAgentOutput {
+    pub fn invokeInlineAgent(self: *Self, allocator: std.mem.Allocator, input: invoke_inline_agent.InvokeInlineAgentInput, options: CallOptions) !invoke_inline_agent.InvokeInlineAgentOutput {
         return invoke_inline_agent.execute(self, allocator, input, options);
     }
 
@@ -250,7 +251,7 @@ pub const Client = struct {
     ///
     /// Flow executions is in preview release for Amazon Bedrock and is subject to
     /// change.
-    pub fn listFlowExecutionEvents(self: *Self, allocator: std.mem.Allocator, input: list_flow_execution_events.ListFlowExecutionEventsInput, options: list_flow_execution_events.Options) !list_flow_execution_events.ListFlowExecutionEventsOutput {
+    pub fn listFlowExecutionEvents(self: *Self, allocator: std.mem.Allocator, input: list_flow_execution_events.ListFlowExecutionEventsInput, options: CallOptions) !list_flow_execution_events.ListFlowExecutionEventsOutput {
         return list_flow_execution_events.execute(self, allocator, input, options);
     }
 
@@ -260,7 +261,7 @@ pub const Client = struct {
     ///
     /// Flow executions is in preview release for Amazon Bedrock and is subject to
     /// change.
-    pub fn listFlowExecutions(self: *Self, allocator: std.mem.Allocator, input: list_flow_executions.ListFlowExecutionsInput, options: list_flow_executions.Options) !list_flow_executions.ListFlowExecutionsOutput {
+    pub fn listFlowExecutions(self: *Self, allocator: std.mem.Allocator, input: list_flow_executions.ListFlowExecutionsInput, options: CallOptions) !list_flow_executions.ListFlowExecutionsOutput {
         return list_flow_executions.execute(self, allocator, input, options);
     }
 
@@ -268,7 +269,7 @@ pub const Client = struct {
     /// invocation within the session. For more information about sessions, see
     /// [Store and retrieve conversation history and context with Amazon Bedrock
     /// sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
-    pub fn listInvocationSteps(self: *Self, allocator: std.mem.Allocator, input: list_invocation_steps.ListInvocationStepsInput, options: list_invocation_steps.Options) !list_invocation_steps.ListInvocationStepsOutput {
+    pub fn listInvocationSteps(self: *Self, allocator: std.mem.Allocator, input: list_invocation_steps.ListInvocationStepsInput, options: CallOptions) !list_invocation_steps.ListInvocationStepsOutput {
         return list_invocation_steps.execute(self, allocator, input, options);
     }
 
@@ -276,7 +277,7 @@ pub const Client = struct {
     /// information about sessions, see [Store and retrieve conversation history and
     /// context with Amazon Bedrock
     /// sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
-    pub fn listInvocations(self: *Self, allocator: std.mem.Allocator, input: list_invocations.ListInvocationsInput, options: list_invocations.Options) !list_invocations.ListInvocationsOutput {
+    pub fn listInvocations(self: *Self, allocator: std.mem.Allocator, input: list_invocations.ListInvocationsInput, options: CallOptions) !list_invocations.ListInvocationsOutput {
         return list_invocations.execute(self, allocator, input, options);
     }
 
@@ -284,19 +285,19 @@ pub const Client = struct {
     /// about sessions, see [Store and retrieve conversation history and context
     /// with Amazon Bedrock
     /// sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
-    pub fn listSessions(self: *Self, allocator: std.mem.Allocator, input: list_sessions.ListSessionsInput, options: list_sessions.Options) !list_sessions.ListSessionsOutput {
+    pub fn listSessions(self: *Self, allocator: std.mem.Allocator, input: list_sessions.ListSessionsInput, options: CallOptions) !list_sessions.ListSessionsOutput {
         return list_sessions.execute(self, allocator, input, options);
     }
 
     /// List all the tags for the resource you specify.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Optimizes a prompt for the task that you specify. For more information, see
     /// [Optimize a
     /// prompt](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-optimize.html) in the [Amazon Bedrock User Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
-    pub fn optimizePrompt(self: *Self, allocator: std.mem.Allocator, input: optimize_prompt.OptimizePromptInput, options: optimize_prompt.Options) !optimize_prompt.OptimizePromptOutput {
+    pub fn optimizePrompt(self: *Self, allocator: std.mem.Allocator, input: optimize_prompt.OptimizePromptInput, options: CallOptions) !optimize_prompt.OptimizePromptOutput {
         return optimize_prompt.execute(self, allocator, input, options);
     }
 
@@ -316,26 +317,26 @@ pub const Client = struct {
     ///   [ListInvocations](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListInvocations.html)
     /// *
     ///   [ListSessions](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListInvocations.html)
-    pub fn putInvocationStep(self: *Self, allocator: std.mem.Allocator, input: put_invocation_step.PutInvocationStepInput, options: put_invocation_step.Options) !put_invocation_step.PutInvocationStepOutput {
+    pub fn putInvocationStep(self: *Self, allocator: std.mem.Allocator, input: put_invocation_step.PutInvocationStepInput, options: CallOptions) !put_invocation_step.PutInvocationStepOutput {
         return put_invocation_step.execute(self, allocator, input, options);
     }
 
     /// Reranks the relevance of sources based on queries. For more information, see
     /// [Improve the relevance of query responses with a reranker
     /// model](https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html).
-    pub fn rerank(self: *Self, allocator: std.mem.Allocator, input: rerank_.RerankInput, options: rerank_.Options) !rerank_.RerankOutput {
+    pub fn rerank(self: *Self, allocator: std.mem.Allocator, input: rerank_.RerankInput, options: CallOptions) !rerank_.RerankOutput {
         return rerank_.execute(self, allocator, input, options);
     }
 
     /// Queries a knowledge base and retrieves information from it.
-    pub fn retrieve(self: *Self, allocator: std.mem.Allocator, input: retrieve_.RetrieveInput, options: retrieve_.Options) !retrieve_.RetrieveOutput {
+    pub fn retrieve(self: *Self, allocator: std.mem.Allocator, input: retrieve_.RetrieveInput, options: CallOptions) !retrieve_.RetrieveOutput {
         return retrieve_.execute(self, allocator, input, options);
     }
 
     /// Queries a knowledge base and generates responses based on the retrieved
     /// results and using the specified foundation model or [inference
     /// profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html). The response only cites sources that are relevant to the query.
-    pub fn retrieveAndGenerate(self: *Self, allocator: std.mem.Allocator, input: retrieve_and_generate.RetrieveAndGenerateInput, options: retrieve_and_generate.Options) !retrieve_and_generate.RetrieveAndGenerateOutput {
+    pub fn retrieveAndGenerate(self: *Self, allocator: std.mem.Allocator, input: retrieve_and_generate.RetrieveAndGenerateInput, options: CallOptions) !retrieve_and_generate.RetrieveAndGenerateOutput {
         return retrieve_and_generate.execute(self, allocator, input, options);
     }
 
@@ -347,7 +348,7 @@ pub const Client = struct {
     ///
     /// This operation requires permission for the ` bedrock:RetrieveAndGenerate`
     /// action.
-    pub fn retrieveAndGenerateStream(self: *Self, allocator: std.mem.Allocator, input: retrieve_and_generate_stream.RetrieveAndGenerateStreamInput, options: retrieve_and_generate_stream.Options) !retrieve_and_generate_stream.RetrieveAndGenerateStreamOutput {
+    pub fn retrieveAndGenerateStream(self: *Self, allocator: std.mem.Allocator, input: retrieve_and_generate_stream.RetrieveAndGenerateStreamInput, options: CallOptions) !retrieve_and_generate_stream.RetrieveAndGenerateStreamOutput {
         return retrieve_and_generate_stream.execute(self, allocator, input, options);
     }
 
@@ -361,24 +362,24 @@ pub const Client = struct {
     ///
     /// Flow executions is in preview release for Amazon Bedrock and is subject to
     /// change.
-    pub fn startFlowExecution(self: *Self, allocator: std.mem.Allocator, input: start_flow_execution.StartFlowExecutionInput, options: start_flow_execution.Options) !start_flow_execution.StartFlowExecutionOutput {
+    pub fn startFlowExecution(self: *Self, allocator: std.mem.Allocator, input: start_flow_execution.StartFlowExecutionInput, options: CallOptions) !start_flow_execution.StartFlowExecutionOutput {
         return start_flow_execution.execute(self, allocator, input, options);
     }
 
     /// Stops an Amazon Bedrock flow's execution. This operation prevents further
     /// processing of the flow and changes the execution status to `Aborted`.
-    pub fn stopFlowExecution(self: *Self, allocator: std.mem.Allocator, input: stop_flow_execution.StopFlowExecutionInput, options: stop_flow_execution.Options) !stop_flow_execution.StopFlowExecutionOutput {
+    pub fn stopFlowExecution(self: *Self, allocator: std.mem.Allocator, input: stop_flow_execution.StopFlowExecutionInput, options: CallOptions) !stop_flow_execution.StopFlowExecutionOutput {
         return stop_flow_execution.execute(self, allocator, input, options);
     }
 
     /// Associate tags with a resource. For more information, see [Tagging
     /// resources](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html) in the Amazon Bedrock User Guide.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Remove tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -386,7 +387,7 @@ pub const Client = struct {
     /// information about sessions, see [Store and retrieve conversation history and
     /// context with Amazon Bedrock
     /// sessions](https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html).
-    pub fn updateSession(self: *Self, allocator: std.mem.Allocator, input: update_session.UpdateSessionInput, options: update_session.Options) !update_session.UpdateSessionOutput {
+    pub fn updateSession(self: *Self, allocator: std.mem.Allocator, input: update_session.UpdateSessionInput, options: CallOptions) !update_session.UpdateSessionOutput {
         return update_session.execute(self, allocator, input, options);
     }
 

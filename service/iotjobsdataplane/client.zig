@@ -6,6 +6,7 @@ const get_pending_job_executions = @import("get_pending_job_executions.zig");
 const start_command_execution = @import("start_command_execution.zig");
 const start_next_pending_job_execution = @import("start_next_pending_job_execution.zig");
 const update_job_execution = @import("update_job_execution.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -39,7 +40,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [DescribeJobExecution](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn describeJobExecution(self: *Self, allocator: std.mem.Allocator, input: describe_job_execution.DescribeJobExecutionInput, options: describe_job_execution.Options) !describe_job_execution.DescribeJobExecutionOutput {
+    pub fn describeJobExecution(self: *Self, allocator: std.mem.Allocator, input: describe_job_execution.DescribeJobExecutionInput, options: CallOptions) !describe_job_execution.DescribeJobExecutionOutput {
         return describe_job_execution.execute(self, allocator, input, options);
     }
 
@@ -47,13 +48,13 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [GetPendingJobExecutions](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn getPendingJobExecutions(self: *Self, allocator: std.mem.Allocator, input: get_pending_job_executions.GetPendingJobExecutionsInput, options: get_pending_job_executions.Options) !get_pending_job_executions.GetPendingJobExecutionsOutput {
+    pub fn getPendingJobExecutions(self: *Self, allocator: std.mem.Allocator, input: get_pending_job_executions.GetPendingJobExecutionsInput, options: CallOptions) !get_pending_job_executions.GetPendingJobExecutionsOutput {
         return get_pending_job_executions.execute(self, allocator, input, options);
     }
 
     /// Using the command created with the `CreateCommand` API, start a command
     /// execution on a specific device.
-    pub fn startCommandExecution(self: *Self, allocator: std.mem.Allocator, input: start_command_execution.StartCommandExecutionInput, options: start_command_execution.Options) !start_command_execution.StartCommandExecutionOutput {
+    pub fn startCommandExecution(self: *Self, allocator: std.mem.Allocator, input: start_command_execution.StartCommandExecutionInput, options: CallOptions) !start_command_execution.StartCommandExecutionOutput {
         return start_command_execution.execute(self, allocator, input, options);
     }
 
@@ -63,7 +64,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [StartNextPendingJobExecution](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-    pub fn startNextPendingJobExecution(self: *Self, allocator: std.mem.Allocator, input: start_next_pending_job_execution.StartNextPendingJobExecutionInput, options: start_next_pending_job_execution.Options) !start_next_pending_job_execution.StartNextPendingJobExecutionOutput {
+    pub fn startNextPendingJobExecution(self: *Self, allocator: std.mem.Allocator, input: start_next_pending_job_execution.StartNextPendingJobExecutionInput, options: CallOptions) !start_next_pending_job_execution.StartNextPendingJobExecutionOutput {
         return start_next_pending_job_execution.execute(self, allocator, input, options);
     }
 
@@ -71,7 +72,7 @@ pub const Client = struct {
     ///
     /// Requires permission to access the
     /// [UpdateJobExecution](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotjobsdataplane.html) action.
-    pub fn updateJobExecution(self: *Self, allocator: std.mem.Allocator, input: update_job_execution.UpdateJobExecutionInput, options: update_job_execution.Options) !update_job_execution.UpdateJobExecutionOutput {
+    pub fn updateJobExecution(self: *Self, allocator: std.mem.Allocator, input: update_job_execution.UpdateJobExecutionInput, options: CallOptions) !update_job_execution.UpdateJobExecutionOutput {
         return update_job_execution.execute(self, allocator, input, options);
     }
 };

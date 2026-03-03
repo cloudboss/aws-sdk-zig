@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SortOrder = @import("sort_order.zig").SortOrder;
 const ListVectorEnrichmentJobOutputConfig = @import("list_vector_enrichment_job_output_config.zig").ListVectorEnrichmentJobOutputConfig;
@@ -47,11 +48,7 @@ pub const ListVectorEnrichmentJobsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListVectorEnrichmentJobsInput, options: Options) !ListVectorEnrichmentJobsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListVectorEnrichmentJobsInput, options: CallOptions) !ListVectorEnrichmentJobsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

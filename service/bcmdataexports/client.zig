@@ -13,6 +13,7 @@ const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_export = @import("update_export.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -74,66 +75,66 @@ pub const Client = struct {
     /// table
     /// dictionary](https://docs.aws.amazon.com/cur/latest/userguide/de-table-dictionary.html) or use the `ListTables` API to get a response of all tables
     /// and their available properties.
-    pub fn createExport(self: *Self, allocator: std.mem.Allocator, input: create_export.CreateExportInput, options: create_export.Options) !create_export.CreateExportOutput {
+    pub fn createExport(self: *Self, allocator: std.mem.Allocator, input: create_export.CreateExportInput, options: CallOptions) !create_export.CreateExportOutput {
         return create_export.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing data export.
-    pub fn deleteExport(self: *Self, allocator: std.mem.Allocator, input: delete_export.DeleteExportInput, options: delete_export.Options) !delete_export.DeleteExportOutput {
+    pub fn deleteExport(self: *Self, allocator: std.mem.Allocator, input: delete_export.DeleteExportInput, options: CallOptions) !delete_export.DeleteExportOutput {
         return delete_export.execute(self, allocator, input, options);
     }
 
     /// Exports data based on the source data update.
-    pub fn getExecution(self: *Self, allocator: std.mem.Allocator, input: get_execution.GetExecutionInput, options: get_execution.Options) !get_execution.GetExecutionOutput {
+    pub fn getExecution(self: *Self, allocator: std.mem.Allocator, input: get_execution.GetExecutionInput, options: CallOptions) !get_execution.GetExecutionOutput {
         return get_execution.execute(self, allocator, input, options);
     }
 
     /// Views the definition of an existing data export.
-    pub fn getExport(self: *Self, allocator: std.mem.Allocator, input: get_export.GetExportInput, options: get_export.Options) !get_export.GetExportOutput {
+    pub fn getExport(self: *Self, allocator: std.mem.Allocator, input: get_export.GetExportInput, options: CallOptions) !get_export.GetExportOutput {
         return get_export.execute(self, allocator, input, options);
     }
 
     /// Returns the metadata for the specified table and table properties. This
     /// includes the list
     /// of columns in the table schema, their data types, and column descriptions.
-    pub fn getTable(self: *Self, allocator: std.mem.Allocator, input: get_table.GetTableInput, options: get_table.Options) !get_table.GetTableOutput {
+    pub fn getTable(self: *Self, allocator: std.mem.Allocator, input: get_table.GetTableInput, options: CallOptions) !get_table.GetTableOutput {
         return get_table.execute(self, allocator, input, options);
     }
 
     /// Lists the historical executions for the export.
-    pub fn listExecutions(self: *Self, allocator: std.mem.Allocator, input: list_executions.ListExecutionsInput, options: list_executions.Options) !list_executions.ListExecutionsOutput {
+    pub fn listExecutions(self: *Self, allocator: std.mem.Allocator, input: list_executions.ListExecutionsInput, options: CallOptions) !list_executions.ListExecutionsOutput {
         return list_executions.execute(self, allocator, input, options);
     }
 
     /// Lists all data export definitions.
-    pub fn listExports(self: *Self, allocator: std.mem.Allocator, input: list_exports.ListExportsInput, options: list_exports.Options) !list_exports.ListExportsOutput {
+    pub fn listExports(self: *Self, allocator: std.mem.Allocator, input: list_exports.ListExportsInput, options: CallOptions) !list_exports.ListExportsOutput {
         return list_exports.execute(self, allocator, input, options);
     }
 
     /// Lists all available tables in data exports.
-    pub fn listTables(self: *Self, allocator: std.mem.Allocator, input: list_tables.ListTablesInput, options: list_tables.Options) !list_tables.ListTablesOutput {
+    pub fn listTables(self: *Self, allocator: std.mem.Allocator, input: list_tables.ListTablesInput, options: CallOptions) !list_tables.ListTablesOutput {
         return list_tables.execute(self, allocator, input, options);
     }
 
     /// List tags associated with an existing data export.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Adds tags for an existing data export definition.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes tags associated with an existing data export definition.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an existing data export by overwriting all export parameters. All
     /// export
     /// parameters must be provided in the UpdateExport request.
-    pub fn updateExport(self: *Self, allocator: std.mem.Allocator, input: update_export.UpdateExportInput, options: update_export.Options) !update_export.UpdateExportOutput {
+    pub fn updateExport(self: *Self, allocator: std.mem.Allocator, input: update_export.UpdateExportInput, options: CallOptions) !update_export.UpdateExportOutput {
         return update_export.execute(self, allocator, input, options);
     }
 

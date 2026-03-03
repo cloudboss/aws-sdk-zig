@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const invoke_endpoint_with_bidirectional_stream = @import("invoke_endpoint_with_bidirectional_stream.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -62,7 +63,7 @@ pub const Client = struct {
     /// Endpoints are scoped to an individual account, and are not public. The URL
     /// does not contain the account ID, but Amazon SageMaker AI determines the
     /// account ID from the authentication token that is supplied by the caller.
-    pub fn invokeEndpointWithBidirectionalStream(self: *Self, allocator: std.mem.Allocator, input: invoke_endpoint_with_bidirectional_stream.InvokeEndpointWithBidirectionalStreamInput, options: invoke_endpoint_with_bidirectional_stream.Options) !invoke_endpoint_with_bidirectional_stream.InvokeEndpointWithBidirectionalStreamOutput {
+    pub fn invokeEndpointWithBidirectionalStream(self: *Self, allocator: std.mem.Allocator, input: invoke_endpoint_with_bidirectional_stream.InvokeEndpointWithBidirectionalStreamInput, options: CallOptions) !invoke_endpoint_with_bidirectional_stream.InvokeEndpointWithBidirectionalStreamOutput {
         return invoke_endpoint_with_bidirectional_stream.execute(self, allocator, input, options);
     }
 };

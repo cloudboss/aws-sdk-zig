@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InclusionProtectionFilters = @import("inclusion_protection_filters.zig").InclusionProtectionFilters;
 const Protection = @import("protection.zig").Protection;
@@ -74,11 +75,7 @@ pub const ListProtectionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListProtectionsInput, options: Options) !ListProtectionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListProtectionsInput, options: CallOptions) !ListProtectionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

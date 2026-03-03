@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteNetworkAclInput = struct {
@@ -16,13 +17,9 @@ pub const DeleteNetworkAclInput = struct {
     network_acl_id: []const u8,
 };
 
-const DeleteNetworkAclOutput = struct {};
+pub const DeleteNetworkAclOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteNetworkAclInput, options: Options) !DeleteNetworkAclOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteNetworkAclInput, options: CallOptions) !DeleteNetworkAclOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

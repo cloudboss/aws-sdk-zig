@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ObjectLambdaConfiguration = @import("object_lambda_configuration.zig").ObjectLambdaConfiguration;
 const serde = @import("serde.zig");
@@ -21,11 +22,7 @@ pub const GetAccessPointConfigurationForObjectLambdaOutput = struct {
     configuration: ?ObjectLambdaConfiguration = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAccessPointConfigurationForObjectLambdaInput, options: Options) !GetAccessPointConfigurationForObjectLambdaOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAccessPointConfigurationForObjectLambdaInput, options: CallOptions) !GetAccessPointConfigurationForObjectLambdaOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

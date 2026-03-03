@@ -24,6 +24,7 @@ const set_queue_attributes = @import("set_queue_attributes.zig");
 const start_message_move_task = @import("start_message_move_task.zig");
 const tag_queue = @import("tag_queue.zig");
 const untag_queue = @import("untag_queue.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -89,7 +90,7 @@ pub const Client = struct {
     /// see [Grant
     /// cross-account permissions to a role and a
     /// username](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name) in the *Amazon SQS Developer Guide*.
-    pub fn addPermission(self: *Self, allocator: std.mem.Allocator, input: add_permission.AddPermissionInput, options: add_permission.Options) !add_permission.AddPermissionOutput {
+    pub fn addPermission(self: *Self, allocator: std.mem.Allocator, input: add_permission.AddPermissionInput, options: CallOptions) !add_permission.AddPermissionOutput {
         return add_permission.execute(self, allocator, input, options);
     }
 
@@ -110,7 +111,7 @@ pub const Client = struct {
     ///
     /// * Only one active message movement task is supported per queue at any given
     /// time.
-    pub fn cancelMessageMoveTask(self: *Self, allocator: std.mem.Allocator, input: cancel_message_move_task.CancelMessageMoveTaskInput, options: cancel_message_move_task.Options) !cancel_message_move_task.CancelMessageMoveTaskOutput {
+    pub fn cancelMessageMoveTask(self: *Self, allocator: std.mem.Allocator, input: cancel_message_move_task.CancelMessageMoveTaskInput, options: CallOptions) !cancel_message_move_task.CancelMessageMoveTaskOutput {
         return cancel_message_move_task.execute(self, allocator, input, options);
     }
 
@@ -181,7 +182,7 @@ pub const Client = struct {
     /// using the
     /// `ChangeMessageVisibility` action) the next time the message is
     /// received.
-    pub fn changeMessageVisibility(self: *Self, allocator: std.mem.Allocator, input: change_message_visibility.ChangeMessageVisibilityInput, options: change_message_visibility.Options) !change_message_visibility.ChangeMessageVisibilityOutput {
+    pub fn changeMessageVisibility(self: *Self, allocator: std.mem.Allocator, input: change_message_visibility.ChangeMessageVisibilityInput, options: CallOptions) !change_message_visibility.ChangeMessageVisibilityOutput {
         return change_message_visibility.execute(self, allocator, input, options);
     }
 
@@ -199,7 +200,7 @@ pub const Client = struct {
     /// Because the batch request can result in a combination of successful and
     /// unsuccessful actions, you should check for batch errors even when the call
     /// returns an HTTP status code of `200`.
-    pub fn changeMessageVisibilityBatch(self: *Self, allocator: std.mem.Allocator, input: change_message_visibility_batch.ChangeMessageVisibilityBatchInput, options: change_message_visibility_batch.Options) !change_message_visibility_batch.ChangeMessageVisibilityBatchOutput {
+    pub fn changeMessageVisibilityBatch(self: *Self, allocator: std.mem.Allocator, input: change_message_visibility_batch.ChangeMessageVisibilityBatchInput, options: CallOptions) !change_message_visibility_batch.ChangeMessageVisibilityBatchOutput {
         return change_message_visibility_batch.execute(self, allocator, input, options);
     }
 
@@ -258,7 +259,7 @@ pub const Client = struct {
     /// see [Grant
     /// cross-account permissions to a role and a
     /// username](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name) in the *Amazon SQS Developer Guide*.
-    pub fn createQueue(self: *Self, allocator: std.mem.Allocator, input: create_queue.CreateQueueInput, options: create_queue.Options) !create_queue.CreateQueueOutput {
+    pub fn createQueue(self: *Self, allocator: std.mem.Allocator, input: create_queue.CreateQueueInput, options: CallOptions) !create_queue.CreateQueueOutput {
         return create_queue.execute(self, allocator, input, options);
     }
 
@@ -291,7 +292,7 @@ pub const Client = struct {
     /// receive request. You should ensure that your application is idempotent, so
     /// that
     /// receiving a message more than once does not cause issues.
-    pub fn deleteMessage(self: *Self, allocator: std.mem.Allocator, input: delete_message.DeleteMessageInput, options: delete_message.Options) !delete_message.DeleteMessageOutput {
+    pub fn deleteMessage(self: *Self, allocator: std.mem.Allocator, input: delete_message.DeleteMessageInput, options: CallOptions) !delete_message.DeleteMessageOutput {
         return delete_message.execute(self, allocator, input, options);
     }
 
@@ -304,7 +305,7 @@ pub const Client = struct {
     /// Because the batch request can result in a combination of successful and
     /// unsuccessful actions, you should check for batch errors even when the call
     /// returns an HTTP status code of `200`.
-    pub fn deleteMessageBatch(self: *Self, allocator: std.mem.Allocator, input: delete_message_batch.DeleteMessageBatchInput, options: delete_message_batch.Options) !delete_message_batch.DeleteMessageBatchOutput {
+    pub fn deleteMessageBatch(self: *Self, allocator: std.mem.Allocator, input: delete_message_batch.DeleteMessageBatchInput, options: CallOptions) !delete_message_batch.DeleteMessageBatchOutput {
         return delete_message_batch.execute(self, allocator, input, options);
     }
 
@@ -333,7 +334,7 @@ pub const Client = struct {
     /// username](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name) in the *Amazon SQS Developer Guide*.
     ///
     /// The delete operation uses the HTTP `GET` verb.
-    pub fn deleteQueue(self: *Self, allocator: std.mem.Allocator, input: delete_queue.DeleteQueueInput, options: delete_queue.Options) !delete_queue.DeleteQueueOutput {
+    pub fn deleteQueue(self: *Self, allocator: std.mem.Allocator, input: delete_queue.DeleteQueueInput, options: CallOptions) !delete_queue.DeleteQueueOutput {
         return delete_queue.execute(self, allocator, input, options);
     }
 
@@ -341,7 +342,7 @@ pub const Client = struct {
     ///
     /// To determine whether a queue is
     /// [FIFO](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html), you can check whether `QueueName` ends with the `.fifo` suffix.
-    pub fn getQueueAttributes(self: *Self, allocator: std.mem.Allocator, input: get_queue_attributes.GetQueueAttributesInput, options: get_queue_attributes.Options) !get_queue_attributes.GetQueueAttributesOutput {
+    pub fn getQueueAttributes(self: *Self, allocator: std.mem.Allocator, input: get_queue_attributes.GetQueueAttributesInput, options: CallOptions) !get_queue_attributes.GetQueueAttributesOutput {
         return get_queue_attributes.execute(self, allocator, input, options);
     }
 
@@ -362,7 +363,7 @@ pub const Client = struct {
     /// ` API or [Allow developers to write messages to a shared
     /// queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-writing-an-sqs-policy.html#write-messages-to-shared-queue) in the *Amazon SQS
     /// Developer Guide*.
-    pub fn getQueueUrl(self: *Self, allocator: std.mem.Allocator, input: get_queue_url.GetQueueUrlInput, options: get_queue_url.Options) !get_queue_url.GetQueueUrlOutput {
+    pub fn getQueueUrl(self: *Self, allocator: std.mem.Allocator, input: get_queue_url.GetQueueUrlInput, options: CallOptions) !get_queue_url.GetQueueUrlOutput {
         return get_queue_url.execute(self, allocator, input, options);
     }
 
@@ -381,7 +382,7 @@ pub const Client = struct {
     /// Dead-Letter
     /// Queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html) in the *Amazon SQS Developer
     /// Guide*.
-    pub fn listDeadLetterSourceQueues(self: *Self, allocator: std.mem.Allocator, input: list_dead_letter_source_queues.ListDeadLetterSourceQueuesInput, options: list_dead_letter_source_queues.Options) !list_dead_letter_source_queues.ListDeadLetterSourceQueuesOutput {
+    pub fn listDeadLetterSourceQueues(self: *Self, allocator: std.mem.Allocator, input: list_dead_letter_source_queues.ListDeadLetterSourceQueuesInput, options: CallOptions) !list_dead_letter_source_queues.ListDeadLetterSourceQueuesOutput {
         return list_dead_letter_source_queues.execute(self, allocator, input, options);
     }
 
@@ -398,7 +399,7 @@ pub const Client = struct {
     ///
     /// * Only one active message movement task is supported per queue at any given
     /// time.
-    pub fn listMessageMoveTasks(self: *Self, allocator: std.mem.Allocator, input: list_message_move_tasks.ListMessageMoveTasksInput, options: list_message_move_tasks.Options) !list_message_move_tasks.ListMessageMoveTasksOutput {
+    pub fn listMessageMoveTasks(self: *Self, allocator: std.mem.Allocator, input: list_message_move_tasks.ListMessageMoveTasksInput, options: CallOptions) !list_message_move_tasks.ListMessageMoveTasksOutput {
         return list_message_move_tasks.execute(self, allocator, input, options);
     }
 
@@ -411,7 +412,7 @@ pub const Client = struct {
     /// see [Grant
     /// cross-account permissions to a role and a
     /// username](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name) in the *Amazon SQS Developer Guide*.
-    pub fn listQueueTags(self: *Self, allocator: std.mem.Allocator, input: list_queue_tags.ListQueueTagsInput, options: list_queue_tags.Options) !list_queue_tags.ListQueueTagsOutput {
+    pub fn listQueueTags(self: *Self, allocator: std.mem.Allocator, input: list_queue_tags.ListQueueTagsInput, options: CallOptions) !list_queue_tags.ListQueueTagsOutput {
         return list_queue_tags.execute(self, allocator, input, options);
     }
 
@@ -434,7 +435,7 @@ pub const Client = struct {
     /// see [Grant
     /// cross-account permissions to a role and a
     /// username](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name) in the *Amazon SQS Developer Guide*.
-    pub fn listQueues(self: *Self, allocator: std.mem.Allocator, input: list_queues.ListQueuesInput, options: list_queues.Options) !list_queues.ListQueuesOutput {
+    pub fn listQueues(self: *Self, allocator: std.mem.Allocator, input: list_queues.ListQueuesInput, options: CallOptions) !list_queues.ListQueuesOutput {
         return list_queues.execute(self, allocator, input, options);
     }
 
@@ -455,7 +456,7 @@ pub const Client = struct {
     ///
     /// Messages sent to the queue *after* you call `PurgeQueue`
     /// might be deleted while the queue is being purged.
-    pub fn purgeQueue(self: *Self, allocator: std.mem.Allocator, input: purge_queue.PurgeQueueInput, options: purge_queue.Options) !purge_queue.PurgeQueueOutput {
+    pub fn purgeQueue(self: *Self, allocator: std.mem.Allocator, input: purge_queue.PurgeQueueInput, options: CallOptions) !purge_queue.PurgeQueueOutput {
         return purge_queue.execute(self, allocator, input, options);
     }
 
@@ -508,7 +509,7 @@ pub const Client = struct {
     /// In the future, new attributes might be added. If you write code that calls
     /// this action, we recommend that you structure your code so that it can handle
     /// new attributes gracefully.
-    pub fn receiveMessage(self: *Self, allocator: std.mem.Allocator, input: receive_message.ReceiveMessageInput, options: receive_message.Options) !receive_message.ReceiveMessageOutput {
+    pub fn receiveMessage(self: *Self, allocator: std.mem.Allocator, input: receive_message.ReceiveMessageInput, options: CallOptions) !receive_message.ReceiveMessageOutput {
         return receive_message.execute(self, allocator, input, options);
     }
 
@@ -526,7 +527,7 @@ pub const Client = struct {
     /// * To remove the ability to change queue permissions, you must deny
     ///   permission to the `AddPermission`, `RemovePermission`, and
     ///   `SetQueueAttributes` actions in your IAM policy.
-    pub fn removePermission(self: *Self, allocator: std.mem.Allocator, input: remove_permission.RemovePermissionInput, options: remove_permission.Options) !remove_permission.RemovePermissionOutput {
+    pub fn removePermission(self: *Self, allocator: std.mem.Allocator, input: remove_permission.RemovePermissionInput, options: CallOptions) !remove_permission.RemovePermissionOutput {
         return remove_permission.execute(self, allocator, input, options);
     }
 
@@ -542,7 +543,7 @@ pub const Client = struct {
     /// If a message contains characters outside the allowed set, Amazon SQS rejects
     /// the message and returns an InvalidMessageContents error. Ensure that your
     /// message body includes only valid characters to avoid this exception.
-    pub fn sendMessage(self: *Self, allocator: std.mem.Allocator, input: send_message.SendMessageInput, options: send_message.Options) !send_message.SendMessageOutput {
+    pub fn sendMessage(self: *Self, allocator: std.mem.Allocator, input: send_message.SendMessageInput, options: CallOptions) !send_message.SendMessageOutput {
         return send_message.execute(self, allocator, input, options);
     }
 
@@ -578,7 +579,7 @@ pub const Client = struct {
     /// If you don't specify the `DelaySeconds` parameter for an entry, Amazon SQS
     /// uses
     /// the default value for the queue.
-    pub fn sendMessageBatch(self: *Self, allocator: std.mem.Allocator, input: send_message_batch.SendMessageBatchInput, options: send_message_batch.Options) !send_message_batch.SendMessageBatchOutput {
+    pub fn sendMessageBatch(self: *Self, allocator: std.mem.Allocator, input: send_message_batch.SendMessageBatchInput, options: CallOptions) !send_message_batch.SendMessageBatchOutput {
         return send_message_batch.execute(self, allocator, input, options);
     }
 
@@ -606,7 +607,7 @@ pub const Client = struct {
     /// * To remove the ability to change queue permissions, you must deny
     ///   permission to the `AddPermission`, `RemovePermission`, and
     ///   `SetQueueAttributes` actions in your IAM policy.
-    pub fn setQueueAttributes(self: *Self, allocator: std.mem.Allocator, input: set_queue_attributes.SetQueueAttributesInput, options: set_queue_attributes.Options) !set_queue_attributes.SetQueueAttributesOutput {
+    pub fn setQueueAttributes(self: *Self, allocator: std.mem.Allocator, input: set_queue_attributes.SetQueueAttributesInput, options: CallOptions) !set_queue_attributes.SetQueueAttributesOutput {
         return set_queue_attributes.execute(self, allocator, input, options);
     }
 
@@ -628,7 +629,7 @@ pub const Client = struct {
     ///
     /// * Only one active message movement task is supported per queue at any given
     /// time.
-    pub fn startMessageMoveTask(self: *Self, allocator: std.mem.Allocator, input: start_message_move_task.StartMessageMoveTaskInput, options: start_message_move_task.Options) !start_message_move_task.StartMessageMoveTaskOutput {
+    pub fn startMessageMoveTask(self: *Self, allocator: std.mem.Allocator, input: start_message_move_task.StartMessageMoveTaskInput, options: CallOptions) !start_message_move_task.StartMessageMoveTaskOutput {
         return start_message_move_task.execute(self, allocator, input, options);
     }
 
@@ -658,7 +659,7 @@ pub const Client = struct {
     /// see [Grant
     /// cross-account permissions to a role and a
     /// username](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name) in the *Amazon SQS Developer Guide*.
-    pub fn tagQueue(self: *Self, allocator: std.mem.Allocator, input: tag_queue.TagQueueInput, options: tag_queue.Options) !tag_queue.TagQueueOutput {
+    pub fn tagQueue(self: *Self, allocator: std.mem.Allocator, input: tag_queue.TagQueueInput, options: CallOptions) !tag_queue.TagQueueOutput {
         return tag_queue.execute(self, allocator, input, options);
     }
 
@@ -671,7 +672,7 @@ pub const Client = struct {
     /// see [Grant
     /// cross-account permissions to a role and a
     /// username](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name) in the *Amazon SQS Developer Guide*.
-    pub fn untagQueue(self: *Self, allocator: std.mem.Allocator, input: untag_queue.UntagQueueInput, options: untag_queue.Options) !untag_queue.UntagQueueOutput {
+    pub fn untagQueue(self: *Self, allocator: std.mem.Allocator, input: untag_queue.UntagQueueInput, options: CallOptions) !untag_queue.UntagQueueOutput {
         return untag_queue.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const NotificationOptions = @import("notification_options.zig").NotificationOptions;
 const SharePrincipal = @import("share_principal.zig").SharePrincipal;
@@ -38,11 +39,7 @@ pub const AddResourcePermissionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddResourcePermissionsInput, options: Options) !AddResourcePermissionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddResourcePermissionsInput, options: CallOptions) !AddResourcePermissionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

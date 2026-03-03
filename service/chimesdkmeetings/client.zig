@@ -17,6 +17,7 @@ const stop_meeting_transcription = @import("stop_meeting_transcription.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_attendee_capabilities = @import("update_attendee_capabilities.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -52,7 +53,7 @@ pub const Client = struct {
     /// [Using the Amazon Chime
     /// SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html) in
     /// the *Amazon Chime Developer Guide*.
-    pub fn batchCreateAttendee(self: *Self, allocator: std.mem.Allocator, input: batch_create_attendee.BatchCreateAttendeeInput, options: batch_create_attendee.Options) !batch_create_attendee.BatchCreateAttendeeOutput {
+    pub fn batchCreateAttendee(self: *Self, allocator: std.mem.Allocator, input: batch_create_attendee.BatchCreateAttendeeInput, options: CallOptions) !batch_create_attendee.BatchCreateAttendeeOutput {
         return batch_create_attendee.execute(self, allocator, input, options);
     }
 
@@ -101,7 +102,7 @@ pub const Client = struct {
     /// and if the attendee turned on their video or content streams, remote
     /// attendees can receive those streams, but only after media renegotiation
     /// between the client and the Amazon Chime back-end server.
-    pub fn batchUpdateAttendeeCapabilitiesExcept(self: *Self, allocator: std.mem.Allocator, input: batch_update_attendee_capabilities_except.BatchUpdateAttendeeCapabilitiesExceptInput, options: batch_update_attendee_capabilities_except.Options) !batch_update_attendee_capabilities_except.BatchUpdateAttendeeCapabilitiesExceptOutput {
+    pub fn batchUpdateAttendeeCapabilitiesExcept(self: *Self, allocator: std.mem.Allocator, input: batch_update_attendee_capabilities_except.BatchUpdateAttendeeCapabilitiesExceptInput, options: CallOptions) !batch_update_attendee_capabilities_except.BatchUpdateAttendeeCapabilitiesExceptOutput {
         return batch_update_attendee_capabilities_except.execute(self, allocator, input, options);
     }
 
@@ -111,7 +112,7 @@ pub const Client = struct {
     /// SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
     /// in the
     /// *Amazon Chime Developer Guide*.
-    pub fn createAttendee(self: *Self, allocator: std.mem.Allocator, input: create_attendee.CreateAttendeeInput, options: create_attendee.Options) !create_attendee.CreateAttendeeOutput {
+    pub fn createAttendee(self: *Self, allocator: std.mem.Allocator, input: create_attendee.CreateAttendeeInput, options: CallOptions) !create_attendee.CreateAttendeeOutput {
         return create_attendee.execute(self, allocator, input, options);
     }
 
@@ -137,7 +138,7 @@ pub const Client = struct {
     /// * Content.MaxResolution: FHD
     ///
     /// * Video.MaxResolution: HD
-    pub fn createMeeting(self: *Self, allocator: std.mem.Allocator, input: create_meeting.CreateMeetingInput, options: create_meeting.Options) !create_meeting.CreateMeetingOutput {
+    pub fn createMeeting(self: *Self, allocator: std.mem.Allocator, input: create_meeting.CreateMeetingInput, options: CallOptions) !create_meeting.CreateMeetingOutput {
         return create_meeting.execute(self, allocator, input, options);
     }
 
@@ -163,7 +164,7 @@ pub const Client = struct {
     /// * Content.MaxResolution: FHD
     ///
     /// * Video.MaxResolution: HD
-    pub fn createMeetingWithAttendees(self: *Self, allocator: std.mem.Allocator, input: create_meeting_with_attendees.CreateMeetingWithAttendeesInput, options: create_meeting_with_attendees.Options) !create_meeting_with_attendees.CreateMeetingWithAttendeesOutput {
+    pub fn createMeetingWithAttendees(self: *Self, allocator: std.mem.Allocator, input: create_meeting_with_attendees.CreateMeetingWithAttendeesInput, options: CallOptions) !create_meeting_with_attendees.CreateMeetingWithAttendeesOutput {
         return create_meeting_with_attendees.execute(self, allocator, input, options);
     }
 
@@ -174,7 +175,7 @@ pub const Client = struct {
     /// [Using the Amazon Chime
     /// SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
     /// in the *Amazon Chime Developer Guide*.
-    pub fn deleteAttendee(self: *Self, allocator: std.mem.Allocator, input: delete_attendee.DeleteAttendeeInput, options: delete_attendee.Options) !delete_attendee.DeleteAttendeeOutput {
+    pub fn deleteAttendee(self: *Self, allocator: std.mem.Allocator, input: delete_attendee.DeleteAttendeeInput, options: CallOptions) !delete_attendee.DeleteAttendeeOutput {
         return delete_attendee.execute(self, allocator, input, options);
     }
 
@@ -185,7 +186,7 @@ pub const Client = struct {
     /// SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html) in
     /// the
     /// *Amazon Chime Developer Guide*.
-    pub fn deleteMeeting(self: *Self, allocator: std.mem.Allocator, input: delete_meeting.DeleteMeetingInput, options: delete_meeting.Options) !delete_meeting.DeleteMeetingOutput {
+    pub fn deleteMeeting(self: *Self, allocator: std.mem.Allocator, input: delete_meeting.DeleteMeetingInput, options: CallOptions) !delete_meeting.DeleteMeetingOutput {
         return delete_meeting.execute(self, allocator, input, options);
     }
 
@@ -194,7 +195,7 @@ pub const Client = struct {
     /// [Using the Amazon Chime
     /// SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
     /// in the *Amazon Chime Developer Guide*.
-    pub fn getAttendee(self: *Self, allocator: std.mem.Allocator, input: get_attendee.GetAttendeeInput, options: get_attendee.Options) !get_attendee.GetAttendeeOutput {
+    pub fn getAttendee(self: *Self, allocator: std.mem.Allocator, input: get_attendee.GetAttendeeInput, options: CallOptions) !get_attendee.GetAttendeeOutput {
         return get_attendee.execute(self, allocator, input, options);
     }
 
@@ -203,7 +204,7 @@ pub const Client = struct {
     /// [Using the Amazon Chime
     /// SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
     /// in the *Amazon Chime Developer Guide*.
-    pub fn getMeeting(self: *Self, allocator: std.mem.Allocator, input: get_meeting.GetMeetingInput, options: get_meeting.Options) !get_meeting.GetMeetingOutput {
+    pub fn getMeeting(self: *Self, allocator: std.mem.Allocator, input: get_meeting.GetMeetingInput, options: CallOptions) !get_meeting.GetMeetingOutput {
         return get_meeting.execute(self, allocator, input, options);
     }
 
@@ -212,12 +213,12 @@ pub const Client = struct {
     /// [Using the Amazon Chime
     /// SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
     /// in the *Amazon Chime Developer Guide*.
-    pub fn listAttendees(self: *Self, allocator: std.mem.Allocator, input: list_attendees.ListAttendeesInput, options: list_attendees.Options) !list_attendees.ListAttendeesOutput {
+    pub fn listAttendees(self: *Self, allocator: std.mem.Allocator, input: list_attendees.ListAttendeesInput, options: CallOptions) !list_attendees.ListAttendeesOutput {
         return list_attendees.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the tags available for the specified resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -249,7 +250,7 @@ pub const Client = struct {
     /// content to develop and
     /// improve AWS AI/ML services by configuring an AI services opt out policy
     /// using Amazon Web Services Organizations.
-    pub fn startMeetingTranscription(self: *Self, allocator: std.mem.Allocator, input: start_meeting_transcription.StartMeetingTranscriptionInput, options: start_meeting_transcription.Options) !start_meeting_transcription.StartMeetingTranscriptionOutput {
+    pub fn startMeetingTranscription(self: *Self, allocator: std.mem.Allocator, input: start_meeting_transcription.StartMeetingTranscriptionInput, options: CallOptions) !start_meeting_transcription.StartMeetingTranscriptionOutput {
         return start_meeting_transcription.execute(self, allocator, input, options);
     }
 
@@ -273,12 +274,12 @@ pub const Client = struct {
     /// content to develop and
     /// improve Amazon Web Services AI/ML services by configuring an AI services opt
     /// out policy using Amazon Web Services Organizations.
-    pub fn stopMeetingTranscription(self: *Self, allocator: std.mem.Allocator, input: stop_meeting_transcription.StopMeetingTranscriptionInput, options: stop_meeting_transcription.Options) !stop_meeting_transcription.StopMeetingTranscriptionOutput {
+    pub fn stopMeetingTranscription(self: *Self, allocator: std.mem.Allocator, input: stop_meeting_transcription.StopMeetingTranscriptionInput, options: CallOptions) !stop_meeting_transcription.StopMeetingTranscriptionOutput {
         return stop_meeting_transcription.execute(self, allocator, input, options);
     }
 
     /// The resource that supports tags.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -307,7 +308,7 @@ pub const Client = struct {
     /// `tag:UntagResource`
     ///
     /// `ChimeSDKMeetings:DeleteTags`
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -355,7 +356,7 @@ pub const Client = struct {
     /// and if the attendee turned on their video or content streams, remote
     /// attendees can receive those streams, but only after media renegotiation
     /// between the client and the Amazon Chime back-end server.
-    pub fn updateAttendeeCapabilities(self: *Self, allocator: std.mem.Allocator, input: update_attendee_capabilities.UpdateAttendeeCapabilitiesInput, options: update_attendee_capabilities.Options) !update_attendee_capabilities.UpdateAttendeeCapabilitiesOutput {
+    pub fn updateAttendeeCapabilities(self: *Self, allocator: std.mem.Allocator, input: update_attendee_capabilities.UpdateAttendeeCapabilitiesInput, options: CallOptions) !update_attendee_capabilities.UpdateAttendeeCapabilitiesOutput {
         return update_attendee_capabilities.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AppInstanceRetentionSettings = @import("app_instance_retention_settings.zig").AppInstanceRetentionSettings;
 
@@ -31,11 +32,7 @@ pub const PutAppInstanceRetentionSettingsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAppInstanceRetentionSettingsInput, options: Options) !PutAppInstanceRetentionSettingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAppInstanceRetentionSettingsInput, options: CallOptions) !PutAppInstanceRetentionSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

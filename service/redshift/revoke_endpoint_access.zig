@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AuthorizationStatus = @import("authorization_status.zig").AuthorizationStatus;
 const serde = @import("serde.zig");
@@ -23,13 +24,9 @@ pub const RevokeEndpointAccessInput = struct {
     vpc_ids: ?[]const []const u8 = null,
 };
 
-const RevokeEndpointAccessOutput = @import("endpoint_authorization.zig").EndpointAuthorization;
+pub const RevokeEndpointAccessOutput = @import("endpoint_authorization.zig").EndpointAuthorization;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RevokeEndpointAccessInput, options: Options) !RevokeEndpointAccessOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RevokeEndpointAccessInput, options: CallOptions) !RevokeEndpointAccessOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

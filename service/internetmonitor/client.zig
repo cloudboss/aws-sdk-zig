@@ -17,6 +17,7 @@ const stop_query = @import("stop_query.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_monitor = @import("update_monitor.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -69,12 +70,12 @@ pub const Client = struct {
     /// city-networks maximum. For more information, see [Choosing a city-network
     /// maximum
     /// value](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html) in the *Amazon CloudWatch User Guide*.
-    pub fn createMonitor(self: *Self, allocator: std.mem.Allocator, input: create_monitor.CreateMonitorInput, options: create_monitor.Options) !create_monitor.CreateMonitorOutput {
+    pub fn createMonitor(self: *Self, allocator: std.mem.Allocator, input: create_monitor.CreateMonitorInput, options: CallOptions) !create_monitor.CreateMonitorOutput {
         return create_monitor.execute(self, allocator, input, options);
     }
 
     /// Deletes a monitor in Amazon CloudWatch Internet Monitor.
-    pub fn deleteMonitor(self: *Self, allocator: std.mem.Allocator, input: delete_monitor.DeleteMonitorInput, options: delete_monitor.Options) !delete_monitor.DeleteMonitorOutput {
+    pub fn deleteMonitor(self: *Self, allocator: std.mem.Allocator, input: delete_monitor.DeleteMonitorInput, options: CallOptions) !delete_monitor.DeleteMonitorOutput {
         return delete_monitor.execute(self, allocator, input, options);
     }
 
@@ -89,7 +90,7 @@ pub const Client = struct {
     ///
     /// Information rolled up at the global traffic level is also returned,
     /// including the impact type and total traffic impact.
-    pub fn getHealthEvent(self: *Self, allocator: std.mem.Allocator, input: get_health_event.GetHealthEventInput, options: get_health_event.Options) !get_health_event.GetHealthEventOutput {
+    pub fn getHealthEvent(self: *Self, allocator: std.mem.Allocator, input: get_health_event.GetHealthEventInput, options: CallOptions) !get_health_event.GetHealthEventOutput {
         return get_health_event.execute(self, allocator, input, options);
     }
 
@@ -103,7 +104,7 @@ pub const Client = struct {
     /// when the event started and (if the event is over) ended, the type of event
     /// (`PERFORMANCE` or `AVAILABILITY`),
     /// and the status (`ACTIVE` or `RESOLVED`).
-    pub fn getInternetEvent(self: *Self, allocator: std.mem.Allocator, input: get_internet_event.GetInternetEventInput, options: get_internet_event.Options) !get_internet_event.GetInternetEventOutput {
+    pub fn getInternetEvent(self: *Self, allocator: std.mem.Allocator, input: get_internet_event.GetInternetEventInput, options: CallOptions) !get_internet_event.GetInternetEventOutput {
         return get_internet_event.execute(self, allocator, input, options);
     }
 
@@ -111,7 +112,7 @@ pub const Client = struct {
     /// on a monitor name. The information returned includes the Amazon Resource
     /// Name (ARN), create time,
     /// modified time, resources included in the monitor, and status information.
-    pub fn getMonitor(self: *Self, allocator: std.mem.Allocator, input: get_monitor.GetMonitorInput, options: get_monitor.Options) !get_monitor.GetMonitorOutput {
+    pub fn getMonitor(self: *Self, allocator: std.mem.Allocator, input: get_monitor.GetMonitorInput, options: CallOptions) !get_monitor.GetMonitorOutput {
         return get_monitor.execute(self, allocator, input, options);
     }
 
@@ -125,7 +126,7 @@ pub const Client = struct {
     /// [Using the Amazon CloudWatch Internet Monitor query
     /// interface](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html)
     /// in the Amazon CloudWatch Internet Monitor User Guide.
-    pub fn getQueryResults(self: *Self, allocator: std.mem.Allocator, input: get_query_results.GetQueryResultsInput, options: get_query_results.Options) !get_query_results.GetQueryResultsOutput {
+    pub fn getQueryResults(self: *Self, allocator: std.mem.Allocator, input: get_query_results.GetQueryResultsInput, options: CallOptions) !get_query_results.GetQueryResultsOutput {
         return get_query_results.execute(self, allocator, input, options);
     }
 
@@ -143,7 +144,7 @@ pub const Client = struct {
     /// * `FAILED`: The query failed due to an error.
     ///
     /// * `CANCELED`: The query was canceled.
-    pub fn getQueryStatus(self: *Self, allocator: std.mem.Allocator, input: get_query_status.GetQueryStatusInput, options: get_query_status.Options) !get_query_status.GetQueryStatusOutput {
+    pub fn getQueryStatus(self: *Self, allocator: std.mem.Allocator, input: get_query_status.GetQueryStatusInput, options: CallOptions) !get_query_status.GetQueryStatusOutput {
         return get_query_status.execute(self, allocator, input, options);
     }
 
@@ -154,7 +155,7 @@ pub const Client = struct {
     ///
     /// Health events that have start times during the time frame that is requested
     /// are not included in the list of health events.
-    pub fn listHealthEvents(self: *Self, allocator: std.mem.Allocator, input: list_health_events.ListHealthEventsInput, options: list_health_events.Options) !list_health_events.ListHealthEventsOutput {
+    pub fn listHealthEvents(self: *Self, allocator: std.mem.Allocator, input: list_health_events.ListHealthEventsInput, options: CallOptions) !list_health_events.ListHealthEventsOutput {
         return list_health_events.execute(self, allocator, input, options);
     }
 
@@ -174,20 +175,20 @@ pub const Client = struct {
     ///
     /// You can also limit the events returned to a specific status
     /// (`ACTIVE` or `RESOLVED`) or type (`PERFORMANCE` or `AVAILABILITY`).
-    pub fn listInternetEvents(self: *Self, allocator: std.mem.Allocator, input: list_internet_events.ListInternetEventsInput, options: list_internet_events.Options) !list_internet_events.ListInternetEventsOutput {
+    pub fn listInternetEvents(self: *Self, allocator: std.mem.Allocator, input: list_internet_events.ListInternetEventsInput, options: CallOptions) !list_internet_events.ListInternetEventsOutput {
         return list_internet_events.execute(self, allocator, input, options);
     }
 
     /// Lists all of your monitors for Amazon CloudWatch Internet Monitor and their
     /// statuses, along with the Amazon Resource Name (ARN) and name of each
     /// monitor.
-    pub fn listMonitors(self: *Self, allocator: std.mem.Allocator, input: list_monitors.ListMonitorsInput, options: list_monitors.Options) !list_monitors.ListMonitorsOutput {
+    pub fn listMonitors(self: *Self, allocator: std.mem.Allocator, input: list_monitors.ListMonitorsInput, options: CallOptions) !list_monitors.ListMonitorsOutput {
         return list_monitors.execute(self, allocator, input, options);
     }
 
     /// Lists the tags for a resource. Tags are supported only for monitors in
     /// Amazon CloudWatch Internet Monitor.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -203,12 +204,12 @@ pub const Client = struct {
     /// [Using the Amazon CloudWatch Internet Monitor query
     /// interface](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html)
     /// in the Amazon CloudWatch Internet Monitor User Guide.
-    pub fn startQuery(self: *Self, allocator: std.mem.Allocator, input: start_query.StartQueryInput, options: start_query.Options) !start_query.StartQueryOutput {
+    pub fn startQuery(self: *Self, allocator: std.mem.Allocator, input: start_query.StartQueryInput, options: CallOptions) !start_query.StartQueryOutput {
         return start_query.execute(self, allocator, input, options);
     }
 
     /// Stop a query that is progress for a specific monitor.
-    pub fn stopQuery(self: *Self, allocator: std.mem.Allocator, input: stop_query.StopQueryInput, options: stop_query.Options) !stop_query.StopQueryOutput {
+    pub fn stopQuery(self: *Self, allocator: std.mem.Allocator, input: stop_query.StopQueryInput, options: CallOptions) !stop_query.StopQueryOutput {
         return stop_query.execute(self, allocator, input, options);
     }
 
@@ -218,12 +219,12 @@ pub const Client = struct {
     ///
     /// A minimum of one tag is required for this call. It returns an error if you
     /// use the `TagResource` request with 0 tags.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -236,7 +237,7 @@ pub const Client = struct {
     /// the number of city-networks that are actually monitored.
     /// For more information, see [Choosing a city-network maximum
     /// value](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html) in the *Amazon CloudWatch User Guide*.
-    pub fn updateMonitor(self: *Self, allocator: std.mem.Allocator, input: update_monitor.UpdateMonitorInput, options: update_monitor.Options) !update_monitor.UpdateMonitorOutput {
+    pub fn updateMonitor(self: *Self, allocator: std.mem.Allocator, input: update_monitor.UpdateMonitorInput, options: CallOptions) !update_monitor.UpdateMonitorOutput {
         return update_monitor.execute(self, allocator, input, options);
     }
 

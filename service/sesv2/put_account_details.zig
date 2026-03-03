@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContactLanguage = @import("contact_language.zig").ContactLanguage;
 const MailType = @import("mail_type.zig").MailType;
@@ -53,11 +54,7 @@ pub const PutAccountDetailsInput = struct {
 pub const PutAccountDetailsOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAccountDetailsInput, options: Options) !PutAccountDetailsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAccountDetailsInput, options: CallOptions) !PutAccountDetailsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

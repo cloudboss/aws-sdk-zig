@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SidewalkAccountInfoWithFingerprint = @import("sidewalk_account_info_with_fingerprint.zig").SidewalkAccountInfoWithFingerprint;
 
@@ -34,11 +35,7 @@ pub const ListPartnerAccountsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListPartnerAccountsInput, options: Options) !ListPartnerAccountsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListPartnerAccountsInput, options: CallOptions) !ListPartnerAccountsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

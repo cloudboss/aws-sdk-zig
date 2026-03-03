@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const RequestPayer = @import("request_payer.zig").RequestPayer;
@@ -266,11 +267,7 @@ pub const UploadPartOutput = struct {
     ssekms_key_id: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UploadPartInput, options: Options) !UploadPartOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UploadPartInput, options: CallOptions) !UploadPartOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

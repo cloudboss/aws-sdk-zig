@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RoutingProfileSearchCriteria = @import("routing_profile_search_criteria.zig").RoutingProfileSearchCriteria;
 const RoutingProfileSearchFilter = @import("routing_profile_search_filter.zig").RoutingProfileSearchFilter;
@@ -58,11 +59,7 @@ pub const SearchRoutingProfilesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchRoutingProfilesInput, options: Options) !SearchRoutingProfilesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchRoutingProfilesInput, options: CallOptions) !SearchRoutingProfilesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

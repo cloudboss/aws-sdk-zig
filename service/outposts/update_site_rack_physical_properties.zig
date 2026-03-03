@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FiberOpticCableType = @import("fiber_optic_cable_type.zig").FiberOpticCableType;
 const MaximumSupportedWeightLbs = @import("maximum_supported_weight_lbs.zig").MaximumSupportedWeightLbs;
@@ -138,11 +139,7 @@ pub const UpdateSiteRackPhysicalPropertiesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSiteRackPhysicalPropertiesInput, options: Options) !UpdateSiteRackPhysicalPropertiesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSiteRackPhysicalPropertiesInput, options: CallOptions) !UpdateSiteRackPhysicalPropertiesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

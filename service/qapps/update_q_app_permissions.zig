@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PermissionInput = @import("permission_input.zig").PermissionInput;
 const PermissionOutput = @import("permission_output.zig").PermissionOutput;
@@ -48,11 +49,7 @@ pub const UpdateQAppPermissionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateQAppPermissionsInput, options: Options) !UpdateQAppPermissionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateQAppPermissionsInput, options: CallOptions) !UpdateQAppPermissionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

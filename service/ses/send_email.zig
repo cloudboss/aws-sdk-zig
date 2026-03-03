@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Destination = @import("destination.zig").Destination;
 const Message = @import("message.zig").Message;
@@ -118,11 +119,7 @@ pub const SendEmailOutput = struct {
     message_id: []const u8,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendEmailInput, options: Options) !SendEmailOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendEmailInput, options: CallOptions) !SendEmailOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

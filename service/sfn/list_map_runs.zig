@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MapRunListItem = @import("map_run_list_item.zig").MapRunListItem;
 
@@ -54,11 +55,7 @@ pub const ListMapRunsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMapRunsInput, options: Options) !ListMapRunsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMapRunsInput, options: CallOptions) !ListMapRunsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PositionResourceType = @import("position_resource_type.zig").PositionResourceType;
 const PositionSolverConfigurations = @import("position_solver_configurations.zig").PositionSolverConfigurations;
@@ -34,11 +35,7 @@ pub const PutPositionConfigurationInput = struct {
 pub const PutPositionConfigurationOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutPositionConfigurationInput, options: Options) !PutPositionConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutPositionConfigurationInput, options: CallOptions) !PutPositionConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

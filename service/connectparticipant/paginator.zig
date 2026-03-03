@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_transcript = @import("get_transcript.zig");
@@ -14,7 +15,7 @@ pub const GetTranscriptPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_transcript.Options) !get_transcript.GetTranscriptOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_transcript.GetTranscriptOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

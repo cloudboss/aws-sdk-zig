@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AuthorizerConfiguration = @import("authorizer_configuration.zig").AuthorizerConfiguration;
 const AuthorizerType = @import("authorizer_type.zig").AuthorizerType;
@@ -13,15 +14,11 @@ const GatewayProtocolType = @import("gateway_protocol_type.zig").GatewayProtocol
 const GatewayStatus = @import("gateway_status.zig").GatewayStatus;
 const WorkloadIdentityDetails = @import("workload_identity_details.zig").WorkloadIdentityDetails;
 
-const GetGatewayInput = @import("get_gateway_request.zig").GetGatewayRequest;
+pub const GetGatewayInput = @import("get_gateway_request.zig").GetGatewayRequest;
 
-const GetGatewayOutput = @import("get_gateway_response.zig").GetGatewayResponse;
+pub const GetGatewayOutput = @import("get_gateway_response.zig").GetGatewayResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetGatewayInput, options: Options) !GetGatewayOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetGatewayInput, options: CallOptions) !GetGatewayOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

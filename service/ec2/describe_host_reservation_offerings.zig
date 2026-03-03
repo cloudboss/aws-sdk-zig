@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const HostOffering = @import("host_offering.zig").HostOffering;
@@ -58,11 +59,7 @@ pub const DescribeHostReservationOfferingsOutput = struct {
     offering_set: ?[]const HostOffering = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeHostReservationOfferingsInput, options: Options) !DescribeHostReservationOfferingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeHostReservationOfferingsInput, options: CallOptions) !DescribeHostReservationOfferingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

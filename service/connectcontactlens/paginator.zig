@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_realtime_contact_analysis_segments = @import("list_realtime_contact_analysis_segments.zig");
@@ -14,7 +15,7 @@ pub const ListRealtimeContactAnalysisSegmentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_realtime_contact_analysis_segments.Options) !list_realtime_contact_analysis_segments.ListRealtimeContactAnalysisSegmentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_realtime_contact_analysis_segments.ListRealtimeContactAnalysisSegmentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

@@ -5,6 +5,7 @@ const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const put_deployment_parameter = @import("put_deployment_parameter.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -35,23 +36,23 @@ pub const Client = struct {
     }
 
     /// Lists all tags that have been added to a deployment parameter resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Creates or updates a deployment parameter and is targeted by `catalog` and
     /// `agreementId`.
-    pub fn putDeploymentParameter(self: *Self, allocator: std.mem.Allocator, input: put_deployment_parameter.PutDeploymentParameterInput, options: put_deployment_parameter.Options) !put_deployment_parameter.PutDeploymentParameterOutput {
+    pub fn putDeploymentParameter(self: *Self, allocator: std.mem.Allocator, input: put_deployment_parameter.PutDeploymentParameterInput, options: CallOptions) !put_deployment_parameter.PutDeploymentParameterOutput {
         return put_deployment_parameter.execute(self, allocator, input, options);
     }
 
     /// Tags a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag or list of tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 };

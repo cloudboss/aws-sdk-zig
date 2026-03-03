@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConflictingAliasesList = @import("conflicting_aliases_list.zig").ConflictingAliasesList;
 const serde = @import("serde.zig");
@@ -30,11 +31,7 @@ pub const ListConflictingAliasesOutput = struct {
     conflicting_aliases_list: ?ConflictingAliasesList = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListConflictingAliasesInput, options: Options) !ListConflictingAliasesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListConflictingAliasesInput, options: CallOptions) !ListConflictingAliasesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

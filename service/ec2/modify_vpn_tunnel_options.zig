@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ModifyVpnTunnelOptionsSpecification = @import("modify_vpn_tunnel_options_specification.zig").ModifyVpnTunnelOptionsSpecification;
 const VpnConnection = @import("vpn_connection.zig").VpnConnection;
@@ -41,11 +42,7 @@ pub const ModifyVpnTunnelOptionsOutput = struct {
     vpn_connection: ?VpnConnection = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyVpnTunnelOptionsInput, options: Options) !ModifyVpnTunnelOptionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyVpnTunnelOptionsInput, options: CallOptions) !ModifyVpnTunnelOptionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EksSource = @import("eks_source.zig").EksSource;
 const ResourceImportStrategyType = @import("resource_import_strategy_type.zig").ResourceImportStrategyType;
@@ -80,11 +81,7 @@ pub const ImportResourcesToDraftAppVersionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ImportResourcesToDraftAppVersionInput, options: Options) !ImportResourcesToDraftAppVersionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ImportResourcesToDraftAppVersionInput, options: CallOptions) !ImportResourcesToDraftAppVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const UsageGroupByField = @import("usage_group_by_field.zig").UsageGroupByField;
 const Period = @import("period.zig").Period;
@@ -56,11 +57,7 @@ pub const StartSessionsStatisticsAggregationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartSessionsStatisticsAggregationInput, options: Options) !StartSessionsStatisticsAggregationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartSessionsStatisticsAggregationInput, options: CallOptions) !StartSessionsStatisticsAggregationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

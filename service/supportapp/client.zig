@@ -11,6 +11,7 @@ const list_slack_workspace_configurations = @import("list_slack_workspace_config
 const put_account_alias = @import("put_account_alias.zig");
 const register_slack_workspace_for_organization = @import("register_slack_workspace_for_organization.zig");
 const update_slack_channel_configuration = @import("update_slack_channel_configuration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -62,7 +63,7 @@ pub const Client = struct {
     /// create, update, or resolve support cases for your account. Users require an
     /// invitation to
     /// join private channels.
-    pub fn createSlackChannelConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_slack_channel_configuration.CreateSlackChannelConfigurationInput, options: create_slack_channel_configuration.Options) !create_slack_channel_configuration.CreateSlackChannelConfigurationOutput {
+    pub fn createSlackChannelConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_slack_channel_configuration.CreateSlackChannelConfigurationInput, options: CallOptions) !create_slack_channel_configuration.CreateSlackChannelConfigurationOutput {
         return create_slack_channel_configuration.execute(self, allocator, input, options);
     }
 
@@ -70,21 +71,21 @@ pub const Client = struct {
     /// the Amazon Web Services Support App page of the
     /// Amazon Web Services Support Center. The alias also appears in Slack messages
     /// from the Amazon Web Services Support App.
-    pub fn deleteAccountAlias(self: *Self, allocator: std.mem.Allocator, input: delete_account_alias.DeleteAccountAliasInput, options: delete_account_alias.Options) !delete_account_alias.DeleteAccountAliasOutput {
+    pub fn deleteAccountAlias(self: *Self, allocator: std.mem.Allocator, input: delete_account_alias.DeleteAccountAliasInput, options: CallOptions) !delete_account_alias.DeleteAccountAliasOutput {
         return delete_account_alias.execute(self, allocator, input, options);
     }
 
     /// Deletes a Slack channel configuration from your Amazon Web Services account.
     /// This operation doesn't
     /// delete your Slack channel.
-    pub fn deleteSlackChannelConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_slack_channel_configuration.DeleteSlackChannelConfigurationInput, options: delete_slack_channel_configuration.Options) !delete_slack_channel_configuration.DeleteSlackChannelConfigurationOutput {
+    pub fn deleteSlackChannelConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_slack_channel_configuration.DeleteSlackChannelConfigurationInput, options: CallOptions) !delete_slack_channel_configuration.DeleteSlackChannelConfigurationOutput {
         return delete_slack_channel_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes a Slack workspace configuration from your Amazon Web Services
     /// account. This operation doesn't
     /// delete your Slack workspace.
-    pub fn deleteSlackWorkspaceConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_slack_workspace_configuration.DeleteSlackWorkspaceConfigurationInput, options: delete_slack_workspace_configuration.Options) !delete_slack_workspace_configuration.DeleteSlackWorkspaceConfigurationOutput {
+    pub fn deleteSlackWorkspaceConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_slack_workspace_configuration.DeleteSlackWorkspaceConfigurationInput, options: CallOptions) !delete_slack_workspace_configuration.DeleteSlackWorkspaceConfigurationOutput {
         return delete_slack_workspace_configuration.execute(self, allocator, input, options);
     }
 
@@ -92,17 +93,17 @@ pub const Client = struct {
     /// appears in the Amazon Web Services Support App page of
     /// the Amazon Web Services Support Center. The alias also appears in Slack
     /// messages from the Amazon Web Services Support App.
-    pub fn getAccountAlias(self: *Self, allocator: std.mem.Allocator, input: get_account_alias.GetAccountAliasInput, options: get_account_alias.Options) !get_account_alias.GetAccountAliasOutput {
+    pub fn getAccountAlias(self: *Self, allocator: std.mem.Allocator, input: get_account_alias.GetAccountAliasInput, options: CallOptions) !get_account_alias.GetAccountAliasOutput {
         return get_account_alias.execute(self, allocator, input, options);
     }
 
     /// Lists the Slack channel configurations for an Amazon Web Services account.
-    pub fn listSlackChannelConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_slack_channel_configurations.ListSlackChannelConfigurationsInput, options: list_slack_channel_configurations.Options) !list_slack_channel_configurations.ListSlackChannelConfigurationsOutput {
+    pub fn listSlackChannelConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_slack_channel_configurations.ListSlackChannelConfigurationsInput, options: CallOptions) !list_slack_channel_configurations.ListSlackChannelConfigurationsOutput {
         return list_slack_channel_configurations.execute(self, allocator, input, options);
     }
 
     /// Lists the Slack workspace configurations for an Amazon Web Services account.
-    pub fn listSlackWorkspaceConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_slack_workspace_configurations.ListSlackWorkspaceConfigurationsInput, options: list_slack_workspace_configurations.Options) !list_slack_workspace_configurations.ListSlackWorkspaceConfigurationsOutput {
+    pub fn listSlackWorkspaceConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_slack_workspace_configurations.ListSlackWorkspaceConfigurationsInput, options: CallOptions) !list_slack_workspace_configurations.ListSlackWorkspaceConfigurationsOutput {
         return list_slack_workspace_configurations.execute(self, allocator, input, options);
     }
 
@@ -111,7 +112,7 @@ pub const Client = struct {
     /// Amazon Web Services Support App page of the Amazon Web Services Support
     /// Center. The alias also appears in Slack messages from the
     /// Amazon Web Services Support App.
-    pub fn putAccountAlias(self: *Self, allocator: std.mem.Allocator, input: put_account_alias.PutAccountAliasInput, options: put_account_alias.Options) !put_account_alias.PutAccountAliasOutput {
+    pub fn putAccountAlias(self: *Self, allocator: std.mem.Allocator, input: put_account_alias.PutAccountAliasInput, options: CallOptions) !put_account_alias.PutAccountAliasOutput {
         return put_account_alias.execute(self, allocator, input, options);
     }
 
@@ -152,13 +153,13 @@ pub const Client = struct {
     ///   support cases for that account. For
     /// more information, see [Configuring a Slack
     /// channel](https://docs.aws.amazon.com/awssupport/latest/user/add-your-slack-channel.html).
-    pub fn registerSlackWorkspaceForOrganization(self: *Self, allocator: std.mem.Allocator, input: register_slack_workspace_for_organization.RegisterSlackWorkspaceForOrganizationInput, options: register_slack_workspace_for_organization.Options) !register_slack_workspace_for_organization.RegisterSlackWorkspaceForOrganizationOutput {
+    pub fn registerSlackWorkspaceForOrganization(self: *Self, allocator: std.mem.Allocator, input: register_slack_workspace_for_organization.RegisterSlackWorkspaceForOrganizationInput, options: CallOptions) !register_slack_workspace_for_organization.RegisterSlackWorkspaceForOrganizationOutput {
         return register_slack_workspace_for_organization.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration for a Slack channel, such as case update
     /// notifications.
-    pub fn updateSlackChannelConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_slack_channel_configuration.UpdateSlackChannelConfigurationInput, options: update_slack_channel_configuration.Options) !update_slack_channel_configuration.UpdateSlackChannelConfigurationOutput {
+    pub fn updateSlackChannelConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_slack_channel_configuration.UpdateSlackChannelConfigurationInput, options: CallOptions) !update_slack_channel_configuration.UpdateSlackChannelConfigurationOutput {
         return update_slack_channel_configuration.execute(self, allocator, input, options);
     }
 

@@ -15,6 +15,7 @@ const list_environments = @import("list_environments.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -47,7 +48,7 @@ pub const Client = struct {
 
     /// Associates an Elastic IP address with a public HCX VLAN. This operation is
     /// only allowed for public HCX VLANs at this time.
-    pub fn associateEipToVlan(self: *Self, allocator: std.mem.Allocator, input: associate_eip_to_vlan.AssociateEipToVlanInput, options: associate_eip_to_vlan.Options) !associate_eip_to_vlan.AssociateEipToVlanOutput {
+    pub fn associateEipToVlan(self: *Self, allocator: std.mem.Allocator, input: associate_eip_to_vlan.AssociateEipToVlanInput, options: CallOptions) !associate_eip_to_vlan.AssociateEipToVlanOutput {
         return associate_eip_to_vlan.execute(self, allocator, input, options);
     }
 
@@ -70,7 +71,7 @@ pub const Client = struct {
     /// You cannot use the `dedicatedHostId` and `placementGroupId` parameters
     /// together in the same `CreateEnvironment` action. This results in a
     /// `ValidationException` response.
-    pub fn createEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_environment.CreateEnvironmentInput, options: create_environment.Options) !create_environment.CreateEnvironmentOutput {
+    pub fn createEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_environment.CreateEnvironmentInput, options: CallOptions) !create_environment.CreateEnvironmentOutput {
         return create_environment.execute(self, allocator, input, options);
     }
 
@@ -94,7 +95,7 @@ pub const Client = struct {
     /// You cannot use the `dedicatedHostId` and `placementGroupId` parameters
     /// together in the same `CreateEnvironmentHost` action. This results in a
     /// `ValidationException` response.
-    pub fn createEnvironmentHost(self: *Self, allocator: std.mem.Allocator, input: create_environment_host.CreateEnvironmentHostInput, options: create_environment_host.Options) !create_environment_host.CreateEnvironmentHostOutput {
+    pub fn createEnvironmentHost(self: *Self, allocator: std.mem.Allocator, input: create_environment_host.CreateEnvironmentHostInput, options: CallOptions) !create_environment_host.CreateEnvironmentHostOutput {
         return create_environment_host.execute(self, allocator, input, options);
     }
 
@@ -107,7 +108,7 @@ pub const Client = struct {
     /// Amazon Web Services Secrets Manager secrets that Amazon EVS created. Amazon
     /// Web Services resources that you create are not deleted. These resources may
     /// continue to incur costs.
-    pub fn deleteEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_environment.DeleteEnvironmentInput, options: delete_environment.Options) !delete_environment.DeleteEnvironmentOutput {
+    pub fn deleteEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_environment.DeleteEnvironmentInput, options: CallOptions) !delete_environment.DeleteEnvironmentOutput {
         return delete_environment.execute(self, allocator, input, options);
     }
 
@@ -116,46 +117,46 @@ pub const Client = struct {
     /// Before deleting a host, you must unassign and decommission the host from
     /// within the SDDC Manager user interface. Not doing so could impact the
     /// availability of your virtual machines or result in data loss.
-    pub fn deleteEnvironmentHost(self: *Self, allocator: std.mem.Allocator, input: delete_environment_host.DeleteEnvironmentHostInput, options: delete_environment_host.Options) !delete_environment_host.DeleteEnvironmentHostOutput {
+    pub fn deleteEnvironmentHost(self: *Self, allocator: std.mem.Allocator, input: delete_environment_host.DeleteEnvironmentHostInput, options: CallOptions) !delete_environment_host.DeleteEnvironmentHostOutput {
         return delete_environment_host.execute(self, allocator, input, options);
     }
 
     /// Disassociates an Elastic IP address from a public HCX VLAN. This operation
     /// is only allowed for public HCX VLANs at this time.
-    pub fn disassociateEipFromVlan(self: *Self, allocator: std.mem.Allocator, input: disassociate_eip_from_vlan.DisassociateEipFromVlanInput, options: disassociate_eip_from_vlan.Options) !disassociate_eip_from_vlan.DisassociateEipFromVlanOutput {
+    pub fn disassociateEipFromVlan(self: *Self, allocator: std.mem.Allocator, input: disassociate_eip_from_vlan.DisassociateEipFromVlanInput, options: CallOptions) !disassociate_eip_from_vlan.DisassociateEipFromVlanOutput {
         return disassociate_eip_from_vlan.execute(self, allocator, input, options);
     }
 
     /// Returns a description of the specified environment.
-    pub fn getEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_environment.GetEnvironmentInput, options: get_environment.Options) !get_environment.GetEnvironmentOutput {
+    pub fn getEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_environment.GetEnvironmentInput, options: CallOptions) !get_environment.GetEnvironmentOutput {
         return get_environment.execute(self, allocator, input, options);
     }
 
     /// Returns information about VCF versions, ESX versions and EC2 instance types
     /// provided by Amazon EVS. For each VCF version, the response also includes the
     /// default ESX version and provided EC2 instance types.
-    pub fn getVersions(self: *Self, allocator: std.mem.Allocator, input: get_versions.GetVersionsInput, options: get_versions.Options) !get_versions.GetVersionsOutput {
+    pub fn getVersions(self: *Self, allocator: std.mem.Allocator, input: get_versions.GetVersionsInput, options: CallOptions) !get_versions.GetVersionsOutput {
         return get_versions.execute(self, allocator, input, options);
     }
 
     /// List the hosts within an environment.
-    pub fn listEnvironmentHosts(self: *Self, allocator: std.mem.Allocator, input: list_environment_hosts.ListEnvironmentHostsInput, options: list_environment_hosts.Options) !list_environment_hosts.ListEnvironmentHostsOutput {
+    pub fn listEnvironmentHosts(self: *Self, allocator: std.mem.Allocator, input: list_environment_hosts.ListEnvironmentHostsInput, options: CallOptions) !list_environment_hosts.ListEnvironmentHostsOutput {
         return list_environment_hosts.execute(self, allocator, input, options);
     }
 
     /// Lists environment VLANs that are associated with the specified environment.
-    pub fn listEnvironmentVlans(self: *Self, allocator: std.mem.Allocator, input: list_environment_vlans.ListEnvironmentVlansInput, options: list_environment_vlans.Options) !list_environment_vlans.ListEnvironmentVlansOutput {
+    pub fn listEnvironmentVlans(self: *Self, allocator: std.mem.Allocator, input: list_environment_vlans.ListEnvironmentVlansInput, options: CallOptions) !list_environment_vlans.ListEnvironmentVlansOutput {
         return list_environment_vlans.execute(self, allocator, input, options);
     }
 
     /// Lists the Amazon EVS environments in your Amazon Web Services account in the
     /// specified Amazon Web Services Region.
-    pub fn listEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_environments.ListEnvironmentsInput, options: list_environments.Options) !list_environments.ListEnvironmentsOutput {
+    pub fn listEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_environments.ListEnvironmentsInput, options: CallOptions) !list_environments.ListEnvironmentsOutput {
         return list_environments.execute(self, allocator, input, options);
     }
 
     /// Lists the tags for an Amazon EVS resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -167,12 +168,12 @@ pub const Client = struct {
     /// with the environment. For example, if you tag an environment with this
     /// operation, that tag doesn't automatically propagate to the VLAN subnets and
     /// hosts associated with the environment.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes specified tags from an Amazon EVS resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

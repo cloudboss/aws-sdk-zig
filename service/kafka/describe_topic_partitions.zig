@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TopicPartitionInfo = @import("topic_partition_info.zig").TopicPartitionInfo;
 
@@ -45,11 +46,7 @@ pub const DescribeTopicPartitionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTopicPartitionsInput, options: Options) !DescribeTopicPartitionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTopicPartitionsInput, options: CallOptions) !DescribeTopicPartitionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

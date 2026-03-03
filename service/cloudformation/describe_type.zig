@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RegistryType = @import("registry_type.zig").RegistryType;
 const DeprecatedStatus = @import("deprecated_status.zig").DeprecatedStatus;
@@ -312,11 +313,7 @@ pub const DescribeTypeOutput = struct {
     visibility: ?Visibility = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTypeInput, options: Options) !DescribeTypeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTypeInput, options: CallOptions) !DescribeTypeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

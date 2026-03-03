@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Ipv6CidrAssociation = @import("ipv_6_cidr_association.zig").Ipv6CidrAssociation;
 const serde = @import("serde.zig");
@@ -35,11 +36,7 @@ pub const GetAssociatedIpv6PoolCidrsOutput = struct {
     next_token: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAssociatedIpv6PoolCidrsInput, options: Options) !GetAssociatedIpv6PoolCidrsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAssociatedIpv6PoolCidrsInput, options: CallOptions) !GetAssociatedIpv6PoolCidrsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

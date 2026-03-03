@@ -21,6 +21,7 @@ const stop_application = @import("stop_application.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_application = @import("update_application.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -62,7 +63,7 @@ pub const Client = struct {
     /// applications, see [Working with Amazon
     /// CloudWatch
     /// Logs](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
-    pub fn addApplicationCloudWatchLoggingOption(self: *Self, allocator: std.mem.Allocator, input: add_application_cloud_watch_logging_option.AddApplicationCloudWatchLoggingOptionInput, options: add_application_cloud_watch_logging_option.Options) !add_application_cloud_watch_logging_option.AddApplicationCloudWatchLoggingOptionOutput {
+    pub fn addApplicationCloudWatchLoggingOption(self: *Self, allocator: std.mem.Allocator, input: add_application_cloud_watch_logging_option.AddApplicationCloudWatchLoggingOptionInput, options: CallOptions) !add_application_cloud_watch_logging_option.AddApplicationCloudWatchLoggingOptionOutput {
         return add_application_cloud_watch_logging_option.execute(self, allocator, input, options);
     }
 
@@ -91,7 +92,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `kinesisanalytics:AddApplicationInput` action.
-    pub fn addApplicationInput(self: *Self, allocator: std.mem.Allocator, input: add_application_input.AddApplicationInputInput, options: add_application_input.Options) !add_application_input.AddApplicationInputOutput {
+    pub fn addApplicationInput(self: *Self, allocator: std.mem.Allocator, input: add_application_input.AddApplicationInputInput, options: CallOptions) !add_application_input.AddApplicationInputOutput {
         return add_application_input.execute(self, allocator, input, options);
     }
 
@@ -106,7 +107,7 @@ pub const Client = struct {
     /// before the application's SQL code executes. Currently, the only input
     /// processor available is
     /// [AWS Lambda](https://docs.aws.amazon.com/lambda/).
-    pub fn addApplicationInputProcessingConfiguration(self: *Self, allocator: std.mem.Allocator, input: add_application_input_processing_configuration.AddApplicationInputProcessingConfigurationInput, options: add_application_input_processing_configuration.Options) !add_application_input_processing_configuration.AddApplicationInputProcessingConfigurationOutput {
+    pub fn addApplicationInputProcessingConfiguration(self: *Self, allocator: std.mem.Allocator, input: add_application_input_processing_configuration.AddApplicationInputProcessingConfigurationInput, options: CallOptions) !add_application_input_processing_configuration.AddApplicationInputProcessingConfigurationOutput {
         return add_application_input_processing_configuration.execute(self, allocator, input, options);
     }
 
@@ -148,7 +149,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `kinesisanalytics:AddApplicationOutput` action.
-    pub fn addApplicationOutput(self: *Self, allocator: std.mem.Allocator, input: add_application_output.AddApplicationOutputInput, options: add_application_output.Options) !add_application_output.AddApplicationOutputOutput {
+    pub fn addApplicationOutput(self: *Self, allocator: std.mem.Allocator, input: add_application_output.AddApplicationOutputInput, options: CallOptions) !add_application_output.AddApplicationOutputOutput {
         return add_application_output.execute(self, allocator, input, options);
     }
 
@@ -175,7 +176,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `kinesisanalytics:AddApplicationOutput` action.
-    pub fn addApplicationReferenceDataSource(self: *Self, allocator: std.mem.Allocator, input: add_application_reference_data_source.AddApplicationReferenceDataSourceInput, options: add_application_reference_data_source.Options) !add_application_reference_data_source.AddApplicationReferenceDataSourceOutput {
+    pub fn addApplicationReferenceDataSource(self: *Self, allocator: std.mem.Allocator, input: add_application_reference_data_source.AddApplicationReferenceDataSourceInput, options: CallOptions) !add_application_reference_data_source.AddApplicationReferenceDataSourceOutput {
         return add_application_reference_data_source.execute(self, allocator, input, options);
     }
 
@@ -219,7 +220,7 @@ pub const Client = struct {
     /// application, see
     /// [Getting
     /// Started](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/getting-started.html).
-    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: create_application.Options) !create_application.CreateApplicationOutput {
+    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: CallOptions) !create_application.CreateApplicationOutput {
         return create_application.execute(self, allocator, input, options);
     }
 
@@ -236,7 +237,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `kinesisanalytics:DeleteApplication` action.
-    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: delete_application.Options) !delete_application.DeleteApplicationOutput {
+    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: CallOptions) !delete_application.DeleteApplicationOutput {
         return delete_application.execute(self, allocator, input, options);
     }
 
@@ -251,7 +252,7 @@ pub const Client = struct {
     /// using CloudWatch log streams with Amazon Kinesis Analytics applications, see
     /// [Working with Amazon CloudWatch
     /// Logs](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
-    pub fn deleteApplicationCloudWatchLoggingOption(self: *Self, allocator: std.mem.Allocator, input: delete_application_cloud_watch_logging_option.DeleteApplicationCloudWatchLoggingOptionInput, options: delete_application_cloud_watch_logging_option.Options) !delete_application_cloud_watch_logging_option.DeleteApplicationCloudWatchLoggingOptionOutput {
+    pub fn deleteApplicationCloudWatchLoggingOption(self: *Self, allocator: std.mem.Allocator, input: delete_application_cloud_watch_logging_option.DeleteApplicationCloudWatchLoggingOptionInput, options: CallOptions) !delete_application_cloud_watch_logging_option.DeleteApplicationCloudWatchLoggingOptionOutput {
         return delete_application_cloud_watch_logging_option.execute(self, allocator, input, options);
     }
 
@@ -263,7 +264,7 @@ pub const Client = struct {
     ///
     /// Deletes an
     /// [InputProcessingConfiguration](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html) from an input.
-    pub fn deleteApplicationInputProcessingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_application_input_processing_configuration.DeleteApplicationInputProcessingConfigurationInput, options: delete_application_input_processing_configuration.Options) !delete_application_input_processing_configuration.DeleteApplicationInputProcessingConfigurationOutput {
+    pub fn deleteApplicationInputProcessingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_application_input_processing_configuration.DeleteApplicationInputProcessingConfigurationInput, options: CallOptions) !delete_application_input_processing_configuration.DeleteApplicationInputProcessingConfigurationOutput {
         return delete_application_input_processing_configuration.execute(self, allocator, input, options);
     }
 
@@ -279,7 +280,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `kinesisanalytics:DeleteApplicationOutput` action.
-    pub fn deleteApplicationOutput(self: *Self, allocator: std.mem.Allocator, input: delete_application_output.DeleteApplicationOutputInput, options: delete_application_output.Options) !delete_application_output.DeleteApplicationOutputOutput {
+    pub fn deleteApplicationOutput(self: *Self, allocator: std.mem.Allocator, input: delete_application_output.DeleteApplicationOutputInput, options: CallOptions) !delete_application_output.DeleteApplicationOutputOutput {
         return delete_application_output.execute(self, allocator, input, options);
     }
 
@@ -300,7 +301,7 @@ pub const Client = struct {
     /// This operation requires permissions to perform the
     /// `kinesisanalytics.DeleteApplicationReferenceDataSource`
     /// action.
-    pub fn deleteApplicationReferenceDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_application_reference_data_source.DeleteApplicationReferenceDataSourceInput, options: delete_application_reference_data_source.Options) !delete_application_reference_data_source.DeleteApplicationReferenceDataSourceOutput {
+    pub fn deleteApplicationReferenceDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_application_reference_data_source.DeleteApplicationReferenceDataSourceInput, options: CallOptions) !delete_application_reference_data_source.DeleteApplicationReferenceDataSourceOutput {
         return delete_application_reference_data_source.execute(self, allocator, input, options);
     }
 
@@ -321,7 +322,7 @@ pub const Client = struct {
     /// action. You can use `DescribeApplication` to get the current application
     /// versionId, which you need to call other
     /// operations such as `Update`.
-    pub fn describeApplication(self: *Self, allocator: std.mem.Allocator, input: describe_application.DescribeApplicationInput, options: describe_application.Options) !describe_application.DescribeApplicationOutput {
+    pub fn describeApplication(self: *Self, allocator: std.mem.Allocator, input: describe_application.DescribeApplicationInput, options: CallOptions) !describe_application.DescribeApplicationOutput {
         return describe_application.execute(self, allocator, input, options);
     }
 
@@ -347,7 +348,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `kinesisanalytics:DiscoverInputSchema` action.
-    pub fn discoverInputSchema(self: *Self, allocator: std.mem.Allocator, input: discover_input_schema.DiscoverInputSchemaInput, options: discover_input_schema.Options) !discover_input_schema.DiscoverInputSchemaOutput {
+    pub fn discoverInputSchema(self: *Self, allocator: std.mem.Allocator, input: discover_input_schema.DiscoverInputSchemaInput, options: CallOptions) !discover_input_schema.DiscoverInputSchemaOutput {
         return discover_input_schema.execute(self, allocator, input, options);
     }
 
@@ -372,14 +373,14 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `kinesisanalytics:ListApplications` action.
-    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: list_applications.Options) !list_applications.ListApplicationsOutput {
+    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: CallOptions) !list_applications.ListApplicationsOutput {
         return list_applications.execute(self, allocator, input, options);
     }
 
     /// Retrieves the list of key-value tags assigned to the application. For more
     /// information, see [Using
     /// Tagging](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html).
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -408,7 +409,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `kinesisanalytics:StartApplication` action.
-    pub fn startApplication(self: *Self, allocator: std.mem.Allocator, input: start_application.StartApplicationInput, options: start_application.Options) !start_application.StartApplicationOutput {
+    pub fn startApplication(self: *Self, allocator: std.mem.Allocator, input: start_application.StartApplicationInput, options: CallOptions) !start_application.StartApplicationOutput {
         return start_application.execute(self, allocator, input, options);
     }
 
@@ -429,7 +430,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `kinesisanalytics:StopApplication` action.
-    pub fn stopApplication(self: *Self, allocator: std.mem.Allocator, input: stop_application.StopApplicationInput, options: stop_application.Options) !stop_application.StopApplicationOutput {
+    pub fn stopApplication(self: *Self, allocator: std.mem.Allocator, input: stop_application.StopApplicationInput, options: CallOptions) !stop_application.StopApplicationOutput {
         return stop_application.execute(self, allocator, input, options);
     }
 
@@ -438,14 +439,14 @@ pub const Client = struct {
     /// maximum number of user-defined application tags is 50.
     /// For more information, see [Using
     /// Tagging](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html).
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from a Kinesis Analytics application. For more
     /// information, see [Using
     /// Tagging](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html).
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -464,7 +465,7 @@ pub const Client = struct {
     ///
     /// This operation requires permission for the
     /// `kinesisanalytics:UpdateApplication` action.
-    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: update_application.Options) !update_application.UpdateApplicationOutput {
+    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: CallOptions) !update_application.UpdateApplicationOutput {
         return update_application.execute(self, allocator, input, options);
     }
 };

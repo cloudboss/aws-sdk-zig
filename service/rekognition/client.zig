@@ -76,6 +76,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_dataset_entries = @import("update_dataset_entries.zig");
 const update_stream_processor = @import("update_stream_processor.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -149,7 +150,7 @@ pub const Client = struct {
     ///
     /// * UPDATING - A UserID is being updated and there are current associations or
     /// disassociations of FaceID(s) taking place.
-    pub fn associateFaces(self: *Self, allocator: std.mem.Allocator, input: associate_faces.AssociateFacesInput, options: associate_faces.Options) !associate_faces.AssociateFacesOutput {
+    pub fn associateFaces(self: *Self, allocator: std.mem.Allocator, input: associate_faces.AssociateFacesInput, options: CallOptions) !associate_faces.AssociateFacesOutput {
         return associate_faces.execute(self, allocator, input, options);
     }
 
@@ -229,7 +230,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:CompareFaces` action.
-    pub fn compareFaces(self: *Self, allocator: std.mem.Allocator, input: compare_faces.CompareFacesInput, options: compare_faces.Options) !compare_faces.CompareFacesOutput {
+    pub fn compareFaces(self: *Self, allocator: std.mem.Allocator, input: compare_faces.CompareFacesInput, options: CallOptions) !compare_faces.CompareFacesOutput {
         return compare_faces.execute(self, allocator, input, options);
     }
 
@@ -268,7 +269,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:CopyProjectVersion` action.
-    pub fn copyProjectVersion(self: *Self, allocator: std.mem.Allocator, input: copy_project_version.CopyProjectVersionInput, options: copy_project_version.Options) !copy_project_version.CopyProjectVersionOutput {
+    pub fn copyProjectVersion(self: *Self, allocator: std.mem.Allocator, input: copy_project_version.CopyProjectVersionInput, options: CallOptions) !copy_project_version.CopyProjectVersionOutput {
         return copy_project_version.execute(self, allocator, input, options);
     }
 
@@ -295,7 +296,7 @@ pub const Client = struct {
     /// you
     /// also require permission to perform the `rekognition:TagResource`
     /// operation.
-    pub fn createCollection(self: *Self, allocator: std.mem.Allocator, input: create_collection.CreateCollectionInput, options: create_collection.Options) !create_collection.CreateCollectionOutput {
+    pub fn createCollection(self: *Self, allocator: std.mem.Allocator, input: create_collection.CreateCollectionInput, options: CallOptions) !create_collection.CreateCollectionOutput {
         return create_collection.execute(self, allocator, input, options);
     }
 
@@ -331,7 +332,7 @@ pub const Client = struct {
     /// `rekognition:CreateDataset` action.
     /// If you want to copy an existing dataset, you also require permission to
     /// perform the `rekognition:ListDatasetEntries` action.
-    pub fn createDataset(self: *Self, allocator: std.mem.Allocator, input: create_dataset.CreateDatasetInput, options: create_dataset.Options) !create_dataset.CreateDatasetOutput {
+    pub fn createDataset(self: *Self, allocator: std.mem.Allocator, input: create_dataset.CreateDatasetInput, options: CallOptions) !create_dataset.CreateDatasetOutput {
         return create_dataset.execute(self, allocator, input, options);
     }
 
@@ -353,7 +354,7 @@ pub const Client = struct {
     /// default, it is set to 0. The limit is best effort and based on the duration
     /// of the
     /// selfie-video.
-    pub fn createFaceLivenessSession(self: *Self, allocator: std.mem.Allocator, input: create_face_liveness_session.CreateFaceLivenessSessionInput, options: create_face_liveness_session.Options) !create_face_liveness_session.CreateFaceLivenessSessionOutput {
+    pub fn createFaceLivenessSession(self: *Self, allocator: std.mem.Allocator, input: create_face_liveness_session.CreateFaceLivenessSessionInput, options: CallOptions) !create_face_liveness_session.CreateFaceLivenessSessionOutput {
         return create_face_liveness_session.execute(self, allocator, input, options);
     }
 
@@ -368,7 +369,7 @@ pub const Client = struct {
     /// auto update by using the AutoUpdate argument. This operation requires
     /// permissions to
     /// perform the `rekognition:CreateProject` action.
-    pub fn createProject(self: *Self, allocator: std.mem.Allocator, input: create_project.CreateProjectInput, options: create_project.Options) !create_project.CreateProjectOutput {
+    pub fn createProject(self: *Self, allocator: std.mem.Allocator, input: create_project.CreateProjectInput, options: CallOptions) !create_project.CreateProjectOutput {
         return create_project.execute(self, allocator, input, options);
     }
 
@@ -411,7 +412,7 @@ pub const Client = struct {
     /// Instead of training with a project without associated datasets,
     /// we recommend that you use the manifest
     /// files to create training and test datasets for the project.
-    pub fn createProjectVersion(self: *Self, allocator: std.mem.Allocator, input: create_project_version.CreateProjectVersionInput, options: create_project_version.Options) !create_project_version.CreateProjectVersionOutput {
+    pub fn createProjectVersion(self: *Self, allocator: std.mem.Allocator, input: create_project_version.CreateProjectVersionInput, options: CallOptions) !create_project_version.CreateProjectVersionOutput {
         return create_project_version.execute(self, allocator, input, options);
     }
 
@@ -454,7 +455,7 @@ pub const Client = struct {
     /// `rekognition:CreateStreamProcessor` action. If you want to tag your stream
     /// processor, you also require permission to perform the
     /// `rekognition:TagResource` operation.
-    pub fn createStreamProcessor(self: *Self, allocator: std.mem.Allocator, input: create_stream_processor.CreateStreamProcessorInput, options: create_stream_processor.Options) !create_stream_processor.CreateStreamProcessorOutput {
+    pub fn createStreamProcessor(self: *Self, allocator: std.mem.Allocator, input: create_stream_processor.CreateStreamProcessorInput, options: CallOptions) !create_stream_processor.CreateStreamProcessorOutput {
         return create_stream_processor.execute(self, allocator, input, options);
     }
 
@@ -469,7 +470,7 @@ pub const Client = struct {
     /// generates an idempotency token for the requests. This prevents retries after
     /// a network error
     /// results from making multiple `CreateUser` calls.
-    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: create_user.Options) !create_user.CreateUserOutput {
+    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: CallOptions) !create_user.CreateUserOutput {
         return create_user.execute(self, allocator, input, options);
     }
 
@@ -480,7 +481,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:DeleteCollection` action.
-    pub fn deleteCollection(self: *Self, allocator: std.mem.Allocator, input: delete_collection.DeleteCollectionInput, options: delete_collection.Options) !delete_collection.DeleteCollectionOutput {
+    pub fn deleteCollection(self: *Self, allocator: std.mem.Allocator, input: delete_collection.DeleteCollectionInput, options: CallOptions) !delete_collection.DeleteCollectionOutput {
         return delete_collection.execute(self, allocator, input, options);
     }
 
@@ -499,7 +500,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:DeleteDataset` action.
-    pub fn deleteDataset(self: *Self, allocator: std.mem.Allocator, input: delete_dataset.DeleteDatasetInput, options: delete_dataset.Options) !delete_dataset.DeleteDatasetOutput {
+    pub fn deleteDataset(self: *Self, allocator: std.mem.Allocator, input: delete_dataset.DeleteDatasetInput, options: CallOptions) !delete_dataset.DeleteDatasetOutput {
         return delete_dataset.execute(self, allocator, input, options);
     }
 
@@ -509,7 +510,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the `rekognition:DeleteFaces`
     /// action.
-    pub fn deleteFaces(self: *Self, allocator: std.mem.Allocator, input: delete_faces.DeleteFacesInput, options: delete_faces.Options) !delete_faces.DeleteFacesOutput {
+    pub fn deleteFaces(self: *Self, allocator: std.mem.Allocator, input: delete_faces.DeleteFacesInput, options: CallOptions) !delete_faces.DeleteFacesOutput {
         return delete_faces.execute(self, allocator, input, options);
     }
 
@@ -526,7 +527,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:DeleteProject` action.
-    pub fn deleteProject(self: *Self, allocator: std.mem.Allocator, input: delete_project.DeleteProjectInput, options: delete_project.Options) !delete_project.DeleteProjectOutput {
+    pub fn deleteProject(self: *Self, allocator: std.mem.Allocator, input: delete_project.DeleteProjectInput, options: CallOptions) !delete_project.DeleteProjectOutput {
         return delete_project.execute(self, allocator, input, options);
     }
 
@@ -540,7 +541,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:DeleteProjectPolicy` action.
-    pub fn deleteProjectPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_project_policy.DeleteProjectPolicyInput, options: delete_project_policy.Options) !delete_project_policy.DeleteProjectPolicyOutput {
+    pub fn deleteProjectPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_project_policy.DeleteProjectPolicyInput, options: CallOptions) !delete_project_policy.DeleteProjectPolicyOutput {
         return delete_project_policy.execute(self, allocator, input, options);
     }
 
@@ -557,7 +558,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:DeleteProjectVersion` action.
-    pub fn deleteProjectVersion(self: *Self, allocator: std.mem.Allocator, input: delete_project_version.DeleteProjectVersionInput, options: delete_project_version.Options) !delete_project_version.DeleteProjectVersionOutput {
+    pub fn deleteProjectVersion(self: *Self, allocator: std.mem.Allocator, input: delete_project_version.DeleteProjectVersionInput, options: CallOptions) !delete_project_version.DeleteProjectVersionOutput {
         return delete_project_version.execute(self, allocator, input, options);
     }
 
@@ -565,7 +566,7 @@ pub const Client = struct {
     /// `Name` when you create the stream processor with
     /// CreateStreamProcessor. You might not be able to use the same name for a
     /// stream processor for a few seconds after calling `DeleteStreamProcessor`.
-    pub fn deleteStreamProcessor(self: *Self, allocator: std.mem.Allocator, input: delete_stream_processor.DeleteStreamProcessorInput, options: delete_stream_processor.Options) !delete_stream_processor.DeleteStreamProcessorOutput {
+    pub fn deleteStreamProcessor(self: *Self, allocator: std.mem.Allocator, input: delete_stream_processor.DeleteStreamProcessorInput, options: CallOptions) !delete_stream_processor.DeleteStreamProcessorOutput {
         return delete_stream_processor.execute(self, allocator, input, options);
     }
 
@@ -577,7 +578,7 @@ pub const Client = struct {
     /// `ResourceNotFoundException` will be thrown. If the action is successful with
     /// a
     /// 200 response, an empty HTTP body is returned.
-    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: delete_user.Options) !delete_user.DeleteUserOutput {
+    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: CallOptions) !delete_user.DeleteUserOutput {
         return delete_user.execute(self, allocator, input, options);
     }
 
@@ -588,7 +589,7 @@ pub const Client = struct {
     ///
     /// For more information, see Describing a Collection in the
     /// Amazon Rekognition Developer Guide.
-    pub fn describeCollection(self: *Self, allocator: std.mem.Allocator, input: describe_collection.DescribeCollectionInput, options: describe_collection.Options) !describe_collection.DescribeCollectionOutput {
+    pub fn describeCollection(self: *Self, allocator: std.mem.Allocator, input: describe_collection.DescribeCollectionInput, options: CallOptions) !describe_collection.DescribeCollectionOutput {
         return describe_collection.execute(self, allocator, input, options);
     }
 
@@ -600,7 +601,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:DescribeDataset` action.
-    pub fn describeDataset(self: *Self, allocator: std.mem.Allocator, input: describe_dataset.DescribeDatasetInput, options: describe_dataset.Options) !describe_dataset.DescribeDatasetOutput {
+    pub fn describeDataset(self: *Self, allocator: std.mem.Allocator, input: describe_dataset.DescribeDatasetInput, options: CallOptions) !describe_dataset.DescribeDatasetOutput {
         return describe_dataset.execute(self, allocator, input, options);
     }
 
@@ -612,7 +613,7 @@ pub const Client = struct {
     /// This operation requires permissions to perform the
     /// `rekognition:DescribeProjectVersions`
     /// action.
-    pub fn describeProjectVersions(self: *Self, allocator: std.mem.Allocator, input: describe_project_versions.DescribeProjectVersionsInput, options: describe_project_versions.Options) !describe_project_versions.DescribeProjectVersionsOutput {
+    pub fn describeProjectVersions(self: *Self, allocator: std.mem.Allocator, input: describe_project_versions.DescribeProjectVersionsInput, options: CallOptions) !describe_project_versions.DescribeProjectVersionsOutput {
         return describe_project_versions.execute(self, allocator, input, options);
     }
 
@@ -620,7 +621,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:DescribeProjects` action.
-    pub fn describeProjects(self: *Self, allocator: std.mem.Allocator, input: describe_projects.DescribeProjectsInput, options: describe_projects.Options) !describe_projects.DescribeProjectsOutput {
+    pub fn describeProjects(self: *Self, allocator: std.mem.Allocator, input: describe_projects.DescribeProjectsInput, options: CallOptions) !describe_projects.DescribeProjectsOutput {
         return describe_projects.execute(self, allocator, input, options);
     }
 
@@ -628,7 +629,7 @@ pub const Client = struct {
     /// CreateStreamProcessor. You can get information about the input and output
     /// streams, the input parameters for the face recognition being performed,
     /// and the current status of the stream processor.
-    pub fn describeStreamProcessor(self: *Self, allocator: std.mem.Allocator, input: describe_stream_processor.DescribeStreamProcessorInput, options: describe_stream_processor.Options) !describe_stream_processor.DescribeStreamProcessorOutput {
+    pub fn describeStreamProcessor(self: *Self, allocator: std.mem.Allocator, input: describe_stream_processor.DescribeStreamProcessorInput, options: CallOptions) !describe_stream_processor.DescribeStreamProcessorOutput {
         return describe_stream_processor.execute(self, allocator, input, options);
     }
 
@@ -688,7 +689,7 @@ pub const Client = struct {
     /// For more information, see
     /// *Analyzing an image* in the Amazon Rekognition Custom Labels Developer
     /// Guide.
-    pub fn detectCustomLabels(self: *Self, allocator: std.mem.Allocator, input: detect_custom_labels.DetectCustomLabelsInput, options: detect_custom_labels.Options) !detect_custom_labels.DetectCustomLabelsOutput {
+    pub fn detectCustomLabels(self: *Self, allocator: std.mem.Allocator, input: detect_custom_labels.DetectCustomLabelsInput, options: CallOptions) !detect_custom_labels.DetectCustomLabelsOutput {
         return detect_custom_labels.execute(self, allocator, input, options);
     }
 
@@ -722,7 +723,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the `rekognition:DetectFaces`
     /// action.
-    pub fn detectFaces(self: *Self, allocator: std.mem.Allocator, input: detect_faces.DetectFacesInput, options: detect_faces.Options) !detect_faces.DetectFacesOutput {
+    pub fn detectFaces(self: *Self, allocator: std.mem.Allocator, input: detect_faces.DetectFacesInput, options: CallOptions) !detect_faces.DetectFacesOutput {
         return detect_faces.execute(self, allocator, input, options);
     }
 
@@ -863,7 +864,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:DetectLabels` action.
-    pub fn detectLabels(self: *Self, allocator: std.mem.Allocator, input: detect_labels.DetectLabelsInput, options: detect_labels.Options) !detect_labels.DetectLabelsOutput {
+    pub fn detectLabels(self: *Self, allocator: std.mem.Allocator, input: detect_labels.DetectLabelsInput, options: CallOptions) !detect_labels.DetectLabelsOutput {
         return detect_labels.execute(self, allocator, input, options);
     }
 
@@ -890,7 +891,7 @@ pub const Client = struct {
     /// You can specify an adapter to use when retrieving label predictions by
     /// providing a
     /// `ProjectVersionArn` to the `ProjectVersion` argument.
-    pub fn detectModerationLabels(self: *Self, allocator: std.mem.Allocator, input: detect_moderation_labels.DetectModerationLabelsInput, options: detect_moderation_labels.Options) !detect_moderation_labels.DetectModerationLabelsOutput {
+    pub fn detectModerationLabels(self: *Self, allocator: std.mem.Allocator, input: detect_moderation_labels.DetectModerationLabelsInput, options: CallOptions) !detect_moderation_labels.DetectModerationLabelsOutput {
         return detect_moderation_labels.execute(self, allocator, input, options);
     }
 
@@ -936,7 +937,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:DetectProtectiveEquipment` action.
-    pub fn detectProtectiveEquipment(self: *Self, allocator: std.mem.Allocator, input: detect_protective_equipment.DetectProtectiveEquipmentInput, options: detect_protective_equipment.Options) !detect_protective_equipment.DetectProtectiveEquipmentOutput {
+    pub fn detectProtectiveEquipment(self: *Self, allocator: std.mem.Allocator, input: detect_protective_equipment.DetectProtectiveEquipmentInput, options: CallOptions) !detect_protective_equipment.DetectProtectiveEquipmentOutput {
         return detect_protective_equipment.execute(self, allocator, input, options);
     }
 
@@ -982,7 +983,7 @@ pub const Client = struct {
     ///
     /// For more information, see Detecting text in the Amazon Rekognition Developer
     /// Guide.
-    pub fn detectText(self: *Self, allocator: std.mem.Allocator, input: detect_text.DetectTextInput, options: detect_text.Options) !detect_text.DetectTextOutput {
+    pub fn detectText(self: *Self, allocator: std.mem.Allocator, input: detect_text.DetectTextInput, options: CallOptions) !detect_text.DetectTextOutput {
         return detect_text.execute(self, allocator, input, options);
     }
 
@@ -999,7 +1000,7 @@ pub const Client = struct {
     /// part of `UnsuccessfulDisassociations`. You can remove 1 - 100 face IDs from
     /// a user
     /// at one time.
-    pub fn disassociateFaces(self: *Self, allocator: std.mem.Allocator, input: disassociate_faces.DisassociateFacesInput, options: disassociate_faces.Options) !disassociate_faces.DisassociateFacesOutput {
+    pub fn disassociateFaces(self: *Self, allocator: std.mem.Allocator, input: disassociate_faces.DisassociateFacesInput, options: CallOptions) !disassociate_faces.DisassociateFacesOutput {
         return disassociate_faces.execute(self, allocator, input, options);
     }
 
@@ -1026,7 +1027,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:DistributeDatasetEntries` action.
-    pub fn distributeDatasetEntries(self: *Self, allocator: std.mem.Allocator, input: distribute_dataset_entries.DistributeDatasetEntriesInput, options: distribute_dataset_entries.Options) !distribute_dataset_entries.DistributeDatasetEntriesOutput {
+    pub fn distributeDatasetEntries(self: *Self, allocator: std.mem.Allocator, input: distribute_dataset_entries.DistributeDatasetEntriesInput, options: CallOptions) !distribute_dataset_entries.DistributeDatasetEntriesOutput {
         return distribute_dataset_entries.execute(self, allocator, input, options);
     }
 
@@ -1041,7 +1042,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:GetCelebrityInfo` action.
-    pub fn getCelebrityInfo(self: *Self, allocator: std.mem.Allocator, input: get_celebrity_info.GetCelebrityInfoInput, options: get_celebrity_info.Options) !get_celebrity_info.GetCelebrityInfoOutput {
+    pub fn getCelebrityInfo(self: *Self, allocator: std.mem.Allocator, input: get_celebrity_info.GetCelebrityInfoInput, options: CallOptions) !get_celebrity_info.GetCelebrityInfoOutput {
         return get_celebrity_info.execute(self, allocator, input, options);
     }
 
@@ -1105,7 +1106,7 @@ pub const Client = struct {
     /// of results, call `GetCelebrityDetection`
     /// and populate the `NextToken` request parameter with the token
     /// value returned from the previous call to `GetCelebrityRecognition`.
-    pub fn getCelebrityRecognition(self: *Self, allocator: std.mem.Allocator, input: get_celebrity_recognition.GetCelebrityRecognitionInput, options: get_celebrity_recognition.Options) !get_celebrity_recognition.GetCelebrityRecognitionOutput {
+    pub fn getCelebrityRecognition(self: *Self, allocator: std.mem.Allocator, input: get_celebrity_recognition.GetCelebrityRecognitionInput, options: CallOptions) !get_celebrity_recognition.GetCelebrityRecognitionOutput {
         return get_celebrity_recognition.execute(self, allocator, input, options);
     }
 
@@ -1155,7 +1156,7 @@ pub const Client = struct {
     ///
     /// For more information, see moderating content in the Amazon Rekognition
     /// Developer Guide.
-    pub fn getContentModeration(self: *Self, allocator: std.mem.Allocator, input: get_content_moderation.GetContentModerationInput, options: get_content_moderation.Options) !get_content_moderation.GetContentModerationOutput {
+    pub fn getContentModeration(self: *Self, allocator: std.mem.Allocator, input: get_content_moderation.GetContentModerationInput, options: CallOptions) !get_content_moderation.GetContentModerationOutput {
         return get_content_moderation.execute(self, allocator, input, options);
     }
 
@@ -1186,7 +1187,7 @@ pub const Client = struct {
     ///
     /// Note that for the `GetFaceDetection` operation, the returned values for
     /// `FaceOccluded` and `EyeDirection` will always be "null".
-    pub fn getFaceDetection(self: *Self, allocator: std.mem.Allocator, input: get_face_detection.GetFaceDetectionInput, options: get_face_detection.Options) !get_face_detection.GetFaceDetectionOutput {
+    pub fn getFaceDetection(self: *Self, allocator: std.mem.Allocator, input: get_face_detection.GetFaceDetectionInput, options: CallOptions) !get_face_detection.GetFaceDetectionOutput {
         return get_face_detection.execute(self, allocator, input, options);
     }
 
@@ -1203,7 +1204,7 @@ pub const Client = struct {
     /// defined by the `AuditImagesLimit` paramater when calling
     /// `CreateFaceLivenessSession`. Reference images are always returned when
     /// possible.
-    pub fn getFaceLivenessSessionResults(self: *Self, allocator: std.mem.Allocator, input: get_face_liveness_session_results.GetFaceLivenessSessionResultsInput, options: get_face_liveness_session_results.Options) !get_face_liveness_session_results.GetFaceLivenessSessionResultsOutput {
+    pub fn getFaceLivenessSessionResults(self: *Self, allocator: std.mem.Allocator, input: get_face_liveness_session_results.GetFaceLivenessSessionResultsInput, options: CallOptions) !get_face_liveness_session_results.GetFaceLivenessSessionResultsOutput {
         return get_face_liveness_session_results.execute(self, allocator, input, options);
     }
 
@@ -1248,7 +1249,7 @@ pub const Client = struct {
     /// start of the video, persons are matched.
     /// You can also sort by persons by specifying `INDEX` for the `SORTBY` input
     /// parameter.
-    pub fn getFaceSearch(self: *Self, allocator: std.mem.Allocator, input: get_face_search.GetFaceSearchInput, options: get_face_search.Options) !get_face_search.GetFaceSearchOutput {
+    pub fn getFaceSearch(self: *Self, allocator: std.mem.Allocator, input: get_face_search.GetFaceSearchInput, options: CallOptions) !get_face_search.GetFaceSearchOutput {
         return get_face_search.execute(self, allocator, input, options);
     }
 
@@ -1342,13 +1343,13 @@ pub const Client = struct {
     /// If you are retrieving results while using the Amazon Simple Notification
     /// Service, note that you will receive an
     /// "ERROR" notification if the job encounters an issue.
-    pub fn getLabelDetection(self: *Self, allocator: std.mem.Allocator, input: get_label_detection.GetLabelDetectionInput, options: get_label_detection.Options) !get_label_detection.GetLabelDetectionOutput {
+    pub fn getLabelDetection(self: *Self, allocator: std.mem.Allocator, input: get_label_detection.GetLabelDetectionInput, options: CallOptions) !get_label_detection.GetLabelDetectionOutput {
         return get_label_detection.execute(self, allocator, input, options);
     }
 
     /// Retrieves the results for a given media analysis job.
     /// Takes a `JobId` returned by StartMediaAnalysisJob.
-    pub fn getMediaAnalysisJob(self: *Self, allocator: std.mem.Allocator, input: get_media_analysis_job.GetMediaAnalysisJobInput, options: get_media_analysis_job.Options) !get_media_analysis_job.GetMediaAnalysisJobOutput {
+    pub fn getMediaAnalysisJob(self: *Self, allocator: std.mem.Allocator, input: get_media_analysis_job.GetMediaAnalysisJobInput, options: CallOptions) !get_media_analysis_job.GetMediaAnalysisJobOutput {
         return get_media_analysis_job.execute(self, allocator, input, options);
     }
 
@@ -1399,7 +1400,7 @@ pub const Client = struct {
     /// of results. To get the next page of results, call `GetPersonTracking` and
     /// populate the `NextToken` request parameter with the token
     /// value returned from the previous call to `GetPersonTracking`.
-    pub fn getPersonTracking(self: *Self, allocator: std.mem.Allocator, input: get_person_tracking.GetPersonTrackingInput, options: get_person_tracking.Options) !get_person_tracking.GetPersonTrackingOutput {
+    pub fn getPersonTracking(self: *Self, allocator: std.mem.Allocator, input: get_person_tracking.GetPersonTrackingInput, options: CallOptions) !get_person_tracking.GetPersonTrackingOutput {
         return get_person_tracking.execute(self, allocator, input, options);
     }
 
@@ -1443,7 +1444,7 @@ pub const Client = struct {
     ///
     /// For more information, see Detecting video segments in stored video in the
     /// Amazon Rekognition Developer Guide.
-    pub fn getSegmentDetection(self: *Self, allocator: std.mem.Allocator, input: get_segment_detection.GetSegmentDetectionInput, options: get_segment_detection.Options) !get_segment_detection.GetSegmentDetectionOutput {
+    pub fn getSegmentDetection(self: *Self, allocator: std.mem.Allocator, input: get_segment_detection.GetSegmentDetectionInput, options: CallOptions) !get_segment_detection.GetSegmentDetectionOutput {
         return get_segment_detection.execute(self, allocator, input, options);
     }
 
@@ -1482,7 +1483,7 @@ pub const Client = struct {
     /// and populate the `NextToken` request parameter with the token value returned
     /// from the previous
     /// call to `GetTextDetection`.
-    pub fn getTextDetection(self: *Self, allocator: std.mem.Allocator, input: get_text_detection.GetTextDetectionInput, options: get_text_detection.Options) !get_text_detection.GetTextDetectionOutput {
+    pub fn getTextDetection(self: *Self, allocator: std.mem.Allocator, input: get_text_detection.GetTextDetectionInput, options: CallOptions) !get_text_detection.GetTextDetectionOutput {
         return get_text_detection.execute(self, allocator, input, options);
     }
 
@@ -1606,7 +1607,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the `rekognition:IndexFaces`
     /// action.
-    pub fn indexFaces(self: *Self, allocator: std.mem.Allocator, input: index_faces.IndexFacesInput, options: index_faces.Options) !index_faces.IndexFacesOutput {
+    pub fn indexFaces(self: *Self, allocator: std.mem.Allocator, input: index_faces.IndexFacesInput, options: CallOptions) !index_faces.IndexFacesOutput {
         return index_faces.execute(self, allocator, input, options);
     }
 
@@ -1621,7 +1622,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:ListCollections` action.
-    pub fn listCollections(self: *Self, allocator: std.mem.Allocator, input: list_collections.ListCollectionsInput, options: list_collections.Options) !list_collections.ListCollectionsOutput {
+    pub fn listCollections(self: *Self, allocator: std.mem.Allocator, input: list_collections.ListCollectionsInput, options: CallOptions) !list_collections.ListCollectionsOutput {
         return list_collections.execute(self, allocator, input, options);
     }
 
@@ -1646,7 +1647,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:ListDatasetEntries` action.
-    pub fn listDatasetEntries(self: *Self, allocator: std.mem.Allocator, input: list_dataset_entries.ListDatasetEntriesInput, options: list_dataset_entries.Options) !list_dataset_entries.ListDatasetEntriesOutput {
+    pub fn listDatasetEntries(self: *Self, allocator: std.mem.Allocator, input: list_dataset_entries.ListDatasetEntriesInput, options: CallOptions) !list_dataset_entries.ListDatasetEntriesOutput {
         return list_dataset_entries.execute(self, allocator, input, options);
     }
 
@@ -1660,7 +1661,7 @@ pub const Client = struct {
     /// Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels
     /// to describe images. For more information, see Labeling images
     /// in the *Amazon Rekognition Custom Labels Developer Guide*.
-    pub fn listDatasetLabels(self: *Self, allocator: std.mem.Allocator, input: list_dataset_labels.ListDatasetLabelsInput, options: list_dataset_labels.Options) !list_dataset_labels.ListDatasetLabelsOutput {
+    pub fn listDatasetLabels(self: *Self, allocator: std.mem.Allocator, input: list_dataset_labels.ListDatasetLabelsInput, options: CallOptions) !list_dataset_labels.ListDatasetLabelsOutput {
         return list_dataset_labels.execute(self, allocator, input, options);
     }
 
@@ -1673,13 +1674,13 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the `rekognition:ListFaces`
     /// action.
-    pub fn listFaces(self: *Self, allocator: std.mem.Allocator, input: list_faces.ListFacesInput, options: list_faces.Options) !list_faces.ListFacesOutput {
+    pub fn listFaces(self: *Self, allocator: std.mem.Allocator, input: list_faces.ListFacesInput, options: CallOptions) !list_faces.ListFacesOutput {
         return list_faces.execute(self, allocator, input, options);
     }
 
     /// Returns a list of media analysis jobs. Results are sorted by
     /// `CreationTimestamp` in descending order.
-    pub fn listMediaAnalysisJobs(self: *Self, allocator: std.mem.Allocator, input: list_media_analysis_jobs.ListMediaAnalysisJobsInput, options: list_media_analysis_jobs.Options) !list_media_analysis_jobs.ListMediaAnalysisJobsOutput {
+    pub fn listMediaAnalysisJobs(self: *Self, allocator: std.mem.Allocator, input: list_media_analysis_jobs.ListMediaAnalysisJobsInput, options: CallOptions) !list_media_analysis_jobs.ListMediaAnalysisJobsOutput {
         return list_media_analysis_jobs.execute(self, allocator, input, options);
     }
 
@@ -1692,13 +1693,13 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:ListProjectPolicies` action.
-    pub fn listProjectPolicies(self: *Self, allocator: std.mem.Allocator, input: list_project_policies.ListProjectPoliciesInput, options: list_project_policies.Options) !list_project_policies.ListProjectPoliciesOutput {
+    pub fn listProjectPolicies(self: *Self, allocator: std.mem.Allocator, input: list_project_policies.ListProjectPoliciesInput, options: CallOptions) !list_project_policies.ListProjectPoliciesOutput {
         return list_project_policies.execute(self, allocator, input, options);
     }
 
     /// Gets a list of stream processors that you have created with
     /// CreateStreamProcessor.
-    pub fn listStreamProcessors(self: *Self, allocator: std.mem.Allocator, input: list_stream_processors.ListStreamProcessorsInput, options: list_stream_processors.Options) !list_stream_processors.ListStreamProcessorsOutput {
+    pub fn listStreamProcessors(self: *Self, allocator: std.mem.Allocator, input: list_stream_processors.ListStreamProcessorsInput, options: CallOptions) !list_stream_processors.ListStreamProcessorsOutput {
         return list_stream_processors.execute(self, allocator, input, options);
     }
 
@@ -1708,7 +1709,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:ListTagsForResource` action.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -1719,7 +1720,7 @@ pub const Client = struct {
     /// response is
     /// truncated, `NextToken` is returned in the response that can be used in the
     /// subsequent request to retrieve the next set of identities.
-    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: list_users.Options) !list_users.ListUsersOutput {
+    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: CallOptions) !list_users.ListUsersOutput {
         return list_users.execute(self, allocator, input, options);
     }
 
@@ -1752,7 +1753,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:PutProjectPolicy` action.
-    pub fn putProjectPolicy(self: *Self, allocator: std.mem.Allocator, input: put_project_policy.PutProjectPolicyInput, options: put_project_policy.Options) !put_project_policy.PutProjectPolicyOutput {
+    pub fn putProjectPolicy(self: *Self, allocator: std.mem.Allocator, input: put_project_policy.PutProjectPolicyInput, options: CallOptions) !put_project_policy.PutProjectPolicyOutput {
         return put_project_policy.execute(self, allocator, input, options);
     }
 
@@ -1795,7 +1796,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:RecognizeCelebrities` operation.
-    pub fn recognizeCelebrities(self: *Self, allocator: std.mem.Allocator, input: recognize_celebrities.RecognizeCelebritiesInput, options: recognize_celebrities.Options) !recognize_celebrities.RecognizeCelebritiesOutput {
+    pub fn recognizeCelebrities(self: *Self, allocator: std.mem.Allocator, input: recognize_celebrities.RecognizeCelebritiesInput, options: CallOptions) !recognize_celebrities.RecognizeCelebritiesOutput {
         return recognize_celebrities.execute(self, allocator, input, options);
     }
 
@@ -1824,7 +1825,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the `rekognition:SearchFaces`
     /// action.
-    pub fn searchFaces(self: *Self, allocator: std.mem.Allocator, input: search_faces.SearchFacesInput, options: search_faces.Options) !search_faces.SearchFacesOutput {
+    pub fn searchFaces(self: *Self, allocator: std.mem.Allocator, input: search_faces.SearchFacesInput, options: CallOptions) !search_faces.SearchFacesOutput {
         return search_faces.execute(self, allocator, input, options);
     }
 
@@ -1884,7 +1885,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:SearchFacesByImage` action.
-    pub fn searchFacesByImage(self: *Self, allocator: std.mem.Allocator, input: search_faces_by_image.SearchFacesByImageInput, options: search_faces_by_image.Options) !search_faces_by_image.SearchFacesByImageOutput {
+    pub fn searchFacesByImage(self: *Self, allocator: std.mem.Allocator, input: search_faces_by_image.SearchFacesByImageInput, options: CallOptions) !search_faces_by_image.SearchFacesByImageOutput {
         return search_faces_by_image.execute(self, allocator, input, options);
     }
 
@@ -1895,7 +1896,7 @@ pub const Client = struct {
     /// or `UserId`. The operation returns an array of UserID that match the
     /// `FaceId` or `UserId`, ordered by similarity score with the highest
     /// similarity first.
-    pub fn searchUsers(self: *Self, allocator: std.mem.Allocator, input: search_users.SearchUsersInput, options: search_users.Options) !search_users.SearchUsersOutput {
+    pub fn searchUsers(self: *Self, allocator: std.mem.Allocator, input: search_users.SearchUsersInput, options: CallOptions) !search_users.SearchUsersOutput {
         return search_users.execute(self, allocator, input, options);
     }
 
@@ -1915,7 +1916,7 @@ pub const Client = struct {
     /// detected in
     /// the image, the response will contain an empty `UserMatches` list and no
     /// `SearchedFace` object.
-    pub fn searchUsersByImage(self: *Self, allocator: std.mem.Allocator, input: search_users_by_image.SearchUsersByImageInput, options: search_users_by_image.Options) !search_users_by_image.SearchUsersByImageOutput {
+    pub fn searchUsersByImage(self: *Self, allocator: std.mem.Allocator, input: search_users_by_image.SearchUsersByImageInput, options: CallOptions) !search_users_by_image.SearchUsersByImageOutput {
         return search_users_by_image.execute(self, allocator, input, options);
     }
 
@@ -1939,7 +1940,7 @@ pub const Client = struct {
     ///
     /// For more information, see Recognizing celebrities in the Amazon Rekognition
     /// Developer Guide.
-    pub fn startCelebrityRecognition(self: *Self, allocator: std.mem.Allocator, input: start_celebrity_recognition.StartCelebrityRecognitionInput, options: start_celebrity_recognition.Options) !start_celebrity_recognition.StartCelebrityRecognitionOutput {
+    pub fn startCelebrityRecognition(self: *Self, allocator: std.mem.Allocator, input: start_celebrity_recognition.StartCelebrityRecognitionInput, options: CallOptions) !start_celebrity_recognition.StartCelebrityRecognitionOutput {
         return start_celebrity_recognition.execute(self, allocator, input, options);
     }
 
@@ -1967,7 +1968,7 @@ pub const Client = struct {
     ///
     /// For more information, see Moderating content in the Amazon Rekognition
     /// Developer Guide.
-    pub fn startContentModeration(self: *Self, allocator: std.mem.Allocator, input: start_content_moderation.StartContentModerationInput, options: start_content_moderation.Options) !start_content_moderation.StartContentModerationOutput {
+    pub fn startContentModeration(self: *Self, allocator: std.mem.Allocator, input: start_content_moderation.StartContentModerationInput, options: CallOptions) !start_content_moderation.StartContentModerationOutput {
         return start_content_moderation.execute(self, allocator, input, options);
     }
 
@@ -1990,7 +1991,7 @@ pub const Client = struct {
     ///
     /// For more information, see Detecting faces in a stored video in the
     /// Amazon Rekognition Developer Guide.
-    pub fn startFaceDetection(self: *Self, allocator: std.mem.Allocator, input: start_face_detection.StartFaceDetectionInput, options: start_face_detection.Options) !start_face_detection.StartFaceDetectionOutput {
+    pub fn startFaceDetection(self: *Self, allocator: std.mem.Allocator, input: start_face_detection.StartFaceDetectionInput, options: CallOptions) !start_face_detection.StartFaceDetectionOutput {
         return start_face_detection.execute(self, allocator, input, options);
     }
 
@@ -2013,7 +2014,7 @@ pub const Client = struct {
     /// see
     /// [Searching stored videos for
     /// faces](https://docs.aws.amazon.com/rekognition/latest/dg/procedure-person-search-videos.html).
-    pub fn startFaceSearch(self: *Self, allocator: std.mem.Allocator, input: start_face_search.StartFaceSearchInput, options: start_face_search.Options) !start_face_search.StartFaceSearchOutput {
+    pub fn startFaceSearch(self: *Self, allocator: std.mem.Allocator, input: start_face_search.StartFaceSearchInput, options: CallOptions) !start_face_search.StartFaceSearchOutput {
         return start_face_search.execute(self, allocator, input, options);
     }
 
@@ -2056,7 +2057,7 @@ pub const Client = struct {
     ///
     /// You can specify `MinConfidence` to control the confidence threshold for the
     /// labels returned. The default is 50.
-    pub fn startLabelDetection(self: *Self, allocator: std.mem.Allocator, input: start_label_detection.StartLabelDetectionInput, options: start_label_detection.Options) !start_label_detection.StartLabelDetectionOutput {
+    pub fn startLabelDetection(self: *Self, allocator: std.mem.Allocator, input: start_label_detection.StartLabelDetectionInput, options: CallOptions) !start_label_detection.StartLabelDetectionOutput {
         return start_label_detection.execute(self, allocator, input, options);
     }
 
@@ -2064,7 +2065,7 @@ pub const Client = struct {
     /// bucket. The
     /// output is a manifest file and a summary of the manifest stored in the Amazon
     /// S3 bucket.
-    pub fn startMediaAnalysisJob(self: *Self, allocator: std.mem.Allocator, input: start_media_analysis_job.StartMediaAnalysisJobInput, options: start_media_analysis_job.Options) !start_media_analysis_job.StartMediaAnalysisJobOutput {
+    pub fn startMediaAnalysisJob(self: *Self, allocator: std.mem.Allocator, input: start_media_analysis_job.StartMediaAnalysisJobInput, options: CallOptions) !start_media_analysis_job.StartMediaAnalysisJobOutput {
         return start_media_analysis_job.execute(self, allocator, input, options);
     }
 
@@ -2093,7 +2094,7 @@ pub const Client = struct {
     /// topic is `SUCCEEDED`. If so, call GetPersonTracking and pass the job
     /// identifier
     /// (`JobId`) from the initial call to `StartPersonTracking`.
-    pub fn startPersonTracking(self: *Self, allocator: std.mem.Allocator, input: start_person_tracking.StartPersonTrackingInput, options: start_person_tracking.Options) !start_person_tracking.StartPersonTrackingOutput {
+    pub fn startPersonTracking(self: *Self, allocator: std.mem.Allocator, input: start_person_tracking.StartPersonTrackingInput, options: CallOptions) !start_person_tracking.StartPersonTrackingOutput {
         return start_person_tracking.execute(self, allocator, input, options);
     }
 
@@ -2114,7 +2115,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:StartProjectVersion` action.
-    pub fn startProjectVersion(self: *Self, allocator: std.mem.Allocator, input: start_project_version.StartProjectVersionInput, options: start_project_version.Options) !start_project_version.StartProjectVersionOutput {
+    pub fn startProjectVersion(self: *Self, allocator: std.mem.Allocator, input: start_project_version.StartProjectVersionInput, options: CallOptions) !start_project_version.StartProjectVersionOutput {
         return start_project_version.execute(self, allocator, input, options);
     }
 
@@ -2145,7 +2146,7 @@ pub const Client = struct {
     ///
     /// For more information, see Detecting video segments in stored video in the
     /// Amazon Rekognition Developer Guide.
-    pub fn startSegmentDetection(self: *Self, allocator: std.mem.Allocator, input: start_segment_detection.StartSegmentDetectionInput, options: start_segment_detection.Options) !start_segment_detection.StartSegmentDetectionOutput {
+    pub fn startSegmentDetection(self: *Self, allocator: std.mem.Allocator, input: start_segment_detection.StartSegmentDetectionInput, options: CallOptions) !start_segment_detection.StartSegmentDetectionOutput {
         return start_segment_detection.execute(self, allocator, input, options);
     }
 
@@ -2158,7 +2159,7 @@ pub const Client = struct {
     /// If you are using a label detection stream processor to detect labels, you
     /// need to provide a `Start selector` and a `Stop selector` to determine the
     /// length of the stream processing time.
-    pub fn startStreamProcessor(self: *Self, allocator: std.mem.Allocator, input: start_stream_processor.StartStreamProcessorInput, options: start_stream_processor.Options) !start_stream_processor.StartStreamProcessorOutput {
+    pub fn startStreamProcessor(self: *Self, allocator: std.mem.Allocator, input: start_stream_processor.StartStreamProcessorInput, options: CallOptions) !start_stream_processor.StartStreamProcessorOutput {
         return start_stream_processor.execute(self, allocator, input, options);
     }
 
@@ -2178,7 +2179,7 @@ pub const Client = struct {
     /// topic is `SUCCEEDED`. if so, call GetTextDetection and pass the job
     /// identifier (`JobId`)
     /// from the initial call to `StartTextDetection`.
-    pub fn startTextDetection(self: *Self, allocator: std.mem.Allocator, input: start_text_detection.StartTextDetectionInput, options: start_text_detection.Options) !start_text_detection.StartTextDetectionOutput {
+    pub fn startTextDetection(self: *Self, allocator: std.mem.Allocator, input: start_text_detection.StartTextDetectionInput, options: CallOptions) !start_text_detection.StartTextDetectionOutput {
         return start_text_detection.execute(self, allocator, input, options);
     }
 
@@ -2191,12 +2192,12 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:StopProjectVersion` action.
-    pub fn stopProjectVersion(self: *Self, allocator: std.mem.Allocator, input: stop_project_version.StopProjectVersionInput, options: stop_project_version.Options) !stop_project_version.StopProjectVersionOutput {
+    pub fn stopProjectVersion(self: *Self, allocator: std.mem.Allocator, input: stop_project_version.StopProjectVersionInput, options: CallOptions) !stop_project_version.StopProjectVersionOutput {
         return stop_project_version.execute(self, allocator, input, options);
     }
 
     /// Stops a running stream processor that was created by CreateStreamProcessor.
-    pub fn stopStreamProcessor(self: *Self, allocator: std.mem.Allocator, input: stop_stream_processor.StopStreamProcessorInput, options: stop_stream_processor.Options) !stop_stream_processor.StopStreamProcessorOutput {
+    pub fn stopStreamProcessor(self: *Self, allocator: std.mem.Allocator, input: stop_stream_processor.StopStreamProcessorInput, options: CallOptions) !stop_stream_processor.StopStreamProcessorOutput {
         return stop_stream_processor.execute(self, allocator, input, options);
     }
 
@@ -2207,7 +2208,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the `rekognition:TagResource`
     /// action.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -2217,7 +2218,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:UntagResource` action.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -2259,13 +2260,13 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `rekognition:UpdateDatasetEntries` action.
-    pub fn updateDatasetEntries(self: *Self, allocator: std.mem.Allocator, input: update_dataset_entries.UpdateDatasetEntriesInput, options: update_dataset_entries.Options) !update_dataset_entries.UpdateDatasetEntriesOutput {
+    pub fn updateDatasetEntries(self: *Self, allocator: std.mem.Allocator, input: update_dataset_entries.UpdateDatasetEntriesInput, options: CallOptions) !update_dataset_entries.UpdateDatasetEntriesOutput {
         return update_dataset_entries.execute(self, allocator, input, options);
     }
 
     /// Allows you to update a stream processor. You can change some settings and
     /// regions of interest and delete certain parameters.
-    pub fn updateStreamProcessor(self: *Self, allocator: std.mem.Allocator, input: update_stream_processor.UpdateStreamProcessorInput, options: update_stream_processor.Options) !update_stream_processor.UpdateStreamProcessorOutput {
+    pub fn updateStreamProcessor(self: *Self, allocator: std.mem.Allocator, input: update_stream_processor.UpdateStreamProcessorInput, options: CallOptions) !update_stream_processor.UpdateStreamProcessorOutput {
         return update_stream_processor.execute(self, allocator, input, options);
     }
 

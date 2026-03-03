@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_linked_whats_app_business_accounts = @import("list_linked_whats_app_business_accounts.zig");
@@ -16,7 +17,7 @@ pub const ListLinkedWhatsAppBusinessAccountsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_linked_whats_app_business_accounts.Options) !list_linked_whats_app_business_accounts.ListLinkedWhatsAppBusinessAccountsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_linked_whats_app_business_accounts.ListLinkedWhatsAppBusinessAccountsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -57,7 +58,7 @@ pub const ListWhatsAppMessageTemplatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_whats_app_message_templates.Options) !list_whats_app_message_templates.ListWhatsAppMessageTemplatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_whats_app_message_templates.ListWhatsAppMessageTemplatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -98,7 +99,7 @@ pub const ListWhatsAppTemplateLibraryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_whats_app_template_library.Options) !list_whats_app_template_library.ListWhatsAppTemplateLibraryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_whats_app_template_library.ListWhatsAppTemplateLibraryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RequestedJobStatus = @import("requested_job_status.zig").RequestedJobStatus;
 const JobStatus = @import("job_status.zig").JobStatus;
@@ -34,11 +35,7 @@ pub const UpdateJobStatusOutput = struct {
     status_update_reason: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateJobStatusInput, options: Options) !UpdateJobStatusOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateJobStatusInput, options: CallOptions) !UpdateJobStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VolumeType = @import("volume_type.zig").VolumeType;
 const VolumeModification = @import("volume_modification.zig").VolumeModification;
@@ -95,11 +96,7 @@ pub const ModifyVolumeOutput = struct {
     volume_modification: ?VolumeModification = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyVolumeInput, options: Options) !ModifyVolumeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyVolumeInput, options: CallOptions) !ModifyVolumeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

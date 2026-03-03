@@ -3,6 +3,7 @@ const std = @import("std");
 
 const get_raw_message_content = @import("get_raw_message_content.zig");
 const put_raw_message_content = @import("put_raw_message_content.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -33,7 +34,7 @@ pub const Client = struct {
     }
 
     /// Retrieves the raw content of an in-transit email message, in MIME format.
-    pub fn getRawMessageContent(self: *Self, allocator: std.mem.Allocator, input: get_raw_message_content.GetRawMessageContentInput, options: get_raw_message_content.Options) !get_raw_message_content.GetRawMessageContentOutput {
+    pub fn getRawMessageContent(self: *Self, allocator: std.mem.Allocator, input: get_raw_message_content.GetRawMessageContentInput, options: CallOptions) !get_raw_message_content.GetRawMessageContentOutput {
         return get_raw_message_content.execute(self, allocator, input, options);
     }
 
@@ -53,7 +54,7 @@ pub const Client = struct {
     /// even though
     /// [GetRawMessageContent](https://docs.aws.amazon.com/workmail/latest/APIReference/API_messageflow_GetRawMessageContent.html) returns an updated
     /// message.
-    pub fn putRawMessageContent(self: *Self, allocator: std.mem.Allocator, input: put_raw_message_content.PutRawMessageContentInput, options: put_raw_message_content.Options) !put_raw_message_content.PutRawMessageContentOutput {
+    pub fn putRawMessageContent(self: *Self, allocator: std.mem.Allocator, input: put_raw_message_content.PutRawMessageContentInput, options: CallOptions) !put_raw_message_content.PutRawMessageContentOutput {
         return put_raw_message_content.execute(self, allocator, input, options);
     }
 };

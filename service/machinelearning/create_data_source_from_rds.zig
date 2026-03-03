@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RDSDataSpec = @import("rds_data_spec.zig").RDSDataSpec;
 
@@ -94,11 +95,7 @@ pub const CreateDataSourceFromRDSOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDataSourceFromRDSInput, options: Options) !CreateDataSourceFromRDSOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDataSourceFromRDSInput, options: CallOptions) !CreateDataSourceFromRDSOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

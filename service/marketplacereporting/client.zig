@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const get_buyer_dashboard = @import("get_buyer_dashboard.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -46,7 +47,7 @@ pub const Client = struct {
     ///
     /// * It has a session lifetime of one hour. The 5-minute validity period runs
     ///   separately from the session lifetime.
-    pub fn getBuyerDashboard(self: *Self, allocator: std.mem.Allocator, input: get_buyer_dashboard.GetBuyerDashboardInput, options: get_buyer_dashboard.Options) !get_buyer_dashboard.GetBuyerDashboardOutput {
+    pub fn getBuyerDashboard(self: *Self, allocator: std.mem.Allocator, input: get_buyer_dashboard.GetBuyerDashboardInput, options: CallOptions) !get_buyer_dashboard.GetBuyerDashboardOutput {
         return get_buyer_dashboard.execute(self, allocator, input, options);
     }
 };

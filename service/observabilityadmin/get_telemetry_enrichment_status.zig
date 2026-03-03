@@ -2,10 +2,11 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TelemetryEnrichmentStatus = @import("telemetry_enrichment_status.zig").TelemetryEnrichmentStatus;
 
-const GetTelemetryEnrichmentStatusInput = struct {};
+pub const GetTelemetryEnrichmentStatusInput = struct {};
 
 pub const GetTelemetryEnrichmentStatusOutput = struct {
     /// The Amazon Resource Name (ARN) of the Resource Explorer managed view used
@@ -22,11 +23,7 @@ pub const GetTelemetryEnrichmentStatusOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTelemetryEnrichmentStatusInput, options: Options) !GetTelemetryEnrichmentStatusOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTelemetryEnrichmentStatusInput, options: CallOptions) !GetTelemetryEnrichmentStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

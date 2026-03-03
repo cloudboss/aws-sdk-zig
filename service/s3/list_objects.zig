@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EncodingType = @import("encoding_type.zig").EncodingType;
 const OptionalObjectAttributes = @import("optional_object_attributes.zig").OptionalObjectAttributes;
@@ -179,11 +180,7 @@ pub const ListObjectsOutput = struct {
     request_charged: ?RequestCharged = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListObjectsInput, options: Options) !ListObjectsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListObjectsInput, options: CallOptions) !ListObjectsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

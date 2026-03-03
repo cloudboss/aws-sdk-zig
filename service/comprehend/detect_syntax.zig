@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SyntaxLanguageCode = @import("syntax_language_code.zig").SyntaxLanguageCode;
 const SyntaxToken = @import("syntax_token.zig").SyntaxToken;
@@ -39,11 +40,7 @@ pub const DetectSyntaxOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DetectSyntaxInput, options: Options) !DetectSyntaxOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DetectSyntaxInput, options: CallOptions) !DetectSyntaxOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

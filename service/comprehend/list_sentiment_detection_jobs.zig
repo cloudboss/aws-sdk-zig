@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SentimentDetectionJobFilter = @import("sentiment_detection_job_filter.zig").SentimentDetectionJobFilter;
 const SentimentDetectionJobProperties = @import("sentiment_detection_job_properties.zig").SentimentDetectionJobProperties;
@@ -38,11 +39,7 @@ pub const ListSentimentDetectionJobsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSentimentDetectionJobsInput, options: Options) !ListSentimentDetectionJobsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSentimentDetectionJobsInput, options: CallOptions) !ListSentimentDetectionJobsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

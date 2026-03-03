@@ -2,21 +2,18 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Snapshot = @import("snapshot.zig").Snapshot;
 const serde = @import("serde.zig");
 
-const DeleteClusterSnapshotInput = @import("delete_cluster_snapshot_message.zig").DeleteClusterSnapshotMessage;
+pub const DeleteClusterSnapshotInput = @import("delete_cluster_snapshot_message.zig").DeleteClusterSnapshotMessage;
 
 pub const DeleteClusterSnapshotOutput = struct {
     snapshot: ?Snapshot = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteClusterSnapshotInput, options: Options) !DeleteClusterSnapshotOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteClusterSnapshotInput, options: CallOptions) !DeleteClusterSnapshotOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

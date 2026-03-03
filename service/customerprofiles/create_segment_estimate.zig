@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SegmentGroupStructure = @import("segment_group_structure.zig").SegmentGroupStructure;
 
@@ -41,11 +42,7 @@ pub const CreateSegmentEstimateOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSegmentEstimateInput, options: Options) !CreateSegmentEstimateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSegmentEstimateInput, options: CallOptions) !CreateSegmentEstimateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

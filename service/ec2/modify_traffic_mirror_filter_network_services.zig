@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TrafficMirrorNetworkService = @import("traffic_mirror_network_service.zig").TrafficMirrorNetworkService;
 const TrafficMirrorFilter = @import("traffic_mirror_filter.zig").TrafficMirrorFilter;
@@ -31,11 +32,7 @@ pub const ModifyTrafficMirrorFilterNetworkServicesOutput = struct {
     traffic_mirror_filter: ?TrafficMirrorFilter = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyTrafficMirrorFilterNetworkServicesInput, options: Options) !ModifyTrafficMirrorFilterNetworkServicesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyTrafficMirrorFilterNetworkServicesInput, options: CallOptions) !ModifyTrafficMirrorFilterNetworkServicesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

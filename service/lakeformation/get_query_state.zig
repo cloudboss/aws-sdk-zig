@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const QueryStateString = @import("query_state_string.zig").QueryStateString;
 
@@ -38,11 +39,7 @@ pub const GetQueryStateOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetQueryStateInput, options: Options) !GetQueryStateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetQueryStateInput, options: CallOptions) !GetQueryStateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

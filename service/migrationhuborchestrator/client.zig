@@ -32,6 +32,7 @@ const update_template = @import("update_template.zig");
 const update_workflow = @import("update_workflow.zig");
 const update_workflow_step = @import("update_workflow_step.zig");
 const update_workflow_step_group = @import("update_workflow_step_group.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -63,162 +64,162 @@ pub const Client = struct {
     }
 
     /// Creates a migration workflow template.
-    pub fn createTemplate(self: *Self, allocator: std.mem.Allocator, input: create_template.CreateTemplateInput, options: create_template.Options) !create_template.CreateTemplateOutput {
+    pub fn createTemplate(self: *Self, allocator: std.mem.Allocator, input: create_template.CreateTemplateInput, options: CallOptions) !create_template.CreateTemplateOutput {
         return create_template.execute(self, allocator, input, options);
     }
 
     /// Create a workflow to orchestrate your migrations.
-    pub fn createWorkflow(self: *Self, allocator: std.mem.Allocator, input: create_workflow.CreateWorkflowInput, options: create_workflow.Options) !create_workflow.CreateWorkflowOutput {
+    pub fn createWorkflow(self: *Self, allocator: std.mem.Allocator, input: create_workflow.CreateWorkflowInput, options: CallOptions) !create_workflow.CreateWorkflowOutput {
         return create_workflow.execute(self, allocator, input, options);
     }
 
     /// Create a step in the migration workflow.
-    pub fn createWorkflowStep(self: *Self, allocator: std.mem.Allocator, input: create_workflow_step.CreateWorkflowStepInput, options: create_workflow_step.Options) !create_workflow_step.CreateWorkflowStepOutput {
+    pub fn createWorkflowStep(self: *Self, allocator: std.mem.Allocator, input: create_workflow_step.CreateWorkflowStepInput, options: CallOptions) !create_workflow_step.CreateWorkflowStepOutput {
         return create_workflow_step.execute(self, allocator, input, options);
     }
 
     /// Create a step group in a migration workflow.
-    pub fn createWorkflowStepGroup(self: *Self, allocator: std.mem.Allocator, input: create_workflow_step_group.CreateWorkflowStepGroupInput, options: create_workflow_step_group.Options) !create_workflow_step_group.CreateWorkflowStepGroupOutput {
+    pub fn createWorkflowStepGroup(self: *Self, allocator: std.mem.Allocator, input: create_workflow_step_group.CreateWorkflowStepGroupInput, options: CallOptions) !create_workflow_step_group.CreateWorkflowStepGroupOutput {
         return create_workflow_step_group.execute(self, allocator, input, options);
     }
 
     /// Deletes a migration workflow template.
-    pub fn deleteTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_template.DeleteTemplateInput, options: delete_template.Options) !delete_template.DeleteTemplateOutput {
+    pub fn deleteTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_template.DeleteTemplateInput, options: CallOptions) !delete_template.DeleteTemplateOutput {
         return delete_template.execute(self, allocator, input, options);
     }
 
     /// Delete a migration workflow. You must pause a running workflow in Migration
     /// Hub Orchestrator console to
     /// delete it.
-    pub fn deleteWorkflow(self: *Self, allocator: std.mem.Allocator, input: delete_workflow.DeleteWorkflowInput, options: delete_workflow.Options) !delete_workflow.DeleteWorkflowOutput {
+    pub fn deleteWorkflow(self: *Self, allocator: std.mem.Allocator, input: delete_workflow.DeleteWorkflowInput, options: CallOptions) !delete_workflow.DeleteWorkflowOutput {
         return delete_workflow.execute(self, allocator, input, options);
     }
 
     /// Delete a step in a migration workflow. Pause the workflow to delete a
     /// running
     /// step.
-    pub fn deleteWorkflowStep(self: *Self, allocator: std.mem.Allocator, input: delete_workflow_step.DeleteWorkflowStepInput, options: delete_workflow_step.Options) !delete_workflow_step.DeleteWorkflowStepOutput {
+    pub fn deleteWorkflowStep(self: *Self, allocator: std.mem.Allocator, input: delete_workflow_step.DeleteWorkflowStepInput, options: CallOptions) !delete_workflow_step.DeleteWorkflowStepOutput {
         return delete_workflow_step.execute(self, allocator, input, options);
     }
 
     /// Delete a step group in a migration workflow.
-    pub fn deleteWorkflowStepGroup(self: *Self, allocator: std.mem.Allocator, input: delete_workflow_step_group.DeleteWorkflowStepGroupInput, options: delete_workflow_step_group.Options) !delete_workflow_step_group.DeleteWorkflowStepGroupOutput {
+    pub fn deleteWorkflowStepGroup(self: *Self, allocator: std.mem.Allocator, input: delete_workflow_step_group.DeleteWorkflowStepGroupInput, options: CallOptions) !delete_workflow_step_group.DeleteWorkflowStepGroupOutput {
         return delete_workflow_step_group.execute(self, allocator, input, options);
     }
 
     /// Get the template you want to use for creating a migration workflow.
-    pub fn getTemplate(self: *Self, allocator: std.mem.Allocator, input: get_template.GetTemplateInput, options: get_template.Options) !get_template.GetTemplateOutput {
+    pub fn getTemplate(self: *Self, allocator: std.mem.Allocator, input: get_template.GetTemplateInput, options: CallOptions) !get_template.GetTemplateOutput {
         return get_template.execute(self, allocator, input, options);
     }
 
     /// Get a specific step in a template.
-    pub fn getTemplateStep(self: *Self, allocator: std.mem.Allocator, input: get_template_step.GetTemplateStepInput, options: get_template_step.Options) !get_template_step.GetTemplateStepOutput {
+    pub fn getTemplateStep(self: *Self, allocator: std.mem.Allocator, input: get_template_step.GetTemplateStepInput, options: CallOptions) !get_template_step.GetTemplateStepOutput {
         return get_template_step.execute(self, allocator, input, options);
     }
 
     /// Get a step group in a template.
-    pub fn getTemplateStepGroup(self: *Self, allocator: std.mem.Allocator, input: get_template_step_group.GetTemplateStepGroupInput, options: get_template_step_group.Options) !get_template_step_group.GetTemplateStepGroupOutput {
+    pub fn getTemplateStepGroup(self: *Self, allocator: std.mem.Allocator, input: get_template_step_group.GetTemplateStepGroupInput, options: CallOptions) !get_template_step_group.GetTemplateStepGroupOutput {
         return get_template_step_group.execute(self, allocator, input, options);
     }
 
     /// Get migration workflow.
-    pub fn getWorkflow(self: *Self, allocator: std.mem.Allocator, input: get_workflow.GetWorkflowInput, options: get_workflow.Options) !get_workflow.GetWorkflowOutput {
+    pub fn getWorkflow(self: *Self, allocator: std.mem.Allocator, input: get_workflow.GetWorkflowInput, options: CallOptions) !get_workflow.GetWorkflowOutput {
         return get_workflow.execute(self, allocator, input, options);
     }
 
     /// Get a step in the migration workflow.
-    pub fn getWorkflowStep(self: *Self, allocator: std.mem.Allocator, input: get_workflow_step.GetWorkflowStepInput, options: get_workflow_step.Options) !get_workflow_step.GetWorkflowStepOutput {
+    pub fn getWorkflowStep(self: *Self, allocator: std.mem.Allocator, input: get_workflow_step.GetWorkflowStepInput, options: CallOptions) !get_workflow_step.GetWorkflowStepOutput {
         return get_workflow_step.execute(self, allocator, input, options);
     }
 
     /// Get the step group of a migration workflow.
-    pub fn getWorkflowStepGroup(self: *Self, allocator: std.mem.Allocator, input: get_workflow_step_group.GetWorkflowStepGroupInput, options: get_workflow_step_group.Options) !get_workflow_step_group.GetWorkflowStepGroupOutput {
+    pub fn getWorkflowStepGroup(self: *Self, allocator: std.mem.Allocator, input: get_workflow_step_group.GetWorkflowStepGroupInput, options: CallOptions) !get_workflow_step_group.GetWorkflowStepGroupOutput {
         return get_workflow_step_group.execute(self, allocator, input, options);
     }
 
     /// List AWS Migration Hub Orchestrator plugins.
-    pub fn listPlugins(self: *Self, allocator: std.mem.Allocator, input: list_plugins.ListPluginsInput, options: list_plugins.Options) !list_plugins.ListPluginsOutput {
+    pub fn listPlugins(self: *Self, allocator: std.mem.Allocator, input: list_plugins.ListPluginsInput, options: CallOptions) !list_plugins.ListPluginsOutput {
         return list_plugins.execute(self, allocator, input, options);
     }
 
     /// List the tags added to a resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// List the step groups in a template.
-    pub fn listTemplateStepGroups(self: *Self, allocator: std.mem.Allocator, input: list_template_step_groups.ListTemplateStepGroupsInput, options: list_template_step_groups.Options) !list_template_step_groups.ListTemplateStepGroupsOutput {
+    pub fn listTemplateStepGroups(self: *Self, allocator: std.mem.Allocator, input: list_template_step_groups.ListTemplateStepGroupsInput, options: CallOptions) !list_template_step_groups.ListTemplateStepGroupsOutput {
         return list_template_step_groups.execute(self, allocator, input, options);
     }
 
     /// List the steps in a template.
-    pub fn listTemplateSteps(self: *Self, allocator: std.mem.Allocator, input: list_template_steps.ListTemplateStepsInput, options: list_template_steps.Options) !list_template_steps.ListTemplateStepsOutput {
+    pub fn listTemplateSteps(self: *Self, allocator: std.mem.Allocator, input: list_template_steps.ListTemplateStepsInput, options: CallOptions) !list_template_steps.ListTemplateStepsOutput {
         return list_template_steps.execute(self, allocator, input, options);
     }
 
     /// List the templates available in Migration Hub Orchestrator to create a
     /// migration workflow.
-    pub fn listTemplates(self: *Self, allocator: std.mem.Allocator, input: list_templates.ListTemplatesInput, options: list_templates.Options) !list_templates.ListTemplatesOutput {
+    pub fn listTemplates(self: *Self, allocator: std.mem.Allocator, input: list_templates.ListTemplatesInput, options: CallOptions) !list_templates.ListTemplatesOutput {
         return list_templates.execute(self, allocator, input, options);
     }
 
     /// List the step groups in a migration workflow.
-    pub fn listWorkflowStepGroups(self: *Self, allocator: std.mem.Allocator, input: list_workflow_step_groups.ListWorkflowStepGroupsInput, options: list_workflow_step_groups.Options) !list_workflow_step_groups.ListWorkflowStepGroupsOutput {
+    pub fn listWorkflowStepGroups(self: *Self, allocator: std.mem.Allocator, input: list_workflow_step_groups.ListWorkflowStepGroupsInput, options: CallOptions) !list_workflow_step_groups.ListWorkflowStepGroupsOutput {
         return list_workflow_step_groups.execute(self, allocator, input, options);
     }
 
     /// List the steps in a workflow.
-    pub fn listWorkflowSteps(self: *Self, allocator: std.mem.Allocator, input: list_workflow_steps.ListWorkflowStepsInput, options: list_workflow_steps.Options) !list_workflow_steps.ListWorkflowStepsOutput {
+    pub fn listWorkflowSteps(self: *Self, allocator: std.mem.Allocator, input: list_workflow_steps.ListWorkflowStepsInput, options: CallOptions) !list_workflow_steps.ListWorkflowStepsOutput {
         return list_workflow_steps.execute(self, allocator, input, options);
     }
 
     /// List the migration workflows.
-    pub fn listWorkflows(self: *Self, allocator: std.mem.Allocator, input: list_workflows.ListWorkflowsInput, options: list_workflows.Options) !list_workflows.ListWorkflowsOutput {
+    pub fn listWorkflows(self: *Self, allocator: std.mem.Allocator, input: list_workflows.ListWorkflowsInput, options: CallOptions) !list_workflows.ListWorkflowsOutput {
         return list_workflows.execute(self, allocator, input, options);
     }
 
     /// Retry a failed step in a migration workflow.
-    pub fn retryWorkflowStep(self: *Self, allocator: std.mem.Allocator, input: retry_workflow_step.RetryWorkflowStepInput, options: retry_workflow_step.Options) !retry_workflow_step.RetryWorkflowStepOutput {
+    pub fn retryWorkflowStep(self: *Self, allocator: std.mem.Allocator, input: retry_workflow_step.RetryWorkflowStepInput, options: CallOptions) !retry_workflow_step.RetryWorkflowStepOutput {
         return retry_workflow_step.execute(self, allocator, input, options);
     }
 
     /// Start a migration workflow.
-    pub fn startWorkflow(self: *Self, allocator: std.mem.Allocator, input: start_workflow.StartWorkflowInput, options: start_workflow.Options) !start_workflow.StartWorkflowOutput {
+    pub fn startWorkflow(self: *Self, allocator: std.mem.Allocator, input: start_workflow.StartWorkflowInput, options: CallOptions) !start_workflow.StartWorkflowOutput {
         return start_workflow.execute(self, allocator, input, options);
     }
 
     /// Stop an ongoing migration workflow.
-    pub fn stopWorkflow(self: *Self, allocator: std.mem.Allocator, input: stop_workflow.StopWorkflowInput, options: stop_workflow.Options) !stop_workflow.StopWorkflowOutput {
+    pub fn stopWorkflow(self: *Self, allocator: std.mem.Allocator, input: stop_workflow.StopWorkflowInput, options: CallOptions) !stop_workflow.StopWorkflowOutput {
         return stop_workflow.execute(self, allocator, input, options);
     }
 
     /// Tag a resource by specifying its Amazon Resource Name (ARN).
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes the tags for a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates a migration workflow template.
-    pub fn updateTemplate(self: *Self, allocator: std.mem.Allocator, input: update_template.UpdateTemplateInput, options: update_template.Options) !update_template.UpdateTemplateOutput {
+    pub fn updateTemplate(self: *Self, allocator: std.mem.Allocator, input: update_template.UpdateTemplateInput, options: CallOptions) !update_template.UpdateTemplateOutput {
         return update_template.execute(self, allocator, input, options);
     }
 
     /// Update a migration workflow.
-    pub fn updateWorkflow(self: *Self, allocator: std.mem.Allocator, input: update_workflow.UpdateWorkflowInput, options: update_workflow.Options) !update_workflow.UpdateWorkflowOutput {
+    pub fn updateWorkflow(self: *Self, allocator: std.mem.Allocator, input: update_workflow.UpdateWorkflowInput, options: CallOptions) !update_workflow.UpdateWorkflowOutput {
         return update_workflow.execute(self, allocator, input, options);
     }
 
     /// Update a step in a migration workflow.
-    pub fn updateWorkflowStep(self: *Self, allocator: std.mem.Allocator, input: update_workflow_step.UpdateWorkflowStepInput, options: update_workflow_step.Options) !update_workflow_step.UpdateWorkflowStepOutput {
+    pub fn updateWorkflowStep(self: *Self, allocator: std.mem.Allocator, input: update_workflow_step.UpdateWorkflowStepInput, options: CallOptions) !update_workflow_step.UpdateWorkflowStepOutput {
         return update_workflow_step.execute(self, allocator, input, options);
     }
 
     /// Update the step group in a migration workflow.
-    pub fn updateWorkflowStepGroup(self: *Self, allocator: std.mem.Allocator, input: update_workflow_step_group.UpdateWorkflowStepGroupInput, options: update_workflow_step_group.Options) !update_workflow_step_group.UpdateWorkflowStepGroupOutput {
+    pub fn updateWorkflowStepGroup(self: *Self, allocator: std.mem.Allocator, input: update_workflow_step_group.UpdateWorkflowStepGroupInput, options: CallOptions) !update_workflow_step_group.UpdateWorkflowStepGroupOutput {
         return update_workflow_step_group.execute(self, allocator, input, options);
     }
 

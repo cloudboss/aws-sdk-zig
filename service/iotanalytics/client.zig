@@ -35,6 +35,7 @@ const update_channel = @import("update_channel.zig");
 const update_dataset = @import("update_dataset.zig");
 const update_datastore = @import("update_datastore.zig");
 const update_pipeline = @import("update_pipeline.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -66,19 +67,19 @@ pub const Client = struct {
     }
 
     /// Sends messages to a channel.
-    pub fn batchPutMessage(self: *Self, allocator: std.mem.Allocator, input: batch_put_message.BatchPutMessageInput, options: batch_put_message.Options) !batch_put_message.BatchPutMessageOutput {
+    pub fn batchPutMessage(self: *Self, allocator: std.mem.Allocator, input: batch_put_message.BatchPutMessageInput, options: CallOptions) !batch_put_message.BatchPutMessageOutput {
         return batch_put_message.execute(self, allocator, input, options);
     }
 
     /// Cancels the reprocessing of data through the pipeline.
-    pub fn cancelPipelineReprocessing(self: *Self, allocator: std.mem.Allocator, input: cancel_pipeline_reprocessing.CancelPipelineReprocessingInput, options: cancel_pipeline_reprocessing.Options) !cancel_pipeline_reprocessing.CancelPipelineReprocessingOutput {
+    pub fn cancelPipelineReprocessing(self: *Self, allocator: std.mem.Allocator, input: cancel_pipeline_reprocessing.CancelPipelineReprocessingInput, options: CallOptions) !cancel_pipeline_reprocessing.CancelPipelineReprocessingOutput {
         return cancel_pipeline_reprocessing.execute(self, allocator, input, options);
     }
 
     /// Used to create a channel. A channel collects data from an MQTT topic and
     /// archives the raw,
     /// unprocessed messages before publishing the data to a pipeline.
-    pub fn createChannel(self: *Self, allocator: std.mem.Allocator, input: create_channel.CreateChannelInput, options: create_channel.Options) !create_channel.CreateChannelOutput {
+    pub fn createChannel(self: *Self, allocator: std.mem.Allocator, input: create_channel.CreateChannelInput, options: CallOptions) !create_channel.CreateChannelOutput {
         return create_channel.execute(self, allocator, input, options);
     }
 
@@ -90,19 +91,19 @@ pub const Client = struct {
     /// be populated manually by calling `CreateDatasetContent` or automatically
     /// according
     /// to a trigger you specify.
-    pub fn createDataset(self: *Self, allocator: std.mem.Allocator, input: create_dataset.CreateDatasetInput, options: create_dataset.Options) !create_dataset.CreateDatasetOutput {
+    pub fn createDataset(self: *Self, allocator: std.mem.Allocator, input: create_dataset.CreateDatasetInput, options: CallOptions) !create_dataset.CreateDatasetOutput {
         return create_dataset.execute(self, allocator, input, options);
     }
 
     /// Creates the content of a dataset by applying a `queryAction` (a SQL query)
     /// or a
     /// `containerAction` (executing a containerized application).
-    pub fn createDatasetContent(self: *Self, allocator: std.mem.Allocator, input: create_dataset_content.CreateDatasetContentInput, options: create_dataset_content.Options) !create_dataset_content.CreateDatasetContentOutput {
+    pub fn createDatasetContent(self: *Self, allocator: std.mem.Allocator, input: create_dataset_content.CreateDatasetContentInput, options: CallOptions) !create_dataset_content.CreateDatasetContentOutput {
         return create_dataset_content.execute(self, allocator, input, options);
     }
 
     /// Creates a data store, which is a repository for messages.
-    pub fn createDatastore(self: *Self, allocator: std.mem.Allocator, input: create_datastore.CreateDatastoreInput, options: create_datastore.Options) !create_datastore.CreateDatastoreOutput {
+    pub fn createDatastore(self: *Self, allocator: std.mem.Allocator, input: create_datastore.CreateDatastoreInput, options: CallOptions) !create_datastore.CreateDatastoreOutput {
         return create_datastore.execute(self, allocator, input, options);
     }
 
@@ -113,12 +114,12 @@ pub const Client = struct {
     /// and a `datastore` activity and, optionally, as many as 23 additional
     /// activities in
     /// the `pipelineActivities` array.
-    pub fn createPipeline(self: *Self, allocator: std.mem.Allocator, input: create_pipeline.CreatePipelineInput, options: create_pipeline.Options) !create_pipeline.CreatePipelineOutput {
+    pub fn createPipeline(self: *Self, allocator: std.mem.Allocator, input: create_pipeline.CreatePipelineInput, options: CallOptions) !create_pipeline.CreatePipelineOutput {
         return create_pipeline.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified channel.
-    pub fn deleteChannel(self: *Self, allocator: std.mem.Allocator, input: delete_channel.DeleteChannelInput, options: delete_channel.Options) !delete_channel.DeleteChannelOutput {
+    pub fn deleteChannel(self: *Self, allocator: std.mem.Allocator, input: delete_channel.DeleteChannelInput, options: CallOptions) !delete_channel.DeleteChannelOutput {
         return delete_channel.execute(self, allocator, input, options);
     }
 
@@ -126,82 +127,82 @@ pub const Client = struct {
     ///
     /// You do not have to delete the content of the dataset before you perform this
     /// operation.
-    pub fn deleteDataset(self: *Self, allocator: std.mem.Allocator, input: delete_dataset.DeleteDatasetInput, options: delete_dataset.Options) !delete_dataset.DeleteDatasetOutput {
+    pub fn deleteDataset(self: *Self, allocator: std.mem.Allocator, input: delete_dataset.DeleteDatasetInput, options: CallOptions) !delete_dataset.DeleteDatasetOutput {
         return delete_dataset.execute(self, allocator, input, options);
     }
 
     /// Deletes the content of the specified dataset.
-    pub fn deleteDatasetContent(self: *Self, allocator: std.mem.Allocator, input: delete_dataset_content.DeleteDatasetContentInput, options: delete_dataset_content.Options) !delete_dataset_content.DeleteDatasetContentOutput {
+    pub fn deleteDatasetContent(self: *Self, allocator: std.mem.Allocator, input: delete_dataset_content.DeleteDatasetContentInput, options: CallOptions) !delete_dataset_content.DeleteDatasetContentOutput {
         return delete_dataset_content.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified data store.
-    pub fn deleteDatastore(self: *Self, allocator: std.mem.Allocator, input: delete_datastore.DeleteDatastoreInput, options: delete_datastore.Options) !delete_datastore.DeleteDatastoreOutput {
+    pub fn deleteDatastore(self: *Self, allocator: std.mem.Allocator, input: delete_datastore.DeleteDatastoreInput, options: CallOptions) !delete_datastore.DeleteDatastoreOutput {
         return delete_datastore.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified pipeline.
-    pub fn deletePipeline(self: *Self, allocator: std.mem.Allocator, input: delete_pipeline.DeletePipelineInput, options: delete_pipeline.Options) !delete_pipeline.DeletePipelineOutput {
+    pub fn deletePipeline(self: *Self, allocator: std.mem.Allocator, input: delete_pipeline.DeletePipelineInput, options: CallOptions) !delete_pipeline.DeletePipelineOutput {
         return delete_pipeline.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a channel.
-    pub fn describeChannel(self: *Self, allocator: std.mem.Allocator, input: describe_channel.DescribeChannelInput, options: describe_channel.Options) !describe_channel.DescribeChannelOutput {
+    pub fn describeChannel(self: *Self, allocator: std.mem.Allocator, input: describe_channel.DescribeChannelInput, options: CallOptions) !describe_channel.DescribeChannelOutput {
         return describe_channel.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a dataset.
-    pub fn describeDataset(self: *Self, allocator: std.mem.Allocator, input: describe_dataset.DescribeDatasetInput, options: describe_dataset.Options) !describe_dataset.DescribeDatasetOutput {
+    pub fn describeDataset(self: *Self, allocator: std.mem.Allocator, input: describe_dataset.DescribeDatasetInput, options: CallOptions) !describe_dataset.DescribeDatasetOutput {
         return describe_dataset.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a data store.
-    pub fn describeDatastore(self: *Self, allocator: std.mem.Allocator, input: describe_datastore.DescribeDatastoreInput, options: describe_datastore.Options) !describe_datastore.DescribeDatastoreOutput {
+    pub fn describeDatastore(self: *Self, allocator: std.mem.Allocator, input: describe_datastore.DescribeDatastoreInput, options: CallOptions) !describe_datastore.DescribeDatastoreOutput {
         return describe_datastore.execute(self, allocator, input, options);
     }
 
     /// Retrieves the current settings of the IoT Analytics logging options.
-    pub fn describeLoggingOptions(self: *Self, allocator: std.mem.Allocator, input: describe_logging_options.DescribeLoggingOptionsInput, options: describe_logging_options.Options) !describe_logging_options.DescribeLoggingOptionsOutput {
+    pub fn describeLoggingOptions(self: *Self, allocator: std.mem.Allocator, input: describe_logging_options.DescribeLoggingOptionsInput, options: CallOptions) !describe_logging_options.DescribeLoggingOptionsOutput {
         return describe_logging_options.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a pipeline.
-    pub fn describePipeline(self: *Self, allocator: std.mem.Allocator, input: describe_pipeline.DescribePipelineInput, options: describe_pipeline.Options) !describe_pipeline.DescribePipelineOutput {
+    pub fn describePipeline(self: *Self, allocator: std.mem.Allocator, input: describe_pipeline.DescribePipelineInput, options: CallOptions) !describe_pipeline.DescribePipelineOutput {
         return describe_pipeline.execute(self, allocator, input, options);
     }
 
     /// Retrieves the contents of a dataset as presigned URIs.
-    pub fn getDatasetContent(self: *Self, allocator: std.mem.Allocator, input: get_dataset_content.GetDatasetContentInput, options: get_dataset_content.Options) !get_dataset_content.GetDatasetContentOutput {
+    pub fn getDatasetContent(self: *Self, allocator: std.mem.Allocator, input: get_dataset_content.GetDatasetContentInput, options: CallOptions) !get_dataset_content.GetDatasetContentOutput {
         return get_dataset_content.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of channels.
-    pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: list_channels.Options) !list_channels.ListChannelsOutput {
+    pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: CallOptions) !list_channels.ListChannelsOutput {
         return list_channels.execute(self, allocator, input, options);
     }
 
     /// Lists information about dataset contents that have been created.
-    pub fn listDatasetContents(self: *Self, allocator: std.mem.Allocator, input: list_dataset_contents.ListDatasetContentsInput, options: list_dataset_contents.Options) !list_dataset_contents.ListDatasetContentsOutput {
+    pub fn listDatasetContents(self: *Self, allocator: std.mem.Allocator, input: list_dataset_contents.ListDatasetContentsInput, options: CallOptions) !list_dataset_contents.ListDatasetContentsOutput {
         return list_dataset_contents.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about datasets.
-    pub fn listDatasets(self: *Self, allocator: std.mem.Allocator, input: list_datasets.ListDatasetsInput, options: list_datasets.Options) !list_datasets.ListDatasetsOutput {
+    pub fn listDatasets(self: *Self, allocator: std.mem.Allocator, input: list_datasets.ListDatasetsInput, options: CallOptions) !list_datasets.ListDatasetsOutput {
         return list_datasets.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of data stores.
-    pub fn listDatastores(self: *Self, allocator: std.mem.Allocator, input: list_datastores.ListDatastoresInput, options: list_datastores.Options) !list_datastores.ListDatastoresOutput {
+    pub fn listDatastores(self: *Self, allocator: std.mem.Allocator, input: list_datastores.ListDatastoresInput, options: CallOptions) !list_datastores.ListDatastoresOutput {
         return list_datastores.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of pipelines.
-    pub fn listPipelines(self: *Self, allocator: std.mem.Allocator, input: list_pipelines.ListPipelinesInput, options: list_pipelines.Options) !list_pipelines.ListPipelinesOutput {
+    pub fn listPipelines(self: *Self, allocator: std.mem.Allocator, input: list_pipelines.ListPipelinesInput, options: CallOptions) !list_pipelines.ListPipelinesOutput {
         return list_pipelines.execute(self, allocator, input, options);
     }
 
     /// Lists the tags (metadata) that you have assigned to the resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -213,51 +214,51 @@ pub const Client = struct {
     /// specified in the `roleArn` field (for example, to correct an invalid
     /// policy), it
     /// takes up to five minutes for that change to take effect.
-    pub fn putLoggingOptions(self: *Self, allocator: std.mem.Allocator, input: put_logging_options.PutLoggingOptionsInput, options: put_logging_options.Options) !put_logging_options.PutLoggingOptionsOutput {
+    pub fn putLoggingOptions(self: *Self, allocator: std.mem.Allocator, input: put_logging_options.PutLoggingOptionsInput, options: CallOptions) !put_logging_options.PutLoggingOptionsOutput {
         return put_logging_options.execute(self, allocator, input, options);
     }
 
     /// Simulates the results of running a pipeline activity on a message payload.
-    pub fn runPipelineActivity(self: *Self, allocator: std.mem.Allocator, input: run_pipeline_activity.RunPipelineActivityInput, options: run_pipeline_activity.Options) !run_pipeline_activity.RunPipelineActivityOutput {
+    pub fn runPipelineActivity(self: *Self, allocator: std.mem.Allocator, input: run_pipeline_activity.RunPipelineActivityInput, options: CallOptions) !run_pipeline_activity.RunPipelineActivityOutput {
         return run_pipeline_activity.execute(self, allocator, input, options);
     }
 
     /// Retrieves a sample of messages from the specified channel ingested during
     /// the specified
     /// timeframe. Up to 10 messages can be retrieved.
-    pub fn sampleChannelData(self: *Self, allocator: std.mem.Allocator, input: sample_channel_data.SampleChannelDataInput, options: sample_channel_data.Options) !sample_channel_data.SampleChannelDataOutput {
+    pub fn sampleChannelData(self: *Self, allocator: std.mem.Allocator, input: sample_channel_data.SampleChannelDataInput, options: CallOptions) !sample_channel_data.SampleChannelDataOutput {
         return sample_channel_data.execute(self, allocator, input, options);
     }
 
     /// Starts the reprocessing of raw message data through the pipeline.
-    pub fn startPipelineReprocessing(self: *Self, allocator: std.mem.Allocator, input: start_pipeline_reprocessing.StartPipelineReprocessingInput, options: start_pipeline_reprocessing.Options) !start_pipeline_reprocessing.StartPipelineReprocessingOutput {
+    pub fn startPipelineReprocessing(self: *Self, allocator: std.mem.Allocator, input: start_pipeline_reprocessing.StartPipelineReprocessingInput, options: CallOptions) !start_pipeline_reprocessing.StartPipelineReprocessingOutput {
         return start_pipeline_reprocessing.execute(self, allocator, input, options);
     }
 
     /// Adds to or modifies the tags of the given resource. Tags are metadata that
     /// can be used to
     /// manage a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the given tags (metadata) from the resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Used to update the settings of a channel.
-    pub fn updateChannel(self: *Self, allocator: std.mem.Allocator, input: update_channel.UpdateChannelInput, options: update_channel.Options) !update_channel.UpdateChannelOutput {
+    pub fn updateChannel(self: *Self, allocator: std.mem.Allocator, input: update_channel.UpdateChannelInput, options: CallOptions) !update_channel.UpdateChannelOutput {
         return update_channel.execute(self, allocator, input, options);
     }
 
     /// Updates the settings of a dataset.
-    pub fn updateDataset(self: *Self, allocator: std.mem.Allocator, input: update_dataset.UpdateDatasetInput, options: update_dataset.Options) !update_dataset.UpdateDatasetOutput {
+    pub fn updateDataset(self: *Self, allocator: std.mem.Allocator, input: update_dataset.UpdateDatasetInput, options: CallOptions) !update_dataset.UpdateDatasetOutput {
         return update_dataset.execute(self, allocator, input, options);
     }
 
     /// Used to update the settings of a data store.
-    pub fn updateDatastore(self: *Self, allocator: std.mem.Allocator, input: update_datastore.UpdateDatastoreInput, options: update_datastore.Options) !update_datastore.UpdateDatastoreOutput {
+    pub fn updateDatastore(self: *Self, allocator: std.mem.Allocator, input: update_datastore.UpdateDatastoreInput, options: CallOptions) !update_datastore.UpdateDatastoreOutput {
         return update_datastore.execute(self, allocator, input, options);
     }
 
@@ -265,7 +266,7 @@ pub const Client = struct {
     /// `datastore` activity and, optionally, as many as 23 additional activities in
     /// the
     /// `pipelineActivities` array.
-    pub fn updatePipeline(self: *Self, allocator: std.mem.Allocator, input: update_pipeline.UpdatePipelineInput, options: update_pipeline.Options) !update_pipeline.UpdatePipelineOutput {
+    pub fn updatePipeline(self: *Self, allocator: std.mem.Allocator, input: update_pipeline.UpdatePipelineInput, options: CallOptions) !update_pipeline.UpdatePipelineOutput {
         return update_pipeline.execute(self, allocator, input, options);
     }
 

@@ -27,6 +27,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_experiment_template = @import("update_experiment_template.zig");
 const update_safety_lever_state = @import("update_safety_lever_state.zig");
 const update_target_account_configuration = @import("update_target_account_configuration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -77,7 +78,7 @@ pub const Client = struct {
     /// For more information, see [experiment
     /// templates](https://docs.aws.amazon.com/fis/latest/userguide/experiment-templates.html)
     /// in the *Fault Injection Service User Guide*.
-    pub fn createExperimentTemplate(self: *Self, allocator: std.mem.Allocator, input: create_experiment_template.CreateExperimentTemplateInput, options: create_experiment_template.Options) !create_experiment_template.CreateExperimentTemplateOutput {
+    pub fn createExperimentTemplate(self: *Self, allocator: std.mem.Allocator, input: create_experiment_template.CreateExperimentTemplateInput, options: CallOptions) !create_experiment_template.CreateExperimentTemplateOutput {
         return create_experiment_template.execute(self, allocator, input, options);
     }
 
@@ -88,132 +89,132 @@ pub const Client = struct {
     /// For more information, see [experiment
     /// options](https://docs.aws.amazon.com/fis/latest/userguide/experiment-options.html)
     /// in the *Fault Injection Service User Guide*.
-    pub fn createTargetAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_target_account_configuration.CreateTargetAccountConfigurationInput, options: create_target_account_configuration.Options) !create_target_account_configuration.CreateTargetAccountConfigurationOutput {
+    pub fn createTargetAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_target_account_configuration.CreateTargetAccountConfigurationInput, options: CallOptions) !create_target_account_configuration.CreateTargetAccountConfigurationOutput {
         return create_target_account_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified experiment template.
-    pub fn deleteExperimentTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_experiment_template.DeleteExperimentTemplateInput, options: delete_experiment_template.Options) !delete_experiment_template.DeleteExperimentTemplateOutput {
+    pub fn deleteExperimentTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_experiment_template.DeleteExperimentTemplateInput, options: CallOptions) !delete_experiment_template.DeleteExperimentTemplateOutput {
         return delete_experiment_template.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified target account configuration of the experiment
     /// template.
-    pub fn deleteTargetAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_target_account_configuration.DeleteTargetAccountConfigurationInput, options: delete_target_account_configuration.Options) !delete_target_account_configuration.DeleteTargetAccountConfigurationOutput {
+    pub fn deleteTargetAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_target_account_configuration.DeleteTargetAccountConfigurationInput, options: CallOptions) !delete_target_account_configuration.DeleteTargetAccountConfigurationOutput {
         return delete_target_account_configuration.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified FIS action.
-    pub fn getAction(self: *Self, allocator: std.mem.Allocator, input: get_action.GetActionInput, options: get_action.Options) !get_action.GetActionOutput {
+    pub fn getAction(self: *Self, allocator: std.mem.Allocator, input: get_action.GetActionInput, options: CallOptions) !get_action.GetActionOutput {
         return get_action.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified experiment.
-    pub fn getExperiment(self: *Self, allocator: std.mem.Allocator, input: get_experiment.GetExperimentInput, options: get_experiment.Options) !get_experiment.GetExperimentOutput {
+    pub fn getExperiment(self: *Self, allocator: std.mem.Allocator, input: get_experiment.GetExperimentInput, options: CallOptions) !get_experiment.GetExperimentOutput {
         return get_experiment.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified target account configuration of the
     /// experiment.
-    pub fn getExperimentTargetAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_experiment_target_account_configuration.GetExperimentTargetAccountConfigurationInput, options: get_experiment_target_account_configuration.Options) !get_experiment_target_account_configuration.GetExperimentTargetAccountConfigurationOutput {
+    pub fn getExperimentTargetAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_experiment_target_account_configuration.GetExperimentTargetAccountConfigurationInput, options: CallOptions) !get_experiment_target_account_configuration.GetExperimentTargetAccountConfigurationOutput {
         return get_experiment_target_account_configuration.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified experiment template.
-    pub fn getExperimentTemplate(self: *Self, allocator: std.mem.Allocator, input: get_experiment_template.GetExperimentTemplateInput, options: get_experiment_template.Options) !get_experiment_template.GetExperimentTemplateOutput {
+    pub fn getExperimentTemplate(self: *Self, allocator: std.mem.Allocator, input: get_experiment_template.GetExperimentTemplateInput, options: CallOptions) !get_experiment_template.GetExperimentTemplateOutput {
         return get_experiment_template.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified safety lever.
-    pub fn getSafetyLever(self: *Self, allocator: std.mem.Allocator, input: get_safety_lever.GetSafetyLeverInput, options: get_safety_lever.Options) !get_safety_lever.GetSafetyLeverOutput {
+    pub fn getSafetyLever(self: *Self, allocator: std.mem.Allocator, input: get_safety_lever.GetSafetyLeverInput, options: CallOptions) !get_safety_lever.GetSafetyLeverOutput {
         return get_safety_lever.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified target account configuration of the
     /// experiment template.
-    pub fn getTargetAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_target_account_configuration.GetTargetAccountConfigurationInput, options: get_target_account_configuration.Options) !get_target_account_configuration.GetTargetAccountConfigurationOutput {
+    pub fn getTargetAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_target_account_configuration.GetTargetAccountConfigurationInput, options: CallOptions) !get_target_account_configuration.GetTargetAccountConfigurationOutput {
         return get_target_account_configuration.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified resource type.
-    pub fn getTargetResourceType(self: *Self, allocator: std.mem.Allocator, input: get_target_resource_type.GetTargetResourceTypeInput, options: get_target_resource_type.Options) !get_target_resource_type.GetTargetResourceTypeOutput {
+    pub fn getTargetResourceType(self: *Self, allocator: std.mem.Allocator, input: get_target_resource_type.GetTargetResourceTypeInput, options: CallOptions) !get_target_resource_type.GetTargetResourceTypeOutput {
         return get_target_resource_type.execute(self, allocator, input, options);
     }
 
     /// Lists the available FIS actions.
-    pub fn listActions(self: *Self, allocator: std.mem.Allocator, input: list_actions.ListActionsInput, options: list_actions.Options) !list_actions.ListActionsOutput {
+    pub fn listActions(self: *Self, allocator: std.mem.Allocator, input: list_actions.ListActionsInput, options: CallOptions) !list_actions.ListActionsOutput {
         return list_actions.execute(self, allocator, input, options);
     }
 
     /// Lists the resolved targets information of the specified experiment.
-    pub fn listExperimentResolvedTargets(self: *Self, allocator: std.mem.Allocator, input: list_experiment_resolved_targets.ListExperimentResolvedTargetsInput, options: list_experiment_resolved_targets.Options) !list_experiment_resolved_targets.ListExperimentResolvedTargetsOutput {
+    pub fn listExperimentResolvedTargets(self: *Self, allocator: std.mem.Allocator, input: list_experiment_resolved_targets.ListExperimentResolvedTargetsInput, options: CallOptions) !list_experiment_resolved_targets.ListExperimentResolvedTargetsOutput {
         return list_experiment_resolved_targets.execute(self, allocator, input, options);
     }
 
     /// Lists the target account configurations of the specified experiment.
-    pub fn listExperimentTargetAccountConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_experiment_target_account_configurations.ListExperimentTargetAccountConfigurationsInput, options: list_experiment_target_account_configurations.Options) !list_experiment_target_account_configurations.ListExperimentTargetAccountConfigurationsOutput {
+    pub fn listExperimentTargetAccountConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_experiment_target_account_configurations.ListExperimentTargetAccountConfigurationsInput, options: CallOptions) !list_experiment_target_account_configurations.ListExperimentTargetAccountConfigurationsOutput {
         return list_experiment_target_account_configurations.execute(self, allocator, input, options);
     }
 
     /// Lists your experiment templates.
-    pub fn listExperimentTemplates(self: *Self, allocator: std.mem.Allocator, input: list_experiment_templates.ListExperimentTemplatesInput, options: list_experiment_templates.Options) !list_experiment_templates.ListExperimentTemplatesOutput {
+    pub fn listExperimentTemplates(self: *Self, allocator: std.mem.Allocator, input: list_experiment_templates.ListExperimentTemplatesInput, options: CallOptions) !list_experiment_templates.ListExperimentTemplatesOutput {
         return list_experiment_templates.execute(self, allocator, input, options);
     }
 
     /// Lists your experiments.
-    pub fn listExperiments(self: *Self, allocator: std.mem.Allocator, input: list_experiments.ListExperimentsInput, options: list_experiments.Options) !list_experiments.ListExperimentsOutput {
+    pub fn listExperiments(self: *Self, allocator: std.mem.Allocator, input: list_experiments.ListExperimentsInput, options: CallOptions) !list_experiments.ListExperimentsOutput {
         return list_experiments.execute(self, allocator, input, options);
     }
 
     /// Lists the tags for the specified resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists the target account configurations of the specified experiment
     /// template.
-    pub fn listTargetAccountConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_target_account_configurations.ListTargetAccountConfigurationsInput, options: list_target_account_configurations.Options) !list_target_account_configurations.ListTargetAccountConfigurationsOutput {
+    pub fn listTargetAccountConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_target_account_configurations.ListTargetAccountConfigurationsInput, options: CallOptions) !list_target_account_configurations.ListTargetAccountConfigurationsOutput {
         return list_target_account_configurations.execute(self, allocator, input, options);
     }
 
     /// Lists the target resource types.
-    pub fn listTargetResourceTypes(self: *Self, allocator: std.mem.Allocator, input: list_target_resource_types.ListTargetResourceTypesInput, options: list_target_resource_types.Options) !list_target_resource_types.ListTargetResourceTypesOutput {
+    pub fn listTargetResourceTypes(self: *Self, allocator: std.mem.Allocator, input: list_target_resource_types.ListTargetResourceTypesInput, options: CallOptions) !list_target_resource_types.ListTargetResourceTypesOutput {
         return list_target_resource_types.execute(self, allocator, input, options);
     }
 
     /// Starts running an experiment from the specified experiment template.
-    pub fn startExperiment(self: *Self, allocator: std.mem.Allocator, input: start_experiment.StartExperimentInput, options: start_experiment.Options) !start_experiment.StartExperimentOutput {
+    pub fn startExperiment(self: *Self, allocator: std.mem.Allocator, input: start_experiment.StartExperimentInput, options: CallOptions) !start_experiment.StartExperimentOutput {
         return start_experiment.execute(self, allocator, input, options);
     }
 
     /// Stops the specified experiment.
-    pub fn stopExperiment(self: *Self, allocator: std.mem.Allocator, input: stop_experiment.StopExperimentInput, options: stop_experiment.Options) !stop_experiment.StopExperimentOutput {
+    pub fn stopExperiment(self: *Self, allocator: std.mem.Allocator, input: stop_experiment.StopExperimentInput, options: CallOptions) !stop_experiment.StopExperimentOutput {
         return stop_experiment.execute(self, allocator, input, options);
     }
 
     /// Applies the specified tags to the specified resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the specified experiment template.
-    pub fn updateExperimentTemplate(self: *Self, allocator: std.mem.Allocator, input: update_experiment_template.UpdateExperimentTemplateInput, options: update_experiment_template.Options) !update_experiment_template.UpdateExperimentTemplateOutput {
+    pub fn updateExperimentTemplate(self: *Self, allocator: std.mem.Allocator, input: update_experiment_template.UpdateExperimentTemplateInput, options: CallOptions) !update_experiment_template.UpdateExperimentTemplateOutput {
         return update_experiment_template.execute(self, allocator, input, options);
     }
 
     /// Updates the specified safety lever state.
-    pub fn updateSafetyLeverState(self: *Self, allocator: std.mem.Allocator, input: update_safety_lever_state.UpdateSafetyLeverStateInput, options: update_safety_lever_state.Options) !update_safety_lever_state.UpdateSafetyLeverStateOutput {
+    pub fn updateSafetyLeverState(self: *Self, allocator: std.mem.Allocator, input: update_safety_lever_state.UpdateSafetyLeverStateInput, options: CallOptions) !update_safety_lever_state.UpdateSafetyLeverStateOutput {
         return update_safety_lever_state.execute(self, allocator, input, options);
     }
 
     /// Updates the target account configuration for the specified experiment
     /// template.
-    pub fn updateTargetAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_target_account_configuration.UpdateTargetAccountConfigurationInput, options: update_target_account_configuration.Options) !update_target_account_configuration.UpdateTargetAccountConfigurationOutput {
+    pub fn updateTargetAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_target_account_configuration.UpdateTargetAccountConfigurationInput, options: CallOptions) !update_target_account_configuration.UpdateTargetAccountConfigurationOutput {
         return update_target_account_configuration.execute(self, allocator, input, options);
     }
 

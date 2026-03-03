@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PackageContentType = @import("package_content_type.zig").PackageContentType;
 const ValidateSolFunctionPackageContentMetadata = @import("validate_sol_function_package_content_metadata.zig").ValidateSolFunctionPackageContentMetadata;
@@ -52,11 +53,7 @@ pub const ValidateSolFunctionPackageContentOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ValidateSolFunctionPackageContentInput, options: Options) !ValidateSolFunctionPackageContentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ValidateSolFunctionPackageContentInput, options: CallOptions) !ValidateSolFunctionPackageContentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

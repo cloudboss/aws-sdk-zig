@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResourceGatewayIpAddressType = @import("resource_gateway_ip_address_type.zig").ResourceGatewayIpAddressType;
 const ResourceGatewayStatus = @import("resource_gateway_status.zig").ResourceGatewayStatus;
@@ -65,11 +66,7 @@ pub const GetResourceGatewayOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourceGatewayInput, options: Options) !GetResourceGatewayOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourceGatewayInput, options: CallOptions) !GetResourceGatewayOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TestSetGenerationDataSource = @import("test_set_generation_data_source.zig").TestSetGenerationDataSource;
 const TestSetStorageLocation = @import("test_set_storage_location.zig").TestSetStorageLocation;
@@ -81,11 +82,7 @@ pub const StartTestSetGenerationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartTestSetGenerationInput, options: Options) !StartTestSetGenerationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartTestSetGenerationInput, options: CallOptions) !StartTestSetGenerationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AsnAuthorizationContext = @import("asn_authorization_context.zig").AsnAuthorizationContext;
 const Byoasn = @import("byoasn.zig").Byoasn;
@@ -30,11 +31,7 @@ pub const ProvisionIpamByoasnOutput = struct {
     byoasn: ?Byoasn = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ProvisionIpamByoasnInput, options: Options) !ProvisionIpamByoasnOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ProvisionIpamByoasnInput, options: CallOptions) !ProvisionIpamByoasnOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

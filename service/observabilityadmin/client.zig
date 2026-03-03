@@ -41,6 +41,7 @@ const update_telemetry_pipeline = @import("update_telemetry_pipeline.zig");
 const update_telemetry_rule = @import("update_telemetry_rule.zig");
 const update_telemetry_rule_for_organization = @import("update_telemetry_rule_for_organization.zig");
 const validate_telemetry_pipeline_configuration = @import("validate_telemetry_pipeline_configuration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -74,21 +75,21 @@ pub const Client = struct {
     /// Creates a centralization rule that applies across an Amazon Web Services
     /// Organization. This operation can only be called by the organization's
     /// management account or a delegated administrator account.
-    pub fn createCentralizationRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: create_centralization_rule_for_organization.CreateCentralizationRuleForOrganizationInput, options: create_centralization_rule_for_organization.Options) !create_centralization_rule_for_organization.CreateCentralizationRuleForOrganizationOutput {
+    pub fn createCentralizationRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: create_centralization_rule_for_organization.CreateCentralizationRuleForOrganizationInput, options: CallOptions) !create_centralization_rule_for_organization.CreateCentralizationRuleForOrganizationOutput {
         return create_centralization_rule_for_organization.execute(self, allocator, input, options);
     }
 
     /// Creates an integration between CloudWatch and S3 Tables for analytics. This
     /// integration enables querying CloudWatch telemetry data using analytics
     /// engines like Amazon Athena, Amazon Redshift, and Apache Spark.
-    pub fn createS3TableIntegration(self: *Self, allocator: std.mem.Allocator, input: create_s3_table_integration.CreateS3TableIntegrationInput, options: create_s3_table_integration.Options) !create_s3_table_integration.CreateS3TableIntegrationOutput {
+    pub fn createS3TableIntegration(self: *Self, allocator: std.mem.Allocator, input: create_s3_table_integration.CreateS3TableIntegrationInput, options: CallOptions) !create_s3_table_integration.CreateS3TableIntegrationOutput {
         return create_s3_table_integration.execute(self, allocator, input, options);
     }
 
     /// Creates a telemetry pipeline for processing and transforming telemetry data.
     /// The pipeline defines how data flows from sources through processors to
     /// destinations, enabling data transformation and delivering capabilities.
-    pub fn createTelemetryPipeline(self: *Self, allocator: std.mem.Allocator, input: create_telemetry_pipeline.CreateTelemetryPipelineInput, options: create_telemetry_pipeline.Options) !create_telemetry_pipeline.CreateTelemetryPipelineOutput {
+    pub fn createTelemetryPipeline(self: *Self, allocator: std.mem.Allocator, input: create_telemetry_pipeline.CreateTelemetryPipelineInput, options: CallOptions) !create_telemetry_pipeline.CreateTelemetryPipelineOutput {
         return create_telemetry_pipeline.execute(self, allocator, input, options);
     }
 
@@ -96,74 +97,74 @@ pub const Client = struct {
     /// Amazon Web Services resources in your account. The rule specifies which
     /// resources should have telemetry enabled and how that telemetry data should
     /// be collected based on resource type, telemetry type, and selection criteria.
-    pub fn createTelemetryRule(self: *Self, allocator: std.mem.Allocator, input: create_telemetry_rule.CreateTelemetryRuleInput, options: create_telemetry_rule.Options) !create_telemetry_rule.CreateTelemetryRuleOutput {
+    pub fn createTelemetryRule(self: *Self, allocator: std.mem.Allocator, input: create_telemetry_rule.CreateTelemetryRuleInput, options: CallOptions) !create_telemetry_rule.CreateTelemetryRuleOutput {
         return create_telemetry_rule.execute(self, allocator, input, options);
     }
 
     /// Creates a telemetry rule that applies across an Amazon Web Services
     /// Organization. This operation can only be called by the organization's
     /// management account or a delegated administrator account.
-    pub fn createTelemetryRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: create_telemetry_rule_for_organization.CreateTelemetryRuleForOrganizationInput, options: create_telemetry_rule_for_organization.Options) !create_telemetry_rule_for_organization.CreateTelemetryRuleForOrganizationOutput {
+    pub fn createTelemetryRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: create_telemetry_rule_for_organization.CreateTelemetryRuleForOrganizationInput, options: CallOptions) !create_telemetry_rule_for_organization.CreateTelemetryRuleForOrganizationOutput {
         return create_telemetry_rule_for_organization.execute(self, allocator, input, options);
     }
 
     /// Deletes an organization-wide centralization rule. This operation can only be
     /// called by the organization's management account or a delegated administrator
     /// account.
-    pub fn deleteCentralizationRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: delete_centralization_rule_for_organization.DeleteCentralizationRuleForOrganizationInput, options: delete_centralization_rule_for_organization.Options) !delete_centralization_rule_for_organization.DeleteCentralizationRuleForOrganizationOutput {
+    pub fn deleteCentralizationRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: delete_centralization_rule_for_organization.DeleteCentralizationRuleForOrganizationInput, options: CallOptions) !delete_centralization_rule_for_organization.DeleteCentralizationRuleForOrganizationOutput {
         return delete_centralization_rule_for_organization.execute(self, allocator, input, options);
     }
 
     /// Deletes an S3 Table integration and its associated data. This operation
     /// removes the connection between CloudWatch Observability Admin and S3 Tables.
-    pub fn deleteS3TableIntegration(self: *Self, allocator: std.mem.Allocator, input: delete_s3_table_integration.DeleteS3TableIntegrationInput, options: delete_s3_table_integration.Options) !delete_s3_table_integration.DeleteS3TableIntegrationOutput {
+    pub fn deleteS3TableIntegration(self: *Self, allocator: std.mem.Allocator, input: delete_s3_table_integration.DeleteS3TableIntegrationInput, options: CallOptions) !delete_s3_table_integration.DeleteS3TableIntegrationOutput {
         return delete_s3_table_integration.execute(self, allocator, input, options);
     }
 
     /// Deletes a telemetry pipeline and its associated resources. This operation
     /// stops data processing and removes the pipeline configuration.
-    pub fn deleteTelemetryPipeline(self: *Self, allocator: std.mem.Allocator, input: delete_telemetry_pipeline.DeleteTelemetryPipelineInput, options: delete_telemetry_pipeline.Options) !delete_telemetry_pipeline.DeleteTelemetryPipelineOutput {
+    pub fn deleteTelemetryPipeline(self: *Self, allocator: std.mem.Allocator, input: delete_telemetry_pipeline.DeleteTelemetryPipelineInput, options: CallOptions) !delete_telemetry_pipeline.DeleteTelemetryPipelineOutput {
         return delete_telemetry_pipeline.execute(self, allocator, input, options);
     }
 
     /// Deletes a telemetry rule from your account. Any telemetry configurations
     /// previously created by the rule will remain but no new resources will be
     /// configured by this rule.
-    pub fn deleteTelemetryRule(self: *Self, allocator: std.mem.Allocator, input: delete_telemetry_rule.DeleteTelemetryRuleInput, options: delete_telemetry_rule.Options) !delete_telemetry_rule.DeleteTelemetryRuleOutput {
+    pub fn deleteTelemetryRule(self: *Self, allocator: std.mem.Allocator, input: delete_telemetry_rule.DeleteTelemetryRuleInput, options: CallOptions) !delete_telemetry_rule.DeleteTelemetryRuleOutput {
         return delete_telemetry_rule.execute(self, allocator, input, options);
     }
 
     /// Deletes an organization-wide telemetry rule. This operation can only be
     /// called by the organization's management account or a delegated administrator
     /// account.
-    pub fn deleteTelemetryRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: delete_telemetry_rule_for_organization.DeleteTelemetryRuleForOrganizationInput, options: delete_telemetry_rule_for_organization.Options) !delete_telemetry_rule_for_organization.DeleteTelemetryRuleForOrganizationOutput {
+    pub fn deleteTelemetryRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: delete_telemetry_rule_for_organization.DeleteTelemetryRuleForOrganizationInput, options: CallOptions) !delete_telemetry_rule_for_organization.DeleteTelemetryRuleForOrganizationOutput {
         return delete_telemetry_rule_for_organization.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details of a specific organization centralization rule. This
     /// operation can only be called by the organization's management account or a
     /// delegated administrator account.
-    pub fn getCentralizationRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: get_centralization_rule_for_organization.GetCentralizationRuleForOrganizationInput, options: get_centralization_rule_for_organization.Options) !get_centralization_rule_for_organization.GetCentralizationRuleForOrganizationOutput {
+    pub fn getCentralizationRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: get_centralization_rule_for_organization.GetCentralizationRuleForOrganizationInput, options: CallOptions) !get_centralization_rule_for_organization.GetCentralizationRuleForOrganizationOutput {
         return get_centralization_rule_for_organization.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a specific S3 Table integration, including its
     /// configuration, status, and metadata.
-    pub fn getS3TableIntegration(self: *Self, allocator: std.mem.Allocator, input: get_s3_table_integration.GetS3TableIntegrationInput, options: get_s3_table_integration.Options) !get_s3_table_integration.GetS3TableIntegrationOutput {
+    pub fn getS3TableIntegration(self: *Self, allocator: std.mem.Allocator, input: get_s3_table_integration.GetS3TableIntegrationInput, options: CallOptions) !get_s3_table_integration.GetS3TableIntegrationOutput {
         return get_s3_table_integration.execute(self, allocator, input, options);
     }
 
     /// Returns the current status of the resource tags for telemetry feature, which
     /// enhances telemetry data with additional resource metadata from Resource
     /// Explorer.
-    pub fn getTelemetryEnrichmentStatus(self: *Self, allocator: std.mem.Allocator, input: get_telemetry_enrichment_status.GetTelemetryEnrichmentStatusInput, options: get_telemetry_enrichment_status.Options) !get_telemetry_enrichment_status.GetTelemetryEnrichmentStatusOutput {
+    pub fn getTelemetryEnrichmentStatus(self: *Self, allocator: std.mem.Allocator, input: get_telemetry_enrichment_status.GetTelemetryEnrichmentStatusInput, options: CallOptions) !get_telemetry_enrichment_status.GetTelemetryEnrichmentStatusOutput {
         return get_telemetry_enrichment_status.execute(self, allocator, input, options);
     }
 
     /// Returns the current onboarding status of the telemetry config feature,
     /// including the status of the feature and reason the feature failed to start
     /// or stop.
-    pub fn getTelemetryEvaluationStatus(self: *Self, allocator: std.mem.Allocator, input: get_telemetry_evaluation_status.GetTelemetryEvaluationStatusInput, options: get_telemetry_evaluation_status.Options) !get_telemetry_evaluation_status.GetTelemetryEvaluationStatusOutput {
+    pub fn getTelemetryEvaluationStatus(self: *Self, allocator: std.mem.Allocator, input: get_telemetry_evaluation_status.GetTelemetryEvaluationStatusInput, options: CallOptions) !get_telemetry_evaluation_status.GetTelemetryEvaluationStatusOutput {
         return get_telemetry_evaluation_status.execute(self, allocator, input, options);
     }
 
@@ -171,32 +172,32 @@ pub const Client = struct {
     /// for the organization. It can only be called by a Management Account of an
     /// Amazon Web Services Organization or an assigned Delegated Admin Account of
     /// Amazon CloudWatch telemetry config.
-    pub fn getTelemetryEvaluationStatusForOrganization(self: *Self, allocator: std.mem.Allocator, input: get_telemetry_evaluation_status_for_organization.GetTelemetryEvaluationStatusForOrganizationInput, options: get_telemetry_evaluation_status_for_organization.Options) !get_telemetry_evaluation_status_for_organization.GetTelemetryEvaluationStatusForOrganizationOutput {
+    pub fn getTelemetryEvaluationStatusForOrganization(self: *Self, allocator: std.mem.Allocator, input: get_telemetry_evaluation_status_for_organization.GetTelemetryEvaluationStatusForOrganizationInput, options: CallOptions) !get_telemetry_evaluation_status_for_organization.GetTelemetryEvaluationStatusForOrganizationOutput {
         return get_telemetry_evaluation_status_for_organization.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a specific telemetry pipeline, including its
     /// configuration, status, and metadata.
-    pub fn getTelemetryPipeline(self: *Self, allocator: std.mem.Allocator, input: get_telemetry_pipeline.GetTelemetryPipelineInput, options: get_telemetry_pipeline.Options) !get_telemetry_pipeline.GetTelemetryPipelineOutput {
+    pub fn getTelemetryPipeline(self: *Self, allocator: std.mem.Allocator, input: get_telemetry_pipeline.GetTelemetryPipelineInput, options: CallOptions) !get_telemetry_pipeline.GetTelemetryPipelineOutput {
         return get_telemetry_pipeline.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details of a specific telemetry rule in your account.
-    pub fn getTelemetryRule(self: *Self, allocator: std.mem.Allocator, input: get_telemetry_rule.GetTelemetryRuleInput, options: get_telemetry_rule.Options) !get_telemetry_rule.GetTelemetryRuleOutput {
+    pub fn getTelemetryRule(self: *Self, allocator: std.mem.Allocator, input: get_telemetry_rule.GetTelemetryRuleInput, options: CallOptions) !get_telemetry_rule.GetTelemetryRuleOutput {
         return get_telemetry_rule.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details of a specific organization telemetry rule. This
     /// operation can only be called by the organization's management account or a
     /// delegated administrator account.
-    pub fn getTelemetryRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: get_telemetry_rule_for_organization.GetTelemetryRuleForOrganizationInput, options: get_telemetry_rule_for_organization.Options) !get_telemetry_rule_for_organization.GetTelemetryRuleForOrganizationOutput {
+    pub fn getTelemetryRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: get_telemetry_rule_for_organization.GetTelemetryRuleForOrganizationInput, options: CallOptions) !get_telemetry_rule_for_organization.GetTelemetryRuleForOrganizationOutput {
         return get_telemetry_rule_for_organization.execute(self, allocator, input, options);
     }
 
     /// Lists all centralization rules in your organization. This operation can only
     /// be called by the organization's management account or a delegated
     /// administrator account.
-    pub fn listCentralizationRulesForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_centralization_rules_for_organization.ListCentralizationRulesForOrganizationInput, options: list_centralization_rules_for_organization.Options) !list_centralization_rules_for_organization.ListCentralizationRulesForOrganizationOutput {
+    pub fn listCentralizationRulesForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_centralization_rules_for_organization.ListCentralizationRulesForOrganizationInput, options: CallOptions) !list_centralization_rules_for_organization.ListCentralizationRulesForOrganizationOutput {
         return list_centralization_rules_for_organization.execute(self, allocator, input, options);
     }
 
@@ -204,108 +205,108 @@ pub const Client = struct {
     /// supported by telemetry config. For more information, see [Auditing
     /// CloudWatch telemetry
     /// configurations](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/telemetry-config-cloudwatch.html).
-    pub fn listResourceTelemetry(self: *Self, allocator: std.mem.Allocator, input: list_resource_telemetry.ListResourceTelemetryInput, options: list_resource_telemetry.Options) !list_resource_telemetry.ListResourceTelemetryOutput {
+    pub fn listResourceTelemetry(self: *Self, allocator: std.mem.Allocator, input: list_resource_telemetry.ListResourceTelemetryInput, options: CallOptions) !list_resource_telemetry.ListResourceTelemetryOutput {
         return list_resource_telemetry.execute(self, allocator, input, options);
     }
 
     /// Returns a list of telemetry configurations for Amazon Web Services resources
     /// supported by telemetry config in the organization.
-    pub fn listResourceTelemetryForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_resource_telemetry_for_organization.ListResourceTelemetryForOrganizationInput, options: list_resource_telemetry_for_organization.Options) !list_resource_telemetry_for_organization.ListResourceTelemetryForOrganizationOutput {
+    pub fn listResourceTelemetryForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_resource_telemetry_for_organization.ListResourceTelemetryForOrganizationInput, options: CallOptions) !list_resource_telemetry_for_organization.ListResourceTelemetryForOrganizationOutput {
         return list_resource_telemetry_for_organization.execute(self, allocator, input, options);
     }
 
     /// Lists all S3 Table integrations in your account. We recommend using
     /// pagination to ensure that the operation returns quickly and successfully.
-    pub fn listS3TableIntegrations(self: *Self, allocator: std.mem.Allocator, input: list_s3_table_integrations.ListS3TableIntegrationsInput, options: list_s3_table_integrations.Options) !list_s3_table_integrations.ListS3TableIntegrationsOutput {
+    pub fn listS3TableIntegrations(self: *Self, allocator: std.mem.Allocator, input: list_s3_table_integrations.ListS3TableIntegrationsInput, options: CallOptions) !list_s3_table_integrations.ListS3TableIntegrationsOutput {
         return list_s3_table_integrations.execute(self, allocator, input, options);
     }
 
     /// Lists all tags attached to the specified resource. Supports telemetry rule
     /// resources and telemetry pipeline resources.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Returns a list of telemetry pipelines in your account. Returns up to 100
     /// results. If more than 100 telemetry pipelines exist, include the `NextToken`
     /// value from the response to retrieve the next set of results.
-    pub fn listTelemetryPipelines(self: *Self, allocator: std.mem.Allocator, input: list_telemetry_pipelines.ListTelemetryPipelinesInput, options: list_telemetry_pipelines.Options) !list_telemetry_pipelines.ListTelemetryPipelinesOutput {
+    pub fn listTelemetryPipelines(self: *Self, allocator: std.mem.Allocator, input: list_telemetry_pipelines.ListTelemetryPipelinesInput, options: CallOptions) !list_telemetry_pipelines.ListTelemetryPipelinesOutput {
         return list_telemetry_pipelines.execute(self, allocator, input, options);
     }
 
     /// Lists all telemetry rules in your account. You can filter the results by
     /// specifying a rule name prefix.
-    pub fn listTelemetryRules(self: *Self, allocator: std.mem.Allocator, input: list_telemetry_rules.ListTelemetryRulesInput, options: list_telemetry_rules.Options) !list_telemetry_rules.ListTelemetryRulesOutput {
+    pub fn listTelemetryRules(self: *Self, allocator: std.mem.Allocator, input: list_telemetry_rules.ListTelemetryRulesInput, options: CallOptions) !list_telemetry_rules.ListTelemetryRulesOutput {
         return list_telemetry_rules.execute(self, allocator, input, options);
     }
 
     /// Lists all telemetry rules in your organization. This operation can only be
     /// called by the organization's management account or a delegated administrator
     /// account.
-    pub fn listTelemetryRulesForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_telemetry_rules_for_organization.ListTelemetryRulesForOrganizationInput, options: list_telemetry_rules_for_organization.Options) !list_telemetry_rules_for_organization.ListTelemetryRulesForOrganizationOutput {
+    pub fn listTelemetryRulesForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_telemetry_rules_for_organization.ListTelemetryRulesForOrganizationInput, options: CallOptions) !list_telemetry_rules_for_organization.ListTelemetryRulesForOrganizationOutput {
         return list_telemetry_rules_for_organization.execute(self, allocator, input, options);
     }
 
     /// Enables the resource tags for telemetry feature for your account, which
     /// enhances telemetry data with additional resource metadata from Resource
     /// Explorer to provide richer context for monitoring and observability.
-    pub fn startTelemetryEnrichment(self: *Self, allocator: std.mem.Allocator, input: start_telemetry_enrichment.StartTelemetryEnrichmentInput, options: start_telemetry_enrichment.Options) !start_telemetry_enrichment.StartTelemetryEnrichmentOutput {
+    pub fn startTelemetryEnrichment(self: *Self, allocator: std.mem.Allocator, input: start_telemetry_enrichment.StartTelemetryEnrichmentInput, options: CallOptions) !start_telemetry_enrichment.StartTelemetryEnrichmentOutput {
         return start_telemetry_enrichment.execute(self, allocator, input, options);
     }
 
     /// This action begins onboarding the caller Amazon Web Services account to the
     /// telemetry config feature.
-    pub fn startTelemetryEvaluation(self: *Self, allocator: std.mem.Allocator, input: start_telemetry_evaluation.StartTelemetryEvaluationInput, options: start_telemetry_evaluation.Options) !start_telemetry_evaluation.StartTelemetryEvaluationOutput {
+    pub fn startTelemetryEvaluation(self: *Self, allocator: std.mem.Allocator, input: start_telemetry_evaluation.StartTelemetryEvaluationInput, options: CallOptions) !start_telemetry_evaluation.StartTelemetryEvaluationOutput {
         return start_telemetry_evaluation.execute(self, allocator, input, options);
     }
 
     /// This actions begins onboarding the organization and all member accounts to
     /// the telemetry config feature.
-    pub fn startTelemetryEvaluationForOrganization(self: *Self, allocator: std.mem.Allocator, input: start_telemetry_evaluation_for_organization.StartTelemetryEvaluationForOrganizationInput, options: start_telemetry_evaluation_for_organization.Options) !start_telemetry_evaluation_for_organization.StartTelemetryEvaluationForOrganizationOutput {
+    pub fn startTelemetryEvaluationForOrganization(self: *Self, allocator: std.mem.Allocator, input: start_telemetry_evaluation_for_organization.StartTelemetryEvaluationForOrganizationInput, options: CallOptions) !start_telemetry_evaluation_for_organization.StartTelemetryEvaluationForOrganizationOutput {
         return start_telemetry_evaluation_for_organization.execute(self, allocator, input, options);
     }
 
     /// Disables the resource tags for telemetry feature for your account, stopping
     /// the enhancement of telemetry data with additional resource metadata.
-    pub fn stopTelemetryEnrichment(self: *Self, allocator: std.mem.Allocator, input: stop_telemetry_enrichment.StopTelemetryEnrichmentInput, options: stop_telemetry_enrichment.Options) !stop_telemetry_enrichment.StopTelemetryEnrichmentOutput {
+    pub fn stopTelemetryEnrichment(self: *Self, allocator: std.mem.Allocator, input: stop_telemetry_enrichment.StopTelemetryEnrichmentInput, options: CallOptions) !stop_telemetry_enrichment.StopTelemetryEnrichmentOutput {
         return stop_telemetry_enrichment.execute(self, allocator, input, options);
     }
 
     /// This action begins offboarding the caller Amazon Web Services account from
     /// the telemetry config feature.
-    pub fn stopTelemetryEvaluation(self: *Self, allocator: std.mem.Allocator, input: stop_telemetry_evaluation.StopTelemetryEvaluationInput, options: stop_telemetry_evaluation.Options) !stop_telemetry_evaluation.StopTelemetryEvaluationOutput {
+    pub fn stopTelemetryEvaluation(self: *Self, allocator: std.mem.Allocator, input: stop_telemetry_evaluation.StopTelemetryEvaluationInput, options: CallOptions) !stop_telemetry_evaluation.StopTelemetryEvaluationOutput {
         return stop_telemetry_evaluation.execute(self, allocator, input, options);
     }
 
     /// This action offboards the Organization of the caller Amazon Web Services
     /// account from the telemetry config feature.
-    pub fn stopTelemetryEvaluationForOrganization(self: *Self, allocator: std.mem.Allocator, input: stop_telemetry_evaluation_for_organization.StopTelemetryEvaluationForOrganizationInput, options: stop_telemetry_evaluation_for_organization.Options) !stop_telemetry_evaluation_for_organization.StopTelemetryEvaluationForOrganizationOutput {
+    pub fn stopTelemetryEvaluationForOrganization(self: *Self, allocator: std.mem.Allocator, input: stop_telemetry_evaluation_for_organization.StopTelemetryEvaluationForOrganizationInput, options: CallOptions) !stop_telemetry_evaluation_for_organization.StopTelemetryEvaluationForOrganizationOutput {
         return stop_telemetry_evaluation_for_organization.execute(self, allocator, input, options);
     }
 
     /// Adds or updates tags for a resource. Supports telemetry rule resources and
     /// telemetry pipeline resources.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Tests a pipeline configuration with sample records to validate data
     /// processing before deployment. This operation helps ensure your pipeline
     /// configuration works as expected.
-    pub fn testTelemetryPipeline(self: *Self, allocator: std.mem.Allocator, input: test_telemetry_pipeline.TestTelemetryPipelineInput, options: test_telemetry_pipeline.Options) !test_telemetry_pipeline.TestTelemetryPipelineOutput {
+    pub fn testTelemetryPipeline(self: *Self, allocator: std.mem.Allocator, input: test_telemetry_pipeline.TestTelemetryPipelineInput, options: CallOptions) !test_telemetry_pipeline.TestTelemetryPipelineOutput {
         return test_telemetry_pipeline.execute(self, allocator, input, options);
     }
 
     /// Removes tags from a resource. Supports telemetry rule resources and
     /// telemetry pipeline resources.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an existing centralization rule that applies across an Amazon Web
     /// Services Organization. This operation can only be called by the
     /// organization's management account or a delegated administrator account.
-    pub fn updateCentralizationRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: update_centralization_rule_for_organization.UpdateCentralizationRuleForOrganizationInput, options: update_centralization_rule_for_organization.Options) !update_centralization_rule_for_organization.UpdateCentralizationRuleForOrganizationOutput {
+    pub fn updateCentralizationRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: update_centralization_rule_for_organization.UpdateCentralizationRuleForOrganizationInput, options: CallOptions) !update_centralization_rule_for_organization.UpdateCentralizationRuleForOrganizationOutput {
         return update_centralization_rule_for_organization.execute(self, allocator, input, options);
     }
 
@@ -370,7 +371,7 @@ pub const Client = struct {
     ///
     /// **Updatable:** All Amazon Web Services Secrets Manager attributes, `region`,
     /// `range`, OAuth2 credentials (`client_id`, `client_secret`)
-    pub fn updateTelemetryPipeline(self: *Self, allocator: std.mem.Allocator, input: update_telemetry_pipeline.UpdateTelemetryPipelineInput, options: update_telemetry_pipeline.Options) !update_telemetry_pipeline.UpdateTelemetryPipelineOutput {
+    pub fn updateTelemetryPipeline(self: *Self, allocator: std.mem.Allocator, input: update_telemetry_pipeline.UpdateTelemetryPipelineInput, options: CallOptions) !update_telemetry_pipeline.UpdateTelemetryPipelineOutput {
         return update_telemetry_pipeline.execute(self, allocator, input, options);
     }
 
@@ -378,21 +379,21 @@ pub const Client = struct {
     /// attempt to modify the same telemetry rule simultaneously, a
     /// ConflictException is returned to provide specific error information for
     /// concurrent modification scenarios.
-    pub fn updateTelemetryRule(self: *Self, allocator: std.mem.Allocator, input: update_telemetry_rule.UpdateTelemetryRuleInput, options: update_telemetry_rule.Options) !update_telemetry_rule.UpdateTelemetryRuleOutput {
+    pub fn updateTelemetryRule(self: *Self, allocator: std.mem.Allocator, input: update_telemetry_rule.UpdateTelemetryRuleInput, options: CallOptions) !update_telemetry_rule.UpdateTelemetryRuleOutput {
         return update_telemetry_rule.execute(self, allocator, input, options);
     }
 
     /// Updates an existing telemetry rule that applies across an Amazon Web
     /// Services Organization. This operation can only be called by the
     /// organization's management account or a delegated administrator account.
-    pub fn updateTelemetryRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: update_telemetry_rule_for_organization.UpdateTelemetryRuleForOrganizationInput, options: update_telemetry_rule_for_organization.Options) !update_telemetry_rule_for_organization.UpdateTelemetryRuleForOrganizationOutput {
+    pub fn updateTelemetryRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: update_telemetry_rule_for_organization.UpdateTelemetryRuleForOrganizationInput, options: CallOptions) !update_telemetry_rule_for_organization.UpdateTelemetryRuleForOrganizationOutput {
         return update_telemetry_rule_for_organization.execute(self, allocator, input, options);
     }
 
     /// Validates a pipeline configuration without creating the pipeline. This
     /// operation checks the configuration for syntax errors and compatibility
     /// issues.
-    pub fn validateTelemetryPipelineConfiguration(self: *Self, allocator: std.mem.Allocator, input: validate_telemetry_pipeline_configuration.ValidateTelemetryPipelineConfigurationInput, options: validate_telemetry_pipeline_configuration.Options) !validate_telemetry_pipeline_configuration.ValidateTelemetryPipelineConfigurationOutput {
+    pub fn validateTelemetryPipelineConfiguration(self: *Self, allocator: std.mem.Allocator, input: validate_telemetry_pipeline_configuration.ValidateTelemetryPipelineConfigurationInput, options: CallOptions) !validate_telemetry_pipeline_configuration.ValidateTelemetryPipelineConfigurationOutput {
         return validate_telemetry_pipeline_configuration.execute(self, allocator, input, options);
     }
 

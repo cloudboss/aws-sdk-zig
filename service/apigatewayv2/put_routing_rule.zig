@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RoutingRuleAction = @import("routing_rule_action.zig").RoutingRuleAction;
 const RoutingRuleCondition = @import("routing_rule_condition.zig").RoutingRuleCondition;
@@ -60,11 +61,7 @@ pub const PutRoutingRuleOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutRoutingRuleInput, options: Options) !PutRoutingRuleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutRoutingRuleInput, options: CallOptions) !PutRoutingRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ObjectReference = @import("object_reference.zig").ObjectReference;
 const PathToObjectIdentifiers = @import("path_to_object_identifiers.zig").PathToObjectIdentifiers;
@@ -43,11 +44,7 @@ pub const ListObjectParentPathsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListObjectParentPathsInput, options: Options) !ListObjectParentPathsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListObjectParentPathsInput, options: CallOptions) !ListObjectParentPathsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

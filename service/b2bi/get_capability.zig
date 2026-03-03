@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CapabilityConfiguration = @import("capability_configuration.zig").CapabilityConfiguration;
 const S3Location = @import("s3_location.zig").S3Location;
@@ -56,11 +57,7 @@ pub const GetCapabilityOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCapabilityInput, options: Options) !GetCapabilityOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCapabilityInput, options: CallOptions) !GetCapabilityOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

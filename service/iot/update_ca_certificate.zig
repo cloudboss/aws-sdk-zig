@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AutoRegistrationStatus = @import("auto_registration_status.zig").AutoRegistrationStatus;
 const CACertificateStatus = @import("ca_certificate_status.zig").CACertificateStatus;
@@ -37,13 +38,9 @@ pub const UpdateCACertificateInput = struct {
     };
 };
 
-const UpdateCACertificateOutput = struct {};
+pub const UpdateCACertificateOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCACertificateInput, options: Options) !UpdateCACertificateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCACertificateInput, options: CallOptions) !UpdateCACertificateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

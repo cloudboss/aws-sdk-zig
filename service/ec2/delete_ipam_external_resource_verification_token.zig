@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpamExternalResourceVerificationToken = @import("ipam_external_resource_verification_token.zig").IpamExternalResourceVerificationToken;
 const serde = @import("serde.zig");
@@ -23,11 +24,7 @@ pub const DeleteIpamExternalResourceVerificationTokenOutput = struct {
     ipam_external_resource_verification_token: ?IpamExternalResourceVerificationToken = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIpamExternalResourceVerificationTokenInput, options: Options) !DeleteIpamExternalResourceVerificationTokenOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIpamExternalResourceVerificationTokenInput, options: CallOptions) !DeleteIpamExternalResourceVerificationTokenOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DbInstanceType = @import("db_instance_type.zig").DbInstanceType;
 const DbStorageType = @import("db_storage_type.zig").DbStorageType;
@@ -122,11 +123,7 @@ pub const RebootDbInstanceOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RebootDbInstanceInput, options: Options) !RebootDbInstanceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RebootDbInstanceInput, options: CallOptions) !RebootDbInstanceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

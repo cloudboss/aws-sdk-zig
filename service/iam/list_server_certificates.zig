@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ServerCertificateMetadata = @import("server_certificate_metadata.zig").ServerCertificateMetadata;
 const serde = @import("serde.zig");
@@ -69,11 +70,7 @@ pub const ListServerCertificatesOutput = struct {
     server_certificate_metadata_list: ?[]const ServerCertificateMetadata = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListServerCertificatesInput, options: Options) !ListServerCertificatesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListServerCertificatesInput, options: CallOptions) !ListServerCertificatesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

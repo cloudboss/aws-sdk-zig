@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CloudFrontOriginAccessIdentityConfig = @import("cloud_front_origin_access_identity_config.zig").CloudFrontOriginAccessIdentityConfig;
 const CloudFrontOriginAccessIdentity = @import("cloud_front_origin_access_identity.zig").CloudFrontOriginAccessIdentity;
@@ -27,11 +28,7 @@ pub const UpdateCloudFrontOriginAccessIdentityOutput = struct {
     e_tag: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCloudFrontOriginAccessIdentityInput, options: Options) !UpdateCloudFrontOriginAccessIdentityOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCloudFrontOriginAccessIdentityInput, options: CallOptions) !UpdateCloudFrontOriginAccessIdentityOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

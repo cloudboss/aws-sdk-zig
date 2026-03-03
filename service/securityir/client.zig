@@ -25,6 +25,7 @@ const update_case_comment = @import("update_case_comment.zig");
 const update_case_status = @import("update_case_status.zig");
 const update_membership = @import("update_membership.zig");
 const update_resolver_type = @import("update_resolver_type.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -62,107 +63,107 @@ pub const Client = struct {
     /// zero-prepended. An example would be `123123123` which is nine digits, and
     /// with zero-prepend would be `000123123123`. Not zero-prepending to 12 digits
     /// could result in errors.
-    pub fn batchGetMemberAccountDetails(self: *Self, allocator: std.mem.Allocator, input: batch_get_member_account_details.BatchGetMemberAccountDetailsInput, options: batch_get_member_account_details.Options) !batch_get_member_account_details.BatchGetMemberAccountDetailsOutput {
+    pub fn batchGetMemberAccountDetails(self: *Self, allocator: std.mem.Allocator, input: batch_get_member_account_details.BatchGetMemberAccountDetailsInput, options: CallOptions) !batch_get_member_account_details.BatchGetMemberAccountDetailsOutput {
         return batch_get_member_account_details.execute(self, allocator, input, options);
     }
 
     /// Cancels an existing membership.
-    pub fn cancelMembership(self: *Self, allocator: std.mem.Allocator, input: cancel_membership.CancelMembershipInput, options: cancel_membership.Options) !cancel_membership.CancelMembershipOutput {
+    pub fn cancelMembership(self: *Self, allocator: std.mem.Allocator, input: cancel_membership.CancelMembershipInput, options: CallOptions) !cancel_membership.CancelMembershipOutput {
         return cancel_membership.execute(self, allocator, input, options);
     }
 
     /// Closes an existing case.
-    pub fn closeCase(self: *Self, allocator: std.mem.Allocator, input: close_case.CloseCaseInput, options: close_case.Options) !close_case.CloseCaseOutput {
+    pub fn closeCase(self: *Self, allocator: std.mem.Allocator, input: close_case.CloseCaseInput, options: CallOptions) !close_case.CloseCaseOutput {
         return close_case.execute(self, allocator, input, options);
     }
 
     /// Creates a new case.
-    pub fn createCase(self: *Self, allocator: std.mem.Allocator, input: create_case.CreateCaseInput, options: create_case.Options) !create_case.CreateCaseOutput {
+    pub fn createCase(self: *Self, allocator: std.mem.Allocator, input: create_case.CreateCaseInput, options: CallOptions) !create_case.CreateCaseOutput {
         return create_case.execute(self, allocator, input, options);
     }
 
     /// Adds a comment to an existing case.
-    pub fn createCaseComment(self: *Self, allocator: std.mem.Allocator, input: create_case_comment.CreateCaseCommentInput, options: create_case_comment.Options) !create_case_comment.CreateCaseCommentOutput {
+    pub fn createCaseComment(self: *Self, allocator: std.mem.Allocator, input: create_case_comment.CreateCaseCommentInput, options: CallOptions) !create_case_comment.CreateCaseCommentOutput {
         return create_case_comment.execute(self, allocator, input, options);
     }
 
     /// Creates a new membership.
-    pub fn createMembership(self: *Self, allocator: std.mem.Allocator, input: create_membership.CreateMembershipInput, options: create_membership.Options) !create_membership.CreateMembershipOutput {
+    pub fn createMembership(self: *Self, allocator: std.mem.Allocator, input: create_membership.CreateMembershipInput, options: CallOptions) !create_membership.CreateMembershipOutput {
         return create_membership.execute(self, allocator, input, options);
     }
 
     /// Returns the attributes of a case.
-    pub fn getCase(self: *Self, allocator: std.mem.Allocator, input: get_case.GetCaseInput, options: get_case.Options) !get_case.GetCaseOutput {
+    pub fn getCase(self: *Self, allocator: std.mem.Allocator, input: get_case.GetCaseInput, options: CallOptions) !get_case.GetCaseOutput {
         return get_case.execute(self, allocator, input, options);
     }
 
     /// Returns a Pre-Signed URL for uploading attachments into a case.
-    pub fn getCaseAttachmentDownloadUrl(self: *Self, allocator: std.mem.Allocator, input: get_case_attachment_download_url.GetCaseAttachmentDownloadUrlInput, options: get_case_attachment_download_url.Options) !get_case_attachment_download_url.GetCaseAttachmentDownloadUrlOutput {
+    pub fn getCaseAttachmentDownloadUrl(self: *Self, allocator: std.mem.Allocator, input: get_case_attachment_download_url.GetCaseAttachmentDownloadUrlInput, options: CallOptions) !get_case_attachment_download_url.GetCaseAttachmentDownloadUrlOutput {
         return get_case_attachment_download_url.execute(self, allocator, input, options);
     }
 
     /// Uploads an attachment to a case.
-    pub fn getCaseAttachmentUploadUrl(self: *Self, allocator: std.mem.Allocator, input: get_case_attachment_upload_url.GetCaseAttachmentUploadUrlInput, options: get_case_attachment_upload_url.Options) !get_case_attachment_upload_url.GetCaseAttachmentUploadUrlOutput {
+    pub fn getCaseAttachmentUploadUrl(self: *Self, allocator: std.mem.Allocator, input: get_case_attachment_upload_url.GetCaseAttachmentUploadUrlInput, options: CallOptions) !get_case_attachment_upload_url.GetCaseAttachmentUploadUrlOutput {
         return get_case_attachment_upload_url.execute(self, allocator, input, options);
     }
 
     /// Returns the attributes of a membership.
-    pub fn getMembership(self: *Self, allocator: std.mem.Allocator, input: get_membership.GetMembershipInput, options: get_membership.Options) !get_membership.GetMembershipOutput {
+    pub fn getMembership(self: *Self, allocator: std.mem.Allocator, input: get_membership.GetMembershipInput, options: CallOptions) !get_membership.GetMembershipOutput {
         return get_membership.execute(self, allocator, input, options);
     }
 
     /// Views the case history for edits made to a designated case.
-    pub fn listCaseEdits(self: *Self, allocator: std.mem.Allocator, input: list_case_edits.ListCaseEditsInput, options: list_case_edits.Options) !list_case_edits.ListCaseEditsOutput {
+    pub fn listCaseEdits(self: *Self, allocator: std.mem.Allocator, input: list_case_edits.ListCaseEditsInput, options: CallOptions) !list_case_edits.ListCaseEditsOutput {
         return list_case_edits.execute(self, allocator, input, options);
     }
 
     /// Lists all cases the requester has access to.
-    pub fn listCases(self: *Self, allocator: std.mem.Allocator, input: list_cases.ListCasesInput, options: list_cases.Options) !list_cases.ListCasesOutput {
+    pub fn listCases(self: *Self, allocator: std.mem.Allocator, input: list_cases.ListCasesInput, options: CallOptions) !list_cases.ListCasesOutput {
         return list_cases.execute(self, allocator, input, options);
     }
 
     /// Returns comments for a designated case.
-    pub fn listComments(self: *Self, allocator: std.mem.Allocator, input: list_comments.ListCommentsInput, options: list_comments.Options) !list_comments.ListCommentsOutput {
+    pub fn listComments(self: *Self, allocator: std.mem.Allocator, input: list_comments.ListCommentsInput, options: CallOptions) !list_comments.ListCommentsOutput {
         return list_comments.execute(self, allocator, input, options);
     }
 
     /// Investigation performed by an agent for a security incident...
-    pub fn listInvestigations(self: *Self, allocator: std.mem.Allocator, input: list_investigations.ListInvestigationsInput, options: list_investigations.Options) !list_investigations.ListInvestigationsOutput {
+    pub fn listInvestigations(self: *Self, allocator: std.mem.Allocator, input: list_investigations.ListInvestigationsInput, options: CallOptions) !list_investigations.ListInvestigationsOutput {
         return list_investigations.execute(self, allocator, input, options);
     }
 
     /// Returns the memberships that the calling principal can access.
-    pub fn listMemberships(self: *Self, allocator: std.mem.Allocator, input: list_memberships.ListMembershipsInput, options: list_memberships.Options) !list_memberships.ListMembershipsOutput {
+    pub fn listMemberships(self: *Self, allocator: std.mem.Allocator, input: list_memberships.ListMembershipsInput, options: CallOptions) !list_memberships.ListMembershipsOutput {
         return list_memberships.execute(self, allocator, input, options);
     }
 
     /// Returns currently configured tags on a resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Send feedback based on response investigation action
-    pub fn sendFeedback(self: *Self, allocator: std.mem.Allocator, input: send_feedback.SendFeedbackInput, options: send_feedback.Options) !send_feedback.SendFeedbackOutput {
+    pub fn sendFeedback(self: *Self, allocator: std.mem.Allocator, input: send_feedback.SendFeedbackInput, options: CallOptions) !send_feedback.SendFeedbackOutput {
         return send_feedback.execute(self, allocator, input, options);
     }
 
     /// Adds a tag(s) to a designated resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag(s) from a designate resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an existing case.
-    pub fn updateCase(self: *Self, allocator: std.mem.Allocator, input: update_case.UpdateCaseInput, options: update_case.Options) !update_case.UpdateCaseOutput {
+    pub fn updateCase(self: *Self, allocator: std.mem.Allocator, input: update_case.UpdateCaseInput, options: CallOptions) !update_case.UpdateCaseOutput {
         return update_case.execute(self, allocator, input, options);
     }
 
     /// Updates an existing case comment.
-    pub fn updateCaseComment(self: *Self, allocator: std.mem.Allocator, input: update_case_comment.UpdateCaseCommentInput, options: update_case_comment.Options) !update_case_comment.UpdateCaseCommentOutput {
+    pub fn updateCaseComment(self: *Self, allocator: std.mem.Allocator, input: update_case_comment.UpdateCaseCommentInput, options: CallOptions) !update_case_comment.UpdateCaseCommentOutput {
         return update_case_comment.execute(self, allocator, input, options);
     }
 
@@ -180,19 +181,19 @@ pub const Client = struct {
     /// * Any → Closed
     ///
     /// **AWS supported**: You must use the `CloseCase` API to close.
-    pub fn updateCaseStatus(self: *Self, allocator: std.mem.Allocator, input: update_case_status.UpdateCaseStatusInput, options: update_case_status.Options) !update_case_status.UpdateCaseStatusOutput {
+    pub fn updateCaseStatus(self: *Self, allocator: std.mem.Allocator, input: update_case_status.UpdateCaseStatusInput, options: CallOptions) !update_case_status.UpdateCaseStatusOutput {
         return update_case_status.execute(self, allocator, input, options);
     }
 
     /// Updates membership configuration.
-    pub fn updateMembership(self: *Self, allocator: std.mem.Allocator, input: update_membership.UpdateMembershipInput, options: update_membership.Options) !update_membership.UpdateMembershipOutput {
+    pub fn updateMembership(self: *Self, allocator: std.mem.Allocator, input: update_membership.UpdateMembershipInput, options: CallOptions) !update_membership.UpdateMembershipOutput {
         return update_membership.execute(self, allocator, input, options);
     }
 
     /// Updates the resolver type for a case.
     ///
     /// This is a one-way action and cannot be reversed.
-    pub fn updateResolverType(self: *Self, allocator: std.mem.Allocator, input: update_resolver_type.UpdateResolverTypeInput, options: update_resolver_type.Options) !update_resolver_type.UpdateResolverTypeOutput {
+    pub fn updateResolverType(self: *Self, allocator: std.mem.Allocator, input: update_resolver_type.UpdateResolverTypeInput, options: CallOptions) !update_resolver_type.UpdateResolverTypeOutput {
         return update_resolver_type.execute(self, allocator, input, options);
     }
 

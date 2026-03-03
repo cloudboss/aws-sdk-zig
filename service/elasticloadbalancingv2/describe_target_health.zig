@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DescribeTargetHealthInputIncludeEnum = @import("describe_target_health_input_include_enum.zig").DescribeTargetHealthInputIncludeEnum;
 const TargetDescription = @import("target_description.zig").TargetDescription;
@@ -24,11 +25,7 @@ pub const DescribeTargetHealthOutput = struct {
     target_health_descriptions: ?[]const TargetHealthDescription = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTargetHealthInput, options: Options) !DescribeTargetHealthOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTargetHealthInput, options: CallOptions) !DescribeTargetHealthOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

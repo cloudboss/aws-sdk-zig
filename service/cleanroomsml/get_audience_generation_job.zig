@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AudienceQualityMetrics = @import("audience_quality_metrics.zig").AudienceQualityMetrics;
 const AudienceGenerationJobDataSource = @import("audience_generation_job_data_source.zig").AudienceGenerationJobDataSource;
@@ -94,11 +95,7 @@ pub const GetAudienceGenerationJobOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAudienceGenerationJobInput, options: Options) !GetAudienceGenerationJobOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAudienceGenerationJobInput, options: CallOptions) !GetAudienceGenerationJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

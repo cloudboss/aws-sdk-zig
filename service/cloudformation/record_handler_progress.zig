@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const OperationStatus = @import("operation_status.zig").OperationStatus;
 const HandlerErrorCode = @import("handler_error_code.zig").HandlerErrorCode;
@@ -39,11 +40,7 @@ pub const RecordHandlerProgressInput = struct {
 pub const RecordHandlerProgressOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RecordHandlerProgressInput, options: Options) !RecordHandlerProgressOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RecordHandlerProgressInput, options: CallOptions) !RecordHandlerProgressOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

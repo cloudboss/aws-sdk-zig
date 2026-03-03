@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const AddRoleToDBInstanceInput = struct {
@@ -18,13 +19,9 @@ pub const AddRoleToDBInstanceInput = struct {
     role_arn: []const u8,
 };
 
-const AddRoleToDBInstanceOutput = struct {};
+pub const AddRoleToDBInstanceOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddRoleToDBInstanceInput, options: Options) !AddRoleToDBInstanceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddRoleToDBInstanceInput, options: CallOptions) !AddRoleToDBInstanceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

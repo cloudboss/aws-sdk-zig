@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EventBridgeConfiguration = @import("event_bridge_configuration.zig").EventBridgeConfiguration;
 
@@ -24,11 +25,7 @@ pub const GetCaseEventConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCaseEventConfigurationInput, options: Options) !GetCaseEventConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCaseEventConfigurationInput, options: CallOptions) !GetCaseEventConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

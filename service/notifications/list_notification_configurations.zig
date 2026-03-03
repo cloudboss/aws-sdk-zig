@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const NotificationConfigurationStatus = @import("notification_configuration_status.zig").NotificationConfigurationStatus;
 const NotificationConfigurationSubtype = @import("notification_configuration_subtype.zig").NotificationConfigurationSubtype;
@@ -78,11 +79,7 @@ pub const ListNotificationConfigurationsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListNotificationConfigurationsInput, options: Options) !ListNotificationConfigurationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListNotificationConfigurationsInput, options: CallOptions) !ListNotificationConfigurationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

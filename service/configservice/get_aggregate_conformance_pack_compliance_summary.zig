@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AggregateConformancePackComplianceSummaryFilters = @import("aggregate_conformance_pack_compliance_summary_filters.zig").AggregateConformancePackComplianceSummaryFilters;
 const AggregateConformancePackComplianceSummaryGroupKey = @import("aggregate_conformance_pack_compliance_summary_group_key.zig").AggregateConformancePackComplianceSummaryGroupKey;
@@ -55,11 +56,7 @@ pub const GetAggregateConformancePackComplianceSummaryOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAggregateConformancePackComplianceSummaryInput, options: Options) !GetAggregateConformancePackComplianceSummaryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAggregateConformancePackComplianceSummaryInput, options: CallOptions) !GetAggregateConformancePackComplianceSummaryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

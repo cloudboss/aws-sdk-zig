@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ExportFilter = @import("export_filter.zig").ExportFilter;
 const ExportFormat = @import("export_format.zig").ExportFormat;
@@ -92,11 +93,7 @@ pub const StartExportTaskOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartExportTaskInput, options: Options) !StartExportTaskOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartExportTaskInput, options: CallOptions) !StartExportTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

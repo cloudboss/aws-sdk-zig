@@ -2,11 +2,12 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResourceQuotas = @import("resource_quotas.zig").ResourceQuotas;
 const serde = @import("serde.zig");
 
-const DescribeAccountAttributesInput = struct {};
+pub const DescribeAccountAttributesInput = struct {};
 
 pub const DescribeAccountAttributesOutput = struct {
     /// The Elastic Beanstalk resource quotas associated with the calling AWS
@@ -14,11 +15,7 @@ pub const DescribeAccountAttributesOutput = struct {
     resource_quotas: ?ResourceQuotas = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeAccountAttributesInput, options: Options) !DescribeAccountAttributesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeAccountAttributesInput, options: CallOptions) !DescribeAccountAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

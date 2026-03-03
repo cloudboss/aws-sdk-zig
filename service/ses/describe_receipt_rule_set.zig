@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReceiptRuleSetMetadata = @import("receipt_rule_set_metadata.zig").ReceiptRuleSetMetadata;
 const ReceiptRule = @import("receipt_rule.zig").ReceiptRule;
@@ -22,11 +23,7 @@ pub const DescribeReceiptRuleSetOutput = struct {
     rules: ?[]const ReceiptRule = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeReceiptRuleSetInput, options: Options) !DescribeReceiptRuleSetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeReceiptRuleSetInput, options: CallOptions) !DescribeReceiptRuleSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

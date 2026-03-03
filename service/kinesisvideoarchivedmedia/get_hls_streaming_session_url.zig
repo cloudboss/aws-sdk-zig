@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContainerFormat = @import("container_format.zig").ContainerFormat;
 const HLSDiscontinuityMode = @import("hls_discontinuity_mode.zig").HLSDiscontinuityMode;
@@ -245,11 +246,7 @@ pub const GetHLSStreamingSessionURLOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetHLSStreamingSessionURLInput, options: Options) !GetHLSStreamingSessionURLOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetHLSStreamingSessionURLInput, options: CallOptions) !GetHLSStreamingSessionURLOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -12,6 +12,7 @@ const get_transcript = @import("get_transcript.zig");
 const send_event = @import("send_event.zig");
 const send_message = @import("send_message.zig");
 const start_attachment_upload = @import("start_attachment_upload.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -54,7 +55,7 @@ pub const Client = struct {
     ///
     /// The Amazon Connect Participant Service APIs do not use [Signature Version 4
     /// authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-    pub fn cancelParticipantAuthentication(self: *Self, allocator: std.mem.Allocator, input: cancel_participant_authentication.CancelParticipantAuthenticationInput, options: cancel_participant_authentication.Options) !cancel_participant_authentication.CancelParticipantAuthenticationOutput {
+    pub fn cancelParticipantAuthentication(self: *Self, allocator: std.mem.Allocator, input: cancel_participant_authentication.CancelParticipantAuthenticationInput, options: CallOptions) !cancel_participant_authentication.CancelParticipantAuthenticationOutput {
         return cancel_participant_authentication.execute(self, allocator, input, options);
     }
 
@@ -72,7 +73,7 @@ pub const Client = struct {
     ///
     /// The Amazon Connect Participant Service APIs do not use [Signature Version 4
     /// authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-    pub fn completeAttachmentUpload(self: *Self, allocator: std.mem.Allocator, input: complete_attachment_upload.CompleteAttachmentUploadInput, options: complete_attachment_upload.Options) !complete_attachment_upload.CompleteAttachmentUploadOutput {
+    pub fn completeAttachmentUpload(self: *Self, allocator: std.mem.Allocator, input: complete_attachment_upload.CompleteAttachmentUploadInput, options: CallOptions) !complete_attachment_upload.CompleteAttachmentUploadOutput {
         return complete_attachment_upload.execute(self, allocator, input, options);
     }
 
@@ -164,7 +165,7 @@ pub const Client = struct {
     ///
     /// The Amazon Connect Participant Service APIs do not use [Signature Version 4
     /// authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-    pub fn createParticipantConnection(self: *Self, allocator: std.mem.Allocator, input: create_participant_connection.CreateParticipantConnectionInput, options: create_participant_connection.Options) !create_participant_connection.CreateParticipantConnectionOutput {
+    pub fn createParticipantConnection(self: *Self, allocator: std.mem.Allocator, input: create_participant_connection.CreateParticipantConnectionInput, options: CallOptions) !create_participant_connection.CreateParticipantConnectionOutput {
         return create_participant_connection.execute(self, allocator, input, options);
     }
 
@@ -172,7 +173,7 @@ pub const Client = struct {
     ///
     /// For security recommendations, see [Amazon Connect Chat security best
     /// practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
-    pub fn describeView(self: *Self, allocator: std.mem.Allocator, input: describe_view.DescribeViewInput, options: describe_view.Options) !describe_view.DescribeViewOutput {
+    pub fn describeView(self: *Self, allocator: std.mem.Allocator, input: describe_view.DescribeViewInput, options: CallOptions) !describe_view.DescribeViewOutput {
         return describe_view.execute(self, allocator, input, options);
     }
 
@@ -186,7 +187,7 @@ pub const Client = struct {
     ///
     /// The Amazon Connect Participant Service APIs do not use [Signature Version 4
     /// authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-    pub fn disconnectParticipant(self: *Self, allocator: std.mem.Allocator, input: disconnect_participant.DisconnectParticipantInput, options: disconnect_participant.Options) !disconnect_participant.DisconnectParticipantOutput {
+    pub fn disconnectParticipant(self: *Self, allocator: std.mem.Allocator, input: disconnect_participant.DisconnectParticipantInput, options: CallOptions) !disconnect_participant.DisconnectParticipantOutput {
         return disconnect_participant.execute(self, allocator, input, options);
     }
 
@@ -206,7 +207,7 @@ pub const Client = struct {
     ///
     /// The Amazon Connect Participant Service APIs do not use [Signature Version 4
     /// authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-    pub fn getAttachment(self: *Self, allocator: std.mem.Allocator, input: get_attachment.GetAttachmentInput, options: get_attachment.Options) !get_attachment.GetAttachmentOutput {
+    pub fn getAttachment(self: *Self, allocator: std.mem.Allocator, input: get_attachment.GetAttachmentInput, options: CallOptions) !get_attachment.GetAttachmentOutput {
         return get_attachment.execute(self, allocator, input, options);
     }
 
@@ -228,7 +229,7 @@ pub const Client = struct {
     ///
     /// The Amazon Connect Participant Service APIs do not use [Signature Version 4
     /// authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-    pub fn getAuthenticationUrl(self: *Self, allocator: std.mem.Allocator, input: get_authentication_url.GetAuthenticationUrlInput, options: get_authentication_url.Options) !get_authentication_url.GetAuthenticationUrlOutput {
+    pub fn getAuthenticationUrl(self: *Self, allocator: std.mem.Allocator, input: get_authentication_url.GetAuthenticationUrlInput, options: CallOptions) !get_authentication_url.GetAuthenticationUrlOutput {
         return get_authentication_url.execute(self, allocator, input, options);
     }
 
@@ -265,7 +266,7 @@ pub const Client = struct {
     ///
     /// The Amazon Connect Participant Service APIs do not use [Signature Version 4
     /// authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-    pub fn getTranscript(self: *Self, allocator: std.mem.Allocator, input: get_transcript.GetTranscriptInput, options: get_transcript.Options) !get_transcript.GetTranscriptOutput {
+    pub fn getTranscript(self: *Self, allocator: std.mem.Allocator, input: get_transcript.GetTranscriptInput, options: CallOptions) !get_transcript.GetTranscriptOutput {
         return get_transcript.execute(self, allocator, input, options);
     }
 
@@ -290,7 +291,7 @@ pub const Client = struct {
     ///
     /// The Amazon Connect Participant Service APIs do not use [Signature Version 4
     /// authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-    pub fn sendEvent(self: *Self, allocator: std.mem.Allocator, input: send_event.SendEventInput, options: send_event.Options) !send_event.SendEventOutput {
+    pub fn sendEvent(self: *Self, allocator: std.mem.Allocator, input: send_event.SendEventInput, options: CallOptions) !send_event.SendEventOutput {
         return send_event.execute(self, allocator, input, options);
     }
 
@@ -304,7 +305,7 @@ pub const Client = struct {
     ///
     /// The Amazon Connect Participant Service APIs do not use [Signature Version 4
     /// authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-    pub fn sendMessage(self: *Self, allocator: std.mem.Allocator, input: send_message.SendMessageInput, options: send_message.Options) !send_message.SendMessageOutput {
+    pub fn sendMessage(self: *Self, allocator: std.mem.Allocator, input: send_message.SendMessageInput, options: CallOptions) !send_message.SendMessageOutput {
         return send_message.execute(self, allocator, input, options);
     }
 
@@ -320,7 +321,7 @@ pub const Client = struct {
     ///
     /// The Amazon Connect Participant Service APIs do not use [Signature Version 4
     /// authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
-    pub fn startAttachmentUpload(self: *Self, allocator: std.mem.Allocator, input: start_attachment_upload.StartAttachmentUploadInput, options: start_attachment_upload.Options) !start_attachment_upload.StartAttachmentUploadOutput {
+    pub fn startAttachmentUpload(self: *Self, allocator: std.mem.Allocator, input: start_attachment_upload.StartAttachmentUploadInput, options: CallOptions) !start_attachment_upload.StartAttachmentUploadOutput {
         return start_attachment_upload.execute(self, allocator, input, options);
     }
 

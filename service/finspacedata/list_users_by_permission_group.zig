@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const UserByPermissionGroup = @import("user_by_permission_group.zig").UserByPermissionGroup;
 
@@ -35,11 +36,7 @@ pub const ListUsersByPermissionGroupOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListUsersByPermissionGroupInput, options: Options) !ListUsersByPermissionGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListUsersByPermissionGroupInput, options: CallOptions) !ListUsersByPermissionGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

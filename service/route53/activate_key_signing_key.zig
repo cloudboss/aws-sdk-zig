@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChangeInfo = @import("change_info.zig").ChangeInfo;
 const serde = @import("serde.zig");
@@ -20,11 +21,7 @@ pub const ActivateKeySigningKeyOutput = struct {
     change_info: ?ChangeInfo = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ActivateKeySigningKeyInput, options: Options) !ActivateKeySigningKeyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ActivateKeySigningKeyInput, options: CallOptions) !ActivateKeySigningKeyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const assertionEncryptionModeType = @import("assertion_encryption_mode_type.zig").assertionEncryptionModeType;
 const SAMLPrivateKey = @import("saml_private_key.zig").SAMLPrivateKey;
@@ -47,11 +48,7 @@ pub const GetSAMLProviderOutput = struct {
     valid_until: ?i64 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSAMLProviderInput, options: Options) !GetSAMLProviderOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSAMLProviderInput, options: CallOptions) !GetSAMLProviderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

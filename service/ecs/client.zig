@@ -65,6 +65,7 @@ const update_service = @import("update_service.zig");
 const update_service_primary_task_set = @import("update_service_primary_task_set.zig");
 const update_task_protection = @import("update_task_protection.zig");
 const update_task_set = @import("update_task_set.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -102,7 +103,7 @@ pub const Client = struct {
     /// capacity providers for Amazon ECS Managed Instances and EC2 instances.
     /// Fargate has the
     /// predefined `FARGATE` and `FARGATE_SPOT` capacity providers.
-    pub fn createCapacityProvider(self: *Self, allocator: std.mem.Allocator, input: create_capacity_provider.CreateCapacityProviderInput, options: create_capacity_provider.Options) !create_capacity_provider.CreateCapacityProviderOutput {
+    pub fn createCapacityProvider(self: *Self, allocator: std.mem.Allocator, input: create_capacity_provider.CreateCapacityProviderInput, options: CallOptions) !create_capacity_provider.CreateCapacityProviderOutput {
         return create_capacity_provider.execute(self, allocator, input, options);
     }
 
@@ -123,7 +124,7 @@ pub const Client = struct {
     /// service-linked roles for Amazon
     /// ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html) in the *Amazon Elastic
     /// Container Service Developer Guide*.
-    pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: create_cluster.Options) !create_cluster.CreateClusterOutput {
+    pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: CallOptions) !create_cluster.CreateClusterOutput {
         return create_cluster.execute(self, allocator, input, options);
     }
 
@@ -144,7 +145,7 @@ pub const Client = struct {
     /// Provide an execution role for task operations and an infrastructure role for
     /// managing
     /// Amazon Web Services resources on your behalf.
-    pub fn createExpressGatewayService(self: *Self, allocator: std.mem.Allocator, input: create_express_gateway_service.CreateExpressGatewayServiceInput, options: create_express_gateway_service.Options) !create_express_gateway_service.CreateExpressGatewayServiceOutput {
+    pub fn createExpressGatewayService(self: *Self, allocator: std.mem.Allocator, input: create_express_gateway_service.CreateExpressGatewayServiceInput, options: CallOptions) !create_express_gateway_service.CreateExpressGatewayServiceOutput {
         return create_express_gateway_service.execute(self, allocator, input, options);
     }
 
@@ -363,7 +364,7 @@ pub const Client = struct {
     /// ECS task
     /// placement](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html) in the *Amazon Elastic Container Service
     /// Developer Guide*
-    pub fn createService(self: *Self, allocator: std.mem.Allocator, input: create_service.CreateServiceInput, options: create_service.Options) !create_service.CreateServiceOutput {
+    pub fn createService(self: *Self, allocator: std.mem.Allocator, input: create_service.CreateServiceInput, options: CallOptions) !create_service.CreateServiceOutput {
         return create_service.execute(self, allocator, input, options);
     }
 
@@ -382,19 +383,19 @@ pub const Client = struct {
     /// [Amazon ECS service
     /// quotas](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html) in the *Amazon Elastic Container Service
     /// Developer Guide*.
-    pub fn createTaskSet(self: *Self, allocator: std.mem.Allocator, input: create_task_set.CreateTaskSetInput, options: create_task_set.Options) !create_task_set.CreateTaskSetOutput {
+    pub fn createTaskSet(self: *Self, allocator: std.mem.Allocator, input: create_task_set.CreateTaskSetInput, options: CallOptions) !create_task_set.CreateTaskSetOutput {
         return create_task_set.execute(self, allocator, input, options);
     }
 
     /// Disables an account setting for a specified user, role, or the root user for
     /// an
     /// account.
-    pub fn deleteAccountSetting(self: *Self, allocator: std.mem.Allocator, input: delete_account_setting.DeleteAccountSettingInput, options: delete_account_setting.Options) !delete_account_setting.DeleteAccountSettingOutput {
+    pub fn deleteAccountSetting(self: *Self, allocator: std.mem.Allocator, input: delete_account_setting.DeleteAccountSettingInput, options: CallOptions) !delete_account_setting.DeleteAccountSettingOutput {
         return delete_account_setting.execute(self, allocator, input, options);
     }
 
     /// Deletes one or more custom attributes from an Amazon ECS resource.
-    pub fn deleteAttributes(self: *Self, allocator: std.mem.Allocator, input: delete_attributes.DeleteAttributesInput, options: delete_attributes.Options) !delete_attributes.DeleteAttributesOutput {
+    pub fn deleteAttributes(self: *Self, allocator: std.mem.Allocator, input: delete_attributes.DeleteAttributesInput, options: CallOptions) !delete_attributes.DeleteAttributesOutput {
         return delete_attributes.execute(self, allocator, input, options);
     }
 
@@ -420,7 +421,7 @@ pub const Client = struct {
     /// deleted. To remove
     /// a capacity provider from a cluster, you can either use
     /// [PutClusterCapacityProviders](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html) or delete the cluster.
-    pub fn deleteCapacityProvider(self: *Self, allocator: std.mem.Allocator, input: delete_capacity_provider.DeleteCapacityProviderInput, options: delete_capacity_provider.Options) !delete_capacity_provider.DeleteCapacityProviderOutput {
+    pub fn deleteCapacityProvider(self: *Self, allocator: std.mem.Allocator, input: delete_capacity_provider.DeleteCapacityProviderInput, options: CallOptions) !delete_capacity_provider.DeleteCapacityProviderOutput {
         return delete_capacity_provider.execute(self, allocator, input, options);
     }
 
@@ -434,7 +435,7 @@ pub const Client = struct {
     /// delete
     /// it. You can list the container instances in a cluster with
     /// [ListContainerInstances](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListContainerInstances.html) and deregister them with [DeregisterContainerInstance](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterContainerInstance.html).
-    pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: delete_cluster.Options) !delete_cluster.DeleteClusterOutput {
+    pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: CallOptions) !delete_cluster.DeleteClusterOutput {
         return delete_cluster.execute(self, allocator, input, options);
     }
 
@@ -452,7 +453,7 @@ pub const Client = struct {
     /// This operation cannot be reversed. Back up important data and verify the
     /// service is no
     /// longer needed before deletion.
-    pub fn deleteExpressGatewayService(self: *Self, allocator: std.mem.Allocator, input: delete_express_gateway_service.DeleteExpressGatewayServiceInput, options: delete_express_gateway_service.Options) !delete_express_gateway_service.DeleteExpressGatewayServiceOutput {
+    pub fn deleteExpressGatewayService(self: *Self, allocator: std.mem.Allocator, input: delete_express_gateway_service.DeleteExpressGatewayServiceInput, options: CallOptions) !delete_express_gateway_service.DeleteExpressGatewayServiceOutput {
         return delete_express_gateway_service.execute(self, allocator, input, options);
     }
 
@@ -484,7 +485,7 @@ pub const Client = struct {
     /// service
     /// in either `ACTIVE` or `DRAINING` status, you receive an
     /// error.
-    pub fn deleteService(self: *Self, allocator: std.mem.Allocator, input: delete_service.DeleteServiceInput, options: delete_service.Options) !delete_service.DeleteServiceOutput {
+    pub fn deleteService(self: *Self, allocator: std.mem.Allocator, input: delete_service.DeleteServiceInput, options: CallOptions) !delete_service.DeleteServiceOutput {
         return delete_service.execute(self, allocator, input, options);
     }
 
@@ -520,7 +521,7 @@ pub const Client = struct {
     /// name is retained by Amazon ECS and the revision is incremented the next time
     /// you create
     /// a task definition with that name.
-    pub fn deleteTaskDefinitions(self: *Self, allocator: std.mem.Allocator, input: delete_task_definitions.DeleteTaskDefinitionsInput, options: delete_task_definitions.Options) !delete_task_definitions.DeleteTaskDefinitionsOutput {
+    pub fn deleteTaskDefinitions(self: *Self, allocator: std.mem.Allocator, input: delete_task_definitions.DeleteTaskDefinitionsInput, options: CallOptions) !delete_task_definitions.DeleteTaskDefinitionsOutput {
         return delete_task_definitions.execute(self, allocator, input, options);
     }
 
@@ -530,7 +531,7 @@ pub const Client = struct {
     /// deployment
     /// types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html) in the *Amazon Elastic Container
     /// Service Developer Guide*.
-    pub fn deleteTaskSet(self: *Self, allocator: std.mem.Allocator, input: delete_task_set.DeleteTaskSetInput, options: delete_task_set.Options) !delete_task_set.DeleteTaskSetOutput {
+    pub fn deleteTaskSet(self: *Self, allocator: std.mem.Allocator, input: delete_task_set.DeleteTaskSetInput, options: CallOptions) !delete_task_set.DeleteTaskSetOutput {
         return delete_task_set.execute(self, allocator, input, options);
     }
 
@@ -555,7 +556,7 @@ pub const Client = struct {
     /// deregisters the instance from your cluster (stopped container instances or
     /// instances
     /// with disconnected agents aren't automatically deregistered when terminated).
-    pub fn deregisterContainerInstance(self: *Self, allocator: std.mem.Allocator, input: deregister_container_instance.DeregisterContainerInstanceInput, options: deregister_container_instance.Options) !deregister_container_instance.DeregisterContainerInstanceOutput {
+    pub fn deregisterContainerInstance(self: *Self, allocator: std.mem.Allocator, input: deregister_container_instance.DeregisterContainerInstanceInput, options: CallOptions) !deregister_container_instance.DeregisterContainerInstanceOutput {
         return deregister_container_instance.execute(self, allocator, input, options);
     }
 
@@ -586,12 +587,12 @@ pub const Client = struct {
     /// more
     /// information, see
     /// [DeleteTaskDefinitions](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteTaskDefinitions.html).
-    pub fn deregisterTaskDefinition(self: *Self, allocator: std.mem.Allocator, input: deregister_task_definition.DeregisterTaskDefinitionInput, options: deregister_task_definition.Options) !deregister_task_definition.DeregisterTaskDefinitionOutput {
+    pub fn deregisterTaskDefinition(self: *Self, allocator: std.mem.Allocator, input: deregister_task_definition.DeregisterTaskDefinitionInput, options: CallOptions) !deregister_task_definition.DeregisterTaskDefinitionOutput {
         return deregister_task_definition.execute(self, allocator, input, options);
     }
 
     /// Describes one or more of your capacity providers.
-    pub fn describeCapacityProviders(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_providers.DescribeCapacityProvidersInput, options: describe_capacity_providers.Options) !describe_capacity_providers.DescribeCapacityProvidersOutput {
+    pub fn describeCapacityProviders(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_providers.DescribeCapacityProvidersInput, options: CallOptions) !describe_capacity_providers.DescribeCapacityProvidersOutput {
         return describe_capacity_providers.execute(self, allocator, input, options);
     }
 
@@ -600,14 +601,14 @@ pub const Client = struct {
     /// For CLI
     /// examples, see
     /// [describe-clusters.rst](https://github.com/aws/aws-cli/blob/develop/awscli/examples/ecs/describe-clusters.rst) on GitHub.
-    pub fn describeClusters(self: *Self, allocator: std.mem.Allocator, input: describe_clusters.DescribeClustersInput, options: describe_clusters.Options) !describe_clusters.DescribeClustersOutput {
+    pub fn describeClusters(self: *Self, allocator: std.mem.Allocator, input: describe_clusters.DescribeClustersInput, options: CallOptions) !describe_clusters.DescribeClustersOutput {
         return describe_clusters.execute(self, allocator, input, options);
     }
 
     /// Describes one or more container instances. Returns metadata about each
     /// container
     /// instance requested.
-    pub fn describeContainerInstances(self: *Self, allocator: std.mem.Allocator, input: describe_container_instances.DescribeContainerInstancesInput, options: describe_container_instances.Options) !describe_container_instances.DescribeContainerInstancesOutput {
+    pub fn describeContainerInstances(self: *Self, allocator: std.mem.Allocator, input: describe_container_instances.DescribeContainerInstancesInput, options: CallOptions) !describe_container_instances.DescribeContainerInstancesOutput {
         return describe_container_instances.execute(self, allocator, input, options);
     }
 
@@ -623,7 +624,7 @@ pub const Client = struct {
     ///
     /// Use the `include` parameter to retrieve additional information such as
     /// resource tags.
-    pub fn describeExpressGatewayService(self: *Self, allocator: std.mem.Allocator, input: describe_express_gateway_service.DescribeExpressGatewayServiceInput, options: describe_express_gateway_service.Options) !describe_express_gateway_service.DescribeExpressGatewayServiceOutput {
+    pub fn describeExpressGatewayService(self: *Self, allocator: std.mem.Allocator, input: describe_express_gateway_service.DescribeExpressGatewayServiceInput, options: CallOptions) !describe_express_gateway_service.DescribeExpressGatewayServiceOutput {
         return describe_express_gateway_service.execute(self, allocator, input, options);
     }
 
@@ -634,7 +635,7 @@ pub const Client = struct {
     /// more information, see [View service history
     /// using Amazon ECS service
     /// deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-deployment.html).
-    pub fn describeServiceDeployments(self: *Self, allocator: std.mem.Allocator, input: describe_service_deployments.DescribeServiceDeploymentsInput, options: describe_service_deployments.Options) !describe_service_deployments.DescribeServiceDeploymentsOutput {
+    pub fn describeServiceDeployments(self: *Self, allocator: std.mem.Allocator, input: describe_service_deployments.DescribeServiceDeploymentsInput, options: CallOptions) !describe_service_deployments.DescribeServiceDeploymentsOutput {
         return describe_service_deployments.execute(self, allocator, input, options);
     }
 
@@ -650,12 +651,12 @@ pub const Client = struct {
     ///
     /// You can't describe a service revision that was created before October 25,
     /// 2024.
-    pub fn describeServiceRevisions(self: *Self, allocator: std.mem.Allocator, input: describe_service_revisions.DescribeServiceRevisionsInput, options: describe_service_revisions.Options) !describe_service_revisions.DescribeServiceRevisionsOutput {
+    pub fn describeServiceRevisions(self: *Self, allocator: std.mem.Allocator, input: describe_service_revisions.DescribeServiceRevisionsInput, options: CallOptions) !describe_service_revisions.DescribeServiceRevisionsOutput {
         return describe_service_revisions.execute(self, allocator, input, options);
     }
 
     /// Describes the specified services running in your cluster.
-    pub fn describeServices(self: *Self, allocator: std.mem.Allocator, input: describe_services.DescribeServicesInput, options: describe_services.Options) !describe_services.DescribeServicesOutput {
+    pub fn describeServices(self: *Self, allocator: std.mem.Allocator, input: describe_services.DescribeServicesInput, options: CallOptions) !describe_services.DescribeServicesOutput {
         return describe_services.execute(self, allocator, input, options);
     }
 
@@ -666,7 +667,7 @@ pub const Client = struct {
     ///
     /// You can only describe `INACTIVE` task definitions while an active task
     /// or service references them.
-    pub fn describeTaskDefinition(self: *Self, allocator: std.mem.Allocator, input: describe_task_definition.DescribeTaskDefinitionInput, options: describe_task_definition.Options) !describe_task_definition.DescribeTaskDefinitionOutput {
+    pub fn describeTaskDefinition(self: *Self, allocator: std.mem.Allocator, input: describe_task_definition.DescribeTaskDefinitionInput, options: CallOptions) !describe_task_definition.DescribeTaskDefinitionOutput {
         return describe_task_definition.execute(self, allocator, input, options);
     }
 
@@ -677,7 +678,7 @@ pub const Client = struct {
     /// see [Amazon ECS Deployment
     /// Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    pub fn describeTaskSets(self: *Self, allocator: std.mem.Allocator, input: describe_task_sets.DescribeTaskSetsInput, options: describe_task_sets.Options) !describe_task_sets.DescribeTaskSetsOutput {
+    pub fn describeTaskSets(self: *Self, allocator: std.mem.Allocator, input: describe_task_sets.DescribeTaskSetsInput, options: CallOptions) !describe_task_sets.DescribeTaskSetsOutput {
         return describe_task_sets.execute(self, allocator, input, options);
     }
 
@@ -691,7 +692,7 @@ pub const Client = struct {
     /// returned in the response. If you create a new cluster with the same name as
     /// the deleted
     /// cluster, the tagged tasks are not included in the response.
-    pub fn describeTasks(self: *Self, allocator: std.mem.Allocator, input: describe_tasks.DescribeTasksInput, options: describe_tasks.Options) !describe_tasks.DescribeTasksOutput {
+    pub fn describeTasks(self: *Self, allocator: std.mem.Allocator, input: describe_tasks.DescribeTasksInput, options: CallOptions) !describe_tasks.DescribeTasksOutput {
         return describe_tasks.execute(self, allocator, input, options);
     }
 
@@ -700,7 +701,7 @@ pub const Client = struct {
     /// outside of the agent.
     ///
     /// Returns an endpoint for the Amazon ECS agent to poll for updates.
-    pub fn discoverPollEndpoint(self: *Self, allocator: std.mem.Allocator, input: discover_poll_endpoint.DiscoverPollEndpointInput, options: discover_poll_endpoint.Options) !discover_poll_endpoint.DiscoverPollEndpointOutput {
+    pub fn discoverPollEndpoint(self: *Self, allocator: std.mem.Allocator, input: discover_poll_endpoint.DiscoverPollEndpointInput, options: CallOptions) !discover_poll_endpoint.DiscoverPollEndpointOutput {
         return discover_poll_endpoint.execute(self, allocator, input, options);
     }
 
@@ -717,17 +718,17 @@ pub const Client = struct {
     /// Amazon ECS Exec for
     /// debugging](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html) in the *Amazon ECS Developer
     /// Guide*.
-    pub fn executeCommand(self: *Self, allocator: std.mem.Allocator, input: execute_command.ExecuteCommandInput, options: execute_command.Options) !execute_command.ExecuteCommandOutput {
+    pub fn executeCommand(self: *Self, allocator: std.mem.Allocator, input: execute_command.ExecuteCommandInput, options: CallOptions) !execute_command.ExecuteCommandOutput {
         return execute_command.execute(self, allocator, input, options);
     }
 
     /// Retrieves the protection status of tasks in an Amazon ECS service.
-    pub fn getTaskProtection(self: *Self, allocator: std.mem.Allocator, input: get_task_protection.GetTaskProtectionInput, options: get_task_protection.Options) !get_task_protection.GetTaskProtectionOutput {
+    pub fn getTaskProtection(self: *Self, allocator: std.mem.Allocator, input: get_task_protection.GetTaskProtectionInput, options: CallOptions) !get_task_protection.GetTaskProtectionOutput {
         return get_task_protection.execute(self, allocator, input, options);
     }
 
     /// Lists the account settings for a specified principal.
-    pub fn listAccountSettings(self: *Self, allocator: std.mem.Allocator, input: list_account_settings.ListAccountSettingsInput, options: list_account_settings.Options) !list_account_settings.ListAccountSettingsOutput {
+    pub fn listAccountSettings(self: *Self, allocator: std.mem.Allocator, input: list_account_settings.ListAccountSettingsInput, options: CallOptions) !list_account_settings.ListAccountSettingsOutput {
         return list_account_settings.execute(self, allocator, input, options);
     }
 
@@ -744,12 +745,12 @@ pub const Client = struct {
     /// example, to see which container instances in a cluster are running a Linux
     /// AMI
     /// (`ecs.os-type=linux`).
-    pub fn listAttributes(self: *Self, allocator: std.mem.Allocator, input: list_attributes.ListAttributesInput, options: list_attributes.Options) !list_attributes.ListAttributesOutput {
+    pub fn listAttributes(self: *Self, allocator: std.mem.Allocator, input: list_attributes.ListAttributesInput, options: CallOptions) !list_attributes.ListAttributesOutput {
         return list_attributes.execute(self, allocator, input, options);
     }
 
     /// Returns a list of existing clusters.
-    pub fn listClusters(self: *Self, allocator: std.mem.Allocator, input: list_clusters.ListClustersInput, options: list_clusters.Options) !list_clusters.ListClustersOutput {
+    pub fn listClusters(self: *Self, allocator: std.mem.Allocator, input: list_clusters.ListClustersInput, options: CallOptions) !list_clusters.ListClustersOutput {
         return list_clusters.execute(self, allocator, input, options);
     }
 
@@ -760,7 +761,7 @@ pub const Client = struct {
     /// Query
     /// Language](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html) in the *Amazon Elastic
     /// Container Service Developer Guide*.
-    pub fn listContainerInstances(self: *Self, allocator: std.mem.Allocator, input: list_container_instances.ListContainerInstancesInput, options: list_container_instances.Options) !list_container_instances.ListContainerInstancesOutput {
+    pub fn listContainerInstances(self: *Self, allocator: std.mem.Allocator, input: list_container_instances.ListContainerInstancesInput, options: CallOptions) !list_container_instances.ListContainerInstancesOutput {
         return list_container_instances.execute(self, allocator, input, options);
     }
 
@@ -776,14 +777,14 @@ pub const Client = struct {
     ///
     /// This API returns the values that you use for the request parameters in
     /// [DescribeServiceRevisions](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceRevisions.html).
-    pub fn listServiceDeployments(self: *Self, allocator: std.mem.Allocator, input: list_service_deployments.ListServiceDeploymentsInput, options: list_service_deployments.Options) !list_service_deployments.ListServiceDeploymentsOutput {
+    pub fn listServiceDeployments(self: *Self, allocator: std.mem.Allocator, input: list_service_deployments.ListServiceDeploymentsInput, options: CallOptions) !list_service_deployments.ListServiceDeploymentsOutput {
         return list_service_deployments.execute(self, allocator, input, options);
     }
 
     /// Returns a list of services. You can filter the results by cluster, launch
     /// type, and
     /// scheduling strategy.
-    pub fn listServices(self: *Self, allocator: std.mem.Allocator, input: list_services.ListServicesInput, options: list_services.Options) !list_services.ListServicesOutput {
+    pub fn listServices(self: *Self, allocator: std.mem.Allocator, input: list_services.ListServicesInput, options: CallOptions) !list_services.ListServicesOutput {
         return list_services.execute(self, allocator, input, options);
     }
 
@@ -796,12 +797,12 @@ pub const Client = struct {
     /// `ListServices`. For more information, see [Service
     /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
     /// in the *Amazon Elastic Container Service Developer Guide*.
-    pub fn listServicesByNamespace(self: *Self, allocator: std.mem.Allocator, input: list_services_by_namespace.ListServicesByNamespaceInput, options: list_services_by_namespace.Options) !list_services_by_namespace.ListServicesByNamespaceOutput {
+    pub fn listServicesByNamespace(self: *Self, allocator: std.mem.Allocator, input: list_services_by_namespace.ListServicesByNamespaceInput, options: CallOptions) !list_services_by_namespace.ListServicesByNamespaceOutput {
         return list_services_by_namespace.execute(self, allocator, input, options);
     }
 
     /// List the tags for an Amazon ECS resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -814,7 +815,7 @@ pub const Client = struct {
     /// task definition revisions by setting the `status` parameter to
     /// `ACTIVE`. You can also filter the results with the
     /// `familyPrefix` parameter.
-    pub fn listTaskDefinitionFamilies(self: *Self, allocator: std.mem.Allocator, input: list_task_definition_families.ListTaskDefinitionFamiliesInput, options: list_task_definition_families.Options) !list_task_definition_families.ListTaskDefinitionFamiliesOutput {
+    pub fn listTaskDefinitionFamilies(self: *Self, allocator: std.mem.Allocator, input: list_task_definition_families.ListTaskDefinitionFamiliesInput, options: CallOptions) !list_task_definition_families.ListTaskDefinitionFamiliesOutput {
         return list_task_definition_families.execute(self, allocator, input, options);
     }
 
@@ -822,7 +823,7 @@ pub const Client = struct {
     /// can filter
     /// the results by family name with the `familyPrefix` parameter or by status
     /// with the `status` parameter.
-    pub fn listTaskDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_task_definitions.ListTaskDefinitionsInput, options: list_task_definitions.Options) !list_task_definitions.ListTaskDefinitionsOutput {
+    pub fn listTaskDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_task_definitions.ListTaskDefinitionsInput, options: CallOptions) !list_task_definitions.ListTaskDefinitionsOutput {
         return list_task_definitions.execute(self, allocator, input, options);
     }
 
@@ -833,7 +834,7 @@ pub const Client = struct {
     /// desired status of the task.
     ///
     /// Recently stopped tasks might appear in the returned results.
-    pub fn listTasks(self: *Self, allocator: std.mem.Allocator, input: list_tasks.ListTasksInput, options: list_tasks.Options) !list_tasks.ListTasksOutput {
+    pub fn listTasks(self: *Self, allocator: std.mem.Allocator, input: list_tasks.ListTasksInput, options: CallOptions) !list_tasks.ListTasksOutput {
         return list_tasks.execute(self, allocator, input, options);
     }
 
@@ -846,14 +847,14 @@ pub const Client = struct {
     /// see [Account
     /// Settings](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    pub fn putAccountSetting(self: *Self, allocator: std.mem.Allocator, input: put_account_setting.PutAccountSettingInput, options: put_account_setting.Options) !put_account_setting.PutAccountSettingOutput {
+    pub fn putAccountSetting(self: *Self, allocator: std.mem.Allocator, input: put_account_setting.PutAccountSettingInput, options: CallOptions) !put_account_setting.PutAccountSettingOutput {
         return put_account_setting.execute(self, allocator, input, options);
     }
 
     /// Modifies an account setting for all users on an account for whom no
     /// individual account
     /// setting has been specified. Account settings are set on a per-Region basis.
-    pub fn putAccountSettingDefault(self: *Self, allocator: std.mem.Allocator, input: put_account_setting_default.PutAccountSettingDefaultInput, options: put_account_setting_default.Options) !put_account_setting_default.PutAccountSettingDefaultOutput {
+    pub fn putAccountSettingDefault(self: *Self, allocator: std.mem.Allocator, input: put_account_setting_default.PutAccountSettingDefaultInput, options: CallOptions) !put_account_setting_default.PutAccountSettingDefaultOutput {
         return put_account_setting_default.execute(self, allocator, input, options);
     }
 
@@ -864,7 +865,7 @@ pub const Client = struct {
     /// value. To delete an attribute, use
     /// [DeleteAttributes](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteAttributes.html). For more information, see [Attributes](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes) in the *Amazon Elastic Container
     /// Service Developer Guide*.
-    pub fn putAttributes(self: *Self, allocator: std.mem.Allocator, input: put_attributes.PutAttributesInput, options: put_attributes.Options) !put_attributes.PutAttributesOutput {
+    pub fn putAttributes(self: *Self, allocator: std.mem.Allocator, input: put_attributes.PutAttributesInput, options: CallOptions) !put_attributes.PutAttributesOutput {
         return put_attributes.execute(self, allocator, input, options);
     }
 
@@ -900,7 +901,7 @@ pub const Client = struct {
     /// provider with Amazon ECS Managed Instances, it becomes available only within
     /// the
     /// specified cluster.
-    pub fn putClusterCapacityProviders(self: *Self, allocator: std.mem.Allocator, input: put_cluster_capacity_providers.PutClusterCapacityProvidersInput, options: put_cluster_capacity_providers.Options) !put_cluster_capacity_providers.PutClusterCapacityProvidersOutput {
+    pub fn putClusterCapacityProviders(self: *Self, allocator: std.mem.Allocator, input: put_cluster_capacity_providers.PutClusterCapacityProvidersInput, options: CallOptions) !put_cluster_capacity_providers.PutClusterCapacityProvidersOutput {
         return put_cluster_capacity_providers.execute(self, allocator, input, options);
     }
 
@@ -911,7 +912,7 @@ pub const Client = struct {
     /// Registers an EC2 instance into the specified cluster. This instance becomes
     /// available
     /// to place containers on.
-    pub fn registerContainerInstance(self: *Self, allocator: std.mem.Allocator, input: register_container_instance.RegisterContainerInstanceInput, options: register_container_instance.Options) !register_container_instance.RegisterContainerInstanceOutput {
+    pub fn registerContainerInstance(self: *Self, allocator: std.mem.Allocator, input: register_container_instance.RegisterContainerInstanceInput, options: CallOptions) !register_container_instance.RegisterContainerInstanceOutput {
         return register_container_instance.execute(self, allocator, input, options);
     }
 
@@ -941,7 +942,7 @@ pub const Client = struct {
     /// definition. For more information, see [Task
     /// Networking](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
     /// in the *Amazon Elastic Container Service Developer Guide*.
-    pub fn registerTaskDefinition(self: *Self, allocator: std.mem.Allocator, input: register_task_definition.RegisterTaskDefinitionInput, options: register_task_definition.Options) !register_task_definition.RegisterTaskDefinitionOutput {
+    pub fn registerTaskDefinition(self: *Self, allocator: std.mem.Allocator, input: register_task_definition.RegisterTaskDefinitionInput, options: CallOptions) !register_task_definition.RegisterTaskDefinitionOutput {
         return register_task_definition.execute(self, allocator, input, options);
     }
 
@@ -1020,7 +1021,7 @@ pub const Client = struct {
     /// quota of tasks in the `PROVISIONING` per cluster has been reached. For
     /// information about the service quotas, see [Amazon ECS service
     /// quotas](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html).
-    pub fn runTask(self: *Self, allocator: std.mem.Allocator, input: run_task.RunTaskInput, options: run_task.Options) !run_task.RunTaskOutput {
+    pub fn runTask(self: *Self, allocator: std.mem.Allocator, input: run_task.RunTaskInput, options: CallOptions) !run_task.RunTaskOutput {
         return run_task.execute(self, allocator, input, options);
     }
 
@@ -1044,7 +1045,7 @@ pub const Client = struct {
     /// creating or updating a service. For more information, see [Amazon EBS
     /// volumes](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types) in the *Amazon Elastic
     /// Container Service Developer Guide*.
-    pub fn startTask(self: *Self, allocator: std.mem.Allocator, input: start_task.StartTaskInput, options: start_task.Options) !start_task.StartTaskOutput {
+    pub fn startTask(self: *Self, allocator: std.mem.Allocator, input: start_task.StartTaskInput, options: CallOptions) !start_task.StartTaskOutput {
         return start_task.execute(self, allocator, input, options);
     }
 
@@ -1062,7 +1063,7 @@ pub const Client = struct {
     /// ECS service
     /// deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/stop-service-deployment.html) in the *Amazon Elastic Container Service
     /// Developer Guide*.
-    pub fn stopServiceDeployment(self: *Self, allocator: std.mem.Allocator, input: stop_service_deployment.StopServiceDeploymentInput, options: stop_service_deployment.Options) !stop_service_deployment.StopServiceDeploymentOutput {
+    pub fn stopServiceDeployment(self: *Self, allocator: std.mem.Allocator, input: stop_service_deployment.StopServiceDeploymentInput, options: CallOptions) !stop_service_deployment.StopServiceDeploymentOutput {
         return stop_service_deployment.execute(self, allocator, input, options);
     }
 
@@ -1092,7 +1093,7 @@ pub const Client = struct {
     /// [Amazon ECS Container Agent
     /// Configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the
     /// *Amazon Elastic Container Service Developer Guide*.
-    pub fn stopTask(self: *Self, allocator: std.mem.Allocator, input: stop_task.StopTaskInput, options: stop_task.Options) !stop_task.StopTaskOutput {
+    pub fn stopTask(self: *Self, allocator: std.mem.Allocator, input: stop_task.StopTaskInput, options: CallOptions) !stop_task.StopTaskOutput {
         return stop_task.execute(self, allocator, input, options);
     }
 
@@ -1101,7 +1102,7 @@ pub const Client = struct {
     /// outside of the agent.
     ///
     /// Sent to acknowledge that an attachment changed states.
-    pub fn submitAttachmentStateChanges(self: *Self, allocator: std.mem.Allocator, input: submit_attachment_state_changes.SubmitAttachmentStateChangesInput, options: submit_attachment_state_changes.Options) !submit_attachment_state_changes.SubmitAttachmentStateChangesOutput {
+    pub fn submitAttachmentStateChanges(self: *Self, allocator: std.mem.Allocator, input: submit_attachment_state_changes.SubmitAttachmentStateChangesInput, options: CallOptions) !submit_attachment_state_changes.SubmitAttachmentStateChangesOutput {
         return submit_attachment_state_changes.execute(self, allocator, input, options);
     }
 
@@ -1110,7 +1111,7 @@ pub const Client = struct {
     /// outside of the agent.
     ///
     /// Sent to acknowledge that a container changed states.
-    pub fn submitContainerStateChange(self: *Self, allocator: std.mem.Allocator, input: submit_container_state_change.SubmitContainerStateChangeInput, options: submit_container_state_change.Options) !submit_container_state_change.SubmitContainerStateChangeOutput {
+    pub fn submitContainerStateChange(self: *Self, allocator: std.mem.Allocator, input: submit_container_state_change.SubmitContainerStateChangeInput, options: CallOptions) !submit_container_state_change.SubmitContainerStateChangeOutput {
         return submit_container_state_change.execute(self, allocator, input, options);
     }
 
@@ -1119,7 +1120,7 @@ pub const Client = struct {
     /// outside of the agent.
     ///
     /// Sent to acknowledge that a task changed states.
-    pub fn submitTaskStateChange(self: *Self, allocator: std.mem.Allocator, input: submit_task_state_change.SubmitTaskStateChangeInput, options: submit_task_state_change.Options) !submit_task_state_change.SubmitTaskStateChangeOutput {
+    pub fn submitTaskStateChange(self: *Self, allocator: std.mem.Allocator, input: submit_task_state_change.SubmitTaskStateChangeInput, options: CallOptions) !submit_task_state_change.SubmitTaskStateChangeOutput {
         return submit_task_state_change.execute(self, allocator, input, options);
     }
 
@@ -1128,12 +1129,12 @@ pub const Client = struct {
     /// request parameters, they aren't changed. When a resource is deleted, the
     /// tags that are
     /// associated with that resource are deleted as well.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes specified tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -1142,17 +1143,17 @@ pub const Client = struct {
     /// These changes only apply to new Amazon ECS Managed Instances, or EC2
     /// instances, not
     /// existing ones.
-    pub fn updateCapacityProvider(self: *Self, allocator: std.mem.Allocator, input: update_capacity_provider.UpdateCapacityProviderInput, options: update_capacity_provider.Options) !update_capacity_provider.UpdateCapacityProviderOutput {
+    pub fn updateCapacityProvider(self: *Self, allocator: std.mem.Allocator, input: update_capacity_provider.UpdateCapacityProviderInput, options: CallOptions) !update_capacity_provider.UpdateCapacityProviderOutput {
         return update_capacity_provider.execute(self, allocator, input, options);
     }
 
     /// Updates the cluster.
-    pub fn updateCluster(self: *Self, allocator: std.mem.Allocator, input: update_cluster.UpdateClusterInput, options: update_cluster.Options) !update_cluster.UpdateClusterOutput {
+    pub fn updateCluster(self: *Self, allocator: std.mem.Allocator, input: update_cluster.UpdateClusterInput, options: CallOptions) !update_cluster.UpdateClusterOutput {
         return update_cluster.execute(self, allocator, input, options);
     }
 
     /// Modifies the settings to use for a cluster.
-    pub fn updateClusterSettings(self: *Self, allocator: std.mem.Allocator, input: update_cluster_settings.UpdateClusterSettingsInput, options: update_cluster_settings.Options) !update_cluster_settings.UpdateClusterSettingsOutput {
+    pub fn updateClusterSettings(self: *Self, allocator: std.mem.Allocator, input: update_cluster_settings.UpdateClusterSettingsInput, options: CallOptions) !update_cluster_settings.UpdateClusterSettingsOutput {
         return update_cluster_settings.execute(self, allocator, input, options);
     }
 
@@ -1185,7 +1186,7 @@ pub const Client = struct {
     /// [Manually updating the Amazon ECS container
     /// agent](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent) in the *Amazon
     /// Elastic Container Service Developer Guide*.
-    pub fn updateContainerAgent(self: *Self, allocator: std.mem.Allocator, input: update_container_agent.UpdateContainerAgentInput, options: update_container_agent.Options) !update_container_agent.UpdateContainerAgentOutput {
+    pub fn updateContainerAgent(self: *Self, allocator: std.mem.Allocator, input: update_container_agent.UpdateContainerAgentInput, options: CallOptions) !update_container_agent.UpdateContainerAgentOutput {
         return update_container_agent.execute(self, allocator, input, options);
     }
 
@@ -1250,7 +1251,7 @@ pub const Client = struct {
     /// to
     /// `ACTIVE` status and once it has reached that status the Amazon ECS
     /// scheduler can begin scheduling tasks on the instance again.
-    pub fn updateContainerInstancesState(self: *Self, allocator: std.mem.Allocator, input: update_container_instances_state.UpdateContainerInstancesStateInput, options: update_container_instances_state.Options) !update_container_instances_state.UpdateContainerInstancesStateOutput {
+    pub fn updateContainerInstancesState(self: *Self, allocator: std.mem.Allocator, input: update_container_instances_state.UpdateContainerInstancesStateInput, options: CallOptions) !update_container_instances_state.UpdateContainerInstancesStateOutput {
         return update_container_instances_state.execute(self, allocator, input, options);
     }
 
@@ -1269,7 +1270,7 @@ pub const Client = struct {
     /// Some parameters like the infrastructure role cannot be modified after
     /// service creation
     /// and require creating a new service.
-    pub fn updateExpressGatewayService(self: *Self, allocator: std.mem.Allocator, input: update_express_gateway_service.UpdateExpressGatewayServiceInput, options: update_express_gateway_service.Options) !update_express_gateway_service.UpdateExpressGatewayServiceOutput {
+    pub fn updateExpressGatewayService(self: *Self, allocator: std.mem.Allocator, input: update_express_gateway_service.UpdateExpressGatewayServiceInput, options: CallOptions) !update_express_gateway_service.UpdateExpressGatewayServiceOutput {
         return update_express_gateway_service.execute(self, allocator, input, options);
     }
 
@@ -1430,7 +1431,7 @@ pub const Client = struct {
     /// on the previous steps), favoring container instances with the largest number
     /// of
     /// running tasks for this service.
-    pub fn updateService(self: *Self, allocator: std.mem.Allocator, input: update_service.UpdateServiceInput, options: update_service.Options) !update_service.UpdateServiceOutput {
+    pub fn updateService(self: *Self, allocator: std.mem.Allocator, input: update_service.UpdateServiceInput, options: CallOptions) !update_service.UpdateServiceOutput {
         return update_service.execute(self, allocator, input, options);
     }
 
@@ -1442,7 +1443,7 @@ pub const Client = struct {
     /// information, see [Amazon ECS Deployment
     /// Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    pub fn updateServicePrimaryTaskSet(self: *Self, allocator: std.mem.Allocator, input: update_service_primary_task_set.UpdateServicePrimaryTaskSetInput, options: update_service_primary_task_set.Options) !update_service_primary_task_set.UpdateServicePrimaryTaskSetOutput {
+    pub fn updateServicePrimaryTaskSet(self: *Self, allocator: std.mem.Allocator, input: update_service_primary_task_set.UpdateServicePrimaryTaskSetInput, options: CallOptions) !update_service_primary_task_set.UpdateServicePrimaryTaskSetOutput {
         return update_service_primary_task_set.execute(self, allocator, input, options);
     }
 
@@ -1481,7 +1482,7 @@ pub const Client = struct {
     /// using
     /// the [Task scale-in protection
     /// endpoint](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection-endpoint.html).
-    pub fn updateTaskProtection(self: *Self, allocator: std.mem.Allocator, input: update_task_protection.UpdateTaskProtectionInput, options: update_task_protection.Options) !update_task_protection.UpdateTaskProtectionOutput {
+    pub fn updateTaskProtection(self: *Self, allocator: std.mem.Allocator, input: update_task_protection.UpdateTaskProtectionInput, options: CallOptions) !update_task_protection.UpdateTaskProtectionOutput {
         return update_task_protection.execute(self, allocator, input, options);
     }
 
@@ -1489,7 +1490,7 @@ pub const Client = struct {
     /// deployment controller type. For more information, see [Amazon ECS Deployment
     /// Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html) in the *Amazon Elastic Container Service Developer
     /// Guide*.
-    pub fn updateTaskSet(self: *Self, allocator: std.mem.Allocator, input: update_task_set.UpdateTaskSetInput, options: update_task_set.Options) !update_task_set.UpdateTaskSetOutput {
+    pub fn updateTaskSet(self: *Self, allocator: std.mem.Allocator, input: update_task_set.UpdateTaskSetInput, options: CallOptions) !update_task_set.UpdateTaskSetOutput {
         return update_task_set.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SlackChannelConfiguration = @import("slack_channel_configuration.zig").SlackChannelConfiguration;
 
@@ -35,11 +36,7 @@ pub const ListSlackChannelConfigurationsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSlackChannelConfigurationsInput, options: Options) !ListSlackChannelConfigurationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSlackChannelConfigurationsInput, options: CallOptions) !ListSlackChannelConfigurationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

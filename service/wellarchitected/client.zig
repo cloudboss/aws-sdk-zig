@@ -73,6 +73,7 @@ const update_workload_share = @import("update_workload_share.zig");
 const upgrade_lens_review = @import("upgrade_lens_review.zig");
 const upgrade_profile_version = @import("upgrade_profile_version.zig");
 const upgrade_review_template_lens_review = @import("upgrade_review_template_lens_review.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -117,12 +118,12 @@ pub const Client = struct {
     /// you are
     /// Third Party Content as defined in the Amazon Web Services Customer
     /// Agreement.
-    pub fn associateLenses(self: *Self, allocator: std.mem.Allocator, input: associate_lenses.AssociateLensesInput, options: associate_lenses.Options) !associate_lenses.AssociateLensesOutput {
+    pub fn associateLenses(self: *Self, allocator: std.mem.Allocator, input: associate_lenses.AssociateLensesInput, options: CallOptions) !associate_lenses.AssociateLensesOutput {
         return associate_lenses.execute(self, allocator, input, options);
     }
 
     /// Associate a profile with a workload.
-    pub fn associateProfiles(self: *Self, allocator: std.mem.Allocator, input: associate_profiles.AssociateProfilesInput, options: associate_profiles.Options) !associate_profiles.AssociateProfilesOutput {
+    pub fn associateProfiles(self: *Self, allocator: std.mem.Allocator, input: associate_profiles.AssociateProfilesInput, options: CallOptions) !associate_profiles.AssociateProfilesOutput {
         return associate_profiles.execute(self, allocator, input, options);
     }
 
@@ -153,7 +154,7 @@ pub const Client = struct {
     /// shared custom lenses even if you delete the custom lenses
     /// from your own Amazon Web Services account or terminate
     /// your Amazon Web Services account.
-    pub fn createLensShare(self: *Self, allocator: std.mem.Allocator, input: create_lens_share.CreateLensShareInput, options: create_lens_share.Options) !create_lens_share.CreateLensShareOutput {
+    pub fn createLensShare(self: *Self, allocator: std.mem.Allocator, input: create_lens_share.CreateLensShareInput, options: CallOptions) !create_lens_share.CreateLensShareOutput {
         return create_lens_share.execute(self, allocator, input, options);
     }
 
@@ -167,22 +168,22 @@ pub const Client = struct {
     /// The owner of a lens can share the lens with other
     /// Amazon Web Services accounts and users in the same Amazon Web Services
     /// Region. Only the owner of a lens can delete it.
-    pub fn createLensVersion(self: *Self, allocator: std.mem.Allocator, input: create_lens_version.CreateLensVersionInput, options: create_lens_version.Options) !create_lens_version.CreateLensVersionOutput {
+    pub fn createLensVersion(self: *Self, allocator: std.mem.Allocator, input: create_lens_version.CreateLensVersionInput, options: CallOptions) !create_lens_version.CreateLensVersionOutput {
         return create_lens_version.execute(self, allocator, input, options);
     }
 
     /// Create a milestone for an existing workload.
-    pub fn createMilestone(self: *Self, allocator: std.mem.Allocator, input: create_milestone.CreateMilestoneInput, options: create_milestone.Options) !create_milestone.CreateMilestoneOutput {
+    pub fn createMilestone(self: *Self, allocator: std.mem.Allocator, input: create_milestone.CreateMilestoneInput, options: CallOptions) !create_milestone.CreateMilestoneOutput {
         return create_milestone.execute(self, allocator, input, options);
     }
 
     /// Create a profile.
-    pub fn createProfile(self: *Self, allocator: std.mem.Allocator, input: create_profile.CreateProfileInput, options: create_profile.Options) !create_profile.CreateProfileOutput {
+    pub fn createProfile(self: *Self, allocator: std.mem.Allocator, input: create_profile.CreateProfileInput, options: CallOptions) !create_profile.CreateProfileOutput {
         return create_profile.execute(self, allocator, input, options);
     }
 
     /// Create a profile share.
-    pub fn createProfileShare(self: *Self, allocator: std.mem.Allocator, input: create_profile_share.CreateProfileShareInput, options: create_profile_share.Options) !create_profile_share.CreateProfileShareOutput {
+    pub fn createProfileShare(self: *Self, allocator: std.mem.Allocator, input: create_profile_share.CreateProfileShareInput, options: CallOptions) !create_profile_share.CreateProfileShareOutput {
         return create_profile_share.execute(self, allocator, input, options);
     }
 
@@ -201,7 +202,7 @@ pub const Client = struct {
     /// with applicable law, providing adequate privacy notices, and obtaining
     /// necessary
     /// consents for processing such data.
-    pub fn createReviewTemplate(self: *Self, allocator: std.mem.Allocator, input: create_review_template.CreateReviewTemplateInput, options: create_review_template.Options) !create_review_template.CreateReviewTemplateOutput {
+    pub fn createReviewTemplate(self: *Self, allocator: std.mem.Allocator, input: create_review_template.CreateReviewTemplateInput, options: CallOptions) !create_review_template.CreateReviewTemplateOutput {
         return create_review_template.execute(self, allocator, input, options);
     }
 
@@ -226,7 +227,7 @@ pub const Client = struct {
     /// acknowledge that Amazon Web Services will make your review template
     /// available to
     /// those other accounts.
-    pub fn createTemplateShare(self: *Self, allocator: std.mem.Allocator, input: create_template_share.CreateTemplateShareInput, options: create_template_share.Options) !create_template_share.CreateTemplateShareOutput {
+    pub fn createTemplateShare(self: *Self, allocator: std.mem.Allocator, input: create_template_share.CreateTemplateShareInput, options: CallOptions) !create_template_share.CreateTemplateShareOutput {
         return create_template_share.execute(self, allocator, input, options);
     }
 
@@ -258,7 +259,7 @@ pub const Client = struct {
     /// * `wellarchitected:ListReviewTemplateAnswers`
     ///
     /// * `wellarchitected:GetReviewTemplateLensReview`
-    pub fn createWorkload(self: *Self, allocator: std.mem.Allocator, input: create_workload.CreateWorkloadInput, options: create_workload.Options) !create_workload.CreateWorkloadOutput {
+    pub fn createWorkload(self: *Self, allocator: std.mem.Allocator, input: create_workload.CreateWorkloadInput, options: CallOptions) !create_workload.CreateWorkloadOutput {
         return create_workload.execute(self, allocator, input, options);
     }
 
@@ -277,7 +278,7 @@ pub const Client = struct {
     /// For more information, see [Sharing a
     /// workload](https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html) in the
     /// *Well-Architected Tool User Guide*.
-    pub fn createWorkloadShare(self: *Self, allocator: std.mem.Allocator, input: create_workload_share.CreateWorkloadShareInput, options: create_workload_share.Options) !create_workload_share.CreateWorkloadShareOutput {
+    pub fn createWorkloadShare(self: *Self, allocator: std.mem.Allocator, input: create_workload_share.CreateWorkloadShareInput, options: CallOptions) !create_workload_share.CreateWorkloadShareOutput {
         return create_workload_share.execute(self, allocator, input, options);
     }
 
@@ -297,7 +298,7 @@ pub const Client = struct {
     /// shared custom lenses even if you delete the custom lenses
     /// from your own Amazon Web Services account or terminate
     /// your Amazon Web Services account.
-    pub fn deleteLens(self: *Self, allocator: std.mem.Allocator, input: delete_lens.DeleteLensInput, options: delete_lens.Options) !delete_lens.DeleteLensOutput {
+    pub fn deleteLens(self: *Self, allocator: std.mem.Allocator, input: delete_lens.DeleteLensInput, options: CallOptions) !delete_lens.DeleteLensOutput {
         return delete_lens.execute(self, allocator, input, options);
     }
 
@@ -318,7 +319,7 @@ pub const Client = struct {
     /// shared custom lenses even if you delete the custom lenses
     /// from your own Amazon Web Services account or terminate
     /// your Amazon Web Services account.
-    pub fn deleteLensShare(self: *Self, allocator: std.mem.Allocator, input: delete_lens_share.DeleteLensShareInput, options: delete_lens_share.Options) !delete_lens_share.DeleteLensShareOutput {
+    pub fn deleteLensShare(self: *Self, allocator: std.mem.Allocator, input: delete_lens_share.DeleteLensShareInput, options: CallOptions) !delete_lens_share.DeleteLensShareOutput {
         return delete_lens_share.execute(self, allocator, input, options);
     }
 
@@ -333,12 +334,12 @@ pub const Client = struct {
     /// shared profile even if you delete the profile
     /// from your own Amazon Web Services account or terminate
     /// your Amazon Web Services account.
-    pub fn deleteProfile(self: *Self, allocator: std.mem.Allocator, input: delete_profile.DeleteProfileInput, options: delete_profile.Options) !delete_profile.DeleteProfileOutput {
+    pub fn deleteProfile(self: *Self, allocator: std.mem.Allocator, input: delete_profile.DeleteProfileInput, options: CallOptions) !delete_profile.DeleteProfileOutput {
         return delete_profile.execute(self, allocator, input, options);
     }
 
     /// Delete a profile share.
-    pub fn deleteProfileShare(self: *Self, allocator: std.mem.Allocator, input: delete_profile_share.DeleteProfileShareInput, options: delete_profile_share.Options) !delete_profile_share.DeleteProfileShareOutput {
+    pub fn deleteProfileShare(self: *Self, allocator: std.mem.Allocator, input: delete_profile_share.DeleteProfileShareInput, options: CallOptions) !delete_profile_share.DeleteProfileShareOutput {
         return delete_profile_share.execute(self, allocator, input, options);
     }
 
@@ -350,7 +351,7 @@ pub const Client = struct {
     /// organizations, and organizational units (OUs) that you shared the review
     /// template with
     /// will no longer be able to apply it to new workloads.
-    pub fn deleteReviewTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_review_template.DeleteReviewTemplateInput, options: delete_review_template.Options) !delete_review_template.DeleteReviewTemplateOutput {
+    pub fn deleteReviewTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_review_template.DeleteReviewTemplateInput, options: CallOptions) !delete_review_template.DeleteReviewTemplateOutput {
         return delete_review_template.execute(self, allocator, input, options);
     }
 
@@ -361,17 +362,17 @@ pub const Client = struct {
     /// organizations, and organizational units (OUs) that you shared the review
     /// template with
     /// will no longer be able to apply it to new workloads.
-    pub fn deleteTemplateShare(self: *Self, allocator: std.mem.Allocator, input: delete_template_share.DeleteTemplateShareInput, options: delete_template_share.Options) !delete_template_share.DeleteTemplateShareOutput {
+    pub fn deleteTemplateShare(self: *Self, allocator: std.mem.Allocator, input: delete_template_share.DeleteTemplateShareInput, options: CallOptions) !delete_template_share.DeleteTemplateShareOutput {
         return delete_template_share.execute(self, allocator, input, options);
     }
 
     /// Delete an existing workload.
-    pub fn deleteWorkload(self: *Self, allocator: std.mem.Allocator, input: delete_workload.DeleteWorkloadInput, options: delete_workload.Options) !delete_workload.DeleteWorkloadOutput {
+    pub fn deleteWorkload(self: *Self, allocator: std.mem.Allocator, input: delete_workload.DeleteWorkloadInput, options: CallOptions) !delete_workload.DeleteWorkloadOutput {
         return delete_workload.execute(self, allocator, input, options);
     }
 
     /// Delete a workload share.
-    pub fn deleteWorkloadShare(self: *Self, allocator: std.mem.Allocator, input: delete_workload_share.DeleteWorkloadShareInput, options: delete_workload_share.Options) !delete_workload_share.DeleteWorkloadShareOutput {
+    pub fn deleteWorkloadShare(self: *Self, allocator: std.mem.Allocator, input: delete_workload_share.DeleteWorkloadShareInput, options: CallOptions) !delete_workload_share.DeleteWorkloadShareOutput {
         return delete_workload_share.execute(self, allocator, input, options);
     }
 
@@ -383,12 +384,12 @@ pub const Client = struct {
     /// The Amazon Web Services Well-Architected Framework lens (`wellarchitected`)
     /// cannot be
     /// removed from a workload.
-    pub fn disassociateLenses(self: *Self, allocator: std.mem.Allocator, input: disassociate_lenses.DisassociateLensesInput, options: disassociate_lenses.Options) !disassociate_lenses.DisassociateLensesOutput {
+    pub fn disassociateLenses(self: *Self, allocator: std.mem.Allocator, input: disassociate_lenses.DisassociateLensesInput, options: CallOptions) !disassociate_lenses.DisassociateLensesOutput {
         return disassociate_lenses.execute(self, allocator, input, options);
     }
 
     /// Disassociate a profile from a workload.
-    pub fn disassociateProfiles(self: *Self, allocator: std.mem.Allocator, input: disassociate_profiles.DisassociateProfilesInput, options: disassociate_profiles.Options) !disassociate_profiles.DisassociateProfilesOutput {
+    pub fn disassociateProfiles(self: *Self, allocator: std.mem.Allocator, input: disassociate_profiles.DisassociateProfilesInput, options: CallOptions) !disassociate_profiles.DisassociateProfilesOutput {
         return disassociate_profiles.execute(self, allocator, input, options);
     }
 
@@ -413,12 +414,12 @@ pub const Client = struct {
     /// with applicable law, providing adequate privacy notices, and obtaining
     /// necessary
     /// consents for processing such data.
-    pub fn exportLens(self: *Self, allocator: std.mem.Allocator, input: export_lens.ExportLensInput, options: export_lens.Options) !export_lens.ExportLensOutput {
+    pub fn exportLens(self: *Self, allocator: std.mem.Allocator, input: export_lens.ExportLensInput, options: CallOptions) !export_lens.ExportLensOutput {
         return export_lens.execute(self, allocator, input, options);
     }
 
     /// Get the answer to a specific question in a workload review.
-    pub fn getAnswer(self: *Self, allocator: std.mem.Allocator, input: get_answer.GetAnswerInput, options: get_answer.Options) !get_answer.GetAnswerOutput {
+    pub fn getAnswer(self: *Self, allocator: std.mem.Allocator, input: get_answer.GetAnswerInput, options: CallOptions) !get_answer.GetAnswerOutput {
         return get_answer.execute(self, allocator, input, options);
     }
 
@@ -426,67 +427,67 @@ pub const Client = struct {
     ///
     /// You can optionally choose to include workloads that have been shared with
     /// you.
-    pub fn getConsolidatedReport(self: *Self, allocator: std.mem.Allocator, input: get_consolidated_report.GetConsolidatedReportInput, options: get_consolidated_report.Options) !get_consolidated_report.GetConsolidatedReportOutput {
+    pub fn getConsolidatedReport(self: *Self, allocator: std.mem.Allocator, input: get_consolidated_report.GetConsolidatedReportInput, options: CallOptions) !get_consolidated_report.GetConsolidatedReportOutput {
         return get_consolidated_report.execute(self, allocator, input, options);
     }
 
     /// Global settings for all workloads.
-    pub fn getGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: get_global_settings.GetGlobalSettingsInput, options: get_global_settings.Options) !get_global_settings.GetGlobalSettingsOutput {
+    pub fn getGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: get_global_settings.GetGlobalSettingsInput, options: CallOptions) !get_global_settings.GetGlobalSettingsOutput {
         return get_global_settings.execute(self, allocator, input, options);
     }
 
     /// Get an existing lens.
-    pub fn getLens(self: *Self, allocator: std.mem.Allocator, input: get_lens.GetLensInput, options: get_lens.Options) !get_lens.GetLensOutput {
+    pub fn getLens(self: *Self, allocator: std.mem.Allocator, input: get_lens.GetLensInput, options: CallOptions) !get_lens.GetLensOutput {
         return get_lens.execute(self, allocator, input, options);
     }
 
     /// Get lens review.
-    pub fn getLensReview(self: *Self, allocator: std.mem.Allocator, input: get_lens_review.GetLensReviewInput, options: get_lens_review.Options) !get_lens_review.GetLensReviewOutput {
+    pub fn getLensReview(self: *Self, allocator: std.mem.Allocator, input: get_lens_review.GetLensReviewInput, options: CallOptions) !get_lens_review.GetLensReviewOutput {
         return get_lens_review.execute(self, allocator, input, options);
     }
 
     /// Get lens review report.
-    pub fn getLensReviewReport(self: *Self, allocator: std.mem.Allocator, input: get_lens_review_report.GetLensReviewReportInput, options: get_lens_review_report.Options) !get_lens_review_report.GetLensReviewReportOutput {
+    pub fn getLensReviewReport(self: *Self, allocator: std.mem.Allocator, input: get_lens_review_report.GetLensReviewReportInput, options: CallOptions) !get_lens_review_report.GetLensReviewReportOutput {
         return get_lens_review_report.execute(self, allocator, input, options);
     }
 
     /// Get lens version differences.
-    pub fn getLensVersionDifference(self: *Self, allocator: std.mem.Allocator, input: get_lens_version_difference.GetLensVersionDifferenceInput, options: get_lens_version_difference.Options) !get_lens_version_difference.GetLensVersionDifferenceOutput {
+    pub fn getLensVersionDifference(self: *Self, allocator: std.mem.Allocator, input: get_lens_version_difference.GetLensVersionDifferenceInput, options: CallOptions) !get_lens_version_difference.GetLensVersionDifferenceOutput {
         return get_lens_version_difference.execute(self, allocator, input, options);
     }
 
     /// Get a milestone for an existing workload.
-    pub fn getMilestone(self: *Self, allocator: std.mem.Allocator, input: get_milestone.GetMilestoneInput, options: get_milestone.Options) !get_milestone.GetMilestoneOutput {
+    pub fn getMilestone(self: *Self, allocator: std.mem.Allocator, input: get_milestone.GetMilestoneInput, options: CallOptions) !get_milestone.GetMilestoneOutput {
         return get_milestone.execute(self, allocator, input, options);
     }
 
     /// Get profile information.
-    pub fn getProfile(self: *Self, allocator: std.mem.Allocator, input: get_profile.GetProfileInput, options: get_profile.Options) !get_profile.GetProfileOutput {
+    pub fn getProfile(self: *Self, allocator: std.mem.Allocator, input: get_profile.GetProfileInput, options: CallOptions) !get_profile.GetProfileOutput {
         return get_profile.execute(self, allocator, input, options);
     }
 
     /// Get profile template.
-    pub fn getProfileTemplate(self: *Self, allocator: std.mem.Allocator, input: get_profile_template.GetProfileTemplateInput, options: get_profile_template.Options) !get_profile_template.GetProfileTemplateOutput {
+    pub fn getProfileTemplate(self: *Self, allocator: std.mem.Allocator, input: get_profile_template.GetProfileTemplateInput, options: CallOptions) !get_profile_template.GetProfileTemplateOutput {
         return get_profile_template.execute(self, allocator, input, options);
     }
 
     /// Get review template.
-    pub fn getReviewTemplate(self: *Self, allocator: std.mem.Allocator, input: get_review_template.GetReviewTemplateInput, options: get_review_template.Options) !get_review_template.GetReviewTemplateOutput {
+    pub fn getReviewTemplate(self: *Self, allocator: std.mem.Allocator, input: get_review_template.GetReviewTemplateInput, options: CallOptions) !get_review_template.GetReviewTemplateOutput {
         return get_review_template.execute(self, allocator, input, options);
     }
 
     /// Get review template answer.
-    pub fn getReviewTemplateAnswer(self: *Self, allocator: std.mem.Allocator, input: get_review_template_answer.GetReviewTemplateAnswerInput, options: get_review_template_answer.Options) !get_review_template_answer.GetReviewTemplateAnswerOutput {
+    pub fn getReviewTemplateAnswer(self: *Self, allocator: std.mem.Allocator, input: get_review_template_answer.GetReviewTemplateAnswerInput, options: CallOptions) !get_review_template_answer.GetReviewTemplateAnswerOutput {
         return get_review_template_answer.execute(self, allocator, input, options);
     }
 
     /// Get a lens review associated with a review template.
-    pub fn getReviewTemplateLensReview(self: *Self, allocator: std.mem.Allocator, input: get_review_template_lens_review.GetReviewTemplateLensReviewInput, options: get_review_template_lens_review.Options) !get_review_template_lens_review.GetReviewTemplateLensReviewOutput {
+    pub fn getReviewTemplateLensReview(self: *Self, allocator: std.mem.Allocator, input: get_review_template_lens_review.GetReviewTemplateLensReviewInput, options: CallOptions) !get_review_template_lens_review.GetReviewTemplateLensReviewOutput {
         return get_review_template_lens_review.execute(self, allocator, input, options);
     }
 
     /// Get an existing workload.
-    pub fn getWorkload(self: *Self, allocator: std.mem.Allocator, input: get_workload.GetWorkloadInput, options: get_workload.Options) !get_workload.GetWorkloadOutput {
+    pub fn getWorkload(self: *Self, allocator: std.mem.Allocator, input: get_workload.GetWorkloadInput, options: CallOptions) !get_workload.GetWorkloadOutput {
         return get_workload.execute(self, allocator, input, options);
     }
 
@@ -517,78 +518,78 @@ pub const Client = struct {
     /// with applicable law, providing adequate privacy notices, and obtaining
     /// necessary
     /// consents for processing such data.
-    pub fn importLens(self: *Self, allocator: std.mem.Allocator, input: import_lens.ImportLensInput, options: import_lens.Options) !import_lens.ImportLensOutput {
+    pub fn importLens(self: *Self, allocator: std.mem.Allocator, input: import_lens.ImportLensInput, options: CallOptions) !import_lens.ImportLensOutput {
         return import_lens.execute(self, allocator, input, options);
     }
 
     /// List of answers for a particular workload and lens.
-    pub fn listAnswers(self: *Self, allocator: std.mem.Allocator, input: list_answers.ListAnswersInput, options: list_answers.Options) !list_answers.ListAnswersOutput {
+    pub fn listAnswers(self: *Self, allocator: std.mem.Allocator, input: list_answers.ListAnswersInput, options: CallOptions) !list_answers.ListAnswersOutput {
         return list_answers.execute(self, allocator, input, options);
     }
 
     /// List of Trusted Advisor check details by account related to the workload.
-    pub fn listCheckDetails(self: *Self, allocator: std.mem.Allocator, input: list_check_details.ListCheckDetailsInput, options: list_check_details.Options) !list_check_details.ListCheckDetailsOutput {
+    pub fn listCheckDetails(self: *Self, allocator: std.mem.Allocator, input: list_check_details.ListCheckDetailsInput, options: CallOptions) !list_check_details.ListCheckDetailsOutput {
         return list_check_details.execute(self, allocator, input, options);
     }
 
     /// List of Trusted Advisor checks summarized for all accounts related to the
     /// workload.
-    pub fn listCheckSummaries(self: *Self, allocator: std.mem.Allocator, input: list_check_summaries.ListCheckSummariesInput, options: list_check_summaries.Options) !list_check_summaries.ListCheckSummariesOutput {
+    pub fn listCheckSummaries(self: *Self, allocator: std.mem.Allocator, input: list_check_summaries.ListCheckSummariesInput, options: CallOptions) !list_check_summaries.ListCheckSummariesOutput {
         return list_check_summaries.execute(self, allocator, input, options);
     }
 
     /// List the improvements of a particular lens review.
-    pub fn listLensReviewImprovements(self: *Self, allocator: std.mem.Allocator, input: list_lens_review_improvements.ListLensReviewImprovementsInput, options: list_lens_review_improvements.Options) !list_lens_review_improvements.ListLensReviewImprovementsOutput {
+    pub fn listLensReviewImprovements(self: *Self, allocator: std.mem.Allocator, input: list_lens_review_improvements.ListLensReviewImprovementsInput, options: CallOptions) !list_lens_review_improvements.ListLensReviewImprovementsOutput {
         return list_lens_review_improvements.execute(self, allocator, input, options);
     }
 
     /// List lens reviews for a particular workload.
-    pub fn listLensReviews(self: *Self, allocator: std.mem.Allocator, input: list_lens_reviews.ListLensReviewsInput, options: list_lens_reviews.Options) !list_lens_reviews.ListLensReviewsOutput {
+    pub fn listLensReviews(self: *Self, allocator: std.mem.Allocator, input: list_lens_reviews.ListLensReviewsInput, options: CallOptions) !list_lens_reviews.ListLensReviewsOutput {
         return list_lens_reviews.execute(self, allocator, input, options);
     }
 
     /// List the lens shares associated with the lens.
-    pub fn listLensShares(self: *Self, allocator: std.mem.Allocator, input: list_lens_shares.ListLensSharesInput, options: list_lens_shares.Options) !list_lens_shares.ListLensSharesOutput {
+    pub fn listLensShares(self: *Self, allocator: std.mem.Allocator, input: list_lens_shares.ListLensSharesInput, options: CallOptions) !list_lens_shares.ListLensSharesOutput {
         return list_lens_shares.execute(self, allocator, input, options);
     }
 
     /// List the available lenses.
-    pub fn listLenses(self: *Self, allocator: std.mem.Allocator, input: list_lenses.ListLensesInput, options: list_lenses.Options) !list_lenses.ListLensesOutput {
+    pub fn listLenses(self: *Self, allocator: std.mem.Allocator, input: list_lenses.ListLensesInput, options: CallOptions) !list_lenses.ListLensesOutput {
         return list_lenses.execute(self, allocator, input, options);
     }
 
     /// List all milestones for an existing workload.
-    pub fn listMilestones(self: *Self, allocator: std.mem.Allocator, input: list_milestones.ListMilestonesInput, options: list_milestones.Options) !list_milestones.ListMilestonesOutput {
+    pub fn listMilestones(self: *Self, allocator: std.mem.Allocator, input: list_milestones.ListMilestonesInput, options: CallOptions) !list_milestones.ListMilestonesOutput {
         return list_milestones.execute(self, allocator, input, options);
     }
 
     /// List lens notifications.
-    pub fn listNotifications(self: *Self, allocator: std.mem.Allocator, input: list_notifications.ListNotificationsInput, options: list_notifications.Options) !list_notifications.ListNotificationsOutput {
+    pub fn listNotifications(self: *Self, allocator: std.mem.Allocator, input: list_notifications.ListNotificationsInput, options: CallOptions) !list_notifications.ListNotificationsOutput {
         return list_notifications.execute(self, allocator, input, options);
     }
 
     /// List profile notifications.
-    pub fn listProfileNotifications(self: *Self, allocator: std.mem.Allocator, input: list_profile_notifications.ListProfileNotificationsInput, options: list_profile_notifications.Options) !list_profile_notifications.ListProfileNotificationsOutput {
+    pub fn listProfileNotifications(self: *Self, allocator: std.mem.Allocator, input: list_profile_notifications.ListProfileNotificationsInput, options: CallOptions) !list_profile_notifications.ListProfileNotificationsOutput {
         return list_profile_notifications.execute(self, allocator, input, options);
     }
 
     /// List profile shares.
-    pub fn listProfileShares(self: *Self, allocator: std.mem.Allocator, input: list_profile_shares.ListProfileSharesInput, options: list_profile_shares.Options) !list_profile_shares.ListProfileSharesOutput {
+    pub fn listProfileShares(self: *Self, allocator: std.mem.Allocator, input: list_profile_shares.ListProfileSharesInput, options: CallOptions) !list_profile_shares.ListProfileSharesOutput {
         return list_profile_shares.execute(self, allocator, input, options);
     }
 
     /// List profiles.
-    pub fn listProfiles(self: *Self, allocator: std.mem.Allocator, input: list_profiles.ListProfilesInput, options: list_profiles.Options) !list_profiles.ListProfilesOutput {
+    pub fn listProfiles(self: *Self, allocator: std.mem.Allocator, input: list_profiles.ListProfilesInput, options: CallOptions) !list_profiles.ListProfilesOutput {
         return list_profiles.execute(self, allocator, input, options);
     }
 
     /// List the answers of a review template.
-    pub fn listReviewTemplateAnswers(self: *Self, allocator: std.mem.Allocator, input: list_review_template_answers.ListReviewTemplateAnswersInput, options: list_review_template_answers.Options) !list_review_template_answers.ListReviewTemplateAnswersOutput {
+    pub fn listReviewTemplateAnswers(self: *Self, allocator: std.mem.Allocator, input: list_review_template_answers.ListReviewTemplateAnswersInput, options: CallOptions) !list_review_template_answers.ListReviewTemplateAnswersOutput {
         return list_review_template_answers.execute(self, allocator, input, options);
     }
 
     /// List review templates.
-    pub fn listReviewTemplates(self: *Self, allocator: std.mem.Allocator, input: list_review_templates.ListReviewTemplatesInput, options: list_review_templates.Options) !list_review_templates.ListReviewTemplatesOutput {
+    pub fn listReviewTemplates(self: *Self, allocator: std.mem.Allocator, input: list_review_templates.ListReviewTemplatesInput, options: CallOptions) !list_review_templates.ListReviewTemplatesOutput {
         return list_review_templates.execute(self, allocator, input, options);
     }
 
@@ -597,7 +598,7 @@ pub const Client = struct {
     /// `WorkloadNamePrefix`, `LensNamePrefix`,
     /// `ProfileNamePrefix`, and `TemplateNamePrefix` are mutually
     /// exclusive. Use the parameter that matches your `ShareResourceType`.
-    pub fn listShareInvitations(self: *Self, allocator: std.mem.Allocator, input: list_share_invitations.ListShareInvitationsInput, options: list_share_invitations.Options) !list_share_invitations.ListShareInvitationsOutput {
+    pub fn listShareInvitations(self: *Self, allocator: std.mem.Allocator, input: list_share_invitations.ListShareInvitationsInput, options: CallOptions) !list_share_invitations.ListShareInvitationsOutput {
         return list_share_invitations.execute(self, allocator, input, options);
     }
 
@@ -605,22 +606,22 @@ pub const Client = struct {
     ///
     /// The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a
     /// profile ARN, or review template ARN.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// List review template shares.
-    pub fn listTemplateShares(self: *Self, allocator: std.mem.Allocator, input: list_template_shares.ListTemplateSharesInput, options: list_template_shares.Options) !list_template_shares.ListTemplateSharesOutput {
+    pub fn listTemplateShares(self: *Self, allocator: std.mem.Allocator, input: list_template_shares.ListTemplateSharesInput, options: CallOptions) !list_template_shares.ListTemplateSharesOutput {
         return list_template_shares.execute(self, allocator, input, options);
     }
 
     /// List the workload shares associated with the workload.
-    pub fn listWorkloadShares(self: *Self, allocator: std.mem.Allocator, input: list_workload_shares.ListWorkloadSharesInput, options: list_workload_shares.Options) !list_workload_shares.ListWorkloadSharesOutput {
+    pub fn listWorkloadShares(self: *Self, allocator: std.mem.Allocator, input: list_workload_shares.ListWorkloadSharesInput, options: CallOptions) !list_workload_shares.ListWorkloadSharesOutput {
         return list_workload_shares.execute(self, allocator, input, options);
     }
 
     /// Paginated list of workloads.
-    pub fn listWorkloads(self: *Self, allocator: std.mem.Allocator, input: list_workloads.ListWorkloadsInput, options: list_workloads.Options) !list_workloads.ListWorkloadsOutput {
+    pub fn listWorkloads(self: *Self, allocator: std.mem.Allocator, input: list_workloads.ListWorkloadsInput, options: CallOptions) !list_workloads.ListWorkloadsOutput {
         return list_workloads.execute(self, allocator, input, options);
     }
 
@@ -628,7 +629,7 @@ pub const Client = struct {
     ///
     /// The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a
     /// profile ARN, or review template ARN.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -640,48 +641,48 @@ pub const Client = struct {
     /// To specify multiple tags, use separate **tagKeys** parameters, for example:
     ///
     /// `DELETE /tags/WorkloadArn?tagKeys=key1&tagKeys=key2`
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Update the answer to a specific question in a workload review.
-    pub fn updateAnswer(self: *Self, allocator: std.mem.Allocator, input: update_answer.UpdateAnswerInput, options: update_answer.Options) !update_answer.UpdateAnswerOutput {
+    pub fn updateAnswer(self: *Self, allocator: std.mem.Allocator, input: update_answer.UpdateAnswerInput, options: CallOptions) !update_answer.UpdateAnswerOutput {
         return update_answer.execute(self, allocator, input, options);
     }
 
     /// Update whether the Amazon Web Services account is opted into organization
     /// sharing and discovery integration features.
-    pub fn updateGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: update_global_settings.UpdateGlobalSettingsInput, options: update_global_settings.Options) !update_global_settings.UpdateGlobalSettingsOutput {
+    pub fn updateGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: update_global_settings.UpdateGlobalSettingsInput, options: CallOptions) !update_global_settings.UpdateGlobalSettingsOutput {
         return update_global_settings.execute(self, allocator, input, options);
     }
 
     /// Update integration features.
-    pub fn updateIntegration(self: *Self, allocator: std.mem.Allocator, input: update_integration.UpdateIntegrationInput, options: update_integration.Options) !update_integration.UpdateIntegrationOutput {
+    pub fn updateIntegration(self: *Self, allocator: std.mem.Allocator, input: update_integration.UpdateIntegrationInput, options: CallOptions) !update_integration.UpdateIntegrationOutput {
         return update_integration.execute(self, allocator, input, options);
     }
 
     /// Update lens review for a particular workload.
-    pub fn updateLensReview(self: *Self, allocator: std.mem.Allocator, input: update_lens_review.UpdateLensReviewInput, options: update_lens_review.Options) !update_lens_review.UpdateLensReviewOutput {
+    pub fn updateLensReview(self: *Self, allocator: std.mem.Allocator, input: update_lens_review.UpdateLensReviewInput, options: CallOptions) !update_lens_review.UpdateLensReviewOutput {
         return update_lens_review.execute(self, allocator, input, options);
     }
 
     /// Update a profile.
-    pub fn updateProfile(self: *Self, allocator: std.mem.Allocator, input: update_profile.UpdateProfileInput, options: update_profile.Options) !update_profile.UpdateProfileOutput {
+    pub fn updateProfile(self: *Self, allocator: std.mem.Allocator, input: update_profile.UpdateProfileInput, options: CallOptions) !update_profile.UpdateProfileOutput {
         return update_profile.execute(self, allocator, input, options);
     }
 
     /// Update a review template.
-    pub fn updateReviewTemplate(self: *Self, allocator: std.mem.Allocator, input: update_review_template.UpdateReviewTemplateInput, options: update_review_template.Options) !update_review_template.UpdateReviewTemplateOutput {
+    pub fn updateReviewTemplate(self: *Self, allocator: std.mem.Allocator, input: update_review_template.UpdateReviewTemplateInput, options: CallOptions) !update_review_template.UpdateReviewTemplateOutput {
         return update_review_template.execute(self, allocator, input, options);
     }
 
     /// Update a review template answer.
-    pub fn updateReviewTemplateAnswer(self: *Self, allocator: std.mem.Allocator, input: update_review_template_answer.UpdateReviewTemplateAnswerInput, options: update_review_template_answer.Options) !update_review_template_answer.UpdateReviewTemplateAnswerOutput {
+    pub fn updateReviewTemplateAnswer(self: *Self, allocator: std.mem.Allocator, input: update_review_template_answer.UpdateReviewTemplateAnswerInput, options: CallOptions) !update_review_template_answer.UpdateReviewTemplateAnswerOutput {
         return update_review_template_answer.execute(self, allocator, input, options);
     }
 
     /// Update a lens review associated with a review template.
-    pub fn updateReviewTemplateLensReview(self: *Self, allocator: std.mem.Allocator, input: update_review_template_lens_review.UpdateReviewTemplateLensReviewInput, options: update_review_template_lens_review.Options) !update_review_template_lens_review.UpdateReviewTemplateLensReviewOutput {
+    pub fn updateReviewTemplateLensReview(self: *Self, allocator: std.mem.Allocator, input: update_review_template_lens_review.UpdateReviewTemplateLensReviewInput, options: CallOptions) !update_review_template_lens_review.UpdateReviewTemplateLensReviewOutput {
         return update_review_template_lens_review.execute(self, allocator, input, options);
     }
 
@@ -689,32 +690,32 @@ pub const Client = struct {
     ///
     /// This API operation can be called independently of any resource. Previous
     /// documentation implied that a workload ARN must be specified.
-    pub fn updateShareInvitation(self: *Self, allocator: std.mem.Allocator, input: update_share_invitation.UpdateShareInvitationInput, options: update_share_invitation.Options) !update_share_invitation.UpdateShareInvitationOutput {
+    pub fn updateShareInvitation(self: *Self, allocator: std.mem.Allocator, input: update_share_invitation.UpdateShareInvitationInput, options: CallOptions) !update_share_invitation.UpdateShareInvitationOutput {
         return update_share_invitation.execute(self, allocator, input, options);
     }
 
     /// Update an existing workload.
-    pub fn updateWorkload(self: *Self, allocator: std.mem.Allocator, input: update_workload.UpdateWorkloadInput, options: update_workload.Options) !update_workload.UpdateWorkloadOutput {
+    pub fn updateWorkload(self: *Self, allocator: std.mem.Allocator, input: update_workload.UpdateWorkloadInput, options: CallOptions) !update_workload.UpdateWorkloadOutput {
         return update_workload.execute(self, allocator, input, options);
     }
 
     /// Update a workload share.
-    pub fn updateWorkloadShare(self: *Self, allocator: std.mem.Allocator, input: update_workload_share.UpdateWorkloadShareInput, options: update_workload_share.Options) !update_workload_share.UpdateWorkloadShareOutput {
+    pub fn updateWorkloadShare(self: *Self, allocator: std.mem.Allocator, input: update_workload_share.UpdateWorkloadShareInput, options: CallOptions) !update_workload_share.UpdateWorkloadShareOutput {
         return update_workload_share.execute(self, allocator, input, options);
     }
 
     /// Upgrade lens review for a particular workload.
-    pub fn upgradeLensReview(self: *Self, allocator: std.mem.Allocator, input: upgrade_lens_review.UpgradeLensReviewInput, options: upgrade_lens_review.Options) !upgrade_lens_review.UpgradeLensReviewOutput {
+    pub fn upgradeLensReview(self: *Self, allocator: std.mem.Allocator, input: upgrade_lens_review.UpgradeLensReviewInput, options: CallOptions) !upgrade_lens_review.UpgradeLensReviewOutput {
         return upgrade_lens_review.execute(self, allocator, input, options);
     }
 
     /// Upgrade a profile.
-    pub fn upgradeProfileVersion(self: *Self, allocator: std.mem.Allocator, input: upgrade_profile_version.UpgradeProfileVersionInput, options: upgrade_profile_version.Options) !upgrade_profile_version.UpgradeProfileVersionOutput {
+    pub fn upgradeProfileVersion(self: *Self, allocator: std.mem.Allocator, input: upgrade_profile_version.UpgradeProfileVersionInput, options: CallOptions) !upgrade_profile_version.UpgradeProfileVersionOutput {
         return upgrade_profile_version.execute(self, allocator, input, options);
     }
 
     /// Upgrade the lens review of a review template.
-    pub fn upgradeReviewTemplateLensReview(self: *Self, allocator: std.mem.Allocator, input: upgrade_review_template_lens_review.UpgradeReviewTemplateLensReviewInput, options: upgrade_review_template_lens_review.Options) !upgrade_review_template_lens_review.UpgradeReviewTemplateLensReviewOutput {
+    pub fn upgradeReviewTemplateLensReview(self: *Self, allocator: std.mem.Allocator, input: upgrade_review_template_lens_review.UpgradeReviewTemplateLensReviewInput, options: CallOptions) !upgrade_review_template_lens_review.UpgradeReviewTemplateLensReviewOutput {
         return upgrade_review_template_lens_review.execute(self, allocator, input, options);
     }
 

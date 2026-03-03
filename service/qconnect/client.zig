@@ -94,6 +94,7 @@ const update_message_template_metadata = @import("update_message_template_metada
 const update_quick_response = @import("update_quick_response.zig");
 const update_session = @import("update_session.zig");
 const update_session_data = @import("update_session_data.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -128,55 +129,55 @@ pub const Client = struct {
     /// After the version is activated, the previous active version will be
     /// deactivated automatically. You can use the `$ACTIVE_VERSION` qualifier later
     /// to reference the version that is in active status.
-    pub fn activateMessageTemplate(self: *Self, allocator: std.mem.Allocator, input: activate_message_template.ActivateMessageTemplateInput, options: activate_message_template.Options) !activate_message_template.ActivateMessageTemplateOutput {
+    pub fn activateMessageTemplate(self: *Self, allocator: std.mem.Allocator, input: activate_message_template.ActivateMessageTemplateInput, options: CallOptions) !activate_message_template.ActivateMessageTemplateOutput {
         return activate_message_template.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon Q in Connect AI Agent.
-    pub fn createAiAgent(self: *Self, allocator: std.mem.Allocator, input: create_ai_agent.CreateAIAgentInput, options: create_ai_agent.Options) !create_ai_agent.CreateAIAgentOutput {
+    pub fn createAiAgent(self: *Self, allocator: std.mem.Allocator, input: create_ai_agent.CreateAIAgentInput, options: CallOptions) !create_ai_agent.CreateAIAgentOutput {
         return create_ai_agent.execute(self, allocator, input, options);
     }
 
     /// Creates and Amazon Q in Connect AI Agent version.
-    pub fn createAiAgentVersion(self: *Self, allocator: std.mem.Allocator, input: create_ai_agent_version.CreateAIAgentVersionInput, options: create_ai_agent_version.Options) !create_ai_agent_version.CreateAIAgentVersionOutput {
+    pub fn createAiAgentVersion(self: *Self, allocator: std.mem.Allocator, input: create_ai_agent_version.CreateAIAgentVersionInput, options: CallOptions) !create_ai_agent_version.CreateAIAgentVersionOutput {
         return create_ai_agent_version.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon Q in Connect AI Guardrail.
-    pub fn createAiGuardrail(self: *Self, allocator: std.mem.Allocator, input: create_ai_guardrail.CreateAIGuardrailInput, options: create_ai_guardrail.Options) !create_ai_guardrail.CreateAIGuardrailOutput {
+    pub fn createAiGuardrail(self: *Self, allocator: std.mem.Allocator, input: create_ai_guardrail.CreateAIGuardrailInput, options: CallOptions) !create_ai_guardrail.CreateAIGuardrailOutput {
         return create_ai_guardrail.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon Q in Connect AI Guardrail version.
-    pub fn createAiGuardrailVersion(self: *Self, allocator: std.mem.Allocator, input: create_ai_guardrail_version.CreateAIGuardrailVersionInput, options: create_ai_guardrail_version.Options) !create_ai_guardrail_version.CreateAIGuardrailVersionOutput {
+    pub fn createAiGuardrailVersion(self: *Self, allocator: std.mem.Allocator, input: create_ai_guardrail_version.CreateAIGuardrailVersionInput, options: CallOptions) !create_ai_guardrail_version.CreateAIGuardrailVersionOutput {
         return create_ai_guardrail_version.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon Q in Connect AI Prompt.
-    pub fn createAiPrompt(self: *Self, allocator: std.mem.Allocator, input: create_ai_prompt.CreateAIPromptInput, options: create_ai_prompt.Options) !create_ai_prompt.CreateAIPromptOutput {
+    pub fn createAiPrompt(self: *Self, allocator: std.mem.Allocator, input: create_ai_prompt.CreateAIPromptInput, options: CallOptions) !create_ai_prompt.CreateAIPromptOutput {
         return create_ai_prompt.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon Q in Connect AI Prompt version.
-    pub fn createAiPromptVersion(self: *Self, allocator: std.mem.Allocator, input: create_ai_prompt_version.CreateAIPromptVersionInput, options: create_ai_prompt_version.Options) !create_ai_prompt_version.CreateAIPromptVersionOutput {
+    pub fn createAiPromptVersion(self: *Self, allocator: std.mem.Allocator, input: create_ai_prompt_version.CreateAIPromptVersionInput, options: CallOptions) !create_ai_prompt_version.CreateAIPromptVersionOutput {
         return create_ai_prompt_version.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon Q in Connect assistant.
-    pub fn createAssistant(self: *Self, allocator: std.mem.Allocator, input: create_assistant.CreateAssistantInput, options: create_assistant.Options) !create_assistant.CreateAssistantOutput {
+    pub fn createAssistant(self: *Self, allocator: std.mem.Allocator, input: create_assistant.CreateAssistantInput, options: CallOptions) !create_assistant.CreateAssistantOutput {
         return create_assistant.execute(self, allocator, input, options);
     }
 
     /// Creates an association between an Amazon Q in Connect assistant and another
     /// resource. Currently, the only supported association is with a knowledge
     /// base. An assistant can have only a single association.
-    pub fn createAssistantAssociation(self: *Self, allocator: std.mem.Allocator, input: create_assistant_association.CreateAssistantAssociationInput, options: create_assistant_association.Options) !create_assistant_association.CreateAssistantAssociationOutput {
+    pub fn createAssistantAssociation(self: *Self, allocator: std.mem.Allocator, input: create_assistant_association.CreateAssistantAssociationInput, options: CallOptions) !create_assistant_association.CreateAssistantAssociationOutput {
         return create_assistant_association.execute(self, allocator, input, options);
     }
 
     /// Creates Amazon Q in Connect content. Before to calling this API, use
     /// [StartContentUpload](https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html) to upload an asset.
-    pub fn createContent(self: *Self, allocator: std.mem.Allocator, input: create_content.CreateContentInput, options: create_content.Options) !create_content.CreateContentOutput {
+    pub fn createContent(self: *Self, allocator: std.mem.Allocator, input: create_content.CreateContentInput, options: CallOptions) !create_content.CreateContentOutput {
         return create_content.execute(self, allocator, input, options);
     }
 
@@ -197,7 +198,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Integrate Amazon Q in Connect with step-by-step
     /// guides](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html) in the *Amazon Connect Administrator Guide*.
-    pub fn createContentAssociation(self: *Self, allocator: std.mem.Allocator, input: create_content_association.CreateContentAssociationInput, options: create_content_association.Options) !create_content_association.CreateContentAssociationOutput {
+    pub fn createContentAssociation(self: *Self, allocator: std.mem.Allocator, input: create_content_association.CreateContentAssociationInput, options: CallOptions) !create_content_association.CreateContentAssociationOutput {
         return create_content_association.execute(self, allocator, input, options);
     }
 
@@ -217,7 +218,7 @@ pub const Client = struct {
     /// * Call
     ///   [CreateDataIntegration](https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html) to recreate the DataIntegration or a create different one.
     /// * Call CreateKnowledgeBase.
-    pub fn createKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: create_knowledge_base.CreateKnowledgeBaseInput, options: create_knowledge_base.Options) !create_knowledge_base.CreateKnowledgeBaseOutput {
+    pub fn createKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: create_knowledge_base.CreateKnowledgeBaseInput, options: CallOptions) !create_knowledge_base.CreateKnowledgeBaseOutput {
         return create_knowledge_base.execute(self, allocator, input, options);
     }
 
@@ -226,7 +227,7 @@ pub const Client = struct {
     /// the message template is immutable and cannot be modified after creation.
     /// After the message template is created, you can use the `$LATEST` qualifier
     /// to reference the created message template.
-    pub fn createMessageTemplate(self: *Self, allocator: std.mem.Allocator, input: create_message_template.CreateMessageTemplateInput, options: create_message_template.Options) !create_message_template.CreateMessageTemplateOutput {
+    pub fn createMessageTemplate(self: *Self, allocator: std.mem.Allocator, input: create_message_template.CreateMessageTemplateInput, options: CallOptions) !create_message_template.CreateMessageTemplateOutput {
         return create_message_template.execute(self, allocator, input, options);
     }
 
@@ -236,7 +237,7 @@ pub const Client = struct {
     /// attachment file should be encoded using base64 encoding. After the file is
     /// uploaded, you can use the pre-signed Amazon S3 URL returned in response to
     /// download the uploaded file.
-    pub fn createMessageTemplateAttachment(self: *Self, allocator: std.mem.Allocator, input: create_message_template_attachment.CreateMessageTemplateAttachmentInput, options: create_message_template_attachment.Options) !create_message_template_attachment.CreateMessageTemplateAttachmentOutput {
+    pub fn createMessageTemplateAttachment(self: *Self, allocator: std.mem.Allocator, input: create_message_template_attachment.CreateMessageTemplateAttachmentInput, options: CallOptions) !create_message_template_attachment.CreateMessageTemplateAttachmentOutput {
         return create_message_template_attachment.execute(self, allocator, input, options);
     }
 
@@ -251,71 +252,71 @@ pub const Client = struct {
     /// requests are made while the message template remains the same, only the
     /// first invocation creates a new version and the succeeding requests will
     /// return the same response as the first invocation.
-    pub fn createMessageTemplateVersion(self: *Self, allocator: std.mem.Allocator, input: create_message_template_version.CreateMessageTemplateVersionInput, options: create_message_template_version.Options) !create_message_template_version.CreateMessageTemplateVersionOutput {
+    pub fn createMessageTemplateVersion(self: *Self, allocator: std.mem.Allocator, input: create_message_template_version.CreateMessageTemplateVersionInput, options: CallOptions) !create_message_template_version.CreateMessageTemplateVersionOutput {
         return create_message_template_version.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon Q in Connect quick response.
-    pub fn createQuickResponse(self: *Self, allocator: std.mem.Allocator, input: create_quick_response.CreateQuickResponseInput, options: create_quick_response.Options) !create_quick_response.CreateQuickResponseOutput {
+    pub fn createQuickResponse(self: *Self, allocator: std.mem.Allocator, input: create_quick_response.CreateQuickResponseInput, options: CallOptions) !create_quick_response.CreateQuickResponseOutput {
         return create_quick_response.execute(self, allocator, input, options);
     }
 
     /// Creates a session. A session is a contextual container used for generating
     /// recommendations. Amazon Connect creates a new Amazon Q in Connect session
     /// for each contact on which Amazon Q in Connect is enabled.
-    pub fn createSession(self: *Self, allocator: std.mem.Allocator, input: create_session.CreateSessionInput, options: create_session.Options) !create_session.CreateSessionOutput {
+    pub fn createSession(self: *Self, allocator: std.mem.Allocator, input: create_session.CreateSessionInput, options: CallOptions) !create_session.CreateSessionOutput {
         return create_session.execute(self, allocator, input, options);
     }
 
     /// Deactivates a specific version of the Amazon Q in Connect message template .
     /// After the version is deactivated, you can no longer use the
     /// `$ACTIVE_VERSION` qualifier to reference the version in active status.
-    pub fn deactivateMessageTemplate(self: *Self, allocator: std.mem.Allocator, input: deactivate_message_template.DeactivateMessageTemplateInput, options: deactivate_message_template.Options) !deactivate_message_template.DeactivateMessageTemplateOutput {
+    pub fn deactivateMessageTemplate(self: *Self, allocator: std.mem.Allocator, input: deactivate_message_template.DeactivateMessageTemplateInput, options: CallOptions) !deactivate_message_template.DeactivateMessageTemplateOutput {
         return deactivate_message_template.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Q in Connect AI Agent.
-    pub fn deleteAiAgent(self: *Self, allocator: std.mem.Allocator, input: delete_ai_agent.DeleteAIAgentInput, options: delete_ai_agent.Options) !delete_ai_agent.DeleteAIAgentOutput {
+    pub fn deleteAiAgent(self: *Self, allocator: std.mem.Allocator, input: delete_ai_agent.DeleteAIAgentInput, options: CallOptions) !delete_ai_agent.DeleteAIAgentOutput {
         return delete_ai_agent.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Q in Connect AI Agent Version.
-    pub fn deleteAiAgentVersion(self: *Self, allocator: std.mem.Allocator, input: delete_ai_agent_version.DeleteAIAgentVersionInput, options: delete_ai_agent_version.Options) !delete_ai_agent_version.DeleteAIAgentVersionOutput {
+    pub fn deleteAiAgentVersion(self: *Self, allocator: std.mem.Allocator, input: delete_ai_agent_version.DeleteAIAgentVersionInput, options: CallOptions) !delete_ai_agent_version.DeleteAIAgentVersionOutput {
         return delete_ai_agent_version.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Q in Connect AI Guardrail.
-    pub fn deleteAiGuardrail(self: *Self, allocator: std.mem.Allocator, input: delete_ai_guardrail.DeleteAIGuardrailInput, options: delete_ai_guardrail.Options) !delete_ai_guardrail.DeleteAIGuardrailOutput {
+    pub fn deleteAiGuardrail(self: *Self, allocator: std.mem.Allocator, input: delete_ai_guardrail.DeleteAIGuardrailInput, options: CallOptions) !delete_ai_guardrail.DeleteAIGuardrailOutput {
         return delete_ai_guardrail.execute(self, allocator, input, options);
     }
 
     /// Delete and Amazon Q in Connect AI Guardrail version.
-    pub fn deleteAiGuardrailVersion(self: *Self, allocator: std.mem.Allocator, input: delete_ai_guardrail_version.DeleteAIGuardrailVersionInput, options: delete_ai_guardrail_version.Options) !delete_ai_guardrail_version.DeleteAIGuardrailVersionOutput {
+    pub fn deleteAiGuardrailVersion(self: *Self, allocator: std.mem.Allocator, input: delete_ai_guardrail_version.DeleteAIGuardrailVersionInput, options: CallOptions) !delete_ai_guardrail_version.DeleteAIGuardrailVersionOutput {
         return delete_ai_guardrail_version.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Q in Connect AI Prompt.
-    pub fn deleteAiPrompt(self: *Self, allocator: std.mem.Allocator, input: delete_ai_prompt.DeleteAIPromptInput, options: delete_ai_prompt.Options) !delete_ai_prompt.DeleteAIPromptOutput {
+    pub fn deleteAiPrompt(self: *Self, allocator: std.mem.Allocator, input: delete_ai_prompt.DeleteAIPromptInput, options: CallOptions) !delete_ai_prompt.DeleteAIPromptOutput {
         return delete_ai_prompt.execute(self, allocator, input, options);
     }
 
     /// Delete and Amazon Q in Connect AI Prompt version.
-    pub fn deleteAiPromptVersion(self: *Self, allocator: std.mem.Allocator, input: delete_ai_prompt_version.DeleteAIPromptVersionInput, options: delete_ai_prompt_version.Options) !delete_ai_prompt_version.DeleteAIPromptVersionOutput {
+    pub fn deleteAiPromptVersion(self: *Self, allocator: std.mem.Allocator, input: delete_ai_prompt_version.DeleteAIPromptVersionInput, options: CallOptions) !delete_ai_prompt_version.DeleteAIPromptVersionOutput {
         return delete_ai_prompt_version.execute(self, allocator, input, options);
     }
 
     /// Deletes an assistant.
-    pub fn deleteAssistant(self: *Self, allocator: std.mem.Allocator, input: delete_assistant.DeleteAssistantInput, options: delete_assistant.Options) !delete_assistant.DeleteAssistantOutput {
+    pub fn deleteAssistant(self: *Self, allocator: std.mem.Allocator, input: delete_assistant.DeleteAssistantInput, options: CallOptions) !delete_assistant.DeleteAssistantOutput {
         return delete_assistant.execute(self, allocator, input, options);
     }
 
     /// Deletes an assistant association.
-    pub fn deleteAssistantAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_assistant_association.DeleteAssistantAssociationInput, options: delete_assistant_association.Options) !delete_assistant_association.DeleteAssistantAssociationOutput {
+    pub fn deleteAssistantAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_assistant_association.DeleteAssistantAssociationInput, options: CallOptions) !delete_assistant_association.DeleteAssistantAssociationOutput {
         return delete_assistant_association.execute(self, allocator, input, options);
     }
 
     /// Deletes the content.
-    pub fn deleteContent(self: *Self, allocator: std.mem.Allocator, input: delete_content.DeleteContentInput, options: delete_content.Options) !delete_content.DeleteContentOutput {
+    pub fn deleteContent(self: *Self, allocator: std.mem.Allocator, input: delete_content.DeleteContentInput, options: CallOptions) !delete_content.DeleteContentOutput {
         return delete_content.execute(self, allocator, input, options);
     }
 
@@ -324,12 +325,12 @@ pub const Client = struct {
     /// For more information about content associations--what they are and when they
     /// are used--see [Integrate Amazon Q in Connect with step-by-step
     /// guides](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html) in the *Amazon Connect Administrator Guide*.
-    pub fn deleteContentAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_content_association.DeleteContentAssociationInput, options: delete_content_association.Options) !delete_content_association.DeleteContentAssociationOutput {
+    pub fn deleteContentAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_content_association.DeleteContentAssociationInput, options: CallOptions) !delete_content_association.DeleteContentAssociationOutput {
         return delete_content_association.execute(self, allocator, input, options);
     }
 
     /// Deletes the quick response import job.
-    pub fn deleteImportJob(self: *Self, allocator: std.mem.Allocator, input: delete_import_job.DeleteImportJobInput, options: delete_import_job.Options) !delete_import_job.DeleteImportJobOutput {
+    pub fn deleteImportJob(self: *Self, allocator: std.mem.Allocator, input: delete_import_job.DeleteImportJobInput, options: CallOptions) !delete_import_job.DeleteImportJobOutput {
         return delete_import_job.execute(self, allocator, input, options);
     }
 
@@ -338,7 +339,7 @@ pub const Client = struct {
     /// When you use this API to delete an external knowledge base such as
     /// Salesforce or ServiceNow, you must also delete the [Amazon
     /// AppIntegrations](https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html) DataIntegration. This is because you can't reuse the DataIntegration after it's been associated with an external knowledge base. However, you can delete and recreate it. See [DeleteDataIntegration](https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html) and [CreateDataIntegration](https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html) in the *Amazon AppIntegrations API Reference*.
-    pub fn deleteKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: delete_knowledge_base.DeleteKnowledgeBaseInput, options: delete_knowledge_base.Options) !delete_knowledge_base.DeleteKnowledgeBaseOutput {
+    pub fn deleteKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: delete_knowledge_base.DeleteKnowledgeBaseInput, options: CallOptions) !delete_knowledge_base.DeleteKnowledgeBaseOutput {
         return delete_knowledge_base.execute(self, allocator, input, options);
     }
 
@@ -348,49 +349,49 @@ pub const Client = struct {
     /// `<message-template-id>:<versionNumber>` to delete a specific version of the
     /// message template. If it is not supplied, the message template and all
     /// available versions will be deleted.
-    pub fn deleteMessageTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_message_template.DeleteMessageTemplateInput, options: delete_message_template.Options) !delete_message_template.DeleteMessageTemplateOutput {
+    pub fn deleteMessageTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_message_template.DeleteMessageTemplateInput, options: CallOptions) !delete_message_template.DeleteMessageTemplateOutput {
         return delete_message_template.execute(self, allocator, input, options);
     }
 
     /// Deletes the attachment file from the Amazon Q in Connect message template
     /// that is referenced by `$LATEST` qualifier. Attachments on available message
     /// template versions will remain unchanged.
-    pub fn deleteMessageTemplateAttachment(self: *Self, allocator: std.mem.Allocator, input: delete_message_template_attachment.DeleteMessageTemplateAttachmentInput, options: delete_message_template_attachment.Options) !delete_message_template_attachment.DeleteMessageTemplateAttachmentOutput {
+    pub fn deleteMessageTemplateAttachment(self: *Self, allocator: std.mem.Allocator, input: delete_message_template_attachment.DeleteMessageTemplateAttachmentInput, options: CallOptions) !delete_message_template_attachment.DeleteMessageTemplateAttachmentOutput {
         return delete_message_template_attachment.execute(self, allocator, input, options);
     }
 
     /// Deletes a quick response.
-    pub fn deleteQuickResponse(self: *Self, allocator: std.mem.Allocator, input: delete_quick_response.DeleteQuickResponseInput, options: delete_quick_response.Options) !delete_quick_response.DeleteQuickResponseOutput {
+    pub fn deleteQuickResponse(self: *Self, allocator: std.mem.Allocator, input: delete_quick_response.DeleteQuickResponseInput, options: CallOptions) !delete_quick_response.DeleteQuickResponseOutput {
         return delete_quick_response.execute(self, allocator, input, options);
     }
 
     /// Gets an Amazon Q in Connect AI Agent.
-    pub fn getAiAgent(self: *Self, allocator: std.mem.Allocator, input: get_ai_agent.GetAIAgentInput, options: get_ai_agent.Options) !get_ai_agent.GetAIAgentOutput {
+    pub fn getAiAgent(self: *Self, allocator: std.mem.Allocator, input: get_ai_agent.GetAIAgentInput, options: CallOptions) !get_ai_agent.GetAIAgentOutput {
         return get_ai_agent.execute(self, allocator, input, options);
     }
 
     /// Gets the Amazon Q in Connect AI Guardrail.
-    pub fn getAiGuardrail(self: *Self, allocator: std.mem.Allocator, input: get_ai_guardrail.GetAIGuardrailInput, options: get_ai_guardrail.Options) !get_ai_guardrail.GetAIGuardrailOutput {
+    pub fn getAiGuardrail(self: *Self, allocator: std.mem.Allocator, input: get_ai_guardrail.GetAIGuardrailInput, options: CallOptions) !get_ai_guardrail.GetAIGuardrailOutput {
         return get_ai_guardrail.execute(self, allocator, input, options);
     }
 
     /// Gets and Amazon Q in Connect AI Prompt.
-    pub fn getAiPrompt(self: *Self, allocator: std.mem.Allocator, input: get_ai_prompt.GetAIPromptInput, options: get_ai_prompt.Options) !get_ai_prompt.GetAIPromptOutput {
+    pub fn getAiPrompt(self: *Self, allocator: std.mem.Allocator, input: get_ai_prompt.GetAIPromptInput, options: CallOptions) !get_ai_prompt.GetAIPromptOutput {
         return get_ai_prompt.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about an assistant.
-    pub fn getAssistant(self: *Self, allocator: std.mem.Allocator, input: get_assistant.GetAssistantInput, options: get_assistant.Options) !get_assistant.GetAssistantOutput {
+    pub fn getAssistant(self: *Self, allocator: std.mem.Allocator, input: get_assistant.GetAssistantInput, options: CallOptions) !get_assistant.GetAssistantOutput {
         return get_assistant.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about an assistant association.
-    pub fn getAssistantAssociation(self: *Self, allocator: std.mem.Allocator, input: get_assistant_association.GetAssistantAssociationInput, options: get_assistant_association.Options) !get_assistant_association.GetAssistantAssociationOutput {
+    pub fn getAssistantAssociation(self: *Self, allocator: std.mem.Allocator, input: get_assistant_association.GetAssistantAssociationInput, options: CallOptions) !get_assistant_association.GetAssistantAssociationOutput {
         return get_assistant_association.execute(self, allocator, input, options);
     }
 
     /// Retrieves content, including a pre-signed URL to download the content.
-    pub fn getContent(self: *Self, allocator: std.mem.Allocator, input: get_content.GetContentInput, options: get_content.Options) !get_content.GetContentOutput {
+    pub fn getContent(self: *Self, allocator: std.mem.Allocator, input: get_content.GetContentInput, options: CallOptions) !get_content.GetContentOutput {
         return get_content.execute(self, allocator, input, options);
     }
 
@@ -399,22 +400,22 @@ pub const Client = struct {
     /// For more information about content associations--what they are and when they
     /// are used--see [Integrate Amazon Q in Connect with step-by-step
     /// guides](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html) in the *Amazon Connect Administrator Guide*.
-    pub fn getContentAssociation(self: *Self, allocator: std.mem.Allocator, input: get_content_association.GetContentAssociationInput, options: get_content_association.Options) !get_content_association.GetContentAssociationOutput {
+    pub fn getContentAssociation(self: *Self, allocator: std.mem.Allocator, input: get_content_association.GetContentAssociationInput, options: CallOptions) !get_content_association.GetContentAssociationOutput {
         return get_content_association.execute(self, allocator, input, options);
     }
 
     /// Retrieves summary information about the content.
-    pub fn getContentSummary(self: *Self, allocator: std.mem.Allocator, input: get_content_summary.GetContentSummaryInput, options: get_content_summary.Options) !get_content_summary.GetContentSummaryOutput {
+    pub fn getContentSummary(self: *Self, allocator: std.mem.Allocator, input: get_content_summary.GetContentSummaryInput, options: CallOptions) !get_content_summary.GetContentSummaryOutput {
         return get_content_summary.execute(self, allocator, input, options);
     }
 
     /// Retrieves the started import job.
-    pub fn getImportJob(self: *Self, allocator: std.mem.Allocator, input: get_import_job.GetImportJobInput, options: get_import_job.Options) !get_import_job.GetImportJobOutput {
+    pub fn getImportJob(self: *Self, allocator: std.mem.Allocator, input: get_import_job.GetImportJobInput, options: CallOptions) !get_import_job.GetImportJobOutput {
         return get_import_job.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the knowledge base.
-    pub fn getKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: get_knowledge_base.GetKnowledgeBaseInput, options: get_knowledge_base.Options) !get_knowledge_base.GetKnowledgeBaseOutput {
+    pub fn getKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: get_knowledge_base.GetKnowledgeBaseInput, options: CallOptions) !get_knowledge_base.GetKnowledgeBaseOutput {
         return get_knowledge_base.execute(self, allocator, input, options);
     }
 
@@ -423,17 +424,17 @@ pub const Client = struct {
     /// `<message-template-id>:<qualifier>`, which is either an actual version
     /// number or an Amazon Q Connect managed qualifier `$ACTIVE_VERSION` |
     /// `$LATEST`. If it is not supplied, then `$LATEST` is assumed implicitly.
-    pub fn getMessageTemplate(self: *Self, allocator: std.mem.Allocator, input: get_message_template.GetMessageTemplateInput, options: get_message_template.Options) !get_message_template.GetMessageTemplateOutput {
+    pub fn getMessageTemplate(self: *Self, allocator: std.mem.Allocator, input: get_message_template.GetMessageTemplateInput, options: CallOptions) !get_message_template.GetMessageTemplateOutput {
         return get_message_template.execute(self, allocator, input, options);
     }
 
     /// Retrieves next message on an Amazon Q in Connect session.
-    pub fn getNextMessage(self: *Self, allocator: std.mem.Allocator, input: get_next_message.GetNextMessageInput, options: get_next_message.Options) !get_next_message.GetNextMessageOutput {
+    pub fn getNextMessage(self: *Self, allocator: std.mem.Allocator, input: get_next_message.GetNextMessageInput, options: CallOptions) !get_next_message.GetNextMessageOutput {
         return get_next_message.execute(self, allocator, input, options);
     }
 
     /// Retrieves the quick response.
-    pub fn getQuickResponse(self: *Self, allocator: std.mem.Allocator, input: get_quick_response.GetQuickResponseInput, options: get_quick_response.Options) !get_quick_response.GetQuickResponseOutput {
+    pub fn getQuickResponse(self: *Self, allocator: std.mem.Allocator, input: get_quick_response.GetQuickResponseInput, options: CallOptions) !get_quick_response.GetQuickResponseOutput {
         return get_quick_response.execute(self, allocator, input, options);
     }
 
@@ -445,52 +446,52 @@ pub const Client = struct {
     /// Retrieves recommendations for the specified session. To avoid retrieving the
     /// same recommendations in subsequent calls, use
     /// [NotifyRecommendationsReceived](https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_NotifyRecommendationsReceived.html). This API supports long-polling behavior with the `waitTimeSeconds` parameter. Short poll is the default behavior and only returns recommendations already available. To perform a manual query against an assistant, use [QueryAssistant](https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_QueryAssistant.html).
-    pub fn getRecommendations(self: *Self, allocator: std.mem.Allocator, input: get_recommendations.GetRecommendationsInput, options: get_recommendations.Options) !get_recommendations.GetRecommendationsOutput {
+    pub fn getRecommendations(self: *Self, allocator: std.mem.Allocator, input: get_recommendations.GetRecommendationsInput, options: CallOptions) !get_recommendations.GetRecommendationsOutput {
         return get_recommendations.execute(self, allocator, input, options);
     }
 
     /// Retrieves information for a specified session.
-    pub fn getSession(self: *Self, allocator: std.mem.Allocator, input: get_session.GetSessionInput, options: get_session.Options) !get_session.GetSessionOutput {
+    pub fn getSession(self: *Self, allocator: std.mem.Allocator, input: get_session.GetSessionInput, options: CallOptions) !get_session.GetSessionOutput {
         return get_session.execute(self, allocator, input, options);
     }
 
     /// List AI Agent versions.
-    pub fn listAiAgentVersions(self: *Self, allocator: std.mem.Allocator, input: list_ai_agent_versions.ListAIAgentVersionsInput, options: list_ai_agent_versions.Options) !list_ai_agent_versions.ListAIAgentVersionsOutput {
+    pub fn listAiAgentVersions(self: *Self, allocator: std.mem.Allocator, input: list_ai_agent_versions.ListAIAgentVersionsInput, options: CallOptions) !list_ai_agent_versions.ListAIAgentVersionsOutput {
         return list_ai_agent_versions.execute(self, allocator, input, options);
     }
 
     /// Lists AI Agents.
-    pub fn listAiAgents(self: *Self, allocator: std.mem.Allocator, input: list_ai_agents.ListAIAgentsInput, options: list_ai_agents.Options) !list_ai_agents.ListAIAgentsOutput {
+    pub fn listAiAgents(self: *Self, allocator: std.mem.Allocator, input: list_ai_agents.ListAIAgentsInput, options: CallOptions) !list_ai_agents.ListAIAgentsOutput {
         return list_ai_agents.execute(self, allocator, input, options);
     }
 
     /// Lists AI Guardrail versions.
-    pub fn listAiGuardrailVersions(self: *Self, allocator: std.mem.Allocator, input: list_ai_guardrail_versions.ListAIGuardrailVersionsInput, options: list_ai_guardrail_versions.Options) !list_ai_guardrail_versions.ListAIGuardrailVersionsOutput {
+    pub fn listAiGuardrailVersions(self: *Self, allocator: std.mem.Allocator, input: list_ai_guardrail_versions.ListAIGuardrailVersionsInput, options: CallOptions) !list_ai_guardrail_versions.ListAIGuardrailVersionsOutput {
         return list_ai_guardrail_versions.execute(self, allocator, input, options);
     }
 
     /// Lists the AI Guardrails available on the Amazon Q in Connect assistant.
-    pub fn listAiGuardrails(self: *Self, allocator: std.mem.Allocator, input: list_ai_guardrails.ListAIGuardrailsInput, options: list_ai_guardrails.Options) !list_ai_guardrails.ListAIGuardrailsOutput {
+    pub fn listAiGuardrails(self: *Self, allocator: std.mem.Allocator, input: list_ai_guardrails.ListAIGuardrailsInput, options: CallOptions) !list_ai_guardrails.ListAIGuardrailsOutput {
         return list_ai_guardrails.execute(self, allocator, input, options);
     }
 
     /// Lists AI Prompt versions.
-    pub fn listAiPromptVersions(self: *Self, allocator: std.mem.Allocator, input: list_ai_prompt_versions.ListAIPromptVersionsInput, options: list_ai_prompt_versions.Options) !list_ai_prompt_versions.ListAIPromptVersionsOutput {
+    pub fn listAiPromptVersions(self: *Self, allocator: std.mem.Allocator, input: list_ai_prompt_versions.ListAIPromptVersionsInput, options: CallOptions) !list_ai_prompt_versions.ListAIPromptVersionsOutput {
         return list_ai_prompt_versions.execute(self, allocator, input, options);
     }
 
     /// Lists the AI Prompts available on the Amazon Q in Connect assistant.
-    pub fn listAiPrompts(self: *Self, allocator: std.mem.Allocator, input: list_ai_prompts.ListAIPromptsInput, options: list_ai_prompts.Options) !list_ai_prompts.ListAIPromptsOutput {
+    pub fn listAiPrompts(self: *Self, allocator: std.mem.Allocator, input: list_ai_prompts.ListAIPromptsInput, options: CallOptions) !list_ai_prompts.ListAIPromptsOutput {
         return list_ai_prompts.execute(self, allocator, input, options);
     }
 
     /// Lists information about assistant associations.
-    pub fn listAssistantAssociations(self: *Self, allocator: std.mem.Allocator, input: list_assistant_associations.ListAssistantAssociationsInput, options: list_assistant_associations.Options) !list_assistant_associations.ListAssistantAssociationsOutput {
+    pub fn listAssistantAssociations(self: *Self, allocator: std.mem.Allocator, input: list_assistant_associations.ListAssistantAssociationsInput, options: CallOptions) !list_assistant_associations.ListAssistantAssociationsOutput {
         return list_assistant_associations.execute(self, allocator, input, options);
     }
 
     /// Lists information about assistants.
-    pub fn listAssistants(self: *Self, allocator: std.mem.Allocator, input: list_assistants.ListAssistantsInput, options: list_assistants.Options) !list_assistants.ListAssistantsOutput {
+    pub fn listAssistants(self: *Self, allocator: std.mem.Allocator, input: list_assistants.ListAssistantsInput, options: CallOptions) !list_assistants.ListAssistantsOutput {
         return list_assistants.execute(self, allocator, input, options);
     }
 
@@ -499,69 +500,69 @@ pub const Client = struct {
     /// For more information about content associations--what they are and when they
     /// are used--see [Integrate Amazon Q in Connect with step-by-step
     /// guides](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html) in the *Amazon Connect Administrator Guide*.
-    pub fn listContentAssociations(self: *Self, allocator: std.mem.Allocator, input: list_content_associations.ListContentAssociationsInput, options: list_content_associations.Options) !list_content_associations.ListContentAssociationsOutput {
+    pub fn listContentAssociations(self: *Self, allocator: std.mem.Allocator, input: list_content_associations.ListContentAssociationsInput, options: CallOptions) !list_content_associations.ListContentAssociationsOutput {
         return list_content_associations.execute(self, allocator, input, options);
     }
 
     /// Lists the content.
-    pub fn listContents(self: *Self, allocator: std.mem.Allocator, input: list_contents.ListContentsInput, options: list_contents.Options) !list_contents.ListContentsOutput {
+    pub fn listContents(self: *Self, allocator: std.mem.Allocator, input: list_contents.ListContentsInput, options: CallOptions) !list_contents.ListContentsOutput {
         return list_contents.execute(self, allocator, input, options);
     }
 
     /// Lists information about import jobs.
-    pub fn listImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_import_jobs.ListImportJobsInput, options: list_import_jobs.Options) !list_import_jobs.ListImportJobsOutput {
+    pub fn listImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_import_jobs.ListImportJobsInput, options: CallOptions) !list_import_jobs.ListImportJobsOutput {
         return list_import_jobs.execute(self, allocator, input, options);
     }
 
     /// Lists the knowledge bases.
-    pub fn listKnowledgeBases(self: *Self, allocator: std.mem.Allocator, input: list_knowledge_bases.ListKnowledgeBasesInput, options: list_knowledge_bases.Options) !list_knowledge_bases.ListKnowledgeBasesOutput {
+    pub fn listKnowledgeBases(self: *Self, allocator: std.mem.Allocator, input: list_knowledge_bases.ListKnowledgeBasesInput, options: CallOptions) !list_knowledge_bases.ListKnowledgeBasesOutput {
         return list_knowledge_bases.execute(self, allocator, input, options);
     }
 
     /// Lists all the available versions for the specified Amazon Q in Connect
     /// message template.
-    pub fn listMessageTemplateVersions(self: *Self, allocator: std.mem.Allocator, input: list_message_template_versions.ListMessageTemplateVersionsInput, options: list_message_template_versions.Options) !list_message_template_versions.ListMessageTemplateVersionsOutput {
+    pub fn listMessageTemplateVersions(self: *Self, allocator: std.mem.Allocator, input: list_message_template_versions.ListMessageTemplateVersionsInput, options: CallOptions) !list_message_template_versions.ListMessageTemplateVersionsOutput {
         return list_message_template_versions.execute(self, allocator, input, options);
     }
 
     /// Lists all the available Amazon Q in Connect message templates for the
     /// specified knowledge base.
-    pub fn listMessageTemplates(self: *Self, allocator: std.mem.Allocator, input: list_message_templates.ListMessageTemplatesInput, options: list_message_templates.Options) !list_message_templates.ListMessageTemplatesOutput {
+    pub fn listMessageTemplates(self: *Self, allocator: std.mem.Allocator, input: list_message_templates.ListMessageTemplatesInput, options: CallOptions) !list_message_templates.ListMessageTemplatesOutput {
         return list_message_templates.execute(self, allocator, input, options);
     }
 
     /// Lists messages on an Amazon Q in Connect session.
-    pub fn listMessages(self: *Self, allocator: std.mem.Allocator, input: list_messages.ListMessagesInput, options: list_messages.Options) !list_messages.ListMessagesOutput {
+    pub fn listMessages(self: *Self, allocator: std.mem.Allocator, input: list_messages.ListMessagesInput, options: CallOptions) !list_messages.ListMessagesOutput {
         return list_messages.execute(self, allocator, input, options);
     }
 
     /// Lists information about quick response.
-    pub fn listQuickResponses(self: *Self, allocator: std.mem.Allocator, input: list_quick_responses.ListQuickResponsesInput, options: list_quick_responses.Options) !list_quick_responses.ListQuickResponsesOutput {
+    pub fn listQuickResponses(self: *Self, allocator: std.mem.Allocator, input: list_quick_responses.ListQuickResponsesInput, options: CallOptions) !list_quick_responses.ListQuickResponsesOutput {
         return list_quick_responses.execute(self, allocator, input, options);
     }
 
     /// Retrieves AI agent execution traces for a session, providing granular
     /// visibility into agent orchestration flows, LLM interactions, and tool
     /// invocations.
-    pub fn listSpans(self: *Self, allocator: std.mem.Allocator, input: list_spans.ListSpansInput, options: list_spans.Options) !list_spans.ListSpansOutput {
+    pub fn listSpans(self: *Self, allocator: std.mem.Allocator, input: list_spans.ListSpansInput, options: CallOptions) !list_spans.ListSpansOutput {
         return list_spans.execute(self, allocator, input, options);
     }
 
     /// Lists the tags for the specified resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the specified recommendations from the specified assistant's queue
     /// of newly available recommendations. You can use this API in conjunction with
     /// [GetRecommendations](https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetRecommendations.html) and a `waitTimeSeconds` input for long-polling behavior and avoiding duplicate recommendations.
-    pub fn notifyRecommendationsReceived(self: *Self, allocator: std.mem.Allocator, input: notify_recommendations_received.NotifyRecommendationsReceivedInput, options: notify_recommendations_received.Options) !notify_recommendations_received.NotifyRecommendationsReceivedOutput {
+    pub fn notifyRecommendationsReceived(self: *Self, allocator: std.mem.Allocator, input: notify_recommendations_received.NotifyRecommendationsReceivedInput, options: CallOptions) !notify_recommendations_received.NotifyRecommendationsReceivedOutput {
         return notify_recommendations_received.execute(self, allocator, input, options);
     }
 
     /// Provides feedback against the specified assistant for the specified target.
     /// This API only supports generative targets.
-    pub fn putFeedback(self: *Self, allocator: std.mem.Allocator, input: put_feedback.PutFeedbackInput, options: put_feedback.Options) !put_feedback.PutFeedbackOutput {
+    pub fn putFeedback(self: *Self, allocator: std.mem.Allocator, input: put_feedback.PutFeedbackInput, options: CallOptions) !put_feedback.PutFeedbackOutput {
         return put_feedback.execute(self, allocator, input, options);
     }
 
@@ -573,18 +574,18 @@ pub const Client = struct {
     /// Performs a manual search against the specified assistant. To retrieve
     /// recommendations for an assistant, use
     /// [GetRecommendations](https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetRecommendations.html).
-    pub fn queryAssistant(self: *Self, allocator: std.mem.Allocator, input: query_assistant.QueryAssistantInput, options: query_assistant.Options) !query_assistant.QueryAssistantOutput {
+    pub fn queryAssistant(self: *Self, allocator: std.mem.Allocator, input: query_assistant.QueryAssistantInput, options: CallOptions) !query_assistant.QueryAssistantOutput {
         return query_assistant.execute(self, allocator, input, options);
     }
 
     /// Removes the AI Agent that is set for use by default on an Amazon Q in
     /// Connect Assistant.
-    pub fn removeAssistantAiAgent(self: *Self, allocator: std.mem.Allocator, input: remove_assistant_ai_agent.RemoveAssistantAIAgentInput, options: remove_assistant_ai_agent.Options) !remove_assistant_ai_agent.RemoveAssistantAIAgentOutput {
+    pub fn removeAssistantAiAgent(self: *Self, allocator: std.mem.Allocator, input: remove_assistant_ai_agent.RemoveAssistantAIAgentInput, options: CallOptions) !remove_assistant_ai_agent.RemoveAssistantAIAgentOutput {
         return remove_assistant_ai_agent.execute(self, allocator, input, options);
     }
 
     /// Removes a URI template from a knowledge base.
-    pub fn removeKnowledgeBaseTemplateUri(self: *Self, allocator: std.mem.Allocator, input: remove_knowledge_base_template_uri.RemoveKnowledgeBaseTemplateUriInput, options: remove_knowledge_base_template_uri.Options) !remove_knowledge_base_template_uri.RemoveKnowledgeBaseTemplateUriOutput {
+    pub fn removeKnowledgeBaseTemplateUri(self: *Self, allocator: std.mem.Allocator, input: remove_knowledge_base_template_uri.RemoveKnowledgeBaseTemplateUriInput, options: CallOptions) !remove_knowledge_base_template_uri.RemoveKnowledgeBaseTemplateUriOutput {
         return remove_knowledge_base_template_uri.execute(self, allocator, input, options);
     }
 
@@ -594,40 +595,40 @@ pub const Client = struct {
     /// attribute request parameter nor the default attribute of the message
     /// template, the rendered message content will keep the variable placeholder as
     /// it is and return the attribute keys that are missing.
-    pub fn renderMessageTemplate(self: *Self, allocator: std.mem.Allocator, input: render_message_template.RenderMessageTemplateInput, options: render_message_template.Options) !render_message_template.RenderMessageTemplateOutput {
+    pub fn renderMessageTemplate(self: *Self, allocator: std.mem.Allocator, input: render_message_template.RenderMessageTemplateInput, options: CallOptions) !render_message_template.RenderMessageTemplateOutput {
         return render_message_template.execute(self, allocator, input, options);
     }
 
     /// Retrieves content from knowledge sources based on a query.
-    pub fn retrieve(self: *Self, allocator: std.mem.Allocator, input: retrieve_.RetrieveInput, options: retrieve_.Options) !retrieve_.RetrieveOutput {
+    pub fn retrieve(self: *Self, allocator: std.mem.Allocator, input: retrieve_.RetrieveInput, options: CallOptions) !retrieve_.RetrieveOutput {
         return retrieve_.execute(self, allocator, input, options);
     }
 
     /// Searches for content in a specified knowledge base. Can be used to get a
     /// specific content resource by its name.
-    pub fn searchContent(self: *Self, allocator: std.mem.Allocator, input: search_content.SearchContentInput, options: search_content.Options) !search_content.SearchContentOutput {
+    pub fn searchContent(self: *Self, allocator: std.mem.Allocator, input: search_content.SearchContentInput, options: CallOptions) !search_content.SearchContentOutput {
         return search_content.execute(self, allocator, input, options);
     }
 
     /// Searches for Amazon Q in Connect message templates in the specified
     /// knowledge base.
-    pub fn searchMessageTemplates(self: *Self, allocator: std.mem.Allocator, input: search_message_templates.SearchMessageTemplatesInput, options: search_message_templates.Options) !search_message_templates.SearchMessageTemplatesOutput {
+    pub fn searchMessageTemplates(self: *Self, allocator: std.mem.Allocator, input: search_message_templates.SearchMessageTemplatesInput, options: CallOptions) !search_message_templates.SearchMessageTemplatesOutput {
         return search_message_templates.execute(self, allocator, input, options);
     }
 
     /// Searches existing Amazon Q in Connect quick responses in an Amazon Q in
     /// Connect knowledge base.
-    pub fn searchQuickResponses(self: *Self, allocator: std.mem.Allocator, input: search_quick_responses.SearchQuickResponsesInput, options: search_quick_responses.Options) !search_quick_responses.SearchQuickResponsesOutput {
+    pub fn searchQuickResponses(self: *Self, allocator: std.mem.Allocator, input: search_quick_responses.SearchQuickResponsesInput, options: CallOptions) !search_quick_responses.SearchQuickResponsesOutput {
         return search_quick_responses.execute(self, allocator, input, options);
     }
 
     /// Searches for sessions.
-    pub fn searchSessions(self: *Self, allocator: std.mem.Allocator, input: search_sessions.SearchSessionsInput, options: search_sessions.Options) !search_sessions.SearchSessionsOutput {
+    pub fn searchSessions(self: *Self, allocator: std.mem.Allocator, input: search_sessions.SearchSessionsInput, options: CallOptions) !search_sessions.SearchSessionsOutput {
         return search_sessions.execute(self, allocator, input, options);
     }
 
     /// Submits a message to the Amazon Q in Connect session.
-    pub fn sendMessage(self: *Self, allocator: std.mem.Allocator, input: send_message.SendMessageInput, options: send_message.Options) !send_message.SendMessageOutput {
+    pub fn sendMessage(self: *Self, allocator: std.mem.Allocator, input: send_message.SendMessageInput, options: CallOptions) !send_message.SendMessageOutput {
         return send_message.execute(self, allocator, input, options);
     }
 
@@ -635,7 +636,7 @@ pub const Client = struct {
     /// make a PUT request to the returned URL with your file, making sure to
     /// include the required headers. Then use
     /// [CreateContent](https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_CreateContent.html) to finalize the content creation process or [UpdateContent](https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_UpdateContent.html) to modify an existing resource. You can only upload content to a knowledge base of type CUSTOM.
-    pub fn startContentUpload(self: *Self, allocator: std.mem.Allocator, input: start_content_upload.StartContentUploadInput, options: start_content_upload.Options) !start_content_upload.StartContentUploadOutput {
+    pub fn startContentUpload(self: *Self, allocator: std.mem.Allocator, input: start_content_upload.StartContentUploadInput, options: CallOptions) !start_content_upload.StartContentUploadOutput {
         return start_content_upload.execute(self, allocator, input, options);
     }
 
@@ -647,43 +648,43 @@ pub const Client = struct {
     ///   csv file including the quick responses. For information about how to
     ///   format the csv file for importing quick responses, see [Import quick
     ///   responses](https://docs.aws.amazon.com/console/connect/quick-responses/add-data).
-    pub fn startImportJob(self: *Self, allocator: std.mem.Allocator, input: start_import_job.StartImportJobInput, options: start_import_job.Options) !start_import_job.StartImportJobOutput {
+    pub fn startImportJob(self: *Self, allocator: std.mem.Allocator, input: start_import_job.StartImportJobInput, options: CallOptions) !start_import_job.StartImportJobOutput {
         return start_import_job.execute(self, allocator, input, options);
     }
 
     /// Adds the specified tags to the specified resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an AI Agent.
-    pub fn updateAiAgent(self: *Self, allocator: std.mem.Allocator, input: update_ai_agent.UpdateAIAgentInput, options: update_ai_agent.Options) !update_ai_agent.UpdateAIAgentOutput {
+    pub fn updateAiAgent(self: *Self, allocator: std.mem.Allocator, input: update_ai_agent.UpdateAIAgentInput, options: CallOptions) !update_ai_agent.UpdateAIAgentOutput {
         return update_ai_agent.execute(self, allocator, input, options);
     }
 
     /// Updates an AI Guardrail.
-    pub fn updateAiGuardrail(self: *Self, allocator: std.mem.Allocator, input: update_ai_guardrail.UpdateAIGuardrailInput, options: update_ai_guardrail.Options) !update_ai_guardrail.UpdateAIGuardrailOutput {
+    pub fn updateAiGuardrail(self: *Self, allocator: std.mem.Allocator, input: update_ai_guardrail.UpdateAIGuardrailInput, options: CallOptions) !update_ai_guardrail.UpdateAIGuardrailOutput {
         return update_ai_guardrail.execute(self, allocator, input, options);
     }
 
     /// Updates an AI Prompt.
-    pub fn updateAiPrompt(self: *Self, allocator: std.mem.Allocator, input: update_ai_prompt.UpdateAIPromptInput, options: update_ai_prompt.Options) !update_ai_prompt.UpdateAIPromptOutput {
+    pub fn updateAiPrompt(self: *Self, allocator: std.mem.Allocator, input: update_ai_prompt.UpdateAIPromptInput, options: CallOptions) !update_ai_prompt.UpdateAIPromptOutput {
         return update_ai_prompt.execute(self, allocator, input, options);
     }
 
     /// Updates the AI Agent that is set for use by default on an Amazon Q in
     /// Connect Assistant.
-    pub fn updateAssistantAiAgent(self: *Self, allocator: std.mem.Allocator, input: update_assistant_ai_agent.UpdateAssistantAIAgentInput, options: update_assistant_ai_agent.Options) !update_assistant_ai_agent.UpdateAssistantAIAgentOutput {
+    pub fn updateAssistantAiAgent(self: *Self, allocator: std.mem.Allocator, input: update_assistant_ai_agent.UpdateAssistantAIAgentInput, options: CallOptions) !update_assistant_ai_agent.UpdateAssistantAIAgentOutput {
         return update_assistant_ai_agent.execute(self, allocator, input, options);
     }
 
     /// Updates information about the content.
-    pub fn updateContent(self: *Self, allocator: std.mem.Allocator, input: update_content.UpdateContentInput, options: update_content.Options) !update_content.UpdateContentOutput {
+    pub fn updateContent(self: *Self, allocator: std.mem.Allocator, input: update_content.UpdateContentInput, options: CallOptions) !update_content.UpdateContentOutput {
         return update_content.execute(self, allocator, input, options);
     }
 
@@ -693,7 +694,7 @@ pub const Client = struct {
     /// example, if you ingest a Salesforce article, it has an `Id` value, and you
     /// can set the template URI to
     /// `https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*/view`.
-    pub fn updateKnowledgeBaseTemplateUri(self: *Self, allocator: std.mem.Allocator, input: update_knowledge_base_template_uri.UpdateKnowledgeBaseTemplateUriInput, options: update_knowledge_base_template_uri.Options) !update_knowledge_base_template_uri.UpdateKnowledgeBaseTemplateUriOutput {
+    pub fn updateKnowledgeBaseTemplateUri(self: *Self, allocator: std.mem.Allocator, input: update_knowledge_base_template_uri.UpdateKnowledgeBaseTemplateUriInput, options: CallOptions) !update_knowledge_base_template_uri.UpdateKnowledgeBaseTemplateUriOutput {
         return update_knowledge_base_template_uri.execute(self, allocator, input, options);
     }
 
@@ -703,7 +704,7 @@ pub const Client = struct {
     /// modification will only apply to the message template that is referenced by
     /// the `$LATEST` qualifier. The fields for all available versions will remain
     /// unchanged.
-    pub fn updateMessageTemplate(self: *Self, allocator: std.mem.Allocator, input: update_message_template.UpdateMessageTemplateInput, options: update_message_template.Options) !update_message_template.UpdateMessageTemplateOutput {
+    pub fn updateMessageTemplate(self: *Self, allocator: std.mem.Allocator, input: update_message_template.UpdateMessageTemplateInput, options: CallOptions) !update_message_template.UpdateMessageTemplateOutput {
         return update_message_template.execute(self, allocator, input, options);
     }
 
@@ -712,24 +713,24 @@ pub const Client = struct {
     /// configuration will applied to the message template pointed by the `$LATEST`
     /// qualifier and all available versions. Partial update is supported. If any
     /// field is not supplied, it will remain unchanged for the message template.
-    pub fn updateMessageTemplateMetadata(self: *Self, allocator: std.mem.Allocator, input: update_message_template_metadata.UpdateMessageTemplateMetadataInput, options: update_message_template_metadata.Options) !update_message_template_metadata.UpdateMessageTemplateMetadataOutput {
+    pub fn updateMessageTemplateMetadata(self: *Self, allocator: std.mem.Allocator, input: update_message_template_metadata.UpdateMessageTemplateMetadataInput, options: CallOptions) !update_message_template_metadata.UpdateMessageTemplateMetadataOutput {
         return update_message_template_metadata.execute(self, allocator, input, options);
     }
 
     /// Updates an existing Amazon Q in Connect quick response.
-    pub fn updateQuickResponse(self: *Self, allocator: std.mem.Allocator, input: update_quick_response.UpdateQuickResponseInput, options: update_quick_response.Options) !update_quick_response.UpdateQuickResponseOutput {
+    pub fn updateQuickResponse(self: *Self, allocator: std.mem.Allocator, input: update_quick_response.UpdateQuickResponseInput, options: CallOptions) !update_quick_response.UpdateQuickResponseOutput {
         return update_quick_response.execute(self, allocator, input, options);
     }
 
     /// Updates a session. A session is a contextual container used for generating
     /// recommendations. Amazon Connect updates the existing Amazon Q in Connect
     /// session for each contact on which Amazon Q in Connect is enabled.
-    pub fn updateSession(self: *Self, allocator: std.mem.Allocator, input: update_session.UpdateSessionInput, options: update_session.Options) !update_session.UpdateSessionOutput {
+    pub fn updateSession(self: *Self, allocator: std.mem.Allocator, input: update_session.UpdateSessionInput, options: CallOptions) !update_session.UpdateSessionOutput {
         return update_session.execute(self, allocator, input, options);
     }
 
     /// Updates the data stored on an Amazon Q in Connect Session.
-    pub fn updateSessionData(self: *Self, allocator: std.mem.Allocator, input: update_session_data.UpdateSessionDataInput, options: update_session_data.Options) !update_session_data.UpdateSessionDataOutput {
+    pub fn updateSessionData(self: *Self, allocator: std.mem.Allocator, input: update_session_data.UpdateSessionDataInput, options: CallOptions) !update_session_data.UpdateSessionDataOutput {
         return update_session_data.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteInternetGatewayInput = struct {
@@ -16,13 +17,9 @@ pub const DeleteInternetGatewayInput = struct {
     internet_gateway_id: []const u8,
 };
 
-const DeleteInternetGatewayOutput = struct {};
+pub const DeleteInternetGatewayOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteInternetGatewayInput, options: Options) !DeleteInternetGatewayOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteInternetGatewayInput, options: CallOptions) !DeleteInternetGatewayOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const ForgetDeviceInput = struct {
@@ -20,13 +21,9 @@ pub const ForgetDeviceInput = struct {
     };
 };
 
-const ForgetDeviceOutput = struct {};
+pub const ForgetDeviceOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ForgetDeviceInput, options: Options) !ForgetDeviceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ForgetDeviceInput, options: CallOptions) !ForgetDeviceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

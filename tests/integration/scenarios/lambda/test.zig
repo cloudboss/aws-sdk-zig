@@ -32,7 +32,7 @@ test "ListFunctions returns successfully" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const result = try lambda.list_functions.execute(&shared_client, arena.allocator(), .{}, .{});
+    const result = try shared_client.listFunctions(arena.allocator(), .{}, .{});
 
     const functions = result.functions orelse return error.MissingFunctions;
     try std.testing.expectEqual(@as(usize, 0), functions.len);
@@ -42,8 +42,7 @@ test "ListFunctions with max_items returns successfully" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const result = try lambda.list_functions.execute(
-        &shared_client,
+    const result = try shared_client.listFunctions(
         arena.allocator(),
         .{ .max_items = 1 },
         .{},
@@ -57,7 +56,7 @@ test "ListFunctions next_marker is null on empty result" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const result = try lambda.list_functions.execute(&shared_client, arena.allocator(), .{}, .{});
+    const result = try shared_client.listFunctions(arena.allocator(), .{}, .{});
 
     try std.testing.expect(result.next_marker == null);
 }
@@ -67,8 +66,7 @@ test "GetFunction returns ResourceNotFoundException for missing function" {
     defer arena.deinit();
 
     var diagnostic: lambda.ServiceError = undefined;
-    const result = lambda.get_function.execute(
-        &shared_client,
+    const result = shared_client.getFunction(
         arena.allocator(),
         .{ .function_name = "nonexistent-function-12345" },
         .{ .diagnostic = &diagnostic },
@@ -96,8 +94,7 @@ test "GetFunction error diagnostic has parseable code" {
     defer arena.deinit();
 
     var diagnostic: lambda.ServiceError = undefined;
-    _ = lambda.get_function.execute(
-        &shared_client,
+    _ = shared_client.getFunction(
         arena.allocator(),
         .{ .function_name = "no-such-fn-abc-789" },
         .{ .diagnostic = &diagnostic },
@@ -124,8 +121,7 @@ test "GetAccountSettings returns Lambda account limits" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const result = try lambda.get_account_settings.execute(
-        &shared_client,
+    const result = try shared_client.getAccountSettings(
         arena.allocator(),
         .{},
         .{},
@@ -138,8 +134,7 @@ test "GetAccountSettings total_code_size is non-negative" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const result = try lambda.get_account_settings.execute(
-        &shared_client,
+    const result = try shared_client.getAccountSettings(
         arena.allocator(),
         .{},
         .{},
@@ -154,8 +149,7 @@ test "GetAccountSettings concurrent_executions is positive" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const result = try lambda.get_account_settings.execute(
-        &shared_client,
+    const result = try shared_client.getAccountSettings(
         arena.allocator(),
         .{},
         .{},
@@ -170,8 +164,7 @@ test "GetAccountSettings code_size_unzipped is positive" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const result = try lambda.get_account_settings.execute(
-        &shared_client,
+    const result = try shared_client.getAccountSettings(
         arena.allocator(),
         .{},
         .{},
@@ -186,8 +179,7 @@ test "GetAccountSettings account_usage is present" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const result = try lambda.get_account_settings.execute(
-        &shared_client,
+    const result = try shared_client.getAccountSettings(
         arena.allocator(),
         .{},
         .{},
@@ -202,8 +194,7 @@ test "GetAccountSettings account_limit has all expected fields" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const result = try lambda.get_account_settings.execute(
-        &shared_client,
+    const result = try shared_client.getAccountSettings(
         arena.allocator(),
         .{},
         .{},

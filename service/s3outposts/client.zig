@@ -6,6 +6,7 @@ const delete_endpoint = @import("delete_endpoint.zig");
 const list_endpoints = @import("list_endpoints.zig");
 const list_outposts_with_s3 = @import("list_outposts_with_s3.zig");
 const list_shared_endpoints = @import("list_shared_endpoints.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -47,7 +48,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListEndpoints](https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html)
-    pub fn createEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_endpoint.CreateEndpointInput, options: create_endpoint.Options) !create_endpoint.CreateEndpointOutput {
+    pub fn createEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_endpoint.CreateEndpointInput, options: CallOptions) !create_endpoint.CreateEndpointOutput {
         return create_endpoint.execute(self, allocator, input, options);
     }
 
@@ -62,7 +63,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [ListEndpoints](https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html)
-    pub fn deleteEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_endpoint.DeleteEndpointInput, options: delete_endpoint.Options) !delete_endpoint.DeleteEndpointOutput {
+    pub fn deleteEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_endpoint.DeleteEndpointInput, options: CallOptions) !delete_endpoint.DeleteEndpointOutput {
         return delete_endpoint.execute(self, allocator, input, options);
     }
 
@@ -75,7 +76,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteEndpoint](https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html)
-    pub fn listEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_endpoints.ListEndpointsInput, options: list_endpoints.Options) !list_endpoints.ListEndpointsOutput {
+    pub fn listEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_endpoints.ListEndpointsInput, options: CallOptions) !list_endpoints.ListEndpointsOutput {
         return list_endpoints.execute(self, allocator, input, options);
     }
 
@@ -84,7 +85,7 @@ pub const Client = struct {
     /// Includes S3 on Outposts that you have access to as the Outposts owner, or as
     /// a shared user
     /// from Resource Access Manager (RAM).
-    pub fn listOutpostsWithS3(self: *Self, allocator: std.mem.Allocator, input: list_outposts_with_s3.ListOutpostsWithS3Input, options: list_outposts_with_s3.Options) !list_outposts_with_s3.ListOutpostsWithS3Output {
+    pub fn listOutpostsWithS3(self: *Self, allocator: std.mem.Allocator, input: list_outposts_with_s3.ListOutpostsWithS3Input, options: CallOptions) !list_outposts_with_s3.ListOutpostsWithS3Output {
         return list_outposts_with_s3.execute(self, allocator, input, options);
     }
 
@@ -98,7 +99,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteEndpoint](https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html)
-    pub fn listSharedEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_shared_endpoints.ListSharedEndpointsInput, options: list_shared_endpoints.Options) !list_shared_endpoints.ListSharedEndpointsOutput {
+    pub fn listSharedEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_shared_endpoints.ListSharedEndpointsInput, options: CallOptions) !list_shared_endpoints.ListSharedEndpointsOutput {
         return list_shared_endpoints.execute(self, allocator, input, options);
     }
 

@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_call_analytics_categories = @import("list_call_analytics_categories.zig");
@@ -22,7 +23,7 @@ pub const ListCallAnalyticsCategoriesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_call_analytics_categories.Options) !list_call_analytics_categories.ListCallAnalyticsCategoriesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_call_analytics_categories.ListCallAnalyticsCategoriesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -63,7 +64,7 @@ pub const ListCallAnalyticsJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_call_analytics_jobs.Options) !list_call_analytics_jobs.ListCallAnalyticsJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_call_analytics_jobs.ListCallAnalyticsJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -104,7 +105,7 @@ pub const ListLanguageModelsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_language_models.Options) !list_language_models.ListLanguageModelsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_language_models.ListLanguageModelsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -145,7 +146,7 @@ pub const ListMedicalScribeJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_medical_scribe_jobs.Options) !list_medical_scribe_jobs.ListMedicalScribeJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_medical_scribe_jobs.ListMedicalScribeJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -186,7 +187,7 @@ pub const ListMedicalTranscriptionJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_medical_transcription_jobs.Options) !list_medical_transcription_jobs.ListMedicalTranscriptionJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_medical_transcription_jobs.ListMedicalTranscriptionJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -227,7 +228,7 @@ pub const ListMedicalVocabulariesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_medical_vocabularies.Options) !list_medical_vocabularies.ListMedicalVocabulariesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_medical_vocabularies.ListMedicalVocabulariesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -268,7 +269,7 @@ pub const ListTranscriptionJobsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_transcription_jobs.Options) !list_transcription_jobs.ListTranscriptionJobsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_transcription_jobs.ListTranscriptionJobsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -309,7 +310,7 @@ pub const ListVocabulariesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_vocabularies.Options) !list_vocabularies.ListVocabulariesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_vocabularies.ListVocabulariesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -350,7 +351,7 @@ pub const ListVocabularyFiltersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_vocabulary_filters.Options) !list_vocabulary_filters.ListVocabularyFiltersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_vocabulary_filters.ListVocabularyFiltersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

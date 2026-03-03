@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const StackStatus = @import("stack_status.zig").StackStatus;
 const StackSummary = @import("stack_summary.zig").StackSummary;
@@ -32,11 +33,7 @@ pub const ListStacksOutput = struct {
     stack_summaries: ?[]const StackSummary = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListStacksInput, options: Options) !ListStacksOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListStacksInput, options: CallOptions) !ListStacksOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const OriginRequestPolicy = @import("origin_request_policy.zig").OriginRequestPolicy;
 const serde = @import("serde.zig");
@@ -23,11 +24,7 @@ pub const GetOriginRequestPolicyOutput = struct {
     origin_request_policy: ?OriginRequestPolicy = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetOriginRequestPolicyInput, options: Options) !GetOriginRequestPolicyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetOriginRequestPolicyInput, options: CallOptions) !GetOriginRequestPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConnectionStatusEventConfiguration = @import("connection_status_event_configuration.zig").ConnectionStatusEventConfiguration;
 const DeviceRegistrationStateEventConfiguration = @import("device_registration_state_event_configuration.zig").DeviceRegistrationStateEventConfiguration;
@@ -53,11 +54,7 @@ pub const UpdateResourceEventConfigurationInput = struct {
 pub const UpdateResourceEventConfigurationOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateResourceEventConfigurationInput, options: Options) !UpdateResourceEventConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateResourceEventConfigurationInput, options: CallOptions) !UpdateResourceEventConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -7,6 +7,7 @@ const list_changed_blocks = @import("list_changed_blocks.zig");
 const list_snapshot_blocks = @import("list_snapshot_blocks.zig");
 const put_snapshot_block = @import("put_snapshot_block.zig");
 const start_snapshot = @import("start_snapshot.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -48,7 +49,7 @@ pub const Client = struct {
     /// client error responses. For more information see [Error
     /// retries](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html) in the
     /// *Amazon Elastic Compute Cloud User Guide*.
-    pub fn completeSnapshot(self: *Self, allocator: std.mem.Allocator, input: complete_snapshot.CompleteSnapshotInput, options: complete_snapshot.Options) !complete_snapshot.CompleteSnapshotOutput {
+    pub fn completeSnapshot(self: *Self, allocator: std.mem.Allocator, input: complete_snapshot.CompleteSnapshotInput, options: CallOptions) !complete_snapshot.CompleteSnapshotOutput {
         return complete_snapshot.execute(self, allocator, input, options);
     }
 
@@ -59,7 +60,7 @@ pub const Client = struct {
     /// client error responses. For more information see [Error
     /// retries](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html) in the
     /// *Amazon Elastic Compute Cloud User Guide*.
-    pub fn getSnapshotBlock(self: *Self, allocator: std.mem.Allocator, input: get_snapshot_block.GetSnapshotBlockInput, options: get_snapshot_block.Options) !get_snapshot_block.GetSnapshotBlockOutput {
+    pub fn getSnapshotBlock(self: *Self, allocator: std.mem.Allocator, input: get_snapshot_block.GetSnapshotBlockInput, options: CallOptions) !get_snapshot_block.GetSnapshotBlockOutput {
         return get_snapshot_block.execute(self, allocator, input, options);
     }
 
@@ -71,7 +72,7 @@ pub const Client = struct {
     /// client error responses. For more information see [Error
     /// retries](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html) in the
     /// *Amazon Elastic Compute Cloud User Guide*.
-    pub fn listChangedBlocks(self: *Self, allocator: std.mem.Allocator, input: list_changed_blocks.ListChangedBlocksInput, options: list_changed_blocks.Options) !list_changed_blocks.ListChangedBlocksOutput {
+    pub fn listChangedBlocks(self: *Self, allocator: std.mem.Allocator, input: list_changed_blocks.ListChangedBlocksInput, options: CallOptions) !list_changed_blocks.ListChangedBlocksOutput {
         return list_changed_blocks.execute(self, allocator, input, options);
     }
 
@@ -83,7 +84,7 @@ pub const Client = struct {
     /// client error responses. For more information see [Error
     /// retries](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html) in the
     /// *Amazon Elastic Compute Cloud User Guide*.
-    pub fn listSnapshotBlocks(self: *Self, allocator: std.mem.Allocator, input: list_snapshot_blocks.ListSnapshotBlocksInput, options: list_snapshot_blocks.Options) !list_snapshot_blocks.ListSnapshotBlocksOutput {
+    pub fn listSnapshotBlocks(self: *Self, allocator: std.mem.Allocator, input: list_snapshot_blocks.ListSnapshotBlocksInput, options: CallOptions) !list_snapshot_blocks.ListSnapshotBlocksOutput {
         return list_snapshot_blocks.execute(self, allocator, input, options);
     }
 
@@ -98,7 +99,7 @@ pub const Client = struct {
     /// client error responses. For more information see [Error
     /// retries](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html) in the
     /// *Amazon Elastic Compute Cloud User Guide*.
-    pub fn putSnapshotBlock(self: *Self, allocator: std.mem.Allocator, input: put_snapshot_block.PutSnapshotBlockInput, options: put_snapshot_block.Options) !put_snapshot_block.PutSnapshotBlockOutput {
+    pub fn putSnapshotBlock(self: *Self, allocator: std.mem.Allocator, input: put_snapshot_block.PutSnapshotBlockInput, options: CallOptions) !put_snapshot_block.PutSnapshotBlockOutput {
         return put_snapshot_block.execute(self, allocator, input, options);
     }
 
@@ -115,7 +116,7 @@ pub const Client = struct {
     /// client error responses. For more information see [Error
     /// retries](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html) in the
     /// *Amazon Elastic Compute Cloud User Guide*.
-    pub fn startSnapshot(self: *Self, allocator: std.mem.Allocator, input: start_snapshot.StartSnapshotInput, options: start_snapshot.Options) !start_snapshot.StartSnapshotOutput {
+    pub fn startSnapshot(self: *Self, allocator: std.mem.Allocator, input: start_snapshot.StartSnapshotInput, options: CallOptions) !start_snapshot.StartSnapshotOutput {
         return start_snapshot.execute(self, allocator, input, options);
     }
 

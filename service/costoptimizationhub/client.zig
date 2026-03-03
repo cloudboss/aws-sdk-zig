@@ -9,6 +9,7 @@ const list_recommendation_summaries = @import("list_recommendation_summaries.zig
 const list_recommendations = @import("list_recommendations.zig");
 const update_enrollment_status = @import("update_enrollment_status.zig");
 const update_preferences = @import("update_preferences.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -43,7 +44,7 @@ pub const Client = struct {
     /// preferences into the service. These preferences impact how the savings
     /// associated with recommendations are presented—estimated savings after
     /// discounts or estimated savings before discounts, for example.
-    pub fn getPreferences(self: *Self, allocator: std.mem.Allocator, input: get_preferences.GetPreferencesInput, options: get_preferences.Options) !get_preferences.GetPreferencesOutput {
+    pub fn getPreferences(self: *Self, allocator: std.mem.Allocator, input: get_preferences.GetPreferencesInput, options: CallOptions) !get_preferences.GetPreferencesOutput {
         return get_preferences.execute(self, allocator, input, options);
     }
 
@@ -53,7 +54,7 @@ pub const Client = struct {
     /// The `recommendationId` is only valid for up to a maximum of 24 hours as
     /// recommendations are refreshed daily. To retrieve the `recommendationId`, use
     /// the `ListRecommendations` API.
-    pub fn getRecommendation(self: *Self, allocator: std.mem.Allocator, input: get_recommendation.GetRecommendationInput, options: get_recommendation.Options) !get_recommendation.GetRecommendationOutput {
+    pub fn getRecommendation(self: *Self, allocator: std.mem.Allocator, input: get_recommendation.GetRecommendationInput, options: CallOptions) !get_recommendation.GetRecommendationOutput {
         return get_recommendation.execute(self, allocator, input, options);
     }
 
@@ -66,13 +67,13 @@ pub const Client = struct {
     /// grouping results by account ID, Amazon Web Services Region. Results are
     /// returned as time-series data, enabling you to analyze trends in your cost
     /// optimization performance over the specified time period.
-    pub fn listEfficiencyMetrics(self: *Self, allocator: std.mem.Allocator, input: list_efficiency_metrics.ListEfficiencyMetricsInput, options: list_efficiency_metrics.Options) !list_efficiency_metrics.ListEfficiencyMetricsOutput {
+    pub fn listEfficiencyMetrics(self: *Self, allocator: std.mem.Allocator, input: list_efficiency_metrics.ListEfficiencyMetricsInput, options: CallOptions) !list_efficiency_metrics.ListEfficiencyMetricsOutput {
         return list_efficiency_metrics.execute(self, allocator, input, options);
     }
 
     /// Retrieves the enrollment status for an account. It can also return the list
     /// of accounts that are enrolled under the organization.
-    pub fn listEnrollmentStatuses(self: *Self, allocator: std.mem.Allocator, input: list_enrollment_statuses.ListEnrollmentStatusesInput, options: list_enrollment_statuses.Options) !list_enrollment_statuses.ListEnrollmentStatusesOutput {
+    pub fn listEnrollmentStatuses(self: *Self, allocator: std.mem.Allocator, input: list_enrollment_statuses.ListEnrollmentStatusesInput, options: CallOptions) !list_enrollment_statuses.ListEnrollmentStatusesOutput {
         return list_enrollment_statuses.execute(self, allocator, input, options);
     }
 
@@ -81,12 +82,12 @@ pub const Client = struct {
     ///
     /// The following filters are not supported for this API: `recommendationIds`,
     /// `resourceArns`, and `resourceIds`.
-    pub fn listRecommendationSummaries(self: *Self, allocator: std.mem.Allocator, input: list_recommendation_summaries.ListRecommendationSummariesInput, options: list_recommendation_summaries.Options) !list_recommendation_summaries.ListRecommendationSummariesOutput {
+    pub fn listRecommendationSummaries(self: *Self, allocator: std.mem.Allocator, input: list_recommendation_summaries.ListRecommendationSummariesInput, options: CallOptions) !list_recommendation_summaries.ListRecommendationSummariesOutput {
         return list_recommendation_summaries.execute(self, allocator, input, options);
     }
 
     /// Returns a list of recommendations.
-    pub fn listRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_recommendations.ListRecommendationsInput, options: list_recommendations.Options) !list_recommendations.ListRecommendationsOutput {
+    pub fn listRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_recommendations.ListRecommendationsInput, options: CallOptions) !list_recommendations.ListRecommendationsOutput {
         return list_recommendations.execute(self, allocator, input, options);
     }
 
@@ -100,14 +101,14 @@ pub const Client = struct {
     /// and to view its recommendations. When you opt in, Cost Optimization Hub
     /// automatically creates a service-linked role in your account to access its
     /// data.
-    pub fn updateEnrollmentStatus(self: *Self, allocator: std.mem.Allocator, input: update_enrollment_status.UpdateEnrollmentStatusInput, options: update_enrollment_status.Options) !update_enrollment_status.UpdateEnrollmentStatusOutput {
+    pub fn updateEnrollmentStatus(self: *Self, allocator: std.mem.Allocator, input: update_enrollment_status.UpdateEnrollmentStatusInput, options: CallOptions) !update_enrollment_status.UpdateEnrollmentStatusOutput {
         return update_enrollment_status.execute(self, allocator, input, options);
     }
 
     /// Updates a set of preferences for an account in order to add account-specific
     /// preferences into the service. These preferences impact how the savings
     /// associated with recommendations are presented.
-    pub fn updatePreferences(self: *Self, allocator: std.mem.Allocator, input: update_preferences.UpdatePreferencesInput, options: update_preferences.Options) !update_preferences.UpdatePreferencesOutput {
+    pub fn updatePreferences(self: *Self, allocator: std.mem.Allocator, input: update_preferences.UpdatePreferencesInput, options: CallOptions) !update_preferences.UpdatePreferencesOutput {
         return update_preferences.execute(self, allocator, input, options);
     }
 

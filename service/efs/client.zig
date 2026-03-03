@@ -32,6 +32,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_file_system = @import("update_file_system.zig");
 const update_file_system_protection = @import("update_file_system_protection.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -100,7 +101,7 @@ pub const Client = struct {
     /// information, see [Granting
     /// permissions to tag resources during
     /// creation](https://docs.aws.amazon.com/efs/latest/ug/using-tags-efs.html#supported-iam-actions-tagging.html).
-    pub fn createAccessPoint(self: *Self, allocator: std.mem.Allocator, input: create_access_point.CreateAccessPointInput, options: create_access_point.Options) !create_access_point.CreateAccessPointOutput {
+    pub fn createAccessPoint(self: *Self, allocator: std.mem.Allocator, input: create_access_point.CreateAccessPointInput, options: CallOptions) !create_access_point.CreateAccessPointOutput {
         return create_access_point.execute(self, allocator, input, options);
     }
 
@@ -190,7 +191,7 @@ pub const Client = struct {
     /// permissions to use the `elasticfilesystem:TagResource` action. For more
     /// information, see [Granting permissions to tag resources during
     /// creation](https://docs.aws.amazon.com/efs/latest/ug/using-tags-efs.html#supported-iam-actions-tagging.html).
-    pub fn createFileSystem(self: *Self, allocator: std.mem.Allocator, input: create_file_system.CreateFileSystemInput, options: create_file_system.Options) !create_file_system.CreateFileSystemOutput {
+    pub fn createFileSystem(self: *Self, allocator: std.mem.Allocator, input: create_file_system.CreateFileSystemInput, options: CallOptions) !create_file_system.CreateFileSystemOutput {
         return create_file_system.execute(self, allocator, input, options);
     }
 
@@ -336,7 +337,7 @@ pub const Client = struct {
     /// * `ec2:DescribeNetworkInterfaces`
     ///
     /// * `ec2:CreateNetworkInterface`
-    pub fn createMountTarget(self: *Self, allocator: std.mem.Allocator, input: create_mount_target.CreateMountTargetInput, options: create_mount_target.Options) !create_mount_target.CreateMountTargetOutput {
+    pub fn createMountTarget(self: *Self, allocator: std.mem.Allocator, input: create_mount_target.CreateMountTargetInput, options: CallOptions) !create_mount_target.CreateMountTargetOutput {
         return create_mount_target.execute(self, allocator, input, options);
     }
 
@@ -371,7 +372,7 @@ pub const Client = struct {
     /// replication](https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html#efs-replication-permissions)
     /// in the *Amazon EFS User
     /// Guide*.
-    pub fn createReplicationConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_replication_configuration.CreateReplicationConfigurationInput, options: create_replication_configuration.Options) !create_replication_configuration.CreateReplicationConfigurationOutput {
+    pub fn createReplicationConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_replication_configuration.CreateReplicationConfigurationInput, options: CallOptions) !create_replication_configuration.CreateReplicationConfigurationOutput {
         return create_replication_configuration.execute(self, allocator, input, options);
     }
 
@@ -390,7 +391,7 @@ pub const Client = struct {
     ///
     /// This operation requires permission for the `elasticfilesystem:CreateTags`
     /// action.
-    pub fn createTags(self: *Self, allocator: std.mem.Allocator, input: create_tags.CreateTagsInput, options: create_tags.Options) !create_tags.CreateTagsOutput {
+    pub fn createTags(self: *Self, allocator: std.mem.Allocator, input: create_tags.CreateTagsInput, options: CallOptions) !create_tags.CreateTagsOutput {
         return create_tags.execute(self, allocator, input, options);
     }
 
@@ -402,7 +403,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `elasticfilesystem:DeleteAccessPoint` action.
-    pub fn deleteAccessPoint(self: *Self, allocator: std.mem.Allocator, input: delete_access_point.DeleteAccessPointInput, options: delete_access_point.Options) !delete_access_point.DeleteAccessPointOutput {
+    pub fn deleteAccessPoint(self: *Self, allocator: std.mem.Allocator, input: delete_access_point.DeleteAccessPointInput, options: CallOptions) !delete_access_point.DeleteAccessPointOutput {
         return delete_access_point.execute(self, allocator, input, options);
     }
 
@@ -436,7 +437,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `elasticfilesystem:DeleteFileSystem` action.
-    pub fn deleteFileSystem(self: *Self, allocator: std.mem.Allocator, input: delete_file_system.DeleteFileSystemInput, options: delete_file_system.Options) !delete_file_system.DeleteFileSystemOutput {
+    pub fn deleteFileSystem(self: *Self, allocator: std.mem.Allocator, input: delete_file_system.DeleteFileSystemInput, options: CallOptions) !delete_file_system.DeleteFileSystemOutput {
         return delete_file_system.execute(self, allocator, input, options);
     }
 
@@ -449,7 +450,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `elasticfilesystem:DeleteFileSystemPolicy` action.
-    pub fn deleteFileSystemPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_file_system_policy.DeleteFileSystemPolicyInput, options: delete_file_system_policy.Options) !delete_file_system_policy.DeleteFileSystemPolicyOutput {
+    pub fn deleteFileSystemPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_file_system_policy.DeleteFileSystemPolicyInput, options: CallOptions) !delete_file_system_policy.DeleteFileSystemPolicyOutput {
         return delete_file_system_policy.execute(self, allocator, input, options);
     }
 
@@ -484,7 +485,7 @@ pub const Client = struct {
     /// mount target's network interface:
     ///
     /// * `ec2:DeleteNetworkInterface`
-    pub fn deleteMountTarget(self: *Self, allocator: std.mem.Allocator, input: delete_mount_target.DeleteMountTargetInput, options: delete_mount_target.Options) !delete_mount_target.DeleteMountTargetOutput {
+    pub fn deleteMountTarget(self: *Self, allocator: std.mem.Allocator, input: delete_mount_target.DeleteMountTargetInput, options: CallOptions) !delete_mount_target.DeleteMountTargetOutput {
         return delete_mount_target.execute(self, allocator, input, options);
     }
 
@@ -499,7 +500,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `elasticfilesystem:DeleteReplicationConfiguration` action.
-    pub fn deleteReplicationConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_replication_configuration.DeleteReplicationConfigurationInput, options: delete_replication_configuration.Options) !delete_replication_configuration.DeleteReplicationConfigurationOutput {
+    pub fn deleteReplicationConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_replication_configuration.DeleteReplicationConfigurationInput, options: CallOptions) !delete_replication_configuration.DeleteReplicationConfigurationOutput {
         return delete_replication_configuration.execute(self, allocator, input, options);
     }
 
@@ -516,7 +517,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the `elasticfilesystem:DeleteTags`
     /// action.
-    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: delete_tags.Options) !delete_tags.DeleteTagsOutput {
+    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: CallOptions) !delete_tags.DeleteTagsOutput {
         return delete_tags.execute(self, allocator, input, options);
     }
 
@@ -528,19 +529,19 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `elasticfilesystem:DescribeAccessPoints` action.
-    pub fn describeAccessPoints(self: *Self, allocator: std.mem.Allocator, input: describe_access_points.DescribeAccessPointsInput, options: describe_access_points.Options) !describe_access_points.DescribeAccessPointsOutput {
+    pub fn describeAccessPoints(self: *Self, allocator: std.mem.Allocator, input: describe_access_points.DescribeAccessPointsInput, options: CallOptions) !describe_access_points.DescribeAccessPointsOutput {
         return describe_access_points.execute(self, allocator, input, options);
     }
 
     /// Returns the account preferences settings for the Amazon Web Services account
     /// associated with the user making the request, in the current Amazon Web
     /// Services Region.
-    pub fn describeAccountPreferences(self: *Self, allocator: std.mem.Allocator, input: describe_account_preferences.DescribeAccountPreferencesInput, options: describe_account_preferences.Options) !describe_account_preferences.DescribeAccountPreferencesOutput {
+    pub fn describeAccountPreferences(self: *Self, allocator: std.mem.Allocator, input: describe_account_preferences.DescribeAccountPreferencesInput, options: CallOptions) !describe_account_preferences.DescribeAccountPreferencesOutput {
         return describe_account_preferences.execute(self, allocator, input, options);
     }
 
     /// Returns the backup policy for the specified EFS file system.
-    pub fn describeBackupPolicy(self: *Self, allocator: std.mem.Allocator, input: describe_backup_policy.DescribeBackupPolicyInput, options: describe_backup_policy.Options) !describe_backup_policy.DescribeBackupPolicyOutput {
+    pub fn describeBackupPolicy(self: *Self, allocator: std.mem.Allocator, input: describe_backup_policy.DescribeBackupPolicyInput, options: CallOptions) !describe_backup_policy.DescribeBackupPolicyOutput {
         return describe_backup_policy.execute(self, allocator, input, options);
     }
 
@@ -549,7 +550,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `elasticfilesystem:DescribeFileSystemPolicy` action.
-    pub fn describeFileSystemPolicy(self: *Self, allocator: std.mem.Allocator, input: describe_file_system_policy.DescribeFileSystemPolicyInput, options: describe_file_system_policy.Options) !describe_file_system_policy.DescribeFileSystemPolicyOutput {
+    pub fn describeFileSystemPolicy(self: *Self, allocator: std.mem.Allocator, input: describe_file_system_policy.DescribeFileSystemPolicyInput, options: CallOptions) !describe_file_system_policy.DescribeFileSystemPolicyOutput {
         return describe_file_system_policy.execute(self, allocator, input, options);
     }
 
@@ -584,7 +585,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `elasticfilesystem:DescribeFileSystems` action.
-    pub fn describeFileSystems(self: *Self, allocator: std.mem.Allocator, input: describe_file_systems.DescribeFileSystemsInput, options: describe_file_systems.Options) !describe_file_systems.DescribeFileSystemsOutput {
+    pub fn describeFileSystems(self: *Self, allocator: std.mem.Allocator, input: describe_file_systems.DescribeFileSystemsInput, options: CallOptions) !describe_file_systems.DescribeFileSystemsOutput {
         return describe_file_systems.execute(self, allocator, input, options);
     }
 
@@ -597,7 +598,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `elasticfilesystem:DescribeLifecycleConfiguration` operation.
-    pub fn describeLifecycleConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_lifecycle_configuration.DescribeLifecycleConfigurationInput, options: describe_lifecycle_configuration.Options) !describe_lifecycle_configuration.DescribeLifecycleConfigurationOutput {
+    pub fn describeLifecycleConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_lifecycle_configuration.DescribeLifecycleConfigurationInput, options: CallOptions) !describe_lifecycle_configuration.DescribeLifecycleConfigurationOutput {
         return describe_lifecycle_configuration.execute(self, allocator, input, options);
     }
 
@@ -614,7 +615,7 @@ pub const Client = struct {
     ///
     /// * `ec2:DescribeNetworkInterfaceAttribute` action on the mount target's
     /// network interface.
-    pub fn describeMountTargetSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: describe_mount_target_security_groups.DescribeMountTargetSecurityGroupsInput, options: describe_mount_target_security_groups.Options) !describe_mount_target_security_groups.DescribeMountTargetSecurityGroupsOutput {
+    pub fn describeMountTargetSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: describe_mount_target_security_groups.DescribeMountTargetSecurityGroupsInput, options: CallOptions) !describe_mount_target_security_groups.DescribeMountTargetSecurityGroupsOutput {
         return describe_mount_target_security_groups.execute(self, allocator, input, options);
     }
 
@@ -630,7 +631,7 @@ pub const Client = struct {
     /// that you specify in `FileSystemId`, or on the file system of the mount
     /// target that
     /// you specify in `MountTargetId`.
-    pub fn describeMountTargets(self: *Self, allocator: std.mem.Allocator, input: describe_mount_targets.DescribeMountTargetsInput, options: describe_mount_targets.Options) !describe_mount_targets.DescribeMountTargetsOutput {
+    pub fn describeMountTargets(self: *Self, allocator: std.mem.Allocator, input: describe_mount_targets.DescribeMountTargetsInput, options: CallOptions) !describe_mount_targets.DescribeMountTargetsOutput {
         return describe_mount_targets.execute(self, allocator, input, options);
     }
 
@@ -639,7 +640,7 @@ pub const Client = struct {
     /// not specified, all of the replication configurations for the Amazon Web
     /// Services account in an
     /// Amazon Web Services Region are retrieved.
-    pub fn describeReplicationConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_replication_configurations.DescribeReplicationConfigurationsInput, options: describe_replication_configurations.Options) !describe_replication_configurations.DescribeReplicationConfigurationsOutput {
+    pub fn describeReplicationConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_replication_configurations.DescribeReplicationConfigurationsInput, options: CallOptions) !describe_replication_configurations.DescribeReplicationConfigurationsOutput {
         return describe_replication_configurations.execute(self, allocator, input, options);
     }
 
@@ -657,7 +658,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `elasticfilesystem:DescribeTags` action.
-    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: describe_tags.Options) !describe_tags.DescribeTagsOutput {
+    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: CallOptions) !describe_tags.DescribeTagsOutput {
         return describe_tags.execute(self, allocator, input, options);
     }
 
@@ -666,7 +667,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `elasticfilesystem:DescribeAccessPoints` action.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -689,7 +690,7 @@ pub const Client = struct {
     ///
     /// * `ec2:ModifyNetworkInterfaceAttribute` action on the mount target's network
     /// interface.
-    pub fn modifyMountTargetSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: modify_mount_target_security_groups.ModifyMountTargetSecurityGroupsInput, options: modify_mount_target_security_groups.Options) !modify_mount_target_security_groups.ModifyMountTargetSecurityGroupsOutput {
+    pub fn modifyMountTargetSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: modify_mount_target_security_groups.ModifyMountTargetSecurityGroupsInput, options: CallOptions) !modify_mount_target_security_groups.ModifyMountTargetSecurityGroupsOutput {
         return modify_mount_target_security_groups.execute(self, allocator, input, options);
     }
 
@@ -711,13 +712,13 @@ pub const Client = struct {
     /// support if you
     /// receive an error and must use short IDs for file system and mount target
     /// resources.
-    pub fn putAccountPreferences(self: *Self, allocator: std.mem.Allocator, input: put_account_preferences.PutAccountPreferencesInput, options: put_account_preferences.Options) !put_account_preferences.PutAccountPreferencesOutput {
+    pub fn putAccountPreferences(self: *Self, allocator: std.mem.Allocator, input: put_account_preferences.PutAccountPreferencesInput, options: CallOptions) !put_account_preferences.PutAccountPreferencesOutput {
         return put_account_preferences.execute(self, allocator, input, options);
     }
 
     /// Updates the file system's backup policy. Use this action to start or stop
     /// automatic backups of the file system.
-    pub fn putBackupPolicy(self: *Self, allocator: std.mem.Allocator, input: put_backup_policy.PutBackupPolicyInput, options: put_backup_policy.Options) !put_backup_policy.PutBackupPolicyOutput {
+    pub fn putBackupPolicy(self: *Self, allocator: std.mem.Allocator, input: put_backup_policy.PutBackupPolicyInput, options: CallOptions) !put_backup_policy.PutBackupPolicyOutput {
         return put_backup_policy.execute(self, allocator, input, options);
     }
 
@@ -739,7 +740,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `elasticfilesystem:PutFileSystemPolicy` action.
-    pub fn putFileSystemPolicy(self: *Self, allocator: std.mem.Allocator, input: put_file_system_policy.PutFileSystemPolicyInput, options: put_file_system_policy.Options) !put_file_system_policy.PutFileSystemPolicyOutput {
+    pub fn putFileSystemPolicy(self: *Self, allocator: std.mem.Allocator, input: put_file_system_policy.PutFileSystemPolicyInput, options: CallOptions) !put_file_system_policy.PutFileSystemPolicyOutput {
         return put_file_system_policy.execute(self, allocator, input, options);
     }
 
@@ -810,7 +811,7 @@ pub const Client = struct {
     /// To apply a `LifecycleConfiguration` object to an encrypted file system, you
     /// need the same Key Management Service permissions as when you created the
     /// encrypted file system.
-    pub fn putLifecycleConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_lifecycle_configuration.PutLifecycleConfigurationInput, options: put_lifecycle_configuration.Options) !put_lifecycle_configuration.PutLifecycleConfigurationOutput {
+    pub fn putLifecycleConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_lifecycle_configuration.PutLifecycleConfigurationInput, options: CallOptions) !put_lifecycle_configuration.PutLifecycleConfigurationOutput {
         return put_lifecycle_configuration.execute(self, allocator, input, options);
     }
 
@@ -819,7 +820,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the `elasticfilesystem:TagResource`
     /// action.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -828,14 +829,14 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `elasticfilesystem:UntagResource` action.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the throughput mode or the amount of provisioned throughput of an
     /// existing file
     /// system.
-    pub fn updateFileSystem(self: *Self, allocator: std.mem.Allocator, input: update_file_system.UpdateFileSystemInput, options: update_file_system.Options) !update_file_system.UpdateFileSystemOutput {
+    pub fn updateFileSystem(self: *Self, allocator: std.mem.Allocator, input: update_file_system.UpdateFileSystemInput, options: CallOptions) !update_file_system.UpdateFileSystemOutput {
         return update_file_system.execute(self, allocator, input, options);
     }
 
@@ -843,7 +844,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `elasticfilesystem:UpdateFileSystemProtection` action.
-    pub fn updateFileSystemProtection(self: *Self, allocator: std.mem.Allocator, input: update_file_system_protection.UpdateFileSystemProtectionInput, options: update_file_system_protection.Options) !update_file_system_protection.UpdateFileSystemProtectionOutput {
+    pub fn updateFileSystemProtection(self: *Self, allocator: std.mem.Allocator, input: update_file_system_protection.UpdateFileSystemProtectionInput, options: CallOptions) !update_file_system_protection.UpdateFileSystemProtectionOutput {
         return update_file_system_protection.execute(self, allocator, input, options);
     }
 

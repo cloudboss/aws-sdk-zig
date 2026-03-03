@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InputDataConfig = @import("input_data_config.zig").InputDataConfig;
 const OutputDataConfig = @import("output_data_config.zig").OutputDataConfig;
@@ -152,11 +153,7 @@ pub const StartTextTranslationJobOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartTextTranslationJobInput, options: Options) !StartTextTranslationJobOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartTextTranslationJobInput, options: CallOptions) !StartTextTranslationJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

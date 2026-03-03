@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VerifiedAccessEndpoint = @import("verified_access_endpoint.zig").VerifiedAccessEndpoint;
 const serde = @import("serde.zig");
@@ -29,11 +30,7 @@ pub const DeleteVerifiedAccessEndpointOutput = struct {
     verified_access_endpoint: ?VerifiedAccessEndpoint = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVerifiedAccessEndpointInput, options: Options) !DeleteVerifiedAccessEndpointOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVerifiedAccessEndpointInput, options: CallOptions) !DeleteVerifiedAccessEndpointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

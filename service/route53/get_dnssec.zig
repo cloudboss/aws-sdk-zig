@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const KeySigningKey = @import("key_signing_key.zig").KeySigningKey;
 const DNSSECStatus = @import("dnssec_status.zig").DNSSECStatus;
@@ -20,11 +21,7 @@ pub const GetDNSSECOutput = struct {
     status: ?DNSSECStatus = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDNSSECInput, options: Options) !GetDNSSECOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDNSSECInput, options: CallOptions) !GetDNSSECOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

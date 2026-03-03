@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const QualificationStatus = @import("qualification_status.zig").QualificationStatus;
 const Qualification = @import("qualification.zig").Qualification;
@@ -47,11 +48,7 @@ pub const ListWorkersWithQualificationTypeOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListWorkersWithQualificationTypeInput, options: Options) !ListWorkersWithQualificationTypeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListWorkersWithQualificationTypeInput, options: CallOptions) !ListWorkersWithQualificationTypeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

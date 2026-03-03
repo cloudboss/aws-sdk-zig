@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AIAgentData = @import("ai_agent_data.zig").AIAgentData;
 
@@ -49,11 +50,7 @@ pub const CreateAIAgentVersionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAIAgentVersionInput, options: Options) !CreateAIAgentVersionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAIAgentVersionInput, options: CallOptions) !CreateAIAgentVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

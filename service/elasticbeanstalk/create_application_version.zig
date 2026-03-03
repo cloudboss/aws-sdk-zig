@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BuildConfiguration = @import("build_configuration.zig").BuildConfiguration;
 const SourceBuildInformation = @import("source_build_information.zig").SourceBuildInformation;
@@ -85,11 +86,7 @@ pub const CreateApplicationVersionOutput = struct {
     application_version: ?ApplicationVersionDescription = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateApplicationVersionInput, options: Options) !CreateApplicationVersionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateApplicationVersionInput, options: CallOptions) !CreateApplicationVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

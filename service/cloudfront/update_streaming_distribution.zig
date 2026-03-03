@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const StreamingDistributionConfig = @import("streaming_distribution_config.zig").StreamingDistributionConfig;
 const StreamingDistribution = @import("streaming_distribution.zig").StreamingDistribution;
@@ -27,11 +28,7 @@ pub const UpdateStreamingDistributionOutput = struct {
     streaming_distribution: ?StreamingDistribution = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateStreamingDistributionInput, options: Options) !UpdateStreamingDistributionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateStreamingDistributionInput, options: CallOptions) !UpdateStreamingDistributionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

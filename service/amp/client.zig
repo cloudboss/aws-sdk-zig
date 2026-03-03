@@ -45,6 +45,7 @@ const update_scraper = @import("update_scraper.zig");
 const update_scraper_logging_configuration = @import("update_scraper_logging_configuration.zig");
 const update_workspace_alias = @import("update_workspace_alias.zig");
 const update_workspace_configuration = @import("update_workspace_configuration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -80,7 +81,7 @@ pub const Client = struct {
     /// definition in a workspace. If a workspace already has an alert manager
     /// definition, don't use this operation to update it. Instead, use
     /// `PutAlertManagerDefinition`.
-    pub fn createAlertManagerDefinition(self: *Self, allocator: std.mem.Allocator, input: create_alert_manager_definition.CreateAlertManagerDefinitionInput, options: create_alert_manager_definition.Options) !create_alert_manager_definition.CreateAlertManagerDefinitionOutput {
+    pub fn createAlertManagerDefinition(self: *Self, allocator: std.mem.Allocator, input: create_alert_manager_definition.CreateAlertManagerDefinitionInput, options: CallOptions) !create_alert_manager_definition.CreateAlertManagerDefinitionOutput {
         return create_alert_manager_definition.execute(self, allocator, input, options);
     }
 
@@ -88,7 +89,7 @@ pub const Client = struct {
     /// algorithm for time-series analysis. The anomaly detector analyzes Amazon
     /// Managed Service for Prometheus metrics to identify unusual patterns and
     /// behaviors.
-    pub fn createAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: create_anomaly_detector.CreateAnomalyDetectorInput, options: create_anomaly_detector.Options) !create_anomaly_detector.CreateAnomalyDetectorOutput {
+    pub fn createAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: create_anomaly_detector.CreateAnomalyDetectorInput, options: CallOptions) !create_anomaly_detector.CreateAnomalyDetectorOutput {
         return create_anomaly_detector.execute(self, allocator, input, options);
     }
 
@@ -97,14 +98,14 @@ pub const Client = struct {
     /// CloudWatch log group to which the logs will be published to.
     ///
     /// These logging configurations are only for rules and alerting logs.
-    pub fn createLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_logging_configuration.CreateLoggingConfigurationInput, options: create_logging_configuration.Options) !create_logging_configuration.CreateLoggingConfigurationOutput {
+    pub fn createLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_logging_configuration.CreateLoggingConfigurationInput, options: CallOptions) !create_logging_configuration.CreateLoggingConfigurationOutput {
         return create_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Creates a query logging configuration for the specified workspace. This
     /// operation enables logging of queries that exceed the specified QSP
     /// threshold.
-    pub fn createQueryLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_query_logging_configuration.CreateQueryLoggingConfigurationInput, options: create_query_logging_configuration.Options) !create_query_logging_configuration.CreateQueryLoggingConfigurationOutput {
+    pub fn createQueryLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_query_logging_configuration.CreateQueryLoggingConfigurationInput, options: CallOptions) !create_query_logging_configuration.CreateQueryLoggingConfigurationOutput {
         return create_query_logging_configuration.execute(self, allocator, input, options);
     }
 
@@ -117,7 +118,7 @@ pub const Client = struct {
     ///
     /// Use this operation only to create new rule groups namespaces. To update an
     /// existing rule groups namespace, use `PutRuleGroupsNamespace`.
-    pub fn createRuleGroupsNamespace(self: *Self, allocator: std.mem.Allocator, input: create_rule_groups_namespace.CreateRuleGroupsNamespaceInput, options: create_rule_groups_namespace.Options) !create_rule_groups_namespace.CreateRuleGroupsNamespaceOutput {
+    pub fn createRuleGroupsNamespace(self: *Self, allocator: std.mem.Allocator, input: create_rule_groups_namespace.CreateRuleGroupsNamespaceInput, options: CallOptions) !create_rule_groups_namespace.CreateRuleGroupsNamespaceOutput {
         return create_rule_groups_namespace.execute(self, allocator, input, options);
     }
 
@@ -147,59 +148,59 @@ pub const Client = struct {
     /// For more information about collectors, including what metrics are collected,
     /// and how to configure the scraper, see [Using an Amazon Web Services managed
     /// collector](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html) in the *Amazon Managed Service for Prometheus User Guide*.
-    pub fn createScraper(self: *Self, allocator: std.mem.Allocator, input: create_scraper.CreateScraperInput, options: create_scraper.Options) !create_scraper.CreateScraperOutput {
+    pub fn createScraper(self: *Self, allocator: std.mem.Allocator, input: create_scraper.CreateScraperInput, options: CallOptions) !create_scraper.CreateScraperOutput {
         return create_scraper.execute(self, allocator, input, options);
     }
 
     /// Creates a Prometheus workspace. A workspace is a logical space dedicated to
     /// the storage and querying of Prometheus metrics. You can have one or more
     /// workspaces in each Region in your account.
-    pub fn createWorkspace(self: *Self, allocator: std.mem.Allocator, input: create_workspace.CreateWorkspaceInput, options: create_workspace.Options) !create_workspace.CreateWorkspaceOutput {
+    pub fn createWorkspace(self: *Self, allocator: std.mem.Allocator, input: create_workspace.CreateWorkspaceInput, options: CallOptions) !create_workspace.CreateWorkspaceOutput {
         return create_workspace.execute(self, allocator, input, options);
     }
 
     /// Deletes the alert manager definition from a workspace.
-    pub fn deleteAlertManagerDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_alert_manager_definition.DeleteAlertManagerDefinitionInput, options: delete_alert_manager_definition.Options) !delete_alert_manager_definition.DeleteAlertManagerDefinitionOutput {
+    pub fn deleteAlertManagerDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_alert_manager_definition.DeleteAlertManagerDefinitionInput, options: CallOptions) !delete_alert_manager_definition.DeleteAlertManagerDefinitionOutput {
         return delete_alert_manager_definition.execute(self, allocator, input, options);
     }
 
     /// Removes an anomaly detector from a workspace. This operation is idempotent.
-    pub fn deleteAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: delete_anomaly_detector.DeleteAnomalyDetectorInput, options: delete_anomaly_detector.Options) !delete_anomaly_detector.DeleteAnomalyDetectorOutput {
+    pub fn deleteAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: delete_anomaly_detector.DeleteAnomalyDetectorInput, options: CallOptions) !delete_anomaly_detector.DeleteAnomalyDetectorOutput {
         return delete_anomaly_detector.execute(self, allocator, input, options);
     }
 
     /// Deletes the rules and alerting logging configuration for a workspace.
     ///
     /// These logging configurations are only for rules and alerting logs.
-    pub fn deleteLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_logging_configuration.DeleteLoggingConfigurationInput, options: delete_logging_configuration.Options) !delete_logging_configuration.DeleteLoggingConfigurationOutput {
+    pub fn deleteLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_logging_configuration.DeleteLoggingConfigurationInput, options: CallOptions) !delete_logging_configuration.DeleteLoggingConfigurationOutput {
         return delete_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes the query logging configuration for the specified workspace.
-    pub fn deleteQueryLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_query_logging_configuration.DeleteQueryLoggingConfigurationInput, options: delete_query_logging_configuration.Options) !delete_query_logging_configuration.DeleteQueryLoggingConfigurationOutput {
+    pub fn deleteQueryLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_query_logging_configuration.DeleteQueryLoggingConfigurationInput, options: CallOptions) !delete_query_logging_configuration.DeleteQueryLoggingConfigurationOutput {
         return delete_query_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes the resource-based policy attached to an Amazon Managed Service for
     /// Prometheus workspace.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes one rule groups namespace and its associated rule groups definition.
-    pub fn deleteRuleGroupsNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_rule_groups_namespace.DeleteRuleGroupsNamespaceInput, options: delete_rule_groups_namespace.Options) !delete_rule_groups_namespace.DeleteRuleGroupsNamespaceOutput {
+    pub fn deleteRuleGroupsNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_rule_groups_namespace.DeleteRuleGroupsNamespaceInput, options: CallOptions) !delete_rule_groups_namespace.DeleteRuleGroupsNamespaceOutput {
         return delete_rule_groups_namespace.execute(self, allocator, input, options);
     }
 
     /// The `DeleteScraper` operation deletes one scraper, and stops any metrics
     /// collection that the scraper performs.
-    pub fn deleteScraper(self: *Self, allocator: std.mem.Allocator, input: delete_scraper.DeleteScraperInput, options: delete_scraper.Options) !delete_scraper.DeleteScraperOutput {
+    pub fn deleteScraper(self: *Self, allocator: std.mem.Allocator, input: delete_scraper.DeleteScraperInput, options: CallOptions) !delete_scraper.DeleteScraperOutput {
         return delete_scraper.execute(self, allocator, input, options);
     }
 
     /// Deletes the logging configuration for a Amazon Managed Service for
     /// Prometheus scraper.
-    pub fn deleteScraperLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_scraper_logging_configuration.DeleteScraperLoggingConfigurationInput, options: delete_scraper_logging_configuration.Options) !delete_scraper_logging_configuration.DeleteScraperLoggingConfigurationOutput {
+    pub fn deleteScraperLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_scraper_logging_configuration.DeleteScraperLoggingConfigurationInput, options: CallOptions) !delete_scraper_logging_configuration.DeleteScraperLoggingConfigurationOutput {
         return delete_scraper_logging_configuration.execute(self, allocator, input, options);
     }
 
@@ -207,19 +208,19 @@ pub const Client = struct {
     ///
     /// When you delete a workspace, the data that has been ingested into it is not
     /// immediately deleted. It will be permanently deleted within one month.
-    pub fn deleteWorkspace(self: *Self, allocator: std.mem.Allocator, input: delete_workspace.DeleteWorkspaceInput, options: delete_workspace.Options) !delete_workspace.DeleteWorkspaceOutput {
+    pub fn deleteWorkspace(self: *Self, allocator: std.mem.Allocator, input: delete_workspace.DeleteWorkspaceInput, options: CallOptions) !delete_workspace.DeleteWorkspaceOutput {
         return delete_workspace.execute(self, allocator, input, options);
     }
 
     /// Retrieves the full information about the alert manager definition for a
     /// workspace.
-    pub fn describeAlertManagerDefinition(self: *Self, allocator: std.mem.Allocator, input: describe_alert_manager_definition.DescribeAlertManagerDefinitionInput, options: describe_alert_manager_definition.Options) !describe_alert_manager_definition.DescribeAlertManagerDefinitionOutput {
+    pub fn describeAlertManagerDefinition(self: *Self, allocator: std.mem.Allocator, input: describe_alert_manager_definition.DescribeAlertManagerDefinitionInput, options: CallOptions) !describe_alert_manager_definition.DescribeAlertManagerDefinitionOutput {
         return describe_alert_manager_definition.execute(self, allocator, input, options);
     }
 
     /// Retrieves detailed information about a specific anomaly detector, including
     /// its status and configuration.
-    pub fn describeAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: describe_anomaly_detector.DescribeAnomalyDetectorInput, options: describe_anomaly_detector.Options) !describe_anomaly_detector.DescribeAnomalyDetectorOutput {
+    pub fn describeAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: describe_anomaly_detector.DescribeAnomalyDetectorInput, options: CallOptions) !describe_anomaly_detector.DescribeAnomalyDetectorOutput {
         return describe_anomaly_detector.execute(self, allocator, input, options);
     }
 
@@ -227,73 +228,73 @@ pub const Client = struct {
     /// configuration of the workspace.
     ///
     /// These logging configurations are only for rules and alerting logs.
-    pub fn describeLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_logging_configuration.DescribeLoggingConfigurationInput, options: describe_logging_configuration.Options) !describe_logging_configuration.DescribeLoggingConfigurationOutput {
+    pub fn describeLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_logging_configuration.DescribeLoggingConfigurationInput, options: CallOptions) !describe_logging_configuration.DescribeLoggingConfigurationOutput {
         return describe_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details of the query logging configuration for the specified
     /// workspace.
-    pub fn describeQueryLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_query_logging_configuration.DescribeQueryLoggingConfigurationInput, options: describe_query_logging_configuration.Options) !describe_query_logging_configuration.DescribeQueryLoggingConfigurationOutput {
+    pub fn describeQueryLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_query_logging_configuration.DescribeQueryLoggingConfigurationInput, options: CallOptions) !describe_query_logging_configuration.DescribeQueryLoggingConfigurationOutput {
         return describe_query_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns information about the resource-based policy attached to an Amazon
     /// Managed Service for Prometheus workspace.
-    pub fn describeResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: describe_resource_policy.DescribeResourcePolicyInput, options: describe_resource_policy.Options) !describe_resource_policy.DescribeResourcePolicyOutput {
+    pub fn describeResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: describe_resource_policy.DescribeResourcePolicyInput, options: CallOptions) !describe_resource_policy.DescribeResourcePolicyOutput {
         return describe_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Returns complete information about one rule groups namespace. To retrieve a
     /// list of rule groups namespaces, use `ListRuleGroupsNamespaces`.
-    pub fn describeRuleGroupsNamespace(self: *Self, allocator: std.mem.Allocator, input: describe_rule_groups_namespace.DescribeRuleGroupsNamespaceInput, options: describe_rule_groups_namespace.Options) !describe_rule_groups_namespace.DescribeRuleGroupsNamespaceOutput {
+    pub fn describeRuleGroupsNamespace(self: *Self, allocator: std.mem.Allocator, input: describe_rule_groups_namespace.DescribeRuleGroupsNamespaceInput, options: CallOptions) !describe_rule_groups_namespace.DescribeRuleGroupsNamespaceOutput {
         return describe_rule_groups_namespace.execute(self, allocator, input, options);
     }
 
     /// The `DescribeScraper` operation displays information about an existing
     /// scraper.
-    pub fn describeScraper(self: *Self, allocator: std.mem.Allocator, input: describe_scraper.DescribeScraperInput, options: describe_scraper.Options) !describe_scraper.DescribeScraperOutput {
+    pub fn describeScraper(self: *Self, allocator: std.mem.Allocator, input: describe_scraper.DescribeScraperInput, options: CallOptions) !describe_scraper.DescribeScraperOutput {
         return describe_scraper.execute(self, allocator, input, options);
     }
 
     /// Describes the logging configuration for a Amazon Managed Service for
     /// Prometheus scraper.
-    pub fn describeScraperLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_scraper_logging_configuration.DescribeScraperLoggingConfigurationInput, options: describe_scraper_logging_configuration.Options) !describe_scraper_logging_configuration.DescribeScraperLoggingConfigurationOutput {
+    pub fn describeScraperLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_scraper_logging_configuration.DescribeScraperLoggingConfigurationInput, options: CallOptions) !describe_scraper_logging_configuration.DescribeScraperLoggingConfigurationOutput {
         return describe_scraper_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns information about an existing workspace.
-    pub fn describeWorkspace(self: *Self, allocator: std.mem.Allocator, input: describe_workspace.DescribeWorkspaceInput, options: describe_workspace.Options) !describe_workspace.DescribeWorkspaceOutput {
+    pub fn describeWorkspace(self: *Self, allocator: std.mem.Allocator, input: describe_workspace.DescribeWorkspaceInput, options: CallOptions) !describe_workspace.DescribeWorkspaceOutput {
         return describe_workspace.execute(self, allocator, input, options);
     }
 
     /// Use this operation to return information about the configuration of a
     /// workspace. The configuration details returned include workspace
     /// configuration status, label set limits, and retention period.
-    pub fn describeWorkspaceConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_configuration.DescribeWorkspaceConfigurationInput, options: describe_workspace_configuration.Options) !describe_workspace_configuration.DescribeWorkspaceConfigurationOutput {
+    pub fn describeWorkspaceConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_configuration.DescribeWorkspaceConfigurationInput, options: CallOptions) !describe_workspace_configuration.DescribeWorkspaceConfigurationOutput {
         return describe_workspace_configuration.execute(self, allocator, input, options);
     }
 
     /// The `GetDefaultScraperConfiguration` operation returns the default scraper
     /// configuration used when Amazon EKS creates a scraper for you.
-    pub fn getDefaultScraperConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_default_scraper_configuration.GetDefaultScraperConfigurationInput, options: get_default_scraper_configuration.Options) !get_default_scraper_configuration.GetDefaultScraperConfigurationOutput {
+    pub fn getDefaultScraperConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_default_scraper_configuration.GetDefaultScraperConfigurationInput, options: CallOptions) !get_default_scraper_configuration.GetDefaultScraperConfigurationOutput {
         return get_default_scraper_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of anomaly detectors for a workspace with optional
     /// filtering by alias.
-    pub fn listAnomalyDetectors(self: *Self, allocator: std.mem.Allocator, input: list_anomaly_detectors.ListAnomalyDetectorsInput, options: list_anomaly_detectors.Options) !list_anomaly_detectors.ListAnomalyDetectorsOutput {
+    pub fn listAnomalyDetectors(self: *Self, allocator: std.mem.Allocator, input: list_anomaly_detectors.ListAnomalyDetectorsInput, options: CallOptions) !list_anomaly_detectors.ListAnomalyDetectorsOutput {
         return list_anomaly_detectors.execute(self, allocator, input, options);
     }
 
     /// Returns a list of rule groups namespaces in a workspace.
-    pub fn listRuleGroupsNamespaces(self: *Self, allocator: std.mem.Allocator, input: list_rule_groups_namespaces.ListRuleGroupsNamespacesInput, options: list_rule_groups_namespaces.Options) !list_rule_groups_namespaces.ListRuleGroupsNamespacesOutput {
+    pub fn listRuleGroupsNamespaces(self: *Self, allocator: std.mem.Allocator, input: list_rule_groups_namespaces.ListRuleGroupsNamespacesInput, options: CallOptions) !list_rule_groups_namespaces.ListRuleGroupsNamespacesOutput {
         return list_rule_groups_namespaces.execute(self, allocator, input, options);
     }
 
     /// The `ListScrapers` operation lists all of the scrapers in your account. This
     /// includes scrapers being created or deleted. You can optionally filter the
     /// returned list.
-    pub fn listScrapers(self: *Self, allocator: std.mem.Allocator, input: list_scrapers.ListScrapersInput, options: list_scrapers.Options) !list_scrapers.ListScrapersOutput {
+    pub fn listScrapers(self: *Self, allocator: std.mem.Allocator, input: list_scrapers.ListScrapersInput, options: CallOptions) !list_scrapers.ListScrapersOutput {
         return list_scrapers.execute(self, allocator, input, options);
     }
 
@@ -301,20 +302,20 @@ pub const Client = struct {
     /// with an Amazon Managed Service for Prometheus resource. Currently, the only
     /// resources that can be tagged are scrapers, workspaces, and rule groups
     /// namespaces.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists all of the Amazon Managed Service for Prometheus workspaces in your
     /// account. This includes workspaces being created or deleted.
-    pub fn listWorkspaces(self: *Self, allocator: std.mem.Allocator, input: list_workspaces.ListWorkspacesInput, options: list_workspaces.Options) !list_workspaces.ListWorkspacesOutput {
+    pub fn listWorkspaces(self: *Self, allocator: std.mem.Allocator, input: list_workspaces.ListWorkspacesInput, options: CallOptions) !list_workspaces.ListWorkspacesOutput {
         return list_workspaces.execute(self, allocator, input, options);
     }
 
     /// Updates an existing alert manager definition in a workspace. If the
     /// workspace does not already have an alert manager definition, don't use this
     /// operation to create it. Instead, use `CreateAlertManagerDefinition`.
-    pub fn putAlertManagerDefinition(self: *Self, allocator: std.mem.Allocator, input: put_alert_manager_definition.PutAlertManagerDefinitionInput, options: put_alert_manager_definition.Options) !put_alert_manager_definition.PutAlertManagerDefinitionOutput {
+    pub fn putAlertManagerDefinition(self: *Self, allocator: std.mem.Allocator, input: put_alert_manager_definition.PutAlertManagerDefinitionInput, options: CallOptions) !put_alert_manager_definition.PutAlertManagerDefinitionOutput {
         return put_alert_manager_definition.execute(self, allocator, input, options);
     }
 
@@ -326,7 +327,7 @@ pub const Client = struct {
     /// minor change like updating the evaluation interval or making more
     /// substantial modifications. The operation serves as the single method for
     /// creating, updating, and retraining anomaly detectors.
-    pub fn putAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: put_anomaly_detector.PutAnomalyDetectorInput, options: put_anomaly_detector.Options) !put_anomaly_detector.PutAnomalyDetectorOutput {
+    pub fn putAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: put_anomaly_detector.PutAnomalyDetectorInput, options: CallOptions) !put_anomaly_detector.PutAnomalyDetectorOutput {
         return put_anomaly_detector.execute(self, allocator, input, options);
     }
 
@@ -347,7 +348,7 @@ pub const Client = struct {
     /// For more information about working with IAM, see [Using Amazon Managed
     /// Service for Prometheus with
     /// IAM](https://docs.aws.amazon.com/prometheus/latest/userguide/security_iam_service-with-iam.html) in the *Amazon Managed Service for Prometheus User Guide*.
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -363,7 +364,7 @@ pub const Client = struct {
     ///
     /// You can't use this operation to add tags to an existing rule groups
     /// namespace. Instead, use `TagResource`.
-    pub fn putRuleGroupsNamespace(self: *Self, allocator: std.mem.Allocator, input: put_rule_groups_namespace.PutRuleGroupsNamespaceInput, options: put_rule_groups_namespace.Options) !put_rule_groups_namespace.PutRuleGroupsNamespaceOutput {
+    pub fn putRuleGroupsNamespace(self: *Self, allocator: std.mem.Allocator, input: put_rule_groups_namespace.PutRuleGroupsNamespaceInput, options: CallOptions) !put_rule_groups_namespace.PutRuleGroupsNamespaceOutput {
         return put_rule_groups_namespace.execute(self, allocator, input, options);
     }
 
@@ -376,14 +377,14 @@ pub const Client = struct {
     /// already associated with the resource, the new tag value that you specify
     /// replaces the previous value for that tag. To remove a tag, use
     /// `UntagResource`.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from an Amazon Managed Service for Prometheus
     /// resource. The only resources that can be tagged are rule groups namespaces,
     /// scrapers, and workspaces.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -391,12 +392,12 @@ pub const Client = struct {
     /// alerting logging configuration.
     ///
     /// These logging configurations are only for rules and alerting logs.
-    pub fn updateLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_logging_configuration.UpdateLoggingConfigurationInput, options: update_logging_configuration.Options) !update_logging_configuration.UpdateLoggingConfigurationOutput {
+    pub fn updateLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_logging_configuration.UpdateLoggingConfigurationInput, options: CallOptions) !update_logging_configuration.UpdateLoggingConfigurationOutput {
         return update_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the query logging configuration for the specified workspace.
-    pub fn updateQueryLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_query_logging_configuration.UpdateQueryLoggingConfigurationInput, options: update_query_logging_configuration.Options) !update_query_logging_configuration.UpdateQueryLoggingConfigurationOutput {
+    pub fn updateQueryLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_query_logging_configuration.UpdateQueryLoggingConfigurationInput, options: CallOptions) !update_query_logging_configuration.UpdateQueryLoggingConfigurationOutput {
         return update_query_logging_configuration.execute(self, allocator, input, options);
     }
 
@@ -405,18 +406,18 @@ pub const Client = struct {
     /// You can't use this function to update the source from which the scraper is
     /// collecting metrics. To change the source, delete the scraper and create a
     /// new one.
-    pub fn updateScraper(self: *Self, allocator: std.mem.Allocator, input: update_scraper.UpdateScraperInput, options: update_scraper.Options) !update_scraper.UpdateScraperOutput {
+    pub fn updateScraper(self: *Self, allocator: std.mem.Allocator, input: update_scraper.UpdateScraperInput, options: CallOptions) !update_scraper.UpdateScraperOutput {
         return update_scraper.execute(self, allocator, input, options);
     }
 
     /// Updates the logging configuration for a Amazon Managed Service for
     /// Prometheus scraper.
-    pub fn updateScraperLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_scraper_logging_configuration.UpdateScraperLoggingConfigurationInput, options: update_scraper_logging_configuration.Options) !update_scraper_logging_configuration.UpdateScraperLoggingConfigurationOutput {
+    pub fn updateScraperLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_scraper_logging_configuration.UpdateScraperLoggingConfigurationInput, options: CallOptions) !update_scraper_logging_configuration.UpdateScraperLoggingConfigurationOutput {
         return update_scraper_logging_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the alias of an existing workspace.
-    pub fn updateWorkspaceAlias(self: *Self, allocator: std.mem.Allocator, input: update_workspace_alias.UpdateWorkspaceAliasInput, options: update_workspace_alias.Options) !update_workspace_alias.UpdateWorkspaceAliasOutput {
+    pub fn updateWorkspaceAlias(self: *Self, allocator: std.mem.Allocator, input: update_workspace_alias.UpdateWorkspaceAliasInput, options: CallOptions) !update_workspace_alias.UpdateWorkspaceAliasOutput {
         return update_workspace_alias.execute(self, allocator, input, options);
     }
 
@@ -425,7 +426,7 @@ pub const Client = struct {
     ///
     /// You must specify at least one of `limitsPerLabelSet` or
     /// `retentionPeriodInDays` for the request to be valid.
-    pub fn updateWorkspaceConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_workspace_configuration.UpdateWorkspaceConfigurationInput, options: update_workspace_configuration.Options) !update_workspace_configuration.UpdateWorkspaceConfigurationOutput {
+    pub fn updateWorkspaceConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_workspace_configuration.UpdateWorkspaceConfigurationInput, options: CallOptions) !update_workspace_configuration.UpdateWorkspaceConfigurationOutput {
         return update_workspace_configuration.execute(self, allocator, input, options);
     }
 

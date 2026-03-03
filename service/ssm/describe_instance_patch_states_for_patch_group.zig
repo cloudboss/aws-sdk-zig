@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstancePatchStateFilter = @import("instance_patch_state_filter.zig").InstancePatchStateFilter;
 const InstancePatchState = @import("instance_patch_state.zig").InstancePatchState;
@@ -51,11 +52,7 @@ pub const DescribeInstancePatchStatesForPatchGroupOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeInstancePatchStatesForPatchGroupInput, options: Options) !DescribeInstancePatchStatesForPatchGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeInstancePatchStatesForPatchGroupInput, options: CallOptions) !DescribeInstancePatchStatesForPatchGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

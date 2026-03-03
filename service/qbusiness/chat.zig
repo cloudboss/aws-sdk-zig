@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChatInputStream = @import("chat_input_stream.zig").ChatInputStream;
 const ChatOutputStream = @import("chat_output_stream.zig").ChatOutputStream;
@@ -50,11 +51,7 @@ pub const ChatOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ChatInput, options: Options) !ChatOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ChatInput, options: CallOptions) !ChatOutput {
     _ = client;
     _ = allocator;
     _ = input;

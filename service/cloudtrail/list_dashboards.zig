@@ -2,19 +2,16 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DashboardType = @import("dashboard_type.zig").DashboardType;
 const DashboardDetail = @import("dashboard_detail.zig").DashboardDetail;
 
-const ListDashboardsInput = @import("list_dashboards_request.zig").ListDashboardsRequest;
+pub const ListDashboardsInput = @import("list_dashboards_request.zig").ListDashboardsRequest;
 
-const ListDashboardsOutput = @import("list_dashboards_response.zig").ListDashboardsResponse;
+pub const ListDashboardsOutput = @import("list_dashboards_response.zig").ListDashboardsResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDashboardsInput, options: Options) !ListDashboardsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDashboardsInput, options: CallOptions) !ListDashboardsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

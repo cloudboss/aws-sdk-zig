@@ -2,18 +2,15 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const StreamSession = @import("stream_session.zig").StreamSession;
 
-const GetStreamSessionInput = @import("get_stream_session_request.zig").GetStreamSessionRequest;
+pub const GetStreamSessionInput = @import("get_stream_session_request.zig").GetStreamSessionRequest;
 
-const GetStreamSessionOutput = @import("get_stream_session_response.zig").GetStreamSessionResponse;
+pub const GetStreamSessionOutput = @import("get_stream_session_response.zig").GetStreamSessionResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetStreamSessionInput, options: Options) !GetStreamSessionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetStreamSessionInput, options: CallOptions) !GetStreamSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

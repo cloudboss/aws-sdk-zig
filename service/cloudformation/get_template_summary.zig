@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CallAs = @import("call_as.zig").CallAs;
 const TemplateSummaryConfig = @import("template_summary_config.zig").TemplateSummaryConfig;
@@ -130,11 +131,7 @@ pub const GetTemplateSummaryOutput = struct {
     warnings: ?Warnings = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTemplateSummaryInput, options: Options) !GetTemplateSummaryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTemplateSummaryInput, options: CallOptions) !GetTemplateSummaryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

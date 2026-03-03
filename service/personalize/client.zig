@@ -72,6 +72,7 @@ const update_dataset = @import("update_dataset.zig");
 const update_metric_attribution = @import("update_metric_attribution.zig");
 const update_recommender = @import("update_recommender.zig");
 const update_solution = @import("update_solution.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -130,7 +131,7 @@ pub const Client = struct {
     ///
     /// You can't get batch recommendations with the Trending-Now or
     /// Next-Best-Action recipes.
-    pub fn createBatchInferenceJob(self: *Self, allocator: std.mem.Allocator, input: create_batch_inference_job.CreateBatchInferenceJobInput, options: create_batch_inference_job.Options) !create_batch_inference_job.CreateBatchInferenceJobOutput {
+    pub fn createBatchInferenceJob(self: *Self, allocator: std.mem.Allocator, input: create_batch_inference_job.CreateBatchInferenceJobInput, options: CallOptions) !create_batch_inference_job.CreateBatchInferenceJobOutput {
         return create_batch_inference_job.execute(self, allocator, input, options);
     }
 
@@ -139,7 +140,7 @@ pub const Client = struct {
     /// input file must be in JSON format. For more information, see
     /// [Getting batch recommendations and user
     /// segments](https://docs.aws.amazon.com/personalize/latest/dg/recommendations-batch.html).
-    pub fn createBatchSegmentJob(self: *Self, allocator: std.mem.Allocator, input: create_batch_segment_job.CreateBatchSegmentJobInput, options: create_batch_segment_job.Options) !create_batch_segment_job.CreateBatchSegmentJobOutput {
+    pub fn createBatchSegmentJob(self: *Self, allocator: std.mem.Allocator, input: create_batch_segment_job.CreateBatchSegmentJobInput, options: CallOptions) !create_batch_segment_job.CreateBatchSegmentJobOutput {
         return create_batch_segment_job.execute(self, allocator, input, options);
     }
 
@@ -216,7 +217,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteCampaign](https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html)
-    pub fn createCampaign(self: *Self, allocator: std.mem.Allocator, input: create_campaign.CreateCampaignInput, options: create_campaign.Options) !create_campaign.CreateCampaignOutput {
+    pub fn createCampaign(self: *Self, allocator: std.mem.Allocator, input: create_campaign.CreateCampaignInput, options: CallOptions) !create_campaign.CreateCampaignOutput {
         return create_campaign.execute(self, allocator, input, options);
     }
 
@@ -271,7 +272,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DescribeDataDeletionJob](https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataDeletionJob.html)
-    pub fn createDataDeletionJob(self: *Self, allocator: std.mem.Allocator, input: create_data_deletion_job.CreateDataDeletionJobInput, options: create_data_deletion_job.Options) !create_data_deletion_job.CreateDataDeletionJobOutput {
+    pub fn createDataDeletionJob(self: *Self, allocator: std.mem.Allocator, input: create_data_deletion_job.CreateDataDeletionJobInput, options: CallOptions) !create_data_deletion_job.CreateDataDeletionJobOutput {
         return create_data_deletion_job.execute(self, allocator, input, options);
     }
 
@@ -319,7 +320,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteDataset](https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDataset.html)
-    pub fn createDataset(self: *Self, allocator: std.mem.Allocator, input: create_dataset.CreateDatasetInput, options: create_dataset.Options) !create_dataset.CreateDatasetOutput {
+    pub fn createDataset(self: *Self, allocator: std.mem.Allocator, input: create_dataset.CreateDatasetInput, options: CallOptions) !create_dataset.CreateDatasetOutput {
         return create_dataset.execute(self, allocator, input, options);
     }
 
@@ -343,7 +344,7 @@ pub const Client = struct {
     /// status shows as ACTIVE. If the status shows as CREATE FAILED, the response
     /// includes a `failureReason` key, which describes why the job
     /// failed.
-    pub fn createDatasetExportJob(self: *Self, allocator: std.mem.Allocator, input: create_dataset_export_job.CreateDatasetExportJobInput, options: create_dataset_export_job.Options) !create_dataset_export_job.CreateDatasetExportJobOutput {
+    pub fn createDatasetExportJob(self: *Self, allocator: std.mem.Allocator, input: create_dataset_export_job.CreateDatasetExportJobInput, options: CallOptions) !create_dataset_export_job.CreateDatasetExportJobOutput {
         return create_dataset_export_job.execute(self, allocator, input, options);
     }
 
@@ -412,7 +413,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteDatasetGroup](https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDatasetGroup.html)
-    pub fn createDatasetGroup(self: *Self, allocator: std.mem.Allocator, input: create_dataset_group.CreateDatasetGroupInput, options: create_dataset_group.Options) !create_dataset_group.CreateDatasetGroupOutput {
+    pub fn createDatasetGroup(self: *Self, allocator: std.mem.Allocator, input: create_dataset_group.CreateDatasetGroupInput, options: CallOptions) !create_dataset_group.CreateDatasetGroupOutput {
         return create_dataset_group.execute(self, allocator, input, options);
     }
 
@@ -464,7 +465,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DescribeDatasetImportJob](https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html)
-    pub fn createDatasetImportJob(self: *Self, allocator: std.mem.Allocator, input: create_dataset_import_job.CreateDatasetImportJobInput, options: create_dataset_import_job.Options) !create_dataset_import_job.CreateDatasetImportJobOutput {
+    pub fn createDatasetImportJob(self: *Self, allocator: std.mem.Allocator, input: create_dataset_import_job.CreateDatasetImportJobInput, options: CallOptions) !create_dataset_import_job.CreateDatasetImportJobOutput {
         return create_dataset_import_job.execute(self, allocator, input, options);
     }
 
@@ -505,14 +506,14 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteEventTracker](https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteEventTracker.html)
-    pub fn createEventTracker(self: *Self, allocator: std.mem.Allocator, input: create_event_tracker.CreateEventTrackerInput, options: create_event_tracker.Options) !create_event_tracker.CreateEventTrackerOutput {
+    pub fn createEventTracker(self: *Self, allocator: std.mem.Allocator, input: create_event_tracker.CreateEventTrackerInput, options: CallOptions) !create_event_tracker.CreateEventTrackerOutput {
         return create_event_tracker.execute(self, allocator, input, options);
     }
 
     /// Creates a recommendation filter. For more information, see [Filtering
     /// recommendations and user
     /// segments](https://docs.aws.amazon.com/personalize/latest/dg/filter.html).
-    pub fn createFilter(self: *Self, allocator: std.mem.Allocator, input: create_filter.CreateFilterInput, options: create_filter.Options) !create_filter.CreateFilterOutput {
+    pub fn createFilter(self: *Self, allocator: std.mem.Allocator, input: create_filter.CreateFilterInput, options: CallOptions) !create_filter.CreateFilterOutput {
         return create_filter.execute(self, allocator, input, options);
     }
 
@@ -522,7 +523,7 @@ pub const Client = struct {
     /// Amazon CloudWatch or Amazon S3.
     /// For more information, see [Measuring impact of
     /// recommendations](https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
-    pub fn createMetricAttribution(self: *Self, allocator: std.mem.Allocator, input: create_metric_attribution.CreateMetricAttributionInput, options: create_metric_attribution.Options) !create_metric_attribution.CreateMetricAttributionOutput {
+    pub fn createMetricAttribution(self: *Self, allocator: std.mem.Allocator, input: create_metric_attribution.CreateMetricAttributionInput, options: CallOptions) !create_metric_attribution.CreateMetricAttributionOutput {
         return create_metric_attribution.execute(self, allocator, input, options);
     }
 
@@ -602,7 +603,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteRecommender](https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteRecommender.html)
-    pub fn createRecommender(self: *Self, allocator: std.mem.Allocator, input: create_recommender.CreateRecommenderInput, options: create_recommender.Options) !create_recommender.CreateRecommenderOutput {
+    pub fn createRecommender(self: *Self, allocator: std.mem.Allocator, input: create_recommender.CreateRecommenderInput, options: CallOptions) !create_recommender.CreateRecommenderOutput {
         return create_recommender.execute(self, allocator, input, options);
     }
 
@@ -628,7 +629,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteSchema](https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSchema.html)
-    pub fn createSchema(self: *Self, allocator: std.mem.Allocator, input: create_schema.CreateSchemaInput, options: create_schema.Options) !create_schema.CreateSchemaOutput {
+    pub fn createSchema(self: *Self, allocator: std.mem.Allocator, input: create_schema.CreateSchemaInput, options: CallOptions) !create_schema.CreateSchemaOutput {
         return create_schema.execute(self, allocator, input, options);
     }
 
@@ -715,7 +716,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DescribeSolutionVersion](https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
-    pub fn createSolution(self: *Self, allocator: std.mem.Allocator, input: create_solution.CreateSolutionInput, options: create_solution.Options) !create_solution.CreateSolutionOutput {
+    pub fn createSolution(self: *Self, allocator: std.mem.Allocator, input: create_solution.CreateSolutionInput, options: CallOptions) !create_solution.CreateSolutionOutput {
         return create_solution.execute(self, allocator, input, options);
     }
 
@@ -770,7 +771,7 @@ pub const Client = struct {
     ///
     /// *
     ///   [DeleteSolution](https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html)
-    pub fn createSolutionVersion(self: *Self, allocator: std.mem.Allocator, input: create_solution_version.CreateSolutionVersionInput, options: create_solution_version.Options) !create_solution_version.CreateSolutionVersionOutput {
+    pub fn createSolutionVersion(self: *Self, allocator: std.mem.Allocator, input: create_solution_version.CreateSolutionVersionInput, options: CallOptions) !create_solution_version.CreateSolutionVersionOutput {
         return create_solution_version.execute(self, allocator, input, options);
     }
 
@@ -782,7 +783,7 @@ pub const Client = struct {
     /// request.
     /// For information on creating campaigns, see
     /// [CreateCampaign](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html).
-    pub fn deleteCampaign(self: *Self, allocator: std.mem.Allocator, input: delete_campaign.DeleteCampaignInput, options: delete_campaign.Options) !delete_campaign.DeleteCampaignOutput {
+    pub fn deleteCampaign(self: *Self, allocator: std.mem.Allocator, input: delete_campaign.DeleteCampaignInput, options: CallOptions) !delete_campaign.DeleteCampaignOutput {
         return delete_campaign.execute(self, allocator, input, options);
     }
 
@@ -792,7 +793,7 @@ pub const Client = struct {
     /// datasets,
     /// see [Deleting a
     /// dataset](https://docs.aws.amazon.com/personalize/latest/dg/delete-dataset.html).
-    pub fn deleteDataset(self: *Self, allocator: std.mem.Allocator, input: delete_dataset.DeleteDatasetInput, options: delete_dataset.Options) !delete_dataset.DeleteDatasetOutput {
+    pub fn deleteDataset(self: *Self, allocator: std.mem.Allocator, input: delete_dataset.DeleteDatasetInput, options: CallOptions) !delete_dataset.DeleteDatasetOutput {
         return delete_dataset.execute(self, allocator, input, options);
     }
 
@@ -804,7 +805,7 @@ pub const Client = struct {
     /// * All associated solutions.
     ///
     /// * All datasets in the dataset group.
-    pub fn deleteDatasetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_dataset_group.DeleteDatasetGroupInput, options: delete_dataset_group.Options) !delete_dataset_group.DeleteDatasetGroupOutput {
+    pub fn deleteDatasetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_dataset_group.DeleteDatasetGroupInput, options: CallOptions) !delete_dataset_group.DeleteDatasetGroupOutput {
         return delete_dataset_group.execute(self, allocator, input, options);
     }
 
@@ -812,17 +813,17 @@ pub const Client = struct {
     /// the dataset group. For more
     /// information on event trackers, see
     /// [CreateEventTracker](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html).
-    pub fn deleteEventTracker(self: *Self, allocator: std.mem.Allocator, input: delete_event_tracker.DeleteEventTrackerInput, options: delete_event_tracker.Options) !delete_event_tracker.DeleteEventTrackerOutput {
+    pub fn deleteEventTracker(self: *Self, allocator: std.mem.Allocator, input: delete_event_tracker.DeleteEventTrackerInput, options: CallOptions) !delete_event_tracker.DeleteEventTrackerOutput {
         return delete_event_tracker.execute(self, allocator, input, options);
     }
 
     /// Deletes a filter.
-    pub fn deleteFilter(self: *Self, allocator: std.mem.Allocator, input: delete_filter.DeleteFilterInput, options: delete_filter.Options) !delete_filter.DeleteFilterOutput {
+    pub fn deleteFilter(self: *Self, allocator: std.mem.Allocator, input: delete_filter.DeleteFilterInput, options: CallOptions) !delete_filter.DeleteFilterOutput {
         return delete_filter.execute(self, allocator, input, options);
     }
 
     /// Deletes a metric attribution.
-    pub fn deleteMetricAttribution(self: *Self, allocator: std.mem.Allocator, input: delete_metric_attribution.DeleteMetricAttributionInput, options: delete_metric_attribution.Options) !delete_metric_attribution.DeleteMetricAttributionOutput {
+    pub fn deleteMetricAttribution(self: *Self, allocator: std.mem.Allocator, input: delete_metric_attribution.DeleteMetricAttributionInput, options: CallOptions) !delete_metric_attribution.DeleteMetricAttributionOutput {
         return delete_metric_attribution.execute(self, allocator, input, options);
     }
 
@@ -830,14 +831,14 @@ pub const Client = struct {
     /// be specified in a
     /// [GetRecommendations](https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
     /// request.
-    pub fn deleteRecommender(self: *Self, allocator: std.mem.Allocator, input: delete_recommender.DeleteRecommenderInput, options: delete_recommender.Options) !delete_recommender.DeleteRecommenderOutput {
+    pub fn deleteRecommender(self: *Self, allocator: std.mem.Allocator, input: delete_recommender.DeleteRecommenderInput, options: CallOptions) !delete_recommender.DeleteRecommenderOutput {
         return delete_recommender.execute(self, allocator, input, options);
     }
 
     /// Deletes a schema. Before deleting a schema, you must delete all
     /// datasets referencing the schema. For more information on schemas, see
     /// [CreateSchema](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSchema.html).
-    pub fn deleteSchema(self: *Self, allocator: std.mem.Allocator, input: delete_schema.DeleteSchemaInput, options: delete_schema.Options) !delete_schema.DeleteSchemaOutput {
+    pub fn deleteSchema(self: *Self, allocator: std.mem.Allocator, input: delete_schema.DeleteSchemaInput, options: CallOptions) !delete_schema.DeleteSchemaOutput {
         return delete_schema.execute(self, allocator, input, options);
     }
 
@@ -849,12 +850,12 @@ pub const Client = struct {
     /// CREATE PENDING or IN PROGRESS state.
     /// For more information on solutions, see
     /// [CreateSolution](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html).
-    pub fn deleteSolution(self: *Self, allocator: std.mem.Allocator, input: delete_solution.DeleteSolutionInput, options: delete_solution.Options) !delete_solution.DeleteSolutionOutput {
+    pub fn deleteSolution(self: *Self, allocator: std.mem.Allocator, input: delete_solution.DeleteSolutionInput, options: CallOptions) !delete_solution.DeleteSolutionOutput {
         return delete_solution.execute(self, allocator, input, options);
     }
 
     /// Describes the given algorithm.
-    pub fn describeAlgorithm(self: *Self, allocator: std.mem.Allocator, input: describe_algorithm.DescribeAlgorithmInput, options: describe_algorithm.Options) !describe_algorithm.DescribeAlgorithmOutput {
+    pub fn describeAlgorithm(self: *Self, allocator: std.mem.Allocator, input: describe_algorithm.DescribeAlgorithmInput, options: CallOptions) !describe_algorithm.DescribeAlgorithmOutput {
         return describe_algorithm.execute(self, allocator, input, options);
     }
 
@@ -863,7 +864,7 @@ pub const Client = struct {
     /// status, input and output configurations, and the ARN of the solution version
     /// used to generate
     /// the recommendations.
-    pub fn describeBatchInferenceJob(self: *Self, allocator: std.mem.Allocator, input: describe_batch_inference_job.DescribeBatchInferenceJobInput, options: describe_batch_inference_job.Options) !describe_batch_inference_job.DescribeBatchInferenceJobOutput {
+    pub fn describeBatchInferenceJob(self: *Self, allocator: std.mem.Allocator, input: describe_batch_inference_job.DescribeBatchInferenceJobInput, options: CallOptions) !describe_batch_inference_job.DescribeBatchInferenceJobOutput {
         return describe_batch_inference_job.execute(self, allocator, input, options);
     }
 
@@ -872,7 +873,7 @@ pub const Client = struct {
     /// status, input and output configurations, and the ARN of the solution version
     /// used to generate
     /// segments.
-    pub fn describeBatchSegmentJob(self: *Self, allocator: std.mem.Allocator, input: describe_batch_segment_job.DescribeBatchSegmentJobInput, options: describe_batch_segment_job.Options) !describe_batch_segment_job.DescribeBatchSegmentJobOutput {
+    pub fn describeBatchSegmentJob(self: *Self, allocator: std.mem.Allocator, input: describe_batch_segment_job.DescribeBatchSegmentJobInput, options: CallOptions) !describe_batch_segment_job.DescribeBatchSegmentJobOutput {
         return describe_batch_segment_job.execute(self, allocator, input, options);
     }
 
@@ -889,38 +890,38 @@ pub const Client = struct {
     ///
     /// For more information on campaigns, see
     /// [CreateCampaign](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html).
-    pub fn describeCampaign(self: *Self, allocator: std.mem.Allocator, input: describe_campaign.DescribeCampaignInput, options: describe_campaign.Options) !describe_campaign.DescribeCampaignOutput {
+    pub fn describeCampaign(self: *Self, allocator: std.mem.Allocator, input: describe_campaign.DescribeCampaignInput, options: CallOptions) !describe_campaign.DescribeCampaignOutput {
         return describe_campaign.execute(self, allocator, input, options);
     }
 
     /// Describes the data deletion job created by
     /// [CreateDataDeletionJob](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataDeletionJob.html), including the job status.
-    pub fn describeDataDeletionJob(self: *Self, allocator: std.mem.Allocator, input: describe_data_deletion_job.DescribeDataDeletionJobInput, options: describe_data_deletion_job.Options) !describe_data_deletion_job.DescribeDataDeletionJobOutput {
+    pub fn describeDataDeletionJob(self: *Self, allocator: std.mem.Allocator, input: describe_data_deletion_job.DescribeDataDeletionJobInput, options: CallOptions) !describe_data_deletion_job.DescribeDataDeletionJobOutput {
         return describe_data_deletion_job.execute(self, allocator, input, options);
     }
 
     /// Describes the given dataset. For more information on datasets, see
     /// [CreateDataset](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html).
-    pub fn describeDataset(self: *Self, allocator: std.mem.Allocator, input: describe_dataset.DescribeDatasetInput, options: describe_dataset.Options) !describe_dataset.DescribeDatasetOutput {
+    pub fn describeDataset(self: *Self, allocator: std.mem.Allocator, input: describe_dataset.DescribeDatasetInput, options: CallOptions) !describe_dataset.DescribeDatasetOutput {
         return describe_dataset.execute(self, allocator, input, options);
     }
 
     /// Describes the dataset export job created by
     /// [CreateDatasetExportJob](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html), including the export job status.
-    pub fn describeDatasetExportJob(self: *Self, allocator: std.mem.Allocator, input: describe_dataset_export_job.DescribeDatasetExportJobInput, options: describe_dataset_export_job.Options) !describe_dataset_export_job.DescribeDatasetExportJobOutput {
+    pub fn describeDatasetExportJob(self: *Self, allocator: std.mem.Allocator, input: describe_dataset_export_job.DescribeDatasetExportJobInput, options: CallOptions) !describe_dataset_export_job.DescribeDatasetExportJobOutput {
         return describe_dataset_export_job.execute(self, allocator, input, options);
     }
 
     /// Describes the given dataset group. For more information on dataset
     /// groups, see
     /// [CreateDatasetGroup](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html).
-    pub fn describeDatasetGroup(self: *Self, allocator: std.mem.Allocator, input: describe_dataset_group.DescribeDatasetGroupInput, options: describe_dataset_group.Options) !describe_dataset_group.DescribeDatasetGroupOutput {
+    pub fn describeDatasetGroup(self: *Self, allocator: std.mem.Allocator, input: describe_dataset_group.DescribeDatasetGroupInput, options: CallOptions) !describe_dataset_group.DescribeDatasetGroupOutput {
         return describe_dataset_group.execute(self, allocator, input, options);
     }
 
     /// Describes the dataset import job created by
     /// [CreateDatasetImportJob](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html), including the import job status.
-    pub fn describeDatasetImportJob(self: *Self, allocator: std.mem.Allocator, input: describe_dataset_import_job.DescribeDatasetImportJobInput, options: describe_dataset_import_job.Options) !describe_dataset_import_job.DescribeDatasetImportJobOutput {
+    pub fn describeDatasetImportJob(self: *Self, allocator: std.mem.Allocator, input: describe_dataset_import_job.DescribeDatasetImportJobInput, options: CallOptions) !describe_dataset_import_job.DescribeDatasetImportJobOutput {
         return describe_dataset_import_job.execute(self, allocator, input, options);
     }
 
@@ -928,22 +929,22 @@ pub const Client = struct {
     /// `status` of the event tracker.
     /// For more information on event trackers, see
     /// [CreateEventTracker](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html).
-    pub fn describeEventTracker(self: *Self, allocator: std.mem.Allocator, input: describe_event_tracker.DescribeEventTrackerInput, options: describe_event_tracker.Options) !describe_event_tracker.DescribeEventTrackerOutput {
+    pub fn describeEventTracker(self: *Self, allocator: std.mem.Allocator, input: describe_event_tracker.DescribeEventTrackerInput, options: CallOptions) !describe_event_tracker.DescribeEventTrackerOutput {
         return describe_event_tracker.execute(self, allocator, input, options);
     }
 
     /// Describes the given feature transformation.
-    pub fn describeFeatureTransformation(self: *Self, allocator: std.mem.Allocator, input: describe_feature_transformation.DescribeFeatureTransformationInput, options: describe_feature_transformation.Options) !describe_feature_transformation.DescribeFeatureTransformationOutput {
+    pub fn describeFeatureTransformation(self: *Self, allocator: std.mem.Allocator, input: describe_feature_transformation.DescribeFeatureTransformationInput, options: CallOptions) !describe_feature_transformation.DescribeFeatureTransformationOutput {
         return describe_feature_transformation.execute(self, allocator, input, options);
     }
 
     /// Describes a filter's properties.
-    pub fn describeFilter(self: *Self, allocator: std.mem.Allocator, input: describe_filter.DescribeFilterInput, options: describe_filter.Options) !describe_filter.DescribeFilterOutput {
+    pub fn describeFilter(self: *Self, allocator: std.mem.Allocator, input: describe_filter.DescribeFilterInput, options: CallOptions) !describe_filter.DescribeFilterOutput {
         return describe_filter.execute(self, allocator, input, options);
     }
 
     /// Describes a metric attribution.
-    pub fn describeMetricAttribution(self: *Self, allocator: std.mem.Allocator, input: describe_metric_attribution.DescribeMetricAttributionInput, options: describe_metric_attribution.Options) !describe_metric_attribution.DescribeMetricAttributionOutput {
+    pub fn describeMetricAttribution(self: *Self, allocator: std.mem.Allocator, input: describe_metric_attribution.DescribeMetricAttributionInput, options: CallOptions) !describe_metric_attribution.DescribeMetricAttributionOutput {
         return describe_metric_attribution.execute(self, allocator, input, options);
     }
 
@@ -967,7 +968,7 @@ pub const Client = struct {
     /// as a campaign,
     /// can provide recommendations using the
     /// [GetRecommendations](https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html) API.
-    pub fn describeRecipe(self: *Self, allocator: std.mem.Allocator, input: describe_recipe.DescribeRecipeInput, options: describe_recipe.Options) !describe_recipe.DescribeRecipeOutput {
+    pub fn describeRecipe(self: *Self, allocator: std.mem.Allocator, input: describe_recipe.DescribeRecipeInput, options: CallOptions) !describe_recipe.DescribeRecipeOutput {
         return describe_recipe.execute(self, allocator, input, options);
     }
 
@@ -990,46 +991,46 @@ pub const Client = struct {
     ///
     /// For more information on recommenders, see
     /// [CreateRecommender](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateRecommender.html).
-    pub fn describeRecommender(self: *Self, allocator: std.mem.Allocator, input: describe_recommender.DescribeRecommenderInput, options: describe_recommender.Options) !describe_recommender.DescribeRecommenderOutput {
+    pub fn describeRecommender(self: *Self, allocator: std.mem.Allocator, input: describe_recommender.DescribeRecommenderInput, options: CallOptions) !describe_recommender.DescribeRecommenderOutput {
         return describe_recommender.execute(self, allocator, input, options);
     }
 
     /// Describes a schema. For more information on schemas, see
     /// [CreateSchema](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSchema.html).
-    pub fn describeSchema(self: *Self, allocator: std.mem.Allocator, input: describe_schema.DescribeSchemaInput, options: describe_schema.Options) !describe_schema.DescribeSchemaOutput {
+    pub fn describeSchema(self: *Self, allocator: std.mem.Allocator, input: describe_schema.DescribeSchemaInput, options: CallOptions) !describe_schema.DescribeSchemaOutput {
         return describe_schema.execute(self, allocator, input, options);
     }
 
     /// Describes a solution.
     /// For more information on solutions, see
     /// [CreateSolution](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html).
-    pub fn describeSolution(self: *Self, allocator: std.mem.Allocator, input: describe_solution.DescribeSolutionInput, options: describe_solution.Options) !describe_solution.DescribeSolutionOutput {
+    pub fn describeSolution(self: *Self, allocator: std.mem.Allocator, input: describe_solution.DescribeSolutionInput, options: CallOptions) !describe_solution.DescribeSolutionOutput {
         return describe_solution.execute(self, allocator, input, options);
     }
 
     /// Describes a specific version of a solution. For more information on
     /// solutions, see
     /// [CreateSolution](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
-    pub fn describeSolutionVersion(self: *Self, allocator: std.mem.Allocator, input: describe_solution_version.DescribeSolutionVersionInput, options: describe_solution_version.Options) !describe_solution_version.DescribeSolutionVersionOutput {
+    pub fn describeSolutionVersion(self: *Self, allocator: std.mem.Allocator, input: describe_solution_version.DescribeSolutionVersionInput, options: CallOptions) !describe_solution_version.DescribeSolutionVersionOutput {
         return describe_solution_version.execute(self, allocator, input, options);
     }
 
     /// Gets the metrics for the specified solution version.
-    pub fn getSolutionMetrics(self: *Self, allocator: std.mem.Allocator, input: get_solution_metrics.GetSolutionMetricsInput, options: get_solution_metrics.Options) !get_solution_metrics.GetSolutionMetricsOutput {
+    pub fn getSolutionMetrics(self: *Self, allocator: std.mem.Allocator, input: get_solution_metrics.GetSolutionMetricsInput, options: CallOptions) !get_solution_metrics.GetSolutionMetricsOutput {
         return get_solution_metrics.execute(self, allocator, input, options);
     }
 
     /// Gets a list of the batch inference jobs that have been performed off of a
     /// solution
     /// version.
-    pub fn listBatchInferenceJobs(self: *Self, allocator: std.mem.Allocator, input: list_batch_inference_jobs.ListBatchInferenceJobsInput, options: list_batch_inference_jobs.Options) !list_batch_inference_jobs.ListBatchInferenceJobsOutput {
+    pub fn listBatchInferenceJobs(self: *Self, allocator: std.mem.Allocator, input: list_batch_inference_jobs.ListBatchInferenceJobsInput, options: CallOptions) !list_batch_inference_jobs.ListBatchInferenceJobsOutput {
         return list_batch_inference_jobs.execute(self, allocator, input, options);
     }
 
     /// Gets a list of the batch segment jobs that have been performed off of a
     /// solution
     /// version that you specify.
-    pub fn listBatchSegmentJobs(self: *Self, allocator: std.mem.Allocator, input: list_batch_segment_jobs.ListBatchSegmentJobsInput, options: list_batch_segment_jobs.Options) !list_batch_segment_jobs.ListBatchSegmentJobsOutput {
+    pub fn listBatchSegmentJobs(self: *Self, allocator: std.mem.Allocator, input: list_batch_segment_jobs.ListBatchSegmentJobsInput, options: CallOptions) !list_batch_segment_jobs.ListBatchSegmentJobsOutput {
         return list_batch_segment_jobs.execute(self, allocator, input, options);
     }
 
@@ -1040,7 +1041,7 @@ pub const Client = struct {
     /// Resource Name (ARN).
     /// For more information on campaigns, see
     /// [CreateCampaign](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html).
-    pub fn listCampaigns(self: *Self, allocator: std.mem.Allocator, input: list_campaigns.ListCampaignsInput, options: list_campaigns.Options) !list_campaigns.ListCampaignsOutput {
+    pub fn listCampaigns(self: *Self, allocator: std.mem.Allocator, input: list_campaigns.ListCampaignsInput, options: CallOptions) !list_campaigns.ListCampaignsOutput {
         return list_campaigns.execute(self, allocator, input, options);
     }
 
@@ -1053,7 +1054,7 @@ pub const Client = struct {
     /// job, including the Amazon Resource Name (ARN). For more
     /// information on data deletion jobs, see [Deleting
     /// users](https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html).
-    pub fn listDataDeletionJobs(self: *Self, allocator: std.mem.Allocator, input: list_data_deletion_jobs.ListDataDeletionJobsInput, options: list_data_deletion_jobs.Options) !list_data_deletion_jobs.ListDataDeletionJobsOutput {
+    pub fn listDataDeletionJobs(self: *Self, allocator: std.mem.Allocator, input: list_data_deletion_jobs.ListDataDeletionJobsInput, options: CallOptions) !list_data_deletion_jobs.ListDataDeletionJobsOutput {
         return list_data_deletion_jobs.execute(self, allocator, input, options);
     }
 
@@ -1064,7 +1065,7 @@ pub const Client = struct {
     /// information on dataset export jobs, see
     /// [CreateDatasetExportJob](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html). For more information on datasets, see
     /// [CreateDataset](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html).
-    pub fn listDatasetExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_dataset_export_jobs.ListDatasetExportJobsInput, options: list_dataset_export_jobs.Options) !list_dataset_export_jobs.ListDatasetExportJobsOutput {
+    pub fn listDatasetExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_dataset_export_jobs.ListDatasetExportJobsInput, options: CallOptions) !list_dataset_export_jobs.ListDatasetExportJobsOutput {
         return list_dataset_export_jobs.execute(self, allocator, input, options);
     }
 
@@ -1072,7 +1073,7 @@ pub const Client = struct {
     /// for each dataset group, including the Amazon Resource Name (ARN). For more
     /// information on dataset groups, see
     /// [CreateDatasetGroup](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html).
-    pub fn listDatasetGroups(self: *Self, allocator: std.mem.Allocator, input: list_dataset_groups.ListDatasetGroupsInput, options: list_dataset_groups.Options) !list_dataset_groups.ListDatasetGroupsOutput {
+    pub fn listDatasetGroups(self: *Self, allocator: std.mem.Allocator, input: list_dataset_groups.ListDatasetGroupsInput, options: CallOptions) !list_dataset_groups.ListDatasetGroupsOutput {
         return list_dataset_groups.execute(self, allocator, input, options);
     }
 
@@ -1083,7 +1084,7 @@ pub const Client = struct {
     /// information on dataset import jobs, see
     /// [CreateDatasetImportJob](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html). For more information on datasets, see
     /// [CreateDataset](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html).
-    pub fn listDatasetImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_dataset_import_jobs.ListDatasetImportJobsInput, options: list_dataset_import_jobs.Options) !list_dataset_import_jobs.ListDatasetImportJobsOutput {
+    pub fn listDatasetImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_dataset_import_jobs.ListDatasetImportJobsInput, options: CallOptions) !list_dataset_import_jobs.ListDatasetImportJobsOutput {
         return list_dataset_import_jobs.execute(self, allocator, input, options);
     }
 
@@ -1091,7 +1092,7 @@ pub const Client = struct {
     /// response provides the properties for each dataset, including the Amazon
     /// Resource Name (ARN). For more information on datasets, see
     /// [CreateDataset](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html).
-    pub fn listDatasets(self: *Self, allocator: std.mem.Allocator, input: list_datasets.ListDatasetsInput, options: list_datasets.Options) !list_datasets.ListDatasetsOutput {
+    pub fn listDatasets(self: *Self, allocator: std.mem.Allocator, input: list_datasets.ListDatasetsInput, options: CallOptions) !list_datasets.ListDatasetsOutput {
         return list_datasets.execute(self, allocator, input, options);
     }
 
@@ -1101,28 +1102,28 @@ pub const Client = struct {
     /// Name (ARN) and tracking ID. For more
     /// information on event trackers, see
     /// [CreateEventTracker](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html).
-    pub fn listEventTrackers(self: *Self, allocator: std.mem.Allocator, input: list_event_trackers.ListEventTrackersInput, options: list_event_trackers.Options) !list_event_trackers.ListEventTrackersOutput {
+    pub fn listEventTrackers(self: *Self, allocator: std.mem.Allocator, input: list_event_trackers.ListEventTrackersInput, options: CallOptions) !list_event_trackers.ListEventTrackersOutput {
         return list_event_trackers.execute(self, allocator, input, options);
     }
 
     /// Lists all filters that belong to a given dataset group.
-    pub fn listFilters(self: *Self, allocator: std.mem.Allocator, input: list_filters.ListFiltersInput, options: list_filters.Options) !list_filters.ListFiltersOutput {
+    pub fn listFilters(self: *Self, allocator: std.mem.Allocator, input: list_filters.ListFiltersInput, options: CallOptions) !list_filters.ListFiltersOutput {
         return list_filters.execute(self, allocator, input, options);
     }
 
     /// Lists the metrics for the metric attribution.
-    pub fn listMetricAttributionMetrics(self: *Self, allocator: std.mem.Allocator, input: list_metric_attribution_metrics.ListMetricAttributionMetricsInput, options: list_metric_attribution_metrics.Options) !list_metric_attribution_metrics.ListMetricAttributionMetricsOutput {
+    pub fn listMetricAttributionMetrics(self: *Self, allocator: std.mem.Allocator, input: list_metric_attribution_metrics.ListMetricAttributionMetricsInput, options: CallOptions) !list_metric_attribution_metrics.ListMetricAttributionMetricsOutput {
         return list_metric_attribution_metrics.execute(self, allocator, input, options);
     }
 
     /// Lists metric attributions.
-    pub fn listMetricAttributions(self: *Self, allocator: std.mem.Allocator, input: list_metric_attributions.ListMetricAttributionsInput, options: list_metric_attributions.Options) !list_metric_attributions.ListMetricAttributionsOutput {
+    pub fn listMetricAttributions(self: *Self, allocator: std.mem.Allocator, input: list_metric_attributions.ListMetricAttributionsInput, options: CallOptions) !list_metric_attributions.ListMetricAttributionsOutput {
         return list_metric_attributions.execute(self, allocator, input, options);
     }
 
     /// Returns a list of available recipes. The response provides the properties
     /// for each recipe, including the recipe's Amazon Resource Name (ARN).
-    pub fn listRecipes(self: *Self, allocator: std.mem.Allocator, input: list_recipes.ListRecipesInput, options: list_recipes.Options) !list_recipes.ListRecipesOutput {
+    pub fn listRecipes(self: *Self, allocator: std.mem.Allocator, input: list_recipes.ListRecipesInput, options: CallOptions) !list_recipes.ListRecipesOutput {
         return list_recipes.execute(self, allocator, input, options);
     }
 
@@ -1133,7 +1134,7 @@ pub const Client = struct {
     /// Amazon Resource Name (ARN).
     /// For more information on recommenders, see
     /// [CreateRecommender](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateRecommender.html).
-    pub fn listRecommenders(self: *Self, allocator: std.mem.Allocator, input: list_recommenders.ListRecommendersInput, options: list_recommenders.Options) !list_recommenders.ListRecommendersOutput {
+    pub fn listRecommenders(self: *Self, allocator: std.mem.Allocator, input: list_recommenders.ListRecommendersInput, options: CallOptions) !list_recommenders.ListRecommendersOutput {
         return list_recommenders.execute(self, allocator, input, options);
     }
 
@@ -1142,7 +1143,7 @@ pub const Client = struct {
     /// properties for each schema, including the Amazon Resource Name (ARN).
     /// For more information on schemas, see
     /// [CreateSchema](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSchema.html).
-    pub fn listSchemas(self: *Self, allocator: std.mem.Allocator, input: list_schemas.ListSchemasInput, options: list_schemas.Options) !list_schemas.ListSchemasOutput {
+    pub fn listSchemas(self: *Self, allocator: std.mem.Allocator, input: list_schemas.ListSchemasInput, options: CallOptions) !list_schemas.ListSchemasOutput {
         return list_schemas.execute(self, allocator, input, options);
     }
 
@@ -1152,7 +1153,7 @@ pub const Client = struct {
     /// The response
     /// provides the properties for each solution version, including the Amazon
     /// Resource Name (ARN).
-    pub fn listSolutionVersions(self: *Self, allocator: std.mem.Allocator, input: list_solution_versions.ListSolutionVersionsInput, options: list_solution_versions.Options) !list_solution_versions.ListSolutionVersionsOutput {
+    pub fn listSolutionVersions(self: *Self, allocator: std.mem.Allocator, input: list_solution_versions.ListSolutionVersionsInput, options: CallOptions) !list_solution_versions.ListSolutionVersionsOutput {
         return list_solution_versions.execute(self, allocator, input, options);
     }
 
@@ -1163,26 +1164,26 @@ pub const Client = struct {
     /// Resource Name (ARN).
     /// For more information on solutions, see
     /// [CreateSolution](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html).
-    pub fn listSolutions(self: *Self, allocator: std.mem.Allocator, input: list_solutions.ListSolutionsInput, options: list_solutions.Options) !list_solutions.ListSolutionsOutput {
+    pub fn listSolutions(self: *Self, allocator: std.mem.Allocator, input: list_solutions.ListSolutionsInput, options: CallOptions) !list_solutions.ListSolutionsOutput {
         return list_solutions.execute(self, allocator, input, options);
     }
 
     /// Get a list of
     /// [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) attached to a resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Starts a recommender that is INACTIVE. Starting a recommender does not
     /// create any new models, but resumes billing and automatic retraining for the
     /// recommender.
-    pub fn startRecommender(self: *Self, allocator: std.mem.Allocator, input: start_recommender.StartRecommenderInput, options: start_recommender.Options) !start_recommender.StartRecommenderOutput {
+    pub fn startRecommender(self: *Self, allocator: std.mem.Allocator, input: start_recommender.StartRecommenderInput, options: CallOptions) !start_recommender.StartRecommenderOutput {
         return start_recommender.execute(self, allocator, input, options);
     }
 
     /// Stops a recommender that is ACTIVE. Stopping a recommender halts billing and
     /// automatic retraining for the recommender.
-    pub fn stopRecommender(self: *Self, allocator: std.mem.Allocator, input: stop_recommender.StopRecommenderInput, options: stop_recommender.Options) !stop_recommender.StopRecommenderOutput {
+    pub fn stopRecommender(self: *Self, allocator: std.mem.Allocator, input: stop_recommender.StopRecommenderInput, options: CallOptions) !stop_recommender.StopRecommenderOutput {
         return stop_recommender.execute(self, allocator, input, options);
     }
 
@@ -1201,19 +1202,19 @@ pub const Client = struct {
     /// You are billed for all of the training completed up
     /// until you stop the solution version creation. You cannot resume creating a
     /// solution version once it has been stopped.
-    pub fn stopSolutionVersionCreation(self: *Self, allocator: std.mem.Allocator, input: stop_solution_version_creation.StopSolutionVersionCreationInput, options: stop_solution_version_creation.Options) !stop_solution_version_creation.StopSolutionVersionCreationOutput {
+    pub fn stopSolutionVersionCreation(self: *Self, allocator: std.mem.Allocator, input: stop_solution_version_creation.StopSolutionVersionCreationInput, options: CallOptions) !stop_solution_version_creation.StopSolutionVersionCreationOutput {
         return stop_solution_version_creation.execute(self, allocator, input, options);
     }
 
     /// Add a list of tags to a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags that are attached to a resource. For more
     /// information, see [Removing tags from Amazon Personalize
     /// resources](https://docs.aws.amazon.com/personalize/latest/dg/tags-remove.html).
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -1246,19 +1247,19 @@ pub const Client = struct {
     /// campaign](https://docs.aws.amazon.com/personalize/latest/dg/update-campaigns.html).
     /// For more information about campaigns, see [Creating a
     /// campaign](https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html).
-    pub fn updateCampaign(self: *Self, allocator: std.mem.Allocator, input: update_campaign.UpdateCampaignInput, options: update_campaign.Options) !update_campaign.UpdateCampaignOutput {
+    pub fn updateCampaign(self: *Self, allocator: std.mem.Allocator, input: update_campaign.UpdateCampaignInput, options: CallOptions) !update_campaign.UpdateCampaignOutput {
         return update_campaign.execute(self, allocator, input, options);
     }
 
     /// Update a dataset to replace its schema with a new or existing one. For more
     /// information, see [Replacing a dataset's
     /// schema](https://docs.aws.amazon.com/personalize/latest/dg/updating-dataset-schema.html).
-    pub fn updateDataset(self: *Self, allocator: std.mem.Allocator, input: update_dataset.UpdateDatasetInput, options: update_dataset.Options) !update_dataset.UpdateDatasetOutput {
+    pub fn updateDataset(self: *Self, allocator: std.mem.Allocator, input: update_dataset.UpdateDatasetInput, options: CallOptions) !update_dataset.UpdateDatasetOutput {
         return update_dataset.execute(self, allocator, input, options);
     }
 
     /// Updates a metric attribution.
-    pub fn updateMetricAttribution(self: *Self, allocator: std.mem.Allocator, input: update_metric_attribution.UpdateMetricAttributionInput, options: update_metric_attribution.Options) !update_metric_attribution.UpdateMetricAttributionOutput {
+    pub fn updateMetricAttribution(self: *Self, allocator: std.mem.Allocator, input: update_metric_attribution.UpdateMetricAttributionInput, options: CallOptions) !update_metric_attribution.UpdateMetricAttributionOutput {
         return update_metric_attribution.execute(self, allocator, input, options);
     }
 
@@ -1272,7 +1273,7 @@ pub const Client = struct {
     /// use the `latestRecommenderUpdate` returned in the
     /// [DescribeRecommender](https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html)
     /// operation.
-    pub fn updateRecommender(self: *Self, allocator: std.mem.Allocator, input: update_recommender.UpdateRecommenderInput, options: update_recommender.Options) !update_recommender.UpdateRecommenderOutput {
+    pub fn updateRecommender(self: *Self, allocator: std.mem.Allocator, input: update_recommender.UpdateRecommenderInput, options: CallOptions) !update_recommender.UpdateRecommenderOutput {
         return update_recommender.execute(self, allocator, input, options);
     }
 
@@ -1292,7 +1293,7 @@ pub const Client = struct {
     /// To get the status of a solution update, call the
     /// [DescribeSolution](https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html) API operation and find the status
     /// in the `latestSolutionUpdate`.
-    pub fn updateSolution(self: *Self, allocator: std.mem.Allocator, input: update_solution.UpdateSolutionInput, options: update_solution.Options) !update_solution.UpdateSolutionOutput {
+    pub fn updateSolution(self: *Self, allocator: std.mem.Allocator, input: update_solution.UpdateSolutionInput, options: CallOptions) !update_solution.UpdateSolutionOutput {
         return update_solution.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AmazonOpenSearchServerlessDestinationUpdate = @import("amazon_open_search_serverless_destination_update.zig").AmazonOpenSearchServerlessDestinationUpdate;
 const AmazonopensearchserviceDestinationUpdate = @import("amazonopensearchservice_destination_update.zig").AmazonopensearchserviceDestinationUpdate;
@@ -83,11 +84,7 @@ pub const UpdateDestinationInput = struct {
 pub const UpdateDestinationOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDestinationInput, options: Options) !UpdateDestinationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDestinationInput, options: CallOptions) !UpdateDestinationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

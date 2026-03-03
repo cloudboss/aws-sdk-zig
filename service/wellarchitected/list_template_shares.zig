@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ShareStatus = @import("share_status.zig").ShareStatus;
 const TemplateShareSummary = @import("template_share_summary.zig").TemplateShareSummary;
@@ -46,11 +47,7 @@ pub const ListTemplateSharesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTemplateSharesInput, options: Options) !ListTemplateSharesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTemplateSharesInput, options: CallOptions) !ListTemplateSharesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

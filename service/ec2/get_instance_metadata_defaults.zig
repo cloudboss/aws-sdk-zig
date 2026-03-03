@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstanceMetadataDefaultsResponse = @import("instance_metadata_defaults_response.zig").InstanceMetadataDefaultsResponse;
 const serde = @import("serde.zig");
@@ -20,11 +21,7 @@ pub const GetInstanceMetadataDefaultsOutput = struct {
     account_level: ?InstanceMetadataDefaultsResponse = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetInstanceMetadataDefaultsInput, options: Options) !GetInstanceMetadataDefaultsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetInstanceMetadataDefaultsInput, options: CallOptions) !GetInstanceMetadataDefaultsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

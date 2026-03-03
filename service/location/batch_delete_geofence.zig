@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchDeleteGeofenceError = @import("batch_delete_geofence_error.zig").BatchDeleteGeofenceError;
 
@@ -27,11 +28,7 @@ pub const BatchDeleteGeofenceOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteGeofenceInput, options: Options) !BatchDeleteGeofenceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteGeofenceInput, options: CallOptions) !BatchDeleteGeofenceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

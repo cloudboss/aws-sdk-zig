@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DiskImageFormat = @import("disk_image_format.zig").DiskImageFormat;
 const ExportTaskS3LocationRequest = @import("export_task_s3_location_request.zig").ExportTaskS3LocationRequest;
@@ -81,11 +82,7 @@ pub const ExportImageOutput = struct {
     tags: ?[]const Tag = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExportImageInput, options: Options) !ExportImageOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExportImageInput, options: CallOptions) !ExportImageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

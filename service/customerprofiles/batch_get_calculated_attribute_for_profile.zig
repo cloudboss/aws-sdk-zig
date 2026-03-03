@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConditionOverrides = @import("condition_overrides.zig").ConditionOverrides;
 const CalculatedAttributeValue = @import("calculated_attribute_value.zig").CalculatedAttributeValue;
@@ -47,11 +48,7 @@ pub const BatchGetCalculatedAttributeForProfileOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetCalculatedAttributeForProfileInput, options: Options) !BatchGetCalculatedAttributeForProfileOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetCalculatedAttributeForProfileInput, options: CallOptions) !BatchGetCalculatedAttributeForProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

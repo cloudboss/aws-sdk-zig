@@ -2,9 +2,11 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FilterRule = @import("filter_rule.zig").FilterRule;
 const ManifestConfig = @import("manifest_config.zig").ManifestConfig;
+const Options = @import("options.zig").Options;
 const TaskSchedule = @import("task_schedule.zig").TaskSchedule;
 const TagListEntry = @import("tag_list_entry.zig").TagListEntry;
 const TaskMode = @import("task_mode.zig").TaskMode;
@@ -139,11 +141,7 @@ pub const CreateTaskOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTaskInput, options: Options) !CreateTaskOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTaskInput, options: CallOptions) !CreateTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

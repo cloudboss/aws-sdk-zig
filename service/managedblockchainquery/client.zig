@@ -10,6 +10,7 @@ const list_filtered_transaction_events = @import("list_filtered_transaction_even
 const list_token_balances = @import("list_token_balances.zig");
 const list_transaction_events = @import("list_transaction_events.zig");
 const list_transactions = @import("list_transactions.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -46,7 +47,7 @@ pub const Client = struct {
     ///
     /// Only the native tokens BTC and ETH, and the ERC-20,
     /// ERC-721, and ERC 1155 token standards are supported.
-    pub fn batchGetTokenBalance(self: *Self, allocator: std.mem.Allocator, input: batch_get_token_balance.BatchGetTokenBalanceInput, options: batch_get_token_balance.Options) !batch_get_token_balance.BatchGetTokenBalanceOutput {
+    pub fn batchGetTokenBalance(self: *Self, allocator: std.mem.Allocator, input: batch_get_token_balance.BatchGetTokenBalanceInput, options: CallOptions) !batch_get_token_balance.BatchGetTokenBalanceOutput {
         return batch_get_token_balance.execute(self, allocator, input, options);
     }
 
@@ -57,7 +58,7 @@ pub const Client = struct {
     ///
     /// * Metadata is currently only available for some `ERC-20` contracts.
     /// Metadata will be available for additional contracts in the future.
-    pub fn getAssetContract(self: *Self, allocator: std.mem.Allocator, input: get_asset_contract.GetAssetContractInput, options: get_asset_contract.Options) !get_asset_contract.GetAssetContractOutput {
+    pub fn getAssetContract(self: *Self, allocator: std.mem.Allocator, input: get_asset_contract.GetAssetContractInput, options: CallOptions) !get_asset_contract.GetAssetContractOutput {
         return get_asset_contract.execute(self, allocator, input, options);
     }
 
@@ -66,7 +67,7 @@ pub const Client = struct {
     ///
     /// Only the native tokens BTC and ETH, and the ERC-20,
     /// ERC-721, and ERC 1155 token standards are supported.
-    pub fn getTokenBalance(self: *Self, allocator: std.mem.Allocator, input: get_token_balance.GetTokenBalanceInput, options: get_token_balance.Options) !get_token_balance.GetTokenBalanceOutput {
+    pub fn getTokenBalance(self: *Self, allocator: std.mem.Allocator, input: get_token_balance.GetTokenBalanceInput, options: CallOptions) !get_token_balance.GetTokenBalanceOutput {
         return get_token_balance.execute(self, allocator, input, options);
     }
 
@@ -75,7 +76,7 @@ pub const Client = struct {
     /// This action will return transaction details for all transactions
     /// that are *confirmed* on the blockchain, even if they have not reached
     /// [finality](https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality).
-    pub fn getTransaction(self: *Self, allocator: std.mem.Allocator, input: get_transaction.GetTransactionInput, options: get_transaction.Options) !get_transaction.GetTransactionOutput {
+    pub fn getTransaction(self: *Self, allocator: std.mem.Allocator, input: get_transaction.GetTransactionInput, options: CallOptions) !get_transaction.GetTransactionOutput {
         return get_transaction.execute(self, allocator, input, options);
     }
 
@@ -84,14 +85,14 @@ pub const Client = struct {
     ///
     /// The Bitcoin blockchain networks do not support this
     /// operation.
-    pub fn listAssetContracts(self: *Self, allocator: std.mem.Allocator, input: list_asset_contracts.ListAssetContractsInput, options: list_asset_contracts.Options) !list_asset_contracts.ListAssetContractsOutput {
+    pub fn listAssetContracts(self: *Self, allocator: std.mem.Allocator, input: list_asset_contracts.ListAssetContractsInput, options: CallOptions) !list_asset_contracts.ListAssetContractsOutput {
         return list_asset_contracts.execute(self, allocator, input, options);
     }
 
     /// Lists all the transaction events for an address on the blockchain.
     ///
     /// This operation is only supported on the Bitcoin networks.
-    pub fn listFilteredTransactionEvents(self: *Self, allocator: std.mem.Allocator, input: list_filtered_transaction_events.ListFilteredTransactionEventsInput, options: list_filtered_transaction_events.Options) !list_filtered_transaction_events.ListFilteredTransactionEventsOutput {
+    pub fn listFilteredTransactionEvents(self: *Self, allocator: std.mem.Allocator, input: list_filtered_transaction_events.ListFilteredTransactionEventsInput, options: CallOptions) !list_filtered_transaction_events.ListFilteredTransactionEventsOutput {
         return list_filtered_transaction_events.execute(self, allocator, input, options);
     }
 
@@ -106,7 +107,7 @@ pub const Client = struct {
     ///
     /// You must always specify the network property of
     /// the `tokenFilter` when using this operation.
-    pub fn listTokenBalances(self: *Self, allocator: std.mem.Allocator, input: list_token_balances.ListTokenBalancesInput, options: list_token_balances.Options) !list_token_balances.ListTokenBalancesOutput {
+    pub fn listTokenBalances(self: *Self, allocator: std.mem.Allocator, input: list_token_balances.ListTokenBalancesInput, options: CallOptions) !list_token_balances.ListTokenBalancesOutput {
         return list_token_balances.execute(self, allocator, input, options);
     }
 
@@ -115,12 +116,12 @@ pub const Client = struct {
     /// This action will return transaction details for all transactions
     /// that are *confirmed* on the blockchain, even if they have not reached
     /// [finality](https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality).
-    pub fn listTransactionEvents(self: *Self, allocator: std.mem.Allocator, input: list_transaction_events.ListTransactionEventsInput, options: list_transaction_events.Options) !list_transaction_events.ListTransactionEventsOutput {
+    pub fn listTransactionEvents(self: *Self, allocator: std.mem.Allocator, input: list_transaction_events.ListTransactionEventsInput, options: CallOptions) !list_transaction_events.ListTransactionEventsOutput {
         return list_transaction_events.execute(self, allocator, input, options);
     }
 
     /// Lists all the transaction events for a transaction.
-    pub fn listTransactions(self: *Self, allocator: std.mem.Allocator, input: list_transactions.ListTransactionsInput, options: list_transactions.Options) !list_transactions.ListTransactionsOutput {
+    pub fn listTransactions(self: *Self, allocator: std.mem.Allocator, input: list_transactions.ListTransactionsInput, options: CallOptions) !list_transactions.ListTransactionsOutput {
         return list_transactions.execute(self, allocator, input, options);
     }
 

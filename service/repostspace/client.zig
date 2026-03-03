@@ -20,6 +20,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_channel = @import("update_channel.zig");
 const update_space = @import("update_space.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -52,82 +53,82 @@ pub const Client = struct {
     }
 
     /// Add role to multiple users or groups in a private re:Post channel.
-    pub fn batchAddChannelRoleToAccessors(self: *Self, allocator: std.mem.Allocator, input: batch_add_channel_role_to_accessors.BatchAddChannelRoleToAccessorsInput, options: batch_add_channel_role_to_accessors.Options) !batch_add_channel_role_to_accessors.BatchAddChannelRoleToAccessorsOutput {
+    pub fn batchAddChannelRoleToAccessors(self: *Self, allocator: std.mem.Allocator, input: batch_add_channel_role_to_accessors.BatchAddChannelRoleToAccessorsInput, options: CallOptions) !batch_add_channel_role_to_accessors.BatchAddChannelRoleToAccessorsOutput {
         return batch_add_channel_role_to_accessors.execute(self, allocator, input, options);
     }
 
     /// Add a role to multiple users or groups in a private re:Post.
-    pub fn batchAddRole(self: *Self, allocator: std.mem.Allocator, input: batch_add_role.BatchAddRoleInput, options: batch_add_role.Options) !batch_add_role.BatchAddRoleOutput {
+    pub fn batchAddRole(self: *Self, allocator: std.mem.Allocator, input: batch_add_role.BatchAddRoleInput, options: CallOptions) !batch_add_role.BatchAddRoleOutput {
         return batch_add_role.execute(self, allocator, input, options);
     }
 
     /// Remove a role from multiple users or groups in a private re:Post channel.
-    pub fn batchRemoveChannelRoleFromAccessors(self: *Self, allocator: std.mem.Allocator, input: batch_remove_channel_role_from_accessors.BatchRemoveChannelRoleFromAccessorsInput, options: batch_remove_channel_role_from_accessors.Options) !batch_remove_channel_role_from_accessors.BatchRemoveChannelRoleFromAccessorsOutput {
+    pub fn batchRemoveChannelRoleFromAccessors(self: *Self, allocator: std.mem.Allocator, input: batch_remove_channel_role_from_accessors.BatchRemoveChannelRoleFromAccessorsInput, options: CallOptions) !batch_remove_channel_role_from_accessors.BatchRemoveChannelRoleFromAccessorsOutput {
         return batch_remove_channel_role_from_accessors.execute(self, allocator, input, options);
     }
 
     /// Remove a role from multiple users or groups in a private re:Post.
-    pub fn batchRemoveRole(self: *Self, allocator: std.mem.Allocator, input: batch_remove_role.BatchRemoveRoleInput, options: batch_remove_role.Options) !batch_remove_role.BatchRemoveRoleOutput {
+    pub fn batchRemoveRole(self: *Self, allocator: std.mem.Allocator, input: batch_remove_role.BatchRemoveRoleInput, options: CallOptions) !batch_remove_role.BatchRemoveRoleOutput {
         return batch_remove_role.execute(self, allocator, input, options);
     }
 
     /// Creates a channel in an AWS re:Post Private private re:Post.
-    pub fn createChannel(self: *Self, allocator: std.mem.Allocator, input: create_channel.CreateChannelInput, options: create_channel.Options) !create_channel.CreateChannelOutput {
+    pub fn createChannel(self: *Self, allocator: std.mem.Allocator, input: create_channel.CreateChannelInput, options: CallOptions) !create_channel.CreateChannelOutput {
         return create_channel.execute(self, allocator, input, options);
     }
 
     /// Creates an AWS re:Post Private private re:Post.
-    pub fn createSpace(self: *Self, allocator: std.mem.Allocator, input: create_space.CreateSpaceInput, options: create_space.Options) !create_space.CreateSpaceOutput {
+    pub fn createSpace(self: *Self, allocator: std.mem.Allocator, input: create_space.CreateSpaceInput, options: CallOptions) !create_space.CreateSpaceOutput {
         return create_space.execute(self, allocator, input, options);
     }
 
     /// Deletes an AWS re:Post Private private re:Post.
-    pub fn deleteSpace(self: *Self, allocator: std.mem.Allocator, input: delete_space.DeleteSpaceInput, options: delete_space.Options) !delete_space.DeleteSpaceOutput {
+    pub fn deleteSpace(self: *Self, allocator: std.mem.Allocator, input: delete_space.DeleteSpaceInput, options: CallOptions) !delete_space.DeleteSpaceOutput {
         return delete_space.execute(self, allocator, input, options);
     }
 
     /// Removes the user or group from the list of administrators of the private
     /// re:Post.
-    pub fn deregisterAdmin(self: *Self, allocator: std.mem.Allocator, input: deregister_admin.DeregisterAdminInput, options: deregister_admin.Options) !deregister_admin.DeregisterAdminOutput {
+    pub fn deregisterAdmin(self: *Self, allocator: std.mem.Allocator, input: deregister_admin.DeregisterAdminInput, options: CallOptions) !deregister_admin.DeregisterAdminOutput {
         return deregister_admin.execute(self, allocator, input, options);
     }
 
     /// Displays information about a channel in a private re:Post.
-    pub fn getChannel(self: *Self, allocator: std.mem.Allocator, input: get_channel.GetChannelInput, options: get_channel.Options) !get_channel.GetChannelOutput {
+    pub fn getChannel(self: *Self, allocator: std.mem.Allocator, input: get_channel.GetChannelInput, options: CallOptions) !get_channel.GetChannelOutput {
         return get_channel.execute(self, allocator, input, options);
     }
 
     /// Displays information about the AWS re:Post Private private re:Post.
-    pub fn getSpace(self: *Self, allocator: std.mem.Allocator, input: get_space.GetSpaceInput, options: get_space.Options) !get_space.GetSpaceOutput {
+    pub fn getSpace(self: *Self, allocator: std.mem.Allocator, input: get_space.GetSpaceInput, options: CallOptions) !get_space.GetSpaceOutput {
         return get_space.execute(self, allocator, input, options);
     }
 
     /// Returns the list of channel within a private re:Post with some information
     /// about each channel.
-    pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: list_channels.Options) !list_channels.ListChannelsOutput {
+    pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: CallOptions) !list_channels.ListChannelsOutput {
         return list_channels.execute(self, allocator, input, options);
     }
 
     /// Returns a list of AWS re:Post Private private re:Posts in the account with
     /// some information about each private re:Post.
-    pub fn listSpaces(self: *Self, allocator: std.mem.Allocator, input: list_spaces.ListSpacesInput, options: list_spaces.Options) !list_spaces.ListSpacesOutput {
+    pub fn listSpaces(self: *Self, allocator: std.mem.Allocator, input: list_spaces.ListSpacesInput, options: CallOptions) !list_spaces.ListSpacesOutput {
         return list_spaces.execute(self, allocator, input, options);
     }
 
     /// Returns the tags that are associated with the AWS re:Post Private resource
     /// specified by the resourceArn. The only resource that can be tagged is a
     /// private re:Post.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Adds a user or group to the list of administrators of the private re:Post.
-    pub fn registerAdmin(self: *Self, allocator: std.mem.Allocator, input: register_admin.RegisterAdminInput, options: register_admin.Options) !register_admin.RegisterAdminOutput {
+    pub fn registerAdmin(self: *Self, allocator: std.mem.Allocator, input: register_admin.RegisterAdminInput, options: CallOptions) !register_admin.RegisterAdminOutput {
         return register_admin.execute(self, allocator, input, options);
     }
 
     /// Sends an invitation email to selected users and groups.
-    pub fn sendInvites(self: *Self, allocator: std.mem.Allocator, input: send_invites.SendInvitesInput, options: send_invites.Options) !send_invites.SendInvitesOutput {
+    pub fn sendInvites(self: *Self, allocator: std.mem.Allocator, input: send_invites.SendInvitesInput, options: CallOptions) !send_invites.SendInvitesOutput {
         return send_invites.execute(self, allocator, input, options);
     }
 
@@ -137,22 +138,22 @@ pub const Client = struct {
     /// associated with the resource. If you specify a tag key that’s already
     /// associated with the resource, the new tag value that you specify replaces
     /// the previous value for that tag.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the association of the tag with the AWS re:Post Private resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Modifies an existing channel.
-    pub fn updateChannel(self: *Self, allocator: std.mem.Allocator, input: update_channel.UpdateChannelInput, options: update_channel.Options) !update_channel.UpdateChannelOutput {
+    pub fn updateChannel(self: *Self, allocator: std.mem.Allocator, input: update_channel.UpdateChannelInput, options: CallOptions) !update_channel.UpdateChannelOutput {
         return update_channel.execute(self, allocator, input, options);
     }
 
     /// Modifies an existing AWS re:Post Private private re:Post.
-    pub fn updateSpace(self: *Self, allocator: std.mem.Allocator, input: update_space.UpdateSpaceInput, options: update_space.Options) !update_space.UpdateSpaceOutput {
+    pub fn updateSpace(self: *Self, allocator: std.mem.Allocator, input: update_space.UpdateSpaceInput, options: CallOptions) !update_space.UpdateSpaceOutput {
         return update_space.execute(self, allocator, input, options);
     }
 

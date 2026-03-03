@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const RequestCancelWorkflowExecutionInput = struct {
@@ -21,13 +22,9 @@ pub const RequestCancelWorkflowExecutionInput = struct {
     };
 };
 
-const RequestCancelWorkflowExecutionOutput = struct {};
+pub const RequestCancelWorkflowExecutionOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RequestCancelWorkflowExecutionInput, options: Options) !RequestCancelWorkflowExecutionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RequestCancelWorkflowExecutionInput, options: CallOptions) !RequestCancelWorkflowExecutionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RdsCustomClusterConfiguration = @import("rds_custom_cluster_configuration.zig").RdsCustomClusterConfiguration;
 const ScalingConfiguration = @import("scaling_configuration.zig").ScalingConfiguration;
@@ -462,11 +463,7 @@ pub const RestoreDBClusterFromSnapshotOutput = struct {
     db_cluster: ?DBCluster = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RestoreDBClusterFromSnapshotInput, options: Options) !RestoreDBClusterFromSnapshotOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RestoreDBClusterFromSnapshotInput, options: CallOptions) !RestoreDBClusterFromSnapshotOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

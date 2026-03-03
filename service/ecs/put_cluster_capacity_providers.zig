@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CapacityProviderStrategyItem = @import("capacity_provider_strategy_item.zig").CapacityProviderStrategyItem;
 const Cluster = @import("cluster.zig").Cluster;
@@ -75,11 +76,7 @@ pub const PutClusterCapacityProvidersOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutClusterCapacityProvidersInput, options: Options) !PutClusterCapacityProvidersOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutClusterCapacityProvidersInput, options: CallOptions) !PutClusterCapacityProvidersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

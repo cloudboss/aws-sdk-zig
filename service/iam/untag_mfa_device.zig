@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
@@ -23,13 +24,9 @@ pub const UntagMFADeviceInput = struct {
     tag_keys: []const []const u8,
 };
 
-const UntagMFADeviceOutput = struct {};
+pub const UntagMFADeviceOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagMFADeviceInput, options: Options) !UntagMFADeviceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagMFADeviceInput, options: CallOptions) !UntagMFADeviceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

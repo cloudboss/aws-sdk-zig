@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ManagedBy = @import("managed_by.zig").ManagedBy;
 
@@ -39,11 +40,7 @@ pub const GetImageBlockPublicAccessStateOutput = struct {
     managed_by: ?ManagedBy = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetImageBlockPublicAccessStateInput, options: Options) !GetImageBlockPublicAccessStateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetImageBlockPublicAccessStateInput, options: CallOptions) !GetImageBlockPublicAccessStateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

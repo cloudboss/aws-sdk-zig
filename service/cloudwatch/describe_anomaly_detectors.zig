@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AnomalyDetectorType = @import("anomaly_detector_type.zig").AnomalyDetectorType;
 const Dimension = @import("dimension.zig").Dimension;
@@ -70,11 +71,7 @@ pub const DescribeAnomalyDetectorsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeAnomalyDetectorsInput, options: Options) !DescribeAnomalyDetectorsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeAnomalyDetectorsInput, options: CallOptions) !DescribeAnomalyDetectorsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

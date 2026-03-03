@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EstimatedMonthlySavings = @import("estimated_monthly_savings.zig").EstimatedMonthlySavings;
 const EventStatus = @import("event_status.zig").EventStatus;
@@ -82,11 +83,7 @@ pub const GetAutomationEventOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAutomationEventInput, options: Options) !GetAutomationEventOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAutomationEventInput, options: CallOptions) !GetAutomationEventOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

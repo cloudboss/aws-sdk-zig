@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CacheSubnetGroup = @import("cache_subnet_group.zig").CacheSubnetGroup;
 const serde = @import("serde.zig");
@@ -27,11 +28,7 @@ pub const ModifyCacheSubnetGroupOutput = struct {
     cache_subnet_group: ?CacheSubnetGroup = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyCacheSubnetGroupInput, options: Options) !ModifyCacheSubnetGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyCacheSubnetGroupInput, options: CallOptions) !ModifyCacheSubnetGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,18 +2,15 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Link = @import("link.zig").Link;
 
-const DeleteLinkInput = @import("delete_link_request.zig").DeleteLinkRequest;
+pub const DeleteLinkInput = @import("delete_link_request.zig").DeleteLinkRequest;
 
-const DeleteLinkOutput = @import("delete_link_response.zig").DeleteLinkResponse;
+pub const DeleteLinkOutput = @import("delete_link_response.zig").DeleteLinkResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLinkInput, options: Options) !DeleteLinkOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLinkInput, options: CallOptions) !DeleteLinkOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

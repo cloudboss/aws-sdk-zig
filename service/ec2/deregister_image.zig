@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DeleteSnapshotReturnCode = @import("delete_snapshot_return_code.zig").DeleteSnapshotReturnCode;
 const serde = @import("serde.zig");
@@ -37,11 +38,7 @@ pub const DeregisterImageOutput = struct {
     @"return": ?bool = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterImageInput, options: Options) !DeregisterImageOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterImageInput, options: CallOptions) !DeregisterImageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

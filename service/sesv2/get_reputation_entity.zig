@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReputationEntityType = @import("reputation_entity_type.zig").ReputationEntityType;
 const ReputationEntity = @import("reputation_entity.zig").ReputationEntity;
@@ -32,11 +33,7 @@ pub const GetReputationEntityOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetReputationEntityInput, options: Options) !GetReputationEntityOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetReputationEntityInput, options: CallOptions) !GetReputationEntityOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

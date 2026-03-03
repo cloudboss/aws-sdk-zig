@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MaintenanceWindowFilter = @import("maintenance_window_filter.zig").MaintenanceWindowFilter;
 const MaintenanceWindowIdentity = @import("maintenance_window_identity.zig").MaintenanceWindowIdentity;
@@ -45,11 +46,7 @@ pub const DescribeMaintenanceWindowsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeMaintenanceWindowsInput, options: Options) !DescribeMaintenanceWindowsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeMaintenanceWindowsInput, options: CallOptions) !DescribeMaintenanceWindowsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

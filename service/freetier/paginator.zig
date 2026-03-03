@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_free_tier_usage = @import("get_free_tier_usage.zig");
@@ -15,7 +16,7 @@ pub const GetFreeTierUsagePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_free_tier_usage.Options) !get_free_tier_usage.GetFreeTierUsageOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_free_tier_usage.GetFreeTierUsageOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const ListAccountActivitiesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_account_activities.Options) !list_account_activities.ListAccountActivitiesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_account_activities.ListAccountActivitiesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

@@ -24,6 +24,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_automation_rule = @import("update_automation_rule.zig");
 const update_enrollment_configuration = @import("update_enrollment_configuration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -66,18 +67,18 @@ pub const Client = struct {
     ///
     /// Only the management account or a delegated administrator can perform this
     /// action.
-    pub fn associateAccounts(self: *Self, allocator: std.mem.Allocator, input: associate_accounts.AssociateAccountsInput, options: associate_accounts.Options) !associate_accounts.AssociateAccountsOutput {
+    pub fn associateAccounts(self: *Self, allocator: std.mem.Allocator, input: associate_accounts.AssociateAccountsInput, options: CallOptions) !associate_accounts.AssociateAccountsOutput {
         return associate_accounts.execute(self, allocator, input, options);
     }
 
     /// Creates a new automation rule to apply recommended actions to resources
     /// based on specified criteria.
-    pub fn createAutomationRule(self: *Self, allocator: std.mem.Allocator, input: create_automation_rule.CreateAutomationRuleInput, options: create_automation_rule.Options) !create_automation_rule.CreateAutomationRuleOutput {
+    pub fn createAutomationRule(self: *Self, allocator: std.mem.Allocator, input: create_automation_rule.CreateAutomationRuleInput, options: CallOptions) !create_automation_rule.CreateAutomationRuleOutput {
         return create_automation_rule.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing automation rule.
-    pub fn deleteAutomationRule(self: *Self, allocator: std.mem.Allocator, input: delete_automation_rule.DeleteAutomationRuleInput, options: delete_automation_rule.Options) !delete_automation_rule.DeleteAutomationRuleOutput {
+    pub fn deleteAutomationRule(self: *Self, allocator: std.mem.Allocator, input: delete_automation_rule.DeleteAutomationRuleInput, options: CallOptions) !delete_automation_rule.DeleteAutomationRuleOutput {
         return delete_automation_rule.execute(self, allocator, input, options);
     }
 
@@ -89,23 +90,23 @@ pub const Client = struct {
     ///
     /// Only the management account or a delegated administrator can perform this
     /// action.
-    pub fn disassociateAccounts(self: *Self, allocator: std.mem.Allocator, input: disassociate_accounts.DisassociateAccountsInput, options: disassociate_accounts.Options) !disassociate_accounts.DisassociateAccountsOutput {
+    pub fn disassociateAccounts(self: *Self, allocator: std.mem.Allocator, input: disassociate_accounts.DisassociateAccountsInput, options: CallOptions) !disassociate_accounts.DisassociateAccountsOutput {
         return disassociate_accounts.execute(self, allocator, input, options);
     }
 
     /// Retrieves details about a specific automation event.
-    pub fn getAutomationEvent(self: *Self, allocator: std.mem.Allocator, input: get_automation_event.GetAutomationEventInput, options: get_automation_event.Options) !get_automation_event.GetAutomationEventOutput {
+    pub fn getAutomationEvent(self: *Self, allocator: std.mem.Allocator, input: get_automation_event.GetAutomationEventInput, options: CallOptions) !get_automation_event.GetAutomationEventOutput {
         return get_automation_event.execute(self, allocator, input, options);
     }
 
     /// Retrieves details about a specific automation rule.
-    pub fn getAutomationRule(self: *Self, allocator: std.mem.Allocator, input: get_automation_rule.GetAutomationRuleInput, options: get_automation_rule.Options) !get_automation_rule.GetAutomationRuleOutput {
+    pub fn getAutomationRule(self: *Self, allocator: std.mem.Allocator, input: get_automation_rule.GetAutomationRuleInput, options: CallOptions) !get_automation_rule.GetAutomationRuleOutput {
         return get_automation_rule.execute(self, allocator, input, options);
     }
 
     /// Retrieves the current enrollment configuration for Compute Optimizer
     /// Automation.
-    pub fn getEnrollmentConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_enrollment_configuration.GetEnrollmentConfigurationInput, options: get_enrollment_configuration.Options) !get_enrollment_configuration.GetEnrollmentConfigurationOutput {
+    pub fn getEnrollmentConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_enrollment_configuration.GetEnrollmentConfigurationInput, options: CallOptions) !get_enrollment_configuration.GetEnrollmentConfigurationOutput {
         return get_enrollment_configuration.execute(self, allocator, input, options);
     }
 
@@ -114,42 +115,42 @@ pub const Client = struct {
     ///
     /// Only the management account or a delegated administrator can perform this
     /// action.
-    pub fn listAccounts(self: *Self, allocator: std.mem.Allocator, input: list_accounts.ListAccountsInput, options: list_accounts.Options) !list_accounts.ListAccountsOutput {
+    pub fn listAccounts(self: *Self, allocator: std.mem.Allocator, input: list_accounts.ListAccountsInput, options: CallOptions) !list_accounts.ListAccountsOutput {
         return list_accounts.execute(self, allocator, input, options);
     }
 
     /// Lists the steps for a specific automation event. You can only list steps for
     /// events created within the past year.
-    pub fn listAutomationEventSteps(self: *Self, allocator: std.mem.Allocator, input: list_automation_event_steps.ListAutomationEventStepsInput, options: list_automation_event_steps.Options) !list_automation_event_steps.ListAutomationEventStepsOutput {
+    pub fn listAutomationEventSteps(self: *Self, allocator: std.mem.Allocator, input: list_automation_event_steps.ListAutomationEventStepsInput, options: CallOptions) !list_automation_event_steps.ListAutomationEventStepsOutput {
         return list_automation_event_steps.execute(self, allocator, input, options);
     }
 
     /// Provides a summary of automation events based on specified filters. Only
     /// events created within the past year will be included in the summary.
-    pub fn listAutomationEventSummaries(self: *Self, allocator: std.mem.Allocator, input: list_automation_event_summaries.ListAutomationEventSummariesInput, options: list_automation_event_summaries.Options) !list_automation_event_summaries.ListAutomationEventSummariesOutput {
+    pub fn listAutomationEventSummaries(self: *Self, allocator: std.mem.Allocator, input: list_automation_event_summaries.ListAutomationEventSummariesInput, options: CallOptions) !list_automation_event_summaries.ListAutomationEventSummariesOutput {
         return list_automation_event_summaries.execute(self, allocator, input, options);
     }
 
     /// Lists automation events based on specified filters. You can retrieve events
     /// that were created within the past year.
-    pub fn listAutomationEvents(self: *Self, allocator: std.mem.Allocator, input: list_automation_events.ListAutomationEventsInput, options: list_automation_events.Options) !list_automation_events.ListAutomationEventsOutput {
+    pub fn listAutomationEvents(self: *Self, allocator: std.mem.Allocator, input: list_automation_events.ListAutomationEventsInput, options: CallOptions) !list_automation_events.ListAutomationEventsOutput {
         return list_automation_events.execute(self, allocator, input, options);
     }
 
     /// Returns a preview of the recommended actions that match your Automation
     /// rule's configuration and criteria.
-    pub fn listAutomationRulePreview(self: *Self, allocator: std.mem.Allocator, input: list_automation_rule_preview.ListAutomationRulePreviewInput, options: list_automation_rule_preview.Options) !list_automation_rule_preview.ListAutomationRulePreviewOutput {
+    pub fn listAutomationRulePreview(self: *Self, allocator: std.mem.Allocator, input: list_automation_rule_preview.ListAutomationRulePreviewInput, options: CallOptions) !list_automation_rule_preview.ListAutomationRulePreviewOutput {
         return list_automation_rule_preview.execute(self, allocator, input, options);
     }
 
     /// Returns a summary of the recommended actions that match your rule preview
     /// configuration and criteria.
-    pub fn listAutomationRulePreviewSummaries(self: *Self, allocator: std.mem.Allocator, input: list_automation_rule_preview_summaries.ListAutomationRulePreviewSummariesInput, options: list_automation_rule_preview_summaries.Options) !list_automation_rule_preview_summaries.ListAutomationRulePreviewSummariesOutput {
+    pub fn listAutomationRulePreviewSummaries(self: *Self, allocator: std.mem.Allocator, input: list_automation_rule_preview_summaries.ListAutomationRulePreviewSummariesInput, options: CallOptions) !list_automation_rule_preview_summaries.ListAutomationRulePreviewSummariesOutput {
         return list_automation_rule_preview_summaries.execute(self, allocator, input, options);
     }
 
     /// Lists the automation rules that match specified filters.
-    pub fn listAutomationRules(self: *Self, allocator: std.mem.Allocator, input: list_automation_rules.ListAutomationRulesInput, options: list_automation_rules.Options) !list_automation_rules.ListAutomationRulesOutput {
+    pub fn listAutomationRules(self: *Self, allocator: std.mem.Allocator, input: list_automation_rules.ListAutomationRulesInput, options: CallOptions) !list_automation_rules.ListAutomationRulesOutput {
         return list_automation_rules.execute(self, allocator, input, options);
     }
 
@@ -158,7 +159,7 @@ pub const Client = struct {
     /// Management accounts and delegated administrators can retrieve recommended
     /// actions that include associated member accounts. You can associate a member
     /// account using `AssociateAccounts`.
-    pub fn listRecommendedActionSummaries(self: *Self, allocator: std.mem.Allocator, input: list_recommended_action_summaries.ListRecommendedActionSummariesInput, options: list_recommended_action_summaries.Options) !list_recommended_action_summaries.ListRecommendedActionSummariesOutput {
+    pub fn listRecommendedActionSummaries(self: *Self, allocator: std.mem.Allocator, input: list_recommended_action_summaries.ListRecommendedActionSummariesInput, options: CallOptions) !list_recommended_action_summaries.ListRecommendedActionSummariesOutput {
         return list_recommended_action_summaries.execute(self, allocator, input, options);
     }
 
@@ -167,12 +168,12 @@ pub const Client = struct {
     /// Management accounts and delegated administrators can retrieve recommended
     /// actions that include associated member accounts. You can associate a member
     /// account using `AssociateAccounts`.
-    pub fn listRecommendedActions(self: *Self, allocator: std.mem.Allocator, input: list_recommended_actions.ListRecommendedActionsInput, options: list_recommended_actions.Options) !list_recommended_actions.ListRecommendedActionsOutput {
+    pub fn listRecommendedActions(self: *Self, allocator: std.mem.Allocator, input: list_recommended_actions.ListRecommendedActionsInput, options: CallOptions) !list_recommended_actions.ListRecommendedActionsOutput {
         return list_recommended_actions.execute(self, allocator, input, options);
     }
 
     /// Lists the tags for a specified resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -181,7 +182,7 @@ pub const Client = struct {
     /// Management accounts and delegated administrators can only initiate a
     /// rollback for events belonging to associated member accounts. You can
     /// associate a member account using `AssociateAccounts`.
-    pub fn rollbackAutomationEvent(self: *Self, allocator: std.mem.Allocator, input: rollback_automation_event.RollbackAutomationEventInput, options: rollback_automation_event.Options) !rollback_automation_event.RollbackAutomationEventOutput {
+    pub fn rollbackAutomationEvent(self: *Self, allocator: std.mem.Allocator, input: rollback_automation_event.RollbackAutomationEventInput, options: CallOptions) !rollback_automation_event.RollbackAutomationEventOutput {
         return rollback_automation_event.execute(self, allocator, input, options);
     }
 
@@ -191,28 +192,28 @@ pub const Client = struct {
     /// Management accounts and delegated administrators can only initiate
     /// recommended actions for associated member accounts. You can associate a
     /// member account using `AssociateAccounts`.
-    pub fn startAutomationEvent(self: *Self, allocator: std.mem.Allocator, input: start_automation_event.StartAutomationEventInput, options: start_automation_event.Options) !start_automation_event.StartAutomationEventOutput {
+    pub fn startAutomationEvent(self: *Self, allocator: std.mem.Allocator, input: start_automation_event.StartAutomationEventInput, options: CallOptions) !start_automation_event.StartAutomationEventOutput {
         return start_automation_event.execute(self, allocator, input, options);
     }
 
     /// Adds tags to the specified resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an existing automation rule.
-    pub fn updateAutomationRule(self: *Self, allocator: std.mem.Allocator, input: update_automation_rule.UpdateAutomationRuleInput, options: update_automation_rule.Options) !update_automation_rule.UpdateAutomationRuleOutput {
+    pub fn updateAutomationRule(self: *Self, allocator: std.mem.Allocator, input: update_automation_rule.UpdateAutomationRuleInput, options: CallOptions) !update_automation_rule.UpdateAutomationRuleOutput {
         return update_automation_rule.execute(self, allocator, input, options);
     }
 
     /// Updates your account’s Compute Optimizer Automation enrollment
     /// configuration.
-    pub fn updateEnrollmentConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_enrollment_configuration.UpdateEnrollmentConfigurationInput, options: update_enrollment_configuration.Options) !update_enrollment_configuration.UpdateEnrollmentConfigurationOutput {
+    pub fn updateEnrollmentConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_enrollment_configuration.UpdateEnrollmentConfigurationInput, options: CallOptions) !update_enrollment_configuration.UpdateEnrollmentConfigurationOutput {
         return update_enrollment_configuration.execute(self, allocator, input, options);
     }
 

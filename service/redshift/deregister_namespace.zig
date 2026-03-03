@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const NamespaceIdentifierUnion = @import("namespace_identifier_union.zig").NamespaceIdentifierUnion;
 const NamespaceRegistrationStatus = @import("namespace_registration_status.zig").NamespaceRegistrationStatus;
@@ -23,11 +24,7 @@ pub const DeregisterNamespaceOutput = struct {
     status: ?NamespaceRegistrationStatus = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterNamespaceInput, options: Options) !DeregisterNamespaceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterNamespaceInput, options: CallOptions) !DeregisterNamespaceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_effective_permissions_for_path = @import("get_effective_permissions_for_path.zig");
@@ -26,7 +27,7 @@ pub const GetEffectivePermissionsForPathPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_effective_permissions_for_path.Options) !get_effective_permissions_for_path.GetEffectivePermissionsForPathOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_effective_permissions_for_path.GetEffectivePermissionsForPathOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -67,7 +68,7 @@ pub const GetTableObjectsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_table_objects.Options) !get_table_objects.GetTableObjectsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_table_objects.GetTableObjectsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -108,7 +109,7 @@ pub const GetWorkUnitsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_work_units.Options) !get_work_units.GetWorkUnitsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_work_units.GetWorkUnitsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -149,7 +150,7 @@ pub const ListDataCellsFilterPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_data_cells_filter.Options) !list_data_cells_filter.ListDataCellsFilterOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_data_cells_filter.ListDataCellsFilterOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -190,7 +191,7 @@ pub const ListLakeFormationOptInsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_lake_formation_opt_ins.Options) !list_lake_formation_opt_ins.ListLakeFormationOptInsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_lake_formation_opt_ins.ListLakeFormationOptInsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -231,7 +232,7 @@ pub const ListLFTagExpressionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_lf_tag_expressions.Options) !list_lf_tag_expressions.ListLFTagExpressionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_lf_tag_expressions.ListLFTagExpressionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -272,7 +273,7 @@ pub const ListLFTagsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_lf_tags.Options) !list_lf_tags.ListLFTagsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_lf_tags.ListLFTagsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -313,7 +314,7 @@ pub const ListPermissionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_permissions.Options) !list_permissions.ListPermissionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_permissions.ListPermissionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -354,7 +355,7 @@ pub const ListResourcesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resources.Options) !list_resources.ListResourcesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resources.ListResourcesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -395,7 +396,7 @@ pub const ListTableStorageOptimizersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_table_storage_optimizers.Options) !list_table_storage_optimizers.ListTableStorageOptimizersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_table_storage_optimizers.ListTableStorageOptimizersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -436,7 +437,7 @@ pub const ListTransactionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_transactions.Options) !list_transactions.ListTransactionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_transactions.ListTransactionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -477,7 +478,7 @@ pub const SearchDatabasesByLFTagsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: search_databases_by_lf_tags.Options) !search_databases_by_lf_tags.SearchDatabasesByLFTagsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !search_databases_by_lf_tags.SearchDatabasesByLFTagsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -518,7 +519,7 @@ pub const SearchTablesByLFTagsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: search_tables_by_lf_tags.Options) !search_tables_by_lf_tags.SearchTablesByLFTagsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !search_tables_by_lf_tags.SearchTablesByLFTagsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

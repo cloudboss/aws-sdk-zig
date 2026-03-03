@@ -35,6 +35,7 @@ const update_domain_contact_privacy = @import("update_domain_contact_privacy.zig
 const update_domain_nameservers = @import("update_domain_nameservers.zig");
 const update_tags_for_domain = @import("update_tags_for_domain.zig");
 const view_billing = @import("view_billing.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -79,7 +80,7 @@ pub const Client = struct {
     /// Use either
     /// [ListOperations](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html) or [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) to determine whether the operation succeeded. [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) provides additional information, for example,
     /// `Domain Transfer from Aws Account 111122223333 has been cancelled`.
-    pub fn acceptDomainTransferFromAnotherAwsAccount(self: *Self, allocator: std.mem.Allocator, input: accept_domain_transfer_from_another_aws_account.AcceptDomainTransferFromAnotherAwsAccountInput, options: accept_domain_transfer_from_another_aws_account.Options) !accept_domain_transfer_from_another_aws_account.AcceptDomainTransferFromAnotherAwsAccountOutput {
+    pub fn acceptDomainTransferFromAnotherAwsAccount(self: *Self, allocator: std.mem.Allocator, input: accept_domain_transfer_from_another_aws_account.AcceptDomainTransferFromAnotherAwsAccountInput, options: CallOptions) !accept_domain_transfer_from_another_aws_account.AcceptDomainTransferFromAnotherAwsAccountOutput {
         return accept_domain_transfer_from_another_aws_account.execute(self, allocator, input, options);
     }
 
@@ -95,7 +96,7 @@ pub const Client = struct {
     /// about DNSSEC signing, see [Configuring DNSSEC
     /// signing](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec.html) in the *Route 53 developer
     /// guide*.
-    pub fn associateDelegationSignerToDomain(self: *Self, allocator: std.mem.Allocator, input: associate_delegation_signer_to_domain.AssociateDelegationSignerToDomainInput, options: associate_delegation_signer_to_domain.Options) !associate_delegation_signer_to_domain.AssociateDelegationSignerToDomainOutput {
+    pub fn associateDelegationSignerToDomain(self: *Self, allocator: std.mem.Allocator, input: associate_delegation_signer_to_domain.AssociateDelegationSignerToDomainInput, options: CallOptions) !associate_delegation_signer_to_domain.AssociateDelegationSignerToDomainOutput {
         return associate_delegation_signer_to_domain.execute(self, allocator, input, options);
     }
 
@@ -113,7 +114,7 @@ pub const Client = struct {
     /// Use either
     /// [ListOperations](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html) or [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) to determine whether the operation succeeded. [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) provides additional information, for example,
     /// `Domain Transfer from Aws Account 111122223333 has been cancelled`.
-    pub fn cancelDomainTransferToAnotherAwsAccount(self: *Self, allocator: std.mem.Allocator, input: cancel_domain_transfer_to_another_aws_account.CancelDomainTransferToAnotherAwsAccountInput, options: cancel_domain_transfer_to_another_aws_account.Options) !cancel_domain_transfer_to_another_aws_account.CancelDomainTransferToAnotherAwsAccountOutput {
+    pub fn cancelDomainTransferToAnotherAwsAccount(self: *Self, allocator: std.mem.Allocator, input: cancel_domain_transfer_to_another_aws_account.CancelDomainTransferToAnotherAwsAccountInput, options: CallOptions) !cancel_domain_transfer_to_another_aws_account.CancelDomainTransferToAnotherAwsAccountOutput {
         return cancel_domain_transfer_to_another_aws_account.execute(self, allocator, input, options);
     }
 
@@ -121,12 +122,12 @@ pub const Client = struct {
     /// availability status of a domain is pending, you must submit another request
     /// to determine
     /// the availability of the domain name.
-    pub fn checkDomainAvailability(self: *Self, allocator: std.mem.Allocator, input: check_domain_availability.CheckDomainAvailabilityInput, options: check_domain_availability.Options) !check_domain_availability.CheckDomainAvailabilityOutput {
+    pub fn checkDomainAvailability(self: *Self, allocator: std.mem.Allocator, input: check_domain_availability.CheckDomainAvailabilityInput, options: CallOptions) !check_domain_availability.CheckDomainAvailabilityOutput {
         return check_domain_availability.execute(self, allocator, input, options);
     }
 
     /// Checks whether a domain name can be transferred to Amazon Route 53.
-    pub fn checkDomainTransferability(self: *Self, allocator: std.mem.Allocator, input: check_domain_transferability.CheckDomainTransferabilityInput, options: check_domain_transferability.Options) !check_domain_transferability.CheckDomainTransferabilityOutput {
+    pub fn checkDomainTransferability(self: *Self, allocator: std.mem.Allocator, input: check_domain_transferability.CheckDomainTransferabilityInput, options: CallOptions) !check_domain_transferability.CheckDomainTransferabilityOutput {
         return check_domain_transferability.execute(self, allocator, input, options);
     }
 
@@ -152,7 +153,7 @@ pub const Client = struct {
     /// registrant contact. The email will come from
     /// `noreply@domainnameverification.net` or
     /// `noreply@registrar.amazon.com`.
-    pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: delete_domain.Options) !delete_domain.DeleteDomainOutput {
+    pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: CallOptions) !delete_domain.DeleteDomainOutput {
         return delete_domain.execute(self, allocator, input, options);
     }
 
@@ -161,14 +162,14 @@ pub const Client = struct {
     /// All tag operations are eventually consistent; subsequent operations might
     /// not
     /// immediately represent all issued operations.
-    pub fn deleteTagsForDomain(self: *Self, allocator: std.mem.Allocator, input: delete_tags_for_domain.DeleteTagsForDomainInput, options: delete_tags_for_domain.Options) !delete_tags_for_domain.DeleteTagsForDomainOutput {
+    pub fn deleteTagsForDomain(self: *Self, allocator: std.mem.Allocator, input: delete_tags_for_domain.DeleteTagsForDomainInput, options: CallOptions) !delete_tags_for_domain.DeleteTagsForDomainOutput {
         return delete_tags_for_domain.execute(self, allocator, input, options);
     }
 
     /// This operation disables automatic renewal of domain registration for the
     /// specified
     /// domain.
-    pub fn disableDomainAutoRenew(self: *Self, allocator: std.mem.Allocator, input: disable_domain_auto_renew.DisableDomainAutoRenewInput, options: disable_domain_auto_renew.Options) !disable_domain_auto_renew.DisableDomainAutoRenewOutput {
+    pub fn disableDomainAutoRenew(self: *Self, allocator: std.mem.Allocator, input: disable_domain_auto_renew.DisableDomainAutoRenewInput, options: CallOptions) !disable_domain_auto_renew.DisableDomainAutoRenewOutput {
         return disable_domain_auto_renew.execute(self, allocator, input, options);
     }
 
@@ -181,13 +182,13 @@ pub const Client = struct {
     /// can use to track the progress and completion of the action. If the request
     /// is not
     /// completed successfully, the domain registrant will be notified by email.
-    pub fn disableDomainTransferLock(self: *Self, allocator: std.mem.Allocator, input: disable_domain_transfer_lock.DisableDomainTransferLockInput, options: disable_domain_transfer_lock.Options) !disable_domain_transfer_lock.DisableDomainTransferLockOutput {
+    pub fn disableDomainTransferLock(self: *Self, allocator: std.mem.Allocator, input: disable_domain_transfer_lock.DisableDomainTransferLockInput, options: CallOptions) !disable_domain_transfer_lock.DisableDomainTransferLockOutput {
         return disable_domain_transfer_lock.execute(self, allocator, input, options);
     }
 
     /// Deletes a delegation signer (DS) record in the registry zone for this domain
     /// name.
-    pub fn disassociateDelegationSignerFromDomain(self: *Self, allocator: std.mem.Allocator, input: disassociate_delegation_signer_from_domain.DisassociateDelegationSignerFromDomainInput, options: disassociate_delegation_signer_from_domain.Options) !disassociate_delegation_signer_from_domain.DisassociateDelegationSignerFromDomainOutput {
+    pub fn disassociateDelegationSignerFromDomain(self: *Self, allocator: std.mem.Allocator, input: disassociate_delegation_signer_from_domain.DisassociateDelegationSignerFromDomainInput, options: CallOptions) !disassociate_delegation_signer_from_domain.DisassociateDelegationSignerFromDomainOutput {
         return disassociate_delegation_signer_from_domain.execute(self, allocator, input, options);
     }
 
@@ -204,7 +205,7 @@ pub const Client = struct {
     /// 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html) in the *Amazon Route 53 Developer
     /// Guide*. Route 53 requires that you renew before the end of the renewal
     /// period so we can complete processing before the deadline.
-    pub fn enableDomainAutoRenew(self: *Self, allocator: std.mem.Allocator, input: enable_domain_auto_renew.EnableDomainAutoRenewInput, options: enable_domain_auto_renew.Options) !enable_domain_auto_renew.EnableDomainAutoRenewOutput {
+    pub fn enableDomainAutoRenew(self: *Self, allocator: std.mem.Allocator, input: enable_domain_auto_renew.EnableDomainAutoRenewInput, options: CallOptions) !enable_domain_auto_renew.EnableDomainAutoRenewOutput {
         return enable_domain_auto_renew.execute(self, allocator, input, options);
     }
 
@@ -215,7 +216,7 @@ pub const Client = struct {
     /// completion of the action. If the request is not completed successfully, the
     /// domain
     /// registrant will be notified by email.
-    pub fn enableDomainTransferLock(self: *Self, allocator: std.mem.Allocator, input: enable_domain_transfer_lock.EnableDomainTransferLockInput, options: enable_domain_transfer_lock.Options) !enable_domain_transfer_lock.EnableDomainTransferLockOutput {
+    pub fn enableDomainTransferLock(self: *Self, allocator: std.mem.Allocator, input: enable_domain_transfer_lock.EnableDomainTransferLockInput, options: CallOptions) !enable_domain_transfer_lock.EnableDomainTransferLockOutput {
         return enable_domain_transfer_lock.execute(self, allocator, input, options);
     }
 
@@ -227,7 +228,7 @@ pub const Client = struct {
     ///
     /// If you want us to resend the email, use the
     /// `ResendContactReachabilityEmail` operation.
-    pub fn getContactReachabilityStatus(self: *Self, allocator: std.mem.Allocator, input: get_contact_reachability_status.GetContactReachabilityStatusInput, options: get_contact_reachability_status.Options) !get_contact_reachability_status.GetContactReachabilityStatusOutput {
+    pub fn getContactReachabilityStatus(self: *Self, allocator: std.mem.Allocator, input: get_contact_reachability_status.GetContactReachabilityStatusInput, options: CallOptions) !get_contact_reachability_status.GetContactReachabilityStatusOutput {
         return get_contact_reachability_status.execute(self, allocator, input, options);
     }
 
@@ -235,25 +236,25 @@ pub const Client = struct {
     /// associated with the current Amazon Web Services account. Contact information
     /// for the
     /// domain is also returned as part of the output.
-    pub fn getDomainDetail(self: *Self, allocator: std.mem.Allocator, input: get_domain_detail.GetDomainDetailInput, options: get_domain_detail.Options) !get_domain_detail.GetDomainDetailOutput {
+    pub fn getDomainDetail(self: *Self, allocator: std.mem.Allocator, input: get_domain_detail.GetDomainDetailInput, options: CallOptions) !get_domain_detail.GetDomainDetailOutput {
         return get_domain_detail.execute(self, allocator, input, options);
     }
 
     /// The GetDomainSuggestions operation returns a list of suggested domain names.
-    pub fn getDomainSuggestions(self: *Self, allocator: std.mem.Allocator, input: get_domain_suggestions.GetDomainSuggestionsInput, options: get_domain_suggestions.Options) !get_domain_suggestions.GetDomainSuggestionsOutput {
+    pub fn getDomainSuggestions(self: *Self, allocator: std.mem.Allocator, input: get_domain_suggestions.GetDomainSuggestionsInput, options: CallOptions) !get_domain_suggestions.GetDomainSuggestionsOutput {
         return get_domain_suggestions.execute(self, allocator, input, options);
     }
 
     /// This operation returns the current status of an operation that is not
     /// completed.
-    pub fn getOperationDetail(self: *Self, allocator: std.mem.Allocator, input: get_operation_detail.GetOperationDetailInput, options: get_operation_detail.Options) !get_operation_detail.GetOperationDetailOutput {
+    pub fn getOperationDetail(self: *Self, allocator: std.mem.Allocator, input: get_operation_detail.GetOperationDetailInput, options: CallOptions) !get_operation_detail.GetOperationDetailOutput {
         return get_operation_detail.execute(self, allocator, input, options);
     }
 
     /// This operation returns all the domain names registered with Amazon Route 53
     /// for the
     /// current Amazon Web Services account if no filtering conditions are used.
-    pub fn listDomains(self: *Self, allocator: std.mem.Allocator, input: list_domains.ListDomainsInput, options: list_domains.Options) !list_domains.ListDomainsOutput {
+    pub fn listDomains(self: *Self, allocator: std.mem.Allocator, input: list_domains.ListDomainsInput, options: CallOptions) !list_domains.ListDomainsOutput {
         return list_domains.execute(self, allocator, input, options);
     }
 
@@ -263,7 +264,7 @@ pub const Client = struct {
     /// account.
     ///
     /// This command runs only in the us-east-1 Region.
-    pub fn listOperations(self: *Self, allocator: std.mem.Allocator, input: list_operations.ListOperationsInput, options: list_operations.Options) !list_operations.ListOperationsOutput {
+    pub fn listOperations(self: *Self, allocator: std.mem.Allocator, input: list_operations.ListOperationsInput, options: CallOptions) !list_operations.ListOperationsOutput {
         return list_operations.execute(self, allocator, input, options);
     }
 
@@ -279,7 +280,7 @@ pub const Client = struct {
     /// * Domain renewal
     ///
     /// * Domain restoration
-    pub fn listPrices(self: *Self, allocator: std.mem.Allocator, input: list_prices.ListPricesInput, options: list_prices.Options) !list_prices.ListPricesOutput {
+    pub fn listPrices(self: *Self, allocator: std.mem.Allocator, input: list_prices.ListPricesInput, options: CallOptions) !list_prices.ListPricesOutput {
         return list_prices.execute(self, allocator, input, options);
     }
 
@@ -290,7 +291,7 @@ pub const Client = struct {
     /// All tag operations are eventually consistent; subsequent operations might
     /// not
     /// immediately represent all issued operations.
-    pub fn listTagsForDomain(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_domain.ListTagsForDomainInput, options: list_tags_for_domain.Options) !list_tags_for_domain.ListTagsForDomainOutput {
+    pub fn listTagsForDomain(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_domain.ListTagsForDomainInput, options: CallOptions) !list_tags_for_domain.ListTagsForDomainOutput {
         return list_tags_for_domain.execute(self, allocator, input, options);
     }
 
@@ -301,7 +302,7 @@ pub const Client = struct {
     /// * Changes the IPS tags of a .uk domain, and pushes it to transit. Transit
     ///   means
     /// that the domain is ready to be transferred to another registrar.
-    pub fn pushDomain(self: *Self, allocator: std.mem.Allocator, input: push_domain.PushDomainInput, options: push_domain.Options) !push_domain.PushDomainOutput {
+    pub fn pushDomain(self: *Self, allocator: std.mem.Allocator, input: push_domain.PushDomainInput, options: CallOptions) !push_domain.PushDomainOutput {
         return push_domain.execute(self, allocator, input, options);
     }
 
@@ -341,7 +342,7 @@ pub const Client = struct {
     /// * Charges your Amazon Web Services account an amount based on the top-level
     /// domain. For more information, see [Amazon Route 53
     /// Pricing](http://aws.amazon.com/route53/pricing/).
-    pub fn registerDomain(self: *Self, allocator: std.mem.Allocator, input: register_domain.RegisterDomainInput, options: register_domain.Options) !register_domain.RegisterDomainOutput {
+    pub fn registerDomain(self: *Self, allocator: std.mem.Allocator, input: register_domain.RegisterDomainInput, options: CallOptions) !register_domain.RegisterDomainOutput {
         return register_domain.execute(self, allocator, input, options);
     }
 
@@ -354,7 +355,7 @@ pub const Client = struct {
     /// Use either
     /// [ListOperations](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html) or [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) to determine whether the operation succeeded. [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) provides additional information, for example,
     /// `Domain Transfer from Aws Account 111122223333 has been cancelled`.
-    pub fn rejectDomainTransferFromAnotherAwsAccount(self: *Self, allocator: std.mem.Allocator, input: reject_domain_transfer_from_another_aws_account.RejectDomainTransferFromAnotherAwsAccountInput, options: reject_domain_transfer_from_another_aws_account.Options) !reject_domain_transfer_from_another_aws_account.RejectDomainTransferFromAnotherAwsAccountOutput {
+    pub fn rejectDomainTransferFromAnotherAwsAccount(self: *Self, allocator: std.mem.Allocator, input: reject_domain_transfer_from_another_aws_account.RejectDomainTransferFromAnotherAwsAccountInput, options: CallOptions) !reject_domain_transfer_from_another_aws_account.RejectDomainTransferFromAnotherAwsAccountOutput {
         return reject_domain_transfer_from_another_aws_account.execute(self, allocator, input, options);
     }
 
@@ -371,7 +372,7 @@ pub const Client = struct {
     /// Registration for a
     /// Domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html) in the *Amazon Route 53 Developer
     /// Guide*.
-    pub fn renewDomain(self: *Self, allocator: std.mem.Allocator, input: renew_domain.RenewDomainInput, options: renew_domain.Options) !renew_domain.RenewDomainOutput {
+    pub fn renewDomain(self: *Self, allocator: std.mem.Allocator, input: renew_domain.RenewDomainInput, options: CallOptions) !renew_domain.RenewDomainOutput {
         return renew_domain.execute(self, allocator, input, options);
     }
 
@@ -380,19 +381,19 @@ pub const Client = struct {
     /// contact is valid, such as registering a new domain, this operation resends
     /// the
     /// confirmation email to the current email address for the registrant contact.
-    pub fn resendContactReachabilityEmail(self: *Self, allocator: std.mem.Allocator, input: resend_contact_reachability_email.ResendContactReachabilityEmailInput, options: resend_contact_reachability_email.Options) !resend_contact_reachability_email.ResendContactReachabilityEmailOutput {
+    pub fn resendContactReachabilityEmail(self: *Self, allocator: std.mem.Allocator, input: resend_contact_reachability_email.ResendContactReachabilityEmailInput, options: CallOptions) !resend_contact_reachability_email.ResendContactReachabilityEmailOutput {
         return resend_contact_reachability_email.execute(self, allocator, input, options);
     }
 
     /// Resend the form of authorization email for this operation.
-    pub fn resendOperationAuthorization(self: *Self, allocator: std.mem.Allocator, input: resend_operation_authorization.ResendOperationAuthorizationInput, options: resend_operation_authorization.Options) !resend_operation_authorization.ResendOperationAuthorizationOutput {
+    pub fn resendOperationAuthorization(self: *Self, allocator: std.mem.Allocator, input: resend_operation_authorization.ResendOperationAuthorizationInput, options: CallOptions) !resend_operation_authorization.ResendOperationAuthorizationOutput {
         return resend_operation_authorization.execute(self, allocator, input, options);
     }
 
     /// This operation returns the authorization code for the domain. To transfer a
     /// domain to
     /// another registrar, you provide this value to the new registrar.
-    pub fn retrieveDomainAuthCode(self: *Self, allocator: std.mem.Allocator, input: retrieve_domain_auth_code.RetrieveDomainAuthCodeInput, options: retrieve_domain_auth_code.Options) !retrieve_domain_auth_code.RetrieveDomainAuthCodeOutput {
+    pub fn retrieveDomainAuthCode(self: *Self, allocator: std.mem.Allocator, input: retrieve_domain_auth_code.RetrieveDomainAuthCodeInput, options: CallOptions) !retrieve_domain_auth_code.RetrieveDomainAuthCodeOutput {
         return retrieve_domain_auth_code.execute(self, allocator, input, options);
     }
 
@@ -449,7 +450,7 @@ pub const Client = struct {
     /// track the progress and completion of the action. If the transfer doesn't
     /// complete
     /// successfully, the domain registrant will be notified by email.
-    pub fn transferDomain(self: *Self, allocator: std.mem.Allocator, input: transfer_domain.TransferDomainInput, options: transfer_domain.Options) !transfer_domain.TransferDomainOutput {
+    pub fn transferDomain(self: *Self, allocator: std.mem.Allocator, input: transfer_domain.TransferDomainInput, options: CallOptions) !transfer_domain.TransferDomainOutput {
         return transfer_domain.execute(self, allocator, input, options);
     }
 
@@ -484,7 +485,7 @@ pub const Client = struct {
     /// Use either
     /// [ListOperations](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html) or [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) to determine whether the operation succeeded. [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) provides additional information, for example,
     /// `Domain Transfer from Aws Account 111122223333 has been cancelled`.
-    pub fn transferDomainToAnotherAwsAccount(self: *Self, allocator: std.mem.Allocator, input: transfer_domain_to_another_aws_account.TransferDomainToAnotherAwsAccountInput, options: transfer_domain_to_another_aws_account.Options) !transfer_domain_to_another_aws_account.TransferDomainToAnotherAwsAccountOutput {
+    pub fn transferDomainToAnotherAwsAccount(self: *Self, allocator: std.mem.Allocator, input: transfer_domain_to_another_aws_account.TransferDomainToAnotherAwsAccountInput, options: CallOptions) !transfer_domain_to_another_aws_account.TransferDomainToAnotherAwsAccountOutput {
         return transfer_domain_to_another_aws_account.execute(self, allocator, input, options);
     }
 
@@ -498,7 +499,7 @@ pub const Client = struct {
     /// track the progress and completion of the operation. If the request is not
     /// completed
     /// successfully, the domain registrant will be notified by email.
-    pub fn updateDomainContact(self: *Self, allocator: std.mem.Allocator, input: update_domain_contact.UpdateDomainContactInput, options: update_domain_contact.Options) !update_domain_contact.UpdateDomainContactOutput {
+    pub fn updateDomainContact(self: *Self, allocator: std.mem.Allocator, input: update_domain_contact.UpdateDomainContactInput, options: CallOptions) !update_domain_contact.UpdateDomainContactOutput {
         return update_domain_contact.execute(self, allocator, input, options);
     }
 
@@ -537,7 +538,7 @@ pub const Client = struct {
     /// this domain from the WHOIS database. For more information on our privacy
     /// practices,
     /// see [https://aws.amazon.com/privacy/](https://aws.amazon.com/privacy/).
-    pub fn updateDomainContactPrivacy(self: *Self, allocator: std.mem.Allocator, input: update_domain_contact_privacy.UpdateDomainContactPrivacyInput, options: update_domain_contact_privacy.Options) !update_domain_contact_privacy.UpdateDomainContactPrivacyOutput {
+    pub fn updateDomainContactPrivacy(self: *Self, allocator: std.mem.Allocator, input: update_domain_contact_privacy.UpdateDomainContactPrivacyInput, options: CallOptions) !update_domain_contact_privacy.UpdateDomainContactPrivacyOutput {
         return update_domain_contact_privacy.execute(self, allocator, input, options);
     }
 
@@ -553,7 +554,7 @@ pub const Client = struct {
     /// progress and completion of the action. If the request is not completed
     /// successfully, the
     /// domain registrant will be notified by email.
-    pub fn updateDomainNameservers(self: *Self, allocator: std.mem.Allocator, input: update_domain_nameservers.UpdateDomainNameserversInput, options: update_domain_nameservers.Options) !update_domain_nameservers.UpdateDomainNameserversOutput {
+    pub fn updateDomainNameservers(self: *Self, allocator: std.mem.Allocator, input: update_domain_nameservers.UpdateDomainNameserversInput, options: CallOptions) !update_domain_nameservers.UpdateDomainNameserversOutput {
         return update_domain_nameservers.execute(self, allocator, input, options);
     }
 
@@ -562,13 +563,13 @@ pub const Client = struct {
     /// All tag operations are eventually consistent; subsequent operations might
     /// not
     /// immediately represent all issued operations.
-    pub fn updateTagsForDomain(self: *Self, allocator: std.mem.Allocator, input: update_tags_for_domain.UpdateTagsForDomainInput, options: update_tags_for_domain.Options) !update_tags_for_domain.UpdateTagsForDomainOutput {
+    pub fn updateTagsForDomain(self: *Self, allocator: std.mem.Allocator, input: update_tags_for_domain.UpdateTagsForDomainInput, options: CallOptions) !update_tags_for_domain.UpdateTagsForDomainOutput {
         return update_tags_for_domain.execute(self, allocator, input, options);
     }
 
     /// Returns all the domain-related billing records for the current Amazon Web
     /// Services account for a specified period
-    pub fn viewBilling(self: *Self, allocator: std.mem.Allocator, input: view_billing.ViewBillingInput, options: view_billing.Options) !view_billing.ViewBillingOutput {
+    pub fn viewBilling(self: *Self, allocator: std.mem.Allocator, input: view_billing.ViewBillingInput, options: CallOptions) !view_billing.ViewBillingOutput {
         return view_billing.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ExecutionEngineConfig = @import("execution_engine_config.zig").ExecutionEngineConfig;
 const NotebookS3LocationFromInput = @import("notebook_s3_location_from_input.zig").NotebookS3LocationFromInput;
@@ -88,11 +89,7 @@ pub const StartNotebookExecutionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartNotebookExecutionInput, options: Options) !StartNotebookExecutionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartNotebookExecutionInput, options: CallOptions) !StartNotebookExecutionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

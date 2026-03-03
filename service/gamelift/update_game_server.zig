@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GameServerHealthCheck = @import("game_server_health_check.zig").GameServerHealthCheck;
 const GameServerUtilizationStatus = @import("game_server_utilization_status.zig").GameServerUtilizationStatus;
@@ -51,11 +52,7 @@ pub const UpdateGameServerOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateGameServerInput, options: Options) !UpdateGameServerOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateGameServerInput, options: CallOptions) !UpdateGameServerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

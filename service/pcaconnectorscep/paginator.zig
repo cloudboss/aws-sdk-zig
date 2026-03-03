@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_challenge_metadata = @import("list_challenge_metadata.zig");
@@ -15,7 +16,7 @@ pub const ListChallengeMetadataPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_challenge_metadata.Options) !list_challenge_metadata.ListChallengeMetadataOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_challenge_metadata.ListChallengeMetadataOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const ListConnectorsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_connectors.Options) !list_connectors.ListConnectorsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_connectors.ListConnectorsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

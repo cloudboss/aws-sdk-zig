@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RequestPayer = @import("request_payer.zig").RequestPayer;
 const Tag = @import("tag.zig").Tag;
@@ -53,11 +54,7 @@ pub const GetObjectTaggingOutput = struct {
     version_id: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetObjectTaggingInput, options: Options) !GetObjectTaggingOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetObjectTaggingInput, options: CallOptions) !GetObjectTaggingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ClipFragmentSelector = @import("clip_fragment_selector.zig").ClipFragmentSelector;
 
@@ -50,11 +51,7 @@ pub const GetClipOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetClipInput, options: Options) !GetClipOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetClipInput, options: CallOptions) !GetClipOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     const alloc = arena.allocator();
 

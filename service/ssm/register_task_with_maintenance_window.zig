@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AlarmConfiguration = @import("alarm_configuration.zig").AlarmConfiguration;
 const MaintenanceWindowTaskCutoffBehavior = @import("maintenance_window_task_cutoff_behavior.zig").MaintenanceWindowTaskCutoffBehavior;
@@ -191,11 +192,7 @@ pub const RegisterTaskWithMaintenanceWindowOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterTaskWithMaintenanceWindowInput, options: Options) !RegisterTaskWithMaintenanceWindowOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterTaskWithMaintenanceWindowInput, options: CallOptions) !RegisterTaskWithMaintenanceWindowOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

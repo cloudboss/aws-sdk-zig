@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AutomationRulesMetadataV2 = @import("automation_rules_metadata_v2.zig").AutomationRulesMetadataV2;
 
@@ -35,11 +36,7 @@ pub const ListAutomationRulesV2Output = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAutomationRulesV2Input, options: Options) !ListAutomationRulesV2Output {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAutomationRulesV2Input, options: CallOptions) !ListAutomationRulesV2Output {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

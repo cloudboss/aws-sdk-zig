@@ -2,10 +2,11 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const OrganizationDetails = @import("organization_details.zig").OrganizationDetails;
 
-const GetOrganizationStatisticsInput = struct {};
+pub const GetOrganizationStatisticsInput = struct {};
 
 pub const GetOrganizationStatisticsOutput = struct {
     /// Information about the statistics report for your organization.
@@ -16,11 +17,7 @@ pub const GetOrganizationStatisticsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetOrganizationStatisticsInput, options: Options) !GetOrganizationStatisticsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetOrganizationStatisticsInput, options: CallOptions) !GetOrganizationStatisticsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

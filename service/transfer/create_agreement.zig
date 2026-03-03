@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CustomDirectoriesType = @import("custom_directories_type.zig").CustomDirectoriesType;
 const EnforceMessageSigningType = @import("enforce_message_signing_type.zig").EnforceMessageSigningType;
@@ -123,11 +124,7 @@ pub const CreateAgreementOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAgreementInput, options: Options) !CreateAgreementOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAgreementInput, options: CallOptions) !CreateAgreementOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

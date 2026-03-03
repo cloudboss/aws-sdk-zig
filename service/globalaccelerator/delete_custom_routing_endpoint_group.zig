@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteCustomRoutingEndpointGroupInput = struct {
@@ -13,13 +14,9 @@ pub const DeleteCustomRoutingEndpointGroupInput = struct {
     };
 };
 
-const DeleteCustomRoutingEndpointGroupOutput = struct {};
+pub const DeleteCustomRoutingEndpointGroupOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCustomRoutingEndpointGroupInput, options: Options) !DeleteCustomRoutingEndpointGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCustomRoutingEndpointGroupInput, options: CallOptions) !DeleteCustomRoutingEndpointGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

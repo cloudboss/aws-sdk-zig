@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConformancePackComplianceScoresFilters = @import("conformance_pack_compliance_scores_filters.zig").ConformancePackComplianceScoresFilters;
 const SortBy = @import("sort_by.zig").SortBy;
@@ -66,11 +67,7 @@ pub const ListConformancePackComplianceScoresOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListConformancePackComplianceScoresInput, options: Options) !ListConformancePackComplianceScoresOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListConformancePackComplianceScoresInput, options: CallOptions) !ListConformancePackComplianceScoresOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

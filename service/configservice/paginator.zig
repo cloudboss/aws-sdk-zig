@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_aggregate_compliance_by_config_rules = @import("describe_aggregate_compliance_by_config_rules.zig");
@@ -54,7 +55,7 @@ pub const DescribeAggregateComplianceByConfigRulesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_aggregate_compliance_by_config_rules.Options) !describe_aggregate_compliance_by_config_rules.DescribeAggregateComplianceByConfigRulesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_aggregate_compliance_by_config_rules.DescribeAggregateComplianceByConfigRulesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -95,7 +96,7 @@ pub const DescribeAggregateComplianceByConformancePacksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_aggregate_compliance_by_conformance_packs.Options) !describe_aggregate_compliance_by_conformance_packs.DescribeAggregateComplianceByConformancePacksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_aggregate_compliance_by_conformance_packs.DescribeAggregateComplianceByConformancePacksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -136,7 +137,7 @@ pub const DescribeAggregationAuthorizationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_aggregation_authorizations.Options) !describe_aggregation_authorizations.DescribeAggregationAuthorizationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_aggregation_authorizations.DescribeAggregationAuthorizationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -177,7 +178,7 @@ pub const DescribeComplianceByConfigRulePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_compliance_by_config_rule.Options) !describe_compliance_by_config_rule.DescribeComplianceByConfigRuleOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_compliance_by_config_rule.DescribeComplianceByConfigRuleOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -218,7 +219,7 @@ pub const DescribeComplianceByResourcePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_compliance_by_resource.Options) !describe_compliance_by_resource.DescribeComplianceByResourceOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_compliance_by_resource.DescribeComplianceByResourceOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -259,7 +260,7 @@ pub const DescribeConfigRuleEvaluationStatusPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_config_rule_evaluation_status.Options) !describe_config_rule_evaluation_status.DescribeConfigRuleEvaluationStatusOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_config_rule_evaluation_status.DescribeConfigRuleEvaluationStatusOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -300,7 +301,7 @@ pub const DescribeConfigRulesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_config_rules.Options) !describe_config_rules.DescribeConfigRulesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_config_rules.DescribeConfigRulesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -341,7 +342,7 @@ pub const DescribeConfigurationAggregatorSourcesStatusPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_configuration_aggregator_sources_status.Options) !describe_configuration_aggregator_sources_status.DescribeConfigurationAggregatorSourcesStatusOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_configuration_aggregator_sources_status.DescribeConfigurationAggregatorSourcesStatusOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -382,7 +383,7 @@ pub const DescribeConfigurationAggregatorsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_configuration_aggregators.Options) !describe_configuration_aggregators.DescribeConfigurationAggregatorsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_configuration_aggregators.DescribeConfigurationAggregatorsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -423,7 +424,7 @@ pub const DescribeConformancePackCompliancePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_conformance_pack_compliance.Options) !describe_conformance_pack_compliance.DescribeConformancePackComplianceOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_conformance_pack_compliance.DescribeConformancePackComplianceOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -464,7 +465,7 @@ pub const DescribeConformancePackStatusPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_conformance_pack_status.Options) !describe_conformance_pack_status.DescribeConformancePackStatusOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_conformance_pack_status.DescribeConformancePackStatusOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -505,7 +506,7 @@ pub const DescribeConformancePacksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_conformance_packs.Options) !describe_conformance_packs.DescribeConformancePacksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_conformance_packs.DescribeConformancePacksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -546,7 +547,7 @@ pub const DescribeOrganizationConfigRuleStatusesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_organization_config_rule_statuses.Options) !describe_organization_config_rule_statuses.DescribeOrganizationConfigRuleStatusesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_organization_config_rule_statuses.DescribeOrganizationConfigRuleStatusesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -587,7 +588,7 @@ pub const DescribeOrganizationConfigRulesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_organization_config_rules.Options) !describe_organization_config_rules.DescribeOrganizationConfigRulesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_organization_config_rules.DescribeOrganizationConfigRulesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -628,7 +629,7 @@ pub const DescribeOrganizationConformancePackStatusesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_organization_conformance_pack_statuses.Options) !describe_organization_conformance_pack_statuses.DescribeOrganizationConformancePackStatusesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_organization_conformance_pack_statuses.DescribeOrganizationConformancePackStatusesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -669,7 +670,7 @@ pub const DescribeOrganizationConformancePacksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_organization_conformance_packs.Options) !describe_organization_conformance_packs.DescribeOrganizationConformancePacksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_organization_conformance_packs.DescribeOrganizationConformancePacksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -710,7 +711,7 @@ pub const DescribePendingAggregationRequestsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_pending_aggregation_requests.Options) !describe_pending_aggregation_requests.DescribePendingAggregationRequestsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_pending_aggregation_requests.DescribePendingAggregationRequestsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -751,7 +752,7 @@ pub const DescribeRemediationExceptionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_remediation_exceptions.Options) !describe_remediation_exceptions.DescribeRemediationExceptionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_remediation_exceptions.DescribeRemediationExceptionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -792,7 +793,7 @@ pub const DescribeRemediationExecutionStatusPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_remediation_execution_status.Options) !describe_remediation_execution_status.DescribeRemediationExecutionStatusOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_remediation_execution_status.DescribeRemediationExecutionStatusOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -833,7 +834,7 @@ pub const DescribeRetentionConfigurationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_retention_configurations.Options) !describe_retention_configurations.DescribeRetentionConfigurationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_retention_configurations.DescribeRetentionConfigurationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -874,7 +875,7 @@ pub const GetAggregateComplianceDetailsByConfigRulePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_aggregate_compliance_details_by_config_rule.Options) !get_aggregate_compliance_details_by_config_rule.GetAggregateComplianceDetailsByConfigRuleOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_aggregate_compliance_details_by_config_rule.GetAggregateComplianceDetailsByConfigRuleOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -915,7 +916,7 @@ pub const GetAggregateConfigRuleComplianceSummaryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_aggregate_config_rule_compliance_summary.Options) !get_aggregate_config_rule_compliance_summary.GetAggregateConfigRuleComplianceSummaryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_aggregate_config_rule_compliance_summary.GetAggregateConfigRuleComplianceSummaryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -956,7 +957,7 @@ pub const GetAggregateConformancePackComplianceSummaryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_aggregate_conformance_pack_compliance_summary.Options) !get_aggregate_conformance_pack_compliance_summary.GetAggregateConformancePackComplianceSummaryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_aggregate_conformance_pack_compliance_summary.GetAggregateConformancePackComplianceSummaryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -997,7 +998,7 @@ pub const GetAggregateDiscoveredResourceCountsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_aggregate_discovered_resource_counts.Options) !get_aggregate_discovered_resource_counts.GetAggregateDiscoveredResourceCountsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_aggregate_discovered_resource_counts.GetAggregateDiscoveredResourceCountsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1038,7 +1039,7 @@ pub const GetComplianceDetailsByConfigRulePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_compliance_details_by_config_rule.Options) !get_compliance_details_by_config_rule.GetComplianceDetailsByConfigRuleOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_compliance_details_by_config_rule.GetComplianceDetailsByConfigRuleOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1079,7 +1080,7 @@ pub const GetComplianceDetailsByResourcePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_compliance_details_by_resource.Options) !get_compliance_details_by_resource.GetComplianceDetailsByResourceOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_compliance_details_by_resource.GetComplianceDetailsByResourceOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1120,7 +1121,7 @@ pub const GetConformancePackComplianceDetailsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_conformance_pack_compliance_details.Options) !get_conformance_pack_compliance_details.GetConformancePackComplianceDetailsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_conformance_pack_compliance_details.GetConformancePackComplianceDetailsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1161,7 +1162,7 @@ pub const GetConformancePackComplianceSummaryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_conformance_pack_compliance_summary.Options) !get_conformance_pack_compliance_summary.GetConformancePackComplianceSummaryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_conformance_pack_compliance_summary.GetConformancePackComplianceSummaryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1202,7 +1203,7 @@ pub const GetDiscoveredResourceCountsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_discovered_resource_counts.Options) !get_discovered_resource_counts.GetDiscoveredResourceCountsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_discovered_resource_counts.GetDiscoveredResourceCountsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1243,7 +1244,7 @@ pub const GetOrganizationConfigRuleDetailedStatusPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_organization_config_rule_detailed_status.Options) !get_organization_config_rule_detailed_status.GetOrganizationConfigRuleDetailedStatusOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_organization_config_rule_detailed_status.GetOrganizationConfigRuleDetailedStatusOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1284,7 +1285,7 @@ pub const GetOrganizationConformancePackDetailedStatusPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_organization_conformance_pack_detailed_status.Options) !get_organization_conformance_pack_detailed_status.GetOrganizationConformancePackDetailedStatusOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_organization_conformance_pack_detailed_status.GetOrganizationConformancePackDetailedStatusOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1325,7 +1326,7 @@ pub const GetResourceConfigHistoryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_resource_config_history.Options) !get_resource_config_history.GetResourceConfigHistoryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_resource_config_history.GetResourceConfigHistoryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1366,7 +1367,7 @@ pub const ListAggregateDiscoveredResourcesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_aggregate_discovered_resources.Options) !list_aggregate_discovered_resources.ListAggregateDiscoveredResourcesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_aggregate_discovered_resources.ListAggregateDiscoveredResourcesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1407,7 +1408,7 @@ pub const ListConfigurationRecordersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_configuration_recorders.Options) !list_configuration_recorders.ListConfigurationRecordersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_configuration_recorders.ListConfigurationRecordersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1448,7 +1449,7 @@ pub const ListConformancePackComplianceScoresPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_conformance_pack_compliance_scores.Options) !list_conformance_pack_compliance_scores.ListConformancePackComplianceScoresOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_conformance_pack_compliance_scores.ListConformancePackComplianceScoresOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1489,7 +1490,7 @@ pub const ListDiscoveredResourcesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_discovered_resources.Options) !list_discovered_resources.ListDiscoveredResourcesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_discovered_resources.ListDiscoveredResourcesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1530,7 +1531,7 @@ pub const ListResourceEvaluationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resource_evaluations.Options) !list_resource_evaluations.ListResourceEvaluationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resource_evaluations.ListResourceEvaluationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1571,7 +1572,7 @@ pub const ListStoredQueriesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_stored_queries.Options) !list_stored_queries.ListStoredQueriesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_stored_queries.ListStoredQueriesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1612,7 +1613,7 @@ pub const ListTagsForResourcePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1653,7 +1654,7 @@ pub const SelectAggregateResourceConfigPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: select_aggregate_resource_config.Options) !select_aggregate_resource_config.SelectAggregateResourceConfigOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !select_aggregate_resource_config.SelectAggregateResourceConfigOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -1694,7 +1695,7 @@ pub const SelectResourceConfigPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: select_resource_config.Options) !select_resource_config.SelectResourceConfigOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !select_resource_config.SelectResourceConfigOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

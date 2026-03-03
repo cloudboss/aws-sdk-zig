@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AuthMode = @import("auth_mode.zig").AuthMode;
 const IdcUserAssignment = @import("idc_user_assignment.zig").IdcUserAssignment;
@@ -133,11 +134,7 @@ pub const CreateStudioOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateStudioInput, options: Options) !CreateStudioOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateStudioInput, options: CallOptions) !CreateStudioOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

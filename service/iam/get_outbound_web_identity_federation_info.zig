@@ -2,9 +2,10 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
-const GetOutboundWebIdentityFederationInfoInput = struct {};
+pub const GetOutboundWebIdentityFederationInfoInput = struct {};
 
 pub const GetOutboundWebIdentityFederationInfoOutput = struct {
     /// A unique issuer URL for your Amazon Web Services account that hosts the
@@ -21,11 +22,7 @@ pub const GetOutboundWebIdentityFederationInfoOutput = struct {
     jwt_vending_enabled: ?bool = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetOutboundWebIdentityFederationInfoInput, options: Options) !GetOutboundWebIdentityFederationInfoOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetOutboundWebIdentityFederationInfoInput, options: CallOptions) !GetOutboundWebIdentityFederationInfoOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

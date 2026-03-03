@@ -21,6 +21,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_app_monitor = @import("update_app_monitor.zig");
 const update_rum_metric_definition = @import("update_rum_metric_definition.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -100,7 +101,7 @@ pub const Client = struct {
     /// If some metric definitions specified in a `BatchCreateRumMetricDefinitions`
     /// operations are not valid, those metric definitions fail and return errors,
     /// but all valid metric definitions in the same operation still succeed.
-    pub fn batchCreateRumMetricDefinitions(self: *Self, allocator: std.mem.Allocator, input: batch_create_rum_metric_definitions.BatchCreateRumMetricDefinitionsInput, options: batch_create_rum_metric_definitions.Options) !batch_create_rum_metric_definitions.BatchCreateRumMetricDefinitionsOutput {
+    pub fn batchCreateRumMetricDefinitions(self: *Self, allocator: std.mem.Allocator, input: batch_create_rum_metric_definitions.BatchCreateRumMetricDefinitionsInput, options: CallOptions) !batch_create_rum_metric_definitions.BatchCreateRumMetricDefinitionsOutput {
         return batch_create_rum_metric_definitions.execute(self, allocator, input, options);
     }
 
@@ -114,13 +115,13 @@ pub const Client = struct {
     ///
     /// The maximum number of metric definitions that you can specify in one
     /// `BatchDeleteRumMetricDefinitions` operation is 200.
-    pub fn batchDeleteRumMetricDefinitions(self: *Self, allocator: std.mem.Allocator, input: batch_delete_rum_metric_definitions.BatchDeleteRumMetricDefinitionsInput, options: batch_delete_rum_metric_definitions.Options) !batch_delete_rum_metric_definitions.BatchDeleteRumMetricDefinitionsOutput {
+    pub fn batchDeleteRumMetricDefinitions(self: *Self, allocator: std.mem.Allocator, input: batch_delete_rum_metric_definitions.BatchDeleteRumMetricDefinitionsInput, options: CallOptions) !batch_delete_rum_metric_definitions.BatchDeleteRumMetricDefinitionsOutput {
         return batch_delete_rum_metric_definitions.execute(self, allocator, input, options);
     }
 
     /// Retrieves the list of metrics and dimensions that a RUM app monitor is
     /// sending to a single destination.
-    pub fn batchGetRumMetricDefinitions(self: *Self, allocator: std.mem.Allocator, input: batch_get_rum_metric_definitions.BatchGetRumMetricDefinitionsInput, options: batch_get_rum_metric_definitions.Options) !batch_get_rum_metric_definitions.BatchGetRumMetricDefinitionsOutput {
+    pub fn batchGetRumMetricDefinitions(self: *Self, allocator: std.mem.Allocator, input: batch_get_rum_metric_definitions.BatchGetRumMetricDefinitionsInput, options: CallOptions) !batch_get_rum_metric_definitions.BatchGetRumMetricDefinitionsOutput {
         return batch_get_rum_metric_definitions.execute(self, allocator, input, options);
     }
 
@@ -137,47 +138,47 @@ pub const Client = struct {
     /// get the JavaScript code snippet to add to your web application. For more
     /// information, see [How do I find a code snippet that I've already
     /// generated?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html)
-    pub fn createAppMonitor(self: *Self, allocator: std.mem.Allocator, input: create_app_monitor.CreateAppMonitorInput, options: create_app_monitor.Options) !create_app_monitor.CreateAppMonitorOutput {
+    pub fn createAppMonitor(self: *Self, allocator: std.mem.Allocator, input: create_app_monitor.CreateAppMonitorInput, options: CallOptions) !create_app_monitor.CreateAppMonitorOutput {
         return create_app_monitor.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing app monitor. This immediately stops the collection of
     /// data.
-    pub fn deleteAppMonitor(self: *Self, allocator: std.mem.Allocator, input: delete_app_monitor.DeleteAppMonitorInput, options: delete_app_monitor.Options) !delete_app_monitor.DeleteAppMonitorOutput {
+    pub fn deleteAppMonitor(self: *Self, allocator: std.mem.Allocator, input: delete_app_monitor.DeleteAppMonitorInput, options: CallOptions) !delete_app_monitor.DeleteAppMonitorOutput {
         return delete_app_monitor.execute(self, allocator, input, options);
     }
 
     /// Removes the association of a resource-based policy from an app monitor.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes a destination for CloudWatch RUM extended metrics, so that the
     /// specified app monitor stops sending extended metrics to that destination.
-    pub fn deleteRumMetricsDestination(self: *Self, allocator: std.mem.Allocator, input: delete_rum_metrics_destination.DeleteRumMetricsDestinationInput, options: delete_rum_metrics_destination.Options) !delete_rum_metrics_destination.DeleteRumMetricsDestinationOutput {
+    pub fn deleteRumMetricsDestination(self: *Self, allocator: std.mem.Allocator, input: delete_rum_metrics_destination.DeleteRumMetricsDestinationInput, options: CallOptions) !delete_rum_metrics_destination.DeleteRumMetricsDestinationOutput {
         return delete_rum_metrics_destination.execute(self, allocator, input, options);
     }
 
     /// Retrieves the complete configuration information for one app monitor.
-    pub fn getAppMonitor(self: *Self, allocator: std.mem.Allocator, input: get_app_monitor.GetAppMonitorInput, options: get_app_monitor.Options) !get_app_monitor.GetAppMonitorOutput {
+    pub fn getAppMonitor(self: *Self, allocator: std.mem.Allocator, input: get_app_monitor.GetAppMonitorInput, options: CallOptions) !get_app_monitor.GetAppMonitorOutput {
         return get_app_monitor.execute(self, allocator, input, options);
     }
 
     /// Retrieves the raw performance events that RUM has collected from your web
     /// application, so that you can do your own processing or analysis of this
     /// data.
-    pub fn getAppMonitorData(self: *Self, allocator: std.mem.Allocator, input: get_app_monitor_data.GetAppMonitorDataInput, options: get_app_monitor_data.Options) !get_app_monitor_data.GetAppMonitorDataOutput {
+    pub fn getAppMonitorData(self: *Self, allocator: std.mem.Allocator, input: get_app_monitor_data.GetAppMonitorDataInput, options: CallOptions) !get_app_monitor_data.GetAppMonitorDataOutput {
         return get_app_monitor_data.execute(self, allocator, input, options);
     }
 
     /// Use this operation to retrieve information about a resource-based policy
     /// that is attached to an app monitor.
-    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
         return get_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the Amazon CloudWatch RUM app monitors in the account.
-    pub fn listAppMonitors(self: *Self, allocator: std.mem.Allocator, input: list_app_monitors.ListAppMonitorsInput, options: list_app_monitors.Options) !list_app_monitors.ListAppMonitorsOutput {
+    pub fn listAppMonitors(self: *Self, allocator: std.mem.Allocator, input: list_app_monitors.ListAppMonitorsInput, options: CallOptions) !list_app_monitors.ListAppMonitorsOutput {
         return list_app_monitors.execute(self, allocator, input, options);
     }
 
@@ -186,12 +187,12 @@ pub const Client = struct {
     ///
     /// For more information about extended metrics, see
     /// [AddRumMetrics](https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrcs.html).
-    pub fn listRumMetricsDestinations(self: *Self, allocator: std.mem.Allocator, input: list_rum_metrics_destinations.ListRumMetricsDestinationsInput, options: list_rum_metrics_destinations.Options) !list_rum_metrics_destinations.ListRumMetricsDestinationsOutput {
+    pub fn listRumMetricsDestinations(self: *Self, allocator: std.mem.Allocator, input: list_rum_metrics_destinations.ListRumMetricsDestinationsInput, options: CallOptions) !list_rum_metrics_destinations.ListRumMetricsDestinationsOutput {
         return list_rum_metrics_destinations.execute(self, allocator, input, options);
     }
 
     /// Displays the tags associated with a CloudWatch RUM resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -201,7 +202,7 @@ pub const Client = struct {
     /// about using resource policies with RUM, see [Using resource-based policies
     /// with CloudWatch
     /// RUM](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html).
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -212,7 +213,7 @@ pub const Client = struct {
     ///
     /// Each `PutRumEvents` operation can send a batch of events from one user
     /// session.
-    pub fn putRumEvents(self: *Self, allocator: std.mem.Allocator, input: put_rum_events.PutRumEventsInput, options: put_rum_events.Options) !put_rum_events.PutRumEventsOutput {
+    pub fn putRumEvents(self: *Self, allocator: std.mem.Allocator, input: put_rum_events.PutRumEventsInput, options: CallOptions) !put_rum_events.PutRumEventsOutput {
         return put_rum_events.execute(self, allocator, input, options);
     }
 
@@ -222,7 +223,7 @@ pub const Client = struct {
     ///
     /// For more information about extended metrics, see
     /// [BatchCreateRumMetricDefinitions](https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricDefinitions.html).
-    pub fn putRumMetricsDestination(self: *Self, allocator: std.mem.Allocator, input: put_rum_metrics_destination.PutRumMetricsDestinationInput, options: put_rum_metrics_destination.Options) !put_rum_metrics_destination.PutRumMetricsDestinationOutput {
+    pub fn putRumMetricsDestination(self: *Self, allocator: std.mem.Allocator, input: put_rum_metrics_destination.PutRumMetricsDestinationInput, options: CallOptions) !put_rum_metrics_destination.PutRumMetricsDestinationOutput {
         return put_rum_metrics_destination.execute(self, allocator, input, options);
     }
 
@@ -246,12 +247,12 @@ pub const Client = struct {
     ///
     /// For more information, see [Tagging Amazon Web Services
     /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -271,14 +272,14 @@ pub const Client = struct {
     /// get the updated JavaScript code snippet to add to your web application. For
     /// more information, see [How do I find a code snippet that I've already
     /// generated?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html)
-    pub fn updateAppMonitor(self: *Self, allocator: std.mem.Allocator, input: update_app_monitor.UpdateAppMonitorInput, options: update_app_monitor.Options) !update_app_monitor.UpdateAppMonitorOutput {
+    pub fn updateAppMonitor(self: *Self, allocator: std.mem.Allocator, input: update_app_monitor.UpdateAppMonitorInput, options: CallOptions) !update_app_monitor.UpdateAppMonitorOutput {
         return update_app_monitor.execute(self, allocator, input, options);
     }
 
     /// Modifies one existing metric definition for CloudWatch RUM extended metrics.
     /// For more information about extended metrics, see
     /// [BatchCreateRumMetricsDefinitions](https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html).
-    pub fn updateRumMetricDefinition(self: *Self, allocator: std.mem.Allocator, input: update_rum_metric_definition.UpdateRumMetricDefinitionInput, options: update_rum_metric_definition.Options) !update_rum_metric_definition.UpdateRumMetricDefinitionOutput {
+    pub fn updateRumMetricDefinition(self: *Self, allocator: std.mem.Allocator, input: update_rum_metric_definition.UpdateRumMetricDefinitionInput, options: CallOptions) !update_rum_metric_definition.UpdateRumMetricDefinitionOutput {
         return update_rum_metric_definition.execute(self, allocator, input, options);
     }
 

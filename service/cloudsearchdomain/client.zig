@@ -4,6 +4,7 @@ const std = @import("std");
 const search_ = @import("search.zig");
 const suggest_ = @import("suggest.zig");
 const upload_documents = @import("upload_documents.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -58,7 +59,7 @@ pub const Client = struct {
     /// for your domain, use the Amazon CloudSearch configuration service
     /// `DescribeDomains` action. A domain's endpoints are also displayed on the
     /// domain dashboard in the Amazon CloudSearch console.
-    pub fn search(self: *Self, allocator: std.mem.Allocator, input: search_.SearchInput, options: search_.Options) !search_.SearchOutput {
+    pub fn search(self: *Self, allocator: std.mem.Allocator, input: search_.SearchInput, options: CallOptions) !search_.SearchOutput {
         return search_.execute(self, allocator, input, options);
     }
 
@@ -79,7 +80,7 @@ pub const Client = struct {
     /// endpoint for your domain, use the Amazon CloudSearch configuration service
     /// `DescribeDomains` action. A domain's endpoints are also displayed on the
     /// domain dashboard in the Amazon CloudSearch console.
-    pub fn suggest(self: *Self, allocator: std.mem.Allocator, input: suggest_.SuggestInput, options: suggest_.Options) !suggest_.SuggestOutput {
+    pub fn suggest(self: *Self, allocator: std.mem.Allocator, input: suggest_.SuggestInput, options: CallOptions) !suggest_.SuggestOutput {
         return suggest_.execute(self, allocator, input, options);
     }
 
@@ -105,7 +106,7 @@ pub const Client = struct {
     /// Data](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/preparing-data.html) in the *Amazon CloudSearch Developer Guide*.
     /// For more information about uploading data for indexing, see [Uploading
     /// Data](http://docs.aws.amazon.com/cloudsearch/latest/developerguide/uploading-data.html) in the *Amazon CloudSearch Developer Guide*.
-    pub fn uploadDocuments(self: *Self, allocator: std.mem.Allocator, input: upload_documents.UploadDocumentsInput, options: upload_documents.Options) !upload_documents.UploadDocumentsOutput {
+    pub fn uploadDocuments(self: *Self, allocator: std.mem.Allocator, input: upload_documents.UploadDocumentsInput, options: CallOptions) !upload_documents.UploadDocumentsOutput {
         return upload_documents.execute(self, allocator, input, options);
     }
 };

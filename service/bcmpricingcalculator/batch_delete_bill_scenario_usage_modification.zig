@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchDeleteBillScenarioUsageModificationError = @import("batch_delete_bill_scenario_usage_modification_error.zig").BatchDeleteBillScenarioUsageModificationError;
 
@@ -28,11 +29,7 @@ pub const BatchDeleteBillScenarioUsageModificationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteBillScenarioUsageModificationInput, options: Options) !BatchDeleteBillScenarioUsageModificationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteBillScenarioUsageModificationInput, options: CallOptions) !BatchDeleteBillScenarioUsageModificationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

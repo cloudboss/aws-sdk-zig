@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SearchFilter = @import("search_filter.zig").SearchFilter;
 const PlatformBranchSummary = @import("platform_branch_summary.zig").PlatformBranchSummary;
@@ -72,11 +73,7 @@ pub const ListPlatformBranchesOutput = struct {
     platform_branch_summary_list: ?[]const PlatformBranchSummary = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListPlatformBranchesInput, options: Options) !ListPlatformBranchesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListPlatformBranchesInput, options: CallOptions) !ListPlatformBranchesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

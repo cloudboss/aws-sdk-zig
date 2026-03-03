@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const TransitGatewayPrefixListReference = @import("transit_gateway_prefix_list_reference.zig").TransitGatewayPrefixListReference;
@@ -57,11 +58,7 @@ pub const GetTransitGatewayPrefixListReferencesOutput = struct {
     transit_gateway_prefix_list_references: ?[]const TransitGatewayPrefixListReference = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTransitGatewayPrefixListReferencesInput, options: Options) !GetTransitGatewayPrefixListReferencesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTransitGatewayPrefixListReferencesInput, options: CallOptions) !GetTransitGatewayPrefixListReferencesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

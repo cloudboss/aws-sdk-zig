@@ -14,6 +14,7 @@ const list_performance_analysis_reports = @import("list_performance_analysis_rep
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -46,12 +47,12 @@ pub const Client = struct {
 
     /// Creates a new performance analysis report for a specific time period for the
     /// DB instance.
-    pub fn createPerformanceAnalysisReport(self: *Self, allocator: std.mem.Allocator, input: create_performance_analysis_report.CreatePerformanceAnalysisReportInput, options: create_performance_analysis_report.Options) !create_performance_analysis_report.CreatePerformanceAnalysisReportOutput {
+    pub fn createPerformanceAnalysisReport(self: *Self, allocator: std.mem.Allocator, input: create_performance_analysis_report.CreatePerformanceAnalysisReportInput, options: CallOptions) !create_performance_analysis_report.CreatePerformanceAnalysisReportOutput {
         return create_performance_analysis_report.execute(self, allocator, input, options);
     }
 
     /// Deletes a performance analysis report.
-    pub fn deletePerformanceAnalysisReport(self: *Self, allocator: std.mem.Allocator, input: delete_performance_analysis_report.DeletePerformanceAnalysisReportInput, options: delete_performance_analysis_report.Options) !delete_performance_analysis_report.DeletePerformanceAnalysisReportOutput {
+    pub fn deletePerformanceAnalysisReport(self: *Self, allocator: std.mem.Allocator, input: delete_performance_analysis_report.DeletePerformanceAnalysisReportInput, options: CallOptions) !delete_performance_analysis_report.DeletePerformanceAnalysisReportOutput {
         return delete_performance_analysis_report.execute(self, allocator, input, options);
     }
 
@@ -61,7 +62,7 @@ pub const Client = struct {
     /// Each response element returns a maximum of 500 bytes. For larger elements,
     /// such as SQL statements,
     /// only the first 500 bytes are returned.
-    pub fn describeDimensionKeys(self: *Self, allocator: std.mem.Allocator, input: describe_dimension_keys.DescribeDimensionKeysInput, options: describe_dimension_keys.Options) !describe_dimension_keys.DescribeDimensionKeysOutput {
+    pub fn describeDimensionKeys(self: *Self, allocator: std.mem.Allocator, input: describe_dimension_keys.DescribeDimensionKeysInput, options: CallOptions) !describe_dimension_keys.DescribeDimensionKeysOutput {
         return describe_dimension_keys.execute(self, allocator, input, options);
     }
 
@@ -72,7 +73,7 @@ pub const Client = struct {
     /// This operation is useful because `GetResourceMetrics` and
     /// `DescribeDimensionKeys` don't support retrieval of large
     /// SQL statement text, lock snapshots, and execution plans.
-    pub fn getDimensionKeyDetails(self: *Self, allocator: std.mem.Allocator, input: get_dimension_key_details.GetDimensionKeyDetailsInput, options: get_dimension_key_details.Options) !get_dimension_key_details.GetDimensionKeyDetailsOutput {
+    pub fn getDimensionKeyDetails(self: *Self, allocator: std.mem.Allocator, input: get_dimension_key_details.GetDimensionKeyDetailsInput, options: CallOptions) !get_dimension_key_details.GetDimensionKeyDetailsOutput {
         return get_dimension_key_details.execute(self, allocator, input, options);
     }
 
@@ -81,14 +82,14 @@ pub const Client = struct {
     /// with recommendations. The report status can be `RUNNING`,
     /// `SUCCEEDED`, or `FAILED`. The insights include the
     /// `description` and `recommendation` fields.
-    pub fn getPerformanceAnalysisReport(self: *Self, allocator: std.mem.Allocator, input: get_performance_analysis_report.GetPerformanceAnalysisReportInput, options: get_performance_analysis_report.Options) !get_performance_analysis_report.GetPerformanceAnalysisReportOutput {
+    pub fn getPerformanceAnalysisReport(self: *Self, allocator: std.mem.Allocator, input: get_performance_analysis_report.GetPerformanceAnalysisReportInput, options: CallOptions) !get_performance_analysis_report.GetPerformanceAnalysisReportOutput {
         return get_performance_analysis_report.execute(self, allocator, input, options);
     }
 
     /// Retrieve the metadata for different features. For example, the metadata
     /// might indicate
     /// that a feature is turned on or off on a specific DB instance.
-    pub fn getResourceMetadata(self: *Self, allocator: std.mem.Allocator, input: get_resource_metadata.GetResourceMetadataInput, options: get_resource_metadata.Options) !get_resource_metadata.GetResourceMetadataOutput {
+    pub fn getResourceMetadata(self: *Self, allocator: std.mem.Allocator, input: get_resource_metadata.GetResourceMetadataInput, options: CallOptions) !get_resource_metadata.GetResourceMetadataOutput {
         return get_resource_metadata.execute(self, allocator, input, options);
     }
 
@@ -101,41 +102,41 @@ pub const Client = struct {
     /// Each response element returns a maximum of 500 bytes. For larger elements,
     /// such as SQL statements,
     /// only the first 500 bytes are returned.
-    pub fn getResourceMetrics(self: *Self, allocator: std.mem.Allocator, input: get_resource_metrics.GetResourceMetricsInput, options: get_resource_metrics.Options) !get_resource_metrics.GetResourceMetricsOutput {
+    pub fn getResourceMetrics(self: *Self, allocator: std.mem.Allocator, input: get_resource_metrics.GetResourceMetricsInput, options: CallOptions) !get_resource_metrics.GetResourceMetricsOutput {
         return get_resource_metrics.execute(self, allocator, input, options);
     }
 
     /// Retrieve the dimensions that can be queried for each specified metric type
     /// on a specified DB instance.
-    pub fn listAvailableResourceDimensions(self: *Self, allocator: std.mem.Allocator, input: list_available_resource_dimensions.ListAvailableResourceDimensionsInput, options: list_available_resource_dimensions.Options) !list_available_resource_dimensions.ListAvailableResourceDimensionsOutput {
+    pub fn listAvailableResourceDimensions(self: *Self, allocator: std.mem.Allocator, input: list_available_resource_dimensions.ListAvailableResourceDimensionsInput, options: CallOptions) !list_available_resource_dimensions.ListAvailableResourceDimensionsOutput {
         return list_available_resource_dimensions.execute(self, allocator, input, options);
     }
 
     /// Retrieve metrics of the specified types that can be queried for a specified
     /// DB instance.
-    pub fn listAvailableResourceMetrics(self: *Self, allocator: std.mem.Allocator, input: list_available_resource_metrics.ListAvailableResourceMetricsInput, options: list_available_resource_metrics.Options) !list_available_resource_metrics.ListAvailableResourceMetricsOutput {
+    pub fn listAvailableResourceMetrics(self: *Self, allocator: std.mem.Allocator, input: list_available_resource_metrics.ListAvailableResourceMetricsInput, options: CallOptions) !list_available_resource_metrics.ListAvailableResourceMetricsOutput {
         return list_available_resource_metrics.execute(self, allocator, input, options);
     }
 
     /// Lists all the analysis reports created for the DB instance. The reports are
     /// sorted based on the start time of each report.
-    pub fn listPerformanceAnalysisReports(self: *Self, allocator: std.mem.Allocator, input: list_performance_analysis_reports.ListPerformanceAnalysisReportsInput, options: list_performance_analysis_reports.Options) !list_performance_analysis_reports.ListPerformanceAnalysisReportsOutput {
+    pub fn listPerformanceAnalysisReports(self: *Self, allocator: std.mem.Allocator, input: list_performance_analysis_reports.ListPerformanceAnalysisReportsInput, options: CallOptions) !list_performance_analysis_reports.ListPerformanceAnalysisReportsOutput {
         return list_performance_analysis_reports.execute(self, allocator, input, options);
     }
 
     /// Retrieves all the metadata tags associated with Amazon RDS Performance
     /// Insights resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Adds metadata tags to the Amazon RDS Performance Insights resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes the metadata tags from the Amazon RDS Performance Insights resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

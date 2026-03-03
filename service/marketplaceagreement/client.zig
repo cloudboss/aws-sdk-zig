@@ -4,6 +4,7 @@ const std = @import("std");
 const describe_agreement = @import("describe_agreement.zig");
 const get_agreement_terms = @import("get_agreement_terms.zig");
 const search_agreements = @import("search_agreements.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -36,7 +37,7 @@ pub const Client = struct {
 
     /// Provides details about an agreement, such as the proposer, acceptor, start
     /// date, and end date.
-    pub fn describeAgreement(self: *Self, allocator: std.mem.Allocator, input: describe_agreement.DescribeAgreementInput, options: describe_agreement.Options) !describe_agreement.DescribeAgreementOutput {
+    pub fn describeAgreement(self: *Self, allocator: std.mem.Allocator, input: describe_agreement.DescribeAgreementInput, options: CallOptions) !describe_agreement.DescribeAgreementOutput {
         return describe_agreement.execute(self, allocator, input, options);
     }
 
@@ -56,7 +57,7 @@ pub const Client = struct {
     /// * `Configuration` – The buyer/acceptor's selection at the time of agreement
     ///   creation, such as the number of units purchased for a dimension or setting
     ///   the `EnableAutoRenew` flag.
-    pub fn getAgreementTerms(self: *Self, allocator: std.mem.Allocator, input: get_agreement_terms.GetAgreementTermsInput, options: get_agreement_terms.Options) !get_agreement_terms.GetAgreementTermsOutput {
+    pub fn getAgreementTerms(self: *Self, allocator: std.mem.Allocator, input: get_agreement_terms.GetAgreementTermsInput, options: CallOptions) !get_agreement_terms.GetAgreementTermsOutput {
         return get_agreement_terms.execute(self, allocator, input, options);
     }
 
@@ -107,7 +108,7 @@ pub const Client = struct {
     ///
     /// To filter by `EndTime`, you can use either `BeforeEndTime` or
     /// `AfterEndTime`. Only `EndTime` is supported for sorting.
-    pub fn searchAgreements(self: *Self, allocator: std.mem.Allocator, input: search_agreements.SearchAgreementsInput, options: search_agreements.Options) !search_agreements.SearchAgreementsOutput {
+    pub fn searchAgreements(self: *Self, allocator: std.mem.Allocator, input: search_agreements.SearchAgreementsInput, options: CallOptions) !search_agreements.SearchAgreementsOutput {
         return search_agreements.execute(self, allocator, input, options);
     }
 

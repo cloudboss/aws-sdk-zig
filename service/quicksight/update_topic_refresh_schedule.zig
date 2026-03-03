@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TopicRefreshSchedule = @import("topic_refresh_schedule.zig").TopicRefreshSchedule;
 
@@ -55,11 +56,7 @@ pub const UpdateTopicRefreshScheduleOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTopicRefreshScheduleInput, options: Options) !UpdateTopicRefreshScheduleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTopicRefreshScheduleInput, options: CallOptions) !UpdateTopicRefreshScheduleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

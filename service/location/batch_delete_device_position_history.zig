@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchDeleteDevicePositionHistoryError = @import("batch_delete_device_position_history_error.zig").BatchDeleteDevicePositionHistoryError;
 
@@ -29,11 +30,7 @@ pub const BatchDeleteDevicePositionHistoryOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteDevicePositionHistoryInput, options: Options) !BatchDeleteDevicePositionHistoryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteDevicePositionHistoryInput, options: CallOptions) !BatchDeleteDevicePositionHistoryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

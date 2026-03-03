@@ -60,6 +60,7 @@ const start_trained_model_inference_job = @import("start_trained_model_inference
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_configured_audience_model = @import("update_configured_audience_model.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -91,12 +92,12 @@ pub const Client = struct {
     }
 
     /// Submits a request to cancel the trained model job.
-    pub fn cancelTrainedModel(self: *Self, allocator: std.mem.Allocator, input: cancel_trained_model.CancelTrainedModelInput, options: cancel_trained_model.Options) !cancel_trained_model.CancelTrainedModelOutput {
+    pub fn cancelTrainedModel(self: *Self, allocator: std.mem.Allocator, input: cancel_trained_model.CancelTrainedModelInput, options: CallOptions) !cancel_trained_model.CancelTrainedModelOutput {
         return cancel_trained_model.execute(self, allocator, input, options);
     }
 
     /// Submits a request to cancel a trained model inference job.
-    pub fn cancelTrainedModelInferenceJob(self: *Self, allocator: std.mem.Allocator, input: cancel_trained_model_inference_job.CancelTrainedModelInferenceJobInput, options: cancel_trained_model_inference_job.Options) !cancel_trained_model_inference_job.CancelTrainedModelInferenceJobOutput {
+    pub fn cancelTrainedModelInferenceJob(self: *Self, allocator: std.mem.Allocator, input: cancel_trained_model_inference_job.CancelTrainedModelInferenceJobInput, options: CallOptions) !cancel_trained_model_inference_job.CancelTrainedModelInferenceJobOutput {
         return cancel_trained_model_inference_job.execute(self, allocator, input, options);
     }
 
@@ -105,56 +106,56 @@ pub const Client = struct {
     /// similarity between users. Clean Rooms ML manages training and storing the
     /// audience model. The audience model can be used in multiple calls to the
     /// StartAudienceGenerationJob API.
-    pub fn createAudienceModel(self: *Self, allocator: std.mem.Allocator, input: create_audience_model.CreateAudienceModelInput, options: create_audience_model.Options) !create_audience_model.CreateAudienceModelOutput {
+    pub fn createAudienceModel(self: *Self, allocator: std.mem.Allocator, input: create_audience_model.CreateAudienceModelInput, options: CallOptions) !create_audience_model.CreateAudienceModelOutput {
         return create_audience_model.execute(self, allocator, input, options);
     }
 
     /// Defines the information necessary to create a configured audience model.
-    pub fn createConfiguredAudienceModel(self: *Self, allocator: std.mem.Allocator, input: create_configured_audience_model.CreateConfiguredAudienceModelInput, options: create_configured_audience_model.Options) !create_configured_audience_model.CreateConfiguredAudienceModelOutput {
+    pub fn createConfiguredAudienceModel(self: *Self, allocator: std.mem.Allocator, input: create_configured_audience_model.CreateConfiguredAudienceModelInput, options: CallOptions) !create_configured_audience_model.CreateConfiguredAudienceModelOutput {
         return create_configured_audience_model.execute(self, allocator, input, options);
     }
 
     /// Creates a configured model algorithm using a container image stored in an
     /// ECR repository.
-    pub fn createConfiguredModelAlgorithm(self: *Self, allocator: std.mem.Allocator, input: create_configured_model_algorithm.CreateConfiguredModelAlgorithmInput, options: create_configured_model_algorithm.Options) !create_configured_model_algorithm.CreateConfiguredModelAlgorithmOutput {
+    pub fn createConfiguredModelAlgorithm(self: *Self, allocator: std.mem.Allocator, input: create_configured_model_algorithm.CreateConfiguredModelAlgorithmInput, options: CallOptions) !create_configured_model_algorithm.CreateConfiguredModelAlgorithmOutput {
         return create_configured_model_algorithm.execute(self, allocator, input, options);
     }
 
     /// Associates a configured model algorithm to a collaboration for use by any
     /// member of the collaboration.
-    pub fn createConfiguredModelAlgorithmAssociation(self: *Self, allocator: std.mem.Allocator, input: create_configured_model_algorithm_association.CreateConfiguredModelAlgorithmAssociationInput, options: create_configured_model_algorithm_association.Options) !create_configured_model_algorithm_association.CreateConfiguredModelAlgorithmAssociationOutput {
+    pub fn createConfiguredModelAlgorithmAssociation(self: *Self, allocator: std.mem.Allocator, input: create_configured_model_algorithm_association.CreateConfiguredModelAlgorithmAssociationInput, options: CallOptions) !create_configured_model_algorithm_association.CreateConfiguredModelAlgorithmAssociationOutput {
         return create_configured_model_algorithm_association.execute(self, allocator, input, options);
     }
 
     /// Provides the information to create an ML input channel. An ML input channel
     /// is the result of a query that can be used for ML modeling.
-    pub fn createMlInputChannel(self: *Self, allocator: std.mem.Allocator, input: create_ml_input_channel.CreateMLInputChannelInput, options: create_ml_input_channel.Options) !create_ml_input_channel.CreateMLInputChannelOutput {
+    pub fn createMlInputChannel(self: *Self, allocator: std.mem.Allocator, input: create_ml_input_channel.CreateMLInputChannelInput, options: CallOptions) !create_ml_input_channel.CreateMLInputChannelOutput {
         return create_ml_input_channel.execute(self, allocator, input, options);
     }
 
     /// Creates a trained model from an associated configured model algorithm using
     /// data from any member of the collaboration.
-    pub fn createTrainedModel(self: *Self, allocator: std.mem.Allocator, input: create_trained_model.CreateTrainedModelInput, options: create_trained_model.Options) !create_trained_model.CreateTrainedModelOutput {
+    pub fn createTrainedModel(self: *Self, allocator: std.mem.Allocator, input: create_trained_model.CreateTrainedModelInput, options: CallOptions) !create_trained_model.CreateTrainedModelOutput {
         return create_trained_model.execute(self, allocator, input, options);
     }
 
     /// Defines the information necessary to create a training dataset. In Clean
     /// Rooms ML, the `TrainingDataset` is metadata that points to a Glue table,
     /// which is read only during `AudienceModel` creation.
-    pub fn createTrainingDataset(self: *Self, allocator: std.mem.Allocator, input: create_training_dataset.CreateTrainingDatasetInput, options: create_training_dataset.Options) !create_training_dataset.CreateTrainingDatasetOutput {
+    pub fn createTrainingDataset(self: *Self, allocator: std.mem.Allocator, input: create_training_dataset.CreateTrainingDatasetInput, options: CallOptions) !create_training_dataset.CreateTrainingDatasetOutput {
         return create_training_dataset.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified audience generation job, and removes all data
     /// associated with the job.
-    pub fn deleteAudienceGenerationJob(self: *Self, allocator: std.mem.Allocator, input: delete_audience_generation_job.DeleteAudienceGenerationJobInput, options: delete_audience_generation_job.Options) !delete_audience_generation_job.DeleteAudienceGenerationJobOutput {
+    pub fn deleteAudienceGenerationJob(self: *Self, allocator: std.mem.Allocator, input: delete_audience_generation_job.DeleteAudienceGenerationJobInput, options: CallOptions) !delete_audience_generation_job.DeleteAudienceGenerationJobOutput {
         return delete_audience_generation_job.execute(self, allocator, input, options);
     }
 
     /// Specifies an audience model that you want to delete. You can't delete an
     /// audience model if there are any configured audience models that depend on
     /// the audience model.
-    pub fn deleteAudienceModel(self: *Self, allocator: std.mem.Allocator, input: delete_audience_model.DeleteAudienceModelInput, options: delete_audience_model.Options) !delete_audience_model.DeleteAudienceModelOutput {
+    pub fn deleteAudienceModel(self: *Self, allocator: std.mem.Allocator, input: delete_audience_model.DeleteAudienceModelInput, options: CallOptions) !delete_audience_model.DeleteAudienceModelOutput {
         return delete_audience_model.execute(self, allocator, input, options);
     }
 
@@ -162,37 +163,37 @@ pub const Client = struct {
     /// configured audience model if there are any lookalike models that use the
     /// configured audience model. If you delete a configured audience model, it
     /// will be removed from any collaborations that it is associated to.
-    pub fn deleteConfiguredAudienceModel(self: *Self, allocator: std.mem.Allocator, input: delete_configured_audience_model.DeleteConfiguredAudienceModelInput, options: delete_configured_audience_model.Options) !delete_configured_audience_model.DeleteConfiguredAudienceModelOutput {
+    pub fn deleteConfiguredAudienceModel(self: *Self, allocator: std.mem.Allocator, input: delete_configured_audience_model.DeleteConfiguredAudienceModelInput, options: CallOptions) !delete_configured_audience_model.DeleteConfiguredAudienceModelOutput {
         return delete_configured_audience_model.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified configured audience model policy.
-    pub fn deleteConfiguredAudienceModelPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_configured_audience_model_policy.DeleteConfiguredAudienceModelPolicyInput, options: delete_configured_audience_model_policy.Options) !delete_configured_audience_model_policy.DeleteConfiguredAudienceModelPolicyOutput {
+    pub fn deleteConfiguredAudienceModelPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_configured_audience_model_policy.DeleteConfiguredAudienceModelPolicyInput, options: CallOptions) !delete_configured_audience_model_policy.DeleteConfiguredAudienceModelPolicyOutput {
         return delete_configured_audience_model_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes a configured model algorithm.
-    pub fn deleteConfiguredModelAlgorithm(self: *Self, allocator: std.mem.Allocator, input: delete_configured_model_algorithm.DeleteConfiguredModelAlgorithmInput, options: delete_configured_model_algorithm.Options) !delete_configured_model_algorithm.DeleteConfiguredModelAlgorithmOutput {
+    pub fn deleteConfiguredModelAlgorithm(self: *Self, allocator: std.mem.Allocator, input: delete_configured_model_algorithm.DeleteConfiguredModelAlgorithmInput, options: CallOptions) !delete_configured_model_algorithm.DeleteConfiguredModelAlgorithmOutput {
         return delete_configured_model_algorithm.execute(self, allocator, input, options);
     }
 
     /// Deletes a configured model algorithm association.
-    pub fn deleteConfiguredModelAlgorithmAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_configured_model_algorithm_association.DeleteConfiguredModelAlgorithmAssociationInput, options: delete_configured_model_algorithm_association.Options) !delete_configured_model_algorithm_association.DeleteConfiguredModelAlgorithmAssociationOutput {
+    pub fn deleteConfiguredModelAlgorithmAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_configured_model_algorithm_association.DeleteConfiguredModelAlgorithmAssociationInput, options: CallOptions) !delete_configured_model_algorithm_association.DeleteConfiguredModelAlgorithmAssociationOutput {
         return delete_configured_model_algorithm_association.execute(self, allocator, input, options);
     }
 
     /// Deletes a ML modeling configuration.
-    pub fn deleteMlConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_ml_configuration.DeleteMLConfigurationInput, options: delete_ml_configuration.Options) !delete_ml_configuration.DeleteMLConfigurationOutput {
+    pub fn deleteMlConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_ml_configuration.DeleteMLConfigurationInput, options: CallOptions) !delete_ml_configuration.DeleteMLConfigurationOutput {
         return delete_ml_configuration.execute(self, allocator, input, options);
     }
 
     /// Provides the information necessary to delete an ML input channel.
-    pub fn deleteMlInputChannelData(self: *Self, allocator: std.mem.Allocator, input: delete_ml_input_channel_data.DeleteMLInputChannelDataInput, options: delete_ml_input_channel_data.Options) !delete_ml_input_channel_data.DeleteMLInputChannelDataOutput {
+    pub fn deleteMlInputChannelData(self: *Self, allocator: std.mem.Allocator, input: delete_ml_input_channel_data.DeleteMLInputChannelDataInput, options: CallOptions) !delete_ml_input_channel_data.DeleteMLInputChannelDataOutput {
         return delete_ml_input_channel_data.execute(self, allocator, input, options);
     }
 
     /// Deletes the model artifacts stored by the service.
-    pub fn deleteTrainedModelOutput(self: *Self, allocator: std.mem.Allocator, input: delete_trained_model_output.DeleteTrainedModelOutputInput, options: delete_trained_model_output.Options) !delete_trained_model_output.DeleteTrainedModelOutputOutput {
+    pub fn deleteTrainedModelOutput(self: *Self, allocator: std.mem.Allocator, input: delete_trained_model_output.DeleteTrainedModelOutputInput, options: CallOptions) !delete_trained_model_output.DeleteTrainedModelOutputOutput {
         return delete_trained_model_output.execute(self, allocator, input, options);
     }
 
@@ -201,150 +202,150 @@ pub const Client = struct {
     /// training dataset. In Clean Rooms ML, the `TrainingDataset` is metadata that
     /// points to a Glue table, which is read only during `AudienceModel` creation.
     /// This action deletes the metadata.
-    pub fn deleteTrainingDataset(self: *Self, allocator: std.mem.Allocator, input: delete_training_dataset.DeleteTrainingDatasetInput, options: delete_training_dataset.Options) !delete_training_dataset.DeleteTrainingDatasetOutput {
+    pub fn deleteTrainingDataset(self: *Self, allocator: std.mem.Allocator, input: delete_training_dataset.DeleteTrainingDatasetInput, options: CallOptions) !delete_training_dataset.DeleteTrainingDatasetOutput {
         return delete_training_dataset.execute(self, allocator, input, options);
     }
 
     /// Returns information about an audience generation job.
-    pub fn getAudienceGenerationJob(self: *Self, allocator: std.mem.Allocator, input: get_audience_generation_job.GetAudienceGenerationJobInput, options: get_audience_generation_job.Options) !get_audience_generation_job.GetAudienceGenerationJobOutput {
+    pub fn getAudienceGenerationJob(self: *Self, allocator: std.mem.Allocator, input: get_audience_generation_job.GetAudienceGenerationJobInput, options: CallOptions) !get_audience_generation_job.GetAudienceGenerationJobOutput {
         return get_audience_generation_job.execute(self, allocator, input, options);
     }
 
     /// Returns information about an audience model
-    pub fn getAudienceModel(self: *Self, allocator: std.mem.Allocator, input: get_audience_model.GetAudienceModelInput, options: get_audience_model.Options) !get_audience_model.GetAudienceModelOutput {
+    pub fn getAudienceModel(self: *Self, allocator: std.mem.Allocator, input: get_audience_model.GetAudienceModelInput, options: CallOptions) !get_audience_model.GetAudienceModelOutput {
         return get_audience_model.execute(self, allocator, input, options);
     }
 
     /// Returns information about the configured model algorithm association in a
     /// collaboration.
-    pub fn getCollaborationConfiguredModelAlgorithmAssociation(self: *Self, allocator: std.mem.Allocator, input: get_collaboration_configured_model_algorithm_association.GetCollaborationConfiguredModelAlgorithmAssociationInput, options: get_collaboration_configured_model_algorithm_association.Options) !get_collaboration_configured_model_algorithm_association.GetCollaborationConfiguredModelAlgorithmAssociationOutput {
+    pub fn getCollaborationConfiguredModelAlgorithmAssociation(self: *Self, allocator: std.mem.Allocator, input: get_collaboration_configured_model_algorithm_association.GetCollaborationConfiguredModelAlgorithmAssociationInput, options: CallOptions) !get_collaboration_configured_model_algorithm_association.GetCollaborationConfiguredModelAlgorithmAssociationOutput {
         return get_collaboration_configured_model_algorithm_association.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific ML input channel in a collaboration.
-    pub fn getCollaborationMlInputChannel(self: *Self, allocator: std.mem.Allocator, input: get_collaboration_ml_input_channel.GetCollaborationMLInputChannelInput, options: get_collaboration_ml_input_channel.Options) !get_collaboration_ml_input_channel.GetCollaborationMLInputChannelOutput {
+    pub fn getCollaborationMlInputChannel(self: *Self, allocator: std.mem.Allocator, input: get_collaboration_ml_input_channel.GetCollaborationMLInputChannelInput, options: CallOptions) !get_collaboration_ml_input_channel.GetCollaborationMLInputChannelOutput {
         return get_collaboration_ml_input_channel.execute(self, allocator, input, options);
     }
 
     /// Returns information about a trained model in a collaboration.
-    pub fn getCollaborationTrainedModel(self: *Self, allocator: std.mem.Allocator, input: get_collaboration_trained_model.GetCollaborationTrainedModelInput, options: get_collaboration_trained_model.Options) !get_collaboration_trained_model.GetCollaborationTrainedModelOutput {
+    pub fn getCollaborationTrainedModel(self: *Self, allocator: std.mem.Allocator, input: get_collaboration_trained_model.GetCollaborationTrainedModelInput, options: CallOptions) !get_collaboration_trained_model.GetCollaborationTrainedModelOutput {
         return get_collaboration_trained_model.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specified configured audience model.
-    pub fn getConfiguredAudienceModel(self: *Self, allocator: std.mem.Allocator, input: get_configured_audience_model.GetConfiguredAudienceModelInput, options: get_configured_audience_model.Options) !get_configured_audience_model.GetConfiguredAudienceModelOutput {
+    pub fn getConfiguredAudienceModel(self: *Self, allocator: std.mem.Allocator, input: get_configured_audience_model.GetConfiguredAudienceModelInput, options: CallOptions) !get_configured_audience_model.GetConfiguredAudienceModelOutput {
         return get_configured_audience_model.execute(self, allocator, input, options);
     }
 
     /// Returns information about a configured audience model policy.
-    pub fn getConfiguredAudienceModelPolicy(self: *Self, allocator: std.mem.Allocator, input: get_configured_audience_model_policy.GetConfiguredAudienceModelPolicyInput, options: get_configured_audience_model_policy.Options) !get_configured_audience_model_policy.GetConfiguredAudienceModelPolicyOutput {
+    pub fn getConfiguredAudienceModelPolicy(self: *Self, allocator: std.mem.Allocator, input: get_configured_audience_model_policy.GetConfiguredAudienceModelPolicyInput, options: CallOptions) !get_configured_audience_model_policy.GetConfiguredAudienceModelPolicyOutput {
         return get_configured_audience_model_policy.execute(self, allocator, input, options);
     }
 
     /// Returns information about a configured model algorithm.
-    pub fn getConfiguredModelAlgorithm(self: *Self, allocator: std.mem.Allocator, input: get_configured_model_algorithm.GetConfiguredModelAlgorithmInput, options: get_configured_model_algorithm.Options) !get_configured_model_algorithm.GetConfiguredModelAlgorithmOutput {
+    pub fn getConfiguredModelAlgorithm(self: *Self, allocator: std.mem.Allocator, input: get_configured_model_algorithm.GetConfiguredModelAlgorithmInput, options: CallOptions) !get_configured_model_algorithm.GetConfiguredModelAlgorithmOutput {
         return get_configured_model_algorithm.execute(self, allocator, input, options);
     }
 
     /// Returns information about a configured model algorithm association.
-    pub fn getConfiguredModelAlgorithmAssociation(self: *Self, allocator: std.mem.Allocator, input: get_configured_model_algorithm_association.GetConfiguredModelAlgorithmAssociationInput, options: get_configured_model_algorithm_association.Options) !get_configured_model_algorithm_association.GetConfiguredModelAlgorithmAssociationOutput {
+    pub fn getConfiguredModelAlgorithmAssociation(self: *Self, allocator: std.mem.Allocator, input: get_configured_model_algorithm_association.GetConfiguredModelAlgorithmAssociationInput, options: CallOptions) !get_configured_model_algorithm_association.GetConfiguredModelAlgorithmAssociationOutput {
         return get_configured_model_algorithm_association.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific ML configuration.
-    pub fn getMlConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_ml_configuration.GetMLConfigurationInput, options: get_ml_configuration.Options) !get_ml_configuration.GetMLConfigurationOutput {
+    pub fn getMlConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_ml_configuration.GetMLConfigurationInput, options: CallOptions) !get_ml_configuration.GetMLConfigurationOutput {
         return get_ml_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns information about an ML input channel.
-    pub fn getMlInputChannel(self: *Self, allocator: std.mem.Allocator, input: get_ml_input_channel.GetMLInputChannelInput, options: get_ml_input_channel.Options) !get_ml_input_channel.GetMLInputChannelOutput {
+    pub fn getMlInputChannel(self: *Self, allocator: std.mem.Allocator, input: get_ml_input_channel.GetMLInputChannelInput, options: CallOptions) !get_ml_input_channel.GetMLInputChannelOutput {
         return get_ml_input_channel.execute(self, allocator, input, options);
     }
 
     /// Returns information about a trained model.
-    pub fn getTrainedModel(self: *Self, allocator: std.mem.Allocator, input: get_trained_model.GetTrainedModelInput, options: get_trained_model.Options) !get_trained_model.GetTrainedModelOutput {
+    pub fn getTrainedModel(self: *Self, allocator: std.mem.Allocator, input: get_trained_model.GetTrainedModelInput, options: CallOptions) !get_trained_model.GetTrainedModelOutput {
         return get_trained_model.execute(self, allocator, input, options);
     }
 
     /// Returns information about a trained model inference job.
-    pub fn getTrainedModelInferenceJob(self: *Self, allocator: std.mem.Allocator, input: get_trained_model_inference_job.GetTrainedModelInferenceJobInput, options: get_trained_model_inference_job.Options) !get_trained_model_inference_job.GetTrainedModelInferenceJobOutput {
+    pub fn getTrainedModelInferenceJob(self: *Self, allocator: std.mem.Allocator, input: get_trained_model_inference_job.GetTrainedModelInferenceJobInput, options: CallOptions) !get_trained_model_inference_job.GetTrainedModelInferenceJobOutput {
         return get_trained_model_inference_job.execute(self, allocator, input, options);
     }
 
     /// Returns information about a training dataset.
-    pub fn getTrainingDataset(self: *Self, allocator: std.mem.Allocator, input: get_training_dataset.GetTrainingDatasetInput, options: get_training_dataset.Options) !get_training_dataset.GetTrainingDatasetOutput {
+    pub fn getTrainingDataset(self: *Self, allocator: std.mem.Allocator, input: get_training_dataset.GetTrainingDatasetInput, options: CallOptions) !get_training_dataset.GetTrainingDatasetOutput {
         return get_training_dataset.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the audience export jobs.
-    pub fn listAudienceExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_audience_export_jobs.ListAudienceExportJobsInput, options: list_audience_export_jobs.Options) !list_audience_export_jobs.ListAudienceExportJobsOutput {
+    pub fn listAudienceExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_audience_export_jobs.ListAudienceExportJobsInput, options: CallOptions) !list_audience_export_jobs.ListAudienceExportJobsOutput {
         return list_audience_export_jobs.execute(self, allocator, input, options);
     }
 
     /// Returns a list of audience generation jobs.
-    pub fn listAudienceGenerationJobs(self: *Self, allocator: std.mem.Allocator, input: list_audience_generation_jobs.ListAudienceGenerationJobsInput, options: list_audience_generation_jobs.Options) !list_audience_generation_jobs.ListAudienceGenerationJobsOutput {
+    pub fn listAudienceGenerationJobs(self: *Self, allocator: std.mem.Allocator, input: list_audience_generation_jobs.ListAudienceGenerationJobsInput, options: CallOptions) !list_audience_generation_jobs.ListAudienceGenerationJobsOutput {
         return list_audience_generation_jobs.execute(self, allocator, input, options);
     }
 
     /// Returns a list of audience models.
-    pub fn listAudienceModels(self: *Self, allocator: std.mem.Allocator, input: list_audience_models.ListAudienceModelsInput, options: list_audience_models.Options) !list_audience_models.ListAudienceModelsOutput {
+    pub fn listAudienceModels(self: *Self, allocator: std.mem.Allocator, input: list_audience_models.ListAudienceModelsInput, options: CallOptions) !list_audience_models.ListAudienceModelsOutput {
         return list_audience_models.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the configured model algorithm associations in a
     /// collaboration.
-    pub fn listCollaborationConfiguredModelAlgorithmAssociations(self: *Self, allocator: std.mem.Allocator, input: list_collaboration_configured_model_algorithm_associations.ListCollaborationConfiguredModelAlgorithmAssociationsInput, options: list_collaboration_configured_model_algorithm_associations.Options) !list_collaboration_configured_model_algorithm_associations.ListCollaborationConfiguredModelAlgorithmAssociationsOutput {
+    pub fn listCollaborationConfiguredModelAlgorithmAssociations(self: *Self, allocator: std.mem.Allocator, input: list_collaboration_configured_model_algorithm_associations.ListCollaborationConfiguredModelAlgorithmAssociationsInput, options: CallOptions) !list_collaboration_configured_model_algorithm_associations.ListCollaborationConfiguredModelAlgorithmAssociationsOutput {
         return list_collaboration_configured_model_algorithm_associations.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the ML input channels in a collaboration.
-    pub fn listCollaborationMlInputChannels(self: *Self, allocator: std.mem.Allocator, input: list_collaboration_ml_input_channels.ListCollaborationMLInputChannelsInput, options: list_collaboration_ml_input_channels.Options) !list_collaboration_ml_input_channels.ListCollaborationMLInputChannelsOutput {
+    pub fn listCollaborationMlInputChannels(self: *Self, allocator: std.mem.Allocator, input: list_collaboration_ml_input_channels.ListCollaborationMLInputChannelsInput, options: CallOptions) !list_collaboration_ml_input_channels.ListCollaborationMLInputChannelsOutput {
         return list_collaboration_ml_input_channels.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the export jobs for a trained model in a collaboration.
-    pub fn listCollaborationTrainedModelExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_collaboration_trained_model_export_jobs.ListCollaborationTrainedModelExportJobsInput, options: list_collaboration_trained_model_export_jobs.Options) !list_collaboration_trained_model_export_jobs.ListCollaborationTrainedModelExportJobsOutput {
+    pub fn listCollaborationTrainedModelExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_collaboration_trained_model_export_jobs.ListCollaborationTrainedModelExportJobsInput, options: CallOptions) !list_collaboration_trained_model_export_jobs.ListCollaborationTrainedModelExportJobsOutput {
         return list_collaboration_trained_model_export_jobs.execute(self, allocator, input, options);
     }
 
     /// Returns a list of trained model inference jobs in a specified collaboration.
-    pub fn listCollaborationTrainedModelInferenceJobs(self: *Self, allocator: std.mem.Allocator, input: list_collaboration_trained_model_inference_jobs.ListCollaborationTrainedModelInferenceJobsInput, options: list_collaboration_trained_model_inference_jobs.Options) !list_collaboration_trained_model_inference_jobs.ListCollaborationTrainedModelInferenceJobsOutput {
+    pub fn listCollaborationTrainedModelInferenceJobs(self: *Self, allocator: std.mem.Allocator, input: list_collaboration_trained_model_inference_jobs.ListCollaborationTrainedModelInferenceJobsInput, options: CallOptions) !list_collaboration_trained_model_inference_jobs.ListCollaborationTrainedModelInferenceJobsOutput {
         return list_collaboration_trained_model_inference_jobs.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the trained models in a collaboration.
-    pub fn listCollaborationTrainedModels(self: *Self, allocator: std.mem.Allocator, input: list_collaboration_trained_models.ListCollaborationTrainedModelsInput, options: list_collaboration_trained_models.Options) !list_collaboration_trained_models.ListCollaborationTrainedModelsOutput {
+    pub fn listCollaborationTrainedModels(self: *Self, allocator: std.mem.Allocator, input: list_collaboration_trained_models.ListCollaborationTrainedModelsInput, options: CallOptions) !list_collaboration_trained_models.ListCollaborationTrainedModelsOutput {
         return list_collaboration_trained_models.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the configured audience models.
-    pub fn listConfiguredAudienceModels(self: *Self, allocator: std.mem.Allocator, input: list_configured_audience_models.ListConfiguredAudienceModelsInput, options: list_configured_audience_models.Options) !list_configured_audience_models.ListConfiguredAudienceModelsOutput {
+    pub fn listConfiguredAudienceModels(self: *Self, allocator: std.mem.Allocator, input: list_configured_audience_models.ListConfiguredAudienceModelsInput, options: CallOptions) !list_configured_audience_models.ListConfiguredAudienceModelsOutput {
         return list_configured_audience_models.execute(self, allocator, input, options);
     }
 
     /// Returns a list of configured model algorithm associations.
-    pub fn listConfiguredModelAlgorithmAssociations(self: *Self, allocator: std.mem.Allocator, input: list_configured_model_algorithm_associations.ListConfiguredModelAlgorithmAssociationsInput, options: list_configured_model_algorithm_associations.Options) !list_configured_model_algorithm_associations.ListConfiguredModelAlgorithmAssociationsOutput {
+    pub fn listConfiguredModelAlgorithmAssociations(self: *Self, allocator: std.mem.Allocator, input: list_configured_model_algorithm_associations.ListConfiguredModelAlgorithmAssociationsInput, options: CallOptions) !list_configured_model_algorithm_associations.ListConfiguredModelAlgorithmAssociationsOutput {
         return list_configured_model_algorithm_associations.execute(self, allocator, input, options);
     }
 
     /// Returns a list of configured model algorithms.
-    pub fn listConfiguredModelAlgorithms(self: *Self, allocator: std.mem.Allocator, input: list_configured_model_algorithms.ListConfiguredModelAlgorithmsInput, options: list_configured_model_algorithms.Options) !list_configured_model_algorithms.ListConfiguredModelAlgorithmsOutput {
+    pub fn listConfiguredModelAlgorithms(self: *Self, allocator: std.mem.Allocator, input: list_configured_model_algorithms.ListConfiguredModelAlgorithmsInput, options: CallOptions) !list_configured_model_algorithms.ListConfiguredModelAlgorithmsOutput {
         return list_configured_model_algorithms.execute(self, allocator, input, options);
     }
 
     /// Returns a list of ML input channels.
-    pub fn listMlInputChannels(self: *Self, allocator: std.mem.Allocator, input: list_ml_input_channels.ListMLInputChannelsInput, options: list_ml_input_channels.Options) !list_ml_input_channels.ListMLInputChannelsOutput {
+    pub fn listMlInputChannels(self: *Self, allocator: std.mem.Allocator, input: list_ml_input_channels.ListMLInputChannelsInput, options: CallOptions) !list_ml_input_channels.ListMLInputChannelsOutput {
         return list_ml_input_channels.execute(self, allocator, input, options);
     }
 
     /// Returns a list of tags for a provided resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Returns a list of trained model inference jobs that match the request
     /// parameters.
-    pub fn listTrainedModelInferenceJobs(self: *Self, allocator: std.mem.Allocator, input: list_trained_model_inference_jobs.ListTrainedModelInferenceJobsInput, options: list_trained_model_inference_jobs.Options) !list_trained_model_inference_jobs.ListTrainedModelInferenceJobsOutput {
+    pub fn listTrainedModelInferenceJobs(self: *Self, allocator: std.mem.Allocator, input: list_trained_model_inference_jobs.ListTrainedModelInferenceJobsInput, options: CallOptions) !list_trained_model_inference_jobs.ListTrainedModelInferenceJobsOutput {
         return list_trained_model_inference_jobs.execute(self, allocator, input, options);
     }
 
@@ -353,64 +354,64 @@ pub const Client = struct {
     /// information about their status and creation details. You can use this to
     /// track the evolution of your trained models and select specific versions for
     /// inference or further training.
-    pub fn listTrainedModelVersions(self: *Self, allocator: std.mem.Allocator, input: list_trained_model_versions.ListTrainedModelVersionsInput, options: list_trained_model_versions.Options) !list_trained_model_versions.ListTrainedModelVersionsOutput {
+    pub fn listTrainedModelVersions(self: *Self, allocator: std.mem.Allocator, input: list_trained_model_versions.ListTrainedModelVersionsInput, options: CallOptions) !list_trained_model_versions.ListTrainedModelVersionsOutput {
         return list_trained_model_versions.execute(self, allocator, input, options);
     }
 
     /// Returns a list of trained models.
-    pub fn listTrainedModels(self: *Self, allocator: std.mem.Allocator, input: list_trained_models.ListTrainedModelsInput, options: list_trained_models.Options) !list_trained_models.ListTrainedModelsOutput {
+    pub fn listTrainedModels(self: *Self, allocator: std.mem.Allocator, input: list_trained_models.ListTrainedModelsInput, options: CallOptions) !list_trained_models.ListTrainedModelsOutput {
         return list_trained_models.execute(self, allocator, input, options);
     }
 
     /// Returns a list of training datasets.
-    pub fn listTrainingDatasets(self: *Self, allocator: std.mem.Allocator, input: list_training_datasets.ListTrainingDatasetsInput, options: list_training_datasets.Options) !list_training_datasets.ListTrainingDatasetsOutput {
+    pub fn listTrainingDatasets(self: *Self, allocator: std.mem.Allocator, input: list_training_datasets.ListTrainingDatasetsInput, options: CallOptions) !list_training_datasets.ListTrainingDatasetsOutput {
         return list_training_datasets.execute(self, allocator, input, options);
     }
 
     /// Create or update the resource policy for a configured audience model.
-    pub fn putConfiguredAudienceModelPolicy(self: *Self, allocator: std.mem.Allocator, input: put_configured_audience_model_policy.PutConfiguredAudienceModelPolicyInput, options: put_configured_audience_model_policy.Options) !put_configured_audience_model_policy.PutConfiguredAudienceModelPolicyOutput {
+    pub fn putConfiguredAudienceModelPolicy(self: *Self, allocator: std.mem.Allocator, input: put_configured_audience_model_policy.PutConfiguredAudienceModelPolicyInput, options: CallOptions) !put_configured_audience_model_policy.PutConfiguredAudienceModelPolicyOutput {
         return put_configured_audience_model_policy.execute(self, allocator, input, options);
     }
 
     /// Assigns information about an ML configuration.
-    pub fn putMlConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_ml_configuration.PutMLConfigurationInput, options: put_ml_configuration.Options) !put_ml_configuration.PutMLConfigurationOutput {
+    pub fn putMlConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_ml_configuration.PutMLConfigurationInput, options: CallOptions) !put_ml_configuration.PutMLConfigurationOutput {
         return put_ml_configuration.execute(self, allocator, input, options);
     }
 
     /// Export an audience of a specified size after you have generated an audience.
-    pub fn startAudienceExportJob(self: *Self, allocator: std.mem.Allocator, input: start_audience_export_job.StartAudienceExportJobInput, options: start_audience_export_job.Options) !start_audience_export_job.StartAudienceExportJobOutput {
+    pub fn startAudienceExportJob(self: *Self, allocator: std.mem.Allocator, input: start_audience_export_job.StartAudienceExportJobInput, options: CallOptions) !start_audience_export_job.StartAudienceExportJobOutput {
         return start_audience_export_job.execute(self, allocator, input, options);
     }
 
     /// Information necessary to start the audience generation job.
-    pub fn startAudienceGenerationJob(self: *Self, allocator: std.mem.Allocator, input: start_audience_generation_job.StartAudienceGenerationJobInput, options: start_audience_generation_job.Options) !start_audience_generation_job.StartAudienceGenerationJobOutput {
+    pub fn startAudienceGenerationJob(self: *Self, allocator: std.mem.Allocator, input: start_audience_generation_job.StartAudienceGenerationJobInput, options: CallOptions) !start_audience_generation_job.StartAudienceGenerationJobOutput {
         return start_audience_generation_job.execute(self, allocator, input, options);
     }
 
     /// Provides the information necessary to start a trained model export job.
-    pub fn startTrainedModelExportJob(self: *Self, allocator: std.mem.Allocator, input: start_trained_model_export_job.StartTrainedModelExportJobInput, options: start_trained_model_export_job.Options) !start_trained_model_export_job.StartTrainedModelExportJobOutput {
+    pub fn startTrainedModelExportJob(self: *Self, allocator: std.mem.Allocator, input: start_trained_model_export_job.StartTrainedModelExportJobInput, options: CallOptions) !start_trained_model_export_job.StartTrainedModelExportJobOutput {
         return start_trained_model_export_job.execute(self, allocator, input, options);
     }
 
     /// Defines the information necessary to begin a trained model inference job.
-    pub fn startTrainedModelInferenceJob(self: *Self, allocator: std.mem.Allocator, input: start_trained_model_inference_job.StartTrainedModelInferenceJobInput, options: start_trained_model_inference_job.Options) !start_trained_model_inference_job.StartTrainedModelInferenceJobOutput {
+    pub fn startTrainedModelInferenceJob(self: *Self, allocator: std.mem.Allocator, input: start_trained_model_inference_job.StartTrainedModelInferenceJobInput, options: CallOptions) !start_trained_model_inference_job.StartTrainedModelInferenceJobOutput {
         return start_trained_model_inference_job.execute(self, allocator, input, options);
     }
 
     /// Adds metadata tags to a specified resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes metadata tags from a specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Provides the information necessary to update a configured audience model.
     /// Updates that impact audience generation jobs take effect when a new job
     /// starts, but do not impact currently running jobs.
-    pub fn updateConfiguredAudienceModel(self: *Self, allocator: std.mem.Allocator, input: update_configured_audience_model.UpdateConfiguredAudienceModelInput, options: update_configured_audience_model.Options) !update_configured_audience_model.UpdateConfiguredAudienceModelOutput {
+    pub fn updateConfiguredAudienceModel(self: *Self, allocator: std.mem.Allocator, input: update_configured_audience_model.UpdateConfiguredAudienceModelInput, options: CallOptions) !update_configured_audience_model.UpdateConfiguredAudienceModelOutput {
         return update_configured_audience_model.execute(self, allocator, input, options);
     }
 

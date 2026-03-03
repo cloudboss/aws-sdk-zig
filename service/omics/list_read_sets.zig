@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReadSetFilter = @import("read_set_filter.zig").ReadSetFilter;
 const ReadSetListItem = @import("read_set_list_item.zig").ReadSetListItem;
@@ -41,11 +42,7 @@ pub const ListReadSetsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListReadSetsInput, options: Options) !ListReadSetsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListReadSetsInput, options: CallOptions) !ListReadSetsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

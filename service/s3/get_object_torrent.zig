@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RequestPayer = @import("request_payer.zig").RequestPayer;
 const RequestCharged = @import("request_charged.zig").RequestCharged;
@@ -33,11 +34,7 @@ pub const GetObjectTorrentOutput = struct {
     }
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetObjectTorrentInput, options: Options) !GetObjectTorrentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetObjectTorrentInput, options: CallOptions) !GetObjectTorrentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     const alloc = arena.allocator();
 

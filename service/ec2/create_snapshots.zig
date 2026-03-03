@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CopyTagsFromSource = @import("copy_tags_from_source.zig").CopyTagsFromSource;
 const InstanceSpecification = @import("instance_specification.zig").InstanceSpecification;
@@ -68,11 +69,7 @@ pub const CreateSnapshotsOutput = struct {
     snapshots: ?[]const SnapshotInfo = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSnapshotsInput, options: Options) !CreateSnapshotsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSnapshotsInput, options: CallOptions) !CreateSnapshotsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

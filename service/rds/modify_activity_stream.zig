@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AuditPolicyState = @import("audit_policy_state.zig").AuditPolicyState;
 const ActivityStreamMode = @import("activity_stream_mode.zig").ActivityStreamMode;
@@ -43,11 +44,7 @@ pub const ModifyActivityStreamOutput = struct {
     status: ?ActivityStreamStatus = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyActivityStreamInput, options: Options) !ModifyActivityStreamOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyActivityStreamInput, options: CallOptions) !ModifyActivityStreamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

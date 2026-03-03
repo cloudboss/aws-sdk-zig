@@ -176,6 +176,7 @@ const update_subscription_grant_status = @import("update_subscription_grant_stat
 const update_subscription_request = @import("update_subscription_request.zig");
 const update_subscription_target = @import("update_subscription_target.zig");
 const update_user_profile = @import("update_user_profile.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -208,44 +209,44 @@ pub const Client = struct {
 
     /// Accepts automatically generated business-friendly metadata for your Amazon
     /// DataZone assets.
-    pub fn acceptPredictions(self: *Self, allocator: std.mem.Allocator, input: accept_predictions.AcceptPredictionsInput, options: accept_predictions.Options) !accept_predictions.AcceptPredictionsOutput {
+    pub fn acceptPredictions(self: *Self, allocator: std.mem.Allocator, input: accept_predictions.AcceptPredictionsInput, options: CallOptions) !accept_predictions.AcceptPredictionsOutput {
         return accept_predictions.execute(self, allocator, input, options);
     }
 
     /// Accepts a subscription request to a specific asset.
-    pub fn acceptSubscriptionRequest(self: *Self, allocator: std.mem.Allocator, input: accept_subscription_request.AcceptSubscriptionRequestInput, options: accept_subscription_request.Options) !accept_subscription_request.AcceptSubscriptionRequestOutput {
+    pub fn acceptSubscriptionRequest(self: *Self, allocator: std.mem.Allocator, input: accept_subscription_request.AcceptSubscriptionRequestInput, options: CallOptions) !accept_subscription_request.AcceptSubscriptionRequestOutput {
         return accept_subscription_request.execute(self, allocator, input, options);
     }
 
     /// Adds the owner of an entity (a domain unit).
-    pub fn addEntityOwner(self: *Self, allocator: std.mem.Allocator, input: add_entity_owner.AddEntityOwnerInput, options: add_entity_owner.Options) !add_entity_owner.AddEntityOwnerOutput {
+    pub fn addEntityOwner(self: *Self, allocator: std.mem.Allocator, input: add_entity_owner.AddEntityOwnerInput, options: CallOptions) !add_entity_owner.AddEntityOwnerOutput {
         return add_entity_owner.execute(self, allocator, input, options);
     }
 
     /// Adds a policy grant (an authorization policy) to a specified entity,
     /// including domain units, environment blueprint configurations, or environment
     /// profiles.
-    pub fn addPolicyGrant(self: *Self, allocator: std.mem.Allocator, input: add_policy_grant.AddPolicyGrantInput, options: add_policy_grant.Options) !add_policy_grant.AddPolicyGrantOutput {
+    pub fn addPolicyGrant(self: *Self, allocator: std.mem.Allocator, input: add_policy_grant.AddPolicyGrantInput, options: CallOptions) !add_policy_grant.AddPolicyGrantOutput {
         return add_policy_grant.execute(self, allocator, input, options);
     }
 
     /// Associates the environment role in Amazon DataZone.
-    pub fn associateEnvironmentRole(self: *Self, allocator: std.mem.Allocator, input: associate_environment_role.AssociateEnvironmentRoleInput, options: associate_environment_role.Options) !associate_environment_role.AssociateEnvironmentRoleOutput {
+    pub fn associateEnvironmentRole(self: *Self, allocator: std.mem.Allocator, input: associate_environment_role.AssociateEnvironmentRoleInput, options: CallOptions) !associate_environment_role.AssociateEnvironmentRoleOutput {
         return associate_environment_role.execute(self, allocator, input, options);
     }
 
     /// Associates governed terms with an asset.
-    pub fn associateGovernedTerms(self: *Self, allocator: std.mem.Allocator, input: associate_governed_terms.AssociateGovernedTermsInput, options: associate_governed_terms.Options) !associate_governed_terms.AssociateGovernedTermsOutput {
+    pub fn associateGovernedTerms(self: *Self, allocator: std.mem.Allocator, input: associate_governed_terms.AssociateGovernedTermsInput, options: CallOptions) !associate_governed_terms.AssociateGovernedTermsOutput {
         return associate_governed_terms.execute(self, allocator, input, options);
     }
 
     /// Gets the attribute metadata.
-    pub fn batchGetAttributesMetadata(self: *Self, allocator: std.mem.Allocator, input: batch_get_attributes_metadata.BatchGetAttributesMetadataInput, options: batch_get_attributes_metadata.Options) !batch_get_attributes_metadata.BatchGetAttributesMetadataOutput {
+    pub fn batchGetAttributesMetadata(self: *Self, allocator: std.mem.Allocator, input: batch_get_attributes_metadata.BatchGetAttributesMetadataInput, options: CallOptions) !batch_get_attributes_metadata.BatchGetAttributesMetadataOutput {
         return batch_get_attributes_metadata.execute(self, allocator, input, options);
     }
 
     /// Writes the attribute metadata.
-    pub fn batchPutAttributesMetadata(self: *Self, allocator: std.mem.Allocator, input: batch_put_attributes_metadata.BatchPutAttributesMetadataInput, options: batch_put_attributes_metadata.Options) !batch_put_attributes_metadata.BatchPutAttributesMetadataOutput {
+    pub fn batchPutAttributesMetadata(self: *Self, allocator: std.mem.Allocator, input: batch_put_attributes_metadata.BatchPutAttributesMetadataInput, options: CallOptions) !batch_put_attributes_metadata.BatchPutAttributesMetadataOutput {
         return batch_put_attributes_metadata.execute(self, allocator, input, options);
     }
 
@@ -257,17 +258,17 @@ pub const Client = struct {
     ///   IN_PROGRESS).
     /// * Runs in SUCCEEDED status cannot be cancelled.
     /// * User must have access to the run and cancel permissions.
-    pub fn cancelMetadataGenerationRun(self: *Self, allocator: std.mem.Allocator, input: cancel_metadata_generation_run.CancelMetadataGenerationRunInput, options: cancel_metadata_generation_run.Options) !cancel_metadata_generation_run.CancelMetadataGenerationRunOutput {
+    pub fn cancelMetadataGenerationRun(self: *Self, allocator: std.mem.Allocator, input: cancel_metadata_generation_run.CancelMetadataGenerationRunInput, options: CallOptions) !cancel_metadata_generation_run.CancelMetadataGenerationRunOutput {
         return cancel_metadata_generation_run.execute(self, allocator, input, options);
     }
 
     /// Cancels the subscription to the specified asset.
-    pub fn cancelSubscription(self: *Self, allocator: std.mem.Allocator, input: cancel_subscription.CancelSubscriptionInput, options: cancel_subscription.Options) !cancel_subscription.CancelSubscriptionOutput {
+    pub fn cancelSubscription(self: *Self, allocator: std.mem.Allocator, input: cancel_subscription.CancelSubscriptionInput, options: CallOptions) !cancel_subscription.CancelSubscriptionOutput {
         return cancel_subscription.execute(self, allocator, input, options);
     }
 
     /// Creates an account pool.
-    pub fn createAccountPool(self: *Self, allocator: std.mem.Allocator, input: create_account_pool.CreateAccountPoolInput, options: create_account_pool.Options) !create_account_pool.CreateAccountPoolOutput {
+    pub fn createAccountPool(self: *Self, allocator: std.mem.Allocator, input: create_account_pool.CreateAccountPoolInput, options: CallOptions) !create_account_pool.CreateAccountPoolOutput {
         return create_account_pool.execute(self, allocator, input, options);
     }
 
@@ -294,7 +295,7 @@ pub const Client = struct {
     ///   [CreateFormType](https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateFormType.html)
     /// *
     ///   [CreateAssetType](https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateAssetType.html)
-    pub fn createAsset(self: *Self, allocator: std.mem.Allocator, input: create_asset.CreateAssetInput, options: create_asset.Options) !create_asset.CreateAssetOutput {
+    pub fn createAsset(self: *Self, allocator: std.mem.Allocator, input: create_asset.CreateAssetInput, options: CallOptions) !create_asset.CreateAssetOutput {
         return create_asset.execute(self, allocator, input, options);
     }
 
@@ -318,7 +319,7 @@ pub const Client = struct {
     ///   column-based filtering.
     /// * You cannot specify both (`columnConfiguration`, `rowConfiguration`)at the
     ///   same time.
-    pub fn createAssetFilter(self: *Self, allocator: std.mem.Allocator, input: create_asset_filter.CreateAssetFilterInput, options: create_asset_filter.Options) !create_asset_filter.CreateAssetFilterOutput {
+    pub fn createAssetFilter(self: *Self, allocator: std.mem.Allocator, input: create_asset_filter.CreateAssetFilterInput, options: CallOptions) !create_asset_filter.CreateAssetFilterOutput {
         return create_asset_filter.execute(self, allocator, input, options);
     }
 
@@ -340,7 +341,7 @@ pub const Client = struct {
     ///   `S3ObjectCollectionForm`).
     /// * The owning project of the original asset must still exist and be active.
     /// * User must have write access to the project and domain.
-    pub fn createAssetRevision(self: *Self, allocator: std.mem.Allocator, input: create_asset_revision.CreateAssetRevisionInput, options: create_asset_revision.Options) !create_asset_revision.CreateAssetRevisionOutput {
+    pub fn createAssetRevision(self: *Self, allocator: std.mem.Allocator, input: create_asset_revision.CreateAssetRevisionInput, options: CallOptions) !create_asset_revision.CreateAssetRevisionOutput {
         return create_asset_revision.execute(self, allocator, input, options);
     }
 
@@ -357,14 +358,14 @@ pub const Client = struct {
     ///   names will cause failure.
     /// * JSON input must be valid — incorrect formatting causes Invalid JSON
     ///   errors.
-    pub fn createAssetType(self: *Self, allocator: std.mem.Allocator, input: create_asset_type.CreateAssetTypeInput, options: create_asset_type.Options) !create_asset_type.CreateAssetTypeOutput {
+    pub fn createAssetType(self: *Self, allocator: std.mem.Allocator, input: create_asset_type.CreateAssetTypeInput, options: CallOptions) !create_asset_type.CreateAssetTypeOutput {
         return create_asset_type.execute(self, allocator, input, options);
     }
 
     /// Creates a new connection. In Amazon DataZone, a connection enables you to
     /// connect your resources (domains, projects, and environments) to external
     /// resources and services.
-    pub fn createConnection(self: *Self, allocator: std.mem.Allocator, input: create_connection.CreateConnectionInput, options: create_connection.Options) !create_connection.CreateConnectionOutput {
+    pub fn createConnection(self: *Self, allocator: std.mem.Allocator, input: create_connection.CreateConnectionInput, options: CallOptions) !create_connection.CreateConnectionOutput {
         return create_connection.execute(self, allocator, input, options);
     }
 
@@ -385,7 +386,7 @@ pub const Client = struct {
     /// * The name must be unique within the domain (no existing data product with
     ///   the same name).
     /// * User must have create permissions for data products in the project.
-    pub fn createDataProduct(self: *Self, allocator: std.mem.Allocator, input: create_data_product.CreateDataProductInput, options: create_data_product.Options) !create_data_product.CreateDataProductOutput {
+    pub fn createDataProduct(self: *Self, allocator: std.mem.Allocator, input: create_data_product.CreateDataProductInput, options: CallOptions) !create_data_product.CreateDataProductOutput {
         return create_data_product.execute(self, allocator, input, options);
     }
 
@@ -397,43 +398,43 @@ pub const Client = struct {
     /// * User must have permissions on the data product.
     /// * The domain must be valid and accessible.
     /// * The new revision name must comply with naming constraints (if required).
-    pub fn createDataProductRevision(self: *Self, allocator: std.mem.Allocator, input: create_data_product_revision.CreateDataProductRevisionInput, options: create_data_product_revision.Options) !create_data_product_revision.CreateDataProductRevisionOutput {
+    pub fn createDataProductRevision(self: *Self, allocator: std.mem.Allocator, input: create_data_product_revision.CreateDataProductRevisionInput, options: CallOptions) !create_data_product_revision.CreateDataProductRevisionOutput {
         return create_data_product_revision.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon DataZone data source.
-    pub fn createDataSource(self: *Self, allocator: std.mem.Allocator, input: create_data_source.CreateDataSourceInput, options: create_data_source.Options) !create_data_source.CreateDataSourceOutput {
+    pub fn createDataSource(self: *Self, allocator: std.mem.Allocator, input: create_data_source.CreateDataSourceInput, options: CallOptions) !create_data_source.CreateDataSourceOutput {
         return create_data_source.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon DataZone domain.
-    pub fn createDomain(self: *Self, allocator: std.mem.Allocator, input: create_domain.CreateDomainInput, options: create_domain.Options) !create_domain.CreateDomainOutput {
+    pub fn createDomain(self: *Self, allocator: std.mem.Allocator, input: create_domain.CreateDomainInput, options: CallOptions) !create_domain.CreateDomainOutput {
         return create_domain.execute(self, allocator, input, options);
     }
 
     /// Creates a domain unit in Amazon DataZone.
-    pub fn createDomainUnit(self: *Self, allocator: std.mem.Allocator, input: create_domain_unit.CreateDomainUnitInput, options: create_domain_unit.Options) !create_domain_unit.CreateDomainUnitOutput {
+    pub fn createDomainUnit(self: *Self, allocator: std.mem.Allocator, input: create_domain_unit.CreateDomainUnitInput, options: CallOptions) !create_domain_unit.CreateDomainUnitOutput {
         return create_domain_unit.execute(self, allocator, input, options);
     }
 
     /// Create an Amazon DataZone environment.
-    pub fn createEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_environment.CreateEnvironmentInput, options: create_environment.Options) !create_environment.CreateEnvironmentOutput {
+    pub fn createEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_environment.CreateEnvironmentInput, options: CallOptions) !create_environment.CreateEnvironmentOutput {
         return create_environment.execute(self, allocator, input, options);
     }
 
     /// Creates an action for the environment, for example, creates a console link
     /// for an analytics tool that is available in this environment.
-    pub fn createEnvironmentAction(self: *Self, allocator: std.mem.Allocator, input: create_environment_action.CreateEnvironmentActionInput, options: create_environment_action.Options) !create_environment_action.CreateEnvironmentActionOutput {
+    pub fn createEnvironmentAction(self: *Self, allocator: std.mem.Allocator, input: create_environment_action.CreateEnvironmentActionInput, options: CallOptions) !create_environment_action.CreateEnvironmentActionOutput {
         return create_environment_action.execute(self, allocator, input, options);
     }
 
     /// Creates a Amazon DataZone blueprint.
-    pub fn createEnvironmentBlueprint(self: *Self, allocator: std.mem.Allocator, input: create_environment_blueprint.CreateEnvironmentBlueprintInput, options: create_environment_blueprint.Options) !create_environment_blueprint.CreateEnvironmentBlueprintOutput {
+    pub fn createEnvironmentBlueprint(self: *Self, allocator: std.mem.Allocator, input: create_environment_blueprint.CreateEnvironmentBlueprintInput, options: CallOptions) !create_environment_blueprint.CreateEnvironmentBlueprintOutput {
         return create_environment_blueprint.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon DataZone environment profile.
-    pub fn createEnvironmentProfile(self: *Self, allocator: std.mem.Allocator, input: create_environment_profile.CreateEnvironmentProfileInput, options: create_environment_profile.Options) !create_environment_profile.CreateEnvironmentProfileOutput {
+    pub fn createEnvironmentProfile(self: *Self, allocator: std.mem.Allocator, input: create_environment_profile.CreateEnvironmentProfileInput, options: CallOptions) !create_environment_profile.CreateEnvironmentProfileOutput {
         return create_environment_profile.execute(self, allocator, input, options);
     }
 
@@ -461,7 +462,7 @@ pub const Client = struct {
     /// `@amazon.datazone#glossaryterm("${GLOSSARY_ID}")`, where `${GLOSSARY_ID}` is
     /// the id of the glossary that the glossary terms stored in the field belong
     /// to.
-    pub fn createFormType(self: *Self, allocator: std.mem.Allocator, input: create_form_type.CreateFormTypeInput, options: create_form_type.Options) !create_form_type.CreateFormTypeOutput {
+    pub fn createFormType(self: *Self, allocator: std.mem.Allocator, input: create_form_type.CreateFormTypeInput, options: CallOptions) !create_form_type.CreateFormTypeOutput {
         return create_form_type.execute(self, allocator, input, options);
     }
 
@@ -482,7 +483,7 @@ pub const Client = struct {
     /// * Domain must exist and be in an active state.
     /// * Owning project must exist and be accessible by the caller.
     /// * The glossary name must be unique within the domain.
-    pub fn createGlossary(self: *Self, allocator: std.mem.Allocator, input: create_glossary.CreateGlossaryInput, options: create_glossary.Options) !create_glossary.CreateGlossaryOutput {
+    pub fn createGlossary(self: *Self, allocator: std.mem.Allocator, input: create_glossary.CreateGlossaryInput, options: CallOptions) !create_glossary.CreateGlossaryOutput {
         return create_glossary.execute(self, allocator, input, options);
     }
 
@@ -505,33 +506,33 @@ pub const Client = struct {
     /// * Glossary must exist.
     /// * The term name must be unique within the glossary.
     /// * Ensure term does not conflict with existing terms in hierarchy.
-    pub fn createGlossaryTerm(self: *Self, allocator: std.mem.Allocator, input: create_glossary_term.CreateGlossaryTermInput, options: create_glossary_term.Options) !create_glossary_term.CreateGlossaryTermOutput {
+    pub fn createGlossaryTerm(self: *Self, allocator: std.mem.Allocator, input: create_glossary_term.CreateGlossaryTermInput, options: CallOptions) !create_glossary_term.CreateGlossaryTermOutput {
         return create_glossary_term.execute(self, allocator, input, options);
     }
 
     /// Creates a group profile in Amazon DataZone.
-    pub fn createGroupProfile(self: *Self, allocator: std.mem.Allocator, input: create_group_profile.CreateGroupProfileInput, options: create_group_profile.Options) !create_group_profile.CreateGroupProfileOutput {
+    pub fn createGroupProfile(self: *Self, allocator: std.mem.Allocator, input: create_group_profile.CreateGroupProfileInput, options: CallOptions) !create_group_profile.CreateGroupProfileOutput {
         return create_group_profile.execute(self, allocator, input, options);
     }
 
     /// Publishes a listing (a record of an asset at a given time) or removes a
     /// listing from the catalog.
-    pub fn createListingChangeSet(self: *Self, allocator: std.mem.Allocator, input: create_listing_change_set.CreateListingChangeSetInput, options: create_listing_change_set.Options) !create_listing_change_set.CreateListingChangeSetOutput {
+    pub fn createListingChangeSet(self: *Self, allocator: std.mem.Allocator, input: create_listing_change_set.CreateListingChangeSetInput, options: CallOptions) !create_listing_change_set.CreateListingChangeSetOutput {
         return create_listing_change_set.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon DataZone project.
-    pub fn createProject(self: *Self, allocator: std.mem.Allocator, input: create_project.CreateProjectInput, options: create_project.Options) !create_project.CreateProjectOutput {
+    pub fn createProject(self: *Self, allocator: std.mem.Allocator, input: create_project.CreateProjectInput, options: CallOptions) !create_project.CreateProjectOutput {
         return create_project.execute(self, allocator, input, options);
     }
 
     /// Creates a project membership in Amazon DataZone.
-    pub fn createProjectMembership(self: *Self, allocator: std.mem.Allocator, input: create_project_membership.CreateProjectMembershipInput, options: create_project_membership.Options) !create_project_membership.CreateProjectMembershipOutput {
+    pub fn createProjectMembership(self: *Self, allocator: std.mem.Allocator, input: create_project_membership.CreateProjectMembershipInput, options: CallOptions) !create_project_membership.CreateProjectMembershipOutput {
         return create_project_membership.execute(self, allocator, input, options);
     }
 
     /// Creates a project profile.
-    pub fn createProjectProfile(self: *Self, allocator: std.mem.Allocator, input: create_project_profile.CreateProjectProfileInput, options: create_project_profile.Options) !create_project_profile.CreateProjectProfileOutput {
+    pub fn createProjectProfile(self: *Self, allocator: std.mem.Allocator, input: create_project_profile.CreateProjectProfileInput, options: CallOptions) !create_project_profile.CreateProjectProfileOutput {
         return create_project_profile.execute(self, allocator, input, options);
     }
 
@@ -543,32 +544,32 @@ pub const Client = struct {
     /// processes. For instance, a metadata enforcement rule can specify the
     /// required information for creating a subscription request or publishing a
     /// data asset to the catalog, ensuring alignment with organizational standards.
-    pub fn createRule(self: *Self, allocator: std.mem.Allocator, input: create_rule.CreateRuleInput, options: create_rule.Options) !create_rule.CreateRuleOutput {
+    pub fn createRule(self: *Self, allocator: std.mem.Allocator, input: create_rule.CreateRuleInput, options: CallOptions) !create_rule.CreateRuleOutput {
         return create_rule.execute(self, allocator, input, options);
     }
 
     /// Creates a subsscription grant in Amazon DataZone.
-    pub fn createSubscriptionGrant(self: *Self, allocator: std.mem.Allocator, input: create_subscription_grant.CreateSubscriptionGrantInput, options: create_subscription_grant.Options) !create_subscription_grant.CreateSubscriptionGrantOutput {
+    pub fn createSubscriptionGrant(self: *Self, allocator: std.mem.Allocator, input: create_subscription_grant.CreateSubscriptionGrantInput, options: CallOptions) !create_subscription_grant.CreateSubscriptionGrantOutput {
         return create_subscription_grant.execute(self, allocator, input, options);
     }
 
     /// Creates a subscription request in Amazon DataZone.
-    pub fn createSubscriptionRequest(self: *Self, allocator: std.mem.Allocator, input: create_subscription_request.CreateSubscriptionRequestInput, options: create_subscription_request.Options) !create_subscription_request.CreateSubscriptionRequestOutput {
+    pub fn createSubscriptionRequest(self: *Self, allocator: std.mem.Allocator, input: create_subscription_request.CreateSubscriptionRequestInput, options: CallOptions) !create_subscription_request.CreateSubscriptionRequestOutput {
         return create_subscription_request.execute(self, allocator, input, options);
     }
 
     /// Creates a subscription target in Amazon DataZone.
-    pub fn createSubscriptionTarget(self: *Self, allocator: std.mem.Allocator, input: create_subscription_target.CreateSubscriptionTargetInput, options: create_subscription_target.Options) !create_subscription_target.CreateSubscriptionTargetOutput {
+    pub fn createSubscriptionTarget(self: *Self, allocator: std.mem.Allocator, input: create_subscription_target.CreateSubscriptionTargetInput, options: CallOptions) !create_subscription_target.CreateSubscriptionTargetOutput {
         return create_subscription_target.execute(self, allocator, input, options);
     }
 
     /// Creates a user profile in Amazon DataZone.
-    pub fn createUserProfile(self: *Self, allocator: std.mem.Allocator, input: create_user_profile.CreateUserProfileInput, options: create_user_profile.Options) !create_user_profile.CreateUserProfileOutput {
+    pub fn createUserProfile(self: *Self, allocator: std.mem.Allocator, input: create_user_profile.CreateUserProfileInput, options: CallOptions) !create_user_profile.CreateUserProfileOutput {
         return create_user_profile.execute(self, allocator, input, options);
     }
 
     /// Deletes an account pool.
-    pub fn deleteAccountPool(self: *Self, allocator: std.mem.Allocator, input: delete_account_pool.DeleteAccountPoolInput, options: delete_account_pool.Options) !delete_account_pool.DeleteAccountPoolOutput {
+    pub fn deleteAccountPool(self: *Self, allocator: std.mem.Allocator, input: delete_account_pool.DeleteAccountPoolInput, options: CallOptions) !delete_account_pool.DeleteAccountPoolOutput {
         return delete_account_pool.execute(self, allocator, input, options);
     }
 
@@ -579,7 +580,7 @@ pub const Client = struct {
     /// * Asset must not be referenced in any existing asset filters.
     /// * Asset must not be linked to any draft or published data product.
     /// * User must have delete permissions for the domain and project.
-    pub fn deleteAsset(self: *Self, allocator: std.mem.Allocator, input: delete_asset.DeleteAssetInput, options: delete_asset.Options) !delete_asset.DeleteAssetOutput {
+    pub fn deleteAsset(self: *Self, allocator: std.mem.Allocator, input: delete_asset.DeleteAssetInput, options: CallOptions) !delete_asset.DeleteAssetOutput {
         return delete_asset.execute(self, allocator, input, options);
     }
 
@@ -590,7 +591,7 @@ pub const Client = struct {
     /// * The asset filter must exist.
     /// * The domain and asset must not have been deleted.
     /// * Ensure the --identifier refers to a valid filter ID.
-    pub fn deleteAssetFilter(self: *Self, allocator: std.mem.Allocator, input: delete_asset_filter.DeleteAssetFilterInput, options: delete_asset_filter.Options) !delete_asset_filter.DeleteAssetFilterOutput {
+    pub fn deleteAssetFilter(self: *Self, allocator: std.mem.Allocator, input: delete_asset_filter.DeleteAssetFilterInput, options: CallOptions) !delete_asset_filter.DeleteAssetFilterOutput {
         return delete_asset_filter.execute(self, allocator, input, options);
     }
 
@@ -604,14 +605,14 @@ pub const Client = struct {
     ///   deletion will fail.
     /// * You should retrieve the asset type using get-asset-type to confirm its
     ///   presence before deletion.
-    pub fn deleteAssetType(self: *Self, allocator: std.mem.Allocator, input: delete_asset_type.DeleteAssetTypeInput, options: delete_asset_type.Options) !delete_asset_type.DeleteAssetTypeOutput {
+    pub fn deleteAssetType(self: *Self, allocator: std.mem.Allocator, input: delete_asset_type.DeleteAssetTypeInput, options: CallOptions) !delete_asset_type.DeleteAssetTypeOutput {
         return delete_asset_type.execute(self, allocator, input, options);
     }
 
     /// Deletes and connection. In Amazon DataZone, a connection enables you to
     /// connect your resources (domains, projects, and environments) to external
     /// resources and services.
-    pub fn deleteConnection(self: *Self, allocator: std.mem.Allocator, input: delete_connection.DeleteConnectionInput, options: delete_connection.Options) !delete_connection.DeleteConnectionOutput {
+    pub fn deleteConnection(self: *Self, allocator: std.mem.Allocator, input: delete_connection.DeleteConnectionInput, options: CallOptions) !delete_connection.DeleteConnectionOutput {
         return delete_connection.execute(self, allocator, input, options);
     }
 
@@ -624,7 +625,7 @@ pub const Client = struct {
     /// PutDataExportConfiguration operation with the `--no-enable-export` flag
     /// instead. This allows you to re-enable export for the same domain using the
     /// `--enable-export` flag without deleting S3 table.
-    pub fn deleteDataExportConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_data_export_configuration.DeleteDataExportConfigurationInput, options: delete_data_export_configuration.Options) !delete_data_export_configuration.DeleteDataExportConfigurationOutput {
+    pub fn deleteDataExportConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_data_export_configuration.DeleteDataExportConfigurationInput, options: CallOptions) !delete_data_export_configuration.DeleteDataExportConfigurationOutput {
         return delete_data_export_configuration.execute(self, allocator, input, options);
     }
 
@@ -635,48 +636,48 @@ pub const Client = struct {
     /// * The data product must exist and not be deleted or archived.
     /// * The user must have delete permissions for the data product.
     /// * Domain and project must be active.
-    pub fn deleteDataProduct(self: *Self, allocator: std.mem.Allocator, input: delete_data_product.DeleteDataProductInput, options: delete_data_product.Options) !delete_data_product.DeleteDataProductOutput {
+    pub fn deleteDataProduct(self: *Self, allocator: std.mem.Allocator, input: delete_data_product.DeleteDataProductInput, options: CallOptions) !delete_data_product.DeleteDataProductOutput {
         return delete_data_product.execute(self, allocator, input, options);
     }
 
     /// Deletes a data source in Amazon DataZone.
-    pub fn deleteDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_data_source.DeleteDataSourceInput, options: delete_data_source.Options) !delete_data_source.DeleteDataSourceOutput {
+    pub fn deleteDataSource(self: *Self, allocator: std.mem.Allocator, input: delete_data_source.DeleteDataSourceInput, options: CallOptions) !delete_data_source.DeleteDataSourceOutput {
         return delete_data_source.execute(self, allocator, input, options);
     }
 
     /// Deletes a Amazon DataZone domain.
-    pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: delete_domain.Options) !delete_domain.DeleteDomainOutput {
+    pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: CallOptions) !delete_domain.DeleteDomainOutput {
         return delete_domain.execute(self, allocator, input, options);
     }
 
     /// Deletes a domain unit.
-    pub fn deleteDomainUnit(self: *Self, allocator: std.mem.Allocator, input: delete_domain_unit.DeleteDomainUnitInput, options: delete_domain_unit.Options) !delete_domain_unit.DeleteDomainUnitOutput {
+    pub fn deleteDomainUnit(self: *Self, allocator: std.mem.Allocator, input: delete_domain_unit.DeleteDomainUnitInput, options: CallOptions) !delete_domain_unit.DeleteDomainUnitOutput {
         return delete_domain_unit.execute(self, allocator, input, options);
     }
 
     /// Deletes an environment in Amazon DataZone.
-    pub fn deleteEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_environment.DeleteEnvironmentInput, options: delete_environment.Options) !delete_environment.DeleteEnvironmentOutput {
+    pub fn deleteEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_environment.DeleteEnvironmentInput, options: CallOptions) !delete_environment.DeleteEnvironmentOutput {
         return delete_environment.execute(self, allocator, input, options);
     }
 
     /// Deletes an action for the environment, for example, deletes a console link
     /// for an analytics tool that is available in this environment.
-    pub fn deleteEnvironmentAction(self: *Self, allocator: std.mem.Allocator, input: delete_environment_action.DeleteEnvironmentActionInput, options: delete_environment_action.Options) !delete_environment_action.DeleteEnvironmentActionOutput {
+    pub fn deleteEnvironmentAction(self: *Self, allocator: std.mem.Allocator, input: delete_environment_action.DeleteEnvironmentActionInput, options: CallOptions) !delete_environment_action.DeleteEnvironmentActionOutput {
         return delete_environment_action.execute(self, allocator, input, options);
     }
 
     /// Deletes a blueprint in Amazon DataZone.
-    pub fn deleteEnvironmentBlueprint(self: *Self, allocator: std.mem.Allocator, input: delete_environment_blueprint.DeleteEnvironmentBlueprintInput, options: delete_environment_blueprint.Options) !delete_environment_blueprint.DeleteEnvironmentBlueprintOutput {
+    pub fn deleteEnvironmentBlueprint(self: *Self, allocator: std.mem.Allocator, input: delete_environment_blueprint.DeleteEnvironmentBlueprintInput, options: CallOptions) !delete_environment_blueprint.DeleteEnvironmentBlueprintOutput {
         return delete_environment_blueprint.execute(self, allocator, input, options);
     }
 
     /// Deletes the blueprint configuration in Amazon DataZone.
-    pub fn deleteEnvironmentBlueprintConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_environment_blueprint_configuration.DeleteEnvironmentBlueprintConfigurationInput, options: delete_environment_blueprint_configuration.Options) !delete_environment_blueprint_configuration.DeleteEnvironmentBlueprintConfigurationOutput {
+    pub fn deleteEnvironmentBlueprintConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_environment_blueprint_configuration.DeleteEnvironmentBlueprintConfigurationInput, options: CallOptions) !delete_environment_blueprint_configuration.DeleteEnvironmentBlueprintConfigurationOutput {
         return delete_environment_blueprint_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes an environment profile in Amazon DataZone.
-    pub fn deleteEnvironmentProfile(self: *Self, allocator: std.mem.Allocator, input: delete_environment_profile.DeleteEnvironmentProfileInput, options: delete_environment_profile.Options) !delete_environment_profile.DeleteEnvironmentProfileOutput {
+    pub fn deleteEnvironmentProfile(self: *Self, allocator: std.mem.Allocator, input: delete_environment_profile.DeleteEnvironmentProfileInput, options: CallOptions) !delete_environment_profile.DeleteEnvironmentProfileOutput {
         return delete_environment_profile.execute(self, allocator, input, options);
     }
 
@@ -689,7 +690,7 @@ pub const Client = struct {
     /// * The domain must be valid and accessible.
     /// * User must have delete permissions on the form type.
     /// * Any dependencies (such as linked asset types) must be removed first.
-    pub fn deleteFormType(self: *Self, allocator: std.mem.Allocator, input: delete_form_type.DeleteFormTypeInput, options: delete_form_type.Options) !delete_form_type.DeleteFormTypeOutput {
+    pub fn deleteFormType(self: *Self, allocator: std.mem.Allocator, input: delete_form_type.DeleteFormTypeInput, options: CallOptions) !delete_form_type.DeleteFormTypeOutput {
         return delete_form_type.execute(self, allocator, input, options);
     }
 
@@ -703,7 +704,7 @@ pub const Client = struct {
     /// * The caller must have the `datazone:DeleteGlossary` permission in the
     ///   domain and glossary.
     /// * Glossary should not be linked to any active metadata forms.
-    pub fn deleteGlossary(self: *Self, allocator: std.mem.Allocator, input: delete_glossary.DeleteGlossaryInput, options: delete_glossary.Options) !delete_glossary.DeleteGlossaryOutput {
+    pub fn deleteGlossary(self: *Self, allocator: std.mem.Allocator, input: delete_glossary.DeleteGlossaryInput, options: CallOptions) !delete_glossary.DeleteGlossaryOutput {
         return delete_glossary.execute(self, allocator, input, options);
     }
 
@@ -716,27 +717,27 @@ pub const Client = struct {
     /// * Caller must have delete permissions in the domain/glossary.
     /// * Ensure all associations (such as to assets or parent terms) are removed
     ///   before deletion.
-    pub fn deleteGlossaryTerm(self: *Self, allocator: std.mem.Allocator, input: delete_glossary_term.DeleteGlossaryTermInput, options: delete_glossary_term.Options) !delete_glossary_term.DeleteGlossaryTermOutput {
+    pub fn deleteGlossaryTerm(self: *Self, allocator: std.mem.Allocator, input: delete_glossary_term.DeleteGlossaryTermInput, options: CallOptions) !delete_glossary_term.DeleteGlossaryTermOutput {
         return delete_glossary_term.execute(self, allocator, input, options);
     }
 
     /// Deletes a listing (a record of an asset at a given time).
-    pub fn deleteListing(self: *Self, allocator: std.mem.Allocator, input: delete_listing.DeleteListingInput, options: delete_listing.Options) !delete_listing.DeleteListingOutput {
+    pub fn deleteListing(self: *Self, allocator: std.mem.Allocator, input: delete_listing.DeleteListingInput, options: CallOptions) !delete_listing.DeleteListingOutput {
         return delete_listing.execute(self, allocator, input, options);
     }
 
     /// Deletes a project in Amazon DataZone.
-    pub fn deleteProject(self: *Self, allocator: std.mem.Allocator, input: delete_project.DeleteProjectInput, options: delete_project.Options) !delete_project.DeleteProjectOutput {
+    pub fn deleteProject(self: *Self, allocator: std.mem.Allocator, input: delete_project.DeleteProjectInput, options: CallOptions) !delete_project.DeleteProjectOutput {
         return delete_project.execute(self, allocator, input, options);
     }
 
     /// Deletes project membership in Amazon DataZone.
-    pub fn deleteProjectMembership(self: *Self, allocator: std.mem.Allocator, input: delete_project_membership.DeleteProjectMembershipInput, options: delete_project_membership.Options) !delete_project_membership.DeleteProjectMembershipOutput {
+    pub fn deleteProjectMembership(self: *Self, allocator: std.mem.Allocator, input: delete_project_membership.DeleteProjectMembershipInput, options: CallOptions) !delete_project_membership.DeleteProjectMembershipOutput {
         return delete_project_membership.execute(self, allocator, input, options);
     }
 
     /// Deletes a project profile.
-    pub fn deleteProjectProfile(self: *Self, allocator: std.mem.Allocator, input: delete_project_profile.DeleteProjectProfileInput, options: delete_project_profile.Options) !delete_project_profile.DeleteProjectProfileOutput {
+    pub fn deleteProjectProfile(self: *Self, allocator: std.mem.Allocator, input: delete_project_profile.DeleteProjectProfileInput, options: CallOptions) !delete_project_profile.DeleteProjectProfileOutput {
         return delete_project_profile.execute(self, allocator, input, options);
     }
 
@@ -748,42 +749,42 @@ pub const Client = struct {
     /// processes. For instance, a metadata enforcement rule can specify the
     /// required information for creating a subscription request or publishing a
     /// data asset to the catalog, ensuring alignment with organizational standards.
-    pub fn deleteRule(self: *Self, allocator: std.mem.Allocator, input: delete_rule.DeleteRuleInput, options: delete_rule.Options) !delete_rule.DeleteRuleOutput {
+    pub fn deleteRule(self: *Self, allocator: std.mem.Allocator, input: delete_rule.DeleteRuleInput, options: CallOptions) !delete_rule.DeleteRuleOutput {
         return delete_rule.execute(self, allocator, input, options);
     }
 
     /// Deletes and subscription grant in Amazon DataZone.
-    pub fn deleteSubscriptionGrant(self: *Self, allocator: std.mem.Allocator, input: delete_subscription_grant.DeleteSubscriptionGrantInput, options: delete_subscription_grant.Options) !delete_subscription_grant.DeleteSubscriptionGrantOutput {
+    pub fn deleteSubscriptionGrant(self: *Self, allocator: std.mem.Allocator, input: delete_subscription_grant.DeleteSubscriptionGrantInput, options: CallOptions) !delete_subscription_grant.DeleteSubscriptionGrantOutput {
         return delete_subscription_grant.execute(self, allocator, input, options);
     }
 
     /// Deletes a subscription request in Amazon DataZone.
-    pub fn deleteSubscriptionRequest(self: *Self, allocator: std.mem.Allocator, input: delete_subscription_request.DeleteSubscriptionRequestInput, options: delete_subscription_request.Options) !delete_subscription_request.DeleteSubscriptionRequestOutput {
+    pub fn deleteSubscriptionRequest(self: *Self, allocator: std.mem.Allocator, input: delete_subscription_request.DeleteSubscriptionRequestInput, options: CallOptions) !delete_subscription_request.DeleteSubscriptionRequestOutput {
         return delete_subscription_request.execute(self, allocator, input, options);
     }
 
     /// Deletes a subscription target in Amazon DataZone.
-    pub fn deleteSubscriptionTarget(self: *Self, allocator: std.mem.Allocator, input: delete_subscription_target.DeleteSubscriptionTargetInput, options: delete_subscription_target.Options) !delete_subscription_target.DeleteSubscriptionTargetOutput {
+    pub fn deleteSubscriptionTarget(self: *Self, allocator: std.mem.Allocator, input: delete_subscription_target.DeleteSubscriptionTargetInput, options: CallOptions) !delete_subscription_target.DeleteSubscriptionTargetOutput {
         return delete_subscription_target.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified time series form for the specified asset.
-    pub fn deleteTimeSeriesDataPoints(self: *Self, allocator: std.mem.Allocator, input: delete_time_series_data_points.DeleteTimeSeriesDataPointsInput, options: delete_time_series_data_points.Options) !delete_time_series_data_points.DeleteTimeSeriesDataPointsOutput {
+    pub fn deleteTimeSeriesDataPoints(self: *Self, allocator: std.mem.Allocator, input: delete_time_series_data_points.DeleteTimeSeriesDataPointsInput, options: CallOptions) !delete_time_series_data_points.DeleteTimeSeriesDataPointsOutput {
         return delete_time_series_data_points.execute(self, allocator, input, options);
     }
 
     /// Disassociates the environment role in Amazon DataZone.
-    pub fn disassociateEnvironmentRole(self: *Self, allocator: std.mem.Allocator, input: disassociate_environment_role.DisassociateEnvironmentRoleInput, options: disassociate_environment_role.Options) !disassociate_environment_role.DisassociateEnvironmentRoleOutput {
+    pub fn disassociateEnvironmentRole(self: *Self, allocator: std.mem.Allocator, input: disassociate_environment_role.DisassociateEnvironmentRoleInput, options: CallOptions) !disassociate_environment_role.DisassociateEnvironmentRoleOutput {
         return disassociate_environment_role.execute(self, allocator, input, options);
     }
 
     /// Disassociates restricted terms from an asset.
-    pub fn disassociateGovernedTerms(self: *Self, allocator: std.mem.Allocator, input: disassociate_governed_terms.DisassociateGovernedTermsInput, options: disassociate_governed_terms.Options) !disassociate_governed_terms.DisassociateGovernedTermsOutput {
+    pub fn disassociateGovernedTerms(self: *Self, allocator: std.mem.Allocator, input: disassociate_governed_terms.DisassociateGovernedTermsInput, options: CallOptions) !disassociate_governed_terms.DisassociateGovernedTermsOutput {
         return disassociate_governed_terms.execute(self, allocator, input, options);
     }
 
     /// Gets the details of the account pool.
-    pub fn getAccountPool(self: *Self, allocator: std.mem.Allocator, input: get_account_pool.GetAccountPoolInput, options: get_account_pool.Options) !get_account_pool.GetAccountPoolOutput {
+    pub fn getAccountPool(self: *Self, allocator: std.mem.Allocator, input: get_account_pool.GetAccountPoolInput, options: CallOptions) !get_account_pool.GetAccountPoolOutput {
         return get_account_pool.execute(self, allocator, input, options);
     }
 
@@ -804,7 +805,7 @@ pub const Client = struct {
     /// * Domain identifier must exist and be valid
     /// * Asset identifier must exist
     /// * User must have the required permissions to perform the action
-    pub fn getAsset(self: *Self, allocator: std.mem.Allocator, input: get_asset.GetAssetInput, options: get_asset.Options) !get_asset.GetAssetOutput {
+    pub fn getAsset(self: *Self, allocator: std.mem.Allocator, input: get_asset.GetAssetInput, options: CallOptions) !get_asset.GetAssetOutput {
         return get_asset.execute(self, allocator, input, options);
     }
 
@@ -816,7 +817,7 @@ pub const Client = struct {
     ///   (`--identifier`) must all exist.
     /// * The asset filter should not have been deleted.
     /// * The asset must still exist (since the filter is linked to it).
-    pub fn getAssetFilter(self: *Self, allocator: std.mem.Allocator, input: get_asset_filter.GetAssetFilterInput, options: get_asset_filter.Options) !get_asset_filter.GetAssetFilterOutput {
+    pub fn getAssetFilter(self: *Self, allocator: std.mem.Allocator, input: get_asset_filter.GetAssetFilterInput, options: CallOptions) !get_asset_filter.GetAssetFilterOutput {
         return get_asset_filter.execute(self, allocator, input, options);
     }
 
@@ -837,19 +838,19 @@ pub const Client = struct {
     ///   ResourceNotFoundException.
     /// * You must have the GetAssetType permission.
     /// * Ensure the domain-identifier value is correct and accessible.
-    pub fn getAssetType(self: *Self, allocator: std.mem.Allocator, input: get_asset_type.GetAssetTypeInput, options: get_asset_type.Options) !get_asset_type.GetAssetTypeOutput {
+    pub fn getAssetType(self: *Self, allocator: std.mem.Allocator, input: get_asset_type.GetAssetTypeInput, options: CallOptions) !get_asset_type.GetAssetTypeOutput {
         return get_asset_type.execute(self, allocator, input, options);
     }
 
     /// Gets a connection. In Amazon DataZone, a connection enables you to connect
     /// your resources (domains, projects, and environments) to external resources
     /// and services.
-    pub fn getConnection(self: *Self, allocator: std.mem.Allocator, input: get_connection.GetConnectionInput, options: get_connection.Options) !get_connection.GetConnectionOutput {
+    pub fn getConnection(self: *Self, allocator: std.mem.Allocator, input: get_connection.GetConnectionInput, options: CallOptions) !get_connection.GetConnectionOutput {
         return get_connection.execute(self, allocator, input, options);
     }
 
     /// Gets data export configuration details.
-    pub fn getDataExportConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_data_export_configuration.GetDataExportConfigurationInput, options: get_data_export_configuration.Options) !get_data_export_configuration.GetDataExportConfigurationOutput {
+    pub fn getDataExportConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_data_export_configuration.GetDataExportConfigurationInput, options: CallOptions) !get_data_export_configuration.GetDataExportConfigurationOutput {
         return get_data_export_configuration.execute(self, allocator, input, options);
     }
 
@@ -860,57 +861,57 @@ pub const Client = struct {
     /// * The data product ID must exist.
     /// * The domain must be valid and accessible.
     /// * User must have read or discovery permissions for the data product.
-    pub fn getDataProduct(self: *Self, allocator: std.mem.Allocator, input: get_data_product.GetDataProductInput, options: get_data_product.Options) !get_data_product.GetDataProductOutput {
+    pub fn getDataProduct(self: *Self, allocator: std.mem.Allocator, input: get_data_product.GetDataProductInput, options: CallOptions) !get_data_product.GetDataProductOutput {
         return get_data_product.execute(self, allocator, input, options);
     }
 
     /// Gets an Amazon DataZone data source.
-    pub fn getDataSource(self: *Self, allocator: std.mem.Allocator, input: get_data_source.GetDataSourceInput, options: get_data_source.Options) !get_data_source.GetDataSourceOutput {
+    pub fn getDataSource(self: *Self, allocator: std.mem.Allocator, input: get_data_source.GetDataSourceInput, options: CallOptions) !get_data_source.GetDataSourceOutput {
         return get_data_source.execute(self, allocator, input, options);
     }
 
     /// Gets an Amazon DataZone data source run.
-    pub fn getDataSourceRun(self: *Self, allocator: std.mem.Allocator, input: get_data_source_run.GetDataSourceRunInput, options: get_data_source_run.Options) !get_data_source_run.GetDataSourceRunOutput {
+    pub fn getDataSourceRun(self: *Self, allocator: std.mem.Allocator, input: get_data_source_run.GetDataSourceRunInput, options: CallOptions) !get_data_source_run.GetDataSourceRunOutput {
         return get_data_source_run.execute(self, allocator, input, options);
     }
 
     /// Gets an Amazon DataZone domain.
-    pub fn getDomain(self: *Self, allocator: std.mem.Allocator, input: get_domain.GetDomainInput, options: get_domain.Options) !get_domain.GetDomainOutput {
+    pub fn getDomain(self: *Self, allocator: std.mem.Allocator, input: get_domain.GetDomainInput, options: CallOptions) !get_domain.GetDomainOutput {
         return get_domain.execute(self, allocator, input, options);
     }
 
     /// Gets the details of the specified domain unit.
-    pub fn getDomainUnit(self: *Self, allocator: std.mem.Allocator, input: get_domain_unit.GetDomainUnitInput, options: get_domain_unit.Options) !get_domain_unit.GetDomainUnitOutput {
+    pub fn getDomainUnit(self: *Self, allocator: std.mem.Allocator, input: get_domain_unit.GetDomainUnitInput, options: CallOptions) !get_domain_unit.GetDomainUnitOutput {
         return get_domain_unit.execute(self, allocator, input, options);
     }
 
     /// Gets an Amazon DataZone environment.
-    pub fn getEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_environment.GetEnvironmentInput, options: get_environment.Options) !get_environment.GetEnvironmentOutput {
+    pub fn getEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_environment.GetEnvironmentInput, options: CallOptions) !get_environment.GetEnvironmentOutput {
         return get_environment.execute(self, allocator, input, options);
     }
 
     /// Gets the specified environment action.
-    pub fn getEnvironmentAction(self: *Self, allocator: std.mem.Allocator, input: get_environment_action.GetEnvironmentActionInput, options: get_environment_action.Options) !get_environment_action.GetEnvironmentActionOutput {
+    pub fn getEnvironmentAction(self: *Self, allocator: std.mem.Allocator, input: get_environment_action.GetEnvironmentActionInput, options: CallOptions) !get_environment_action.GetEnvironmentActionOutput {
         return get_environment_action.execute(self, allocator, input, options);
     }
 
     /// Gets an Amazon DataZone blueprint.
-    pub fn getEnvironmentBlueprint(self: *Self, allocator: std.mem.Allocator, input: get_environment_blueprint.GetEnvironmentBlueprintInput, options: get_environment_blueprint.Options) !get_environment_blueprint.GetEnvironmentBlueprintOutput {
+    pub fn getEnvironmentBlueprint(self: *Self, allocator: std.mem.Allocator, input: get_environment_blueprint.GetEnvironmentBlueprintInput, options: CallOptions) !get_environment_blueprint.GetEnvironmentBlueprintOutput {
         return get_environment_blueprint.execute(self, allocator, input, options);
     }
 
     /// Gets the blueprint configuration in Amazon DataZone.
-    pub fn getEnvironmentBlueprintConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_environment_blueprint_configuration.GetEnvironmentBlueprintConfigurationInput, options: get_environment_blueprint_configuration.Options) !get_environment_blueprint_configuration.GetEnvironmentBlueprintConfigurationOutput {
+    pub fn getEnvironmentBlueprintConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_environment_blueprint_configuration.GetEnvironmentBlueprintConfigurationInput, options: CallOptions) !get_environment_blueprint_configuration.GetEnvironmentBlueprintConfigurationOutput {
         return get_environment_blueprint_configuration.execute(self, allocator, input, options);
     }
 
     /// Gets the credentials of an environment in Amazon DataZone.
-    pub fn getEnvironmentCredentials(self: *Self, allocator: std.mem.Allocator, input: get_environment_credentials.GetEnvironmentCredentialsInput, options: get_environment_credentials.Options) !get_environment_credentials.GetEnvironmentCredentialsOutput {
+    pub fn getEnvironmentCredentials(self: *Self, allocator: std.mem.Allocator, input: get_environment_credentials.GetEnvironmentCredentialsInput, options: CallOptions) !get_environment_credentials.GetEnvironmentCredentialsOutput {
         return get_environment_credentials.execute(self, allocator, input, options);
     }
 
     /// Gets an evinronment profile in Amazon DataZone.
-    pub fn getEnvironmentProfile(self: *Self, allocator: std.mem.Allocator, input: get_environment_profile.GetEnvironmentProfileInput, options: get_environment_profile.Options) !get_environment_profile.GetEnvironmentProfileOutput {
+    pub fn getEnvironmentProfile(self: *Self, allocator: std.mem.Allocator, input: get_environment_profile.GetEnvironmentProfileInput, options: CallOptions) !get_environment_profile.GetEnvironmentProfileOutput {
         return get_environment_profile.execute(self, allocator, input, options);
     }
 
@@ -944,7 +945,7 @@ pub const Client = struct {
     ///
     /// A field storing glossary term IDs (which is filterable) will be annotated
     /// with `@amazon.datazone#glossaryterm("${glossaryId}")`.
-    pub fn getFormType(self: *Self, allocator: std.mem.Allocator, input: get_form_type.GetFormTypeInput, options: get_form_type.Options) !get_form_type.GetFormTypeOutput {
+    pub fn getFormType(self: *Self, allocator: std.mem.Allocator, input: get_form_type.GetFormTypeInput, options: CallOptions) !get_form_type.GetFormTypeOutput {
         return get_form_type.execute(self, allocator, input, options);
     }
 
@@ -955,7 +956,7 @@ pub const Client = struct {
     /// * The specified glossary ID must exist and be associated with the given
     ///   domain.
     /// * The caller must have the `datazone:GetGlossary` permission on the domain.
-    pub fn getGlossary(self: *Self, allocator: std.mem.Allocator, input: get_glossary.GetGlossaryInput, options: get_glossary.Options) !get_glossary.GetGlossaryOutput {
+    pub fn getGlossary(self: *Self, allocator: std.mem.Allocator, input: get_glossary.GetGlossaryInput, options: CallOptions) !get_glossary.GetGlossaryOutput {
         return get_glossary.execute(self, allocator, input, options);
     }
 
@@ -966,39 +967,39 @@ pub const Client = struct {
     /// * Glossary term with identifier must exist in the domain.
     /// * User must have permission on the glossary term.
     /// * Domain must be accessible and active.
-    pub fn getGlossaryTerm(self: *Self, allocator: std.mem.Allocator, input: get_glossary_term.GetGlossaryTermInput, options: get_glossary_term.Options) !get_glossary_term.GetGlossaryTermOutput {
+    pub fn getGlossaryTerm(self: *Self, allocator: std.mem.Allocator, input: get_glossary_term.GetGlossaryTermInput, options: CallOptions) !get_glossary_term.GetGlossaryTermOutput {
         return get_glossary_term.execute(self, allocator, input, options);
     }
 
     /// Gets a group profile in Amazon DataZone.
-    pub fn getGroupProfile(self: *Self, allocator: std.mem.Allocator, input: get_group_profile.GetGroupProfileInput, options: get_group_profile.Options) !get_group_profile.GetGroupProfileOutput {
+    pub fn getGroupProfile(self: *Self, allocator: std.mem.Allocator, input: get_group_profile.GetGroupProfileInput, options: CallOptions) !get_group_profile.GetGroupProfileOutput {
         return get_group_profile.execute(self, allocator, input, options);
     }
 
     /// Gets the data portal URL for the specified Amazon DataZone domain.
-    pub fn getIamPortalLoginUrl(self: *Self, allocator: std.mem.Allocator, input: get_iam_portal_login_url.GetIamPortalLoginUrlInput, options: get_iam_portal_login_url.Options) !get_iam_portal_login_url.GetIamPortalLoginUrlOutput {
+    pub fn getIamPortalLoginUrl(self: *Self, allocator: std.mem.Allocator, input: get_iam_portal_login_url.GetIamPortalLoginUrlInput, options: CallOptions) !get_iam_portal_login_url.GetIamPortalLoginUrlOutput {
         return get_iam_portal_login_url.execute(self, allocator, input, options);
     }
 
     /// The details of the job run.
-    pub fn getJobRun(self: *Self, allocator: std.mem.Allocator, input: get_job_run.GetJobRunInput, options: get_job_run.Options) !get_job_run.GetJobRunOutput {
+    pub fn getJobRun(self: *Self, allocator: std.mem.Allocator, input: get_job_run.GetJobRunInput, options: CallOptions) !get_job_run.GetJobRunOutput {
         return get_job_run.execute(self, allocator, input, options);
     }
 
     /// Describes the lineage event.
-    pub fn getLineageEvent(self: *Self, allocator: std.mem.Allocator, input: get_lineage_event.GetLineageEventInput, options: get_lineage_event.Options) !get_lineage_event.GetLineageEventOutput {
+    pub fn getLineageEvent(self: *Self, allocator: std.mem.Allocator, input: get_lineage_event.GetLineageEventInput, options: CallOptions) !get_lineage_event.GetLineageEventOutput {
         return get_lineage_event.execute(self, allocator, input, options);
     }
 
     /// Gets the data lineage node.
-    pub fn getLineageNode(self: *Self, allocator: std.mem.Allocator, input: get_lineage_node.GetLineageNodeInput, options: get_lineage_node.Options) !get_lineage_node.GetLineageNodeOutput {
+    pub fn getLineageNode(self: *Self, allocator: std.mem.Allocator, input: get_lineage_node.GetLineageNodeInput, options: CallOptions) !get_lineage_node.GetLineageNodeOutput {
         return get_lineage_node.execute(self, allocator, input, options);
     }
 
     /// Gets a listing (a record of an asset at a given time). If you specify a
     /// listing version, only details that are specific to that version are
     /// returned.
-    pub fn getListing(self: *Self, allocator: std.mem.Allocator, input: get_listing.GetListingInput, options: get_listing.Options) !get_listing.GetListingOutput {
+    pub fn getListing(self: *Self, allocator: std.mem.Allocator, input: get_listing.GetListingInput, options: CallOptions) !get_listing.GetListingOutput {
         return get_listing.execute(self, allocator, input, options);
     }
 
@@ -1009,17 +1010,17 @@ pub const Client = struct {
     /// * Valid domain and run identifier.
     /// * The metadata generation run must exist.
     /// * User must have read access to the metadata run.
-    pub fn getMetadataGenerationRun(self: *Self, allocator: std.mem.Allocator, input: get_metadata_generation_run.GetMetadataGenerationRunInput, options: get_metadata_generation_run.Options) !get_metadata_generation_run.GetMetadataGenerationRunOutput {
+    pub fn getMetadataGenerationRun(self: *Self, allocator: std.mem.Allocator, input: get_metadata_generation_run.GetMetadataGenerationRunInput, options: CallOptions) !get_metadata_generation_run.GetMetadataGenerationRunOutput {
         return get_metadata_generation_run.execute(self, allocator, input, options);
     }
 
     /// Gets a project in Amazon DataZone.
-    pub fn getProject(self: *Self, allocator: std.mem.Allocator, input: get_project.GetProjectInput, options: get_project.Options) !get_project.GetProjectOutput {
+    pub fn getProject(self: *Self, allocator: std.mem.Allocator, input: get_project.GetProjectInput, options: CallOptions) !get_project.GetProjectOutput {
         return get_project.execute(self, allocator, input, options);
     }
 
     /// The details of the project profile.
-    pub fn getProjectProfile(self: *Self, allocator: std.mem.Allocator, input: get_project_profile.GetProjectProfileInput, options: get_project_profile.Options) !get_project_profile.GetProjectProfileOutput {
+    pub fn getProjectProfile(self: *Self, allocator: std.mem.Allocator, input: get_project_profile.GetProjectProfileInput, options: CallOptions) !get_project_profile.GetProjectProfileOutput {
         return get_project_profile.execute(self, allocator, input, options);
     }
 
@@ -1031,47 +1032,47 @@ pub const Client = struct {
     /// processes. For instance, a metadata enforcement rule can specify the
     /// required information for creating a subscription request or publishing a
     /// data asset to the catalog, ensuring alignment with organizational standards.
-    pub fn getRule(self: *Self, allocator: std.mem.Allocator, input: get_rule.GetRuleInput, options: get_rule.Options) !get_rule.GetRuleOutput {
+    pub fn getRule(self: *Self, allocator: std.mem.Allocator, input: get_rule.GetRuleInput, options: CallOptions) !get_rule.GetRuleOutput {
         return get_rule.execute(self, allocator, input, options);
     }
 
     /// Gets a subscription in Amazon DataZone.
-    pub fn getSubscription(self: *Self, allocator: std.mem.Allocator, input: get_subscription.GetSubscriptionInput, options: get_subscription.Options) !get_subscription.GetSubscriptionOutput {
+    pub fn getSubscription(self: *Self, allocator: std.mem.Allocator, input: get_subscription.GetSubscriptionInput, options: CallOptions) !get_subscription.GetSubscriptionOutput {
         return get_subscription.execute(self, allocator, input, options);
     }
 
     /// Gets the subscription grant in Amazon DataZone.
-    pub fn getSubscriptionGrant(self: *Self, allocator: std.mem.Allocator, input: get_subscription_grant.GetSubscriptionGrantInput, options: get_subscription_grant.Options) !get_subscription_grant.GetSubscriptionGrantOutput {
+    pub fn getSubscriptionGrant(self: *Self, allocator: std.mem.Allocator, input: get_subscription_grant.GetSubscriptionGrantInput, options: CallOptions) !get_subscription_grant.GetSubscriptionGrantOutput {
         return get_subscription_grant.execute(self, allocator, input, options);
     }
 
     /// Gets the details of the specified subscription request.
-    pub fn getSubscriptionRequestDetails(self: *Self, allocator: std.mem.Allocator, input: get_subscription_request_details.GetSubscriptionRequestDetailsInput, options: get_subscription_request_details.Options) !get_subscription_request_details.GetSubscriptionRequestDetailsOutput {
+    pub fn getSubscriptionRequestDetails(self: *Self, allocator: std.mem.Allocator, input: get_subscription_request_details.GetSubscriptionRequestDetailsInput, options: CallOptions) !get_subscription_request_details.GetSubscriptionRequestDetailsOutput {
         return get_subscription_request_details.execute(self, allocator, input, options);
     }
 
     /// Gets the subscription target in Amazon DataZone.
-    pub fn getSubscriptionTarget(self: *Self, allocator: std.mem.Allocator, input: get_subscription_target.GetSubscriptionTargetInput, options: get_subscription_target.Options) !get_subscription_target.GetSubscriptionTargetOutput {
+    pub fn getSubscriptionTarget(self: *Self, allocator: std.mem.Allocator, input: get_subscription_target.GetSubscriptionTargetInput, options: CallOptions) !get_subscription_target.GetSubscriptionTargetOutput {
         return get_subscription_target.execute(self, allocator, input, options);
     }
 
     /// Gets the existing data point for the asset.
-    pub fn getTimeSeriesDataPoint(self: *Self, allocator: std.mem.Allocator, input: get_time_series_data_point.GetTimeSeriesDataPointInput, options: get_time_series_data_point.Options) !get_time_series_data_point.GetTimeSeriesDataPointOutput {
+    pub fn getTimeSeriesDataPoint(self: *Self, allocator: std.mem.Allocator, input: get_time_series_data_point.GetTimeSeriesDataPointInput, options: CallOptions) !get_time_series_data_point.GetTimeSeriesDataPointOutput {
         return get_time_series_data_point.execute(self, allocator, input, options);
     }
 
     /// Gets a user profile in Amazon DataZone.
-    pub fn getUserProfile(self: *Self, allocator: std.mem.Allocator, input: get_user_profile.GetUserProfileInput, options: get_user_profile.Options) !get_user_profile.GetUserProfileOutput {
+    pub fn getUserProfile(self: *Self, allocator: std.mem.Allocator, input: get_user_profile.GetUserProfileInput, options: CallOptions) !get_user_profile.GetUserProfileOutput {
         return get_user_profile.execute(self, allocator, input, options);
     }
 
     /// Lists existing account pools.
-    pub fn listAccountPools(self: *Self, allocator: std.mem.Allocator, input: list_account_pools.ListAccountPoolsInput, options: list_account_pools.Options) !list_account_pools.ListAccountPoolsOutput {
+    pub fn listAccountPools(self: *Self, allocator: std.mem.Allocator, input: list_account_pools.ListAccountPoolsInput, options: CallOptions) !list_account_pools.ListAccountPoolsOutput {
         return list_account_pools.execute(self, allocator, input, options);
     }
 
     /// Lists the accounts in the specified account pool.
-    pub fn listAccountsInAccountPool(self: *Self, allocator: std.mem.Allocator, input: list_accounts_in_account_pool.ListAccountsInAccountPoolInput, options: list_accounts_in_account_pool.Options) !list_accounts_in_account_pool.ListAccountsInAccountPoolOutput {
+    pub fn listAccountsInAccountPool(self: *Self, allocator: std.mem.Allocator, input: list_accounts_in_account_pool.ListAccountsInAccountPoolInput, options: CallOptions) !list_accounts_in_account_pool.ListAccountsInAccountPoolOutput {
         return list_accounts_in_account_pool.execute(self, allocator, input, options);
     }
 
@@ -1081,7 +1082,7 @@ pub const Client = struct {
     ///
     /// * A valid domain and asset must exist.
     /// * The asset must have at least one filter created to return results.
-    pub fn listAssetFilters(self: *Self, allocator: std.mem.Allocator, input: list_asset_filters.ListAssetFiltersInput, options: list_asset_filters.Options) !list_asset_filters.ListAssetFiltersOutput {
+    pub fn listAssetFilters(self: *Self, allocator: std.mem.Allocator, input: list_asset_filters.ListAssetFiltersInput, options: CallOptions) !list_asset_filters.ListAssetFiltersOutput {
         return list_asset_filters.execute(self, allocator, input, options);
     }
 
@@ -1094,14 +1095,14 @@ pub const Client = struct {
     ///   automatically after creation).
     /// * The domain must be valid and active.
     /// * User must have permissions on the asset and domain.
-    pub fn listAssetRevisions(self: *Self, allocator: std.mem.Allocator, input: list_asset_revisions.ListAssetRevisionsInput, options: list_asset_revisions.Options) !list_asset_revisions.ListAssetRevisionsOutput {
+    pub fn listAssetRevisions(self: *Self, allocator: std.mem.Allocator, input: list_asset_revisions.ListAssetRevisionsInput, options: CallOptions) !list_asset_revisions.ListAssetRevisionsOutput {
         return list_asset_revisions.execute(self, allocator, input, options);
     }
 
     /// Lists connections. In Amazon DataZone, a connection enables you to connect
     /// your resources (domains, projects, and environments) to external resources
     /// and services.
-    pub fn listConnections(self: *Self, allocator: std.mem.Allocator, input: list_connections.ListConnectionsInput, options: list_connections.Options) !list_connections.ListConnectionsOutput {
+    pub fn listConnections(self: *Self, allocator: std.mem.Allocator, input: list_connections.ListConnectionsInput, options: CallOptions) !list_connections.ListConnectionsOutput {
         return list_connections.execute(self, allocator, input, options);
     }
 
@@ -1112,77 +1113,77 @@ pub const Client = struct {
     /// * The data product ID must exist within the domain.
     /// * User must have view permissions on the data product.
     /// * The domain must be in a valid and accessible state.
-    pub fn listDataProductRevisions(self: *Self, allocator: std.mem.Allocator, input: list_data_product_revisions.ListDataProductRevisionsInput, options: list_data_product_revisions.Options) !list_data_product_revisions.ListDataProductRevisionsOutput {
+    pub fn listDataProductRevisions(self: *Self, allocator: std.mem.Allocator, input: list_data_product_revisions.ListDataProductRevisionsInput, options: CallOptions) !list_data_product_revisions.ListDataProductRevisionsOutput {
         return list_data_product_revisions.execute(self, allocator, input, options);
     }
 
     /// Lists data source run activities.
-    pub fn listDataSourceRunActivities(self: *Self, allocator: std.mem.Allocator, input: list_data_source_run_activities.ListDataSourceRunActivitiesInput, options: list_data_source_run_activities.Options) !list_data_source_run_activities.ListDataSourceRunActivitiesOutput {
+    pub fn listDataSourceRunActivities(self: *Self, allocator: std.mem.Allocator, input: list_data_source_run_activities.ListDataSourceRunActivitiesInput, options: CallOptions) !list_data_source_run_activities.ListDataSourceRunActivitiesOutput {
         return list_data_source_run_activities.execute(self, allocator, input, options);
     }
 
     /// Lists data source runs in Amazon DataZone.
-    pub fn listDataSourceRuns(self: *Self, allocator: std.mem.Allocator, input: list_data_source_runs.ListDataSourceRunsInput, options: list_data_source_runs.Options) !list_data_source_runs.ListDataSourceRunsOutput {
+    pub fn listDataSourceRuns(self: *Self, allocator: std.mem.Allocator, input: list_data_source_runs.ListDataSourceRunsInput, options: CallOptions) !list_data_source_runs.ListDataSourceRunsOutput {
         return list_data_source_runs.execute(self, allocator, input, options);
     }
 
     /// Lists data sources in Amazon DataZone.
-    pub fn listDataSources(self: *Self, allocator: std.mem.Allocator, input: list_data_sources.ListDataSourcesInput, options: list_data_sources.Options) !list_data_sources.ListDataSourcesOutput {
+    pub fn listDataSources(self: *Self, allocator: std.mem.Allocator, input: list_data_sources.ListDataSourcesInput, options: CallOptions) !list_data_sources.ListDataSourcesOutput {
         return list_data_sources.execute(self, allocator, input, options);
     }
 
     /// Lists child domain units for the specified parent domain unit.
-    pub fn listDomainUnitsForParent(self: *Self, allocator: std.mem.Allocator, input: list_domain_units_for_parent.ListDomainUnitsForParentInput, options: list_domain_units_for_parent.Options) !list_domain_units_for_parent.ListDomainUnitsForParentOutput {
+    pub fn listDomainUnitsForParent(self: *Self, allocator: std.mem.Allocator, input: list_domain_units_for_parent.ListDomainUnitsForParentInput, options: CallOptions) !list_domain_units_for_parent.ListDomainUnitsForParentOutput {
         return list_domain_units_for_parent.execute(self, allocator, input, options);
     }
 
     /// Lists Amazon DataZone domains.
-    pub fn listDomains(self: *Self, allocator: std.mem.Allocator, input: list_domains.ListDomainsInput, options: list_domains.Options) !list_domains.ListDomainsOutput {
+    pub fn listDomains(self: *Self, allocator: std.mem.Allocator, input: list_domains.ListDomainsInput, options: CallOptions) !list_domains.ListDomainsOutput {
         return list_domains.execute(self, allocator, input, options);
     }
 
     /// Lists the entity (domain units) owners.
-    pub fn listEntityOwners(self: *Self, allocator: std.mem.Allocator, input: list_entity_owners.ListEntityOwnersInput, options: list_entity_owners.Options) !list_entity_owners.ListEntityOwnersOutput {
+    pub fn listEntityOwners(self: *Self, allocator: std.mem.Allocator, input: list_entity_owners.ListEntityOwnersInput, options: CallOptions) !list_entity_owners.ListEntityOwnersOutput {
         return list_entity_owners.execute(self, allocator, input, options);
     }
 
     /// Lists existing environment actions.
-    pub fn listEnvironmentActions(self: *Self, allocator: std.mem.Allocator, input: list_environment_actions.ListEnvironmentActionsInput, options: list_environment_actions.Options) !list_environment_actions.ListEnvironmentActionsOutput {
+    pub fn listEnvironmentActions(self: *Self, allocator: std.mem.Allocator, input: list_environment_actions.ListEnvironmentActionsInput, options: CallOptions) !list_environment_actions.ListEnvironmentActionsOutput {
         return list_environment_actions.execute(self, allocator, input, options);
     }
 
     /// Lists blueprint configurations for a Amazon DataZone environment.
-    pub fn listEnvironmentBlueprintConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_environment_blueprint_configurations.ListEnvironmentBlueprintConfigurationsInput, options: list_environment_blueprint_configurations.Options) !list_environment_blueprint_configurations.ListEnvironmentBlueprintConfigurationsOutput {
+    pub fn listEnvironmentBlueprintConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_environment_blueprint_configurations.ListEnvironmentBlueprintConfigurationsInput, options: CallOptions) !list_environment_blueprint_configurations.ListEnvironmentBlueprintConfigurationsOutput {
         return list_environment_blueprint_configurations.execute(self, allocator, input, options);
     }
 
     /// Lists blueprints in an Amazon DataZone environment.
-    pub fn listEnvironmentBlueprints(self: *Self, allocator: std.mem.Allocator, input: list_environment_blueprints.ListEnvironmentBlueprintsInput, options: list_environment_blueprints.Options) !list_environment_blueprints.ListEnvironmentBlueprintsOutput {
+    pub fn listEnvironmentBlueprints(self: *Self, allocator: std.mem.Allocator, input: list_environment_blueprints.ListEnvironmentBlueprintsInput, options: CallOptions) !list_environment_blueprints.ListEnvironmentBlueprintsOutput {
         return list_environment_blueprints.execute(self, allocator, input, options);
     }
 
     /// Lists Amazon DataZone environment profiles.
-    pub fn listEnvironmentProfiles(self: *Self, allocator: std.mem.Allocator, input: list_environment_profiles.ListEnvironmentProfilesInput, options: list_environment_profiles.Options) !list_environment_profiles.ListEnvironmentProfilesOutput {
+    pub fn listEnvironmentProfiles(self: *Self, allocator: std.mem.Allocator, input: list_environment_profiles.ListEnvironmentProfilesInput, options: CallOptions) !list_environment_profiles.ListEnvironmentProfilesOutput {
         return list_environment_profiles.execute(self, allocator, input, options);
     }
 
     /// Lists Amazon DataZone environments.
-    pub fn listEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_environments.ListEnvironmentsInput, options: list_environments.Options) !list_environments.ListEnvironmentsOutput {
+    pub fn listEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_environments.ListEnvironmentsInput, options: CallOptions) !list_environments.ListEnvironmentsOutput {
         return list_environments.execute(self, allocator, input, options);
     }
 
     /// Lists job runs.
-    pub fn listJobRuns(self: *Self, allocator: std.mem.Allocator, input: list_job_runs.ListJobRunsInput, options: list_job_runs.Options) !list_job_runs.ListJobRunsOutput {
+    pub fn listJobRuns(self: *Self, allocator: std.mem.Allocator, input: list_job_runs.ListJobRunsInput, options: CallOptions) !list_job_runs.ListJobRunsOutput {
         return list_job_runs.execute(self, allocator, input, options);
     }
 
     /// Lists lineage events.
-    pub fn listLineageEvents(self: *Self, allocator: std.mem.Allocator, input: list_lineage_events.ListLineageEventsInput, options: list_lineage_events.Options) !list_lineage_events.ListLineageEventsOutput {
+    pub fn listLineageEvents(self: *Self, allocator: std.mem.Allocator, input: list_lineage_events.ListLineageEventsInput, options: CallOptions) !list_lineage_events.ListLineageEventsOutput {
         return list_lineage_events.execute(self, allocator, input, options);
     }
 
     /// Lists the history of the specified data lineage node.
-    pub fn listLineageNodeHistory(self: *Self, allocator: std.mem.Allocator, input: list_lineage_node_history.ListLineageNodeHistoryInput, options: list_lineage_node_history.Options) !list_lineage_node_history.ListLineageNodeHistoryOutput {
+    pub fn listLineageNodeHistory(self: *Self, allocator: std.mem.Allocator, input: list_lineage_node_history.ListLineageNodeHistoryInput, options: CallOptions) !list_lineage_node_history.ListLineageNodeHistoryOutput {
         return list_lineage_node_history.execute(self, allocator, input, options);
     }
 
@@ -1200,32 +1201,32 @@ pub const Client = struct {
     ///
     /// * Valid domain identifier.
     /// * User must have access to metadata generation runs in the domain.
-    pub fn listMetadataGenerationRuns(self: *Self, allocator: std.mem.Allocator, input: list_metadata_generation_runs.ListMetadataGenerationRunsInput, options: list_metadata_generation_runs.Options) !list_metadata_generation_runs.ListMetadataGenerationRunsOutput {
+    pub fn listMetadataGenerationRuns(self: *Self, allocator: std.mem.Allocator, input: list_metadata_generation_runs.ListMetadataGenerationRunsInput, options: CallOptions) !list_metadata_generation_runs.ListMetadataGenerationRunsOutput {
         return list_metadata_generation_runs.execute(self, allocator, input, options);
     }
 
     /// Lists all Amazon DataZone notifications.
-    pub fn listNotifications(self: *Self, allocator: std.mem.Allocator, input: list_notifications.ListNotificationsInput, options: list_notifications.Options) !list_notifications.ListNotificationsOutput {
+    pub fn listNotifications(self: *Self, allocator: std.mem.Allocator, input: list_notifications.ListNotificationsInput, options: CallOptions) !list_notifications.ListNotificationsOutput {
         return list_notifications.execute(self, allocator, input, options);
     }
 
     /// Lists policy grants.
-    pub fn listPolicyGrants(self: *Self, allocator: std.mem.Allocator, input: list_policy_grants.ListPolicyGrantsInput, options: list_policy_grants.Options) !list_policy_grants.ListPolicyGrantsOutput {
+    pub fn listPolicyGrants(self: *Self, allocator: std.mem.Allocator, input: list_policy_grants.ListPolicyGrantsInput, options: CallOptions) !list_policy_grants.ListPolicyGrantsOutput {
         return list_policy_grants.execute(self, allocator, input, options);
     }
 
     /// Lists all members of the specified project.
-    pub fn listProjectMemberships(self: *Self, allocator: std.mem.Allocator, input: list_project_memberships.ListProjectMembershipsInput, options: list_project_memberships.Options) !list_project_memberships.ListProjectMembershipsOutput {
+    pub fn listProjectMemberships(self: *Self, allocator: std.mem.Allocator, input: list_project_memberships.ListProjectMembershipsInput, options: CallOptions) !list_project_memberships.ListProjectMembershipsOutput {
         return list_project_memberships.execute(self, allocator, input, options);
     }
 
     /// Lists project profiles.
-    pub fn listProjectProfiles(self: *Self, allocator: std.mem.Allocator, input: list_project_profiles.ListProjectProfilesInput, options: list_project_profiles.Options) !list_project_profiles.ListProjectProfilesOutput {
+    pub fn listProjectProfiles(self: *Self, allocator: std.mem.Allocator, input: list_project_profiles.ListProjectProfilesInput, options: CallOptions) !list_project_profiles.ListProjectProfilesOutput {
         return list_project_profiles.execute(self, allocator, input, options);
     }
 
     /// Lists Amazon DataZone projects.
-    pub fn listProjects(self: *Self, allocator: std.mem.Allocator, input: list_projects.ListProjectsInput, options: list_projects.Options) !list_projects.ListProjectsOutput {
+    pub fn listProjects(self: *Self, allocator: std.mem.Allocator, input: list_projects.ListProjectsInput, options: CallOptions) !list_projects.ListProjectsOutput {
         return list_projects.execute(self, allocator, input, options);
     }
 
@@ -1237,47 +1238,47 @@ pub const Client = struct {
     /// processes. For instance, a metadata enforcement rule can specify the
     /// required information for creating a subscription request or publishing a
     /// data asset to the catalog, ensuring alignment with organizational standards.
-    pub fn listRules(self: *Self, allocator: std.mem.Allocator, input: list_rules.ListRulesInput, options: list_rules.Options) !list_rules.ListRulesOutput {
+    pub fn listRules(self: *Self, allocator: std.mem.Allocator, input: list_rules.ListRulesInput, options: CallOptions) !list_rules.ListRulesOutput {
         return list_rules.execute(self, allocator, input, options);
     }
 
     /// Lists subscription grants.
-    pub fn listSubscriptionGrants(self: *Self, allocator: std.mem.Allocator, input: list_subscription_grants.ListSubscriptionGrantsInput, options: list_subscription_grants.Options) !list_subscription_grants.ListSubscriptionGrantsOutput {
+    pub fn listSubscriptionGrants(self: *Self, allocator: std.mem.Allocator, input: list_subscription_grants.ListSubscriptionGrantsInput, options: CallOptions) !list_subscription_grants.ListSubscriptionGrantsOutput {
         return list_subscription_grants.execute(self, allocator, input, options);
     }
 
     /// Lists Amazon DataZone subscription requests.
-    pub fn listSubscriptionRequests(self: *Self, allocator: std.mem.Allocator, input: list_subscription_requests.ListSubscriptionRequestsInput, options: list_subscription_requests.Options) !list_subscription_requests.ListSubscriptionRequestsOutput {
+    pub fn listSubscriptionRequests(self: *Self, allocator: std.mem.Allocator, input: list_subscription_requests.ListSubscriptionRequestsInput, options: CallOptions) !list_subscription_requests.ListSubscriptionRequestsOutput {
         return list_subscription_requests.execute(self, allocator, input, options);
     }
 
     /// Lists subscription targets in Amazon DataZone.
-    pub fn listSubscriptionTargets(self: *Self, allocator: std.mem.Allocator, input: list_subscription_targets.ListSubscriptionTargetsInput, options: list_subscription_targets.Options) !list_subscription_targets.ListSubscriptionTargetsOutput {
+    pub fn listSubscriptionTargets(self: *Self, allocator: std.mem.Allocator, input: list_subscription_targets.ListSubscriptionTargetsInput, options: CallOptions) !list_subscription_targets.ListSubscriptionTargetsOutput {
         return list_subscription_targets.execute(self, allocator, input, options);
     }
 
     /// Lists subscriptions in Amazon DataZone.
-    pub fn listSubscriptions(self: *Self, allocator: std.mem.Allocator, input: list_subscriptions.ListSubscriptionsInput, options: list_subscriptions.Options) !list_subscriptions.ListSubscriptionsOutput {
+    pub fn listSubscriptions(self: *Self, allocator: std.mem.Allocator, input: list_subscriptions.ListSubscriptionsInput, options: CallOptions) !list_subscriptions.ListSubscriptionsOutput {
         return list_subscriptions.execute(self, allocator, input, options);
     }
 
     /// Lists tags for the specified resource in Amazon DataZone.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists time series data points.
-    pub fn listTimeSeriesDataPoints(self: *Self, allocator: std.mem.Allocator, input: list_time_series_data_points.ListTimeSeriesDataPointsInput, options: list_time_series_data_points.Options) !list_time_series_data_points.ListTimeSeriesDataPointsOutput {
+    pub fn listTimeSeriesDataPoints(self: *Self, allocator: std.mem.Allocator, input: list_time_series_data_points.ListTimeSeriesDataPointsInput, options: CallOptions) !list_time_series_data_points.ListTimeSeriesDataPointsOutput {
         return list_time_series_data_points.execute(self, allocator, input, options);
     }
 
     /// Posts a data lineage event.
-    pub fn postLineageEvent(self: *Self, allocator: std.mem.Allocator, input: post_lineage_event.PostLineageEventInput, options: post_lineage_event.Options) !post_lineage_event.PostLineageEventOutput {
+    pub fn postLineageEvent(self: *Self, allocator: std.mem.Allocator, input: post_lineage_event.PostLineageEventInput, options: CallOptions) !post_lineage_event.PostLineageEventOutput {
         return post_lineage_event.execute(self, allocator, input, options);
     }
 
     /// Posts time series data points to Amazon DataZone for the specified asset.
-    pub fn postTimeSeriesDataPoints(self: *Self, allocator: std.mem.Allocator, input: post_time_series_data_points.PostTimeSeriesDataPointsInput, options: post_time_series_data_points.Options) !post_time_series_data_points.PostTimeSeriesDataPointsOutput {
+    pub fn postTimeSeriesDataPoints(self: *Self, allocator: std.mem.Allocator, input: post_time_series_data_points.PostTimeSeriesDataPointsInput, options: CallOptions) !post_time_series_data_points.PostTimeSeriesDataPointsOutput {
         return post_time_series_data_points.execute(self, allocator, input, options);
     }
 
@@ -1298,39 +1299,39 @@ pub const Client = struct {
     ///   We recommend backing up the S3 table before deletion.
     /// * Call the PutDataExportConfiguration API to enable export for the new
     ///   domain.
-    pub fn putDataExportConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_data_export_configuration.PutDataExportConfigurationInput, options: put_data_export_configuration.Options) !put_data_export_configuration.PutDataExportConfigurationOutput {
+    pub fn putDataExportConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_data_export_configuration.PutDataExportConfigurationInput, options: CallOptions) !put_data_export_configuration.PutDataExportConfigurationOutput {
         return put_data_export_configuration.execute(self, allocator, input, options);
     }
 
     /// Writes the configuration for the specified environment blueprint in Amazon
     /// DataZone.
-    pub fn putEnvironmentBlueprintConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_environment_blueprint_configuration.PutEnvironmentBlueprintConfigurationInput, options: put_environment_blueprint_configuration.Options) !put_environment_blueprint_configuration.PutEnvironmentBlueprintConfigurationOutput {
+    pub fn putEnvironmentBlueprintConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_environment_blueprint_configuration.PutEnvironmentBlueprintConfigurationInput, options: CallOptions) !put_environment_blueprint_configuration.PutEnvironmentBlueprintConfigurationOutput {
         return put_environment_blueprint_configuration.execute(self, allocator, input, options);
     }
 
     /// Rejects automatically generated business-friendly metadata for your Amazon
     /// DataZone assets.
-    pub fn rejectPredictions(self: *Self, allocator: std.mem.Allocator, input: reject_predictions.RejectPredictionsInput, options: reject_predictions.Options) !reject_predictions.RejectPredictionsOutput {
+    pub fn rejectPredictions(self: *Self, allocator: std.mem.Allocator, input: reject_predictions.RejectPredictionsInput, options: CallOptions) !reject_predictions.RejectPredictionsOutput {
         return reject_predictions.execute(self, allocator, input, options);
     }
 
     /// Rejects the specified subscription request.
-    pub fn rejectSubscriptionRequest(self: *Self, allocator: std.mem.Allocator, input: reject_subscription_request.RejectSubscriptionRequestInput, options: reject_subscription_request.Options) !reject_subscription_request.RejectSubscriptionRequestOutput {
+    pub fn rejectSubscriptionRequest(self: *Self, allocator: std.mem.Allocator, input: reject_subscription_request.RejectSubscriptionRequestInput, options: CallOptions) !reject_subscription_request.RejectSubscriptionRequestOutput {
         return reject_subscription_request.execute(self, allocator, input, options);
     }
 
     /// Removes an owner from an entity.
-    pub fn removeEntityOwner(self: *Self, allocator: std.mem.Allocator, input: remove_entity_owner.RemoveEntityOwnerInput, options: remove_entity_owner.Options) !remove_entity_owner.RemoveEntityOwnerOutput {
+    pub fn removeEntityOwner(self: *Self, allocator: std.mem.Allocator, input: remove_entity_owner.RemoveEntityOwnerInput, options: CallOptions) !remove_entity_owner.RemoveEntityOwnerOutput {
         return remove_entity_owner.execute(self, allocator, input, options);
     }
 
     /// Removes a policy grant.
-    pub fn removePolicyGrant(self: *Self, allocator: std.mem.Allocator, input: remove_policy_grant.RemovePolicyGrantInput, options: remove_policy_grant.Options) !remove_policy_grant.RemovePolicyGrantOutput {
+    pub fn removePolicyGrant(self: *Self, allocator: std.mem.Allocator, input: remove_policy_grant.RemovePolicyGrantInput, options: CallOptions) !remove_policy_grant.RemovePolicyGrantOutput {
         return remove_policy_grant.execute(self, allocator, input, options);
     }
 
     /// Revokes a specified subscription in Amazon DataZone.
-    pub fn revokeSubscription(self: *Self, allocator: std.mem.Allocator, input: revoke_subscription.RevokeSubscriptionInput, options: revoke_subscription.Options) !revoke_subscription.RevokeSubscriptionOutput {
+    pub fn revokeSubscription(self: *Self, allocator: std.mem.Allocator, input: revoke_subscription.RevokeSubscriptionInput, options: CallOptions) !revoke_subscription.RevokeSubscriptionOutput {
         return revoke_subscription.execute(self, allocator, input, options);
     }
 
@@ -1384,12 +1385,12 @@ pub const Client = struct {
     /// To find out whether an attribute has been annotated and indexed for a given
     /// search type, use the GetFormType API to retrieve the form containing the
     /// attribute.
-    pub fn search(self: *Self, allocator: std.mem.Allocator, input: search_.SearchInput, options: search_.Options) !search_.SearchOutput {
+    pub fn search(self: *Self, allocator: std.mem.Allocator, input: search_.SearchInput, options: CallOptions) !search_.SearchOutput {
         return search_.execute(self, allocator, input, options);
     }
 
     /// Searches group profiles in Amazon DataZone.
-    pub fn searchGroupProfiles(self: *Self, allocator: std.mem.Allocator, input: search_group_profiles.SearchGroupProfilesInput, options: search_group_profiles.Options) !search_group_profiles.SearchGroupProfilesOutput {
+    pub fn searchGroupProfiles(self: *Self, allocator: std.mem.Allocator, input: search_group_profiles.SearchGroupProfilesInput, options: CallOptions) !search_group_profiles.SearchGroupProfilesOutput {
         return search_group_profiles.execute(self, allocator, input, options);
     }
 
@@ -1432,7 +1433,7 @@ pub const Client = struct {
     /// To find out whether an attribute has been annotated and indexed for a given
     /// search type, use the GetFormType API to retrieve the form containing the
     /// attribute.
-    pub fn searchListings(self: *Self, allocator: std.mem.Allocator, input: search_listings.SearchListingsInput, options: search_listings.Options) !search_listings.SearchListingsOutput {
+    pub fn searchListings(self: *Self, allocator: std.mem.Allocator, input: search_listings.SearchListingsInput, options: CallOptions) !search_listings.SearchListingsOutput {
         return search_listings.execute(self, allocator, input, options);
     }
 
@@ -1447,17 +1448,17 @@ pub const Client = struct {
     /// * The user must have permissions for form or asset types in the domain.
     /// * If using --filters, ensure that the JSON is valid.
     /// * Filters contain correct structure (attribute, value, operator).
-    pub fn searchTypes(self: *Self, allocator: std.mem.Allocator, input: search_types.SearchTypesInput, options: search_types.Options) !search_types.SearchTypesOutput {
+    pub fn searchTypes(self: *Self, allocator: std.mem.Allocator, input: search_types.SearchTypesInput, options: CallOptions) !search_types.SearchTypesOutput {
         return search_types.execute(self, allocator, input, options);
     }
 
     /// Searches user profiles in Amazon DataZone.
-    pub fn searchUserProfiles(self: *Self, allocator: std.mem.Allocator, input: search_user_profiles.SearchUserProfilesInput, options: search_user_profiles.Options) !search_user_profiles.SearchUserProfilesOutput {
+    pub fn searchUserProfiles(self: *Self, allocator: std.mem.Allocator, input: search_user_profiles.SearchUserProfilesInput, options: CallOptions) !search_user_profiles.SearchUserProfilesOutput {
         return search_user_profiles.execute(self, allocator, input, options);
     }
 
     /// Start the run of the specified data source in Amazon DataZone.
-    pub fn startDataSourceRun(self: *Self, allocator: std.mem.Allocator, input: start_data_source_run.StartDataSourceRunInput, options: start_data_source_run.Options) !start_data_source_run.StartDataSourceRunOutput {
+    pub fn startDataSourceRun(self: *Self, allocator: std.mem.Allocator, input: start_data_source_run.StartDataSourceRunInput, options: CallOptions) !start_data_source_run.StartDataSourceRunOutput {
         return start_data_source_run.execute(self, allocator, input, options);
     }
 
@@ -1473,22 +1474,22 @@ pub const Client = struct {
     ///   BUSINESS_GLOSSARY_ASSOCIATIONS.
     /// * The user must have permission to run metadata generation in the
     ///   domain/project.
-    pub fn startMetadataGenerationRun(self: *Self, allocator: std.mem.Allocator, input: start_metadata_generation_run.StartMetadataGenerationRunInput, options: start_metadata_generation_run.Options) !start_metadata_generation_run.StartMetadataGenerationRunOutput {
+    pub fn startMetadataGenerationRun(self: *Self, allocator: std.mem.Allocator, input: start_metadata_generation_run.StartMetadataGenerationRunInput, options: CallOptions) !start_metadata_generation_run.StartMetadataGenerationRunOutput {
         return start_metadata_generation_run.execute(self, allocator, input, options);
     }
 
     /// Tags a resource in Amazon DataZone.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Untags a resource in Amazon DataZone.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the account pool.
-    pub fn updateAccountPool(self: *Self, allocator: std.mem.Allocator, input: update_account_pool.UpdateAccountPoolInput, options: update_account_pool.Options) !update_account_pool.UpdateAccountPoolOutput {
+    pub fn updateAccountPool(self: *Self, allocator: std.mem.Allocator, input: update_account_pool.UpdateAccountPoolInput, options: CallOptions) !update_account_pool.UpdateAccountPoolOutput {
         return update_account_pool.execute(self, allocator, input, options);
     }
 
@@ -1500,49 +1501,49 @@ pub const Client = struct {
     /// * The asset must contain the columns being referenced in the update.
     /// * If applying a row filter, ensure the column referenced in the expression
     ///   exists in the asset schema.
-    pub fn updateAssetFilter(self: *Self, allocator: std.mem.Allocator, input: update_asset_filter.UpdateAssetFilterInput, options: update_asset_filter.Options) !update_asset_filter.UpdateAssetFilterOutput {
+    pub fn updateAssetFilter(self: *Self, allocator: std.mem.Allocator, input: update_asset_filter.UpdateAssetFilterInput, options: CallOptions) !update_asset_filter.UpdateAssetFilterOutput {
         return update_asset_filter.execute(self, allocator, input, options);
     }
 
     /// Updates a connection. In Amazon DataZone, a connection enables you to
     /// connect your resources (domains, projects, and environments) to external
     /// resources and services.
-    pub fn updateConnection(self: *Self, allocator: std.mem.Allocator, input: update_connection.UpdateConnectionInput, options: update_connection.Options) !update_connection.UpdateConnectionOutput {
+    pub fn updateConnection(self: *Self, allocator: std.mem.Allocator, input: update_connection.UpdateConnectionInput, options: CallOptions) !update_connection.UpdateConnectionOutput {
         return update_connection.execute(self, allocator, input, options);
     }
 
     /// Updates the specified data source in Amazon DataZone.
-    pub fn updateDataSource(self: *Self, allocator: std.mem.Allocator, input: update_data_source.UpdateDataSourceInput, options: update_data_source.Options) !update_data_source.UpdateDataSourceOutput {
+    pub fn updateDataSource(self: *Self, allocator: std.mem.Allocator, input: update_data_source.UpdateDataSourceInput, options: CallOptions) !update_data_source.UpdateDataSourceOutput {
         return update_data_source.execute(self, allocator, input, options);
     }
 
     /// Updates a Amazon DataZone domain.
-    pub fn updateDomain(self: *Self, allocator: std.mem.Allocator, input: update_domain.UpdateDomainInput, options: update_domain.Options) !update_domain.UpdateDomainOutput {
+    pub fn updateDomain(self: *Self, allocator: std.mem.Allocator, input: update_domain.UpdateDomainInput, options: CallOptions) !update_domain.UpdateDomainOutput {
         return update_domain.execute(self, allocator, input, options);
     }
 
     /// Updates the domain unit.
-    pub fn updateDomainUnit(self: *Self, allocator: std.mem.Allocator, input: update_domain_unit.UpdateDomainUnitInput, options: update_domain_unit.Options) !update_domain_unit.UpdateDomainUnitOutput {
+    pub fn updateDomainUnit(self: *Self, allocator: std.mem.Allocator, input: update_domain_unit.UpdateDomainUnitInput, options: CallOptions) !update_domain_unit.UpdateDomainUnitOutput {
         return update_domain_unit.execute(self, allocator, input, options);
     }
 
     /// Updates the specified environment in Amazon DataZone.
-    pub fn updateEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_environment.UpdateEnvironmentInput, options: update_environment.Options) !update_environment.UpdateEnvironmentOutput {
+    pub fn updateEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_environment.UpdateEnvironmentInput, options: CallOptions) !update_environment.UpdateEnvironmentOutput {
         return update_environment.execute(self, allocator, input, options);
     }
 
     /// Updates an environment action.
-    pub fn updateEnvironmentAction(self: *Self, allocator: std.mem.Allocator, input: update_environment_action.UpdateEnvironmentActionInput, options: update_environment_action.Options) !update_environment_action.UpdateEnvironmentActionOutput {
+    pub fn updateEnvironmentAction(self: *Self, allocator: std.mem.Allocator, input: update_environment_action.UpdateEnvironmentActionInput, options: CallOptions) !update_environment_action.UpdateEnvironmentActionOutput {
         return update_environment_action.execute(self, allocator, input, options);
     }
 
     /// Updates an environment blueprint in Amazon DataZone.
-    pub fn updateEnvironmentBlueprint(self: *Self, allocator: std.mem.Allocator, input: update_environment_blueprint.UpdateEnvironmentBlueprintInput, options: update_environment_blueprint.Options) !update_environment_blueprint.UpdateEnvironmentBlueprintOutput {
+    pub fn updateEnvironmentBlueprint(self: *Self, allocator: std.mem.Allocator, input: update_environment_blueprint.UpdateEnvironmentBlueprintInput, options: CallOptions) !update_environment_blueprint.UpdateEnvironmentBlueprintOutput {
         return update_environment_blueprint.execute(self, allocator, input, options);
     }
 
     /// Updates the specified environment profile in Amazon DataZone.
-    pub fn updateEnvironmentProfile(self: *Self, allocator: std.mem.Allocator, input: update_environment_profile.UpdateEnvironmentProfileInput, options: update_environment_profile.Options) !update_environment_profile.UpdateEnvironmentProfileOutput {
+    pub fn updateEnvironmentProfile(self: *Self, allocator: std.mem.Allocator, input: update_environment_profile.UpdateEnvironmentProfileInput, options: CallOptions) !update_environment_profile.UpdateEnvironmentProfileOutput {
         return update_environment_profile.execute(self, allocator, input, options);
     }
 
@@ -1555,7 +1556,7 @@ pub const Client = struct {
     ///   it.
     /// * When updating the name, the new name must be unique within the domain.
     /// * The glossary must not be deleted or in a terminal state.
-    pub fn updateGlossary(self: *Self, allocator: std.mem.Allocator, input: update_glossary.UpdateGlossaryInput, options: update_glossary.Options) !update_glossary.UpdateGlossaryOutput {
+    pub fn updateGlossary(self: *Self, allocator: std.mem.Allocator, input: update_glossary.UpdateGlossaryInput, options: CallOptions) !update_glossary.UpdateGlossaryOutput {
         return update_glossary.execute(self, allocator, input, options);
     }
 
@@ -1567,27 +1568,27 @@ pub const Client = struct {
     /// * New name must not conflict with existing terms in the same glossary.
     /// * User must have permissions on the term.
     /// * The term must not be in DELETED status.
-    pub fn updateGlossaryTerm(self: *Self, allocator: std.mem.Allocator, input: update_glossary_term.UpdateGlossaryTermInput, options: update_glossary_term.Options) !update_glossary_term.UpdateGlossaryTermOutput {
+    pub fn updateGlossaryTerm(self: *Self, allocator: std.mem.Allocator, input: update_glossary_term.UpdateGlossaryTermInput, options: CallOptions) !update_glossary_term.UpdateGlossaryTermOutput {
         return update_glossary_term.execute(self, allocator, input, options);
     }
 
     /// Updates the specified group profile in Amazon DataZone.
-    pub fn updateGroupProfile(self: *Self, allocator: std.mem.Allocator, input: update_group_profile.UpdateGroupProfileInput, options: update_group_profile.Options) !update_group_profile.UpdateGroupProfileOutput {
+    pub fn updateGroupProfile(self: *Self, allocator: std.mem.Allocator, input: update_group_profile.UpdateGroupProfileInput, options: CallOptions) !update_group_profile.UpdateGroupProfileOutput {
         return update_group_profile.execute(self, allocator, input, options);
     }
 
     /// Updates the specified project in Amazon DataZone.
-    pub fn updateProject(self: *Self, allocator: std.mem.Allocator, input: update_project.UpdateProjectInput, options: update_project.Options) !update_project.UpdateProjectOutput {
+    pub fn updateProject(self: *Self, allocator: std.mem.Allocator, input: update_project.UpdateProjectInput, options: CallOptions) !update_project.UpdateProjectOutput {
         return update_project.execute(self, allocator, input, options);
     }
 
     /// Updates a project profile.
-    pub fn updateProjectProfile(self: *Self, allocator: std.mem.Allocator, input: update_project_profile.UpdateProjectProfileInput, options: update_project_profile.Options) !update_project_profile.UpdateProjectProfileOutput {
+    pub fn updateProjectProfile(self: *Self, allocator: std.mem.Allocator, input: update_project_profile.UpdateProjectProfileInput, options: CallOptions) !update_project_profile.UpdateProjectProfileOutput {
         return update_project_profile.execute(self, allocator, input, options);
     }
 
     /// Updates the owner of the root domain unit.
-    pub fn updateRootDomainUnitOwner(self: *Self, allocator: std.mem.Allocator, input: update_root_domain_unit_owner.UpdateRootDomainUnitOwnerInput, options: update_root_domain_unit_owner.Options) !update_root_domain_unit_owner.UpdateRootDomainUnitOwnerOutput {
+    pub fn updateRootDomainUnitOwner(self: *Self, allocator: std.mem.Allocator, input: update_root_domain_unit_owner.UpdateRootDomainUnitOwnerInput, options: CallOptions) !update_root_domain_unit_owner.UpdateRootDomainUnitOwnerOutput {
         return update_root_domain_unit_owner.execute(self, allocator, input, options);
     }
 
@@ -1599,28 +1600,28 @@ pub const Client = struct {
     /// processes. For instance, a metadata enforcement rule can specify the
     /// required information for creating a subscription request or publishing a
     /// data asset to the catalog, ensuring alignment with organizational standards.
-    pub fn updateRule(self: *Self, allocator: std.mem.Allocator, input: update_rule.UpdateRuleInput, options: update_rule.Options) !update_rule.UpdateRuleOutput {
+    pub fn updateRule(self: *Self, allocator: std.mem.Allocator, input: update_rule.UpdateRuleInput, options: CallOptions) !update_rule.UpdateRuleOutput {
         return update_rule.execute(self, allocator, input, options);
     }
 
     /// Updates the status of the specified subscription grant status in Amazon
     /// DataZone.
-    pub fn updateSubscriptionGrantStatus(self: *Self, allocator: std.mem.Allocator, input: update_subscription_grant_status.UpdateSubscriptionGrantStatusInput, options: update_subscription_grant_status.Options) !update_subscription_grant_status.UpdateSubscriptionGrantStatusOutput {
+    pub fn updateSubscriptionGrantStatus(self: *Self, allocator: std.mem.Allocator, input: update_subscription_grant_status.UpdateSubscriptionGrantStatusInput, options: CallOptions) !update_subscription_grant_status.UpdateSubscriptionGrantStatusOutput {
         return update_subscription_grant_status.execute(self, allocator, input, options);
     }
 
     /// Updates a specified subscription request in Amazon DataZone.
-    pub fn updateSubscriptionRequest(self: *Self, allocator: std.mem.Allocator, input: update_subscription_request.UpdateSubscriptionRequestInput, options: update_subscription_request.Options) !update_subscription_request.UpdateSubscriptionRequestOutput {
+    pub fn updateSubscriptionRequest(self: *Self, allocator: std.mem.Allocator, input: update_subscription_request.UpdateSubscriptionRequestInput, options: CallOptions) !update_subscription_request.UpdateSubscriptionRequestOutput {
         return update_subscription_request.execute(self, allocator, input, options);
     }
 
     /// Updates the specified subscription target in Amazon DataZone.
-    pub fn updateSubscriptionTarget(self: *Self, allocator: std.mem.Allocator, input: update_subscription_target.UpdateSubscriptionTargetInput, options: update_subscription_target.Options) !update_subscription_target.UpdateSubscriptionTargetOutput {
+    pub fn updateSubscriptionTarget(self: *Self, allocator: std.mem.Allocator, input: update_subscription_target.UpdateSubscriptionTargetInput, options: CallOptions) !update_subscription_target.UpdateSubscriptionTargetOutput {
         return update_subscription_target.execute(self, allocator, input, options);
     }
 
     /// Updates the specified user profile in Amazon DataZone.
-    pub fn updateUserProfile(self: *Self, allocator: std.mem.Allocator, input: update_user_profile.UpdateUserProfileInput, options: update_user_profile.Options) !update_user_profile.UpdateUserProfileOutput {
+    pub fn updateUserProfile(self: *Self, allocator: std.mem.Allocator, input: update_user_profile.UpdateUserProfileInput, options: CallOptions) !update_user_profile.UpdateUserProfileOutput {
         return update_user_profile.execute(self, allocator, input, options);
     }
 

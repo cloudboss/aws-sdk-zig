@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IotEndpointType = @import("iot_endpoint_type.zig").IotEndpointType;
 const S3EndpointType = @import("s3_endpoint_type.zig").S3EndpointType;
@@ -54,11 +55,7 @@ pub const GetComponentVersionArtifactOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetComponentVersionArtifactInput, options: Options) !GetComponentVersionArtifactOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetComponentVersionArtifactInput, options: CallOptions) !GetComponentVersionArtifactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

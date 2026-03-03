@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IdentityMailFromDomainAttributes = @import("identity_mail_from_domain_attributes.zig").IdentityMailFromDomainAttributes;
 const serde = @import("serde.zig");
@@ -16,11 +17,7 @@ pub const GetIdentityMailFromDomainAttributesOutput = struct {
     mail_from_domain_attributes: ?[]const aws.map.MapEntry(IdentityMailFromDomainAttributes) = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetIdentityMailFromDomainAttributesInput, options: Options) !GetIdentityMailFromDomainAttributesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetIdentityMailFromDomainAttributesInput, options: CallOptions) !GetIdentityMailFromDomainAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

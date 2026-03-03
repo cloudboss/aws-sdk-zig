@@ -36,6 +36,7 @@ const set_default_permission_version = @import("set_default_permission_version.z
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_resource_share = @import("update_resource_share.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -71,7 +72,7 @@ pub const Client = struct {
     /// invitation, the resources included in the resource share are available to
     /// interact with in the
     /// relevant Amazon Web Services Management Consoles and tools.
-    pub fn acceptResourceShareInvitation(self: *Self, allocator: std.mem.Allocator, input: accept_resource_share_invitation.AcceptResourceShareInvitationInput, options: accept_resource_share_invitation.Options) !accept_resource_share_invitation.AcceptResourceShareInvitationOutput {
+    pub fn acceptResourceShareInvitation(self: *Self, allocator: std.mem.Allocator, input: accept_resource_share_invitation.AcceptResourceShareInvitationInput, options: CallOptions) !accept_resource_share_invitation.AcceptResourceShareInvitationOutput {
         return accept_resource_share_invitation.execute(self, allocator, input, options);
     }
 
@@ -81,7 +82,7 @@ pub const Client = struct {
     /// added resources.
     /// Newly added principals immediately receive access to the resources shared in
     /// this resource share.
-    pub fn associateResourceShare(self: *Self, allocator: std.mem.Allocator, input: associate_resource_share.AssociateResourceShareInput, options: associate_resource_share.Options) !associate_resource_share.AssociateResourceShareOutput {
+    pub fn associateResourceShare(self: *Self, allocator: std.mem.Allocator, input: associate_resource_share.AssociateResourceShareInput, options: CallOptions) !associate_resource_share.AssociateResourceShareOutput {
         return associate_resource_share.execute(self, allocator, input, options);
     }
 
@@ -92,7 +93,7 @@ pub const Client = struct {
     /// a new RAM permission only if there are currently no resources of that
     /// resource type
     /// currently in the resource share.
-    pub fn associateResourceSharePermission(self: *Self, allocator: std.mem.Allocator, input: associate_resource_share_permission.AssociateResourceSharePermissionInput, options: associate_resource_share_permission.Options) !associate_resource_share_permission.AssociateResourceSharePermissionOutput {
+    pub fn associateResourceSharePermission(self: *Self, allocator: std.mem.Allocator, input: associate_resource_share_permission.AssociateResourceSharePermissionInput, options: CallOptions) !associate_resource_share_permission.AssociateResourceSharePermissionOutput {
         return associate_resource_share_permission.execute(self, allocator, input, options);
     }
 
@@ -100,7 +101,7 @@ pub const Client = struct {
     /// can attach to resource shares.
     /// It is created in the Amazon Web Services Region in which you call the
     /// operation.
-    pub fn createPermission(self: *Self, allocator: std.mem.Allocator, input: create_permission.CreatePermissionInput, options: create_permission.Options) !create_permission.CreatePermissionOutput {
+    pub fn createPermission(self: *Self, allocator: std.mem.Allocator, input: create_permission.CreatePermissionInput, options: CallOptions) !create_permission.CreatePermissionOutput {
         return create_permission.execute(self, allocator, input, options);
     }
 
@@ -116,7 +117,7 @@ pub const Client = struct {
     /// versions, then
     /// you must delete one of the existing versions before you can create a new
     /// one.
-    pub fn createPermissionVersion(self: *Self, allocator: std.mem.Allocator, input: create_permission_version.CreatePermissionVersionInput, options: create_permission_version.Options) !create_permission_version.CreatePermissionVersionOutput {
+    pub fn createPermissionVersion(self: *Self, allocator: std.mem.Allocator, input: create_permission_version.CreatePermissionVersionInput, options: CallOptions) !create_permission_version.CreatePermissionVersionOutput {
         return create_permission_version.execute(self, allocator, input, options);
     }
 
@@ -132,7 +133,7 @@ pub const Client = struct {
     /// Amazon Web Services account that created the resource. Sharing doesn't
     /// change any permissions or
     /// quotas that apply to the resource in the account that created it.
-    pub fn createResourceShare(self: *Self, allocator: std.mem.Allocator, input: create_resource_share.CreateResourceShareInput, options: create_resource_share.Options) !create_resource_share.CreateResourceShareOutput {
+    pub fn createResourceShare(self: *Self, allocator: std.mem.Allocator, input: create_resource_share.CreateResourceShareInput, options: CallOptions) !create_resource_share.CreateResourceShareOutput {
         return create_resource_share.execute(self, allocator, input, options);
     }
 
@@ -141,7 +142,7 @@ pub const Client = struct {
     /// can delete a customer managed permission only if it isn't attached to any
     /// resource share. The operation deletes all
     /// versions associated with the customer managed permission.
-    pub fn deletePermission(self: *Self, allocator: std.mem.Allocator, input: delete_permission.DeletePermissionInput, options: delete_permission.Options) !delete_permission.DeletePermissionOutput {
+    pub fn deletePermission(self: *Self, allocator: std.mem.Allocator, input: delete_permission.DeletePermissionInput, options: CallOptions) !delete_permission.DeletePermissionOutput {
         return delete_permission.execute(self, allocator, input, options);
     }
 
@@ -152,7 +153,7 @@ pub const Client = struct {
     /// If a customer managed permission has the maximum of 5 versions, then you
     /// must delete at
     /// least one version before you can create another.
-    pub fn deletePermissionVersion(self: *Self, allocator: std.mem.Allocator, input: delete_permission_version.DeletePermissionVersionInput, options: delete_permission_version.Options) !delete_permission_version.DeletePermissionVersionOutput {
+    pub fn deletePermissionVersion(self: *Self, allocator: std.mem.Allocator, input: delete_permission_version.DeletePermissionVersionInput, options: CallOptions) !delete_permission_version.DeletePermissionVersionOutput {
         return delete_permission_version.execute(self, allocator, input, options);
     }
 
@@ -161,14 +162,14 @@ pub const Client = struct {
     /// This doesn't delete any of the resources that were associated with the
     /// resource share; it
     /// only stops the sharing of those resources through this resource share.
-    pub fn deleteResourceShare(self: *Self, allocator: std.mem.Allocator, input: delete_resource_share.DeleteResourceShareInput, options: delete_resource_share.Options) !delete_resource_share.DeleteResourceShareOutput {
+    pub fn deleteResourceShare(self: *Self, allocator: std.mem.Allocator, input: delete_resource_share.DeleteResourceShareInput, options: CallOptions) !delete_resource_share.DeleteResourceShareOutput {
         return delete_resource_share.execute(self, allocator, input, options);
     }
 
     /// Removes the specified principals, resources, or source constraints from
     /// participating in the specified
     /// resource share.
-    pub fn disassociateResourceShare(self: *Self, allocator: std.mem.Allocator, input: disassociate_resource_share.DisassociateResourceShareInput, options: disassociate_resource_share.Options) !disassociate_resource_share.DisassociateResourceShareOutput {
+    pub fn disassociateResourceShare(self: *Self, allocator: std.mem.Allocator, input: disassociate_resource_share.DisassociateResourceShareInput, options: CallOptions) !disassociate_resource_share.DisassociateResourceShareOutput {
         return disassociate_resource_share.execute(self, allocator, input, options);
     }
 
@@ -177,7 +178,7 @@ pub const Client = struct {
     /// remove a managed permission from a resource share only if there are
     /// currently no resources of the relevant
     /// resource type currently attached to the resource share.
-    pub fn disassociateResourceSharePermission(self: *Self, allocator: std.mem.Allocator, input: disassociate_resource_share_permission.DisassociateResourceSharePermissionInput, options: disassociate_resource_share_permission.Options) !disassociate_resource_share_permission.DisassociateResourceSharePermissionOutput {
+    pub fn disassociateResourceSharePermission(self: *Self, allocator: std.mem.Allocator, input: disassociate_resource_share_permission.DisassociateResourceSharePermissionInput, options: CallOptions) !disassociate_resource_share_permission.DisassociateResourceSharePermissionOutput {
         return disassociate_resource_share_permission.execute(self, allocator, input, options);
     }
 
@@ -199,12 +200,12 @@ pub const Client = struct {
     ///
     /// You must call this operation from an IAM role or user in the organization's
     /// management account.
-    pub fn enableSharingWithAwsOrganization(self: *Self, allocator: std.mem.Allocator, input: enable_sharing_with_aws_organization.EnableSharingWithAwsOrganizationInput, options: enable_sharing_with_aws_organization.Options) !enable_sharing_with_aws_organization.EnableSharingWithAwsOrganizationOutput {
+    pub fn enableSharingWithAwsOrganization(self: *Self, allocator: std.mem.Allocator, input: enable_sharing_with_aws_organization.EnableSharingWithAwsOrganizationInput, options: CallOptions) !enable_sharing_with_aws_organization.EnableSharingWithAwsOrganizationOutput {
         return enable_sharing_with_aws_organization.execute(self, allocator, input, options);
     }
 
     /// Retrieves the contents of a managed permission in JSON format.
-    pub fn getPermission(self: *Self, allocator: std.mem.Allocator, input: get_permission.GetPermissionInput, options: get_permission.Options) !get_permission.GetPermissionOutput {
+    pub fn getPermission(self: *Self, allocator: std.mem.Allocator, input: get_permission.GetPermissionInput, options: CallOptions) !get_permission.GetPermissionOutput {
         return get_permission.execute(self, allocator, input, options);
     }
 
@@ -218,7 +219,7 @@ pub const Client = struct {
     /// results available. The `NextToken` response parameter value is `null`
     /// *only*
     /// when there are no more results to display.
-    pub fn getResourcePolicies(self: *Self, allocator: std.mem.Allocator, input: get_resource_policies.GetResourcePoliciesInput, options: get_resource_policies.Options) !get_resource_policies.GetResourcePoliciesOutput {
+    pub fn getResourcePolicies(self: *Self, allocator: std.mem.Allocator, input: get_resource_policies.GetResourcePoliciesInput, options: CallOptions) !get_resource_policies.GetResourcePoliciesOutput {
         return get_resource_policies.execute(self, allocator, input, options);
     }
 
@@ -232,7 +233,7 @@ pub const Client = struct {
     /// results available. The `NextToken` response parameter value is `null`
     /// *only*
     /// when there are no more results to display.
-    pub fn getResourceShareAssociations(self: *Self, allocator: std.mem.Allocator, input: get_resource_share_associations.GetResourceShareAssociationsInput, options: get_resource_share_associations.Options) !get_resource_share_associations.GetResourceShareAssociationsOutput {
+    pub fn getResourceShareAssociations(self: *Self, allocator: std.mem.Allocator, input: get_resource_share_associations.GetResourceShareAssociationsInput, options: CallOptions) !get_resource_share_associations.GetResourceShareAssociationsOutput {
         return get_resource_share_associations.execute(self, allocator, input, options);
     }
 
@@ -245,7 +246,7 @@ pub const Client = struct {
     /// results available. The `NextToken` response parameter value is `null`
     /// *only*
     /// when there are no more results to display.
-    pub fn getResourceShareInvitations(self: *Self, allocator: std.mem.Allocator, input: get_resource_share_invitations.GetResourceShareInvitationsInput, options: get_resource_share_invitations.Options) !get_resource_share_invitations.GetResourceShareInvitationsOutput {
+    pub fn getResourceShareInvitations(self: *Self, allocator: std.mem.Allocator, input: get_resource_share_invitations.GetResourceShareInvitationsInput, options: CallOptions) !get_resource_share_invitations.GetResourceShareInvitationsOutput {
         return get_resource_share_invitations.execute(self, allocator, input, options);
     }
 
@@ -258,7 +259,7 @@ pub const Client = struct {
     /// results available. The `NextToken` response parameter value is `null`
     /// *only*
     /// when there are no more results to display.
-    pub fn getResourceShares(self: *Self, allocator: std.mem.Allocator, input: get_resource_shares.GetResourceSharesInput, options: get_resource_shares.Options) !get_resource_shares.GetResourceSharesOutput {
+    pub fn getResourceShares(self: *Self, allocator: std.mem.Allocator, input: get_resource_shares.GetResourceSharesInput, options: CallOptions) !get_resource_shares.GetResourceSharesOutput {
         return get_resource_shares.execute(self, allocator, input, options);
     }
 
@@ -273,7 +274,7 @@ pub const Client = struct {
     /// results available. The `NextToken` response parameter value is `null`
     /// *only*
     /// when there are no more results to display.
-    pub fn listPendingInvitationResources(self: *Self, allocator: std.mem.Allocator, input: list_pending_invitation_resources.ListPendingInvitationResourcesInput, options: list_pending_invitation_resources.Options) !list_pending_invitation_resources.ListPendingInvitationResourcesOutput {
+    pub fn listPendingInvitationResources(self: *Self, allocator: std.mem.Allocator, input: list_pending_invitation_resources.ListPendingInvitationResourcesInput, options: CallOptions) !list_pending_invitation_resources.ListPendingInvitationResourcesOutput {
         return list_pending_invitation_resources.execute(self, allocator, input, options);
     }
 
@@ -289,7 +290,7 @@ pub const Client = struct {
     /// results available. The `NextToken` response parameter value is `null`
     /// *only*
     /// when there are no more results to display.
-    pub fn listPermissionAssociations(self: *Self, allocator: std.mem.Allocator, input: list_permission_associations.ListPermissionAssociationsInput, options: list_permission_associations.Options) !list_permission_associations.ListPermissionAssociationsOutput {
+    pub fn listPermissionAssociations(self: *Self, allocator: std.mem.Allocator, input: list_permission_associations.ListPermissionAssociationsInput, options: CallOptions) !list_permission_associations.ListPermissionAssociationsOutput {
         return list_permission_associations.execute(self, allocator, input, options);
     }
 
@@ -301,7 +302,7 @@ pub const Client = struct {
     /// results available. The `NextToken` response parameter value is `null`
     /// *only*
     /// when there are no more results to display.
-    pub fn listPermissionVersions(self: *Self, allocator: std.mem.Allocator, input: list_permission_versions.ListPermissionVersionsInput, options: list_permission_versions.Options) !list_permission_versions.ListPermissionVersionsOutput {
+    pub fn listPermissionVersions(self: *Self, allocator: std.mem.Allocator, input: list_permission_versions.ListPermissionVersionsInput, options: CallOptions) !list_permission_versions.ListPermissionVersionsOutput {
         return list_permission_versions.execute(self, allocator, input, options);
     }
 
@@ -315,7 +316,7 @@ pub const Client = struct {
     /// results available. The `NextToken` response parameter value is `null`
     /// *only*
     /// when there are no more results to display.
-    pub fn listPermissions(self: *Self, allocator: std.mem.Allocator, input: list_permissions.ListPermissionsInput, options: list_permissions.Options) !list_permissions.ListPermissionsOutput {
+    pub fn listPermissions(self: *Self, allocator: std.mem.Allocator, input: list_permissions.ListPermissionsInput, options: CallOptions) !list_permissions.ListPermissionsOutput {
         return list_permissions.execute(self, allocator, input, options);
     }
 
@@ -329,7 +330,7 @@ pub const Client = struct {
     /// results available. The `NextToken` response parameter value is `null`
     /// *only*
     /// when there are no more results to display.
-    pub fn listPrincipals(self: *Self, allocator: std.mem.Allocator, input: list_principals.ListPrincipalsInput, options: list_principals.Options) !list_principals.ListPrincipalsOutput {
+    pub fn listPrincipals(self: *Self, allocator: std.mem.Allocator, input: list_principals.ListPrincipalsInput, options: CallOptions) !list_principals.ListPrincipalsOutput {
         return list_principals.execute(self, allocator, input, options);
     }
 
@@ -343,7 +344,7 @@ pub const Client = struct {
     /// results available. The `NextToken` response parameter value is `null`
     /// *only*
     /// when there are no more results to display.
-    pub fn listReplacePermissionAssociationsWork(self: *Self, allocator: std.mem.Allocator, input: list_replace_permission_associations_work.ListReplacePermissionAssociationsWorkInput, options: list_replace_permission_associations_work.Options) !list_replace_permission_associations_work.ListReplacePermissionAssociationsWorkOutput {
+    pub fn listReplacePermissionAssociationsWork(self: *Self, allocator: std.mem.Allocator, input: list_replace_permission_associations_work.ListReplacePermissionAssociationsWorkInput, options: CallOptions) !list_replace_permission_associations_work.ListReplacePermissionAssociationsWorkOutput {
         return list_replace_permission_associations_work.execute(self, allocator, input, options);
     }
 
@@ -355,12 +356,12 @@ pub const Client = struct {
     /// results available. The `NextToken` response parameter value is `null`
     /// *only*
     /// when there are no more results to display.
-    pub fn listResourceSharePermissions(self: *Self, allocator: std.mem.Allocator, input: list_resource_share_permissions.ListResourceSharePermissionsInput, options: list_resource_share_permissions.Options) !list_resource_share_permissions.ListResourceSharePermissionsOutput {
+    pub fn listResourceSharePermissions(self: *Self, allocator: std.mem.Allocator, input: list_resource_share_permissions.ListResourceSharePermissionsInput, options: CallOptions) !list_resource_share_permissions.ListResourceSharePermissionsOutput {
         return list_resource_share_permissions.execute(self, allocator, input, options);
     }
 
     /// Lists the resource types that can be shared by RAM.
-    pub fn listResourceTypes(self: *Self, allocator: std.mem.Allocator, input: list_resource_types.ListResourceTypesInput, options: list_resource_types.Options) !list_resource_types.ListResourceTypesOutput {
+    pub fn listResourceTypes(self: *Self, allocator: std.mem.Allocator, input: list_resource_types.ListResourceTypesInput, options: CallOptions) !list_resource_types.ListResourceTypesOutput {
         return list_resource_types.execute(self, allocator, input, options);
     }
 
@@ -374,7 +375,7 @@ pub const Client = struct {
     /// results available. The `NextToken` response parameter value is `null`
     /// *only*
     /// when there are no more results to display.
-    pub fn listResources(self: *Self, allocator: std.mem.Allocator, input: list_resources.ListResourcesInput, options: list_resources.Options) !list_resources.ListResourcesOutput {
+    pub fn listResources(self: *Self, allocator: std.mem.Allocator, input: list_resources.ListResourcesInput, options: CallOptions) !list_resources.ListResourcesOutput {
         return list_resources.execute(self, allocator, input, options);
     }
 
@@ -386,7 +387,7 @@ pub const Client = struct {
     /// You can filter the results by resource share Amazon Resource Name (ARN),
     /// source ID, source type, or association status. We recommend using pagination
     /// to ensure that the operation returns quickly and successfully.
-    pub fn listSourceAssociations(self: *Self, allocator: std.mem.Allocator, input: list_source_associations.ListSourceAssociationsInput, options: list_source_associations.Options) !list_source_associations.ListSourceAssociationsOutput {
+    pub fn listSourceAssociations(self: *Self, allocator: std.mem.Allocator, input: list_source_associations.ListSourceAssociationsInput, options: CallOptions) !list_source_associations.ListSourceAssociationsOutput {
         return list_source_associations.execute(self, allocator, input, options);
     }
 
@@ -427,7 +428,7 @@ pub const Client = struct {
     /// managed permission has no other associations to A resource share, then RAM
     /// automatically deletes
     /// it.
-    pub fn promotePermissionCreatedFromPolicy(self: *Self, allocator: std.mem.Allocator, input: promote_permission_created_from_policy.PromotePermissionCreatedFromPolicyInput, options: promote_permission_created_from_policy.Options) !promote_permission_created_from_policy.PromotePermissionCreatedFromPolicyOutput {
+    pub fn promotePermissionCreatedFromPolicy(self: *Self, allocator: std.mem.Allocator, input: promote_permission_created_from_policy.PromotePermissionCreatedFromPolicyInput, options: CallOptions) !promote_permission_created_from_policy.PromotePermissionCreatedFromPolicyOutput {
         return promote_permission_created_from_policy.execute(self, allocator, input, options);
     }
 
@@ -454,13 +455,13 @@ pub const Client = struct {
     /// this operation can't find a managed permission that exactly matches the
     /// existing
     /// `CREATED_FROM_POLICY` permission, then this operation fails.
-    pub fn promoteResourceShareCreatedFromPolicy(self: *Self, allocator: std.mem.Allocator, input: promote_resource_share_created_from_policy.PromoteResourceShareCreatedFromPolicyInput, options: promote_resource_share_created_from_policy.Options) !promote_resource_share_created_from_policy.PromoteResourceShareCreatedFromPolicyOutput {
+    pub fn promoteResourceShareCreatedFromPolicy(self: *Self, allocator: std.mem.Allocator, input: promote_resource_share_created_from_policy.PromoteResourceShareCreatedFromPolicyInput, options: CallOptions) !promote_resource_share_created_from_policy.PromoteResourceShareCreatedFromPolicyOutput {
         return promote_resource_share_created_from_policy.execute(self, allocator, input, options);
     }
 
     /// Rejects an invitation to a resource share from another Amazon Web Services
     /// account.
-    pub fn rejectResourceShareInvitation(self: *Self, allocator: std.mem.Allocator, input: reject_resource_share_invitation.RejectResourceShareInvitationInput, options: reject_resource_share_invitation.Options) !reject_resource_share_invitation.RejectResourceShareInvitationOutput {
+    pub fn rejectResourceShareInvitation(self: *Self, allocator: std.mem.Allocator, input: reject_resource_share_invitation.RejectResourceShareInvitationInput, options: CallOptions) !reject_resource_share_invitation.RejectResourceShareInvitationOutput {
         return reject_resource_share_invitation.execute(self, allocator, input, options);
     }
 
@@ -487,7 +488,7 @@ pub const Client = struct {
     /// To successfully perform this operation, you must have permission to update
     /// the
     /// resource-based policy on all affected resource types.
-    pub fn replacePermissionAssociations(self: *Self, allocator: std.mem.Allocator, input: replace_permission_associations.ReplacePermissionAssociationsInput, options: replace_permission_associations.Options) !replace_permission_associations.ReplacePermissionAssociationsOutput {
+    pub fn replacePermissionAssociations(self: *Self, allocator: std.mem.Allocator, input: replace_permission_associations.ReplacePermissionAssociationsInput, options: CallOptions) !replace_permission_associations.ReplacePermissionAssociationsOutput {
         return replace_permission_associations.execute(self, allocator, input, options);
     }
 
@@ -497,7 +498,7 @@ pub const Client = struct {
     /// default permission. Existing
     /// resource shares continue to use their original permission version, but you
     /// can use ReplacePermissionAssociations to update them.
-    pub fn setDefaultPermissionVersion(self: *Self, allocator: std.mem.Allocator, input: set_default_permission_version.SetDefaultPermissionVersionInput, options: set_default_permission_version.Options) !set_default_permission_version.SetDefaultPermissionVersionOutput {
+    pub fn setDefaultPermissionVersion(self: *Self, allocator: std.mem.Allocator, input: set_default_permission_version.SetDefaultPermissionVersionInput, options: CallOptions) !set_default_permission_version.SetDefaultPermissionVersionOutput {
         return set_default_permission_version.execute(self, allocator, input, options);
     }
 
@@ -508,18 +509,18 @@ pub const Client = struct {
     ///
     /// The tags on a managed permission are the same for all versions of the
     /// managed permission.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tag key and value pairs from the specified resource
     /// share or managed permission.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Modifies some of the properties of the specified resource share.
-    pub fn updateResourceShare(self: *Self, allocator: std.mem.Allocator, input: update_resource_share.UpdateResourceShareInput, options: update_resource_share.Options) !update_resource_share.UpdateResourceShareOutput {
+    pub fn updateResourceShare(self: *Self, allocator: std.mem.Allocator, input: update_resource_share.UpdateResourceShareInput, options: CallOptions) !update_resource_share.UpdateResourceShareOutput {
         return update_resource_share.execute(self, allocator, input, options);
     }
 

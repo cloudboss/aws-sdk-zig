@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DocumentIdentifier = @import("document_identifier.zig").DocumentIdentifier;
 const KnowledgeBaseDocumentDetail = @import("knowledge_base_document_detail.zig").KnowledgeBaseDocumentDetail;
@@ -43,11 +44,7 @@ pub const DeleteKnowledgeBaseDocumentsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteKnowledgeBaseDocumentsInput, options: Options) !DeleteKnowledgeBaseDocumentsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteKnowledgeBaseDocumentsInput, options: CallOptions) !DeleteKnowledgeBaseDocumentsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

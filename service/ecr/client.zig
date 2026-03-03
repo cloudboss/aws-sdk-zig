@@ -59,6 +59,7 @@ const update_pull_through_cache_rule = @import("update_pull_through_cache_rule.z
 const update_repository_creation_template = @import("update_repository_creation_template.zig");
 const upload_layer_part = @import("upload_layer_part.zig");
 const validate_pull_through_cache_rule = @import("validate_pull_through_cache_rule.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -100,7 +101,7 @@ pub const Client = struct {
     /// This operation is used by the Amazon ECR proxy and is not generally used by
     /// customers for pulling and pushing images. In most cases, you should use the
     /// `docker` CLI to pull, tag, and push images.
-    pub fn batchCheckLayerAvailability(self: *Self, allocator: std.mem.Allocator, input: batch_check_layer_availability.BatchCheckLayerAvailabilityInput, options: batch_check_layer_availability.Options) !batch_check_layer_availability.BatchCheckLayerAvailabilityOutput {
+    pub fn batchCheckLayerAvailability(self: *Self, allocator: std.mem.Allocator, input: batch_check_layer_availability.BatchCheckLayerAvailabilityInput, options: CallOptions) !batch_check_layer_availability.BatchCheckLayerAvailabilityOutput {
         return batch_check_layer_availability.execute(self, allocator, input, options);
     }
 
@@ -116,7 +117,7 @@ pub const Client = struct {
     /// You can completely delete an image (and all of its tags) by specifying the
     /// image's
     /// digest in your request.
-    pub fn batchDeleteImage(self: *Self, allocator: std.mem.Allocator, input: batch_delete_image.BatchDeleteImageInput, options: batch_delete_image.Options) !batch_delete_image.BatchDeleteImageOutput {
+    pub fn batchDeleteImage(self: *Self, allocator: std.mem.Allocator, input: batch_delete_image.BatchDeleteImageInput, options: CallOptions) !batch_delete_image.BatchDeleteImageOutput {
         return batch_delete_image.execute(self, allocator, input, options);
     }
 
@@ -126,12 +127,12 @@ pub const Client = struct {
     /// When an image is pulled, the BatchGetImage API is called once to retrieve
     /// the image
     /// manifest.
-    pub fn batchGetImage(self: *Self, allocator: std.mem.Allocator, input: batch_get_image.BatchGetImageInput, options: batch_get_image.Options) !batch_get_image.BatchGetImageOutput {
+    pub fn batchGetImage(self: *Self, allocator: std.mem.Allocator, input: batch_get_image.BatchGetImageInput, options: CallOptions) !batch_get_image.BatchGetImageOutput {
         return batch_get_image.execute(self, allocator, input, options);
     }
 
     /// Gets the scanning configuration for one or more repositories.
-    pub fn batchGetRepositoryScanningConfiguration(self: *Self, allocator: std.mem.Allocator, input: batch_get_repository_scanning_configuration.BatchGetRepositoryScanningConfigurationInput, options: batch_get_repository_scanning_configuration.Options) !batch_get_repository_scanning_configuration.BatchGetRepositoryScanningConfigurationOutput {
+    pub fn batchGetRepositoryScanningConfiguration(self: *Self, allocator: std.mem.Allocator, input: batch_get_repository_scanning_configuration.BatchGetRepositoryScanningConfigurationInput, options: CallOptions) !batch_get_repository_scanning_configuration.BatchGetRepositoryScanningConfigurationOutput {
         return batch_get_repository_scanning_configuration.execute(self, allocator, input, options);
     }
 
@@ -147,7 +148,7 @@ pub const Client = struct {
     /// This operation is used by the Amazon ECR proxy and is not generally used by
     /// customers for pulling and pushing images. In most cases, you should use the
     /// `docker` CLI to pull, tag, and push images.
-    pub fn completeLayerUpload(self: *Self, allocator: std.mem.Allocator, input: complete_layer_upload.CompleteLayerUploadInput, options: complete_layer_upload.Options) !complete_layer_upload.CompleteLayerUploadOutput {
+    pub fn completeLayerUpload(self: *Self, allocator: std.mem.Allocator, input: complete_layer_upload.CompleteLayerUploadInput, options: CallOptions) !complete_layer_upload.CompleteLayerUploadOutput {
         return complete_layer_upload.execute(self, allocator, input, options);
     }
 
@@ -157,14 +158,14 @@ pub const Client = struct {
     /// For more
     /// information, see [Using pull through cache
     /// rules](https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html) in the *Amazon Elastic Container Registry User Guide*.
-    pub fn createPullThroughCacheRule(self: *Self, allocator: std.mem.Allocator, input: create_pull_through_cache_rule.CreatePullThroughCacheRuleInput, options: create_pull_through_cache_rule.Options) !create_pull_through_cache_rule.CreatePullThroughCacheRuleOutput {
+    pub fn createPullThroughCacheRule(self: *Self, allocator: std.mem.Allocator, input: create_pull_through_cache_rule.CreatePullThroughCacheRuleInput, options: CallOptions) !create_pull_through_cache_rule.CreatePullThroughCacheRuleOutput {
         return create_pull_through_cache_rule.execute(self, allocator, input, options);
     }
 
     /// Creates a repository. For more information, see [Amazon ECR
     /// repositories](https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html) in the
     /// *Amazon Elastic Container Registry User Guide*.
-    pub fn createRepository(self: *Self, allocator: std.mem.Allocator, input: create_repository.CreateRepositoryInput, options: create_repository.Options) !create_repository.CreateRepositoryOutput {
+    pub fn createRepository(self: *Self, allocator: std.mem.Allocator, input: create_repository.CreateRepositoryInput, options: CallOptions) !create_repository.CreateRepositoryOutput {
         return create_repository.execute(self, allocator, input, options);
     }
 
@@ -176,22 +177,22 @@ pub const Client = struct {
     /// repository creation
     /// templates](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-creation-templates.html) in the
     /// *Amazon Elastic Container Registry User Guide*.
-    pub fn createRepositoryCreationTemplate(self: *Self, allocator: std.mem.Allocator, input: create_repository_creation_template.CreateRepositoryCreationTemplateInput, options: create_repository_creation_template.Options) !create_repository_creation_template.CreateRepositoryCreationTemplateOutput {
+    pub fn createRepositoryCreationTemplate(self: *Self, allocator: std.mem.Allocator, input: create_repository_creation_template.CreateRepositoryCreationTemplateInput, options: CallOptions) !create_repository_creation_template.CreateRepositoryCreationTemplateOutput {
         return create_repository_creation_template.execute(self, allocator, input, options);
     }
 
     /// Deletes the lifecycle policy associated with the specified repository.
-    pub fn deleteLifecyclePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_lifecycle_policy.DeleteLifecyclePolicyInput, options: delete_lifecycle_policy.Options) !delete_lifecycle_policy.DeleteLifecyclePolicyOutput {
+    pub fn deleteLifecyclePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_lifecycle_policy.DeleteLifecyclePolicyInput, options: CallOptions) !delete_lifecycle_policy.DeleteLifecyclePolicyOutput {
         return delete_lifecycle_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes a pull through cache rule.
-    pub fn deletePullThroughCacheRule(self: *Self, allocator: std.mem.Allocator, input: delete_pull_through_cache_rule.DeletePullThroughCacheRuleInput, options: delete_pull_through_cache_rule.Options) !delete_pull_through_cache_rule.DeletePullThroughCacheRuleOutput {
+    pub fn deletePullThroughCacheRule(self: *Self, allocator: std.mem.Allocator, input: delete_pull_through_cache_rule.DeletePullThroughCacheRuleInput, options: CallOptions) !delete_pull_through_cache_rule.DeletePullThroughCacheRuleOutput {
         return delete_pull_through_cache_rule.execute(self, allocator, input, options);
     }
 
     /// Deletes the registry permissions policy.
-    pub fn deleteRegistryPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_registry_policy.DeleteRegistryPolicyInput, options: delete_registry_policy.Options) !delete_registry_policy.DeleteRegistryPolicyOutput {
+    pub fn deleteRegistryPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_registry_policy.DeleteRegistryPolicyInput, options: CallOptions) !delete_registry_policy.DeleteRegistryPolicyOutput {
         return delete_registry_policy.execute(self, allocator, input, options);
     }
 
@@ -200,17 +201,17 @@ pub const Client = struct {
     /// contents of the repository or use the `force` option to delete the
     /// repository
     /// and have Amazon ECR delete all of its contents on your behalf.
-    pub fn deleteRepository(self: *Self, allocator: std.mem.Allocator, input: delete_repository.DeleteRepositoryInput, options: delete_repository.Options) !delete_repository.DeleteRepositoryOutput {
+    pub fn deleteRepository(self: *Self, allocator: std.mem.Allocator, input: delete_repository.DeleteRepositoryInput, options: CallOptions) !delete_repository.DeleteRepositoryOutput {
         return delete_repository.execute(self, allocator, input, options);
     }
 
     /// Deletes a repository creation template.
-    pub fn deleteRepositoryCreationTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_repository_creation_template.DeleteRepositoryCreationTemplateInput, options: delete_repository_creation_template.Options) !delete_repository_creation_template.DeleteRepositoryCreationTemplateOutput {
+    pub fn deleteRepositoryCreationTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_repository_creation_template.DeleteRepositoryCreationTemplateInput, options: CallOptions) !delete_repository_creation_template.DeleteRepositoryCreationTemplateOutput {
         return delete_repository_creation_template.execute(self, allocator, input, options);
     }
 
     /// Deletes the repository policy associated with the specified repository.
-    pub fn deleteRepositoryPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_repository_policy.DeleteRepositoryPolicyInput, options: delete_repository_policy.Options) !delete_repository_policy.DeleteRepositoryPolicyOutput {
+    pub fn deleteRepositoryPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_repository_policy.DeleteRepositoryPolicyInput, options: CallOptions) !delete_repository_policy.DeleteRepositoryPolicyOutput {
         return delete_repository_policy.execute(self, allocator, input, options);
     }
 
@@ -224,24 +225,24 @@ pub const Client = struct {
     ///
     /// Deleting the signing configuration does not affect existing image
     /// signatures.
-    pub fn deleteSigningConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_signing_configuration.DeleteSigningConfigurationInput, options: delete_signing_configuration.Options) !delete_signing_configuration.DeleteSigningConfigurationOutput {
+    pub fn deleteSigningConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_signing_configuration.DeleteSigningConfigurationInput, options: CallOptions) !delete_signing_configuration.DeleteSigningConfigurationOutput {
         return delete_signing_configuration.execute(self, allocator, input, options);
     }
 
     /// Removes a principal from the pull time update exclusion list for a registry.
     /// Once removed, Amazon ECR will resume updating the pull time if the specified
     /// principal pulls an image.
-    pub fn deregisterPullTimeUpdateExclusion(self: *Self, allocator: std.mem.Allocator, input: deregister_pull_time_update_exclusion.DeregisterPullTimeUpdateExclusionInput, options: deregister_pull_time_update_exclusion.Options) !deregister_pull_time_update_exclusion.DeregisterPullTimeUpdateExclusionOutput {
+    pub fn deregisterPullTimeUpdateExclusion(self: *Self, allocator: std.mem.Allocator, input: deregister_pull_time_update_exclusion.DeregisterPullTimeUpdateExclusionInput, options: CallOptions) !deregister_pull_time_update_exclusion.DeregisterPullTimeUpdateExclusionOutput {
         return deregister_pull_time_update_exclusion.execute(self, allocator, input, options);
     }
 
     /// Returns the replication status for a specified image.
-    pub fn describeImageReplicationStatus(self: *Self, allocator: std.mem.Allocator, input: describe_image_replication_status.DescribeImageReplicationStatusInput, options: describe_image_replication_status.Options) !describe_image_replication_status.DescribeImageReplicationStatusOutput {
+    pub fn describeImageReplicationStatus(self: *Self, allocator: std.mem.Allocator, input: describe_image_replication_status.DescribeImageReplicationStatusInput, options: CallOptions) !describe_image_replication_status.DescribeImageReplicationStatusOutput {
         return describe_image_replication_status.execute(self, allocator, input, options);
     }
 
     /// Returns the scan findings for the specified image.
-    pub fn describeImageScanFindings(self: *Self, allocator: std.mem.Allocator, input: describe_image_scan_findings.DescribeImageScanFindingsInput, options: describe_image_scan_findings.Options) !describe_image_scan_findings.DescribeImageScanFindingsOutput {
+    pub fn describeImageScanFindings(self: *Self, allocator: std.mem.Allocator, input: describe_image_scan_findings.DescribeImageScanFindingsInput, options: CallOptions) !describe_image_scan_findings.DescribeImageScanFindingsOutput {
         return describe_image_scan_findings.execute(self, allocator, input, options);
     }
 
@@ -253,7 +254,7 @@ pub const Client = struct {
     /// For more information, see [Managed
     /// signing](https://docs.aws.amazon.com/AmazonECR/latest/userguide/managed-signing.html) in the
     /// *Amazon Elastic Container Registry User Guide*.
-    pub fn describeImageSigningStatus(self: *Self, allocator: std.mem.Allocator, input: describe_image_signing_status.DescribeImageSigningStatusInput, options: describe_image_signing_status.Options) !describe_image_signing_status.DescribeImageSigningStatusOutput {
+    pub fn describeImageSigningStatus(self: *Self, allocator: std.mem.Allocator, input: describe_image_signing_status.DescribeImageSigningStatusInput, options: CallOptions) !describe_image_signing_status.DescribeImageSigningStatusOutput {
         return describe_image_signing_status.execute(self, allocator, input, options);
     }
 
@@ -274,12 +275,12 @@ pub const Client = struct {
     /// scanning, see [ Scan
     /// images for software vulnerabilities in Amazon
     /// ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html).
-    pub fn describeImages(self: *Self, allocator: std.mem.Allocator, input: describe_images.DescribeImagesInput, options: describe_images.Options) !describe_images.DescribeImagesOutput {
+    pub fn describeImages(self: *Self, allocator: std.mem.Allocator, input: describe_images.DescribeImagesInput, options: CallOptions) !describe_images.DescribeImagesOutput {
         return describe_images.execute(self, allocator, input, options);
     }
 
     /// Returns the pull through cache rules for a registry.
-    pub fn describePullThroughCacheRules(self: *Self, allocator: std.mem.Allocator, input: describe_pull_through_cache_rules.DescribePullThroughCacheRulesInput, options: describe_pull_through_cache_rules.Options) !describe_pull_through_cache_rules.DescribePullThroughCacheRulesOutput {
+    pub fn describePullThroughCacheRules(self: *Self, allocator: std.mem.Allocator, input: describe_pull_through_cache_rules.DescribePullThroughCacheRulesInput, options: CallOptions) !describe_pull_through_cache_rules.DescribePullThroughCacheRulesOutput {
         return describe_pull_through_cache_rules.execute(self, allocator, input, options);
     }
 
@@ -287,24 +288,24 @@ pub const Client = struct {
     /// repository
     /// can be created or updated with the PutReplicationConfiguration API
     /// action.
-    pub fn describeRegistry(self: *Self, allocator: std.mem.Allocator, input: describe_registry.DescribeRegistryInput, options: describe_registry.Options) !describe_registry.DescribeRegistryOutput {
+    pub fn describeRegistry(self: *Self, allocator: std.mem.Allocator, input: describe_registry.DescribeRegistryInput, options: CallOptions) !describe_registry.DescribeRegistryOutput {
         return describe_registry.execute(self, allocator, input, options);
     }
 
     /// Describes image repositories in a registry.
-    pub fn describeRepositories(self: *Self, allocator: std.mem.Allocator, input: describe_repositories.DescribeRepositoriesInput, options: describe_repositories.Options) !describe_repositories.DescribeRepositoriesOutput {
+    pub fn describeRepositories(self: *Self, allocator: std.mem.Allocator, input: describe_repositories.DescribeRepositoriesInput, options: CallOptions) !describe_repositories.DescribeRepositoriesOutput {
         return describe_repositories.execute(self, allocator, input, options);
     }
 
     /// Returns details about the repository creation templates in a registry. The
     /// `prefixes` request parameter can be used to return the details for a
     /// specific repository creation template.
-    pub fn describeRepositoryCreationTemplates(self: *Self, allocator: std.mem.Allocator, input: describe_repository_creation_templates.DescribeRepositoryCreationTemplatesInput, options: describe_repository_creation_templates.Options) !describe_repository_creation_templates.DescribeRepositoryCreationTemplatesOutput {
+    pub fn describeRepositoryCreationTemplates(self: *Self, allocator: std.mem.Allocator, input: describe_repository_creation_templates.DescribeRepositoryCreationTemplatesInput, options: CallOptions) !describe_repository_creation_templates.DescribeRepositoryCreationTemplatesOutput {
         return describe_repository_creation_templates.execute(self, allocator, input, options);
     }
 
     /// Retrieves the account setting value for the specified setting name.
-    pub fn getAccountSetting(self: *Self, allocator: std.mem.Allocator, input: get_account_setting.GetAccountSettingInput, options: get_account_setting.Options) !get_account_setting.GetAccountSettingOutput {
+    pub fn getAccountSetting(self: *Self, allocator: std.mem.Allocator, input: get_account_setting.GetAccountSettingInput, options: CallOptions) !get_account_setting.GetAccountSettingOutput {
         return get_account_setting.execute(self, allocator, input, options);
     }
 
@@ -318,7 +319,7 @@ pub const Client = struct {
     /// The CLI offers an `get-login-password` command that simplifies the login
     /// process. For more information, see [Registry
     /// authentication](https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html#registry_auth) in the *Amazon Elastic Container Registry User Guide*.
-    pub fn getAuthorizationToken(self: *Self, allocator: std.mem.Allocator, input: get_authorization_token.GetAuthorizationTokenInput, options: get_authorization_token.Options) !get_authorization_token.GetAuthorizationTokenOutput {
+    pub fn getAuthorizationToken(self: *Self, allocator: std.mem.Allocator, input: get_authorization_token.GetAuthorizationTokenInput, options: CallOptions) !get_authorization_token.GetAuthorizationTokenOutput {
         return get_authorization_token.execute(self, allocator, input, options);
     }
 
@@ -333,34 +334,34 @@ pub const Client = struct {
     /// This operation is used by the Amazon ECR proxy and is not generally used by
     /// customers for pulling and pushing images. In most cases, you should use the
     /// `docker` CLI to pull, tag, and push images.
-    pub fn getDownloadUrlForLayer(self: *Self, allocator: std.mem.Allocator, input: get_download_url_for_layer.GetDownloadUrlForLayerInput, options: get_download_url_for_layer.Options) !get_download_url_for_layer.GetDownloadUrlForLayerOutput {
+    pub fn getDownloadUrlForLayer(self: *Self, allocator: std.mem.Allocator, input: get_download_url_for_layer.GetDownloadUrlForLayerInput, options: CallOptions) !get_download_url_for_layer.GetDownloadUrlForLayerOutput {
         return get_download_url_for_layer.execute(self, allocator, input, options);
     }
 
     /// Retrieves the lifecycle policy for the specified repository.
-    pub fn getLifecyclePolicy(self: *Self, allocator: std.mem.Allocator, input: get_lifecycle_policy.GetLifecyclePolicyInput, options: get_lifecycle_policy.Options) !get_lifecycle_policy.GetLifecyclePolicyOutput {
+    pub fn getLifecyclePolicy(self: *Self, allocator: std.mem.Allocator, input: get_lifecycle_policy.GetLifecyclePolicyInput, options: CallOptions) !get_lifecycle_policy.GetLifecyclePolicyOutput {
         return get_lifecycle_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves the results of the lifecycle policy preview request for the
     /// specified
     /// repository.
-    pub fn getLifecyclePolicyPreview(self: *Self, allocator: std.mem.Allocator, input: get_lifecycle_policy_preview.GetLifecyclePolicyPreviewInput, options: get_lifecycle_policy_preview.Options) !get_lifecycle_policy_preview.GetLifecyclePolicyPreviewOutput {
+    pub fn getLifecyclePolicyPreview(self: *Self, allocator: std.mem.Allocator, input: get_lifecycle_policy_preview.GetLifecyclePolicyPreviewInput, options: CallOptions) !get_lifecycle_policy_preview.GetLifecyclePolicyPreviewOutput {
         return get_lifecycle_policy_preview.execute(self, allocator, input, options);
     }
 
     /// Retrieves the permissions policy for a registry.
-    pub fn getRegistryPolicy(self: *Self, allocator: std.mem.Allocator, input: get_registry_policy.GetRegistryPolicyInput, options: get_registry_policy.Options) !get_registry_policy.GetRegistryPolicyOutput {
+    pub fn getRegistryPolicy(self: *Self, allocator: std.mem.Allocator, input: get_registry_policy.GetRegistryPolicyInput, options: CallOptions) !get_registry_policy.GetRegistryPolicyOutput {
         return get_registry_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves the scanning configuration for a registry.
-    pub fn getRegistryScanningConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_registry_scanning_configuration.GetRegistryScanningConfigurationInput, options: get_registry_scanning_configuration.Options) !get_registry_scanning_configuration.GetRegistryScanningConfigurationOutput {
+    pub fn getRegistryScanningConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_registry_scanning_configuration.GetRegistryScanningConfigurationInput, options: CallOptions) !get_registry_scanning_configuration.GetRegistryScanningConfigurationOutput {
         return get_registry_scanning_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves the repository policy for the specified repository.
-    pub fn getRepositoryPolicy(self: *Self, allocator: std.mem.Allocator, input: get_repository_policy.GetRepositoryPolicyInput, options: get_repository_policy.Options) !get_repository_policy.GetRepositoryPolicyOutput {
+    pub fn getRepositoryPolicy(self: *Self, allocator: std.mem.Allocator, input: get_repository_policy.GetRepositoryPolicyInput, options: CallOptions) !get_repository_policy.GetRepositoryPolicyOutput {
         return get_repository_policy.execute(self, allocator, input, options);
     }
 
@@ -370,7 +371,7 @@ pub const Client = struct {
     /// For more information, see [Managed
     /// signing](https://docs.aws.amazon.com/AmazonECR/latest/userguide/managed-signing.html) in the
     /// *Amazon Elastic Container Registry User Guide*.
-    pub fn getSigningConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_signing_configuration.GetSigningConfigurationInput, options: get_signing_configuration.Options) !get_signing_configuration.GetSigningConfigurationOutput {
+    pub fn getSigningConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_signing_configuration.GetSigningConfigurationInput, options: CallOptions) !get_signing_configuration.GetSigningConfigurationOutput {
         return get_signing_configuration.execute(self, allocator, input, options);
     }
 
@@ -385,12 +386,12 @@ pub const Client = struct {
     /// This operation is used by the Amazon ECR proxy and is not generally used by
     /// customers for pulling and pushing images. In most cases, you should use the
     /// `docker` CLI to pull, tag, and push images.
-    pub fn initiateLayerUpload(self: *Self, allocator: std.mem.Allocator, input: initiate_layer_upload.InitiateLayerUploadInput, options: initiate_layer_upload.Options) !initiate_layer_upload.InitiateLayerUploadOutput {
+    pub fn initiateLayerUpload(self: *Self, allocator: std.mem.Allocator, input: initiate_layer_upload.InitiateLayerUploadInput, options: CallOptions) !initiate_layer_upload.InitiateLayerUploadOutput {
         return initiate_layer_upload.execute(self, allocator, input, options);
     }
 
     /// Lists the artifacts associated with a specified subject image.
-    pub fn listImageReferrers(self: *Self, allocator: std.mem.Allocator, input: list_image_referrers.ListImageReferrersInput, options: list_image_referrers.Options) !list_image_referrers.ListImageReferrersOutput {
+    pub fn listImageReferrers(self: *Self, allocator: std.mem.Allocator, input: list_image_referrers.ListImageReferrersInput, options: CallOptions) !list_image_referrers.ListImageReferrersOutput {
         return list_image_referrers.execute(self, allocator, input, options);
     }
 
@@ -403,23 +404,23 @@ pub const Client = struct {
     /// BatchDeleteImage operation to delete them. Or, you can filter your
     /// results to return only `TAGGED` images to list all of the tags in your
     /// repository.
-    pub fn listImages(self: *Self, allocator: std.mem.Allocator, input: list_images.ListImagesInput, options: list_images.Options) !list_images.ListImagesOutput {
+    pub fn listImages(self: *Self, allocator: std.mem.Allocator, input: list_images.ListImagesInput, options: CallOptions) !list_images.ListImagesOutput {
         return list_images.execute(self, allocator, input, options);
     }
 
     /// Lists the IAM principals that are excluded from having their image pull
     /// times recorded.
-    pub fn listPullTimeUpdateExclusions(self: *Self, allocator: std.mem.Allocator, input: list_pull_time_update_exclusions.ListPullTimeUpdateExclusionsInput, options: list_pull_time_update_exclusions.Options) !list_pull_time_update_exclusions.ListPullTimeUpdateExclusionsOutput {
+    pub fn listPullTimeUpdateExclusions(self: *Self, allocator: std.mem.Allocator, input: list_pull_time_update_exclusions.ListPullTimeUpdateExclusionsInput, options: CallOptions) !list_pull_time_update_exclusions.ListPullTimeUpdateExclusionsOutput {
         return list_pull_time_update_exclusions.execute(self, allocator, input, options);
     }
 
     /// List the tags for an Amazon ECR resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Allows you to change the basic scan type version or registry policy scope.
-    pub fn putAccountSetting(self: *Self, allocator: std.mem.Allocator, input: put_account_setting.PutAccountSettingInput, options: put_account_setting.Options) !put_account_setting.PutAccountSettingOutput {
+    pub fn putAccountSetting(self: *Self, allocator: std.mem.Allocator, input: put_account_setting.PutAccountSettingInput, options: CallOptions) !put_account_setting.PutAccountSettingOutput {
         return put_account_setting.execute(self, allocator, input, options);
     }
 
@@ -434,7 +435,7 @@ pub const Client = struct {
     /// This operation is used by the Amazon ECR proxy and is not generally used by
     /// customers for pulling and pushing images. In most cases, you should use the
     /// `docker` CLI to pull, tag, and push images.
-    pub fn putImage(self: *Self, allocator: std.mem.Allocator, input: put_image.PutImageInput, options: put_image.Options) !put_image.PutImageOutput {
+    pub fn putImage(self: *Self, allocator: std.mem.Allocator, input: put_image.PutImageInput, options: CallOptions) !put_image.PutImageOutput {
         return put_image.execute(self, allocator, input, options);
     }
 
@@ -444,7 +445,7 @@ pub const Client = struct {
     /// information, see PutRegistryScanningConfiguration.
     ///
     /// Updates the image scanning configuration for the specified repository.
-    pub fn putImageScanningConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_image_scanning_configuration.PutImageScanningConfigurationInput, options: put_image_scanning_configuration.Options) !put_image_scanning_configuration.PutImageScanningConfigurationOutput {
+    pub fn putImageScanningConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_image_scanning_configuration.PutImageScanningConfigurationInput, options: CallOptions) !put_image_scanning_configuration.PutImageScanningConfigurationOutput {
         return put_image_scanning_configuration.execute(self, allocator, input, options);
     }
 
@@ -452,7 +453,7 @@ pub const Client = struct {
     /// more
     /// information, see [Image tag
     /// mutability](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html) in the *Amazon Elastic Container Registry User Guide*.
-    pub fn putImageTagMutability(self: *Self, allocator: std.mem.Allocator, input: put_image_tag_mutability.PutImageTagMutabilityInput, options: put_image_tag_mutability.Options) !put_image_tag_mutability.PutImageTagMutabilityOutput {
+    pub fn putImageTagMutability(self: *Self, allocator: std.mem.Allocator, input: put_image_tag_mutability.PutImageTagMutabilityInput, options: CallOptions) !put_image_tag_mutability.PutImageTagMutabilityOutput {
         return put_image_tag_mutability.execute(self, allocator, input, options);
     }
 
@@ -460,7 +461,7 @@ pub const Client = struct {
     /// more
     /// information, see [Lifecycle policy
     /// template](https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html).
-    pub fn putLifecyclePolicy(self: *Self, allocator: std.mem.Allocator, input: put_lifecycle_policy.PutLifecyclePolicyInput, options: put_lifecycle_policy.Options) !put_lifecycle_policy.PutLifecyclePolicyOutput {
+    pub fn putLifecyclePolicy(self: *Self, allocator: std.mem.Allocator, input: put_lifecycle_policy.PutLifecyclePolicyInput, options: CallOptions) !put_lifecycle_policy.PutLifecyclePolicyOutput {
         return put_lifecycle_policy.execute(self, allocator, input, options);
     }
 
@@ -471,12 +472,12 @@ pub const Client = struct {
     /// when configuring cross-account replication. For more information, see
     /// [Registry
     /// permissions](https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html) in the *Amazon Elastic Container Registry User Guide*.
-    pub fn putRegistryPolicy(self: *Self, allocator: std.mem.Allocator, input: put_registry_policy.PutRegistryPolicyInput, options: put_registry_policy.Options) !put_registry_policy.PutRegistryPolicyOutput {
+    pub fn putRegistryPolicy(self: *Self, allocator: std.mem.Allocator, input: put_registry_policy.PutRegistryPolicyInput, options: CallOptions) !put_registry_policy.PutRegistryPolicyOutput {
         return put_registry_policy.execute(self, allocator, input, options);
     }
 
     /// Creates or updates the scanning configuration for your private registry.
-    pub fn putRegistryScanningConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_registry_scanning_configuration.PutRegistryScanningConfigurationInput, options: put_registry_scanning_configuration.Options) !put_registry_scanning_configuration.PutRegistryScanningConfigurationOutput {
+    pub fn putRegistryScanningConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_registry_scanning_configuration.PutRegistryScanningConfigurationInput, options: CallOptions) !put_registry_scanning_configuration.PutRegistryScanningConfigurationOutput {
         return put_registry_scanning_configuration.execute(self, allocator, input, options);
     }
 
@@ -498,7 +499,7 @@ pub const Client = struct {
     /// source account permission to replicate. This permission is controlled using
     /// a
     /// registry permissions policy. For more information, see PutRegistryPolicy.
-    pub fn putReplicationConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_replication_configuration.PutReplicationConfigurationInput, options: put_replication_configuration.Options) !put_replication_configuration.PutReplicationConfigurationOutput {
+    pub fn putReplicationConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_replication_configuration.PutReplicationConfigurationInput, options: CallOptions) !put_replication_configuration.PutReplicationConfigurationOutput {
         return put_replication_configuration.execute(self, allocator, input, options);
     }
 
@@ -514,14 +515,14 @@ pub const Client = struct {
     /// permission to sign payloads with the Amazon Web Services Signer signing
     /// profile referenced in the signing
     /// configuration.
-    pub fn putSigningConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_signing_configuration.PutSigningConfigurationInput, options: put_signing_configuration.Options) !put_signing_configuration.PutSigningConfigurationOutput {
+    pub fn putSigningConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_signing_configuration.PutSigningConfigurationInput, options: CallOptions) !put_signing_configuration.PutSigningConfigurationOutput {
         return put_signing_configuration.execute(self, allocator, input, options);
     }
 
     /// Adds an IAM principal to the pull time update exclusion list for a registry.
     /// Amazon ECR will not record the pull time if an excluded principal pulls an
     /// image.
-    pub fn registerPullTimeUpdateExclusion(self: *Self, allocator: std.mem.Allocator, input: register_pull_time_update_exclusion.RegisterPullTimeUpdateExclusionInput, options: register_pull_time_update_exclusion.Options) !register_pull_time_update_exclusion.RegisterPullTimeUpdateExclusionOutput {
+    pub fn registerPullTimeUpdateExclusion(self: *Self, allocator: std.mem.Allocator, input: register_pull_time_update_exclusion.RegisterPullTimeUpdateExclusionInput, options: CallOptions) !register_pull_time_update_exclusion.RegisterPullTimeUpdateExclusionOutput {
         return register_pull_time_update_exclusion.execute(self, allocator, input, options);
     }
 
@@ -529,7 +530,7 @@ pub const Client = struct {
     /// permissions.
     /// For more information, see [Amazon ECR Repository
     /// policies](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html) in the *Amazon Elastic Container Registry User Guide*.
-    pub fn setRepositoryPolicy(self: *Self, allocator: std.mem.Allocator, input: set_repository_policy.SetRepositoryPolicyInput, options: set_repository_policy.Options) !set_repository_policy.SetRepositoryPolicyOutput {
+    pub fn setRepositoryPolicy(self: *Self, allocator: std.mem.Allocator, input: set_repository_policy.SetRepositoryPolicyInput, options: CallOptions) !set_repository_policy.SetRepositoryPolicyOutput {
         return set_repository_policy.execute(self, allocator, input, options);
     }
 
@@ -543,7 +544,7 @@ pub const Client = struct {
     /// scans
     /// initiated by the StartImageScan API. For more information, see [Basic
     /// scanning](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning-basic.html) in the *Amazon Elastic Container Registry User Guide*.
-    pub fn startImageScan(self: *Self, allocator: std.mem.Allocator, input: start_image_scan.StartImageScanInput, options: start_image_scan.Options) !start_image_scan.StartImageScanOutput {
+    pub fn startImageScan(self: *Self, allocator: std.mem.Allocator, input: start_image_scan.StartImageScanInput, options: CallOptions) !start_image_scan.StartImageScanOutput {
         return start_image_scan.execute(self, allocator, input, options);
     }
 
@@ -551,36 +552,36 @@ pub const Client = struct {
     /// allows you
     /// to see the results before associating the lifecycle policy with the
     /// repository.
-    pub fn startLifecyclePolicyPreview(self: *Self, allocator: std.mem.Allocator, input: start_lifecycle_policy_preview.StartLifecyclePolicyPreviewInput, options: start_lifecycle_policy_preview.Options) !start_lifecycle_policy_preview.StartLifecyclePolicyPreviewOutput {
+    pub fn startLifecyclePolicyPreview(self: *Self, allocator: std.mem.Allocator, input: start_lifecycle_policy_preview.StartLifecyclePolicyPreviewInput, options: CallOptions) !start_lifecycle_policy_preview.StartLifecyclePolicyPreviewOutput {
         return start_lifecycle_policy_preview.execute(self, allocator, input, options);
     }
 
     /// Adds specified tags to a resource with the specified ARN. Existing tags on a
     /// resource
     /// are not changed if they are not specified in the request parameters.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes specified tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Transitions an image between storage classes. You can transition images from
     /// Amazon ECR standard storage class to Amazon ECR archival storage class for
     /// long-term storage, or restore archived images back to Amazon ECR standard.
-    pub fn updateImageStorageClass(self: *Self, allocator: std.mem.Allocator, input: update_image_storage_class.UpdateImageStorageClassInput, options: update_image_storage_class.Options) !update_image_storage_class.UpdateImageStorageClassOutput {
+    pub fn updateImageStorageClass(self: *Self, allocator: std.mem.Allocator, input: update_image_storage_class.UpdateImageStorageClassInput, options: CallOptions) !update_image_storage_class.UpdateImageStorageClassOutput {
         return update_image_storage_class.execute(self, allocator, input, options);
     }
 
     /// Updates an existing pull through cache rule.
-    pub fn updatePullThroughCacheRule(self: *Self, allocator: std.mem.Allocator, input: update_pull_through_cache_rule.UpdatePullThroughCacheRuleInput, options: update_pull_through_cache_rule.Options) !update_pull_through_cache_rule.UpdatePullThroughCacheRuleOutput {
+    pub fn updatePullThroughCacheRule(self: *Self, allocator: std.mem.Allocator, input: update_pull_through_cache_rule.UpdatePullThroughCacheRuleInput, options: CallOptions) !update_pull_through_cache_rule.UpdatePullThroughCacheRuleOutput {
         return update_pull_through_cache_rule.execute(self, allocator, input, options);
     }
 
     /// Updates an existing repository creation template.
-    pub fn updateRepositoryCreationTemplate(self: *Self, allocator: std.mem.Allocator, input: update_repository_creation_template.UpdateRepositoryCreationTemplateInput, options: update_repository_creation_template.Options) !update_repository_creation_template.UpdateRepositoryCreationTemplateOutput {
+    pub fn updateRepositoryCreationTemplate(self: *Self, allocator: std.mem.Allocator, input: update_repository_creation_template.UpdateRepositoryCreationTemplateInput, options: CallOptions) !update_repository_creation_template.UpdateRepositoryCreationTemplateOutput {
         return update_repository_creation_template.execute(self, allocator, input, options);
     }
 
@@ -595,7 +596,7 @@ pub const Client = struct {
     /// This operation is used by the Amazon ECR proxy and is not generally used by
     /// customers for pulling and pushing images. In most cases, you should use the
     /// `docker` CLI to pull, tag, and push images.
-    pub fn uploadLayerPart(self: *Self, allocator: std.mem.Allocator, input: upload_layer_part.UploadLayerPartInput, options: upload_layer_part.Options) !upload_layer_part.UploadLayerPartOutput {
+    pub fn uploadLayerPart(self: *Self, allocator: std.mem.Allocator, input: upload_layer_part.UploadLayerPartInput, options: CallOptions) !upload_layer_part.UploadLayerPartOutput {
         return upload_layer_part.execute(self, allocator, input, options);
     }
 
@@ -605,7 +606,7 @@ pub const Client = struct {
     /// Secrets Manager secret, verify the
     /// syntax, and then validate that authentication to the upstream registry is
     /// successful.
-    pub fn validatePullThroughCacheRule(self: *Self, allocator: std.mem.Allocator, input: validate_pull_through_cache_rule.ValidatePullThroughCacheRuleInput, options: validate_pull_through_cache_rule.Options) !validate_pull_through_cache_rule.ValidatePullThroughCacheRuleOutput {
+    pub fn validatePullThroughCacheRule(self: *Self, allocator: std.mem.Allocator, input: validate_pull_through_cache_rule.ValidatePullThroughCacheRuleInput, options: CallOptions) !validate_pull_through_cache_rule.ValidatePullThroughCacheRuleOutput {
         return validate_pull_through_cache_rule.execute(self, allocator, input, options);
     }
 

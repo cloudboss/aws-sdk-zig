@@ -108,6 +108,7 @@ const update_anomaly = @import("update_anomaly.zig");
 const update_delivery_configuration = @import("update_delivery_configuration.zig");
 const update_log_anomaly_detector = @import("update_log_anomaly_detector.zig");
 const update_scheduled_query = @import("update_scheduled_query.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -195,7 +196,7 @@ pub const Client = struct {
     /// If you attempt to associate a KMS key with a log group but the KMS key does
     /// not exist or the KMS key is disabled, you receive an
     /// `InvalidParameterException` error.
-    pub fn associateKmsKey(self: *Self, allocator: std.mem.Allocator, input: associate_kms_key.AssociateKmsKeyInput, options: associate_kms_key.Options) !associate_kms_key.AssociateKmsKeyOutput {
+    pub fn associateKmsKey(self: *Self, allocator: std.mem.Allocator, input: associate_kms_key.AssociateKmsKeyInput, options: CallOptions) !associate_kms_key.AssociateKmsKeyOutput {
         return associate_kms_key.execute(self, allocator, input, options);
     }
 
@@ -204,20 +205,20 @@ pub const Client = struct {
     /// namespace. This enables querying log data using analytics engines that
     /// support Iceberg such as
     /// Amazon Athena, Amazon Redshift, and Apache Spark.
-    pub fn associateSourceToS3TableIntegration(self: *Self, allocator: std.mem.Allocator, input: associate_source_to_s3_table_integration.AssociateSourceToS3TableIntegrationInput, options: associate_source_to_s3_table_integration.Options) !associate_source_to_s3_table_integration.AssociateSourceToS3TableIntegrationOutput {
+    pub fn associateSourceToS3TableIntegration(self: *Self, allocator: std.mem.Allocator, input: associate_source_to_s3_table_integration.AssociateSourceToS3TableIntegrationInput, options: CallOptions) !associate_source_to_s3_table_integration.AssociateSourceToS3TableIntegrationOutput {
         return associate_source_to_s3_table_integration.execute(self, allocator, input, options);
     }
 
     /// Cancels the specified export task.
     ///
     /// The task must be in the `PENDING` or `RUNNING` state.
-    pub fn cancelExportTask(self: *Self, allocator: std.mem.Allocator, input: cancel_export_task.CancelExportTaskInput, options: cancel_export_task.Options) !cancel_export_task.CancelExportTaskOutput {
+    pub fn cancelExportTask(self: *Self, allocator: std.mem.Allocator, input: cancel_export_task.CancelExportTaskInput, options: CallOptions) !cancel_export_task.CancelExportTaskOutput {
         return cancel_export_task.execute(self, allocator, input, options);
     }
 
     /// Cancels an active import task and stops importing data from the CloudTrail
     /// Lake Event Data Store.
-    pub fn cancelImportTask(self: *Self, allocator: std.mem.Allocator, input: cancel_import_task.CancelImportTaskInput, options: cancel_import_task.Options) !cancel_import_task.CancelImportTaskOutput {
+    pub fn cancelImportTask(self: *Self, allocator: std.mem.Allocator, input: cancel_import_task.CancelImportTaskInput, options: CallOptions) !cancel_import_task.CancelImportTaskOutput {
         return cancel_import_task.execute(self, allocator, input, options);
     }
 
@@ -262,7 +263,7 @@ pub const Client = struct {
     ///
     /// To update an existing delivery configuration, use
     /// [UpdateDeliveryConfiguration](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html).
-    pub fn createDelivery(self: *Self, allocator: std.mem.Allocator, input: create_delivery.CreateDeliveryInput, options: create_delivery.Options) !create_delivery.CreateDeliveryOutput {
+    pub fn createDelivery(self: *Self, allocator: std.mem.Allocator, input: create_delivery.CreateDeliveryInput, options: CallOptions) !create_delivery.CreateDeliveryOutput {
         return create_delivery.execute(self, allocator, input, options);
     }
 
@@ -308,7 +309,7 @@ pub const Client = struct {
     /// Time-based sorting on chunks of log data inside an exported file is not
     /// guaranteed. You
     /// can sort the exported log field data by using Linux utilities.
-    pub fn createExportTask(self: *Self, allocator: std.mem.Allocator, input: create_export_task.CreateExportTaskInput, options: create_export_task.Options) !create_export_task.CreateExportTaskOutput {
+    pub fn createExportTask(self: *Self, allocator: std.mem.Allocator, input: create_export_task.CreateExportTaskInput, options: CallOptions) !create_export_task.CreateExportTaskOutput {
         return create_export_task.execute(self, allocator, input, options);
     }
 
@@ -357,7 +358,7 @@ pub const Client = struct {
     ///
     /// * The data being imported must be within the specified source's retention
     ///   period.
-    pub fn createImportTask(self: *Self, allocator: std.mem.Allocator, input: create_import_task.CreateImportTaskInput, options: create_import_task.Options) !create_import_task.CreateImportTaskOutput {
+    pub fn createImportTask(self: *Self, allocator: std.mem.Allocator, input: create_import_task.CreateImportTaskInput, options: CallOptions) !create_import_task.CreateImportTaskOutput {
         return create_import_task.execute(self, allocator, input, options);
     }
 
@@ -398,7 +399,7 @@ pub const Client = struct {
     /// sensitive log
     /// data with
     /// masking](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html).
-    pub fn createLogAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: create_log_anomaly_detector.CreateLogAnomalyDetectorInput, options: create_log_anomaly_detector.Options) !create_log_anomaly_detector.CreateLogAnomalyDetectorOutput {
+    pub fn createLogAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: create_log_anomaly_detector.CreateLogAnomalyDetectorInput, options: CallOptions) !create_log_anomaly_detector.CreateLogAnomalyDetectorOutput {
         return create_log_anomaly_detector.execute(self, allocator, input, options);
     }
 
@@ -439,7 +440,7 @@ pub const Client = struct {
     /// asymmetric KMS key with your log group. For more information, see [Using
     /// Symmetric and Asymmetric
     /// Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html).
-    pub fn createLogGroup(self: *Self, allocator: std.mem.Allocator, input: create_log_group.CreateLogGroupInput, options: create_log_group.Options) !create_log_group.CreateLogGroupOutput {
+    pub fn createLogGroup(self: *Self, allocator: std.mem.Allocator, input: create_log_group.CreateLogGroupInput, options: CallOptions) !create_log_group.CreateLogGroupOutput {
         return create_log_group.execute(self, allocator, input, options);
     }
 
@@ -461,7 +462,7 @@ pub const Client = struct {
     /// * Log stream names can be between 1 and 512 characters long.
     ///
     /// * Don't use ':' (colon) or '*' (asterisk) characters.
-    pub fn createLogStream(self: *Self, allocator: std.mem.Allocator, input: create_log_stream.CreateLogStreamInput, options: create_log_stream.Options) !create_log_stream.CreateLogStreamOutput {
+    pub fn createLogStream(self: *Self, allocator: std.mem.Allocator, input: create_log_stream.CreateLogStreamInput, options: CallOptions) !create_log_stream.CreateLogStreamOutput {
         return create_log_stream.execute(self, allocator, input, options);
     }
 
@@ -472,7 +473,7 @@ pub const Client = struct {
     /// patterns and anomalies in your log data. Query results can be delivered to
     /// Amazon S3 for analysis
     /// or further processing.
-    pub fn createScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: create_scheduled_query.CreateScheduledQueryInput, options: create_scheduled_query.Options) !create_scheduled_query.CreateScheduledQueryOutput {
+    pub fn createScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: create_scheduled_query.CreateScheduledQueryInput, options: CallOptions) !create_scheduled_query.CreateScheduledQueryOutput {
         return create_scheduled_query.execute(self, allocator, input, options);
     }
 
@@ -515,7 +516,7 @@ pub const Client = struct {
     /// you deleted the policy will still be used for up to 30 days to improve
     /// CloudWatch Logs
     /// Insights queries.
-    pub fn deleteAccountPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_account_policy.DeleteAccountPolicyInput, options: delete_account_policy.Options) !delete_account_policy.DeleteAccountPolicyOutput {
+    pub fn deleteAccountPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_account_policy.DeleteAccountPolicyInput, options: CallOptions) !delete_account_policy.DeleteAccountPolicyOutput {
         return delete_account_policy.execute(self, allocator, input, options);
     }
 
@@ -523,7 +524,7 @@ pub const Client = struct {
     ///
     /// For more information about data protection policies, see
     /// [PutDataProtectionPolicy](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html).
-    pub fn deleteDataProtectionPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_data_protection_policy.DeleteDataProtectionPolicyInput, options: delete_data_protection_policy.Options) !delete_data_protection_policy.DeleteDataProtectionPolicyOutput {
+    pub fn deleteDataProtectionPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_data_protection_policy.DeleteDataProtectionPolicyInput, options: CallOptions) !delete_data_protection_policy.DeleteDataProtectionPolicyOutput {
         return delete_data_protection_policy.execute(self, allocator, input, options);
     }
 
@@ -534,7 +535,7 @@ pub const Client = struct {
     /// source and delivery destination. It does not delete the delivery destination
     /// or the delivery
     /// source.
-    pub fn deleteDelivery(self: *Self, allocator: std.mem.Allocator, input: delete_delivery.DeleteDeliveryInput, options: delete_delivery.Options) !delete_delivery.DeleteDeliveryOutput {
+    pub fn deleteDelivery(self: *Self, allocator: std.mem.Allocator, input: delete_delivery.DeleteDeliveryInput, options: CallOptions) !delete_delivery.DeleteDeliveryOutput {
         return delete_delivery.execute(self, allocator, input, options);
     }
 
@@ -548,14 +549,14 @@ pub const Client = struct {
     /// destination, use the
     /// [DescribeDeliveries](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html) operation and check the `deliveryDestinationArn`
     /// field in the results.
-    pub fn deleteDeliveryDestination(self: *Self, allocator: std.mem.Allocator, input: delete_delivery_destination.DeleteDeliveryDestinationInput, options: delete_delivery_destination.Options) !delete_delivery_destination.DeleteDeliveryDestinationOutput {
+    pub fn deleteDeliveryDestination(self: *Self, allocator: std.mem.Allocator, input: delete_delivery_destination.DeleteDeliveryDestinationInput, options: CallOptions) !delete_delivery_destination.DeleteDeliveryDestinationOutput {
         return delete_delivery_destination.execute(self, allocator, input, options);
     }
 
     /// Deletes a delivery destination policy. For more information about these
     /// policies, see
     /// [PutDeliveryDestinationPolicy](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html).
-    pub fn deleteDeliveryDestinationPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_delivery_destination_policy.DeleteDeliveryDestinationPolicyInput, options: delete_delivery_destination_policy.Options) !delete_delivery_destination_policy.DeleteDeliveryDestinationPolicyOutput {
+    pub fn deleteDeliveryDestinationPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_delivery_destination_policy.DeleteDeliveryDestinationPolicyInput, options: CallOptions) !delete_delivery_destination_policy.DeleteDeliveryDestinationPolicyOutput {
         return delete_delivery_destination_policy.execute(self, allocator, input, options);
     }
 
@@ -569,7 +570,7 @@ pub const Client = struct {
     /// the
     /// [DescribeDeliveries](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html) operation and check the `deliverySourceName` field in
     /// the results.
-    pub fn deleteDeliverySource(self: *Self, allocator: std.mem.Allocator, input: delete_delivery_source.DeleteDeliverySourceInput, options: delete_delivery_source.Options) !delete_delivery_source.DeleteDeliverySourceOutput {
+    pub fn deleteDeliverySource(self: *Self, allocator: std.mem.Allocator, input: delete_delivery_source.DeleteDeliverySourceInput, options: CallOptions) !delete_delivery_source.DeleteDeliverySourceOutput {
         return delete_delivery_source.execute(self, allocator, input, options);
     }
 
@@ -578,7 +579,7 @@ pub const Client = struct {
     /// that publish to it. This operation does not delete the physical resource
     /// encapsulated by the
     /// destination.
-    pub fn deleteDestination(self: *Self, allocator: std.mem.Allocator, input: delete_destination.DeleteDestinationInput, options: delete_destination.Options) !delete_destination.DeleteDestinationOutput {
+    pub fn deleteDestination(self: *Self, allocator: std.mem.Allocator, input: delete_destination.DeleteDestinationInput, options: CallOptions) !delete_destination.DeleteDestinationOutput {
         return delete_destination.execute(self, allocator, input, options);
     }
 
@@ -607,7 +608,7 @@ pub const Client = struct {
     /// facet configurations, and preserves any data source-based account policies
     /// that may apply to
     /// the log group.
-    pub fn deleteIndexPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_index_policy.DeleteIndexPolicyInput, options: delete_index_policy.Options) !delete_index_policy.DeleteIndexPolicyOutput {
+    pub fn deleteIndexPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_index_policy.DeleteIndexPolicyInput, options: CallOptions) !delete_index_policy.DeleteIndexPolicyOutput {
         return delete_index_policy.execute(self, allocator, input, options);
     }
 
@@ -620,31 +621,31 @@ pub const Client = struct {
     /// dashboards powered by OpenSearch Service will be deleted and the data that
     /// was on them will no
     /// longer be accessible.
-    pub fn deleteIntegration(self: *Self, allocator: std.mem.Allocator, input: delete_integration.DeleteIntegrationInput, options: delete_integration.Options) !delete_integration.DeleteIntegrationOutput {
+    pub fn deleteIntegration(self: *Self, allocator: std.mem.Allocator, input: delete_integration.DeleteIntegrationInput, options: CallOptions) !delete_integration.DeleteIntegrationOutput {
         return delete_integration.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified CloudWatch Logs anomaly detector.
-    pub fn deleteLogAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: delete_log_anomaly_detector.DeleteLogAnomalyDetectorInput, options: delete_log_anomaly_detector.Options) !delete_log_anomaly_detector.DeleteLogAnomalyDetectorOutput {
+    pub fn deleteLogAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: delete_log_anomaly_detector.DeleteLogAnomalyDetectorInput, options: CallOptions) !delete_log_anomaly_detector.DeleteLogAnomalyDetectorOutput {
         return delete_log_anomaly_detector.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified log group and permanently deletes all the archived log
     /// events
     /// associated with the log group.
-    pub fn deleteLogGroup(self: *Self, allocator: std.mem.Allocator, input: delete_log_group.DeleteLogGroupInput, options: delete_log_group.Options) !delete_log_group.DeleteLogGroupOutput {
+    pub fn deleteLogGroup(self: *Self, allocator: std.mem.Allocator, input: delete_log_group.DeleteLogGroupInput, options: CallOptions) !delete_log_group.DeleteLogGroupOutput {
         return delete_log_group.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified log stream and permanently deletes all the archived
     /// log events
     /// associated with the log stream.
-    pub fn deleteLogStream(self: *Self, allocator: std.mem.Allocator, input: delete_log_stream.DeleteLogStreamInput, options: delete_log_stream.Options) !delete_log_stream.DeleteLogStreamOutput {
+    pub fn deleteLogStream(self: *Self, allocator: std.mem.Allocator, input: delete_log_stream.DeleteLogStreamInput, options: CallOptions) !delete_log_stream.DeleteLogStreamOutput {
         return delete_log_stream.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified metric filter.
-    pub fn deleteMetricFilter(self: *Self, allocator: std.mem.Allocator, input: delete_metric_filter.DeleteMetricFilterInput, options: delete_metric_filter.Options) !delete_metric_filter.DeleteMetricFilterOutput {
+    pub fn deleteMetricFilter(self: *Self, allocator: std.mem.Allocator, input: delete_metric_filter.DeleteMetricFilterInput, options: CallOptions) !delete_metric_filter.DeleteMetricFilterOutput {
         return delete_metric_filter.execute(self, allocator, input, options);
     }
 
@@ -657,14 +658,14 @@ pub const Client = struct {
     /// You must have the `logs:DeleteQueryDefinition` permission to be able to
     /// perform
     /// this operation.
-    pub fn deleteQueryDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_query_definition.DeleteQueryDefinitionInput, options: delete_query_definition.Options) !delete_query_definition.DeleteQueryDefinitionOutput {
+    pub fn deleteQueryDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_query_definition.DeleteQueryDefinitionInput, options: CallOptions) !delete_query_definition.DeleteQueryDefinitionOutput {
         return delete_query_definition.execute(self, allocator, input, options);
     }
 
     /// Deletes a resource policy from this account. This revokes the access of the
     /// identities
     /// in that policy to put log events to this account.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -672,19 +673,19 @@ pub const Client = struct {
     ///
     /// Log events do not expire if they belong to log groups without a retention
     /// policy.
-    pub fn deleteRetentionPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_retention_policy.DeleteRetentionPolicyInput, options: delete_retention_policy.Options) !delete_retention_policy.DeleteRetentionPolicyOutput {
+    pub fn deleteRetentionPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_retention_policy.DeleteRetentionPolicyInput, options: CallOptions) !delete_retention_policy.DeleteRetentionPolicyOutput {
         return delete_retention_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes a scheduled query and stops all future executions. This operation
     /// also removes any
     /// configured actions and associated resources.
-    pub fn deleteScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: delete_scheduled_query.DeleteScheduledQueryInput, options: delete_scheduled_query.Options) !delete_scheduled_query.DeleteScheduledQueryOutput {
+    pub fn deleteScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: delete_scheduled_query.DeleteScheduledQueryInput, options: CallOptions) !delete_scheduled_query.DeleteScheduledQueryOutput {
         return delete_scheduled_query.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified subscription filter.
-    pub fn deleteSubscriptionFilter(self: *Self, allocator: std.mem.Allocator, input: delete_subscription_filter.DeleteSubscriptionFilterInput, options: delete_subscription_filter.Options) !delete_subscription_filter.DeleteSubscriptionFilterOutput {
+    pub fn deleteSubscriptionFilter(self: *Self, allocator: std.mem.Allocator, input: delete_subscription_filter.DeleteSubscriptionFilterInput, options: CallOptions) !delete_subscription_filter.DeleteSubscriptionFilterOutput {
         return delete_subscription_filter.execute(self, allocator, input, options);
     }
 
@@ -699,7 +700,7 @@ pub const Client = struct {
     /// After you delete a transformer, be sure to edit any metric filters or
     /// subscription filters
     /// that relied on the transformed versions of the log events.
-    pub fn deleteTransformer(self: *Self, allocator: std.mem.Allocator, input: delete_transformer.DeleteTransformerInput, options: delete_transformer.Options) !delete_transformer.DeleteTransformerOutput {
+    pub fn deleteTransformer(self: *Self, allocator: std.mem.Allocator, input: delete_transformer.DeleteTransformerInput, options: CallOptions) !delete_transformer.DeleteTransformerOutput {
         return delete_transformer.execute(self, allocator, input, options);
     }
 
@@ -723,7 +724,7 @@ pub const Client = struct {
     /// * To see field index policies, you must have the
     ///   `logs:DescribeIndexPolicies`
     /// and `logs:DescribeAccountPolicies` permissions.
-    pub fn describeAccountPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_account_policies.DescribeAccountPoliciesInput, options: describe_account_policies.Options) !describe_account_policies.DescribeAccountPoliciesOutput {
+    pub fn describeAccountPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_account_policies.DescribeAccountPoliciesInput, options: CallOptions) !describe_account_policies.DescribeAccountPoliciesOutput {
         return describe_account_policies.execute(self, allocator, input, options);
     }
 
@@ -733,7 +734,7 @@ pub const Client = struct {
     /// information about
     /// deliveries, see
     /// [CreateDelivery](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html).
-    pub fn describeConfigurationTemplates(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_templates.DescribeConfigurationTemplatesInput, options: describe_configuration_templates.Options) !describe_configuration_templates.DescribeConfigurationTemplatesOutput {
+    pub fn describeConfigurationTemplates(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_templates.DescribeConfigurationTemplatesInput, options: CallOptions) !describe_configuration_templates.DescribeConfigurationTemplatesOutput {
         return describe_configuration_templates.execute(self, allocator, input, options);
     }
 
@@ -754,32 +755,32 @@ pub const Client = struct {
     /// logging from
     /// Amazon Web Services
     /// services.](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html)
-    pub fn describeDeliveries(self: *Self, allocator: std.mem.Allocator, input: describe_deliveries.DescribeDeliveriesInput, options: describe_deliveries.Options) !describe_deliveries.DescribeDeliveriesOutput {
+    pub fn describeDeliveries(self: *Self, allocator: std.mem.Allocator, input: describe_deliveries.DescribeDeliveriesInput, options: CallOptions) !describe_deliveries.DescribeDeliveriesOutput {
         return describe_deliveries.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of the delivery destinations that have been created in the
     /// account.
-    pub fn describeDeliveryDestinations(self: *Self, allocator: std.mem.Allocator, input: describe_delivery_destinations.DescribeDeliveryDestinationsInput, options: describe_delivery_destinations.Options) !describe_delivery_destinations.DescribeDeliveryDestinationsOutput {
+    pub fn describeDeliveryDestinations(self: *Self, allocator: std.mem.Allocator, input: describe_delivery_destinations.DescribeDeliveryDestinationsInput, options: CallOptions) !describe_delivery_destinations.DescribeDeliveryDestinationsOutput {
         return describe_delivery_destinations.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of the delivery sources that have been created in the
     /// account.
-    pub fn describeDeliverySources(self: *Self, allocator: std.mem.Allocator, input: describe_delivery_sources.DescribeDeliverySourcesInput, options: describe_delivery_sources.Options) !describe_delivery_sources.DescribeDeliverySourcesOutput {
+    pub fn describeDeliverySources(self: *Self, allocator: std.mem.Allocator, input: describe_delivery_sources.DescribeDeliverySourcesInput, options: CallOptions) !describe_delivery_sources.DescribeDeliverySourcesOutput {
         return describe_delivery_sources.execute(self, allocator, input, options);
     }
 
     /// Lists all your destinations. The results are ASCII-sorted by destination
     /// name.
-    pub fn describeDestinations(self: *Self, allocator: std.mem.Allocator, input: describe_destinations.DescribeDestinationsInput, options: describe_destinations.Options) !describe_destinations.DescribeDestinationsOutput {
+    pub fn describeDestinations(self: *Self, allocator: std.mem.Allocator, input: describe_destinations.DescribeDestinationsInput, options: CallOptions) !describe_destinations.DescribeDestinationsOutput {
         return describe_destinations.execute(self, allocator, input, options);
     }
 
     /// Lists the specified export tasks. You can list all your export tasks or
     /// filter the
     /// results based on task ID or task status.
-    pub fn describeExportTasks(self: *Self, allocator: std.mem.Allocator, input: describe_export_tasks.DescribeExportTasksInput, options: describe_export_tasks.Options) !describe_export_tasks.DescribeExportTasksOutput {
+    pub fn describeExportTasks(self: *Self, allocator: std.mem.Allocator, input: describe_export_tasks.DescribeExportTasksInput, options: CallOptions) !describe_export_tasks.DescribeExportTasksOutput {
         return describe_export_tasks.execute(self, allocator, input, options);
     }
 
@@ -787,7 +788,7 @@ pub const Client = struct {
     /// log data. For
     /// more information about field index policies, see
     /// [PutIndexPolicy](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html).
-    pub fn describeFieldIndexes(self: *Self, allocator: std.mem.Allocator, input: describe_field_indexes.DescribeFieldIndexesInput, options: describe_field_indexes.Options) !describe_field_indexes.DescribeFieldIndexesOutput {
+    pub fn describeFieldIndexes(self: *Self, allocator: std.mem.Allocator, input: describe_field_indexes.DescribeFieldIndexesInput, options: CallOptions) !describe_field_indexes.DescribeFieldIndexesOutput {
         return describe_field_indexes.execute(self, allocator, input, options);
     }
 
@@ -795,13 +796,13 @@ pub const Client = struct {
     /// task, including their status and any error messages.
     /// For CloudTrail Event Data Store sources, a batch refers to a subset of
     /// stored events grouped by their eventTime.
-    pub fn describeImportTaskBatches(self: *Self, allocator: std.mem.Allocator, input: describe_import_task_batches.DescribeImportTaskBatchesInput, options: describe_import_task_batches.Options) !describe_import_task_batches.DescribeImportTaskBatchesOutput {
+    pub fn describeImportTaskBatches(self: *Self, allocator: std.mem.Allocator, input: describe_import_task_batches.DescribeImportTaskBatchesInput, options: CallOptions) !describe_import_task_batches.DescribeImportTaskBatchesOutput {
         return describe_import_task_batches.execute(self, allocator, input, options);
     }
 
     /// Lists and describes import tasks, with optional filtering by import status
     /// and source ARN.
-    pub fn describeImportTasks(self: *Self, allocator: std.mem.Allocator, input: describe_import_tasks.DescribeImportTasksInput, options: describe_import_tasks.Options) !describe_import_tasks.DescribeImportTasksOutput {
+    pub fn describeImportTasks(self: *Self, allocator: std.mem.Allocator, input: describe_import_tasks.DescribeImportTasksInput, options: CallOptions) !describe_import_tasks.DescribeImportTasksOutput {
         return describe_import_tasks.execute(self, allocator, input, options);
     }
 
@@ -821,7 +822,7 @@ pub const Client = struct {
     ///
     /// To find information about only account-level policies, use
     /// [DescribeAccountPolicies](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeAccountPolicies.html) instead.
-    pub fn describeIndexPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_index_policies.DescribeIndexPoliciesInput, options: describe_index_policies.Options) !describe_index_policies.DescribeIndexPoliciesOutput {
+    pub fn describeIndexPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_index_policies.DescribeIndexPoliciesInput, options: CallOptions) !describe_index_policies.DescribeIndexPoliciesOutput {
         return describe_index_policies.execute(self, allocator, input, options);
     }
 
@@ -849,7 +850,7 @@ pub const Client = struct {
     /// more information,
     /// see [CloudWatch cross-account
     /// observability](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
-    pub fn describeLogGroups(self: *Self, allocator: std.mem.Allocator, input: describe_log_groups.DescribeLogGroupsInput, options: describe_log_groups.Options) !describe_log_groups.DescribeLogGroupsOutput {
+    pub fn describeLogGroups(self: *Self, allocator: std.mem.Allocator, input: describe_log_groups.DescribeLogGroupsInput, options: CallOptions) !describe_log_groups.DescribeLogGroupsOutput {
         return describe_log_groups.execute(self, allocator, input, options);
     }
 
@@ -873,7 +874,7 @@ pub const Client = struct {
     /// more information,
     /// see [CloudWatch cross-account
     /// observability](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
-    pub fn describeLogStreams(self: *Self, allocator: std.mem.Allocator, input: describe_log_streams.DescribeLogStreamsInput, options: describe_log_streams.Options) !describe_log_streams.DescribeLogStreamsOutput {
+    pub fn describeLogStreams(self: *Self, allocator: std.mem.Allocator, input: describe_log_streams.DescribeLogStreamsInput, options: CallOptions) !describe_log_streams.DescribeLogStreamsOutput {
         return describe_log_streams.execute(self, allocator, input, options);
     }
 
@@ -882,7 +883,7 @@ pub const Client = struct {
     /// the results by log name, prefix, metric name, or metric namespace. The
     /// results are
     /// ASCII-sorted by filter name.
-    pub fn describeMetricFilters(self: *Self, allocator: std.mem.Allocator, input: describe_metric_filters.DescribeMetricFiltersInput, options: describe_metric_filters.Options) !describe_metric_filters.DescribeMetricFiltersOutput {
+    pub fn describeMetricFilters(self: *Self, allocator: std.mem.Allocator, input: describe_metric_filters.DescribeMetricFiltersInput, options: CallOptions) !describe_metric_filters.DescribeMetricFiltersOutput {
         return describe_metric_filters.execute(self, allocator, input, options);
     }
 
@@ -899,7 +900,7 @@ pub const Client = struct {
     /// results alongside manually initiated queries, providing visibility into all
     /// query activity in
     /// your account.
-    pub fn describeQueries(self: *Self, allocator: std.mem.Allocator, input: describe_queries.DescribeQueriesInput, options: describe_queries.Options) !describe_queries.DescribeQueriesOutput {
+    pub fn describeQueries(self: *Self, allocator: std.mem.Allocator, input: describe_queries.DescribeQueriesInput, options: CallOptions) !describe_queries.DescribeQueriesOutput {
         return describe_queries.execute(self, allocator, input, options);
     }
 
@@ -912,12 +913,12 @@ pub const Client = struct {
     /// You can use the `queryDefinitionNamePrefix` parameter to limit the results
     /// to
     /// only the query definitions that have names that start with a certain string.
-    pub fn describeQueryDefinitions(self: *Self, allocator: std.mem.Allocator, input: describe_query_definitions.DescribeQueryDefinitionsInput, options: describe_query_definitions.Options) !describe_query_definitions.DescribeQueryDefinitionsOutput {
+    pub fn describeQueryDefinitions(self: *Self, allocator: std.mem.Allocator, input: describe_query_definitions.DescribeQueryDefinitionsInput, options: CallOptions) !describe_query_definitions.DescribeQueryDefinitionsOutput {
         return describe_query_definitions.execute(self, allocator, input, options);
     }
 
     /// Lists the resource policies in this account.
-    pub fn describeResourcePolicies(self: *Self, allocator: std.mem.Allocator, input: describe_resource_policies.DescribeResourcePoliciesInput, options: describe_resource_policies.Options) !describe_resource_policies.DescribeResourcePoliciesOutput {
+    pub fn describeResourcePolicies(self: *Self, allocator: std.mem.Allocator, input: describe_resource_policies.DescribeResourcePoliciesInput, options: CallOptions) !describe_resource_policies.DescribeResourcePoliciesOutput {
         return describe_resource_policies.execute(self, allocator, input, options);
     }
 
@@ -926,7 +927,7 @@ pub const Client = struct {
     /// subscription filters or filter the results by prefix. The results are
     /// ASCII-sorted by filter
     /// name.
-    pub fn describeSubscriptionFilters(self: *Self, allocator: std.mem.Allocator, input: describe_subscription_filters.DescribeSubscriptionFiltersInput, options: describe_subscription_filters.Options) !describe_subscription_filters.DescribeSubscriptionFiltersOutput {
+    pub fn describeSubscriptionFilters(self: *Self, allocator: std.mem.Allocator, input: describe_subscription_filters.DescribeSubscriptionFiltersInput, options: CallOptions) !describe_subscription_filters.DescribeSubscriptionFiltersOutput {
         return describe_subscription_filters.execute(self, allocator, input, options);
     }
 
@@ -959,14 +960,14 @@ pub const Client = struct {
     /// permissions for the key whenever that data is accessed.
     ///
     /// It can take up to 5 minutes for this operation to take effect.
-    pub fn disassociateKmsKey(self: *Self, allocator: std.mem.Allocator, input: disassociate_kms_key.DisassociateKmsKeyInput, options: disassociate_kms_key.Options) !disassociate_kms_key.DisassociateKmsKeyOutput {
+    pub fn disassociateKmsKey(self: *Self, allocator: std.mem.Allocator, input: disassociate_kms_key.DisassociateKmsKeyInput, options: CallOptions) !disassociate_kms_key.DisassociateKmsKeyOutput {
         return disassociate_kms_key.execute(self, allocator, input, options);
     }
 
     /// Disassociates a data source from an S3 Table Integration, removing query
     /// access and
     /// deleting all associated data from the integration.
-    pub fn disassociateSourceFromS3TableIntegration(self: *Self, allocator: std.mem.Allocator, input: disassociate_source_from_s3_table_integration.DisassociateSourceFromS3TableIntegrationInput, options: disassociate_source_from_s3_table_integration.Options) !disassociate_source_from_s3_table_integration.DisassociateSourceFromS3TableIntegrationOutput {
+    pub fn disassociateSourceFromS3TableIntegration(self: *Self, allocator: std.mem.Allocator, input: disassociate_source_from_s3_table_integration.DisassociateSourceFromS3TableIntegrationInput, options: CallOptions) !disassociate_source_from_s3_table_integration.DisassociateSourceFromS3TableIntegrationOutput {
         return disassociate_source_from_s3_table_integration.execute(self, allocator, input, options);
     }
 
@@ -1029,12 +1030,12 @@ pub const Client = struct {
     /// transformed
     /// versions, you must use a [CloudWatch Logs
     /// query.](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html)
-    pub fn filterLogEvents(self: *Self, allocator: std.mem.Allocator, input: filter_log_events.FilterLogEventsInput, options: filter_log_events.Options) !filter_log_events.FilterLogEventsOutput {
+    pub fn filterLogEvents(self: *Self, allocator: std.mem.Allocator, input: filter_log_events.FilterLogEventsInput, options: CallOptions) !filter_log_events.FilterLogEventsOutput {
         return filter_log_events.execute(self, allocator, input, options);
     }
 
     /// Returns information about a log group data protection policy.
-    pub fn getDataProtectionPolicy(self: *Self, allocator: std.mem.Allocator, input: get_data_protection_policy.GetDataProtectionPolicyInput, options: get_data_protection_policy.Options) !get_data_protection_policy.GetDataProtectionPolicyOutput {
+    pub fn getDataProtectionPolicy(self: *Self, allocator: std.mem.Allocator, input: get_data_protection_policy.GetDataProtectionPolicyInput, options: CallOptions) !get_data_protection_policy.GetDataProtectionPolicyOutput {
         return get_data_protection_policy.execute(self, allocator, input, options);
     }
 
@@ -1059,12 +1060,12 @@ pub const Client = struct {
     /// IDs
     /// of the deliveries in your account with the
     /// [DescribeDeliveries](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html) operation.
-    pub fn getDelivery(self: *Self, allocator: std.mem.Allocator, input: get_delivery.GetDeliveryInput, options: get_delivery.Options) !get_delivery.GetDeliveryOutput {
+    pub fn getDelivery(self: *Self, allocator: std.mem.Allocator, input: get_delivery.GetDeliveryInput, options: CallOptions) !get_delivery.GetDeliveryOutput {
         return get_delivery.execute(self, allocator, input, options);
     }
 
     /// Retrieves complete information about one delivery destination.
-    pub fn getDeliveryDestination(self: *Self, allocator: std.mem.Allocator, input: get_delivery_destination.GetDeliveryDestinationInput, options: get_delivery_destination.Options) !get_delivery_destination.GetDeliveryDestinationOutput {
+    pub fn getDeliveryDestination(self: *Self, allocator: std.mem.Allocator, input: get_delivery_destination.GetDeliveryDestinationInput, options: CallOptions) !get_delivery_destination.GetDeliveryDestinationOutput {
         return get_delivery_destination.execute(self, allocator, input, options);
     }
 
@@ -1073,24 +1074,24 @@ pub const Client = struct {
     /// specify. For more information about delivery destinations and their
     /// policies, see
     /// [PutDeliveryDestinationPolicy](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html).
-    pub fn getDeliveryDestinationPolicy(self: *Self, allocator: std.mem.Allocator, input: get_delivery_destination_policy.GetDeliveryDestinationPolicyInput, options: get_delivery_destination_policy.Options) !get_delivery_destination_policy.GetDeliveryDestinationPolicyOutput {
+    pub fn getDeliveryDestinationPolicy(self: *Self, allocator: std.mem.Allocator, input: get_delivery_destination_policy.GetDeliveryDestinationPolicyInput, options: CallOptions) !get_delivery_destination_policy.GetDeliveryDestinationPolicyOutput {
         return get_delivery_destination_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves complete information about one delivery source.
-    pub fn getDeliverySource(self: *Self, allocator: std.mem.Allocator, input: get_delivery_source.GetDeliverySourceInput, options: get_delivery_source.Options) !get_delivery_source.GetDeliverySourceOutput {
+    pub fn getDeliverySource(self: *Self, allocator: std.mem.Allocator, input: get_delivery_source.GetDeliverySourceInput, options: CallOptions) !get_delivery_source.GetDeliverySourceOutput {
         return get_delivery_source.execute(self, allocator, input, options);
     }
 
     /// Returns information about one integration between CloudWatch Logs and
     /// OpenSearch Service.
-    pub fn getIntegration(self: *Self, allocator: std.mem.Allocator, input: get_integration.GetIntegrationInput, options: get_integration.Options) !get_integration.GetIntegrationOutput {
+    pub fn getIntegration(self: *Self, allocator: std.mem.Allocator, input: get_integration.GetIntegrationInput, options: CallOptions) !get_integration.GetIntegrationOutput {
         return get_integration.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the log anomaly detector that you specify. The
     /// KMS key ARN detected is valid.
-    pub fn getLogAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: get_log_anomaly_detector.GetLogAnomalyDetectorInput, options: get_log_anomaly_detector.Options) !get_log_anomaly_detector.GetLogAnomalyDetectorOutput {
+    pub fn getLogAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: get_log_anomaly_detector.GetLogAnomalyDetectorInput, options: CallOptions) !get_log_anomaly_detector.GetLogAnomalyDetectorOutput {
         return get_log_anomaly_detector.execute(self, allocator, input, options);
     }
 
@@ -1144,7 +1145,7 @@ pub const Client = struct {
     /// transformed versions, you
     /// must use a [CloudWatch Logs
     /// query.](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html)
-    pub fn getLogEvents(self: *Self, allocator: std.mem.Allocator, input: get_log_events.GetLogEventsInput, options: get_log_events.Options) !get_log_events.GetLogEventsOutput {
+    pub fn getLogEvents(self: *Self, allocator: std.mem.Allocator, input: get_log_events.GetLogEventsInput, options: CallOptions) !get_log_events.GetLogEventsOutput {
         return get_log_events.execute(self, allocator, input, options);
     }
 
@@ -1152,7 +1153,7 @@ pub const Client = struct {
     /// includes any
     /// field modifications introduced through pipelines, such as new fields or
     /// changed field types.
-    pub fn getLogFields(self: *Self, allocator: std.mem.Allocator, input: get_log_fields.GetLogFieldsInput, options: get_log_fields.Options) !get_log_fields.GetLogFieldsOutput {
+    pub fn getLogFields(self: *Self, allocator: std.mem.Allocator, input: get_log_fields.GetLogFieldsInput, options: CallOptions) !get_log_fields.GetLogFieldsOutput {
         return get_log_fields.execute(self, allocator, input, options);
     }
 
@@ -1190,7 +1191,7 @@ pub const Client = struct {
     /// more information,
     /// see [CloudWatch cross-account
     /// observability](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
-    pub fn getLogGroupFields(self: *Self, allocator: std.mem.Allocator, input: get_log_group_fields.GetLogGroupFieldsInput, options: get_log_group_fields.Options) !get_log_group_fields.GetLogGroupFieldsOutput {
+    pub fn getLogGroupFields(self: *Self, allocator: std.mem.Allocator, input: get_log_group_fields.GetLogGroupFieldsInput, options: CallOptions) !get_log_group_fields.GetLogGroupFieldsOutput {
         return get_log_group_fields.execute(self, allocator, input, options);
     }
 
@@ -1212,7 +1213,7 @@ pub const Client = struct {
     /// could be
     /// `@ptr.$['input']['message']`, `@ptr.$['AAA']['BBB']['CCC']['DDD']`,
     /// `@ptr.$['AAA']`, or any other path matching your log structure.
-    pub fn getLogObject(self: *Self, allocator: std.mem.Allocator, input: get_log_object.GetLogObjectInput, options: get_log_object.Options) !get_log_object.GetLogObjectOutput {
+    pub fn getLogObject(self: *Self, allocator: std.mem.Allocator, input: get_log_object.GetLogObjectInput, options: CallOptions) !get_log_object.GetLogObjectOutput {
         return get_log_object.execute(self, allocator, input, options);
     }
 
@@ -1223,7 +1224,7 @@ pub const Client = struct {
     /// subset of fields. Fields are returned as field name/field value pairs.
     ///
     /// The full unparsed log event is returned within `@message`.
-    pub fn getLogRecord(self: *Self, allocator: std.mem.Allocator, input: get_log_record.GetLogRecordInput, options: get_log_record.Options) !get_log_record.GetLogRecordOutput {
+    pub fn getLogRecord(self: *Self, allocator: std.mem.Allocator, input: get_log_record.GetLogRecordInput, options: CallOptions) !get_log_record.GetLogRecordOutput {
         return get_log_record.execute(self, allocator, input, options);
     }
 
@@ -1260,21 +1261,21 @@ pub const Client = struct {
     /// information, see
     /// [CloudWatch cross-account
     /// observability](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
-    pub fn getQueryResults(self: *Self, allocator: std.mem.Allocator, input: get_query_results.GetQueryResultsInput, options: get_query_results.Options) !get_query_results.GetQueryResultsOutput {
+    pub fn getQueryResults(self: *Self, allocator: std.mem.Allocator, input: get_query_results.GetQueryResultsInput, options: CallOptions) !get_query_results.GetQueryResultsOutput {
         return get_query_results.execute(self, allocator, input, options);
     }
 
     /// Retrieves details about a specific scheduled query, including its
     /// configuration, execution
     /// status, and metadata.
-    pub fn getScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: get_scheduled_query.GetScheduledQueryInput, options: get_scheduled_query.Options) !get_scheduled_query.GetScheduledQueryOutput {
+    pub fn getScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: get_scheduled_query.GetScheduledQueryInput, options: CallOptions) !get_scheduled_query.GetScheduledQueryOutput {
         return get_scheduled_query.execute(self, allocator, input, options);
     }
 
     /// Retrieves the execution history of a scheduled query within a specified time
     /// range,
     /// including query results and destination processing status.
-    pub fn getScheduledQueryHistory(self: *Self, allocator: std.mem.Allocator, input: get_scheduled_query_history.GetScheduledQueryHistoryInput, options: get_scheduled_query_history.Options) !get_scheduled_query_history.GetScheduledQueryHistoryOutput {
+    pub fn getScheduledQueryHistory(self: *Self, allocator: std.mem.Allocator, input: get_scheduled_query_history.GetScheduledQueryHistoryInput, options: CallOptions) !get_scheduled_query_history.GetScheduledQueryHistoryOutput {
         return get_scheduled_query_history.execute(self, allocator, input, options);
     }
 
@@ -1285,7 +1286,7 @@ pub const Client = struct {
     /// level. To get
     /// information for an account-level transformer, use
     /// [DescribeAccountPolicies](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeAccountPolicies.html).
-    pub fn getTransformer(self: *Self, allocator: std.mem.Allocator, input: get_transformer.GetTransformerInput, options: get_transformer.Options) !get_transformer.GetTransformerOutput {
+    pub fn getTransformer(self: *Self, allocator: std.mem.Allocator, input: get_transformer.GetTransformerInput, options: CallOptions) !get_transformer.GetTransformerOutput {
         return get_transformer.execute(self, allocator, input, options);
     }
 
@@ -1310,7 +1311,7 @@ pub const Client = struct {
     /// results. By default, it returns up to 50 results and includes a token to
     /// retrieve more
     /// results.
-    pub fn listAggregateLogGroupSummaries(self: *Self, allocator: std.mem.Allocator, input: list_aggregate_log_group_summaries.ListAggregateLogGroupSummariesInput, options: list_aggregate_log_group_summaries.Options) !list_aggregate_log_group_summaries.ListAggregateLogGroupSummariesOutput {
+    pub fn listAggregateLogGroupSummaries(self: *Self, allocator: std.mem.Allocator, input: list_aggregate_log_group_summaries.ListAggregateLogGroupSummariesInput, options: CallOptions) !list_aggregate_log_group_summaries.ListAggregateLogGroupSummariesOutput {
         return list_aggregate_log_group_summaries.execute(self, allocator, input, options);
     }
 
@@ -1319,7 +1320,7 @@ pub const Client = struct {
     /// structure format of each anomaly object that is returned, see the example in
     /// this
     /// section.
-    pub fn listAnomalies(self: *Self, allocator: std.mem.Allocator, input: list_anomalies.ListAnomaliesInput, options: list_anomalies.Options) !list_anomalies.ListAnomaliesOutput {
+    pub fn listAnomalies(self: *Self, allocator: std.mem.Allocator, input: list_anomalies.ListAnomaliesInput, options: CallOptions) !list_anomalies.ListAnomaliesOutput {
         return list_anomalies.execute(self, allocator, input, options);
     }
 
@@ -1328,12 +1329,12 @@ pub const Client = struct {
     /// account. Currently, only one integration can be created in an account, and
     /// this integration
     /// must be with OpenSearch Service.
-    pub fn listIntegrations(self: *Self, allocator: std.mem.Allocator, input: list_integrations.ListIntegrationsInput, options: list_integrations.Options) !list_integrations.ListIntegrationsOutput {
+    pub fn listIntegrations(self: *Self, allocator: std.mem.Allocator, input: list_integrations.ListIntegrationsInput, options: CallOptions) !list_integrations.ListIntegrationsOutput {
         return list_integrations.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of the log anomaly detectors in the account.
-    pub fn listLogAnomalyDetectors(self: *Self, allocator: std.mem.Allocator, input: list_log_anomaly_detectors.ListLogAnomalyDetectorsInput, options: list_log_anomaly_detectors.Options) !list_log_anomaly_detectors.ListLogAnomalyDetectorsOutput {
+    pub fn listLogAnomalyDetectors(self: *Self, allocator: std.mem.Allocator, input: list_log_anomaly_detectors.ListLogAnomalyDetectorsInput, options: CallOptions) !list_log_anomaly_detectors.ListLogAnomalyDetectorsOutput {
         return list_log_anomaly_detectors.execute(self, allocator, input, options);
     }
 
@@ -1361,7 +1362,7 @@ pub const Client = struct {
     /// returns 50
     /// results, and includes a token to use in a subsequent operation to return
     /// more results.
-    pub fn listLogGroups(self: *Self, allocator: std.mem.Allocator, input: list_log_groups.ListLogGroupsInput, options: list_log_groups.Options) !list_log_groups.ListLogGroupsOutput {
+    pub fn listLogGroups(self: *Self, allocator: std.mem.Allocator, input: list_log_groups.ListLogGroupsInput, options: CallOptions) !list_log_groups.ListLogGroupsOutput {
         return list_log_groups.execute(self, allocator, input, options);
     }
 
@@ -1376,28 +1377,28 @@ pub const Client = struct {
     /// For more information about field indexes, see [Create field indexes
     /// to improve query performance and reduce
     /// costs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing.html).
-    pub fn listLogGroupsForQuery(self: *Self, allocator: std.mem.Allocator, input: list_log_groups_for_query.ListLogGroupsForQueryInput, options: list_log_groups_for_query.Options) !list_log_groups_for_query.ListLogGroupsForQueryOutput {
+    pub fn listLogGroupsForQuery(self: *Self, allocator: std.mem.Allocator, input: list_log_groups_for_query.ListLogGroupsForQueryInput, options: CallOptions) !list_log_groups_for_query.ListLogGroupsForQueryOutput {
         return list_log_groups_for_query.execute(self, allocator, input, options);
     }
 
     /// Lists all scheduled queries in your account and region. You can filter
     /// results by state to
     /// show only enabled or disabled queries.
-    pub fn listScheduledQueries(self: *Self, allocator: std.mem.Allocator, input: list_scheduled_queries.ListScheduledQueriesInput, options: list_scheduled_queries.Options) !list_scheduled_queries.ListScheduledQueriesOutput {
+    pub fn listScheduledQueries(self: *Self, allocator: std.mem.Allocator, input: list_scheduled_queries.ListScheduledQueriesInput, options: CallOptions) !list_scheduled_queries.ListScheduledQueriesOutput {
         return list_scheduled_queries.execute(self, allocator, input, options);
     }
 
     /// Returns a list of data source associations for a specified S3 Table
     /// Integration, showing
     /// which data sources are currently associated for query access.
-    pub fn listSourcesForS3TableIntegration(self: *Self, allocator: std.mem.Allocator, input: list_sources_for_s3_table_integration.ListSourcesForS3TableIntegrationInput, options: list_sources_for_s3_table_integration.Options) !list_sources_for_s3_table_integration.ListSourcesForS3TableIntegrationOutput {
+    pub fn listSourcesForS3TableIntegration(self: *Self, allocator: std.mem.Allocator, input: list_sources_for_s3_table_integration.ListSourcesForS3TableIntegrationInput, options: CallOptions) !list_sources_for_s3_table_integration.ListSourcesForS3TableIntegrationOutput {
         return list_sources_for_s3_table_integration.execute(self, allocator, input, options);
     }
 
     /// Displays the tags associated with a CloudWatch Logs resource. Currently, log
     /// groups and
     /// destinations support tagging.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -1406,7 +1407,7 @@ pub const Client = struct {
     /// [ListTagsForResource](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html) instead.
     ///
     /// Lists the tags for the specified log group.
-    pub fn listTagsLogGroup(self: *Self, allocator: std.mem.Allocator, input: list_tags_log_group.ListTagsLogGroupInput, options: list_tags_log_group.Options) !list_tags_log_group.ListTagsLogGroupOutput {
+    pub fn listTagsLogGroup(self: *Self, allocator: std.mem.Allocator, input: list_tags_log_group.ListTagsLogGroupInput, options: CallOptions) !list_tags_log_group.ListTagsLogGroupOutput {
         return list_tags_log_group.execute(self, allocator, input, options);
     }
 
@@ -1837,7 +1838,7 @@ pub const Client = struct {
     /// cannot create an `IN` policy for prefix `"/aws"` because the set of
     /// log groups matching `"/aws"` is not a subset of the log groups matching
     /// `"/aws/lambda"`.
-    pub fn putAccountPolicy(self: *Self, allocator: std.mem.Allocator, input: put_account_policy.PutAccountPolicyInput, options: put_account_policy.Options) !put_account_policy.PutAccountPolicyOutput {
+    pub fn putAccountPolicy(self: *Self, allocator: std.mem.Allocator, input: put_account_policy.PutAccountPolicyInput, options: CallOptions) !put_account_policy.PutAccountPolicyOutput {
         return put_account_policy.execute(self, allocator, input, options);
     }
 
@@ -1878,7 +1879,7 @@ pub const Client = struct {
     /// account-level data protection policy, then the two policies are cumulative.
     /// Any sensitive term
     /// specified in either policy is masked.
-    pub fn putDataProtectionPolicy(self: *Self, allocator: std.mem.Allocator, input: put_data_protection_policy.PutDataProtectionPolicyInput, options: put_data_protection_policy.Options) !put_data_protection_policy.PutDataProtectionPolicyOutput {
+    pub fn putDataProtectionPolicy(self: *Self, allocator: std.mem.Allocator, input: put_data_protection_policy.PutDataProtectionPolicyInput, options: CallOptions) !put_data_protection_policy.PutDataProtectionPolicyOutput {
         return put_data_protection_policy.execute(self, allocator, input, options);
     }
 
@@ -1930,7 +1931,7 @@ pub const Client = struct {
     /// delivery destination parameters are overwritten with the new parameter
     /// values that you
     /// specify.
-    pub fn putDeliveryDestination(self: *Self, allocator: std.mem.Allocator, input: put_delivery_destination.PutDeliveryDestinationInput, options: put_delivery_destination.Options) !put_delivery_destination.PutDeliveryDestinationOutput {
+    pub fn putDeliveryDestination(self: *Self, allocator: std.mem.Allocator, input: put_delivery_destination.PutDeliveryDestinationInput, options: CallOptions) !put_delivery_destination.PutDeliveryDestinationOutput {
         return put_delivery_destination.execute(self, allocator, input, options);
     }
 
@@ -1968,7 +1969,7 @@ pub const Client = struct {
     /// delivery, and the other allows delivery to the chosen destination. See the
     /// examples for the
     /// needed policies.
-    pub fn putDeliveryDestinationPolicy(self: *Self, allocator: std.mem.Allocator, input: put_delivery_destination_policy.PutDeliveryDestinationPolicyInput, options: put_delivery_destination_policy.Options) !put_delivery_destination_policy.PutDeliveryDestinationPolicyOutput {
+    pub fn putDeliveryDestinationPolicy(self: *Self, allocator: std.mem.Allocator, input: put_delivery_destination_policy.PutDeliveryDestinationPolicyInput, options: CallOptions) !put_delivery_destination_policy.PutDeliveryDestinationPolicyOutput {
         return put_delivery_destination_policy.execute(self, allocator, input, options);
     }
 
@@ -2015,7 +2016,7 @@ pub const Client = struct {
     /// current delivery
     /// source parameters are overwritten with the new parameter values that you
     /// specify.
-    pub fn putDeliverySource(self: *Self, allocator: std.mem.Allocator, input: put_delivery_source.PutDeliverySourceInput, options: put_delivery_source.Options) !put_delivery_source.PutDeliverySourceOutput {
+    pub fn putDeliverySource(self: *Self, allocator: std.mem.Allocator, input: put_delivery_source.PutDeliverySourceInput, options: CallOptions) !put_delivery_source.PutDeliverySourceOutput {
         return put_delivery_source.execute(self, allocator, input, options);
     }
 
@@ -2041,7 +2042,7 @@ pub const Client = struct {
     ///
     /// To perform a `PutDestination` operation, you must also have the
     /// `iam:PassRole` permission.
-    pub fn putDestination(self: *Self, allocator: std.mem.Allocator, input: put_destination.PutDestinationInput, options: put_destination.Options) !put_destination.PutDestinationOutput {
+    pub fn putDestination(self: *Self, allocator: std.mem.Allocator, input: put_destination.PutDestinationInput, options: CallOptions) !put_destination.PutDestinationOutput {
         return put_destination.execute(self, allocator, input, options);
     }
 
@@ -2051,7 +2052,7 @@ pub const Client = struct {
     /// policy
     /// document](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html) that is used to authorize claims to register a subscription filter
     /// against a given destination.
-    pub fn putDestinationPolicy(self: *Self, allocator: std.mem.Allocator, input: put_destination_policy.PutDestinationPolicyInput, options: put_destination_policy.Options) !put_destination_policy.PutDestinationPolicyOutput {
+    pub fn putDestinationPolicy(self: *Self, allocator: std.mem.Allocator, input: put_destination_policy.PutDestinationPolicyInput, options: CallOptions) !put_destination_policy.PutDestinationPolicyOutput {
         return put_destination_policy.execute(self, allocator, input, options);
     }
 
@@ -2139,7 +2140,7 @@ pub const Client = struct {
     /// account-wide field index policy that applies to log groups, but data
     /// source-based account
     /// policies may still apply.
-    pub fn putIndexPolicy(self: *Self, allocator: std.mem.Allocator, input: put_index_policy.PutIndexPolicyInput, options: put_index_policy.Options) !put_index_policy.PutIndexPolicyOutput {
+    pub fn putIndexPolicy(self: *Self, allocator: std.mem.Allocator, input: put_index_policy.PutIndexPolicyInput, options: CallOptions) !put_index_policy.PutIndexPolicyOutput {
         return put_index_policy.execute(self, allocator, input, options);
     }
 
@@ -2159,7 +2160,7 @@ pub const Client = struct {
     /// You can use this operation only to create a new integration. You can't
     /// modify an existing
     /// integration.
-    pub fn putIntegration(self: *Self, allocator: std.mem.Allocator, input: put_integration.PutIntegrationInput, options: put_integration.Options) !put_integration.PutIntegrationOutput {
+    pub fn putIntegration(self: *Self, allocator: std.mem.Allocator, input: put_integration.PutIntegrationInput, options: CallOptions) !put_integration.PutIntegrationOutput {
         return put_integration.execute(self, allocator, input, options);
     }
 
@@ -2216,7 +2217,7 @@ pub const Client = struct {
     ///
     /// If a call to `PutLogEvents` returns "UnrecognizedClientException" the most
     /// likely cause is a non-valid Amazon Web Services access key ID or secret key.
-    pub fn putLogEvents(self: *Self, allocator: std.mem.Allocator, input: put_log_events.PutLogEventsInput, options: put_log_events.Options) !put_log_events.PutLogEventsOutput {
+    pub fn putLogEvents(self: *Self, allocator: std.mem.Allocator, input: put_log_events.PutLogEventsInput, options: CallOptions) !put_log_events.PutLogEventsOutput {
         return put_log_events.execute(self, allocator, input, options);
     }
 
@@ -2229,7 +2230,7 @@ pub const Client = struct {
     /// For information about the parameters that are common to all actions, see
     /// [Common
     /// Parameters](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/CommonParameters.html).
-    pub fn putLogGroupDeletionProtection(self: *Self, allocator: std.mem.Allocator, input: put_log_group_deletion_protection.PutLogGroupDeletionProtectionInput, options: put_log_group_deletion_protection.Options) !put_log_group_deletion_protection.PutLogGroupDeletionProtectionOutput {
+    pub fn putLogGroupDeletionProtection(self: *Self, allocator: std.mem.Allocator, input: put_log_group_deletion_protection.PutLogGroupDeletionProtectionInput, options: CallOptions) !put_log_group_deletion_protection.PutLogGroupDeletionProtectionOutput {
         return put_log_group_deletion_protection.execute(self, allocator, input, options);
     }
 
@@ -2274,7 +2275,7 @@ pub const Client = struct {
     /// expected. For more information, see [
     /// Creating a Billing Alarm to Monitor Your Estimated Amazon Web Services
     /// Charges](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).
-    pub fn putMetricFilter(self: *Self, allocator: std.mem.Allocator, input: put_metric_filter.PutMetricFilterInput, options: put_metric_filter.Options) !put_metric_filter.PutMetricFilterOutput {
+    pub fn putMetricFilter(self: *Self, allocator: std.mem.Allocator, input: put_metric_filter.PutMetricFilterInput, options: CallOptions) !put_metric_filter.PutMetricFilterOutput {
         return put_metric_filter.execute(self, allocator, input, options);
     }
 
@@ -2298,7 +2299,7 @@ pub const Client = struct {
     ///
     /// You must have the `logs:PutQueryDefinition` permission to be able to perform
     /// this operation.
-    pub fn putQueryDefinition(self: *Self, allocator: std.mem.Allocator, input: put_query_definition.PutQueryDefinitionInput, options: put_query_definition.Options) !put_query_definition.PutQueryDefinitionOutput {
+    pub fn putQueryDefinition(self: *Self, allocator: std.mem.Allocator, input: put_query_definition.PutQueryDefinitionInput, options: CallOptions) !put_query_definition.PutQueryDefinitionOutput {
         return put_query_definition.execute(self, allocator, input, options);
     }
 
@@ -2324,7 +2325,7 @@ pub const Client = struct {
     /// be
     /// enforced. For access control involving these principals, use the IAM
     /// policies.
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -2363,7 +2364,7 @@ pub const Client = struct {
     /// included when you use an API to retrieve the `storedBytes` value to see how
     /// many
     /// bytes a log group is storing.
-    pub fn putRetentionPolicy(self: *Self, allocator: std.mem.Allocator, input: put_retention_policy.PutRetentionPolicyInput, options: put_retention_policy.Options) !put_retention_policy.PutRetentionPolicyOutput {
+    pub fn putRetentionPolicy(self: *Self, allocator: std.mem.Allocator, input: put_retention_policy.PutRetentionPolicyInput, options: CallOptions) !put_retention_policy.PutRetentionPolicyOutput {
         return put_retention_policy.execute(self, allocator, input, options);
     }
 
@@ -2414,7 +2415,7 @@ pub const Client = struct {
     /// To perform a `PutSubscriptionFilter` operation for any destination except a
     /// Lambda function, you must also have the `iam:PassRole`
     /// permission.
-    pub fn putSubscriptionFilter(self: *Self, allocator: std.mem.Allocator, input: put_subscription_filter.PutSubscriptionFilterInput, options: put_subscription_filter.Options) !put_subscription_filter.PutSubscriptionFilterOutput {
+    pub fn putSubscriptionFilter(self: *Self, allocator: std.mem.Allocator, input: put_subscription_filter.PutSubscriptionFilterInput, options: CallOptions) !put_subscription_filter.PutSubscriptionFilterOutput {
         return put_subscription_filter.execute(self, allocator, input, options);
     }
 
@@ -2469,7 +2470,7 @@ pub const Client = struct {
     /// log group, the log group uses only the log-group level transformer. It
     /// ignores the
     /// account-level transformer.
-    pub fn putTransformer(self: *Self, allocator: std.mem.Allocator, input: put_transformer.PutTransformerInput, options: put_transformer.Options) !put_transformer.PutTransformerOutput {
+    pub fn putTransformer(self: *Self, allocator: std.mem.Allocator, input: put_transformer.PutTransformerInput, options: CallOptions) !put_transformer.PutTransformerOutput {
         return put_transformer.execute(self, allocator, input, options);
     }
 
@@ -2529,7 +2530,7 @@ pub const Client = struct {
     /// For examples of using an SDK to start a Live Tail session, see [ Start
     /// a Live Tail session using an Amazon Web Services
     /// SDK](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/example_cloudwatch-logs_StartLiveTail_section.html).
-    pub fn startLiveTail(self: *Self, allocator: std.mem.Allocator, input: start_live_tail.StartLiveTailInput, options: start_live_tail.Options) !start_live_tail.StartLiveTailOutput {
+    pub fn startLiveTail(self: *Self, allocator: std.mem.Allocator, input: start_live_tail.StartLiveTailInput, options: CallOptions) !start_live_tail.StartLiveTailOutput {
         return start_live_tail.execute(self, allocator, input, options);
     }
 
@@ -2595,7 +2596,7 @@ pub const Client = struct {
     /// You can have up to 30 concurrent CloudWatch Logs insights queries, including
     /// queries
     /// that have been added to dashboards.
-    pub fn startQuery(self: *Self, allocator: std.mem.Allocator, input: start_query.StartQueryInput, options: start_query.Options) !start_query.StartQueryOutput {
+    pub fn startQuery(self: *Self, allocator: std.mem.Allocator, input: start_query.StartQueryInput, options: CallOptions) !start_query.StartQueryOutput {
         return start_query.execute(self, allocator, input, options);
     }
 
@@ -2612,7 +2613,7 @@ pub const Client = struct {
     /// specific execution identified by the query ID, not the scheduled query
     /// configuration
     /// itself.
-    pub fn stopQuery(self: *Self, allocator: std.mem.Allocator, input: stop_query.StopQueryInput, options: stop_query.Options) !stop_query.StopQueryOutput {
+    pub fn stopQuery(self: *Self, allocator: std.mem.Allocator, input: stop_query.StopQueryInput, options: CallOptions) !stop_query.StopQueryOutput {
         return stop_query.execute(self, allocator, input, options);
     }
 
@@ -2638,7 +2639,7 @@ pub const Client = struct {
     /// control
     /// access, see [Controlling access to Amazon Web Services resources using
     /// tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html).
-    pub fn tagLogGroup(self: *Self, allocator: std.mem.Allocator, input: tag_log_group.TagLogGroupInput, options: tag_log_group.Options) !tag_log_group.TagLogGroupOutput {
+    pub fn tagLogGroup(self: *Self, allocator: std.mem.Allocator, input: tag_log_group.TagLogGroupInput, options: CallOptions) !tag_log_group.TagLogGroupOutput {
         return tag_log_group.execute(self, allocator, input, options);
     }
 
@@ -2667,7 +2668,7 @@ pub const Client = struct {
     /// tag value that you specify replaces the previous value for that tag.
     ///
     /// You can associate as many as 50 tags with a CloudWatch Logs resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -2675,7 +2676,7 @@ pub const Client = struct {
     /// messages. You
     /// can use this operation to validate the correctness of a metric filter
     /// pattern.
-    pub fn testMetricFilter(self: *Self, allocator: std.mem.Allocator, input: test_metric_filter.TestMetricFilterInput, options: test_metric_filter.Options) !test_metric_filter.TestMetricFilterOutput {
+    pub fn testMetricFilter(self: *Self, allocator: std.mem.Allocator, input: test_metric_filter.TestMetricFilterInput, options: CallOptions) !test_metric_filter.TestMetricFilterOutput {
         return test_metric_filter.execute(self, allocator, input, options);
     }
 
@@ -2684,7 +2685,7 @@ pub const Client = struct {
     /// a set of log events to test with. The operation responds with an array that
     /// includes the
     /// original log events and the transformed versions.
-    pub fn testTransformer(self: *Self, allocator: std.mem.Allocator, input: test_transformer.TestTransformerInput, options: test_transformer.Options) !test_transformer.TestTransformerOutput {
+    pub fn testTransformer(self: *Self, allocator: std.mem.Allocator, input: test_transformer.TestTransformerInput, options: CallOptions) !test_transformer.TestTransformerOutput {
         return test_transformer.execute(self, allocator, input, options);
     }
 
@@ -2701,12 +2702,12 @@ pub const Client = struct {
     /// groups, the
     /// condition keys `aws:Resource/key-name` and `aws:TagKeys` cannot be used
     /// to restrict which tags users can assign.
-    pub fn untagLogGroup(self: *Self, allocator: std.mem.Allocator, input: untag_log_group.UntagLogGroupInput, options: untag_log_group.Options) !untag_log_group.UntagLogGroupOutput {
+    pub fn untagLogGroup(self: *Self, allocator: std.mem.Allocator, input: untag_log_group.UntagLogGroupInput, options: CallOptions) !untag_log_group.UntagLogGroupOutput {
         return untag_log_group.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -2727,7 +2728,7 @@ pub const Client = struct {
     /// operation and specify the anomaly or pattern to stop suppressing, and omit
     /// the
     /// `suppressionType` and `suppressionPeriod` parameters.
-    pub fn updateAnomaly(self: *Self, allocator: std.mem.Allocator, input: update_anomaly.UpdateAnomalyInput, options: update_anomaly.Options) !update_anomaly.UpdateAnomalyOutput {
+    pub fn updateAnomaly(self: *Self, allocator: std.mem.Allocator, input: update_anomaly.UpdateAnomalyInput, options: CallOptions) !update_anomaly.UpdateAnomalyOutput {
         return update_anomaly.execute(self, allocator, input, options);
     }
 
@@ -2736,12 +2737,12 @@ pub const Client = struct {
     /// either the S3 path pattern or the format of the delivered logs. You can't
     /// use this operation
     /// to change the source or destination of the delivery.
-    pub fn updateDeliveryConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_delivery_configuration.UpdateDeliveryConfigurationInput, options: update_delivery_configuration.Options) !update_delivery_configuration.UpdateDeliveryConfigurationOutput {
+    pub fn updateDeliveryConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_delivery_configuration.UpdateDeliveryConfigurationInput, options: CallOptions) !update_delivery_configuration.UpdateDeliveryConfigurationOutput {
         return update_delivery_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates an existing log anomaly detector.
-    pub fn updateLogAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: update_log_anomaly_detector.UpdateLogAnomalyDetectorInput, options: update_log_anomaly_detector.Options) !update_log_anomaly_detector.UpdateLogAnomalyDetectorOutput {
+    pub fn updateLogAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: update_log_anomaly_detector.UpdateLogAnomalyDetectorInput, options: CallOptions) !update_log_anomaly_detector.UpdateLogAnomalyDetectorOutput {
         return update_log_anomaly_detector.execute(self, allocator, input, options);
     }
 
@@ -2749,7 +2750,7 @@ pub const Client = struct {
     /// uses PUT
     /// semantics, allowing modification of query parameters, schedule, and
     /// destinations.
-    pub fn updateScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: update_scheduled_query.UpdateScheduledQueryInput, options: update_scheduled_query.Options) !update_scheduled_query.UpdateScheduledQueryOutput {
+    pub fn updateScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: update_scheduled_query.UpdateScheduledQueryInput, options: CallOptions) !update_scheduled_query.UpdateScheduledQueryOutput {
         return update_scheduled_query.execute(self, allocator, input, options);
     }
 

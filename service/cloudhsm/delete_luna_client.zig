@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteLunaClientInput = struct {
@@ -22,11 +23,7 @@ pub const DeleteLunaClientOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLunaClientInput, options: Options) !DeleteLunaClientOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLunaClientInput, options: CallOptions) !DeleteLunaClientOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

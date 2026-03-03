@@ -2,20 +2,17 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EnvironmentVariable = @import("environment_variable.zig").EnvironmentVariable;
 const VpcConfig = @import("vpc_config.zig").VpcConfig;
 const Project = @import("project.zig").Project;
 
-const CreateProjectInput = @import("create_project_request.zig").CreateProjectRequest;
+pub const CreateProjectInput = @import("create_project_request.zig").CreateProjectRequest;
 
-const CreateProjectOutput = @import("create_project_result.zig").CreateProjectResult;
+pub const CreateProjectOutput = @import("create_project_result.zig").CreateProjectResult;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateProjectInput, options: Options) !CreateProjectOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateProjectInput, options: CallOptions) !CreateProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

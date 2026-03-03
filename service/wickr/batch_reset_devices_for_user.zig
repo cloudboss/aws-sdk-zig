@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchDeviceErrorResponseItem = @import("batch_device_error_response_item.zig").BatchDeviceErrorResponseItem;
 const BatchDeviceSuccessResponseItem = @import("batch_device_success_response_item.zig").BatchDeviceSuccessResponseItem;
@@ -46,11 +47,7 @@ pub const BatchResetDevicesForUserOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchResetDevicesForUserInput, options: Options) !BatchResetDevicesForUserOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchResetDevicesForUserInput, options: CallOptions) !BatchResetDevicesForUserOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

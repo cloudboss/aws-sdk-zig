@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ModelMetadataSearchExpression = @import("model_metadata_search_expression.zig").ModelMetadataSearchExpression;
 const ModelMetadataSummary = @import("model_metadata_summary.zig").ModelMetadataSummary;
@@ -42,11 +43,7 @@ pub const ListModelMetadataOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListModelMetadataInput, options: Options) !ListModelMetadataOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListModelMetadataInput, options: CallOptions) !ListModelMetadataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

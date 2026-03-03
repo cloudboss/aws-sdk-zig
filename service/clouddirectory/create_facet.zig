@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FacetAttribute = @import("facet_attribute.zig").FacetAttribute;
 const FacetStyle = @import("facet_style.zig").FacetStyle;
@@ -51,11 +52,7 @@ pub const CreateFacetInput = struct {
 pub const CreateFacetOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateFacetInput, options: Options) !CreateFacetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateFacetInput, options: CallOptions) !CreateFacetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

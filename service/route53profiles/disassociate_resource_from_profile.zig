@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProfileResourceAssociation = @import("profile_resource_association.zig").ProfileResourceAssociation;
 
@@ -28,11 +29,7 @@ pub const DisassociateResourceFromProfileOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateResourceFromProfileInput, options: Options) !DisassociateResourceFromProfileOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateResourceFromProfileInput, options: CallOptions) !DisassociateResourceFromProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

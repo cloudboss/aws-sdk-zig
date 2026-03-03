@@ -2,10 +2,11 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProjectStatus = @import("project_status.zig").ProjectStatus;
 
-const DeleteProjectInput = @import("delete_project_request.zig").DeleteProjectRequest;
+pub const DeleteProjectInput = @import("delete_project_request.zig").DeleteProjectRequest;
 
 pub const DeleteProjectOutput = struct {
     /// The current status of the delete project operation.
@@ -16,11 +17,7 @@ pub const DeleteProjectOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProjectInput, options: Options) !DeleteProjectOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProjectInput, options: CallOptions) !DeleteProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

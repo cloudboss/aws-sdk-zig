@@ -17,6 +17,7 @@ const request_certificate = @import("request_certificate.zig");
 const resend_validation_email = @import("resend_validation_email.zig");
 const revoke_certificate = @import("revoke_certificate.zig");
 const update_certificate_options = @import("update_certificate_options.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -67,7 +68,7 @@ pub const Client = struct {
     /// To remove one or more tags, use the RemoveTagsFromCertificate action. To
     /// view all of the tags that have been applied to the certificate, use the
     /// ListTagsForCertificate action.
-    pub fn addTagsToCertificate(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_certificate.AddTagsToCertificateInput, options: add_tags_to_certificate.Options) !add_tags_to_certificate.AddTagsToCertificateOutput {
+    pub fn addTagsToCertificate(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_certificate.AddTagsToCertificateInput, options: CallOptions) !add_tags_to_certificate.AddTagsToCertificateOutput {
         return add_tags_to_certificate.execute(self, allocator, input, options);
     }
 
@@ -80,7 +81,7 @@ pub const Client = struct {
     /// You cannot delete an ACM certificate that is being used by another Amazon
     /// Web Services service. To delete a certificate that is in use, the
     /// certificate association must first be removed.
-    pub fn deleteCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_certificate.DeleteCertificateInput, options: delete_certificate.Options) !delete_certificate.DeleteCertificateOutput {
+    pub fn deleteCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_certificate.DeleteCertificateInput, options: CallOptions) !delete_certificate.DeleteCertificateOutput {
         return delete_certificate.execute(self, allocator, input, options);
     }
 
@@ -89,7 +90,7 @@ pub const Client = struct {
     /// If you have just created a certificate using the `RequestCertificate`
     /// action, there is a delay of several seconds before you can retrieve
     /// information about it.
-    pub fn describeCertificate(self: *Self, allocator: std.mem.Allocator, input: describe_certificate.DescribeCertificateInput, options: describe_certificate.Options) !describe_certificate.DescribeCertificateOutput {
+    pub fn describeCertificate(self: *Self, allocator: std.mem.Allocator, input: describe_certificate.DescribeCertificateInput, options: CallOptions) !describe_certificate.DescribeCertificateOutput {
         return describe_certificate.execute(self, allocator, input, options);
     }
 
@@ -102,13 +103,13 @@ pub const Client = struct {
     /// For information about exporting and formatting a certificate using the ACM
     /// console or CLI, see [Export a private
     /// certificate](https://docs.aws.amazon.com/acm/latest/userguide/export-private.html) and [Export a public certificate](https://docs.aws.amazon.com/acm/latest/userguide/export-public-certificate).
-    pub fn exportCertificate(self: *Self, allocator: std.mem.Allocator, input: export_certificate.ExportCertificateInput, options: export_certificate.Options) !export_certificate.ExportCertificateOutput {
+    pub fn exportCertificate(self: *Self, allocator: std.mem.Allocator, input: export_certificate.ExportCertificateInput, options: CallOptions) !export_certificate.ExportCertificateOutput {
         return export_certificate.execute(self, allocator, input, options);
     }
 
     /// Returns the account configuration options associated with an Amazon Web
     /// Services account.
-    pub fn getAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_account_configuration.GetAccountConfigurationInput, options: get_account_configuration.Options) !get_account_configuration.GetAccountConfigurationOutput {
+    pub fn getAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_account_configuration.GetAccountConfigurationInput, options: CallOptions) !get_account_configuration.GetAccountConfigurationOutput {
         return get_account_configuration.execute(self, allocator, input, options);
     }
 
@@ -120,7 +121,7 @@ pub const Client = struct {
     /// All of the certificates are base64 encoded. You can use
     /// [OpenSSL](https://wiki.openssl.org/index.php/Command_Line_Utilities) to
     /// decode the certificates and inspect individual fields.
-    pub fn getCertificate(self: *Self, allocator: std.mem.Allocator, input: get_certificate.GetCertificateInput, options: get_certificate.Options) !get_certificate.GetCertificateOutput {
+    pub fn getCertificate(self: *Self, allocator: std.mem.Allocator, input: get_certificate.GetCertificateInput, options: CallOptions) !get_certificate.GetCertificateOutput {
         return get_certificate.execute(self, allocator, input, options);
     }
 
@@ -162,7 +163,7 @@ pub const Client = struct {
     ///
     /// This operation returns the [Amazon Resource Name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the imported certificate.
-    pub fn importCertificate(self: *Self, allocator: std.mem.Allocator, input: import_certificate.ImportCertificateInput, options: import_certificate.Options) !import_certificate.ImportCertificateOutput {
+    pub fn importCertificate(self: *Self, allocator: std.mem.Allocator, input: import_certificate.ImportCertificateInput, options: CallOptions) !import_certificate.ImportCertificateOutput {
         return import_certificate.execute(self, allocator, input, options);
     }
 
@@ -170,7 +171,7 @@ pub const Client = struct {
     /// only certificates that match a specific status be listed. You can also
     /// filter by specific attributes of the certificate. Default filtering returns
     /// only `RSA_2048` certificates. For more information, see Filters.
-    pub fn listCertificates(self: *Self, allocator: std.mem.Allocator, input: list_certificates.ListCertificatesInput, options: list_certificates.Options) !list_certificates.ListCertificatesOutput {
+    pub fn listCertificates(self: *Self, allocator: std.mem.Allocator, input: list_certificates.ListCertificatesInput, options: CallOptions) !list_certificates.ListCertificatesOutput {
         return list_certificates.execute(self, allocator, input, options);
     }
 
@@ -178,7 +179,7 @@ pub const Client = struct {
     /// certificate's Amazon Resource Name (ARN) to specify the certificate. To add
     /// a tag to an ACM certificate, use the AddTagsToCertificate action. To delete
     /// a tag, use the RemoveTagsFromCertificate action.
-    pub fn listTagsForCertificate(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_certificate.ListTagsForCertificateInput, options: list_tags_for_certificate.Options) !list_tags_for_certificate.ListTagsForCertificateOutput {
+    pub fn listTagsForCertificate(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_certificate.ListTagsForCertificateInput, options: CallOptions) !list_tags_for_certificate.ListTagsForCertificateOutput {
         return list_tags_for_certificate.execute(self, allocator, input, options);
     }
 
@@ -189,7 +190,7 @@ pub const Client = struct {
     /// generating `EventBridge` events. ACM sends one event per day per certificate
     /// until the certificate expires. By default, accounts receive events starting
     /// 45 days before certificate expiration.
-    pub fn putAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_account_configuration.PutAccountConfigurationInput, options: put_account_configuration.Options) !put_account_configuration.PutAccountConfigurationOutput {
+    pub fn putAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_account_configuration.PutAccountConfigurationInput, options: CallOptions) !put_account_configuration.PutAccountConfigurationOutput {
         return put_account_configuration.execute(self, allocator, input, options);
     }
 
@@ -202,13 +203,13 @@ pub const Client = struct {
     /// To add tags to a certificate, use the AddTagsToCertificate action. To view
     /// all of the tags that have been applied to a specific ACM certificate, use
     /// the ListTagsForCertificate action.
-    pub fn removeTagsFromCertificate(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_certificate.RemoveTagsFromCertificateInput, options: remove_tags_from_certificate.Options) !remove_tags_from_certificate.RemoveTagsFromCertificateOutput {
+    pub fn removeTagsFromCertificate(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_certificate.RemoveTagsFromCertificateInput, options: CallOptions) !remove_tags_from_certificate.RemoveTagsFromCertificateOutput {
         return remove_tags_from_certificate.execute(self, allocator, input, options);
     }
 
     /// Renews an [eligible ACM
     /// certificate](https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html). In order to renew your Amazon Web Services Private CA certificates with ACM, you must first [grant the ACM service principal permission to do so](https://docs.aws.amazon.com/privateca/latest/userguide/PcaPermissions.html). For more information, see [Testing Managed Renewal](https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html) in the ACM User Guide.
-    pub fn renewCertificate(self: *Self, allocator: std.mem.Allocator, input: renew_certificate.RenewCertificateInput, options: renew_certificate.Options) !renew_certificate.RenewCertificateOutput {
+    pub fn renewCertificate(self: *Self, allocator: std.mem.Allocator, input: renew_certificate.RenewCertificateInput, options: CallOptions) !renew_certificate.RenewCertificateOutput {
         return renew_certificate.execute(self, allocator, input, options);
     }
 
@@ -232,7 +233,7 @@ pub const Client = struct {
     /// After successful completion of the `RequestCertificate` action, there is a
     /// delay of several seconds before you can retrieve information about the new
     /// certificate.
-    pub fn requestCertificate(self: *Self, allocator: std.mem.Allocator, input: request_certificate.RequestCertificateInput, options: request_certificate.Options) !request_certificate.RequestCertificateOutput {
+    pub fn requestCertificate(self: *Self, allocator: std.mem.Allocator, input: request_certificate.RequestCertificateInput, options: CallOptions) !request_certificate.RequestCertificateOutput {
         return request_certificate.execute(self, allocator, input, options);
     }
 
@@ -248,13 +249,13 @@ pub const Client = struct {
     /// For more information about setting up your contact email addresses, see
     /// [Configure Email for your
     /// Domain](https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html).
-    pub fn resendValidationEmail(self: *Self, allocator: std.mem.Allocator, input: resend_validation_email.ResendValidationEmailInput, options: resend_validation_email.Options) !resend_validation_email.ResendValidationEmailOutput {
+    pub fn resendValidationEmail(self: *Self, allocator: std.mem.Allocator, input: resend_validation_email.ResendValidationEmailInput, options: CallOptions) !resend_validation_email.ResendValidationEmailOutput {
         return resend_validation_email.execute(self, allocator, input, options);
     }
 
     /// Revokes a public ACM certificate. You can only revoke certificates that have
     /// been previously exported.
-    pub fn revokeCertificate(self: *Self, allocator: std.mem.Allocator, input: revoke_certificate.RevokeCertificateInput, options: revoke_certificate.Options) !revoke_certificate.RevokeCertificateOutput {
+    pub fn revokeCertificate(self: *Self, allocator: std.mem.Allocator, input: revoke_certificate.RevokeCertificateInput, options: CallOptions) !revoke_certificate.RevokeCertificateOutput {
         return revoke_certificate.execute(self, allocator, input, options);
     }
 
@@ -263,7 +264,7 @@ pub const Client = struct {
     /// and exporting. For more information, see [ Opting Out of Certificate
     /// Transparency
     /// Logging](https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency) and [Certificate Manager Exportable Managed Certificates](https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html).
-    pub fn updateCertificateOptions(self: *Self, allocator: std.mem.Allocator, input: update_certificate_options.UpdateCertificateOptionsInput, options: update_certificate_options.Options) !update_certificate_options.UpdateCertificateOptionsOutput {
+    pub fn updateCertificateOptions(self: *Self, allocator: std.mem.Allocator, input: update_certificate_options.UpdateCertificateOptionsInput, options: CallOptions) !update_certificate_options.UpdateCertificateOptionsOutput {
         return update_certificate_options.execute(self, allocator, input, options);
     }
 

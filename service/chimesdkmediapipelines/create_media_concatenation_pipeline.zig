@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConcatenationSink = @import("concatenation_sink.zig").ConcatenationSink;
 const ConcatenationSource = @import("concatenation_source.zig").ConcatenationSource;
@@ -44,11 +45,7 @@ pub const CreateMediaConcatenationPipelineOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMediaConcatenationPipelineInput, options: Options) !CreateMediaConcatenationPipelineOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMediaConcatenationPipelineInput, options: CallOptions) !CreateMediaConcatenationPipelineOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

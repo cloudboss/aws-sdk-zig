@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DisconnectReasonValue = @import("disconnect_reason_value.zig").DisconnectReasonValue;
 
@@ -35,11 +36,7 @@ pub const GetThingConnectivityDataOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetThingConnectivityDataInput, options: Options) !GetThingConnectivityDataOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetThingConnectivityDataInput, options: CallOptions) !GetThingConnectivityDataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

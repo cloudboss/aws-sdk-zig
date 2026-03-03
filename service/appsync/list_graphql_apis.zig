@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GraphQLApiType = @import("graph_ql_api_type.zig").GraphQLApiType;
 const Ownership = @import("ownership.zig").Ownership;
@@ -46,11 +47,7 @@ pub const ListGraphqlApisOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListGraphqlApisInput, options: Options) !ListGraphqlApisOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListGraphqlApisInput, options: CallOptions) !ListGraphqlApisOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

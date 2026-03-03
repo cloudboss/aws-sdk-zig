@@ -36,6 +36,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_flow_template = @import("update_flow_template.zig");
 const update_system_template = @import("update_system_template.zig");
 const upload_entity_definitions = @import("upload_entity_definitions.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -70,7 +71,7 @@ pub const Client = struct {
     ///
     /// A thing can be associated with only one device at a time. If you associate a
     /// thing with a new device id, its previous association will be removed.
-    pub fn associateEntityToThing(self: *Self, allocator: std.mem.Allocator, input: associate_entity_to_thing.AssociateEntityToThingInput, options: associate_entity_to_thing.Options) !associate_entity_to_thing.AssociateEntityToThingOutput {
+    pub fn associateEntityToThing(self: *Self, allocator: std.mem.Allocator, input: associate_entity_to_thing.AssociateEntityToThingInput, options: CallOptions) !associate_entity_to_thing.AssociateEntityToThingOutput {
         return associate_entity_to_thing.execute(self, allocator, input, options);
     }
 
@@ -80,7 +81,7 @@ pub const Client = struct {
     /// namespace. The workflow is validated against the entities in the
     /// latest version of the user's namespace unless another namespace version is
     /// specified in the request.
-    pub fn createFlowTemplate(self: *Self, allocator: std.mem.Allocator, input: create_flow_template.CreateFlowTemplateInput, options: create_flow_template.Options) !create_flow_template.CreateFlowTemplateOutput {
+    pub fn createFlowTemplate(self: *Self, allocator: std.mem.Allocator, input: create_flow_template.CreateFlowTemplateInput, options: CallOptions) !create_flow_template.CreateFlowTemplateOutput {
         return create_flow_template.execute(self, allocator, input, options);
     }
 
@@ -106,14 +107,14 @@ pub const Client = struct {
     ///
     /// If the definition document doesn't specify a version of the user's
     /// namespace, the latest version will be used by default.
-    pub fn createSystemInstance(self: *Self, allocator: std.mem.Allocator, input: create_system_instance.CreateSystemInstanceInput, options: create_system_instance.Options) !create_system_instance.CreateSystemInstanceOutput {
+    pub fn createSystemInstance(self: *Self, allocator: std.mem.Allocator, input: create_system_instance.CreateSystemInstanceInput, options: CallOptions) !create_system_instance.CreateSystemInstanceOutput {
         return create_system_instance.execute(self, allocator, input, options);
     }
 
     /// Creates a system. The system is validated against the entities in the
     /// latest version of the user's namespace unless another namespace version is
     /// specified in the request.
-    pub fn createSystemTemplate(self: *Self, allocator: std.mem.Allocator, input: create_system_template.CreateSystemTemplateInput, options: create_system_template.Options) !create_system_template.CreateSystemTemplateOutput {
+    pub fn createSystemTemplate(self: *Self, allocator: std.mem.Allocator, input: create_system_template.CreateSystemTemplateInput, options: CallOptions) !create_system_template.CreateSystemTemplateOutput {
         return create_system_template.execute(self, allocator, input, options);
     }
 
@@ -121,7 +122,7 @@ pub const Client = struct {
     /// will fail to update or deploy.
     /// Existing deployments that contain the workflow will continue to run (since
     /// they use a snapshot of the workflow taken at the time of deployment).
-    pub fn deleteFlowTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_flow_template.DeleteFlowTemplateInput, options: delete_flow_template.Options) !delete_flow_template.DeleteFlowTemplateOutput {
+    pub fn deleteFlowTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_flow_template.DeleteFlowTemplateInput, options: CallOptions) !delete_flow_template.DeleteFlowTemplateOutput {
         return delete_flow_template.execute(self, allocator, input, options);
     }
 
@@ -129,7 +130,7 @@ pub const Client = struct {
     /// the namespace. Delete the systems and flows that use entities in the
     /// namespace before performing this action. This action takes no
     /// request parameters.
-    pub fn deleteNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_namespace.DeleteNamespaceInput, options: delete_namespace.Options) !delete_namespace.DeleteNamespaceOutput {
+    pub fn deleteNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_namespace.DeleteNamespaceInput, options: CallOptions) !delete_namespace.DeleteNamespaceOutput {
         return delete_namespace.execute(self, allocator, input, options);
     }
 
@@ -139,7 +140,7 @@ pub const Client = struct {
     ///
     /// Users can create a new system instance that has the same ID as a deleted
     /// system instance.
-    pub fn deleteSystemInstance(self: *Self, allocator: std.mem.Allocator, input: delete_system_instance.DeleteSystemInstanceInput, options: delete_system_instance.Options) !delete_system_instance.DeleteSystemInstanceOutput {
+    pub fn deleteSystemInstance(self: *Self, allocator: std.mem.Allocator, input: delete_system_instance.DeleteSystemInstanceInput, options: CallOptions) !delete_system_instance.DeleteSystemInstanceOutput {
         return delete_system_instance.execute(self, allocator, input, options);
     }
 
@@ -147,7 +148,7 @@ pub const Client = struct {
     /// deletion.
     /// Existing deployments that contain the system will continue to work because
     /// they use a snapshot of the system that is taken when it is deployed.
-    pub fn deleteSystemTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_system_template.DeleteSystemTemplateInput, options: delete_system_template.Options) !delete_system_template.DeleteSystemTemplateOutput {
+    pub fn deleteSystemTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_system_template.DeleteSystemTemplateInput, options: CallOptions) !delete_system_template.DeleteSystemTemplateOutput {
         return delete_system_template.execute(self, allocator, input, options);
     }
 
@@ -171,32 +172,32 @@ pub const Client = struct {
     /// For information about the artifacts that get added to your Greengrass core
     /// device when you use this API, see [AWS IoT Things Graph and AWS IoT
     /// Greengrass](https://docs.aws.amazon.com/thingsgraph/latest/ug/iot-tg-greengrass.html).
-    pub fn deploySystemInstance(self: *Self, allocator: std.mem.Allocator, input: deploy_system_instance.DeploySystemInstanceInput, options: deploy_system_instance.Options) !deploy_system_instance.DeploySystemInstanceOutput {
+    pub fn deploySystemInstance(self: *Self, allocator: std.mem.Allocator, input: deploy_system_instance.DeploySystemInstanceInput, options: CallOptions) !deploy_system_instance.DeploySystemInstanceOutput {
         return deploy_system_instance.execute(self, allocator, input, options);
     }
 
     /// Deprecates the specified workflow. This action marks the workflow for
     /// deletion. Deprecated flows can't be deployed, but existing deployments will
     /// continue to run.
-    pub fn deprecateFlowTemplate(self: *Self, allocator: std.mem.Allocator, input: deprecate_flow_template.DeprecateFlowTemplateInput, options: deprecate_flow_template.Options) !deprecate_flow_template.DeprecateFlowTemplateOutput {
+    pub fn deprecateFlowTemplate(self: *Self, allocator: std.mem.Allocator, input: deprecate_flow_template.DeprecateFlowTemplateInput, options: CallOptions) !deprecate_flow_template.DeprecateFlowTemplateOutput {
         return deprecate_flow_template.execute(self, allocator, input, options);
     }
 
     /// Deprecates the specified system.
-    pub fn deprecateSystemTemplate(self: *Self, allocator: std.mem.Allocator, input: deprecate_system_template.DeprecateSystemTemplateInput, options: deprecate_system_template.Options) !deprecate_system_template.DeprecateSystemTemplateOutput {
+    pub fn deprecateSystemTemplate(self: *Self, allocator: std.mem.Allocator, input: deprecate_system_template.DeprecateSystemTemplateInput, options: CallOptions) !deprecate_system_template.DeprecateSystemTemplateOutput {
         return deprecate_system_template.execute(self, allocator, input, options);
     }
 
     /// Gets the latest version of the user's namespace and the public version that
     /// it is tracking.
-    pub fn describeNamespace(self: *Self, allocator: std.mem.Allocator, input: describe_namespace.DescribeNamespaceInput, options: describe_namespace.Options) !describe_namespace.DescribeNamespaceOutput {
+    pub fn describeNamespace(self: *Self, allocator: std.mem.Allocator, input: describe_namespace.DescribeNamespaceInput, options: CallOptions) !describe_namespace.DescribeNamespaceOutput {
         return describe_namespace.execute(self, allocator, input, options);
     }
 
     /// Dissociates a device entity from a concrete thing. The action takes only the
     /// type of the entity that you need to dissociate because only
     /// one entity of a particular type can be associated with a thing.
-    pub fn dissociateEntityFromThing(self: *Self, allocator: std.mem.Allocator, input: dissociate_entity_from_thing.DissociateEntityFromThingInput, options: dissociate_entity_from_thing.Options) !dissociate_entity_from_thing.DissociateEntityFromThingOutput {
+    pub fn dissociateEntityFromThing(self: *Self, allocator: std.mem.Allocator, input: dissociate_entity_from_thing.DissociateEntityFromThingInput, options: CallOptions) !dissociate_entity_from_thing.DissociateEntityFromThingOutput {
         return dissociate_entity_from_thing.execute(self, allocator, input, options);
     }
 
@@ -223,13 +224,13 @@ pub const Client = struct {
     /// * Services
     ///
     /// This action doesn't return definitions for systems, flows, and deployments.
-    pub fn getEntities(self: *Self, allocator: std.mem.Allocator, input: get_entities.GetEntitiesInput, options: get_entities.Options) !get_entities.GetEntitiesOutput {
+    pub fn getEntities(self: *Self, allocator: std.mem.Allocator, input: get_entities.GetEntitiesInput, options: CallOptions) !get_entities.GetEntitiesOutput {
         return get_entities.execute(self, allocator, input, options);
     }
 
     /// Gets the latest version of the `DefinitionDocument` and
     /// `FlowTemplateSummary` for the specified workflow.
-    pub fn getFlowTemplate(self: *Self, allocator: std.mem.Allocator, input: get_flow_template.GetFlowTemplateInput, options: get_flow_template.Options) !get_flow_template.GetFlowTemplateOutput {
+    pub fn getFlowTemplate(self: *Self, allocator: std.mem.Allocator, input: get_flow_template.GetFlowTemplateInput, options: CallOptions) !get_flow_template.GetFlowTemplateOutput {
         return get_flow_template.execute(self, allocator, input, options);
     }
 
@@ -237,22 +238,22 @@ pub const Client = struct {
     /// stored. If the workflow has been deprecated,
     /// this action will return revisions that occurred before the deprecation. This
     /// action won't work for workflows that have been deleted.
-    pub fn getFlowTemplateRevisions(self: *Self, allocator: std.mem.Allocator, input: get_flow_template_revisions.GetFlowTemplateRevisionsInput, options: get_flow_template_revisions.Options) !get_flow_template_revisions.GetFlowTemplateRevisionsOutput {
+    pub fn getFlowTemplateRevisions(self: *Self, allocator: std.mem.Allocator, input: get_flow_template_revisions.GetFlowTemplateRevisionsInput, options: CallOptions) !get_flow_template_revisions.GetFlowTemplateRevisionsOutput {
         return get_flow_template_revisions.execute(self, allocator, input, options);
     }
 
     /// Gets the status of a namespace deletion task.
-    pub fn getNamespaceDeletionStatus(self: *Self, allocator: std.mem.Allocator, input: get_namespace_deletion_status.GetNamespaceDeletionStatusInput, options: get_namespace_deletion_status.Options) !get_namespace_deletion_status.GetNamespaceDeletionStatusOutput {
+    pub fn getNamespaceDeletionStatus(self: *Self, allocator: std.mem.Allocator, input: get_namespace_deletion_status.GetNamespaceDeletionStatusInput, options: CallOptions) !get_namespace_deletion_status.GetNamespaceDeletionStatusOutput {
         return get_namespace_deletion_status.execute(self, allocator, input, options);
     }
 
     /// Gets a system instance.
-    pub fn getSystemInstance(self: *Self, allocator: std.mem.Allocator, input: get_system_instance.GetSystemInstanceInput, options: get_system_instance.Options) !get_system_instance.GetSystemInstanceOutput {
+    pub fn getSystemInstance(self: *Self, allocator: std.mem.Allocator, input: get_system_instance.GetSystemInstanceInput, options: CallOptions) !get_system_instance.GetSystemInstanceOutput {
         return get_system_instance.execute(self, allocator, input, options);
     }
 
     /// Gets a system.
-    pub fn getSystemTemplate(self: *Self, allocator: std.mem.Allocator, input: get_system_template.GetSystemTemplateInput, options: get_system_template.Options) !get_system_template.GetSystemTemplateOutput {
+    pub fn getSystemTemplate(self: *Self, allocator: std.mem.Allocator, input: get_system_template.GetSystemTemplateInput, options: CallOptions) !get_system_template.GetSystemTemplateOutput {
         return get_system_template.execute(self, allocator, input, options);
     }
 
@@ -261,51 +262,51 @@ pub const Client = struct {
     /// return
     /// the revisions that occurred before its deprecation. This action won't work
     /// with systems that have been deleted.
-    pub fn getSystemTemplateRevisions(self: *Self, allocator: std.mem.Allocator, input: get_system_template_revisions.GetSystemTemplateRevisionsInput, options: get_system_template_revisions.Options) !get_system_template_revisions.GetSystemTemplateRevisionsOutput {
+    pub fn getSystemTemplateRevisions(self: *Self, allocator: std.mem.Allocator, input: get_system_template_revisions.GetSystemTemplateRevisionsInput, options: CallOptions) !get_system_template_revisions.GetSystemTemplateRevisionsOutput {
         return get_system_template_revisions.execute(self, allocator, input, options);
     }
 
     /// Gets the status of the specified upload.
-    pub fn getUploadStatus(self: *Self, allocator: std.mem.Allocator, input: get_upload_status.GetUploadStatusInput, options: get_upload_status.Options) !get_upload_status.GetUploadStatusOutput {
+    pub fn getUploadStatus(self: *Self, allocator: std.mem.Allocator, input: get_upload_status.GetUploadStatusInput, options: CallOptions) !get_upload_status.GetUploadStatusOutput {
         return get_upload_status.execute(self, allocator, input, options);
     }
 
     /// Returns a list of objects that contain information about events in a flow
     /// execution.
-    pub fn listFlowExecutionMessages(self: *Self, allocator: std.mem.Allocator, input: list_flow_execution_messages.ListFlowExecutionMessagesInput, options: list_flow_execution_messages.Options) !list_flow_execution_messages.ListFlowExecutionMessagesOutput {
+    pub fn listFlowExecutionMessages(self: *Self, allocator: std.mem.Allocator, input: list_flow_execution_messages.ListFlowExecutionMessagesInput, options: CallOptions) !list_flow_execution_messages.ListFlowExecutionMessagesOutput {
         return list_flow_execution_messages.execute(self, allocator, input, options);
     }
 
     /// Lists all tags on an AWS IoT Things Graph resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Searches for entities of the specified type. You can search for entities in
     /// your namespace and the public namespace that you're tracking.
-    pub fn searchEntities(self: *Self, allocator: std.mem.Allocator, input: search_entities.SearchEntitiesInput, options: search_entities.Options) !search_entities.SearchEntitiesOutput {
+    pub fn searchEntities(self: *Self, allocator: std.mem.Allocator, input: search_entities.SearchEntitiesInput, options: CallOptions) !search_entities.SearchEntitiesOutput {
         return search_entities.execute(self, allocator, input, options);
     }
 
     /// Searches for AWS IoT Things Graph workflow execution instances.
-    pub fn searchFlowExecutions(self: *Self, allocator: std.mem.Allocator, input: search_flow_executions.SearchFlowExecutionsInput, options: search_flow_executions.Options) !search_flow_executions.SearchFlowExecutionsOutput {
+    pub fn searchFlowExecutions(self: *Self, allocator: std.mem.Allocator, input: search_flow_executions.SearchFlowExecutionsInput, options: CallOptions) !search_flow_executions.SearchFlowExecutionsOutput {
         return search_flow_executions.execute(self, allocator, input, options);
     }
 
     /// Searches for summary information about workflows.
-    pub fn searchFlowTemplates(self: *Self, allocator: std.mem.Allocator, input: search_flow_templates.SearchFlowTemplatesInput, options: search_flow_templates.Options) !search_flow_templates.SearchFlowTemplatesOutput {
+    pub fn searchFlowTemplates(self: *Self, allocator: std.mem.Allocator, input: search_flow_templates.SearchFlowTemplatesInput, options: CallOptions) !search_flow_templates.SearchFlowTemplatesOutput {
         return search_flow_templates.execute(self, allocator, input, options);
     }
 
     /// Searches for system instances in the user's account.
-    pub fn searchSystemInstances(self: *Self, allocator: std.mem.Allocator, input: search_system_instances.SearchSystemInstancesInput, options: search_system_instances.Options) !search_system_instances.SearchSystemInstancesOutput {
+    pub fn searchSystemInstances(self: *Self, allocator: std.mem.Allocator, input: search_system_instances.SearchSystemInstancesInput, options: CallOptions) !search_system_instances.SearchSystemInstancesOutput {
         return search_system_instances.execute(self, allocator, input, options);
     }
 
     /// Searches for summary information about systems in the user's account. You
     /// can filter by the ID of a workflow to return only systems that use the
     /// specified workflow.
-    pub fn searchSystemTemplates(self: *Self, allocator: std.mem.Allocator, input: search_system_templates.SearchSystemTemplatesInput, options: search_system_templates.Options) !search_system_templates.SearchSystemTemplatesOutput {
+    pub fn searchSystemTemplates(self: *Self, allocator: std.mem.Allocator, input: search_system_templates.SearchSystemTemplatesInput, options: CallOptions) !search_system_templates.SearchSystemTemplatesOutput {
         return search_system_templates.execute(self, allocator, input, options);
     }
 
@@ -320,22 +321,22 @@ pub const Client = struct {
     ///
     /// This action searches for exact matches and doesn't perform partial text
     /// matching.
-    pub fn searchThings(self: *Self, allocator: std.mem.Allocator, input: search_things.SearchThingsInput, options: search_things.Options) !search_things.SearchThingsOutput {
+    pub fn searchThings(self: *Self, allocator: std.mem.Allocator, input: search_things.SearchThingsInput, options: CallOptions) !search_things.SearchThingsOutput {
         return search_things.execute(self, allocator, input, options);
     }
 
     /// Creates a tag for the specified resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a system instance from its target (Cloud or Greengrass).
-    pub fn undeploySystemInstance(self: *Self, allocator: std.mem.Allocator, input: undeploy_system_instance.UndeploySystemInstanceInput, options: undeploy_system_instance.Options) !undeploy_system_instance.UndeploySystemInstanceOutput {
+    pub fn undeploySystemInstance(self: *Self, allocator: std.mem.Allocator, input: undeploy_system_instance.UndeploySystemInstanceInput, options: CallOptions) !undeploy_system_instance.UndeploySystemInstanceOutput {
         return undeploy_system_instance.execute(self, allocator, input, options);
     }
 
     /// Removes a tag from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -345,14 +346,14 @@ pub const Client = struct {
     /// behavior, copy the workflow (creating a new workflow with a different ID),
     /// and update the copy. The workflow can contain only entities in the specified
     /// namespace.
-    pub fn updateFlowTemplate(self: *Self, allocator: std.mem.Allocator, input: update_flow_template.UpdateFlowTemplateInput, options: update_flow_template.Options) !update_flow_template.UpdateFlowTemplateOutput {
+    pub fn updateFlowTemplate(self: *Self, allocator: std.mem.Allocator, input: update_flow_template.UpdateFlowTemplateInput, options: CallOptions) !update_flow_template.UpdateFlowTemplateOutput {
         return update_flow_template.execute(self, allocator, input, options);
     }
 
     /// Updates the specified system. You don't need to run this action after
     /// updating a workflow. Any deployment that uses the system will see the
     /// changes in the system when it is redeployed.
-    pub fn updateSystemTemplate(self: *Self, allocator: std.mem.Allocator, input: update_system_template.UpdateSystemTemplateInput, options: update_system_template.Options) !update_system_template.UpdateSystemTemplateOutput {
+    pub fn updateSystemTemplate(self: *Self, allocator: std.mem.Allocator, input: update_system_template.UpdateSystemTemplateInput, options: CallOptions) !update_system_template.UpdateSystemTemplateOutput {
         return update_system_template.execute(self, allocator, input, options);
     }
 
@@ -382,7 +383,7 @@ pub const Client = struct {
     /// Valid entities are `Device`, `DeviceModel`, `Service`, `Capability`,
     /// `State`, `Action`, `Event`, `Property`,
     /// `Mapping`, `Enum`.
-    pub fn uploadEntityDefinitions(self: *Self, allocator: std.mem.Allocator, input: upload_entity_definitions.UploadEntityDefinitionsInput, options: upload_entity_definitions.Options) !upload_entity_definitions.UploadEntityDefinitionsOutput {
+    pub fn uploadEntityDefinitions(self: *Self, allocator: std.mem.Allocator, input: upload_entity_definitions.UploadEntityDefinitionsInput, options: CallOptions) !upload_entity_definitions.UploadEntityDefinitionsOutput {
         return upload_entity_definitions.execute(self, allocator, input, options);
     }
 

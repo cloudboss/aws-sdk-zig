@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const StartSourceNetworkRecoveryRequestNetworkEntry = @import("start_source_network_recovery_request_network_entry.zig").StartSourceNetworkRecoveryRequestNetworkEntry;
 const Job = @import("job.zig").Job;
@@ -33,11 +34,7 @@ pub const StartSourceNetworkRecoveryOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartSourceNetworkRecoveryInput, options: Options) !StartSourceNetworkRecoveryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartSourceNetworkRecoveryInput, options: CallOptions) !StartSourceNetworkRecoveryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

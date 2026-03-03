@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_suite_definitions = @import("list_suite_definitions.zig");
@@ -15,7 +16,7 @@ pub const ListSuiteDefinitionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_suite_definitions.Options) !list_suite_definitions.ListSuiteDefinitionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_suite_definitions.ListSuiteDefinitionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const ListSuiteRunsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_suite_runs.Options) !list_suite_runs.ListSuiteRunsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_suite_runs.ListSuiteRunsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

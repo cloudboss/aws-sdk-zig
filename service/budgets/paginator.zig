@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_budget_action_histories = @import("describe_budget_action_histories.zig");
@@ -21,7 +22,7 @@ pub const DescribeBudgetActionHistoriesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_budget_action_histories.Options) !describe_budget_action_histories.DescribeBudgetActionHistoriesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_budget_action_histories.DescribeBudgetActionHistoriesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -62,7 +63,7 @@ pub const DescribeBudgetActionsForAccountPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_budget_actions_for_account.Options) !describe_budget_actions_for_account.DescribeBudgetActionsForAccountOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_budget_actions_for_account.DescribeBudgetActionsForAccountOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -103,7 +104,7 @@ pub const DescribeBudgetActionsForBudgetPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_budget_actions_for_budget.Options) !describe_budget_actions_for_budget.DescribeBudgetActionsForBudgetOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_budget_actions_for_budget.DescribeBudgetActionsForBudgetOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -144,7 +145,7 @@ pub const DescribeBudgetNotificationsForAccountPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_budget_notifications_for_account.Options) !describe_budget_notifications_for_account.DescribeBudgetNotificationsForAccountOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_budget_notifications_for_account.DescribeBudgetNotificationsForAccountOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -185,7 +186,7 @@ pub const DescribeBudgetPerformanceHistoryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_budget_performance_history.Options) !describe_budget_performance_history.DescribeBudgetPerformanceHistoryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_budget_performance_history.DescribeBudgetPerformanceHistoryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -226,7 +227,7 @@ pub const DescribeBudgetsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_budgets.Options) !describe_budgets.DescribeBudgetsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_budgets.DescribeBudgetsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -267,7 +268,7 @@ pub const DescribeNotificationsForBudgetPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_notifications_for_budget.Options) !describe_notifications_for_budget.DescribeNotificationsForBudgetOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_notifications_for_budget.DescribeNotificationsForBudgetOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -308,7 +309,7 @@ pub const DescribeSubscribersForNotificationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_subscribers_for_notification.Options) !describe_subscribers_for_notification.DescribeSubscribersForNotificationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_subscribers_for_notification.DescribeSubscribersForNotificationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

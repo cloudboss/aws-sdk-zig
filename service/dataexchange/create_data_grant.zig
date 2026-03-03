@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GrantDistributionScope = @import("grant_distribution_scope.zig").GrantDistributionScope;
 const DataGrantAcceptanceState = @import("data_grant_acceptance_state.zig").DataGrantAcceptanceState;
@@ -104,11 +105,7 @@ pub const CreateDataGrantOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDataGrantInput, options: Options) !CreateDataGrantOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDataGrantInput, options: CallOptions) !CreateDataGrantOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

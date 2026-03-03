@@ -39,8 +39,7 @@ test "adaptive retry succeeds on valid request" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    const result = try sts.get_caller_identity.execute(
-        &client,
+    const result = try client.getCallerIdentity(
         arena.allocator(),
         .{},
         .{},
@@ -67,8 +66,7 @@ test "token bucket at full capacity after success" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    _ = try sts.get_caller_identity.execute(
-        &client,
+    _ = try client.getCallerIdentity(
         arena.allocator(),
         .{},
         .{},

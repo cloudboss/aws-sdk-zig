@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GroupScope = @import("group_scope.zig").GroupScope;
 const GroupType = @import("group_type.zig").GroupType;
@@ -80,11 +81,7 @@ pub const DescribeGroupOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeGroupInput, options: Options) !DescribeGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeGroupInput, options: CallOptions) !DescribeGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

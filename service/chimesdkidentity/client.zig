@@ -31,6 +31,7 @@ const update_app_instance = @import("update_app_instance.zig");
 const update_app_instance_bot = @import("update_app_instance_bot.zig");
 const update_app_instance_user = @import("update_app_instance_user.zig");
 const update_app_instance_user_endpoint = @import("update_app_instance_user_endpoint.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -66,7 +67,7 @@ pub const Client = struct {
     /// idempotency behavior as described in the AWS API Standard.
     ///
     /// identity
-    pub fn createAppInstance(self: *Self, allocator: std.mem.Allocator, input: create_app_instance.CreateAppInstanceInput, options: create_app_instance.Options) !create_app_instance.CreateAppInstanceOutput {
+    pub fn createAppInstance(self: *Self, allocator: std.mem.Allocator, input: create_app_instance.CreateAppInstanceInput, options: CallOptions) !create_app_instance.CreateAppInstanceOutput {
         return create_app_instance.execute(self, allocator, input, options);
     }
 
@@ -82,116 +83,116 @@ pub const Client = struct {
     /// Only an `AppInstanceUser` and `AppInstanceBot` can be promoted to an
     /// `AppInstanceAdmin`
     /// role.
-    pub fn createAppInstanceAdmin(self: *Self, allocator: std.mem.Allocator, input: create_app_instance_admin.CreateAppInstanceAdminInput, options: create_app_instance_admin.Options) !create_app_instance_admin.CreateAppInstanceAdminOutput {
+    pub fn createAppInstanceAdmin(self: *Self, allocator: std.mem.Allocator, input: create_app_instance_admin.CreateAppInstanceAdminInput, options: CallOptions) !create_app_instance_admin.CreateAppInstanceAdminOutput {
         return create_app_instance_admin.execute(self, allocator, input, options);
     }
 
     /// Creates a bot under an Amazon Chime `AppInstance`. The request consists of a
     /// unique `Configuration` and `Name` for that bot.
-    pub fn createAppInstanceBot(self: *Self, allocator: std.mem.Allocator, input: create_app_instance_bot.CreateAppInstanceBotInput, options: create_app_instance_bot.Options) !create_app_instance_bot.CreateAppInstanceBotOutput {
+    pub fn createAppInstanceBot(self: *Self, allocator: std.mem.Allocator, input: create_app_instance_bot.CreateAppInstanceBotInput, options: CallOptions) !create_app_instance_bot.CreateAppInstanceBotOutput {
         return create_app_instance_bot.execute(self, allocator, input, options);
     }
 
     /// Creates a user under an Amazon Chime `AppInstance`. The request consists of
     /// a
     /// unique `appInstanceUserId` and `Name` for that user.
-    pub fn createAppInstanceUser(self: *Self, allocator: std.mem.Allocator, input: create_app_instance_user.CreateAppInstanceUserInput, options: create_app_instance_user.Options) !create_app_instance_user.CreateAppInstanceUserOutput {
+    pub fn createAppInstanceUser(self: *Self, allocator: std.mem.Allocator, input: create_app_instance_user.CreateAppInstanceUserInput, options: CallOptions) !create_app_instance_user.CreateAppInstanceUserOutput {
         return create_app_instance_user.execute(self, allocator, input, options);
     }
 
     /// Deletes an `AppInstance` and all associated data asynchronously.
-    pub fn deleteAppInstance(self: *Self, allocator: std.mem.Allocator, input: delete_app_instance.DeleteAppInstanceInput, options: delete_app_instance.Options) !delete_app_instance.DeleteAppInstanceOutput {
+    pub fn deleteAppInstance(self: *Self, allocator: std.mem.Allocator, input: delete_app_instance.DeleteAppInstanceInput, options: CallOptions) !delete_app_instance.DeleteAppInstanceOutput {
         return delete_app_instance.execute(self, allocator, input, options);
     }
 
     /// Demotes an `AppInstanceAdmin` to an `AppInstanceUser` or
     /// `AppInstanceBot`. This action
     /// does not delete the user.
-    pub fn deleteAppInstanceAdmin(self: *Self, allocator: std.mem.Allocator, input: delete_app_instance_admin.DeleteAppInstanceAdminInput, options: delete_app_instance_admin.Options) !delete_app_instance_admin.DeleteAppInstanceAdminOutput {
+    pub fn deleteAppInstanceAdmin(self: *Self, allocator: std.mem.Allocator, input: delete_app_instance_admin.DeleteAppInstanceAdminInput, options: CallOptions) !delete_app_instance_admin.DeleteAppInstanceAdminOutput {
         return delete_app_instance_admin.execute(self, allocator, input, options);
     }
 
     /// Deletes an `AppInstanceBot`.
-    pub fn deleteAppInstanceBot(self: *Self, allocator: std.mem.Allocator, input: delete_app_instance_bot.DeleteAppInstanceBotInput, options: delete_app_instance_bot.Options) !delete_app_instance_bot.DeleteAppInstanceBotOutput {
+    pub fn deleteAppInstanceBot(self: *Self, allocator: std.mem.Allocator, input: delete_app_instance_bot.DeleteAppInstanceBotInput, options: CallOptions) !delete_app_instance_bot.DeleteAppInstanceBotOutput {
         return delete_app_instance_bot.execute(self, allocator, input, options);
     }
 
     /// Deletes an `AppInstanceUser`.
-    pub fn deleteAppInstanceUser(self: *Self, allocator: std.mem.Allocator, input: delete_app_instance_user.DeleteAppInstanceUserInput, options: delete_app_instance_user.Options) !delete_app_instance_user.DeleteAppInstanceUserOutput {
+    pub fn deleteAppInstanceUser(self: *Self, allocator: std.mem.Allocator, input: delete_app_instance_user.DeleteAppInstanceUserInput, options: CallOptions) !delete_app_instance_user.DeleteAppInstanceUserOutput {
         return delete_app_instance_user.execute(self, allocator, input, options);
     }
 
     /// Deregisters an `AppInstanceUserEndpoint`.
-    pub fn deregisterAppInstanceUserEndpoint(self: *Self, allocator: std.mem.Allocator, input: deregister_app_instance_user_endpoint.DeregisterAppInstanceUserEndpointInput, options: deregister_app_instance_user_endpoint.Options) !deregister_app_instance_user_endpoint.DeregisterAppInstanceUserEndpointOutput {
+    pub fn deregisterAppInstanceUserEndpoint(self: *Self, allocator: std.mem.Allocator, input: deregister_app_instance_user_endpoint.DeregisterAppInstanceUserEndpointInput, options: CallOptions) !deregister_app_instance_user_endpoint.DeregisterAppInstanceUserEndpointOutput {
         return deregister_app_instance_user_endpoint.execute(self, allocator, input, options);
     }
 
     /// Returns the full details of an `AppInstance`.
-    pub fn describeAppInstance(self: *Self, allocator: std.mem.Allocator, input: describe_app_instance.DescribeAppInstanceInput, options: describe_app_instance.Options) !describe_app_instance.DescribeAppInstanceOutput {
+    pub fn describeAppInstance(self: *Self, allocator: std.mem.Allocator, input: describe_app_instance.DescribeAppInstanceInput, options: CallOptions) !describe_app_instance.DescribeAppInstanceOutput {
         return describe_app_instance.execute(self, allocator, input, options);
     }
 
     /// Returns the full details of an `AppInstanceAdmin`.
-    pub fn describeAppInstanceAdmin(self: *Self, allocator: std.mem.Allocator, input: describe_app_instance_admin.DescribeAppInstanceAdminInput, options: describe_app_instance_admin.Options) !describe_app_instance_admin.DescribeAppInstanceAdminOutput {
+    pub fn describeAppInstanceAdmin(self: *Self, allocator: std.mem.Allocator, input: describe_app_instance_admin.DescribeAppInstanceAdminInput, options: CallOptions) !describe_app_instance_admin.DescribeAppInstanceAdminOutput {
         return describe_app_instance_admin.execute(self, allocator, input, options);
     }
 
     /// The `AppInstanceBot's` information.
-    pub fn describeAppInstanceBot(self: *Self, allocator: std.mem.Allocator, input: describe_app_instance_bot.DescribeAppInstanceBotInput, options: describe_app_instance_bot.Options) !describe_app_instance_bot.DescribeAppInstanceBotOutput {
+    pub fn describeAppInstanceBot(self: *Self, allocator: std.mem.Allocator, input: describe_app_instance_bot.DescribeAppInstanceBotInput, options: CallOptions) !describe_app_instance_bot.DescribeAppInstanceBotOutput {
         return describe_app_instance_bot.execute(self, allocator, input, options);
     }
 
     /// Returns the full details of an `AppInstanceUser`.
-    pub fn describeAppInstanceUser(self: *Self, allocator: std.mem.Allocator, input: describe_app_instance_user.DescribeAppInstanceUserInput, options: describe_app_instance_user.Options) !describe_app_instance_user.DescribeAppInstanceUserOutput {
+    pub fn describeAppInstanceUser(self: *Self, allocator: std.mem.Allocator, input: describe_app_instance_user.DescribeAppInstanceUserInput, options: CallOptions) !describe_app_instance_user.DescribeAppInstanceUserOutput {
         return describe_app_instance_user.execute(self, allocator, input, options);
     }
 
     /// Returns the full details of an `AppInstanceUserEndpoint`.
-    pub fn describeAppInstanceUserEndpoint(self: *Self, allocator: std.mem.Allocator, input: describe_app_instance_user_endpoint.DescribeAppInstanceUserEndpointInput, options: describe_app_instance_user_endpoint.Options) !describe_app_instance_user_endpoint.DescribeAppInstanceUserEndpointOutput {
+    pub fn describeAppInstanceUserEndpoint(self: *Self, allocator: std.mem.Allocator, input: describe_app_instance_user_endpoint.DescribeAppInstanceUserEndpointInput, options: CallOptions) !describe_app_instance_user_endpoint.DescribeAppInstanceUserEndpointOutput {
         return describe_app_instance_user_endpoint.execute(self, allocator, input, options);
     }
 
     /// Gets the retention settings for an `AppInstance`.
-    pub fn getAppInstanceRetentionSettings(self: *Self, allocator: std.mem.Allocator, input: get_app_instance_retention_settings.GetAppInstanceRetentionSettingsInput, options: get_app_instance_retention_settings.Options) !get_app_instance_retention_settings.GetAppInstanceRetentionSettingsOutput {
+    pub fn getAppInstanceRetentionSettings(self: *Self, allocator: std.mem.Allocator, input: get_app_instance_retention_settings.GetAppInstanceRetentionSettingsInput, options: CallOptions) !get_app_instance_retention_settings.GetAppInstanceRetentionSettingsOutput {
         return get_app_instance_retention_settings.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the administrators in the `AppInstance`.
-    pub fn listAppInstanceAdmins(self: *Self, allocator: std.mem.Allocator, input: list_app_instance_admins.ListAppInstanceAdminsInput, options: list_app_instance_admins.Options) !list_app_instance_admins.ListAppInstanceAdminsOutput {
+    pub fn listAppInstanceAdmins(self: *Self, allocator: std.mem.Allocator, input: list_app_instance_admins.ListAppInstanceAdminsInput, options: CallOptions) !list_app_instance_admins.ListAppInstanceAdminsOutput {
         return list_app_instance_admins.execute(self, allocator, input, options);
     }
 
     /// Lists all `AppInstanceBots` created under a single `AppInstance`.
-    pub fn listAppInstanceBots(self: *Self, allocator: std.mem.Allocator, input: list_app_instance_bots.ListAppInstanceBotsInput, options: list_app_instance_bots.Options) !list_app_instance_bots.ListAppInstanceBotsOutput {
+    pub fn listAppInstanceBots(self: *Self, allocator: std.mem.Allocator, input: list_app_instance_bots.ListAppInstanceBotsInput, options: CallOptions) !list_app_instance_bots.ListAppInstanceBotsOutput {
         return list_app_instance_bots.execute(self, allocator, input, options);
     }
 
     /// Lists all the `AppInstanceUserEndpoints` created under a single
     /// `AppInstanceUser`.
-    pub fn listAppInstanceUserEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_app_instance_user_endpoints.ListAppInstanceUserEndpointsInput, options: list_app_instance_user_endpoints.Options) !list_app_instance_user_endpoints.ListAppInstanceUserEndpointsOutput {
+    pub fn listAppInstanceUserEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_app_instance_user_endpoints.ListAppInstanceUserEndpointsInput, options: CallOptions) !list_app_instance_user_endpoints.ListAppInstanceUserEndpointsOutput {
         return list_app_instance_user_endpoints.execute(self, allocator, input, options);
     }
 
     /// List all `AppInstanceUsers` created under a single
     /// `AppInstance`.
-    pub fn listAppInstanceUsers(self: *Self, allocator: std.mem.Allocator, input: list_app_instance_users.ListAppInstanceUsersInput, options: list_app_instance_users.Options) !list_app_instance_users.ListAppInstanceUsersOutput {
+    pub fn listAppInstanceUsers(self: *Self, allocator: std.mem.Allocator, input: list_app_instance_users.ListAppInstanceUsersInput, options: CallOptions) !list_app_instance_users.ListAppInstanceUsersOutput {
         return list_app_instance_users.execute(self, allocator, input, options);
     }
 
     /// Lists all Amazon Chime `AppInstance`s created under a single AWS
     /// account.
-    pub fn listAppInstances(self: *Self, allocator: std.mem.Allocator, input: list_app_instances.ListAppInstancesInput, options: list_app_instances.Options) !list_app_instances.ListAppInstancesOutput {
+    pub fn listAppInstances(self: *Self, allocator: std.mem.Allocator, input: list_app_instances.ListAppInstancesInput, options: CallOptions) !list_app_instances.ListAppInstancesOutput {
         return list_app_instances.execute(self, allocator, input, options);
     }
 
     /// Lists the tags applied to an Amazon Chime SDK identity resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Sets the amount of time in days that a given `AppInstance` retains
     /// data.
-    pub fn putAppInstanceRetentionSettings(self: *Self, allocator: std.mem.Allocator, input: put_app_instance_retention_settings.PutAppInstanceRetentionSettingsInput, options: put_app_instance_retention_settings.Options) !put_app_instance_retention_settings.PutAppInstanceRetentionSettingsOutput {
+    pub fn putAppInstanceRetentionSettings(self: *Self, allocator: std.mem.Allocator, input: put_app_instance_retention_settings.PutAppInstanceRetentionSettingsInput, options: CallOptions) !put_app_instance_retention_settings.PutAppInstanceRetentionSettingsOutput {
         return put_app_instance_retention_settings.execute(self, allocator, input, options);
     }
 
@@ -205,48 +206,48 @@ pub const Client = struct {
     /// Expired `AppInstanceUsers` that have not yet been deleted appear as active,
     /// and you can update
     /// their expiration settings. The system honors the new settings.
-    pub fn putAppInstanceUserExpirationSettings(self: *Self, allocator: std.mem.Allocator, input: put_app_instance_user_expiration_settings.PutAppInstanceUserExpirationSettingsInput, options: put_app_instance_user_expiration_settings.Options) !put_app_instance_user_expiration_settings.PutAppInstanceUserExpirationSettingsOutput {
+    pub fn putAppInstanceUserExpirationSettings(self: *Self, allocator: std.mem.Allocator, input: put_app_instance_user_expiration_settings.PutAppInstanceUserExpirationSettingsInput, options: CallOptions) !put_app_instance_user_expiration_settings.PutAppInstanceUserExpirationSettingsOutput {
         return put_app_instance_user_expiration_settings.execute(self, allocator, input, options);
     }
 
     /// Registers an endpoint under an Amazon Chime `AppInstanceUser`. The endpoint
     /// receives messages for a user. For push notifications, the endpoint is a
     /// mobile device used to receive mobile push notifications for a user.
-    pub fn registerAppInstanceUserEndpoint(self: *Self, allocator: std.mem.Allocator, input: register_app_instance_user_endpoint.RegisterAppInstanceUserEndpointInput, options: register_app_instance_user_endpoint.Options) !register_app_instance_user_endpoint.RegisterAppInstanceUserEndpointOutput {
+    pub fn registerAppInstanceUserEndpoint(self: *Self, allocator: std.mem.Allocator, input: register_app_instance_user_endpoint.RegisterAppInstanceUserEndpointInput, options: CallOptions) !register_app_instance_user_endpoint.RegisterAppInstanceUserEndpointOutput {
         return register_app_instance_user_endpoint.execute(self, allocator, input, options);
     }
 
     /// Applies the specified tags to the specified Amazon Chime SDK identity
     /// resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the specified Amazon Chime SDK identity
     /// resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates `AppInstance` metadata.
-    pub fn updateAppInstance(self: *Self, allocator: std.mem.Allocator, input: update_app_instance.UpdateAppInstanceInput, options: update_app_instance.Options) !update_app_instance.UpdateAppInstanceOutput {
+    pub fn updateAppInstance(self: *Self, allocator: std.mem.Allocator, input: update_app_instance.UpdateAppInstanceInput, options: CallOptions) !update_app_instance.UpdateAppInstanceOutput {
         return update_app_instance.execute(self, allocator, input, options);
     }
 
     /// Updates the name and metadata of an `AppInstanceBot`.
-    pub fn updateAppInstanceBot(self: *Self, allocator: std.mem.Allocator, input: update_app_instance_bot.UpdateAppInstanceBotInput, options: update_app_instance_bot.Options) !update_app_instance_bot.UpdateAppInstanceBotOutput {
+    pub fn updateAppInstanceBot(self: *Self, allocator: std.mem.Allocator, input: update_app_instance_bot.UpdateAppInstanceBotInput, options: CallOptions) !update_app_instance_bot.UpdateAppInstanceBotOutput {
         return update_app_instance_bot.execute(self, allocator, input, options);
     }
 
     /// Updates the details of an `AppInstanceUser`. You can update names and
     /// metadata.
-    pub fn updateAppInstanceUser(self: *Self, allocator: std.mem.Allocator, input: update_app_instance_user.UpdateAppInstanceUserInput, options: update_app_instance_user.Options) !update_app_instance_user.UpdateAppInstanceUserOutput {
+    pub fn updateAppInstanceUser(self: *Self, allocator: std.mem.Allocator, input: update_app_instance_user.UpdateAppInstanceUserInput, options: CallOptions) !update_app_instance_user.UpdateAppInstanceUserOutput {
         return update_app_instance_user.execute(self, allocator, input, options);
     }
 
     /// Updates the details of an `AppInstanceUserEndpoint`. You can update the name
     /// and `AllowMessage` values.
-    pub fn updateAppInstanceUserEndpoint(self: *Self, allocator: std.mem.Allocator, input: update_app_instance_user_endpoint.UpdateAppInstanceUserEndpointInput, options: update_app_instance_user_endpoint.Options) !update_app_instance_user_endpoint.UpdateAppInstanceUserEndpointOutput {
+    pub fn updateAppInstanceUserEndpoint(self: *Self, allocator: std.mem.Allocator, input: update_app_instance_user_endpoint.UpdateAppInstanceUserEndpointInput, options: CallOptions) !update_app_instance_user_endpoint.UpdateAppInstanceUserEndpointOutput {
         return update_app_instance_user_endpoint.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResourceOwner = @import("resource_owner.zig").ResourceOwner;
 const DomainNameAccessAssociation = @import("domain_name_access_association.zig").DomainNameAccessAssociation;
@@ -41,11 +42,7 @@ pub const GetDomainNameAccessAssociationsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDomainNameAccessAssociationsInput, options: Options) !GetDomainNameAccessAssociationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDomainNameAccessAssociationsInput, options: CallOptions) !GetDomainNameAccessAssociationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

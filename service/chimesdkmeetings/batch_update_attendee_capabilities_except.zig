@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AttendeeCapabilities = @import("attendee_capabilities.zig").AttendeeCapabilities;
 const AttendeeIdItem = @import("attendee_id_item.zig").AttendeeIdItem;
@@ -23,13 +24,9 @@ pub const BatchUpdateAttendeeCapabilitiesExceptInput = struct {
     };
 };
 
-const BatchUpdateAttendeeCapabilitiesExceptOutput = struct {};
+pub const BatchUpdateAttendeeCapabilitiesExceptOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchUpdateAttendeeCapabilitiesExceptInput, options: Options) !BatchUpdateAttendeeCapabilitiesExceptOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchUpdateAttendeeCapabilitiesExceptInput, options: CallOptions) !BatchUpdateAttendeeCapabilitiesExceptOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const GetRawMessageContentInput = struct {
@@ -26,11 +27,7 @@ pub const GetRawMessageContentOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetRawMessageContentInput, options: Options) !GetRawMessageContentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetRawMessageContentInput, options: CallOptions) !GetRawMessageContentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     const alloc = arena.allocator();
 

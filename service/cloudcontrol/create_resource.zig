@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProgressEvent = @import("progress_event.zig").ProgressEvent;
 
@@ -100,11 +101,7 @@ pub const CreateResourceOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateResourceInput, options: Options) !CreateResourceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateResourceInput, options: CallOptions) !CreateResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

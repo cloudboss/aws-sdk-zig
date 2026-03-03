@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const NetworkAcl = @import("network_acl.zig").NetworkAcl;
@@ -37,11 +38,7 @@ pub const CreateNetworkAclOutput = struct {
     network_acl: ?NetworkAcl = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateNetworkAclInput, options: Options) !CreateNetworkAclOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateNetworkAclInput, options: CallOptions) !CreateNetworkAclOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

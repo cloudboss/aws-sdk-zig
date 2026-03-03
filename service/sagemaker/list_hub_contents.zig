@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const HubContentType = @import("hub_content_type.zig").HubContentType;
 const HubContentSortBy = @import("hub_content_sort_by.zig").HubContentSortBy;
@@ -69,11 +70,7 @@ pub const ListHubContentsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListHubContentsInput, options: Options) !ListHubContentsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListHubContentsInput, options: CallOptions) !ListHubContentsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

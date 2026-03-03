@@ -6,6 +6,7 @@ const get_sprites = @import("get_sprites.zig");
 const get_static_map = @import("get_static_map.zig");
 const get_style_descriptor = @import("get_style_descriptor.zig");
 const get_tile = @import("get_tile.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -39,7 +40,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Style labels with
     /// glyphs](https://docs.aws.amazon.com/location/latest/developerguide/styling-labels-with-glyphs.html) in the *Amazon Location Service Developer Guide*.
-    pub fn getGlyphs(self: *Self, allocator: std.mem.Allocator, input: get_glyphs.GetGlyphsInput, options: get_glyphs.Options) !get_glyphs.GetGlyphsOutput {
+    pub fn getGlyphs(self: *Self, allocator: std.mem.Allocator, input: get_glyphs.GetGlyphsInput, options: CallOptions) !get_glyphs.GetGlyphsOutput {
         return get_glyphs.execute(self, allocator, input, options);
     }
 
@@ -47,7 +48,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Style iconography with
     /// sprites](https://docs.aws.amazon.com/location/latest/developerguide/styling-iconography-with-sprites.html) in the *Amazon Location Service Developer Guide*.
-    pub fn getSprites(self: *Self, allocator: std.mem.Allocator, input: get_sprites.GetSpritesInput, options: get_sprites.Options) !get_sprites.GetSpritesOutput {
+    pub fn getSprites(self: *Self, allocator: std.mem.Allocator, input: get_sprites.GetSpritesInput, options: CallOptions) !get_sprites.GetSpritesOutput {
         return get_sprites.execute(self, allocator, input, options);
     }
 
@@ -65,7 +66,7 @@ pub const Client = struct {
     ///   maps](https://docs.aws.amazon.com/location/latest/developerguide/customizing-static-maps.html)
     /// * [Overlay on the static
     ///   map](https://docs.aws.amazon.com/location/latest/developerguide/overlaying-static-map.html)
-    pub fn getStaticMap(self: *Self, allocator: std.mem.Allocator, input: get_static_map.GetStaticMapInput, options: get_static_map.Options) !get_static_map.GetStaticMapOutput {
+    pub fn getStaticMap(self: *Self, allocator: std.mem.Allocator, input: get_static_map.GetStaticMapInput, options: CallOptions) !get_static_map.GetStaticMapOutput {
         return get_static_map.execute(self, allocator, input, options);
     }
 
@@ -73,7 +74,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Style dynamic
     /// maps](https://docs.aws.amazon.com/location/latest/developerguide/styling-dynamic-maps.html) in the *Amazon Location Service Developer Guide*.
-    pub fn getStyleDescriptor(self: *Self, allocator: std.mem.Allocator, input: get_style_descriptor.GetStyleDescriptorInput, options: get_style_descriptor.Options) !get_style_descriptor.GetStyleDescriptorOutput {
+    pub fn getStyleDescriptor(self: *Self, allocator: std.mem.Allocator, input: get_style_descriptor.GetStyleDescriptorInput, options: CallOptions) !get_style_descriptor.GetStyleDescriptorOutput {
         return get_style_descriptor.execute(self, allocator, input, options);
     }
 
@@ -83,7 +84,7 @@ pub const Client = struct {
     ///
     /// For more information, see
     /// [Tiles](https://docs.aws.amazon.com/location/latest/developerguide/tiles.html) in the *Amazon Location Service Developer Guide*.
-    pub fn getTile(self: *Self, allocator: std.mem.Allocator, input: get_tile.GetTileInput, options: get_tile.Options) !get_tile.GetTileOutput {
+    pub fn getTile(self: *Self, allocator: std.mem.Allocator, input: get_tile.GetTileInput, options: CallOptions) !get_tile.GetTileOutput {
         return get_tile.execute(self, allocator, input, options);
     }
 };

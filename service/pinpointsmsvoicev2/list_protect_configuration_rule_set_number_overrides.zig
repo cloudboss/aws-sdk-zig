@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProtectConfigurationRuleSetNumberOverrideFilterItem = @import("protect_configuration_rule_set_number_override_filter_item.zig").ProtectConfigurationRuleSetNumberOverrideFilterItem;
 const ProtectConfigurationRuleSetNumberOverride = @import("protect_configuration_rule_set_number_override.zig").ProtectConfigurationRuleSetNumberOverride;
@@ -51,11 +52,7 @@ pub const ListProtectConfigurationRuleSetNumberOverridesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListProtectConfigurationRuleSetNumberOverridesInput, options: Options) !ListProtectConfigurationRuleSetNumberOverridesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListProtectConfigurationRuleSetNumberOverridesInput, options: CallOptions) !ListProtectConfigurationRuleSetNumberOverridesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

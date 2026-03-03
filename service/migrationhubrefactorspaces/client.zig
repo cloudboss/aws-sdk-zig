@@ -25,6 +25,7 @@ const put_resource_policy = @import("put_resource_policy.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_route = @import("update_route.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -72,7 +73,7 @@ pub const Client = struct {
     /// information, see [
     /// Create an
     /// application](https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/getting-started-create-application.html) in the *Refactor Spaces User Guide*.
-    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: create_application.Options) !create_application.CreateApplicationOutput {
+    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: CallOptions) !create_application.CreateApplicationOutput {
         return create_application.execute(self, allocator, input, options);
     }
 
@@ -94,7 +95,7 @@ pub const Client = struct {
     /// a transit gateway and you must use your network infrastructure to route
     /// traffic to services
     /// with private URL endpoints.
-    pub fn createEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_environment.CreateEnvironmentInput, options: create_environment.Options) !create_environment.CreateEnvironmentOutput {
+    pub fn createEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_environment.CreateEnvironmentInput, options: CallOptions) !create_environment.CreateEnvironmentOutput {
         return create_environment.execute(self, allocator, input, options);
     }
 
@@ -198,7 +199,7 @@ pub const Client = struct {
     /// see [ Create
     /// a
     /// route](https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/getting-started-create-role.html) in the *Refactor Spaces User Guide*.
-    pub fn createRoute(self: *Self, allocator: std.mem.Allocator, input: create_route.CreateRouteInput, options: create_route.Options) !create_route.CreateRouteOutput {
+    pub fn createRoute(self: *Self, allocator: std.mem.Allocator, input: create_route.CreateRouteInput, options: CallOptions) !create_route.CreateRouteOutput {
         return create_route.execute(self, allocator, input, options);
     }
 
@@ -216,101 +217,101 @@ pub const Client = struct {
     /// the
     /// `RefactorSpacesSecurityGroup` to the resource. Alternatively, to add more
     /// cross-account constraints, apply your own security group.
-    pub fn createService(self: *Self, allocator: std.mem.Allocator, input: create_service.CreateServiceInput, options: create_service.Options) !create_service.CreateServiceOutput {
+    pub fn createService(self: *Self, allocator: std.mem.Allocator, input: create_service.CreateServiceInput, options: CallOptions) !create_service.CreateServiceOutput {
         return create_service.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Web Services Migration Hub Refactor Spaces application.
     /// Before you can delete an application, you must first
     /// delete any services or routes within the application.
-    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: delete_application.Options) !delete_application.DeleteApplicationOutput {
+    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: CallOptions) !delete_application.DeleteApplicationOutput {
         return delete_application.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Web Services Migration Hub Refactor Spaces environment.
     /// Before you can delete an environment, you must first
     /// delete any applications and services within the environment.
-    pub fn deleteEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_environment.DeleteEnvironmentInput, options: delete_environment.Options) !delete_environment.DeleteEnvironmentOutput {
+    pub fn deleteEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_environment.DeleteEnvironmentInput, options: CallOptions) !delete_environment.DeleteEnvironmentOutput {
         return delete_environment.execute(self, allocator, input, options);
     }
 
     /// Deletes the resource policy set for the environment.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Web Services Migration Hub Refactor Spaces route.
-    pub fn deleteRoute(self: *Self, allocator: std.mem.Allocator, input: delete_route.DeleteRouteInput, options: delete_route.Options) !delete_route.DeleteRouteOutput {
+    pub fn deleteRoute(self: *Self, allocator: std.mem.Allocator, input: delete_route.DeleteRouteInput, options: CallOptions) !delete_route.DeleteRouteOutput {
         return delete_route.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Web Services Migration Hub Refactor Spaces service.
-    pub fn deleteService(self: *Self, allocator: std.mem.Allocator, input: delete_service.DeleteServiceInput, options: delete_service.Options) !delete_service.DeleteServiceOutput {
+    pub fn deleteService(self: *Self, allocator: std.mem.Allocator, input: delete_service.DeleteServiceInput, options: CallOptions) !delete_service.DeleteServiceOutput {
         return delete_service.execute(self, allocator, input, options);
     }
 
     /// Gets an Amazon Web Services Migration Hub Refactor Spaces application.
-    pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: get_application.Options) !get_application.GetApplicationOutput {
+    pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: CallOptions) !get_application.GetApplicationOutput {
         return get_application.execute(self, allocator, input, options);
     }
 
     /// Gets an Amazon Web Services Migration Hub Refactor Spaces environment.
-    pub fn getEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_environment.GetEnvironmentInput, options: get_environment.Options) !get_environment.GetEnvironmentOutput {
+    pub fn getEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_environment.GetEnvironmentInput, options: CallOptions) !get_environment.GetEnvironmentOutput {
         return get_environment.execute(self, allocator, input, options);
     }
 
     /// Gets the resource-based permission policy that is set for the given
     /// environment.
-    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
         return get_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Gets an Amazon Web Services Migration Hub Refactor Spaces route.
-    pub fn getRoute(self: *Self, allocator: std.mem.Allocator, input: get_route.GetRouteInput, options: get_route.Options) !get_route.GetRouteOutput {
+    pub fn getRoute(self: *Self, allocator: std.mem.Allocator, input: get_route.GetRouteInput, options: CallOptions) !get_route.GetRouteOutput {
         return get_route.execute(self, allocator, input, options);
     }
 
     /// Gets an Amazon Web Services Migration Hub Refactor Spaces service.
-    pub fn getService(self: *Self, allocator: std.mem.Allocator, input: get_service.GetServiceInput, options: get_service.Options) !get_service.GetServiceOutput {
+    pub fn getService(self: *Self, allocator: std.mem.Allocator, input: get_service.GetServiceInput, options: CallOptions) !get_service.GetServiceOutput {
         return get_service.execute(self, allocator, input, options);
     }
 
     /// Lists all the Amazon Web Services Migration Hub Refactor Spaces applications
     /// within an environment.
-    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: list_applications.Options) !list_applications.ListApplicationsOutput {
+    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: CallOptions) !list_applications.ListApplicationsOutput {
         return list_applications.execute(self, allocator, input, options);
     }
 
     /// Lists all Amazon Web Services Migration Hub Refactor Spaces service virtual
     /// private clouds (VPCs) that are part of the
     /// environment.
-    pub fn listEnvironmentVpcs(self: *Self, allocator: std.mem.Allocator, input: list_environment_vpcs.ListEnvironmentVpcsInput, options: list_environment_vpcs.Options) !list_environment_vpcs.ListEnvironmentVpcsOutput {
+    pub fn listEnvironmentVpcs(self: *Self, allocator: std.mem.Allocator, input: list_environment_vpcs.ListEnvironmentVpcsInput, options: CallOptions) !list_environment_vpcs.ListEnvironmentVpcsOutput {
         return list_environment_vpcs.execute(self, allocator, input, options);
     }
 
     /// Lists Amazon Web Services Migration Hub Refactor Spaces environments owned
     /// by a caller account or shared with the caller
     /// account.
-    pub fn listEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_environments.ListEnvironmentsInput, options: list_environments.Options) !list_environments.ListEnvironmentsOutput {
+    pub fn listEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_environments.ListEnvironmentsInput, options: CallOptions) !list_environments.ListEnvironmentsOutput {
         return list_environments.execute(self, allocator, input, options);
     }
 
     /// Lists all the Amazon Web Services Migration Hub Refactor Spaces routes
     /// within an application.
-    pub fn listRoutes(self: *Self, allocator: std.mem.Allocator, input: list_routes.ListRoutesInput, options: list_routes.Options) !list_routes.ListRoutesOutput {
+    pub fn listRoutes(self: *Self, allocator: std.mem.Allocator, input: list_routes.ListRoutesInput, options: CallOptions) !list_routes.ListRoutesOutput {
         return list_routes.execute(self, allocator, input, options);
     }
 
     /// Lists all the Amazon Web Services Migration Hub Refactor Spaces services
     /// within an application.
-    pub fn listServices(self: *Self, allocator: std.mem.Allocator, input: list_services.ListServicesInput, options: list_services.Options) !list_services.ListServicesOutput {
+    pub fn listServices(self: *Self, allocator: std.mem.Allocator, input: list_services.ListServicesInput, options: CallOptions) !list_services.ListServicesOutput {
         return list_services.execute(self, allocator, input, options);
     }
 
     /// Lists the tags of a resource. The caller account must be the same as the
     /// resource’s
     /// `OwnerAccountId`. Listing tags in other accounts is not supported.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -320,7 +321,7 @@ pub const Client = struct {
     /// `arn:aws:ram::aws:permission/AWSRAMDefaultPermissionRefactorSpacesEnvironment`
     /// permission in Resource Access Manager. The policy must not contain new lines
     /// or blank lines.
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -333,7 +334,7 @@ pub const Client = struct {
     /// Amazon Web Services Migration Hub Refactor Spaces does not propagate tags to
     /// orchestrated resources, such as an
     /// environment’s transit gateway.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -342,12 +343,12 @@ pub const Client = struct {
     /// manage a resource. To untag a resource, the caller account must be the same
     /// as the resource’s
     /// `OwnerAccountId`. Untagging resources across accounts is not supported.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an Amazon Web Services Migration Hub Refactor Spaces route.
-    pub fn updateRoute(self: *Self, allocator: std.mem.Allocator, input: update_route.UpdateRouteInput, options: update_route.Options) !update_route.UpdateRouteOutput {
+    pub fn updateRoute(self: *Self, allocator: std.mem.Allocator, input: update_route.UpdateRouteInput, options: CallOptions) !update_route.UpdateRouteOutput {
         return update_route.execute(self, allocator, input, options);
     }
 

@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_identity_pools = @import("list_identity_pools.zig");
@@ -14,7 +15,7 @@ pub const ListIdentityPoolsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_identity_pools.Options) !list_identity_pools.ListIdentityPoolsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_identity_pools.ListIdentityPoolsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

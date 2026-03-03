@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const AssociateEnclaveCertificateIamRoleInput = struct {
@@ -33,11 +34,7 @@ pub const AssociateEnclaveCertificateIamRoleOutput = struct {
     encryption_kms_key_id: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateEnclaveCertificateIamRoleInput, options: Options) !AssociateEnclaveCertificateIamRoleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateEnclaveCertificateIamRoleInput, options: CallOptions) !AssociateEnclaveCertificateIamRoleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

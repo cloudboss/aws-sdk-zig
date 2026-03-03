@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const NotebookInstanceLifecycleConfigSortKey = @import("notebook_instance_lifecycle_config_sort_key.zig").NotebookInstanceLifecycleConfigSortKey;
 const NotebookInstanceLifecycleConfigSortOrder = @import("notebook_instance_lifecycle_config_sort_order.zig").NotebookInstanceLifecycleConfigSortOrder;
@@ -70,11 +71,7 @@ pub const ListNotebookInstanceLifecycleConfigsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListNotebookInstanceLifecycleConfigsInput, options: Options) !ListNotebookInstanceLifecycleConfigsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListNotebookInstanceLifecycleConfigsInput, options: CallOptions) !ListNotebookInstanceLifecycleConfigsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

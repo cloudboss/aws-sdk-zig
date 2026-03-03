@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ModelPromoteMode = @import("model_promote_mode.zig").ModelPromoteMode;
 
@@ -50,13 +51,9 @@ pub const UpdateRetrainingSchedulerInput = struct {
     };
 };
 
-const UpdateRetrainingSchedulerOutput = struct {};
+pub const UpdateRetrainingSchedulerOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRetrainingSchedulerInput, options: Options) !UpdateRetrainingSchedulerOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRetrainingSchedulerInput, options: CallOptions) !UpdateRetrainingSchedulerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

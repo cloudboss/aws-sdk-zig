@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DeviceType = @import("device_type.zig").DeviceType;
 
@@ -61,11 +62,7 @@ pub const AdminListDevicesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminListDevicesInput, options: Options) !AdminListDevicesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminListDevicesInput, options: CallOptions) !AdminListDevicesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

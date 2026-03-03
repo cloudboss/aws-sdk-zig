@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const BlueGreenDeployment = @import("blue_green_deployment.zig").BlueGreenDeployment;
@@ -65,11 +66,7 @@ pub const DescribeBlueGreenDeploymentsOutput = struct {
     marker: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeBlueGreenDeploymentsInput, options: Options) !DescribeBlueGreenDeploymentsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeBlueGreenDeploymentsInput, options: CallOptions) !DescribeBlueGreenDeploymentsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

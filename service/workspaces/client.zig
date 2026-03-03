@@ -92,6 +92,7 @@ const update_rules_of_ip_group = @import("update_rules_of_ip_group.zig");
 const update_workspace_bundle = @import("update_workspace_bundle.zig");
 const update_workspace_image_permission = @import("update_workspace_image_permission.zig");
 const update_workspaces_pool = @import("update_workspaces_pool.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -126,7 +127,7 @@ pub const Client = struct {
     ///
     /// There's currently no unlinking capability after you accept the account
     /// linking invitation.
-    pub fn acceptAccountLinkInvitation(self: *Self, allocator: std.mem.Allocator, input: accept_account_link_invitation.AcceptAccountLinkInvitationInput, options: accept_account_link_invitation.Options) !accept_account_link_invitation.AcceptAccountLinkInvitationOutput {
+    pub fn acceptAccountLinkInvitation(self: *Self, allocator: std.mem.Allocator, input: accept_account_link_invitation.AcceptAccountLinkInvitationInput, options: CallOptions) !accept_account_link_invitation.AcceptAccountLinkInvitationOutput {
         return accept_account_link_invitation.execute(self, allocator, input, options);
     }
 
@@ -139,18 +140,18 @@ pub const Client = struct {
     /// Before performing this operation, call [
     /// DescribeConnectionAliases](https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html) to make sure that the current state of the
     /// connection alias is `CREATED`.
-    pub fn associateConnectionAlias(self: *Self, allocator: std.mem.Allocator, input: associate_connection_alias.AssociateConnectionAliasInput, options: associate_connection_alias.Options) !associate_connection_alias.AssociateConnectionAliasOutput {
+    pub fn associateConnectionAlias(self: *Self, allocator: std.mem.Allocator, input: associate_connection_alias.AssociateConnectionAliasInput, options: CallOptions) !associate_connection_alias.AssociateConnectionAliasOutput {
         return associate_connection_alias.execute(self, allocator, input, options);
     }
 
     /// Associates the specified IP access control group with the specified
     /// directory.
-    pub fn associateIpGroups(self: *Self, allocator: std.mem.Allocator, input: associate_ip_groups.AssociateIpGroupsInput, options: associate_ip_groups.Options) !associate_ip_groups.AssociateIpGroupsOutput {
+    pub fn associateIpGroups(self: *Self, allocator: std.mem.Allocator, input: associate_ip_groups.AssociateIpGroupsInput, options: CallOptions) !associate_ip_groups.AssociateIpGroupsOutput {
         return associate_ip_groups.execute(self, allocator, input, options);
     }
 
     /// Associates the specified application to the specified WorkSpace.
-    pub fn associateWorkspaceApplication(self: *Self, allocator: std.mem.Allocator, input: associate_workspace_application.AssociateWorkspaceApplicationInput, options: associate_workspace_application.Options) !associate_workspace_application.AssociateWorkspaceApplicationOutput {
+    pub fn associateWorkspaceApplication(self: *Self, allocator: std.mem.Allocator, input: associate_workspace_application.AssociateWorkspaceApplicationInput, options: CallOptions) !associate_workspace_application.AssociateWorkspaceApplicationOutput {
         return associate_workspace_application.execute(self, allocator, input, options);
     }
 
@@ -159,7 +160,7 @@ pub const Client = struct {
     /// This action gives users permission to access their WorkSpaces from the CIDR
     /// address
     /// ranges specified in the rules.
-    pub fn authorizeIpRules(self: *Self, allocator: std.mem.Allocator, input: authorize_ip_rules.AuthorizeIpRulesInput, options: authorize_ip_rules.Options) !authorize_ip_rules.AuthorizeIpRulesOutput {
+    pub fn authorizeIpRules(self: *Self, allocator: std.mem.Allocator, input: authorize_ip_rules.AuthorizeIpRulesInput, options: CallOptions) !authorize_ip_rules.AuthorizeIpRulesOutput {
         return authorize_ip_rules.execute(self, allocator, input, options);
     }
 
@@ -180,12 +181,12 @@ pub const Client = struct {
     /// shared and to see
     /// the ID of the Amazon Web Services account that owns an image, use the
     /// [DescribeWorkSpaceImages](https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html) and [DescribeWorkspaceImagePermissions](https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImagePermissions.html) API operations.
-    pub fn copyWorkspaceImage(self: *Self, allocator: std.mem.Allocator, input: copy_workspace_image.CopyWorkspaceImageInput, options: copy_workspace_image.Options) !copy_workspace_image.CopyWorkspaceImageOutput {
+    pub fn copyWorkspaceImage(self: *Self, allocator: std.mem.Allocator, input: copy_workspace_image.CopyWorkspaceImageInput, options: CallOptions) !copy_workspace_image.CopyWorkspaceImageOutput {
         return copy_workspace_image.execute(self, allocator, input, options);
     }
 
     /// Creates the account link invitation.
-    pub fn createAccountLinkInvitation(self: *Self, allocator: std.mem.Allocator, input: create_account_link_invitation.CreateAccountLinkInvitationInput, options: create_account_link_invitation.Options) !create_account_link_invitation.CreateAccountLinkInvitationOutput {
+    pub fn createAccountLinkInvitation(self: *Self, allocator: std.mem.Allocator, input: create_account_link_invitation.CreateAccountLinkInvitationInput, options: CallOptions) !create_account_link_invitation.CreateAccountLinkInvitationOutput {
         return create_account_link_invitation.execute(self, allocator, input, options);
     }
 
@@ -195,7 +196,7 @@ pub const Client = struct {
     ///
     /// This client add-in allows WorkSpaces users to seamlessly connect to Amazon
     /// Connect.
-    pub fn createConnectClientAddIn(self: *Self, allocator: std.mem.Allocator, input: create_connect_client_add_in.CreateConnectClientAddInInput, options: create_connect_client_add_in.Options) !create_connect_client_add_in.CreateConnectClientAddInOutput {
+    pub fn createConnectClientAddIn(self: *Self, allocator: std.mem.Allocator, input: create_connect_client_add_in.CreateConnectClientAddInInput, options: CallOptions) !create_connect_client_add_in.CreateConnectClientAddInOutput {
         return create_connect_client_add_in.execute(self, allocator, input, options);
     }
 
@@ -204,7 +205,7 @@ pub const Client = struct {
     /// information, see [ Cross-Region
     /// Redirection for Amazon
     /// WorkSpaces](https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
-    pub fn createConnectionAlias(self: *Self, allocator: std.mem.Allocator, input: create_connection_alias.CreateConnectionAliasInput, options: create_connection_alias.Options) !create_connection_alias.CreateConnectionAliasOutput {
+    pub fn createConnectionAlias(self: *Self, allocator: std.mem.Allocator, input: create_connection_alias.CreateConnectionAliasInput, options: CallOptions) !create_connection_alias.CreateConnectionAliasOutput {
         return create_connection_alias.execute(self, allocator, input, options);
     }
 
@@ -227,17 +228,17 @@ pub const Client = struct {
     /// WorkSpaces from
     /// anywhere. You cannot modify the default IP access control group for your
     /// directory.
-    pub fn createIpGroup(self: *Self, allocator: std.mem.Allocator, input: create_ip_group.CreateIpGroupInput, options: create_ip_group.Options) !create_ip_group.CreateIpGroupOutput {
+    pub fn createIpGroup(self: *Self, allocator: std.mem.Allocator, input: create_ip_group.CreateIpGroupInput, options: CallOptions) !create_ip_group.CreateIpGroupOutput {
         return create_ip_group.execute(self, allocator, input, options);
     }
 
     /// Creates a standby WorkSpace in a secondary Region.
-    pub fn createStandbyWorkspaces(self: *Self, allocator: std.mem.Allocator, input: create_standby_workspaces.CreateStandbyWorkspacesInput, options: create_standby_workspaces.Options) !create_standby_workspaces.CreateStandbyWorkspacesOutput {
+    pub fn createStandbyWorkspaces(self: *Self, allocator: std.mem.Allocator, input: create_standby_workspaces.CreateStandbyWorkspacesInput, options: CallOptions) !create_standby_workspaces.CreateStandbyWorkspacesOutput {
         return create_standby_workspaces.execute(self, allocator, input, options);
     }
 
     /// Creates the specified tags for the specified WorkSpaces resource.
-    pub fn createTags(self: *Self, allocator: std.mem.Allocator, input: create_tags.CreateTagsInput, options: create_tags.Options) !create_tags.CreateTagsOutput {
+    pub fn createTags(self: *Self, allocator: std.mem.Allocator, input: create_tags.CreateTagsInput, options: CallOptions) !create_tags.CreateTagsOutput {
         return create_tags.execute(self, allocator, input, options);
     }
 
@@ -262,7 +263,7 @@ pub const Client = struct {
     ///
     /// * The source WorkSpace image is not deleted. You can delete the source image
     /// after you've verified your new updated image and created a new bundle.
-    pub fn createUpdatedWorkspaceImage(self: *Self, allocator: std.mem.Allocator, input: create_updated_workspace_image.CreateUpdatedWorkspaceImageInput, options: create_updated_workspace_image.Options) !create_updated_workspace_image.CreateUpdatedWorkspaceImageOutput {
+    pub fn createUpdatedWorkspaceImage(self: *Self, allocator: std.mem.Allocator, input: create_updated_workspace_image.CreateUpdatedWorkspaceImageInput, options: CallOptions) !create_updated_workspace_image.CreateUpdatedWorkspaceImageOutput {
         return create_updated_workspace_image.execute(self, allocator, input, options);
     }
 
@@ -271,12 +272,12 @@ pub const Client = struct {
     /// [
     /// Create a Custom WorkSpaces Image and
     /// Bundle](https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html).
-    pub fn createWorkspaceBundle(self: *Self, allocator: std.mem.Allocator, input: create_workspace_bundle.CreateWorkspaceBundleInput, options: create_workspace_bundle.Options) !create_workspace_bundle.CreateWorkspaceBundleOutput {
+    pub fn createWorkspaceBundle(self: *Self, allocator: std.mem.Allocator, input: create_workspace_bundle.CreateWorkspaceBundleInput, options: CallOptions) !create_workspace_bundle.CreateWorkspaceBundleOutput {
         return create_workspace_bundle.execute(self, allocator, input, options);
     }
 
     /// Creates a new WorkSpace image from an existing WorkSpace.
-    pub fn createWorkspaceImage(self: *Self, allocator: std.mem.Allocator, input: create_workspace_image.CreateWorkspaceImageInput, options: create_workspace_image.Options) !create_workspace_image.CreateWorkspaceImageOutput {
+    pub fn createWorkspaceImage(self: *Self, allocator: std.mem.Allocator, input: create_workspace_image.CreateWorkspaceImageInput, options: CallOptions) !create_workspace_image.CreateWorkspaceImageOutput {
         return create_workspace_image.execute(self, allocator, input, options);
     }
 
@@ -303,17 +304,17 @@ pub const Client = struct {
     /// [
     /// Can I switch between hourly and monthly
     /// billing?](http://aws.amazon.com/workspaces-family/workspaces/faqs/#:~:text=Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%20on%20WorkSpaces%20Personal%3F)
-    pub fn createWorkspaces(self: *Self, allocator: std.mem.Allocator, input: create_workspaces.CreateWorkspacesInput, options: create_workspaces.Options) !create_workspaces.CreateWorkspacesOutput {
+    pub fn createWorkspaces(self: *Self, allocator: std.mem.Allocator, input: create_workspaces.CreateWorkspacesInput, options: CallOptions) !create_workspaces.CreateWorkspacesOutput {
         return create_workspaces.execute(self, allocator, input, options);
     }
 
     /// Creates a pool of WorkSpaces.
-    pub fn createWorkspacesPool(self: *Self, allocator: std.mem.Allocator, input: create_workspaces_pool.CreateWorkspacesPoolInput, options: create_workspaces_pool.Options) !create_workspaces_pool.CreateWorkspacesPoolOutput {
+    pub fn createWorkspacesPool(self: *Self, allocator: std.mem.Allocator, input: create_workspaces_pool.CreateWorkspacesPoolInput, options: CallOptions) !create_workspaces_pool.CreateWorkspacesPoolOutput {
         return create_workspaces_pool.execute(self, allocator, input, options);
     }
 
     /// Deletes the account link invitation.
-    pub fn deleteAccountLinkInvitation(self: *Self, allocator: std.mem.Allocator, input: delete_account_link_invitation.DeleteAccountLinkInvitationInput, options: delete_account_link_invitation.Options) !delete_account_link_invitation.DeleteAccountLinkInvitationOutput {
+    pub fn deleteAccountLinkInvitation(self: *Self, allocator: std.mem.Allocator, input: delete_account_link_invitation.DeleteAccountLinkInvitationInput, options: CallOptions) !delete_account_link_invitation.DeleteAccountLinkInvitationOutput {
         return delete_account_link_invitation.execute(self, allocator, input, options);
     }
 
@@ -328,13 +329,13 @@ pub const Client = struct {
     /// After you delete your customized client branding, your login portal reverts
     /// to the
     /// default client branding.
-    pub fn deleteClientBranding(self: *Self, allocator: std.mem.Allocator, input: delete_client_branding.DeleteClientBrandingInput, options: delete_client_branding.Options) !delete_client_branding.DeleteClientBrandingOutput {
+    pub fn deleteClientBranding(self: *Self, allocator: std.mem.Allocator, input: delete_client_branding.DeleteClientBrandingInput, options: CallOptions) !delete_client_branding.DeleteClientBrandingOutput {
         return delete_client_branding.execute(self, allocator, input, options);
     }
 
     /// Deletes a client-add-in for Amazon Connect that is configured within a
     /// directory.
-    pub fn deleteConnectClientAddIn(self: *Self, allocator: std.mem.Allocator, input: delete_connect_client_add_in.DeleteConnectClientAddInInput, options: delete_connect_client_add_in.Options) !delete_connect_client_add_in.DeleteConnectClientAddInOutput {
+    pub fn deleteConnectClientAddIn(self: *Self, allocator: std.mem.Allocator, input: delete_connect_client_add_in.DeleteConnectClientAddInInput, options: CallOptions) !delete_connect_client_add_in.DeleteConnectClientAddInOutput {
         return delete_connect_client_add_in.execute(self, allocator, input, options);
     }
 
@@ -358,7 +359,7 @@ pub const Client = struct {
     /// delete a connection alias only after it is no longer shared with any
     /// accounts or
     /// associated with any directories.
-    pub fn deleteConnectionAlias(self: *Self, allocator: std.mem.Allocator, input: delete_connection_alias.DeleteConnectionAliasInput, options: delete_connection_alias.Options) !delete_connection_alias.DeleteConnectionAliasOutput {
+    pub fn deleteConnectionAlias(self: *Self, allocator: std.mem.Allocator, input: delete_connection_alias.DeleteConnectionAliasInput, options: CallOptions) !delete_connection_alias.DeleteConnectionAliasOutput {
         return delete_connection_alias.execute(self, allocator, input, options);
     }
 
@@ -366,12 +367,12 @@ pub const Client = struct {
     ///
     /// You cannot delete an IP access control group that is associated with a
     /// directory.
-    pub fn deleteIpGroup(self: *Self, allocator: std.mem.Allocator, input: delete_ip_group.DeleteIpGroupInput, options: delete_ip_group.Options) !delete_ip_group.DeleteIpGroupOutput {
+    pub fn deleteIpGroup(self: *Self, allocator: std.mem.Allocator, input: delete_ip_group.DeleteIpGroupInput, options: CallOptions) !delete_ip_group.DeleteIpGroupOutput {
         return delete_ip_group.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified tags from the specified WorkSpaces resource.
-    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: delete_tags.Options) !delete_tags.DeleteTagsOutput {
+    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: CallOptions) !delete_tags.DeleteTagsOutput {
         return delete_tags.execute(self, allocator, input, options);
     }
 
@@ -380,7 +381,7 @@ pub const Client = struct {
     /// [
     /// Delete a Custom WorkSpaces Bundle or
     /// Image](https://docs.aws.amazon.com/workspaces/latest/adminguide/delete_bundle.html).
-    pub fn deleteWorkspaceBundle(self: *Self, allocator: std.mem.Allocator, input: delete_workspace_bundle.DeleteWorkspaceBundleInput, options: delete_workspace_bundle.Options) !delete_workspace_bundle.DeleteWorkspaceBundleOutput {
+    pub fn deleteWorkspaceBundle(self: *Self, allocator: std.mem.Allocator, input: delete_workspace_bundle.DeleteWorkspaceBundleInput, options: CallOptions) !delete_workspace_bundle.DeleteWorkspaceBundleOutput {
         return delete_workspace_bundle.execute(self, allocator, input, options);
     }
 
@@ -389,12 +390,12 @@ pub const Client = struct {
     /// any bundles that are associated with the image and unshare the image if it
     /// is shared with
     /// other accounts.
-    pub fn deleteWorkspaceImage(self: *Self, allocator: std.mem.Allocator, input: delete_workspace_image.DeleteWorkspaceImageInput, options: delete_workspace_image.Options) !delete_workspace_image.DeleteWorkspaceImageOutput {
+    pub fn deleteWorkspaceImage(self: *Self, allocator: std.mem.Allocator, input: delete_workspace_image.DeleteWorkspaceImageInput, options: CallOptions) !delete_workspace_image.DeleteWorkspaceImageOutput {
         return delete_workspace_image.execute(self, allocator, input, options);
     }
 
     /// Deploys associated applications to the specified WorkSpace
-    pub fn deployWorkspaceApplications(self: *Self, allocator: std.mem.Allocator, input: deploy_workspace_applications.DeployWorkspaceApplicationsInput, options: deploy_workspace_applications.Options) !deploy_workspace_applications.DeployWorkspaceApplicationsOutput {
+    pub fn deployWorkspaceApplications(self: *Self, allocator: std.mem.Allocator, input: deploy_workspace_applications.DeployWorkspaceApplicationsInput, options: CallOptions) !deploy_workspace_applications.DeployWorkspaceApplicationsOutput {
         return deploy_workspace_applications.execute(self, allocator, input, options);
     }
 
@@ -420,39 +421,39 @@ pub const Client = struct {
     /// directory, you can always create a new one when you want to start using
     /// WorkSpaces
     /// again.
-    pub fn deregisterWorkspaceDirectory(self: *Self, allocator: std.mem.Allocator, input: deregister_workspace_directory.DeregisterWorkspaceDirectoryInput, options: deregister_workspace_directory.Options) !deregister_workspace_directory.DeregisterWorkspaceDirectoryOutput {
+    pub fn deregisterWorkspaceDirectory(self: *Self, allocator: std.mem.Allocator, input: deregister_workspace_directory.DeregisterWorkspaceDirectoryInput, options: CallOptions) !deregister_workspace_directory.DeregisterWorkspaceDirectoryOutput {
         return deregister_workspace_directory.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list that describes the configuration of Bring Your Own License
     /// (BYOL) for
     /// the specified account.
-    pub fn describeAccount(self: *Self, allocator: std.mem.Allocator, input: describe_account.DescribeAccountInput, options: describe_account.Options) !describe_account.DescribeAccountOutput {
+    pub fn describeAccount(self: *Self, allocator: std.mem.Allocator, input: describe_account.DescribeAccountInput, options: CallOptions) !describe_account.DescribeAccountOutput {
         return describe_account.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list that describes modifications to the configuration of Bring
     /// Your Own
     /// License (BYOL) for the specified account.
-    pub fn describeAccountModifications(self: *Self, allocator: std.mem.Allocator, input: describe_account_modifications.DescribeAccountModificationsInput, options: describe_account_modifications.Options) !describe_account_modifications.DescribeAccountModificationsOutput {
+    pub fn describeAccountModifications(self: *Self, allocator: std.mem.Allocator, input: describe_account_modifications.DescribeAccountModificationsInput, options: CallOptions) !describe_account_modifications.DescribeAccountModificationsOutput {
         return describe_account_modifications.execute(self, allocator, input, options);
     }
 
     /// Describes the associations between the application and the specified
     /// associated resources.
-    pub fn describeApplicationAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_application_associations.DescribeApplicationAssociationsInput, options: describe_application_associations.Options) !describe_application_associations.DescribeApplicationAssociationsOutput {
+    pub fn describeApplicationAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_application_associations.DescribeApplicationAssociationsInput, options: CallOptions) !describe_application_associations.DescribeApplicationAssociationsOutput {
         return describe_application_associations.execute(self, allocator, input, options);
     }
 
     /// Describes the specified applications by filtering based on their compute
     /// types, license availability, operating systems, and owners.
-    pub fn describeApplications(self: *Self, allocator: std.mem.Allocator, input: describe_applications.DescribeApplicationsInput, options: describe_applications.Options) !describe_applications.DescribeApplicationsOutput {
+    pub fn describeApplications(self: *Self, allocator: std.mem.Allocator, input: describe_applications.DescribeApplicationsInput, options: CallOptions) !describe_applications.DescribeApplicationsOutput {
         return describe_applications.execute(self, allocator, input, options);
     }
 
     /// Describes the associations between the applications and the specified
     /// bundle.
-    pub fn describeBundleAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_bundle_associations.DescribeBundleAssociationsInput, options: describe_bundle_associations.Options) !describe_bundle_associations.DescribeBundleAssociationsOutput {
+    pub fn describeBundleAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_bundle_associations.DescribeBundleAssociationsInput, options: CallOptions) !describe_bundle_associations.DescribeBundleAssociationsOutput {
         return describe_bundle_associations.execute(self, allocator, input, options);
     }
 
@@ -467,18 +468,18 @@ pub const Client = struct {
     /// Only device types that have branding information configured will be shown in
     /// the
     /// response.
-    pub fn describeClientBranding(self: *Self, allocator: std.mem.Allocator, input: describe_client_branding.DescribeClientBrandingInput, options: describe_client_branding.Options) !describe_client_branding.DescribeClientBrandingOutput {
+    pub fn describeClientBranding(self: *Self, allocator: std.mem.Allocator, input: describe_client_branding.DescribeClientBrandingInput, options: CallOptions) !describe_client_branding.DescribeClientBrandingOutput {
         return describe_client_branding.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list that describes one or more specified Amazon WorkSpaces
     /// clients.
-    pub fn describeClientProperties(self: *Self, allocator: std.mem.Allocator, input: describe_client_properties.DescribeClientPropertiesInput, options: describe_client_properties.Options) !describe_client_properties.DescribeClientPropertiesOutput {
+    pub fn describeClientProperties(self: *Self, allocator: std.mem.Allocator, input: describe_client_properties.DescribeClientPropertiesInput, options: CallOptions) !describe_client_properties.DescribeClientPropertiesOutput {
         return describe_client_properties.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of Amazon Connect client add-ins that have been created.
-    pub fn describeConnectClientAddIns(self: *Self, allocator: std.mem.Allocator, input: describe_connect_client_add_ins.DescribeConnectClientAddInsInput, options: describe_connect_client_add_ins.Options) !describe_connect_client_add_ins.DescribeConnectClientAddInsOutput {
+    pub fn describeConnectClientAddIns(self: *Self, allocator: std.mem.Allocator, input: describe_connect_client_add_ins.DescribeConnectClientAddInsInput, options: CallOptions) !describe_connect_client_add_ins.DescribeConnectClientAddInsOutput {
         return describe_connect_client_add_ins.execute(self, allocator, input, options);
     }
 
@@ -489,7 +490,7 @@ pub const Client = struct {
     /// [ Cross-Region
     /// Redirection for Amazon
     /// WorkSpaces](https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
-    pub fn describeConnectionAliasPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_connection_alias_permissions.DescribeConnectionAliasPermissionsInput, options: describe_connection_alias_permissions.Options) !describe_connection_alias_permissions.DescribeConnectionAliasPermissionsOutput {
+    pub fn describeConnectionAliasPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_connection_alias_permissions.DescribeConnectionAliasPermissionsInput, options: CallOptions) !describe_connection_alias_permissions.DescribeConnectionAliasPermissionsOutput {
         return describe_connection_alias_permissions.execute(self, allocator, input, options);
     }
 
@@ -497,65 +498,65 @@ pub const Client = struct {
     /// redirection. For more information, see [ Cross-Region
     /// Redirection for Amazon
     /// WorkSpaces](https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
-    pub fn describeConnectionAliases(self: *Self, allocator: std.mem.Allocator, input: describe_connection_aliases.DescribeConnectionAliasesInput, options: describe_connection_aliases.Options) !describe_connection_aliases.DescribeConnectionAliasesOutput {
+    pub fn describeConnectionAliases(self: *Self, allocator: std.mem.Allocator, input: describe_connection_aliases.DescribeConnectionAliasesInput, options: CallOptions) !describe_connection_aliases.DescribeConnectionAliasesOutput {
         return describe_connection_aliases.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a WorkSpace BYOL image being imported via
     /// ImportCustomWorkspaceImage.
-    pub fn describeCustomWorkspaceImageImport(self: *Self, allocator: std.mem.Allocator, input: describe_custom_workspace_image_import.DescribeCustomWorkspaceImageImportInput, options: describe_custom_workspace_image_import.Options) !describe_custom_workspace_image_import.DescribeCustomWorkspaceImageImportOutput {
+    pub fn describeCustomWorkspaceImageImport(self: *Self, allocator: std.mem.Allocator, input: describe_custom_workspace_image_import.DescribeCustomWorkspaceImageImportInput, options: CallOptions) !describe_custom_workspace_image_import.DescribeCustomWorkspaceImageImportOutput {
         return describe_custom_workspace_image_import.execute(self, allocator, input, options);
     }
 
     /// Describes the associations between the applications and the specified image.
-    pub fn describeImageAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_image_associations.DescribeImageAssociationsInput, options: describe_image_associations.Options) !describe_image_associations.DescribeImageAssociationsOutput {
+    pub fn describeImageAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_image_associations.DescribeImageAssociationsInput, options: CallOptions) !describe_image_associations.DescribeImageAssociationsOutput {
         return describe_image_associations.execute(self, allocator, input, options);
     }
 
     /// Describes one or more of your IP access control groups.
-    pub fn describeIpGroups(self: *Self, allocator: std.mem.Allocator, input: describe_ip_groups.DescribeIpGroupsInput, options: describe_ip_groups.Options) !describe_ip_groups.DescribeIpGroupsOutput {
+    pub fn describeIpGroups(self: *Self, allocator: std.mem.Allocator, input: describe_ip_groups.DescribeIpGroupsInput, options: CallOptions) !describe_ip_groups.DescribeIpGroupsOutput {
         return describe_ip_groups.execute(self, allocator, input, options);
     }
 
     /// Describes the specified tags for the specified WorkSpaces resource.
-    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: describe_tags.Options) !describe_tags.DescribeTagsOutput {
+    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: CallOptions) !describe_tags.DescribeTagsOutput {
         return describe_tags.execute(self, allocator, input, options);
     }
 
     /// Describes the associations betweens applications and the specified
     /// WorkSpace.
-    pub fn describeWorkspaceAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_associations.DescribeWorkspaceAssociationsInput, options: describe_workspace_associations.Options) !describe_workspace_associations.DescribeWorkspaceAssociationsOutput {
+    pub fn describeWorkspaceAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_associations.DescribeWorkspaceAssociationsInput, options: CallOptions) !describe_workspace_associations.DescribeWorkspaceAssociationsOutput {
         return describe_workspace_associations.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list that describes the available WorkSpace bundles.
     ///
     /// You can filter the results using either bundle ID or owner, but not both.
-    pub fn describeWorkspaceBundles(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_bundles.DescribeWorkspaceBundlesInput, options: describe_workspace_bundles.Options) !describe_workspace_bundles.DescribeWorkspaceBundlesOutput {
+    pub fn describeWorkspaceBundles(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_bundles.DescribeWorkspaceBundlesInput, options: CallOptions) !describe_workspace_bundles.DescribeWorkspaceBundlesOutput {
         return describe_workspace_bundles.execute(self, allocator, input, options);
     }
 
     /// Describes the available directories that are registered with Amazon
     /// WorkSpaces.
-    pub fn describeWorkspaceDirectories(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_directories.DescribeWorkspaceDirectoriesInput, options: describe_workspace_directories.Options) !describe_workspace_directories.DescribeWorkspaceDirectoriesOutput {
+    pub fn describeWorkspaceDirectories(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_directories.DescribeWorkspaceDirectoriesInput, options: CallOptions) !describe_workspace_directories.DescribeWorkspaceDirectoriesOutput {
         return describe_workspace_directories.execute(self, allocator, input, options);
     }
 
     /// Describes the permissions that the owner of an image has granted to other
     /// Amazon Web Services accounts for an image.
-    pub fn describeWorkspaceImagePermissions(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_image_permissions.DescribeWorkspaceImagePermissionsInput, options: describe_workspace_image_permissions.Options) !describe_workspace_image_permissions.DescribeWorkspaceImagePermissionsOutput {
+    pub fn describeWorkspaceImagePermissions(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_image_permissions.DescribeWorkspaceImagePermissionsInput, options: CallOptions) !describe_workspace_image_permissions.DescribeWorkspaceImagePermissionsOutput {
         return describe_workspace_image_permissions.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list that describes one or more specified images, if the image
     /// identifiers
     /// are provided. Otherwise, all images in the account are described.
-    pub fn describeWorkspaceImages(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_images.DescribeWorkspaceImagesInput, options: describe_workspace_images.Options) !describe_workspace_images.DescribeWorkspaceImagesOutput {
+    pub fn describeWorkspaceImages(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_images.DescribeWorkspaceImagesInput, options: CallOptions) !describe_workspace_images.DescribeWorkspaceImagesOutput {
         return describe_workspace_images.execute(self, allocator, input, options);
     }
 
     /// Describes the snapshots for the specified WorkSpace.
-    pub fn describeWorkspaceSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_snapshots.DescribeWorkspaceSnapshotsInput, options: describe_workspace_snapshots.Options) !describe_workspace_snapshots.DescribeWorkspaceSnapshotsOutput {
+    pub fn describeWorkspaceSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_snapshots.DescribeWorkspaceSnapshotsInput, options: CallOptions) !describe_workspace_snapshots.DescribeWorkspaceSnapshotsOutput {
         return describe_workspace_snapshots.execute(self, allocator, input, options);
     }
 
@@ -564,22 +565,22 @@ pub const Client = struct {
     /// You can filter the results by using the bundle identifier, directory
     /// identifier, or
     /// owner, but you can specify only one filter at a time.
-    pub fn describeWorkspaces(self: *Self, allocator: std.mem.Allocator, input: describe_workspaces.DescribeWorkspacesInput, options: describe_workspaces.Options) !describe_workspaces.DescribeWorkspacesOutput {
+    pub fn describeWorkspaces(self: *Self, allocator: std.mem.Allocator, input: describe_workspaces.DescribeWorkspacesInput, options: CallOptions) !describe_workspaces.DescribeWorkspacesOutput {
         return describe_workspaces.execute(self, allocator, input, options);
     }
 
     /// Describes the connection status of the specified WorkSpaces.
-    pub fn describeWorkspacesConnectionStatus(self: *Self, allocator: std.mem.Allocator, input: describe_workspaces_connection_status.DescribeWorkspacesConnectionStatusInput, options: describe_workspaces_connection_status.Options) !describe_workspaces_connection_status.DescribeWorkspacesConnectionStatusOutput {
+    pub fn describeWorkspacesConnectionStatus(self: *Self, allocator: std.mem.Allocator, input: describe_workspaces_connection_status.DescribeWorkspacesConnectionStatusInput, options: CallOptions) !describe_workspaces_connection_status.DescribeWorkspacesConnectionStatusOutput {
         return describe_workspaces_connection_status.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list that describes the streaming sessions for a specified pool.
-    pub fn describeWorkspacesPoolSessions(self: *Self, allocator: std.mem.Allocator, input: describe_workspaces_pool_sessions.DescribeWorkspacesPoolSessionsInput, options: describe_workspaces_pool_sessions.Options) !describe_workspaces_pool_sessions.DescribeWorkspacesPoolSessionsOutput {
+    pub fn describeWorkspacesPoolSessions(self: *Self, allocator: std.mem.Allocator, input: describe_workspaces_pool_sessions.DescribeWorkspacesPoolSessionsInput, options: CallOptions) !describe_workspaces_pool_sessions.DescribeWorkspacesPoolSessionsOutput {
         return describe_workspaces_pool_sessions.execute(self, allocator, input, options);
     }
 
     /// Describes the specified WorkSpaces Pools.
-    pub fn describeWorkspacesPools(self: *Self, allocator: std.mem.Allocator, input: describe_workspaces_pools.DescribeWorkspacesPoolsInput, options: describe_workspaces_pools.Options) !describe_workspaces_pools.DescribeWorkspacesPoolsOutput {
+    pub fn describeWorkspacesPools(self: *Self, allocator: std.mem.Allocator, input: describe_workspaces_pools.DescribeWorkspacesPoolsInput, options: CallOptions) !describe_workspaces_pools.DescribeWorkspacesPoolsOutput {
         return describe_workspaces_pools.execute(self, allocator, input, options);
     }
 
@@ -594,23 +595,23 @@ pub const Client = struct {
     /// Before performing this operation, call [
     /// DescribeConnectionAliases](https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html) to make sure that the current state of the
     /// connection alias is `CREATED`.
-    pub fn disassociateConnectionAlias(self: *Self, allocator: std.mem.Allocator, input: disassociate_connection_alias.DisassociateConnectionAliasInput, options: disassociate_connection_alias.Options) !disassociate_connection_alias.DisassociateConnectionAliasOutput {
+    pub fn disassociateConnectionAlias(self: *Self, allocator: std.mem.Allocator, input: disassociate_connection_alias.DisassociateConnectionAliasInput, options: CallOptions) !disassociate_connection_alias.DisassociateConnectionAliasOutput {
         return disassociate_connection_alias.execute(self, allocator, input, options);
     }
 
     /// Disassociates the specified IP access control group from the specified
     /// directory.
-    pub fn disassociateIpGroups(self: *Self, allocator: std.mem.Allocator, input: disassociate_ip_groups.DisassociateIpGroupsInput, options: disassociate_ip_groups.Options) !disassociate_ip_groups.DisassociateIpGroupsOutput {
+    pub fn disassociateIpGroups(self: *Self, allocator: std.mem.Allocator, input: disassociate_ip_groups.DisassociateIpGroupsInput, options: CallOptions) !disassociate_ip_groups.DisassociateIpGroupsOutput {
         return disassociate_ip_groups.execute(self, allocator, input, options);
     }
 
     /// Disassociates the specified application from a WorkSpace.
-    pub fn disassociateWorkspaceApplication(self: *Self, allocator: std.mem.Allocator, input: disassociate_workspace_application.DisassociateWorkspaceApplicationInput, options: disassociate_workspace_application.Options) !disassociate_workspace_application.DisassociateWorkspaceApplicationOutput {
+    pub fn disassociateWorkspaceApplication(self: *Self, allocator: std.mem.Allocator, input: disassociate_workspace_application.DisassociateWorkspaceApplicationInput, options: CallOptions) !disassociate_workspace_application.DisassociateWorkspaceApplicationOutput {
         return disassociate_workspace_application.execute(self, allocator, input, options);
     }
 
     /// Retrieves account link information.
-    pub fn getAccountLink(self: *Self, allocator: std.mem.Allocator, input: get_account_link.GetAccountLinkInput, options: get_account_link.Options) !get_account_link.GetAccountLinkOutput {
+    pub fn getAccountLink(self: *Self, allocator: std.mem.Allocator, input: get_account_link.GetAccountLinkInput, options: CallOptions) !get_account_link.GetAccountLinkOutput {
         return get_account_link.execute(self, allocator, input, options);
     }
 
@@ -641,7 +642,7 @@ pub const Client = struct {
     ///
     /// * Imported data can take up to a minute to appear in the WorkSpaces
     /// client.
-    pub fn importClientBranding(self: *Self, allocator: std.mem.Allocator, input: import_client_branding.ImportClientBrandingInput, options: import_client_branding.Options) !import_client_branding.ImportClientBrandingOutput {
+    pub fn importClientBranding(self: *Self, allocator: std.mem.Allocator, input: import_client_branding.ImportClientBrandingInput, options: CallOptions) !import_client_branding.ImportClientBrandingOutput {
         return import_client_branding.execute(self, allocator, input, options);
     }
 
@@ -653,7 +654,7 @@ pub const Client = struct {
     /// creating BYOL images, see [ Bring Your Own Windows
     /// Desktop
     /// Licenses](https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
-    pub fn importCustomWorkspaceImage(self: *Self, allocator: std.mem.Allocator, input: import_custom_workspace_image.ImportCustomWorkspaceImageInput, options: import_custom_workspace_image.Options) !import_custom_workspace_image.ImportCustomWorkspaceImageOutput {
+    pub fn importCustomWorkspaceImage(self: *Self, allocator: std.mem.Allocator, input: import_custom_workspace_image.ImportCustomWorkspaceImageInput, options: CallOptions) !import_custom_workspace_image.ImportCustomWorkspaceImageOutput {
         return import_custom_workspace_image.execute(self, allocator, input, options);
     }
 
@@ -665,12 +666,12 @@ pub const Client = struct {
     /// creating BYOL images, see [ Bring Your Own Windows
     /// Desktop
     /// Licenses](https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
-    pub fn importWorkspaceImage(self: *Self, allocator: std.mem.Allocator, input: import_workspace_image.ImportWorkspaceImageInput, options: import_workspace_image.Options) !import_workspace_image.ImportWorkspaceImageOutput {
+    pub fn importWorkspaceImage(self: *Self, allocator: std.mem.Allocator, input: import_workspace_image.ImportWorkspaceImageInput, options: CallOptions) !import_workspace_image.ImportWorkspaceImageOutput {
         return import_workspace_image.execute(self, allocator, input, options);
     }
 
     /// Lists all account links.
-    pub fn listAccountLinks(self: *Self, allocator: std.mem.Allocator, input: list_account_links.ListAccountLinksInput, options: list_account_links.Options) !list_account_links.ListAccountLinksOutput {
+    pub fn listAccountLinks(self: *Self, allocator: std.mem.Allocator, input: list_account_links.ListAccountLinksInput, options: CallOptions) !list_account_links.ListAccountLinksOutput {
         return list_account_links.execute(self, allocator, input, options);
     }
 
@@ -689,7 +690,7 @@ pub const Client = struct {
     /// network. It is used for interactive streaming of the WorkSpace desktop to
     /// Amazon WorkSpaces
     /// clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
-    pub fn listAvailableManagementCidrRanges(self: *Self, allocator: std.mem.Allocator, input: list_available_management_cidr_ranges.ListAvailableManagementCidrRangesInput, options: list_available_management_cidr_ranges.Options) !list_available_management_cidr_ranges.ListAvailableManagementCidrRangesOutput {
+    pub fn listAvailableManagementCidrRanges(self: *Self, allocator: std.mem.Allocator, input: list_available_management_cidr_ranges.ListAvailableManagementCidrRangesInput, options: CallOptions) !list_available_management_cidr_ranges.ListAvailableManagementCidrRangesOutput {
         return list_available_management_cidr_ranges.execute(self, allocator, input, options);
     }
 
@@ -710,32 +711,32 @@ pub const Client = struct {
     /// migration, and best
     /// practices, see [Migrate a
     /// WorkSpace](https://docs.aws.amazon.com/workspaces/latest/adminguide/migrate-workspaces.html).
-    pub fn migrateWorkspace(self: *Self, allocator: std.mem.Allocator, input: migrate_workspace.MigrateWorkspaceInput, options: migrate_workspace.Options) !migrate_workspace.MigrateWorkspaceOutput {
+    pub fn migrateWorkspace(self: *Self, allocator: std.mem.Allocator, input: migrate_workspace.MigrateWorkspaceInput, options: CallOptions) !migrate_workspace.MigrateWorkspaceOutput {
         return migrate_workspace.execute(self, allocator, input, options);
     }
 
     /// Modifies the configuration of Bring Your Own License (BYOL) for the
     /// specified
     /// account.
-    pub fn modifyAccount(self: *Self, allocator: std.mem.Allocator, input: modify_account.ModifyAccountInput, options: modify_account.Options) !modify_account.ModifyAccountOutput {
+    pub fn modifyAccount(self: *Self, allocator: std.mem.Allocator, input: modify_account.ModifyAccountInput, options: CallOptions) !modify_account.ModifyAccountOutput {
         return modify_account.execute(self, allocator, input, options);
     }
 
     /// Modifies the properties of the certificate-based authentication you want
     /// to use with your WorkSpaces.
-    pub fn modifyCertificateBasedAuthProperties(self: *Self, allocator: std.mem.Allocator, input: modify_certificate_based_auth_properties.ModifyCertificateBasedAuthPropertiesInput, options: modify_certificate_based_auth_properties.Options) !modify_certificate_based_auth_properties.ModifyCertificateBasedAuthPropertiesOutput {
+    pub fn modifyCertificateBasedAuthProperties(self: *Self, allocator: std.mem.Allocator, input: modify_certificate_based_auth_properties.ModifyCertificateBasedAuthPropertiesInput, options: CallOptions) !modify_certificate_based_auth_properties.ModifyCertificateBasedAuthPropertiesOutput {
         return modify_certificate_based_auth_properties.execute(self, allocator, input, options);
     }
 
     /// Modifies the properties of the specified Amazon WorkSpaces clients.
-    pub fn modifyClientProperties(self: *Self, allocator: std.mem.Allocator, input: modify_client_properties.ModifyClientPropertiesInput, options: modify_client_properties.Options) !modify_client_properties.ModifyClientPropertiesOutput {
+    pub fn modifyClientProperties(self: *Self, allocator: std.mem.Allocator, input: modify_client_properties.ModifyClientPropertiesInput, options: CallOptions) !modify_client_properties.ModifyClientPropertiesOutput {
         return modify_client_properties.execute(self, allocator, input, options);
     }
 
     /// Modifies the endpoint encryption mode that allows you to configure the
     /// specified
     /// directory between Standard TLS and FIPS 140-2 validated mode.
-    pub fn modifyEndpointEncryptionMode(self: *Self, allocator: std.mem.Allocator, input: modify_endpoint_encryption_mode.ModifyEndpointEncryptionModeInput, options: modify_endpoint_encryption_mode.Options) !modify_endpoint_encryption_mode.ModifyEndpointEncryptionModeOutput {
+    pub fn modifyEndpointEncryptionMode(self: *Self, allocator: std.mem.Allocator, input: modify_endpoint_encryption_mode.ModifyEndpointEncryptionModeInput, options: CallOptions) !modify_endpoint_encryption_mode.ModifyEndpointEncryptionModeOutput {
         return modify_endpoint_encryption_mode.execute(self, allocator, input, options);
     }
 
@@ -744,7 +745,7 @@ pub const Client = struct {
     /// user access URL, and relay state parameter name that are used for
     /// configuring federation with an
     /// SAML 2.0 identity provider.
-    pub fn modifySamlProperties(self: *Self, allocator: std.mem.Allocator, input: modify_saml_properties.ModifySamlPropertiesInput, options: modify_saml_properties.Options) !modify_saml_properties.ModifySamlPropertiesOutput {
+    pub fn modifySamlProperties(self: *Self, allocator: std.mem.Allocator, input: modify_saml_properties.ModifySamlPropertiesInput, options: CallOptions) !modify_saml_properties.ModifySamlPropertiesOutput {
         return modify_saml_properties.execute(self, allocator, input, options);
     }
 
@@ -753,12 +754,12 @@ pub const Client = struct {
     /// information, see [Enable Self-Service WorkSpace Management Capabilities for
     /// Your
     /// Users](https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html).
-    pub fn modifySelfservicePermissions(self: *Self, allocator: std.mem.Allocator, input: modify_selfservice_permissions.ModifySelfservicePermissionsInput, options: modify_selfservice_permissions.Options) !modify_selfservice_permissions.ModifySelfservicePermissionsOutput {
+    pub fn modifySelfservicePermissions(self: *Self, allocator: std.mem.Allocator, input: modify_selfservice_permissions.ModifySelfservicePermissionsInput, options: CallOptions) !modify_selfservice_permissions.ModifySelfservicePermissionsOutput {
         return modify_selfservice_permissions.execute(self, allocator, input, options);
     }
 
     /// Modifies the specified streaming properties.
-    pub fn modifyStreamingProperties(self: *Self, allocator: std.mem.Allocator, input: modify_streaming_properties.ModifyStreamingPropertiesInput, options: modify_streaming_properties.Options) !modify_streaming_properties.ModifyStreamingPropertiesOutput {
+    pub fn modifyStreamingProperties(self: *Self, allocator: std.mem.Allocator, input: modify_streaming_properties.ModifyStreamingPropertiesInput, options: CallOptions) !modify_streaming_properties.ModifyStreamingPropertiesOutput {
         return modify_streaming_properties.execute(self, allocator, input, options);
     }
 
@@ -767,12 +768,12 @@ pub const Client = struct {
     /// For more information, see [
     /// Control Device
     /// Access](https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html#control-device-access).
-    pub fn modifyWorkspaceAccessProperties(self: *Self, allocator: std.mem.Allocator, input: modify_workspace_access_properties.ModifyWorkspaceAccessPropertiesInput, options: modify_workspace_access_properties.Options) !modify_workspace_access_properties.ModifyWorkspaceAccessPropertiesOutput {
+    pub fn modifyWorkspaceAccessProperties(self: *Self, allocator: std.mem.Allocator, input: modify_workspace_access_properties.ModifyWorkspaceAccessPropertiesInput, options: CallOptions) !modify_workspace_access_properties.ModifyWorkspaceAccessPropertiesOutput {
         return modify_workspace_access_properties.execute(self, allocator, input, options);
     }
 
     /// Modify the default properties used to create WorkSpaces.
-    pub fn modifyWorkspaceCreationProperties(self: *Self, allocator: std.mem.Allocator, input: modify_workspace_creation_properties.ModifyWorkspaceCreationPropertiesInput, options: modify_workspace_creation_properties.Options) !modify_workspace_creation_properties.ModifyWorkspaceCreationPropertiesOutput {
+    pub fn modifyWorkspaceCreationProperties(self: *Self, allocator: std.mem.Allocator, input: modify_workspace_creation_properties.ModifyWorkspaceCreationPropertiesInput, options: CallOptions) !modify_workspace_creation_properties.ModifyWorkspaceCreationPropertiesOutput {
         return modify_workspace_creation_properties.execute(self, allocator, input, options);
     }
 
@@ -786,7 +787,7 @@ pub const Client = struct {
     /// more
     /// information, see [Amazon WorkSpaces
     /// Core](http://aws.amazon.com/workspaces/core/).
-    pub fn modifyWorkspaceProperties(self: *Self, allocator: std.mem.Allocator, input: modify_workspace_properties.ModifyWorkspacePropertiesInput, options: modify_workspace_properties.Options) !modify_workspace_properties.ModifyWorkspacePropertiesOutput {
+    pub fn modifyWorkspaceProperties(self: *Self, allocator: std.mem.Allocator, input: modify_workspace_properties.ModifyWorkspacePropertiesInput, options: CallOptions) !modify_workspace_properties.ModifyWorkspacePropertiesOutput {
         return modify_workspace_properties.execute(self, allocator, input, options);
     }
 
@@ -799,7 +800,7 @@ pub const Client = struct {
     /// state is not
     /// stopped. Users cannot log into a WorkSpace in the `ADMIN_MAINTENANCE`
     /// state.
-    pub fn modifyWorkspaceState(self: *Self, allocator: std.mem.Allocator, input: modify_workspace_state.ModifyWorkspaceStateInput, options: modify_workspace_state.Options) !modify_workspace_state.ModifyWorkspaceStateOutput {
+    pub fn modifyWorkspaceState(self: *Self, allocator: std.mem.Allocator, input: modify_workspace_state.ModifyWorkspaceStateInput, options: CallOptions) !modify_workspace_state.ModifyWorkspaceStateOutput {
         return modify_workspace_state.execute(self, allocator, input, options);
     }
 
@@ -812,7 +813,7 @@ pub const Client = struct {
     ///
     /// This operation is asynchronous and returns before the WorkSpaces have
     /// rebooted.
-    pub fn rebootWorkspaces(self: *Self, allocator: std.mem.Allocator, input: reboot_workspaces.RebootWorkspacesInput, options: reboot_workspaces.Options) !reboot_workspaces.RebootWorkspacesOutput {
+    pub fn rebootWorkspaces(self: *Self, allocator: std.mem.Allocator, input: reboot_workspaces.RebootWorkspacesInput, options: CallOptions) !reboot_workspaces.RebootWorkspacesOutput {
         return reboot_workspaces.execute(self, allocator, input, options);
     }
 
@@ -830,7 +831,7 @@ pub const Client = struct {
     /// This operation is asynchronous and returns before the WorkSpaces have been
     /// completely
     /// rebuilt.
-    pub fn rebuildWorkspaces(self: *Self, allocator: std.mem.Allocator, input: rebuild_workspaces.RebuildWorkspacesInput, options: rebuild_workspaces.Options) !rebuild_workspaces.RebuildWorkspacesOutput {
+    pub fn rebuildWorkspaces(self: *Self, allocator: std.mem.Allocator, input: rebuild_workspaces.RebuildWorkspacesInput, options: CallOptions) !rebuild_workspaces.RebuildWorkspacesOutput {
         return rebuild_workspaces.execute(self, allocator, input, options);
     }
 
@@ -843,12 +844,12 @@ pub const Client = struct {
     /// a directory. For more information, see [
     /// Creating the workspaces_DefaultRole
     /// Role](https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role).
-    pub fn registerWorkspaceDirectory(self: *Self, allocator: std.mem.Allocator, input: register_workspace_directory.RegisterWorkspaceDirectoryInput, options: register_workspace_directory.Options) !register_workspace_directory.RegisterWorkspaceDirectoryOutput {
+    pub fn registerWorkspaceDirectory(self: *Self, allocator: std.mem.Allocator, input: register_workspace_directory.RegisterWorkspaceDirectoryInput, options: CallOptions) !register_workspace_directory.RegisterWorkspaceDirectoryOutput {
         return register_workspace_directory.execute(self, allocator, input, options);
     }
 
     /// Rejects the account link invitation.
-    pub fn rejectAccountLinkInvitation(self: *Self, allocator: std.mem.Allocator, input: reject_account_link_invitation.RejectAccountLinkInvitationInput, options: reject_account_link_invitation.Options) !reject_account_link_invitation.RejectAccountLinkInvitationOutput {
+    pub fn rejectAccountLinkInvitation(self: *Self, allocator: std.mem.Allocator, input: reject_account_link_invitation.RejectAccountLinkInvitationInput, options: CallOptions) !reject_account_link_invitation.RejectAccountLinkInvitationOutput {
         return reject_account_link_invitation.execute(self, allocator, input, options);
     }
 
@@ -865,12 +866,12 @@ pub const Client = struct {
     /// This operation is asynchronous and returns before the WorkSpace is
     /// completely
     /// restored.
-    pub fn restoreWorkspace(self: *Self, allocator: std.mem.Allocator, input: restore_workspace.RestoreWorkspaceInput, options: restore_workspace.Options) !restore_workspace.RestoreWorkspaceOutput {
+    pub fn restoreWorkspace(self: *Self, allocator: std.mem.Allocator, input: restore_workspace.RestoreWorkspaceInput, options: CallOptions) !restore_workspace.RestoreWorkspaceOutput {
         return restore_workspace.execute(self, allocator, input, options);
     }
 
     /// Removes one or more rules from the specified IP access control group.
-    pub fn revokeIpRules(self: *Self, allocator: std.mem.Allocator, input: revoke_ip_rules.RevokeIpRulesInput, options: revoke_ip_rules.Options) !revoke_ip_rules.RevokeIpRulesOutput {
+    pub fn revokeIpRules(self: *Self, allocator: std.mem.Allocator, input: revoke_ip_rules.RevokeIpRulesInput, options: CallOptions) !revoke_ip_rules.RevokeIpRulesOutput {
         return revoke_ip_rules.execute(self, allocator, input, options);
     }
 
@@ -878,7 +879,7 @@ pub const Client = struct {
     ///
     /// You cannot start a WorkSpace unless it has a running mode of `AutoStop` or
     /// `Manual` and a state of `STOPPED`.
-    pub fn startWorkspaces(self: *Self, allocator: std.mem.Allocator, input: start_workspaces.StartWorkspacesInput, options: start_workspaces.Options) !start_workspaces.StartWorkspacesOutput {
+    pub fn startWorkspaces(self: *Self, allocator: std.mem.Allocator, input: start_workspaces.StartWorkspacesInput, options: CallOptions) !start_workspaces.StartWorkspacesOutput {
         return start_workspaces.execute(self, allocator, input, options);
     }
 
@@ -886,7 +887,7 @@ pub const Client = struct {
     ///
     /// You cannot start a pool unless it has a running mode of
     /// `AutoStop` and a state of `STOPPED`.
-    pub fn startWorkspacesPool(self: *Self, allocator: std.mem.Allocator, input: start_workspaces_pool.StartWorkspacesPoolInput, options: start_workspaces_pool.Options) !start_workspaces_pool.StartWorkspacesPoolOutput {
+    pub fn startWorkspacesPool(self: *Self, allocator: std.mem.Allocator, input: start_workspaces_pool.StartWorkspacesPoolInput, options: CallOptions) !start_workspaces_pool.StartWorkspacesPoolOutput {
         return start_workspaces_pool.execute(self, allocator, input, options);
     }
 
@@ -895,7 +896,7 @@ pub const Client = struct {
     /// You cannot stop a WorkSpace unless it has a running mode of `AutoStop` or
     /// `Manual` and a state of `AVAILABLE`, `IMPAIRED`,
     /// `UNHEALTHY`, or `ERROR`.
-    pub fn stopWorkspaces(self: *Self, allocator: std.mem.Allocator, input: stop_workspaces.StopWorkspacesInput, options: stop_workspaces.Options) !stop_workspaces.StopWorkspacesOutput {
+    pub fn stopWorkspaces(self: *Self, allocator: std.mem.Allocator, input: stop_workspaces.StopWorkspacesInput, options: CallOptions) !stop_workspaces.StopWorkspacesOutput {
         return stop_workspaces.execute(self, allocator, input, options);
     }
 
@@ -903,7 +904,7 @@ pub const Client = struct {
     ///
     /// You cannot stop a WorkSpace pool unless it has a running mode of `AutoStop`
     /// and a state of `AVAILABLE`, `IMPAIRED`, `UNHEALTHY`, or `ERROR`.
-    pub fn stopWorkspacesPool(self: *Self, allocator: std.mem.Allocator, input: stop_workspaces_pool.StopWorkspacesPoolInput, options: stop_workspaces_pool.Options) !stop_workspaces_pool.StopWorkspacesPoolOutput {
+    pub fn stopWorkspacesPool(self: *Self, allocator: std.mem.Allocator, input: stop_workspaces_pool.StopWorkspacesPoolInput, options: CallOptions) !stop_workspaces_pool.StopWorkspacesPoolOutput {
         return stop_workspaces_pool.execute(self, allocator, input, options);
     }
 
@@ -945,24 +946,24 @@ pub const Client = struct {
     /// directory, you can always create a new one when you want to start using
     /// WorkSpaces
     /// again.
-    pub fn terminateWorkspaces(self: *Self, allocator: std.mem.Allocator, input: terminate_workspaces.TerminateWorkspacesInput, options: terminate_workspaces.Options) !terminate_workspaces.TerminateWorkspacesOutput {
+    pub fn terminateWorkspaces(self: *Self, allocator: std.mem.Allocator, input: terminate_workspaces.TerminateWorkspacesInput, options: CallOptions) !terminate_workspaces.TerminateWorkspacesOutput {
         return terminate_workspaces.execute(self, allocator, input, options);
     }
 
     /// Terminates the specified pool.
-    pub fn terminateWorkspacesPool(self: *Self, allocator: std.mem.Allocator, input: terminate_workspaces_pool.TerminateWorkspacesPoolInput, options: terminate_workspaces_pool.Options) !terminate_workspaces_pool.TerminateWorkspacesPoolOutput {
+    pub fn terminateWorkspacesPool(self: *Self, allocator: std.mem.Allocator, input: terminate_workspaces_pool.TerminateWorkspacesPoolInput, options: CallOptions) !terminate_workspaces_pool.TerminateWorkspacesPoolOutput {
         return terminate_workspaces_pool.execute(self, allocator, input, options);
     }
 
     /// Terminates the pool session.
-    pub fn terminateWorkspacesPoolSession(self: *Self, allocator: std.mem.Allocator, input: terminate_workspaces_pool_session.TerminateWorkspacesPoolSessionInput, options: terminate_workspaces_pool_session.Options) !terminate_workspaces_pool_session.TerminateWorkspacesPoolSessionOutput {
+    pub fn terminateWorkspacesPoolSession(self: *Self, allocator: std.mem.Allocator, input: terminate_workspaces_pool_session.TerminateWorkspacesPoolSessionInput, options: CallOptions) !terminate_workspaces_pool_session.TerminateWorkspacesPoolSessionOutput {
         return terminate_workspaces_pool_session.execute(self, allocator, input, options);
     }
 
     /// Updates a Amazon Connect client add-in. Use this action to update the name
     /// and
     /// endpoint URL of a Amazon Connect client add-in.
-    pub fn updateConnectClientAddIn(self: *Self, allocator: std.mem.Allocator, input: update_connect_client_add_in.UpdateConnectClientAddInInput, options: update_connect_client_add_in.Options) !update_connect_client_add_in.UpdateConnectClientAddInOutput {
+    pub fn updateConnectClientAddIn(self: *Self, allocator: std.mem.Allocator, input: update_connect_client_add_in.UpdateConnectClientAddInInput, options: CallOptions) !update_connect_client_add_in.UpdateConnectClientAddInOutput {
         return update_connect_client_add_in.execute(self, allocator, input, options);
     }
 
@@ -989,14 +990,14 @@ pub const Client = struct {
     /// has been shared with. You can delete a connection alias only after it is no
     /// longer
     /// shared with any accounts or associated with any directories.
-    pub fn updateConnectionAliasPermission(self: *Self, allocator: std.mem.Allocator, input: update_connection_alias_permission.UpdateConnectionAliasPermissionInput, options: update_connection_alias_permission.Options) !update_connection_alias_permission.UpdateConnectionAliasPermissionOutput {
+    pub fn updateConnectionAliasPermission(self: *Self, allocator: std.mem.Allocator, input: update_connection_alias_permission.UpdateConnectionAliasPermissionInput, options: CallOptions) !update_connection_alias_permission.UpdateConnectionAliasPermissionOutput {
         return update_connection_alias_permission.execute(self, allocator, input, options);
     }
 
     /// Replaces the current rules of the specified IP access control group with the
     /// specified
     /// rules.
-    pub fn updateRulesOfIpGroup(self: *Self, allocator: std.mem.Allocator, input: update_rules_of_ip_group.UpdateRulesOfIpGroupInput, options: update_rules_of_ip_group.Options) !update_rules_of_ip_group.UpdateRulesOfIpGroupOutput {
+    pub fn updateRulesOfIpGroup(self: *Self, allocator: std.mem.Allocator, input: update_rules_of_ip_group.UpdateRulesOfIpGroupInput, options: CallOptions) !update_rules_of_ip_group.UpdateRulesOfIpGroupOutput {
         return update_rules_of_ip_group.execute(self, allocator, input, options);
     }
 
@@ -1011,7 +1012,7 @@ pub const Client = struct {
     /// based on. To update existing WorkSpaces that are based on a bundle that
     /// you've updated, you
     /// must either rebuild the WorkSpaces or delete and recreate them.
-    pub fn updateWorkspaceBundle(self: *Self, allocator: std.mem.Allocator, input: update_workspace_bundle.UpdateWorkspaceBundleInput, options: update_workspace_bundle.Options) !update_workspace_bundle.UpdateWorkspaceBundleOutput {
+    pub fn updateWorkspaceBundle(self: *Self, allocator: std.mem.Allocator, input: update_workspace_bundle.UpdateWorkspaceBundleInput, options: CallOptions) !update_workspace_bundle.UpdateWorkspaceBundleOutput {
         return update_workspace_bundle.execute(self, allocator, input, options);
     }
 
@@ -1047,12 +1048,12 @@ pub const Client = struct {
     /// BYOL images
     /// across accounts in Amazon Web Services GovCloud (US), contact Amazon Web
     /// Services Support.
-    pub fn updateWorkspaceImagePermission(self: *Self, allocator: std.mem.Allocator, input: update_workspace_image_permission.UpdateWorkspaceImagePermissionInput, options: update_workspace_image_permission.Options) !update_workspace_image_permission.UpdateWorkspaceImagePermissionOutput {
+    pub fn updateWorkspaceImagePermission(self: *Self, allocator: std.mem.Allocator, input: update_workspace_image_permission.UpdateWorkspaceImagePermissionInput, options: CallOptions) !update_workspace_image_permission.UpdateWorkspaceImagePermissionOutput {
         return update_workspace_image_permission.execute(self, allocator, input, options);
     }
 
     /// Updates the specified pool.
-    pub fn updateWorkspacesPool(self: *Self, allocator: std.mem.Allocator, input: update_workspaces_pool.UpdateWorkspacesPoolInput, options: update_workspaces_pool.Options) !update_workspaces_pool.UpdateWorkspacesPoolOutput {
+    pub fn updateWorkspacesPool(self: *Self, allocator: std.mem.Allocator, input: update_workspaces_pool.UpdateWorkspacesPoolInput, options: CallOptions) !update_workspaces_pool.UpdateWorkspacesPoolOutput {
         return update_workspaces_pool.execute(self, allocator, input, options);
     }
 

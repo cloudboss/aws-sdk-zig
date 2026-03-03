@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const KinesisVideoStreamRecordingSourceRuntimeConfiguration = @import("kinesis_video_stream_recording_source_runtime_configuration.zig").KinesisVideoStreamRecordingSourceRuntimeConfiguration;
 const KinesisVideoStreamSourceRuntimeConfiguration = @import("kinesis_video_stream_source_runtime_configuration.zig").KinesisVideoStreamSourceRuntimeConfiguration;
@@ -56,11 +57,7 @@ pub const CreateMediaInsightsPipelineOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMediaInsightsPipelineInput, options: Options) !CreateMediaInsightsPipelineOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMediaInsightsPipelineInput, options: CallOptions) !CreateMediaInsightsPipelineOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

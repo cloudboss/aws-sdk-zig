@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DeleteLaunchTemplateVersionsResponseSuccessItem = @import("delete_launch_template_versions_response_success_item.zig").DeleteLaunchTemplateVersionsResponseSuccessItem;
 const DeleteLaunchTemplateVersionsResponseErrorItem = @import("delete_launch_template_versions_response_error_item.zig").DeleteLaunchTemplateVersionsResponseErrorItem;
@@ -44,11 +45,7 @@ pub const DeleteLaunchTemplateVersionsOutput = struct {
     unsuccessfully_deleted_launch_template_versions: ?[]const DeleteLaunchTemplateVersionsResponseErrorItem = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLaunchTemplateVersionsInput, options: Options) !DeleteLaunchTemplateVersionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLaunchTemplateVersionsInput, options: CallOptions) !DeleteLaunchTemplateVersionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

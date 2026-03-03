@@ -24,6 +24,7 @@ const list_virtual_clusters = @import("list_virtual_clusters.zig");
 const start_job_run = @import("start_job_run.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -57,7 +58,7 @@ pub const Client = struct {
     /// Cancels a job run. A job run is a unit of work, such as a Spark jar, PySpark
     /// script, or
     /// SparkSQL query, that you submit to Amazon EMR on EKS.
-    pub fn cancelJobRun(self: *Self, allocator: std.mem.Allocator, input: cancel_job_run.CancelJobRunInput, options: cancel_job_run.Options) !cancel_job_run.CancelJobRunOutput {
+    pub fn cancelJobRun(self: *Self, allocator: std.mem.Allocator, input: cancel_job_run.CancelJobRunInput, options: CallOptions) !cancel_job_run.CancelJobRunOutput {
         return cancel_job_run.execute(self, allocator, input, options);
     }
 
@@ -68,14 +69,14 @@ pub const Client = struct {
     /// repeating recurring StartJobRun API request values, enforcing certain values
     /// in StartJobRun
     /// API request.
-    pub fn createJobTemplate(self: *Self, allocator: std.mem.Allocator, input: create_job_template.CreateJobTemplateInput, options: create_job_template.Options) !create_job_template.CreateJobTemplateOutput {
+    pub fn createJobTemplate(self: *Self, allocator: std.mem.Allocator, input: create_job_template.CreateJobTemplateInput, options: CallOptions) !create_job_template.CreateJobTemplateOutput {
         return create_job_template.execute(self, allocator, input, options);
     }
 
     /// Creates a managed endpoint. A managed endpoint is a gateway that connects
     /// Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can
     /// communicate with your virtual cluster.
-    pub fn createManagedEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_managed_endpoint.CreateManagedEndpointInput, options: create_managed_endpoint.Options) !create_managed_endpoint.CreateManagedEndpointOutput {
+    pub fn createManagedEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_managed_endpoint.CreateManagedEndpointInput, options: CallOptions) !create_managed_endpoint.CreateManagedEndpointOutput {
         return create_managed_endpoint.execute(self, allocator, input, options);
     }
 
@@ -86,7 +87,7 @@ pub const Client = struct {
     /// the Lake Formation integration setup. You can also create a security
     /// configuration
     /// to re-use a security setup each time you create a virtual cluster.
-    pub fn createSecurityConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_security_configuration.CreateSecurityConfigurationInput, options: create_security_configuration.Options) !create_security_configuration.CreateSecurityConfigurationOutput {
+    pub fn createSecurityConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_security_configuration.CreateSecurityConfigurationInput, options: CallOptions) !create_security_configuration.CreateSecurityConfigurationOutput {
         return create_security_configuration.execute(self, allocator, input, options);
     }
 
@@ -98,7 +99,7 @@ pub const Client = struct {
     /// namespace. Given this relationship, you can model virtual clusters the same
     /// way you model
     /// Kubernetes namespaces to meet your requirements.
-    pub fn createVirtualCluster(self: *Self, allocator: std.mem.Allocator, input: create_virtual_cluster.CreateVirtualClusterInput, options: create_virtual_cluster.Options) !create_virtual_cluster.CreateVirtualClusterOutput {
+    pub fn createVirtualCluster(self: *Self, allocator: std.mem.Allocator, input: create_virtual_cluster.CreateVirtualClusterInput, options: CallOptions) !create_virtual_cluster.CreateVirtualClusterOutput {
         return create_virtual_cluster.execute(self, allocator, input, options);
     }
 
@@ -109,14 +110,14 @@ pub const Client = struct {
     /// repeating recurring StartJobRun API request values, enforcing certain values
     /// in StartJobRun
     /// API request.
-    pub fn deleteJobTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_job_template.DeleteJobTemplateInput, options: delete_job_template.Options) !delete_job_template.DeleteJobTemplateOutput {
+    pub fn deleteJobTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_job_template.DeleteJobTemplateInput, options: CallOptions) !delete_job_template.DeleteJobTemplateOutput {
         return delete_job_template.execute(self, allocator, input, options);
     }
 
     /// Deletes a managed endpoint. A managed endpoint is a gateway that connects
     /// Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can
     /// communicate with your virtual cluster.
-    pub fn deleteManagedEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_managed_endpoint.DeleteManagedEndpointInput, options: delete_managed_endpoint.Options) !delete_managed_endpoint.DeleteManagedEndpointOutput {
+    pub fn deleteManagedEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_managed_endpoint.DeleteManagedEndpointInput, options: CallOptions) !delete_managed_endpoint.DeleteManagedEndpointOutput {
         return delete_managed_endpoint.execute(self, allocator, input, options);
     }
 
@@ -128,7 +129,7 @@ pub const Client = struct {
     /// namespace. Given this relationship, you can model virtual clusters the same
     /// way you model
     /// Kubernetes namespaces to meet your requirements.
-    pub fn deleteVirtualCluster(self: *Self, allocator: std.mem.Allocator, input: delete_virtual_cluster.DeleteVirtualClusterInput, options: delete_virtual_cluster.Options) !delete_virtual_cluster.DeleteVirtualClusterOutput {
+    pub fn deleteVirtualCluster(self: *Self, allocator: std.mem.Allocator, input: delete_virtual_cluster.DeleteVirtualClusterInput, options: CallOptions) !delete_virtual_cluster.DeleteVirtualClusterOutput {
         return delete_virtual_cluster.execute(self, allocator, input, options);
     }
 
@@ -136,7 +137,7 @@ pub const Client = struct {
     /// such as a
     /// Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR
     /// on EKS.
-    pub fn describeJobRun(self: *Self, allocator: std.mem.Allocator, input: describe_job_run.DescribeJobRunInput, options: describe_job_run.Options) !describe_job_run.DescribeJobRunOutput {
+    pub fn describeJobRun(self: *Self, allocator: std.mem.Allocator, input: describe_job_run.DescribeJobRunInput, options: CallOptions) !describe_job_run.DescribeJobRunOutput {
         return describe_job_run.execute(self, allocator, input, options);
     }
 
@@ -147,7 +148,7 @@ pub const Client = struct {
     /// allows two use cases: avoid repeating recurring StartJobRun API request
     /// values, enforcing
     /// certain values in StartJobRun API request.
-    pub fn describeJobTemplate(self: *Self, allocator: std.mem.Allocator, input: describe_job_template.DescribeJobTemplateInput, options: describe_job_template.Options) !describe_job_template.DescribeJobTemplateOutput {
+    pub fn describeJobTemplate(self: *Self, allocator: std.mem.Allocator, input: describe_job_template.DescribeJobTemplateInput, options: CallOptions) !describe_job_template.DescribeJobTemplateOutput {
         return describe_job_template.execute(self, allocator, input, options);
     }
 
@@ -155,7 +156,7 @@ pub const Client = struct {
     /// is a gateway
     /// that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR
     /// Studio can communicate with your virtual cluster.
-    pub fn describeManagedEndpoint(self: *Self, allocator: std.mem.Allocator, input: describe_managed_endpoint.DescribeManagedEndpointInput, options: describe_managed_endpoint.Options) !describe_managed_endpoint.DescribeManagedEndpointOutput {
+    pub fn describeManagedEndpoint(self: *Self, allocator: std.mem.Allocator, input: describe_managed_endpoint.DescribeManagedEndpointInput, options: CallOptions) !describe_managed_endpoint.DescribeManagedEndpointOutput {
         return describe_managed_endpoint.execute(self, allocator, input, options);
     }
 
@@ -168,7 +169,7 @@ pub const Client = struct {
     /// You can also create a security configuration to re-use a security setup each
     /// time you
     /// create a virtual cluster.
-    pub fn describeSecurityConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_security_configuration.DescribeSecurityConfigurationInput, options: describe_security_configuration.Options) !describe_security_configuration.DescribeSecurityConfigurationOutput {
+    pub fn describeSecurityConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_security_configuration.DescribeSecurityConfigurationInput, options: CallOptions) !describe_security_configuration.DescribeSecurityConfigurationOutput {
         return describe_security_configuration.execute(self, allocator, input, options);
     }
 
@@ -182,12 +183,12 @@ pub const Client = struct {
     /// can model
     /// virtual clusters the same way you model Kubernetes namespaces to meet your
     /// requirements.
-    pub fn describeVirtualCluster(self: *Self, allocator: std.mem.Allocator, input: describe_virtual_cluster.DescribeVirtualClusterInput, options: describe_virtual_cluster.Options) !describe_virtual_cluster.DescribeVirtualClusterOutput {
+    pub fn describeVirtualCluster(self: *Self, allocator: std.mem.Allocator, input: describe_virtual_cluster.DescribeVirtualClusterInput, options: CallOptions) !describe_virtual_cluster.DescribeVirtualClusterOutput {
         return describe_virtual_cluster.execute(self, allocator, input, options);
     }
 
     /// Generate a session token to connect to a managed endpoint.
-    pub fn getManagedEndpointSessionCredentials(self: *Self, allocator: std.mem.Allocator, input: get_managed_endpoint_session_credentials.GetManagedEndpointSessionCredentialsInput, options: get_managed_endpoint_session_credentials.Options) !get_managed_endpoint_session_credentials.GetManagedEndpointSessionCredentialsOutput {
+    pub fn getManagedEndpointSessionCredentials(self: *Self, allocator: std.mem.Allocator, input: get_managed_endpoint_session_credentials.GetManagedEndpointSessionCredentialsInput, options: CallOptions) !get_managed_endpoint_session_credentials.GetManagedEndpointSessionCredentialsOutput {
         return get_managed_endpoint_session_credentials.execute(self, allocator, input, options);
     }
 
@@ -195,7 +196,7 @@ pub const Client = struct {
     /// such as a
     /// Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR
     /// on EKS.
-    pub fn listJobRuns(self: *Self, allocator: std.mem.Allocator, input: list_job_runs.ListJobRunsInput, options: list_job_runs.Options) !list_job_runs.ListJobRunsOutput {
+    pub fn listJobRuns(self: *Self, allocator: std.mem.Allocator, input: list_job_runs.ListJobRunsInput, options: CallOptions) !list_job_runs.ListJobRunsOutput {
         return list_job_runs.execute(self, allocator, input, options);
     }
 
@@ -206,7 +207,7 @@ pub const Client = struct {
     /// allows two use cases: avoid repeating recurring StartJobRun API request
     /// values, enforcing
     /// certain values in StartJobRun API request.
-    pub fn listJobTemplates(self: *Self, allocator: std.mem.Allocator, input: list_job_templates.ListJobTemplatesInput, options: list_job_templates.Options) !list_job_templates.ListJobTemplatesOutput {
+    pub fn listJobTemplates(self: *Self, allocator: std.mem.Allocator, input: list_job_templates.ListJobTemplatesInput, options: CallOptions) !list_job_templates.ListJobTemplatesOutput {
         return list_job_templates.execute(self, allocator, input, options);
     }
 
@@ -214,7 +215,7 @@ pub const Client = struct {
     /// a gateway
     /// that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR
     /// Studio can communicate with your virtual cluster.
-    pub fn listManagedEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_managed_endpoints.ListManagedEndpointsInput, options: list_managed_endpoints.Options) !list_managed_endpoints.ListManagedEndpointsOutput {
+    pub fn listManagedEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_managed_endpoints.ListManagedEndpointsInput, options: CallOptions) !list_managed_endpoints.ListManagedEndpointsOutput {
         return list_managed_endpoints.execute(self, allocator, input, options);
     }
 
@@ -227,12 +228,12 @@ pub const Client = struct {
     /// create a security configuration to re-use a security setup each time you
     /// create a virtual
     /// cluster.
-    pub fn listSecurityConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_security_configurations.ListSecurityConfigurationsInput, options: list_security_configurations.Options) !list_security_configurations.ListSecurityConfigurationsOutput {
+    pub fn listSecurityConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_security_configurations.ListSecurityConfigurationsInput, options: CallOptions) !list_security_configurations.ListSecurityConfigurationsOutput {
         return list_security_configurations.execute(self, allocator, input, options);
     }
 
     /// Lists the tags assigned to the resources.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -246,14 +247,14 @@ pub const Client = struct {
     /// can model
     /// virtual clusters the same way you model Kubernetes namespaces to meet your
     /// requirements.
-    pub fn listVirtualClusters(self: *Self, allocator: std.mem.Allocator, input: list_virtual_clusters.ListVirtualClustersInput, options: list_virtual_clusters.Options) !list_virtual_clusters.ListVirtualClustersOutput {
+    pub fn listVirtualClusters(self: *Self, allocator: std.mem.Allocator, input: list_virtual_clusters.ListVirtualClustersInput, options: CallOptions) !list_virtual_clusters.ListVirtualClustersOutput {
         return list_virtual_clusters.execute(self, allocator, input, options);
     }
 
     /// Starts a job run. A job run is a unit of work, such as a Spark jar, PySpark
     /// script, or
     /// SparkSQL query, that you submit to Amazon EMR on EKS.
-    pub fn startJobRun(self: *Self, allocator: std.mem.Allocator, input: start_job_run.StartJobRunInput, options: start_job_run.Options) !start_job_run.StartJobRunOutput {
+    pub fn startJobRun(self: *Self, allocator: std.mem.Allocator, input: start_job_run.StartJobRunInput, options: CallOptions) !start_job_run.StartJobRunOutput {
         return start_job_run.execute(self, allocator, input, options);
     }
 
@@ -274,12 +275,12 @@ pub const Client = struct {
     /// for each resource type. You can then search and filter the resources based
     /// on the tags that
     /// you add.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from resources.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

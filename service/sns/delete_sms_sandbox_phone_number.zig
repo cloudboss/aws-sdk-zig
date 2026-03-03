@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteSMSSandboxPhoneNumberInput = struct {
@@ -12,11 +13,7 @@ pub const DeleteSMSSandboxPhoneNumberInput = struct {
 pub const DeleteSMSSandboxPhoneNumberOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSMSSandboxPhoneNumberInput, options: Options) !DeleteSMSSandboxPhoneNumberOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSMSSandboxPhoneNumberInput, options: CallOptions) !DeleteSMSSandboxPhoneNumberOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

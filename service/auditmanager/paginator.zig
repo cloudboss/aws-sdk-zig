@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_change_logs = @import("get_change_logs.zig");
@@ -29,7 +30,7 @@ pub const GetChangeLogsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_change_logs.Options) !get_change_logs.GetChangeLogsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_change_logs.GetChangeLogsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -70,7 +71,7 @@ pub const GetDelegationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_delegations.Options) !get_delegations.GetDelegationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_delegations.GetDelegationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -111,7 +112,7 @@ pub const GetEvidenceByEvidenceFolderPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_evidence_by_evidence_folder.Options) !get_evidence_by_evidence_folder.GetEvidenceByEvidenceFolderOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_evidence_by_evidence_folder.GetEvidenceByEvidenceFolderOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -152,7 +153,7 @@ pub const GetEvidenceFoldersByAssessmentPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_evidence_folders_by_assessment.Options) !get_evidence_folders_by_assessment.GetEvidenceFoldersByAssessmentOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_evidence_folders_by_assessment.GetEvidenceFoldersByAssessmentOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -193,7 +194,7 @@ pub const GetEvidenceFoldersByAssessmentControlPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_evidence_folders_by_assessment_control.Options) !get_evidence_folders_by_assessment_control.GetEvidenceFoldersByAssessmentControlOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_evidence_folders_by_assessment_control.GetEvidenceFoldersByAssessmentControlOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -234,7 +235,7 @@ pub const ListAssessmentControlInsightsByControlDomainPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_assessment_control_insights_by_control_domain.Options) !list_assessment_control_insights_by_control_domain.ListAssessmentControlInsightsByControlDomainOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_assessment_control_insights_by_control_domain.ListAssessmentControlInsightsByControlDomainOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -275,7 +276,7 @@ pub const ListAssessmentFrameworkShareRequestsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_assessment_framework_share_requests.Options) !list_assessment_framework_share_requests.ListAssessmentFrameworkShareRequestsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_assessment_framework_share_requests.ListAssessmentFrameworkShareRequestsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -316,7 +317,7 @@ pub const ListAssessmentFrameworksPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_assessment_frameworks.Options) !list_assessment_frameworks.ListAssessmentFrameworksOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_assessment_frameworks.ListAssessmentFrameworksOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -357,7 +358,7 @@ pub const ListAssessmentReportsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_assessment_reports.Options) !list_assessment_reports.ListAssessmentReportsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_assessment_reports.ListAssessmentReportsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -398,7 +399,7 @@ pub const ListAssessmentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_assessments.Options) !list_assessments.ListAssessmentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_assessments.ListAssessmentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -439,7 +440,7 @@ pub const ListControlDomainInsightsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_control_domain_insights.Options) !list_control_domain_insights.ListControlDomainInsightsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_control_domain_insights.ListControlDomainInsightsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -480,7 +481,7 @@ pub const ListControlDomainInsightsByAssessmentPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_control_domain_insights_by_assessment.Options) !list_control_domain_insights_by_assessment.ListControlDomainInsightsByAssessmentOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_control_domain_insights_by_assessment.ListControlDomainInsightsByAssessmentOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -521,7 +522,7 @@ pub const ListControlInsightsByControlDomainPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_control_insights_by_control_domain.Options) !list_control_insights_by_control_domain.ListControlInsightsByControlDomainOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_control_insights_by_control_domain.ListControlInsightsByControlDomainOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -562,7 +563,7 @@ pub const ListControlsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_controls.Options) !list_controls.ListControlsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_controls.ListControlsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -603,7 +604,7 @@ pub const ListKeywordsForDataSourcePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_keywords_for_data_source.Options) !list_keywords_for_data_source.ListKeywordsForDataSourceOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_keywords_for_data_source.ListKeywordsForDataSourceOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -644,7 +645,7 @@ pub const ListNotificationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_notifications.Options) !list_notifications.ListNotificationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_notifications.ListNotificationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

@@ -2,22 +2,19 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SendDataPoint = @import("send_data_point.zig").SendDataPoint;
 const serde = @import("serde.zig");
 
-const GetSendStatisticsInput = struct {};
+pub const GetSendStatisticsInput = struct {};
 
 pub const GetSendStatisticsOutput = struct {
     /// A list of data points, each of which represents 15 minutes of activity.
     send_data_points: ?[]const SendDataPoint = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSendStatisticsInput, options: Options) !GetSendStatisticsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSendStatisticsInput, options: CallOptions) !GetSendStatisticsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

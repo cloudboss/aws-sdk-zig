@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ApplicationSource = @import("application_source.zig").ApplicationSource;
 const ScalingInstruction = @import("scaling_instruction.zig").ScalingInstruction;
@@ -37,11 +38,7 @@ pub const UpdateScalingPlanInput = struct {
 pub const UpdateScalingPlanOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateScalingPlanInput, options: Options) !UpdateScalingPlanOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateScalingPlanInput, options: CallOptions) !UpdateScalingPlanOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Condition = @import("condition.zig").Condition;
 const DataLakePrincipal = @import("data_lake_principal.zig").DataLakePrincipal;
@@ -24,11 +25,7 @@ pub const CreateLakeFormationOptInInput = struct {
 pub const CreateLakeFormationOptInOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLakeFormationOptInInput, options: Options) !CreateLakeFormationOptInOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLakeFormationOptInInput, options: CallOptions) !CreateLakeFormationOptInOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

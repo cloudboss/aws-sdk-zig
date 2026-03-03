@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DesiredWeightAndCapacity = @import("desired_weight_and_capacity.zig").DesiredWeightAndCapacity;
 
@@ -27,11 +28,7 @@ pub const UpdateEndpointWeightsAndCapacitiesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateEndpointWeightsAndCapacitiesInput, options: Options) !UpdateEndpointWeightsAndCapacitiesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateEndpointWeightsAndCapacitiesInput, options: CallOptions) !UpdateEndpointWeightsAndCapacitiesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

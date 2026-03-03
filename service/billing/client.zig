@@ -13,6 +13,7 @@ const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_billing_view = @import("update_billing_view.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -46,35 +47,35 @@ pub const Client = struct {
     /// Associates one or more source billing views with an existing billing view.
     /// This allows creating aggregate billing views that combine data from multiple
     /// sources.
-    pub fn associateSourceViews(self: *Self, allocator: std.mem.Allocator, input: associate_source_views.AssociateSourceViewsInput, options: associate_source_views.Options) !associate_source_views.AssociateSourceViewsOutput {
+    pub fn associateSourceViews(self: *Self, allocator: std.mem.Allocator, input: associate_source_views.AssociateSourceViewsInput, options: CallOptions) !associate_source_views.AssociateSourceViewsOutput {
         return associate_source_views.execute(self, allocator, input, options);
     }
 
     /// Creates a billing view with the specified billing view attributes.
-    pub fn createBillingView(self: *Self, allocator: std.mem.Allocator, input: create_billing_view.CreateBillingViewInput, options: create_billing_view.Options) !create_billing_view.CreateBillingViewOutput {
+    pub fn createBillingView(self: *Self, allocator: std.mem.Allocator, input: create_billing_view.CreateBillingViewInput, options: CallOptions) !create_billing_view.CreateBillingViewOutput {
         return create_billing_view.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified billing view.
-    pub fn deleteBillingView(self: *Self, allocator: std.mem.Allocator, input: delete_billing_view.DeleteBillingViewInput, options: delete_billing_view.Options) !delete_billing_view.DeleteBillingViewOutput {
+    pub fn deleteBillingView(self: *Self, allocator: std.mem.Allocator, input: delete_billing_view.DeleteBillingViewInput, options: CallOptions) !delete_billing_view.DeleteBillingViewOutput {
         return delete_billing_view.execute(self, allocator, input, options);
     }
 
     /// Removes the association between one or more source billing views and an
     /// existing billing view. This allows modifying the composition of aggregate
     /// billing views.
-    pub fn disassociateSourceViews(self: *Self, allocator: std.mem.Allocator, input: disassociate_source_views.DisassociateSourceViewsInput, options: disassociate_source_views.Options) !disassociate_source_views.DisassociateSourceViewsOutput {
+    pub fn disassociateSourceViews(self: *Self, allocator: std.mem.Allocator, input: disassociate_source_views.DisassociateSourceViewsInput, options: CallOptions) !disassociate_source_views.DisassociateSourceViewsOutput {
         return disassociate_source_views.execute(self, allocator, input, options);
     }
 
     /// Returns the metadata associated to the specified billing view ARN.
-    pub fn getBillingView(self: *Self, allocator: std.mem.Allocator, input: get_billing_view.GetBillingViewInput, options: get_billing_view.Options) !get_billing_view.GetBillingViewOutput {
+    pub fn getBillingView(self: *Self, allocator: std.mem.Allocator, input: get_billing_view.GetBillingViewInput, options: CallOptions) !get_billing_view.GetBillingViewOutput {
         return get_billing_view.execute(self, allocator, input, options);
     }
 
     /// Returns the resource-based policy document attached to the resource in
     /// `JSON` format.
-    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
         return get_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -84,35 +85,35 @@ pub const Client = struct {
     /// represents the billing data available by default. Accounts that use Billing
     /// Conductor also have `BILLING_GROUP` billing views representing pro forma
     /// costs associated with each created billing group.
-    pub fn listBillingViews(self: *Self, allocator: std.mem.Allocator, input: list_billing_views.ListBillingViewsInput, options: list_billing_views.Options) !list_billing_views.ListBillingViewsOutput {
+    pub fn listBillingViews(self: *Self, allocator: std.mem.Allocator, input: list_billing_views.ListBillingViewsInput, options: CallOptions) !list_billing_views.ListBillingViewsOutput {
         return list_billing_views.execute(self, allocator, input, options);
     }
 
     /// Lists the source views (managed Amazon Web Services billing views)
     /// associated with the billing view.
-    pub fn listSourceViewsForBillingView(self: *Self, allocator: std.mem.Allocator, input: list_source_views_for_billing_view.ListSourceViewsForBillingViewInput, options: list_source_views_for_billing_view.Options) !list_source_views_for_billing_view.ListSourceViewsForBillingViewOutput {
+    pub fn listSourceViewsForBillingView(self: *Self, allocator: std.mem.Allocator, input: list_source_views_for_billing_view.ListSourceViewsForBillingViewInput, options: CallOptions) !list_source_views_for_billing_view.ListSourceViewsForBillingViewOutput {
         return list_source_views_for_billing_view.execute(self, allocator, input, options);
     }
 
     /// Lists tags associated with the billing view resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// An API operation for adding one or more tags (key-value pairs) to a
     /// resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from a resource. Specify only tag keys in your
     /// request. Don't specify the value.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// An API to update the attributes of the billing view.
-    pub fn updateBillingView(self: *Self, allocator: std.mem.Allocator, input: update_billing_view.UpdateBillingViewInput, options: update_billing_view.Options) !update_billing_view.UpdateBillingViewOutput {
+    pub fn updateBillingView(self: *Self, allocator: std.mem.Allocator, input: update_billing_view.UpdateBillingViewInput, options: CallOptions) !update_billing_view.UpdateBillingViewOutput {
         return update_billing_view.execute(self, allocator, input, options);
     }
 

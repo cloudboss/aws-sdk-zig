@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ExpressGatewayServiceNetworkConfiguration = @import("express_gateway_service_network_configuration.zig").ExpressGatewayServiceNetworkConfiguration;
 const ExpressGatewayContainer = @import("express_gateway_container.zig").ExpressGatewayContainer;
@@ -61,11 +62,7 @@ pub const UpdateExpressGatewayServiceOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateExpressGatewayServiceInput, options: Options) !UpdateExpressGatewayServiceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateExpressGatewayServiceInput, options: CallOptions) !UpdateExpressGatewayServiceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DevicePosition = @import("device_position.zig").DevicePosition;
 
@@ -70,11 +71,7 @@ pub const GetDevicePositionHistoryOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDevicePositionHistoryInput, options: Options) !GetDevicePositionHistoryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDevicePositionHistoryInput, options: CallOptions) !GetDevicePositionHistoryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

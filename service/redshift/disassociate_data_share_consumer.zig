@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DataShareAssociation = @import("data_share_association.zig").DataShareAssociation;
 const DataShareType = @import("data_share_type.zig").DataShareType;
@@ -27,13 +28,9 @@ pub const DisassociateDataShareConsumerInput = struct {
     disassociate_entire_account: ?bool = null,
 };
 
-const DisassociateDataShareConsumerOutput = @import("data_share.zig").DataShare;
+pub const DisassociateDataShareConsumerOutput = @import("data_share.zig").DataShare;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateDataShareConsumerInput, options: Options) !DisassociateDataShareConsumerOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateDataShareConsumerInput, options: CallOptions) !DisassociateDataShareConsumerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

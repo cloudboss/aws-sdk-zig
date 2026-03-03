@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PrivateGraphEndpointSummary = @import("private_graph_endpoint_summary.zig").PrivateGraphEndpointSummary;
 
@@ -49,11 +50,7 @@ pub const ListPrivateGraphEndpointsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListPrivateGraphEndpointsInput, options: Options) !ListPrivateGraphEndpointsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListPrivateGraphEndpointsInput, options: CallOptions) !ListPrivateGraphEndpointsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ThroughputMode = @import("throughput_mode.zig").ThroughputMode;
 const FileSystemProtectionDescription = @import("file_system_protection_description.zig").FileSystemProtectionDescription;
@@ -41,13 +42,9 @@ pub const UpdateFileSystemInput = struct {
     };
 };
 
-const UpdateFileSystemOutput = @import("file_system_description.zig").FileSystemDescription;
+pub const UpdateFileSystemOutput = @import("file_system_description.zig").FileSystemDescription;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFileSystemInput, options: Options) !UpdateFileSystemOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFileSystemInput, options: CallOptions) !UpdateFileSystemOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

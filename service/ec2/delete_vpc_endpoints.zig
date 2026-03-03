@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const UnsuccessfulItem = @import("unsuccessful_item.zig").UnsuccessfulItem;
 const serde = @import("serde.zig");
@@ -23,11 +24,7 @@ pub const DeleteVpcEndpointsOutput = struct {
     unsuccessful: ?[]const UnsuccessfulItem = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVpcEndpointsInput, options: Options) !DeleteVpcEndpointsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVpcEndpointsInput, options: CallOptions) !DeleteVpcEndpointsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

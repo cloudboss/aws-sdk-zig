@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_home_region_controls = @import("describe_home_region_controls.zig");
@@ -14,7 +15,7 @@ pub const DescribeHomeRegionControlsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_home_region_controls.Options) !describe_home_region_controls.DescribeHomeRegionControlsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_home_region_controls.DescribeHomeRegionControlsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

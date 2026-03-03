@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContactDetail = @import("contact_detail.zig").ContactDetail;
 const DnssecKey = @import("dnssec_key.zig").DnssecKey;
@@ -168,11 +169,7 @@ pub const GetDomainDetailOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDomainDetailInput, options: Options) !GetDomainDetailOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDomainDetailInput, options: CallOptions) !GetDomainDetailOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

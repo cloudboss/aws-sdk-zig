@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const WorkloadDeploymentPatternDataSummary = @import("workload_deployment_pattern_data_summary.zig").WorkloadDeploymentPatternDataSummary;
 
@@ -38,11 +39,7 @@ pub const ListWorkloadDeploymentPatternsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListWorkloadDeploymentPatternsInput, options: Options) !ListWorkloadDeploymentPatternsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListWorkloadDeploymentPatternsInput, options: CallOptions) !ListWorkloadDeploymentPatternsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

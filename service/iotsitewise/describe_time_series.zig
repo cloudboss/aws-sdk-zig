@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PropertyDataType = @import("property_data_type.zig").PropertyDataType;
 
@@ -83,11 +84,7 @@ pub const DescribeTimeSeriesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTimeSeriesInput, options: Options) !DescribeTimeSeriesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTimeSeriesInput, options: CallOptions) !DescribeTimeSeriesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

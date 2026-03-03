@@ -2,10 +2,11 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DeleteStatisticsValueMap = @import("delete_statistics_value_map.zig").DeleteStatisticsValueMap;
 
-const DeleteSparqlStatisticsInput = struct {};
+pub const DeleteSparqlStatisticsInput = struct {};
 
 pub const DeleteSparqlStatisticsOutput = struct {
     /// The deletion payload.
@@ -25,11 +26,7 @@ pub const DeleteSparqlStatisticsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSparqlStatisticsInput, options: Options) !DeleteSparqlStatisticsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSparqlStatisticsInput, options: CallOptions) !DeleteSparqlStatisticsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

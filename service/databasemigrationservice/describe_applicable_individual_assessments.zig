@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MigrationTypeValue = @import("migration_type_value.zig").MigrationTypeValue;
 
@@ -87,11 +88,7 @@ pub const DescribeApplicableIndividualAssessmentsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeApplicableIndividualAssessmentsInput, options: Options) !DescribeApplicableIndividualAssessmentsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeApplicableIndividualAssessmentsInput, options: CallOptions) !DescribeApplicableIndividualAssessmentsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

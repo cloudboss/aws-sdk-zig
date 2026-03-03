@@ -80,6 +80,7 @@ const update_pull_request_title = @import("update_pull_request_title.zig");
 const update_repository_description = @import("update_repository_description.zig");
 const update_repository_encryption_key = @import("update_repository_encryption_key.zig");
 const update_repository_name = @import("update_repository_name.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -123,31 +124,31 @@ pub const Client = struct {
     /// approval rule that matches the template contents is created for all pull
     /// requests in
     /// that repository.
-    pub fn associateApprovalRuleTemplateWithRepository(self: *Self, allocator: std.mem.Allocator, input: associate_approval_rule_template_with_repository.AssociateApprovalRuleTemplateWithRepositoryInput, options: associate_approval_rule_template_with_repository.Options) !associate_approval_rule_template_with_repository.AssociateApprovalRuleTemplateWithRepositoryOutput {
+    pub fn associateApprovalRuleTemplateWithRepository(self: *Self, allocator: std.mem.Allocator, input: associate_approval_rule_template_with_repository.AssociateApprovalRuleTemplateWithRepositoryInput, options: CallOptions) !associate_approval_rule_template_with_repository.AssociateApprovalRuleTemplateWithRepositoryOutput {
         return associate_approval_rule_template_with_repository.execute(self, allocator, input, options);
     }
 
     /// Creates an association between an approval rule template and one or more
     /// specified repositories.
-    pub fn batchAssociateApprovalRuleTemplateWithRepositories(self: *Self, allocator: std.mem.Allocator, input: batch_associate_approval_rule_template_with_repositories.BatchAssociateApprovalRuleTemplateWithRepositoriesInput, options: batch_associate_approval_rule_template_with_repositories.Options) !batch_associate_approval_rule_template_with_repositories.BatchAssociateApprovalRuleTemplateWithRepositoriesOutput {
+    pub fn batchAssociateApprovalRuleTemplateWithRepositories(self: *Self, allocator: std.mem.Allocator, input: batch_associate_approval_rule_template_with_repositories.BatchAssociateApprovalRuleTemplateWithRepositoriesInput, options: CallOptions) !batch_associate_approval_rule_template_with_repositories.BatchAssociateApprovalRuleTemplateWithRepositoriesOutput {
         return batch_associate_approval_rule_template_with_repositories.execute(self, allocator, input, options);
     }
 
     /// Returns information about one or more merge conflicts in the attempted merge
     /// of two commit specifiers using the squash or three-way merge strategy.
-    pub fn batchDescribeMergeConflicts(self: *Self, allocator: std.mem.Allocator, input: batch_describe_merge_conflicts.BatchDescribeMergeConflictsInput, options: batch_describe_merge_conflicts.Options) !batch_describe_merge_conflicts.BatchDescribeMergeConflictsOutput {
+    pub fn batchDescribeMergeConflicts(self: *Self, allocator: std.mem.Allocator, input: batch_describe_merge_conflicts.BatchDescribeMergeConflictsInput, options: CallOptions) !batch_describe_merge_conflicts.BatchDescribeMergeConflictsOutput {
         return batch_describe_merge_conflicts.execute(self, allocator, input, options);
     }
 
     /// Removes the association between an approval rule template and one or more
     /// specified repositories.
-    pub fn batchDisassociateApprovalRuleTemplateFromRepositories(self: *Self, allocator: std.mem.Allocator, input: batch_disassociate_approval_rule_template_from_repositories.BatchDisassociateApprovalRuleTemplateFromRepositoriesInput, options: batch_disassociate_approval_rule_template_from_repositories.Options) !batch_disassociate_approval_rule_template_from_repositories.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput {
+    pub fn batchDisassociateApprovalRuleTemplateFromRepositories(self: *Self, allocator: std.mem.Allocator, input: batch_disassociate_approval_rule_template_from_repositories.BatchDisassociateApprovalRuleTemplateFromRepositoriesInput, options: CallOptions) !batch_disassociate_approval_rule_template_from_repositories.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput {
         return batch_disassociate_approval_rule_template_from_repositories.execute(self, allocator, input, options);
     }
 
     /// Returns information about the contents of one or more commits in a
     /// repository.
-    pub fn batchGetCommits(self: *Self, allocator: std.mem.Allocator, input: batch_get_commits.BatchGetCommitsInput, options: batch_get_commits.Options) !batch_get_commits.BatchGetCommitsOutput {
+    pub fn batchGetCommits(self: *Self, allocator: std.mem.Allocator, input: batch_get_commits.BatchGetCommitsInput, options: CallOptions) !batch_get_commits.BatchGetCommitsOutput {
         return batch_get_commits.execute(self, allocator, input, options);
     }
 
@@ -162,7 +163,7 @@ pub const Client = struct {
     /// HTML-encode the description field in any application that uses this API to
     /// display
     /// the repository description on a webpage.
-    pub fn batchGetRepositories(self: *Self, allocator: std.mem.Allocator, input: batch_get_repositories.BatchGetRepositoriesInput, options: batch_get_repositories.Options) !batch_get_repositories.BatchGetRepositoriesOutput {
+    pub fn batchGetRepositories(self: *Self, allocator: std.mem.Allocator, input: batch_get_repositories.BatchGetRepositoriesInput, options: CallOptions) !batch_get_repositories.BatchGetRepositoriesOutput {
         return batch_get_repositories.execute(self, allocator, input, options);
     }
 
@@ -175,7 +176,7 @@ pub const Client = struct {
     /// pull requests that meet the conditions of the template. For more
     /// information, see
     /// AssociateApprovalRuleTemplateWithRepository.
-    pub fn createApprovalRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: create_approval_rule_template.CreateApprovalRuleTemplateInput, options: create_approval_rule_template.Options) !create_approval_rule_template.CreateApprovalRuleTemplateOutput {
+    pub fn createApprovalRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: create_approval_rule_template.CreateApprovalRuleTemplateInput, options: CallOptions) !create_approval_rule_template.CreateApprovalRuleTemplateOutput {
         return create_approval_rule_template.execute(self, allocator, input, options);
     }
 
@@ -183,27 +184,27 @@ pub const Client = struct {
     ///
     /// Calling the create branch operation does not set a repository's default
     /// branch. To do this, call the update default branch operation.
-    pub fn createBranch(self: *Self, allocator: std.mem.Allocator, input: create_branch.CreateBranchInput, options: create_branch.Options) !create_branch.CreateBranchOutput {
+    pub fn createBranch(self: *Self, allocator: std.mem.Allocator, input: create_branch.CreateBranchInput, options: CallOptions) !create_branch.CreateBranchOutput {
         return create_branch.execute(self, allocator, input, options);
     }
 
     /// Creates a commit for a repository on the tip of a specified branch.
-    pub fn createCommit(self: *Self, allocator: std.mem.Allocator, input: create_commit.CreateCommitInput, options: create_commit.Options) !create_commit.CreateCommitOutput {
+    pub fn createCommit(self: *Self, allocator: std.mem.Allocator, input: create_commit.CreateCommitInput, options: CallOptions) !create_commit.CreateCommitOutput {
         return create_commit.execute(self, allocator, input, options);
     }
 
     /// Creates a pull request in the specified repository.
-    pub fn createPullRequest(self: *Self, allocator: std.mem.Allocator, input: create_pull_request.CreatePullRequestInput, options: create_pull_request.Options) !create_pull_request.CreatePullRequestOutput {
+    pub fn createPullRequest(self: *Self, allocator: std.mem.Allocator, input: create_pull_request.CreatePullRequestInput, options: CallOptions) !create_pull_request.CreatePullRequestOutput {
         return create_pull_request.execute(self, allocator, input, options);
     }
 
     /// Creates an approval rule for a pull request.
-    pub fn createPullRequestApprovalRule(self: *Self, allocator: std.mem.Allocator, input: create_pull_request_approval_rule.CreatePullRequestApprovalRuleInput, options: create_pull_request_approval_rule.Options) !create_pull_request_approval_rule.CreatePullRequestApprovalRuleOutput {
+    pub fn createPullRequestApprovalRule(self: *Self, allocator: std.mem.Allocator, input: create_pull_request_approval_rule.CreatePullRequestApprovalRuleInput, options: CallOptions) !create_pull_request_approval_rule.CreatePullRequestApprovalRuleOutput {
         return create_pull_request_approval_rule.execute(self, allocator, input, options);
     }
 
     /// Creates a new, empty repository.
-    pub fn createRepository(self: *Self, allocator: std.mem.Allocator, input: create_repository.CreateRepositoryInput, options: create_repository.Options) !create_repository.CreateRepositoryOutput {
+    pub fn createRepository(self: *Self, allocator: std.mem.Allocator, input: create_repository.CreateRepositoryInput, options: CallOptions) !create_repository.CreateRepositoryOutput {
         return create_repository.execute(self, allocator, input, options);
     }
 
@@ -219,25 +220,25 @@ pub const Client = struct {
     /// can only be accessed using the GetCommit API or through git commands such as
     /// git fetch. To retrieve this commit, you must specify its commit ID or
     /// otherwise reference it.
-    pub fn createUnreferencedMergeCommit(self: *Self, allocator: std.mem.Allocator, input: create_unreferenced_merge_commit.CreateUnreferencedMergeCommitInput, options: create_unreferenced_merge_commit.Options) !create_unreferenced_merge_commit.CreateUnreferencedMergeCommitOutput {
+    pub fn createUnreferencedMergeCommit(self: *Self, allocator: std.mem.Allocator, input: create_unreferenced_merge_commit.CreateUnreferencedMergeCommitInput, options: CallOptions) !create_unreferenced_merge_commit.CreateUnreferencedMergeCommitOutput {
         return create_unreferenced_merge_commit.execute(self, allocator, input, options);
     }
 
     /// Deletes a specified approval rule template. Deleting a template does not
     /// remove approval rules on pull requests already created with the template.
-    pub fn deleteApprovalRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_approval_rule_template.DeleteApprovalRuleTemplateInput, options: delete_approval_rule_template.Options) !delete_approval_rule_template.DeleteApprovalRuleTemplateOutput {
+    pub fn deleteApprovalRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_approval_rule_template.DeleteApprovalRuleTemplateInput, options: CallOptions) !delete_approval_rule_template.DeleteApprovalRuleTemplateOutput {
         return delete_approval_rule_template.execute(self, allocator, input, options);
     }
 
     /// Deletes a branch from a repository, unless that branch is the default branch
     /// for the repository.
-    pub fn deleteBranch(self: *Self, allocator: std.mem.Allocator, input: delete_branch.DeleteBranchInput, options: delete_branch.Options) !delete_branch.DeleteBranchOutput {
+    pub fn deleteBranch(self: *Self, allocator: std.mem.Allocator, input: delete_branch.DeleteBranchInput, options: CallOptions) !delete_branch.DeleteBranchOutput {
         return delete_branch.execute(self, allocator, input, options);
     }
 
     /// Deletes the content of a comment made on a change, file, or commit in a
     /// repository.
-    pub fn deleteCommentContent(self: *Self, allocator: std.mem.Allocator, input: delete_comment_content.DeleteCommentContentInput, options: delete_comment_content.Options) !delete_comment_content.DeleteCommentContentOutput {
+    pub fn deleteCommentContent(self: *Self, allocator: std.mem.Allocator, input: delete_comment_content.DeleteCommentContentInput, options: CallOptions) !delete_comment_content.DeleteCommentContentOutput {
         return delete_comment_content.execute(self, allocator, input, options);
     }
 
@@ -246,7 +247,7 @@ pub const Client = struct {
     /// that contains the revision. The file still exists in the commits earlier to
     /// the commit
     /// that contains the deletion.
-    pub fn deleteFile(self: *Self, allocator: std.mem.Allocator, input: delete_file.DeleteFileInput, options: delete_file.Options) !delete_file.DeleteFileOutput {
+    pub fn deleteFile(self: *Self, allocator: std.mem.Allocator, input: delete_file.DeleteFileInput, options: CallOptions) !delete_file.DeleteFileOutput {
         return delete_file.execute(self, allocator, input, options);
     }
 
@@ -256,7 +257,7 @@ pub const Client = struct {
     /// from an approval rule template associated with the repository where the
     /// pull request was created. You cannot delete an approval rule from a merged
     /// or closed pull request.
-    pub fn deletePullRequestApprovalRule(self: *Self, allocator: std.mem.Allocator, input: delete_pull_request_approval_rule.DeletePullRequestApprovalRuleInput, options: delete_pull_request_approval_rule.Options) !delete_pull_request_approval_rule.DeletePullRequestApprovalRuleOutput {
+    pub fn deletePullRequestApprovalRule(self: *Self, allocator: std.mem.Allocator, input: delete_pull_request_approval_rule.DeletePullRequestApprovalRuleInput, options: CallOptions) !delete_pull_request_approval_rule.DeletePullRequestApprovalRuleOutput {
         return delete_pull_request_approval_rule.execute(self, allocator, input, options);
     }
 
@@ -267,7 +268,7 @@ pub const Client = struct {
     /// Deleting a repository also deletes all associated objects and metadata.
     /// After a repository is
     /// deleted, all future push calls to the deleted repository fail.
-    pub fn deleteRepository(self: *Self, allocator: std.mem.Allocator, input: delete_repository.DeleteRepositoryInput, options: delete_repository.Options) !delete_repository.DeleteRepositoryOutput {
+    pub fn deleteRepository(self: *Self, allocator: std.mem.Allocator, input: delete_repository.DeleteRepositoryInput, options: CallOptions) !delete_repository.DeleteRepositoryOutput {
         return delete_repository.execute(self, allocator, input, options);
     }
 
@@ -277,12 +278,12 @@ pub const Client = struct {
     /// option for
     /// the attempted merge is specified as FAST_FORWARD_MERGE, an exception is
     /// thrown.
-    pub fn describeMergeConflicts(self: *Self, allocator: std.mem.Allocator, input: describe_merge_conflicts.DescribeMergeConflictsInput, options: describe_merge_conflicts.Options) !describe_merge_conflicts.DescribeMergeConflictsOutput {
+    pub fn describeMergeConflicts(self: *Self, allocator: std.mem.Allocator, input: describe_merge_conflicts.DescribeMergeConflictsInput, options: CallOptions) !describe_merge_conflicts.DescribeMergeConflictsOutput {
         return describe_merge_conflicts.execute(self, allocator, input, options);
     }
 
     /// Returns information about one or more pull request events.
-    pub fn describePullRequestEvents(self: *Self, allocator: std.mem.Allocator, input: describe_pull_request_events.DescribePullRequestEventsInput, options: describe_pull_request_events.Options) !describe_pull_request_events.DescribePullRequestEventsOutput {
+    pub fn describePullRequestEvents(self: *Self, allocator: std.mem.Allocator, input: describe_pull_request_events.DescribePullRequestEventsInput, options: CallOptions) !describe_pull_request_events.DescribePullRequestEventsOutput {
         return describe_pull_request_events.execute(self, allocator, input, options);
     }
 
@@ -293,29 +294,29 @@ pub const Client = struct {
     /// the specified repository. This does not delete any approval rules previously
     /// created for
     /// pull requests through the template association.
-    pub fn disassociateApprovalRuleTemplateFromRepository(self: *Self, allocator: std.mem.Allocator, input: disassociate_approval_rule_template_from_repository.DisassociateApprovalRuleTemplateFromRepositoryInput, options: disassociate_approval_rule_template_from_repository.Options) !disassociate_approval_rule_template_from_repository.DisassociateApprovalRuleTemplateFromRepositoryOutput {
+    pub fn disassociateApprovalRuleTemplateFromRepository(self: *Self, allocator: std.mem.Allocator, input: disassociate_approval_rule_template_from_repository.DisassociateApprovalRuleTemplateFromRepositoryInput, options: CallOptions) !disassociate_approval_rule_template_from_repository.DisassociateApprovalRuleTemplateFromRepositoryOutput {
         return disassociate_approval_rule_template_from_repository.execute(self, allocator, input, options);
     }
 
     /// Evaluates whether a pull request has met all the conditions specified in its
     /// associated approval rules.
-    pub fn evaluatePullRequestApprovalRules(self: *Self, allocator: std.mem.Allocator, input: evaluate_pull_request_approval_rules.EvaluatePullRequestApprovalRulesInput, options: evaluate_pull_request_approval_rules.Options) !evaluate_pull_request_approval_rules.EvaluatePullRequestApprovalRulesOutput {
+    pub fn evaluatePullRequestApprovalRules(self: *Self, allocator: std.mem.Allocator, input: evaluate_pull_request_approval_rules.EvaluatePullRequestApprovalRulesInput, options: CallOptions) !evaluate_pull_request_approval_rules.EvaluatePullRequestApprovalRulesOutput {
         return evaluate_pull_request_approval_rules.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specified approval rule template.
-    pub fn getApprovalRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: get_approval_rule_template.GetApprovalRuleTemplateInput, options: get_approval_rule_template.Options) !get_approval_rule_template.GetApprovalRuleTemplateOutput {
+    pub fn getApprovalRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: get_approval_rule_template.GetApprovalRuleTemplateInput, options: CallOptions) !get_approval_rule_template.GetApprovalRuleTemplateOutput {
         return get_approval_rule_template.execute(self, allocator, input, options);
     }
 
     /// Returns the base-64 encoded content of an individual blob in a repository.
-    pub fn getBlob(self: *Self, allocator: std.mem.Allocator, input: get_blob.GetBlobInput, options: get_blob.Options) !get_blob.GetBlobOutput {
+    pub fn getBlob(self: *Self, allocator: std.mem.Allocator, input: get_blob.GetBlobInput, options: CallOptions) !get_blob.GetBlobOutput {
         return get_blob.execute(self, allocator, input, options);
     }
 
     /// Returns information about a repository branch, including its name and the
     /// last commit ID.
-    pub fn getBranch(self: *Self, allocator: std.mem.Allocator, input: get_branch.GetBranchInput, options: get_branch.Options) !get_branch.GetBranchOutput {
+    pub fn getBranch(self: *Self, allocator: std.mem.Allocator, input: get_branch.GetBranchInput, options: CallOptions) !get_branch.GetBranchOutput {
         return get_branch.execute(self, allocator, input, options);
     }
 
@@ -325,13 +326,13 @@ pub const Client = struct {
     /// Reaction counts might include numbers from user identities who were deleted
     /// after the reaction was made. For a count of
     /// reactions from active identities, use GetCommentReactions.
-    pub fn getComment(self: *Self, allocator: std.mem.Allocator, input: get_comment.GetCommentInput, options: get_comment.Options) !get_comment.GetCommentOutput {
+    pub fn getComment(self: *Self, allocator: std.mem.Allocator, input: get_comment.GetCommentInput, options: CallOptions) !get_comment.GetCommentOutput {
         return get_comment.execute(self, allocator, input, options);
     }
 
     /// Returns information about reactions to a specified comment ID. Reactions
     /// from users who have been deleted will not be included in the count.
-    pub fn getCommentReactions(self: *Self, allocator: std.mem.Allocator, input: get_comment_reactions.GetCommentReactionsInput, options: get_comment_reactions.Options) !get_comment_reactions.GetCommentReactionsOutput {
+    pub fn getCommentReactions(self: *Self, allocator: std.mem.Allocator, input: get_comment_reactions.GetCommentReactionsInput, options: CallOptions) !get_comment_reactions.GetCommentReactionsOutput {
         return get_comment_reactions.execute(self, allocator, input, options);
     }
 
@@ -341,7 +342,7 @@ pub const Client = struct {
     /// Reaction counts might include numbers from user identities who were deleted
     /// after the reaction was made. For a count of
     /// reactions from active identities, use GetCommentReactions.
-    pub fn getCommentsForComparedCommit(self: *Self, allocator: std.mem.Allocator, input: get_comments_for_compared_commit.GetCommentsForComparedCommitInput, options: get_comments_for_compared_commit.Options) !get_comments_for_compared_commit.GetCommentsForComparedCommitOutput {
+    pub fn getCommentsForComparedCommit(self: *Self, allocator: std.mem.Allocator, input: get_comments_for_compared_commit.GetCommentsForComparedCommitInput, options: CallOptions) !get_comments_for_compared_commit.GetCommentsForComparedCommitOutput {
         return get_comments_for_compared_commit.execute(self, allocator, input, options);
     }
 
@@ -350,13 +351,13 @@ pub const Client = struct {
     /// Reaction counts might include numbers from user identities who were deleted
     /// after the reaction was made. For a count of
     /// reactions from active identities, use GetCommentReactions.
-    pub fn getCommentsForPullRequest(self: *Self, allocator: std.mem.Allocator, input: get_comments_for_pull_request.GetCommentsForPullRequestInput, options: get_comments_for_pull_request.Options) !get_comments_for_pull_request.GetCommentsForPullRequestOutput {
+    pub fn getCommentsForPullRequest(self: *Self, allocator: std.mem.Allocator, input: get_comments_for_pull_request.GetCommentsForPullRequestInput, options: CallOptions) !get_comments_for_pull_request.GetCommentsForPullRequestOutput {
         return get_comments_for_pull_request.execute(self, allocator, input, options);
     }
 
     /// Returns information about a commit, including commit message and committer
     /// information.
-    pub fn getCommit(self: *Self, allocator: std.mem.Allocator, input: get_commit.GetCommitInput, options: get_commit.Options) !get_commit.GetCommitOutput {
+    pub fn getCommit(self: *Self, allocator: std.mem.Allocator, input: get_commit.GetCommitInput, options: CallOptions) !get_commit.GetCommitOutput {
         return get_commit.execute(self, allocator, input, options);
     }
 
@@ -365,28 +366,28 @@ pub const Client = struct {
     /// branch, tag, HEAD, commit ID, or other fully qualified reference). Results
     /// can be
     /// limited to a specified path.
-    pub fn getDifferences(self: *Self, allocator: std.mem.Allocator, input: get_differences.GetDifferencesInput, options: get_differences.Options) !get_differences.GetDifferencesOutput {
+    pub fn getDifferences(self: *Self, allocator: std.mem.Allocator, input: get_differences.GetDifferencesInput, options: CallOptions) !get_differences.GetDifferencesOutput {
         return get_differences.execute(self, allocator, input, options);
     }
 
     /// Returns the base-64 encoded contents of a specified file and its metadata.
-    pub fn getFile(self: *Self, allocator: std.mem.Allocator, input: get_file.GetFileInput, options: get_file.Options) !get_file.GetFileOutput {
+    pub fn getFile(self: *Self, allocator: std.mem.Allocator, input: get_file.GetFileInput, options: CallOptions) !get_file.GetFileOutput {
         return get_file.execute(self, allocator, input, options);
     }
 
     /// Returns the contents of a specified folder in a repository.
-    pub fn getFolder(self: *Self, allocator: std.mem.Allocator, input: get_folder.GetFolderInput, options: get_folder.Options) !get_folder.GetFolderOutput {
+    pub fn getFolder(self: *Self, allocator: std.mem.Allocator, input: get_folder.GetFolderInput, options: CallOptions) !get_folder.GetFolderOutput {
         return get_folder.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specified merge commit.
-    pub fn getMergeCommit(self: *Self, allocator: std.mem.Allocator, input: get_merge_commit.GetMergeCommitInput, options: get_merge_commit.Options) !get_merge_commit.GetMergeCommitOutput {
+    pub fn getMergeCommit(self: *Self, allocator: std.mem.Allocator, input: get_merge_commit.GetMergeCommitInput, options: CallOptions) !get_merge_commit.GetMergeCommitOutput {
         return get_merge_commit.execute(self, allocator, input, options);
     }
 
     /// Returns information about merge conflicts between the before and after
     /// commit IDs for a pull request in a repository.
-    pub fn getMergeConflicts(self: *Self, allocator: std.mem.Allocator, input: get_merge_conflicts.GetMergeConflictsInput, options: get_merge_conflicts.Options) !get_merge_conflicts.GetMergeConflictsOutput {
+    pub fn getMergeConflicts(self: *Self, allocator: std.mem.Allocator, input: get_merge_conflicts.GetMergeConflictsInput, options: CallOptions) !get_merge_conflicts.GetMergeConflictsOutput {
         return get_merge_conflicts.execute(self, allocator, input, options);
     }
 
@@ -395,19 +396,19 @@ pub const Client = struct {
     /// branches. For details about why a merge option is not available, use
     /// GetMergeConflicts
     /// or DescribeMergeConflicts.
-    pub fn getMergeOptions(self: *Self, allocator: std.mem.Allocator, input: get_merge_options.GetMergeOptionsInput, options: get_merge_options.Options) !get_merge_options.GetMergeOptionsOutput {
+    pub fn getMergeOptions(self: *Self, allocator: std.mem.Allocator, input: get_merge_options.GetMergeOptionsInput, options: CallOptions) !get_merge_options.GetMergeOptionsOutput {
         return get_merge_options.execute(self, allocator, input, options);
     }
 
     /// Gets information about a pull request in a specified repository.
-    pub fn getPullRequest(self: *Self, allocator: std.mem.Allocator, input: get_pull_request.GetPullRequestInput, options: get_pull_request.Options) !get_pull_request.GetPullRequestOutput {
+    pub fn getPullRequest(self: *Self, allocator: std.mem.Allocator, input: get_pull_request.GetPullRequestInput, options: CallOptions) !get_pull_request.GetPullRequestOutput {
         return get_pull_request.execute(self, allocator, input, options);
     }
 
     /// Gets information about the approval states for a specified pull request.
     /// Approval states only apply to pull requests that have one or more
     /// approval rules applied to them.
-    pub fn getPullRequestApprovalStates(self: *Self, allocator: std.mem.Allocator, input: get_pull_request_approval_states.GetPullRequestApprovalStatesInput, options: get_pull_request_approval_states.Options) !get_pull_request_approval_states.GetPullRequestApprovalStatesOutput {
+    pub fn getPullRequestApprovalStates(self: *Self, allocator: std.mem.Allocator, input: get_pull_request_approval_states.GetPullRequestApprovalStatesInput, options: CallOptions) !get_pull_request_approval_states.GetPullRequestApprovalStatesOutput {
         return get_pull_request_approval_states.execute(self, allocator, input, options);
     }
 
@@ -416,7 +417,7 @@ pub const Client = struct {
     /// pull request, and if so, the Amazon Resource Name (ARN) of the user or
     /// identity that overrode the rules and their requirements for the pull
     /// request.
-    pub fn getPullRequestOverrideState(self: *Self, allocator: std.mem.Allocator, input: get_pull_request_override_state.GetPullRequestOverrideStateInput, options: get_pull_request_override_state.Options) !get_pull_request_override_state.GetPullRequestOverrideStateOutput {
+    pub fn getPullRequestOverrideState(self: *Self, allocator: std.mem.Allocator, input: get_pull_request_override_state.GetPullRequestOverrideStateInput, options: CallOptions) !get_pull_request_override_state.GetPullRequestOverrideStateOutput {
         return get_pull_request_override_state.execute(self, allocator, input, options);
     }
 
@@ -431,12 +432,12 @@ pub const Client = struct {
     /// HTML-encode the description field in any application that uses this API to
     /// display
     /// the repository description on a webpage.
-    pub fn getRepository(self: *Self, allocator: std.mem.Allocator, input: get_repository.GetRepositoryInput, options: get_repository.Options) !get_repository.GetRepositoryOutput {
+    pub fn getRepository(self: *Self, allocator: std.mem.Allocator, input: get_repository.GetRepositoryInput, options: CallOptions) !get_repository.GetRepositoryOutput {
         return get_repository.execute(self, allocator, input, options);
     }
 
     /// Gets information about triggers configured for a repository.
-    pub fn getRepositoryTriggers(self: *Self, allocator: std.mem.Allocator, input: get_repository_triggers.GetRepositoryTriggersInput, options: get_repository_triggers.Options) !get_repository_triggers.GetRepositoryTriggersOutput {
+    pub fn getRepositoryTriggers(self: *Self, allocator: std.mem.Allocator, input: get_repository_triggers.GetRepositoryTriggersInput, options: CallOptions) !get_repository_triggers.GetRepositoryTriggersOutput {
         return get_repository_triggers.execute(self, allocator, input, options);
     }
 
@@ -444,40 +445,40 @@ pub const Client = struct {
     /// Region in your Amazon Web Services account. If
     /// an Amazon Web Services Region is not specified, the Amazon Web Services
     /// Region where you are signed in is used.
-    pub fn listApprovalRuleTemplates(self: *Self, allocator: std.mem.Allocator, input: list_approval_rule_templates.ListApprovalRuleTemplatesInput, options: list_approval_rule_templates.Options) !list_approval_rule_templates.ListApprovalRuleTemplatesOutput {
+    pub fn listApprovalRuleTemplates(self: *Self, allocator: std.mem.Allocator, input: list_approval_rule_templates.ListApprovalRuleTemplatesInput, options: CallOptions) !list_approval_rule_templates.ListApprovalRuleTemplatesOutput {
         return list_approval_rule_templates.execute(self, allocator, input, options);
     }
 
     /// Lists all approval rule templates that are associated with a specified
     /// repository.
-    pub fn listAssociatedApprovalRuleTemplatesForRepository(self: *Self, allocator: std.mem.Allocator, input: list_associated_approval_rule_templates_for_repository.ListAssociatedApprovalRuleTemplatesForRepositoryInput, options: list_associated_approval_rule_templates_for_repository.Options) !list_associated_approval_rule_templates_for_repository.ListAssociatedApprovalRuleTemplatesForRepositoryOutput {
+    pub fn listAssociatedApprovalRuleTemplatesForRepository(self: *Self, allocator: std.mem.Allocator, input: list_associated_approval_rule_templates_for_repository.ListAssociatedApprovalRuleTemplatesForRepositoryInput, options: CallOptions) !list_associated_approval_rule_templates_for_repository.ListAssociatedApprovalRuleTemplatesForRepositoryOutput {
         return list_associated_approval_rule_templates_for_repository.execute(self, allocator, input, options);
     }
 
     /// Gets information about one or more branches in a repository.
-    pub fn listBranches(self: *Self, allocator: std.mem.Allocator, input: list_branches.ListBranchesInput, options: list_branches.Options) !list_branches.ListBranchesOutput {
+    pub fn listBranches(self: *Self, allocator: std.mem.Allocator, input: list_branches.ListBranchesInput, options: CallOptions) !list_branches.ListBranchesOutput {
         return list_branches.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of commits and changes to a specified file.
-    pub fn listFileCommitHistory(self: *Self, allocator: std.mem.Allocator, input: list_file_commit_history.ListFileCommitHistoryInput, options: list_file_commit_history.Options) !list_file_commit_history.ListFileCommitHistoryOutput {
+    pub fn listFileCommitHistory(self: *Self, allocator: std.mem.Allocator, input: list_file_commit_history.ListFileCommitHistoryInput, options: CallOptions) !list_file_commit_history.ListFileCommitHistoryOutput {
         return list_file_commit_history.execute(self, allocator, input, options);
     }
 
     /// Returns a list of pull requests for a specified repository. The return list
     /// can be refined by pull request
     /// status or pull request author ARN.
-    pub fn listPullRequests(self: *Self, allocator: std.mem.Allocator, input: list_pull_requests.ListPullRequestsInput, options: list_pull_requests.Options) !list_pull_requests.ListPullRequestsOutput {
+    pub fn listPullRequests(self: *Self, allocator: std.mem.Allocator, input: list_pull_requests.ListPullRequestsInput, options: CallOptions) !list_pull_requests.ListPullRequestsOutput {
         return list_pull_requests.execute(self, allocator, input, options);
     }
 
     /// Gets information about one or more repositories.
-    pub fn listRepositories(self: *Self, allocator: std.mem.Allocator, input: list_repositories.ListRepositoriesInput, options: list_repositories.Options) !list_repositories.ListRepositoriesOutput {
+    pub fn listRepositories(self: *Self, allocator: std.mem.Allocator, input: list_repositories.ListRepositoriesInput, options: CallOptions) !list_repositories.ListRepositoriesOutput {
         return list_repositories.execute(self, allocator, input, options);
     }
 
     /// Lists all repositories associated with the specified approval rule template.
-    pub fn listRepositoriesForApprovalRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: list_repositories_for_approval_rule_template.ListRepositoriesForApprovalRuleTemplateInput, options: list_repositories_for_approval_rule_template.Options) !list_repositories_for_approval_rule_template.ListRepositoriesForApprovalRuleTemplateOutput {
+    pub fn listRepositoriesForApprovalRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: list_repositories_for_approval_rule_template.ListRepositoriesForApprovalRuleTemplateInput, options: CallOptions) !list_repositories_for_approval_rule_template.ListRepositoriesForApprovalRuleTemplateOutput {
         return list_repositories_for_approval_rule_template.execute(self, allocator, input, options);
     }
 
@@ -486,22 +487,22 @@ pub const Client = struct {
     /// CodeCommit, see [CodeCommit Resources and
     /// Operations](https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats) in the* CodeCommit User
     /// Guide*.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Merges two branches using the fast-forward merge strategy.
-    pub fn mergeBranchesByFastForward(self: *Self, allocator: std.mem.Allocator, input: merge_branches_by_fast_forward.MergeBranchesByFastForwardInput, options: merge_branches_by_fast_forward.Options) !merge_branches_by_fast_forward.MergeBranchesByFastForwardOutput {
+    pub fn mergeBranchesByFastForward(self: *Self, allocator: std.mem.Allocator, input: merge_branches_by_fast_forward.MergeBranchesByFastForwardInput, options: CallOptions) !merge_branches_by_fast_forward.MergeBranchesByFastForwardOutput {
         return merge_branches_by_fast_forward.execute(self, allocator, input, options);
     }
 
     /// Merges two branches using the squash merge strategy.
-    pub fn mergeBranchesBySquash(self: *Self, allocator: std.mem.Allocator, input: merge_branches_by_squash.MergeBranchesBySquashInput, options: merge_branches_by_squash.Options) !merge_branches_by_squash.MergeBranchesBySquashOutput {
+    pub fn mergeBranchesBySquash(self: *Self, allocator: std.mem.Allocator, input: merge_branches_by_squash.MergeBranchesBySquashInput, options: CallOptions) !merge_branches_by_squash.MergeBranchesBySquashOutput {
         return merge_branches_by_squash.execute(self, allocator, input, options);
     }
 
     /// Merges two specified branches using the three-way merge strategy.
-    pub fn mergeBranchesByThreeWay(self: *Self, allocator: std.mem.Allocator, input: merge_branches_by_three_way.MergeBranchesByThreeWayInput, options: merge_branches_by_three_way.Options) !merge_branches_by_three_way.MergeBranchesByThreeWayOutput {
+    pub fn mergeBranchesByThreeWay(self: *Self, allocator: std.mem.Allocator, input: merge_branches_by_three_way.MergeBranchesByThreeWayInput, options: CallOptions) !merge_branches_by_three_way.MergeBranchesByThreeWayOutput {
         return merge_branches_by_three_way.execute(self, allocator, input, options);
     }
 
@@ -509,7 +510,7 @@ pub const Client = struct {
     /// destination
     /// branch for that pull request at the specified commit using the fast-forward
     /// merge strategy. If the merge is successful, it closes the pull request.
-    pub fn mergePullRequestByFastForward(self: *Self, allocator: std.mem.Allocator, input: merge_pull_request_by_fast_forward.MergePullRequestByFastForwardInput, options: merge_pull_request_by_fast_forward.Options) !merge_pull_request_by_fast_forward.MergePullRequestByFastForwardOutput {
+    pub fn mergePullRequestByFastForward(self: *Self, allocator: std.mem.Allocator, input: merge_pull_request_by_fast_forward.MergePullRequestByFastForwardInput, options: CallOptions) !merge_pull_request_by_fast_forward.MergePullRequestByFastForwardOutput {
         return merge_pull_request_by_fast_forward.execute(self, allocator, input, options);
     }
 
@@ -517,7 +518,7 @@ pub const Client = struct {
     /// destination
     /// branch for that pull request at the specified commit using the squash merge
     /// strategy. If the merge is successful, it closes the pull request.
-    pub fn mergePullRequestBySquash(self: *Self, allocator: std.mem.Allocator, input: merge_pull_request_by_squash.MergePullRequestBySquashInput, options: merge_pull_request_by_squash.Options) !merge_pull_request_by_squash.MergePullRequestBySquashOutput {
+    pub fn mergePullRequestBySquash(self: *Self, allocator: std.mem.Allocator, input: merge_pull_request_by_squash.MergePullRequestBySquashInput, options: CallOptions) !merge_pull_request_by_squash.MergePullRequestBySquashOutput {
         return merge_pull_request_by_squash.execute(self, allocator, input, options);
     }
 
@@ -525,29 +526,29 @@ pub const Client = struct {
     /// destination
     /// branch for that pull request at the specified commit using the three-way
     /// merge strategy. If the merge is successful, it closes the pull request.
-    pub fn mergePullRequestByThreeWay(self: *Self, allocator: std.mem.Allocator, input: merge_pull_request_by_three_way.MergePullRequestByThreeWayInput, options: merge_pull_request_by_three_way.Options) !merge_pull_request_by_three_way.MergePullRequestByThreeWayOutput {
+    pub fn mergePullRequestByThreeWay(self: *Self, allocator: std.mem.Allocator, input: merge_pull_request_by_three_way.MergePullRequestByThreeWayInput, options: CallOptions) !merge_pull_request_by_three_way.MergePullRequestByThreeWayOutput {
         return merge_pull_request_by_three_way.execute(self, allocator, input, options);
     }
 
     /// Sets aside (overrides) all approval rule requirements for a specified pull
     /// request.
-    pub fn overridePullRequestApprovalRules(self: *Self, allocator: std.mem.Allocator, input: override_pull_request_approval_rules.OverridePullRequestApprovalRulesInput, options: override_pull_request_approval_rules.Options) !override_pull_request_approval_rules.OverridePullRequestApprovalRulesOutput {
+    pub fn overridePullRequestApprovalRules(self: *Self, allocator: std.mem.Allocator, input: override_pull_request_approval_rules.OverridePullRequestApprovalRulesInput, options: CallOptions) !override_pull_request_approval_rules.OverridePullRequestApprovalRulesOutput {
         return override_pull_request_approval_rules.execute(self, allocator, input, options);
     }
 
     /// Posts a comment on the comparison between two commits.
-    pub fn postCommentForComparedCommit(self: *Self, allocator: std.mem.Allocator, input: post_comment_for_compared_commit.PostCommentForComparedCommitInput, options: post_comment_for_compared_commit.Options) !post_comment_for_compared_commit.PostCommentForComparedCommitOutput {
+    pub fn postCommentForComparedCommit(self: *Self, allocator: std.mem.Allocator, input: post_comment_for_compared_commit.PostCommentForComparedCommitInput, options: CallOptions) !post_comment_for_compared_commit.PostCommentForComparedCommitOutput {
         return post_comment_for_compared_commit.execute(self, allocator, input, options);
     }
 
     /// Posts a comment on a pull request.
-    pub fn postCommentForPullRequest(self: *Self, allocator: std.mem.Allocator, input: post_comment_for_pull_request.PostCommentForPullRequestInput, options: post_comment_for_pull_request.Options) !post_comment_for_pull_request.PostCommentForPullRequestOutput {
+    pub fn postCommentForPullRequest(self: *Self, allocator: std.mem.Allocator, input: post_comment_for_pull_request.PostCommentForPullRequestInput, options: CallOptions) !post_comment_for_pull_request.PostCommentForPullRequestOutput {
         return post_comment_for_pull_request.execute(self, allocator, input, options);
     }
 
     /// Posts a comment in reply to an existing comment on a comparison between
     /// commits or a pull request.
-    pub fn postCommentReply(self: *Self, allocator: std.mem.Allocator, input: post_comment_reply.PostCommentReplyInput, options: post_comment_reply.Options) !post_comment_reply.PostCommentReplyOutput {
+    pub fn postCommentReply(self: *Self, allocator: std.mem.Allocator, input: post_comment_reply.PostCommentReplyInput, options: CallOptions) !post_comment_reply.PostCommentReplyOutput {
         return post_comment_reply.execute(self, allocator, input, options);
     }
 
@@ -555,18 +556,18 @@ pub const Client = struct {
     /// identity is used to make the request. You can only add or
     /// update a reaction for yourself. You cannot add, modify, or delete a reaction
     /// for another user.
-    pub fn putCommentReaction(self: *Self, allocator: std.mem.Allocator, input: put_comment_reaction.PutCommentReactionInput, options: put_comment_reaction.Options) !put_comment_reaction.PutCommentReactionOutput {
+    pub fn putCommentReaction(self: *Self, allocator: std.mem.Allocator, input: put_comment_reaction.PutCommentReactionInput, options: CallOptions) !put_comment_reaction.PutCommentReactionOutput {
         return put_comment_reaction.execute(self, allocator, input, options);
     }
 
     /// Adds or updates a file in a branch in an CodeCommit repository, and
     /// generates a commit for the addition in the specified branch.
-    pub fn putFile(self: *Self, allocator: std.mem.Allocator, input: put_file.PutFileInput, options: put_file.Options) !put_file.PutFileOutput {
+    pub fn putFile(self: *Self, allocator: std.mem.Allocator, input: put_file.PutFileInput, options: CallOptions) !put_file.PutFileOutput {
         return put_file.execute(self, allocator, input, options);
     }
 
     /// Replaces all triggers for a repository. Used to create or delete triggers.
-    pub fn putRepositoryTriggers(self: *Self, allocator: std.mem.Allocator, input: put_repository_triggers.PutRepositoryTriggersInput, options: put_repository_triggers.Options) !put_repository_triggers.PutRepositoryTriggersOutput {
+    pub fn putRepositoryTriggers(self: *Self, allocator: std.mem.Allocator, input: put_repository_triggers.PutRepositoryTriggersInput, options: CallOptions) !put_repository_triggers.PutRepositoryTriggersOutput {
         return put_repository_triggers.execute(self, allocator, input, options);
     }
 
@@ -575,7 +576,7 @@ pub const Client = struct {
     /// in CodeCommit, see [CodeCommit Resources and
     /// Operations](https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats) in the *CodeCommit User
     /// Guide*.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -584,7 +585,7 @@ pub const Client = struct {
     /// target. If real data is available in the repository, the test sends data
     /// from the last
     /// commit. If no data is available, sample data is generated.
-    pub fn testRepositoryTriggers(self: *Self, allocator: std.mem.Allocator, input: test_repository_triggers.TestRepositoryTriggersInput, options: test_repository_triggers.Options) !test_repository_triggers.TestRepositoryTriggersOutput {
+    pub fn testRepositoryTriggers(self: *Self, allocator: std.mem.Allocator, input: test_repository_triggers.TestRepositoryTriggersInput, options: CallOptions) !test_repository_triggers.TestRepositoryTriggersOutput {
         return test_repository_triggers.execute(self, allocator, input, options);
     }
 
@@ -592,7 +593,7 @@ pub const Client = struct {
     /// CodeCommit, see [CodeCommit Resources and
     /// Operations](https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats) in the *CodeCommit User
     /// Guide*.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -601,22 +602,22 @@ pub const Client = struct {
     /// required approvals, the membership of the approval rule, and whether an
     /// approval pool is
     /// defined.
-    pub fn updateApprovalRuleTemplateContent(self: *Self, allocator: std.mem.Allocator, input: update_approval_rule_template_content.UpdateApprovalRuleTemplateContentInput, options: update_approval_rule_template_content.Options) !update_approval_rule_template_content.UpdateApprovalRuleTemplateContentOutput {
+    pub fn updateApprovalRuleTemplateContent(self: *Self, allocator: std.mem.Allocator, input: update_approval_rule_template_content.UpdateApprovalRuleTemplateContentInput, options: CallOptions) !update_approval_rule_template_content.UpdateApprovalRuleTemplateContentOutput {
         return update_approval_rule_template_content.execute(self, allocator, input, options);
     }
 
     /// Updates the description for a specified approval rule template.
-    pub fn updateApprovalRuleTemplateDescription(self: *Self, allocator: std.mem.Allocator, input: update_approval_rule_template_description.UpdateApprovalRuleTemplateDescriptionInput, options: update_approval_rule_template_description.Options) !update_approval_rule_template_description.UpdateApprovalRuleTemplateDescriptionOutput {
+    pub fn updateApprovalRuleTemplateDescription(self: *Self, allocator: std.mem.Allocator, input: update_approval_rule_template_description.UpdateApprovalRuleTemplateDescriptionInput, options: CallOptions) !update_approval_rule_template_description.UpdateApprovalRuleTemplateDescriptionOutput {
         return update_approval_rule_template_description.execute(self, allocator, input, options);
     }
 
     /// Updates the name of a specified approval rule template.
-    pub fn updateApprovalRuleTemplateName(self: *Self, allocator: std.mem.Allocator, input: update_approval_rule_template_name.UpdateApprovalRuleTemplateNameInput, options: update_approval_rule_template_name.Options) !update_approval_rule_template_name.UpdateApprovalRuleTemplateNameOutput {
+    pub fn updateApprovalRuleTemplateName(self: *Self, allocator: std.mem.Allocator, input: update_approval_rule_template_name.UpdateApprovalRuleTemplateNameInput, options: CallOptions) !update_approval_rule_template_name.UpdateApprovalRuleTemplateNameOutput {
         return update_approval_rule_template_name.execute(self, allocator, input, options);
     }
 
     /// Replaces the contents of a comment.
-    pub fn updateComment(self: *Self, allocator: std.mem.Allocator, input: update_comment.UpdateCommentInput, options: update_comment.Options) !update_comment.UpdateCommentOutput {
+    pub fn updateComment(self: *Self, allocator: std.mem.Allocator, input: update_comment.UpdateCommentInput, options: CallOptions) !update_comment.UpdateCommentOutput {
         return update_comment.execute(self, allocator, input, options);
     }
 
@@ -625,35 +626,35 @@ pub const Client = struct {
     /// If you use this operation to change the default branch name to the current
     /// default branch name, a success message is returned even though the default
     /// branch did not change.
-    pub fn updateDefaultBranch(self: *Self, allocator: std.mem.Allocator, input: update_default_branch.UpdateDefaultBranchInput, options: update_default_branch.Options) !update_default_branch.UpdateDefaultBranchOutput {
+    pub fn updateDefaultBranch(self: *Self, allocator: std.mem.Allocator, input: update_default_branch.UpdateDefaultBranchInput, options: CallOptions) !update_default_branch.UpdateDefaultBranchOutput {
         return update_default_branch.execute(self, allocator, input, options);
     }
 
     /// Updates the structure of an approval rule created specifically for a pull
     /// request. For example, you can change the number of required approvers and
     /// the approval pool for approvers.
-    pub fn updatePullRequestApprovalRuleContent(self: *Self, allocator: std.mem.Allocator, input: update_pull_request_approval_rule_content.UpdatePullRequestApprovalRuleContentInput, options: update_pull_request_approval_rule_content.Options) !update_pull_request_approval_rule_content.UpdatePullRequestApprovalRuleContentOutput {
+    pub fn updatePullRequestApprovalRuleContent(self: *Self, allocator: std.mem.Allocator, input: update_pull_request_approval_rule_content.UpdatePullRequestApprovalRuleContentInput, options: CallOptions) !update_pull_request_approval_rule_content.UpdatePullRequestApprovalRuleContentOutput {
         return update_pull_request_approval_rule_content.execute(self, allocator, input, options);
     }
 
     /// Updates the state of a user's approval on a pull request. The user is
     /// derived from the signed-in account when the request is made.
-    pub fn updatePullRequestApprovalState(self: *Self, allocator: std.mem.Allocator, input: update_pull_request_approval_state.UpdatePullRequestApprovalStateInput, options: update_pull_request_approval_state.Options) !update_pull_request_approval_state.UpdatePullRequestApprovalStateOutput {
+    pub fn updatePullRequestApprovalState(self: *Self, allocator: std.mem.Allocator, input: update_pull_request_approval_state.UpdatePullRequestApprovalStateInput, options: CallOptions) !update_pull_request_approval_state.UpdatePullRequestApprovalStateOutput {
         return update_pull_request_approval_state.execute(self, allocator, input, options);
     }
 
     /// Replaces the contents of the description of a pull request.
-    pub fn updatePullRequestDescription(self: *Self, allocator: std.mem.Allocator, input: update_pull_request_description.UpdatePullRequestDescriptionInput, options: update_pull_request_description.Options) !update_pull_request_description.UpdatePullRequestDescriptionOutput {
+    pub fn updatePullRequestDescription(self: *Self, allocator: std.mem.Allocator, input: update_pull_request_description.UpdatePullRequestDescriptionInput, options: CallOptions) !update_pull_request_description.UpdatePullRequestDescriptionOutput {
         return update_pull_request_description.execute(self, allocator, input, options);
     }
 
     /// Updates the status of a pull request.
-    pub fn updatePullRequestStatus(self: *Self, allocator: std.mem.Allocator, input: update_pull_request_status.UpdatePullRequestStatusInput, options: update_pull_request_status.Options) !update_pull_request_status.UpdatePullRequestStatusOutput {
+    pub fn updatePullRequestStatus(self: *Self, allocator: std.mem.Allocator, input: update_pull_request_status.UpdatePullRequestStatusInput, options: CallOptions) !update_pull_request_status.UpdatePullRequestStatusOutput {
         return update_pull_request_status.execute(self, allocator, input, options);
     }
 
     /// Replaces the title of a pull request.
-    pub fn updatePullRequestTitle(self: *Self, allocator: std.mem.Allocator, input: update_pull_request_title.UpdatePullRequestTitleInput, options: update_pull_request_title.Options) !update_pull_request_title.UpdatePullRequestTitleOutput {
+    pub fn updatePullRequestTitle(self: *Self, allocator: std.mem.Allocator, input: update_pull_request_title.UpdatePullRequestTitleInput, options: CallOptions) !update_pull_request_title.UpdatePullRequestTitleOutput {
         return update_pull_request_title.execute(self, allocator, input, options);
     }
 
@@ -668,13 +669,13 @@ pub const Client = struct {
     /// HTML-encode the description field in any application that uses this API to
     /// display
     /// the repository description on a webpage.
-    pub fn updateRepositoryDescription(self: *Self, allocator: std.mem.Allocator, input: update_repository_description.UpdateRepositoryDescriptionInput, options: update_repository_description.Options) !update_repository_description.UpdateRepositoryDescriptionOutput {
+    pub fn updateRepositoryDescription(self: *Self, allocator: std.mem.Allocator, input: update_repository_description.UpdateRepositoryDescriptionInput, options: CallOptions) !update_repository_description.UpdateRepositoryDescriptionOutput {
         return update_repository_description.execute(self, allocator, input, options);
     }
 
     /// Updates the Key Management Service encryption key used to encrypt and
     /// decrypt a CodeCommit repository.
-    pub fn updateRepositoryEncryptionKey(self: *Self, allocator: std.mem.Allocator, input: update_repository_encryption_key.UpdateRepositoryEncryptionKeyInput, options: update_repository_encryption_key.Options) !update_repository_encryption_key.UpdateRepositoryEncryptionKeyOutput {
+    pub fn updateRepositoryEncryptionKey(self: *Self, allocator: std.mem.Allocator, input: update_repository_encryption_key.UpdateRepositoryEncryptionKeyInput, options: CallOptions) !update_repository_encryption_key.UpdateRepositoryEncryptionKeyOutput {
         return update_repository_encryption_key.execute(self, allocator, input, options);
     }
 
@@ -686,7 +687,7 @@ pub const Client = struct {
     /// more information about the limits on repository names, see
     /// [Quotas](https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html) in the CodeCommit
     /// User Guide.
-    pub fn updateRepositoryName(self: *Self, allocator: std.mem.Allocator, input: update_repository_name.UpdateRepositoryNameInput, options: update_repository_name.Options) !update_repository_name.UpdateRepositoryNameOutput {
+    pub fn updateRepositoryName(self: *Self, allocator: std.mem.Allocator, input: update_repository_name.UpdateRepositoryNameInput, options: CallOptions) !update_repository_name.UpdateRepositoryNameOutput {
         return update_repository_name.execute(self, allocator, input, options);
     }
 

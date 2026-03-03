@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ComputationModelResolveToResourceSummary = @import("computation_model_resolve_to_resource_summary.zig").ComputationModelResolveToResourceSummary;
 
@@ -39,11 +40,7 @@ pub const ListComputationModelResolveToResourcesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListComputationModelResolveToResourcesInput, options: Options) !ListComputationModelResolveToResourcesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListComputationModelResolveToResourcesInput, options: CallOptions) !ListComputationModelResolveToResourcesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

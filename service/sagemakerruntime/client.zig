@@ -4,6 +4,7 @@ const std = @import("std");
 const invoke_endpoint = @import("invoke_endpoint.zig");
 const invoke_endpoint_async = @import("invoke_endpoint_async.zig");
 const invoke_endpoint_with_response_stream = @import("invoke_endpoint_with_response_stream.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -65,7 +66,7 @@ pub const Client = struct {
     /// not contain the account ID, but Amazon SageMaker AI determines the account
     /// ID from
     /// the authentication token that is supplied by the caller.
-    pub fn invokeEndpoint(self: *Self, allocator: std.mem.Allocator, input: invoke_endpoint.InvokeEndpointInput, options: invoke_endpoint.Options) !invoke_endpoint.InvokeEndpointOutput {
+    pub fn invokeEndpoint(self: *Self, allocator: std.mem.Allocator, input: invoke_endpoint.InvokeEndpointInput, options: CallOptions) !invoke_endpoint.InvokeEndpointOutput {
         return invoke_endpoint.execute(self, allocator, input, options);
     }
 
@@ -93,7 +94,7 @@ pub const Client = struct {
     /// Services Signature Version 4. For information, see [Authenticating
     /// Requests (Amazon Web Services Signature Version
     /// 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html) in the *Amazon S3 API Reference*.
-    pub fn invokeEndpointAsync(self: *Self, allocator: std.mem.Allocator, input: invoke_endpoint_async.InvokeEndpointAsyncInput, options: invoke_endpoint_async.Options) !invoke_endpoint_async.InvokeEndpointAsyncOutput {
+    pub fn invokeEndpointAsync(self: *Self, allocator: std.mem.Allocator, input: invoke_endpoint_async.InvokeEndpointAsyncInput, options: CallOptions) !invoke_endpoint_async.InvokeEndpointAsyncOutput {
         return invoke_endpoint_async.execute(self, allocator, input, options);
     }
 
@@ -137,7 +138,7 @@ pub const Client = struct {
     /// [Authenticating Requests (Amazon Web Services Signature Version
     /// 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html) in the
     /// *Amazon S3 API Reference*.
-    pub fn invokeEndpointWithResponseStream(self: *Self, allocator: std.mem.Allocator, input: invoke_endpoint_with_response_stream.InvokeEndpointWithResponseStreamInput, options: invoke_endpoint_with_response_stream.Options) !invoke_endpoint_with_response_stream.InvokeEndpointWithResponseStreamOutput {
+    pub fn invokeEndpointWithResponseStream(self: *Self, allocator: std.mem.Allocator, input: invoke_endpoint_with_response_stream.InvokeEndpointWithResponseStreamInput, options: CallOptions) !invoke_endpoint_with_response_stream.InvokeEndpointWithResponseStreamOutput {
         return invoke_endpoint_with_response_stream.execute(self, allocator, input, options);
     }
 };

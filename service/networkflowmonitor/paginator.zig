@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_query_results_monitor_top_contributors = @import("get_query_results_monitor_top_contributors.zig");
@@ -18,7 +19,7 @@ pub const GetQueryResultsMonitorTopContributorsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_query_results_monitor_top_contributors.Options) !get_query_results_monitor_top_contributors.GetQueryResultsMonitorTopContributorsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_query_results_monitor_top_contributors.GetQueryResultsMonitorTopContributorsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -59,7 +60,7 @@ pub const GetQueryResultsWorkloadInsightsTopContributorsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_query_results_workload_insights_top_contributors.Options) !get_query_results_workload_insights_top_contributors.GetQueryResultsWorkloadInsightsTopContributorsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_query_results_workload_insights_top_contributors.GetQueryResultsWorkloadInsightsTopContributorsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -100,7 +101,7 @@ pub const GetQueryResultsWorkloadInsightsTopContributorsDataPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_query_results_workload_insights_top_contributors_data.Options) !get_query_results_workload_insights_top_contributors_data.GetQueryResultsWorkloadInsightsTopContributorsDataOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_query_results_workload_insights_top_contributors_data.GetQueryResultsWorkloadInsightsTopContributorsDataOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -141,7 +142,7 @@ pub const ListMonitorsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_monitors.Options) !list_monitors.ListMonitorsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_monitors.ListMonitorsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -182,7 +183,7 @@ pub const ListScopesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_scopes.Options) !list_scopes.ListScopesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_scopes.ListScopesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

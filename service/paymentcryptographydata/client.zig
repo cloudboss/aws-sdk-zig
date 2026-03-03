@@ -15,6 +15,7 @@ const verify_auth_request_cryptogram = @import("verify_auth_request_cryptogram.z
 const verify_card_validation_data = @import("verify_card_validation_data.zig");
 const verify_mac = @import("verify_mac.zig");
 const verify_pin_data = @import("verify_pin_data.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -86,7 +87,7 @@ pub const Client = struct {
     ///   [GetPublicCertificate](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html)
     /// *
     ///   [ImportKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
-    pub fn decryptData(self: *Self, allocator: std.mem.Allocator, input: decrypt_data.DecryptDataInput, options: decrypt_data.Options) !decrypt_data.DecryptDataOutput {
+    pub fn decryptData(self: *Self, allocator: std.mem.Allocator, input: decrypt_data.DecryptDataInput, options: CallOptions) !decrypt_data.DecryptDataOutput {
         return decrypt_data.execute(self, allocator, input, options);
     }
 
@@ -144,7 +145,7 @@ pub const Client = struct {
     /// *
     ///   [ImportKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
     /// * ReEncryptData
-    pub fn encryptData(self: *Self, allocator: std.mem.Allocator, input: encrypt_data.EncryptDataInput, options: encrypt_data.Options) !encrypt_data.EncryptDataOutput {
+    pub fn encryptData(self: *Self, allocator: std.mem.Allocator, input: encrypt_data.EncryptDataInput, options: CallOptions) !encrypt_data.EncryptDataOutput {
         return encrypt_data.execute(self, allocator, input, options);
     }
 
@@ -173,7 +174,7 @@ pub const Client = struct {
     ///
     /// **Cross-account use**: This operation can't be used across different Amazon
     /// Web Services accounts.
-    pub fn generateAs2805KekValidation(self: *Self, allocator: std.mem.Allocator, input: generate_as_2805_kek_validation.GenerateAs2805KekValidationInput, options: generate_as_2805_kek_validation.Options) !generate_as_2805_kek_validation.GenerateAs2805KekValidationOutput {
+    pub fn generateAs2805KekValidation(self: *Self, allocator: std.mem.Allocator, input: generate_as_2805_kek_validation.GenerateAs2805KekValidationInput, options: CallOptions) !generate_as_2805_kek_validation.GenerateAs2805KekValidationOutput {
         return generate_as_2805_kek_validation.execute(self, allocator, input, options);
     }
 
@@ -201,7 +202,7 @@ pub const Client = struct {
     /// *
     ///   [ImportKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
     /// * VerifyCardValidationData
-    pub fn generateCardValidationData(self: *Self, allocator: std.mem.Allocator, input: generate_card_validation_data.GenerateCardValidationDataInput, options: generate_card_validation_data.Options) !generate_card_validation_data.GenerateCardValidationDataOutput {
+    pub fn generateCardValidationData(self: *Self, allocator: std.mem.Allocator, input: generate_card_validation_data.GenerateCardValidationDataInput, options: CallOptions) !generate_card_validation_data.GenerateCardValidationDataOutput {
         return generate_card_validation_data.execute(self, allocator, input, options);
     }
 
@@ -230,7 +231,7 @@ pub const Client = struct {
     /// **Related operations:**
     ///
     /// * VerifyMac
-    pub fn generateMac(self: *Self, allocator: std.mem.Allocator, input: generate_mac.GenerateMacInput, options: generate_mac.Options) !generate_mac.GenerateMacOutput {
+    pub fn generateMac(self: *Self, allocator: std.mem.Allocator, input: generate_mac.GenerateMacInput, options: CallOptions) !generate_mac.GenerateMacOutput {
         return generate_mac.execute(self, allocator, input, options);
     }
 
@@ -271,7 +272,7 @@ pub const Client = struct {
     ///
     /// * EncryptData
     /// * GenerateMac
-    pub fn generateMacEmvPinChange(self: *Self, allocator: std.mem.Allocator, input: generate_mac_emv_pin_change.GenerateMacEmvPinChangeInput, options: generate_mac_emv_pin_change.Options) !generate_mac_emv_pin_change.GenerateMacEmvPinChangeOutput {
+    pub fn generateMacEmvPinChange(self: *Self, allocator: std.mem.Allocator, input: generate_mac_emv_pin_change.GenerateMacEmvPinChangeInput, options: CallOptions) !generate_mac_emv_pin_change.GenerateMacEmvPinChangeOutput {
         return generate_mac_emv_pin_change.execute(self, allocator, input, options);
     }
 
@@ -306,7 +307,7 @@ pub const Client = struct {
     /// * GenerateCardValidationData
     /// * TranslatePinData
     /// * VerifyPinData
-    pub fn generatePinData(self: *Self, allocator: std.mem.Allocator, input: generate_pin_data.GeneratePinDataInput, options: generate_pin_data.Options) !generate_pin_data.GeneratePinDataOutput {
+    pub fn generatePinData(self: *Self, allocator: std.mem.Allocator, input: generate_pin_data.GeneratePinDataInput, options: CallOptions) !generate_pin_data.GeneratePinDataOutput {
         return generate_pin_data.execute(self, allocator, input, options);
     }
 
@@ -346,7 +347,7 @@ pub const Client = struct {
     ///   [GetPublicCertificate](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html)
     /// *
     ///   [ImportKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
-    pub fn reEncryptData(self: *Self, allocator: std.mem.Allocator, input: re_encrypt_data.ReEncryptDataInput, options: re_encrypt_data.Options) !re_encrypt_data.ReEncryptDataOutput {
+    pub fn reEncryptData(self: *Self, allocator: std.mem.Allocator, input: re_encrypt_data.ReEncryptDataInput, options: CallOptions) !re_encrypt_data.ReEncryptDataOutput {
         return re_encrypt_data.execute(self, allocator, input, options);
     }
 
@@ -382,7 +383,7 @@ pub const Client = struct {
     ///   [GetPublicCertificate](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html)
     /// *
     ///   [ImportKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
-    pub fn translateKeyMaterial(self: *Self, allocator: std.mem.Allocator, input: translate_key_material.TranslateKeyMaterialInput, options: translate_key_material.Options) !translate_key_material.TranslateKeyMaterialOutput {
+    pub fn translateKeyMaterial(self: *Self, allocator: std.mem.Allocator, input: translate_key_material.TranslateKeyMaterialInput, options: CallOptions) !translate_key_material.TranslateKeyMaterialOutput {
         return translate_key_material.execute(self, allocator, input, options);
     }
 
@@ -438,7 +439,7 @@ pub const Client = struct {
     ///
     /// * GeneratePinData
     /// * VerifyPinData
-    pub fn translatePinData(self: *Self, allocator: std.mem.Allocator, input: translate_pin_data.TranslatePinDataInput, options: translate_pin_data.Options) !translate_pin_data.TranslatePinDataOutput {
+    pub fn translatePinData(self: *Self, allocator: std.mem.Allocator, input: translate_pin_data.TranslatePinDataInput, options: CallOptions) !translate_pin_data.TranslatePinDataOutput {
         return translate_pin_data.execute(self, allocator, input, options);
     }
 
@@ -463,7 +464,7 @@ pub const Client = struct {
     ///
     /// * VerifyCardValidationData
     /// * VerifyPinData
-    pub fn verifyAuthRequestCryptogram(self: *Self, allocator: std.mem.Allocator, input: verify_auth_request_cryptogram.VerifyAuthRequestCryptogramInput, options: verify_auth_request_cryptogram.Options) !verify_auth_request_cryptogram.VerifyAuthRequestCryptogramOutput {
+    pub fn verifyAuthRequestCryptogram(self: *Self, allocator: std.mem.Allocator, input: verify_auth_request_cryptogram.VerifyAuthRequestCryptogramInput, options: CallOptions) !verify_auth_request_cryptogram.VerifyAuthRequestCryptogramOutput {
         return verify_auth_request_cryptogram.execute(self, allocator, input, options);
     }
 
@@ -493,7 +494,7 @@ pub const Client = struct {
     /// * GenerateCardValidationData
     /// * VerifyAuthRequestCryptogram
     /// * VerifyPinData
-    pub fn verifyCardValidationData(self: *Self, allocator: std.mem.Allocator, input: verify_card_validation_data.VerifyCardValidationDataInput, options: verify_card_validation_data.Options) !verify_card_validation_data.VerifyCardValidationDataOutput {
+    pub fn verifyCardValidationData(self: *Self, allocator: std.mem.Allocator, input: verify_card_validation_data.VerifyCardValidationDataInput, options: CallOptions) !verify_card_validation_data.VerifyCardValidationDataOutput {
         return verify_card_validation_data.execute(self, allocator, input, options);
     }
 
@@ -514,7 +515,7 @@ pub const Client = struct {
     /// **Related operations:**
     ///
     /// * GenerateMac
-    pub fn verifyMac(self: *Self, allocator: std.mem.Allocator, input: verify_mac.VerifyMacInput, options: verify_mac.Options) !verify_mac.VerifyMacOutput {
+    pub fn verifyMac(self: *Self, allocator: std.mem.Allocator, input: verify_mac.VerifyMacInput, options: CallOptions) !verify_mac.VerifyMacOutput {
         return verify_mac.execute(self, allocator, input, options);
     }
 
@@ -539,7 +540,7 @@ pub const Client = struct {
     ///
     /// * GeneratePinData
     /// * TranslatePinData
-    pub fn verifyPinData(self: *Self, allocator: std.mem.Allocator, input: verify_pin_data.VerifyPinDataInput, options: verify_pin_data.Options) !verify_pin_data.VerifyPinDataOutput {
+    pub fn verifyPinData(self: *Self, allocator: std.mem.Allocator, input: verify_pin_data.VerifyPinDataInput, options: CallOptions) !verify_pin_data.VerifyPinDataOutput {
         return verify_pin_data.execute(self, allocator, input, options);
     }
 };

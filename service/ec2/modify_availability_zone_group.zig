@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ModifyAvailabilityZoneOptInStatus = @import("modify_availability_zone_opt_in_status.zig").ModifyAvailabilityZoneOptInStatus;
 
@@ -30,11 +31,7 @@ pub const ModifyAvailabilityZoneGroupOutput = struct {
     @"return": ?bool = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyAvailabilityZoneGroupInput, options: Options) !ModifyAvailabilityZoneGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyAvailabilityZoneGroupInput, options: CallOptions) !ModifyAvailabilityZoneGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

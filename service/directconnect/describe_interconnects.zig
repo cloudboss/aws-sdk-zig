@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Interconnect = @import("interconnect.zig").Interconnect;
 
@@ -41,11 +42,7 @@ pub const DescribeInterconnectsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeInterconnectsInput, options: Options) !DescribeInterconnectsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeInterconnectsInput, options: CallOptions) !DescribeInterconnectsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -20,6 +20,7 @@ const list_groups = @import("list_groups.zig");
 const list_users = @import("list_users.zig");
 const update_group = @import("update_group.zig");
 const update_user = @import("update_user.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -51,33 +52,33 @@ pub const Client = struct {
     }
 
     /// Creates a group within the specified identity store.
-    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: create_group.Options) !create_group.CreateGroupOutput {
+    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: CallOptions) !create_group.CreateGroupOutput {
         return create_group.execute(self, allocator, input, options);
     }
 
     /// Creates a relationship between a member and a group. The following
     /// identifiers must be specified: `GroupId`, `IdentityStoreId`, and `MemberId`.
-    pub fn createGroupMembership(self: *Self, allocator: std.mem.Allocator, input: create_group_membership.CreateGroupMembershipInput, options: create_group_membership.Options) !create_group_membership.CreateGroupMembershipOutput {
+    pub fn createGroupMembership(self: *Self, allocator: std.mem.Allocator, input: create_group_membership.CreateGroupMembershipInput, options: CallOptions) !create_group_membership.CreateGroupMembershipOutput {
         return create_group_membership.execute(self, allocator, input, options);
     }
 
     /// Creates a user within the specified identity store.
-    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: create_user.Options) !create_user.CreateUserOutput {
+    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: CallOptions) !create_user.CreateUserOutput {
         return create_user.execute(self, allocator, input, options);
     }
 
     /// Delete a group within an identity store given `GroupId`.
-    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: delete_group.Options) !delete_group.DeleteGroupOutput {
+    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: CallOptions) !delete_group.DeleteGroupOutput {
         return delete_group.execute(self, allocator, input, options);
     }
 
     /// Delete a membership within a group given `MembershipId`.
-    pub fn deleteGroupMembership(self: *Self, allocator: std.mem.Allocator, input: delete_group_membership.DeleteGroupMembershipInput, options: delete_group_membership.Options) !delete_group_membership.DeleteGroupMembershipOutput {
+    pub fn deleteGroupMembership(self: *Self, allocator: std.mem.Allocator, input: delete_group_membership.DeleteGroupMembershipInput, options: CallOptions) !delete_group_membership.DeleteGroupMembershipOutput {
         return delete_group_membership.execute(self, allocator, input, options);
     }
 
     /// Deletes a user within an identity store given `UserId`.
-    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: delete_user.Options) !delete_user.DeleteUserOutput {
+    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: CallOptions) !delete_user.DeleteUserOutput {
         return delete_user.execute(self, allocator, input, options);
     }
 
@@ -88,7 +89,7 @@ pub const Client = struct {
     /// the member account. For more information, see [Limiting access to the
     /// identity store from member
     /// accounts](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts) in the * IAM Identity Center User Guide*.
-    pub fn describeGroup(self: *Self, allocator: std.mem.Allocator, input: describe_group.DescribeGroupInput, options: describe_group.Options) !describe_group.DescribeGroupOutput {
+    pub fn describeGroup(self: *Self, allocator: std.mem.Allocator, input: describe_group.DescribeGroupInput, options: CallOptions) !describe_group.DescribeGroupOutput {
         return describe_group.execute(self, allocator, input, options);
     }
 
@@ -99,7 +100,7 @@ pub const Client = struct {
     /// the member account. For more information, see [Limiting access to the
     /// identity store from member
     /// accounts](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts) in the * IAM Identity Center User Guide*.
-    pub fn describeGroupMembership(self: *Self, allocator: std.mem.Allocator, input: describe_group_membership.DescribeGroupMembershipInput, options: describe_group_membership.Options) !describe_group_membership.DescribeGroupMembershipOutput {
+    pub fn describeGroupMembership(self: *Self, allocator: std.mem.Allocator, input: describe_group_membership.DescribeGroupMembershipInput, options: CallOptions) !describe_group_membership.DescribeGroupMembershipOutput {
         return describe_group_membership.execute(self, allocator, input, options);
     }
 
@@ -110,7 +111,7 @@ pub const Client = struct {
     /// the member account. For more information, see [Limiting access to the
     /// identity store from member
     /// accounts](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts) in the * IAM Identity Center User Guide*.
-    pub fn describeUser(self: *Self, allocator: std.mem.Allocator, input: describe_user.DescribeUserInput, options: describe_user.Options) !describe_user.DescribeUserOutput {
+    pub fn describeUser(self: *Self, allocator: std.mem.Allocator, input: describe_user.DescribeUserInput, options: CallOptions) !describe_user.DescribeUserOutput {
         return describe_user.execute(self, allocator, input, options);
     }
 
@@ -120,7 +121,7 @@ pub const Client = struct {
     /// the member account. For more information, see [Limiting access to the
     /// identity store from member
     /// accounts](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts) in the * IAM Identity Center User Guide*.
-    pub fn getGroupId(self: *Self, allocator: std.mem.Allocator, input: get_group_id.GetGroupIdInput, options: get_group_id.Options) !get_group_id.GetGroupIdOutput {
+    pub fn getGroupId(self: *Self, allocator: std.mem.Allocator, input: get_group_id.GetGroupIdInput, options: CallOptions) !get_group_id.GetGroupIdOutput {
         return get_group_id.execute(self, allocator, input, options);
     }
 
@@ -130,7 +131,7 @@ pub const Client = struct {
     /// the member account. For more information, see [Limiting access to the
     /// identity store from member
     /// accounts](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts) in the * IAM Identity Center User Guide*.
-    pub fn getGroupMembershipId(self: *Self, allocator: std.mem.Allocator, input: get_group_membership_id.GetGroupMembershipIdInput, options: get_group_membership_id.Options) !get_group_membership_id.GetGroupMembershipIdOutput {
+    pub fn getGroupMembershipId(self: *Self, allocator: std.mem.Allocator, input: get_group_membership_id.GetGroupMembershipIdInput, options: CallOptions) !get_group_membership_id.GetGroupMembershipIdOutput {
         return get_group_membership_id.execute(self, allocator, input, options);
     }
 
@@ -140,7 +141,7 @@ pub const Client = struct {
     /// the member account. For more information, see [Limiting access to the
     /// identity store from member
     /// accounts](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts) in the * IAM Identity Center User Guide*.
-    pub fn getUserId(self: *Self, allocator: std.mem.Allocator, input: get_user_id.GetUserIdInput, options: get_user_id.Options) !get_user_id.GetUserIdOutput {
+    pub fn getUserId(self: *Self, allocator: std.mem.Allocator, input: get_user_id.GetUserIdInput, options: CallOptions) !get_user_id.GetUserIdOutput {
         return get_user_id.execute(self, allocator, input, options);
     }
 
@@ -151,7 +152,7 @@ pub const Client = struct {
     /// the member account. For more information, see [Limiting access to the
     /// identity store from member
     /// accounts](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts) in the * IAM Identity Center User Guide*.
-    pub fn isMemberInGroups(self: *Self, allocator: std.mem.Allocator, input: is_member_in_groups.IsMemberInGroupsInput, options: is_member_in_groups.Options) !is_member_in_groups.IsMemberInGroupsOutput {
+    pub fn isMemberInGroups(self: *Self, allocator: std.mem.Allocator, input: is_member_in_groups.IsMemberInGroupsInput, options: CallOptions) !is_member_in_groups.IsMemberInGroupsOutput {
         return is_member_in_groups.execute(self, allocator, input, options);
     }
 
@@ -162,7 +163,7 @@ pub const Client = struct {
     /// the member account. For more information, see [Limiting access to the
     /// identity store from member
     /// accounts](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts) in the * IAM Identity Center User Guide*.
-    pub fn listGroupMemberships(self: *Self, allocator: std.mem.Allocator, input: list_group_memberships.ListGroupMembershipsInput, options: list_group_memberships.Options) !list_group_memberships.ListGroupMembershipsOutput {
+    pub fn listGroupMemberships(self: *Self, allocator: std.mem.Allocator, input: list_group_memberships.ListGroupMembershipsInput, options: CallOptions) !list_group_memberships.ListGroupMembershipsOutput {
         return list_group_memberships.execute(self, allocator, input, options);
     }
 
@@ -173,7 +174,7 @@ pub const Client = struct {
     /// the member account. For more information, see [Limiting access to the
     /// identity store from member
     /// accounts](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts) in the * IAM Identity Center User Guide*.
-    pub fn listGroupMembershipsForMember(self: *Self, allocator: std.mem.Allocator, input: list_group_memberships_for_member.ListGroupMembershipsForMemberInput, options: list_group_memberships_for_member.Options) !list_group_memberships_for_member.ListGroupMembershipsForMemberOutput {
+    pub fn listGroupMembershipsForMember(self: *Self, allocator: std.mem.Allocator, input: list_group_memberships_for_member.ListGroupMembershipsForMemberInput, options: CallOptions) !list_group_memberships_for_member.ListGroupMembershipsForMemberOutput {
         return list_group_memberships_for_member.execute(self, allocator, input, options);
     }
 
@@ -185,7 +186,7 @@ pub const Client = struct {
     /// the member account. For more information, see [Limiting access to the
     /// identity store from member
     /// accounts](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts) in the * IAM Identity Center User Guide*.
-    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: list_groups.Options) !list_groups.ListGroupsOutput {
+    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: CallOptions) !list_groups.ListGroupsOutput {
         return list_groups.execute(self, allocator, input, options);
     }
 
@@ -197,19 +198,19 @@ pub const Client = struct {
     /// the member account. For more information, see [Limiting access to the
     /// identity store from member
     /// accounts](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts) in the * IAM Identity Center User Guide*.
-    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: list_users.Options) !list_users.ListUsersOutput {
+    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: CallOptions) !list_users.ListUsersOutput {
         return list_users.execute(self, allocator, input, options);
     }
 
     /// Updates the specified group metadata and attributes in the specified
     /// identity store.
-    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: update_group.Options) !update_group.UpdateGroupOutput {
+    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: CallOptions) !update_group.UpdateGroupOutput {
         return update_group.execute(self, allocator, input, options);
     }
 
     /// Updates the specified user metadata and attributes in the specified identity
     /// store.
-    pub fn updateUser(self: *Self, allocator: std.mem.Allocator, input: update_user.UpdateUserInput, options: update_user.Options) !update_user.UpdateUserOutput {
+    pub fn updateUser(self: *Self, allocator: std.mem.Allocator, input: update_user.UpdateUserInput, options: CallOptions) !update_user.UpdateUserOutput {
         return update_user.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AsyncInvokeOutputDataConfig = @import("async_invoke_output_data_config.zig").AsyncInvokeOutputDataConfig;
 const AsyncInvokeStatus = @import("async_invoke_status.zig").AsyncInvokeStatus;
@@ -56,11 +57,7 @@ pub const GetAsyncInvokeOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAsyncInvokeInput, options: Options) !GetAsyncInvokeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAsyncInvokeInput, options: CallOptions) !GetAsyncInvokeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -40,6 +40,7 @@ const update_consumable_resource = @import("update_consumable_resource.zig");
 const update_job_queue = @import("update_job_queue.zig");
 const update_scheduling_policy = @import("update_scheduling_policy.zig");
 const update_service_environment = @import("update_service_environment.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -88,7 +89,7 @@ pub const Client = struct {
     /// even
     /// if no job is canceled. These jobs must be terminated with the TerminateJob
     /// operation.
-    pub fn cancelJob(self: *Self, allocator: std.mem.Allocator, input: cancel_job.CancelJobInput, options: cancel_job.Options) !cancel_job.CancelJobOutput {
+    pub fn cancelJob(self: *Self, allocator: std.mem.Allocator, input: cancel_job.CancelJobInput, options: CallOptions) !cancel_job.CancelJobOutput {
         return cancel_job.execute(self, allocator, input, options);
     }
 
@@ -135,12 +136,12 @@ pub const Client = struct {
     /// created. For more information on how to update a compute environment's AMI,
     /// see [Updating compute
     /// environments](https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html) in the *Batch User Guide*.
-    pub fn createComputeEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_compute_environment.CreateComputeEnvironmentInput, options: create_compute_environment.Options) !create_compute_environment.CreateComputeEnvironmentOutput {
+    pub fn createComputeEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_compute_environment.CreateComputeEnvironmentInput, options: CallOptions) !create_compute_environment.CreateComputeEnvironmentOutput {
         return create_compute_environment.execute(self, allocator, input, options);
     }
 
     /// Creates an Batch consumable resource.
-    pub fn createConsumableResource(self: *Self, allocator: std.mem.Allocator, input: create_consumable_resource.CreateConsumableResourceInput, options: create_consumable_resource.Options) !create_consumable_resource.CreateConsumableResourceOutput {
+    pub fn createConsumableResource(self: *Self, allocator: std.mem.Allocator, input: create_consumable_resource.CreateConsumableResourceInput, options: CallOptions) !create_consumable_resource.CreateConsumableResourceOutput {
         return create_consumable_resource.execute(self, allocator, input, options);
     }
 
@@ -157,19 +158,19 @@ pub const Client = struct {
     /// environment is associated with more than one job queue, the job queue with a
     /// higher priority
     /// is given preference for scheduling jobs to that compute environment.
-    pub fn createJobQueue(self: *Self, allocator: std.mem.Allocator, input: create_job_queue.CreateJobQueueInput, options: create_job_queue.Options) !create_job_queue.CreateJobQueueOutput {
+    pub fn createJobQueue(self: *Self, allocator: std.mem.Allocator, input: create_job_queue.CreateJobQueueInput, options: CallOptions) !create_job_queue.CreateJobQueueOutput {
         return create_job_queue.execute(self, allocator, input, options);
     }
 
     /// Creates an Batch scheduling policy.
-    pub fn createSchedulingPolicy(self: *Self, allocator: std.mem.Allocator, input: create_scheduling_policy.CreateSchedulingPolicyInput, options: create_scheduling_policy.Options) !create_scheduling_policy.CreateSchedulingPolicyOutput {
+    pub fn createSchedulingPolicy(self: *Self, allocator: std.mem.Allocator, input: create_scheduling_policy.CreateSchedulingPolicyInput, options: CallOptions) !create_scheduling_policy.CreateSchedulingPolicyOutput {
         return create_scheduling_policy.execute(self, allocator, input, options);
     }
 
     /// Creates a service environment for running service jobs. Service environments
     /// define capacity limits for specific service types such as SageMaker Training
     /// jobs.
-    pub fn createServiceEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_service_environment.CreateServiceEnvironmentInput, options: create_service_environment.Options) !create_service_environment.CreateServiceEnvironmentOutput {
+    pub fn createServiceEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_service_environment.CreateServiceEnvironmentInput, options: CallOptions) !create_service_environment.CreateServiceEnvironmentOutput {
         return create_service_environment.execute(self, allocator, input, options);
     }
 
@@ -183,12 +184,12 @@ pub const Client = struct {
     /// compute environment before deleting the compute environment. If this isn't
     /// done, the compute
     /// environment enters an invalid state.
-    pub fn deleteComputeEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_compute_environment.DeleteComputeEnvironmentInput, options: delete_compute_environment.Options) !delete_compute_environment.DeleteComputeEnvironmentOutput {
+    pub fn deleteComputeEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_compute_environment.DeleteComputeEnvironmentInput, options: CallOptions) !delete_compute_environment.DeleteComputeEnvironmentOutput {
         return delete_compute_environment.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified consumable resource.
-    pub fn deleteConsumableResource(self: *Self, allocator: std.mem.Allocator, input: delete_consumable_resource.DeleteConsumableResourceInput, options: delete_consumable_resource.Options) !delete_consumable_resource.DeleteConsumableResourceOutput {
+    pub fn deleteConsumableResource(self: *Self, allocator: std.mem.Allocator, input: delete_consumable_resource.DeleteConsumableResourceInput, options: CallOptions) !delete_consumable_resource.DeleteConsumableResourceOutput {
         return delete_consumable_resource.execute(self, allocator, input, options);
     }
 
@@ -202,14 +203,14 @@ pub const Client = struct {
     /// It's not necessary to disassociate compute environments from a queue before
     /// submitting a
     /// `DeleteJobQueue` request.
-    pub fn deleteJobQueue(self: *Self, allocator: std.mem.Allocator, input: delete_job_queue.DeleteJobQueueInput, options: delete_job_queue.Options) !delete_job_queue.DeleteJobQueueOutput {
+    pub fn deleteJobQueue(self: *Self, allocator: std.mem.Allocator, input: delete_job_queue.DeleteJobQueueInput, options: CallOptions) !delete_job_queue.DeleteJobQueueOutput {
         return delete_job_queue.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified scheduling policy.
     ///
     /// You can't delete a scheduling policy that's used in any job queues.
-    pub fn deleteSchedulingPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_scheduling_policy.DeleteSchedulingPolicyInput, options: delete_scheduling_policy.Options) !delete_scheduling_policy.DeleteSchedulingPolicyOutput {
+    pub fn deleteSchedulingPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_scheduling_policy.DeleteSchedulingPolicyInput, options: CallOptions) !delete_scheduling_policy.DeleteSchedulingPolicyOutput {
         return delete_scheduling_policy.execute(self, allocator, input, options);
     }
 
@@ -217,14 +218,14 @@ pub const Client = struct {
     /// you must first set its state to `DISABLED` with the
     /// `UpdateServiceEnvironment` API operation and disassociate it from any job
     /// queues with the `UpdateJobQueue` API operation.
-    pub fn deleteServiceEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_service_environment.DeleteServiceEnvironmentInput, options: delete_service_environment.Options) !delete_service_environment.DeleteServiceEnvironmentOutput {
+    pub fn deleteServiceEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_service_environment.DeleteServiceEnvironmentInput, options: CallOptions) !delete_service_environment.DeleteServiceEnvironmentOutput {
         return delete_service_environment.execute(self, allocator, input, options);
     }
 
     /// Deregisters an Batch job definition. Job definitions are permanently deleted
     /// after 180
     /// days.
-    pub fn deregisterJobDefinition(self: *Self, allocator: std.mem.Allocator, input: deregister_job_definition.DeregisterJobDefinitionInput, options: deregister_job_definition.Options) !deregister_job_definition.DeregisterJobDefinitionOutput {
+    pub fn deregisterJobDefinition(self: *Self, allocator: std.mem.Allocator, input: deregister_job_definition.DeregisterJobDefinitionInput, options: CallOptions) !deregister_job_definition.DeregisterJobDefinitionOutput {
         return deregister_job_definition.execute(self, allocator, input, options);
     }
 
@@ -233,54 +234,54 @@ pub const Client = struct {
     /// If you're using an unmanaged compute environment, you can use the
     /// `DescribeComputeEnvironment` operation to determine the
     /// `ecsClusterArn` that you launch your Amazon ECS container instances into.
-    pub fn describeComputeEnvironments(self: *Self, allocator: std.mem.Allocator, input: describe_compute_environments.DescribeComputeEnvironmentsInput, options: describe_compute_environments.Options) !describe_compute_environments.DescribeComputeEnvironmentsOutput {
+    pub fn describeComputeEnvironments(self: *Self, allocator: std.mem.Allocator, input: describe_compute_environments.DescribeComputeEnvironmentsInput, options: CallOptions) !describe_compute_environments.DescribeComputeEnvironmentsOutput {
         return describe_compute_environments.execute(self, allocator, input, options);
     }
 
     /// Returns a description of the specified consumable resource.
-    pub fn describeConsumableResource(self: *Self, allocator: std.mem.Allocator, input: describe_consumable_resource.DescribeConsumableResourceInput, options: describe_consumable_resource.Options) !describe_consumable_resource.DescribeConsumableResourceOutput {
+    pub fn describeConsumableResource(self: *Self, allocator: std.mem.Allocator, input: describe_consumable_resource.DescribeConsumableResourceInput, options: CallOptions) !describe_consumable_resource.DescribeConsumableResourceOutput {
         return describe_consumable_resource.execute(self, allocator, input, options);
     }
 
     /// Describes a list of job definitions. You can specify a `status` (such as
     /// `ACTIVE`) to only return job definitions that match that status.
-    pub fn describeJobDefinitions(self: *Self, allocator: std.mem.Allocator, input: describe_job_definitions.DescribeJobDefinitionsInput, options: describe_job_definitions.Options) !describe_job_definitions.DescribeJobDefinitionsOutput {
+    pub fn describeJobDefinitions(self: *Self, allocator: std.mem.Allocator, input: describe_job_definitions.DescribeJobDefinitionsInput, options: CallOptions) !describe_job_definitions.DescribeJobDefinitionsOutput {
         return describe_job_definitions.execute(self, allocator, input, options);
     }
 
     /// Describes one or more of your job queues.
-    pub fn describeJobQueues(self: *Self, allocator: std.mem.Allocator, input: describe_job_queues.DescribeJobQueuesInput, options: describe_job_queues.Options) !describe_job_queues.DescribeJobQueuesOutput {
+    pub fn describeJobQueues(self: *Self, allocator: std.mem.Allocator, input: describe_job_queues.DescribeJobQueuesInput, options: CallOptions) !describe_job_queues.DescribeJobQueuesOutput {
         return describe_job_queues.execute(self, allocator, input, options);
     }
 
     /// Describes a list of Batch jobs.
-    pub fn describeJobs(self: *Self, allocator: std.mem.Allocator, input: describe_jobs.DescribeJobsInput, options: describe_jobs.Options) !describe_jobs.DescribeJobsOutput {
+    pub fn describeJobs(self: *Self, allocator: std.mem.Allocator, input: describe_jobs.DescribeJobsInput, options: CallOptions) !describe_jobs.DescribeJobsOutput {
         return describe_jobs.execute(self, allocator, input, options);
     }
 
     /// Describes one or more of your scheduling policies.
-    pub fn describeSchedulingPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_scheduling_policies.DescribeSchedulingPoliciesInput, options: describe_scheduling_policies.Options) !describe_scheduling_policies.DescribeSchedulingPoliciesOutput {
+    pub fn describeSchedulingPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_scheduling_policies.DescribeSchedulingPoliciesInput, options: CallOptions) !describe_scheduling_policies.DescribeSchedulingPoliciesOutput {
         return describe_scheduling_policies.execute(self, allocator, input, options);
     }
 
     /// Describes one or more of your service environments.
-    pub fn describeServiceEnvironments(self: *Self, allocator: std.mem.Allocator, input: describe_service_environments.DescribeServiceEnvironmentsInput, options: describe_service_environments.Options) !describe_service_environments.DescribeServiceEnvironmentsOutput {
+    pub fn describeServiceEnvironments(self: *Self, allocator: std.mem.Allocator, input: describe_service_environments.DescribeServiceEnvironmentsInput, options: CallOptions) !describe_service_environments.DescribeServiceEnvironmentsOutput {
         return describe_service_environments.execute(self, allocator, input, options);
     }
 
     /// The details of a service job.
-    pub fn describeServiceJob(self: *Self, allocator: std.mem.Allocator, input: describe_service_job.DescribeServiceJobInput, options: describe_service_job.Options) !describe_service_job.DescribeServiceJobOutput {
+    pub fn describeServiceJob(self: *Self, allocator: std.mem.Allocator, input: describe_service_job.DescribeServiceJobInput, options: CallOptions) !describe_service_job.DescribeServiceJobOutput {
         return describe_service_job.execute(self, allocator, input, options);
     }
 
     /// Provides a list of the first 100 `RUNNABLE` jobs associated to a single job
     /// queue.
-    pub fn getJobQueueSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_job_queue_snapshot.GetJobQueueSnapshotInput, options: get_job_queue_snapshot.Options) !get_job_queue_snapshot.GetJobQueueSnapshotOutput {
+    pub fn getJobQueueSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_job_queue_snapshot.GetJobQueueSnapshotInput, options: CallOptions) !get_job_queue_snapshot.GetJobQueueSnapshotOutput {
         return get_job_queue_snapshot.execute(self, allocator, input, options);
     }
 
     /// Returns a list of Batch consumable resources.
-    pub fn listConsumableResources(self: *Self, allocator: std.mem.Allocator, input: list_consumable_resources.ListConsumableResourcesInput, options: list_consumable_resources.Options) !list_consumable_resources.ListConsumableResourcesOutput {
+    pub fn listConsumableResources(self: *Self, allocator: std.mem.Allocator, input: list_consumable_resources.ListConsumableResourcesInput, options: CallOptions) !list_consumable_resources.ListConsumableResourcesOutput {
         return list_consumable_resources.execute(self, allocator, input, options);
     }
 
@@ -297,22 +298,22 @@ pub const Client = struct {
     /// You can filter the results by job status with the `jobStatus` parameter. If
     /// you
     /// don't specify a status, only `RUNNING` jobs are returned.
-    pub fn listJobs(self: *Self, allocator: std.mem.Allocator, input: list_jobs.ListJobsInput, options: list_jobs.Options) !list_jobs.ListJobsOutput {
+    pub fn listJobs(self: *Self, allocator: std.mem.Allocator, input: list_jobs.ListJobsInput, options: CallOptions) !list_jobs.ListJobsOutput {
         return list_jobs.execute(self, allocator, input, options);
     }
 
     /// Returns a list of Batch jobs that require a specific consumable resource.
-    pub fn listJobsByConsumableResource(self: *Self, allocator: std.mem.Allocator, input: list_jobs_by_consumable_resource.ListJobsByConsumableResourceInput, options: list_jobs_by_consumable_resource.Options) !list_jobs_by_consumable_resource.ListJobsByConsumableResourceOutput {
+    pub fn listJobsByConsumableResource(self: *Self, allocator: std.mem.Allocator, input: list_jobs_by_consumable_resource.ListJobsByConsumableResourceInput, options: CallOptions) !list_jobs_by_consumable_resource.ListJobsByConsumableResourceOutput {
         return list_jobs_by_consumable_resource.execute(self, allocator, input, options);
     }
 
     /// Returns a list of Batch scheduling policies.
-    pub fn listSchedulingPolicies(self: *Self, allocator: std.mem.Allocator, input: list_scheduling_policies.ListSchedulingPoliciesInput, options: list_scheduling_policies.Options) !list_scheduling_policies.ListSchedulingPoliciesOutput {
+    pub fn listSchedulingPolicies(self: *Self, allocator: std.mem.Allocator, input: list_scheduling_policies.ListSchedulingPoliciesInput, options: CallOptions) !list_scheduling_policies.ListSchedulingPoliciesOutput {
         return list_scheduling_policies.execute(self, allocator, input, options);
     }
 
     /// Returns a list of service jobs for a specified job queue.
-    pub fn listServiceJobs(self: *Self, allocator: std.mem.Allocator, input: list_service_jobs.ListServiceJobsInput, options: list_service_jobs.Options) !list_service_jobs.ListServiceJobsOutput {
+    pub fn listServiceJobs(self: *Self, allocator: std.mem.Allocator, input: list_service_jobs.ListServiceJobsInput, options: CallOptions) !list_service_jobs.ListServiceJobsOutput {
         return list_service_jobs.execute(self, allocator, input, options);
     }
 
@@ -320,12 +321,12 @@ pub const Client = struct {
     /// compute environments, jobs, job definitions, job queues,
     /// and scheduling policies. ARNs for child jobs of array and multi-node
     /// parallel (MNP) jobs aren't supported.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Registers an Batch job definition.
-    pub fn registerJobDefinition(self: *Self, allocator: std.mem.Allocator, input: register_job_definition.RegisterJobDefinitionInput, options: register_job_definition.Options) !register_job_definition.RegisterJobDefinitionOutput {
+    pub fn registerJobDefinition(self: *Self, allocator: std.mem.Allocator, input: register_job_definition.RegisterJobDefinitionInput, options: CallOptions) !register_job_definition.RegisterJobDefinitionOutput {
         return register_job_definition.execute(self, allocator, input, options);
     }
 
@@ -349,14 +350,14 @@ pub const Client = struct {
     /// This is because, after 14 days, Fargate resources might become unavailable
     /// and job might be
     /// terminated.
-    pub fn submitJob(self: *Self, allocator: std.mem.Allocator, input: submit_job.SubmitJobInput, options: submit_job.Options) !submit_job.SubmitJobOutput {
+    pub fn submitJob(self: *Self, allocator: std.mem.Allocator, input: submit_job.SubmitJobInput, options: CallOptions) !submit_job.SubmitJobOutput {
         return submit_job.execute(self, allocator, input, options);
     }
 
     /// Submits a service job to a specified job queue to run on SageMaker AI. A
     /// service job is a unit of work that you submit to Batch for execution on
     /// SageMaker AI.
-    pub fn submitServiceJob(self: *Self, allocator: std.mem.Allocator, input: submit_service_job.SubmitServiceJobInput, options: submit_service_job.Options) !submit_service_job.SubmitServiceJobOutput {
+    pub fn submitServiceJob(self: *Self, allocator: std.mem.Allocator, input: submit_service_job.SubmitServiceJobInput, options: CallOptions) !submit_service_job.SubmitServiceJobOutput {
         return submit_service_job.execute(self, allocator, input, options);
     }
 
@@ -370,7 +371,7 @@ pub const Client = struct {
     /// jobs, job definitions, job queues,
     /// and scheduling policies. ARNs for child jobs of array and multi-node
     /// parallel (MNP) jobs aren't supported.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -378,44 +379,44 @@ pub const Client = struct {
     /// `RUNNING` state are terminated, which causes them to transition to
     /// `FAILED`. Jobs that have not progressed to the `STARTING` state are
     /// cancelled.
-    pub fn terminateJob(self: *Self, allocator: std.mem.Allocator, input: terminate_job.TerminateJobInput, options: terminate_job.Options) !terminate_job.TerminateJobOutput {
+    pub fn terminateJob(self: *Self, allocator: std.mem.Allocator, input: terminate_job.TerminateJobInput, options: CallOptions) !terminate_job.TerminateJobOutput {
         return terminate_job.execute(self, allocator, input, options);
     }
 
     /// Terminates a service job in a job queue.
-    pub fn terminateServiceJob(self: *Self, allocator: std.mem.Allocator, input: terminate_service_job.TerminateServiceJobInput, options: terminate_service_job.Options) !terminate_service_job.TerminateServiceJobOutput {
+    pub fn terminateServiceJob(self: *Self, allocator: std.mem.Allocator, input: terminate_service_job.TerminateServiceJobInput, options: CallOptions) !terminate_service_job.TerminateServiceJobOutput {
         return terminate_service_job.execute(self, allocator, input, options);
     }
 
     /// Deletes specified tags from an Batch resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an Batch compute environment.
-    pub fn updateComputeEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_compute_environment.UpdateComputeEnvironmentInput, options: update_compute_environment.Options) !update_compute_environment.UpdateComputeEnvironmentOutput {
+    pub fn updateComputeEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_compute_environment.UpdateComputeEnvironmentInput, options: CallOptions) !update_compute_environment.UpdateComputeEnvironmentOutput {
         return update_compute_environment.execute(self, allocator, input, options);
     }
 
     /// Updates a consumable resource.
-    pub fn updateConsumableResource(self: *Self, allocator: std.mem.Allocator, input: update_consumable_resource.UpdateConsumableResourceInput, options: update_consumable_resource.Options) !update_consumable_resource.UpdateConsumableResourceOutput {
+    pub fn updateConsumableResource(self: *Self, allocator: std.mem.Allocator, input: update_consumable_resource.UpdateConsumableResourceInput, options: CallOptions) !update_consumable_resource.UpdateConsumableResourceOutput {
         return update_consumable_resource.execute(self, allocator, input, options);
     }
 
     /// Updates a job queue.
-    pub fn updateJobQueue(self: *Self, allocator: std.mem.Allocator, input: update_job_queue.UpdateJobQueueInput, options: update_job_queue.Options) !update_job_queue.UpdateJobQueueOutput {
+    pub fn updateJobQueue(self: *Self, allocator: std.mem.Allocator, input: update_job_queue.UpdateJobQueueInput, options: CallOptions) !update_job_queue.UpdateJobQueueOutput {
         return update_job_queue.execute(self, allocator, input, options);
     }
 
     /// Updates a scheduling policy.
-    pub fn updateSchedulingPolicy(self: *Self, allocator: std.mem.Allocator, input: update_scheduling_policy.UpdateSchedulingPolicyInput, options: update_scheduling_policy.Options) !update_scheduling_policy.UpdateSchedulingPolicyOutput {
+    pub fn updateSchedulingPolicy(self: *Self, allocator: std.mem.Allocator, input: update_scheduling_policy.UpdateSchedulingPolicyInput, options: CallOptions) !update_scheduling_policy.UpdateSchedulingPolicyOutput {
         return update_scheduling_policy.execute(self, allocator, input, options);
     }
 
     /// Updates a service environment. You can update the state of a service
     /// environment from `ENABLED` to `DISABLED` to prevent new service jobs from
     /// being placed in the service environment.
-    pub fn updateServiceEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_service_environment.UpdateServiceEnvironmentInput, options: update_service_environment.Options) !update_service_environment.UpdateServiceEnvironmentOutput {
+    pub fn updateServiceEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_service_environment.UpdateServiceEnvironmentInput, options: CallOptions) !update_service_environment.UpdateServiceEnvironmentOutput {
         return update_service_environment.execute(self, allocator, input, options);
     }
 

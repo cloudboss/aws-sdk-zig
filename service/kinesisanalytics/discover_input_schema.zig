@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InputProcessingConfiguration = @import("input_processing_configuration.zig").InputProcessingConfiguration;
 const InputStartingPositionConfiguration = @import("input_starting_position_configuration.zig").InputStartingPositionConfiguration;
@@ -62,11 +63,7 @@ pub const DiscoverInputSchemaOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DiscoverInputSchemaInput, options: Options) !DiscoverInputSchemaOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DiscoverInputSchemaInput, options: CallOptions) !DiscoverInputSchemaOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

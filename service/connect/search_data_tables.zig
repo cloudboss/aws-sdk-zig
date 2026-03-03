@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DataTableSearchCriteria = @import("data_table_search_criteria.zig").DataTableSearchCriteria;
 const DataTableSearchFilter = @import("data_table_search_filter.zig").DataTableSearchFilter;
@@ -57,11 +58,7 @@ pub const SearchDataTablesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchDataTablesInput, options: Options) !SearchDataTablesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchDataTablesInput, options: CallOptions) !SearchDataTablesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

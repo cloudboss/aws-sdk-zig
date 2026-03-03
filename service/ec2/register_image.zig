@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ArchitectureValues = @import("architecture_values.zig").ArchitectureValues;
 const BlockDeviceMapping = @import("block_device_mapping.zig").BlockDeviceMapping;
@@ -163,11 +164,7 @@ pub const RegisterImageOutput = struct {
     image_id: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterImageInput, options: Options) !RegisterImageOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterImageInput, options: CallOptions) !RegisterImageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

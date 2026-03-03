@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AIPromptAPIFormat = @import("ai_prompt_api_format.zig").AIPromptAPIFormat;
 const AIPromptInferenceConfiguration = @import("ai_prompt_inference_configuration.zig").AIPromptInferenceConfiguration;
@@ -87,11 +88,7 @@ pub const CreateAIPromptOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAIPromptInput, options: Options) !CreateAIPromptOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAIPromptInput, options: CallOptions) !CreateAIPromptOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

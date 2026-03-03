@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 
@@ -22,11 +23,7 @@ pub const StartBulkDisassociateWirelessDeviceFromMulticastGroupInput = struct {
 pub const StartBulkDisassociateWirelessDeviceFromMulticastGroupOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartBulkDisassociateWirelessDeviceFromMulticastGroupInput, options: Options) !StartBulkDisassociateWirelessDeviceFromMulticastGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartBulkDisassociateWirelessDeviceFromMulticastGroupInput, options: CallOptions) !StartBulkDisassociateWirelessDeviceFromMulticastGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

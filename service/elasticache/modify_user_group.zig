@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const UserGroupPendingChanges = @import("user_group_pending_changes.zig").UserGroupPendingChanges;
 const serde = @import("serde.zig");
@@ -20,13 +21,9 @@ pub const ModifyUserGroupInput = struct {
     user_ids_to_remove: ?[]const []const u8 = null,
 };
 
-const ModifyUserGroupOutput = @import("user_group.zig").UserGroup;
+pub const ModifyUserGroupOutput = @import("user_group.zig").UserGroup;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyUserGroupInput, options: Options) !ModifyUserGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyUserGroupInput, options: CallOptions) !ModifyUserGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AmazonManagedKafkaEventSourceConfig = @import("amazon_managed_kafka_event_source_config.zig").AmazonManagedKafkaEventSourceConfig;
 const DestinationConfig = @import("destination_config.zig").DestinationConfig;
@@ -217,13 +218,9 @@ pub const CreateEventSourceMappingInput = struct {
     };
 };
 
-const CreateEventSourceMappingOutput = @import("event_source_mapping_configuration.zig").EventSourceMappingConfiguration;
+pub const CreateEventSourceMappingOutput = @import("event_source_mapping_configuration.zig").EventSourceMappingConfiguration;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateEventSourceMappingInput, options: Options) !CreateEventSourceMappingOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateEventSourceMappingInput, options: CallOptions) !CreateEventSourceMappingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

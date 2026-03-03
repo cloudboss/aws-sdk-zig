@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DeriveKeyUsage = @import("derive_key_usage.zig").DeriveKeyUsage;
 const KeyAttributes = @import("key_attributes.zig").KeyAttributes;
@@ -81,11 +82,7 @@ pub const CreateKeyOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateKeyInput, options: Options) !CreateKeyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateKeyInput, options: CallOptions) !CreateKeyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PortfolioShareType = @import("portfolio_share_type.zig").PortfolioShareType;
 
@@ -41,11 +42,7 @@ pub const AcceptPortfolioShareInput = struct {
 pub const AcceptPortfolioShareOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AcceptPortfolioShareInput, options: Options) !AcceptPortfolioShareOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AcceptPortfolioShareInput, options: CallOptions) !AcceptPortfolioShareOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

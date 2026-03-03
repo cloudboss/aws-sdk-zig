@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SensorStatisticsSummary = @import("sensor_statistics_summary.zig").SensorStatisticsSummary;
 
@@ -51,11 +52,7 @@ pub const ListSensorStatisticsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSensorStatisticsInput, options: Options) !ListSensorStatisticsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSensorStatisticsInput, options: CallOptions) !ListSensorStatisticsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

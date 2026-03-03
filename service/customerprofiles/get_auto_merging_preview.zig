@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConflictResolution = @import("conflict_resolution.zig").ConflictResolution;
 const Consolidation = @import("consolidation.zig").Consolidation;
@@ -54,11 +55,7 @@ pub const GetAutoMergingPreviewOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAutoMergingPreviewInput, options: Options) !GetAutoMergingPreviewOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAutoMergingPreviewInput, options: CallOptions) !GetAutoMergingPreviewOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const globalEndpointTokenVersion = @import("global_endpoint_token_version.zig").globalEndpointTokenVersion;
 
@@ -22,13 +23,9 @@ pub const SetSecurityTokenServicePreferencesInput = struct {
     global_endpoint_token_version: globalEndpointTokenVersion,
 };
 
-const SetSecurityTokenServicePreferencesOutput = struct {};
+pub const SetSecurityTokenServicePreferencesOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetSecurityTokenServicePreferencesInput, options: Options) !SetSecurityTokenServicePreferencesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetSecurityTokenServicePreferencesInput, options: CallOptions) !SetSecurityTokenServicePreferencesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

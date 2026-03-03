@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Scope = @import("scope.zig").Scope;
 const RegexPatternSetSummary = @import("regex_pattern_set_summary.zig").RegexPatternSetSummary;
@@ -58,11 +59,7 @@ pub const ListRegexPatternSetsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRegexPatternSetsInput, options: Options) !ListRegexPatternSetsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRegexPatternSetsInput, options: CallOptions) !ListRegexPatternSetsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CreateVehicleRequestItem = @import("create_vehicle_request_item.zig").CreateVehicleRequestItem;
 const CreateVehicleError = @import("create_vehicle_error.zig").CreateVehicleError;
@@ -35,11 +36,7 @@ pub const BatchCreateVehicleOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchCreateVehicleInput, options: Options) !BatchCreateVehicleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchCreateVehicleInput, options: CallOptions) !BatchCreateVehicleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

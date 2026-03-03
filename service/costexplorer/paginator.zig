@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_anomalies = @import("get_anomalies.zig");
@@ -28,7 +29,7 @@ pub const GetAnomaliesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_anomalies.Options) !get_anomalies.GetAnomaliesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_anomalies.GetAnomaliesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -69,7 +70,7 @@ pub const GetAnomalyMonitorsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_anomaly_monitors.Options) !get_anomaly_monitors.GetAnomalyMonitorsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_anomaly_monitors.GetAnomalyMonitorsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -110,7 +111,7 @@ pub const GetAnomalySubscriptionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_anomaly_subscriptions.Options) !get_anomaly_subscriptions.GetAnomalySubscriptionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_anomaly_subscriptions.GetAnomalySubscriptionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -151,7 +152,7 @@ pub const GetCostAndUsageComparisonsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_cost_and_usage_comparisons.Options) !get_cost_and_usage_comparisons.GetCostAndUsageComparisonsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_cost_and_usage_comparisons.GetCostAndUsageComparisonsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -192,7 +193,7 @@ pub const GetCostComparisonDriversPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_cost_comparison_drivers.Options) !get_cost_comparison_drivers.GetCostComparisonDriversOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_cost_comparison_drivers.GetCostComparisonDriversOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -233,7 +234,7 @@ pub const GetReservationPurchaseRecommendationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_reservation_purchase_recommendation.Options) !get_reservation_purchase_recommendation.GetReservationPurchaseRecommendationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_reservation_purchase_recommendation.GetReservationPurchaseRecommendationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -274,7 +275,7 @@ pub const GetRightsizingRecommendationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_rightsizing_recommendation.Options) !get_rightsizing_recommendation.GetRightsizingRecommendationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_rightsizing_recommendation.GetRightsizingRecommendationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -315,7 +316,7 @@ pub const GetSavingsPlansCoveragePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_savings_plans_coverage.Options) !get_savings_plans_coverage.GetSavingsPlansCoverageOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_savings_plans_coverage.GetSavingsPlansCoverageOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -356,7 +357,7 @@ pub const GetSavingsPlansUtilizationDetailsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_savings_plans_utilization_details.Options) !get_savings_plans_utilization_details.GetSavingsPlansUtilizationDetailsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_savings_plans_utilization_details.GetSavingsPlansUtilizationDetailsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -397,7 +398,7 @@ pub const ListCommitmentPurchaseAnalysesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_commitment_purchase_analyses.Options) !list_commitment_purchase_analyses.ListCommitmentPurchaseAnalysesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_commitment_purchase_analyses.ListCommitmentPurchaseAnalysesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -438,7 +439,7 @@ pub const ListCostAllocationTagBackfillHistoryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_cost_allocation_tag_backfill_history.Options) !list_cost_allocation_tag_backfill_history.ListCostAllocationTagBackfillHistoryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_cost_allocation_tag_backfill_history.ListCostAllocationTagBackfillHistoryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -479,7 +480,7 @@ pub const ListCostAllocationTagsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_cost_allocation_tags.Options) !list_cost_allocation_tags.ListCostAllocationTagsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_cost_allocation_tags.ListCostAllocationTagsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -520,7 +521,7 @@ pub const ListCostCategoryDefinitionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_cost_category_definitions.Options) !list_cost_category_definitions.ListCostCategoryDefinitionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_cost_category_definitions.ListCostCategoryDefinitionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -561,7 +562,7 @@ pub const ListCostCategoryResourceAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_cost_category_resource_associations.Options) !list_cost_category_resource_associations.ListCostCategoryResourceAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_cost_category_resource_associations.ListCostCategoryResourceAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -602,7 +603,7 @@ pub const ListSavingsPlansPurchaseRecommendationGenerationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_savings_plans_purchase_recommendation_generation.Options) !list_savings_plans_purchase_recommendation_generation.ListSavingsPlansPurchaseRecommendationGenerationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_savings_plans_purchase_recommendation_generation.ListSavingsPlansPurchaseRecommendationGenerationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

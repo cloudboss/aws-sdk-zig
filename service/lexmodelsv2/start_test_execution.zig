@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TestExecutionApiMode = @import("test_execution_api_mode.zig").TestExecutionApiMode;
 const TestExecutionTarget = @import("test_execution_target.zig").TestExecutionTarget;
@@ -65,11 +66,7 @@ pub const StartTestExecutionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartTestExecutionInput, options: Options) !StartTestExecutionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartTestExecutionInput, options: CallOptions) !StartTestExecutionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

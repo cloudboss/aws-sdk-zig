@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CrossAccountFilterOption = @import("cross_account_filter_option.zig").CrossAccountFilterOption;
 const ResourceType = @import("resource_type.zig").ResourceType;
@@ -11,15 +12,11 @@ const VisibilityConditions = @import("visibility_conditions.zig").VisibilityCond
 const SearchRecord = @import("search_record.zig").SearchRecord;
 const TotalHits = @import("total_hits.zig").TotalHits;
 
-const SearchInput = @import("search_request.zig").SearchRequest;
+pub const SearchInput = @import("search_request.zig").SearchRequest;
 
-const SearchOutput = @import("search_response.zig").SearchResponse;
+pub const SearchOutput = @import("search_response.zig").SearchResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchInput, options: Options) !SearchOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchInput, options: CallOptions) !SearchOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConfigCapabilityType = @import("config_capability_type.zig").ConfigCapabilityType;
 
@@ -35,11 +36,7 @@ pub const DeleteConfigOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConfigInput, options: Options) !DeleteConfigOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConfigInput, options: CallOptions) !DeleteConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

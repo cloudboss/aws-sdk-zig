@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TaxExemptionType = @import("tax_exemption_type.zig").TaxExemptionType;
 
@@ -17,11 +18,7 @@ pub const GetTaxExemptionTypesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTaxExemptionTypesInput, options: Options) !GetTaxExemptionTypesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTaxExemptionTypesInput, options: CallOptions) !GetTaxExemptionTypesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

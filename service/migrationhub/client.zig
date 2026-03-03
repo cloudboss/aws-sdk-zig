@@ -22,6 +22,7 @@ const list_source_resources = @import("list_source_resources.zig");
 const notify_application_state = @import("notify_application_state.zig");
 const notify_migration_task_state = @import("notify_migration_task_state.zig");
 const put_resource_attributes = @import("put_resource_attributes.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -69,21 +70,21 @@ pub const Client = struct {
     /// * Examples of the AWS resource behind the created artifact are, AMI's, EC2
     ///   instance,
     /// or DMS endpoint, etc.
-    pub fn associateCreatedArtifact(self: *Self, allocator: std.mem.Allocator, input: associate_created_artifact.AssociateCreatedArtifactInput, options: associate_created_artifact.Options) !associate_created_artifact.AssociateCreatedArtifactOutput {
+    pub fn associateCreatedArtifact(self: *Self, allocator: std.mem.Allocator, input: associate_created_artifact.AssociateCreatedArtifactInput, options: CallOptions) !associate_created_artifact.AssociateCreatedArtifactOutput {
         return associate_created_artifact.execute(self, allocator, input, options);
     }
 
     /// Associates a discovered resource ID from Application Discovery Service with
     /// a migration
     /// task.
-    pub fn associateDiscoveredResource(self: *Self, allocator: std.mem.Allocator, input: associate_discovered_resource.AssociateDiscoveredResourceInput, options: associate_discovered_resource.Options) !associate_discovered_resource.AssociateDiscoveredResourceOutput {
+    pub fn associateDiscoveredResource(self: *Self, allocator: std.mem.Allocator, input: associate_discovered_resource.AssociateDiscoveredResourceInput, options: CallOptions) !associate_discovered_resource.AssociateDiscoveredResourceOutput {
         return associate_discovered_resource.execute(self, allocator, input, options);
     }
 
     /// Associates a source resource with a migration task. For example, the source
     /// resource can
     /// be a source server, an application, or a migration wave.
-    pub fn associateSourceResource(self: *Self, allocator: std.mem.Allocator, input: associate_source_resource.AssociateSourceResourceInput, options: associate_source_resource.Options) !associate_source_resource.AssociateSourceResourceOutput {
+    pub fn associateSourceResource(self: *Self, allocator: std.mem.Allocator, input: associate_source_resource.AssociateSourceResourceInput, options: CallOptions) !associate_source_resource.AssociateSourceResourceOutput {
         return associate_source_resource.execute(self, allocator, input, options);
     }
 
@@ -96,7 +97,7 @@ pub const Client = struct {
     /// tool; however, it does not need to be unique for each AWS account because it
     /// is scoped to
     /// the AWS account.
-    pub fn createProgressUpdateStream(self: *Self, allocator: std.mem.Allocator, input: create_progress_update_stream.CreateProgressUpdateStreamInput, options: create_progress_update_stream.Options) !create_progress_update_stream.CreateProgressUpdateStreamOutput {
+    pub fn createProgressUpdateStream(self: *Self, allocator: std.mem.Allocator, input: create_progress_update_stream.CreateProgressUpdateStreamInput, options: CallOptions) !create_progress_update_stream.CreateProgressUpdateStreamOutput {
         return create_progress_update_stream.execute(self, allocator, input, options);
     }
 
@@ -129,18 +130,18 @@ pub const Client = struct {
     /// succeed, and that stream will be an entirely new logical resource (without
     /// any
     /// resources associated with the old stream).
-    pub fn deleteProgressUpdateStream(self: *Self, allocator: std.mem.Allocator, input: delete_progress_update_stream.DeleteProgressUpdateStreamInput, options: delete_progress_update_stream.Options) !delete_progress_update_stream.DeleteProgressUpdateStreamOutput {
+    pub fn deleteProgressUpdateStream(self: *Self, allocator: std.mem.Allocator, input: delete_progress_update_stream.DeleteProgressUpdateStreamInput, options: CallOptions) !delete_progress_update_stream.DeleteProgressUpdateStreamOutput {
         return delete_progress_update_stream.execute(self, allocator, input, options);
     }
 
     /// Gets the migration status of an application.
-    pub fn describeApplicationState(self: *Self, allocator: std.mem.Allocator, input: describe_application_state.DescribeApplicationStateInput, options: describe_application_state.Options) !describe_application_state.DescribeApplicationStateOutput {
+    pub fn describeApplicationState(self: *Self, allocator: std.mem.Allocator, input: describe_application_state.DescribeApplicationStateInput, options: CallOptions) !describe_application_state.DescribeApplicationStateOutput {
         return describe_application_state.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of all attributes associated with a specific migration
     /// task.
-    pub fn describeMigrationTask(self: *Self, allocator: std.mem.Allocator, input: describe_migration_task.DescribeMigrationTaskInput, options: describe_migration_task.Options) !describe_migration_task.DescribeMigrationTaskOutput {
+    pub fn describeMigrationTask(self: *Self, allocator: std.mem.Allocator, input: describe_migration_task.DescribeMigrationTaskInput, options: CallOptions) !describe_migration_task.DescribeMigrationTaskOutput {
         return describe_migration_task.execute(self, allocator, input, options);
     }
 
@@ -160,19 +161,19 @@ pub const Client = struct {
     /// * Examples of the AWS resource behind the created artifact are, AMI's, EC2
     ///   instance,
     /// or RDS instance, etc.
-    pub fn disassociateCreatedArtifact(self: *Self, allocator: std.mem.Allocator, input: disassociate_created_artifact.DisassociateCreatedArtifactInput, options: disassociate_created_artifact.Options) !disassociate_created_artifact.DisassociateCreatedArtifactOutput {
+    pub fn disassociateCreatedArtifact(self: *Self, allocator: std.mem.Allocator, input: disassociate_created_artifact.DisassociateCreatedArtifactInput, options: CallOptions) !disassociate_created_artifact.DisassociateCreatedArtifactOutput {
         return disassociate_created_artifact.execute(self, allocator, input, options);
     }
 
     /// Disassociate an Application Discovery Service discovered resource from a
     /// migration
     /// task.
-    pub fn disassociateDiscoveredResource(self: *Self, allocator: std.mem.Allocator, input: disassociate_discovered_resource.DisassociateDiscoveredResourceInput, options: disassociate_discovered_resource.Options) !disassociate_discovered_resource.DisassociateDiscoveredResourceOutput {
+    pub fn disassociateDiscoveredResource(self: *Self, allocator: std.mem.Allocator, input: disassociate_discovered_resource.DisassociateDiscoveredResourceInput, options: CallOptions) !disassociate_discovered_resource.DisassociateDiscoveredResourceOutput {
         return disassociate_discovered_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the association between a source resource and a migration task.
-    pub fn disassociateSourceResource(self: *Self, allocator: std.mem.Allocator, input: disassociate_source_resource.DisassociateSourceResourceInput, options: disassociate_source_resource.Options) !disassociate_source_resource.DisassociateSourceResourceOutput {
+    pub fn disassociateSourceResource(self: *Self, allocator: std.mem.Allocator, input: disassociate_source_resource.DisassociateSourceResourceInput, options: CallOptions) !disassociate_source_resource.DisassociateSourceResourceOutput {
         return disassociate_source_resource.execute(self, allocator, input, options);
     }
 
@@ -183,7 +184,7 @@ pub const Client = struct {
     /// This API is a prerequisite to calling the `NotifyMigrationTaskState` API as
     /// the migration tool must first register the migration task with Migration
     /// Hub.
-    pub fn importMigrationTask(self: *Self, allocator: std.mem.Allocator, input: import_migration_task.ImportMigrationTaskInput, options: import_migration_task.Options) !import_migration_task.ImportMigrationTaskOutput {
+    pub fn importMigrationTask(self: *Self, allocator: std.mem.Allocator, input: import_migration_task.ImportMigrationTaskInput, options: CallOptions) !import_migration_task.ImportMigrationTaskOutput {
         return import_migration_task.execute(self, allocator, input, options);
     }
 
@@ -191,7 +192,7 @@ pub const Client = struct {
     /// optional
     /// `ApplicationIds` parameter, only the migration statuses for those
     /// applications will be returned.
-    pub fn listApplicationStates(self: *Self, allocator: std.mem.Allocator, input: list_application_states.ListApplicationStatesInput, options: list_application_states.Options) !list_application_states.ListApplicationStatesOutput {
+    pub fn listApplicationStates(self: *Self, allocator: std.mem.Allocator, input: list_application_states.ListApplicationStatesInput, options: CallOptions) !list_application_states.ListApplicationStatesOutput {
         return list_application_states.execute(self, allocator, input, options);
     }
 
@@ -207,19 +208,19 @@ pub const Client = struct {
     /// `AssociateCreatedArtifact` API.
     ///
     /// * Lists created artifacts in a paginated interface.
-    pub fn listCreatedArtifacts(self: *Self, allocator: std.mem.Allocator, input: list_created_artifacts.ListCreatedArtifactsInput, options: list_created_artifacts.Options) !list_created_artifacts.ListCreatedArtifactsOutput {
+    pub fn listCreatedArtifacts(self: *Self, allocator: std.mem.Allocator, input: list_created_artifacts.ListCreatedArtifactsInput, options: CallOptions) !list_created_artifacts.ListCreatedArtifactsOutput {
         return list_created_artifacts.execute(self, allocator, input, options);
     }
 
     /// Lists discovered resources associated with the given `MigrationTask`.
-    pub fn listDiscoveredResources(self: *Self, allocator: std.mem.Allocator, input: list_discovered_resources.ListDiscoveredResourcesInput, options: list_discovered_resources.Options) !list_discovered_resources.ListDiscoveredResourcesOutput {
+    pub fn listDiscoveredResources(self: *Self, allocator: std.mem.Allocator, input: list_discovered_resources.ListDiscoveredResourcesInput, options: CallOptions) !list_discovered_resources.ListDiscoveredResourcesOutput {
         return list_discovered_resources.execute(self, allocator, input, options);
     }
 
     /// This is a paginated API that returns all the migration-task states for the
     /// specified
     /// `MigrationTaskName` and `ProgressUpdateStream`.
-    pub fn listMigrationTaskUpdates(self: *Self, allocator: std.mem.Allocator, input: list_migration_task_updates.ListMigrationTaskUpdatesInput, options: list_migration_task_updates.Options) !list_migration_task_updates.ListMigrationTaskUpdatesOutput {
+    pub fn listMigrationTaskUpdates(self: *Self, allocator: std.mem.Allocator, input: list_migration_task_updates.ListMigrationTaskUpdatesInput, options: CallOptions) !list_migration_task_updates.ListMigrationTaskUpdatesOutput {
         return list_migration_task_updates.execute(self, allocator, input, options);
     }
 
@@ -234,19 +235,19 @@ pub const Client = struct {
     /// resource.
     ///
     /// * Lists migration tasks in a paginated interface.
-    pub fn listMigrationTasks(self: *Self, allocator: std.mem.Allocator, input: list_migration_tasks.ListMigrationTasksInput, options: list_migration_tasks.Options) !list_migration_tasks.ListMigrationTasksOutput {
+    pub fn listMigrationTasks(self: *Self, allocator: std.mem.Allocator, input: list_migration_tasks.ListMigrationTasksInput, options: CallOptions) !list_migration_tasks.ListMigrationTasksOutput {
         return list_migration_tasks.execute(self, allocator, input, options);
     }
 
     /// Lists progress update streams associated with the user account making this
     /// call.
-    pub fn listProgressUpdateStreams(self: *Self, allocator: std.mem.Allocator, input: list_progress_update_streams.ListProgressUpdateStreamsInput, options: list_progress_update_streams.Options) !list_progress_update_streams.ListProgressUpdateStreamsOutput {
+    pub fn listProgressUpdateStreams(self: *Self, allocator: std.mem.Allocator, input: list_progress_update_streams.ListProgressUpdateStreamsInput, options: CallOptions) !list_progress_update_streams.ListProgressUpdateStreamsOutput {
         return list_progress_update_streams.execute(self, allocator, input, options);
     }
 
     /// Lists all the source resource that are associated with the specified
     /// `MigrationTaskName` and `ProgressUpdateStream`.
-    pub fn listSourceResources(self: *Self, allocator: std.mem.Allocator, input: list_source_resources.ListSourceResourcesInput, options: list_source_resources.Options) !list_source_resources.ListSourceResourcesOutput {
+    pub fn listSourceResources(self: *Self, allocator: std.mem.Allocator, input: list_source_resources.ListSourceResourcesInput, options: CallOptions) !list_source_resources.ListSourceResourcesOutput {
         return list_source_resources.execute(self, allocator, input, options);
     }
 
@@ -256,7 +257,7 @@ pub const Client = struct {
     /// of
     /// three values to `Status`: `NOT_STARTED | IN_PROGRESS |
     /// COMPLETED`.
-    pub fn notifyApplicationState(self: *Self, allocator: std.mem.Allocator, input: notify_application_state.NotifyApplicationStateInput, options: notify_application_state.Options) !notify_application_state.NotifyApplicationStateOutput {
+    pub fn notifyApplicationState(self: *Self, allocator: std.mem.Allocator, input: notify_application_state.NotifyApplicationStateInput, options: CallOptions) !notify_application_state.NotifyApplicationStateOutput {
         return notify_application_state.execute(self, allocator, input, options);
     }
 
@@ -272,7 +273,7 @@ pub const Client = struct {
     ///
     /// * `ProgressUpdateStream` is used for access control and to provide a
     /// namespace for each migration tool.
-    pub fn notifyMigrationTaskState(self: *Self, allocator: std.mem.Allocator, input: notify_migration_task_state.NotifyMigrationTaskStateInput, options: notify_migration_task_state.Options) !notify_migration_task_state.NotifyMigrationTaskStateOutput {
+    pub fn notifyMigrationTaskState(self: *Self, allocator: std.mem.Allocator, input: notify_migration_task_state.NotifyMigrationTaskStateInput, options: CallOptions) !notify_migration_task_state.NotifyMigrationTaskStateOutput {
         return notify_migration_task_state.execute(self, allocator, input, options);
     }
 
@@ -297,7 +298,7 @@ pub const Client = struct {
     /// association occurs or not. To confirm if an association was found based on
     /// the provided
     /// details, call `ListDiscoveredResources`.
-    pub fn putResourceAttributes(self: *Self, allocator: std.mem.Allocator, input: put_resource_attributes.PutResourceAttributesInput, options: put_resource_attributes.Options) !put_resource_attributes.PutResourceAttributesOutput {
+    pub fn putResourceAttributes(self: *Self, allocator: std.mem.Allocator, input: put_resource_attributes.PutResourceAttributesInput, options: CallOptions) !put_resource_attributes.PutResourceAttributesOutput {
         return put_resource_attributes.execute(self, allocator, input, options);
     }
 

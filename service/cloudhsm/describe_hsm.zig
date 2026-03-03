@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const HsmStatus = @import("hsm_status.zig").HsmStatus;
 const SubscriptionType = @import("subscription_type.zig").SubscriptionType;
@@ -109,11 +110,7 @@ pub const DescribeHsmOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeHsmInput, options: Options) !DescribeHsmOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeHsmInput, options: CallOptions) !DescribeHsmOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InboundCrossClusterSearchConnection = @import("inbound_cross_cluster_search_connection.zig").InboundCrossClusterSearchConnection;
 
@@ -24,11 +25,7 @@ pub const AcceptInboundCrossClusterSearchConnectionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AcceptInboundCrossClusterSearchConnectionInput, options: Options) !AcceptInboundCrossClusterSearchConnectionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AcceptInboundCrossClusterSearchConnectionInput, options: CallOptions) !AcceptInboundCrossClusterSearchConnectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

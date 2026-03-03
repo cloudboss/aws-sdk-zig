@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const S3ObjectTag = @import("s3_object_tag.zig").S3ObjectTag;
 const serde = @import("serde.zig");
@@ -34,11 +35,7 @@ pub const CreateStoreImageTaskOutput = struct {
     object_key: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateStoreImageTaskInput, options: Options) !CreateStoreImageTaskOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateStoreImageTaskInput, options: CallOptions) !CreateStoreImageTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

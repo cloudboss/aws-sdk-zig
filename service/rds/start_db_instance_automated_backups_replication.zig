@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const DBInstanceAutomatedBackup = @import("db_instance_automated_backup.zig").DBInstanceAutomatedBackup;
@@ -53,11 +54,7 @@ pub const StartDBInstanceAutomatedBackupsReplicationOutput = struct {
     db_instance_automated_backup: ?DBInstanceAutomatedBackup = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartDBInstanceAutomatedBackupsReplicationInput, options: Options) !StartDBInstanceAutomatedBackupsReplicationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartDBInstanceAutomatedBackupsReplicationInput, options: CallOptions) !StartDBInstanceAutomatedBackupsReplicationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

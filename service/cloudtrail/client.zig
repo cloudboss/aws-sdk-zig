@@ -61,6 +61,7 @@ const update_channel = @import("update_channel.zig");
 const update_dashboard = @import("update_dashboard.zig");
 const update_event_data_store = @import("update_event_data_store.zig");
 const update_trail = @import("update_trail.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -103,7 +104,7 @@ pub const Client = struct {
     /// Amazon Web Services Regions only from the Region in which the trail or event
     /// data store
     /// was created (also known as its home Region).
-    pub fn addTags(self: *Self, allocator: std.mem.Allocator, input: add_tags.AddTagsInput, options: add_tags.Options) !add_tags.AddTagsOutput {
+    pub fn addTags(self: *Self, allocator: std.mem.Allocator, input: add_tags.AddTagsInput, options: CallOptions) !add_tags.AddTagsOutput {
         return add_tags.execute(self, allocator, input, options);
     }
 
@@ -113,7 +114,7 @@ pub const Client = struct {
     /// The ID of the query that you want to cancel is also required. When you run
     /// `CancelQuery`, the query status might show as `CANCELLED` even if
     /// the operation is not yet finished.
-    pub fn cancelQuery(self: *Self, allocator: std.mem.Allocator, input: cancel_query.CancelQueryInput, options: cancel_query.Options) !cancel_query.CancelQueryOutput {
+    pub fn cancelQuery(self: *Self, allocator: std.mem.Allocator, input: cancel_query.CancelQueryInput, options: CallOptions) !cancel_query.CancelQueryOutput {
         return cancel_query.execute(self, allocator, input, options);
     }
 
@@ -122,7 +123,7 @@ pub const Client = struct {
     /// After you create a channel, a CloudTrail Lake event data store can log
     /// events
     /// from the partner or source that you specify.
-    pub fn createChannel(self: *Self, allocator: std.mem.Allocator, input: create_channel.CreateChannelInput, options: create_channel.Options) !create_channel.CreateChannelOutput {
+    pub fn createChannel(self: *Self, allocator: std.mem.Allocator, input: create_channel.CreateChannelInput, options: CallOptions) !create_channel.CreateChannelOutput {
         return create_channel.execute(self, allocator, input, options);
     }
 
@@ -158,29 +159,29 @@ pub const Client = struct {
     ///
     /// For more information about dashboards, see [CloudTrail Lake
     /// dashboards](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-dashboard.html) in the *CloudTrail User Guide*.
-    pub fn createDashboard(self: *Self, allocator: std.mem.Allocator, input: create_dashboard.CreateDashboardInput, options: create_dashboard.Options) !create_dashboard.CreateDashboardOutput {
+    pub fn createDashboard(self: *Self, allocator: std.mem.Allocator, input: create_dashboard.CreateDashboardInput, options: CallOptions) !create_dashboard.CreateDashboardOutput {
         return create_dashboard.execute(self, allocator, input, options);
     }
 
     /// Creates a new event data store.
-    pub fn createEventDataStore(self: *Self, allocator: std.mem.Allocator, input: create_event_data_store.CreateEventDataStoreInput, options: create_event_data_store.Options) !create_event_data_store.CreateEventDataStoreOutput {
+    pub fn createEventDataStore(self: *Self, allocator: std.mem.Allocator, input: create_event_data_store.CreateEventDataStoreInput, options: CallOptions) !create_event_data_store.CreateEventDataStoreOutput {
         return create_event_data_store.execute(self, allocator, input, options);
     }
 
     /// Creates a trail that specifies the settings for delivery of log data to an
     /// Amazon S3 bucket.
-    pub fn createTrail(self: *Self, allocator: std.mem.Allocator, input: create_trail.CreateTrailInput, options: create_trail.Options) !create_trail.CreateTrailOutput {
+    pub fn createTrail(self: *Self, allocator: std.mem.Allocator, input: create_trail.CreateTrailInput, options: CallOptions) !create_trail.CreateTrailOutput {
         return create_trail.execute(self, allocator, input, options);
     }
 
     /// Deletes a channel.
-    pub fn deleteChannel(self: *Self, allocator: std.mem.Allocator, input: delete_channel.DeleteChannelInput, options: delete_channel.Options) !delete_channel.DeleteChannelOutput {
+    pub fn deleteChannel(self: *Self, allocator: std.mem.Allocator, input: delete_channel.DeleteChannelInput, options: CallOptions) !delete_channel.DeleteChannelOutput {
         return delete_channel.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified dashboard. You cannot delete a dashboard that has
     /// termination protection enabled.
-    pub fn deleteDashboard(self: *Self, allocator: std.mem.Allocator, input: delete_dashboard.DeleteDashboardInput, options: delete_dashboard.Options) !delete_dashboard.DeleteDashboardOutput {
+    pub fn deleteDashboard(self: *Self, allocator: std.mem.Allocator, input: delete_dashboard.DeleteDashboardInput, options: CallOptions) !delete_dashboard.DeleteDashboardOutput {
         return delete_dashboard.execute(self, allocator, input, options);
     }
 
@@ -199,13 +200,13 @@ pub const Client = struct {
     /// `ListQueries`, `DescribeQuery`, or `GetQueryResults` on
     /// queries that are using an event data store in a `PENDING_DELETION` state. An
     /// event data store in the `PENDING_DELETION` state does not incur costs.
-    pub fn deleteEventDataStore(self: *Self, allocator: std.mem.Allocator, input: delete_event_data_store.DeleteEventDataStoreInput, options: delete_event_data_store.Options) !delete_event_data_store.DeleteEventDataStoreOutput {
+    pub fn deleteEventDataStore(self: *Self, allocator: std.mem.Allocator, input: delete_event_data_store.DeleteEventDataStoreInput, options: CallOptions) !delete_event_data_store.DeleteEventDataStoreOutput {
         return delete_event_data_store.execute(self, allocator, input, options);
     }
 
     /// Deletes the resource-based policy attached to the CloudTrail event data
     /// store, dashboard, or channel.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -231,14 +232,14 @@ pub const Client = struct {
     ///
     /// For information about account closure and deletion of CloudTrail trails, see
     /// [https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-account-closure.html](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-account-closure.html).
-    pub fn deleteTrail(self: *Self, allocator: std.mem.Allocator, input: delete_trail.DeleteTrailInput, options: delete_trail.Options) !delete_trail.DeleteTrailOutput {
+    pub fn deleteTrail(self: *Self, allocator: std.mem.Allocator, input: delete_trail.DeleteTrailInput, options: CallOptions) !delete_trail.DeleteTrailOutput {
         return delete_trail.execute(self, allocator, input, options);
     }
 
     /// Removes CloudTrail delegated administrator permissions from a member account
     /// in
     /// an organization.
-    pub fn deregisterOrganizationDelegatedAdmin(self: *Self, allocator: std.mem.Allocator, input: deregister_organization_delegated_admin.DeregisterOrganizationDelegatedAdminInput, options: deregister_organization_delegated_admin.Options) !deregister_organization_delegated_admin.DeregisterOrganizationDelegatedAdminOutput {
+    pub fn deregisterOrganizationDelegatedAdmin(self: *Self, allocator: std.mem.Allocator, input: deregister_organization_delegated_admin.DeregisterOrganizationDelegatedAdminInput, options: CallOptions) !deregister_organization_delegated_admin.DeregisterOrganizationDelegatedAdminOutput {
         return deregister_organization_delegated_admin.execute(self, allocator, input, options);
     }
 
@@ -253,14 +254,14 @@ pub const Client = struct {
     /// returns information about the last query run for the alias. You can provide
     /// `RefreshId` along with `QueryAlias` to view the query results
     /// of a dashboard query for the specified `RefreshId`.
-    pub fn describeQuery(self: *Self, allocator: std.mem.Allocator, input: describe_query.DescribeQueryInput, options: describe_query.Options) !describe_query.DescribeQueryOutput {
+    pub fn describeQuery(self: *Self, allocator: std.mem.Allocator, input: describe_query.DescribeQueryInput, options: CallOptions) !describe_query.DescribeQueryOutput {
         return describe_query.execute(self, allocator, input, options);
     }
 
     /// Retrieves settings for one or more trails associated with the current Region
     /// for your
     /// account.
-    pub fn describeTrails(self: *Self, allocator: std.mem.Allocator, input: describe_trails.DescribeTrailsInput, options: describe_trails.Options) !describe_trails.DescribeTrailsOutput {
+    pub fn describeTrails(self: *Self, allocator: std.mem.Allocator, input: describe_trails.DescribeTrailsInput, options: CallOptions) !describe_trails.DescribeTrailsOutput {
         return describe_trails.execute(self, allocator, input, options);
     }
 
@@ -272,7 +273,7 @@ pub const Client = struct {
     ///
     /// No CloudTrail Lake data is deleted when you disable federation and you can
     /// continue to run queries in CloudTrail Lake.
-    pub fn disableFederation(self: *Self, allocator: std.mem.Allocator, input: disable_federation.DisableFederationInput, options: disable_federation.Options) !disable_federation.DisableFederationOutput {
+    pub fn disableFederation(self: *Self, allocator: std.mem.Allocator, input: disable_federation.DisableFederationInput, options: CallOptions) !disable_federation.DisableFederationOutput {
         return disable_federation.execute(self, allocator, input, options);
     }
 
@@ -298,7 +299,7 @@ pub const Client = struct {
     /// For more information about Lake query federation, see [Federate an event
     /// data
     /// store](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html).
-    pub fn enableFederation(self: *Self, allocator: std.mem.Allocator, input: enable_federation.EnableFederationInput, options: enable_federation.Options) !enable_federation.EnableFederationOutput {
+    pub fn enableFederation(self: *Self, allocator: std.mem.Allocator, input: enable_federation.EnableFederationInput, options: CallOptions) !enable_federation.EnableFederationOutput {
         return enable_federation.execute(self, allocator, input, options);
     }
 
@@ -324,17 +325,17 @@ pub const Client = struct {
     /// This feature uses generative AI large language models (LLMs); we recommend
     /// double-checking the
     /// LLM response.
-    pub fn generateQuery(self: *Self, allocator: std.mem.Allocator, input: generate_query.GenerateQueryInput, options: generate_query.Options) !generate_query.GenerateQueryOutput {
+    pub fn generateQuery(self: *Self, allocator: std.mem.Allocator, input: generate_query.GenerateQueryInput, options: CallOptions) !generate_query.GenerateQueryOutput {
         return generate_query.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific channel.
-    pub fn getChannel(self: *Self, allocator: std.mem.Allocator, input: get_channel.GetChannelInput, options: get_channel.Options) !get_channel.GetChannelOutput {
+    pub fn getChannel(self: *Self, allocator: std.mem.Allocator, input: get_channel.GetChannelInput, options: CallOptions) !get_channel.GetChannelOutput {
         return get_channel.execute(self, allocator, input, options);
     }
 
     /// Returns the specified dashboard.
-    pub fn getDashboard(self: *Self, allocator: std.mem.Allocator, input: get_dashboard.GetDashboardInput, options: get_dashboard.Options) !get_dashboard.GetDashboardOutput {
+    pub fn getDashboard(self: *Self, allocator: std.mem.Allocator, input: get_dashboard.GetDashboardInput, options: CallOptions) !get_dashboard.GetDashboardOutput {
         return get_dashboard.execute(self, allocator, input, options);
     }
 
@@ -342,14 +343,14 @@ pub const Client = struct {
     /// data store or trail. The response includes maximum event size configuration,
     /// the context key selectors configured for the event data store, and any
     /// aggregation settings configured for the trail.
-    pub fn getEventConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_event_configuration.GetEventConfigurationInput, options: get_event_configuration.Options) !get_event_configuration.GetEventConfigurationOutput {
+    pub fn getEventConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_event_configuration.GetEventConfigurationInput, options: CallOptions) !get_event_configuration.GetEventConfigurationOutput {
         return get_event_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns information about an event data store specified as either an ARN or
     /// the ID
     /// portion of the ARN.
-    pub fn getEventDataStore(self: *Self, allocator: std.mem.Allocator, input: get_event_data_store.GetEventDataStoreInput, options: get_event_data_store.Options) !get_event_data_store.GetEventDataStoreOutput {
+    pub fn getEventDataStore(self: *Self, allocator: std.mem.Allocator, input: get_event_data_store.GetEventDataStoreInput, options: CallOptions) !get_event_data_store.GetEventDataStoreOutput {
         return get_event_data_store.execute(self, allocator, input, options);
     }
 
@@ -383,12 +384,12 @@ pub const Client = struct {
     ///
     /// * [Logging network activity
     ///   events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html)
-    pub fn getEventSelectors(self: *Self, allocator: std.mem.Allocator, input: get_event_selectors.GetEventSelectorsInput, options: get_event_selectors.Options) !get_event_selectors.GetEventSelectorsOutput {
+    pub fn getEventSelectors(self: *Self, allocator: std.mem.Allocator, input: get_event_selectors.GetEventSelectorsInput, options: CallOptions) !get_event_selectors.GetEventSelectorsOutput {
         return get_event_selectors.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific import.
-    pub fn getImport(self: *Self, allocator: std.mem.Allocator, input: get_import.GetImportInput, options: get_import.Options) !get_import.GetImportOutput {
+    pub fn getImport(self: *Self, allocator: std.mem.Allocator, input: get_import.GetImportInput, options: CallOptions) !get_import.GetImportOutput {
         return get_import.execute(self, allocator, input, options);
     }
 
@@ -409,24 +410,24 @@ pub const Client = struct {
     ///
     /// For more information, see [Working with CloudTrail
     /// Insights](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html) in the *CloudTrail User Guide*.
-    pub fn getInsightSelectors(self: *Self, allocator: std.mem.Allocator, input: get_insight_selectors.GetInsightSelectorsInput, options: get_insight_selectors.Options) !get_insight_selectors.GetInsightSelectorsOutput {
+    pub fn getInsightSelectors(self: *Self, allocator: std.mem.Allocator, input: get_insight_selectors.GetInsightSelectorsInput, options: CallOptions) !get_insight_selectors.GetInsightSelectorsOutput {
         return get_insight_selectors.execute(self, allocator, input, options);
     }
 
     /// Gets event data results of a query. You must specify the `QueryID` value
     /// returned by the `StartQuery` operation.
-    pub fn getQueryResults(self: *Self, allocator: std.mem.Allocator, input: get_query_results.GetQueryResultsInput, options: get_query_results.Options) !get_query_results.GetQueryResultsOutput {
+    pub fn getQueryResults(self: *Self, allocator: std.mem.Allocator, input: get_query_results.GetQueryResultsInput, options: CallOptions) !get_query_results.GetQueryResultsOutput {
         return get_query_results.execute(self, allocator, input, options);
     }
 
     /// Retrieves the JSON text of the resource-based policy document attached to
     /// the CloudTrail event data store, dashboard, or channel.
-    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
         return get_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Returns settings information for a specified trail.
-    pub fn getTrail(self: *Self, allocator: std.mem.Allocator, input: get_trail.GetTrailInput, options: get_trail.Options) !get_trail.GetTrailOutput {
+    pub fn getTrail(self: *Self, allocator: std.mem.Allocator, input: get_trail.GetTrailInput, options: CallOptions) !get_trail.GetTrailOutput {
         return get_trail.execute(self, allocator, input, options);
     }
 
@@ -438,36 +439,36 @@ pub const Client = struct {
     /// Region. To return trail status from all Regions, you must call the operation
     /// on each
     /// Region.
-    pub fn getTrailStatus(self: *Self, allocator: std.mem.Allocator, input: get_trail_status.GetTrailStatusInput, options: get_trail_status.Options) !get_trail_status.GetTrailStatusOutput {
+    pub fn getTrailStatus(self: *Self, allocator: std.mem.Allocator, input: get_trail_status.GetTrailStatusInput, options: CallOptions) !get_trail_status.GetTrailStatusOutput {
         return get_trail_status.execute(self, allocator, input, options);
     }
 
     /// Lists the channels in the current account, and their source names.
-    pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: list_channels.Options) !list_channels.ListChannelsOutput {
+    pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: CallOptions) !list_channels.ListChannelsOutput {
         return list_channels.execute(self, allocator, input, options);
     }
 
     /// Returns information about all dashboards in the account, in the current
     /// Region.
-    pub fn listDashboards(self: *Self, allocator: std.mem.Allocator, input: list_dashboards.ListDashboardsInput, options: list_dashboards.Options) !list_dashboards.ListDashboardsOutput {
+    pub fn listDashboards(self: *Self, allocator: std.mem.Allocator, input: list_dashboards.ListDashboardsInput, options: CallOptions) !list_dashboards.ListDashboardsOutput {
         return list_dashboards.execute(self, allocator, input, options);
     }
 
     /// Returns information about all event data stores in the account, in the
     /// current
     /// Region.
-    pub fn listEventDataStores(self: *Self, allocator: std.mem.Allocator, input: list_event_data_stores.ListEventDataStoresInput, options: list_event_data_stores.Options) !list_event_data_stores.ListEventDataStoresOutput {
+    pub fn listEventDataStores(self: *Self, allocator: std.mem.Allocator, input: list_event_data_stores.ListEventDataStoresInput, options: CallOptions) !list_event_data_stores.ListEventDataStoresOutput {
         return list_event_data_stores.execute(self, allocator, input, options);
     }
 
     /// Returns a list of failures for the specified import.
-    pub fn listImportFailures(self: *Self, allocator: std.mem.Allocator, input: list_import_failures.ListImportFailuresInput, options: list_import_failures.Options) !list_import_failures.ListImportFailuresOutput {
+    pub fn listImportFailures(self: *Self, allocator: std.mem.Allocator, input: list_import_failures.ListImportFailuresInput, options: CallOptions) !list_import_failures.ListImportFailuresOutput {
         return list_import_failures.execute(self, allocator, input, options);
     }
 
     /// Returns information on all imports, or a select set of imports by
     /// `ImportStatus` or `Destination`.
-    pub fn listImports(self: *Self, allocator: std.mem.Allocator, input: list_imports.ListImportsInput, options: list_imports.Options) !list_imports.ListImportsOutput {
+    pub fn listImports(self: *Self, allocator: std.mem.Allocator, input: list_imports.ListImportsInput, options: CallOptions) !list_imports.ListImportsOutput {
         return list_imports.execute(self, allocator, input, options);
     }
 
@@ -491,7 +492,7 @@ pub const Client = struct {
     /// The rate of ListInsightsData requests is limited to two per second, per
     /// account, per Region. If
     /// this limit is exceeded, a throttling error occurs.
-    pub fn listInsightsData(self: *Self, allocator: std.mem.Allocator, input: list_insights_data.ListInsightsDataInput, options: list_insights_data.Options) !list_insights_data.ListInsightsDataOutput {
+    pub fn listInsightsData(self: *Self, allocator: std.mem.Allocator, input: list_insights_data.ListInsightsDataInput, options: CallOptions) !list_insights_data.ListInsightsDataOutput {
         return list_insights_data.execute(self, allocator, input, options);
     }
 
@@ -528,7 +529,7 @@ pub const Client = struct {
     ///   access to the `ListInsightsMetricData` API operation is linked to the
     ///   `cloudtrail:LookupEvents` action only. To use this operation,
     /// you must have permissions to perform the `cloudtrail:LookupEvents` action.
-    pub fn listInsightsMetricData(self: *Self, allocator: std.mem.Allocator, input: list_insights_metric_data.ListInsightsMetricDataInput, options: list_insights_metric_data.Options) !list_insights_metric_data.ListInsightsMetricDataOutput {
+    pub fn listInsightsMetricData(self: *Self, allocator: std.mem.Allocator, input: list_insights_metric_data.ListInsightsMetricDataInput, options: CallOptions) !list_insights_metric_data.ListInsightsMetricDataOutput {
         return list_insights_metric_data.execute(self, allocator, input, options);
     }
 
@@ -545,7 +546,7 @@ pub const Client = struct {
     /// from a specific Region, you must look in the same Region for its
     /// corresponding public
     /// key.
-    pub fn listPublicKeys(self: *Self, allocator: std.mem.Allocator, input: list_public_keys.ListPublicKeysInput, options: list_public_keys.Options) !list_public_keys.ListPublicKeysOutput {
+    pub fn listPublicKeys(self: *Self, allocator: std.mem.Allocator, input: list_public_keys.ListPublicKeysInput, options: CallOptions) !list_public_keys.ListPublicKeysOutput {
         return list_public_keys.execute(self, allocator, input, options);
     }
 
@@ -559,18 +560,18 @@ pub const Client = struct {
     /// `QueryStatus` include `QUEUED`, `RUNNING`,
     /// `FINISHED`, `FAILED`, `TIMED_OUT`, or
     /// `CANCELLED`.
-    pub fn listQueries(self: *Self, allocator: std.mem.Allocator, input: list_queries.ListQueriesInput, options: list_queries.Options) !list_queries.ListQueriesOutput {
+    pub fn listQueries(self: *Self, allocator: std.mem.Allocator, input: list_queries.ListQueriesInput, options: CallOptions) !list_queries.ListQueriesOutput {
         return list_queries.execute(self, allocator, input, options);
     }
 
     /// Lists the tags for the specified trails, event data stores, dashboards, or
     /// channels in the current Region.
-    pub fn listTags(self: *Self, allocator: std.mem.Allocator, input: list_tags.ListTagsInput, options: list_tags.Options) !list_tags.ListTagsOutput {
+    pub fn listTags(self: *Self, allocator: std.mem.Allocator, input: list_tags.ListTagsInput, options: CallOptions) !list_tags.ListTagsOutput {
         return list_tags.execute(self, allocator, input, options);
     }
 
     /// Lists trails that are in the current account.
-    pub fn listTrails(self: *Self, allocator: std.mem.Allocator, input: list_trails.ListTrailsInput, options: list_trails.Options) !list_trails.ListTrailsOutput {
+    pub fn listTrails(self: *Self, allocator: std.mem.Allocator, input: list_trails.ListTrailsInput, options: CallOptions) !list_trails.ListTrailsOutput {
         return list_trails.execute(self, allocator, input, options);
     }
 
@@ -619,7 +620,7 @@ pub const Client = struct {
     /// The rate of lookup requests is limited to two per second, per account, per
     /// Region. If
     /// this limit is exceeded, a throttling error occurs.
-    pub fn lookupEvents(self: *Self, allocator: std.mem.Allocator, input: lookup_events.LookupEventsInput, options: lookup_events.Options) !lookup_events.LookupEventsOutput {
+    pub fn lookupEvents(self: *Self, allocator: std.mem.Allocator, input: lookup_events.LookupEventsInput, options: CallOptions) !lookup_events.LookupEventsOutput {
         return lookup_events.execute(self, allocator, input, options);
     }
 
@@ -627,7 +628,7 @@ pub const Client = struct {
     /// or trail. This operation supports updating the maximum event size, adding or
     /// modifying context key selectors for event data store, and configuring
     /// aggregation settings for the trail.
-    pub fn putEventConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_event_configuration.PutEventConfigurationInput, options: put_event_configuration.Options) !put_event_configuration.PutEventConfigurationOutput {
+    pub fn putEventConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_event_configuration.PutEventConfigurationInput, options: CallOptions) !put_event_configuration.PutEventConfigurationOutput {
         return put_event_configuration.execute(self, allocator, input, options);
     }
 
@@ -705,7 +706,7 @@ pub const Client = struct {
     /// network activity
     /// events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html), and [Quotas in CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html) in the *CloudTrail User
     /// Guide*.
-    pub fn putEventSelectors(self: *Self, allocator: std.mem.Allocator, input: put_event_selectors.PutEventSelectorsInput, options: put_event_selectors.Options) !put_event_selectors.PutEventSelectorsOutput {
+    pub fn putEventSelectors(self: *Self, allocator: std.mem.Allocator, input: put_event_selectors.PutEventSelectorsInput, options: CallOptions) !put_event_selectors.PutEventSelectorsOutput {
         return put_event_selectors.execute(self, allocator, input, options);
     }
 
@@ -756,7 +757,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Working with CloudTrail
     /// Insights](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html) in the *CloudTrail User Guide*.
-    pub fn putInsightSelectors(self: *Self, allocator: std.mem.Allocator, input: put_insight_selectors.PutInsightSelectorsInput, options: put_insight_selectors.Options) !put_insight_selectors.PutInsightSelectorsOutput {
+    pub fn putInsightSelectors(self: *Self, allocator: std.mem.Allocator, input: put_insight_selectors.PutInsightSelectorsInput, options: CallOptions) !put_insight_selectors.PutInsightSelectorsOutput {
         return put_insight_selectors.execute(self, allocator, input, options);
     }
 
@@ -766,19 +767,19 @@ pub const Client = struct {
     /// [CloudTrail resource-based policy
     /// examples](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html)
     /// in the *CloudTrail User Guide*.
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Registers an organization’s member account as the CloudTrail [delegated
     /// administrator](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-delegated-administrator.html).
-    pub fn registerOrganizationDelegatedAdmin(self: *Self, allocator: std.mem.Allocator, input: register_organization_delegated_admin.RegisterOrganizationDelegatedAdminInput, options: register_organization_delegated_admin.Options) !register_organization_delegated_admin.RegisterOrganizationDelegatedAdminOutput {
+    pub fn registerOrganizationDelegatedAdmin(self: *Self, allocator: std.mem.Allocator, input: register_organization_delegated_admin.RegisterOrganizationDelegatedAdminInput, options: CallOptions) !register_organization_delegated_admin.RegisterOrganizationDelegatedAdminOutput {
         return register_organization_delegated_admin.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from a trail, event data store, dashboard, or
     /// channel.
-    pub fn removeTags(self: *Self, allocator: std.mem.Allocator, input: remove_tags.RemoveTagsInput, options: remove_tags.Options) !remove_tags.RemoveTagsOutput {
+    pub fn removeTags(self: *Self, allocator: std.mem.Allocator, input: remove_tags.RemoveTagsInput, options: CallOptions) !remove_tags.RemoveTagsOutput {
         return remove_tags.execute(self, allocator, input, options);
     }
 
@@ -788,7 +789,7 @@ pub const Client = struct {
     /// seven-day wait period after deletion. Restoring an event data store can take
     /// several
     /// minutes, depending on the size of the event data store.
-    pub fn restoreEventDataStore(self: *Self, allocator: std.mem.Allocator, input: restore_event_data_store.RestoreEventDataStoreInput, options: restore_event_data_store.Options) !restore_event_data_store.RestoreEventDataStoreOutput {
+    pub fn restoreEventDataStore(self: *Self, allocator: std.mem.Allocator, input: restore_event_data_store.RestoreEventDataStoreInput, options: CallOptions) !restore_event_data_store.RestoreEventDataStoreOutput {
         return restore_event_data_store.execute(self, allocator, input, options);
     }
 
@@ -796,7 +797,7 @@ pub const Client = struct {
     /// by relevance.
     /// To search for sample queries, provide a natural language `SearchPhrase` in
     /// English.
-    pub fn searchSampleQueries(self: *Self, allocator: std.mem.Allocator, input: search_sample_queries.SearchSampleQueriesInput, options: search_sample_queries.Options) !search_sample_queries.SearchSampleQueriesOutput {
+    pub fn searchSampleQueries(self: *Self, allocator: std.mem.Allocator, input: search_sample_queries.SearchSampleQueriesInput, options: CallOptions) !search_sample_queries.SearchSampleQueriesOutput {
         return search_sample_queries.execute(self, allocator, input, options);
     }
 
@@ -809,7 +810,7 @@ pub const Client = struct {
     /// event data store. For more information,
     /// see [Example: Allow CloudTrail to run queries to populate a
     /// dashboard](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard) in the *CloudTrail User Guide*.
-    pub fn startDashboardRefresh(self: *Self, allocator: std.mem.Allocator, input: start_dashboard_refresh.StartDashboardRefreshInput, options: start_dashboard_refresh.Options) !start_dashboard_refresh.StartDashboardRefreshOutput {
+    pub fn startDashboardRefresh(self: *Self, allocator: std.mem.Allocator, input: start_dashboard_refresh.StartDashboardRefreshInput, options: CallOptions) !start_dashboard_refresh.StartDashboardRefreshOutput {
         return start_dashboard_refresh.execute(self, allocator, input, options);
     }
 
@@ -818,7 +819,7 @@ pub const Client = struct {
     /// data store `Status` must be `STOPPED_INGESTION`
     /// and the `eventCategory` must be `Management`, `Data`, `NetworkActivity`, or
     /// `ConfigurationItem`.
-    pub fn startEventDataStoreIngestion(self: *Self, allocator: std.mem.Allocator, input: start_event_data_store_ingestion.StartEventDataStoreIngestionInput, options: start_event_data_store_ingestion.Options) !start_event_data_store_ingestion.StartEventDataStoreIngestionOutput {
+    pub fn startEventDataStoreIngestion(self: *Self, allocator: std.mem.Allocator, input: start_event_data_store_ingestion.StartEventDataStoreIngestionInput, options: CallOptions) !start_event_data_store_ingestion.StartEventDataStoreIngestionOutput {
         return start_event_data_store_ingestion.execute(self, allocator, input, options);
     }
 
@@ -850,7 +851,7 @@ pub const Client = struct {
     /// management account to import trail events. You cannot use the delegated
     /// administrator
     /// account for the organization.
-    pub fn startImport(self: *Self, allocator: std.mem.Allocator, input: start_import.StartImportInput, options: start_import.Options) !start_import.StartImportOutput {
+    pub fn startImport(self: *Self, allocator: std.mem.Allocator, input: start_import.StartImportInput, options: CallOptions) !start_import.StartImportOutput {
         return start_import.execute(self, allocator, input, options);
     }
 
@@ -862,7 +863,7 @@ pub const Client = struct {
     /// shadow trails
     /// (replicated trails in other Regions) of a trail that is enabled in all
     /// Regions.
-    pub fn startLogging(self: *Self, allocator: std.mem.Allocator, input: start_logging.StartLoggingInput, options: start_logging.Options) !start_logging.StartLoggingOutput {
+    pub fn startLogging(self: *Self, allocator: std.mem.Allocator, input: start_logging.StartLoggingInput, options: CallOptions) !start_logging.StartLoggingOutput {
         return start_logging.execute(self, allocator, input, options);
     }
 
@@ -876,7 +877,7 @@ pub const Client = struct {
     /// a `QueryAlias` and any `QueryParameters`. In the current release,
     /// the `QueryAlias` and `QueryParameters` parameters are used only for the
     /// queries that populate the CloudTrail Lake dashboards.
-    pub fn startQuery(self: *Self, allocator: std.mem.Allocator, input: start_query.StartQueryInput, options: start_query.Options) !start_query.StartQueryOutput {
+    pub fn startQuery(self: *Self, allocator: std.mem.Allocator, input: start_query.StartQueryInput, options: CallOptions) !start_query.StartQueryOutput {
         return start_query.execute(self, allocator, input, options);
     }
 
@@ -885,12 +886,12 @@ pub const Client = struct {
     /// data store `Status` must be `ENABLED`
     /// and the `eventCategory` must be `Management`, `Data`, `NetworkActivity`, or
     /// `ConfigurationItem`.
-    pub fn stopEventDataStoreIngestion(self: *Self, allocator: std.mem.Allocator, input: stop_event_data_store_ingestion.StopEventDataStoreIngestionInput, options: stop_event_data_store_ingestion.Options) !stop_event_data_store_ingestion.StopEventDataStoreIngestionOutput {
+    pub fn stopEventDataStoreIngestion(self: *Self, allocator: std.mem.Allocator, input: stop_event_data_store_ingestion.StopEventDataStoreIngestionInput, options: CallOptions) !stop_event_data_store_ingestion.StopEventDataStoreIngestionOutput {
         return stop_event_data_store_ingestion.execute(self, allocator, input, options);
     }
 
     /// Stops a specified import.
-    pub fn stopImport(self: *Self, allocator: std.mem.Allocator, input: stop_import.StopImportInput, options: stop_import.Options) !stop_import.StopImportOutput {
+    pub fn stopImport(self: *Self, allocator: std.mem.Allocator, input: stop_import.StopImportInput, options: CallOptions) !stop_import.StopImportOutput {
         return stop_import.execute(self, allocator, input, options);
     }
 
@@ -906,12 +907,12 @@ pub const Client = struct {
     /// operation cannot be called on the shadow trails (replicated trails in other
     /// Regions) of a
     /// trail enabled in all Regions.
-    pub fn stopLogging(self: *Self, allocator: std.mem.Allocator, input: stop_logging.StopLoggingInput, options: stop_logging.Options) !stop_logging.StopLoggingOutput {
+    pub fn stopLogging(self: *Self, allocator: std.mem.Allocator, input: stop_logging.StopLoggingInput, options: CallOptions) !stop_logging.StopLoggingOutput {
         return stop_logging.execute(self, allocator, input, options);
     }
 
     /// Updates a channel specified by a required channel ARN or UUID.
-    pub fn updateChannel(self: *Self, allocator: std.mem.Allocator, input: update_channel.UpdateChannelInput, options: update_channel.Options) !update_channel.UpdateChannelOutput {
+    pub fn updateChannel(self: *Self, allocator: std.mem.Allocator, input: update_channel.UpdateChannelInput, options: CallOptions) !update_channel.UpdateChannelOutput {
         return update_channel.execute(self, allocator, input, options);
     }
 
@@ -932,7 +933,7 @@ pub const Client = struct {
     /// event data store. For more information,
     /// see [Example: Allow CloudTrail to run queries to populate a
     /// dashboard](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard) in the *CloudTrail User Guide*.
-    pub fn updateDashboard(self: *Self, allocator: std.mem.Allocator, input: update_dashboard.UpdateDashboardInput, options: update_dashboard.Options) !update_dashboard.UpdateDashboardOutput {
+    pub fn updateDashboard(self: *Self, allocator: std.mem.Allocator, input: update_dashboard.UpdateDashboardInput, options: CallOptions) !update_dashboard.UpdateDashboardOutput {
         return update_dashboard.execute(self, allocator, input, options);
     }
 
@@ -956,7 +957,7 @@ pub const Client = struct {
     /// items, Audit Manager evidence, or non-Amazon Web Services events,
     /// `AdvancedEventSelectors` includes events of that type in your event data
     /// store.
-    pub fn updateEventDataStore(self: *Self, allocator: std.mem.Allocator, input: update_event_data_store.UpdateEventDataStoreInput, options: update_event_data_store.Options) !update_event_data_store.UpdateEventDataStoreOutput {
+    pub fn updateEventDataStore(self: *Self, allocator: std.mem.Allocator, input: update_event_data_store.UpdateEventDataStoreInput, options: CallOptions) !update_event_data_store.UpdateEventDataStoreOutput {
         return update_event_data_store.execute(self, allocator, input, options);
     }
 
@@ -970,7 +971,7 @@ pub const Client = struct {
     /// exists for the bucket. `UpdateTrail` must be called from the Region in which
     /// the
     /// trail was created; otherwise, an `InvalidHomeRegionException` is thrown.
-    pub fn updateTrail(self: *Self, allocator: std.mem.Allocator, input: update_trail.UpdateTrailInput, options: update_trail.Options) !update_trail.UpdateTrailOutput {
+    pub fn updateTrail(self: *Self, allocator: std.mem.Allocator, input: update_trail.UpdateTrailInput, options: CallOptions) !update_trail.UpdateTrailOutput {
         return update_trail.execute(self, allocator, input, options);
     }
 

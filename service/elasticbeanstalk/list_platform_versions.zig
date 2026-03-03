@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PlatformFilter = @import("platform_filter.zig").PlatformFilter;
 const PlatformSummary = @import("platform_summary.zig").PlatformSummary;
@@ -37,11 +38,7 @@ pub const ListPlatformVersionsOutput = struct {
     platform_summary_list: ?[]const PlatformSummary = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListPlatformVersionsInput, options: Options) !ListPlatformVersionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListPlatformVersionsInput, options: CallOptions) !ListPlatformVersionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

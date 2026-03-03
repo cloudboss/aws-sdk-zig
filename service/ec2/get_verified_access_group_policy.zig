@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const GetVerifiedAccessGroupPolicyInput = struct {
@@ -24,11 +25,7 @@ pub const GetVerifiedAccessGroupPolicyOutput = struct {
     policy_enabled: ?bool = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetVerifiedAccessGroupPolicyInput, options: Options) !GetVerifiedAccessGroupPolicyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetVerifiedAccessGroupPolicyInput, options: CallOptions) !GetVerifiedAccessGroupPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IndexCapacityConfiguration = @import("index_capacity_configuration.zig").IndexCapacityConfiguration;
 const DocumentAttributeConfiguration = @import("document_attribute_configuration.zig").DocumentAttributeConfiguration;
@@ -10,15 +11,11 @@ const IndexStatistics = @import("index_statistics.zig").IndexStatistics;
 const IndexStatus = @import("index_status.zig").IndexStatus;
 const IndexType = @import("index_type.zig").IndexType;
 
-const GetIndexInput = @import("get_index_request.zig").GetIndexRequest;
+pub const GetIndexInput = @import("get_index_request.zig").GetIndexRequest;
 
-const GetIndexOutput = @import("get_index_response.zig").GetIndexResponse;
+pub const GetIndexOutput = @import("get_index_response.zig").GetIndexResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetIndexInput, options: Options) !GetIndexOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetIndexInput, options: CallOptions) !GetIndexOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ImportReferenceFilter = @import("import_reference_filter.zig").ImportReferenceFilter;
 const ImportReferenceJobItem = @import("import_reference_job_item.zig").ImportReferenceJobItem;
@@ -41,11 +42,7 @@ pub const ListReferenceImportJobsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListReferenceImportJobsInput, options: Options) !ListReferenceImportJobsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListReferenceImportJobsInput, options: CallOptions) !ListReferenceImportJobsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

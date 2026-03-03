@@ -43,6 +43,7 @@ const update_case_rule = @import("update_case_rule.zig");
 const update_field = @import("update_field.zig");
 const update_layout = @import("update_layout.zig");
 const update_template = @import("update_template.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -77,18 +78,18 @@ pub const Client = struct {
     /// are known as *case field conditions*. For more information about case field
     /// conditions, see [Add case field conditions to a case
     /// template](https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html).
-    pub fn batchGetCaseRule(self: *Self, allocator: std.mem.Allocator, input: batch_get_case_rule.BatchGetCaseRuleInput, options: batch_get_case_rule.Options) !batch_get_case_rule.BatchGetCaseRuleOutput {
+    pub fn batchGetCaseRule(self: *Self, allocator: std.mem.Allocator, input: batch_get_case_rule.BatchGetCaseRuleInput, options: CallOptions) !batch_get_case_rule.BatchGetCaseRuleOutput {
         return batch_get_case_rule.execute(self, allocator, input, options);
     }
 
     /// Returns the description for the list of fields in the request parameters.
-    pub fn batchGetField(self: *Self, allocator: std.mem.Allocator, input: batch_get_field.BatchGetFieldInput, options: batch_get_field.Options) !batch_get_field.BatchGetFieldOutput {
+    pub fn batchGetField(self: *Self, allocator: std.mem.Allocator, input: batch_get_field.BatchGetFieldInput, options: CallOptions) !batch_get_field.BatchGetFieldOutput {
         return batch_get_field.execute(self, allocator, input, options);
     }
 
     /// Creates and updates a set of field options for a single select field in a
     /// Cases domain.
-    pub fn batchPutFieldOptions(self: *Self, allocator: std.mem.Allocator, input: batch_put_field_options.BatchPutFieldOptionsInput, options: batch_put_field_options.Options) !batch_put_field_options.BatchPutFieldOptionsOutput {
+    pub fn batchPutFieldOptions(self: *Self, allocator: std.mem.Allocator, input: batch_put_field_options.BatchPutFieldOptionsInput, options: CallOptions) !batch_put_field_options.BatchPutFieldOptionsOutput {
         return batch_put_field_options.execute(self, allocator, input, options);
     }
 
@@ -107,7 +108,7 @@ pub const Client = struct {
     ///   format: `arn:aws:profile:your_AWS_Region:your_AWS_account
     ///   ID:domains/your_profiles_domain_name/profiles/profile_ID`
     /// * `title`
-    pub fn createCase(self: *Self, allocator: std.mem.Allocator, input: create_case.CreateCaseInput, options: create_case.Options) !create_case.CreateCaseOutput {
+    pub fn createCase(self: *Self, allocator: std.mem.Allocator, input: create_case.CreateCaseInput, options: CallOptions) !create_case.CreateCaseOutput {
         return create_case.execute(self, allocator, input, options);
     }
 
@@ -115,7 +116,7 @@ pub const Client = struct {
     /// known as *case field conditions*. For more information about case field
     /// conditions, see [Add case field conditions to a case
     /// template](https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html).
-    pub fn createCaseRule(self: *Self, allocator: std.mem.Allocator, input: create_case_rule.CreateCaseRuleInput, options: create_case_rule.Options) !create_case_rule.CreateCaseRuleOutput {
+    pub fn createCaseRule(self: *Self, allocator: std.mem.Allocator, input: create_case_rule.CreateCaseRuleInput, options: CallOptions) !create_case_rule.CreateCaseRuleOutput {
         return create_case_rule.execute(self, allocator, input, options);
     }
 
@@ -126,14 +127,14 @@ pub const Client = struct {
     /// This will not associate your connect instance to Cases domain. Instead, use
     /// the Amazon Connect
     /// [CreateIntegrationAssociation](https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateIntegrationAssociation.html) API. You need specific IAM permissions to successfully associate the Cases domain. For more information, see [Onboard to Cases](https://docs.aws.amazon.com/connect/latest/adminguide/required-permissions-iam-cases.html#onboard-cases-iam).
-    pub fn createDomain(self: *Self, allocator: std.mem.Allocator, input: create_domain.CreateDomainInput, options: create_domain.Options) !create_domain.CreateDomainOutput {
+    pub fn createDomain(self: *Self, allocator: std.mem.Allocator, input: create_domain.CreateDomainInput, options: CallOptions) !create_domain.CreateDomainOutput {
         return create_domain.execute(self, allocator, input, options);
     }
 
     /// Creates a field in the Cases domain. This field is used to define the case
     /// object model (that is, defines what data can be captured on cases) in a
     /// Cases domain.
-    pub fn createField(self: *Self, allocator: std.mem.Allocator, input: create_field.CreateFieldInput, options: create_field.Options) !create_field.CreateFieldOutput {
+    pub fn createField(self: *Self, allocator: std.mem.Allocator, input: create_field.CreateFieldInput, options: CallOptions) !create_field.CreateFieldOutput {
         return create_field.execute(self, allocator, input, options);
     }
 
@@ -146,7 +147,7 @@ pub const Client = struct {
     ///
     /// Title and Status fields cannot be part of layouts since they are not
     /// configurable.
-    pub fn createLayout(self: *Self, allocator: std.mem.Allocator, input: create_layout.CreateLayoutInput, options: create_layout.Options) !create_layout.CreateLayoutOutput {
+    pub fn createLayout(self: *Self, allocator: std.mem.Allocator, input: create_layout.CreateLayoutInput, options: CallOptions) !create_layout.CreateLayoutOutput {
         return create_layout.execute(self, allocator, input, options);
     }
 
@@ -186,7 +187,7 @@ pub const Client = struct {
     ///
     /// **Endpoints**: See [Amazon Connect endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
-    pub fn createRelatedItem(self: *Self, allocator: std.mem.Allocator, input: create_related_item.CreateRelatedItemInput, options: create_related_item.Options) !create_related_item.CreateRelatedItemOutput {
+    pub fn createRelatedItem(self: *Self, allocator: std.mem.Allocator, input: create_related_item.CreateRelatedItemInput, options: CallOptions) !create_related_item.CreateRelatedItemOutput {
         return create_related_item.execute(self, allocator, input, options);
     }
 
@@ -208,7 +209,7 @@ pub const Client = struct {
     ///   [ListTemplates](https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_ListTemplates.html)
     /// *
     ///   [UpdateTemplate](https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_UpdateTemplate.html)
-    pub fn createTemplate(self: *Self, allocator: std.mem.Allocator, input: create_template.CreateTemplateInput, options: create_template.Options) !create_template.CreateTemplateOutput {
+    pub fn createTemplate(self: *Self, allocator: std.mem.Allocator, input: create_template.CreateTemplateInput, options: CallOptions) !create_template.CreateTemplateOutput {
         return create_template.execute(self, allocator, input, options);
     }
 
@@ -222,7 +223,7 @@ pub const Client = struct {
     ///
     /// This action is irreversible. After you delete a case, you cannot recover its
     /// data.
-    pub fn deleteCase(self: *Self, allocator: std.mem.Allocator, input: delete_case.DeleteCaseInput, options: delete_case.Options) !delete_case.DeleteCaseOutput {
+    pub fn deleteCase(self: *Self, allocator: std.mem.Allocator, input: delete_case.DeleteCaseInput, options: CallOptions) !delete_case.DeleteCaseOutput {
         return delete_case.execute(self, allocator, input, options);
     }
 
@@ -230,7 +231,7 @@ pub const Client = struct {
     /// known as *case field conditions*. For more information about case field
     /// conditions, see [Add case field conditions to a case
     /// template](https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html).
-    pub fn deleteCaseRule(self: *Self, allocator: std.mem.Allocator, input: delete_case_rule.DeleteCaseRuleInput, options: delete_case_rule.Options) !delete_case_rule.DeleteCaseRuleOutput {
+    pub fn deleteCaseRule(self: *Self, allocator: std.mem.Allocator, input: delete_case_rule.DeleteCaseRuleInput, options: CallOptions) !delete_case_rule.DeleteCaseRuleOutput {
         return delete_case_rule.execute(self, allocator, input, options);
     }
 
@@ -240,7 +241,7 @@ pub const Client = struct {
     /// your Amazon Connect instance with another API call before being able to use
     /// Cases again with this Amazon Connect instance. See
     /// [DeleteIntegrationAssociation](https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteIntegrationAssociation.html).
-    pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: delete_domain.Options) !delete_domain.DeleteDomainOutput {
+    pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: CallOptions) !delete_domain.DeleteDomainOutput {
         return delete_domain.execute(self, allocator, input, options);
     }
 
@@ -272,7 +273,7 @@ pub const Client = struct {
     ///   `ValidationException`.
     /// * Calling `GetCaseEventConfiguration` does not return field IDs for deleted
     ///   fields.
-    pub fn deleteField(self: *Self, allocator: std.mem.Allocator, input: delete_field.DeleteFieldInput, options: delete_field.Options) !delete_field.DeleteFieldOutput {
+    pub fn deleteField(self: *Self, allocator: std.mem.Allocator, input: delete_field.DeleteFieldInput, options: CallOptions) !delete_field.DeleteFieldOutput {
         return delete_field.execute(self, allocator, input, options);
     }
 
@@ -285,7 +286,7 @@ pub const Client = struct {
     /// * You cannot update a deleted layout by calling `UpdateLayout`; it throws a
     ///   `ValidationException`.
     /// * Deleted layouts are not included in the `ListLayouts` response.
-    pub fn deleteLayout(self: *Self, allocator: std.mem.Allocator, input: delete_layout.DeleteLayoutInput, options: delete_layout.Options) !delete_layout.DeleteLayoutOutput {
+    pub fn deleteLayout(self: *Self, allocator: std.mem.Allocator, input: delete_layout.DeleteLayoutInput, options: CallOptions) !delete_layout.DeleteLayoutOutput {
         return delete_layout.execute(self, allocator, input, options);
     }
 
@@ -294,7 +295,7 @@ pub const Client = struct {
     /// This API cannot be used on a FILE type related attachment. To delete this
     /// type of file, use the
     /// [DeleteAttachedFile](https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteAttachedFile.html) API
-    pub fn deleteRelatedItem(self: *Self, allocator: std.mem.Allocator, input: delete_related_item.DeleteRelatedItemInput, options: delete_related_item.Options) !delete_related_item.DeleteRelatedItemOutput {
+    pub fn deleteRelatedItem(self: *Self, allocator: std.mem.Allocator, input: delete_related_item.DeleteRelatedItemInput, options: CallOptions) !delete_related_item.DeleteRelatedItemOutput {
         return delete_related_item.execute(self, allocator, input, options);
     }
 
@@ -306,32 +307,32 @@ pub const Client = struct {
     /// * You cannot update the template.
     /// * You cannot create a case by using the deleted template.
     /// * Deleted templates are not included in the `ListTemplates` response.
-    pub fn deleteTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_template.DeleteTemplateInput, options: delete_template.Options) !delete_template.DeleteTemplateOutput {
+    pub fn deleteTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_template.DeleteTemplateInput, options: CallOptions) !delete_template.DeleteTemplateOutput {
         return delete_template.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific case if it exists.
-    pub fn getCase(self: *Self, allocator: std.mem.Allocator, input: get_case.GetCaseInput, options: get_case.Options) !get_case.GetCaseOutput {
+    pub fn getCase(self: *Self, allocator: std.mem.Allocator, input: get_case.GetCaseInput, options: CallOptions) !get_case.GetCaseOutput {
         return get_case.execute(self, allocator, input, options);
     }
 
     /// Returns the audit history about a specific case if it exists.
-    pub fn getCaseAuditEvents(self: *Self, allocator: std.mem.Allocator, input: get_case_audit_events.GetCaseAuditEventsInput, options: get_case_audit_events.Options) !get_case_audit_events.GetCaseAuditEventsOutput {
+    pub fn getCaseAuditEvents(self: *Self, allocator: std.mem.Allocator, input: get_case_audit_events.GetCaseAuditEventsInput, options: CallOptions) !get_case_audit_events.GetCaseAuditEventsOutput {
         return get_case_audit_events.execute(self, allocator, input, options);
     }
 
     /// Returns the case event publishing configuration.
-    pub fn getCaseEventConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_case_event_configuration.GetCaseEventConfigurationInput, options: get_case_event_configuration.Options) !get_case_event_configuration.GetCaseEventConfigurationOutput {
+    pub fn getCaseEventConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_case_event_configuration.GetCaseEventConfigurationInput, options: CallOptions) !get_case_event_configuration.GetCaseEventConfigurationOutput {
         return get_case_event_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific domain if it exists.
-    pub fn getDomain(self: *Self, allocator: std.mem.Allocator, input: get_domain.GetDomainInput, options: get_domain.Options) !get_domain.GetDomainOutput {
+    pub fn getDomain(self: *Self, allocator: std.mem.Allocator, input: get_domain.GetDomainInput, options: CallOptions) !get_domain.GetDomainOutput {
         return get_domain.execute(self, allocator, input, options);
     }
 
     /// Returns the details for the requested layout.
-    pub fn getLayout(self: *Self, allocator: std.mem.Allocator, input: get_layout.GetLayoutInput, options: get_layout.Options) !get_layout.GetLayoutOutput {
+    pub fn getLayout(self: *Self, allocator: std.mem.Allocator, input: get_layout.GetLayoutInput, options: CallOptions) !get_layout.GetLayoutOutput {
         return get_layout.execute(self, allocator, input, options);
     }
 
@@ -345,7 +346,7 @@ pub const Client = struct {
     ///   [ListTemplates](https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_ListTemplates.html)
     /// *
     ///   [UpdateTemplate](https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_UpdateTemplate.html)
-    pub fn getTemplate(self: *Self, allocator: std.mem.Allocator, input: get_template.GetTemplateInput, options: get_template.Options) !get_template.GetTemplateOutput {
+    pub fn getTemplate(self: *Self, allocator: std.mem.Allocator, input: get_template.GetTemplateInput, options: CallOptions) !get_template.GetTemplateOutput {
         return get_template.execute(self, allocator, input, options);
     }
 
@@ -353,39 +354,39 @@ pub const Client = struct {
     /// case rules are known as *case field conditions*. For more information about
     /// case field conditions, see [Add case field conditions to a case
     /// template](https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html).
-    pub fn listCaseRules(self: *Self, allocator: std.mem.Allocator, input: list_case_rules.ListCaseRulesInput, options: list_case_rules.Options) !list_case_rules.ListCaseRulesOutput {
+    pub fn listCaseRules(self: *Self, allocator: std.mem.Allocator, input: list_case_rules.ListCaseRulesInput, options: CallOptions) !list_case_rules.ListCaseRulesOutput {
         return list_case_rules.execute(self, allocator, input, options);
     }
 
     /// Lists cases for a given contact.
-    pub fn listCasesForContact(self: *Self, allocator: std.mem.Allocator, input: list_cases_for_contact.ListCasesForContactInput, options: list_cases_for_contact.Options) !list_cases_for_contact.ListCasesForContactOutput {
+    pub fn listCasesForContact(self: *Self, allocator: std.mem.Allocator, input: list_cases_for_contact.ListCasesForContactInput, options: CallOptions) !list_cases_for_contact.ListCasesForContactOutput {
         return list_cases_for_contact.execute(self, allocator, input, options);
     }
 
     /// Lists all cases domains in the Amazon Web Services account. Each list item
     /// is a condensed summary object of the domain.
-    pub fn listDomains(self: *Self, allocator: std.mem.Allocator, input: list_domains.ListDomainsInput, options: list_domains.Options) !list_domains.ListDomainsOutput {
+    pub fn listDomains(self: *Self, allocator: std.mem.Allocator, input: list_domains.ListDomainsInput, options: CallOptions) !list_domains.ListDomainsOutput {
         return list_domains.execute(self, allocator, input, options);
     }
 
     /// Lists all of the field options for a field identifier in the domain.
-    pub fn listFieldOptions(self: *Self, allocator: std.mem.Allocator, input: list_field_options.ListFieldOptionsInput, options: list_field_options.Options) !list_field_options.ListFieldOptionsOutput {
+    pub fn listFieldOptions(self: *Self, allocator: std.mem.Allocator, input: list_field_options.ListFieldOptionsInput, options: CallOptions) !list_field_options.ListFieldOptionsOutput {
         return list_field_options.execute(self, allocator, input, options);
     }
 
     /// Lists all fields in a Cases domain.
-    pub fn listFields(self: *Self, allocator: std.mem.Allocator, input: list_fields.ListFieldsInput, options: list_fields.Options) !list_fields.ListFieldsOutput {
+    pub fn listFields(self: *Self, allocator: std.mem.Allocator, input: list_fields.ListFieldsInput, options: CallOptions) !list_fields.ListFieldsOutput {
         return list_fields.execute(self, allocator, input, options);
     }
 
     /// Lists all layouts in the given cases domain. Each list item is a condensed
     /// summary object of the layout.
-    pub fn listLayouts(self: *Self, allocator: std.mem.Allocator, input: list_layouts.ListLayoutsInput, options: list_layouts.Options) !list_layouts.ListLayoutsOutput {
+    pub fn listLayouts(self: *Self, allocator: std.mem.Allocator, input: list_layouts.ListLayoutsInput, options: CallOptions) !list_layouts.ListLayoutsOutput {
         return list_layouts.execute(self, allocator, input, options);
     }
 
     /// Lists tags for a resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -402,14 +403,14 @@ pub const Client = struct {
     ///   [GetTemplate](https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetTemplate.html)
     /// *
     ///   [UpdateTemplate](https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_UpdateTemplate.html)
-    pub fn listTemplates(self: *Self, allocator: std.mem.Allocator, input: list_templates.ListTemplatesInput, options: list_templates.Options) !list_templates.ListTemplatesOutput {
+    pub fn listTemplates(self: *Self, allocator: std.mem.Allocator, input: list_templates.ListTemplatesInput, options: CallOptions) !list_templates.ListTemplatesOutput {
         return list_templates.execute(self, allocator, input, options);
     }
 
     /// Adds case event publishing configuration. For a complete list of fields you
     /// can add to the event message, see [Create case
     /// fields](https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html) in the *Amazon Connect Administrator Guide*
-    pub fn putCaseEventConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_case_event_configuration.PutCaseEventConfigurationInput, options: put_case_event_configuration.Options) !put_case_event_configuration.PutCaseEventConfigurationOutput {
+    pub fn putCaseEventConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_case_event_configuration.PutCaseEventConfigurationInput, options: CallOptions) !put_case_event_configuration.PutCaseEventConfigurationOutput {
         return put_case_event_configuration.execute(self, allocator, input, options);
     }
 
@@ -441,7 +442,7 @@ pub const Client = struct {
     ///
     /// **Endpoints**: See [Amazon Connect endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
-    pub fn searchAllRelatedItems(self: *Self, allocator: std.mem.Allocator, input: search_all_related_items.SearchAllRelatedItemsInput, options: search_all_related_items.Options) !search_all_related_items.SearchAllRelatedItemsOutput {
+    pub fn searchAllRelatedItems(self: *Self, allocator: std.mem.Allocator, input: search_all_related_items.SearchAllRelatedItemsInput, options: CallOptions) !search_all_related_items.SearchAllRelatedItemsOutput {
         return search_all_related_items.execute(self, allocator, input, options);
     }
 
@@ -451,7 +452,7 @@ pub const Client = struct {
     /// For `customer_id` you must provide the full customer profile ARN in this
     /// format: ` arn:aws:profile:your AWS Region:your AWS account
     /// ID:domains/profiles domain name/profiles/profile ID`.
-    pub fn searchCases(self: *Self, allocator: std.mem.Allocator, input: search_cases.SearchCasesInput, options: search_cases.Options) !search_cases.SearchCasesOutput {
+    pub fn searchCases(self: *Self, allocator: std.mem.Allocator, input: search_cases.SearchCasesInput, options: CallOptions) !search_cases.SearchCasesOutput {
         return search_cases.execute(self, allocator, input, options);
     }
 
@@ -459,17 +460,17 @@ pub const Client = struct {
     ///
     /// If no filters are provided, this returns all related items associated with a
     /// case.
-    pub fn searchRelatedItems(self: *Self, allocator: std.mem.Allocator, input: search_related_items.SearchRelatedItemsInput, options: search_related_items.Options) !search_related_items.SearchRelatedItemsOutput {
+    pub fn searchRelatedItems(self: *Self, allocator: std.mem.Allocator, input: search_related_items.SearchRelatedItemsInput, options: CallOptions) !search_related_items.SearchRelatedItemsOutput {
         return search_related_items.execute(self, allocator, input, options);
     }
 
     /// Adds tags to a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Untags a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -481,7 +482,7 @@ pub const Client = struct {
     ///
     /// If the action is successful, the service sends back an HTTP 200 response
     /// with an empty HTTP body.
-    pub fn updateCase(self: *Self, allocator: std.mem.Allocator, input: update_case.UpdateCaseInput, options: update_case.Options) !update_case.UpdateCaseOutput {
+    pub fn updateCase(self: *Self, allocator: std.mem.Allocator, input: update_case.UpdateCaseInput, options: CallOptions) !update_case.UpdateCaseOutput {
         return update_case.execute(self, allocator, input, options);
     }
 
@@ -489,12 +490,12 @@ pub const Client = struct {
     /// known as *case field conditions*. For more information about case field
     /// conditions, see [Add case field conditions to a case
     /// template](https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html).
-    pub fn updateCaseRule(self: *Self, allocator: std.mem.Allocator, input: update_case_rule.UpdateCaseRuleInput, options: update_case_rule.Options) !update_case_rule.UpdateCaseRuleOutput {
+    pub fn updateCaseRule(self: *Self, allocator: std.mem.Allocator, input: update_case_rule.UpdateCaseRuleInput, options: CallOptions) !update_case_rule.UpdateCaseRuleOutput {
         return update_case_rule.execute(self, allocator, input, options);
     }
 
     /// Updates the properties of an existing field.
-    pub fn updateField(self: *Self, allocator: std.mem.Allocator, input: update_field.UpdateFieldInput, options: update_field.Options) !update_field.UpdateFieldOutput {
+    pub fn updateField(self: *Self, allocator: std.mem.Allocator, input: update_field.UpdateFieldInput, options: CallOptions) !update_field.UpdateFieldOutput {
         return update_field.execute(self, allocator, input, options);
     }
 
@@ -508,7 +509,7 @@ pub const Client = struct {
     ///
     /// Title and Status fields cannot be part of layouts because they are not
     /// configurable.
-    pub fn updateLayout(self: *Self, allocator: std.mem.Allocator, input: update_layout.UpdateLayoutInput, options: update_layout.Options) !update_layout.UpdateLayoutOutput {
+    pub fn updateLayout(self: *Self, allocator: std.mem.Allocator, input: update_layout.UpdateLayoutInput, options: CallOptions) !update_layout.UpdateLayoutOutput {
         return update_layout.execute(self, allocator, input, options);
     }
 
@@ -528,7 +529,7 @@ pub const Client = struct {
     ///   [GetTemplate](https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetTemplate.html)
     /// *
     ///   [ListTemplates](https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_ListTemplates.html)
-    pub fn updateTemplate(self: *Self, allocator: std.mem.Allocator, input: update_template.UpdateTemplateInput, options: update_template.Options) !update_template.UpdateTemplateOutput {
+    pub fn updateTemplate(self: *Self, allocator: std.mem.Allocator, input: update_template.UpdateTemplateInput, options: CallOptions) !update_template.UpdateTemplateOutput {
         return update_template.execute(self, allocator, input, options);
     }
 

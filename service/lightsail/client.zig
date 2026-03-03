@@ -162,6 +162,7 @@ const update_instance_metadata_options = @import("update_instance_metadata_optio
 const update_load_balancer_attribute = @import("update_load_balancer_attribute.zig");
 const update_relational_database = @import("update_relational_database.zig");
 const update_relational_database_parameters = @import("update_relational_database_parameters.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -192,7 +193,7 @@ pub const Client = struct {
     }
 
     /// Allocates a static IP address.
-    pub fn allocateStaticIp(self: *Self, allocator: std.mem.Allocator, input: allocate_static_ip.AllocateStaticIpInput, options: allocate_static_ip.Options) !allocate_static_ip.AllocateStaticIpOutput {
+    pub fn allocateStaticIp(self: *Self, allocator: std.mem.Allocator, input: allocate_static_ip.AllocateStaticIpInput, options: CallOptions) !allocate_static_ip.AllocateStaticIpOutput {
         return allocate_static_ip.execute(self, allocator, input, options);
     }
 
@@ -216,7 +217,7 @@ pub const Client = struct {
     /// Region, and distribute its content globally. However, all distributions are
     /// located in the
     /// `us-east-1` Region.
-    pub fn attachCertificateToDistribution(self: *Self, allocator: std.mem.Allocator, input: attach_certificate_to_distribution.AttachCertificateToDistributionInput, options: attach_certificate_to_distribution.Options) !attach_certificate_to_distribution.AttachCertificateToDistributionOutput {
+    pub fn attachCertificateToDistribution(self: *Self, allocator: std.mem.Allocator, input: attach_certificate_to_distribution.AttachCertificateToDistributionInput, options: CallOptions) !attach_certificate_to_distribution.AttachCertificateToDistributionOutput {
         return attach_certificate_to_distribution.execute(self, allocator, input, options);
     }
 
@@ -230,7 +231,7 @@ pub const Client = struct {
     /// the
     /// [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn attachDisk(self: *Self, allocator: std.mem.Allocator, input: attach_disk.AttachDiskInput, options: attach_disk.Options) !attach_disk.AttachDiskOutput {
+    pub fn attachDisk(self: *Self, allocator: std.mem.Allocator, input: attach_disk.AttachDiskInput, options: CallOptions) !attach_disk.AttachDiskOutput {
         return attach_disk.execute(self, allocator, input, options);
     }
 
@@ -245,7 +246,7 @@ pub const Client = struct {
     /// balancer
     /// name`. For more information, see the [Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn attachInstancesToLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: attach_instances_to_load_balancer.AttachInstancesToLoadBalancerInput, options: attach_instances_to_load_balancer.Options) !attach_instances_to_load_balancer.AttachInstancesToLoadBalancerOutput {
+    pub fn attachInstancesToLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: attach_instances_to_load_balancer.AttachInstancesToLoadBalancerInput, options: CallOptions) !attach_instances_to_load_balancer.AttachInstancesToLoadBalancerOutput {
         return attach_instances_to_load_balancer.execute(self, allocator, input, options);
     }
 
@@ -266,12 +267,12 @@ pub const Client = struct {
     /// balancer
     /// name`. For more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn attachLoadBalancerTlsCertificate(self: *Self, allocator: std.mem.Allocator, input: attach_load_balancer_tls_certificate.AttachLoadBalancerTlsCertificateInput, options: attach_load_balancer_tls_certificate.Options) !attach_load_balancer_tls_certificate.AttachLoadBalancerTlsCertificateOutput {
+    pub fn attachLoadBalancerTlsCertificate(self: *Self, allocator: std.mem.Allocator, input: attach_load_balancer_tls_certificate.AttachLoadBalancerTlsCertificateInput, options: CallOptions) !attach_load_balancer_tls_certificate.AttachLoadBalancerTlsCertificateOutput {
         return attach_load_balancer_tls_certificate.execute(self, allocator, input, options);
     }
 
     /// Attaches a static IP address to a specific Amazon Lightsail instance.
-    pub fn attachStaticIp(self: *Self, allocator: std.mem.Allocator, input: attach_static_ip.AttachStaticIpInput, options: attach_static_ip.Options) !attach_static_ip.AttachStaticIpOutput {
+    pub fn attachStaticIp(self: *Self, allocator: std.mem.Allocator, input: attach_static_ip.AttachStaticIpInput, options: CallOptions) !attach_static_ip.AttachStaticIpOutput {
         return attach_static_ip.execute(self, allocator, input, options);
     }
 
@@ -281,7 +282,7 @@ pub const Client = struct {
     /// resource tags applied to the resource identified by `instanceName`. For more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn closeInstancePublicPorts(self: *Self, allocator: std.mem.Allocator, input: close_instance_public_ports.CloseInstancePublicPortsInput, options: close_instance_public_ports.Options) !close_instance_public_ports.CloseInstancePublicPortsOutput {
+    pub fn closeInstancePublicPorts(self: *Self, allocator: std.mem.Allocator, input: close_instance_public_ports.CloseInstancePublicPortsInput, options: CallOptions) !close_instance_public_ports.CloseInstancePublicPortsOutput {
         return close_instance_public_ports.execute(self, allocator, input, options);
     }
 
@@ -300,7 +301,7 @@ pub const Client = struct {
     /// `source region`, `source resource name`, `target snapshot
     /// name`, and either the `restore date` or the `use latest restorable
     /// auto snapshot` parameters.
-    pub fn copySnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_snapshot.CopySnapshotInput, options: copy_snapshot.Options) !copy_snapshot.CopySnapshotOutput {
+    pub fn copySnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_snapshot.CopySnapshotInput, options: CallOptions) !copy_snapshot.CopySnapshotOutput {
         return copy_snapshot.execute(self, allocator, input, options);
     }
 
@@ -313,7 +314,7 @@ pub const Client = struct {
     /// about buckets, see [Buckets in Amazon
     /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/buckets-in-amazon-lightsail) in the *Amazon Lightsail Developer
     /// Guide*.
-    pub fn createBucket(self: *Self, allocator: std.mem.Allocator, input: create_bucket.CreateBucketInput, options: create_bucket.Options) !create_bucket.CreateBucketOutput {
+    pub fn createBucket(self: *Self, allocator: std.mem.Allocator, input: create_bucket.CreateBucketInput, options: CallOptions) !create_bucket.CreateBucketOutput {
         return create_bucket.execute(self, allocator, input, options);
     }
 
@@ -336,7 +337,7 @@ pub const Client = struct {
     /// first create an access key; you cannot get the secret access key later. If
     /// you lose the
     /// secret access key, you must create a new access key.
-    pub fn createBucketAccessKey(self: *Self, allocator: std.mem.Allocator, input: create_bucket_access_key.CreateBucketAccessKeyInput, options: create_bucket_access_key.Options) !create_bucket_access_key.CreateBucketAccessKeyOutput {
+    pub fn createBucketAccessKey(self: *Self, allocator: std.mem.Allocator, input: create_bucket_access_key.CreateBucketAccessKeyInput, options: CallOptions) !create_bucket_access_key.CreateBucketAccessKeyOutput {
         return create_bucket_access_key.execute(self, allocator, input, options);
     }
 
@@ -359,7 +360,7 @@ pub const Client = struct {
     /// Region, and distribute its content globally. However, all distributions are
     /// located in the
     /// `us-east-1` Region.
-    pub fn createCertificate(self: *Self, allocator: std.mem.Allocator, input: create_certificate.CreateCertificateInput, options: create_certificate.Options) !create_certificate.CreateCertificateOutput {
+    pub fn createCertificate(self: *Self, allocator: std.mem.Allocator, input: create_certificate.CreateCertificateInput, options: CallOptions) !create_certificate.CreateCertificateOutput {
         return create_certificate.execute(self, allocator, input, options);
     }
 
@@ -374,7 +375,7 @@ pub const Client = struct {
     /// Wait until after your new Amazon EC2 instance is created before running the
     /// `create
     /// cloud formation stack` operation again with the same export snapshot record.
-    pub fn createCloudFormationStack(self: *Self, allocator: std.mem.Allocator, input: create_cloud_formation_stack.CreateCloudFormationStackInput, options: create_cloud_formation_stack.Options) !create_cloud_formation_stack.CreateCloudFormationStackOutput {
+    pub fn createCloudFormationStack(self: *Self, allocator: std.mem.Allocator, input: create_cloud_formation_stack.CreateCloudFormationStackInput, options: CallOptions) !create_cloud_formation_stack.CreateCloudFormationStackOutput {
         return create_cloud_formation_stack.execute(self, allocator, input, options);
     }
 
@@ -389,7 +390,7 @@ pub const Client = struct {
     /// more information,
     /// see [Notifications in Amazon
     /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications).
-    pub fn createContactMethod(self: *Self, allocator: std.mem.Allocator, input: create_contact_method.CreateContactMethodInput, options: create_contact_method.Options) !create_contact_method.CreateContactMethodOutput {
+    pub fn createContactMethod(self: *Self, allocator: std.mem.Allocator, input: create_contact_method.CreateContactMethodInput, options: CallOptions) !create_contact_method.CreateContactMethodOutput {
         return create_contact_method.execute(self, allocator, input, options);
     }
 
@@ -400,7 +401,7 @@ pub const Client = struct {
     /// For more information, see [Container services in Amazon
     /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-container-services) in the *Lightsail Dev
     /// Guide*.
-    pub fn createContainerService(self: *Self, allocator: std.mem.Allocator, input: create_container_service.CreateContainerServiceInput, options: create_container_service.Options) !create_container_service.CreateContainerServiceOutput {
+    pub fn createContainerService(self: *Self, allocator: std.mem.Allocator, input: create_container_service.CreateContainerServiceInput, options: CallOptions) !create_container_service.CreateContainerServiceOutput {
         return create_container_service.execute(self, allocator, input, options);
     }
 
@@ -423,7 +424,7 @@ pub const Client = struct {
     /// [Creating container images for your Amazon Lightsail container
     /// services](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-creating-container-images) in the
     /// *Amazon Lightsail Developer Guide*.
-    pub fn createContainerServiceDeployment(self: *Self, allocator: std.mem.Allocator, input: create_container_service_deployment.CreateContainerServiceDeploymentInput, options: create_container_service_deployment.Options) !create_container_service_deployment.CreateContainerServiceDeploymentOutput {
+    pub fn createContainerServiceDeployment(self: *Self, allocator: std.mem.Allocator, input: create_container_service_deployment.CreateContainerServiceDeploymentInput, options: CallOptions) !create_container_service_deployment.CreateContainerServiceDeploymentOutput {
         return create_container_service_deployment.execute(self, allocator, input, options);
     }
 
@@ -458,7 +459,7 @@ pub const Client = struct {
     /// Lightsail container
     /// services](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-pushing-container-images)
     /// in the *Amazon Lightsail Developer Guide*.
-    pub fn createContainerServiceRegistryLogin(self: *Self, allocator: std.mem.Allocator, input: create_container_service_registry_login.CreateContainerServiceRegistryLoginInput, options: create_container_service_registry_login.Options) !create_container_service_registry_login.CreateContainerServiceRegistryLoginOutput {
+    pub fn createContainerServiceRegistryLogin(self: *Self, allocator: std.mem.Allocator, input: create_container_service_registry_login.CreateContainerServiceRegistryLoginInput, options: CallOptions) !create_container_service_registry_login.CreateContainerServiceRegistryLoginOutput {
         return create_container_service_registry_login.execute(self, allocator, input, options);
     }
 
@@ -470,7 +471,7 @@ pub const Client = struct {
     /// tags.
     /// For more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn createDisk(self: *Self, allocator: std.mem.Allocator, input: create_disk.CreateDiskInput, options: create_disk.Options) !create_disk.CreateDiskOutput {
+    pub fn createDisk(self: *Self, allocator: std.mem.Allocator, input: create_disk.CreateDiskInput, options: CallOptions) !create_disk.CreateDiskOutput {
         return create_disk.execute(self, allocator, input, options);
     }
 
@@ -486,7 +487,7 @@ pub const Client = struct {
     /// snapshot
     /// name`. For more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn createDiskFromSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_disk_from_snapshot.CreateDiskFromSnapshotInput, options: create_disk_from_snapshot.Options) !create_disk_from_snapshot.CreateDiskFromSnapshotOutput {
+    pub fn createDiskFromSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_disk_from_snapshot.CreateDiskFromSnapshotInput, options: CallOptions) !create_disk_from_snapshot.CreateDiskFromSnapshotOutput {
         return create_disk_from_snapshot.execute(self, allocator, input, options);
     }
 
@@ -527,7 +528,7 @@ pub const Client = struct {
     /// The `create disk snapshot` operation supports tag-based access control via
     /// request tags. For more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn createDiskSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_disk_snapshot.CreateDiskSnapshotInput, options: create_disk_snapshot.Options) !create_disk_snapshot.CreateDiskSnapshotOutput {
+    pub fn createDiskSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_disk_snapshot.CreateDiskSnapshotInput, options: CallOptions) !create_disk_snapshot.CreateDiskSnapshotOutput {
         return create_disk_snapshot.execute(self, allocator, input, options);
     }
 
@@ -539,7 +540,7 @@ pub const Client = struct {
     /// instance. For more
     /// information, see [Content delivery networks in Amazon
     /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-content-delivery-network-distributions).
-    pub fn createDistribution(self: *Self, allocator: std.mem.Allocator, input: create_distribution.CreateDistributionInput, options: create_distribution.Options) !create_distribution.CreateDistributionOutput {
+    pub fn createDistribution(self: *Self, allocator: std.mem.Allocator, input: create_distribution.CreateDistributionInput, options: CallOptions) !create_distribution.CreateDistributionOutput {
         return create_distribution.execute(self, allocator, input, options);
     }
 
@@ -548,7 +549,7 @@ pub const Client = struct {
     /// The `create domain` operation supports tag-based access control via request
     /// tags. For more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn createDomain(self: *Self, allocator: std.mem.Allocator, input: create_domain.CreateDomainInput, options: create_domain.Options) !create_domain.CreateDomainOutput {
+    pub fn createDomain(self: *Self, allocator: std.mem.Allocator, input: create_domain.CreateDomainInput, options: CallOptions) !create_domain.CreateDomainOutput {
         return create_domain.execute(self, allocator, input, options);
     }
 
@@ -562,7 +563,7 @@ pub const Client = struct {
     /// resource tags applied to the resource identified by `domain name`. For more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn createDomainEntry(self: *Self, allocator: std.mem.Allocator, input: create_domain_entry.CreateDomainEntryInput, options: create_domain_entry.Options) !create_domain_entry.CreateDomainEntryOutput {
+    pub fn createDomainEntry(self: *Self, allocator: std.mem.Allocator, input: create_domain_entry.CreateDomainEntryInput, options: CallOptions) !create_domain_entry.CreateDomainEntryOutput {
         return create_domain_entry.execute(self, allocator, input, options);
     }
 
@@ -575,7 +576,7 @@ pub const Client = struct {
     /// virtual computer's operating session.
     ///
     /// Use `StartGUISession` to open the session.
-    pub fn createGuiSessionAccessDetails(self: *Self, allocator: std.mem.Allocator, input: create_gui_session_access_details.CreateGUISessionAccessDetailsInput, options: create_gui_session_access_details.Options) !create_gui_session_access_details.CreateGUISessionAccessDetailsOutput {
+    pub fn createGuiSessionAccessDetails(self: *Self, allocator: std.mem.Allocator, input: create_gui_session_access_details.CreateGUISessionAccessDetailsInput, options: CallOptions) !create_gui_session_access_details.CreateGUISessionAccessDetailsOutput {
         return create_gui_session_access_details.execute(self, allocator, input, options);
     }
 
@@ -587,7 +588,7 @@ pub const Client = struct {
     /// via
     /// request tags. For more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn createInstanceSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_instance_snapshot.CreateInstanceSnapshotInput, options: create_instance_snapshot.Options) !create_instance_snapshot.CreateInstanceSnapshotOutput {
+    pub fn createInstanceSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_instance_snapshot.CreateInstanceSnapshotInput, options: CallOptions) !create_instance_snapshot.CreateInstanceSnapshotOutput {
         return create_instance_snapshot.execute(self, allocator, input, options);
     }
 
@@ -597,7 +598,7 @@ pub const Client = struct {
     /// request
     /// tags. For more information, see the [Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn createInstances(self: *Self, allocator: std.mem.Allocator, input: create_instances.CreateInstancesInput, options: create_instances.Options) !create_instances.CreateInstancesOutput {
+    pub fn createInstances(self: *Self, allocator: std.mem.Allocator, input: create_instances.CreateInstancesInput, options: CallOptions) !create_instances.CreateInstancesOutput {
         return create_instances.execute(self, allocator, input, options);
     }
 
@@ -610,7 +611,7 @@ pub const Client = struct {
     /// `instance snapshot name`. For more information, see the [Amazon Lightsail
     /// Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn createInstancesFromSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_instances_from_snapshot.CreateInstancesFromSnapshotInput, options: create_instances_from_snapshot.Options) !create_instances_from_snapshot.CreateInstancesFromSnapshotOutput {
+    pub fn createInstancesFromSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_instances_from_snapshot.CreateInstancesFromSnapshotInput, options: CallOptions) !create_instances_from_snapshot.CreateInstancesFromSnapshotOutput {
         return create_instances_from_snapshot.execute(self, allocator, input, options);
     }
 
@@ -627,7 +628,7 @@ pub const Client = struct {
     /// request
     /// tags. For more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn createKeyPair(self: *Self, allocator: std.mem.Allocator, input: create_key_pair.CreateKeyPairInput, options: create_key_pair.Options) !create_key_pair.CreateKeyPairOutput {
+    pub fn createKeyPair(self: *Self, allocator: std.mem.Allocator, input: create_key_pair.CreateKeyPairInput, options: CallOptions) !create_key_pair.CreateKeyPairOutput {
         return create_key_pair.execute(self, allocator, input, options);
     }
 
@@ -646,7 +647,7 @@ pub const Client = struct {
     /// The `create load balancer` operation supports tag-based access control via
     /// request tags. For more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn createLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: create_load_balancer.CreateLoadBalancerInput, options: create_load_balancer.Options) !create_load_balancer.CreateLoadBalancerOutput {
+    pub fn createLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: create_load_balancer.CreateLoadBalancerInput, options: CallOptions) !create_load_balancer.CreateLoadBalancerOutput {
         return create_load_balancer.execute(self, allocator, input, options);
     }
 
@@ -659,7 +660,7 @@ pub const Client = struct {
     /// balancer
     /// name`. For more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn createLoadBalancerTlsCertificate(self: *Self, allocator: std.mem.Allocator, input: create_load_balancer_tls_certificate.CreateLoadBalancerTlsCertificateInput, options: create_load_balancer_tls_certificate.Options) !create_load_balancer_tls_certificate.CreateLoadBalancerTlsCertificateOutput {
+    pub fn createLoadBalancerTlsCertificate(self: *Self, allocator: std.mem.Allocator, input: create_load_balancer_tls_certificate.CreateLoadBalancerTlsCertificateInput, options: CallOptions) !create_load_balancer_tls_certificate.CreateLoadBalancerTlsCertificateOutput {
         return create_load_balancer_tls_certificate.execute(self, allocator, input, options);
     }
 
@@ -668,7 +669,7 @@ pub const Client = struct {
     /// The `create relational database` operation supports tag-based access control
     /// via request tags. For more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn createRelationalDatabase(self: *Self, allocator: std.mem.Allocator, input: create_relational_database.CreateRelationalDatabaseInput, options: create_relational_database.Options) !create_relational_database.CreateRelationalDatabaseOutput {
+    pub fn createRelationalDatabase(self: *Self, allocator: std.mem.Allocator, input: create_relational_database.CreateRelationalDatabaseInput, options: CallOptions) !create_relational_database.CreateRelationalDatabaseOutput {
         return create_relational_database.execute(self, allocator, input, options);
     }
 
@@ -687,7 +688,7 @@ pub const Client = struct {
     /// relationalDatabaseSnapshotName. For more information, see the [Amazon
     /// Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn createRelationalDatabaseFromSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_relational_database_from_snapshot.CreateRelationalDatabaseFromSnapshotInput, options: create_relational_database_from_snapshot.Options) !create_relational_database_from_snapshot.CreateRelationalDatabaseFromSnapshotOutput {
+    pub fn createRelationalDatabaseFromSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_relational_database_from_snapshot.CreateRelationalDatabaseFromSnapshotInput, options: CallOptions) !create_relational_database_from_snapshot.CreateRelationalDatabaseFromSnapshotOutput {
         return create_relational_database_from_snapshot.execute(self, allocator, input, options);
     }
 
@@ -700,7 +701,7 @@ pub const Client = struct {
     /// control via request tags. For more information, see the [Amazon Lightsail
     /// Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn createRelationalDatabaseSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_relational_database_snapshot.CreateRelationalDatabaseSnapshotInput, options: create_relational_database_snapshot.Options) !create_relational_database_snapshot.CreateRelationalDatabaseSnapshotOutput {
+    pub fn createRelationalDatabaseSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_relational_database_snapshot.CreateRelationalDatabaseSnapshotInput, options: CallOptions) !create_relational_database_snapshot.CreateRelationalDatabaseSnapshotOutput {
         return create_relational_database_snapshot.execute(self, allocator, input, options);
     }
 
@@ -713,14 +714,14 @@ pub const Client = struct {
     /// on the Amazon Lightsail console. For more information, see [Alarms
     /// in Amazon
     /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-alarms).
-    pub fn deleteAlarm(self: *Self, allocator: std.mem.Allocator, input: delete_alarm.DeleteAlarmInput, options: delete_alarm.Options) !delete_alarm.DeleteAlarmOutput {
+    pub fn deleteAlarm(self: *Self, allocator: std.mem.Allocator, input: delete_alarm.DeleteAlarmInput, options: CallOptions) !delete_alarm.DeleteAlarmOutput {
         return delete_alarm.execute(self, allocator, input, options);
     }
 
     /// Deletes an automatic snapshot of an instance or disk. For more information,
     /// see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configuring-automatic-snapshots).
-    pub fn deleteAutoSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_auto_snapshot.DeleteAutoSnapshotInput, options: delete_auto_snapshot.Options) !delete_auto_snapshot.DeleteAutoSnapshotOutput {
+    pub fn deleteAutoSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_auto_snapshot.DeleteAutoSnapshotInput, options: CallOptions) !delete_auto_snapshot.DeleteAutoSnapshotOutput {
         return delete_auto_snapshot.execute(self, allocator, input, options);
     }
 
@@ -729,7 +730,7 @@ pub const Client = struct {
     /// When you delete your bucket, the bucket name is released and can be reused
     /// for a new
     /// bucket in your account or another Amazon Web Services account.
-    pub fn deleteBucket(self: *Self, allocator: std.mem.Allocator, input: delete_bucket.DeleteBucketInput, options: delete_bucket.Options) !delete_bucket.DeleteBucketOutput {
+    pub fn deleteBucket(self: *Self, allocator: std.mem.Allocator, input: delete_bucket.DeleteBucketInput, options: CallOptions) !delete_bucket.DeleteBucketOutput {
         return delete_bucket.execute(self, allocator, input, options);
     }
 
@@ -742,7 +743,7 @@ pub const Client = struct {
     /// bucket in Amazon
     /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-creating-bucket-access-keys) in the
     /// *Amazon Lightsail Developer Guide*.
-    pub fn deleteBucketAccessKey(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_access_key.DeleteBucketAccessKeyInput, options: delete_bucket_access_key.Options) !delete_bucket_access_key.DeleteBucketAccessKeyOutput {
+    pub fn deleteBucketAccessKey(self: *Self, allocator: std.mem.Allocator, input: delete_bucket_access_key.DeleteBucketAccessKeyInput, options: CallOptions) !delete_bucket_access_key.DeleteBucketAccessKeyOutput {
         return delete_bucket_access_key.execute(self, allocator, input, options);
     }
 
@@ -754,7 +755,7 @@ pub const Client = struct {
     /// deleted. Use the
     /// `DetachCertificateFromDistribution` action to detach a certificate from a
     /// distribution.
-    pub fn deleteCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_certificate.DeleteCertificateInput, options: delete_certificate.Options) !delete_certificate.DeleteCertificateOutput {
+    pub fn deleteCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_certificate.DeleteCertificateInput, options: CallOptions) !delete_certificate.DeleteCertificateOutput {
         return delete_certificate.execute(self, allocator, input, options);
     }
 
@@ -769,19 +770,19 @@ pub const Client = struct {
     /// more information,
     /// see [Notifications in Amazon
     /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications).
-    pub fn deleteContactMethod(self: *Self, allocator: std.mem.Allocator, input: delete_contact_method.DeleteContactMethodInput, options: delete_contact_method.Options) !delete_contact_method.DeleteContactMethodOutput {
+    pub fn deleteContactMethod(self: *Self, allocator: std.mem.Allocator, input: delete_contact_method.DeleteContactMethodInput, options: CallOptions) !delete_contact_method.DeleteContactMethodOutput {
         return delete_contact_method.execute(self, allocator, input, options);
     }
 
     /// Deletes a container image that is registered to your Amazon Lightsail
     /// container
     /// service.
-    pub fn deleteContainerImage(self: *Self, allocator: std.mem.Allocator, input: delete_container_image.DeleteContainerImageInput, options: delete_container_image.Options) !delete_container_image.DeleteContainerImageOutput {
+    pub fn deleteContainerImage(self: *Self, allocator: std.mem.Allocator, input: delete_container_image.DeleteContainerImageInput, options: CallOptions) !delete_container_image.DeleteContainerImageOutput {
         return delete_container_image.execute(self, allocator, input, options);
     }
 
     /// Deletes your Amazon Lightsail container service.
-    pub fn deleteContainerService(self: *Self, allocator: std.mem.Allocator, input: delete_container_service.DeleteContainerServiceInput, options: delete_container_service.Options) !delete_container_service.DeleteContainerServiceOutput {
+    pub fn deleteContainerService(self: *Self, allocator: std.mem.Allocator, input: delete_container_service.DeleteContainerServiceInput, options: CallOptions) !delete_container_service.DeleteContainerServiceOutput {
         return delete_container_service.execute(self, allocator, input, options);
     }
 
@@ -797,7 +798,7 @@ pub const Client = struct {
     /// the
     /// [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn deleteDisk(self: *Self, allocator: std.mem.Allocator, input: delete_disk.DeleteDiskInput, options: delete_disk.Options) !delete_disk.DeleteDiskOutput {
+    pub fn deleteDisk(self: *Self, allocator: std.mem.Allocator, input: delete_disk.DeleteDiskInput, options: CallOptions) !delete_disk.DeleteDiskOutput {
         return delete_disk.execute(self, allocator, input, options);
     }
 
@@ -818,12 +819,12 @@ pub const Client = struct {
     /// For more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn deleteDiskSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_disk_snapshot.DeleteDiskSnapshotInput, options: delete_disk_snapshot.Options) !delete_disk_snapshot.DeleteDiskSnapshotOutput {
+    pub fn deleteDiskSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_disk_snapshot.DeleteDiskSnapshotInput, options: CallOptions) !delete_disk_snapshot.DeleteDiskSnapshotOutput {
         return delete_disk_snapshot.execute(self, allocator, input, options);
     }
 
     /// Deletes your Amazon Lightsail content delivery network (CDN) distribution.
-    pub fn deleteDistribution(self: *Self, allocator: std.mem.Allocator, input: delete_distribution.DeleteDistributionInput, options: delete_distribution.Options) !delete_distribution.DeleteDistributionOutput {
+    pub fn deleteDistribution(self: *Self, allocator: std.mem.Allocator, input: delete_distribution.DeleteDistributionInput, options: CallOptions) !delete_distribution.DeleteDistributionOutput {
         return delete_distribution.execute(self, allocator, input, options);
     }
 
@@ -834,7 +835,7 @@ pub const Client = struct {
     /// information, see
     /// the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: delete_domain.Options) !delete_domain.DeleteDomainOutput {
+    pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: CallOptions) !delete_domain.DeleteDomainOutput {
         return delete_domain.execute(self, allocator, input, options);
     }
 
@@ -844,7 +845,7 @@ pub const Client = struct {
     /// resource tags applied to the resource identified by `domain name`. For more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn deleteDomainEntry(self: *Self, allocator: std.mem.Allocator, input: delete_domain_entry.DeleteDomainEntryInput, options: delete_domain_entry.Options) !delete_domain_entry.DeleteDomainEntryOutput {
+    pub fn deleteDomainEntry(self: *Self, allocator: std.mem.Allocator, input: delete_domain_entry.DeleteDomainEntryInput, options: CallOptions) !delete_domain_entry.DeleteDomainEntryOutput {
         return delete_domain_entry.execute(self, allocator, input, options);
     }
 
@@ -856,7 +857,7 @@ pub const Client = struct {
     /// information,
     /// see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn deleteInstance(self: *Self, allocator: std.mem.Allocator, input: delete_instance.DeleteInstanceInput, options: delete_instance.Options) !delete_instance.DeleteInstanceOutput {
+    pub fn deleteInstance(self: *Self, allocator: std.mem.Allocator, input: delete_instance.DeleteInstanceInput, options: CallOptions) !delete_instance.DeleteInstanceOutput {
         return delete_instance.execute(self, allocator, input, options);
     }
 
@@ -869,7 +870,7 @@ pub const Client = struct {
     /// name`. For
     /// more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn deleteInstanceSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_instance_snapshot.DeleteInstanceSnapshotInput, options: delete_instance_snapshot.Options) !delete_instance_snapshot.DeleteInstanceSnapshotOutput {
+    pub fn deleteInstanceSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_instance_snapshot.DeleteInstanceSnapshotInput, options: CallOptions) !delete_instance_snapshot.DeleteInstanceSnapshotOutput {
         return delete_instance_snapshot.execute(self, allocator, input, options);
     }
 
@@ -890,7 +891,7 @@ pub const Client = struct {
     /// information,
     /// see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn deleteKeyPair(self: *Self, allocator: std.mem.Allocator, input: delete_key_pair.DeleteKeyPairInput, options: delete_key_pair.Options) !delete_key_pair.DeleteKeyPairOutput {
+    pub fn deleteKeyPair(self: *Self, allocator: std.mem.Allocator, input: delete_key_pair.DeleteKeyPairInput, options: CallOptions) !delete_key_pair.DeleteKeyPairOutput {
         return delete_key_pair.execute(self, allocator, input, options);
     }
 
@@ -907,7 +908,7 @@ pub const Client = struct {
     /// information, see [Troubleshooting connection issues when using the Amazon
     /// Lightsail browser-based SSH or RDP
     /// client](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-troubleshooting-browser-based-ssh-rdp-client-connection).
-    pub fn deleteKnownHostKeys(self: *Self, allocator: std.mem.Allocator, input: delete_known_host_keys.DeleteKnownHostKeysInput, options: delete_known_host_keys.Options) !delete_known_host_keys.DeleteKnownHostKeysOutput {
+    pub fn deleteKnownHostKeys(self: *Self, allocator: std.mem.Allocator, input: delete_known_host_keys.DeleteKnownHostKeysInput, options: CallOptions) !delete_known_host_keys.DeleteKnownHostKeysOutput {
         return delete_known_host_keys.execute(self, allocator, input, options);
     }
 
@@ -922,7 +923,7 @@ pub const Client = struct {
     /// For more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn deleteLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: delete_load_balancer.DeleteLoadBalancerInput, options: delete_load_balancer.Options) !delete_load_balancer.DeleteLoadBalancerOutput {
+    pub fn deleteLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: delete_load_balancer.DeleteLoadBalancerInput, options: CallOptions) !delete_load_balancer.DeleteLoadBalancerOutput {
         return delete_load_balancer.execute(self, allocator, input, options);
     }
 
@@ -933,7 +934,7 @@ pub const Client = struct {
     /// balancer
     /// name`. For more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn deleteLoadBalancerTlsCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_load_balancer_tls_certificate.DeleteLoadBalancerTlsCertificateInput, options: delete_load_balancer_tls_certificate.Options) !delete_load_balancer_tls_certificate.DeleteLoadBalancerTlsCertificateOutput {
+    pub fn deleteLoadBalancerTlsCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_load_balancer_tls_certificate.DeleteLoadBalancerTlsCertificateInput, options: CallOptions) !delete_load_balancer_tls_certificate.DeleteLoadBalancerTlsCertificateOutput {
         return delete_load_balancer_tls_certificate.execute(self, allocator, input, options);
     }
 
@@ -944,7 +945,7 @@ pub const Client = struct {
     /// relationalDatabaseName. For more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn deleteRelationalDatabase(self: *Self, allocator: std.mem.Allocator, input: delete_relational_database.DeleteRelationalDatabaseInput, options: delete_relational_database.Options) !delete_relational_database.DeleteRelationalDatabaseOutput {
+    pub fn deleteRelationalDatabase(self: *Self, allocator: std.mem.Allocator, input: delete_relational_database.DeleteRelationalDatabaseInput, options: CallOptions) !delete_relational_database.DeleteRelationalDatabaseOutput {
         return delete_relational_database.execute(self, allocator, input, options);
     }
 
@@ -956,7 +957,7 @@ pub const Client = struct {
     /// relationalDatabaseName. For
     /// more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn deleteRelationalDatabaseSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_relational_database_snapshot.DeleteRelationalDatabaseSnapshotInput, options: delete_relational_database_snapshot.Options) !delete_relational_database_snapshot.DeleteRelationalDatabaseSnapshotOutput {
+    pub fn deleteRelationalDatabaseSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_relational_database_snapshot.DeleteRelationalDatabaseSnapshotInput, options: CallOptions) !delete_relational_database_snapshot.DeleteRelationalDatabaseSnapshotOutput {
         return delete_relational_database_snapshot.execute(self, allocator, input, options);
     }
 
@@ -967,7 +968,7 @@ pub const Client = struct {
     /// After the certificate is detached, your distribution stops accepting traffic
     /// for all of
     /// the domains that are associated with the certificate.
-    pub fn detachCertificateFromDistribution(self: *Self, allocator: std.mem.Allocator, input: detach_certificate_from_distribution.DetachCertificateFromDistributionInput, options: detach_certificate_from_distribution.Options) !detach_certificate_from_distribution.DetachCertificateFromDistributionOutput {
+    pub fn detachCertificateFromDistribution(self: *Self, allocator: std.mem.Allocator, input: detach_certificate_from_distribution.DetachCertificateFromDistributionInput, options: CallOptions) !detach_certificate_from_distribution.DetachCertificateFromDistributionOutput {
         return detach_certificate_from_distribution.execute(self, allocator, input, options);
     }
 
@@ -983,7 +984,7 @@ pub const Client = struct {
     /// the
     /// [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn detachDisk(self: *Self, allocator: std.mem.Allocator, input: detach_disk.DetachDiskInput, options: detach_disk.Options) !detach_disk.DetachDiskOutput {
+    pub fn detachDisk(self: *Self, allocator: std.mem.Allocator, input: detach_disk.DetachDiskInput, options: CallOptions) !detach_disk.DetachDiskOutput {
         return detach_disk.execute(self, allocator, input, options);
     }
 
@@ -999,20 +1000,20 @@ pub const Client = struct {
     /// balancer
     /// name`. For more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn detachInstancesFromLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: detach_instances_from_load_balancer.DetachInstancesFromLoadBalancerInput, options: detach_instances_from_load_balancer.Options) !detach_instances_from_load_balancer.DetachInstancesFromLoadBalancerOutput {
+    pub fn detachInstancesFromLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: detach_instances_from_load_balancer.DetachInstancesFromLoadBalancerInput, options: CallOptions) !detach_instances_from_load_balancer.DetachInstancesFromLoadBalancerOutput {
         return detach_instances_from_load_balancer.execute(self, allocator, input, options);
     }
 
     /// Detaches a static IP from the Amazon Lightsail instance to which it is
     /// attached.
-    pub fn detachStaticIp(self: *Self, allocator: std.mem.Allocator, input: detach_static_ip.DetachStaticIpInput, options: detach_static_ip.Options) !detach_static_ip.DetachStaticIpOutput {
+    pub fn detachStaticIp(self: *Self, allocator: std.mem.Allocator, input: detach_static_ip.DetachStaticIpInput, options: CallOptions) !detach_static_ip.DetachStaticIpOutput {
         return detach_static_ip.execute(self, allocator, input, options);
     }
 
     /// Disables an add-on for an Amazon Lightsail resource. For more information,
     /// see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configuring-automatic-snapshots).
-    pub fn disableAddOn(self: *Self, allocator: std.mem.Allocator, input: disable_add_on.DisableAddOnInput, options: disable_add_on.Options) !disable_add_on.DisableAddOnOutput {
+    pub fn disableAddOn(self: *Self, allocator: std.mem.Allocator, input: disable_add_on.DisableAddOnInput, options: CallOptions) !disable_add_on.DisableAddOnOutput {
         return disable_add_on.execute(self, allocator, input, options);
     }
 
@@ -1020,7 +1021,7 @@ pub const Client = struct {
     ///
     /// This action also creates a Lightsail default key pair if a default key pair
     /// does not currently exist in the Amazon Web Services Region.
-    pub fn downloadDefaultKeyPair(self: *Self, allocator: std.mem.Allocator, input: download_default_key_pair.DownloadDefaultKeyPairInput, options: download_default_key_pair.Options) !download_default_key_pair.DownloadDefaultKeyPairOutput {
+    pub fn downloadDefaultKeyPair(self: *Self, allocator: std.mem.Allocator, input: download_default_key_pair.DownloadDefaultKeyPairInput, options: CallOptions) !download_default_key_pair.DownloadDefaultKeyPairOutput {
         return download_default_key_pair.execute(self, allocator, input, options);
     }
 
@@ -1028,7 +1029,7 @@ pub const Client = struct {
     /// information, see
     /// the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configuring-automatic-snapshots).
-    pub fn enableAddOn(self: *Self, allocator: std.mem.Allocator, input: enable_add_on.EnableAddOnInput, options: enable_add_on.Options) !enable_add_on.EnableAddOnOutput {
+    pub fn enableAddOn(self: *Self, allocator: std.mem.Allocator, input: enable_add_on.EnableAddOnInput, options: CallOptions) !enable_add_on.EnableAddOnOutput {
         return enable_add_on.execute(self, allocator, input, options);
     }
 
@@ -1054,12 +1055,12 @@ pub const Client = struct {
     ///
     /// Use the `get instance snapshots` or `get disk snapshots`
     /// operations to get a list of snapshots that you can export to Amazon EC2.
-    pub fn exportSnapshot(self: *Self, allocator: std.mem.Allocator, input: export_snapshot.ExportSnapshotInput, options: export_snapshot.Options) !export_snapshot.ExportSnapshotOutput {
+    pub fn exportSnapshot(self: *Self, allocator: std.mem.Allocator, input: export_snapshot.ExportSnapshotInput, options: CallOptions) !export_snapshot.ExportSnapshotOutput {
         return export_snapshot.execute(self, allocator, input, options);
     }
 
     /// Returns the names of all active (not deleted) resources.
-    pub fn getActiveNames(self: *Self, allocator: std.mem.Allocator, input: get_active_names.GetActiveNamesInput, options: get_active_names.Options) !get_active_names.GetActiveNamesOutput {
+    pub fn getActiveNames(self: *Self, allocator: std.mem.Allocator, input: get_active_names.GetActiveNamesInput, options: CallOptions) !get_active_names.GetActiveNamesOutput {
         return get_active_names.execute(self, allocator, input, options);
     }
 
@@ -1076,7 +1077,7 @@ pub const Client = struct {
     /// on the Amazon Lightsail console. For more information, see [Alarms
     /// in Amazon
     /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-alarms).
-    pub fn getAlarms(self: *Self, allocator: std.mem.Allocator, input: get_alarms.GetAlarmsInput, options: get_alarms.Options) !get_alarms.GetAlarmsOutput {
+    pub fn getAlarms(self: *Self, allocator: std.mem.Allocator, input: get_alarms.GetAlarmsInput, options: CallOptions) !get_alarms.GetAlarmsOutput {
         return get_alarms.execute(self, allocator, input, options);
     }
 
@@ -1084,7 +1085,7 @@ pub const Client = struct {
     /// information,
     /// see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configuring-automatic-snapshots).
-    pub fn getAutoSnapshots(self: *Self, allocator: std.mem.Allocator, input: get_auto_snapshots.GetAutoSnapshotsInput, options: get_auto_snapshots.Options) !get_auto_snapshots.GetAutoSnapshotsOutput {
+    pub fn getAutoSnapshots(self: *Self, allocator: std.mem.Allocator, input: get_auto_snapshots.GetAutoSnapshotsInput, options: CallOptions) !get_auto_snapshots.GetAutoSnapshotsOutput {
         return get_auto_snapshots.execute(self, allocator, input, options);
     }
 
@@ -1102,7 +1103,7 @@ pub const Client = struct {
     /// instances. Blueprints are marked inactive when they become outdated due to
     /// operating system
     /// updates or new application releases.
-    pub fn getBlueprints(self: *Self, allocator: std.mem.Allocator, input: get_blueprints.GetBlueprintsInput, options: get_blueprints.Options) !get_blueprints.GetBlueprintsOutput {
+    pub fn getBlueprints(self: *Self, allocator: std.mem.Allocator, input: get_blueprints.GetBlueprintsInput, options: CallOptions) !get_blueprints.GetBlueprintsOutput {
         return get_blueprints.execute(self, allocator, input, options);
     }
 
@@ -1114,7 +1115,7 @@ pub const Client = struct {
     /// secret access key only when you create it from the response of the
     /// [CreateBucketAccessKey](https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateBucketAccessKey.html) action. If you lose the secret access key, you must create
     /// a new access key.
-    pub fn getBucketAccessKeys(self: *Self, allocator: std.mem.Allocator, input: get_bucket_access_keys.GetBucketAccessKeysInput, options: get_bucket_access_keys.Options) !get_bucket_access_keys.GetBucketAccessKeysOutput {
+    pub fn getBucketAccessKeys(self: *Self, allocator: std.mem.Allocator, input: get_bucket_access_keys.GetBucketAccessKeysInput, options: CallOptions) !get_bucket_access_keys.GetBucketAccessKeysOutput {
         return get_bucket_access_keys.execute(self, allocator, input, options);
     }
 
@@ -1127,7 +1128,7 @@ pub const Client = struct {
     /// Use the
     /// [UpdateBucketBundle](https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html) action to update the
     /// bundle for a bucket.
-    pub fn getBucketBundles(self: *Self, allocator: std.mem.Allocator, input: get_bucket_bundles.GetBucketBundlesInput, options: get_bucket_bundles.Options) !get_bucket_bundles.GetBucketBundlesOutput {
+    pub fn getBucketBundles(self: *Self, allocator: std.mem.Allocator, input: get_bucket_bundles.GetBucketBundlesInput, options: CallOptions) !get_bucket_bundles.GetBucketBundlesOutput {
         return get_bucket_bundles.execute(self, allocator, input, options);
     }
 
@@ -1138,7 +1139,7 @@ pub const Client = struct {
     /// monitor the number of objects stored in a bucket (including object versions)
     /// and the storage
     /// space used by those objects.
-    pub fn getBucketMetricData(self: *Self, allocator: std.mem.Allocator, input: get_bucket_metric_data.GetBucketMetricDataInput, options: get_bucket_metric_data.Options) !get_bucket_metric_data.GetBucketMetricDataOutput {
+    pub fn getBucketMetricData(self: *Self, allocator: std.mem.Allocator, input: get_bucket_metric_data.GetBucketMetricDataInput, options: CallOptions) !get_bucket_metric_data.GetBucketMetricDataOutput {
         return get_bucket_metric_data.execute(self, allocator, input, options);
     }
 
@@ -1151,7 +1152,7 @@ pub const Client = struct {
     /// For more information about buckets, see [Buckets in Amazon
     /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/buckets-in-amazon-lightsail) in the *Amazon Lightsail Developer
     /// Guide*.
-    pub fn getBuckets(self: *Self, allocator: std.mem.Allocator, input: get_buckets.GetBucketsInput, options: get_buckets.Options) !get_buckets.GetBucketsOutput {
+    pub fn getBuckets(self: *Self, allocator: std.mem.Allocator, input: get_buckets.GetBucketsInput, options: CallOptions) !get_buckets.GetBucketsOutput {
         return get_buckets.execute(self, allocator, input, options);
     }
 
@@ -1167,7 +1168,7 @@ pub const Client = struct {
     ///
     /// Bundles are referred to as *instance plans* in the Lightsail
     /// console.
-    pub fn getBundles(self: *Self, allocator: std.mem.Allocator, input: get_bundles.GetBundlesInput, options: get_bundles.Options) !get_bundles.GetBundlesOutput {
+    pub fn getBundles(self: *Self, allocator: std.mem.Allocator, input: get_bundles.GetBundlesInput, options: CallOptions) !get_bundles.GetBundlesOutput {
         return get_bundles.execute(self, allocator, input, options);
     }
 
@@ -1178,7 +1179,7 @@ pub const Client = struct {
     /// request. The response will include only the certificate Amazon Resource Name
     /// (ARN),
     /// certificate name, domain name, and tags.
-    pub fn getCertificates(self: *Self, allocator: std.mem.Allocator, input: get_certificates.GetCertificatesInput, options: get_certificates.Options) !get_certificates.GetCertificatesOutput {
+    pub fn getCertificates(self: *Self, allocator: std.mem.Allocator, input: get_certificates.GetCertificatesInput, options: CallOptions) !get_certificates.GetCertificatesOutput {
         return get_certificates.execute(self, allocator, input, options);
     }
 
@@ -1189,7 +1190,7 @@ pub const Client = struct {
     /// An AWS CloudFormation stack is used to create a new Amazon EC2 instance from
     /// an exported Lightsail
     /// snapshot.
-    pub fn getCloudFormationStackRecords(self: *Self, allocator: std.mem.Allocator, input: get_cloud_formation_stack_records.GetCloudFormationStackRecordsInput, options: get_cloud_formation_stack_records.Options) !get_cloud_formation_stack_records.GetCloudFormationStackRecordsOutput {
+    pub fn getCloudFormationStackRecords(self: *Self, allocator: std.mem.Allocator, input: get_cloud_formation_stack_records.GetCloudFormationStackRecordsInput, options: CallOptions) !get_cloud_formation_stack_records.GetCloudFormationStackRecordsOutput {
         return get_cloud_formation_stack_records.execute(self, allocator, input, options);
     }
 
@@ -1206,14 +1207,14 @@ pub const Client = struct {
     /// more information,
     /// see [Notifications in Amazon
     /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications).
-    pub fn getContactMethods(self: *Self, allocator: std.mem.Allocator, input: get_contact_methods.GetContactMethodsInput, options: get_contact_methods.Options) !get_contact_methods.GetContactMethodsOutput {
+    pub fn getContactMethods(self: *Self, allocator: std.mem.Allocator, input: get_contact_methods.GetContactMethodsInput, options: CallOptions) !get_contact_methods.GetContactMethodsOutput {
         return get_contact_methods.execute(self, allocator, input, options);
     }
 
     /// Returns information about Amazon Lightsail containers, such as the current
     /// version of the
     /// Lightsail Control (lightsailctl) plugin.
-    pub fn getContainerApiMetadata(self: *Self, allocator: std.mem.Allocator, input: get_container_api_metadata.GetContainerAPIMetadataInput, options: get_container_api_metadata.Options) !get_container_api_metadata.GetContainerAPIMetadataOutput {
+    pub fn getContainerApiMetadata(self: *Self, allocator: std.mem.Allocator, input: get_container_api_metadata.GetContainerAPIMetadataInput, options: CallOptions) !get_container_api_metadata.GetContainerAPIMetadataOutput {
         return get_container_api_metadata.execute(self, allocator, input, options);
     }
 
@@ -1226,7 +1227,7 @@ pub const Client = struct {
     /// images from a public registry like Docker Hub, those images are not returned
     /// as part of this
     /// action. Those images are not registered to your Lightsail container service.
-    pub fn getContainerImages(self: *Self, allocator: std.mem.Allocator, input: get_container_images.GetContainerImagesInput, options: get_container_images.Options) !get_container_images.GetContainerImagesOutput {
+    pub fn getContainerImages(self: *Self, allocator: std.mem.Allocator, input: get_container_images.GetContainerImagesInput, options: CallOptions) !get_container_images.GetContainerImagesOutput {
         return get_container_images.execute(self, allocator, input, options);
     }
 
@@ -1246,7 +1247,7 @@ pub const Client = struct {
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/lightsail.html) in the
     /// *Amazon Web Services General
     /// Reference*.
-    pub fn getContainerLog(self: *Self, allocator: std.mem.Allocator, input: get_container_log.GetContainerLogInput, options: get_container_log.Options) !get_container_log.GetContainerLogOutput {
+    pub fn getContainerLog(self: *Self, allocator: std.mem.Allocator, input: get_container_log.GetContainerLogInput, options: CallOptions) !get_container_log.GetContainerLogOutput {
         return get_container_log.execute(self, allocator, input, options);
     }
 
@@ -1267,7 +1268,7 @@ pub const Client = struct {
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/lightsail.html) in the
     /// *Amazon Web Services General
     /// Reference*.
-    pub fn getContainerServiceDeployments(self: *Self, allocator: std.mem.Allocator, input: get_container_service_deployments.GetContainerServiceDeploymentsInput, options: get_container_service_deployments.Options) !get_container_service_deployments.GetContainerServiceDeploymentsOutput {
+    pub fn getContainerServiceDeployments(self: *Self, allocator: std.mem.Allocator, input: get_container_service_deployments.GetContainerServiceDeploymentsInput, options: CallOptions) !get_container_service_deployments.GetContainerServiceDeploymentsOutput {
         return get_container_service_deployments.execute(self, allocator, input, options);
     }
 
@@ -1279,7 +1280,7 @@ pub const Client = struct {
     /// data
     /// regularly to maintain the reliability, availability, and performance of your
     /// resources.
-    pub fn getContainerServiceMetricData(self: *Self, allocator: std.mem.Allocator, input: get_container_service_metric_data.GetContainerServiceMetricDataInput, options: get_container_service_metric_data.Options) !get_container_service_metric_data.GetContainerServiceMetricDataOutput {
+    pub fn getContainerServiceMetricData(self: *Self, allocator: std.mem.Allocator, input: get_container_service_metric_data.GetContainerServiceMetricDataInput, options: CallOptions) !get_container_service_metric_data.GetContainerServiceMetricDataOutput {
         return get_container_service_metric_data.execute(self, allocator, input, options);
     }
 
@@ -1290,43 +1291,43 @@ pub const Client = struct {
     /// The power specifies the amount of memory, the number of vCPUs, and the base
     /// price of the
     /// container service.
-    pub fn getContainerServicePowers(self: *Self, allocator: std.mem.Allocator, input: get_container_service_powers.GetContainerServicePowersInput, options: get_container_service_powers.Options) !get_container_service_powers.GetContainerServicePowersOutput {
+    pub fn getContainerServicePowers(self: *Self, allocator: std.mem.Allocator, input: get_container_service_powers.GetContainerServicePowersInput, options: CallOptions) !get_container_service_powers.GetContainerServicePowersOutput {
         return get_container_service_powers.execute(self, allocator, input, options);
     }
 
     /// Returns information about one or more of your Amazon Lightsail container
     /// services.
-    pub fn getContainerServices(self: *Self, allocator: std.mem.Allocator, input: get_container_services.GetContainerServicesInput, options: get_container_services.Options) !get_container_services.GetContainerServicesOutput {
+    pub fn getContainerServices(self: *Self, allocator: std.mem.Allocator, input: get_container_services.GetContainerServicesInput, options: CallOptions) !get_container_services.GetContainerServicesOutput {
         return get_container_services.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the cost estimate for a specified resource. A
     /// cost estimate
     /// will not generate for a resource that has been deleted.
-    pub fn getCostEstimate(self: *Self, allocator: std.mem.Allocator, input: get_cost_estimate.GetCostEstimateInput, options: get_cost_estimate.Options) !get_cost_estimate.GetCostEstimateOutput {
+    pub fn getCostEstimate(self: *Self, allocator: std.mem.Allocator, input: get_cost_estimate.GetCostEstimateInput, options: CallOptions) !get_cost_estimate.GetCostEstimateOutput {
         return get_cost_estimate.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific block storage disk.
-    pub fn getDisk(self: *Self, allocator: std.mem.Allocator, input: get_disk.GetDiskInput, options: get_disk.Options) !get_disk.GetDiskOutput {
+    pub fn getDisk(self: *Self, allocator: std.mem.Allocator, input: get_disk.GetDiskInput, options: CallOptions) !get_disk.GetDiskOutput {
         return get_disk.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific block storage disk snapshot.
-    pub fn getDiskSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_disk_snapshot.GetDiskSnapshotInput, options: get_disk_snapshot.Options) !get_disk_snapshot.GetDiskSnapshotOutput {
+    pub fn getDiskSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_disk_snapshot.GetDiskSnapshotInput, options: CallOptions) !get_disk_snapshot.GetDiskSnapshotOutput {
         return get_disk_snapshot.execute(self, allocator, input, options);
     }
 
     /// Returns information about all block storage disk snapshots in your AWS
     /// account and
     /// region.
-    pub fn getDiskSnapshots(self: *Self, allocator: std.mem.Allocator, input: get_disk_snapshots.GetDiskSnapshotsInput, options: get_disk_snapshots.Options) !get_disk_snapshots.GetDiskSnapshotsOutput {
+    pub fn getDiskSnapshots(self: *Self, allocator: std.mem.Allocator, input: get_disk_snapshots.GetDiskSnapshotsInput, options: CallOptions) !get_disk_snapshots.GetDiskSnapshotsOutput {
         return get_disk_snapshots.execute(self, allocator, input, options);
     }
 
     /// Returns information about all block storage disks in your AWS account and
     /// region.
-    pub fn getDisks(self: *Self, allocator: std.mem.Allocator, input: get_disks.GetDisksInput, options: get_disks.Options) !get_disks.GetDisksOutput {
+    pub fn getDisks(self: *Self, allocator: std.mem.Allocator, input: get_disks.GetDisksInput, options: CallOptions) !get_disks.GetDisksOutput {
         return get_disks.execute(self, allocator, input, options);
     }
 
@@ -1337,14 +1338,14 @@ pub const Client = struct {
     /// A distribution bundle specifies the monthly network transfer quota and
     /// monthly cost of
     /// your distribution.
-    pub fn getDistributionBundles(self: *Self, allocator: std.mem.Allocator, input: get_distribution_bundles.GetDistributionBundlesInput, options: get_distribution_bundles.Options) !get_distribution_bundles.GetDistributionBundlesOutput {
+    pub fn getDistributionBundles(self: *Self, allocator: std.mem.Allocator, input: get_distribution_bundles.GetDistributionBundlesInput, options: CallOptions) !get_distribution_bundles.GetDistributionBundlesOutput {
         return get_distribution_bundles.execute(self, allocator, input, options);
     }
 
     /// Returns the timestamp and status of the last cache reset of a specific
     /// Amazon Lightsail
     /// content delivery network (CDN) distribution.
-    pub fn getDistributionLatestCacheReset(self: *Self, allocator: std.mem.Allocator, input: get_distribution_latest_cache_reset.GetDistributionLatestCacheResetInput, options: get_distribution_latest_cache_reset.Options) !get_distribution_latest_cache_reset.GetDistributionLatestCacheResetOutput {
+    pub fn getDistributionLatestCacheReset(self: *Self, allocator: std.mem.Allocator, input: get_distribution_latest_cache_reset.GetDistributionLatestCacheResetInput, options: CallOptions) !get_distribution_latest_cache_reset.GetDistributionLatestCacheResetOutput {
         return get_distribution_latest_cache_reset.execute(self, allocator, input, options);
     }
 
@@ -1357,24 +1358,24 @@ pub const Client = struct {
     /// Monitor and collect metric data regularly to maintain the reliability,
     /// availability, and
     /// performance of your resources.
-    pub fn getDistributionMetricData(self: *Self, allocator: std.mem.Allocator, input: get_distribution_metric_data.GetDistributionMetricDataInput, options: get_distribution_metric_data.Options) !get_distribution_metric_data.GetDistributionMetricDataOutput {
+    pub fn getDistributionMetricData(self: *Self, allocator: std.mem.Allocator, input: get_distribution_metric_data.GetDistributionMetricDataInput, options: CallOptions) !get_distribution_metric_data.GetDistributionMetricDataOutput {
         return get_distribution_metric_data.execute(self, allocator, input, options);
     }
 
     /// Returns information about one or more of your Amazon Lightsail content
     /// delivery network
     /// (CDN) distributions.
-    pub fn getDistributions(self: *Self, allocator: std.mem.Allocator, input: get_distributions.GetDistributionsInput, options: get_distributions.Options) !get_distributions.GetDistributionsOutput {
+    pub fn getDistributions(self: *Self, allocator: std.mem.Allocator, input: get_distributions.GetDistributionsInput, options: CallOptions) !get_distributions.GetDistributionsOutput {
         return get_distributions.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific domain recordset.
-    pub fn getDomain(self: *Self, allocator: std.mem.Allocator, input: get_domain.GetDomainInput, options: get_domain.Options) !get_domain.GetDomainOutput {
+    pub fn getDomain(self: *Self, allocator: std.mem.Allocator, input: get_domain.GetDomainInput, options: CallOptions) !get_domain.GetDomainOutput {
         return get_domain.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all domains in the user's account.
-    pub fn getDomains(self: *Self, allocator: std.mem.Allocator, input: get_domains.GetDomainsInput, options: get_domains.Options) !get_domains.GetDomainsOutput {
+    pub fn getDomains(self: *Self, allocator: std.mem.Allocator, input: get_domains.GetDomainsInput, options: CallOptions) !get_domains.GetDomainsOutput {
         return get_domains.execute(self, allocator, input, options);
     }
 
@@ -1386,14 +1387,14 @@ pub const Client = struct {
     /// resources with the
     /// [CreateCloudFormationStack](https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateCloudFormationStack.html)
     /// action.
-    pub fn getExportSnapshotRecords(self: *Self, allocator: std.mem.Allocator, input: get_export_snapshot_records.GetExportSnapshotRecordsInput, options: get_export_snapshot_records.Options) !get_export_snapshot_records.GetExportSnapshotRecordsOutput {
+    pub fn getExportSnapshotRecords(self: *Self, allocator: std.mem.Allocator, input: get_export_snapshot_records.GetExportSnapshotRecordsInput, options: CallOptions) !get_export_snapshot_records.GetExportSnapshotRecordsOutput {
         return get_export_snapshot_records.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific Amazon Lightsail instance, which is a
     /// virtual private
     /// server.
-    pub fn getInstance(self: *Self, allocator: std.mem.Allocator, input: get_instance.GetInstanceInput, options: get_instance.Options) !get_instance.GetInstanceOutput {
+    pub fn getInstance(self: *Self, allocator: std.mem.Allocator, input: get_instance.GetInstanceInput, options: CallOptions) !get_instance.GetInstanceOutput {
         return get_instance.execute(self, allocator, input, options);
     }
 
@@ -1407,7 +1408,7 @@ pub const Client = struct {
     /// more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn getInstanceAccessDetails(self: *Self, allocator: std.mem.Allocator, input: get_instance_access_details.GetInstanceAccessDetailsInput, options: get_instance_access_details.Options) !get_instance_access_details.GetInstanceAccessDetailsOutput {
+    pub fn getInstanceAccessDetails(self: *Self, allocator: std.mem.Allocator, input: get_instance_access_details.GetInstanceAccessDetailsInput, options: CallOptions) !get_instance_access_details.GetInstanceAccessDetailsOutput {
         return get_instance_access_details.execute(self, allocator, input, options);
     }
 
@@ -1420,50 +1421,50 @@ pub const Client = struct {
     /// Monitor and collect metric data regularly to maintain the reliability,
     /// availability, and
     /// performance of your resources.
-    pub fn getInstanceMetricData(self: *Self, allocator: std.mem.Allocator, input: get_instance_metric_data.GetInstanceMetricDataInput, options: get_instance_metric_data.Options) !get_instance_metric_data.GetInstanceMetricDataOutput {
+    pub fn getInstanceMetricData(self: *Self, allocator: std.mem.Allocator, input: get_instance_metric_data.GetInstanceMetricDataInput, options: CallOptions) !get_instance_metric_data.GetInstanceMetricDataOutput {
         return get_instance_metric_data.execute(self, allocator, input, options);
     }
 
     /// Returns the firewall port states for a specific Amazon Lightsail instance,
     /// the IP addresses
     /// allowed to connect to the instance through the ports, and the protocol.
-    pub fn getInstancePortStates(self: *Self, allocator: std.mem.Allocator, input: get_instance_port_states.GetInstancePortStatesInput, options: get_instance_port_states.Options) !get_instance_port_states.GetInstancePortStatesOutput {
+    pub fn getInstancePortStates(self: *Self, allocator: std.mem.Allocator, input: get_instance_port_states.GetInstancePortStatesInput, options: CallOptions) !get_instance_port_states.GetInstancePortStatesOutput {
         return get_instance_port_states.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific instance snapshot.
-    pub fn getInstanceSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_instance_snapshot.GetInstanceSnapshotInput, options: get_instance_snapshot.Options) !get_instance_snapshot.GetInstanceSnapshotOutput {
+    pub fn getInstanceSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_instance_snapshot.GetInstanceSnapshotInput, options: CallOptions) !get_instance_snapshot.GetInstanceSnapshotOutput {
         return get_instance_snapshot.execute(self, allocator, input, options);
     }
 
     /// Returns all instance snapshots for the user's account.
-    pub fn getInstanceSnapshots(self: *Self, allocator: std.mem.Allocator, input: get_instance_snapshots.GetInstanceSnapshotsInput, options: get_instance_snapshots.Options) !get_instance_snapshots.GetInstanceSnapshotsOutput {
+    pub fn getInstanceSnapshots(self: *Self, allocator: std.mem.Allocator, input: get_instance_snapshots.GetInstanceSnapshotsInput, options: CallOptions) !get_instance_snapshots.GetInstanceSnapshotsOutput {
         return get_instance_snapshots.execute(self, allocator, input, options);
     }
 
     /// Returns the state of a specific instance. Works on one instance at a time.
-    pub fn getInstanceState(self: *Self, allocator: std.mem.Allocator, input: get_instance_state.GetInstanceStateInput, options: get_instance_state.Options) !get_instance_state.GetInstanceStateOutput {
+    pub fn getInstanceState(self: *Self, allocator: std.mem.Allocator, input: get_instance_state.GetInstanceStateInput, options: CallOptions) !get_instance_state.GetInstanceStateOutput {
         return get_instance_state.execute(self, allocator, input, options);
     }
 
     /// Returns information about all Amazon Lightsail virtual private servers, or
     /// *instances*.
-    pub fn getInstances(self: *Self, allocator: std.mem.Allocator, input: get_instances.GetInstancesInput, options: get_instances.Options) !get_instances.GetInstancesOutput {
+    pub fn getInstances(self: *Self, allocator: std.mem.Allocator, input: get_instances.GetInstancesInput, options: CallOptions) !get_instances.GetInstancesOutput {
         return get_instances.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific key pair.
-    pub fn getKeyPair(self: *Self, allocator: std.mem.Allocator, input: get_key_pair.GetKeyPairInput, options: get_key_pair.Options) !get_key_pair.GetKeyPairOutput {
+    pub fn getKeyPair(self: *Self, allocator: std.mem.Allocator, input: get_key_pair.GetKeyPairInput, options: CallOptions) !get_key_pair.GetKeyPairOutput {
         return get_key_pair.execute(self, allocator, input, options);
     }
 
     /// Returns information about all key pairs in the user's account.
-    pub fn getKeyPairs(self: *Self, allocator: std.mem.Allocator, input: get_key_pairs.GetKeyPairsInput, options: get_key_pairs.Options) !get_key_pairs.GetKeyPairsOutput {
+    pub fn getKeyPairs(self: *Self, allocator: std.mem.Allocator, input: get_key_pairs.GetKeyPairsInput, options: CallOptions) !get_key_pairs.GetKeyPairsOutput {
         return get_key_pairs.execute(self, allocator, input, options);
     }
 
     /// Returns information about the specified Lightsail load balancer.
-    pub fn getLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: get_load_balancer.GetLoadBalancerInput, options: get_load_balancer.Options) !get_load_balancer.GetLoadBalancerOutput {
+    pub fn getLoadBalancer(self: *Self, allocator: std.mem.Allocator, input: get_load_balancer.GetLoadBalancerInput, options: CallOptions) !get_load_balancer.GetLoadBalancerOutput {
         return get_load_balancer.execute(self, allocator, input, options);
     }
 
@@ -1474,7 +1475,7 @@ pub const Client = struct {
     /// Monitor and collect metric data regularly to maintain the reliability,
     /// availability, and
     /// performance of your resources.
-    pub fn getLoadBalancerMetricData(self: *Self, allocator: std.mem.Allocator, input: get_load_balancer_metric_data.GetLoadBalancerMetricDataInput, options: get_load_balancer_metric_data.Options) !get_load_balancer_metric_data.GetLoadBalancerMetricDataOutput {
+    pub fn getLoadBalancerMetricData(self: *Self, allocator: std.mem.Allocator, input: get_load_balancer_metric_data.GetLoadBalancerMetricDataInput, options: CallOptions) !get_load_balancer_metric_data.GetLoadBalancerMetricDataOutput {
         return get_load_balancer_metric_data.execute(self, allocator, input, options);
     }
 
@@ -1487,7 +1488,7 @@ pub const Client = struct {
     /// You can have a maximum of 2 certificates associated with a Lightsail load
     /// balancer. One
     /// is active and the other is inactive.
-    pub fn getLoadBalancerTlsCertificates(self: *Self, allocator: std.mem.Allocator, input: get_load_balancer_tls_certificates.GetLoadBalancerTlsCertificatesInput, options: get_load_balancer_tls_certificates.Options) !get_load_balancer_tls_certificates.GetLoadBalancerTlsCertificatesOutput {
+    pub fn getLoadBalancerTlsCertificates(self: *Self, allocator: std.mem.Allocator, input: get_load_balancer_tls_certificates.GetLoadBalancerTlsCertificatesInput, options: CallOptions) !get_load_balancer_tls_certificates.GetLoadBalancerTlsCertificatesOutput {
         return get_load_balancer_tls_certificates.execute(self, allocator, input, options);
     }
 
@@ -1497,19 +1498,19 @@ pub const Client = struct {
     /// For more information about load balancer TLS security policies, see
     /// [Configuring TLS security policies on your Amazon Lightsail load
     /// balancers](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configure-load-balancer-tls-security-policy) in the *Amazon Lightsail Developer Guide*.
-    pub fn getLoadBalancerTlsPolicies(self: *Self, allocator: std.mem.Allocator, input: get_load_balancer_tls_policies.GetLoadBalancerTlsPoliciesInput, options: get_load_balancer_tls_policies.Options) !get_load_balancer_tls_policies.GetLoadBalancerTlsPoliciesOutput {
+    pub fn getLoadBalancerTlsPolicies(self: *Self, allocator: std.mem.Allocator, input: get_load_balancer_tls_policies.GetLoadBalancerTlsPoliciesInput, options: CallOptions) !get_load_balancer_tls_policies.GetLoadBalancerTlsPoliciesOutput {
         return get_load_balancer_tls_policies.execute(self, allocator, input, options);
     }
 
     /// Returns information about all load balancers in an account.
-    pub fn getLoadBalancers(self: *Self, allocator: std.mem.Allocator, input: get_load_balancers.GetLoadBalancersInput, options: get_load_balancers.Options) !get_load_balancers.GetLoadBalancersOutput {
+    pub fn getLoadBalancers(self: *Self, allocator: std.mem.Allocator, input: get_load_balancers.GetLoadBalancersInput, options: CallOptions) !get_load_balancers.GetLoadBalancersOutput {
         return get_load_balancers.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific operation. Operations include events
     /// such as when you
     /// create an instance, allocate a static IP, attach a static IP, and so on.
-    pub fn getOperation(self: *Self, allocator: std.mem.Allocator, input: get_operation.GetOperationInput, options: get_operation.Options) !get_operation.GetOperationOutput {
+    pub fn getOperation(self: *Self, allocator: std.mem.Allocator, input: get_operation.GetOperationInput, options: CallOptions) !get_operation.GetOperationOutput {
         return get_operation.execute(self, allocator, input, options);
     }
 
@@ -1519,24 +1520,24 @@ pub const Client = struct {
     /// can be paged
     /// by making each subsequent call to `GetOperations` use the maximum (last)
     /// `statusChangedAt` value from the previous request.
-    pub fn getOperations(self: *Self, allocator: std.mem.Allocator, input: get_operations.GetOperationsInput, options: get_operations.Options) !get_operations.GetOperationsOutput {
+    pub fn getOperations(self: *Self, allocator: std.mem.Allocator, input: get_operations.GetOperationsInput, options: CallOptions) !get_operations.GetOperationsOutput {
         return get_operations.execute(self, allocator, input, options);
     }
 
     /// Gets operations for a specific resource (an instance or a static IP).
-    pub fn getOperationsForResource(self: *Self, allocator: std.mem.Allocator, input: get_operations_for_resource.GetOperationsForResourceInput, options: get_operations_for_resource.Options) !get_operations_for_resource.GetOperationsForResourceOutput {
+    pub fn getOperationsForResource(self: *Self, allocator: std.mem.Allocator, input: get_operations_for_resource.GetOperationsForResourceInput, options: CallOptions) !get_operations_for_resource.GetOperationsForResourceOutput {
         return get_operations_for_resource.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all valid regions for Amazon Lightsail. Use the `include
     /// availability zones` parameter to also return the Availability Zones in a
     /// region.
-    pub fn getRegions(self: *Self, allocator: std.mem.Allocator, input: get_regions.GetRegionsInput, options: get_regions.Options) !get_regions.GetRegionsOutput {
+    pub fn getRegions(self: *Self, allocator: std.mem.Allocator, input: get_regions.GetRegionsInput, options: CallOptions) !get_regions.GetRegionsOutput {
         return get_regions.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific database in Amazon Lightsail.
-    pub fn getRelationalDatabase(self: *Self, allocator: std.mem.Allocator, input: get_relational_database.GetRelationalDatabaseInput, options: get_relational_database.Options) !get_relational_database.GetRelationalDatabaseOutput {
+    pub fn getRelationalDatabase(self: *Self, allocator: std.mem.Allocator, input: get_relational_database.GetRelationalDatabaseInput, options: CallOptions) !get_relational_database.GetRelationalDatabaseOutput {
         return get_relational_database.execute(self, allocator, input, options);
     }
 
@@ -1547,7 +1548,7 @@ pub const Client = struct {
     /// You can use a blueprint ID to create a new database that runs a specific
     /// database
     /// engine.
-    pub fn getRelationalDatabaseBlueprints(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_blueprints.GetRelationalDatabaseBlueprintsInput, options: get_relational_database_blueprints.Options) !get_relational_database_blueprints.GetRelationalDatabaseBlueprintsOutput {
+    pub fn getRelationalDatabaseBlueprints(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_blueprints.GetRelationalDatabaseBlueprintsInput, options: CallOptions) !get_relational_database_blueprints.GetRelationalDatabaseBlueprintsOutput {
         return get_relational_database_blueprints.execute(self, allocator, input, options);
     }
 
@@ -1557,23 +1558,23 @@ pub const Client = struct {
     ///
     /// You can use a bundle ID to create a new database with explicit performance
     /// specifications.
-    pub fn getRelationalDatabaseBundles(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_bundles.GetRelationalDatabaseBundlesInput, options: get_relational_database_bundles.Options) !get_relational_database_bundles.GetRelationalDatabaseBundlesOutput {
+    pub fn getRelationalDatabaseBundles(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_bundles.GetRelationalDatabaseBundlesInput, options: CallOptions) !get_relational_database_bundles.GetRelationalDatabaseBundlesOutput {
         return get_relational_database_bundles.execute(self, allocator, input, options);
     }
 
     /// Returns a list of events for a specific database in Amazon Lightsail.
-    pub fn getRelationalDatabaseEvents(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_events.GetRelationalDatabaseEventsInput, options: get_relational_database_events.Options) !get_relational_database_events.GetRelationalDatabaseEventsOutput {
+    pub fn getRelationalDatabaseEvents(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_events.GetRelationalDatabaseEventsInput, options: CallOptions) !get_relational_database_events.GetRelationalDatabaseEventsOutput {
         return get_relational_database_events.execute(self, allocator, input, options);
     }
 
     /// Returns a list of log events for a database in Amazon Lightsail.
-    pub fn getRelationalDatabaseLogEvents(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_log_events.GetRelationalDatabaseLogEventsInput, options: get_relational_database_log_events.Options) !get_relational_database_log_events.GetRelationalDatabaseLogEventsOutput {
+    pub fn getRelationalDatabaseLogEvents(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_log_events.GetRelationalDatabaseLogEventsInput, options: CallOptions) !get_relational_database_log_events.GetRelationalDatabaseLogEventsOutput {
         return get_relational_database_log_events.execute(self, allocator, input, options);
     }
 
     /// Returns a list of available log streams for a specific database in Amazon
     /// Lightsail.
-    pub fn getRelationalDatabaseLogStreams(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_log_streams.GetRelationalDatabaseLogStreamsInput, options: get_relational_database_log_streams.Options) !get_relational_database_log_streams.GetRelationalDatabaseLogStreamsOutput {
+    pub fn getRelationalDatabaseLogStreams(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_log_streams.GetRelationalDatabaseLogStreamsInput, options: CallOptions) !get_relational_database_log_streams.GetRelationalDatabaseLogStreamsOutput {
         return get_relational_database_log_streams.execute(self, allocator, input, options);
     }
 
@@ -1584,7 +1585,7 @@ pub const Client = struct {
     /// The `GetRelationalDatabaseMasterUserPassword` operation supports tag-based
     /// access control via resource tags applied to the resource identified by
     /// relationalDatabaseName.
-    pub fn getRelationalDatabaseMasterUserPassword(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_master_user_password.GetRelationalDatabaseMasterUserPasswordInput, options: get_relational_database_master_user_password.Options) !get_relational_database_master_user_password.GetRelationalDatabaseMasterUserPasswordOutput {
+    pub fn getRelationalDatabaseMasterUserPassword(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_master_user_password.GetRelationalDatabaseMasterUserPasswordInput, options: CallOptions) !get_relational_database_master_user_password.GetRelationalDatabaseMasterUserPasswordOutput {
         return get_relational_database_master_user_password.execute(self, allocator, input, options);
     }
 
@@ -1596,7 +1597,7 @@ pub const Client = struct {
     /// Monitor and collect metric data regularly to maintain the reliability,
     /// availability, and
     /// performance of your resources.
-    pub fn getRelationalDatabaseMetricData(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_metric_data.GetRelationalDatabaseMetricDataInput, options: get_relational_database_metric_data.Options) !get_relational_database_metric_data.GetRelationalDatabaseMetricDataOutput {
+    pub fn getRelationalDatabaseMetricData(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_metric_data.GetRelationalDatabaseMetricDataInput, options: CallOptions) !get_relational_database_metric_data.GetRelationalDatabaseMetricDataOutput {
         return get_relational_database_metric_data.execute(self, allocator, input, options);
     }
 
@@ -1609,50 +1610,50 @@ pub const Client = struct {
     /// about each parameter. This information includes whether changes require a
     /// reboot, whether the
     /// parameter is modifiable, the allowed values, and the data types.
-    pub fn getRelationalDatabaseParameters(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_parameters.GetRelationalDatabaseParametersInput, options: get_relational_database_parameters.Options) !get_relational_database_parameters.GetRelationalDatabaseParametersOutput {
+    pub fn getRelationalDatabaseParameters(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_parameters.GetRelationalDatabaseParametersInput, options: CallOptions) !get_relational_database_parameters.GetRelationalDatabaseParametersOutput {
         return get_relational_database_parameters.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific database snapshot in Amazon Lightsail.
-    pub fn getRelationalDatabaseSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_snapshot.GetRelationalDatabaseSnapshotInput, options: get_relational_database_snapshot.Options) !get_relational_database_snapshot.GetRelationalDatabaseSnapshotOutput {
+    pub fn getRelationalDatabaseSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_snapshot.GetRelationalDatabaseSnapshotInput, options: CallOptions) !get_relational_database_snapshot.GetRelationalDatabaseSnapshotOutput {
         return get_relational_database_snapshot.execute(self, allocator, input, options);
     }
 
     /// Returns information about all of your database snapshots in Amazon
     /// Lightsail.
-    pub fn getRelationalDatabaseSnapshots(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_snapshots.GetRelationalDatabaseSnapshotsInput, options: get_relational_database_snapshots.Options) !get_relational_database_snapshots.GetRelationalDatabaseSnapshotsOutput {
+    pub fn getRelationalDatabaseSnapshots(self: *Self, allocator: std.mem.Allocator, input: get_relational_database_snapshots.GetRelationalDatabaseSnapshotsInput, options: CallOptions) !get_relational_database_snapshots.GetRelationalDatabaseSnapshotsOutput {
         return get_relational_database_snapshots.execute(self, allocator, input, options);
     }
 
     /// Returns information about all of your databases in Amazon Lightsail.
-    pub fn getRelationalDatabases(self: *Self, allocator: std.mem.Allocator, input: get_relational_databases.GetRelationalDatabasesInput, options: get_relational_databases.Options) !get_relational_databases.GetRelationalDatabasesOutput {
+    pub fn getRelationalDatabases(self: *Self, allocator: std.mem.Allocator, input: get_relational_databases.GetRelationalDatabasesInput, options: CallOptions) !get_relational_databases.GetRelationalDatabasesOutput {
         return get_relational_databases.execute(self, allocator, input, options);
     }
 
     /// Returns detailed information for five of the most recent
     /// `SetupInstanceHttps`
     /// requests that were ran on the target instance.
-    pub fn getSetupHistory(self: *Self, allocator: std.mem.Allocator, input: get_setup_history.GetSetupHistoryInput, options: get_setup_history.Options) !get_setup_history.GetSetupHistoryOutput {
+    pub fn getSetupHistory(self: *Self, allocator: std.mem.Allocator, input: get_setup_history.GetSetupHistoryInput, options: CallOptions) !get_setup_history.GetSetupHistoryOutput {
         return get_setup_history.execute(self, allocator, input, options);
     }
 
     /// Returns information about an Amazon Lightsail static IP.
-    pub fn getStaticIp(self: *Self, allocator: std.mem.Allocator, input: get_static_ip.GetStaticIpInput, options: get_static_ip.Options) !get_static_ip.GetStaticIpOutput {
+    pub fn getStaticIp(self: *Self, allocator: std.mem.Allocator, input: get_static_ip.GetStaticIpInput, options: CallOptions) !get_static_ip.GetStaticIpOutput {
         return get_static_ip.execute(self, allocator, input, options);
     }
 
     /// Returns information about all static IPs in the user's account.
-    pub fn getStaticIps(self: *Self, allocator: std.mem.Allocator, input: get_static_ips.GetStaticIpsInput, options: get_static_ips.Options) !get_static_ips.GetStaticIpsOutput {
+    pub fn getStaticIps(self: *Self, allocator: std.mem.Allocator, input: get_static_ips.GetStaticIpsInput, options: CallOptions) !get_static_ips.GetStaticIpsOutput {
         return get_static_ips.execute(self, allocator, input, options);
     }
 
     /// Imports a public SSH key from a specific key pair.
-    pub fn importKeyPair(self: *Self, allocator: std.mem.Allocator, input: import_key_pair.ImportKeyPairInput, options: import_key_pair.Options) !import_key_pair.ImportKeyPairOutput {
+    pub fn importKeyPair(self: *Self, allocator: std.mem.Allocator, input: import_key_pair.ImportKeyPairInput, options: CallOptions) !import_key_pair.ImportKeyPairOutput {
         return import_key_pair.execute(self, allocator, input, options);
     }
 
     /// Returns a Boolean value indicating whether your Lightsail VPC is peered.
-    pub fn isVpcPeered(self: *Self, allocator: std.mem.Allocator, input: is_vpc_peered.IsVpcPeeredInput, options: is_vpc_peered.Options) !is_vpc_peered.IsVpcPeeredOutput {
+    pub fn isVpcPeered(self: *Self, allocator: std.mem.Allocator, input: is_vpc_peered.IsVpcPeeredInput, options: CallOptions) !is_vpc_peered.IsVpcPeeredOutput {
         return is_vpc_peered.execute(self, allocator, input, options);
     }
 
@@ -1664,12 +1665,12 @@ pub const Client = struct {
     /// resource tags applied to the resource identified by `instanceName`. For more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn openInstancePublicPorts(self: *Self, allocator: std.mem.Allocator, input: open_instance_public_ports.OpenInstancePublicPortsInput, options: open_instance_public_ports.Options) !open_instance_public_ports.OpenInstancePublicPortsOutput {
+    pub fn openInstancePublicPorts(self: *Self, allocator: std.mem.Allocator, input: open_instance_public_ports.OpenInstancePublicPortsInput, options: CallOptions) !open_instance_public_ports.OpenInstancePublicPortsOutput {
         return open_instance_public_ports.execute(self, allocator, input, options);
     }
 
     /// Peers the Lightsail VPC with the user's default VPC.
-    pub fn peerVpc(self: *Self, allocator: std.mem.Allocator, input: peer_vpc.PeerVpcInput, options: peer_vpc.Options) !peer_vpc.PeerVpcOutput {
+    pub fn peerVpc(self: *Self, allocator: std.mem.Allocator, input: peer_vpc.PeerVpcInput, options: CallOptions) !peer_vpc.PeerVpcOutput {
         return peer_vpc.execute(self, allocator, input, options);
     }
 
@@ -1692,7 +1693,7 @@ pub const Client = struct {
     /// overwrites the previous configuration of the alarm. The alarm is then
     /// evaluated with the
     /// updated configuration.
-    pub fn putAlarm(self: *Self, allocator: std.mem.Allocator, input: put_alarm.PutAlarmInput, options: put_alarm.Options) !put_alarm.PutAlarmOutput {
+    pub fn putAlarm(self: *Self, allocator: std.mem.Allocator, input: put_alarm.PutAlarmInput, options: CallOptions) !put_alarm.PutAlarmOutput {
         return put_alarm.execute(self, allocator, input, options);
     }
 
@@ -1712,7 +1713,7 @@ pub const Client = struct {
     /// resource tags applied to the resource identified by `instanceName`. For more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn putInstancePublicPorts(self: *Self, allocator: std.mem.Allocator, input: put_instance_public_ports.PutInstancePublicPortsInput, options: put_instance_public_ports.Options) !put_instance_public_ports.PutInstancePublicPortsOutput {
+    pub fn putInstancePublicPorts(self: *Self, allocator: std.mem.Allocator, input: put_instance_public_ports.PutInstancePublicPortsInput, options: CallOptions) !put_instance_public_ports.PutInstancePublicPortsOutput {
         return put_instance_public_ports.execute(self, allocator, input, options);
     }
 
@@ -1724,7 +1725,7 @@ pub const Client = struct {
     /// information,
     /// see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn rebootInstance(self: *Self, allocator: std.mem.Allocator, input: reboot_instance.RebootInstanceInput, options: reboot_instance.Options) !reboot_instance.RebootInstanceOutput {
+    pub fn rebootInstance(self: *Self, allocator: std.mem.Allocator, input: reboot_instance.RebootInstanceInput, options: CallOptions) !reboot_instance.RebootInstanceOutput {
         return reboot_instance.execute(self, allocator, input, options);
     }
 
@@ -1735,7 +1736,7 @@ pub const Client = struct {
     /// relationalDatabaseName. For more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn rebootRelationalDatabase(self: *Self, allocator: std.mem.Allocator, input: reboot_relational_database.RebootRelationalDatabaseInput, options: reboot_relational_database.Options) !reboot_relational_database.RebootRelationalDatabaseOutput {
+    pub fn rebootRelationalDatabase(self: *Self, allocator: std.mem.Allocator, input: reboot_relational_database.RebootRelationalDatabaseInput, options: CallOptions) !reboot_relational_database.RebootRelationalDatabaseOutput {
         return reboot_relational_database.execute(self, allocator, input, options);
     }
 
@@ -1748,12 +1749,12 @@ pub const Client = struct {
     /// Lightsail container
     /// services](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-pushing-container-images)
     /// in the *Amazon Lightsail Developer Guide*.
-    pub fn registerContainerImage(self: *Self, allocator: std.mem.Allocator, input: register_container_image.RegisterContainerImageInput, options: register_container_image.Options) !register_container_image.RegisterContainerImageOutput {
+    pub fn registerContainerImage(self: *Self, allocator: std.mem.Allocator, input: register_container_image.RegisterContainerImageInput, options: CallOptions) !register_container_image.RegisterContainerImageOutput {
         return register_container_image.execute(self, allocator, input, options);
     }
 
     /// Deletes a specific static IP from your account.
-    pub fn releaseStaticIp(self: *Self, allocator: std.mem.Allocator, input: release_static_ip.ReleaseStaticIpInput, options: release_static_ip.Options) !release_static_ip.ReleaseStaticIpOutput {
+    pub fn releaseStaticIp(self: *Self, allocator: std.mem.Allocator, input: release_static_ip.ReleaseStaticIpInput, options: CallOptions) !release_static_ip.ReleaseStaticIpOutput {
         return release_static_ip.execute(self, allocator, input, options);
     }
 
@@ -1764,7 +1765,7 @@ pub const Client = struct {
     /// After resetting the cache, the next time a content request is made, your
     /// distribution
     /// pulls, serves, and caches it from the origin.
-    pub fn resetDistributionCache(self: *Self, allocator: std.mem.Allocator, input: reset_distribution_cache.ResetDistributionCacheInput, options: reset_distribution_cache.Options) !reset_distribution_cache.ResetDistributionCacheOutput {
+    pub fn resetDistributionCache(self: *Self, allocator: std.mem.Allocator, input: reset_distribution_cache.ResetDistributionCacheInput, options: CallOptions) !reset_distribution_cache.ResetDistributionCacheOutput {
         return reset_distribution_cache.execute(self, allocator, input, options);
     }
 
@@ -1791,7 +1792,7 @@ pub const Client = struct {
     /// Notifications are not sent to an email contact method until after it is
     /// verified, and
     /// confirmed as valid.
-    pub fn sendContactMethodVerification(self: *Self, allocator: std.mem.Allocator, input: send_contact_method_verification.SendContactMethodVerificationInput, options: send_contact_method_verification.Options) !send_contact_method_verification.SendContactMethodVerificationOutput {
+    pub fn sendContactMethodVerification(self: *Self, allocator: std.mem.Allocator, input: send_contact_method_verification.SendContactMethodVerificationInput, options: CallOptions) !send_contact_method_verification.SendContactMethodVerificationOutput {
         return send_contact_method_verification.execute(self, allocator, input, options);
     }
 
@@ -1802,7 +1803,7 @@ pub const Client = struct {
     /// specified resource. Alternately, you can use this action to disable
     /// dual-stack, and enable
     /// IPv4 only.
-    pub fn setIpAddressType(self: *Self, allocator: std.mem.Allocator, input: set_ip_address_type.SetIpAddressTypeInput, options: set_ip_address_type.Options) !set_ip_address_type.SetIpAddressTypeOutput {
+    pub fn setIpAddressType(self: *Self, allocator: std.mem.Allocator, input: set_ip_address_type.SetIpAddressTypeInput, options: CallOptions) !set_ip_address_type.SetIpAddressTypeOutput {
         return set_ip_address_type.execute(self, allocator, input, options);
     }
 
@@ -1812,7 +1813,7 @@ pub const Client = struct {
     /// Lightsail buckets currently support setting access for Lightsail instances
     /// in the same
     /// Amazon Web Services Region.
-    pub fn setResourceAccessForBucket(self: *Self, allocator: std.mem.Allocator, input: set_resource_access_for_bucket.SetResourceAccessForBucketInput, options: set_resource_access_for_bucket.Options) !set_resource_access_for_bucket.SetResourceAccessForBucketOutput {
+    pub fn setResourceAccessForBucket(self: *Self, allocator: std.mem.Allocator, input: set_resource_access_for_bucket.SetResourceAccessForBucketInput, options: CallOptions) !set_resource_access_for_bucket.SetResourceAccessForBucketOutput {
         return set_resource_access_for_bucket.execute(self, allocator, input, options);
     }
 
@@ -1823,7 +1824,7 @@ pub const Client = struct {
     /// If you provide more than one domain name in the request, at least one name
     /// must be less
     /// than or equal to 63 characters in length.
-    pub fn setupInstanceHttps(self: *Self, allocator: std.mem.Allocator, input: setup_instance_https.SetupInstanceHttpsInput, options: setup_instance_https.Options) !setup_instance_https.SetupInstanceHttpsOutput {
+    pub fn setupInstanceHttps(self: *Self, allocator: std.mem.Allocator, input: setup_instance_https.SetupInstanceHttpsInput, options: CallOptions) !setup_instance_https.SetupInstanceHttpsOutput {
         return setup_instance_https.execute(self, allocator, input, options);
     }
 
@@ -1832,7 +1833,7 @@ pub const Client = struct {
     /// computer’s operating system and application. The session will be active for
     /// 1 hour. Use this
     /// action to resume the session after it expires.
-    pub fn startGuiSession(self: *Self, allocator: std.mem.Allocator, input: start_gui_session.StartGUISessionInput, options: start_gui_session.Options) !start_gui_session.StartGUISessionOutput {
+    pub fn startGuiSession(self: *Self, allocator: std.mem.Allocator, input: start_gui_session.StartGUISessionInput, options: CallOptions) !start_gui_session.StartGUISessionOutput {
         return start_gui_session.execute(self, allocator, input, options);
     }
 
@@ -1854,7 +1855,7 @@ pub const Client = struct {
     /// information,
     /// see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn startInstance(self: *Self, allocator: std.mem.Allocator, input: start_instance.StartInstanceInput, options: start_instance.Options) !start_instance.StartInstanceOutput {
+    pub fn startInstance(self: *Self, allocator: std.mem.Allocator, input: start_instance.StartInstanceInput, options: CallOptions) !start_instance.StartInstanceOutput {
         return start_instance.execute(self, allocator, input, options);
     }
 
@@ -1868,7 +1869,7 @@ pub const Client = struct {
     /// For more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn startRelationalDatabase(self: *Self, allocator: std.mem.Allocator, input: start_relational_database.StartRelationalDatabaseInput, options: start_relational_database.Options) !start_relational_database.StartRelationalDatabaseOutput {
+    pub fn startRelationalDatabase(self: *Self, allocator: std.mem.Allocator, input: start_relational_database.StartRelationalDatabaseInput, options: CallOptions) !start_relational_database.StartRelationalDatabaseOutput {
         return start_relational_database.execute(self, allocator, input, options);
     }
 
@@ -1877,7 +1878,7 @@ pub const Client = struct {
     /// operating system or application. The session will close and any unsaved data
     /// will be
     /// lost.
-    pub fn stopGuiSession(self: *Self, allocator: std.mem.Allocator, input: stop_gui_session.StopGUISessionInput, options: stop_gui_session.Options) !stop_gui_session.StopGUISessionOutput {
+    pub fn stopGuiSession(self: *Self, allocator: std.mem.Allocator, input: stop_gui_session.StopGUISessionInput, options: CallOptions) !stop_gui_session.StopGUISessionOutput {
         return stop_gui_session.execute(self, allocator, input, options);
     }
 
@@ -1896,7 +1897,7 @@ pub const Client = struct {
     /// information,
     /// see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn stopInstance(self: *Self, allocator: std.mem.Allocator, input: stop_instance.StopInstanceInput, options: stop_instance.Options) !stop_instance.StopInstanceOutput {
+    pub fn stopInstance(self: *Self, allocator: std.mem.Allocator, input: stop_instance.StopInstanceInput, options: CallOptions) !stop_instance.StopInstanceOutput {
         return stop_instance.execute(self, allocator, input, options);
     }
 
@@ -1915,7 +1916,7 @@ pub const Client = struct {
     /// For more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn stopRelationalDatabase(self: *Self, allocator: std.mem.Allocator, input: stop_relational_database.StopRelationalDatabaseInput, options: stop_relational_database.Options) !stop_relational_database.StopRelationalDatabaseOutput {
+    pub fn stopRelationalDatabase(self: *Self, allocator: std.mem.Allocator, input: stop_relational_database.StopRelationalDatabaseInput, options: CallOptions) !stop_relational_database.StopRelationalDatabaseOutput {
         return stop_relational_database.execute(self, allocator, input, options);
     }
 
@@ -1933,7 +1934,7 @@ pub const Client = struct {
     /// more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -1951,12 +1952,12 @@ pub const Client = struct {
     /// on the Amazon Lightsail console. For more information, see [Alarms
     /// in Amazon
     /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-alarms).
-    pub fn testAlarm(self: *Self, allocator: std.mem.Allocator, input: test_alarm.TestAlarmInput, options: test_alarm.Options) !test_alarm.TestAlarmOutput {
+    pub fn testAlarm(self: *Self, allocator: std.mem.Allocator, input: test_alarm.TestAlarmInput, options: CallOptions) !test_alarm.TestAlarmOutput {
         return test_alarm.execute(self, allocator, input, options);
     }
 
     /// Unpeers the Lightsail VPC from the user's default VPC.
-    pub fn unpeerVpc(self: *Self, allocator: std.mem.Allocator, input: unpeer_vpc.UnpeerVpcInput, options: unpeer_vpc.Options) !unpeer_vpc.UnpeerVpcOutput {
+    pub fn unpeerVpc(self: *Self, allocator: std.mem.Allocator, input: unpeer_vpc.UnpeerVpcInput, options: CallOptions) !unpeer_vpc.UnpeerVpcOutput {
         return unpeer_vpc.execute(self, allocator, input, options);
     }
 
@@ -1969,7 +1970,7 @@ pub const Client = struct {
     /// name`. For
     /// more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -1979,7 +1980,7 @@ pub const Client = struct {
     /// versioning,
     /// public accessibility, and the Amazon Web Services accounts that can access
     /// the bucket.
-    pub fn updateBucket(self: *Self, allocator: std.mem.Allocator, input: update_bucket.UpdateBucketInput, options: update_bucket.Options) !update_bucket.UpdateBucketOutput {
+    pub fn updateBucket(self: *Self, allocator: std.mem.Allocator, input: update_bucket.UpdateBucketInput, options: CallOptions) !update_bucket.UpdateBucketOutput {
         return update_bucket.execute(self, allocator, input, options);
     }
 
@@ -2007,14 +2008,14 @@ pub const Client = struct {
     /// that will provide the bucket with ample storage space and data transfer for
     /// a long time to
     /// come.
-    pub fn updateBucketBundle(self: *Self, allocator: std.mem.Allocator, input: update_bucket_bundle.UpdateBucketBundleInput, options: update_bucket_bundle.Options) !update_bucket_bundle.UpdateBucketBundleOutput {
+    pub fn updateBucketBundle(self: *Self, allocator: std.mem.Allocator, input: update_bucket_bundle.UpdateBucketBundleInput, options: CallOptions) !update_bucket_bundle.UpdateBucketBundleOutput {
         return update_bucket_bundle.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration of your Amazon Lightsail container service, such
     /// as its power,
     /// scale, and public domain names.
-    pub fn updateContainerService(self: *Self, allocator: std.mem.Allocator, input: update_container_service.UpdateContainerServiceInput, options: update_container_service.Options) !update_container_service.UpdateContainerServiceOutput {
+    pub fn updateContainerService(self: *Self, allocator: std.mem.Allocator, input: update_container_service.UpdateContainerServiceInput, options: CallOptions) !update_container_service.UpdateContainerServiceOutput {
         return update_container_service.execute(self, allocator, input, options);
     }
 
@@ -2022,7 +2023,7 @@ pub const Client = struct {
     /// distribution.
     ///
     /// Use this action to update the configuration of your existing distribution.
-    pub fn updateDistribution(self: *Self, allocator: std.mem.Allocator, input: update_distribution.UpdateDistributionInput, options: update_distribution.Options) !update_distribution.UpdateDistributionOutput {
+    pub fn updateDistribution(self: *Self, allocator: std.mem.Allocator, input: update_distribution.UpdateDistributionInput, options: CallOptions) !update_distribution.UpdateDistributionOutput {
         return update_distribution.execute(self, allocator, input, options);
     }
 
@@ -2043,7 +2044,7 @@ pub const Client = struct {
     /// `GetDistributions` action. The `ableToUpdateBundle` parameter in the
     /// result will indicate whether you can currently update your distribution's
     /// bundle.
-    pub fn updateDistributionBundle(self: *Self, allocator: std.mem.Allocator, input: update_distribution_bundle.UpdateDistributionBundleInput, options: update_distribution_bundle.Options) !update_distribution_bundle.UpdateDistributionBundleOutput {
+    pub fn updateDistributionBundle(self: *Self, allocator: std.mem.Allocator, input: update_distribution_bundle.UpdateDistributionBundleInput, options: CallOptions) !update_distribution_bundle.UpdateDistributionBundleOutput {
         return update_distribution_bundle.execute(self, allocator, input, options);
     }
 
@@ -2053,7 +2054,7 @@ pub const Client = struct {
     /// resource tags applied to the resource identified by `domain name`. For more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn updateDomainEntry(self: *Self, allocator: std.mem.Allocator, input: update_domain_entry.UpdateDomainEntryInput, options: update_domain_entry.Options) !update_domain_entry.UpdateDomainEntryOutput {
+    pub fn updateDomainEntry(self: *Self, allocator: std.mem.Allocator, input: update_domain_entry.UpdateDomainEntryInput, options: CallOptions) !update_domain_entry.UpdateDomainEntryOutput {
         return update_domain_entry.execute(self, allocator, input, options);
     }
 
@@ -2068,7 +2069,7 @@ pub const Client = struct {
     /// `GetInstances` API calls. For more information, see [Use IMDSv2 with an
     /// Amazon Lightsail
     /// instance](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-configuring-instance-metadata-service) in the *Amazon Lightsail Developer Guide*.
-    pub fn updateInstanceMetadataOptions(self: *Self, allocator: std.mem.Allocator, input: update_instance_metadata_options.UpdateInstanceMetadataOptionsInput, options: update_instance_metadata_options.Options) !update_instance_metadata_options.UpdateInstanceMetadataOptionsOutput {
+    pub fn updateInstanceMetadataOptions(self: *Self, allocator: std.mem.Allocator, input: update_instance_metadata_options.UpdateInstanceMetadataOptionsInput, options: CallOptions) !update_instance_metadata_options.UpdateInstanceMetadataOptionsOutput {
         return update_instance_metadata_options.execute(self, allocator, input, options);
     }
 
@@ -2081,7 +2082,7 @@ pub const Client = struct {
     /// balancer
     /// name`. For more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn updateLoadBalancerAttribute(self: *Self, allocator: std.mem.Allocator, input: update_load_balancer_attribute.UpdateLoadBalancerAttributeInput, options: update_load_balancer_attribute.Options) !update_load_balancer_attribute.UpdateLoadBalancerAttributeOutput {
+    pub fn updateLoadBalancerAttribute(self: *Self, allocator: std.mem.Allocator, input: update_load_balancer_attribute.UpdateLoadBalancerAttributeInput, options: CallOptions) !update_load_balancer_attribute.UpdateLoadBalancerAttributeOutput {
         return update_load_balancer_attribute.execute(self, allocator, input, options);
     }
 
@@ -2097,7 +2098,7 @@ pub const Client = struct {
     /// relationalDatabaseName. For more
     /// information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn updateRelationalDatabase(self: *Self, allocator: std.mem.Allocator, input: update_relational_database.UpdateRelationalDatabaseInput, options: update_relational_database.Options) !update_relational_database.UpdateRelationalDatabaseOutput {
+    pub fn updateRelationalDatabase(self: *Self, allocator: std.mem.Allocator, input: update_relational_database.UpdateRelationalDatabaseInput, options: CallOptions) !update_relational_database.UpdateRelationalDatabaseOutput {
         return update_relational_database.execute(self, allocator, input, options);
     }
 
@@ -2120,7 +2121,7 @@ pub const Client = struct {
     /// relationalDatabaseName. For
     /// more information, see the [Amazon Lightsail Developer
     /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
-    pub fn updateRelationalDatabaseParameters(self: *Self, allocator: std.mem.Allocator, input: update_relational_database_parameters.UpdateRelationalDatabaseParametersInput, options: update_relational_database_parameters.Options) !update_relational_database_parameters.UpdateRelationalDatabaseParametersOutput {
+    pub fn updateRelationalDatabaseParameters(self: *Self, allocator: std.mem.Allocator, input: update_relational_database_parameters.UpdateRelationalDatabaseParametersInput, options: CallOptions) !update_relational_database_parameters.UpdateRelationalDatabaseParametersOutput {
         return update_relational_database_parameters.execute(self, allocator, input, options);
     }
 };

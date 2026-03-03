@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DocumentVersionStatus = @import("document_version_status.zig").DocumentVersionStatus;
 
@@ -27,13 +28,9 @@ pub const UpdateDocumentVersionInput = struct {
     };
 };
 
-const UpdateDocumentVersionOutput = struct {};
+pub const UpdateDocumentVersionOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDocumentVersionInput, options: Options) !UpdateDocumentVersionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDocumentVersionInput, options: CallOptions) !UpdateDocumentVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

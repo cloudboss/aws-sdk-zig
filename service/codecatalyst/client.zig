@@ -39,6 +39,7 @@ const update_dev_environment = @import("update_dev_environment.zig");
 const update_project = @import("update_project.zig");
 const update_space = @import("update_space.zig");
 const verify_session = @import("verify_session.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -79,7 +80,7 @@ pub const Client = struct {
     /// user settings.For more information, see
     /// [Managing personal access tokens in Amazon
     /// CodeCatalyst](https://docs.aws.amazon.com/codecatalyst/latest/userguide/ipa-tokens-keys.html).
-    pub fn createAccessToken(self: *Self, allocator: std.mem.Allocator, input: create_access_token.CreateAccessTokenInput, options: create_access_token.Options) !create_access_token.CreateAccessTokenOutput {
+    pub fn createAccessToken(self: *Self, allocator: std.mem.Allocator, input: create_access_token.CreateAccessTokenInput, options: CallOptions) !create_access_token.CreateAccessTokenOutput {
         return create_access_token.execute(self, allocator, input, options);
     }
 
@@ -91,19 +92,19 @@ pub const Client = struct {
     /// Environment is configured to have a 2 core processor, 4GB of RAM, and 16GB
     /// of persistent storage. None of these
     /// defaults apply to a Dev Environment created programmatically.
-    pub fn createDevEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_dev_environment.CreateDevEnvironmentInput, options: create_dev_environment.Options) !create_dev_environment.CreateDevEnvironmentOutput {
+    pub fn createDevEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_dev_environment.CreateDevEnvironmentInput, options: CallOptions) !create_dev_environment.CreateDevEnvironmentOutput {
         return create_dev_environment.execute(self, allocator, input, options);
     }
 
     /// Creates a project in a specified space.
-    pub fn createProject(self: *Self, allocator: std.mem.Allocator, input: create_project.CreateProjectInput, options: create_project.Options) !create_project.CreateProjectOutput {
+    pub fn createProject(self: *Self, allocator: std.mem.Allocator, input: create_project.CreateProjectInput, options: CallOptions) !create_project.CreateProjectOutput {
         return create_project.execute(self, allocator, input, options);
     }
 
     /// Creates an empty Git-based source repository in a specified project. The
     /// repository is
     /// created with an initial empty commit with a default branch named `main`.
-    pub fn createSourceRepository(self: *Self, allocator: std.mem.Allocator, input: create_source_repository.CreateSourceRepositoryInput, options: create_source_repository.Options) !create_source_repository.CreateSourceRepositoryOutput {
+    pub fn createSourceRepository(self: *Self, allocator: std.mem.Allocator, input: create_source_repository.CreateSourceRepositoryInput, options: CallOptions) !create_source_repository.CreateSourceRepositoryOutput {
         return create_source_repository.execute(self, allocator, input, options);
     }
 
@@ -112,30 +113,30 @@ pub const Client = struct {
     /// This API only creates a branch in a source repository hosted in Amazon
     /// CodeCatalyst. You cannot use this API to create a branch in a linked
     /// repository.
-    pub fn createSourceRepositoryBranch(self: *Self, allocator: std.mem.Allocator, input: create_source_repository_branch.CreateSourceRepositoryBranchInput, options: create_source_repository_branch.Options) !create_source_repository_branch.CreateSourceRepositoryBranchOutput {
+    pub fn createSourceRepositoryBranch(self: *Self, allocator: std.mem.Allocator, input: create_source_repository_branch.CreateSourceRepositoryBranchInput, options: CallOptions) !create_source_repository_branch.CreateSourceRepositoryBranchOutput {
         return create_source_repository_branch.execute(self, allocator, input, options);
     }
 
     /// Deletes a specified personal access token (PAT). A personal access token can
     /// only be deleted by the user who created it.
-    pub fn deleteAccessToken(self: *Self, allocator: std.mem.Allocator, input: delete_access_token.DeleteAccessTokenInput, options: delete_access_token.Options) !delete_access_token.DeleteAccessTokenOutput {
+    pub fn deleteAccessToken(self: *Self, allocator: std.mem.Allocator, input: delete_access_token.DeleteAccessTokenInput, options: CallOptions) !delete_access_token.DeleteAccessTokenOutput {
         return delete_access_token.execute(self, allocator, input, options);
     }
 
     /// Deletes a Dev Environment.
-    pub fn deleteDevEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_dev_environment.DeleteDevEnvironmentInput, options: delete_dev_environment.Options) !delete_dev_environment.DeleteDevEnvironmentOutput {
+    pub fn deleteDevEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_dev_environment.DeleteDevEnvironmentInput, options: CallOptions) !delete_dev_environment.DeleteDevEnvironmentOutput {
         return delete_dev_environment.execute(self, allocator, input, options);
     }
 
     /// Deletes a project in a space.
-    pub fn deleteProject(self: *Self, allocator: std.mem.Allocator, input: delete_project.DeleteProjectInput, options: delete_project.Options) !delete_project.DeleteProjectOutput {
+    pub fn deleteProject(self: *Self, allocator: std.mem.Allocator, input: delete_project.DeleteProjectInput, options: CallOptions) !delete_project.DeleteProjectOutput {
         return delete_project.execute(self, allocator, input, options);
     }
 
     /// Deletes a source repository in Amazon CodeCatalyst. You cannot use this API
     /// to delete a linked repository. It can only be used to delete a Amazon
     /// CodeCatalyst source repository.
-    pub fn deleteSourceRepository(self: *Self, allocator: std.mem.Allocator, input: delete_source_repository.DeleteSourceRepositoryInput, options: delete_source_repository.Options) !delete_source_repository.DeleteSourceRepositoryOutput {
+    pub fn deleteSourceRepository(self: *Self, allocator: std.mem.Allocator, input: delete_source_repository.DeleteSourceRepositoryInput, options: CallOptions) !delete_source_repository.DeleteSourceRepositoryOutput {
         return delete_source_repository.execute(self, allocator, input, options);
     }
 
@@ -143,74 +144,74 @@ pub const Client = struct {
     ///
     /// Deleting a space cannot be undone. Additionally, since space names must be
     /// unique across Amazon CodeCatalyst, you cannot reuse names of deleted spaces.
-    pub fn deleteSpace(self: *Self, allocator: std.mem.Allocator, input: delete_space.DeleteSpaceInput, options: delete_space.Options) !delete_space.DeleteSpaceOutput {
+    pub fn deleteSpace(self: *Self, allocator: std.mem.Allocator, input: delete_space.DeleteSpaceInput, options: CallOptions) !delete_space.DeleteSpaceOutput {
         return delete_space.execute(self, allocator, input, options);
     }
 
     /// Returns information about a Dev Environment for a source repository in a
     /// project. Dev Environments are specific to the user who creates them.
-    pub fn getDevEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_dev_environment.GetDevEnvironmentInput, options: get_dev_environment.Options) !get_dev_environment.GetDevEnvironmentOutput {
+    pub fn getDevEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_dev_environment.GetDevEnvironmentInput, options: CallOptions) !get_dev_environment.GetDevEnvironmentOutput {
         return get_dev_environment.execute(self, allocator, input, options);
     }
 
     /// Returns information about a project.
-    pub fn getProject(self: *Self, allocator: std.mem.Allocator, input: get_project.GetProjectInput, options: get_project.Options) !get_project.GetProjectOutput {
+    pub fn getProject(self: *Self, allocator: std.mem.Allocator, input: get_project.GetProjectInput, options: CallOptions) !get_project.GetProjectOutput {
         return get_project.execute(self, allocator, input, options);
     }
 
     /// Returns information about a source repository.
-    pub fn getSourceRepository(self: *Self, allocator: std.mem.Allocator, input: get_source_repository.GetSourceRepositoryInput, options: get_source_repository.Options) !get_source_repository.GetSourceRepositoryOutput {
+    pub fn getSourceRepository(self: *Self, allocator: std.mem.Allocator, input: get_source_repository.GetSourceRepositoryInput, options: CallOptions) !get_source_repository.GetSourceRepositoryOutput {
         return get_source_repository.execute(self, allocator, input, options);
     }
 
     /// Returns information about the URLs that can be used with a Git client to
     /// clone a source
     /// repository.
-    pub fn getSourceRepositoryCloneUrls(self: *Self, allocator: std.mem.Allocator, input: get_source_repository_clone_urls.GetSourceRepositoryCloneUrlsInput, options: get_source_repository_clone_urls.Options) !get_source_repository_clone_urls.GetSourceRepositoryCloneUrlsOutput {
+    pub fn getSourceRepositoryCloneUrls(self: *Self, allocator: std.mem.Allocator, input: get_source_repository_clone_urls.GetSourceRepositoryCloneUrlsInput, options: CallOptions) !get_source_repository_clone_urls.GetSourceRepositoryCloneUrlsOutput {
         return get_source_repository_clone_urls.execute(self, allocator, input, options);
     }
 
     /// Returns information about an space.
-    pub fn getSpace(self: *Self, allocator: std.mem.Allocator, input: get_space.GetSpaceInput, options: get_space.Options) !get_space.GetSpaceOutput {
+    pub fn getSpace(self: *Self, allocator: std.mem.Allocator, input: get_space.GetSpaceInput, options: CallOptions) !get_space.GetSpaceOutput {
         return get_space.execute(self, allocator, input, options);
     }
 
     /// Returns information about the Amazon Web Services account used for billing
     /// purposes
     /// and the billing plan for the space.
-    pub fn getSubscription(self: *Self, allocator: std.mem.Allocator, input: get_subscription.GetSubscriptionInput, options: get_subscription.Options) !get_subscription.GetSubscriptionOutput {
+    pub fn getSubscription(self: *Self, allocator: std.mem.Allocator, input: get_subscription.GetSubscriptionInput, options: CallOptions) !get_subscription.GetSubscriptionOutput {
         return get_subscription.execute(self, allocator, input, options);
     }
 
     /// Returns information about a user.
-    pub fn getUserDetails(self: *Self, allocator: std.mem.Allocator, input: get_user_details.GetUserDetailsInput, options: get_user_details.Options) !get_user_details.GetUserDetailsOutput {
+    pub fn getUserDetails(self: *Self, allocator: std.mem.Allocator, input: get_user_details.GetUserDetailsInput, options: CallOptions) !get_user_details.GetUserDetailsOutput {
         return get_user_details.execute(self, allocator, input, options);
     }
 
     /// Returns information about a workflow.
-    pub fn getWorkflow(self: *Self, allocator: std.mem.Allocator, input: get_workflow.GetWorkflowInput, options: get_workflow.Options) !get_workflow.GetWorkflowOutput {
+    pub fn getWorkflow(self: *Self, allocator: std.mem.Allocator, input: get_workflow.GetWorkflowInput, options: CallOptions) !get_workflow.GetWorkflowOutput {
         return get_workflow.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specified run of a workflow.
-    pub fn getWorkflowRun(self: *Self, allocator: std.mem.Allocator, input: get_workflow_run.GetWorkflowRunInput, options: get_workflow_run.Options) !get_workflow_run.GetWorkflowRunOutput {
+    pub fn getWorkflowRun(self: *Self, allocator: std.mem.Allocator, input: get_workflow_run.GetWorkflowRunInput, options: CallOptions) !get_workflow_run.GetWorkflowRunOutput {
         return get_workflow_run.execute(self, allocator, input, options);
     }
 
     /// Lists all personal access tokens (PATs) associated with the user who calls
     /// the API. You can only list PATs associated with your Amazon Web Services
     /// Builder ID.
-    pub fn listAccessTokens(self: *Self, allocator: std.mem.Allocator, input: list_access_tokens.ListAccessTokensInput, options: list_access_tokens.Options) !list_access_tokens.ListAccessTokensOutput {
+    pub fn listAccessTokens(self: *Self, allocator: std.mem.Allocator, input: list_access_tokens.ListAccessTokensInput, options: CallOptions) !list_access_tokens.ListAccessTokensOutput {
         return list_access_tokens.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of active sessions for a Dev Environment in a project.
-    pub fn listDevEnvironmentSessions(self: *Self, allocator: std.mem.Allocator, input: list_dev_environment_sessions.ListDevEnvironmentSessionsInput, options: list_dev_environment_sessions.Options) !list_dev_environment_sessions.ListDevEnvironmentSessionsOutput {
+    pub fn listDevEnvironmentSessions(self: *Self, allocator: std.mem.Allocator, input: list_dev_environment_sessions.ListDevEnvironmentSessionsInput, options: CallOptions) !list_dev_environment_sessions.ListDevEnvironmentSessionsOutput {
         return list_dev_environment_sessions.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of Dev Environments in a project.
-    pub fn listDevEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_dev_environments.ListDevEnvironmentsInput, options: list_dev_environments.Options) !list_dev_environments.ListDevEnvironmentsOutput {
+    pub fn listDevEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_dev_environments.ListDevEnvironmentsInput, options: CallOptions) !list_dev_environments.ListDevEnvironmentsOutput {
         return list_dev_environments.execute(self, allocator, input, options);
     }
 
@@ -231,86 +232,86 @@ pub const Client = struct {
     /// History](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html) and [Working with
     /// CloudTrail
     /// trails](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-getting-started.html).
-    pub fn listEventLogs(self: *Self, allocator: std.mem.Allocator, input: list_event_logs.ListEventLogsInput, options: list_event_logs.Options) !list_event_logs.ListEventLogsOutput {
+    pub fn listEventLogs(self: *Self, allocator: std.mem.Allocator, input: list_event_logs.ListEventLogsInput, options: CallOptions) !list_event_logs.ListEventLogsOutput {
         return list_event_logs.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of projects.
-    pub fn listProjects(self: *Self, allocator: std.mem.Allocator, input: list_projects.ListProjectsInput, options: list_projects.Options) !list_projects.ListProjectsOutput {
+    pub fn listProjects(self: *Self, allocator: std.mem.Allocator, input: list_projects.ListProjectsInput, options: CallOptions) !list_projects.ListProjectsOutput {
         return list_projects.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of source repositories in a project.
-    pub fn listSourceRepositories(self: *Self, allocator: std.mem.Allocator, input: list_source_repositories.ListSourceRepositoriesInput, options: list_source_repositories.Options) !list_source_repositories.ListSourceRepositoriesOutput {
+    pub fn listSourceRepositories(self: *Self, allocator: std.mem.Allocator, input: list_source_repositories.ListSourceRepositoriesInput, options: CallOptions) !list_source_repositories.ListSourceRepositoriesOutput {
         return list_source_repositories.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of branches in a specified source repository.
-    pub fn listSourceRepositoryBranches(self: *Self, allocator: std.mem.Allocator, input: list_source_repository_branches.ListSourceRepositoryBranchesInput, options: list_source_repository_branches.Options) !list_source_repository_branches.ListSourceRepositoryBranchesOutput {
+    pub fn listSourceRepositoryBranches(self: *Self, allocator: std.mem.Allocator, input: list_source_repository_branches.ListSourceRepositoryBranchesInput, options: CallOptions) !list_source_repository_branches.ListSourceRepositoryBranchesOutput {
         return list_source_repository_branches.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of spaces.
-    pub fn listSpaces(self: *Self, allocator: std.mem.Allocator, input: list_spaces.ListSpacesInput, options: list_spaces.Options) !list_spaces.ListSpacesOutput {
+    pub fn listSpaces(self: *Self, allocator: std.mem.Allocator, input: list_spaces.ListSpacesInput, options: CallOptions) !list_spaces.ListSpacesOutput {
         return list_spaces.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of workflow runs of a specified workflow.
-    pub fn listWorkflowRuns(self: *Self, allocator: std.mem.Allocator, input: list_workflow_runs.ListWorkflowRunsInput, options: list_workflow_runs.Options) !list_workflow_runs.ListWorkflowRunsOutput {
+    pub fn listWorkflowRuns(self: *Self, allocator: std.mem.Allocator, input: list_workflow_runs.ListWorkflowRunsInput, options: CallOptions) !list_workflow_runs.ListWorkflowRunsOutput {
         return list_workflow_runs.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of workflows in a specified project.
-    pub fn listWorkflows(self: *Self, allocator: std.mem.Allocator, input: list_workflows.ListWorkflowsInput, options: list_workflows.Options) !list_workflows.ListWorkflowsOutput {
+    pub fn listWorkflows(self: *Self, allocator: std.mem.Allocator, input: list_workflows.ListWorkflowsInput, options: CallOptions) !list_workflows.ListWorkflowsOutput {
         return list_workflows.execute(self, allocator, input, options);
     }
 
     /// Starts a specified Dev Environment and puts it into an active state.
-    pub fn startDevEnvironment(self: *Self, allocator: std.mem.Allocator, input: start_dev_environment.StartDevEnvironmentInput, options: start_dev_environment.Options) !start_dev_environment.StartDevEnvironmentOutput {
+    pub fn startDevEnvironment(self: *Self, allocator: std.mem.Allocator, input: start_dev_environment.StartDevEnvironmentInput, options: CallOptions) !start_dev_environment.StartDevEnvironmentOutput {
         return start_dev_environment.execute(self, allocator, input, options);
     }
 
     /// Starts a session for a specified Dev Environment.
-    pub fn startDevEnvironmentSession(self: *Self, allocator: std.mem.Allocator, input: start_dev_environment_session.StartDevEnvironmentSessionInput, options: start_dev_environment_session.Options) !start_dev_environment_session.StartDevEnvironmentSessionOutput {
+    pub fn startDevEnvironmentSession(self: *Self, allocator: std.mem.Allocator, input: start_dev_environment_session.StartDevEnvironmentSessionInput, options: CallOptions) !start_dev_environment_session.StartDevEnvironmentSessionOutput {
         return start_dev_environment_session.execute(self, allocator, input, options);
     }
 
     /// Begins a run of a specified workflow.
-    pub fn startWorkflowRun(self: *Self, allocator: std.mem.Allocator, input: start_workflow_run.StartWorkflowRunInput, options: start_workflow_run.Options) !start_workflow_run.StartWorkflowRunOutput {
+    pub fn startWorkflowRun(self: *Self, allocator: std.mem.Allocator, input: start_workflow_run.StartWorkflowRunInput, options: CallOptions) !start_workflow_run.StartWorkflowRunOutput {
         return start_workflow_run.execute(self, allocator, input, options);
     }
 
     /// Pauses a specified Dev Environment and places it in a non-running state.
     /// Stopped Dev Environments do not consume compute minutes.
-    pub fn stopDevEnvironment(self: *Self, allocator: std.mem.Allocator, input: stop_dev_environment.StopDevEnvironmentInput, options: stop_dev_environment.Options) !stop_dev_environment.StopDevEnvironmentOutput {
+    pub fn stopDevEnvironment(self: *Self, allocator: std.mem.Allocator, input: stop_dev_environment.StopDevEnvironmentInput, options: CallOptions) !stop_dev_environment.StopDevEnvironmentOutput {
         return stop_dev_environment.execute(self, allocator, input, options);
     }
 
     /// Stops a session for a specified Dev Environment.
-    pub fn stopDevEnvironmentSession(self: *Self, allocator: std.mem.Allocator, input: stop_dev_environment_session.StopDevEnvironmentSessionInput, options: stop_dev_environment_session.Options) !stop_dev_environment_session.StopDevEnvironmentSessionOutput {
+    pub fn stopDevEnvironmentSession(self: *Self, allocator: std.mem.Allocator, input: stop_dev_environment_session.StopDevEnvironmentSessionInput, options: CallOptions) !stop_dev_environment_session.StopDevEnvironmentSessionOutput {
         return stop_dev_environment_session.execute(self, allocator, input, options);
     }
 
     /// Changes one or more values for a Dev Environment. Updating certain values of
     /// the Dev Environment will cause a restart.
-    pub fn updateDevEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_dev_environment.UpdateDevEnvironmentInput, options: update_dev_environment.Options) !update_dev_environment.UpdateDevEnvironmentOutput {
+    pub fn updateDevEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_dev_environment.UpdateDevEnvironmentInput, options: CallOptions) !update_dev_environment.UpdateDevEnvironmentOutput {
         return update_dev_environment.execute(self, allocator, input, options);
     }
 
     /// Changes one or more values for a project.
-    pub fn updateProject(self: *Self, allocator: std.mem.Allocator, input: update_project.UpdateProjectInput, options: update_project.Options) !update_project.UpdateProjectOutput {
+    pub fn updateProject(self: *Self, allocator: std.mem.Allocator, input: update_project.UpdateProjectInput, options: CallOptions) !update_project.UpdateProjectOutput {
         return update_project.execute(self, allocator, input, options);
     }
 
     /// Changes one or more values for a space.
-    pub fn updateSpace(self: *Self, allocator: std.mem.Allocator, input: update_space.UpdateSpaceInput, options: update_space.Options) !update_space.UpdateSpaceOutput {
+    pub fn updateSpace(self: *Self, allocator: std.mem.Allocator, input: update_space.UpdateSpaceInput, options: CallOptions) !update_space.UpdateSpaceOutput {
         return update_space.execute(self, allocator, input, options);
     }
 
     /// Verifies whether the calling user has a valid Amazon CodeCatalyst login and
     /// session. If successful, this returns the ID of the user in Amazon
     /// CodeCatalyst.
-    pub fn verifySession(self: *Self, allocator: std.mem.Allocator, input: verify_session.VerifySessionInput, options: verify_session.Options) !verify_session.VerifySessionOutput {
+    pub fn verifySession(self: *Self, allocator: std.mem.Allocator, input: verify_session.VerifySessionInput, options: CallOptions) !verify_session.VerifySessionOutput {
         return verify_session.execute(self, allocator, input, options);
     }
 

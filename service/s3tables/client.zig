@@ -50,6 +50,7 @@ const rename_table = @import("rename_table.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_table_metadata_location = @import("update_table_metadata_location.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -89,7 +90,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:CreateNamespace` permission to use this
     /// operation.
-    pub fn createNamespace(self: *Self, allocator: std.mem.Allocator, input: create_namespace.CreateNamespaceInput, options: create_namespace.Options) !create_namespace.CreateNamespaceOutput {
+    pub fn createNamespace(self: *Self, allocator: std.mem.Allocator, input: create_namespace.CreateNamespaceInput, options: CallOptions) !create_namespace.CreateNamespaceOutput {
         return create_namespace.execute(self, allocator, input, options);
     }
 
@@ -114,7 +115,7 @@ pub const Client = struct {
     /// maintenance principal access to your KMS key. For more information, see
     /// [Permissions requirements for S3 Tables SSE-KMS
     /// encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html).
-    pub fn createTable(self: *Self, allocator: std.mem.Allocator, input: create_table.CreateTableInput, options: create_table.Options) !create_table.CreateTableOutput {
+    pub fn createTable(self: *Self, allocator: std.mem.Allocator, input: create_table.CreateTableInput, options: CallOptions) !create_table.CreateTableOutput {
         return create_table.execute(self, allocator, input, options);
     }
 
@@ -134,7 +135,7 @@ pub const Client = struct {
     /// * To create a table bucket with tags, you must have the
     ///   `s3tables:TagResource` permission in addition to
     ///   `s3tables:CreateTableBucket` permission.
-    pub fn createTableBucket(self: *Self, allocator: std.mem.Allocator, input: create_table_bucket.CreateTableBucketInput, options: create_table_bucket.Options) !create_table_bucket.CreateTableBucketOutput {
+    pub fn createTableBucket(self: *Self, allocator: std.mem.Allocator, input: create_table_bucket.CreateTableBucketInput, options: CallOptions) !create_table_bucket.CreateTableBucketOutput {
         return create_table_bucket.execute(self, allocator, input, options);
     }
 
@@ -145,7 +146,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:DeleteNamespace` permission to use this
     /// operation.
-    pub fn deleteNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_namespace.DeleteNamespaceInput, options: delete_namespace.Options) !delete_namespace.DeleteNamespaceOutput {
+    pub fn deleteNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_namespace.DeleteNamespaceInput, options: CallOptions) !delete_namespace.DeleteNamespaceOutput {
         return delete_namespace.execute(self, allocator, input, options);
     }
 
@@ -155,7 +156,7 @@ pub const Client = struct {
     /// **Permissions**
     ///
     /// You must have the `s3tables:DeleteTable` permission to use this operation.
-    pub fn deleteTable(self: *Self, allocator: std.mem.Allocator, input: delete_table.DeleteTableInput, options: delete_table.Options) !delete_table.DeleteTableOutput {
+    pub fn deleteTable(self: *Self, allocator: std.mem.Allocator, input: delete_table.DeleteTableInput, options: CallOptions) !delete_table.DeleteTableOutput {
         return delete_table.execute(self, allocator, input, options);
     }
 
@@ -166,7 +167,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:DeleteTableBucket` permission to use this
     /// operation.
-    pub fn deleteTableBucket(self: *Self, allocator: std.mem.Allocator, input: delete_table_bucket.DeleteTableBucketInput, options: delete_table_bucket.Options) !delete_table_bucket.DeleteTableBucketOutput {
+    pub fn deleteTableBucket(self: *Self, allocator: std.mem.Allocator, input: delete_table_bucket.DeleteTableBucketInput, options: CallOptions) !delete_table_bucket.DeleteTableBucketOutput {
         return delete_table_bucket.execute(self, allocator, input, options);
     }
 
@@ -176,7 +177,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:DeleteTableBucketEncryption` permission to use
     /// this operation.
-    pub fn deleteTableBucketEncryption(self: *Self, allocator: std.mem.Allocator, input: delete_table_bucket_encryption.DeleteTableBucketEncryptionInput, options: delete_table_bucket_encryption.Options) !delete_table_bucket_encryption.DeleteTableBucketEncryptionOutput {
+    pub fn deleteTableBucketEncryption(self: *Self, allocator: std.mem.Allocator, input: delete_table_bucket_encryption.DeleteTableBucketEncryptionInput, options: CallOptions) !delete_table_bucket_encryption.DeleteTableBucketEncryptionOutput {
         return delete_table_bucket_encryption.execute(self, allocator, input, options);
     }
 
@@ -186,7 +187,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:DeleteTableBucketMetricsConfiguration`
     /// permission to use this operation.
-    pub fn deleteTableBucketMetricsConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_table_bucket_metrics_configuration.DeleteTableBucketMetricsConfigurationInput, options: delete_table_bucket_metrics_configuration.Options) !delete_table_bucket_metrics_configuration.DeleteTableBucketMetricsConfigurationOutput {
+    pub fn deleteTableBucketMetricsConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_table_bucket_metrics_configuration.DeleteTableBucketMetricsConfigurationInput, options: CallOptions) !delete_table_bucket_metrics_configuration.DeleteTableBucketMetricsConfigurationOutput {
         return delete_table_bucket_metrics_configuration.execute(self, allocator, input, options);
     }
 
@@ -198,7 +199,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:DeleteTableBucketPolicy` permission to use this
     /// operation.
-    pub fn deleteTableBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_table_bucket_policy.DeleteTableBucketPolicyInput, options: delete_table_bucket_policy.Options) !delete_table_bucket_policy.DeleteTableBucketPolicyOutput {
+    pub fn deleteTableBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_table_bucket_policy.DeleteTableBucketPolicyInput, options: CallOptions) !delete_table_bucket_policy.DeleteTableBucketPolicyOutput {
         return delete_table_bucket_policy.execute(self, allocator, input, options);
     }
 
@@ -210,7 +211,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:DeleteTableBucketReplication` permission to use
     /// this operation.
-    pub fn deleteTableBucketReplication(self: *Self, allocator: std.mem.Allocator, input: delete_table_bucket_replication.DeleteTableBucketReplicationInput, options: delete_table_bucket_replication.Options) !delete_table_bucket_replication.DeleteTableBucketReplicationOutput {
+    pub fn deleteTableBucketReplication(self: *Self, allocator: std.mem.Allocator, input: delete_table_bucket_replication.DeleteTableBucketReplicationInput, options: CallOptions) !delete_table_bucket_replication.DeleteTableBucketReplicationOutput {
         return delete_table_bucket_replication.execute(self, allocator, input, options);
     }
 
@@ -221,7 +222,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:DeleteTablePolicy` permission to use this
     /// operation.
-    pub fn deleteTablePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_table_policy.DeleteTablePolicyInput, options: delete_table_policy.Options) !delete_table_policy.DeleteTablePolicyOutput {
+    pub fn deleteTablePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_table_policy.DeleteTablePolicyInput, options: CallOptions) !delete_table_policy.DeleteTablePolicyOutput {
         return delete_table_policy.execute(self, allocator, input, options);
     }
 
@@ -234,7 +235,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:DeleteTableReplication` permission to use this
     /// operation.
-    pub fn deleteTableReplication(self: *Self, allocator: std.mem.Allocator, input: delete_table_replication.DeleteTableReplicationInput, options: delete_table_replication.Options) !delete_table_replication.DeleteTableReplicationOutput {
+    pub fn deleteTableReplication(self: *Self, allocator: std.mem.Allocator, input: delete_table_replication.DeleteTableReplicationInput, options: CallOptions) !delete_table_replication.DeleteTableReplicationOutput {
         return delete_table_replication.execute(self, allocator, input, options);
     }
 
@@ -244,7 +245,7 @@ pub const Client = struct {
     /// **Permissions**
     ///
     /// You must have the `s3tables:GetNamespace` permission to use this operation.
-    pub fn getNamespace(self: *Self, allocator: std.mem.Allocator, input: get_namespace.GetNamespaceInput, options: get_namespace.Options) !get_namespace.GetNamespaceOutput {
+    pub fn getNamespace(self: *Self, allocator: std.mem.Allocator, input: get_namespace.GetNamespaceInput, options: CallOptions) !get_namespace.GetNamespaceOutput {
         return get_namespace.execute(self, allocator, input, options);
     }
 
@@ -254,7 +255,7 @@ pub const Client = struct {
     /// **Permissions**
     ///
     /// You must have the `s3tables:GetTable` permission to use this operation.
-    pub fn getTable(self: *Self, allocator: std.mem.Allocator, input: get_table.GetTableInput, options: get_table.Options) !get_table.GetTableOutput {
+    pub fn getTable(self: *Self, allocator: std.mem.Allocator, input: get_table.GetTableInput, options: CallOptions) !get_table.GetTableOutput {
         return get_table.execute(self, allocator, input, options);
     }
 
@@ -266,7 +267,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableBucket` permission to use this
     /// operation.
-    pub fn getTableBucket(self: *Self, allocator: std.mem.Allocator, input: get_table_bucket.GetTableBucketInput, options: get_table_bucket.Options) !get_table_bucket.GetTableBucketOutput {
+    pub fn getTableBucket(self: *Self, allocator: std.mem.Allocator, input: get_table_bucket.GetTableBucketInput, options: CallOptions) !get_table_bucket.GetTableBucketOutput {
         return get_table_bucket.execute(self, allocator, input, options);
     }
 
@@ -276,7 +277,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableBucketEncryption` permission to use this
     /// operation.
-    pub fn getTableBucketEncryption(self: *Self, allocator: std.mem.Allocator, input: get_table_bucket_encryption.GetTableBucketEncryptionInput, options: get_table_bucket_encryption.Options) !get_table_bucket_encryption.GetTableBucketEncryptionOutput {
+    pub fn getTableBucketEncryption(self: *Self, allocator: std.mem.Allocator, input: get_table_bucket_encryption.GetTableBucketEncryptionInput, options: CallOptions) !get_table_bucket_encryption.GetTableBucketEncryptionOutput {
         return get_table_bucket_encryption.execute(self, allocator, input, options);
     }
 
@@ -288,7 +289,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableBucketMaintenanceConfiguration`
     /// permission to use this operation.
-    pub fn getTableBucketMaintenanceConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_table_bucket_maintenance_configuration.GetTableBucketMaintenanceConfigurationInput, options: get_table_bucket_maintenance_configuration.Options) !get_table_bucket_maintenance_configuration.GetTableBucketMaintenanceConfigurationOutput {
+    pub fn getTableBucketMaintenanceConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_table_bucket_maintenance_configuration.GetTableBucketMaintenanceConfigurationInput, options: CallOptions) !get_table_bucket_maintenance_configuration.GetTableBucketMaintenanceConfigurationOutput {
         return get_table_bucket_maintenance_configuration.execute(self, allocator, input, options);
     }
 
@@ -298,7 +299,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableBucketMetricsConfiguration` permission
     /// to use this operation.
-    pub fn getTableBucketMetricsConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_table_bucket_metrics_configuration.GetTableBucketMetricsConfigurationInput, options: get_table_bucket_metrics_configuration.Options) !get_table_bucket_metrics_configuration.GetTableBucketMetricsConfigurationOutput {
+    pub fn getTableBucketMetricsConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_table_bucket_metrics_configuration.GetTableBucketMetricsConfigurationInput, options: CallOptions) !get_table_bucket_metrics_configuration.GetTableBucketMetricsConfigurationOutput {
         return get_table_bucket_metrics_configuration.execute(self, allocator, input, options);
     }
 
@@ -310,7 +311,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableBucketPolicy` permission to use this
     /// operation.
-    pub fn getTableBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: get_table_bucket_policy.GetTableBucketPolicyInput, options: get_table_bucket_policy.Options) !get_table_bucket_policy.GetTableBucketPolicyOutput {
+    pub fn getTableBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: get_table_bucket_policy.GetTableBucketPolicyInput, options: CallOptions) !get_table_bucket_policy.GetTableBucketPolicyOutput {
         return get_table_bucket_policy.execute(self, allocator, input, options);
     }
 
@@ -322,7 +323,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableBucketReplication` permission to use
     /// this operation.
-    pub fn getTableBucketReplication(self: *Self, allocator: std.mem.Allocator, input: get_table_bucket_replication.GetTableBucketReplicationInput, options: get_table_bucket_replication.Options) !get_table_bucket_replication.GetTableBucketReplicationOutput {
+    pub fn getTableBucketReplication(self: *Self, allocator: std.mem.Allocator, input: get_table_bucket_replication.GetTableBucketReplicationInput, options: CallOptions) !get_table_bucket_replication.GetTableBucketReplicationOutput {
         return get_table_bucket_replication.execute(self, allocator, input, options);
     }
 
@@ -334,7 +335,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableBucketStorageClass` permission to use
     /// this operation.
-    pub fn getTableBucketStorageClass(self: *Self, allocator: std.mem.Allocator, input: get_table_bucket_storage_class.GetTableBucketStorageClassInput, options: get_table_bucket_storage_class.Options) !get_table_bucket_storage_class.GetTableBucketStorageClassOutput {
+    pub fn getTableBucketStorageClass(self: *Self, allocator: std.mem.Allocator, input: get_table_bucket_storage_class.GetTableBucketStorageClassInput, options: CallOptions) !get_table_bucket_storage_class.GetTableBucketStorageClassOutput {
         return get_table_bucket_storage_class.execute(self, allocator, input, options);
     }
 
@@ -344,7 +345,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableEncryption` permission to use this
     /// operation.
-    pub fn getTableEncryption(self: *Self, allocator: std.mem.Allocator, input: get_table_encryption.GetTableEncryptionInput, options: get_table_encryption.Options) !get_table_encryption.GetTableEncryptionOutput {
+    pub fn getTableEncryption(self: *Self, allocator: std.mem.Allocator, input: get_table_encryption.GetTableEncryptionInput, options: CallOptions) !get_table_encryption.GetTableEncryptionOutput {
         return get_table_encryption.execute(self, allocator, input, options);
     }
 
@@ -358,7 +359,7 @@ pub const Client = struct {
     ///   to use this operation.
     /// * You must have the `s3tables:GetTableData` permission to use set the
     ///   compaction strategy to `sort` or `zorder`.
-    pub fn getTableMaintenanceConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_table_maintenance_configuration.GetTableMaintenanceConfigurationInput, options: get_table_maintenance_configuration.Options) !get_table_maintenance_configuration.GetTableMaintenanceConfigurationOutput {
+    pub fn getTableMaintenanceConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_table_maintenance_configuration.GetTableMaintenanceConfigurationInput, options: CallOptions) !get_table_maintenance_configuration.GetTableMaintenanceConfigurationOutput {
         return get_table_maintenance_configuration.execute(self, allocator, input, options);
     }
 
@@ -370,7 +371,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableMaintenanceJobStatus` permission to use
     /// this operation.
-    pub fn getTableMaintenanceJobStatus(self: *Self, allocator: std.mem.Allocator, input: get_table_maintenance_job_status.GetTableMaintenanceJobStatusInput, options: get_table_maintenance_job_status.Options) !get_table_maintenance_job_status.GetTableMaintenanceJobStatusOutput {
+    pub fn getTableMaintenanceJobStatus(self: *Self, allocator: std.mem.Allocator, input: get_table_maintenance_job_status.GetTableMaintenanceJobStatusInput, options: CallOptions) !get_table_maintenance_job_status.GetTableMaintenanceJobStatusOutput {
         return get_table_maintenance_job_status.execute(self, allocator, input, options);
     }
 
@@ -380,7 +381,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableMetadataLocation` permission to use this
     /// operation.
-    pub fn getTableMetadataLocation(self: *Self, allocator: std.mem.Allocator, input: get_table_metadata_location.GetTableMetadataLocationInput, options: get_table_metadata_location.Options) !get_table_metadata_location.GetTableMetadataLocationOutput {
+    pub fn getTableMetadataLocation(self: *Self, allocator: std.mem.Allocator, input: get_table_metadata_location.GetTableMetadataLocationInput, options: CallOptions) !get_table_metadata_location.GetTableMetadataLocationOutput {
         return get_table_metadata_location.execute(self, allocator, input, options);
     }
 
@@ -392,7 +393,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTablePolicy` permission to use this
     /// operation.
-    pub fn getTablePolicy(self: *Self, allocator: std.mem.Allocator, input: get_table_policy.GetTablePolicyInput, options: get_table_policy.Options) !get_table_policy.GetTablePolicyOutput {
+    pub fn getTablePolicy(self: *Self, allocator: std.mem.Allocator, input: get_table_policy.GetTablePolicyInput, options: CallOptions) !get_table_policy.GetTablePolicyOutput {
         return get_table_policy.execute(self, allocator, input, options);
     }
 
@@ -405,7 +406,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableRecordExpirationConfiguration`
     /// permission to use this operation.
-    pub fn getTableRecordExpirationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_table_record_expiration_configuration.GetTableRecordExpirationConfigurationInput, options: get_table_record_expiration_configuration.Options) !get_table_record_expiration_configuration.GetTableRecordExpirationConfigurationOutput {
+    pub fn getTableRecordExpirationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_table_record_expiration_configuration.GetTableRecordExpirationConfigurationInput, options: CallOptions) !get_table_record_expiration_configuration.GetTableRecordExpirationConfigurationOutput {
         return get_table_record_expiration_configuration.execute(self, allocator, input, options);
     }
 
@@ -418,7 +419,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableRecordExpirationJobStatus` permission to
     /// use this operation.
-    pub fn getTableRecordExpirationJobStatus(self: *Self, allocator: std.mem.Allocator, input: get_table_record_expiration_job_status.GetTableRecordExpirationJobStatusInput, options: get_table_record_expiration_job_status.Options) !get_table_record_expiration_job_status.GetTableRecordExpirationJobStatusOutput {
+    pub fn getTableRecordExpirationJobStatus(self: *Self, allocator: std.mem.Allocator, input: get_table_record_expiration_job_status.GetTableRecordExpirationJobStatusInput, options: CallOptions) !get_table_record_expiration_job_status.GetTableRecordExpirationJobStatusOutput {
         return get_table_record_expiration_job_status.execute(self, allocator, input, options);
     }
 
@@ -428,7 +429,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableReplication` permission to use this
     /// operation.
-    pub fn getTableReplication(self: *Self, allocator: std.mem.Allocator, input: get_table_replication.GetTableReplicationInput, options: get_table_replication.Options) !get_table_replication.GetTableReplicationOutput {
+    pub fn getTableReplication(self: *Self, allocator: std.mem.Allocator, input: get_table_replication.GetTableReplicationInput, options: CallOptions) !get_table_replication.GetTableReplicationOutput {
         return get_table_replication.execute(self, allocator, input, options);
     }
 
@@ -440,7 +441,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableReplicationStatus` permission to use
     /// this operation.
-    pub fn getTableReplicationStatus(self: *Self, allocator: std.mem.Allocator, input: get_table_replication_status.GetTableReplicationStatusInput, options: get_table_replication_status.Options) !get_table_replication_status.GetTableReplicationStatusOutput {
+    pub fn getTableReplicationStatus(self: *Self, allocator: std.mem.Allocator, input: get_table_replication_status.GetTableReplicationStatusInput, options: CallOptions) !get_table_replication_status.GetTableReplicationStatusOutput {
         return get_table_replication_status.execute(self, allocator, input, options);
     }
 
@@ -452,7 +453,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:GetTableStorageClass` permission to use this
     /// operation.
-    pub fn getTableStorageClass(self: *Self, allocator: std.mem.Allocator, input: get_table_storage_class.GetTableStorageClassInput, options: get_table_storage_class.Options) !get_table_storage_class.GetTableStorageClassOutput {
+    pub fn getTableStorageClass(self: *Self, allocator: std.mem.Allocator, input: get_table_storage_class.GetTableStorageClassInput, options: CallOptions) !get_table_storage_class.GetTableStorageClassOutput {
         return get_table_storage_class.execute(self, allocator, input, options);
     }
 
@@ -463,7 +464,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:ListNamespaces` permission to use this
     /// operation.
-    pub fn listNamespaces(self: *Self, allocator: std.mem.Allocator, input: list_namespaces.ListNamespacesInput, options: list_namespaces.Options) !list_namespaces.ListNamespacesOutput {
+    pub fn listNamespaces(self: *Self, allocator: std.mem.Allocator, input: list_namespaces.ListNamespacesInput, options: CallOptions) !list_namespaces.ListNamespacesOutput {
         return list_namespaces.execute(self, allocator, input, options);
     }
 
@@ -474,7 +475,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:ListTableBuckets` permission to use this
     /// operation.
-    pub fn listTableBuckets(self: *Self, allocator: std.mem.Allocator, input: list_table_buckets.ListTableBucketsInput, options: list_table_buckets.Options) !list_table_buckets.ListTableBucketsOutput {
+    pub fn listTableBuckets(self: *Self, allocator: std.mem.Allocator, input: list_table_buckets.ListTableBucketsInput, options: CallOptions) !list_table_buckets.ListTableBucketsOutput {
         return list_table_buckets.execute(self, allocator, input, options);
     }
 
@@ -484,7 +485,7 @@ pub const Client = struct {
     /// **Permissions**
     ///
     /// You must have the `s3tables:ListTables` permission to use this operation.
-    pub fn listTables(self: *Self, allocator: std.mem.Allocator, input: list_tables.ListTablesInput, options: list_tables.Options) !list_tables.ListTablesOutput {
+    pub fn listTables(self: *Self, allocator: std.mem.Allocator, input: list_tables.ListTablesInput, options: CallOptions) !list_tables.ListTablesOutput {
         return list_tables.execute(self, allocator, input, options);
     }
 
@@ -500,7 +501,7 @@ pub const Client = struct {
     ///
     /// For tables and table buckets, you must have the
     /// `s3tables:ListTagsForResource` permission to use this operation.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -515,7 +516,7 @@ pub const Client = struct {
     /// principal access to your KMS key. For more information, see [Permissions
     /// requirements for S3 Tables SSE-KMS
     /// encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html) in the *Amazon Simple Storage Service User Guide*.
-    pub fn putTableBucketEncryption(self: *Self, allocator: std.mem.Allocator, input: put_table_bucket_encryption.PutTableBucketEncryptionInput, options: put_table_bucket_encryption.Options) !put_table_bucket_encryption.PutTableBucketEncryptionOutput {
+    pub fn putTableBucketEncryption(self: *Self, allocator: std.mem.Allocator, input: put_table_bucket_encryption.PutTableBucketEncryptionInput, options: CallOptions) !put_table_bucket_encryption.PutTableBucketEncryptionOutput {
         return put_table_bucket_encryption.execute(self, allocator, input, options);
     }
 
@@ -528,7 +529,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:PutTableBucketMaintenanceConfiguration`
     /// permission to use this operation.
-    pub fn putTableBucketMaintenanceConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_table_bucket_maintenance_configuration.PutTableBucketMaintenanceConfigurationInput, options: put_table_bucket_maintenance_configuration.Options) !put_table_bucket_maintenance_configuration.PutTableBucketMaintenanceConfigurationOutput {
+    pub fn putTableBucketMaintenanceConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_table_bucket_maintenance_configuration.PutTableBucketMaintenanceConfigurationInput, options: CallOptions) !put_table_bucket_maintenance_configuration.PutTableBucketMaintenanceConfigurationOutput {
         return put_table_bucket_maintenance_configuration.execute(self, allocator, input, options);
     }
 
@@ -538,7 +539,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:PutTableBucketMetricsConfiguration` permission
     /// to use this operation.
-    pub fn putTableBucketMetricsConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_table_bucket_metrics_configuration.PutTableBucketMetricsConfigurationInput, options: put_table_bucket_metrics_configuration.Options) !put_table_bucket_metrics_configuration.PutTableBucketMetricsConfigurationOutput {
+    pub fn putTableBucketMetricsConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_table_bucket_metrics_configuration.PutTableBucketMetricsConfigurationInput, options: CallOptions) !put_table_bucket_metrics_configuration.PutTableBucketMetricsConfigurationOutput {
         return put_table_bucket_metrics_configuration.execute(self, allocator, input, options);
     }
 
@@ -550,7 +551,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:PutTableBucketPolicy` permission to use this
     /// operation.
-    pub fn putTableBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: put_table_bucket_policy.PutTableBucketPolicyInput, options: put_table_bucket_policy.Options) !put_table_bucket_policy.PutTableBucketPolicyOutput {
+    pub fn putTableBucketPolicy(self: *Self, allocator: std.mem.Allocator, input: put_table_bucket_policy.PutTableBucketPolicyInput, options: CallOptions) !put_table_bucket_policy.PutTableBucketPolicyOutput {
         return put_table_bucket_policy.execute(self, allocator, input, options);
     }
 
@@ -577,7 +578,7 @@ pub const Client = struct {
     ///
     /// * You must have `iam:PassRole` permission with condition allowing roles to
     ///   be passed to `replication.s3tables.amazonaws.com`.
-    pub fn putTableBucketReplication(self: *Self, allocator: std.mem.Allocator, input: put_table_bucket_replication.PutTableBucketReplicationInput, options: put_table_bucket_replication.Options) !put_table_bucket_replication.PutTableBucketReplicationOutput {
+    pub fn putTableBucketReplication(self: *Self, allocator: std.mem.Allocator, input: put_table_bucket_replication.PutTableBucketReplicationInput, options: CallOptions) !put_table_bucket_replication.PutTableBucketReplicationOutput {
         return put_table_bucket_replication.execute(self, allocator, input, options);
     }
 
@@ -589,7 +590,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:PutTableBucketStorageClass` permission to use
     /// this operation.
-    pub fn putTableBucketStorageClass(self: *Self, allocator: std.mem.Allocator, input: put_table_bucket_storage_class.PutTableBucketStorageClassInput, options: put_table_bucket_storage_class.Options) !put_table_bucket_storage_class.PutTableBucketStorageClassOutput {
+    pub fn putTableBucketStorageClass(self: *Self, allocator: std.mem.Allocator, input: put_table_bucket_storage_class.PutTableBucketStorageClassInput, options: CallOptions) !put_table_bucket_storage_class.PutTableBucketStorageClassOutput {
         return put_table_bucket_storage_class.execute(self, allocator, input, options);
     }
 
@@ -601,7 +602,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:PutTableMaintenanceConfiguration` permission to
     /// use this operation.
-    pub fn putTableMaintenanceConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_table_maintenance_configuration.PutTableMaintenanceConfigurationInput, options: put_table_maintenance_configuration.Options) !put_table_maintenance_configuration.PutTableMaintenanceConfigurationOutput {
+    pub fn putTableMaintenanceConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_table_maintenance_configuration.PutTableMaintenanceConfigurationInput, options: CallOptions) !put_table_maintenance_configuration.PutTableMaintenanceConfigurationOutput {
         return put_table_maintenance_configuration.execute(self, allocator, input, options);
     }
 
@@ -613,7 +614,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:PutTablePolicy` permission to use this
     /// operation.
-    pub fn putTablePolicy(self: *Self, allocator: std.mem.Allocator, input: put_table_policy.PutTablePolicyInput, options: put_table_policy.Options) !put_table_policy.PutTablePolicyOutput {
+    pub fn putTablePolicy(self: *Self, allocator: std.mem.Allocator, input: put_table_policy.PutTablePolicyInput, options: CallOptions) !put_table_policy.PutTablePolicyOutput {
         return put_table_policy.execute(self, allocator, input, options);
     }
 
@@ -626,7 +627,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:PutTableRecordExpirationConfiguration`
     /// permission to use this operation.
-    pub fn putTableRecordExpirationConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_table_record_expiration_configuration.PutTableRecordExpirationConfigurationInput, options: put_table_record_expiration_configuration.Options) !put_table_record_expiration_configuration.PutTableRecordExpirationConfigurationOutput {
+    pub fn putTableRecordExpirationConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_table_record_expiration_configuration.PutTableRecordExpirationConfigurationInput, options: CallOptions) !put_table_record_expiration_configuration.PutTableRecordExpirationConfigurationOutput {
         return put_table_record_expiration_configuration.execute(self, allocator, input, options);
     }
 
@@ -651,7 +652,7 @@ pub const Client = struct {
     ///
     /// * You must have `iam:PassRole` permission with condition allowing roles to
     ///   be passed to `replication.s3tables.amazonaws.com`.
-    pub fn putTableReplication(self: *Self, allocator: std.mem.Allocator, input: put_table_replication.PutTableReplicationInput, options: put_table_replication.Options) !put_table_replication.PutTableReplicationOutput {
+    pub fn putTableReplication(self: *Self, allocator: std.mem.Allocator, input: put_table_replication.PutTableReplicationInput, options: CallOptions) !put_table_replication.PutTableReplicationOutput {
         return put_table_replication.execute(self, allocator, input, options);
     }
 
@@ -661,7 +662,7 @@ pub const Client = struct {
     /// **Permissions**
     ///
     /// You must have the `s3tables:RenameTable` permission to use this operation.
-    pub fn renameTable(self: *Self, allocator: std.mem.Allocator, input: rename_table.RenameTableInput, options: rename_table.Options) !rename_table.RenameTableOutput {
+    pub fn renameTable(self: *Self, allocator: std.mem.Allocator, input: rename_table.RenameTableInput, options: CallOptions) !rename_table.RenameTableOutput {
         return rename_table.execute(self, allocator, input, options);
     }
 
@@ -678,7 +679,7 @@ pub const Client = struct {
     ///
     /// For tables and table buckets, you must have the `s3tables:TagResource`
     /// permission to use this operation.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -693,7 +694,7 @@ pub const Client = struct {
     ///
     /// For tables and table buckets, you must have the `s3tables:UntagResource`
     /// permission to use this operation.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -707,7 +708,7 @@ pub const Client = struct {
     ///
     /// You must have the `s3tables:UpdateTableMetadataLocation` permission to use
     /// this operation.
-    pub fn updateTableMetadataLocation(self: *Self, allocator: std.mem.Allocator, input: update_table_metadata_location.UpdateTableMetadataLocationInput, options: update_table_metadata_location.Options) !update_table_metadata_location.UpdateTableMetadataLocationOutput {
+    pub fn updateTableMetadataLocation(self: *Self, allocator: std.mem.Allocator, input: update_table_metadata_location.UpdateTableMetadataLocationInput, options: CallOptions) !update_table_metadata_location.UpdateTableMetadataLocationOutput {
         return update_table_metadata_location.execute(self, allocator, input, options);
     }
 

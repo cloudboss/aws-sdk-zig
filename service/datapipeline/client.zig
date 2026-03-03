@@ -20,6 +20,7 @@ const report_task_runner_heartbeat = @import("report_task_runner_heartbeat.zig")
 const set_status = @import("set_status.zig");
 const set_task_status = @import("set_task_status.zig");
 const validate_pipeline_definition = @import("validate_pipeline_definition.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -78,12 +79,12 @@ pub const Client = struct {
     /// Date: Mon, 12 Nov 2012 17:50:53 GMT
     ///
     /// {}
-    pub fn activatePipeline(self: *Self, allocator: std.mem.Allocator, input: activate_pipeline.ActivatePipelineInput, options: activate_pipeline.Options) !activate_pipeline.ActivatePipelineOutput {
+    pub fn activatePipeline(self: *Self, allocator: std.mem.Allocator, input: activate_pipeline.ActivatePipelineInput, options: CallOptions) !activate_pipeline.ActivatePipelineOutput {
         return activate_pipeline.execute(self, allocator, input, options);
     }
 
     /// Adds or modifies tags for the specified pipeline.
-    pub fn addTags(self: *Self, allocator: std.mem.Allocator, input: add_tags.AddTagsInput, options: add_tags.Options) !add_tags.AddTagsOutput {
+    pub fn addTags(self: *Self, allocator: std.mem.Allocator, input: add_tags.AddTagsInput, options: CallOptions) !add_tags.AddTagsOutput {
         return add_tags.execute(self, allocator, input, options);
     }
 
@@ -109,7 +110,7 @@ pub const Client = struct {
     /// Date: Mon, 12 Nov 2012 17:50:53 GMT
     ///
     /// {"pipelineId": "df-06372391ZG65EXAMPLE"}
-    pub fn createPipeline(self: *Self, allocator: std.mem.Allocator, input: create_pipeline.CreatePipelineInput, options: create_pipeline.Options) !create_pipeline.CreatePipelineOutput {
+    pub fn createPipeline(self: *Self, allocator: std.mem.Allocator, input: create_pipeline.CreatePipelineInput, options: CallOptions) !create_pipeline.CreatePipelineOutput {
         return create_pipeline.execute(self, allocator, input, options);
     }
 
@@ -120,7 +121,7 @@ pub const Client = struct {
     /// To resume a deactivated pipeline, use ActivatePipeline. By default, the
     /// pipeline resumes from the last completed execution.
     /// Optionally, you can specify the date and time to resume the pipeline.
-    pub fn deactivatePipeline(self: *Self, allocator: std.mem.Allocator, input: deactivate_pipeline.DeactivatePipelineInput, options: deactivate_pipeline.Options) !deactivate_pipeline.DeactivatePipelineOutput {
+    pub fn deactivatePipeline(self: *Self, allocator: std.mem.Allocator, input: deactivate_pipeline.DeactivatePipelineInput, options: CallOptions) !deactivate_pipeline.DeactivatePipelineOutput {
         return deactivate_pipeline.execute(self, allocator, input, options);
     }
 
@@ -150,7 +151,7 @@ pub const Client = struct {
     /// Date: Mon, 12 Nov 2012 17:50:53 GMT
     ///
     /// Unexpected response: 200, OK, undefined
-    pub fn deletePipeline(self: *Self, allocator: std.mem.Allocator, input: delete_pipeline.DeletePipelineInput, options: delete_pipeline.Options) !delete_pipeline.DeletePipelineOutput {
+    pub fn deletePipeline(self: *Self, allocator: std.mem.Allocator, input: delete_pipeline.DeletePipelineInput, options: CallOptions) !delete_pipeline.DeletePipelineOutput {
         return delete_pipeline.execute(self, allocator, input, options);
     }
 
@@ -204,7 +205,7 @@ pub const Client = struct {
     /// "name": "Schedule"}
     /// ]
     /// }
-    pub fn describeObjects(self: *Self, allocator: std.mem.Allocator, input: describe_objects.DescribeObjectsInput, options: describe_objects.Options) !describe_objects.DescribeObjectsOutput {
+    pub fn describeObjects(self: *Self, allocator: std.mem.Allocator, input: describe_objects.DescribeObjectsInput, options: CallOptions) !describe_objects.DescribeObjectsOutput {
         return describe_objects.execute(self, allocator, input, options);
     }
 
@@ -266,7 +267,7 @@ pub const Client = struct {
     /// "pipelineId": "df-0937003356ZJEXAMPLE"}
     /// ]
     /// }
-    pub fn describePipelines(self: *Self, allocator: std.mem.Allocator, input: describe_pipelines.DescribePipelinesInput, options: describe_pipelines.Options) !describe_pipelines.DescribePipelinesOutput {
+    pub fn describePipelines(self: *Self, allocator: std.mem.Allocator, input: describe_pipelines.DescribePipelinesInput, options: CallOptions) !describe_pipelines.DescribePipelinesOutput {
         return describe_pipelines.execute(self, allocator, input, options);
     }
 
@@ -294,7 +295,7 @@ pub const Client = struct {
     ///
     /// {"evaluatedExpression": "Transform started at 2012-12-12T00:00:00 and
     /// finished at 2012-12-21T18:00:00"}
-    pub fn evaluateExpression(self: *Self, allocator: std.mem.Allocator, input: evaluate_expression.EvaluateExpressionInput, options: evaluate_expression.Options) !evaluate_expression.EvaluateExpressionOutput {
+    pub fn evaluateExpression(self: *Self, allocator: std.mem.Allocator, input: evaluate_expression.EvaluateExpressionInput, options: CallOptions) !evaluate_expression.EvaluateExpressionOutput {
         return evaluate_expression.execute(self, allocator, input, options);
     }
 
@@ -354,7 +355,7 @@ pub const Client = struct {
     /// "name": "SayHello"}
     /// ]
     /// }
-    pub fn getPipelineDefinition(self: *Self, allocator: std.mem.Allocator, input: get_pipeline_definition.GetPipelineDefinitionInput, options: get_pipeline_definition.Options) !get_pipeline_definition.GetPipelineDefinitionOutput {
+    pub fn getPipelineDefinition(self: *Self, allocator: std.mem.Allocator, input: get_pipeline_definition.GetPipelineDefinitionInput, options: CallOptions) !get_pipeline_definition.GetPipelineDefinitionOutput {
         return get_pipeline_definition.execute(self, allocator, input, options);
     }
 
@@ -385,7 +386,7 @@ pub const Client = struct {
     /// "name": "MySecondPipeline"}
     /// ]
     /// }
-    pub fn listPipelines(self: *Self, allocator: std.mem.Allocator, input: list_pipelines.ListPipelinesInput, options: list_pipelines.Options) !list_pipelines.ListPipelinesOutput {
+    pub fn listPipelines(self: *Self, allocator: std.mem.Allocator, input: list_pipelines.ListPipelinesInput, options: CallOptions) !list_pipelines.ListPipelinesOutput {
         return list_pipelines.execute(self, allocator, input, options);
     }
 
@@ -466,7 +467,7 @@ pub const Client = struct {
     /// "taskId":
     /// "2xaM4wRs5zOsIH+g9U3oVHfAgAlbSqU6XduncB0HhZ3xMnmvfePZPn4dIbYXHyWyRK+cU15MqDHwdrvftx/4wv+sNS4w34vJfv7QA9aOoOazW28l1GYSb2ZRR0N0paiQp+d1MhSKo10hOTWOsVK5S5Lnx9Qm6omFgXHyIvZRIvTlrQMpr1xuUrflyGOfbFOGpOLpvPE172MYdqpZKnbSS4TcuqgQKSWV2833fEubI57DPOP7ghWa2TcYeSIv4pdLYG53fTuwfbnbdc98g2LNUQzSVhSnt7BoqyNwht2aQ6b/UHg9A80+KVpuXuqmz3m1MXwHFgxjdmuesXNOrrlGpeLCcRWD+aGo0RN1NqhQRzNAig8V4GlaPTQzMsRCljKqvrIyAoP3Tt2XEGsHkkQo12rEX8Z90957XX2qKRwhruwYzqGkSLWjINoLdAxUJdpRXRc5DJTrBd3D5mdzn7kY1l7NEh4kFHJDt3Cx4Z3Mk8MYCACyCk/CEyy9DwuPi66cLz0NBcgbCM5LKjTBOwo1m+am+pvM1kSposE9FPP1+RFGb8k6jQBTJx3TRz1yKilnGXQTZ5xvdOFpJrklIT0OXP1MG3+auM9FlJA+1dX90QoNJE5z7axmK//MOGXUdkqFe2kiDkorqjxwDvc0Js9pVKfKvAmW8YqUbmI9l0ERpWCXXnLVHNmPWz3jaPY+OBAmuJWDmxB/Z8p94aEDg4BVXQ7LvsKQ3DLYhaB7yJ390CJT+i0mm+EBqY60V6YikPSWDFrYQ/NPi2b1DgE19mX8zHqw8qprIl4yh1Ckx2Iige4En/N5ktOoIxnASxAw/TzcE2skxdw5KlHDF+UTj71m16CR/dIaKlXijlfNlNzUBo/bNSadCQn3G5NoO501wPKI:XO50TgDNyo8EXAMPLE/g==:1"}
     /// }
-    pub fn pollForTask(self: *Self, allocator: std.mem.Allocator, input: poll_for_task.PollForTaskInput, options: poll_for_task.Options) !poll_for_task.PollForTaskOutput {
+    pub fn pollForTask(self: *Self, allocator: std.mem.Allocator, input: poll_for_task.PollForTaskInput, options: CallOptions) !poll_for_task.PollForTaskOutput {
         return poll_for_task.execute(self, allocator, input, options);
     }
 
@@ -617,7 +618,7 @@ pub const Client = struct {
     /// definition due to FATAL errors:
     /// [com.amazon.setl.webservice.ValidationError@108d7ea9] Please call Validate
     /// to validate your pipeline"}
-    pub fn putPipelineDefinition(self: *Self, allocator: std.mem.Allocator, input: put_pipeline_definition.PutPipelineDefinitionInput, options: put_pipeline_definition.Options) !put_pipeline_definition.PutPipelineDefinitionOutput {
+    pub fn putPipelineDefinition(self: *Self, allocator: std.mem.Allocator, input: put_pipeline_definition.PutPipelineDefinitionInput, options: CallOptions) !put_pipeline_definition.PutPipelineDefinitionOutput {
         return put_pipeline_definition.execute(self, allocator, input, options);
     }
 
@@ -651,12 +652,12 @@ pub const Client = struct {
     /// "ids":
     /// ["@SayHello_1_2012-09-25T17:00:00"]
     /// }
-    pub fn queryObjects(self: *Self, allocator: std.mem.Allocator, input: query_objects.QueryObjectsInput, options: query_objects.Options) !query_objects.QueryObjectsOutput {
+    pub fn queryObjects(self: *Self, allocator: std.mem.Allocator, input: query_objects.QueryObjectsInput, options: CallOptions) !query_objects.QueryObjectsOutput {
         return query_objects.execute(self, allocator, input, options);
     }
 
     /// Removes existing tags from the specified pipeline.
-    pub fn removeTags(self: *Self, allocator: std.mem.Allocator, input: remove_tags.RemoveTagsInput, options: remove_tags.Options) !remove_tags.RemoveTagsOutput {
+    pub fn removeTags(self: *Self, allocator: std.mem.Allocator, input: remove_tags.RemoveTagsInput, options: CallOptions) !remove_tags.RemoveTagsOutput {
         return remove_tags.execute(self, allocator, input, options);
     }
 
@@ -697,7 +698,7 @@ pub const Client = struct {
     /// Date: Mon, 12 Nov 2012 17:50:53 GMT
     ///
     /// {"canceled": false}
-    pub fn reportTaskProgress(self: *Self, allocator: std.mem.Allocator, input: report_task_progress.ReportTaskProgressInput, options: report_task_progress.Options) !report_task_progress.ReportTaskProgressOutput {
+    pub fn reportTaskProgress(self: *Self, allocator: std.mem.Allocator, input: report_task_progress.ReportTaskProgressInput, options: CallOptions) !report_task_progress.ReportTaskProgressOutput {
         return report_task_progress.execute(self, allocator, input, options);
     }
 
@@ -727,7 +728,7 @@ pub const Client = struct {
     /// Date: Mon, 12 Nov 2012 17:50:53 GMT
     ///
     /// {"terminate": false}
-    pub fn reportTaskRunnerHeartbeat(self: *Self, allocator: std.mem.Allocator, input: report_task_runner_heartbeat.ReportTaskRunnerHeartbeatInput, options: report_task_runner_heartbeat.Options) !report_task_runner_heartbeat.ReportTaskRunnerHeartbeatOutput {
+    pub fn reportTaskRunnerHeartbeat(self: *Self, allocator: std.mem.Allocator, input: report_task_runner_heartbeat.ReportTaskRunnerHeartbeatInput, options: CallOptions) !report_task_runner_heartbeat.ReportTaskRunnerHeartbeatOutput {
         return report_task_runner_heartbeat.execute(self, allocator, input, options);
     }
 
@@ -758,7 +759,7 @@ pub const Client = struct {
     /// Date: Mon, 12 Nov 2012 17:50:53 GMT
     ///
     /// Unexpected response: 200, OK, undefined
-    pub fn setStatus(self: *Self, allocator: std.mem.Allocator, input: set_status.SetStatusInput, options: set_status.Options) !set_status.SetStatusOutput {
+    pub fn setStatus(self: *Self, allocator: std.mem.Allocator, input: set_status.SetStatusInput, options: CallOptions) !set_status.SetStatusOutput {
         return set_status.execute(self, allocator, input, options);
     }
 
@@ -787,7 +788,7 @@ pub const Client = struct {
     /// Date: Mon, 12 Nov 2012 17:50:53 GMT
     ///
     /// {}
-    pub fn setTaskStatus(self: *Self, allocator: std.mem.Allocator, input: set_task_status.SetTaskStatusInput, options: set_task_status.Options) !set_task_status.SetTaskStatusOutput {
+    pub fn setTaskStatus(self: *Self, allocator: std.mem.Allocator, input: set_task_status.SetTaskStatusInput, options: CallOptions) !set_task_status.SetTaskStatusOutput {
         return set_task_status.execute(self, allocator, input, options);
     }
 
@@ -926,7 +927,7 @@ pub const Client = struct {
     /// "id": "Schedule"}
     /// ]
     /// }
-    pub fn validatePipelineDefinition(self: *Self, allocator: std.mem.Allocator, input: validate_pipeline_definition.ValidatePipelineDefinitionInput, options: validate_pipeline_definition.Options) !validate_pipeline_definition.ValidatePipelineDefinitionOutput {
+    pub fn validatePipelineDefinition(self: *Self, allocator: std.mem.Allocator, input: validate_pipeline_definition.ValidatePipelineDefinitionInput, options: CallOptions) !validate_pipeline_definition.ValidatePipelineDefinitionOutput {
         return validate_pipeline_definition.execute(self, allocator, input, options);
     }
 

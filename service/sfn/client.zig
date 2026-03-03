@@ -38,6 +38,7 @@ const update_map_run = @import("update_map_run.zig");
 const update_state_machine = @import("update_state_machine.zig");
 const update_state_machine_alias = @import("update_state_machine_alias.zig");
 const validate_state_machine_definition = @import("validate_state_machine_definition.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -88,7 +89,7 @@ pub const Client = struct {
     /// idempotent request of the previous. In this case, `tags` will not be
     /// updated,
     /// even if they are different.
-    pub fn createActivity(self: *Self, allocator: std.mem.Allocator, input: create_activity.CreateActivityInput, options: create_activity.Options) !create_activity.CreateActivityOutput {
+    pub fn createActivity(self: *Self, allocator: std.mem.Allocator, input: create_activity.CreateActivityInput, options: CallOptions) !create_activity.CreateActivityOutput {
         return create_activity.execute(self, allocator, input, options);
     }
 
@@ -125,7 +126,7 @@ pub const Client = struct {
     /// `roleArn` or `tags`, Step Functions will ignore these differences and treat
     /// it as an idempotent request of the previous. In this case, `roleArn` and
     /// `tags` will not be updated, even if they are different.
-    pub fn createStateMachine(self: *Self, allocator: std.mem.Allocator, input: create_state_machine.CreateStateMachineInput, options: create_state_machine.Options) !create_state_machine.CreateStateMachineOutput {
+    pub fn createStateMachine(self: *Self, allocator: std.mem.Allocator, input: create_state_machine.CreateStateMachineInput, options: CallOptions) !create_state_machine.CreateStateMachineOutput {
         return create_state_machine.execute(self, allocator, input, options);
     }
 
@@ -164,12 +165,12 @@ pub const Client = struct {
     /// * UpdateStateMachineAlias
     ///
     /// * DeleteStateMachineAlias
-    pub fn createStateMachineAlias(self: *Self, allocator: std.mem.Allocator, input: create_state_machine_alias.CreateStateMachineAliasInput, options: create_state_machine_alias.Options) !create_state_machine_alias.CreateStateMachineAliasOutput {
+    pub fn createStateMachineAlias(self: *Self, allocator: std.mem.Allocator, input: create_state_machine_alias.CreateStateMachineAliasInput, options: CallOptions) !create_state_machine_alias.CreateStateMachineAliasOutput {
         return create_state_machine_alias.execute(self, allocator, input, options);
     }
 
     /// Deletes an activity.
-    pub fn deleteActivity(self: *Self, allocator: std.mem.Allocator, input: delete_activity.DeleteActivityInput, options: delete_activity.Options) !delete_activity.DeleteActivityOutput {
+    pub fn deleteActivity(self: *Self, allocator: std.mem.Allocator, input: delete_activity.DeleteActivityInput, options: CallOptions) !delete_activity.DeleteActivityOutput {
         return delete_activity.execute(self, allocator, input, options);
     }
 
@@ -206,7 +207,7 @@ pub const Client = struct {
     /// less than a minute). Running executions may emit logs after
     /// `DeleteStateMachine`
     /// API is called.
-    pub fn deleteStateMachine(self: *Self, allocator: std.mem.Allocator, input: delete_state_machine.DeleteStateMachineInput, options: delete_state_machine.Options) !delete_state_machine.DeleteStateMachineOutput {
+    pub fn deleteStateMachine(self: *Self, allocator: std.mem.Allocator, input: delete_state_machine.DeleteStateMachineInput, options: CallOptions) !delete_state_machine.DeleteStateMachineOutput {
         return delete_state_machine.execute(self, allocator, input, options);
     }
 
@@ -228,7 +229,7 @@ pub const Client = struct {
     /// * ListStateMachineAliases
     ///
     /// * UpdateStateMachineAlias
-    pub fn deleteStateMachineAlias(self: *Self, allocator: std.mem.Allocator, input: delete_state_machine_alias.DeleteStateMachineAliasInput, options: delete_state_machine_alias.Options) !delete_state_machine_alias.DeleteStateMachineAliasOutput {
+    pub fn deleteStateMachineAlias(self: *Self, allocator: std.mem.Allocator, input: delete_state_machine_alias.DeleteStateMachineAliasInput, options: CallOptions) !delete_state_machine_alias.DeleteStateMachineAliasOutput {
         return delete_state_machine_alias.execute(self, allocator, input, options);
     }
 
@@ -249,7 +250,7 @@ pub const Client = struct {
     /// * PublishStateMachineVersion
     ///
     /// * ListStateMachineVersions
-    pub fn deleteStateMachineVersion(self: *Self, allocator: std.mem.Allocator, input: delete_state_machine_version.DeleteStateMachineVersionInput, options: delete_state_machine_version.Options) !delete_state_machine_version.DeleteStateMachineVersionOutput {
+    pub fn deleteStateMachineVersion(self: *Self, allocator: std.mem.Allocator, input: delete_state_machine_version.DeleteStateMachineVersionInput, options: CallOptions) !delete_state_machine_version.DeleteStateMachineVersionOutput {
         return delete_state_machine_version.execute(self, allocator, input, options);
     }
 
@@ -257,7 +258,7 @@ pub const Client = struct {
     ///
     /// This operation is eventually consistent. The results are best effort and may
     /// not reflect very recent updates and changes.
-    pub fn describeActivity(self: *Self, allocator: std.mem.Allocator, input: describe_activity.DescribeActivityInput, options: describe_activity.Options) !describe_activity.DescribeActivityOutput {
+    pub fn describeActivity(self: *Self, allocator: std.mem.Allocator, input: describe_activity.DescribeActivityInput, options: CallOptions) !describe_activity.DescribeActivityOutput {
         return describe_activity.execute(self, allocator, input, options);
     }
 
@@ -274,14 +275,14 @@ pub const Client = struct {
     ///
     /// Executions of an `EXPRESS` state machine aren't supported by
     /// `DescribeExecution` unless a Map Run dispatched them.
-    pub fn describeExecution(self: *Self, allocator: std.mem.Allocator, input: describe_execution.DescribeExecutionInput, options: describe_execution.Options) !describe_execution.DescribeExecutionOutput {
+    pub fn describeExecution(self: *Self, allocator: std.mem.Allocator, input: describe_execution.DescribeExecutionInput, options: CallOptions) !describe_execution.DescribeExecutionOutput {
         return describe_execution.execute(self, allocator, input, options);
     }
 
     /// Provides information about a Map Run's configuration, progress, and results.
     /// If you've
     /// [redriven](https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html) a Map Run, this API action also returns information about the redrives of that Map Run. For more information, see [Examining Map Run](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html) in the *Step Functions Developer Guide*.
-    pub fn describeMapRun(self: *Self, allocator: std.mem.Allocator, input: describe_map_run.DescribeMapRunInput, options: describe_map_run.Options) !describe_map_run.DescribeMapRunOutput {
+    pub fn describeMapRun(self: *Self, allocator: std.mem.Allocator, input: describe_map_run.DescribeMapRunInput, options: CallOptions) !describe_map_run.DescribeMapRunOutput {
         return describe_map_run.execute(self, allocator, input, options);
     }
 
@@ -320,7 +321,7 @@ pub const Client = struct {
     ///
     /// This operation is eventually consistent. The results are best effort and may
     /// not reflect very recent updates and changes.
-    pub fn describeStateMachine(self: *Self, allocator: std.mem.Allocator, input: describe_state_machine.DescribeStateMachineInput, options: describe_state_machine.Options) !describe_state_machine.DescribeStateMachineOutput {
+    pub fn describeStateMachine(self: *Self, allocator: std.mem.Allocator, input: describe_state_machine.DescribeStateMachineInput, options: CallOptions) !describe_state_machine.DescribeStateMachineOutput {
         return describe_state_machine.execute(self, allocator, input, options);
     }
 
@@ -336,7 +337,7 @@ pub const Client = struct {
     /// * UpdateStateMachineAlias
     ///
     /// * DeleteStateMachineAlias
-    pub fn describeStateMachineAlias(self: *Self, allocator: std.mem.Allocator, input: describe_state_machine_alias.DescribeStateMachineAliasInput, options: describe_state_machine_alias.Options) !describe_state_machine_alias.DescribeStateMachineAliasOutput {
+    pub fn describeStateMachineAlias(self: *Self, allocator: std.mem.Allocator, input: describe_state_machine_alias.DescribeStateMachineAliasInput, options: CallOptions) !describe_state_machine_alias.DescribeStateMachineAliasOutput {
         return describe_state_machine_alias.execute(self, allocator, input, options);
     }
 
@@ -352,7 +353,7 @@ pub const Client = struct {
     /// not reflect very recent updates and changes.
     ///
     /// This API action is not supported by `EXPRESS` state machines.
-    pub fn describeStateMachineForExecution(self: *Self, allocator: std.mem.Allocator, input: describe_state_machine_for_execution.DescribeStateMachineForExecutionInput, options: describe_state_machine_for_execution.Options) !describe_state_machine_for_execution.DescribeStateMachineForExecutionOutput {
+    pub fn describeStateMachineForExecution(self: *Self, allocator: std.mem.Allocator, input: describe_state_machine_for_execution.DescribeStateMachineForExecutionInput, options: CallOptions) !describe_state_machine_for_execution.DescribeStateMachineForExecutionOutput {
         return describe_state_machine_for_execution.execute(self, allocator, input, options);
     }
 
@@ -379,7 +380,7 @@ pub const Client = struct {
     /// [Avoid
     /// Latency When Polling for Activity
     /// Tasks](https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html) in the Step Functions Developer Guide.
-    pub fn getActivityTask(self: *Self, allocator: std.mem.Allocator, input: get_activity_task.GetActivityTaskInput, options: get_activity_task.Options) !get_activity_task.GetActivityTaskOutput {
+    pub fn getActivityTask(self: *Self, allocator: std.mem.Allocator, input: get_activity_task.GetActivityTaskInput, options: CallOptions) !get_activity_task.GetActivityTaskOutput {
         return get_activity_task.execute(self, allocator, input, options);
     }
 
@@ -397,7 +398,7 @@ pub const Client = struct {
     /// error.
     ///
     /// This API action is not supported by `EXPRESS` state machines.
-    pub fn getExecutionHistory(self: *Self, allocator: std.mem.Allocator, input: get_execution_history.GetExecutionHistoryInput, options: get_execution_history.Options) !get_execution_history.GetExecutionHistoryOutput {
+    pub fn getExecutionHistory(self: *Self, allocator: std.mem.Allocator, input: get_execution_history.GetExecutionHistoryInput, options: CallOptions) !get_execution_history.GetExecutionHistoryOutput {
         return get_execution_history.execute(self, allocator, input, options);
     }
 
@@ -412,7 +413,7 @@ pub const Client = struct {
     ///
     /// This operation is eventually consistent. The results are best effort and may
     /// not reflect very recent updates and changes.
-    pub fn listActivities(self: *Self, allocator: std.mem.Allocator, input: list_activities.ListActivitiesInput, options: list_activities.Options) !list_activities.ListActivitiesOutput {
+    pub fn listActivities(self: *Self, allocator: std.mem.Allocator, input: list_activities.ListActivitiesInput, options: CallOptions) !list_activities.ListActivitiesOutput {
         return list_activities.execute(self, allocator, input, options);
     }
 
@@ -439,14 +440,14 @@ pub const Client = struct {
     /// not reflect very recent updates and changes.
     ///
     /// This API action is not supported by `EXPRESS` state machines.
-    pub fn listExecutions(self: *Self, allocator: std.mem.Allocator, input: list_executions.ListExecutionsInput, options: list_executions.Options) !list_executions.ListExecutionsOutput {
+    pub fn listExecutions(self: *Self, allocator: std.mem.Allocator, input: list_executions.ListExecutionsInput, options: CallOptions) !list_executions.ListExecutionsOutput {
         return list_executions.execute(self, allocator, input, options);
     }
 
     /// Lists all Map Runs that were started by a given state machine execution. Use
     /// this API action to obtain Map Run ARNs, and then call `DescribeMapRun` to
     /// obtain more information, if needed.
-    pub fn listMapRuns(self: *Self, allocator: std.mem.Allocator, input: list_map_runs.ListMapRunsInput, options: list_map_runs.Options) !list_map_runs.ListMapRunsOutput {
+    pub fn listMapRuns(self: *Self, allocator: std.mem.Allocator, input: list_map_runs.ListMapRunsInput, options: CallOptions) !list_map_runs.ListMapRunsOutput {
         return list_map_runs.execute(self, allocator, input, options);
     }
 
@@ -472,7 +473,7 @@ pub const Client = struct {
     /// * UpdateStateMachineAlias
     ///
     /// * DeleteStateMachineAlias
-    pub fn listStateMachineAliases(self: *Self, allocator: std.mem.Allocator, input: list_state_machine_aliases.ListStateMachineAliasesInput, options: list_state_machine_aliases.Options) !list_state_machine_aliases.ListStateMachineAliasesOutput {
+    pub fn listStateMachineAliases(self: *Self, allocator: std.mem.Allocator, input: list_state_machine_aliases.ListStateMachineAliasesInput, options: CallOptions) !list_state_machine_aliases.ListStateMachineAliasesOutput {
         return list_state_machine_aliases.execute(self, allocator, input, options);
     }
 
@@ -493,7 +494,7 @@ pub const Client = struct {
     /// * PublishStateMachineVersion
     ///
     /// * DeleteStateMachineVersion
-    pub fn listStateMachineVersions(self: *Self, allocator: std.mem.Allocator, input: list_state_machine_versions.ListStateMachineVersionsInput, options: list_state_machine_versions.Options) !list_state_machine_versions.ListStateMachineVersionsOutput {
+    pub fn listStateMachineVersions(self: *Self, allocator: std.mem.Allocator, input: list_state_machine_versions.ListStateMachineVersionsInput, options: CallOptions) !list_state_machine_versions.ListStateMachineVersionsOutput {
         return list_state_machine_versions.execute(self, allocator, input, options);
     }
 
@@ -508,7 +509,7 @@ pub const Client = struct {
     ///
     /// This operation is eventually consistent. The results are best effort and may
     /// not reflect very recent updates and changes.
-    pub fn listStateMachines(self: *Self, allocator: std.mem.Allocator, input: list_state_machines.ListStateMachinesInput, options: list_state_machines.Options) !list_state_machines.ListStateMachinesOutput {
+    pub fn listStateMachines(self: *Self, allocator: std.mem.Allocator, input: list_state_machines.ListStateMachinesInput, options: CallOptions) !list_state_machines.ListStateMachinesOutput {
         return list_state_machines.execute(self, allocator, input, options);
     }
 
@@ -516,7 +517,7 @@ pub const Client = struct {
     ///
     /// Tags may only contain Unicode letters, digits, white space, or these
     /// symbols: `_ . : / = + - @`.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -547,7 +548,7 @@ pub const Client = struct {
     /// * DeleteStateMachineVersion
     ///
     /// * ListStateMachineVersions
-    pub fn publishStateMachineVersion(self: *Self, allocator: std.mem.Allocator, input: publish_state_machine_version.PublishStateMachineVersionInput, options: publish_state_machine_version.Options) !publish_state_machine_version.PublishStateMachineVersionOutput {
+    pub fn publishStateMachineVersion(self: *Self, allocator: std.mem.Allocator, input: publish_state_machine_version.PublishStateMachineVersionInput, options: CallOptions) !publish_state_machine_version.PublishStateMachineVersionOutput {
         return publish_state_machine_version.execute(self, allocator, input, options);
     }
 
@@ -590,7 +591,7 @@ pub const Client = struct {
     ///   append their event history to the existing event history. Make sure your
     ///   workflow execution contains less than 24,999 events to accommodate the
     ///   `ExecutionRedriven` history event and at least one other history event.
-    pub fn redriveExecution(self: *Self, allocator: std.mem.Allocator, input: redrive_execution.RedriveExecutionInput, options: redrive_execution.Options) !redrive_execution.RedriveExecutionOutput {
+    pub fn redriveExecution(self: *Self, allocator: std.mem.Allocator, input: redrive_execution.RedriveExecutionInput, options: CallOptions) !redrive_execution.RedriveExecutionOutput {
         return redrive_execution.execute(self, allocator, input, options);
     }
 
@@ -605,7 +606,7 @@ pub const Client = struct {
     /// A caller can mark a task as fail without using any KMS permissions in the
     /// execution role if the caller provides a null value for both `error` and
     /// `cause` fields because no data needs to be encrypted.
-    pub fn sendTaskFailure(self: *Self, allocator: std.mem.Allocator, input: send_task_failure.SendTaskFailureInput, options: send_task_failure.Options) !send_task_failure.SendTaskFailureOutput {
+    pub fn sendTaskFailure(self: *Self, allocator: std.mem.Allocator, input: send_task_failure.SendTaskFailureInput, options: CallOptions) !send_task_failure.SendTaskFailureOutput {
         return send_task_failure.execute(self, allocator, input, options);
     }
 
@@ -630,7 +631,7 @@ pub const Client = struct {
     /// its maximum allowed duration, regardless of the number of SendTaskHeartbeat
     /// requests received. Use `HeartbeatSeconds` to configure the timeout interval
     /// for heartbeats.
-    pub fn sendTaskHeartbeat(self: *Self, allocator: std.mem.Allocator, input: send_task_heartbeat.SendTaskHeartbeatInput, options: send_task_heartbeat.Options) !send_task_heartbeat.SendTaskHeartbeatOutput {
+    pub fn sendTaskHeartbeat(self: *Self, allocator: std.mem.Allocator, input: send_task_heartbeat.SendTaskHeartbeatInput, options: CallOptions) !send_task_heartbeat.SendTaskHeartbeatOutput {
         return send_task_heartbeat.execute(self, allocator, input, options);
     }
 
@@ -639,7 +640,7 @@ pub const Client = struct {
     /// pattern, and optionally Task states using the [job
     /// run](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync) pattern to report that the task identified by the `taskToken` completed
     /// successfully.
-    pub fn sendTaskSuccess(self: *Self, allocator: std.mem.Allocator, input: send_task_success.SendTaskSuccessInput, options: send_task_success.Options) !send_task_success.SendTaskSuccessOutput {
+    pub fn sendTaskSuccess(self: *Self, allocator: std.mem.Allocator, input: send_task_success.SendTaskSuccessInput, options: CallOptions) !send_task_success.SendTaskSuccessOutput {
         return send_task_success.execute(self, allocator, input, options);
     }
 
@@ -689,7 +690,7 @@ pub const Client = struct {
     /// `400 ExecutionAlreadyExists` error. You can reuse names after 90 days.
     ///
     /// `StartExecution` isn't idempotent for `EXPRESS` workflows.
-    pub fn startExecution(self: *Self, allocator: std.mem.Allocator, input: start_execution.StartExecutionInput, options: start_execution.Options) !start_execution.StartExecutionOutput {
+    pub fn startExecution(self: *Self, allocator: std.mem.Allocator, input: start_execution.StartExecutionInput, options: CallOptions) !start_execution.StartExecutionOutput {
         return start_execution.execute(self, allocator, input, options);
     }
 
@@ -706,7 +707,7 @@ pub const Client = struct {
     /// configuration.
     ///
     /// This API action isn't logged in CloudTrail.
-    pub fn startSyncExecution(self: *Self, allocator: std.mem.Allocator, input: start_sync_execution.StartSyncExecutionInput, options: start_sync_execution.Options) !start_sync_execution.StartSyncExecutionOutput {
+    pub fn startSyncExecution(self: *Self, allocator: std.mem.Allocator, input: start_sync_execution.StartSyncExecutionInput, options: CallOptions) !start_sync_execution.StartSyncExecutionOutput {
         return start_sync_execution.execute(self, allocator, input, options);
     }
 
@@ -720,7 +721,7 @@ pub const Client = struct {
     /// A caller can stop an execution without using any KMS permissions in the
     /// execution role if the caller provides a null value for both `error` and
     /// `cause` fields because no data needs to be encrypted.
-    pub fn stopExecution(self: *Self, allocator: std.mem.Allocator, input: stop_execution.StopExecutionInput, options: stop_execution.Options) !stop_execution.StopExecutionOutput {
+    pub fn stopExecution(self: *Self, allocator: std.mem.Allocator, input: stop_execution.StopExecutionInput, options: CallOptions) !stop_execution.StopExecutionOutput {
         return stop_execution.execute(self, allocator, input, options);
     }
 
@@ -734,7 +735,7 @@ pub const Client = struct {
     ///
     /// Tags may only contain Unicode letters, digits, white space, or these
     /// symbols: `_ . : / = + - @`.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -784,18 +785,18 @@ pub const Client = struct {
     /// tasks](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html), `.sync` or `.waitForTaskToken`
     /// [service integration
     /// patterns](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html), [Parallel](https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html), or [Map](https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html) states.
-    pub fn testState(self: *Self, allocator: std.mem.Allocator, input: test_state.TestStateInput, options: test_state.Options) !test_state.TestStateOutput {
+    pub fn testState(self: *Self, allocator: std.mem.Allocator, input: test_state.TestStateInput, options: CallOptions) !test_state.TestStateOutput {
         return test_state.execute(self, allocator, input, options);
     }
 
     /// Remove a tag from a Step Functions resource
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an in-progress Map Run's configuration to include changes to the
     /// settings that control maximum concurrency and Map Run failure.
-    pub fn updateMapRun(self: *Self, allocator: std.mem.Allocator, input: update_map_run.UpdateMapRunInput, options: update_map_run.Options) !update_map_run.UpdateMapRunOutput {
+    pub fn updateMapRun(self: *Self, allocator: std.mem.Allocator, input: update_map_run.UpdateMapRunInput, options: CallOptions) !update_map_run.UpdateMapRunOutput {
         return update_map_run.execute(self, allocator, input, options);
     }
 
@@ -849,7 +850,7 @@ pub const Client = struct {
     /// `definition` and `roleArn`. Executions started immediately after you
     /// call `UpdateStateMachine` may use the previous state machine
     /// `definition` and `roleArn`.
-    pub fn updateStateMachine(self: *Self, allocator: std.mem.Allocator, input: update_state_machine.UpdateStateMachineInput, options: update_state_machine.Options) !update_state_machine.UpdateStateMachineOutput {
+    pub fn updateStateMachine(self: *Self, allocator: std.mem.Allocator, input: update_state_machine.UpdateStateMachineInput, options: CallOptions) !update_state_machine.UpdateStateMachineOutput {
         return update_state_machine.execute(self, allocator, input, options);
     }
 
@@ -880,7 +881,7 @@ pub const Client = struct {
     /// * ListStateMachineAliases
     ///
     /// * DeleteStateMachineAlias
-    pub fn updateStateMachineAlias(self: *Self, allocator: std.mem.Allocator, input: update_state_machine_alias.UpdateStateMachineAliasInput, options: update_state_machine_alias.Options) !update_state_machine_alias.UpdateStateMachineAliasOutput {
+    pub fn updateStateMachineAlias(self: *Self, allocator: std.mem.Allocator, input: update_state_machine_alias.UpdateStateMachineAliasInput, options: CallOptions) !update_state_machine_alias.UpdateStateMachineAliasOutput {
         return update_state_machine_alias.execute(self, allocator, input, options);
     }
 
@@ -926,7 +927,7 @@ pub const Client = struct {
     /// **result** field value (OK, FAIL). Do **not** rely on the exact order,
     /// count, or
     /// wording of diagnostic messages.
-    pub fn validateStateMachineDefinition(self: *Self, allocator: std.mem.Allocator, input: validate_state_machine_definition.ValidateStateMachineDefinitionInput, options: validate_state_machine_definition.Options) !validate_state_machine_definition.ValidateStateMachineDefinitionOutput {
+    pub fn validateStateMachineDefinition(self: *Self, allocator: std.mem.Allocator, input: validate_state_machine_definition.ValidateStateMachineDefinitionInput, options: CallOptions) !validate_state_machine_definition.ValidateStateMachineDefinitionOutput {
         return validate_state_machine_definition.execute(self, allocator, input, options);
     }
 

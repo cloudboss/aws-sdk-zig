@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MacSystemIntegrityProtectionConfigurationRequest = @import("mac_system_integrity_protection_configuration_request.zig").MacSystemIntegrityProtectionConfigurationRequest;
 const MacSystemIntegrityProtectionSettingStatus = @import("mac_system_integrity_protection_setting_status.zig").MacSystemIntegrityProtectionSettingStatus;
@@ -76,11 +77,7 @@ pub const CreateMacSystemIntegrityProtectionModificationTaskOutput = struct {
     mac_modification_task: ?MacModificationTask = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMacSystemIntegrityProtectionModificationTaskInput, options: Options) !CreateMacSystemIntegrityProtectionModificationTaskOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMacSystemIntegrityProtectionModificationTaskInput, options: CallOptions) !CreateMacSystemIntegrityProtectionModificationTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

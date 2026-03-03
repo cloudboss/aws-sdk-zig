@@ -27,6 +27,7 @@ const stop_icd10_cm_inference_job = @import("stop_icd10_cm_inference_job.zig");
 const stop_phi_detection_job = @import("stop_phi_detection_job.zig");
 const stop_rx_norm_inference_job = @import("stop_rx_norm_inference_job.zig");
 const stop_snomedct_inference_job = @import("stop_snomedct_inference_job.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -59,34 +60,34 @@ pub const Client = struct {
     /// Gets the properties associated with a medical entities detection job. Use
     /// this operation
     /// to get the status of a detection job.
-    pub fn describeEntitiesDetectionV2Job(self: *Self, allocator: std.mem.Allocator, input: describe_entities_detection_v2_job.DescribeEntitiesDetectionV2JobInput, options: describe_entities_detection_v2_job.Options) !describe_entities_detection_v2_job.DescribeEntitiesDetectionV2JobOutput {
+    pub fn describeEntitiesDetectionV2Job(self: *Self, allocator: std.mem.Allocator, input: describe_entities_detection_v2_job.DescribeEntitiesDetectionV2JobInput, options: CallOptions) !describe_entities_detection_v2_job.DescribeEntitiesDetectionV2JobOutput {
         return describe_entities_detection_v2_job.execute(self, allocator, input, options);
     }
 
     /// Gets the properties associated with an InferICD10CM job. Use this operation
     /// to get the
     /// status of an inference job.
-    pub fn describeIcd10CmInferenceJob(self: *Self, allocator: std.mem.Allocator, input: describe_icd10_cm_inference_job.DescribeICD10CMInferenceJobInput, options: describe_icd10_cm_inference_job.Options) !describe_icd10_cm_inference_job.DescribeICD10CMInferenceJobOutput {
+    pub fn describeIcd10CmInferenceJob(self: *Self, allocator: std.mem.Allocator, input: describe_icd10_cm_inference_job.DescribeICD10CMInferenceJobInput, options: CallOptions) !describe_icd10_cm_inference_job.DescribeICD10CMInferenceJobOutput {
         return describe_icd10_cm_inference_job.execute(self, allocator, input, options);
     }
 
     /// Gets the properties associated with a protected health information (PHI)
     /// detection job.
     /// Use this operation to get the status of a detection job.
-    pub fn describePhiDetectionJob(self: *Self, allocator: std.mem.Allocator, input: describe_phi_detection_job.DescribePHIDetectionJobInput, options: describe_phi_detection_job.Options) !describe_phi_detection_job.DescribePHIDetectionJobOutput {
+    pub fn describePhiDetectionJob(self: *Self, allocator: std.mem.Allocator, input: describe_phi_detection_job.DescribePHIDetectionJobInput, options: CallOptions) !describe_phi_detection_job.DescribePHIDetectionJobOutput {
         return describe_phi_detection_job.execute(self, allocator, input, options);
     }
 
     /// Gets the properties associated with an InferRxNorm job. Use this operation
     /// to get the
     /// status of an inference job.
-    pub fn describeRxNormInferenceJob(self: *Self, allocator: std.mem.Allocator, input: describe_rx_norm_inference_job.DescribeRxNormInferenceJobInput, options: describe_rx_norm_inference_job.Options) !describe_rx_norm_inference_job.DescribeRxNormInferenceJobOutput {
+    pub fn describeRxNormInferenceJob(self: *Self, allocator: std.mem.Allocator, input: describe_rx_norm_inference_job.DescribeRxNormInferenceJobInput, options: CallOptions) !describe_rx_norm_inference_job.DescribeRxNormInferenceJobOutput {
         return describe_rx_norm_inference_job.execute(self, allocator, input, options);
     }
 
     /// Gets the properties associated with an InferSNOMEDCT job. Use this operation
     /// to get the status of an inference job.
-    pub fn describeSnomedctInferenceJob(self: *Self, allocator: std.mem.Allocator, input: describe_snomedct_inference_job.DescribeSNOMEDCTInferenceJobInput, options: describe_snomedct_inference_job.Options) !describe_snomedct_inference_job.DescribeSNOMEDCTInferenceJobOutput {
+    pub fn describeSnomedctInferenceJob(self: *Self, allocator: std.mem.Allocator, input: describe_snomedct_inference_job.DescribeSNOMEDCTInferenceJobInput, options: CallOptions) !describe_snomedct_inference_job.DescribeSNOMEDCTInferenceJobOutput {
         return describe_snomedct_inference_job.execute(self, allocator, input, options);
     }
 
@@ -98,7 +99,7 @@ pub const Client = struct {
     /// information about them such as entity category, location, and confidence
     /// score on that
     /// information.
-    pub fn detectEntities(self: *Self, allocator: std.mem.Allocator, input: detect_entities.DetectEntitiesInput, options: detect_entities.Options) !detect_entities.DetectEntitiesOutput {
+    pub fn detectEntities(self: *Self, allocator: std.mem.Allocator, input: detect_entities.DetectEntitiesInput, options: CallOptions) !detect_entities.DetectEntitiesOutput {
         return detect_entities.execute(self, allocator, input, options);
     }
 
@@ -119,7 +120,7 @@ pub const Client = struct {
     ///
     /// The `DetectEntitiesV2` operation returns the `Acuity` and
     /// `Direction` entities as attributes instead of types.
-    pub fn detectEntitiesV2(self: *Self, allocator: std.mem.Allocator, input: detect_entities_v2.DetectEntitiesV2Input, options: detect_entities_v2.Options) !detect_entities_v2.DetectEntitiesV2Output {
+    pub fn detectEntitiesV2(self: *Self, allocator: std.mem.Allocator, input: detect_entities_v2.DetectEntitiesV2Input, options: CallOptions) !detect_entities_v2.DetectEntitiesV2Output {
         return detect_entities_v2.execute(self, allocator, input, options);
     }
 
@@ -128,7 +129,7 @@ pub const Client = struct {
     /// the entity category, location, and confidence score for each entity. Amazon
     /// Comprehend Medical
     /// only detects entities in English language texts.
-    pub fn detectPhi(self: *Self, allocator: std.mem.Allocator, input: detect_phi.DetectPHIInput, options: detect_phi.Options) !detect_phi.DetectPHIOutput {
+    pub fn detectPhi(self: *Self, allocator: std.mem.Allocator, input: detect_phi.DetectPHIInput, options: CallOptions) !detect_phi.DetectPHIOutput {
         return detect_phi.execute(self, allocator, input, options);
     }
 
@@ -139,7 +140,7 @@ pub const Client = struct {
     /// Centers for Disease Control. Amazon Comprehend Medical only detects medical
     /// entities in
     /// English language texts.
-    pub fn inferIcd10Cm(self: *Self, allocator: std.mem.Allocator, input: infer_icd10_cm.InferICD10CMInput, options: infer_icd10_cm.Options) !infer_icd10_cm.InferICD10CMOutput {
+    pub fn inferIcd10Cm(self: *Self, allocator: std.mem.Allocator, input: infer_icd10_cm.InferICD10CMInput, options: CallOptions) !infer_icd10_cm.InferICD10CMOutput {
         return infer_icd10_cm.execute(self, allocator, input, options);
     }
 
@@ -149,47 +150,47 @@ pub const Client = struct {
     /// Library of Medicine.
     /// Amazon Comprehend Medical only detects medical entities in English language
     /// texts.
-    pub fn inferRxNorm(self: *Self, allocator: std.mem.Allocator, input: infer_rx_norm.InferRxNormInput, options: infer_rx_norm.Options) !infer_rx_norm.InferRxNormOutput {
+    pub fn inferRxNorm(self: *Self, allocator: std.mem.Allocator, input: infer_rx_norm.InferRxNormInput, options: CallOptions) !infer_rx_norm.InferRxNormOutput {
         return infer_rx_norm.execute(self, allocator, input, options);
     }
 
     /// InferSNOMEDCT detects possible medical concepts as entities and links them
     /// to codes from the Systematized Nomenclature of Medicine, Clinical Terms
     /// (SNOMED-CT) ontology
-    pub fn inferSnomedct(self: *Self, allocator: std.mem.Allocator, input: infer_snomedct.InferSNOMEDCTInput, options: infer_snomedct.Options) !infer_snomedct.InferSNOMEDCTOutput {
+    pub fn inferSnomedct(self: *Self, allocator: std.mem.Allocator, input: infer_snomedct.InferSNOMEDCTInput, options: CallOptions) !infer_snomedct.InferSNOMEDCTOutput {
         return infer_snomedct.execute(self, allocator, input, options);
     }
 
     /// Gets a list of medical entity detection jobs that you have submitted.
-    pub fn listEntitiesDetectionV2Jobs(self: *Self, allocator: std.mem.Allocator, input: list_entities_detection_v2_jobs.ListEntitiesDetectionV2JobsInput, options: list_entities_detection_v2_jobs.Options) !list_entities_detection_v2_jobs.ListEntitiesDetectionV2JobsOutput {
+    pub fn listEntitiesDetectionV2Jobs(self: *Self, allocator: std.mem.Allocator, input: list_entities_detection_v2_jobs.ListEntitiesDetectionV2JobsInput, options: CallOptions) !list_entities_detection_v2_jobs.ListEntitiesDetectionV2JobsOutput {
         return list_entities_detection_v2_jobs.execute(self, allocator, input, options);
     }
 
     /// Gets a list of InferICD10CM jobs that you have submitted.
-    pub fn listIcd10CmInferenceJobs(self: *Self, allocator: std.mem.Allocator, input: list_icd10_cm_inference_jobs.ListICD10CMInferenceJobsInput, options: list_icd10_cm_inference_jobs.Options) !list_icd10_cm_inference_jobs.ListICD10CMInferenceJobsOutput {
+    pub fn listIcd10CmInferenceJobs(self: *Self, allocator: std.mem.Allocator, input: list_icd10_cm_inference_jobs.ListICD10CMInferenceJobsInput, options: CallOptions) !list_icd10_cm_inference_jobs.ListICD10CMInferenceJobsOutput {
         return list_icd10_cm_inference_jobs.execute(self, allocator, input, options);
     }
 
     /// Gets a list of protected health information (PHI) detection jobs you have
     /// submitted.
-    pub fn listPhiDetectionJobs(self: *Self, allocator: std.mem.Allocator, input: list_phi_detection_jobs.ListPHIDetectionJobsInput, options: list_phi_detection_jobs.Options) !list_phi_detection_jobs.ListPHIDetectionJobsOutput {
+    pub fn listPhiDetectionJobs(self: *Self, allocator: std.mem.Allocator, input: list_phi_detection_jobs.ListPHIDetectionJobsInput, options: CallOptions) !list_phi_detection_jobs.ListPHIDetectionJobsOutput {
         return list_phi_detection_jobs.execute(self, allocator, input, options);
     }
 
     /// Gets a list of InferRxNorm jobs that you have submitted.
-    pub fn listRxNormInferenceJobs(self: *Self, allocator: std.mem.Allocator, input: list_rx_norm_inference_jobs.ListRxNormInferenceJobsInput, options: list_rx_norm_inference_jobs.Options) !list_rx_norm_inference_jobs.ListRxNormInferenceJobsOutput {
+    pub fn listRxNormInferenceJobs(self: *Self, allocator: std.mem.Allocator, input: list_rx_norm_inference_jobs.ListRxNormInferenceJobsInput, options: CallOptions) !list_rx_norm_inference_jobs.ListRxNormInferenceJobsOutput {
         return list_rx_norm_inference_jobs.execute(self, allocator, input, options);
     }
 
     /// Gets a list of InferSNOMEDCT jobs a user has submitted.
-    pub fn listSnomedctInferenceJobs(self: *Self, allocator: std.mem.Allocator, input: list_snomedct_inference_jobs.ListSNOMEDCTInferenceJobsInput, options: list_snomedct_inference_jobs.Options) !list_snomedct_inference_jobs.ListSNOMEDCTInferenceJobsOutput {
+    pub fn listSnomedctInferenceJobs(self: *Self, allocator: std.mem.Allocator, input: list_snomedct_inference_jobs.ListSNOMEDCTInferenceJobsInput, options: CallOptions) !list_snomedct_inference_jobs.ListSNOMEDCTInferenceJobsOutput {
         return list_snomedct_inference_jobs.execute(self, allocator, input, options);
     }
 
     /// Starts an asynchronous medical entity detection job for a collection of
     /// documents. Use the
     /// `DescribeEntitiesDetectionV2Job` operation to track the status of a job.
-    pub fn startEntitiesDetectionV2Job(self: *Self, allocator: std.mem.Allocator, input: start_entities_detection_v2_job.StartEntitiesDetectionV2JobInput, options: start_entities_detection_v2_job.Options) !start_entities_detection_v2_job.StartEntitiesDetectionV2JobOutput {
+    pub fn startEntitiesDetectionV2Job(self: *Self, allocator: std.mem.Allocator, input: start_entities_detection_v2_job.StartEntitiesDetectionV2JobInput, options: CallOptions) !start_entities_detection_v2_job.StartEntitiesDetectionV2JobOutput {
         return start_entities_detection_v2_job.execute(self, allocator, input, options);
     }
 
@@ -198,14 +199,14 @@ pub const Client = struct {
     /// ontology. Use the `DescribeICD10CMInferenceJob` operation to track the
     /// status of a
     /// job.
-    pub fn startIcd10CmInferenceJob(self: *Self, allocator: std.mem.Allocator, input: start_icd10_cm_inference_job.StartICD10CMInferenceJobInput, options: start_icd10_cm_inference_job.Options) !start_icd10_cm_inference_job.StartICD10CMInferenceJobOutput {
+    pub fn startIcd10CmInferenceJob(self: *Self, allocator: std.mem.Allocator, input: start_icd10_cm_inference_job.StartICD10CMInferenceJobInput, options: CallOptions) !start_icd10_cm_inference_job.StartICD10CMInferenceJobOutput {
         return start_icd10_cm_inference_job.execute(self, allocator, input, options);
     }
 
     /// Starts an asynchronous job to detect protected health information (PHI). Use
     /// the
     /// `DescribePHIDetectionJob` operation to track the status of a job.
-    pub fn startPhiDetectionJob(self: *Self, allocator: std.mem.Allocator, input: start_phi_detection_job.StartPHIDetectionJobInput, options: start_phi_detection_job.Options) !start_phi_detection_job.StartPHIDetectionJobOutput {
+    pub fn startPhiDetectionJob(self: *Self, allocator: std.mem.Allocator, input: start_phi_detection_job.StartPHIDetectionJobInput, options: CallOptions) !start_phi_detection_job.StartPHIDetectionJobOutput {
         return start_phi_detection_job.execute(self, allocator, input, options);
     }
 
@@ -214,39 +215,39 @@ pub const Client = struct {
     /// ontology. Use the `DescribeRxNormInferenceJob` operation to track the status
     /// of a
     /// job.
-    pub fn startRxNormInferenceJob(self: *Self, allocator: std.mem.Allocator, input: start_rx_norm_inference_job.StartRxNormInferenceJobInput, options: start_rx_norm_inference_job.Options) !start_rx_norm_inference_job.StartRxNormInferenceJobOutput {
+    pub fn startRxNormInferenceJob(self: *Self, allocator: std.mem.Allocator, input: start_rx_norm_inference_job.StartRxNormInferenceJobInput, options: CallOptions) !start_rx_norm_inference_job.StartRxNormInferenceJobOutput {
         return start_rx_norm_inference_job.execute(self, allocator, input, options);
     }
 
     /// Starts an asynchronous job to detect medical concepts and link them to the
     /// SNOMED-CT ontology. Use the DescribeSNOMEDCTInferenceJob operation to track
     /// the status of a job.
-    pub fn startSnomedctInferenceJob(self: *Self, allocator: std.mem.Allocator, input: start_snomedct_inference_job.StartSNOMEDCTInferenceJobInput, options: start_snomedct_inference_job.Options) !start_snomedct_inference_job.StartSNOMEDCTInferenceJobOutput {
+    pub fn startSnomedctInferenceJob(self: *Self, allocator: std.mem.Allocator, input: start_snomedct_inference_job.StartSNOMEDCTInferenceJobInput, options: CallOptions) !start_snomedct_inference_job.StartSNOMEDCTInferenceJobOutput {
         return start_snomedct_inference_job.execute(self, allocator, input, options);
     }
 
     /// Stops a medical entities detection job in progress.
-    pub fn stopEntitiesDetectionV2Job(self: *Self, allocator: std.mem.Allocator, input: stop_entities_detection_v2_job.StopEntitiesDetectionV2JobInput, options: stop_entities_detection_v2_job.Options) !stop_entities_detection_v2_job.StopEntitiesDetectionV2JobOutput {
+    pub fn stopEntitiesDetectionV2Job(self: *Self, allocator: std.mem.Allocator, input: stop_entities_detection_v2_job.StopEntitiesDetectionV2JobInput, options: CallOptions) !stop_entities_detection_v2_job.StopEntitiesDetectionV2JobOutput {
         return stop_entities_detection_v2_job.execute(self, allocator, input, options);
     }
 
     /// Stops an InferICD10CM inference job in progress.
-    pub fn stopIcd10CmInferenceJob(self: *Self, allocator: std.mem.Allocator, input: stop_icd10_cm_inference_job.StopICD10CMInferenceJobInput, options: stop_icd10_cm_inference_job.Options) !stop_icd10_cm_inference_job.StopICD10CMInferenceJobOutput {
+    pub fn stopIcd10CmInferenceJob(self: *Self, allocator: std.mem.Allocator, input: stop_icd10_cm_inference_job.StopICD10CMInferenceJobInput, options: CallOptions) !stop_icd10_cm_inference_job.StopICD10CMInferenceJobOutput {
         return stop_icd10_cm_inference_job.execute(self, allocator, input, options);
     }
 
     /// Stops a protected health information (PHI) detection job in progress.
-    pub fn stopPhiDetectionJob(self: *Self, allocator: std.mem.Allocator, input: stop_phi_detection_job.StopPHIDetectionJobInput, options: stop_phi_detection_job.Options) !stop_phi_detection_job.StopPHIDetectionJobOutput {
+    pub fn stopPhiDetectionJob(self: *Self, allocator: std.mem.Allocator, input: stop_phi_detection_job.StopPHIDetectionJobInput, options: CallOptions) !stop_phi_detection_job.StopPHIDetectionJobOutput {
         return stop_phi_detection_job.execute(self, allocator, input, options);
     }
 
     /// Stops an InferRxNorm inference job in progress.
-    pub fn stopRxNormInferenceJob(self: *Self, allocator: std.mem.Allocator, input: stop_rx_norm_inference_job.StopRxNormInferenceJobInput, options: stop_rx_norm_inference_job.Options) !stop_rx_norm_inference_job.StopRxNormInferenceJobOutput {
+    pub fn stopRxNormInferenceJob(self: *Self, allocator: std.mem.Allocator, input: stop_rx_norm_inference_job.StopRxNormInferenceJobInput, options: CallOptions) !stop_rx_norm_inference_job.StopRxNormInferenceJobOutput {
         return stop_rx_norm_inference_job.execute(self, allocator, input, options);
     }
 
     /// Stops an InferSNOMEDCT inference job in progress.
-    pub fn stopSnomedctInferenceJob(self: *Self, allocator: std.mem.Allocator, input: stop_snomedct_inference_job.StopSNOMEDCTInferenceJobInput, options: stop_snomedct_inference_job.Options) !stop_snomedct_inference_job.StopSNOMEDCTInferenceJobOutput {
+    pub fn stopSnomedctInferenceJob(self: *Self, allocator: std.mem.Allocator, input: stop_snomedct_inference_job.StopSNOMEDCTInferenceJobInput, options: CallOptions) !stop_snomedct_inference_job.StopSNOMEDCTInferenceJobOutput {
         return stop_snomedct_inference_job.execute(self, allocator, input, options);
     }
 };

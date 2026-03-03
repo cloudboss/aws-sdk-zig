@@ -31,6 +31,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_crl = @import("update_crl.zig");
 const update_profile = @import("update_profile.zig");
 const update_trust_anchor = @import("update_trust_anchor.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -66,7 +67,7 @@ pub const Client = struct {
     /// managed policies.
     ///
     /// **Required permissions: ** `rolesanywhere:CreateProfile`.
-    pub fn createProfile(self: *Self, allocator: std.mem.Allocator, input: create_profile.CreateProfileInput, options: create_profile.Options) !create_profile.CreateProfileOutput {
+    pub fn createProfile(self: *Self, allocator: std.mem.Allocator, input: create_profile.CreateProfileInput, options: CallOptions) !create_profile.CreateProfileOutput {
         return create_profile.execute(self, allocator, input, options);
     }
 
@@ -78,41 +79,41 @@ pub const Client = struct {
     /// Amazon Web Services credentials.
     ///
     /// **Required permissions: ** `rolesanywhere:CreateTrustAnchor`.
-    pub fn createTrustAnchor(self: *Self, allocator: std.mem.Allocator, input: create_trust_anchor.CreateTrustAnchorInput, options: create_trust_anchor.Options) !create_trust_anchor.CreateTrustAnchorOutput {
+    pub fn createTrustAnchor(self: *Self, allocator: std.mem.Allocator, input: create_trust_anchor.CreateTrustAnchorInput, options: CallOptions) !create_trust_anchor.CreateTrustAnchorOutput {
         return create_trust_anchor.execute(self, allocator, input, options);
     }
 
     /// Delete an entry from the attribute mapping rules enforced by a given
     /// profile.
-    pub fn deleteAttributeMapping(self: *Self, allocator: std.mem.Allocator, input: delete_attribute_mapping.DeleteAttributeMappingInput, options: delete_attribute_mapping.Options) !delete_attribute_mapping.DeleteAttributeMappingOutput {
+    pub fn deleteAttributeMapping(self: *Self, allocator: std.mem.Allocator, input: delete_attribute_mapping.DeleteAttributeMappingInput, options: CallOptions) !delete_attribute_mapping.DeleteAttributeMappingOutput {
         return delete_attribute_mapping.execute(self, allocator, input, options);
     }
 
     /// Deletes a certificate revocation list (CRL).
     ///
     /// **Required permissions: ** `rolesanywhere:DeleteCrl`.
-    pub fn deleteCrl(self: *Self, allocator: std.mem.Allocator, input: delete_crl.DeleteCrlInput, options: delete_crl.Options) !delete_crl.DeleteCrlOutput {
+    pub fn deleteCrl(self: *Self, allocator: std.mem.Allocator, input: delete_crl.DeleteCrlInput, options: CallOptions) !delete_crl.DeleteCrlOutput {
         return delete_crl.execute(self, allocator, input, options);
     }
 
     /// Deletes a profile.
     ///
     /// **Required permissions: ** `rolesanywhere:DeleteProfile`.
-    pub fn deleteProfile(self: *Self, allocator: std.mem.Allocator, input: delete_profile.DeleteProfileInput, options: delete_profile.Options) !delete_profile.DeleteProfileOutput {
+    pub fn deleteProfile(self: *Self, allocator: std.mem.Allocator, input: delete_profile.DeleteProfileInput, options: CallOptions) !delete_profile.DeleteProfileOutput {
         return delete_profile.execute(self, allocator, input, options);
     }
 
     /// Deletes a trust anchor.
     ///
     /// **Required permissions: ** `rolesanywhere:DeleteTrustAnchor`.
-    pub fn deleteTrustAnchor(self: *Self, allocator: std.mem.Allocator, input: delete_trust_anchor.DeleteTrustAnchorInput, options: delete_trust_anchor.Options) !delete_trust_anchor.DeleteTrustAnchorOutput {
+    pub fn deleteTrustAnchor(self: *Self, allocator: std.mem.Allocator, input: delete_trust_anchor.DeleteTrustAnchorInput, options: CallOptions) !delete_trust_anchor.DeleteTrustAnchorOutput {
         return delete_trust_anchor.execute(self, allocator, input, options);
     }
 
     /// Disables a certificate revocation list (CRL).
     ///
     /// **Required permissions: ** `rolesanywhere:DisableCrl`.
-    pub fn disableCrl(self: *Self, allocator: std.mem.Allocator, input: disable_crl.DisableCrlInput, options: disable_crl.Options) !disable_crl.DisableCrlOutput {
+    pub fn disableCrl(self: *Self, allocator: std.mem.Allocator, input: disable_crl.DisableCrlInput, options: CallOptions) !disable_crl.DisableCrlOutput {
         return disable_crl.execute(self, allocator, input, options);
     }
 
@@ -120,7 +121,7 @@ pub const Client = struct {
     /// profile fail.
     ///
     /// **Required permissions: ** `rolesanywhere:DisableProfile`.
-    pub fn disableProfile(self: *Self, allocator: std.mem.Allocator, input: disable_profile.DisableProfileInput, options: disable_profile.Options) !disable_profile.DisableProfileOutput {
+    pub fn disableProfile(self: *Self, allocator: std.mem.Allocator, input: disable_profile.DisableProfileInput, options: CallOptions) !disable_profile.DisableProfileOutput {
         return disable_profile.execute(self, allocator, input, options);
     }
 
@@ -128,7 +129,7 @@ pub const Client = struct {
     /// specifying this trust anchor are unauthorized.
     ///
     /// **Required permissions: ** `rolesanywhere:DisableTrustAnchor`.
-    pub fn disableTrustAnchor(self: *Self, allocator: std.mem.Allocator, input: disable_trust_anchor.DisableTrustAnchorInput, options: disable_trust_anchor.Options) !disable_trust_anchor.DisableTrustAnchorOutput {
+    pub fn disableTrustAnchor(self: *Self, allocator: std.mem.Allocator, input: disable_trust_anchor.DisableTrustAnchorInput, options: CallOptions) !disable_trust_anchor.DisableTrustAnchorOutput {
         return disable_trust_anchor.execute(self, allocator, input, options);
     }
 
@@ -136,14 +137,14 @@ pub const Client = struct {
     /// stored in the CRL are unauthorized to receive session credentials.
     ///
     /// **Required permissions: ** `rolesanywhere:EnableCrl`.
-    pub fn enableCrl(self: *Self, allocator: std.mem.Allocator, input: enable_crl.EnableCrlInput, options: enable_crl.Options) !enable_crl.EnableCrlOutput {
+    pub fn enableCrl(self: *Self, allocator: std.mem.Allocator, input: enable_crl.EnableCrlInput, options: CallOptions) !enable_crl.EnableCrlOutput {
         return enable_crl.execute(self, allocator, input, options);
     }
 
     /// Enables temporary credential requests for a profile.
     ///
     /// **Required permissions: ** `rolesanywhere:EnableProfile`.
-    pub fn enableProfile(self: *Self, allocator: std.mem.Allocator, input: enable_profile.EnableProfileInput, options: enable_profile.Options) !enable_profile.EnableProfileOutput {
+    pub fn enableProfile(self: *Self, allocator: std.mem.Allocator, input: enable_profile.EnableProfileInput, options: CallOptions) !enable_profile.EnableProfileOutput {
         return enable_profile.execute(self, allocator, input, options);
     }
 
@@ -151,21 +152,21 @@ pub const Client = struct {
     /// are authorized for trust validation.
     ///
     /// **Required permissions: ** `rolesanywhere:EnableTrustAnchor`.
-    pub fn enableTrustAnchor(self: *Self, allocator: std.mem.Allocator, input: enable_trust_anchor.EnableTrustAnchorInput, options: enable_trust_anchor.Options) !enable_trust_anchor.EnableTrustAnchorOutput {
+    pub fn enableTrustAnchor(self: *Self, allocator: std.mem.Allocator, input: enable_trust_anchor.EnableTrustAnchorInput, options: CallOptions) !enable_trust_anchor.EnableTrustAnchorOutput {
         return enable_trust_anchor.execute(self, allocator, input, options);
     }
 
     /// Gets a certificate revocation list (CRL).
     ///
     /// **Required permissions: ** `rolesanywhere:GetCrl`.
-    pub fn getCrl(self: *Self, allocator: std.mem.Allocator, input: get_crl.GetCrlInput, options: get_crl.Options) !get_crl.GetCrlOutput {
+    pub fn getCrl(self: *Self, allocator: std.mem.Allocator, input: get_crl.GetCrlInput, options: CallOptions) !get_crl.GetCrlOutput {
         return get_crl.execute(self, allocator, input, options);
     }
 
     /// Gets a profile.
     ///
     /// **Required permissions: ** `rolesanywhere:GetProfile`.
-    pub fn getProfile(self: *Self, allocator: std.mem.Allocator, input: get_profile.GetProfileInput, options: get_profile.Options) !get_profile.GetProfileOutput {
+    pub fn getProfile(self: *Self, allocator: std.mem.Allocator, input: get_profile.GetProfileInput, options: CallOptions) !get_profile.GetProfileOutput {
         return get_profile.execute(self, allocator, input, options);
     }
 
@@ -175,14 +176,14 @@ pub const Client = struct {
     /// attempt, and the last time the associated identity attempted authentication.
     ///
     /// **Required permissions: ** `rolesanywhere:GetSubject`.
-    pub fn getSubject(self: *Self, allocator: std.mem.Allocator, input: get_subject.GetSubjectInput, options: get_subject.Options) !get_subject.GetSubjectOutput {
+    pub fn getSubject(self: *Self, allocator: std.mem.Allocator, input: get_subject.GetSubjectInput, options: CallOptions) !get_subject.GetSubjectOutput {
         return get_subject.execute(self, allocator, input, options);
     }
 
     /// Gets a trust anchor.
     ///
     /// **Required permissions: ** `rolesanywhere:GetTrustAnchor`.
-    pub fn getTrustAnchor(self: *Self, allocator: std.mem.Allocator, input: get_trust_anchor.GetTrustAnchorInput, options: get_trust_anchor.Options) !get_trust_anchor.GetTrustAnchorOutput {
+    pub fn getTrustAnchor(self: *Self, allocator: std.mem.Allocator, input: get_trust_anchor.GetTrustAnchorInput, options: CallOptions) !get_trust_anchor.GetTrustAnchorOutput {
         return get_trust_anchor.execute(self, allocator, input, options);
     }
 
@@ -192,7 +193,7 @@ pub const Client = struct {
     /// Roles Anywhere validates against the CRL before issuing credentials.
     ///
     /// **Required permissions: ** `rolesanywhere:ImportCrl`.
-    pub fn importCrl(self: *Self, allocator: std.mem.Allocator, input: import_crl.ImportCrlInput, options: import_crl.Options) !import_crl.ImportCrlOutput {
+    pub fn importCrl(self: *Self, allocator: std.mem.Allocator, input: import_crl.ImportCrlInput, options: CallOptions) !import_crl.ImportCrlOutput {
         return import_crl.execute(self, allocator, input, options);
     }
 
@@ -200,7 +201,7 @@ pub const Client = struct {
     /// and Amazon Web Services Region.
     ///
     /// **Required permissions: ** `rolesanywhere:ListCrls`.
-    pub fn listCrls(self: *Self, allocator: std.mem.Allocator, input: list_crls.ListCrlsInput, options: list_crls.Options) !list_crls.ListCrlsOutput {
+    pub fn listCrls(self: *Self, allocator: std.mem.Allocator, input: list_crls.ListCrlsInput, options: CallOptions) !list_crls.ListCrlsOutput {
         return list_crls.execute(self, allocator, input, options);
     }
 
@@ -208,7 +209,7 @@ pub const Client = struct {
     /// Region.
     ///
     /// **Required permissions: ** `rolesanywhere:ListProfiles`.
-    pub fn listProfiles(self: *Self, allocator: std.mem.Allocator, input: list_profiles.ListProfilesInput, options: list_profiles.Options) !list_profiles.ListProfilesOutput {
+    pub fn listProfiles(self: *Self, allocator: std.mem.Allocator, input: list_profiles.ListProfilesInput, options: CallOptions) !list_profiles.ListProfilesOutput {
         return list_profiles.execute(self, allocator, input, options);
     }
 
@@ -216,14 +217,14 @@ pub const Client = struct {
     /// Region.
     ///
     /// **Required permissions: ** `rolesanywhere:ListSubjects`.
-    pub fn listSubjects(self: *Self, allocator: std.mem.Allocator, input: list_subjects.ListSubjectsInput, options: list_subjects.Options) !list_subjects.ListSubjectsOutput {
+    pub fn listSubjects(self: *Self, allocator: std.mem.Allocator, input: list_subjects.ListSubjectsInput, options: CallOptions) !list_subjects.ListSubjectsOutput {
         return list_subjects.execute(self, allocator, input, options);
     }
 
     /// Lists the tags attached to the resource.
     ///
     /// **Required permissions: ** `rolesanywhere:ListTagsForResource`.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -231,14 +232,14 @@ pub const Client = struct {
     /// Region.
     ///
     /// **Required permissions: ** `rolesanywhere:ListTrustAnchors`.
-    pub fn listTrustAnchors(self: *Self, allocator: std.mem.Allocator, input: list_trust_anchors.ListTrustAnchorsInput, options: list_trust_anchors.Options) !list_trust_anchors.ListTrustAnchorsOutput {
+    pub fn listTrustAnchors(self: *Self, allocator: std.mem.Allocator, input: list_trust_anchors.ListTrustAnchorsInput, options: CallOptions) !list_trust_anchors.ListTrustAnchorsOutput {
         return list_trust_anchors.execute(self, allocator, input, options);
     }
 
     /// Put an entry in the attribute mapping rules that will be enforced by a given
     /// profile. A mapping specifies a certificate field and one or more specifiers
     /// that have contextual meanings.
-    pub fn putAttributeMapping(self: *Self, allocator: std.mem.Allocator, input: put_attribute_mapping.PutAttributeMappingInput, options: put_attribute_mapping.Options) !put_attribute_mapping.PutAttributeMappingOutput {
+    pub fn putAttributeMapping(self: *Self, allocator: std.mem.Allocator, input: put_attribute_mapping.PutAttributeMappingInput, options: CallOptions) !put_attribute_mapping.PutAttributeMappingOutput {
         return put_attribute_mapping.execute(self, allocator, input, options);
     }
 
@@ -248,7 +249,7 @@ pub const Client = struct {
     /// status of the notification setting, and the channel to notify.
     ///
     /// **Required permissions: ** `rolesanywhere:PutNotificationSettings`.
-    pub fn putNotificationSettings(self: *Self, allocator: std.mem.Allocator, input: put_notification_settings.PutNotificationSettingsInput, options: put_notification_settings.Options) !put_notification_settings.PutNotificationSettingsOutput {
+    pub fn putNotificationSettings(self: *Self, allocator: std.mem.Allocator, input: put_notification_settings.PutNotificationSettingsInput, options: CallOptions) !put_notification_settings.PutNotificationSettingsOutput {
         return put_notification_settings.execute(self, allocator, input, options);
     }
 
@@ -256,21 +257,21 @@ pub const Client = struct {
     /// setting.
     ///
     /// **Required permissions: ** `rolesanywhere:ResetNotificationSettings`.
-    pub fn resetNotificationSettings(self: *Self, allocator: std.mem.Allocator, input: reset_notification_settings.ResetNotificationSettingsInput, options: reset_notification_settings.Options) !reset_notification_settings.ResetNotificationSettingsOutput {
+    pub fn resetNotificationSettings(self: *Self, allocator: std.mem.Allocator, input: reset_notification_settings.ResetNotificationSettingsInput, options: CallOptions) !reset_notification_settings.ResetNotificationSettingsOutput {
         return reset_notification_settings.execute(self, allocator, input, options);
     }
 
     /// Attaches tags to a resource.
     ///
     /// **Required permissions: ** `rolesanywhere:TagResource`.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from the resource.
     ///
     /// **Required permissions: ** `rolesanywhere:UntagResource`.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -280,7 +281,7 @@ pub const Client = struct {
     /// credentials.
     ///
     /// **Required permissions: ** `rolesanywhere:UpdateCrl`.
-    pub fn updateCrl(self: *Self, allocator: std.mem.Allocator, input: update_crl.UpdateCrlInput, options: update_crl.Options) !update_crl.UpdateCrlOutput {
+    pub fn updateCrl(self: *Self, allocator: std.mem.Allocator, input: update_crl.UpdateCrlInput, options: CallOptions) !update_crl.UpdateCrlOutput {
         return update_crl.execute(self, allocator, input, options);
     }
 
@@ -289,7 +290,7 @@ pub const Client = struct {
     /// managed policies.
     ///
     /// **Required permissions: ** `rolesanywhere:UpdateProfile`.
-    pub fn updateProfile(self: *Self, allocator: std.mem.Allocator, input: update_profile.UpdateProfileInput, options: update_profile.Options) !update_profile.UpdateProfileOutput {
+    pub fn updateProfile(self: *Self, allocator: std.mem.Allocator, input: update_profile.UpdateProfileInput, options: CallOptions) !update_profile.UpdateProfileOutput {
         return update_profile.execute(self, allocator, input, options);
     }
 
@@ -301,7 +302,7 @@ pub const Client = struct {
     /// by the CA in exchange for temporary Amazon Web Services credentials.
     ///
     /// **Required permissions: ** `rolesanywhere:UpdateTrustAnchor`.
-    pub fn updateTrustAnchor(self: *Self, allocator: std.mem.Allocator, input: update_trust_anchor.UpdateTrustAnchorInput, options: update_trust_anchor.Options) !update_trust_anchor.UpdateTrustAnchorOutput {
+    pub fn updateTrustAnchor(self: *Self, allocator: std.mem.Allocator, input: update_trust_anchor.UpdateTrustAnchorInput, options: CallOptions) !update_trust_anchor.UpdateTrustAnchorOutput {
         return update_trust_anchor.execute(self, allocator, input, options);
     }
 

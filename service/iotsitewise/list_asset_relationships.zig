@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TraversalType = @import("traversal_type.zig").TraversalType;
 const AssetRelationshipSummary = @import("asset_relationship_summary.zig").AssetRelationshipSummary;
@@ -51,11 +52,7 @@ pub const ListAssetRelationshipsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAssetRelationshipsInput, options: Options) !ListAssetRelationshipsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAssetRelationshipsInput, options: CallOptions) !ListAssetRelationshipsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

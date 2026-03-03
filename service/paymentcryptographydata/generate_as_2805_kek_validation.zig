@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const As2805KekValidationType = @import("as_2805_kek_validation_type.zig").As2805KekValidationType;
 const RandomKeySendVariantMask = @import("random_key_send_variant_mask.zig").RandomKeySendVariantMask;
@@ -50,11 +51,7 @@ pub const GenerateAs2805KekValidationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GenerateAs2805KekValidationInput, options: Options) !GenerateAs2805KekValidationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GenerateAs2805KekValidationInput, options: CallOptions) !GenerateAs2805KekValidationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

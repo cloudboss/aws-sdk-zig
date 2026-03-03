@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const WirelessDeviceIdType = @import("wireless_device_id_type.zig").WirelessDeviceIdType;
 const LoRaWANDevice = @import("lo_ra_wan_device.zig").LoRaWANDevice;
@@ -74,11 +75,7 @@ pub const GetWirelessDeviceOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetWirelessDeviceInput, options: Options) !GetWirelessDeviceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetWirelessDeviceInput, options: CallOptions) !GetWirelessDeviceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

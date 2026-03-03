@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SelfservicePermissions = @import("selfservice_permissions.zig").SelfservicePermissions;
 
@@ -21,11 +22,7 @@ pub const ModifySelfservicePermissionsInput = struct {
 pub const ModifySelfservicePermissionsOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifySelfservicePermissionsInput, options: Options) !ModifySelfservicePermissionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifySelfservicePermissionsInput, options: CallOptions) !ModifySelfservicePermissionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

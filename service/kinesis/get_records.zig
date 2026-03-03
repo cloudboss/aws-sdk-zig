@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChildShard = @import("child_shard.zig").ChildShard;
 const Record = @import("record.zig").Record;
@@ -64,11 +65,7 @@ pub const GetRecordsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetRecordsInput, options: Options) !GetRecordsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetRecordsInput, options: CallOptions) !GetRecordsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

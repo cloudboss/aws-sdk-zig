@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const UpdateKinesisStreamingConfiguration = @import("update_kinesis_streaming_configuration.zig").UpdateKinesisStreamingConfiguration;
 const DestinationStatus = @import("destination_status.zig").DestinationStatus;
@@ -47,11 +48,7 @@ pub const UpdateKinesisStreamingDestinationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateKinesisStreamingDestinationInput, options: Options) !UpdateKinesisStreamingDestinationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateKinesisStreamingDestinationInput, options: CallOptions) !UpdateKinesisStreamingDestinationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

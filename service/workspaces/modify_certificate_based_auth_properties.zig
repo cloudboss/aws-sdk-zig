@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CertificateBasedAuthProperties = @import("certificate_based_auth_properties.zig").CertificateBasedAuthProperties;
 const DeletableCertificateBasedAuthProperty = @import("deletable_certificate_based_auth_property.zig").DeletableCertificateBasedAuthProperty;
@@ -26,11 +27,7 @@ pub const ModifyCertificateBasedAuthPropertiesInput = struct {
 pub const ModifyCertificateBasedAuthPropertiesOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyCertificateBasedAuthPropertiesInput, options: Options) !ModifyCertificateBasedAuthPropertiesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyCertificateBasedAuthPropertiesInput, options: CallOptions) !ModifyCertificateBasedAuthPropertiesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

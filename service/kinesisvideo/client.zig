@@ -33,6 +33,7 @@ const update_notification_configuration = @import("update_notification_configura
 const update_signaling_channel = @import("update_signaling_channel.zig");
 const update_stream = @import("update_stream.zig");
 const update_stream_storage_configuration = @import("update_stream_storage_configuration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -66,7 +67,7 @@ pub const Client = struct {
     /// Creates a signaling channel.
     ///
     /// `CreateSignalingChannel` is an asynchronous operation.
-    pub fn createSignalingChannel(self: *Self, allocator: std.mem.Allocator, input: create_signaling_channel.CreateSignalingChannelInput, options: create_signaling_channel.Options) !create_signaling_channel.CreateSignalingChannelOutput {
+    pub fn createSignalingChannel(self: *Self, allocator: std.mem.Allocator, input: create_signaling_channel.CreateSignalingChannelInput, options: CallOptions) !create_signaling_channel.CreateSignalingChannelOutput {
         return create_signaling_channel.execute(self, allocator, input, options);
     }
 
@@ -84,7 +85,7 @@ pub const Client = struct {
     ///
     /// You must have permissions for the `KinesisVideo:CreateStream`
     /// action.
-    pub fn createStream(self: *Self, allocator: std.mem.Allocator, input: create_stream.CreateStreamInput, options: create_stream.Options) !create_stream.CreateStreamOutput {
+    pub fn createStream(self: *Self, allocator: std.mem.Allocator, input: create_stream.CreateStreamInput, options: CallOptions) !create_stream.CreateStreamOutput {
         return create_stream.execute(self, allocator, input, options);
     }
 
@@ -99,7 +100,7 @@ pub const Client = struct {
     ///
     /// When the deletion process has completed successfully, the edge configuration
     /// is no longer accessible.
-    pub fn deleteEdgeConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_edge_configuration.DeleteEdgeConfigurationInput, options: delete_edge_configuration.Options) !delete_edge_configuration.DeleteEdgeConfigurationOutput {
+    pub fn deleteEdgeConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_edge_configuration.DeleteEdgeConfigurationInput, options: CallOptions) !delete_edge_configuration.DeleteEdgeConfigurationOutput {
         return delete_edge_configuration.execute(self, allocator, input, options);
     }
 
@@ -107,7 +108,7 @@ pub const Client = struct {
     /// asynchronous operation. If you don't specify the channel's current version,
     /// the most
     /// recent version is deleted.
-    pub fn deleteSignalingChannel(self: *Self, allocator: std.mem.Allocator, input: delete_signaling_channel.DeleteSignalingChannelInput, options: delete_signaling_channel.Options) !delete_signaling_channel.DeleteSignalingChannelOutput {
+    pub fn deleteSignalingChannel(self: *Self, allocator: std.mem.Allocator, input: delete_signaling_channel.DeleteSignalingChannelInput, options: CallOptions) !delete_signaling_channel.DeleteSignalingChannelOutput {
         return delete_signaling_channel.execute(self, allocator, input, options);
     }
 
@@ -126,7 +127,7 @@ pub const Client = struct {
     ///
     /// This operation requires permission for the `KinesisVideo:DeleteStream`
     /// action.
-    pub fn deleteStream(self: *Self, allocator: std.mem.Allocator, input: delete_stream.DeleteStreamInput, options: delete_stream.Options) !delete_stream.DeleteStreamOutput {
+    pub fn deleteStream(self: *Self, allocator: std.mem.Allocator, input: delete_stream.DeleteStreamInput, options: CallOptions) !delete_stream.DeleteStreamOutput {
         return delete_stream.execute(self, allocator, input, options);
     }
 
@@ -137,30 +138,30 @@ pub const Client = struct {
     /// to determine if the configuration is in sync with the Edge Agent. Use this
     /// API to
     /// evaluate the health of the Edge Agent.
-    pub fn describeEdgeConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_edge_configuration.DescribeEdgeConfigurationInput, options: describe_edge_configuration.Options) !describe_edge_configuration.DescribeEdgeConfigurationOutput {
+    pub fn describeEdgeConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_edge_configuration.DescribeEdgeConfigurationInput, options: CallOptions) !describe_edge_configuration.DescribeEdgeConfigurationOutput {
         return describe_edge_configuration.execute(self, allocator, input, options);
     }
 
     /// Gets the `ImageGenerationConfiguration` for a given Kinesis video stream.
-    pub fn describeImageGenerationConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_image_generation_configuration.DescribeImageGenerationConfigurationInput, options: describe_image_generation_configuration.Options) !describe_image_generation_configuration.DescribeImageGenerationConfigurationOutput {
+    pub fn describeImageGenerationConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_image_generation_configuration.DescribeImageGenerationConfigurationInput, options: CallOptions) !describe_image_generation_configuration.DescribeImageGenerationConfigurationOutput {
         return describe_image_generation_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns the most current information about the stream. The `streamName`
     /// or `streamARN` should be provided in the input.
-    pub fn describeMappedResourceConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_mapped_resource_configuration.DescribeMappedResourceConfigurationInput, options: describe_mapped_resource_configuration.Options) !describe_mapped_resource_configuration.DescribeMappedResourceConfigurationOutput {
+    pub fn describeMappedResourceConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_mapped_resource_configuration.DescribeMappedResourceConfigurationInput, options: CallOptions) !describe_mapped_resource_configuration.DescribeMappedResourceConfigurationOutput {
         return describe_mapped_resource_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns the most current information about the channel. Specify the
     /// `ChannelName`
     /// or `ChannelARN` in the input.
-    pub fn describeMediaStorageConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_media_storage_configuration.DescribeMediaStorageConfigurationInput, options: describe_media_storage_configuration.Options) !describe_media_storage_configuration.DescribeMediaStorageConfigurationOutput {
+    pub fn describeMediaStorageConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_media_storage_configuration.DescribeMediaStorageConfigurationInput, options: CallOptions) !describe_media_storage_configuration.DescribeMediaStorageConfigurationOutput {
         return describe_media_storage_configuration.execute(self, allocator, input, options);
     }
 
     /// Gets the `NotificationConfiguration` for a given Kinesis video stream.
-    pub fn describeNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_notification_configuration.DescribeNotificationConfigurationInput, options: describe_notification_configuration.Options) !describe_notification_configuration.DescribeNotificationConfigurationOutput {
+    pub fn describeNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_notification_configuration.DescribeNotificationConfigurationInput, options: CallOptions) !describe_notification_configuration.DescribeNotificationConfigurationOutput {
         return describe_notification_configuration.execute(self, allocator, input, options);
     }
 
@@ -169,14 +170,14 @@ pub const Client = struct {
     /// either the name or the Amazon Resource Name (ARN) of the channel that you
     /// want to
     /// describe.
-    pub fn describeSignalingChannel(self: *Self, allocator: std.mem.Allocator, input: describe_signaling_channel.DescribeSignalingChannelInput, options: describe_signaling_channel.Options) !describe_signaling_channel.DescribeSignalingChannelOutput {
+    pub fn describeSignalingChannel(self: *Self, allocator: std.mem.Allocator, input: describe_signaling_channel.DescribeSignalingChannelInput, options: CallOptions) !describe_signaling_channel.DescribeSignalingChannelOutput {
         return describe_signaling_channel.execute(self, allocator, input, options);
     }
 
     /// Returns the most current information about the specified stream. You must
     /// specify
     /// either the `StreamName` or the `StreamARN`.
-    pub fn describeStream(self: *Self, allocator: std.mem.Allocator, input: describe_stream.DescribeStreamInput, options: describe_stream.Options) !describe_stream.DescribeStreamOutput {
+    pub fn describeStream(self: *Self, allocator: std.mem.Allocator, input: describe_stream.DescribeStreamInput, options: CallOptions) !describe_stream.DescribeStreamOutput {
         return describe_stream.execute(self, allocator, input, options);
     }
 
@@ -187,7 +188,7 @@ pub const Client = struct {
     ///
     /// You must have permissions for the
     /// `KinesisVideo:DescribeStreamStorageConfiguration` action.
-    pub fn describeStreamStorageConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_stream_storage_configuration.DescribeStreamStorageConfigurationInput, options: describe_stream_storage_configuration.Options) !describe_stream_storage_configuration.DescribeStreamStorageConfigurationOutput {
+    pub fn describeStreamStorageConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_stream_storage_configuration.DescribeStreamStorageConfigurationInput, options: CallOptions) !describe_stream_storage_configuration.DescribeStreamStorageConfigurationOutput {
         return describe_stream_storage_configuration.execute(self, allocator, input, options);
     }
 
@@ -203,7 +204,7 @@ pub const Client = struct {
     ///
     /// In the request, specify the stream either by `StreamName` or
     /// `StreamARN`.
-    pub fn getDataEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_data_endpoint.GetDataEndpointInput, options: get_data_endpoint.Options) !get_data_endpoint.GetDataEndpointOutput {
+    pub fn getDataEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_data_endpoint.GetDataEndpointInput, options: CallOptions) !get_data_endpoint.GetDataEndpointOutput {
         return get_data_endpoint.execute(self, allocator, input, options);
     }
 
@@ -228,7 +229,7 @@ pub const Client = struct {
     /// of the viewers on the channel. A `VIEWER` role results in this API
     /// generating
     /// an endpoint that a client can use to communicate only with a `MASTER`.
-    pub fn getSignalingChannelEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_signaling_channel_endpoint.GetSignalingChannelEndpointInput, options: get_signaling_channel_endpoint.Options) !get_signaling_channel_endpoint.GetSignalingChannelEndpointOutput {
+    pub fn getSignalingChannelEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_signaling_channel_endpoint.GetSignalingChannelEndpointInput, options: CallOptions) !get_signaling_channel_endpoint.GetSignalingChannelEndpointOutput {
         return get_signaling_channel_endpoint.execute(self, allocator, input, options);
     }
 
@@ -236,7 +237,7 @@ pub const Client = struct {
     /// Agent.
     ///
     /// In the request, you must specify the Edge Agent `HubDeviceArn`.
-    pub fn listEdgeAgentConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_edge_agent_configurations.ListEdgeAgentConfigurationsInput, options: list_edge_agent_configurations.Options) !list_edge_agent_configurations.ListEdgeAgentConfigurationsOutput {
+    pub fn listEdgeAgentConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_edge_agent_configurations.ListEdgeAgentConfigurationsInput, options: CallOptions) !list_edge_agent_configurations.ListEdgeAgentConfigurationsOutput {
         return list_edge_agent_configurations.execute(self, allocator, input, options);
     }
 
@@ -244,7 +245,7 @@ pub const Client = struct {
     /// signaling channel. To retrieve only those channels that satisfy a specific
     /// condition,
     /// you can specify a `ChannelNameCondition`.
-    pub fn listSignalingChannels(self: *Self, allocator: std.mem.Allocator, input: list_signaling_channels.ListSignalingChannelsInput, options: list_signaling_channels.Options) !list_signaling_channels.ListSignalingChannelsOutput {
+    pub fn listSignalingChannels(self: *Self, allocator: std.mem.Allocator, input: list_signaling_channels.ListSignalingChannelsInput, options: CallOptions) !list_signaling_channels.ListSignalingChannelsOutput {
         return list_signaling_channels.execute(self, allocator, input, options);
     }
 
@@ -252,12 +253,12 @@ pub const Client = struct {
     /// stream. To retrieve only streams that satisfy a specific condition, you can
     /// specify a
     /// `StreamNameCondition`.
-    pub fn listStreams(self: *Self, allocator: std.mem.Allocator, input: list_streams.ListStreamsInput, options: list_streams.Options) !list_streams.ListStreamsOutput {
+    pub fn listStreams(self: *Self, allocator: std.mem.Allocator, input: list_streams.ListStreamsInput, options: CallOptions) !list_streams.ListStreamsOutput {
         return list_streams.execute(self, allocator, input, options);
     }
 
     /// Returns a list of tags associated with the specified signaling channel.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -265,7 +266,7 @@ pub const Client = struct {
     ///
     /// In the request, you must specify either the `StreamName` or the
     /// `StreamARN`.
-    pub fn listTagsForStream(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_stream.ListTagsForStreamInput, options: list_tags_for_stream.Options) !list_tags_for_stream.ListTagsForStreamOutput {
+    pub fn listTagsForStream(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_stream.ListTagsForStreamInput, options: CallOptions) !list_tags_for_stream.ListTagsForStreamOutput {
         return list_tags_for_stream.execute(self, allocator, input, options);
     }
 
@@ -294,7 +295,7 @@ pub const Client = struct {
     /// DeleteEdgeConfiguration to delete
     /// the current edge configuration. You can then invoke
     /// StartEdgeConfigurationUpdate with an updated Hub Device ARN.
-    pub fn startEdgeConfigurationUpdate(self: *Self, allocator: std.mem.Allocator, input: start_edge_configuration_update.StartEdgeConfigurationUpdateInput, options: start_edge_configuration_update.Options) !start_edge_configuration_update.StartEdgeConfigurationUpdateOutput {
+    pub fn startEdgeConfigurationUpdate(self: *Self, allocator: std.mem.Allocator, input: start_edge_configuration_update.StartEdgeConfigurationUpdateInput, options: CallOptions) !start_edge_configuration_update.StartEdgeConfigurationUpdateOutput {
         return start_edge_configuration_update.execute(self, allocator, input, options);
     }
 
@@ -306,7 +307,7 @@ pub const Client = struct {
     /// you specify in the request. For more information, see [Using Cost Allocation
     /// Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *Billing and Cost Management and Cost Management User
     /// Guide*.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -325,7 +326,7 @@ pub const Client = struct {
     /// action.
     ///
     /// A Kinesis video stream can support up to 50 tags.
-    pub fn tagStream(self: *Self, allocator: std.mem.Allocator, input: tag_stream.TagStreamInput, options: tag_stream.Options) !tag_stream.TagStreamOutput {
+    pub fn tagStream(self: *Self, allocator: std.mem.Allocator, input: tag_stream.TagStreamInput, options: CallOptions) !tag_stream.TagStreamOutput {
         return tag_stream.execute(self, allocator, input, options);
     }
 
@@ -334,7 +335,7 @@ pub const Client = struct {
     /// key or keys; don't specify the value. If you specify a tag key that does not
     /// exist, it's
     /// ignored.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -346,7 +347,7 @@ pub const Client = struct {
     ///
     /// In the request, you must provide the `StreamName` or
     /// `StreamARN`.
-    pub fn untagStream(self: *Self, allocator: std.mem.Allocator, input: untag_stream.UntagStreamInput, options: untag_stream.Options) !untag_stream.UntagStreamOutput {
+    pub fn untagStream(self: *Self, allocator: std.mem.Allocator, input: untag_stream.UntagStreamInput, options: CallOptions) !untag_stream.UntagStreamOutput {
         return untag_stream.execute(self, allocator, input, options);
     }
 
@@ -375,12 +376,12 @@ pub const Client = struct {
     /// from seven hours to one hour, all existing data is retained for one hour,
     /// and
     /// any data older than one hour is deleted immediately.
-    pub fn updateDataRetention(self: *Self, allocator: std.mem.Allocator, input: update_data_retention.UpdateDataRetentionInput, options: update_data_retention.Options) !update_data_retention.UpdateDataRetentionOutput {
+    pub fn updateDataRetention(self: *Self, allocator: std.mem.Allocator, input: update_data_retention.UpdateDataRetentionInput, options: CallOptions) !update_data_retention.UpdateDataRetentionOutput {
         return update_data_retention.execute(self, allocator, input, options);
     }
 
     /// Updates the `StreamInfo` and `ImageProcessingConfiguration` fields.
-    pub fn updateImageGenerationConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_image_generation_configuration.UpdateImageGenerationConfigurationInput, options: update_image_generation_configuration.Options) !update_image_generation_configuration.UpdateImageGenerationConfigurationOutput {
+    pub fn updateImageGenerationConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_image_generation_configuration.UpdateImageGenerationConfigurationInput, options: CallOptions) !update_image_generation_configuration.UpdateImageGenerationConfigurationOutput {
         return update_image_generation_configuration.execute(self, allocator, input, options);
     }
 
@@ -401,12 +402,12 @@ pub const Client = struct {
     /// the
     /// `JoinStorageSession` API to trigger an SDP offer send and establish a
     /// connection between a peer and the storage session.
-    pub fn updateMediaStorageConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_media_storage_configuration.UpdateMediaStorageConfigurationInput, options: update_media_storage_configuration.Options) !update_media_storage_configuration.UpdateMediaStorageConfigurationOutput {
+    pub fn updateMediaStorageConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_media_storage_configuration.UpdateMediaStorageConfigurationInput, options: CallOptions) !update_media_storage_configuration.UpdateMediaStorageConfigurationOutput {
         return update_media_storage_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates the notification information for a stream.
-    pub fn updateNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_notification_configuration.UpdateNotificationConfigurationInput, options: update_notification_configuration.Options) !update_notification_configuration.UpdateNotificationConfigurationOutput {
+    pub fn updateNotificationConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_notification_configuration.UpdateNotificationConfigurationInput, options: CallOptions) !update_notification_configuration.UpdateNotificationConfigurationOutput {
         return update_notification_configuration.execute(self, allocator, input, options);
     }
 
@@ -419,7 +420,7 @@ pub const Client = struct {
     /// updated. Existing
     /// messages are still expired as per the previous `MessageTtlSeconds`
     /// value.
-    pub fn updateSignalingChannel(self: *Self, allocator: std.mem.Allocator, input: update_signaling_channel.UpdateSignalingChannelInput, options: update_signaling_channel.Options) !update_signaling_channel.UpdateSignalingChannelOutput {
+    pub fn updateSignalingChannel(self: *Self, allocator: std.mem.Allocator, input: update_signaling_channel.UpdateSignalingChannelInput, options: CallOptions) !update_signaling_channel.UpdateSignalingChannelOutput {
         return update_signaling_channel.execute(self, allocator, input, options);
     }
 
@@ -438,7 +439,7 @@ pub const Client = struct {
     ///
     /// `UpdateStream` is an asynchronous operation, and takes time to
     /// complete.
-    pub fn updateStream(self: *Self, allocator: std.mem.Allocator, input: update_stream.UpdateStreamInput, options: update_stream.Options) !update_stream.UpdateStreamOutput {
+    pub fn updateStream(self: *Self, allocator: std.mem.Allocator, input: update_stream.UpdateStreamInput, options: CallOptions) !update_stream.UpdateStreamOutput {
         return update_stream.execute(self, allocator, input, options);
     }
 
@@ -452,7 +453,7 @@ pub const Client = struct {
     ///
     /// You must have permissions for the
     /// `KinesisVideo:UpdateStreamStorageConfiguration` action.
-    pub fn updateStreamStorageConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_stream_storage_configuration.UpdateStreamStorageConfigurationInput, options: update_stream_storage_configuration.Options) !update_stream_storage_configuration.UpdateStreamStorageConfigurationOutput {
+    pub fn updateStreamStorageConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_stream_storage_configuration.UpdateStreamStorageConfigurationInput, options: CallOptions) !update_stream_storage_configuration.UpdateStreamStorageConfigurationOutput {
         return update_stream_storage_configuration.execute(self, allocator, input, options);
     }
 

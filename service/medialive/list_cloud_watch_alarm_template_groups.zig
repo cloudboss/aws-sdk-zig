@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CloudWatchAlarmTemplateGroupSummary = @import("cloud_watch_alarm_template_group_summary.zig").CloudWatchAlarmTemplateGroupSummary;
 
@@ -40,11 +41,7 @@ pub const ListCloudWatchAlarmTemplateGroupsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCloudWatchAlarmTemplateGroupsInput, options: Options) !ListCloudWatchAlarmTemplateGroupsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCloudWatchAlarmTemplateGroupsInput, options: CallOptions) !ListCloudWatchAlarmTemplateGroupsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

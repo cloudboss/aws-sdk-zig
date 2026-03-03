@@ -30,6 +30,7 @@ const resolve_component_candidates = @import("resolve_component_candidates.zig")
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_connectivity_info = @import("update_connectivity_info.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -70,7 +71,7 @@ pub const Client = struct {
     /// For more information, see
     /// [Greengrass service
     /// role](https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html) in the *IoT Greengrass Version 2 Developer Guide*.
-    pub fn associateServiceRoleToAccount(self: *Self, allocator: std.mem.Allocator, input: associate_service_role_to_account.AssociateServiceRoleToAccountInput, options: associate_service_role_to_account.Options) !associate_service_role_to_account.AssociateServiceRoleToAccountOutput {
+    pub fn associateServiceRoleToAccount(self: *Self, allocator: std.mem.Allocator, input: associate_service_role_to_account.AssociateServiceRoleToAccountInput, options: CallOptions) !associate_service_role_to_account.AssociateServiceRoleToAccountOutput {
         return associate_service_role_to_account.execute(self, allocator, input, options);
     }
 
@@ -92,7 +93,7 @@ pub const Client = struct {
     /// see [Interact with
     /// local IoT
     /// devices](https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-local-iot-devices.html) in the *IoT Greengrass V2 Developer Guide*.
-    pub fn batchAssociateClientDeviceWithCoreDevice(self: *Self, allocator: std.mem.Allocator, input: batch_associate_client_device_with_core_device.BatchAssociateClientDeviceWithCoreDeviceInput, options: batch_associate_client_device_with_core_device.Options) !batch_associate_client_device_with_core_device.BatchAssociateClientDeviceWithCoreDeviceOutput {
+    pub fn batchAssociateClientDeviceWithCoreDevice(self: *Self, allocator: std.mem.Allocator, input: batch_associate_client_device_with_core_device.BatchAssociateClientDeviceWithCoreDeviceInput, options: CallOptions) !batch_associate_client_device_with_core_device.BatchAssociateClientDeviceWithCoreDeviceOutput {
         return batch_associate_client_device_with_core_device.execute(self, allocator, input, options);
     }
 
@@ -101,7 +102,7 @@ pub const Client = struct {
     /// device from a core device, the client device won't be able to use cloud
     /// discovery to retrieve
     /// the core device's connectivity information and certificates.
-    pub fn batchDisassociateClientDeviceFromCoreDevice(self: *Self, allocator: std.mem.Allocator, input: batch_disassociate_client_device_from_core_device.BatchDisassociateClientDeviceFromCoreDeviceInput, options: batch_disassociate_client_device_from_core_device.Options) !batch_disassociate_client_device_from_core_device.BatchDisassociateClientDeviceFromCoreDeviceOutput {
+    pub fn batchDisassociateClientDeviceFromCoreDevice(self: *Self, allocator: std.mem.Allocator, input: batch_disassociate_client_device_from_core_device.BatchDisassociateClientDeviceFromCoreDeviceInput, options: CallOptions) !batch_disassociate_client_device_from_core_device.BatchDisassociateClientDeviceFromCoreDeviceOutput {
         return batch_disassociate_client_device_from_core_device.execute(self, allocator, input, options);
     }
 
@@ -110,7 +111,7 @@ pub const Client = struct {
     /// received it. If a device already received the deployment, this operation
     /// doesn't change
     /// anything for that device.
-    pub fn cancelDeployment(self: *Self, allocator: std.mem.Allocator, input: cancel_deployment.CancelDeploymentInput, options: cancel_deployment.Options) !cancel_deployment.CancelDeploymentOutput {
+    pub fn cancelDeployment(self: *Self, allocator: std.mem.Allocator, input: cancel_deployment.CancelDeploymentInput, options: CallOptions) !cancel_deployment.CancelDeploymentOutput {
         return cancel_deployment.execute(self, allocator, input, options);
     }
 
@@ -154,7 +155,7 @@ pub const Client = struct {
     ///
     /// IoT Greengrass currently supports Lambda functions on only Linux core
     /// devices.
-    pub fn createComponentVersion(self: *Self, allocator: std.mem.Allocator, input: create_component_version.CreateComponentVersionInput, options: create_component_version.Options) !create_component_version.CreateComponentVersionOutput {
+    pub fn createComponentVersion(self: *Self, allocator: std.mem.Allocator, input: create_component_version.CreateComponentVersionInput, options: CallOptions) !create_component_version.CreateComponentVersionOutput {
         return create_component_version.execute(self, allocator, input, options);
     }
 
@@ -179,7 +180,7 @@ pub const Client = struct {
     /// For more information, see the [Create
     /// deployments](https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html) in the
     /// *IoT Greengrass V2 Developer Guide*.
-    pub fn createDeployment(self: *Self, allocator: std.mem.Allocator, input: create_deployment.CreateDeploymentInput, options: create_deployment.Options) !create_deployment.CreateDeploymentOutput {
+    pub fn createDeployment(self: *Self, allocator: std.mem.Allocator, input: create_deployment.CreateDeploymentInput, options: CallOptions) !create_deployment.CreateDeploymentOutput {
         return create_deployment.execute(self, allocator, input, options);
     }
 
@@ -192,7 +193,7 @@ pub const Client = struct {
     /// component version, you can remove the component from the deployment or
     /// update the deployment
     /// to use a valid version.
-    pub fn deleteComponent(self: *Self, allocator: std.mem.Allocator, input: delete_component.DeleteComponentInput, options: delete_component.Options) !delete_component.DeleteComponentOutput {
+    pub fn deleteComponent(self: *Self, allocator: std.mem.Allocator, input: delete_component.DeleteComponentInput, options: CallOptions) !delete_component.DeleteComponentOutput {
         return delete_component.execute(self, allocator, input, options);
     }
 
@@ -203,7 +204,7 @@ pub const Client = struct {
     /// information about how to delete the IoT thing, see
     /// [DeleteThing](https://docs.aws.amazon.com/iot/latest/apireference/API_DeleteThing.html) in the
     /// *IoT API Reference*.
-    pub fn deleteCoreDevice(self: *Self, allocator: std.mem.Allocator, input: delete_core_device.DeleteCoreDeviceInput, options: delete_core_device.Options) !delete_core_device.DeleteCoreDeviceOutput {
+    pub fn deleteCoreDevice(self: *Self, allocator: std.mem.Allocator, input: delete_core_device.DeleteCoreDeviceInput, options: CallOptions) !delete_core_device.DeleteCoreDeviceOutput {
         return delete_core_device.execute(self, allocator, input, options);
     }
 
@@ -217,12 +218,12 @@ pub const Client = struct {
     /// devices store the deployment's configuration on the device. Additionally,
     /// core devices can
     /// roll back to a previous deployment that has been deleted.
-    pub fn deleteDeployment(self: *Self, allocator: std.mem.Allocator, input: delete_deployment.DeleteDeploymentInput, options: delete_deployment.Options) !delete_deployment.DeleteDeploymentOutput {
+    pub fn deleteDeployment(self: *Self, allocator: std.mem.Allocator, input: delete_deployment.DeleteDeploymentInput, options: CallOptions) !delete_deployment.DeleteDeploymentOutput {
         return delete_deployment.execute(self, allocator, input, options);
     }
 
     /// Retrieves metadata for a version of a component.
-    pub fn describeComponent(self: *Self, allocator: std.mem.Allocator, input: describe_component.DescribeComponentInput, options: describe_component.Options) !describe_component.DescribeComponentOutput {
+    pub fn describeComponent(self: *Self, allocator: std.mem.Allocator, input: describe_component.DescribeComponentInput, options: CallOptions) !describe_component.DescribeComponentOutput {
         return describe_component.execute(self, allocator, input, options);
     }
 
@@ -233,12 +234,12 @@ pub const Client = struct {
     /// connectivity information. For more information, see [Greengrass service
     /// role](https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html) in
     /// the *IoT Greengrass Version 2 Developer Guide*.
-    pub fn disassociateServiceRoleFromAccount(self: *Self, allocator: std.mem.Allocator, input: disassociate_service_role_from_account.DisassociateServiceRoleFromAccountInput, options: disassociate_service_role_from_account.Options) !disassociate_service_role_from_account.DisassociateServiceRoleFromAccountOutput {
+    pub fn disassociateServiceRoleFromAccount(self: *Self, allocator: std.mem.Allocator, input: disassociate_service_role_from_account.DisassociateServiceRoleFromAccountInput, options: CallOptions) !disassociate_service_role_from_account.DisassociateServiceRoleFromAccountOutput {
         return disassociate_service_role_from_account.execute(self, allocator, input, options);
     }
 
     /// Gets the recipe for a version of a component.
-    pub fn getComponent(self: *Self, allocator: std.mem.Allocator, input: get_component.GetComponentInput, options: get_component.Options) !get_component.GetComponentOutput {
+    pub fn getComponent(self: *Self, allocator: std.mem.Allocator, input: get_component.GetComponentInput, options: CallOptions) !get_component.GetComponentOutput {
         return get_component.execute(self, allocator, input, options);
     }
 
@@ -247,7 +248,7 @@ pub const Client = struct {
     /// call this operation to identify the URL that they can use to download an
     /// artifact to
     /// install.
-    pub fn getComponentVersionArtifact(self: *Self, allocator: std.mem.Allocator, input: get_component_version_artifact.GetComponentVersionArtifactInput, options: get_component_version_artifact.Options) !get_component_version_artifact.GetComponentVersionArtifactOutput {
+    pub fn getComponentVersionArtifact(self: *Self, allocator: std.mem.Allocator, input: get_component_version_artifact.GetComponentVersionArtifactInput, options: CallOptions) !get_component_version_artifact.GetComponentVersionArtifactOutput {
         return get_component_version_artifact.execute(self, allocator, input, options);
     }
 
@@ -262,7 +263,7 @@ pub const Client = struct {
     /// connect. For more information, see [Connect client devices to
     /// core
     /// devices](https://docs.aws.amazon.com/greengrass/v2/developerguide/connect-client-devices.html) in the *IoT Greengrass Version 2 Developer Guide*.
-    pub fn getConnectivityInfo(self: *Self, allocator: std.mem.Allocator, input: get_connectivity_info.GetConnectivityInfoInput, options: get_connectivity_info.Options) !get_connectivity_info.GetConnectivityInfoOutput {
+    pub fn getConnectivityInfo(self: *Self, allocator: std.mem.Allocator, input: get_connectivity_info.GetConnectivityInfoInput, options: CallOptions) !get_connectivity_info.GetConnectivityInfoOutput {
         return get_connectivity_info.execute(self, allocator, input, options);
     }
 
@@ -292,13 +293,13 @@ pub const Client = struct {
     /// * For IoT Greengrass Core v2.7.0, the core device sends status updates upon
     ///   local deployment and
     /// cloud deployment
-    pub fn getCoreDevice(self: *Self, allocator: std.mem.Allocator, input: get_core_device.GetCoreDeviceInput, options: get_core_device.Options) !get_core_device.GetCoreDeviceOutput {
+    pub fn getCoreDevice(self: *Self, allocator: std.mem.Allocator, input: get_core_device.GetCoreDeviceInput, options: CallOptions) !get_core_device.GetCoreDeviceOutput {
         return get_core_device.execute(self, allocator, input, options);
     }
 
     /// Gets a deployment. Deployments define the components that run on Greengrass
     /// core devices.
-    pub fn getDeployment(self: *Self, allocator: std.mem.Allocator, input: get_deployment.GetDeploymentInput, options: get_deployment.Options) !get_deployment.GetDeploymentOutput {
+    pub fn getDeployment(self: *Self, allocator: std.mem.Allocator, input: get_deployment.GetDeploymentInput, options: CallOptions) !get_deployment.GetDeploymentOutput {
         return get_deployment.execute(self, allocator, input, options);
     }
 
@@ -309,27 +310,27 @@ pub const Client = struct {
     /// connectivity information. For more information, see [Greengrass service
     /// role](https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html) in
     /// the *IoT Greengrass Version 2 Developer Guide*.
-    pub fn getServiceRoleForAccount(self: *Self, allocator: std.mem.Allocator, input: get_service_role_for_account.GetServiceRoleForAccountInput, options: get_service_role_for_account.Options) !get_service_role_for_account.GetServiceRoleForAccountOutput {
+    pub fn getServiceRoleForAccount(self: *Self, allocator: std.mem.Allocator, input: get_service_role_for_account.GetServiceRoleForAccountInput, options: CallOptions) !get_service_role_for_account.GetServiceRoleForAccountOutput {
         return get_service_role_for_account.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of client devices that are associated with a core
     /// device.
-    pub fn listClientDevicesAssociatedWithCoreDevice(self: *Self, allocator: std.mem.Allocator, input: list_client_devices_associated_with_core_device.ListClientDevicesAssociatedWithCoreDeviceInput, options: list_client_devices_associated_with_core_device.Options) !list_client_devices_associated_with_core_device.ListClientDevicesAssociatedWithCoreDeviceOutput {
+    pub fn listClientDevicesAssociatedWithCoreDevice(self: *Self, allocator: std.mem.Allocator, input: list_client_devices_associated_with_core_device.ListClientDevicesAssociatedWithCoreDeviceInput, options: CallOptions) !list_client_devices_associated_with_core_device.ListClientDevicesAssociatedWithCoreDeviceOutput {
         return list_client_devices_associated_with_core_device.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of all versions for a component. Greater versions
     /// are listed
     /// first.
-    pub fn listComponentVersions(self: *Self, allocator: std.mem.Allocator, input: list_component_versions.ListComponentVersionsInput, options: list_component_versions.Options) !list_component_versions.ListComponentVersionsOutput {
+    pub fn listComponentVersions(self: *Self, allocator: std.mem.Allocator, input: list_component_versions.ListComponentVersionsInput, options: CallOptions) !list_component_versions.ListComponentVersionsOutput {
         return list_component_versions.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of component summaries. This list includes
     /// components that you
     /// have permission to view.
-    pub fn listComponents(self: *Self, allocator: std.mem.Allocator, input: list_components.ListComponentsInput, options: list_components.Options) !list_components.ListComponentsOutput {
+    pub fn listComponents(self: *Self, allocator: std.mem.Allocator, input: list_components.ListComponentsInput, options: CallOptions) !list_components.ListComponentsOutput {
         return list_components.execute(self, allocator, input, options);
     }
 
@@ -366,18 +367,18 @@ pub const Client = struct {
     /// * For IoT Greengrass Core v2.7.0, the core device sends status updates upon
     ///   local deployment and
     /// cloud deployment
-    pub fn listCoreDevices(self: *Self, allocator: std.mem.Allocator, input: list_core_devices.ListCoreDevicesInput, options: list_core_devices.Options) !list_core_devices.ListCoreDevicesOutput {
+    pub fn listCoreDevices(self: *Self, allocator: std.mem.Allocator, input: list_core_devices.ListCoreDevicesInput, options: CallOptions) !list_core_devices.ListCoreDevicesOutput {
         return list_core_devices.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of deployments.
-    pub fn listDeployments(self: *Self, allocator: std.mem.Allocator, input: list_deployments.ListDeploymentsInput, options: list_deployments.Options) !list_deployments.ListDeploymentsOutput {
+    pub fn listDeployments(self: *Self, allocator: std.mem.Allocator, input: list_deployments.ListDeploymentsInput, options: CallOptions) !list_deployments.ListDeploymentsOutput {
         return list_deployments.execute(self, allocator, input, options);
     }
 
     /// Retrieves a paginated list of deployment jobs that IoT Greengrass sends to
     /// Greengrass core devices.
-    pub fn listEffectiveDeployments(self: *Self, allocator: std.mem.Allocator, input: list_effective_deployments.ListEffectiveDeploymentsInput, options: list_effective_deployments.Options) !list_effective_deployments.ListEffectiveDeploymentsOutput {
+    pub fn listEffectiveDeployments(self: *Self, allocator: std.mem.Allocator, input: list_effective_deployments.ListEffectiveDeploymentsInput, options: CallOptions) !list_effective_deployments.ListEffectiveDeploymentsOutput {
         return list_effective_deployments.execute(self, allocator, input, options);
     }
 
@@ -412,12 +413,12 @@ pub const Client = struct {
     /// * For IoT Greengrass Core v2.7.0, the core device sends status updates upon
     ///   local deployment and
     /// cloud deployment
-    pub fn listInstalledComponents(self: *Self, allocator: std.mem.Allocator, input: list_installed_components.ListInstalledComponentsInput, options: list_installed_components.Options) !list_installed_components.ListInstalledComponentsOutput {
+    pub fn listInstalledComponents(self: *Self, allocator: std.mem.Allocator, input: list_installed_components.ListInstalledComponentsInput, options: CallOptions) !list_installed_components.ListInstalledComponentsOutput {
         return list_installed_components.execute(self, allocator, input, options);
     }
 
     /// Retrieves the list of tags for an IoT Greengrass resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -446,19 +447,19 @@ pub const Client = struct {
     /// authenticate with an
     /// IoT device certificate. For more information, see [IoT Greengrass endpoints
     /// and quotas](https://docs.aws.amazon.com/general/latest/gr/greengrass.html).
-    pub fn resolveComponentCandidates(self: *Self, allocator: std.mem.Allocator, input: resolve_component_candidates.ResolveComponentCandidatesInput, options: resolve_component_candidates.Options) !resolve_component_candidates.ResolveComponentCandidatesOutput {
+    pub fn resolveComponentCandidates(self: *Self, allocator: std.mem.Allocator, input: resolve_component_candidates.ResolveComponentCandidatesInput, options: CallOptions) !resolve_component_candidates.ResolveComponentCandidatesOutput {
         return resolve_component_candidates.execute(self, allocator, input, options);
     }
 
     /// Adds tags to an IoT Greengrass resource. If a tag already exists for the
     /// resource, this operation
     /// updates the tag's value.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes a tag from an IoT Greengrass resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -473,7 +474,7 @@ pub const Client = struct {
     /// connect. For more information, see [Connect client devices to
     /// core
     /// devices](https://docs.aws.amazon.com/greengrass/v2/developerguide/connect-client-devices.html) in the *IoT Greengrass Version 2 Developer Guide*.
-    pub fn updateConnectivityInfo(self: *Self, allocator: std.mem.Allocator, input: update_connectivity_info.UpdateConnectivityInfoInput, options: update_connectivity_info.Options) !update_connectivity_info.UpdateConnectivityInfoOutput {
+    pub fn updateConnectivityInfo(self: *Self, allocator: std.mem.Allocator, input: update_connectivity_info.UpdateConnectivityInfoInput, options: CallOptions) !update_connectivity_info.UpdateConnectivityInfoOutput {
         return update_connectivity_info.execute(self, allocator, input, options);
     }
 

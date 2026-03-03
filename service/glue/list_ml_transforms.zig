@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TransformFilterCriteria = @import("transform_filter_criteria.zig").TransformFilterCriteria;
 const TransformSortCriteria = @import("transform_sort_criteria.zig").TransformSortCriteria;
@@ -47,11 +48,7 @@ pub const ListMLTransformsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMLTransformsInput, options: Options) !ListMLTransformsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMLTransformsInput, options: CallOptions) !ListMLTransformsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

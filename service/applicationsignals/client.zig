@@ -24,6 +24,7 @@ const start_discovery = @import("start_discovery.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_service_level_objective = @import("update_service_level_objective.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -68,13 +69,13 @@ pub const Client = struct {
     ///
     /// For more information about SLO error budgets, see [ SLO
     /// concepts](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html#CloudWatch-ServiceLevelObjectives-concepts).
-    pub fn batchGetServiceLevelObjectiveBudgetReport(self: *Self, allocator: std.mem.Allocator, input: batch_get_service_level_objective_budget_report.BatchGetServiceLevelObjectiveBudgetReportInput, options: batch_get_service_level_objective_budget_report.Options) !batch_get_service_level_objective_budget_report.BatchGetServiceLevelObjectiveBudgetReportOutput {
+    pub fn batchGetServiceLevelObjectiveBudgetReport(self: *Self, allocator: std.mem.Allocator, input: batch_get_service_level_objective_budget_report.BatchGetServiceLevelObjectiveBudgetReportInput, options: CallOptions) !batch_get_service_level_objective_budget_report.BatchGetServiceLevelObjectiveBudgetReportOutput {
         return batch_get_service_level_objective_budget_report.execute(self, allocator, input, options);
     }
 
     /// Add or remove time window exclusions for one or more Service Level
     /// Objectives (SLOs).
-    pub fn batchUpdateExclusionWindows(self: *Self, allocator: std.mem.Allocator, input: batch_update_exclusion_windows.BatchUpdateExclusionWindowsInput, options: batch_update_exclusion_windows.Options) !batch_update_exclusion_windows.BatchUpdateExclusionWindowsOutput {
+    pub fn batchUpdateExclusionWindows(self: *Self, allocator: std.mem.Allocator, input: batch_update_exclusion_windows.BatchUpdateExclusionWindowsInput, options: CallOptions) !batch_update_exclusion_windows.BatchUpdateExclusionWindowsOutput {
         return batch_update_exclusion_windows.execute(self, allocator, input, options);
     }
 
@@ -151,28 +152,28 @@ pub const Client = struct {
     /// * `cloudwatch:ListMetrics`
     /// * `tag:GetResources`
     /// * `autoscaling:DescribeAutoScalingGroups`
-    pub fn createServiceLevelObjective(self: *Self, allocator: std.mem.Allocator, input: create_service_level_objective.CreateServiceLevelObjectiveInput, options: create_service_level_objective.Options) !create_service_level_objective.CreateServiceLevelObjectiveOutput {
+    pub fn createServiceLevelObjective(self: *Self, allocator: std.mem.Allocator, input: create_service_level_objective.CreateServiceLevelObjectiveInput, options: CallOptions) !create_service_level_objective.CreateServiceLevelObjectiveOutput {
         return create_service_level_objective.execute(self, allocator, input, options);
     }
 
     /// Deletes the grouping configuration for this account. This removes all custom
     /// grouping attribute definitions that were previously configured.
-    pub fn deleteGroupingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_grouping_configuration.DeleteGroupingConfigurationInput, options: delete_grouping_configuration.Options) !delete_grouping_configuration.DeleteGroupingConfigurationOutput {
+    pub fn deleteGroupingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_grouping_configuration.DeleteGroupingConfigurationInput, options: CallOptions) !delete_grouping_configuration.DeleteGroupingConfigurationOutput {
         return delete_grouping_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified service level objective.
-    pub fn deleteServiceLevelObjective(self: *Self, allocator: std.mem.Allocator, input: delete_service_level_objective.DeleteServiceLevelObjectiveInput, options: delete_service_level_objective.Options) !delete_service_level_objective.DeleteServiceLevelObjectiveOutput {
+    pub fn deleteServiceLevelObjective(self: *Self, allocator: std.mem.Allocator, input: delete_service_level_objective.DeleteServiceLevelObjectiveInput, options: CallOptions) !delete_service_level_objective.DeleteServiceLevelObjectiveOutput {
         return delete_service_level_objective.execute(self, allocator, input, options);
     }
 
     /// Returns information about a service discovered by Application Signals.
-    pub fn getService(self: *Self, allocator: std.mem.Allocator, input: get_service.GetServiceInput, options: get_service.Options) !get_service.GetServiceOutput {
+    pub fn getService(self: *Self, allocator: std.mem.Allocator, input: get_service.GetServiceInput, options: CallOptions) !get_service.GetServiceOutput {
         return get_service.execute(self, allocator, input, options);
     }
 
     /// Returns information about one SLO created in the account.
-    pub fn getServiceLevelObjective(self: *Self, allocator: std.mem.Allocator, input: get_service_level_objective.GetServiceLevelObjectiveInput, options: get_service_level_objective.Options) !get_service_level_objective.GetServiceLevelObjectiveOutput {
+    pub fn getServiceLevelObjective(self: *Self, allocator: std.mem.Allocator, input: get_service_level_objective.GetServiceLevelObjectiveInput, options: CallOptions) !get_service_level_objective.GetServiceLevelObjectiveOutput {
         return get_service_level_objective.execute(self, allocator, input, options);
     }
 
@@ -181,7 +182,7 @@ pub const Client = struct {
     /// significant observations about your services, including performance issues,
     /// anomalies, and potential problems. The findings are generated using
     /// heuristic algorithms based on established troubleshooting patterns.
-    pub fn listAuditFindings(self: *Self, allocator: std.mem.Allocator, input: list_audit_findings.ListAuditFindingsInput, options: list_audit_findings.Options) !list_audit_findings.ListAuditFindingsOutput {
+    pub fn listAuditFindings(self: *Self, allocator: std.mem.Allocator, input: list_audit_findings.ListAuditFindingsInput, options: CallOptions) !list_audit_findings.ListAuditFindingsOutput {
         return list_audit_findings.execute(self, allocator, input, options);
     }
 
@@ -189,7 +190,7 @@ pub const Client = struct {
     /// configuration changes, or other state-changing activities. This operation
     /// helps track the history of changes that may have affected service
     /// performance.
-    pub fn listEntityEvents(self: *Self, allocator: std.mem.Allocator, input: list_entity_events.ListEntityEventsInput, options: list_entity_events.Options) !list_entity_events.ListEntityEventsOutput {
+    pub fn listEntityEvents(self: *Self, allocator: std.mem.Allocator, input: list_entity_events.ListEntityEventsInput, options: CallOptions) !list_entity_events.ListEntityEventsOutput {
         return list_entity_events.execute(self, allocator, input, options);
     }
 
@@ -197,7 +198,7 @@ pub const Client = struct {
     /// custom grouping attribute definitions that have been configured. These
     /// definitions determine how services are logically grouped based on telemetry
     /// attributes, Amazon Web Services tags, or predefined mappings.
-    pub fn listGroupingAttributeDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_grouping_attribute_definitions.ListGroupingAttributeDefinitionsInput, options: list_grouping_attribute_definitions.Options) !list_grouping_attribute_definitions.ListGroupingAttributeDefinitionsOutput {
+    pub fn listGroupingAttributeDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_grouping_attribute_definitions.ListGroupingAttributeDefinitionsInput, options: CallOptions) !list_grouping_attribute_definitions.ListGroupingAttributeDefinitionsOutput {
         return list_grouping_attribute_definitions.execute(self, allocator, input, options);
     }
 
@@ -205,7 +206,7 @@ pub const Client = struct {
     /// dependency is an infrastructure component that an operation of this service
     /// connects with. Dependencies can include Amazon Web Services services, Amazon
     /// Web Services resources, and third-party services.
-    pub fn listServiceDependencies(self: *Self, allocator: std.mem.Allocator, input: list_service_dependencies.ListServiceDependenciesInput, options: list_service_dependencies.Options) !list_service_dependencies.ListServiceDependenciesOutput {
+    pub fn listServiceDependencies(self: *Self, allocator: std.mem.Allocator, input: list_service_dependencies.ListServiceDependenciesInput, options: CallOptions) !list_service_dependencies.ListServiceDependenciesOutput {
         return list_service_dependencies.execute(self, allocator, input, options);
     }
 
@@ -213,24 +214,24 @@ pub const Client = struct {
     /// provided time range. Dependents include other services, CloudWatch
     /// Synthetics canaries, and clients that are instrumented with CloudWatch RUM
     /// app monitors.
-    pub fn listServiceDependents(self: *Self, allocator: std.mem.Allocator, input: list_service_dependents.ListServiceDependentsInput, options: list_service_dependents.Options) !list_service_dependents.ListServiceDependentsOutput {
+    pub fn listServiceDependents(self: *Self, allocator: std.mem.Allocator, input: list_service_dependents.ListServiceDependentsInput, options: CallOptions) !list_service_dependents.ListServiceDependentsOutput {
         return list_service_dependents.execute(self, allocator, input, options);
     }
 
     /// Retrieves all exclusion windows configured for a specific SLO.
-    pub fn listServiceLevelObjectiveExclusionWindows(self: *Self, allocator: std.mem.Allocator, input: list_service_level_objective_exclusion_windows.ListServiceLevelObjectiveExclusionWindowsInput, options: list_service_level_objective_exclusion_windows.Options) !list_service_level_objective_exclusion_windows.ListServiceLevelObjectiveExclusionWindowsOutput {
+    pub fn listServiceLevelObjectiveExclusionWindows(self: *Self, allocator: std.mem.Allocator, input: list_service_level_objective_exclusion_windows.ListServiceLevelObjectiveExclusionWindowsInput, options: CallOptions) !list_service_level_objective_exclusion_windows.ListServiceLevelObjectiveExclusionWindowsOutput {
         return list_service_level_objective_exclusion_windows.execute(self, allocator, input, options);
     }
 
     /// Returns a list of SLOs created in this account.
-    pub fn listServiceLevelObjectives(self: *Self, allocator: std.mem.Allocator, input: list_service_level_objectives.ListServiceLevelObjectivesInput, options: list_service_level_objectives.Options) !list_service_level_objectives.ListServiceLevelObjectivesOutput {
+    pub fn listServiceLevelObjectives(self: *Self, allocator: std.mem.Allocator, input: list_service_level_objectives.ListServiceLevelObjectivesInput, options: CallOptions) !list_service_level_objectives.ListServiceLevelObjectivesOutput {
         return list_service_level_objectives.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the *operations* of this service that have been discovered
     /// by Application Signals. Only the operations that were invoked during the
     /// specified time range are returned.
-    pub fn listServiceOperations(self: *Self, allocator: std.mem.Allocator, input: list_service_operations.ListServiceOperationsInput, options: list_service_operations.Options) !list_service_operations.ListServiceOperationsOutput {
+    pub fn listServiceOperations(self: *Self, allocator: std.mem.Allocator, input: list_service_operations.ListServiceOperationsInput, options: CallOptions) !list_service_operations.ListServiceOperationsOutput {
         return list_service_operations.execute(self, allocator, input, options);
     }
 
@@ -238,7 +239,7 @@ pub const Client = struct {
     /// services. This API provides visibility into recent changes that may have
     /// affected service performance, helping with troubleshooting and change
     /// correlation.
-    pub fn listServiceStates(self: *Self, allocator: std.mem.Allocator, input: list_service_states.ListServiceStatesInput, options: list_service_states.Options) !list_service_states.ListServiceStatesOutput {
+    pub fn listServiceStates(self: *Self, allocator: std.mem.Allocator, input: list_service_states.ListServiceStatesInput, options: CallOptions) !list_service_states.ListServiceStatesOutput {
         return list_service_states.execute(self, allocator, input, options);
     }
 
@@ -246,13 +247,13 @@ pub const Client = struct {
     /// A service represents a minimum logical and transactional unit that completes
     /// a business function. Services are discovered through Application Signals
     /// instrumentation.
-    pub fn listServices(self: *Self, allocator: std.mem.Allocator, input: list_services.ListServicesInput, options: list_services.Options) !list_services.ListServicesOutput {
+    pub fn listServices(self: *Self, allocator: std.mem.Allocator, input: list_services.ListServicesInput, options: CallOptions) !list_services.ListServicesOutput {
         return list_services.execute(self, allocator, input, options);
     }
 
     /// Displays the tags associated with a CloudWatch resource. Tags can be
     /// assigned to service level objectives.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -262,7 +263,7 @@ pub const Client = struct {
     /// Services tags, or predefined mappings. These grouping attributes can then be
     /// used to organize and filter services in the Application Signals console and
     /// APIs.
-    pub fn putGroupingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_grouping_configuration.PutGroupingConfigurationInput, options: put_grouping_configuration.Options) !put_grouping_configuration.PutGroupingConfigurationOutput {
+    pub fn putGroupingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_grouping_configuration.PutGroupingConfigurationInput, options: CallOptions) !put_grouping_configuration.PutGroupingConfigurationOutput {
         return put_grouping_configuration.execute(self, allocator, input, options);
     }
 
@@ -287,7 +288,7 @@ pub const Client = struct {
     /// Python applications to send data to Application Signals. For more
     /// information, see [ Enabling Application
     /// Signals](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable.html).
-    pub fn startDiscovery(self: *Self, allocator: std.mem.Allocator, input: start_discovery.StartDiscoveryInput, options: start_discovery.Options) !start_discovery.StartDiscoveryOutput {
+    pub fn startDiscovery(self: *Self, allocator: std.mem.Allocator, input: start_discovery.StartDiscoveryInput, options: CallOptions) !start_discovery.StartDiscoveryOutput {
         return start_discovery.execute(self, allocator, input, options);
     }
 
@@ -308,12 +309,12 @@ pub const Client = struct {
     /// previous value for that tag.
     ///
     /// You can associate as many as 50 tags with a CloudWatch resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -322,7 +323,7 @@ pub const Client = struct {
     ///
     /// You cannot change from a period-based SLO to a request-based SLO, or change
     /// from a request-based SLO to a period-based SLO.
-    pub fn updateServiceLevelObjective(self: *Self, allocator: std.mem.Allocator, input: update_service_level_objective.UpdateServiceLevelObjectiveInput, options: update_service_level_objective.Options) !update_service_level_objective.UpdateServiceLevelObjectiveOutput {
+    pub fn updateServiceLevelObjective(self: *Self, allocator: std.mem.Allocator, input: update_service_level_objective.UpdateServiceLevelObjectiveInput, options: CallOptions) !update_service_level_objective.UpdateServiceLevelObjectiveOutput {
         return update_service_level_objective.execute(self, allocator, input, options);
     }
 

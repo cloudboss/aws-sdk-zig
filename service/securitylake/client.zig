@@ -32,6 +32,7 @@ const update_data_lake = @import("update_data_lake.zig");
 const update_data_lake_exception_subscription = @import("update_data_lake_exception_subscription.zig");
 const update_subscriber = @import("update_subscriber.zig");
 const update_subscriber_notification = @import("update_subscriber_notification.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -76,7 +77,7 @@ pub const Client = struct {
     /// services as a
     /// source. Use `CreateCustomLogSource` to enable data collection from a custom
     /// source.
-    pub fn createAwsLogSource(self: *Self, allocator: std.mem.Allocator, input: create_aws_log_source.CreateAwsLogSourceInput, options: create_aws_log_source.Options) !create_aws_log_source.CreateAwsLogSourceOutput {
+    pub fn createAwsLogSource(self: *Self, allocator: std.mem.Allocator, input: create_aws_log_source.CreateAwsLogSourceInput, options: CallOptions) !create_aws_log_source.CreateAwsLogSourceOutput {
         return create_aws_log_source.execute(self, allocator, input, options);
     }
 
@@ -92,7 +93,7 @@ pub const Client = struct {
     /// location for log files from the custom source. In addition, this operation
     /// also creates an
     /// associated Glue table and an Glue crawler.
-    pub fn createCustomLogSource(self: *Self, allocator: std.mem.Allocator, input: create_custom_log_source.CreateCustomLogSourceInput, options: create_custom_log_source.Options) !create_custom_log_source.CreateCustomLogSourceOutput {
+    pub fn createCustomLogSource(self: *Self, allocator: std.mem.Allocator, input: create_custom_log_source.CreateCustomLogSourceInput, options: CallOptions) !create_custom_log_source.CreateCustomLogSourceOutput {
         return create_custom_log_source.execute(self, allocator, input, options);
     }
 
@@ -121,7 +122,7 @@ pub const Client = struct {
     /// and event data. For
     /// more information, see the [Amazon Security Lake User
     /// Guide](https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html).
-    pub fn createDataLake(self: *Self, allocator: std.mem.Allocator, input: create_data_lake.CreateDataLakeInput, options: create_data_lake.Options) !create_data_lake.CreateDataLakeOutput {
+    pub fn createDataLake(self: *Self, allocator: std.mem.Allocator, input: create_data_lake.CreateDataLakeInput, options: CallOptions) !create_data_lake.CreateDataLakeOutput {
         return create_data_lake.execute(self, allocator, input, options);
     }
 
@@ -129,7 +130,7 @@ pub const Client = struct {
     /// the organization
     /// you specify. The notification subscription is created for exceptions that
     /// cannot be resolved by Security Lake automatically.
-    pub fn createDataLakeExceptionSubscription(self: *Self, allocator: std.mem.Allocator, input: create_data_lake_exception_subscription.CreateDataLakeExceptionSubscriptionInput, options: create_data_lake_exception_subscription.Options) !create_data_lake_exception_subscription.CreateDataLakeExceptionSubscriptionOutput {
+    pub fn createDataLakeExceptionSubscription(self: *Self, allocator: std.mem.Allocator, input: create_data_lake_exception_subscription.CreateDataLakeExceptionSubscriptionInput, options: CallOptions) !create_data_lake_exception_subscription.CreateDataLakeExceptionSubscriptionOutput {
         return create_data_lake_exception_subscription.execute(self, allocator, input, options);
     }
 
@@ -144,7 +145,7 @@ pub const Client = struct {
     /// to create a new data lake organization configuration, you must delete the
     /// existing one using
     /// [DeleteDataLakeOrganizationConfiguration](https://docs.aws.amazon.com/security-lake/latest/APIReference/API_DeleteDataLakeOrganizationConfiguration.html).
-    pub fn createDataLakeOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_data_lake_organization_configuration.CreateDataLakeOrganizationConfigurationInput, options: create_data_lake_organization_configuration.Options) !create_data_lake_organization_configuration.CreateDataLakeOrganizationConfigurationOutput {
+    pub fn createDataLakeOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_data_lake_organization_configuration.CreateDataLakeOrganizationConfigurationInput, options: CallOptions) !create_data_lake_organization_configuration.CreateDataLakeOrganizationConfigurationOutput {
         return create_data_lake_organization_configuration.execute(self, allocator, input, options);
     }
 
@@ -152,7 +153,7 @@ pub const Client = struct {
     /// Security Lake. You can
     /// create a subscriber with access to data in the current Amazon Web Services
     /// Region.
-    pub fn createSubscriber(self: *Self, allocator: std.mem.Allocator, input: create_subscriber.CreateSubscriberInput, options: create_subscriber.Options) !create_subscriber.CreateSubscriberOutput {
+    pub fn createSubscriber(self: *Self, allocator: std.mem.Allocator, input: create_subscriber.CreateSubscriberInput, options: CallOptions) !create_subscriber.CreateSubscriberOutput {
         return create_subscriber.execute(self, allocator, input, options);
     }
 
@@ -161,7 +162,7 @@ pub const Client = struct {
     /// the subscriber consumes in Security Lake. You can create only one subscriber
     /// notification per
     /// subscriber.
-    pub fn createSubscriberNotification(self: *Self, allocator: std.mem.Allocator, input: create_subscriber_notification.CreateSubscriberNotificationInput, options: create_subscriber_notification.Options) !create_subscriber_notification.CreateSubscriberNotificationOutput {
+    pub fn createSubscriberNotification(self: *Self, allocator: std.mem.Allocator, input: create_subscriber_notification.CreateSubscriberNotificationInput, options: CallOptions) !create_subscriber_notification.CreateSubscriberNotificationOutput {
         return create_subscriber_notification.execute(self, allocator, input, options);
     }
 
@@ -178,14 +179,14 @@ pub const Client = struct {
     /// You can choose any source type in any Amazon Web Services Region for either
     /// accounts that
     /// are part of a trusted organization or standalone accounts.
-    pub fn deleteAwsLogSource(self: *Self, allocator: std.mem.Allocator, input: delete_aws_log_source.DeleteAwsLogSourceInput, options: delete_aws_log_source.Options) !delete_aws_log_source.DeleteAwsLogSourceOutput {
+    pub fn deleteAwsLogSource(self: *Self, allocator: std.mem.Allocator, input: delete_aws_log_source.DeleteAwsLogSourceInput, options: CallOptions) !delete_aws_log_source.DeleteAwsLogSourceOutput {
         return delete_aws_log_source.execute(self, allocator, input, options);
     }
 
     /// Removes a custom log source from Amazon Security Lake, to stop sending data
     /// from the custom
     /// source to Security Lake.
-    pub fn deleteCustomLogSource(self: *Self, allocator: std.mem.Allocator, input: delete_custom_log_source.DeleteCustomLogSourceInput, options: delete_custom_log_source.Options) !delete_custom_log_source.DeleteCustomLogSourceOutput {
+    pub fn deleteCustomLogSource(self: *Self, allocator: std.mem.Allocator, input: delete_custom_log_source.DeleteCustomLogSourceInput, options: CallOptions) !delete_custom_log_source.DeleteCustomLogSourceOutput {
         return delete_custom_log_source.execute(self, allocator, input, options);
     }
 
@@ -203,14 +204,14 @@ pub const Client = struct {
     /// For more
     /// information, see the [Amazon Security Lake User
     /// Guide](https://docs.aws.amazon.com/security-lake/latest/userguide/disable-security-lake.html).
-    pub fn deleteDataLake(self: *Self, allocator: std.mem.Allocator, input: delete_data_lake.DeleteDataLakeInput, options: delete_data_lake.Options) !delete_data_lake.DeleteDataLakeOutput {
+    pub fn deleteDataLake(self: *Self, allocator: std.mem.Allocator, input: delete_data_lake.DeleteDataLakeInput, options: CallOptions) !delete_data_lake.DeleteDataLakeOutput {
         return delete_data_lake.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified notification subscription in Amazon Security Lake for
     /// the organization
     /// you specify.
-    pub fn deleteDataLakeExceptionSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_data_lake_exception_subscription.DeleteDataLakeExceptionSubscriptionInput, options: delete_data_lake_exception_subscription.Options) !delete_data_lake_exception_subscription.DeleteDataLakeExceptionSubscriptionOutput {
+    pub fn deleteDataLakeExceptionSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_data_lake_exception_subscription.DeleteDataLakeExceptionSubscriptionInput, options: CallOptions) !delete_data_lake_exception_subscription.DeleteDataLakeExceptionSubscriptionOutput {
         return delete_data_lake_exception_subscription.execute(self, allocator, input, options);
     }
 
@@ -220,7 +221,7 @@ pub const Client = struct {
     /// If the delegated Security Lake administrator performs this operation, new
     /// member
     /// accounts won't automatically contribute data to the data lake.
-    pub fn deleteDataLakeOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_data_lake_organization_configuration.DeleteDataLakeOrganizationConfigurationInput, options: delete_data_lake_organization_configuration.Options) !delete_data_lake_organization_configuration.DeleteDataLakeOrganizationConfigurationOutput {
+    pub fn deleteDataLakeOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_data_lake_organization_configuration.DeleteDataLakeOrganizationConfigurationInput, options: CallOptions) !delete_data_lake_organization_configuration.DeleteDataLakeOrganizationConfigurationOutput {
         return delete_data_lake_organization_configuration.execute(self, allocator, input, options);
     }
 
@@ -232,14 +233,14 @@ pub const Client = struct {
     /// is removed. This
     /// operation deletes the subscriber and removes access to data in the current
     /// Amazon Web Services Region.
-    pub fn deleteSubscriber(self: *Self, allocator: std.mem.Allocator, input: delete_subscriber.DeleteSubscriberInput, options: delete_subscriber.Options) !delete_subscriber.DeleteSubscriberOutput {
+    pub fn deleteSubscriber(self: *Self, allocator: std.mem.Allocator, input: delete_subscriber.DeleteSubscriberInput, options: CallOptions) !delete_subscriber.DeleteSubscriberOutput {
         return delete_subscriber.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified subscription notification in Amazon Security Lake for
     /// the organization
     /// you specify.
-    pub fn deleteSubscriberNotification(self: *Self, allocator: std.mem.Allocator, input: delete_subscriber_notification.DeleteSubscriberNotificationInput, options: delete_subscriber_notification.Options) !delete_subscriber_notification.DeleteSubscriberNotificationOutput {
+    pub fn deleteSubscriberNotification(self: *Self, allocator: std.mem.Allocator, input: delete_subscriber_notification.DeleteSubscriberNotificationInput, options: CallOptions) !delete_subscriber_notification.DeleteSubscriberNotificationOutput {
         return delete_subscriber_notification.execute(self, allocator, input, options);
     }
 
@@ -248,13 +249,13 @@ pub const Client = struct {
     /// can only be called by the organization management account. The organization
     /// management
     /// account cannot be the delegated administrator account.
-    pub fn deregisterDataLakeDelegatedAdministrator(self: *Self, allocator: std.mem.Allocator, input: deregister_data_lake_delegated_administrator.DeregisterDataLakeDelegatedAdministratorInput, options: deregister_data_lake_delegated_administrator.Options) !deregister_data_lake_delegated_administrator.DeregisterDataLakeDelegatedAdministratorOutput {
+    pub fn deregisterDataLakeDelegatedAdministrator(self: *Self, allocator: std.mem.Allocator, input: deregister_data_lake_delegated_administrator.DeregisterDataLakeDelegatedAdministratorInput, options: CallOptions) !deregister_data_lake_delegated_administrator.DeregisterDataLakeDelegatedAdministratorOutput {
         return deregister_data_lake_delegated_administrator.execute(self, allocator, input, options);
     }
 
     /// Retrieves the protocol and endpoint that were provided when subscribing to
     /// Amazon SNS topics for exception notifications.
-    pub fn getDataLakeExceptionSubscription(self: *Self, allocator: std.mem.Allocator, input: get_data_lake_exception_subscription.GetDataLakeExceptionSubscriptionInput, options: get_data_lake_exception_subscription.Options) !get_data_lake_exception_subscription.GetDataLakeExceptionSubscriptionOutput {
+    pub fn getDataLakeExceptionSubscription(self: *Self, allocator: std.mem.Allocator, input: get_data_lake_exception_subscription.GetDataLakeExceptionSubscriptionInput, options: CallOptions) !get_data_lake_exception_subscription.GetDataLakeExceptionSubscriptionOutput {
         return get_data_lake_exception_subscription.execute(self, allocator, input, options);
     }
 
@@ -263,40 +264,40 @@ pub const Client = struct {
     /// organization after the organization has onboarded to Amazon Security Lake.
     /// This API does not take
     /// input parameters.
-    pub fn getDataLakeOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_data_lake_organization_configuration.GetDataLakeOrganizationConfigurationInput, options: get_data_lake_organization_configuration.Options) !get_data_lake_organization_configuration.GetDataLakeOrganizationConfigurationOutput {
+    pub fn getDataLakeOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_data_lake_organization_configuration.GetDataLakeOrganizationConfigurationInput, options: CallOptions) !get_data_lake_organization_configuration.GetDataLakeOrganizationConfigurationOutput {
         return get_data_lake_organization_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves a snapshot of the current Region, including whether Amazon
     /// Security Lake is enabled
     /// for those accounts and which sources Security Lake is collecting data from.
-    pub fn getDataLakeSources(self: *Self, allocator: std.mem.Allocator, input: get_data_lake_sources.GetDataLakeSourcesInput, options: get_data_lake_sources.Options) !get_data_lake_sources.GetDataLakeSourcesOutput {
+    pub fn getDataLakeSources(self: *Self, allocator: std.mem.Allocator, input: get_data_lake_sources.GetDataLakeSourcesInput, options: CallOptions) !get_data_lake_sources.GetDataLakeSourcesOutput {
         return get_data_lake_sources.execute(self, allocator, input, options);
     }
 
     /// Retrieves the subscription information for the specified subscription ID.
     /// You can get
     /// information about a specific subscriber.
-    pub fn getSubscriber(self: *Self, allocator: std.mem.Allocator, input: get_subscriber.GetSubscriberInput, options: get_subscriber.Options) !get_subscriber.GetSubscriberOutput {
+    pub fn getSubscriber(self: *Self, allocator: std.mem.Allocator, input: get_subscriber.GetSubscriberInput, options: CallOptions) !get_subscriber.GetSubscriberOutput {
         return get_subscriber.execute(self, allocator, input, options);
     }
 
     /// Lists the Amazon Security Lake exceptions that you can use to find the
     /// source of problems and
     /// fix them.
-    pub fn listDataLakeExceptions(self: *Self, allocator: std.mem.Allocator, input: list_data_lake_exceptions.ListDataLakeExceptionsInput, options: list_data_lake_exceptions.Options) !list_data_lake_exceptions.ListDataLakeExceptionsOutput {
+    pub fn listDataLakeExceptions(self: *Self, allocator: std.mem.Allocator, input: list_data_lake_exceptions.ListDataLakeExceptionsInput, options: CallOptions) !list_data_lake_exceptions.ListDataLakeExceptionsOutput {
         return list_data_lake_exceptions.execute(self, allocator, input, options);
     }
 
     /// Retrieves the Amazon Security Lake configuration object for the specified
     /// Amazon Web Services Regions. You can use this operation to determine whether
     /// Security Lake is enabled for a Region.
-    pub fn listDataLakes(self: *Self, allocator: std.mem.Allocator, input: list_data_lakes.ListDataLakesInput, options: list_data_lakes.Options) !list_data_lakes.ListDataLakesOutput {
+    pub fn listDataLakes(self: *Self, allocator: std.mem.Allocator, input: list_data_lakes.ListDataLakesInput, options: CallOptions) !list_data_lakes.ListDataLakesOutput {
         return list_data_lakes.execute(self, allocator, input, options);
     }
 
     /// Retrieves the log sources.
-    pub fn listLogSources(self: *Self, allocator: std.mem.Allocator, input: list_log_sources.ListLogSourcesInput, options: list_log_sources.Options) !list_log_sources.ListLogSourcesOutput {
+    pub fn listLogSources(self: *Self, allocator: std.mem.Allocator, input: list_log_sources.ListLogSourcesInput, options: CallOptions) !list_log_sources.ListLogSourcesOutput {
         return list_log_sources.execute(self, allocator, input, options);
     }
 
@@ -304,14 +305,14 @@ pub const Client = struct {
     /// can retrieve a list
     /// of subscriptions associated with a specific organization or Amazon Web
     /// Services account.
-    pub fn listSubscribers(self: *Self, allocator: std.mem.Allocator, input: list_subscribers.ListSubscribersInput, options: list_subscribers.Options) !list_subscribers.ListSubscribersOutput {
+    pub fn listSubscribers(self: *Self, allocator: std.mem.Allocator, input: list_subscribers.ListSubscribersInput, options: CallOptions) !list_subscribers.ListSubscribersOutput {
         return list_subscribers.execute(self, allocator, input, options);
     }
 
     /// Retrieves the tags (keys and values) that are associated with an Amazon
     /// Security Lake resource: a subscriber, or the data lake configuration for
     /// your Amazon Web Services account in a particular Amazon Web Services Region.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -320,7 +321,7 @@ pub const Client = struct {
     /// API can only be called by the organization management account. The
     /// organization management
     /// account cannot be the delegated administrator account.
-    pub fn registerDataLakeDelegatedAdministrator(self: *Self, allocator: std.mem.Allocator, input: register_data_lake_delegated_administrator.RegisterDataLakeDelegatedAdministratorInput, options: register_data_lake_delegated_administrator.Options) !register_data_lake_delegated_administrator.RegisterDataLakeDelegatedAdministratorOutput {
+    pub fn registerDataLakeDelegatedAdministrator(self: *Self, allocator: std.mem.Allocator, input: register_data_lake_delegated_administrator.RegisterDataLakeDelegatedAdministratorInput, options: CallOptions) !register_data_lake_delegated_administrator.RegisterDataLakeDelegatedAdministratorOutput {
         return register_data_lake_delegated_administrator.execute(self, allocator, input, options);
     }
 
@@ -338,14 +339,14 @@ pub const Client = struct {
     /// [Tagging Amazon Security Lake
     /// resources](https://docs.aws.amazon.com/security-lake/latest/userguide/tagging-resources.html) in the
     /// *Amazon Security Lake User Guide*.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags (keys and values) from an Amazon Security Lake
     /// resource: a subscriber, or the data lake configuration for your
     /// Amazon Web Services account in a particular Amazon Web Services Region.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -374,28 +375,28 @@ pub const Client = struct {
     /// settings for one or more Regions after enabling Security Lake, see the
     /// [Amazon Security Lake User
     /// Guide](https://docs.aws.amazon.com/security-lake/latest/userguide/lifecycle-management.html).
-    pub fn updateDataLake(self: *Self, allocator: std.mem.Allocator, input: update_data_lake.UpdateDataLakeInput, options: update_data_lake.Options) !update_data_lake.UpdateDataLakeOutput {
+    pub fn updateDataLake(self: *Self, allocator: std.mem.Allocator, input: update_data_lake.UpdateDataLakeInput, options: CallOptions) !update_data_lake.UpdateDataLakeOutput {
         return update_data_lake.execute(self, allocator, input, options);
     }
 
     /// Updates the specified notification subscription in Amazon Security Lake for
     /// the organization
     /// you specify.
-    pub fn updateDataLakeExceptionSubscription(self: *Self, allocator: std.mem.Allocator, input: update_data_lake_exception_subscription.UpdateDataLakeExceptionSubscriptionInput, options: update_data_lake_exception_subscription.Options) !update_data_lake_exception_subscription.UpdateDataLakeExceptionSubscriptionOutput {
+    pub fn updateDataLakeExceptionSubscription(self: *Self, allocator: std.mem.Allocator, input: update_data_lake_exception_subscription.UpdateDataLakeExceptionSubscriptionInput, options: CallOptions) !update_data_lake_exception_subscription.UpdateDataLakeExceptionSubscriptionOutput {
         return update_data_lake_exception_subscription.execute(self, allocator, input, options);
     }
 
     /// Updates an existing subscription for the given Amazon Security Lake account
     /// ID. You can update
     /// a subscriber by changing the sources that the subscriber consumes data from.
-    pub fn updateSubscriber(self: *Self, allocator: std.mem.Allocator, input: update_subscriber.UpdateSubscriberInput, options: update_subscriber.Options) !update_subscriber.UpdateSubscriberOutput {
+    pub fn updateSubscriber(self: *Self, allocator: std.mem.Allocator, input: update_subscriber.UpdateSubscriberInput, options: CallOptions) !update_subscriber.UpdateSubscriberOutput {
         return update_subscriber.execute(self, allocator, input, options);
     }
 
     /// Updates an existing notification method for the subscription (SQS or HTTPs
     /// endpoint) or
     /// switches the notification subscription endpoint for a subscriber.
-    pub fn updateSubscriberNotification(self: *Self, allocator: std.mem.Allocator, input: update_subscriber_notification.UpdateSubscriberNotificationInput, options: update_subscriber_notification.Options) !update_subscriber_notification.UpdateSubscriberNotificationOutput {
+    pub fn updateSubscriberNotification(self: *Self, allocator: std.mem.Allocator, input: update_subscriber_notification.UpdateSubscriberNotificationInput, options: CallOptions) !update_subscriber_notification.UpdateSubscriberNotificationOutput {
         return update_subscriber_notification.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Grant = @import("grant.zig").Grant;
 const Owner = @import("owner.zig").Owner;
@@ -36,11 +37,7 @@ pub const GetBucketAclOutput = struct {
     owner: ?Owner = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketAclInput, options: Options) !GetBucketAclOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketAclInput, options: CallOptions) !GetBucketAclOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,9 +2,10 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
-const GetSendQuotaInput = struct {};
+pub const GetSendQuotaInput = struct {};
 
 pub const GetSendQuotaOutput = struct {
     /// The maximum number of emails the user is allowed to send in a 24-hour
@@ -25,11 +26,7 @@ pub const GetSendQuotaOutput = struct {
     sent_last_24_hours: ?f64 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSendQuotaInput, options: Options) !GetSendQuotaOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSendQuotaInput, options: CallOptions) !GetSendQuotaOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

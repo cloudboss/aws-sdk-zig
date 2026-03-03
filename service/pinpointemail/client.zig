@@ -43,6 +43,7 @@ const send_email = @import("send_email.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_configuration_set_event_destination = @import("update_configuration_set_event_destination.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -81,7 +82,7 @@ pub const Client = struct {
     /// email. When you apply a configuration set to an email, all of the rules in
     /// that
     /// configuration set are applied to the email.
-    pub fn createConfigurationSet(self: *Self, allocator: std.mem.Allocator, input: create_configuration_set.CreateConfigurationSetInput, options: create_configuration_set.Options) !create_configuration_set.CreateConfigurationSetOutput {
+    pub fn createConfigurationSet(self: *Self, allocator: std.mem.Allocator, input: create_configuration_set.CreateConfigurationSetInput, options: CallOptions) !create_configuration_set.CreateConfigurationSetOutput {
         return create_configuration_set.execute(self, allocator, input, options);
     }
 
@@ -95,7 +96,7 @@ pub const Client = struct {
     /// storage.
     ///
     /// A single configuration set can include more than one event destination.
-    pub fn createConfigurationSetEventDestination(self: *Self, allocator: std.mem.Allocator, input: create_configuration_set_event_destination.CreateConfigurationSetEventDestinationInput, options: create_configuration_set_event_destination.Options) !create_configuration_set_event_destination.CreateConfigurationSetEventDestinationOutput {
+    pub fn createConfigurationSetEventDestination(self: *Self, allocator: std.mem.Allocator, input: create_configuration_set_event_destination.CreateConfigurationSetEventDestinationInput, options: CallOptions) !create_configuration_set_event_destination.CreateConfigurationSetEventDestinationOutput {
         return create_configuration_set_event_destination.execute(self, allocator, input, options);
     }
 
@@ -106,7 +107,7 @@ pub const Client = struct {
     /// a configuration set. When you send an email that uses that configuration
     /// set, Amazon Pinpoint
     /// sends it using only the IP addresses in the associated pool.
-    pub fn createDedicatedIpPool(self: *Self, allocator: std.mem.Allocator, input: create_dedicated_ip_pool.CreateDedicatedIpPoolInput, options: create_dedicated_ip_pool.Options) !create_dedicated_ip_pool.CreateDedicatedIpPoolOutput {
+    pub fn createDedicatedIpPool(self: *Self, allocator: std.mem.Allocator, input: create_dedicated_ip_pool.CreateDedicatedIpPoolInput, options: CallOptions) !create_dedicated_ip_pool.CreateDedicatedIpPoolOutput {
         return create_dedicated_ip_pool.execute(self, allocator, input, options);
     }
 
@@ -121,7 +122,7 @@ pub const Client = struct {
     /// providers. After about 24 hours, the test is complete, and you can use the
     /// `GetDeliverabilityTestReport` operation to view the results of the
     /// test.
-    pub fn createDeliverabilityTestReport(self: *Self, allocator: std.mem.Allocator, input: create_deliverability_test_report.CreateDeliverabilityTestReportInput, options: create_deliverability_test_report.Options) !create_deliverability_test_report.CreateDeliverabilityTestReportOutput {
+    pub fn createDeliverabilityTestReport(self: *Self, allocator: std.mem.Allocator, input: create_deliverability_test_report.CreateDeliverabilityTestReportInput, options: CallOptions) !create_deliverability_test_report.CreateDeliverabilityTestReportOutput {
         return create_deliverability_test_report.execute(self, allocator, input, options);
     }
 
@@ -149,7 +150,7 @@ pub const Client = struct {
     /// configuration for your domain. It usually takes around 72 hours to complete
     /// the domain
     /// verification process.
-    pub fn createEmailIdentity(self: *Self, allocator: std.mem.Allocator, input: create_email_identity.CreateEmailIdentityInput, options: create_email_identity.Options) !create_email_identity.CreateEmailIdentityOutput {
+    pub fn createEmailIdentity(self: *Self, allocator: std.mem.Allocator, input: create_email_identity.CreateEmailIdentityInput, options: CallOptions) !create_email_identity.CreateEmailIdentityOutput {
         return create_email_identity.execute(self, allocator, input, options);
     }
 
@@ -163,7 +164,7 @@ pub const Client = struct {
     /// configuration set to an email, all of the rules in that configuration set
     /// are applied to
     /// the email.
-    pub fn deleteConfigurationSet(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_set.DeleteConfigurationSetInput, options: delete_configuration_set.Options) !delete_configuration_set.DeleteConfigurationSetOutput {
+    pub fn deleteConfigurationSet(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_set.DeleteConfigurationSetInput, options: CallOptions) !delete_configuration_set.DeleteConfigurationSetOutput {
         return delete_configuration_set.execute(self, allocator, input, options);
     }
 
@@ -177,32 +178,32 @@ pub const Client = struct {
     /// or you can use
     /// Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term
     /// storage.
-    pub fn deleteConfigurationSetEventDestination(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_set_event_destination.DeleteConfigurationSetEventDestinationInput, options: delete_configuration_set_event_destination.Options) !delete_configuration_set_event_destination.DeleteConfigurationSetEventDestinationOutput {
+    pub fn deleteConfigurationSetEventDestination(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_set_event_destination.DeleteConfigurationSetEventDestinationInput, options: CallOptions) !delete_configuration_set_event_destination.DeleteConfigurationSetEventDestinationOutput {
         return delete_configuration_set_event_destination.execute(self, allocator, input, options);
     }
 
     /// Delete a dedicated IP pool.
-    pub fn deleteDedicatedIpPool(self: *Self, allocator: std.mem.Allocator, input: delete_dedicated_ip_pool.DeleteDedicatedIpPoolInput, options: delete_dedicated_ip_pool.Options) !delete_dedicated_ip_pool.DeleteDedicatedIpPoolOutput {
+    pub fn deleteDedicatedIpPool(self: *Self, allocator: std.mem.Allocator, input: delete_dedicated_ip_pool.DeleteDedicatedIpPoolInput, options: CallOptions) !delete_dedicated_ip_pool.DeleteDedicatedIpPoolOutput {
         return delete_dedicated_ip_pool.execute(self, allocator, input, options);
     }
 
     /// Deletes an email identity that you previously verified for use with Amazon
     /// Pinpoint. An identity
     /// can be either an email address or a domain name.
-    pub fn deleteEmailIdentity(self: *Self, allocator: std.mem.Allocator, input: delete_email_identity.DeleteEmailIdentityInput, options: delete_email_identity.Options) !delete_email_identity.DeleteEmailIdentityOutput {
+    pub fn deleteEmailIdentity(self: *Self, allocator: std.mem.Allocator, input: delete_email_identity.DeleteEmailIdentityInput, options: CallOptions) !delete_email_identity.DeleteEmailIdentityOutput {
         return delete_email_identity.execute(self, allocator, input, options);
     }
 
     /// Obtain information about the email-sending status and capabilities of your
     /// Amazon Pinpoint
     /// account in the current AWS Region.
-    pub fn getAccount(self: *Self, allocator: std.mem.Allocator, input: get_account.GetAccountInput, options: get_account.Options) !get_account.GetAccountOutput {
+    pub fn getAccount(self: *Self, allocator: std.mem.Allocator, input: get_account.GetAccountInput, options: CallOptions) !get_account.GetAccountOutput {
         return get_account.execute(self, allocator, input, options);
     }
 
     /// Retrieve a list of the blacklists that your dedicated IP addresses appear
     /// on.
-    pub fn getBlacklistReports(self: *Self, allocator: std.mem.Allocator, input: get_blacklist_reports.GetBlacklistReportsInput, options: get_blacklist_reports.Options) !get_blacklist_reports.GetBlacklistReportsOutput {
+    pub fn getBlacklistReports(self: *Self, allocator: std.mem.Allocator, input: get_blacklist_reports.GetBlacklistReportsInput, options: CallOptions) !get_blacklist_reports.GetBlacklistReportsOutput {
         return get_blacklist_reports.execute(self, allocator, input, options);
     }
 
@@ -220,7 +221,7 @@ pub const Client = struct {
     /// configuration set to an email, all of the rules in that configuration set
     /// are applied to
     /// the email.
-    pub fn getConfigurationSet(self: *Self, allocator: std.mem.Allocator, input: get_configuration_set.GetConfigurationSetInput, options: get_configuration_set.Options) !get_configuration_set.GetConfigurationSetOutput {
+    pub fn getConfigurationSet(self: *Self, allocator: std.mem.Allocator, input: get_configuration_set.GetConfigurationSetInput, options: CallOptions) !get_configuration_set.GetConfigurationSetOutput {
         return get_configuration_set.execute(self, allocator, input, options);
     }
 
@@ -236,7 +237,7 @@ pub const Client = struct {
     /// or you can use
     /// Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term
     /// storage.
-    pub fn getConfigurationSetEventDestinations(self: *Self, allocator: std.mem.Allocator, input: get_configuration_set_event_destinations.GetConfigurationSetEventDestinationsInput, options: get_configuration_set_event_destinations.Options) !get_configuration_set_event_destinations.GetConfigurationSetEventDestinationsOutput {
+    pub fn getConfigurationSetEventDestinations(self: *Self, allocator: std.mem.Allocator, input: get_configuration_set_event_destinations.GetConfigurationSetEventDestinationsInput, options: CallOptions) !get_configuration_set_event_destinations.GetConfigurationSetEventDestinationsOutput {
         return get_configuration_set_event_destinations.execute(self, allocator, input, options);
     }
 
@@ -245,14 +246,14 @@ pub const Client = struct {
     /// pool that it's associated with, as well information about the automatic
     /// warm-up process
     /// for the address.
-    pub fn getDedicatedIp(self: *Self, allocator: std.mem.Allocator, input: get_dedicated_ip.GetDedicatedIpInput, options: get_dedicated_ip.Options) !get_dedicated_ip.GetDedicatedIpOutput {
+    pub fn getDedicatedIp(self: *Self, allocator: std.mem.Allocator, input: get_dedicated_ip.GetDedicatedIpInput, options: CallOptions) !get_dedicated_ip.GetDedicatedIpOutput {
         return get_dedicated_ip.execute(self, allocator, input, options);
     }
 
     /// List the dedicated IP addresses that are associated with your Amazon
     /// Pinpoint
     /// account.
-    pub fn getDedicatedIps(self: *Self, allocator: std.mem.Allocator, input: get_dedicated_ips.GetDedicatedIpsInput, options: get_dedicated_ips.Options) !get_dedicated_ips.GetDedicatedIpsOutput {
+    pub fn getDedicatedIps(self: *Self, allocator: std.mem.Allocator, input: get_dedicated_ips.GetDedicatedIpsInput, options: CallOptions) !get_dedicated_ips.GetDedicatedIpsOutput {
         return get_dedicated_ips.execute(self, allocator, input, options);
     }
 
@@ -270,12 +271,12 @@ pub const Client = struct {
     /// information about the
     /// features and cost of a Deliverability dashboard subscription, see [Amazon
     /// Pinpoint Pricing](http://aws.amazon.com/pinpoint/pricing/).
-    pub fn getDeliverabilityDashboardOptions(self: *Self, allocator: std.mem.Allocator, input: get_deliverability_dashboard_options.GetDeliverabilityDashboardOptionsInput, options: get_deliverability_dashboard_options.Options) !get_deliverability_dashboard_options.GetDeliverabilityDashboardOptionsOutput {
+    pub fn getDeliverabilityDashboardOptions(self: *Self, allocator: std.mem.Allocator, input: get_deliverability_dashboard_options.GetDeliverabilityDashboardOptionsInput, options: CallOptions) !get_deliverability_dashboard_options.GetDeliverabilityDashboardOptionsOutput {
         return get_deliverability_dashboard_options.execute(self, allocator, input, options);
     }
 
     /// Retrieve the results of a predictive inbox placement test.
-    pub fn getDeliverabilityTestReport(self: *Self, allocator: std.mem.Allocator, input: get_deliverability_test_report.GetDeliverabilityTestReportInput, options: get_deliverability_test_report.Options) !get_deliverability_test_report.GetDeliverabilityTestReportOutput {
+    pub fn getDeliverabilityTestReport(self: *Self, allocator: std.mem.Allocator, input: get_deliverability_test_report.GetDeliverabilityTestReportInput, options: CallOptions) !get_deliverability_test_report.GetDeliverabilityTestReportOutput {
         return get_deliverability_test_report.execute(self, allocator, input, options);
     }
 
@@ -284,14 +285,14 @@ pub const Client = struct {
     /// for a campaign only if the campaign sent email by using a domain that the
     /// Deliverability dashboard is enabled for (`PutDeliverabilityDashboardOption`
     /// operation).
-    pub fn getDomainDeliverabilityCampaign(self: *Self, allocator: std.mem.Allocator, input: get_domain_deliverability_campaign.GetDomainDeliverabilityCampaignInput, options: get_domain_deliverability_campaign.Options) !get_domain_deliverability_campaign.GetDomainDeliverabilityCampaignOutput {
+    pub fn getDomainDeliverabilityCampaign(self: *Self, allocator: std.mem.Allocator, input: get_domain_deliverability_campaign.GetDomainDeliverabilityCampaignInput, options: CallOptions) !get_domain_deliverability_campaign.GetDomainDeliverabilityCampaignOutput {
         return get_domain_deliverability_campaign.execute(self, allocator, input, options);
     }
 
     /// Retrieve inbox placement and engagement rates for the domains that you use
     /// to send
     /// email.
-    pub fn getDomainStatisticsReport(self: *Self, allocator: std.mem.Allocator, input: get_domain_statistics_report.GetDomainStatisticsReportInput, options: get_domain_statistics_report.Options) !get_domain_statistics_report.GetDomainStatisticsReportOutput {
+    pub fn getDomainStatisticsReport(self: *Self, allocator: std.mem.Allocator, input: get_domain_statistics_report.GetDomainStatisticsReportInput, options: CallOptions) !get_domain_statistics_report.GetDomainStatisticsReportOutput {
         return get_domain_statistics_report.execute(self, allocator, input, options);
     }
 
@@ -300,7 +301,7 @@ pub const Client = struct {
     /// including the identity's verification status, its DKIM authentication
     /// status, and its
     /// custom Mail-From settings.
-    pub fn getEmailIdentity(self: *Self, allocator: std.mem.Allocator, input: get_email_identity.GetEmailIdentityInput, options: get_email_identity.Options) !get_email_identity.GetEmailIdentityOutput {
+    pub fn getEmailIdentity(self: *Self, allocator: std.mem.Allocator, input: get_email_identity.GetEmailIdentityInput, options: CallOptions) !get_email_identity.GetEmailIdentityOutput {
         return get_email_identity.execute(self, allocator, input, options);
     }
 
@@ -316,14 +317,14 @@ pub const Client = struct {
     /// configuration set to an email, all of the rules in that configuration set
     /// are applied to
     /// the email.
-    pub fn listConfigurationSets(self: *Self, allocator: std.mem.Allocator, input: list_configuration_sets.ListConfigurationSetsInput, options: list_configuration_sets.Options) !list_configuration_sets.ListConfigurationSetsOutput {
+    pub fn listConfigurationSets(self: *Self, allocator: std.mem.Allocator, input: list_configuration_sets.ListConfigurationSetsInput, options: CallOptions) !list_configuration_sets.ListConfigurationSetsOutput {
         return list_configuration_sets.execute(self, allocator, input, options);
     }
 
     /// List all of the dedicated IP pools that exist in your Amazon Pinpoint
     /// account in the current
     /// AWS Region.
-    pub fn listDedicatedIpPools(self: *Self, allocator: std.mem.Allocator, input: list_dedicated_ip_pools.ListDedicatedIpPoolsInput, options: list_dedicated_ip_pools.Options) !list_dedicated_ip_pools.ListDedicatedIpPoolsOutput {
+    pub fn listDedicatedIpPools(self: *Self, allocator: std.mem.Allocator, input: list_dedicated_ip_pools.ListDedicatedIpPoolsInput, options: CallOptions) !list_dedicated_ip_pools.ListDedicatedIpPoolsOutput {
         return list_dedicated_ip_pools.execute(self, allocator, input, options);
     }
 
@@ -332,7 +333,7 @@ pub const Client = struct {
     /// predictive inbox placement tests that are complete, you can use the
     /// `GetDeliverabilityTestReport`
     /// operation to view the results.
-    pub fn listDeliverabilityTestReports(self: *Self, allocator: std.mem.Allocator, input: list_deliverability_test_reports.ListDeliverabilityTestReportsInput, options: list_deliverability_test_reports.Options) !list_deliverability_test_reports.ListDeliverabilityTestReportsOutput {
+    pub fn listDeliverabilityTestReports(self: *Self, allocator: std.mem.Allocator, input: list_deliverability_test_reports.ListDeliverabilityTestReportsInput, options: CallOptions) !list_deliverability_test_reports.ListDeliverabilityTestReportsOutput {
         return list_deliverability_test_reports.execute(self, allocator, input, options);
     }
 
@@ -343,7 +344,7 @@ pub const Client = struct {
     /// enabled the Deliverability dashboard (`PutDeliverabilityDashboardOption`
     /// operation)
     /// for the domain.
-    pub fn listDomainDeliverabilityCampaigns(self: *Self, allocator: std.mem.Allocator, input: list_domain_deliverability_campaigns.ListDomainDeliverabilityCampaignsInput, options: list_domain_deliverability_campaigns.Options) !list_domain_deliverability_campaigns.ListDomainDeliverabilityCampaignsOutput {
+    pub fn listDomainDeliverabilityCampaigns(self: *Self, allocator: std.mem.Allocator, input: list_domain_deliverability_campaigns.ListDomainDeliverabilityCampaignsInput, options: CallOptions) !list_domain_deliverability_campaigns.ListDomainDeliverabilityCampaignsOutput {
         return list_domain_deliverability_campaigns.execute(self, allocator, input, options);
     }
 
@@ -352,7 +353,7 @@ pub const Client = struct {
     /// account. An identity can be either an email address or a domain. This
     /// operation returns
     /// identities that are verified as well as those that aren't.
-    pub fn listEmailIdentities(self: *Self, allocator: std.mem.Allocator, input: list_email_identities.ListEmailIdentitiesInput, options: list_email_identities.Options) !list_email_identities.ListEmailIdentitiesOutput {
+    pub fn listEmailIdentities(self: *Self, allocator: std.mem.Allocator, input: list_email_identities.ListEmailIdentitiesInput, options: CallOptions) !list_email_identities.ListEmailIdentitiesOutput {
         return list_email_identities.execute(self, allocator, input, options);
     }
 
@@ -364,17 +365,17 @@ pub const Client = struct {
     /// is a general label that acts as a category for more specific tag values. A
     /// tag value
     /// acts as a descriptor within a tag key.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Enable or disable the automatic warm-up feature for dedicated IP addresses.
-    pub fn putAccountDedicatedIpWarmupAttributes(self: *Self, allocator: std.mem.Allocator, input: put_account_dedicated_ip_warmup_attributes.PutAccountDedicatedIpWarmupAttributesInput, options: put_account_dedicated_ip_warmup_attributes.Options) !put_account_dedicated_ip_warmup_attributes.PutAccountDedicatedIpWarmupAttributesOutput {
+    pub fn putAccountDedicatedIpWarmupAttributes(self: *Self, allocator: std.mem.Allocator, input: put_account_dedicated_ip_warmup_attributes.PutAccountDedicatedIpWarmupAttributesInput, options: CallOptions) !put_account_dedicated_ip_warmup_attributes.PutAccountDedicatedIpWarmupAttributesOutput {
         return put_account_dedicated_ip_warmup_attributes.execute(self, allocator, input, options);
     }
 
     /// Enable or disable the ability of your account to send email.
-    pub fn putAccountSendingAttributes(self: *Self, allocator: std.mem.Allocator, input: put_account_sending_attributes.PutAccountSendingAttributesInput, options: put_account_sending_attributes.Options) !put_account_sending_attributes.PutAccountSendingAttributesOutput {
+    pub fn putAccountSendingAttributes(self: *Self, allocator: std.mem.Allocator, input: put_account_sending_attributes.PutAccountSendingAttributesInput, options: CallOptions) !put_account_sending_attributes.PutAccountSendingAttributesOutput {
         return put_account_sending_attributes.execute(self, allocator, input, options);
     }
 
@@ -382,28 +383,28 @@ pub const Client = struct {
     /// dedicated IP pools
     /// to create groups of dedicated IP addresses for sending specific types of
     /// email.
-    pub fn putConfigurationSetDeliveryOptions(self: *Self, allocator: std.mem.Allocator, input: put_configuration_set_delivery_options.PutConfigurationSetDeliveryOptionsInput, options: put_configuration_set_delivery_options.Options) !put_configuration_set_delivery_options.PutConfigurationSetDeliveryOptionsOutput {
+    pub fn putConfigurationSetDeliveryOptions(self: *Self, allocator: std.mem.Allocator, input: put_configuration_set_delivery_options.PutConfigurationSetDeliveryOptionsInput, options: CallOptions) !put_configuration_set_delivery_options.PutConfigurationSetDeliveryOptionsOutput {
         return put_configuration_set_delivery_options.execute(self, allocator, input, options);
     }
 
     /// Enable or disable collection of reputation metrics for emails that you send
     /// using a
     /// particular configuration set in a specific AWS Region.
-    pub fn putConfigurationSetReputationOptions(self: *Self, allocator: std.mem.Allocator, input: put_configuration_set_reputation_options.PutConfigurationSetReputationOptionsInput, options: put_configuration_set_reputation_options.Options) !put_configuration_set_reputation_options.PutConfigurationSetReputationOptionsOutput {
+    pub fn putConfigurationSetReputationOptions(self: *Self, allocator: std.mem.Allocator, input: put_configuration_set_reputation_options.PutConfigurationSetReputationOptionsInput, options: CallOptions) !put_configuration_set_reputation_options.PutConfigurationSetReputationOptionsOutput {
         return put_configuration_set_reputation_options.execute(self, allocator, input, options);
     }
 
     /// Enable or disable email sending for messages that use a particular
     /// configuration set
     /// in a specific AWS Region.
-    pub fn putConfigurationSetSendingOptions(self: *Self, allocator: std.mem.Allocator, input: put_configuration_set_sending_options.PutConfigurationSetSendingOptionsInput, options: put_configuration_set_sending_options.Options) !put_configuration_set_sending_options.PutConfigurationSetSendingOptionsOutput {
+    pub fn putConfigurationSetSendingOptions(self: *Self, allocator: std.mem.Allocator, input: put_configuration_set_sending_options.PutConfigurationSetSendingOptionsInput, options: CallOptions) !put_configuration_set_sending_options.PutConfigurationSetSendingOptionsOutput {
         return put_configuration_set_sending_options.execute(self, allocator, input, options);
     }
 
     /// Specify a custom domain to use for open and click tracking elements in email
     /// that you
     /// send using Amazon Pinpoint.
-    pub fn putConfigurationSetTrackingOptions(self: *Self, allocator: std.mem.Allocator, input: put_configuration_set_tracking_options.PutConfigurationSetTrackingOptionsInput, options: put_configuration_set_tracking_options.Options) !put_configuration_set_tracking_options.PutConfigurationSetTrackingOptionsOutput {
+    pub fn putConfigurationSetTrackingOptions(self: *Self, allocator: std.mem.Allocator, input: put_configuration_set_tracking_options.PutConfigurationSetTrackingOptionsInput, options: CallOptions) !put_configuration_set_tracking_options.PutConfigurationSetTrackingOptionsOutput {
         return put_configuration_set_tracking_options.execute(self, allocator, input, options);
     }
 
@@ -415,11 +416,11 @@ pub const Client = struct {
     /// The dedicated IP pool you specify must already exist. You can create a new
     /// pool by
     /// using the `CreateDedicatedIpPool` operation.
-    pub fn putDedicatedIpInPool(self: *Self, allocator: std.mem.Allocator, input: put_dedicated_ip_in_pool.PutDedicatedIpInPoolInput, options: put_dedicated_ip_in_pool.Options) !put_dedicated_ip_in_pool.PutDedicatedIpInPoolOutput {
+    pub fn putDedicatedIpInPool(self: *Self, allocator: std.mem.Allocator, input: put_dedicated_ip_in_pool.PutDedicatedIpInPoolInput, options: CallOptions) !put_dedicated_ip_in_pool.PutDedicatedIpInPoolOutput {
         return put_dedicated_ip_in_pool.execute(self, allocator, input, options);
     }
 
-    pub fn putDedicatedIpWarmupAttributes(self: *Self, allocator: std.mem.Allocator, input: put_dedicated_ip_warmup_attributes.PutDedicatedIpWarmupAttributesInput, options: put_dedicated_ip_warmup_attributes.Options) !put_dedicated_ip_warmup_attributes.PutDedicatedIpWarmupAttributesOutput {
+    pub fn putDedicatedIpWarmupAttributes(self: *Self, allocator: std.mem.Allocator, input: put_dedicated_ip_warmup_attributes.PutDedicatedIpWarmupAttributesInput, options: CallOptions) !put_dedicated_ip_warmup_attributes.PutDedicatedIpWarmupAttributesOutput {
         return put_dedicated_ip_warmup_attributes.execute(self, allocator, input, options);
     }
 
@@ -437,12 +438,12 @@ pub const Client = struct {
     /// information about the
     /// features and cost of a Deliverability dashboard subscription, see [Amazon
     /// Pinpoint Pricing](http://aws.amazon.com/pinpoint/pricing/).
-    pub fn putDeliverabilityDashboardOption(self: *Self, allocator: std.mem.Allocator, input: put_deliverability_dashboard_option.PutDeliverabilityDashboardOptionInput, options: put_deliverability_dashboard_option.Options) !put_deliverability_dashboard_option.PutDeliverabilityDashboardOptionOutput {
+    pub fn putDeliverabilityDashboardOption(self: *Self, allocator: std.mem.Allocator, input: put_deliverability_dashboard_option.PutDeliverabilityDashboardOptionInput, options: CallOptions) !put_deliverability_dashboard_option.PutDeliverabilityDashboardOptionOutput {
         return put_deliverability_dashboard_option.execute(self, allocator, input, options);
     }
 
     /// Used to enable or disable DKIM authentication for an email identity.
-    pub fn putEmailIdentityDkimAttributes(self: *Self, allocator: std.mem.Allocator, input: put_email_identity_dkim_attributes.PutEmailIdentityDkimAttributesInput, options: put_email_identity_dkim_attributes.Options) !put_email_identity_dkim_attributes.PutEmailIdentityDkimAttributesOutput {
+    pub fn putEmailIdentityDkimAttributes(self: *Self, allocator: std.mem.Allocator, input: put_email_identity_dkim_attributes.PutEmailIdentityDkimAttributesInput, options: CallOptions) !put_email_identity_dkim_attributes.PutEmailIdentityDkimAttributesOutput {
         return put_email_identity_dkim_attributes.execute(self, allocator, input, options);
     }
 
@@ -467,14 +468,14 @@ pub const Client = struct {
     /// bounce or complaint notifications, Amazon Pinpoint sends an email
     /// notification when these events
     /// occur (even if this setting is disabled).
-    pub fn putEmailIdentityFeedbackAttributes(self: *Self, allocator: std.mem.Allocator, input: put_email_identity_feedback_attributes.PutEmailIdentityFeedbackAttributesInput, options: put_email_identity_feedback_attributes.Options) !put_email_identity_feedback_attributes.PutEmailIdentityFeedbackAttributesOutput {
+    pub fn putEmailIdentityFeedbackAttributes(self: *Self, allocator: std.mem.Allocator, input: put_email_identity_feedback_attributes.PutEmailIdentityFeedbackAttributesInput, options: CallOptions) !put_email_identity_feedback_attributes.PutEmailIdentityFeedbackAttributesOutput {
         return put_email_identity_feedback_attributes.execute(self, allocator, input, options);
     }
 
     /// Used to enable or disable the custom Mail-From domain configuration for an
     /// email
     /// identity.
-    pub fn putEmailIdentityMailFromAttributes(self: *Self, allocator: std.mem.Allocator, input: put_email_identity_mail_from_attributes.PutEmailIdentityMailFromAttributesInput, options: put_email_identity_mail_from_attributes.Options) !put_email_identity_mail_from_attributes.PutEmailIdentityMailFromAttributesOutput {
+    pub fn putEmailIdentityMailFromAttributes(self: *Self, allocator: std.mem.Allocator, input: put_email_identity_mail_from_attributes.PutEmailIdentityMailFromAttributesInput, options: CallOptions) !put_email_identity_mail_from_attributes.PutEmailIdentityMailFromAttributesOutput {
         return put_email_identity_mail_from_attributes.execute(self, allocator, input, options);
     }
 
@@ -494,7 +495,7 @@ pub const Client = struct {
     /// send messages that contain attachments. The message that you specify has to
     /// be a
     /// valid MIME message.
-    pub fn sendEmail(self: *Self, allocator: std.mem.Allocator, input: send_email.SendEmailInput, options: send_email.Options) !send_email.SendEmailOutput {
+    pub fn sendEmail(self: *Self, allocator: std.mem.Allocator, input: send_email.SendEmailInput, options: CallOptions) !send_email.SendEmailOutput {
         return send_email.execute(self, allocator, input, options);
     }
 
@@ -511,12 +512,12 @@ pub const Client = struct {
     /// general label that acts as a category for more specific tag values. A tag
     /// value acts as
     /// a descriptor within a tag key.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Remove one or more tags (keys and values) from a specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -530,7 +531,7 @@ pub const Client = struct {
     /// or you can use
     /// Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term
     /// storage.
-    pub fn updateConfigurationSetEventDestination(self: *Self, allocator: std.mem.Allocator, input: update_configuration_set_event_destination.UpdateConfigurationSetEventDestinationInput, options: update_configuration_set_event_destination.Options) !update_configuration_set_event_destination.UpdateConfigurationSetEventDestinationOutput {
+    pub fn updateConfigurationSetEventDestination(self: *Self, allocator: std.mem.Allocator, input: update_configuration_set_event_destination.UpdateConfigurationSetEventDestinationInput, options: CallOptions) !update_configuration_set_event_destination.UpdateConfigurationSetEventDestinationOutput {
         return update_configuration_set_event_destination.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const NewPrivateVirtualInterface = @import("new_private_virtual_interface.zig").NewPrivateVirtualInterface;
 const AddressFamily = @import("address_family.zig").AddressFamily;
@@ -23,13 +24,9 @@ pub const CreatePrivateVirtualInterfaceInput = struct {
     };
 };
 
-const CreatePrivateVirtualInterfaceOutput = @import("virtual_interface.zig").VirtualInterface;
+pub const CreatePrivateVirtualInterfaceOutput = @import("virtual_interface.zig").VirtualInterface;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreatePrivateVirtualInterfaceInput, options: Options) !CreatePrivateVirtualInterfaceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreatePrivateVirtualInterfaceInput, options: CallOptions) !CreatePrivateVirtualInterfaceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

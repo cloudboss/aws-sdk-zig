@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RequestPayer = @import("request_payer.zig").RequestPayer;
 const CopyPartResult = @import("copy_part_result.zig").CopyPartResult;
@@ -298,11 +299,7 @@ pub const UploadPartCopyOutput = struct {
     ssekms_key_id: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UploadPartCopyInput, options: Options) !UploadPartCopyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UploadPartCopyInput, options: CallOptions) !UploadPartCopyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

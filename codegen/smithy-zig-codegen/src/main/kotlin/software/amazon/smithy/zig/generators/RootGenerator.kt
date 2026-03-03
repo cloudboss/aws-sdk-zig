@@ -24,12 +24,6 @@ class RootGenerator(
 ) {
     fun run() {
         val topDownIndex = TopDownIndex.of(model)
-        val operations = topDownIndex.getContainedOperations(service)
-            .map { opShape ->
-                val name = opShape.id.name
-                NamingUtil.toSnakeCase(name)
-            }
-            .sorted()
 
         val hasPaginatedOps = paginatorGen?.collectPaginatedOperations()?.isNotEmpty() ?: false
         val hasWaiters = waiterGen?.collectWaiters()?.isNotEmpty() ?: false
@@ -61,7 +55,39 @@ class RootGenerator(
             .distinctBy { it.second }
             .sortedBy { it.first }
 
-        // Generate types.zig
+        // Collect operation I/O type re-exports for root.zig.
+        // For each operation, export {OpName}Input and {OpName}Output,
+        // unless the input/output is smithy.api#Unit (empty struct).
+        data class IoTypeExport(val typeName: String, val fileName: String)
+        val ioTypes = mutableListOf<IoTypeExport>()
+        for (opShape in topDownIndex.getContainedOperations(service)) {
+            val operationName = opShape.id.name
+            val moduleFileName = NamingUtil.toSnakeCase(operationName)
+            if (opShape.inputShape.toString() != "smithy.api#Unit") {
+                ioTypes.add(IoTypeExport("${operationName}Input", moduleFileName))
+            }
+            if (opShape.outputShape.toString() != "smithy.api#Unit") {
+                ioTypes.add(IoTypeExport("${operationName}Output", moduleFileName))
+            }
+        }
+        // Filter out I/O types that collide with standalone type names.
+        // Some shapes are both operation I/O AND referenced as member types,
+        // so they appear in standaloneTypes already.
+        val standaloneTypeNames = standaloneTypes.map { it.second }.toSet()
+        val filteredIoTypes = ioTypes
+            .filter { it.typeName !in standaloneTypeNames }
+            .sortedBy { it.typeName }
+
+        // Generate call_options.zig
+        context.writerDelegator().useFileWriter("call_options.zig") { writer ->
+            writer.write("const errors = @import(\"errors.zig\");")
+            writer.blankLine()
+            writer.openBlock("pub const CallOptions = struct {")
+            writer.write("diagnostic: ?*errors.ServiceError = null,")
+            writer.closeBlock("};")
+        }
+
+        // Generate types.zig -- standalone types only
         if (standaloneTypes.isNotEmpty()) {
             context.writerDelegator().useFileWriter("types.zig") { writer ->
                 for ((fileName, typeName) in standaloneTypes) {
@@ -76,6 +102,7 @@ class RootGenerator(
         // Generate root.zig
         context.writerDelegator().useFileWriter("root.zig") { writer ->
             writer.write("pub const Client = @import(\"client.zig\").Client;")
+            writer.write("pub const CallOptions = @import(\"call_options.zig\").CallOptions;")
             writer.write("pub const errors = @import(\"errors.zig\");")
             writer.write("pub const ServiceError = errors.ServiceError;")
 
@@ -93,10 +120,10 @@ class RootGenerator(
 
             writer.blankLine()
 
-            for (opName in operations) {
+            for (ioType in filteredIoTypes) {
                 writer.write(
-                    "pub const \$L = @import(\"\$L.zig\");",
-                    opName, opName,
+                    "pub const \$L = @import(\"\$L.zig\").\$L;",
+                    ioType.typeName, ioType.fileName, ioType.typeName,
                 )
             }
         }

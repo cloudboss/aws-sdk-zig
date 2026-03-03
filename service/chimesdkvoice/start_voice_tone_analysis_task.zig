@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LanguageCode = @import("language_code.zig").LanguageCode;
 const VoiceToneAnalysisTask = @import("voice_tone_analysis_task.zig").VoiceToneAnalysisTask;
@@ -38,11 +39,7 @@ pub const StartVoiceToneAnalysisTaskOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartVoiceToneAnalysisTaskInput, options: Options) !StartVoiceToneAnalysisTaskOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartVoiceToneAnalysisTaskInput, options: CallOptions) !StartVoiceToneAnalysisTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

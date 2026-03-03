@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ComputeConfig = @import("compute_config.zig").ComputeConfig;
 const MigrationTypeValue = @import("migration_type_value.zig").MigrationTypeValue;
@@ -61,11 +62,7 @@ pub const ModifyReplicationConfigOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyReplicationConfigInput, options: Options) !ModifyReplicationConfigOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyReplicationConfigInput, options: CallOptions) !ModifyReplicationConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

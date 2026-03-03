@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccountTakeoverRiskConfigurationType = @import("account_takeover_risk_configuration_type.zig").AccountTakeoverRiskConfigurationType;
 const CompromisedCredentialsRiskConfigurationType = @import("compromised_credentials_risk_configuration_type.zig").CompromisedCredentialsRiskConfigurationType;
@@ -65,11 +66,7 @@ pub const SetRiskConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetRiskConfigurationInput, options: Options) !SetRiskConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetRiskConfigurationInput, options: CallOptions) !SetRiskConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

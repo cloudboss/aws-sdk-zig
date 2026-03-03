@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RegistryScanningRule = @import("registry_scanning_rule.zig").RegistryScanningRule;
 const ScanType = @import("scan_type.zig").ScanType;
@@ -46,11 +47,7 @@ pub const PutRegistryScanningConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutRegistryScanningConfigurationInput, options: Options) !PutRegistryScanningConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutRegistryScanningConfigurationInput, options: CallOptions) !PutRegistryScanningConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

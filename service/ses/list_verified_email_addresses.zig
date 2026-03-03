@@ -2,21 +2,18 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
-const ListVerifiedEmailAddressesInput = struct {};
+pub const ListVerifiedEmailAddressesInput = struct {};
 
 pub const ListVerifiedEmailAddressesOutput = struct {
     /// A list of email addresses that have been verified.
     verified_email_addresses: ?[]const []const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListVerifiedEmailAddressesInput, options: Options) !ListVerifiedEmailAddressesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListVerifiedEmailAddressesInput, options: CallOptions) !ListVerifiedEmailAddressesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

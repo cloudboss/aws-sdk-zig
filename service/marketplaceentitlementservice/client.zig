@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const get_entitlements = @import("get_entitlements.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -42,7 +43,7 @@ pub const Client = struct {
     ///
     /// These parameters are mutually exclusive. You can't specify both
     /// `CustomerIdentifier` and `CustomerAWSAccountID` in the same request.
-    pub fn getEntitlements(self: *Self, allocator: std.mem.Allocator, input: get_entitlements.GetEntitlementsInput, options: get_entitlements.Options) !get_entitlements.GetEntitlementsOutput {
+    pub fn getEntitlements(self: *Self, allocator: std.mem.Allocator, input: get_entitlements.GetEntitlementsInput, options: CallOptions) !get_entitlements.GetEntitlementsOutput {
         return get_entitlements.execute(self, allocator, input, options);
     }
 

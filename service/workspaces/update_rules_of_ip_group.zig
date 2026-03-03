@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpRuleItem = @import("ip_rule_item.zig").IpRuleItem;
 
@@ -21,11 +22,7 @@ pub const UpdateRulesOfIpGroupInput = struct {
 pub const UpdateRulesOfIpGroupOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRulesOfIpGroupInput, options: Options) !UpdateRulesOfIpGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRulesOfIpGroupInput, options: CallOptions) !UpdateRulesOfIpGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

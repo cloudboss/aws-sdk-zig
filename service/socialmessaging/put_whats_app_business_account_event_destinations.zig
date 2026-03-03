@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const WhatsAppBusinessAccountEventDestination = @import("whats_app_business_account_event_destination.zig").WhatsAppBusinessAccountEventDestination;
 
@@ -24,11 +25,7 @@ pub const PutWhatsAppBusinessAccountEventDestinationsInput = struct {
 pub const PutWhatsAppBusinessAccountEventDestinationsOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutWhatsAppBusinessAccountEventDestinationsInput, options: Options) !PutWhatsAppBusinessAccountEventDestinationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutWhatsAppBusinessAccountEventDestinationsInput, options: CallOptions) !PutWhatsAppBusinessAccountEventDestinationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

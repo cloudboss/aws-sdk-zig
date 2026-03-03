@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteLicenseAssetRulesetInput = struct {
@@ -16,11 +17,7 @@ pub const DeleteLicenseAssetRulesetInput = struct {
 pub const DeleteLicenseAssetRulesetOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLicenseAssetRulesetInput, options: Options) !DeleteLicenseAssetRulesetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLicenseAssetRulesetInput, options: CallOptions) !DeleteLicenseAssetRulesetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

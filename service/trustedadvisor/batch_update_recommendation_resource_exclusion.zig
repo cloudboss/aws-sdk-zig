@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RecommendationResourceExclusion = @import("recommendation_resource_exclusion.zig").RecommendationResourceExclusion;
 const UpdateRecommendationResourceExclusionError = @import("update_recommendation_resource_exclusion_error.zig").UpdateRecommendationResourceExclusionError;
@@ -25,11 +26,7 @@ pub const BatchUpdateRecommendationResourceExclusionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchUpdateRecommendationResourceExclusionInput, options: Options) !BatchUpdateRecommendationResourceExclusionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchUpdateRecommendationResourceExclusionInput, options: CallOptions) !BatchUpdateRecommendationResourceExclusionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

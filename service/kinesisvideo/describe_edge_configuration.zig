@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EdgeAgentStatus = @import("edge_agent_status.zig").EdgeAgentStatus;
 const EdgeConfig = @import("edge_config.zig").EdgeConfig;
@@ -65,11 +66,7 @@ pub const DescribeEdgeConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeEdgeConfigurationInput, options: Options) !DescribeEdgeConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeEdgeConfigurationInput, options: CallOptions) !DescribeEdgeConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const describe_chime_webhook_configurations = @import("describe_chime_webhook_configurations.zig");
@@ -22,7 +23,7 @@ pub const DescribeChimeWebhookConfigurationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_chime_webhook_configurations.Options) !describe_chime_webhook_configurations.DescribeChimeWebhookConfigurationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_chime_webhook_configurations.DescribeChimeWebhookConfigurationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -63,7 +64,7 @@ pub const DescribeSlackChannelConfigurationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_slack_channel_configurations.Options) !describe_slack_channel_configurations.DescribeSlackChannelConfigurationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_slack_channel_configurations.DescribeSlackChannelConfigurationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -104,7 +105,7 @@ pub const DescribeSlackUserIdentitiesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_slack_user_identities.Options) !describe_slack_user_identities.DescribeSlackUserIdentitiesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_slack_user_identities.DescribeSlackUserIdentitiesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -145,7 +146,7 @@ pub const DescribeSlackWorkspacesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: describe_slack_workspaces.Options) !describe_slack_workspaces.DescribeSlackWorkspacesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_slack_workspaces.DescribeSlackWorkspacesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -186,7 +187,7 @@ pub const ListAssociationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_associations.Options) !list_associations.ListAssociationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_associations.ListAssociationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -227,7 +228,7 @@ pub const ListCustomActionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_custom_actions.Options) !list_custom_actions.ListCustomActionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_custom_actions.ListCustomActionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -268,7 +269,7 @@ pub const ListMicrosoftTeamsChannelConfigurationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_microsoft_teams_channel_configurations.Options) !list_microsoft_teams_channel_configurations.ListMicrosoftTeamsChannelConfigurationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_microsoft_teams_channel_configurations.ListMicrosoftTeamsChannelConfigurationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -309,7 +310,7 @@ pub const ListMicrosoftTeamsConfiguredTeamsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_microsoft_teams_configured_teams.Options) !list_microsoft_teams_configured_teams.ListMicrosoftTeamsConfiguredTeamsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_microsoft_teams_configured_teams.ListMicrosoftTeamsConfiguredTeamsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -350,7 +351,7 @@ pub const ListMicrosoftTeamsUserIdentitiesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_microsoft_teams_user_identities.Options) !list_microsoft_teams_user_identities.ListMicrosoftTeamsUserIdentitiesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_microsoft_teams_user_identities.ListMicrosoftTeamsUserIdentitiesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

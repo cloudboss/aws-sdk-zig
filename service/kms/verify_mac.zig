@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MacAlgorithmSpec = @import("mac_algorithm_spec.zig").MacAlgorithmSpec;
 
@@ -87,11 +88,7 @@ pub const VerifyMacOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: VerifyMacInput, options: Options) !VerifyMacOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: VerifyMacInput, options: CallOptions) !VerifyMacOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

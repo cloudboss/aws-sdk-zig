@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RegistrationStatus = @import("registration_status.zig").RegistrationStatus;
 const RegistryType = @import("registry_type.zig").RegistryType;
@@ -63,11 +64,7 @@ pub const ListTypeRegistrationsOutput = struct {
     registration_token_list: ?[]const []const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTypeRegistrationsInput, options: Options) !ListTypeRegistrationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTypeRegistrationsInput, options: CallOptions) !ListTypeRegistrationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

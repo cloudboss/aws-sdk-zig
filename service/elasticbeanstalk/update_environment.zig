@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConfigurationOptionSetting = @import("configuration_option_setting.zig").ConfigurationOptionSetting;
 const OptionSpecification = @import("option_specification.zig").OptionSpecification;
@@ -13,15 +14,11 @@ const EnvironmentResourcesDescription = @import("environment_resources_descripti
 const EnvironmentStatus = @import("environment_status.zig").EnvironmentStatus;
 const serde = @import("serde.zig");
 
-const UpdateEnvironmentInput = @import("update_environment_message.zig").UpdateEnvironmentMessage;
+pub const UpdateEnvironmentInput = @import("update_environment_message.zig").UpdateEnvironmentMessage;
 
-const UpdateEnvironmentOutput = @import("environment_description.zig").EnvironmentDescription;
+pub const UpdateEnvironmentOutput = @import("environment_description.zig").EnvironmentDescription;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateEnvironmentInput, options: Options) !UpdateEnvironmentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateEnvironmentInput, options: CallOptions) !UpdateEnvironmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

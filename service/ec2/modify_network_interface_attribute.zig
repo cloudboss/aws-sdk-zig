@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const NetworkInterfaceAttachmentChanges = @import("network_interface_attachment_changes.zig").NetworkInterfaceAttachmentChanges;
 const ConnectionTrackingSpecificationRequest = @import("connection_tracking_specification_request.zig").ConnectionTrackingSpecificationRequest;
@@ -93,13 +94,9 @@ pub const ModifyNetworkInterfaceAttributeInput = struct {
     source_dest_check: ?AttributeBooleanValue = null,
 };
 
-const ModifyNetworkInterfaceAttributeOutput = struct {};
+pub const ModifyNetworkInterfaceAttributeOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyNetworkInterfaceAttributeInput, options: Options) !ModifyNetworkInterfaceAttributeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyNetworkInterfaceAttributeInput, options: CallOptions) !ModifyNetworkInterfaceAttributeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

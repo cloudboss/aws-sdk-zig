@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ShareRequestType = @import("share_request_type.zig").ShareRequestType;
 const AssessmentFrameworkShareRequest = @import("assessment_framework_share_request.zig").AssessmentFrameworkShareRequest;
@@ -38,11 +39,7 @@ pub const ListAssessmentFrameworkShareRequestsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAssessmentFrameworkShareRequestsInput, options: Options) !ListAssessmentFrameworkShareRequestsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAssessmentFrameworkShareRequestsInput, options: CallOptions) !ListAssessmentFrameworkShareRequestsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

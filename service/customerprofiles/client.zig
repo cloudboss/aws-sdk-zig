@@ -99,6 +99,7 @@ const update_domain_layout = @import("update_domain_layout.zig");
 const update_event_trigger = @import("update_event_trigger.zig");
 const update_profile = @import("update_profile.zig");
 const update_recommender = @import("update_recommender.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -135,17 +136,17 @@ pub const Client = struct {
     /// A profile object can have a single unique key and any number of additional
     /// keys that can
     /// be used to identify the profile that it belongs to.
-    pub fn addProfileKey(self: *Self, allocator: std.mem.Allocator, input: add_profile_key.AddProfileKeyInput, options: add_profile_key.Options) !add_profile_key.AddProfileKeyOutput {
+    pub fn addProfileKey(self: *Self, allocator: std.mem.Allocator, input: add_profile_key.AddProfileKeyInput, options: CallOptions) !add_profile_key.AddProfileKeyOutput {
         return add_profile_key.execute(self, allocator, input, options);
     }
 
     /// Fetch the possible attribute values given the attribute name.
-    pub fn batchGetCalculatedAttributeForProfile(self: *Self, allocator: std.mem.Allocator, input: batch_get_calculated_attribute_for_profile.BatchGetCalculatedAttributeForProfileInput, options: batch_get_calculated_attribute_for_profile.Options) !batch_get_calculated_attribute_for_profile.BatchGetCalculatedAttributeForProfileOutput {
+    pub fn batchGetCalculatedAttributeForProfile(self: *Self, allocator: std.mem.Allocator, input: batch_get_calculated_attribute_for_profile.BatchGetCalculatedAttributeForProfileInput, options: CallOptions) !batch_get_calculated_attribute_for_profile.BatchGetCalculatedAttributeForProfileOutput {
         return batch_get_calculated_attribute_for_profile.execute(self, allocator, input, options);
     }
 
     /// Get a batch of profiles.
-    pub fn batchGetProfile(self: *Self, allocator: std.mem.Allocator, input: batch_get_profile.BatchGetProfileInput, options: batch_get_profile.Options) !batch_get_profile.BatchGetProfileOutput {
+    pub fn batchGetProfile(self: *Self, allocator: std.mem.Allocator, input: batch_get_profile.BatchGetProfileInput, options: CallOptions) !batch_get_profile.BatchGetProfileOutput {
         return batch_get_profile.execute(self, allocator, input, options);
     }
 
@@ -159,7 +160,7 @@ pub const Client = struct {
     /// only reference
     /// one `ObjectType` and at most, two fields from that
     /// `ObjectType`.
-    pub fn createCalculatedAttributeDefinition(self: *Self, allocator: std.mem.Allocator, input: create_calculated_attribute_definition.CreateCalculatedAttributeDefinitionInput, options: create_calculated_attribute_definition.Options) !create_calculated_attribute_definition.CreateCalculatedAttributeDefinitionOutput {
+    pub fn createCalculatedAttributeDefinition(self: *Self, allocator: std.mem.Allocator, input: create_calculated_attribute_definition.CreateCalculatedAttributeDefinitionInput, options: CallOptions) !create_calculated_attribute_definition.CreateCalculatedAttributeDefinitionOutput {
         return create_calculated_attribute_definition.execute(self, allocator, input, options);
     }
 
@@ -193,14 +194,14 @@ pub const Client = struct {
     /// Each Amazon Connect instance can be associated with only one domain.
     /// Multiple Amazon Connect instances
     /// can be associated with one domain.
-    pub fn createDomain(self: *Self, allocator: std.mem.Allocator, input: create_domain.CreateDomainInput, options: create_domain.Options) !create_domain.CreateDomainOutput {
+    pub fn createDomain(self: *Self, allocator: std.mem.Allocator, input: create_domain.CreateDomainInput, options: CallOptions) !create_domain.CreateDomainOutput {
         return create_domain.execute(self, allocator, input, options);
     }
 
     /// Creates the layout to view data for a specific domain. This API can only be
     /// invoked from
     /// the Amazon Connect admin website.
-    pub fn createDomainLayout(self: *Self, allocator: std.mem.Allocator, input: create_domain_layout.CreateDomainLayoutInput, options: create_domain_layout.Options) !create_domain_layout.CreateDomainLayoutOutput {
+    pub fn createDomainLayout(self: *Self, allocator: std.mem.Allocator, input: create_domain_layout.CreateDomainLayoutInput, options: CallOptions) !create_domain_layout.CreateDomainLayoutOutput {
         return create_domain_layout.execute(self, allocator, input, options);
     }
 
@@ -211,7 +212,7 @@ pub const Client = struct {
     /// Each event stream can be associated with only one Kinesis Data Stream
     /// destination in the
     /// same region and Amazon Web Services account as the customer profiles domain
-    pub fn createEventStream(self: *Self, allocator: std.mem.Allocator, input: create_event_stream.CreateEventStreamInput, options: create_event_stream.Options) !create_event_stream.CreateEventStreamOutput {
+    pub fn createEventStream(self: *Self, allocator: std.mem.Allocator, input: create_event_stream.CreateEventStreamInput, options: CallOptions) !create_event_stream.CreateEventStreamOutput {
         return create_event_stream.execute(self, allocator, input, options);
     }
 
@@ -222,7 +223,7 @@ pub const Client = struct {
     /// Each event stream can be associated with only one integration in the same
     /// region and AWS
     /// account as the event stream.
-    pub fn createEventTrigger(self: *Self, allocator: std.mem.Allocator, input: create_event_trigger.CreateEventTriggerInput, options: create_event_trigger.Options) !create_event_trigger.CreateEventTriggerOutput {
+    pub fn createEventTrigger(self: *Self, allocator: std.mem.Allocator, input: create_event_trigger.CreateEventTriggerInput, options: CallOptions) !create_event_trigger.CreateEventTriggerOutput {
         return create_event_trigger.execute(self, allocator, input, options);
     }
 
@@ -230,7 +231,7 @@ pub const Client = struct {
     /// which
     /// ingests historic data and sets up an integration for ongoing updates. The
     /// supported Amazon AppFlow sources are Salesforce, ServiceNow, and Marketo.
-    pub fn createIntegrationWorkflow(self: *Self, allocator: std.mem.Allocator, input: create_integration_workflow.CreateIntegrationWorkflowInput, options: create_integration_workflow.Options) !create_integration_workflow.CreateIntegrationWorkflowOutput {
+    pub fn createIntegrationWorkflow(self: *Self, allocator: std.mem.Allocator, input: create_integration_workflow.CreateIntegrationWorkflowInput, options: CallOptions) !create_integration_workflow.CreateIntegrationWorkflowOutput {
         return create_integration_workflow.execute(self, allocator, input, options);
     }
 
@@ -239,34 +240,34 @@ pub const Client = struct {
     /// A standard profile represents the following attributes for a customer
     /// profile in a
     /// domain.
-    pub fn createProfile(self: *Self, allocator: std.mem.Allocator, input: create_profile.CreateProfileInput, options: create_profile.Options) !create_profile.CreateProfileOutput {
+    pub fn createProfile(self: *Self, allocator: std.mem.Allocator, input: create_profile.CreateProfileInput, options: CallOptions) !create_profile.CreateProfileOutput {
         return create_profile.execute(self, allocator, input, options);
     }
 
     /// Creates a recommender
-    pub fn createRecommender(self: *Self, allocator: std.mem.Allocator, input: create_recommender.CreateRecommenderInput, options: create_recommender.Options) !create_recommender.CreateRecommenderOutput {
+    pub fn createRecommender(self: *Self, allocator: std.mem.Allocator, input: create_recommender.CreateRecommenderInput, options: CallOptions) !create_recommender.CreateRecommenderOutput {
         return create_recommender.execute(self, allocator, input, options);
     }
 
     /// Creates a segment definition associated to the given domain.
-    pub fn createSegmentDefinition(self: *Self, allocator: std.mem.Allocator, input: create_segment_definition.CreateSegmentDefinitionInput, options: create_segment_definition.Options) !create_segment_definition.CreateSegmentDefinitionOutput {
+    pub fn createSegmentDefinition(self: *Self, allocator: std.mem.Allocator, input: create_segment_definition.CreateSegmentDefinitionInput, options: CallOptions) !create_segment_definition.CreateSegmentDefinitionOutput {
         return create_segment_definition.execute(self, allocator, input, options);
     }
 
     /// Creates a segment estimate query.
-    pub fn createSegmentEstimate(self: *Self, allocator: std.mem.Allocator, input: create_segment_estimate.CreateSegmentEstimateInput, options: create_segment_estimate.Options) !create_segment_estimate.CreateSegmentEstimateOutput {
+    pub fn createSegmentEstimate(self: *Self, allocator: std.mem.Allocator, input: create_segment_estimate.CreateSegmentEstimateInput, options: CallOptions) !create_segment_estimate.CreateSegmentEstimateOutput {
         return create_segment_estimate.execute(self, allocator, input, options);
     }
 
     /// Triggers a job to export a segment to a specified destination.
-    pub fn createSegmentSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_segment_snapshot.CreateSegmentSnapshotInput, options: create_segment_snapshot.Options) !create_segment_snapshot.CreateSegmentSnapshotOutput {
+    pub fn createSegmentSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_segment_snapshot.CreateSegmentSnapshotInput, options: CallOptions) !create_segment_snapshot.CreateSegmentSnapshotOutput {
         return create_segment_snapshot.execute(self, allocator, input, options);
     }
 
     /// Creates an Upload job to ingest data for segment imports. The metadata is
     /// created for
     /// the job with the provided field mapping and unique key.
-    pub fn createUploadJob(self: *Self, allocator: std.mem.Allocator, input: create_upload_job.CreateUploadJobInput, options: create_upload_job.Options) !create_upload_job.CreateUploadJobOutput {
+    pub fn createUploadJob(self: *Self, allocator: std.mem.Allocator, input: create_upload_job.CreateUploadJobInput, options: CallOptions) !create_upload_job.CreateUploadJobOutput {
         return create_upload_job.execute(self, allocator, input, options);
     }
 
@@ -276,59 +277,59 @@ pub const Client = struct {
     /// to undo that
     /// action and will need to recreate it on your own using the
     /// CreateCalculatedAttributeDefinition API if you want it back.
-    pub fn deleteCalculatedAttributeDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_calculated_attribute_definition.DeleteCalculatedAttributeDefinitionInput, options: delete_calculated_attribute_definition.Options) !delete_calculated_attribute_definition.DeleteCalculatedAttributeDefinitionOutput {
+    pub fn deleteCalculatedAttributeDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_calculated_attribute_definition.DeleteCalculatedAttributeDefinitionInput, options: CallOptions) !delete_calculated_attribute_definition.DeleteCalculatedAttributeDefinitionOutput {
         return delete_calculated_attribute_definition.execute(self, allocator, input, options);
     }
 
     /// Deletes a specific domain and all of its customer data, such as customer
     /// profile
     /// attributes and their related objects.
-    pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: delete_domain.Options) !delete_domain.DeleteDomainOutput {
+    pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: CallOptions) !delete_domain.DeleteDomainOutput {
         return delete_domain.execute(self, allocator, input, options);
     }
 
     /// Deletes the layout used to view data for a specific domain. This API can
     /// only be invoked
     /// from the Amazon Connect admin website.
-    pub fn deleteDomainLayout(self: *Self, allocator: std.mem.Allocator, input: delete_domain_layout.DeleteDomainLayoutInput, options: delete_domain_layout.Options) !delete_domain_layout.DeleteDomainLayoutOutput {
+    pub fn deleteDomainLayout(self: *Self, allocator: std.mem.Allocator, input: delete_domain_layout.DeleteDomainLayoutInput, options: CallOptions) !delete_domain_layout.DeleteDomainLayoutOutput {
         return delete_domain_layout.execute(self, allocator, input, options);
     }
 
     /// Delete a DomainObjectType for the given Domain and ObjectType name.
-    pub fn deleteDomainObjectType(self: *Self, allocator: std.mem.Allocator, input: delete_domain_object_type.DeleteDomainObjectTypeInput, options: delete_domain_object_type.Options) !delete_domain_object_type.DeleteDomainObjectTypeOutput {
+    pub fn deleteDomainObjectType(self: *Self, allocator: std.mem.Allocator, input: delete_domain_object_type.DeleteDomainObjectTypeInput, options: CallOptions) !delete_domain_object_type.DeleteDomainObjectTypeOutput {
         return delete_domain_object_type.execute(self, allocator, input, options);
     }
 
     /// Disables and deletes the specified event stream.
-    pub fn deleteEventStream(self: *Self, allocator: std.mem.Allocator, input: delete_event_stream.DeleteEventStreamInput, options: delete_event_stream.Options) !delete_event_stream.DeleteEventStreamOutput {
+    pub fn deleteEventStream(self: *Self, allocator: std.mem.Allocator, input: delete_event_stream.DeleteEventStreamInput, options: CallOptions) !delete_event_stream.DeleteEventStreamOutput {
         return delete_event_stream.execute(self, allocator, input, options);
     }
 
     /// Disable and deletes the Event Trigger.
     ///
     /// You cannot delete an Event Trigger with an active Integration associated.
-    pub fn deleteEventTrigger(self: *Self, allocator: std.mem.Allocator, input: delete_event_trigger.DeleteEventTriggerInput, options: delete_event_trigger.Options) !delete_event_trigger.DeleteEventTriggerOutput {
+    pub fn deleteEventTrigger(self: *Self, allocator: std.mem.Allocator, input: delete_event_trigger.DeleteEventTriggerInput, options: CallOptions) !delete_event_trigger.DeleteEventTriggerOutput {
         return delete_event_trigger.execute(self, allocator, input, options);
     }
 
     /// Removes an integration from a specific domain.
-    pub fn deleteIntegration(self: *Self, allocator: std.mem.Allocator, input: delete_integration.DeleteIntegrationInput, options: delete_integration.Options) !delete_integration.DeleteIntegrationOutput {
+    pub fn deleteIntegration(self: *Self, allocator: std.mem.Allocator, input: delete_integration.DeleteIntegrationInput, options: CallOptions) !delete_integration.DeleteIntegrationOutput {
         return delete_integration.execute(self, allocator, input, options);
     }
 
     /// Deletes the standard customer profile and all data pertaining to the
     /// profile.
-    pub fn deleteProfile(self: *Self, allocator: std.mem.Allocator, input: delete_profile.DeleteProfileInput, options: delete_profile.Options) !delete_profile.DeleteProfileOutput {
+    pub fn deleteProfile(self: *Self, allocator: std.mem.Allocator, input: delete_profile.DeleteProfileInput, options: CallOptions) !delete_profile.DeleteProfileOutput {
         return delete_profile.execute(self, allocator, input, options);
     }
 
     /// Removes a searchable key from a customer profile.
-    pub fn deleteProfileKey(self: *Self, allocator: std.mem.Allocator, input: delete_profile_key.DeleteProfileKeyInput, options: delete_profile_key.Options) !delete_profile_key.DeleteProfileKeyOutput {
+    pub fn deleteProfileKey(self: *Self, allocator: std.mem.Allocator, input: delete_profile_key.DeleteProfileKeyInput, options: CallOptions) !delete_profile_key.DeleteProfileKeyOutput {
         return delete_profile_key.execute(self, allocator, input, options);
     }
 
     /// Removes an object associated with a profile of a given ProfileObjectType.
-    pub fn deleteProfileObject(self: *Self, allocator: std.mem.Allocator, input: delete_profile_object.DeleteProfileObjectInput, options: delete_profile_object.Options) !delete_profile_object.DeleteProfileObjectOutput {
+    pub fn deleteProfileObject(self: *Self, allocator: std.mem.Allocator, input: delete_profile_object.DeleteProfileObjectInput, options: CallOptions) !delete_profile_object.DeleteProfileObjectOutput {
         return delete_profile_object.execute(self, allocator, input, options);
     }
 
@@ -339,29 +340,29 @@ pub const Client = struct {
     /// ProfileObjectType. In addition, it scrubs all of the fields of the standard
     /// profile that
     /// were populated from this ProfileObjectType.
-    pub fn deleteProfileObjectType(self: *Self, allocator: std.mem.Allocator, input: delete_profile_object_type.DeleteProfileObjectTypeInput, options: delete_profile_object_type.Options) !delete_profile_object_type.DeleteProfileObjectTypeOutput {
+    pub fn deleteProfileObjectType(self: *Self, allocator: std.mem.Allocator, input: delete_profile_object_type.DeleteProfileObjectTypeInput, options: CallOptions) !delete_profile_object_type.DeleteProfileObjectTypeOutput {
         return delete_profile_object_type.execute(self, allocator, input, options);
     }
 
     /// Deletes a recommender.
-    pub fn deleteRecommender(self: *Self, allocator: std.mem.Allocator, input: delete_recommender.DeleteRecommenderInput, options: delete_recommender.Options) !delete_recommender.DeleteRecommenderOutput {
+    pub fn deleteRecommender(self: *Self, allocator: std.mem.Allocator, input: delete_recommender.DeleteRecommenderInput, options: CallOptions) !delete_recommender.DeleteRecommenderOutput {
         return delete_recommender.execute(self, allocator, input, options);
     }
 
     /// Deletes a segment definition from the domain.
-    pub fn deleteSegmentDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_segment_definition.DeleteSegmentDefinitionInput, options: delete_segment_definition.Options) !delete_segment_definition.DeleteSegmentDefinitionOutput {
+    pub fn deleteSegmentDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_segment_definition.DeleteSegmentDefinitionInput, options: CallOptions) !delete_segment_definition.DeleteSegmentDefinitionOutput {
         return delete_segment_definition.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified workflow and all its corresponding resources. This is
     /// an async
     /// process.
-    pub fn deleteWorkflow(self: *Self, allocator: std.mem.Allocator, input: delete_workflow.DeleteWorkflowInput, options: delete_workflow.Options) !delete_workflow.DeleteWorkflowOutput {
+    pub fn deleteWorkflow(self: *Self, allocator: std.mem.Allocator, input: delete_workflow.DeleteWorkflowInput, options: CallOptions) !delete_workflow.DeleteWorkflowOutput {
         return delete_workflow.execute(self, allocator, input, options);
     }
 
     /// The process of detecting profile object type mapping by using given objects.
-    pub fn detectProfileObjectType(self: *Self, allocator: std.mem.Allocator, input: detect_profile_object_type.DetectProfileObjectTypeInput, options: detect_profile_object_type.Options) !detect_profile_object_type.DetectProfileObjectTypeOutput {
+    pub fn detectProfileObjectType(self: *Self, allocator: std.mem.Allocator, input: detect_profile_object_type.DetectProfileObjectTypeInput, options: CallOptions) !detect_profile_object_type.DetectProfileObjectTypeOutput {
         return detect_profile_object_type.execute(self, allocator, input, options);
     }
 
@@ -385,45 +386,45 @@ pub const Client = struct {
     /// attributes. If your matching list includes too few attributes (such as only
     /// `FirstName` or only `LastName`), there may be a large number of
     /// matches. This increases the chances of erroneous merges.
-    pub fn getAutoMergingPreview(self: *Self, allocator: std.mem.Allocator, input: get_auto_merging_preview.GetAutoMergingPreviewInput, options: get_auto_merging_preview.Options) !get_auto_merging_preview.GetAutoMergingPreviewOutput {
+    pub fn getAutoMergingPreview(self: *Self, allocator: std.mem.Allocator, input: get_auto_merging_preview.GetAutoMergingPreviewInput, options: CallOptions) !get_auto_merging_preview.GetAutoMergingPreviewOutput {
         return get_auto_merging_preview.execute(self, allocator, input, options);
     }
 
     /// Provides more information on a calculated attribute definition for Customer
     /// Profiles.
-    pub fn getCalculatedAttributeDefinition(self: *Self, allocator: std.mem.Allocator, input: get_calculated_attribute_definition.GetCalculatedAttributeDefinitionInput, options: get_calculated_attribute_definition.Options) !get_calculated_attribute_definition.GetCalculatedAttributeDefinitionOutput {
+    pub fn getCalculatedAttributeDefinition(self: *Self, allocator: std.mem.Allocator, input: get_calculated_attribute_definition.GetCalculatedAttributeDefinitionInput, options: CallOptions) !get_calculated_attribute_definition.GetCalculatedAttributeDefinitionOutput {
         return get_calculated_attribute_definition.execute(self, allocator, input, options);
     }
 
     /// Retrieve a calculated attribute for a customer profile.
-    pub fn getCalculatedAttributeForProfile(self: *Self, allocator: std.mem.Allocator, input: get_calculated_attribute_for_profile.GetCalculatedAttributeForProfileInput, options: get_calculated_attribute_for_profile.Options) !get_calculated_attribute_for_profile.GetCalculatedAttributeForProfileOutput {
+    pub fn getCalculatedAttributeForProfile(self: *Self, allocator: std.mem.Allocator, input: get_calculated_attribute_for_profile.GetCalculatedAttributeForProfileInput, options: CallOptions) !get_calculated_attribute_for_profile.GetCalculatedAttributeForProfileOutput {
         return get_calculated_attribute_for_profile.execute(self, allocator, input, options);
     }
 
     /// Returns information about a specific domain.
-    pub fn getDomain(self: *Self, allocator: std.mem.Allocator, input: get_domain.GetDomainInput, options: get_domain.Options) !get_domain.GetDomainOutput {
+    pub fn getDomain(self: *Self, allocator: std.mem.Allocator, input: get_domain.GetDomainInput, options: CallOptions) !get_domain.GetDomainOutput {
         return get_domain.execute(self, allocator, input, options);
     }
 
     /// Gets the layout to view data for a specific domain. This API can only be
     /// invoked from
     /// the Amazon Connect admin website.
-    pub fn getDomainLayout(self: *Self, allocator: std.mem.Allocator, input: get_domain_layout.GetDomainLayoutInput, options: get_domain_layout.Options) !get_domain_layout.GetDomainLayoutOutput {
+    pub fn getDomainLayout(self: *Self, allocator: std.mem.Allocator, input: get_domain_layout.GetDomainLayoutInput, options: CallOptions) !get_domain_layout.GetDomainLayoutOutput {
         return get_domain_layout.execute(self, allocator, input, options);
     }
 
     /// Return a DomainObjectType for the input Domain and ObjectType names.
-    pub fn getDomainObjectType(self: *Self, allocator: std.mem.Allocator, input: get_domain_object_type.GetDomainObjectTypeInput, options: get_domain_object_type.Options) !get_domain_object_type.GetDomainObjectTypeOutput {
+    pub fn getDomainObjectType(self: *Self, allocator: std.mem.Allocator, input: get_domain_object_type.GetDomainObjectTypeInput, options: CallOptions) !get_domain_object_type.GetDomainObjectTypeOutput {
         return get_domain_object_type.execute(self, allocator, input, options);
     }
 
     /// Returns information about the specified event stream in a specific domain.
-    pub fn getEventStream(self: *Self, allocator: std.mem.Allocator, input: get_event_stream.GetEventStreamInput, options: get_event_stream.Options) !get_event_stream.GetEventStreamOutput {
+    pub fn getEventStream(self: *Self, allocator: std.mem.Allocator, input: get_event_stream.GetEventStreamInput, options: CallOptions) !get_event_stream.GetEventStreamOutput {
         return get_event_stream.execute(self, allocator, input, options);
     }
 
     /// Get a specific Event Trigger from the domain.
-    pub fn getEventTrigger(self: *Self, allocator: std.mem.Allocator, input: get_event_trigger.GetEventTriggerInput, options: get_event_trigger.Options) !get_event_trigger.GetEventTriggerOutput {
+    pub fn getEventTrigger(self: *Self, allocator: std.mem.Allocator, input: get_event_trigger.GetEventTriggerInput, options: CallOptions) !get_event_trigger.GetEventTriggerOutput {
         return get_event_trigger.execute(self, allocator, input, options);
     }
 
@@ -433,12 +434,12 @@ pub const Client = struct {
     /// For more information, see [Use
     /// Identity Resolution to consolidate similar
     /// profiles](https://docs.aws.amazon.com/connect/latest/adminguide/use-identity-resolution.html).
-    pub fn getIdentityResolutionJob(self: *Self, allocator: std.mem.Allocator, input: get_identity_resolution_job.GetIdentityResolutionJobInput, options: get_identity_resolution_job.Options) !get_identity_resolution_job.GetIdentityResolutionJobOutput {
+    pub fn getIdentityResolutionJob(self: *Self, allocator: std.mem.Allocator, input: get_identity_resolution_job.GetIdentityResolutionJobInput, options: CallOptions) !get_identity_resolution_job.GetIdentityResolutionJobOutput {
         return get_identity_resolution_job.execute(self, allocator, input, options);
     }
 
     /// Returns an integration for a domain.
-    pub fn getIntegration(self: *Self, allocator: std.mem.Allocator, input: get_integration.GetIntegrationInput, options: get_integration.Options) !get_integration.GetIntegrationOutput {
+    pub fn getIntegration(self: *Self, allocator: std.mem.Allocator, input: get_integration.GetIntegrationInput, options: CallOptions) !get_integration.GetIntegrationOutput {
         return get_integration.execute(self, allocator, input, options);
     }
 
@@ -489,7 +490,7 @@ pub const Client = struct {
     /// formats such as **555-010-0000** and **+1-555-010-0000**—can be detected as
     /// belonging to the same customer **John Doe** and merged into a unified
     /// profile.
-    pub fn getMatches(self: *Self, allocator: std.mem.Allocator, input: get_matches.GetMatchesInput, options: get_matches.Options) !get_matches.GetMatchesOutput {
+    pub fn getMatches(self: *Self, allocator: std.mem.Allocator, input: get_matches.GetMatchesInput, options: CallOptions) !get_matches.GetMatchesOutput {
         return get_matches.execute(self, allocator, input, options);
     }
 
@@ -507,17 +508,17 @@ pub const Client = struct {
     /// cycle occurs, which happens once daily).
     ///
     /// For attributes that don't contain numeric values.
-    pub fn getObjectTypeAttributeStatistics(self: *Self, allocator: std.mem.Allocator, input: get_object_type_attribute_statistics.GetObjectTypeAttributeStatisticsInput, options: get_object_type_attribute_statistics.Options) !get_object_type_attribute_statistics.GetObjectTypeAttributeStatisticsOutput {
+    pub fn getObjectTypeAttributeStatistics(self: *Self, allocator: std.mem.Allocator, input: get_object_type_attribute_statistics.GetObjectTypeAttributeStatisticsInput, options: CallOptions) !get_object_type_attribute_statistics.GetObjectTypeAttributeStatisticsOutput {
         return get_object_type_attribute_statistics.execute(self, allocator, input, options);
     }
 
     /// Returns a history record for a specific profile, for a specific domain.
-    pub fn getProfileHistoryRecord(self: *Self, allocator: std.mem.Allocator, input: get_profile_history_record.GetProfileHistoryRecordInput, options: get_profile_history_record.Options) !get_profile_history_record.GetProfileHistoryRecordOutput {
+    pub fn getProfileHistoryRecord(self: *Self, allocator: std.mem.Allocator, input: get_profile_history_record.GetProfileHistoryRecordInput, options: CallOptions) !get_profile_history_record.GetProfileHistoryRecordOutput {
         return get_profile_history_record.execute(self, allocator, input, options);
     }
 
     /// Returns the object types for a specific domain.
-    pub fn getProfileObjectType(self: *Self, allocator: std.mem.Allocator, input: get_profile_object_type.GetProfileObjectTypeInput, options: get_profile_object_type.Options) !get_profile_object_type.GetProfileObjectTypeOutput {
+    pub fn getProfileObjectType(self: *Self, allocator: std.mem.Allocator, input: get_profile_object_type.GetProfileObjectTypeInput, options: CallOptions) !get_profile_object_type.GetProfileObjectTypeOutput {
         return get_profile_object_type.execute(self, allocator, input, options);
     }
 
@@ -530,38 +531,38 @@ pub const Client = struct {
     /// with an ObjectTypeName that matches one of the TemplateIds, it uses the
     /// mappings from the
     /// template.
-    pub fn getProfileObjectTypeTemplate(self: *Self, allocator: std.mem.Allocator, input: get_profile_object_type_template.GetProfileObjectTypeTemplateInput, options: get_profile_object_type_template.Options) !get_profile_object_type_template.GetProfileObjectTypeTemplateOutput {
+    pub fn getProfileObjectTypeTemplate(self: *Self, allocator: std.mem.Allocator, input: get_profile_object_type_template.GetProfileObjectTypeTemplateInput, options: CallOptions) !get_profile_object_type_template.GetProfileObjectTypeTemplateOutput {
         return get_profile_object_type_template.execute(self, allocator, input, options);
     }
 
     /// Fetches the recommendations for a profile in the input Customer Profiles
     /// domain. Fetches all the profile recommendations
-    pub fn getProfileRecommendations(self: *Self, allocator: std.mem.Allocator, input: get_profile_recommendations.GetProfileRecommendationsInput, options: get_profile_recommendations.Options) !get_profile_recommendations.GetProfileRecommendationsOutput {
+    pub fn getProfileRecommendations(self: *Self, allocator: std.mem.Allocator, input: get_profile_recommendations.GetProfileRecommendationsInput, options: CallOptions) !get_profile_recommendations.GetProfileRecommendationsOutput {
         return get_profile_recommendations.execute(self, allocator, input, options);
     }
 
     /// Retrieves a recommender.
-    pub fn getRecommender(self: *Self, allocator: std.mem.Allocator, input: get_recommender.GetRecommenderInput, options: get_recommender.Options) !get_recommender.GetRecommenderOutput {
+    pub fn getRecommender(self: *Self, allocator: std.mem.Allocator, input: get_recommender.GetRecommenderInput, options: CallOptions) !get_recommender.GetRecommenderOutput {
         return get_recommender.execute(self, allocator, input, options);
     }
 
     /// Gets a segment definition from the domain.
-    pub fn getSegmentDefinition(self: *Self, allocator: std.mem.Allocator, input: get_segment_definition.GetSegmentDefinitionInput, options: get_segment_definition.Options) !get_segment_definition.GetSegmentDefinitionOutput {
+    pub fn getSegmentDefinition(self: *Self, allocator: std.mem.Allocator, input: get_segment_definition.GetSegmentDefinitionInput, options: CallOptions) !get_segment_definition.GetSegmentDefinitionOutput {
         return get_segment_definition.execute(self, allocator, input, options);
     }
 
     /// Gets the result of a segment estimate query.
-    pub fn getSegmentEstimate(self: *Self, allocator: std.mem.Allocator, input: get_segment_estimate.GetSegmentEstimateInput, options: get_segment_estimate.Options) !get_segment_estimate.GetSegmentEstimateOutput {
+    pub fn getSegmentEstimate(self: *Self, allocator: std.mem.Allocator, input: get_segment_estimate.GetSegmentEstimateInput, options: CallOptions) !get_segment_estimate.GetSegmentEstimateOutput {
         return get_segment_estimate.execute(self, allocator, input, options);
     }
 
     /// Determines if the given profiles are within a segment.
-    pub fn getSegmentMembership(self: *Self, allocator: std.mem.Allocator, input: get_segment_membership.GetSegmentMembershipInput, options: get_segment_membership.Options) !get_segment_membership.GetSegmentMembershipOutput {
+    pub fn getSegmentMembership(self: *Self, allocator: std.mem.Allocator, input: get_segment_membership.GetSegmentMembershipInput, options: CallOptions) !get_segment_membership.GetSegmentMembershipOutput {
         return get_segment_membership.execute(self, allocator, input, options);
     }
 
     /// Retrieve the latest status of a segment snapshot.
-    pub fn getSegmentSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_segment_snapshot.GetSegmentSnapshotInput, options: get_segment_snapshot.Options) !get_segment_snapshot.GetSegmentSnapshotOutput {
+    pub fn getSegmentSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_segment_snapshot.GetSegmentSnapshotInput, options: CallOptions) !get_segment_snapshot.GetSegmentSnapshotOutput {
         return get_segment_snapshot.execute(self, allocator, input, options);
     }
 
@@ -569,84 +570,84 @@ pub const Client = struct {
     /// `matchId` or `profileId`. You can also specify the type of
     /// matching that you want for finding similar profiles using either
     /// `RULE_BASED_MATCHING` or `ML_BASED_MATCHING`.
-    pub fn getSimilarProfiles(self: *Self, allocator: std.mem.Allocator, input: get_similar_profiles.GetSimilarProfilesInput, options: get_similar_profiles.Options) !get_similar_profiles.GetSimilarProfilesOutput {
+    pub fn getSimilarProfiles(self: *Self, allocator: std.mem.Allocator, input: get_similar_profiles.GetSimilarProfilesInput, options: CallOptions) !get_similar_profiles.GetSimilarProfilesOutput {
         return get_similar_profiles.execute(self, allocator, input, options);
     }
 
     /// This API retrieves the details of a specific upload job.
-    pub fn getUploadJob(self: *Self, allocator: std.mem.Allocator, input: get_upload_job.GetUploadJobInput, options: get_upload_job.Options) !get_upload_job.GetUploadJobOutput {
+    pub fn getUploadJob(self: *Self, allocator: std.mem.Allocator, input: get_upload_job.GetUploadJobInput, options: CallOptions) !get_upload_job.GetUploadJobOutput {
         return get_upload_job.execute(self, allocator, input, options);
     }
 
     /// This API retrieves the pre-signed URL and client token for uploading the
     /// file associated
     /// with the upload job.
-    pub fn getUploadJobPath(self: *Self, allocator: std.mem.Allocator, input: get_upload_job_path.GetUploadJobPathInput, options: get_upload_job_path.Options) !get_upload_job_path.GetUploadJobPathOutput {
+    pub fn getUploadJobPath(self: *Self, allocator: std.mem.Allocator, input: get_upload_job_path.GetUploadJobPathInput, options: CallOptions) !get_upload_job_path.GetUploadJobPathOutput {
         return get_upload_job_path.execute(self, allocator, input, options);
     }
 
     /// Get details of specified workflow.
-    pub fn getWorkflow(self: *Self, allocator: std.mem.Allocator, input: get_workflow.GetWorkflowInput, options: get_workflow.Options) !get_workflow.GetWorkflowOutput {
+    pub fn getWorkflow(self: *Self, allocator: std.mem.Allocator, input: get_workflow.GetWorkflowInput, options: CallOptions) !get_workflow.GetWorkflowOutput {
         return get_workflow.execute(self, allocator, input, options);
     }
 
     /// Get granular list of steps in workflow.
-    pub fn getWorkflowSteps(self: *Self, allocator: std.mem.Allocator, input: get_workflow_steps.GetWorkflowStepsInput, options: get_workflow_steps.Options) !get_workflow_steps.GetWorkflowStepsOutput {
+    pub fn getWorkflowSteps(self: *Self, allocator: std.mem.Allocator, input: get_workflow_steps.GetWorkflowStepsInput, options: CallOptions) !get_workflow_steps.GetWorkflowStepsOutput {
         return get_workflow_steps.execute(self, allocator, input, options);
     }
 
     /// Lists all of the integrations associated to a specific URI in the AWS
     /// account.
-    pub fn listAccountIntegrations(self: *Self, allocator: std.mem.Allocator, input: list_account_integrations.ListAccountIntegrationsInput, options: list_account_integrations.Options) !list_account_integrations.ListAccountIntegrationsOutput {
+    pub fn listAccountIntegrations(self: *Self, allocator: std.mem.Allocator, input: list_account_integrations.ListAccountIntegrationsInput, options: CallOptions) !list_account_integrations.ListAccountIntegrationsOutput {
         return list_account_integrations.execute(self, allocator, input, options);
     }
 
     /// Lists calculated attribute definitions for Customer Profiles
-    pub fn listCalculatedAttributeDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_calculated_attribute_definitions.ListCalculatedAttributeDefinitionsInput, options: list_calculated_attribute_definitions.Options) !list_calculated_attribute_definitions.ListCalculatedAttributeDefinitionsOutput {
+    pub fn listCalculatedAttributeDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_calculated_attribute_definitions.ListCalculatedAttributeDefinitionsInput, options: CallOptions) !list_calculated_attribute_definitions.ListCalculatedAttributeDefinitionsOutput {
         return list_calculated_attribute_definitions.execute(self, allocator, input, options);
     }
 
     /// Retrieve a list of calculated attributes for a customer profile.
-    pub fn listCalculatedAttributesForProfile(self: *Self, allocator: std.mem.Allocator, input: list_calculated_attributes_for_profile.ListCalculatedAttributesForProfileInput, options: list_calculated_attributes_for_profile.Options) !list_calculated_attributes_for_profile.ListCalculatedAttributesForProfileOutput {
+    pub fn listCalculatedAttributesForProfile(self: *Self, allocator: std.mem.Allocator, input: list_calculated_attributes_for_profile.ListCalculatedAttributesForProfileInput, options: CallOptions) !list_calculated_attributes_for_profile.ListCalculatedAttributesForProfileOutput {
         return list_calculated_attributes_for_profile.execute(self, allocator, input, options);
     }
 
     /// Lists the existing layouts that can be used to view data for a specific
     /// domain. This API
     /// can only be invoked from the Amazon Connect admin website.
-    pub fn listDomainLayouts(self: *Self, allocator: std.mem.Allocator, input: list_domain_layouts.ListDomainLayoutsInput, options: list_domain_layouts.Options) !list_domain_layouts.ListDomainLayoutsOutput {
+    pub fn listDomainLayouts(self: *Self, allocator: std.mem.Allocator, input: list_domain_layouts.ListDomainLayoutsInput, options: CallOptions) !list_domain_layouts.ListDomainLayoutsOutput {
         return list_domain_layouts.execute(self, allocator, input, options);
     }
 
     /// List all DomainObjectType(s) in a Customer Profiles domain.
-    pub fn listDomainObjectTypes(self: *Self, allocator: std.mem.Allocator, input: list_domain_object_types.ListDomainObjectTypesInput, options: list_domain_object_types.Options) !list_domain_object_types.ListDomainObjectTypesOutput {
+    pub fn listDomainObjectTypes(self: *Self, allocator: std.mem.Allocator, input: list_domain_object_types.ListDomainObjectTypesInput, options: CallOptions) !list_domain_object_types.ListDomainObjectTypesOutput {
         return list_domain_object_types.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all the domains for an AWS account that have been created.
-    pub fn listDomains(self: *Self, allocator: std.mem.Allocator, input: list_domains.ListDomainsInput, options: list_domains.Options) !list_domains.ListDomainsOutput {
+    pub fn listDomains(self: *Self, allocator: std.mem.Allocator, input: list_domains.ListDomainsInput, options: CallOptions) !list_domains.ListDomainsOutput {
         return list_domains.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all the event streams in a specific domain.
-    pub fn listEventStreams(self: *Self, allocator: std.mem.Allocator, input: list_event_streams.ListEventStreamsInput, options: list_event_streams.Options) !list_event_streams.ListEventStreamsOutput {
+    pub fn listEventStreams(self: *Self, allocator: std.mem.Allocator, input: list_event_streams.ListEventStreamsInput, options: CallOptions) !list_event_streams.ListEventStreamsOutput {
         return list_event_streams.execute(self, allocator, input, options);
     }
 
     /// List all Event Triggers under a domain.
-    pub fn listEventTriggers(self: *Self, allocator: std.mem.Allocator, input: list_event_triggers.ListEventTriggersInput, options: list_event_triggers.Options) !list_event_triggers.ListEventTriggersOutput {
+    pub fn listEventTriggers(self: *Self, allocator: std.mem.Allocator, input: list_event_triggers.ListEventTriggersInput, options: CallOptions) !list_event_triggers.ListEventTriggersOutput {
         return list_event_triggers.execute(self, allocator, input, options);
     }
 
     /// Lists all of the Identity Resolution Jobs in your domain. The response sorts
     /// the list by
     /// `JobStartTime`.
-    pub fn listIdentityResolutionJobs(self: *Self, allocator: std.mem.Allocator, input: list_identity_resolution_jobs.ListIdentityResolutionJobsInput, options: list_identity_resolution_jobs.Options) !list_identity_resolution_jobs.ListIdentityResolutionJobsOutput {
+    pub fn listIdentityResolutionJobs(self: *Self, allocator: std.mem.Allocator, input: list_identity_resolution_jobs.ListIdentityResolutionJobsInput, options: CallOptions) !list_identity_resolution_jobs.ListIdentityResolutionJobsOutput {
         return list_identity_resolution_jobs.execute(self, allocator, input, options);
     }
 
     /// Lists all of the integrations in your domain.
-    pub fn listIntegrations(self: *Self, allocator: std.mem.Allocator, input: list_integrations.ListIntegrationsInput, options: list_integrations.Options) !list_integrations.ListIntegrationsOutput {
+    pub fn listIntegrations(self: *Self, allocator: std.mem.Allocator, input: list_integrations.ListIntegrationsInput, options: CallOptions) !list_integrations.ListIntegrationsOutput {
         return list_integrations.execute(self, allocator, input, options);
     }
 
@@ -657,60 +658,60 @@ pub const Client = struct {
     /// types. The API accepts the object type name, attribute name, and domain name
     /// as input parameters and returns values up to the storage limit of
     /// approximately 350KB.
-    pub fn listObjectTypeAttributeValues(self: *Self, allocator: std.mem.Allocator, input: list_object_type_attribute_values.ListObjectTypeAttributeValuesInput, options: list_object_type_attribute_values.Options) !list_object_type_attribute_values.ListObjectTypeAttributeValuesOutput {
+    pub fn listObjectTypeAttributeValues(self: *Self, allocator: std.mem.Allocator, input: list_object_type_attribute_values.ListObjectTypeAttributeValuesInput, options: CallOptions) !list_object_type_attribute_values.ListObjectTypeAttributeValuesOutput {
         return list_object_type_attribute_values.execute(self, allocator, input, options);
     }
 
     /// Fetch the possible attribute values given the attribute name.
-    pub fn listObjectTypeAttributes(self: *Self, allocator: std.mem.Allocator, input: list_object_type_attributes.ListObjectTypeAttributesInput, options: list_object_type_attributes.Options) !list_object_type_attributes.ListObjectTypeAttributesOutput {
+    pub fn listObjectTypeAttributes(self: *Self, allocator: std.mem.Allocator, input: list_object_type_attributes.ListObjectTypeAttributesInput, options: CallOptions) !list_object_type_attributes.ListObjectTypeAttributesOutput {
         return list_object_type_attributes.execute(self, allocator, input, options);
     }
 
     /// Fetch the possible attribute values given the attribute name.
-    pub fn listProfileAttributeValues(self: *Self, allocator: std.mem.Allocator, input: list_profile_attribute_values.ListProfileAttributeValuesInput, options: list_profile_attribute_values.Options) !list_profile_attribute_values.ListProfileAttributeValuesOutput {
+    pub fn listProfileAttributeValues(self: *Self, allocator: std.mem.Allocator, input: list_profile_attribute_values.ListProfileAttributeValuesInput, options: CallOptions) !list_profile_attribute_values.ListProfileAttributeValuesOutput {
         return list_profile_attribute_values.execute(self, allocator, input, options);
     }
 
     /// Returns a list of history records for a specific profile, for a specific
     /// domain.
-    pub fn listProfileHistoryRecords(self: *Self, allocator: std.mem.Allocator, input: list_profile_history_records.ListProfileHistoryRecordsInput, options: list_profile_history_records.Options) !list_profile_history_records.ListProfileHistoryRecordsOutput {
+    pub fn listProfileHistoryRecords(self: *Self, allocator: std.mem.Allocator, input: list_profile_history_records.ListProfileHistoryRecordsInput, options: CallOptions) !list_profile_history_records.ListProfileHistoryRecordsOutput {
         return list_profile_history_records.execute(self, allocator, input, options);
     }
 
     /// Lists all of the template information for object types.
-    pub fn listProfileObjectTypeTemplates(self: *Self, allocator: std.mem.Allocator, input: list_profile_object_type_templates.ListProfileObjectTypeTemplatesInput, options: list_profile_object_type_templates.Options) !list_profile_object_type_templates.ListProfileObjectTypeTemplatesOutput {
+    pub fn listProfileObjectTypeTemplates(self: *Self, allocator: std.mem.Allocator, input: list_profile_object_type_templates.ListProfileObjectTypeTemplatesInput, options: CallOptions) !list_profile_object_type_templates.ListProfileObjectTypeTemplatesOutput {
         return list_profile_object_type_templates.execute(self, allocator, input, options);
     }
 
     /// Lists all of the templates available within the service.
-    pub fn listProfileObjectTypes(self: *Self, allocator: std.mem.Allocator, input: list_profile_object_types.ListProfileObjectTypesInput, options: list_profile_object_types.Options) !list_profile_object_types.ListProfileObjectTypesOutput {
+    pub fn listProfileObjectTypes(self: *Self, allocator: std.mem.Allocator, input: list_profile_object_types.ListProfileObjectTypesInput, options: CallOptions) !list_profile_object_types.ListProfileObjectTypesOutput {
         return list_profile_object_types.execute(self, allocator, input, options);
     }
 
     /// Returns a list of objects associated with a profile of a given
     /// ProfileObjectType.
-    pub fn listProfileObjects(self: *Self, allocator: std.mem.Allocator, input: list_profile_objects.ListProfileObjectsInput, options: list_profile_objects.Options) !list_profile_objects.ListProfileObjectsOutput {
+    pub fn listProfileObjects(self: *Self, allocator: std.mem.Allocator, input: list_profile_objects.ListProfileObjectsInput, options: CallOptions) !list_profile_objects.ListProfileObjectsOutput {
         return list_profile_objects.execute(self, allocator, input, options);
     }
 
     /// Returns a list of available recommender recipes that can be used to create
     /// recommenders.
-    pub fn listRecommenderRecipes(self: *Self, allocator: std.mem.Allocator, input: list_recommender_recipes.ListRecommenderRecipesInput, options: list_recommender_recipes.Options) !list_recommender_recipes.ListRecommenderRecipesOutput {
+    pub fn listRecommenderRecipes(self: *Self, allocator: std.mem.Allocator, input: list_recommender_recipes.ListRecommenderRecipesInput, options: CallOptions) !list_recommender_recipes.ListRecommenderRecipesOutput {
         return list_recommender_recipes.execute(self, allocator, input, options);
     }
 
     /// Returns a list of recommenders in the specified domain.
-    pub fn listRecommenders(self: *Self, allocator: std.mem.Allocator, input: list_recommenders.ListRecommendersInput, options: list_recommenders.Options) !list_recommenders.ListRecommendersOutput {
+    pub fn listRecommenders(self: *Self, allocator: std.mem.Allocator, input: list_recommenders.ListRecommendersInput, options: CallOptions) !list_recommenders.ListRecommendersOutput {
         return list_recommenders.execute(self, allocator, input, options);
     }
 
     /// Returns a set of `MatchIds` that belong to the given domain.
-    pub fn listRuleBasedMatches(self: *Self, allocator: std.mem.Allocator, input: list_rule_based_matches.ListRuleBasedMatchesInput, options: list_rule_based_matches.Options) !list_rule_based_matches.ListRuleBasedMatchesOutput {
+    pub fn listRuleBasedMatches(self: *Self, allocator: std.mem.Allocator, input: list_rule_based_matches.ListRuleBasedMatchesInput, options: CallOptions) !list_rule_based_matches.ListRuleBasedMatchesOutput {
         return list_rule_based_matches.execute(self, allocator, input, options);
     }
 
     /// Lists all segment definitions under a domain.
-    pub fn listSegmentDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_segment_definitions.ListSegmentDefinitionsInput, options: list_segment_definitions.Options) !list_segment_definitions.ListSegmentDefinitionsOutput {
+    pub fn listSegmentDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_segment_definitions.ListSegmentDefinitionsInput, options: CallOptions) !list_segment_definitions.ListSegmentDefinitionsOutput {
         return list_segment_definitions.execute(self, allocator, input, options);
     }
 
@@ -718,17 +719,17 @@ pub const Client = struct {
     /// resource. In Connect
     /// Customer Profiles, domains, profile object types, and integrations can be
     /// tagged.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// This API retrieves a list of upload jobs for the specified domain.
-    pub fn listUploadJobs(self: *Self, allocator: std.mem.Allocator, input: list_upload_jobs.ListUploadJobsInput, options: list_upload_jobs.Options) !list_upload_jobs.ListUploadJobsOutput {
+    pub fn listUploadJobs(self: *Self, allocator: std.mem.Allocator, input: list_upload_jobs.ListUploadJobsInput, options: CallOptions) !list_upload_jobs.ListUploadJobsOutput {
         return list_upload_jobs.execute(self, allocator, input, options);
     }
 
     /// Query to list all workflows.
-    pub fn listWorkflows(self: *Self, allocator: std.mem.Allocator, input: list_workflows.ListWorkflowsInput, options: list_workflows.Options) !list_workflows.ListWorkflowsOutput {
+    pub fn listWorkflows(self: *Self, allocator: std.mem.Allocator, input: list_workflows.ListWorkflowsInput, options: CallOptions) !list_workflows.ListWorkflowsOutput {
         return list_workflows.execute(self, allocator, input, options);
     }
 
@@ -765,13 +766,13 @@ pub const Client = struct {
     /// matching
     /// system. After profiles have been merged, they cannot be separated
     /// (unmerged).
-    pub fn mergeProfiles(self: *Self, allocator: std.mem.Allocator, input: merge_profiles.MergeProfilesInput, options: merge_profiles.Options) !merge_profiles.MergeProfilesOutput {
+    pub fn mergeProfiles(self: *Self, allocator: std.mem.Allocator, input: merge_profiles.MergeProfilesInput, options: CallOptions) !merge_profiles.MergeProfilesOutput {
         return merge_profiles.execute(self, allocator, input, options);
     }
 
     /// Create/Update a DomainObjectType in a Customer Profiles domain. To create a
     /// new DomainObjectType, Data Store needs to be enabled on the Domain.
-    pub fn putDomainObjectType(self: *Self, allocator: std.mem.Allocator, input: put_domain_object_type.PutDomainObjectTypeInput, options: put_domain_object_type.Options) !put_domain_object_type.PutDomainObjectTypeOutput {
+    pub fn putDomainObjectType(self: *Self, allocator: std.mem.Allocator, input: put_domain_object_type.PutDomainObjectTypeInput, options: CallOptions) !put_domain_object_type.PutDomainObjectTypeOutput {
         return put_domain_object_type.execute(self, allocator, input, options);
     }
 
@@ -784,7 +785,7 @@ pub const Client = struct {
     /// To add or remove tags on an existing Integration, see [ TagResource
     /// ](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html)/[
     /// UntagResource](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html).
-    pub fn putIntegration(self: *Self, allocator: std.mem.Allocator, input: put_integration.PutIntegrationInput, options: put_integration.Options) !put_integration.PutIntegrationOutput {
+    pub fn putIntegration(self: *Self, allocator: std.mem.Allocator, input: put_integration.PutIntegrationInput, options: CallOptions) !put_integration.PutIntegrationOutput {
         return put_integration.execute(self, allocator, input, options);
     }
 
@@ -805,7 +806,7 @@ pub const Client = struct {
     ///
     /// PutProfileObject needs an ObjectType, which can be created using
     /// PutProfileObjectType.
-    pub fn putProfileObject(self: *Self, allocator: std.mem.Allocator, input: put_profile_object.PutProfileObjectInput, options: put_profile_object.Options) !put_profile_object.PutProfileObjectOutput {
+    pub fn putProfileObject(self: *Self, allocator: std.mem.Allocator, input: put_profile_object.PutProfileObjectInput, options: CallOptions) !put_profile_object.PutProfileObjectOutput {
         return put_profile_object.execute(self, allocator, input, options);
     }
 
@@ -813,7 +814,7 @@ pub const Client = struct {
     ///
     /// To add or remove tags on an existing ObjectType, see [
     /// TagResource](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html)/[UntagResource](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html).
-    pub fn putProfileObjectType(self: *Self, allocator: std.mem.Allocator, input: put_profile_object_type.PutProfileObjectTypeInput, options: put_profile_object_type.Options) !put_profile_object_type.PutProfileObjectTypeOutput {
+    pub fn putProfileObjectType(self: *Self, allocator: std.mem.Allocator, input: put_profile_object_type.PutProfileObjectTypeInput, options: CallOptions) !put_profile_object_type.PutProfileObjectTypeOutput {
         return put_profile_object_type.execute(self, allocator, input, options);
     }
 
@@ -827,29 +828,29 @@ pub const Client = struct {
     /// This operation supports searching for profiles with a minimum of 1
     /// key-value(s) pair and
     /// up to 5 key-value(s) pairs using either `AND` or `OR` logic.
-    pub fn searchProfiles(self: *Self, allocator: std.mem.Allocator, input: search_profiles.SearchProfilesInput, options: search_profiles.Options) !search_profiles.SearchProfilesOutput {
+    pub fn searchProfiles(self: *Self, allocator: std.mem.Allocator, input: search_profiles.SearchProfilesInput, options: CallOptions) !search_profiles.SearchProfilesOutput {
         return search_profiles.execute(self, allocator, input, options);
     }
 
     /// Starts a recommender that was previously stopped. Starting a recommender
     /// resumes its ability to generate recommendations.
-    pub fn startRecommender(self: *Self, allocator: std.mem.Allocator, input: start_recommender.StartRecommenderInput, options: start_recommender.Options) !start_recommender.StartRecommenderOutput {
+    pub fn startRecommender(self: *Self, allocator: std.mem.Allocator, input: start_recommender.StartRecommenderInput, options: CallOptions) !start_recommender.StartRecommenderOutput {
         return start_recommender.execute(self, allocator, input, options);
     }
 
     /// This API starts the processing of an upload job to ingest profile data.
-    pub fn startUploadJob(self: *Self, allocator: std.mem.Allocator, input: start_upload_job.StartUploadJobInput, options: start_upload_job.Options) !start_upload_job.StartUploadJobOutput {
+    pub fn startUploadJob(self: *Self, allocator: std.mem.Allocator, input: start_upload_job.StartUploadJobInput, options: CallOptions) !start_upload_job.StartUploadJobOutput {
         return start_upload_job.execute(self, allocator, input, options);
     }
 
     /// Stops a recommender, suspending its ability to generate recommendations. The
     /// recommender can be restarted later using StartRecommender.
-    pub fn stopRecommender(self: *Self, allocator: std.mem.Allocator, input: stop_recommender.StopRecommenderInput, options: stop_recommender.Options) !stop_recommender.StopRecommenderOutput {
+    pub fn stopRecommender(self: *Self, allocator: std.mem.Allocator, input: stop_recommender.StopRecommenderInput, options: CallOptions) !stop_recommender.StopRecommenderOutput {
         return stop_recommender.execute(self, allocator, input, options);
     }
 
     /// This API stops the processing of an upload job.
-    pub fn stopUploadJob(self: *Self, allocator: std.mem.Allocator, input: stop_upload_job.StopUploadJobInput, options: stop_upload_job.Options) !stop_upload_job.StopUploadJobOutput {
+    pub fn stopUploadJob(self: *Self, allocator: std.mem.Allocator, input: stop_upload_job.StopUploadJobInput, options: CallOptions) !stop_upload_job.StopUploadJobOutput {
         return stop_upload_job.execute(self, allocator, input, options);
     }
 
@@ -876,7 +877,7 @@ pub const Client = struct {
     /// you specify replaces the previous value for that tag.
     ///
     /// You can associate as many as 50 tags with a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -884,7 +885,7 @@ pub const Client = struct {
     /// resource. In Connect
     /// Customer Profiles, domains, profile object types, and integrations can be
     /// tagged.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -893,7 +894,7 @@ pub const Client = struct {
     /// that increasing the date range of a calculated attribute will not trigger
     /// inclusion of
     /// historical data greater than the current date range.
-    pub fn updateCalculatedAttributeDefinition(self: *Self, allocator: std.mem.Allocator, input: update_calculated_attribute_definition.UpdateCalculatedAttributeDefinitionInput, options: update_calculated_attribute_definition.Options) !update_calculated_attribute_definition.UpdateCalculatedAttributeDefinitionOutput {
+    pub fn updateCalculatedAttributeDefinition(self: *Self, allocator: std.mem.Allocator, input: update_calculated_attribute_definition.UpdateCalculatedAttributeDefinitionInput, options: CallOptions) !update_calculated_attribute_definition.UpdateCalculatedAttributeDefinitionOutput {
         return update_calculated_attribute_definition.execute(self, allocator, input, options);
     }
 
@@ -915,19 +916,19 @@ pub const Client = struct {
     ///
     /// To add or remove tags on an existing Domain, see
     /// [TagResource](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html)/[UntagResource](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html).
-    pub fn updateDomain(self: *Self, allocator: std.mem.Allocator, input: update_domain.UpdateDomainInput, options: update_domain.Options) !update_domain.UpdateDomainOutput {
+    pub fn updateDomain(self: *Self, allocator: std.mem.Allocator, input: update_domain.UpdateDomainInput, options: CallOptions) !update_domain.UpdateDomainOutput {
         return update_domain.execute(self, allocator, input, options);
     }
 
     /// Updates the layout used to view data for a specific domain. This API can
     /// only be invoked
     /// from the Amazon Connect admin website.
-    pub fn updateDomainLayout(self: *Self, allocator: std.mem.Allocator, input: update_domain_layout.UpdateDomainLayoutInput, options: update_domain_layout.Options) !update_domain_layout.UpdateDomainLayoutOutput {
+    pub fn updateDomainLayout(self: *Self, allocator: std.mem.Allocator, input: update_domain_layout.UpdateDomainLayoutInput, options: CallOptions) !update_domain_layout.UpdateDomainLayoutOutput {
         return update_domain_layout.execute(self, allocator, input, options);
     }
 
     /// Update the properties of an Event Trigger.
-    pub fn updateEventTrigger(self: *Self, allocator: std.mem.Allocator, input: update_event_trigger.UpdateEventTriggerInput, options: update_event_trigger.Options) !update_event_trigger.UpdateEventTriggerOutput {
+    pub fn updateEventTrigger(self: *Self, allocator: std.mem.Allocator, input: update_event_trigger.UpdateEventTriggerInput, options: CallOptions) !update_event_trigger.UpdateEventTriggerOutput {
         return update_event_trigger.execute(self, allocator, input, options);
     }
 
@@ -940,13 +941,13 @@ pub const Client = struct {
     /// existing value will be removed. Not specifying a string value means that any
     /// value already
     /// there will be kept.
-    pub fn updateProfile(self: *Self, allocator: std.mem.Allocator, input: update_profile.UpdateProfileInput, options: update_profile.Options) !update_profile.UpdateProfileOutput {
+    pub fn updateProfile(self: *Self, allocator: std.mem.Allocator, input: update_profile.UpdateProfileInput, options: CallOptions) !update_profile.UpdateProfileOutput {
         return update_profile.execute(self, allocator, input, options);
     }
 
     /// Updates the properties of an existing recommender, allowing you to modify
     /// its configuration and description.
-    pub fn updateRecommender(self: *Self, allocator: std.mem.Allocator, input: update_recommender.UpdateRecommenderInput, options: update_recommender.Options) !update_recommender.UpdateRecommenderOutput {
+    pub fn updateRecommender(self: *Self, allocator: std.mem.Allocator, input: update_recommender.UpdateRecommenderInput, options: CallOptions) !update_recommender.UpdateRecommenderOutput {
         return update_recommender.execute(self, allocator, input, options);
     }
 

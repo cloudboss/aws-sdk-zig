@@ -1,12 +1,19 @@
 pub const Client = @import("client.zig").Client;
+pub const CallOptions = @import("call_options.zig").CallOptions;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
 pub const types = @import("types.zig");
 
-pub const get_control = @import("get_control.zig");
-pub const list_common_controls = @import("list_common_controls.zig");
-pub const list_control_mappings = @import("list_control_mappings.zig");
-pub const list_controls = @import("list_controls.zig");
-pub const list_domains = @import("list_domains.zig");
-pub const list_objectives = @import("list_objectives.zig");
+pub const GetControlInput = @import("get_control.zig").GetControlInput;
+pub const GetControlOutput = @import("get_control.zig").GetControlOutput;
+pub const ListCommonControlsInput = @import("list_common_controls.zig").ListCommonControlsInput;
+pub const ListCommonControlsOutput = @import("list_common_controls.zig").ListCommonControlsOutput;
+pub const ListControlMappingsInput = @import("list_control_mappings.zig").ListControlMappingsInput;
+pub const ListControlMappingsOutput = @import("list_control_mappings.zig").ListControlMappingsOutput;
+pub const ListControlsInput = @import("list_controls.zig").ListControlsInput;
+pub const ListControlsOutput = @import("list_controls.zig").ListControlsOutput;
+pub const ListDomainsInput = @import("list_domains.zig").ListDomainsInput;
+pub const ListDomainsOutput = @import("list_domains.zig").ListDomainsOutput;
+pub const ListObjectivesInput = @import("list_objectives.zig").ListObjectivesInput;
+pub const ListObjectivesOutput = @import("list_objectives.zig").ListObjectivesOutput;

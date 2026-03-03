@@ -2,10 +2,11 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IndexType = @import("index_type.zig").IndexType;
 
-const GetServiceIndexInput = struct {};
+pub const GetServiceIndexInput = struct {};
 
 pub const GetServiceIndexOutput = struct {
     /// The Amazon Resource Name (ARN) of the Resource Explorer index in the current
@@ -23,11 +24,7 @@ pub const GetServiceIndexOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetServiceIndexInput, options: Options) !GetServiceIndexOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetServiceIndexInput, options: CallOptions) !GetServiceIndexOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

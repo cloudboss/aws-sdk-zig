@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_attendees = @import("list_attendees.zig");
@@ -14,7 +15,7 @@ pub const ListAttendeesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_attendees.Options) !list_attendees.ListAttendeesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_attendees.ListAttendeesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

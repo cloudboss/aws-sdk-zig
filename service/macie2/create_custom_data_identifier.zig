@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SeverityLevel = @import("severity_level.zig").SeverityLevel;
 
@@ -98,11 +99,7 @@ pub const CreateCustomDataIdentifierOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCustomDataIdentifierInput, options: Options) !CreateCustomDataIdentifierOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCustomDataIdentifierInput, options: CallOptions) !CreateCustomDataIdentifierOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

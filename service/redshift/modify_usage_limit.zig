@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const UsageLimitBreachAction = @import("usage_limit_breach_action.zig").UsageLimitBreachAction;
 const UsageLimitFeatureType = @import("usage_limit_feature_type.zig").UsageLimitFeatureType;
@@ -23,13 +24,9 @@ pub const ModifyUsageLimitInput = struct {
     usage_limit_id: []const u8,
 };
 
-const ModifyUsageLimitOutput = @import("usage_limit.zig").UsageLimit;
+pub const ModifyUsageLimitOutput = @import("usage_limit.zig").UsageLimit;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyUsageLimitInput, options: Options) !ModifyUsageLimitOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyUsageLimitInput, options: CallOptions) !ModifyUsageLimitOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

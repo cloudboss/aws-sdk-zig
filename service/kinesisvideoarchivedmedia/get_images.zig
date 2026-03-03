@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Format = @import("format.zig").Format;
 const ImageSelectorType = @import("image_selector_type.zig").ImageSelectorType;
@@ -113,11 +114,7 @@ pub const GetImagesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetImagesInput, options: Options) !GetImagesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetImagesInput, options: CallOptions) !GetImagesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RequestedServiceQuotaChange = @import("requested_service_quota_change.zig").RequestedServiceQuotaChange;
 
@@ -23,11 +24,7 @@ pub const GetRequestedServiceQuotaChangeOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetRequestedServiceQuotaChangeInput, options: Options) !GetRequestedServiceQuotaChangeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetRequestedServiceQuotaChangeInput, options: CallOptions) !GetRequestedServiceQuotaChangeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

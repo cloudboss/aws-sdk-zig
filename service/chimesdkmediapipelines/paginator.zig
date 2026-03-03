@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_media_capture_pipelines = @import("list_media_capture_pipelines.zig");
@@ -17,7 +18,7 @@ pub const ListMediaCapturePipelinesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_media_capture_pipelines.Options) !list_media_capture_pipelines.ListMediaCapturePipelinesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_media_capture_pipelines.ListMediaCapturePipelinesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -58,7 +59,7 @@ pub const ListMediaInsightsPipelineConfigurationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_media_insights_pipeline_configurations.Options) !list_media_insights_pipeline_configurations.ListMediaInsightsPipelineConfigurationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_media_insights_pipeline_configurations.ListMediaInsightsPipelineConfigurationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -99,7 +100,7 @@ pub const ListMediaPipelineKinesisVideoStreamPoolsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_media_pipeline_kinesis_video_stream_pools.Options) !list_media_pipeline_kinesis_video_stream_pools.ListMediaPipelineKinesisVideoStreamPoolsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_media_pipeline_kinesis_video_stream_pools.ListMediaPipelineKinesisVideoStreamPoolsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -140,7 +141,7 @@ pub const ListMediaPipelinesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_media_pipelines.Options) !list_media_pipelines.ListMediaPipelinesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_media_pipelines.ListMediaPipelinesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

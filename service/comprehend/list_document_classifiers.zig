@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DocumentClassifierFilter = @import("document_classifier_filter.zig").DocumentClassifierFilter;
 const DocumentClassifierProperties = @import("document_classifier_properties.zig").DocumentClassifierProperties;
@@ -38,11 +39,7 @@ pub const ListDocumentClassifiersOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDocumentClassifiersInput, options: Options) !ListDocumentClassifiersOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDocumentClassifiersInput, options: CallOptions) !ListDocumentClassifiersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MetricQuery = @import("metric_query.zig").MetricQuery;
 const PeriodAlignment = @import("period_alignment.zig").PeriodAlignment;
@@ -145,11 +146,7 @@ pub const GetResourceMetricsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourceMetricsInput, options: Options) !GetResourceMetricsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourceMetricsInput, options: CallOptions) !GetResourceMetricsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

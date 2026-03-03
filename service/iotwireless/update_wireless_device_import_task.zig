@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SidewalkUpdateImportInfo = @import("sidewalk_update_import_info.zig").SidewalkUpdateImportInfo;
 
@@ -21,11 +22,7 @@ pub const UpdateWirelessDeviceImportTaskInput = struct {
 pub const UpdateWirelessDeviceImportTaskOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWirelessDeviceImportTaskInput, options: Options) !UpdateWirelessDeviceImportTaskOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWirelessDeviceImportTaskInput, options: CallOptions) !UpdateWirelessDeviceImportTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

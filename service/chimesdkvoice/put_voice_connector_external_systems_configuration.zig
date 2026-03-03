@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContactCenterSystemType = @import("contact_center_system_type.zig").ContactCenterSystemType;
 const SessionBorderControllerType = @import("session_border_controller_type.zig").SessionBorderControllerType;
@@ -35,11 +36,7 @@ pub const PutVoiceConnectorExternalSystemsConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutVoiceConnectorExternalSystemsConfigurationInput, options: Options) !PutVoiceConnectorExternalSystemsConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutVoiceConnectorExternalSystemsConfigurationInput, options: CallOptions) !PutVoiceConnectorExternalSystemsConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

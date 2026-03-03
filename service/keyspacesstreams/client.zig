@@ -5,6 +5,7 @@ const get_records = @import("get_records.zig");
 const get_shard_iterator = @import("get_shard_iterator.zig");
 const get_stream = @import("get_stream.zig");
 const list_streams = @import("list_streams.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -41,7 +42,7 @@ pub const Client = struct {
     /// to the captured table data. Each record represents a single data
     /// modification in the Amazon Keyspaces table and includes metadata about when
     /// the change occurred.
-    pub fn getRecords(self: *Self, allocator: std.mem.Allocator, input: get_records.GetRecordsInput, options: get_records.Options) !get_records.GetRecordsOutput {
+    pub fn getRecords(self: *Self, allocator: std.mem.Allocator, input: get_records.GetRecordsInput, options: CallOptions) !get_records.GetRecordsOutput {
         return get_records.execute(self, allocator, input, options);
     }
 
@@ -51,7 +52,7 @@ pub const Client = struct {
     /// records sequentially. You can specify whether to begin reading at the latest
     /// record, the oldest record, or at a particular sequence number within the
     /// shard.
-    pub fn getShardIterator(self: *Self, allocator: std.mem.Allocator, input: get_shard_iterator.GetShardIteratorInput, options: get_shard_iterator.Options) !get_shard_iterator.GetShardIteratorOutput {
+    pub fn getShardIterator(self: *Self, allocator: std.mem.Allocator, input: get_shard_iterator.GetShardIteratorInput, options: CallOptions) !get_shard_iterator.GetShardIteratorOutput {
         return get_shard_iterator.execute(self, allocator, input, options);
     }
 
@@ -60,7 +61,7 @@ pub const Client = struct {
     /// Resource Name (ARN), creation time, current status, retention period, shard
     /// composition, and associated table details. This operation helps you monitor
     /// and manage the configuration of your Amazon Keyspaces data streams.
-    pub fn getStream(self: *Self, allocator: std.mem.Allocator, input: get_stream.GetStreamInput, options: get_stream.Options) !get_stream.GetStreamOutput {
+    pub fn getStream(self: *Self, allocator: std.mem.Allocator, input: get_stream.GetStreamInput, options: CallOptions) !get_stream.GetStreamOutput {
         return get_stream.execute(self, allocator, input, options);
     }
 
@@ -69,7 +70,7 @@ pub const Client = struct {
     /// information such as stream ARNs, table associations, creation timestamps,
     /// and current status. This operation helps you discover and manage all active
     /// data streams in your Amazon Keyspaces environment.
-    pub fn listStreams(self: *Self, allocator: std.mem.Allocator, input: list_streams.ListStreamsInput, options: list_streams.Options) !list_streams.ListStreamsOutput {
+    pub fn listStreams(self: *Self, allocator: std.mem.Allocator, input: list_streams.ListStreamsInput, options: CallOptions) !list_streams.ListStreamsOutput {
         return list_streams.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const HookStatus = @import("hook_status.zig").HookStatus;
 const ListHookResultsTargetType = @import("list_hook_results_target_type.zig").ListHookResultsTargetType;
@@ -67,11 +68,7 @@ pub const ListHookResultsOutput = struct {
     target_type: ?ListHookResultsTargetType = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListHookResultsInput, options: Options) !ListHookResultsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListHookResultsInput, options: CallOptions) !ListHookResultsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

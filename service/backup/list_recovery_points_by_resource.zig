@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RecoveryPointByResource = @import("recovery_point_by_resource.zig").RecoveryPointByResource;
 
@@ -67,11 +68,7 @@ pub const ListRecoveryPointsByResourceOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRecoveryPointsByResourceInput, options: Options) !ListRecoveryPointsByResourceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRecoveryPointsByResourceInput, options: CallOptions) !ListRecoveryPointsByResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

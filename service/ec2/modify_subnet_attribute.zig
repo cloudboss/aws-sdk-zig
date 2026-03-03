@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AttributeBooleanValue = @import("attribute_boolean_value.zig").AttributeBooleanValue;
 const HostnameType = @import("hostname_type.zig").HostnameType;
@@ -90,13 +91,9 @@ pub const ModifySubnetAttributeInput = struct {
     subnet_id: []const u8,
 };
 
-const ModifySubnetAttributeOutput = struct {};
+pub const ModifySubnetAttributeOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifySubnetAttributeInput, options: Options) !ModifySubnetAttributeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifySubnetAttributeInput, options: CallOptions) !ModifySubnetAttributeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

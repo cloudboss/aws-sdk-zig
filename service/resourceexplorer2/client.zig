@@ -33,6 +33,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_index_type = @import("update_index_type.zig");
 const update_view = @import("update_view.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -72,12 +73,12 @@ pub const Client = struct {
     /// If an Amazon Web Services Region doesn't have a default view configured,
     /// then users must explicitly specify a view with every `Search` operation
     /// performed in that Region.
-    pub fn associateDefaultView(self: *Self, allocator: std.mem.Allocator, input: associate_default_view.AssociateDefaultViewInput, options: associate_default_view.Options) !associate_default_view.AssociateDefaultViewOutput {
+    pub fn associateDefaultView(self: *Self, allocator: std.mem.Allocator, input: associate_default_view.AssociateDefaultViewInput, options: CallOptions) !associate_default_view.AssociateDefaultViewOutput {
         return associate_default_view.execute(self, allocator, input, options);
     }
 
     /// Retrieves details about a list of views.
-    pub fn batchGetView(self: *Self, allocator: std.mem.Allocator, input: batch_get_view.BatchGetViewInput, options: batch_get_view.Options) !batch_get_view.BatchGetViewOutput {
+    pub fn batchGetView(self: *Self, allocator: std.mem.Allocator, input: batch_get_view.BatchGetViewInput, options: CallOptions) !batch_get_view.BatchGetViewOutput {
         return batch_get_view.execute(self, allocator, input, options);
     }
 
@@ -124,7 +125,7 @@ pub const Client = struct {
     /// on Resource Explorer in the account. Resource Explorer uses this to create
     /// the [service-linked role needed to index the resources in your
     /// account](https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html). Resource Explorer uses the same service-linked role for all additional indexes you create afterwards.
-    pub fn createIndex(self: *Self, allocator: std.mem.Allocator, input: create_index.CreateIndexInput, options: create_index.Options) !create_index.CreateIndexOutput {
+    pub fn createIndex(self: *Self, allocator: std.mem.Allocator, input: create_index.CreateIndexInput, options: CallOptions) !create_index.CreateIndexOutput {
         return create_index.execute(self, allocator, input, options);
     }
 
@@ -132,7 +133,7 @@ pub const Client = struct {
     /// Services Regions. This operation sets up indexes and views in the specified
     /// Regions. This operation can also be used to set an aggregator Region for
     /// cross-Region resource search.
-    pub fn createResourceExplorerSetup(self: *Self, allocator: std.mem.Allocator, input: create_resource_explorer_setup.CreateResourceExplorerSetupInput, options: create_resource_explorer_setup.Options) !create_resource_explorer_setup.CreateResourceExplorerSetupOutput {
+    pub fn createResourceExplorerSetup(self: *Self, allocator: std.mem.Allocator, input: create_resource_explorer_setup.CreateResourceExplorerSetupInput, options: CallOptions) !create_resource_explorer_setup.CreateResourceExplorerSetupOutput {
         return create_resource_explorer_setup.execute(self, allocator, input, options);
     }
 
@@ -145,7 +146,7 @@ pub const Client = struct {
     /// Only the principals with an IAM identity-based policy that grants `Allow` to
     /// the `Search` action on a `Resource` with the [Amazon resource name
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of this view can Search using views you create with this operation.
-    pub fn createView(self: *Self, allocator: std.mem.Allocator, input: create_view.CreateViewInput, options: create_view.Options) !create_view.CreateViewOutput {
+    pub fn createView(self: *Self, allocator: std.mem.Allocator, input: create_view.CreateViewInput, options: CallOptions) !create_view.CreateViewOutput {
         return create_view.execute(self, allocator, input, options);
     }
 
@@ -162,14 +163,14 @@ pub const Client = struct {
     /// to be the aggregator index for the account. Users can't perform account-wide
     /// searches using Resource Explorer until another aggregator index is
     /// configured.
-    pub fn deleteIndex(self: *Self, allocator: std.mem.Allocator, input: delete_index.DeleteIndexInput, options: delete_index.Options) !delete_index.DeleteIndexOutput {
+    pub fn deleteIndex(self: *Self, allocator: std.mem.Allocator, input: delete_index.DeleteIndexInput, options: CallOptions) !delete_index.DeleteIndexOutput {
         return delete_index.execute(self, allocator, input, options);
     }
 
     /// Deletes a Resource Explorer setup configuration. This operation removes
     /// indexes and views from the specified Regions or all Regions where Resource
     /// Explorer is configured.
-    pub fn deleteResourceExplorerSetup(self: *Self, allocator: std.mem.Allocator, input: delete_resource_explorer_setup.DeleteResourceExplorerSetupInput, options: delete_resource_explorer_setup.Options) !delete_resource_explorer_setup.DeleteResourceExplorerSetupOutput {
+    pub fn deleteResourceExplorerSetup(self: *Self, allocator: std.mem.Allocator, input: delete_resource_explorer_setup.DeleteResourceExplorerSetupInput, options: CallOptions) !delete_resource_explorer_setup.DeleteResourceExplorerSetupOutput {
         return delete_resource_explorer_setup.execute(self, allocator, input, options);
     }
 
@@ -179,7 +180,7 @@ pub const Client = struct {
     /// Region, then all Search operations in that Region must explicitly specify
     /// the view to use until you configure a new default by calling the
     /// AssociateDefaultView operation.
-    pub fn deleteView(self: *Self, allocator: std.mem.Allocator, input: delete_view.DeleteViewInput, options: delete_view.Options) !delete_view.DeleteViewOutput {
+    pub fn deleteView(self: *Self, allocator: std.mem.Allocator, input: delete_view.DeleteViewInput, options: CallOptions) !delete_view.DeleteViewOutput {
         return delete_view.execute(self, allocator, input, options);
     }
 
@@ -191,65 +192,65 @@ pub const Client = struct {
     /// If an Amazon Web Services Region doesn't have a default view configured,
     /// then users must explicitly specify a view with every `Search` operation
     /// performed in that Region.
-    pub fn disassociateDefaultView(self: *Self, allocator: std.mem.Allocator, input: disassociate_default_view.DisassociateDefaultViewInput, options: disassociate_default_view.Options) !disassociate_default_view.DisassociateDefaultViewOutput {
+    pub fn disassociateDefaultView(self: *Self, allocator: std.mem.Allocator, input: disassociate_default_view.DisassociateDefaultViewInput, options: CallOptions) !disassociate_default_view.DisassociateDefaultViewOutput {
         return disassociate_default_view.execute(self, allocator, input, options);
     }
 
     /// Retrieves the status of your account's Amazon Web Services service access,
     /// and validates the service linked role required to access the multi-account
     /// search feature. Only the management account can invoke this API call.
-    pub fn getAccountLevelServiceConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_account_level_service_configuration.GetAccountLevelServiceConfigurationInput, options: get_account_level_service_configuration.Options) !get_account_level_service_configuration.GetAccountLevelServiceConfigurationOutput {
+    pub fn getAccountLevelServiceConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_account_level_service_configuration.GetAccountLevelServiceConfigurationInput, options: CallOptions) !get_account_level_service_configuration.GetAccountLevelServiceConfigurationOutput {
         return get_account_level_service_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves the Amazon Resource Name (ARN) of the view that is the default for
     /// the Amazon Web Services Region in which you call this operation. You can
     /// then call GetView to retrieve the details of that view.
-    pub fn getDefaultView(self: *Self, allocator: std.mem.Allocator, input: get_default_view.GetDefaultViewInput, options: get_default_view.Options) !get_default_view.GetDefaultViewOutput {
+    pub fn getDefaultView(self: *Self, allocator: std.mem.Allocator, input: get_default_view.GetDefaultViewInput, options: CallOptions) !get_default_view.GetDefaultViewOutput {
         return get_default_view.execute(self, allocator, input, options);
     }
 
     /// Retrieves details about the Amazon Web Services Resource Explorer index in
     /// the Amazon Web Services Region in which you invoked the operation.
-    pub fn getIndex(self: *Self, allocator: std.mem.Allocator, input: get_index.GetIndexInput, options: get_index.Options) !get_index.GetIndexOutput {
+    pub fn getIndex(self: *Self, allocator: std.mem.Allocator, input: get_index.GetIndexInput, options: CallOptions) !get_index.GetIndexOutput {
         return get_index.execute(self, allocator, input, options);
     }
 
     /// Retrieves details of the specified [Amazon Web Services-managed
     /// view](https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html).
-    pub fn getManagedView(self: *Self, allocator: std.mem.Allocator, input: get_managed_view.GetManagedViewInput, options: get_managed_view.Options) !get_managed_view.GetManagedViewOutput {
+    pub fn getManagedView(self: *Self, allocator: std.mem.Allocator, input: get_managed_view.GetManagedViewInput, options: CallOptions) !get_managed_view.GetManagedViewOutput {
         return get_managed_view.execute(self, allocator, input, options);
     }
 
     /// Retrieves the status and details of a Resource Explorer setup operation.
     /// This operation returns information about the progress of creating or
     /// deleting Resource Explorer configurations across Regions.
-    pub fn getResourceExplorerSetup(self: *Self, allocator: std.mem.Allocator, input: get_resource_explorer_setup.GetResourceExplorerSetupInput, options: get_resource_explorer_setup.Options) !get_resource_explorer_setup.GetResourceExplorerSetupOutput {
+    pub fn getResourceExplorerSetup(self: *Self, allocator: std.mem.Allocator, input: get_resource_explorer_setup.GetResourceExplorerSetupInput, options: CallOptions) !get_resource_explorer_setup.GetResourceExplorerSetupOutput {
         return get_resource_explorer_setup.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the Resource Explorer index in the current
     /// Amazon Web Services Region. This operation returns the ARN and type of the
     /// index if one exists.
-    pub fn getServiceIndex(self: *Self, allocator: std.mem.Allocator, input: get_service_index.GetServiceIndexInput, options: get_service_index.Options) !get_service_index.GetServiceIndexOutput {
+    pub fn getServiceIndex(self: *Self, allocator: std.mem.Allocator, input: get_service_index.GetServiceIndexInput, options: CallOptions) !get_service_index.GetServiceIndexOutput {
         return get_service_index.execute(self, allocator, input, options);
     }
 
     /// Retrieves details about a specific Resource Explorer service view. This
     /// operation returns the configuration and properties of the specified view.
-    pub fn getServiceView(self: *Self, allocator: std.mem.Allocator, input: get_service_view.GetServiceViewInput, options: get_service_view.Options) !get_service_view.GetServiceViewOutput {
+    pub fn getServiceView(self: *Self, allocator: std.mem.Allocator, input: get_service_view.GetServiceViewInput, options: CallOptions) !get_service_view.GetServiceViewOutput {
         return get_service_view.execute(self, allocator, input, options);
     }
 
     /// Retrieves details of the specified view.
-    pub fn getView(self: *Self, allocator: std.mem.Allocator, input: get_view.GetViewInput, options: get_view.Options) !get_view.GetViewOutput {
+    pub fn getView(self: *Self, allocator: std.mem.Allocator, input: get_view.GetViewInput, options: CallOptions) !get_view.GetViewOutput {
         return get_view.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of all of the indexes in Amazon Web Services Regions that
     /// are currently collecting resource information for Amazon Web Services
     /// Resource Explorer.
-    pub fn listIndexes(self: *Self, allocator: std.mem.Allocator, input: list_indexes.ListIndexesInput, options: list_indexes.Options) !list_indexes.ListIndexesOutput {
+    pub fn listIndexes(self: *Self, allocator: std.mem.Allocator, input: list_indexes.ListIndexesInput, options: CallOptions) !list_indexes.ListIndexesOutput {
         return list_indexes.execute(self, allocator, input, options);
     }
 
@@ -257,13 +258,13 @@ pub const Client = struct {
     /// that are currently collecting resource information for Amazon Web Services
     /// Resource Explorer. Only the management account or a delegated administrator
     /// with service access enabled can invoke this API call.
-    pub fn listIndexesForMembers(self: *Self, allocator: std.mem.Allocator, input: list_indexes_for_members.ListIndexesForMembersInput, options: list_indexes_for_members.Options) !list_indexes_for_members.ListIndexesForMembersOutput {
+    pub fn listIndexesForMembers(self: *Self, allocator: std.mem.Allocator, input: list_indexes_for_members.ListIndexesForMembersInput, options: CallOptions) !list_indexes_for_members.ListIndexesForMembersOutput {
         return list_indexes_for_members.execute(self, allocator, input, options);
     }
 
     /// Lists the Amazon resource names (ARNs) of the [Amazon Web Services-managed
     /// views](https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html) available in the Amazon Web Services Region in which you call this operation.
-    pub fn listManagedViews(self: *Self, allocator: std.mem.Allocator, input: list_managed_views.ListManagedViewsInput, options: list_managed_views.Options) !list_managed_views.ListManagedViewsOutput {
+    pub fn listManagedViews(self: *Self, allocator: std.mem.Allocator, input: list_managed_views.ListManagedViewsInput, options: CallOptions) !list_managed_views.ListManagedViewsOutput {
         return list_managed_views.execute(self, allocator, input, options);
     }
 
@@ -271,21 +272,21 @@ pub const Client = struct {
     /// criteria. This query must use a view. If you don’t explicitly specify a
     /// view, then Resource Explorer uses the default view for the Amazon Web
     /// Services Region in which you call this operation.
-    pub fn listResources(self: *Self, allocator: std.mem.Allocator, input: list_resources.ListResourcesInput, options: list_resources.Options) !list_resources.ListResourcesOutput {
+    pub fn listResources(self: *Self, allocator: std.mem.Allocator, input: list_resources.ListResourcesInput, options: CallOptions) !list_resources.ListResourcesOutput {
         return list_resources.execute(self, allocator, input, options);
     }
 
     /// Lists all Resource Explorer indexes across the specified Amazon Web Services
     /// Regions. This operation returns information about indexes including their
     /// ARNs, types, and Regions.
-    pub fn listServiceIndexes(self: *Self, allocator: std.mem.Allocator, input: list_service_indexes.ListServiceIndexesInput, options: list_service_indexes.Options) !list_service_indexes.ListServiceIndexesOutput {
+    pub fn listServiceIndexes(self: *Self, allocator: std.mem.Allocator, input: list_service_indexes.ListServiceIndexesInput, options: CallOptions) !list_service_indexes.ListServiceIndexesOutput {
         return list_service_indexes.execute(self, allocator, input, options);
     }
 
     /// Lists all Resource Explorer service views available in the current Amazon
     /// Web Services account. This operation returns the ARNs of available service
     /// views.
-    pub fn listServiceViews(self: *Self, allocator: std.mem.Allocator, input: list_service_views.ListServiceViewsInput, options: list_service_views.Options) !list_service_views.ListServiceViewsOutput {
+    pub fn listServiceViews(self: *Self, allocator: std.mem.Allocator, input: list_service_views.ListServiceViewsInput, options: CallOptions) !list_service_views.ListServiceViewsOutput {
         return list_service_views.execute(self, allocator, input, options);
     }
 
@@ -293,18 +294,18 @@ pub const Client = struct {
     /// streaming access to your Resource Explorer data. Streaming access allows
     /// Amazon Web Services services to receive real-time updates about your
     /// resources as they are indexed by Resource Explorer.
-    pub fn listStreamingAccessForServices(self: *Self, allocator: std.mem.Allocator, input: list_streaming_access_for_services.ListStreamingAccessForServicesInput, options: list_streaming_access_for_services.Options) !list_streaming_access_for_services.ListStreamingAccessForServicesOutput {
+    pub fn listStreamingAccessForServices(self: *Self, allocator: std.mem.Allocator, input: list_streaming_access_for_services.ListStreamingAccessForServicesInput, options: CallOptions) !list_streaming_access_for_services.ListStreamingAccessForServicesOutput {
         return list_streaming_access_for_services.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of all resource types currently supported by Amazon Web
     /// Services Resource Explorer.
-    pub fn listSupportedResourceTypes(self: *Self, allocator: std.mem.Allocator, input: list_supported_resource_types.ListSupportedResourceTypesInput, options: list_supported_resource_types.Options) !list_supported_resource_types.ListSupportedResourceTypesOutput {
+    pub fn listSupportedResourceTypes(self: *Self, allocator: std.mem.Allocator, input: list_supported_resource_types.ListSupportedResourceTypesInput, options: CallOptions) !list_supported_resource_types.ListSupportedResourceTypesOutput {
         return list_supported_resource_types.execute(self, allocator, input, options);
     }
 
     /// Lists the tags that are attached to the specified resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -316,7 +317,7 @@ pub const Client = struct {
     /// empty set of results even when there are more results available. The
     /// `NextToken` response parameter value is `null` *only* when there are no more
     /// results to display.
-    pub fn listViews(self: *Self, allocator: std.mem.Allocator, input: list_views.ListViewsInput, options: list_views.Options) !list_views.ListViewsOutput {
+    pub fn listViews(self: *Self, allocator: std.mem.Allocator, input: list_views.ListViewsInput, options: CallOptions) !list_views.ListViewsOutput {
         return list_views.execute(self, allocator, input, options);
     }
 
@@ -337,19 +338,19 @@ pub const Client = struct {
     /// If your search results are empty, or are missing results that you think
     /// should be there, see [Troubleshooting Resource Explorer
     /// search](https://docs.aws.amazon.com/resource-explorer/latest/userguide/troubleshooting_search.html).
-    pub fn search(self: *Self, allocator: std.mem.Allocator, input: search_.SearchInput, options: search_.Options) !search_.SearchOutput {
+    pub fn search(self: *Self, allocator: std.mem.Allocator, input: search_.SearchInput, options: CallOptions) !search_.SearchOutput {
         return search_.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tag key and value pairs to an Amazon Web Services Resource
     /// Explorer view or index.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tag key and value pairs from an Amazon Web Services
     /// Resource Explorer view or index.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -406,13 +407,13 @@ pub const Client = struct {
     /// After you demote an aggregator index to a local index, you must wait 24
     /// hours before you can promote another index to be the new aggregator index
     /// for the account.
-    pub fn updateIndexType(self: *Self, allocator: std.mem.Allocator, input: update_index_type.UpdateIndexTypeInput, options: update_index_type.Options) !update_index_type.UpdateIndexTypeOutput {
+    pub fn updateIndexType(self: *Self, allocator: std.mem.Allocator, input: update_index_type.UpdateIndexTypeInput, options: CallOptions) !update_index_type.UpdateIndexTypeOutput {
         return update_index_type.execute(self, allocator, input, options);
     }
 
     /// Modifies some of the details of a view. You can change the filter string and
     /// the list of included properties. You can't change the name of the view.
-    pub fn updateView(self: *Self, allocator: std.mem.Allocator, input: update_view.UpdateViewInput, options: update_view.Options) !update_view.UpdateViewOutput {
+    pub fn updateView(self: *Self, allocator: std.mem.Allocator, input: update_view.UpdateViewInput, options: CallOptions) !update_view.UpdateViewOutput {
         return update_view.execute(self, allocator, input, options);
     }
 

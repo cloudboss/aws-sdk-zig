@@ -5,6 +5,7 @@ const create_home_region_control = @import("create_home_region_control.zig");
 const delete_home_region_control = @import("delete_home_region_control.zig");
 const describe_home_region_controls = @import("describe_home_region_controls.zig");
 const get_home_region = @import("get_home_region.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -36,20 +37,20 @@ pub const Client = struct {
     }
 
     /// This API sets up the home region for the calling account only.
-    pub fn createHomeRegionControl(self: *Self, allocator: std.mem.Allocator, input: create_home_region_control.CreateHomeRegionControlInput, options: create_home_region_control.Options) !create_home_region_control.CreateHomeRegionControlOutput {
+    pub fn createHomeRegionControl(self: *Self, allocator: std.mem.Allocator, input: create_home_region_control.CreateHomeRegionControlInput, options: CallOptions) !create_home_region_control.CreateHomeRegionControlOutput {
         return create_home_region_control.execute(self, allocator, input, options);
     }
 
     /// This operation deletes the home region configuration for the calling
     /// account. The operation does not delete discovery or migration tracking data
     /// in the home region.
-    pub fn deleteHomeRegionControl(self: *Self, allocator: std.mem.Allocator, input: delete_home_region_control.DeleteHomeRegionControlInput, options: delete_home_region_control.Options) !delete_home_region_control.DeleteHomeRegionControlOutput {
+    pub fn deleteHomeRegionControl(self: *Self, allocator: std.mem.Allocator, input: delete_home_region_control.DeleteHomeRegionControlInput, options: CallOptions) !delete_home_region_control.DeleteHomeRegionControlOutput {
         return delete_home_region_control.execute(self, allocator, input, options);
     }
 
     /// This API permits filtering on the `ControlId` and `HomeRegion`
     /// fields.
-    pub fn describeHomeRegionControls(self: *Self, allocator: std.mem.Allocator, input: describe_home_region_controls.DescribeHomeRegionControlsInput, options: describe_home_region_controls.Options) !describe_home_region_controls.DescribeHomeRegionControlsOutput {
+    pub fn describeHomeRegionControls(self: *Self, allocator: std.mem.Allocator, input: describe_home_region_controls.DescribeHomeRegionControlsInput, options: CallOptions) !describe_home_region_controls.DescribeHomeRegionControlsOutput {
         return describe_home_region_controls.execute(self, allocator, input, options);
     }
 
@@ -62,7 +63,7 @@ pub const Client = struct {
     /// other AWS Application Discovery Service and AWS Migration Hub APIs, to
     /// obtain the account's
     /// Migration Hub home region.
-    pub fn getHomeRegion(self: *Self, allocator: std.mem.Allocator, input: get_home_region.GetHomeRegionInput, options: get_home_region.Options) !get_home_region.GetHomeRegionOutput {
+    pub fn getHomeRegion(self: *Self, allocator: std.mem.Allocator, input: get_home_region.GetHomeRegionInput, options: CallOptions) !get_home_region.GetHomeRegionOutput {
         return get_home_region.execute(self, allocator, input, options);
     }
 

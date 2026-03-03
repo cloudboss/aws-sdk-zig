@@ -25,6 +25,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_application = @import("update_application.zig");
 const update_attribute_group = @import("update_attribute_group.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -61,7 +62,7 @@ pub const Client = struct {
     /// described with
     /// user-defined details that are machine-readable, such as third-party
     /// integrations.
-    pub fn associateAttributeGroup(self: *Self, allocator: std.mem.Allocator, input: associate_attribute_group.AssociateAttributeGroupInput, options: associate_attribute_group.Options) !associate_attribute_group.AssociateAttributeGroupOutput {
+    pub fn associateAttributeGroup(self: *Self, allocator: std.mem.Allocator, input: associate_attribute_group.AssociateAttributeGroupInput, options: CallOptions) !associate_attribute_group.AssociateAttributeGroupOutput {
         return associate_attribute_group.execute(self, allocator, input, options);
     }
 
@@ -93,13 +94,13 @@ pub const Client = struct {
     /// Services service that creates the resource.
     /// For more information, see
     /// [TagResources](https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html) in the *Resource Groups Tagging API Reference*.
-    pub fn associateResource(self: *Self, allocator: std.mem.Allocator, input: associate_resource.AssociateResourceInput, options: associate_resource.Options) !associate_resource.AssociateResourceOutput {
+    pub fn associateResource(self: *Self, allocator: std.mem.Allocator, input: associate_resource.AssociateResourceInput, options: CallOptions) !associate_resource.AssociateResourceOutput {
         return associate_resource.execute(self, allocator, input, options);
     }
 
     /// Creates a new application that is the top-level node in a hierarchy of
     /// related cloud resource abstractions.
-    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: create_application.Options) !create_application.CreateApplicationOutput {
+    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: CallOptions) !create_application.CreateApplicationOutput {
         return create_application.execute(self, allocator, input, options);
     }
 
@@ -110,27 +111,27 @@ pub const Client = struct {
     /// machine-readable format to facilitate integration with automated workflows
     /// and third-party
     /// tools.
-    pub fn createAttributeGroup(self: *Self, allocator: std.mem.Allocator, input: create_attribute_group.CreateAttributeGroupInput, options: create_attribute_group.Options) !create_attribute_group.CreateAttributeGroupOutput {
+    pub fn createAttributeGroup(self: *Self, allocator: std.mem.Allocator, input: create_attribute_group.CreateAttributeGroupInput, options: CallOptions) !create_attribute_group.CreateAttributeGroupOutput {
         return create_attribute_group.execute(self, allocator, input, options);
     }
 
     /// Deletes an application that is specified either by its application ID, name,
     /// or ARN. All associated attribute groups and resources must be disassociated
     /// from it before deleting an application.
-    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: delete_application.Options) !delete_application.DeleteApplicationOutput {
+    pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: CallOptions) !delete_application.DeleteApplicationOutput {
         return delete_application.execute(self, allocator, input, options);
     }
 
     /// Deletes an attribute group, specified either by its attribute group ID,
     /// name, or ARN.
-    pub fn deleteAttributeGroup(self: *Self, allocator: std.mem.Allocator, input: delete_attribute_group.DeleteAttributeGroupInput, options: delete_attribute_group.Options) !delete_attribute_group.DeleteAttributeGroupOutput {
+    pub fn deleteAttributeGroup(self: *Self, allocator: std.mem.Allocator, input: delete_attribute_group.DeleteAttributeGroupInput, options: CallOptions) !delete_attribute_group.DeleteAttributeGroupOutput {
         return delete_attribute_group.execute(self, allocator, input, options);
     }
 
     /// Disassociates an attribute group from an application to remove the extra
     /// attributes contained in the attribute group from the application's metadata.
     /// This operation reverts `AssociateAttributeGroup`.
-    pub fn disassociateAttributeGroup(self: *Self, allocator: std.mem.Allocator, input: disassociate_attribute_group.DisassociateAttributeGroupInput, options: disassociate_attribute_group.Options) !disassociate_attribute_group.DisassociateAttributeGroupOutput {
+    pub fn disassociateAttributeGroup(self: *Self, allocator: std.mem.Allocator, input: disassociate_attribute_group.DisassociateAttributeGroupInput, options: CallOptions) !disassociate_attribute_group.DisassociateAttributeGroupOutput {
         return disassociate_attribute_group.execute(self, allocator, input, options);
     }
 
@@ -162,7 +163,7 @@ pub const Client = struct {
     /// Services service that creates the resource.
     /// For more information, see
     /// [UntagResources](https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_UntTagResources.html) in the *Resource Groups Tagging API Reference*.
-    pub fn disassociateResource(self: *Self, allocator: std.mem.Allocator, input: disassociate_resource.DisassociateResourceInput, options: disassociate_resource.Options) !disassociate_resource.DisassociateResourceOutput {
+    pub fn disassociateResource(self: *Self, allocator: std.mem.Allocator, input: disassociate_resource.DisassociateResourceInput, options: CallOptions) !disassociate_resource.DisassociateResourceOutput {
         return disassociate_resource.execute(self, allocator, input, options);
     }
 
@@ -184,12 +185,12 @@ pub const Client = struct {
     /// that the exact same application is returned or a `ResourceNotFoundException`
     /// is thrown,
     /// avoiding the ABA addressing problem.
-    pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: get_application.Options) !get_application.GetApplicationOutput {
+    pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: CallOptions) !get_application.GetApplicationOutput {
         return get_application.execute(self, allocator, input, options);
     }
 
     /// Gets the resource associated with the application.
-    pub fn getAssociatedResource(self: *Self, allocator: std.mem.Allocator, input: get_associated_resource.GetAssociatedResourceInput, options: get_associated_resource.Options) !get_associated_resource.GetAssociatedResourceOutput {
+    pub fn getAssociatedResource(self: *Self, allocator: std.mem.Allocator, input: get_associated_resource.GetAssociatedResourceInput, options: CallOptions) !get_associated_resource.GetAssociatedResourceOutput {
         return get_associated_resource.execute(self, allocator, input, options);
     }
 
@@ -197,24 +198,24 @@ pub const Client = struct {
     /// by its ARN, ID, or name.
     /// The attribute group can be specified
     /// by its ARN, ID, or name.
-    pub fn getAttributeGroup(self: *Self, allocator: std.mem.Allocator, input: get_attribute_group.GetAttributeGroupInput, options: get_attribute_group.Options) !get_attribute_group.GetAttributeGroupOutput {
+    pub fn getAttributeGroup(self: *Self, allocator: std.mem.Allocator, input: get_attribute_group.GetAttributeGroupInput, options: CallOptions) !get_attribute_group.GetAttributeGroupOutput {
         return get_attribute_group.execute(self, allocator, input, options);
     }
 
     /// Retrieves a `TagKey` configuration
     /// from an account.
-    pub fn getConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_configuration.GetConfigurationInput, options: get_configuration.Options) !get_configuration.GetConfigurationOutput {
+    pub fn getConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_configuration.GetConfigurationInput, options: CallOptions) !get_configuration.GetConfigurationOutput {
         return get_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of all of your applications. Results are paginated.
-    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: list_applications.Options) !list_applications.ListApplicationsOutput {
+    pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: CallOptions) !list_applications.ListApplicationsOutput {
         return list_applications.execute(self, allocator, input, options);
     }
 
     /// Lists all attribute groups that are associated with specified application.
     /// Results are paginated.
-    pub fn listAssociatedAttributeGroups(self: *Self, allocator: std.mem.Allocator, input: list_associated_attribute_groups.ListAssociatedAttributeGroupsInput, options: list_associated_attribute_groups.Options) !list_associated_attribute_groups.ListAssociatedAttributeGroupsOutput {
+    pub fn listAssociatedAttributeGroups(self: *Self, allocator: std.mem.Allocator, input: list_associated_attribute_groups.ListAssociatedAttributeGroupsInput, options: CallOptions) !list_associated_attribute_groups.ListAssociatedAttributeGroupsOutput {
         return list_associated_attribute_groups.execute(self, allocator, input, options);
     }
 
@@ -234,29 +235,29 @@ pub const Client = struct {
     /// that are associated
     /// with it
     /// using this API.
-    pub fn listAssociatedResources(self: *Self, allocator: std.mem.Allocator, input: list_associated_resources.ListAssociatedResourcesInput, options: list_associated_resources.Options) !list_associated_resources.ListAssociatedResourcesOutput {
+    pub fn listAssociatedResources(self: *Self, allocator: std.mem.Allocator, input: list_associated_resources.ListAssociatedResourcesInput, options: CallOptions) !list_associated_resources.ListAssociatedResourcesOutput {
         return list_associated_resources.execute(self, allocator, input, options);
     }
 
     /// Lists all attribute groups which you have access to. Results are paginated.
-    pub fn listAttributeGroups(self: *Self, allocator: std.mem.Allocator, input: list_attribute_groups.ListAttributeGroupsInput, options: list_attribute_groups.Options) !list_attribute_groups.ListAttributeGroupsOutput {
+    pub fn listAttributeGroups(self: *Self, allocator: std.mem.Allocator, input: list_attribute_groups.ListAttributeGroupsInput, options: CallOptions) !list_attribute_groups.ListAttributeGroupsOutput {
         return list_attribute_groups.execute(self, allocator, input, options);
     }
 
     /// Lists the details of all attribute groups associated with a specific
     /// application. The results display in pages.
-    pub fn listAttributeGroupsForApplication(self: *Self, allocator: std.mem.Allocator, input: list_attribute_groups_for_application.ListAttributeGroupsForApplicationInput, options: list_attribute_groups_for_application.Options) !list_attribute_groups_for_application.ListAttributeGroupsForApplicationOutput {
+    pub fn listAttributeGroupsForApplication(self: *Self, allocator: std.mem.Allocator, input: list_attribute_groups_for_application.ListAttributeGroupsForApplicationInput, options: CallOptions) !list_attribute_groups_for_application.ListAttributeGroupsForApplicationOutput {
         return list_attribute_groups_for_application.execute(self, allocator, input, options);
     }
 
     /// Lists all of the tags on the resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Associates a `TagKey` configuration
     /// to an account.
-    pub fn putConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_configuration.PutConfigurationInput, options: put_configuration.Options) !put_configuration.PutConfigurationOutput {
+    pub fn putConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_configuration.PutConfigurationInput, options: CallOptions) !put_configuration.PutConfigurationOutput {
         return put_configuration.execute(self, allocator, input, options);
     }
 
@@ -266,7 +267,7 @@ pub const Client = struct {
     /// associated application. We remove the resource's AppRegistry system tags if
     /// it does not associate with the application. The caller must have permissions
     /// to read and update the resource.
-    pub fn syncResource(self: *Self, allocator: std.mem.Allocator, input: sync_resource.SyncResourceInput, options: sync_resource.Options) !sync_resource.SyncResourceOutput {
+    pub fn syncResource(self: *Self, allocator: std.mem.Allocator, input: sync_resource.SyncResourceInput, options: CallOptions) !sync_resource.SyncResourceOutput {
         return sync_resource.execute(self, allocator, input, options);
     }
 
@@ -276,24 +277,24 @@ pub const Client = struct {
     /// is already associated with the resource, this action updates its value.
     ///
     /// This operation returns an empty response if the call was successful.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from a resource.
     ///
     /// This operation returns an empty response if the call was successful.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an existing application with new attributes.
-    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: update_application.Options) !update_application.UpdateApplicationOutput {
+    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: CallOptions) !update_application.UpdateApplicationOutput {
         return update_application.execute(self, allocator, input, options);
     }
 
     /// Updates an existing attribute group with new details.
-    pub fn updateAttributeGroup(self: *Self, allocator: std.mem.Allocator, input: update_attribute_group.UpdateAttributeGroupInput, options: update_attribute_group.Options) !update_attribute_group.UpdateAttributeGroupOutput {
+    pub fn updateAttributeGroup(self: *Self, allocator: std.mem.Allocator, input: update_attribute_group.UpdateAttributeGroupInput, options: CallOptions) !update_attribute_group.UpdateAttributeGroupOutput {
         return update_attribute_group.execute(self, allocator, input, options);
     }
 

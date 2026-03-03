@@ -7,6 +7,7 @@ const get_hls_streaming_session_url = @import("get_hls_streaming_session_url.zig
 const get_images = @import("get_images.zig");
 const get_media_for_fragment_list = @import("get_media_for_fragment_list.zig");
 const list_fragments = @import("list_fragments.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -88,7 +89,7 @@ pub const Client = struct {
     /// [ Amazon Web Services
     /// Pricing](https://aws.amazon.com/pricing/). Charges for outgoing Amazon Web
     /// Services data apply.
-    pub fn getClip(self: *Self, allocator: std.mem.Allocator, input: get_clip.GetClipInput, options: get_clip.Options) !get_clip.GetClipOutput {
+    pub fn getClip(self: *Self, allocator: std.mem.Allocator, input: get_clip.GetClipInput, options: CallOptions) !get_clip.GetClipOutput {
         return get_clip.execute(self, allocator, input, options);
     }
 
@@ -248,7 +249,7 @@ pub const Client = struct {
     /// For more information, see the **Errors** section at
     /// the bottom of this topic, as well as [Common
     /// Errors](https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html).
-    pub fn getDashStreamingSessionUrl(self: *Self, allocator: std.mem.Allocator, input: get_dash_streaming_session_url.GetDASHStreamingSessionURLInput, options: get_dash_streaming_session_url.Options) !get_dash_streaming_session_url.GetDASHStreamingSessionURLOutput {
+    pub fn getDashStreamingSessionUrl(self: *Self, allocator: std.mem.Allocator, input: get_dash_streaming_session_url.GetDASHStreamingSessionURLInput, options: CallOptions) !get_dash_streaming_session_url.GetDASHStreamingSessionURLOutput {
         return get_dash_streaming_session_url.execute(self, allocator, input, options);
     }
 
@@ -450,14 +451,14 @@ pub const Client = struct {
     /// For more information, see the **Errors** section at
     /// the bottom of this topic, as well as [Common
     /// Errors](https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html).
-    pub fn getHlsStreamingSessionUrl(self: *Self, allocator: std.mem.Allocator, input: get_hls_streaming_session_url.GetHLSStreamingSessionURLInput, options: get_hls_streaming_session_url.Options) !get_hls_streaming_session_url.GetHLSStreamingSessionURLOutput {
+    pub fn getHlsStreamingSessionUrl(self: *Self, allocator: std.mem.Allocator, input: get_hls_streaming_session_url.GetHLSStreamingSessionURLInput, options: CallOptions) !get_hls_streaming_session_url.GetHLSStreamingSessionURLOutput {
         return get_hls_streaming_session_url.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of images corresponding to each timestamp for a given time
     /// range,
     /// sampling interval, and image format configuration.
-    pub fn getImages(self: *Self, allocator: std.mem.Allocator, input: get_images.GetImagesInput, options: get_images.Options) !get_images.GetImagesOutput {
+    pub fn getImages(self: *Self, allocator: std.mem.Allocator, input: get_images.GetImagesInput, options: CallOptions) !get_images.GetImagesOutput {
         return get_images.execute(self, allocator, input, options);
     }
 
@@ -496,7 +497,7 @@ pub const Client = struct {
     /// For more information, see the **Errors** section at
     /// the bottom of this topic, as well as [Common
     /// Errors](https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html).
-    pub fn getMediaForFragmentList(self: *Self, allocator: std.mem.Allocator, input: get_media_for_fragment_list.GetMediaForFragmentListInput, options: get_media_for_fragment_list.Options) !get_media_for_fragment_list.GetMediaForFragmentListOutput {
+    pub fn getMediaForFragmentList(self: *Self, allocator: std.mem.Allocator, input: get_media_for_fragment_list.GetMediaForFragmentListInput, options: CallOptions) !get_media_for_fragment_list.GetMediaForFragmentListOutput {
         return get_media_for_fragment_list.execute(self, allocator, input, options);
     }
 
@@ -538,7 +539,7 @@ pub const Client = struct {
     /// For more information, see the **Errors** section at
     /// the bottom of this topic, as well as [Common
     /// Errors](https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html).
-    pub fn listFragments(self: *Self, allocator: std.mem.Allocator, input: list_fragments.ListFragmentsInput, options: list_fragments.Options) !list_fragments.ListFragmentsOutput {
+    pub fn listFragments(self: *Self, allocator: std.mem.Allocator, input: list_fragments.ListFragmentsInput, options: CallOptions) !list_fragments.ListFragmentsOutput {
         return list_fragments.execute(self, allocator, input, options);
     }
 

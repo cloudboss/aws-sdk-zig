@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const KinesisVideoStreamConfigurationUpdate = @import("kinesis_video_stream_configuration_update.zig").KinesisVideoStreamConfigurationUpdate;
 const KinesisVideoStreamPoolConfiguration = @import("kinesis_video_stream_pool_configuration.zig").KinesisVideoStreamPoolConfiguration;
@@ -29,11 +30,7 @@ pub const UpdateMediaPipelineKinesisVideoStreamPoolOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateMediaPipelineKinesisVideoStreamPoolInput, options: Options) !UpdateMediaPipelineKinesisVideoStreamPoolOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateMediaPipelineKinesisVideoStreamPoolInput, options: CallOptions) !UpdateMediaPipelineKinesisVideoStreamPoolOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

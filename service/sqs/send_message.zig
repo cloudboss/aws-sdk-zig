@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MessageAttributeValue = @import("message_attribute_value.zig").MessageAttributeValue;
 const MessageSystemAttributeValue = @import("message_system_attribute_value.zig").MessageSystemAttributeValue;
@@ -231,11 +232,7 @@ pub const SendMessageOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendMessageInput, options: Options) !SendMessageOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendMessageInput, options: CallOptions) !SendMessageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

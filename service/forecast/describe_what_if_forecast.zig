@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TimeSeriesReplacementsDataSource = @import("time_series_replacements_data_source.zig").TimeSeriesReplacementsDataSource;
 const TimeSeriesTransformation = @import("time_series_transformation.zig").TimeSeriesTransformation;
@@ -98,11 +99,7 @@ pub const DescribeWhatIfForecastOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeWhatIfForecastInput, options: Options) !DescribeWhatIfForecastOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeWhatIfForecastInput, options: CallOptions) !DescribeWhatIfForecastOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

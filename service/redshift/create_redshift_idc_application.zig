@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ApplicationType = @import("application_type.zig").ApplicationType;
 const AuthorizedTokenIssuer = @import("authorized_token_issuer.zig").AuthorizedTokenIssuer;
@@ -59,11 +60,7 @@ pub const CreateRedshiftIdcApplicationOutput = struct {
     redshift_idc_application: ?RedshiftIdcApplication = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateRedshiftIdcApplicationInput, options: Options) !CreateRedshiftIdcApplicationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateRedshiftIdcApplicationInput, options: CallOptions) !CreateRedshiftIdcApplicationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

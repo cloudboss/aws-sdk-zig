@@ -28,6 +28,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_member = @import("update_member.zig");
 const update_node = @import("update_node.zig");
 const vote_on_proposal = @import("vote_on_proposal.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -61,28 +62,28 @@ pub const Client = struct {
     /// Creates a new accessor for use with Amazon Managed Blockchain service that
     /// supports token based access.
     /// The accessor contains information required for token based access.
-    pub fn createAccessor(self: *Self, allocator: std.mem.Allocator, input: create_accessor.CreateAccessorInput, options: create_accessor.Options) !create_accessor.CreateAccessorOutput {
+    pub fn createAccessor(self: *Self, allocator: std.mem.Allocator, input: create_accessor.CreateAccessorInput, options: CallOptions) !create_accessor.CreateAccessorOutput {
         return create_accessor.execute(self, allocator, input, options);
     }
 
     /// Creates a member within a Managed Blockchain network.
     ///
     /// Applies only to Hyperledger Fabric.
-    pub fn createMember(self: *Self, allocator: std.mem.Allocator, input: create_member.CreateMemberInput, options: create_member.Options) !create_member.CreateMemberOutput {
+    pub fn createMember(self: *Self, allocator: std.mem.Allocator, input: create_member.CreateMemberInput, options: CallOptions) !create_member.CreateMemberOutput {
         return create_member.execute(self, allocator, input, options);
     }
 
     /// Creates a new blockchain network using Amazon Managed Blockchain.
     ///
     /// Applies only to Hyperledger Fabric.
-    pub fn createNetwork(self: *Self, allocator: std.mem.Allocator, input: create_network.CreateNetworkInput, options: create_network.Options) !create_network.CreateNetworkOutput {
+    pub fn createNetwork(self: *Self, allocator: std.mem.Allocator, input: create_network.CreateNetworkInput, options: CallOptions) !create_network.CreateNetworkOutput {
         return create_network.execute(self, allocator, input, options);
     }
 
     /// Creates a node on the specified blockchain network.
     ///
     /// Applies to Hyperledger Fabric and Ethereum.
-    pub fn createNode(self: *Self, allocator: std.mem.Allocator, input: create_node.CreateNodeInput, options: create_node.Options) !create_node.CreateNodeOutput {
+    pub fn createNode(self: *Self, allocator: std.mem.Allocator, input: create_node.CreateNodeInput, options: CallOptions) !create_node.CreateNodeOutput {
         return create_node.execute(self, allocator, input, options);
     }
 
@@ -91,7 +92,7 @@ pub const Client = struct {
     /// network. Any member can create a proposal.
     ///
     /// Applies only to Hyperledger Fabric.
-    pub fn createProposal(self: *Self, allocator: std.mem.Allocator, input: create_proposal.CreateProposalInput, options: create_proposal.Options) !create_proposal.CreateProposalOutput {
+    pub fn createProposal(self: *Self, allocator: std.mem.Allocator, input: create_proposal.CreateProposalInput, options: CallOptions) !create_proposal.CreateProposalOutput {
         return create_proposal.execute(self, allocator, input, options);
     }
 
@@ -106,7 +107,7 @@ pub const Client = struct {
     /// HTTP requests. However, WebSocket connections that were initiated while the
     /// accessor was in the
     /// `AVAILABLE` state remain open until they expire (up to 2 hours).
-    pub fn deleteAccessor(self: *Self, allocator: std.mem.Allocator, input: delete_accessor.DeleteAccessorInput, options: delete_accessor.Options) !delete_accessor.DeleteAccessorOutput {
+    pub fn deleteAccessor(self: *Self, allocator: std.mem.Allocator, input: delete_accessor.DeleteAccessorInput, options: CallOptions) !delete_accessor.DeleteAccessorOutput {
         return delete_accessor.execute(self, allocator, input, options);
     }
 
@@ -120,7 +121,7 @@ pub const Client = struct {
     /// also.
     ///
     /// Applies only to Hyperledger Fabric.
-    pub fn deleteMember(self: *Self, allocator: std.mem.Allocator, input: delete_member.DeleteMemberInput, options: delete_member.Options) !delete_member.DeleteMemberOutput {
+    pub fn deleteMember(self: *Self, allocator: std.mem.Allocator, input: delete_member.DeleteMemberInput, options: CallOptions) !delete_member.DeleteMemberOutput {
         return delete_member.execute(self, allocator, input, options);
     }
 
@@ -128,49 +129,49 @@ pub const Client = struct {
     /// node is lost and cannot be recovered.
     ///
     /// Applies to Hyperledger Fabric and Ethereum.
-    pub fn deleteNode(self: *Self, allocator: std.mem.Allocator, input: delete_node.DeleteNodeInput, options: delete_node.Options) !delete_node.DeleteNodeOutput {
+    pub fn deleteNode(self: *Self, allocator: std.mem.Allocator, input: delete_node.DeleteNodeInput, options: CallOptions) !delete_node.DeleteNodeOutput {
         return delete_node.execute(self, allocator, input, options);
     }
 
     /// Returns detailed information about an accessor. An accessor object is a
     /// container that has the
     /// information required for token based access to your Ethereum nodes.
-    pub fn getAccessor(self: *Self, allocator: std.mem.Allocator, input: get_accessor.GetAccessorInput, options: get_accessor.Options) !get_accessor.GetAccessorOutput {
+    pub fn getAccessor(self: *Self, allocator: std.mem.Allocator, input: get_accessor.GetAccessorInput, options: CallOptions) !get_accessor.GetAccessorOutput {
         return get_accessor.execute(self, allocator, input, options);
     }
 
     /// Returns detailed information about a member.
     ///
     /// Applies only to Hyperledger Fabric.
-    pub fn getMember(self: *Self, allocator: std.mem.Allocator, input: get_member.GetMemberInput, options: get_member.Options) !get_member.GetMemberOutput {
+    pub fn getMember(self: *Self, allocator: std.mem.Allocator, input: get_member.GetMemberInput, options: CallOptions) !get_member.GetMemberOutput {
         return get_member.execute(self, allocator, input, options);
     }
 
     /// Returns detailed information about a network.
     ///
     /// Applies to Hyperledger Fabric and Ethereum.
-    pub fn getNetwork(self: *Self, allocator: std.mem.Allocator, input: get_network.GetNetworkInput, options: get_network.Options) !get_network.GetNetworkOutput {
+    pub fn getNetwork(self: *Self, allocator: std.mem.Allocator, input: get_network.GetNetworkInput, options: CallOptions) !get_network.GetNetworkOutput {
         return get_network.execute(self, allocator, input, options);
     }
 
     /// Returns detailed information about a node.
     ///
     /// Applies to Hyperledger Fabric and Ethereum.
-    pub fn getNode(self: *Self, allocator: std.mem.Allocator, input: get_node.GetNodeInput, options: get_node.Options) !get_node.GetNodeOutput {
+    pub fn getNode(self: *Self, allocator: std.mem.Allocator, input: get_node.GetNodeInput, options: CallOptions) !get_node.GetNodeOutput {
         return get_node.execute(self, allocator, input, options);
     }
 
     /// Returns detailed information about a proposal.
     ///
     /// Applies only to Hyperledger Fabric.
-    pub fn getProposal(self: *Self, allocator: std.mem.Allocator, input: get_proposal.GetProposalInput, options: get_proposal.Options) !get_proposal.GetProposalOutput {
+    pub fn getProposal(self: *Self, allocator: std.mem.Allocator, input: get_proposal.GetProposalInput, options: CallOptions) !get_proposal.GetProposalOutput {
         return get_proposal.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the accessors and their properties. Accessor objects are
     /// containers that have the
     /// information required for token based access to your Ethereum nodes.
-    pub fn listAccessors(self: *Self, allocator: std.mem.Allocator, input: list_accessors.ListAccessorsInput, options: list_accessors.Options) !list_accessors.ListAccessorsOutput {
+    pub fn listAccessors(self: *Self, allocator: std.mem.Allocator, input: list_accessors.ListAccessorsInput, options: CallOptions) !list_accessors.ListAccessorsOutput {
         return list_accessors.execute(self, allocator, input, options);
     }
 
@@ -178,7 +179,7 @@ pub const Client = struct {
     /// account.
     ///
     /// Applies only to Hyperledger Fabric.
-    pub fn listInvitations(self: *Self, allocator: std.mem.Allocator, input: list_invitations.ListInvitationsInput, options: list_invitations.Options) !list_invitations.ListInvitationsOutput {
+    pub fn listInvitations(self: *Self, allocator: std.mem.Allocator, input: list_invitations.ListInvitationsInput, options: CallOptions) !list_invitations.ListInvitationsOutput {
         return list_invitations.execute(self, allocator, input, options);
     }
 
@@ -186,7 +187,7 @@ pub const Client = struct {
     /// configurations.
     ///
     /// Applies only to Hyperledger Fabric.
-    pub fn listMembers(self: *Self, allocator: std.mem.Allocator, input: list_members.ListMembersInput, options: list_members.Options) !list_members.ListMembersOutput {
+    pub fn listMembers(self: *Self, allocator: std.mem.Allocator, input: list_members.ListMembersInput, options: CallOptions) !list_members.ListMembersOutput {
         return list_members.execute(self, allocator, input, options);
     }
 
@@ -194,14 +195,14 @@ pub const Client = struct {
     /// Services account participates.
     ///
     /// Applies to Hyperledger Fabric and Ethereum.
-    pub fn listNetworks(self: *Self, allocator: std.mem.Allocator, input: list_networks.ListNetworksInput, options: list_networks.Options) !list_networks.ListNetworksOutput {
+    pub fn listNetworks(self: *Self, allocator: std.mem.Allocator, input: list_networks.ListNetworksInput, options: CallOptions) !list_networks.ListNetworksOutput {
         return list_networks.execute(self, allocator, input, options);
     }
 
     /// Returns information about the nodes within a network.
     ///
     /// Applies to Hyperledger Fabric and Ethereum.
-    pub fn listNodes(self: *Self, allocator: std.mem.Allocator, input: list_nodes.ListNodesInput, options: list_nodes.Options) !list_nodes.ListNodesOutput {
+    pub fn listNodes(self: *Self, allocator: std.mem.Allocator, input: list_nodes.ListNodesInput, options: CallOptions) !list_nodes.ListNodesOutput {
         return list_nodes.execute(self, allocator, input, options);
     }
 
@@ -209,14 +210,14 @@ pub const Client = struct {
     /// each vote and the unique identifier of the member that cast the vote.
     ///
     /// Applies only to Hyperledger Fabric.
-    pub fn listProposalVotes(self: *Self, allocator: std.mem.Allocator, input: list_proposal_votes.ListProposalVotesInput, options: list_proposal_votes.Options) !list_proposal_votes.ListProposalVotesOutput {
+    pub fn listProposalVotes(self: *Self, allocator: std.mem.Allocator, input: list_proposal_votes.ListProposalVotesInput, options: CallOptions) !list_proposal_votes.ListProposalVotesOutput {
         return list_proposal_votes.execute(self, allocator, input, options);
     }
 
     /// Returns a list of proposals for the network.
     ///
     /// Applies only to Hyperledger Fabric.
-    pub fn listProposals(self: *Self, allocator: std.mem.Allocator, input: list_proposals.ListProposalsInput, options: list_proposals.Options) !list_proposals.ListProposalsOutput {
+    pub fn listProposals(self: *Self, allocator: std.mem.Allocator, input: list_proposals.ListProposalsInput, options: CallOptions) !list_proposals.ListProposalsOutput {
         return list_proposals.execute(self, allocator, input, options);
     }
 
@@ -225,7 +226,7 @@ pub const Client = struct {
     ///
     /// For more information about tags, see [Tagging
     /// Resources](https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html) in the *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging Resources](https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html) in the *Amazon Managed Blockchain Hyperledger Fabric Developer Guide*.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -234,7 +235,7 @@ pub const Client = struct {
     /// to create a member and join a network.
     ///
     /// Applies only to Hyperledger Fabric.
-    pub fn rejectInvitation(self: *Self, allocator: std.mem.Allocator, input: reject_invitation.RejectInvitationInput, options: reject_invitation.Options) !reject_invitation.RejectInvitationOutput {
+    pub fn rejectInvitation(self: *Self, allocator: std.mem.Allocator, input: reject_invitation.RejectInvitationInput, options: CallOptions) !reject_invitation.RejectInvitationOutput {
         return reject_invitation.execute(self, allocator, input, options);
     }
 
@@ -249,7 +250,7 @@ pub const Client = struct {
     ///
     /// For more information about tags, see [Tagging
     /// Resources](https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html) in the *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging Resources](https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html) in the *Amazon Managed Blockchain Hyperledger Fabric Developer Guide*.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -257,21 +258,21 @@ pub const Client = struct {
     ///
     /// For more information about tags, see [Tagging
     /// Resources](https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html) in the *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging Resources](https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html) in the *Amazon Managed Blockchain Hyperledger Fabric Developer Guide*.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates a member configuration with new parameters.
     ///
     /// Applies only to Hyperledger Fabric.
-    pub fn updateMember(self: *Self, allocator: std.mem.Allocator, input: update_member.UpdateMemberInput, options: update_member.Options) !update_member.UpdateMemberOutput {
+    pub fn updateMember(self: *Self, allocator: std.mem.Allocator, input: update_member.UpdateMemberInput, options: CallOptions) !update_member.UpdateMemberOutput {
         return update_member.execute(self, allocator, input, options);
     }
 
     /// Updates a node configuration with new parameters.
     ///
     /// Applies only to Hyperledger Fabric.
-    pub fn updateNode(self: *Self, allocator: std.mem.Allocator, input: update_node.UpdateNodeInput, options: update_node.Options) !update_node.UpdateNodeOutput {
+    pub fn updateNode(self: *Self, allocator: std.mem.Allocator, input: update_node.UpdateNodeInput, options: CallOptions) !update_node.UpdateNodeOutput {
         return update_node.execute(self, allocator, input, options);
     }
 
@@ -280,7 +281,7 @@ pub const Client = struct {
     /// Services account as the principal that calls the action.
     ///
     /// Applies only to Hyperledger Fabric.
-    pub fn voteOnProposal(self: *Self, allocator: std.mem.Allocator, input: vote_on_proposal.VoteOnProposalInput, options: vote_on_proposal.Options) !vote_on_proposal.VoteOnProposalOutput {
+    pub fn voteOnProposal(self: *Self, allocator: std.mem.Allocator, input: vote_on_proposal.VoteOnProposalInput, options: CallOptions) !vote_on_proposal.VoteOnProposalOutput {
         return vote_on_proposal.execute(self, allocator, input, options);
     }
 

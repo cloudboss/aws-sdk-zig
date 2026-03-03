@@ -43,6 +43,7 @@ class ClientGenerator(
                     op.constName, op.moduleFileName,
                 )
             }
+            writer.write("const CallOptions = @import(\"call_options.zig\").CallOptions;")
 
             // Import paginator module if paginated ops exist
             if (paginatedOps.isNotEmpty()) {
@@ -140,10 +141,9 @@ class ClientGenerator(
                 writer.writeDocs(op.docs)
             }
             writer.openBlock(
-                "pub fn \$L(self: *Self, allocator: std.mem.Allocator, input: \$L.\$L, options: \$L.Options) !\$L.\$L {",
+                "pub fn \$L(self: *Self, allocator: std.mem.Allocator, input: \$L.\$L, options: CallOptions) !\$L.\$L {",
                 op.methodName,
                 op.constName, op.inputType,
-                op.constName,
                 op.constName, op.outputType,
             )
             writer.write("return \$L.execute(self, allocator, input, options);", op.constName)

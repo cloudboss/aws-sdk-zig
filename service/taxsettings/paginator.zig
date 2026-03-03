@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_supplemental_tax_registrations = @import("list_supplemental_tax_registrations.zig");
@@ -16,7 +17,7 @@ pub const ListSupplementalTaxRegistrationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_supplemental_tax_registrations.Options) !list_supplemental_tax_registrations.ListSupplementalTaxRegistrationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_supplemental_tax_registrations.ListSupplementalTaxRegistrationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -57,7 +58,7 @@ pub const ListTaxExemptionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_tax_exemptions.Options) !list_tax_exemptions.ListTaxExemptionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_tax_exemptions.ListTaxExemptionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -98,7 +99,7 @@ pub const ListTaxRegistrationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_tax_registrations.Options) !list_tax_registrations.ListTaxRegistrationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_tax_registrations.ListTaxRegistrationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

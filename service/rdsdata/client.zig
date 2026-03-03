@@ -7,6 +7,7 @@ const commit_transaction = @import("commit_transaction.zig");
 const execute_sql = @import("execute_sql.zig");
 const execute_statement = @import("execute_statement.zig");
 const rollback_transaction = @import("rollback_transaction.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -60,7 +61,7 @@ pub const Client = struct {
     ///
     /// The response size limit is 1 MiB. If the call returns more than 1 MiB of
     /// response data, the call is terminated.
-    pub fn batchExecuteStatement(self: *Self, allocator: std.mem.Allocator, input: batch_execute_statement.BatchExecuteStatementInput, options: batch_execute_statement.Options) !batch_execute_statement.BatchExecuteStatementOutput {
+    pub fn batchExecuteStatement(self: *Self, allocator: std.mem.Allocator, input: batch_execute_statement.BatchExecuteStatementInput, options: CallOptions) !batch_execute_statement.BatchExecuteStatementOutput {
         return batch_execute_statement.execute(self, allocator, input, options);
     }
 
@@ -77,13 +78,13 @@ pub const Client = struct {
     /// For Aurora MySQL, DDL statements inside a transaction cause an implicit
     /// commit. We recommend that you run each MySQL DDL statement in a separate
     /// `ExecuteStatement` call with `continueAfterTimeout` enabled.
-    pub fn beginTransaction(self: *Self, allocator: std.mem.Allocator, input: begin_transaction.BeginTransactionInput, options: begin_transaction.Options) !begin_transaction.BeginTransactionOutput {
+    pub fn beginTransaction(self: *Self, allocator: std.mem.Allocator, input: begin_transaction.BeginTransactionInput, options: CallOptions) !begin_transaction.BeginTransactionOutput {
         return begin_transaction.execute(self, allocator, input, options);
     }
 
     /// Ends a SQL transaction started with the `BeginTransaction` operation and
     /// commits the changes.
-    pub fn commitTransaction(self: *Self, allocator: std.mem.Allocator, input: commit_transaction.CommitTransactionInput, options: commit_transaction.Options) !commit_transaction.CommitTransactionOutput {
+    pub fn commitTransaction(self: *Self, allocator: std.mem.Allocator, input: commit_transaction.CommitTransactionInput, options: CallOptions) !commit_transaction.CommitTransactionOutput {
         return commit_transaction.execute(self, allocator, input, options);
     }
 
@@ -93,7 +94,7 @@ pub const Client = struct {
     /// clusters.
     /// For Aurora Serverless v1 DB clusters, the operation is deprecated.
     /// Use the `BatchExecuteStatement` or `ExecuteStatement` operation.
-    pub fn executeSql(self: *Self, allocator: std.mem.Allocator, input: execute_sql.ExecuteSqlInput, options: execute_sql.Options) !execute_sql.ExecuteSqlOutput {
+    pub fn executeSql(self: *Self, allocator: std.mem.Allocator, input: execute_sql.ExecuteSqlInput, options: CallOptions) !execute_sql.ExecuteSqlOutput {
         return execute_sql.execute(self, allocator, input, options);
     }
 
@@ -105,13 +106,13 @@ pub const Client = struct {
     ///
     /// If the binary response data from the database is more than 1 MB, the call is
     /// terminated.
-    pub fn executeStatement(self: *Self, allocator: std.mem.Allocator, input: execute_statement.ExecuteStatementInput, options: execute_statement.Options) !execute_statement.ExecuteStatementOutput {
+    pub fn executeStatement(self: *Self, allocator: std.mem.Allocator, input: execute_statement.ExecuteStatementInput, options: CallOptions) !execute_statement.ExecuteStatementOutput {
         return execute_statement.execute(self, allocator, input, options);
     }
 
     /// Performs a rollback of a transaction. Rolling back a transaction cancels its
     /// changes.
-    pub fn rollbackTransaction(self: *Self, allocator: std.mem.Allocator, input: rollback_transaction.RollbackTransactionInput, options: rollback_transaction.Options) !rollback_transaction.RollbackTransactionOutput {
+    pub fn rollbackTransaction(self: *Self, allocator: std.mem.Allocator, input: rollback_transaction.RollbackTransactionInput, options: CallOptions) !rollback_transaction.RollbackTransactionOutput {
         return rollback_transaction.execute(self, allocator, input, options);
     }
 };

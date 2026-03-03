@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CloudWatchOutputConfig = @import("cloud_watch_output_config.zig").CloudWatchOutputConfig;
 const CommandInvocationStatus = @import("command_invocation_status.zig").CommandInvocationStatus;
@@ -213,11 +214,7 @@ pub const GetCommandInvocationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCommandInvocationInput, options: Options) !GetCommandInvocationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCommandInvocationInput, options: CallOptions) !GetCommandInvocationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

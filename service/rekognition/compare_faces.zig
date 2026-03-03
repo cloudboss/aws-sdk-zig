@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const QualityFilter = @import("quality_filter.zig").QualityFilter;
 const Image = @import("image.zig").Image;
@@ -134,11 +135,7 @@ pub const CompareFacesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CompareFacesInput, options: Options) !CompareFacesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CompareFacesInput, options: CallOptions) !CompareFacesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

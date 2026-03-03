@@ -1,12 +1,19 @@
 pub const Client = @import("client.zig").Client;
+pub const CallOptions = @import("call_options.zig").CallOptions;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
 pub const types = @import("types.zig");
 
-pub const delete_key = @import("delete_key.zig");
-pub const describe_key_value_store = @import("describe_key_value_store.zig");
-pub const get_key = @import("get_key.zig");
-pub const list_keys = @import("list_keys.zig");
-pub const put_key = @import("put_key.zig");
-pub const update_keys = @import("update_keys.zig");
+pub const DeleteKeyInput = @import("delete_key.zig").DeleteKeyInput;
+pub const DeleteKeyOutput = @import("delete_key.zig").DeleteKeyOutput;
+pub const DescribeKeyValueStoreInput = @import("describe_key_value_store.zig").DescribeKeyValueStoreInput;
+pub const DescribeKeyValueStoreOutput = @import("describe_key_value_store.zig").DescribeKeyValueStoreOutput;
+pub const GetKeyInput = @import("get_key.zig").GetKeyInput;
+pub const GetKeyOutput = @import("get_key.zig").GetKeyOutput;
+pub const ListKeysInput = @import("list_keys.zig").ListKeysInput;
+pub const ListKeysOutput = @import("list_keys.zig").ListKeysOutput;
+pub const PutKeyInput = @import("put_key.zig").PutKeyInput;
+pub const PutKeyOutput = @import("put_key.zig").PutKeyOutput;
+pub const UpdateKeysInput = @import("update_keys.zig").UpdateKeysInput;
+pub const UpdateKeysOutput = @import("update_keys.zig").UpdateKeysOutput;

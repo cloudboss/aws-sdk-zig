@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const EnableEbsEncryptionByDefaultInput = struct {
@@ -18,11 +19,7 @@ pub const EnableEbsEncryptionByDefaultOutput = struct {
     ebs_encryption_by_default: ?bool = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableEbsEncryptionByDefaultInput, options: Options) !EnableEbsEncryptionByDefaultOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableEbsEncryptionByDefaultInput, options: CallOptions) !EnableEbsEncryptionByDefaultOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

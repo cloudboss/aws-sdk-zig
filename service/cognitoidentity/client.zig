@@ -24,6 +24,7 @@ const unlink_developer_identity = @import("unlink_developer_identity.zig");
 const unlink_identity = @import("unlink_identity.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_identity_pool = @import("update_identity_pool.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -76,7 +77,7 @@ pub const Client = struct {
     ///
     /// You must use Amazon Web Services developer credentials to call this
     /// operation.
-    pub fn createIdentityPool(self: *Self, allocator: std.mem.Allocator, input: create_identity_pool.CreateIdentityPoolInput, options: create_identity_pool.Options) !create_identity_pool.CreateIdentityPoolOutput {
+    pub fn createIdentityPool(self: *Self, allocator: std.mem.Allocator, input: create_identity_pool.CreateIdentityPoolInput, options: CallOptions) !create_identity_pool.CreateIdentityPoolOutput {
         return create_identity_pool.execute(self, allocator, input, options);
     }
 
@@ -86,7 +87,7 @@ pub const Client = struct {
     ///
     /// You must use Amazon Web Services developer credentials to call this
     /// operation.
-    pub fn deleteIdentities(self: *Self, allocator: std.mem.Allocator, input: delete_identities.DeleteIdentitiesInput, options: delete_identities.Options) !delete_identities.DeleteIdentitiesOutput {
+    pub fn deleteIdentities(self: *Self, allocator: std.mem.Allocator, input: delete_identities.DeleteIdentitiesInput, options: CallOptions) !delete_identities.DeleteIdentitiesOutput {
         return delete_identities.execute(self, allocator, input, options);
     }
 
@@ -95,7 +96,7 @@ pub const Client = struct {
     ///
     /// You must use Amazon Web Services developer credentials to call this
     /// operation.
-    pub fn deleteIdentityPool(self: *Self, allocator: std.mem.Allocator, input: delete_identity_pool.DeleteIdentityPoolInput, options: delete_identity_pool.Options) !delete_identity_pool.DeleteIdentityPoolOutput {
+    pub fn deleteIdentityPool(self: *Self, allocator: std.mem.Allocator, input: delete_identity_pool.DeleteIdentityPoolInput, options: CallOptions) !delete_identity_pool.DeleteIdentityPoolOutput {
         return delete_identity_pool.execute(self, allocator, input, options);
     }
 
@@ -105,7 +106,7 @@ pub const Client = struct {
     ///
     /// You must use Amazon Web Services developer credentials to call this
     /// operation.
-    pub fn describeIdentity(self: *Self, allocator: std.mem.Allocator, input: describe_identity.DescribeIdentityInput, options: describe_identity.Options) !describe_identity.DescribeIdentityOutput {
+    pub fn describeIdentity(self: *Self, allocator: std.mem.Allocator, input: describe_identity.DescribeIdentityInput, options: CallOptions) !describe_identity.DescribeIdentityOutput {
         return describe_identity.execute(self, allocator, input, options);
     }
 
@@ -114,7 +115,7 @@ pub const Client = struct {
     ///
     /// You must use Amazon Web Services developer credentials to call this
     /// operation.
-    pub fn describeIdentityPool(self: *Self, allocator: std.mem.Allocator, input: describe_identity_pool.DescribeIdentityPoolInput, options: describe_identity_pool.Options) !describe_identity_pool.DescribeIdentityPoolOutput {
+    pub fn describeIdentityPool(self: *Self, allocator: std.mem.Allocator, input: describe_identity_pool.DescribeIdentityPoolInput, options: CallOptions) !describe_identity_pool.DescribeIdentityPoolOutput {
         return describe_identity_pool.execute(self, allocator, input, options);
     }
 
@@ -125,7 +126,7 @@ pub const Client = struct {
     /// Token Service with the appropriate role for the token.
     ///
     /// This is a public API. You do not need any credentials to call this API.
-    pub fn getCredentialsForIdentity(self: *Self, allocator: std.mem.Allocator, input: get_credentials_for_identity.GetCredentialsForIdentityInput, options: get_credentials_for_identity.Options) !get_credentials_for_identity.GetCredentialsForIdentityOutput {
+    pub fn getCredentialsForIdentity(self: *Self, allocator: std.mem.Allocator, input: get_credentials_for_identity.GetCredentialsForIdentityInput, options: CallOptions) !get_credentials_for_identity.GetCredentialsForIdentityOutput {
         return get_credentials_for_identity.execute(self, allocator, input, options);
     }
 
@@ -134,7 +135,7 @@ pub const Client = struct {
     /// implicit linked account.
     ///
     /// This is a public API. You do not need any credentials to call this API.
-    pub fn getId(self: *Self, allocator: std.mem.Allocator, input: get_id.GetIdInput, options: get_id.Options) !get_id.GetIdOutput {
+    pub fn getId(self: *Self, allocator: std.mem.Allocator, input: get_id.GetIdInput, options: CallOptions) !get_id.GetIdOutput {
         return get_id.execute(self, allocator, input, options);
     }
 
@@ -142,7 +143,7 @@ pub const Client = struct {
     ///
     /// You must use Amazon Web Services developer credentials to call this
     /// operation.
-    pub fn getIdentityPoolRoles(self: *Self, allocator: std.mem.Allocator, input: get_identity_pool_roles.GetIdentityPoolRolesInput, options: get_identity_pool_roles.Options) !get_identity_pool_roles.GetIdentityPoolRolesOutput {
+    pub fn getIdentityPoolRoles(self: *Self, allocator: std.mem.Allocator, input: get_identity_pool_roles.GetIdentityPoolRolesInput, options: CallOptions) !get_identity_pool_roles.GetIdentityPoolRolesOutput {
         return get_identity_pool_roles.execute(self, allocator, input, options);
     }
 
@@ -154,7 +155,7 @@ pub const Client = struct {
     /// The OpenID token is valid for 10 minutes.
     ///
     /// This is a public API. You do not need any credentials to call this API.
-    pub fn getOpenIdToken(self: *Self, allocator: std.mem.Allocator, input: get_open_id_token.GetOpenIdTokenInput, options: get_open_id_token.Options) !get_open_id_token.GetOpenIdTokenOutput {
+    pub fn getOpenIdToken(self: *Self, allocator: std.mem.Allocator, input: get_open_id_token.GetOpenIdTokenInput, options: CallOptions) !get_open_id_token.GetOpenIdTokenOutput {
         return get_open_id_token.execute(self, allocator, input, options);
     }
 
@@ -180,13 +181,13 @@ pub const Client = struct {
     ///
     /// You must use Amazon Web Services developer credentials to call this
     /// operation.
-    pub fn getOpenIdTokenForDeveloperIdentity(self: *Self, allocator: std.mem.Allocator, input: get_open_id_token_for_developer_identity.GetOpenIdTokenForDeveloperIdentityInput, options: get_open_id_token_for_developer_identity.Options) !get_open_id_token_for_developer_identity.GetOpenIdTokenForDeveloperIdentityOutput {
+    pub fn getOpenIdTokenForDeveloperIdentity(self: *Self, allocator: std.mem.Allocator, input: get_open_id_token_for_developer_identity.GetOpenIdTokenForDeveloperIdentityInput, options: CallOptions) !get_open_id_token_for_developer_identity.GetOpenIdTokenForDeveloperIdentityOutput {
         return get_open_id_token_for_developer_identity.execute(self, allocator, input, options);
     }
 
     /// Use `GetPrincipalTagAttributeMap` to list all mappings between
     /// `PrincipalTags` and user attributes.
-    pub fn getPrincipalTagAttributeMap(self: *Self, allocator: std.mem.Allocator, input: get_principal_tag_attribute_map.GetPrincipalTagAttributeMapInput, options: get_principal_tag_attribute_map.Options) !get_principal_tag_attribute_map.GetPrincipalTagAttributeMapOutput {
+    pub fn getPrincipalTagAttributeMap(self: *Self, allocator: std.mem.Allocator, input: get_principal_tag_attribute_map.GetPrincipalTagAttributeMapInput, options: CallOptions) !get_principal_tag_attribute_map.GetPrincipalTagAttributeMapOutput {
         return get_principal_tag_attribute_map.execute(self, allocator, input, options);
     }
 
@@ -194,7 +195,7 @@ pub const Client = struct {
     ///
     /// You must use Amazon Web Services developer credentials to call this
     /// operation.
-    pub fn listIdentities(self: *Self, allocator: std.mem.Allocator, input: list_identities.ListIdentitiesInput, options: list_identities.Options) !list_identities.ListIdentitiesOutput {
+    pub fn listIdentities(self: *Self, allocator: std.mem.Allocator, input: list_identities.ListIdentitiesInput, options: CallOptions) !list_identities.ListIdentitiesOutput {
         return list_identities.execute(self, allocator, input, options);
     }
 
@@ -202,7 +203,7 @@ pub const Client = struct {
     ///
     /// You must use Amazon Web Services developer credentials to call this
     /// operation.
-    pub fn listIdentityPools(self: *Self, allocator: std.mem.Allocator, input: list_identity_pools.ListIdentityPoolsInput, options: list_identity_pools.Options) !list_identity_pools.ListIdentityPoolsOutput {
+    pub fn listIdentityPools(self: *Self, allocator: std.mem.Allocator, input: list_identity_pools.ListIdentityPoolsInput, options: CallOptions) !list_identity_pools.ListIdentityPoolsOutput {
         return list_identity_pools.execute(self, allocator, input, options);
     }
 
@@ -213,7 +214,7 @@ pub const Client = struct {
     /// different ways, such as by purpose, owner, environment, or other criteria.
     ///
     /// You can use this action up to 10 times per second, per account.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -240,7 +241,7 @@ pub const Client = struct {
     ///
     /// You must use Amazon Web Services developer credentials to call this
     /// operation.
-    pub fn lookupDeveloperIdentity(self: *Self, allocator: std.mem.Allocator, input: lookup_developer_identity.LookupDeveloperIdentityInput, options: lookup_developer_identity.Options) !lookup_developer_identity.LookupDeveloperIdentityOutput {
+    pub fn lookupDeveloperIdentity(self: *Self, allocator: std.mem.Allocator, input: lookup_developer_identity.LookupDeveloperIdentityInput, options: CallOptions) !lookup_developer_identity.LookupDeveloperIdentityOutput {
         return lookup_developer_identity.execute(self, allocator, input, options);
     }
 
@@ -265,7 +266,7 @@ pub const Client = struct {
     ///
     /// You must use Amazon Web Services developer credentials to call this
     /// operation.
-    pub fn mergeDeveloperIdentities(self: *Self, allocator: std.mem.Allocator, input: merge_developer_identities.MergeDeveloperIdentitiesInput, options: merge_developer_identities.Options) !merge_developer_identities.MergeDeveloperIdentitiesOutput {
+    pub fn mergeDeveloperIdentities(self: *Self, allocator: std.mem.Allocator, input: merge_developer_identities.MergeDeveloperIdentitiesInput, options: CallOptions) !merge_developer_identities.MergeDeveloperIdentitiesOutput {
         return merge_developer_identities.execute(self, allocator, input, options);
     }
 
@@ -274,14 +275,14 @@ pub const Client = struct {
     ///
     /// You must use Amazon Web Services developer credentials to call this
     /// operation.
-    pub fn setIdentityPoolRoles(self: *Self, allocator: std.mem.Allocator, input: set_identity_pool_roles.SetIdentityPoolRolesInput, options: set_identity_pool_roles.Options) !set_identity_pool_roles.SetIdentityPoolRolesOutput {
+    pub fn setIdentityPoolRoles(self: *Self, allocator: std.mem.Allocator, input: set_identity_pool_roles.SetIdentityPoolRolesInput, options: CallOptions) !set_identity_pool_roles.SetIdentityPoolRolesOutput {
         return set_identity_pool_roles.execute(self, allocator, input, options);
     }
 
     /// You can use this operation to use default (username and clientID) attribute
     /// or custom
     /// attribute mappings.
-    pub fn setPrincipalTagAttributeMap(self: *Self, allocator: std.mem.Allocator, input: set_principal_tag_attribute_map.SetPrincipalTagAttributeMapInput, options: set_principal_tag_attribute_map.Options) !set_principal_tag_attribute_map.SetPrincipalTagAttributeMapOutput {
+    pub fn setPrincipalTagAttributeMap(self: *Self, allocator: std.mem.Allocator, input: set_principal_tag_attribute_map.SetPrincipalTagAttributeMapInput, options: CallOptions) !set_principal_tag_attribute_map.SetPrincipalTagAttributeMapOutput {
         return set_principal_tag_attribute_map.execute(self, allocator, input, options);
     }
 
@@ -310,7 +311,7 @@ pub const Client = struct {
     /// You can use this action up to 5 times per second, per account. An identity
     /// pool can have
     /// as many as 50 tags.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -323,7 +324,7 @@ pub const Client = struct {
     ///
     /// You must use Amazon Web Services developer credentials to call this
     /// operation.
-    pub fn unlinkDeveloperIdentity(self: *Self, allocator: std.mem.Allocator, input: unlink_developer_identity.UnlinkDeveloperIdentityInput, options: unlink_developer_identity.Options) !unlink_developer_identity.UnlinkDeveloperIdentityOutput {
+    pub fn unlinkDeveloperIdentity(self: *Self, allocator: std.mem.Allocator, input: unlink_developer_identity.UnlinkDeveloperIdentityInput, options: CallOptions) !unlink_developer_identity.UnlinkDeveloperIdentityOutput {
         return unlink_developer_identity.execute(self, allocator, input, options);
     }
 
@@ -334,14 +335,14 @@ pub const Client = struct {
     /// this identity inaccessible.
     ///
     /// This is a public API. You do not need any credentials to call this API.
-    pub fn unlinkIdentity(self: *Self, allocator: std.mem.Allocator, input: unlink_identity.UnlinkIdentityInput, options: unlink_identity.Options) !unlink_identity.UnlinkIdentityOutput {
+    pub fn unlinkIdentity(self: *Self, allocator: std.mem.Allocator, input: unlink_identity.UnlinkIdentityInput, options: CallOptions) !unlink_identity.UnlinkIdentityOutput {
         return unlink_identity.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the specified Amazon Cognito identity pool.
     /// You can use
     /// this action up to 5 times per second, per account
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -352,7 +353,7 @@ pub const Client = struct {
     ///
     /// You must use Amazon Web Services developer credentials to call this
     /// operation.
-    pub fn updateIdentityPool(self: *Self, allocator: std.mem.Allocator, input: update_identity_pool.UpdateIdentityPoolInput, options: update_identity_pool.Options) !update_identity_pool.UpdateIdentityPoolOutput {
+    pub fn updateIdentityPool(self: *Self, allocator: std.mem.Allocator, input: update_identity_pool.UpdateIdentityPoolInput, options: CallOptions) !update_identity_pool.UpdateIdentityPoolOutput {
         return update_identity_pool.execute(self, allocator, input, options);
     }
 

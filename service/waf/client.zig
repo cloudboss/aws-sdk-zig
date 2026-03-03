@@ -78,6 +78,7 @@ const update_size_constraint_set = @import("update_size_constraint_set.zig");
 const update_sql_injection_match_set = @import("update_sql_injection_match_set.zig");
 const update_web_acl = @import("update_web_acl.zig");
 const update_xss_match_set = @import("update_xss_match_set.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -146,7 +147,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn createByteMatchSet(self: *Self, allocator: std.mem.Allocator, input: create_byte_match_set.CreateByteMatchSetInput, options: create_byte_match_set.Options) !create_byte_match_set.CreateByteMatchSetOutput {
+    pub fn createByteMatchSet(self: *Self, allocator: std.mem.Allocator, input: create_byte_match_set.CreateByteMatchSetInput, options: CallOptions) !create_byte_match_set.CreateByteMatchSetOutput {
         return create_byte_match_set.execute(self, allocator, input, options);
     }
 
@@ -185,7 +186,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn createGeoMatchSet(self: *Self, allocator: std.mem.Allocator, input: create_geo_match_set.CreateGeoMatchSetInput, options: create_geo_match_set.Options) !create_geo_match_set.CreateGeoMatchSetOutput {
+    pub fn createGeoMatchSet(self: *Self, allocator: std.mem.Allocator, input: create_geo_match_set.CreateGeoMatchSetInput, options: CallOptions) !create_geo_match_set.CreateGeoMatchSetOutput {
         return create_geo_match_set.execute(self, allocator, input, options);
     }
 
@@ -228,7 +229,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn createIpSet(self: *Self, allocator: std.mem.Allocator, input: create_ip_set.CreateIPSetInput, options: create_ip_set.Options) !create_ip_set.CreateIPSetOutput {
+    pub fn createIpSet(self: *Self, allocator: std.mem.Allocator, input: create_ip_set.CreateIPSetInput, options: CallOptions) !create_ip_set.CreateIPSetOutput {
         return create_ip_set.execute(self, allocator, input, options);
     }
 
@@ -320,7 +321,7 @@ pub const Client = struct {
     /// requests,
     /// see the [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn createRateBasedRule(self: *Self, allocator: std.mem.Allocator, input: create_rate_based_rule.CreateRateBasedRuleInput, options: create_rate_based_rule.Options) !create_rate_based_rule.CreateRateBasedRuleOutput {
+    pub fn createRateBasedRule(self: *Self, allocator: std.mem.Allocator, input: create_rate_based_rule.CreateRateBasedRuleInput, options: CallOptions) !create_rate_based_rule.CreateRateBasedRuleOutput {
         return create_rate_based_rule.execute(self, allocator, input, options);
     }
 
@@ -363,7 +364,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn createRegexMatchSet(self: *Self, allocator: std.mem.Allocator, input: create_regex_match_set.CreateRegexMatchSetInput, options: create_regex_match_set.Options) !create_regex_match_set.CreateRegexMatchSetOutput {
+    pub fn createRegexMatchSet(self: *Self, allocator: std.mem.Allocator, input: create_regex_match_set.CreateRegexMatchSetInput, options: CallOptions) !create_regex_match_set.CreateRegexMatchSetOutput {
         return create_regex_match_set.execute(self, allocator, input, options);
     }
 
@@ -400,7 +401,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn createRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: create_regex_pattern_set.CreateRegexPatternSetInput, options: create_regex_pattern_set.Options) !create_regex_pattern_set.CreateRegexPatternSetOutput {
+    pub fn createRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: create_regex_pattern_set.CreateRegexPatternSetInput, options: CallOptions) !create_regex_pattern_set.CreateRegexPatternSetOutput {
         return create_regex_pattern_set.execute(self, allocator, input, options);
     }
 
@@ -457,7 +458,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn createRule(self: *Self, allocator: std.mem.Allocator, input: create_rule.CreateRuleInput, options: create_rule.Options) !create_rule.CreateRuleOutput {
+    pub fn createRule(self: *Self, allocator: std.mem.Allocator, input: create_rule.CreateRuleInput, options: CallOptions) !create_rule.CreateRuleOutput {
         return create_rule.execute(self, allocator, input, options);
     }
 
@@ -487,7 +488,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn createRuleGroup(self: *Self, allocator: std.mem.Allocator, input: create_rule_group.CreateRuleGroupInput, options: create_rule_group.Options) !create_rule_group.CreateRuleGroupOutput {
+    pub fn createRuleGroup(self: *Self, allocator: std.mem.Allocator, input: create_rule_group.CreateRuleGroupInput, options: CallOptions) !create_rule_group.CreateRuleGroupOutput {
         return create_rule_group.execute(self, allocator, input, options);
     }
 
@@ -529,7 +530,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn createSizeConstraintSet(self: *Self, allocator: std.mem.Allocator, input: create_size_constraint_set.CreateSizeConstraintSetInput, options: create_size_constraint_set.Options) !create_size_constraint_set.CreateSizeConstraintSetOutput {
+    pub fn createSizeConstraintSet(self: *Self, allocator: std.mem.Allocator, input: create_size_constraint_set.CreateSizeConstraintSetInput, options: CallOptions) !create_size_constraint_set.CreateSizeConstraintSetOutput {
         return create_size_constraint_set.execute(self, allocator, input, options);
     }
 
@@ -568,7 +569,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn createSqlInjectionMatchSet(self: *Self, allocator: std.mem.Allocator, input: create_sql_injection_match_set.CreateSqlInjectionMatchSetInput, options: create_sql_injection_match_set.Options) !create_sql_injection_match_set.CreateSqlInjectionMatchSetOutput {
+    pub fn createSqlInjectionMatchSet(self: *Self, allocator: std.mem.Allocator, input: create_sql_injection_match_set.CreateSqlInjectionMatchSetInput, options: CallOptions) !create_sql_injection_match_set.CreateSqlInjectionMatchSetOutput {
         return create_sql_injection_match_set.execute(self, allocator, input, options);
     }
 
@@ -620,7 +621,7 @@ pub const Client = struct {
     ///
     /// For more information about how to use the AWS WAF API, see the [AWS WAF
     /// Developer Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn createWebAcl(self: *Self, allocator: std.mem.Allocator, input: create_web_acl.CreateWebACLInput, options: create_web_acl.Options) !create_web_acl.CreateWebACLOutput {
+    pub fn createWebAcl(self: *Self, allocator: std.mem.Allocator, input: create_web_acl.CreateWebACLInput, options: CallOptions) !create_web_acl.CreateWebACLOutput {
         return create_web_acl.execute(self, allocator, input, options);
     }
 
@@ -639,7 +640,7 @@ pub const Client = struct {
     /// WAF](https://docs.aws.amazon.com/waf/latest/developerguide/waf-migrating-from-classic.html) in the [AWS WAF
     /// Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-    pub fn createWebAclMigrationStack(self: *Self, allocator: std.mem.Allocator, input: create_web_acl_migration_stack.CreateWebACLMigrationStackInput, options: create_web_acl_migration_stack.Options) !create_web_acl_migration_stack.CreateWebACLMigrationStackOutput {
+    pub fn createWebAclMigrationStack(self: *Self, allocator: std.mem.Allocator, input: create_web_acl_migration_stack.CreateWebACLMigrationStackInput, options: CallOptions) !create_web_acl_migration_stack.CreateWebACLMigrationStackOutput {
         return create_web_acl_migration_stack.execute(self, allocator, input, options);
     }
 
@@ -677,7 +678,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn createXssMatchSet(self: *Self, allocator: std.mem.Allocator, input: create_xss_match_set.CreateXssMatchSetInput, options: create_xss_match_set.Options) !create_xss_match_set.CreateXssMatchSetOutput {
+    pub fn createXssMatchSet(self: *Self, allocator: std.mem.Allocator, input: create_xss_match_set.CreateXssMatchSetInput, options: CallOptions) !create_xss_match_set.CreateXssMatchSetOutput {
         return create_xss_match_set.execute(self, allocator, input, options);
     }
 
@@ -706,7 +707,7 @@ pub const Client = struct {
     /// `DeleteByteMatchSet` request.
     ///
     /// * Submit a `DeleteByteMatchSet` request.
-    pub fn deleteByteMatchSet(self: *Self, allocator: std.mem.Allocator, input: delete_byte_match_set.DeleteByteMatchSetInput, options: delete_byte_match_set.Options) !delete_byte_match_set.DeleteByteMatchSetOutput {
+    pub fn deleteByteMatchSet(self: *Self, allocator: std.mem.Allocator, input: delete_byte_match_set.DeleteByteMatchSetInput, options: CallOptions) !delete_byte_match_set.DeleteByteMatchSetOutput {
         return delete_byte_match_set.execute(self, allocator, input, options);
     }
 
@@ -736,7 +737,7 @@ pub const Client = struct {
     /// `DeleteGeoMatchSet` request.
     ///
     /// * Submit a `DeleteGeoMatchSet` request.
-    pub fn deleteGeoMatchSet(self: *Self, allocator: std.mem.Allocator, input: delete_geo_match_set.DeleteGeoMatchSetInput, options: delete_geo_match_set.Options) !delete_geo_match_set.DeleteGeoMatchSetOutput {
+    pub fn deleteGeoMatchSet(self: *Self, allocator: std.mem.Allocator, input: delete_geo_match_set.DeleteGeoMatchSetInput, options: CallOptions) !delete_geo_match_set.DeleteGeoMatchSetOutput {
         return delete_geo_match_set.execute(self, allocator, input, options);
     }
 
@@ -765,7 +766,7 @@ pub const Client = struct {
     /// `DeleteIPSet` request.
     ///
     /// * Submit a `DeleteIPSet` request.
-    pub fn deleteIpSet(self: *Self, allocator: std.mem.Allocator, input: delete_ip_set.DeleteIPSetInput, options: delete_ip_set.Options) !delete_ip_set.DeleteIPSetOutput {
+    pub fn deleteIpSet(self: *Self, allocator: std.mem.Allocator, input: delete_ip_set.DeleteIPSetInput, options: CallOptions) !delete_ip_set.DeleteIPSetOutput {
         return delete_ip_set.execute(self, allocator, input, options);
     }
 
@@ -780,7 +781,7 @@ pub const Client = struct {
     ///
     /// Permanently deletes the LoggingConfiguration from the specified web
     /// ACL.
-    pub fn deleteLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_logging_configuration.DeleteLoggingConfigurationInput, options: delete_logging_configuration.Options) !delete_logging_configuration.DeleteLoggingConfigurationOutput {
+    pub fn deleteLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_logging_configuration.DeleteLoggingConfigurationInput, options: CallOptions) !delete_logging_configuration.DeleteLoggingConfigurationOutput {
         return delete_logging_configuration.execute(self, allocator, input, options);
     }
 
@@ -796,7 +797,7 @@ pub const Client = struct {
     /// Permanently deletes an IAM policy from the specified RuleGroup.
     ///
     /// The user making the request must be the owner of the RuleGroup.
-    pub fn deletePermissionPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_permission_policy.DeletePermissionPolicyInput, options: delete_permission_policy.Options) !delete_permission_policy.DeletePermissionPolicyOutput {
+    pub fn deletePermissionPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_permission_policy.DeletePermissionPolicyInput, options: CallOptions) !delete_permission_policy.DeletePermissionPolicyOutput {
         return delete_permission_policy.execute(self, allocator, input, options);
     }
 
@@ -827,7 +828,7 @@ pub const Client = struct {
     /// request.
     ///
     /// * Submit a `DeleteRateBasedRule` request.
-    pub fn deleteRateBasedRule(self: *Self, allocator: std.mem.Allocator, input: delete_rate_based_rule.DeleteRateBasedRuleInput, options: delete_rate_based_rule.Options) !delete_rate_based_rule.DeleteRateBasedRuleOutput {
+    pub fn deleteRateBasedRule(self: *Self, allocator: std.mem.Allocator, input: delete_rate_based_rule.DeleteRateBasedRuleInput, options: CallOptions) !delete_rate_based_rule.DeleteRateBasedRuleOutput {
         return delete_rate_based_rule.execute(self, allocator, input, options);
     }
 
@@ -856,7 +857,7 @@ pub const Client = struct {
     /// `DeleteRegexMatchSet` request.
     ///
     /// * Submit a `DeleteRegexMatchSet` request.
-    pub fn deleteRegexMatchSet(self: *Self, allocator: std.mem.Allocator, input: delete_regex_match_set.DeleteRegexMatchSetInput, options: delete_regex_match_set.Options) !delete_regex_match_set.DeleteRegexMatchSetOutput {
+    pub fn deleteRegexMatchSet(self: *Self, allocator: std.mem.Allocator, input: delete_regex_match_set.DeleteRegexMatchSetInput, options: CallOptions) !delete_regex_match_set.DeleteRegexMatchSetOutput {
         return delete_regex_match_set.execute(self, allocator, input, options);
     }
 
@@ -872,7 +873,7 @@ pub const Client = struct {
     /// Permanently deletes a RegexPatternSet. You can't delete a `RegexPatternSet`
     /// if it's still used in any `RegexMatchSet`
     /// or if the `RegexPatternSet` is not empty.
-    pub fn deleteRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: delete_regex_pattern_set.DeleteRegexPatternSetInput, options: delete_regex_pattern_set.Options) !delete_regex_pattern_set.DeleteRegexPatternSetOutput {
+    pub fn deleteRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: delete_regex_pattern_set.DeleteRegexPatternSetInput, options: CallOptions) !delete_regex_pattern_set.DeleteRegexPatternSetOutput {
         return delete_regex_pattern_set.execute(self, allocator, input, options);
     }
 
@@ -902,7 +903,7 @@ pub const Client = struct {
     /// `DeleteRule` request.
     ///
     /// * Submit a `DeleteRule` request.
-    pub fn deleteRule(self: *Self, allocator: std.mem.Allocator, input: delete_rule.DeleteRuleInput, options: delete_rule.Options) !delete_rule.DeleteRuleOutput {
+    pub fn deleteRule(self: *Self, allocator: std.mem.Allocator, input: delete_rule.DeleteRuleInput, options: CallOptions) !delete_rule.DeleteRuleOutput {
         return delete_rule.execute(self, allocator, input, options);
     }
 
@@ -932,7 +933,7 @@ pub const Client = struct {
     /// `DeleteRuleGroup` request.
     ///
     /// * Submit a `DeleteRuleGroup` request.
-    pub fn deleteRuleGroup(self: *Self, allocator: std.mem.Allocator, input: delete_rule_group.DeleteRuleGroupInput, options: delete_rule_group.Options) !delete_rule_group.DeleteRuleGroupOutput {
+    pub fn deleteRuleGroup(self: *Self, allocator: std.mem.Allocator, input: delete_rule_group.DeleteRuleGroupInput, options: CallOptions) !delete_rule_group.DeleteRuleGroupOutput {
         return delete_rule_group.execute(self, allocator, input, options);
     }
 
@@ -962,7 +963,7 @@ pub const Client = struct {
     /// `DeleteSizeConstraintSet` request.
     ///
     /// * Submit a `DeleteSizeConstraintSet` request.
-    pub fn deleteSizeConstraintSet(self: *Self, allocator: std.mem.Allocator, input: delete_size_constraint_set.DeleteSizeConstraintSetInput, options: delete_size_constraint_set.Options) !delete_size_constraint_set.DeleteSizeConstraintSetOutput {
+    pub fn deleteSizeConstraintSet(self: *Self, allocator: std.mem.Allocator, input: delete_size_constraint_set.DeleteSizeConstraintSetInput, options: CallOptions) !delete_size_constraint_set.DeleteSizeConstraintSetOutput {
         return delete_size_constraint_set.execute(self, allocator, input, options);
     }
 
@@ -995,7 +996,7 @@ pub const Client = struct {
     /// `DeleteSqlInjectionMatchSet` request.
     ///
     /// * Submit a `DeleteSqlInjectionMatchSet` request.
-    pub fn deleteSqlInjectionMatchSet(self: *Self, allocator: std.mem.Allocator, input: delete_sql_injection_match_set.DeleteSqlInjectionMatchSetInput, options: delete_sql_injection_match_set.Options) !delete_sql_injection_match_set.DeleteSqlInjectionMatchSetOutput {
+    pub fn deleteSqlInjectionMatchSet(self: *Self, allocator: std.mem.Allocator, input: delete_sql_injection_match_set.DeleteSqlInjectionMatchSetInput, options: CallOptions) !delete_sql_injection_match_set.DeleteSqlInjectionMatchSetOutput {
         return delete_sql_injection_match_set.execute(self, allocator, input, options);
     }
 
@@ -1021,7 +1022,7 @@ pub const Client = struct {
     /// `DeleteWebACL` request.
     ///
     /// * Submit a `DeleteWebACL` request.
-    pub fn deleteWebAcl(self: *Self, allocator: std.mem.Allocator, input: delete_web_acl.DeleteWebACLInput, options: delete_web_acl.Options) !delete_web_acl.DeleteWebACLOutput {
+    pub fn deleteWebAcl(self: *Self, allocator: std.mem.Allocator, input: delete_web_acl.DeleteWebACLInput, options: CallOptions) !delete_web_acl.DeleteWebACLOutput {
         return delete_web_acl.execute(self, allocator, input, options);
     }
 
@@ -1052,7 +1053,7 @@ pub const Client = struct {
     /// `DeleteXssMatchSet` request.
     ///
     /// * Submit a `DeleteXssMatchSet` request.
-    pub fn deleteXssMatchSet(self: *Self, allocator: std.mem.Allocator, input: delete_xss_match_set.DeleteXssMatchSetInput, options: delete_xss_match_set.Options) !delete_xss_match_set.DeleteXssMatchSetOutput {
+    pub fn deleteXssMatchSet(self: *Self, allocator: std.mem.Allocator, input: delete_xss_match_set.DeleteXssMatchSetInput, options: CallOptions) !delete_xss_match_set.DeleteXssMatchSetOutput {
         return delete_xss_match_set.execute(self, allocator, input, options);
     }
 
@@ -1066,7 +1067,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns the ByteMatchSet specified by `ByteMatchSetId`.
-    pub fn getByteMatchSet(self: *Self, allocator: std.mem.Allocator, input: get_byte_match_set.GetByteMatchSetInput, options: get_byte_match_set.Options) !get_byte_match_set.GetByteMatchSetOutput {
+    pub fn getByteMatchSet(self: *Self, allocator: std.mem.Allocator, input: get_byte_match_set.GetByteMatchSetInput, options: CallOptions) !get_byte_match_set.GetByteMatchSetOutput {
         return get_byte_match_set.execute(self, allocator, input, options);
     }
 
@@ -1096,7 +1097,7 @@ pub const Client = struct {
     /// which indicates that AWS WAF is propagating the change to all AWS WAF
     /// servers. Use `GetChangeTokenStatus` to determine the
     /// status of your change token.
-    pub fn getChangeToken(self: *Self, allocator: std.mem.Allocator, input: get_change_token.GetChangeTokenInput, options: get_change_token.Options) !get_change_token.GetChangeTokenOutput {
+    pub fn getChangeToken(self: *Self, allocator: std.mem.Allocator, input: get_change_token.GetChangeTokenInput, options: CallOptions) !get_change_token.GetChangeTokenOutput {
         return get_change_token.execute(self, allocator, input, options);
     }
 
@@ -1121,7 +1122,7 @@ pub const Client = struct {
     ///   all AWS WAF servers.
     ///
     /// * `INSYNC`: Propagation is complete.
-    pub fn getChangeTokenStatus(self: *Self, allocator: std.mem.Allocator, input: get_change_token_status.GetChangeTokenStatusInput, options: get_change_token_status.Options) !get_change_token_status.GetChangeTokenStatusOutput {
+    pub fn getChangeTokenStatus(self: *Self, allocator: std.mem.Allocator, input: get_change_token_status.GetChangeTokenStatusInput, options: CallOptions) !get_change_token_status.GetChangeTokenStatusOutput {
         return get_change_token_status.execute(self, allocator, input, options);
     }
 
@@ -1135,7 +1136,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns the GeoMatchSet that is specified by `GeoMatchSetId`.
-    pub fn getGeoMatchSet(self: *Self, allocator: std.mem.Allocator, input: get_geo_match_set.GetGeoMatchSetInput, options: get_geo_match_set.Options) !get_geo_match_set.GetGeoMatchSetOutput {
+    pub fn getGeoMatchSet(self: *Self, allocator: std.mem.Allocator, input: get_geo_match_set.GetGeoMatchSetInput, options: CallOptions) !get_geo_match_set.GetGeoMatchSetOutput {
         return get_geo_match_set.execute(self, allocator, input, options);
     }
 
@@ -1149,7 +1150,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns the IPSet that is specified by `IPSetId`.
-    pub fn getIpSet(self: *Self, allocator: std.mem.Allocator, input: get_ip_set.GetIPSetInput, options: get_ip_set.Options) !get_ip_set.GetIPSetOutput {
+    pub fn getIpSet(self: *Self, allocator: std.mem.Allocator, input: get_ip_set.GetIPSetInput, options: CallOptions) !get_ip_set.GetIPSetOutput {
         return get_ip_set.execute(self, allocator, input, options);
     }
 
@@ -1163,7 +1164,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns the LoggingConfiguration for the specified web ACL.
-    pub fn getLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_logging_configuration.GetLoggingConfigurationInput, options: get_logging_configuration.Options) !get_logging_configuration.GetLoggingConfigurationOutput {
+    pub fn getLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_logging_configuration.GetLoggingConfigurationInput, options: CallOptions) !get_logging_configuration.GetLoggingConfigurationOutput {
         return get_logging_configuration.execute(self, allocator, input, options);
     }
 
@@ -1177,7 +1178,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns the IAM policy attached to the RuleGroup.
-    pub fn getPermissionPolicy(self: *Self, allocator: std.mem.Allocator, input: get_permission_policy.GetPermissionPolicyInput, options: get_permission_policy.Options) !get_permission_policy.GetPermissionPolicyOutput {
+    pub fn getPermissionPolicy(self: *Self, allocator: std.mem.Allocator, input: get_permission_policy.GetPermissionPolicyInput, options: CallOptions) !get_permission_policy.GetPermissionPolicyOutput {
         return get_permission_policy.execute(self, allocator, input, options);
     }
 
@@ -1193,7 +1194,7 @@ pub const Client = struct {
     /// Returns the RateBasedRule that is specified by the
     /// `RuleId` that you included in the `GetRateBasedRule`
     /// request.
-    pub fn getRateBasedRule(self: *Self, allocator: std.mem.Allocator, input: get_rate_based_rule.GetRateBasedRuleInput, options: get_rate_based_rule.Options) !get_rate_based_rule.GetRateBasedRuleOutput {
+    pub fn getRateBasedRule(self: *Self, allocator: std.mem.Allocator, input: get_rate_based_rule.GetRateBasedRuleInput, options: CallOptions) !get_rate_based_rule.GetRateBasedRuleOutput {
         return get_rate_based_rule.execute(self, allocator, input, options);
     }
 
@@ -1211,7 +1212,7 @@ pub const Client = struct {
     /// number of managed keys that will be blocked is 10,000. If more than 10,000
     /// addresses exceed
     /// the rate limit, the 10,000 addresses with the highest rates will be blocked.
-    pub fn getRateBasedRuleManagedKeys(self: *Self, allocator: std.mem.Allocator, input: get_rate_based_rule_managed_keys.GetRateBasedRuleManagedKeysInput, options: get_rate_based_rule_managed_keys.Options) !get_rate_based_rule_managed_keys.GetRateBasedRuleManagedKeysOutput {
+    pub fn getRateBasedRuleManagedKeys(self: *Self, allocator: std.mem.Allocator, input: get_rate_based_rule_managed_keys.GetRateBasedRuleManagedKeysInput, options: CallOptions) !get_rate_based_rule_managed_keys.GetRateBasedRuleManagedKeysOutput {
         return get_rate_based_rule_managed_keys.execute(self, allocator, input, options);
     }
 
@@ -1225,7 +1226,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns the RegexMatchSet specified by `RegexMatchSetId`.
-    pub fn getRegexMatchSet(self: *Self, allocator: std.mem.Allocator, input: get_regex_match_set.GetRegexMatchSetInput, options: get_regex_match_set.Options) !get_regex_match_set.GetRegexMatchSetOutput {
+    pub fn getRegexMatchSet(self: *Self, allocator: std.mem.Allocator, input: get_regex_match_set.GetRegexMatchSetInput, options: CallOptions) !get_regex_match_set.GetRegexMatchSetOutput {
         return get_regex_match_set.execute(self, allocator, input, options);
     }
 
@@ -1239,7 +1240,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns the RegexPatternSet specified by `RegexPatternSetId`.
-    pub fn getRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: get_regex_pattern_set.GetRegexPatternSetInput, options: get_regex_pattern_set.Options) !get_regex_pattern_set.GetRegexPatternSetOutput {
+    pub fn getRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: get_regex_pattern_set.GetRegexPatternSetInput, options: CallOptions) !get_regex_pattern_set.GetRegexPatternSetOutput {
         return get_regex_pattern_set.execute(self, allocator, input, options);
     }
 
@@ -1254,7 +1255,7 @@ pub const Client = struct {
     ///
     /// Returns the Rule that is specified by the `RuleId` that you included in the
     /// `GetRule` request.
-    pub fn getRule(self: *Self, allocator: std.mem.Allocator, input: get_rule.GetRuleInput, options: get_rule.Options) !get_rule.GetRuleOutput {
+    pub fn getRule(self: *Self, allocator: std.mem.Allocator, input: get_rule.GetRuleInput, options: CallOptions) !get_rule.GetRuleOutput {
         return get_rule.execute(self, allocator, input, options);
     }
 
@@ -1271,7 +1272,7 @@ pub const Client = struct {
     /// included in the `GetRuleGroup` request.
     ///
     /// To view the rules in a rule group, use ListActivatedRulesInRuleGroup.
-    pub fn getRuleGroup(self: *Self, allocator: std.mem.Allocator, input: get_rule_group.GetRuleGroupInput, options: get_rule_group.Options) !get_rule_group.GetRuleGroupOutput {
+    pub fn getRuleGroup(self: *Self, allocator: std.mem.Allocator, input: get_rule_group.GetRuleGroupInput, options: CallOptions) !get_rule_group.GetRuleGroupOutput {
         return get_rule_group.execute(self, allocator, input, options);
     }
 
@@ -1296,7 +1297,7 @@ pub const Client = struct {
     /// specified time range elapsed, `GetSampledRequests`
     /// returns an updated time range. This new time range indicates the actual
     /// period during which AWS WAF selected the requests in the sample.
-    pub fn getSampledRequests(self: *Self, allocator: std.mem.Allocator, input: get_sampled_requests.GetSampledRequestsInput, options: get_sampled_requests.Options) !get_sampled_requests.GetSampledRequestsOutput {
+    pub fn getSampledRequests(self: *Self, allocator: std.mem.Allocator, input: get_sampled_requests.GetSampledRequestsInput, options: CallOptions) !get_sampled_requests.GetSampledRequestsOutput {
         return get_sampled_requests.execute(self, allocator, input, options);
     }
 
@@ -1310,7 +1311,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns the SizeConstraintSet specified by `SizeConstraintSetId`.
-    pub fn getSizeConstraintSet(self: *Self, allocator: std.mem.Allocator, input: get_size_constraint_set.GetSizeConstraintSetInput, options: get_size_constraint_set.Options) !get_size_constraint_set.GetSizeConstraintSetOutput {
+    pub fn getSizeConstraintSet(self: *Self, allocator: std.mem.Allocator, input: get_size_constraint_set.GetSizeConstraintSetInput, options: CallOptions) !get_size_constraint_set.GetSizeConstraintSetOutput {
         return get_size_constraint_set.execute(self, allocator, input, options);
     }
 
@@ -1325,7 +1326,7 @@ pub const Client = struct {
     ///
     /// Returns the SqlInjectionMatchSet that is specified by
     /// `SqlInjectionMatchSetId`.
-    pub fn getSqlInjectionMatchSet(self: *Self, allocator: std.mem.Allocator, input: get_sql_injection_match_set.GetSqlInjectionMatchSetInput, options: get_sql_injection_match_set.Options) !get_sql_injection_match_set.GetSqlInjectionMatchSetOutput {
+    pub fn getSqlInjectionMatchSet(self: *Self, allocator: std.mem.Allocator, input: get_sql_injection_match_set.GetSqlInjectionMatchSetInput, options: CallOptions) !get_sql_injection_match_set.GetSqlInjectionMatchSetOutput {
         return get_sql_injection_match_set.execute(self, allocator, input, options);
     }
 
@@ -1339,7 +1340,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns the WebACL that is specified by `WebACLId`.
-    pub fn getWebAcl(self: *Self, allocator: std.mem.Allocator, input: get_web_acl.GetWebACLInput, options: get_web_acl.Options) !get_web_acl.GetWebACLOutput {
+    pub fn getWebAcl(self: *Self, allocator: std.mem.Allocator, input: get_web_acl.GetWebACLInput, options: CallOptions) !get_web_acl.GetWebACLOutput {
         return get_web_acl.execute(self, allocator, input, options);
     }
 
@@ -1353,7 +1354,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns the XssMatchSet that is specified by `XssMatchSetId`.
-    pub fn getXssMatchSet(self: *Self, allocator: std.mem.Allocator, input: get_xss_match_set.GetXssMatchSetInput, options: get_xss_match_set.Options) !get_xss_match_set.GetXssMatchSetOutput {
+    pub fn getXssMatchSet(self: *Self, allocator: std.mem.Allocator, input: get_xss_match_set.GetXssMatchSetInput, options: CallOptions) !get_xss_match_set.GetXssMatchSetOutput {
         return get_xss_match_set.execute(self, allocator, input, options);
     }
 
@@ -1367,7 +1368,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of ActivatedRule objects.
-    pub fn listActivatedRulesInRuleGroup(self: *Self, allocator: std.mem.Allocator, input: list_activated_rules_in_rule_group.ListActivatedRulesInRuleGroupInput, options: list_activated_rules_in_rule_group.Options) !list_activated_rules_in_rule_group.ListActivatedRulesInRuleGroupOutput {
+    pub fn listActivatedRulesInRuleGroup(self: *Self, allocator: std.mem.Allocator, input: list_activated_rules_in_rule_group.ListActivatedRulesInRuleGroupInput, options: CallOptions) !list_activated_rules_in_rule_group.ListActivatedRulesInRuleGroupOutput {
         return list_activated_rules_in_rule_group.execute(self, allocator, input, options);
     }
 
@@ -1381,7 +1382,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of ByteMatchSetSummary objects.
-    pub fn listByteMatchSets(self: *Self, allocator: std.mem.Allocator, input: list_byte_match_sets.ListByteMatchSetsInput, options: list_byte_match_sets.Options) !list_byte_match_sets.ListByteMatchSetsOutput {
+    pub fn listByteMatchSets(self: *Self, allocator: std.mem.Allocator, input: list_byte_match_sets.ListByteMatchSetsInput, options: CallOptions) !list_byte_match_sets.ListByteMatchSetsOutput {
         return list_byte_match_sets.execute(self, allocator, input, options);
     }
 
@@ -1395,7 +1396,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of GeoMatchSetSummary objects in the response.
-    pub fn listGeoMatchSets(self: *Self, allocator: std.mem.Allocator, input: list_geo_match_sets.ListGeoMatchSetsInput, options: list_geo_match_sets.Options) !list_geo_match_sets.ListGeoMatchSetsOutput {
+    pub fn listGeoMatchSets(self: *Self, allocator: std.mem.Allocator, input: list_geo_match_sets.ListGeoMatchSetsInput, options: CallOptions) !list_geo_match_sets.ListGeoMatchSetsOutput {
         return list_geo_match_sets.execute(self, allocator, input, options);
     }
 
@@ -1409,7 +1410,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of IPSetSummary objects in the response.
-    pub fn listIpSets(self: *Self, allocator: std.mem.Allocator, input: list_ip_sets.ListIPSetsInput, options: list_ip_sets.Options) !list_ip_sets.ListIPSetsOutput {
+    pub fn listIpSets(self: *Self, allocator: std.mem.Allocator, input: list_ip_sets.ListIPSetsInput, options: CallOptions) !list_ip_sets.ListIPSetsOutput {
         return list_ip_sets.execute(self, allocator, input, options);
     }
 
@@ -1423,7 +1424,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of LoggingConfiguration objects.
-    pub fn listLoggingConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_logging_configurations.ListLoggingConfigurationsInput, options: list_logging_configurations.Options) !list_logging_configurations.ListLoggingConfigurationsOutput {
+    pub fn listLoggingConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_logging_configurations.ListLoggingConfigurationsInput, options: CallOptions) !list_logging_configurations.ListLoggingConfigurationsOutput {
         return list_logging_configurations.execute(self, allocator, input, options);
     }
 
@@ -1437,7 +1438,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of RuleSummary objects.
-    pub fn listRateBasedRules(self: *Self, allocator: std.mem.Allocator, input: list_rate_based_rules.ListRateBasedRulesInput, options: list_rate_based_rules.Options) !list_rate_based_rules.ListRateBasedRulesOutput {
+    pub fn listRateBasedRules(self: *Self, allocator: std.mem.Allocator, input: list_rate_based_rules.ListRateBasedRulesInput, options: CallOptions) !list_rate_based_rules.ListRateBasedRulesOutput {
         return list_rate_based_rules.execute(self, allocator, input, options);
     }
 
@@ -1451,7 +1452,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of RegexMatchSetSummary objects.
-    pub fn listRegexMatchSets(self: *Self, allocator: std.mem.Allocator, input: list_regex_match_sets.ListRegexMatchSetsInput, options: list_regex_match_sets.Options) !list_regex_match_sets.ListRegexMatchSetsOutput {
+    pub fn listRegexMatchSets(self: *Self, allocator: std.mem.Allocator, input: list_regex_match_sets.ListRegexMatchSetsInput, options: CallOptions) !list_regex_match_sets.ListRegexMatchSetsOutput {
         return list_regex_match_sets.execute(self, allocator, input, options);
     }
 
@@ -1465,7 +1466,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of RegexPatternSetSummary objects.
-    pub fn listRegexPatternSets(self: *Self, allocator: std.mem.Allocator, input: list_regex_pattern_sets.ListRegexPatternSetsInput, options: list_regex_pattern_sets.Options) !list_regex_pattern_sets.ListRegexPatternSetsOutput {
+    pub fn listRegexPatternSets(self: *Self, allocator: std.mem.Allocator, input: list_regex_pattern_sets.ListRegexPatternSetsInput, options: CallOptions) !list_regex_pattern_sets.ListRegexPatternSetsOutput {
         return list_regex_pattern_sets.execute(self, allocator, input, options);
     }
 
@@ -1479,7 +1480,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of RuleGroup objects.
-    pub fn listRuleGroups(self: *Self, allocator: std.mem.Allocator, input: list_rule_groups.ListRuleGroupsInput, options: list_rule_groups.Options) !list_rule_groups.ListRuleGroupsOutput {
+    pub fn listRuleGroups(self: *Self, allocator: std.mem.Allocator, input: list_rule_groups.ListRuleGroupsInput, options: CallOptions) !list_rule_groups.ListRuleGroupsOutput {
         return list_rule_groups.execute(self, allocator, input, options);
     }
 
@@ -1493,7 +1494,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of RuleSummary objects.
-    pub fn listRules(self: *Self, allocator: std.mem.Allocator, input: list_rules.ListRulesInput, options: list_rules.Options) !list_rules.ListRulesOutput {
+    pub fn listRules(self: *Self, allocator: std.mem.Allocator, input: list_rules.ListRulesInput, options: CallOptions) !list_rules.ListRulesOutput {
         return list_rules.execute(self, allocator, input, options);
     }
 
@@ -1507,7 +1508,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of SizeConstraintSetSummary objects.
-    pub fn listSizeConstraintSets(self: *Self, allocator: std.mem.Allocator, input: list_size_constraint_sets.ListSizeConstraintSetsInput, options: list_size_constraint_sets.Options) !list_size_constraint_sets.ListSizeConstraintSetsOutput {
+    pub fn listSizeConstraintSets(self: *Self, allocator: std.mem.Allocator, input: list_size_constraint_sets.ListSizeConstraintSetsInput, options: CallOptions) !list_size_constraint_sets.ListSizeConstraintSetsOutput {
         return list_size_constraint_sets.execute(self, allocator, input, options);
     }
 
@@ -1521,7 +1522,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of SqlInjectionMatchSet objects.
-    pub fn listSqlInjectionMatchSets(self: *Self, allocator: std.mem.Allocator, input: list_sql_injection_match_sets.ListSqlInjectionMatchSetsInput, options: list_sql_injection_match_sets.Options) !list_sql_injection_match_sets.ListSqlInjectionMatchSetsOutput {
+    pub fn listSqlInjectionMatchSets(self: *Self, allocator: std.mem.Allocator, input: list_sql_injection_match_sets.ListSqlInjectionMatchSetsInput, options: CallOptions) !list_sql_injection_match_sets.ListSqlInjectionMatchSetsOutput {
         return list_sql_injection_match_sets.execute(self, allocator, input, options);
     }
 
@@ -1535,7 +1536,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of RuleGroup objects that you are subscribed to.
-    pub fn listSubscribedRuleGroups(self: *Self, allocator: std.mem.Allocator, input: list_subscribed_rule_groups.ListSubscribedRuleGroupsInput, options: list_subscribed_rule_groups.Options) !list_subscribed_rule_groups.ListSubscribedRuleGroupsOutput {
+    pub fn listSubscribedRuleGroups(self: *Self, allocator: std.mem.Allocator, input: list_subscribed_rule_groups.ListSubscribedRuleGroupsInput, options: CallOptions) !list_subscribed_rule_groups.ListSubscribedRuleGroupsOutput {
         return list_subscribed_rule_groups.execute(self, allocator, input, options);
     }
 
@@ -1558,7 +1559,7 @@ pub const Client = struct {
     /// or view tags through the AWS WAF Classic console. You can tag the AWS
     /// resources that you manage through AWS WAF Classic: web ACLs, rule groups,
     /// and rules.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -1572,7 +1573,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of WebACLSummary objects in the response.
-    pub fn listWebAcLs(self: *Self, allocator: std.mem.Allocator, input: list_web_ac_ls.ListWebACLsInput, options: list_web_ac_ls.Options) !list_web_ac_ls.ListWebACLsOutput {
+    pub fn listWebAcLs(self: *Self, allocator: std.mem.Allocator, input: list_web_ac_ls.ListWebACLsInput, options: CallOptions) !list_web_ac_ls.ListWebACLsOutput {
         return list_web_ac_ls.execute(self, allocator, input, options);
     }
 
@@ -1586,7 +1587,7 @@ pub const Client = struct {
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
     ///
     /// Returns an array of XssMatchSet objects.
-    pub fn listXssMatchSets(self: *Self, allocator: std.mem.Allocator, input: list_xss_match_sets.ListXssMatchSetsInput, options: list_xss_match_sets.Options) !list_xss_match_sets.ListXssMatchSetsOutput {
+    pub fn listXssMatchSets(self: *Self, allocator: std.mem.Allocator, input: list_xss_match_sets.ListXssMatchSetsInput, options: CallOptions) !list_xss_match_sets.ListXssMatchSetsOutput {
         return list_xss_match_sets.execute(self, allocator, input, options);
     }
 
@@ -1622,7 +1623,7 @@ pub const Client = struct {
     /// permissions to write logs to the Amazon Kinesis Data Firehose. For more
     /// information, see [Logging Web ACL Traffic
     /// Information](https://docs.aws.amazon.com/waf/latest/developerguide/logging.html) in the *AWS WAF Developer Guide*.
-    pub fn putLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_logging_configuration.PutLoggingConfigurationInput, options: put_logging_configuration.Options) !put_logging_configuration.PutLoggingConfigurationOutput {
+    pub fn putLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_logging_configuration.PutLoggingConfigurationInput, options: CallOptions) !put_logging_configuration.PutLoggingConfigurationOutput {
         return put_logging_configuration.execute(self, allocator, input, options);
     }
 
@@ -1665,7 +1666,7 @@ pub const Client = struct {
     ///
     /// An example of a valid policy parameter is shown in the Examples section
     /// below.
-    pub fn putPermissionPolicy(self: *Self, allocator: std.mem.Allocator, input: put_permission_policy.PutPermissionPolicyInput, options: put_permission_policy.Options) !put_permission_policy.PutPermissionPolicyOutput {
+    pub fn putPermissionPolicy(self: *Self, allocator: std.mem.Allocator, input: put_permission_policy.PutPermissionPolicyInput, options: CallOptions) !put_permission_policy.PutPermissionPolicyOutput {
         return put_permission_policy.execute(self, allocator, input, options);
     }
 
@@ -1688,7 +1689,7 @@ pub const Client = struct {
     /// or view tags through the AWS WAF Classic console. You can use this action to
     /// tag the AWS resources that you manage through AWS WAF Classic: web ACLs,
     /// rule groups, and rules.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -1700,7 +1701,7 @@ pub const Client = struct {
     /// **For the latest version of AWS
     /// WAF**, use the AWS WAFV2 API and see the [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With the latest version, AWS WAF has a single set of endpoints for regional and global use.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -1756,7 +1757,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn updateByteMatchSet(self: *Self, allocator: std.mem.Allocator, input: update_byte_match_set.UpdateByteMatchSetInput, options: update_byte_match_set.Options) !update_byte_match_set.UpdateByteMatchSetOutput {
+    pub fn updateByteMatchSet(self: *Self, allocator: std.mem.Allocator, input: update_byte_match_set.UpdateByteMatchSetInput, options: CallOptions) !update_byte_match_set.UpdateByteMatchSetOutput {
         return update_byte_match_set.execute(self, allocator, input, options);
     }
 
@@ -1803,7 +1804,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn updateGeoMatchSet(self: *Self, allocator: std.mem.Allocator, input: update_geo_match_set.UpdateGeoMatchSetInput, options: update_geo_match_set.Options) !update_geo_match_set.UpdateGeoMatchSetOutput {
+    pub fn updateGeoMatchSet(self: *Self, allocator: std.mem.Allocator, input: update_geo_match_set.UpdateGeoMatchSetInput, options: CallOptions) !update_geo_match_set.UpdateGeoMatchSetOutput {
         return update_geo_match_set.execute(self, allocator, input, options);
     }
 
@@ -1881,7 +1882,7 @@ pub const Client = struct {
     /// For more information about how to use the AWS WAF API to allow or block HTTP
     /// requests, see the [AWS WAF
     /// Developer Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn updateIpSet(self: *Self, allocator: std.mem.Allocator, input: update_ip_set.UpdateIPSetInput, options: update_ip_set.Options) !update_ip_set.UpdateIPSetOutput {
+    pub fn updateIpSet(self: *Self, allocator: std.mem.Allocator, input: update_ip_set.UpdateIPSetInput, options: CallOptions) !update_ip_set.UpdateIPSetOutput {
         return update_ip_set.execute(self, allocator, input, options);
     }
 
@@ -1938,7 +1939,7 @@ pub const Client = struct {
     ///
     /// By adding this `RateBasedRule` to a `WebACL`, you could limit requests to
     /// your login page without affecting the rest of your site.
-    pub fn updateRateBasedRule(self: *Self, allocator: std.mem.Allocator, input: update_rate_based_rule.UpdateRateBasedRuleInput, options: update_rate_based_rule.Options) !update_rate_based_rule.UpdateRateBasedRuleOutput {
+    pub fn updateRateBasedRule(self: *Self, allocator: std.mem.Allocator, input: update_rate_based_rule.UpdateRateBasedRuleInput, options: CallOptions) !update_rate_based_rule.UpdateRateBasedRuleOutput {
         return update_rate_based_rule.execute(self, allocator, input, options);
     }
 
@@ -1991,7 +1992,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn updateRegexMatchSet(self: *Self, allocator: std.mem.Allocator, input: update_regex_match_set.UpdateRegexMatchSetInput, options: update_regex_match_set.Options) !update_regex_match_set.UpdateRegexMatchSetOutput {
+    pub fn updateRegexMatchSet(self: *Self, allocator: std.mem.Allocator, input: update_regex_match_set.UpdateRegexMatchSetInput, options: CallOptions) !update_regex_match_set.UpdateRegexMatchSetOutput {
         return update_regex_match_set.execute(self, allocator, input, options);
     }
 
@@ -2040,7 +2041,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn updateRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: update_regex_pattern_set.UpdateRegexPatternSetInput, options: update_regex_pattern_set.Options) !update_regex_pattern_set.UpdateRegexPatternSetOutput {
+    pub fn updateRegexPatternSet(self: *Self, allocator: std.mem.Allocator, input: update_regex_pattern_set.UpdateRegexPatternSetInput, options: CallOptions) !update_regex_pattern_set.UpdateRegexPatternSetOutput {
         return update_regex_pattern_set.execute(self, allocator, input, options);
     }
 
@@ -2096,7 +2097,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn updateRule(self: *Self, allocator: std.mem.Allocator, input: update_rule.UpdateRuleInput, options: update_rule.Options) !update_rule.UpdateRuleOutput {
+    pub fn updateRule(self: *Self, allocator: std.mem.Allocator, input: update_rule.UpdateRuleInput, options: CallOptions) !update_rule.UpdateRuleOutput {
         return update_rule.execute(self, allocator, input, options);
     }
 
@@ -2137,7 +2138,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn updateRuleGroup(self: *Self, allocator: std.mem.Allocator, input: update_rule_group.UpdateRuleGroupInput, options: update_rule_group.Options) !update_rule_group.UpdateRuleGroupOutput {
+    pub fn updateRuleGroup(self: *Self, allocator: std.mem.Allocator, input: update_rule_group.UpdateRuleGroupInput, options: CallOptions) !update_rule_group.UpdateRuleGroupOutput {
         return update_rule_group.execute(self, allocator, input, options);
     }
 
@@ -2200,7 +2201,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn updateSizeConstraintSet(self: *Self, allocator: std.mem.Allocator, input: update_size_constraint_set.UpdateSizeConstraintSetInput, options: update_size_constraint_set.Options) !update_size_constraint_set.UpdateSizeConstraintSetOutput {
+    pub fn updateSizeConstraintSet(self: *Self, allocator: std.mem.Allocator, input: update_size_constraint_set.UpdateSizeConstraintSetInput, options: CallOptions) !update_size_constraint_set.UpdateSizeConstraintSetOutput {
         return update_size_constraint_set.execute(self, allocator, input, options);
     }
 
@@ -2257,7 +2258,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn updateSqlInjectionMatchSet(self: *Self, allocator: std.mem.Allocator, input: update_sql_injection_match_set.UpdateSqlInjectionMatchSetInput, options: update_sql_injection_match_set.Options) !update_sql_injection_match_set.UpdateSqlInjectionMatchSetOutput {
+    pub fn updateSqlInjectionMatchSet(self: *Self, allocator: std.mem.Allocator, input: update_sql_injection_match_set.UpdateSqlInjectionMatchSetInput, options: CallOptions) !update_sql_injection_match_set.UpdateSqlInjectionMatchSetOutput {
         return update_sql_injection_match_set.execute(self, allocator, input, options);
     }
 
@@ -2346,7 +2347,7 @@ pub const Client = struct {
     /// For more information about how to use the AWS WAF API to allow or block HTTP
     /// requests, see the [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn updateWebAcl(self: *Self, allocator: std.mem.Allocator, input: update_web_acl.UpdateWebACLInput, options: update_web_acl.Options) !update_web_acl.UpdateWebACLOutput {
+    pub fn updateWebAcl(self: *Self, allocator: std.mem.Allocator, input: update_web_acl.UpdateWebACLInput, options: CallOptions) !update_web_acl.UpdateWebACLOutput {
         return update_web_acl.execute(self, allocator, input, options);
     }
 
@@ -2401,7 +2402,7 @@ pub const Client = struct {
     /// requests, see the
     /// [AWS WAF Developer
     /// Guide](https://docs.aws.amazon.com/waf/latest/developerguide/).
-    pub fn updateXssMatchSet(self: *Self, allocator: std.mem.Allocator, input: update_xss_match_set.UpdateXssMatchSetInput, options: update_xss_match_set.Options) !update_xss_match_set.UpdateXssMatchSetOutput {
+    pub fn updateXssMatchSet(self: *Self, allocator: std.mem.Allocator, input: update_xss_match_set.UpdateXssMatchSetInput, options: CallOptions) !update_xss_match_set.UpdateXssMatchSetOutput {
         return update_xss_match_set.execute(self, allocator, input, options);
     }
 };

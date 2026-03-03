@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GlobalCluster = @import("global_cluster.zig").GlobalCluster;
 const serde = @import("serde.zig");
@@ -59,11 +60,7 @@ pub const ModifyGlobalClusterOutput = struct {
     global_cluster: ?GlobalCluster = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyGlobalClusterInput, options: Options) !ModifyGlobalClusterOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyGlobalClusterInput, options: CallOptions) !ModifyGlobalClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ScheduledActionType = @import("scheduled_action_type.zig").ScheduledActionType;
 const ScheduledActionState = @import("scheduled_action_state.zig").ScheduledActionState;
@@ -39,13 +40,9 @@ pub const ModifyScheduledActionInput = struct {
     target_action: ?ScheduledActionType = null,
 };
 
-const ModifyScheduledActionOutput = @import("scheduled_action.zig").ScheduledAction;
+pub const ModifyScheduledActionOutput = @import("scheduled_action.zig").ScheduledAction;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyScheduledActionInput, options: Options) !ModifyScheduledActionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyScheduledActionInput, options: CallOptions) !ModifyScheduledActionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

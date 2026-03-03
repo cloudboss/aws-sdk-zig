@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AlarmIdentifier = @import("alarm_identifier.zig").AlarmIdentifier;
 const InsufficientDataHealthStatus = @import("insufficient_data_health_status.zig").InsufficientDataHealthStatus;
@@ -371,11 +372,7 @@ pub const UpdateHealthCheckOutput = struct {
     health_check: ?HealthCheck = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateHealthCheckInput, options: Options) !UpdateHealthCheckOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateHealthCheckInput, options: CallOptions) !UpdateHealthCheckOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

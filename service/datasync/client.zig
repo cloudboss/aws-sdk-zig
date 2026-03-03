@@ -54,6 +54,7 @@ const update_location_s3 = @import("update_location_s3.zig");
 const update_location_smb = @import("update_location_smb.zig");
 const update_task = @import("update_task.zig");
 const update_task_execution = @import("update_task_execution.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -96,7 +97,7 @@ pub const Client = struct {
     /// unexpected failures that interrupt a task execution. In all of these cases,
     /// DataSync
     /// successfully completes the transfer when you start the next task execution.
-    pub fn cancelTaskExecution(self: *Self, allocator: std.mem.Allocator, input: cancel_task_execution.CancelTaskExecutionInput, options: cancel_task_execution.Options) !cancel_task_execution.CancelTaskExecutionOutput {
+    pub fn cancelTaskExecution(self: *Self, allocator: std.mem.Allocator, input: cancel_task_execution.CancelTaskExecutionInput, options: CallOptions) !cancel_task_execution.CancelTaskExecutionOutput {
         return cancel_task_execution.execute(self, allocator, input, options);
     }
 
@@ -106,7 +107,7 @@ pub const Client = struct {
     ///
     /// If you haven't deployed an agent yet, see [Do I need a DataSync
     /// agent?](https://docs.aws.amazon.com/datasync/latest/userguide/do-i-need-datasync-agent.html)
-    pub fn createAgent(self: *Self, allocator: std.mem.Allocator, input: create_agent.CreateAgentInput, options: create_agent.Options) !create_agent.CreateAgentOutput {
+    pub fn createAgent(self: *Self, allocator: std.mem.Allocator, input: create_agent.CreateAgentInput, options: CallOptions) !create_agent.CreateAgentOutput {
         return create_agent.execute(self, allocator, input, options);
     }
 
@@ -119,7 +120,7 @@ pub const Client = struct {
     ///
     /// Before you begin, make sure you know [how DataSync accesses Azure Blob
     /// Storage](https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access) and works with [access tiers](https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers) and [blob types](https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#blob-types).
-    pub fn createLocationAzureBlob(self: *Self, allocator: std.mem.Allocator, input: create_location_azure_blob.CreateLocationAzureBlobInput, options: create_location_azure_blob.Options) !create_location_azure_blob.CreateLocationAzureBlobOutput {
+    pub fn createLocationAzureBlob(self: *Self, allocator: std.mem.Allocator, input: create_location_azure_blob.CreateLocationAzureBlobInput, options: CallOptions) !create_location_azure_blob.CreateLocationAzureBlobOutput {
         return create_location_azure_blob.execute(self, allocator, input, options);
     }
 
@@ -131,7 +132,7 @@ pub const Client = struct {
     /// [accesses
     /// Amazon EFS file
     /// systems](https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html#create-efs-location-access).
-    pub fn createLocationEfs(self: *Self, allocator: std.mem.Allocator, input: create_location_efs.CreateLocationEfsInput, options: create_location_efs.Options) !create_location_efs.CreateLocationEfsOutput {
+    pub fn createLocationEfs(self: *Self, allocator: std.mem.Allocator, input: create_location_efs.CreateLocationEfsInput, options: CallOptions) !create_location_efs.CreateLocationEfsOutput {
         return create_location_efs.execute(self, allocator, input, options);
     }
 
@@ -142,7 +143,7 @@ pub const Client = struct {
     /// Before you begin, make sure that you understand how DataSync
     /// [accesses FSx for Lustre file
     /// systems](https://docs.aws.amazon.com/datasync/latest/userguide/create-lustre-location.html#create-lustre-location-access).
-    pub fn createLocationFsxLustre(self: *Self, allocator: std.mem.Allocator, input: create_location_fsx_lustre.CreateLocationFsxLustreInput, options: create_location_fsx_lustre.Options) !create_location_fsx_lustre.CreateLocationFsxLustreOutput {
+    pub fn createLocationFsxLustre(self: *Self, allocator: std.mem.Allocator, input: create_location_fsx_lustre.CreateLocationFsxLustreInput, options: CallOptions) !create_location_fsx_lustre.CreateLocationFsxLustreOutput {
         return create_location_fsx_lustre.execute(self, allocator, input, options);
     }
 
@@ -153,7 +154,7 @@ pub const Client = struct {
     /// Before you begin, make sure that you understand how DataSync
     /// [accesses FSx for ONTAP file
     /// systems](https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access).
-    pub fn createLocationFsxOntap(self: *Self, allocator: std.mem.Allocator, input: create_location_fsx_ontap.CreateLocationFsxOntapInput, options: create_location_fsx_ontap.Options) !create_location_fsx_ontap.CreateLocationFsxOntapOutput {
+    pub fn createLocationFsxOntap(self: *Self, allocator: std.mem.Allocator, input: create_location_fsx_ontap.CreateLocationFsxOntapInput, options: CallOptions) !create_location_fsx_ontap.CreateLocationFsxOntapOutput {
         return create_location_fsx_ontap.execute(self, allocator, input, options);
     }
 
@@ -168,7 +169,7 @@ pub const Client = struct {
     ///
     /// Request parameters related to `SMB` aren't supported with the
     /// `CreateLocationFsxOpenZfs` operation.
-    pub fn createLocationFsxOpenZfs(self: *Self, allocator: std.mem.Allocator, input: create_location_fsx_open_zfs.CreateLocationFsxOpenZfsInput, options: create_location_fsx_open_zfs.Options) !create_location_fsx_open_zfs.CreateLocationFsxOpenZfsOutput {
+    pub fn createLocationFsxOpenZfs(self: *Self, allocator: std.mem.Allocator, input: create_location_fsx_open_zfs.CreateLocationFsxOpenZfsInput, options: CallOptions) !create_location_fsx_open_zfs.CreateLocationFsxOpenZfsOutput {
         return create_location_fsx_open_zfs.execute(self, allocator, input, options);
     }
 
@@ -180,7 +181,7 @@ pub const Client = struct {
     /// [accesses
     /// FSx for Windows File Server file
     /// systems](https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-location-access).
-    pub fn createLocationFsxWindows(self: *Self, allocator: std.mem.Allocator, input: create_location_fsx_windows.CreateLocationFsxWindowsInput, options: create_location_fsx_windows.Options) !create_location_fsx_windows.CreateLocationFsxWindowsOutput {
+    pub fn createLocationFsxWindows(self: *Self, allocator: std.mem.Allocator, input: create_location_fsx_windows.CreateLocationFsxWindowsInput, options: CallOptions) !create_location_fsx_windows.CreateLocationFsxWindowsOutput {
         return create_location_fsx_windows.execute(self, allocator, input, options);
     }
 
@@ -191,7 +192,7 @@ pub const Client = struct {
     /// Before you begin, make sure that you understand how DataSync
     /// [accesses HDFS
     /// clusters](https://docs.aws.amazon.com/datasync/latest/userguide/create-hdfs-location.html#accessing-hdfs).
-    pub fn createLocationHdfs(self: *Self, allocator: std.mem.Allocator, input: create_location_hdfs.CreateLocationHdfsInput, options: create_location_hdfs.Options) !create_location_hdfs.CreateLocationHdfsOutput {
+    pub fn createLocationHdfs(self: *Self, allocator: std.mem.Allocator, input: create_location_hdfs.CreateLocationHdfsInput, options: CallOptions) !create_location_hdfs.CreateLocationHdfsOutput {
         return create_location_hdfs.execute(self, allocator, input, options);
     }
 
@@ -202,7 +203,7 @@ pub const Client = struct {
     /// Before you begin, make sure that you understand how DataSync
     /// [accesses NFS file
     /// servers](https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs).
-    pub fn createLocationNfs(self: *Self, allocator: std.mem.Allocator, input: create_location_nfs.CreateLocationNfsInput, options: create_location_nfs.Options) !create_location_nfs.CreateLocationNfsOutput {
+    pub fn createLocationNfs(self: *Self, allocator: std.mem.Allocator, input: create_location_nfs.CreateLocationNfsInput, options: CallOptions) !create_location_nfs.CreateLocationNfsOutput {
         return create_location_nfs.execute(self, allocator, input, options);
     }
 
@@ -213,7 +214,7 @@ pub const Client = struct {
     ///
     /// Before you begin, make sure that you understand the
     /// [prerequisites](https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html#create-object-location-prerequisites) for DataSync to work with object storage systems.
-    pub fn createLocationObjectStorage(self: *Self, allocator: std.mem.Allocator, input: create_location_object_storage.CreateLocationObjectStorageInput, options: create_location_object_storage.Options) !create_location_object_storage.CreateLocationObjectStorageOutput {
+    pub fn createLocationObjectStorage(self: *Self, allocator: std.mem.Allocator, input: create_location_object_storage.CreateLocationObjectStorageInput, options: CallOptions) !create_location_object_storage.CreateLocationObjectStorageOutput {
         return create_location_object_storage.execute(self, allocator, input, options);
     }
 
@@ -233,7 +234,7 @@ pub const Client = struct {
     /// For more information, see [Configuring
     /// transfers with Amazon
     /// S3](https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html).
-    pub fn createLocationS3(self: *Self, allocator: std.mem.Allocator, input: create_location_s3.CreateLocationS3Input, options: create_location_s3.Options) !create_location_s3.CreateLocationS3Output {
+    pub fn createLocationS3(self: *Self, allocator: std.mem.Allocator, input: create_location_s3.CreateLocationS3Input, options: CallOptions) !create_location_s3.CreateLocationS3Output {
         return create_location_s3.execute(self, allocator, input, options);
     }
 
@@ -245,7 +246,7 @@ pub const Client = struct {
     /// file servers. For more information, see [Providing DataSync access to SMB
     /// file
     /// servers](https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions).
-    pub fn createLocationSmb(self: *Self, allocator: std.mem.Allocator, input: create_location_smb.CreateLocationSmbInput, options: create_location_smb.Options) !create_location_smb.CreateLocationSmbOutput {
+    pub fn createLocationSmb(self: *Self, allocator: std.mem.Allocator, input: create_location_smb.CreateLocationSmbInput, options: CallOptions) !create_location_smb.CreateLocationSmbOutput {
         return create_location_smb.execute(self, allocator, input, options);
     }
 
@@ -261,7 +262,7 @@ pub const Client = struct {
     /// DataSync can affect your S3 request
     /// charges](https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests) and the [DataSync pricing page](http://aws.amazon.com/datasync/pricing/) before
     /// you begin.
-    pub fn createTask(self: *Self, allocator: std.mem.Allocator, input: create_task.CreateTaskInput, options: create_task.Options) !create_task.CreateTaskOutput {
+    pub fn createTask(self: *Self, allocator: std.mem.Allocator, input: create_task.CreateTaskInput, options: CallOptions) !create_task.CreateTaskOutput {
         return create_task.execute(self, allocator, input, options);
     }
 
@@ -274,41 +275,41 @@ pub const Client = struct {
     /// steps, you can delete the VM or instance from your storage environment or
     /// reuse it to [activate a new
     /// agent](https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html).
-    pub fn deleteAgent(self: *Self, allocator: std.mem.Allocator, input: delete_agent.DeleteAgentInput, options: delete_agent.Options) !delete_agent.DeleteAgentOutput {
+    pub fn deleteAgent(self: *Self, allocator: std.mem.Allocator, input: delete_agent.DeleteAgentInput, options: CallOptions) !delete_agent.DeleteAgentOutput {
         return delete_agent.execute(self, allocator, input, options);
     }
 
     /// Deletes a transfer location resource from DataSync.
-    pub fn deleteLocation(self: *Self, allocator: std.mem.Allocator, input: delete_location.DeleteLocationInput, options: delete_location.Options) !delete_location.DeleteLocationOutput {
+    pub fn deleteLocation(self: *Self, allocator: std.mem.Allocator, input: delete_location.DeleteLocationInput, options: CallOptions) !delete_location.DeleteLocationOutput {
         return delete_location.execute(self, allocator, input, options);
     }
 
     /// Deletes a transfer task resource from DataSync.
-    pub fn deleteTask(self: *Self, allocator: std.mem.Allocator, input: delete_task.DeleteTaskInput, options: delete_task.Options) !delete_task.DeleteTaskOutput {
+    pub fn deleteTask(self: *Self, allocator: std.mem.Allocator, input: delete_task.DeleteTaskInput, options: CallOptions) !delete_task.DeleteTaskOutput {
         return delete_task.execute(self, allocator, input, options);
     }
 
     /// Returns information about an DataSync agent, such as its name, service
     /// endpoint type, and status.
-    pub fn describeAgent(self: *Self, allocator: std.mem.Allocator, input: describe_agent.DescribeAgentInput, options: describe_agent.Options) !describe_agent.DescribeAgentOutput {
+    pub fn describeAgent(self: *Self, allocator: std.mem.Allocator, input: describe_agent.DescribeAgentInput, options: CallOptions) !describe_agent.DescribeAgentOutput {
         return describe_agent.execute(self, allocator, input, options);
     }
 
     /// Provides details about how an DataSync transfer location for Microsoft Azure
     /// Blob Storage is configured.
-    pub fn describeLocationAzureBlob(self: *Self, allocator: std.mem.Allocator, input: describe_location_azure_blob.DescribeLocationAzureBlobInput, options: describe_location_azure_blob.Options) !describe_location_azure_blob.DescribeLocationAzureBlobOutput {
+    pub fn describeLocationAzureBlob(self: *Self, allocator: std.mem.Allocator, input: describe_location_azure_blob.DescribeLocationAzureBlobInput, options: CallOptions) !describe_location_azure_blob.DescribeLocationAzureBlobOutput {
         return describe_location_azure_blob.execute(self, allocator, input, options);
     }
 
     /// Provides details about how an DataSync transfer location for an Amazon EFS
     /// file system is configured.
-    pub fn describeLocationEfs(self: *Self, allocator: std.mem.Allocator, input: describe_location_efs.DescribeLocationEfsInput, options: describe_location_efs.Options) !describe_location_efs.DescribeLocationEfsOutput {
+    pub fn describeLocationEfs(self: *Self, allocator: std.mem.Allocator, input: describe_location_efs.DescribeLocationEfsInput, options: CallOptions) !describe_location_efs.DescribeLocationEfsOutput {
         return describe_location_efs.execute(self, allocator, input, options);
     }
 
     /// Provides details about how an DataSync transfer location for an Amazon FSx
     /// for Lustre file system is configured.
-    pub fn describeLocationFsxLustre(self: *Self, allocator: std.mem.Allocator, input: describe_location_fsx_lustre.DescribeLocationFsxLustreInput, options: describe_location_fsx_lustre.Options) !describe_location_fsx_lustre.DescribeLocationFsxLustreOutput {
+    pub fn describeLocationFsxLustre(self: *Self, allocator: std.mem.Allocator, input: describe_location_fsx_lustre.DescribeLocationFsxLustreInput, options: CallOptions) !describe_location_fsx_lustre.DescribeLocationFsxLustreOutput {
         return describe_location_fsx_lustre.execute(self, allocator, input, options);
     }
 
@@ -317,7 +318,7 @@ pub const Client = struct {
     ///
     /// If your location uses SMB, the `DescribeLocationFsxOntap` operation doesn't
     /// actually return a `Password`.
-    pub fn describeLocationFsxOntap(self: *Self, allocator: std.mem.Allocator, input: describe_location_fsx_ontap.DescribeLocationFsxOntapInput, options: describe_location_fsx_ontap.Options) !describe_location_fsx_ontap.DescribeLocationFsxOntapOutput {
+    pub fn describeLocationFsxOntap(self: *Self, allocator: std.mem.Allocator, input: describe_location_fsx_ontap.DescribeLocationFsxOntapInput, options: CallOptions) !describe_location_fsx_ontap.DescribeLocationFsxOntapOutput {
         return describe_location_fsx_ontap.execute(self, allocator, input, options);
     }
 
@@ -326,49 +327,49 @@ pub const Client = struct {
     ///
     /// Response elements related to `SMB` aren't supported with the
     /// `DescribeLocationFsxOpenZfs` operation.
-    pub fn describeLocationFsxOpenZfs(self: *Self, allocator: std.mem.Allocator, input: describe_location_fsx_open_zfs.DescribeLocationFsxOpenZfsInput, options: describe_location_fsx_open_zfs.Options) !describe_location_fsx_open_zfs.DescribeLocationFsxOpenZfsOutput {
+    pub fn describeLocationFsxOpenZfs(self: *Self, allocator: std.mem.Allocator, input: describe_location_fsx_open_zfs.DescribeLocationFsxOpenZfsInput, options: CallOptions) !describe_location_fsx_open_zfs.DescribeLocationFsxOpenZfsOutput {
         return describe_location_fsx_open_zfs.execute(self, allocator, input, options);
     }
 
     /// Provides details about how an DataSync transfer location for an Amazon FSx
     /// for Windows File Server file system is configured.
-    pub fn describeLocationFsxWindows(self: *Self, allocator: std.mem.Allocator, input: describe_location_fsx_windows.DescribeLocationFsxWindowsInput, options: describe_location_fsx_windows.Options) !describe_location_fsx_windows.DescribeLocationFsxWindowsOutput {
+    pub fn describeLocationFsxWindows(self: *Self, allocator: std.mem.Allocator, input: describe_location_fsx_windows.DescribeLocationFsxWindowsInput, options: CallOptions) !describe_location_fsx_windows.DescribeLocationFsxWindowsOutput {
         return describe_location_fsx_windows.execute(self, allocator, input, options);
     }
 
     /// Provides details about how an DataSync transfer location for a Hadoop
     /// Distributed File System (HDFS) is configured.
-    pub fn describeLocationHdfs(self: *Self, allocator: std.mem.Allocator, input: describe_location_hdfs.DescribeLocationHdfsInput, options: describe_location_hdfs.Options) !describe_location_hdfs.DescribeLocationHdfsOutput {
+    pub fn describeLocationHdfs(self: *Self, allocator: std.mem.Allocator, input: describe_location_hdfs.DescribeLocationHdfsInput, options: CallOptions) !describe_location_hdfs.DescribeLocationHdfsOutput {
         return describe_location_hdfs.execute(self, allocator, input, options);
     }
 
     /// Provides details about how an DataSync transfer location for a Network
     /// File System (NFS) file server is configured.
-    pub fn describeLocationNfs(self: *Self, allocator: std.mem.Allocator, input: describe_location_nfs.DescribeLocationNfsInput, options: describe_location_nfs.Options) !describe_location_nfs.DescribeLocationNfsOutput {
+    pub fn describeLocationNfs(self: *Self, allocator: std.mem.Allocator, input: describe_location_nfs.DescribeLocationNfsInput, options: CallOptions) !describe_location_nfs.DescribeLocationNfsOutput {
         return describe_location_nfs.execute(self, allocator, input, options);
     }
 
     /// Provides details about how an DataSync transfer location for an object
     /// storage system is configured.
-    pub fn describeLocationObjectStorage(self: *Self, allocator: std.mem.Allocator, input: describe_location_object_storage.DescribeLocationObjectStorageInput, options: describe_location_object_storage.Options) !describe_location_object_storage.DescribeLocationObjectStorageOutput {
+    pub fn describeLocationObjectStorage(self: *Self, allocator: std.mem.Allocator, input: describe_location_object_storage.DescribeLocationObjectStorageInput, options: CallOptions) !describe_location_object_storage.DescribeLocationObjectStorageOutput {
         return describe_location_object_storage.execute(self, allocator, input, options);
     }
 
     /// Provides details about how an DataSync transfer location for an S3 bucket
     /// is configured.
-    pub fn describeLocationS3(self: *Self, allocator: std.mem.Allocator, input: describe_location_s3.DescribeLocationS3Input, options: describe_location_s3.Options) !describe_location_s3.DescribeLocationS3Output {
+    pub fn describeLocationS3(self: *Self, allocator: std.mem.Allocator, input: describe_location_s3.DescribeLocationS3Input, options: CallOptions) !describe_location_s3.DescribeLocationS3Output {
         return describe_location_s3.execute(self, allocator, input, options);
     }
 
     /// Provides details about how an DataSync transfer location for a Server
     /// Message Block (SMB) file server is configured.
-    pub fn describeLocationSmb(self: *Self, allocator: std.mem.Allocator, input: describe_location_smb.DescribeLocationSmbInput, options: describe_location_smb.Options) !describe_location_smb.DescribeLocationSmbOutput {
+    pub fn describeLocationSmb(self: *Self, allocator: std.mem.Allocator, input: describe_location_smb.DescribeLocationSmbInput, options: CallOptions) !describe_location_smb.DescribeLocationSmbOutput {
         return describe_location_smb.execute(self, allocator, input, options);
     }
 
     /// Provides information about a *task*, which defines where and how
     /// DataSync transfers your data.
-    pub fn describeTask(self: *Self, allocator: std.mem.Allocator, input: describe_task.DescribeTaskInput, options: describe_task.Options) !describe_task.DescribeTaskOutput {
+    pub fn describeTask(self: *Self, allocator: std.mem.Allocator, input: describe_task.DescribeTaskInput, options: CallOptions) !describe_task.DescribeTaskOutput {
         return describe_task.execute(self, allocator, input, options);
     }
 
@@ -382,7 +383,7 @@ pub const Client = struct {
     /// differences](https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html#task-mode-differences) and [Understanding data
     /// transfer performance
     /// counters](https://docs.aws.amazon.com/datasync/latest/userguide/transfer-performance-counters.html).
-    pub fn describeTaskExecution(self: *Self, allocator: std.mem.Allocator, input: describe_task_execution.DescribeTaskExecutionInput, options: describe_task_execution.Options) !describe_task_execution.DescribeTaskExecutionOutput {
+    pub fn describeTaskExecution(self: *Self, allocator: std.mem.Allocator, input: describe_task_execution.DescribeTaskExecutionInput, options: CallOptions) !describe_task_execution.DescribeTaskExecutionOutput {
         return describe_task_execution.execute(self, allocator, input, options);
     }
 
@@ -406,7 +407,7 @@ pub const Client = struct {
     /// created (or deleted)
     /// by using
     /// [DescribeAgent](https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeAgent.html).
-    pub fn listAgents(self: *Self, allocator: std.mem.Allocator, input: list_agents.ListAgentsInput, options: list_agents.Options) !list_agents.ListAgentsOutput {
+    pub fn listAgents(self: *Self, allocator: std.mem.Allocator, input: list_agents.ListAgentsInput, options: CallOptions) !list_agents.ListAgentsOutput {
         return list_agents.execute(self, allocator, input, options);
     }
 
@@ -417,22 +418,22 @@ pub const Client = struct {
     /// returns only a truncated list of your agents), the response contains a token
     /// that you can
     /// specify in your next request to fetch the next page of locations.
-    pub fn listLocations(self: *Self, allocator: std.mem.Allocator, input: list_locations.ListLocationsInput, options: list_locations.Options) !list_locations.ListLocationsOutput {
+    pub fn listLocations(self: *Self, allocator: std.mem.Allocator, input: list_locations.ListLocationsInput, options: CallOptions) !list_locations.ListLocationsOutput {
         return list_locations.execute(self, allocator, input, options);
     }
 
     /// Returns all the tags associated with an Amazon Web Services resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Returns a list of executions for an DataSync transfer task.
-    pub fn listTaskExecutions(self: *Self, allocator: std.mem.Allocator, input: list_task_executions.ListTaskExecutionsInput, options: list_task_executions.Options) !list_task_executions.ListTaskExecutionsOutput {
+    pub fn listTaskExecutions(self: *Self, allocator: std.mem.Allocator, input: list_task_executions.ListTaskExecutionsInput, options: CallOptions) !list_task_executions.ListTaskExecutionsOutput {
         return list_task_executions.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the DataSync tasks you created.
-    pub fn listTasks(self: *Self, allocator: std.mem.Allocator, input: list_tasks.ListTasksInput, options: list_tasks.Options) !list_tasks.ListTasksOutput {
+    pub fn listTasks(self: *Self, allocator: std.mem.Allocator, input: list_tasks.ListTasksInput, options: CallOptions) !list_tasks.ListTasksOutput {
         return list_tasks.execute(self, allocator, input, options);
     }
 
@@ -448,7 +449,7 @@ pub const Client = struct {
     /// DataSync can affect your S3 request
     /// charges](https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests) and the [DataSync pricing page](http://aws.amazon.com/datasync/pricing/) before
     /// you begin.
-    pub fn startTaskExecution(self: *Self, allocator: std.mem.Allocator, input: start_task_execution.StartTaskExecutionInput, options: start_task_execution.Options) !start_task_execution.StartTaskExecutionOutput {
+    pub fn startTaskExecution(self: *Self, allocator: std.mem.Allocator, input: start_task_execution.StartTaskExecutionInput, options: CallOptions) !start_task_execution.StartTaskExecutionOutput {
         return start_task_execution.execute(self, allocator, input, options);
     }
 
@@ -458,17 +459,17 @@ pub const Client = struct {
     ///
     /// These include DataSync resources, such as locations, tasks, and task
     /// executions.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from an Amazon Web Services resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the name of an DataSync agent.
-    pub fn updateAgent(self: *Self, allocator: std.mem.Allocator, input: update_agent.UpdateAgentInput, options: update_agent.Options) !update_agent.UpdateAgentOutput {
+    pub fn updateAgent(self: *Self, allocator: std.mem.Allocator, input: update_agent.UpdateAgentInput, options: CallOptions) !update_agent.UpdateAgentOutput {
         return update_agent.execute(self, allocator, input, options);
     }
 
@@ -478,7 +479,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Configuring DataSync transfers with Azure Blob
     /// Storage](https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html).
-    pub fn updateLocationAzureBlob(self: *Self, allocator: std.mem.Allocator, input: update_location_azure_blob.UpdateLocationAzureBlobInput, options: update_location_azure_blob.Options) !update_location_azure_blob.UpdateLocationAzureBlobOutput {
+    pub fn updateLocationAzureBlob(self: *Self, allocator: std.mem.Allocator, input: update_location_azure_blob.UpdateLocationAzureBlobInput, options: CallOptions) !update_location_azure_blob.UpdateLocationAzureBlobOutput {
         return update_location_azure_blob.execute(self, allocator, input, options);
     }
 
@@ -488,7 +489,7 @@ pub const Client = struct {
     /// For more information, see [Configuring DataSync
     /// transfers with Amazon
     /// EFS](https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html).
-    pub fn updateLocationEfs(self: *Self, allocator: std.mem.Allocator, input: update_location_efs.UpdateLocationEfsInput, options: update_location_efs.Options) !update_location_efs.UpdateLocationEfsOutput {
+    pub fn updateLocationEfs(self: *Self, allocator: std.mem.Allocator, input: update_location_efs.UpdateLocationEfsInput, options: CallOptions) !update_location_efs.UpdateLocationEfsOutput {
         return update_location_efs.execute(self, allocator, input, options);
     }
 
@@ -498,7 +499,7 @@ pub const Client = struct {
     /// For more information, see [Configuring DataSync
     /// transfers with FSx for
     /// Lustre](https://docs.aws.amazon.com/datasync/latest/userguide/create-lustre-location.html).
-    pub fn updateLocationFsxLustre(self: *Self, allocator: std.mem.Allocator, input: update_location_fsx_lustre.UpdateLocationFsxLustreInput, options: update_location_fsx_lustre.Options) !update_location_fsx_lustre.UpdateLocationFsxLustreOutput {
+    pub fn updateLocationFsxLustre(self: *Self, allocator: std.mem.Allocator, input: update_location_fsx_lustre.UpdateLocationFsxLustreInput, options: CallOptions) !update_location_fsx_lustre.UpdateLocationFsxLustreOutput {
         return update_location_fsx_lustre.execute(self, allocator, input, options);
     }
 
@@ -509,7 +510,7 @@ pub const Client = struct {
     /// For more information, see [Configuring DataSync
     /// transfers with FSx for
     /// ONTAP](https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html).
-    pub fn updateLocationFsxOntap(self: *Self, allocator: std.mem.Allocator, input: update_location_fsx_ontap.UpdateLocationFsxOntapInput, options: update_location_fsx_ontap.Options) !update_location_fsx_ontap.UpdateLocationFsxOntapOutput {
+    pub fn updateLocationFsxOntap(self: *Self, allocator: std.mem.Allocator, input: update_location_fsx_ontap.UpdateLocationFsxOntapInput, options: CallOptions) !update_location_fsx_ontap.UpdateLocationFsxOntapOutput {
         return update_location_fsx_ontap.execute(self, allocator, input, options);
     }
 
@@ -523,7 +524,7 @@ pub const Client = struct {
     ///
     /// Request parameters related to `SMB` aren't supported with the
     /// `UpdateLocationFsxOpenZfs` operation.
-    pub fn updateLocationFsxOpenZfs(self: *Self, allocator: std.mem.Allocator, input: update_location_fsx_open_zfs.UpdateLocationFsxOpenZfsInput, options: update_location_fsx_open_zfs.Options) !update_location_fsx_open_zfs.UpdateLocationFsxOpenZfsOutput {
+    pub fn updateLocationFsxOpenZfs(self: *Self, allocator: std.mem.Allocator, input: update_location_fsx_open_zfs.UpdateLocationFsxOpenZfsInput, options: CallOptions) !update_location_fsx_open_zfs.UpdateLocationFsxOpenZfsOutput {
         return update_location_fsx_open_zfs.execute(self, allocator, input, options);
     }
 
@@ -534,7 +535,7 @@ pub const Client = struct {
     /// For more information, see [Configuring DataSync
     /// transfers with FSx for Windows File
     /// Server](https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html).
-    pub fn updateLocationFsxWindows(self: *Self, allocator: std.mem.Allocator, input: update_location_fsx_windows.UpdateLocationFsxWindowsInput, options: update_location_fsx_windows.Options) !update_location_fsx_windows.UpdateLocationFsxWindowsOutput {
+    pub fn updateLocationFsxWindows(self: *Self, allocator: std.mem.Allocator, input: update_location_fsx_windows.UpdateLocationFsxWindowsInput, options: CallOptions) !update_location_fsx_windows.UpdateLocationFsxWindowsOutput {
         return update_location_fsx_windows.execute(self, allocator, input, options);
     }
 
@@ -545,7 +546,7 @@ pub const Client = struct {
     /// For more information, see [Configuring DataSync
     /// transfers with an HDFS
     /// cluster](https://docs.aws.amazon.com/datasync/latest/userguide/create-hdfs-location.html).
-    pub fn updateLocationHdfs(self: *Self, allocator: std.mem.Allocator, input: update_location_hdfs.UpdateLocationHdfsInput, options: update_location_hdfs.Options) !update_location_hdfs.UpdateLocationHdfsOutput {
+    pub fn updateLocationHdfs(self: *Self, allocator: std.mem.Allocator, input: update_location_hdfs.UpdateLocationHdfsInput, options: CallOptions) !update_location_hdfs.UpdateLocationHdfsOutput {
         return update_location_hdfs.execute(self, allocator, input, options);
     }
 
@@ -556,7 +557,7 @@ pub const Client = struct {
     /// For more information, see [Configuring transfers with an NFS
     /// file
     /// server](https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html).
-    pub fn updateLocationNfs(self: *Self, allocator: std.mem.Allocator, input: update_location_nfs.UpdateLocationNfsInput, options: update_location_nfs.Options) !update_location_nfs.UpdateLocationNfsOutput {
+    pub fn updateLocationNfs(self: *Self, allocator: std.mem.Allocator, input: update_location_nfs.UpdateLocationNfsInput, options: CallOptions) !update_location_nfs.UpdateLocationNfsOutput {
         return update_location_nfs.execute(self, allocator, input, options);
     }
 
@@ -567,7 +568,7 @@ pub const Client = struct {
     /// For more information, see [Configuring DataSync
     /// transfers with an object storage
     /// system](https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html).
-    pub fn updateLocationObjectStorage(self: *Self, allocator: std.mem.Allocator, input: update_location_object_storage.UpdateLocationObjectStorageInput, options: update_location_object_storage.Options) !update_location_object_storage.UpdateLocationObjectStorageOutput {
+    pub fn updateLocationObjectStorage(self: *Self, allocator: std.mem.Allocator, input: update_location_object_storage.UpdateLocationObjectStorageInput, options: CallOptions) !update_location_object_storage.UpdateLocationObjectStorageOutput {
         return update_location_object_storage.execute(self, allocator, input, options);
     }
 
@@ -583,7 +584,7 @@ pub const Client = struct {
     ///
     /// * [Evaluating S3 request costs when using
     ///   DataSync](https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests)
-    pub fn updateLocationS3(self: *Self, allocator: std.mem.Allocator, input: update_location_s3.UpdateLocationS3Input, options: update_location_s3.Options) !update_location_s3.UpdateLocationS3Output {
+    pub fn updateLocationS3(self: *Self, allocator: std.mem.Allocator, input: update_location_s3.UpdateLocationS3Input, options: CallOptions) !update_location_s3.UpdateLocationS3Output {
         return update_location_s3.execute(self, allocator, input, options);
     }
 
@@ -594,13 +595,13 @@ pub const Client = struct {
     /// For more information, see [Configuring DataSync
     /// transfers with an SMB file
     /// server](https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html).
-    pub fn updateLocationSmb(self: *Self, allocator: std.mem.Allocator, input: update_location_smb.UpdateLocationSmbInput, options: update_location_smb.Options) !update_location_smb.UpdateLocationSmbOutput {
+    pub fn updateLocationSmb(self: *Self, allocator: std.mem.Allocator, input: update_location_smb.UpdateLocationSmbInput, options: CallOptions) !update_location_smb.UpdateLocationSmbOutput {
         return update_location_smb.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration of a *task*, which defines where and how
     /// DataSync transfers your data.
-    pub fn updateTask(self: *Self, allocator: std.mem.Allocator, input: update_task.UpdateTaskInput, options: update_task.Options) !update_task.UpdateTaskOutput {
+    pub fn updateTask(self: *Self, allocator: std.mem.Allocator, input: update_task.UpdateTaskInput, options: CallOptions) !update_task.UpdateTaskOutput {
         return update_task.execute(self, allocator, input, options);
     }
 
@@ -611,7 +612,7 @@ pub const Client = struct {
     /// [BytesPerSecond](https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond)
     /// `, which throttles bandwidth for a running or queued task
     /// execution.
-    pub fn updateTaskExecution(self: *Self, allocator: std.mem.Allocator, input: update_task_execution.UpdateTaskExecutionInput, options: update_task_execution.Options) !update_task_execution.UpdateTaskExecutionOutput {
+    pub fn updateTaskExecution(self: *Self, allocator: std.mem.Allocator, input: update_task_execution.UpdateTaskExecutionInput, options: CallOptions) !update_task_execution.UpdateTaskExecutionOutput {
         return update_task_execution.execute(self, allocator, input, options);
     }
 

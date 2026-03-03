@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const KnowledgeBaseData = @import("knowledge_base_data.zig").KnowledgeBaseData;
 
@@ -30,11 +31,7 @@ pub const UpdateKnowledgeBaseTemplateUriOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateKnowledgeBaseTemplateUriInput, options: Options) !UpdateKnowledgeBaseTemplateUriOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateKnowledgeBaseTemplateUriInput, options: CallOptions) !UpdateKnowledgeBaseTemplateUriOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

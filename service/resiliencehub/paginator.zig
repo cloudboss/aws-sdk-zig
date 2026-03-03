@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_alarm_recommendations = @import("list_alarm_recommendations.zig");
@@ -33,7 +34,7 @@ pub const ListAlarmRecommendationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_alarm_recommendations.Options) !list_alarm_recommendations.ListAlarmRecommendationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_alarm_recommendations.ListAlarmRecommendationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -74,7 +75,7 @@ pub const ListAppAssessmentComplianceDriftsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_assessment_compliance_drifts.Options) !list_app_assessment_compliance_drifts.ListAppAssessmentComplianceDriftsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_assessment_compliance_drifts.ListAppAssessmentComplianceDriftsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -115,7 +116,7 @@ pub const ListAppAssessmentResourceDriftsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_assessment_resource_drifts.Options) !list_app_assessment_resource_drifts.ListAppAssessmentResourceDriftsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_assessment_resource_drifts.ListAppAssessmentResourceDriftsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -156,7 +157,7 @@ pub const ListAppAssessmentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_assessments.Options) !list_app_assessments.ListAppAssessmentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_assessments.ListAppAssessmentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -197,7 +198,7 @@ pub const ListAppComponentCompliancesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_component_compliances.Options) !list_app_component_compliances.ListAppComponentCompliancesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_component_compliances.ListAppComponentCompliancesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -238,7 +239,7 @@ pub const ListAppComponentRecommendationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_component_recommendations.Options) !list_app_component_recommendations.ListAppComponentRecommendationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_component_recommendations.ListAppComponentRecommendationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -279,7 +280,7 @@ pub const ListAppInputSourcesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_input_sources.Options) !list_app_input_sources.ListAppInputSourcesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_input_sources.ListAppInputSourcesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -320,7 +321,7 @@ pub const ListAppVersionAppComponentsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_version_app_components.Options) !list_app_version_app_components.ListAppVersionAppComponentsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_version_app_components.ListAppVersionAppComponentsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -361,7 +362,7 @@ pub const ListAppVersionResourceMappingsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_version_resource_mappings.Options) !list_app_version_resource_mappings.ListAppVersionResourceMappingsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_version_resource_mappings.ListAppVersionResourceMappingsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -402,7 +403,7 @@ pub const ListAppVersionResourcesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_version_resources.Options) !list_app_version_resources.ListAppVersionResourcesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_version_resources.ListAppVersionResourcesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -443,7 +444,7 @@ pub const ListAppVersionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_versions.Options) !list_app_versions.ListAppVersionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_versions.ListAppVersionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -484,7 +485,7 @@ pub const ListAppsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_apps.Options) !list_apps.ListAppsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_apps.ListAppsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -525,7 +526,7 @@ pub const ListMetricsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_metrics.Options) !list_metrics.ListMetricsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_metrics.ListMetricsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -566,7 +567,7 @@ pub const ListRecommendationTemplatesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_recommendation_templates.Options) !list_recommendation_templates.ListRecommendationTemplatesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_recommendation_templates.ListRecommendationTemplatesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -607,7 +608,7 @@ pub const ListResiliencyPoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resiliency_policies.Options) !list_resiliency_policies.ListResiliencyPoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resiliency_policies.ListResiliencyPoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -648,7 +649,7 @@ pub const ListResourceGroupingRecommendationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_resource_grouping_recommendations.Options) !list_resource_grouping_recommendations.ListResourceGroupingRecommendationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_resource_grouping_recommendations.ListResourceGroupingRecommendationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -689,7 +690,7 @@ pub const ListSopRecommendationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_sop_recommendations.Options) !list_sop_recommendations.ListSopRecommendationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_sop_recommendations.ListSopRecommendationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -730,7 +731,7 @@ pub const ListSuggestedResiliencyPoliciesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_suggested_resiliency_policies.Options) !list_suggested_resiliency_policies.ListSuggestedResiliencyPoliciesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_suggested_resiliency_policies.ListSuggestedResiliencyPoliciesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -771,7 +772,7 @@ pub const ListTestRecommendationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_test_recommendations.Options) !list_test_recommendations.ListTestRecommendationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_test_recommendations.ListTestRecommendationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -812,7 +813,7 @@ pub const ListUnsupportedAppVersionResourcesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_unsupported_app_version_resources.Options) !list_unsupported_app_version_resources.ListUnsupportedAppVersionResourcesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_unsupported_app_version_resources.ListUnsupportedAppVersionResourcesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

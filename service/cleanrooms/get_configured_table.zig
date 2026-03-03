@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConfiguredTable = @import("configured_table.zig").ConfiguredTable;
 
@@ -23,11 +24,7 @@ pub const GetConfiguredTableOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetConfiguredTableInput, options: Options) !GetConfiguredTableOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetConfiguredTableInput, options: CallOptions) !GetConfiguredTableOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

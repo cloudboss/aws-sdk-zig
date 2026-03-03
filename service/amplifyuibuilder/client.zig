@@ -29,6 +29,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_component = @import("update_component.zig");
 const update_form = @import("update_form.zig");
 const update_theme = @import("update_theme.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -60,116 +61,116 @@ pub const Client = struct {
     }
 
     /// Creates a new component for an Amplify app.
-    pub fn createComponent(self: *Self, allocator: std.mem.Allocator, input: create_component.CreateComponentInput, options: create_component.Options) !create_component.CreateComponentOutput {
+    pub fn createComponent(self: *Self, allocator: std.mem.Allocator, input: create_component.CreateComponentInput, options: CallOptions) !create_component.CreateComponentOutput {
         return create_component.execute(self, allocator, input, options);
     }
 
     /// Creates a new form for an Amplify app.
-    pub fn createForm(self: *Self, allocator: std.mem.Allocator, input: create_form.CreateFormInput, options: create_form.Options) !create_form.CreateFormOutput {
+    pub fn createForm(self: *Self, allocator: std.mem.Allocator, input: create_form.CreateFormInput, options: CallOptions) !create_form.CreateFormOutput {
         return create_form.execute(self, allocator, input, options);
     }
 
     /// Creates a theme to apply to the components in an Amplify app.
-    pub fn createTheme(self: *Self, allocator: std.mem.Allocator, input: create_theme.CreateThemeInput, options: create_theme.Options) !create_theme.CreateThemeOutput {
+    pub fn createTheme(self: *Self, allocator: std.mem.Allocator, input: create_theme.CreateThemeInput, options: CallOptions) !create_theme.CreateThemeOutput {
         return create_theme.execute(self, allocator, input, options);
     }
 
     /// Deletes a component from an Amplify app.
-    pub fn deleteComponent(self: *Self, allocator: std.mem.Allocator, input: delete_component.DeleteComponentInput, options: delete_component.Options) !delete_component.DeleteComponentOutput {
+    pub fn deleteComponent(self: *Self, allocator: std.mem.Allocator, input: delete_component.DeleteComponentInput, options: CallOptions) !delete_component.DeleteComponentOutput {
         return delete_component.execute(self, allocator, input, options);
     }
 
     /// Deletes a form from an Amplify app.
-    pub fn deleteForm(self: *Self, allocator: std.mem.Allocator, input: delete_form.DeleteFormInput, options: delete_form.Options) !delete_form.DeleteFormOutput {
+    pub fn deleteForm(self: *Self, allocator: std.mem.Allocator, input: delete_form.DeleteFormInput, options: CallOptions) !delete_form.DeleteFormOutput {
         return delete_form.execute(self, allocator, input, options);
     }
 
     /// Deletes a theme from an Amplify app.
-    pub fn deleteTheme(self: *Self, allocator: std.mem.Allocator, input: delete_theme.DeleteThemeInput, options: delete_theme.Options) !delete_theme.DeleteThemeOutput {
+    pub fn deleteTheme(self: *Self, allocator: std.mem.Allocator, input: delete_theme.DeleteThemeInput, options: CallOptions) !delete_theme.DeleteThemeOutput {
         return delete_theme.execute(self, allocator, input, options);
     }
 
     /// This is for internal use.
     ///
     /// Amplify uses this action to exchange an access code for a token.
-    pub fn exchangeCodeForToken(self: *Self, allocator: std.mem.Allocator, input: exchange_code_for_token.ExchangeCodeForTokenInput, options: exchange_code_for_token.Options) !exchange_code_for_token.ExchangeCodeForTokenOutput {
+    pub fn exchangeCodeForToken(self: *Self, allocator: std.mem.Allocator, input: exchange_code_for_token.ExchangeCodeForTokenInput, options: CallOptions) !exchange_code_for_token.ExchangeCodeForTokenOutput {
         return exchange_code_for_token.execute(self, allocator, input, options);
     }
 
     /// Exports component configurations to code that is ready to integrate into an
     /// Amplify app.
-    pub fn exportComponents(self: *Self, allocator: std.mem.Allocator, input: export_components.ExportComponentsInput, options: export_components.Options) !export_components.ExportComponentsOutput {
+    pub fn exportComponents(self: *Self, allocator: std.mem.Allocator, input: export_components.ExportComponentsInput, options: CallOptions) !export_components.ExportComponentsOutput {
         return export_components.execute(self, allocator, input, options);
     }
 
     /// Exports form configurations to code that is ready to integrate into an
     /// Amplify app.
-    pub fn exportForms(self: *Self, allocator: std.mem.Allocator, input: export_forms.ExportFormsInput, options: export_forms.Options) !export_forms.ExportFormsOutput {
+    pub fn exportForms(self: *Self, allocator: std.mem.Allocator, input: export_forms.ExportFormsInput, options: CallOptions) !export_forms.ExportFormsOutput {
         return export_forms.execute(self, allocator, input, options);
     }
 
     /// Exports theme configurations to code that is ready to integrate into an
     /// Amplify app.
-    pub fn exportThemes(self: *Self, allocator: std.mem.Allocator, input: export_themes.ExportThemesInput, options: export_themes.Options) !export_themes.ExportThemesOutput {
+    pub fn exportThemes(self: *Self, allocator: std.mem.Allocator, input: export_themes.ExportThemesInput, options: CallOptions) !export_themes.ExportThemesOutput {
         return export_themes.execute(self, allocator, input, options);
     }
 
     /// Returns an existing code generation job.
-    pub fn getCodegenJob(self: *Self, allocator: std.mem.Allocator, input: get_codegen_job.GetCodegenJobInput, options: get_codegen_job.Options) !get_codegen_job.GetCodegenJobOutput {
+    pub fn getCodegenJob(self: *Self, allocator: std.mem.Allocator, input: get_codegen_job.GetCodegenJobInput, options: CallOptions) !get_codegen_job.GetCodegenJobOutput {
         return get_codegen_job.execute(self, allocator, input, options);
     }
 
     /// Returns an existing component for an Amplify app.
-    pub fn getComponent(self: *Self, allocator: std.mem.Allocator, input: get_component.GetComponentInput, options: get_component.Options) !get_component.GetComponentOutput {
+    pub fn getComponent(self: *Self, allocator: std.mem.Allocator, input: get_component.GetComponentInput, options: CallOptions) !get_component.GetComponentOutput {
         return get_component.execute(self, allocator, input, options);
     }
 
     /// Returns an existing form for an Amplify app.
-    pub fn getForm(self: *Self, allocator: std.mem.Allocator, input: get_form.GetFormInput, options: get_form.Options) !get_form.GetFormOutput {
+    pub fn getForm(self: *Self, allocator: std.mem.Allocator, input: get_form.GetFormInput, options: CallOptions) !get_form.GetFormOutput {
         return get_form.execute(self, allocator, input, options);
     }
 
     /// Returns existing metadata for an Amplify app.
-    pub fn getMetadata(self: *Self, allocator: std.mem.Allocator, input: get_metadata.GetMetadataInput, options: get_metadata.Options) !get_metadata.GetMetadataOutput {
+    pub fn getMetadata(self: *Self, allocator: std.mem.Allocator, input: get_metadata.GetMetadataInput, options: CallOptions) !get_metadata.GetMetadataOutput {
         return get_metadata.execute(self, allocator, input, options);
     }
 
     /// Returns an existing theme for an Amplify app.
-    pub fn getTheme(self: *Self, allocator: std.mem.Allocator, input: get_theme.GetThemeInput, options: get_theme.Options) !get_theme.GetThemeOutput {
+    pub fn getTheme(self: *Self, allocator: std.mem.Allocator, input: get_theme.GetThemeInput, options: CallOptions) !get_theme.GetThemeOutput {
         return get_theme.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of code generation jobs for a specified Amplify app and
     /// backend environment.
-    pub fn listCodegenJobs(self: *Self, allocator: std.mem.Allocator, input: list_codegen_jobs.ListCodegenJobsInput, options: list_codegen_jobs.Options) !list_codegen_jobs.ListCodegenJobsOutput {
+    pub fn listCodegenJobs(self: *Self, allocator: std.mem.Allocator, input: list_codegen_jobs.ListCodegenJobsInput, options: CallOptions) !list_codegen_jobs.ListCodegenJobsOutput {
         return list_codegen_jobs.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of components for a specified Amplify app and backend
     /// environment.
-    pub fn listComponents(self: *Self, allocator: std.mem.Allocator, input: list_components.ListComponentsInput, options: list_components.Options) !list_components.ListComponentsOutput {
+    pub fn listComponents(self: *Self, allocator: std.mem.Allocator, input: list_components.ListComponentsInput, options: CallOptions) !list_components.ListComponentsOutput {
         return list_components.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of forms for a specified Amplify app and backend
     /// environment.
-    pub fn listForms(self: *Self, allocator: std.mem.Allocator, input: list_forms.ListFormsInput, options: list_forms.Options) !list_forms.ListFormsOutput {
+    pub fn listForms(self: *Self, allocator: std.mem.Allocator, input: list_forms.ListFormsInput, options: CallOptions) !list_forms.ListFormsOutput {
         return list_forms.execute(self, allocator, input, options);
     }
 
     /// Returns a list of tags for a specified Amazon Resource Name (ARN).
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of themes for a specified Amplify app and backend
     /// environment.
-    pub fn listThemes(self: *Self, allocator: std.mem.Allocator, input: list_themes.ListThemesInput, options: list_themes.Options) !list_themes.ListThemesOutput {
+    pub fn listThemes(self: *Self, allocator: std.mem.Allocator, input: list_themes.ListThemesInput, options: CallOptions) !list_themes.ListThemesOutput {
         return list_themes.execute(self, allocator, input, options);
     }
 
     /// Stores the metadata information about a feature on a form.
-    pub fn putMetadataFlag(self: *Self, allocator: std.mem.Allocator, input: put_metadata_flag.PutMetadataFlagInput, options: put_metadata_flag.Options) !put_metadata_flag.PutMetadataFlagOutput {
+    pub fn putMetadataFlag(self: *Self, allocator: std.mem.Allocator, input: put_metadata_flag.PutMetadataFlagInput, options: CallOptions) !put_metadata_flag.PutMetadataFlagOutput {
         return put_metadata_flag.execute(self, allocator, input, options);
     }
 
@@ -177,38 +178,38 @@ pub const Client = struct {
     ///
     /// Amplify uses this action to refresh a previously issued access token that
     /// might have expired.
-    pub fn refreshToken(self: *Self, allocator: std.mem.Allocator, input: refresh_token.RefreshTokenInput, options: refresh_token.Options) !refresh_token.RefreshTokenOutput {
+    pub fn refreshToken(self: *Self, allocator: std.mem.Allocator, input: refresh_token.RefreshTokenInput, options: CallOptions) !refresh_token.RefreshTokenOutput {
         return refresh_token.execute(self, allocator, input, options);
     }
 
     /// Starts a code generation job for a specified Amplify app and backend
     /// environment.
-    pub fn startCodegenJob(self: *Self, allocator: std.mem.Allocator, input: start_codegen_job.StartCodegenJobInput, options: start_codegen_job.Options) !start_codegen_job.StartCodegenJobOutput {
+    pub fn startCodegenJob(self: *Self, allocator: std.mem.Allocator, input: start_codegen_job.StartCodegenJobInput, options: CallOptions) !start_codegen_job.StartCodegenJobOutput {
         return start_codegen_job.execute(self, allocator, input, options);
     }
 
     /// Tags the resource with a tag key and value.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Untags a resource with a specified Amazon Resource Name (ARN).
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an existing component.
-    pub fn updateComponent(self: *Self, allocator: std.mem.Allocator, input: update_component.UpdateComponentInput, options: update_component.Options) !update_component.UpdateComponentOutput {
+    pub fn updateComponent(self: *Self, allocator: std.mem.Allocator, input: update_component.UpdateComponentInput, options: CallOptions) !update_component.UpdateComponentOutput {
         return update_component.execute(self, allocator, input, options);
     }
 
     /// Updates an existing form.
-    pub fn updateForm(self: *Self, allocator: std.mem.Allocator, input: update_form.UpdateFormInput, options: update_form.Options) !update_form.UpdateFormOutput {
+    pub fn updateForm(self: *Self, allocator: std.mem.Allocator, input: update_form.UpdateFormInput, options: CallOptions) !update_form.UpdateFormOutput {
         return update_form.execute(self, allocator, input, options);
     }
 
     /// Updates an existing theme.
-    pub fn updateTheme(self: *Self, allocator: std.mem.Allocator, input: update_theme.UpdateThemeInput, options: update_theme.Options) !update_theme.UpdateThemeOutput {
+    pub fn updateTheme(self: *Self, allocator: std.mem.Allocator, input: update_theme.UpdateThemeInput, options: CallOptions) !update_theme.UpdateThemeOutput {
         return update_theme.execute(self, allocator, input, options);
     }
 

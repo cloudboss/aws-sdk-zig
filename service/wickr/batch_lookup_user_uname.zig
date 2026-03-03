@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchUnameErrorResponseItem = @import("batch_uname_error_response_item.zig").BatchUnameErrorResponseItem;
 const BatchUnameSuccessResponseItem = @import("batch_uname_success_response_item.zig").BatchUnameSuccessResponseItem;
@@ -43,11 +44,7 @@ pub const BatchLookupUserUnameOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchLookupUserUnameInput, options: Options) !BatchLookupUserUnameOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchLookupUserUnameInput, options: CallOptions) !BatchLookupUserUnameOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

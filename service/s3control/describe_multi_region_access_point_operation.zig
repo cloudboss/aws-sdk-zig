@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AsyncOperation = @import("async_operation.zig").AsyncOperation;
 const serde = @import("serde.zig");
@@ -24,11 +25,7 @@ pub const DescribeMultiRegionAccessPointOperationOutput = struct {
     async_operation: ?AsyncOperation = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeMultiRegionAccessPointOperationInput, options: Options) !DescribeMultiRegionAccessPointOperationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeMultiRegionAccessPointOperationInput, options: CallOptions) !DescribeMultiRegionAccessPointOperationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

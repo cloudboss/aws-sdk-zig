@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CognitoStreams = @import("cognito_streams.zig").CognitoStreams;
 const PushSync = @import("push_sync.zig").PushSync;
@@ -37,11 +38,7 @@ pub const GetIdentityPoolConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetIdentityPoolConfigurationInput, options: Options) !GetIdentityPoolConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetIdentityPoolConfigurationInput, options: CallOptions) !GetIdentityPoolConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

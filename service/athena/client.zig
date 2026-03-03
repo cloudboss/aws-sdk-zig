@@ -71,6 +71,7 @@ const update_notebook = @import("update_notebook.zig");
 const update_notebook_metadata = @import("update_notebook_metadata.zig");
 const update_prepared_statement = @import("update_prepared_statement.zig");
 const update_work_group = @import("update_work_group.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -114,7 +115,7 @@ pub const Client = struct {
     /// queries. Use BatchGetQueryExecutionInput to get details about each
     /// unique query execution, and ListQueryExecutionsInput to get a list of
     /// query execution IDs.
-    pub fn batchGetNamedQuery(self: *Self, allocator: std.mem.Allocator, input: batch_get_named_query.BatchGetNamedQueryInput, options: batch_get_named_query.Options) !batch_get_named_query.BatchGetNamedQueryOutput {
+    pub fn batchGetNamedQuery(self: *Self, allocator: std.mem.Allocator, input: batch_get_named_query.BatchGetNamedQueryInput, options: CallOptions) !batch_get_named_query.BatchGetNamedQueryOutput {
         return batch_get_named_query.execute(self, allocator, input, options);
     }
 
@@ -127,7 +128,7 @@ pub const Client = struct {
     /// statement cannot be retrieved for the name specified, the statement is
     /// listed in
     /// `UnprocessedPreparedStatementNames`.
-    pub fn batchGetPreparedStatement(self: *Self, allocator: std.mem.Allocator, input: batch_get_prepared_statement.BatchGetPreparedStatementInput, options: batch_get_prepared_statement.Options) !batch_get_prepared_statement.BatchGetPreparedStatementOutput {
+    pub fn batchGetPreparedStatement(self: *Self, allocator: std.mem.Allocator, input: batch_get_prepared_statement.BatchGetPreparedStatementInput, options: CallOptions) !batch_get_prepared_statement.BatchGetPreparedStatementOutput {
         return batch_get_prepared_statement.execute(self, allocator, input, options);
     }
 
@@ -139,7 +140,7 @@ pub const Client = struct {
     /// IDs, use ListQueryExecutionsInput$WorkGroup. Query executions differ
     /// from named (saved) queries. Use BatchGetNamedQueryInput to get details
     /// about named queries.
-    pub fn batchGetQueryExecution(self: *Self, allocator: std.mem.Allocator, input: batch_get_query_execution.BatchGetQueryExecutionInput, options: batch_get_query_execution.Options) !batch_get_query_execution.BatchGetQueryExecutionOutput {
+    pub fn batchGetQueryExecution(self: *Self, allocator: std.mem.Allocator, input: batch_get_query_execution.BatchGetQueryExecutionInput, options: CallOptions) !batch_get_query_execution.BatchGetQueryExecutionOutput {
         return batch_get_query_execution.execute(self, allocator, input, options);
     }
 
@@ -150,14 +151,14 @@ pub const Client = struct {
     /// days, you cannot re-purpose or reuse a reservation that has been cancelled,
     /// but you can
     /// refer to its tags and view it for historical reference.
-    pub fn cancelCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: cancel_capacity_reservation.CancelCapacityReservationInput, options: cancel_capacity_reservation.Options) !cancel_capacity_reservation.CancelCapacityReservationOutput {
+    pub fn cancelCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: cancel_capacity_reservation.CancelCapacityReservationInput, options: CallOptions) !cancel_capacity_reservation.CancelCapacityReservationOutput {
         return cancel_capacity_reservation.execute(self, allocator, input, options);
     }
 
     /// Creates a capacity reservation with the specified name and number of
     /// requested data
     /// processing units.
-    pub fn createCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: create_capacity_reservation.CreateCapacityReservationInput, options: create_capacity_reservation.Options) !create_capacity_reservation.CreateCapacityReservationOutput {
+    pub fn createCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: create_capacity_reservation.CreateCapacityReservationInput, options: CallOptions) !create_capacity_reservation.CreateCapacityReservationOutput {
         return create_capacity_reservation.execute(self, allocator, input, options);
     }
 
@@ -179,14 +180,14 @@ pub const Client = struct {
     /// * Glue Connection Name with a maximum length of 255 characters and a prefix
     /// `athenafederatedcatalog_CATALOG_NAME_SANITIZED` with length 23
     /// characters.
-    pub fn createDataCatalog(self: *Self, allocator: std.mem.Allocator, input: create_data_catalog.CreateDataCatalogInput, options: create_data_catalog.Options) !create_data_catalog.CreateDataCatalogOutput {
+    pub fn createDataCatalog(self: *Self, allocator: std.mem.Allocator, input: create_data_catalog.CreateDataCatalogInput, options: CallOptions) !create_data_catalog.CreateDataCatalogOutput {
         return create_data_catalog.execute(self, allocator, input, options);
     }
 
     /// Creates a named query in the specified workgroup. Requires that you have
     /// access to the
     /// workgroup.
-    pub fn createNamedQuery(self: *Self, allocator: std.mem.Allocator, input: create_named_query.CreateNamedQueryInput, options: create_named_query.Options) !create_named_query.CreateNamedQueryOutput {
+    pub fn createNamedQuery(self: *Self, allocator: std.mem.Allocator, input: create_named_query.CreateNamedQueryInput, options: CallOptions) !create_named_query.CreateNamedQueryOutput {
         return create_named_query.execute(self, allocator, input, options);
     }
 
@@ -194,12 +195,12 @@ pub const Client = struct {
     /// workgroup. Throws an error if a file in the workgroup with the same name
     /// already
     /// exists.
-    pub fn createNotebook(self: *Self, allocator: std.mem.Allocator, input: create_notebook.CreateNotebookInput, options: create_notebook.Options) !create_notebook.CreateNotebookOutput {
+    pub fn createNotebook(self: *Self, allocator: std.mem.Allocator, input: create_notebook.CreateNotebookInput, options: CallOptions) !create_notebook.CreateNotebookOutput {
         return create_notebook.execute(self, allocator, input, options);
     }
 
     /// Creates a prepared statement for use with SQL queries in Athena.
-    pub fn createPreparedStatement(self: *Self, allocator: std.mem.Allocator, input: create_prepared_statement.CreatePreparedStatementInput, options: create_prepared_statement.Options) !create_prepared_statement.CreatePreparedStatementOutput {
+    pub fn createPreparedStatement(self: *Self, allocator: std.mem.Allocator, input: create_prepared_statement.CreatePreparedStatementInput, options: CallOptions) !create_prepared_statement.CreatePreparedStatementOutput {
         return create_prepared_statement.execute(self, allocator, input, options);
     }
 
@@ -211,14 +212,14 @@ pub const Client = struct {
     /// access, see [Grant
     /// programmatic
     /// access](https://docs.aws.amazon.com/athena/latest/ug/setting-up.html#setting-up-grant-programmatic-access).
-    pub fn createPresignedNotebookUrl(self: *Self, allocator: std.mem.Allocator, input: create_presigned_notebook_url.CreatePresignedNotebookUrlInput, options: create_presigned_notebook_url.Options) !create_presigned_notebook_url.CreatePresignedNotebookUrlOutput {
+    pub fn createPresignedNotebookUrl(self: *Self, allocator: std.mem.Allocator, input: create_presigned_notebook_url.CreatePresignedNotebookUrlInput, options: CallOptions) !create_presigned_notebook_url.CreatePresignedNotebookUrlOutput {
         return create_presigned_notebook_url.execute(self, allocator, input, options);
     }
 
     /// Creates a workgroup with the specified name. A workgroup can be an Apache
     /// Spark
     /// enabled workgroup or an Athena SQL workgroup.
-    pub fn createWorkGroup(self: *Self, allocator: std.mem.Allocator, input: create_work_group.CreateWorkGroupInput, options: create_work_group.Options) !create_work_group.CreateWorkGroupOutput {
+    pub fn createWorkGroup(self: *Self, allocator: std.mem.Allocator, input: create_work_group.CreateWorkGroupInput, options: CallOptions) !create_work_group.CreateWorkGroupOutput {
         return create_work_group.execute(self, allocator, input, options);
     }
 
@@ -230,97 +231,97 @@ pub const Client = struct {
     /// be called by
     /// `GetCapacityReservation`, and deleted reservations do not appear in the
     /// output of `ListCapacityReservations`.
-    pub fn deleteCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: delete_capacity_reservation.DeleteCapacityReservationInput, options: delete_capacity_reservation.Options) !delete_capacity_reservation.DeleteCapacityReservationOutput {
+    pub fn deleteCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: delete_capacity_reservation.DeleteCapacityReservationInput, options: CallOptions) !delete_capacity_reservation.DeleteCapacityReservationOutput {
         return delete_capacity_reservation.execute(self, allocator, input, options);
     }
 
     /// Deletes a data catalog.
-    pub fn deleteDataCatalog(self: *Self, allocator: std.mem.Allocator, input: delete_data_catalog.DeleteDataCatalogInput, options: delete_data_catalog.Options) !delete_data_catalog.DeleteDataCatalogOutput {
+    pub fn deleteDataCatalog(self: *Self, allocator: std.mem.Allocator, input: delete_data_catalog.DeleteDataCatalogInput, options: CallOptions) !delete_data_catalog.DeleteDataCatalogOutput {
         return delete_data_catalog.execute(self, allocator, input, options);
     }
 
     /// Deletes the named query if you have access to the workgroup in which the
     /// query was
     /// saved.
-    pub fn deleteNamedQuery(self: *Self, allocator: std.mem.Allocator, input: delete_named_query.DeleteNamedQueryInput, options: delete_named_query.Options) !delete_named_query.DeleteNamedQueryOutput {
+    pub fn deleteNamedQuery(self: *Self, allocator: std.mem.Allocator, input: delete_named_query.DeleteNamedQueryInput, options: CallOptions) !delete_named_query.DeleteNamedQueryOutput {
         return delete_named_query.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified notebook.
-    pub fn deleteNotebook(self: *Self, allocator: std.mem.Allocator, input: delete_notebook.DeleteNotebookInput, options: delete_notebook.Options) !delete_notebook.DeleteNotebookOutput {
+    pub fn deleteNotebook(self: *Self, allocator: std.mem.Allocator, input: delete_notebook.DeleteNotebookInput, options: CallOptions) !delete_notebook.DeleteNotebookOutput {
         return delete_notebook.execute(self, allocator, input, options);
     }
 
     /// Deletes the prepared statement with the specified name from the specified
     /// workgroup.
-    pub fn deletePreparedStatement(self: *Self, allocator: std.mem.Allocator, input: delete_prepared_statement.DeletePreparedStatementInput, options: delete_prepared_statement.Options) !delete_prepared_statement.DeletePreparedStatementOutput {
+    pub fn deletePreparedStatement(self: *Self, allocator: std.mem.Allocator, input: delete_prepared_statement.DeletePreparedStatementInput, options: CallOptions) !delete_prepared_statement.DeletePreparedStatementOutput {
         return delete_prepared_statement.execute(self, allocator, input, options);
     }
 
     /// Deletes the workgroup with the specified name. The primary workgroup cannot
     /// be
     /// deleted.
-    pub fn deleteWorkGroup(self: *Self, allocator: std.mem.Allocator, input: delete_work_group.DeleteWorkGroupInput, options: delete_work_group.Options) !delete_work_group.DeleteWorkGroupOutput {
+    pub fn deleteWorkGroup(self: *Self, allocator: std.mem.Allocator, input: delete_work_group.DeleteWorkGroupInput, options: CallOptions) !delete_work_group.DeleteWorkGroupOutput {
         return delete_work_group.execute(self, allocator, input, options);
     }
 
     /// Exports the specified notebook and its metadata.
-    pub fn exportNotebook(self: *Self, allocator: std.mem.Allocator, input: export_notebook.ExportNotebookInput, options: export_notebook.Options) !export_notebook.ExportNotebookOutput {
+    pub fn exportNotebook(self: *Self, allocator: std.mem.Allocator, input: export_notebook.ExportNotebookInput, options: CallOptions) !export_notebook.ExportNotebookOutput {
         return export_notebook.execute(self, allocator, input, options);
     }
 
     /// Describes a previously submitted calculation execution.
-    pub fn getCalculationExecution(self: *Self, allocator: std.mem.Allocator, input: get_calculation_execution.GetCalculationExecutionInput, options: get_calculation_execution.Options) !get_calculation_execution.GetCalculationExecutionOutput {
+    pub fn getCalculationExecution(self: *Self, allocator: std.mem.Allocator, input: get_calculation_execution.GetCalculationExecutionInput, options: CallOptions) !get_calculation_execution.GetCalculationExecutionOutput {
         return get_calculation_execution.execute(self, allocator, input, options);
     }
 
     /// Retrieves the unencrypted code that was executed for the calculation.
-    pub fn getCalculationExecutionCode(self: *Self, allocator: std.mem.Allocator, input: get_calculation_execution_code.GetCalculationExecutionCodeInput, options: get_calculation_execution_code.Options) !get_calculation_execution_code.GetCalculationExecutionCodeOutput {
+    pub fn getCalculationExecutionCode(self: *Self, allocator: std.mem.Allocator, input: get_calculation_execution_code.GetCalculationExecutionCodeInput, options: CallOptions) !get_calculation_execution_code.GetCalculationExecutionCodeOutput {
         return get_calculation_execution_code.execute(self, allocator, input, options);
     }
 
     /// Gets the status of a current calculation.
-    pub fn getCalculationExecutionStatus(self: *Self, allocator: std.mem.Allocator, input: get_calculation_execution_status.GetCalculationExecutionStatusInput, options: get_calculation_execution_status.Options) !get_calculation_execution_status.GetCalculationExecutionStatusOutput {
+    pub fn getCalculationExecutionStatus(self: *Self, allocator: std.mem.Allocator, input: get_calculation_execution_status.GetCalculationExecutionStatusInput, options: CallOptions) !get_calculation_execution_status.GetCalculationExecutionStatusOutput {
         return get_calculation_execution_status.execute(self, allocator, input, options);
     }
 
     /// Gets the capacity assignment configuration for a capacity reservation, if
     /// one
     /// exists.
-    pub fn getCapacityAssignmentConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_capacity_assignment_configuration.GetCapacityAssignmentConfigurationInput, options: get_capacity_assignment_configuration.Options) !get_capacity_assignment_configuration.GetCapacityAssignmentConfigurationOutput {
+    pub fn getCapacityAssignmentConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_capacity_assignment_configuration.GetCapacityAssignmentConfigurationInput, options: CallOptions) !get_capacity_assignment_configuration.GetCapacityAssignmentConfigurationOutput {
         return get_capacity_assignment_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns information about the capacity reservation with the specified name.
-    pub fn getCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: get_capacity_reservation.GetCapacityReservationInput, options: get_capacity_reservation.Options) !get_capacity_reservation.GetCapacityReservationOutput {
+    pub fn getCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: get_capacity_reservation.GetCapacityReservationInput, options: CallOptions) !get_capacity_reservation.GetCapacityReservationOutput {
         return get_capacity_reservation.execute(self, allocator, input, options);
     }
 
     /// Returns the specified data catalog.
-    pub fn getDataCatalog(self: *Self, allocator: std.mem.Allocator, input: get_data_catalog.GetDataCatalogInput, options: get_data_catalog.Options) !get_data_catalog.GetDataCatalogOutput {
+    pub fn getDataCatalog(self: *Self, allocator: std.mem.Allocator, input: get_data_catalog.GetDataCatalogInput, options: CallOptions) !get_data_catalog.GetDataCatalogOutput {
         return get_data_catalog.execute(self, allocator, input, options);
     }
 
     /// Returns a database object for the specified database and data catalog.
-    pub fn getDatabase(self: *Self, allocator: std.mem.Allocator, input: get_database.GetDatabaseInput, options: get_database.Options) !get_database.GetDatabaseOutput {
+    pub fn getDatabase(self: *Self, allocator: std.mem.Allocator, input: get_database.GetDatabaseInput, options: CallOptions) !get_database.GetDatabaseOutput {
         return get_database.execute(self, allocator, input, options);
     }
 
     /// Returns information about a single query. Requires that you have access to
     /// the
     /// workgroup in which the query was saved.
-    pub fn getNamedQuery(self: *Self, allocator: std.mem.Allocator, input: get_named_query.GetNamedQueryInput, options: get_named_query.Options) !get_named_query.GetNamedQueryOutput {
+    pub fn getNamedQuery(self: *Self, allocator: std.mem.Allocator, input: get_named_query.GetNamedQueryInput, options: CallOptions) !get_named_query.GetNamedQueryOutput {
         return get_named_query.execute(self, allocator, input, options);
     }
 
     /// Retrieves notebook metadata for the specified notebook ID.
-    pub fn getNotebookMetadata(self: *Self, allocator: std.mem.Allocator, input: get_notebook_metadata.GetNotebookMetadataInput, options: get_notebook_metadata.Options) !get_notebook_metadata.GetNotebookMetadataOutput {
+    pub fn getNotebookMetadata(self: *Self, allocator: std.mem.Allocator, input: get_notebook_metadata.GetNotebookMetadataInput, options: CallOptions) !get_notebook_metadata.GetNotebookMetadataOutput {
         return get_notebook_metadata.execute(self, allocator, input, options);
     }
 
     /// Retrieves the prepared statement with the specified name from the specified
     /// workgroup.
-    pub fn getPreparedStatement(self: *Self, allocator: std.mem.Allocator, input: get_prepared_statement.GetPreparedStatementInput, options: get_prepared_statement.Options) !get_prepared_statement.GetPreparedStatementOutput {
+    pub fn getPreparedStatement(self: *Self, allocator: std.mem.Allocator, input: get_prepared_statement.GetPreparedStatementInput, options: CallOptions) !get_prepared_statement.GetPreparedStatementOutput {
         return get_prepared_statement.execute(self, allocator, input, options);
     }
 
@@ -329,7 +330,7 @@ pub const Client = struct {
     /// workgroup in which the query ran. Each time a query executes, information
     /// about the
     /// query execution is saved with a unique ID.
-    pub fn getQueryExecution(self: *Self, allocator: std.mem.Allocator, input: get_query_execution.GetQueryExecutionInput, options: get_query_execution.Options) !get_query_execution.GetQueryExecutionOutput {
+    pub fn getQueryExecution(self: *Self, allocator: std.mem.Allocator, input: get_query_execution.GetQueryExecutionInput, options: CallOptions) !get_query_execution.GetQueryExecutionOutput {
         return get_query_execution.execute(self, allocator, input, options);
     }
 
@@ -353,7 +354,7 @@ pub const Client = struct {
     /// `GetQueryResults` action is denied. To restrict user or role access,
     /// ensure that Amazon S3 permissions to the Athena query location
     /// are denied.
-    pub fn getQueryResults(self: *Self, allocator: std.mem.Allocator, input: get_query_results.GetQueryResultsInput, options: get_query_results.Options) !get_query_results.GetQueryResultsOutput {
+    pub fn getQueryResults(self: *Self, allocator: std.mem.Allocator, input: get_query_results.GetQueryResultsInput, options: CallOptions) !get_query_results.GetQueryResultsOutput {
         return get_query_results.execute(self, allocator, input, options);
     }
 
@@ -370,39 +371,39 @@ pub const Client = struct {
     /// non-timeline
     /// statistics are also not included when a query has row-level filters defined
     /// in Lake Formation.
-    pub fn getQueryRuntimeStatistics(self: *Self, allocator: std.mem.Allocator, input: get_query_runtime_statistics.GetQueryRuntimeStatisticsInput, options: get_query_runtime_statistics.Options) !get_query_runtime_statistics.GetQueryRuntimeStatisticsOutput {
+    pub fn getQueryRuntimeStatistics(self: *Self, allocator: std.mem.Allocator, input: get_query_runtime_statistics.GetQueryRuntimeStatisticsInput, options: CallOptions) !get_query_runtime_statistics.GetQueryRuntimeStatisticsOutput {
         return get_query_runtime_statistics.execute(self, allocator, input, options);
     }
 
     /// Gets the Live UI/Persistence UI for a session.
-    pub fn getResourceDashboard(self: *Self, allocator: std.mem.Allocator, input: get_resource_dashboard.GetResourceDashboardInput, options: get_resource_dashboard.Options) !get_resource_dashboard.GetResourceDashboardOutput {
+    pub fn getResourceDashboard(self: *Self, allocator: std.mem.Allocator, input: get_resource_dashboard.GetResourceDashboardInput, options: CallOptions) !get_resource_dashboard.GetResourceDashboardOutput {
         return get_resource_dashboard.execute(self, allocator, input, options);
     }
 
     /// Gets the full details of a previously created session, including the session
     /// status
     /// and configuration.
-    pub fn getSession(self: *Self, allocator: std.mem.Allocator, input: get_session.GetSessionInput, options: get_session.Options) !get_session.GetSessionOutput {
+    pub fn getSession(self: *Self, allocator: std.mem.Allocator, input: get_session.GetSessionInput, options: CallOptions) !get_session.GetSessionOutput {
         return get_session.execute(self, allocator, input, options);
     }
 
     /// Gets a connection endpoint and authentication token for a given session Id.
-    pub fn getSessionEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_session_endpoint.GetSessionEndpointInput, options: get_session_endpoint.Options) !get_session_endpoint.GetSessionEndpointOutput {
+    pub fn getSessionEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_session_endpoint.GetSessionEndpointInput, options: CallOptions) !get_session_endpoint.GetSessionEndpointOutput {
         return get_session_endpoint.execute(self, allocator, input, options);
     }
 
     /// Gets the current status of a session.
-    pub fn getSessionStatus(self: *Self, allocator: std.mem.Allocator, input: get_session_status.GetSessionStatusInput, options: get_session_status.Options) !get_session_status.GetSessionStatusOutput {
+    pub fn getSessionStatus(self: *Self, allocator: std.mem.Allocator, input: get_session_status.GetSessionStatusInput, options: CallOptions) !get_session_status.GetSessionStatusOutput {
         return get_session_status.execute(self, allocator, input, options);
     }
 
     /// Returns table metadata for the specified catalog, database, and table.
-    pub fn getTableMetadata(self: *Self, allocator: std.mem.Allocator, input: get_table_metadata.GetTableMetadataInput, options: get_table_metadata.Options) !get_table_metadata.GetTableMetadataOutput {
+    pub fn getTableMetadata(self: *Self, allocator: std.mem.Allocator, input: get_table_metadata.GetTableMetadataInput, options: CallOptions) !get_table_metadata.GetTableMetadataOutput {
         return get_table_metadata.execute(self, allocator, input, options);
     }
 
     /// Returns information about the workgroup with the specified name.
-    pub fn getWorkGroup(self: *Self, allocator: std.mem.Allocator, input: get_work_group.GetWorkGroupInput, options: get_work_group.Options) !get_work_group.GetWorkGroupOutput {
+    pub fn getWorkGroup(self: *Self, allocator: std.mem.Allocator, input: get_work_group.GetWorkGroupInput, options: CallOptions) !get_work_group.GetWorkGroupOutput {
         return get_work_group.execute(self, allocator, input, options);
     }
 
@@ -412,26 +413,26 @@ pub const Client = struct {
     /// an `InvalidRequestException` occurs. The maximum file size that can be
     /// imported is 10 megabytes. If an `ipynb` file with the same name already
     /// exists in the workgroup, throws an error.
-    pub fn importNotebook(self: *Self, allocator: std.mem.Allocator, input: import_notebook.ImportNotebookInput, options: import_notebook.Options) !import_notebook.ImportNotebookOutput {
+    pub fn importNotebook(self: *Self, allocator: std.mem.Allocator, input: import_notebook.ImportNotebookInput, options: CallOptions) !import_notebook.ImportNotebookOutput {
         return import_notebook.execute(self, allocator, input, options);
     }
 
     /// Returns the supported DPU sizes for the supported application runtimes (for
     /// example,
     /// `Athena notebook version 1`).
-    pub fn listApplicationDpuSizes(self: *Self, allocator: std.mem.Allocator, input: list_application_dpu_sizes.ListApplicationDPUSizesInput, options: list_application_dpu_sizes.Options) !list_application_dpu_sizes.ListApplicationDPUSizesOutput {
+    pub fn listApplicationDpuSizes(self: *Self, allocator: std.mem.Allocator, input: list_application_dpu_sizes.ListApplicationDPUSizesInput, options: CallOptions) !list_application_dpu_sizes.ListApplicationDPUSizesOutput {
         return list_application_dpu_sizes.execute(self, allocator, input, options);
     }
 
     /// Lists the calculations that have been submitted to a session in descending
     /// order.
     /// Newer calculations are listed first; older calculations are listed later.
-    pub fn listCalculationExecutions(self: *Self, allocator: std.mem.Allocator, input: list_calculation_executions.ListCalculationExecutionsInput, options: list_calculation_executions.Options) !list_calculation_executions.ListCalculationExecutionsOutput {
+    pub fn listCalculationExecutions(self: *Self, allocator: std.mem.Allocator, input: list_calculation_executions.ListCalculationExecutionsInput, options: CallOptions) !list_calculation_executions.ListCalculationExecutionsOutput {
         return list_calculation_executions.execute(self, allocator, input, options);
     }
 
     /// Lists the capacity reservations for the current account.
-    pub fn listCapacityReservations(self: *Self, allocator: std.mem.Allocator, input: list_capacity_reservations.ListCapacityReservationsInput, options: list_capacity_reservations.Options) !list_capacity_reservations.ListCapacityReservationsOutput {
+    pub fn listCapacityReservations(self: *Self, allocator: std.mem.Allocator, input: list_capacity_reservations.ListCapacityReservationsInput, options: CallOptions) !list_capacity_reservations.ListCapacityReservationsOutput {
         return list_capacity_reservations.execute(self, allocator, input, options);
     }
 
@@ -439,19 +440,19 @@ pub const Client = struct {
     ///
     /// In the Athena console, data catalogs are listed as "data sources" on
     /// the **Data sources** page under the **Data source name** column.
-    pub fn listDataCatalogs(self: *Self, allocator: std.mem.Allocator, input: list_data_catalogs.ListDataCatalogsInput, options: list_data_catalogs.Options) !list_data_catalogs.ListDataCatalogsOutput {
+    pub fn listDataCatalogs(self: *Self, allocator: std.mem.Allocator, input: list_data_catalogs.ListDataCatalogsInput, options: CallOptions) !list_data_catalogs.ListDataCatalogsOutput {
         return list_data_catalogs.execute(self, allocator, input, options);
     }
 
     /// Lists the databases in the specified data catalog.
-    pub fn listDatabases(self: *Self, allocator: std.mem.Allocator, input: list_databases.ListDatabasesInput, options: list_databases.Options) !list_databases.ListDatabasesOutput {
+    pub fn listDatabases(self: *Self, allocator: std.mem.Allocator, input: list_databases.ListDatabasesInput, options: CallOptions) !list_databases.ListDatabasesOutput {
         return list_databases.execute(self, allocator, input, options);
     }
 
     /// Returns a list of engine versions that are available to choose from,
     /// including the
     /// Auto option.
-    pub fn listEngineVersions(self: *Self, allocator: std.mem.Allocator, input: list_engine_versions.ListEngineVersionsInput, options: list_engine_versions.Options) !list_engine_versions.ListEngineVersionsOutput {
+    pub fn listEngineVersions(self: *Self, allocator: std.mem.Allocator, input: list_engine_versions.ListEngineVersionsInput, options: CallOptions) !list_engine_versions.ListEngineVersionsOutput {
         return list_engine_versions.execute(self, allocator, input, options);
     }
 
@@ -460,7 +461,7 @@ pub const Client = struct {
     /// listed first; older executors are listed later. The result can be optionally
     /// filtered by
     /// state.
-    pub fn listExecutors(self: *Self, allocator: std.mem.Allocator, input: list_executors.ListExecutorsInput, options: list_executors.Options) !list_executors.ListExecutorsOutput {
+    pub fn listExecutors(self: *Self, allocator: std.mem.Allocator, input: list_executors.ListExecutorsInput, options: CallOptions) !list_executors.ListExecutorsOutput {
         return list_executors.execute(self, allocator, input, options);
     }
 
@@ -469,12 +470,12 @@ pub const Client = struct {
     /// workgroup. Requires that you have access to the specified workgroup. If a
     /// workgroup is
     /// not specified, lists the saved queries for the primary workgroup.
-    pub fn listNamedQueries(self: *Self, allocator: std.mem.Allocator, input: list_named_queries.ListNamedQueriesInput, options: list_named_queries.Options) !list_named_queries.ListNamedQueriesOutput {
+    pub fn listNamedQueries(self: *Self, allocator: std.mem.Allocator, input: list_named_queries.ListNamedQueriesInput, options: CallOptions) !list_named_queries.ListNamedQueriesOutput {
         return list_named_queries.execute(self, allocator, input, options);
     }
 
     /// Displays the notebook files for the specified workgroup in paginated format.
-    pub fn listNotebookMetadata(self: *Self, allocator: std.mem.Allocator, input: list_notebook_metadata.ListNotebookMetadataInput, options: list_notebook_metadata.Options) !list_notebook_metadata.ListNotebookMetadataOutput {
+    pub fn listNotebookMetadata(self: *Self, allocator: std.mem.Allocator, input: list_notebook_metadata.ListNotebookMetadataInput, options: CallOptions) !list_notebook_metadata.ListNotebookMetadataOutput {
         return list_notebook_metadata.execute(self, allocator, input, options);
     }
 
@@ -483,12 +484,12 @@ pub const Client = struct {
     /// in an active state like `CREATING`, `CREATED`, `IDLE`
     /// or `BUSY`. Newer sessions are listed first; older sessions are listed
     /// later.
-    pub fn listNotebookSessions(self: *Self, allocator: std.mem.Allocator, input: list_notebook_sessions.ListNotebookSessionsInput, options: list_notebook_sessions.Options) !list_notebook_sessions.ListNotebookSessionsOutput {
+    pub fn listNotebookSessions(self: *Self, allocator: std.mem.Allocator, input: list_notebook_sessions.ListNotebookSessionsInput, options: CallOptions) !list_notebook_sessions.ListNotebookSessionsOutput {
         return list_notebook_sessions.execute(self, allocator, input, options);
     }
 
     /// Lists the prepared statements in the specified workgroup.
-    pub fn listPreparedStatements(self: *Self, allocator: std.mem.Allocator, input: list_prepared_statements.ListPreparedStatementsInput, options: list_prepared_statements.Options) !list_prepared_statements.ListPreparedStatementsOutput {
+    pub fn listPreparedStatements(self: *Self, allocator: std.mem.Allocator, input: list_prepared_statements.ListPreparedStatementsInput, options: CallOptions) !list_prepared_statements.ListPreparedStatementsOutput {
         return list_prepared_statements.execute(self, allocator, input, options);
     }
 
@@ -498,7 +499,7 @@ pub const Client = struct {
     /// specified, returns a list of query execution IDs for the primary workgroup.
     /// Requires you
     /// to have access to the workgroup in which the queries ran.
-    pub fn listQueryExecutions(self: *Self, allocator: std.mem.Allocator, input: list_query_executions.ListQueryExecutionsInput, options: list_query_executions.Options) !list_query_executions.ListQueryExecutionsOutput {
+    pub fn listQueryExecutions(self: *Self, allocator: std.mem.Allocator, input: list_query_executions.ListQueryExecutionsInput, options: CallOptions) !list_query_executions.ListQueryExecutionsOutput {
         return list_query_executions.execute(self, allocator, input, options);
     }
 
@@ -506,22 +507,22 @@ pub const Client = struct {
     /// `CREATING`, `CREATED`, `IDLE`, or
     /// `BUSY`. Newer sessions are listed first; older sessions are listed
     /// later.
-    pub fn listSessions(self: *Self, allocator: std.mem.Allocator, input: list_sessions.ListSessionsInput, options: list_sessions.Options) !list_sessions.ListSessionsOutput {
+    pub fn listSessions(self: *Self, allocator: std.mem.Allocator, input: list_sessions.ListSessionsInput, options: CallOptions) !list_sessions.ListSessionsOutput {
         return list_sessions.execute(self, allocator, input, options);
     }
 
     /// Lists the metadata for the tables in the specified data catalog database.
-    pub fn listTableMetadata(self: *Self, allocator: std.mem.Allocator, input: list_table_metadata.ListTableMetadataInput, options: list_table_metadata.Options) !list_table_metadata.ListTableMetadataOutput {
+    pub fn listTableMetadata(self: *Self, allocator: std.mem.Allocator, input: list_table_metadata.ListTableMetadataInput, options: CallOptions) !list_table_metadata.ListTableMetadataOutput {
         return list_table_metadata.execute(self, allocator, input, options);
     }
 
     /// Lists the tags associated with an Athena resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists available workgroups for the account.
-    pub fn listWorkGroups(self: *Self, allocator: std.mem.Allocator, input: list_work_groups.ListWorkGroupsInput, options: list_work_groups.Options) !list_work_groups.ListWorkGroupsOutput {
+    pub fn listWorkGroups(self: *Self, allocator: std.mem.Allocator, input: list_work_groups.ListWorkGroupsInput, options: CallOptions) !list_work_groups.ListWorkGroupsOutput {
         return list_work_groups.execute(self, allocator, input, options);
     }
 
@@ -530,7 +531,7 @@ pub const Client = struct {
     /// a capacity assignment configuration already exists for the capacity
     /// reservation,
     /// replaces the existing capacity assignment configuration.
-    pub fn putCapacityAssignmentConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_capacity_assignment_configuration.PutCapacityAssignmentConfigurationInput, options: put_capacity_assignment_configuration.Options) !put_capacity_assignment_configuration.PutCapacityAssignmentConfigurationOutput {
+    pub fn putCapacityAssignmentConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_capacity_assignment_configuration.PutCapacityAssignmentConfigurationInput, options: CallOptions) !put_capacity_assignment_configuration.PutCapacityAssignmentConfigurationOutput {
         return put_capacity_assignment_configuration.execute(self, allocator, input, options);
     }
 
@@ -544,7 +545,7 @@ pub const Client = struct {
     /// CalculationConfiguration$CodeBlock is deprecated, use the
     /// StartCalculationExecutionRequest$CodeBlock parameter
     /// instead.
-    pub fn startCalculationExecution(self: *Self, allocator: std.mem.Allocator, input: start_calculation_execution.StartCalculationExecutionInput, options: start_calculation_execution.Options) !start_calculation_execution.StartCalculationExecutionOutput {
+    pub fn startCalculationExecution(self: *Self, allocator: std.mem.Allocator, input: start_calculation_execution.StartCalculationExecutionInput, options: CallOptions) !start_calculation_execution.StartCalculationExecutionOutput {
         return start_calculation_execution.execute(self, allocator, input, options);
     }
 
@@ -556,14 +557,14 @@ pub const Client = struct {
     /// Code Samples](http://docs.aws.amazon.com/athena/latest/ug/code-samples.html)
     /// in the *Amazon Athena User
     /// Guide*.
-    pub fn startQueryExecution(self: *Self, allocator: std.mem.Allocator, input: start_query_execution.StartQueryExecutionInput, options: start_query_execution.Options) !start_query_execution.StartQueryExecutionOutput {
+    pub fn startQueryExecution(self: *Self, allocator: std.mem.Allocator, input: start_query_execution.StartQueryExecutionInput, options: CallOptions) !start_query_execution.StartQueryExecutionOutput {
         return start_query_execution.execute(self, allocator, input, options);
     }
 
     /// Creates a session for running calculations within a workgroup. The session
     /// is ready
     /// when it reaches an `IDLE` state.
-    pub fn startSession(self: *Self, allocator: std.mem.Allocator, input: start_session.StartSessionInput, options: start_session.Options) !start_session.StartSessionOutput {
+    pub fn startSession(self: *Self, allocator: std.mem.Allocator, input: start_session.StartSessionInput, options: CallOptions) !start_session.StartSessionOutput {
         return start_session.execute(self, allocator, input, options);
     }
 
@@ -579,14 +580,14 @@ pub const Client = struct {
     /// being charged for a calculation that cannot be cancelled, consider
     /// terminating the
     /// session in which the calculation is running.
-    pub fn stopCalculationExecution(self: *Self, allocator: std.mem.Allocator, input: stop_calculation_execution.StopCalculationExecutionInput, options: stop_calculation_execution.Options) !stop_calculation_execution.StopCalculationExecutionOutput {
+    pub fn stopCalculationExecution(self: *Self, allocator: std.mem.Allocator, input: stop_calculation_execution.StopCalculationExecutionInput, options: CallOptions) !stop_calculation_execution.StopCalculationExecutionOutput {
         return stop_calculation_execution.execute(self, allocator, input, options);
     }
 
     /// Stops a query execution. Requires you to have access to the workgroup in
     /// which the
     /// query ran.
-    pub fn stopQueryExecution(self: *Self, allocator: std.mem.Allocator, input: stop_query_execution.StopQueryExecutionInput, options: stop_query_execution.Options) !stop_query_execution.StopQueryExecutionOutput {
+    pub fn stopQueryExecution(self: *Self, allocator: std.mem.Allocator, input: stop_query_execution.StopQueryExecutionInput, options: CallOptions) !stop_query_execution.StopQueryExecutionOutput {
         return stop_query_execution.execute(self, allocator, input, options);
     }
 
@@ -608,7 +609,7 @@ pub const Client = struct {
     /// and values are case-sensitive. Tag keys must be unique per resource. If you
     /// specify more
     /// than one tag, separate them by commas.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -618,52 +619,52 @@ pub const Client = struct {
     /// the session when `TerminateSession` is called are forcefully stopped, but
     /// may
     /// display as `FAILED` instead of `STOPPED`.
-    pub fn terminateSession(self: *Self, allocator: std.mem.Allocator, input: terminate_session.TerminateSessionInput, options: terminate_session.Options) !terminate_session.TerminateSessionOutput {
+    pub fn terminateSession(self: *Self, allocator: std.mem.Allocator, input: terminate_session.TerminateSessionInput, options: CallOptions) !terminate_session.TerminateSessionOutput {
         return terminate_session.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from an Athena resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the number of requested data processing units for the capacity
     /// reservation
     /// with the specified name.
-    pub fn updateCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: update_capacity_reservation.UpdateCapacityReservationInput, options: update_capacity_reservation.Options) !update_capacity_reservation.UpdateCapacityReservationOutput {
+    pub fn updateCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: update_capacity_reservation.UpdateCapacityReservationInput, options: CallOptions) !update_capacity_reservation.UpdateCapacityReservationOutput {
         return update_capacity_reservation.execute(self, allocator, input, options);
     }
 
     /// Updates the data catalog that has the specified name.
-    pub fn updateDataCatalog(self: *Self, allocator: std.mem.Allocator, input: update_data_catalog.UpdateDataCatalogInput, options: update_data_catalog.Options) !update_data_catalog.UpdateDataCatalogOutput {
+    pub fn updateDataCatalog(self: *Self, allocator: std.mem.Allocator, input: update_data_catalog.UpdateDataCatalogInput, options: CallOptions) !update_data_catalog.UpdateDataCatalogOutput {
         return update_data_catalog.execute(self, allocator, input, options);
     }
 
     /// Updates a NamedQuery object. The database or workgroup cannot be
     /// updated.
-    pub fn updateNamedQuery(self: *Self, allocator: std.mem.Allocator, input: update_named_query.UpdateNamedQueryInput, options: update_named_query.Options) !update_named_query.UpdateNamedQueryOutput {
+    pub fn updateNamedQuery(self: *Self, allocator: std.mem.Allocator, input: update_named_query.UpdateNamedQueryInput, options: CallOptions) !update_named_query.UpdateNamedQueryOutput {
         return update_named_query.execute(self, allocator, input, options);
     }
 
     /// Updates the contents of a Spark notebook.
-    pub fn updateNotebook(self: *Self, allocator: std.mem.Allocator, input: update_notebook.UpdateNotebookInput, options: update_notebook.Options) !update_notebook.UpdateNotebookOutput {
+    pub fn updateNotebook(self: *Self, allocator: std.mem.Allocator, input: update_notebook.UpdateNotebookInput, options: CallOptions) !update_notebook.UpdateNotebookOutput {
         return update_notebook.execute(self, allocator, input, options);
     }
 
     /// Updates the metadata for a notebook.
-    pub fn updateNotebookMetadata(self: *Self, allocator: std.mem.Allocator, input: update_notebook_metadata.UpdateNotebookMetadataInput, options: update_notebook_metadata.Options) !update_notebook_metadata.UpdateNotebookMetadataOutput {
+    pub fn updateNotebookMetadata(self: *Self, allocator: std.mem.Allocator, input: update_notebook_metadata.UpdateNotebookMetadataInput, options: CallOptions) !update_notebook_metadata.UpdateNotebookMetadataOutput {
         return update_notebook_metadata.execute(self, allocator, input, options);
     }
 
     /// Updates a prepared statement.
-    pub fn updatePreparedStatement(self: *Self, allocator: std.mem.Allocator, input: update_prepared_statement.UpdatePreparedStatementInput, options: update_prepared_statement.Options) !update_prepared_statement.UpdatePreparedStatementOutput {
+    pub fn updatePreparedStatement(self: *Self, allocator: std.mem.Allocator, input: update_prepared_statement.UpdatePreparedStatementInput, options: CallOptions) !update_prepared_statement.UpdatePreparedStatementOutput {
         return update_prepared_statement.execute(self, allocator, input, options);
     }
 
     /// Updates the workgroup with the specified name. The workgroup's name cannot
     /// be changed.
     /// Only `ConfigurationUpdates` can be specified.
-    pub fn updateWorkGroup(self: *Self, allocator: std.mem.Allocator, input: update_work_group.UpdateWorkGroupInput, options: update_work_group.Options) !update_work_group.UpdateWorkGroupOutput {
+    pub fn updateWorkGroup(self: *Self, allocator: std.mem.Allocator, input: update_work_group.UpdateWorkGroupInput, options: CallOptions) !update_work_group.UpdateWorkGroupOutput {
         return update_work_group.execute(self, allocator, input, options);
     }
 

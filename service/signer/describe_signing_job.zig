@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SigningPlatformOverrides = @import("signing_platform_overrides.zig").SigningPlatformOverrides;
 const SigningJobRevocationRecord = @import("signing_job_revocation_record.zig").SigningJobRevocationRecord;
@@ -107,11 +108,7 @@ pub const DescribeSigningJobOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeSigningJobInput, options: Options) !DescribeSigningJobOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeSigningJobInput, options: CallOptions) !DescribeSigningJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

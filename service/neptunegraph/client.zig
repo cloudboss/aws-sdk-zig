@@ -35,6 +35,7 @@ const stop_graph = @import("stop_graph.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_graph = @import("update_graph.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -67,27 +68,27 @@ pub const Client = struct {
     }
 
     /// Cancel the specified export task.
-    pub fn cancelExportTask(self: *Self, allocator: std.mem.Allocator, input: cancel_export_task.CancelExportTaskInput, options: cancel_export_task.Options) !cancel_export_task.CancelExportTaskOutput {
+    pub fn cancelExportTask(self: *Self, allocator: std.mem.Allocator, input: cancel_export_task.CancelExportTaskInput, options: CallOptions) !cancel_export_task.CancelExportTaskOutput {
         return cancel_export_task.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified import task.
-    pub fn cancelImportTask(self: *Self, allocator: std.mem.Allocator, input: cancel_import_task.CancelImportTaskInput, options: cancel_import_task.Options) !cancel_import_task.CancelImportTaskOutput {
+    pub fn cancelImportTask(self: *Self, allocator: std.mem.Allocator, input: cancel_import_task.CancelImportTaskInput, options: CallOptions) !cancel_import_task.CancelImportTaskOutput {
         return cancel_import_task.execute(self, allocator, input, options);
     }
 
     /// Cancels a specified query.
-    pub fn cancelQuery(self: *Self, allocator: std.mem.Allocator, input: cancel_query.CancelQueryInput, options: cancel_query.Options) !cancel_query.CancelQueryOutput {
+    pub fn cancelQuery(self: *Self, allocator: std.mem.Allocator, input: cancel_query.CancelQueryInput, options: CallOptions) !cancel_query.CancelQueryOutput {
         return cancel_query.execute(self, allocator, input, options);
     }
 
     /// Creates a new Neptune Analytics graph.
-    pub fn createGraph(self: *Self, allocator: std.mem.Allocator, input: create_graph.CreateGraphInput, options: create_graph.Options) !create_graph.CreateGraphOutput {
+    pub fn createGraph(self: *Self, allocator: std.mem.Allocator, input: create_graph.CreateGraphInput, options: CallOptions) !create_graph.CreateGraphOutput {
         return create_graph.execute(self, allocator, input, options);
     }
 
     /// Creates a snapshot of the specific graph.
-    pub fn createGraphSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_graph_snapshot.CreateGraphSnapshotInput, options: create_graph_snapshot.Options) !create_graph_snapshot.CreateGraphSnapshotOutput {
+    pub fn createGraphSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_graph_snapshot.CreateGraphSnapshotInput, options: CallOptions) !create_graph_snapshot.CreateGraphSnapshotOutput {
         return create_graph_snapshot.execute(self, allocator, input, options);
     }
 
@@ -97,7 +98,7 @@ pub const Client = struct {
     ///
     /// The data can be loaded from files in S3 that in either the [Gremlin CSV
     /// format](https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html) or the [openCypher load format](https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html).
-    pub fn createGraphUsingImportTask(self: *Self, allocator: std.mem.Allocator, input: create_graph_using_import_task.CreateGraphUsingImportTaskInput, options: create_graph_using_import_task.Options) !create_graph_using_import_task.CreateGraphUsingImportTaskOutput {
+    pub fn createGraphUsingImportTask(self: *Self, allocator: std.mem.Allocator, input: create_graph_using_import_task.CreateGraphUsingImportTaskInput, options: CallOptions) !create_graph_using_import_task.CreateGraphUsingImportTaskOutput {
         return create_graph_using_import_task.execute(self, allocator, input, options);
     }
 
@@ -105,23 +106,23 @@ pub const Client = struct {
     /// within a VPC. You can attach security groups to the private graph endpoint.
     ///
     /// VPC endpoint charges apply.
-    pub fn createPrivateGraphEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_private_graph_endpoint.CreatePrivateGraphEndpointInput, options: create_private_graph_endpoint.Options) !create_private_graph_endpoint.CreatePrivateGraphEndpointOutput {
+    pub fn createPrivateGraphEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_private_graph_endpoint.CreatePrivateGraphEndpointInput, options: CallOptions) !create_private_graph_endpoint.CreatePrivateGraphEndpointOutput {
         return create_private_graph_endpoint.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified graph. Graphs cannot be deleted if delete-protection
     /// is enabled.
-    pub fn deleteGraph(self: *Self, allocator: std.mem.Allocator, input: delete_graph.DeleteGraphInput, options: delete_graph.Options) !delete_graph.DeleteGraphOutput {
+    pub fn deleteGraph(self: *Self, allocator: std.mem.Allocator, input: delete_graph.DeleteGraphInput, options: CallOptions) !delete_graph.DeleteGraphOutput {
         return delete_graph.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified graph snapshot.
-    pub fn deleteGraphSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_graph_snapshot.DeleteGraphSnapshotInput, options: delete_graph_snapshot.Options) !delete_graph_snapshot.DeleteGraphSnapshotOutput {
+    pub fn deleteGraphSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_graph_snapshot.DeleteGraphSnapshotInput, options: CallOptions) !delete_graph_snapshot.DeleteGraphSnapshotOutput {
         return delete_graph_snapshot.execute(self, allocator, input, options);
     }
 
     /// Deletes a private graph endpoint.
-    pub fn deletePrivateGraphEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_private_graph_endpoint.DeletePrivateGraphEndpointInput, options: delete_private_graph_endpoint.Options) !delete_private_graph_endpoint.DeletePrivateGraphEndpointOutput {
+    pub fn deletePrivateGraphEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_private_graph_endpoint.DeletePrivateGraphEndpointInput, options: CallOptions) !delete_private_graph_endpoint.DeletePrivateGraphEndpointOutput {
         return delete_private_graph_endpoint.execute(self, allocator, input, options);
     }
 
@@ -134,37 +135,37 @@ pub const Client = struct {
     /// * neptune-graph:ReadDataViaQuery
     /// * neptune-graph:WriteDataViaQuery
     /// * neptune-graph:DeleteDataViaQuery
-    pub fn executeQuery(self: *Self, allocator: std.mem.Allocator, input: execute_query.ExecuteQueryInput, options: execute_query.Options) !execute_query.ExecuteQueryOutput {
+    pub fn executeQuery(self: *Self, allocator: std.mem.Allocator, input: execute_query.ExecuteQueryInput, options: CallOptions) !execute_query.ExecuteQueryOutput {
         return execute_query.execute(self, allocator, input, options);
     }
 
     /// Retrieves a specified export task.
-    pub fn getExportTask(self: *Self, allocator: std.mem.Allocator, input: get_export_task.GetExportTaskInput, options: get_export_task.Options) !get_export_task.GetExportTaskOutput {
+    pub fn getExportTask(self: *Self, allocator: std.mem.Allocator, input: get_export_task.GetExportTaskInput, options: CallOptions) !get_export_task.GetExportTaskOutput {
         return get_export_task.execute(self, allocator, input, options);
     }
 
     /// Gets information about a specified graph.
-    pub fn getGraph(self: *Self, allocator: std.mem.Allocator, input: get_graph.GetGraphInput, options: get_graph.Options) !get_graph.GetGraphOutput {
+    pub fn getGraph(self: *Self, allocator: std.mem.Allocator, input: get_graph.GetGraphInput, options: CallOptions) !get_graph.GetGraphOutput {
         return get_graph.execute(self, allocator, input, options);
     }
 
     /// Retrieves a specified graph snapshot.
-    pub fn getGraphSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_graph_snapshot.GetGraphSnapshotInput, options: get_graph_snapshot.Options) !get_graph_snapshot.GetGraphSnapshotOutput {
+    pub fn getGraphSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_graph_snapshot.GetGraphSnapshotInput, options: CallOptions) !get_graph_snapshot.GetGraphSnapshotOutput {
         return get_graph_snapshot.execute(self, allocator, input, options);
     }
 
     /// Gets a graph summary for a property graph.
-    pub fn getGraphSummary(self: *Self, allocator: std.mem.Allocator, input: get_graph_summary.GetGraphSummaryInput, options: get_graph_summary.Options) !get_graph_summary.GetGraphSummaryOutput {
+    pub fn getGraphSummary(self: *Self, allocator: std.mem.Allocator, input: get_graph_summary.GetGraphSummaryInput, options: CallOptions) !get_graph_summary.GetGraphSummaryOutput {
         return get_graph_summary.execute(self, allocator, input, options);
     }
 
     /// Retrieves a specified import task.
-    pub fn getImportTask(self: *Self, allocator: std.mem.Allocator, input: get_import_task.GetImportTaskInput, options: get_import_task.Options) !get_import_task.GetImportTaskOutput {
+    pub fn getImportTask(self: *Self, allocator: std.mem.Allocator, input: get_import_task.GetImportTaskInput, options: CallOptions) !get_import_task.GetImportTaskOutput {
         return get_import_task.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a specified private endpoint.
-    pub fn getPrivateGraphEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_private_graph_endpoint.GetPrivateGraphEndpointInput, options: get_private_graph_endpoint.Options) !get_private_graph_endpoint.GetPrivateGraphEndpointOutput {
+    pub fn getPrivateGraphEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_private_graph_endpoint.GetPrivateGraphEndpointInput, options: CallOptions) !get_private_graph_endpoint.GetPrivateGraphEndpointOutput {
         return get_private_graph_endpoint.execute(self, allocator, input, options);
     }
 
@@ -173,89 +174,89 @@ pub const Client = struct {
     /// When invoking this operation in a Neptune Analytics cluster, the IAM user or
     /// role making the request must have the `neptune-graph:GetQueryStatus` IAM
     /// action attached.
-    pub fn getQuery(self: *Self, allocator: std.mem.Allocator, input: get_query.GetQueryInput, options: get_query.Options) !get_query.GetQueryOutput {
+    pub fn getQuery(self: *Self, allocator: std.mem.Allocator, input: get_query.GetQueryInput, options: CallOptions) !get_query.GetQueryOutput {
         return get_query.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of export tasks.
-    pub fn listExportTasks(self: *Self, allocator: std.mem.Allocator, input: list_export_tasks.ListExportTasksInput, options: list_export_tasks.Options) !list_export_tasks.ListExportTasksOutput {
+    pub fn listExportTasks(self: *Self, allocator: std.mem.Allocator, input: list_export_tasks.ListExportTasksInput, options: CallOptions) !list_export_tasks.ListExportTasksOutput {
         return list_export_tasks.execute(self, allocator, input, options);
     }
 
     /// Lists available snapshots of a specified Neptune Analytics graph.
-    pub fn listGraphSnapshots(self: *Self, allocator: std.mem.Allocator, input: list_graph_snapshots.ListGraphSnapshotsInput, options: list_graph_snapshots.Options) !list_graph_snapshots.ListGraphSnapshotsOutput {
+    pub fn listGraphSnapshots(self: *Self, allocator: std.mem.Allocator, input: list_graph_snapshots.ListGraphSnapshotsInput, options: CallOptions) !list_graph_snapshots.ListGraphSnapshotsOutput {
         return list_graph_snapshots.execute(self, allocator, input, options);
     }
 
     /// Lists available Neptune Analytics graphs.
-    pub fn listGraphs(self: *Self, allocator: std.mem.Allocator, input: list_graphs.ListGraphsInput, options: list_graphs.Options) !list_graphs.ListGraphsOutput {
+    pub fn listGraphs(self: *Self, allocator: std.mem.Allocator, input: list_graphs.ListGraphsInput, options: CallOptions) !list_graphs.ListGraphsOutput {
         return list_graphs.execute(self, allocator, input, options);
     }
 
     /// Lists import tasks.
-    pub fn listImportTasks(self: *Self, allocator: std.mem.Allocator, input: list_import_tasks.ListImportTasksInput, options: list_import_tasks.Options) !list_import_tasks.ListImportTasksOutput {
+    pub fn listImportTasks(self: *Self, allocator: std.mem.Allocator, input: list_import_tasks.ListImportTasksInput, options: CallOptions) !list_import_tasks.ListImportTasksOutput {
         return list_import_tasks.execute(self, allocator, input, options);
     }
 
     /// Lists private endpoints for a specified Neptune Analytics graph.
-    pub fn listPrivateGraphEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_private_graph_endpoints.ListPrivateGraphEndpointsInput, options: list_private_graph_endpoints.Options) !list_private_graph_endpoints.ListPrivateGraphEndpointsOutput {
+    pub fn listPrivateGraphEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_private_graph_endpoints.ListPrivateGraphEndpointsInput, options: CallOptions) !list_private_graph_endpoints.ListPrivateGraphEndpointsOutput {
         return list_private_graph_endpoints.execute(self, allocator, input, options);
     }
 
     /// Lists active openCypher queries.
-    pub fn listQueries(self: *Self, allocator: std.mem.Allocator, input: list_queries.ListQueriesInput, options: list_queries.Options) !list_queries.ListQueriesOutput {
+    pub fn listQueries(self: *Self, allocator: std.mem.Allocator, input: list_queries.ListQueriesInput, options: CallOptions) !list_queries.ListQueriesOutput {
         return list_queries.execute(self, allocator, input, options);
     }
 
     /// Lists tags associated with a specified resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Empties the data from a specified Neptune Analytics graph.
-    pub fn resetGraph(self: *Self, allocator: std.mem.Allocator, input: reset_graph.ResetGraphInput, options: reset_graph.Options) !reset_graph.ResetGraphOutput {
+    pub fn resetGraph(self: *Self, allocator: std.mem.Allocator, input: reset_graph.ResetGraphInput, options: CallOptions) !reset_graph.ResetGraphOutput {
         return reset_graph.execute(self, allocator, input, options);
     }
 
     /// Restores a graph from a snapshot.
-    pub fn restoreGraphFromSnapshot(self: *Self, allocator: std.mem.Allocator, input: restore_graph_from_snapshot.RestoreGraphFromSnapshotInput, options: restore_graph_from_snapshot.Options) !restore_graph_from_snapshot.RestoreGraphFromSnapshotOutput {
+    pub fn restoreGraphFromSnapshot(self: *Self, allocator: std.mem.Allocator, input: restore_graph_from_snapshot.RestoreGraphFromSnapshotInput, options: CallOptions) !restore_graph_from_snapshot.RestoreGraphFromSnapshotOutput {
         return restore_graph_from_snapshot.execute(self, allocator, input, options);
     }
 
     /// Export data from an existing Neptune Analytics graph to Amazon S3. The graph
     /// state should be `AVAILABLE`.
-    pub fn startExportTask(self: *Self, allocator: std.mem.Allocator, input: start_export_task.StartExportTaskInput, options: start_export_task.Options) !start_export_task.StartExportTaskOutput {
+    pub fn startExportTask(self: *Self, allocator: std.mem.Allocator, input: start_export_task.StartExportTaskInput, options: CallOptions) !start_export_task.StartExportTaskOutput {
         return start_export_task.execute(self, allocator, input, options);
     }
 
     /// Starts the specific graph.
-    pub fn startGraph(self: *Self, allocator: std.mem.Allocator, input: start_graph.StartGraphInput, options: start_graph.Options) !start_graph.StartGraphOutput {
+    pub fn startGraph(self: *Self, allocator: std.mem.Allocator, input: start_graph.StartGraphInput, options: CallOptions) !start_graph.StartGraphOutput {
         return start_graph.execute(self, allocator, input, options);
     }
 
     /// Import data into existing Neptune Analytics graph from Amazon Simple Storage
     /// Service (S3). The graph needs to be empty and in the AVAILABLE state.
-    pub fn startImportTask(self: *Self, allocator: std.mem.Allocator, input: start_import_task.StartImportTaskInput, options: start_import_task.Options) !start_import_task.StartImportTaskOutput {
+    pub fn startImportTask(self: *Self, allocator: std.mem.Allocator, input: start_import_task.StartImportTaskInput, options: CallOptions) !start_import_task.StartImportTaskOutput {
         return start_import_task.execute(self, allocator, input, options);
     }
 
     /// Stops the specific graph.
-    pub fn stopGraph(self: *Self, allocator: std.mem.Allocator, input: stop_graph.StopGraphInput, options: stop_graph.Options) !stop_graph.StopGraphOutput {
+    pub fn stopGraph(self: *Self, allocator: std.mem.Allocator, input: stop_graph.StopGraphInput, options: CallOptions) !stop_graph.StopGraphOutput {
         return stop_graph.execute(self, allocator, input, options);
     }
 
     /// Adds tags to the specified resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the specified tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration of a specified Neptune Analytics graph
-    pub fn updateGraph(self: *Self, allocator: std.mem.Allocator, input: update_graph.UpdateGraphInput, options: update_graph.Options) !update_graph.UpdateGraphOutput {
+    pub fn updateGraph(self: *Self, allocator: std.mem.Allocator, input: update_graph.UpdateGraphInput, options: CallOptions) !update_graph.UpdateGraphOutput {
         return update_graph.execute(self, allocator, input, options);
     }
 

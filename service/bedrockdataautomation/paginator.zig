@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_blueprints = @import("list_blueprints.zig");
@@ -15,7 +16,7 @@ pub const ListBlueprintsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_blueprints.Options) !list_blueprints.ListBlueprintsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_blueprints.ListBlueprintsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const ListDataAutomationProjectsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_data_automation_projects.Options) !list_data_automation_projects.ListDataAutomationProjectsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_data_automation_projects.ListDataAutomationProjectsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SuppressionListReason = @import("suppression_list_reason.zig").SuppressionListReason;
 const SuppressionValidationOptions = @import("suppression_validation_options.zig").SuppressionValidationOptions;
@@ -40,11 +41,7 @@ pub const PutConfigurationSetSuppressionOptionsInput = struct {
 pub const PutConfigurationSetSuppressionOptionsOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutConfigurationSetSuppressionOptionsInput, options: Options) !PutConfigurationSetSuppressionOptionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutConfigurationSetSuppressionOptionsInput, options: CallOptions) !PutConfigurationSetSuppressionOptionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

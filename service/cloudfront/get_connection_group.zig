@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConnectionGroup = @import("connection_group.zig").ConnectionGroup;
 const serde = @import("serde.zig");
@@ -19,11 +20,7 @@ pub const GetConnectionGroupOutput = struct {
     e_tag: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetConnectionGroupInput, options: Options) !GetConnectionGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetConnectionGroupInput, options: CallOptions) !GetConnectionGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const SecurityGroupVpcAssociation = @import("security_group_vpc_association.zig").SecurityGroupVpcAssociation;
@@ -49,11 +50,7 @@ pub const DescribeSecurityGroupVpcAssociationsOutput = struct {
     security_group_vpc_associations: ?[]const SecurityGroupVpcAssociation = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeSecurityGroupVpcAssociationsInput, options: Options) !DescribeSecurityGroupVpcAssociationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeSecurityGroupVpcAssociationsInput, options: CallOptions) !DescribeSecurityGroupVpcAssociationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

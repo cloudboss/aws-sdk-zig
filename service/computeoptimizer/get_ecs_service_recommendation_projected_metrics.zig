@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MetricStatistic = @import("metric_statistic.zig").MetricStatistic;
 const ECSServiceRecommendedOptionProjectedMetric = @import("ecs_service_recommended_option_projected_metric.zig").ECSServiceRecommendedOptionProjectedMetric;
@@ -44,11 +45,7 @@ pub const GetECSServiceRecommendationProjectedMetricsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetECSServiceRecommendationProjectedMetricsInput, options: Options) !GetECSServiceRecommendationProjectedMetricsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetECSServiceRecommendationProjectedMetricsInput, options: CallOptions) !GetECSServiceRecommendationProjectedMetricsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

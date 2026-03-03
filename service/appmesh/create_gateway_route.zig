@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GatewayRouteSpec = @import("gateway_route_spec.zig").GatewayRouteSpec;
 const TagRef = @import("tag_ref.zig").TagRef;
@@ -67,11 +68,7 @@ pub const CreateGatewayRouteOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateGatewayRouteInput, options: Options) !CreateGatewayRouteOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateGatewayRouteInput, options: CallOptions) !CreateGatewayRouteOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

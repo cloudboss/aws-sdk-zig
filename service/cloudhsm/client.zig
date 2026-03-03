@@ -21,6 +21,7 @@ const modify_hapg = @import("modify_hapg.zig");
 const modify_hsm = @import("modify_hsm.zig");
 const modify_luna_client = @import("modify_luna_client.zig");
 const remove_tags_from_resource = @import("remove_tags_from_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -69,7 +70,7 @@ pub const Client = struct {
     ///
     /// Each tag consists of a key and a value. Tag keys must be unique to each
     /// resource.
-    pub fn addTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_resource.AddTagsToResourceInput, options: add_tags_to_resource.Options) !add_tags_to_resource.AddTagsToResourceOutput {
+    pub fn addTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_resource.AddTagsToResourceInput, options: CallOptions) !add_tags_to_resource.AddTagsToResourceOutput {
         return add_tags_to_resource.execute(self, allocator, input, options);
     }
 
@@ -91,7 +92,7 @@ pub const Client = struct {
     /// Creates a high-availability partition group. A high-availability partition
     /// group is a
     /// group of partitions that spans multiple physical HSMs.
-    pub fn createHapg(self: *Self, allocator: std.mem.Allocator, input: create_hapg.CreateHapgInput, options: create_hapg.Options) !create_hapg.CreateHapgOutput {
+    pub fn createHapg(self: *Self, allocator: std.mem.Allocator, input: create_hapg.CreateHapgInput, options: CallOptions) !create_hapg.CreateHapgOutput {
         return create_hapg.execute(self, allocator, input, options);
     }
 
@@ -125,7 +126,7 @@ pub const Client = struct {
     /// the
     /// status of the HSM with the DescribeHsm operation. The HSM is ready to be
     /// initialized when the status changes to `RUNNING`.
-    pub fn createHsm(self: *Self, allocator: std.mem.Allocator, input: create_hsm.CreateHsmInput, options: create_hsm.Options) !create_hsm.CreateHsmOutput {
+    pub fn createHsm(self: *Self, allocator: std.mem.Allocator, input: create_hsm.CreateHsmInput, options: CallOptions) !create_hsm.CreateHsmOutput {
         return create_hsm.execute(self, allocator, input, options);
     }
 
@@ -145,7 +146,7 @@ pub const Client = struct {
     /// Reference](https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
     ///
     /// Creates an HSM client.
-    pub fn createLunaClient(self: *Self, allocator: std.mem.Allocator, input: create_luna_client.CreateLunaClientInput, options: create_luna_client.Options) !create_luna_client.CreateLunaClientOutput {
+    pub fn createLunaClient(self: *Self, allocator: std.mem.Allocator, input: create_luna_client.CreateLunaClientInput, options: CallOptions) !create_luna_client.CreateLunaClientOutput {
         return create_luna_client.execute(self, allocator, input, options);
     }
 
@@ -165,7 +166,7 @@ pub const Client = struct {
     /// Reference](https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
     ///
     /// Deletes a high-availability partition group.
-    pub fn deleteHapg(self: *Self, allocator: std.mem.Allocator, input: delete_hapg.DeleteHapgInput, options: delete_hapg.Options) !delete_hapg.DeleteHapgOutput {
+    pub fn deleteHapg(self: *Self, allocator: std.mem.Allocator, input: delete_hapg.DeleteHapgInput, options: CallOptions) !delete_hapg.DeleteHapgOutput {
         return delete_hapg.execute(self, allocator, input, options);
     }
 
@@ -187,7 +188,7 @@ pub const Client = struct {
     /// Deletes an HSM. After completion, this operation cannot be undone and your
     /// key material
     /// cannot be recovered.
-    pub fn deleteHsm(self: *Self, allocator: std.mem.Allocator, input: delete_hsm.DeleteHsmInput, options: delete_hsm.Options) !delete_hsm.DeleteHsmOutput {
+    pub fn deleteHsm(self: *Self, allocator: std.mem.Allocator, input: delete_hsm.DeleteHsmInput, options: CallOptions) !delete_hsm.DeleteHsmOutput {
         return delete_hsm.execute(self, allocator, input, options);
     }
 
@@ -207,7 +208,7 @@ pub const Client = struct {
     /// Reference](https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
     ///
     /// Deletes a client.
-    pub fn deleteLunaClient(self: *Self, allocator: std.mem.Allocator, input: delete_luna_client.DeleteLunaClientInput, options: delete_luna_client.Options) !delete_luna_client.DeleteLunaClientOutput {
+    pub fn deleteLunaClient(self: *Self, allocator: std.mem.Allocator, input: delete_luna_client.DeleteLunaClientInput, options: CallOptions) !delete_luna_client.DeleteLunaClientOutput {
         return delete_luna_client.execute(self, allocator, input, options);
     }
 
@@ -227,7 +228,7 @@ pub const Client = struct {
     /// Reference](https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
     ///
     /// Retrieves information about a high-availability partition group.
-    pub fn describeHapg(self: *Self, allocator: std.mem.Allocator, input: describe_hapg.DescribeHapgInput, options: describe_hapg.Options) !describe_hapg.DescribeHapgOutput {
+    pub fn describeHapg(self: *Self, allocator: std.mem.Allocator, input: describe_hapg.DescribeHapgInput, options: CallOptions) !describe_hapg.DescribeHapgOutput {
         return describe_hapg.execute(self, allocator, input, options);
     }
 
@@ -249,7 +250,7 @@ pub const Client = struct {
     /// Retrieves information about an HSM. You can identify the HSM by its ARN or
     /// its serial
     /// number.
-    pub fn describeHsm(self: *Self, allocator: std.mem.Allocator, input: describe_hsm.DescribeHsmInput, options: describe_hsm.Options) !describe_hsm.DescribeHsmOutput {
+    pub fn describeHsm(self: *Self, allocator: std.mem.Allocator, input: describe_hsm.DescribeHsmInput, options: CallOptions) !describe_hsm.DescribeHsmOutput {
         return describe_hsm.execute(self, allocator, input, options);
     }
 
@@ -269,7 +270,7 @@ pub const Client = struct {
     /// Reference](https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
     ///
     /// Retrieves information about an HSM client.
-    pub fn describeLunaClient(self: *Self, allocator: std.mem.Allocator, input: describe_luna_client.DescribeLunaClientInput, options: describe_luna_client.Options) !describe_luna_client.DescribeLunaClientOutput {
+    pub fn describeLunaClient(self: *Self, allocator: std.mem.Allocator, input: describe_luna_client.DescribeLunaClientInput, options: CallOptions) !describe_luna_client.DescribeLunaClientOutput {
         return describe_luna_client.execute(self, allocator, input, options);
     }
 
@@ -291,7 +292,7 @@ pub const Client = struct {
     /// Gets the configuration files necessary to connect to all high availability
     /// partition
     /// groups the client is associated with.
-    pub fn getConfig(self: *Self, allocator: std.mem.Allocator, input: get_config.GetConfigInput, options: get_config.Options) !get_config.GetConfigOutput {
+    pub fn getConfig(self: *Self, allocator: std.mem.Allocator, input: get_config.GetConfigInput, options: CallOptions) !get_config.GetConfigOutput {
         return get_config.execute(self, allocator, input, options);
     }
 
@@ -311,7 +312,7 @@ pub const Client = struct {
     /// Reference](https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
     ///
     /// Lists the Availability Zones that have available AWS CloudHSM capacity.
-    pub fn listAvailableZones(self: *Self, allocator: std.mem.Allocator, input: list_available_zones.ListAvailableZonesInput, options: list_available_zones.Options) !list_available_zones.ListAvailableZonesOutput {
+    pub fn listAvailableZones(self: *Self, allocator: std.mem.Allocator, input: list_available_zones.ListAvailableZonesInput, options: CallOptions) !list_available_zones.ListAvailableZonesOutput {
         return list_available_zones.execute(self, allocator, input, options);
     }
 
@@ -338,7 +339,7 @@ pub const Client = struct {
     /// token that you pass in the next call to `ListHapgs` to retrieve the next set
     /// of
     /// items.
-    pub fn listHapgs(self: *Self, allocator: std.mem.Allocator, input: list_hapgs.ListHapgsInput, options: list_hapgs.Options) !list_hapgs.ListHapgsOutput {
+    pub fn listHapgs(self: *Self, allocator: std.mem.Allocator, input: list_hapgs.ListHapgsInput, options: CallOptions) !list_hapgs.ListHapgsOutput {
         return list_hapgs.execute(self, allocator, input, options);
     }
 
@@ -366,7 +367,7 @@ pub const Client = struct {
     /// token that you pass in the next call to `ListHsms` to retrieve the next set
     /// of
     /// items.
-    pub fn listHsms(self: *Self, allocator: std.mem.Allocator, input: list_hsms.ListHsmsInput, options: list_hsms.Options) !list_hsms.ListHsmsOutput {
+    pub fn listHsms(self: *Self, allocator: std.mem.Allocator, input: list_hsms.ListHsmsInput, options: CallOptions) !list_hsms.ListHsmsOutput {
         return list_hsms.execute(self, allocator, input, options);
     }
 
@@ -393,7 +394,7 @@ pub const Client = struct {
     /// token that you pass in the next call to `ListLunaClients` to retrieve the
     /// next set
     /// of items.
-    pub fn listLunaClients(self: *Self, allocator: std.mem.Allocator, input: list_luna_clients.ListLunaClientsInput, options: list_luna_clients.Options) !list_luna_clients.ListLunaClientsOutput {
+    pub fn listLunaClients(self: *Self, allocator: std.mem.Allocator, input: list_luna_clients.ListLunaClientsInput, options: CallOptions) !list_luna_clients.ListLunaClientsOutput {
         return list_luna_clients.execute(self, allocator, input, options);
     }
 
@@ -413,7 +414,7 @@ pub const Client = struct {
     /// Reference](https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
     ///
     /// Returns a list of all tags for the specified AWS CloudHSM resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -433,7 +434,7 @@ pub const Client = struct {
     /// Reference](https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
     ///
     /// Modifies an existing high-availability partition group.
-    pub fn modifyHapg(self: *Self, allocator: std.mem.Allocator, input: modify_hapg.ModifyHapgInput, options: modify_hapg.Options) !modify_hapg.ModifyHapgOutput {
+    pub fn modifyHapg(self: *Self, allocator: std.mem.Allocator, input: modify_hapg.ModifyHapgInput, options: CallOptions) !modify_hapg.ModifyHapgOutput {
         return modify_hapg.execute(self, allocator, input, options);
     }
 
@@ -461,7 +462,7 @@ pub const Client = struct {
     /// that your AWS CloudHSM service is configured for high availability, and
     /// consider executing this
     /// operation during a maintenance window.
-    pub fn modifyHsm(self: *Self, allocator: std.mem.Allocator, input: modify_hsm.ModifyHsmInput, options: modify_hsm.Options) !modify_hsm.ModifyHsmOutput {
+    pub fn modifyHsm(self: *Self, allocator: std.mem.Allocator, input: modify_hsm.ModifyHsmInput, options: CallOptions) !modify_hsm.ModifyHsmOutput {
         return modify_hsm.execute(self, allocator, input, options);
     }
 
@@ -485,7 +486,7 @@ pub const Client = struct {
     /// This action can potentially start a workflow to install the new certificate
     /// on the
     /// client's HSMs.
-    pub fn modifyLunaClient(self: *Self, allocator: std.mem.Allocator, input: modify_luna_client.ModifyLunaClientInput, options: modify_luna_client.Options) !modify_luna_client.ModifyLunaClientOutput {
+    pub fn modifyLunaClient(self: *Self, allocator: std.mem.Allocator, input: modify_luna_client.ModifyLunaClientInput, options: CallOptions) !modify_luna_client.ModifyLunaClientOutput {
         return modify_luna_client.execute(self, allocator, input, options);
     }
 
@@ -509,7 +510,7 @@ pub const Client = struct {
     /// To remove a tag, specify only the tag key to remove (not the value). To
     /// overwrite the
     /// value for an existing tag, use AddTagsToResource.
-    pub fn removeTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_resource.RemoveTagsFromResourceInput, options: remove_tags_from_resource.Options) !remove_tags_from_resource.RemoveTagsFromResourceOutput {
+    pub fn removeTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_resource.RemoveTagsFromResourceInput, options: CallOptions) !remove_tags_from_resource.RemoveTagsFromResourceOutput {
         return remove_tags_from_resource.execute(self, allocator, input, options);
     }
 };

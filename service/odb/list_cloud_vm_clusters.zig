@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CloudVmClusterSummary = @import("cloud_vm_cluster_summary.zig").CloudVmClusterSummary;
 
@@ -40,11 +41,7 @@ pub const ListCloudVmClustersOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCloudVmClustersInput, options: Options) !ListCloudVmClustersOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCloudVmClustersInput, options: CallOptions) !ListCloudVmClustersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

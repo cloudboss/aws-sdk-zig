@@ -40,6 +40,7 @@ const undeprecate_activity_type = @import("undeprecate_activity_type.zig");
 const undeprecate_domain = @import("undeprecate_domain.zig");
 const undeprecate_workflow_type = @import("undeprecate_workflow_type.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -110,7 +111,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn countClosedWorkflowExecutions(self: *Self, allocator: std.mem.Allocator, input: count_closed_workflow_executions.CountClosedWorkflowExecutionsInput, options: count_closed_workflow_executions.Options) !count_closed_workflow_executions.CountClosedWorkflowExecutionsOutput {
+    pub fn countClosedWorkflowExecutions(self: *Self, allocator: std.mem.Allocator, input: count_closed_workflow_executions.CountClosedWorkflowExecutionsInput, options: CallOptions) !count_closed_workflow_executions.CountClosedWorkflowExecutionsOutput {
         return count_closed_workflow_executions.execute(self, allocator, input, options);
     }
 
@@ -154,7 +155,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn countOpenWorkflowExecutions(self: *Self, allocator: std.mem.Allocator, input: count_open_workflow_executions.CountOpenWorkflowExecutionsInput, options: count_open_workflow_executions.Options) !count_open_workflow_executions.CountOpenWorkflowExecutionsOutput {
+    pub fn countOpenWorkflowExecutions(self: *Self, allocator: std.mem.Allocator, input: count_open_workflow_executions.CountOpenWorkflowExecutionsInput, options: CallOptions) !count_open_workflow_executions.CountOpenWorkflowExecutionsOutput {
         return count_open_workflow_executions.execute(self, allocator, input, options);
     }
 
@@ -188,7 +189,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn countPendingActivityTasks(self: *Self, allocator: std.mem.Allocator, input: count_pending_activity_tasks.CountPendingActivityTasksInput, options: count_pending_activity_tasks.Options) !count_pending_activity_tasks.CountPendingActivityTasksOutput {
+    pub fn countPendingActivityTasks(self: *Self, allocator: std.mem.Allocator, input: count_pending_activity_tasks.CountPendingActivityTasksInput, options: CallOptions) !count_pending_activity_tasks.CountPendingActivityTasksOutput {
         return count_pending_activity_tasks.execute(self, allocator, input, options);
     }
 
@@ -222,7 +223,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn countPendingDecisionTasks(self: *Self, allocator: std.mem.Allocator, input: count_pending_decision_tasks.CountPendingDecisionTasksInput, options: count_pending_decision_tasks.Options) !count_pending_decision_tasks.CountPendingDecisionTasksOutput {
+    pub fn countPendingDecisionTasks(self: *Self, allocator: std.mem.Allocator, input: count_pending_decision_tasks.CountPendingDecisionTasksInput, options: CallOptions) !count_pending_decision_tasks.CountPendingDecisionTasksOutput {
         return count_pending_decision_tasks.execute(self, allocator, input, options);
     }
 
@@ -262,7 +263,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn deleteActivityType(self: *Self, allocator: std.mem.Allocator, input: delete_activity_type.DeleteActivityTypeInput, options: delete_activity_type.Options) !delete_activity_type.DeleteActivityTypeOutput {
+    pub fn deleteActivityType(self: *Self, allocator: std.mem.Allocator, input: delete_activity_type.DeleteActivityTypeInput, options: CallOptions) !delete_activity_type.DeleteActivityTypeOutput {
         return delete_activity_type.execute(self, allocator, input, options);
     }
 
@@ -302,7 +303,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn deleteWorkflowType(self: *Self, allocator: std.mem.Allocator, input: delete_workflow_type.DeleteWorkflowTypeInput, options: delete_workflow_type.Options) !delete_workflow_type.DeleteWorkflowTypeOutput {
+    pub fn deleteWorkflowType(self: *Self, allocator: std.mem.Allocator, input: delete_workflow_type.DeleteWorkflowTypeInput, options: CallOptions) !delete_workflow_type.DeleteWorkflowTypeOutput {
         return delete_workflow_type.execute(self, allocator, input, options);
     }
 
@@ -340,7 +341,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn deprecateActivityType(self: *Self, allocator: std.mem.Allocator, input: deprecate_activity_type.DeprecateActivityTypeInput, options: deprecate_activity_type.Options) !deprecate_activity_type.DeprecateActivityTypeOutput {
+    pub fn deprecateActivityType(self: *Self, allocator: std.mem.Allocator, input: deprecate_activity_type.DeprecateActivityTypeInput, options: CallOptions) !deprecate_activity_type.DeprecateActivityTypeOutput {
         return deprecate_activity_type.execute(self, allocator, input, options);
     }
 
@@ -380,7 +381,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn deprecateDomain(self: *Self, allocator: std.mem.Allocator, input: deprecate_domain.DeprecateDomainInput, options: deprecate_domain.Options) !deprecate_domain.DeprecateDomainOutput {
+    pub fn deprecateDomain(self: *Self, allocator: std.mem.Allocator, input: deprecate_domain.DeprecateDomainInput, options: CallOptions) !deprecate_domain.DeprecateDomainOutput {
         return deprecate_domain.execute(self, allocator, input, options);
     }
 
@@ -424,7 +425,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn deprecateWorkflowType(self: *Self, allocator: std.mem.Allocator, input: deprecate_workflow_type.DeprecateWorkflowTypeInput, options: deprecate_workflow_type.Options) !deprecate_workflow_type.DeprecateWorkflowTypeOutput {
+    pub fn deprecateWorkflowType(self: *Self, allocator: std.mem.Allocator, input: deprecate_workflow_type.DeprecateWorkflowTypeInput, options: CallOptions) !deprecate_workflow_type.DeprecateWorkflowTypeOutput {
         return deprecate_workflow_type.execute(self, allocator, input, options);
     }
 
@@ -463,7 +464,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn describeActivityType(self: *Self, allocator: std.mem.Allocator, input: describe_activity_type.DescribeActivityTypeInput, options: describe_activity_type.Options) !describe_activity_type.DescribeActivityTypeOutput {
+    pub fn describeActivityType(self: *Self, allocator: std.mem.Allocator, input: describe_activity_type.DescribeActivityTypeInput, options: CallOptions) !describe_activity_type.DescribeActivityTypeOutput {
         return describe_activity_type.execute(self, allocator, input, options);
     }
 
@@ -492,7 +493,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn describeDomain(self: *Self, allocator: std.mem.Allocator, input: describe_domain.DescribeDomainInput, options: describe_domain.Options) !describe_domain.DescribeDomainOutput {
+    pub fn describeDomain(self: *Self, allocator: std.mem.Allocator, input: describe_domain.DescribeDomainInput, options: CallOptions) !describe_domain.DescribeDomainOutput {
         return describe_domain.execute(self, allocator, input, options);
     }
 
@@ -526,7 +527,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn describeWorkflowExecution(self: *Self, allocator: std.mem.Allocator, input: describe_workflow_execution.DescribeWorkflowExecutionInput, options: describe_workflow_execution.Options) !describe_workflow_execution.DescribeWorkflowExecutionOutput {
+    pub fn describeWorkflowExecution(self: *Self, allocator: std.mem.Allocator, input: describe_workflow_execution.DescribeWorkflowExecutionInput, options: CallOptions) !describe_workflow_execution.DescribeWorkflowExecutionOutput {
         return describe_workflow_execution.execute(self, allocator, input, options);
     }
 
@@ -564,7 +565,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn describeWorkflowType(self: *Self, allocator: std.mem.Allocator, input: describe_workflow_type.DescribeWorkflowTypeInput, options: describe_workflow_type.Options) !describe_workflow_type.DescribeWorkflowTypeOutput {
+    pub fn describeWorkflowType(self: *Self, allocator: std.mem.Allocator, input: describe_workflow_type.DescribeWorkflowTypeInput, options: CallOptions) !describe_workflow_type.DescribeWorkflowTypeOutput {
         return describe_workflow_type.execute(self, allocator, input, options);
     }
 
@@ -599,7 +600,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn getWorkflowExecutionHistory(self: *Self, allocator: std.mem.Allocator, input: get_workflow_execution_history.GetWorkflowExecutionHistoryInput, options: get_workflow_execution_history.Options) !get_workflow_execution_history.GetWorkflowExecutionHistoryOutput {
+    pub fn getWorkflowExecutionHistory(self: *Self, allocator: std.mem.Allocator, input: get_workflow_execution_history.GetWorkflowExecutionHistoryInput, options: CallOptions) !get_workflow_execution_history.GetWorkflowExecutionHistoryOutput {
         return get_workflow_execution_history.execute(self, allocator, input, options);
     }
 
@@ -635,7 +636,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn listActivityTypes(self: *Self, allocator: std.mem.Allocator, input: list_activity_types.ListActivityTypesInput, options: list_activity_types.Options) !list_activity_types.ListActivityTypesOutput {
+    pub fn listActivityTypes(self: *Self, allocator: std.mem.Allocator, input: list_activity_types.ListActivityTypesInput, options: CallOptions) !list_activity_types.ListActivityTypesOutput {
         return list_activity_types.execute(self, allocator, input, options);
     }
 
@@ -682,7 +683,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn listClosedWorkflowExecutions(self: *Self, allocator: std.mem.Allocator, input: list_closed_workflow_executions.ListClosedWorkflowExecutionsInput, options: list_closed_workflow_executions.Options) !list_closed_workflow_executions.ListClosedWorkflowExecutionsOutput {
+    pub fn listClosedWorkflowExecutions(self: *Self, allocator: std.mem.Allocator, input: list_closed_workflow_executions.ListClosedWorkflowExecutionsInput, options: CallOptions) !list_closed_workflow_executions.ListClosedWorkflowExecutionsOutput {
         return list_closed_workflow_executions.execute(self, allocator, input, options);
     }
 
@@ -720,7 +721,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn listDomains(self: *Self, allocator: std.mem.Allocator, input: list_domains.ListDomainsInput, options: list_domains.Options) !list_domains.ListDomainsOutput {
+    pub fn listDomains(self: *Self, allocator: std.mem.Allocator, input: list_domains.ListDomainsInput, options: CallOptions) !list_domains.ListDomainsOutput {
         return list_domains.execute(self, allocator, input, options);
     }
 
@@ -767,12 +768,12 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn listOpenWorkflowExecutions(self: *Self, allocator: std.mem.Allocator, input: list_open_workflow_executions.ListOpenWorkflowExecutionsInput, options: list_open_workflow_executions.Options) !list_open_workflow_executions.ListOpenWorkflowExecutionsOutput {
+    pub fn listOpenWorkflowExecutions(self: *Self, allocator: std.mem.Allocator, input: list_open_workflow_executions.ListOpenWorkflowExecutionsInput, options: CallOptions) !list_open_workflow_executions.ListOpenWorkflowExecutionsOutput {
         return list_open_workflow_executions.execute(self, allocator, input, options);
     }
 
     /// List tags for a given domain.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -803,7 +804,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn listWorkflowTypes(self: *Self, allocator: std.mem.Allocator, input: list_workflow_types.ListWorkflowTypesInput, options: list_workflow_types.Options) !list_workflow_types.ListWorkflowTypesOutput {
+    pub fn listWorkflowTypes(self: *Self, allocator: std.mem.Allocator, input: list_workflow_types.ListWorkflowTypesInput, options: CallOptions) !list_workflow_types.ListWorkflowTypesOutput {
         return list_workflow_types.execute(self, allocator, input, options);
     }
 
@@ -848,7 +849,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn pollForActivityTask(self: *Self, allocator: std.mem.Allocator, input: poll_for_activity_task.PollForActivityTaskInput, options: poll_for_activity_task.Options) !poll_for_activity_task.PollForActivityTaskOutput {
+    pub fn pollForActivityTask(self: *Self, allocator: std.mem.Allocator, input: poll_for_activity_task.PollForActivityTaskInput, options: CallOptions) !poll_for_activity_task.PollForActivityTaskOutput {
         return poll_for_activity_task.execute(self, allocator, input, options);
     }
 
@@ -909,7 +910,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn pollForDecisionTask(self: *Self, allocator: std.mem.Allocator, input: poll_for_decision_task.PollForDecisionTaskInput, options: poll_for_decision_task.Options) !poll_for_decision_task.PollForDecisionTaskOutput {
+    pub fn pollForDecisionTask(self: *Self, allocator: std.mem.Allocator, input: poll_for_decision_task.PollForDecisionTaskInput, options: CallOptions) !poll_for_decision_task.PollForDecisionTaskOutput {
         return poll_for_decision_task.execute(self, allocator, input, options);
     }
 
@@ -972,7 +973,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn recordActivityTaskHeartbeat(self: *Self, allocator: std.mem.Allocator, input: record_activity_task_heartbeat.RecordActivityTaskHeartbeatInput, options: record_activity_task_heartbeat.Options) !record_activity_task_heartbeat.RecordActivityTaskHeartbeatOutput {
+    pub fn recordActivityTaskHeartbeat(self: *Self, allocator: std.mem.Allocator, input: record_activity_task_heartbeat.RecordActivityTaskHeartbeatInput, options: CallOptions) !record_activity_task_heartbeat.RecordActivityTaskHeartbeatOutput {
         return record_activity_task_heartbeat.execute(self, allocator, input, options);
     }
 
@@ -1015,7 +1016,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn registerActivityType(self: *Self, allocator: std.mem.Allocator, input: register_activity_type.RegisterActivityTypeInput, options: register_activity_type.Options) !register_activity_type.RegisterActivityTypeOutput {
+    pub fn registerActivityType(self: *Self, allocator: std.mem.Allocator, input: register_activity_type.RegisterActivityTypeInput, options: CallOptions) !register_activity_type.RegisterActivityTypeOutput {
         return register_activity_type.execute(self, allocator, input, options);
     }
 
@@ -1044,7 +1045,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn registerDomain(self: *Self, allocator: std.mem.Allocator, input: register_domain.RegisterDomainInput, options: register_domain.Options) !register_domain.RegisterDomainOutput {
+    pub fn registerDomain(self: *Self, allocator: std.mem.Allocator, input: register_domain.RegisterDomainInput, options: CallOptions) !register_domain.RegisterDomainOutput {
         return register_domain.execute(self, allocator, input, options);
     }
 
@@ -1090,7 +1091,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn registerWorkflowType(self: *Self, allocator: std.mem.Allocator, input: register_workflow_type.RegisterWorkflowTypeInput, options: register_workflow_type.Options) !register_workflow_type.RegisterWorkflowTypeOutput {
+    pub fn registerWorkflowType(self: *Self, allocator: std.mem.Allocator, input: register_workflow_type.RegisterWorkflowTypeInput, options: CallOptions) !register_workflow_type.RegisterWorkflowTypeOutput {
         return register_workflow_type.execute(self, allocator, input, options);
     }
 
@@ -1134,7 +1135,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn requestCancelWorkflowExecution(self: *Self, allocator: std.mem.Allocator, input: request_cancel_workflow_execution.RequestCancelWorkflowExecutionInput, options: request_cancel_workflow_execution.Options) !request_cancel_workflow_execution.RequestCancelWorkflowExecutionOutput {
+    pub fn requestCancelWorkflowExecution(self: *Self, allocator: std.mem.Allocator, input: request_cancel_workflow_execution.RequestCancelWorkflowExecutionInput, options: CallOptions) !request_cancel_workflow_execution.RequestCancelWorkflowExecutionOutput {
         return request_cancel_workflow_execution.execute(self, allocator, input, options);
     }
 
@@ -1180,7 +1181,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn respondActivityTaskCanceled(self: *Self, allocator: std.mem.Allocator, input: respond_activity_task_canceled.RespondActivityTaskCanceledInput, options: respond_activity_task_canceled.Options) !respond_activity_task_canceled.RespondActivityTaskCanceledOutput {
+    pub fn respondActivityTaskCanceled(self: *Self, allocator: std.mem.Allocator, input: respond_activity_task_canceled.RespondActivityTaskCanceledInput, options: CallOptions) !respond_activity_task_canceled.RespondActivityTaskCanceledOutput {
         return respond_activity_task_canceled.execute(self, allocator, input, options);
     }
 
@@ -1227,7 +1228,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn respondActivityTaskCompleted(self: *Self, allocator: std.mem.Allocator, input: respond_activity_task_completed.RespondActivityTaskCompletedInput, options: respond_activity_task_completed.Options) !respond_activity_task_completed.RespondActivityTaskCompletedOutput {
+    pub fn respondActivityTaskCompleted(self: *Self, allocator: std.mem.Allocator, input: respond_activity_task_completed.RespondActivityTaskCompletedInput, options: CallOptions) !respond_activity_task_completed.RespondActivityTaskCompletedOutput {
         return respond_activity_task_completed.execute(self, allocator, input, options);
     }
 
@@ -1267,7 +1268,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn respondActivityTaskFailed(self: *Self, allocator: std.mem.Allocator, input: respond_activity_task_failed.RespondActivityTaskFailedInput, options: respond_activity_task_failed.Options) !respond_activity_task_failed.RespondActivityTaskFailedOutput {
+    pub fn respondActivityTaskFailed(self: *Self, allocator: std.mem.Allocator, input: respond_activity_task_failed.RespondActivityTaskFailedInput, options: CallOptions) !respond_activity_task_failed.RespondActivityTaskFailedOutput {
         return respond_activity_task_failed.execute(self, allocator, input, options);
     }
 
@@ -1295,7 +1296,7 @@ pub const Client = struct {
     /// IAM to Manage Access to Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the
     /// *Amazon SWF Developer Guide*.
-    pub fn respondDecisionTaskCompleted(self: *Self, allocator: std.mem.Allocator, input: respond_decision_task_completed.RespondDecisionTaskCompletedInput, options: respond_decision_task_completed.Options) !respond_decision_task_completed.RespondDecisionTaskCompletedOutput {
+    pub fn respondDecisionTaskCompleted(self: *Self, allocator: std.mem.Allocator, input: respond_decision_task_completed.RespondDecisionTaskCompletedInput, options: CallOptions) !respond_decision_task_completed.RespondDecisionTaskCompletedOutput {
         return respond_decision_task_completed.execute(self, allocator, input, options);
     }
 
@@ -1336,7 +1337,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn signalWorkflowExecution(self: *Self, allocator: std.mem.Allocator, input: signal_workflow_execution.SignalWorkflowExecutionInput, options: signal_workflow_execution.Options) !signal_workflow_execution.SignalWorkflowExecutionOutput {
+    pub fn signalWorkflowExecution(self: *Self, allocator: std.mem.Allocator, input: signal_workflow_execution.SignalWorkflowExecutionInput, options: CallOptions) !signal_workflow_execution.SignalWorkflowExecutionOutput {
         return signal_workflow_execution.execute(self, allocator, input, options);
     }
 
@@ -1388,14 +1389,14 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn startWorkflowExecution(self: *Self, allocator: std.mem.Allocator, input: start_workflow_execution.StartWorkflowExecutionInput, options: start_workflow_execution.Options) !start_workflow_execution.StartWorkflowExecutionOutput {
+    pub fn startWorkflowExecution(self: *Self, allocator: std.mem.Allocator, input: start_workflow_execution.StartWorkflowExecutionInput, options: CallOptions) !start_workflow_execution.StartWorkflowExecutionOutput {
         return start_workflow_execution.execute(self, allocator, input, options);
     }
 
     /// Add a tag to a Amazon SWF domain.
     ///
     /// Amazon SWF supports a maximum of 50 tags per resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -1440,7 +1441,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn terminateWorkflowExecution(self: *Self, allocator: std.mem.Allocator, input: terminate_workflow_execution.TerminateWorkflowExecutionInput, options: terminate_workflow_execution.Options) !terminate_workflow_execution.TerminateWorkflowExecutionOutput {
+    pub fn terminateWorkflowExecution(self: *Self, allocator: std.mem.Allocator, input: terminate_workflow_execution.TerminateWorkflowExecutionInput, options: CallOptions) !terminate_workflow_execution.TerminateWorkflowExecutionOutput {
         return terminate_workflow_execution.execute(self, allocator, input, options);
     }
 
@@ -1481,7 +1482,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn undeprecateActivityType(self: *Self, allocator: std.mem.Allocator, input: undeprecate_activity_type.UndeprecateActivityTypeInput, options: undeprecate_activity_type.Options) !undeprecate_activity_type.UndeprecateActivityTypeOutput {
+    pub fn undeprecateActivityType(self: *Self, allocator: std.mem.Allocator, input: undeprecate_activity_type.UndeprecateActivityTypeInput, options: CallOptions) !undeprecate_activity_type.UndeprecateActivityTypeOutput {
         return undeprecate_activity_type.execute(self, allocator, input, options);
     }
 
@@ -1515,7 +1516,7 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn undeprecateDomain(self: *Self, allocator: std.mem.Allocator, input: undeprecate_domain.UndeprecateDomainInput, options: undeprecate_domain.Options) !undeprecate_domain.UndeprecateDomainOutput {
+    pub fn undeprecateDomain(self: *Self, allocator: std.mem.Allocator, input: undeprecate_domain.UndeprecateDomainInput, options: CallOptions) !undeprecate_domain.UndeprecateDomainOutput {
         return undeprecate_domain.execute(self, allocator, input, options);
     }
 
@@ -1556,12 +1557,12 @@ pub const Client = struct {
     /// For details and example IAM policies, see [Using IAM to Manage Access to
     /// Amazon SWF
     /// Workflows](https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html) in the *Amazon SWF Developer Guide*.
-    pub fn undeprecateWorkflowType(self: *Self, allocator: std.mem.Allocator, input: undeprecate_workflow_type.UndeprecateWorkflowTypeInput, options: undeprecate_workflow_type.Options) !undeprecate_workflow_type.UndeprecateWorkflowTypeOutput {
+    pub fn undeprecateWorkflowType(self: *Self, allocator: std.mem.Allocator, input: undeprecate_workflow_type.UndeprecateWorkflowTypeInput, options: CallOptions) !undeprecate_workflow_type.UndeprecateWorkflowTypeOutput {
         return undeprecate_workflow_type.execute(self, allocator, input, options);
     }
 
     /// Remove a tag from a Amazon SWF domain.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

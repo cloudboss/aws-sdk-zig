@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_pipeline_endpoint_connections = @import("list_pipeline_endpoint_connections.zig");
@@ -16,7 +17,7 @@ pub const ListPipelineEndpointConnectionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_pipeline_endpoint_connections.Options) !list_pipeline_endpoint_connections.ListPipelineEndpointConnectionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_pipeline_endpoint_connections.ListPipelineEndpointConnectionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -57,7 +58,7 @@ pub const ListPipelineEndpointsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_pipeline_endpoints.Options) !list_pipeline_endpoints.ListPipelineEndpointsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_pipeline_endpoints.ListPipelineEndpointsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -98,7 +99,7 @@ pub const ListPipelinesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_pipelines.Options) !list_pipelines.ListPipelinesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_pipelines.ListPipelinesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

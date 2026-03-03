@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const OriginRequestPolicyType = @import("origin_request_policy_type.zig").OriginRequestPolicyType;
 const OriginRequestPolicyList = @import("origin_request_policy_list.zig").OriginRequestPolicyList;
@@ -33,11 +34,7 @@ pub const ListOriginRequestPoliciesOutput = struct {
     origin_request_policy_list: ?OriginRequestPolicyList = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOriginRequestPoliciesInput, options: Options) !ListOriginRequestPoliciesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOriginRequestPoliciesInput, options: CallOptions) !ListOriginRequestPoliciesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

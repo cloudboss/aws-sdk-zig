@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SendMessageBatchRequestEntry = @import("send_message_batch_request_entry.zig").SendMessageBatchRequestEntry;
 const BatchResultErrorEntry = @import("batch_result_error_entry.zig").BatchResultErrorEntry;
@@ -42,11 +43,7 @@ pub const SendMessageBatchOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendMessageBatchInput, options: Options) !SendMessageBatchOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendMessageBatchInput, options: CallOptions) !SendMessageBatchOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

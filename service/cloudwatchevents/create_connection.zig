@@ -2,20 +2,17 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConnectionAuthorizationType = @import("connection_authorization_type.zig").ConnectionAuthorizationType;
 const CreateConnectionAuthRequestParameters = @import("create_connection_auth_request_parameters.zig").CreateConnectionAuthRequestParameters;
 const ConnectionState = @import("connection_state.zig").ConnectionState;
 
-const CreateConnectionInput = @import("create_connection_request.zig").CreateConnectionRequest;
+pub const CreateConnectionInput = @import("create_connection_request.zig").CreateConnectionRequest;
 
-const CreateConnectionOutput = @import("create_connection_response.zig").CreateConnectionResponse;
+pub const CreateConnectionOutput = @import("create_connection_response.zig").CreateConnectionResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateConnectionInput, options: Options) !CreateConnectionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateConnectionInput, options: CallOptions) !CreateConnectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

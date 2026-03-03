@@ -64,6 +64,7 @@ const update_app_version = @import("update_app_version.zig");
 const update_app_version_app_component = @import("update_app_version_app_component.zig");
 const update_app_version_resource = @import("update_app_version_resource.zig");
 const update_resiliency_policy = @import("update_resiliency_policy.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -96,7 +97,7 @@ pub const Client = struct {
 
     /// Accepts the resource grouping recommendations suggested by Resilience Hub
     /// for your application.
-    pub fn acceptResourceGroupingRecommendations(self: *Self, allocator: std.mem.Allocator, input: accept_resource_grouping_recommendations.AcceptResourceGroupingRecommendationsInput, options: accept_resource_grouping_recommendations.Options) !accept_resource_grouping_recommendations.AcceptResourceGroupingRecommendationsOutput {
+    pub fn acceptResourceGroupingRecommendations(self: *Self, allocator: std.mem.Allocator, input: accept_resource_grouping_recommendations.AcceptResourceGroupingRecommendationsInput, options: CallOptions) !accept_resource_grouping_recommendations.AcceptResourceGroupingRecommendationsOutput {
         return accept_resource_grouping_recommendations.execute(self, allocator, input, options);
     }
 
@@ -111,12 +112,12 @@ pub const Client = struct {
     /// [Step
     /// 2: How is your application
     /// managed?](https://docs.aws.amazon.com/resilience-hub/latest/userguide/how-app-manage.html) in the Resilience Hub User Guide.
-    pub fn addDraftAppVersionResourceMappings(self: *Self, allocator: std.mem.Allocator, input: add_draft_app_version_resource_mappings.AddDraftAppVersionResourceMappingsInput, options: add_draft_app_version_resource_mappings.Options) !add_draft_app_version_resource_mappings.AddDraftAppVersionResourceMappingsOutput {
+    pub fn addDraftAppVersionResourceMappings(self: *Self, allocator: std.mem.Allocator, input: add_draft_app_version_resource_mappings.AddDraftAppVersionResourceMappingsInput, options: CallOptions) !add_draft_app_version_resource_mappings.AddDraftAppVersionResourceMappingsOutput {
         return add_draft_app_version_resource_mappings.execute(self, allocator, input, options);
     }
 
     /// Enables you to include or exclude one or more operational recommendations.
-    pub fn batchUpdateRecommendationStatus(self: *Self, allocator: std.mem.Allocator, input: batch_update_recommendation_status.BatchUpdateRecommendationStatusInput, options: batch_update_recommendation_status.Options) !batch_update_recommendation_status.BatchUpdateRecommendationStatusOutput {
+    pub fn batchUpdateRecommendationStatus(self: *Self, allocator: std.mem.Allocator, input: batch_update_recommendation_status.BatchUpdateRecommendationStatusInput, options: CallOptions) !batch_update_recommendation_status.BatchUpdateRecommendationStatusOutput {
         return batch_update_recommendation_status.execute(self, allocator, input, options);
     }
 
@@ -141,7 +142,7 @@ pub const Client = struct {
     /// until you achieve your goals for recovery time objective (RTO) and recovery
     /// point objective
     /// (RPO).
-    pub fn createApp(self: *Self, allocator: std.mem.Allocator, input: create_app.CreateAppInput, options: create_app.Options) !create_app.CreateAppOutput {
+    pub fn createApp(self: *Self, allocator: std.mem.Allocator, input: create_app.CreateAppInput, options: CallOptions) !create_app.CreateAppOutput {
         return create_app.execute(self, allocator, input, options);
     }
 
@@ -151,7 +152,7 @@ pub const Client = struct {
     /// Application Component for running assessments, you must publish the
     /// Resilience Hub
     /// application using the `PublishAppVersion` API.
-    pub fn createAppVersionAppComponent(self: *Self, allocator: std.mem.Allocator, input: create_app_version_app_component.CreateAppVersionAppComponentInput, options: create_app_version_app_component.Options) !create_app_version_app_component.CreateAppVersionAppComponentOutput {
+    pub fn createAppVersionAppComponent(self: *Self, allocator: std.mem.Allocator, input: create_app_version_app_component.CreateAppVersionAppComponentInput, options: CallOptions) !create_app_version_app_component.CreateAppVersionAppComponentOutput {
         return create_app_version_app_component.execute(self, allocator, input, options);
     }
 
@@ -170,12 +171,12 @@ pub const Client = struct {
     ///
     /// * To update application version with new `physicalResourceID`, you must
     /// call `ResolveAppVersionResources` API.
-    pub fn createAppVersionResource(self: *Self, allocator: std.mem.Allocator, input: create_app_version_resource.CreateAppVersionResourceInput, options: create_app_version_resource.Options) !create_app_version_resource.CreateAppVersionResourceOutput {
+    pub fn createAppVersionResource(self: *Self, allocator: std.mem.Allocator, input: create_app_version_resource.CreateAppVersionResourceInput, options: CallOptions) !create_app_version_resource.CreateAppVersionResourceOutput {
         return create_app_version_resource.execute(self, allocator, input, options);
     }
 
     /// Creates a new recommendation template for the Resilience Hub application.
-    pub fn createRecommendationTemplate(self: *Self, allocator: std.mem.Allocator, input: create_recommendation_template.CreateRecommendationTemplateInput, options: create_recommendation_template.Options) !create_recommendation_template.CreateRecommendationTemplateOutput {
+    pub fn createRecommendationTemplate(self: *Self, allocator: std.mem.Allocator, input: create_recommendation_template.CreateRecommendationTemplateInput, options: CallOptions) !create_recommendation_template.CreateRecommendationTemplateOutput {
         return create_recommendation_template.execute(self, allocator, input, options);
     }
 
@@ -190,28 +191,28 @@ pub const Client = struct {
     /// estimated workload RPO result will be near zero and the **Compliance
     /// status** for your application will be set to **Policy
     /// breached**.
-    pub fn createResiliencyPolicy(self: *Self, allocator: std.mem.Allocator, input: create_resiliency_policy.CreateResiliencyPolicyInput, options: create_resiliency_policy.Options) !create_resiliency_policy.CreateResiliencyPolicyOutput {
+    pub fn createResiliencyPolicy(self: *Self, allocator: std.mem.Allocator, input: create_resiliency_policy.CreateResiliencyPolicyInput, options: CallOptions) !create_resiliency_policy.CreateResiliencyPolicyOutput {
         return create_resiliency_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes an Resilience Hub application. This is a destructive action that
     /// can't be
     /// undone.
-    pub fn deleteApp(self: *Self, allocator: std.mem.Allocator, input: delete_app.DeleteAppInput, options: delete_app.Options) !delete_app.DeleteAppOutput {
+    pub fn deleteApp(self: *Self, allocator: std.mem.Allocator, input: delete_app.DeleteAppInput, options: CallOptions) !delete_app.DeleteAppOutput {
         return delete_app.execute(self, allocator, input, options);
     }
 
     /// Deletes an Resilience Hub application assessment. This is a destructive
     /// action
     /// that can't be undone.
-    pub fn deleteAppAssessment(self: *Self, allocator: std.mem.Allocator, input: delete_app_assessment.DeleteAppAssessmentInput, options: delete_app_assessment.Options) !delete_app_assessment.DeleteAppAssessmentOutput {
+    pub fn deleteAppAssessment(self: *Self, allocator: std.mem.Allocator, input: delete_app_assessment.DeleteAppAssessmentInput, options: CallOptions) !delete_app_assessment.DeleteAppAssessmentOutput {
         return delete_app_assessment.execute(self, allocator, input, options);
     }
 
     /// Deletes the input source and all of its imported resources from the
     /// Resilience Hub
     /// application.
-    pub fn deleteAppInputSource(self: *Self, allocator: std.mem.Allocator, input: delete_app_input_source.DeleteAppInputSourceInput, options: delete_app_input_source.Options) !delete_app_input_source.DeleteAppInputSourceOutput {
+    pub fn deleteAppInputSource(self: *Self, allocator: std.mem.Allocator, input: delete_app_input_source.DeleteAppInputSourceInput, options: CallOptions) !delete_app_input_source.DeleteAppInputSourceOutput {
         return delete_app_input_source.execute(self, allocator, input, options);
     }
 
@@ -225,7 +226,7 @@ pub const Client = struct {
     /// * You will not be able to delete an Application Component if it has
     ///   resources associated
     /// with it.
-    pub fn deleteAppVersionAppComponent(self: *Self, allocator: std.mem.Allocator, input: delete_app_version_app_component.DeleteAppVersionAppComponentInput, options: delete_app_version_app_component.Options) !delete_app_version_app_component.DeleteAppVersionAppComponentOutput {
+    pub fn deleteAppVersionAppComponent(self: *Self, allocator: std.mem.Allocator, input: delete_app_version_app_component.DeleteAppVersionAppComponentInput, options: CallOptions) !delete_app_version_app_component.DeleteAppVersionAppComponentOutput {
         return delete_app_version_app_component.execute(self, allocator, input, options);
     }
 
@@ -241,40 +242,40 @@ pub const Client = struct {
     /// resource for running resiliency assessments, you must publish the Resilience
     /// Hub
     /// application using the `PublishAppVersion` API.
-    pub fn deleteAppVersionResource(self: *Self, allocator: std.mem.Allocator, input: delete_app_version_resource.DeleteAppVersionResourceInput, options: delete_app_version_resource.Options) !delete_app_version_resource.DeleteAppVersionResourceOutput {
+    pub fn deleteAppVersionResource(self: *Self, allocator: std.mem.Allocator, input: delete_app_version_resource.DeleteAppVersionResourceInput, options: CallOptions) !delete_app_version_resource.DeleteAppVersionResourceOutput {
         return delete_app_version_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes a recommendation template. This is a destructive action that can't
     /// be
     /// undone.
-    pub fn deleteRecommendationTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_recommendation_template.DeleteRecommendationTemplateInput, options: delete_recommendation_template.Options) !delete_recommendation_template.DeleteRecommendationTemplateOutput {
+    pub fn deleteRecommendationTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_recommendation_template.DeleteRecommendationTemplateInput, options: CallOptions) !delete_recommendation_template.DeleteRecommendationTemplateOutput {
         return delete_recommendation_template.execute(self, allocator, input, options);
     }
 
     /// Deletes a resiliency policy. This is a destructive action that can't be
     /// undone.
-    pub fn deleteResiliencyPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resiliency_policy.DeleteResiliencyPolicyInput, options: delete_resiliency_policy.Options) !delete_resiliency_policy.DeleteResiliencyPolicyOutput {
+    pub fn deleteResiliencyPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resiliency_policy.DeleteResiliencyPolicyInput, options: CallOptions) !delete_resiliency_policy.DeleteResiliencyPolicyOutput {
         return delete_resiliency_policy.execute(self, allocator, input, options);
     }
 
     /// Describes an Resilience Hub application.
-    pub fn describeApp(self: *Self, allocator: std.mem.Allocator, input: describe_app.DescribeAppInput, options: describe_app.Options) !describe_app.DescribeAppOutput {
+    pub fn describeApp(self: *Self, allocator: std.mem.Allocator, input: describe_app.DescribeAppInput, options: CallOptions) !describe_app.DescribeAppOutput {
         return describe_app.execute(self, allocator, input, options);
     }
 
     /// Describes an assessment for an Resilience Hub application.
-    pub fn describeAppAssessment(self: *Self, allocator: std.mem.Allocator, input: describe_app_assessment.DescribeAppAssessmentInput, options: describe_app_assessment.Options) !describe_app_assessment.DescribeAppAssessmentOutput {
+    pub fn describeAppAssessment(self: *Self, allocator: std.mem.Allocator, input: describe_app_assessment.DescribeAppAssessmentInput, options: CallOptions) !describe_app_assessment.DescribeAppAssessmentOutput {
         return describe_app_assessment.execute(self, allocator, input, options);
     }
 
     /// Describes the Resilience Hub application version.
-    pub fn describeAppVersion(self: *Self, allocator: std.mem.Allocator, input: describe_app_version.DescribeAppVersionInput, options: describe_app_version.Options) !describe_app_version.DescribeAppVersionOutput {
+    pub fn describeAppVersion(self: *Self, allocator: std.mem.Allocator, input: describe_app_version.DescribeAppVersionInput, options: CallOptions) !describe_app_version.DescribeAppVersionOutput {
         return describe_app_version.execute(self, allocator, input, options);
     }
 
     /// Describes an Application Component in the Resilience Hub application.
-    pub fn describeAppVersionAppComponent(self: *Self, allocator: std.mem.Allocator, input: describe_app_version_app_component.DescribeAppVersionAppComponentInput, options: describe_app_version_app_component.Options) !describe_app_version_app_component.DescribeAppVersionAppComponentOutput {
+    pub fn describeAppVersionAppComponent(self: *Self, allocator: std.mem.Allocator, input: describe_app_version_app_component.DescribeAppVersionAppComponentInput, options: CallOptions) !describe_app_version_app_component.DescribeAppVersionAppComponentOutput {
         return describe_app_version_app_component.execute(self, allocator, input, options);
     }
 
@@ -289,7 +290,7 @@ pub const Client = struct {
     ///
     /// * `physicalResourceId` (Along with `physicalResourceId`, you can
     /// also provide `awsAccountId`, and `awsRegion`)
-    pub fn describeAppVersionResource(self: *Self, allocator: std.mem.Allocator, input: describe_app_version_resource.DescribeAppVersionResourceInput, options: describe_app_version_resource.Options) !describe_app_version_resource.DescribeAppVersionResourceOutput {
+    pub fn describeAppVersionResource(self: *Self, allocator: std.mem.Allocator, input: describe_app_version_resource.DescribeAppVersionResourceInput, options: CallOptions) !describe_app_version_resource.DescribeAppVersionResourceOutput {
         return describe_app_version_resource.execute(self, allocator, input, options);
     }
 
@@ -298,12 +299,12 @@ pub const Client = struct {
     /// version. If `resolutionId` is not specified, the current resolution status
     /// is
     /// returned.
-    pub fn describeAppVersionResourcesResolutionStatus(self: *Self, allocator: std.mem.Allocator, input: describe_app_version_resources_resolution_status.DescribeAppVersionResourcesResolutionStatusInput, options: describe_app_version_resources_resolution_status.Options) !describe_app_version_resources_resolution_status.DescribeAppVersionResourcesResolutionStatusOutput {
+    pub fn describeAppVersionResourcesResolutionStatus(self: *Self, allocator: std.mem.Allocator, input: describe_app_version_resources_resolution_status.DescribeAppVersionResourcesResolutionStatusInput, options: CallOptions) !describe_app_version_resources_resolution_status.DescribeAppVersionResourcesResolutionStatusOutput {
         return describe_app_version_resources_resolution_status.execute(self, allocator, input, options);
     }
 
     /// Describes details about an Resilience Hub application.
-    pub fn describeAppVersionTemplate(self: *Self, allocator: std.mem.Allocator, input: describe_app_version_template.DescribeAppVersionTemplateInput, options: describe_app_version_template.Options) !describe_app_version_template.DescribeAppVersionTemplateOutput {
+    pub fn describeAppVersionTemplate(self: *Self, allocator: std.mem.Allocator, input: describe_app_version_template.DescribeAppVersionTemplateInput, options: CallOptions) !describe_app_version_template.DescribeAppVersionTemplateOutput {
         return describe_app_version_template.execute(self, allocator, input, options);
     }
 
@@ -314,12 +315,12 @@ pub const Client = struct {
     /// `importResourcesToDraftAppVersion` after creating the application and before
     /// calling `describeDraftAppVersionResourcesImportStatus` to obtain the
     /// status.
-    pub fn describeDraftAppVersionResourcesImportStatus(self: *Self, allocator: std.mem.Allocator, input: describe_draft_app_version_resources_import_status.DescribeDraftAppVersionResourcesImportStatusInput, options: describe_draft_app_version_resources_import_status.Options) !describe_draft_app_version_resources_import_status.DescribeDraftAppVersionResourcesImportStatusOutput {
+    pub fn describeDraftAppVersionResourcesImportStatus(self: *Self, allocator: std.mem.Allocator, input: describe_draft_app_version_resources_import_status.DescribeDraftAppVersionResourcesImportStatusInput, options: CallOptions) !describe_draft_app_version_resources_import_status.DescribeDraftAppVersionResourcesImportStatusOutput {
         return describe_draft_app_version_resources_import_status.execute(self, allocator, input, options);
     }
 
     /// Describes the metrics of the application configuration being exported.
-    pub fn describeMetricsExport(self: *Self, allocator: std.mem.Allocator, input: describe_metrics_export.DescribeMetricsExportInput, options: describe_metrics_export.Options) !describe_metrics_export.DescribeMetricsExportOutput {
+    pub fn describeMetricsExport(self: *Self, allocator: std.mem.Allocator, input: describe_metrics_export.DescribeMetricsExportInput, options: CallOptions) !describe_metrics_export.DescribeMetricsExportOutput {
         return describe_metrics_export.execute(self, allocator, input, options);
     }
 
@@ -328,13 +329,13 @@ pub const Client = struct {
     /// returned policy object includes creation time, data location constraints,
     /// the Amazon Resource
     /// Name (ARN) for the policy, tags, tier, and more.
-    pub fn describeResiliencyPolicy(self: *Self, allocator: std.mem.Allocator, input: describe_resiliency_policy.DescribeResiliencyPolicyInput, options: describe_resiliency_policy.Options) !describe_resiliency_policy.DescribeResiliencyPolicyOutput {
+    pub fn describeResiliencyPolicy(self: *Self, allocator: std.mem.Allocator, input: describe_resiliency_policy.DescribeResiliencyPolicyInput, options: CallOptions) !describe_resiliency_policy.DescribeResiliencyPolicyOutput {
         return describe_resiliency_policy.execute(self, allocator, input, options);
     }
 
     /// Describes the resource grouping recommendation tasks run by Resilience Hub
     /// for your application.
-    pub fn describeResourceGroupingRecommendationTask(self: *Self, allocator: std.mem.Allocator, input: describe_resource_grouping_recommendation_task.DescribeResourceGroupingRecommendationTaskInput, options: describe_resource_grouping_recommendation_task.Options) !describe_resource_grouping_recommendation_task.DescribeResourceGroupingRecommendationTaskOutput {
+    pub fn describeResourceGroupingRecommendationTask(self: *Self, allocator: std.mem.Allocator, input: describe_resource_grouping_recommendation_task.DescribeResourceGroupingRecommendationTaskInput, options: CallOptions) !describe_resource_grouping_recommendation_task.DescribeResourceGroupingRecommendationTaskOutput {
         return describe_resource_grouping_recommendation_task.execute(self, allocator, input, options);
     }
 
@@ -344,40 +345,40 @@ pub const Client = struct {
     /// Resilience Hub, see
     /// [Discover the structure and describe your Resilience Hub
     /// application](https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html).
-    pub fn importResourcesToDraftAppVersion(self: *Self, allocator: std.mem.Allocator, input: import_resources_to_draft_app_version.ImportResourcesToDraftAppVersionInput, options: import_resources_to_draft_app_version.Options) !import_resources_to_draft_app_version.ImportResourcesToDraftAppVersionOutput {
+    pub fn importResourcesToDraftAppVersion(self: *Self, allocator: std.mem.Allocator, input: import_resources_to_draft_app_version.ImportResourcesToDraftAppVersionInput, options: CallOptions) !import_resources_to_draft_app_version.ImportResourcesToDraftAppVersionOutput {
         return import_resources_to_draft_app_version.execute(self, allocator, input, options);
     }
 
     /// Lists the alarm recommendations for an Resilience Hub application.
-    pub fn listAlarmRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_alarm_recommendations.ListAlarmRecommendationsInput, options: list_alarm_recommendations.Options) !list_alarm_recommendations.ListAlarmRecommendationsOutput {
+    pub fn listAlarmRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_alarm_recommendations.ListAlarmRecommendationsInput, options: CallOptions) !list_alarm_recommendations.ListAlarmRecommendationsOutput {
         return list_alarm_recommendations.execute(self, allocator, input, options);
     }
 
     /// List of compliance drifts that were detected while running an
     /// assessment.
-    pub fn listAppAssessmentComplianceDrifts(self: *Self, allocator: std.mem.Allocator, input: list_app_assessment_compliance_drifts.ListAppAssessmentComplianceDriftsInput, options: list_app_assessment_compliance_drifts.Options) !list_app_assessment_compliance_drifts.ListAppAssessmentComplianceDriftsOutput {
+    pub fn listAppAssessmentComplianceDrifts(self: *Self, allocator: std.mem.Allocator, input: list_app_assessment_compliance_drifts.ListAppAssessmentComplianceDriftsInput, options: CallOptions) !list_app_assessment_compliance_drifts.ListAppAssessmentComplianceDriftsOutput {
         return list_app_assessment_compliance_drifts.execute(self, allocator, input, options);
     }
 
     /// List of resource drifts that were detected while running an
     /// assessment.
-    pub fn listAppAssessmentResourceDrifts(self: *Self, allocator: std.mem.Allocator, input: list_app_assessment_resource_drifts.ListAppAssessmentResourceDriftsInput, options: list_app_assessment_resource_drifts.Options) !list_app_assessment_resource_drifts.ListAppAssessmentResourceDriftsOutput {
+    pub fn listAppAssessmentResourceDrifts(self: *Self, allocator: std.mem.Allocator, input: list_app_assessment_resource_drifts.ListAppAssessmentResourceDriftsInput, options: CallOptions) !list_app_assessment_resource_drifts.ListAppAssessmentResourceDriftsOutput {
         return list_app_assessment_resource_drifts.execute(self, allocator, input, options);
     }
 
     /// Lists the assessments for an Resilience Hub application. You can use request
     /// parameters to refine the results for the response object.
-    pub fn listAppAssessments(self: *Self, allocator: std.mem.Allocator, input: list_app_assessments.ListAppAssessmentsInput, options: list_app_assessments.Options) !list_app_assessments.ListAppAssessmentsOutput {
+    pub fn listAppAssessments(self: *Self, allocator: std.mem.Allocator, input: list_app_assessments.ListAppAssessmentsInput, options: CallOptions) !list_app_assessments.ListAppAssessmentsOutput {
         return list_app_assessments.execute(self, allocator, input, options);
     }
 
     /// Lists the compliances for an Resilience Hub Application Component.
-    pub fn listAppComponentCompliances(self: *Self, allocator: std.mem.Allocator, input: list_app_component_compliances.ListAppComponentCompliancesInput, options: list_app_component_compliances.Options) !list_app_component_compliances.ListAppComponentCompliancesOutput {
+    pub fn listAppComponentCompliances(self: *Self, allocator: std.mem.Allocator, input: list_app_component_compliances.ListAppComponentCompliancesInput, options: CallOptions) !list_app_component_compliances.ListAppComponentCompliancesOutput {
         return list_app_component_compliances.execute(self, allocator, input, options);
     }
 
     /// Lists the recommendations for an Resilience Hub Application Component.
-    pub fn listAppComponentRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_app_component_recommendations.ListAppComponentRecommendationsInput, options: list_app_component_recommendations.Options) !list_app_component_recommendations.ListAppComponentRecommendationsOutput {
+    pub fn listAppComponentRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_app_component_recommendations.ListAppComponentRecommendationsInput, options: CallOptions) !list_app_component_recommendations.ListAppComponentRecommendationsOutput {
         return list_app_component_recommendations.execute(self, allocator, input, options);
     }
 
@@ -386,12 +387,12 @@ pub const Client = struct {
     /// [Discover
     /// the structure and describe your Resilience Hub
     /// application](https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html).
-    pub fn listAppInputSources(self: *Self, allocator: std.mem.Allocator, input: list_app_input_sources.ListAppInputSourcesInput, options: list_app_input_sources.Options) !list_app_input_sources.ListAppInputSourcesOutput {
+    pub fn listAppInputSources(self: *Self, allocator: std.mem.Allocator, input: list_app_input_sources.ListAppInputSourcesInput, options: CallOptions) !list_app_input_sources.ListAppInputSourcesOutput {
         return list_app_input_sources.execute(self, allocator, input, options);
     }
 
     /// Lists all the Application Components in the Resilience Hub application.
-    pub fn listAppVersionAppComponents(self: *Self, allocator: std.mem.Allocator, input: list_app_version_app_components.ListAppVersionAppComponentsInput, options: list_app_version_app_components.Options) !list_app_version_app_components.ListAppVersionAppComponentsOutput {
+    pub fn listAppVersionAppComponents(self: *Self, allocator: std.mem.Allocator, input: list_app_version_app_components.ListAppVersionAppComponentsInput, options: CallOptions) !list_app_version_app_components.ListAppVersionAppComponentsOutput {
         return list_app_version_app_components.execute(self, allocator, input, options);
     }
 
@@ -400,17 +401,17 @@ pub const Client = struct {
     /// physical resource identifiers, CloudFormation stacks, resource-groups, or an
     /// application registry
     /// app.
-    pub fn listAppVersionResourceMappings(self: *Self, allocator: std.mem.Allocator, input: list_app_version_resource_mappings.ListAppVersionResourceMappingsInput, options: list_app_version_resource_mappings.Options) !list_app_version_resource_mappings.ListAppVersionResourceMappingsOutput {
+    pub fn listAppVersionResourceMappings(self: *Self, allocator: std.mem.Allocator, input: list_app_version_resource_mappings.ListAppVersionResourceMappingsInput, options: CallOptions) !list_app_version_resource_mappings.ListAppVersionResourceMappingsOutput {
         return list_app_version_resource_mappings.execute(self, allocator, input, options);
     }
 
     /// Lists all the resources in an Resilience Hub application.
-    pub fn listAppVersionResources(self: *Self, allocator: std.mem.Allocator, input: list_app_version_resources.ListAppVersionResourcesInput, options: list_app_version_resources.Options) !list_app_version_resources.ListAppVersionResourcesOutput {
+    pub fn listAppVersionResources(self: *Self, allocator: std.mem.Allocator, input: list_app_version_resources.ListAppVersionResourcesInput, options: CallOptions) !list_app_version_resources.ListAppVersionResourcesOutput {
         return list_app_version_resources.execute(self, allocator, input, options);
     }
 
     /// Lists the different versions for the Resilience Hub applications.
-    pub fn listAppVersions(self: *Self, allocator: std.mem.Allocator, input: list_app_versions.ListAppVersionsInput, options: list_app_versions.Options) !list_app_versions.ListAppVersionsOutput {
+    pub fn listAppVersions(self: *Self, allocator: std.mem.Allocator, input: list_app_versions.ListAppVersionsInput, options: CallOptions) !list_app_versions.ListAppVersionsOutput {
         return list_app_versions.execute(self, allocator, input, options);
     }
 
@@ -425,50 +426,50 @@ pub const Client = struct {
     /// `An error occurred (ValidationException) when calling the ListApps
     /// operation: Only
     /// one filter is supported for this operation.`
-    pub fn listApps(self: *Self, allocator: std.mem.Allocator, input: list_apps.ListAppsInput, options: list_apps.Options) !list_apps.ListAppsOutput {
+    pub fn listApps(self: *Self, allocator: std.mem.Allocator, input: list_apps.ListAppsInput, options: CallOptions) !list_apps.ListAppsOutput {
         return list_apps.execute(self, allocator, input, options);
     }
 
     /// Lists the metrics that can be exported.
-    pub fn listMetrics(self: *Self, allocator: std.mem.Allocator, input: list_metrics.ListMetricsInput, options: list_metrics.Options) !list_metrics.ListMetricsOutput {
+    pub fn listMetrics(self: *Self, allocator: std.mem.Allocator, input: list_metrics.ListMetricsInput, options: CallOptions) !list_metrics.ListMetricsOutput {
         return list_metrics.execute(self, allocator, input, options);
     }
 
     /// Lists the recommendation templates for the Resilience Hub applications.
-    pub fn listRecommendationTemplates(self: *Self, allocator: std.mem.Allocator, input: list_recommendation_templates.ListRecommendationTemplatesInput, options: list_recommendation_templates.Options) !list_recommendation_templates.ListRecommendationTemplatesOutput {
+    pub fn listRecommendationTemplates(self: *Self, allocator: std.mem.Allocator, input: list_recommendation_templates.ListRecommendationTemplatesInput, options: CallOptions) !list_recommendation_templates.ListRecommendationTemplatesOutput {
         return list_recommendation_templates.execute(self, allocator, input, options);
     }
 
     /// Lists the resiliency policies for the Resilience Hub applications.
-    pub fn listResiliencyPolicies(self: *Self, allocator: std.mem.Allocator, input: list_resiliency_policies.ListResiliencyPoliciesInput, options: list_resiliency_policies.Options) !list_resiliency_policies.ListResiliencyPoliciesOutput {
+    pub fn listResiliencyPolicies(self: *Self, allocator: std.mem.Allocator, input: list_resiliency_policies.ListResiliencyPoliciesInput, options: CallOptions) !list_resiliency_policies.ListResiliencyPoliciesOutput {
         return list_resiliency_policies.execute(self, allocator, input, options);
     }
 
     /// Lists the resource grouping recommendations suggested by Resilience Hub for
     /// your application.
-    pub fn listResourceGroupingRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_resource_grouping_recommendations.ListResourceGroupingRecommendationsInput, options: list_resource_grouping_recommendations.Options) !list_resource_grouping_recommendations.ListResourceGroupingRecommendationsOutput {
+    pub fn listResourceGroupingRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_resource_grouping_recommendations.ListResourceGroupingRecommendationsInput, options: CallOptions) !list_resource_grouping_recommendations.ListResourceGroupingRecommendationsOutput {
         return list_resource_grouping_recommendations.execute(self, allocator, input, options);
     }
 
     /// Lists the standard operating procedure (SOP) recommendations for the
     /// Resilience Hub applications.
-    pub fn listSopRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_sop_recommendations.ListSopRecommendationsInput, options: list_sop_recommendations.Options) !list_sop_recommendations.ListSopRecommendationsOutput {
+    pub fn listSopRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_sop_recommendations.ListSopRecommendationsInput, options: CallOptions) !list_sop_recommendations.ListSopRecommendationsOutput {
         return list_sop_recommendations.execute(self, allocator, input, options);
     }
 
     /// Lists the suggested resiliency policies for the Resilience Hub
     /// applications.
-    pub fn listSuggestedResiliencyPolicies(self: *Self, allocator: std.mem.Allocator, input: list_suggested_resiliency_policies.ListSuggestedResiliencyPoliciesInput, options: list_suggested_resiliency_policies.Options) !list_suggested_resiliency_policies.ListSuggestedResiliencyPoliciesOutput {
+    pub fn listSuggestedResiliencyPolicies(self: *Self, allocator: std.mem.Allocator, input: list_suggested_resiliency_policies.ListSuggestedResiliencyPoliciesInput, options: CallOptions) !list_suggested_resiliency_policies.ListSuggestedResiliencyPoliciesOutput {
         return list_suggested_resiliency_policies.execute(self, allocator, input, options);
     }
 
     /// Lists the tags for your resources in your Resilience Hub applications.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists the test recommendations for the Resilience Hub application.
-    pub fn listTestRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_test_recommendations.ListTestRecommendationsInput, options: list_test_recommendations.Options) !list_test_recommendations.ListTestRecommendationsOutput {
+    pub fn listTestRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_test_recommendations.ListTestRecommendationsInput, options: CallOptions) !list_test_recommendations.ListTestRecommendationsOutput {
         return list_test_recommendations.execute(self, allocator, input, options);
     }
 
@@ -476,63 +477,63 @@ pub const Client = struct {
     /// unsupported resource is a resource that exists in the object that was used
     /// to create an app,
     /// but is not supported by Resilience Hub.
-    pub fn listUnsupportedAppVersionResources(self: *Self, allocator: std.mem.Allocator, input: list_unsupported_app_version_resources.ListUnsupportedAppVersionResourcesInput, options: list_unsupported_app_version_resources.Options) !list_unsupported_app_version_resources.ListUnsupportedAppVersionResourcesOutput {
+    pub fn listUnsupportedAppVersionResources(self: *Self, allocator: std.mem.Allocator, input: list_unsupported_app_version_resources.ListUnsupportedAppVersionResourcesInput, options: CallOptions) !list_unsupported_app_version_resources.ListUnsupportedAppVersionResourcesOutput {
         return list_unsupported_app_version_resources.execute(self, allocator, input, options);
     }
 
     /// Publishes a new version of a specific Resilience Hub application.
-    pub fn publishAppVersion(self: *Self, allocator: std.mem.Allocator, input: publish_app_version.PublishAppVersionInput, options: publish_app_version.Options) !publish_app_version.PublishAppVersionOutput {
+    pub fn publishAppVersion(self: *Self, allocator: std.mem.Allocator, input: publish_app_version.PublishAppVersionInput, options: CallOptions) !publish_app_version.PublishAppVersionOutput {
         return publish_app_version.execute(self, allocator, input, options);
     }
 
     /// Adds or updates the app template for an Resilience Hub application draft
     /// version.
-    pub fn putDraftAppVersionTemplate(self: *Self, allocator: std.mem.Allocator, input: put_draft_app_version_template.PutDraftAppVersionTemplateInput, options: put_draft_app_version_template.Options) !put_draft_app_version_template.PutDraftAppVersionTemplateOutput {
+    pub fn putDraftAppVersionTemplate(self: *Self, allocator: std.mem.Allocator, input: put_draft_app_version_template.PutDraftAppVersionTemplateInput, options: CallOptions) !put_draft_app_version_template.PutDraftAppVersionTemplateOutput {
         return put_draft_app_version_template.execute(self, allocator, input, options);
     }
 
     /// Rejects resource grouping recommendations.
-    pub fn rejectResourceGroupingRecommendations(self: *Self, allocator: std.mem.Allocator, input: reject_resource_grouping_recommendations.RejectResourceGroupingRecommendationsInput, options: reject_resource_grouping_recommendations.Options) !reject_resource_grouping_recommendations.RejectResourceGroupingRecommendationsOutput {
+    pub fn rejectResourceGroupingRecommendations(self: *Self, allocator: std.mem.Allocator, input: reject_resource_grouping_recommendations.RejectResourceGroupingRecommendationsInput, options: CallOptions) !reject_resource_grouping_recommendations.RejectResourceGroupingRecommendationsOutput {
         return reject_resource_grouping_recommendations.execute(self, allocator, input, options);
     }
 
     /// Removes resource mappings from a draft application version.
-    pub fn removeDraftAppVersionResourceMappings(self: *Self, allocator: std.mem.Allocator, input: remove_draft_app_version_resource_mappings.RemoveDraftAppVersionResourceMappingsInput, options: remove_draft_app_version_resource_mappings.Options) !remove_draft_app_version_resource_mappings.RemoveDraftAppVersionResourceMappingsOutput {
+    pub fn removeDraftAppVersionResourceMappings(self: *Self, allocator: std.mem.Allocator, input: remove_draft_app_version_resource_mappings.RemoveDraftAppVersionResourceMappingsInput, options: CallOptions) !remove_draft_app_version_resource_mappings.RemoveDraftAppVersionResourceMappingsOutput {
         return remove_draft_app_version_resource_mappings.execute(self, allocator, input, options);
     }
 
     /// Resolves the resources for an application version.
-    pub fn resolveAppVersionResources(self: *Self, allocator: std.mem.Allocator, input: resolve_app_version_resources.ResolveAppVersionResourcesInput, options: resolve_app_version_resources.Options) !resolve_app_version_resources.ResolveAppVersionResourcesOutput {
+    pub fn resolveAppVersionResources(self: *Self, allocator: std.mem.Allocator, input: resolve_app_version_resources.ResolveAppVersionResourcesInput, options: CallOptions) !resolve_app_version_resources.ResolveAppVersionResourcesOutput {
         return resolve_app_version_resources.execute(self, allocator, input, options);
     }
 
     /// Creates a new application assessment for an application.
-    pub fn startAppAssessment(self: *Self, allocator: std.mem.Allocator, input: start_app_assessment.StartAppAssessmentInput, options: start_app_assessment.Options) !start_app_assessment.StartAppAssessmentOutput {
+    pub fn startAppAssessment(self: *Self, allocator: std.mem.Allocator, input: start_app_assessment.StartAppAssessmentInput, options: CallOptions) !start_app_assessment.StartAppAssessmentOutput {
         return start_app_assessment.execute(self, allocator, input, options);
     }
 
     /// Initiates the export task of metrics.
-    pub fn startMetricsExport(self: *Self, allocator: std.mem.Allocator, input: start_metrics_export.StartMetricsExportInput, options: start_metrics_export.Options) !start_metrics_export.StartMetricsExportOutput {
+    pub fn startMetricsExport(self: *Self, allocator: std.mem.Allocator, input: start_metrics_export.StartMetricsExportInput, options: CallOptions) !start_metrics_export.StartMetricsExportOutput {
         return start_metrics_export.execute(self, allocator, input, options);
     }
 
     /// Starts grouping recommendation task.
-    pub fn startResourceGroupingRecommendationTask(self: *Self, allocator: std.mem.Allocator, input: start_resource_grouping_recommendation_task.StartResourceGroupingRecommendationTaskInput, options: start_resource_grouping_recommendation_task.Options) !start_resource_grouping_recommendation_task.StartResourceGroupingRecommendationTaskOutput {
+    pub fn startResourceGroupingRecommendationTask(self: *Self, allocator: std.mem.Allocator, input: start_resource_grouping_recommendation_task.StartResourceGroupingRecommendationTaskInput, options: CallOptions) !start_resource_grouping_recommendation_task.StartResourceGroupingRecommendationTaskOutput {
         return start_resource_grouping_recommendation_task.execute(self, allocator, input, options);
     }
 
     /// Applies one or more tags to a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an application.
-    pub fn updateApp(self: *Self, allocator: std.mem.Allocator, input: update_app.UpdateAppInput, options: update_app.Options) !update_app.UpdateAppOutput {
+    pub fn updateApp(self: *Self, allocator: std.mem.Allocator, input: update_app.UpdateAppInput, options: CallOptions) !update_app.UpdateAppOutput {
         return update_app.execute(self, allocator, input, options);
     }
 
@@ -542,7 +543,7 @@ pub const Client = struct {
     /// information for running resiliency assessments, you must publish the
     /// Resilience Hub
     /// application using the `PublishAppVersion` API.
-    pub fn updateAppVersion(self: *Self, allocator: std.mem.Allocator, input: update_app_version.UpdateAppVersionInput, options: update_app_version.Options) !update_app_version.UpdateAppVersionOutput {
+    pub fn updateAppVersion(self: *Self, allocator: std.mem.Allocator, input: update_app_version.UpdateAppVersionInput, options: CallOptions) !update_app_version.UpdateAppVersionOutput {
         return update_app_version.execute(self, allocator, input, options);
     }
 
@@ -552,7 +553,7 @@ pub const Client = struct {
     /// Application Component for running assessments, you must publish the
     /// Resilience Hub
     /// application using the `PublishAppVersion` API.
-    pub fn updateAppVersionAppComponent(self: *Self, allocator: std.mem.Allocator, input: update_app_version_app_component.UpdateAppVersionAppComponentInput, options: update_app_version_app_component.Options) !update_app_version_app_component.UpdateAppVersionAppComponentOutput {
+    pub fn updateAppVersionAppComponent(self: *Self, allocator: std.mem.Allocator, input: update_app_version_app_component.UpdateAppVersionAppComponentInput, options: CallOptions) !update_app_version_app_component.UpdateAppVersionAppComponentOutput {
         return update_app_version_app_component.execute(self, allocator, input, options);
     }
 
@@ -567,7 +568,7 @@ pub const Client = struct {
     ///
     /// * To update application version with new `physicalResourceID`, you must
     /// call `ResolveAppVersionResources` API.
-    pub fn updateAppVersionResource(self: *Self, allocator: std.mem.Allocator, input: update_app_version_resource.UpdateAppVersionResourceInput, options: update_app_version_resource.Options) !update_app_version_resource.UpdateAppVersionResourceOutput {
+    pub fn updateAppVersionResource(self: *Self, allocator: std.mem.Allocator, input: update_app_version_resource.UpdateAppVersionResourceInput, options: CallOptions) !update_app_version_resource.UpdateAppVersionResourceOutput {
         return update_app_version_resource.execute(self, allocator, input, options);
     }
 
@@ -582,7 +583,7 @@ pub const Client = struct {
     /// estimated workload RPO result will be near zero and the **Compliance
     /// status** for your application will be set to **Policy
     /// breached**.
-    pub fn updateResiliencyPolicy(self: *Self, allocator: std.mem.Allocator, input: update_resiliency_policy.UpdateResiliencyPolicyInput, options: update_resiliency_policy.Options) !update_resiliency_policy.UpdateResiliencyPolicyOutput {
+    pub fn updateResiliencyPolicy(self: *Self, allocator: std.mem.Allocator, input: update_resiliency_policy.UpdateResiliencyPolicyInput, options: CallOptions) !update_resiliency_policy.UpdateResiliencyPolicyOutput {
         return update_resiliency_policy.execute(self, allocator, input, options);
     }
 

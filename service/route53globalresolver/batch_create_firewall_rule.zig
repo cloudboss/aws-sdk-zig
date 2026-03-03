@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchCreateFirewallRuleInputItem = @import("batch_create_firewall_rule_input_item.zig").BatchCreateFirewallRuleInputItem;
 const BatchCreateFirewallRuleOutputItem = @import("batch_create_firewall_rule_output_item.zig").BatchCreateFirewallRuleOutputItem;
@@ -29,11 +30,7 @@ pub const BatchCreateFirewallRuleOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchCreateFirewallRuleInput, options: Options) !BatchCreateFirewallRuleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchCreateFirewallRuleInput, options: CallOptions) !BatchCreateFirewallRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

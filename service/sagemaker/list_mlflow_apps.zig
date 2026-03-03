@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccountDefaultStatus = @import("account_default_status.zig").AccountDefaultStatus;
 const SortMlflowAppBy = @import("sort_mlflow_app_by.zig").SortMlflowAppBy;
@@ -77,11 +78,7 @@ pub const ListMlflowAppsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMlflowAppsInput, options: Options) !ListMlflowAppsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMlflowAppsInput, options: CallOptions) !ListMlflowAppsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

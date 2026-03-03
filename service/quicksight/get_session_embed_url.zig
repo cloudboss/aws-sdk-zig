@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const GetSessionEmbedUrlInput = struct {
@@ -84,11 +85,7 @@ pub const GetSessionEmbedUrlOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSessionEmbedUrlInput, options: Options) !GetSessionEmbedUrlOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSessionEmbedUrlInput, options: CallOptions) !GetSessionEmbedUrlOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

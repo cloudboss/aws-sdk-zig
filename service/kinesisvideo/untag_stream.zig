@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const UntagStreamInput = struct {
@@ -25,11 +26,7 @@ pub const UntagStreamInput = struct {
 pub const UntagStreamOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagStreamInput, options: Options) !UntagStreamOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagStreamInput, options: CallOptions) !UntagStreamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

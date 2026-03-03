@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FlowTemplateFilter = @import("flow_template_filter.zig").FlowTemplateFilter;
 const FlowTemplateSummary = @import("flow_template_summary.zig").FlowTemplateSummary;
@@ -40,11 +41,7 @@ pub const SearchFlowTemplatesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchFlowTemplatesInput, options: Options) !SearchFlowTemplatesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchFlowTemplatesInput, options: CallOptions) !SearchFlowTemplatesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

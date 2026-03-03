@@ -2,10 +2,11 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const KMSKey = @import("kms_key.zig").KMSKey;
 
-const GetKMSEncryptionKeyInput = struct {};
+pub const GetKMSEncryptionKeyInput = struct {};
 
 pub const GetKMSEncryptionKeyOutput = struct {
     /// The KMS encryption key.
@@ -16,11 +17,7 @@ pub const GetKMSEncryptionKeyOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetKMSEncryptionKeyInput, options: Options) !GetKMSEncryptionKeyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetKMSEncryptionKeyInput, options: CallOptions) !GetKMSEncryptionKeyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

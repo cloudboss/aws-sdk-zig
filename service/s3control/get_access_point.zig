@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const NetworkOrigin = @import("network_origin.zig").NetworkOrigin;
 const PublicAccessBlockConfiguration = @import("public_access_block_configuration.zig").PublicAccessBlockConfiguration;
@@ -80,11 +81,7 @@ pub const GetAccessPointOutput = struct {
     vpc_configuration: ?VpcConfiguration = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAccessPointInput, options: Options) !GetAccessPointOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAccessPointInput, options: CallOptions) !GetAccessPointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

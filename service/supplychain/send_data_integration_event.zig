@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DataIntegrationEventDatasetTargetConfiguration = @import("data_integration_event_dataset_target_configuration.zig").DataIntegrationEventDatasetTargetConfiguration;
 const DataIntegrationEventType = @import("data_integration_event_type.zig").DataIntegrationEventType;
@@ -108,11 +109,7 @@ pub const SendDataIntegrationEventOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendDataIntegrationEventInput, options: Options) !SendDataIntegrationEventOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendDataIntegrationEventInput, options: CallOptions) !SendDataIntegrationEventOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

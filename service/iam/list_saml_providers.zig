@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SAMLProviderListEntry = @import("saml_provider_list_entry.zig").SAMLProviderListEntry;
 const serde = @import("serde.zig");
@@ -16,11 +17,7 @@ pub const ListSAMLProvidersOutput = struct {
     saml_provider_list: ?[]const SAMLProviderListEntry = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSAMLProvidersInput, options: Options) !ListSAMLProvidersOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSAMLProvidersInput, options: CallOptions) !ListSAMLProvidersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

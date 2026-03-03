@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RecordsFormatType = @import("records_format_type.zig").RecordsFormatType;
 const SqlParameter = @import("sql_parameter.zig").SqlParameter;
@@ -9,15 +10,11 @@ const ResultSetOptions = @import("result_set_options.zig").ResultSetOptions;
 const ColumnMetadata = @import("column_metadata.zig").ColumnMetadata;
 const Field = @import("field.zig").Field;
 
-const ExecuteStatementInput = @import("execute_statement_request.zig").ExecuteStatementRequest;
+pub const ExecuteStatementInput = @import("execute_statement_request.zig").ExecuteStatementRequest;
 
-const ExecuteStatementOutput = @import("execute_statement_response.zig").ExecuteStatementResponse;
+pub const ExecuteStatementOutput = @import("execute_statement_response.zig").ExecuteStatementResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExecuteStatementInput, options: Options) !ExecuteStatementOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExecuteStatementInput, options: CallOptions) !ExecuteStatementOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

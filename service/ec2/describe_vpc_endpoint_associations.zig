@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const VpcEndpointAssociation = @import("vpc_endpoint_association.zig").VpcEndpointAssociation;
@@ -56,11 +57,7 @@ pub const DescribeVpcEndpointAssociationsOutput = struct {
     vpc_endpoint_associations: ?[]const VpcEndpointAssociation = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeVpcEndpointAssociationsInput, options: Options) !DescribeVpcEndpointAssociationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeVpcEndpointAssociationsInput, options: CallOptions) !DescribeVpcEndpointAssociationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

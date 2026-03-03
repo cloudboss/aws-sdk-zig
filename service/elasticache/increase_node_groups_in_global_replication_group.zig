@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RegionalConfiguration = @import("regional_configuration.zig").RegionalConfiguration;
 const GlobalReplicationGroup = @import("global_replication_group.zig").GlobalReplicationGroup;
@@ -29,11 +30,7 @@ pub const IncreaseNodeGroupsInGlobalReplicationGroupOutput = struct {
     global_replication_group: ?GlobalReplicationGroup = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: IncreaseNodeGroupsInGlobalReplicationGroupInput, options: Options) !IncreaseNodeGroupsInGlobalReplicationGroupOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: IncreaseNodeGroupsInGlobalReplicationGroupInput, options: CallOptions) !IncreaseNodeGroupsInGlobalReplicationGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

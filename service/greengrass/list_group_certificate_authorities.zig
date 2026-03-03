@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GroupCertificateAuthorityProperties = @import("group_certificate_authority_properties.zig").GroupCertificateAuthorityProperties;
 
@@ -23,11 +24,7 @@ pub const ListGroupCertificateAuthoritiesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListGroupCertificateAuthoritiesInput, options: Options) !ListGroupCertificateAuthoritiesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListGroupCertificateAuthoritiesInput, options: CallOptions) !ListGroupCertificateAuthoritiesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

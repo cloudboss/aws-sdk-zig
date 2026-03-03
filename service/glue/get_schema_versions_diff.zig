@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SchemaVersionNumber = @import("schema_version_number.zig").SchemaVersionNumber;
 const SchemaDiffType = @import("schema_diff_type.zig").SchemaDiffType;
@@ -44,11 +45,7 @@ pub const GetSchemaVersionsDiffOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSchemaVersionsDiffInput, options: Options) !GetSchemaVersionsDiffOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSchemaVersionsDiffInput, options: CallOptions) !GetSchemaVersionsDiffOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

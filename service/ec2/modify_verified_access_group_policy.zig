@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VerifiedAccessSseSpecificationRequest = @import("verified_access_sse_specification_request.zig").VerifiedAccessSseSpecificationRequest;
 const VerifiedAccessSseSpecificationResponse = @import("verified_access_sse_specification_response.zig").VerifiedAccessSseSpecificationResponse;
@@ -45,11 +46,7 @@ pub const ModifyVerifiedAccessGroupPolicyOutput = struct {
     sse_specification: ?VerifiedAccessSseSpecificationResponse = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyVerifiedAccessGroupPolicyInput, options: Options) !ModifyVerifiedAccessGroupPolicyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyVerifiedAccessGroupPolicyInput, options: CallOptions) !ModifyVerifiedAccessGroupPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

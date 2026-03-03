@@ -63,6 +63,7 @@ const update_room = @import("update_room.zig");
 const update_room_membership = @import("update_room_membership.zig");
 const update_user = @import("update_user.zig");
 const update_user_settings = @import("update_user_settings.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -94,13 +95,13 @@ pub const Client = struct {
     }
 
     /// Associates a phone number with the specified Amazon Chime user.
-    pub fn associatePhoneNumberWithUser(self: *Self, allocator: std.mem.Allocator, input: associate_phone_number_with_user.AssociatePhoneNumberWithUserInput, options: associate_phone_number_with_user.Options) !associate_phone_number_with_user.AssociatePhoneNumberWithUserOutput {
+    pub fn associatePhoneNumberWithUser(self: *Self, allocator: std.mem.Allocator, input: associate_phone_number_with_user.AssociatePhoneNumberWithUserInput, options: CallOptions) !associate_phone_number_with_user.AssociatePhoneNumberWithUserOutput {
         return associate_phone_number_with_user.execute(self, allocator, input, options);
     }
 
     /// Associates the specified sign-in delegate groups with the specified Amazon
     /// Chime account.
-    pub fn associateSigninDelegateGroupsWithAccount(self: *Self, allocator: std.mem.Allocator, input: associate_signin_delegate_groups_with_account.AssociateSigninDelegateGroupsWithAccountInput, options: associate_signin_delegate_groups_with_account.Options) !associate_signin_delegate_groups_with_account.AssociateSigninDelegateGroupsWithAccountOutput {
+    pub fn associateSigninDelegateGroupsWithAccount(self: *Self, allocator: std.mem.Allocator, input: associate_signin_delegate_groups_with_account.AssociateSigninDelegateGroupsWithAccountInput, options: CallOptions) !associate_signin_delegate_groups_with_account.AssociateSigninDelegateGroupsWithAccountOutput {
         return associate_signin_delegate_groups_with_account.execute(self, allocator, input, options);
     }
 
@@ -108,7 +109,7 @@ pub const Client = struct {
     /// Members can be users or bots. The member role designates whether the member
     /// is a
     /// chat room administrator or a general chat room member.
-    pub fn batchCreateRoomMembership(self: *Self, allocator: std.mem.Allocator, input: batch_create_room_membership.BatchCreateRoomMembershipInput, options: batch_create_room_membership.Options) !batch_create_room_membership.BatchCreateRoomMembershipOutput {
+    pub fn batchCreateRoomMembership(self: *Self, allocator: std.mem.Allocator, input: batch_create_room_membership.BatchCreateRoomMembershipInput, options: CallOptions) !batch_create_room_membership.BatchCreateRoomMembershipOutput {
         return batch_create_room_membership.execute(self, allocator, input, options);
     }
 
@@ -118,7 +119,7 @@ pub const Client = struct {
     ///
     /// Phone numbers remain in the
     /// **Deletion queue** for 7 days before they are deleted permanently.
-    pub fn batchDeletePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: batch_delete_phone_number.BatchDeletePhoneNumberInput, options: batch_delete_phone_number.Options) !batch_delete_phone_number.BatchDeletePhoneNumberOutput {
+    pub fn batchDeletePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: batch_delete_phone_number.BatchDeletePhoneNumberInput, options: CallOptions) !batch_delete_phone_number.BatchDeletePhoneNumberOutput {
         return batch_delete_phone_number.execute(self, allocator, input, options);
     }
 
@@ -143,7 +144,7 @@ pub const Client = struct {
     ///
     /// To sign out users without suspending them, use the
     /// LogoutUser action.
-    pub fn batchSuspendUser(self: *Self, allocator: std.mem.Allocator, input: batch_suspend_user.BatchSuspendUserInput, options: batch_suspend_user.Options) !batch_suspend_user.BatchSuspendUserOutput {
+    pub fn batchSuspendUser(self: *Self, allocator: std.mem.Allocator, input: batch_suspend_user.BatchSuspendUserInput, options: CallOptions) !batch_suspend_user.BatchSuspendUserOutput {
         return batch_suspend_user.execute(self, allocator, input, options);
     }
 
@@ -161,7 +162,7 @@ pub const Client = struct {
     /// returned to
     /// `Registered`
     /// status. Users who are not previously suspended are ignored.
-    pub fn batchUnsuspendUser(self: *Self, allocator: std.mem.Allocator, input: batch_unsuspend_user.BatchUnsuspendUserInput, options: batch_unsuspend_user.Options) !batch_unsuspend_user.BatchUnsuspendUserOutput {
+    pub fn batchUnsuspendUser(self: *Self, allocator: std.mem.Allocator, input: batch_unsuspend_user.BatchUnsuspendUserInput, options: CallOptions) !batch_unsuspend_user.BatchUnsuspendUserOutput {
         return batch_unsuspend_user.execute(self, allocator, input, options);
     }
 
@@ -176,14 +177,14 @@ pub const Client = struct {
     /// Updates to outbound calling names can take up to 72 hours to complete.
     /// Pending updates to outbound calling names must be complete before you can
     /// request another update.
-    pub fn batchUpdatePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: batch_update_phone_number.BatchUpdatePhoneNumberInput, options: batch_update_phone_number.Options) !batch_update_phone_number.BatchUpdatePhoneNumberOutput {
+    pub fn batchUpdatePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: batch_update_phone_number.BatchUpdatePhoneNumberInput, options: CallOptions) !batch_update_phone_number.BatchUpdatePhoneNumberOutput {
         return batch_update_phone_number.execute(self, allocator, input, options);
     }
 
     /// Updates user details within the UpdateUserRequestItem object for up to 20
     /// users for the specified Amazon Chime account. Currently, only `LicenseType`
     /// updates are supported for this action.
-    pub fn batchUpdateUser(self: *Self, allocator: std.mem.Allocator, input: batch_update_user.BatchUpdateUserInput, options: batch_update_user.Options) !batch_update_user.BatchUpdateUserOutput {
+    pub fn batchUpdateUser(self: *Self, allocator: std.mem.Allocator, input: batch_update_user.BatchUpdateUserInput, options: CallOptions) !batch_update_user.BatchUpdateUserOutput {
         return batch_update_user.execute(self, allocator, input, options);
     }
 
@@ -194,12 +195,12 @@ pub const Client = struct {
     /// [Managing Your Amazon Chime
     /// Accounts](https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html) in the *Amazon Chime
     /// Administration Guide*.
-    pub fn createAccount(self: *Self, allocator: std.mem.Allocator, input: create_account.CreateAccountInput, options: create_account.Options) !create_account.CreateAccountOutput {
+    pub fn createAccount(self: *Self, allocator: std.mem.Allocator, input: create_account.CreateAccountInput, options: CallOptions) !create_account.CreateAccountOutput {
         return create_account.execute(self, allocator, input, options);
     }
 
     /// Creates a bot for an Amazon Chime Enterprise account.
-    pub fn createBot(self: *Self, allocator: std.mem.Allocator, input: create_bot.CreateBotInput, options: create_bot.Options) !create_bot.CreateBotOutput {
+    pub fn createBot(self: *Self, allocator: std.mem.Allocator, input: create_bot.CreateBotInput, options: CallOptions) !create_bot.CreateBotOutput {
         return create_bot.execute(self, allocator, input, options);
     }
 
@@ -214,7 +215,7 @@ pub const Client = struct {
     /// application ID.
     ///
     /// **This API is not available in a dedicated namespace.**
-    pub fn createMeetingDialOut(self: *Self, allocator: std.mem.Allocator, input: create_meeting_dial_out.CreateMeetingDialOutInput, options: create_meeting_dial_out.Options) !create_meeting_dial_out.CreateMeetingDialOutOutput {
+    pub fn createMeetingDialOut(self: *Self, allocator: std.mem.Allocator, input: create_meeting_dial_out.CreateMeetingDialOutInput, options: CallOptions) !create_meeting_dial_out.CreateMeetingDialOutOutput {
         return create_meeting_dial_out.execute(self, allocator, input, options);
     }
 
@@ -222,24 +223,24 @@ pub const Client = struct {
     /// you cannot use the Amazon Chime Business Calling product type.
     /// For numbers outside the U.S., you must use the Amazon Chime SIP Media
     /// Application Dial-In product type.
-    pub fn createPhoneNumberOrder(self: *Self, allocator: std.mem.Allocator, input: create_phone_number_order.CreatePhoneNumberOrderInput, options: create_phone_number_order.Options) !create_phone_number_order.CreatePhoneNumberOrderOutput {
+    pub fn createPhoneNumberOrder(self: *Self, allocator: std.mem.Allocator, input: create_phone_number_order.CreatePhoneNumberOrderInput, options: CallOptions) !create_phone_number_order.CreatePhoneNumberOrderOutput {
         return create_phone_number_order.execute(self, allocator, input, options);
     }
 
     /// Creates a chat room for the specified Amazon Chime Enterprise account.
-    pub fn createRoom(self: *Self, allocator: std.mem.Allocator, input: create_room.CreateRoomInput, options: create_room.Options) !create_room.CreateRoomOutput {
+    pub fn createRoom(self: *Self, allocator: std.mem.Allocator, input: create_room.CreateRoomInput, options: CallOptions) !create_room.CreateRoomOutput {
         return create_room.execute(self, allocator, input, options);
     }
 
     /// Adds a member to a chat room in an Amazon Chime Enterprise account. A member
     /// can be either a user or a bot. The member role designates whether the member
     /// is a chat room administrator or a general chat room member.
-    pub fn createRoomMembership(self: *Self, allocator: std.mem.Allocator, input: create_room_membership.CreateRoomMembershipInput, options: create_room_membership.Options) !create_room_membership.CreateRoomMembershipOutput {
+    pub fn createRoomMembership(self: *Self, allocator: std.mem.Allocator, input: create_room_membership.CreateRoomMembershipInput, options: CallOptions) !create_room_membership.CreateRoomMembershipOutput {
         return create_room_membership.execute(self, allocator, input, options);
     }
 
     /// Creates a user under the specified Amazon Chime account.
-    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: create_user.Options) !create_user.CreateUserOutput {
+    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: CallOptions) !create_user.CreateUserOutput {
         return create_user.execute(self, allocator, input, options);
     }
 
@@ -260,13 +261,13 @@ pub const Client = struct {
     ///
     /// After 90 days, deleted accounts are permanently removed from your
     /// `Disabled` accounts list.
-    pub fn deleteAccount(self: *Self, allocator: std.mem.Allocator, input: delete_account.DeleteAccountInput, options: delete_account.Options) !delete_account.DeleteAccountOutput {
+    pub fn deleteAccount(self: *Self, allocator: std.mem.Allocator, input: delete_account.DeleteAccountInput, options: CallOptions) !delete_account.DeleteAccountOutput {
         return delete_account.execute(self, allocator, input, options);
     }
 
     /// Deletes the events configuration that allows a bot to receive outgoing
     /// events.
-    pub fn deleteEventsConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_events_configuration.DeleteEventsConfigurationInput, options: delete_events_configuration.Options) !delete_events_configuration.DeleteEventsConfigurationOutput {
+    pub fn deleteEventsConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_events_configuration.DeleteEventsConfigurationInput, options: CallOptions) !delete_events_configuration.DeleteEventsConfigurationOutput {
         return delete_events_configuration.execute(self, allocator, input, options);
     }
 
@@ -278,36 +279,36 @@ pub const Client = struct {
     /// Deleted phone numbers remain in the
     /// **Deletion queue**
     /// for 7 days before they are deleted permanently.
-    pub fn deletePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: delete_phone_number.DeletePhoneNumberInput, options: delete_phone_number.Options) !delete_phone_number.DeletePhoneNumberOutput {
+    pub fn deletePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: delete_phone_number.DeletePhoneNumberInput, options: CallOptions) !delete_phone_number.DeletePhoneNumberOutput {
         return delete_phone_number.execute(self, allocator, input, options);
     }
 
     /// Deletes a chat room in an Amazon Chime Enterprise account.
-    pub fn deleteRoom(self: *Self, allocator: std.mem.Allocator, input: delete_room.DeleteRoomInput, options: delete_room.Options) !delete_room.DeleteRoomOutput {
+    pub fn deleteRoom(self: *Self, allocator: std.mem.Allocator, input: delete_room.DeleteRoomInput, options: CallOptions) !delete_room.DeleteRoomOutput {
         return delete_room.execute(self, allocator, input, options);
     }
 
     /// Removes a member from a chat room in an Amazon Chime Enterprise account.
-    pub fn deleteRoomMembership(self: *Self, allocator: std.mem.Allocator, input: delete_room_membership.DeleteRoomMembershipInput, options: delete_room_membership.Options) !delete_room_membership.DeleteRoomMembershipOutput {
+    pub fn deleteRoomMembership(self: *Self, allocator: std.mem.Allocator, input: delete_room_membership.DeleteRoomMembershipInput, options: CallOptions) !delete_room_membership.DeleteRoomMembershipOutput {
         return delete_room_membership.execute(self, allocator, input, options);
     }
 
     /// Disassociates the primary provisioned phone number from the specified Amazon
     /// Chime user.
-    pub fn disassociatePhoneNumberFromUser(self: *Self, allocator: std.mem.Allocator, input: disassociate_phone_number_from_user.DisassociatePhoneNumberFromUserInput, options: disassociate_phone_number_from_user.Options) !disassociate_phone_number_from_user.DisassociatePhoneNumberFromUserOutput {
+    pub fn disassociatePhoneNumberFromUser(self: *Self, allocator: std.mem.Allocator, input: disassociate_phone_number_from_user.DisassociatePhoneNumberFromUserInput, options: CallOptions) !disassociate_phone_number_from_user.DisassociatePhoneNumberFromUserOutput {
         return disassociate_phone_number_from_user.execute(self, allocator, input, options);
     }
 
     /// Disassociates the specified sign-in delegate groups from the specified
     /// Amazon Chime account.
-    pub fn disassociateSigninDelegateGroupsFromAccount(self: *Self, allocator: std.mem.Allocator, input: disassociate_signin_delegate_groups_from_account.DisassociateSigninDelegateGroupsFromAccountInput, options: disassociate_signin_delegate_groups_from_account.Options) !disassociate_signin_delegate_groups_from_account.DisassociateSigninDelegateGroupsFromAccountOutput {
+    pub fn disassociateSigninDelegateGroupsFromAccount(self: *Self, allocator: std.mem.Allocator, input: disassociate_signin_delegate_groups_from_account.DisassociateSigninDelegateGroupsFromAccountInput, options: CallOptions) !disassociate_signin_delegate_groups_from_account.DisassociateSigninDelegateGroupsFromAccountOutput {
         return disassociate_signin_delegate_groups_from_account.execute(self, allocator, input, options);
     }
 
     /// Retrieves details for the specified Amazon Chime account, such as account
     /// type and supported
     /// licenses.
-    pub fn getAccount(self: *Self, allocator: std.mem.Allocator, input: get_account.GetAccountInput, options: get_account.Options) !get_account.GetAccountOutput {
+    pub fn getAccount(self: *Self, allocator: std.mem.Allocator, input: get_account.GetAccountInput, options: CallOptions) !get_account.GetAccountOutput {
         return get_account.execute(self, allocator, input, options);
     }
 
@@ -317,45 +318,45 @@ pub const Client = struct {
     /// [Use the Policies
     /// Page](https://docs.aws.amazon.com/chime/latest/ag/policies.html) in the
     /// *Amazon Chime Administration Guide*.
-    pub fn getAccountSettings(self: *Self, allocator: std.mem.Allocator, input: get_account_settings.GetAccountSettingsInput, options: get_account_settings.Options) !get_account_settings.GetAccountSettingsOutput {
+    pub fn getAccountSettings(self: *Self, allocator: std.mem.Allocator, input: get_account_settings.GetAccountSettingsInput, options: CallOptions) !get_account_settings.GetAccountSettingsOutput {
         return get_account_settings.execute(self, allocator, input, options);
     }
 
     /// Retrieves details for the specified bot, such as bot email address, bot
     /// type, status, and display name.
-    pub fn getBot(self: *Self, allocator: std.mem.Allocator, input: get_bot.GetBotInput, options: get_bot.Options) !get_bot.GetBotOutput {
+    pub fn getBot(self: *Self, allocator: std.mem.Allocator, input: get_bot.GetBotInput, options: CallOptions) !get_bot.GetBotOutput {
         return get_bot.execute(self, allocator, input, options);
     }
 
     /// Gets details for an events configuration that allows a bot to receive
     /// outgoing events, such as an HTTPS endpoint or Lambda function ARN.
-    pub fn getEventsConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_events_configuration.GetEventsConfigurationInput, options: get_events_configuration.Options) !get_events_configuration.GetEventsConfigurationOutput {
+    pub fn getEventsConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_events_configuration.GetEventsConfigurationInput, options: CallOptions) !get_events_configuration.GetEventsConfigurationOutput {
         return get_events_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves global settings for the administrator's AWS account, such as
     /// Amazon Chime Business
     /// Calling and Amazon Chime Voice Connector settings.
-    pub fn getGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: get_global_settings.GetGlobalSettingsInput, options: get_global_settings.Options) !get_global_settings.GetGlobalSettingsOutput {
+    pub fn getGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: get_global_settings.GetGlobalSettingsInput, options: CallOptions) !get_global_settings.GetGlobalSettingsOutput {
         return get_global_settings.execute(self, allocator, input, options);
     }
 
     /// Retrieves details for the specified phone number ID, such as associations,
     /// capabilities, and product type.
-    pub fn getPhoneNumber(self: *Self, allocator: std.mem.Allocator, input: get_phone_number.GetPhoneNumberInput, options: get_phone_number.Options) !get_phone_number.GetPhoneNumberOutput {
+    pub fn getPhoneNumber(self: *Self, allocator: std.mem.Allocator, input: get_phone_number.GetPhoneNumberInput, options: CallOptions) !get_phone_number.GetPhoneNumberOutput {
         return get_phone_number.execute(self, allocator, input, options);
     }
 
     /// Retrieves details for the specified phone number order, such as the order
     /// creation timestamp, phone
     /// numbers in E.164 format, product type, and order status.
-    pub fn getPhoneNumberOrder(self: *Self, allocator: std.mem.Allocator, input: get_phone_number_order.GetPhoneNumberOrderInput, options: get_phone_number_order.Options) !get_phone_number_order.GetPhoneNumberOrderOutput {
+    pub fn getPhoneNumberOrder(self: *Self, allocator: std.mem.Allocator, input: get_phone_number_order.GetPhoneNumberOrderInput, options: CallOptions) !get_phone_number_order.GetPhoneNumberOrderOutput {
         return get_phone_number_order.execute(self, allocator, input, options);
     }
 
     /// Retrieves the phone number settings for the administrator's AWS account,
     /// such as the default outbound calling name.
-    pub fn getPhoneNumberSettings(self: *Self, allocator: std.mem.Allocator, input: get_phone_number_settings.GetPhoneNumberSettingsInput, options: get_phone_number_settings.Options) !get_phone_number_settings.GetPhoneNumberSettingsOutput {
+    pub fn getPhoneNumberSettings(self: *Self, allocator: std.mem.Allocator, input: get_phone_number_settings.GetPhoneNumberSettingsInput, options: CallOptions) !get_phone_number_settings.GetPhoneNumberSettingsOutput {
         return get_phone_number_settings.execute(self, allocator, input, options);
     }
 
@@ -364,13 +365,13 @@ pub const Client = struct {
     /// [Managing Chat Retention
     /// Policies](https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html)
     /// in the *Amazon Chime Administration Guide*.
-    pub fn getRetentionSettings(self: *Self, allocator: std.mem.Allocator, input: get_retention_settings.GetRetentionSettingsInput, options: get_retention_settings.Options) !get_retention_settings.GetRetentionSettingsOutput {
+    pub fn getRetentionSettings(self: *Self, allocator: std.mem.Allocator, input: get_retention_settings.GetRetentionSettingsInput, options: CallOptions) !get_retention_settings.GetRetentionSettingsOutput {
         return get_retention_settings.execute(self, allocator, input, options);
     }
 
     /// Retrieves room details, such as the room name, for a room in an Amazon Chime
     /// Enterprise account.
-    pub fn getRoom(self: *Self, allocator: std.mem.Allocator, input: get_room.GetRoomInput, options: get_room.Options) !get_room.GetRoomOutput {
+    pub fn getRoom(self: *Self, allocator: std.mem.Allocator, input: get_room.GetRoomInput, options: CallOptions) !get_room.GetRoomOutput {
         return get_room.execute(self, allocator, input, options);
     }
 
@@ -379,13 +380,13 @@ pub const Client = struct {
     ///
     /// To retrieve user details with an email address instead of a user ID, use the
     /// ListUsers action, and then filter by email address.
-    pub fn getUser(self: *Self, allocator: std.mem.Allocator, input: get_user.GetUserInput, options: get_user.Options) !get_user.GetUserOutput {
+    pub fn getUser(self: *Self, allocator: std.mem.Allocator, input: get_user.GetUserInput, options: CallOptions) !get_user.GetUserOutput {
         return get_user.execute(self, allocator, input, options);
     }
 
     /// Retrieves settings for the specified user ID, such as any associated phone
     /// number settings.
-    pub fn getUserSettings(self: *Self, allocator: std.mem.Allocator, input: get_user_settings.GetUserSettingsInput, options: get_user_settings.Options) !get_user_settings.GetUserSettingsOutput {
+    pub fn getUserSettings(self: *Self, allocator: std.mem.Allocator, input: get_user_settings.GetUserSettingsInput, options: CallOptions) !get_user_settings.GetUserSettingsOutput {
         return get_user_settings.execute(self, allocator, input, options);
     }
 
@@ -393,7 +394,7 @@ pub const Client = struct {
     /// Chime
     /// `Team` account. Only `Team` account types are currently
     /// supported for this action.
-    pub fn inviteUsers(self: *Self, allocator: std.mem.Allocator, input: invite_users.InviteUsersInput, options: invite_users.Options) !invite_users.InviteUsersOutput {
+    pub fn inviteUsers(self: *Self, allocator: std.mem.Allocator, input: invite_users.InviteUsersInput, options: CallOptions) !invite_users.InviteUsersOutput {
         return invite_users.execute(self, allocator, input, options);
     }
 
@@ -402,56 +403,56 @@ pub const Client = struct {
     /// by account name prefix. To find out which Amazon Chime account a user
     /// belongs to, you can
     /// filter by the user's email address, which returns one account result.
-    pub fn listAccounts(self: *Self, allocator: std.mem.Allocator, input: list_accounts.ListAccountsInput, options: list_accounts.Options) !list_accounts.ListAccountsOutput {
+    pub fn listAccounts(self: *Self, allocator: std.mem.Allocator, input: list_accounts.ListAccountsInput, options: CallOptions) !list_accounts.ListAccountsOutput {
         return list_accounts.execute(self, allocator, input, options);
     }
 
     /// Lists the bots associated with the administrator's Amazon Chime Enterprise
     /// account ID.
-    pub fn listBots(self: *Self, allocator: std.mem.Allocator, input: list_bots.ListBotsInput, options: list_bots.Options) !list_bots.ListBotsOutput {
+    pub fn listBots(self: *Self, allocator: std.mem.Allocator, input: list_bots.ListBotsInput, options: CallOptions) !list_bots.ListBotsOutput {
         return list_bots.execute(self, allocator, input, options);
     }
 
     /// Lists the phone number orders for the administrator's Amazon Chime account.
-    pub fn listPhoneNumberOrders(self: *Self, allocator: std.mem.Allocator, input: list_phone_number_orders.ListPhoneNumberOrdersInput, options: list_phone_number_orders.Options) !list_phone_number_orders.ListPhoneNumberOrdersOutput {
+    pub fn listPhoneNumberOrders(self: *Self, allocator: std.mem.Allocator, input: list_phone_number_orders.ListPhoneNumberOrdersInput, options: CallOptions) !list_phone_number_orders.ListPhoneNumberOrdersOutput {
         return list_phone_number_orders.execute(self, allocator, input, options);
     }
 
     /// Lists the phone numbers for the specified Amazon Chime account, Amazon Chime
     /// user, Amazon Chime Voice Connector, or Amazon Chime Voice Connector group.
-    pub fn listPhoneNumbers(self: *Self, allocator: std.mem.Allocator, input: list_phone_numbers.ListPhoneNumbersInput, options: list_phone_numbers.Options) !list_phone_numbers.ListPhoneNumbersOutput {
+    pub fn listPhoneNumbers(self: *Self, allocator: std.mem.Allocator, input: list_phone_numbers.ListPhoneNumbersInput, options: CallOptions) !list_phone_numbers.ListPhoneNumbersOutput {
         return list_phone_numbers.execute(self, allocator, input, options);
     }
 
     /// Lists the membership details for the specified room in an Amazon Chime
     /// Enterprise account,
     /// such as the members' IDs, email addresses, and names.
-    pub fn listRoomMemberships(self: *Self, allocator: std.mem.Allocator, input: list_room_memberships.ListRoomMembershipsInput, options: list_room_memberships.Options) !list_room_memberships.ListRoomMembershipsOutput {
+    pub fn listRoomMemberships(self: *Self, allocator: std.mem.Allocator, input: list_room_memberships.ListRoomMembershipsInput, options: CallOptions) !list_room_memberships.ListRoomMembershipsOutput {
         return list_room_memberships.execute(self, allocator, input, options);
     }
 
     /// Lists the room details for the specified Amazon Chime Enterprise account.
     /// Optionally, filter the results by a member ID (user ID or bot ID) to see a
     /// list of rooms that the member belongs to.
-    pub fn listRooms(self: *Self, allocator: std.mem.Allocator, input: list_rooms.ListRoomsInput, options: list_rooms.Options) !list_rooms.ListRoomsOutput {
+    pub fn listRooms(self: *Self, allocator: std.mem.Allocator, input: list_rooms.ListRoomsInput, options: CallOptions) !list_rooms.ListRoomsOutput {
         return list_rooms.execute(self, allocator, input, options);
     }
 
     /// Lists supported phone number countries.
-    pub fn listSupportedPhoneNumberCountries(self: *Self, allocator: std.mem.Allocator, input: list_supported_phone_number_countries.ListSupportedPhoneNumberCountriesInput, options: list_supported_phone_number_countries.Options) !list_supported_phone_number_countries.ListSupportedPhoneNumberCountriesOutput {
+    pub fn listSupportedPhoneNumberCountries(self: *Self, allocator: std.mem.Allocator, input: list_supported_phone_number_countries.ListSupportedPhoneNumberCountriesInput, options: CallOptions) !list_supported_phone_number_countries.ListSupportedPhoneNumberCountriesOutput {
         return list_supported_phone_number_countries.execute(self, allocator, input, options);
     }
 
     /// Lists the users that belong to the specified Amazon Chime account. You can
     /// specify an email
     /// address to list only the user that the email address belongs to.
-    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: list_users.Options) !list_users.ListUsersOutput {
+    pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: CallOptions) !list_users.ListUsersOutput {
         return list_users.execute(self, allocator, input, options);
     }
 
     /// Logs out the specified user from all of the devices they are currently
     /// logged into.
-    pub fn logoutUser(self: *Self, allocator: std.mem.Allocator, input: logout_user.LogoutUserInput, options: logout_user.Options) !logout_user.LogoutUserOutput {
+    pub fn logoutUser(self: *Self, allocator: std.mem.Allocator, input: logout_user.LogoutUserInput, options: CallOptions) !logout_user.LogoutUserOutput {
         return logout_user.execute(self, allocator, input, options);
     }
 
@@ -460,7 +461,7 @@ pub const Client = struct {
     /// Chime. Choose either an HTTPS endpoint or a Lambda function ARN. For more
     /// information,
     /// see Bot.
-    pub fn putEventsConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_events_configuration.PutEventsConfigurationInput, options: put_events_configuration.Options) !put_events_configuration.PutEventsConfigurationOutput {
+    pub fn putEventsConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_events_configuration.PutEventsConfigurationInput, options: CallOptions) !put_events_configuration.PutEventsConfigurationOutput {
         return put_events_configuration.execute(self, allocator, input, options);
     }
 
@@ -480,35 +481,35 @@ pub const Client = struct {
     /// [Managing Chat Retention
     /// Policies](https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html)
     /// in the *Amazon Chime Administration Guide*.
-    pub fn putRetentionSettings(self: *Self, allocator: std.mem.Allocator, input: put_retention_settings.PutRetentionSettingsInput, options: put_retention_settings.Options) !put_retention_settings.PutRetentionSettingsOutput {
+    pub fn putRetentionSettings(self: *Self, allocator: std.mem.Allocator, input: put_retention_settings.PutRetentionSettingsInput, options: CallOptions) !put_retention_settings.PutRetentionSettingsOutput {
         return put_retention_settings.execute(self, allocator, input, options);
     }
 
     /// Redacts the specified message from the specified Amazon Chime conversation.
-    pub fn redactConversationMessage(self: *Self, allocator: std.mem.Allocator, input: redact_conversation_message.RedactConversationMessageInput, options: redact_conversation_message.Options) !redact_conversation_message.RedactConversationMessageOutput {
+    pub fn redactConversationMessage(self: *Self, allocator: std.mem.Allocator, input: redact_conversation_message.RedactConversationMessageInput, options: CallOptions) !redact_conversation_message.RedactConversationMessageOutput {
         return redact_conversation_message.execute(self, allocator, input, options);
     }
 
     /// Redacts the specified message from the specified Amazon Chime channel.
-    pub fn redactRoomMessage(self: *Self, allocator: std.mem.Allocator, input: redact_room_message.RedactRoomMessageInput, options: redact_room_message.Options) !redact_room_message.RedactRoomMessageOutput {
+    pub fn redactRoomMessage(self: *Self, allocator: std.mem.Allocator, input: redact_room_message.RedactRoomMessageInput, options: CallOptions) !redact_room_message.RedactRoomMessageOutput {
         return redact_room_message.execute(self, allocator, input, options);
     }
 
     /// Regenerates the security token for a bot.
-    pub fn regenerateSecurityToken(self: *Self, allocator: std.mem.Allocator, input: regenerate_security_token.RegenerateSecurityTokenInput, options: regenerate_security_token.Options) !regenerate_security_token.RegenerateSecurityTokenOutput {
+    pub fn regenerateSecurityToken(self: *Self, allocator: std.mem.Allocator, input: regenerate_security_token.RegenerateSecurityTokenInput, options: CallOptions) !regenerate_security_token.RegenerateSecurityTokenOutput {
         return regenerate_security_token.execute(self, allocator, input, options);
     }
 
     /// Resets the personal meeting PIN for the specified user on an Amazon Chime
     /// account. Returns
     /// the User object with the updated personal meeting PIN.
-    pub fn resetPersonalPin(self: *Self, allocator: std.mem.Allocator, input: reset_personal_pin.ResetPersonalPINInput, options: reset_personal_pin.Options) !reset_personal_pin.ResetPersonalPINOutput {
+    pub fn resetPersonalPin(self: *Self, allocator: std.mem.Allocator, input: reset_personal_pin.ResetPersonalPINInput, options: CallOptions) !reset_personal_pin.ResetPersonalPINOutput {
         return reset_personal_pin.execute(self, allocator, input, options);
     }
 
     /// Moves a phone number from the **Deletion queue** back into the
     /// phone number **Inventory**.
-    pub fn restorePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: restore_phone_number.RestorePhoneNumberInput, options: restore_phone_number.Options) !restore_phone_number.RestorePhoneNumberOutput {
+    pub fn restorePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: restore_phone_number.RestorePhoneNumberInput, options: CallOptions) !restore_phone_number.RestorePhoneNumberOutput {
         return restore_phone_number.execute(self, allocator, input, options);
     }
 
@@ -518,13 +519,13 @@ pub const Client = struct {
     /// `State`, or `TollFreePrefix`. If you provide
     /// `City`, you must also provide `State`. Numbers outside the US only
     /// support the `PhoneNumberType` filter, which you must use.
-    pub fn searchAvailablePhoneNumbers(self: *Self, allocator: std.mem.Allocator, input: search_available_phone_numbers.SearchAvailablePhoneNumbersInput, options: search_available_phone_numbers.Options) !search_available_phone_numbers.SearchAvailablePhoneNumbersOutput {
+    pub fn searchAvailablePhoneNumbers(self: *Self, allocator: std.mem.Allocator, input: search_available_phone_numbers.SearchAvailablePhoneNumbersInput, options: CallOptions) !search_available_phone_numbers.SearchAvailablePhoneNumbersOutput {
         return search_available_phone_numbers.execute(self, allocator, input, options);
     }
 
     /// Updates account details for the specified Amazon Chime account. Currently,
     /// only account name and default license updates are supported for this action.
-    pub fn updateAccount(self: *Self, allocator: std.mem.Allocator, input: update_account.UpdateAccountInput, options: update_account.Options) !update_account.UpdateAccountOutput {
+    pub fn updateAccount(self: *Self, allocator: std.mem.Allocator, input: update_account.UpdateAccountInput, options: CallOptions) !update_account.UpdateAccountOutput {
         return update_account.execute(self, allocator, input, options);
     }
 
@@ -537,19 +538,19 @@ pub const Client = struct {
     /// Page](https://docs.aws.amazon.com/chime/latest/ag/policies.html) in the
     /// *Amazon Chime Administration
     /// Guide*.
-    pub fn updateAccountSettings(self: *Self, allocator: std.mem.Allocator, input: update_account_settings.UpdateAccountSettingsInput, options: update_account_settings.Options) !update_account_settings.UpdateAccountSettingsOutput {
+    pub fn updateAccountSettings(self: *Self, allocator: std.mem.Allocator, input: update_account_settings.UpdateAccountSettingsInput, options: CallOptions) !update_account_settings.UpdateAccountSettingsOutput {
         return update_account_settings.execute(self, allocator, input, options);
     }
 
     /// Updates the status of the specified bot, such as starting or stopping the
     /// bot from running in your Amazon Chime Enterprise account.
-    pub fn updateBot(self: *Self, allocator: std.mem.Allocator, input: update_bot.UpdateBotInput, options: update_bot.Options) !update_bot.UpdateBotOutput {
+    pub fn updateBot(self: *Self, allocator: std.mem.Allocator, input: update_bot.UpdateBotInput, options: CallOptions) !update_bot.UpdateBotOutput {
         return update_bot.execute(self, allocator, input, options);
     }
 
     /// Updates global settings for the administrator's AWS account, such as Amazon
     /// Chime Business Calling and Amazon Chime Voice Connector settings.
-    pub fn updateGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: update_global_settings.UpdateGlobalSettingsInput, options: update_global_settings.Options) !update_global_settings.UpdateGlobalSettingsOutput {
+    pub fn updateGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: update_global_settings.UpdateGlobalSettingsInput, options: CallOptions) !update_global_settings.UpdateGlobalSettingsOutput {
         return update_global_settings.execute(self, allocator, input, options);
     }
 
@@ -565,7 +566,7 @@ pub const Client = struct {
     /// Updates to outbound calling names can take 72 hours to complete. Pending
     /// updates to outbound calling names must be complete before you can request
     /// another update.
-    pub fn updatePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: update_phone_number.UpdatePhoneNumberInput, options: update_phone_number.Options) !update_phone_number.UpdatePhoneNumberOutput {
+    pub fn updatePhoneNumber(self: *Self, allocator: std.mem.Allocator, input: update_phone_number.UpdatePhoneNumberInput, options: CallOptions) !update_phone_number.UpdatePhoneNumberOutput {
         return update_phone_number.execute(self, allocator, input, options);
     }
 
@@ -574,13 +575,13 @@ pub const Client = struct {
     /// outbound calling name. You can update the default outbound calling name once
     /// every seven
     /// days. Outbound calling names can take up to 72 hours to update.
-    pub fn updatePhoneNumberSettings(self: *Self, allocator: std.mem.Allocator, input: update_phone_number_settings.UpdatePhoneNumberSettingsInput, options: update_phone_number_settings.Options) !update_phone_number_settings.UpdatePhoneNumberSettingsOutput {
+    pub fn updatePhoneNumberSettings(self: *Self, allocator: std.mem.Allocator, input: update_phone_number_settings.UpdatePhoneNumberSettingsInput, options: CallOptions) !update_phone_number_settings.UpdatePhoneNumberSettingsOutput {
         return update_phone_number_settings.execute(self, allocator, input, options);
     }
 
     /// Updates room details, such as the room name, for a room in an Amazon Chime
     /// Enterprise account.
-    pub fn updateRoom(self: *Self, allocator: std.mem.Allocator, input: update_room.UpdateRoomInput, options: update_room.Options) !update_room.UpdateRoomOutput {
+    pub fn updateRoom(self: *Self, allocator: std.mem.Allocator, input: update_room.UpdateRoomInput, options: CallOptions) !update_room.UpdateRoomOutput {
         return update_room.execute(self, allocator, input, options);
     }
 
@@ -591,18 +592,18 @@ pub const Client = struct {
     /// administrator or a general chat room member. The member role can be updated
     /// only for
     /// user IDs.
-    pub fn updateRoomMembership(self: *Self, allocator: std.mem.Allocator, input: update_room_membership.UpdateRoomMembershipInput, options: update_room_membership.Options) !update_room_membership.UpdateRoomMembershipOutput {
+    pub fn updateRoomMembership(self: *Self, allocator: std.mem.Allocator, input: update_room_membership.UpdateRoomMembershipInput, options: CallOptions) !update_room_membership.UpdateRoomMembershipOutput {
         return update_room_membership.execute(self, allocator, input, options);
     }
 
     /// Updates user details for a specified user ID. Currently, only `LicenseType`
     /// updates are supported for this action.
-    pub fn updateUser(self: *Self, allocator: std.mem.Allocator, input: update_user.UpdateUserInput, options: update_user.Options) !update_user.UpdateUserOutput {
+    pub fn updateUser(self: *Self, allocator: std.mem.Allocator, input: update_user.UpdateUserInput, options: CallOptions) !update_user.UpdateUserOutput {
         return update_user.execute(self, allocator, input, options);
     }
 
     /// Updates the settings for the specified user, such as phone number settings.
-    pub fn updateUserSettings(self: *Self, allocator: std.mem.Allocator, input: update_user_settings.UpdateUserSettingsInput, options: update_user_settings.Options) !update_user_settings.UpdateUserSettingsOutput {
+    pub fn updateUserSettings(self: *Self, allocator: std.mem.Allocator, input: update_user_settings.UpdateUserSettingsInput, options: CallOptions) !update_user_settings.UpdateUserSettingsOutput {
         return update_user_settings.execute(self, allocator, input, options);
     }
 

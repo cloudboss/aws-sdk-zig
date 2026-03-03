@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FileSystemType = @import("file_system_type.zig").FileSystemType;
 const CreateFileSystemLustreConfiguration = @import("create_file_system_lustre_configuration.zig").CreateFileSystemLustreConfiguration;
@@ -199,11 +200,7 @@ pub const CreateFileSystemOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateFileSystemInput, options: Options) !CreateFileSystemOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateFileSystemInput, options: CallOptions) !CreateFileSystemOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

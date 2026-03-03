@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BlueprintOptimizationOutputConfiguration = @import("blueprint_optimization_output_configuration.zig").BlueprintOptimizationOutputConfiguration;
 const BlueprintOptimizationJobStatus = @import("blueprint_optimization_job_status.zig").BlueprintOptimizationJobStatus;
@@ -36,11 +37,7 @@ pub const GetBlueprintOptimizationStatusOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBlueprintOptimizationStatusInput, options: Options) !GetBlueprintOptimizationStatusOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBlueprintOptimizationStatusInput, options: CallOptions) !GetBlueprintOptimizationStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

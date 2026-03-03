@@ -31,6 +31,7 @@ const update_private_dns_namespace = @import("update_private_dns_namespace.zig")
 const update_public_dns_namespace = @import("update_public_dns_namespace.zig");
 const update_service = @import("update_service.zig");
 const update_service_attributes = @import("update_service_attributes.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -70,7 +71,7 @@ pub const Client = struct {
     /// the same Amazon Web Services account, see [Cloud Map
     /// quotas](https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html) in the
     /// *Cloud Map Developer Guide*.
-    pub fn createHttpNamespace(self: *Self, allocator: std.mem.Allocator, input: create_http_namespace.CreateHttpNamespaceInput, options: create_http_namespace.Options) !create_http_namespace.CreateHttpNamespaceOutput {
+    pub fn createHttpNamespace(self: *Self, allocator: std.mem.Allocator, input: create_http_namespace.CreateHttpNamespaceInput, options: CallOptions) !create_http_namespace.CreateHttpNamespaceOutput {
         return create_http_namespace.execute(self, allocator, input, options);
     }
 
@@ -88,7 +89,7 @@ pub const Client = struct {
     /// Amazon Web Services account, see [Cloud Map
     /// quotas](https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html) in the
     /// *Cloud Map Developer Guide*.
-    pub fn createPrivateDnsNamespace(self: *Self, allocator: std.mem.Allocator, input: create_private_dns_namespace.CreatePrivateDnsNamespaceInput, options: create_private_dns_namespace.Options) !create_private_dns_namespace.CreatePrivateDnsNamespaceOutput {
+    pub fn createPrivateDnsNamespace(self: *Self, allocator: std.mem.Allocator, input: create_private_dns_namespace.CreatePrivateDnsNamespaceInput, options: CallOptions) !create_private_dns_namespace.CreatePrivateDnsNamespaceOutput {
         return create_private_dns_namespace.execute(self, allocator, input, options);
     }
 
@@ -107,7 +108,7 @@ pub const Client = struct {
     ///
     /// The `CreatePublicDnsNamespace` API operation is not supported in the Amazon
     /// Web Services GovCloud (US) Regions.
-    pub fn createPublicDnsNamespace(self: *Self, allocator: std.mem.Allocator, input: create_public_dns_namespace.CreatePublicDnsNamespaceInput, options: create_public_dns_namespace.Options) !create_public_dns_namespace.CreatePublicDnsNamespaceOutput {
+    pub fn createPublicDnsNamespace(self: *Self, allocator: std.mem.Allocator, input: create_public_dns_namespace.CreatePublicDnsNamespaceInput, options: CallOptions) !create_public_dns_namespace.CreatePublicDnsNamespaceOutput {
         return create_public_dns_namespace.execute(self, allocator, input, options);
     }
 
@@ -140,33 +141,33 @@ pub const Client = struct {
     /// namespace and using the same service, see [Cloud Map
     /// quotas](https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html) in the
     /// *Cloud Map Developer Guide*.
-    pub fn createService(self: *Self, allocator: std.mem.Allocator, input: create_service.CreateServiceInput, options: create_service.Options) !create_service.CreateServiceOutput {
+    pub fn createService(self: *Self, allocator: std.mem.Allocator, input: create_service.CreateServiceInput, options: CallOptions) !create_service.CreateServiceOutput {
         return create_service.execute(self, allocator, input, options);
     }
 
     /// Deletes a namespace from the current account. If the namespace still
     /// contains one or more
     /// services, the request fails.
-    pub fn deleteNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_namespace.DeleteNamespaceInput, options: delete_namespace.Options) !delete_namespace.DeleteNamespaceOutput {
+    pub fn deleteNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_namespace.DeleteNamespaceInput, options: CallOptions) !delete_namespace.DeleteNamespaceOutput {
         return delete_namespace.execute(self, allocator, input, options);
     }
 
     /// Deletes a specified service and all associated service attributes. If the
     /// service still
     /// contains one or more registered instances, the request fails.
-    pub fn deleteService(self: *Self, allocator: std.mem.Allocator, input: delete_service.DeleteServiceInput, options: delete_service.Options) !delete_service.DeleteServiceOutput {
+    pub fn deleteService(self: *Self, allocator: std.mem.Allocator, input: delete_service.DeleteServiceInput, options: CallOptions) !delete_service.DeleteServiceOutput {
         return delete_service.execute(self, allocator, input, options);
     }
 
     /// Deletes specific attributes associated with a service.
-    pub fn deleteServiceAttributes(self: *Self, allocator: std.mem.Allocator, input: delete_service_attributes.DeleteServiceAttributesInput, options: delete_service_attributes.Options) !delete_service_attributes.DeleteServiceAttributesOutput {
+    pub fn deleteServiceAttributes(self: *Self, allocator: std.mem.Allocator, input: delete_service_attributes.DeleteServiceAttributesInput, options: CallOptions) !delete_service_attributes.DeleteServiceAttributesOutput {
         return delete_service_attributes.execute(self, allocator, input, options);
     }
 
     /// Deletes the Amazon Route 53 DNS records and health check, if any, that Cloud
     /// Map created for the
     /// specified instance.
-    pub fn deregisterInstance(self: *Self, allocator: std.mem.Allocator, input: deregister_instance.DeregisterInstanceInput, options: deregister_instance.Options) !deregister_instance.DeregisterInstanceOutput {
+    pub fn deregisterInstance(self: *Self, allocator: std.mem.Allocator, input: deregister_instance.DeregisterInstanceInput, options: CallOptions) !deregister_instance.DeregisterInstanceOutput {
         return deregister_instance.execute(self, allocator, input, options);
     }
 
@@ -178,17 +179,17 @@ pub const Client = struct {
     /// distribute traffic evenly across instances. For public and private DNS
     /// namespaces, you can also
     /// use DNS queries to discover instances.
-    pub fn discoverInstances(self: *Self, allocator: std.mem.Allocator, input: discover_instances.DiscoverInstancesInput, options: discover_instances.Options) !discover_instances.DiscoverInstancesOutput {
+    pub fn discoverInstances(self: *Self, allocator: std.mem.Allocator, input: discover_instances.DiscoverInstancesInput, options: CallOptions) !discover_instances.DiscoverInstancesOutput {
         return discover_instances.execute(self, allocator, input, options);
     }
 
     /// Discovers the increasing revision associated with an instance.
-    pub fn discoverInstancesRevision(self: *Self, allocator: std.mem.Allocator, input: discover_instances_revision.DiscoverInstancesRevisionInput, options: discover_instances_revision.Options) !discover_instances_revision.DiscoverInstancesRevisionOutput {
+    pub fn discoverInstancesRevision(self: *Self, allocator: std.mem.Allocator, input: discover_instances_revision.DiscoverInstancesRevisionInput, options: CallOptions) !discover_instances_revision.DiscoverInstancesRevisionOutput {
         return discover_instances_revision.execute(self, allocator, input, options);
     }
 
     /// Gets information about a specified instance.
-    pub fn getInstance(self: *Self, allocator: std.mem.Allocator, input: get_instance.GetInstanceInput, options: get_instance.Options) !get_instance.GetInstanceOutput {
+    pub fn getInstance(self: *Self, allocator: std.mem.Allocator, input: get_instance.GetInstanceInput, options: CallOptions) !get_instance.GetInstanceOutput {
         return get_instance.execute(self, allocator, input, options);
     }
 
@@ -199,12 +200,12 @@ pub const Client = struct {
     /// There's a brief delay between when you register an instance and when the
     /// health status for
     /// the instance is available.
-    pub fn getInstancesHealthStatus(self: *Self, allocator: std.mem.Allocator, input: get_instances_health_status.GetInstancesHealthStatusInput, options: get_instances_health_status.Options) !get_instances_health_status.GetInstancesHealthStatusOutput {
+    pub fn getInstancesHealthStatus(self: *Self, allocator: std.mem.Allocator, input: get_instances_health_status.GetInstancesHealthStatusInput, options: CallOptions) !get_instances_health_status.GetInstancesHealthStatusOutput {
         return get_instances_health_status.execute(self, allocator, input, options);
     }
 
     /// Gets information about a namespace.
-    pub fn getNamespace(self: *Self, allocator: std.mem.Allocator, input: get_namespace.GetNamespaceInput, options: get_namespace.Options) !get_namespace.GetNamespaceOutput {
+    pub fn getNamespace(self: *Self, allocator: std.mem.Allocator, input: get_namespace.GetNamespaceInput, options: CallOptions) !get_namespace.GetNamespaceOutput {
         return get_namespace.execute(self, allocator, input, options);
     }
 
@@ -214,48 +215,48 @@ pub const Client = struct {
     ///
     /// To get a list of operations that match specified criteria, see
     /// [ListOperations](https://docs.aws.amazon.com/cloud-map/latest/api/API_ListOperations.html).
-    pub fn getOperation(self: *Self, allocator: std.mem.Allocator, input: get_operation.GetOperationInput, options: get_operation.Options) !get_operation.GetOperationOutput {
+    pub fn getOperation(self: *Self, allocator: std.mem.Allocator, input: get_operation.GetOperationInput, options: CallOptions) !get_operation.GetOperationOutput {
         return get_operation.execute(self, allocator, input, options);
     }
 
     /// Gets the settings for a specified service.
-    pub fn getService(self: *Self, allocator: std.mem.Allocator, input: get_service.GetServiceInput, options: get_service.Options) !get_service.GetServiceOutput {
+    pub fn getService(self: *Self, allocator: std.mem.Allocator, input: get_service.GetServiceInput, options: CallOptions) !get_service.GetServiceOutput {
         return get_service.execute(self, allocator, input, options);
     }
 
     /// Returns the attributes associated with a specified service.
-    pub fn getServiceAttributes(self: *Self, allocator: std.mem.Allocator, input: get_service_attributes.GetServiceAttributesInput, options: get_service_attributes.Options) !get_service_attributes.GetServiceAttributesOutput {
+    pub fn getServiceAttributes(self: *Self, allocator: std.mem.Allocator, input: get_service_attributes.GetServiceAttributesInput, options: CallOptions) !get_service_attributes.GetServiceAttributesOutput {
         return get_service_attributes.execute(self, allocator, input, options);
     }
 
     /// Lists summary information about the instances that you registered by using a
     /// specified
     /// service.
-    pub fn listInstances(self: *Self, allocator: std.mem.Allocator, input: list_instances.ListInstancesInput, options: list_instances.Options) !list_instances.ListInstancesOutput {
+    pub fn listInstances(self: *Self, allocator: std.mem.Allocator, input: list_instances.ListInstancesInput, options: CallOptions) !list_instances.ListInstancesOutput {
         return list_instances.execute(self, allocator, input, options);
     }
 
     /// Lists summary information about the namespaces that were created by the
     /// current Amazon Web Services account and shared with the current Amazon Web
     /// Services account.
-    pub fn listNamespaces(self: *Self, allocator: std.mem.Allocator, input: list_namespaces.ListNamespacesInput, options: list_namespaces.Options) !list_namespaces.ListNamespacesOutput {
+    pub fn listNamespaces(self: *Self, allocator: std.mem.Allocator, input: list_namespaces.ListNamespacesInput, options: CallOptions) !list_namespaces.ListNamespacesOutput {
         return list_namespaces.execute(self, allocator, input, options);
     }
 
     /// Lists operations that match the criteria that you specify.
-    pub fn listOperations(self: *Self, allocator: std.mem.Allocator, input: list_operations.ListOperationsInput, options: list_operations.Options) !list_operations.ListOperationsOutput {
+    pub fn listOperations(self: *Self, allocator: std.mem.Allocator, input: list_operations.ListOperationsInput, options: CallOptions) !list_operations.ListOperationsOutput {
         return list_operations.execute(self, allocator, input, options);
     }
 
     /// Lists summary information for all the services that are associated with one
     /// or more
     /// namespaces.
-    pub fn listServices(self: *Self, allocator: std.mem.Allocator, input: list_services.ListServicesInput, options: list_services.Options) !list_services.ListServicesOutput {
+    pub fn listServices(self: *Self, allocator: std.mem.Allocator, input: list_services.ListServicesInput, options: CallOptions) !list_services.ListServicesOutput {
         return list_services.execute(self, allocator, input, options);
     }
 
     /// Lists tags for the specified resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -301,23 +302,23 @@ pub const Client = struct {
     /// namespace and using the same service, see [Cloud Map
     /// quotas](https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html) in the
     /// *Cloud Map Developer Guide*.
-    pub fn registerInstance(self: *Self, allocator: std.mem.Allocator, input: register_instance.RegisterInstanceInput, options: register_instance.Options) !register_instance.RegisterInstanceOutput {
+    pub fn registerInstance(self: *Self, allocator: std.mem.Allocator, input: register_instance.RegisterInstanceInput, options: CallOptions) !register_instance.RegisterInstanceOutput {
         return register_instance.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tags to the specified resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an HTTP
     /// namespace.
-    pub fn updateHttpNamespace(self: *Self, allocator: std.mem.Allocator, input: update_http_namespace.UpdateHttpNamespaceInput, options: update_http_namespace.Options) !update_http_namespace.UpdateHttpNamespaceOutput {
+    pub fn updateHttpNamespace(self: *Self, allocator: std.mem.Allocator, input: update_http_namespace.UpdateHttpNamespaceInput, options: CallOptions) !update_http_namespace.UpdateHttpNamespaceOutput {
         return update_http_namespace.execute(self, allocator, input, options);
     }
 
@@ -334,18 +335,18 @@ pub const Client = struct {
     ///
     /// For more information, see
     /// [HealthCheckCustomConfig](https://docs.aws.amazon.com/cloud-map/latest/api/API_HealthCheckCustomConfig.html).
-    pub fn updateInstanceCustomHealthStatus(self: *Self, allocator: std.mem.Allocator, input: update_instance_custom_health_status.UpdateInstanceCustomHealthStatusInput, options: update_instance_custom_health_status.Options) !update_instance_custom_health_status.UpdateInstanceCustomHealthStatusOutput {
+    pub fn updateInstanceCustomHealthStatus(self: *Self, allocator: std.mem.Allocator, input: update_instance_custom_health_status.UpdateInstanceCustomHealthStatusInput, options: CallOptions) !update_instance_custom_health_status.UpdateInstanceCustomHealthStatusOutput {
         return update_instance_custom_health_status.execute(self, allocator, input, options);
     }
 
     /// Updates a private DNS
     /// namespace.
-    pub fn updatePrivateDnsNamespace(self: *Self, allocator: std.mem.Allocator, input: update_private_dns_namespace.UpdatePrivateDnsNamespaceInput, options: update_private_dns_namespace.Options) !update_private_dns_namespace.UpdatePrivateDnsNamespaceOutput {
+    pub fn updatePrivateDnsNamespace(self: *Self, allocator: std.mem.Allocator, input: update_private_dns_namespace.UpdatePrivateDnsNamespaceInput, options: CallOptions) !update_private_dns_namespace.UpdatePrivateDnsNamespaceOutput {
         return update_private_dns_namespace.execute(self, allocator, input, options);
     }
 
     /// Updates a public DNS namespace.
-    pub fn updatePublicDnsNamespace(self: *Self, allocator: std.mem.Allocator, input: update_public_dns_namespace.UpdatePublicDnsNamespaceInput, options: update_public_dns_namespace.Options) !update_public_dns_namespace.UpdatePublicDnsNamespaceOutput {
+    pub fn updatePublicDnsNamespace(self: *Self, allocator: std.mem.Allocator, input: update_public_dns_namespace.UpdatePublicDnsNamespaceInput, options: CallOptions) !update_public_dns_namespace.UpdatePublicDnsNamespaceOutput {
         return update_public_dns_namespace.execute(self, allocator, input, options);
     }
 
@@ -383,13 +384,13 @@ pub const Client = struct {
     /// corresponding settings
     /// in all the records and health checks that were created by using the
     /// specified service.
-    pub fn updateService(self: *Self, allocator: std.mem.Allocator, input: update_service.UpdateServiceInput, options: update_service.Options) !update_service.UpdateServiceOutput {
+    pub fn updateService(self: *Self, allocator: std.mem.Allocator, input: update_service.UpdateServiceInput, options: CallOptions) !update_service.UpdateServiceOutput {
         return update_service.execute(self, allocator, input, options);
     }
 
     /// Submits a request to update a specified service to add service-level
     /// attributes.
-    pub fn updateServiceAttributes(self: *Self, allocator: std.mem.Allocator, input: update_service_attributes.UpdateServiceAttributesInput, options: update_service_attributes.Options) !update_service_attributes.UpdateServiceAttributesOutput {
+    pub fn updateServiceAttributes(self: *Self, allocator: std.mem.Allocator, input: update_service_attributes.UpdateServiceAttributesInput, options: CallOptions) !update_service_attributes.UpdateServiceAttributesOutput {
         return update_service_attributes.execute(self, allocator, input, options);
     }
 

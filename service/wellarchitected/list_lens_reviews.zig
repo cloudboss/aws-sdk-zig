@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LensReviewSummary = @import("lens_review_summary.zig").LensReviewSummary;
 
@@ -39,11 +40,7 @@ pub const ListLensReviewsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListLensReviewsInput, options: Options) !ListLensReviewsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListLensReviewsInput, options: CallOptions) !ListLensReviewsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AssetType = @import("asset_type.zig").AssetType;
 const ManagedLoginBrandingType = @import("managed_login_branding_type.zig").ManagedLoginBrandingType;
@@ -66,11 +67,7 @@ pub const UpdateManagedLoginBrandingOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateManagedLoginBrandingInput, options: Options) !UpdateManagedLoginBrandingOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateManagedLoginBrandingInput, options: CallOptions) !UpdateManagedLoginBrandingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

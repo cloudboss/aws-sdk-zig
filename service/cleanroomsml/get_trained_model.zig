@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ModelTrainingDataChannel = @import("model_training_data_channel.zig").ModelTrainingDataChannel;
 const IncrementalTrainingDataChannelOutput = @import("incremental_training_data_channel_output.zig").IncrementalTrainingDataChannelOutput;
@@ -167,11 +168,7 @@ pub const GetTrainedModelOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTrainedModelInput, options: Options) !GetTrainedModelOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTrainedModelInput, options: CallOptions) !GetTrainedModelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

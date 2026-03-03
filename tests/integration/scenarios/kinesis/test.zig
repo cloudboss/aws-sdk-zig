@@ -27,8 +27,7 @@ test "zest.beforeAll" {
     defer arena.deinit();
 
     // Create stream with 1 shard
-    _ = try kinesis.create_stream.execute(
-        &shared_client,
+    _ = try shared_client.createStream(
         arena.allocator(),
         .{
             .stream_name = stream_name,
@@ -40,8 +39,7 @@ test "zest.beforeAll" {
     // Wait for stream to become ACTIVE
     var attempts: u32 = 0;
     while (attempts < 30) : (attempts += 1) {
-        const desc = try kinesis.describe_stream_summary.execute(
-            &shared_client,
+        const desc = try shared_client.describeStreamSummary(
             arena.allocator(),
             .{ .stream_name = stream_name },
             .{},
@@ -60,8 +58,7 @@ test "zest.beforeAll" {
     if (stream_arn.len == 0) return error.StreamNotActive;
 
     // Register enhanced fan-out consumer
-    const reg = try kinesis.register_stream_consumer.execute(
-        &shared_client,
+    const reg = try shared_client.registerStreamConsumer(
         arena.allocator(),
         .{
             .stream_arn = stream_arn,
@@ -81,8 +78,7 @@ test "zest.beforeAll" {
     // Wait for consumer to become ACTIVE
     attempts = 0;
     while (attempts < 30) : (attempts += 1) {
-        const desc = try kinesis.describe_stream_consumer.execute(
-            &shared_client,
+        const desc = try shared_client.describeStreamConsumer(
             arena.allocator(),
             .{ .consumer_arn = consumer_arn },
             .{},
@@ -106,15 +102,13 @@ test "zest.afterAll" {
         defer arena.deinit();
 
         if (consumer_arn.len > 0) {
-            _ = kinesis.deregister_stream_consumer.execute(
-                &shared_client,
+            _ = shared_client.deregisterStreamConsumer(
                 arena.allocator(),
                 .{ .consumer_arn = consumer_arn },
                 .{},
             ) catch {};
         }
-        _ = kinesis.delete_stream.execute(
-            &shared_client,
+        _ = shared_client.deleteStream(
             arena.allocator(),
             .{
                 .stream_name = stream_name,
@@ -132,8 +126,7 @@ test "PutRecord writes data to stream" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const result = try kinesis.put_record.execute(
-        &shared_client,
+    const result = try shared_client.putRecord(
         arena.allocator(),
         .{
             .stream_name = stream_name,
@@ -152,8 +145,7 @@ test "SubscribeToShard returns event stream reader" {
     const allocator = gpa.allocator();
 
     // Get the shard ID
-    const shards = try kinesis.list_shards.execute(
-        &shared_client,
+    const shards = try shared_client.listShards(
         arena.allocator(),
         .{ .stream_name = stream_name },
         .{},
@@ -164,8 +156,7 @@ test "SubscribeToShard returns event stream reader" {
     const shard_id = shard_list[0].shard_id;
 
     // Subscribe to shard from the beginning
-    var result = try kinesis.subscribe_to_shard.execute(
-        &shared_client,
+    var result = try shared_client.subscribeToShard(
         allocator,
         .{
             .consumer_arn = consumer_arn,

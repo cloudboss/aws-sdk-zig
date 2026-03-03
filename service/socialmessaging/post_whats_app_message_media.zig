@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const S3File = @import("s3_file.zig").S3File;
 const S3PresignedUrl = @import("s3_presigned_url.zig").S3PresignedUrl;
@@ -38,11 +39,7 @@ pub const PostWhatsAppMessageMediaOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PostWhatsAppMessageMediaInput, options: Options) !PostWhatsAppMessageMediaOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PostWhatsAppMessageMediaInput, options: CallOptions) !PostWhatsAppMessageMediaOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -32,6 +32,7 @@ const start_cost_estimation = @import("start_cost_estimation.zig");
 const update_event_sources_config = @import("update_event_sources_config.zig");
 const update_resource_collection = @import("update_resource_collection.zig");
 const update_service_integration = @import("update_service_integration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -81,13 +82,13 @@ pub const Client = struct {
     /// to the CMK. For more information, see [Permissions for
     /// Amazon Web Services KMS–encrypted Amazon SNS
     /// topics](https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html).
-    pub fn addNotificationChannel(self: *Self, allocator: std.mem.Allocator, input: add_notification_channel.AddNotificationChannelInput, options: add_notification_channel.Options) !add_notification_channel.AddNotificationChannelOutput {
+    pub fn addNotificationChannel(self: *Self, allocator: std.mem.Allocator, input: add_notification_channel.AddNotificationChannelInput, options: CallOptions) !add_notification_channel.AddNotificationChannelOutput {
         return add_notification_channel.execute(self, allocator, input, options);
     }
 
     /// Deletes the insight along with the associated anomalies, events and
     /// recommendations.
-    pub fn deleteInsight(self: *Self, allocator: std.mem.Allocator, input: delete_insight.DeleteInsightInput, options: delete_insight.Options) !delete_insight.DeleteInsightOutput {
+    pub fn deleteInsight(self: *Self, allocator: std.mem.Allocator, input: delete_insight.DeleteInsightInput, options: CallOptions) !delete_insight.DeleteInsightOutput {
         return delete_insight.execute(self, allocator, input, options);
     }
 
@@ -96,7 +97,7 @@ pub const Client = struct {
     /// and the number of metrics analyzed in your Amazon Web Services account. Use
     /// these numbers to gauge the
     /// health of operations in your Amazon Web Services account.
-    pub fn describeAccountHealth(self: *Self, allocator: std.mem.Allocator, input: describe_account_health.DescribeAccountHealthInput, options: describe_account_health.Options) !describe_account_health.DescribeAccountHealthOutput {
+    pub fn describeAccountHealth(self: *Self, allocator: std.mem.Allocator, input: describe_account_health.DescribeAccountHealthInput, options: CallOptions) !describe_account_health.DescribeAccountHealthOutput {
         return describe_account_health.execute(self, allocator, input, options);
     }
 
@@ -105,12 +106,12 @@ pub const Client = struct {
     /// created, the number of open proactive insights that were created, and the
     /// Mean Time to Recover (MTTR) for all
     /// closed reactive insights.
-    pub fn describeAccountOverview(self: *Self, allocator: std.mem.Allocator, input: describe_account_overview.DescribeAccountOverviewInput, options: describe_account_overview.Options) !describe_account_overview.DescribeAccountOverviewOutput {
+    pub fn describeAccountOverview(self: *Self, allocator: std.mem.Allocator, input: describe_account_overview.DescribeAccountOverviewInput, options: CallOptions) !describe_account_overview.DescribeAccountOverviewOutput {
         return describe_account_overview.execute(self, allocator, input, options);
     }
 
     /// Returns details about an anomaly that you specify using its ID.
-    pub fn describeAnomaly(self: *Self, allocator: std.mem.Allocator, input: describe_anomaly.DescribeAnomalyInput, options: describe_anomaly.Options) !describe_anomaly.DescribeAnomalyOutput {
+    pub fn describeAnomaly(self: *Self, allocator: std.mem.Allocator, input: describe_anomaly.DescribeAnomalyInput, options: CallOptions) !describe_anomaly.DescribeAnomalyOutput {
         return describe_anomaly.execute(self, allocator, input, options);
     }
 
@@ -121,32 +122,32 @@ pub const Client = struct {
     /// Profiler, which can produce proactive recommendations which can be stored
     /// and viewed in
     /// DevOps Guru.
-    pub fn describeEventSourcesConfig(self: *Self, allocator: std.mem.Allocator, input: describe_event_sources_config.DescribeEventSourcesConfigInput, options: describe_event_sources_config.Options) !describe_event_sources_config.DescribeEventSourcesConfigOutput {
+    pub fn describeEventSourcesConfig(self: *Self, allocator: std.mem.Allocator, input: describe_event_sources_config.DescribeEventSourcesConfigInput, options: CallOptions) !describe_event_sources_config.DescribeEventSourcesConfigOutput {
         return describe_event_sources_config.execute(self, allocator, input, options);
     }
 
     /// Returns the most recent feedback submitted in the current Amazon Web
     /// Services account and Region.
-    pub fn describeFeedback(self: *Self, allocator: std.mem.Allocator, input: describe_feedback.DescribeFeedbackInput, options: describe_feedback.Options) !describe_feedback.DescribeFeedbackOutput {
+    pub fn describeFeedback(self: *Self, allocator: std.mem.Allocator, input: describe_feedback.DescribeFeedbackInput, options: CallOptions) !describe_feedback.DescribeFeedbackOutput {
         return describe_feedback.execute(self, allocator, input, options);
     }
 
     /// Returns details about an insight that you specify using its ID.
-    pub fn describeInsight(self: *Self, allocator: std.mem.Allocator, input: describe_insight.DescribeInsightInput, options: describe_insight.Options) !describe_insight.DescribeInsightOutput {
+    pub fn describeInsight(self: *Self, allocator: std.mem.Allocator, input: describe_insight.DescribeInsightInput, options: CallOptions) !describe_insight.DescribeInsightOutput {
         return describe_insight.execute(self, allocator, input, options);
     }
 
     /// Returns active insights, predictive insights, and resource hours analyzed in
     /// last
     /// hour.
-    pub fn describeOrganizationHealth(self: *Self, allocator: std.mem.Allocator, input: describe_organization_health.DescribeOrganizationHealthInput, options: describe_organization_health.Options) !describe_organization_health.DescribeOrganizationHealthOutput {
+    pub fn describeOrganizationHealth(self: *Self, allocator: std.mem.Allocator, input: describe_organization_health.DescribeOrganizationHealthInput, options: CallOptions) !describe_organization_health.DescribeOrganizationHealthOutput {
         return describe_organization_health.execute(self, allocator, input, options);
     }
 
     /// Returns an overview of your organization's history based on the specified
     /// time range.
     /// The overview includes the total reactive and proactive insights.
-    pub fn describeOrganizationOverview(self: *Self, allocator: std.mem.Allocator, input: describe_organization_overview.DescribeOrganizationOverviewInput, options: describe_organization_overview.Options) !describe_organization_overview.DescribeOrganizationOverviewOutput {
+    pub fn describeOrganizationOverview(self: *Self, allocator: std.mem.Allocator, input: describe_organization_overview.DescribeOrganizationOverviewInput, options: CallOptions) !describe_organization_overview.DescribeOrganizationOverviewOutput {
         return describe_organization_overview.execute(self, allocator, input, options);
     }
 
@@ -154,7 +155,7 @@ pub const Client = struct {
     /// are part
     /// of your organization, you can filter those accounts using the `AccountIds`
     /// field.
-    pub fn describeOrganizationResourceCollectionHealth(self: *Self, allocator: std.mem.Allocator, input: describe_organization_resource_collection_health.DescribeOrganizationResourceCollectionHealthInput, options: describe_organization_resource_collection_health.Options) !describe_organization_resource_collection_health.DescribeOrganizationResourceCollectionHealthOutput {
+    pub fn describeOrganizationResourceCollectionHealth(self: *Self, allocator: std.mem.Allocator, input: describe_organization_resource_collection_health.DescribeOrganizationResourceCollectionHealthInput, options: CallOptions) !describe_organization_resource_collection_health.DescribeOrganizationResourceCollectionHealthOutput {
         return describe_organization_resource_collection_health.execute(self, allocator, input, options);
     }
 
@@ -170,7 +171,7 @@ pub const Client = struct {
     /// the Amazon Web Services resources that are defined in the stacks or that are
     /// tagged using the same tag *key*. You can specify up to 500 Amazon Web
     /// Services CloudFormation stacks.
-    pub fn describeResourceCollectionHealth(self: *Self, allocator: std.mem.Allocator, input: describe_resource_collection_health.DescribeResourceCollectionHealthInput, options: describe_resource_collection_health.Options) !describe_resource_collection_health.DescribeResourceCollectionHealthOutput {
+    pub fn describeResourceCollectionHealth(self: *Self, allocator: std.mem.Allocator, input: describe_resource_collection_health.DescribeResourceCollectionHealthInput, options: CallOptions) !describe_resource_collection_health.DescribeResourceCollectionHealthOutput {
         return describe_resource_collection_health.execute(self, allocator, input, options);
     }
 
@@ -179,7 +180,7 @@ pub const Client = struct {
     /// The one service that can be integrated with DevOps Guru
     /// is Amazon Web Services Systems Manager, which can be used to create an
     /// OpsItem for each generated insight.
-    pub fn describeServiceIntegration(self: *Self, allocator: std.mem.Allocator, input: describe_service_integration.DescribeServiceIntegrationInput, options: describe_service_integration.Options) !describe_service_integration.DescribeServiceIntegrationOutput {
+    pub fn describeServiceIntegration(self: *Self, allocator: std.mem.Allocator, input: describe_service_integration.DescribeServiceIntegrationInput, options: CallOptions) !describe_service_integration.DescribeServiceIntegrationOutput {
         return describe_service_integration.execute(self, allocator, input, options);
     }
 
@@ -190,7 +191,7 @@ pub const Client = struct {
     /// Amazon DevOps Guru
     /// costs](https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html) and
     /// [Amazon DevOps Guru pricing](http://aws.amazon.com/devops-guru/pricing/).
-    pub fn getCostEstimation(self: *Self, allocator: std.mem.Allocator, input: get_cost_estimation.GetCostEstimationInput, options: get_cost_estimation.Options) !get_cost_estimation.GetCostEstimationOutput {
+    pub fn getCostEstimation(self: *Self, allocator: std.mem.Allocator, input: get_cost_estimation.GetCostEstimationInput, options: CallOptions) !get_cost_estimation.GetCostEstimationOutput {
         return get_cost_estimation.execute(self, allocator, input, options);
     }
 
@@ -203,26 +204,26 @@ pub const Client = struct {
     /// the Amazon Web Services resources that are defined in the stacks or that are
     /// tagged using the same tag *key*. You can specify up to 500 Amazon Web
     /// Services CloudFormation stacks.
-    pub fn getResourceCollection(self: *Self, allocator: std.mem.Allocator, input: get_resource_collection.GetResourceCollectionInput, options: get_resource_collection.Options) !get_resource_collection.GetResourceCollectionOutput {
+    pub fn getResourceCollection(self: *Self, allocator: std.mem.Allocator, input: get_resource_collection.GetResourceCollectionInput, options: CallOptions) !get_resource_collection.GetResourceCollectionOutput {
         return get_resource_collection.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the anomalies that belong to an insight that you specify
     /// using its
     /// ID.
-    pub fn listAnomaliesForInsight(self: *Self, allocator: std.mem.Allocator, input: list_anomalies_for_insight.ListAnomaliesForInsightInput, options: list_anomalies_for_insight.Options) !list_anomalies_for_insight.ListAnomaliesForInsightOutput {
+    pub fn listAnomaliesForInsight(self: *Self, allocator: std.mem.Allocator, input: list_anomalies_for_insight.ListAnomaliesForInsightInput, options: CallOptions) !list_anomalies_for_insight.ListAnomaliesForInsightOutput {
         return list_anomalies_for_insight.execute(self, allocator, input, options);
     }
 
     /// Returns the list of log groups that contain log anomalies.
-    pub fn listAnomalousLogGroups(self: *Self, allocator: std.mem.Allocator, input: list_anomalous_log_groups.ListAnomalousLogGroupsInput, options: list_anomalous_log_groups.Options) !list_anomalous_log_groups.ListAnomalousLogGroupsOutput {
+    pub fn listAnomalousLogGroups(self: *Self, allocator: std.mem.Allocator, input: list_anomalous_log_groups.ListAnomalousLogGroupsInput, options: CallOptions) !list_anomalous_log_groups.ListAnomalousLogGroupsOutput {
         return list_anomalous_log_groups.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the events emitted by the resources that are evaluated by
     /// DevOps Guru.
     /// You can use filters to specify which events are returned.
-    pub fn listEvents(self: *Self, allocator: std.mem.Allocator, input: list_events.ListEventsInput, options: list_events.Options) !list_events.ListEventsOutput {
+    pub fn listEvents(self: *Self, allocator: std.mem.Allocator, input: list_events.ListEventsInput, options: CallOptions) !list_events.ListEventsOutput {
         return list_events.execute(self, allocator, input, options);
     }
 
@@ -230,13 +231,13 @@ pub const Client = struct {
     /// specify which insights are
     /// returned by their start time and status (`ONGOING`, `CLOSED`, or
     /// `ANY`).
-    pub fn listInsights(self: *Self, allocator: std.mem.Allocator, input: list_insights.ListInsightsInput, options: list_insights.Options) !list_insights.ListInsightsOutput {
+    pub fn listInsights(self: *Self, allocator: std.mem.Allocator, input: list_insights.ListInsightsInput, options: CallOptions) !list_insights.ListInsightsOutput {
         return list_insights.execute(self, allocator, input, options);
     }
 
     /// Returns the list of all log groups that are being monitored and tagged by
     /// DevOps Guru.
-    pub fn listMonitoredResources(self: *Self, allocator: std.mem.Allocator, input: list_monitored_resources.ListMonitoredResourcesInput, options: list_monitored_resources.Options) !list_monitored_resources.ListMonitoredResourcesOutput {
+    pub fn listMonitoredResources(self: *Self, allocator: std.mem.Allocator, input: list_monitored_resources.ListMonitoredResourcesInput, options: CallOptions) !list_monitored_resources.ListMonitoredResourcesOutput {
         return list_monitored_resources.execute(self, allocator, input, options);
     }
 
@@ -247,24 +248,24 @@ pub const Client = struct {
     /// about how to improve your operations. The one
     /// supported notification channel is Amazon Simple Notification Service (Amazon
     /// SNS).
-    pub fn listNotificationChannels(self: *Self, allocator: std.mem.Allocator, input: list_notification_channels.ListNotificationChannelsInput, options: list_notification_channels.Options) !list_notification_channels.ListNotificationChannelsOutput {
+    pub fn listNotificationChannels(self: *Self, allocator: std.mem.Allocator, input: list_notification_channels.ListNotificationChannelsInput, options: CallOptions) !list_notification_channels.ListNotificationChannelsOutput {
         return list_notification_channels.execute(self, allocator, input, options);
     }
 
     /// Returns a list of insights associated with the account or OU Id.
-    pub fn listOrganizationInsights(self: *Self, allocator: std.mem.Allocator, input: list_organization_insights.ListOrganizationInsightsInput, options: list_organization_insights.Options) !list_organization_insights.ListOrganizationInsightsOutput {
+    pub fn listOrganizationInsights(self: *Self, allocator: std.mem.Allocator, input: list_organization_insights.ListOrganizationInsightsInput, options: CallOptions) !list_organization_insights.ListOrganizationInsightsOutput {
         return list_organization_insights.execute(self, allocator, input, options);
     }
 
     /// Returns a list of a specified insight's recommendations. Each recommendation
     /// includes
     /// a list of related metrics and a list of related events.
-    pub fn listRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_recommendations.ListRecommendationsInput, options: list_recommendations.Options) !list_recommendations.ListRecommendationsOutput {
+    pub fn listRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_recommendations.ListRecommendationsInput, options: CallOptions) !list_recommendations.ListRecommendationsOutput {
         return list_recommendations.execute(self, allocator, input, options);
     }
 
     /// Collects customer feedback about the specified insight.
-    pub fn putFeedback(self: *Self, allocator: std.mem.Allocator, input: put_feedback.PutFeedbackInput, options: put_feedback.Options) !put_feedback.PutFeedbackOutput {
+    pub fn putFeedback(self: *Self, allocator: std.mem.Allocator, input: put_feedback.PutFeedbackInput, options: CallOptions) !put_feedback.PutFeedbackOutput {
         return put_feedback.execute(self, allocator, input, options);
     }
 
@@ -273,7 +274,7 @@ pub const Client = struct {
     /// you when DevOps Guru generates an insight that contains information about
     /// how to improve your
     /// operations.
-    pub fn removeNotificationChannel(self: *Self, allocator: std.mem.Allocator, input: remove_notification_channel.RemoveNotificationChannelInput, options: remove_notification_channel.Options) !remove_notification_channel.RemoveNotificationChannelOutput {
+    pub fn removeNotificationChannel(self: *Self, allocator: std.mem.Allocator, input: remove_notification_channel.RemoveNotificationChannelInput, options: CallOptions) !remove_notification_channel.RemoveNotificationChannelOutput {
         return remove_notification_channel.execute(self, allocator, input, options);
     }
 
@@ -287,7 +288,7 @@ pub const Client = struct {
     /// Use the `Filters` parameter to specify status and severity search
     /// parameters. Use the `Type` parameter to specify `REACTIVE` or
     /// `PROACTIVE` in your search.
-    pub fn searchInsights(self: *Self, allocator: std.mem.Allocator, input: search_insights.SearchInsightsInput, options: search_insights.Options) !search_insights.SearchInsightsOutput {
+    pub fn searchInsights(self: *Self, allocator: std.mem.Allocator, input: search_insights.SearchInsightsInput, options: CallOptions) !search_insights.SearchInsightsOutput {
         return search_insights.execute(self, allocator, input, options);
     }
 
@@ -301,14 +302,14 @@ pub const Client = struct {
     /// Use the `Filters` parameter to specify status and severity search
     /// parameters. Use the `Type` parameter to specify `REACTIVE` or
     /// `PROACTIVE` in your search.
-    pub fn searchOrganizationInsights(self: *Self, allocator: std.mem.Allocator, input: search_organization_insights.SearchOrganizationInsightsInput, options: search_organization_insights.Options) !search_organization_insights.SearchOrganizationInsightsOutput {
+    pub fn searchOrganizationInsights(self: *Self, allocator: std.mem.Allocator, input: search_organization_insights.SearchOrganizationInsightsInput, options: CallOptions) !search_organization_insights.SearchOrganizationInsightsOutput {
         return search_organization_insights.execute(self, allocator, input, options);
     }
 
     /// Starts the creation of an estimate of the monthly cost to analyze your
     /// Amazon Web Services
     /// resources.
-    pub fn startCostEstimation(self: *Self, allocator: std.mem.Allocator, input: start_cost_estimation.StartCostEstimationInput, options: start_cost_estimation.Options) !start_cost_estimation.StartCostEstimationOutput {
+    pub fn startCostEstimation(self: *Self, allocator: std.mem.Allocator, input: start_cost_estimation.StartCostEstimationInput, options: CallOptions) !start_cost_estimation.StartCostEstimationOutput {
         return start_cost_estimation.execute(self, allocator, input, options);
     }
 
@@ -318,7 +319,7 @@ pub const Client = struct {
     /// Profiler, which
     /// can produce proactive recommendations which can be stored and viewed in
     /// DevOps Guru.
-    pub fn updateEventSourcesConfig(self: *Self, allocator: std.mem.Allocator, input: update_event_sources_config.UpdateEventSourcesConfigInput, options: update_event_sources_config.Options) !update_event_sources_config.UpdateEventSourcesConfigOutput {
+    pub fn updateEventSourcesConfig(self: *Self, allocator: std.mem.Allocator, input: update_event_sources_config.UpdateEventSourcesConfigInput, options: CallOptions) !update_event_sources_config.UpdateEventSourcesConfigOutput {
         return update_event_sources_config.execute(self, allocator, input, options);
     }
 
@@ -332,7 +333,7 @@ pub const Client = struct {
     /// Services CloudFormation stacks. This method also creates the IAM role
     /// required for
     /// you to use DevOps Guru.
-    pub fn updateResourceCollection(self: *Self, allocator: std.mem.Allocator, input: update_resource_collection.UpdateResourceCollectionInput, options: update_resource_collection.Options) !update_resource_collection.UpdateResourceCollectionOutput {
+    pub fn updateResourceCollection(self: *Self, allocator: std.mem.Allocator, input: update_resource_collection.UpdateResourceCollectionInput, options: CallOptions) !update_resource_collection.UpdateResourceCollectionOutput {
         return update_resource_collection.execute(self, allocator, input, options);
     }
 
@@ -341,7 +342,7 @@ pub const Client = struct {
     /// one service that can be integrated with DevOps Guru is Amazon Web Services
     /// Systems Manager, which can be used to create
     /// an OpsItem for each generated insight.
-    pub fn updateServiceIntegration(self: *Self, allocator: std.mem.Allocator, input: update_service_integration.UpdateServiceIntegrationInput, options: update_service_integration.Options) !update_service_integration.UpdateServiceIntegrationOutput {
+    pub fn updateServiceIntegration(self: *Self, allocator: std.mem.Allocator, input: update_service_integration.UpdateServiceIntegrationInput, options: CallOptions) !update_service_integration.UpdateServiceIntegrationOutput {
         return update_service_integration.execute(self, allocator, input, options);
     }
 

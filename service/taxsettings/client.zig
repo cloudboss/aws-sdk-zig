@@ -17,6 +17,7 @@ const put_supplemental_tax_registration = @import("put_supplemental_tax_registra
 const put_tax_exemption = @import("put_tax_exemption.zig");
 const put_tax_inheritance = @import("put_tax_inheritance.zig");
 const put_tax_registration = @import("put_tax_registration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -54,13 +55,13 @@ pub const Client = struct {
     /// This API operation can't be used to delete your tax registration in Brazil.
     /// Use the [Payment
     /// preferences](https://console.aws.amazon.com/billing/home#/paymentpreferences/paymentmethods) page in the Billing and Cost Management console instead.
-    pub fn batchDeleteTaxRegistration(self: *Self, allocator: std.mem.Allocator, input: batch_delete_tax_registration.BatchDeleteTaxRegistrationInput, options: batch_delete_tax_registration.Options) !batch_delete_tax_registration.BatchDeleteTaxRegistrationOutput {
+    pub fn batchDeleteTaxRegistration(self: *Self, allocator: std.mem.Allocator, input: batch_delete_tax_registration.BatchDeleteTaxRegistrationInput, options: CallOptions) !batch_delete_tax_registration.BatchDeleteTaxRegistrationOutput {
         return batch_delete_tax_registration.execute(self, allocator, input, options);
     }
 
     /// Get the active tax exemptions for a given list of accounts. The IAM action
     /// is `tax:GetExemptions`.
-    pub fn batchGetTaxExemptions(self: *Self, allocator: std.mem.Allocator, input: batch_get_tax_exemptions.BatchGetTaxExemptionsInput, options: batch_get_tax_exemptions.Options) !batch_get_tax_exemptions.BatchGetTaxExemptionsOutput {
+    pub fn batchGetTaxExemptions(self: *Self, allocator: std.mem.Allocator, input: batch_get_tax_exemptions.BatchGetTaxExemptionsInput, options: CallOptions) !batch_get_tax_exemptions.BatchGetTaxExemptionsOutput {
         return batch_get_tax_exemptions.execute(self, allocator, input, options);
     }
 
@@ -244,12 +245,12 @@ pub const Client = struct {
     /// **Ukraine**
     ///
     /// * The sector valid values are `Business` and `Individual`.
-    pub fn batchPutTaxRegistration(self: *Self, allocator: std.mem.Allocator, input: batch_put_tax_registration.BatchPutTaxRegistrationInput, options: batch_put_tax_registration.Options) !batch_put_tax_registration.BatchPutTaxRegistrationOutput {
+    pub fn batchPutTaxRegistration(self: *Self, allocator: std.mem.Allocator, input: batch_put_tax_registration.BatchPutTaxRegistrationInput, options: CallOptions) !batch_put_tax_registration.BatchPutTaxRegistrationOutput {
         return batch_put_tax_registration.execute(self, allocator, input, options);
     }
 
     /// Deletes a supplemental tax registration for a single account.
-    pub fn deleteSupplementalTaxRegistration(self: *Self, allocator: std.mem.Allocator, input: delete_supplemental_tax_registration.DeleteSupplementalTaxRegistrationInput, options: delete_supplemental_tax_registration.Options) !delete_supplemental_tax_registration.DeleteSupplementalTaxRegistrationOutput {
+    pub fn deleteSupplementalTaxRegistration(self: *Self, allocator: std.mem.Allocator, input: delete_supplemental_tax_registration.DeleteSupplementalTaxRegistrationInput, options: CallOptions) !delete_supplemental_tax_registration.DeleteSupplementalTaxRegistrationOutput {
         return delete_supplemental_tax_registration.execute(self, allocator, input, options);
     }
 
@@ -258,40 +259,40 @@ pub const Client = struct {
     /// This API operation can't be used to delete your tax registration in Brazil.
     /// Use the [Payment
     /// preferences](https://console.aws.amazon.com/billing/home#/paymentpreferences/paymentmethods) page in the Billing and Cost Management console instead.
-    pub fn deleteTaxRegistration(self: *Self, allocator: std.mem.Allocator, input: delete_tax_registration.DeleteTaxRegistrationInput, options: delete_tax_registration.Options) !delete_tax_registration.DeleteTaxRegistrationOutput {
+    pub fn deleteTaxRegistration(self: *Self, allocator: std.mem.Allocator, input: delete_tax_registration.DeleteTaxRegistrationInput, options: CallOptions) !delete_tax_registration.DeleteTaxRegistrationOutput {
         return delete_tax_registration.execute(self, allocator, input, options);
     }
 
     /// Get supported tax exemption types. The IAM action is `tax:GetExemptions`.
-    pub fn getTaxExemptionTypes(self: *Self, allocator: std.mem.Allocator, input: get_tax_exemption_types.GetTaxExemptionTypesInput, options: get_tax_exemption_types.Options) !get_tax_exemption_types.GetTaxExemptionTypesOutput {
+    pub fn getTaxExemptionTypes(self: *Self, allocator: std.mem.Allocator, input: get_tax_exemption_types.GetTaxExemptionTypesInput, options: CallOptions) !get_tax_exemption_types.GetTaxExemptionTypesOutput {
         return get_tax_exemption_types.execute(self, allocator, input, options);
     }
 
     /// The get account tax inheritance status.
-    pub fn getTaxInheritance(self: *Self, allocator: std.mem.Allocator, input: get_tax_inheritance.GetTaxInheritanceInput, options: get_tax_inheritance.Options) !get_tax_inheritance.GetTaxInheritanceOutput {
+    pub fn getTaxInheritance(self: *Self, allocator: std.mem.Allocator, input: get_tax_inheritance.GetTaxInheritanceInput, options: CallOptions) !get_tax_inheritance.GetTaxInheritanceOutput {
         return get_tax_inheritance.execute(self, allocator, input, options);
     }
 
     /// Retrieves tax registration for a single account.
-    pub fn getTaxRegistration(self: *Self, allocator: std.mem.Allocator, input: get_tax_registration.GetTaxRegistrationInput, options: get_tax_registration.Options) !get_tax_registration.GetTaxRegistrationOutput {
+    pub fn getTaxRegistration(self: *Self, allocator: std.mem.Allocator, input: get_tax_registration.GetTaxRegistrationInput, options: CallOptions) !get_tax_registration.GetTaxRegistrationOutput {
         return get_tax_registration.execute(self, allocator, input, options);
     }
 
     /// Downloads your tax documents to the Amazon S3 bucket that you specify in
     /// your
     /// request.
-    pub fn getTaxRegistrationDocument(self: *Self, allocator: std.mem.Allocator, input: get_tax_registration_document.GetTaxRegistrationDocumentInput, options: get_tax_registration_document.Options) !get_tax_registration_document.GetTaxRegistrationDocumentOutput {
+    pub fn getTaxRegistrationDocument(self: *Self, allocator: std.mem.Allocator, input: get_tax_registration_document.GetTaxRegistrationDocumentInput, options: CallOptions) !get_tax_registration_document.GetTaxRegistrationDocumentOutput {
         return get_tax_registration_document.execute(self, allocator, input, options);
     }
 
     /// Retrieves supplemental tax registrations for a single account.
-    pub fn listSupplementalTaxRegistrations(self: *Self, allocator: std.mem.Allocator, input: list_supplemental_tax_registrations.ListSupplementalTaxRegistrationsInput, options: list_supplemental_tax_registrations.Options) !list_supplemental_tax_registrations.ListSupplementalTaxRegistrationsOutput {
+    pub fn listSupplementalTaxRegistrations(self: *Self, allocator: std.mem.Allocator, input: list_supplemental_tax_registrations.ListSupplementalTaxRegistrationsInput, options: CallOptions) !list_supplemental_tax_registrations.ListSupplementalTaxRegistrationsOutput {
         return list_supplemental_tax_registrations.execute(self, allocator, input, options);
     }
 
     /// Retrieves the tax exemption of accounts listed in a consolidated billing
     /// family. The IAM action is `tax:GetExemptions`.
-    pub fn listTaxExemptions(self: *Self, allocator: std.mem.Allocator, input: list_tax_exemptions.ListTaxExemptionsInput, options: list_tax_exemptions.Options) !list_tax_exemptions.ListTaxExemptionsOutput {
+    pub fn listTaxExemptions(self: *Self, allocator: std.mem.Allocator, input: list_tax_exemptions.ListTaxExemptionsInput, options: CallOptions) !list_tax_exemptions.ListTaxExemptionsOutput {
         return list_tax_exemptions.execute(self, allocator, input, options);
     }
 
@@ -299,23 +300,23 @@ pub const Client = struct {
     /// family. This
     /// can be used to retrieve up to 100 accounts' tax registrations in one call
     /// (default 50).
-    pub fn listTaxRegistrations(self: *Self, allocator: std.mem.Allocator, input: list_tax_registrations.ListTaxRegistrationsInput, options: list_tax_registrations.Options) !list_tax_registrations.ListTaxRegistrationsOutput {
+    pub fn listTaxRegistrations(self: *Self, allocator: std.mem.Allocator, input: list_tax_registrations.ListTaxRegistrationsInput, options: CallOptions) !list_tax_registrations.ListTaxRegistrationsOutput {
         return list_tax_registrations.execute(self, allocator, input, options);
     }
 
     /// Stores supplemental tax registration for a single account.
-    pub fn putSupplementalTaxRegistration(self: *Self, allocator: std.mem.Allocator, input: put_supplemental_tax_registration.PutSupplementalTaxRegistrationInput, options: put_supplemental_tax_registration.Options) !put_supplemental_tax_registration.PutSupplementalTaxRegistrationOutput {
+    pub fn putSupplementalTaxRegistration(self: *Self, allocator: std.mem.Allocator, input: put_supplemental_tax_registration.PutSupplementalTaxRegistrationInput, options: CallOptions) !put_supplemental_tax_registration.PutSupplementalTaxRegistrationOutput {
         return put_supplemental_tax_registration.execute(self, allocator, input, options);
     }
 
     /// Adds the tax exemption for a single account or all accounts listed in a
     /// consolidated billing family. The IAM action is `tax:UpdateExemptions`.
-    pub fn putTaxExemption(self: *Self, allocator: std.mem.Allocator, input: put_tax_exemption.PutTaxExemptionInput, options: put_tax_exemption.Options) !put_tax_exemption.PutTaxExemptionOutput {
+    pub fn putTaxExemption(self: *Self, allocator: std.mem.Allocator, input: put_tax_exemption.PutTaxExemptionInput, options: CallOptions) !put_tax_exemption.PutTaxExemptionOutput {
         return put_tax_exemption.execute(self, allocator, input, options);
     }
 
     /// The updated tax inheritance status.
-    pub fn putTaxInheritance(self: *Self, allocator: std.mem.Allocator, input: put_tax_inheritance.PutTaxInheritanceInput, options: put_tax_inheritance.Options) !put_tax_inheritance.PutTaxInheritanceOutput {
+    pub fn putTaxInheritance(self: *Self, allocator: std.mem.Allocator, input: put_tax_inheritance.PutTaxInheritanceInput, options: CallOptions) !put_tax_inheritance.PutTaxInheritanceOutput {
         return put_tax_inheritance.execute(self, allocator, input, options);
     }
 
@@ -496,7 +497,7 @@ pub const Client = struct {
     /// **Ukraine**
     ///
     /// * The sector valid values are `Business` and `Individual`.
-    pub fn putTaxRegistration(self: *Self, allocator: std.mem.Allocator, input: put_tax_registration.PutTaxRegistrationInput, options: put_tax_registration.Options) !put_tax_registration.PutTaxRegistrationOutput {
+    pub fn putTaxRegistration(self: *Self, allocator: std.mem.Allocator, input: put_tax_registration.PutTaxRegistrationInput, options: CallOptions) !put_tax_registration.PutTaxRegistrationOutput {
         return put_tax_registration.execute(self, allocator, input, options);
     }
 

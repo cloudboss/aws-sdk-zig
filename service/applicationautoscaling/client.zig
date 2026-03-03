@@ -15,6 +15,7 @@ const put_scheduled_action = @import("put_scheduled_action.zig");
 const register_scalable_target = @import("register_scalable_target.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -57,7 +58,7 @@ pub const Client = struct {
     /// For more information, see [Delete a step scaling
     /// policy](https://docs.aws.amazon.com/autoscaling/application/userguide/create-step-scaling-policy-cli.html#delete-step-scaling-policy) and [Delete a target tracking scaling policy](https://docs.aws.amazon.com/autoscaling/application/userguide/create-target-tracking-policy-cli.html#delete-target-tracking-policy) in the
     /// *Application Auto Scaling User Guide*.
-    pub fn deleteScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_scaling_policy.DeleteScalingPolicyInput, options: delete_scaling_policy.Options) !delete_scaling_policy.DeleteScalingPolicyOutput {
+    pub fn deleteScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_scaling_policy.DeleteScalingPolicyInput, options: CallOptions) !delete_scaling_policy.DeleteScalingPolicyOutput {
         return delete_scaling_policy.execute(self, allocator, input, options);
     }
 
@@ -66,7 +67,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Delete a scheduled
     /// action](https://docs.aws.amazon.com/autoscaling/application/userguide/scheduled-scaling-additional-cli-commands.html#delete-scheduled-action) in the *Application Auto Scaling User Guide*.
-    pub fn deleteScheduledAction(self: *Self, allocator: std.mem.Allocator, input: delete_scheduled_action.DeleteScheduledActionInput, options: delete_scheduled_action.Options) !delete_scheduled_action.DeleteScheduledActionOutput {
+    pub fn deleteScheduledAction(self: *Self, allocator: std.mem.Allocator, input: delete_scheduled_action.DeleteScheduledActionInput, options: CallOptions) !delete_scheduled_action.DeleteScheduledActionOutput {
         return delete_scheduled_action.execute(self, allocator, input, options);
     }
 
@@ -78,7 +79,7 @@ pub const Client = struct {
     /// Deregistering a scalable target deletes the scaling policies and the
     /// scheduled
     /// actions that are associated with it.
-    pub fn deregisterScalableTarget(self: *Self, allocator: std.mem.Allocator, input: deregister_scalable_target.DeregisterScalableTargetInput, options: deregister_scalable_target.Options) !deregister_scalable_target.DeregisterScalableTargetOutput {
+    pub fn deregisterScalableTarget(self: *Self, allocator: std.mem.Allocator, input: deregister_scalable_target.DeregisterScalableTargetInput, options: CallOptions) !deregister_scalable_target.DeregisterScalableTargetOutput {
         return deregister_scalable_target.execute(self, allocator, input, options);
     }
 
@@ -86,7 +87,7 @@ pub const Client = struct {
     ///
     /// You can filter the results using `ResourceIds` and
     /// `ScalableDimension`.
-    pub fn describeScalableTargets(self: *Self, allocator: std.mem.Allocator, input: describe_scalable_targets.DescribeScalableTargetsInput, options: describe_scalable_targets.Options) !describe_scalable_targets.DescribeScalableTargetsOutput {
+    pub fn describeScalableTargets(self: *Self, allocator: std.mem.Allocator, input: describe_scalable_targets.DescribeScalableTargetsInput, options: CallOptions) !describe_scalable_targets.DescribeScalableTargetsOutput {
         return describe_scalable_targets.execute(self, allocator, input, options);
     }
 
@@ -100,7 +101,7 @@ pub const Client = struct {
     /// For information about viewing scaling activities using the Amazon Web
     /// Services CLI, see [Scaling activities for Application Auto
     /// Scaling](https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scaling-activities.html).
-    pub fn describeScalingActivities(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_activities.DescribeScalingActivitiesInput, options: describe_scaling_activities.Options) !describe_scaling_activities.DescribeScalingActivitiesOutput {
+    pub fn describeScalingActivities(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_activities.DescribeScalingActivitiesInput, options: CallOptions) !describe_scaling_activities.DescribeScalingActivitiesOutput {
         return describe_scaling_activities.execute(self, allocator, input, options);
     }
 
@@ -112,7 +113,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Target tracking scaling
     /// policies](https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html) and [Step scaling policies](https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html) in the *Application Auto Scaling User Guide*.
-    pub fn describeScalingPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_policies.DescribeScalingPoliciesInput, options: describe_scaling_policies.Options) !describe_scaling_policies.DescribeScalingPoliciesOutput {
+    pub fn describeScalingPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_scaling_policies.DescribeScalingPoliciesInput, options: CallOptions) !describe_scaling_policies.DescribeScalingPoliciesOutput {
         return describe_scaling_policies.execute(self, allocator, input, options);
     }
 
@@ -124,7 +125,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Scheduled
     /// scaling](https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html) in the *Application Auto Scaling User Guide*.
-    pub fn describeScheduledActions(self: *Self, allocator: std.mem.Allocator, input: describe_scheduled_actions.DescribeScheduledActionsInput, options: describe_scheduled_actions.Options) !describe_scheduled_actions.DescribeScheduledActionsOutput {
+    pub fn describeScheduledActions(self: *Self, allocator: std.mem.Allocator, input: describe_scheduled_actions.DescribeScheduledActionsInput, options: CallOptions) !describe_scheduled_actions.DescribeScheduledActionsOutput {
         return describe_scheduled_actions.execute(self, allocator, input, options);
     }
 
@@ -141,7 +142,7 @@ pub const Client = struct {
     /// A minimum of 24 hours of data is required to create the initial forecasts.
     /// However,
     /// having a full 14 days of historical data results in more accurate forecasts.
-    pub fn getPredictiveScalingForecast(self: *Self, allocator: std.mem.Allocator, input: get_predictive_scaling_forecast.GetPredictiveScalingForecastInput, options: get_predictive_scaling_forecast.Options) !get_predictive_scaling_forecast.GetPredictiveScalingForecastOutput {
+    pub fn getPredictiveScalingForecast(self: *Self, allocator: std.mem.Allocator, input: get_predictive_scaling_forecast.GetPredictiveScalingForecastInput, options: CallOptions) !get_predictive_scaling_forecast.GetPredictiveScalingForecastOutput {
         return get_predictive_scaling_forecast.execute(self, allocator, input, options);
     }
 
@@ -152,7 +153,7 @@ pub const Client = struct {
     /// [Tagging your Amazon Web Services
     /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
     /// in the *Amazon Web Services General Reference*.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -204,7 +205,7 @@ pub const Client = struct {
     /// use scaling policies. Any scaling policies that were specified for the
     /// scalable target
     /// are deleted.
-    pub fn putScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: put_scaling_policy.PutScalingPolicyInput, options: put_scaling_policy.Options) !put_scaling_policy.PutScalingPolicyOutput {
+    pub fn putScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: put_scaling_policy.PutScalingPolicyInput, options: CallOptions) !put_scaling_policy.PutScalingPolicyOutput {
         return put_scaling_policy.execute(self, allocator, input, options);
     }
 
@@ -236,7 +237,7 @@ pub const Client = struct {
     /// run scheduled actions. Any scheduled actions that were specified for the
     /// scalable target
     /// are deleted.
-    pub fn putScheduledAction(self: *Self, allocator: std.mem.Allocator, input: put_scheduled_action.PutScheduledActionInput, options: put_scheduled_action.Options) !put_scheduled_action.PutScheduledActionOutput {
+    pub fn putScheduledAction(self: *Self, allocator: std.mem.Allocator, input: put_scheduled_action.PutScheduledActionInput, options: CallOptions) !put_scheduled_action.PutScheduledActionOutput {
         return put_scheduled_action.execute(self, allocator, input, options);
     }
 
@@ -300,7 +301,7 @@ pub const Client = struct {
     /// don't
     /// include the `MinCapacity` or `MaxCapacity` request
     /// parameters.
-    pub fn registerScalableTarget(self: *Self, allocator: std.mem.Allocator, input: register_scalable_target.RegisterScalableTargetInput, options: register_scalable_target.Options) !register_scalable_target.RegisterScalableTargetOutput {
+    pub fn registerScalableTarget(self: *Self, allocator: std.mem.Allocator, input: register_scalable_target.RegisterScalableTargetInput, options: CallOptions) !register_scalable_target.RegisterScalableTargetOutput {
         return register_scalable_target.execute(self, allocator, input, options);
     }
 
@@ -329,14 +330,14 @@ pub const Client = struct {
     /// [Tagging support
     /// for Application Auto
     /// Scaling](https://docs.aws.amazon.com/autoscaling/application/userguide/resource-tagging-support.html) in the *Application Auto Scaling User Guide*.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes tags from an Application Auto Scaling scalable target. To delete a
     /// tag, specify the tag key and
     /// the Application Auto Scaling scalable target.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

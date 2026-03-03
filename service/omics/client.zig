@@ -97,6 +97,7 @@ const update_variant_store = @import("update_variant_store.zig");
 const update_workflow = @import("update_workflow.zig");
 const update_workflow_version = @import("update_workflow_version.zig");
 const upload_read_set_part = @import("upload_read_set_part.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -133,12 +134,12 @@ pub const Client = struct {
     /// multipart read set upload has been stopped, use the
     /// `ListMultipartReadSetUploads` API operation to view all active multipart
     /// read set uploads.
-    pub fn abortMultipartReadSetUpload(self: *Self, allocator: std.mem.Allocator, input: abort_multipart_read_set_upload.AbortMultipartReadSetUploadInput, options: abort_multipart_read_set_upload.Options) !abort_multipart_read_set_upload.AbortMultipartReadSetUploadOutput {
+    pub fn abortMultipartReadSetUpload(self: *Self, allocator: std.mem.Allocator, input: abort_multipart_read_set_upload.AbortMultipartReadSetUploadInput, options: CallOptions) !abort_multipart_read_set_upload.AbortMultipartReadSetUploadOutput {
         return abort_multipart_read_set_upload.execute(self, allocator, input, options);
     }
 
     /// Accept a resource share request.
-    pub fn acceptShare(self: *Self, allocator: std.mem.Allocator, input: accept_share.AcceptShareInput, options: accept_share.Options) !accept_share.AcceptShareOutput {
+    pub fn acceptShare(self: *Self, allocator: std.mem.Allocator, input: accept_share.AcceptShareInput, options: CallOptions) !accept_share.AcceptShareOutput {
         return accept_share.execute(self, allocator, input, options);
     }
 
@@ -148,7 +149,7 @@ pub const Client = struct {
     /// deletes only a subset of files, it will return an error list for the
     /// remaining files that fail to be deleted. There is a limit of 100 read sets
     /// that can be deleted in each `BatchDeleteReadSet` API call.
-    pub fn batchDeleteReadSet(self: *Self, allocator: std.mem.Allocator, input: batch_delete_read_set.BatchDeleteReadSetInput, options: batch_delete_read_set.Options) !batch_delete_read_set.BatchDeleteReadSetOutput {
+    pub fn batchDeleteReadSet(self: *Self, allocator: std.mem.Allocator, input: batch_delete_read_set.BatchDeleteReadSetInput, options: CallOptions) !batch_delete_read_set.BatchDeleteReadSetOutput {
         return batch_delete_read_set.execute(self, allocator, input, options);
     }
 
@@ -161,14 +162,14 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Cancels an annotation import job.
-    pub fn cancelAnnotationImportJob(self: *Self, allocator: std.mem.Allocator, input: cancel_annotation_import_job.CancelAnnotationImportJobInput, options: cancel_annotation_import_job.Options) !cancel_annotation_import_job.CancelAnnotationImportJobOutput {
+    pub fn cancelAnnotationImportJob(self: *Self, allocator: std.mem.Allocator, input: cancel_annotation_import_job.CancelAnnotationImportJobInput, options: CallOptions) !cancel_annotation_import_job.CancelAnnotationImportJobOutput {
         return cancel_annotation_import_job.execute(self, allocator, input, options);
     }
 
     /// Cancels a run using its ID and returns a response with no body if the
     /// operation is successful. To confirm that the run has been cancelled, use the
     /// `ListRuns` API operation to check that it is no longer listed.
-    pub fn cancelRun(self: *Self, allocator: std.mem.Allocator, input: cancel_run.CancelRunInput, options: cancel_run.Options) !cancel_run.CancelRunOutput {
+    pub fn cancelRun(self: *Self, allocator: std.mem.Allocator, input: cancel_run.CancelRunInput, options: CallOptions) !cancel_run.CancelRunOutput {
         return cancel_run.execute(self, allocator, input, options);
     }
 
@@ -181,7 +182,7 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Cancels a variant import job.
-    pub fn cancelVariantImportJob(self: *Self, allocator: std.mem.Allocator, input: cancel_variant_import_job.CancelVariantImportJobInput, options: cancel_variant_import_job.Options) !cancel_variant_import_job.CancelVariantImportJobOutput {
+    pub fn cancelVariantImportJob(self: *Self, allocator: std.mem.Allocator, input: cancel_variant_import_job.CancelVariantImportJobInput, options: CallOptions) !cancel_variant_import_job.CancelVariantImportJobOutput {
         return cancel_variant_import_job.execute(self, allocator, input, options);
     }
 
@@ -193,7 +194,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Direct upload to a sequence
     /// store](https://docs.aws.amazon.com/omics/latest/dev/synchronous-uploads.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn completeMultipartReadSetUpload(self: *Self, allocator: std.mem.Allocator, input: complete_multipart_read_set_upload.CompleteMultipartReadSetUploadInput, options: complete_multipart_read_set_upload.Options) !complete_multipart_read_set_upload.CompleteMultipartReadSetUploadOutput {
+    pub fn completeMultipartReadSetUpload(self: *Self, allocator: std.mem.Allocator, input: complete_multipart_read_set_upload.CompleteMultipartReadSetUploadInput, options: CallOptions) !complete_multipart_read_set_upload.CompleteMultipartReadSetUploadOutput {
         return complete_multipart_read_set_upload.execute(self, allocator, input, options);
     }
 
@@ -206,12 +207,12 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Creates an annotation store.
-    pub fn createAnnotationStore(self: *Self, allocator: std.mem.Allocator, input: create_annotation_store.CreateAnnotationStoreInput, options: create_annotation_store.Options) !create_annotation_store.CreateAnnotationStoreOutput {
+    pub fn createAnnotationStore(self: *Self, allocator: std.mem.Allocator, input: create_annotation_store.CreateAnnotationStoreInput, options: CallOptions) !create_annotation_store.CreateAnnotationStoreOutput {
         return create_annotation_store.execute(self, allocator, input, options);
     }
 
     /// Creates a new version of an annotation store.
-    pub fn createAnnotationStoreVersion(self: *Self, allocator: std.mem.Allocator, input: create_annotation_store_version.CreateAnnotationStoreVersionInput, options: create_annotation_store_version.Options) !create_annotation_store_version.CreateAnnotationStoreVersionOutput {
+    pub fn createAnnotationStoreVersion(self: *Self, allocator: std.mem.Allocator, input: create_annotation_store_version.CreateAnnotationStoreVersionInput, options: CallOptions) !create_annotation_store_version.CreateAnnotationStoreVersionOutput {
         return create_annotation_store_version.execute(self, allocator, input, options);
     }
 
@@ -238,7 +239,7 @@ pub const Client = struct {
     /// To learn more about creating parts and the `split` operation, see [Direct
     /// upload to a sequence
     /// store](https://docs.aws.amazon.com/omics/latest/dev/synchronous-uploads.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn createMultipartReadSetUpload(self: *Self, allocator: std.mem.Allocator, input: create_multipart_read_set_upload.CreateMultipartReadSetUploadInput, options: create_multipart_read_set_upload.Options) !create_multipart_read_set_upload.CreateMultipartReadSetUploadOutput {
+    pub fn createMultipartReadSetUpload(self: *Self, allocator: std.mem.Allocator, input: create_multipart_read_set_upload.CreateMultipartReadSetUploadInput, options: CallOptions) !create_multipart_read_set_upload.CreateMultipartReadSetUploadOutput {
         return create_multipart_read_set_upload.execute(self, allocator, input, options);
     }
 
@@ -250,7 +251,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Creating a HealthOmics reference
     /// store](https://docs.aws.amazon.com/omics/latest/dev/create-reference-store.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn createReferenceStore(self: *Self, allocator: std.mem.Allocator, input: create_reference_store.CreateReferenceStoreInput, options: create_reference_store.Options) !create_reference_store.CreateReferenceStoreOutput {
+    pub fn createReferenceStore(self: *Self, allocator: std.mem.Allocator, input: create_reference_store.CreateReferenceStoreInput, options: CallOptions) !create_reference_store.CreateReferenceStoreOutput {
         return create_reference_store.execute(self, allocator, input, options);
     }
 
@@ -262,13 +263,13 @@ pub const Client = struct {
     ///
     /// For more information, see [Call
     /// caching](https://docs.aws.amazon.com/omics/latest/dev/workflows-call-caching.html) and [Creating a run cache](https://docs.aws.amazon.com/omics/latest/dev/workflow-cache-create.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn createRunCache(self: *Self, allocator: std.mem.Allocator, input: create_run_cache.CreateRunCacheInput, options: create_run_cache.Options) !create_run_cache.CreateRunCacheOutput {
+    pub fn createRunCache(self: *Self, allocator: std.mem.Allocator, input: create_run_cache.CreateRunCacheInput, options: CallOptions) !create_run_cache.CreateRunCacheOutput {
         return create_run_cache.execute(self, allocator, input, options);
     }
 
     /// Creates a run group to limit the compute resources for the runs that are
     /// added to the group. Returns an ARN, ID, and tags for the run group.
-    pub fn createRunGroup(self: *Self, allocator: std.mem.Allocator, input: create_run_group.CreateRunGroupInput, options: create_run_group.Options) !create_run_group.CreateRunGroupOutput {
+    pub fn createRunGroup(self: *Self, allocator: std.mem.Allocator, input: create_run_group.CreateRunGroupInput, options: CallOptions) !create_run_group.CreateRunGroupOutput {
         return create_run_group.execute(self, allocator, input, options);
     }
 
@@ -294,7 +295,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Creating a HealthOmics sequence
     /// store](https://docs.aws.amazon.com/omics/latest/dev/create-sequence-store.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn createSequenceStore(self: *Self, allocator: std.mem.Allocator, input: create_sequence_store.CreateSequenceStoreInput, options: create_sequence_store.Options) !create_sequence_store.CreateSequenceStoreOutput {
+    pub fn createSequenceStore(self: *Self, allocator: std.mem.Allocator, input: create_sequence_store.CreateSequenceStoreInput, options: CallOptions) !create_sequence_store.CreateSequenceStoreOutput {
         return create_sequence_store.execute(self, allocator, input, options);
     }
 
@@ -307,7 +308,7 @@ pub const Client = struct {
     /// * HealthOmics variant stores
     /// * HealthOmics annotation stores
     /// * Private workflows
-    pub fn createShare(self: *Self, allocator: std.mem.Allocator, input: create_share.CreateShareInput, options: create_share.Options) !create_share.CreateShareOutput {
+    pub fn createShare(self: *Self, allocator: std.mem.Allocator, input: create_share.CreateShareInput, options: CallOptions) !create_share.CreateShareOutput {
         return create_share.execute(self, allocator, input, options);
     }
 
@@ -320,7 +321,7 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Creates a variant store.
-    pub fn createVariantStore(self: *Self, allocator: std.mem.Allocator, input: create_variant_store.CreateVariantStoreInput, options: create_variant_store.Options) !create_variant_store.CreateVariantStoreOutput {
+    pub fn createVariantStore(self: *Self, allocator: std.mem.Allocator, input: create_variant_store.CreateVariantStoreInput, options: CallOptions) !create_variant_store.CreateVariantStoreOutput {
         return create_variant_store.execute(self, allocator, input, options);
     }
 
@@ -354,7 +355,7 @@ pub const Client = struct {
     /// For more information, see [Creating or updating a private workflow in Amazon
     /// Web Services
     /// HealthOmics](https://docs.aws.amazon.com/omics/latest/dev/creating-private-workflows.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn createWorkflow(self: *Self, allocator: std.mem.Allocator, input: create_workflow.CreateWorkflowInput, options: create_workflow.Options) !create_workflow.CreateWorkflowOutput {
+    pub fn createWorkflow(self: *Self, allocator: std.mem.Allocator, input: create_workflow.CreateWorkflowInput, options: CallOptions) !create_workflow.CreateWorkflowOutput {
         return create_workflow.execute(self, allocator, input, options);
     }
 
@@ -373,7 +374,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Workflow versioning in Amazon Web Services
     /// HealthOmics](https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn createWorkflowVersion(self: *Self, allocator: std.mem.Allocator, input: create_workflow_version.CreateWorkflowVersionInput, options: create_workflow_version.Options) !create_workflow_version.CreateWorkflowVersionOutput {
+    pub fn createWorkflowVersion(self: *Self, allocator: std.mem.Allocator, input: create_workflow_version.CreateWorkflowVersionInput, options: CallOptions) !create_workflow_version.CreateWorkflowVersionOutput {
         return create_workflow_version.execute(self, allocator, input, options);
     }
 
@@ -386,12 +387,12 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Deletes an annotation store.
-    pub fn deleteAnnotationStore(self: *Self, allocator: std.mem.Allocator, input: delete_annotation_store.DeleteAnnotationStoreInput, options: delete_annotation_store.Options) !delete_annotation_store.DeleteAnnotationStoreOutput {
+    pub fn deleteAnnotationStore(self: *Self, allocator: std.mem.Allocator, input: delete_annotation_store.DeleteAnnotationStoreInput, options: CallOptions) !delete_annotation_store.DeleteAnnotationStoreOutput {
         return delete_annotation_store.execute(self, allocator, input, options);
     }
 
     /// Deletes one or multiple versions of an annotation store.
-    pub fn deleteAnnotationStoreVersions(self: *Self, allocator: std.mem.Allocator, input: delete_annotation_store_versions.DeleteAnnotationStoreVersionsInput, options: delete_annotation_store_versions.Options) !delete_annotation_store_versions.DeleteAnnotationStoreVersionsOutput {
+    pub fn deleteAnnotationStoreVersions(self: *Self, allocator: std.mem.Allocator, input: delete_annotation_store_versions.DeleteAnnotationStoreVersionsInput, options: CallOptions) !delete_annotation_store_versions.DeleteAnnotationStoreVersionsOutput {
         return delete_annotation_store_versions.execute(self, allocator, input, options);
     }
 
@@ -403,7 +404,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Deleting HealthOmics reference and sequence
     /// stores](https://docs.aws.amazon.com/omics/latest/dev/deleting-reference-and-sequence-stores.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn deleteReference(self: *Self, allocator: std.mem.Allocator, input: delete_reference.DeleteReferenceInput, options: delete_reference.Options) !delete_reference.DeleteReferenceOutput {
+    pub fn deleteReference(self: *Self, allocator: std.mem.Allocator, input: delete_reference.DeleteReferenceInput, options: CallOptions) !delete_reference.DeleteReferenceOutput {
         return delete_reference.execute(self, allocator, input, options);
     }
 
@@ -415,7 +416,7 @@ pub const Client = struct {
     /// For more information about your workflow status, see [Deleting HealthOmics
     /// reference and sequence
     /// stores](https://docs.aws.amazon.com/omics/latest/dev/deleting-reference-and-sequence-stores.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn deleteReferenceStore(self: *Self, allocator: std.mem.Allocator, input: delete_reference_store.DeleteReferenceStoreInput, options: delete_reference_store.Options) !delete_reference_store.DeleteReferenceStoreOutput {
+    pub fn deleteReferenceStore(self: *Self, allocator: std.mem.Allocator, input: delete_reference_store.DeleteReferenceStoreInput, options: CallOptions) !delete_reference_store.DeleteReferenceStoreOutput {
         return delete_reference_store.execute(self, allocator, input, options);
     }
 
@@ -430,7 +431,7 @@ pub const Client = struct {
     ///
     /// * Use `ListRuns` to confirm the workflow no longer appears in the list.
     /// * Use `GetRun` to verify the workflow cannot be found.
-    pub fn deleteRun(self: *Self, allocator: std.mem.Allocator, input: delete_run.DeleteRunInput, options: delete_run.Options) !delete_run.DeleteRunOutput {
+    pub fn deleteRun(self: *Self, allocator: std.mem.Allocator, input: delete_run.DeleteRunInput, options: CallOptions) !delete_run.DeleteRunOutput {
         return delete_run.execute(self, allocator, input, options);
     }
 
@@ -442,7 +443,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Deleting a run
     /// cache](https://docs.aws.amazon.com/omics/latest/dev/workflow-cache-delete.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn deleteRunCache(self: *Self, allocator: std.mem.Allocator, input: delete_run_cache.DeleteRunCacheInput, options: delete_run_cache.Options) !delete_run_cache.DeleteRunCacheOutput {
+    pub fn deleteRunCache(self: *Self, allocator: std.mem.Allocator, input: delete_run_cache.DeleteRunCacheInput, options: CallOptions) !delete_run_cache.DeleteRunCacheOutput {
         return delete_run_cache.execute(self, allocator, input, options);
     }
 
@@ -453,12 +454,12 @@ pub const Client = struct {
     ///
     /// * Use `ListRunGroups` to confirm the workflow no longer appears in the list.
     /// * Use `GetRunGroup` to verify the workflow cannot be found.
-    pub fn deleteRunGroup(self: *Self, allocator: std.mem.Allocator, input: delete_run_group.DeleteRunGroupInput, options: delete_run_group.Options) !delete_run_group.DeleteRunGroupOutput {
+    pub fn deleteRunGroup(self: *Self, allocator: std.mem.Allocator, input: delete_run_group.DeleteRunGroupInput, options: CallOptions) !delete_run_group.DeleteRunGroupOutput {
         return delete_run_group.execute(self, allocator, input, options);
     }
 
     /// Deletes an access policy for the specified store.
-    pub fn deleteS3AccessPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_s3_access_policy.DeleteS3AccessPolicyInput, options: delete_s3_access_policy.Options) !delete_s3_access_policy.DeleteS3AccessPolicyOutput {
+    pub fn deleteS3AccessPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_s3_access_policy.DeleteS3AccessPolicyInput, options: CallOptions) !delete_s3_access_policy.DeleteS3AccessPolicyOutput {
         return delete_s3_access_policy.execute(self, allocator, input, options);
     }
 
@@ -472,14 +473,14 @@ pub const Client = struct {
     ///
     /// For more information, see [Deleting HealthOmics reference and sequence
     /// stores](https://docs.aws.amazon.com/omics/latest/dev/deleting-reference-and-sequence-stores.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn deleteSequenceStore(self: *Self, allocator: std.mem.Allocator, input: delete_sequence_store.DeleteSequenceStoreInput, options: delete_sequence_store.Options) !delete_sequence_store.DeleteSequenceStoreOutput {
+    pub fn deleteSequenceStore(self: *Self, allocator: std.mem.Allocator, input: delete_sequence_store.DeleteSequenceStoreInput, options: CallOptions) !delete_sequence_store.DeleteSequenceStoreOutput {
         return delete_sequence_store.execute(self, allocator, input, options);
     }
 
     /// Deletes a resource share. If you are the resource owner, the subscriber will
     /// no longer have access to the shared resource. If you are the subscriber,
     /// this operation deletes your access to the share.
-    pub fn deleteShare(self: *Self, allocator: std.mem.Allocator, input: delete_share.DeleteShareInput, options: delete_share.Options) !delete_share.DeleteShareOutput {
+    pub fn deleteShare(self: *Self, allocator: std.mem.Allocator, input: delete_share.DeleteShareInput, options: CallOptions) !delete_share.DeleteShareOutput {
         return delete_share.execute(self, allocator, input, options);
     }
 
@@ -492,7 +493,7 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Deletes a variant store.
-    pub fn deleteVariantStore(self: *Self, allocator: std.mem.Allocator, input: delete_variant_store.DeleteVariantStoreInput, options: delete_variant_store.Options) !delete_variant_store.DeleteVariantStoreOutput {
+    pub fn deleteVariantStore(self: *Self, allocator: std.mem.Allocator, input: delete_variant_store.DeleteVariantStoreInput, options: CallOptions) !delete_variant_store.DeleteVariantStoreOutput {
         return delete_variant_store.execute(self, allocator, input, options);
     }
 
@@ -503,7 +504,7 @@ pub const Client = struct {
     ///
     /// * Use `ListWorkflows` to confirm the workflow no longer appears in the list.
     /// * Use `GetWorkflow` to verify the workflow cannot be found.
-    pub fn deleteWorkflow(self: *Self, allocator: std.mem.Allocator, input: delete_workflow.DeleteWorkflowInput, options: delete_workflow.Options) !delete_workflow.DeleteWorkflowOutput {
+    pub fn deleteWorkflow(self: *Self, allocator: std.mem.Allocator, input: delete_workflow.DeleteWorkflowInput, options: CallOptions) !delete_workflow.DeleteWorkflowOutput {
         return delete_workflow.execute(self, allocator, input, options);
     }
 
@@ -512,7 +513,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Workflow versioning in Amazon Web Services
     /// HealthOmics](https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn deleteWorkflowVersion(self: *Self, allocator: std.mem.Allocator, input: delete_workflow_version.DeleteWorkflowVersionInput, options: delete_workflow_version.Options) !delete_workflow_version.DeleteWorkflowVersionOutput {
+    pub fn deleteWorkflowVersion(self: *Self, allocator: std.mem.Allocator, input: delete_workflow_version.DeleteWorkflowVersionInput, options: CallOptions) !delete_workflow_version.DeleteWorkflowVersionOutput {
         return delete_workflow_version.execute(self, allocator, input, options);
     }
 
@@ -525,7 +526,7 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Gets information about an annotation import job.
-    pub fn getAnnotationImportJob(self: *Self, allocator: std.mem.Allocator, input: get_annotation_import_job.GetAnnotationImportJobInput, options: get_annotation_import_job.Options) !get_annotation_import_job.GetAnnotationImportJobOutput {
+    pub fn getAnnotationImportJob(self: *Self, allocator: std.mem.Allocator, input: get_annotation_import_job.GetAnnotationImportJobInput, options: CallOptions) !get_annotation_import_job.GetAnnotationImportJobOutput {
         return get_annotation_import_job.execute(self, allocator, input, options);
     }
 
@@ -538,45 +539,45 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Gets information about an annotation store.
-    pub fn getAnnotationStore(self: *Self, allocator: std.mem.Allocator, input: get_annotation_store.GetAnnotationStoreInput, options: get_annotation_store.Options) !get_annotation_store.GetAnnotationStoreOutput {
+    pub fn getAnnotationStore(self: *Self, allocator: std.mem.Allocator, input: get_annotation_store.GetAnnotationStoreInput, options: CallOptions) !get_annotation_store.GetAnnotationStoreOutput {
         return get_annotation_store.execute(self, allocator, input, options);
     }
 
     /// Retrieves the metadata for an annotation store version.
-    pub fn getAnnotationStoreVersion(self: *Self, allocator: std.mem.Allocator, input: get_annotation_store_version.GetAnnotationStoreVersionInput, options: get_annotation_store_version.Options) !get_annotation_store_version.GetAnnotationStoreVersionOutput {
+    pub fn getAnnotationStoreVersion(self: *Self, allocator: std.mem.Allocator, input: get_annotation_store_version.GetAnnotationStoreVersionInput, options: CallOptions) !get_annotation_store_version.GetAnnotationStoreVersionOutput {
         return get_annotation_store_version.execute(self, allocator, input, options);
     }
 
     /// Retrieves detailed information from parts of a read set and returns the read
     /// set in the same format that it was uploaded. You must have read sets
     /// uploaded to your sequence store in order to run this operation.
-    pub fn getReadSet(self: *Self, allocator: std.mem.Allocator, input: get_read_set.GetReadSetInput, options: get_read_set.Options) !get_read_set.GetReadSetOutput {
+    pub fn getReadSet(self: *Self, allocator: std.mem.Allocator, input: get_read_set.GetReadSetInput, options: CallOptions) !get_read_set.GetReadSetOutput {
         return get_read_set.execute(self, allocator, input, options);
     }
 
     /// Returns detailed information about the status of a read set activation job
     /// in JSON format.
-    pub fn getReadSetActivationJob(self: *Self, allocator: std.mem.Allocator, input: get_read_set_activation_job.GetReadSetActivationJobInput, options: get_read_set_activation_job.Options) !get_read_set_activation_job.GetReadSetActivationJobOutput {
+    pub fn getReadSetActivationJob(self: *Self, allocator: std.mem.Allocator, input: get_read_set_activation_job.GetReadSetActivationJobInput, options: CallOptions) !get_read_set_activation_job.GetReadSetActivationJobOutput {
         return get_read_set_activation_job.execute(self, allocator, input, options);
     }
 
     /// Retrieves status information about a read set export job and returns the
     /// data in JSON format. Use this operation to actively monitor the progress of
     /// an export job.
-    pub fn getReadSetExportJob(self: *Self, allocator: std.mem.Allocator, input: get_read_set_export_job.GetReadSetExportJobInput, options: get_read_set_export_job.Options) !get_read_set_export_job.GetReadSetExportJobOutput {
+    pub fn getReadSetExportJob(self: *Self, allocator: std.mem.Allocator, input: get_read_set_export_job.GetReadSetExportJobInput, options: CallOptions) !get_read_set_export_job.GetReadSetExportJobOutput {
         return get_read_set_export_job.execute(self, allocator, input, options);
     }
 
     /// Gets detailed and status information about a read set import job and returns
     /// the data in JSON format.
-    pub fn getReadSetImportJob(self: *Self, allocator: std.mem.Allocator, input: get_read_set_import_job.GetReadSetImportJobInput, options: get_read_set_import_job.Options) !get_read_set_import_job.GetReadSetImportJobOutput {
+    pub fn getReadSetImportJob(self: *Self, allocator: std.mem.Allocator, input: get_read_set_import_job.GetReadSetImportJobInput, options: CallOptions) !get_read_set_import_job.GetReadSetImportJobOutput {
         return get_read_set_import_job.execute(self, allocator, input, options);
     }
 
     /// Retrieves the metadata for a read set from a sequence store in JSON format.
     /// This operation does not return tags. To retrieve the list of tags for a read
     /// set, use the `ListTagsForResource` API operation.
-    pub fn getReadSetMetadata(self: *Self, allocator: std.mem.Allocator, input: get_read_set_metadata.GetReadSetMetadataInput, options: get_read_set_metadata.Options) !get_read_set_metadata.GetReadSetMetadataOutput {
+    pub fn getReadSetMetadata(self: *Self, allocator: std.mem.Allocator, input: get_read_set_metadata.GetReadSetMetadataInput, options: CallOptions) !get_read_set_metadata.GetReadSetMetadataOutput {
         return get_read_set_metadata.execute(self, allocator, input, options);
     }
 
@@ -585,13 +586,13 @@ pub const Client = struct {
     ///
     /// For more information, see [Creating a HealthOmics reference
     /// store](https://docs.aws.amazon.com/omics/latest/dev/create-reference-store.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn getReference(self: *Self, allocator: std.mem.Allocator, input: get_reference.GetReferenceInput, options: get_reference.Options) !get_reference.GetReferenceOutput {
+    pub fn getReference(self: *Self, allocator: std.mem.Allocator, input: get_reference.GetReferenceInput, options: CallOptions) !get_reference.GetReferenceOutput {
         return get_reference.execute(self, allocator, input, options);
     }
 
     /// Monitors the status of a reference import job. This operation can be called
     /// after calling the `StartReferenceImportJob` operation.
-    pub fn getReferenceImportJob(self: *Self, allocator: std.mem.Allocator, input: get_reference_import_job.GetReferenceImportJobInput, options: get_reference_import_job.Options) !get_reference_import_job.GetReferenceImportJobOutput {
+    pub fn getReferenceImportJob(self: *Self, allocator: std.mem.Allocator, input: get_reference_import_job.GetReferenceImportJobInput, options: CallOptions) !get_reference_import_job.GetReferenceImportJobOutput {
         return get_reference_import_job.execute(self, allocator, input, options);
     }
 
@@ -599,12 +600,12 @@ pub const Client = struct {
     /// of parts, part size, and MD5 of an entire file. This operation does not
     /// return tags. To retrieve the list of tags for a read set, use the
     /// `ListTagsForResource` API operation.
-    pub fn getReferenceMetadata(self: *Self, allocator: std.mem.Allocator, input: get_reference_metadata.GetReferenceMetadataInput, options: get_reference_metadata.Options) !get_reference_metadata.GetReferenceMetadataOutput {
+    pub fn getReferenceMetadata(self: *Self, allocator: std.mem.Allocator, input: get_reference_metadata.GetReferenceMetadataInput, options: CallOptions) !get_reference_metadata.GetReferenceMetadataOutput {
         return get_reference_metadata.execute(self, allocator, input, options);
     }
 
     /// Gets information about a reference store.
-    pub fn getReferenceStore(self: *Self, allocator: std.mem.Allocator, input: get_reference_store.GetReferenceStoreInput, options: get_reference_store.Options) !get_reference_store.GetReferenceStoreOutput {
+    pub fn getReferenceStore(self: *Self, allocator: std.mem.Allocator, input: get_reference_store.GetReferenceStoreInput, options: CallOptions) !get_reference_store.GetReferenceStoreOutput {
         return get_reference_store.execute(self, allocator, input, options);
     }
 
@@ -616,7 +617,7 @@ pub const Client = struct {
     /// CloudWatch logs. For more information about viewing the run logs, see
     /// [CloudWatch
     /// logs](https://docs.aws.amazon.com/omics/latest/dev/monitoring-cloudwatch-logs.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn getRun(self: *Self, allocator: std.mem.Allocator, input: get_run.GetRunInput, options: get_run.Options) !get_run.GetRunOutput {
+    pub fn getRun(self: *Self, allocator: std.mem.Allocator, input: get_run.GetRunInput, options: CallOptions) !get_run.GetRunOutput {
         return get_run.execute(self, allocator, input, options);
     }
 
@@ -624,33 +625,33 @@ pub const Client = struct {
     ///
     /// For more information, see [Call caching for Amazon Web Services HealthOmics
     /// runs](https://docs.aws.amazon.com/omics/latest/dev/workflows-call-caching.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn getRunCache(self: *Self, allocator: std.mem.Allocator, input: get_run_cache.GetRunCacheInput, options: get_run_cache.Options) !get_run_cache.GetRunCacheOutput {
+    pub fn getRunCache(self: *Self, allocator: std.mem.Allocator, input: get_run_cache.GetRunCacheInput, options: CallOptions) !get_run_cache.GetRunCacheOutput {
         return get_run_cache.execute(self, allocator, input, options);
     }
 
     /// Gets information about a run group and returns its metadata.
-    pub fn getRunGroup(self: *Self, allocator: std.mem.Allocator, input: get_run_group.GetRunGroupInput, options: get_run_group.Options) !get_run_group.GetRunGroupOutput {
+    pub fn getRunGroup(self: *Self, allocator: std.mem.Allocator, input: get_run_group.GetRunGroupInput, options: CallOptions) !get_run_group.GetRunGroupOutput {
         return get_run_group.execute(self, allocator, input, options);
     }
 
     /// Gets detailed information about a run task using its ID.
-    pub fn getRunTask(self: *Self, allocator: std.mem.Allocator, input: get_run_task.GetRunTaskInput, options: get_run_task.Options) !get_run_task.GetRunTaskOutput {
+    pub fn getRunTask(self: *Self, allocator: std.mem.Allocator, input: get_run_task.GetRunTaskInput, options: CallOptions) !get_run_task.GetRunTaskOutput {
         return get_run_task.execute(self, allocator, input, options);
     }
 
     /// Retrieves details about an access policy on a given store.
-    pub fn getS3AccessPolicy(self: *Self, allocator: std.mem.Allocator, input: get_s3_access_policy.GetS3AccessPolicyInput, options: get_s3_access_policy.Options) !get_s3_access_policy.GetS3AccessPolicyOutput {
+    pub fn getS3AccessPolicy(self: *Self, allocator: std.mem.Allocator, input: get_s3_access_policy.GetS3AccessPolicyInput, options: CallOptions) !get_s3_access_policy.GetS3AccessPolicyOutput {
         return get_s3_access_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves metadata for a sequence store using its ID and returns it in JSON
     /// format.
-    pub fn getSequenceStore(self: *Self, allocator: std.mem.Allocator, input: get_sequence_store.GetSequenceStoreInput, options: get_sequence_store.Options) !get_sequence_store.GetSequenceStoreOutput {
+    pub fn getSequenceStore(self: *Self, allocator: std.mem.Allocator, input: get_sequence_store.GetSequenceStoreInput, options: CallOptions) !get_sequence_store.GetSequenceStoreOutput {
         return get_sequence_store.execute(self, allocator, input, options);
     }
 
     /// Retrieves the metadata for the specified resource share.
-    pub fn getShare(self: *Self, allocator: std.mem.Allocator, input: get_share.GetShareInput, options: get_share.Options) !get_share.GetShareOutput {
+    pub fn getShare(self: *Self, allocator: std.mem.Allocator, input: get_share.GetShareInput, options: CallOptions) !get_share.GetShareOutput {
         return get_share.execute(self, allocator, input, options);
     }
 
@@ -663,7 +664,7 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Gets information about a variant import job.
-    pub fn getVariantImportJob(self: *Self, allocator: std.mem.Allocator, input: get_variant_import_job.GetVariantImportJobInput, options: get_variant_import_job.Options) !get_variant_import_job.GetVariantImportJobOutput {
+    pub fn getVariantImportJob(self: *Self, allocator: std.mem.Allocator, input: get_variant_import_job.GetVariantImportJobInput, options: CallOptions) !get_variant_import_job.GetVariantImportJobOutput {
         return get_variant_import_job.execute(self, allocator, input, options);
     }
 
@@ -676,7 +677,7 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Gets information about a variant store.
-    pub fn getVariantStore(self: *Self, allocator: std.mem.Allocator, input: get_variant_store.GetVariantStoreInput, options: get_variant_store.Options) !get_variant_store.GetVariantStoreOutput {
+    pub fn getVariantStore(self: *Self, allocator: std.mem.Allocator, input: get_variant_store.GetVariantStoreInput, options: CallOptions) !get_variant_store.GetVariantStoreOutput {
         return get_variant_store.execute(self, allocator, input, options);
     }
 
@@ -686,14 +687,14 @@ pub const Client = struct {
     ///
     /// For more information about your workflow status, see [Verify the workflow
     /// status](https://docs.aws.amazon.com/omics/latest/dev/using-get-workflow.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn getWorkflow(self: *Self, allocator: std.mem.Allocator, input: get_workflow.GetWorkflowInput, options: get_workflow.Options) !get_workflow.GetWorkflowOutput {
+    pub fn getWorkflow(self: *Self, allocator: std.mem.Allocator, input: get_workflow.GetWorkflowInput, options: CallOptions) !get_workflow.GetWorkflowOutput {
         return get_workflow.execute(self, allocator, input, options);
     }
 
     /// Gets information about a workflow version. For more information, see
     /// [Workflow versioning in Amazon Web Services
     /// HealthOmics](https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn getWorkflowVersion(self: *Self, allocator: std.mem.Allocator, input: get_workflow_version.GetWorkflowVersionInput, options: get_workflow_version.Options) !get_workflow_version.GetWorkflowVersionOutput {
+    pub fn getWorkflowVersion(self: *Self, allocator: std.mem.Allocator, input: get_workflow_version.GetWorkflowVersionInput, options: CallOptions) !get_workflow_version.GetWorkflowVersionOutput {
         return get_workflow_version.execute(self, allocator, input, options);
     }
 
@@ -706,12 +707,12 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Retrieves a list of annotation import jobs.
-    pub fn listAnnotationImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_annotation_import_jobs.ListAnnotationImportJobsInput, options: list_annotation_import_jobs.Options) !list_annotation_import_jobs.ListAnnotationImportJobsOutput {
+    pub fn listAnnotationImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_annotation_import_jobs.ListAnnotationImportJobsInput, options: CallOptions) !list_annotation_import_jobs.ListAnnotationImportJobsOutput {
         return list_annotation_import_jobs.execute(self, allocator, input, options);
     }
 
     /// Lists the versions of an annotation store.
-    pub fn listAnnotationStoreVersions(self: *Self, allocator: std.mem.Allocator, input: list_annotation_store_versions.ListAnnotationStoreVersionsInput, options: list_annotation_store_versions.Options) !list_annotation_store_versions.ListAnnotationStoreVersionsOutput {
+    pub fn listAnnotationStoreVersions(self: *Self, allocator: std.mem.Allocator, input: list_annotation_store_versions.ListAnnotationStoreVersionsInput, options: CallOptions) !list_annotation_store_versions.ListAnnotationStoreVersionsOutput {
         return list_annotation_store_versions.execute(self, allocator, input, options);
     }
 
@@ -724,7 +725,7 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Retrieves a list of annotation stores.
-    pub fn listAnnotationStores(self: *Self, allocator: std.mem.Allocator, input: list_annotation_stores.ListAnnotationStoresInput, options: list_annotation_stores.Options) !list_annotation_stores.ListAnnotationStoresOutput {
+    pub fn listAnnotationStores(self: *Self, allocator: std.mem.Allocator, input: list_annotation_stores.ListAnnotationStoresInput, options: CallOptions) !list_annotation_stores.ListAnnotationStoresOutput {
         return list_annotation_stores.execute(self, allocator, input, options);
     }
 
@@ -732,45 +733,45 @@ pub const Client = struct {
     /// returns it in a JSON formatted output. Multipart read set uploads are
     /// initiated by the `CreateMultipartReadSetUploads` API operation. This
     /// operation returns a response with no body when the upload is complete.
-    pub fn listMultipartReadSetUploads(self: *Self, allocator: std.mem.Allocator, input: list_multipart_read_set_uploads.ListMultipartReadSetUploadsInput, options: list_multipart_read_set_uploads.Options) !list_multipart_read_set_uploads.ListMultipartReadSetUploadsOutput {
+    pub fn listMultipartReadSetUploads(self: *Self, allocator: std.mem.Allocator, input: list_multipart_read_set_uploads.ListMultipartReadSetUploadsInput, options: CallOptions) !list_multipart_read_set_uploads.ListMultipartReadSetUploadsOutput {
         return list_multipart_read_set_uploads.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of read set activation jobs and returns the metadata in a
     /// JSON formatted output. To extract metadata from a read set activation job,
     /// use the `GetReadSetActivationJob` API operation.
-    pub fn listReadSetActivationJobs(self: *Self, allocator: std.mem.Allocator, input: list_read_set_activation_jobs.ListReadSetActivationJobsInput, options: list_read_set_activation_jobs.Options) !list_read_set_activation_jobs.ListReadSetActivationJobsOutput {
+    pub fn listReadSetActivationJobs(self: *Self, allocator: std.mem.Allocator, input: list_read_set_activation_jobs.ListReadSetActivationJobsInput, options: CallOptions) !list_read_set_activation_jobs.ListReadSetActivationJobsOutput {
         return list_read_set_activation_jobs.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of read set export jobs in a JSON formatted response. This
     /// API operation is used to check the status of a read set export job initiated
     /// by the `StartReadSetExportJob` API operation.
-    pub fn listReadSetExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_read_set_export_jobs.ListReadSetExportJobsInput, options: list_read_set_export_jobs.Options) !list_read_set_export_jobs.ListReadSetExportJobsOutput {
+    pub fn listReadSetExportJobs(self: *Self, allocator: std.mem.Allocator, input: list_read_set_export_jobs.ListReadSetExportJobsInput, options: CallOptions) !list_read_set_export_jobs.ListReadSetExportJobsOutput {
         return list_read_set_export_jobs.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of read set import jobs and returns the data in JSON
     /// format.
-    pub fn listReadSetImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_read_set_import_jobs.ListReadSetImportJobsInput, options: list_read_set_import_jobs.Options) !list_read_set_import_jobs.ListReadSetImportJobsOutput {
+    pub fn listReadSetImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_read_set_import_jobs.ListReadSetImportJobsInput, options: CallOptions) !list_read_set_import_jobs.ListReadSetImportJobsOutput {
         return list_read_set_import_jobs.execute(self, allocator, input, options);
     }
 
     /// Lists all parts in a multipart read set upload for a sequence store and
     /// returns the metadata in a JSON formatted output.
-    pub fn listReadSetUploadParts(self: *Self, allocator: std.mem.Allocator, input: list_read_set_upload_parts.ListReadSetUploadPartsInput, options: list_read_set_upload_parts.Options) !list_read_set_upload_parts.ListReadSetUploadPartsOutput {
+    pub fn listReadSetUploadParts(self: *Self, allocator: std.mem.Allocator, input: list_read_set_upload_parts.ListReadSetUploadPartsInput, options: CallOptions) !list_read_set_upload_parts.ListReadSetUploadPartsOutput {
         return list_read_set_upload_parts.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of read sets from a sequence store ID and returns the
     /// metadata in JSON format.
-    pub fn listReadSets(self: *Self, allocator: std.mem.Allocator, input: list_read_sets.ListReadSetsInput, options: list_read_sets.Options) !list_read_sets.ListReadSetsOutput {
+    pub fn listReadSets(self: *Self, allocator: std.mem.Allocator, input: list_read_sets.ListReadSetsInput, options: CallOptions) !list_read_sets.ListReadSetsOutput {
         return list_read_sets.execute(self, allocator, input, options);
     }
 
     /// Retrieves the metadata of one or more reference import jobs for a reference
     /// store.
-    pub fn listReferenceImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_reference_import_jobs.ListReferenceImportJobsInput, options: list_reference_import_jobs.Options) !list_reference_import_jobs.ListReferenceImportJobsOutput {
+    pub fn listReferenceImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_reference_import_jobs.ListReferenceImportJobsInput, options: CallOptions) !list_reference_import_jobs.ListReferenceImportJobsOutput {
         return list_reference_import_jobs.execute(self, allocator, input, options);
     }
 
@@ -779,7 +780,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Creating a reference
     /// store](https://docs.aws.amazon.com/omics/latest/dev/create-reference-store.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn listReferenceStores(self: *Self, allocator: std.mem.Allocator, input: list_reference_stores.ListReferenceStoresInput, options: list_reference_stores.Options) !list_reference_stores.ListReferenceStoresOutput {
+    pub fn listReferenceStores(self: *Self, allocator: std.mem.Allocator, input: list_reference_stores.ListReferenceStoresInput, options: CallOptions) !list_reference_stores.ListReferenceStoresOutput {
         return list_reference_stores.execute(self, allocator, input, options);
     }
 
@@ -788,25 +789,25 @@ pub const Client = struct {
     ///
     /// For more information, see [Creating a reference
     /// store](https://docs.aws.amazon.com/omics/latest/dev/create-reference-store.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn listReferences(self: *Self, allocator: std.mem.Allocator, input: list_references.ListReferencesInput, options: list_references.Options) !list_references.ListReferencesOutput {
+    pub fn listReferences(self: *Self, allocator: std.mem.Allocator, input: list_references.ListReferencesInput, options: CallOptions) !list_references.ListReferencesOutput {
         return list_references.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of your run caches and the metadata for each cache.
-    pub fn listRunCaches(self: *Self, allocator: std.mem.Allocator, input: list_run_caches.ListRunCachesInput, options: list_run_caches.Options) !list_run_caches.ListRunCachesOutput {
+    pub fn listRunCaches(self: *Self, allocator: std.mem.Allocator, input: list_run_caches.ListRunCachesInput, options: CallOptions) !list_run_caches.ListRunCachesOutput {
         return list_run_caches.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of all run groups and returns the metadata for each run
     /// group.
-    pub fn listRunGroups(self: *Self, allocator: std.mem.Allocator, input: list_run_groups.ListRunGroupsInput, options: list_run_groups.Options) !list_run_groups.ListRunGroupsOutput {
+    pub fn listRunGroups(self: *Self, allocator: std.mem.Allocator, input: list_run_groups.ListRunGroupsInput, options: CallOptions) !list_run_groups.ListRunGroupsOutput {
         return list_run_groups.execute(self, allocator, input, options);
     }
 
     /// Returns a list of tasks and status information within their specified run.
     /// Use this operation to monitor runs and to identify which specific tasks have
     /// failed.
-    pub fn listRunTasks(self: *Self, allocator: std.mem.Allocator, input: list_run_tasks.ListRunTasksInput, options: list_run_tasks.Options) !list_run_tasks.ListRunTasksOutput {
+    pub fn listRunTasks(self: *Self, allocator: std.mem.Allocator, input: list_run_tasks.ListRunTasksInput, options: CallOptions) !list_run_tasks.ListRunTasksOutput {
         return list_run_tasks.execute(self, allocator, input, options);
     }
 
@@ -818,7 +819,7 @@ pub const Client = struct {
     /// can find all run logs in the CloudWatch logs. For more information about
     /// viewing the run logs, see [CloudWatch
     /// logs](https://docs.aws.amazon.com/omics/latest/dev/monitoring-cloudwatch-logs.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn listRuns(self: *Self, allocator: std.mem.Allocator, input: list_runs.ListRunsInput, options: list_runs.Options) !list_runs.ListRunsOutput {
+    pub fn listRuns(self: *Self, allocator: std.mem.Allocator, input: list_runs.ListRunsInput, options: CallOptions) !list_runs.ListRunsOutput {
         return list_runs.execute(self, allocator, input, options);
     }
 
@@ -827,18 +828,18 @@ pub const Client = struct {
     ///
     /// For more information, see [Creating a HealthOmics sequence
     /// store](https://docs.aws.amazon.com/omics/latest/dev/create-sequence-store.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn listSequenceStores(self: *Self, allocator: std.mem.Allocator, input: list_sequence_stores.ListSequenceStoresInput, options: list_sequence_stores.Options) !list_sequence_stores.ListSequenceStoresOutput {
+    pub fn listSequenceStores(self: *Self, allocator: std.mem.Allocator, input: list_sequence_stores.ListSequenceStoresInput, options: CallOptions) !list_sequence_stores.ListSequenceStoresOutput {
         return list_sequence_stores.execute(self, allocator, input, options);
     }
 
     /// Retrieves the resource shares associated with an account. Use the filter
     /// parameter to retrieve a specific subset of the shares.
-    pub fn listShares(self: *Self, allocator: std.mem.Allocator, input: list_shares.ListSharesInput, options: list_shares.Options) !list_shares.ListSharesOutput {
+    pub fn listShares(self: *Self, allocator: std.mem.Allocator, input: list_shares.ListSharesInput, options: CallOptions) !list_shares.ListSharesOutput {
         return list_shares.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of tags for a resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -851,7 +852,7 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Retrieves a list of variant import jobs.
-    pub fn listVariantImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_variant_import_jobs.ListVariantImportJobsInput, options: list_variant_import_jobs.Options) !list_variant_import_jobs.ListVariantImportJobsOutput {
+    pub fn listVariantImportJobs(self: *Self, allocator: std.mem.Allocator, input: list_variant_import_jobs.ListVariantImportJobsInput, options: CallOptions) !list_variant_import_jobs.ListVariantImportJobsOutput {
         return list_variant_import_jobs.execute(self, allocator, input, options);
     }
 
@@ -864,14 +865,14 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Retrieves a list of variant stores.
-    pub fn listVariantStores(self: *Self, allocator: std.mem.Allocator, input: list_variant_stores.ListVariantStoresInput, options: list_variant_stores.Options) !list_variant_stores.ListVariantStoresOutput {
+    pub fn listVariantStores(self: *Self, allocator: std.mem.Allocator, input: list_variant_stores.ListVariantStoresInput, options: CallOptions) !list_variant_stores.ListVariantStoresOutput {
         return list_variant_stores.execute(self, allocator, input, options);
     }
 
     /// Lists the workflow versions for the specified workflow. For more
     /// information, see [Workflow versioning in Amazon Web Services
     /// HealthOmics](https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn listWorkflowVersions(self: *Self, allocator: std.mem.Allocator, input: list_workflow_versions.ListWorkflowVersionsInput, options: list_workflow_versions.Options) !list_workflow_versions.ListWorkflowVersionsOutput {
+    pub fn listWorkflowVersions(self: *Self, allocator: std.mem.Allocator, input: list_workflow_versions.ListWorkflowVersionsInput, options: CallOptions) !list_workflow_versions.ListWorkflowVersionsOutput {
         return list_workflow_versions.execute(self, allocator, input, options);
     }
 
@@ -880,12 +881,12 @@ pub const Client = struct {
     /// `PRIVATE` to retrieve a list of private workflows or specify `READY2RUN` for
     /// a list of all Ready2Run workflows. If you do not specify the type of
     /// workflow, this operation returns a list of existing workflows.
-    pub fn listWorkflows(self: *Self, allocator: std.mem.Allocator, input: list_workflows.ListWorkflowsInput, options: list_workflows.Options) !list_workflows.ListWorkflowsOutput {
+    pub fn listWorkflows(self: *Self, allocator: std.mem.Allocator, input: list_workflows.ListWorkflowsInput, options: CallOptions) !list_workflows.ListWorkflowsOutput {
         return list_workflows.execute(self, allocator, input, options);
     }
 
     /// Adds an access policy to the specified store.
-    pub fn putS3AccessPolicy(self: *Self, allocator: std.mem.Allocator, input: put_s3_access_policy.PutS3AccessPolicyInput, options: put_s3_access_policy.Options) !put_s3_access_policy.PutS3AccessPolicyOutput {
+    pub fn putS3AccessPolicy(self: *Self, allocator: std.mem.Allocator, input: put_s3_access_policy.PutS3AccessPolicyInput, options: CallOptions) !put_s3_access_policy.PutS3AccessPolicyOutput {
         return put_s3_access_policy.execute(self, allocator, input, options);
     }
 
@@ -898,7 +899,7 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Starts an annotation import job.
-    pub fn startAnnotationImportJob(self: *Self, allocator: std.mem.Allocator, input: start_annotation_import_job.StartAnnotationImportJobInput, options: start_annotation_import_job.Options) !start_annotation_import_job.StartAnnotationImportJobOutput {
+    pub fn startAnnotationImportJob(self: *Self, allocator: std.mem.Allocator, input: start_annotation_import_job.StartAnnotationImportJobInput, options: CallOptions) !start_annotation_import_job.StartAnnotationImportJobOutput {
         return start_annotation_import_job.execute(self, allocator, input, options);
     }
 
@@ -909,7 +910,7 @@ pub const Client = struct {
     ///
     /// To learn more, see [Activating read
     /// sets](https://docs.aws.amazon.com/omics/latest/dev/activating-read-sets.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn startReadSetActivationJob(self: *Self, allocator: std.mem.Allocator, input: start_read_set_activation_job.StartReadSetActivationJobInput, options: start_read_set_activation_job.Options) !start_read_set_activation_job.StartReadSetActivationJobOutput {
+    pub fn startReadSetActivationJob(self: *Self, allocator: std.mem.Allocator, input: start_read_set_activation_job.StartReadSetActivationJobInput, options: CallOptions) !start_read_set_activation_job.StartReadSetActivationJobOutput {
         return start_read_set_activation_job.execute(self, allocator, input, options);
     }
 
@@ -919,14 +920,14 @@ pub const Client = struct {
     ///
     /// To monitor the status of the export job, use the `ListReadSetExportJobs` API
     /// operation.
-    pub fn startReadSetExportJob(self: *Self, allocator: std.mem.Allocator, input: start_read_set_export_job.StartReadSetExportJobInput, options: start_read_set_export_job.Options) !start_read_set_export_job.StartReadSetExportJobOutput {
+    pub fn startReadSetExportJob(self: *Self, allocator: std.mem.Allocator, input: start_read_set_export_job.StartReadSetExportJobInput, options: CallOptions) !start_read_set_export_job.StartReadSetExportJobOutput {
         return start_read_set_export_job.execute(self, allocator, input, options);
     }
 
     /// Imports a read set from the sequence store. Read set import jobs support a
     /// maximum of 100 read sets of different types. Monitor the progress of your
     /// read set import job by calling the `GetReadSetImportJob` API operation.
-    pub fn startReadSetImportJob(self: *Self, allocator: std.mem.Allocator, input: start_read_set_import_job.StartReadSetImportJobInput, options: start_read_set_import_job.Options) !start_read_set_import_job.StartReadSetImportJobOutput {
+    pub fn startReadSetImportJob(self: *Self, allocator: std.mem.Allocator, input: start_read_set_import_job.StartReadSetImportJobInput, options: CallOptions) !start_read_set_import_job.StartReadSetImportJobOutput {
         return start_read_set_import_job.execute(self, allocator, input, options);
     }
 
@@ -935,7 +936,7 @@ pub const Client = struct {
     /// import reference genomes one at a time into each reference store. Monitor
     /// the status of your reference import job by using the `GetReferenceImportJob`
     /// API operation.
-    pub fn startReferenceImportJob(self: *Self, allocator: std.mem.Allocator, input: start_reference_import_job.StartReferenceImportJobInput, options: start_reference_import_job.Options) !start_reference_import_job.StartReferenceImportJobOutput {
+    pub fn startReferenceImportJob(self: *Self, allocator: std.mem.Allocator, input: start_reference_import_job.StartReferenceImportJobInput, options: CallOptions) !start_reference_import_job.StartReferenceImportJobOutput {
         return start_reference_import_job.execute(self, allocator, input, options);
     }
 
@@ -990,7 +991,7 @@ pub const Client = struct {
     /// optimization recommendations. To get started, see the [Amazon Web Services
     /// HealthOmics MCP
     /// server](https://github.com/awslabs/mcp/tree/main/src/aws-healthomics-mcp-server) on GitHub.
-    pub fn startRun(self: *Self, allocator: std.mem.Allocator, input: start_run.StartRunInput, options: start_run.Options) !start_run.StartRunOutput {
+    pub fn startRun(self: *Self, allocator: std.mem.Allocator, input: start_run.StartRunInput, options: CallOptions) !start_run.StartRunOutput {
         return start_run.execute(self, allocator, input, options);
     }
 
@@ -1003,17 +1004,17 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Starts a variant import job.
-    pub fn startVariantImportJob(self: *Self, allocator: std.mem.Allocator, input: start_variant_import_job.StartVariantImportJobInput, options: start_variant_import_job.Options) !start_variant_import_job.StartVariantImportJobOutput {
+    pub fn startVariantImportJob(self: *Self, allocator: std.mem.Allocator, input: start_variant_import_job.StartVariantImportJobInput, options: CallOptions) !start_variant_import_job.StartVariantImportJobOutput {
         return start_variant_import_job.execute(self, allocator, input, options);
     }
 
     /// Tags a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from a resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -1026,12 +1027,12 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Updates an annotation store.
-    pub fn updateAnnotationStore(self: *Self, allocator: std.mem.Allocator, input: update_annotation_store.UpdateAnnotationStoreInput, options: update_annotation_store.Options) !update_annotation_store.UpdateAnnotationStoreOutput {
+    pub fn updateAnnotationStore(self: *Self, allocator: std.mem.Allocator, input: update_annotation_store.UpdateAnnotationStoreInput, options: CallOptions) !update_annotation_store.UpdateAnnotationStoreOutput {
         return update_annotation_store.execute(self, allocator, input, options);
     }
 
     /// Updates the description of an annotation store version.
-    pub fn updateAnnotationStoreVersion(self: *Self, allocator: std.mem.Allocator, input: update_annotation_store_version.UpdateAnnotationStoreVersionInput, options: update_annotation_store_version.Options) !update_annotation_store_version.UpdateAnnotationStoreVersionOutput {
+    pub fn updateAnnotationStoreVersion(self: *Self, allocator: std.mem.Allocator, input: update_annotation_store_version.UpdateAnnotationStoreVersionInput, options: CallOptions) !update_annotation_store_version.UpdateAnnotationStoreVersionOutput {
         return update_annotation_store_version.execute(self, allocator, input, options);
     }
 
@@ -1044,7 +1045,7 @@ pub const Client = struct {
     /// For more information, see [How call caching
     /// works](https://docs.aws.amazon.com/omics/latest/dev/how-run-cache.html) in
     /// the *Amazon Web Services HealthOmics User Guide*.
-    pub fn updateRunCache(self: *Self, allocator: std.mem.Allocator, input: update_run_cache.UpdateRunCacheInput, options: update_run_cache.Options) !update_run_cache.UpdateRunCacheOutput {
+    pub fn updateRunCache(self: *Self, allocator: std.mem.Allocator, input: update_run_cache.UpdateRunCacheInput, options: CallOptions) !update_run_cache.UpdateRunCacheOutput {
         return update_run_cache.execute(self, allocator, input, options);
     }
 
@@ -1062,12 +1063,12 @@ pub const Client = struct {
     /// To confirm that the settings have been successfully updated, use the
     /// `ListRunGroups` or `GetRunGroup` API operations to verify that the desired
     /// changes have been made.
-    pub fn updateRunGroup(self: *Self, allocator: std.mem.Allocator, input: update_run_group.UpdateRunGroupInput, options: update_run_group.Options) !update_run_group.UpdateRunGroupOutput {
+    pub fn updateRunGroup(self: *Self, allocator: std.mem.Allocator, input: update_run_group.UpdateRunGroupInput, options: CallOptions) !update_run_group.UpdateRunGroupOutput {
         return update_run_group.execute(self, allocator, input, options);
     }
 
     /// Update one or more parameters for the sequence store.
-    pub fn updateSequenceStore(self: *Self, allocator: std.mem.Allocator, input: update_sequence_store.UpdateSequenceStoreInput, options: update_sequence_store.Options) !update_sequence_store.UpdateSequenceStoreOutput {
+    pub fn updateSequenceStore(self: *Self, allocator: std.mem.Allocator, input: update_sequence_store.UpdateSequenceStoreInput, options: CallOptions) !update_sequence_store.UpdateSequenceStoreOutput {
         return update_sequence_store.execute(self, allocator, input, options);
     }
 
@@ -1080,7 +1081,7 @@ pub const Client = struct {
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Updates a variant store.
-    pub fn updateVariantStore(self: *Self, allocator: std.mem.Allocator, input: update_variant_store.UpdateVariantStoreInput, options: update_variant_store.Options) !update_variant_store.UpdateVariantStoreOutput {
+    pub fn updateVariantStore(self: *Self, allocator: std.mem.Allocator, input: update_variant_store.UpdateVariantStoreInput, options: CallOptions) !update_variant_store.UpdateVariantStoreOutput {
         return update_variant_store.execute(self, allocator, input, options);
     }
 
@@ -1099,14 +1100,14 @@ pub const Client = struct {
     ///
     /// For more information, see [Update a private
     /// workflow](https://docs.aws.amazon.com/omics/latest/dev/update-private-workflow.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn updateWorkflow(self: *Self, allocator: std.mem.Allocator, input: update_workflow.UpdateWorkflowInput, options: update_workflow.Options) !update_workflow.UpdateWorkflowOutput {
+    pub fn updateWorkflow(self: *Self, allocator: std.mem.Allocator, input: update_workflow.UpdateWorkflowInput, options: CallOptions) !update_workflow.UpdateWorkflowOutput {
         return update_workflow.execute(self, allocator, input, options);
     }
 
     /// Updates information about the workflow version. For more information, see
     /// [Workflow versioning in Amazon Web Services
     /// HealthOmics](https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn updateWorkflowVersion(self: *Self, allocator: std.mem.Allocator, input: update_workflow_version.UpdateWorkflowVersionInput, options: update_workflow_version.Options) !update_workflow_version.UpdateWorkflowVersionOutput {
+    pub fn updateWorkflowVersion(self: *Self, allocator: std.mem.Allocator, input: update_workflow_version.UpdateWorkflowVersionInput, options: CallOptions) !update_workflow_version.UpdateWorkflowVersionOutput {
         return update_workflow_version.execute(self, allocator, input, options);
     }
 
@@ -1118,7 +1119,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Direct upload to a sequence
     /// store](https://docs.aws.amazon.com/omics/latest/dev/synchronous-uploads.html) in the *Amazon Web Services HealthOmics User Guide*.
-    pub fn uploadReadSetPart(self: *Self, allocator: std.mem.Allocator, input: upload_read_set_part.UploadReadSetPartInput, options: upload_read_set_part.Options) !upload_read_set_part.UploadReadSetPartOutput {
+    pub fn uploadReadSetPart(self: *Self, allocator: std.mem.Allocator, input: upload_read_set_part.UploadReadSetPartInput, options: CallOptions) !upload_read_set_part.UploadReadSetPartOutput {
         return upload_read_set_part.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TimeSeriesEntityType = @import("time_series_entity_type.zig").TimeSeriesEntityType;
 const TimeSeriesDataPointSummaryFormOutput = @import("time_series_data_point_summary_form_output.zig").TimeSeriesDataPointSummaryFormOutput;
@@ -71,11 +72,7 @@ pub const ListTimeSeriesDataPointsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTimeSeriesDataPointsInput, options: Options) !ListTimeSeriesDataPointsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTimeSeriesDataPointsInput, options: CallOptions) !ListTimeSeriesDataPointsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

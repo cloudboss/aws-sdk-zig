@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TemplateProgress = @import("template_progress.zig").TemplateProgress;
 const ResourceDetail = @import("resource_detail.zig").ResourceDetail;
@@ -77,11 +78,7 @@ pub const DescribeGeneratedTemplateOutput = struct {
     total_warnings: ?i32 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeGeneratedTemplateInput, options: Options) !DescribeGeneratedTemplateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeGeneratedTemplateInput, options: CallOptions) !DescribeGeneratedTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

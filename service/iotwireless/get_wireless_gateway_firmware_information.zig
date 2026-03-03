@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LoRaWANGatewayCurrentVersion = @import("lo_ra_wan_gateway_current_version.zig").LoRaWANGatewayCurrentVersion;
 
@@ -23,11 +24,7 @@ pub const GetWirelessGatewayFirmwareInformationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetWirelessGatewayFirmwareInformationInput, options: Options) !GetWirelessGatewayFirmwareInformationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetWirelessGatewayFirmwareInformationInput, options: CallOptions) !GetWirelessGatewayFirmwareInformationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

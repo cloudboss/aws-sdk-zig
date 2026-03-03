@@ -26,6 +26,7 @@ const update_permissions = @import("update_permissions.zig");
 const update_workspace = @import("update_workspace.zig");
 const update_workspace_authentication = @import("update_workspace_authentication.zig");
 const update_workspace_configuration = @import("update_workspace_configuration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -63,7 +64,7 @@ pub const Client = struct {
     /// incurs additional fees. For more information, see [Upgrade a
     /// workspace to Grafana
     /// Enterprise](https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html).
-    pub fn associateLicense(self: *Self, allocator: std.mem.Allocator, input: associate_license.AssociateLicenseInput, options: associate_license.Options) !associate_license.AssociateLicenseOutput {
+    pub fn associateLicense(self: *Self, allocator: std.mem.Allocator, input: associate_license.AssociateLicenseInput, options: CallOptions) !associate_license.AssociateLicenseOutput {
         return associate_license.execute(self, allocator, input, options);
     }
 
@@ -74,7 +75,7 @@ pub const Client = struct {
     ///
     /// Don't use `CreateWorkspace` to modify an existing workspace. Instead, use
     /// [UpdateWorkspace](https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspace.html).
-    pub fn createWorkspace(self: *Self, allocator: std.mem.Allocator, input: create_workspace.CreateWorkspaceInput, options: create_workspace.Options) !create_workspace.CreateWorkspaceOutput {
+    pub fn createWorkspace(self: *Self, allocator: std.mem.Allocator, input: create_workspace.CreateWorkspaceInput, options: CallOptions) !create_workspace.CreateWorkspaceOutput {
         return create_workspace.execute(self, allocator, input, options);
     }
 
@@ -87,7 +88,7 @@ pub const Client = struct {
     /// In workspaces compatible with Grafana version 9 or above, use workspace
     /// service
     /// accounts instead of API keys. API keys will be removed in a future release.
-    pub fn createWorkspaceApiKey(self: *Self, allocator: std.mem.Allocator, input: create_workspace_api_key.CreateWorkspaceApiKeyInput, options: create_workspace_api_key.Options) !create_workspace_api_key.CreateWorkspaceApiKeyOutput {
+    pub fn createWorkspaceApiKey(self: *Self, allocator: std.mem.Allocator, input: create_workspace_api_key.CreateWorkspaceApiKeyInput, options: CallOptions) !create_workspace_api_key.CreateWorkspaceApiKeyOutput {
         return create_workspace_api_key.execute(self, allocator, input, options);
     }
 
@@ -109,7 +110,7 @@ pub const Client = struct {
     ///
     /// For more information about the Grafana HTTP APIs, see [Using Grafana HTTP
     /// APIs](https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html) in the *Amazon Managed Grafana User Guide*.
-    pub fn createWorkspaceServiceAccount(self: *Self, allocator: std.mem.Allocator, input: create_workspace_service_account.CreateWorkspaceServiceAccountInput, options: create_workspace_service_account.Options) !create_workspace_service_account.CreateWorkspaceServiceAccountOutput {
+    pub fn createWorkspaceServiceAccount(self: *Self, allocator: std.mem.Allocator, input: create_workspace_service_account.CreateWorkspaceServiceAccountInput, options: CallOptions) !create_workspace_service_account.CreateWorkspaceServiceAccountOutput {
         return create_workspace_service_account.execute(self, allocator, input, options);
     }
 
@@ -132,12 +133,12 @@ pub const Client = struct {
     /// Service accounts are only available for workspaces that are compatible with
     /// Grafana
     /// version 9 and above.
-    pub fn createWorkspaceServiceAccountToken(self: *Self, allocator: std.mem.Allocator, input: create_workspace_service_account_token.CreateWorkspaceServiceAccountTokenInput, options: create_workspace_service_account_token.Options) !create_workspace_service_account_token.CreateWorkspaceServiceAccountTokenOutput {
+    pub fn createWorkspaceServiceAccountToken(self: *Self, allocator: std.mem.Allocator, input: create_workspace_service_account_token.CreateWorkspaceServiceAccountTokenInput, options: CallOptions) !create_workspace_service_account_token.CreateWorkspaceServiceAccountTokenOutput {
         return create_workspace_service_account_token.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Managed Grafana workspace.
-    pub fn deleteWorkspace(self: *Self, allocator: std.mem.Allocator, input: delete_workspace.DeleteWorkspaceInput, options: delete_workspace.Options) !delete_workspace.DeleteWorkspaceOutput {
+    pub fn deleteWorkspace(self: *Self, allocator: std.mem.Allocator, input: delete_workspace.DeleteWorkspaceInput, options: CallOptions) !delete_workspace.DeleteWorkspaceOutput {
         return delete_workspace.execute(self, allocator, input, options);
     }
 
@@ -146,7 +147,7 @@ pub const Client = struct {
     /// In workspaces compatible with Grafana version 9 or above, use workspace
     /// service
     /// accounts instead of API keys. API keys will be removed in a future release.
-    pub fn deleteWorkspaceApiKey(self: *Self, allocator: std.mem.Allocator, input: delete_workspace_api_key.DeleteWorkspaceApiKeyInput, options: delete_workspace_api_key.Options) !delete_workspace_api_key.DeleteWorkspaceApiKeyOutput {
+    pub fn deleteWorkspaceApiKey(self: *Self, allocator: std.mem.Allocator, input: delete_workspace_api_key.DeleteWorkspaceApiKeyInput, options: CallOptions) !delete_workspace_api_key.DeleteWorkspaceApiKeyOutput {
         return delete_workspace_api_key.execute(self, allocator, input, options);
     }
 
@@ -161,7 +162,7 @@ pub const Client = struct {
     /// Service accounts are only available for workspaces that are compatible with
     /// Grafana
     /// version 9 and above.
-    pub fn deleteWorkspaceServiceAccount(self: *Self, allocator: std.mem.Allocator, input: delete_workspace_service_account.DeleteWorkspaceServiceAccountInput, options: delete_workspace_service_account.Options) !delete_workspace_service_account.DeleteWorkspaceServiceAccountOutput {
+    pub fn deleteWorkspaceServiceAccount(self: *Self, allocator: std.mem.Allocator, input: delete_workspace_service_account.DeleteWorkspaceServiceAccountInput, options: CallOptions) !delete_workspace_service_account.DeleteWorkspaceServiceAccountOutput {
         return delete_workspace_service_account.execute(self, allocator, input, options);
     }
 
@@ -176,29 +177,29 @@ pub const Client = struct {
     /// Service accounts are only available for workspaces that are compatible with
     /// Grafana
     /// version 9 and above.
-    pub fn deleteWorkspaceServiceAccountToken(self: *Self, allocator: std.mem.Allocator, input: delete_workspace_service_account_token.DeleteWorkspaceServiceAccountTokenInput, options: delete_workspace_service_account_token.Options) !delete_workspace_service_account_token.DeleteWorkspaceServiceAccountTokenOutput {
+    pub fn deleteWorkspaceServiceAccountToken(self: *Self, allocator: std.mem.Allocator, input: delete_workspace_service_account_token.DeleteWorkspaceServiceAccountTokenInput, options: CallOptions) !delete_workspace_service_account_token.DeleteWorkspaceServiceAccountTokenOutput {
         return delete_workspace_service_account_token.execute(self, allocator, input, options);
     }
 
     /// Displays information about one Amazon Managed Grafana workspace.
-    pub fn describeWorkspace(self: *Self, allocator: std.mem.Allocator, input: describe_workspace.DescribeWorkspaceInput, options: describe_workspace.Options) !describe_workspace.DescribeWorkspaceOutput {
+    pub fn describeWorkspace(self: *Self, allocator: std.mem.Allocator, input: describe_workspace.DescribeWorkspaceInput, options: CallOptions) !describe_workspace.DescribeWorkspaceOutput {
         return describe_workspace.execute(self, allocator, input, options);
     }
 
     /// Displays information about the authentication methods used in one Amazon
     /// Managed Grafana
     /// workspace.
-    pub fn describeWorkspaceAuthentication(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_authentication.DescribeWorkspaceAuthenticationInput, options: describe_workspace_authentication.Options) !describe_workspace_authentication.DescribeWorkspaceAuthenticationOutput {
+    pub fn describeWorkspaceAuthentication(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_authentication.DescribeWorkspaceAuthenticationInput, options: CallOptions) !describe_workspace_authentication.DescribeWorkspaceAuthenticationOutput {
         return describe_workspace_authentication.execute(self, allocator, input, options);
     }
 
     /// Gets the current configuration string for the given workspace.
-    pub fn describeWorkspaceConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_configuration.DescribeWorkspaceConfigurationInput, options: describe_workspace_configuration.Options) !describe_workspace_configuration.DescribeWorkspaceConfigurationOutput {
+    pub fn describeWorkspaceConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_workspace_configuration.DescribeWorkspaceConfigurationInput, options: CallOptions) !describe_workspace_configuration.DescribeWorkspaceConfigurationOutput {
         return describe_workspace_configuration.execute(self, allocator, input, options);
     }
 
     /// Removes the Grafana Enterprise license from a workspace.
-    pub fn disassociateLicense(self: *Self, allocator: std.mem.Allocator, input: disassociate_license.DisassociateLicenseInput, options: disassociate_license.Options) !disassociate_license.DisassociateLicenseOutput {
+    pub fn disassociateLicense(self: *Self, allocator: std.mem.Allocator, input: disassociate_license.DisassociateLicenseInput, options: CallOptions) !disassociate_license.DisassociateLicenseOutput {
         return disassociate_license.execute(self, allocator, input, options);
     }
 
@@ -209,7 +210,7 @@ pub const Client = struct {
     /// only the roles for that user or group are returned. If you do this, you can
     /// specify only
     /// one `userId` or one `groupId`.
-    pub fn listPermissions(self: *Self, allocator: std.mem.Allocator, input: list_permissions.ListPermissionsInput, options: list_permissions.Options) !list_permissions.ListPermissionsOutput {
+    pub fn listPermissions(self: *Self, allocator: std.mem.Allocator, input: list_permissions.ListPermissionsInput, options: CallOptions) !list_permissions.ListPermissionsOutput {
         return list_permissions.execute(self, allocator, input, options);
     }
 
@@ -217,14 +218,14 @@ pub const Client = struct {
     /// with the Amazon Managed Service for Grafana resource specified by the
     /// `resourceArn`. Currently, the only resource that can be tagged is a
     /// workspace.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists available versions of Grafana. These are available when calling
     /// `CreateWorkspace`. Optionally, include a workspace to list the versions
     /// to which it can be upgraded.
-    pub fn listVersions(self: *Self, allocator: std.mem.Allocator, input: list_versions.ListVersionsInput, options: list_versions.Options) !list_versions.ListVersionsOutput {
+    pub fn listVersions(self: *Self, allocator: std.mem.Allocator, input: list_versions.ListVersionsInput, options: CallOptions) !list_versions.ListVersionsOutput {
         return list_versions.execute(self, allocator, input, options);
     }
 
@@ -237,7 +238,7 @@ pub const Client = struct {
     /// Service accounts are only available for workspaces that are compatible with
     /// Grafana
     /// version 9 and above.
-    pub fn listWorkspaceServiceAccountTokens(self: *Self, allocator: std.mem.Allocator, input: list_workspace_service_account_tokens.ListWorkspaceServiceAccountTokensInput, options: list_workspace_service_account_tokens.Options) !list_workspace_service_account_tokens.ListWorkspaceServiceAccountTokensOutput {
+    pub fn listWorkspaceServiceAccountTokens(self: *Self, allocator: std.mem.Allocator, input: list_workspace_service_account_tokens.ListWorkspaceServiceAccountTokensInput, options: CallOptions) !list_workspace_service_account_tokens.ListWorkspaceServiceAccountTokensOutput {
         return list_workspace_service_account_tokens.execute(self, allocator, input, options);
     }
 
@@ -246,7 +247,7 @@ pub const Client = struct {
     /// Service accounts are only available for workspaces that are compatible with
     /// Grafana
     /// version 9 and above.
-    pub fn listWorkspaceServiceAccounts(self: *Self, allocator: std.mem.Allocator, input: list_workspace_service_accounts.ListWorkspaceServiceAccountsInput, options: list_workspace_service_accounts.Options) !list_workspace_service_accounts.ListWorkspaceServiceAccountsOutput {
+    pub fn listWorkspaceServiceAccounts(self: *Self, allocator: std.mem.Allocator, input: list_workspace_service_accounts.ListWorkspaceServiceAccountsInput, options: CallOptions) !list_workspace_service_accounts.ListWorkspaceServiceAccountsOutput {
         return list_workspace_service_accounts.execute(self, allocator, input, options);
     }
 
@@ -254,7 +255,7 @@ pub const Client = struct {
     /// some information
     /// about each workspace. For more complete information about one workspace, use
     /// [DescribeWorkspace](https://docs.aws.amazon.com/AAMG/latest/APIReference/API_DescribeWorkspace.html).
-    pub fn listWorkspaces(self: *Self, allocator: std.mem.Allocator, input: list_workspaces.ListWorkspacesInput, options: list_workspaces.Options) !list_workspaces.ListWorkspacesOutput {
+    pub fn listWorkspaces(self: *Self, allocator: std.mem.Allocator, input: list_workspaces.ListWorkspacesInput, options: CallOptions) !list_workspaces.ListWorkspacesOutput {
         return list_workspaces.execute(self, allocator, input, options);
     }
 
@@ -268,19 +269,19 @@ pub const Client = struct {
     /// with the resource, the new tag value that you specify replaces the previous
     /// value for
     /// that tag.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// The `UntagResource` operation removes the association of the tag with the
     /// Amazon Managed Grafana resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates which users in a workspace have the Grafana `Admin` or
     /// `Editor` roles.
-    pub fn updatePermissions(self: *Self, allocator: std.mem.Allocator, input: update_permissions.UpdatePermissionsInput, options: update_permissions.Options) !update_permissions.UpdatePermissionsOutput {
+    pub fn updatePermissions(self: *Self, allocator: std.mem.Allocator, input: update_permissions.UpdatePermissionsInput, options: CallOptions) !update_permissions.UpdatePermissionsOutput {
         return update_permissions.execute(self, allocator, input, options);
     }
 
@@ -297,7 +298,7 @@ pub const Client = struct {
     /// To modify which users in the workspace have the `Admin` and
     /// `Editor` Grafana roles, use
     /// [UpdatePermissions](https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html).
-    pub fn updateWorkspace(self: *Self, allocator: std.mem.Allocator, input: update_workspace.UpdateWorkspaceInput, options: update_workspace.Options) !update_workspace.UpdateWorkspaceOutput {
+    pub fn updateWorkspace(self: *Self, allocator: std.mem.Allocator, input: update_workspace.UpdateWorkspaceInput, options: CallOptions) !update_workspace.UpdateWorkspaceOutput {
         return update_workspace.execute(self, allocator, input, options);
     }
 
@@ -311,12 +312,12 @@ pub const Client = struct {
     /// Changes to the authentication method for a workspace may take a few minutes
     /// to
     /// take effect.
-    pub fn updateWorkspaceAuthentication(self: *Self, allocator: std.mem.Allocator, input: update_workspace_authentication.UpdateWorkspaceAuthenticationInput, options: update_workspace_authentication.Options) !update_workspace_authentication.UpdateWorkspaceAuthenticationOutput {
+    pub fn updateWorkspaceAuthentication(self: *Self, allocator: std.mem.Allocator, input: update_workspace_authentication.UpdateWorkspaceAuthenticationInput, options: CallOptions) !update_workspace_authentication.UpdateWorkspaceAuthenticationOutput {
         return update_workspace_authentication.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration string for the given workspace
-    pub fn updateWorkspaceConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_workspace_configuration.UpdateWorkspaceConfigurationInput, options: update_workspace_configuration.Options) !update_workspace_configuration.UpdateWorkspaceConfigurationOutput {
+    pub fn updateWorkspaceConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_workspace_configuration.UpdateWorkspaceConfigurationInput, options: CallOptions) !update_workspace_configuration.UpdateWorkspaceConfigurationOutput {
         return update_workspace_configuration.execute(self, allocator, input, options);
     }
 

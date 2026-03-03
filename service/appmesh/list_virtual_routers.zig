@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VirtualRouterRef = @import("virtual_router_ref.zig").VirtualRouterRef;
 
@@ -58,11 +59,7 @@ pub const ListVirtualRoutersOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListVirtualRoutersInput, options: Options) !ListVirtualRoutersOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListVirtualRoutersInput, options: CallOptions) !ListVirtualRoutersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

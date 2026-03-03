@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReplicationConfiguration = @import("replication_configuration.zig").ReplicationConfiguration;
 const serde = @import("serde.zig");
@@ -24,13 +25,9 @@ pub const GetBucketReplicationInput = struct {
     bucket: []const u8,
 };
 
-const GetBucketReplicationOutput = @import("get_bucket_replication_result.zig").GetBucketReplicationResult;
+pub const GetBucketReplicationOutput = @import("get_bucket_replication_result.zig").GetBucketReplicationResult;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketReplicationInput, options: Options) !GetBucketReplicationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketReplicationInput, options: CallOptions) !GetBucketReplicationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

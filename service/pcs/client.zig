@@ -20,6 +20,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_cluster = @import("update_cluster.zig");
 const update_compute_node_group = @import("update_compute_node_group.zig");
 const update_queue = @import("update_queue.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -60,7 +61,7 @@ pub const Client = struct {
     /// state per Amazon Web Services Region per Amazon Web Services account.
     /// `CreateCluster` fails with a `ServiceQuotaExceededException` if there is
     /// already a cluster in a `Creating` state.
-    pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: create_cluster.Options) !create_cluster.CreateClusterOutput {
+    pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: CallOptions) !create_cluster.CreateClusterOutput {
         return create_cluster.execute(self, allocator, input, options);
     }
 
@@ -74,73 +75,73 @@ pub const Client = struct {
     /// launch template before you call this API. For more information, see [Launch
     /// an instance from a launch
     /// template](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html) in the *Amazon Elastic Compute Cloud User Guide for Linux Instances*.
-    pub fn createComputeNodeGroup(self: *Self, allocator: std.mem.Allocator, input: create_compute_node_group.CreateComputeNodeGroupInput, options: create_compute_node_group.Options) !create_compute_node_group.CreateComputeNodeGroupOutput {
+    pub fn createComputeNodeGroup(self: *Self, allocator: std.mem.Allocator, input: create_compute_node_group.CreateComputeNodeGroupInput, options: CallOptions) !create_compute_node_group.CreateComputeNodeGroupOutput {
         return create_compute_node_group.execute(self, allocator, input, options);
     }
 
     /// Creates a job queue. You must associate 1 or more compute node groups with
     /// the queue. You can associate 1 compute node group with multiple queues.
-    pub fn createQueue(self: *Self, allocator: std.mem.Allocator, input: create_queue.CreateQueueInput, options: create_queue.Options) !create_queue.CreateQueueOutput {
+    pub fn createQueue(self: *Self, allocator: std.mem.Allocator, input: create_queue.CreateQueueInput, options: CallOptions) !create_queue.CreateQueueOutput {
         return create_queue.execute(self, allocator, input, options);
     }
 
     /// Deletes a cluster and all its linked resources. You must delete all queues
     /// and compute node groups associated with the cluster before you can delete
     /// the cluster.
-    pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: delete_cluster.Options) !delete_cluster.DeleteClusterOutput {
+    pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: CallOptions) !delete_cluster.DeleteClusterOutput {
         return delete_cluster.execute(self, allocator, input, options);
     }
 
     /// Deletes a compute node group. You must delete all queues associated with the
     /// compute node group first.
-    pub fn deleteComputeNodeGroup(self: *Self, allocator: std.mem.Allocator, input: delete_compute_node_group.DeleteComputeNodeGroupInput, options: delete_compute_node_group.Options) !delete_compute_node_group.DeleteComputeNodeGroupOutput {
+    pub fn deleteComputeNodeGroup(self: *Self, allocator: std.mem.Allocator, input: delete_compute_node_group.DeleteComputeNodeGroupInput, options: CallOptions) !delete_compute_node_group.DeleteComputeNodeGroupOutput {
         return delete_compute_node_group.execute(self, allocator, input, options);
     }
 
     /// Deletes a job queue. If the compute node group associated with this queue
     /// isn't associated with any other queues, PCS terminates all the compute nodes
     /// for this queue.
-    pub fn deleteQueue(self: *Self, allocator: std.mem.Allocator, input: delete_queue.DeleteQueueInput, options: delete_queue.Options) !delete_queue.DeleteQueueOutput {
+    pub fn deleteQueue(self: *Self, allocator: std.mem.Allocator, input: delete_queue.DeleteQueueInput, options: CallOptions) !delete_queue.DeleteQueueOutput {
         return delete_queue.execute(self, allocator, input, options);
     }
 
     /// Returns detailed information about a running cluster in your account. This
     /// API action provides networking information, endpoint information for
     /// communication with the scheduler, and provisioning status.
-    pub fn getCluster(self: *Self, allocator: std.mem.Allocator, input: get_cluster.GetClusterInput, options: get_cluster.Options) !get_cluster.GetClusterOutput {
+    pub fn getCluster(self: *Self, allocator: std.mem.Allocator, input: get_cluster.GetClusterInput, options: CallOptions) !get_cluster.GetClusterOutput {
         return get_cluster.execute(self, allocator, input, options);
     }
 
     /// Returns detailed information about a compute node group. This API action
     /// provides networking information, EC2 instance type, compute node group
     /// status, and scheduler (such as Slurm) configuration.
-    pub fn getComputeNodeGroup(self: *Self, allocator: std.mem.Allocator, input: get_compute_node_group.GetComputeNodeGroupInput, options: get_compute_node_group.Options) !get_compute_node_group.GetComputeNodeGroupOutput {
+    pub fn getComputeNodeGroup(self: *Self, allocator: std.mem.Allocator, input: get_compute_node_group.GetComputeNodeGroupInput, options: CallOptions) !get_compute_node_group.GetComputeNodeGroupOutput {
         return get_compute_node_group.execute(self, allocator, input, options);
     }
 
     /// Returns detailed information about a queue. The information includes the
     /// compute node groups that the queue uses to schedule jobs.
-    pub fn getQueue(self: *Self, allocator: std.mem.Allocator, input: get_queue.GetQueueInput, options: get_queue.Options) !get_queue.GetQueueOutput {
+    pub fn getQueue(self: *Self, allocator: std.mem.Allocator, input: get_queue.GetQueueInput, options: CallOptions) !get_queue.GetQueueOutput {
         return get_queue.execute(self, allocator, input, options);
     }
 
     /// Returns a list of running clusters in your account.
-    pub fn listClusters(self: *Self, allocator: std.mem.Allocator, input: list_clusters.ListClustersInput, options: list_clusters.Options) !list_clusters.ListClustersOutput {
+    pub fn listClusters(self: *Self, allocator: std.mem.Allocator, input: list_clusters.ListClustersInput, options: CallOptions) !list_clusters.ListClustersOutput {
         return list_clusters.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all compute node groups associated with a cluster.
-    pub fn listComputeNodeGroups(self: *Self, allocator: std.mem.Allocator, input: list_compute_node_groups.ListComputeNodeGroupsInput, options: list_compute_node_groups.Options) !list_compute_node_groups.ListComputeNodeGroupsOutput {
+    pub fn listComputeNodeGroups(self: *Self, allocator: std.mem.Allocator, input: list_compute_node_groups.ListComputeNodeGroupsInput, options: CallOptions) !list_compute_node_groups.ListComputeNodeGroupsOutput {
         return list_compute_node_groups.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all queues associated with a cluster.
-    pub fn listQueues(self: *Self, allocator: std.mem.Allocator, input: list_queues.ListQueuesInput, options: list_queues.Options) !list_queues.ListQueuesOutput {
+    pub fn listQueues(self: *Self, allocator: std.mem.Allocator, input: list_queues.ListQueuesInput, options: CallOptions) !list_queues.ListQueuesOutput {
         return list_queues.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all tags on an PCS resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -148,7 +149,7 @@ pub const Client = struct {
     ///
     /// PCS uses this API action to register the compute nodes it launches in your
     /// account.
-    pub fn registerComputeNodeGroupInstance(self: *Self, allocator: std.mem.Allocator, input: register_compute_node_group_instance.RegisterComputeNodeGroupInstanceInput, options: register_compute_node_group_instance.Options) !register_compute_node_group_instance.RegisterComputeNodeGroupInstanceOutput {
+    pub fn registerComputeNodeGroupInstance(self: *Self, allocator: std.mem.Allocator, input: register_compute_node_group_instance.RegisterComputeNodeGroupInstanceInput, options: CallOptions) !register_compute_node_group_instance.RegisterComputeNodeGroupInstanceOutput {
         return register_compute_node_group_instance.execute(self, allocator, input, options);
     }
 
@@ -156,13 +157,13 @@ pub const Client = struct {
     /// tag value. The tag key and tag value are case-sensitive strings. The tag
     /// value can be an empty (null) string. To add a tag, specify a new tag key and
     /// a tag value. To edit a tag, specify an existing tag key and a new tag value.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Deletes tags from an PCS resource. To delete a tag, specify the tag key and
     /// the Amazon Resource Name (ARN) of the PCS resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -172,20 +173,20 @@ pub const Client = struct {
     /// You can only update clusters that are in `ACTIVE`, `UPDATE_FAILED`, or
     /// `SUSPENDED` state. All associated resources (queues and compute node groups)
     /// must be in `ACTIVE` state before you can update the cluster.
-    pub fn updateCluster(self: *Self, allocator: std.mem.Allocator, input: update_cluster.UpdateClusterInput, options: update_cluster.Options) !update_cluster.UpdateClusterOutput {
+    pub fn updateCluster(self: *Self, allocator: std.mem.Allocator, input: update_cluster.UpdateClusterInput, options: CallOptions) !update_cluster.UpdateClusterOutput {
         return update_cluster.execute(self, allocator, input, options);
     }
 
     /// Updates a compute node group. You can update many of the fields related to
     /// your compute node group including the configurations for networking, compute
     /// nodes, and settings specific to your scheduler (such as Slurm).
-    pub fn updateComputeNodeGroup(self: *Self, allocator: std.mem.Allocator, input: update_compute_node_group.UpdateComputeNodeGroupInput, options: update_compute_node_group.Options) !update_compute_node_group.UpdateComputeNodeGroupOutput {
+    pub fn updateComputeNodeGroup(self: *Self, allocator: std.mem.Allocator, input: update_compute_node_group.UpdateComputeNodeGroupInput, options: CallOptions) !update_compute_node_group.UpdateComputeNodeGroupOutput {
         return update_compute_node_group.execute(self, allocator, input, options);
     }
 
     /// Updates the compute node group configuration of a queue. Use this API to
     /// change the compute node groups that the queue can send jobs to.
-    pub fn updateQueue(self: *Self, allocator: std.mem.Allocator, input: update_queue.UpdateQueueInput, options: update_queue.Options) !update_queue.UpdateQueueOutput {
+    pub fn updateQueue(self: *Self, allocator: std.mem.Allocator, input: update_queue.UpdateQueueInput, options: CallOptions) !update_queue.UpdateQueueOutput {
         return update_queue.execute(self, allocator, input, options);
     }
 

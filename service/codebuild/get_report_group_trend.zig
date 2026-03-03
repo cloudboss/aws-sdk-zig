@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReportGroupTrendFieldType = @import("report_group_trend_field_type.zig").ReportGroupTrendFieldType;
 const ReportWithRawData = @import("report_with_raw_data.zig").ReportWithRawData;
@@ -91,11 +92,7 @@ pub const GetReportGroupTrendOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetReportGroupTrendInput, options: Options) !GetReportGroupTrendOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetReportGroupTrendInput, options: CallOptions) !GetReportGroupTrendOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

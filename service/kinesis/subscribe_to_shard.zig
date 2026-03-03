@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const StartingPosition = @import("starting_position.zig").StartingPosition;
 const SubscribeToShardEventStream = @import("subscribe_to_shard_event_stream.zig").SubscribeToShardEventStream;
@@ -43,11 +44,7 @@ pub const SubscribeToShardOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SubscribeToShardInput, options: Options) !SubscribeToShardOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SubscribeToShardInput, options: CallOptions) !SubscribeToShardOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     const alloc = arena.allocator();
 

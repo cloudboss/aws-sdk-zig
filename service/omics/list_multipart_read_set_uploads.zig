@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MultipartReadSetUploadListItem = @import("multipart_read_set_upload_list_item.zig").MultipartReadSetUploadListItem;
 
@@ -37,11 +38,7 @@ pub const ListMultipartReadSetUploadsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMultipartReadSetUploadsInput, options: Options) !ListMultipartReadSetUploadsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMultipartReadSetUploadsInput, options: CallOptions) !ListMultipartReadSetUploadsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

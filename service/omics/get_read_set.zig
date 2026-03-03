@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReadSetFile = @import("read_set_file.zig").ReadSetFile;
 
@@ -39,11 +40,7 @@ pub const GetReadSetOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetReadSetInput, options: Options) !GetReadSetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetReadSetInput, options: CallOptions) !GetReadSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     const alloc = arena.allocator();
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RouteServerEndpoint = @import("route_server_endpoint.zig").RouteServerEndpoint;
 const serde = @import("serde.zig");
@@ -23,11 +24,7 @@ pub const DeleteRouteServerEndpointOutput = struct {
     route_server_endpoint: ?RouteServerEndpoint = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRouteServerEndpointInput, options: Options) !DeleteRouteServerEndpointOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRouteServerEndpointInput, options: CallOptions) !DeleteRouteServerEndpointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

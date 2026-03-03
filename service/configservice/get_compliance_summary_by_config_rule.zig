@@ -2,10 +2,11 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ComplianceSummary = @import("compliance_summary.zig").ComplianceSummary;
 
-const GetComplianceSummaryByConfigRuleInput = struct {};
+pub const GetComplianceSummaryByConfigRuleInput = struct {};
 
 pub const GetComplianceSummaryByConfigRuleOutput = struct {
     /// The number of Config rules that are compliant and the
@@ -18,11 +19,7 @@ pub const GetComplianceSummaryByConfigRuleOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetComplianceSummaryByConfigRuleInput, options: Options) !GetComplianceSummaryByConfigRuleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetComplianceSummaryByConfigRuleInput, options: CallOptions) !GetComplianceSummaryByConfigRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AnalysisDetails = @import("analysis_details.zig").AnalysisDetails;
 const AnalysisStatus = @import("analysis_status.zig").AnalysisStatus;
@@ -54,11 +55,7 @@ pub const GetCommitmentPurchaseAnalysisOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCommitmentPurchaseAnalysisInput, options: Options) !GetCommitmentPurchaseAnalysisOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCommitmentPurchaseAnalysisInput, options: CallOptions) !GetCommitmentPurchaseAnalysisOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

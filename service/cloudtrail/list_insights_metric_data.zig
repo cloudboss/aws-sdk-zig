@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InsightsMetricDataType = @import("insights_metric_data_type.zig").InsightsMetricDataType;
 const InsightType = @import("insight_type.zig").InsightType;
@@ -139,11 +140,7 @@ pub const ListInsightsMetricDataOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListInsightsMetricDataInput, options: Options) !ListInsightsMetricDataOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListInsightsMetricDataInput, options: CallOptions) !ListInsightsMetricDataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

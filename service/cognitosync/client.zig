@@ -18,6 +18,7 @@ const set_identity_pool_configuration = @import("set_identity_pool_configuration
 const subscribe_to_dataset = @import("subscribe_to_dataset.zig");
 const unsubscribe_from_dataset = @import("unsubscribe_from_dataset.zig");
 const update_records = @import("update_records.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -54,7 +55,7 @@ pub const Client = struct {
     ///
     /// This API can only be called with developer credentials. You cannot call this
     /// API with the temporary user credentials provided by Cognito Identity.
-    pub fn bulkPublish(self: *Self, allocator: std.mem.Allocator, input: bulk_publish.BulkPublishInput, options: bulk_publish.Options) !bulk_publish.BulkPublishOutput {
+    pub fn bulkPublish(self: *Self, allocator: std.mem.Allocator, input: bulk_publish.BulkPublishInput, options: CallOptions) !bulk_publish.BulkPublishOutput {
         return bulk_publish.execute(self, allocator, input, options);
     }
 
@@ -67,7 +68,7 @@ pub const Client = struct {
     ///
     /// This API can be called with temporary user credentials provided by Cognito
     /// Identity or with developer credentials.
-    pub fn deleteDataset(self: *Self, allocator: std.mem.Allocator, input: delete_dataset.DeleteDatasetInput, options: delete_dataset.Options) !delete_dataset.DeleteDatasetOutput {
+    pub fn deleteDataset(self: *Self, allocator: std.mem.Allocator, input: delete_dataset.DeleteDatasetInput, options: CallOptions) !delete_dataset.DeleteDatasetOutput {
         return delete_dataset.execute(self, allocator, input, options);
     }
 
@@ -80,7 +81,7 @@ pub const Client = struct {
     /// This API can be called with temporary user credentials provided by Cognito
     /// Identity or with developer credentials. You should use Cognito Identity
     /// credentials to make this API call.
-    pub fn describeDataset(self: *Self, allocator: std.mem.Allocator, input: describe_dataset.DescribeDatasetInput, options: describe_dataset.Options) !describe_dataset.DescribeDatasetOutput {
+    pub fn describeDataset(self: *Self, allocator: std.mem.Allocator, input: describe_dataset.DescribeDatasetInput, options: CallOptions) !describe_dataset.DescribeDatasetOutput {
         return describe_dataset.execute(self, allocator, input, options);
     }
 
@@ -134,7 +135,7 @@ pub const Client = struct {
     /// },
     /// "Version": "1.0"
     /// }
-    pub fn describeIdentityPoolUsage(self: *Self, allocator: std.mem.Allocator, input: describe_identity_pool_usage.DescribeIdentityPoolUsageInput, options: describe_identity_pool_usage.Options) !describe_identity_pool_usage.DescribeIdentityPoolUsageOutput {
+    pub fn describeIdentityPoolUsage(self: *Self, allocator: std.mem.Allocator, input: describe_identity_pool_usage.DescribeIdentityPoolUsageInput, options: CallOptions) !describe_identity_pool_usage.DescribeIdentityPoolUsageOutput {
         return describe_identity_pool_usage.execute(self, allocator, input, options);
     }
 
@@ -189,7 +190,7 @@ pub const Client = struct {
     /// },
     /// "Version": "1.0"
     /// }
-    pub fn describeIdentityUsage(self: *Self, allocator: std.mem.Allocator, input: describe_identity_usage.DescribeIdentityUsageInput, options: describe_identity_usage.Options) !describe_identity_usage.DescribeIdentityUsageOutput {
+    pub fn describeIdentityUsage(self: *Self, allocator: std.mem.Allocator, input: describe_identity_usage.DescribeIdentityUsageInput, options: CallOptions) !describe_identity_usage.DescribeIdentityUsageOutput {
         return describe_identity_usage.execute(self, allocator, input, options);
     }
 
@@ -197,7 +198,7 @@ pub const Client = struct {
     ///
     /// This API can only be called with developer credentials. You cannot call this
     /// API with the temporary user credentials provided by Cognito Identity.
-    pub fn getBulkPublishDetails(self: *Self, allocator: std.mem.Allocator, input: get_bulk_publish_details.GetBulkPublishDetailsInput, options: get_bulk_publish_details.Options) !get_bulk_publish_details.GetBulkPublishDetailsOutput {
+    pub fn getBulkPublishDetails(self: *Self, allocator: std.mem.Allocator, input: get_bulk_publish_details.GetBulkPublishDetailsInput, options: CallOptions) !get_bulk_publish_details.GetBulkPublishDetailsOutput {
         return get_bulk_publish_details.execute(self, allocator, input, options);
     }
 
@@ -206,7 +207,7 @@ pub const Client = struct {
     ///
     /// This API can only be called with developer credentials. You cannot call this
     /// API with the temporary user credentials provided by Cognito Identity.
-    pub fn getCognitoEvents(self: *Self, allocator: std.mem.Allocator, input: get_cognito_events.GetCognitoEventsInput, options: get_cognito_events.Options) !get_cognito_events.GetCognitoEventsOutput {
+    pub fn getCognitoEvents(self: *Self, allocator: std.mem.Allocator, input: get_cognito_events.GetCognitoEventsInput, options: CallOptions) !get_cognito_events.GetCognitoEventsOutput {
         return get_cognito_events.execute(self, allocator, input, options);
     }
 
@@ -259,7 +260,7 @@ pub const Client = struct {
     /// },
     /// "Version": "1.0"
     /// }
-    pub fn getIdentityPoolConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_identity_pool_configuration.GetIdentityPoolConfigurationInput, options: get_identity_pool_configuration.Options) !get_identity_pool_configuration.GetIdentityPoolConfigurationOutput {
+    pub fn getIdentityPoolConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_identity_pool_configuration.GetIdentityPoolConfigurationInput, options: CallOptions) !get_identity_pool_configuration.GetIdentityPoolConfigurationOutput {
         return get_identity_pool_configuration.execute(self, allocator, input, options);
     }
 
@@ -326,7 +327,7 @@ pub const Client = struct {
     /// },
     /// "Version": "1.0"
     /// }
-    pub fn listDatasets(self: *Self, allocator: std.mem.Allocator, input: list_datasets.ListDatasetsInput, options: list_datasets.Options) !list_datasets.ListDatasetsOutput {
+    pub fn listDatasets(self: *Self, allocator: std.mem.Allocator, input: list_datasets.ListDatasetsInput, options: CallOptions) !list_datasets.ListDatasetsOutput {
         return list_datasets.execute(self, allocator, input, options);
     }
 
@@ -390,7 +391,7 @@ pub const Client = struct {
     /// },
     /// "Version": "1.0"
     /// }
-    pub fn listIdentityPoolUsage(self: *Self, allocator: std.mem.Allocator, input: list_identity_pool_usage.ListIdentityPoolUsageInput, options: list_identity_pool_usage.Options) !list_identity_pool_usage.ListIdentityPoolUsageOutput {
+    pub fn listIdentityPoolUsage(self: *Self, allocator: std.mem.Allocator, input: list_identity_pool_usage.ListIdentityPoolUsageInput, options: CallOptions) !list_identity_pool_usage.ListIdentityPoolUsageOutput {
         return list_identity_pool_usage.execute(self, allocator, input, options);
     }
 
@@ -454,7 +455,7 @@ pub const Client = struct {
     /// },
     /// "Version": "1.0"
     /// }
-    pub fn listRecords(self: *Self, allocator: std.mem.Allocator, input: list_records.ListRecordsInput, options: list_records.Options) !list_records.ListRecordsOutput {
+    pub fn listRecords(self: *Self, allocator: std.mem.Allocator, input: list_records.ListRecordsInput, options: CallOptions) !list_records.ListRecordsOutput {
         return list_records.execute(self, allocator, input, options);
     }
 
@@ -504,7 +505,7 @@ pub const Client = struct {
     /// },
     /// "Version": "1.0"
     /// }
-    pub fn registerDevice(self: *Self, allocator: std.mem.Allocator, input: register_device.RegisterDeviceInput, options: register_device.Options) !register_device.RegisterDeviceOutput {
+    pub fn registerDevice(self: *Self, allocator: std.mem.Allocator, input: register_device.RegisterDeviceInput, options: CallOptions) !register_device.RegisterDeviceOutput {
         return register_device.execute(self, allocator, input, options);
     }
 
@@ -515,7 +516,7 @@ pub const Client = struct {
     ///
     /// This API can only be called with developer credentials. You cannot call this
     /// API with the temporary user credentials provided by Cognito Identity.
-    pub fn setCognitoEvents(self: *Self, allocator: std.mem.Allocator, input: set_cognito_events.SetCognitoEventsInput, options: set_cognito_events.Options) !set_cognito_events.SetCognitoEventsOutput {
+    pub fn setCognitoEvents(self: *Self, allocator: std.mem.Allocator, input: set_cognito_events.SetCognitoEventsInput, options: CallOptions) !set_cognito_events.SetCognitoEventsOutput {
         return set_cognito_events.execute(self, allocator, input, options);
     }
 
@@ -573,7 +574,7 @@ pub const Client = struct {
     /// },
     /// "Version": "1.0"
     /// }
-    pub fn setIdentityPoolConfiguration(self: *Self, allocator: std.mem.Allocator, input: set_identity_pool_configuration.SetIdentityPoolConfigurationInput, options: set_identity_pool_configuration.Options) !set_identity_pool_configuration.SetIdentityPoolConfigurationOutput {
+    pub fn setIdentityPoolConfiguration(self: *Self, allocator: std.mem.Allocator, input: set_identity_pool_configuration.SetIdentityPoolConfigurationInput, options: CallOptions) !set_identity_pool_configuration.SetIdentityPoolConfigurationOutput {
         return set_identity_pool_configuration.execute(self, allocator, input, options);
     }
 
@@ -623,7 +624,7 @@ pub const Client = struct {
     /// },
     /// "Version": "1.0"
     /// }
-    pub fn subscribeToDataset(self: *Self, allocator: std.mem.Allocator, input: subscribe_to_dataset.SubscribeToDatasetInput, options: subscribe_to_dataset.Options) !subscribe_to_dataset.SubscribeToDatasetOutput {
+    pub fn subscribeToDataset(self: *Self, allocator: std.mem.Allocator, input: subscribe_to_dataset.SubscribeToDatasetInput, options: CallOptions) !subscribe_to_dataset.SubscribeToDatasetOutput {
         return subscribe_to_dataset.execute(self, allocator, input, options);
     }
 
@@ -674,7 +675,7 @@ pub const Client = struct {
     /// },
     /// "Version": "1.0"
     /// }
-    pub fn unsubscribeFromDataset(self: *Self, allocator: std.mem.Allocator, input: unsubscribe_from_dataset.UnsubscribeFromDatasetInput, options: unsubscribe_from_dataset.Options) !unsubscribe_from_dataset.UnsubscribeFromDatasetOutput {
+    pub fn unsubscribeFromDataset(self: *Self, allocator: std.mem.Allocator, input: unsubscribe_from_dataset.UnsubscribeFromDatasetInput, options: CallOptions) !unsubscribe_from_dataset.UnsubscribeFromDatasetOutput {
         return unsubscribe_from_dataset.execute(self, allocator, input, options);
     }
 
@@ -696,7 +697,7 @@ pub const Client = struct {
     ///
     /// This API can be called with temporary user credentials provided by Cognito
     /// Identity or with developer credentials.
-    pub fn updateRecords(self: *Self, allocator: std.mem.Allocator, input: update_records.UpdateRecordsInput, options: update_records.Options) !update_records.UpdateRecordsOutput {
+    pub fn updateRecords(self: *Self, allocator: std.mem.Allocator, input: update_records.UpdateRecordsInput, options: CallOptions) !update_records.UpdateRecordsOutput {
         return update_records.execute(self, allocator, input, options);
     }
 };

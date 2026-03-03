@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DeleteVolumeOntapConfiguration = @import("delete_volume_ontap_configuration.zig").DeleteVolumeOntapConfiguration;
 const DeleteVolumeOpenZFSConfiguration = @import("delete_volume_open_zfs_configuration.zig").DeleteVolumeOpenZFSConfiguration;
@@ -51,11 +52,7 @@ pub const DeleteVolumeOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVolumeInput, options: Options) !DeleteVolumeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVolumeInput, options: CallOptions) !DeleteVolumeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

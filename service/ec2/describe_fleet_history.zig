@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FleetEventType = @import("fleet_event_type.zig").FleetEventType;
 const HistoryRecordEntry = @import("history_record_entry.zig").HistoryRecordEntry;
@@ -62,11 +63,7 @@ pub const DescribeFleetHistoryOutput = struct {
     start_time: ?i64 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeFleetHistoryInput, options: Options) !DescribeFleetHistoryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeFleetHistoryInput, options: CallOptions) !DescribeFleetHistoryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

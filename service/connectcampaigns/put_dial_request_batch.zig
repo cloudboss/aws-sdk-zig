@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DialRequest = @import("dial_request.zig").DialRequest;
 const FailedRequest = @import("failed_request.zig").FailedRequest;
@@ -29,11 +30,7 @@ pub const PutDialRequestBatchOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDialRequestBatchInput, options: Options) !PutDialRequestBatchOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDialRequestBatchInput, options: CallOptions) !PutDialRequestBatchOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

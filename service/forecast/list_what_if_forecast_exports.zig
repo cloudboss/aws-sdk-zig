@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const WhatIfForecastExportSummary = @import("what_if_forecast_export_summary.zig").WhatIfForecastExportSummary;
@@ -65,11 +66,7 @@ pub const ListWhatIfForecastExportsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListWhatIfForecastExportsInput, options: Options) !ListWhatIfForecastExportsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListWhatIfForecastExportsInput, options: CallOptions) !ListWhatIfForecastExportsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

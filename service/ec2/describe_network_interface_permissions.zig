@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const NetworkInterfacePermission = @import("network_interface_permission.zig").NetworkInterfacePermission;
@@ -54,11 +55,7 @@ pub const DescribeNetworkInterfacePermissionsOutput = struct {
     next_token: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeNetworkInterfacePermissionsInput, options: Options) !DescribeNetworkInterfacePermissionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeNetworkInterfacePermissionsInput, options: CallOptions) !DescribeNetworkInterfacePermissionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

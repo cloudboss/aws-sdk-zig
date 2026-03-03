@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SpotDatafeedSubscription = @import("spot_datafeed_subscription.zig").SpotDatafeedSubscription;
 const serde = @import("serde.zig");
@@ -20,11 +21,7 @@ pub const DescribeSpotDatafeedSubscriptionOutput = struct {
     spot_datafeed_subscription: ?SpotDatafeedSubscription = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeSpotDatafeedSubscriptionInput, options: Options) !DescribeSpotDatafeedSubscriptionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeSpotDatafeedSubscriptionInput, options: CallOptions) !DescribeSpotDatafeedSubscriptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Oauth2CredentialProviderItem = @import("oauth_2_credential_provider_item.zig").Oauth2CredentialProviderItem;
 
@@ -31,11 +32,7 @@ pub const ListOauth2CredentialProvidersOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOauth2CredentialProvidersInput, options: Options) !ListOauth2CredentialProvidersOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOauth2CredentialProvidersInput, options: CallOptions) !ListOauth2CredentialProvidersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

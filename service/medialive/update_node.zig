@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const NodeRole = @import("node_role.zig").NodeRole;
 const SdiSourceMappingUpdateRequest = @import("sdi_source_mapping_update_request.zig").SdiSourceMappingUpdateRequest;
@@ -10,15 +11,11 @@ const NodeInterfaceMapping = @import("node_interface_mapping.zig").NodeInterface
 const SdiSourceMapping = @import("sdi_source_mapping.zig").SdiSourceMapping;
 const NodeState = @import("node_state.zig").NodeState;
 
-const UpdateNodeInput = @import("update_node_request.zig").UpdateNodeRequest;
+pub const UpdateNodeInput = @import("update_node_request.zig").UpdateNodeRequest;
 
-const UpdateNodeOutput = @import("update_node_response.zig").UpdateNodeResponse;
+pub const UpdateNodeOutput = @import("update_node_response.zig").UpdateNodeResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateNodeInput, options: Options) !UpdateNodeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateNodeInput, options: CallOptions) !UpdateNodeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

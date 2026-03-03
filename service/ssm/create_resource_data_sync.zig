@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResourceDataSyncS3Destination = @import("resource_data_sync_s3_destination.zig").ResourceDataSyncS3Destination;
 const ResourceDataSyncSource = @import("resource_data_sync_source.zig").ResourceDataSyncSource;
@@ -43,11 +44,7 @@ pub const CreateResourceDataSyncInput = struct {
 pub const CreateResourceDataSyncOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateResourceDataSyncInput, options: Options) !CreateResourceDataSyncOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateResourceDataSyncInput, options: CallOptions) !CreateResourceDataSyncOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

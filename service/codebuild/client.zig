@@ -60,6 +60,7 @@ const update_project = @import("update_project.zig");
 const update_project_visibility = @import("update_project_visibility.zig");
 const update_report_group = @import("update_report_group.zig");
 const update_webhook = @import("update_webhook.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -91,62 +92,62 @@ pub const Client = struct {
     }
 
     /// Deletes one or more builds.
-    pub fn batchDeleteBuilds(self: *Self, allocator: std.mem.Allocator, input: batch_delete_builds.BatchDeleteBuildsInput, options: batch_delete_builds.Options) !batch_delete_builds.BatchDeleteBuildsOutput {
+    pub fn batchDeleteBuilds(self: *Self, allocator: std.mem.Allocator, input: batch_delete_builds.BatchDeleteBuildsInput, options: CallOptions) !batch_delete_builds.BatchDeleteBuildsOutput {
         return batch_delete_builds.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about one or more batch builds.
-    pub fn batchGetBuildBatches(self: *Self, allocator: std.mem.Allocator, input: batch_get_build_batches.BatchGetBuildBatchesInput, options: batch_get_build_batches.Options) !batch_get_build_batches.BatchGetBuildBatchesOutput {
+    pub fn batchGetBuildBatches(self: *Self, allocator: std.mem.Allocator, input: batch_get_build_batches.BatchGetBuildBatchesInput, options: CallOptions) !batch_get_build_batches.BatchGetBuildBatchesOutput {
         return batch_get_build_batches.execute(self, allocator, input, options);
     }
 
     /// Gets information about one or more builds.
-    pub fn batchGetBuilds(self: *Self, allocator: std.mem.Allocator, input: batch_get_builds.BatchGetBuildsInput, options: batch_get_builds.Options) !batch_get_builds.BatchGetBuildsOutput {
+    pub fn batchGetBuilds(self: *Self, allocator: std.mem.Allocator, input: batch_get_builds.BatchGetBuildsInput, options: CallOptions) !batch_get_builds.BatchGetBuildsOutput {
         return batch_get_builds.execute(self, allocator, input, options);
     }
 
     /// Gets information about the command executions.
-    pub fn batchGetCommandExecutions(self: *Self, allocator: std.mem.Allocator, input: batch_get_command_executions.BatchGetCommandExecutionsInput, options: batch_get_command_executions.Options) !batch_get_command_executions.BatchGetCommandExecutionsOutput {
+    pub fn batchGetCommandExecutions(self: *Self, allocator: std.mem.Allocator, input: batch_get_command_executions.BatchGetCommandExecutionsInput, options: CallOptions) !batch_get_command_executions.BatchGetCommandExecutionsOutput {
         return batch_get_command_executions.execute(self, allocator, input, options);
     }
 
     /// Gets information about one or more compute fleets.
-    pub fn batchGetFleets(self: *Self, allocator: std.mem.Allocator, input: batch_get_fleets.BatchGetFleetsInput, options: batch_get_fleets.Options) !batch_get_fleets.BatchGetFleetsOutput {
+    pub fn batchGetFleets(self: *Self, allocator: std.mem.Allocator, input: batch_get_fleets.BatchGetFleetsInput, options: CallOptions) !batch_get_fleets.BatchGetFleetsOutput {
         return batch_get_fleets.execute(self, allocator, input, options);
     }
 
     /// Gets information about one or more build projects.
-    pub fn batchGetProjects(self: *Self, allocator: std.mem.Allocator, input: batch_get_projects.BatchGetProjectsInput, options: batch_get_projects.Options) !batch_get_projects.BatchGetProjectsOutput {
+    pub fn batchGetProjects(self: *Self, allocator: std.mem.Allocator, input: batch_get_projects.BatchGetProjectsInput, options: CallOptions) !batch_get_projects.BatchGetProjectsOutput {
         return batch_get_projects.execute(self, allocator, input, options);
     }
 
     /// Returns an array of report groups.
-    pub fn batchGetReportGroups(self: *Self, allocator: std.mem.Allocator, input: batch_get_report_groups.BatchGetReportGroupsInput, options: batch_get_report_groups.Options) !batch_get_report_groups.BatchGetReportGroupsOutput {
+    pub fn batchGetReportGroups(self: *Self, allocator: std.mem.Allocator, input: batch_get_report_groups.BatchGetReportGroupsInput, options: CallOptions) !batch_get_report_groups.BatchGetReportGroupsOutput {
         return batch_get_report_groups.execute(self, allocator, input, options);
     }
 
     /// Returns an array of reports.
-    pub fn batchGetReports(self: *Self, allocator: std.mem.Allocator, input: batch_get_reports.BatchGetReportsInput, options: batch_get_reports.Options) !batch_get_reports.BatchGetReportsOutput {
+    pub fn batchGetReports(self: *Self, allocator: std.mem.Allocator, input: batch_get_reports.BatchGetReportsInput, options: CallOptions) !batch_get_reports.BatchGetReportsOutput {
         return batch_get_reports.execute(self, allocator, input, options);
     }
 
     /// Gets information about the sandbox status.
-    pub fn batchGetSandboxes(self: *Self, allocator: std.mem.Allocator, input: batch_get_sandboxes.BatchGetSandboxesInput, options: batch_get_sandboxes.Options) !batch_get_sandboxes.BatchGetSandboxesOutput {
+    pub fn batchGetSandboxes(self: *Self, allocator: std.mem.Allocator, input: batch_get_sandboxes.BatchGetSandboxesInput, options: CallOptions) !batch_get_sandboxes.BatchGetSandboxesOutput {
         return batch_get_sandboxes.execute(self, allocator, input, options);
     }
 
     /// Creates a compute fleet.
-    pub fn createFleet(self: *Self, allocator: std.mem.Allocator, input: create_fleet.CreateFleetInput, options: create_fleet.Options) !create_fleet.CreateFleetOutput {
+    pub fn createFleet(self: *Self, allocator: std.mem.Allocator, input: create_fleet.CreateFleetInput, options: CallOptions) !create_fleet.CreateFleetOutput {
         return create_fleet.execute(self, allocator, input, options);
     }
 
     /// Creates a build project.
-    pub fn createProject(self: *Self, allocator: std.mem.Allocator, input: create_project.CreateProjectInput, options: create_project.Options) !create_project.CreateProjectOutput {
+    pub fn createProject(self: *Self, allocator: std.mem.Allocator, input: create_project.CreateProjectInput, options: CallOptions) !create_project.CreateProjectOutput {
         return create_project.execute(self, allocator, input, options);
     }
 
     /// Creates a report group. A report group contains a collection of reports.
-    pub fn createReportGroup(self: *Self, allocator: std.mem.Allocator, input: create_report_group.CreateReportGroupInput, options: create_report_group.Options) !create_report_group.CreateReportGroupOutput {
+    pub fn createReportGroup(self: *Self, allocator: std.mem.Allocator, input: create_report_group.CreateReportGroupInput, options: CallOptions) !create_report_group.CreateReportGroupOutput {
         return create_report_group.execute(self, allocator, input, options);
     }
 
@@ -168,45 +169,45 @@ pub const Client = struct {
     /// clear the
     /// Webhook box. For more information, see step 5 in [Change a Build Project's
     /// Settings](https://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console).
-    pub fn createWebhook(self: *Self, allocator: std.mem.Allocator, input: create_webhook.CreateWebhookInput, options: create_webhook.Options) !create_webhook.CreateWebhookOutput {
+    pub fn createWebhook(self: *Self, allocator: std.mem.Allocator, input: create_webhook.CreateWebhookInput, options: CallOptions) !create_webhook.CreateWebhookOutput {
         return create_webhook.execute(self, allocator, input, options);
     }
 
     /// Deletes a batch build.
-    pub fn deleteBuildBatch(self: *Self, allocator: std.mem.Allocator, input: delete_build_batch.DeleteBuildBatchInput, options: delete_build_batch.Options) !delete_build_batch.DeleteBuildBatchOutput {
+    pub fn deleteBuildBatch(self: *Self, allocator: std.mem.Allocator, input: delete_build_batch.DeleteBuildBatchInput, options: CallOptions) !delete_build_batch.DeleteBuildBatchOutput {
         return delete_build_batch.execute(self, allocator, input, options);
     }
 
     /// Deletes a compute fleet. When you delete a compute fleet, its builds are not
     /// deleted.
-    pub fn deleteFleet(self: *Self, allocator: std.mem.Allocator, input: delete_fleet.DeleteFleetInput, options: delete_fleet.Options) !delete_fleet.DeleteFleetOutput {
+    pub fn deleteFleet(self: *Self, allocator: std.mem.Allocator, input: delete_fleet.DeleteFleetInput, options: CallOptions) !delete_fleet.DeleteFleetOutput {
         return delete_fleet.execute(self, allocator, input, options);
     }
 
     /// Deletes a build project. When you delete a project, its builds are not
     /// deleted.
-    pub fn deleteProject(self: *Self, allocator: std.mem.Allocator, input: delete_project.DeleteProjectInput, options: delete_project.Options) !delete_project.DeleteProjectOutput {
+    pub fn deleteProject(self: *Self, allocator: std.mem.Allocator, input: delete_project.DeleteProjectInput, options: CallOptions) !delete_project.DeleteProjectOutput {
         return delete_project.execute(self, allocator, input, options);
     }
 
     /// Deletes a report.
-    pub fn deleteReport(self: *Self, allocator: std.mem.Allocator, input: delete_report.DeleteReportInput, options: delete_report.Options) !delete_report.DeleteReportOutput {
+    pub fn deleteReport(self: *Self, allocator: std.mem.Allocator, input: delete_report.DeleteReportInput, options: CallOptions) !delete_report.DeleteReportOutput {
         return delete_report.execute(self, allocator, input, options);
     }
 
     /// Deletes a report group. Before you delete a report group, you must delete
     /// its reports.
-    pub fn deleteReportGroup(self: *Self, allocator: std.mem.Allocator, input: delete_report_group.DeleteReportGroupInput, options: delete_report_group.Options) !delete_report_group.DeleteReportGroupOutput {
+    pub fn deleteReportGroup(self: *Self, allocator: std.mem.Allocator, input: delete_report_group.DeleteReportGroupInput, options: CallOptions) !delete_report_group.DeleteReportGroupOutput {
         return delete_report_group.execute(self, allocator, input, options);
     }
 
     /// Deletes a resource policy that is identified by its resource ARN.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials.
-    pub fn deleteSourceCredentials(self: *Self, allocator: std.mem.Allocator, input: delete_source_credentials.DeleteSourceCredentialsInput, options: delete_source_credentials.Options) !delete_source_credentials.DeleteSourceCredentialsOutput {
+    pub fn deleteSourceCredentials(self: *Self, allocator: std.mem.Allocator, input: delete_source_credentials.DeleteSourceCredentialsInput, options: CallOptions) !delete_source_credentials.DeleteSourceCredentialsOutput {
         return delete_source_credentials.execute(self, allocator, input, options);
     }
 
@@ -215,27 +216,27 @@ pub const Client = struct {
     /// Bitbucket repository, stops CodeBuild from rebuilding the source code every
     /// time a code
     /// change is pushed to the repository.
-    pub fn deleteWebhook(self: *Self, allocator: std.mem.Allocator, input: delete_webhook.DeleteWebhookInput, options: delete_webhook.Options) !delete_webhook.DeleteWebhookOutput {
+    pub fn deleteWebhook(self: *Self, allocator: std.mem.Allocator, input: delete_webhook.DeleteWebhookInput, options: CallOptions) !delete_webhook.DeleteWebhookOutput {
         return delete_webhook.execute(self, allocator, input, options);
     }
 
     /// Retrieves one or more code coverage reports.
-    pub fn describeCodeCoverages(self: *Self, allocator: std.mem.Allocator, input: describe_code_coverages.DescribeCodeCoveragesInput, options: describe_code_coverages.Options) !describe_code_coverages.DescribeCodeCoveragesOutput {
+    pub fn describeCodeCoverages(self: *Self, allocator: std.mem.Allocator, input: describe_code_coverages.DescribeCodeCoveragesInput, options: CallOptions) !describe_code_coverages.DescribeCodeCoveragesOutput {
         return describe_code_coverages.execute(self, allocator, input, options);
     }
 
     /// Returns a list of details about test cases for a report.
-    pub fn describeTestCases(self: *Self, allocator: std.mem.Allocator, input: describe_test_cases.DescribeTestCasesInput, options: describe_test_cases.Options) !describe_test_cases.DescribeTestCasesOutput {
+    pub fn describeTestCases(self: *Self, allocator: std.mem.Allocator, input: describe_test_cases.DescribeTestCasesInput, options: CallOptions) !describe_test_cases.DescribeTestCasesOutput {
         return describe_test_cases.execute(self, allocator, input, options);
     }
 
     /// Analyzes and accumulates test report values for the specified test reports.
-    pub fn getReportGroupTrend(self: *Self, allocator: std.mem.Allocator, input: get_report_group_trend.GetReportGroupTrendInput, options: get_report_group_trend.Options) !get_report_group_trend.GetReportGroupTrendOutput {
+    pub fn getReportGroupTrend(self: *Self, allocator: std.mem.Allocator, input: get_report_group_trend.GetReportGroupTrendInput, options: CallOptions) !get_report_group_trend.GetReportGroupTrendOutput {
         return get_report_group_trend.execute(self, allocator, input, options);
     }
 
     /// Gets a resource policy that is identified by its resource ARN.
-    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: get_resource_policy.Options) !get_resource_policy.GetResourcePolicyOutput {
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
         return get_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -243,118 +244,118 @@ pub const Client = struct {
     /// its
     /// source code stored in a GitHub, GitHub Enterprise, GitLab, GitLab Self
     /// Managed, or Bitbucket repository.
-    pub fn importSourceCredentials(self: *Self, allocator: std.mem.Allocator, input: import_source_credentials.ImportSourceCredentialsInput, options: import_source_credentials.Options) !import_source_credentials.ImportSourceCredentialsOutput {
+    pub fn importSourceCredentials(self: *Self, allocator: std.mem.Allocator, input: import_source_credentials.ImportSourceCredentialsInput, options: CallOptions) !import_source_credentials.ImportSourceCredentialsOutput {
         return import_source_credentials.execute(self, allocator, input, options);
     }
 
     /// Resets the cache for a project.
-    pub fn invalidateProjectCache(self: *Self, allocator: std.mem.Allocator, input: invalidate_project_cache.InvalidateProjectCacheInput, options: invalidate_project_cache.Options) !invalidate_project_cache.InvalidateProjectCacheOutput {
+    pub fn invalidateProjectCache(self: *Self, allocator: std.mem.Allocator, input: invalidate_project_cache.InvalidateProjectCacheInput, options: CallOptions) !invalidate_project_cache.InvalidateProjectCacheOutput {
         return invalidate_project_cache.execute(self, allocator, input, options);
     }
 
     /// Retrieves the identifiers of your build batches in the current region.
-    pub fn listBuildBatches(self: *Self, allocator: std.mem.Allocator, input: list_build_batches.ListBuildBatchesInput, options: list_build_batches.Options) !list_build_batches.ListBuildBatchesOutput {
+    pub fn listBuildBatches(self: *Self, allocator: std.mem.Allocator, input: list_build_batches.ListBuildBatchesInput, options: CallOptions) !list_build_batches.ListBuildBatchesOutput {
         return list_build_batches.execute(self, allocator, input, options);
     }
 
     /// Retrieves the identifiers of the build batches for a specific project.
-    pub fn listBuildBatchesForProject(self: *Self, allocator: std.mem.Allocator, input: list_build_batches_for_project.ListBuildBatchesForProjectInput, options: list_build_batches_for_project.Options) !list_build_batches_for_project.ListBuildBatchesForProjectOutput {
+    pub fn listBuildBatchesForProject(self: *Self, allocator: std.mem.Allocator, input: list_build_batches_for_project.ListBuildBatchesForProjectInput, options: CallOptions) !list_build_batches_for_project.ListBuildBatchesForProjectOutput {
         return list_build_batches_for_project.execute(self, allocator, input, options);
     }
 
     /// Gets a list of build IDs, with each build ID representing a single build.
-    pub fn listBuilds(self: *Self, allocator: std.mem.Allocator, input: list_builds.ListBuildsInput, options: list_builds.Options) !list_builds.ListBuildsOutput {
+    pub fn listBuilds(self: *Self, allocator: std.mem.Allocator, input: list_builds.ListBuildsInput, options: CallOptions) !list_builds.ListBuildsOutput {
         return list_builds.execute(self, allocator, input, options);
     }
 
     /// Gets a list of build identifiers for the specified build project, with each
     /// build
     /// identifier representing a single build.
-    pub fn listBuildsForProject(self: *Self, allocator: std.mem.Allocator, input: list_builds_for_project.ListBuildsForProjectInput, options: list_builds_for_project.Options) !list_builds_for_project.ListBuildsForProjectOutput {
+    pub fn listBuildsForProject(self: *Self, allocator: std.mem.Allocator, input: list_builds_for_project.ListBuildsForProjectInput, options: CallOptions) !list_builds_for_project.ListBuildsForProjectOutput {
         return list_builds_for_project.execute(self, allocator, input, options);
     }
 
     /// Gets a list of command executions for a sandbox.
-    pub fn listCommandExecutionsForSandbox(self: *Self, allocator: std.mem.Allocator, input: list_command_executions_for_sandbox.ListCommandExecutionsForSandboxInput, options: list_command_executions_for_sandbox.Options) !list_command_executions_for_sandbox.ListCommandExecutionsForSandboxOutput {
+    pub fn listCommandExecutionsForSandbox(self: *Self, allocator: std.mem.Allocator, input: list_command_executions_for_sandbox.ListCommandExecutionsForSandboxInput, options: CallOptions) !list_command_executions_for_sandbox.ListCommandExecutionsForSandboxOutput {
         return list_command_executions_for_sandbox.execute(self, allocator, input, options);
     }
 
     /// Gets information about Docker images that are managed by CodeBuild.
-    pub fn listCuratedEnvironmentImages(self: *Self, allocator: std.mem.Allocator, input: list_curated_environment_images.ListCuratedEnvironmentImagesInput, options: list_curated_environment_images.Options) !list_curated_environment_images.ListCuratedEnvironmentImagesOutput {
+    pub fn listCuratedEnvironmentImages(self: *Self, allocator: std.mem.Allocator, input: list_curated_environment_images.ListCuratedEnvironmentImagesInput, options: CallOptions) !list_curated_environment_images.ListCuratedEnvironmentImagesOutput {
         return list_curated_environment_images.execute(self, allocator, input, options);
     }
 
     /// Gets a list of compute fleet names with each compute fleet name representing
     /// a single compute fleet.
-    pub fn listFleets(self: *Self, allocator: std.mem.Allocator, input: list_fleets.ListFleetsInput, options: list_fleets.Options) !list_fleets.ListFleetsOutput {
+    pub fn listFleets(self: *Self, allocator: std.mem.Allocator, input: list_fleets.ListFleetsInput, options: CallOptions) !list_fleets.ListFleetsOutput {
         return list_fleets.execute(self, allocator, input, options);
     }
 
     /// Gets a list of build project names, with each build project name
     /// representing a single
     /// build project.
-    pub fn listProjects(self: *Self, allocator: std.mem.Allocator, input: list_projects.ListProjectsInput, options: list_projects.Options) !list_projects.ListProjectsOutput {
+    pub fn listProjects(self: *Self, allocator: std.mem.Allocator, input: list_projects.ListProjectsInput, options: CallOptions) !list_projects.ListProjectsOutput {
         return list_projects.execute(self, allocator, input, options);
     }
 
     /// Gets a list ARNs for the report groups in the current Amazon Web Services
     /// account.
-    pub fn listReportGroups(self: *Self, allocator: std.mem.Allocator, input: list_report_groups.ListReportGroupsInput, options: list_report_groups.Options) !list_report_groups.ListReportGroupsOutput {
+    pub fn listReportGroups(self: *Self, allocator: std.mem.Allocator, input: list_report_groups.ListReportGroupsInput, options: CallOptions) !list_report_groups.ListReportGroupsOutput {
         return list_report_groups.execute(self, allocator, input, options);
     }
 
     /// Returns a list of ARNs for the reports in the current Amazon Web Services
     /// account.
-    pub fn listReports(self: *Self, allocator: std.mem.Allocator, input: list_reports.ListReportsInput, options: list_reports.Options) !list_reports.ListReportsOutput {
+    pub fn listReports(self: *Self, allocator: std.mem.Allocator, input: list_reports.ListReportsInput, options: CallOptions) !list_reports.ListReportsOutput {
         return list_reports.execute(self, allocator, input, options);
     }
 
     /// Returns a list of ARNs for the reports that belong to a `ReportGroup`.
-    pub fn listReportsForReportGroup(self: *Self, allocator: std.mem.Allocator, input: list_reports_for_report_group.ListReportsForReportGroupInput, options: list_reports_for_report_group.Options) !list_reports_for_report_group.ListReportsForReportGroupOutput {
+    pub fn listReportsForReportGroup(self: *Self, allocator: std.mem.Allocator, input: list_reports_for_report_group.ListReportsForReportGroupInput, options: CallOptions) !list_reports_for_report_group.ListReportsForReportGroupOutput {
         return list_reports_for_report_group.execute(self, allocator, input, options);
     }
 
     /// Gets a list of sandboxes.
-    pub fn listSandboxes(self: *Self, allocator: std.mem.Allocator, input: list_sandboxes.ListSandboxesInput, options: list_sandboxes.Options) !list_sandboxes.ListSandboxesOutput {
+    pub fn listSandboxes(self: *Self, allocator: std.mem.Allocator, input: list_sandboxes.ListSandboxesInput, options: CallOptions) !list_sandboxes.ListSandboxesOutput {
         return list_sandboxes.execute(self, allocator, input, options);
     }
 
     /// Gets a list of sandboxes for a given project.
-    pub fn listSandboxesForProject(self: *Self, allocator: std.mem.Allocator, input: list_sandboxes_for_project.ListSandboxesForProjectInput, options: list_sandboxes_for_project.Options) !list_sandboxes_for_project.ListSandboxesForProjectOutput {
+    pub fn listSandboxesForProject(self: *Self, allocator: std.mem.Allocator, input: list_sandboxes_for_project.ListSandboxesForProjectInput, options: CallOptions) !list_sandboxes_for_project.ListSandboxesForProjectOutput {
         return list_sandboxes_for_project.execute(self, allocator, input, options);
     }
 
     /// Gets a list of projects that are shared with other Amazon Web Services
     /// accounts or users.
-    pub fn listSharedProjects(self: *Self, allocator: std.mem.Allocator, input: list_shared_projects.ListSharedProjectsInput, options: list_shared_projects.Options) !list_shared_projects.ListSharedProjectsOutput {
+    pub fn listSharedProjects(self: *Self, allocator: std.mem.Allocator, input: list_shared_projects.ListSharedProjectsInput, options: CallOptions) !list_shared_projects.ListSharedProjectsOutput {
         return list_shared_projects.execute(self, allocator, input, options);
     }
 
     /// Gets a list of report groups that are shared with other Amazon Web Services
     /// accounts or users.
-    pub fn listSharedReportGroups(self: *Self, allocator: std.mem.Allocator, input: list_shared_report_groups.ListSharedReportGroupsInput, options: list_shared_report_groups.Options) !list_shared_report_groups.ListSharedReportGroupsOutput {
+    pub fn listSharedReportGroups(self: *Self, allocator: std.mem.Allocator, input: list_shared_report_groups.ListSharedReportGroupsInput, options: CallOptions) !list_shared_report_groups.ListSharedReportGroupsOutput {
         return list_shared_report_groups.execute(self, allocator, input, options);
     }
 
     /// Returns a list of `SourceCredentialsInfo` objects.
-    pub fn listSourceCredentials(self: *Self, allocator: std.mem.Allocator, input: list_source_credentials.ListSourceCredentialsInput, options: list_source_credentials.Options) !list_source_credentials.ListSourceCredentialsOutput {
+    pub fn listSourceCredentials(self: *Self, allocator: std.mem.Allocator, input: list_source_credentials.ListSourceCredentialsInput, options: CallOptions) !list_source_credentials.ListSourceCredentialsOutput {
         return list_source_credentials.execute(self, allocator, input, options);
     }
 
     /// Stores a resource policy for the ARN of a `Project` or
     /// `ReportGroup` object.
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Restarts a build.
-    pub fn retryBuild(self: *Self, allocator: std.mem.Allocator, input: retry_build.RetryBuildInput, options: retry_build.Options) !retry_build.RetryBuildOutput {
+    pub fn retryBuild(self: *Self, allocator: std.mem.Allocator, input: retry_build.RetryBuildInput, options: CallOptions) !retry_build.RetryBuildOutput {
         return retry_build.execute(self, allocator, input, options);
     }
 
     /// Restarts a failed batch build. Only batch builds that have failed can be
     /// retried.
-    pub fn retryBuildBatch(self: *Self, allocator: std.mem.Allocator, input: retry_build_batch.RetryBuildBatchInput, options: retry_build_batch.Options) !retry_build_batch.RetryBuildBatchOutput {
+    pub fn retryBuildBatch(self: *Self, allocator: std.mem.Allocator, input: retry_build_batch.RetryBuildBatchInput, options: CallOptions) !retry_build_batch.RetryBuildBatchOutput {
         return retry_build_batch.execute(self, allocator, input, options);
     }
 
@@ -366,52 +367,52 @@ pub const Client = struct {
     /// You can also start a build run by overriding some of the build settings in
     /// the project. The overrides only apply for that
     /// specific start build request. The settings in the project are unaltered.
-    pub fn startBuild(self: *Self, allocator: std.mem.Allocator, input: start_build.StartBuildInput, options: start_build.Options) !start_build.StartBuildOutput {
+    pub fn startBuild(self: *Self, allocator: std.mem.Allocator, input: start_build.StartBuildInput, options: CallOptions) !start_build.StartBuildOutput {
         return start_build.execute(self, allocator, input, options);
     }
 
     /// Starts a batch build for a project.
-    pub fn startBuildBatch(self: *Self, allocator: std.mem.Allocator, input: start_build_batch.StartBuildBatchInput, options: start_build_batch.Options) !start_build_batch.StartBuildBatchOutput {
+    pub fn startBuildBatch(self: *Self, allocator: std.mem.Allocator, input: start_build_batch.StartBuildBatchInput, options: CallOptions) !start_build_batch.StartBuildBatchOutput {
         return start_build_batch.execute(self, allocator, input, options);
     }
 
     /// Starts a command execution.
-    pub fn startCommandExecution(self: *Self, allocator: std.mem.Allocator, input: start_command_execution.StartCommandExecutionInput, options: start_command_execution.Options) !start_command_execution.StartCommandExecutionOutput {
+    pub fn startCommandExecution(self: *Self, allocator: std.mem.Allocator, input: start_command_execution.StartCommandExecutionInput, options: CallOptions) !start_command_execution.StartCommandExecutionOutput {
         return start_command_execution.execute(self, allocator, input, options);
     }
 
     /// Starts a sandbox.
-    pub fn startSandbox(self: *Self, allocator: std.mem.Allocator, input: start_sandbox.StartSandboxInput, options: start_sandbox.Options) !start_sandbox.StartSandboxOutput {
+    pub fn startSandbox(self: *Self, allocator: std.mem.Allocator, input: start_sandbox.StartSandboxInput, options: CallOptions) !start_sandbox.StartSandboxOutput {
         return start_sandbox.execute(self, allocator, input, options);
     }
 
     /// Starts a sandbox connection.
-    pub fn startSandboxConnection(self: *Self, allocator: std.mem.Allocator, input: start_sandbox_connection.StartSandboxConnectionInput, options: start_sandbox_connection.Options) !start_sandbox_connection.StartSandboxConnectionOutput {
+    pub fn startSandboxConnection(self: *Self, allocator: std.mem.Allocator, input: start_sandbox_connection.StartSandboxConnectionInput, options: CallOptions) !start_sandbox_connection.StartSandboxConnectionOutput {
         return start_sandbox_connection.execute(self, allocator, input, options);
     }
 
     /// Attempts to stop running a build.
-    pub fn stopBuild(self: *Self, allocator: std.mem.Allocator, input: stop_build.StopBuildInput, options: stop_build.Options) !stop_build.StopBuildOutput {
+    pub fn stopBuild(self: *Self, allocator: std.mem.Allocator, input: stop_build.StopBuildInput, options: CallOptions) !stop_build.StopBuildOutput {
         return stop_build.execute(self, allocator, input, options);
     }
 
     /// Stops a running batch build.
-    pub fn stopBuildBatch(self: *Self, allocator: std.mem.Allocator, input: stop_build_batch.StopBuildBatchInput, options: stop_build_batch.Options) !stop_build_batch.StopBuildBatchOutput {
+    pub fn stopBuildBatch(self: *Self, allocator: std.mem.Allocator, input: stop_build_batch.StopBuildBatchInput, options: CallOptions) !stop_build_batch.StopBuildBatchOutput {
         return stop_build_batch.execute(self, allocator, input, options);
     }
 
     /// Stops a sandbox.
-    pub fn stopSandbox(self: *Self, allocator: std.mem.Allocator, input: stop_sandbox.StopSandboxInput, options: stop_sandbox.Options) !stop_sandbox.StopSandboxOutput {
+    pub fn stopSandbox(self: *Self, allocator: std.mem.Allocator, input: stop_sandbox.StopSandboxInput, options: CallOptions) !stop_sandbox.StopSandboxOutput {
         return stop_sandbox.execute(self, allocator, input, options);
     }
 
     /// Updates a compute fleet.
-    pub fn updateFleet(self: *Self, allocator: std.mem.Allocator, input: update_fleet.UpdateFleetInput, options: update_fleet.Options) !update_fleet.UpdateFleetOutput {
+    pub fn updateFleet(self: *Self, allocator: std.mem.Allocator, input: update_fleet.UpdateFleetInput, options: CallOptions) !update_fleet.UpdateFleetOutput {
         return update_fleet.execute(self, allocator, input, options);
     }
 
     /// Changes the settings of a build project.
-    pub fn updateProject(self: *Self, allocator: std.mem.Allocator, input: update_project.UpdateProjectInput, options: update_project.Options) !update_project.UpdateProjectOutput {
+    pub fn updateProject(self: *Self, allocator: std.mem.Allocator, input: update_project.UpdateProjectInput, options: CallOptions) !update_project.UpdateProjectOutput {
         return update_project.execute(self, allocator, input, options);
     }
 
@@ -454,19 +455,19 @@ pub const Client = struct {
     /// also recommend that you validate any artifacts with their checksums to make
     /// sure that the
     /// correct artifacts are being downloaded.
-    pub fn updateProjectVisibility(self: *Self, allocator: std.mem.Allocator, input: update_project_visibility.UpdateProjectVisibilityInput, options: update_project_visibility.Options) !update_project_visibility.UpdateProjectVisibilityOutput {
+    pub fn updateProjectVisibility(self: *Self, allocator: std.mem.Allocator, input: update_project_visibility.UpdateProjectVisibilityInput, options: CallOptions) !update_project_visibility.UpdateProjectVisibilityOutput {
         return update_project_visibility.execute(self, allocator, input, options);
     }
 
     /// Updates a report group.
-    pub fn updateReportGroup(self: *Self, allocator: std.mem.Allocator, input: update_report_group.UpdateReportGroupInput, options: update_report_group.Options) !update_report_group.UpdateReportGroupOutput {
+    pub fn updateReportGroup(self: *Self, allocator: std.mem.Allocator, input: update_report_group.UpdateReportGroupInput, options: CallOptions) !update_report_group.UpdateReportGroupOutput {
         return update_report_group.execute(self, allocator, input, options);
     }
 
     /// Updates the webhook associated with an CodeBuild build project.
     ///
     /// If you use Bitbucket for your repository, `rotateSecret` is ignored.
-    pub fn updateWebhook(self: *Self, allocator: std.mem.Allocator, input: update_webhook.UpdateWebhookInput, options: update_webhook.Options) !update_webhook.UpdateWebhookOutput {
+    pub fn updateWebhook(self: *Self, allocator: std.mem.Allocator, input: update_webhook.UpdateWebhookInput, options: CallOptions) !update_webhook.UpdateWebhookOutput {
         return update_webhook.execute(self, allocator, input, options);
     }
 

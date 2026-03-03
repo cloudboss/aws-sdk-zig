@@ -13,6 +13,7 @@ const publish_metrics = @import("publish_metrics.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_environment = @import("update_environment.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -46,31 +47,31 @@ pub const Client = struct {
     /// Creates a CLI token for the Airflow CLI. To learn more, see [Creating an
     /// Apache Airflow CLI
     /// token](https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-cli.html).
-    pub fn createCliToken(self: *Self, allocator: std.mem.Allocator, input: create_cli_token.CreateCliTokenInput, options: create_cli_token.Options) !create_cli_token.CreateCliTokenOutput {
+    pub fn createCliToken(self: *Self, allocator: std.mem.Allocator, input: create_cli_token.CreateCliTokenInput, options: CallOptions) !create_cli_token.CreateCliTokenOutput {
         return create_cli_token.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon Managed Workflows for Apache Airflow (Amazon MWAA)
     /// environment.
-    pub fn createEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_environment.CreateEnvironmentInput, options: create_environment.Options) !create_environment.CreateEnvironmentOutput {
+    pub fn createEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_environment.CreateEnvironmentInput, options: CallOptions) !create_environment.CreateEnvironmentOutput {
         return create_environment.execute(self, allocator, input, options);
     }
 
     /// Creates a web login token for the Airflow Web UI. To learn more, see
     /// [Creating an Apache Airflow web login
     /// token](https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-web.html).
-    pub fn createWebLoginToken(self: *Self, allocator: std.mem.Allocator, input: create_web_login_token.CreateWebLoginTokenInput, options: create_web_login_token.Options) !create_web_login_token.CreateWebLoginTokenOutput {
+    pub fn createWebLoginToken(self: *Self, allocator: std.mem.Allocator, input: create_web_login_token.CreateWebLoginTokenInput, options: CallOptions) !create_web_login_token.CreateWebLoginTokenOutput {
         return create_web_login_token.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Managed Workflows for Apache Airflow (Amazon MWAA)
     /// environment.
-    pub fn deleteEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_environment.DeleteEnvironmentInput, options: delete_environment.Options) !delete_environment.DeleteEnvironmentOutput {
+    pub fn deleteEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_environment.DeleteEnvironmentInput, options: CallOptions) !delete_environment.DeleteEnvironmentOutput {
         return delete_environment.execute(self, allocator, input, options);
     }
 
     /// Describes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
-    pub fn getEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_environment.GetEnvironmentInput, options: get_environment.Options) !get_environment.GetEnvironmentOutput {
+    pub fn getEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_environment.GetEnvironmentInput, options: CallOptions) !get_environment.GetEnvironmentOutput {
         return get_environment.execute(self, allocator, input, options);
     }
 
@@ -78,41 +79,41 @@ pub const Client = struct {
     /// inputs. To
     /// learn more, see [Using the Apache Airflow REST
     /// API](https://docs.aws.amazon.com/mwaa/latest/userguide/access-mwaa-apache-airflow-rest-api.html)
-    pub fn invokeRestApi(self: *Self, allocator: std.mem.Allocator, input: invoke_rest_api.InvokeRestApiInput, options: invoke_rest_api.Options) !invoke_rest_api.InvokeRestApiOutput {
+    pub fn invokeRestApi(self: *Self, allocator: std.mem.Allocator, input: invoke_rest_api.InvokeRestApiInput, options: CallOptions) !invoke_rest_api.InvokeRestApiOutput {
         return invoke_rest_api.execute(self, allocator, input, options);
     }
 
     /// Lists the Amazon Managed Workflows for Apache Airflow (MWAA) environments.
-    pub fn listEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_environments.ListEnvironmentsInput, options: list_environments.Options) !list_environments.ListEnvironmentsOutput {
+    pub fn listEnvironments(self: *Self, allocator: std.mem.Allocator, input: list_environments.ListEnvironmentsInput, options: CallOptions) !list_environments.ListEnvironmentsOutput {
         return list_environments.execute(self, allocator, input, options);
     }
 
     /// Lists the key-value tag pairs associated to the Amazon Managed Workflows for
     /// Apache Airflow (MWAA) environment. For example, `"Environment": "Staging"`.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// **Internal only**. Publishes environment health metrics to Amazon
     /// CloudWatch.
-    pub fn publishMetrics(self: *Self, allocator: std.mem.Allocator, input: publish_metrics.PublishMetricsInput, options: publish_metrics.Options) !publish_metrics.PublishMetricsOutput {
+    pub fn publishMetrics(self: *Self, allocator: std.mem.Allocator, input: publish_metrics.PublishMetricsInput, options: CallOptions) !publish_metrics.PublishMetricsOutput {
         return publish_metrics.execute(self, allocator, input, options);
     }
 
     /// Associates key-value tag pairs to your Amazon Managed Workflows for Apache
     /// Airflow (MWAA) environment.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes key-value tag pairs associated to your Amazon Managed Workflows for
     /// Apache Airflow (MWAA) environment. For example, `"Environment": "Staging"`.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
-    pub fn updateEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_environment.UpdateEnvironmentInput, options: update_environment.Options) !update_environment.UpdateEnvironmentOutput {
+    pub fn updateEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_environment.UpdateEnvironmentInput, options: CallOptions) !update_environment.UpdateEnvironmentOutput {
         return update_environment.execute(self, allocator, input, options);
     }
 

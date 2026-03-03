@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ClusterAssociatedToSchedule = @import("cluster_associated_to_schedule.zig").ClusterAssociatedToSchedule;
 const Tag = @import("tag.zig").Tag;
@@ -17,13 +18,9 @@ pub const ModifySnapshotScheduleInput = struct {
     schedule_identifier: []const u8,
 };
 
-const ModifySnapshotScheduleOutput = @import("snapshot_schedule.zig").SnapshotSchedule;
+pub const ModifySnapshotScheduleOutput = @import("snapshot_schedule.zig").SnapshotSchedule;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifySnapshotScheduleInput, options: Options) !ModifySnapshotScheduleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifySnapshotScheduleInput, options: CallOptions) !ModifySnapshotScheduleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

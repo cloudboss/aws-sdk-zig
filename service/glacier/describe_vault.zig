@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DescribeVaultInput = struct {
@@ -23,13 +24,9 @@ pub const DescribeVaultInput = struct {
     };
 };
 
-const DescribeVaultOutput = @import("describe_vault_output.zig").DescribeVaultOutput;
+pub const DescribeVaultOutput = @import("describe_vault_output.zig").DescribeVaultOutput;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeVaultInput, options: Options) !DescribeVaultOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeVaultInput, options: CallOptions) !DescribeVaultOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

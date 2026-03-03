@@ -76,6 +76,7 @@ const revoke_cache_security_group_ingress = @import("revoke_cache_security_group
 const start_migration = @import("start_migration.zig");
 const test_failover = @import("test_failover.zig");
 const test_migration = @import("test_migration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -131,7 +132,7 @@ pub const Client = struct {
     /// Amazon
     /// ElastiCache](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Tagging.html) in the *ElastiCache User
     /// Guide*.
-    pub fn addTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_resource.AddTagsToResourceInput, options: add_tags_to_resource.Options) !add_tags_to_resource.AddTagsToResourceOutput {
+    pub fn addTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_resource.AddTagsToResourceInput, options: CallOptions) !add_tags_to_resource.AddTagsToResourceOutput {
         return add_tags_to_resource.execute(self, allocator, input, options);
     }
 
@@ -144,7 +145,7 @@ pub const Client = struct {
     /// You cannot authorize ingress from an Amazon EC2 security group in one region
     /// to an
     /// ElastiCache cluster in another region.
-    pub fn authorizeCacheSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: authorize_cache_security_group_ingress.AuthorizeCacheSecurityGroupIngressInput, options: authorize_cache_security_group_ingress.Options) !authorize_cache_security_group_ingress.AuthorizeCacheSecurityGroupIngressOutput {
+    pub fn authorizeCacheSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: authorize_cache_security_group_ingress.AuthorizeCacheSecurityGroupIngressInput, options: CallOptions) !authorize_cache_security_group_ingress.AuthorizeCacheSecurityGroupIngressOutput {
         return authorize_cache_security_group_ingress.execute(self, allocator, input, options);
     }
 
@@ -152,7 +153,7 @@ pub const Client = struct {
     /// applying them,
     /// see [Applying Service
     /// Updates](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/applying-updates.html).
-    pub fn batchApplyUpdateAction(self: *Self, allocator: std.mem.Allocator, input: batch_apply_update_action.BatchApplyUpdateActionInput, options: batch_apply_update_action.Options) !batch_apply_update_action.BatchApplyUpdateActionOutput {
+    pub fn batchApplyUpdateAction(self: *Self, allocator: std.mem.Allocator, input: batch_apply_update_action.BatchApplyUpdateActionInput, options: CallOptions) !batch_apply_update_action.BatchApplyUpdateActionOutput {
         return batch_apply_update_action.execute(self, allocator, input, options);
     }
 
@@ -161,18 +162,18 @@ pub const Client = struct {
     /// see [Stopping
     /// Service
     /// Updates](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/stopping-self-service-updates.html).
-    pub fn batchStopUpdateAction(self: *Self, allocator: std.mem.Allocator, input: batch_stop_update_action.BatchStopUpdateActionInput, options: batch_stop_update_action.Options) !batch_stop_update_action.BatchStopUpdateActionOutput {
+    pub fn batchStopUpdateAction(self: *Self, allocator: std.mem.Allocator, input: batch_stop_update_action.BatchStopUpdateActionInput, options: CallOptions) !batch_stop_update_action.BatchStopUpdateActionOutput {
         return batch_stop_update_action.execute(self, allocator, input, options);
     }
 
     /// Complete the migration of data.
-    pub fn completeMigration(self: *Self, allocator: std.mem.Allocator, input: complete_migration.CompleteMigrationInput, options: complete_migration.Options) !complete_migration.CompleteMigrationOutput {
+    pub fn completeMigration(self: *Self, allocator: std.mem.Allocator, input: complete_migration.CompleteMigrationInput, options: CallOptions) !complete_migration.CompleteMigrationOutput {
         return complete_migration.execute(self, allocator, input, options);
     }
 
     /// Creates a copy of an existing serverless cache’s snapshot. Available for
     /// Valkey, Redis OSS and Serverless Memcached only.
-    pub fn copyServerlessCacheSnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_serverless_cache_snapshot.CopyServerlessCacheSnapshotInput, options: copy_serverless_cache_snapshot.Options) !copy_serverless_cache_snapshot.CopyServerlessCacheSnapshotOutput {
+    pub fn copyServerlessCacheSnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_serverless_cache_snapshot.CopyServerlessCacheSnapshotInput, options: CallOptions) !copy_serverless_cache_snapshot.CopyServerlessCacheSnapshotOutput {
         return copy_serverless_cache_snapshot.execute(self, allocator, input, options);
     }
 
@@ -261,7 +262,7 @@ pub const Client = struct {
     /// S3
     /// Bucket](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/backups-exporting.html#backups-exporting-grant-access) in the
     /// ElastiCache User Guide.
-    pub fn copySnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_snapshot.CopySnapshotInput, options: copy_snapshot.Options) !copy_snapshot.CopySnapshotOutput {
+    pub fn copySnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_snapshot.CopySnapshotInput, options: CallOptions) !copy_snapshot.CopySnapshotOutput {
         return copy_snapshot.execute(self, allocator, input, options);
     }
 
@@ -271,7 +272,7 @@ pub const Client = struct {
     ///
     /// This operation is not supported for Valkey or Redis OSS (cluster mode
     /// enabled) clusters.
-    pub fn createCacheCluster(self: *Self, allocator: std.mem.Allocator, input: create_cache_cluster.CreateCacheClusterInput, options: create_cache_cluster.Options) !create_cache_cluster.CreateCacheClusterOutput {
+    pub fn createCacheCluster(self: *Self, allocator: std.mem.Allocator, input: create_cache_cluster.CreateCacheClusterInput, options: CallOptions) !create_cache_cluster.CreateCacheClusterOutput {
         return create_cache_cluster.execute(self, allocator, input, options);
     }
 
@@ -294,7 +295,7 @@ pub const Client = struct {
     /// * [Parameters and
     /// Parameter
     /// Groups](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/ParameterGroups.html) in the ElastiCache User Guide.
-    pub fn createCacheParameterGroup(self: *Self, allocator: std.mem.Allocator, input: create_cache_parameter_group.CreateCacheParameterGroupInput, options: create_cache_parameter_group.Options) !create_cache_parameter_group.CreateCacheParameterGroupOutput {
+    pub fn createCacheParameterGroup(self: *Self, allocator: std.mem.Allocator, input: create_cache_parameter_group.CreateCacheParameterGroupInput, options: CallOptions) !create_cache_parameter_group.CreateCacheParameterGroupOutput {
         return create_cache_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -308,7 +309,7 @@ pub const Client = struct {
     /// inside of a
     /// VPC, use a cache subnet group instead. For more information, see
     /// [CreateCacheSubnetGroup](https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html).
-    pub fn createCacheSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: create_cache_security_group.CreateCacheSecurityGroupInput, options: create_cache_security_group.Options) !create_cache_security_group.CreateCacheSecurityGroupOutput {
+    pub fn createCacheSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: create_cache_security_group.CreateCacheSecurityGroupInput, options: CallOptions) !create_cache_security_group.CreateCacheSecurityGroupOutput {
         return create_cache_security_group.execute(self, allocator, input, options);
     }
 
@@ -317,7 +318,7 @@ pub const Client = struct {
     /// Use this parameter only when you are creating a cluster in an Amazon Virtual
     /// Private
     /// Cloud (Amazon VPC).
-    pub fn createCacheSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: create_cache_subnet_group.CreateCacheSubnetGroupInput, options: create_cache_subnet_group.Options) !create_cache_subnet_group.CreateCacheSubnetGroupOutput {
+    pub fn createCacheSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: create_cache_subnet_group.CreateCacheSubnetGroupInput, options: CallOptions) !create_cache_subnet_group.CreateCacheSubnetGroupOutput {
         return create_cache_subnet_group.execute(self, allocator, input, options);
     }
 
@@ -337,7 +338,7 @@ pub const Client = struct {
     /// name of the primary cluster that accepts writes and will replicate updates
     /// to
     /// the secondary cluster.
-    pub fn createGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: create_global_replication_group.CreateGlobalReplicationGroupInput, options: create_global_replication_group.Options) !create_global_replication_group.CreateGlobalReplicationGroupOutput {
+    pub fn createGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: create_global_replication_group.CreateGlobalReplicationGroupInput, options: CallOptions) !create_global_replication_group.CreateGlobalReplicationGroupOutput {
         return create_global_replication_group.execute(self, allocator, input, options);
     }
 
@@ -394,18 +395,18 @@ pub const Client = struct {
     /// Guide*.
     ///
     /// This operation is valid for Valkey and Redis OSS only.
-    pub fn createReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: create_replication_group.CreateReplicationGroupInput, options: create_replication_group.Options) !create_replication_group.CreateReplicationGroupOutput {
+    pub fn createReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: create_replication_group.CreateReplicationGroupInput, options: CallOptions) !create_replication_group.CreateReplicationGroupOutput {
         return create_replication_group.execute(self, allocator, input, options);
     }
 
     /// Creates a serverless cache.
-    pub fn createServerlessCache(self: *Self, allocator: std.mem.Allocator, input: create_serverless_cache.CreateServerlessCacheInput, options: create_serverless_cache.Options) !create_serverless_cache.CreateServerlessCacheOutput {
+    pub fn createServerlessCache(self: *Self, allocator: std.mem.Allocator, input: create_serverless_cache.CreateServerlessCacheInput, options: CallOptions) !create_serverless_cache.CreateServerlessCacheOutput {
         return create_serverless_cache.execute(self, allocator, input, options);
     }
 
     /// This API creates a copy of an entire ServerlessCache at a specific moment in
     /// time. Available for Valkey, Redis OSS and Serverless Memcached only.
-    pub fn createServerlessCacheSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_serverless_cache_snapshot.CreateServerlessCacheSnapshotInput, options: create_serverless_cache_snapshot.Options) !create_serverless_cache_snapshot.CreateServerlessCacheSnapshotOutput {
+    pub fn createServerlessCacheSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_serverless_cache_snapshot.CreateServerlessCacheSnapshotInput, options: CallOptions) !create_serverless_cache_snapshot.CreateServerlessCacheSnapshotOutput {
         return create_serverless_cache_snapshot.execute(self, allocator, input, options);
     }
 
@@ -414,7 +415,7 @@ pub const Client = struct {
     /// time.
     ///
     /// This operation is valid for Valkey or Redis OSS only.
-    pub fn createSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_snapshot.CreateSnapshotInput, options: create_snapshot.Options) !create_snapshot.CreateSnapshotOutput {
+    pub fn createSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_snapshot.CreateSnapshotInput, options: CallOptions) !create_snapshot.CreateSnapshotOutput {
         return create_snapshot.execute(self, allocator, input, options);
     }
 
@@ -422,7 +423,7 @@ pub const Client = struct {
     /// user. For more information, see
     /// [Using Role Based Access Control
     /// (RBAC)](http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.RBAC.html).
-    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: create_user.Options) !create_user.CreateUserOutput {
+    pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: CallOptions) !create_user.CreateUserOutput {
         return create_user.execute(self, allocator, input, options);
     }
 
@@ -430,12 +431,12 @@ pub const Client = struct {
     /// user group. For more
     /// information, see [Using Role Based Access Control
     /// (RBAC)](http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.RBAC.html)
-    pub fn createUserGroup(self: *Self, allocator: std.mem.Allocator, input: create_user_group.CreateUserGroupInput, options: create_user_group.Options) !create_user_group.CreateUserGroupOutput {
+    pub fn createUserGroup(self: *Self, allocator: std.mem.Allocator, input: create_user_group.CreateUserGroupInput, options: CallOptions) !create_user_group.CreateUserGroupOutput {
         return create_user_group.execute(self, allocator, input, options);
     }
 
     /// Decreases the number of node groups in a Global datastore
-    pub fn decreaseNodeGroupsInGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: decrease_node_groups_in_global_replication_group.DecreaseNodeGroupsInGlobalReplicationGroupInput, options: decrease_node_groups_in_global_replication_group.Options) !decrease_node_groups_in_global_replication_group.DecreaseNodeGroupsInGlobalReplicationGroupOutput {
+    pub fn decreaseNodeGroupsInGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: decrease_node_groups_in_global_replication_group.DecreaseNodeGroupsInGlobalReplicationGroupInput, options: CallOptions) !decrease_node_groups_in_global_replication_group.DecreaseNodeGroupsInGlobalReplicationGroupOutput {
         return decrease_node_groups_in_global_replication_group.execute(self, allocator, input, options);
     }
 
@@ -446,7 +447,7 @@ pub const Client = struct {
     /// a Valkey or Redis OSS (cluster mode enabled) replication group. This
     /// operation is performed with no
     /// cluster down time.
-    pub fn decreaseReplicaCount(self: *Self, allocator: std.mem.Allocator, input: decrease_replica_count.DecreaseReplicaCountInput, options: decrease_replica_count.Options) !decrease_replica_count.DecreaseReplicaCountOutput {
+    pub fn decreaseReplicaCount(self: *Self, allocator: std.mem.Allocator, input: decrease_replica_count.DecreaseReplicaCountInput, options: CallOptions) !decrease_replica_count.DecreaseReplicaCountOutput {
         return decrease_replica_count.execute(self, allocator, input, options);
     }
 
@@ -473,7 +474,7 @@ pub const Client = struct {
     ///   group
     ///
     /// * A cluster that is not in the `available` state
-    pub fn deleteCacheCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cache_cluster.DeleteCacheClusterInput, options: delete_cache_cluster.Options) !delete_cache_cluster.DeleteCacheClusterOutput {
+    pub fn deleteCacheCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cache_cluster.DeleteCacheClusterInput, options: CallOptions) !delete_cache_cluster.DeleteCacheClusterOutput {
         return delete_cache_cluster.execute(self, allocator, input, options);
     }
 
@@ -482,7 +483,7 @@ pub const Client = struct {
     /// if it is associated with any cache clusters. You cannot delete the default
     /// cache
     /// parameter groups in your account.
-    pub fn deleteCacheParameterGroup(self: *Self, allocator: std.mem.Allocator, input: delete_cache_parameter_group.DeleteCacheParameterGroupInput, options: delete_cache_parameter_group.Options) !delete_cache_parameter_group.DeleteCacheParameterGroupOutput {
+    pub fn deleteCacheParameterGroup(self: *Self, allocator: std.mem.Allocator, input: delete_cache_parameter_group.DeleteCacheParameterGroupInput, options: CallOptions) !delete_cache_parameter_group.DeleteCacheParameterGroupOutput {
         return delete_cache_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -490,7 +491,7 @@ pub const Client = struct {
     ///
     /// You cannot delete a cache security group if it is associated with any
     /// clusters.
-    pub fn deleteCacheSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: delete_cache_security_group.DeleteCacheSecurityGroupInput, options: delete_cache_security_group.Options) !delete_cache_security_group.DeleteCacheSecurityGroupOutput {
+    pub fn deleteCacheSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: delete_cache_security_group.DeleteCacheSecurityGroupInput, options: CallOptions) !delete_cache_security_group.DeleteCacheSecurityGroupOutput {
         return delete_cache_security_group.execute(self, allocator, input, options);
     }
 
@@ -499,7 +500,7 @@ pub const Client = struct {
     /// You cannot delete a default cache subnet group or one that is associated
     /// with any
     /// clusters.
-    pub fn deleteCacheSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_cache_subnet_group.DeleteCacheSubnetGroupInput, options: delete_cache_subnet_group.Options) !delete_cache_subnet_group.DeleteCacheSubnetGroupOutput {
+    pub fn deleteCacheSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_cache_subnet_group.DeleteCacheSubnetGroupInput, options: CallOptions) !delete_cache_subnet_group.DeleteCacheSubnetGroupOutput {
         return delete_cache_subnet_group.execute(self, allocator, input, options);
     }
 
@@ -527,7 +528,7 @@ pub const Client = struct {
     /// immediately begins deleting the selected resources; you cannot cancel or
     /// revert this
     /// operation.
-    pub fn deleteGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: delete_global_replication_group.DeleteGlobalReplicationGroupInput, options: delete_global_replication_group.Options) !delete_global_replication_group.DeleteGlobalReplicationGroupOutput {
+    pub fn deleteGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: delete_global_replication_group.DeleteGlobalReplicationGroupInput, options: CallOptions) !delete_global_replication_group.DeleteGlobalReplicationGroupOutput {
         return delete_global_replication_group.execute(self, allocator, input, options);
     }
 
@@ -551,7 +552,7 @@ pub const Client = struct {
     /// exception.
     ///
     /// * This operation is valid for Redis OSS only.
-    pub fn deleteReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: delete_replication_group.DeleteReplicationGroupInput, options: delete_replication_group.Options) !delete_replication_group.DeleteReplicationGroupOutput {
+    pub fn deleteReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: delete_replication_group.DeleteReplicationGroupInput, options: CallOptions) !delete_replication_group.DeleteReplicationGroupOutput {
         return delete_replication_group.execute(self, allocator, input, options);
     }
 
@@ -561,13 +562,13 @@ pub const Client = struct {
     /// snapshot.
     /// Without this permission, the API call will fail with an `Access Denied`
     /// exception.
-    pub fn deleteServerlessCache(self: *Self, allocator: std.mem.Allocator, input: delete_serverless_cache.DeleteServerlessCacheInput, options: delete_serverless_cache.Options) !delete_serverless_cache.DeleteServerlessCacheOutput {
+    pub fn deleteServerlessCache(self: *Self, allocator: std.mem.Allocator, input: delete_serverless_cache.DeleteServerlessCacheInput, options: CallOptions) !delete_serverless_cache.DeleteServerlessCacheOutput {
         return delete_serverless_cache.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing serverless cache snapshot. Available for Valkey, Redis
     /// OSS and Serverless Memcached only.
-    pub fn deleteServerlessCacheSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_serverless_cache_snapshot.DeleteServerlessCacheSnapshotInput, options: delete_serverless_cache_snapshot.Options) !delete_serverless_cache_snapshot.DeleteServerlessCacheSnapshotOutput {
+    pub fn deleteServerlessCacheSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_serverless_cache_snapshot.DeleteServerlessCacheSnapshotInput, options: CallOptions) !delete_serverless_cache_snapshot.DeleteServerlessCacheSnapshotOutput {
         return delete_serverless_cache_snapshot.execute(self, allocator, input, options);
     }
 
@@ -578,7 +579,7 @@ pub const Client = struct {
     /// revert this operation.
     ///
     /// This operation is valid for Valkey or Redis OSS only.
-    pub fn deleteSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_snapshot.DeleteSnapshotInput, options: delete_snapshot.Options) !delete_snapshot.DeleteSnapshotOutput {
+    pub fn deleteSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_snapshot.DeleteSnapshotInput, options: CallOptions) !delete_snapshot.DeleteSnapshotOutput {
         return delete_snapshot.execute(self, allocator, input, options);
     }
 
@@ -588,7 +589,7 @@ pub const Client = struct {
     /// information,
     /// see [Using Role Based Access Control
     /// (RBAC)](http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.RBAC.html).
-    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: delete_user.Options) !delete_user.DeleteUserOutput {
+    pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: CallOptions) !delete_user.DeleteUserOutput {
         return delete_user.execute(self, allocator, input, options);
     }
 
@@ -598,7 +599,7 @@ pub const Client = struct {
     /// more
     /// information, see [Using Role Based Access Control
     /// (RBAC)](http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.RBAC.html).
-    pub fn deleteUserGroup(self: *Self, allocator: std.mem.Allocator, input: delete_user_group.DeleteUserGroupInput, options: delete_user_group.Options) !delete_user_group.DeleteUserGroupOutput {
+    pub fn deleteUserGroup(self: *Self, allocator: std.mem.Allocator, input: delete_user_group.DeleteUserGroupInput, options: CallOptions) !delete_user_group.DeleteUserGroupOutput {
         return delete_user_group.execute(self, allocator, input, options);
     }
 
@@ -631,24 +632,24 @@ pub const Client = struct {
     /// If cache nodes are currently being removed from the cluster, no endpoint
     /// information
     /// for the removed nodes is displayed.
-    pub fn describeCacheClusters(self: *Self, allocator: std.mem.Allocator, input: describe_cache_clusters.DescribeCacheClustersInput, options: describe_cache_clusters.Options) !describe_cache_clusters.DescribeCacheClustersOutput {
+    pub fn describeCacheClusters(self: *Self, allocator: std.mem.Allocator, input: describe_cache_clusters.DescribeCacheClustersInput, options: CallOptions) !describe_cache_clusters.DescribeCacheClustersOutput {
         return describe_cache_clusters.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the available cache engines and their versions.
-    pub fn describeCacheEngineVersions(self: *Self, allocator: std.mem.Allocator, input: describe_cache_engine_versions.DescribeCacheEngineVersionsInput, options: describe_cache_engine_versions.Options) !describe_cache_engine_versions.DescribeCacheEngineVersionsOutput {
+    pub fn describeCacheEngineVersions(self: *Self, allocator: std.mem.Allocator, input: describe_cache_engine_versions.DescribeCacheEngineVersionsInput, options: CallOptions) !describe_cache_engine_versions.DescribeCacheEngineVersionsOutput {
         return describe_cache_engine_versions.execute(self, allocator, input, options);
     }
 
     /// Returns a list of cache parameter group descriptions. If a cache parameter
     /// group name
     /// is specified, the list contains only the descriptions for that group.
-    pub fn describeCacheParameterGroups(self: *Self, allocator: std.mem.Allocator, input: describe_cache_parameter_groups.DescribeCacheParameterGroupsInput, options: describe_cache_parameter_groups.Options) !describe_cache_parameter_groups.DescribeCacheParameterGroupsOutput {
+    pub fn describeCacheParameterGroups(self: *Self, allocator: std.mem.Allocator, input: describe_cache_parameter_groups.DescribeCacheParameterGroupsInput, options: CallOptions) !describe_cache_parameter_groups.DescribeCacheParameterGroupsOutput {
         return describe_cache_parameter_groups.execute(self, allocator, input, options);
     }
 
     /// Returns the detailed parameter list for a particular cache parameter group.
-    pub fn describeCacheParameters(self: *Self, allocator: std.mem.Allocator, input: describe_cache_parameters.DescribeCacheParametersInput, options: describe_cache_parameters.Options) !describe_cache_parameters.DescribeCacheParametersOutput {
+    pub fn describeCacheParameters(self: *Self, allocator: std.mem.Allocator, input: describe_cache_parameters.DescribeCacheParametersInput, options: CallOptions) !describe_cache_parameters.DescribeCacheParametersOutput {
         return describe_cache_parameters.execute(self, allocator, input, options);
     }
 
@@ -657,7 +658,7 @@ pub const Client = struct {
     /// specified, the list contains only the description of that group. This
     /// applicable only
     /// when you have ElastiCache in Classic setup
-    pub fn describeCacheSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: describe_cache_security_groups.DescribeCacheSecurityGroupsInput, options: describe_cache_security_groups.Options) !describe_cache_security_groups.DescribeCacheSecurityGroupsOutput {
+    pub fn describeCacheSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: describe_cache_security_groups.DescribeCacheSecurityGroupsInput, options: CallOptions) !describe_cache_security_groups.DescribeCacheSecurityGroupsOutput {
         return describe_cache_security_groups.execute(self, allocator, input, options);
     }
 
@@ -667,14 +668,14 @@ pub const Client = struct {
     /// when you have ElastiCache in VPC setup. All ElastiCache clusters now launch
     /// in VPC by
     /// default.
-    pub fn describeCacheSubnetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_cache_subnet_groups.DescribeCacheSubnetGroupsInput, options: describe_cache_subnet_groups.Options) !describe_cache_subnet_groups.DescribeCacheSubnetGroupsOutput {
+    pub fn describeCacheSubnetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_cache_subnet_groups.DescribeCacheSubnetGroupsInput, options: CallOptions) !describe_cache_subnet_groups.DescribeCacheSubnetGroupsOutput {
         return describe_cache_subnet_groups.execute(self, allocator, input, options);
     }
 
     /// Returns the default engine and system parameter information for the
     /// specified cache
     /// engine.
-    pub fn describeEngineDefaultParameters(self: *Self, allocator: std.mem.Allocator, input: describe_engine_default_parameters.DescribeEngineDefaultParametersInput, options: describe_engine_default_parameters.Options) !describe_engine_default_parameters.DescribeEngineDefaultParametersOutput {
+    pub fn describeEngineDefaultParameters(self: *Self, allocator: std.mem.Allocator, input: describe_engine_default_parameters.DescribeEngineDefaultParametersInput, options: CallOptions) !describe_engine_default_parameters.DescribeEngineDefaultParametersOutput {
         return describe_engine_default_parameters.execute(self, allocator, input, options);
     }
 
@@ -687,14 +688,14 @@ pub const Client = struct {
     /// By default, only the events occurring within the last hour are returned;
     /// however, you
     /// can retrieve up to 14 days' worth of events if necessary.
-    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: describe_events.Options) !describe_events.DescribeEventsOutput {
+    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: CallOptions) !describe_events.DescribeEventsOutput {
         return describe_events.execute(self, allocator, input, options);
     }
 
     /// Returns information about a particular global replication group. If no
     /// identifier is
     /// specified, returns information about all Global datastores.
-    pub fn describeGlobalReplicationGroups(self: *Self, allocator: std.mem.Allocator, input: describe_global_replication_groups.DescribeGlobalReplicationGroupsInput, options: describe_global_replication_groups.Options) !describe_global_replication_groups.DescribeGlobalReplicationGroupsOutput {
+    pub fn describeGlobalReplicationGroups(self: *Self, allocator: std.mem.Allocator, input: describe_global_replication_groups.DescribeGlobalReplicationGroupsInput, options: CallOptions) !describe_global_replication_groups.DescribeGlobalReplicationGroupsOutput {
         return describe_global_replication_groups.execute(self, allocator, input, options);
     }
 
@@ -704,19 +705,19 @@ pub const Client = struct {
     /// replication groups.
     ///
     /// This operation is valid for Valkey or Redis OSS only.
-    pub fn describeReplicationGroups(self: *Self, allocator: std.mem.Allocator, input: describe_replication_groups.DescribeReplicationGroupsInput, options: describe_replication_groups.Options) !describe_replication_groups.DescribeReplicationGroupsOutput {
+    pub fn describeReplicationGroups(self: *Self, allocator: std.mem.Allocator, input: describe_replication_groups.DescribeReplicationGroupsInput, options: CallOptions) !describe_replication_groups.DescribeReplicationGroupsOutput {
         return describe_replication_groups.execute(self, allocator, input, options);
     }
 
     /// Returns information about reserved cache nodes for this account, or about a
     /// specified
     /// reserved cache node.
-    pub fn describeReservedCacheNodes(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_cache_nodes.DescribeReservedCacheNodesInput, options: describe_reserved_cache_nodes.Options) !describe_reserved_cache_nodes.DescribeReservedCacheNodesOutput {
+    pub fn describeReservedCacheNodes(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_cache_nodes.DescribeReservedCacheNodesInput, options: CallOptions) !describe_reserved_cache_nodes.DescribeReservedCacheNodesOutput {
         return describe_reserved_cache_nodes.execute(self, allocator, input, options);
     }
 
     /// Lists available reserved cache node offerings.
-    pub fn describeReservedCacheNodesOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_cache_nodes_offerings.DescribeReservedCacheNodesOfferingsInput, options: describe_reserved_cache_nodes_offerings.Options) !describe_reserved_cache_nodes_offerings.DescribeReservedCacheNodesOfferingsOutput {
+    pub fn describeReservedCacheNodesOfferings(self: *Self, allocator: std.mem.Allocator, input: describe_reserved_cache_nodes_offerings.DescribeReservedCacheNodesOfferingsInput, options: CallOptions) !describe_reserved_cache_nodes_offerings.DescribeReservedCacheNodesOfferingsOutput {
         return describe_reserved_cache_nodes_offerings.execute(self, allocator, input, options);
     }
 
@@ -726,7 +727,7 @@ pub const Client = struct {
     /// associated with
     /// a particular serverless cache. Available for Valkey, Redis OSS and
     /// Serverless Memcached only.
-    pub fn describeServerlessCacheSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_serverless_cache_snapshots.DescribeServerlessCacheSnapshotsInput, options: describe_serverless_cache_snapshots.Options) !describe_serverless_cache_snapshots.DescribeServerlessCacheSnapshotsOutput {
+    pub fn describeServerlessCacheSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_serverless_cache_snapshots.DescribeServerlessCacheSnapshotsInput, options: CallOptions) !describe_serverless_cache_snapshots.DescribeServerlessCacheSnapshotsOutput {
         return describe_serverless_cache_snapshots.execute(self, allocator, input, options);
     }
 
@@ -734,12 +735,12 @@ pub const Client = struct {
     /// If no identifier is specified, then the API returns information on all the
     /// serverless caches belonging to
     /// this Amazon Web Services account.
-    pub fn describeServerlessCaches(self: *Self, allocator: std.mem.Allocator, input: describe_serverless_caches.DescribeServerlessCachesInput, options: describe_serverless_caches.Options) !describe_serverless_caches.DescribeServerlessCachesOutput {
+    pub fn describeServerlessCaches(self: *Self, allocator: std.mem.Allocator, input: describe_serverless_caches.DescribeServerlessCachesInput, options: CallOptions) !describe_serverless_caches.DescribeServerlessCachesOutput {
         return describe_serverless_caches.execute(self, allocator, input, options);
     }
 
     /// Returns details of the service updates
-    pub fn describeServiceUpdates(self: *Self, allocator: std.mem.Allocator, input: describe_service_updates.DescribeServiceUpdatesInput, options: describe_service_updates.Options) !describe_service_updates.DescribeServiceUpdatesOutput {
+    pub fn describeServiceUpdates(self: *Self, allocator: std.mem.Allocator, input: describe_service_updates.DescribeServiceUpdatesInput, options: CallOptions) !describe_service_updates.DescribeServiceUpdatesOutput {
         return describe_service_updates.execute(self, allocator, input, options);
     }
 
@@ -751,22 +752,22 @@ pub const Client = struct {
     /// cluster.
     ///
     /// This operation is valid for Valkey or Redis OSS only.
-    pub fn describeSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_snapshots.DescribeSnapshotsInput, options: describe_snapshots.Options) !describe_snapshots.DescribeSnapshotsOutput {
+    pub fn describeSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_snapshots.DescribeSnapshotsInput, options: CallOptions) !describe_snapshots.DescribeSnapshotsOutput {
         return describe_snapshots.execute(self, allocator, input, options);
     }
 
     /// Returns details of the update actions
-    pub fn describeUpdateActions(self: *Self, allocator: std.mem.Allocator, input: describe_update_actions.DescribeUpdateActionsInput, options: describe_update_actions.Options) !describe_update_actions.DescribeUpdateActionsOutput {
+    pub fn describeUpdateActions(self: *Self, allocator: std.mem.Allocator, input: describe_update_actions.DescribeUpdateActionsInput, options: CallOptions) !describe_update_actions.DescribeUpdateActionsOutput {
         return describe_update_actions.execute(self, allocator, input, options);
     }
 
     /// Returns a list of user groups.
-    pub fn describeUserGroups(self: *Self, allocator: std.mem.Allocator, input: describe_user_groups.DescribeUserGroupsInput, options: describe_user_groups.Options) !describe_user_groups.DescribeUserGroupsOutput {
+    pub fn describeUserGroups(self: *Self, allocator: std.mem.Allocator, input: describe_user_groups.DescribeUserGroupsInput, options: CallOptions) !describe_user_groups.DescribeUserGroupsOutput {
         return describe_user_groups.execute(self, allocator, input, options);
     }
 
     /// Returns a list of users.
-    pub fn describeUsers(self: *Self, allocator: std.mem.Allocator, input: describe_users.DescribeUsersInput, options: describe_users.Options) !describe_users.DescribeUsersOutput {
+    pub fn describeUsers(self: *Self, allocator: std.mem.Allocator, input: describe_users.DescribeUsersInput, options: CallOptions) !describe_users.DescribeUsersOutput {
         return describe_users.execute(self, allocator, input, options);
     }
 
@@ -775,25 +776,25 @@ pub const Client = struct {
     /// The secondary cluster will no longer receive updates from the primary
     /// cluster, but will
     /// remain as a standalone cluster in that Amazon region.
-    pub fn disassociateGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: disassociate_global_replication_group.DisassociateGlobalReplicationGroupInput, options: disassociate_global_replication_group.Options) !disassociate_global_replication_group.DisassociateGlobalReplicationGroupOutput {
+    pub fn disassociateGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: disassociate_global_replication_group.DisassociateGlobalReplicationGroupInput, options: CallOptions) !disassociate_global_replication_group.DisassociateGlobalReplicationGroupOutput {
         return disassociate_global_replication_group.execute(self, allocator, input, options);
     }
 
     /// Provides the functionality to export the serverless cache snapshot data to
     /// Amazon S3. Available for Valkey and Redis OSS only.
-    pub fn exportServerlessCacheSnapshot(self: *Self, allocator: std.mem.Allocator, input: export_serverless_cache_snapshot.ExportServerlessCacheSnapshotInput, options: export_serverless_cache_snapshot.Options) !export_serverless_cache_snapshot.ExportServerlessCacheSnapshotOutput {
+    pub fn exportServerlessCacheSnapshot(self: *Self, allocator: std.mem.Allocator, input: export_serverless_cache_snapshot.ExportServerlessCacheSnapshotInput, options: CallOptions) !export_serverless_cache_snapshot.ExportServerlessCacheSnapshotOutput {
         return export_serverless_cache_snapshot.execute(self, allocator, input, options);
     }
 
     /// Used to failover the primary region to a secondary region. The secondary
     /// region will
     /// become primary, and all other clusters will become secondary.
-    pub fn failoverGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: failover_global_replication_group.FailoverGlobalReplicationGroupInput, options: failover_global_replication_group.Options) !failover_global_replication_group.FailoverGlobalReplicationGroupOutput {
+    pub fn failoverGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: failover_global_replication_group.FailoverGlobalReplicationGroupInput, options: CallOptions) !failover_global_replication_group.FailoverGlobalReplicationGroupOutput {
         return failover_global_replication_group.execute(self, allocator, input, options);
     }
 
     /// Increase the number of node groups in the Global datastore
-    pub fn increaseNodeGroupsInGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: increase_node_groups_in_global_replication_group.IncreaseNodeGroupsInGlobalReplicationGroupInput, options: increase_node_groups_in_global_replication_group.Options) !increase_node_groups_in_global_replication_group.IncreaseNodeGroupsInGlobalReplicationGroupOutput {
+    pub fn increaseNodeGroupsInGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: increase_node_groups_in_global_replication_group.IncreaseNodeGroupsInGlobalReplicationGroupInput, options: CallOptions) !increase_node_groups_in_global_replication_group.IncreaseNodeGroupsInGlobalReplicationGroupOutput {
         return increase_node_groups_in_global_replication_group.execute(self, allocator, input, options);
     }
 
@@ -804,7 +805,7 @@ pub const Client = struct {
     /// a Valkey or Redis OSS (cluster mode enabled) replication group. This
     /// operation is performed with no
     /// cluster down time.
-    pub fn increaseReplicaCount(self: *Self, allocator: std.mem.Allocator, input: increase_replica_count.IncreaseReplicaCountInput, options: increase_replica_count.Options) !increase_replica_count.IncreaseReplicaCountOutput {
+    pub fn increaseReplicaCount(self: *Self, allocator: std.mem.Allocator, input: increase_replica_count.IncreaseReplicaCountInput, options: CallOptions) !increase_replica_count.IncreaseReplicaCountOutput {
         return increase_replica_count.execute(self, allocator, input, options);
     }
 
@@ -816,7 +817,7 @@ pub const Client = struct {
     /// `ModifyReplicationGroup` operations to scale your cluster or replication
     /// group, the value of the `CacheNodeType` parameter must be one of the node
     /// types returned by this operation.
-    pub fn listAllowedNodeTypeModifications(self: *Self, allocator: std.mem.Allocator, input: list_allowed_node_type_modifications.ListAllowedNodeTypeModificationsInput, options: list_allowed_node_type_modifications.Options) !list_allowed_node_type_modifications.ListAllowedNodeTypeModificationsOutput {
+    pub fn listAllowedNodeTypeModifications(self: *Self, allocator: std.mem.Allocator, input: list_allowed_node_type_modifications.ListAllowedNodeTypeModificationsInput, options: CallOptions) !list_allowed_node_type_modifications.ListAllowedNodeTypeModificationsOutput {
         return list_allowed_node_type_modifications.execute(self, allocator, input, options);
     }
 
@@ -835,7 +836,7 @@ pub const Client = struct {
     ///
     /// If the cluster is not in the *available* state,
     /// `ListTagsForResource` returns an error.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -843,24 +844,24 @@ pub const Client = struct {
     /// one or more
     /// cluster configuration parameters by specifying the parameters and the new
     /// values.
-    pub fn modifyCacheCluster(self: *Self, allocator: std.mem.Allocator, input: modify_cache_cluster.ModifyCacheClusterInput, options: modify_cache_cluster.Options) !modify_cache_cluster.ModifyCacheClusterOutput {
+    pub fn modifyCacheCluster(self: *Self, allocator: std.mem.Allocator, input: modify_cache_cluster.ModifyCacheClusterInput, options: CallOptions) !modify_cache_cluster.ModifyCacheClusterOutput {
         return modify_cache_cluster.execute(self, allocator, input, options);
     }
 
     /// Modifies the parameters of a cache parameter group. You can modify up to 20
     /// parameters
     /// in a single request by submitting a list parameter name and value pairs.
-    pub fn modifyCacheParameterGroup(self: *Self, allocator: std.mem.Allocator, input: modify_cache_parameter_group.ModifyCacheParameterGroupInput, options: modify_cache_parameter_group.Options) !modify_cache_parameter_group.ModifyCacheParameterGroupOutput {
+    pub fn modifyCacheParameterGroup(self: *Self, allocator: std.mem.Allocator, input: modify_cache_parameter_group.ModifyCacheParameterGroupInput, options: CallOptions) !modify_cache_parameter_group.ModifyCacheParameterGroupOutput {
         return modify_cache_parameter_group.execute(self, allocator, input, options);
     }
 
     /// Modifies an existing cache subnet group.
-    pub fn modifyCacheSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: modify_cache_subnet_group.ModifyCacheSubnetGroupInput, options: modify_cache_subnet_group.Options) !modify_cache_subnet_group.ModifyCacheSubnetGroupOutput {
+    pub fn modifyCacheSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: modify_cache_subnet_group.ModifyCacheSubnetGroupInput, options: CallOptions) !modify_cache_subnet_group.ModifyCacheSubnetGroupOutput {
         return modify_cache_subnet_group.execute(self, allocator, input, options);
     }
 
     /// Modifies the settings for a Global datastore.
-    pub fn modifyGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: modify_global_replication_group.ModifyGlobalReplicationGroupInput, options: modify_global_replication_group.Options) !modify_global_replication_group.ModifyGlobalReplicationGroupOutput {
+    pub fn modifyGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: modify_global_replication_group.ModifyGlobalReplicationGroupInput, options: CallOptions) !modify_global_replication_group.ModifyGlobalReplicationGroupOutput {
         return modify_global_replication_group.execute(self, allocator, input, options);
     }
 
@@ -876,29 +877,29 @@ pub const Client = struct {
     /// Reference
     ///
     /// This operation is valid for Valkey or Redis OSS only.
-    pub fn modifyReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: modify_replication_group.ModifyReplicationGroupInput, options: modify_replication_group.Options) !modify_replication_group.ModifyReplicationGroupOutput {
+    pub fn modifyReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: modify_replication_group.ModifyReplicationGroupInput, options: CallOptions) !modify_replication_group.ModifyReplicationGroupOutput {
         return modify_replication_group.execute(self, allocator, input, options);
     }
 
     /// Modifies a replication group's shards (node groups) by allowing you to add
     /// shards,
     /// remove shards, or rebalance the keyspaces among existing shards.
-    pub fn modifyReplicationGroupShardConfiguration(self: *Self, allocator: std.mem.Allocator, input: modify_replication_group_shard_configuration.ModifyReplicationGroupShardConfigurationInput, options: modify_replication_group_shard_configuration.Options) !modify_replication_group_shard_configuration.ModifyReplicationGroupShardConfigurationOutput {
+    pub fn modifyReplicationGroupShardConfiguration(self: *Self, allocator: std.mem.Allocator, input: modify_replication_group_shard_configuration.ModifyReplicationGroupShardConfigurationInput, options: CallOptions) !modify_replication_group_shard_configuration.ModifyReplicationGroupShardConfigurationOutput {
         return modify_replication_group_shard_configuration.execute(self, allocator, input, options);
     }
 
     /// This API modifies the attributes of a serverless cache.
-    pub fn modifyServerlessCache(self: *Self, allocator: std.mem.Allocator, input: modify_serverless_cache.ModifyServerlessCacheInput, options: modify_serverless_cache.Options) !modify_serverless_cache.ModifyServerlessCacheOutput {
+    pub fn modifyServerlessCache(self: *Self, allocator: std.mem.Allocator, input: modify_serverless_cache.ModifyServerlessCacheInput, options: CallOptions) !modify_serverless_cache.ModifyServerlessCacheOutput {
         return modify_serverless_cache.execute(self, allocator, input, options);
     }
 
     /// Changes user password(s) and/or access string.
-    pub fn modifyUser(self: *Self, allocator: std.mem.Allocator, input: modify_user.ModifyUserInput, options: modify_user.Options) !modify_user.ModifyUserOutput {
+    pub fn modifyUser(self: *Self, allocator: std.mem.Allocator, input: modify_user.ModifyUserInput, options: CallOptions) !modify_user.ModifyUserOutput {
         return modify_user.execute(self, allocator, input, options);
     }
 
     /// Changes the list of users that belong to the user group.
-    pub fn modifyUserGroup(self: *Self, allocator: std.mem.Allocator, input: modify_user_group.ModifyUserGroupInput, options: modify_user_group.Options) !modify_user_group.ModifyUserGroupOutput {
+    pub fn modifyUserGroup(self: *Self, allocator: std.mem.Allocator, input: modify_user_group.ModifyUserGroupInput, options: CallOptions) !modify_user_group.ModifyUserGroupOutput {
         return modify_user_group.execute(self, allocator, input, options);
     }
 
@@ -907,14 +908,14 @@ pub const Client = struct {
     /// for cancellation and are non-refundable. For more information, see [Managing
     /// Costs with Reserved
     /// Nodes](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/reserved-nodes.html).
-    pub fn purchaseReservedCacheNodesOffering(self: *Self, allocator: std.mem.Allocator, input: purchase_reserved_cache_nodes_offering.PurchaseReservedCacheNodesOfferingInput, options: purchase_reserved_cache_nodes_offering.Options) !purchase_reserved_cache_nodes_offering.PurchaseReservedCacheNodesOfferingOutput {
+    pub fn purchaseReservedCacheNodesOffering(self: *Self, allocator: std.mem.Allocator, input: purchase_reserved_cache_nodes_offering.PurchaseReservedCacheNodesOfferingInput, options: CallOptions) !purchase_reserved_cache_nodes_offering.PurchaseReservedCacheNodesOfferingOutput {
         return purchase_reserved_cache_nodes_offering.execute(self, allocator, input, options);
     }
 
     /// Redistribute slots to ensure uniform distribution across existing shards in
     /// the
     /// cluster.
-    pub fn rebalanceSlotsInGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: rebalance_slots_in_global_replication_group.RebalanceSlotsInGlobalReplicationGroupInput, options: rebalance_slots_in_global_replication_group.Options) !rebalance_slots_in_global_replication_group.RebalanceSlotsInGlobalReplicationGroupOutput {
+    pub fn rebalanceSlotsInGlobalReplicationGroup(self: *Self, allocator: std.mem.Allocator, input: rebalance_slots_in_global_replication_group.RebalanceSlotsInGlobalReplicationGroupInput, options: CallOptions) !rebalance_slots_in_global_replication_group.RebalanceSlotsInGlobalReplicationGroupOutput {
         return rebalance_slots_in_global_replication_group.execute(self, allocator, input, options);
     }
 
@@ -942,7 +943,7 @@ pub const Client = struct {
     /// (cluster mode enabled) cluster
     /// reboot for the changes to be applied, see [Rebooting a
     /// Cluster](http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/nodes.rebooting.html) for an alternate process.
-    pub fn rebootCacheCluster(self: *Self, allocator: std.mem.Allocator, input: reboot_cache_cluster.RebootCacheClusterInput, options: reboot_cache_cluster.Options) !reboot_cache_cluster.RebootCacheClusterOutput {
+    pub fn rebootCacheCluster(self: *Self, allocator: std.mem.Allocator, input: reboot_cache_cluster.RebootCacheClusterInput, options: CallOptions) !reboot_cache_cluster.RebootCacheClusterOutput {
         return reboot_cache_cluster.execute(self, allocator, input, options);
     }
 
@@ -956,7 +957,7 @@ pub const Client = struct {
     /// be replicated to all nodes in the replication group. For more information,
     /// see [Resource-level
     /// permissions](http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html).
-    pub fn removeTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_resource.RemoveTagsFromResourceInput, options: remove_tags_from_resource.Options) !remove_tags_from_resource.RemoveTagsFromResourceOutput {
+    pub fn removeTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_resource.RemoveTagsFromResourceInput, options: CallOptions) !remove_tags_from_resource.RemoveTagsFromResourceOutput {
         return remove_tags_from_resource.execute(self, allocator, input, options);
     }
 
@@ -966,19 +967,19 @@ pub const Client = struct {
     /// names. To
     /// reset the entire cache parameter group, specify the `ResetAllParameters` and
     /// `CacheParameterGroupName` parameters.
-    pub fn resetCacheParameterGroup(self: *Self, allocator: std.mem.Allocator, input: reset_cache_parameter_group.ResetCacheParameterGroupInput, options: reset_cache_parameter_group.Options) !reset_cache_parameter_group.ResetCacheParameterGroupOutput {
+    pub fn resetCacheParameterGroup(self: *Self, allocator: std.mem.Allocator, input: reset_cache_parameter_group.ResetCacheParameterGroupInput, options: CallOptions) !reset_cache_parameter_group.ResetCacheParameterGroupOutput {
         return reset_cache_parameter_group.execute(self, allocator, input, options);
     }
 
     /// Revokes ingress from a cache security group. Use this operation to disallow
     /// access
     /// from an Amazon EC2 security group that had been previously authorized.
-    pub fn revokeCacheSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: revoke_cache_security_group_ingress.RevokeCacheSecurityGroupIngressInput, options: revoke_cache_security_group_ingress.Options) !revoke_cache_security_group_ingress.RevokeCacheSecurityGroupIngressOutput {
+    pub fn revokeCacheSecurityGroupIngress(self: *Self, allocator: std.mem.Allocator, input: revoke_cache_security_group_ingress.RevokeCacheSecurityGroupIngressInput, options: CallOptions) !revoke_cache_security_group_ingress.RevokeCacheSecurityGroupIngressOutput {
         return revoke_cache_security_group_ingress.execute(self, allocator, input, options);
     }
 
     /// Start the migration of data.
-    pub fn startMigration(self: *Self, allocator: std.mem.Allocator, input: start_migration.StartMigrationInput, options: start_migration.Options) !start_migration.StartMigrationOutput {
+    pub fn startMigration(self: *Self, allocator: std.mem.Allocator, input: start_migration.StartMigrationInput, options: CallOptions) !start_migration.StartMigrationOutput {
         return start_migration.execute(self, allocator, input, options);
     }
 
@@ -1048,12 +1049,12 @@ pub const Client = struct {
     /// Also see, [Testing
     /// Multi-AZ
     /// ](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/AutoFailover.html#auto-failover-test) in the *ElastiCache User Guide*.
-    pub fn testFailover(self: *Self, allocator: std.mem.Allocator, input: test_failover.TestFailoverInput, options: test_failover.Options) !test_failover.TestFailoverOutput {
+    pub fn testFailover(self: *Self, allocator: std.mem.Allocator, input: test_failover.TestFailoverInput, options: CallOptions) !test_failover.TestFailoverOutput {
         return test_failover.execute(self, allocator, input, options);
     }
 
     /// Async API to test connection between source and target replication group.
-    pub fn testMigration(self: *Self, allocator: std.mem.Allocator, input: test_migration.TestMigrationInput, options: test_migration.Options) !test_migration.TestMigrationOutput {
+    pub fn testMigration(self: *Self, allocator: std.mem.Allocator, input: test_migration.TestMigrationInput, options: CallOptions) !test_migration.TestMigrationOutput {
         return test_migration.execute(self, allocator, input, options);
     }
 

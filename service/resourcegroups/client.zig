@@ -24,6 +24,7 @@ const untag_ = @import("untag.zig");
 const update_account_settings = @import("update_account_settings.zig");
 const update_group = @import("update_group.zig");
 const update_group_query = @import("update_group_query.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -63,7 +64,7 @@ pub const Client = struct {
     /// * `resource-groups:CancelTagSyncTask` on the application group
     ///
     /// * `resource-groups:DeleteGroup`
-    pub fn cancelTagSyncTask(self: *Self, allocator: std.mem.Allocator, input: cancel_tag_sync_task.CancelTagSyncTaskInput, options: cancel_tag_sync_task.Options) !cancel_tag_sync_task.CancelTagSyncTaskOutput {
+    pub fn cancelTagSyncTask(self: *Self, allocator: std.mem.Allocator, input: cancel_tag_sync_task.CancelTagSyncTaskInput, options: CallOptions) !cancel_tag_sync_task.CancelTagSyncTaskOutput {
         return cancel_tag_sync_task.execute(self, allocator, input, options);
     }
 
@@ -83,7 +84,7 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:CreateGroup`
-    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: create_group.Options) !create_group.CreateGroupOutput {
+    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: CallOptions) !create_group.CreateGroupOutput {
         return create_group.execute(self, allocator, input, options);
     }
 
@@ -97,12 +98,12 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:DeleteGroup`
-    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: delete_group.Options) !delete_group.DeleteGroupOutput {
+    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: CallOptions) !delete_group.DeleteGroupOutput {
         return delete_group.execute(self, allocator, input, options);
     }
 
     /// Retrieves the current status of optional features in Resource Groups.
-    pub fn getAccountSettings(self: *Self, allocator: std.mem.Allocator, input: get_account_settings.GetAccountSettingsInput, options: get_account_settings.Options) !get_account_settings.GetAccountSettingsOutput {
+    pub fn getAccountSettings(self: *Self, allocator: std.mem.Allocator, input: get_account_settings.GetAccountSettingsInput, options: CallOptions) !get_account_settings.GetAccountSettingsOutput {
         return get_account_settings.execute(self, allocator, input, options);
     }
 
@@ -113,7 +114,7 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:GetGroup`
-    pub fn getGroup(self: *Self, allocator: std.mem.Allocator, input: get_group.GetGroupInput, options: get_group.Options) !get_group.GetGroupOutput {
+    pub fn getGroup(self: *Self, allocator: std.mem.Allocator, input: get_group.GetGroupInput, options: CallOptions) !get_group.GetGroupOutput {
         return get_group.execute(self, allocator, input, options);
     }
 
@@ -128,7 +129,7 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:GetGroupConfiguration`
-    pub fn getGroupConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_group_configuration.GetGroupConfigurationInput, options: get_group_configuration.Options) !get_group_configuration.GetGroupConfigurationOutput {
+    pub fn getGroupConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_group_configuration.GetGroupConfigurationInput, options: CallOptions) !get_group_configuration.GetGroupConfigurationOutput {
         return get_group_configuration.execute(self, allocator, input, options);
     }
 
@@ -143,7 +144,7 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:GetGroupQuery`
-    pub fn getGroupQuery(self: *Self, allocator: std.mem.Allocator, input: get_group_query.GetGroupQueryInput, options: get_group_query.Options) !get_group_query.GetGroupQueryOutput {
+    pub fn getGroupQuery(self: *Self, allocator: std.mem.Allocator, input: get_group_query.GetGroupQueryInput, options: CallOptions) !get_group_query.GetGroupQueryOutput {
         return get_group_query.execute(self, allocator, input, options);
     }
 
@@ -154,7 +155,7 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:GetTagSyncTask` on the application group
-    pub fn getTagSyncTask(self: *Self, allocator: std.mem.Allocator, input: get_tag_sync_task.GetTagSyncTaskInput, options: get_tag_sync_task.Options) !get_tag_sync_task.GetTagSyncTaskOutput {
+    pub fn getTagSyncTask(self: *Self, allocator: std.mem.Allocator, input: get_tag_sync_task.GetTagSyncTaskInput, options: CallOptions) !get_tag_sync_task.GetTagSyncTaskOutput {
         return get_tag_sync_task.execute(self, allocator, input, options);
     }
 
@@ -167,7 +168,7 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:GetTags`
-    pub fn getTags(self: *Self, allocator: std.mem.Allocator, input: get_tags.GetTagsInput, options: get_tags.Options) !get_tags.GetTagsOutput {
+    pub fn getTags(self: *Self, allocator: std.mem.Allocator, input: get_tags.GetTagsInput, options: CallOptions) !get_tags.GetTagsOutput {
         return get_tags.execute(self, allocator, input, options);
     }
 
@@ -190,7 +191,7 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:GroupResources`
-    pub fn groupResources(self: *Self, allocator: std.mem.Allocator, input: group_resources.GroupResourcesInput, options: group_resources.Options) !group_resources.GroupResourcesOutput {
+    pub fn groupResources(self: *Self, allocator: std.mem.Allocator, input: group_resources.GroupResourcesInput, options: CallOptions) !group_resources.GroupResourcesOutput {
         return group_resources.execute(self, allocator, input, options);
     }
 
@@ -209,13 +210,13 @@ pub const Client = struct {
     /// * `cloudformation:ListStackResources`
     ///
     /// * `tag:GetResources`
-    pub fn listGroupResources(self: *Self, allocator: std.mem.Allocator, input: list_group_resources.ListGroupResourcesInput, options: list_group_resources.Options) !list_group_resources.ListGroupResourcesOutput {
+    pub fn listGroupResources(self: *Self, allocator: std.mem.Allocator, input: list_group_resources.ListGroupResourcesInput, options: CallOptions) !list_group_resources.ListGroupResourcesOutput {
         return list_group_resources.execute(self, allocator, input, options);
     }
 
     /// Returns the status of the last grouping or ungrouping action for
     /// each resource in the specified application group.
-    pub fn listGroupingStatuses(self: *Self, allocator: std.mem.Allocator, input: list_grouping_statuses.ListGroupingStatusesInput, options: list_grouping_statuses.Options) !list_grouping_statuses.ListGroupingStatusesOutput {
+    pub fn listGroupingStatuses(self: *Self, allocator: std.mem.Allocator, input: list_grouping_statuses.ListGroupingStatusesInput, options: CallOptions) !list_grouping_statuses.ListGroupingStatusesOutput {
         return list_grouping_statuses.execute(self, allocator, input, options);
     }
 
@@ -226,7 +227,7 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:ListGroups`
-    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: list_groups.Options) !list_groups.ListGroupsOutput {
+    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: CallOptions) !list_groups.ListGroupsOutput {
         return list_groups.execute(self, allocator, input, options);
     }
 
@@ -239,7 +240,7 @@ pub const Client = struct {
     /// * `resource-groups:ListTagSyncTasks` with the group passed in the filters as
     ///   the resource
     /// or * if using no filters
-    pub fn listTagSyncTasks(self: *Self, allocator: std.mem.Allocator, input: list_tag_sync_tasks.ListTagSyncTasksInput, options: list_tag_sync_tasks.Options) !list_tag_sync_tasks.ListTagSyncTasksOutput {
+    pub fn listTagSyncTasks(self: *Self, allocator: std.mem.Allocator, input: list_tag_sync_tasks.ListTagSyncTasksInput, options: CallOptions) !list_tag_sync_tasks.ListTagSyncTasksOutput {
         return list_tag_sync_tasks.execute(self, allocator, input, options);
     }
 
@@ -253,7 +254,7 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:PutGroupConfiguration`
-    pub fn putGroupConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_group_configuration.PutGroupConfigurationInput, options: put_group_configuration.Options) !put_group_configuration.PutGroupConfigurationOutput {
+    pub fn putGroupConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_group_configuration.PutGroupConfigurationInput, options: CallOptions) !put_group_configuration.PutGroupConfigurationOutput {
         return put_group_configuration.execute(self, allocator, input, options);
     }
 
@@ -273,7 +274,7 @@ pub const Client = struct {
     /// * `cloudformation:ListStackResources`
     ///
     /// * `tag:GetResources`
-    pub fn searchResources(self: *Self, allocator: std.mem.Allocator, input: search_resources.SearchResourcesInput, options: search_resources.Options) !search_resources.SearchResourcesOutput {
+    pub fn searchResources(self: *Self, allocator: std.mem.Allocator, input: search_resources.SearchResourcesInput, options: CallOptions) !search_resources.SearchResourcesOutput {
         return search_resources.execute(self, allocator, input, options);
     }
 
@@ -299,7 +300,7 @@ pub const Client = struct {
     /// * `resource-groups:CreateGroup`
     ///
     /// * `iam:PassRole` on the role provided in the request
-    pub fn startTagSyncTask(self: *Self, allocator: std.mem.Allocator, input: start_tag_sync_task.StartTagSyncTaskInput, options: start_tag_sync_task.Options) !start_tag_sync_task.StartTagSyncTaskOutput {
+    pub fn startTagSyncTask(self: *Self, allocator: std.mem.Allocator, input: start_tag_sync_task.StartTagSyncTaskInput, options: CallOptions) !start_tag_sync_task.StartTagSyncTaskOutput {
         return start_tag_sync_task.execute(self, allocator, input, options);
     }
 
@@ -319,7 +320,7 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:Tag`
-    pub fn tag(self: *Self, allocator: std.mem.Allocator, input: tag_.TagInput, options: tag_.Options) !tag_.TagOutput {
+    pub fn tag(self: *Self, allocator: std.mem.Allocator, input: tag_.TagInput, options: CallOptions) !tag_.TagOutput {
         return tag_.execute(self, allocator, input, options);
     }
 
@@ -335,7 +336,7 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:UngroupResources`
-    pub fn ungroupResources(self: *Self, allocator: std.mem.Allocator, input: ungroup_resources.UngroupResourcesInput, options: ungroup_resources.Options) !ungroup_resources.UngroupResourcesOutput {
+    pub fn ungroupResources(self: *Self, allocator: std.mem.Allocator, input: ungroup_resources.UngroupResourcesInput, options: CallOptions) !ungroup_resources.UngroupResourcesOutput {
         return ungroup_resources.execute(self, allocator, input, options);
     }
 
@@ -346,7 +347,7 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:Untag`
-    pub fn untag(self: *Self, allocator: std.mem.Allocator, input: untag_.UntagInput, options: untag_.Options) !untag_.UntagOutput {
+    pub fn untag(self: *Self, allocator: std.mem.Allocator, input: untag_.UntagInput, options: CallOptions) !untag_.UntagOutput {
         return untag_.execute(self, allocator, input, options);
     }
 
@@ -358,7 +359,7 @@ pub const Client = struct {
     /// operation to check for completion by looking for
     /// `GroupLifecycleEventsStatus`
     /// to change to `ACTIVE`.
-    pub fn updateAccountSettings(self: *Self, allocator: std.mem.Allocator, input: update_account_settings.UpdateAccountSettingsInput, options: update_account_settings.Options) !update_account_settings.UpdateAccountSettingsOutput {
+    pub fn updateAccountSettings(self: *Self, allocator: std.mem.Allocator, input: update_account_settings.UpdateAccountSettingsInput, options: CallOptions) !update_account_settings.UpdateAccountSettingsOutput {
         return update_account_settings.execute(self, allocator, input, options);
     }
 
@@ -371,7 +372,7 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:UpdateGroup`
-    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: update_group.Options) !update_group.UpdateGroupOutput {
+    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: CallOptions) !update_group.UpdateGroupOutput {
         return update_group.execute(self, allocator, input, options);
     }
 
@@ -385,7 +386,7 @@ pub const Client = struct {
     /// To run this command, you must have the following permissions:
     ///
     /// * `resource-groups:UpdateGroupQuery`
-    pub fn updateGroupQuery(self: *Self, allocator: std.mem.Allocator, input: update_group_query.UpdateGroupQueryInput, options: update_group_query.Options) !update_group_query.UpdateGroupQueryOutput {
+    pub fn updateGroupQuery(self: *Self, allocator: std.mem.Allocator, input: update_group_query.UpdateGroupQueryInput, options: CallOptions) !update_group_query.UpdateGroupQueryOutput {
         return update_group_query.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchAssociateApprovalRuleTemplateWithRepositoriesError = @import("batch_associate_approval_rule_template_with_repositories_error.zig").BatchAssociateApprovalRuleTemplateWithRepositoriesError;
 
@@ -37,11 +38,7 @@ pub const BatchAssociateApprovalRuleTemplateWithRepositoriesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchAssociateApprovalRuleTemplateWithRepositoriesInput, options: Options) !BatchAssociateApprovalRuleTemplateWithRepositoriesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchAssociateApprovalRuleTemplateWithRepositoriesInput, options: CallOptions) !BatchAssociateApprovalRuleTemplateWithRepositoriesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

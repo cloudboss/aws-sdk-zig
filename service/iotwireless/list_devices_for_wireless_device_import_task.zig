@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const OnboardStatus = @import("onboard_status.zig").OnboardStatus;
 const ImportedWirelessDevice = @import("imported_wireless_device.zig").ImportedWirelessDevice;
@@ -58,11 +59,7 @@ pub const ListDevicesForWirelessDeviceImportTaskOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDevicesForWirelessDeviceImportTaskInput, options: Options) !ListDevicesForWirelessDeviceImportTaskOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDevicesForWirelessDeviceImportTaskInput, options: CallOptions) !ListDevicesForWirelessDeviceImportTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

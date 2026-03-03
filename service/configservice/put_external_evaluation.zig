@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ExternalEvaluation = @import("external_evaluation.zig").ExternalEvaluation;
 
@@ -21,11 +22,7 @@ pub const PutExternalEvaluationInput = struct {
 pub const PutExternalEvaluationOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutExternalEvaluationInput, options: Options) !PutExternalEvaluationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutExternalEvaluationInput, options: CallOptions) !PutExternalEvaluationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

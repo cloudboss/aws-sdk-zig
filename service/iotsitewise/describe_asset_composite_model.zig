@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ActionDefinition = @import("action_definition.zig").ActionDefinition;
 const AssetCompositeModelPathSegment = @import("asset_composite_model_path_segment.zig").AssetCompositeModelPathSegment;
@@ -84,11 +85,7 @@ pub const DescribeAssetCompositeModelOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeAssetCompositeModelInput, options: Options) !DescribeAssetCompositeModelOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeAssetCompositeModelInput, options: CallOptions) !DescribeAssetCompositeModelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

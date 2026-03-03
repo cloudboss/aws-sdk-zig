@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DedicatedIpPool = @import("dedicated_ip_pool.zig").DedicatedIpPool;
 
@@ -23,11 +24,7 @@ pub const GetDedicatedIpPoolOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDedicatedIpPoolInput, options: Options) !GetDedicatedIpPoolOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDedicatedIpPoolInput, options: CallOptions) !GetDedicatedIpPoolOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

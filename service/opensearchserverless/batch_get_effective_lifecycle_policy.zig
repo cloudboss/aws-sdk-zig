@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LifecyclePolicyResourceIdentifier = @import("lifecycle_policy_resource_identifier.zig").LifecyclePolicyResourceIdentifier;
 const EffectiveLifecyclePolicyDetail = @import("effective_lifecycle_policy_detail.zig").EffectiveLifecyclePolicyDetail;
@@ -29,11 +30,7 @@ pub const BatchGetEffectiveLifecyclePolicyOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetEffectiveLifecyclePolicyInput, options: Options) !BatchGetEffectiveLifecyclePolicyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetEffectiveLifecyclePolicyInput, options: CallOptions) !BatchGetEffectiveLifecyclePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

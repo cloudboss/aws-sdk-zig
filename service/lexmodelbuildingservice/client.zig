@@ -43,6 +43,7 @@ const start_import = @import("start_import.zig");
 const start_migration = @import("start_migration.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -88,7 +89,7 @@ pub const Client = struct {
     ///
     /// This operation requires permission for the
     /// `lex:CreateBotVersion` action.
-    pub fn createBotVersion(self: *Self, allocator: std.mem.Allocator, input: create_bot_version.CreateBotVersionInput, options: create_bot_version.Options) !create_bot_version.CreateBotVersionOutput {
+    pub fn createBotVersion(self: *Self, allocator: std.mem.Allocator, input: create_bot_version.CreateBotVersionInput, options: CallOptions) !create_bot_version.CreateBotVersionOutput {
         return create_bot_version.execute(self, allocator, input, options);
     }
 
@@ -108,7 +109,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `lex:CreateIntentVersion` action.
-    pub fn createIntentVersion(self: *Self, allocator: std.mem.Allocator, input: create_intent_version.CreateIntentVersionInput, options: create_intent_version.Options) !create_intent_version.CreateIntentVersionOutput {
+    pub fn createIntentVersion(self: *Self, allocator: std.mem.Allocator, input: create_intent_version.CreateIntentVersionInput, options: CallOptions) !create_intent_version.CreateIntentVersionOutput {
         return create_intent_version.execute(self, allocator, input, options);
     }
 
@@ -128,7 +129,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:CreateSlotTypeVersion` action.
-    pub fn createSlotTypeVersion(self: *Self, allocator: std.mem.Allocator, input: create_slot_type_version.CreateSlotTypeVersionInput, options: create_slot_type_version.Options) !create_slot_type_version.CreateSlotTypeVersionOutput {
+    pub fn createSlotTypeVersion(self: *Self, allocator: std.mem.Allocator, input: create_slot_type_version.CreateSlotTypeVersionInput, options: CallOptions) !create_slot_type_version.CreateSlotTypeVersionOutput {
         return create_slot_type_version.execute(self, allocator, input, options);
     }
 
@@ -153,7 +154,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:DeleteBot` action.
-    pub fn deleteBot(self: *Self, allocator: std.mem.Allocator, input: delete_bot.DeleteBotInput, options: delete_bot.Options) !delete_bot.DeleteBotOutput {
+    pub fn deleteBot(self: *Self, allocator: std.mem.Allocator, input: delete_bot.DeleteBotInput, options: CallOptions) !delete_bot.DeleteBotOutput {
         return delete_bot.execute(self, allocator, input, options);
     }
 
@@ -167,7 +168,7 @@ pub const Client = struct {
     /// reference to the alias by deleting the channel association. If you get the
     /// same exception again, delete the referring association until the
     /// `DeleteBotAlias` operation is successful.
-    pub fn deleteBotAlias(self: *Self, allocator: std.mem.Allocator, input: delete_bot_alias.DeleteBotAliasInput, options: delete_bot_alias.Options) !delete_bot_alias.DeleteBotAliasOutput {
+    pub fn deleteBotAlias(self: *Self, allocator: std.mem.Allocator, input: delete_bot_alias.DeleteBotAliasInput, options: CallOptions) !delete_bot_alias.DeleteBotAliasOutput {
         return delete_bot_alias.execute(self, allocator, input, options);
     }
 
@@ -176,7 +177,7 @@ pub const Client = struct {
     ///
     /// This operation requires permission for the
     /// `lex:DeleteBotChannelAssociation` action.
-    pub fn deleteBotChannelAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_bot_channel_association.DeleteBotChannelAssociationInput, options: delete_bot_channel_association.Options) !delete_bot_channel_association.DeleteBotChannelAssociationOutput {
+    pub fn deleteBotChannelAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_bot_channel_association.DeleteBotChannelAssociationInput, options: CallOptions) !delete_bot_channel_association.DeleteBotChannelAssociationOutput {
         return delete_bot_channel_association.execute(self, allocator, input, options);
     }
 
@@ -185,7 +186,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:DeleteBotVersion` action.
-    pub fn deleteBotVersion(self: *Self, allocator: std.mem.Allocator, input: delete_bot_version.DeleteBotVersionInput, options: delete_bot_version.Options) !delete_bot_version.DeleteBotVersionOutput {
+    pub fn deleteBotVersion(self: *Self, allocator: std.mem.Allocator, input: delete_bot_version.DeleteBotVersionInput, options: CallOptions) !delete_bot_version.DeleteBotVersionOutput {
         return delete_bot_version.execute(self, allocator, input, options);
     }
 
@@ -207,7 +208,7 @@ pub const Client = struct {
     ///
     /// This operation requires permission for the
     /// `lex:DeleteIntent` action.
-    pub fn deleteIntent(self: *Self, allocator: std.mem.Allocator, input: delete_intent.DeleteIntentInput, options: delete_intent.Options) !delete_intent.DeleteIntentOutput {
+    pub fn deleteIntent(self: *Self, allocator: std.mem.Allocator, input: delete_intent.DeleteIntentInput, options: CallOptions) !delete_intent.DeleteIntentOutput {
         return delete_intent.execute(self, allocator, input, options);
     }
 
@@ -216,7 +217,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:DeleteIntentVersion` action.
-    pub fn deleteIntentVersion(self: *Self, allocator: std.mem.Allocator, input: delete_intent_version.DeleteIntentVersionInput, options: delete_intent_version.Options) !delete_intent_version.DeleteIntentVersionOutput {
+    pub fn deleteIntentVersion(self: *Self, allocator: std.mem.Allocator, input: delete_intent_version.DeleteIntentVersionInput, options: CallOptions) !delete_intent_version.DeleteIntentVersionOutput {
         return delete_intent_version.execute(self, allocator, input, options);
     }
 
@@ -238,7 +239,7 @@ pub const Client = struct {
     ///
     /// This operation requires permission for the
     /// `lex:DeleteSlotType` action.
-    pub fn deleteSlotType(self: *Self, allocator: std.mem.Allocator, input: delete_slot_type.DeleteSlotTypeInput, options: delete_slot_type.Options) !delete_slot_type.DeleteSlotTypeOutput {
+    pub fn deleteSlotType(self: *Self, allocator: std.mem.Allocator, input: delete_slot_type.DeleteSlotTypeInput, options: CallOptions) !delete_slot_type.DeleteSlotTypeOutput {
         return delete_slot_type.execute(self, allocator, input, options);
     }
 
@@ -247,7 +248,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:DeleteSlotTypeVersion` action.
-    pub fn deleteSlotTypeVersion(self: *Self, allocator: std.mem.Allocator, input: delete_slot_type_version.DeleteSlotTypeVersionInput, options: delete_slot_type_version.Options) !delete_slot_type_version.DeleteSlotTypeVersionOutput {
+    pub fn deleteSlotTypeVersion(self: *Self, allocator: std.mem.Allocator, input: delete_slot_type_version.DeleteSlotTypeVersionInput, options: CallOptions) !delete_slot_type_version.DeleteSlotTypeVersionOutput {
         return delete_slot_type_version.execute(self, allocator, input, options);
     }
 
@@ -267,7 +268,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:DeleteUtterances` action.
-    pub fn deleteUtterances(self: *Self, allocator: std.mem.Allocator, input: delete_utterances.DeleteUtterancesInput, options: delete_utterances.Options) !delete_utterances.DeleteUtterancesOutput {
+    pub fn deleteUtterances(self: *Self, allocator: std.mem.Allocator, input: delete_utterances.DeleteUtterancesInput, options: CallOptions) !delete_utterances.DeleteUtterancesOutput {
         return delete_utterances.execute(self, allocator, input, options);
     }
 
@@ -276,7 +277,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:GetBot` action.
-    pub fn getBot(self: *Self, allocator: std.mem.Allocator, input: get_bot.GetBotInput, options: get_bot.Options) !get_bot.GetBotOutput {
+    pub fn getBot(self: *Self, allocator: std.mem.Allocator, input: get_bot.GetBotInput, options: CallOptions) !get_bot.GetBotOutput {
         return get_bot.execute(self, allocator, input, options);
     }
 
@@ -285,7 +286,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:GetBotAlias` action.
-    pub fn getBotAlias(self: *Self, allocator: std.mem.Allocator, input: get_bot_alias.GetBotAliasInput, options: get_bot_alias.Options) !get_bot_alias.GetBotAliasOutput {
+    pub fn getBotAlias(self: *Self, allocator: std.mem.Allocator, input: get_bot_alias.GetBotAliasInput, options: CallOptions) !get_bot_alias.GetBotAliasOutput {
         return get_bot_alias.execute(self, allocator, input, options);
     }
 
@@ -293,7 +294,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:GetBotAliases` action.
-    pub fn getBotAliases(self: *Self, allocator: std.mem.Allocator, input: get_bot_aliases.GetBotAliasesInput, options: get_bot_aliases.Options) !get_bot_aliases.GetBotAliasesOutput {
+    pub fn getBotAliases(self: *Self, allocator: std.mem.Allocator, input: get_bot_aliases.GetBotAliasesInput, options: CallOptions) !get_bot_aliases.GetBotAliasesOutput {
         return get_bot_aliases.execute(self, allocator, input, options);
     }
 
@@ -302,7 +303,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:GetBotChannelAssociation` action.
-    pub fn getBotChannelAssociation(self: *Self, allocator: std.mem.Allocator, input: get_bot_channel_association.GetBotChannelAssociationInput, options: get_bot_channel_association.Options) !get_bot_channel_association.GetBotChannelAssociationOutput {
+    pub fn getBotChannelAssociation(self: *Self, allocator: std.mem.Allocator, input: get_bot_channel_association.GetBotChannelAssociationInput, options: CallOptions) !get_bot_channel_association.GetBotChannelAssociationOutput {
         return get_bot_channel_association.execute(self, allocator, input, options);
     }
 
@@ -312,7 +313,7 @@ pub const Client = struct {
     /// The `GetBotChannelAssociations` operation requires
     /// permissions for the `lex:GetBotChannelAssociations`
     /// action.
-    pub fn getBotChannelAssociations(self: *Self, allocator: std.mem.Allocator, input: get_bot_channel_associations.GetBotChannelAssociationsInput, options: get_bot_channel_associations.Options) !get_bot_channel_associations.GetBotChannelAssociationsOutput {
+    pub fn getBotChannelAssociations(self: *Self, allocator: std.mem.Allocator, input: get_bot_channel_associations.GetBotChannelAssociationsInput, options: CallOptions) !get_bot_channel_associations.GetBotChannelAssociationsOutput {
         return get_bot_channel_associations.execute(self, allocator, input, options);
     }
 
@@ -330,7 +331,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:GetBotVersions` action.
-    pub fn getBotVersions(self: *Self, allocator: std.mem.Allocator, input: get_bot_versions.GetBotVersionsInput, options: get_bot_versions.Options) !get_bot_versions.GetBotVersionsOutput {
+    pub fn getBotVersions(self: *Self, allocator: std.mem.Allocator, input: get_bot_versions.GetBotVersionsInput, options: CallOptions) !get_bot_versions.GetBotVersionsOutput {
         return get_bot_versions.execute(self, allocator, input, options);
     }
 
@@ -346,7 +347,7 @@ pub const Client = struct {
     ///
     /// This operation requires permission for the `lex:GetBots`
     /// action.
-    pub fn getBots(self: *Self, allocator: std.mem.Allocator, input: get_bots.GetBotsInput, options: get_bots.Options) !get_bots.GetBotsOutput {
+    pub fn getBots(self: *Self, allocator: std.mem.Allocator, input: get_bots.GetBotsInput, options: CallOptions) !get_bots.GetBotsOutput {
         return get_bots.execute(self, allocator, input, options);
     }
 
@@ -354,7 +355,7 @@ pub const Client = struct {
     ///
     /// This operation requires permission for the
     /// `lex:GetBuiltinIntent` action.
-    pub fn getBuiltinIntent(self: *Self, allocator: std.mem.Allocator, input: get_builtin_intent.GetBuiltinIntentInput, options: get_builtin_intent.Options) !get_builtin_intent.GetBuiltinIntentOutput {
+    pub fn getBuiltinIntent(self: *Self, allocator: std.mem.Allocator, input: get_builtin_intent.GetBuiltinIntentInput, options: CallOptions) !get_builtin_intent.GetBuiltinIntentOutput {
         return get_builtin_intent.execute(self, allocator, input, options);
     }
 
@@ -363,7 +364,7 @@ pub const Client = struct {
     ///
     /// This operation requires permission for the
     /// `lex:GetBuiltinIntents` action.
-    pub fn getBuiltinIntents(self: *Self, allocator: std.mem.Allocator, input: get_builtin_intents.GetBuiltinIntentsInput, options: get_builtin_intents.Options) !get_builtin_intents.GetBuiltinIntentsOutput {
+    pub fn getBuiltinIntents(self: *Self, allocator: std.mem.Allocator, input: get_builtin_intents.GetBuiltinIntentsInput, options: CallOptions) !get_builtin_intents.GetBuiltinIntentsOutput {
         return get_builtin_intents.execute(self, allocator, input, options);
     }
 
@@ -376,18 +377,18 @@ pub const Client = struct {
     ///
     /// This operation requires permission for the
     /// `lex:GetBuiltInSlotTypes` action.
-    pub fn getBuiltinSlotTypes(self: *Self, allocator: std.mem.Allocator, input: get_builtin_slot_types.GetBuiltinSlotTypesInput, options: get_builtin_slot_types.Options) !get_builtin_slot_types.GetBuiltinSlotTypesOutput {
+    pub fn getBuiltinSlotTypes(self: *Self, allocator: std.mem.Allocator, input: get_builtin_slot_types.GetBuiltinSlotTypesInput, options: CallOptions) !get_builtin_slot_types.GetBuiltinSlotTypesOutput {
         return get_builtin_slot_types.execute(self, allocator, input, options);
     }
 
     /// Exports the contents of a Amazon Lex resource in a specified format.
-    pub fn getExport(self: *Self, allocator: std.mem.Allocator, input: get_export.GetExportInput, options: get_export.Options) !get_export.GetExportOutput {
+    pub fn getExport(self: *Self, allocator: std.mem.Allocator, input: get_export.GetExportInput, options: CallOptions) !get_export.GetExportOutput {
         return get_export.execute(self, allocator, input, options);
     }
 
     /// Gets information about an import job started with the
     /// `StartImport` operation.
-    pub fn getImport(self: *Self, allocator: std.mem.Allocator, input: get_import.GetImportInput, options: get_import.Options) !get_import.GetImportOutput {
+    pub fn getImport(self: *Self, allocator: std.mem.Allocator, input: get_import.GetImportInput, options: CallOptions) !get_import.GetImportOutput {
         return get_import.execute(self, allocator, input, options);
     }
 
@@ -396,7 +397,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions to perform the
     /// `lex:GetIntent` action.
-    pub fn getIntent(self: *Self, allocator: std.mem.Allocator, input: get_intent.GetIntentInput, options: get_intent.Options) !get_intent.GetIntentOutput {
+    pub fn getIntent(self: *Self, allocator: std.mem.Allocator, input: get_intent.GetIntentInput, options: CallOptions) !get_intent.GetIntentOutput {
         return get_intent.execute(self, allocator, input, options);
     }
 
@@ -414,7 +415,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:GetIntentVersions` action.
-    pub fn getIntentVersions(self: *Self, allocator: std.mem.Allocator, input: get_intent_versions.GetIntentVersionsInput, options: get_intent_versions.Options) !get_intent_versions.GetIntentVersionsOutput {
+    pub fn getIntentVersions(self: *Self, allocator: std.mem.Allocator, input: get_intent_versions.GetIntentVersionsInput, options: CallOptions) !get_intent_versions.GetIntentVersionsOutput {
         return get_intent_versions.execute(self, allocator, input, options);
     }
 
@@ -430,7 +431,7 @@ pub const Client = struct {
     ///
     /// The operation requires permission for the
     /// `lex:GetIntents` action.
-    pub fn getIntents(self: *Self, allocator: std.mem.Allocator, input: get_intents.GetIntentsInput, options: get_intents.Options) !get_intents.GetIntentsOutput {
+    pub fn getIntents(self: *Self, allocator: std.mem.Allocator, input: get_intents.GetIntentsInput, options: CallOptions) !get_intents.GetIntentsOutput {
         return get_intents.execute(self, allocator, input, options);
     }
 
@@ -438,12 +439,12 @@ pub const Client = struct {
     /// Amazon Lex V1 bot to an Amazon Lex V2 bot. Use this operation to view the
     /// migration
     /// alerts and warnings related to the migration.
-    pub fn getMigration(self: *Self, allocator: std.mem.Allocator, input: get_migration.GetMigrationInput, options: get_migration.Options) !get_migration.GetMigrationOutput {
+    pub fn getMigration(self: *Self, allocator: std.mem.Allocator, input: get_migration.GetMigrationInput, options: CallOptions) !get_migration.GetMigrationOutput {
         return get_migration.execute(self, allocator, input, options);
     }
 
     /// Gets a list of migrations between Amazon Lex V1 and Amazon Lex V2.
-    pub fn getMigrations(self: *Self, allocator: std.mem.Allocator, input: get_migrations.GetMigrationsInput, options: get_migrations.Options) !get_migrations.GetMigrationsOutput {
+    pub fn getMigrations(self: *Self, allocator: std.mem.Allocator, input: get_migrations.GetMigrationsInput, options: CallOptions) !get_migrations.GetMigrationsOutput {
         return get_migrations.execute(self, allocator, input, options);
     }
 
@@ -453,7 +454,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:GetSlotType` action.
-    pub fn getSlotType(self: *Self, allocator: std.mem.Allocator, input: get_slot_type.GetSlotTypeInput, options: get_slot_type.Options) !get_slot_type.GetSlotTypeOutput {
+    pub fn getSlotType(self: *Self, allocator: std.mem.Allocator, input: get_slot_type.GetSlotTypeInput, options: CallOptions) !get_slot_type.GetSlotTypeOutput {
         return get_slot_type.execute(self, allocator, input, options);
     }
 
@@ -471,7 +472,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:GetSlotTypeVersions` action.
-    pub fn getSlotTypeVersions(self: *Self, allocator: std.mem.Allocator, input: get_slot_type_versions.GetSlotTypeVersionsInput, options: get_slot_type_versions.Options) !get_slot_type_versions.GetSlotTypeVersionsOutput {
+    pub fn getSlotTypeVersions(self: *Self, allocator: std.mem.Allocator, input: get_slot_type_versions.GetSlotTypeVersionsInput, options: CallOptions) !get_slot_type_versions.GetSlotTypeVersionsOutput {
         return get_slot_type_versions.execute(self, allocator, input, options);
     }
 
@@ -487,7 +488,7 @@ pub const Client = struct {
     ///
     /// The operation requires permission for the
     /// `lex:GetSlotTypes` action.
-    pub fn getSlotTypes(self: *Self, allocator: std.mem.Allocator, input: get_slot_types.GetSlotTypesInput, options: get_slot_types.Options) !get_slot_types.GetSlotTypesOutput {
+    pub fn getSlotTypes(self: *Self, allocator: std.mem.Allocator, input: get_slot_types.GetSlotTypesInput, options: CallOptions) !get_slot_types.GetSlotTypesOutput {
         return get_slot_types.execute(self, allocator, input, options);
     }
 
@@ -521,13 +522,13 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:GetUtterancesView` action.
-    pub fn getUtterancesView(self: *Self, allocator: std.mem.Allocator, input: get_utterances_view.GetUtterancesViewInput, options: get_utterances_view.Options) !get_utterances_view.GetUtterancesViewOutput {
+    pub fn getUtterancesView(self: *Self, allocator: std.mem.Allocator, input: get_utterances_view.GetUtterancesViewInput, options: CallOptions) !get_utterances_view.GetUtterancesViewOutput {
         return get_utterances_view.execute(self, allocator, input, options);
     }
 
     /// Gets a list of tags associated with the specified resource. Only bots,
     /// bot aliases, and bot channels can have tags associated with them.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -552,7 +553,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the `lex:PutBot`
     /// action. For more information, see security-iam.
-    pub fn putBot(self: *Self, allocator: std.mem.Allocator, input: put_bot.PutBotInput, options: put_bot.Options) !put_bot.PutBotOutput {
+    pub fn putBot(self: *Self, allocator: std.mem.Allocator, input: put_bot.PutBotInput, options: CallOptions) !put_bot.PutBotOutput {
         return put_bot.execute(self, allocator, input, options);
     }
 
@@ -563,7 +564,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:PutBotAlias` action.
-    pub fn putBotAlias(self: *Self, allocator: std.mem.Allocator, input: put_bot_alias.PutBotAliasInput, options: put_bot_alias.Options) !put_bot_alias.PutBotAliasOutput {
+    pub fn putBotAlias(self: *Self, allocator: std.mem.Allocator, input: put_bot_alias.PutBotAliasInput, options: CallOptions) !put_bot_alias.PutBotAliasOutput {
         return put_bot_alias.execute(self, allocator, input, options);
     }
 
@@ -620,7 +621,7 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:PutIntent` action.
-    pub fn putIntent(self: *Self, allocator: std.mem.Allocator, input: put_intent.PutIntentInput, options: put_intent.Options) !put_intent.PutIntentOutput {
+    pub fn putIntent(self: *Self, allocator: std.mem.Allocator, input: put_intent.PutIntentInput, options: CallOptions) !put_intent.PutIntentOutput {
         return put_intent.execute(self, allocator, input, options);
     }
 
@@ -643,12 +644,12 @@ pub const Client = struct {
     ///
     /// This operation requires permissions for the
     /// `lex:PutSlotType` action.
-    pub fn putSlotType(self: *Self, allocator: std.mem.Allocator, input: put_slot_type.PutSlotTypeInput, options: put_slot_type.Options) !put_slot_type.PutSlotTypeOutput {
+    pub fn putSlotType(self: *Self, allocator: std.mem.Allocator, input: put_slot_type.PutSlotTypeInput, options: CallOptions) !put_slot_type.PutSlotTypeOutput {
         return put_slot_type.execute(self, allocator, input, options);
     }
 
     /// Starts a job to import a resource to Amazon Lex.
-    pub fn startImport(self: *Self, allocator: std.mem.Allocator, input: start_import.StartImportInput, options: start_import.Options) !start_import.StartImportOutput {
+    pub fn startImport(self: *Self, allocator: std.mem.Allocator, input: start_import.StartImportInput, options: CallOptions) !start_import.StartImportOutput {
         return start_import.execute(self, allocator, input, options);
     }
 
@@ -660,18 +661,18 @@ pub const Client = struct {
     /// bot](https://docs.aws.amazon.com/lex/latest/dg/migrate.html) in the *Amazon
     /// Lex
     /// developer guide*.
-    pub fn startMigration(self: *Self, allocator: std.mem.Allocator, input: start_migration.StartMigrationInput, options: start_migration.Options) !start_migration.StartMigrationOutput {
+    pub fn startMigration(self: *Self, allocator: std.mem.Allocator, input: start_migration.StartMigrationInput, options: CallOptions) !start_migration.StartMigrationOutput {
         return start_migration.execute(self, allocator, input, options);
     }
 
     /// Adds the specified tags to the specified resource. If a tag key
     /// already exists, the existing value is replaced with the new value.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from a bot, bot alias or bot channel.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 

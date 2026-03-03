@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InstanceRequirementsWithMetadataRequest = @import("instance_requirements_with_metadata_request.zig").InstanceRequirementsWithMetadataRequest;
 const TargetCapacityUnitType = @import("target_capacity_unit_type.zig").TargetCapacityUnitType;
@@ -100,11 +101,7 @@ pub const GetSpotPlacementScoresOutput = struct {
     spot_placement_scores: ?[]const SpotPlacementScore = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSpotPlacementScoresInput, options: Options) !GetSpotPlacementScoresOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSpotPlacementScoresInput, options: CallOptions) !GetSpotPlacementScoresOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

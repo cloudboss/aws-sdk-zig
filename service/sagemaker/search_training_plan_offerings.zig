@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReservedCapacityInstanceType = @import("reserved_capacity_instance_type.zig").ReservedCapacityInstanceType;
 const SageMakerResourceName = @import("sage_maker_resource_name.zig").SageMakerResourceName;
@@ -73,11 +74,7 @@ pub const SearchTrainingPlanOfferingsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchTrainingPlanOfferingsInput, options: Options) !SearchTrainingPlanOfferingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchTrainingPlanOfferingsInput, options: CallOptions) !SearchTrainingPlanOfferingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContactFlowModuleSearchCriteria = @import("contact_flow_module_search_criteria.zig").ContactFlowModuleSearchCriteria;
 const ContactFlowModuleSearchFilter = @import("contact_flow_module_search_filter.zig").ContactFlowModuleSearchFilter;
@@ -60,11 +61,7 @@ pub const SearchContactFlowModulesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchContactFlowModulesInput, options: Options) !SearchContactFlowModulesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SearchContactFlowModulesInput, options: CallOptions) !SearchContactFlowModulesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

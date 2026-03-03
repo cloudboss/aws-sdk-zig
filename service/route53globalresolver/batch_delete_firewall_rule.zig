@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchDeleteFirewallRuleInputItem = @import("batch_delete_firewall_rule_input_item.zig").BatchDeleteFirewallRuleInputItem;
 const BatchDeleteFirewallRuleOutputItem = @import("batch_delete_firewall_rule_output_item.zig").BatchDeleteFirewallRuleOutputItem;
@@ -29,11 +30,7 @@ pub const BatchDeleteFirewallRuleOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteFirewallRuleInput, options: Options) !BatchDeleteFirewallRuleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteFirewallRuleInput, options: CallOptions) !BatchDeleteFirewallRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

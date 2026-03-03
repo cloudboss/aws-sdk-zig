@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProxyRuleGroupAttachment = @import("proxy_rule_group_attachment.zig").ProxyRuleGroupAttachment;
 const ProxyConfiguration = @import("proxy_configuration.zig").ProxyConfiguration;
@@ -66,11 +67,7 @@ pub const AttachRuleGroupsToProxyConfigurationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AttachRuleGroupsToProxyConfigurationInput, options: Options) !AttachRuleGroupsToProxyConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AttachRuleGroupsToProxyConfigurationInput, options: CallOptions) !AttachRuleGroupsToProxyConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

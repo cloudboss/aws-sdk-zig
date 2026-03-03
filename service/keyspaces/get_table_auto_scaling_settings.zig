@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AutoScalingSpecification = @import("auto_scaling_specification.zig").AutoScalingSpecification;
 const ReplicaAutoScalingSpecification = @import("replica_auto_scaling_specification.zig").ReplicaAutoScalingSpecification;
@@ -45,11 +46,7 @@ pub const GetTableAutoScalingSettingsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTableAutoScalingSettingsInput, options: Options) !GetTableAutoScalingSettingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetTableAutoScalingSettingsInput, options: CallOptions) !GetTableAutoScalingSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,19 +2,16 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const NetworkFabricType = @import("network_fabric_type.zig").NetworkFabricType;
 const EnvironmentState = @import("environment_state.zig").EnvironmentState;
 
-const CreateEnvironmentInput = @import("create_environment_request.zig").CreateEnvironmentRequest;
+pub const CreateEnvironmentInput = @import("create_environment_request.zig").CreateEnvironmentRequest;
 
-const CreateEnvironmentOutput = @import("create_environment_response.zig").CreateEnvironmentResponse;
+pub const CreateEnvironmentOutput = @import("create_environment_response.zig").CreateEnvironmentResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateEnvironmentInput, options: Options) !CreateEnvironmentOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateEnvironmentInput, options: CallOptions) !CreateEnvironmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const InputPredefinedAttributeConfiguration = @import("input_predefined_attribute_configuration.zig").InputPredefinedAttributeConfiguration;
 const PredefinedAttributeValues = @import("predefined_attribute_values.zig").PredefinedAttributeValues;
@@ -38,13 +39,9 @@ pub const CreatePredefinedAttributeInput = struct {
     };
 };
 
-const CreatePredefinedAttributeOutput = struct {};
+pub const CreatePredefinedAttributeOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreatePredefinedAttributeInput, options: Options) !CreatePredefinedAttributeOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreatePredefinedAttributeInput, options: CallOptions) !CreatePredefinedAttributeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

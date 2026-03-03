@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const UpdateAddress = @import("update_address.zig").UpdateAddress;
 const EngagementPreferences = @import("engagement_preferences.zig").EngagementPreferences;
@@ -137,11 +138,7 @@ pub const UpdateProfileOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateProfileInput, options: Options) !UpdateProfileOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateProfileInput, options: CallOptions) !UpdateProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

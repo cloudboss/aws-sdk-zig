@@ -62,6 +62,7 @@ const update_lf_tag_expression = @import("update_lf_tag_expression.zig");
 const update_resource = @import("update_resource.zig");
 const update_table_objects = @import("update_table_objects.zig");
 const update_table_storage_optimizer = @import("update_table_storage_optimizer.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -93,7 +94,7 @@ pub const Client = struct {
     }
 
     /// Attaches one or more LF-tags to an existing resource.
-    pub fn addLfTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_lf_tags_to_resource.AddLFTagsToResourceInput, options: add_lf_tags_to_resource.Options) !add_lf_tags_to_resource.AddLFTagsToResourceOutput {
+    pub fn addLfTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_lf_tags_to_resource.AddLFTagsToResourceInput, options: CallOptions) !add_lf_tags_to_resource.AddLFTagsToResourceOutput {
         return add_lf_tags_to_resource.execute(self, allocator, input, options);
     }
 
@@ -124,53 +125,53 @@ pub const Client = struct {
     /// * glue:*UserDefinedFunction*
     ///
     /// * lakeformation:GetDataAccess
-    pub fn assumeDecoratedRoleWithSaml(self: *Self, allocator: std.mem.Allocator, input: assume_decorated_role_with_saml.AssumeDecoratedRoleWithSAMLInput, options: assume_decorated_role_with_saml.Options) !assume_decorated_role_with_saml.AssumeDecoratedRoleWithSAMLOutput {
+    pub fn assumeDecoratedRoleWithSaml(self: *Self, allocator: std.mem.Allocator, input: assume_decorated_role_with_saml.AssumeDecoratedRoleWithSAMLInput, options: CallOptions) !assume_decorated_role_with_saml.AssumeDecoratedRoleWithSAMLOutput {
         return assume_decorated_role_with_saml.execute(self, allocator, input, options);
     }
 
     /// Batch operation to grant permissions to the principal.
-    pub fn batchGrantPermissions(self: *Self, allocator: std.mem.Allocator, input: batch_grant_permissions.BatchGrantPermissionsInput, options: batch_grant_permissions.Options) !batch_grant_permissions.BatchGrantPermissionsOutput {
+    pub fn batchGrantPermissions(self: *Self, allocator: std.mem.Allocator, input: batch_grant_permissions.BatchGrantPermissionsInput, options: CallOptions) !batch_grant_permissions.BatchGrantPermissionsOutput {
         return batch_grant_permissions.execute(self, allocator, input, options);
     }
 
     /// Batch operation to revoke permissions from the principal.
-    pub fn batchRevokePermissions(self: *Self, allocator: std.mem.Allocator, input: batch_revoke_permissions.BatchRevokePermissionsInput, options: batch_revoke_permissions.Options) !batch_revoke_permissions.BatchRevokePermissionsOutput {
+    pub fn batchRevokePermissions(self: *Self, allocator: std.mem.Allocator, input: batch_revoke_permissions.BatchRevokePermissionsInput, options: CallOptions) !batch_revoke_permissions.BatchRevokePermissionsOutput {
         return batch_revoke_permissions.execute(self, allocator, input, options);
     }
 
     /// Attempts to cancel the specified transaction. Returns an exception if the
     /// transaction was previously committed.
-    pub fn cancelTransaction(self: *Self, allocator: std.mem.Allocator, input: cancel_transaction.CancelTransactionInput, options: cancel_transaction.Options) !cancel_transaction.CancelTransactionOutput {
+    pub fn cancelTransaction(self: *Self, allocator: std.mem.Allocator, input: cancel_transaction.CancelTransactionInput, options: CallOptions) !cancel_transaction.CancelTransactionOutput {
         return cancel_transaction.execute(self, allocator, input, options);
     }
 
     /// Attempts to commit the specified transaction. Returns an exception if the
     /// transaction was previously aborted. This API action is idempotent if called
     /// multiple times for the same transaction.
-    pub fn commitTransaction(self: *Self, allocator: std.mem.Allocator, input: commit_transaction.CommitTransactionInput, options: commit_transaction.Options) !commit_transaction.CommitTransactionOutput {
+    pub fn commitTransaction(self: *Self, allocator: std.mem.Allocator, input: commit_transaction.CommitTransactionInput, options: CallOptions) !commit_transaction.CommitTransactionOutput {
         return commit_transaction.execute(self, allocator, input, options);
     }
 
     /// Creates a data cell filter to allow one to grant access to certain columns
     /// on certain rows.
-    pub fn createDataCellsFilter(self: *Self, allocator: std.mem.Allocator, input: create_data_cells_filter.CreateDataCellsFilterInput, options: create_data_cells_filter.Options) !create_data_cells_filter.CreateDataCellsFilterOutput {
+    pub fn createDataCellsFilter(self: *Self, allocator: std.mem.Allocator, input: create_data_cells_filter.CreateDataCellsFilterInput, options: CallOptions) !create_data_cells_filter.CreateDataCellsFilterOutput {
         return create_data_cells_filter.execute(self, allocator, input, options);
     }
 
     /// Creates an IAM Identity Center connection with Lake Formation to allow IAM
     /// Identity Center users and groups to access Data Catalog resources.
-    pub fn createLakeFormationIdentityCenterConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_lake_formation_identity_center_configuration.CreateLakeFormationIdentityCenterConfigurationInput, options: create_lake_formation_identity_center_configuration.Options) !create_lake_formation_identity_center_configuration.CreateLakeFormationIdentityCenterConfigurationOutput {
+    pub fn createLakeFormationIdentityCenterConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_lake_formation_identity_center_configuration.CreateLakeFormationIdentityCenterConfigurationInput, options: CallOptions) !create_lake_formation_identity_center_configuration.CreateLakeFormationIdentityCenterConfigurationOutput {
         return create_lake_formation_identity_center_configuration.execute(self, allocator, input, options);
     }
 
     /// Enforce Lake Formation permissions for the given databases, tables, and
     /// principals.
-    pub fn createLakeFormationOptIn(self: *Self, allocator: std.mem.Allocator, input: create_lake_formation_opt_in.CreateLakeFormationOptInInput, options: create_lake_formation_opt_in.Options) !create_lake_formation_opt_in.CreateLakeFormationOptInOutput {
+    pub fn createLakeFormationOptIn(self: *Self, allocator: std.mem.Allocator, input: create_lake_formation_opt_in.CreateLakeFormationOptInInput, options: CallOptions) !create_lake_formation_opt_in.CreateLakeFormationOptInOutput {
         return create_lake_formation_opt_in.execute(self, allocator, input, options);
     }
 
     /// Creates an LF-tag with the specified name and values.
-    pub fn createLfTag(self: *Self, allocator: std.mem.Allocator, input: create_lf_tag.CreateLFTagInput, options: create_lf_tag.Options) !create_lf_tag.CreateLFTagOutput {
+    pub fn createLfTag(self: *Self, allocator: std.mem.Allocator, input: create_lf_tag.CreateLFTagInput, options: CallOptions) !create_lf_tag.CreateLFTagOutput {
         return create_lf_tag.execute(self, allocator, input, options);
     }
 
@@ -186,23 +187,23 @@ pub const Client = struct {
     ///
     /// `GRANT_WITH_LF_TAG_EXPRESSION` on all underlying LF-Tag key:value pairs
     /// included in the expression.
-    pub fn createLfTagExpression(self: *Self, allocator: std.mem.Allocator, input: create_lf_tag_expression.CreateLFTagExpressionInput, options: create_lf_tag_expression.Options) !create_lf_tag_expression.CreateLFTagExpressionOutput {
+    pub fn createLfTagExpression(self: *Self, allocator: std.mem.Allocator, input: create_lf_tag_expression.CreateLFTagExpressionInput, options: CallOptions) !create_lf_tag_expression.CreateLFTagExpressionOutput {
         return create_lf_tag_expression.execute(self, allocator, input, options);
     }
 
     /// Deletes a data cell filter.
-    pub fn deleteDataCellsFilter(self: *Self, allocator: std.mem.Allocator, input: delete_data_cells_filter.DeleteDataCellsFilterInput, options: delete_data_cells_filter.Options) !delete_data_cells_filter.DeleteDataCellsFilterOutput {
+    pub fn deleteDataCellsFilter(self: *Self, allocator: std.mem.Allocator, input: delete_data_cells_filter.DeleteDataCellsFilterInput, options: CallOptions) !delete_data_cells_filter.DeleteDataCellsFilterOutput {
         return delete_data_cells_filter.execute(self, allocator, input, options);
     }
 
     /// Deletes an IAM Identity Center connection with Lake Formation.
-    pub fn deleteLakeFormationIdentityCenterConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_lake_formation_identity_center_configuration.DeleteLakeFormationIdentityCenterConfigurationInput, options: delete_lake_formation_identity_center_configuration.Options) !delete_lake_formation_identity_center_configuration.DeleteLakeFormationIdentityCenterConfigurationOutput {
+    pub fn deleteLakeFormationIdentityCenterConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_lake_formation_identity_center_configuration.DeleteLakeFormationIdentityCenterConfigurationInput, options: CallOptions) !delete_lake_formation_identity_center_configuration.DeleteLakeFormationIdentityCenterConfigurationOutput {
         return delete_lake_formation_identity_center_configuration.execute(self, allocator, input, options);
     }
 
     /// Remove the Lake Formation permissions enforcement of the given databases,
     /// tables, and principals.
-    pub fn deleteLakeFormationOptIn(self: *Self, allocator: std.mem.Allocator, input: delete_lake_formation_opt_in.DeleteLakeFormationOptInInput, options: delete_lake_formation_opt_in.Options) !delete_lake_formation_opt_in.DeleteLakeFormationOptInOutput {
+    pub fn deleteLakeFormationOptIn(self: *Self, allocator: std.mem.Allocator, input: delete_lake_formation_opt_in.DeleteLakeFormationOptInInput, options: CallOptions) !delete_lake_formation_opt_in.DeleteLakeFormationOptInOutput {
         return delete_lake_formation_opt_in.execute(self, allocator, input, options);
     }
 
@@ -215,7 +216,7 @@ pub const Client = struct {
     /// * Resources that had this tag assigned will no longer have the tag policy
     ///   applied to
     /// them.
-    pub fn deleteLfTag(self: *Self, allocator: std.mem.Allocator, input: delete_lf_tag.DeleteLFTagInput, options: delete_lf_tag.Options) !delete_lf_tag.DeleteLFTagOutput {
+    pub fn deleteLfTag(self: *Self, allocator: std.mem.Allocator, input: delete_lf_tag.DeleteLFTagInput, options: CallOptions) !delete_lf_tag.DeleteLFTagOutput {
         return delete_lf_tag.execute(self, allocator, input, options);
     }
 
@@ -223,7 +224,7 @@ pub const Client = struct {
     /// `DROP` permissions on the LF-Tag expression.
     /// Deleting a LF-Tag expression will also delete all `LFTagPolicy` permissions
     /// referencing the LF-Tag expression.
-    pub fn deleteLfTagExpression(self: *Self, allocator: std.mem.Allocator, input: delete_lf_tag_expression.DeleteLFTagExpressionInput, options: delete_lf_tag_expression.Options) !delete_lf_tag_expression.DeleteLFTagExpressionOutput {
+    pub fn deleteLfTagExpression(self: *Self, allocator: std.mem.Allocator, input: delete_lf_tag_expression.DeleteLFTagExpressionInput, options: CallOptions) !delete_lf_tag_expression.DeleteLFTagExpressionOutput {
         return delete_lf_tag_expression.execute(self, allocator, input, options);
     }
 
@@ -238,7 +239,7 @@ pub const Client = struct {
     /// call `DeleteObjectsOnCancel` before writes. For more information, see
     /// [Rolling Back Amazon S3
     /// Writes](https://docs.aws.amazon.com/lake-formation/latest/dg/transactions-data-operations.html#rolling-back-writes).
-    pub fn deleteObjectsOnCancel(self: *Self, allocator: std.mem.Allocator, input: delete_objects_on_cancel.DeleteObjectsOnCancelInput, options: delete_objects_on_cancel.Options) !delete_objects_on_cancel.DeleteObjectsOnCancelOutput {
+    pub fn deleteObjectsOnCancel(self: *Self, allocator: std.mem.Allocator, input: delete_objects_on_cancel.DeleteObjectsOnCancelInput, options: CallOptions) !delete_objects_on_cancel.DeleteObjectsOnCancelOutput {
         return delete_objects_on_cancel.execute(self, allocator, input, options);
     }
 
@@ -246,23 +247,23 @@ pub const Client = struct {
     ///
     /// When you deregister a path, Lake Formation removes the path from the inline
     /// policy attached to your service-linked role.
-    pub fn deregisterResource(self: *Self, allocator: std.mem.Allocator, input: deregister_resource.DeregisterResourceInput, options: deregister_resource.Options) !deregister_resource.DeregisterResourceOutput {
+    pub fn deregisterResource(self: *Self, allocator: std.mem.Allocator, input: deregister_resource.DeregisterResourceInput, options: CallOptions) !deregister_resource.DeregisterResourceOutput {
         return deregister_resource.execute(self, allocator, input, options);
     }
 
     /// Retrieves the instance ARN and application ARN for the connection.
-    pub fn describeLakeFormationIdentityCenterConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_lake_formation_identity_center_configuration.DescribeLakeFormationIdentityCenterConfigurationInput, options: describe_lake_formation_identity_center_configuration.Options) !describe_lake_formation_identity_center_configuration.DescribeLakeFormationIdentityCenterConfigurationOutput {
+    pub fn describeLakeFormationIdentityCenterConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_lake_formation_identity_center_configuration.DescribeLakeFormationIdentityCenterConfigurationInput, options: CallOptions) !describe_lake_formation_identity_center_configuration.DescribeLakeFormationIdentityCenterConfigurationOutput {
         return describe_lake_formation_identity_center_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves the current data access role for the given resource registered in
     /// Lake Formation.
-    pub fn describeResource(self: *Self, allocator: std.mem.Allocator, input: describe_resource.DescribeResourceInput, options: describe_resource.Options) !describe_resource.DescribeResourceOutput {
+    pub fn describeResource(self: *Self, allocator: std.mem.Allocator, input: describe_resource.DescribeResourceInput, options: CallOptions) !describe_resource.DescribeResourceOutput {
         return describe_resource.execute(self, allocator, input, options);
     }
 
     /// Returns the details of a single transaction.
-    pub fn describeTransaction(self: *Self, allocator: std.mem.Allocator, input: describe_transaction.DescribeTransactionInput, options: describe_transaction.Options) !describe_transaction.DescribeTransactionOutput {
+    pub fn describeTransaction(self: *Self, allocator: std.mem.Allocator, input: describe_transaction.DescribeTransactionInput, options: CallOptions) !describe_transaction.DescribeTransactionOutput {
         return describe_transaction.execute(self, allocator, input, options);
     }
 
@@ -271,23 +272,23 @@ pub const Client = struct {
     ///
     /// Write transactions that remain idle for a long period are automatically
     /// aborted unless explicitly extended.
-    pub fn extendTransaction(self: *Self, allocator: std.mem.Allocator, input: extend_transaction.ExtendTransactionInput, options: extend_transaction.Options) !extend_transaction.ExtendTransactionOutput {
+    pub fn extendTransaction(self: *Self, allocator: std.mem.Allocator, input: extend_transaction.ExtendTransactionInput, options: CallOptions) !extend_transaction.ExtendTransactionOutput {
         return extend_transaction.execute(self, allocator, input, options);
     }
 
     /// Returns a data cells filter.
-    pub fn getDataCellsFilter(self: *Self, allocator: std.mem.Allocator, input: get_data_cells_filter.GetDataCellsFilterInput, options: get_data_cells_filter.Options) !get_data_cells_filter.GetDataCellsFilterOutput {
+    pub fn getDataCellsFilter(self: *Self, allocator: std.mem.Allocator, input: get_data_cells_filter.GetDataCellsFilterInput, options: CallOptions) !get_data_cells_filter.GetDataCellsFilterOutput {
         return get_data_cells_filter.execute(self, allocator, input, options);
     }
 
     /// Returns the identity of the invoking principal.
-    pub fn getDataLakePrincipal(self: *Self, allocator: std.mem.Allocator, input: get_data_lake_principal.GetDataLakePrincipalInput, options: get_data_lake_principal.Options) !get_data_lake_principal.GetDataLakePrincipalOutput {
+    pub fn getDataLakePrincipal(self: *Self, allocator: std.mem.Allocator, input: get_data_lake_principal.GetDataLakePrincipalInput, options: CallOptions) !get_data_lake_principal.GetDataLakePrincipalOutput {
         return get_data_lake_principal.execute(self, allocator, input, options);
     }
 
     /// Retrieves the list of the data lake administrators of a Lake
     /// Formation-managed data lake.
-    pub fn getDataLakeSettings(self: *Self, allocator: std.mem.Allocator, input: get_data_lake_settings.GetDataLakeSettingsInput, options: get_data_lake_settings.Options) !get_data_lake_settings.GetDataLakeSettingsOutput {
+    pub fn getDataLakeSettings(self: *Self, allocator: std.mem.Allocator, input: get_data_lake_settings.GetDataLakeSettingsInput, options: CallOptions) !get_data_lake_settings.GetDataLakeSettingsOutput {
         return get_data_lake_settings.execute(self, allocator, input, options);
     }
 
@@ -295,19 +296,19 @@ pub const Client = struct {
     /// resource located
     /// at a path in Amazon S3. `GetEffectivePermissionsForPath` will not return
     /// databases and tables if the catalog is encrypted.
-    pub fn getEffectivePermissionsForPath(self: *Self, allocator: std.mem.Allocator, input: get_effective_permissions_for_path.GetEffectivePermissionsForPathInput, options: get_effective_permissions_for_path.Options) !get_effective_permissions_for_path.GetEffectivePermissionsForPathOutput {
+    pub fn getEffectivePermissionsForPath(self: *Self, allocator: std.mem.Allocator, input: get_effective_permissions_for_path.GetEffectivePermissionsForPathInput, options: CallOptions) !get_effective_permissions_for_path.GetEffectivePermissionsForPathOutput {
         return get_effective_permissions_for_path.execute(self, allocator, input, options);
     }
 
     /// Returns an LF-tag definition.
-    pub fn getLfTag(self: *Self, allocator: std.mem.Allocator, input: get_lf_tag.GetLFTagInput, options: get_lf_tag.Options) !get_lf_tag.GetLFTagOutput {
+    pub fn getLfTag(self: *Self, allocator: std.mem.Allocator, input: get_lf_tag.GetLFTagInput, options: CallOptions) !get_lf_tag.GetLFTagOutput {
         return get_lf_tag.execute(self, allocator, input, options);
     }
 
     /// Returns the details about the LF-Tag expression. The caller must be a data
     /// lake admin or must have `DESCRIBE` permission on the LF-Tag expression
     /// resource.
-    pub fn getLfTagExpression(self: *Self, allocator: std.mem.Allocator, input: get_lf_tag_expression.GetLFTagExpressionInput, options: get_lf_tag_expression.Options) !get_lf_tag_expression.GetLFTagExpressionOutput {
+    pub fn getLfTagExpression(self: *Self, allocator: std.mem.Allocator, input: get_lf_tag_expression.GetLFTagExpressionInput, options: CallOptions) !get_lf_tag_expression.GetLFTagExpressionOutput {
         return get_lf_tag_expression.execute(self, allocator, input, options);
     }
 
@@ -315,24 +316,24 @@ pub const Client = struct {
     /// poll `GetQueryState` to monitor the current state of the planning before
     /// retrieving the work units. A query state is only visible to the principal
     /// that made the initial call to `StartQueryPlanning`.
-    pub fn getQueryState(self: *Self, allocator: std.mem.Allocator, input: get_query_state.GetQueryStateInput, options: get_query_state.Options) !get_query_state.GetQueryStateOutput {
+    pub fn getQueryState(self: *Self, allocator: std.mem.Allocator, input: get_query_state.GetQueryStateInput, options: CallOptions) !get_query_state.GetQueryStateOutput {
         return get_query_state.execute(self, allocator, input, options);
     }
 
     /// Retrieves statistics on the planning and execution of a query.
-    pub fn getQueryStatistics(self: *Self, allocator: std.mem.Allocator, input: get_query_statistics.GetQueryStatisticsInput, options: get_query_statistics.Options) !get_query_statistics.GetQueryStatisticsOutput {
+    pub fn getQueryStatistics(self: *Self, allocator: std.mem.Allocator, input: get_query_statistics.GetQueryStatisticsInput, options: CallOptions) !get_query_statistics.GetQueryStatisticsOutput {
         return get_query_statistics.execute(self, allocator, input, options);
     }
 
     /// Returns the LF-tags applied to a resource.
-    pub fn getResourceLfTags(self: *Self, allocator: std.mem.Allocator, input: get_resource_lf_tags.GetResourceLFTagsInput, options: get_resource_lf_tags.Options) !get_resource_lf_tags.GetResourceLFTagsOutput {
+    pub fn getResourceLfTags(self: *Self, allocator: std.mem.Allocator, input: get_resource_lf_tags.GetResourceLFTagsInput, options: CallOptions) !get_resource_lf_tags.GetResourceLFTagsOutput {
         return get_resource_lf_tags.execute(self, allocator, input, options);
     }
 
     /// Returns the set of Amazon S3 objects that make up the specified governed
     /// table. A transaction ID or timestamp can be specified for time-travel
     /// queries.
-    pub fn getTableObjects(self: *Self, allocator: std.mem.Allocator, input: get_table_objects.GetTableObjectsInput, options: get_table_objects.Options) !get_table_objects.GetTableObjectsOutput {
+    pub fn getTableObjects(self: *Self, allocator: std.mem.Allocator, input: get_table_objects.GetTableObjectsInput, options: CallOptions) !get_table_objects.GetTableObjectsOutput {
         return get_table_objects.execute(self, allocator, input, options);
     }
 
@@ -363,7 +364,7 @@ pub const Client = struct {
     /// Lake Formation only supports Amazon S3 paths registered within the same
     /// Region as the API
     /// call.
-    pub fn getTemporaryDataLocationCredentials(self: *Self, allocator: std.mem.Allocator, input: get_temporary_data_location_credentials.GetTemporaryDataLocationCredentialsInput, options: get_temporary_data_location_credentials.Options) !get_temporary_data_location_credentials.GetTemporaryDataLocationCredentialsOutput {
+    pub fn getTemporaryDataLocationCredentials(self: *Self, allocator: std.mem.Allocator, input: get_temporary_data_location_credentials.GetTemporaryDataLocationCredentialsInput, options: CallOptions) !get_temporary_data_location_credentials.GetTemporaryDataLocationCredentialsOutput {
         return get_temporary_data_location_credentials.execute(self, allocator, input, options);
     }
 
@@ -371,7 +372,7 @@ pub const Client = struct {
     /// used when the target Data Catalog resource is of type Partition. Lake
     /// Formation restricts the permission of the vended credentials with the same
     /// scope down policy which restricts access to a single Amazon S3 prefix.
-    pub fn getTemporaryGluePartitionCredentials(self: *Self, allocator: std.mem.Allocator, input: get_temporary_glue_partition_credentials.GetTemporaryGluePartitionCredentialsInput, options: get_temporary_glue_partition_credentials.Options) !get_temporary_glue_partition_credentials.GetTemporaryGluePartitionCredentialsOutput {
+    pub fn getTemporaryGluePartitionCredentials(self: *Self, allocator: std.mem.Allocator, input: get_temporary_glue_partition_credentials.GetTemporaryGluePartitionCredentialsInput, options: CallOptions) !get_temporary_glue_partition_credentials.GetTemporaryGluePartitionCredentialsOutput {
         return get_temporary_glue_partition_credentials.execute(self, allocator, input, options);
     }
 
@@ -383,18 +384,18 @@ pub const Client = struct {
     ///
     /// To call this API, the role that the service assumes must have
     /// `lakeformation:GetDataAccess` permission on the resource.
-    pub fn getTemporaryGlueTableCredentials(self: *Self, allocator: std.mem.Allocator, input: get_temporary_glue_table_credentials.GetTemporaryGlueTableCredentialsInput, options: get_temporary_glue_table_credentials.Options) !get_temporary_glue_table_credentials.GetTemporaryGlueTableCredentialsOutput {
+    pub fn getTemporaryGlueTableCredentials(self: *Self, allocator: std.mem.Allocator, input: get_temporary_glue_table_credentials.GetTemporaryGlueTableCredentialsInput, options: CallOptions) !get_temporary_glue_table_credentials.GetTemporaryGlueTableCredentialsOutput {
         return get_temporary_glue_table_credentials.execute(self, allocator, input, options);
     }
 
     /// Returns the work units resulting from the query. Work units can be executed
     /// in any order and in parallel.
-    pub fn getWorkUnitResults(self: *Self, allocator: std.mem.Allocator, input: get_work_unit_results.GetWorkUnitResultsInput, options: get_work_unit_results.Options) !get_work_unit_results.GetWorkUnitResultsOutput {
+    pub fn getWorkUnitResults(self: *Self, allocator: std.mem.Allocator, input: get_work_unit_results.GetWorkUnitResultsInput, options: CallOptions) !get_work_unit_results.GetWorkUnitResultsOutput {
         return get_work_unit_results.execute(self, allocator, input, options);
     }
 
     /// Retrieves the work units generated by the `StartQueryPlanning` operation.
-    pub fn getWorkUnits(self: *Self, allocator: std.mem.Allocator, input: get_work_units.GetWorkUnitsInput, options: get_work_units.Options) !get_work_units.GetWorkUnitsOutput {
+    pub fn getWorkUnits(self: *Self, allocator: std.mem.Allocator, input: get_work_units.GetWorkUnitsInput, options: CallOptions) !get_work_units.GetWorkUnitsOutput {
         return get_work_units.execute(self, allocator, input, options);
     }
 
@@ -404,18 +405,18 @@ pub const Client = struct {
     /// For information about permissions, see [Security and Access Control to
     /// Metadata and
     /// Data](https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html).
-    pub fn grantPermissions(self: *Self, allocator: std.mem.Allocator, input: grant_permissions.GrantPermissionsInput, options: grant_permissions.Options) !grant_permissions.GrantPermissionsOutput {
+    pub fn grantPermissions(self: *Self, allocator: std.mem.Allocator, input: grant_permissions.GrantPermissionsInput, options: CallOptions) !grant_permissions.GrantPermissionsOutput {
         return grant_permissions.execute(self, allocator, input, options);
     }
 
     /// Lists all the data cell filters on a table.
-    pub fn listDataCellsFilter(self: *Self, allocator: std.mem.Allocator, input: list_data_cells_filter.ListDataCellsFilterInput, options: list_data_cells_filter.Options) !list_data_cells_filter.ListDataCellsFilterOutput {
+    pub fn listDataCellsFilter(self: *Self, allocator: std.mem.Allocator, input: list_data_cells_filter.ListDataCellsFilterInput, options: CallOptions) !list_data_cells_filter.ListDataCellsFilterOutput {
         return list_data_cells_filter.execute(self, allocator, input, options);
     }
 
     /// Retrieve the current list of resources and principals that are opt in to
     /// enforce Lake Formation permissions.
-    pub fn listLakeFormationOptIns(self: *Self, allocator: std.mem.Allocator, input: list_lake_formation_opt_ins.ListLakeFormationOptInsInput, options: list_lake_formation_opt_ins.Options) !list_lake_formation_opt_ins.ListLakeFormationOptInsOutput {
+    pub fn listLakeFormationOptIns(self: *Self, allocator: std.mem.Allocator, input: list_lake_formation_opt_ins.ListLakeFormationOptInsInput, options: CallOptions) !list_lake_formation_opt_ins.ListLakeFormationOptInsOutput {
         return list_lake_formation_opt_ins.execute(self, allocator, input, options);
     }
 
@@ -423,12 +424,12 @@ pub const Client = struct {
     /// caller's permissions. Data Lake and read only admins implicitly can see all
     /// tag expressions in their account, else caller needs DESCRIBE permissions on
     /// tag expression.
-    pub fn listLfTagExpressions(self: *Self, allocator: std.mem.Allocator, input: list_lf_tag_expressions.ListLFTagExpressionsInput, options: list_lf_tag_expressions.Options) !list_lf_tag_expressions.ListLFTagExpressionsOutput {
+    pub fn listLfTagExpressions(self: *Self, allocator: std.mem.Allocator, input: list_lf_tag_expressions.ListLFTagExpressionsInput, options: CallOptions) !list_lf_tag_expressions.ListLFTagExpressionsOutput {
         return list_lf_tag_expressions.execute(self, allocator, input, options);
     }
 
     /// Lists LF-tags that the requester has permission to view.
-    pub fn listLfTags(self: *Self, allocator: std.mem.Allocator, input: list_lf_tags.ListLFTagsInput, options: list_lf_tags.Options) !list_lf_tags.ListLFTagsOutput {
+    pub fn listLfTags(self: *Self, allocator: std.mem.Allocator, input: list_lf_tags.ListLFTagsInput, options: CallOptions) !list_lf_tags.ListLFTagsOutput {
         return list_lf_tags.execute(self, allocator, input, options);
     }
 
@@ -445,18 +446,18 @@ pub const Client = struct {
     /// For information about permissions, see [Security and Access Control to
     /// Metadata and
     /// Data](https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html).
-    pub fn listPermissions(self: *Self, allocator: std.mem.Allocator, input: list_permissions.ListPermissionsInput, options: list_permissions.Options) !list_permissions.ListPermissionsOutput {
+    pub fn listPermissions(self: *Self, allocator: std.mem.Allocator, input: list_permissions.ListPermissionsInput, options: CallOptions) !list_permissions.ListPermissionsOutput {
         return list_permissions.execute(self, allocator, input, options);
     }
 
     /// Lists the resources registered to be managed by the Data Catalog.
-    pub fn listResources(self: *Self, allocator: std.mem.Allocator, input: list_resources.ListResourcesInput, options: list_resources.Options) !list_resources.ListResourcesOutput {
+    pub fn listResources(self: *Self, allocator: std.mem.Allocator, input: list_resources.ListResourcesInput, options: CallOptions) !list_resources.ListResourcesOutput {
         return list_resources.execute(self, allocator, input, options);
     }
 
     /// Returns the configuration of all storage optimizers associated with a
     /// specified table.
-    pub fn listTableStorageOptimizers(self: *Self, allocator: std.mem.Allocator, input: list_table_storage_optimizers.ListTableStorageOptimizersInput, options: list_table_storage_optimizers.Options) !list_table_storage_optimizers.ListTableStorageOptimizersOutput {
+    pub fn listTableStorageOptimizers(self: *Self, allocator: std.mem.Allocator, input: list_table_storage_optimizers.ListTableStorageOptimizersInput, options: CallOptions) !list_table_storage_optimizers.ListTableStorageOptimizersOutput {
         return list_table_storage_optimizers.execute(self, allocator, input, options);
     }
 
@@ -466,7 +467,7 @@ pub const Client = struct {
     ///
     /// This operation can help you identify uncommitted transactions or to get
     /// information about transactions.
-    pub fn listTransactions(self: *Self, allocator: std.mem.Allocator, input: list_transactions.ListTransactionsInput, options: list_transactions.Options) !list_transactions.ListTransactionsOutput {
+    pub fn listTransactions(self: *Self, allocator: std.mem.Allocator, input: list_transactions.ListTransactionsInput, options: CallOptions) !list_transactions.ListTransactionsOutput {
         return list_transactions.execute(self, allocator, input, options);
     }
 
@@ -478,7 +479,7 @@ pub const Client = struct {
     /// This API replaces the current list of data lake admins with the new list
     /// being passed. To add an admin, fetch the current list and add the new admin
     /// to that list and pass that list in this API.
-    pub fn putDataLakeSettings(self: *Self, allocator: std.mem.Allocator, input: put_data_lake_settings.PutDataLakeSettingsInput, options: put_data_lake_settings.Options) !put_data_lake_settings.PutDataLakeSettingsOutput {
+    pub fn putDataLakeSettings(self: *Self, allocator: std.mem.Allocator, input: put_data_lake_settings.PutDataLakeSettingsInput, options: CallOptions) !put_data_lake_settings.PutDataLakeSettingsOutput {
         return put_data_lake_settings.execute(self, allocator, input, options);
     }
 
@@ -503,20 +504,20 @@ pub const Client = struct {
     /// `RoleArn`:
     ///
     /// `arn:aws:iam::12345:role/my-data-access-role`
-    pub fn registerResource(self: *Self, allocator: std.mem.Allocator, input: register_resource.RegisterResourceInput, options: register_resource.Options) !register_resource.RegisterResourceOutput {
+    pub fn registerResource(self: *Self, allocator: std.mem.Allocator, input: register_resource.RegisterResourceInput, options: CallOptions) !register_resource.RegisterResourceOutput {
         return register_resource.execute(self, allocator, input, options);
     }
 
     /// Removes an LF-tag from the resource. Only database, table, or
     /// tableWithColumns resource are allowed. To tag columns, use the column
     /// inclusion list in `tableWithColumns` to specify column input.
-    pub fn removeLfTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_lf_tags_from_resource.RemoveLFTagsFromResourceInput, options: remove_lf_tags_from_resource.Options) !remove_lf_tags_from_resource.RemoveLFTagsFromResourceOutput {
+    pub fn removeLfTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_lf_tags_from_resource.RemoveLFTagsFromResourceInput, options: CallOptions) !remove_lf_tags_from_resource.RemoveLFTagsFromResourceOutput {
         return remove_lf_tags_from_resource.execute(self, allocator, input, options);
     }
 
     /// Revokes permissions to the principal to access metadata in the Data Catalog
     /// and data organized in underlying data storage such as Amazon S3.
-    pub fn revokePermissions(self: *Self, allocator: std.mem.Allocator, input: revoke_permissions.RevokePermissionsInput, options: revoke_permissions.Options) !revoke_permissions.RevokePermissionsOutput {
+    pub fn revokePermissions(self: *Self, allocator: std.mem.Allocator, input: revoke_permissions.RevokePermissionsInput, options: CallOptions) !revoke_permissions.RevokePermissionsOutput {
         return revoke_permissions.execute(self, allocator, input, options);
     }
 
@@ -526,7 +527,7 @@ pub const Client = struct {
     /// `SearchDatabasesByTags` to find all resources where the given
     /// `TagConditions` are valid to verify whether the returned resources can be
     /// shared.
-    pub fn searchDatabasesByLfTags(self: *Self, allocator: std.mem.Allocator, input: search_databases_by_lf_tags.SearchDatabasesByLFTagsInput, options: search_databases_by_lf_tags.Options) !search_databases_by_lf_tags.SearchDatabasesByLFTagsOutput {
+    pub fn searchDatabasesByLfTags(self: *Self, allocator: std.mem.Allocator, input: search_databases_by_lf_tags.SearchDatabasesByLFTagsInput, options: CallOptions) !search_databases_by_lf_tags.SearchDatabasesByLFTagsOutput {
         return search_databases_by_lf_tags.execute(self, allocator, input, options);
     }
 
@@ -535,7 +536,7 @@ pub const Client = struct {
     /// Before making a grant, the admin can use `SearchTablesByLFTags` to find all
     /// resources where the given `LFTag`s are valid to verify whether the returned
     /// resources can be shared.
-    pub fn searchTablesByLfTags(self: *Self, allocator: std.mem.Allocator, input: search_tables_by_lf_tags.SearchTablesByLFTagsInput, options: search_tables_by_lf_tags.Options) !search_tables_by_lf_tags.SearchTablesByLFTagsOutput {
+    pub fn searchTablesByLfTags(self: *Self, allocator: std.mem.Allocator, input: search_tables_by_lf_tags.SearchTablesByLFTagsInput, options: CallOptions) !search_tables_by_lf_tags.SearchTablesByLFTagsOutput {
         return search_tables_by_lf_tags.execute(self, allocator, input, options);
     }
 
@@ -544,23 +545,23 @@ pub const Client = struct {
     /// This operation generates work units that can be retrieved with the
     /// `GetWorkUnits` operation as soon as the query state is WORKUNITS_AVAILABLE
     /// or FINISHED.
-    pub fn startQueryPlanning(self: *Self, allocator: std.mem.Allocator, input: start_query_planning.StartQueryPlanningInput, options: start_query_planning.Options) !start_query_planning.StartQueryPlanningOutput {
+    pub fn startQueryPlanning(self: *Self, allocator: std.mem.Allocator, input: start_query_planning.StartQueryPlanningInput, options: CallOptions) !start_query_planning.StartQueryPlanningOutput {
         return start_query_planning.execute(self, allocator, input, options);
     }
 
     /// Starts a new transaction and returns its transaction ID. Transaction IDs are
     /// opaque objects that you can use to identify a transaction.
-    pub fn startTransaction(self: *Self, allocator: std.mem.Allocator, input: start_transaction.StartTransactionInput, options: start_transaction.Options) !start_transaction.StartTransactionOutput {
+    pub fn startTransaction(self: *Self, allocator: std.mem.Allocator, input: start_transaction.StartTransactionInput, options: CallOptions) !start_transaction.StartTransactionOutput {
         return start_transaction.execute(self, allocator, input, options);
     }
 
     /// Updates a data cell filter.
-    pub fn updateDataCellsFilter(self: *Self, allocator: std.mem.Allocator, input: update_data_cells_filter.UpdateDataCellsFilterInput, options: update_data_cells_filter.Options) !update_data_cells_filter.UpdateDataCellsFilterOutput {
+    pub fn updateDataCellsFilter(self: *Self, allocator: std.mem.Allocator, input: update_data_cells_filter.UpdateDataCellsFilterInput, options: CallOptions) !update_data_cells_filter.UpdateDataCellsFilterOutput {
         return update_data_cells_filter.execute(self, allocator, input, options);
     }
 
     /// Updates the IAM Identity Center connection parameters.
-    pub fn updateLakeFormationIdentityCenterConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_lake_formation_identity_center_configuration.UpdateLakeFormationIdentityCenterConfigurationInput, options: update_lake_formation_identity_center_configuration.Options) !update_lake_formation_identity_center_configuration.UpdateLakeFormationIdentityCenterConfigurationOutput {
+    pub fn updateLakeFormationIdentityCenterConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_lake_formation_identity_center_configuration.UpdateLakeFormationIdentityCenterConfigurationInput, options: CallOptions) !update_lake_formation_identity_center_configuration.UpdateLakeFormationIdentityCenterConfigurationOutput {
         return update_lake_formation_identity_center_configuration.execute(self, allocator, input, options);
     }
 
@@ -570,7 +571,7 @@ pub const Client = struct {
     /// values. If any value in the delete key values is attached to a resource,
     /// then API errors out with a 400 Exception - "Update not allowed". Untag the
     /// attribute before deleting the LF-tag key's value.
-    pub fn updateLfTag(self: *Self, allocator: std.mem.Allocator, input: update_lf_tag.UpdateLFTagInput, options: update_lf_tag.Options) !update_lf_tag.UpdateLFTagOutput {
+    pub fn updateLfTag(self: *Self, allocator: std.mem.Allocator, input: update_lf_tag.UpdateLFTagInput, options: CallOptions) !update_lf_tag.UpdateLFTagOutput {
         return update_lf_tag.execute(self, allocator, input, options);
     }
 
@@ -579,24 +580,24 @@ pub const Client = struct {
     /// Updating a LF-Tag expression immediately changes the permission boundaries
     /// of all existing `LFTagPolicy` permission grants that reference the given
     /// LF-Tag expression.
-    pub fn updateLfTagExpression(self: *Self, allocator: std.mem.Allocator, input: update_lf_tag_expression.UpdateLFTagExpressionInput, options: update_lf_tag_expression.Options) !update_lf_tag_expression.UpdateLFTagExpressionOutput {
+    pub fn updateLfTagExpression(self: *Self, allocator: std.mem.Allocator, input: update_lf_tag_expression.UpdateLFTagExpressionInput, options: CallOptions) !update_lf_tag_expression.UpdateLFTagExpressionOutput {
         return update_lf_tag_expression.execute(self, allocator, input, options);
     }
 
     /// Updates the data access role used for vending access to the given
     /// (registered) resource in Lake Formation.
-    pub fn updateResource(self: *Self, allocator: std.mem.Allocator, input: update_resource.UpdateResourceInput, options: update_resource.Options) !update_resource.UpdateResourceOutput {
+    pub fn updateResource(self: *Self, allocator: std.mem.Allocator, input: update_resource.UpdateResourceInput, options: CallOptions) !update_resource.UpdateResourceOutput {
         return update_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the manifest of Amazon S3 objects that make up the specified
     /// governed table.
-    pub fn updateTableObjects(self: *Self, allocator: std.mem.Allocator, input: update_table_objects.UpdateTableObjectsInput, options: update_table_objects.Options) !update_table_objects.UpdateTableObjectsOutput {
+    pub fn updateTableObjects(self: *Self, allocator: std.mem.Allocator, input: update_table_objects.UpdateTableObjectsInput, options: CallOptions) !update_table_objects.UpdateTableObjectsOutput {
         return update_table_objects.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration of the storage optimizers for a table.
-    pub fn updateTableStorageOptimizer(self: *Self, allocator: std.mem.Allocator, input: update_table_storage_optimizer.UpdateTableStorageOptimizerInput, options: update_table_storage_optimizer.Options) !update_table_storage_optimizer.UpdateTableStorageOptimizerOutput {
+    pub fn updateTableStorageOptimizer(self: *Self, allocator: std.mem.Allocator, input: update_table_storage_optimizer.UpdateTableStorageOptimizerInput, options: CallOptions) !update_table_storage_optimizer.UpdateTableStorageOptimizerOutput {
         return update_table_storage_optimizer.execute(self, allocator, input, options);
     }
 

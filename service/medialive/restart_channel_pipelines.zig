@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ChannelPipelineIdToRestart = @import("channel_pipeline_id_to_restart.zig").ChannelPipelineIdToRestart;
 const DescribeAnywhereSettings = @import("describe_anywhere_settings.zig").DescribeAnywhereSettings;
@@ -132,11 +133,7 @@ pub const RestartChannelPipelinesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RestartChannelPipelinesInput, options: Options) !RestartChannelPipelinesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RestartChannelPipelinesInput, options: CallOptions) !RestartChannelPipelinesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

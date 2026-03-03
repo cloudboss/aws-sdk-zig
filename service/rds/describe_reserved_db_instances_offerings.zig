@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Filter = @import("filter.zig").Filter;
 const ReservedDBInstancesOffering = @import("reserved_db_instances_offering.zig").ReservedDBInstancesOffering;
@@ -67,11 +68,7 @@ pub const DescribeReservedDBInstancesOfferingsOutput = struct {
     reserved_db_instances_offerings: ?[]const ReservedDBInstancesOffering = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeReservedDBInstancesOfferingsInput, options: Options) !DescribeReservedDBInstancesOfferingsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeReservedDBInstancesOfferingsInput, options: CallOptions) !DescribeReservedDBInstancesOfferingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

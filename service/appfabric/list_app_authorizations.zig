@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AppAuthorizationSummary = @import("app_authorization_summary.zig").AppAuthorizationSummary;
 
@@ -54,11 +55,7 @@ pub const ListAppAuthorizationsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAppAuthorizationsInput, options: Options) !ListAppAuthorizationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAppAuthorizationsInput, options: CallOptions) !ListAppAuthorizationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -12,6 +12,7 @@ const list_databases = @import("list_databases.zig");
 const list_schemas = @import("list_schemas.zig");
 const list_statements = @import("list_statements.zig");
 const list_tables = @import("list_tables.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -76,7 +77,7 @@ pub const Client = struct {
     /// examples, see [Using the Amazon Redshift Data
     /// API](https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the
     /// *Amazon Redshift Management Guide*.
-    pub fn batchExecuteStatement(self: *Self, allocator: std.mem.Allocator, input: batch_execute_statement.BatchExecuteStatementInput, options: batch_execute_statement.Options) !batch_execute_statement.BatchExecuteStatementOutput {
+    pub fn batchExecuteStatement(self: *Self, allocator: std.mem.Allocator, input: batch_execute_statement.BatchExecuteStatementInput, options: CallOptions) !batch_execute_statement.BatchExecuteStatementOutput {
         return batch_execute_statement.execute(self, allocator, input, options);
     }
 
@@ -86,7 +87,7 @@ pub const Client = struct {
     /// examples, see [Using the Amazon Redshift Data
     /// API](https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the
     /// *Amazon Redshift Management Guide*.
-    pub fn cancelStatement(self: *Self, allocator: std.mem.Allocator, input: cancel_statement.CancelStatementInput, options: cancel_statement.Options) !cancel_statement.CancelStatementOutput {
+    pub fn cancelStatement(self: *Self, allocator: std.mem.Allocator, input: cancel_statement.CancelStatementInput, options: CallOptions) !cancel_statement.CancelStatementOutput {
         return cancel_statement.execute(self, allocator, input, options);
     }
 
@@ -99,7 +100,7 @@ pub const Client = struct {
     /// examples, see [Using the Amazon Redshift Data
     /// API](https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the
     /// *Amazon Redshift Management Guide*.
-    pub fn describeStatement(self: *Self, allocator: std.mem.Allocator, input: describe_statement.DescribeStatementInput, options: describe_statement.Options) !describe_statement.DescribeStatementOutput {
+    pub fn describeStatement(self: *Self, allocator: std.mem.Allocator, input: describe_statement.DescribeStatementInput, options: CallOptions) !describe_statement.DescribeStatementOutput {
         return describe_statement.execute(self, allocator, input, options);
     }
 
@@ -138,7 +139,7 @@ pub const Client = struct {
     /// examples, see [Using the Amazon Redshift Data
     /// API](https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the
     /// *Amazon Redshift Management Guide*.
-    pub fn describeTable(self: *Self, allocator: std.mem.Allocator, input: describe_table.DescribeTableInput, options: describe_table.Options) !describe_table.DescribeTableOutput {
+    pub fn describeTable(self: *Self, allocator: std.mem.Allocator, input: describe_table.DescribeTableInput, options: CallOptions) !describe_table.DescribeTableOutput {
         return describe_table.execute(self, allocator, input, options);
     }
 
@@ -177,7 +178,7 @@ pub const Client = struct {
     /// examples, see [Using the Amazon Redshift Data
     /// API](https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the
     /// *Amazon Redshift Management Guide*.
-    pub fn executeStatement(self: *Self, allocator: std.mem.Allocator, input: execute_statement.ExecuteStatementInput, options: execute_statement.Options) !execute_statement.ExecuteStatementOutput {
+    pub fn executeStatement(self: *Self, allocator: std.mem.Allocator, input: execute_statement.ExecuteStatementInput, options: CallOptions) !execute_statement.ExecuteStatementOutput {
         return execute_statement.execute(self, allocator, input, options);
     }
 
@@ -190,7 +191,7 @@ pub const Client = struct {
     /// examples, see [Using the Amazon Redshift Data
     /// API](https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the
     /// *Amazon Redshift Management Guide*.
-    pub fn getStatementResult(self: *Self, allocator: std.mem.Allocator, input: get_statement_result.GetStatementResultInput, options: get_statement_result.Options) !get_statement_result.GetStatementResultOutput {
+    pub fn getStatementResult(self: *Self, allocator: std.mem.Allocator, input: get_statement_result.GetStatementResultInput, options: CallOptions) !get_statement_result.GetStatementResultOutput {
         return get_statement_result.execute(self, allocator, input, options);
     }
 
@@ -203,7 +204,7 @@ pub const Client = struct {
     /// examples, see [Using the Amazon Redshift Data
     /// API](https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the
     /// *Amazon Redshift Management Guide*.
-    pub fn getStatementResultV2(self: *Self, allocator: std.mem.Allocator, input: get_statement_result_v2.GetStatementResultV2Input, options: get_statement_result_v2.Options) !get_statement_result_v2.GetStatementResultV2Output {
+    pub fn getStatementResultV2(self: *Self, allocator: std.mem.Allocator, input: get_statement_result_v2.GetStatementResultV2Input, options: CallOptions) !get_statement_result_v2.GetStatementResultV2Output {
         return get_statement_result_v2.execute(self, allocator, input, options);
     }
 
@@ -241,7 +242,7 @@ pub const Client = struct {
     /// examples, see [Using the Amazon Redshift Data
     /// API](https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the
     /// *Amazon Redshift Management Guide*.
-    pub fn listDatabases(self: *Self, allocator: std.mem.Allocator, input: list_databases.ListDatabasesInput, options: list_databases.Options) !list_databases.ListDatabasesOutput {
+    pub fn listDatabases(self: *Self, allocator: std.mem.Allocator, input: list_databases.ListDatabasesInput, options: CallOptions) !list_databases.ListDatabasesOutput {
         return list_databases.execute(self, allocator, input, options);
     }
 
@@ -279,7 +280,7 @@ pub const Client = struct {
     /// examples, see [Using the Amazon Redshift Data
     /// API](https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the
     /// *Amazon Redshift Management Guide*.
-    pub fn listSchemas(self: *Self, allocator: std.mem.Allocator, input: list_schemas.ListSchemasInput, options: list_schemas.Options) !list_schemas.ListSchemasOutput {
+    pub fn listSchemas(self: *Self, allocator: std.mem.Allocator, input: list_schemas.ListSchemasInput, options: CallOptions) !list_schemas.ListSchemasOutput {
         return list_schemas.execute(self, allocator, input, options);
     }
 
@@ -297,7 +298,7 @@ pub const Client = struct {
     /// examples, see [Using the Amazon Redshift Data
     /// API](https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the
     /// *Amazon Redshift Management Guide*.
-    pub fn listStatements(self: *Self, allocator: std.mem.Allocator, input: list_statements.ListStatementsInput, options: list_statements.Options) !list_statements.ListStatementsOutput {
+    pub fn listStatements(self: *Self, allocator: std.mem.Allocator, input: list_statements.ListStatementsInput, options: CallOptions) !list_statements.ListStatementsOutput {
         return list_statements.execute(self, allocator, input, options);
     }
 
@@ -336,7 +337,7 @@ pub const Client = struct {
     /// examples, see [Using the Amazon Redshift Data
     /// API](https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the
     /// *Amazon Redshift Management Guide*.
-    pub fn listTables(self: *Self, allocator: std.mem.Allocator, input: list_tables.ListTablesInput, options: list_tables.Options) !list_tables.ListTablesOutput {
+    pub fn listTables(self: *Self, allocator: std.mem.Allocator, input: list_tables.ListTablesInput, options: CallOptions) !list_tables.ListTablesOutput {
         return list_tables.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const NatGatewayAddress = @import("nat_gateway_address.zig").NatGatewayAddress;
 const serde = @import("serde.zig");
@@ -52,11 +53,7 @@ pub const AssociateNatGatewayAddressOutput = struct {
     nat_gateway_id: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateNatGatewayAddressInput, options: Options) !AssociateNatGatewayAddressOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateNatGatewayAddressInput, options: CallOptions) !AssociateNatGatewayAddressOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

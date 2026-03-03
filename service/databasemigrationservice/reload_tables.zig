@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReloadOptionValue = @import("reload_option_value.zig").ReloadOptionValue;
 const TableToReload = @import("table_to_reload.zig").TableToReload;
@@ -39,11 +40,7 @@ pub const ReloadTablesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ReloadTablesInput, options: Options) !ReloadTablesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ReloadTablesInput, options: CallOptions) !ReloadTablesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

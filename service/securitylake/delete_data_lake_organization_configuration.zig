@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DataLakeAutoEnableNewAccountConfiguration = @import("data_lake_auto_enable_new_account_configuration.zig").DataLakeAutoEnableNewAccountConfiguration;
 
@@ -18,11 +19,7 @@ pub const DeleteDataLakeOrganizationConfigurationInput = struct {
 pub const DeleteDataLakeOrganizationConfigurationOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDataLakeOrganizationConfigurationInput, options: Options) !DeleteDataLakeOrganizationConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDataLakeOrganizationConfigurationInput, options: CallOptions) !DeleteDataLakeOrganizationConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

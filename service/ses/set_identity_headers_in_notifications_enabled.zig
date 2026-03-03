@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const NotificationType = @import("notification_type.zig").NotificationType;
 
@@ -31,11 +32,7 @@ pub const SetIdentityHeadersInNotificationsEnabledInput = struct {
 pub const SetIdentityHeadersInNotificationsEnabledOutput = struct {
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetIdentityHeadersInNotificationsEnabledInput, options: Options) !SetIdentityHeadersInNotificationsEnabledOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetIdentityHeadersInNotificationsEnabledInput, options: CallOptions) !SetIdentityHeadersInNotificationsEnabledOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

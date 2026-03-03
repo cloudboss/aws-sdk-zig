@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResetAlarmActionRequest = @import("reset_alarm_action_request.zig").ResetAlarmActionRequest;
 const BatchAlarmActionErrorEntry = @import("batch_alarm_action_error_entry.zig").BatchAlarmActionErrorEntry;
@@ -28,11 +29,7 @@ pub const BatchResetAlarmOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchResetAlarmInput, options: Options) !BatchResetAlarmOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchResetAlarmInput, options: CallOptions) !BatchResetAlarmOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

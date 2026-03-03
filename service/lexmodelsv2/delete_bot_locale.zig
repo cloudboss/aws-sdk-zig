@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BotLocaleStatus = @import("bot_locale_status.zig").BotLocaleStatus;
 
@@ -48,11 +49,7 @@ pub const DeleteBotLocaleOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteBotLocaleInput, options: Options) !DeleteBotLocaleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteBotLocaleInput, options: CallOptions) !DeleteBotLocaleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

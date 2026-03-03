@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EventBridgeConfiguration = @import("event_bridge_configuration.zig").EventBridgeConfiguration;
 const LambdaFunctionConfiguration = @import("lambda_function_configuration.zig").LambdaFunctionConfiguration;
@@ -30,13 +31,9 @@ pub const GetBucketNotificationConfigurationInput = struct {
     expected_bucket_owner: ?[]const u8 = null,
 };
 
-const GetBucketNotificationConfigurationOutput = @import("notification_configuration.zig").NotificationConfiguration;
+pub const GetBucketNotificationConfigurationOutput = @import("notification_configuration.zig").NotificationConfiguration;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketNotificationConfigurationInput, options: Options) !GetBucketNotificationConfigurationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketNotificationConfigurationInput, options: CallOptions) !GetBucketNotificationConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

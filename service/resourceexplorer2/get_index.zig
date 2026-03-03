@@ -2,11 +2,12 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IndexState = @import("index_state.zig").IndexState;
 const IndexType = @import("index_type.zig").IndexType;
 
-const GetIndexInput = struct {};
+pub const GetIndexInput = struct {};
 
 pub const GetIndexOutput = struct {
     /// The [Amazon resource name
@@ -57,11 +58,7 @@ pub const GetIndexOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetIndexInput, options: Options) !GetIndexOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetIndexInput, options: CallOptions) !GetIndexOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

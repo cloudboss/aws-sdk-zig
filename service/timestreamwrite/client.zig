@@ -20,6 +20,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_database = @import("update_database.zig");
 const update_table = @import("update_table.zig");
 const write_records = @import("write_records.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -63,7 +64,7 @@ pub const Client = struct {
     /// keys](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk). [Service quotas apply](https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html). For
     /// details, see [code
     /// sample](https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-batch-load.html).
-    pub fn createBatchLoadTask(self: *Self, allocator: std.mem.Allocator, input: create_batch_load_task.CreateBatchLoadTaskInput, options: create_batch_load_task.Options) !create_batch_load_task.CreateBatchLoadTaskOutput {
+    pub fn createBatchLoadTask(self: *Self, allocator: std.mem.Allocator, input: create_batch_load_task.CreateBatchLoadTaskInput, options: CallOptions) !create_batch_load_task.CreateBatchLoadTaskOutput {
         return create_batch_load_task.execute(self, allocator, input, options);
     }
 
@@ -74,7 +75,7 @@ pub const Client = struct {
     /// keys](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk). [Service quotas apply](https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html). For
     /// details, see [code
     /// sample](https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-db.html).
-    pub fn createDatabase(self: *Self, allocator: std.mem.Allocator, input: create_database.CreateDatabaseInput, options: create_database.Options) !create_database.CreateDatabaseOutput {
+    pub fn createDatabase(self: *Self, allocator: std.mem.Allocator, input: create_database.CreateDatabaseInput, options: CallOptions) !create_database.CreateDatabaseOutput {
         return create_database.execute(self, allocator, input, options);
     }
 
@@ -89,7 +90,7 @@ pub const Client = struct {
     /// apply](https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html). See
     /// [code
     /// sample](https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-table.html) for details.
-    pub fn createTable(self: *Self, allocator: std.mem.Allocator, input: create_table.CreateTableInput, options: create_table.Options) !create_table.CreateTableOutput {
+    pub fn createTable(self: *Self, allocator: std.mem.Allocator, input: create_table.CreateTableInput, options: CallOptions) !create_table.CreateTableOutput {
         return create_table.execute(self, allocator, input, options);
     }
 
@@ -109,7 +110,7 @@ pub const Client = struct {
     /// See [code
     /// sample](https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.delete-db.html)
     /// for details.
-    pub fn deleteDatabase(self: *Self, allocator: std.mem.Allocator, input: delete_database.DeleteDatabaseInput, options: delete_database.Options) !delete_database.DeleteDatabaseOutput {
+    pub fn deleteDatabase(self: *Self, allocator: std.mem.Allocator, input: delete_database.DeleteDatabaseInput, options: CallOptions) !delete_database.DeleteDatabaseOutput {
         return delete_database.execute(self, allocator, input, options);
     }
 
@@ -124,7 +125,7 @@ pub const Client = struct {
     ///
     /// See [code
     /// sample](https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.delete-table.html) for details.
-    pub fn deleteTable(self: *Self, allocator: std.mem.Allocator, input: delete_table.DeleteTableInput, options: delete_table.Options) !delete_table.DeleteTableOutput {
+    pub fn deleteTable(self: *Self, allocator: std.mem.Allocator, input: delete_table.DeleteTableInput, options: CallOptions) !delete_table.DeleteTableOutput {
         return delete_table.execute(self, allocator, input, options);
     }
 
@@ -134,7 +135,7 @@ pub const Client = struct {
     /// apply](https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html). See
     /// [code
     /// sample](https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.describe-batch-load.html) for details.
-    pub fn describeBatchLoadTask(self: *Self, allocator: std.mem.Allocator, input: describe_batch_load_task.DescribeBatchLoadTaskInput, options: describe_batch_load_task.Options) !describe_batch_load_task.DescribeBatchLoadTaskOutput {
+    pub fn describeBatchLoadTask(self: *Self, allocator: std.mem.Allocator, input: describe_batch_load_task.DescribeBatchLoadTaskInput, options: CallOptions) !describe_batch_load_task.DescribeBatchLoadTaskOutput {
         return describe_batch_load_task.execute(self, allocator, input, options);
     }
 
@@ -145,7 +146,7 @@ pub const Client = struct {
     /// quotas
     /// apply](https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html). See [code sample](https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.describe-db.html)
     /// for details.
-    pub fn describeDatabase(self: *Self, allocator: std.mem.Allocator, input: describe_database.DescribeDatabaseInput, options: describe_database.Options) !describe_database.DescribeDatabaseOutput {
+    pub fn describeDatabase(self: *Self, allocator: std.mem.Allocator, input: describe_database.DescribeDatabaseInput, options: CallOptions) !describe_database.DescribeDatabaseOutput {
         return describe_database.execute(self, allocator, input, options);
     }
 
@@ -170,7 +171,7 @@ pub const Client = struct {
     /// [The
     /// Endpoint Discovery
     /// Pattern](https://docs.aws.amazon.com/timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery).
-    pub fn describeEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_endpoints.DescribeEndpointsInput, options: describe_endpoints.Options) !describe_endpoints.DescribeEndpointsOutput {
+    pub fn describeEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_endpoints.DescribeEndpointsInput, options: CallOptions) !describe_endpoints.DescribeEndpointsOutput {
         return describe_endpoints.execute(self, allocator, input, options);
     }
 
@@ -180,7 +181,7 @@ pub const Client = struct {
     /// apply](https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html). See
     /// [code
     /// sample](https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.describe-table.html) for details.
-    pub fn describeTable(self: *Self, allocator: std.mem.Allocator, input: describe_table.DescribeTableInput, options: describe_table.Options) !describe_table.DescribeTableOutput {
+    pub fn describeTable(self: *Self, allocator: std.mem.Allocator, input: describe_table.DescribeTableInput, options: CallOptions) !describe_table.DescribeTableOutput {
         return describe_table.execute(self, allocator, input, options);
     }
 
@@ -188,7 +189,7 @@ pub const Client = struct {
     /// task is
     /// resumable until, and other details. See [code
     /// sample](https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-batch-load-tasks.html) for details.
-    pub fn listBatchLoadTasks(self: *Self, allocator: std.mem.Allocator, input: list_batch_load_tasks.ListBatchLoadTasksInput, options: list_batch_load_tasks.Options) !list_batch_load_tasks.ListBatchLoadTasksOutput {
+    pub fn listBatchLoadTasks(self: *Self, allocator: std.mem.Allocator, input: list_batch_load_tasks.ListBatchLoadTasksInput, options: CallOptions) !list_batch_load_tasks.ListBatchLoadTasksOutput {
         return list_batch_load_tasks.execute(self, allocator, input, options);
     }
 
@@ -197,7 +198,7 @@ pub const Client = struct {
     /// [code
     /// sample](https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-db.html) for
     /// details.
-    pub fn listDatabases(self: *Self, allocator: std.mem.Allocator, input: list_databases.ListDatabasesInput, options: list_databases.Options) !list_databases.ListDatabasesOutput {
+    pub fn listDatabases(self: *Self, allocator: std.mem.Allocator, input: list_databases.ListDatabasesInput, options: CallOptions) !list_databases.ListDatabasesOutput {
         return list_databases.execute(self, allocator, input, options);
     }
 
@@ -206,16 +207,16 @@ pub const Client = struct {
     /// table. See [code
     /// sample](https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-table.html)
     /// for details.
-    pub fn listTables(self: *Self, allocator: std.mem.Allocator, input: list_tables.ListTablesInput, options: list_tables.Options) !list_tables.ListTablesOutput {
+    pub fn listTables(self: *Self, allocator: std.mem.Allocator, input: list_tables.ListTablesInput, options: CallOptions) !list_tables.ListTablesOutput {
         return list_tables.execute(self, allocator, input, options);
     }
 
     /// Lists all tags on a Timestream resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
-    pub fn resumeBatchLoadTask(self: *Self, allocator: std.mem.Allocator, input: resume_batch_load_task.ResumeBatchLoadTaskInput, options: resume_batch_load_task.Options) !resume_batch_load_task.ResumeBatchLoadTaskOutput {
+    pub fn resumeBatchLoadTask(self: *Self, allocator: std.mem.Allocator, input: resume_batch_load_task.ResumeBatchLoadTaskInput, options: CallOptions) !resume_batch_load_task.ResumeBatchLoadTaskOutput {
         return resume_batch_load_task.execute(self, allocator, input, options);
     }
 
@@ -223,12 +224,12 @@ pub const Client = struct {
     /// these user-defined tags so that they appear on the Billing and Cost
     /// Management console for
     /// cost allocation tracking.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the association of tags from a Timestream resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -240,7 +241,7 @@ pub const Client = struct {
     /// See [code
     /// sample](https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.update-db.html)
     /// for details.
-    pub fn updateDatabase(self: *Self, allocator: std.mem.Allocator, input: update_database.UpdateDatabaseInput, options: update_database.Options) !update_database.UpdateDatabaseOutput {
+    pub fn updateDatabase(self: *Self, allocator: std.mem.Allocator, input: update_database.UpdateDatabaseInput, options: CallOptions) !update_database.UpdateDatabaseOutput {
         return update_database.execute(self, allocator, input, options);
     }
 
@@ -257,7 +258,7 @@ pub const Client = struct {
     ///
     /// See [code
     /// sample](https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.update-table.html) for details.
-    pub fn updateTable(self: *Self, allocator: std.mem.Allocator, input: update_table.UpdateTableInput, options: update_table.Options) !update_table.UpdateTableOutput {
+    pub fn updateTable(self: *Self, allocator: std.mem.Allocator, input: update_table.UpdateTableInput, options: CallOptions) !update_table.UpdateTableOutput {
         return update_table.execute(self, allocator, input, options);
     }
 
@@ -319,7 +320,7 @@ pub const Client = struct {
     /// send a version number greater than `3`, or the update requests would receive
     /// a
     /// `RejectedRecordsException`.
-    pub fn writeRecords(self: *Self, allocator: std.mem.Allocator, input: write_records.WriteRecordsInput, options: write_records.Options) !write_records.WriteRecordsOutput {
+    pub fn writeRecords(self: *Self, allocator: std.mem.Allocator, input: write_records.WriteRecordsInput, options: CallOptions) !write_records.WriteRecordsOutput {
         return write_records.execute(self, allocator, input, options);
     }
 

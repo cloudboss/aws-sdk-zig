@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ColumnStatistics = @import("column_statistics.zig").ColumnStatistics;
 const ColumnError = @import("column_error.zig").ColumnError;
@@ -45,11 +46,7 @@ pub const GetColumnStatisticsForPartitionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetColumnStatisticsForPartitionInput, options: Options) !GetColumnStatisticsForPartitionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetColumnStatisticsForPartitionInput, options: CallOptions) !GetColumnStatisticsForPartitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

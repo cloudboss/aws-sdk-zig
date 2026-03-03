@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DeleteMessageBatchRequestEntry = @import("delete_message_batch_request_entry.zig").DeleteMessageBatchRequestEntry;
 const BatchResultErrorEntry = @import("batch_result_error_entry.zig").BatchResultErrorEntry;
@@ -39,11 +40,7 @@ pub const DeleteMessageBatchOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMessageBatchInput, options: Options) !DeleteMessageBatchOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMessageBatchInput, options: CallOptions) !DeleteMessageBatchOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

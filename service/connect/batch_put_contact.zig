@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContactDataRequest = @import("contact_data_request.zig").ContactDataRequest;
 const FailedRequest = @import("failed_request.zig").FailedRequest;
@@ -43,11 +44,7 @@ pub const BatchPutContactOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchPutContactInput, options: Options) !BatchPutContactOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchPutContactInput, options: CallOptions) !BatchPutContactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

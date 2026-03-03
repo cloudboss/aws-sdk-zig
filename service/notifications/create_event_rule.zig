@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EventRuleStatusSummary = @import("event_rule_status_summary.zig").EventRuleStatusSummary;
 
@@ -64,11 +65,7 @@ pub const CreateEventRuleOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateEventRuleInput, options: Options) !CreateEventRuleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateEventRuleInput, options: CallOptions) !CreateEventRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

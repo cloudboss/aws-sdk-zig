@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MFADeleteStatus = @import("mfa_delete_status.zig").MFADeleteStatus;
 const BucketVersioningStatus = @import("bucket_versioning_status.zig").BucketVersioningStatus;
@@ -14,13 +15,9 @@ pub const GetBucketVersioningInput = struct {
     bucket: []const u8,
 };
 
-const GetBucketVersioningOutput = @import("get_bucket_versioning_result.zig").GetBucketVersioningResult;
+pub const GetBucketVersioningOutput = @import("get_bucket_versioning_result.zig").GetBucketVersioningResult;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketVersioningInput, options: Options) !GetBucketVersioningOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketVersioningInput, options: CallOptions) !GetBucketVersioningOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

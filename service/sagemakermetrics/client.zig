@@ -3,6 +3,7 @@ const std = @import("std");
 
 const batch_get_metrics = @import("batch_get_metrics.zig");
 const batch_put_metrics = @import("batch_put_metrics.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -33,13 +34,13 @@ pub const Client = struct {
     }
 
     /// Used to retrieve training metrics from SageMaker.
-    pub fn batchGetMetrics(self: *Self, allocator: std.mem.Allocator, input: batch_get_metrics.BatchGetMetricsInput, options: batch_get_metrics.Options) !batch_get_metrics.BatchGetMetricsOutput {
+    pub fn batchGetMetrics(self: *Self, allocator: std.mem.Allocator, input: batch_get_metrics.BatchGetMetricsInput, options: CallOptions) !batch_get_metrics.BatchGetMetricsOutput {
         return batch_get_metrics.execute(self, allocator, input, options);
     }
 
     /// Used to ingest training metrics into SageMaker. These metrics can be
     /// visualized in SageMaker Studio.
-    pub fn batchPutMetrics(self: *Self, allocator: std.mem.Allocator, input: batch_put_metrics.BatchPutMetricsInput, options: batch_put_metrics.Options) !batch_put_metrics.BatchPutMetricsOutput {
+    pub fn batchPutMetrics(self: *Self, allocator: std.mem.Allocator, input: batch_put_metrics.BatchPutMetricsInput, options: CallOptions) !batch_put_metrics.BatchPutMetricsOutput {
         return batch_put_metrics.execute(self, allocator, input, options);
     }
 };

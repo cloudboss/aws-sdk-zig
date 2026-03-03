@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum = @import("enforce_security_group_inbound_rules_on_private_link_traffic_enum.zig").EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum;
 const serde = @import("serde.zig");
@@ -31,11 +32,7 @@ pub const SetSecurityGroupsOutput = struct {
     security_group_ids: ?[]const []const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetSecurityGroupsInput, options: Options) !SetSecurityGroupsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetSecurityGroupsInput, options: CallOptions) !SetSecurityGroupsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProcessingType = @import("processing_type.zig").ProcessingType;
 const Record = @import("record.zig").Record;
@@ -56,11 +57,7 @@ pub const GenerateMatchIdOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GenerateMatchIdInput, options: Options) !GenerateMatchIdOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GenerateMatchIdInput, options: CallOptions) !GenerateMatchIdOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

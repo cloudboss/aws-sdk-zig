@@ -5,6 +5,7 @@ const describe_stream = @import("describe_stream.zig");
 const get_records = @import("get_records.zig");
 const get_shard_iterator = @import("get_shard_iterator.zig");
 const list_streams = @import("list_streams.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -47,7 +48,7 @@ pub const Client = struct {
     /// stream
     /// records). If both `StartingSequenceNumber` and `EndingSequenceNumber`
     /// are present, then that shard is closed and can no longer receive more data.
-    pub fn describeStream(self: *Self, allocator: std.mem.Allocator, input: describe_stream.DescribeStreamInput, options: describe_stream.Options) !describe_stream.DescribeStreamOutput {
+    pub fn describeStream(self: *Self, allocator: std.mem.Allocator, input: describe_stream.DescribeStreamInput, options: CallOptions) !describe_stream.DescribeStreamOutput {
         return describe_stream.execute(self, allocator, input, options);
     }
 
@@ -66,7 +67,7 @@ pub const Client = struct {
     ///
     /// `GetRecords` can retrieve a maximum of 1 MB of data or 1000 stream records,
     /// whichever comes first.
-    pub fn getRecords(self: *Self, allocator: std.mem.Allocator, input: get_records.GetRecordsInput, options: get_records.Options) !get_records.GetRecordsOutput {
+    pub fn getRecords(self: *Self, allocator: std.mem.Allocator, input: get_records.GetRecordsInput, options: CallOptions) !get_records.GetRecordsOutput {
         return get_records.execute(self, allocator, input, options);
     }
 
@@ -77,7 +78,7 @@ pub const Client = struct {
     /// from the shard.
     ///
     /// A shard iterator expires 15 minutes after it is returned to the requester.
-    pub fn getShardIterator(self: *Self, allocator: std.mem.Allocator, input: get_shard_iterator.GetShardIteratorInput, options: get_shard_iterator.Options) !get_shard_iterator.GetShardIteratorOutput {
+    pub fn getShardIterator(self: *Self, allocator: std.mem.Allocator, input: get_shard_iterator.GetShardIteratorInput, options: CallOptions) !get_shard_iterator.GetShardIteratorOutput {
         return get_shard_iterator.execute(self, allocator, input, options);
     }
 
@@ -87,7 +88,7 @@ pub const Client = struct {
     /// streams ARNs for that table.
     ///
     /// You can call `ListStreams` at a maximum rate of 5 times per second.
-    pub fn listStreams(self: *Self, allocator: std.mem.Allocator, input: list_streams.ListStreamsInput, options: list_streams.Options) !list_streams.ListStreamsOutput {
+    pub fn listStreams(self: *Self, allocator: std.mem.Allocator, input: list_streams.ListStreamsInput, options: CallOptions) !list_streams.ListStreamsOutput {
         return list_streams.execute(self, allocator, input, options);
     }
 };

@@ -40,6 +40,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_contact = @import("update_contact.zig");
 const update_contact_channel = @import("update_contact_channel.zig");
 const update_rotation = @import("update_rotation.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -71,14 +72,14 @@ pub const Client = struct {
     }
 
     /// Used to acknowledge an engagement to a contact channel during an incident.
-    pub fn acceptPage(self: *Self, allocator: std.mem.Allocator, input: accept_page.AcceptPageInput, options: accept_page.Options) !accept_page.AcceptPageOutput {
+    pub fn acceptPage(self: *Self, allocator: std.mem.Allocator, input: accept_page.AcceptPageInput, options: CallOptions) !accept_page.AcceptPageOutput {
         return accept_page.execute(self, allocator, input, options);
     }
 
     /// Activates a contact's contact channel. Incident Manager can't engage a
     /// contact until the
     /// contact channel has been activated.
-    pub fn activateContactChannel(self: *Self, allocator: std.mem.Allocator, input: activate_contact_channel.ActivateContactChannelInput, options: activate_contact_channel.Options) !activate_contact_channel.ActivateContactChannelOutput {
+    pub fn activateContactChannel(self: *Self, allocator: std.mem.Allocator, input: activate_contact_channel.ActivateContactChannelInput, options: CallOptions) !activate_contact_channel.ActivateContactChannelOutput {
         return activate_contact_channel.execute(self, allocator, input, options);
     }
 
@@ -87,30 +88,30 @@ pub const Client = struct {
     /// escalation plans that Incident Manager uses to engage contacts in phases
     /// during an
     /// incident.
-    pub fn createContact(self: *Self, allocator: std.mem.Allocator, input: create_contact.CreateContactInput, options: create_contact.Options) !create_contact.CreateContactOutput {
+    pub fn createContact(self: *Self, allocator: std.mem.Allocator, input: create_contact.CreateContactInput, options: CallOptions) !create_contact.CreateContactOutput {
         return create_contact.execute(self, allocator, input, options);
     }
 
     /// A contact channel is the method that Incident Manager uses to engage your
     /// contact.
-    pub fn createContactChannel(self: *Self, allocator: std.mem.Allocator, input: create_contact_channel.CreateContactChannelInput, options: create_contact_channel.Options) !create_contact_channel.CreateContactChannelOutput {
+    pub fn createContactChannel(self: *Self, allocator: std.mem.Allocator, input: create_contact_channel.CreateContactChannelInput, options: CallOptions) !create_contact_channel.CreateContactChannelOutput {
         return create_contact_channel.execute(self, allocator, input, options);
     }
 
     /// Creates a rotation in an on-call schedule.
-    pub fn createRotation(self: *Self, allocator: std.mem.Allocator, input: create_rotation.CreateRotationInput, options: create_rotation.Options) !create_rotation.CreateRotationOutput {
+    pub fn createRotation(self: *Self, allocator: std.mem.Allocator, input: create_rotation.CreateRotationInput, options: CallOptions) !create_rotation.CreateRotationOutput {
         return create_rotation.execute(self, allocator, input, options);
     }
 
     /// Creates an override for a rotation in an on-call schedule.
-    pub fn createRotationOverride(self: *Self, allocator: std.mem.Allocator, input: create_rotation_override.CreateRotationOverrideInput, options: create_rotation_override.Options) !create_rotation_override.CreateRotationOverrideOutput {
+    pub fn createRotationOverride(self: *Self, allocator: std.mem.Allocator, input: create_rotation_override.CreateRotationOverrideInput, options: CallOptions) !create_rotation_override.CreateRotationOverrideOutput {
         return create_rotation_override.execute(self, allocator, input, options);
     }
 
     /// To no longer receive Incident Manager engagements to a contact channel, you
     /// can deactivate
     /// the channel.
-    pub fn deactivateContactChannel(self: *Self, allocator: std.mem.Allocator, input: deactivate_contact_channel.DeactivateContactChannelInput, options: deactivate_contact_channel.Options) !deactivate_contact_channel.DeactivateContactChannelOutput {
+    pub fn deactivateContactChannel(self: *Self, allocator: std.mem.Allocator, input: deactivate_contact_channel.DeactivateContactChannelInput, options: CallOptions) !deactivate_contact_channel.DeactivateContactChannelOutput {
         return deactivate_contact_channel.execute(self, allocator, input, options);
     }
 
@@ -122,7 +123,7 @@ pub const Client = struct {
     /// modify an
     /// escalation plan, we recommend using the UpdateContact action to specify a
     /// different existing contact.
-    pub fn deleteContact(self: *Self, allocator: std.mem.Allocator, input: delete_contact.DeleteContactInput, options: delete_contact.Options) !delete_contact.DeleteContactOutput {
+    pub fn deleteContact(self: *Self, allocator: std.mem.Allocator, input: delete_contact.DeleteContactInput, options: CallOptions) !delete_contact.DeleteContactOutput {
         return delete_contact.execute(self, allocator, input, options);
     }
 
@@ -135,19 +136,19 @@ pub const Client = struct {
     /// contact channel for a contact, you'll no longer be able to engage that
     /// contact during an
     /// incident.
-    pub fn deleteContactChannel(self: *Self, allocator: std.mem.Allocator, input: delete_contact_channel.DeleteContactChannelInput, options: delete_contact_channel.Options) !delete_contact_channel.DeleteContactChannelOutput {
+    pub fn deleteContactChannel(self: *Self, allocator: std.mem.Allocator, input: delete_contact_channel.DeleteContactChannelInput, options: CallOptions) !delete_contact_channel.DeleteContactChannelOutput {
         return delete_contact_channel.execute(self, allocator, input, options);
     }
 
     /// Deletes a rotation from the system. If a rotation belongs to more than one
     /// on-call
     /// schedule, this operation deletes it from all of them.
-    pub fn deleteRotation(self: *Self, allocator: std.mem.Allocator, input: delete_rotation.DeleteRotationInput, options: delete_rotation.Options) !delete_rotation.DeleteRotationOutput {
+    pub fn deleteRotation(self: *Self, allocator: std.mem.Allocator, input: delete_rotation.DeleteRotationInput, options: CallOptions) !delete_rotation.DeleteRotationOutput {
         return delete_rotation.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing override for an on-call rotation.
-    pub fn deleteRotationOverride(self: *Self, allocator: std.mem.Allocator, input: delete_rotation_override.DeleteRotationOverrideInput, options: delete_rotation_override.Options) !delete_rotation_override.DeleteRotationOverrideOutput {
+    pub fn deleteRotationOverride(self: *Self, allocator: std.mem.Allocator, input: delete_rotation_override.DeleteRotationOverrideInput, options: CallOptions) !delete_rotation_override.DeleteRotationOverrideOutput {
         return delete_rotation_override.execute(self, allocator, input, options);
     }
 
@@ -155,60 +156,60 @@ pub const Client = struct {
     /// during an incident.
     /// Use this command to describe the engagement that occurred during an
     /// incident.
-    pub fn describeEngagement(self: *Self, allocator: std.mem.Allocator, input: describe_engagement.DescribeEngagementInput, options: describe_engagement.Options) !describe_engagement.DescribeEngagementOutput {
+    pub fn describeEngagement(self: *Self, allocator: std.mem.Allocator, input: describe_engagement.DescribeEngagementInput, options: CallOptions) !describe_engagement.DescribeEngagementOutput {
         return describe_engagement.execute(self, allocator, input, options);
     }
 
     /// Lists details of the engagement to a contact channel.
-    pub fn describePage(self: *Self, allocator: std.mem.Allocator, input: describe_page.DescribePageInput, options: describe_page.Options) !describe_page.DescribePageOutput {
+    pub fn describePage(self: *Self, allocator: std.mem.Allocator, input: describe_page.DescribePageInput, options: CallOptions) !describe_page.DescribePageOutput {
         return describe_page.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about the specified contact or escalation plan.
-    pub fn getContact(self: *Self, allocator: std.mem.Allocator, input: get_contact.GetContactInput, options: get_contact.Options) !get_contact.GetContactOutput {
+    pub fn getContact(self: *Self, allocator: std.mem.Allocator, input: get_contact.GetContactInput, options: CallOptions) !get_contact.GetContactOutput {
         return get_contact.execute(self, allocator, input, options);
     }
 
     /// List details about a specific contact channel.
-    pub fn getContactChannel(self: *Self, allocator: std.mem.Allocator, input: get_contact_channel.GetContactChannelInput, options: get_contact_channel.Options) !get_contact_channel.GetContactChannelOutput {
+    pub fn getContactChannel(self: *Self, allocator: std.mem.Allocator, input: get_contact_channel.GetContactChannelInput, options: CallOptions) !get_contact_channel.GetContactChannelOutput {
         return get_contact_channel.execute(self, allocator, input, options);
     }
 
     /// Retrieves the resource policies attached to the specified contact or
     /// escalation
     /// plan.
-    pub fn getContactPolicy(self: *Self, allocator: std.mem.Allocator, input: get_contact_policy.GetContactPolicyInput, options: get_contact_policy.Options) !get_contact_policy.GetContactPolicyOutput {
+    pub fn getContactPolicy(self: *Self, allocator: std.mem.Allocator, input: get_contact_policy.GetContactPolicyInput, options: CallOptions) !get_contact_policy.GetContactPolicyOutput {
         return get_contact_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about an on-call rotation.
-    pub fn getRotation(self: *Self, allocator: std.mem.Allocator, input: get_rotation.GetRotationInput, options: get_rotation.Options) !get_rotation.GetRotationOutput {
+    pub fn getRotation(self: *Self, allocator: std.mem.Allocator, input: get_rotation.GetRotationInput, options: CallOptions) !get_rotation.GetRotationOutput {
         return get_rotation.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about an override to an on-call rotation.
-    pub fn getRotationOverride(self: *Self, allocator: std.mem.Allocator, input: get_rotation_override.GetRotationOverrideInput, options: get_rotation_override.Options) !get_rotation_override.GetRotationOverrideOutput {
+    pub fn getRotationOverride(self: *Self, allocator: std.mem.Allocator, input: get_rotation_override.GetRotationOverrideInput, options: CallOptions) !get_rotation_override.GetRotationOverrideOutput {
         return get_rotation_override.execute(self, allocator, input, options);
     }
 
     /// Lists all contact channels for the specified contact.
-    pub fn listContactChannels(self: *Self, allocator: std.mem.Allocator, input: list_contact_channels.ListContactChannelsInput, options: list_contact_channels.Options) !list_contact_channels.ListContactChannelsOutput {
+    pub fn listContactChannels(self: *Self, allocator: std.mem.Allocator, input: list_contact_channels.ListContactChannelsInput, options: CallOptions) !list_contact_channels.ListContactChannelsOutput {
         return list_contact_channels.execute(self, allocator, input, options);
     }
 
     /// Lists all contacts and escalation plans in Incident Manager.
-    pub fn listContacts(self: *Self, allocator: std.mem.Allocator, input: list_contacts.ListContactsInput, options: list_contacts.Options) !list_contacts.ListContactsOutput {
+    pub fn listContacts(self: *Self, allocator: std.mem.Allocator, input: list_contacts.ListContactsInput, options: CallOptions) !list_contacts.ListContactsOutput {
         return list_contacts.execute(self, allocator, input, options);
     }
 
     /// Lists all engagements that have happened in an incident.
-    pub fn listEngagements(self: *Self, allocator: std.mem.Allocator, input: list_engagements.ListEngagementsInput, options: list_engagements.Options) !list_engagements.ListEngagementsOutput {
+    pub fn listEngagements(self: *Self, allocator: std.mem.Allocator, input: list_engagements.ListEngagementsInput, options: CallOptions) !list_engagements.ListEngagementsOutput {
         return list_engagements.execute(self, allocator, input, options);
     }
 
     /// Lists all of the engagements to contact channels that have been
     /// acknowledged.
-    pub fn listPageReceipts(self: *Self, allocator: std.mem.Allocator, input: list_page_receipts.ListPageReceiptsInput, options: list_page_receipts.Options) !list_page_receipts.ListPageReceiptsOutput {
+    pub fn listPageReceipts(self: *Self, allocator: std.mem.Allocator, input: list_page_receipts.ListPageReceiptsInput, options: CallOptions) !list_page_receipts.ListPageReceiptsOutput {
         return list_page_receipts.execute(self, allocator, input, options);
     }
 
@@ -220,18 +221,18 @@ pub const Client = struct {
     /// resolution path
     /// indicates the hierarchy of *escalation plan > on-call schedule >
     /// contact*.
-    pub fn listPageResolutions(self: *Self, allocator: std.mem.Allocator, input: list_page_resolutions.ListPageResolutionsInput, options: list_page_resolutions.Options) !list_page_resolutions.ListPageResolutionsOutput {
+    pub fn listPageResolutions(self: *Self, allocator: std.mem.Allocator, input: list_page_resolutions.ListPageResolutionsInput, options: CallOptions) !list_page_resolutions.ListPageResolutionsOutput {
         return list_page_resolutions.execute(self, allocator, input, options);
     }
 
     /// Lists the engagements to a contact's contact channels.
-    pub fn listPagesByContact(self: *Self, allocator: std.mem.Allocator, input: list_pages_by_contact.ListPagesByContactInput, options: list_pages_by_contact.Options) !list_pages_by_contact.ListPagesByContactOutput {
+    pub fn listPagesByContact(self: *Self, allocator: std.mem.Allocator, input: list_pages_by_contact.ListPagesByContactInput, options: CallOptions) !list_pages_by_contact.ListPagesByContactOutput {
         return list_pages_by_contact.execute(self, allocator, input, options);
     }
 
     /// Lists the engagements to contact channels that occurred by engaging a
     /// contact.
-    pub fn listPagesByEngagement(self: *Self, allocator: std.mem.Allocator, input: list_pages_by_engagement.ListPagesByEngagementInput, options: list_pages_by_engagement.Options) !list_pages_by_engagement.ListPagesByEngagementOutput {
+    pub fn listPagesByEngagement(self: *Self, allocator: std.mem.Allocator, input: list_pages_by_engagement.ListPagesByEngagementInput, options: CallOptions) !list_pages_by_engagement.ListPagesByEngagementOutput {
         return list_pages_by_engagement.execute(self, allocator, input, options);
     }
 
@@ -239,27 +240,27 @@ pub const Client = struct {
     ///
     /// The Incident Manager primarily uses this operation to populate the
     /// **Preview** calendar. It is not typically run by end users.
-    pub fn listPreviewRotationShifts(self: *Self, allocator: std.mem.Allocator, input: list_preview_rotation_shifts.ListPreviewRotationShiftsInput, options: list_preview_rotation_shifts.Options) !list_preview_rotation_shifts.ListPreviewRotationShiftsOutput {
+    pub fn listPreviewRotationShifts(self: *Self, allocator: std.mem.Allocator, input: list_preview_rotation_shifts.ListPreviewRotationShiftsInput, options: CallOptions) !list_preview_rotation_shifts.ListPreviewRotationShiftsOutput {
         return list_preview_rotation_shifts.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of overrides currently specified for an on-call rotation.
-    pub fn listRotationOverrides(self: *Self, allocator: std.mem.Allocator, input: list_rotation_overrides.ListRotationOverridesInput, options: list_rotation_overrides.Options) !list_rotation_overrides.ListRotationOverridesOutput {
+    pub fn listRotationOverrides(self: *Self, allocator: std.mem.Allocator, input: list_rotation_overrides.ListRotationOverridesInput, options: CallOptions) !list_rotation_overrides.ListRotationOverridesOutput {
         return list_rotation_overrides.execute(self, allocator, input, options);
     }
 
     /// Returns a list of shifts generated by an existing rotation in the system.
-    pub fn listRotationShifts(self: *Self, allocator: std.mem.Allocator, input: list_rotation_shifts.ListRotationShiftsInput, options: list_rotation_shifts.Options) !list_rotation_shifts.ListRotationShiftsOutput {
+    pub fn listRotationShifts(self: *Self, allocator: std.mem.Allocator, input: list_rotation_shifts.ListRotationShiftsInput, options: CallOptions) !list_rotation_shifts.ListRotationShiftsOutput {
         return list_rotation_shifts.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of on-call rotations.
-    pub fn listRotations(self: *Self, allocator: std.mem.Allocator, input: list_rotations.ListRotationsInput, options: list_rotations.Options) !list_rotations.ListRotationsOutput {
+    pub fn listRotations(self: *Self, allocator: std.mem.Allocator, input: list_rotations.ListRotationsInput, options: CallOptions) !list_rotations.ListRotationsOutput {
         return list_rotations.execute(self, allocator, input, options);
     }
 
     /// Lists the tags of a contact, escalation plan, rotation, or on-call schedule.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -270,7 +271,7 @@ pub const Client = struct {
     /// [Setting up
     /// cross-account
     /// functionality](https://docs.aws.amazon.com/incident-manager/latest/userguide/xa.html).
-    pub fn putContactPolicy(self: *Self, allocator: std.mem.Allocator, input: put_contact_policy.PutContactPolicyInput, options: put_contact_policy.Options) !put_contact_policy.PutContactPolicyOutput {
+    pub fn putContactPolicy(self: *Self, allocator: std.mem.Allocator, input: put_contact_policy.PutContactPolicyInput, options: CallOptions) !put_contact_policy.PutContactPolicyOutput {
         return put_contact_policy.execute(self, allocator, input, options);
     }
 
@@ -278,48 +279,48 @@ pub const Client = struct {
     /// to activate
     /// the contact channel in the console or with the `ActivateChannel` operation.
     /// Incident Manager can't engage a contact channel until it has been activated.
-    pub fn sendActivationCode(self: *Self, allocator: std.mem.Allocator, input: send_activation_code.SendActivationCodeInput, options: send_activation_code.Options) !send_activation_code.SendActivationCodeOutput {
+    pub fn sendActivationCode(self: *Self, allocator: std.mem.Allocator, input: send_activation_code.SendActivationCodeInput, options: CallOptions) !send_activation_code.SendActivationCodeOutput {
         return send_activation_code.execute(self, allocator, input, options);
     }
 
     /// Starts an engagement to a contact or escalation plan. The engagement engages
     /// each
     /// contact specified in the incident.
-    pub fn startEngagement(self: *Self, allocator: std.mem.Allocator, input: start_engagement.StartEngagementInput, options: start_engagement.Options) !start_engagement.StartEngagementOutput {
+    pub fn startEngagement(self: *Self, allocator: std.mem.Allocator, input: start_engagement.StartEngagementInput, options: CallOptions) !start_engagement.StartEngagementOutput {
         return start_engagement.execute(self, allocator, input, options);
     }
 
     /// Stops an engagement before it finishes the final stage of the escalation
     /// plan or
     /// engagement plan. Further contacts aren't engaged.
-    pub fn stopEngagement(self: *Self, allocator: std.mem.Allocator, input: stop_engagement.StopEngagementInput, options: stop_engagement.Options) !stop_engagement.StopEngagementOutput {
+    pub fn stopEngagement(self: *Self, allocator: std.mem.Allocator, input: stop_engagement.StopEngagementInput, options: CallOptions) !stop_engagement.StopEngagementOutput {
         return stop_engagement.execute(self, allocator, input, options);
     }
 
     /// Tags a contact or escalation plan. You can tag only contacts and escalation
     /// plans in the
     /// first region of your replication set.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the contact or escalation plan specified.
-    pub fn updateContact(self: *Self, allocator: std.mem.Allocator, input: update_contact.UpdateContactInput, options: update_contact.Options) !update_contact.UpdateContactOutput {
+    pub fn updateContact(self: *Self, allocator: std.mem.Allocator, input: update_contact.UpdateContactInput, options: CallOptions) !update_contact.UpdateContactOutput {
         return update_contact.execute(self, allocator, input, options);
     }
 
     /// Updates a contact's contact channel.
-    pub fn updateContactChannel(self: *Self, allocator: std.mem.Allocator, input: update_contact_channel.UpdateContactChannelInput, options: update_contact_channel.Options) !update_contact_channel.UpdateContactChannelOutput {
+    pub fn updateContactChannel(self: *Self, allocator: std.mem.Allocator, input: update_contact_channel.UpdateContactChannelInput, options: CallOptions) !update_contact_channel.UpdateContactChannelOutput {
         return update_contact_channel.execute(self, allocator, input, options);
     }
 
     /// Updates the information specified for an on-call rotation.
-    pub fn updateRotation(self: *Self, allocator: std.mem.Allocator, input: update_rotation.UpdateRotationInput, options: update_rotation.Options) !update_rotation.UpdateRotationOutput {
+    pub fn updateRotation(self: *Self, allocator: std.mem.Allocator, input: update_rotation.UpdateRotationInput, options: CallOptions) !update_rotation.UpdateRotationOutput {
         return update_rotation.execute(self, allocator, input, options);
     }
 

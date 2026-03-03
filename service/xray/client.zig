@@ -39,6 +39,7 @@ const update_group = @import("update_group.zig");
 const update_indexing_rule = @import("update_indexing_rule.zig");
 const update_sampling_rule = @import("update_sampling_rule.zig");
 const update_trace_segment_destination = @import("update_trace_segment_destination.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -77,19 +78,19 @@ pub const Client = struct {
     /// documents that originates from a single request. Use `GetTraceSummaries` to
     /// get a
     /// list of trace IDs.
-    pub fn batchGetTraces(self: *Self, allocator: std.mem.Allocator, input: batch_get_traces.BatchGetTracesInput, options: batch_get_traces.Options) !batch_get_traces.BatchGetTracesOutput {
+    pub fn batchGetTraces(self: *Self, allocator: std.mem.Allocator, input: batch_get_traces.BatchGetTracesInput, options: CallOptions) !batch_get_traces.BatchGetTracesOutput {
         return batch_get_traces.execute(self, allocator, input, options);
     }
 
     /// Cancels an ongoing trace retrieval job initiated by `StartTraceRetrieval`
     /// using the provided `RetrievalToken`. A successful cancellation will return
     /// an HTTP 200 response.
-    pub fn cancelTraceRetrieval(self: *Self, allocator: std.mem.Allocator, input: cancel_trace_retrieval.CancelTraceRetrievalInput, options: cancel_trace_retrieval.Options) !cancel_trace_retrieval.CancelTraceRetrievalOutput {
+    pub fn cancelTraceRetrieval(self: *Self, allocator: std.mem.Allocator, input: cancel_trace_retrieval.CancelTraceRetrievalInput, options: CallOptions) !cancel_trace_retrieval.CancelTraceRetrievalOutput {
         return cancel_trace_retrieval.execute(self, allocator, input, options);
     }
 
     /// Creates a group resource with a name and a filter expression.
-    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: create_group.Options) !create_group.CreateGroupOutput {
+    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: CallOptions) !create_group.CreateGroupOutput {
         return create_group.execute(self, allocator, input, options);
     }
 
@@ -105,37 +106,37 @@ pub const Client = struct {
     /// each in-use rule. The updated rule contains a trace quota that the service
     /// can use instead
     /// of borrowing from the reservoir.
-    pub fn createSamplingRule(self: *Self, allocator: std.mem.Allocator, input: create_sampling_rule.CreateSamplingRuleInput, options: create_sampling_rule.Options) !create_sampling_rule.CreateSamplingRuleOutput {
+    pub fn createSamplingRule(self: *Self, allocator: std.mem.Allocator, input: create_sampling_rule.CreateSamplingRuleInput, options: CallOptions) !create_sampling_rule.CreateSamplingRuleOutput {
         return create_sampling_rule.execute(self, allocator, input, options);
     }
 
     /// Deletes a group resource.
-    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: delete_group.Options) !delete_group.DeleteGroupOutput {
+    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: CallOptions) !delete_group.DeleteGroupOutput {
         return delete_group.execute(self, allocator, input, options);
     }
 
     /// Deletes a resource policy from the target Amazon Web Services account.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes a sampling rule.
-    pub fn deleteSamplingRule(self: *Self, allocator: std.mem.Allocator, input: delete_sampling_rule.DeleteSamplingRuleInput, options: delete_sampling_rule.Options) !delete_sampling_rule.DeleteSamplingRuleOutput {
+    pub fn deleteSamplingRule(self: *Self, allocator: std.mem.Allocator, input: delete_sampling_rule.DeleteSamplingRuleInput, options: CallOptions) !delete_sampling_rule.DeleteSamplingRuleOutput {
         return delete_sampling_rule.execute(self, allocator, input, options);
     }
 
     /// Retrieves the current encryption configuration for X-Ray data.
-    pub fn getEncryptionConfig(self: *Self, allocator: std.mem.Allocator, input: get_encryption_config.GetEncryptionConfigInput, options: get_encryption_config.Options) !get_encryption_config.GetEncryptionConfigOutput {
+    pub fn getEncryptionConfig(self: *Self, allocator: std.mem.Allocator, input: get_encryption_config.GetEncryptionConfigInput, options: CallOptions) !get_encryption_config.GetEncryptionConfigOutput {
         return get_encryption_config.execute(self, allocator, input, options);
     }
 
     /// Retrieves group resource details.
-    pub fn getGroup(self: *Self, allocator: std.mem.Allocator, input: get_group.GetGroupInput, options: get_group.Options) !get_group.GetGroupOutput {
+    pub fn getGroup(self: *Self, allocator: std.mem.Allocator, input: get_group.GetGroupInput, options: CallOptions) !get_group.GetGroupOutput {
         return get_group.execute(self, allocator, input, options);
     }
 
     /// Retrieves all active group details.
-    pub fn getGroups(self: *Self, allocator: std.mem.Allocator, input: get_groups.GetGroupsInput, options: get_groups.Options) !get_groups.GetGroupsOutput {
+    pub fn getGroups(self: *Self, allocator: std.mem.Allocator, input: get_groups.GetGroupsInput, options: CallOptions) !get_groups.GetGroupsOutput {
         return get_groups.execute(self, allocator, input, options);
     }
 
@@ -145,7 +146,7 @@ pub const Client = struct {
     /// ingested through the CloudWatchLogs destination and indexed by X-Ray. For
     /// more information, see [Transaction
     /// Search](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Transaction-Search.html).
-    pub fn getIndexingRules(self: *Self, allocator: std.mem.Allocator, input: get_indexing_rules.GetIndexingRulesInput, options: get_indexing_rules.Options) !get_indexing_rules.GetIndexingRulesOutput {
+    pub fn getIndexingRules(self: *Self, allocator: std.mem.Allocator, input: get_indexing_rules.GetIndexingRulesInput, options: CallOptions) !get_indexing_rules.GetIndexingRulesOutput {
         return get_indexing_rules.execute(self, allocator, input, options);
     }
 
@@ -154,7 +155,7 @@ pub const Client = struct {
     /// root cause services, the top anomalous services, the category, the state of
     /// the insight,
     /// and the start and end time of the insight.
-    pub fn getInsight(self: *Self, allocator: std.mem.Allocator, input: get_insight.GetInsightInput, options: get_insight.Options) !get_insight.GetInsightOutput {
+    pub fn getInsight(self: *Self, allocator: std.mem.Allocator, input: get_insight.GetInsightInput, options: CallOptions) !get_insight.GetInsightOutput {
         return get_insight.execute(self, allocator, input, options);
     }
 
@@ -163,7 +164,7 @@ pub const Client = struct {
     /// event. You can review an insight's events in the Impact Timeline on the
     /// Inspect page in the X-Ray
     /// console.
-    pub fn getInsightEvents(self: *Self, allocator: std.mem.Allocator, input: get_insight_events.GetInsightEventsInput, options: get_insight_events.Options) !get_insight_events.GetInsightEventsOutput {
+    pub fn getInsightEvents(self: *Self, allocator: std.mem.Allocator, input: get_insight_events.GetInsightEventsInput, options: CallOptions) !get_insight_events.GetInsightEventsOutput {
         return get_insight_events.execute(self, allocator, input, options);
     }
 
@@ -171,13 +172,13 @@ pub const Client = struct {
     /// service graph is limited to only
     /// structural information. For a complete service graph, use this API with the
     /// GetServiceGraph API.
-    pub fn getInsightImpactGraph(self: *Self, allocator: std.mem.Allocator, input: get_insight_impact_graph.GetInsightImpactGraphInput, options: get_insight_impact_graph.Options) !get_insight_impact_graph.GetInsightImpactGraphOutput {
+    pub fn getInsightImpactGraph(self: *Self, allocator: std.mem.Allocator, input: get_insight_impact_graph.GetInsightImpactGraphInput, options: CallOptions) !get_insight_impact_graph.GetInsightImpactGraphOutput {
         return get_insight_impact_graph.execute(self, allocator, input, options);
     }
 
     /// Retrieves the summaries of all insights in the specified group matching the
     /// provided filter values.
-    pub fn getInsightSummaries(self: *Self, allocator: std.mem.Allocator, input: get_insight_summaries.GetInsightSummariesInput, options: get_insight_summaries.Options) !get_insight_summaries.GetInsightSummariesOutput {
+    pub fn getInsightSummaries(self: *Self, allocator: std.mem.Allocator, input: get_insight_summaries.GetInsightSummariesInput, options: CallOptions) !get_insight_summaries.GetInsightSummariesOutput {
         return get_insight_summaries.execute(self, allocator, input, options);
     }
 
@@ -200,23 +201,23 @@ pub const Client = struct {
     /// For retrieving graphs from X-Ray directly as opposed to the
     /// Transaction-Search Log group, see
     /// [GetTraceGraph](https://docs.aws.amazon.com/xray/latest/api/API_GetTraceGraph.html).
-    pub fn getRetrievedTracesGraph(self: *Self, allocator: std.mem.Allocator, input: get_retrieved_traces_graph.GetRetrievedTracesGraphInput, options: get_retrieved_traces_graph.Options) !get_retrieved_traces_graph.GetRetrievedTracesGraphOutput {
+    pub fn getRetrievedTracesGraph(self: *Self, allocator: std.mem.Allocator, input: get_retrieved_traces_graph.GetRetrievedTracesGraphInput, options: CallOptions) !get_retrieved_traces_graph.GetRetrievedTracesGraphOutput {
         return get_retrieved_traces_graph.execute(self, allocator, input, options);
     }
 
     /// Retrieves all sampling rules.
-    pub fn getSamplingRules(self: *Self, allocator: std.mem.Allocator, input: get_sampling_rules.GetSamplingRulesInput, options: get_sampling_rules.Options) !get_sampling_rules.GetSamplingRulesOutput {
+    pub fn getSamplingRules(self: *Self, allocator: std.mem.Allocator, input: get_sampling_rules.GetSamplingRulesInput, options: CallOptions) !get_sampling_rules.GetSamplingRulesOutput {
         return get_sampling_rules.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about recent sampling results for all sampling rules.
-    pub fn getSamplingStatisticSummaries(self: *Self, allocator: std.mem.Allocator, input: get_sampling_statistic_summaries.GetSamplingStatisticSummariesInput, options: get_sampling_statistic_summaries.Options) !get_sampling_statistic_summaries.GetSamplingStatisticSummariesOutput {
+    pub fn getSamplingStatisticSummaries(self: *Self, allocator: std.mem.Allocator, input: get_sampling_statistic_summaries.GetSamplingStatisticSummariesInput, options: CallOptions) !get_sampling_statistic_summaries.GetSamplingStatisticSummariesOutput {
         return get_sampling_statistic_summaries.execute(self, allocator, input, options);
     }
 
     /// Requests a sampling quota for rules that the service is using to sample
     /// requests.
-    pub fn getSamplingTargets(self: *Self, allocator: std.mem.Allocator, input: get_sampling_targets.GetSamplingTargetsInput, options: get_sampling_targets.Options) !get_sampling_targets.GetSamplingTargetsOutput {
+    pub fn getSamplingTargets(self: *Self, allocator: std.mem.Allocator, input: get_sampling_targets.GetSamplingTargetsInput, options: CallOptions) !get_sampling_targets.GetSamplingTargetsOutput {
         return get_sampling_targets.execute(self, allocator, input, options);
     }
 
@@ -230,18 +231,18 @@ pub const Client = struct {
     /// Downstream services can be other applications, Amazon Web Services
     /// resources, HTTP web APIs, or SQL
     /// databases.
-    pub fn getServiceGraph(self: *Self, allocator: std.mem.Allocator, input: get_service_graph.GetServiceGraphInput, options: get_service_graph.Options) !get_service_graph.GetServiceGraphOutput {
+    pub fn getServiceGraph(self: *Self, allocator: std.mem.Allocator, input: get_service_graph.GetServiceGraphInput, options: CallOptions) !get_service_graph.GetServiceGraphOutput {
         return get_service_graph.execute(self, allocator, input, options);
     }
 
     /// Get an aggregation of service statistics defined by a specific time
     /// range.
-    pub fn getTimeSeriesServiceStatistics(self: *Self, allocator: std.mem.Allocator, input: get_time_series_service_statistics.GetTimeSeriesServiceStatisticsInput, options: get_time_series_service_statistics.Options) !get_time_series_service_statistics.GetTimeSeriesServiceStatisticsOutput {
+    pub fn getTimeSeriesServiceStatistics(self: *Self, allocator: std.mem.Allocator, input: get_time_series_service_statistics.GetTimeSeriesServiceStatisticsInput, options: CallOptions) !get_time_series_service_statistics.GetTimeSeriesServiceStatisticsOutput {
         return get_time_series_service_statistics.execute(self, allocator, input, options);
     }
 
     /// Retrieves a service graph for one or more specific trace IDs.
-    pub fn getTraceGraph(self: *Self, allocator: std.mem.Allocator, input: get_trace_graph.GetTraceGraphInput, options: get_trace_graph.Options) !get_trace_graph.GetTraceGraphOutput {
+    pub fn getTraceGraph(self: *Self, allocator: std.mem.Allocator, input: get_trace_graph.GetTraceGraphInput, options: CallOptions) !get_trace_graph.GetTraceGraphOutput {
         return get_trace_graph.execute(self, allocator, input, options);
     }
 
@@ -250,7 +251,7 @@ pub const Client = struct {
     /// requires a CloudWatchLogs destination. For more information, see
     /// [Transaction
     /// Search](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Transaction-Search.html) and [OpenTelemetry](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-OpenTelemetry-Sections.html).
-    pub fn getTraceSegmentDestination(self: *Self, allocator: std.mem.Allocator, input: get_trace_segment_destination.GetTraceSegmentDestinationInput, options: get_trace_segment_destination.Options) !get_trace_segment_destination.GetTraceSegmentDestinationOutput {
+    pub fn getTraceSegmentDestination(self: *Self, allocator: std.mem.Allocator, input: get_trace_segment_destination.GetTraceSegmentDestinationInput, options: CallOptions) !get_trace_segment_destination.GetTraceSegmentDestinationOutput {
         return get_trace_segment_destination.execute(self, allocator, input, options);
     }
 
@@ -276,13 +277,13 @@ pub const Client = struct {
     /// expressions,
     /// see [Use filter
     /// expressions](https://docs.aws.amazon.com/xray/latest/devguide/aws-xray-interface-console.html#xray-console-filters) in the *Amazon Web Services X-Ray Developer Guide*.
-    pub fn getTraceSummaries(self: *Self, allocator: std.mem.Allocator, input: get_trace_summaries.GetTraceSummariesInput, options: get_trace_summaries.Options) !get_trace_summaries.GetTraceSummariesOutput {
+    pub fn getTraceSummaries(self: *Self, allocator: std.mem.Allocator, input: get_trace_summaries.GetTraceSummariesInput, options: CallOptions) !get_trace_summaries.GetTraceSummariesOutput {
         return get_trace_summaries.execute(self, allocator, input, options);
     }
 
     /// Returns the list of resource policies in the target Amazon Web Services
     /// account.
-    pub fn listResourcePolicies(self: *Self, allocator: std.mem.Allocator, input: list_resource_policies.ListResourcePoliciesInput, options: list_resource_policies.Options) !list_resource_policies.ListResourcePoliciesOutput {
+    pub fn listResourcePolicies(self: *Self, allocator: std.mem.Allocator, input: list_resource_policies.ListResourcePoliciesInput, options: CallOptions) !list_resource_policies.ListResourcePoliciesOutput {
         return list_resource_policies.execute(self, allocator, input, options);
     }
 
@@ -306,18 +307,18 @@ pub const Client = struct {
     /// For retrieving data from X-Ray directly as opposed to the Transaction Search
     /// generated log group, see
     /// [BatchGetTraces](https://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html).
-    pub fn listRetrievedTraces(self: *Self, allocator: std.mem.Allocator, input: list_retrieved_traces.ListRetrievedTracesInput, options: list_retrieved_traces.Options) !list_retrieved_traces.ListRetrievedTracesOutput {
+    pub fn listRetrievedTraces(self: *Self, allocator: std.mem.Allocator, input: list_retrieved_traces.ListRetrievedTracesInput, options: CallOptions) !list_retrieved_traces.ListRetrievedTracesOutput {
         return list_retrieved_traces.execute(self, allocator, input, options);
     }
 
     /// Returns a list of tags that are applied to the specified Amazon Web Services
     /// X-Ray group or sampling rule.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the encryption configuration for X-Ray data.
-    pub fn putEncryptionConfig(self: *Self, allocator: std.mem.Allocator, input: put_encryption_config.PutEncryptionConfigInput, options: put_encryption_config.Options) !put_encryption_config.PutEncryptionConfigOutput {
+    pub fn putEncryptionConfig(self: *Self, allocator: std.mem.Allocator, input: put_encryption_config.PutEncryptionConfigInput, options: CallOptions) !put_encryption_config.PutEncryptionConfigOutput {
         return put_encryption_config.execute(self, allocator, input, options);
     }
 
@@ -328,12 +329,12 @@ pub const Client = struct {
     /// Each Amazon Web Services account can have a maximum of 5 resource policies,
     /// and each policy name must be
     /// unique within that account. The maximum size of each resource policy is 5KB.
-    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: put_resource_policy.Options) !put_resource_policy.PutResourcePolicyOutput {
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Used by the Amazon Web Services X-Ray daemon to upload telemetry.
-    pub fn putTelemetryRecords(self: *Self, allocator: std.mem.Allocator, input: put_telemetry_records.PutTelemetryRecordsInput, options: put_telemetry_records.Options) !put_telemetry_records.PutTelemetryRecordsOutput {
+    pub fn putTelemetryRecords(self: *Self, allocator: std.mem.Allocator, input: put_telemetry_records.PutTelemetryRecordsInput, options: CallOptions) !put_telemetry_records.PutTelemetryRecordsOutput {
         return put_telemetry_records.execute(self, allocator, input, options);
     }
 
@@ -404,7 +405,7 @@ pub const Client = struct {
     /// trace IDs include
     /// the original request timestamp in Unix epoch time, this is not required or
     /// validated.
-    pub fn putTraceSegments(self: *Self, allocator: std.mem.Allocator, input: put_trace_segments.PutTraceSegmentsInput, options: put_trace_segments.Options) !put_trace_segments.PutTraceSegmentsOutput {
+    pub fn putTraceSegments(self: *Self, allocator: std.mem.Allocator, input: put_trace_segments.PutTraceSegmentsInput, options: CallOptions) !put_trace_segments.PutTraceSegmentsOutput {
         return put_trace_segments.execute(self, allocator, input, options);
     }
 
@@ -424,25 +425,25 @@ pub const Client = struct {
     /// For retrieving data from X-Ray directly as opposed to the Transaction-Search
     /// Log group, see
     /// [BatchGetTraces](https://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html).
-    pub fn startTraceRetrieval(self: *Self, allocator: std.mem.Allocator, input: start_trace_retrieval.StartTraceRetrievalInput, options: start_trace_retrieval.Options) !start_trace_retrieval.StartTraceRetrievalOutput {
+    pub fn startTraceRetrieval(self: *Self, allocator: std.mem.Allocator, input: start_trace_retrieval.StartTraceRetrievalInput, options: CallOptions) !start_trace_retrieval.StartTraceRetrievalOutput {
         return start_trace_retrieval.execute(self, allocator, input, options);
     }
 
     /// Applies tags to an existing Amazon Web Services X-Ray group or sampling
     /// rule.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from an Amazon Web Services X-Ray group or sampling rule. You
     /// cannot edit or delete system
     /// tags (those with an `aws:` prefix).
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates a group resource.
-    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: update_group.Options) !update_group.UpdateGroupOutput {
+    pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: CallOptions) !update_group.UpdateGroupOutput {
         return update_group.execute(self, allocator, input, options);
     }
 
@@ -451,12 +452,12 @@ pub const Client = struct {
     /// Indexing rules are used for determining the sampling rate for spans indexed
     /// from CloudWatch Logs. For more information, see [Transaction
     /// Search](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Transaction-Search.html).
-    pub fn updateIndexingRule(self: *Self, allocator: std.mem.Allocator, input: update_indexing_rule.UpdateIndexingRuleInput, options: update_indexing_rule.Options) !update_indexing_rule.UpdateIndexingRuleOutput {
+    pub fn updateIndexingRule(self: *Self, allocator: std.mem.Allocator, input: update_indexing_rule.UpdateIndexingRuleInput, options: CallOptions) !update_indexing_rule.UpdateIndexingRuleOutput {
         return update_indexing_rule.execute(self, allocator, input, options);
     }
 
     /// Modifies a sampling rule's configuration.
-    pub fn updateSamplingRule(self: *Self, allocator: std.mem.Allocator, input: update_sampling_rule.UpdateSamplingRuleInput, options: update_sampling_rule.Options) !update_sampling_rule.UpdateSamplingRuleOutput {
+    pub fn updateSamplingRule(self: *Self, allocator: std.mem.Allocator, input: update_sampling_rule.UpdateSamplingRuleInput, options: CallOptions) !update_sampling_rule.UpdateSamplingRuleOutput {
         return update_sampling_rule.execute(self, allocator, input, options);
     }
 
@@ -464,7 +465,7 @@ pub const Client = struct {
     /// Search feature requires the CloudWatchLogs destination. For more
     /// information, see [Transaction
     /// Search](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Transaction-Search.html).
-    pub fn updateTraceSegmentDestination(self: *Self, allocator: std.mem.Allocator, input: update_trace_segment_destination.UpdateTraceSegmentDestinationInput, options: update_trace_segment_destination.Options) !update_trace_segment_destination.UpdateTraceSegmentDestinationOutput {
+    pub fn updateTraceSegmentDestination(self: *Self, allocator: std.mem.Allocator, input: update_trace_segment_destination.UpdateTraceSegmentDestinationInput, options: CallOptions) !update_trace_segment_destination.UpdateTraceSegmentDestinationOutput {
         return update_trace_segment_destination.execute(self, allocator, input, options);
     }
 

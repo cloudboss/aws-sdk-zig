@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchRebootClusterNodesError = @import("batch_reboot_cluster_nodes_error.zig").BatchRebootClusterNodesError;
 const BatchRebootClusterNodeLogicalIdsError = @import("batch_reboot_cluster_node_logical_ids_error.zig").BatchRebootClusterNodeLogicalIdsError;
@@ -70,11 +71,7 @@ pub const BatchRebootClusterNodesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchRebootClusterNodesInput, options: Options) !BatchRebootClusterNodesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchRebootClusterNodesInput, options: CallOptions) !BatchRebootClusterNodesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

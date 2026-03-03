@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProviderType = @import("provider_type.zig").ProviderType;
 const RepositoryAssociationState = @import("repository_association_state.zig").RepositoryAssociationState;
@@ -106,11 +107,7 @@ pub const ListRepositoryAssociationsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRepositoryAssociationsInput, options: Options) !ListRepositoryAssociationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRepositoryAssociationsInput, options: CallOptions) !ListRepositoryAssociationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

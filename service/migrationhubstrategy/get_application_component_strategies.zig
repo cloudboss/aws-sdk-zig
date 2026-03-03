@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ApplicationComponentStrategy = @import("application_component_strategy.zig").ApplicationComponentStrategy;
 
@@ -23,11 +24,7 @@ pub const GetApplicationComponentStrategiesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetApplicationComponentStrategiesInput, options: Options) !GetApplicationComponentStrategiesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetApplicationComponentStrategiesInput, options: CallOptions) !GetApplicationComponentStrategiesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

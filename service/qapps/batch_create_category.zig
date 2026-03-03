@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BatchCreateCategoryInputCategory = @import("batch_create_category_input_category.zig").BatchCreateCategoryInputCategory;
 
@@ -19,13 +20,9 @@ pub const BatchCreateCategoryInput = struct {
     };
 };
 
-const BatchCreateCategoryOutput = struct {};
+pub const BatchCreateCategoryOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchCreateCategoryInput, options: Options) !BatchCreateCategoryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchCreateCategoryInput, options: CallOptions) !BatchCreateCategoryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -124,6 +124,7 @@ const update_node = @import("update_node.zig");
 const update_node_state = @import("update_node_state.zig");
 const update_reservation = @import("update_reservation.zig");
 const update_sdi_source = @import("update_sdi_source.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -157,43 +158,43 @@ pub const Client = struct {
 
     /// Accept an incoming input device transfer. The ownership of the device will
     /// transfer to your AWS account.
-    pub fn acceptInputDeviceTransfer(self: *Self, allocator: std.mem.Allocator, input: accept_input_device_transfer.AcceptInputDeviceTransferInput, options: accept_input_device_transfer.Options) !accept_input_device_transfer.AcceptInputDeviceTransferOutput {
+    pub fn acceptInputDeviceTransfer(self: *Self, allocator: std.mem.Allocator, input: accept_input_device_transfer.AcceptInputDeviceTransferInput, options: CallOptions) !accept_input_device_transfer.AcceptInputDeviceTransferOutput {
         return accept_input_device_transfer.execute(self, allocator, input, options);
     }
 
     /// Starts delete of resources.
-    pub fn batchDelete(self: *Self, allocator: std.mem.Allocator, input: batch_delete.BatchDeleteInput, options: batch_delete.Options) !batch_delete.BatchDeleteOutput {
+    pub fn batchDelete(self: *Self, allocator: std.mem.Allocator, input: batch_delete.BatchDeleteInput, options: CallOptions) !batch_delete.BatchDeleteOutput {
         return batch_delete.execute(self, allocator, input, options);
     }
 
     /// Starts existing resources
-    pub fn batchStart(self: *Self, allocator: std.mem.Allocator, input: batch_start.BatchStartInput, options: batch_start.Options) !batch_start.BatchStartOutput {
+    pub fn batchStart(self: *Self, allocator: std.mem.Allocator, input: batch_start.BatchStartInput, options: CallOptions) !batch_start.BatchStartOutput {
         return batch_start.execute(self, allocator, input, options);
     }
 
     /// Stops running resources
-    pub fn batchStop(self: *Self, allocator: std.mem.Allocator, input: batch_stop.BatchStopInput, options: batch_stop.Options) !batch_stop.BatchStopOutput {
+    pub fn batchStop(self: *Self, allocator: std.mem.Allocator, input: batch_stop.BatchStopInput, options: CallOptions) !batch_stop.BatchStopOutput {
         return batch_stop.execute(self, allocator, input, options);
     }
 
     /// Update a channel schedule
-    pub fn batchUpdateSchedule(self: *Self, allocator: std.mem.Allocator, input: batch_update_schedule.BatchUpdateScheduleInput, options: batch_update_schedule.Options) !batch_update_schedule.BatchUpdateScheduleOutput {
+    pub fn batchUpdateSchedule(self: *Self, allocator: std.mem.Allocator, input: batch_update_schedule.BatchUpdateScheduleInput, options: CallOptions) !batch_update_schedule.BatchUpdateScheduleOutput {
         return batch_update_schedule.execute(self, allocator, input, options);
     }
 
     /// Cancel an input device transfer that you have requested.
-    pub fn cancelInputDeviceTransfer(self: *Self, allocator: std.mem.Allocator, input: cancel_input_device_transfer.CancelInputDeviceTransferInput, options: cancel_input_device_transfer.Options) !cancel_input_device_transfer.CancelInputDeviceTransferOutput {
+    pub fn cancelInputDeviceTransfer(self: *Self, allocator: std.mem.Allocator, input: cancel_input_device_transfer.CancelInputDeviceTransferInput, options: CallOptions) !cancel_input_device_transfer.CancelInputDeviceTransferOutput {
         return cancel_input_device_transfer.execute(self, allocator, input, options);
     }
 
     /// Send a request to claim an AWS Elemental device that you have purchased from
     /// a third-party vendor. After the request succeeds, you will own the device.
-    pub fn claimDevice(self: *Self, allocator: std.mem.Allocator, input: claim_device.ClaimDeviceInput, options: claim_device.Options) !claim_device.ClaimDeviceOutput {
+    pub fn claimDevice(self: *Self, allocator: std.mem.Allocator, input: claim_device.ClaimDeviceInput, options: CallOptions) !claim_device.ClaimDeviceOutput {
         return claim_device.execute(self, allocator, input, options);
     }
 
     /// Creates a new channel
-    pub fn createChannel(self: *Self, allocator: std.mem.Allocator, input: create_channel.CreateChannelInput, options: create_channel.Options) !create_channel.CreateChannelOutput {
+    pub fn createChannel(self: *Self, allocator: std.mem.Allocator, input: create_channel.CreateChannelInput, options: CallOptions) !create_channel.CreateChannelOutput {
         return create_channel.execute(self, allocator, input, options);
     }
 
@@ -204,57 +205,57 @@ pub const Client = struct {
     /// association of Channels to ChannelPlacementGroup, and ChannelPlacementGroup
     /// to Nodes. This association means that all the Channels in the group are able
     /// to run on any of the Nodes associated with the group.
-    pub fn createChannelPlacementGroup(self: *Self, allocator: std.mem.Allocator, input: create_channel_placement_group.CreateChannelPlacementGroupInput, options: create_channel_placement_group.Options) !create_channel_placement_group.CreateChannelPlacementGroupOutput {
+    pub fn createChannelPlacementGroup(self: *Self, allocator: std.mem.Allocator, input: create_channel_placement_group.CreateChannelPlacementGroupInput, options: CallOptions) !create_channel_placement_group.CreateChannelPlacementGroupOutput {
         return create_channel_placement_group.execute(self, allocator, input, options);
     }
 
     /// Creates a cloudwatch alarm template to dynamically generate cloudwatch
     /// metric alarms on targeted resource types.
-    pub fn createCloudWatchAlarmTemplate(self: *Self, allocator: std.mem.Allocator, input: create_cloud_watch_alarm_template.CreateCloudWatchAlarmTemplateInput, options: create_cloud_watch_alarm_template.Options) !create_cloud_watch_alarm_template.CreateCloudWatchAlarmTemplateOutput {
+    pub fn createCloudWatchAlarmTemplate(self: *Self, allocator: std.mem.Allocator, input: create_cloud_watch_alarm_template.CreateCloudWatchAlarmTemplateInput, options: CallOptions) !create_cloud_watch_alarm_template.CreateCloudWatchAlarmTemplateOutput {
         return create_cloud_watch_alarm_template.execute(self, allocator, input, options);
     }
 
     /// Creates a cloudwatch alarm template group to group your cloudwatch alarm
     /// templates and to attach to signal maps for dynamically creating alarms.
-    pub fn createCloudWatchAlarmTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: create_cloud_watch_alarm_template_group.CreateCloudWatchAlarmTemplateGroupInput, options: create_cloud_watch_alarm_template_group.Options) !create_cloud_watch_alarm_template_group.CreateCloudWatchAlarmTemplateGroupOutput {
+    pub fn createCloudWatchAlarmTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: create_cloud_watch_alarm_template_group.CreateCloudWatchAlarmTemplateGroupInput, options: CallOptions) !create_cloud_watch_alarm_template_group.CreateCloudWatchAlarmTemplateGroupOutput {
         return create_cloud_watch_alarm_template_group.execute(self, allocator, input, options);
     }
 
     /// Create a new Cluster.
-    pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: create_cluster.Options) !create_cluster.CreateClusterOutput {
+    pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: CallOptions) !create_cluster.CreateClusterOutput {
         return create_cluster.execute(self, allocator, input, options);
     }
 
     /// Creates an eventbridge rule template to monitor events and send
     /// notifications to your targeted resources.
-    pub fn createEventBridgeRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: create_event_bridge_rule_template.CreateEventBridgeRuleTemplateInput, options: create_event_bridge_rule_template.Options) !create_event_bridge_rule_template.CreateEventBridgeRuleTemplateOutput {
+    pub fn createEventBridgeRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: create_event_bridge_rule_template.CreateEventBridgeRuleTemplateInput, options: CallOptions) !create_event_bridge_rule_template.CreateEventBridgeRuleTemplateOutput {
         return create_event_bridge_rule_template.execute(self, allocator, input, options);
     }
 
     /// Creates an eventbridge rule template group to group your eventbridge rule
     /// templates and to attach to signal maps for dynamically creating notification
     /// rules.
-    pub fn createEventBridgeRuleTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: create_event_bridge_rule_template_group.CreateEventBridgeRuleTemplateGroupInput, options: create_event_bridge_rule_template_group.Options) !create_event_bridge_rule_template_group.CreateEventBridgeRuleTemplateGroupOutput {
+    pub fn createEventBridgeRuleTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: create_event_bridge_rule_template_group.CreateEventBridgeRuleTemplateGroupInput, options: CallOptions) !create_event_bridge_rule_template_group.CreateEventBridgeRuleTemplateGroupOutput {
         return create_event_bridge_rule_template_group.execute(self, allocator, input, options);
     }
 
     /// Create an input
-    pub fn createInput(self: *Self, allocator: std.mem.Allocator, input: create_input.CreateInputInput, options: create_input.Options) !create_input.CreateInputOutput {
+    pub fn createInput(self: *Self, allocator: std.mem.Allocator, input: create_input.CreateInputInput, options: CallOptions) !create_input.CreateInputOutput {
         return create_input.execute(self, allocator, input, options);
     }
 
     /// Creates a Input Security Group
-    pub fn createInputSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: create_input_security_group.CreateInputSecurityGroupInput, options: create_input_security_group.Options) !create_input_security_group.CreateInputSecurityGroupOutput {
+    pub fn createInputSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: create_input_security_group.CreateInputSecurityGroupInput, options: CallOptions) !create_input_security_group.CreateInputSecurityGroupOutput {
         return create_input_security_group.execute(self, allocator, input, options);
     }
 
     /// Create a new multiplex.
-    pub fn createMultiplex(self: *Self, allocator: std.mem.Allocator, input: create_multiplex.CreateMultiplexInput, options: create_multiplex.Options) !create_multiplex.CreateMultiplexOutput {
+    pub fn createMultiplex(self: *Self, allocator: std.mem.Allocator, input: create_multiplex.CreateMultiplexInput, options: CallOptions) !create_multiplex.CreateMultiplexOutput {
         return create_multiplex.execute(self, allocator, input, options);
     }
 
     /// Create a new program in the multiplex.
-    pub fn createMultiplexProgram(self: *Self, allocator: std.mem.Allocator, input: create_multiplex_program.CreateMultiplexProgramInput, options: create_multiplex_program.Options) !create_multiplex_program.CreateMultiplexProgramOutput {
+    pub fn createMultiplexProgram(self: *Self, allocator: std.mem.Allocator, input: create_multiplex_program.CreateMultiplexProgramInput, options: CallOptions) !create_multiplex_program.CreateMultiplexProgramOutput {
         return create_multiplex_program.execute(self, allocator, input, options);
     }
 
@@ -262,14 +263,14 @@ pub const Client = struct {
     /// with each Network.Each Network provides MediaLive Anywhere with required
     /// information about the network in your organization that you are using for
     /// video encoding using MediaLive.
-    pub fn createNetwork(self: *Self, allocator: std.mem.Allocator, input: create_network.CreateNetworkInput, options: create_network.Options) !create_network.CreateNetworkOutput {
+    pub fn createNetwork(self: *Self, allocator: std.mem.Allocator, input: create_network.CreateNetworkInput, options: CallOptions) !create_network.CreateNetworkOutput {
         return create_network.execute(self, allocator, input, options);
     }
 
     /// Create a Node in the specified Cluster. You can also create Nodes using the
     /// CreateNodeRegistrationScript. Note that you can't move a Node to another
     /// Cluster.
-    pub fn createNode(self: *Self, allocator: std.mem.Allocator, input: create_node.CreateNodeInput, options: create_node.Options) !create_node.CreateNodeOutput {
+    pub fn createNode(self: *Self, allocator: std.mem.Allocator, input: create_node.CreateNodeInput, options: CallOptions) !create_node.CreateNodeOutput {
         return create_node.execute(self, allocator, input, options);
     }
 
@@ -278,12 +279,12 @@ pub const Client = struct {
     /// for that Cluster. The script creates a Node in the specified Cluster. It
     /// then binds the Node to this hardware unit, and activates the node hardware
     /// for use with MediaLive Anywhere.
-    pub fn createNodeRegistrationScript(self: *Self, allocator: std.mem.Allocator, input: create_node_registration_script.CreateNodeRegistrationScriptInput, options: create_node_registration_script.Options) !create_node_registration_script.CreateNodeRegistrationScriptOutput {
+    pub fn createNodeRegistrationScript(self: *Self, allocator: std.mem.Allocator, input: create_node_registration_script.CreateNodeRegistrationScriptInput, options: CallOptions) !create_node_registration_script.CreateNodeRegistrationScriptOutput {
         return create_node_registration_script.execute(self, allocator, input, options);
     }
 
     /// Create a partner input
-    pub fn createPartnerInput(self: *Self, allocator: std.mem.Allocator, input: create_partner_input.CreatePartnerInputInput, options: create_partner_input.Options) !create_partner_input.CreatePartnerInputOutput {
+    pub fn createPartnerInput(self: *Self, allocator: std.mem.Allocator, input: create_partner_input.CreatePartnerInputInput, options: CallOptions) !create_partner_input.CreatePartnerInputOutput {
         return create_partner_input.execute(self, allocator, input, options);
     }
 
@@ -292,387 +293,387 @@ pub const Client = struct {
     /// will also reference it in an SdiSourceMapping, in order to create a
     /// connection between the logical SdiSource and the physical SDI card and port
     /// that the physical SDI source uses.
-    pub fn createSdiSource(self: *Self, allocator: std.mem.Allocator, input: create_sdi_source.CreateSdiSourceInput, options: create_sdi_source.Options) !create_sdi_source.CreateSdiSourceOutput {
+    pub fn createSdiSource(self: *Self, allocator: std.mem.Allocator, input: create_sdi_source.CreateSdiSourceInput, options: CallOptions) !create_sdi_source.CreateSdiSourceOutput {
         return create_sdi_source.execute(self, allocator, input, options);
     }
 
     /// Initiates the creation of a new signal map. Will discover a new
     /// mediaResourceMap based on the provided discoveryEntryPointArn.
-    pub fn createSignalMap(self: *Self, allocator: std.mem.Allocator, input: create_signal_map.CreateSignalMapInput, options: create_signal_map.Options) !create_signal_map.CreateSignalMapOutput {
+    pub fn createSignalMap(self: *Self, allocator: std.mem.Allocator, input: create_signal_map.CreateSignalMapInput, options: CallOptions) !create_signal_map.CreateSignalMapOutput {
         return create_signal_map.execute(self, allocator, input, options);
     }
 
     /// Create tags for a resource
-    pub fn createTags(self: *Self, allocator: std.mem.Allocator, input: create_tags.CreateTagsInput, options: create_tags.Options) !create_tags.CreateTagsOutput {
+    pub fn createTags(self: *Self, allocator: std.mem.Allocator, input: create_tags.CreateTagsInput, options: CallOptions) !create_tags.CreateTagsOutput {
         return create_tags.execute(self, allocator, input, options);
     }
 
     /// Starts deletion of channel. The associated outputs are also deleted.
-    pub fn deleteChannel(self: *Self, allocator: std.mem.Allocator, input: delete_channel.DeleteChannelInput, options: delete_channel.Options) !delete_channel.DeleteChannelOutput {
+    pub fn deleteChannel(self: *Self, allocator: std.mem.Allocator, input: delete_channel.DeleteChannelInput, options: CallOptions) !delete_channel.DeleteChannelOutput {
         return delete_channel.execute(self, allocator, input, options);
     }
 
     /// Delete the specified ChannelPlacementGroup that exists in the specified
     /// Cluster.
-    pub fn deleteChannelPlacementGroup(self: *Self, allocator: std.mem.Allocator, input: delete_channel_placement_group.DeleteChannelPlacementGroupInput, options: delete_channel_placement_group.Options) !delete_channel_placement_group.DeleteChannelPlacementGroupOutput {
+    pub fn deleteChannelPlacementGroup(self: *Self, allocator: std.mem.Allocator, input: delete_channel_placement_group.DeleteChannelPlacementGroupInput, options: CallOptions) !delete_channel_placement_group.DeleteChannelPlacementGroupOutput {
         return delete_channel_placement_group.execute(self, allocator, input, options);
     }
 
     /// Deletes a cloudwatch alarm template.
-    pub fn deleteCloudWatchAlarmTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_cloud_watch_alarm_template.DeleteCloudWatchAlarmTemplateInput, options: delete_cloud_watch_alarm_template.Options) !delete_cloud_watch_alarm_template.DeleteCloudWatchAlarmTemplateOutput {
+    pub fn deleteCloudWatchAlarmTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_cloud_watch_alarm_template.DeleteCloudWatchAlarmTemplateInput, options: CallOptions) !delete_cloud_watch_alarm_template.DeleteCloudWatchAlarmTemplateOutput {
         return delete_cloud_watch_alarm_template.execute(self, allocator, input, options);
     }
 
     /// Deletes a cloudwatch alarm template group. You must detach this group from
     /// all signal maps and ensure its existing templates are moved to another group
     /// or deleted.
-    pub fn deleteCloudWatchAlarmTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: delete_cloud_watch_alarm_template_group.DeleteCloudWatchAlarmTemplateGroupInput, options: delete_cloud_watch_alarm_template_group.Options) !delete_cloud_watch_alarm_template_group.DeleteCloudWatchAlarmTemplateGroupOutput {
+    pub fn deleteCloudWatchAlarmTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: delete_cloud_watch_alarm_template_group.DeleteCloudWatchAlarmTemplateGroupInput, options: CallOptions) !delete_cloud_watch_alarm_template_group.DeleteCloudWatchAlarmTemplateGroupOutput {
         return delete_cloud_watch_alarm_template_group.execute(self, allocator, input, options);
     }
 
     /// Delete a Cluster. The Cluster must be idle.
-    pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: delete_cluster.Options) !delete_cluster.DeleteClusterOutput {
+    pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: CallOptions) !delete_cluster.DeleteClusterOutput {
         return delete_cluster.execute(self, allocator, input, options);
     }
 
     /// Deletes an eventbridge rule template.
-    pub fn deleteEventBridgeRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_event_bridge_rule_template.DeleteEventBridgeRuleTemplateInput, options: delete_event_bridge_rule_template.Options) !delete_event_bridge_rule_template.DeleteEventBridgeRuleTemplateOutput {
+    pub fn deleteEventBridgeRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_event_bridge_rule_template.DeleteEventBridgeRuleTemplateInput, options: CallOptions) !delete_event_bridge_rule_template.DeleteEventBridgeRuleTemplateOutput {
         return delete_event_bridge_rule_template.execute(self, allocator, input, options);
     }
 
     /// Deletes an eventbridge rule template group. You must detach this group from
     /// all signal maps and ensure its existing templates are moved to another group
     /// or deleted.
-    pub fn deleteEventBridgeRuleTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: delete_event_bridge_rule_template_group.DeleteEventBridgeRuleTemplateGroupInput, options: delete_event_bridge_rule_template_group.Options) !delete_event_bridge_rule_template_group.DeleteEventBridgeRuleTemplateGroupOutput {
+    pub fn deleteEventBridgeRuleTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: delete_event_bridge_rule_template_group.DeleteEventBridgeRuleTemplateGroupInput, options: CallOptions) !delete_event_bridge_rule_template_group.DeleteEventBridgeRuleTemplateGroupOutput {
         return delete_event_bridge_rule_template_group.execute(self, allocator, input, options);
     }
 
     /// Deletes the input end point
-    pub fn deleteInput(self: *Self, allocator: std.mem.Allocator, input: delete_input.DeleteInputInput, options: delete_input.Options) !delete_input.DeleteInputOutput {
+    pub fn deleteInput(self: *Self, allocator: std.mem.Allocator, input: delete_input.DeleteInputInput, options: CallOptions) !delete_input.DeleteInputOutput {
         return delete_input.execute(self, allocator, input, options);
     }
 
     /// Deletes an Input Security Group
-    pub fn deleteInputSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: delete_input_security_group.DeleteInputSecurityGroupInput, options: delete_input_security_group.Options) !delete_input_security_group.DeleteInputSecurityGroupOutput {
+    pub fn deleteInputSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: delete_input_security_group.DeleteInputSecurityGroupInput, options: CallOptions) !delete_input_security_group.DeleteInputSecurityGroupOutput {
         return delete_input_security_group.execute(self, allocator, input, options);
     }
 
     /// Delete a multiplex. The multiplex must be idle.
-    pub fn deleteMultiplex(self: *Self, allocator: std.mem.Allocator, input: delete_multiplex.DeleteMultiplexInput, options: delete_multiplex.Options) !delete_multiplex.DeleteMultiplexOutput {
+    pub fn deleteMultiplex(self: *Self, allocator: std.mem.Allocator, input: delete_multiplex.DeleteMultiplexInput, options: CallOptions) !delete_multiplex.DeleteMultiplexOutput {
         return delete_multiplex.execute(self, allocator, input, options);
     }
 
     /// Delete a program from a multiplex.
-    pub fn deleteMultiplexProgram(self: *Self, allocator: std.mem.Allocator, input: delete_multiplex_program.DeleteMultiplexProgramInput, options: delete_multiplex_program.Options) !delete_multiplex_program.DeleteMultiplexProgramOutput {
+    pub fn deleteMultiplexProgram(self: *Self, allocator: std.mem.Allocator, input: delete_multiplex_program.DeleteMultiplexProgramInput, options: CallOptions) !delete_multiplex_program.DeleteMultiplexProgramOutput {
         return delete_multiplex_program.execute(self, allocator, input, options);
     }
 
     /// Delete a Network. The Network must have no resources associated with it.
-    pub fn deleteNetwork(self: *Self, allocator: std.mem.Allocator, input: delete_network.DeleteNetworkInput, options: delete_network.Options) !delete_network.DeleteNetworkOutput {
+    pub fn deleteNetwork(self: *Self, allocator: std.mem.Allocator, input: delete_network.DeleteNetworkInput, options: CallOptions) !delete_network.DeleteNetworkOutput {
         return delete_network.execute(self, allocator, input, options);
     }
 
     /// Delete a Node. The Node must be IDLE.
-    pub fn deleteNode(self: *Self, allocator: std.mem.Allocator, input: delete_node.DeleteNodeInput, options: delete_node.Options) !delete_node.DeleteNodeOutput {
+    pub fn deleteNode(self: *Self, allocator: std.mem.Allocator, input: delete_node.DeleteNodeInput, options: CallOptions) !delete_node.DeleteNodeOutput {
         return delete_node.execute(self, allocator, input, options);
     }
 
     /// Delete an expired reservation.
-    pub fn deleteReservation(self: *Self, allocator: std.mem.Allocator, input: delete_reservation.DeleteReservationInput, options: delete_reservation.Options) !delete_reservation.DeleteReservationOutput {
+    pub fn deleteReservation(self: *Self, allocator: std.mem.Allocator, input: delete_reservation.DeleteReservationInput, options: CallOptions) !delete_reservation.DeleteReservationOutput {
         return delete_reservation.execute(self, allocator, input, options);
     }
 
     /// Delete all schedule actions on a channel.
-    pub fn deleteSchedule(self: *Self, allocator: std.mem.Allocator, input: delete_schedule.DeleteScheduleInput, options: delete_schedule.Options) !delete_schedule.DeleteScheduleOutput {
+    pub fn deleteSchedule(self: *Self, allocator: std.mem.Allocator, input: delete_schedule.DeleteScheduleInput, options: CallOptions) !delete_schedule.DeleteScheduleOutput {
         return delete_schedule.execute(self, allocator, input, options);
     }
 
     /// Delete an SdiSource. The SdiSource must not be part of any SidSourceMapping
     /// and must not be attached to any input.
-    pub fn deleteSdiSource(self: *Self, allocator: std.mem.Allocator, input: delete_sdi_source.DeleteSdiSourceInput, options: delete_sdi_source.Options) !delete_sdi_source.DeleteSdiSourceOutput {
+    pub fn deleteSdiSource(self: *Self, allocator: std.mem.Allocator, input: delete_sdi_source.DeleteSdiSourceInput, options: CallOptions) !delete_sdi_source.DeleteSdiSourceOutput {
         return delete_sdi_source.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified signal map.
-    pub fn deleteSignalMap(self: *Self, allocator: std.mem.Allocator, input: delete_signal_map.DeleteSignalMapInput, options: delete_signal_map.Options) !delete_signal_map.DeleteSignalMapOutput {
+    pub fn deleteSignalMap(self: *Self, allocator: std.mem.Allocator, input: delete_signal_map.DeleteSignalMapInput, options: CallOptions) !delete_signal_map.DeleteSignalMapOutput {
         return delete_signal_map.execute(self, allocator, input, options);
     }
 
     /// Removes tags for a resource
-    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: delete_tags.Options) !delete_tags.DeleteTagsOutput {
+    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: CallOptions) !delete_tags.DeleteTagsOutput {
         return delete_tags.execute(self, allocator, input, options);
     }
 
     /// Describe account configuration
-    pub fn describeAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_account_configuration.DescribeAccountConfigurationInput, options: describe_account_configuration.Options) !describe_account_configuration.DescribeAccountConfigurationOutput {
+    pub fn describeAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_account_configuration.DescribeAccountConfigurationInput, options: CallOptions) !describe_account_configuration.DescribeAccountConfigurationOutput {
         return describe_account_configuration.execute(self, allocator, input, options);
     }
 
     /// Gets details about a channel
-    pub fn describeChannel(self: *Self, allocator: std.mem.Allocator, input: describe_channel.DescribeChannelInput, options: describe_channel.Options) !describe_channel.DescribeChannelOutput {
+    pub fn describeChannel(self: *Self, allocator: std.mem.Allocator, input: describe_channel.DescribeChannelInput, options: CallOptions) !describe_channel.DescribeChannelOutput {
         return describe_channel.execute(self, allocator, input, options);
     }
 
     /// Get details about a ChannelPlacementGroup.
-    pub fn describeChannelPlacementGroup(self: *Self, allocator: std.mem.Allocator, input: describe_channel_placement_group.DescribeChannelPlacementGroupInput, options: describe_channel_placement_group.Options) !describe_channel_placement_group.DescribeChannelPlacementGroupOutput {
+    pub fn describeChannelPlacementGroup(self: *Self, allocator: std.mem.Allocator, input: describe_channel_placement_group.DescribeChannelPlacementGroupInput, options: CallOptions) !describe_channel_placement_group.DescribeChannelPlacementGroupOutput {
         return describe_channel_placement_group.execute(self, allocator, input, options);
     }
 
     /// Get details about a Cluster.
-    pub fn describeCluster(self: *Self, allocator: std.mem.Allocator, input: describe_cluster.DescribeClusterInput, options: describe_cluster.Options) !describe_cluster.DescribeClusterOutput {
+    pub fn describeCluster(self: *Self, allocator: std.mem.Allocator, input: describe_cluster.DescribeClusterInput, options: CallOptions) !describe_cluster.DescribeClusterOutput {
         return describe_cluster.execute(self, allocator, input, options);
     }
 
     /// Produces details about an input
-    pub fn describeInput(self: *Self, allocator: std.mem.Allocator, input: describe_input.DescribeInputInput, options: describe_input.Options) !describe_input.DescribeInputOutput {
+    pub fn describeInput(self: *Self, allocator: std.mem.Allocator, input: describe_input.DescribeInputInput, options: CallOptions) !describe_input.DescribeInputOutput {
         return describe_input.execute(self, allocator, input, options);
     }
 
     /// Gets the details for the input device
-    pub fn describeInputDevice(self: *Self, allocator: std.mem.Allocator, input: describe_input_device.DescribeInputDeviceInput, options: describe_input_device.Options) !describe_input_device.DescribeInputDeviceOutput {
+    pub fn describeInputDevice(self: *Self, allocator: std.mem.Allocator, input: describe_input_device.DescribeInputDeviceInput, options: CallOptions) !describe_input_device.DescribeInputDeviceOutput {
         return describe_input_device.execute(self, allocator, input, options);
     }
 
     /// Get the latest thumbnail data for the input device.
-    pub fn describeInputDeviceThumbnail(self: *Self, allocator: std.mem.Allocator, input: describe_input_device_thumbnail.DescribeInputDeviceThumbnailInput, options: describe_input_device_thumbnail.Options) !describe_input_device_thumbnail.DescribeInputDeviceThumbnailOutput {
+    pub fn describeInputDeviceThumbnail(self: *Self, allocator: std.mem.Allocator, input: describe_input_device_thumbnail.DescribeInputDeviceThumbnailInput, options: CallOptions) !describe_input_device_thumbnail.DescribeInputDeviceThumbnailOutput {
         return describe_input_device_thumbnail.execute(self, allocator, input, options);
     }
 
     /// Produces a summary of an Input Security Group
-    pub fn describeInputSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: describe_input_security_group.DescribeInputSecurityGroupInput, options: describe_input_security_group.Options) !describe_input_security_group.DescribeInputSecurityGroupOutput {
+    pub fn describeInputSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: describe_input_security_group.DescribeInputSecurityGroupInput, options: CallOptions) !describe_input_security_group.DescribeInputSecurityGroupOutput {
         return describe_input_security_group.execute(self, allocator, input, options);
     }
 
     /// Gets details about a multiplex.
-    pub fn describeMultiplex(self: *Self, allocator: std.mem.Allocator, input: describe_multiplex.DescribeMultiplexInput, options: describe_multiplex.Options) !describe_multiplex.DescribeMultiplexOutput {
+    pub fn describeMultiplex(self: *Self, allocator: std.mem.Allocator, input: describe_multiplex.DescribeMultiplexInput, options: CallOptions) !describe_multiplex.DescribeMultiplexOutput {
         return describe_multiplex.execute(self, allocator, input, options);
     }
 
     /// Get the details for a program in a multiplex.
-    pub fn describeMultiplexProgram(self: *Self, allocator: std.mem.Allocator, input: describe_multiplex_program.DescribeMultiplexProgramInput, options: describe_multiplex_program.Options) !describe_multiplex_program.DescribeMultiplexProgramOutput {
+    pub fn describeMultiplexProgram(self: *Self, allocator: std.mem.Allocator, input: describe_multiplex_program.DescribeMultiplexProgramInput, options: CallOptions) !describe_multiplex_program.DescribeMultiplexProgramOutput {
         return describe_multiplex_program.execute(self, allocator, input, options);
     }
 
     /// Get details about a Network.
-    pub fn describeNetwork(self: *Self, allocator: std.mem.Allocator, input: describe_network.DescribeNetworkInput, options: describe_network.Options) !describe_network.DescribeNetworkOutput {
+    pub fn describeNetwork(self: *Self, allocator: std.mem.Allocator, input: describe_network.DescribeNetworkInput, options: CallOptions) !describe_network.DescribeNetworkOutput {
         return describe_network.execute(self, allocator, input, options);
     }
 
     /// Get details about a Node in the specified Cluster.
-    pub fn describeNode(self: *Self, allocator: std.mem.Allocator, input: describe_node.DescribeNodeInput, options: describe_node.Options) !describe_node.DescribeNodeOutput {
+    pub fn describeNode(self: *Self, allocator: std.mem.Allocator, input: describe_node.DescribeNodeInput, options: CallOptions) !describe_node.DescribeNodeOutput {
         return describe_node.execute(self, allocator, input, options);
     }
 
     /// Get details for an offering.
-    pub fn describeOffering(self: *Self, allocator: std.mem.Allocator, input: describe_offering.DescribeOfferingInput, options: describe_offering.Options) !describe_offering.DescribeOfferingOutput {
+    pub fn describeOffering(self: *Self, allocator: std.mem.Allocator, input: describe_offering.DescribeOfferingInput, options: CallOptions) !describe_offering.DescribeOfferingOutput {
         return describe_offering.execute(self, allocator, input, options);
     }
 
     /// Get details for a reservation.
-    pub fn describeReservation(self: *Self, allocator: std.mem.Allocator, input: describe_reservation.DescribeReservationInput, options: describe_reservation.Options) !describe_reservation.DescribeReservationOutput {
+    pub fn describeReservation(self: *Self, allocator: std.mem.Allocator, input: describe_reservation.DescribeReservationInput, options: CallOptions) !describe_reservation.DescribeReservationOutput {
         return describe_reservation.execute(self, allocator, input, options);
     }
 
     /// Get a channel schedule
-    pub fn describeSchedule(self: *Self, allocator: std.mem.Allocator, input: describe_schedule.DescribeScheduleInput, options: describe_schedule.Options) !describe_schedule.DescribeScheduleOutput {
+    pub fn describeSchedule(self: *Self, allocator: std.mem.Allocator, input: describe_schedule.DescribeScheduleInput, options: CallOptions) !describe_schedule.DescribeScheduleOutput {
         return describe_schedule.execute(self, allocator, input, options);
     }
 
     /// Gets details about a SdiSource.
-    pub fn describeSdiSource(self: *Self, allocator: std.mem.Allocator, input: describe_sdi_source.DescribeSdiSourceInput, options: describe_sdi_source.Options) !describe_sdi_source.DescribeSdiSourceOutput {
+    pub fn describeSdiSource(self: *Self, allocator: std.mem.Allocator, input: describe_sdi_source.DescribeSdiSourceInput, options: CallOptions) !describe_sdi_source.DescribeSdiSourceOutput {
         return describe_sdi_source.execute(self, allocator, input, options);
     }
 
     /// Describe the latest thumbnails data.
-    pub fn describeThumbnails(self: *Self, allocator: std.mem.Allocator, input: describe_thumbnails.DescribeThumbnailsInput, options: describe_thumbnails.Options) !describe_thumbnails.DescribeThumbnailsOutput {
+    pub fn describeThumbnails(self: *Self, allocator: std.mem.Allocator, input: describe_thumbnails.DescribeThumbnailsInput, options: CallOptions) !describe_thumbnails.DescribeThumbnailsOutput {
         return describe_thumbnails.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified cloudwatch alarm template.
-    pub fn getCloudWatchAlarmTemplate(self: *Self, allocator: std.mem.Allocator, input: get_cloud_watch_alarm_template.GetCloudWatchAlarmTemplateInput, options: get_cloud_watch_alarm_template.Options) !get_cloud_watch_alarm_template.GetCloudWatchAlarmTemplateOutput {
+    pub fn getCloudWatchAlarmTemplate(self: *Self, allocator: std.mem.Allocator, input: get_cloud_watch_alarm_template.GetCloudWatchAlarmTemplateInput, options: CallOptions) !get_cloud_watch_alarm_template.GetCloudWatchAlarmTemplateOutput {
         return get_cloud_watch_alarm_template.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified cloudwatch alarm template group.
-    pub fn getCloudWatchAlarmTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: get_cloud_watch_alarm_template_group.GetCloudWatchAlarmTemplateGroupInput, options: get_cloud_watch_alarm_template_group.Options) !get_cloud_watch_alarm_template_group.GetCloudWatchAlarmTemplateGroupOutput {
+    pub fn getCloudWatchAlarmTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: get_cloud_watch_alarm_template_group.GetCloudWatchAlarmTemplateGroupInput, options: CallOptions) !get_cloud_watch_alarm_template_group.GetCloudWatchAlarmTemplateGroupOutput {
         return get_cloud_watch_alarm_template_group.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified eventbridge rule template.
-    pub fn getEventBridgeRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: get_event_bridge_rule_template.GetEventBridgeRuleTemplateInput, options: get_event_bridge_rule_template.Options) !get_event_bridge_rule_template.GetEventBridgeRuleTemplateOutput {
+    pub fn getEventBridgeRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: get_event_bridge_rule_template.GetEventBridgeRuleTemplateInput, options: CallOptions) !get_event_bridge_rule_template.GetEventBridgeRuleTemplateOutput {
         return get_event_bridge_rule_template.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified eventbridge rule template group.
-    pub fn getEventBridgeRuleTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: get_event_bridge_rule_template_group.GetEventBridgeRuleTemplateGroupInput, options: get_event_bridge_rule_template_group.Options) !get_event_bridge_rule_template_group.GetEventBridgeRuleTemplateGroupOutput {
+    pub fn getEventBridgeRuleTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: get_event_bridge_rule_template_group.GetEventBridgeRuleTemplateGroupInput, options: CallOptions) !get_event_bridge_rule_template_group.GetEventBridgeRuleTemplateGroupOutput {
         return get_event_bridge_rule_template_group.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified signal map.
-    pub fn getSignalMap(self: *Self, allocator: std.mem.Allocator, input: get_signal_map.GetSignalMapInput, options: get_signal_map.Options) !get_signal_map.GetSignalMapOutput {
+    pub fn getSignalMap(self: *Self, allocator: std.mem.Allocator, input: get_signal_map.GetSignalMapInput, options: CallOptions) !get_signal_map.GetSignalMapOutput {
         return get_signal_map.execute(self, allocator, input, options);
     }
 
     /// List the alerts for a channel with optional filtering based on alert state.
-    pub fn listAlerts(self: *Self, allocator: std.mem.Allocator, input: list_alerts.ListAlertsInput, options: list_alerts.Options) !list_alerts.ListAlertsOutput {
+    pub fn listAlerts(self: *Self, allocator: std.mem.Allocator, input: list_alerts.ListAlertsInput, options: CallOptions) !list_alerts.ListAlertsOutput {
         return list_alerts.execute(self, allocator, input, options);
     }
 
     /// Retrieve the list of ChannelPlacementGroups in the specified Cluster.
-    pub fn listChannelPlacementGroups(self: *Self, allocator: std.mem.Allocator, input: list_channel_placement_groups.ListChannelPlacementGroupsInput, options: list_channel_placement_groups.Options) !list_channel_placement_groups.ListChannelPlacementGroupsOutput {
+    pub fn listChannelPlacementGroups(self: *Self, allocator: std.mem.Allocator, input: list_channel_placement_groups.ListChannelPlacementGroupsInput, options: CallOptions) !list_channel_placement_groups.ListChannelPlacementGroupsOutput {
         return list_channel_placement_groups.execute(self, allocator, input, options);
     }
 
     /// Produces list of channels that have been created
-    pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: list_channels.Options) !list_channels.ListChannelsOutput {
+    pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: CallOptions) !list_channels.ListChannelsOutput {
         return list_channels.execute(self, allocator, input, options);
     }
 
     /// Lists cloudwatch alarm template groups.
-    pub fn listCloudWatchAlarmTemplateGroups(self: *Self, allocator: std.mem.Allocator, input: list_cloud_watch_alarm_template_groups.ListCloudWatchAlarmTemplateGroupsInput, options: list_cloud_watch_alarm_template_groups.Options) !list_cloud_watch_alarm_template_groups.ListCloudWatchAlarmTemplateGroupsOutput {
+    pub fn listCloudWatchAlarmTemplateGroups(self: *Self, allocator: std.mem.Allocator, input: list_cloud_watch_alarm_template_groups.ListCloudWatchAlarmTemplateGroupsInput, options: CallOptions) !list_cloud_watch_alarm_template_groups.ListCloudWatchAlarmTemplateGroupsOutput {
         return list_cloud_watch_alarm_template_groups.execute(self, allocator, input, options);
     }
 
     /// Lists cloudwatch alarm templates.
-    pub fn listCloudWatchAlarmTemplates(self: *Self, allocator: std.mem.Allocator, input: list_cloud_watch_alarm_templates.ListCloudWatchAlarmTemplatesInput, options: list_cloud_watch_alarm_templates.Options) !list_cloud_watch_alarm_templates.ListCloudWatchAlarmTemplatesOutput {
+    pub fn listCloudWatchAlarmTemplates(self: *Self, allocator: std.mem.Allocator, input: list_cloud_watch_alarm_templates.ListCloudWatchAlarmTemplatesInput, options: CallOptions) !list_cloud_watch_alarm_templates.ListCloudWatchAlarmTemplatesOutput {
         return list_cloud_watch_alarm_templates.execute(self, allocator, input, options);
     }
 
     /// List the alerts for a cluster with optional filtering based on alert state.
-    pub fn listClusterAlerts(self: *Self, allocator: std.mem.Allocator, input: list_cluster_alerts.ListClusterAlertsInput, options: list_cluster_alerts.Options) !list_cluster_alerts.ListClusterAlertsOutput {
+    pub fn listClusterAlerts(self: *Self, allocator: std.mem.Allocator, input: list_cluster_alerts.ListClusterAlertsInput, options: CallOptions) !list_cluster_alerts.ListClusterAlertsOutput {
         return list_cluster_alerts.execute(self, allocator, input, options);
     }
 
     /// Retrieve the list of Clusters.
-    pub fn listClusters(self: *Self, allocator: std.mem.Allocator, input: list_clusters.ListClustersInput, options: list_clusters.Options) !list_clusters.ListClustersOutput {
+    pub fn listClusters(self: *Self, allocator: std.mem.Allocator, input: list_clusters.ListClustersInput, options: CallOptions) !list_clusters.ListClustersOutput {
         return list_clusters.execute(self, allocator, input, options);
     }
 
     /// Lists eventbridge rule template groups.
-    pub fn listEventBridgeRuleTemplateGroups(self: *Self, allocator: std.mem.Allocator, input: list_event_bridge_rule_template_groups.ListEventBridgeRuleTemplateGroupsInput, options: list_event_bridge_rule_template_groups.Options) !list_event_bridge_rule_template_groups.ListEventBridgeRuleTemplateGroupsOutput {
+    pub fn listEventBridgeRuleTemplateGroups(self: *Self, allocator: std.mem.Allocator, input: list_event_bridge_rule_template_groups.ListEventBridgeRuleTemplateGroupsInput, options: CallOptions) !list_event_bridge_rule_template_groups.ListEventBridgeRuleTemplateGroupsOutput {
         return list_event_bridge_rule_template_groups.execute(self, allocator, input, options);
     }
 
     /// Lists eventbridge rule templates.
-    pub fn listEventBridgeRuleTemplates(self: *Self, allocator: std.mem.Allocator, input: list_event_bridge_rule_templates.ListEventBridgeRuleTemplatesInput, options: list_event_bridge_rule_templates.Options) !list_event_bridge_rule_templates.ListEventBridgeRuleTemplatesOutput {
+    pub fn listEventBridgeRuleTemplates(self: *Self, allocator: std.mem.Allocator, input: list_event_bridge_rule_templates.ListEventBridgeRuleTemplatesInput, options: CallOptions) !list_event_bridge_rule_templates.ListEventBridgeRuleTemplatesOutput {
         return list_event_bridge_rule_templates.execute(self, allocator, input, options);
     }
 
     /// List input devices that are currently being transferred. List input devices
     /// that you are transferring from your AWS account or input devices that
     /// another AWS account is transferring to you.
-    pub fn listInputDeviceTransfers(self: *Self, allocator: std.mem.Allocator, input: list_input_device_transfers.ListInputDeviceTransfersInput, options: list_input_device_transfers.Options) !list_input_device_transfers.ListInputDeviceTransfersOutput {
+    pub fn listInputDeviceTransfers(self: *Self, allocator: std.mem.Allocator, input: list_input_device_transfers.ListInputDeviceTransfersInput, options: CallOptions) !list_input_device_transfers.ListInputDeviceTransfersOutput {
         return list_input_device_transfers.execute(self, allocator, input, options);
     }
 
     /// List input devices
-    pub fn listInputDevices(self: *Self, allocator: std.mem.Allocator, input: list_input_devices.ListInputDevicesInput, options: list_input_devices.Options) !list_input_devices.ListInputDevicesOutput {
+    pub fn listInputDevices(self: *Self, allocator: std.mem.Allocator, input: list_input_devices.ListInputDevicesInput, options: CallOptions) !list_input_devices.ListInputDevicesOutput {
         return list_input_devices.execute(self, allocator, input, options);
     }
 
     /// Produces a list of Input Security Groups for an account
-    pub fn listInputSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: list_input_security_groups.ListInputSecurityGroupsInput, options: list_input_security_groups.Options) !list_input_security_groups.ListInputSecurityGroupsOutput {
+    pub fn listInputSecurityGroups(self: *Self, allocator: std.mem.Allocator, input: list_input_security_groups.ListInputSecurityGroupsInput, options: CallOptions) !list_input_security_groups.ListInputSecurityGroupsOutput {
         return list_input_security_groups.execute(self, allocator, input, options);
     }
 
     /// Produces list of inputs that have been created
-    pub fn listInputs(self: *Self, allocator: std.mem.Allocator, input: list_inputs.ListInputsInput, options: list_inputs.Options) !list_inputs.ListInputsOutput {
+    pub fn listInputs(self: *Self, allocator: std.mem.Allocator, input: list_inputs.ListInputsInput, options: CallOptions) !list_inputs.ListInputsOutput {
         return list_inputs.execute(self, allocator, input, options);
     }
 
     /// List the alerts for a multiplex with optional filtering based on alert
     /// state.
-    pub fn listMultiplexAlerts(self: *Self, allocator: std.mem.Allocator, input: list_multiplex_alerts.ListMultiplexAlertsInput, options: list_multiplex_alerts.Options) !list_multiplex_alerts.ListMultiplexAlertsOutput {
+    pub fn listMultiplexAlerts(self: *Self, allocator: std.mem.Allocator, input: list_multiplex_alerts.ListMultiplexAlertsInput, options: CallOptions) !list_multiplex_alerts.ListMultiplexAlertsOutput {
         return list_multiplex_alerts.execute(self, allocator, input, options);
     }
 
     /// List the programs that currently exist for a specific multiplex.
-    pub fn listMultiplexPrograms(self: *Self, allocator: std.mem.Allocator, input: list_multiplex_programs.ListMultiplexProgramsInput, options: list_multiplex_programs.Options) !list_multiplex_programs.ListMultiplexProgramsOutput {
+    pub fn listMultiplexPrograms(self: *Self, allocator: std.mem.Allocator, input: list_multiplex_programs.ListMultiplexProgramsInput, options: CallOptions) !list_multiplex_programs.ListMultiplexProgramsOutput {
         return list_multiplex_programs.execute(self, allocator, input, options);
     }
 
     /// Retrieve a list of the existing multiplexes.
-    pub fn listMultiplexes(self: *Self, allocator: std.mem.Allocator, input: list_multiplexes.ListMultiplexesInput, options: list_multiplexes.Options) !list_multiplexes.ListMultiplexesOutput {
+    pub fn listMultiplexes(self: *Self, allocator: std.mem.Allocator, input: list_multiplexes.ListMultiplexesInput, options: CallOptions) !list_multiplexes.ListMultiplexesOutput {
         return list_multiplexes.execute(self, allocator, input, options);
     }
 
     /// Retrieve the list of Networks.
-    pub fn listNetworks(self: *Self, allocator: std.mem.Allocator, input: list_networks.ListNetworksInput, options: list_networks.Options) !list_networks.ListNetworksOutput {
+    pub fn listNetworks(self: *Self, allocator: std.mem.Allocator, input: list_networks.ListNetworksInput, options: CallOptions) !list_networks.ListNetworksOutput {
         return list_networks.execute(self, allocator, input, options);
     }
 
     /// Retrieve the list of Nodes.
-    pub fn listNodes(self: *Self, allocator: std.mem.Allocator, input: list_nodes.ListNodesInput, options: list_nodes.Options) !list_nodes.ListNodesOutput {
+    pub fn listNodes(self: *Self, allocator: std.mem.Allocator, input: list_nodes.ListNodesInput, options: CallOptions) !list_nodes.ListNodesOutput {
         return list_nodes.execute(self, allocator, input, options);
     }
 
     /// List offerings available for purchase.
-    pub fn listOfferings(self: *Self, allocator: std.mem.Allocator, input: list_offerings.ListOfferingsInput, options: list_offerings.Options) !list_offerings.ListOfferingsOutput {
+    pub fn listOfferings(self: *Self, allocator: std.mem.Allocator, input: list_offerings.ListOfferingsInput, options: CallOptions) !list_offerings.ListOfferingsOutput {
         return list_offerings.execute(self, allocator, input, options);
     }
 
     /// List purchased reservations.
-    pub fn listReservations(self: *Self, allocator: std.mem.Allocator, input: list_reservations.ListReservationsInput, options: list_reservations.Options) !list_reservations.ListReservationsOutput {
+    pub fn listReservations(self: *Self, allocator: std.mem.Allocator, input: list_reservations.ListReservationsInput, options: CallOptions) !list_reservations.ListReservationsOutput {
         return list_reservations.execute(self, allocator, input, options);
     }
 
     /// List all the SdiSources in the AWS account.
-    pub fn listSdiSources(self: *Self, allocator: std.mem.Allocator, input: list_sdi_sources.ListSdiSourcesInput, options: list_sdi_sources.Options) !list_sdi_sources.ListSdiSourcesOutput {
+    pub fn listSdiSources(self: *Self, allocator: std.mem.Allocator, input: list_sdi_sources.ListSdiSourcesInput, options: CallOptions) !list_sdi_sources.ListSdiSourcesOutput {
         return list_sdi_sources.execute(self, allocator, input, options);
     }
 
     /// Lists signal maps.
-    pub fn listSignalMaps(self: *Self, allocator: std.mem.Allocator, input: list_signal_maps.ListSignalMapsInput, options: list_signal_maps.Options) !list_signal_maps.ListSignalMapsOutput {
+    pub fn listSignalMaps(self: *Self, allocator: std.mem.Allocator, input: list_signal_maps.ListSignalMapsInput, options: CallOptions) !list_signal_maps.ListSignalMapsOutput {
         return list_signal_maps.execute(self, allocator, input, options);
     }
 
     /// Produces list of tags that have been created for a resource
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Retrieves an array of all the encoder engine versions that are available in
     /// this AWS account.
-    pub fn listVersions(self: *Self, allocator: std.mem.Allocator, input: list_versions.ListVersionsInput, options: list_versions.Options) !list_versions.ListVersionsOutput {
+    pub fn listVersions(self: *Self, allocator: std.mem.Allocator, input: list_versions.ListVersionsInput, options: CallOptions) !list_versions.ListVersionsOutput {
         return list_versions.execute(self, allocator, input, options);
     }
 
     /// Purchase an offering and create a reservation.
-    pub fn purchaseOffering(self: *Self, allocator: std.mem.Allocator, input: purchase_offering.PurchaseOfferingInput, options: purchase_offering.Options) !purchase_offering.PurchaseOfferingOutput {
+    pub fn purchaseOffering(self: *Self, allocator: std.mem.Allocator, input: purchase_offering.PurchaseOfferingInput, options: CallOptions) !purchase_offering.PurchaseOfferingOutput {
         return purchase_offering.execute(self, allocator, input, options);
     }
 
     /// Send a reboot command to the specified input device. The device will begin
     /// rebooting within a few seconds of sending the command. When the reboot is
     /// complete, the device’s connection status will change to connected.
-    pub fn rebootInputDevice(self: *Self, allocator: std.mem.Allocator, input: reboot_input_device.RebootInputDeviceInput, options: reboot_input_device.Options) !reboot_input_device.RebootInputDeviceOutput {
+    pub fn rebootInputDevice(self: *Self, allocator: std.mem.Allocator, input: reboot_input_device.RebootInputDeviceInput, options: CallOptions) !reboot_input_device.RebootInputDeviceOutput {
         return reboot_input_device.execute(self, allocator, input, options);
     }
 
     /// Reject the transfer of the specified input device to your AWS account.
-    pub fn rejectInputDeviceTransfer(self: *Self, allocator: std.mem.Allocator, input: reject_input_device_transfer.RejectInputDeviceTransferInput, options: reject_input_device_transfer.Options) !reject_input_device_transfer.RejectInputDeviceTransferOutput {
+    pub fn rejectInputDeviceTransfer(self: *Self, allocator: std.mem.Allocator, input: reject_input_device_transfer.RejectInputDeviceTransferInput, options: CallOptions) !reject_input_device_transfer.RejectInputDeviceTransferOutput {
         return reject_input_device_transfer.execute(self, allocator, input, options);
     }
 
     /// Restart pipelines in one channel that is currently running.
-    pub fn restartChannelPipelines(self: *Self, allocator: std.mem.Allocator, input: restart_channel_pipelines.RestartChannelPipelinesInput, options: restart_channel_pipelines.Options) !restart_channel_pipelines.RestartChannelPipelinesOutput {
+    pub fn restartChannelPipelines(self: *Self, allocator: std.mem.Allocator, input: restart_channel_pipelines.RestartChannelPipelinesInput, options: CallOptions) !restart_channel_pipelines.RestartChannelPipelinesOutput {
         return restart_channel_pipelines.execute(self, allocator, input, options);
     }
 
     /// Starts an existing channel
-    pub fn startChannel(self: *Self, allocator: std.mem.Allocator, input: start_channel.StartChannelInput, options: start_channel.Options) !start_channel.StartChannelOutput {
+    pub fn startChannel(self: *Self, allocator: std.mem.Allocator, input: start_channel.StartChannelInput, options: CallOptions) !start_channel.StartChannelOutput {
         return start_channel.execute(self, allocator, input, options);
     }
 
     /// Initiates a deployment to delete the monitor of the specified signal map.
-    pub fn startDeleteMonitorDeployment(self: *Self, allocator: std.mem.Allocator, input: start_delete_monitor_deployment.StartDeleteMonitorDeploymentInput, options: start_delete_monitor_deployment.Options) !start_delete_monitor_deployment.StartDeleteMonitorDeploymentOutput {
+    pub fn startDeleteMonitorDeployment(self: *Self, allocator: std.mem.Allocator, input: start_delete_monitor_deployment.StartDeleteMonitorDeploymentInput, options: CallOptions) !start_delete_monitor_deployment.StartDeleteMonitorDeploymentOutput {
         return start_delete_monitor_deployment.execute(self, allocator, input, options);
     }
 
     /// Start an input device that is attached to a MediaConnect flow. (There is no
     /// need to start a device that is attached to a MediaLive input; MediaLive
     /// starts the device when the channel starts.)
-    pub fn startInputDevice(self: *Self, allocator: std.mem.Allocator, input: start_input_device.StartInputDeviceInput, options: start_input_device.Options) !start_input_device.StartInputDeviceOutput {
+    pub fn startInputDevice(self: *Self, allocator: std.mem.Allocator, input: start_input_device.StartInputDeviceInput, options: CallOptions) !start_input_device.StartInputDeviceOutput {
         return start_input_device.execute(self, allocator, input, options);
     }
 
@@ -685,144 +686,144 @@ pub const Client = struct {
     /// to stop MediaLive channels that use the device. The device must remain
     /// powered on and connected to the internet for the duration of the
     /// maintenance.
-    pub fn startInputDeviceMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: start_input_device_maintenance_window.StartInputDeviceMaintenanceWindowInput, options: start_input_device_maintenance_window.Options) !start_input_device_maintenance_window.StartInputDeviceMaintenanceWindowOutput {
+    pub fn startInputDeviceMaintenanceWindow(self: *Self, allocator: std.mem.Allocator, input: start_input_device_maintenance_window.StartInputDeviceMaintenanceWindowInput, options: CallOptions) !start_input_device_maintenance_window.StartInputDeviceMaintenanceWindowOutput {
         return start_input_device_maintenance_window.execute(self, allocator, input, options);
     }
 
     /// Initiates a deployment to deploy the latest monitor of the specified signal
     /// map.
-    pub fn startMonitorDeployment(self: *Self, allocator: std.mem.Allocator, input: start_monitor_deployment.StartMonitorDeploymentInput, options: start_monitor_deployment.Options) !start_monitor_deployment.StartMonitorDeploymentOutput {
+    pub fn startMonitorDeployment(self: *Self, allocator: std.mem.Allocator, input: start_monitor_deployment.StartMonitorDeploymentInput, options: CallOptions) !start_monitor_deployment.StartMonitorDeploymentOutput {
         return start_monitor_deployment.execute(self, allocator, input, options);
     }
 
     /// Start (run) the multiplex. Starting the multiplex does not start the
     /// channels. You must explicitly start each channel.
-    pub fn startMultiplex(self: *Self, allocator: std.mem.Allocator, input: start_multiplex.StartMultiplexInput, options: start_multiplex.Options) !start_multiplex.StartMultiplexOutput {
+    pub fn startMultiplex(self: *Self, allocator: std.mem.Allocator, input: start_multiplex.StartMultiplexInput, options: CallOptions) !start_multiplex.StartMultiplexOutput {
         return start_multiplex.execute(self, allocator, input, options);
     }
 
     /// Initiates an update for the specified signal map. Will discover a new signal
     /// map if a changed discoveryEntryPointArn is provided.
-    pub fn startUpdateSignalMap(self: *Self, allocator: std.mem.Allocator, input: start_update_signal_map.StartUpdateSignalMapInput, options: start_update_signal_map.Options) !start_update_signal_map.StartUpdateSignalMapOutput {
+    pub fn startUpdateSignalMap(self: *Self, allocator: std.mem.Allocator, input: start_update_signal_map.StartUpdateSignalMapInput, options: CallOptions) !start_update_signal_map.StartUpdateSignalMapOutput {
         return start_update_signal_map.execute(self, allocator, input, options);
     }
 
     /// Stops a running channel
-    pub fn stopChannel(self: *Self, allocator: std.mem.Allocator, input: stop_channel.StopChannelInput, options: stop_channel.Options) !stop_channel.StopChannelOutput {
+    pub fn stopChannel(self: *Self, allocator: std.mem.Allocator, input: stop_channel.StopChannelInput, options: CallOptions) !stop_channel.StopChannelOutput {
         return stop_channel.execute(self, allocator, input, options);
     }
 
     /// Stop an input device that is attached to a MediaConnect flow. (There is no
     /// need to stop a device that is attached to a MediaLive input; MediaLive
     /// automatically stops the device when the channel stops.)
-    pub fn stopInputDevice(self: *Self, allocator: std.mem.Allocator, input: stop_input_device.StopInputDeviceInput, options: stop_input_device.Options) !stop_input_device.StopInputDeviceOutput {
+    pub fn stopInputDevice(self: *Self, allocator: std.mem.Allocator, input: stop_input_device.StopInputDeviceInput, options: CallOptions) !stop_input_device.StopInputDeviceOutput {
         return stop_input_device.execute(self, allocator, input, options);
     }
 
     /// Stops a running multiplex. If the multiplex isn't running, this action has
     /// no effect.
-    pub fn stopMultiplex(self: *Self, allocator: std.mem.Allocator, input: stop_multiplex.StopMultiplexInput, options: stop_multiplex.Options) !stop_multiplex.StopMultiplexOutput {
+    pub fn stopMultiplex(self: *Self, allocator: std.mem.Allocator, input: stop_multiplex.StopMultiplexInput, options: CallOptions) !stop_multiplex.StopMultiplexOutput {
         return stop_multiplex.execute(self, allocator, input, options);
     }
 
     /// Start an input device transfer to another AWS account. After you make the
     /// request, the other account must accept or reject the transfer.
-    pub fn transferInputDevice(self: *Self, allocator: std.mem.Allocator, input: transfer_input_device.TransferInputDeviceInput, options: transfer_input_device.Options) !transfer_input_device.TransferInputDeviceOutput {
+    pub fn transferInputDevice(self: *Self, allocator: std.mem.Allocator, input: transfer_input_device.TransferInputDeviceInput, options: CallOptions) !transfer_input_device.TransferInputDeviceOutput {
         return transfer_input_device.execute(self, allocator, input, options);
     }
 
     /// Update account configuration
-    pub fn updateAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_account_configuration.UpdateAccountConfigurationInput, options: update_account_configuration.Options) !update_account_configuration.UpdateAccountConfigurationOutput {
+    pub fn updateAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_account_configuration.UpdateAccountConfigurationInput, options: CallOptions) !update_account_configuration.UpdateAccountConfigurationOutput {
         return update_account_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates a channel.
-    pub fn updateChannel(self: *Self, allocator: std.mem.Allocator, input: update_channel.UpdateChannelInput, options: update_channel.Options) !update_channel.UpdateChannelOutput {
+    pub fn updateChannel(self: *Self, allocator: std.mem.Allocator, input: update_channel.UpdateChannelInput, options: CallOptions) !update_channel.UpdateChannelOutput {
         return update_channel.execute(self, allocator, input, options);
     }
 
     /// Changes the class of the channel.
-    pub fn updateChannelClass(self: *Self, allocator: std.mem.Allocator, input: update_channel_class.UpdateChannelClassInput, options: update_channel_class.Options) !update_channel_class.UpdateChannelClassOutput {
+    pub fn updateChannelClass(self: *Self, allocator: std.mem.Allocator, input: update_channel_class.UpdateChannelClassInput, options: CallOptions) !update_channel_class.UpdateChannelClassOutput {
         return update_channel_class.execute(self, allocator, input, options);
     }
 
     /// Change the settings for a ChannelPlacementGroup.
-    pub fn updateChannelPlacementGroup(self: *Self, allocator: std.mem.Allocator, input: update_channel_placement_group.UpdateChannelPlacementGroupInput, options: update_channel_placement_group.Options) !update_channel_placement_group.UpdateChannelPlacementGroupOutput {
+    pub fn updateChannelPlacementGroup(self: *Self, allocator: std.mem.Allocator, input: update_channel_placement_group.UpdateChannelPlacementGroupInput, options: CallOptions) !update_channel_placement_group.UpdateChannelPlacementGroupOutput {
         return update_channel_placement_group.execute(self, allocator, input, options);
     }
 
     /// Updates the specified cloudwatch alarm template.
-    pub fn updateCloudWatchAlarmTemplate(self: *Self, allocator: std.mem.Allocator, input: update_cloud_watch_alarm_template.UpdateCloudWatchAlarmTemplateInput, options: update_cloud_watch_alarm_template.Options) !update_cloud_watch_alarm_template.UpdateCloudWatchAlarmTemplateOutput {
+    pub fn updateCloudWatchAlarmTemplate(self: *Self, allocator: std.mem.Allocator, input: update_cloud_watch_alarm_template.UpdateCloudWatchAlarmTemplateInput, options: CallOptions) !update_cloud_watch_alarm_template.UpdateCloudWatchAlarmTemplateOutput {
         return update_cloud_watch_alarm_template.execute(self, allocator, input, options);
     }
 
     /// Updates the specified cloudwatch alarm template group.
-    pub fn updateCloudWatchAlarmTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: update_cloud_watch_alarm_template_group.UpdateCloudWatchAlarmTemplateGroupInput, options: update_cloud_watch_alarm_template_group.Options) !update_cloud_watch_alarm_template_group.UpdateCloudWatchAlarmTemplateGroupOutput {
+    pub fn updateCloudWatchAlarmTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: update_cloud_watch_alarm_template_group.UpdateCloudWatchAlarmTemplateGroupInput, options: CallOptions) !update_cloud_watch_alarm_template_group.UpdateCloudWatchAlarmTemplateGroupOutput {
         return update_cloud_watch_alarm_template_group.execute(self, allocator, input, options);
     }
 
     /// Change the settings for a Cluster.
-    pub fn updateCluster(self: *Self, allocator: std.mem.Allocator, input: update_cluster.UpdateClusterInput, options: update_cluster.Options) !update_cluster.UpdateClusterOutput {
+    pub fn updateCluster(self: *Self, allocator: std.mem.Allocator, input: update_cluster.UpdateClusterInput, options: CallOptions) !update_cluster.UpdateClusterOutput {
         return update_cluster.execute(self, allocator, input, options);
     }
 
     /// Updates the specified eventbridge rule template.
-    pub fn updateEventBridgeRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: update_event_bridge_rule_template.UpdateEventBridgeRuleTemplateInput, options: update_event_bridge_rule_template.Options) !update_event_bridge_rule_template.UpdateEventBridgeRuleTemplateOutput {
+    pub fn updateEventBridgeRuleTemplate(self: *Self, allocator: std.mem.Allocator, input: update_event_bridge_rule_template.UpdateEventBridgeRuleTemplateInput, options: CallOptions) !update_event_bridge_rule_template.UpdateEventBridgeRuleTemplateOutput {
         return update_event_bridge_rule_template.execute(self, allocator, input, options);
     }
 
     /// Updates the specified eventbridge rule template group.
-    pub fn updateEventBridgeRuleTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: update_event_bridge_rule_template_group.UpdateEventBridgeRuleTemplateGroupInput, options: update_event_bridge_rule_template_group.Options) !update_event_bridge_rule_template_group.UpdateEventBridgeRuleTemplateGroupOutput {
+    pub fn updateEventBridgeRuleTemplateGroup(self: *Self, allocator: std.mem.Allocator, input: update_event_bridge_rule_template_group.UpdateEventBridgeRuleTemplateGroupInput, options: CallOptions) !update_event_bridge_rule_template_group.UpdateEventBridgeRuleTemplateGroupOutput {
         return update_event_bridge_rule_template_group.execute(self, allocator, input, options);
     }
 
     /// Updates an input.
-    pub fn updateInput(self: *Self, allocator: std.mem.Allocator, input: update_input.UpdateInputInput, options: update_input.Options) !update_input.UpdateInputOutput {
+    pub fn updateInput(self: *Self, allocator: std.mem.Allocator, input: update_input.UpdateInputInput, options: CallOptions) !update_input.UpdateInputOutput {
         return update_input.execute(self, allocator, input, options);
     }
 
     /// Updates the parameters for the input device.
-    pub fn updateInputDevice(self: *Self, allocator: std.mem.Allocator, input: update_input_device.UpdateInputDeviceInput, options: update_input_device.Options) !update_input_device.UpdateInputDeviceOutput {
+    pub fn updateInputDevice(self: *Self, allocator: std.mem.Allocator, input: update_input_device.UpdateInputDeviceInput, options: CallOptions) !update_input_device.UpdateInputDeviceOutput {
         return update_input_device.execute(self, allocator, input, options);
     }
 
     /// Update an Input Security Group's Whilelists.
-    pub fn updateInputSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: update_input_security_group.UpdateInputSecurityGroupInput, options: update_input_security_group.Options) !update_input_security_group.UpdateInputSecurityGroupOutput {
+    pub fn updateInputSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: update_input_security_group.UpdateInputSecurityGroupInput, options: CallOptions) !update_input_security_group.UpdateInputSecurityGroupOutput {
         return update_input_security_group.execute(self, allocator, input, options);
     }
 
     /// Updates a multiplex.
-    pub fn updateMultiplex(self: *Self, allocator: std.mem.Allocator, input: update_multiplex.UpdateMultiplexInput, options: update_multiplex.Options) !update_multiplex.UpdateMultiplexOutput {
+    pub fn updateMultiplex(self: *Self, allocator: std.mem.Allocator, input: update_multiplex.UpdateMultiplexInput, options: CallOptions) !update_multiplex.UpdateMultiplexOutput {
         return update_multiplex.execute(self, allocator, input, options);
     }
 
     /// Update a program in a multiplex.
-    pub fn updateMultiplexProgram(self: *Self, allocator: std.mem.Allocator, input: update_multiplex_program.UpdateMultiplexProgramInput, options: update_multiplex_program.Options) !update_multiplex_program.UpdateMultiplexProgramOutput {
+    pub fn updateMultiplexProgram(self: *Self, allocator: std.mem.Allocator, input: update_multiplex_program.UpdateMultiplexProgramInput, options: CallOptions) !update_multiplex_program.UpdateMultiplexProgramOutput {
         return update_multiplex_program.execute(self, allocator, input, options);
     }
 
     /// Change the settings for a Network.
-    pub fn updateNetwork(self: *Self, allocator: std.mem.Allocator, input: update_network.UpdateNetworkInput, options: update_network.Options) !update_network.UpdateNetworkOutput {
+    pub fn updateNetwork(self: *Self, allocator: std.mem.Allocator, input: update_network.UpdateNetworkInput, options: CallOptions) !update_network.UpdateNetworkOutput {
         return update_network.execute(self, allocator, input, options);
     }
 
     /// Change the settings for a Node.
-    pub fn updateNode(self: *Self, allocator: std.mem.Allocator, input: update_node.UpdateNodeInput, options: update_node.Options) !update_node.UpdateNodeOutput {
+    pub fn updateNode(self: *Self, allocator: std.mem.Allocator, input: update_node.UpdateNodeInput, options: CallOptions) !update_node.UpdateNodeOutput {
         return update_node.execute(self, allocator, input, options);
     }
 
     /// Update the state of a node.
-    pub fn updateNodeState(self: *Self, allocator: std.mem.Allocator, input: update_node_state.UpdateNodeStateInput, options: update_node_state.Options) !update_node_state.UpdateNodeStateOutput {
+    pub fn updateNodeState(self: *Self, allocator: std.mem.Allocator, input: update_node_state.UpdateNodeStateInput, options: CallOptions) !update_node_state.UpdateNodeStateOutput {
         return update_node_state.execute(self, allocator, input, options);
     }
 
     /// Update reservation.
-    pub fn updateReservation(self: *Self, allocator: std.mem.Allocator, input: update_reservation.UpdateReservationInput, options: update_reservation.Options) !update_reservation.UpdateReservationOutput {
+    pub fn updateReservation(self: *Self, allocator: std.mem.Allocator, input: update_reservation.UpdateReservationInput, options: CallOptions) !update_reservation.UpdateReservationOutput {
         return update_reservation.execute(self, allocator, input, options);
     }
 
     /// Change some of the settings in an SdiSource.
-    pub fn updateSdiSource(self: *Self, allocator: std.mem.Allocator, input: update_sdi_source.UpdateSdiSourceInput, options: update_sdi_source.Options) !update_sdi_source.UpdateSdiSourceOutput {
+    pub fn updateSdiSource(self: *Self, allocator: std.mem.Allocator, input: update_sdi_source.UpdateSdiSourceInput, options: CallOptions) !update_sdi_source.UpdateSdiSourceOutput {
         return update_sdi_source.execute(self, allocator, input, options);
     }
 

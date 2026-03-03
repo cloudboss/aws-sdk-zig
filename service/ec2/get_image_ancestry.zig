@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ImageAncestryEntry = @import("image_ancestry_entry.zig").ImageAncestryEntry;
 const serde = @import("serde.zig");
@@ -25,11 +26,7 @@ pub const GetImageAncestryOutput = struct {
     image_ancestry_entries: ?[]const ImageAncestryEntry = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetImageAncestryInput, options: Options) !GetImageAncestryOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetImageAncestryInput, options: CallOptions) !GetImageAncestryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

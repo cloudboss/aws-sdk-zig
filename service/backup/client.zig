@@ -109,6 +109,7 @@ const update_report_plan = @import("update_report_plan.zig");
 const update_restore_testing_plan = @import("update_restore_testing_plan.zig");
 const update_restore_testing_selection = @import("update_restore_testing_selection.zig");
 const update_tiering_configuration = @import("update_tiering_configuration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -140,14 +141,14 @@ pub const Client = struct {
     }
 
     /// Associates an MPA approval team with a backup vault.
-    pub fn associateBackupVaultMpaApprovalTeam(self: *Self, allocator: std.mem.Allocator, input: associate_backup_vault_mpa_approval_team.AssociateBackupVaultMpaApprovalTeamInput, options: associate_backup_vault_mpa_approval_team.Options) !associate_backup_vault_mpa_approval_team.AssociateBackupVaultMpaApprovalTeamOutput {
+    pub fn associateBackupVaultMpaApprovalTeam(self: *Self, allocator: std.mem.Allocator, input: associate_backup_vault_mpa_approval_team.AssociateBackupVaultMpaApprovalTeamInput, options: CallOptions) !associate_backup_vault_mpa_approval_team.AssociateBackupVaultMpaApprovalTeamOutput {
         return associate_backup_vault_mpa_approval_team.execute(self, allocator, input, options);
     }
 
     /// Removes the specified legal hold on a recovery point. This action can only
     /// be performed
     /// by a user with sufficient permissions.
-    pub fn cancelLegalHold(self: *Self, allocator: std.mem.Allocator, input: cancel_legal_hold.CancelLegalHoldInput, options: cancel_legal_hold.Options) !cancel_legal_hold.CancelLegalHoldOutput {
+    pub fn cancelLegalHold(self: *Self, allocator: std.mem.Allocator, input: cancel_legal_hold.CancelLegalHoldInput, options: CallOptions) !cancel_legal_hold.CancelLegalHoldOutput {
         return cancel_legal_hold.execute(self, allocator, input, options);
     }
 
@@ -158,7 +159,7 @@ pub const Client = struct {
     ///
     /// If you call `CreateBackupPlan` with a plan that already exists, you receive
     /// an `AlreadyExistsException` exception.
-    pub fn createBackupPlan(self: *Self, allocator: std.mem.Allocator, input: create_backup_plan.CreateBackupPlanInput, options: create_backup_plan.Options) !create_backup_plan.CreateBackupPlanOutput {
+    pub fn createBackupPlan(self: *Self, allocator: std.mem.Allocator, input: create_backup_plan.CreateBackupPlanInput, options: CallOptions) !create_backup_plan.CreateBackupPlanOutput {
         return create_backup_plan.execute(self, allocator, input, options);
     }
 
@@ -166,7 +167,7 @@ pub const Client = struct {
     /// backup plan.
     /// For examples, see [Assigning resources
     /// programmatically](https://docs.aws.amazon.com/aws-backup/latest/devguide/assigning-resources.html#assigning-resources-json).
-    pub fn createBackupSelection(self: *Self, allocator: std.mem.Allocator, input: create_backup_selection.CreateBackupSelectionInput, options: create_backup_selection.Options) !create_backup_selection.CreateBackupSelectionOutput {
+    pub fn createBackupSelection(self: *Self, allocator: std.mem.Allocator, input: create_backup_selection.CreateBackupSelectionInput, options: CallOptions) !create_backup_selection.CreateBackupSelectionOutput {
         return create_backup_selection.execute(self, allocator, input, options);
     }
 
@@ -178,7 +179,7 @@ pub const Client = struct {
     /// Do not include sensitive data, such as passport numbers, in the name of a
     /// backup
     /// vault.
-    pub fn createBackupVault(self: *Self, allocator: std.mem.Allocator, input: create_backup_vault.CreateBackupVaultInput, options: create_backup_vault.Options) !create_backup_vault.CreateBackupVaultOutput {
+    pub fn createBackupVault(self: *Self, allocator: std.mem.Allocator, input: create_backup_vault.CreateBackupVaultInput, options: CallOptions) !create_backup_vault.CreateBackupVaultOutput {
         return create_backup_vault.execute(self, allocator, input, options);
     }
 
@@ -189,7 +190,7 @@ pub const Client = struct {
     /// controls to define your policies, you can evaluate whether your backup
     /// practices comply
     /// with your policies and which resources are not yet in compliance.
-    pub fn createFramework(self: *Self, allocator: std.mem.Allocator, input: create_framework.CreateFrameworkInput, options: create_framework.Options) !create_framework.CreateFrameworkOutput {
+    pub fn createFramework(self: *Self, allocator: std.mem.Allocator, input: create_framework.CreateFrameworkInput, options: CallOptions) !create_framework.CreateFrameworkOutput {
         return create_framework.execute(self, allocator, input, options);
     }
 
@@ -200,7 +201,7 @@ pub const Client = struct {
     /// to delete or disassociate a recovery point will fail with an error if one or
     /// more active
     /// legal holds are on the recovery point.
-    pub fn createLegalHold(self: *Self, allocator: std.mem.Allocator, input: create_legal_hold.CreateLegalHoldInput, options: create_legal_hold.Options) !create_legal_hold.CreateLegalHoldOutput {
+    pub fn createLegalHold(self: *Self, allocator: std.mem.Allocator, input: create_legal_hold.CreateLegalHoldInput, options: CallOptions) !create_legal_hold.CreateLegalHoldOutput {
         return create_legal_hold.execute(self, allocator, input, options);
     }
 
@@ -215,7 +216,7 @@ pub const Client = struct {
     /// Do not include sensitive data, such as passport numbers, in the name of a
     /// backup
     /// vault.
-    pub fn createLogicallyAirGappedBackupVault(self: *Self, allocator: std.mem.Allocator, input: create_logically_air_gapped_backup_vault.CreateLogicallyAirGappedBackupVaultInput, options: create_logically_air_gapped_backup_vault.Options) !create_logically_air_gapped_backup_vault.CreateLogicallyAirGappedBackupVaultOutput {
+    pub fn createLogicallyAirGappedBackupVault(self: *Self, allocator: std.mem.Allocator, input: create_logically_air_gapped_backup_vault.CreateLogicallyAirGappedBackupVaultInput, options: CallOptions) !create_logically_air_gapped_backup_vault.CreateLogicallyAirGappedBackupVaultOutput {
         return create_logically_air_gapped_backup_vault.execute(self, allocator, input, options);
     }
 
@@ -225,14 +226,14 @@ pub const Client = struct {
     ///
     /// If you call `CreateReportPlan` with a plan that already exists, you receive
     /// an `AlreadyExistsException` exception.
-    pub fn createReportPlan(self: *Self, allocator: std.mem.Allocator, input: create_report_plan.CreateReportPlanInput, options: create_report_plan.Options) !create_report_plan.CreateReportPlanOutput {
+    pub fn createReportPlan(self: *Self, allocator: std.mem.Allocator, input: create_report_plan.CreateReportPlanInput, options: CallOptions) !create_report_plan.CreateReportPlanOutput {
         return create_report_plan.execute(self, allocator, input, options);
     }
 
     /// Creates a restore access backup vault that provides temporary access to
     /// recovery points in a logically air-gapped backup vault, subject to MPA
     /// approval.
-    pub fn createRestoreAccessBackupVault(self: *Self, allocator: std.mem.Allocator, input: create_restore_access_backup_vault.CreateRestoreAccessBackupVaultInput, options: create_restore_access_backup_vault.Options) !create_restore_access_backup_vault.CreateRestoreAccessBackupVaultOutput {
+    pub fn createRestoreAccessBackupVault(self: *Self, allocator: std.mem.Allocator, input: create_restore_access_backup_vault.CreateRestoreAccessBackupVaultInput, options: CallOptions) !create_restore_access_backup_vault.CreateRestoreAccessBackupVaultOutput {
         return create_restore_access_backup_vault.execute(self, allocator, input, options);
     }
 
@@ -241,7 +242,7 @@ pub const Client = struct {
     /// The first of two steps to create a restore testing
     /// plan. After this request is successful, finish the procedure using
     /// CreateRestoreTestingSelection.
-    pub fn createRestoreTestingPlan(self: *Self, allocator: std.mem.Allocator, input: create_restore_testing_plan.CreateRestoreTestingPlanInput, options: create_restore_testing_plan.Options) !create_restore_testing_plan.CreateRestoreTestingPlanOutput {
+    pub fn createRestoreTestingPlan(self: *Self, allocator: std.mem.Allocator, input: create_restore_testing_plan.CreateRestoreTestingPlanInput, options: CallOptions) !create_restore_testing_plan.CreateRestoreTestingPlanOutput {
         return create_restore_testing_plan.execute(self, allocator, input, options);
     }
 
@@ -265,7 +266,7 @@ pub const Client = struct {
     ///
     /// Cannot select by both protected resource types AND specific ARNs.
     /// Request will fail if both are included.
-    pub fn createRestoreTestingSelection(self: *Self, allocator: std.mem.Allocator, input: create_restore_testing_selection.CreateRestoreTestingSelectionInput, options: create_restore_testing_selection.Options) !create_restore_testing_selection.CreateRestoreTestingSelectionOutput {
+    pub fn createRestoreTestingSelection(self: *Self, allocator: std.mem.Allocator, input: create_restore_testing_selection.CreateRestoreTestingSelectionInput, options: CallOptions) !create_restore_testing_selection.CreateRestoreTestingSelectionOutput {
         return create_restore_testing_selection.execute(self, allocator, input, options);
     }
 
@@ -277,7 +278,7 @@ pub const Client = struct {
     ///
     /// Each vault can only have one vault-specific tiering configuration, in
     /// addition to any global configuration that applies to all vaults.
-    pub fn createTieringConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_tiering_configuration.CreateTieringConfigurationInput, options: create_tiering_configuration.Options) !create_tiering_configuration.CreateTieringConfigurationOutput {
+    pub fn createTieringConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_tiering_configuration.CreateTieringConfigurationInput, options: CallOptions) !create_tiering_configuration.CreateTieringConfigurationOutput {
         return create_tiering_configuration.execute(self, allocator, input, options);
     }
 
@@ -286,26 +287,26 @@ pub const Client = struct {
     /// of resources have been deleted. Deleting a backup plan deletes the current
     /// version of a
     /// backup plan. Previous versions, if any, will still exist.
-    pub fn deleteBackupPlan(self: *Self, allocator: std.mem.Allocator, input: delete_backup_plan.DeleteBackupPlanInput, options: delete_backup_plan.Options) !delete_backup_plan.DeleteBackupPlanOutput {
+    pub fn deleteBackupPlan(self: *Self, allocator: std.mem.Allocator, input: delete_backup_plan.DeleteBackupPlanInput, options: CallOptions) !delete_backup_plan.DeleteBackupPlanOutput {
         return delete_backup_plan.execute(self, allocator, input, options);
     }
 
     /// Deletes the resource selection associated with a backup plan that is
     /// specified by the
     /// `SelectionId`.
-    pub fn deleteBackupSelection(self: *Self, allocator: std.mem.Allocator, input: delete_backup_selection.DeleteBackupSelectionInput, options: delete_backup_selection.Options) !delete_backup_selection.DeleteBackupSelectionOutput {
+    pub fn deleteBackupSelection(self: *Self, allocator: std.mem.Allocator, input: delete_backup_selection.DeleteBackupSelectionInput, options: CallOptions) !delete_backup_selection.DeleteBackupSelectionOutput {
         return delete_backup_selection.execute(self, allocator, input, options);
     }
 
     /// Deletes the backup vault identified by its name. A vault can be deleted only
     /// if it is
     /// empty.
-    pub fn deleteBackupVault(self: *Self, allocator: std.mem.Allocator, input: delete_backup_vault.DeleteBackupVaultInput, options: delete_backup_vault.Options) !delete_backup_vault.DeleteBackupVaultOutput {
+    pub fn deleteBackupVault(self: *Self, allocator: std.mem.Allocator, input: delete_backup_vault.DeleteBackupVaultInput, options: CallOptions) !delete_backup_vault.DeleteBackupVaultOutput {
         return delete_backup_vault.execute(self, allocator, input, options);
     }
 
     /// Deletes the policy document that manages permissions on a backup vault.
-    pub fn deleteBackupVaultAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_backup_vault_access_policy.DeleteBackupVaultAccessPolicyInput, options: delete_backup_vault_access_policy.Options) !delete_backup_vault_access_policy.DeleteBackupVaultAccessPolicyOutput {
+    pub fn deleteBackupVaultAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_backup_vault_access_policy.DeleteBackupVaultAccessPolicyInput, options: CallOptions) !delete_backup_vault_access_policy.DeleteBackupVaultAccessPolicyOutput {
         return delete_backup_vault_access_policy.execute(self, allocator, input, options);
     }
 
@@ -319,17 +320,17 @@ pub const Client = struct {
     /// to do so. For more information, see [Vault
     /// Lock](https://docs.aws.amazon.com/aws-backup/latest/devguide/vault-lock.html) in the
     /// *Backup Developer Guide*.
-    pub fn deleteBackupVaultLockConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_backup_vault_lock_configuration.DeleteBackupVaultLockConfigurationInput, options: delete_backup_vault_lock_configuration.Options) !delete_backup_vault_lock_configuration.DeleteBackupVaultLockConfigurationOutput {
+    pub fn deleteBackupVaultLockConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_backup_vault_lock_configuration.DeleteBackupVaultLockConfigurationInput, options: CallOptions) !delete_backup_vault_lock_configuration.DeleteBackupVaultLockConfigurationOutput {
         return delete_backup_vault_lock_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes event notifications for the specified backup vault.
-    pub fn deleteBackupVaultNotifications(self: *Self, allocator: std.mem.Allocator, input: delete_backup_vault_notifications.DeleteBackupVaultNotificationsInput, options: delete_backup_vault_notifications.Options) !delete_backup_vault_notifications.DeleteBackupVaultNotificationsOutput {
+    pub fn deleteBackupVaultNotifications(self: *Self, allocator: std.mem.Allocator, input: delete_backup_vault_notifications.DeleteBackupVaultNotificationsInput, options: CallOptions) !delete_backup_vault_notifications.DeleteBackupVaultNotificationsOutput {
         return delete_backup_vault_notifications.execute(self, allocator, input, options);
     }
 
     /// Deletes the framework specified by a framework name.
-    pub fn deleteFramework(self: *Self, allocator: std.mem.Allocator, input: delete_framework.DeleteFrameworkInput, options: delete_framework.Options) !delete_framework.DeleteFrameworkOutput {
+    pub fn deleteFramework(self: *Self, allocator: std.mem.Allocator, input: delete_framework.DeleteFrameworkInput, options: CallOptions) !delete_framework.DeleteFrameworkOutput {
         return delete_framework.execute(self, allocator, input, options);
     }
 
@@ -354,12 +355,12 @@ pub const Client = struct {
     ///
     /// If the user or role is deleted or the permission within the role is removed,
     /// the deletion will not be successful and will enter an `EXPIRED` state.
-    pub fn deleteRecoveryPoint(self: *Self, allocator: std.mem.Allocator, input: delete_recovery_point.DeleteRecoveryPointInput, options: delete_recovery_point.Options) !delete_recovery_point.DeleteRecoveryPointOutput {
+    pub fn deleteRecoveryPoint(self: *Self, allocator: std.mem.Allocator, input: delete_recovery_point.DeleteRecoveryPointInput, options: CallOptions) !delete_recovery_point.DeleteRecoveryPointOutput {
         return delete_recovery_point.execute(self, allocator, input, options);
     }
 
     /// Deletes the report plan specified by a report plan name.
-    pub fn deleteReportPlan(self: *Self, allocator: std.mem.Allocator, input: delete_report_plan.DeleteReportPlanInput, options: delete_report_plan.Options) !delete_report_plan.DeleteReportPlanOutput {
+    pub fn deleteReportPlan(self: *Self, allocator: std.mem.Allocator, input: delete_report_plan.DeleteReportPlanInput, options: CallOptions) !delete_report_plan.DeleteReportPlanOutput {
         return delete_report_plan.execute(self, allocator, input, options);
     }
 
@@ -367,7 +368,7 @@ pub const Client = struct {
     ///
     /// Deletion can only successfully occur if all associated
     /// restore testing selections are deleted first.
-    pub fn deleteRestoreTestingPlan(self: *Self, allocator: std.mem.Allocator, input: delete_restore_testing_plan.DeleteRestoreTestingPlanInput, options: delete_restore_testing_plan.Options) !delete_restore_testing_plan.DeleteRestoreTestingPlanOutput {
+    pub fn deleteRestoreTestingPlan(self: *Self, allocator: std.mem.Allocator, input: delete_restore_testing_plan.DeleteRestoreTestingPlanInput, options: CallOptions) !delete_restore_testing_plan.DeleteRestoreTestingPlanOutput {
         return delete_restore_testing_plan.execute(self, allocator, input, options);
     }
 
@@ -376,32 +377,32 @@ pub const Client = struct {
     ///
     /// All testing selections associated with a restore testing plan must
     /// be deleted before the restore testing plan can be deleted.
-    pub fn deleteRestoreTestingSelection(self: *Self, allocator: std.mem.Allocator, input: delete_restore_testing_selection.DeleteRestoreTestingSelectionInput, options: delete_restore_testing_selection.Options) !delete_restore_testing_selection.DeleteRestoreTestingSelectionOutput {
+    pub fn deleteRestoreTestingSelection(self: *Self, allocator: std.mem.Allocator, input: delete_restore_testing_selection.DeleteRestoreTestingSelectionInput, options: CallOptions) !delete_restore_testing_selection.DeleteRestoreTestingSelectionOutput {
         return delete_restore_testing_selection.execute(self, allocator, input, options);
     }
 
     /// Deletes the tiering configuration specified by a tiering configuration name.
-    pub fn deleteTieringConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_tiering_configuration.DeleteTieringConfigurationInput, options: delete_tiering_configuration.Options) !delete_tiering_configuration.DeleteTieringConfigurationOutput {
+    pub fn deleteTieringConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_tiering_configuration.DeleteTieringConfigurationInput, options: CallOptions) !delete_tiering_configuration.DeleteTieringConfigurationOutput {
         return delete_tiering_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns backup job details for the specified `BackupJobId`.
-    pub fn describeBackupJob(self: *Self, allocator: std.mem.Allocator, input: describe_backup_job.DescribeBackupJobInput, options: describe_backup_job.Options) !describe_backup_job.DescribeBackupJobOutput {
+    pub fn describeBackupJob(self: *Self, allocator: std.mem.Allocator, input: describe_backup_job.DescribeBackupJobInput, options: CallOptions) !describe_backup_job.DescribeBackupJobOutput {
         return describe_backup_job.execute(self, allocator, input, options);
     }
 
     /// Returns metadata about a backup vault specified by its name.
-    pub fn describeBackupVault(self: *Self, allocator: std.mem.Allocator, input: describe_backup_vault.DescribeBackupVaultInput, options: describe_backup_vault.Options) !describe_backup_vault.DescribeBackupVaultOutput {
+    pub fn describeBackupVault(self: *Self, allocator: std.mem.Allocator, input: describe_backup_vault.DescribeBackupVaultInput, options: CallOptions) !describe_backup_vault.DescribeBackupVaultOutput {
         return describe_backup_vault.execute(self, allocator, input, options);
     }
 
     /// Returns metadata associated with creating a copy of a resource.
-    pub fn describeCopyJob(self: *Self, allocator: std.mem.Allocator, input: describe_copy_job.DescribeCopyJobInput, options: describe_copy_job.Options) !describe_copy_job.DescribeCopyJobOutput {
+    pub fn describeCopyJob(self: *Self, allocator: std.mem.Allocator, input: describe_copy_job.DescribeCopyJobInput, options: CallOptions) !describe_copy_job.DescribeCopyJobOutput {
         return describe_copy_job.execute(self, allocator, input, options);
     }
 
     /// Returns the framework details for the specified `FrameworkName`.
-    pub fn describeFramework(self: *Self, allocator: std.mem.Allocator, input: describe_framework.DescribeFrameworkInput, options: describe_framework.Options) !describe_framework.DescribeFrameworkOutput {
+    pub fn describeFramework(self: *Self, allocator: std.mem.Allocator, input: describe_framework.DescribeFrameworkInput, options: CallOptions) !describe_framework.DescribeFrameworkOutput {
         return describe_framework.execute(self, allocator, input, options);
     }
 
@@ -410,7 +411,7 @@ pub const Client = struct {
     /// Returns an error if the account is not a member of an Organizations
     /// organization.
     /// Example: `describe-global-settings --region us-west-2`
-    pub fn describeGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: describe_global_settings.DescribeGlobalSettingsInput, options: describe_global_settings.Options) !describe_global_settings.DescribeGlobalSettingsOutput {
+    pub fn describeGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: describe_global_settings.DescribeGlobalSettingsInput, options: CallOptions) !describe_global_settings.DescribeGlobalSettingsOutput {
         return describe_global_settings.execute(self, allocator, input, options);
     }
 
@@ -419,14 +420,14 @@ pub const Client = struct {
     /// its Amazon Resource Name (ARN), and the Amazon Web Services service type of
     /// the saved
     /// resource.
-    pub fn describeProtectedResource(self: *Self, allocator: std.mem.Allocator, input: describe_protected_resource.DescribeProtectedResourceInput, options: describe_protected_resource.Options) !describe_protected_resource.DescribeProtectedResourceOutput {
+    pub fn describeProtectedResource(self: *Self, allocator: std.mem.Allocator, input: describe_protected_resource.DescribeProtectedResourceInput, options: CallOptions) !describe_protected_resource.DescribeProtectedResourceOutput {
         return describe_protected_resource.execute(self, allocator, input, options);
     }
 
     /// Returns metadata associated with a recovery point, including ID, status,
     /// encryption, and
     /// lifecycle.
-    pub fn describeRecoveryPoint(self: *Self, allocator: std.mem.Allocator, input: describe_recovery_point.DescribeRecoveryPointInput, options: describe_recovery_point.Options) !describe_recovery_point.DescribeRecoveryPointOutput {
+    pub fn describeRecoveryPoint(self: *Self, allocator: std.mem.Allocator, input: describe_recovery_point.DescribeRecoveryPointInput, options: CallOptions) !describe_recovery_point.DescribeRecoveryPointOutput {
         return describe_recovery_point.execute(self, allocator, input, options);
     }
 
@@ -438,36 +439,36 @@ pub const Client = struct {
     /// plan. Otherwise,
     /// Backup does not try to protect that service's resources in this
     /// Region.
-    pub fn describeRegionSettings(self: *Self, allocator: std.mem.Allocator, input: describe_region_settings.DescribeRegionSettingsInput, options: describe_region_settings.Options) !describe_region_settings.DescribeRegionSettingsOutput {
+    pub fn describeRegionSettings(self: *Self, allocator: std.mem.Allocator, input: describe_region_settings.DescribeRegionSettingsInput, options: CallOptions) !describe_region_settings.DescribeRegionSettingsOutput {
         return describe_region_settings.execute(self, allocator, input, options);
     }
 
     /// Returns the details associated with creating a report as specified by its
     /// `ReportJobId`.
-    pub fn describeReportJob(self: *Self, allocator: std.mem.Allocator, input: describe_report_job.DescribeReportJobInput, options: describe_report_job.Options) !describe_report_job.DescribeReportJobOutput {
+    pub fn describeReportJob(self: *Self, allocator: std.mem.Allocator, input: describe_report_job.DescribeReportJobInput, options: CallOptions) !describe_report_job.DescribeReportJobOutput {
         return describe_report_job.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all report plans for an Amazon Web Services account and
     /// Amazon Web Services Region.
-    pub fn describeReportPlan(self: *Self, allocator: std.mem.Allocator, input: describe_report_plan.DescribeReportPlanInput, options: describe_report_plan.Options) !describe_report_plan.DescribeReportPlanOutput {
+    pub fn describeReportPlan(self: *Self, allocator: std.mem.Allocator, input: describe_report_plan.DescribeReportPlanInput, options: CallOptions) !describe_report_plan.DescribeReportPlanOutput {
         return describe_report_plan.execute(self, allocator, input, options);
     }
 
     /// Returns metadata associated with a restore job that is specified by a job
     /// ID.
-    pub fn describeRestoreJob(self: *Self, allocator: std.mem.Allocator, input: describe_restore_job.DescribeRestoreJobInput, options: describe_restore_job.Options) !describe_restore_job.DescribeRestoreJobOutput {
+    pub fn describeRestoreJob(self: *Self, allocator: std.mem.Allocator, input: describe_restore_job.DescribeRestoreJobInput, options: CallOptions) !describe_restore_job.DescribeRestoreJobOutput {
         return describe_restore_job.execute(self, allocator, input, options);
     }
 
     /// Returns scan job details for the specified ScanJobID.
-    pub fn describeScanJob(self: *Self, allocator: std.mem.Allocator, input: describe_scan_job.DescribeScanJobInput, options: describe_scan_job.Options) !describe_scan_job.DescribeScanJobOutput {
+    pub fn describeScanJob(self: *Self, allocator: std.mem.Allocator, input: describe_scan_job.DescribeScanJobInput, options: CallOptions) !describe_scan_job.DescribeScanJobOutput {
         return describe_scan_job.execute(self, allocator, input, options);
     }
 
     /// Removes the association between an MPA approval team and a backup vault,
     /// disabling the MPA approval workflow for restore operations.
-    pub fn disassociateBackupVaultMpaApprovalTeam(self: *Self, allocator: std.mem.Allocator, input: disassociate_backup_vault_mpa_approval_team.DisassociateBackupVaultMpaApprovalTeamInput, options: disassociate_backup_vault_mpa_approval_team.Options) !disassociate_backup_vault_mpa_approval_team.DisassociateBackupVaultMpaApprovalTeamOutput {
+    pub fn disassociateBackupVaultMpaApprovalTeam(self: *Self, allocator: std.mem.Allocator, input: disassociate_backup_vault_mpa_approval_team.DisassociateBackupVaultMpaApprovalTeamInput, options: CallOptions) !disassociate_backup_vault_mpa_approval_team.DisassociateBackupVaultMpaApprovalTeamOutput {
         return disassociate_backup_vault_mpa_approval_team.execute(self, allocator, input, options);
     }
 
@@ -478,7 +479,7 @@ pub const Client = struct {
     /// lifecycle that you specified in your original backup plan.
     ///
     /// Does not support snapshot backup recovery points.
-    pub fn disassociateRecoveryPoint(self: *Self, allocator: std.mem.Allocator, input: disassociate_recovery_point.DisassociateRecoveryPointInput, options: disassociate_recovery_point.Options) !disassociate_recovery_point.DisassociateRecoveryPointOutput {
+    pub fn disassociateRecoveryPoint(self: *Self, allocator: std.mem.Allocator, input: disassociate_recovery_point.DisassociateRecoveryPointInput, options: CallOptions) !disassociate_recovery_point.DisassociateRecoveryPointOutput {
         return disassociate_recovery_point.execute(self, allocator, input, options);
     }
 
@@ -486,71 +487,71 @@ pub const Client = struct {
     /// relationship
     /// between the specified recovery point and its parent (composite) recovery
     /// point.
-    pub fn disassociateRecoveryPointFromParent(self: *Self, allocator: std.mem.Allocator, input: disassociate_recovery_point_from_parent.DisassociateRecoveryPointFromParentInput, options: disassociate_recovery_point_from_parent.Options) !disassociate_recovery_point_from_parent.DisassociateRecoveryPointFromParentOutput {
+    pub fn disassociateRecoveryPointFromParent(self: *Self, allocator: std.mem.Allocator, input: disassociate_recovery_point_from_parent.DisassociateRecoveryPointFromParentInput, options: CallOptions) !disassociate_recovery_point_from_parent.DisassociateRecoveryPointFromParentOutput {
         return disassociate_recovery_point_from_parent.execute(self, allocator, input, options);
     }
 
     /// Returns the backup plan that is specified by the plan ID as a backup
     /// template.
-    pub fn exportBackupPlanTemplate(self: *Self, allocator: std.mem.Allocator, input: export_backup_plan_template.ExportBackupPlanTemplateInput, options: export_backup_plan_template.Options) !export_backup_plan_template.ExportBackupPlanTemplateOutput {
+    pub fn exportBackupPlanTemplate(self: *Self, allocator: std.mem.Allocator, input: export_backup_plan_template.ExportBackupPlanTemplateInput, options: CallOptions) !export_backup_plan_template.ExportBackupPlanTemplateOutput {
         return export_backup_plan_template.execute(self, allocator, input, options);
     }
 
     /// Returns `BackupPlan` details for the specified `BackupPlanId`. The
     /// details are the body of a backup plan in JSON format, in addition to plan
     /// metadata.
-    pub fn getBackupPlan(self: *Self, allocator: std.mem.Allocator, input: get_backup_plan.GetBackupPlanInput, options: get_backup_plan.Options) !get_backup_plan.GetBackupPlanOutput {
+    pub fn getBackupPlan(self: *Self, allocator: std.mem.Allocator, input: get_backup_plan.GetBackupPlanInput, options: CallOptions) !get_backup_plan.GetBackupPlanOutput {
         return get_backup_plan.execute(self, allocator, input, options);
     }
 
     /// Returns a valid JSON document specifying a backup plan or an error.
-    pub fn getBackupPlanFromJson(self: *Self, allocator: std.mem.Allocator, input: get_backup_plan_from_json.GetBackupPlanFromJSONInput, options: get_backup_plan_from_json.Options) !get_backup_plan_from_json.GetBackupPlanFromJSONOutput {
+    pub fn getBackupPlanFromJson(self: *Self, allocator: std.mem.Allocator, input: get_backup_plan_from_json.GetBackupPlanFromJSONInput, options: CallOptions) !get_backup_plan_from_json.GetBackupPlanFromJSONOutput {
         return get_backup_plan_from_json.execute(self, allocator, input, options);
     }
 
     /// Returns the template specified by its `templateId` as a backup plan.
-    pub fn getBackupPlanFromTemplate(self: *Self, allocator: std.mem.Allocator, input: get_backup_plan_from_template.GetBackupPlanFromTemplateInput, options: get_backup_plan_from_template.Options) !get_backup_plan_from_template.GetBackupPlanFromTemplateOutput {
+    pub fn getBackupPlanFromTemplate(self: *Self, allocator: std.mem.Allocator, input: get_backup_plan_from_template.GetBackupPlanFromTemplateInput, options: CallOptions) !get_backup_plan_from_template.GetBackupPlanFromTemplateOutput {
         return get_backup_plan_from_template.execute(self, allocator, input, options);
     }
 
     /// Returns selection metadata and a document in JSON format that specifies a
     /// list of
     /// resources that are associated with a backup plan.
-    pub fn getBackupSelection(self: *Self, allocator: std.mem.Allocator, input: get_backup_selection.GetBackupSelectionInput, options: get_backup_selection.Options) !get_backup_selection.GetBackupSelectionOutput {
+    pub fn getBackupSelection(self: *Self, allocator: std.mem.Allocator, input: get_backup_selection.GetBackupSelectionInput, options: CallOptions) !get_backup_selection.GetBackupSelectionOutput {
         return get_backup_selection.execute(self, allocator, input, options);
     }
 
     /// Returns the access policy document that is associated with the named backup
     /// vault.
-    pub fn getBackupVaultAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: get_backup_vault_access_policy.GetBackupVaultAccessPolicyInput, options: get_backup_vault_access_policy.Options) !get_backup_vault_access_policy.GetBackupVaultAccessPolicyOutput {
+    pub fn getBackupVaultAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: get_backup_vault_access_policy.GetBackupVaultAccessPolicyInput, options: CallOptions) !get_backup_vault_access_policy.GetBackupVaultAccessPolicyOutput {
         return get_backup_vault_access_policy.execute(self, allocator, input, options);
     }
 
     /// Returns event notifications for the specified backup vault.
-    pub fn getBackupVaultNotifications(self: *Self, allocator: std.mem.Allocator, input: get_backup_vault_notifications.GetBackupVaultNotificationsInput, options: get_backup_vault_notifications.Options) !get_backup_vault_notifications.GetBackupVaultNotificationsOutput {
+    pub fn getBackupVaultNotifications(self: *Self, allocator: std.mem.Allocator, input: get_backup_vault_notifications.GetBackupVaultNotificationsInput, options: CallOptions) !get_backup_vault_notifications.GetBackupVaultNotificationsOutput {
         return get_backup_vault_notifications.execute(self, allocator, input, options);
     }
 
     /// This action returns details for a specified legal hold. The details are the
     /// body of a legal hold in JSON format, in addition to metadata.
-    pub fn getLegalHold(self: *Self, allocator: std.mem.Allocator, input: get_legal_hold.GetLegalHoldInput, options: get_legal_hold.Options) !get_legal_hold.GetLegalHoldOutput {
+    pub fn getLegalHold(self: *Self, allocator: std.mem.Allocator, input: get_legal_hold.GetLegalHoldInput, options: CallOptions) !get_legal_hold.GetLegalHoldOutput {
         return get_legal_hold.execute(self, allocator, input, options);
     }
 
     /// This operation returns the metadata and details specific to
     /// the backup index associated with the specified recovery point.
-    pub fn getRecoveryPointIndexDetails(self: *Self, allocator: std.mem.Allocator, input: get_recovery_point_index_details.GetRecoveryPointIndexDetailsInput, options: get_recovery_point_index_details.Options) !get_recovery_point_index_details.GetRecoveryPointIndexDetailsOutput {
+    pub fn getRecoveryPointIndexDetails(self: *Self, allocator: std.mem.Allocator, input: get_recovery_point_index_details.GetRecoveryPointIndexDetailsInput, options: CallOptions) !get_recovery_point_index_details.GetRecoveryPointIndexDetailsOutput {
         return get_recovery_point_index_details.execute(self, allocator, input, options);
     }
 
     /// Returns a set of metadata key-value pairs that were used to create the
     /// backup.
-    pub fn getRecoveryPointRestoreMetadata(self: *Self, allocator: std.mem.Allocator, input: get_recovery_point_restore_metadata.GetRecoveryPointRestoreMetadataInput, options: get_recovery_point_restore_metadata.Options) !get_recovery_point_restore_metadata.GetRecoveryPointRestoreMetadataOutput {
+    pub fn getRecoveryPointRestoreMetadata(self: *Self, allocator: std.mem.Allocator, input: get_recovery_point_restore_metadata.GetRecoveryPointRestoreMetadataInput, options: CallOptions) !get_recovery_point_restore_metadata.GetRecoveryPointRestoreMetadataOutput {
         return get_recovery_point_restore_metadata.execute(self, allocator, input, options);
     }
 
     /// This request returns the metadata for the specified restore job.
-    pub fn getRestoreJobMetadata(self: *Self, allocator: std.mem.Allocator, input: get_restore_job_metadata.GetRestoreJobMetadataInput, options: get_restore_job_metadata.Options) !get_restore_job_metadata.GetRestoreJobMetadataOutput {
+    pub fn getRestoreJobMetadata(self: *Self, allocator: std.mem.Allocator, input: get_restore_job_metadata.GetRestoreJobMetadataInput, options: CallOptions) !get_restore_job_metadata.GetRestoreJobMetadataOutput {
         return get_restore_job_metadata.execute(self, allocator, input, options);
     }
 
@@ -558,25 +559,25 @@ pub const Client = struct {
     /// start a restore job with secure default settings. `BackupVaultName`
     /// and `RecoveryPointArn` are required parameters.
     /// `BackupVaultAccountId` is an optional parameter.
-    pub fn getRestoreTestingInferredMetadata(self: *Self, allocator: std.mem.Allocator, input: get_restore_testing_inferred_metadata.GetRestoreTestingInferredMetadataInput, options: get_restore_testing_inferred_metadata.Options) !get_restore_testing_inferred_metadata.GetRestoreTestingInferredMetadataOutput {
+    pub fn getRestoreTestingInferredMetadata(self: *Self, allocator: std.mem.Allocator, input: get_restore_testing_inferred_metadata.GetRestoreTestingInferredMetadataInput, options: CallOptions) !get_restore_testing_inferred_metadata.GetRestoreTestingInferredMetadataOutput {
         return get_restore_testing_inferred_metadata.execute(self, allocator, input, options);
     }
 
     /// Returns `RestoreTestingPlan` details for the specified
     /// `RestoreTestingPlanName`. The details are the body of a restore testing plan
     /// in JSON format, in addition to plan metadata.
-    pub fn getRestoreTestingPlan(self: *Self, allocator: std.mem.Allocator, input: get_restore_testing_plan.GetRestoreTestingPlanInput, options: get_restore_testing_plan.Options) !get_restore_testing_plan.GetRestoreTestingPlanOutput {
+    pub fn getRestoreTestingPlan(self: *Self, allocator: std.mem.Allocator, input: get_restore_testing_plan.GetRestoreTestingPlanInput, options: CallOptions) !get_restore_testing_plan.GetRestoreTestingPlanOutput {
         return get_restore_testing_plan.execute(self, allocator, input, options);
     }
 
     /// Returns RestoreTestingSelection, which displays resources
     /// and elements of the restore testing plan.
-    pub fn getRestoreTestingSelection(self: *Self, allocator: std.mem.Allocator, input: get_restore_testing_selection.GetRestoreTestingSelectionInput, options: get_restore_testing_selection.Options) !get_restore_testing_selection.GetRestoreTestingSelectionOutput {
+    pub fn getRestoreTestingSelection(self: *Self, allocator: std.mem.Allocator, input: get_restore_testing_selection.GetRestoreTestingSelectionInput, options: CallOptions) !get_restore_testing_selection.GetRestoreTestingSelectionOutput {
         return get_restore_testing_selection.execute(self, allocator, input, options);
     }
 
     /// Returns the Amazon Web Services resource types supported by Backup.
-    pub fn getSupportedResourceTypes(self: *Self, allocator: std.mem.Allocator, input: get_supported_resource_types.GetSupportedResourceTypesInput, options: get_supported_resource_types.Options) !get_supported_resource_types.GetSupportedResourceTypesOutput {
+    pub fn getSupportedResourceTypes(self: *Self, allocator: std.mem.Allocator, input: get_supported_resource_types.GetSupportedResourceTypesInput, options: CallOptions) !get_supported_resource_types.GetSupportedResourceTypesOutput {
         return get_supported_resource_types.execute(self, allocator, input, options);
     }
 
@@ -584,7 +585,7 @@ pub const Client = struct {
     /// `TieringConfigurationName`. The details are the body of a tiering
     /// configuration
     /// in JSON format, in addition to configuration metadata.
-    pub fn getTieringConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_tiering_configuration.GetTieringConfigurationInput, options: get_tiering_configuration.Options) !get_tiering_configuration.GetTieringConfigurationOutput {
+    pub fn getTieringConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_tiering_configuration.GetTieringConfigurationInput, options: CallOptions) !get_tiering_configuration.GetTieringConfigurationOutput {
         return get_tiering_configuration.execute(self, allocator, input, options);
     }
 
@@ -597,7 +598,7 @@ pub const Client = struct {
     /// This request returns a summary that contains
     /// Region, Account, State, ResourceType, MessageCategory,
     /// StartTime, EndTime, and Count of included jobs.
-    pub fn listBackupJobSummaries(self: *Self, allocator: std.mem.Allocator, input: list_backup_job_summaries.ListBackupJobSummariesInput, options: list_backup_job_summaries.Options) !list_backup_job_summaries.ListBackupJobSummariesOutput {
+    pub fn listBackupJobSummaries(self: *Self, allocator: std.mem.Allocator, input: list_backup_job_summaries.ListBackupJobSummariesInput, options: CallOptions) !list_backup_job_summaries.ListBackupJobSummariesOutput {
         return list_backup_job_summaries.execute(self, allocator, input, options);
     }
 
@@ -605,38 +606,38 @@ pub const Client = struct {
     /// last 30
     /// days. For a longer period of time, consider using these [monitoring
     /// tools](https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html).
-    pub fn listBackupJobs(self: *Self, allocator: std.mem.Allocator, input: list_backup_jobs.ListBackupJobsInput, options: list_backup_jobs.Options) !list_backup_jobs.ListBackupJobsOutput {
+    pub fn listBackupJobs(self: *Self, allocator: std.mem.Allocator, input: list_backup_jobs.ListBackupJobsInput, options: CallOptions) !list_backup_jobs.ListBackupJobsOutput {
         return list_backup_jobs.execute(self, allocator, input, options);
     }
 
     /// Lists the backup plan templates.
-    pub fn listBackupPlanTemplates(self: *Self, allocator: std.mem.Allocator, input: list_backup_plan_templates.ListBackupPlanTemplatesInput, options: list_backup_plan_templates.Options) !list_backup_plan_templates.ListBackupPlanTemplatesOutput {
+    pub fn listBackupPlanTemplates(self: *Self, allocator: std.mem.Allocator, input: list_backup_plan_templates.ListBackupPlanTemplatesInput, options: CallOptions) !list_backup_plan_templates.ListBackupPlanTemplatesOutput {
         return list_backup_plan_templates.execute(self, allocator, input, options);
     }
 
     /// Returns version metadata of your backup plans, including Amazon Resource
     /// Names (ARNs),
     /// backup plan IDs, creation and deletion dates, plan names, and version IDs.
-    pub fn listBackupPlanVersions(self: *Self, allocator: std.mem.Allocator, input: list_backup_plan_versions.ListBackupPlanVersionsInput, options: list_backup_plan_versions.Options) !list_backup_plan_versions.ListBackupPlanVersionsOutput {
+    pub fn listBackupPlanVersions(self: *Self, allocator: std.mem.Allocator, input: list_backup_plan_versions.ListBackupPlanVersionsInput, options: CallOptions) !list_backup_plan_versions.ListBackupPlanVersionsOutput {
         return list_backup_plan_versions.execute(self, allocator, input, options);
     }
 
     /// Lists the active backup plans for the account.
-    pub fn listBackupPlans(self: *Self, allocator: std.mem.Allocator, input: list_backup_plans.ListBackupPlansInput, options: list_backup_plans.Options) !list_backup_plans.ListBackupPlansOutput {
+    pub fn listBackupPlans(self: *Self, allocator: std.mem.Allocator, input: list_backup_plans.ListBackupPlansInput, options: CallOptions) !list_backup_plans.ListBackupPlansOutput {
         return list_backup_plans.execute(self, allocator, input, options);
     }
 
     /// Returns an array containing metadata of the resources associated with the
     /// target backup
     /// plan.
-    pub fn listBackupSelections(self: *Self, allocator: std.mem.Allocator, input: list_backup_selections.ListBackupSelectionsInput, options: list_backup_selections.Options) !list_backup_selections.ListBackupSelectionsOutput {
+    pub fn listBackupSelections(self: *Self, allocator: std.mem.Allocator, input: list_backup_selections.ListBackupSelectionsInput, options: CallOptions) !list_backup_selections.ListBackupSelectionsOutput {
         return list_backup_selections.execute(self, allocator, input, options);
     }
 
     /// Returns a list of recovery point storage containers along with information
     /// about
     /// them.
-    pub fn listBackupVaults(self: *Self, allocator: std.mem.Allocator, input: list_backup_vaults.ListBackupVaultsInput, options: list_backup_vaults.Options) !list_backup_vaults.ListBackupVaultsOutput {
+    pub fn listBackupVaults(self: *Self, allocator: std.mem.Allocator, input: list_backup_vaults.ListBackupVaultsInput, options: CallOptions) !list_backup_vaults.ListBackupVaultsOutput {
         return list_backup_vaults.execute(self, allocator, input, options);
     }
 
@@ -649,18 +650,18 @@ pub const Client = struct {
     /// This request returns a summary that contains
     /// Region, Account, State, RestourceType, MessageCategory,
     /// StartTime, EndTime, and Count of included jobs.
-    pub fn listCopyJobSummaries(self: *Self, allocator: std.mem.Allocator, input: list_copy_job_summaries.ListCopyJobSummariesInput, options: list_copy_job_summaries.Options) !list_copy_job_summaries.ListCopyJobSummariesOutput {
+    pub fn listCopyJobSummaries(self: *Self, allocator: std.mem.Allocator, input: list_copy_job_summaries.ListCopyJobSummariesInput, options: CallOptions) !list_copy_job_summaries.ListCopyJobSummariesOutput {
         return list_copy_job_summaries.execute(self, allocator, input, options);
     }
 
     /// Returns metadata about your copy jobs.
-    pub fn listCopyJobs(self: *Self, allocator: std.mem.Allocator, input: list_copy_jobs.ListCopyJobsInput, options: list_copy_jobs.Options) !list_copy_jobs.ListCopyJobsOutput {
+    pub fn listCopyJobs(self: *Self, allocator: std.mem.Allocator, input: list_copy_jobs.ListCopyJobsInput, options: CallOptions) !list_copy_jobs.ListCopyJobsOutput {
         return list_copy_jobs.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all frameworks for an Amazon Web Services account and
     /// Amazon Web Services Region.
-    pub fn listFrameworks(self: *Self, allocator: std.mem.Allocator, input: list_frameworks.ListFrameworksInput, options: list_frameworks.Options) !list_frameworks.ListFrameworksOutput {
+    pub fn listFrameworks(self: *Self, allocator: std.mem.Allocator, input: list_frameworks.ListFrameworksInput, options: CallOptions) !list_frameworks.ListFrameworksOutput {
         return list_frameworks.execute(self, allocator, input, options);
     }
 
@@ -670,12 +671,12 @@ pub const Client = struct {
     /// Optional parameters you can include are: MaxResults;
     /// NextToken; SourceResourceArns; CreatedBefore; CreatedAfter;
     /// and ResourceType.
-    pub fn listIndexedRecoveryPoints(self: *Self, allocator: std.mem.Allocator, input: list_indexed_recovery_points.ListIndexedRecoveryPointsInput, options: list_indexed_recovery_points.Options) !list_indexed_recovery_points.ListIndexedRecoveryPointsOutput {
+    pub fn listIndexedRecoveryPoints(self: *Self, allocator: std.mem.Allocator, input: list_indexed_recovery_points.ListIndexedRecoveryPointsInput, options: CallOptions) !list_indexed_recovery_points.ListIndexedRecoveryPointsOutput {
         return list_indexed_recovery_points.execute(self, allocator, input, options);
     }
 
     /// This action returns metadata about active and previous legal holds.
-    pub fn listLegalHolds(self: *Self, allocator: std.mem.Allocator, input: list_legal_holds.ListLegalHoldsInput, options: list_legal_holds.Options) !list_legal_holds.ListLegalHoldsOutput {
+    pub fn listLegalHolds(self: *Self, allocator: std.mem.Allocator, input: list_legal_holds.ListLegalHoldsInput, options: CallOptions) !list_legal_holds.ListLegalHoldsOutput {
         return list_legal_holds.execute(self, allocator, input, options);
     }
 
@@ -683,25 +684,25 @@ pub const Client = struct {
     /// the time the resource was saved, an Amazon Resource Name (ARN) of the
     /// resource, and a
     /// resource type.
-    pub fn listProtectedResources(self: *Self, allocator: std.mem.Allocator, input: list_protected_resources.ListProtectedResourcesInput, options: list_protected_resources.Options) !list_protected_resources.ListProtectedResourcesOutput {
+    pub fn listProtectedResources(self: *Self, allocator: std.mem.Allocator, input: list_protected_resources.ListProtectedResourcesInput, options: CallOptions) !list_protected_resources.ListProtectedResourcesOutput {
         return list_protected_resources.execute(self, allocator, input, options);
     }
 
     /// This request lists the protected resources corresponding to each backup
     /// vault.
-    pub fn listProtectedResourcesByBackupVault(self: *Self, allocator: std.mem.Allocator, input: list_protected_resources_by_backup_vault.ListProtectedResourcesByBackupVaultInput, options: list_protected_resources_by_backup_vault.Options) !list_protected_resources_by_backup_vault.ListProtectedResourcesByBackupVaultOutput {
+    pub fn listProtectedResourcesByBackupVault(self: *Self, allocator: std.mem.Allocator, input: list_protected_resources_by_backup_vault.ListProtectedResourcesByBackupVaultInput, options: CallOptions) !list_protected_resources_by_backup_vault.ListProtectedResourcesByBackupVaultOutput {
         return list_protected_resources_by_backup_vault.execute(self, allocator, input, options);
     }
 
     /// Returns detailed information about the recovery points stored in a backup
     /// vault.
-    pub fn listRecoveryPointsByBackupVault(self: *Self, allocator: std.mem.Allocator, input: list_recovery_points_by_backup_vault.ListRecoveryPointsByBackupVaultInput, options: list_recovery_points_by_backup_vault.Options) !list_recovery_points_by_backup_vault.ListRecoveryPointsByBackupVaultOutput {
+    pub fn listRecoveryPointsByBackupVault(self: *Self, allocator: std.mem.Allocator, input: list_recovery_points_by_backup_vault.ListRecoveryPointsByBackupVaultInput, options: CallOptions) !list_recovery_points_by_backup_vault.ListRecoveryPointsByBackupVaultOutput {
         return list_recovery_points_by_backup_vault.execute(self, allocator, input, options);
     }
 
     /// This action returns recovery point ARNs (Amazon Resource Names) of the
     /// specified legal hold.
-    pub fn listRecoveryPointsByLegalHold(self: *Self, allocator: std.mem.Allocator, input: list_recovery_points_by_legal_hold.ListRecoveryPointsByLegalHoldInput, options: list_recovery_points_by_legal_hold.Options) !list_recovery_points_by_legal_hold.ListRecoveryPointsByLegalHoldOutput {
+    pub fn listRecoveryPointsByLegalHold(self: *Self, allocator: std.mem.Allocator, input: list_recovery_points_by_legal_hold.ListRecoveryPointsByLegalHoldInput, options: CallOptions) !list_recovery_points_by_legal_hold.ListRecoveryPointsByLegalHoldOutput {
         return list_recovery_points_by_legal_hold.execute(self, allocator, input, options);
     }
 
@@ -710,25 +711,25 @@ pub const Client = struct {
     ///
     /// For Amazon EFS and Amazon EC2, this action only lists recovery points
     /// created by Backup.
-    pub fn listRecoveryPointsByResource(self: *Self, allocator: std.mem.Allocator, input: list_recovery_points_by_resource.ListRecoveryPointsByResourceInput, options: list_recovery_points_by_resource.Options) !list_recovery_points_by_resource.ListRecoveryPointsByResourceOutput {
+    pub fn listRecoveryPointsByResource(self: *Self, allocator: std.mem.Allocator, input: list_recovery_points_by_resource.ListRecoveryPointsByResourceInput, options: CallOptions) !list_recovery_points_by_resource.ListRecoveryPointsByResourceOutput {
         return list_recovery_points_by_resource.execute(self, allocator, input, options);
     }
 
     /// Returns details about your report jobs.
-    pub fn listReportJobs(self: *Self, allocator: std.mem.Allocator, input: list_report_jobs.ListReportJobsInput, options: list_report_jobs.Options) !list_report_jobs.ListReportJobsOutput {
+    pub fn listReportJobs(self: *Self, allocator: std.mem.Allocator, input: list_report_jobs.ListReportJobsInput, options: CallOptions) !list_report_jobs.ListReportJobsOutput {
         return list_report_jobs.execute(self, allocator, input, options);
     }
 
     /// Returns a list of your report plans. For detailed information about a single
     /// report
     /// plan, use `DescribeReportPlan`.
-    pub fn listReportPlans(self: *Self, allocator: std.mem.Allocator, input: list_report_plans.ListReportPlansInput, options: list_report_plans.Options) !list_report_plans.ListReportPlansOutput {
+    pub fn listReportPlans(self: *Self, allocator: std.mem.Allocator, input: list_report_plans.ListReportPlansInput, options: CallOptions) !list_report_plans.ListReportPlansOutput {
         return list_report_plans.execute(self, allocator, input, options);
     }
 
     /// Returns a list of restore access backup vaults associated with a specified
     /// backup vault.
-    pub fn listRestoreAccessBackupVaults(self: *Self, allocator: std.mem.Allocator, input: list_restore_access_backup_vaults.ListRestoreAccessBackupVaultsInput, options: list_restore_access_backup_vaults.Options) !list_restore_access_backup_vaults.ListRestoreAccessBackupVaultsOutput {
+    pub fn listRestoreAccessBackupVaults(self: *Self, allocator: std.mem.Allocator, input: list_restore_access_backup_vaults.ListRestoreAccessBackupVaultsInput, options: CallOptions) !list_restore_access_backup_vaults.ListRestoreAccessBackupVaultsOutput {
         return list_restore_access_backup_vaults.execute(self, allocator, input, options);
     }
 
@@ -741,13 +742,13 @@ pub const Client = struct {
     /// This request returns a summary that contains
     /// Region, Account, State, RestourceType, MessageCategory,
     /// StartTime, EndTime, and Count of included jobs.
-    pub fn listRestoreJobSummaries(self: *Self, allocator: std.mem.Allocator, input: list_restore_job_summaries.ListRestoreJobSummariesInput, options: list_restore_job_summaries.Options) !list_restore_job_summaries.ListRestoreJobSummariesOutput {
+    pub fn listRestoreJobSummaries(self: *Self, allocator: std.mem.Allocator, input: list_restore_job_summaries.ListRestoreJobSummariesInput, options: CallOptions) !list_restore_job_summaries.ListRestoreJobSummariesOutput {
         return list_restore_job_summaries.execute(self, allocator, input, options);
     }
 
     /// Returns a list of jobs that Backup initiated to restore a saved resource,
     /// including details about the recovery process.
-    pub fn listRestoreJobs(self: *Self, allocator: std.mem.Allocator, input: list_restore_jobs.ListRestoreJobsInput, options: list_restore_jobs.Options) !list_restore_jobs.ListRestoreJobsOutput {
+    pub fn listRestoreJobs(self: *Self, allocator: std.mem.Allocator, input: list_restore_jobs.ListRestoreJobsInput, options: CallOptions) !list_restore_jobs.ListRestoreJobsOutput {
         return list_restore_jobs.execute(self, allocator, input, options);
     }
 
@@ -757,30 +758,30 @@ pub const Client = struct {
     /// `NextToken`, `ByStatus`, `MaxResults`,
     /// `ByRecoveryPointCreationDateAfter` , and
     /// `ByRecoveryPointCreationDateBefore`.
-    pub fn listRestoreJobsByProtectedResource(self: *Self, allocator: std.mem.Allocator, input: list_restore_jobs_by_protected_resource.ListRestoreJobsByProtectedResourceInput, options: list_restore_jobs_by_protected_resource.Options) !list_restore_jobs_by_protected_resource.ListRestoreJobsByProtectedResourceOutput {
+    pub fn listRestoreJobsByProtectedResource(self: *Self, allocator: std.mem.Allocator, input: list_restore_jobs_by_protected_resource.ListRestoreJobsByProtectedResourceInput, options: CallOptions) !list_restore_jobs_by_protected_resource.ListRestoreJobsByProtectedResourceOutput {
         return list_restore_jobs_by_protected_resource.execute(self, allocator, input, options);
     }
 
     /// Returns a list of restore testing plans.
-    pub fn listRestoreTestingPlans(self: *Self, allocator: std.mem.Allocator, input: list_restore_testing_plans.ListRestoreTestingPlansInput, options: list_restore_testing_plans.Options) !list_restore_testing_plans.ListRestoreTestingPlansOutput {
+    pub fn listRestoreTestingPlans(self: *Self, allocator: std.mem.Allocator, input: list_restore_testing_plans.ListRestoreTestingPlansInput, options: CallOptions) !list_restore_testing_plans.ListRestoreTestingPlansOutput {
         return list_restore_testing_plans.execute(self, allocator, input, options);
     }
 
     /// Returns a list of restore testing selections. Can be filtered
     /// by `MaxResults` and `RestoreTestingPlanName`.
-    pub fn listRestoreTestingSelections(self: *Self, allocator: std.mem.Allocator, input: list_restore_testing_selections.ListRestoreTestingSelectionsInput, options: list_restore_testing_selections.Options) !list_restore_testing_selections.ListRestoreTestingSelectionsOutput {
+    pub fn listRestoreTestingSelections(self: *Self, allocator: std.mem.Allocator, input: list_restore_testing_selections.ListRestoreTestingSelectionsInput, options: CallOptions) !list_restore_testing_selections.ListRestoreTestingSelectionsOutput {
         return list_restore_testing_selections.execute(self, allocator, input, options);
     }
 
     /// This is a request for a summary of scan jobs created or running within the
     /// most recent 30 days.
-    pub fn listScanJobSummaries(self: *Self, allocator: std.mem.Allocator, input: list_scan_job_summaries.ListScanJobSummariesInput, options: list_scan_job_summaries.Options) !list_scan_job_summaries.ListScanJobSummariesOutput {
+    pub fn listScanJobSummaries(self: *Self, allocator: std.mem.Allocator, input: list_scan_job_summaries.ListScanJobSummariesInput, options: CallOptions) !list_scan_job_summaries.ListScanJobSummariesOutput {
         return list_scan_job_summaries.execute(self, allocator, input, options);
     }
 
     /// Returns a list of existing scan jobs for an authenticated account for the
     /// last 30 days.
-    pub fn listScanJobs(self: *Self, allocator: std.mem.Allocator, input: list_scan_jobs.ListScanJobsInput, options: list_scan_jobs.Options) !list_scan_jobs.ListScanJobsOutput {
+    pub fn listScanJobs(self: *Self, allocator: std.mem.Allocator, input: list_scan_jobs.ListScanJobsInput, options: CallOptions) !list_scan_jobs.ListScanJobsOutput {
         return list_scan_jobs.execute(self, allocator, input, options);
     }
 
@@ -804,12 +805,12 @@ pub const Client = struct {
     /// begins
     /// `arn:aws:backup` and they are noted in the [Feature availability by
     /// resource](https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource) table.
-    pub fn listTags(self: *Self, allocator: std.mem.Allocator, input: list_tags.ListTagsInput, options: list_tags.Options) !list_tags.ListTagsOutput {
+    pub fn listTags(self: *Self, allocator: std.mem.Allocator, input: list_tags.ListTagsInput, options: CallOptions) !list_tags.ListTagsOutput {
         return list_tags.execute(self, allocator, input, options);
     }
 
     /// Returns a list of tiering configurations.
-    pub fn listTieringConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_tiering_configurations.ListTieringConfigurationsInput, options: list_tiering_configurations.Options) !list_tiering_configurations.ListTieringConfigurationsOutput {
+    pub fn listTieringConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_tiering_configurations.ListTieringConfigurationsInput, options: CallOptions) !list_tiering_configurations.ListTieringConfigurationsOutput {
         return list_tiering_configurations.execute(self, allocator, input, options);
     }
 
@@ -818,7 +819,7 @@ pub const Client = struct {
     /// backup vault. Requires a backup vault name and an access policy document in
     /// JSON
     /// format.
-    pub fn putBackupVaultAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: put_backup_vault_access_policy.PutBackupVaultAccessPolicyInput, options: put_backup_vault_access_policy.Options) !put_backup_vault_access_policy.PutBackupVaultAccessPolicyOutput {
+    pub fn putBackupVaultAccessPolicy(self: *Self, allocator: std.mem.Allocator, input: put_backup_vault_access_policy.PutBackupVaultAccessPolicyInput, options: CallOptions) !put_backup_vault_access_policy.PutBackupVaultAccessPolicyOutput {
         return put_backup_vault_access_policy.execute(self, allocator, input, options);
     }
 
@@ -843,12 +844,12 @@ pub const Client = struct {
     ///
     /// For more information, see [Backup Vault
     /// Lock](https://docs.aws.amazon.com/aws-backup/latest/devguide/vault-lock.html).
-    pub fn putBackupVaultLockConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_backup_vault_lock_configuration.PutBackupVaultLockConfigurationInput, options: put_backup_vault_lock_configuration.Options) !put_backup_vault_lock_configuration.PutBackupVaultLockConfigurationOutput {
+    pub fn putBackupVaultLockConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_backup_vault_lock_configuration.PutBackupVaultLockConfigurationInput, options: CallOptions) !put_backup_vault_lock_configuration.PutBackupVaultLockConfigurationOutput {
         return put_backup_vault_lock_configuration.execute(self, allocator, input, options);
     }
 
     /// Turns on notifications on a backup vault for the specified topic and events.
-    pub fn putBackupVaultNotifications(self: *Self, allocator: std.mem.Allocator, input: put_backup_vault_notifications.PutBackupVaultNotificationsInput, options: put_backup_vault_notifications.Options) !put_backup_vault_notifications.PutBackupVaultNotificationsOutput {
+    pub fn putBackupVaultNotifications(self: *Self, allocator: std.mem.Allocator, input: put_backup_vault_notifications.PutBackupVaultNotificationsInput, options: CallOptions) !put_backup_vault_notifications.PutBackupVaultNotificationsOutput {
         return put_backup_vault_notifications.execute(self, allocator, input, options);
     }
 
@@ -857,18 +858,18 @@ pub const Client = struct {
     /// `RestoreJobId` and `ValidationStatus`
     /// are required. Optionally, you can input a
     /// `ValidationStatusMessage`.
-    pub fn putRestoreValidationResult(self: *Self, allocator: std.mem.Allocator, input: put_restore_validation_result.PutRestoreValidationResultInput, options: put_restore_validation_result.Options) !put_restore_validation_result.PutRestoreValidationResultOutput {
+    pub fn putRestoreValidationResult(self: *Self, allocator: std.mem.Allocator, input: put_restore_validation_result.PutRestoreValidationResultInput, options: CallOptions) !put_restore_validation_result.PutRestoreValidationResultOutput {
         return put_restore_validation_result.execute(self, allocator, input, options);
     }
 
     /// Revokes access to a restore access backup vault, removing the ability to
     /// restore from its recovery points and permanently deleting the vault.
-    pub fn revokeRestoreAccessBackupVault(self: *Self, allocator: std.mem.Allocator, input: revoke_restore_access_backup_vault.RevokeRestoreAccessBackupVaultInput, options: revoke_restore_access_backup_vault.Options) !revoke_restore_access_backup_vault.RevokeRestoreAccessBackupVaultOutput {
+    pub fn revokeRestoreAccessBackupVault(self: *Self, allocator: std.mem.Allocator, input: revoke_restore_access_backup_vault.RevokeRestoreAccessBackupVaultInput, options: CallOptions) !revoke_restore_access_backup_vault.RevokeRestoreAccessBackupVaultOutput {
         return revoke_restore_access_backup_vault.execute(self, allocator, input, options);
     }
 
     /// Starts an on-demand backup job for the specified resource.
-    pub fn startBackupJob(self: *Self, allocator: std.mem.Allocator, input: start_backup_job.StartBackupJobInput, options: start_backup_job.Options) !start_backup_job.StartBackupJobOutput {
+    pub fn startBackupJob(self: *Self, allocator: std.mem.Allocator, input: start_backup_job.StartBackupJobInput, options: CallOptions) !start_backup_job.StartBackupJobOutput {
         return start_backup_job.execute(self, allocator, input, options);
     }
 
@@ -880,22 +881,22 @@ pub const Client = struct {
     /// job
     /// retry](https://docs.aws.amazon.com/aws-backup/latest/devguide/recov-point-create-a-copy.html#backup-copy-retry) for information on how Backup retries copy job
     /// operations.
-    pub fn startCopyJob(self: *Self, allocator: std.mem.Allocator, input: start_copy_job.StartCopyJobInput, options: start_copy_job.Options) !start_copy_job.StartCopyJobOutput {
+    pub fn startCopyJob(self: *Self, allocator: std.mem.Allocator, input: start_copy_job.StartCopyJobInput, options: CallOptions) !start_copy_job.StartCopyJobOutput {
         return start_copy_job.execute(self, allocator, input, options);
     }
 
     /// Starts an on-demand report job for the specified report plan.
-    pub fn startReportJob(self: *Self, allocator: std.mem.Allocator, input: start_report_job.StartReportJobInput, options: start_report_job.Options) !start_report_job.StartReportJobOutput {
+    pub fn startReportJob(self: *Self, allocator: std.mem.Allocator, input: start_report_job.StartReportJobInput, options: CallOptions) !start_report_job.StartReportJobOutput {
         return start_report_job.execute(self, allocator, input, options);
     }
 
     /// Recovers the saved resource identified by an Amazon Resource Name (ARN).
-    pub fn startRestoreJob(self: *Self, allocator: std.mem.Allocator, input: start_restore_job.StartRestoreJobInput, options: start_restore_job.Options) !start_restore_job.StartRestoreJobOutput {
+    pub fn startRestoreJob(self: *Self, allocator: std.mem.Allocator, input: start_restore_job.StartRestoreJobInput, options: CallOptions) !start_restore_job.StartRestoreJobOutput {
         return start_restore_job.execute(self, allocator, input, options);
     }
 
     /// Starts scanning jobs for specific resources.
-    pub fn startScanJob(self: *Self, allocator: std.mem.Allocator, input: start_scan_job.StartScanJobInput, options: start_scan_job.Options) !start_scan_job.StartScanJobOutput {
+    pub fn startScanJob(self: *Self, allocator: std.mem.Allocator, input: start_scan_job.StartScanJobInput, options: CallOptions) !start_scan_job.StartScanJobOutput {
         return start_scan_job.execute(self, allocator, input, options);
     }
 
@@ -920,12 +921,12 @@ pub const Client = struct {
     /// * SAP HANA databases on Amazon EC2 instances
     ///
     /// * Amazon RDS
-    pub fn stopBackupJob(self: *Self, allocator: std.mem.Allocator, input: stop_backup_job.StopBackupJobInput, options: stop_backup_job.Options) !stop_backup_job.StopBackupJobOutput {
+    pub fn stopBackupJob(self: *Self, allocator: std.mem.Allocator, input: stop_backup_job.StopBackupJobInput, options: CallOptions) !stop_backup_job.StopBackupJobOutput {
         return stop_backup_job.execute(self, allocator, input, options);
     }
 
     /// Assigns a set of key-value pairs to a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -936,18 +937,18 @@ pub const Client = struct {
     /// This API is not supported for recovery points for resource types
     /// including Aurora, Amazon DocumentDB. Amazon EBS,
     /// Amazon FSx, Neptune, and Amazon RDS.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the specified backup plan. The new version is uniquely identified by
     /// its ID.
-    pub fn updateBackupPlan(self: *Self, allocator: std.mem.Allocator, input: update_backup_plan.UpdateBackupPlanInput, options: update_backup_plan.Options) !update_backup_plan.UpdateBackupPlanOutput {
+    pub fn updateBackupPlan(self: *Self, allocator: std.mem.Allocator, input: update_backup_plan.UpdateBackupPlanInput, options: CallOptions) !update_backup_plan.UpdateBackupPlanOutput {
         return update_backup_plan.execute(self, allocator, input, options);
     }
 
     /// Updates the specified framework.
-    pub fn updateFramework(self: *Self, allocator: std.mem.Allocator, input: update_framework.UpdateFrameworkInput, options: update_framework.Options) !update_framework.UpdateFrameworkOutput {
+    pub fn updateFramework(self: *Self, allocator: std.mem.Allocator, input: update_framework.UpdateFrameworkInput, options: CallOptions) !update_framework.UpdateFrameworkOutput {
         return update_framework.execute(self, allocator, input, options);
     }
 
@@ -956,14 +957,14 @@ pub const Client = struct {
     /// Returns an error if the account is not an Organizations management account.
     /// Use the
     /// `DescribeGlobalSettings` API to determine the current settings.
-    pub fn updateGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: update_global_settings.UpdateGlobalSettingsInput, options: update_global_settings.Options) !update_global_settings.UpdateGlobalSettingsOutput {
+    pub fn updateGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: update_global_settings.UpdateGlobalSettingsInput, options: CallOptions) !update_global_settings.UpdateGlobalSettingsOutput {
         return update_global_settings.execute(self, allocator, input, options);
     }
 
     /// This operation updates the settings of a recovery point index.
     ///
     /// Required: BackupVaultName, RecoveryPointArn, and IAMRoleArn
-    pub fn updateRecoveryPointIndexSettings(self: *Self, allocator: std.mem.Allocator, input: update_recovery_point_index_settings.UpdateRecoveryPointIndexSettingsInput, options: update_recovery_point_index_settings.Options) !update_recovery_point_index_settings.UpdateRecoveryPointIndexSettingsOutput {
+    pub fn updateRecoveryPointIndexSettings(self: *Self, allocator: std.mem.Allocator, input: update_recovery_point_index_settings.UpdateRecoveryPointIndexSettingsInput, options: CallOptions) !update_recovery_point_index_settings.UpdateRecoveryPointIndexSettingsOutput {
         return update_recovery_point_index_settings.execute(self, allocator, input, options);
     }
 
@@ -995,7 +996,7 @@ pub const Client = struct {
     /// null values.
     ///
     /// This operation does not support continuous backups.
-    pub fn updateRecoveryPointLifecycle(self: *Self, allocator: std.mem.Allocator, input: update_recovery_point_lifecycle.UpdateRecoveryPointLifecycleInput, options: update_recovery_point_lifecycle.Options) !update_recovery_point_lifecycle.UpdateRecoveryPointLifecycleOutput {
+    pub fn updateRecoveryPointLifecycle(self: *Self, allocator: std.mem.Allocator, input: update_recovery_point_lifecycle.UpdateRecoveryPointLifecycleInput, options: CallOptions) !update_recovery_point_lifecycle.UpdateRecoveryPointLifecycleOutput {
         return update_recovery_point_lifecycle.execute(self, allocator, input, options);
     }
 
@@ -1004,12 +1005,12 @@ pub const Client = struct {
     /// Use
     /// the `DescribeRegionSettings` API to determine the resource types that are
     /// supported.
-    pub fn updateRegionSettings(self: *Self, allocator: std.mem.Allocator, input: update_region_settings.UpdateRegionSettingsInput, options: update_region_settings.Options) !update_region_settings.UpdateRegionSettingsOutput {
+    pub fn updateRegionSettings(self: *Self, allocator: std.mem.Allocator, input: update_region_settings.UpdateRegionSettingsInput, options: CallOptions) !update_region_settings.UpdateRegionSettingsOutput {
         return update_region_settings.execute(self, allocator, input, options);
     }
 
     /// Updates the specified report plan.
-    pub fn updateReportPlan(self: *Self, allocator: std.mem.Allocator, input: update_report_plan.UpdateReportPlanInput, options: update_report_plan.Options) !update_report_plan.UpdateReportPlanOutput {
+    pub fn updateReportPlan(self: *Self, allocator: std.mem.Allocator, input: update_report_plan.UpdateReportPlanInput, options: CallOptions) !update_report_plan.UpdateReportPlanOutput {
         return update_report_plan.execute(self, allocator, input, options);
     }
 
@@ -1028,7 +1029,7 @@ pub const Client = struct {
     /// * `RecoveryPointTypes`
     ///
     /// * `SelectionWindowDays`
-    pub fn updateRestoreTestingPlan(self: *Self, allocator: std.mem.Allocator, input: update_restore_testing_plan.UpdateRestoreTestingPlanInput, options: update_restore_testing_plan.Options) !update_restore_testing_plan.UpdateRestoreTestingPlanOutput {
+    pub fn updateRestoreTestingPlan(self: *Self, allocator: std.mem.Allocator, input: update_restore_testing_plan.UpdateRestoreTestingPlanInput, options: CallOptions) !update_restore_testing_plan.UpdateRestoreTestingPlanOutput {
         return update_restore_testing_plan.execute(self, allocator, input, options);
     }
 
@@ -1038,7 +1039,7 @@ pub const Client = struct {
     /// can be updated with this request.
     ///
     /// You can use either protected resource ARNs or conditions, but not both.
-    pub fn updateRestoreTestingSelection(self: *Self, allocator: std.mem.Allocator, input: update_restore_testing_selection.UpdateRestoreTestingSelectionInput, options: update_restore_testing_selection.Options) !update_restore_testing_selection.UpdateRestoreTestingSelectionOutput {
+    pub fn updateRestoreTestingSelection(self: *Self, allocator: std.mem.Allocator, input: update_restore_testing_selection.UpdateRestoreTestingSelectionInput, options: CallOptions) !update_restore_testing_selection.UpdateRestoreTestingSelectionOutput {
         return update_restore_testing_selection.execute(self, allocator, input, options);
     }
 
@@ -1053,7 +1054,7 @@ pub const Client = struct {
     /// * `TieringDownSettingsInDays`
     ///
     /// * `ResourceType`
-    pub fn updateTieringConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_tiering_configuration.UpdateTieringConfigurationInput, options: update_tiering_configuration.Options) !update_tiering_configuration.UpdateTieringConfigurationOutput {
+    pub fn updateTieringConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_tiering_configuration.UpdateTieringConfigurationInput, options: CallOptions) !update_tiering_configuration.UpdateTieringConfigurationOutput {
         return update_tiering_configuration.execute(self, allocator, input, options);
     }
 

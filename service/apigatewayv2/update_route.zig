@@ -2,19 +2,16 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AuthorizationType = @import("authorization_type.zig").AuthorizationType;
 const ParameterConstraints = @import("parameter_constraints.zig").ParameterConstraints;
 
-const UpdateRouteInput = @import("update_route_request.zig").UpdateRouteRequest;
+pub const UpdateRouteInput = @import("update_route_request.zig").UpdateRouteRequest;
 
-const UpdateRouteOutput = @import("update_route_result.zig").UpdateRouteResult;
+pub const UpdateRouteOutput = @import("update_route_result.zig").UpdateRouteResult;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRouteInput, options: Options) !UpdateRouteOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRouteInput, options: CallOptions) !UpdateRouteOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MediaPlacementNetworkType = @import("media_placement_network_type.zig").MediaPlacementNetworkType;
 const MeetingFeaturesConfiguration = @import("meeting_features_configuration.zig").MeetingFeaturesConfiguration;
@@ -143,11 +144,7 @@ pub const CreateMeetingOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMeetingInput, options: Options) !CreateMeetingOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMeetingInput, options: CallOptions) !CreateMeetingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

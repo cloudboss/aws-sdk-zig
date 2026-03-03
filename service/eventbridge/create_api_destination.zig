@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ApiDestinationHttpMethod = @import("api_destination_http_method.zig").ApiDestinationHttpMethod;
 const ApiDestinationState = @import("api_destination_state.zig").ApiDestinationState;
@@ -59,11 +60,7 @@ pub const CreateApiDestinationOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateApiDestinationInput, options: Options) !CreateApiDestinationOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateApiDestinationInput, options: CallOptions) !CreateApiDestinationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -6,6 +6,7 @@ const get_session = @import("get_session.zig");
 const post_content = @import("post_content.zig");
 const post_text = @import("post_text.zig");
 const put_session = @import("put_session.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -36,13 +37,13 @@ pub const Client = struct {
     }
 
     /// Removes session information for a specified bot, alias, and user ID.
-    pub fn deleteSession(self: *Self, allocator: std.mem.Allocator, input: delete_session.DeleteSessionInput, options: delete_session.Options) !delete_session.DeleteSessionOutput {
+    pub fn deleteSession(self: *Self, allocator: std.mem.Allocator, input: delete_session.DeleteSessionInput, options: CallOptions) !delete_session.DeleteSessionOutput {
         return delete_session.execute(self, allocator, input, options);
     }
 
     /// Returns session information for a specified bot, alias, and user
     /// ID.
-    pub fn getSession(self: *Self, allocator: std.mem.Allocator, input: get_session.GetSessionInput, options: get_session.Options) !get_session.GetSessionOutput {
+    pub fn getSession(self: *Self, allocator: std.mem.Allocator, input: get_session.GetSessionInput, options: CallOptions) !get_session.GetSessionOutput {
         return get_session.execute(self, allocator, input, options);
     }
 
@@ -107,7 +108,7 @@ pub const Client = struct {
     /// `sessionAttributes`. For more information, see [Managing
     /// Conversation
     /// Context](https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html).
-    pub fn postContent(self: *Self, allocator: std.mem.Allocator, input: post_content.PostContentInput, options: post_content.Options) !post_content.PostContentOutput {
+    pub fn postContent(self: *Self, allocator: std.mem.Allocator, input: post_content.PostContentInput, options: CallOptions) !post_content.PostContentOutput {
         return post_content.execute(self, allocator, input, options);
     }
 
@@ -169,7 +170,7 @@ pub const Client = struct {
     /// `sessionAttributes`. For more information, see [Managing
     /// Conversation
     /// Context](https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html).
-    pub fn postText(self: *Self, allocator: std.mem.Allocator, input: post_text.PostTextInput, options: post_text.Options) !post_text.PostTextOutput {
+    pub fn postText(self: *Self, allocator: std.mem.Allocator, input: post_text.PostTextInput, options: CallOptions) !post_text.PostTextOutput {
         return post_text.execute(self, allocator, input, options);
     }
 
@@ -179,7 +180,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Managing
     /// Sessions](https://docs.aws.amazon.com/lex/latest/dg/how-session-api.html).
-    pub fn putSession(self: *Self, allocator: std.mem.Allocator, input: put_session.PutSessionInput, options: put_session.Options) !put_session.PutSessionOutput {
+    pub fn putSession(self: *Self, allocator: std.mem.Allocator, input: put_session.PutSessionInput, options: CallOptions) !put_session.PutSessionOutput {
         return put_session.execute(self, allocator, input, options);
     }
 };

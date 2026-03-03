@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ListedBridge = @import("listed_bridge.zig").ListedBridge;
 
@@ -55,11 +56,7 @@ pub const ListBridgesOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListBridgesInput, options: Options) !ListBridgesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListBridgesInput, options: CallOptions) !ListBridgesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

@@ -71,6 +71,7 @@ const restore_db_cluster_to_point_in_time = @import("restore_db_cluster_to_point
 const start_db_cluster = @import("start_db_cluster.zig");
 const stop_db_cluster = @import("stop_db_cluster.zig");
 const switchover_global_cluster = @import("switchover_global_cluster.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -104,12 +105,12 @@ pub const Client = struct {
 
     /// Associates an Identity and Access Management (IAM) role with an
     /// Neptune DB cluster.
-    pub fn addRoleToDbCluster(self: *Self, allocator: std.mem.Allocator, input: add_role_to_db_cluster.AddRoleToDBClusterInput, options: add_role_to_db_cluster.Options) !add_role_to_db_cluster.AddRoleToDBClusterOutput {
+    pub fn addRoleToDbCluster(self: *Self, allocator: std.mem.Allocator, input: add_role_to_db_cluster.AddRoleToDBClusterInput, options: CallOptions) !add_role_to_db_cluster.AddRoleToDBClusterOutput {
         return add_role_to_db_cluster.execute(self, allocator, input, options);
     }
 
     /// Adds a source identifier to an existing event notification subscription.
-    pub fn addSourceIdentifierToSubscription(self: *Self, allocator: std.mem.Allocator, input: add_source_identifier_to_subscription.AddSourceIdentifierToSubscriptionInput, options: add_source_identifier_to_subscription.Options) !add_source_identifier_to_subscription.AddSourceIdentifierToSubscriptionOutput {
+    pub fn addSourceIdentifierToSubscription(self: *Self, allocator: std.mem.Allocator, input: add_source_identifier_to_subscription.AddSourceIdentifierToSubscriptionInput, options: CallOptions) !add_source_identifier_to_subscription.AddSourceIdentifierToSubscriptionOutput {
         return add_source_identifier_to_subscription.execute(self, allocator, input, options);
     }
 
@@ -118,18 +119,18 @@ pub const Client = struct {
     /// allocation reporting to track cost associated with Amazon Neptune resources,
     /// or used in a
     /// Condition statement in an IAM policy for Amazon Neptune.
-    pub fn addTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_resource.AddTagsToResourceInput, options: add_tags_to_resource.Options) !add_tags_to_resource.AddTagsToResourceOutput {
+    pub fn addTagsToResource(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_resource.AddTagsToResourceInput, options: CallOptions) !add_tags_to_resource.AddTagsToResourceOutput {
         return add_tags_to_resource.execute(self, allocator, input, options);
     }
 
     /// Applies a pending maintenance action to a resource (for example, to a DB
     /// instance).
-    pub fn applyPendingMaintenanceAction(self: *Self, allocator: std.mem.Allocator, input: apply_pending_maintenance_action.ApplyPendingMaintenanceActionInput, options: apply_pending_maintenance_action.Options) !apply_pending_maintenance_action.ApplyPendingMaintenanceActionOutput {
+    pub fn applyPendingMaintenanceAction(self: *Self, allocator: std.mem.Allocator, input: apply_pending_maintenance_action.ApplyPendingMaintenanceActionInput, options: CallOptions) !apply_pending_maintenance_action.ApplyPendingMaintenanceActionOutput {
         return apply_pending_maintenance_action.execute(self, allocator, input, options);
     }
 
     /// Copies the specified DB cluster parameter group.
-    pub fn copyDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: copy_db_cluster_parameter_group.CopyDBClusterParameterGroupInput, options: copy_db_cluster_parameter_group.Options) !copy_db_cluster_parameter_group.CopyDBClusterParameterGroupOutput {
+    pub fn copyDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: copy_db_cluster_parameter_group.CopyDBClusterParameterGroupInput, options: CallOptions) !copy_db_cluster_parameter_group.CopyDBClusterParameterGroupOutput {
         return copy_db_cluster_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -139,12 +140,12 @@ pub const Client = struct {
     /// `SourceDBClusterSnapshotIdentifier` must be the Amazon Resource Name (ARN)
     /// of the
     /// shared DB cluster snapshot.
-    pub fn copyDbClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_db_cluster_snapshot.CopyDBClusterSnapshotInput, options: copy_db_cluster_snapshot.Options) !copy_db_cluster_snapshot.CopyDBClusterSnapshotOutput {
+    pub fn copyDbClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: copy_db_cluster_snapshot.CopyDBClusterSnapshotInput, options: CallOptions) !copy_db_cluster_snapshot.CopyDBClusterSnapshotOutput {
         return copy_db_cluster_snapshot.execute(self, allocator, input, options);
     }
 
     /// Copies the specified DB parameter group.
-    pub fn copyDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: copy_db_parameter_group.CopyDBParameterGroupInput, options: copy_db_parameter_group.Options) !copy_db_parameter_group.CopyDBParameterGroupOutput {
+    pub fn copyDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: copy_db_parameter_group.CopyDBParameterGroupInput, options: CallOptions) !copy_db_parameter_group.CopyDBParameterGroupOutput {
         return copy_db_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -160,13 +161,13 @@ pub const Client = struct {
     /// the console, deletion protection is enabled by default). You can only delete
     /// a DB
     /// cluster if its `DeletionProtection` field is set to `false`.
-    pub fn createDbCluster(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster.CreateDBClusterInput, options: create_db_cluster.Options) !create_db_cluster.CreateDBClusterOutput {
+    pub fn createDbCluster(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster.CreateDBClusterInput, options: CallOptions) !create_db_cluster.CreateDBClusterOutput {
         return create_db_cluster.execute(self, allocator, input, options);
     }
 
     /// Creates a new custom endpoint and associates it with an Amazon Neptune DB
     /// cluster.
-    pub fn createDbClusterEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster_endpoint.CreateDBClusterEndpointInput, options: create_db_cluster_endpoint.Options) !create_db_cluster_endpoint.CreateDBClusterEndpointOutput {
+    pub fn createDbClusterEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster_endpoint.CreateDBClusterEndpointInput, options: CallOptions) !create_db_cluster_endpoint.CreateDBClusterEndpointOutput {
         return create_db_cluster_endpoint.execute(self, allocator, input, options);
     }
 
@@ -202,17 +203,17 @@ pub const Client = struct {
     /// DescribeDBClusterParameters
     /// command to verify that your DB cluster parameter group has been created or
     /// modified.
-    pub fn createDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster_parameter_group.CreateDBClusterParameterGroupInput, options: create_db_cluster_parameter_group.Options) !create_db_cluster_parameter_group.CreateDBClusterParameterGroupOutput {
+    pub fn createDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster_parameter_group.CreateDBClusterParameterGroupInput, options: CallOptions) !create_db_cluster_parameter_group.CreateDBClusterParameterGroupOutput {
         return create_db_cluster_parameter_group.execute(self, allocator, input, options);
     }
 
     /// Creates a snapshot of a DB cluster.
-    pub fn createDbClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster_snapshot.CreateDBClusterSnapshotInput, options: create_db_cluster_snapshot.Options) !create_db_cluster_snapshot.CreateDBClusterSnapshotOutput {
+    pub fn createDbClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster_snapshot.CreateDBClusterSnapshotInput, options: CallOptions) !create_db_cluster_snapshot.CreateDBClusterSnapshotOutput {
         return create_db_cluster_snapshot.execute(self, allocator, input, options);
     }
 
     /// Creates a new DB instance.
-    pub fn createDbInstance(self: *Self, allocator: std.mem.Allocator, input: create_db_instance.CreateDBInstanceInput, options: create_db_instance.Options) !create_db_instance.CreateDBInstanceOutput {
+    pub fn createDbInstance(self: *Self, allocator: std.mem.Allocator, input: create_db_instance.CreateDBInstanceInput, options: CallOptions) !create_db_instance.CreateDBInstanceOutput {
         return create_db_instance.execute(self, allocator, input, options);
     }
 
@@ -245,14 +246,14 @@ pub const Client = struct {
     /// Groups* option of the Amazon Neptune console or the
     /// *DescribeDBParameters* command to verify that your DB parameter group has
     /// been created or modified.
-    pub fn createDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_parameter_group.CreateDBParameterGroupInput, options: create_db_parameter_group.Options) !create_db_parameter_group.CreateDBParameterGroupOutput {
+    pub fn createDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_parameter_group.CreateDBParameterGroupInput, options: CallOptions) !create_db_parameter_group.CreateDBParameterGroupOutput {
         return create_db_parameter_group.execute(self, allocator, input, options);
     }
 
     /// Creates a new DB subnet group. DB subnet groups must contain at least one
     /// subnet in at
     /// least two AZs in the Amazon Region.
-    pub fn createDbSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_subnet_group.CreateDBSubnetGroupInput, options: create_db_subnet_group.Options) !create_db_subnet_group.CreateDBSubnetGroupOutput {
+    pub fn createDbSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_subnet_group.CreateDBSubnetGroupInput, options: CallOptions) !create_db_subnet_group.CreateDBSubnetGroupOutput {
         return create_db_subnet_group.execute(self, allocator, input, options);
     }
 
@@ -285,7 +286,7 @@ pub const Client = struct {
     /// specify either the SourceType nor the SourceIdentifier, you are notified of
     /// events generated
     /// from all Neptune sources belonging to your customer account.
-    pub fn createEventSubscription(self: *Self, allocator: std.mem.Allocator, input: create_event_subscription.CreateEventSubscriptionInput, options: create_event_subscription.Options) !create_event_subscription.CreateEventSubscriptionOutput {
+    pub fn createEventSubscription(self: *Self, allocator: std.mem.Allocator, input: create_event_subscription.CreateEventSubscriptionInput, options: CallOptions) !create_event_subscription.CreateEventSubscriptionOutput {
         return create_event_subscription.execute(self, allocator, input, options);
     }
 
@@ -299,7 +300,7 @@ pub const Client = struct {
     /// add a primary cluster and secondary clusters to it, or you can specify
     /// an existing Neptune cluster during the create operation to become the
     /// primary cluster of the global database.
-    pub fn createGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: create_global_cluster.CreateGlobalClusterInput, options: create_global_cluster.Options) !create_global_cluster.CreateGlobalClusterOutput {
+    pub fn createGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: create_global_cluster.CreateGlobalClusterInput, options: CallOptions) !create_global_cluster.CreateGlobalClusterOutput {
         return create_global_cluster.execute(self, allocator, input, options);
     }
 
@@ -313,19 +314,19 @@ pub const Client = struct {
     /// enabled. To
     /// delete it, you must first set its `DeletionProtection` field to
     /// `False`.
-    pub fn deleteDbCluster(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster.DeleteDBClusterInput, options: delete_db_cluster.Options) !delete_db_cluster.DeleteDBClusterOutput {
+    pub fn deleteDbCluster(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster.DeleteDBClusterInput, options: CallOptions) !delete_db_cluster.DeleteDBClusterOutput {
         return delete_db_cluster.execute(self, allocator, input, options);
     }
 
     /// Deletes a custom endpoint and removes it from an Amazon Neptune DB cluster.
-    pub fn deleteDbClusterEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster_endpoint.DeleteDBClusterEndpointInput, options: delete_db_cluster_endpoint.Options) !delete_db_cluster_endpoint.DeleteDBClusterEndpointOutput {
+    pub fn deleteDbClusterEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster_endpoint.DeleteDBClusterEndpointInput, options: CallOptions) !delete_db_cluster_endpoint.DeleteDBClusterEndpointOutput {
         return delete_db_cluster_endpoint.execute(self, allocator, input, options);
     }
 
     /// Deletes a specified DB cluster parameter group. The DB cluster parameter
     /// group to be
     /// deleted can't be associated with any DB clusters.
-    pub fn deleteDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster_parameter_group.DeleteDBClusterParameterGroupInput, options: delete_db_cluster_parameter_group.Options) !delete_db_cluster_parameter_group.DeleteDBClusterParameterGroupOutput {
+    pub fn deleteDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster_parameter_group.DeleteDBClusterParameterGroupInput, options: CallOptions) !delete_db_cluster_parameter_group.DeleteDBClusterParameterGroupOutput {
         return delete_db_cluster_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -335,7 +336,7 @@ pub const Client = struct {
     ///
     /// The DB cluster snapshot must be in the `available` state to be
     /// deleted.
-    pub fn deleteDbClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster_snapshot.DeleteDBClusterSnapshotInput, options: delete_db_cluster_snapshot.Options) !delete_db_cluster_snapshot.DeleteDBClusterSnapshotOutput {
+    pub fn deleteDbClusterSnapshot(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster_snapshot.DeleteDBClusterSnapshotInput, options: CallOptions) !delete_db_cluster_snapshot.DeleteDBClusterSnapshotOutput {
         return delete_db_cluster_snapshot.execute(self, allocator, input, options);
     }
 
@@ -362,14 +363,14 @@ pub const Client = struct {
     /// You can't delete a DB instance if it is the only instance in the DB cluster,
     /// or
     /// if it has deletion protection enabled.
-    pub fn deleteDbInstance(self: *Self, allocator: std.mem.Allocator, input: delete_db_instance.DeleteDBInstanceInput, options: delete_db_instance.Options) !delete_db_instance.DeleteDBInstanceOutput {
+    pub fn deleteDbInstance(self: *Self, allocator: std.mem.Allocator, input: delete_db_instance.DeleteDBInstanceInput, options: CallOptions) !delete_db_instance.DeleteDBInstanceOutput {
         return delete_db_instance.execute(self, allocator, input, options);
     }
 
     /// Deletes a specified DBParameterGroup. The DBParameterGroup to be deleted
     /// can't be
     /// associated with any DB instances.
-    pub fn deleteDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_parameter_group.DeleteDBParameterGroupInput, options: delete_db_parameter_group.Options) !delete_db_parameter_group.DeleteDBParameterGroupOutput {
+    pub fn deleteDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_parameter_group.DeleteDBParameterGroupInput, options: CallOptions) !delete_db_parameter_group.DeleteDBParameterGroupOutput {
         return delete_db_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -377,18 +378,18 @@ pub const Client = struct {
     ///
     /// The specified database subnet group must not be associated with any DB
     /// instances.
-    pub fn deleteDbSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_subnet_group.DeleteDBSubnetGroupInput, options: delete_db_subnet_group.Options) !delete_db_subnet_group.DeleteDBSubnetGroupOutput {
+    pub fn deleteDbSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: delete_db_subnet_group.DeleteDBSubnetGroupInput, options: CallOptions) !delete_db_subnet_group.DeleteDBSubnetGroupOutput {
         return delete_db_subnet_group.execute(self, allocator, input, options);
     }
 
     /// Deletes an event notification subscription.
-    pub fn deleteEventSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_event_subscription.DeleteEventSubscriptionInput, options: delete_event_subscription.Options) !delete_event_subscription.DeleteEventSubscriptionOutput {
+    pub fn deleteEventSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_event_subscription.DeleteEventSubscriptionInput, options: CallOptions) !delete_event_subscription.DeleteEventSubscriptionOutput {
         return delete_event_subscription.execute(self, allocator, input, options);
     }
 
     /// Deletes a global database. The primary and all secondary clusters must
     /// already be detached or deleted first.
-    pub fn deleteGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: delete_global_cluster.DeleteGlobalClusterInput, options: delete_global_cluster.Options) !delete_global_cluster.DeleteGlobalClusterOutput {
+    pub fn deleteGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: delete_global_cluster.DeleteGlobalClusterInput, options: CallOptions) !delete_global_cluster.DeleteGlobalClusterOutput {
         return delete_global_cluster.execute(self, allocator, input, options);
     }
 
@@ -396,7 +397,7 @@ pub const Client = struct {
     ///
     /// This operation can also return information for Amazon RDS clusters
     /// and Amazon DocDB clusters.
-    pub fn describeDbClusterEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_endpoints.DescribeDBClusterEndpointsInput, options: describe_db_cluster_endpoints.Options) !describe_db_cluster_endpoints.DescribeDBClusterEndpointsOutput {
+    pub fn describeDbClusterEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_endpoints.DescribeDBClusterEndpointsInput, options: CallOptions) !describe_db_cluster_endpoints.DescribeDBClusterEndpointsOutput {
         return describe_db_cluster_endpoints.execute(self, allocator, input, options);
     }
 
@@ -404,13 +405,13 @@ pub const Client = struct {
     /// `DBClusterParameterGroupName` parameter is specified, the list will contain
     /// only
     /// the description of the specified DB cluster parameter group.
-    pub fn describeDbClusterParameterGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_parameter_groups.DescribeDBClusterParameterGroupsInput, options: describe_db_cluster_parameter_groups.Options) !describe_db_cluster_parameter_groups.DescribeDBClusterParameterGroupsOutput {
+    pub fn describeDbClusterParameterGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_parameter_groups.DescribeDBClusterParameterGroupsInput, options: CallOptions) !describe_db_cluster_parameter_groups.DescribeDBClusterParameterGroupsOutput {
         return describe_db_cluster_parameter_groups.execute(self, allocator, input, options);
     }
 
     /// Returns the detailed parameter list for a particular DB cluster parameter
     /// group.
-    pub fn describeDbClusterParameters(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_parameters.DescribeDBClusterParametersInput, options: describe_db_cluster_parameters.Options) !describe_db_cluster_parameters.DescribeDBClusterParametersOutput {
+    pub fn describeDbClusterParameters(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_parameters.DescribeDBClusterParametersInput, options: CallOptions) !describe_db_cluster_parameters.DescribeDBClusterParametersOutput {
         return describe_db_cluster_parameters.execute(self, allocator, input, options);
     }
 
@@ -431,13 +432,13 @@ pub const Client = struct {
     /// cluster
     /// snapshot, or to make the manual DB cluster snapshot public or private, use
     /// the ModifyDBClusterSnapshotAttribute API action.
-    pub fn describeDbClusterSnapshotAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_snapshot_attributes.DescribeDBClusterSnapshotAttributesInput, options: describe_db_cluster_snapshot_attributes.Options) !describe_db_cluster_snapshot_attributes.DescribeDBClusterSnapshotAttributesOutput {
+    pub fn describeDbClusterSnapshotAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_snapshot_attributes.DescribeDBClusterSnapshotAttributesInput, options: CallOptions) !describe_db_cluster_snapshot_attributes.DescribeDBClusterSnapshotAttributesOutput {
         return describe_db_cluster_snapshot_attributes.execute(self, allocator, input, options);
     }
 
     /// Returns information about DB cluster snapshots. This API action supports
     /// pagination.
-    pub fn describeDbClusterSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_snapshots.DescribeDBClusterSnapshotsInput, options: describe_db_cluster_snapshots.Options) !describe_db_cluster_snapshots.DescribeDBClusterSnapshotsOutput {
+    pub fn describeDbClusterSnapshots(self: *Self, allocator: std.mem.Allocator, input: describe_db_cluster_snapshots.DescribeDBClusterSnapshotsInput, options: CallOptions) !describe_db_cluster_snapshots.DescribeDBClusterSnapshotsOutput {
         return describe_db_cluster_snapshots.execute(self, allocator, input, options);
     }
 
@@ -446,12 +447,12 @@ pub const Client = struct {
     ///
     /// This operation can also return information for Amazon RDS clusters
     /// and Amazon DocDB clusters.
-    pub fn describeDbClusters(self: *Self, allocator: std.mem.Allocator, input: describe_db_clusters.DescribeDBClustersInput, options: describe_db_clusters.Options) !describe_db_clusters.DescribeDBClustersOutput {
+    pub fn describeDbClusters(self: *Self, allocator: std.mem.Allocator, input: describe_db_clusters.DescribeDBClustersInput, options: CallOptions) !describe_db_clusters.DescribeDBClustersOutput {
         return describe_db_clusters.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the available DB engines.
-    pub fn describeDbEngineVersions(self: *Self, allocator: std.mem.Allocator, input: describe_db_engine_versions.DescribeDBEngineVersionsInput, options: describe_db_engine_versions.Options) !describe_db_engine_versions.DescribeDBEngineVersionsOutput {
+    pub fn describeDbEngineVersions(self: *Self, allocator: std.mem.Allocator, input: describe_db_engine_versions.DescribeDBEngineVersionsInput, options: CallOptions) !describe_db_engine_versions.DescribeDBEngineVersionsOutput {
         return describe_db_engine_versions.execute(self, allocator, input, options);
     }
 
@@ -459,7 +460,7 @@ pub const Client = struct {
     ///
     /// This operation can also return information for Amazon RDS instances
     /// and Amazon DocDB instances.
-    pub fn describeDbInstances(self: *Self, allocator: std.mem.Allocator, input: describe_db_instances.DescribeDBInstancesInput, options: describe_db_instances.Options) !describe_db_instances.DescribeDBInstancesOutput {
+    pub fn describeDbInstances(self: *Self, allocator: std.mem.Allocator, input: describe_db_instances.DescribeDBInstancesInput, options: CallOptions) !describe_db_instances.DescribeDBInstancesOutput {
         return describe_db_instances.execute(self, allocator, input, options);
     }
 
@@ -467,12 +468,12 @@ pub const Client = struct {
     /// `DBParameterGroupName` is specified, the list will contain only the
     /// description of
     /// the specified DB parameter group.
-    pub fn describeDbParameterGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_parameter_groups.DescribeDBParameterGroupsInput, options: describe_db_parameter_groups.Options) !describe_db_parameter_groups.DescribeDBParameterGroupsOutput {
+    pub fn describeDbParameterGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_parameter_groups.DescribeDBParameterGroupsInput, options: CallOptions) !describe_db_parameter_groups.DescribeDBParameterGroupsOutput {
         return describe_db_parameter_groups.execute(self, allocator, input, options);
     }
 
     /// Returns the detailed parameter list for a particular DB parameter group.
-    pub fn describeDbParameters(self: *Self, allocator: std.mem.Allocator, input: describe_db_parameters.DescribeDBParametersInput, options: describe_db_parameters.Options) !describe_db_parameters.DescribeDBParametersOutput {
+    pub fn describeDbParameters(self: *Self, allocator: std.mem.Allocator, input: describe_db_parameters.DescribeDBParametersInput, options: CallOptions) !describe_db_parameters.DescribeDBParametersOutput {
         return describe_db_parameters.execute(self, allocator, input, options);
     }
 
@@ -482,28 +483,28 @@ pub const Client = struct {
     ///
     /// For an overview of CIDR ranges, go to the [Wikipedia
     /// Tutorial](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
-    pub fn describeDbSubnetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_subnet_groups.DescribeDBSubnetGroupsInput, options: describe_db_subnet_groups.Options) !describe_db_subnet_groups.DescribeDBSubnetGroupsOutput {
+    pub fn describeDbSubnetGroups(self: *Self, allocator: std.mem.Allocator, input: describe_db_subnet_groups.DescribeDBSubnetGroupsInput, options: CallOptions) !describe_db_subnet_groups.DescribeDBSubnetGroupsOutput {
         return describe_db_subnet_groups.execute(self, allocator, input, options);
     }
 
     /// Returns the default engine and system parameter information for the cluster
     /// database
     /// engine.
-    pub fn describeEngineDefaultClusterParameters(self: *Self, allocator: std.mem.Allocator, input: describe_engine_default_cluster_parameters.DescribeEngineDefaultClusterParametersInput, options: describe_engine_default_cluster_parameters.Options) !describe_engine_default_cluster_parameters.DescribeEngineDefaultClusterParametersOutput {
+    pub fn describeEngineDefaultClusterParameters(self: *Self, allocator: std.mem.Allocator, input: describe_engine_default_cluster_parameters.DescribeEngineDefaultClusterParametersInput, options: CallOptions) !describe_engine_default_cluster_parameters.DescribeEngineDefaultClusterParametersOutput {
         return describe_engine_default_cluster_parameters.execute(self, allocator, input, options);
     }
 
     /// Returns the default engine and system parameter information for the
     /// specified database
     /// engine.
-    pub fn describeEngineDefaultParameters(self: *Self, allocator: std.mem.Allocator, input: describe_engine_default_parameters.DescribeEngineDefaultParametersInput, options: describe_engine_default_parameters.Options) !describe_engine_default_parameters.DescribeEngineDefaultParametersOutput {
+    pub fn describeEngineDefaultParameters(self: *Self, allocator: std.mem.Allocator, input: describe_engine_default_parameters.DescribeEngineDefaultParametersInput, options: CallOptions) !describe_engine_default_parameters.DescribeEngineDefaultParametersOutput {
         return describe_engine_default_parameters.execute(self, allocator, input, options);
     }
 
     /// Displays a list of categories for all event source types, or, if specified,
     /// for a
     /// specified source type.
-    pub fn describeEventCategories(self: *Self, allocator: std.mem.Allocator, input: describe_event_categories.DescribeEventCategoriesInput, options: describe_event_categories.Options) !describe_event_categories.DescribeEventCategoriesOutput {
+    pub fn describeEventCategories(self: *Self, allocator: std.mem.Allocator, input: describe_event_categories.DescribeEventCategoriesInput, options: CallOptions) !describe_event_categories.DescribeEventCategoriesOutput {
         return describe_event_categories.execute(self, allocator, input, options);
     }
 
@@ -515,7 +516,7 @@ pub const Client = struct {
     ///
     /// If you specify a SubscriptionName, lists the description for that
     /// subscription.
-    pub fn describeEventSubscriptions(self: *Self, allocator: std.mem.Allocator, input: describe_event_subscriptions.DescribeEventSubscriptionsInput, options: describe_event_subscriptions.Options) !describe_event_subscriptions.DescribeEventSubscriptionsOutput {
+    pub fn describeEventSubscriptions(self: *Self, allocator: std.mem.Allocator, input: describe_event_subscriptions.DescribeEventSubscriptionsInput, options: CallOptions) !describe_event_subscriptions.DescribeEventSubscriptionsOutput {
         return describe_event_subscriptions.execute(self, allocator, input, options);
     }
 
@@ -526,25 +527,25 @@ pub const Client = struct {
     /// database snapshot, or DB parameter group can be obtained by providing the
     /// name as a parameter.
     /// By default, the past hour of events are returned.
-    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: describe_events.Options) !describe_events.DescribeEventsOutput {
+    pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: CallOptions) !describe_events.DescribeEventsOutput {
         return describe_events.execute(self, allocator, input, options);
     }
 
     /// Returns information about Neptune global database clusters. This API
     /// supports pagination.
-    pub fn describeGlobalClusters(self: *Self, allocator: std.mem.Allocator, input: describe_global_clusters.DescribeGlobalClustersInput, options: describe_global_clusters.Options) !describe_global_clusters.DescribeGlobalClustersOutput {
+    pub fn describeGlobalClusters(self: *Self, allocator: std.mem.Allocator, input: describe_global_clusters.DescribeGlobalClustersInput, options: CallOptions) !describe_global_clusters.DescribeGlobalClustersOutput {
         return describe_global_clusters.execute(self, allocator, input, options);
     }
 
     /// Returns a list of orderable DB instance options for the specified engine.
-    pub fn describeOrderableDbInstanceOptions(self: *Self, allocator: std.mem.Allocator, input: describe_orderable_db_instance_options.DescribeOrderableDBInstanceOptionsInput, options: describe_orderable_db_instance_options.Options) !describe_orderable_db_instance_options.DescribeOrderableDBInstanceOptionsOutput {
+    pub fn describeOrderableDbInstanceOptions(self: *Self, allocator: std.mem.Allocator, input: describe_orderable_db_instance_options.DescribeOrderableDBInstanceOptionsInput, options: CallOptions) !describe_orderable_db_instance_options.DescribeOrderableDBInstanceOptionsOutput {
         return describe_orderable_db_instance_options.execute(self, allocator, input, options);
     }
 
     /// Returns a list of resources (for example, DB instances) that have at least
     /// one pending
     /// maintenance action.
-    pub fn describePendingMaintenanceActions(self: *Self, allocator: std.mem.Allocator, input: describe_pending_maintenance_actions.DescribePendingMaintenanceActionsInput, options: describe_pending_maintenance_actions.Options) !describe_pending_maintenance_actions.DescribePendingMaintenanceActionsOutput {
+    pub fn describePendingMaintenanceActions(self: *Self, allocator: std.mem.Allocator, input: describe_pending_maintenance_actions.DescribePendingMaintenanceActionsInput, options: CallOptions) !describe_pending_maintenance_actions.DescribePendingMaintenanceActionsOutput {
         return describe_pending_maintenance_actions.execute(self, allocator, input, options);
     }
 
@@ -552,7 +553,7 @@ pub const Client = struct {
     /// to learn what modifications you can make to your DB instance. You can use
     /// this
     /// information when you call ModifyDBInstance.
-    pub fn describeValidDbInstanceModifications(self: *Self, allocator: std.mem.Allocator, input: describe_valid_db_instance_modifications.DescribeValidDBInstanceModificationsInput, options: describe_valid_db_instance_modifications.Options) !describe_valid_db_instance_modifications.DescribeValidDBInstanceModificationsOutput {
+    pub fn describeValidDbInstanceModifications(self: *Self, allocator: std.mem.Allocator, input: describe_valid_db_instance_modifications.DescribeValidDBInstanceModificationsInput, options: CallOptions) !describe_valid_db_instance_modifications.DescribeValidDBInstanceModificationsOutput {
         return describe_valid_db_instance_modifications.execute(self, allocator, input, options);
     }
 
@@ -571,7 +572,7 @@ pub const Client = struct {
     /// address, you will need to clean up and re-establish any existing connections
     /// that use those
     /// endpoint addresses when the failover is complete.
-    pub fn failoverDbCluster(self: *Self, allocator: std.mem.Allocator, input: failover_db_cluster.FailoverDBClusterInput, options: failover_db_cluster.Options) !failover_db_cluster.FailoverDBClusterOutput {
+    pub fn failoverDbCluster(self: *Self, allocator: std.mem.Allocator, input: failover_db_cluster.FailoverDBClusterInput, options: CallOptions) !failover_db_cluster.FailoverDBClusterOutput {
         return failover_db_cluster.execute(self, allocator, input, options);
     }
 
@@ -589,24 +590,24 @@ pub const Client = struct {
     /// Neptune global databases with healthy Neptune DB clusters and no region-wide
     /// outages, to test disaster recovery scenarios or to reconfigure the global
     /// database topology.
-    pub fn failoverGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: failover_global_cluster.FailoverGlobalClusterInput, options: failover_global_cluster.Options) !failover_global_cluster.FailoverGlobalClusterOutput {
+    pub fn failoverGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: failover_global_cluster.FailoverGlobalClusterInput, options: CallOptions) !failover_global_cluster.FailoverGlobalClusterOutput {
         return failover_global_cluster.execute(self, allocator, input, options);
     }
 
     /// Lists all tags on an Amazon Neptune resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Modify a setting for a DB cluster. You can change one or more database
     /// configuration
     /// parameters by specifying these parameters and the new values in the request.
-    pub fn modifyDbCluster(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster.ModifyDBClusterInput, options: modify_db_cluster.Options) !modify_db_cluster.ModifyDBClusterOutput {
+    pub fn modifyDbCluster(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster.ModifyDBClusterInput, options: CallOptions) !modify_db_cluster.ModifyDBClusterOutput {
         return modify_db_cluster.execute(self, allocator, input, options);
     }
 
     /// Modifies the properties of an endpoint in an Amazon Neptune DB cluster.
-    pub fn modifyDbClusterEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster_endpoint.ModifyDBClusterEndpointInput, options: modify_db_cluster_endpoint.Options) !modify_db_cluster_endpoint.ModifyDBClusterEndpointOutput {
+    pub fn modifyDbClusterEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster_endpoint.ModifyDBClusterEndpointInput, options: CallOptions) !modify_db_cluster_endpoint.ModifyDBClusterEndpointOutput {
         return modify_db_cluster_endpoint.execute(self, allocator, input, options);
     }
 
@@ -637,7 +638,7 @@ pub const Client = struct {
     /// Groups* option of the Amazon Neptune console or the
     /// DescribeDBClusterParameters command to verify that your DB cluster parameter
     /// group has been created or modified.
-    pub fn modifyDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster_parameter_group.ModifyDBClusterParameterGroupInput, options: modify_db_cluster_parameter_group.Options) !modify_db_cluster_parameter_group.ModifyDBClusterParameterGroupOutput {
+    pub fn modifyDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster_parameter_group.ModifyDBClusterParameterGroupInput, options: CallOptions) !modify_db_cluster_parameter_group.ModifyDBClusterParameterGroupOutput {
         return modify_db_cluster_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -666,7 +667,7 @@ pub const Client = struct {
     /// cluster snapshot, or
     /// whether a manual DB cluster snapshot public or private, use the
     /// DescribeDBClusterSnapshotAttributes API action.
-    pub fn modifyDbClusterSnapshotAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster_snapshot_attribute.ModifyDBClusterSnapshotAttributeInput, options: modify_db_cluster_snapshot_attribute.Options) !modify_db_cluster_snapshot_attribute.ModifyDBClusterSnapshotAttributeOutput {
+    pub fn modifyDbClusterSnapshotAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_db_cluster_snapshot_attribute.ModifyDBClusterSnapshotAttributeInput, options: CallOptions) !modify_db_cluster_snapshot_attribute.ModifyDBClusterSnapshotAttributeOutput {
         return modify_db_cluster_snapshot_attribute.execute(self, allocator, input, options);
     }
 
@@ -676,7 +677,7 @@ pub const Client = struct {
     /// To learn what
     /// modifications you can make to your DB instance, call
     /// DescribeValidDBInstanceModifications before you call ModifyDBInstance.
-    pub fn modifyDbInstance(self: *Self, allocator: std.mem.Allocator, input: modify_db_instance.ModifyDBInstanceInput, options: modify_db_instance.Options) !modify_db_instance.ModifyDBInstanceOutput {
+    pub fn modifyDbInstance(self: *Self, allocator: std.mem.Allocator, input: modify_db_instance.ModifyDBInstanceInput, options: CallOptions) !modify_db_instance.ModifyDBInstanceOutput {
         return modify_db_instance.execute(self, allocator, input, options);
     }
 
@@ -707,14 +708,14 @@ pub const Client = struct {
     /// Groups* option of the Amazon Neptune console or the
     /// *DescribeDBParameters* command to verify that your DB parameter group has
     /// been created or modified.
-    pub fn modifyDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_parameter_group.ModifyDBParameterGroupInput, options: modify_db_parameter_group.Options) !modify_db_parameter_group.ModifyDBParameterGroupOutput {
+    pub fn modifyDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_parameter_group.ModifyDBParameterGroupInput, options: CallOptions) !modify_db_parameter_group.ModifyDBParameterGroupOutput {
         return modify_db_parameter_group.execute(self, allocator, input, options);
     }
 
     /// Modifies an existing DB subnet group. DB subnet groups must contain at least
     /// one subnet in
     /// at least two AZs in the Amazon Region.
-    pub fn modifyDbSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_subnet_group.ModifyDBSubnetGroupInput, options: modify_db_subnet_group.Options) !modify_db_subnet_group.ModifyDBSubnetGroupOutput {
+    pub fn modifyDbSubnetGroup(self: *Self, allocator: std.mem.Allocator, input: modify_db_subnet_group.ModifyDBSubnetGroupInput, options: CallOptions) !modify_db_subnet_group.ModifyDBSubnetGroupOutput {
         return modify_db_subnet_group.execute(self, allocator, input, options);
     }
 
@@ -727,19 +728,19 @@ pub const Client = struct {
     ///
     /// You can see a list of the event categories for a given SourceType
     /// by using the **DescribeEventCategories** action.
-    pub fn modifyEventSubscription(self: *Self, allocator: std.mem.Allocator, input: modify_event_subscription.ModifyEventSubscriptionInput, options: modify_event_subscription.Options) !modify_event_subscription.ModifyEventSubscriptionOutput {
+    pub fn modifyEventSubscription(self: *Self, allocator: std.mem.Allocator, input: modify_event_subscription.ModifyEventSubscriptionInput, options: CallOptions) !modify_event_subscription.ModifyEventSubscriptionOutput {
         return modify_event_subscription.execute(self, allocator, input, options);
     }
 
     /// Modify a setting for an Amazon Neptune global cluster. You can change one
     /// or more database configuration parameters by specifying these parameters
     /// and their new values in the request.
-    pub fn modifyGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: modify_global_cluster.ModifyGlobalClusterInput, options: modify_global_cluster.Options) !modify_global_cluster.ModifyGlobalClusterOutput {
+    pub fn modifyGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: modify_global_cluster.ModifyGlobalClusterInput, options: CallOptions) !modify_global_cluster.ModifyGlobalClusterOutput {
         return modify_global_cluster.execute(self, allocator, input, options);
     }
 
     /// Not supported.
-    pub fn promoteReadReplicaDbCluster(self: *Self, allocator: std.mem.Allocator, input: promote_read_replica_db_cluster.PromoteReadReplicaDBClusterInput, options: promote_read_replica_db_cluster.Options) !promote_read_replica_db_cluster.PromoteReadReplicaDBClusterOutput {
+    pub fn promoteReadReplicaDbCluster(self: *Self, allocator: std.mem.Allocator, input: promote_read_replica_db_cluster.PromoteReadReplicaDBClusterInput, options: CallOptions) !promote_read_replica_db_cluster.PromoteReadReplicaDBClusterOutput {
         return promote_read_replica_db_cluster.execute(self, allocator, input, options);
     }
 
@@ -753,7 +754,7 @@ pub const Client = struct {
     /// instance
     /// results in a momentary outage, during which the DB instance status is set to
     /// rebooting.
-    pub fn rebootDbInstance(self: *Self, allocator: std.mem.Allocator, input: reboot_db_instance.RebootDBInstanceInput, options: reboot_db_instance.Options) !reboot_db_instance.RebootDBInstanceOutput {
+    pub fn rebootDbInstance(self: *Self, allocator: std.mem.Allocator, input: reboot_db_instance.RebootDBInstanceInput, options: CallOptions) !reboot_db_instance.RebootDBInstanceOutput {
         return reboot_db_instance.execute(self, allocator, input, options);
     }
 
@@ -761,24 +762,24 @@ pub const Client = struct {
     /// cluster becomes a normal standalone cluster with read-write capability
     /// instead of being read-only, and no longer receives data from a the
     /// primary cluster.
-    pub fn removeFromGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: remove_from_global_cluster.RemoveFromGlobalClusterInput, options: remove_from_global_cluster.Options) !remove_from_global_cluster.RemoveFromGlobalClusterOutput {
+    pub fn removeFromGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: remove_from_global_cluster.RemoveFromGlobalClusterInput, options: CallOptions) !remove_from_global_cluster.RemoveFromGlobalClusterOutput {
         return remove_from_global_cluster.execute(self, allocator, input, options);
     }
 
     /// Disassociates an Identity and Access Management (IAM) role from a DB
     /// cluster.
-    pub fn removeRoleFromDbCluster(self: *Self, allocator: std.mem.Allocator, input: remove_role_from_db_cluster.RemoveRoleFromDBClusterInput, options: remove_role_from_db_cluster.Options) !remove_role_from_db_cluster.RemoveRoleFromDBClusterOutput {
+    pub fn removeRoleFromDbCluster(self: *Self, allocator: std.mem.Allocator, input: remove_role_from_db_cluster.RemoveRoleFromDBClusterInput, options: CallOptions) !remove_role_from_db_cluster.RemoveRoleFromDBClusterOutput {
         return remove_role_from_db_cluster.execute(self, allocator, input, options);
     }
 
     /// Removes a source identifier from an existing event notification
     /// subscription.
-    pub fn removeSourceIdentifierFromSubscription(self: *Self, allocator: std.mem.Allocator, input: remove_source_identifier_from_subscription.RemoveSourceIdentifierFromSubscriptionInput, options: remove_source_identifier_from_subscription.Options) !remove_source_identifier_from_subscription.RemoveSourceIdentifierFromSubscriptionOutput {
+    pub fn removeSourceIdentifierFromSubscription(self: *Self, allocator: std.mem.Allocator, input: remove_source_identifier_from_subscription.RemoveSourceIdentifierFromSubscriptionInput, options: CallOptions) !remove_source_identifier_from_subscription.RemoveSourceIdentifierFromSubscriptionOutput {
         return remove_source_identifier_from_subscription.execute(self, allocator, input, options);
     }
 
     /// Removes metadata tags from an Amazon Neptune resource.
-    pub fn removeTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_resource.RemoveTagsFromResourceInput, options: remove_tags_from_resource.Options) !remove_tags_from_resource.RemoveTagsFromResourceOutput {
+    pub fn removeTagsFromResource(self: *Self, allocator: std.mem.Allocator, input: remove_tags_from_resource.RemoveTagsFromResourceInput, options: CallOptions) !remove_tags_from_resource.RemoveTagsFromResourceOutput {
         return remove_tags_from_resource.execute(self, allocator, input, options);
     }
 
@@ -795,7 +796,7 @@ pub const Client = struct {
     /// restart or RebootDBInstance request. You must call RebootDBInstance for
     /// every DB instance in your DB cluster
     /// that you want the updated static parameter to apply to.
-    pub fn resetDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: reset_db_cluster_parameter_group.ResetDBClusterParameterGroupInput, options: reset_db_cluster_parameter_group.Options) !reset_db_cluster_parameter_group.ResetDBClusterParameterGroupOutput {
+    pub fn resetDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: reset_db_cluster_parameter_group.ResetDBClusterParameterGroupInput, options: CallOptions) !reset_db_cluster_parameter_group.ResetDBClusterParameterGroupOutput {
         return reset_db_cluster_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -810,7 +811,7 @@ pub const Client = struct {
     /// are set to `pending-reboot` to take effect on the next DB instance restart
     /// or
     /// `RebootDBInstance` request.
-    pub fn resetDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: reset_db_parameter_group.ResetDBParameterGroupInput, options: reset_db_parameter_group.Options) !reset_db_parameter_group.ResetDBParameterGroupOutput {
+    pub fn resetDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: reset_db_parameter_group.ResetDBParameterGroupInput, options: CallOptions) !reset_db_parameter_group.ResetDBParameterGroupOutput {
         return reset_db_parameter_group.execute(self, allocator, input, options);
     }
 
@@ -825,7 +826,7 @@ pub const Client = struct {
     /// cluster restore point with the same configuration as the original source DB
     /// cluster, except
     /// that the new DB cluster is created with the default security group.
-    pub fn restoreDbClusterFromSnapshot(self: *Self, allocator: std.mem.Allocator, input: restore_db_cluster_from_snapshot.RestoreDBClusterFromSnapshotInput, options: restore_db_cluster_from_snapshot.Options) !restore_db_cluster_from_snapshot.RestoreDBClusterFromSnapshotOutput {
+    pub fn restoreDbClusterFromSnapshot(self: *Self, allocator: std.mem.Allocator, input: restore_db_cluster_from_snapshot.RestoreDBClusterFromSnapshotInput, options: CallOptions) !restore_db_cluster_from_snapshot.RestoreDBClusterFromSnapshotOutput {
         return restore_db_cluster_from_snapshot.execute(self, allocator, input, options);
     }
 
@@ -845,13 +846,13 @@ pub const Client = struct {
     /// `DBClusterIdentifier`. You can create DB instances only after the
     /// `RestoreDBClusterToPointInTime` action has completed and the DB cluster is
     /// available.
-    pub fn restoreDbClusterToPointInTime(self: *Self, allocator: std.mem.Allocator, input: restore_db_cluster_to_point_in_time.RestoreDBClusterToPointInTimeInput, options: restore_db_cluster_to_point_in_time.Options) !restore_db_cluster_to_point_in_time.RestoreDBClusterToPointInTimeOutput {
+    pub fn restoreDbClusterToPointInTime(self: *Self, allocator: std.mem.Allocator, input: restore_db_cluster_to_point_in_time.RestoreDBClusterToPointInTimeInput, options: CallOptions) !restore_db_cluster_to_point_in_time.RestoreDBClusterToPointInTimeOutput {
         return restore_db_cluster_to_point_in_time.execute(self, allocator, input, options);
     }
 
     /// Starts an Amazon Neptune DB cluster that was stopped using the Amazon
     /// console, the Amazon CLI stop-db-cluster command, or the StopDBCluster API.
-    pub fn startDbCluster(self: *Self, allocator: std.mem.Allocator, input: start_db_cluster.StartDBClusterInput, options: start_db_cluster.Options) !start_db_cluster.StartDBClusterOutput {
+    pub fn startDbCluster(self: *Self, allocator: std.mem.Allocator, input: start_db_cluster.StartDBClusterInput, options: CallOptions) !start_db_cluster.StartDBClusterOutput {
         return start_db_cluster.execute(self, allocator, input, options);
     }
 
@@ -861,7 +862,7 @@ pub const Client = struct {
     ///
     /// Neptune also retains the transaction logs so you can do a point-in-time
     /// restore if necessary.
-    pub fn stopDbCluster(self: *Self, allocator: std.mem.Allocator, input: stop_db_cluster.StopDBClusterInput, options: stop_db_cluster.Options) !stop_db_cluster.StopDBClusterOutput {
+    pub fn stopDbCluster(self: *Self, allocator: std.mem.Allocator, input: stop_db_cluster.StopDBClusterInput, options: CallOptions) !stop_db_cluster.StopDBClusterOutput {
         return stop_db_cluster.execute(self, allocator, input, options);
     }
 
@@ -883,7 +884,7 @@ pub const Client = struct {
     /// This operation is intended for controlled environments, for operations such
     /// as "regional rotation" or
     /// to fall back to the original primary after a global database failover.
-    pub fn switchoverGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: switchover_global_cluster.SwitchoverGlobalClusterInput, options: switchover_global_cluster.Options) !switchover_global_cluster.SwitchoverGlobalClusterOutput {
+    pub fn switchoverGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: switchover_global_cluster.SwitchoverGlobalClusterInput, options: CallOptions) !switchover_global_cluster.SwitchoverGlobalClusterOutput {
         return switchover_global_cluster.execute(self, allocator, input, options);
     }
 

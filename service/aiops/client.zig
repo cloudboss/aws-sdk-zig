@@ -12,6 +12,7 @@ const put_investigation_group_policy = @import("put_investigation_group_policy.z
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_investigation_group = @import("update_investigation_group.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -72,7 +73,7 @@ pub const Client = struct {
     /// For more information about configuring CloudWatch alarms, see [Using Amazon
     /// CloudWatch
     /// alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)
-    pub fn createInvestigationGroup(self: *Self, allocator: std.mem.Allocator, input: create_investigation_group.CreateInvestigationGroupInput, options: create_investigation_group.Options) !create_investigation_group.CreateInvestigationGroupOutput {
+    pub fn createInvestigationGroup(self: *Self, allocator: std.mem.Allocator, input: create_investigation_group.CreateInvestigationGroupInput, options: CallOptions) !create_investigation_group.CreateInvestigationGroupOutput {
         return create_investigation_group.execute(self, allocator, input, options);
     }
 
@@ -80,36 +81,36 @@ pub const Client = struct {
     /// currently have one investigation group per Region in your account. After you
     /// delete an investigation group, you can later create a new investigation
     /// group in the same Region.
-    pub fn deleteInvestigationGroup(self: *Self, allocator: std.mem.Allocator, input: delete_investigation_group.DeleteInvestigationGroupInput, options: delete_investigation_group.Options) !delete_investigation_group.DeleteInvestigationGroupOutput {
+    pub fn deleteInvestigationGroup(self: *Self, allocator: std.mem.Allocator, input: delete_investigation_group.DeleteInvestigationGroupInput, options: CallOptions) !delete_investigation_group.DeleteInvestigationGroupOutput {
         return delete_investigation_group.execute(self, allocator, input, options);
     }
 
     /// Removes the IAM resource policy from being associated with the investigation
     /// group that you specify.
-    pub fn deleteInvestigationGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_investigation_group_policy.DeleteInvestigationGroupPolicyInput, options: delete_investigation_group_policy.Options) !delete_investigation_group_policy.DeleteInvestigationGroupPolicyOutput {
+    pub fn deleteInvestigationGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_investigation_group_policy.DeleteInvestigationGroupPolicyInput, options: CallOptions) !delete_investigation_group_policy.DeleteInvestigationGroupPolicyOutput {
         return delete_investigation_group_policy.execute(self, allocator, input, options);
     }
 
     /// Returns the configuration information for the specified investigation group.
-    pub fn getInvestigationGroup(self: *Self, allocator: std.mem.Allocator, input: get_investigation_group.GetInvestigationGroupInput, options: get_investigation_group.Options) !get_investigation_group.GetInvestigationGroupOutput {
+    pub fn getInvestigationGroup(self: *Self, allocator: std.mem.Allocator, input: get_investigation_group.GetInvestigationGroupInput, options: CallOptions) !get_investigation_group.GetInvestigationGroupOutput {
         return get_investigation_group.execute(self, allocator, input, options);
     }
 
     /// Returns the JSON of the IAM resource policy associated with the specified
     /// investigation group in a string. For example,
     /// `{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"aiops.alarms.cloudwatch.amazonaws.com\"},\"Action\":[\"aiops:CreateInvestigation\",\"aiops:CreateInvestigationEvent\"],\"Resource\":\"*\",\"Condition\":{\"StringEquals\":{\"aws:SourceAccount\":\"111122223333\"},\"ArnLike\":{\"aws:SourceArn\":\"arn:aws:cloudwatch:us-east-1:111122223333:alarm:*\"}}}]}`.
-    pub fn getInvestigationGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: get_investigation_group_policy.GetInvestigationGroupPolicyInput, options: get_investigation_group_policy.Options) !get_investigation_group_policy.GetInvestigationGroupPolicyOutput {
+    pub fn getInvestigationGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: get_investigation_group_policy.GetInvestigationGroupPolicyInput, options: CallOptions) !get_investigation_group_policy.GetInvestigationGroupPolicyOutput {
         return get_investigation_group_policy.execute(self, allocator, input, options);
     }
 
     /// Returns the ARN and name of each investigation group in the account.
-    pub fn listInvestigationGroups(self: *Self, allocator: std.mem.Allocator, input: list_investigation_groups.ListInvestigationGroupsInput, options: list_investigation_groups.Options) !list_investigation_groups.ListInvestigationGroupsOutput {
+    pub fn listInvestigationGroups(self: *Self, allocator: std.mem.Allocator, input: list_investigation_groups.ListInvestigationGroupsInput, options: CallOptions) !list_investigation_groups.ListInvestigationGroupsOutput {
         return list_investigation_groups.execute(self, allocator, input, options);
     }
 
     /// Displays the tags associated with a CloudWatch investigations resource.
     /// Currently, investigation groups support tagging.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -127,7 +128,7 @@ pub const Client = struct {
     /// "Resource": "*", "Condition": { "StringEquals": { "aws:SourceAccount":
     /// "account-id" }, "ArnLike": { "aws:SourceArn":
     /// "arn:aws:cloudwatch:region:account-id:alarm:*" } } } ] } `
-    pub fn putInvestigationGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: put_investigation_group_policy.PutInvestigationGroupPolicyInput, options: put_investigation_group_policy.Options) !put_investigation_group_policy.PutInvestigationGroupPolicyOutput {
+    pub fn putInvestigationGroupPolicy(self: *Self, allocator: std.mem.Allocator, input: put_investigation_group_policy.PutInvestigationGroupPolicyInput, options: CallOptions) !put_investigation_group_policy.PutInvestigationGroupPolicyOutput {
         return put_investigation_group_policy.execute(self, allocator, input, options);
     }
 
@@ -141,17 +142,17 @@ pub const Client = struct {
     /// interpreted strictly as strings of characters.
     ///
     /// You can associate as many as 50 tags with a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration of the specified investigation group.
-    pub fn updateInvestigationGroup(self: *Self, allocator: std.mem.Allocator, input: update_investigation_group.UpdateInvestigationGroupInput, options: update_investigation_group.Options) !update_investigation_group.UpdateInvestigationGroupOutput {
+    pub fn updateInvestigationGroup(self: *Self, allocator: std.mem.Allocator, input: update_investigation_group.UpdateInvestigationGroupInput, options: CallOptions) !update_investigation_group.UpdateInvestigationGroupOutput {
         return update_investigation_group.execute(self, allocator, input, options);
     }
 

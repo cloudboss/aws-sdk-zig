@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FastLaunchLaunchTemplateSpecificationRequest = @import("fast_launch_launch_template_specification_request.zig").FastLaunchLaunchTemplateSpecificationRequest;
 const FastLaunchSnapshotConfigurationRequest = @import("fast_launch_snapshot_configuration_request.zig").FastLaunchSnapshotConfigurationRequest;
@@ -87,11 +88,7 @@ pub const EnableFastLaunchOutput = struct {
     state_transition_time: ?i64 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableFastLaunchInput, options: Options) !EnableFastLaunchOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableFastLaunchInput, options: CallOptions) !EnableFastLaunchOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

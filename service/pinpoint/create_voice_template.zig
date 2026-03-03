@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const VoiceTemplateRequest = @import("voice_template_request.zig").VoiceTemplateRequest;
 const CreateTemplateMessageBody = @import("create_template_message_body.zig").CreateTemplateMessageBody;
@@ -29,11 +30,7 @@ pub const CreateVoiceTemplateOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVoiceTemplateInput, options: Options) !CreateVoiceTemplateOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVoiceTemplateInput, options: CallOptions) !CreateVoiceTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

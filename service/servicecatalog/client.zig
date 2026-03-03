@@ -91,6 +91,7 @@ const update_provisioned_product_properties = @import("update_provisioned_produc
 const update_provisioning_artifact = @import("update_provisioning_artifact.zig");
 const update_service_action = @import("update_service_action.zig");
 const update_tag_option = @import("update_tag_option.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -122,12 +123,12 @@ pub const Client = struct {
     }
 
     /// Accepts an offer to share the specified portfolio.
-    pub fn acceptPortfolioShare(self: *Self, allocator: std.mem.Allocator, input: accept_portfolio_share.AcceptPortfolioShareInput, options: accept_portfolio_share.Options) !accept_portfolio_share.AcceptPortfolioShareOutput {
+    pub fn acceptPortfolioShare(self: *Self, allocator: std.mem.Allocator, input: accept_portfolio_share.AcceptPortfolioShareInput, options: CallOptions) !accept_portfolio_share.AcceptPortfolioShareOutput {
         return accept_portfolio_share.execute(self, allocator, input, options);
     }
 
     /// Associates the specified budget with the specified resource.
-    pub fn associateBudgetWithResource(self: *Self, allocator: std.mem.Allocator, input: associate_budget_with_resource.AssociateBudgetWithResourceInput, options: associate_budget_with_resource.Options) !associate_budget_with_resource.AssociateBudgetWithResourceOutput {
+    pub fn associateBudgetWithResource(self: *Self, allocator: std.mem.Allocator, input: associate_budget_with_resource.AssociateBudgetWithResourceInput, options: CallOptions) !associate_budget_with_resource.AssociateBudgetWithResourceOutput {
         return associate_budget_with_resource.execute(self, allocator, input, options);
     }
 
@@ -157,35 +158,35 @@ pub const Client = struct {
     /// configuration,
     /// the `PrincipalARN` must already exist in the recipient account before it can
     /// be associated.
-    pub fn associatePrincipalWithPortfolio(self: *Self, allocator: std.mem.Allocator, input: associate_principal_with_portfolio.AssociatePrincipalWithPortfolioInput, options: associate_principal_with_portfolio.Options) !associate_principal_with_portfolio.AssociatePrincipalWithPortfolioOutput {
+    pub fn associatePrincipalWithPortfolio(self: *Self, allocator: std.mem.Allocator, input: associate_principal_with_portfolio.AssociatePrincipalWithPortfolioInput, options: CallOptions) !associate_principal_with_portfolio.AssociatePrincipalWithPortfolioOutput {
         return associate_principal_with_portfolio.execute(self, allocator, input, options);
     }
 
     /// Associates the specified product with the specified portfolio.
     ///
     /// A delegated admin is authorized to invoke this command.
-    pub fn associateProductWithPortfolio(self: *Self, allocator: std.mem.Allocator, input: associate_product_with_portfolio.AssociateProductWithPortfolioInput, options: associate_product_with_portfolio.Options) !associate_product_with_portfolio.AssociateProductWithPortfolioOutput {
+    pub fn associateProductWithPortfolio(self: *Self, allocator: std.mem.Allocator, input: associate_product_with_portfolio.AssociateProductWithPortfolioInput, options: CallOptions) !associate_product_with_portfolio.AssociateProductWithPortfolioOutput {
         return associate_product_with_portfolio.execute(self, allocator, input, options);
     }
 
     /// Associates a self-service action with a provisioning artifact.
-    pub fn associateServiceActionWithProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: associate_service_action_with_provisioning_artifact.AssociateServiceActionWithProvisioningArtifactInput, options: associate_service_action_with_provisioning_artifact.Options) !associate_service_action_with_provisioning_artifact.AssociateServiceActionWithProvisioningArtifactOutput {
+    pub fn associateServiceActionWithProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: associate_service_action_with_provisioning_artifact.AssociateServiceActionWithProvisioningArtifactInput, options: CallOptions) !associate_service_action_with_provisioning_artifact.AssociateServiceActionWithProvisioningArtifactOutput {
         return associate_service_action_with_provisioning_artifact.execute(self, allocator, input, options);
     }
 
     /// Associate the specified TagOption with the specified portfolio or product.
-    pub fn associateTagOptionWithResource(self: *Self, allocator: std.mem.Allocator, input: associate_tag_option_with_resource.AssociateTagOptionWithResourceInput, options: associate_tag_option_with_resource.Options) !associate_tag_option_with_resource.AssociateTagOptionWithResourceOutput {
+    pub fn associateTagOptionWithResource(self: *Self, allocator: std.mem.Allocator, input: associate_tag_option_with_resource.AssociateTagOptionWithResourceInput, options: CallOptions) !associate_tag_option_with_resource.AssociateTagOptionWithResourceOutput {
         return associate_tag_option_with_resource.execute(self, allocator, input, options);
     }
 
     /// Associates multiple self-service actions with provisioning artifacts.
-    pub fn batchAssociateServiceActionWithProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: batch_associate_service_action_with_provisioning_artifact.BatchAssociateServiceActionWithProvisioningArtifactInput, options: batch_associate_service_action_with_provisioning_artifact.Options) !batch_associate_service_action_with_provisioning_artifact.BatchAssociateServiceActionWithProvisioningArtifactOutput {
+    pub fn batchAssociateServiceActionWithProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: batch_associate_service_action_with_provisioning_artifact.BatchAssociateServiceActionWithProvisioningArtifactInput, options: CallOptions) !batch_associate_service_action_with_provisioning_artifact.BatchAssociateServiceActionWithProvisioningArtifactOutput {
         return batch_associate_service_action_with_provisioning_artifact.execute(self, allocator, input, options);
     }
 
     /// Disassociates a batch of self-service actions from the specified
     /// provisioning artifact.
-    pub fn batchDisassociateServiceActionFromProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: batch_disassociate_service_action_from_provisioning_artifact.BatchDisassociateServiceActionFromProvisioningArtifactInput, options: batch_disassociate_service_action_from_provisioning_artifact.Options) !batch_disassociate_service_action_from_provisioning_artifact.BatchDisassociateServiceActionFromProvisioningArtifactOutput {
+    pub fn batchDisassociateServiceActionFromProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: batch_disassociate_service_action_from_provisioning_artifact.BatchDisassociateServiceActionFromProvisioningArtifactInput, options: CallOptions) !batch_disassociate_service_action_from_provisioning_artifact.BatchDisassociateServiceActionFromProvisioningArtifactOutput {
         return batch_disassociate_service_action_from_provisioning_artifact.execute(self, allocator, input, options);
     }
 
@@ -200,21 +201,21 @@ pub const Client = struct {
     ///
     /// This operation is performed asynchronously. To track the progress of the
     /// operation, use DescribeCopyProductStatus.
-    pub fn copyProduct(self: *Self, allocator: std.mem.Allocator, input: copy_product.CopyProductInput, options: copy_product.Options) !copy_product.CopyProductOutput {
+    pub fn copyProduct(self: *Self, allocator: std.mem.Allocator, input: copy_product.CopyProductInput, options: CallOptions) !copy_product.CopyProductOutput {
         return copy_product.execute(self, allocator, input, options);
     }
 
     /// Creates a constraint.
     ///
     /// A delegated admin is authorized to invoke this command.
-    pub fn createConstraint(self: *Self, allocator: std.mem.Allocator, input: create_constraint.CreateConstraintInput, options: create_constraint.Options) !create_constraint.CreateConstraintOutput {
+    pub fn createConstraint(self: *Self, allocator: std.mem.Allocator, input: create_constraint.CreateConstraintInput, options: CallOptions) !create_constraint.CreateConstraintOutput {
         return create_constraint.execute(self, allocator, input, options);
     }
 
     /// Creates a portfolio.
     ///
     /// A delegated admin is authorized to invoke this command.
-    pub fn createPortfolio(self: *Self, allocator: std.mem.Allocator, input: create_portfolio.CreatePortfolioInput, options: create_portfolio.Options) !create_portfolio.CreatePortfolioOutput {
+    pub fn createPortfolio(self: *Self, allocator: std.mem.Allocator, input: create_portfolio.CreatePortfolioInput, options: CallOptions) !create_portfolio.CreatePortfolioOutput {
         return create_portfolio.execute(self, allocator, input, options);
     }
 
@@ -254,7 +255,7 @@ pub const Client = struct {
     /// configuration,
     /// the `PrincipalARN` must already exist in the recipient account before it can
     /// be associated.
-    pub fn createPortfolioShare(self: *Self, allocator: std.mem.Allocator, input: create_portfolio_share.CreatePortfolioShareInput, options: create_portfolio_share.Options) !create_portfolio_share.CreatePortfolioShareOutput {
+    pub fn createPortfolioShare(self: *Self, allocator: std.mem.Allocator, input: create_portfolio_share.CreatePortfolioShareInput, options: CallOptions) !create_portfolio_share.CreatePortfolioShareOutput {
         return create_portfolio_share.execute(self, allocator, input, options);
     }
 
@@ -267,7 +268,7 @@ pub const Client = struct {
     /// is
     /// required when using the `ImportFromPhysicalId` template source in the
     /// information data section.
-    pub fn createProduct(self: *Self, allocator: std.mem.Allocator, input: create_product.CreateProductInput, options: create_product.Options) !create_product.CreateProductOutput {
+    pub fn createProduct(self: *Self, allocator: std.mem.Allocator, input: create_product.CreateProductInput, options: CallOptions) !create_product.CreateProductOutput {
         return create_product.execute(self, allocator, input, options);
     }
 
@@ -286,7 +287,7 @@ pub const Client = struct {
     /// DescribeProvisionedProductPlan.
     /// To create or modify the provisioned product, use
     /// ExecuteProvisionedProductPlan.
-    pub fn createProvisionedProductPlan(self: *Self, allocator: std.mem.Allocator, input: create_provisioned_product_plan.CreateProvisionedProductPlanInput, options: create_provisioned_product_plan.Options) !create_provisioned_product_plan.CreateProvisionedProductPlanOutput {
+    pub fn createProvisionedProductPlan(self: *Self, allocator: std.mem.Allocator, input: create_provisioned_product_plan.CreateProvisionedProductPlanInput, options: CallOptions) !create_provisioned_product_plan.CreateProvisionedProductPlanOutput {
         return create_provisioned_product_plan.execute(self, allocator, input, options);
     }
 
@@ -300,24 +301,24 @@ pub const Client = struct {
     /// `cloudformation:GetTemplate`
     /// IAM policy permission. This policy permission is required when using the
     /// `ImportFromPhysicalId` template source in the information data section.
-    pub fn createProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: create_provisioning_artifact.CreateProvisioningArtifactInput, options: create_provisioning_artifact.Options) !create_provisioning_artifact.CreateProvisioningArtifactOutput {
+    pub fn createProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: create_provisioning_artifact.CreateProvisioningArtifactInput, options: CallOptions) !create_provisioning_artifact.CreateProvisioningArtifactOutput {
         return create_provisioning_artifact.execute(self, allocator, input, options);
     }
 
     /// Creates a self-service action.
-    pub fn createServiceAction(self: *Self, allocator: std.mem.Allocator, input: create_service_action.CreateServiceActionInput, options: create_service_action.Options) !create_service_action.CreateServiceActionOutput {
+    pub fn createServiceAction(self: *Self, allocator: std.mem.Allocator, input: create_service_action.CreateServiceActionInput, options: CallOptions) !create_service_action.CreateServiceActionOutput {
         return create_service_action.execute(self, allocator, input, options);
     }
 
     /// Creates a TagOption.
-    pub fn createTagOption(self: *Self, allocator: std.mem.Allocator, input: create_tag_option.CreateTagOptionInput, options: create_tag_option.Options) !create_tag_option.CreateTagOptionOutput {
+    pub fn createTagOption(self: *Self, allocator: std.mem.Allocator, input: create_tag_option.CreateTagOptionInput, options: CallOptions) !create_tag_option.CreateTagOptionOutput {
         return create_tag_option.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified constraint.
     ///
     /// A delegated admin is authorized to invoke this command.
-    pub fn deleteConstraint(self: *Self, allocator: std.mem.Allocator, input: delete_constraint.DeleteConstraintInput, options: delete_constraint.Options) !delete_constraint.DeleteConstraintOutput {
+    pub fn deleteConstraint(self: *Self, allocator: std.mem.Allocator, input: delete_constraint.DeleteConstraintInput, options: CallOptions) !delete_constraint.DeleteConstraintOutput {
         return delete_constraint.execute(self, allocator, input, options);
     }
 
@@ -328,7 +329,7 @@ pub const Client = struct {
     /// products, users, constraints, or shared accounts.
     ///
     /// A delegated admin is authorized to invoke this command.
-    pub fn deletePortfolio(self: *Self, allocator: std.mem.Allocator, input: delete_portfolio.DeletePortfolioInput, options: delete_portfolio.Options) !delete_portfolio.DeletePortfolioOutput {
+    pub fn deletePortfolio(self: *Self, allocator: std.mem.Allocator, input: delete_portfolio.DeletePortfolioInput, options: CallOptions) !delete_portfolio.DeletePortfolioOutput {
         return delete_portfolio.execute(self, allocator, input, options);
     }
 
@@ -340,7 +341,7 @@ pub const Client = struct {
     ///
     /// Note that if a delegated admin is de-registered, portfolio shares created
     /// from that account are removed.
-    pub fn deletePortfolioShare(self: *Self, allocator: std.mem.Allocator, input: delete_portfolio_share.DeletePortfolioShareInput, options: delete_portfolio_share.Options) !delete_portfolio_share.DeletePortfolioShareOutput {
+    pub fn deletePortfolioShare(self: *Self, allocator: std.mem.Allocator, input: delete_portfolio_share.DeletePortfolioShareInput, options: CallOptions) !delete_portfolio_share.DeletePortfolioShareOutput {
         return delete_portfolio_share.execute(self, allocator, input, options);
     }
 
@@ -350,12 +351,12 @@ pub const Client = struct {
     /// a portfolio.
     ///
     /// A delegated admin is authorized to invoke this command.
-    pub fn deleteProduct(self: *Self, allocator: std.mem.Allocator, input: delete_product.DeleteProductInput, options: delete_product.Options) !delete_product.DeleteProductOutput {
+    pub fn deleteProduct(self: *Self, allocator: std.mem.Allocator, input: delete_product.DeleteProductInput, options: CallOptions) !delete_product.DeleteProductOutput {
         return delete_product.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified plan.
-    pub fn deleteProvisionedProductPlan(self: *Self, allocator: std.mem.Allocator, input: delete_provisioned_product_plan.DeleteProvisionedProductPlanInput, options: delete_provisioned_product_plan.Options) !delete_provisioned_product_plan.DeleteProvisionedProductPlanOutput {
+    pub fn deleteProvisionedProductPlan(self: *Self, allocator: std.mem.Allocator, input: delete_provisioned_product_plan.DeleteProvisionedProductPlanInput, options: CallOptions) !delete_provisioned_product_plan.DeleteProvisionedProductPlanOutput {
         return delete_provisioned_product_plan.execute(self, allocator, input, options);
     }
 
@@ -367,12 +368,12 @@ pub const Client = struct {
     /// You cannot delete the last provisioning artifact for a product, because a
     /// product must have at
     /// least one provisioning artifact.
-    pub fn deleteProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: delete_provisioning_artifact.DeleteProvisioningArtifactInput, options: delete_provisioning_artifact.Options) !delete_provisioning_artifact.DeleteProvisioningArtifactOutput {
+    pub fn deleteProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: delete_provisioning_artifact.DeleteProvisioningArtifactInput, options: CallOptions) !delete_provisioning_artifact.DeleteProvisioningArtifactOutput {
         return delete_provisioning_artifact.execute(self, allocator, input, options);
     }
 
     /// Deletes a self-service action.
-    pub fn deleteServiceAction(self: *Self, allocator: std.mem.Allocator, input: delete_service_action.DeleteServiceActionInput, options: delete_service_action.Options) !delete_service_action.DeleteServiceActionOutput {
+    pub fn deleteServiceAction(self: *Self, allocator: std.mem.Allocator, input: delete_service_action.DeleteServiceActionInput, options: CallOptions) !delete_service_action.DeleteServiceActionOutput {
         return delete_service_action.execute(self, allocator, input, options);
     }
 
@@ -380,31 +381,31 @@ pub const Client = struct {
     ///
     /// You cannot delete a TagOption if it is associated with a product or
     /// portfolio.
-    pub fn deleteTagOption(self: *Self, allocator: std.mem.Allocator, input: delete_tag_option.DeleteTagOptionInput, options: delete_tag_option.Options) !delete_tag_option.DeleteTagOptionOutput {
+    pub fn deleteTagOption(self: *Self, allocator: std.mem.Allocator, input: delete_tag_option.DeleteTagOptionInput, options: CallOptions) !delete_tag_option.DeleteTagOptionOutput {
         return delete_tag_option.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified constraint.
-    pub fn describeConstraint(self: *Self, allocator: std.mem.Allocator, input: describe_constraint.DescribeConstraintInput, options: describe_constraint.Options) !describe_constraint.DescribeConstraintOutput {
+    pub fn describeConstraint(self: *Self, allocator: std.mem.Allocator, input: describe_constraint.DescribeConstraintInput, options: CallOptions) !describe_constraint.DescribeConstraintOutput {
         return describe_constraint.execute(self, allocator, input, options);
     }
 
     /// Gets the status of the specified copy product operation.
-    pub fn describeCopyProductStatus(self: *Self, allocator: std.mem.Allocator, input: describe_copy_product_status.DescribeCopyProductStatusInput, options: describe_copy_product_status.Options) !describe_copy_product_status.DescribeCopyProductStatusOutput {
+    pub fn describeCopyProductStatus(self: *Self, allocator: std.mem.Allocator, input: describe_copy_product_status.DescribeCopyProductStatusInput, options: CallOptions) !describe_copy_product_status.DescribeCopyProductStatusOutput {
         return describe_copy_product_status.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified portfolio.
     ///
     /// A delegated admin is authorized to invoke this command.
-    pub fn describePortfolio(self: *Self, allocator: std.mem.Allocator, input: describe_portfolio.DescribePortfolioInput, options: describe_portfolio.Options) !describe_portfolio.DescribePortfolioOutput {
+    pub fn describePortfolio(self: *Self, allocator: std.mem.Allocator, input: describe_portfolio.DescribePortfolioInput, options: CallOptions) !describe_portfolio.DescribePortfolioOutput {
         return describe_portfolio.execute(self, allocator, input, options);
     }
 
     /// Gets the status of the specified portfolio share operation. This API can
     /// only be called
     /// by the management account in the organization or by a delegated admin.
-    pub fn describePortfolioShareStatus(self: *Self, allocator: std.mem.Allocator, input: describe_portfolio_share_status.DescribePortfolioShareStatusInput, options: describe_portfolio_share_status.Options) !describe_portfolio_share_status.DescribePortfolioShareStatusOutput {
+    pub fn describePortfolioShareStatus(self: *Self, allocator: std.mem.Allocator, input: describe_portfolio_share_status.DescribePortfolioShareStatusInput, options: CallOptions) !describe_portfolio_share_status.DescribePortfolioShareStatusOutput {
         return describe_portfolio_share_status.execute(self, allocator, input, options);
     }
 
@@ -418,7 +419,7 @@ pub const Client = struct {
     /// whether TagOptions are included with the share.
     ///
     /// The `PortfolioId` and `Type` parameters are both required.
-    pub fn describePortfolioShares(self: *Self, allocator: std.mem.Allocator, input: describe_portfolio_shares.DescribePortfolioSharesInput, options: describe_portfolio_shares.Options) !describe_portfolio_shares.DescribePortfolioSharesOutput {
+    pub fn describePortfolioShares(self: *Self, allocator: std.mem.Allocator, input: describe_portfolio_shares.DescribePortfolioSharesInput, options: CallOptions) !describe_portfolio_shares.DescribePortfolioSharesOutput {
         return describe_portfolio_shares.execute(self, allocator, input, options);
     }
 
@@ -429,34 +430,34 @@ pub const Client = struct {
     /// results
     /// in a failure.
     /// DescribeProductAsAdmin should be used instead.
-    pub fn describeProduct(self: *Self, allocator: std.mem.Allocator, input: describe_product.DescribeProductInput, options: describe_product.Options) !describe_product.DescribeProductOutput {
+    pub fn describeProduct(self: *Self, allocator: std.mem.Allocator, input: describe_product.DescribeProductInput, options: CallOptions) !describe_product.DescribeProductOutput {
         return describe_product.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified product. This operation is run with
     /// administrator access.
-    pub fn describeProductAsAdmin(self: *Self, allocator: std.mem.Allocator, input: describe_product_as_admin.DescribeProductAsAdminInput, options: describe_product_as_admin.Options) !describe_product_as_admin.DescribeProductAsAdminOutput {
+    pub fn describeProductAsAdmin(self: *Self, allocator: std.mem.Allocator, input: describe_product_as_admin.DescribeProductAsAdminInput, options: CallOptions) !describe_product_as_admin.DescribeProductAsAdminOutput {
         return describe_product_as_admin.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified product.
-    pub fn describeProductView(self: *Self, allocator: std.mem.Allocator, input: describe_product_view.DescribeProductViewInput, options: describe_product_view.Options) !describe_product_view.DescribeProductViewOutput {
+    pub fn describeProductView(self: *Self, allocator: std.mem.Allocator, input: describe_product_view.DescribeProductViewInput, options: CallOptions) !describe_product_view.DescribeProductViewOutput {
         return describe_product_view.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified provisioned product.
-    pub fn describeProvisionedProduct(self: *Self, allocator: std.mem.Allocator, input: describe_provisioned_product.DescribeProvisionedProductInput, options: describe_provisioned_product.Options) !describe_provisioned_product.DescribeProvisionedProductOutput {
+    pub fn describeProvisionedProduct(self: *Self, allocator: std.mem.Allocator, input: describe_provisioned_product.DescribeProvisionedProductInput, options: CallOptions) !describe_provisioned_product.DescribeProvisionedProductOutput {
         return describe_provisioned_product.execute(self, allocator, input, options);
     }
 
     /// Gets information about the resource changes for the specified plan.
-    pub fn describeProvisionedProductPlan(self: *Self, allocator: std.mem.Allocator, input: describe_provisioned_product_plan.DescribeProvisionedProductPlanInput, options: describe_provisioned_product_plan.Options) !describe_provisioned_product_plan.DescribeProvisionedProductPlanOutput {
+    pub fn describeProvisionedProductPlan(self: *Self, allocator: std.mem.Allocator, input: describe_provisioned_product_plan.DescribeProvisionedProductPlanInput, options: CallOptions) !describe_provisioned_product_plan.DescribeProvisionedProductPlanOutput {
         return describe_provisioned_product_plan.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified provisioning artifact (also known as a
     /// version) for the specified product.
-    pub fn describeProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: describe_provisioning_artifact.DescribeProvisioningArtifactInput, options: describe_provisioning_artifact.Options) !describe_provisioning_artifact.DescribeProvisioningArtifactOutput {
+    pub fn describeProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: describe_provisioning_artifact.DescribeProvisioningArtifactInput, options: CallOptions) !describe_provisioning_artifact.DescribeProvisioningArtifactOutput {
         return describe_provisioning_artifact.execute(self, allocator, input, options);
     }
 
@@ -474,7 +475,7 @@ pub const Client = struct {
     /// Tags[*N*]:*Value*".
     /// Tag the provisioned product with the value
     /// `sc-tagoption-conflict-portfolioId-productId`.
-    pub fn describeProvisioningParameters(self: *Self, allocator: std.mem.Allocator, input: describe_provisioning_parameters.DescribeProvisioningParametersInput, options: describe_provisioning_parameters.Options) !describe_provisioning_parameters.DescribeProvisioningParametersOutput {
+    pub fn describeProvisioningParameters(self: *Self, allocator: std.mem.Allocator, input: describe_provisioning_parameters.DescribeProvisioningParametersInput, options: CallOptions) !describe_provisioning_parameters.DescribeProvisioningParametersOutput {
         return describe_provisioning_parameters.execute(self, allocator, input, options);
     }
 
@@ -490,23 +491,23 @@ pub const Client = struct {
     /// owner will no longer be able to describe the records, but will be able to
     /// use ListRecordHistory to see the product's history from when he was the
     /// owner.
-    pub fn describeRecord(self: *Self, allocator: std.mem.Allocator, input: describe_record.DescribeRecordInput, options: describe_record.Options) !describe_record.DescribeRecordOutput {
+    pub fn describeRecord(self: *Self, allocator: std.mem.Allocator, input: describe_record.DescribeRecordInput, options: CallOptions) !describe_record.DescribeRecordOutput {
         return describe_record.execute(self, allocator, input, options);
     }
 
     /// Describes a self-service action.
-    pub fn describeServiceAction(self: *Self, allocator: std.mem.Allocator, input: describe_service_action.DescribeServiceActionInput, options: describe_service_action.Options) !describe_service_action.DescribeServiceActionOutput {
+    pub fn describeServiceAction(self: *Self, allocator: std.mem.Allocator, input: describe_service_action.DescribeServiceActionInput, options: CallOptions) !describe_service_action.DescribeServiceActionOutput {
         return describe_service_action.execute(self, allocator, input, options);
     }
 
     /// Finds the default parameters for a specific self-service action on a
     /// specific provisioned product and returns a map of the results to the user.
-    pub fn describeServiceActionExecutionParameters(self: *Self, allocator: std.mem.Allocator, input: describe_service_action_execution_parameters.DescribeServiceActionExecutionParametersInput, options: describe_service_action_execution_parameters.Options) !describe_service_action_execution_parameters.DescribeServiceActionExecutionParametersOutput {
+    pub fn describeServiceActionExecutionParameters(self: *Self, allocator: std.mem.Allocator, input: describe_service_action_execution_parameters.DescribeServiceActionExecutionParametersInput, options: CallOptions) !describe_service_action_execution_parameters.DescribeServiceActionExecutionParametersOutput {
         return describe_service_action_execution_parameters.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified TagOption.
-    pub fn describeTagOption(self: *Self, allocator: std.mem.Allocator, input: describe_tag_option.DescribeTagOptionInput, options: describe_tag_option.Options) !describe_tag_option.DescribeTagOptionOutput {
+    pub fn describeTagOption(self: *Self, allocator: std.mem.Allocator, input: describe_tag_option.DescribeTagOptionInput, options: CallOptions) !describe_tag_option.DescribeTagOptionOutput {
         return describe_tag_option.execute(self, allocator, input, options);
     }
 
@@ -533,12 +534,12 @@ pub const Client = struct {
     /// after
     /// disabling Service Catalog access will retain access to the previously shared
     /// portfolio.
-    pub fn disableAwsOrganizationsAccess(self: *Self, allocator: std.mem.Allocator, input: disable_aws_organizations_access.DisableAWSOrganizationsAccessInput, options: disable_aws_organizations_access.Options) !disable_aws_organizations_access.DisableAWSOrganizationsAccessOutput {
+    pub fn disableAwsOrganizationsAccess(self: *Self, allocator: std.mem.Allocator, input: disable_aws_organizations_access.DisableAWSOrganizationsAccessInput, options: CallOptions) !disable_aws_organizations_access.DisableAWSOrganizationsAccessOutput {
         return disable_aws_organizations_access.execute(self, allocator, input, options);
     }
 
     /// Disassociates the specified budget from the specified resource.
-    pub fn disassociateBudgetFromResource(self: *Self, allocator: std.mem.Allocator, input: disassociate_budget_from_resource.DisassociateBudgetFromResourceInput, options: disassociate_budget_from_resource.Options) !disassociate_budget_from_resource.DisassociateBudgetFromResourceOutput {
+    pub fn disassociateBudgetFromResource(self: *Self, allocator: std.mem.Allocator, input: disassociate_budget_from_resource.DisassociateBudgetFromResourceInput, options: CallOptions) !disassociate_budget_from_resource.DisassociateBudgetFromResourceOutput {
         return disassociate_budget_from_resource.execute(self, allocator, input, options);
     }
 
@@ -571,25 +572,25 @@ pub const Client = struct {
     /// and then ensure you disassociate any `IAM_PATTERN` principals that match the
     /// principal
     /// whose access you are removing.
-    pub fn disassociatePrincipalFromPortfolio(self: *Self, allocator: std.mem.Allocator, input: disassociate_principal_from_portfolio.DisassociatePrincipalFromPortfolioInput, options: disassociate_principal_from_portfolio.Options) !disassociate_principal_from_portfolio.DisassociatePrincipalFromPortfolioOutput {
+    pub fn disassociatePrincipalFromPortfolio(self: *Self, allocator: std.mem.Allocator, input: disassociate_principal_from_portfolio.DisassociatePrincipalFromPortfolioInput, options: CallOptions) !disassociate_principal_from_portfolio.DisassociatePrincipalFromPortfolioOutput {
         return disassociate_principal_from_portfolio.execute(self, allocator, input, options);
     }
 
     /// Disassociates the specified product from the specified portfolio.
     ///
     /// A delegated admin is authorized to invoke this command.
-    pub fn disassociateProductFromPortfolio(self: *Self, allocator: std.mem.Allocator, input: disassociate_product_from_portfolio.DisassociateProductFromPortfolioInput, options: disassociate_product_from_portfolio.Options) !disassociate_product_from_portfolio.DisassociateProductFromPortfolioOutput {
+    pub fn disassociateProductFromPortfolio(self: *Self, allocator: std.mem.Allocator, input: disassociate_product_from_portfolio.DisassociateProductFromPortfolioInput, options: CallOptions) !disassociate_product_from_portfolio.DisassociateProductFromPortfolioOutput {
         return disassociate_product_from_portfolio.execute(self, allocator, input, options);
     }
 
     /// Disassociates the specified self-service action association from the
     /// specified provisioning artifact.
-    pub fn disassociateServiceActionFromProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: disassociate_service_action_from_provisioning_artifact.DisassociateServiceActionFromProvisioningArtifactInput, options: disassociate_service_action_from_provisioning_artifact.Options) !disassociate_service_action_from_provisioning_artifact.DisassociateServiceActionFromProvisioningArtifactOutput {
+    pub fn disassociateServiceActionFromProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: disassociate_service_action_from_provisioning_artifact.DisassociateServiceActionFromProvisioningArtifactInput, options: CallOptions) !disassociate_service_action_from_provisioning_artifact.DisassociateServiceActionFromProvisioningArtifactOutput {
         return disassociate_service_action_from_provisioning_artifact.execute(self, allocator, input, options);
     }
 
     /// Disassociates the specified TagOption from the specified resource.
-    pub fn disassociateTagOptionFromResource(self: *Self, allocator: std.mem.Allocator, input: disassociate_tag_option_from_resource.DisassociateTagOptionFromResourceInput, options: disassociate_tag_option_from_resource.Options) !disassociate_tag_option_from_resource.DisassociateTagOptionFromResourceOutput {
+    pub fn disassociateTagOptionFromResource(self: *Self, allocator: std.mem.Allocator, input: disassociate_tag_option_from_resource.DisassociateTagOptionFromResourceInput, options: CallOptions) !disassociate_tag_option_from_resource.DisassociateTagOptionFromResourceOutput {
         return disassociate_tag_option_from_resource.execute(self, allocator, input, options);
     }
 
@@ -619,18 +620,18 @@ pub const Client = struct {
     /// might still be able to create or manage Amazon Web Services resources when
     /// it is no longer
     /// authorized to do so. Amazon Web Services is working to resolve this issue.
-    pub fn enableAwsOrganizationsAccess(self: *Self, allocator: std.mem.Allocator, input: enable_aws_organizations_access.EnableAWSOrganizationsAccessInput, options: enable_aws_organizations_access.Options) !enable_aws_organizations_access.EnableAWSOrganizationsAccessOutput {
+    pub fn enableAwsOrganizationsAccess(self: *Self, allocator: std.mem.Allocator, input: enable_aws_organizations_access.EnableAWSOrganizationsAccessInput, options: CallOptions) !enable_aws_organizations_access.EnableAWSOrganizationsAccessOutput {
         return enable_aws_organizations_access.execute(self, allocator, input, options);
     }
 
     /// Provisions or modifies a product based on the resource changes for the
     /// specified plan.
-    pub fn executeProvisionedProductPlan(self: *Self, allocator: std.mem.Allocator, input: execute_provisioned_product_plan.ExecuteProvisionedProductPlanInput, options: execute_provisioned_product_plan.Options) !execute_provisioned_product_plan.ExecuteProvisionedProductPlanOutput {
+    pub fn executeProvisionedProductPlan(self: *Self, allocator: std.mem.Allocator, input: execute_provisioned_product_plan.ExecuteProvisionedProductPlanInput, options: CallOptions) !execute_provisioned_product_plan.ExecuteProvisionedProductPlanOutput {
         return execute_provisioned_product_plan.execute(self, allocator, input, options);
     }
 
     /// Executes a self-service action against a provisioned product.
-    pub fn executeProvisionedProductServiceAction(self: *Self, allocator: std.mem.Allocator, input: execute_provisioned_product_service_action.ExecuteProvisionedProductServiceActionInput, options: execute_provisioned_product_service_action.Options) !execute_provisioned_product_service_action.ExecuteProvisionedProductServiceActionOutput {
+    pub fn executeProvisionedProductServiceAction(self: *Self, allocator: std.mem.Allocator, input: execute_provisioned_product_service_action.ExecuteProvisionedProductServiceActionInput, options: CallOptions) !execute_provisioned_product_service_action.ExecuteProvisionedProductServiceActionOutput {
         return execute_provisioned_product_service_action.execute(self, allocator, input, options);
     }
 
@@ -638,14 +639,14 @@ pub const Client = struct {
     /// can only be
     /// called by the management account in the organization or by a delegated
     /// admin.
-    pub fn getAwsOrganizationsAccessStatus(self: *Self, allocator: std.mem.Allocator, input: get_aws_organizations_access_status.GetAWSOrganizationsAccessStatusInput, options: get_aws_organizations_access_status.Options) !get_aws_organizations_access_status.GetAWSOrganizationsAccessStatusOutput {
+    pub fn getAwsOrganizationsAccessStatus(self: *Self, allocator: std.mem.Allocator, input: get_aws_organizations_access_status.GetAWSOrganizationsAccessStatusInput, options: CallOptions) !get_aws_organizations_access_status.GetAWSOrganizationsAccessStatusOutput {
         return get_aws_organizations_access_status.execute(self, allocator, input, options);
     }
 
     /// This API takes either a `ProvisonedProductId` or a `ProvisionedProductName`,
     /// along with a list of one or more output keys, and responds with the
     /// key/value pairs of those outputs.
-    pub fn getProvisionedProductOutputs(self: *Self, allocator: std.mem.Allocator, input: get_provisioned_product_outputs.GetProvisionedProductOutputsInput, options: get_provisioned_product_outputs.Options) !get_provisioned_product_outputs.GetProvisionedProductOutputsOutput {
+    pub fn getProvisionedProductOutputs(self: *Self, allocator: std.mem.Allocator, input: get_provisioned_product_outputs.GetProvisionedProductOutputsInput, options: CallOptions) !get_provisioned_product_outputs.GetProvisionedProductOutputsOutput {
         return get_provisioned_product_outputs.execute(self, allocator, input, options);
     }
 
@@ -681,7 +682,7 @@ pub const Client = struct {
     /// You can only import one provisioned product at a time. The product's
     /// CloudFormation stack must have the
     /// `IMPORT_COMPLETE` status before you import another.
-    pub fn importAsProvisionedProduct(self: *Self, allocator: std.mem.Allocator, input: import_as_provisioned_product.ImportAsProvisionedProductInput, options: import_as_provisioned_product.Options) !import_as_provisioned_product.ImportAsProvisionedProductOutput {
+    pub fn importAsProvisionedProduct(self: *Self, allocator: std.mem.Allocator, input: import_as_provisioned_product.ImportAsProvisionedProductInput, options: CallOptions) !import_as_provisioned_product.ImportAsProvisionedProductOutput {
         return import_as_provisioned_product.execute(self, allocator, input, options);
     }
 
@@ -690,17 +691,17 @@ pub const Client = struct {
     /// this account. By specifying the `PortfolioShareType`, you can list
     /// portfolios for which
     /// organizational shares were accepted by this account.
-    pub fn listAcceptedPortfolioShares(self: *Self, allocator: std.mem.Allocator, input: list_accepted_portfolio_shares.ListAcceptedPortfolioSharesInput, options: list_accepted_portfolio_shares.Options) !list_accepted_portfolio_shares.ListAcceptedPortfolioSharesOutput {
+    pub fn listAcceptedPortfolioShares(self: *Self, allocator: std.mem.Allocator, input: list_accepted_portfolio_shares.ListAcceptedPortfolioSharesInput, options: CallOptions) !list_accepted_portfolio_shares.ListAcceptedPortfolioSharesOutput {
         return list_accepted_portfolio_shares.execute(self, allocator, input, options);
     }
 
     /// Lists all the budgets associated to the specified resource.
-    pub fn listBudgetsForResource(self: *Self, allocator: std.mem.Allocator, input: list_budgets_for_resource.ListBudgetsForResourceInput, options: list_budgets_for_resource.Options) !list_budgets_for_resource.ListBudgetsForResourceOutput {
+    pub fn listBudgetsForResource(self: *Self, allocator: std.mem.Allocator, input: list_budgets_for_resource.ListBudgetsForResourceInput, options: CallOptions) !list_budgets_for_resource.ListBudgetsForResourceOutput {
         return list_budgets_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists the constraints for the specified portfolio and product.
-    pub fn listConstraintsForPortfolio(self: *Self, allocator: std.mem.Allocator, input: list_constraints_for_portfolio.ListConstraintsForPortfolioInput, options: list_constraints_for_portfolio.Options) !list_constraints_for_portfolio.ListConstraintsForPortfolioOutput {
+    pub fn listConstraintsForPortfolio(self: *Self, allocator: std.mem.Allocator, input: list_constraints_for_portfolio.ListConstraintsForPortfolioInput, options: CallOptions) !list_constraints_for_portfolio.ListConstraintsForPortfolioOutput {
         return list_constraints_for_portfolio.execute(self, allocator, input, options);
     }
 
@@ -726,7 +727,7 @@ pub const Client = struct {
     /// see [Granting users
     /// access](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/catalogs_portfolios_users.html)
     /// in the *Service Catalog User Guide*.
-    pub fn listLaunchPaths(self: *Self, allocator: std.mem.Allocator, input: list_launch_paths.ListLaunchPathsInput, options: list_launch_paths.Options) !list_launch_paths.ListLaunchPathsOutput {
+    pub fn listLaunchPaths(self: *Self, allocator: std.mem.Allocator, input: list_launch_paths.ListLaunchPathsInput, options: CallOptions) !list_launch_paths.ListLaunchPathsOutput {
         return list_launch_paths.execute(self, allocator, input, options);
     }
 
@@ -738,7 +739,7 @@ pub const Client = struct {
     ///
     /// If a delegated admin is de-registered, they can no longer perform this
     /// operation.
-    pub fn listOrganizationPortfolioAccess(self: *Self, allocator: std.mem.Allocator, input: list_organization_portfolio_access.ListOrganizationPortfolioAccessInput, options: list_organization_portfolio_access.Options) !list_organization_portfolio_access.ListOrganizationPortfolioAccessOutput {
+    pub fn listOrganizationPortfolioAccess(self: *Self, allocator: std.mem.Allocator, input: list_organization_portfolio_access.ListOrganizationPortfolioAccessInput, options: CallOptions) !list_organization_portfolio_access.ListOrganizationPortfolioAccessOutput {
         return list_organization_portfolio_access.execute(self, allocator, input, options);
     }
 
@@ -747,62 +748,62 @@ pub const Client = struct {
     /// A delegated admin can list the accounts that have access to the shared
     /// portfolio. Note that if a delegated admin is de-registered, they can no
     /// longer perform this operation.
-    pub fn listPortfolioAccess(self: *Self, allocator: std.mem.Allocator, input: list_portfolio_access.ListPortfolioAccessInput, options: list_portfolio_access.Options) !list_portfolio_access.ListPortfolioAccessOutput {
+    pub fn listPortfolioAccess(self: *Self, allocator: std.mem.Allocator, input: list_portfolio_access.ListPortfolioAccessInput, options: CallOptions) !list_portfolio_access.ListPortfolioAccessOutput {
         return list_portfolio_access.execute(self, allocator, input, options);
     }
 
     /// Lists all portfolios in the catalog.
-    pub fn listPortfolios(self: *Self, allocator: std.mem.Allocator, input: list_portfolios.ListPortfoliosInput, options: list_portfolios.Options) !list_portfolios.ListPortfoliosOutput {
+    pub fn listPortfolios(self: *Self, allocator: std.mem.Allocator, input: list_portfolios.ListPortfoliosInput, options: CallOptions) !list_portfolios.ListPortfoliosOutput {
         return list_portfolios.execute(self, allocator, input, options);
     }
 
     /// Lists all portfolios that the specified product is associated with.
-    pub fn listPortfoliosForProduct(self: *Self, allocator: std.mem.Allocator, input: list_portfolios_for_product.ListPortfoliosForProductInput, options: list_portfolios_for_product.Options) !list_portfolios_for_product.ListPortfoliosForProductOutput {
+    pub fn listPortfoliosForProduct(self: *Self, allocator: std.mem.Allocator, input: list_portfolios_for_product.ListPortfoliosForProductInput, options: CallOptions) !list_portfolios_for_product.ListPortfoliosForProductOutput {
         return list_portfolios_for_product.execute(self, allocator, input, options);
     }
 
     /// Lists all `PrincipalARN`s and corresponding `PrincipalType`s associated with
     /// the specified portfolio.
-    pub fn listPrincipalsForPortfolio(self: *Self, allocator: std.mem.Allocator, input: list_principals_for_portfolio.ListPrincipalsForPortfolioInput, options: list_principals_for_portfolio.Options) !list_principals_for_portfolio.ListPrincipalsForPortfolioOutput {
+    pub fn listPrincipalsForPortfolio(self: *Self, allocator: std.mem.Allocator, input: list_principals_for_portfolio.ListPrincipalsForPortfolioInput, options: CallOptions) !list_principals_for_portfolio.ListPrincipalsForPortfolioOutput {
         return list_principals_for_portfolio.execute(self, allocator, input, options);
     }
 
     /// Lists the plans for the specified provisioned product or all plans to which
     /// the user has access.
-    pub fn listProvisionedProductPlans(self: *Self, allocator: std.mem.Allocator, input: list_provisioned_product_plans.ListProvisionedProductPlansInput, options: list_provisioned_product_plans.Options) !list_provisioned_product_plans.ListProvisionedProductPlansOutput {
+    pub fn listProvisionedProductPlans(self: *Self, allocator: std.mem.Allocator, input: list_provisioned_product_plans.ListProvisionedProductPlansInput, options: CallOptions) !list_provisioned_product_plans.ListProvisionedProductPlansOutput {
         return list_provisioned_product_plans.execute(self, allocator, input, options);
     }
 
     /// Lists all provisioning artifacts (also known as versions) for the specified
     /// product.
-    pub fn listProvisioningArtifacts(self: *Self, allocator: std.mem.Allocator, input: list_provisioning_artifacts.ListProvisioningArtifactsInput, options: list_provisioning_artifacts.Options) !list_provisioning_artifacts.ListProvisioningArtifactsOutput {
+    pub fn listProvisioningArtifacts(self: *Self, allocator: std.mem.Allocator, input: list_provisioning_artifacts.ListProvisioningArtifactsInput, options: CallOptions) !list_provisioning_artifacts.ListProvisioningArtifactsOutput {
         return list_provisioning_artifacts.execute(self, allocator, input, options);
     }
 
     /// Lists all provisioning artifacts (also known as versions) for the specified
     /// self-service action.
-    pub fn listProvisioningArtifactsForServiceAction(self: *Self, allocator: std.mem.Allocator, input: list_provisioning_artifacts_for_service_action.ListProvisioningArtifactsForServiceActionInput, options: list_provisioning_artifacts_for_service_action.Options) !list_provisioning_artifacts_for_service_action.ListProvisioningArtifactsForServiceActionOutput {
+    pub fn listProvisioningArtifactsForServiceAction(self: *Self, allocator: std.mem.Allocator, input: list_provisioning_artifacts_for_service_action.ListProvisioningArtifactsForServiceActionInput, options: CallOptions) !list_provisioning_artifacts_for_service_action.ListProvisioningArtifactsForServiceActionOutput {
         return list_provisioning_artifacts_for_service_action.execute(self, allocator, input, options);
     }
 
     /// Lists the specified requests or all performed requests.
-    pub fn listRecordHistory(self: *Self, allocator: std.mem.Allocator, input: list_record_history.ListRecordHistoryInput, options: list_record_history.Options) !list_record_history.ListRecordHistoryOutput {
+    pub fn listRecordHistory(self: *Self, allocator: std.mem.Allocator, input: list_record_history.ListRecordHistoryInput, options: CallOptions) !list_record_history.ListRecordHistoryOutput {
         return list_record_history.execute(self, allocator, input, options);
     }
 
     /// Lists the resources associated with the specified TagOption.
-    pub fn listResourcesForTagOption(self: *Self, allocator: std.mem.Allocator, input: list_resources_for_tag_option.ListResourcesForTagOptionInput, options: list_resources_for_tag_option.Options) !list_resources_for_tag_option.ListResourcesForTagOptionOutput {
+    pub fn listResourcesForTagOption(self: *Self, allocator: std.mem.Allocator, input: list_resources_for_tag_option.ListResourcesForTagOptionInput, options: CallOptions) !list_resources_for_tag_option.ListResourcesForTagOptionOutput {
         return list_resources_for_tag_option.execute(self, allocator, input, options);
     }
 
     /// Lists all self-service actions.
-    pub fn listServiceActions(self: *Self, allocator: std.mem.Allocator, input: list_service_actions.ListServiceActionsInput, options: list_service_actions.Options) !list_service_actions.ListServiceActionsOutput {
+    pub fn listServiceActions(self: *Self, allocator: std.mem.Allocator, input: list_service_actions.ListServiceActionsInput, options: CallOptions) !list_service_actions.ListServiceActionsOutput {
         return list_service_actions.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of self-service actions associated with the
     /// specified Product ID and Provisioning Artifact ID.
-    pub fn listServiceActionsForProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: list_service_actions_for_provisioning_artifact.ListServiceActionsForProvisioningArtifactInput, options: list_service_actions_for_provisioning_artifact.Options) !list_service_actions_for_provisioning_artifact.ListServiceActionsForProvisioningArtifactOutput {
+    pub fn listServiceActionsForProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: list_service_actions_for_provisioning_artifact.ListServiceActionsForProvisioningArtifactInput, options: CallOptions) !list_service_actions_for_provisioning_artifact.ListServiceActionsForProvisioningArtifactOutput {
         return list_service_actions_for_provisioning_artifact.execute(self, allocator, input, options);
     }
 
@@ -810,30 +811,30 @@ pub const Client = struct {
     /// the specified `CFN_STACKSET` type provisioned product. You can filter for
     /// stack instances that are associated with a specific Amazon Web Services
     /// account name or Region.
-    pub fn listStackInstancesForProvisionedProduct(self: *Self, allocator: std.mem.Allocator, input: list_stack_instances_for_provisioned_product.ListStackInstancesForProvisionedProductInput, options: list_stack_instances_for_provisioned_product.Options) !list_stack_instances_for_provisioned_product.ListStackInstancesForProvisionedProductOutput {
+    pub fn listStackInstancesForProvisionedProduct(self: *Self, allocator: std.mem.Allocator, input: list_stack_instances_for_provisioned_product.ListStackInstancesForProvisionedProductInput, options: CallOptions) !list_stack_instances_for_provisioned_product.ListStackInstancesForProvisionedProductOutput {
         return list_stack_instances_for_provisioned_product.execute(self, allocator, input, options);
     }
 
     /// Lists the specified TagOptions or all TagOptions.
-    pub fn listTagOptions(self: *Self, allocator: std.mem.Allocator, input: list_tag_options.ListTagOptionsInput, options: list_tag_options.Options) !list_tag_options.ListTagOptionsOutput {
+    pub fn listTagOptions(self: *Self, allocator: std.mem.Allocator, input: list_tag_options.ListTagOptionsInput, options: CallOptions) !list_tag_options.ListTagOptionsOutput {
         return list_tag_options.execute(self, allocator, input, options);
     }
 
     /// Notifies the result
     /// of the provisioning engine execution.
-    pub fn notifyProvisionProductEngineWorkflowResult(self: *Self, allocator: std.mem.Allocator, input: notify_provision_product_engine_workflow_result.NotifyProvisionProductEngineWorkflowResultInput, options: notify_provision_product_engine_workflow_result.Options) !notify_provision_product_engine_workflow_result.NotifyProvisionProductEngineWorkflowResultOutput {
+    pub fn notifyProvisionProductEngineWorkflowResult(self: *Self, allocator: std.mem.Allocator, input: notify_provision_product_engine_workflow_result.NotifyProvisionProductEngineWorkflowResultInput, options: CallOptions) !notify_provision_product_engine_workflow_result.NotifyProvisionProductEngineWorkflowResultOutput {
         return notify_provision_product_engine_workflow_result.execute(self, allocator, input, options);
     }
 
     /// Notifies the result
     /// of the terminate engine execution.
-    pub fn notifyTerminateProvisionedProductEngineWorkflowResult(self: *Self, allocator: std.mem.Allocator, input: notify_terminate_provisioned_product_engine_workflow_result.NotifyTerminateProvisionedProductEngineWorkflowResultInput, options: notify_terminate_provisioned_product_engine_workflow_result.Options) !notify_terminate_provisioned_product_engine_workflow_result.NotifyTerminateProvisionedProductEngineWorkflowResultOutput {
+    pub fn notifyTerminateProvisionedProductEngineWorkflowResult(self: *Self, allocator: std.mem.Allocator, input: notify_terminate_provisioned_product_engine_workflow_result.NotifyTerminateProvisionedProductEngineWorkflowResultInput, options: CallOptions) !notify_terminate_provisioned_product_engine_workflow_result.NotifyTerminateProvisionedProductEngineWorkflowResultOutput {
         return notify_terminate_provisioned_product_engine_workflow_result.execute(self, allocator, input, options);
     }
 
     /// Notifies the result
     /// of the update engine execution.
-    pub fn notifyUpdateProvisionedProductEngineWorkflowResult(self: *Self, allocator: std.mem.Allocator, input: notify_update_provisioned_product_engine_workflow_result.NotifyUpdateProvisionedProductEngineWorkflowResultInput, options: notify_update_provisioned_product_engine_workflow_result.Options) !notify_update_provisioned_product_engine_workflow_result.NotifyUpdateProvisionedProductEngineWorkflowResultOutput {
+    pub fn notifyUpdateProvisionedProductEngineWorkflowResult(self: *Self, allocator: std.mem.Allocator, input: notify_update_provisioned_product_engine_workflow_result.NotifyUpdateProvisionedProductEngineWorkflowResultInput, options: CallOptions) !notify_update_provisioned_product_engine_workflow_result.NotifyUpdateProvisionedProductEngineWorkflowResultOutput {
         return notify_update_provisioned_product_engine_workflow_result.execute(self, allocator, input, options);
     }
 
@@ -869,36 +870,36 @@ pub const Client = struct {
     /// see [Granting users
     /// access](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/catalogs_portfolios_users.html)
     /// in the *Service Catalog User Guide*.
-    pub fn provisionProduct(self: *Self, allocator: std.mem.Allocator, input: provision_product.ProvisionProductInput, options: provision_product.Options) !provision_product.ProvisionProductOutput {
+    pub fn provisionProduct(self: *Self, allocator: std.mem.Allocator, input: provision_product.ProvisionProductInput, options: CallOptions) !provision_product.ProvisionProductOutput {
         return provision_product.execute(self, allocator, input, options);
     }
 
     /// Rejects an offer to share the specified portfolio.
-    pub fn rejectPortfolioShare(self: *Self, allocator: std.mem.Allocator, input: reject_portfolio_share.RejectPortfolioShareInput, options: reject_portfolio_share.Options) !reject_portfolio_share.RejectPortfolioShareOutput {
+    pub fn rejectPortfolioShare(self: *Self, allocator: std.mem.Allocator, input: reject_portfolio_share.RejectPortfolioShareInput, options: CallOptions) !reject_portfolio_share.RejectPortfolioShareOutput {
         return reject_portfolio_share.execute(self, allocator, input, options);
     }
 
     /// Lists the provisioned products that are available (not terminated).
     ///
     /// To use additional filtering, see SearchProvisionedProducts.
-    pub fn scanProvisionedProducts(self: *Self, allocator: std.mem.Allocator, input: scan_provisioned_products.ScanProvisionedProductsInput, options: scan_provisioned_products.Options) !scan_provisioned_products.ScanProvisionedProductsOutput {
+    pub fn scanProvisionedProducts(self: *Self, allocator: std.mem.Allocator, input: scan_provisioned_products.ScanProvisionedProductsInput, options: CallOptions) !scan_provisioned_products.ScanProvisionedProductsOutput {
         return scan_provisioned_products.execute(self, allocator, input, options);
     }
 
     /// Gets information about the products to which the caller has access.
-    pub fn searchProducts(self: *Self, allocator: std.mem.Allocator, input: search_products.SearchProductsInput, options: search_products.Options) !search_products.SearchProductsOutput {
+    pub fn searchProducts(self: *Self, allocator: std.mem.Allocator, input: search_products.SearchProductsInput, options: CallOptions) !search_products.SearchProductsOutput {
         return search_products.execute(self, allocator, input, options);
     }
 
     /// Gets information about the products for the specified portfolio or all
     /// products.
-    pub fn searchProductsAsAdmin(self: *Self, allocator: std.mem.Allocator, input: search_products_as_admin.SearchProductsAsAdminInput, options: search_products_as_admin.Options) !search_products_as_admin.SearchProductsAsAdminOutput {
+    pub fn searchProductsAsAdmin(self: *Self, allocator: std.mem.Allocator, input: search_products_as_admin.SearchProductsAsAdminInput, options: CallOptions) !search_products_as_admin.SearchProductsAsAdminOutput {
         return search_products_as_admin.execute(self, allocator, input, options);
     }
 
     /// Gets information about the provisioned products that meet the specified
     /// criteria.
-    pub fn searchProvisionedProducts(self: *Self, allocator: std.mem.Allocator, input: search_provisioned_products.SearchProvisionedProductsInput, options: search_provisioned_products.Options) !search_provisioned_products.SearchProvisionedProductsOutput {
+    pub fn searchProvisionedProducts(self: *Self, allocator: std.mem.Allocator, input: search_provisioned_products.SearchProvisionedProductsInput, options: CallOptions) !search_provisioned_products.SearchProvisionedProductsOutput {
         return search_provisioned_products.execute(self, allocator, input, options);
     }
 
@@ -908,19 +909,19 @@ pub const Client = struct {
     /// product.
     ///
     /// You can check the status of this request using DescribeRecord.
-    pub fn terminateProvisionedProduct(self: *Self, allocator: std.mem.Allocator, input: terminate_provisioned_product.TerminateProvisionedProductInput, options: terminate_provisioned_product.Options) !terminate_provisioned_product.TerminateProvisionedProductOutput {
+    pub fn terminateProvisionedProduct(self: *Self, allocator: std.mem.Allocator, input: terminate_provisioned_product.TerminateProvisionedProductInput, options: CallOptions) !terminate_provisioned_product.TerminateProvisionedProductOutput {
         return terminate_provisioned_product.execute(self, allocator, input, options);
     }
 
     /// Updates the specified constraint.
-    pub fn updateConstraint(self: *Self, allocator: std.mem.Allocator, input: update_constraint.UpdateConstraintInput, options: update_constraint.Options) !update_constraint.UpdateConstraintOutput {
+    pub fn updateConstraint(self: *Self, allocator: std.mem.Allocator, input: update_constraint.UpdateConstraintInput, options: CallOptions) !update_constraint.UpdateConstraintOutput {
         return update_constraint.execute(self, allocator, input, options);
     }
 
     /// Updates the specified portfolio.
     ///
     /// You cannot update a product that was shared with you.
-    pub fn updatePortfolio(self: *Self, allocator: std.mem.Allocator, input: update_portfolio.UpdatePortfolioInput, options: update_portfolio.Options) !update_portfolio.UpdatePortfolioOutput {
+    pub fn updatePortfolio(self: *Self, allocator: std.mem.Allocator, input: update_portfolio.UpdatePortfolioInput, options: CallOptions) !update_portfolio.UpdatePortfolioOutput {
         return update_portfolio.execute(self, allocator, input, options);
     }
 
@@ -957,12 +958,12 @@ pub const Client = struct {
     /// configuration,
     /// the `PrincipalARN` must already exist in the recipient account before it can
     /// be associated.
-    pub fn updatePortfolioShare(self: *Self, allocator: std.mem.Allocator, input: update_portfolio_share.UpdatePortfolioShareInput, options: update_portfolio_share.Options) !update_portfolio_share.UpdatePortfolioShareOutput {
+    pub fn updatePortfolioShare(self: *Self, allocator: std.mem.Allocator, input: update_portfolio_share.UpdatePortfolioShareInput, options: CallOptions) !update_portfolio_share.UpdatePortfolioShareOutput {
         return update_portfolio_share.execute(self, allocator, input, options);
     }
 
     /// Updates the specified product.
-    pub fn updateProduct(self: *Self, allocator: std.mem.Allocator, input: update_product.UpdateProductInput, options: update_product.Options) !update_product.UpdateProductOutput {
+    pub fn updateProduct(self: *Self, allocator: std.mem.Allocator, input: update_product.UpdateProductInput, options: CallOptions) !update_product.UpdateProductOutput {
         return update_product.execute(self, allocator, input, options);
     }
 
@@ -976,12 +977,12 @@ pub const Client = struct {
     /// entirely.
     ///
     /// You can check the status of this request using DescribeRecord.
-    pub fn updateProvisionedProduct(self: *Self, allocator: std.mem.Allocator, input: update_provisioned_product.UpdateProvisionedProductInput, options: update_provisioned_product.Options) !update_provisioned_product.UpdateProvisionedProductOutput {
+    pub fn updateProvisionedProduct(self: *Self, allocator: std.mem.Allocator, input: update_provisioned_product.UpdateProvisionedProductInput, options: CallOptions) !update_provisioned_product.UpdateProvisionedProductOutput {
         return update_provisioned_product.execute(self, allocator, input, options);
     }
 
     /// Requests updates to the properties of the specified provisioned product.
-    pub fn updateProvisionedProductProperties(self: *Self, allocator: std.mem.Allocator, input: update_provisioned_product_properties.UpdateProvisionedProductPropertiesInput, options: update_provisioned_product_properties.Options) !update_provisioned_product_properties.UpdateProvisionedProductPropertiesOutput {
+    pub fn updateProvisionedProductProperties(self: *Self, allocator: std.mem.Allocator, input: update_provisioned_product_properties.UpdateProvisionedProductPropertiesInput, options: CallOptions) !update_provisioned_product_properties.UpdateProvisionedProductPropertiesOutput {
         return update_provisioned_product_properties.execute(self, allocator, input, options);
     }
 
@@ -990,17 +991,17 @@ pub const Client = struct {
     ///
     /// You cannot update a provisioning artifact for a product that was shared with
     /// you.
-    pub fn updateProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: update_provisioning_artifact.UpdateProvisioningArtifactInput, options: update_provisioning_artifact.Options) !update_provisioning_artifact.UpdateProvisioningArtifactOutput {
+    pub fn updateProvisioningArtifact(self: *Self, allocator: std.mem.Allocator, input: update_provisioning_artifact.UpdateProvisioningArtifactInput, options: CallOptions) !update_provisioning_artifact.UpdateProvisioningArtifactOutput {
         return update_provisioning_artifact.execute(self, allocator, input, options);
     }
 
     /// Updates a self-service action.
-    pub fn updateServiceAction(self: *Self, allocator: std.mem.Allocator, input: update_service_action.UpdateServiceActionInput, options: update_service_action.Options) !update_service_action.UpdateServiceActionOutput {
+    pub fn updateServiceAction(self: *Self, allocator: std.mem.Allocator, input: update_service_action.UpdateServiceActionInput, options: CallOptions) !update_service_action.UpdateServiceActionOutput {
         return update_service_action.execute(self, allocator, input, options);
     }
 
     /// Updates the specified TagOption.
-    pub fn updateTagOption(self: *Self, allocator: std.mem.Allocator, input: update_tag_option.UpdateTagOptionInput, options: update_tag_option.Options) !update_tag_option.UpdateTagOptionOutput {
+    pub fn updateTagOption(self: *Self, allocator: std.mem.Allocator, input: update_tag_option.UpdateTagOptionInput, options: CallOptions) !update_tag_option.UpdateTagOptionOutput {
         return update_tag_option.execute(self, allocator, input, options);
     }
 

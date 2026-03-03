@@ -23,6 +23,7 @@ const stop_canary = @import("stop_canary.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_canary = @import("update_canary.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -59,7 +60,7 @@ pub const Client = struct {
     /// for all canaries in a group.
     ///
     /// You must run this operation in the Region where the canary exists.
-    pub fn associateResource(self: *Self, allocator: std.mem.Allocator, input: associate_resource.AssociateResourceInput, options: associate_resource.Options) !associate_resource.AssociateResourceOutput {
+    pub fn associateResource(self: *Self, allocator: std.mem.Allocator, input: associate_resource.AssociateResourceInput, options: CallOptions) !associate_resource.AssociateResourceOutput {
         return associate_resource.execute(self, allocator, input, options);
     }
 
@@ -89,7 +90,7 @@ pub const Client = struct {
     /// outbound calls over the internet. For more information, see [Security
     /// Considerations for Synthetics
     /// Canaries](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html).
-    pub fn createCanary(self: *Self, allocator: std.mem.Allocator, input: create_canary.CreateCanaryInput, options: create_canary.Options) !create_canary.CreateCanaryOutput {
+    pub fn createCanary(self: *Self, allocator: std.mem.Allocator, input: create_canary.CreateCanaryInput, options: CallOptions) !create_canary.CreateCanaryOutput {
         return create_canary.execute(self, allocator, input, options);
     }
 
@@ -117,7 +118,7 @@ pub const Client = struct {
     /// Each group can contain as many as 10 canaries. You can have as many as 20
     /// groups in your account. Any single canary
     /// can be a member of up to 10 groups.
-    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: create_group.Options) !create_group.CreateGroupOutput {
+    pub fn createGroup(self: *Self, allocator: std.mem.Allocator, input: create_group.CreateGroupInput, options: CallOptions) !create_group.CreateGroupOutput {
         return create_group.execute(self, allocator, input, options);
     }
 
@@ -156,7 +157,7 @@ pub const Client = struct {
     /// note of the information returned by this operation so that you can delete
     /// these resources
     /// after you delete the canary.
-    pub fn deleteCanary(self: *Self, allocator: std.mem.Allocator, input: delete_canary.DeleteCanaryInput, options: delete_canary.Options) !delete_canary.DeleteCanaryOutput {
+    pub fn deleteCanary(self: *Self, allocator: std.mem.Allocator, input: delete_canary.DeleteCanaryInput, options: CallOptions) !delete_canary.DeleteCanaryOutput {
         return delete_canary.execute(self, allocator, input, options);
     }
 
@@ -168,7 +169,7 @@ pub const Client = struct {
     /// delete a group
     /// must be made from its home Region. You can find the home Region of a group
     /// within its ARN.
-    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: delete_group.Options) !delete_group.DeleteGroupOutput {
+    pub fn deleteGroup(self: *Self, allocator: std.mem.Allocator, input: delete_group.DeleteGroupInput, options: CallOptions) !delete_group.DeleteGroupOutput {
         return delete_group.execute(self, allocator, input, options);
     }
 
@@ -190,7 +191,7 @@ pub const Client = struct {
     /// see [
     /// Limiting a user to viewing specific
     /// canaries](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html).
-    pub fn describeCanaries(self: *Self, allocator: std.mem.Allocator, input: describe_canaries.DescribeCanariesInput, options: describe_canaries.Options) !describe_canaries.DescribeCanariesOutput {
+    pub fn describeCanaries(self: *Self, allocator: std.mem.Allocator, input: describe_canaries.DescribeCanariesInput, options: CallOptions) !describe_canaries.DescribeCanariesOutput {
         return describe_canaries.execute(self, allocator, input, options);
     }
 
@@ -211,7 +212,7 @@ pub const Client = struct {
     /// see [
     /// Limiting a user to viewing specific
     /// canaries](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html).
-    pub fn describeCanariesLastRun(self: *Self, allocator: std.mem.Allocator, input: describe_canaries_last_run.DescribeCanariesLastRunInput, options: describe_canaries_last_run.Options) !describe_canaries_last_run.DescribeCanariesLastRunOutput {
+    pub fn describeCanariesLastRun(self: *Self, allocator: std.mem.Allocator, input: describe_canaries_last_run.DescribeCanariesLastRunInput, options: CallOptions) !describe_canaries_last_run.DescribeCanariesLastRunOutput {
         return describe_canaries_last_run.execute(self, allocator, input, options);
     }
 
@@ -219,13 +220,13 @@ pub const Client = struct {
     /// see [
     /// Canary Runtime
     /// Versions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html).
-    pub fn describeRuntimeVersions(self: *Self, allocator: std.mem.Allocator, input: describe_runtime_versions.DescribeRuntimeVersionsInput, options: describe_runtime_versions.Options) !describe_runtime_versions.DescribeRuntimeVersionsOutput {
+    pub fn describeRuntimeVersions(self: *Self, allocator: std.mem.Allocator, input: describe_runtime_versions.DescribeRuntimeVersionsInput, options: CallOptions) !describe_runtime_versions.DescribeRuntimeVersionsOutput {
         return describe_runtime_versions.execute(self, allocator, input, options);
     }
 
     /// Removes a canary from a group. You must run this operation in the Region
     /// where the canary exists.
-    pub fn disassociateResource(self: *Self, allocator: std.mem.Allocator, input: disassociate_resource.DisassociateResourceInput, options: disassociate_resource.Options) !disassociate_resource.DisassociateResourceOutput {
+    pub fn disassociateResource(self: *Self, allocator: std.mem.Allocator, input: disassociate_resource.DisassociateResourceInput, options: CallOptions) !disassociate_resource.DisassociateResourceOutput {
         return disassociate_resource.execute(self, allocator, input, options);
     }
 
@@ -233,44 +234,44 @@ pub const Client = struct {
     /// the name of the canary that you want. To get a list of canaries
     /// and their names, use
     /// [DescribeCanaries](https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html).
-    pub fn getCanary(self: *Self, allocator: std.mem.Allocator, input: get_canary.GetCanaryInput, options: get_canary.Options) !get_canary.GetCanaryOutput {
+    pub fn getCanary(self: *Self, allocator: std.mem.Allocator, input: get_canary.GetCanaryInput, options: CallOptions) !get_canary.GetCanaryOutput {
         return get_canary.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of runs for a specified canary.
-    pub fn getCanaryRuns(self: *Self, allocator: std.mem.Allocator, input: get_canary_runs.GetCanaryRunsInput, options: get_canary_runs.Options) !get_canary_runs.GetCanaryRunsOutput {
+    pub fn getCanaryRuns(self: *Self, allocator: std.mem.Allocator, input: get_canary_runs.GetCanaryRunsInput, options: CallOptions) !get_canary_runs.GetCanaryRunsOutput {
         return get_canary_runs.execute(self, allocator, input, options);
     }
 
     /// Returns information about one group. Groups are a global resource, so you
     /// can use this operation from
     /// any Region.
-    pub fn getGroup(self: *Self, allocator: std.mem.Allocator, input: get_group.GetGroupInput, options: get_group.Options) !get_group.GetGroupOutput {
+    pub fn getGroup(self: *Self, allocator: std.mem.Allocator, input: get_group.GetGroupInput, options: CallOptions) !get_group.GetGroupOutput {
         return get_group.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the groups that the specified canary is associated with.
     /// The canary
     /// that you specify must be in the current Region.
-    pub fn listAssociatedGroups(self: *Self, allocator: std.mem.Allocator, input: list_associated_groups.ListAssociatedGroupsInput, options: list_associated_groups.Options) !list_associated_groups.ListAssociatedGroupsOutput {
+    pub fn listAssociatedGroups(self: *Self, allocator: std.mem.Allocator, input: list_associated_groups.ListAssociatedGroupsInput, options: CallOptions) !list_associated_groups.ListAssociatedGroupsOutput {
         return list_associated_groups.execute(self, allocator, input, options);
     }
 
     /// This operation returns a list of the ARNs of the canaries that are
     /// associated with the specified group.
-    pub fn listGroupResources(self: *Self, allocator: std.mem.Allocator, input: list_group_resources.ListGroupResourcesInput, options: list_group_resources.Options) !list_group_resources.ListGroupResourcesOutput {
+    pub fn listGroupResources(self: *Self, allocator: std.mem.Allocator, input: list_group_resources.ListGroupResourcesInput, options: CallOptions) !list_group_resources.ListGroupResourcesOutput {
         return list_group_resources.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all groups in the account, displaying their names, unique
     /// IDs, and ARNs. The groups
     /// from all Regions are returned.
-    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: list_groups.Options) !list_groups.ListGroupsOutput {
+    pub fn listGroups(self: *Self, allocator: std.mem.Allocator, input: list_groups.ListGroupsInput, options: CallOptions) !list_groups.ListGroupsOutput {
         return list_groups.execute(self, allocator, input, options);
     }
 
     /// Displays the tags associated with a canary or group.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -279,13 +280,13 @@ pub const Client = struct {
     /// `Schedule`. To see a canary's schedule,
     /// use
     /// [GetCanary](https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanary.html).
-    pub fn startCanary(self: *Self, allocator: std.mem.Allocator, input: start_canary.StartCanaryInput, options: start_canary.Options) !start_canary.StartCanaryOutput {
+    pub fn startCanary(self: *Self, allocator: std.mem.Allocator, input: start_canary.StartCanaryInput, options: CallOptions) !start_canary.StartCanaryOutput {
         return start_canary.execute(self, allocator, input, options);
     }
 
     /// Use this operation to start a dry run for a canary that has already been
     /// created
-    pub fn startCanaryDryRun(self: *Self, allocator: std.mem.Allocator, input: start_canary_dry_run.StartCanaryDryRunInput, options: start_canary_dry_run.Options) !start_canary_dry_run.StartCanaryDryRunOutput {
+    pub fn startCanaryDryRun(self: *Self, allocator: std.mem.Allocator, input: start_canary_dry_run.StartCanaryDryRunInput, options: CallOptions) !start_canary_dry_run.StartCanaryDryRunOutput {
         return start_canary_dry_run.execute(self, allocator, input, options);
     }
 
@@ -297,7 +298,7 @@ pub const Client = struct {
     ///
     /// You can use `StartCanary` to start it running again
     /// with the canary’s current schedule at any point in the future.
-    pub fn stopCanary(self: *Self, allocator: std.mem.Allocator, input: stop_canary.StopCanaryInput, options: stop_canary.Options) !stop_canary.StopCanaryOutput {
+    pub fn stopCanary(self: *Self, allocator: std.mem.Allocator, input: stop_canary.StopCanaryInput, options: CallOptions) !stop_canary.StopCanaryOutput {
         return stop_canary.execute(self, allocator, input, options);
     }
 
@@ -321,12 +322,12 @@ pub const Client = struct {
     /// the previous value for that tag.
     ///
     /// You can associate as many as 50 tags with a canary or group.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -347,7 +348,7 @@ pub const Client = struct {
     /// When you use the `dryRunId` field when updating a canary, the only other
     /// field you can provide is the `Schedule`. Adding any other field will thrown
     /// an exception.
-    pub fn updateCanary(self: *Self, allocator: std.mem.Allocator, input: update_canary.UpdateCanaryInput, options: update_canary.Options) !update_canary.UpdateCanaryOutput {
+    pub fn updateCanary(self: *Self, allocator: std.mem.Allocator, input: update_canary.UpdateCanaryInput, options: CallOptions) !update_canary.UpdateCanaryOutput {
         return update_canary.execute(self, allocator, input, options);
     }
 

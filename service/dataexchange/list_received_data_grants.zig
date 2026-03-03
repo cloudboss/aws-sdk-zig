@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AcceptanceStateFilterValue = @import("acceptance_state_filter_value.zig").AcceptanceStateFilterValue;
 const ReceivedDataGrantSummariesEntry = @import("received_data_grant_summaries_entry.zig").ReceivedDataGrantSummariesEntry;
@@ -38,11 +39,7 @@ pub const ListReceivedDataGrantsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListReceivedDataGrantsInput, options: Options) !ListReceivedDataGrantsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListReceivedDataGrantsInput, options: CallOptions) !ListReceivedDataGrantsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

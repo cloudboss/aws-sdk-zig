@@ -39,6 +39,7 @@ const update_feature = @import("update_feature.zig");
 const update_launch = @import("update_launch.zig");
 const update_project = @import("update_project.zig");
 const update_project_data_delivery = @import("update_project_data_delivery.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -92,7 +93,7 @@ pub const Client = struct {
     ///
     /// If the user is not assigned to a launch or experiment, they are served the
     /// default variation.
-    pub fn batchEvaluateFeature(self: *Self, allocator: std.mem.Allocator, input: batch_evaluate_feature.BatchEvaluateFeatureInput, options: batch_evaluate_feature.Options) !batch_evaluate_feature.BatchEvaluateFeatureOutput {
+    pub fn batchEvaluateFeature(self: *Self, allocator: std.mem.Allocator, input: batch_evaluate_feature.BatchEvaluateFeatureInput, options: CallOptions) !batch_evaluate_feature.BatchEvaluateFeatureOutput {
         return batch_evaluate_feature.execute(self, allocator, input, options);
     }
 
@@ -110,7 +111,7 @@ pub const Client = struct {
     ///
     /// Don't use this operation to update an existing experiment. Instead, use
     /// [UpdateExperiment](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateExperiment.html).
-    pub fn createExperiment(self: *Self, allocator: std.mem.Allocator, input: create_experiment.CreateExperimentInput, options: create_experiment.Options) !create_experiment.CreateExperimentOutput {
+    pub fn createExperiment(self: *Self, allocator: std.mem.Allocator, input: create_experiment.CreateExperimentInput, options: CallOptions) !create_experiment.CreateExperimentOutput {
         return create_experiment.execute(self, allocator, input, options);
     }
 
@@ -122,7 +123,7 @@ pub const Client = struct {
     ///
     /// Don't use this operation to update an existing feature. Instead, use
     /// [UpdateFeature](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateFeature.html).
-    pub fn createFeature(self: *Self, allocator: std.mem.Allocator, input: create_feature.CreateFeatureInput, options: create_feature.Options) !create_feature.CreateFeatureOutput {
+    pub fn createFeature(self: *Self, allocator: std.mem.Allocator, input: create_feature.CreateFeatureInput, options: CallOptions) !create_feature.CreateFeatureOutput {
         return create_feature.execute(self, allocator, input, options);
     }
 
@@ -137,7 +138,7 @@ pub const Client = struct {
     ///
     /// Don't use this operation to update an existing launch. Instead, use
     /// [UpdateLaunch](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateLaunch.html).
-    pub fn createLaunch(self: *Self, allocator: std.mem.Allocator, input: create_launch.CreateLaunchInput, options: create_launch.Options) !create_launch.CreateLaunchOutput {
+    pub fn createLaunch(self: *Self, allocator: std.mem.Allocator, input: create_launch.CreateLaunchInput, options: CallOptions) !create_launch.CreateLaunchOutput {
         return create_launch.execute(self, allocator, input, options);
     }
 
@@ -147,7 +148,7 @@ pub const Client = struct {
     ///
     /// To update an existing project, use
     /// [UpdateProject](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateProject.html).
-    pub fn createProject(self: *Self, allocator: std.mem.Allocator, input: create_project.CreateProjectInput, options: create_project.Options) !create_project.CreateProjectOutput {
+    pub fn createProject(self: *Self, allocator: std.mem.Allocator, input: create_project.CreateProjectInput, options: CallOptions) !create_project.CreateProjectOutput {
         return create_project.execute(self, allocator, input, options);
     }
 
@@ -169,7 +170,7 @@ pub const Client = struct {
     /// The pattern that you define for a segment is matched against the value of
     /// `evaluationContext`, which is passed into Evidently in the
     /// [EvaluateFeature](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html) operation, when Evidently assigns a feature variation to a user.
-    pub fn createSegment(self: *Self, allocator: std.mem.Allocator, input: create_segment.CreateSegmentInput, options: create_segment.Options) !create_segment.CreateSegmentOutput {
+    pub fn createSegment(self: *Self, allocator: std.mem.Allocator, input: create_segment.CreateSegmentInput, options: CallOptions) !create_segment.CreateSegmentOutput {
         return create_segment.execute(self, allocator, input, options);
     }
 
@@ -178,12 +179,12 @@ pub const Client = struct {
     ///
     /// To stop an experiment without deleting it, use
     /// [StopExperiment](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_StopExperiment.html).
-    pub fn deleteExperiment(self: *Self, allocator: std.mem.Allocator, input: delete_experiment.DeleteExperimentInput, options: delete_experiment.Options) !delete_experiment.DeleteExperimentOutput {
+    pub fn deleteExperiment(self: *Self, allocator: std.mem.Allocator, input: delete_experiment.DeleteExperimentInput, options: CallOptions) !delete_experiment.DeleteExperimentOutput {
         return delete_experiment.execute(self, allocator, input, options);
     }
 
     /// Deletes an Evidently feature.
-    pub fn deleteFeature(self: *Self, allocator: std.mem.Allocator, input: delete_feature.DeleteFeatureInput, options: delete_feature.Options) !delete_feature.DeleteFeatureOutput {
+    pub fn deleteFeature(self: *Self, allocator: std.mem.Allocator, input: delete_feature.DeleteFeatureInput, options: CallOptions) !delete_feature.DeleteFeatureOutput {
         return delete_feature.execute(self, allocator, input, options);
     }
 
@@ -191,20 +192,20 @@ pub const Client = struct {
     ///
     /// To stop a launch without deleting it, use
     /// [StopLaunch](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_StopLaunch.html).
-    pub fn deleteLaunch(self: *Self, allocator: std.mem.Allocator, input: delete_launch.DeleteLaunchInput, options: delete_launch.Options) !delete_launch.DeleteLaunchOutput {
+    pub fn deleteLaunch(self: *Self, allocator: std.mem.Allocator, input: delete_launch.DeleteLaunchInput, options: CallOptions) !delete_launch.DeleteLaunchOutput {
         return delete_launch.execute(self, allocator, input, options);
     }
 
     /// Deletes an Evidently project. Before you can delete a project, you must
     /// delete all the features that the project contains. To delete a feature, use
     /// [DeleteFeature](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_DeleteFeature.html).
-    pub fn deleteProject(self: *Self, allocator: std.mem.Allocator, input: delete_project.DeleteProjectInput, options: delete_project.Options) !delete_project.DeleteProjectOutput {
+    pub fn deleteProject(self: *Self, allocator: std.mem.Allocator, input: delete_project.DeleteProjectInput, options: CallOptions) !delete_project.DeleteProjectOutput {
         return delete_project.execute(self, allocator, input, options);
     }
 
     /// Deletes a segment. You can't delete a segment that is being used in a launch
     /// or experiment, even if that launch or experiment is not currently running.
-    pub fn deleteSegment(self: *Self, allocator: std.mem.Allocator, input: delete_segment.DeleteSegmentInput, options: delete_segment.Options) !delete_segment.DeleteSegmentOutput {
+    pub fn deleteSegment(self: *Self, allocator: std.mem.Allocator, input: delete_segment.DeleteSegmentInput, options: CallOptions) !delete_segment.DeleteSegmentOutput {
         return delete_segment.execute(self, allocator, input, options);
     }
 
@@ -243,14 +244,14 @@ pub const Client = struct {
     ///
     /// If the user is not assigned to a launch or experiment, they are served the
     /// default variation.
-    pub fn evaluateFeature(self: *Self, allocator: std.mem.Allocator, input: evaluate_feature.EvaluateFeatureInput, options: evaluate_feature.Options) !evaluate_feature.EvaluateFeatureOutput {
+    pub fn evaluateFeature(self: *Self, allocator: std.mem.Allocator, input: evaluate_feature.EvaluateFeatureInput, options: CallOptions) !evaluate_feature.EvaluateFeatureOutput {
         return evaluate_feature.execute(self, allocator, input, options);
     }
 
     /// Returns the details about one experiment. You must already know the
     /// experiment name. To retrieve a list of experiments in your account, use
     /// [ListExperiments](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListExperiments.html).
-    pub fn getExperiment(self: *Self, allocator: std.mem.Allocator, input: get_experiment.GetExperimentInput, options: get_experiment.Options) !get_experiment.GetExperimentOutput {
+    pub fn getExperiment(self: *Self, allocator: std.mem.Allocator, input: get_experiment.GetExperimentInput, options: CallOptions) !get_experiment.GetExperimentOutput {
         return get_experiment.execute(self, allocator, input, options);
     }
 
@@ -265,99 +266,99 @@ pub const Client = struct {
     /// Experiment results are available up to 63 days after the start of the
     /// experiment. They are not available after that because of CloudWatch data
     /// retention policies.
-    pub fn getExperimentResults(self: *Self, allocator: std.mem.Allocator, input: get_experiment_results.GetExperimentResultsInput, options: get_experiment_results.Options) !get_experiment_results.GetExperimentResultsOutput {
+    pub fn getExperimentResults(self: *Self, allocator: std.mem.Allocator, input: get_experiment_results.GetExperimentResultsInput, options: CallOptions) !get_experiment_results.GetExperimentResultsOutput {
         return get_experiment_results.execute(self, allocator, input, options);
     }
 
     /// Returns the details about one feature. You must already know the feature
     /// name. To retrieve a list of features in your account, use
     /// [ListFeatures](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListFeatures.html).
-    pub fn getFeature(self: *Self, allocator: std.mem.Allocator, input: get_feature.GetFeatureInput, options: get_feature.Options) !get_feature.GetFeatureOutput {
+    pub fn getFeature(self: *Self, allocator: std.mem.Allocator, input: get_feature.GetFeatureInput, options: CallOptions) !get_feature.GetFeatureOutput {
         return get_feature.execute(self, allocator, input, options);
     }
 
     /// Returns the details about one launch. You must already know the launch name.
     /// To retrieve a list of launches in your account, use
     /// [ListLaunches](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListLaunches.html).
-    pub fn getLaunch(self: *Self, allocator: std.mem.Allocator, input: get_launch.GetLaunchInput, options: get_launch.Options) !get_launch.GetLaunchOutput {
+    pub fn getLaunch(self: *Self, allocator: std.mem.Allocator, input: get_launch.GetLaunchInput, options: CallOptions) !get_launch.GetLaunchOutput {
         return get_launch.execute(self, allocator, input, options);
     }
 
     /// Returns the details about one launch. You must already know the project
     /// name. To retrieve a list of projects in your account, use
     /// [ListProjects](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_ListProjects.html).
-    pub fn getProject(self: *Self, allocator: std.mem.Allocator, input: get_project.GetProjectInput, options: get_project.Options) !get_project.GetProjectOutput {
+    pub fn getProject(self: *Self, allocator: std.mem.Allocator, input: get_project.GetProjectInput, options: CallOptions) !get_project.GetProjectOutput {
         return get_project.execute(self, allocator, input, options);
     }
 
     /// Returns information about the specified segment. Specify the segment you
     /// want to view by specifying its ARN.
-    pub fn getSegment(self: *Self, allocator: std.mem.Allocator, input: get_segment.GetSegmentInput, options: get_segment.Options) !get_segment.GetSegmentOutput {
+    pub fn getSegment(self: *Self, allocator: std.mem.Allocator, input: get_segment.GetSegmentInput, options: CallOptions) !get_segment.GetSegmentOutput {
         return get_segment.execute(self, allocator, input, options);
     }
 
     /// Returns configuration details about all the experiments in the specified
     /// project.
-    pub fn listExperiments(self: *Self, allocator: std.mem.Allocator, input: list_experiments.ListExperimentsInput, options: list_experiments.Options) !list_experiments.ListExperimentsOutput {
+    pub fn listExperiments(self: *Self, allocator: std.mem.Allocator, input: list_experiments.ListExperimentsInput, options: CallOptions) !list_experiments.ListExperimentsOutput {
         return list_experiments.execute(self, allocator, input, options);
     }
 
     /// Returns configuration details about all the features in the specified
     /// project.
-    pub fn listFeatures(self: *Self, allocator: std.mem.Allocator, input: list_features.ListFeaturesInput, options: list_features.Options) !list_features.ListFeaturesOutput {
+    pub fn listFeatures(self: *Self, allocator: std.mem.Allocator, input: list_features.ListFeaturesInput, options: CallOptions) !list_features.ListFeaturesOutput {
         return list_features.execute(self, allocator, input, options);
     }
 
     /// Returns configuration details about all the launches in the specified
     /// project.
-    pub fn listLaunches(self: *Self, allocator: std.mem.Allocator, input: list_launches.ListLaunchesInput, options: list_launches.Options) !list_launches.ListLaunchesOutput {
+    pub fn listLaunches(self: *Self, allocator: std.mem.Allocator, input: list_launches.ListLaunchesInput, options: CallOptions) !list_launches.ListLaunchesOutput {
         return list_launches.execute(self, allocator, input, options);
     }
 
     /// Returns configuration details about all the projects in the current Region
     /// in your account.
-    pub fn listProjects(self: *Self, allocator: std.mem.Allocator, input: list_projects.ListProjectsInput, options: list_projects.Options) !list_projects.ListProjectsOutput {
+    pub fn listProjects(self: *Self, allocator: std.mem.Allocator, input: list_projects.ListProjectsInput, options: CallOptions) !list_projects.ListProjectsOutput {
         return list_projects.execute(self, allocator, input, options);
     }
 
     /// Use this operation to find which experiments or launches are using a
     /// specified segment.
-    pub fn listSegmentReferences(self: *Self, allocator: std.mem.Allocator, input: list_segment_references.ListSegmentReferencesInput, options: list_segment_references.Options) !list_segment_references.ListSegmentReferencesOutput {
+    pub fn listSegmentReferences(self: *Self, allocator: std.mem.Allocator, input: list_segment_references.ListSegmentReferencesInput, options: CallOptions) !list_segment_references.ListSegmentReferencesOutput {
         return list_segment_references.execute(self, allocator, input, options);
     }
 
     /// Returns a list of audience segments that you have created in your account in
     /// this Region.
-    pub fn listSegments(self: *Self, allocator: std.mem.Allocator, input: list_segments.ListSegmentsInput, options: list_segments.Options) !list_segments.ListSegmentsOutput {
+    pub fn listSegments(self: *Self, allocator: std.mem.Allocator, input: list_segments.ListSegmentsInput, options: CallOptions) !list_segments.ListSegmentsOutput {
         return list_segments.execute(self, allocator, input, options);
     }
 
     /// Displays the tags associated with an Evidently resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Sends performance events to Evidently. These events can be used to evaluate
     /// a launch or an experiment.
-    pub fn putProjectEvents(self: *Self, allocator: std.mem.Allocator, input: put_project_events.PutProjectEventsInput, options: put_project_events.Options) !put_project_events.PutProjectEventsOutput {
+    pub fn putProjectEvents(self: *Self, allocator: std.mem.Allocator, input: put_project_events.PutProjectEventsInput, options: CallOptions) !put_project_events.PutProjectEventsOutput {
         return put_project_events.execute(self, allocator, input, options);
     }
 
     /// Starts an existing experiment. To create an experiment, use
     /// [CreateExperiment](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateExperiment.html).
-    pub fn startExperiment(self: *Self, allocator: std.mem.Allocator, input: start_experiment.StartExperimentInput, options: start_experiment.Options) !start_experiment.StartExperimentOutput {
+    pub fn startExperiment(self: *Self, allocator: std.mem.Allocator, input: start_experiment.StartExperimentInput, options: CallOptions) !start_experiment.StartExperimentOutput {
         return start_experiment.execute(self, allocator, input, options);
     }
 
     /// Starts an existing launch. To create a launch, use
     /// [CreateLaunch](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateLaunch.html).
-    pub fn startLaunch(self: *Self, allocator: std.mem.Allocator, input: start_launch.StartLaunchInput, options: start_launch.Options) !start_launch.StartLaunchOutput {
+    pub fn startLaunch(self: *Self, allocator: std.mem.Allocator, input: start_launch.StartLaunchInput, options: CallOptions) !start_launch.StartLaunchOutput {
         return start_launch.execute(self, allocator, input, options);
     }
 
     /// Stops an experiment that is currently running. If you stop an experiment,
     /// you can't resume it or restart it.
-    pub fn stopExperiment(self: *Self, allocator: std.mem.Allocator, input: stop_experiment.StopExperimentInput, options: stop_experiment.Options) !stop_experiment.StopExperimentOutput {
+    pub fn stopExperiment(self: *Self, allocator: std.mem.Allocator, input: stop_experiment.StopExperimentInput, options: CallOptions) !stop_experiment.StopExperimentOutput {
         return stop_experiment.execute(self, allocator, input, options);
     }
 
@@ -367,7 +368,7 @@ pub const Client = struct {
     /// launch will instead be available to the feature's experiment, if there is
     /// one. Otherwise, all traffic will be served the default variation after the
     /// launch is stopped.
-    pub fn stopLaunch(self: *Self, allocator: std.mem.Allocator, input: stop_launch.StopLaunchInput, options: stop_launch.Options) !stop_launch.StopLaunchOutput {
+    pub fn stopLaunch(self: *Self, allocator: std.mem.Allocator, input: stop_launch.StopLaunchInput, options: CallOptions) !stop_launch.StopLaunchOutput {
         return stop_launch.execute(self, allocator, input, options);
     }
 
@@ -392,19 +393,19 @@ pub const Client = struct {
     ///
     /// For more information, see [Tagging Amazon Web Services
     /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Use this operation to test a rules pattern that you plan to use to create an
     /// audience segment. For more information about segments, see
     /// [CreateSegment](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html).
-    pub fn testSegmentPattern(self: *Self, allocator: std.mem.Allocator, input: test_segment_pattern.TestSegmentPatternInput, options: test_segment_pattern.Options) !test_segment_pattern.TestSegmentPatternOutput {
+    pub fn testSegmentPattern(self: *Self, allocator: std.mem.Allocator, input: test_segment_pattern.TestSegmentPatternInput, options: CallOptions) !test_segment_pattern.TestSegmentPatternOutput {
         return test_segment_pattern.execute(self, allocator, input, options);
     }
 
     /// Removes one or more tags from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -412,7 +413,7 @@ pub const Client = struct {
     ///
     /// Don't use this operation to update an experiment's tag. Instead, use
     /// [TagResource](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html).
-    pub fn updateExperiment(self: *Self, allocator: std.mem.Allocator, input: update_experiment.UpdateExperimentInput, options: update_experiment.Options) !update_experiment.UpdateExperimentOutput {
+    pub fn updateExperiment(self: *Self, allocator: std.mem.Allocator, input: update_experiment.UpdateExperimentInput, options: CallOptions) !update_experiment.UpdateExperimentOutput {
         return update_experiment.execute(self, allocator, input, options);
     }
 
@@ -421,7 +422,7 @@ pub const Client = struct {
     /// You can't use this operation to update the tags of an existing feature.
     /// Instead, use
     /// [TagResource](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html).
-    pub fn updateFeature(self: *Self, allocator: std.mem.Allocator, input: update_feature.UpdateFeatureInput, options: update_feature.Options) !update_feature.UpdateFeatureOutput {
+    pub fn updateFeature(self: *Self, allocator: std.mem.Allocator, input: update_feature.UpdateFeatureInput, options: CallOptions) !update_feature.UpdateFeatureOutput {
         return update_feature.execute(self, allocator, input, options);
     }
 
@@ -430,7 +431,7 @@ pub const Client = struct {
     /// Don't use this operation to update the tags of an existing launch. Instead,
     /// use
     /// [TagResource](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html).
-    pub fn updateLaunch(self: *Self, allocator: std.mem.Allocator, input: update_launch.UpdateLaunchInput, options: update_launch.Options) !update_launch.UpdateLaunchOutput {
+    pub fn updateLaunch(self: *Self, allocator: std.mem.Allocator, input: update_launch.UpdateLaunchInput, options: CallOptions) !update_launch.UpdateLaunchOutput {
         return update_launch.execute(self, allocator, input, options);
     }
 
@@ -445,7 +446,7 @@ pub const Client = struct {
     ///
     /// Don't use this operation to update the tags of a project. Instead, use
     /// [TagResource](https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html).
-    pub fn updateProject(self: *Self, allocator: std.mem.Allocator, input: update_project.UpdateProjectInput, options: update_project.Options) !update_project.UpdateProjectOutput {
+    pub fn updateProject(self: *Self, allocator: std.mem.Allocator, input: update_project.UpdateProjectInput, options: CallOptions) !update_project.UpdateProjectOutput {
         return update_project.execute(self, allocator, input, options);
     }
 
@@ -456,7 +457,7 @@ pub const Client = struct {
     ///
     /// You can't specify both `cloudWatchLogs` and `s3Destination` in the same
     /// operation.
-    pub fn updateProjectDataDelivery(self: *Self, allocator: std.mem.Allocator, input: update_project_data_delivery.UpdateProjectDataDeliveryInput, options: update_project_data_delivery.Options) !update_project_data_delivery.UpdateProjectDataDeliveryOutput {
+    pub fn updateProjectDataDelivery(self: *Self, allocator: std.mem.Allocator, input: update_project_data_delivery.UpdateProjectDataDeliveryInput, options: CallOptions) !update_project_data_delivery.UpdateProjectDataDeliveryOutput {
         return update_project_data_delivery.execute(self, allocator, input, options);
     }
 

@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_app_instance_admins = @import("list_app_instance_admins.zig");
@@ -18,7 +19,7 @@ pub const ListAppInstanceAdminsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_instance_admins.Options) !list_app_instance_admins.ListAppInstanceAdminsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_instance_admins.ListAppInstanceAdminsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -59,7 +60,7 @@ pub const ListAppInstanceBotsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_instance_bots.Options) !list_app_instance_bots.ListAppInstanceBotsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_instance_bots.ListAppInstanceBotsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -100,7 +101,7 @@ pub const ListAppInstanceUserEndpointsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_instance_user_endpoints.Options) !list_app_instance_user_endpoints.ListAppInstanceUserEndpointsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_instance_user_endpoints.ListAppInstanceUserEndpointsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -141,7 +142,7 @@ pub const ListAppInstanceUsersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_instance_users.Options) !list_app_instance_users.ListAppInstanceUsersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_instance_users.ListAppInstanceUsersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -182,7 +183,7 @@ pub const ListAppInstancesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_app_instances.Options) !list_app_instances.ListAppInstancesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_app_instances.ListAppInstancesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

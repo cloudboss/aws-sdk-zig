@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_endpoints_by_platform_application = @import("list_endpoints_by_platform_application.zig");
@@ -21,7 +22,7 @@ pub const ListEndpointsByPlatformApplicationPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_endpoints_by_platform_application.Options) !list_endpoints_by_platform_application.ListEndpointsByPlatformApplicationOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_endpoints_by_platform_application.ListEndpointsByPlatformApplicationOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -62,7 +63,7 @@ pub const ListOriginationNumbersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_origination_numbers.Options) !list_origination_numbers.ListOriginationNumbersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_origination_numbers.ListOriginationNumbersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -103,7 +104,7 @@ pub const ListPhoneNumbersOptedOutPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_phone_numbers_opted_out.Options) !list_phone_numbers_opted_out.ListPhoneNumbersOptedOutOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_phone_numbers_opted_out.ListPhoneNumbersOptedOutOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -144,7 +145,7 @@ pub const ListPlatformApplicationsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_platform_applications.Options) !list_platform_applications.ListPlatformApplicationsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_platform_applications.ListPlatformApplicationsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -185,7 +186,7 @@ pub const ListSMSSandboxPhoneNumbersPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_sms_sandbox_phone_numbers.Options) !list_sms_sandbox_phone_numbers.ListSMSSandboxPhoneNumbersOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_sms_sandbox_phone_numbers.ListSMSSandboxPhoneNumbersOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -226,7 +227,7 @@ pub const ListSubscriptionsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_subscriptions.Options) !list_subscriptions.ListSubscriptionsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_subscriptions.ListSubscriptionsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -267,7 +268,7 @@ pub const ListSubscriptionsByTopicPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_subscriptions_by_topic.Options) !list_subscriptions_by_topic.ListSubscriptionsByTopicOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_subscriptions_by_topic.ListSubscriptionsByTopicOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -308,7 +309,7 @@ pub const ListTopicsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_topics.Options) !list_topics.ListTopicsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_topics.ListTopicsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AuditEvent = @import("audit_event.zig").AuditEvent;
 
@@ -42,11 +43,7 @@ pub const GetCaseAuditEventsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCaseAuditEventsInput, options: Options) !GetCaseAuditEventsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCaseAuditEventsInput, options: CallOptions) !GetCaseAuditEventsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

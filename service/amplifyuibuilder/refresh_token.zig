@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TokenProviders = @import("token_providers.zig").TokenProviders;
 const RefreshTokenRequestBody = @import("refresh_token_request_body.zig").RefreshTokenRequestBody;
@@ -32,11 +33,7 @@ pub const RefreshTokenOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RefreshTokenInput, options: Options) !RefreshTokenOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RefreshTokenInput, options: CallOptions) !RefreshTokenOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

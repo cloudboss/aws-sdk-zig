@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const QuantumTaskAdditionalAttributeName = @import("quantum_task_additional_attribute_name.zig").QuantumTaskAdditionalAttributeName;
 const ActionMetadata = @import("action_metadata.zig").ActionMetadata;
@@ -101,11 +102,7 @@ pub const GetQuantumTaskOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetQuantumTaskInput, options: Options) !GetQuantumTaskOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetQuantumTaskInput, options: CallOptions) !GetQuantumTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

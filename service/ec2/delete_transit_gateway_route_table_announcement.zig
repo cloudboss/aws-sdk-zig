@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TransitGatewayRouteTableAnnouncement = @import("transit_gateway_route_table_announcement.zig").TransitGatewayRouteTableAnnouncement;
 const serde = @import("serde.zig");
@@ -23,11 +24,7 @@ pub const DeleteTransitGatewayRouteTableAnnouncementOutput = struct {
     transit_gateway_route_table_announcement: ?TransitGatewayRouteTableAnnouncement = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTransitGatewayRouteTableAnnouncementInput, options: Options) !DeleteTransitGatewayRouteTableAnnouncementOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTransitGatewayRouteTableAnnouncementInput, options: CallOptions) !DeleteTransitGatewayRouteTableAnnouncementOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

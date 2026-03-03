@@ -28,6 +28,7 @@ const update_host = @import("update_host.zig");
 const update_repository_link = @import("update_repository_link.zig");
 const update_sync_blocker = @import("update_sync_blocker.zig");
 const update_sync_configuration = @import("update_sync_configuration.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -63,7 +64,7 @@ pub const Client = struct {
     /// that it can access third-party code repositories. The connection is in
     /// pending status until
     /// the third-party connection handshake is completed from the console.
-    pub fn createConnection(self: *Self, allocator: std.mem.Allocator, input: create_connection.CreateConnectionInput, options: create_connection.Options) !create_connection.CreateConnectionOutput {
+    pub fn createConnection(self: *Self, allocator: std.mem.Allocator, input: create_connection.CreateConnectionInput, options: CallOptions) !create_connection.CreateConnectionOutput {
         return create_connection.execute(self, allocator, input, options);
     }
 
@@ -78,14 +79,14 @@ pub const Client = struct {
     /// A host created through the CLI or the SDK is in `PENDING` status by
     /// default. You can make its status `AVAILABLE` by setting up the host in the
     /// console.
-    pub fn createHost(self: *Self, allocator: std.mem.Allocator, input: create_host.CreateHostInput, options: create_host.Options) !create_host.CreateHostOutput {
+    pub fn createHost(self: *Self, allocator: std.mem.Allocator, input: create_host.CreateHostInput, options: CallOptions) !create_host.CreateHostOutput {
         return create_host.execute(self, allocator, input, options);
     }
 
     /// Creates a link to a specified external Git repository. A repository link
     /// allows Git sync to monitor and sync changes to files in a specified Git
     /// repository.
-    pub fn createRepositoryLink(self: *Self, allocator: std.mem.Allocator, input: create_repository_link.CreateRepositoryLinkInput, options: create_repository_link.Options) !create_repository_link.CreateRepositoryLinkOutput {
+    pub fn createRepositoryLink(self: *Self, allocator: std.mem.Allocator, input: create_repository_link.CreateRepositoryLinkInput, options: CallOptions) !create_repository_link.CreateRepositoryLinkOutput {
         return create_repository_link.execute(self, allocator, input, options);
     }
 
@@ -94,12 +95,12 @@ pub const Client = struct {
     /// repository to update a specified Amazon Web Services resource. Parameters
     /// for the sync
     /// configuration are determined by the sync type.
-    pub fn createSyncConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_sync_configuration.CreateSyncConfigurationInput, options: create_sync_configuration.Options) !create_sync_configuration.CreateSyncConfigurationOutput {
+    pub fn createSyncConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_sync_configuration.CreateSyncConfigurationInput, options: CallOptions) !create_sync_configuration.CreateSyncConfigurationOutput {
         return create_sync_configuration.execute(self, allocator, input, options);
     }
 
     /// The connection to be deleted.
-    pub fn deleteConnection(self: *Self, allocator: std.mem.Allocator, input: delete_connection.DeleteConnectionInput, options: delete_connection.Options) !delete_connection.DeleteConnectionOutput {
+    pub fn deleteConnection(self: *Self, allocator: std.mem.Allocator, input: delete_connection.DeleteConnectionInput, options: CallOptions) !delete_connection.DeleteConnectionOutput {
         return delete_connection.execute(self, allocator, input, options);
     }
 
@@ -108,57 +109,57 @@ pub const Client = struct {
     ///
     /// A host cannot be deleted if it is in the VPC_CONFIG_INITIALIZING or
     /// VPC_CONFIG_DELETING state.
-    pub fn deleteHost(self: *Self, allocator: std.mem.Allocator, input: delete_host.DeleteHostInput, options: delete_host.Options) !delete_host.DeleteHostOutput {
+    pub fn deleteHost(self: *Self, allocator: std.mem.Allocator, input: delete_host.DeleteHostInput, options: CallOptions) !delete_host.DeleteHostOutput {
         return delete_host.execute(self, allocator, input, options);
     }
 
     /// Deletes the association between your connection and a specified external Git
     /// repository.
-    pub fn deleteRepositoryLink(self: *Self, allocator: std.mem.Allocator, input: delete_repository_link.DeleteRepositoryLinkInput, options: delete_repository_link.Options) !delete_repository_link.DeleteRepositoryLinkOutput {
+    pub fn deleteRepositoryLink(self: *Self, allocator: std.mem.Allocator, input: delete_repository_link.DeleteRepositoryLinkInput, options: CallOptions) !delete_repository_link.DeleteRepositoryLinkOutput {
         return delete_repository_link.execute(self, allocator, input, options);
     }
 
     /// Deletes the sync configuration for a specified repository and connection.
-    pub fn deleteSyncConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_sync_configuration.DeleteSyncConfigurationInput, options: delete_sync_configuration.Options) !delete_sync_configuration.DeleteSyncConfigurationOutput {
+    pub fn deleteSyncConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_sync_configuration.DeleteSyncConfigurationInput, options: CallOptions) !delete_sync_configuration.DeleteSyncConfigurationOutput {
         return delete_sync_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns the connection ARN and details such as status, owner, and provider
     /// type.
-    pub fn getConnection(self: *Self, allocator: std.mem.Allocator, input: get_connection.GetConnectionInput, options: get_connection.Options) !get_connection.GetConnectionOutput {
+    pub fn getConnection(self: *Self, allocator: std.mem.Allocator, input: get_connection.GetConnectionInput, options: CallOptions) !get_connection.GetConnectionOutput {
         return get_connection.execute(self, allocator, input, options);
     }
 
     /// Returns the host ARN and details such as status, provider type, endpoint,
     /// and, if
     /// applicable, the VPC configuration.
-    pub fn getHost(self: *Self, allocator: std.mem.Allocator, input: get_host.GetHostInput, options: get_host.Options) !get_host.GetHostOutput {
+    pub fn getHost(self: *Self, allocator: std.mem.Allocator, input: get_host.GetHostInput, options: CallOptions) !get_host.GetHostOutput {
         return get_host.execute(self, allocator, input, options);
     }
 
     /// Returns details about a repository link. A repository link allows Git sync
     /// to monitor
     /// and sync changes from files in a specified Git repository.
-    pub fn getRepositoryLink(self: *Self, allocator: std.mem.Allocator, input: get_repository_link.GetRepositoryLinkInput, options: get_repository_link.Options) !get_repository_link.GetRepositoryLinkOutput {
+    pub fn getRepositoryLink(self: *Self, allocator: std.mem.Allocator, input: get_repository_link.GetRepositoryLinkInput, options: CallOptions) !get_repository_link.GetRepositoryLinkOutput {
         return get_repository_link.execute(self, allocator, input, options);
     }
 
     /// Returns details about the sync status for a repository. A repository sync
     /// uses Git sync
     /// to push and pull changes from your remote repository.
-    pub fn getRepositorySyncStatus(self: *Self, allocator: std.mem.Allocator, input: get_repository_sync_status.GetRepositorySyncStatusInput, options: get_repository_sync_status.Options) !get_repository_sync_status.GetRepositorySyncStatusOutput {
+    pub fn getRepositorySyncStatus(self: *Self, allocator: std.mem.Allocator, input: get_repository_sync_status.GetRepositorySyncStatusInput, options: CallOptions) !get_repository_sync_status.GetRepositorySyncStatusOutput {
         return get_repository_sync_status.execute(self, allocator, input, options);
     }
 
     /// Returns the status of the sync with the Git repository for a specific Amazon
     /// Web Services
     /// resource.
-    pub fn getResourceSyncStatus(self: *Self, allocator: std.mem.Allocator, input: get_resource_sync_status.GetResourceSyncStatusInput, options: get_resource_sync_status.Options) !get_resource_sync_status.GetResourceSyncStatusOutput {
+    pub fn getResourceSyncStatus(self: *Self, allocator: std.mem.Allocator, input: get_resource_sync_status.GetResourceSyncStatusInput, options: CallOptions) !get_resource_sync_status.GetResourceSyncStatusOutput {
         return get_resource_sync_status.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the most recent sync blockers.
-    pub fn getSyncBlockerSummary(self: *Self, allocator: std.mem.Allocator, input: get_sync_blocker_summary.GetSyncBlockerSummaryInput, options: get_sync_blocker_summary.Options) !get_sync_blocker_summary.GetSyncBlockerSummaryOutput {
+    pub fn getSyncBlockerSummary(self: *Self, allocator: std.mem.Allocator, input: get_sync_blocker_summary.GetSyncBlockerSummaryInput, options: CallOptions) !get_sync_blocker_summary.GetSyncBlockerSummaryOutput {
         return get_sync_blocker_summary.execute(self, allocator, input, options);
     }
 
@@ -166,55 +167,55 @@ pub const Client = struct {
     /// resource name. A sync configuration allows the configuration to sync (push
     /// and pull) changes from the remote repository for a specified branch in a Git
     /// repository.
-    pub fn getSyncConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_sync_configuration.GetSyncConfigurationInput, options: get_sync_configuration.Options) !get_sync_configuration.GetSyncConfigurationOutput {
+    pub fn getSyncConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_sync_configuration.GetSyncConfigurationInput, options: CallOptions) !get_sync_configuration.GetSyncConfigurationOutput {
         return get_sync_configuration.execute(self, allocator, input, options);
     }
 
     /// Lists the connections associated with your account.
-    pub fn listConnections(self: *Self, allocator: std.mem.Allocator, input: list_connections.ListConnectionsInput, options: list_connections.Options) !list_connections.ListConnectionsOutput {
+    pub fn listConnections(self: *Self, allocator: std.mem.Allocator, input: list_connections.ListConnectionsInput, options: CallOptions) !list_connections.ListConnectionsOutput {
         return list_connections.execute(self, allocator, input, options);
     }
 
     /// Lists the hosts associated with your account.
-    pub fn listHosts(self: *Self, allocator: std.mem.Allocator, input: list_hosts.ListHostsInput, options: list_hosts.Options) !list_hosts.ListHostsOutput {
+    pub fn listHosts(self: *Self, allocator: std.mem.Allocator, input: list_hosts.ListHostsInput, options: CallOptions) !list_hosts.ListHostsOutput {
         return list_hosts.execute(self, allocator, input, options);
     }
 
     /// Lists the repository links created for connections in your account.
-    pub fn listRepositoryLinks(self: *Self, allocator: std.mem.Allocator, input: list_repository_links.ListRepositoryLinksInput, options: list_repository_links.Options) !list_repository_links.ListRepositoryLinksOutput {
+    pub fn listRepositoryLinks(self: *Self, allocator: std.mem.Allocator, input: list_repository_links.ListRepositoryLinksInput, options: CallOptions) !list_repository_links.ListRepositoryLinksOutput {
         return list_repository_links.execute(self, allocator, input, options);
     }
 
     /// Lists the repository sync definitions for repository links in your account.
-    pub fn listRepositorySyncDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_repository_sync_definitions.ListRepositorySyncDefinitionsInput, options: list_repository_sync_definitions.Options) !list_repository_sync_definitions.ListRepositorySyncDefinitionsOutput {
+    pub fn listRepositorySyncDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_repository_sync_definitions.ListRepositorySyncDefinitionsInput, options: CallOptions) !list_repository_sync_definitions.ListRepositorySyncDefinitionsOutput {
         return list_repository_sync_definitions.execute(self, allocator, input, options);
     }
 
     /// Returns a list of sync configurations for a specified repository.
-    pub fn listSyncConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_sync_configurations.ListSyncConfigurationsInput, options: list_sync_configurations.Options) !list_sync_configurations.ListSyncConfigurationsOutput {
+    pub fn listSyncConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_sync_configurations.ListSyncConfigurationsInput, options: CallOptions) !list_sync_configurations.ListSyncConfigurationsOutput {
         return list_sync_configurations.execute(self, allocator, input, options);
     }
 
     /// Gets the set of key-value pairs (metadata) that are used to manage the
     /// resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Adds to or modifies the tags of the given resource. Tags are metadata that
     /// can be used
     /// to manage a resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from an Amazon Web Services resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates a specified host with the provided configurations.
-    pub fn updateHost(self: *Self, allocator: std.mem.Allocator, input: update_host.UpdateHostInput, options: update_host.Options) !update_host.UpdateHostOutput {
+    pub fn updateHost(self: *Self, allocator: std.mem.Allocator, input: update_host.UpdateHostInput, options: CallOptions) !update_host.UpdateHostOutput {
         return update_host.execute(self, allocator, input, options);
     }
 
@@ -223,19 +224,19 @@ pub const Client = struct {
     /// A repository link allows Git sync to monitor and sync changes to files in a
     /// specified Git
     /// repository.
-    pub fn updateRepositoryLink(self: *Self, allocator: std.mem.Allocator, input: update_repository_link.UpdateRepositoryLinkInput, options: update_repository_link.Options) !update_repository_link.UpdateRepositoryLinkOutput {
+    pub fn updateRepositoryLink(self: *Self, allocator: std.mem.Allocator, input: update_repository_link.UpdateRepositoryLinkInput, options: CallOptions) !update_repository_link.UpdateRepositoryLinkOutput {
         return update_repository_link.execute(self, allocator, input, options);
     }
 
     /// Allows you to update the status of a sync blocker, resolving the blocker and
     /// allowing syncing to continue.
-    pub fn updateSyncBlocker(self: *Self, allocator: std.mem.Allocator, input: update_sync_blocker.UpdateSyncBlockerInput, options: update_sync_blocker.Options) !update_sync_blocker.UpdateSyncBlockerOutput {
+    pub fn updateSyncBlocker(self: *Self, allocator: std.mem.Allocator, input: update_sync_blocker.UpdateSyncBlockerInput, options: CallOptions) !update_sync_blocker.UpdateSyncBlockerOutput {
         return update_sync_blocker.execute(self, allocator, input, options);
     }
 
     /// Updates the sync configuration for your connection and a specified external
     /// Git repository.
-    pub fn updateSyncConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_sync_configuration.UpdateSyncConfigurationInput, options: update_sync_configuration.Options) !update_sync_configuration.UpdateSyncConfigurationOutput {
+    pub fn updateSyncConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_sync_configuration.UpdateSyncConfigurationInput, options: CallOptions) !update_sync_configuration.UpdateSyncConfigurationOutput {
         return update_sync_configuration.execute(self, allocator, input, options);
     }
 

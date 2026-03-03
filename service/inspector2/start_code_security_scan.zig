@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CodeSecurityResource = @import("code_security_resource.zig").CodeSecurityResource;
 const CodeScanStatus = @import("code_scan_status.zig").CodeScanStatus;
@@ -34,11 +35,7 @@ pub const StartCodeSecurityScanOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartCodeSecurityScanInput, options: Options) !StartCodeSecurityScanOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartCodeSecurityScanInput, options: CallOptions) !StartCodeSecurityScanOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

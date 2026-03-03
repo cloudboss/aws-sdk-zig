@@ -137,6 +137,7 @@ class OperationGenerator(
 
             // Intra-service imports written after standard imports
             writer.write("const Client = @import(\"client.zig\").Client;")
+            writer.write("const CallOptions = @import(\"call_options.zig\").CallOptions;")
             writer.write("const ServiceError = @import(\"errors.zig\").ServiceError;")
 
             // Import shared types referenced by input/output members
@@ -155,11 +156,11 @@ class OperationGenerator(
 
             // smithy.api#Unit is a built-in with no generated file -- emit inline
             if (inputShape.id.toString() == "smithy.api#Unit") {
-                writer.write("const \$L = struct {};", "${operationName}Input")
+                writer.write("pub const \$L = struct {};", "${operationName}Input")
             } else if (isSharedType(inputShape.id)) {
                 val inputFileName = NamingUtil.toZigFileName(inputShape.id.name)
                 writer.write(
-                    "const \$L = @import(\"\$L\").\$L;",
+                    "pub const \$L = @import(\"\$L\").\$L;",
                     "${operationName}Input", inputFileName, inputShape.id.name
                 )
             } else {
@@ -167,18 +168,16 @@ class OperationGenerator(
             }
             writer.blankLine()
             if (outputShape.id.toString() == "smithy.api#Unit") {
-                writer.write("const \$L = struct {};", "${operationName}Output")
+                writer.write("pub const \$L = struct {};", "${operationName}Output")
             } else if (isSharedType(outputShape.id)) {
                 val outputFileName = NamingUtil.toZigFileName(outputShape.id.name)
                 writer.write(
-                    "const \$L = @import(\"\$L\").\$L;",
+                    "pub const \$L = @import(\"\$L\").\$L;",
                     "${operationName}Output", outputFileName, outputShape.id.name
                 )
             } else {
                 writeOutputStruct(writer, ctx, isStreaming, isServerPushEventStream)
             }
-            writer.blankLine()
-            writeOptionsStruct(writer)
             writer.blankLine()
 
             if (isBidirectionalEventStream) {
@@ -350,18 +349,12 @@ class OperationGenerator(
         writer.closeBlock("};")
     }
 
-    private fun writeOptionsStruct(writer: ZigWriter) {
-        writer.openBlock("pub const Options = struct {")
-        writer.write("diagnostic: ?*ServiceError = null,")
-        writer.closeBlock("};")
-    }
-
     private fun writeEventStreamStubExecuteFunction(writer: ZigWriter) {
         val inputName = "${operationName}Input"
         val outputName = "${operationName}Output"
 
         writer.openBlock(
-            "pub fn execute(client: *Client, allocator: std.mem.Allocator, input: \$L, options: Options) !\$L {",
+            "pub fn execute(client: *Client, allocator: std.mem.Allocator, input: \$L, options: CallOptions) !\$L {",
             inputName, outputName,
         )
 
@@ -380,7 +373,7 @@ class OperationGenerator(
         val outputName = "${operationName}Output"
 
         writer.openBlock(
-            "pub fn execute(client: *Client, allocator: std.mem.Allocator, input: \$L, options: Options) !\$L {",
+            "pub fn execute(client: *Client, allocator: std.mem.Allocator, input: \$L, options: CallOptions) !\$L {",
             inputName, outputName,
         )
 
@@ -435,7 +428,7 @@ class OperationGenerator(
         val outputName = "${operationName}Output"
 
         writer.openBlock(
-            "pub fn execute(client: *Client, allocator: std.mem.Allocator, input: \$L, options: Options) !\$L {",
+            "pub fn execute(client: *Client, allocator: std.mem.Allocator, input: \$L, options: CallOptions) !\$L {",
             inputName, outputName,
         )
 
@@ -480,7 +473,7 @@ class OperationGenerator(
         val outputName = "${operationName}Output"
 
         writer.openBlock(
-            "pub fn execute(client: *Client, allocator: std.mem.Allocator, input: \$L, options: Options) !\$L {",
+            "pub fn execute(client: *Client, allocator: std.mem.Allocator, input: \$L, options: CallOptions) !\$L {",
             inputName, outputName,
         )
 
@@ -642,8 +635,8 @@ class OperationGenerator(
         // Also exclude names matching the generated input/output names to prevent collision
         result.remove("${operationName}Input")
         result.remove("${operationName}Output")
-        // Exclude "Options" -- every operation file defines a local Options struct
-        result.remove("Options")
+        // Exclude "CallOptions" -- every operation file imports it from call_options.zig
+        result.remove("CallOptions")
 
         return result
     }

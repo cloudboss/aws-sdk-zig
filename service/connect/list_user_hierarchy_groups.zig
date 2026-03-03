@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const HierarchyGroupSummary = @import("hierarchy_group_summary.zig").HierarchyGroupSummary;
 
@@ -40,11 +41,7 @@ pub const ListUserHierarchyGroupsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListUserHierarchyGroupsInput, options: Options) !ListUserHierarchyGroupsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListUserHierarchyGroupsInput, options: CallOptions) !ListUserHierarchyGroupsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

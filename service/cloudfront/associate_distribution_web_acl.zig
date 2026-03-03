@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const AssociateDistributionWebACLInput = struct {
@@ -27,11 +28,7 @@ pub const AssociateDistributionWebACLOutput = struct {
     web_acl_arn: ?[]const u8 = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateDistributionWebACLInput, options: Options) !AssociateDistributionWebACLOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateDistributionWebACLInput, options: CallOptions) !AssociateDistributionWebACLOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

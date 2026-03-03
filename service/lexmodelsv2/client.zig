@@ -103,6 +103,7 @@ const update_resource_policy = @import("update_resource_policy.zig");
 const update_slot = @import("update_slot.zig");
 const update_slot_type = @import("update_slot_type.zig");
 const update_test_set = @import("update_test_set.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -136,31 +137,31 @@ pub const Client = struct {
 
     /// Create a batch of custom vocabulary items for a given bot locale's
     /// custom vocabulary.
-    pub fn batchCreateCustomVocabularyItem(self: *Self, allocator: std.mem.Allocator, input: batch_create_custom_vocabulary_item.BatchCreateCustomVocabularyItemInput, options: batch_create_custom_vocabulary_item.Options) !batch_create_custom_vocabulary_item.BatchCreateCustomVocabularyItemOutput {
+    pub fn batchCreateCustomVocabularyItem(self: *Self, allocator: std.mem.Allocator, input: batch_create_custom_vocabulary_item.BatchCreateCustomVocabularyItemInput, options: CallOptions) !batch_create_custom_vocabulary_item.BatchCreateCustomVocabularyItemOutput {
         return batch_create_custom_vocabulary_item.execute(self, allocator, input, options);
     }
 
     /// Delete a batch of custom vocabulary items for a given bot locale's
     /// custom vocabulary.
-    pub fn batchDeleteCustomVocabularyItem(self: *Self, allocator: std.mem.Allocator, input: batch_delete_custom_vocabulary_item.BatchDeleteCustomVocabularyItemInput, options: batch_delete_custom_vocabulary_item.Options) !batch_delete_custom_vocabulary_item.BatchDeleteCustomVocabularyItemOutput {
+    pub fn batchDeleteCustomVocabularyItem(self: *Self, allocator: std.mem.Allocator, input: batch_delete_custom_vocabulary_item.BatchDeleteCustomVocabularyItemInput, options: CallOptions) !batch_delete_custom_vocabulary_item.BatchDeleteCustomVocabularyItemOutput {
         return batch_delete_custom_vocabulary_item.execute(self, allocator, input, options);
     }
 
     /// Update a batch of custom vocabulary items for a given bot locale's custom
     /// vocabulary.
-    pub fn batchUpdateCustomVocabularyItem(self: *Self, allocator: std.mem.Allocator, input: batch_update_custom_vocabulary_item.BatchUpdateCustomVocabularyItemInput, options: batch_update_custom_vocabulary_item.Options) !batch_update_custom_vocabulary_item.BatchUpdateCustomVocabularyItemOutput {
+    pub fn batchUpdateCustomVocabularyItem(self: *Self, allocator: std.mem.Allocator, input: batch_update_custom_vocabulary_item.BatchUpdateCustomVocabularyItemInput, options: CallOptions) !batch_update_custom_vocabulary_item.BatchUpdateCustomVocabularyItemOutput {
         return batch_update_custom_vocabulary_item.execute(self, allocator, input, options);
     }
 
     /// Builds a bot, its intents, and its slot types into a specific
     /// locale. A bot can be built into multiple locales. At runtime the locale
     /// is used to choose a specific build of the bot.
-    pub fn buildBotLocale(self: *Self, allocator: std.mem.Allocator, input: build_bot_locale.BuildBotLocaleInput, options: build_bot_locale.Options) !build_bot_locale.BuildBotLocaleOutput {
+    pub fn buildBotLocale(self: *Self, allocator: std.mem.Allocator, input: build_bot_locale.BuildBotLocaleInput, options: CallOptions) !build_bot_locale.BuildBotLocaleOutput {
         return build_bot_locale.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon Lex conversational bot.
-    pub fn createBot(self: *Self, allocator: std.mem.Allocator, input: create_bot.CreateBotInput, options: create_bot.Options) !create_bot.CreateBotOutput {
+    pub fn createBot(self: *Self, allocator: std.mem.Allocator, input: create_bot.CreateBotInput, options: CallOptions) !create_bot.CreateBotOutput {
         return create_bot.execute(self, allocator, input, options);
     }
 
@@ -170,7 +171,7 @@ pub const Client = struct {
     ///
     /// For example, you can create an alias called "PROD" that your
     /// applications use to call the Amazon Lex bot.
-    pub fn createBotAlias(self: *Self, allocator: std.mem.Allocator, input: create_bot_alias.CreateBotAliasInput, options: create_bot_alias.Options) !create_bot_alias.CreateBotAliasOutput {
+    pub fn createBotAlias(self: *Self, allocator: std.mem.Allocator, input: create_bot_alias.CreateBotAliasInput, options: CallOptions) !create_bot_alias.CreateBotAliasOutput {
         return create_bot_alias.execute(self, allocator, input, options);
     }
 
@@ -178,12 +179,12 @@ pub const Client = struct {
     /// slot types that the bot uses in conversations with users in the
     /// specified language and locale. You must add a locale to a bot before
     /// you can add intents and slot types to the bot.
-    pub fn createBotLocale(self: *Self, allocator: std.mem.Allocator, input: create_bot_locale.CreateBotLocaleInput, options: create_bot_locale.Options) !create_bot_locale.CreateBotLocaleOutput {
+    pub fn createBotLocale(self: *Self, allocator: std.mem.Allocator, input: create_bot_locale.CreateBotLocaleInput, options: CallOptions) !create_bot_locale.CreateBotLocaleOutput {
         return create_bot_locale.execute(self, allocator, input, options);
     }
 
     /// Action to create a replication of the source bot in the secondary region.
-    pub fn createBotReplica(self: *Self, allocator: std.mem.Allocator, input: create_bot_replica.CreateBotReplicaInput, options: create_bot_replica.Options) !create_bot_replica.CreateBotReplicaOutput {
+    pub fn createBotReplica(self: *Self, allocator: std.mem.Allocator, input: create_bot_replica.CreateBotReplicaInput, options: CallOptions) !create_bot_replica.CreateBotReplicaOutput {
         return create_bot_replica.execute(self, allocator, input, options);
     }
 
@@ -195,7 +196,7 @@ pub const Client = struct {
     /// of versions created of the bot, not the current number of versions. If a bot
     /// version
     /// is deleted, that bot version number will not be reused.
-    pub fn createBotVersion(self: *Self, allocator: std.mem.Allocator, input: create_bot_version.CreateBotVersionInput, options: create_bot_version.Options) !create_bot_version.CreateBotVersionOutput {
+    pub fn createBotVersion(self: *Self, allocator: std.mem.Allocator, input: create_bot_version.CreateBotVersionInput, options: CallOptions) !create_bot_version.CreateBotVersionOutput {
         return create_bot_version.execute(self, allocator, input, options);
     }
 
@@ -211,7 +212,7 @@ pub const Client = struct {
     /// of the export archive, see [ Importing and
     /// exporting bots
     /// ](https://docs.aws.amazon.com/lexv2/latest/dg/importing-exporting.html)
-    pub fn createExport(self: *Self, allocator: std.mem.Allocator, input: create_export.CreateExportInput, options: create_export.Options) !create_export.CreateExportOutput {
+    pub fn createExport(self: *Self, allocator: std.mem.Allocator, input: create_export.CreateExportInput, options: CallOptions) !create_export.CreateExportOutput {
         return create_export.execute(self, allocator, input, options);
     }
 
@@ -247,13 +248,13 @@ pub const Client = struct {
     ///
     /// * A follow-up prompt that asks the user for additional activity.
     /// For example, "Do you want a drink with your pizza?"
-    pub fn createIntent(self: *Self, allocator: std.mem.Allocator, input: create_intent.CreateIntentInput, options: create_intent.Options) !create_intent.CreateIntentOutput {
+    pub fn createIntent(self: *Self, allocator: std.mem.Allocator, input: create_intent.CreateIntentInput, options: CallOptions) !create_intent.CreateIntentOutput {
         return create_intent.execute(self, allocator, input, options);
     }
 
     /// Creates a new resource policy with the specified policy
     /// statements.
-    pub fn createResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: create_resource_policy.CreateResourcePolicyInput, options: create_resource_policy.Options) !create_resource_policy.CreateResourcePolicyOutput {
+    pub fn createResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: create_resource_policy.CreateResourcePolicyInput, options: CallOptions) !create_resource_policy.CreateResourcePolicyOutput {
         return create_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -266,7 +267,7 @@ pub const Client = struct {
     ///
     /// You need to add the `CreateResourcePolicy` or `UpdateResourcePolicy`
     /// action to the bot role in order to call the API.
-    pub fn createResourcePolicyStatement(self: *Self, allocator: std.mem.Allocator, input: create_resource_policy_statement.CreateResourcePolicyStatementInput, options: create_resource_policy_statement.Options) !create_resource_policy_statement.CreateResourcePolicyStatementOutput {
+    pub fn createResourcePolicyStatement(self: *Self, allocator: std.mem.Allocator, input: create_resource_policy_statement.CreateResourcePolicyStatementInput, options: CallOptions) !create_resource_policy_statement.CreateResourcePolicyStatementOutput {
         return create_resource_policy_statement.execute(self, allocator, input, options);
     }
 
@@ -275,7 +276,7 @@ pub const Client = struct {
     /// slots for size, crust, and number of pizzas. For each slot, you define
     /// one or more utterances that Amazon Lex uses to elicit a response from the
     /// user.
-    pub fn createSlot(self: *Self, allocator: std.mem.Allocator, input: create_slot.CreateSlotInput, options: create_slot.Options) !create_slot.CreateSlotOutput {
+    pub fn createSlot(self: *Self, allocator: std.mem.Allocator, input: create_slot.CreateSlotInput, options: CallOptions) !create_slot.CreateSlotOutput {
         return create_slot.execute(self, allocator, input, options);
     }
 
@@ -284,19 +285,19 @@ pub const Client = struct {
     /// To create a custom slot type, specify a name for the slot type and
     /// a set of enumeration values, the values that a slot of this type can
     /// assume.
-    pub fn createSlotType(self: *Self, allocator: std.mem.Allocator, input: create_slot_type.CreateSlotTypeInput, options: create_slot_type.Options) !create_slot_type.CreateSlotTypeOutput {
+    pub fn createSlotType(self: *Self, allocator: std.mem.Allocator, input: create_slot_type.CreateSlotTypeInput, options: CallOptions) !create_slot_type.CreateSlotTypeOutput {
         return create_slot_type.execute(self, allocator, input, options);
     }
 
     /// Create a report that describes the differences between the bot and the test
     /// set.
-    pub fn createTestSetDiscrepancyReport(self: *Self, allocator: std.mem.Allocator, input: create_test_set_discrepancy_report.CreateTestSetDiscrepancyReportInput, options: create_test_set_discrepancy_report.Options) !create_test_set_discrepancy_report.CreateTestSetDiscrepancyReportOutput {
+    pub fn createTestSetDiscrepancyReport(self: *Self, allocator: std.mem.Allocator, input: create_test_set_discrepancy_report.CreateTestSetDiscrepancyReportInput, options: CallOptions) !create_test_set_discrepancy_report.CreateTestSetDiscrepancyReportOutput {
         return create_test_set_discrepancy_report.execute(self, allocator, input, options);
     }
 
     /// Gets a pre-signed S3 write URL that you use to upload the zip
     /// archive when importing a bot or a bot locale.
-    pub fn createUploadUrl(self: *Self, allocator: std.mem.Allocator, input: create_upload_url.CreateUploadUrlInput, options: create_upload_url.Options) !create_upload_url.CreateUploadUrlOutput {
+    pub fn createUploadUrl(self: *Self, allocator: std.mem.Allocator, input: create_upload_url.CreateUploadUrlInput, options: CallOptions) !create_upload_url.CreateUploadUrlOutput {
         return create_upload_url.execute(self, allocator, input, options);
     }
 
@@ -312,12 +313,12 @@ pub const Client = struct {
     /// a `ResourceInUseException` exception. If you want to delete
     /// the bot and the alias, set the `skipResourceInUseCheck`
     /// parameter to `true`.
-    pub fn deleteBot(self: *Self, allocator: std.mem.Allocator, input: delete_bot.DeleteBotInput, options: delete_bot.Options) !delete_bot.DeleteBotOutput {
+    pub fn deleteBot(self: *Self, allocator: std.mem.Allocator, input: delete_bot.DeleteBotInput, options: CallOptions) !delete_bot.DeleteBotOutput {
         return delete_bot.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified bot alias.
-    pub fn deleteBotAlias(self: *Self, allocator: std.mem.Allocator, input: delete_bot_alias.DeleteBotAliasInput, options: delete_bot_alias.Options) !delete_bot_alias.DeleteBotAliasOutput {
+    pub fn deleteBotAlias(self: *Self, allocator: std.mem.Allocator, input: delete_bot_alias.DeleteBotAliasInput, options: CallOptions) !delete_bot_alias.DeleteBotAliasOutput {
         return delete_bot_alias.execute(self, allocator, input, options);
     }
 
@@ -325,37 +326,37 @@ pub const Client = struct {
     ///
     /// When you delete a locale, all intents, slots, and slot types defined
     /// for the locale are also deleted.
-    pub fn deleteBotLocale(self: *Self, allocator: std.mem.Allocator, input: delete_bot_locale.DeleteBotLocaleInput, options: delete_bot_locale.Options) !delete_bot_locale.DeleteBotLocaleOutput {
+    pub fn deleteBotLocale(self: *Self, allocator: std.mem.Allocator, input: delete_bot_locale.DeleteBotLocaleInput, options: CallOptions) !delete_bot_locale.DeleteBotLocaleOutput {
         return delete_bot_locale.execute(self, allocator, input, options);
     }
 
     /// The action to delete the replicated bot in the secondary region.
-    pub fn deleteBotReplica(self: *Self, allocator: std.mem.Allocator, input: delete_bot_replica.DeleteBotReplicaInput, options: delete_bot_replica.Options) !delete_bot_replica.DeleteBotReplicaOutput {
+    pub fn deleteBotReplica(self: *Self, allocator: std.mem.Allocator, input: delete_bot_replica.DeleteBotReplicaInput, options: CallOptions) !delete_bot_replica.DeleteBotReplicaOutput {
         return delete_bot_replica.execute(self, allocator, input, options);
     }
 
     /// Deletes a specific version of a bot. To delete all versions of a bot,
     /// use the
     /// [DeleteBot](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DeleteBot.html) operation.
-    pub fn deleteBotVersion(self: *Self, allocator: std.mem.Allocator, input: delete_bot_version.DeleteBotVersionInput, options: delete_bot_version.Options) !delete_bot_version.DeleteBotVersionOutput {
+    pub fn deleteBotVersion(self: *Self, allocator: std.mem.Allocator, input: delete_bot_version.DeleteBotVersionInput, options: CallOptions) !delete_bot_version.DeleteBotVersionOutput {
         return delete_bot_version.execute(self, allocator, input, options);
     }
 
     /// Removes a custom vocabulary from the specified locale
     /// in the specified bot.
-    pub fn deleteCustomVocabulary(self: *Self, allocator: std.mem.Allocator, input: delete_custom_vocabulary.DeleteCustomVocabularyInput, options: delete_custom_vocabulary.Options) !delete_custom_vocabulary.DeleteCustomVocabularyOutput {
+    pub fn deleteCustomVocabulary(self: *Self, allocator: std.mem.Allocator, input: delete_custom_vocabulary.DeleteCustomVocabularyInput, options: CallOptions) !delete_custom_vocabulary.DeleteCustomVocabularyOutput {
         return delete_custom_vocabulary.execute(self, allocator, input, options);
     }
 
     /// Removes a previous export and the associated files stored in an S3
     /// bucket.
-    pub fn deleteExport(self: *Self, allocator: std.mem.Allocator, input: delete_export.DeleteExportInput, options: delete_export.Options) !delete_export.DeleteExportOutput {
+    pub fn deleteExport(self: *Self, allocator: std.mem.Allocator, input: delete_export.DeleteExportInput, options: CallOptions) !delete_export.DeleteExportOutput {
         return delete_export.execute(self, allocator, input, options);
     }
 
     /// Removes a previous import and the associated file stored in an S3
     /// bucket.
-    pub fn deleteImport(self: *Self, allocator: std.mem.Allocator, input: delete_import.DeleteImportInput, options: delete_import.Options) !delete_import.DeleteImportOutput {
+    pub fn deleteImport(self: *Self, allocator: std.mem.Allocator, input: delete_import.DeleteImportInput, options: CallOptions) !delete_import.DeleteImportOutput {
         return delete_import.execute(self, allocator, input, options);
     }
 
@@ -363,13 +364,13 @@ pub const Client = struct {
     ///
     /// Deleting an intent also deletes the slots associated with the
     /// intent.
-    pub fn deleteIntent(self: *Self, allocator: std.mem.Allocator, input: delete_intent.DeleteIntentInput, options: delete_intent.Options) !delete_intent.DeleteIntentOutput {
+    pub fn deleteIntent(self: *Self, allocator: std.mem.Allocator, input: delete_intent.DeleteIntentInput, options: CallOptions) !delete_intent.DeleteIntentOutput {
         return delete_intent.execute(self, allocator, input, options);
     }
 
     /// Removes an existing policy from a bot or bot alias. If the resource
     /// doesn't have a policy attached, Amazon Lex returns an exception.
-    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: delete_resource_policy.Options) !delete_resource_policy.DeleteResourcePolicyOutput {
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
@@ -381,12 +382,12 @@ pub const Client = struct {
     ///
     /// You need to add the `DeleteResourcePolicy` or `UpdateResourcePolicy`
     /// action to the bot role in order to call the API.
-    pub fn deleteResourcePolicyStatement(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy_statement.DeleteResourcePolicyStatementInput, options: delete_resource_policy_statement.Options) !delete_resource_policy_statement.DeleteResourcePolicyStatementOutput {
+    pub fn deleteResourcePolicyStatement(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy_statement.DeleteResourcePolicyStatementInput, options: CallOptions) !delete_resource_policy_statement.DeleteResourcePolicyStatementOutput {
         return delete_resource_policy_statement.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified slot from an intent.
-    pub fn deleteSlot(self: *Self, allocator: std.mem.Allocator, input: delete_slot.DeleteSlotInput, options: delete_slot.Options) !delete_slot.DeleteSlotOutput {
+    pub fn deleteSlot(self: *Self, allocator: std.mem.Allocator, input: delete_slot.DeleteSlotInput, options: CallOptions) !delete_slot.DeleteSlotOutput {
         return delete_slot.execute(self, allocator, input, options);
     }
 
@@ -396,12 +397,12 @@ pub const Client = struct {
     /// `ResourceInUseException` exception. To avoid the
     /// exception, set the `skipResourceInUseCheck` parameter to
     /// `true`.
-    pub fn deleteSlotType(self: *Self, allocator: std.mem.Allocator, input: delete_slot_type.DeleteSlotTypeInput, options: delete_slot_type.Options) !delete_slot_type.DeleteSlotTypeOutput {
+    pub fn deleteSlotType(self: *Self, allocator: std.mem.Allocator, input: delete_slot_type.DeleteSlotTypeInput, options: CallOptions) !delete_slot_type.DeleteSlotTypeOutput {
         return delete_slot_type.execute(self, allocator, input, options);
     }
 
     /// The action to delete the selected test set.
-    pub fn deleteTestSet(self: *Self, allocator: std.mem.Allocator, input: delete_test_set.DeleteTestSetInput, options: delete_test_set.Options) !delete_test_set.DeleteTestSetOutput {
+    pub fn deleteTestSet(self: *Self, allocator: std.mem.Allocator, input: delete_test_set.DeleteTestSetInput, options: CallOptions) !delete_test_set.DeleteTestSetOutput {
         return delete_test_set.execute(self, allocator, input, options);
     }
 
@@ -420,22 +421,22 @@ pub const Client = struct {
     /// immediately. Utterances stored for use with the
     /// `ListAggregatedUtterances` operation are deleted after 15
     /// days.
-    pub fn deleteUtterances(self: *Self, allocator: std.mem.Allocator, input: delete_utterances.DeleteUtterancesInput, options: delete_utterances.Options) !delete_utterances.DeleteUtterancesOutput {
+    pub fn deleteUtterances(self: *Self, allocator: std.mem.Allocator, input: delete_utterances.DeleteUtterancesInput, options: CallOptions) !delete_utterances.DeleteUtterancesOutput {
         return delete_utterances.execute(self, allocator, input, options);
     }
 
     /// Provides metadata information about a bot.
-    pub fn describeBot(self: *Self, allocator: std.mem.Allocator, input: describe_bot.DescribeBotInput, options: describe_bot.Options) !describe_bot.DescribeBotOutput {
+    pub fn describeBot(self: *Self, allocator: std.mem.Allocator, input: describe_bot.DescribeBotInput, options: CallOptions) !describe_bot.DescribeBotOutput {
         return describe_bot.execute(self, allocator, input, options);
     }
 
     /// Get information about a specific bot alias.
-    pub fn describeBotAlias(self: *Self, allocator: std.mem.Allocator, input: describe_bot_alias.DescribeBotAliasInput, options: describe_bot_alias.Options) !describe_bot_alias.DescribeBotAliasOutput {
+    pub fn describeBotAlias(self: *Self, allocator: std.mem.Allocator, input: describe_bot_alias.DescribeBotAliasInput, options: CallOptions) !describe_bot_alias.DescribeBotAliasOutput {
         return describe_bot_alias.execute(self, allocator, input, options);
     }
 
     /// Describes the settings that a bot has for a specific locale.
-    pub fn describeBotLocale(self: *Self, allocator: std.mem.Allocator, input: describe_bot_locale.DescribeBotLocaleInput, options: describe_bot_locale.Options) !describe_bot_locale.DescribeBotLocaleOutput {
+    pub fn describeBotLocale(self: *Self, allocator: std.mem.Allocator, input: describe_bot_locale.DescribeBotLocaleInput, options: CallOptions) !describe_bot_locale.DescribeBotLocaleOutput {
         return describe_bot_locale.execute(self, allocator, input, options);
     }
 
@@ -444,12 +445,12 @@ pub const Client = struct {
     /// to download associated transcripts after processing is complete, and to
     /// download intents and slot-types generated by the bot
     /// recommendation.
-    pub fn describeBotRecommendation(self: *Self, allocator: std.mem.Allocator, input: describe_bot_recommendation.DescribeBotRecommendationInput, options: describe_bot_recommendation.Options) !describe_bot_recommendation.DescribeBotRecommendationOutput {
+    pub fn describeBotRecommendation(self: *Self, allocator: std.mem.Allocator, input: describe_bot_recommendation.DescribeBotRecommendationInput, options: CallOptions) !describe_bot_recommendation.DescribeBotRecommendationOutput {
         return describe_bot_recommendation.execute(self, allocator, input, options);
     }
 
     /// Monitors the bot replication status through the UI console.
-    pub fn describeBotReplica(self: *Self, allocator: std.mem.Allocator, input: describe_bot_replica.DescribeBotReplicaInput, options: describe_bot_replica.Options) !describe_bot_replica.DescribeBotReplicaOutput {
+    pub fn describeBotReplica(self: *Self, allocator: std.mem.Allocator, input: describe_bot_replica.DescribeBotReplicaInput, options: CallOptions) !describe_bot_replica.DescribeBotReplicaOutput {
         return describe_bot_replica.execute(self, allocator, input, options);
     }
 
@@ -459,79 +460,79 @@ pub const Client = struct {
     /// to retrieve the Amazon S3 object containing the bot locale configuration.
     /// You can
     /// then modify and import this configuration.
-    pub fn describeBotResourceGeneration(self: *Self, allocator: std.mem.Allocator, input: describe_bot_resource_generation.DescribeBotResourceGenerationInput, options: describe_bot_resource_generation.Options) !describe_bot_resource_generation.DescribeBotResourceGenerationOutput {
+    pub fn describeBotResourceGeneration(self: *Self, allocator: std.mem.Allocator, input: describe_bot_resource_generation.DescribeBotResourceGenerationInput, options: CallOptions) !describe_bot_resource_generation.DescribeBotResourceGenerationOutput {
         return describe_bot_resource_generation.execute(self, allocator, input, options);
     }
 
     /// Provides metadata about a version of a bot.
-    pub fn describeBotVersion(self: *Self, allocator: std.mem.Allocator, input: describe_bot_version.DescribeBotVersionInput, options: describe_bot_version.Options) !describe_bot_version.DescribeBotVersionOutput {
+    pub fn describeBotVersion(self: *Self, allocator: std.mem.Allocator, input: describe_bot_version.DescribeBotVersionInput, options: CallOptions) !describe_bot_version.DescribeBotVersionOutput {
         return describe_bot_version.execute(self, allocator, input, options);
     }
 
     /// Provides metadata information about a custom vocabulary.
-    pub fn describeCustomVocabularyMetadata(self: *Self, allocator: std.mem.Allocator, input: describe_custom_vocabulary_metadata.DescribeCustomVocabularyMetadataInput, options: describe_custom_vocabulary_metadata.Options) !describe_custom_vocabulary_metadata.DescribeCustomVocabularyMetadataOutput {
+    pub fn describeCustomVocabularyMetadata(self: *Self, allocator: std.mem.Allocator, input: describe_custom_vocabulary_metadata.DescribeCustomVocabularyMetadataInput, options: CallOptions) !describe_custom_vocabulary_metadata.DescribeCustomVocabularyMetadataOutput {
         return describe_custom_vocabulary_metadata.execute(self, allocator, input, options);
     }
 
     /// Gets information about a specific export.
-    pub fn describeExport(self: *Self, allocator: std.mem.Allocator, input: describe_export.DescribeExportInput, options: describe_export.Options) !describe_export.DescribeExportOutput {
+    pub fn describeExport(self: *Self, allocator: std.mem.Allocator, input: describe_export.DescribeExportInput, options: CallOptions) !describe_export.DescribeExportOutput {
         return describe_export.execute(self, allocator, input, options);
     }
 
     /// Gets information about a specific import.
-    pub fn describeImport(self: *Self, allocator: std.mem.Allocator, input: describe_import.DescribeImportInput, options: describe_import.Options) !describe_import.DescribeImportOutput {
+    pub fn describeImport(self: *Self, allocator: std.mem.Allocator, input: describe_import.DescribeImportInput, options: CallOptions) !describe_import.DescribeImportOutput {
         return describe_import.execute(self, allocator, input, options);
     }
 
     /// Returns metadata about an intent.
-    pub fn describeIntent(self: *Self, allocator: std.mem.Allocator, input: describe_intent.DescribeIntentInput, options: describe_intent.Options) !describe_intent.DescribeIntentOutput {
+    pub fn describeIntent(self: *Self, allocator: std.mem.Allocator, input: describe_intent.DescribeIntentInput, options: CallOptions) !describe_intent.DescribeIntentOutput {
         return describe_intent.execute(self, allocator, input, options);
     }
 
     /// Gets the resource policy and policy revision for a bot or bot
     /// alias.
-    pub fn describeResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: describe_resource_policy.DescribeResourcePolicyInput, options: describe_resource_policy.Options) !describe_resource_policy.DescribeResourcePolicyOutput {
+    pub fn describeResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: describe_resource_policy.DescribeResourcePolicyInput, options: CallOptions) !describe_resource_policy.DescribeResourcePolicyOutput {
         return describe_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Gets metadata information about a slot.
-    pub fn describeSlot(self: *Self, allocator: std.mem.Allocator, input: describe_slot.DescribeSlotInput, options: describe_slot.Options) !describe_slot.DescribeSlotOutput {
+    pub fn describeSlot(self: *Self, allocator: std.mem.Allocator, input: describe_slot.DescribeSlotInput, options: CallOptions) !describe_slot.DescribeSlotOutput {
         return describe_slot.execute(self, allocator, input, options);
     }
 
     /// Gets metadata information about a slot type.
-    pub fn describeSlotType(self: *Self, allocator: std.mem.Allocator, input: describe_slot_type.DescribeSlotTypeInput, options: describe_slot_type.Options) !describe_slot_type.DescribeSlotTypeOutput {
+    pub fn describeSlotType(self: *Self, allocator: std.mem.Allocator, input: describe_slot_type.DescribeSlotTypeInput, options: CallOptions) !describe_slot_type.DescribeSlotTypeOutput {
         return describe_slot_type.execute(self, allocator, input, options);
     }
 
     /// Gets metadata information about the test execution.
-    pub fn describeTestExecution(self: *Self, allocator: std.mem.Allocator, input: describe_test_execution.DescribeTestExecutionInput, options: describe_test_execution.Options) !describe_test_execution.DescribeTestExecutionOutput {
+    pub fn describeTestExecution(self: *Self, allocator: std.mem.Allocator, input: describe_test_execution.DescribeTestExecutionInput, options: CallOptions) !describe_test_execution.DescribeTestExecutionOutput {
         return describe_test_execution.execute(self, allocator, input, options);
     }
 
     /// Gets metadata information about the test set.
-    pub fn describeTestSet(self: *Self, allocator: std.mem.Allocator, input: describe_test_set.DescribeTestSetInput, options: describe_test_set.Options) !describe_test_set.DescribeTestSetOutput {
+    pub fn describeTestSet(self: *Self, allocator: std.mem.Allocator, input: describe_test_set.DescribeTestSetInput, options: CallOptions) !describe_test_set.DescribeTestSetOutput {
         return describe_test_set.execute(self, allocator, input, options);
     }
 
     /// Gets metadata information about the test set discrepancy report.
-    pub fn describeTestSetDiscrepancyReport(self: *Self, allocator: std.mem.Allocator, input: describe_test_set_discrepancy_report.DescribeTestSetDiscrepancyReportInput, options: describe_test_set_discrepancy_report.Options) !describe_test_set_discrepancy_report.DescribeTestSetDiscrepancyReportOutput {
+    pub fn describeTestSetDiscrepancyReport(self: *Self, allocator: std.mem.Allocator, input: describe_test_set_discrepancy_report.DescribeTestSetDiscrepancyReportInput, options: CallOptions) !describe_test_set_discrepancy_report.DescribeTestSetDiscrepancyReportOutput {
         return describe_test_set_discrepancy_report.execute(self, allocator, input, options);
     }
 
     /// Gets metadata information about the test set generation.
-    pub fn describeTestSetGeneration(self: *Self, allocator: std.mem.Allocator, input: describe_test_set_generation.DescribeTestSetGenerationInput, options: describe_test_set_generation.Options) !describe_test_set_generation.DescribeTestSetGenerationOutput {
+    pub fn describeTestSetGeneration(self: *Self, allocator: std.mem.Allocator, input: describe_test_set_generation.DescribeTestSetGenerationInput, options: CallOptions) !describe_test_set_generation.DescribeTestSetGenerationOutput {
         return describe_test_set_generation.execute(self, allocator, input, options);
     }
 
     /// Generates sample utterances for an intent.
-    pub fn generateBotElement(self: *Self, allocator: std.mem.Allocator, input: generate_bot_element.GenerateBotElementInput, options: generate_bot_element.Options) !generate_bot_element.GenerateBotElementOutput {
+    pub fn generateBotElement(self: *Self, allocator: std.mem.Allocator, input: generate_bot_element.GenerateBotElementInput, options: CallOptions) !generate_bot_element.GenerateBotElementOutput {
         return generate_bot_element.execute(self, allocator, input, options);
     }
 
     /// The pre-signed Amazon S3 URL to download the test execution result
     /// artifacts.
-    pub fn getTestExecutionArtifactsUrl(self: *Self, allocator: std.mem.Allocator, input: get_test_execution_artifacts_url.GetTestExecutionArtifactsUrlInput, options: get_test_execution_artifacts_url.Options) !get_test_execution_artifacts_url.GetTestExecutionArtifactsUrlOutput {
+    pub fn getTestExecutionArtifactsUrl(self: *Self, allocator: std.mem.Allocator, input: get_test_execution_artifacts_url.GetTestExecutionArtifactsUrlInput, options: CallOptions) !get_test_execution_artifacts_url.GetTestExecutionArtifactsUrlOutput {
         return get_test_execution_artifacts_url.execute(self, allocator, input, options);
     }
 
@@ -559,44 +560,44 @@ pub const Client = struct {
     /// * You are using slot obfuscation with one or more slots.
     ///
     /// * You opted out of participating in improving Amazon Lex.
-    pub fn listAggregatedUtterances(self: *Self, allocator: std.mem.Allocator, input: list_aggregated_utterances.ListAggregatedUtterancesInput, options: list_aggregated_utterances.Options) !list_aggregated_utterances.ListAggregatedUtterancesOutput {
+    pub fn listAggregatedUtterances(self: *Self, allocator: std.mem.Allocator, input: list_aggregated_utterances.ListAggregatedUtterancesInput, options: CallOptions) !list_aggregated_utterances.ListAggregatedUtterancesOutput {
         return list_aggregated_utterances.execute(self, allocator, input, options);
     }
 
     /// The action to list the replicated bots created from the source bot alias.
-    pub fn listBotAliasReplicas(self: *Self, allocator: std.mem.Allocator, input: list_bot_alias_replicas.ListBotAliasReplicasInput, options: list_bot_alias_replicas.Options) !list_bot_alias_replicas.ListBotAliasReplicasOutput {
+    pub fn listBotAliasReplicas(self: *Self, allocator: std.mem.Allocator, input: list_bot_alias_replicas.ListBotAliasReplicasInput, options: CallOptions) !list_bot_alias_replicas.ListBotAliasReplicasOutput {
         return list_bot_alias_replicas.execute(self, allocator, input, options);
     }
 
     /// Gets a list of aliases for the specified bot.
-    pub fn listBotAliases(self: *Self, allocator: std.mem.Allocator, input: list_bot_aliases.ListBotAliasesInput, options: list_bot_aliases.Options) !list_bot_aliases.ListBotAliasesOutput {
+    pub fn listBotAliases(self: *Self, allocator: std.mem.Allocator, input: list_bot_aliases.ListBotAliasesInput, options: CallOptions) !list_bot_aliases.ListBotAliasesOutput {
         return list_bot_aliases.execute(self, allocator, input, options);
     }
 
     /// Gets a list of locales for the specified bot.
-    pub fn listBotLocales(self: *Self, allocator: std.mem.Allocator, input: list_bot_locales.ListBotLocalesInput, options: list_bot_locales.Options) !list_bot_locales.ListBotLocalesOutput {
+    pub fn listBotLocales(self: *Self, allocator: std.mem.Allocator, input: list_bot_locales.ListBotLocalesInput, options: CallOptions) !list_bot_locales.ListBotLocalesOutput {
         return list_bot_locales.execute(self, allocator, input, options);
     }
 
     /// Get a list of bot recommendations that meet the specified
     /// criteria.
-    pub fn listBotRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_bot_recommendations.ListBotRecommendationsInput, options: list_bot_recommendations.Options) !list_bot_recommendations.ListBotRecommendationsOutput {
+    pub fn listBotRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_bot_recommendations.ListBotRecommendationsInput, options: CallOptions) !list_bot_recommendations.ListBotRecommendationsOutput {
         return list_bot_recommendations.execute(self, allocator, input, options);
     }
 
     /// The action to list the replicated bots.
-    pub fn listBotReplicas(self: *Self, allocator: std.mem.Allocator, input: list_bot_replicas.ListBotReplicasInput, options: list_bot_replicas.Options) !list_bot_replicas.ListBotReplicasOutput {
+    pub fn listBotReplicas(self: *Self, allocator: std.mem.Allocator, input: list_bot_replicas.ListBotReplicasInput, options: CallOptions) !list_bot_replicas.ListBotReplicasOutput {
         return list_bot_replicas.execute(self, allocator, input, options);
     }
 
     /// Lists the generation requests made for a bot locale.
-    pub fn listBotResourceGenerations(self: *Self, allocator: std.mem.Allocator, input: list_bot_resource_generations.ListBotResourceGenerationsInput, options: list_bot_resource_generations.Options) !list_bot_resource_generations.ListBotResourceGenerationsOutput {
+    pub fn listBotResourceGenerations(self: *Self, allocator: std.mem.Allocator, input: list_bot_resource_generations.ListBotResourceGenerationsInput, options: CallOptions) !list_bot_resource_generations.ListBotResourceGenerationsOutput {
         return list_bot_resource_generations.execute(self, allocator, input, options);
     }
 
     /// Contains information about all the versions replication statuses applicable
     /// for Global Resiliency.
-    pub fn listBotVersionReplicas(self: *Self, allocator: std.mem.Allocator, input: list_bot_version_replicas.ListBotVersionReplicasInput, options: list_bot_version_replicas.Options) !list_bot_version_replicas.ListBotVersionReplicasOutput {
+    pub fn listBotVersionReplicas(self: *Self, allocator: std.mem.Allocator, input: list_bot_version_replicas.ListBotVersionReplicasInput, options: CallOptions) !list_bot_version_replicas.ListBotVersionReplicasOutput {
         return list_bot_version_replicas.execute(self, allocator, input, options);
     }
 
@@ -610,12 +611,12 @@ pub const Client = struct {
     ///
     /// The `ListBotVersions` operation always returns at least
     /// one version, the `DRAFT` version.
-    pub fn listBotVersions(self: *Self, allocator: std.mem.Allocator, input: list_bot_versions.ListBotVersionsInput, options: list_bot_versions.Options) !list_bot_versions.ListBotVersionsOutput {
+    pub fn listBotVersions(self: *Self, allocator: std.mem.Allocator, input: list_bot_versions.ListBotVersionsInput, options: CallOptions) !list_bot_versions.ListBotVersionsOutput {
         return list_bot_versions.execute(self, allocator, input, options);
     }
 
     /// Gets a list of available bots.
-    pub fn listBots(self: *Self, allocator: std.mem.Allocator, input: list_bots.ListBotsInput, options: list_bots.Options) !list_bots.ListBotsOutput {
+    pub fn listBots(self: *Self, allocator: std.mem.Allocator, input: list_bots.ListBotsInput, options: CallOptions) !list_bots.ListBotsOutput {
         return list_bots.execute(self, allocator, input, options);
     }
 
@@ -627,31 +628,31 @@ pub const Client = struct {
     /// parameter when you call the `CreateIntent` operation. For
     /// more information, see
     /// [CreateIntent](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateIntent.html).
-    pub fn listBuiltInIntents(self: *Self, allocator: std.mem.Allocator, input: list_built_in_intents.ListBuiltInIntentsInput, options: list_built_in_intents.Options) !list_built_in_intents.ListBuiltInIntentsOutput {
+    pub fn listBuiltInIntents(self: *Self, allocator: std.mem.Allocator, input: list_built_in_intents.ListBuiltInIntentsInput, options: CallOptions) !list_built_in_intents.ListBuiltInIntentsOutput {
         return list_built_in_intents.execute(self, allocator, input, options);
     }
 
     /// Gets a list of built-in slot types that meet the specified
     /// criteria.
-    pub fn listBuiltInSlotTypes(self: *Self, allocator: std.mem.Allocator, input: list_built_in_slot_types.ListBuiltInSlotTypesInput, options: list_built_in_slot_types.Options) !list_built_in_slot_types.ListBuiltInSlotTypesOutput {
+    pub fn listBuiltInSlotTypes(self: *Self, allocator: std.mem.Allocator, input: list_built_in_slot_types.ListBuiltInSlotTypesInput, options: CallOptions) !list_built_in_slot_types.ListBuiltInSlotTypesOutput {
         return list_built_in_slot_types.execute(self, allocator, input, options);
     }
 
     /// Paginated list of custom vocabulary items for a given bot locale's
     /// custom vocabulary.
-    pub fn listCustomVocabularyItems(self: *Self, allocator: std.mem.Allocator, input: list_custom_vocabulary_items.ListCustomVocabularyItemsInput, options: list_custom_vocabulary_items.Options) !list_custom_vocabulary_items.ListCustomVocabularyItemsOutput {
+    pub fn listCustomVocabularyItems(self: *Self, allocator: std.mem.Allocator, input: list_custom_vocabulary_items.ListCustomVocabularyItemsInput, options: CallOptions) !list_custom_vocabulary_items.ListCustomVocabularyItemsOutput {
         return list_custom_vocabulary_items.execute(self, allocator, input, options);
     }
 
     /// Lists the exports for a bot, bot locale, or custom vocabulary.
     /// Exports are kept in the list for 7 days.
-    pub fn listExports(self: *Self, allocator: std.mem.Allocator, input: list_exports.ListExportsInput, options: list_exports.Options) !list_exports.ListExportsOutput {
+    pub fn listExports(self: *Self, allocator: std.mem.Allocator, input: list_exports.ListExportsInput, options: CallOptions) !list_exports.ListExportsOutput {
         return list_exports.execute(self, allocator, input, options);
     }
 
     /// Lists the imports for a bot, bot locale, or custom vocabulary.
     /// Imports are kept in the list for 7 days.
-    pub fn listImports(self: *Self, allocator: std.mem.Allocator, input: list_imports.ListImportsInput, options: list_imports.Options) !list_imports.ListImportsOutput {
+    pub fn listImports(self: *Self, allocator: std.mem.Allocator, input: list_imports.ListImportsInput, options: CallOptions) !list_imports.ListImportsOutput {
         return list_imports.execute(self, allocator, input, options);
     }
 
@@ -676,7 +677,7 @@ pub const Client = struct {
     ///
     /// Note that an `order` field exists in both `binBy` and `metrics`. You can
     /// specify only one `order` in a given request.
-    pub fn listIntentMetrics(self: *Self, allocator: std.mem.Allocator, input: list_intent_metrics.ListIntentMetricsInput, options: list_intent_metrics.Options) !list_intent_metrics.ListIntentMetricsOutput {
+    pub fn listIntentMetrics(self: *Self, allocator: std.mem.Allocator, input: list_intent_metrics.ListIntentMetricsInput, options: CallOptions) !list_intent_metrics.ListIntentMetricsOutput {
         return list_intent_metrics.execute(self, allocator, input, options);
     }
 
@@ -693,7 +694,7 @@ pub const Client = struct {
     ///   in that order.
     ///
     /// Use the optional `filters` field to filter the results.
-    pub fn listIntentPaths(self: *Self, allocator: std.mem.Allocator, input: list_intent_paths.ListIntentPathsInput, options: list_intent_paths.Options) !list_intent_paths.ListIntentPathsOutput {
+    pub fn listIntentPaths(self: *Self, allocator: std.mem.Allocator, input: list_intent_paths.ListIntentPathsInput, options: CallOptions) !list_intent_paths.ListIntentPathsOutput {
         return list_intent_paths.execute(self, allocator, input, options);
     }
 
@@ -718,19 +719,19 @@ pub const Client = struct {
     ///
     /// Note that an `order` field exists in both `binBy` and `metrics`. You can
     /// only specify one `order` in a given request.
-    pub fn listIntentStageMetrics(self: *Self, allocator: std.mem.Allocator, input: list_intent_stage_metrics.ListIntentStageMetricsInput, options: list_intent_stage_metrics.Options) !list_intent_stage_metrics.ListIntentStageMetricsOutput {
+    pub fn listIntentStageMetrics(self: *Self, allocator: std.mem.Allocator, input: list_intent_stage_metrics.ListIntentStageMetricsInput, options: CallOptions) !list_intent_stage_metrics.ListIntentStageMetricsOutput {
         return list_intent_stage_metrics.execute(self, allocator, input, options);
     }
 
     /// Get a list of intents that meet the specified criteria.
-    pub fn listIntents(self: *Self, allocator: std.mem.Allocator, input: list_intents.ListIntentsInput, options: list_intents.Options) !list_intents.ListIntentsOutput {
+    pub fn listIntents(self: *Self, allocator: std.mem.Allocator, input: list_intents.ListIntentsInput, options: CallOptions) !list_intents.ListIntentsOutput {
         return list_intents.execute(self, allocator, input, options);
     }
 
     /// Gets a list of recommended intents provided by the bot
     /// recommendation that you can use in your bot. Intents in the
     /// response are ordered by relevance.
-    pub fn listRecommendedIntents(self: *Self, allocator: std.mem.Allocator, input: list_recommended_intents.ListRecommendedIntentsInput, options: list_recommended_intents.Options) !list_recommended_intents.ListRecommendedIntentsOutput {
+    pub fn listRecommendedIntents(self: *Self, allocator: std.mem.Allocator, input: list_recommended_intents.ListRecommendedIntentsInput, options: CallOptions) !list_recommended_intents.ListRecommendedIntentsOutput {
         return list_recommended_intents.execute(self, allocator, input, options);
     }
 
@@ -745,7 +746,7 @@ pub const Client = struct {
     /// * Use the `maxResults` field to limit the number of results to return in a
     ///   single response and the `nextToken` field to return the next batch of
     ///   results if the response does not return the full set of results.
-    pub fn listSessionAnalyticsData(self: *Self, allocator: std.mem.Allocator, input: list_session_analytics_data.ListSessionAnalyticsDataInput, options: list_session_analytics_data.Options) !list_session_analytics_data.ListSessionAnalyticsDataOutput {
+    pub fn listSessionAnalyticsData(self: *Self, allocator: std.mem.Allocator, input: list_session_analytics_data.ListSessionAnalyticsDataInput, options: CallOptions) !list_session_analytics_data.ListSessionAnalyticsDataOutput {
         return list_session_analytics_data.execute(self, allocator, input, options);
     }
 
@@ -770,43 +771,43 @@ pub const Client = struct {
     ///
     /// Note that an `order` field exists in both `binBy` and `metrics`. Currently,
     /// you can specify it in either field, but not in both.
-    pub fn listSessionMetrics(self: *Self, allocator: std.mem.Allocator, input: list_session_metrics.ListSessionMetricsInput, options: list_session_metrics.Options) !list_session_metrics.ListSessionMetricsOutput {
+    pub fn listSessionMetrics(self: *Self, allocator: std.mem.Allocator, input: list_session_metrics.ListSessionMetricsInput, options: CallOptions) !list_session_metrics.ListSessionMetricsOutput {
         return list_session_metrics.execute(self, allocator, input, options);
     }
 
     /// Gets a list of slot types that match the specified criteria.
-    pub fn listSlotTypes(self: *Self, allocator: std.mem.Allocator, input: list_slot_types.ListSlotTypesInput, options: list_slot_types.Options) !list_slot_types.ListSlotTypesOutput {
+    pub fn listSlotTypes(self: *Self, allocator: std.mem.Allocator, input: list_slot_types.ListSlotTypesInput, options: CallOptions) !list_slot_types.ListSlotTypesOutput {
         return list_slot_types.execute(self, allocator, input, options);
     }
 
     /// Gets a list of slots that match the specified criteria.
-    pub fn listSlots(self: *Self, allocator: std.mem.Allocator, input: list_slots.ListSlotsInput, options: list_slots.Options) !list_slots.ListSlotsOutput {
+    pub fn listSlots(self: *Self, allocator: std.mem.Allocator, input: list_slots.ListSlotsInput, options: CallOptions) !list_slots.ListSlotsOutput {
         return list_slots.execute(self, allocator, input, options);
     }
 
     /// Gets a list of tags associated with a resource. Only bots, bot
     /// aliases, and bot channels can have tags associated with them.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Gets a list of test execution result items.
-    pub fn listTestExecutionResultItems(self: *Self, allocator: std.mem.Allocator, input: list_test_execution_result_items.ListTestExecutionResultItemsInput, options: list_test_execution_result_items.Options) !list_test_execution_result_items.ListTestExecutionResultItemsOutput {
+    pub fn listTestExecutionResultItems(self: *Self, allocator: std.mem.Allocator, input: list_test_execution_result_items.ListTestExecutionResultItemsInput, options: CallOptions) !list_test_execution_result_items.ListTestExecutionResultItemsOutput {
         return list_test_execution_result_items.execute(self, allocator, input, options);
     }
 
     /// The list of test set executions.
-    pub fn listTestExecutions(self: *Self, allocator: std.mem.Allocator, input: list_test_executions.ListTestExecutionsInput, options: list_test_executions.Options) !list_test_executions.ListTestExecutionsOutput {
+    pub fn listTestExecutions(self: *Self, allocator: std.mem.Allocator, input: list_test_executions.ListTestExecutionsInput, options: CallOptions) !list_test_executions.ListTestExecutionsOutput {
         return list_test_executions.execute(self, allocator, input, options);
     }
 
     /// The list of test set records.
-    pub fn listTestSetRecords(self: *Self, allocator: std.mem.Allocator, input: list_test_set_records.ListTestSetRecordsInput, options: list_test_set_records.Options) !list_test_set_records.ListTestSetRecordsOutput {
+    pub fn listTestSetRecords(self: *Self, allocator: std.mem.Allocator, input: list_test_set_records.ListTestSetRecordsInput, options: CallOptions) !list_test_set_records.ListTestSetRecordsOutput {
         return list_test_set_records.execute(self, allocator, input, options);
     }
 
     /// The list of the test sets
-    pub fn listTestSets(self: *Self, allocator: std.mem.Allocator, input: list_test_sets.ListTestSetsInput, options: list_test_sets.Options) !list_test_sets.ListTestSetsOutput {
+    pub fn listTestSets(self: *Self, allocator: std.mem.Allocator, input: list_test_sets.ListTestSetsInput, options: CallOptions) !list_test_sets.ListTestSetsOutput {
         return list_test_sets.execute(self, allocator, input, options);
     }
 
@@ -830,7 +831,7 @@ pub const Client = struct {
     /// * Use the `maxResults` field to limit the number of results to return in a
     ///   single response and the `nextToken` field to return the next batch of
     ///   results if the response does not return the full set of results.
-    pub fn listUtteranceAnalyticsData(self: *Self, allocator: std.mem.Allocator, input: list_utterance_analytics_data.ListUtteranceAnalyticsDataInput, options: list_utterance_analytics_data.Options) !list_utterance_analytics_data.ListUtteranceAnalyticsDataOutput {
+    pub fn listUtteranceAnalyticsData(self: *Self, allocator: std.mem.Allocator, input: list_utterance_analytics_data.ListUtteranceAnalyticsDataInput, options: CallOptions) !list_utterance_analytics_data.ListUtteranceAnalyticsDataOutput {
         return list_utterance_analytics_data.execute(self, allocator, input, options);
     }
 
@@ -861,19 +862,19 @@ pub const Client = struct {
     ///
     /// Note that an `order` field exists in both `binBy` and `metrics`. Currently,
     /// you can specify it in either field, but not in both.
-    pub fn listUtteranceMetrics(self: *Self, allocator: std.mem.Allocator, input: list_utterance_metrics.ListUtteranceMetricsInput, options: list_utterance_metrics.Options) !list_utterance_metrics.ListUtteranceMetricsOutput {
+    pub fn listUtteranceMetrics(self: *Self, allocator: std.mem.Allocator, input: list_utterance_metrics.ListUtteranceMetricsInput, options: CallOptions) !list_utterance_metrics.ListUtteranceMetricsOutput {
         return list_utterance_metrics.execute(self, allocator, input, options);
     }
 
     /// Search for associated transcripts that meet the specified
     /// criteria.
-    pub fn searchAssociatedTranscripts(self: *Self, allocator: std.mem.Allocator, input: search_associated_transcripts.SearchAssociatedTranscriptsInput, options: search_associated_transcripts.Options) !search_associated_transcripts.SearchAssociatedTranscriptsOutput {
+    pub fn searchAssociatedTranscripts(self: *Self, allocator: std.mem.Allocator, input: search_associated_transcripts.SearchAssociatedTranscriptsInput, options: CallOptions) !search_associated_transcripts.SearchAssociatedTranscriptsOutput {
         return search_associated_transcripts.execute(self, allocator, input, options);
     }
 
     /// Use this to provide your transcript data, and to start the bot
     /// recommendation process.
-    pub fn startBotRecommendation(self: *Self, allocator: std.mem.Allocator, input: start_bot_recommendation.StartBotRecommendationInput, options: start_bot_recommendation.Options) !start_bot_recommendation.StartBotRecommendationOutput {
+    pub fn startBotRecommendation(self: *Self, allocator: std.mem.Allocator, input: start_bot_recommendation.StartBotRecommendationInput, options: CallOptions) !start_bot_recommendation.StartBotRecommendationOutput {
         return start_bot_recommendation.execute(self, allocator, input, options);
     }
 
@@ -886,60 +887,60 @@ pub const Client = struct {
     /// generation is complete. Use that value to retrieve the Amazon S3 object
     /// containing the bot locale configuration. You can
     /// then modify and import this configuration.
-    pub fn startBotResourceGeneration(self: *Self, allocator: std.mem.Allocator, input: start_bot_resource_generation.StartBotResourceGenerationInput, options: start_bot_resource_generation.Options) !start_bot_resource_generation.StartBotResourceGenerationOutput {
+    pub fn startBotResourceGeneration(self: *Self, allocator: std.mem.Allocator, input: start_bot_resource_generation.StartBotResourceGenerationInput, options: CallOptions) !start_bot_resource_generation.StartBotResourceGenerationOutput {
         return start_bot_resource_generation.execute(self, allocator, input, options);
     }
 
     /// Starts importing a bot, bot locale, or custom vocabulary from a zip
     /// archive that you uploaded to an S3 bucket.
-    pub fn startImport(self: *Self, allocator: std.mem.Allocator, input: start_import.StartImportInput, options: start_import.Options) !start_import.StartImportOutput {
+    pub fn startImport(self: *Self, allocator: std.mem.Allocator, input: start_import.StartImportInput, options: CallOptions) !start_import.StartImportOutput {
         return start_import.execute(self, allocator, input, options);
     }
 
     /// The action to start test set execution.
-    pub fn startTestExecution(self: *Self, allocator: std.mem.Allocator, input: start_test_execution.StartTestExecutionInput, options: start_test_execution.Options) !start_test_execution.StartTestExecutionOutput {
+    pub fn startTestExecution(self: *Self, allocator: std.mem.Allocator, input: start_test_execution.StartTestExecutionInput, options: CallOptions) !start_test_execution.StartTestExecutionOutput {
         return start_test_execution.execute(self, allocator, input, options);
     }
 
     /// The action to start the generation of test set.
-    pub fn startTestSetGeneration(self: *Self, allocator: std.mem.Allocator, input: start_test_set_generation.StartTestSetGenerationInput, options: start_test_set_generation.Options) !start_test_set_generation.StartTestSetGenerationOutput {
+    pub fn startTestSetGeneration(self: *Self, allocator: std.mem.Allocator, input: start_test_set_generation.StartTestSetGenerationInput, options: CallOptions) !start_test_set_generation.StartTestSetGenerationOutput {
         return start_test_set_generation.execute(self, allocator, input, options);
     }
 
     /// Stop an already running Bot Recommendation request.
-    pub fn stopBotRecommendation(self: *Self, allocator: std.mem.Allocator, input: stop_bot_recommendation.StopBotRecommendationInput, options: stop_bot_recommendation.Options) !stop_bot_recommendation.StopBotRecommendationOutput {
+    pub fn stopBotRecommendation(self: *Self, allocator: std.mem.Allocator, input: stop_bot_recommendation.StopBotRecommendationInput, options: CallOptions) !stop_bot_recommendation.StopBotRecommendationOutput {
         return stop_bot_recommendation.execute(self, allocator, input, options);
     }
 
     /// Adds the specified tags to the specified resource. If a tag key
     /// already exists, the existing value is replaced with the new
     /// value.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes tags from a bot, bot alias, or bot channel.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration of an existing bot.
-    pub fn updateBot(self: *Self, allocator: std.mem.Allocator, input: update_bot.UpdateBotInput, options: update_bot.Options) !update_bot.UpdateBotOutput {
+    pub fn updateBot(self: *Self, allocator: std.mem.Allocator, input: update_bot.UpdateBotInput, options: CallOptions) !update_bot.UpdateBotOutput {
         return update_bot.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration of an existing bot alias.
-    pub fn updateBotAlias(self: *Self, allocator: std.mem.Allocator, input: update_bot_alias.UpdateBotAliasInput, options: update_bot_alias.Options) !update_bot_alias.UpdateBotAliasOutput {
+    pub fn updateBotAlias(self: *Self, allocator: std.mem.Allocator, input: update_bot_alias.UpdateBotAliasInput, options: CallOptions) !update_bot_alias.UpdateBotAliasOutput {
         return update_bot_alias.execute(self, allocator, input, options);
     }
 
     /// Updates the settings that a bot has for a specific locale.
-    pub fn updateBotLocale(self: *Self, allocator: std.mem.Allocator, input: update_bot_locale.UpdateBotLocaleInput, options: update_bot_locale.Options) !update_bot_locale.UpdateBotLocaleOutput {
+    pub fn updateBotLocale(self: *Self, allocator: std.mem.Allocator, input: update_bot_locale.UpdateBotLocaleInput, options: CallOptions) !update_bot_locale.UpdateBotLocaleOutput {
         return update_bot_locale.execute(self, allocator, input, options);
     }
 
     /// Updates an existing bot recommendation request.
-    pub fn updateBotRecommendation(self: *Self, allocator: std.mem.Allocator, input: update_bot_recommendation.UpdateBotRecommendationInput, options: update_bot_recommendation.Options) !update_bot_recommendation.UpdateBotRecommendationOutput {
+    pub fn updateBotRecommendation(self: *Self, allocator: std.mem.Allocator, input: update_bot_recommendation.UpdateBotRecommendationInput, options: CallOptions) !update_bot_recommendation.UpdateBotRecommendationOutput {
         return update_bot_recommendation.execute(self, allocator, input, options);
     }
 
@@ -949,34 +950,34 @@ pub const Client = struct {
     /// generates a zip file that is not protected by a password. This is the
     /// archive that is available at the pre-signed S3 URL provided by the
     /// [DescribeExport](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeExport.html) operation.
-    pub fn updateExport(self: *Self, allocator: std.mem.Allocator, input: update_export.UpdateExportInput, options: update_export.Options) !update_export.UpdateExportOutput {
+    pub fn updateExport(self: *Self, allocator: std.mem.Allocator, input: update_export.UpdateExportInput, options: CallOptions) !update_export.UpdateExportOutput {
         return update_export.execute(self, allocator, input, options);
     }
 
     /// Updates the settings for an intent.
-    pub fn updateIntent(self: *Self, allocator: std.mem.Allocator, input: update_intent.UpdateIntentInput, options: update_intent.Options) !update_intent.UpdateIntentOutput {
+    pub fn updateIntent(self: *Self, allocator: std.mem.Allocator, input: update_intent.UpdateIntentInput, options: CallOptions) !update_intent.UpdateIntentOutput {
         return update_intent.execute(self, allocator, input, options);
     }
 
     /// Replaces the existing resource policy for a bot or bot alias with a
     /// new one. If the policy doesn't exist, Amazon Lex returns an
     /// exception.
-    pub fn updateResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: update_resource_policy.UpdateResourcePolicyInput, options: update_resource_policy.Options) !update_resource_policy.UpdateResourcePolicyOutput {
+    pub fn updateResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: update_resource_policy.UpdateResourcePolicyInput, options: CallOptions) !update_resource_policy.UpdateResourcePolicyOutput {
         return update_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Updates the settings for a slot.
-    pub fn updateSlot(self: *Self, allocator: std.mem.Allocator, input: update_slot.UpdateSlotInput, options: update_slot.Options) !update_slot.UpdateSlotOutput {
+    pub fn updateSlot(self: *Self, allocator: std.mem.Allocator, input: update_slot.UpdateSlotInput, options: CallOptions) !update_slot.UpdateSlotOutput {
         return update_slot.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration of an existing slot type.
-    pub fn updateSlotType(self: *Self, allocator: std.mem.Allocator, input: update_slot_type.UpdateSlotTypeInput, options: update_slot_type.Options) !update_slot_type.UpdateSlotTypeOutput {
+    pub fn updateSlotType(self: *Self, allocator: std.mem.Allocator, input: update_slot_type.UpdateSlotTypeInput, options: CallOptions) !update_slot_type.UpdateSlotTypeOutput {
         return update_slot_type.execute(self, allocator, input, options);
     }
 
     /// The action to update the test set.
-    pub fn updateTestSet(self: *Self, allocator: std.mem.Allocator, input: update_test_set.UpdateTestSetInput, options: update_test_set.Options) !update_test_set.UpdateTestSetOutput {
+    pub fn updateTestSet(self: *Self, allocator: std.mem.Allocator, input: update_test_set.UpdateTestSetInput, options: CallOptions) !update_test_set.UpdateTestSetOutput {
         return update_test_set.execute(self, allocator, input, options);
     }
 

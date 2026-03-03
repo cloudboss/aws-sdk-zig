@@ -16,6 +16,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_account_settings = @import("update_account_settings.zig");
 const update_scheduled_query = @import("update_scheduled_query.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -54,7 +55,7 @@ pub const Client = struct {
     /// `CancellationMessage`, indicating that the query has already been
     /// canceled. See [code
     /// sample](https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.cancel-query.html) for details.
-    pub fn cancelQuery(self: *Self, allocator: std.mem.Allocator, input: cancel_query.CancelQueryInput, options: cancel_query.Options) !cancel_query.CancelQueryOutput {
+    pub fn cancelQuery(self: *Self, allocator: std.mem.Allocator, input: cancel_query.CancelQueryInput, options: CallOptions) !cancel_query.CancelQueryOutput {
         return cancel_query.execute(self, allocator, input, options);
     }
 
@@ -64,12 +65,12 @@ pub const Client = struct {
     /// `ScheduledQueryExecutionRoleArn` parameter to run the query. You can use
     /// the `NotificationConfiguration` parameter to configure notification for your
     /// scheduled query operations.
-    pub fn createScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: create_scheduled_query.CreateScheduledQueryInput, options: create_scheduled_query.Options) !create_scheduled_query.CreateScheduledQueryOutput {
+    pub fn createScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: create_scheduled_query.CreateScheduledQueryInput, options: CallOptions) !create_scheduled_query.CreateScheduledQueryOutput {
         return create_scheduled_query.execute(self, allocator, input, options);
     }
 
     /// Deletes a given scheduled query. This is an irreversible operation.
-    pub fn deleteScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: delete_scheduled_query.DeleteScheduledQueryInput, options: delete_scheduled_query.Options) !delete_scheduled_query.DeleteScheduledQueryOutput {
+    pub fn deleteScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: delete_scheduled_query.DeleteScheduledQueryInput, options: CallOptions) !delete_scheduled_query.DeleteScheduledQueryOutput {
         return delete_scheduled_query.execute(self, allocator, input, options);
     }
 
@@ -78,7 +79,7 @@ pub const Client = struct {
     ///
     /// You're charged only for the duration of compute units used for your
     /// workloads.
-    pub fn describeAccountSettings(self: *Self, allocator: std.mem.Allocator, input: describe_account_settings.DescribeAccountSettingsInput, options: describe_account_settings.Options) !describe_account_settings.DescribeAccountSettingsOutput {
+    pub fn describeAccountSettings(self: *Self, allocator: std.mem.Allocator, input: describe_account_settings.DescribeAccountSettingsInput, options: CallOptions) !describe_account_settings.DescribeAccountSettingsOutput {
         return describe_account_settings.execute(self, allocator, input, options);
     }
 
@@ -103,12 +104,12 @@ pub const Client = struct {
     /// DescribeEndpoints, see
     /// [The Endpoint Discovery
     /// Pattern](https://docs.aws.amazon.com/timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery).
-    pub fn describeEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_endpoints.DescribeEndpointsInput, options: describe_endpoints.Options) !describe_endpoints.DescribeEndpointsOutput {
+    pub fn describeEndpoints(self: *Self, allocator: std.mem.Allocator, input: describe_endpoints.DescribeEndpointsInput, options: CallOptions) !describe_endpoints.DescribeEndpointsOutput {
         return describe_endpoints.execute(self, allocator, input, options);
     }
 
     /// Provides detailed information about a scheduled query.
-    pub fn describeScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: describe_scheduled_query.DescribeScheduledQueryInput, options: describe_scheduled_query.Options) !describe_scheduled_query.DescribeScheduledQueryOutput {
+    pub fn describeScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: describe_scheduled_query.DescribeScheduledQueryInput, options: CallOptions) !describe_scheduled_query.DescribeScheduledQueryOutput {
         return describe_scheduled_query.execute(self, allocator, input, options);
     }
 
@@ -120,19 +121,19 @@ pub const Client = struct {
     /// For more information about `QueryInsights`, see [Using query insights to
     /// optimize queries in Amazon
     /// Timestream](https://docs.aws.amazon.com/timestream/latest/developerguide/using-query-insights.html).
-    pub fn executeScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: execute_scheduled_query.ExecuteScheduledQueryInput, options: execute_scheduled_query.Options) !execute_scheduled_query.ExecuteScheduledQueryOutput {
+    pub fn executeScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: execute_scheduled_query.ExecuteScheduledQueryInput, options: CallOptions) !execute_scheduled_query.ExecuteScheduledQueryOutput {
         return execute_scheduled_query.execute(self, allocator, input, options);
     }
 
     /// Gets a list of all scheduled queries in the caller's Amazon account and
     /// Region.
     /// `ListScheduledQueries` is eventually consistent.
-    pub fn listScheduledQueries(self: *Self, allocator: std.mem.Allocator, input: list_scheduled_queries.ListScheduledQueriesInput, options: list_scheduled_queries.Options) !list_scheduled_queries.ListScheduledQueriesOutput {
+    pub fn listScheduledQueries(self: *Self, allocator: std.mem.Allocator, input: list_scheduled_queries.ListScheduledQueriesInput, options: CallOptions) !list_scheduled_queries.ListScheduledQueriesOutput {
         return list_scheduled_queries.execute(self, allocator, input, options);
     }
 
     /// List all tags on a Timestream query resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -141,7 +142,7 @@ pub const Client = struct {
     /// by Timestream for later running. Timestream only supports using this
     /// operation with
     /// `ValidateOnly` set to `true`.
-    pub fn prepareQuery(self: *Self, allocator: std.mem.Allocator, input: prepare_query.PrepareQueryInput, options: prepare_query.Options) !prepare_query.PrepareQueryOutput {
+    pub fn prepareQuery(self: *Self, allocator: std.mem.Allocator, input: prepare_query.PrepareQueryInput, options: CallOptions) !prepare_query.PrepareQueryOutput {
         return prepare_query.execute(self, allocator, input, options);
     }
 
@@ -185,7 +186,7 @@ pub const Client = struct {
     /// query
     /// string in the query requests, the query will fail with an `Invalid
     /// pagination token` error.
-    pub fn query(self: *Self, allocator: std.mem.Allocator, input: query_.QueryInput, options: query_.Options) !query_.QueryOutput {
+    pub fn query(self: *Self, allocator: std.mem.Allocator, input: query_.QueryInput, options: CallOptions) !query_.QueryOutput {
         return query_.execute(self, allocator, input, options);
     }
 
@@ -194,12 +195,12 @@ pub const Client = struct {
     /// user-defined tags so that they appear on the Billing and Cost Management
     /// console for
     /// cost allocation tracking.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes the association of tags from a Timestream query resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -210,12 +211,12 @@ pub const Client = struct {
     ///
     /// After you've transitioned your account to use TCUs for query pricing, you
     /// can't transition to using bytes scanned for query pricing.
-    pub fn updateAccountSettings(self: *Self, allocator: std.mem.Allocator, input: update_account_settings.UpdateAccountSettingsInput, options: update_account_settings.Options) !update_account_settings.UpdateAccountSettingsOutput {
+    pub fn updateAccountSettings(self: *Self, allocator: std.mem.Allocator, input: update_account_settings.UpdateAccountSettingsInput, options: CallOptions) !update_account_settings.UpdateAccountSettingsOutput {
         return update_account_settings.execute(self, allocator, input, options);
     }
 
     /// Update a scheduled query.
-    pub fn updateScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: update_scheduled_query.UpdateScheduledQueryInput, options: update_scheduled_query.Options) !update_scheduled_query.UpdateScheduledQueryOutput {
+    pub fn updateScheduledQuery(self: *Self, allocator: std.mem.Allocator, input: update_scheduled_query.UpdateScheduledQueryInput, options: CallOptions) !update_scheduled_query.UpdateScheduledQueryOutput {
         return update_scheduled_query.execute(self, allocator, input, options);
     }
 

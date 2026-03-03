@@ -29,6 +29,7 @@ const start_import_task = @import("start_import_task.zig");
 const stop_continuous_export = @import("stop_continuous_export.zig");
 const stop_data_collection_by_agent_ids = @import("stop_data_collection_by_agent_ids.zig");
 const update_application = @import("update_application.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -60,7 +61,7 @@ pub const Client = struct {
     }
 
     /// Associates one or more configuration items with an application.
-    pub fn associateConfigurationItemsToApplication(self: *Self, allocator: std.mem.Allocator, input: associate_configuration_items_to_application.AssociateConfigurationItemsToApplicationInput, options: associate_configuration_items_to_application.Options) !associate_configuration_items_to_application.AssociateConfigurationItemsToApplicationOutput {
+    pub fn associateConfigurationItemsToApplication(self: *Self, allocator: std.mem.Allocator, input: associate_configuration_items_to_application.AssociateConfigurationItemsToApplicationInput, options: CallOptions) !associate_configuration_items_to_application.AssociateConfigurationItemsToApplicationOutput {
         return associate_configuration_items_to_application.execute(self, allocator, input, options);
     }
 
@@ -68,7 +69,7 @@ pub const Client = struct {
     /// agent or collector does not
     /// delete the previously discovered data.
     /// To delete the data collected, use `StartBatchDeleteConfigurationTask`.
-    pub fn batchDeleteAgents(self: *Self, allocator: std.mem.Allocator, input: batch_delete_agents.BatchDeleteAgentsInput, options: batch_delete_agents.Options) !batch_delete_agents.BatchDeleteAgentsOutput {
+    pub fn batchDeleteAgents(self: *Self, allocator: std.mem.Allocator, input: batch_delete_agents.BatchDeleteAgentsInput, options: CallOptions) !batch_delete_agents.BatchDeleteAgentsOutput {
         return batch_delete_agents.execute(self, allocator, input, options);
     }
 
@@ -85,12 +86,12 @@ pub const Client = struct {
     /// contains records that were used to match, the information in those matched
     /// records that comes
     /// from the deleted records will also be deleted.
-    pub fn batchDeleteImportData(self: *Self, allocator: std.mem.Allocator, input: batch_delete_import_data.BatchDeleteImportDataInput, options: batch_delete_import_data.Options) !batch_delete_import_data.BatchDeleteImportDataOutput {
+    pub fn batchDeleteImportData(self: *Self, allocator: std.mem.Allocator, input: batch_delete_import_data.BatchDeleteImportDataInput, options: CallOptions) !batch_delete_import_data.BatchDeleteImportDataOutput {
         return batch_delete_import_data.execute(self, allocator, input, options);
     }
 
     /// Creates an application with the given name and description.
-    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: create_application.Options) !create_application.CreateApplicationOutput {
+    pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: CallOptions) !create_application.CreateApplicationOutput {
         return create_application.execute(self, allocator, input, options);
     }
 
@@ -100,20 +101,20 @@ pub const Client = struct {
     /// items.
     ///
     /// Do not store sensitive information (like personal data) in tags.
-    pub fn createTags(self: *Self, allocator: std.mem.Allocator, input: create_tags.CreateTagsInput, options: create_tags.Options) !create_tags.CreateTagsOutput {
+    pub fn createTags(self: *Self, allocator: std.mem.Allocator, input: create_tags.CreateTagsInput, options: CallOptions) !create_tags.CreateTagsOutput {
         return create_tags.execute(self, allocator, input, options);
     }
 
     /// Deletes a list of applications and their associations with configuration
     /// items.
-    pub fn deleteApplications(self: *Self, allocator: std.mem.Allocator, input: delete_applications.DeleteApplicationsInput, options: delete_applications.Options) !delete_applications.DeleteApplicationsOutput {
+    pub fn deleteApplications(self: *Self, allocator: std.mem.Allocator, input: delete_applications.DeleteApplicationsInput, options: CallOptions) !delete_applications.DeleteApplicationsOutput {
         return delete_applications.execute(self, allocator, input, options);
     }
 
     /// Deletes the association between configuration items and one or more tags.
     /// This API
     /// accepts a list of multiple configuration items.
-    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: delete_tags.Options) !delete_tags.DeleteTagsOutput {
+    pub fn deleteTags(self: *Self, allocator: std.mem.Allocator, input: delete_tags.DeleteTagsInput, options: CallOptions) !delete_tags.DeleteTagsOutput {
         return delete_tags.execute(self, allocator, input, options);
     }
 
@@ -121,13 +122,13 @@ pub const Client = struct {
     /// agents/collectors
     /// associated with your user can be listed if you call `DescribeAgents` as is
     /// without passing any parameters.
-    pub fn describeAgents(self: *Self, allocator: std.mem.Allocator, input: describe_agents.DescribeAgentsInput, options: describe_agents.Options) !describe_agents.DescribeAgentsOutput {
+    pub fn describeAgents(self: *Self, allocator: std.mem.Allocator, input: describe_agents.DescribeAgentsInput, options: CallOptions) !describe_agents.DescribeAgentsOutput {
         return describe_agents.execute(self, allocator, input, options);
     }
 
     /// Takes a unique deletion task identifier as input and returns metadata about
     /// a configuration deletion task.
-    pub fn describeBatchDeleteConfigurationTask(self: *Self, allocator: std.mem.Allocator, input: describe_batch_delete_configuration_task.DescribeBatchDeleteConfigurationTaskInput, options: describe_batch_delete_configuration_task.Options) !describe_batch_delete_configuration_task.DescribeBatchDeleteConfigurationTaskOutput {
+    pub fn describeBatchDeleteConfigurationTask(self: *Self, allocator: std.mem.Allocator, input: describe_batch_delete_configuration_task.DescribeBatchDeleteConfigurationTaskInput, options: CallOptions) !describe_batch_delete_configuration_task.DescribeBatchDeleteConfigurationTaskOutput {
         return describe_batch_delete_configuration_task.execute(self, allocator, input, options);
     }
 
@@ -153,7 +154,7 @@ pub const Client = struct {
     /// DescribeConfigurations
     /// Action](https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#DescribeConfigurations) in the *Amazon Web Services Application
     /// Discovery Service User Guide*.
-    pub fn describeConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_configurations.DescribeConfigurationsInput, options: describe_configurations.Options) !describe_configurations.DescribeConfigurationsOutput {
+    pub fn describeConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_configurations.DescribeConfigurationsInput, options: CallOptions) !describe_configurations.DescribeConfigurationsOutput {
         return describe_configurations.execute(self, allocator, input, options);
     }
 
@@ -161,27 +162,27 @@ pub const Client = struct {
     /// your user
     /// can be listed if you call `DescribeContinuousExports` as is without passing
     /// any parameters.
-    pub fn describeContinuousExports(self: *Self, allocator: std.mem.Allocator, input: describe_continuous_exports.DescribeContinuousExportsInput, options: describe_continuous_exports.Options) !describe_continuous_exports.DescribeContinuousExportsOutput {
+    pub fn describeContinuousExports(self: *Self, allocator: std.mem.Allocator, input: describe_continuous_exports.DescribeContinuousExportsInput, options: CallOptions) !describe_continuous_exports.DescribeContinuousExportsOutput {
         return describe_continuous_exports.execute(self, allocator, input, options);
     }
 
     /// `DescribeExportConfigurations` is deprecated. Use
     /// [DescribeExportTasks](https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html), instead.
-    pub fn describeExportConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_export_configurations.DescribeExportConfigurationsInput, options: describe_export_configurations.Options) !describe_export_configurations.DescribeExportConfigurationsOutput {
+    pub fn describeExportConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_export_configurations.DescribeExportConfigurationsInput, options: CallOptions) !describe_export_configurations.DescribeExportConfigurationsOutput {
         return describe_export_configurations.execute(self, allocator, input, options);
     }
 
     /// Retrieve status of one or more export tasks. You can retrieve the status of
     /// up to 100
     /// export tasks.
-    pub fn describeExportTasks(self: *Self, allocator: std.mem.Allocator, input: describe_export_tasks.DescribeExportTasksInput, options: describe_export_tasks.Options) !describe_export_tasks.DescribeExportTasksOutput {
+    pub fn describeExportTasks(self: *Self, allocator: std.mem.Allocator, input: describe_export_tasks.DescribeExportTasksInput, options: CallOptions) !describe_export_tasks.DescribeExportTasksOutput {
         return describe_export_tasks.execute(self, allocator, input, options);
     }
 
     /// Returns an array of import tasks for your account, including status
     /// information, times,
     /// IDs, the Amazon S3 Object URL for the import file, and more.
-    pub fn describeImportTasks(self: *Self, allocator: std.mem.Allocator, input: describe_import_tasks.DescribeImportTasksInput, options: describe_import_tasks.Options) !describe_import_tasks.DescribeImportTasksOutput {
+    pub fn describeImportTasks(self: *Self, allocator: std.mem.Allocator, input: describe_import_tasks.DescribeImportTasksInput, options: CallOptions) !describe_import_tasks.DescribeImportTasksOutput {
         return describe_import_tasks.execute(self, allocator, input, options);
     }
 
@@ -200,12 +201,12 @@ pub const Client = struct {
     /// Also, all configuration items associated with your user that have tags can
     /// be
     /// listed if you call `DescribeTags` as is without passing any parameters.
-    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: describe_tags.Options) !describe_tags.DescribeTagsOutput {
+    pub fn describeTags(self: *Self, allocator: std.mem.Allocator, input: describe_tags.DescribeTagsInput, options: CallOptions) !describe_tags.DescribeTagsOutput {
         return describe_tags.execute(self, allocator, input, options);
     }
 
     /// Disassociates one or more configuration items from an application.
-    pub fn disassociateConfigurationItemsFromApplication(self: *Self, allocator: std.mem.Allocator, input: disassociate_configuration_items_from_application.DisassociateConfigurationItemsFromApplicationInput, options: disassociate_configuration_items_from_application.Options) !disassociate_configuration_items_from_application.DisassociateConfigurationItemsFromApplicationOutput {
+    pub fn disassociateConfigurationItemsFromApplication(self: *Self, allocator: std.mem.Allocator, input: disassociate_configuration_items_from_application.DisassociateConfigurationItemsFromApplicationInput, options: CallOptions) !disassociate_configuration_items_from_application.DisassociateConfigurationItemsFromApplicationOutput {
         return disassociate_configuration_items_from_application.execute(self, allocator, input, options);
     }
 
@@ -219,7 +220,7 @@ pub const Client = struct {
     /// that you can query
     /// using the *DescribeExportConfigurations* API. The system imposes a limit of
     /// two configuration exports in six hours.
-    pub fn exportConfigurations(self: *Self, allocator: std.mem.Allocator, input: export_configurations.ExportConfigurationsInput, options: export_configurations.Options) !export_configurations.ExportConfigurationsOutput {
+    pub fn exportConfigurations(self: *Self, allocator: std.mem.Allocator, input: export_configurations.ExportConfigurationsInput, options: CallOptions) !export_configurations.ExportConfigurationsOutput {
         return export_configurations.execute(self, allocator, input, options);
     }
 
@@ -228,7 +229,7 @@ pub const Client = struct {
     /// This API operation takes no request parameters and is called as is at the
     /// command
     /// prompt as shown in the example.
-    pub fn getDiscoverySummary(self: *Self, allocator: std.mem.Allocator, input: get_discovery_summary.GetDiscoverySummaryInput, options: get_discovery_summary.Options) !get_discovery_summary.GetDiscoverySummaryOutput {
+    pub fn getDiscoverySummary(self: *Self, allocator: std.mem.Allocator, input: get_discovery_summary.GetDiscoverySummaryInput, options: CallOptions) !get_discovery_summary.GetDiscoverySummaryOutput {
         return get_discovery_summary.execute(self, allocator, input, options);
     }
 
@@ -237,30 +238,30 @@ pub const Client = struct {
     /// required parameter `configurationType`. Optional filtering may be applied to
     /// refine
     /// search results.
-    pub fn listConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_configurations.ListConfigurationsInput, options: list_configurations.Options) !list_configurations.ListConfigurationsOutput {
+    pub fn listConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_configurations.ListConfigurationsInput, options: CallOptions) !list_configurations.ListConfigurationsOutput {
         return list_configurations.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of servers that are one network hop away from a specified
     /// server.
-    pub fn listServerNeighbors(self: *Self, allocator: std.mem.Allocator, input: list_server_neighbors.ListServerNeighborsInput, options: list_server_neighbors.Options) !list_server_neighbors.ListServerNeighborsOutput {
+    pub fn listServerNeighbors(self: *Self, allocator: std.mem.Allocator, input: list_server_neighbors.ListServerNeighborsInput, options: CallOptions) !list_server_neighbors.ListServerNeighborsOutput {
         return list_server_neighbors.execute(self, allocator, input, options);
     }
 
     /// Takes a list of configurationId as input and starts an asynchronous deletion
     /// task to remove the configurationItems. Returns a unique deletion task
     /// identifier.
-    pub fn startBatchDeleteConfigurationTask(self: *Self, allocator: std.mem.Allocator, input: start_batch_delete_configuration_task.StartBatchDeleteConfigurationTaskInput, options: start_batch_delete_configuration_task.Options) !start_batch_delete_configuration_task.StartBatchDeleteConfigurationTaskOutput {
+    pub fn startBatchDeleteConfigurationTask(self: *Self, allocator: std.mem.Allocator, input: start_batch_delete_configuration_task.StartBatchDeleteConfigurationTaskInput, options: CallOptions) !start_batch_delete_configuration_task.StartBatchDeleteConfigurationTaskOutput {
         return start_batch_delete_configuration_task.execute(self, allocator, input, options);
     }
 
     /// Start the continuous flow of agent's discovered data into Amazon Athena.
-    pub fn startContinuousExport(self: *Self, allocator: std.mem.Allocator, input: start_continuous_export.StartContinuousExportInput, options: start_continuous_export.Options) !start_continuous_export.StartContinuousExportOutput {
+    pub fn startContinuousExport(self: *Self, allocator: std.mem.Allocator, input: start_continuous_export.StartContinuousExportInput, options: CallOptions) !start_continuous_export.StartContinuousExportOutput {
         return start_continuous_export.execute(self, allocator, input, options);
     }
 
     /// Instructs the specified agents to start collecting data.
-    pub fn startDataCollectionByAgentIds(self: *Self, allocator: std.mem.Allocator, input: start_data_collection_by_agent_ids.StartDataCollectionByAgentIdsInput, options: start_data_collection_by_agent_ids.Options) !start_data_collection_by_agent_ids.StartDataCollectionByAgentIdsOutput {
+    pub fn startDataCollectionByAgentIds(self: *Self, allocator: std.mem.Allocator, input: start_data_collection_by_agent_ids.StartDataCollectionByAgentIdsInput, options: CallOptions) !start_data_collection_by_agent_ids.StartDataCollectionByAgentIdsOutput {
         return start_data_collection_by_agent_ids.execute(self, allocator, input, options);
     }
 
@@ -296,7 +297,7 @@ pub const Client = struct {
     /// Application Discovery Service is generated.
     /// Changing the attributes of the `ec2RecommendationsPreferences` changes the
     /// criteria of the recommendation.
-    pub fn startExportTask(self: *Self, allocator: std.mem.Allocator, input: start_export_task.StartExportTaskInput, options: start_export_task.Options) !start_export_task.StartExportTaskOutput {
+    pub fn startExportTask(self: *Self, allocator: std.mem.Allocator, input: start_export_task.StartExportTaskInput, options: CallOptions) !start_export_task.StartExportTaskOutput {
         return start_export_task.execute(self, allocator, input, options);
     }
 
@@ -339,22 +340,22 @@ pub const Client = struct {
     /// Discovery Service
     /// Limits](https://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html) in the *Amazon Web Services Application Discovery Service User
     /// Guide*.
-    pub fn startImportTask(self: *Self, allocator: std.mem.Allocator, input: start_import_task.StartImportTaskInput, options: start_import_task.Options) !start_import_task.StartImportTaskOutput {
+    pub fn startImportTask(self: *Self, allocator: std.mem.Allocator, input: start_import_task.StartImportTaskInput, options: CallOptions) !start_import_task.StartImportTaskOutput {
         return start_import_task.execute(self, allocator, input, options);
     }
 
     /// Stop the continuous flow of agent's discovered data into Amazon Athena.
-    pub fn stopContinuousExport(self: *Self, allocator: std.mem.Allocator, input: stop_continuous_export.StopContinuousExportInput, options: stop_continuous_export.Options) !stop_continuous_export.StopContinuousExportOutput {
+    pub fn stopContinuousExport(self: *Self, allocator: std.mem.Allocator, input: stop_continuous_export.StopContinuousExportInput, options: CallOptions) !stop_continuous_export.StopContinuousExportOutput {
         return stop_continuous_export.execute(self, allocator, input, options);
     }
 
     /// Instructs the specified agents to stop collecting data.
-    pub fn stopDataCollectionByAgentIds(self: *Self, allocator: std.mem.Allocator, input: stop_data_collection_by_agent_ids.StopDataCollectionByAgentIdsInput, options: stop_data_collection_by_agent_ids.Options) !stop_data_collection_by_agent_ids.StopDataCollectionByAgentIdsOutput {
+    pub fn stopDataCollectionByAgentIds(self: *Self, allocator: std.mem.Allocator, input: stop_data_collection_by_agent_ids.StopDataCollectionByAgentIdsInput, options: CallOptions) !stop_data_collection_by_agent_ids.StopDataCollectionByAgentIdsOutput {
         return stop_data_collection_by_agent_ids.execute(self, allocator, input, options);
     }
 
     /// Updates metadata about an application.
-    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: update_application.Options) !update_application.UpdateApplicationOutput {
+    pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: CallOptions) !update_application.UpdateApplicationOutput {
         return update_application.execute(self, allocator, input, options);
     }
 

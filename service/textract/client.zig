@@ -26,6 +26,7 @@ const start_lending_analysis = @import("start_lending_analysis.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_adapter = @import("update_adapter.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -107,7 +108,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Document Text
     /// Analysis](https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html).
-    pub fn analyzeDocument(self: *Self, allocator: std.mem.Allocator, input: analyze_document.AnalyzeDocumentInput, options: analyze_document.Options) !analyze_document.AnalyzeDocumentOutput {
+    pub fn analyzeDocument(self: *Self, allocator: std.mem.Allocator, input: analyze_document.AnalyzeDocumentInput, options: CallOptions) !analyze_document.AnalyzeDocumentOutput {
         return analyze_document.execute(self, allocator, input, options);
     }
 
@@ -124,7 +125,7 @@ pub const Client = struct {
     ///
     /// * `SummaryFields`- Contains all other information a receipt, such as
     /// header information or the vendors name.
-    pub fn analyzeExpense(self: *Self, allocator: std.mem.Allocator, input: analyze_expense.AnalyzeExpenseInput, options: analyze_expense.Options) !analyze_expense.AnalyzeExpenseOutput {
+    pub fn analyzeExpense(self: *Self, allocator: std.mem.Allocator, input: analyze_expense.AnalyzeExpenseInput, options: CallOptions) !analyze_expense.AnalyzeExpenseOutput {
         return analyze_expense.execute(self, allocator, input, options);
     }
 
@@ -134,7 +135,7 @@ pub const Client = struct {
     /// field
     /// and value of the extracted text. Unlike other Amazon Textract operations,
     /// `AnalyzeID` doesn't return any Geometry data.
-    pub fn analyzeId(self: *Self, allocator: std.mem.Allocator, input: analyze_id.AnalyzeIDInput, options: analyze_id.Options) !analyze_id.AnalyzeIDOutput {
+    pub fn analyzeId(self: *Self, allocator: std.mem.Allocator, input: analyze_id.AnalyzeIDInput, options: CallOptions) !analyze_id.AnalyzeIDOutput {
         return analyze_id.execute(self, allocator, input, options);
     }
 
@@ -146,7 +147,7 @@ pub const Client = struct {
     /// ClientRequestToken. You can choose whether or not the adapter should be
     /// AutoUpdated with
     /// the AutoUpdate argument. By default, AutoUpdate is set to DISABLED.
-    pub fn createAdapter(self: *Self, allocator: std.mem.Allocator, input: create_adapter.CreateAdapterInput, options: create_adapter.Options) !create_adapter.CreateAdapterOutput {
+    pub fn createAdapter(self: *Self, allocator: std.mem.Allocator, input: create_adapter.CreateAdapterInput, options: CallOptions) !create_adapter.CreateAdapterOutput {
         return create_adapter.execute(self, allocator, input, options);
     }
 
@@ -156,13 +157,13 @@ pub const Client = struct {
     /// specify an Amazon S3 bucket with the OutputConfig argument. You can provide
     /// an optional KMSKeyId,
     /// an optional ClientRequestToken, and optional tags.
-    pub fn createAdapterVersion(self: *Self, allocator: std.mem.Allocator, input: create_adapter_version.CreateAdapterVersionInput, options: create_adapter_version.Options) !create_adapter_version.CreateAdapterVersionOutput {
+    pub fn createAdapterVersion(self: *Self, allocator: std.mem.Allocator, input: create_adapter_version.CreateAdapterVersionInput, options: CallOptions) !create_adapter_version.CreateAdapterVersionOutput {
         return create_adapter_version.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Textract adapter. Takes an AdapterId and deletes the
     /// adapter specified by the ID.
-    pub fn deleteAdapter(self: *Self, allocator: std.mem.Allocator, input: delete_adapter.DeleteAdapterInput, options: delete_adapter.Options) !delete_adapter.DeleteAdapterOutput {
+    pub fn deleteAdapter(self: *Self, allocator: std.mem.Allocator, input: delete_adapter.DeleteAdapterInput, options: CallOptions) !delete_adapter.DeleteAdapterOutput {
         return delete_adapter.execute(self, allocator, input, options);
     }
 
@@ -170,7 +171,7 @@ pub const Client = struct {
     /// an AdapterId and a
     /// AdapterVersion. Deletes the adapter version specified by the AdapterId and
     /// the AdapterVersion.
-    pub fn deleteAdapterVersion(self: *Self, allocator: std.mem.Allocator, input: delete_adapter_version.DeleteAdapterVersionInput, options: delete_adapter_version.Options) !delete_adapter_version.DeleteAdapterVersionOutput {
+    pub fn deleteAdapterVersion(self: *Self, allocator: std.mem.Allocator, input: delete_adapter_version.DeleteAdapterVersionInput, options: CallOptions) !delete_adapter_version.DeleteAdapterVersionOutput {
         return delete_adapter_version.execute(self, allocator, input, options);
     }
 
@@ -193,14 +194,14 @@ pub const Client = struct {
     ///
     /// For more information, see [Document Text
     /// Detection](https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html).
-    pub fn detectDocumentText(self: *Self, allocator: std.mem.Allocator, input: detect_document_text.DetectDocumentTextInput, options: detect_document_text.Options) !detect_document_text.DetectDocumentTextOutput {
+    pub fn detectDocumentText(self: *Self, allocator: std.mem.Allocator, input: detect_document_text.DetectDocumentTextInput, options: CallOptions) !detect_document_text.DetectDocumentTextOutput {
         return detect_document_text.execute(self, allocator, input, options);
     }
 
     /// Gets configuration information for an adapter specified by an AdapterId,
     /// returning information on AdapterName, Description,
     /// CreationTime, AutoUpdate status, and FeatureTypes.
-    pub fn getAdapter(self: *Self, allocator: std.mem.Allocator, input: get_adapter.GetAdapterInput, options: get_adapter.Options) !get_adapter.GetAdapterOutput {
+    pub fn getAdapter(self: *Self, allocator: std.mem.Allocator, input: get_adapter.GetAdapterInput, options: CallOptions) !get_adapter.GetAdapterOutput {
         return get_adapter.execute(self, allocator, input, options);
     }
 
@@ -208,7 +209,7 @@ pub const Client = struct {
     /// AdapterId, AdapterVersion, FeatureTypes, Status, StatusMessage,
     /// DatasetConfig,
     /// KMSKeyId, OutputConfig, Tags and EvaluationMetrics.
-    pub fn getAdapterVersion(self: *Self, allocator: std.mem.Allocator, input: get_adapter_version.GetAdapterVersionInput, options: get_adapter_version.Options) !get_adapter_version.GetAdapterVersionOutput {
+    pub fn getAdapterVersion(self: *Self, allocator: std.mem.Allocator, input: get_adapter_version.GetAdapterVersionInput, options: CallOptions) !get_adapter_version.GetAdapterVersionOutput {
         return get_adapter_version.execute(self, allocator, input, options);
     }
 
@@ -281,7 +282,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Document Text
     /// Analysis](https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html).
-    pub fn getDocumentAnalysis(self: *Self, allocator: std.mem.Allocator, input: get_document_analysis.GetDocumentAnalysisInput, options: get_document_analysis.Options) !get_document_analysis.GetDocumentAnalysisOutput {
+    pub fn getDocumentAnalysis(self: *Self, allocator: std.mem.Allocator, input: get_document_analysis.GetDocumentAnalysisInput, options: CallOptions) !get_document_analysis.GetDocumentAnalysisOutput {
         return get_document_analysis.execute(self, allocator, input, options);
     }
 
@@ -325,7 +326,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Document Text
     /// Detection](https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html).
-    pub fn getDocumentTextDetection(self: *Self, allocator: std.mem.Allocator, input: get_document_text_detection.GetDocumentTextDetectionInput, options: get_document_text_detection.Options) !get_document_text_detection.GetDocumentTextDetectionOutput {
+    pub fn getDocumentTextDetection(self: *Self, allocator: std.mem.Allocator, input: get_document_text_detection.GetDocumentTextDetectionInput, options: CallOptions) !get_document_text_detection.GetDocumentTextDetectionOutput {
         return get_document_text_detection.execute(self, allocator, input, options);
     }
 
@@ -360,7 +361,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Analyzing Invoices and
     /// Receipts](https://docs.aws.amazon.com/textract/latest/dg/invoices-receipts.html).
-    pub fn getExpenseAnalysis(self: *Self, allocator: std.mem.Allocator, input: get_expense_analysis.GetExpenseAnalysisInput, options: get_expense_analysis.Options) !get_expense_analysis.GetExpenseAnalysisOutput {
+    pub fn getExpenseAnalysis(self: *Self, allocator: std.mem.Allocator, input: get_expense_analysis.GetExpenseAnalysisInput, options: CallOptions) !get_expense_analysis.GetExpenseAnalysisOutput {
         return get_expense_analysis.execute(self, allocator, input, options);
     }
 
@@ -381,7 +382,7 @@ pub const Client = struct {
     /// GetLendingAnalysis, and pass
     /// the job identifier (`JobId`) from the initial call to
     /// `StartLendingAnalysis`.
-    pub fn getLendingAnalysis(self: *Self, allocator: std.mem.Allocator, input: get_lending_analysis.GetLendingAnalysisInput, options: get_lending_analysis.Options) !get_lending_analysis.GetLendingAnalysisOutput {
+    pub fn getLendingAnalysis(self: *Self, allocator: std.mem.Allocator, input: get_lending_analysis.GetLendingAnalysisInput, options: CallOptions) !get_lending_analysis.GetLendingAnalysisOutput {
         return get_lending_analysis.execute(self, allocator, input, options);
     }
 
@@ -406,22 +407,22 @@ pub const Client = struct {
     /// published to the Amazon SNS topic is SUCCEEDED. If so, call
     /// `GetLendingAnalysisSummary`, and pass the job identifier (`JobId`) from
     /// the initial call to `StartLendingAnalysis`.
-    pub fn getLendingAnalysisSummary(self: *Self, allocator: std.mem.Allocator, input: get_lending_analysis_summary.GetLendingAnalysisSummaryInput, options: get_lending_analysis_summary.Options) !get_lending_analysis_summary.GetLendingAnalysisSummaryOutput {
+    pub fn getLendingAnalysisSummary(self: *Self, allocator: std.mem.Allocator, input: get_lending_analysis_summary.GetLendingAnalysisSummaryInput, options: CallOptions) !get_lending_analysis_summary.GetLendingAnalysisSummaryOutput {
         return get_lending_analysis_summary.execute(self, allocator, input, options);
     }
 
     /// List all version of an adapter that meet the specified filtration criteria.
-    pub fn listAdapterVersions(self: *Self, allocator: std.mem.Allocator, input: list_adapter_versions.ListAdapterVersionsInput, options: list_adapter_versions.Options) !list_adapter_versions.ListAdapterVersionsOutput {
+    pub fn listAdapterVersions(self: *Self, allocator: std.mem.Allocator, input: list_adapter_versions.ListAdapterVersionsInput, options: CallOptions) !list_adapter_versions.ListAdapterVersionsOutput {
         return list_adapter_versions.execute(self, allocator, input, options);
     }
 
     /// Lists all adapters that match the specified filtration criteria.
-    pub fn listAdapters(self: *Self, allocator: std.mem.Allocator, input: list_adapters.ListAdaptersInput, options: list_adapters.Options) !list_adapters.ListAdaptersOutput {
+    pub fn listAdapters(self: *Self, allocator: std.mem.Allocator, input: list_adapters.ListAdaptersInput, options: CallOptions) !list_adapters.ListAdaptersOutput {
         return list_adapters.execute(self, allocator, input, options);
     }
 
     /// Lists all tags for an Amazon Textract resource.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
@@ -449,7 +450,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Document Text
     /// Analysis](https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html).
-    pub fn startDocumentAnalysis(self: *Self, allocator: std.mem.Allocator, input: start_document_analysis.StartDocumentAnalysisInput, options: start_document_analysis.Options) !start_document_analysis.StartDocumentAnalysisOutput {
+    pub fn startDocumentAnalysis(self: *Self, allocator: std.mem.Allocator, input: start_document_analysis.StartDocumentAnalysisInput, options: CallOptions) !start_document_analysis.StartDocumentAnalysisOutput {
         return start_document_analysis.execute(self, allocator, input, options);
     }
 
@@ -477,7 +478,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Document Text
     /// Detection](https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html).
-    pub fn startDocumentTextDetection(self: *Self, allocator: std.mem.Allocator, input: start_document_text_detection.StartDocumentTextDetectionInput, options: start_document_text_detection.Options) !start_document_text_detection.StartDocumentTextDetectionOutput {
+    pub fn startDocumentTextDetection(self: *Self, allocator: std.mem.Allocator, input: start_document_text_detection.StartDocumentTextDetectionInput, options: CallOptions) !start_document_text_detection.StartDocumentTextDetectionOutput {
         return start_document_text_detection.execute(self, allocator, input, options);
     }
 
@@ -507,7 +508,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Analyzing Invoices and
     /// Receipts](https://docs.aws.amazon.com/textract/latest/dg/invoice-receipts.html).
-    pub fn startExpenseAnalysis(self: *Self, allocator: std.mem.Allocator, input: start_expense_analysis.StartExpenseAnalysisInput, options: start_expense_analysis.Options) !start_expense_analysis.StartExpenseAnalysisOutput {
+    pub fn startExpenseAnalysis(self: *Self, allocator: std.mem.Allocator, input: start_expense_analysis.StartExpenseAnalysisInput, options: CallOptions) !start_expense_analysis.StartExpenseAnalysisOutput {
         return start_expense_analysis.execute(self, allocator, input, options);
     }
 
@@ -547,24 +548,24 @@ pub const Client = struct {
     /// * summaryResponse (for the GetLendingAnalysisSummary response)
     ///
     /// * splitDocuments (documents split across logical boundaries)
-    pub fn startLendingAnalysis(self: *Self, allocator: std.mem.Allocator, input: start_lending_analysis.StartLendingAnalysisInput, options: start_lending_analysis.Options) !start_lending_analysis.StartLendingAnalysisOutput {
+    pub fn startLendingAnalysis(self: *Self, allocator: std.mem.Allocator, input: start_lending_analysis.StartLendingAnalysisInput, options: CallOptions) !start_lending_analysis.StartLendingAnalysisOutput {
         return start_lending_analysis.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tags to the specified resource.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
     /// Removes any tags with the specified keys from the specified resource.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
     /// Update the configuration for an adapter. FeatureTypes configurations cannot
     /// be updated.
     /// At least one new parameter must be specified as an argument.
-    pub fn updateAdapter(self: *Self, allocator: std.mem.Allocator, input: update_adapter.UpdateAdapterInput, options: update_adapter.Options) !update_adapter.UpdateAdapterOutput {
+    pub fn updateAdapter(self: *Self, allocator: std.mem.Allocator, input: update_adapter.UpdateAdapterInput, options: CallOptions) !update_adapter.UpdateAdapterOutput {
         return update_adapter.execute(self, allocator, input, options);
     }
 

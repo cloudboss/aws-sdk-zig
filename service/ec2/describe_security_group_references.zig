@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SecurityGroupReference = @import("security_group_reference.zig").SecurityGroupReference;
 const serde = @import("serde.zig");
@@ -23,11 +24,7 @@ pub const DescribeSecurityGroupReferencesOutput = struct {
     security_group_reference_set: ?[]const SecurityGroupReference = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeSecurityGroupReferencesInput, options: Options) !DescribeSecurityGroupReferencesOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeSecurityGroupReferencesInput, options: CallOptions) !DescribeSecurityGroupReferencesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

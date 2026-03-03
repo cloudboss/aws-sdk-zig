@@ -61,6 +61,7 @@ const stop_notebook_execution = @import("stop_notebook_execution.zig");
 const terminate_job_flows = @import("terminate_job_flows.zig");
 const update_studio = @import("update_studio.zig");
 const update_studio_session_mapping = @import("update_studio_session_mapping.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
 
@@ -96,12 +97,12 @@ pub const Client = struct {
     ///
     /// The instance fleet configuration is available only in Amazon EMR releases
     /// 4.8.0 and later, excluding 5.0.x.
-    pub fn addInstanceFleet(self: *Self, allocator: std.mem.Allocator, input: add_instance_fleet.AddInstanceFleetInput, options: add_instance_fleet.Options) !add_instance_fleet.AddInstanceFleetOutput {
+    pub fn addInstanceFleet(self: *Self, allocator: std.mem.Allocator, input: add_instance_fleet.AddInstanceFleetInput, options: CallOptions) !add_instance_fleet.AddInstanceFleetOutput {
         return add_instance_fleet.execute(self, allocator, input, options);
     }
 
     /// Adds one or more instance groups to a running cluster.
-    pub fn addInstanceGroups(self: *Self, allocator: std.mem.Allocator, input: add_instance_groups.AddInstanceGroupsInput, options: add_instance_groups.Options) !add_instance_groups.AddInstanceGroupsOutput {
+    pub fn addInstanceGroups(self: *Self, allocator: std.mem.Allocator, input: add_instance_groups.AddInstanceGroupsInput, options: CallOptions) !add_instance_groups.AddInstanceGroupsOutput {
         return add_instance_groups.execute(self, allocator, input, options);
     }
 
@@ -138,7 +139,7 @@ pub const Client = struct {
     ///
     /// The string values passed into `HadoopJarStep` object cannot exceed a total
     /// of 10240 characters.
-    pub fn addJobFlowSteps(self: *Self, allocator: std.mem.Allocator, input: add_job_flow_steps.AddJobFlowStepsInput, options: add_job_flow_steps.Options) !add_job_flow_steps.AddJobFlowStepsOutput {
+    pub fn addJobFlowSteps(self: *Self, allocator: std.mem.Allocator, input: add_job_flow_steps.AddJobFlowStepsInput, options: CallOptions) !add_job_flow_steps.AddJobFlowStepsOutput {
         return add_job_flow_steps.execute(self, allocator, input, options);
     }
 
@@ -149,7 +150,7 @@ pub const Client = struct {
     /// information,
     /// see [Tag
     /// Clusters](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html).
-    pub fn addTags(self: *Self, allocator: std.mem.Allocator, input: add_tags.AddTagsInput, options: add_tags.Options) !add_tags.AddTagsOutput {
+    pub fn addTags(self: *Self, allocator: std.mem.Allocator, input: add_tags.AddTagsInput, options: CallOptions) !add_tags.AddTagsOutput {
         return add_tags.execute(self, allocator, input, options);
     }
 
@@ -163,24 +164,24 @@ pub const Client = struct {
     /// Amazon EMR releases 5.28.0 and later, you can cancel steps that are in a
     /// `PENDING` or `RUNNING` state. In earlier versions of Amazon EMR, you can
     /// only cancel steps that are in a `PENDING` state.
-    pub fn cancelSteps(self: *Self, allocator: std.mem.Allocator, input: cancel_steps.CancelStepsInput, options: cancel_steps.Options) !cancel_steps.CancelStepsOutput {
+    pub fn cancelSteps(self: *Self, allocator: std.mem.Allocator, input: cancel_steps.CancelStepsInput, options: CallOptions) !cancel_steps.CancelStepsOutput {
         return cancel_steps.execute(self, allocator, input, options);
     }
 
     /// Creates a persistent application user interface.
-    pub fn createPersistentAppUi(self: *Self, allocator: std.mem.Allocator, input: create_persistent_app_ui.CreatePersistentAppUIInput, options: create_persistent_app_ui.Options) !create_persistent_app_ui.CreatePersistentAppUIOutput {
+    pub fn createPersistentAppUi(self: *Self, allocator: std.mem.Allocator, input: create_persistent_app_ui.CreatePersistentAppUIInput, options: CallOptions) !create_persistent_app_ui.CreatePersistentAppUIOutput {
         return create_persistent_app_ui.execute(self, allocator, input, options);
     }
 
     /// Creates a security configuration, which is stored in the service and can be
     /// specified
     /// when a cluster is created.
-    pub fn createSecurityConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_security_configuration.CreateSecurityConfigurationInput, options: create_security_configuration.Options) !create_security_configuration.CreateSecurityConfigurationOutput {
+    pub fn createSecurityConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_security_configuration.CreateSecurityConfigurationInput, options: CallOptions) !create_security_configuration.CreateSecurityConfigurationOutput {
         return create_security_configuration.execute(self, allocator, input, options);
     }
 
     /// Creates a new Amazon EMR Studio.
-    pub fn createStudio(self: *Self, allocator: std.mem.Allocator, input: create_studio.CreateStudioInput, options: create_studio.Options) !create_studio.CreateStudioOutput {
+    pub fn createStudio(self: *Self, allocator: std.mem.Allocator, input: create_studio.CreateStudioInput, options: CallOptions) !create_studio.CreateStudioOutput {
         return create_studio.execute(self, allocator, input, options);
     }
 
@@ -194,29 +195,29 @@ pub const Client = struct {
     /// Studio when you use IAM authentication, see [Assign a user or group to your
     /// EMR
     /// Studio](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-manage-users.html#emr-studio-assign-users-groups).
-    pub fn createStudioSessionMapping(self: *Self, allocator: std.mem.Allocator, input: create_studio_session_mapping.CreateStudioSessionMappingInput, options: create_studio_session_mapping.Options) !create_studio_session_mapping.CreateStudioSessionMappingOutput {
+    pub fn createStudioSessionMapping(self: *Self, allocator: std.mem.Allocator, input: create_studio_session_mapping.CreateStudioSessionMappingInput, options: CallOptions) !create_studio_session_mapping.CreateStudioSessionMappingOutput {
         return create_studio_session_mapping.execute(self, allocator, input, options);
     }
 
     /// Deletes a security configuration.
-    pub fn deleteSecurityConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_security_configuration.DeleteSecurityConfigurationInput, options: delete_security_configuration.Options) !delete_security_configuration.DeleteSecurityConfigurationOutput {
+    pub fn deleteSecurityConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_security_configuration.DeleteSecurityConfigurationInput, options: CallOptions) !delete_security_configuration.DeleteSecurityConfigurationOutput {
         return delete_security_configuration.execute(self, allocator, input, options);
     }
 
     /// Removes an Amazon EMR Studio from the Studio metadata store.
-    pub fn deleteStudio(self: *Self, allocator: std.mem.Allocator, input: delete_studio.DeleteStudioInput, options: delete_studio.Options) !delete_studio.DeleteStudioOutput {
+    pub fn deleteStudio(self: *Self, allocator: std.mem.Allocator, input: delete_studio.DeleteStudioInput, options: CallOptions) !delete_studio.DeleteStudioOutput {
         return delete_studio.execute(self, allocator, input, options);
     }
 
     /// Removes a user or group from an Amazon EMR Studio.
-    pub fn deleteStudioSessionMapping(self: *Self, allocator: std.mem.Allocator, input: delete_studio_session_mapping.DeleteStudioSessionMappingInput, options: delete_studio_session_mapping.Options) !delete_studio_session_mapping.DeleteStudioSessionMappingOutput {
+    pub fn deleteStudioSessionMapping(self: *Self, allocator: std.mem.Allocator, input: delete_studio_session_mapping.DeleteStudioSessionMappingInput, options: CallOptions) !delete_studio_session_mapping.DeleteStudioSessionMappingOutput {
         return delete_studio_session_mapping.execute(self, allocator, input, options);
     }
 
     /// Provides cluster-level details including status, hardware and software
     /// configuration,
     /// VPC settings, and so on.
-    pub fn describeCluster(self: *Self, allocator: std.mem.Allocator, input: describe_cluster.DescribeClusterInput, options: describe_cluster.Options) !describe_cluster.DescribeClusterOutput {
+    pub fn describeCluster(self: *Self, allocator: std.mem.Allocator, input: describe_cluster.DescribeClusterInput, options: CallOptions) !describe_cluster.DescribeClusterOutput {
         return describe_cluster.execute(self, allocator, input, options);
     }
 
@@ -247,17 +248,17 @@ pub const Client = struct {
     /// `STARTING`
     ///
     /// Amazon EMR can return a maximum of 512 job flow descriptions.
-    pub fn describeJobFlows(self: *Self, allocator: std.mem.Allocator, input: describe_job_flows.DescribeJobFlowsInput, options: describe_job_flows.Options) !describe_job_flows.DescribeJobFlowsOutput {
+    pub fn describeJobFlows(self: *Self, allocator: std.mem.Allocator, input: describe_job_flows.DescribeJobFlowsInput, options: CallOptions) !describe_job_flows.DescribeJobFlowsOutput {
         return describe_job_flows.execute(self, allocator, input, options);
     }
 
     /// Provides details of a notebook execution.
-    pub fn describeNotebookExecution(self: *Self, allocator: std.mem.Allocator, input: describe_notebook_execution.DescribeNotebookExecutionInput, options: describe_notebook_execution.Options) !describe_notebook_execution.DescribeNotebookExecutionOutput {
+    pub fn describeNotebookExecution(self: *Self, allocator: std.mem.Allocator, input: describe_notebook_execution.DescribeNotebookExecutionInput, options: CallOptions) !describe_notebook_execution.DescribeNotebookExecutionOutput {
         return describe_notebook_execution.execute(self, allocator, input, options);
     }
 
     /// Describes a persistent application user interface.
-    pub fn describePersistentAppUi(self: *Self, allocator: std.mem.Allocator, input: describe_persistent_app_ui.DescribePersistentAppUIInput, options: describe_persistent_app_ui.Options) !describe_persistent_app_ui.DescribePersistentAppUIOutput {
+    pub fn describePersistentAppUi(self: *Self, allocator: std.mem.Allocator, input: describe_persistent_app_ui.DescribePersistentAppUIInput, options: CallOptions) !describe_persistent_app_ui.DescribePersistentAppUIOutput {
         return describe_persistent_app_ui.execute(self, allocator, input, options);
     }
 
@@ -267,30 +268,30 @@ pub const Client = struct {
     /// specific Amazon EMR release label. Can also list Amazon EMR releases that
     /// support a
     /// specified version of Spark.
-    pub fn describeReleaseLabel(self: *Self, allocator: std.mem.Allocator, input: describe_release_label.DescribeReleaseLabelInput, options: describe_release_label.Options) !describe_release_label.DescribeReleaseLabelOutput {
+    pub fn describeReleaseLabel(self: *Self, allocator: std.mem.Allocator, input: describe_release_label.DescribeReleaseLabelInput, options: CallOptions) !describe_release_label.DescribeReleaseLabelOutput {
         return describe_release_label.execute(self, allocator, input, options);
     }
 
     /// Provides the details of a security configuration by returning the
     /// configuration
     /// JSON.
-    pub fn describeSecurityConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_security_configuration.DescribeSecurityConfigurationInput, options: describe_security_configuration.Options) !describe_security_configuration.DescribeSecurityConfigurationOutput {
+    pub fn describeSecurityConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_security_configuration.DescribeSecurityConfigurationInput, options: CallOptions) !describe_security_configuration.DescribeSecurityConfigurationOutput {
         return describe_security_configuration.execute(self, allocator, input, options);
     }
 
     /// Provides more detail about the cluster step.
-    pub fn describeStep(self: *Self, allocator: std.mem.Allocator, input: describe_step.DescribeStepInput, options: describe_step.Options) !describe_step.DescribeStepOutput {
+    pub fn describeStep(self: *Self, allocator: std.mem.Allocator, input: describe_step.DescribeStepInput, options: CallOptions) !describe_step.DescribeStepOutput {
         return describe_step.execute(self, allocator, input, options);
     }
 
     /// Returns details for the specified Amazon EMR Studio including ID, Name, VPC,
     /// Studio access URL, and so on.
-    pub fn describeStudio(self: *Self, allocator: std.mem.Allocator, input: describe_studio.DescribeStudioInput, options: describe_studio.Options) !describe_studio.DescribeStudioOutput {
+    pub fn describeStudio(self: *Self, allocator: std.mem.Allocator, input: describe_studio.DescribeStudioInput, options: CallOptions) !describe_studio.DescribeStudioOutput {
         return describe_studio.execute(self, allocator, input, options);
     }
 
     /// Returns the auto-termination policy for an Amazon EMR cluster.
-    pub fn getAutoTerminationPolicy(self: *Self, allocator: std.mem.Allocator, input: get_auto_termination_policy.GetAutoTerminationPolicyInput, options: get_auto_termination_policy.Options) !get_auto_termination_policy.GetAutoTerminationPolicyOutput {
+    pub fn getAutoTerminationPolicy(self: *Self, allocator: std.mem.Allocator, input: get_auto_termination_policy.GetAutoTerminationPolicyInput, options: CallOptions) !get_auto_termination_policy.GetAutoTerminationPolicyOutput {
         return get_auto_termination_policy.execute(self, allocator, input, options);
     }
 
@@ -300,7 +301,7 @@ pub const Client = struct {
     /// Public Access for Amazon
     /// EMR](https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html) in the *Amazon EMR
     /// Management Guide*.
-    pub fn getBlockPublicAccessConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_block_public_access_configuration.GetBlockPublicAccessConfigurationInput, options: get_block_public_access_configuration.Options) !get_block_public_access_configuration.GetBlockPublicAccessConfigurationOutput {
+    pub fn getBlockPublicAccessConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_block_public_access_configuration.GetBlockPublicAccessConfigurationInput, options: CallOptions) !get_block_public_access_configuration.GetBlockPublicAccessConfigurationOutput {
         return get_block_public_access_configuration.execute(self, allocator, input, options);
     }
 
@@ -310,34 +311,34 @@ pub const Client = struct {
     /// activated. You can use these credentials to connect to cluster endpoints
     /// that support
     /// username and password authentication.
-    pub fn getClusterSessionCredentials(self: *Self, allocator: std.mem.Allocator, input: get_cluster_session_credentials.GetClusterSessionCredentialsInput, options: get_cluster_session_credentials.Options) !get_cluster_session_credentials.GetClusterSessionCredentialsOutput {
+    pub fn getClusterSessionCredentials(self: *Self, allocator: std.mem.Allocator, input: get_cluster_session_credentials.GetClusterSessionCredentialsInput, options: CallOptions) !get_cluster_session_credentials.GetClusterSessionCredentialsOutput {
         return get_cluster_session_credentials.execute(self, allocator, input, options);
     }
 
     /// Fetches the attached managed scaling policy for an Amazon EMR cluster.
-    pub fn getManagedScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: get_managed_scaling_policy.GetManagedScalingPolicyInput, options: get_managed_scaling_policy.Options) !get_managed_scaling_policy.GetManagedScalingPolicyOutput {
+    pub fn getManagedScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: get_managed_scaling_policy.GetManagedScalingPolicyInput, options: CallOptions) !get_managed_scaling_policy.GetManagedScalingPolicyOutput {
         return get_managed_scaling_policy.execute(self, allocator, input, options);
     }
 
     /// The presigned URL properties for the cluster's application user interface.
-    pub fn getOnClusterAppUiPresignedUrl(self: *Self, allocator: std.mem.Allocator, input: get_on_cluster_app_ui_presigned_url.GetOnClusterAppUIPresignedURLInput, options: get_on_cluster_app_ui_presigned_url.Options) !get_on_cluster_app_ui_presigned_url.GetOnClusterAppUIPresignedURLOutput {
+    pub fn getOnClusterAppUiPresignedUrl(self: *Self, allocator: std.mem.Allocator, input: get_on_cluster_app_ui_presigned_url.GetOnClusterAppUIPresignedURLInput, options: CallOptions) !get_on_cluster_app_ui_presigned_url.GetOnClusterAppUIPresignedURLOutput {
         return get_on_cluster_app_ui_presigned_url.execute(self, allocator, input, options);
     }
 
     /// The presigned URL properties for the cluster's application user interface.
-    pub fn getPersistentAppUiPresignedUrl(self: *Self, allocator: std.mem.Allocator, input: get_persistent_app_ui_presigned_url.GetPersistentAppUIPresignedURLInput, options: get_persistent_app_ui_presigned_url.Options) !get_persistent_app_ui_presigned_url.GetPersistentAppUIPresignedURLOutput {
+    pub fn getPersistentAppUiPresignedUrl(self: *Self, allocator: std.mem.Allocator, input: get_persistent_app_ui_presigned_url.GetPersistentAppUIPresignedURLInput, options: CallOptions) !get_persistent_app_ui_presigned_url.GetPersistentAppUIPresignedURLOutput {
         return get_persistent_app_ui_presigned_url.execute(self, allocator, input, options);
     }
 
     /// Fetches mapping details for the specified Amazon EMR Studio and identity
     /// (user
     /// or group).
-    pub fn getStudioSessionMapping(self: *Self, allocator: std.mem.Allocator, input: get_studio_session_mapping.GetStudioSessionMappingInput, options: get_studio_session_mapping.Options) !get_studio_session_mapping.GetStudioSessionMappingOutput {
+    pub fn getStudioSessionMapping(self: *Self, allocator: std.mem.Allocator, input: get_studio_session_mapping.GetStudioSessionMappingInput, options: CallOptions) !get_studio_session_mapping.GetStudioSessionMappingOutput {
         return get_studio_session_mapping.execute(self, allocator, input, options);
     }
 
     /// Provides information about the bootstrap actions associated with a cluster.
-    pub fn listBootstrapActions(self: *Self, allocator: std.mem.Allocator, input: list_bootstrap_actions.ListBootstrapActionsInput, options: list_bootstrap_actions.Options) !list_bootstrap_actions.ListBootstrapActionsOutput {
+    pub fn listBootstrapActions(self: *Self, allocator: std.mem.Allocator, input: list_bootstrap_actions.ListBootstrapActionsInput, options: CallOptions) !list_bootstrap_actions.ListBootstrapActionsOutput {
         return list_bootstrap_actions.execute(self, allocator, input, options);
     }
 
@@ -350,7 +351,7 @@ pub const Client = struct {
     /// unsorted order per call, but returns a marker to track the paging of the
     /// cluster list
     /// across multiple ListClusters calls.
-    pub fn listClusters(self: *Self, allocator: std.mem.Allocator, input: list_clusters.ListClustersInput, options: list_clusters.Options) !list_clusters.ListClustersOutput {
+    pub fn listClusters(self: *Self, allocator: std.mem.Allocator, input: list_clusters.ListClustersInput, options: CallOptions) !list_clusters.ListClustersOutput {
         return list_clusters.execute(self, allocator, input, options);
     }
 
@@ -358,12 +359,12 @@ pub const Client = struct {
     ///
     /// The instance fleet configuration is available only in Amazon EMR releases
     /// 4.8.0 and later, excluding 5.0.x versions.
-    pub fn listInstanceFleets(self: *Self, allocator: std.mem.Allocator, input: list_instance_fleets.ListInstanceFleetsInput, options: list_instance_fleets.Options) !list_instance_fleets.ListInstanceFleetsOutput {
+    pub fn listInstanceFleets(self: *Self, allocator: std.mem.Allocator, input: list_instance_fleets.ListInstanceFleetsInput, options: CallOptions) !list_instance_fleets.ListInstanceFleetsOutput {
         return list_instance_fleets.execute(self, allocator, input, options);
     }
 
     /// Provides all available details about the instance groups in a cluster.
-    pub fn listInstanceGroups(self: *Self, allocator: std.mem.Allocator, input: list_instance_groups.ListInstanceGroupsInput, options: list_instance_groups.Options) !list_instance_groups.ListInstanceGroupsOutput {
+    pub fn listInstanceGroups(self: *Self, allocator: std.mem.Allocator, input: list_instance_groups.ListInstanceGroupsInput, options: CallOptions) !list_instance_groups.ListInstanceGroupsOutput {
         return list_instance_groups.execute(self, allocator, input, options);
     }
 
@@ -373,7 +374,7 @@ pub const Client = struct {
     /// instances in any of the following states are considered active:
     /// AWAITING_FULFILLMENT,
     /// PROVISIONING, BOOTSTRAPPING, RUNNING.
-    pub fn listInstances(self: *Self, allocator: std.mem.Allocator, input: list_instances.ListInstancesInput, options: list_instances.Options) !list_instances.ListInstancesOutput {
+    pub fn listInstances(self: *Self, allocator: std.mem.Allocator, input: list_instances.ListInstancesInput, options: CallOptions) !list_instances.ListInstancesOutput {
         return list_instances.execute(self, allocator, input, options);
     }
 
@@ -384,14 +385,14 @@ pub const Client = struct {
     /// executions and a marker to track the paging of a longer notebook execution
     /// list across
     /// multiple `ListNotebookExecutions` calls.
-    pub fn listNotebookExecutions(self: *Self, allocator: std.mem.Allocator, input: list_notebook_executions.ListNotebookExecutionsInput, options: list_notebook_executions.Options) !list_notebook_executions.ListNotebookExecutionsOutput {
+    pub fn listNotebookExecutions(self: *Self, allocator: std.mem.Allocator, input: list_notebook_executions.ListNotebookExecutionsInput, options: CallOptions) !list_notebook_executions.ListNotebookExecutionsOutput {
         return list_notebook_executions.execute(self, allocator, input, options);
     }
 
     /// Retrieves release labels of Amazon EMR services in the Region where the API
     /// is
     /// called.
-    pub fn listReleaseLabels(self: *Self, allocator: std.mem.Allocator, input: list_release_labels.ListReleaseLabelsInput, options: list_release_labels.Options) !list_release_labels.ListReleaseLabelsOutput {
+    pub fn listReleaseLabels(self: *Self, allocator: std.mem.Allocator, input: list_release_labels.ListReleaseLabelsInput, options: CallOptions) !list_release_labels.ListReleaseLabelsOutput {
         return list_release_labels.execute(self, allocator, input, options);
     }
 
@@ -401,7 +402,7 @@ pub const Client = struct {
     /// per call, but
     /// returns a marker to track the paging of the cluster list across multiple
     /// ListSecurityConfigurations calls.
-    pub fn listSecurityConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_security_configurations.ListSecurityConfigurationsInput, options: list_security_configurations.Options) !list_security_configurations.ListSecurityConfigurationsOutput {
+    pub fn listSecurityConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_security_configurations.ListSecurityConfigurationsInput, options: CallOptions) !list_security_configurations.ListSecurityConfigurationsOutput {
         return list_security_configurations.execute(self, allocator, input, options);
     }
 
@@ -412,14 +413,14 @@ pub const Client = struct {
     /// than 50 steps
     /// using the CLI, specify a `Marker`, which is a pagination token
     /// that indicates the next set of steps to retrieve.
-    pub fn listSteps(self: *Self, allocator: std.mem.Allocator, input: list_steps.ListStepsInput, options: list_steps.Options) !list_steps.ListStepsOutput {
+    pub fn listSteps(self: *Self, allocator: std.mem.Allocator, input: list_steps.ListStepsInput, options: CallOptions) !list_steps.ListStepsOutput {
         return list_steps.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all user or group session mappings for the Amazon EMR
     /// Studio
     /// specified by `StudioId`.
-    pub fn listStudioSessionMappings(self: *Self, allocator: std.mem.Allocator, input: list_studio_session_mappings.ListStudioSessionMappingsInput, options: list_studio_session_mappings.Options) !list_studio_session_mappings.ListStudioSessionMappingsOutput {
+    pub fn listStudioSessionMappings(self: *Self, allocator: std.mem.Allocator, input: list_studio_session_mappings.ListStudioSessionMappingsInput, options: CallOptions) !list_studio_session_mappings.ListStudioSessionMappingsOutput {
         return list_studio_session_mappings.execute(self, allocator, input, options);
     }
 
@@ -427,20 +428,20 @@ pub const Client = struct {
     /// Services account. The list includes details such as ID, Studio Access URL,
     /// and
     /// creation time for each Studio.
-    pub fn listStudios(self: *Self, allocator: std.mem.Allocator, input: list_studios.ListStudiosInput, options: list_studios.Options) !list_studios.ListStudiosOutput {
+    pub fn listStudios(self: *Self, allocator: std.mem.Allocator, input: list_studios.ListStudiosInput, options: CallOptions) !list_studios.ListStudiosOutput {
         return list_studios.execute(self, allocator, input, options);
     }
 
     /// A list of the instance types that Amazon EMR supports. You can filter the
     /// list by Amazon Web Services Region and Amazon EMR release.
-    pub fn listSupportedInstanceTypes(self: *Self, allocator: std.mem.Allocator, input: list_supported_instance_types.ListSupportedInstanceTypesInput, options: list_supported_instance_types.Options) !list_supported_instance_types.ListSupportedInstanceTypesOutput {
+    pub fn listSupportedInstanceTypes(self: *Self, allocator: std.mem.Allocator, input: list_supported_instance_types.ListSupportedInstanceTypesInput, options: CallOptions) !list_supported_instance_types.ListSupportedInstanceTypesOutput {
         return list_supported_instance_types.execute(self, allocator, input, options);
     }
 
     /// Modifies the number of steps that can be executed concurrently for the
     /// cluster specified
     /// using ClusterID.
-    pub fn modifyCluster(self: *Self, allocator: std.mem.Allocator, input: modify_cluster.ModifyClusterInput, options: modify_cluster.Options) !modify_cluster.ModifyClusterOutput {
+    pub fn modifyCluster(self: *Self, allocator: std.mem.Allocator, input: modify_cluster.ModifyClusterInput, options: CallOptions) !modify_cluster.ModifyClusterOutput {
         return modify_cluster.execute(self, allocator, input, options);
     }
 
@@ -452,7 +453,7 @@ pub const Client = struct {
     ///
     /// The instance fleet configuration is available only in Amazon EMR releases
     /// 4.8.0 and later, excluding 5.0.x versions.
-    pub fn modifyInstanceFleet(self: *Self, allocator: std.mem.Allocator, input: modify_instance_fleet.ModifyInstanceFleetInput, options: modify_instance_fleet.Options) !modify_instance_fleet.ModifyInstanceFleetOutput {
+    pub fn modifyInstanceFleet(self: *Self, allocator: std.mem.Allocator, input: modify_instance_fleet.ModifyInstanceFleetInput, options: CallOptions) !modify_instance_fleet.ModifyInstanceFleetOutput {
         return modify_instance_fleet.execute(self, allocator, input, options);
     }
 
@@ -461,7 +462,7 @@ pub const Client = struct {
     /// instance group. The input parameters include the new target instance count
     /// for the group
     /// and the instance group ID. The call will either succeed or fail atomically.
-    pub fn modifyInstanceGroups(self: *Self, allocator: std.mem.Allocator, input: modify_instance_groups.ModifyInstanceGroupsInput, options: modify_instance_groups.Options) !modify_instance_groups.ModifyInstanceGroupsOutput {
+    pub fn modifyInstanceGroups(self: *Self, allocator: std.mem.Allocator, input: modify_instance_groups.ModifyInstanceGroupsInput, options: CallOptions) !modify_instance_groups.ModifyInstanceGroupsOutput {
         return modify_instance_groups.execute(self, allocator, input, options);
     }
 
@@ -472,7 +473,7 @@ pub const Client = struct {
     /// an instance group dynamically adds and terminates Amazon EC2 instances in
     /// response
     /// to the value of a CloudWatch metric.
-    pub fn putAutoScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: put_auto_scaling_policy.PutAutoScalingPolicyInput, options: put_auto_scaling_policy.Options) !put_auto_scaling_policy.PutAutoScalingPolicyOutput {
+    pub fn putAutoScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: put_auto_scaling_policy.PutAutoScalingPolicyInput, options: CallOptions) !put_auto_scaling_policy.PutAutoScalingPolicyOutput {
         return put_auto_scaling_policy.execute(self, allocator, input, options);
     }
 
@@ -488,7 +489,7 @@ pub const Client = struct {
     /// [Control
     /// cluster
     /// termination](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html).
-    pub fn putAutoTerminationPolicy(self: *Self, allocator: std.mem.Allocator, input: put_auto_termination_policy.PutAutoTerminationPolicyInput, options: put_auto_termination_policy.Options) !put_auto_termination_policy.PutAutoTerminationPolicyOutput {
+    pub fn putAutoTerminationPolicy(self: *Self, allocator: std.mem.Allocator, input: put_auto_termination_policy.PutAutoTerminationPolicyInput, options: CallOptions) !put_auto_termination_policy.PutAutoTerminationPolicyOutput {
         return put_auto_termination_policy.execute(self, allocator, input, options);
     }
 
@@ -498,7 +499,7 @@ pub const Client = struct {
     /// Public Access for Amazon
     /// EMR](https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html) in the *Amazon EMR
     /// Management Guide*.
-    pub fn putBlockPublicAccessConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_block_public_access_configuration.PutBlockPublicAccessConfigurationInput, options: put_block_public_access_configuration.Options) !put_block_public_access_configuration.PutBlockPublicAccessConfigurationOutput {
+    pub fn putBlockPublicAccessConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_block_public_access_configuration.PutBlockPublicAccessConfigurationInput, options: CallOptions) !put_block_public_access_configuration.PutBlockPublicAccessConfigurationOutput {
         return put_block_public_access_configuration.execute(self, allocator, input, options);
     }
 
@@ -508,23 +509,23 @@ pub const Client = struct {
     /// applies to the
     /// core and task nodes. The master node cannot be scaled after initial
     /// configuration.
-    pub fn putManagedScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: put_managed_scaling_policy.PutManagedScalingPolicyInput, options: put_managed_scaling_policy.Options) !put_managed_scaling_policy.PutManagedScalingPolicyOutput {
+    pub fn putManagedScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: put_managed_scaling_policy.PutManagedScalingPolicyInput, options: CallOptions) !put_managed_scaling_policy.PutManagedScalingPolicyOutput {
         return put_managed_scaling_policy.execute(self, allocator, input, options);
     }
 
     /// Removes an automatic scaling policy from a specified instance group within
     /// an Amazon EMR cluster.
-    pub fn removeAutoScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: remove_auto_scaling_policy.RemoveAutoScalingPolicyInput, options: remove_auto_scaling_policy.Options) !remove_auto_scaling_policy.RemoveAutoScalingPolicyOutput {
+    pub fn removeAutoScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: remove_auto_scaling_policy.RemoveAutoScalingPolicyInput, options: CallOptions) !remove_auto_scaling_policy.RemoveAutoScalingPolicyOutput {
         return remove_auto_scaling_policy.execute(self, allocator, input, options);
     }
 
     /// Removes an auto-termination policy from an Amazon EMR cluster.
-    pub fn removeAutoTerminationPolicy(self: *Self, allocator: std.mem.Allocator, input: remove_auto_termination_policy.RemoveAutoTerminationPolicyInput, options: remove_auto_termination_policy.Options) !remove_auto_termination_policy.RemoveAutoTerminationPolicyOutput {
+    pub fn removeAutoTerminationPolicy(self: *Self, allocator: std.mem.Allocator, input: remove_auto_termination_policy.RemoveAutoTerminationPolicyInput, options: CallOptions) !remove_auto_termination_policy.RemoveAutoTerminationPolicyOutput {
         return remove_auto_termination_policy.execute(self, allocator, input, options);
     }
 
     /// Removes a managed scaling policy from a specified Amazon EMR cluster.
-    pub fn removeManagedScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: remove_managed_scaling_policy.RemoveManagedScalingPolicyInput, options: remove_managed_scaling_policy.Options) !remove_managed_scaling_policy.RemoveManagedScalingPolicyOutput {
+    pub fn removeManagedScalingPolicy(self: *Self, allocator: std.mem.Allocator, input: remove_managed_scaling_policy.RemoveManagedScalingPolicyInput, options: CallOptions) !remove_managed_scaling_policy.RemoveManagedScalingPolicyOutput {
         return remove_managed_scaling_policy.execute(self, allocator, input, options);
     }
 
@@ -537,7 +538,7 @@ pub const Client = struct {
     /// Clusters](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html).
     ///
     /// The following example removes the stack tag with value Prod from a cluster:
-    pub fn removeTags(self: *Self, allocator: std.mem.Allocator, input: remove_tags.RemoveTagsInput, options: remove_tags.Options) !remove_tags.RemoveTagsOutput {
+    pub fn removeTags(self: *Self, allocator: std.mem.Allocator, input: remove_tags.RemoveTagsInput, options: CallOptions) !remove_tags.RemoveTagsOutput {
         return remove_tags.execute(self, allocator, input, options);
     }
 
@@ -577,7 +578,7 @@ pub const Client = struct {
     /// 4.8.0 and later, excluding 5.0.x versions. The RunJobFlow request can
     /// contain
     /// InstanceFleets parameters or InstanceGroups parameters, but not both.
-    pub fn runJobFlow(self: *Self, allocator: std.mem.Allocator, input: run_job_flow.RunJobFlowInput, options: run_job_flow.Options) !run_job_flow.RunJobFlowOutput {
+    pub fn runJobFlow(self: *Self, allocator: std.mem.Allocator, input: run_job_flow.RunJobFlowInput, options: CallOptions) !run_job_flow.RunJobFlowOutput {
         return run_job_flow.execute(self, allocator, input, options);
     }
 
@@ -590,7 +591,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Managing Cluster
     /// Termination](https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html) in the *Amazon EMR Management Guide*.
-    pub fn setKeepJobFlowAliveWhenNoSteps(self: *Self, allocator: std.mem.Allocator, input: set_keep_job_flow_alive_when_no_steps.SetKeepJobFlowAliveWhenNoStepsInput, options: set_keep_job_flow_alive_when_no_steps.Options) !set_keep_job_flow_alive_when_no_steps.SetKeepJobFlowAliveWhenNoStepsOutput {
+    pub fn setKeepJobFlowAliveWhenNoSteps(self: *Self, allocator: std.mem.Allocator, input: set_keep_job_flow_alive_when_no_steps.SetKeepJobFlowAliveWhenNoStepsInput, options: CallOptions) !set_keep_job_flow_alive_when_no_steps.SetKeepJobFlowAliveWhenNoStepsOutput {
         return set_keep_job_flow_alive_when_no_steps.execute(self, allocator, input, options);
     }
 
@@ -618,7 +619,7 @@ pub const Client = struct {
     ///
     /// For more information, see [Managing Cluster
     /// Termination](https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html) in the *Amazon EMR Management Guide*.
-    pub fn setTerminationProtection(self: *Self, allocator: std.mem.Allocator, input: set_termination_protection.SetTerminationProtectionInput, options: set_termination_protection.Options) !set_termination_protection.SetTerminationProtectionOutput {
+    pub fn setTerminationProtection(self: *Self, allocator: std.mem.Allocator, input: set_termination_protection.SetTerminationProtectionInput, options: CallOptions) !set_termination_protection.SetTerminationProtectionOutput {
         return set_termination_protection.execute(self, allocator, input, options);
     }
 
@@ -641,7 +642,7 @@ pub const Client = struct {
     /// For more information, see [graceful
     /// node
     /// replacement](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-node-replacement.html) in the *Amazon EMR Management Guide*.
-    pub fn setUnhealthyNodeReplacement(self: *Self, allocator: std.mem.Allocator, input: set_unhealthy_node_replacement.SetUnhealthyNodeReplacementInput, options: set_unhealthy_node_replacement.Options) !set_unhealthy_node_replacement.SetUnhealthyNodeReplacementOutput {
+    pub fn setUnhealthyNodeReplacement(self: *Self, allocator: std.mem.Allocator, input: set_unhealthy_node_replacement.SetUnhealthyNodeReplacementInput, options: CallOptions) !set_unhealthy_node_replacement.SetUnhealthyNodeReplacementOutput {
         return set_unhealthy_node_replacement.execute(self, allocator, input, options);
     }
 
@@ -668,17 +669,17 @@ pub const Client = struct {
     /// VisibleToAllUsers
     /// Setting](https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_IAM_emr-with-IAM.html#security_set_visible_to_all_users) in the
     /// *Amazon EMR Management Guide*.
-    pub fn setVisibleToAllUsers(self: *Self, allocator: std.mem.Allocator, input: set_visible_to_all_users.SetVisibleToAllUsersInput, options: set_visible_to_all_users.Options) !set_visible_to_all_users.SetVisibleToAllUsersOutput {
+    pub fn setVisibleToAllUsers(self: *Self, allocator: std.mem.Allocator, input: set_visible_to_all_users.SetVisibleToAllUsersInput, options: CallOptions) !set_visible_to_all_users.SetVisibleToAllUsersOutput {
         return set_visible_to_all_users.execute(self, allocator, input, options);
     }
 
     /// Starts a notebook execution.
-    pub fn startNotebookExecution(self: *Self, allocator: std.mem.Allocator, input: start_notebook_execution.StartNotebookExecutionInput, options: start_notebook_execution.Options) !start_notebook_execution.StartNotebookExecutionOutput {
+    pub fn startNotebookExecution(self: *Self, allocator: std.mem.Allocator, input: start_notebook_execution.StartNotebookExecutionInput, options: CallOptions) !start_notebook_execution.StartNotebookExecutionOutput {
         return start_notebook_execution.execute(self, allocator, input, options);
     }
 
     /// Stops a notebook execution.
-    pub fn stopNotebookExecution(self: *Self, allocator: std.mem.Allocator, input: stop_notebook_execution.StopNotebookExecutionInput, options: stop_notebook_execution.Options) !stop_notebook_execution.StopNotebookExecutionOutput {
+    pub fn stopNotebookExecution(self: *Self, allocator: std.mem.Allocator, input: stop_notebook_execution.StopNotebookExecutionInput, options: CallOptions) !stop_notebook_execution.StopNotebookExecutionOutput {
         return stop_notebook_execution.execute(self, allocator, input, options);
     }
 
@@ -697,20 +698,20 @@ pub const Client = struct {
     /// minutes for the cluster to completely terminate and release allocated
     /// resources, such as
     /// Amazon EC2 instances.
-    pub fn terminateJobFlows(self: *Self, allocator: std.mem.Allocator, input: terminate_job_flows.TerminateJobFlowsInput, options: terminate_job_flows.Options) !terminate_job_flows.TerminateJobFlowsOutput {
+    pub fn terminateJobFlows(self: *Self, allocator: std.mem.Allocator, input: terminate_job_flows.TerminateJobFlowsInput, options: CallOptions) !terminate_job_flows.TerminateJobFlowsOutput {
         return terminate_job_flows.execute(self, allocator, input, options);
     }
 
     /// Updates an Amazon EMR Studio configuration, including attributes such as
     /// name,
     /// description, and subnets.
-    pub fn updateStudio(self: *Self, allocator: std.mem.Allocator, input: update_studio.UpdateStudioInput, options: update_studio.Options) !update_studio.UpdateStudioOutput {
+    pub fn updateStudio(self: *Self, allocator: std.mem.Allocator, input: update_studio.UpdateStudioInput, options: CallOptions) !update_studio.UpdateStudioOutput {
         return update_studio.execute(self, allocator, input, options);
     }
 
     /// Updates the session policy attached to the user or group for the specified
     /// Amazon EMR Studio.
-    pub fn updateStudioSessionMapping(self: *Self, allocator: std.mem.Allocator, input: update_studio_session_mapping.UpdateStudioSessionMappingInput, options: update_studio_session_mapping.Options) !update_studio_session_mapping.UpdateStudioSessionMappingOutput {
+    pub fn updateStudioSessionMapping(self: *Self, allocator: std.mem.Allocator, input: update_studio_session_mapping.UpdateStudioSessionMappingInput, options: CallOptions) !update_studio_session_mapping.UpdateStudioSessionMappingOutput {
         return update_studio_session_mapping.execute(self, allocator, input, options);
     }
 

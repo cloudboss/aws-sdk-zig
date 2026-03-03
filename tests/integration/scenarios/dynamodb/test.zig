@@ -19,7 +19,7 @@ test "zest.beforeAll" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
+    _ = try shared_client.createTable(arena.allocator(), .{
         .table_name = "sdk-zig-ddb-shared",
         .key_schema = &.{
             .{ .attribute_name = "pk", .key_type = .hash },
@@ -42,8 +42,7 @@ test "zest.afterAll" {
     {
         var arena = std.heap.ArenaAllocator.init(gpa.allocator());
         defer arena.deinit();
-        _ = try dynamodb.delete_table.execute(
-            &shared_client,
+        _ = try shared_client.deleteTable(
             arena.allocator(),
             .{ .table_name = "sdk-zig-ddb-shared" },
             .{},
@@ -60,7 +59,7 @@ test "CreateTable returns table description with correct name" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const result = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
+    const result = try shared_client.createTable(arena.allocator(), .{
         .table_name = table_name,
         .key_schema = &.{
             .{ .attribute_name = "pk", .key_type = .hash },
@@ -77,8 +76,7 @@ test "CreateTable returns table description with correct name" {
         desc.table_name orelse return error.MissingTableName,
     );
 
-    _ = try dynamodb.delete_table.execute(
-        &shared_client,
+    _ = try shared_client.deleteTable(
         arena.allocator(),
         .{ .table_name = table_name },
         .{},
@@ -89,8 +87,7 @@ test "DescribeTable returns key schema with attribute definitions" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const result = try dynamodb.describe_table.execute(
-        &shared_client,
+    const result = try shared_client.describeTable(
         arena.allocator(),
         .{ .table_name = "sdk-zig-ddb-shared" },
         .{},
@@ -109,8 +106,7 @@ test "ListTables includes created table" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const result = try dynamodb.list_tables.execute(
-        &shared_client,
+    const result = try shared_client.listTables(
         arena.allocator(),
         .{},
         .{},
@@ -134,7 +130,7 @@ test "DeleteTable returns table description" {
     defer arena.deinit();
 
     {
-        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.createTable(arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -146,8 +142,7 @@ test "DeleteTable returns table description" {
         }, .{});
     }
 
-    const result = try dynamodb.delete_table.execute(
-        &shared_client,
+    const result = try shared_client.deleteTable(
         arena.allocator(),
         .{ .table_name = table_name },
         .{},
@@ -163,7 +158,7 @@ test "PutItem stores item retrievable via GetItem" {
     defer arena.deinit();
 
     {
-        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.createTable(arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -175,8 +170,7 @@ test "PutItem stores item retrievable via GetItem" {
         }, .{});
     }
     defer {
-        _ = dynamodb.delete_table.execute(
-            &shared_client,
+        _ = shared_client.deleteTable(
             arena.allocator(),
             .{ .table_name = table_name },
             .{},
@@ -184,7 +178,7 @@ test "PutItem stores item retrievable via GetItem" {
     }
 
     {
-        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.putItem(arena.allocator(), .{
             .table_name = table_name,
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "test-key-1" } },
@@ -194,7 +188,7 @@ test "PutItem stores item retrievable via GetItem" {
         }, .{});
     }
 
-    const result = try dynamodb.get_item.execute(&shared_client, arena.allocator(), .{
+    const result = try shared_client.getItem(arena.allocator(), .{
         .table_name = table_name,
         .key = &.{
             .{ .key = "pk", .value = .{ .s = "test-key-1" } },
@@ -240,7 +234,7 @@ test "Scan paginator collects all items across pages" {
     defer arena.deinit();
 
     {
-        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.createTable(arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -252,8 +246,7 @@ test "Scan paginator collects all items across pages" {
         }, .{});
     }
     defer {
-        _ = dynamodb.delete_table.execute(
-            &shared_client,
+        _ = shared_client.deleteTable(
             arena.allocator(),
             .{ .table_name = table_name },
             .{},
@@ -264,7 +257,7 @@ test "Scan paginator collects all items across pages" {
         var key_buf: [16]u8 = undefined;
         const key = std.fmt.bufPrint(&key_buf, "item-{d}", .{i + 1}) catch
             unreachable;
-        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.putItem(arena.allocator(), .{
             .table_name = table_name,
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = key } },
@@ -295,8 +288,7 @@ test "DescribeTable returns ResourceNotFoundException for missing table" {
     defer arena.deinit();
 
     var diagnostic: dynamodb.ServiceError = undefined;
-    const result = dynamodb.describe_table.execute(
-        &shared_client,
+    const result = shared_client.describeTable(
         arena.allocator(),
         .{ .table_name = "nonexistent-table-12345" },
         .{ .diagnostic = &diagnostic },
@@ -326,7 +318,7 @@ test "Query returns items matching key condition" {
     defer arena.deinit();
 
     {
-        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.createTable(arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -340,8 +332,7 @@ test "Query returns items matching key condition" {
         }, .{});
     }
     defer {
-        _ = dynamodb.delete_table.execute(
-            &shared_client,
+        _ = shared_client.deleteTable(
             arena.allocator(),
             .{ .table_name = table_name },
             .{},
@@ -349,7 +340,7 @@ test "Query returns items matching key condition" {
     }
 
     for ([_][]const u8{ "sk-1", "sk-2", "sk-3" }) |sk| {
-        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.putItem(arena.allocator(), .{
             .table_name = table_name,
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "partition-1" } },
@@ -358,7 +349,7 @@ test "Query returns items matching key condition" {
         }, .{});
     }
 
-    const result = try dynamodb.query.execute(&shared_client, arena.allocator(), .{
+    const result = try shared_client.query(arena.allocator(), .{
         .table_name = table_name,
         .key_condition_expression = "pk = :pk_val",
         .expression_attribute_values = &.{
@@ -377,7 +368,7 @@ test "UpdateItem modifies existing item attribute" {
     defer arena.deinit();
 
     {
-        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.createTable(arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -389,8 +380,7 @@ test "UpdateItem modifies existing item attribute" {
         }, .{});
     }
     defer {
-        _ = dynamodb.delete_table.execute(
-            &shared_client,
+        _ = shared_client.deleteTable(
             arena.allocator(),
             .{ .table_name = table_name },
             .{},
@@ -398,7 +388,7 @@ test "UpdateItem modifies existing item attribute" {
     }
 
     {
-        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.putItem(arena.allocator(), .{
             .table_name = table_name,
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "key-1" } },
@@ -408,7 +398,7 @@ test "UpdateItem modifies existing item attribute" {
     }
 
     {
-        _ = try dynamodb.update_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.updateItem(arena.allocator(), .{
             .table_name = table_name,
             .key = &.{
                 .{ .key = "pk", .value = .{ .s = "key-1" } },
@@ -423,7 +413,7 @@ test "UpdateItem modifies existing item attribute" {
         }, .{});
     }
 
-    const result = try dynamodb.get_item.execute(&shared_client, arena.allocator(), .{
+    const result = try shared_client.getItem(arena.allocator(), .{
         .table_name = table_name,
         .key = &.{
             .{ .key = "pk", .value = .{ .s = "key-1" } },
@@ -456,7 +446,7 @@ test "BatchWriteItem writes multiple items" {
     defer arena.deinit();
 
     {
-        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.createTable(arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -468,8 +458,7 @@ test "BatchWriteItem writes multiple items" {
         }, .{});
     }
     defer {
-        _ = dynamodb.delete_table.execute(
-            &shared_client,
+        _ = shared_client.deleteTable(
             arena.allocator(),
             .{ .table_name = table_name },
             .{},
@@ -477,7 +466,7 @@ test "BatchWriteItem writes multiple items" {
     }
 
     {
-        _ = try dynamodb.batch_write_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.batchWriteItem(arena.allocator(), .{
             .request_items = &.{
                 .{
                     .key = table_name,
@@ -506,8 +495,7 @@ test "BatchWriteItem writes multiple items" {
         }, .{});
     }
 
-    const result = try dynamodb.scan.execute(
-        &shared_client,
+    const result = try shared_client.scan(
         arena.allocator(),
         .{ .table_name = table_name },
         .{},
@@ -522,7 +510,7 @@ test "DeleteItem removes item from table" {
     defer arena.deinit();
 
     {
-        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.putItem(arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "del-test" } },
@@ -532,7 +520,7 @@ test "DeleteItem removes item from table" {
     }
 
     {
-        _ = try dynamodb.delete_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.deleteItem(arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .key = &.{
                 .{ .key = "pk", .value = .{ .s = "del-test" } },
@@ -541,7 +529,7 @@ test "DeleteItem removes item from table" {
         }, .{});
     }
 
-    const result = try dynamodb.get_item.execute(&shared_client, arena.allocator(), .{
+    const result = try shared_client.getItem(arena.allocator(), .{
         .table_name = "sdk-zig-ddb-shared",
         .key = &.{
             .{ .key = "pk", .value = .{ .s = "del-test" } },
@@ -556,7 +544,7 @@ test "GetItem returns null for nonexistent key" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();
 
-    const result = try dynamodb.get_item.execute(&shared_client, arena.allocator(), .{
+    const result = try shared_client.getItem(arena.allocator(), .{
         .table_name = "sdk-zig-ddb-shared",
         .key = &.{
             .{ .key = "pk", .value = .{ .s = "nonexistent" } },
@@ -572,7 +560,7 @@ test "PutItem with conditional expression succeeds" {
     defer arena.deinit();
 
     {
-        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.putItem(arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "cond-ok" } },
@@ -582,7 +570,7 @@ test "PutItem with conditional expression succeeds" {
         }, .{});
     }
 
-    const result = try dynamodb.get_item.execute(&shared_client, arena.allocator(), .{
+    const result = try shared_client.getItem(arena.allocator(), .{
         .table_name = "sdk-zig-ddb-shared",
         .key = &.{
             .{ .key = "pk", .value = .{ .s = "cond-ok" } },
@@ -598,7 +586,7 @@ test "PutItem with failing condition returns ConditionalCheckFailedException" {
     defer arena.deinit();
 
     {
-        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.putItem(arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "cond-fail" } },
@@ -608,7 +596,7 @@ test "PutItem with failing condition returns ConditionalCheckFailedException" {
     }
 
     var diagnostic: dynamodb.ServiceError = undefined;
-    const result = dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+    const result = shared_client.putItem(arena.allocator(), .{
         .table_name = "sdk-zig-ddb-shared",
         .item = &.{
             .{ .key = "pk", .value = .{ .s = "cond-fail" } },
@@ -641,7 +629,7 @@ test "Scan returns all items without filter" {
     defer arena.deinit();
 
     {
-        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.createTable(arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -653,8 +641,7 @@ test "Scan returns all items without filter" {
         }, .{});
     }
     defer {
-        _ = dynamodb.delete_table.execute(
-            &shared_client,
+        _ = shared_client.deleteTable(
             arena.allocator(),
             .{ .table_name = table_name },
             .{},
@@ -662,7 +649,7 @@ test "Scan returns all items without filter" {
     }
 
     for ([_][]const u8{ "a", "b", "c" }) |pk| {
-        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.putItem(arena.allocator(), .{
             .table_name = table_name,
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = pk } },
@@ -670,8 +657,7 @@ test "Scan returns all items without filter" {
         }, .{});
     }
 
-    const result = try dynamodb.scan.execute(
-        &shared_client,
+    const result = try shared_client.scan(
         arena.allocator(),
         .{ .table_name = table_name },
         .{},
@@ -688,7 +674,7 @@ test "Query with sort key begins_with returns filtered results" {
     defer arena.deinit();
 
     {
-        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.createTable(arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -702,8 +688,7 @@ test "Query with sort key begins_with returns filtered results" {
         }, .{});
     }
     defer {
-        _ = dynamodb.delete_table.execute(
-            &shared_client,
+        _ = shared_client.deleteTable(
             arena.allocator(),
             .{ .table_name = table_name },
             .{},
@@ -711,7 +696,7 @@ test "Query with sort key begins_with returns filtered results" {
     }
 
     for ([_][]const u8{ "a-1", "a-2", "b-1" }) |sk| {
-        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.putItem(arena.allocator(), .{
             .table_name = table_name,
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "p1" } },
@@ -720,7 +705,7 @@ test "Query with sort key begins_with returns filtered results" {
         }, .{});
     }
 
-    const result = try dynamodb.query.execute(&shared_client, arena.allocator(), .{
+    const result = try shared_client.query(arena.allocator(), .{
         .table_name = table_name,
         .key_condition_expression = "pk = :pk_val AND begins_with(sk, :sk_prefix)",
         .expression_attribute_values = &.{
@@ -738,7 +723,7 @@ test "BatchGetItem retrieves multiple items" {
     defer arena.deinit();
 
     {
-        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.putItem(arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "bg-1" } },
@@ -747,7 +732,7 @@ test "BatchGetItem retrieves multiple items" {
         }, .{});
     }
     {
-        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.putItem(arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "bg-2" } },
@@ -756,7 +741,7 @@ test "BatchGetItem retrieves multiple items" {
         }, .{});
     }
 
-    const result = try dynamodb.batch_get_item.execute(&shared_client, arena.allocator(), .{
+    const result = try shared_client.batchGetItem(arena.allocator(), .{
         .request_items = &.{
             .{
                 .key = "sdk-zig-ddb-shared",
@@ -795,7 +780,7 @@ test "PutItem and GetItem with explicit AttributeValue type" {
     defer arena.deinit();
 
     {
-        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.createTable(arena.allocator(), .{
             .table_name = table_name,
             .key_schema = &.{
                 .{ .attribute_name = "pk", .key_type = .hash },
@@ -807,8 +792,7 @@ test "PutItem and GetItem with explicit AttributeValue type" {
         }, .{});
     }
     defer {
-        _ = dynamodb.delete_table.execute(
-            &shared_client,
+        _ = shared_client.deleteTable(
             arena.allocator(),
             .{ .table_name = table_name },
             .{},
@@ -819,7 +803,7 @@ test "PutItem and GetItem with explicit AttributeValue type" {
     const name_val: dynamodb.types.AttributeValue = .{ .s = "Carol" };
 
     {
-        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.putItem(arena.allocator(), .{
             .table_name = table_name,
             .item = &.{
                 .{ .key = "pk", .value = pk_val },
@@ -828,7 +812,7 @@ test "PutItem and GetItem with explicit AttributeValue type" {
         }, .{});
     }
 
-    const result = try dynamodb.get_item.execute(&shared_client, arena.allocator(), .{
+    const result = try shared_client.getItem(arena.allocator(), .{
         .table_name = table_name,
         .key = &.{
             .{ .key = "pk", .value = pk_val },
@@ -859,7 +843,7 @@ test "UpdateItem with ADD increments number attribute" {
     defer arena.deinit();
 
     {
-        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.putItem(arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "add-test" } },
@@ -870,7 +854,7 @@ test "UpdateItem with ADD increments number attribute" {
     }
 
     {
-        _ = try dynamodb.update_item.execute(&shared_client, arena.allocator(), .{
+        _ = try shared_client.updateItem(arena.allocator(), .{
             .table_name = "sdk-zig-ddb-shared",
             .key = &.{
                 .{ .key = "pk", .value = .{ .s = "add-test" } },
@@ -886,7 +870,7 @@ test "UpdateItem with ADD increments number attribute" {
         }, .{});
     }
 
-    const result = try dynamodb.get_item.execute(&shared_client, arena.allocator(), .{
+    const result = try shared_client.getItem(arena.allocator(), .{
         .table_name = "sdk-zig-ddb-shared",
         .key = &.{
             .{ .key = "pk", .value = .{ .s = "add-test" } },

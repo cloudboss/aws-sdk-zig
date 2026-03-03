@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ExportableIdleField = @import("exportable_idle_field.zig").ExportableIdleField;
 const FileFormat = @import("file_format.zig").FileFormat;
@@ -91,11 +92,7 @@ pub const ExportIdleRecommendationsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExportIdleRecommendationsInput, options: Options) !ExportIdleRecommendationsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExportIdleRecommendationsInput, options: CallOptions) !ExportIdleRecommendationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

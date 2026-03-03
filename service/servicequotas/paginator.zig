@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const list_aws_default_service_quotas = @import("list_aws_default_service_quotas.zig");
@@ -19,7 +20,7 @@ pub const ListAWSDefaultServiceQuotasPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_aws_default_service_quotas.Options) !list_aws_default_service_quotas.ListAWSDefaultServiceQuotasOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_aws_default_service_quotas.ListAWSDefaultServiceQuotasOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -60,7 +61,7 @@ pub const ListRequestedServiceQuotaChangeHistoryPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_requested_service_quota_change_history.Options) !list_requested_service_quota_change_history.ListRequestedServiceQuotaChangeHistoryOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_requested_service_quota_change_history.ListRequestedServiceQuotaChangeHistoryOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -101,7 +102,7 @@ pub const ListRequestedServiceQuotaChangeHistoryByQuotaPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_requested_service_quota_change_history_by_quota.Options) !list_requested_service_quota_change_history_by_quota.ListRequestedServiceQuotaChangeHistoryByQuotaOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_requested_service_quota_change_history_by_quota.ListRequestedServiceQuotaChangeHistoryByQuotaOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -142,7 +143,7 @@ pub const ListServiceQuotaIncreaseRequestsInTemplatePaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_service_quota_increase_requests_in_template.Options) !list_service_quota_increase_requests_in_template.ListServiceQuotaIncreaseRequestsInTemplateOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_service_quota_increase_requests_in_template.ListServiceQuotaIncreaseRequestsInTemplateOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -183,7 +184,7 @@ pub const ListServiceQuotasPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_service_quotas.Options) !list_service_quotas.ListServiceQuotasOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_service_quotas.ListServiceQuotasOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -224,7 +225,7 @@ pub const ListServicesPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_services.Options) !list_services.ListServicesOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_services.ListServicesOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

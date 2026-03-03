@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Action = @import("action.zig").Action;
 const BlockOverrideDnsType = @import("block_override_dns_type.zig").BlockOverrideDnsType;
@@ -11,15 +12,11 @@ const DnsThreatProtection = @import("dns_threat_protection.zig").DnsThreatProtec
 const FirewallDomainRedirectionAction = @import("firewall_domain_redirection_action.zig").FirewallDomainRedirectionAction;
 const FirewallRule = @import("firewall_rule.zig").FirewallRule;
 
-const UpdateFirewallRuleInput = @import("update_firewall_rule_request.zig").UpdateFirewallRuleRequest;
+pub const UpdateFirewallRuleInput = @import("update_firewall_rule_request.zig").UpdateFirewallRuleRequest;
 
-const UpdateFirewallRuleOutput = @import("update_firewall_rule_response.zig").UpdateFirewallRuleResponse;
+pub const UpdateFirewallRuleOutput = @import("update_firewall_rule_response.zig").UpdateFirewallRuleResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFirewallRuleInput, options: Options) !UpdateFirewallRuleOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFirewallRuleInput, options: CallOptions) !UpdateFirewallRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

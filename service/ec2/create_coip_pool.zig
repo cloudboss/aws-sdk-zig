@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const CoipPool = @import("coip_pool.zig").CoipPool;
@@ -27,11 +28,7 @@ pub const CreateCoipPoolOutput = struct {
     coip_pool: ?CoipPool = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCoipPoolInput, options: Options) !CreateCoipPoolOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCoipPoolInput, options: CallOptions) !CreateCoipPoolOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

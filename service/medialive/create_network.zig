@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpPoolCreateRequest = @import("ip_pool_create_request.zig").IpPoolCreateRequest;
 const RouteCreateRequest = @import("route_create_request.zig").RouteCreateRequest;
@@ -9,15 +10,11 @@ const IpPool = @import("ip_pool.zig").IpPool;
 const Route = @import("route.zig").Route;
 const NetworkState = @import("network_state.zig").NetworkState;
 
-const CreateNetworkInput = @import("create_network_request.zig").CreateNetworkRequest;
+pub const CreateNetworkInput = @import("create_network_request.zig").CreateNetworkRequest;
 
-const CreateNetworkOutput = @import("create_network_response.zig").CreateNetworkResponse;
+pub const CreateNetworkOutput = @import("create_network_response.zig").CreateNetworkResponse;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateNetworkInput, options: Options) !CreateNetworkOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateNetworkInput, options: CallOptions) !CreateNetworkOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

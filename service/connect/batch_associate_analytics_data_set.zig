@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AnalyticsDataAssociationResult = @import("analytics_data_association_result.zig").AnalyticsDataAssociationResult;
 const ErrorResult = @import("error_result.zig").ErrorResult;
@@ -43,11 +44,7 @@ pub const BatchAssociateAnalyticsDataSetOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchAssociateAnalyticsDataSetInput, options: Options) !BatchAssociateAnalyticsDataSetOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchAssociateAnalyticsDataSetInput, options: CallOptions) !BatchAssociateAnalyticsDataSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

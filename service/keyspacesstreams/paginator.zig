@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const get_stream = @import("get_stream.zig");
@@ -15,7 +16,7 @@ pub const GetStreamPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: get_stream.Options) !get_stream.GetStreamOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_stream.GetStreamOutput {
         if (self.done) {
             return error.EndOfPagination;
         }
@@ -56,7 +57,7 @@ pub const ListStreamsPaginator = struct {
 
     const Self = @This();
 
-    pub fn next(self: *Self, allocator: std.mem.Allocator, options: list_streams.Options) !list_streams.ListStreamsOutput {
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_streams.ListStreamsOutput {
         if (self.done) {
             return error.EndOfPagination;
         }

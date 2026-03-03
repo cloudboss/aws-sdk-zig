@@ -2,10 +2,11 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SpaceSettings = @import("space_settings.zig").SpaceSettings;
 
-const UpdateSpaceInput = @import("update_space_request.zig").UpdateSpaceRequest;
+pub const UpdateSpaceInput = @import("update_space_request.zig").UpdateSpaceRequest;
 
 pub const UpdateSpaceOutput = struct {
     /// The space's Amazon Resource Name (ARN).
@@ -16,11 +17,7 @@ pub const UpdateSpaceOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSpaceInput, options: Options) !UpdateSpaceOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSpaceInput, options: CallOptions) !UpdateSpaceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

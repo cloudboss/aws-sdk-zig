@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ServiceSpecificCredential = @import("service_specific_credential.zig").ServiceSpecificCredential;
 const serde = @import("serde.zig");
@@ -38,11 +39,7 @@ pub const ResetServiceSpecificCredentialOutput = struct {
     service_specific_credential: ?ServiceSpecificCredential = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ResetServiceSpecificCredentialInput, options: Options) !ResetServiceSpecificCredentialOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ResetServiceSpecificCredentialInput, options: CallOptions) !ResetServiceSpecificCredentialOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

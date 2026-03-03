@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const DBSnapshot = @import("db_snapshot.zig").DBSnapshot;
@@ -169,11 +170,7 @@ pub const CopyDBSnapshotOutput = struct {
     db_snapshot: ?DBSnapshot = null,
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CopyDBSnapshotInput, options: Options) !CopyDBSnapshotOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CopyDBSnapshotInput, options: CallOptions) !CopyDBSnapshotOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

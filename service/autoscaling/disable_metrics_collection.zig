@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const serde = @import("serde.zig");
 
@@ -61,13 +62,9 @@ pub const DisableMetricsCollectionInput = struct {
     metrics: ?[]const []const u8 = null,
 };
 
-const DisableMetricsCollectionOutput = struct {};
+pub const DisableMetricsCollectionOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableMetricsCollectionInput, options: Options) !DisableMetricsCollectionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableMetricsCollectionInput, options: CallOptions) !DisableMetricsCollectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

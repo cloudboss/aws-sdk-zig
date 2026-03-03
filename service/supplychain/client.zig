@@ -31,6 +31,7 @@ const update_data_integration_flow = @import("update_data_integration_flow.zig")
 const update_data_lake_dataset = @import("update_data_lake_dataset.zig");
 const update_data_lake_namespace = @import("update_data_lake_namespace.zig");
 const update_instance = @import("update_instance.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
 pub const Client = struct {
@@ -68,7 +69,7 @@ pub const Client = struct {
     /// The CSV file must be located in an Amazon S3 location accessible to AWS
     /// Supply Chain. It is recommended to use the same Amazon S3 bucket created
     /// during your AWS Supply Chain instance creation.
-    pub fn createBillOfMaterialsImportJob(self: *Self, allocator: std.mem.Allocator, input: create_bill_of_materials_import_job.CreateBillOfMaterialsImportJobInput, options: create_bill_of_materials_import_job.Options) !create_bill_of_materials_import_job.CreateBillOfMaterialsImportJobOutput {
+    pub fn createBillOfMaterialsImportJob(self: *Self, allocator: std.mem.Allocator, input: create_bill_of_materials_import_job.CreateBillOfMaterialsImportJobInput, options: CallOptions) !create_bill_of_materials_import_job.CreateBillOfMaterialsImportJobOutput {
         return create_bill_of_materials_import_job.execute(self, allocator, input, options);
     }
 
@@ -76,7 +77,7 @@ pub const Client = struct {
     /// source systems such as Amazon S3 buckets, to a predefined Amazon Web
     /// Services Supply Chain dataset (product, inbound_order) or a temporary
     /// dataset along with the data transformation query provided with the API.
-    pub fn createDataIntegrationFlow(self: *Self, allocator: std.mem.Allocator, input: create_data_integration_flow.CreateDataIntegrationFlowInput, options: create_data_integration_flow.Options) !create_data_integration_flow.CreateDataIntegrationFlowOutput {
+    pub fn createDataIntegrationFlow(self: *Self, allocator: std.mem.Allocator, input: create_data_integration_flow.CreateDataIntegrationFlowInput, options: CallOptions) !create_data_integration_flow.CreateDataIntegrationFlowOutput {
         return create_data_integration_flow.execute(self, allocator, input, options);
     }
 
@@ -84,14 +85,14 @@ pub const Client = struct {
     /// data lake dataset. Developers can create the datasets using their
     /// pre-defined or custom schema for a given instance ID, namespace, and dataset
     /// name.
-    pub fn createDataLakeDataset(self: *Self, allocator: std.mem.Allocator, input: create_data_lake_dataset.CreateDataLakeDatasetInput, options: create_data_lake_dataset.Options) !create_data_lake_dataset.CreateDataLakeDatasetOutput {
+    pub fn createDataLakeDataset(self: *Self, allocator: std.mem.Allocator, input: create_data_lake_dataset.CreateDataLakeDatasetInput, options: CallOptions) !create_data_lake_dataset.CreateDataLakeDatasetOutput {
         return create_data_lake_dataset.execute(self, allocator, input, options);
     }
 
     /// Enables you to programmatically create an Amazon Web Services Supply Chain
     /// data lake namespace. Developers can create the namespaces for a given
     /// instance ID.
-    pub fn createDataLakeNamespace(self: *Self, allocator: std.mem.Allocator, input: create_data_lake_namespace.CreateDataLakeNamespaceInput, options: create_data_lake_namespace.Options) !create_data_lake_namespace.CreateDataLakeNamespaceOutput {
+    pub fn createDataLakeNamespace(self: *Self, allocator: std.mem.Allocator, input: create_data_lake_namespace.CreateDataLakeNamespaceInput, options: CallOptions) !create_data_lake_namespace.CreateDataLakeNamespaceOutput {
         return create_data_lake_namespace.execute(self, allocator, input, options);
     }
 
@@ -107,28 +108,28 @@ pub const Client = struct {
     /// an unhealthy state, you need to check the error message, delete the current
     /// instance, and recreate a new one based on the mitigation from the error
     /// message.
-    pub fn createInstance(self: *Self, allocator: std.mem.Allocator, input: create_instance.CreateInstanceInput, options: create_instance.Options) !create_instance.CreateInstanceOutput {
+    pub fn createInstance(self: *Self, allocator: std.mem.Allocator, input: create_instance.CreateInstanceInput, options: CallOptions) !create_instance.CreateInstanceOutput {
         return create_instance.execute(self, allocator, input, options);
     }
 
     /// Enable you to programmatically delete an existing data pipeline for the
     /// provided Amazon Web Services Supply Chain instance and DataIntegrationFlow
     /// name.
-    pub fn deleteDataIntegrationFlow(self: *Self, allocator: std.mem.Allocator, input: delete_data_integration_flow.DeleteDataIntegrationFlowInput, options: delete_data_integration_flow.Options) !delete_data_integration_flow.DeleteDataIntegrationFlowOutput {
+    pub fn deleteDataIntegrationFlow(self: *Self, allocator: std.mem.Allocator, input: delete_data_integration_flow.DeleteDataIntegrationFlowInput, options: CallOptions) !delete_data_integration_flow.DeleteDataIntegrationFlowOutput {
         return delete_data_integration_flow.execute(self, allocator, input, options);
     }
 
     /// Enables you to programmatically delete an Amazon Web Services Supply Chain
     /// data lake dataset. Developers can delete the existing datasets for a given
     /// instance ID, namespace, and instance name.
-    pub fn deleteDataLakeDataset(self: *Self, allocator: std.mem.Allocator, input: delete_data_lake_dataset.DeleteDataLakeDatasetInput, options: delete_data_lake_dataset.Options) !delete_data_lake_dataset.DeleteDataLakeDatasetOutput {
+    pub fn deleteDataLakeDataset(self: *Self, allocator: std.mem.Allocator, input: delete_data_lake_dataset.DeleteDataLakeDatasetInput, options: CallOptions) !delete_data_lake_dataset.DeleteDataLakeDatasetOutput {
         return delete_data_lake_dataset.execute(self, allocator, input, options);
     }
 
     /// Enables you to programmatically delete an Amazon Web Services Supply Chain
     /// data lake namespace and its underling datasets. Developers can delete the
     /// existing namespaces for a given instance ID and namespace name.
-    pub fn deleteDataLakeNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_data_lake_namespace.DeleteDataLakeNamespaceInput, options: delete_data_lake_namespace.Options) !delete_data_lake_namespace.DeleteDataLakeNamespaceOutput {
+    pub fn deleteDataLakeNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_data_lake_namespace.DeleteDataLakeNamespaceInput, options: CallOptions) !delete_data_lake_namespace.DeleteDataLakeNamespaceOutput {
         return delete_data_lake_namespace.execute(self, allocator, input, options);
     }
 
@@ -141,31 +142,31 @@ pub const Client = struct {
     /// instance resource, delete state while cleaning up all Amazon Web Services
     /// resources created during the instance creation process. You can use the
     /// GetInstance action to check the instance status.
-    pub fn deleteInstance(self: *Self, allocator: std.mem.Allocator, input: delete_instance.DeleteInstanceInput, options: delete_instance.Options) !delete_instance.DeleteInstanceOutput {
+    pub fn deleteInstance(self: *Self, allocator: std.mem.Allocator, input: delete_instance.DeleteInstanceInput, options: CallOptions) !delete_instance.DeleteInstanceOutput {
         return delete_instance.execute(self, allocator, input, options);
     }
 
     /// Get status and details of a BillOfMaterialsImportJob.
-    pub fn getBillOfMaterialsImportJob(self: *Self, allocator: std.mem.Allocator, input: get_bill_of_materials_import_job.GetBillOfMaterialsImportJobInput, options: get_bill_of_materials_import_job.Options) !get_bill_of_materials_import_job.GetBillOfMaterialsImportJobOutput {
+    pub fn getBillOfMaterialsImportJob(self: *Self, allocator: std.mem.Allocator, input: get_bill_of_materials_import_job.GetBillOfMaterialsImportJobInput, options: CallOptions) !get_bill_of_materials_import_job.GetBillOfMaterialsImportJobOutput {
         return get_bill_of_materials_import_job.execute(self, allocator, input, options);
     }
 
     /// Enables you to programmatically view an Amazon Web Services Supply Chain
     /// Data Integration Event. Developers can view the eventType, eventGroupId,
     /// eventTimestamp, datasetTarget, datasetLoadExecution.
-    pub fn getDataIntegrationEvent(self: *Self, allocator: std.mem.Allocator, input: get_data_integration_event.GetDataIntegrationEventInput, options: get_data_integration_event.Options) !get_data_integration_event.GetDataIntegrationEventOutput {
+    pub fn getDataIntegrationEvent(self: *Self, allocator: std.mem.Allocator, input: get_data_integration_event.GetDataIntegrationEventInput, options: CallOptions) !get_data_integration_event.GetDataIntegrationEventOutput {
         return get_data_integration_event.execute(self, allocator, input, options);
     }
 
     /// Enables you to programmatically view a specific data pipeline for the
     /// provided Amazon Web Services Supply Chain instance and DataIntegrationFlow
     /// name.
-    pub fn getDataIntegrationFlow(self: *Self, allocator: std.mem.Allocator, input: get_data_integration_flow.GetDataIntegrationFlowInput, options: get_data_integration_flow.Options) !get_data_integration_flow.GetDataIntegrationFlowOutput {
+    pub fn getDataIntegrationFlow(self: *Self, allocator: std.mem.Allocator, input: get_data_integration_flow.GetDataIntegrationFlowInput, options: CallOptions) !get_data_integration_flow.GetDataIntegrationFlowOutput {
         return get_data_integration_flow.execute(self, allocator, input, options);
     }
 
     /// Get the flow execution.
-    pub fn getDataIntegrationFlowExecution(self: *Self, allocator: std.mem.Allocator, input: get_data_integration_flow_execution.GetDataIntegrationFlowExecutionInput, options: get_data_integration_flow_execution.Options) !get_data_integration_flow_execution.GetDataIntegrationFlowExecutionOutput {
+    pub fn getDataIntegrationFlowExecution(self: *Self, allocator: std.mem.Allocator, input: get_data_integration_flow_execution.GetDataIntegrationFlowExecutionInput, options: CallOptions) !get_data_integration_flow_execution.GetDataIntegrationFlowExecutionOutput {
         return get_data_integration_flow_execution.execute(self, allocator, input, options);
     }
 
@@ -173,37 +174,37 @@ pub const Client = struct {
     /// data lake dataset. Developers can view the data lake dataset information
     /// such as namespace, schema, and so on for a given instance ID, namespace, and
     /// dataset name.
-    pub fn getDataLakeDataset(self: *Self, allocator: std.mem.Allocator, input: get_data_lake_dataset.GetDataLakeDatasetInput, options: get_data_lake_dataset.Options) !get_data_lake_dataset.GetDataLakeDatasetOutput {
+    pub fn getDataLakeDataset(self: *Self, allocator: std.mem.Allocator, input: get_data_lake_dataset.GetDataLakeDatasetInput, options: CallOptions) !get_data_lake_dataset.GetDataLakeDatasetOutput {
         return get_data_lake_dataset.execute(self, allocator, input, options);
     }
 
     /// Enables you to programmatically view an Amazon Web Services Supply Chain
     /// data lake namespace. Developers can view the data lake namespace information
     /// such as description for a given instance ID and namespace name.
-    pub fn getDataLakeNamespace(self: *Self, allocator: std.mem.Allocator, input: get_data_lake_namespace.GetDataLakeNamespaceInput, options: get_data_lake_namespace.Options) !get_data_lake_namespace.GetDataLakeNamespaceOutput {
+    pub fn getDataLakeNamespace(self: *Self, allocator: std.mem.Allocator, input: get_data_lake_namespace.GetDataLakeNamespaceInput, options: CallOptions) !get_data_lake_namespace.GetDataLakeNamespaceOutput {
         return get_data_lake_namespace.execute(self, allocator, input, options);
     }
 
     /// Enables you to programmatically retrieve the information related to an
     /// Amazon Web Services Supply Chain instance ID.
-    pub fn getInstance(self: *Self, allocator: std.mem.Allocator, input: get_instance.GetInstanceInput, options: get_instance.Options) !get_instance.GetInstanceOutput {
+    pub fn getInstance(self: *Self, allocator: std.mem.Allocator, input: get_instance.GetInstanceInput, options: CallOptions) !get_instance.GetInstanceOutput {
         return get_instance.execute(self, allocator, input, options);
     }
 
     /// Enables you to programmatically list all data integration events for the
     /// provided Amazon Web Services Supply Chain instance.
-    pub fn listDataIntegrationEvents(self: *Self, allocator: std.mem.Allocator, input: list_data_integration_events.ListDataIntegrationEventsInput, options: list_data_integration_events.Options) !list_data_integration_events.ListDataIntegrationEventsOutput {
+    pub fn listDataIntegrationEvents(self: *Self, allocator: std.mem.Allocator, input: list_data_integration_events.ListDataIntegrationEventsInput, options: CallOptions) !list_data_integration_events.ListDataIntegrationEventsOutput {
         return list_data_integration_events.execute(self, allocator, input, options);
     }
 
     /// List flow executions.
-    pub fn listDataIntegrationFlowExecutions(self: *Self, allocator: std.mem.Allocator, input: list_data_integration_flow_executions.ListDataIntegrationFlowExecutionsInput, options: list_data_integration_flow_executions.Options) !list_data_integration_flow_executions.ListDataIntegrationFlowExecutionsOutput {
+    pub fn listDataIntegrationFlowExecutions(self: *Self, allocator: std.mem.Allocator, input: list_data_integration_flow_executions.ListDataIntegrationFlowExecutionsInput, options: CallOptions) !list_data_integration_flow_executions.ListDataIntegrationFlowExecutionsOutput {
         return list_data_integration_flow_executions.execute(self, allocator, input, options);
     }
 
     /// Enables you to programmatically list all data pipelines for the provided
     /// Amazon Web Services Supply Chain instance.
-    pub fn listDataIntegrationFlows(self: *Self, allocator: std.mem.Allocator, input: list_data_integration_flows.ListDataIntegrationFlowsInput, options: list_data_integration_flows.Options) !list_data_integration_flows.ListDataIntegrationFlowsOutput {
+    pub fn listDataIntegrationFlows(self: *Self, allocator: std.mem.Allocator, input: list_data_integration_flows.ListDataIntegrationFlowsInput, options: CallOptions) !list_data_integration_flows.ListDataIntegrationFlowsOutput {
         return list_data_integration_flows.execute(self, allocator, input, options);
     }
 
@@ -211,7 +212,7 @@ pub const Client = struct {
     /// Chain data lake datasets. Developers can view the datasets and the
     /// corresponding information such as namespace, schema, and so on for a given
     /// instance ID and namespace.
-    pub fn listDataLakeDatasets(self: *Self, allocator: std.mem.Allocator, input: list_data_lake_datasets.ListDataLakeDatasetsInput, options: list_data_lake_datasets.Options) !list_data_lake_datasets.ListDataLakeDatasetsOutput {
+    pub fn listDataLakeDatasets(self: *Self, allocator: std.mem.Allocator, input: list_data_lake_datasets.ListDataLakeDatasetsInput, options: CallOptions) !list_data_lake_datasets.ListDataLakeDatasetsOutput {
         return list_data_lake_datasets.execute(self, allocator, input, options);
     }
 
@@ -220,7 +221,7 @@ pub const Client = struct {
     /// corresponding information such as description for a given instance ID. Note
     /// that this API only return custom namespaces, instance pre-defined namespaces
     /// are not included.
-    pub fn listDataLakeNamespaces(self: *Self, allocator: std.mem.Allocator, input: list_data_lake_namespaces.ListDataLakeNamespacesInput, options: list_data_lake_namespaces.Options) !list_data_lake_namespaces.ListDataLakeNamespacesOutput {
+    pub fn listDataLakeNamespaces(self: *Self, allocator: std.mem.Allocator, input: list_data_lake_namespaces.ListDataLakeNamespacesInput, options: CallOptions) !list_data_lake_namespaces.ListDataLakeNamespacesOutput {
         return list_data_lake_namespaces.execute(self, allocator, input, options);
     }
 
@@ -228,7 +229,7 @@ pub const Client = struct {
     /// Enables you to programmatically list all Amazon Web Services Supply Chain
     /// instances based on their account ID, instance name, and state of the
     /// instance (active or delete).
-    pub fn listInstances(self: *Self, allocator: std.mem.Allocator, input: list_instances.ListInstancesInput, options: list_instances.Options) !list_instances.ListInstancesOutput {
+    pub fn listInstances(self: *Self, allocator: std.mem.Allocator, input: list_instances.ListInstancesInput, options: CallOptions) !list_instances.ListInstancesOutput {
         return list_instances.execute(self, allocator, input, options);
     }
 
@@ -236,14 +237,14 @@ pub const Client = struct {
     /// list all the tags added to a resource. By listing the tags, developers can
     /// view the tag level information on a resource and perform actions such as,
     /// deleting a resource associated with a particular tag.
-    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: list_tags_for_resource.Options) !list_tags_for_resource.ListTagsForResourceOutput {
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Send the data payload for the event with real-time data for analysis or
     /// monitoring. The real-time data events are stored in an Amazon Web Services
     /// service before being processed and stored in data lake.
-    pub fn sendDataIntegrationEvent(self: *Self, allocator: std.mem.Allocator, input: send_data_integration_event.SendDataIntegrationEventInput, options: send_data_integration_event.Options) !send_data_integration_event.SendDataIntegrationEventOutput {
+    pub fn sendDataIntegrationEvent(self: *Self, allocator: std.mem.Allocator, input: send_data_integration_event.SendDataIntegrationEventInput, options: CallOptions) !send_data_integration_event.SendDataIntegrationEventOutput {
         return send_data_integration_event.execute(self, allocator, input, options);
     }
 
@@ -253,7 +254,7 @@ pub const Client = struct {
     /// during the data ingestion process in the AWS Supply Chain datasets. You can
     /// use these tags to identify a group of resources or a single resource used by
     /// the developer.
-    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: tag_resource.Options) !tag_resource.TagResourceOutput {
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
@@ -262,7 +263,7 @@ pub const Client = struct {
     /// ingestion process, you can delete tags such as dev, test, or prod to data
     /// flows created during the data ingestion process in the AWS Supply Chain
     /// datasets.
-    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: untag_resource.Options) !untag_resource.UntagResourceOutput {
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }
 
@@ -271,28 +272,28 @@ pub const Client = struct {
     /// Amazon Web Services Supply Chain dataset (product, inbound_order) or a
     /// temporary dataset along with the data transformation query provided with the
     /// API.
-    pub fn updateDataIntegrationFlow(self: *Self, allocator: std.mem.Allocator, input: update_data_integration_flow.UpdateDataIntegrationFlowInput, options: update_data_integration_flow.Options) !update_data_integration_flow.UpdateDataIntegrationFlowOutput {
+    pub fn updateDataIntegrationFlow(self: *Self, allocator: std.mem.Allocator, input: update_data_integration_flow.UpdateDataIntegrationFlowInput, options: CallOptions) !update_data_integration_flow.UpdateDataIntegrationFlowOutput {
         return update_data_integration_flow.execute(self, allocator, input, options);
     }
 
     /// Enables you to programmatically update an Amazon Web Services Supply Chain
     /// data lake dataset. Developers can update the description of a data lake
     /// dataset for a given instance ID, namespace, and dataset name.
-    pub fn updateDataLakeDataset(self: *Self, allocator: std.mem.Allocator, input: update_data_lake_dataset.UpdateDataLakeDatasetInput, options: update_data_lake_dataset.Options) !update_data_lake_dataset.UpdateDataLakeDatasetOutput {
+    pub fn updateDataLakeDataset(self: *Self, allocator: std.mem.Allocator, input: update_data_lake_dataset.UpdateDataLakeDatasetInput, options: CallOptions) !update_data_lake_dataset.UpdateDataLakeDatasetOutput {
         return update_data_lake_dataset.execute(self, allocator, input, options);
     }
 
     /// Enables you to programmatically update an Amazon Web Services Supply Chain
     /// data lake namespace. Developers can update the description of a data lake
     /// namespace for a given instance ID and namespace name.
-    pub fn updateDataLakeNamespace(self: *Self, allocator: std.mem.Allocator, input: update_data_lake_namespace.UpdateDataLakeNamespaceInput, options: update_data_lake_namespace.Options) !update_data_lake_namespace.UpdateDataLakeNamespaceOutput {
+    pub fn updateDataLakeNamespace(self: *Self, allocator: std.mem.Allocator, input: update_data_lake_namespace.UpdateDataLakeNamespaceInput, options: CallOptions) !update_data_lake_namespace.UpdateDataLakeNamespaceOutput {
         return update_data_lake_namespace.execute(self, allocator, input, options);
     }
 
     /// Enables you to programmatically update an Amazon Web Services Supply Chain
     /// instance description by providing all the relevant information such as
     /// account ID, instance ID and so on without using the AWS console.
-    pub fn updateInstance(self: *Self, allocator: std.mem.Allocator, input: update_instance.UpdateInstanceInput, options: update_instance.Options) !update_instance.UpdateInstanceOutput {
+    pub fn updateInstance(self: *Self, allocator: std.mem.Allocator, input: update_instance.UpdateInstanceInput, options: CallOptions) !update_instance.UpdateInstanceOutput {
         return update_instance.execute(self, allocator, input, options);
     }
 

@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const TrustedTokenIssuerConfiguration = @import("trusted_token_issuer_configuration.zig").TrustedTokenIssuerConfiguration;
 const TrustedTokenIssuerType = @import("trusted_token_issuer_type.zig").TrustedTokenIssuerType;
@@ -38,11 +39,7 @@ pub const DescribeTrustedTokenIssuerOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTrustedTokenIssuerInput, options: Options) !DescribeTrustedTokenIssuerOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTrustedTokenIssuerInput, options: CallOptions) !DescribeTrustedTokenIssuerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

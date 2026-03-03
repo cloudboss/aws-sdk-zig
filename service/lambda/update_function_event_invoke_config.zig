@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DestinationConfig = @import("destination_config.zig").DestinationConfig;
 
@@ -50,13 +51,9 @@ pub const UpdateFunctionEventInvokeConfigInput = struct {
     };
 };
 
-const UpdateFunctionEventInvokeConfigOutput = @import("function_event_invoke_config.zig").FunctionEventInvokeConfig;
+pub const UpdateFunctionEventInvokeConfigOutput = @import("function_event_invoke_config.zig").FunctionEventInvokeConfig;
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFunctionEventInvokeConfigInput, options: Options) !UpdateFunctionEventInvokeConfigOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFunctionEventInvokeConfigInput, options: CallOptions) !UpdateFunctionEventInvokeConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

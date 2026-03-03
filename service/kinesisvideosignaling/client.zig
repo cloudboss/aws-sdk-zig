@@ -3,6 +3,7 @@ const std = @import("std");
 
 const get_ice_server_config = @import("get_ice_server_config.zig");
 const send_alexa_offer_to_master = @import("send_alexa_offer_to_master.zig");
+const CallOptions = @import("call_options.zig").CallOptions;
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -57,7 +58,7 @@ pub const Client = struct {
     /// must specify either a signaling channel ARN or the client ID in order to
     /// invoke this
     /// API.
-    pub fn getIceServerConfig(self: *Self, allocator: std.mem.Allocator, input: get_ice_server_config.GetIceServerConfigInput, options: get_ice_server_config.Options) !get_ice_server_config.GetIceServerConfigOutput {
+    pub fn getIceServerConfig(self: *Self, allocator: std.mem.Allocator, input: get_ice_server_config.GetIceServerConfigInput, options: CallOptions) !get_ice_server_config.GetIceServerConfigOutput {
         return get_ice_server_config.execute(self, allocator, input, options);
     }
 
@@ -72,7 +73,7 @@ pub const Client = struct {
     /// connected to the signaling channel, redelivery requests are made until the
     /// message
     /// expires.
-    pub fn sendAlexaOfferToMaster(self: *Self, allocator: std.mem.Allocator, input: send_alexa_offer_to_master.SendAlexaOfferToMasterInput, options: send_alexa_offer_to_master.Options) !send_alexa_offer_to_master.SendAlexaOfferToMasterOutput {
+    pub fn sendAlexaOfferToMaster(self: *Self, allocator: std.mem.Allocator, input: send_alexa_offer_to_master.SendAlexaOfferToMasterInput, options: CallOptions) !send_alexa_offer_to_master.SendAlexaOfferToMasterOutput {
         return send_alexa_offer_to_master.execute(self, allocator, input, options);
     }
 };

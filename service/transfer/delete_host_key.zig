@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteHostKeyInput = struct {
@@ -18,13 +19,9 @@ pub const DeleteHostKeyInput = struct {
     };
 };
 
-const DeleteHostKeyOutput = struct {};
+pub const DeleteHostKeyOutput = struct {};
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteHostKeyInput, options: Options) !DeleteHostKeyOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteHostKeyInput, options: CallOptions) !DeleteHostKeyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

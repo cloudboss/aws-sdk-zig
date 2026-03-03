@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConversionSource = @import("conversion_source.zig").ConversionSource;
 const ConversionTarget = @import("conversion_target.zig").ConversionTarget;
@@ -39,11 +40,7 @@ pub const TestConversionOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TestConversionInput, options: Options) !TestConversionOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TestConversionInput, options: CallOptions) !TestConversionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

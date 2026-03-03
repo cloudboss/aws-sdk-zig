@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const RemediationExceptionResourceKey = @import("remediation_exception_resource_key.zig").RemediationExceptionResourceKey;
 const RemediationException = @import("remediation_exception.zig").RemediationException;
@@ -45,11 +46,7 @@ pub const DescribeRemediationExceptionsOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeRemediationExceptionsInput, options: Options) !DescribeRemediationExceptionsOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeRemediationExceptionsInput, options: CallOptions) !DescribeRemediationExceptionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();

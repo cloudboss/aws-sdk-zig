@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ApprovalStrategyResponse = @import("approval_strategy_response.zig").ApprovalStrategyResponse;
 const GetApprovalTeamResponseApprover = @import("get_approval_team_response_approver.zig").GetApprovalTeamResponseApprover;
@@ -92,11 +93,7 @@ pub const GetApprovalTeamOutput = struct {
     };
 };
 
-pub const Options = struct {
-    diagnostic: ?*ServiceError = null,
-};
-
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetApprovalTeamInput, options: Options) !GetApprovalTeamOutput {
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetApprovalTeamInput, options: CallOptions) !GetApprovalTeamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
