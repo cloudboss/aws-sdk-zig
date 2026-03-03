@@ -212,17 +212,24 @@ pub const HttpClient = struct {
 
     const Self = @This();
 
+    pub const HttpClientOptions = struct {
+        retry_mode: config_mod.RetryMode = .standard,
+        request_options: RequestOptions = .{},
+        ca_bundle_path: ?[]const u8 = null,
+    };
+
     pub fn init(
         allocator: Allocator,
-        retry_mode: config_mod.RetryMode,
+        options: HttpClientOptions,
     ) Self {
         var self: Self = .{
             .inner = .{ .allocator = allocator },
             .allocator = allocator,
-            .default_options = .{},
+            .default_options = options.request_options,
             .proxy_arena = std.heap.ArenaAllocator.init(allocator),
             .no_proxy = null,
-            .retry_mode = retry_mode,
+            .retry_mode = options.retry_mode,
+            .ca_bundle_path = options.ca_bundle_path,
         };
         self.initProxies();
         if (std.posix.getenv("AWS_REQUEST_TIMEOUT")) |val| {
@@ -230,33 +237,6 @@ pub const HttpClient = struct {
                 self.timeout_ms = ms;
             } else |_| {}
         }
-        return self;
-    }
-
-    pub fn initWithOptions(
-        allocator: Allocator,
-        retry_mode: config_mod.RetryMode,
-        options: RequestOptions,
-    ) Self {
-        var self: Self = .{
-            .inner = .{ .allocator = allocator },
-            .allocator = allocator,
-            .default_options = options,
-            .proxy_arena = std.heap.ArenaAllocator.init(allocator),
-            .no_proxy = null,
-            .retry_mode = retry_mode,
-        };
-        self.initProxies();
-        return self;
-    }
-
-    pub fn initWithCaBundle(
-        allocator: Allocator,
-        retry_mode: config_mod.RetryMode,
-        ca_bundle_path: ?[]const u8,
-    ) Self {
-        var self = init(allocator, retry_mode);
-        self.ca_bundle_path = ca_bundle_path;
         return self;
     }
 
@@ -320,50 +300,17 @@ pub const HttpClient = struct {
             const result = self.doRequest(request, options, &invocation_id);
 
             if (result) |response| {
-                const is_clock_skew = isClockSkewError(
-                    response.status,
-                    response.body,
-                );
-                const is_throttle_error = errors.bodyContainsErrorCode(
-                    response.body,
-                    errors.throttling_error_codes[0..],
-                );
-                const is_timeout_error = errors.bodyContainsErrorCode(
-                    response.body,
-                    errors.transient_error_codes[0..],
-                );
-                const is_retryable = response.isRetryable() or
-                    is_clock_skew or
-                    is_throttle_error or
-                    is_timeout_error;
-                if (is_retryable and
+                const disposition = classifyResponse(&response);
+
+                if (disposition != .success and
+                    disposition != .non_retryable and
                     backoff.attempt + 1 < max_attempts)
                 {
-                    if (is_clock_skew) {
-                        if (response.headers.get("date")) |date_str| {
-                            if (parseHttpDate(date_str)) |server_s| {
-                                const local_s: i64 = @intCast(
-                                    @divTrunc(
-                                        std.time.nanoTimestamp(),
-                                        std.time.ns_per_s,
-                                    ),
-                                );
-                                self.clock_skew_offset =
-                                    (server_s - local_s) *
-                                    std.time.ns_per_s;
-                            }
-                        }
-                    }
-                    if (self.retry_mode == .adaptive) {
-                        const retry_cost: f64 = if (is_timeout_error)
-                            10.0
-                        else
-                            5.0;
-                        if (is_throttle_error)
-                            self.token_bucket.onThrottle();
-                        if (!self.token_bucket.tryAcquire(retry_cost))
-                            return response;
-                    }
+                    if (disposition == .retryable_clock_skew)
+                        self.syncClockSkew(&response);
+                    if (!self.shouldAdaptiveRetry(disposition))
+                        return response;
+
                     const retry_after_ms = parseRetryAfter(
                         response.headers,
                     );
@@ -430,6 +377,56 @@ pub const HttpClient = struct {
         return error.MaxRetriesExceeded;
     }
 
+    const RetryDisposition = enum {
+        success,
+        retryable_clock_skew,
+        retryable_throttle,
+        retryable_timeout,
+        retryable_server_error,
+        non_retryable,
+    };
+
+    fn classifyResponse(response: *const Response) RetryDisposition {
+        if (isClockSkewError(response.status, response.body))
+            return .retryable_clock_skew;
+        if (errors.bodyContainsErrorCode(
+            response.body,
+            errors.throttling_error_codes[0..],
+        ))
+            return .retryable_throttle;
+        if (errors.bodyContainsErrorCode(
+            response.body,
+            errors.transient_error_codes[0..],
+        ))
+            return .retryable_timeout;
+        if (response.isRetryable())
+            return .retryable_server_error;
+        return if (response.isSuccess()) .success else .non_retryable;
+    }
+
+    fn syncClockSkew(self: *Self, response: *const Response) void {
+        const date_str = response.headers.get("date") orelse return;
+        const server_s = parseHttpDate(date_str) orelse return;
+        const local_s: i64 = @intCast(
+            @divTrunc(std.time.nanoTimestamp(), std.time.ns_per_s),
+        );
+        self.clock_skew_offset = (server_s - local_s) * std.time.ns_per_s;
+    }
+
+    fn shouldAdaptiveRetry(
+        self: *Self,
+        disposition: RetryDisposition,
+    ) bool {
+        if (self.retry_mode != .adaptive) return true;
+        const retry_cost: f64 = if (disposition == .retryable_timeout)
+            10.0
+        else
+            5.0;
+        if (disposition == .retryable_throttle)
+            self.token_bucket.onThrottle();
+        return self.token_bucket.tryAcquire(retry_cost);
+    }
+
     /// Send a request and return a streaming response (connection stays open for body reads).
     /// No retry logic -- streaming responses cannot be replayed.
     pub fn sendStreamingRequest(
@@ -451,21 +448,9 @@ pub const HttpClient = struct {
             self.inner.https_proxy = saved_https_proxy;
         }
 
-        const uri = request.getUri();
-
-        // Build extra headers from request
-        var extra_headers_list: std.ArrayListUnmanaged(std.http.Header) = .{};
+        var extra_headers_list = self.buildExtraHeaders(request, null) orelse
+            return error.OutOfMemory;
         defer extra_headers_list.deinit(self.allocator);
-
-        var iter = request.headers.iterator();
-        while (iter.next()) |entry| {
-            // Skip host header -- std.http.Client sets it from the URI
-            if (std.ascii.eqlIgnoreCase(entry.key_ptr.*, "host")) continue;
-            extra_headers_list.append(self.allocator, .{
-                .name = entry.key_ptr.*,
-                .value = entry.value_ptr.*,
-            }) catch return error.OutOfMemory;
-        }
 
         const ua = user_agent_mod.buildUserAgent(
             self.allocator,
@@ -485,7 +470,7 @@ pub const HttpClient = struct {
         errdefer self.allocator.destroy(inner);
         inner.allocator = self.allocator;
 
-        inner.http_request = self.inner.request(request.method.toStd(), uri, .{
+        inner.http_request = self.inner.request(request.method.toStd(), request.getUri(), .{
             .extra_headers = extra_headers_list.items,
             .keep_alive = self.default_options.keep_alive,
         }) catch return error.ConnectionFailed;
@@ -496,54 +481,19 @@ pub const HttpClient = struct {
                 setSocketTimeouts(conn, self.timeout_ms);
             }
         }
-        // Send request with or without body
-        {
-            const req_body = request.body orelse "";
-            if (req_body.len > 0 or request.method.toStd().requestHasBody()) {
-                inner.http_request.transfer_encoding = .{ .content_length = req_body.len };
-                var body_writer = inner.http_request.sendBodyUnflushed(
-                    &.{},
-                ) catch return error.RequestFailed;
-                if (req_body.len > 0) {
-                    body_writer.writer.writeAll(req_body) catch return error.RequestFailed;
-                }
-                body_writer.end() catch return error.RequestFailed;
-                inner.http_request.connection.?.flush() catch return error.RequestFailed;
-            } else {
-                inner.http_request.sendBodiless() catch return error.RequestFailed;
-            }
-        }
 
-        // Receive response head
+        sendBody(&inner.http_request, request) catch return error.RequestFailed;
+
         var redirect_buf: [8192]u8 = undefined;
         var response = inner.http_request.receiveHead(
             &redirect_buf,
         ) catch return error.RequestFailed;
 
-        // Extract status and response headers before calling reader()
-        // (reader() invalidates head string pointers)
         const status = @intFromEnum(response.head.status);
-
-        var resp_headers = std.StringHashMapUnmanaged([]const u8){};
-        var header_iter = response.head.iterateHeaders();
-        while (header_iter.next()) |header| {
-            const key = std.ascii.allocLowerString(
-                self.allocator,
-                header.name,
-            ) catch return error.OutOfMemory;
-            const value = self.allocator.dupe(u8, header.value) catch {
-                self.allocator.free(key);
-                return error.OutOfMemory;
-            };
-            resp_headers.put(self.allocator, key, value) catch {
-                self.allocator.free(key);
-                self.allocator.free(value);
-                return error.OutOfMemory;
-            };
-        }
+        const resp_headers = self.parseResponseHeaders(&response) orelse
+            return error.OutOfMemory;
 
         // Initialize body reader -- this invalidates head strings but we've already duped them.
-        // The returned pointer lives inside inner.http_request and remains valid.
         inner.body_reader = response.reader(&inner.transfer_buf);
 
         return StreamingResponse{
@@ -569,21 +519,9 @@ pub const HttpClient = struct {
                 return error.ConnectionFailed;
         }
 
-        const uri = request.getUri();
-
-        // Build extra headers from request
-        var extra_headers_list: std.ArrayListUnmanaged(std.http.Header) = .{};
+        var extra_headers_list = self.buildExtraHeaders(request, invocation_id) orelse
+            return error.OutOfMemory;
         defer extra_headers_list.deinit(self.allocator);
-
-        var iter = request.headers.iterator();
-        while (iter.next()) |entry| {
-            // Skip host header -- std.http.Client sets it from the URI
-            if (std.ascii.eqlIgnoreCase(entry.key_ptr.*, "host")) continue;
-            extra_headers_list.append(self.allocator, .{
-                .name = entry.key_ptr.*,
-                .value = entry.value_ptr.*,
-            }) catch return error.OutOfMemory;
-        }
 
         const ua = user_agent_mod.buildUserAgent(
             self.allocator,
@@ -597,10 +535,6 @@ pub const HttpClient = struct {
                 .value = s,
             }) catch {};
         }
-        extra_headers_list.append(self.allocator, .{
-            .name = "amz-sdk-invocation-id",
-            .value = invocation_id,
-        }) catch {};
 
         const effective_checksum_alg: ?checksum_mod.Algorithm =
             request.checksum_algorithm;
@@ -649,7 +583,7 @@ pub const HttpClient = struct {
             if (ic.pre_send) |hook| hook(request);
         }
 
-        var req = self.inner.request(request.method.toStd(), uri, .{
+        var req = self.inner.request(request.method.toStd(), request.getUri(), .{
             .extra_headers = extra_headers_list.items,
             .keep_alive = options.keep_alive,
         }) catch return error.ConnectionFailed;
@@ -660,44 +594,14 @@ pub const HttpClient = struct {
                 setSocketTimeouts(conn, self.timeout_ms);
             }
         }
-        // Send request with or without body
-        {
-            const req_body = request.body orelse "";
-            if (req_body.len > 0 or request.method.toStd().requestHasBody()) {
-                req.transfer_encoding = .{ .content_length = req_body.len };
-                var body_writer = req.sendBodyUnflushed(&.{}) catch return error.RequestFailed;
-                if (req_body.len > 0) {
-                    body_writer.writer.writeAll(req_body) catch return error.RequestFailed;
-                }
-                body_writer.end() catch return error.RequestFailed;
-                req.connection.?.flush() catch return error.RequestFailed;
-            } else {
-                req.sendBodiless() catch return error.RequestFailed;
-            }
-        }
 
-        // Receive response head
+        sendBody(&req, request) catch return error.RequestFailed;
+
         var redirect_buf: [8192]u8 = undefined;
         var response = req.receiveHead(&redirect_buf) catch return error.RequestFailed;
 
-        // Extract response headers (lowercase keys for case-insensitive lookup)
-        var resp_headers = std.StringHashMapUnmanaged([]const u8){};
-        var header_iter = response.head.iterateHeaders();
-        while (header_iter.next()) |header| {
-            const key = std.ascii.allocLowerString(
-                self.allocator,
-                header.name,
-            ) catch return error.OutOfMemory;
-            const value = self.allocator.dupe(u8, header.value) catch {
-                self.allocator.free(key);
-                return error.OutOfMemory;
-            };
-            resp_headers.put(self.allocator, key, value) catch {
-                self.allocator.free(key);
-                self.allocator.free(value);
-                return error.OutOfMemory;
-            };
-        }
+        var resp_headers = self.parseResponseHeaders(&response) orelse
+            return error.OutOfMemory;
 
         // Read response body
         var transfer_buf: [8192]u8 = undefined;
@@ -747,6 +651,75 @@ pub const HttpClient = struct {
         }
 
         return final_response;
+    }
+
+    /// Build extra headers from request, filtering out host (set by std.http.Client).
+    /// Optionally appends invocation ID header for retry tracking.
+    fn buildExtraHeaders(
+        self: *Self,
+        request: *const Request,
+        invocation_id: ?[]const u8,
+    ) ?std.ArrayListUnmanaged(std.http.Header) {
+        var list: std.ArrayListUnmanaged(std.http.Header) = .{};
+        var iter = request.headers.iterator();
+        while (iter.next()) |entry| {
+            if (std.ascii.eqlIgnoreCase(entry.key_ptr.*, "host")) continue;
+            list.append(self.allocator, .{
+                .name = entry.key_ptr.*,
+                .value = entry.value_ptr.*,
+            }) catch return null;
+        }
+        if (invocation_id) |id| {
+            list.append(self.allocator, .{
+                .name = "amz-sdk-invocation-id",
+                .value = id,
+            }) catch {};
+        }
+        return list;
+    }
+
+    /// Parse response headers into a lowercase-keyed hash map.
+    fn parseResponseHeaders(
+        self: *Self,
+        response: anytype,
+    ) ?std.StringHashMapUnmanaged([]const u8) {
+        var resp_headers = std.StringHashMapUnmanaged([]const u8){};
+        var header_iter = response.head.iterateHeaders();
+        while (header_iter.next()) |header| {
+            const key = std.ascii.allocLowerString(
+                self.allocator,
+                header.name,
+            ) catch return null;
+            const value = self.allocator.dupe(u8, header.value) catch {
+                self.allocator.free(key);
+                return null;
+            };
+            resp_headers.put(self.allocator, key, value) catch {
+                self.allocator.free(key);
+                self.allocator.free(value);
+                return null;
+            };
+        }
+        return resp_headers;
+    }
+
+    /// Send request body or bodiless request.
+    fn sendBody(
+        req: *std.http.Client.Request,
+        request: *const Request,
+    ) !void {
+        const req_body = request.body orelse "";
+        if (req_body.len > 0 or request.method.toStd().requestHasBody()) {
+            req.transfer_encoding = .{ .content_length = req_body.len };
+            var body_writer = try req.sendBodyUnflushed(&.{});
+            if (req_body.len > 0) {
+                try body_writer.writer.writeAll(req_body);
+            }
+            try body_writer.end();
+            try req.connection.?.flush();
+        } else {
+            try req.sendBodiless();
+        }
     }
 };
 
@@ -1106,7 +1079,7 @@ pub const Backoff = struct {
 
 /// Send an HTTP request using std.http.Client (stateless convenience function)
 pub fn sendRequest(allocator: Allocator, request: *const Request) RequestError!Response {
-    var client = HttpClient.init(allocator, .standard);
+    var client = HttpClient.init(allocator, .{});
     defer client.deinit();
     return client.sendRequest(request);
 }
@@ -1117,7 +1090,7 @@ pub fn sendRequestWithOptions(
     request: *const Request,
     options: RequestOptions,
 ) RequestError!Response {
-    var client = HttpClient.init(allocator, .standard);
+    var client = HttpClient.init(allocator, .{});
     defer client.deinit();
     return client.sendRequestWithOptions(request, options);
 }
@@ -1322,14 +1295,14 @@ test "RequestOptions defaults" {
 }
 
 test "HttpClient exposes default_max_attempts and default_base_delay_ms" {
-    var client = HttpClient.init(std.testing.allocator, .standard);
+    var client = HttpClient.init(std.testing.allocator, .{});
     defer client.deinit();
     try std.testing.expectEqual(@as(u32, 3), client.default_max_attempts);
     try std.testing.expectEqual(@as(u32, 1_000), client.default_base_delay_ms);
 }
 
 test "per-call max_attempts overrides HttpClient default" {
-    var client = HttpClient.init(std.testing.allocator, .standard);
+    var client = HttpClient.init(std.testing.allocator, .{});
     defer client.deinit();
     client.default_max_attempts = 5;
     const opts = RequestOptions{ .max_attempts = 1 };
@@ -1338,7 +1311,7 @@ test "per-call max_attempts overrides HttpClient default" {
 }
 
 test "null max_attempts falls back to HttpClient default" {
-    var client = HttpClient.init(std.testing.allocator, .standard);
+    var client = HttpClient.init(std.testing.allocator, .{});
     defer client.deinit();
     client.default_max_attempts = 7;
     const opts = RequestOptions{};
@@ -1524,7 +1497,7 @@ test "TokenBucket cost limits" {
 }
 
 test "HttpClient defaults to standard retry mode" {
-    var client = HttpClient.init(std.testing.allocator, .standard);
+    var client = HttpClient.init(std.testing.allocator, .{});
     defer client.deinit();
     try std.testing.expectEqual(
         config_mod.RetryMode.standard,
@@ -1540,7 +1513,7 @@ test "HttpClient interceptors fire on success" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .standard);
+    var client = HttpClient.init(std.testing.allocator, .{});
     defer client.deinit();
 
     var state = HookState{};
@@ -1579,7 +1552,7 @@ test "HttpClient interceptors fire per retry" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .standard);
+    var client = HttpClient.init(std.testing.allocator, .{});
     defer client.deinit();
 
     var state = HookState{};
@@ -1618,7 +1591,7 @@ test "HttpClient interceptors empty slice is no-op" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .standard);
+    var client = HttpClient.init(std.testing.allocator, .{});
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");
@@ -1638,10 +1611,9 @@ test "HttpClient interceptors empty slice is no-op" {
 }
 
 test "HttpClient stores ca_bundle_path" {
-    var client = HttpClient.initWithCaBundle(
+    var client = HttpClient.init(
         std.testing.allocator,
-        .standard,
-        "/etc/pki/tls/certs/ca-bundle.crt",
+        .{ .ca_bundle_path = "/etc/pki/tls/certs/ca-bundle.crt" },
     );
     defer client.deinit();
     try std.testing.expectEqualStrings(
@@ -1651,13 +1623,13 @@ test "HttpClient stores ca_bundle_path" {
 }
 
 test "HttpClient ca_bundle_path defaults to null" {
-    var client = HttpClient.init(std.testing.allocator, .standard);
+    var client = HttpClient.init(std.testing.allocator, .{});
     defer client.deinit();
     try std.testing.expectEqual(@as(?[]const u8, null), client.ca_bundle_path);
 }
 
 test "HttpClient timeout_ms defaults to 30s" {
-    var client = HttpClient.init(std.testing.allocator, .standard);
+    var client = HttpClient.init(std.testing.allocator, .{});
     defer client.deinit();
     try std.testing.expectEqual(
         @as(u32, 30_000),
@@ -1671,7 +1643,7 @@ test "HttpClient.init reads AWS_REQUEST_TIMEOUT env var" {
     std.os.environ.len += 1;
     std.os.environ[old_len] = entry;
     defer std.os.environ.len = old_len;
-    var client = HttpClient.init(std.testing.allocator, .standard);
+    var client = HttpClient.init(std.testing.allocator, .{});
     defer client.deinit();
     try std.testing.expectEqual(@as(u32, 5000), client.timeout_ms);
 }
@@ -1836,7 +1808,7 @@ test "HttpClient sends amz-sdk-invocation-id header" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .standard);
+    var client = HttpClient.init(std.testing.allocator, .{});
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");
@@ -1864,7 +1836,7 @@ test "adaptive retry: depleted bucket prevents retry" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .adaptive);
+    var client = HttpClient.init(std.testing.allocator, .{ .retry_mode = .adaptive });
     defer client.deinit();
     client.token_bucket.current_capacity = 0.0;
 
@@ -1895,7 +1867,7 @@ test "adaptive retry: sufficient tokens allow retry" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .adaptive);
+    var client = HttpClient.init(std.testing.allocator, .{ .retry_mode = .adaptive });
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");
@@ -1933,7 +1905,7 @@ test "adaptive retry: throttle error depletes bucket and stops retry" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .adaptive);
+    var client = HttpClient.init(std.testing.allocator, .{ .retry_mode = .adaptive });
     defer client.deinit();
     client.token_bucket.current_capacity = 4.0;
 
@@ -1964,7 +1936,7 @@ test "adaptive retry: onSuccess restores capacity" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .adaptive);
+    var client = HttpClient.init(std.testing.allocator, .{ .retry_mode = .adaptive });
     defer client.deinit();
     client.token_bucket.current_capacity = 490.0;
 

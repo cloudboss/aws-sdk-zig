@@ -60,7 +60,7 @@ test "SigV4 signed request accepted by STS" {
     try aws.signing.signRequest(sign_alloc, &request, creds, "us-east-1", "sts");
 
     // Send the request
-    var client = aws.http.HttpClient.initWithOptions(allocator, .standard, .{ .keep_alive = false });
+    var client = aws.http.HttpClient.init(allocator, .{ .request_options = .{ .keep_alive = false } });
     defer client.deinit();
 
     var response = try client.sendRequest(&request);
@@ -113,7 +113,7 @@ test "HTTP client connects to LocalStack" {
     request.tls = endpoint.tls;
     request.port = endpoint.port;
 
-    var client = aws.http.HttpClient.initWithOptions(allocator, .standard, .{ .keep_alive = false });
+    var client = aws.http.HttpClient.init(allocator, .{ .request_options = .{ .keep_alive = false } });
     defer client.deinit();
 
     var response = try client.sendRequest(&request);
@@ -164,7 +164,7 @@ test "SigV4 signing includes session token header when present" {
     try std.testing.expectEqualStrings("test-session-token", token_header.?);
 
     // Send the request to verify LocalStack accepts it
-    var client = aws.http.HttpClient.initWithOptions(allocator, .standard, .{ .keep_alive = false });
+    var client = aws.http.HttpClient.init(allocator, .{ .request_options = .{ .keep_alive = false } });
     defer client.deinit();
 
     var response = try client.sendRequest(&request);
@@ -299,7 +299,7 @@ test "SigV4 signed GET request with empty body succeeds" {
     };
     try aws.signing.signRequest(sign_alloc, &request, creds, "us-east-1", "s3");
 
-    var client = aws.http.HttpClient.initWithOptions(allocator, .standard, .{ .keep_alive = false });
+    var client = aws.http.HttpClient.init(allocator, .{ .request_options = .{ .keep_alive = false } });
     defer client.deinit();
     var response = try client.sendRequest(&request);
     defer response.deinit();

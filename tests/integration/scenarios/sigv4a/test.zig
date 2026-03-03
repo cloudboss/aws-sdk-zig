@@ -10,7 +10,7 @@ test "GetCallerIdentity with SigV4a signing succeeds" {
     var cfg = try aws.Config.load(allocator, .{});
     defer cfg.deinit();
 
-    var http_client = aws.http.HttpClient.init(allocator, .standard);
+    var http_client = aws.http.HttpClient.init(allocator, .{});
     defer http_client.deinit();
 
     var request = try makeGetCallerIdentityRequest(arena.allocator(), &cfg);

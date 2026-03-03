@@ -12,7 +12,7 @@ const endpoint_mod = @import("endpoint.zig");
 const sts_common_mod = @import("sts_common.zig");
 
 /// Retry mode for transient failures
-pub const RetryMode = enum { standard, adaptive };
+pub const RetryMode = enum { legacy, standard, adaptive };
 
 pub const StsRegionalEndpoints = sts_common_mod.StsRegionalEndpoints;
 
@@ -34,7 +34,9 @@ fn readEnvStsRegionalEndpoints() ?StsRegionalEndpoints {
 
 /// Parse retry mode from string value
 pub fn parseRetryMode(value: []const u8) ?RetryMode {
-    if (std.mem.eql(u8, value, "standard")) {
+    if (std.mem.eql(u8, value, "legacy")) {
+        return .legacy;
+    } else if (std.mem.eql(u8, value, "standard")) {
         return .standard;
     } else if (std.mem.eql(u8, value, "adaptive")) {
         return .adaptive;
@@ -1023,6 +1025,7 @@ test "parseSectionHeader" {
 }
 
 test "parseRetryMode" {
+    try std.testing.expect(parseRetryMode("legacy") == .legacy);
     try std.testing.expect(parseRetryMode("standard") == .standard);
     try std.testing.expect(parseRetryMode("adaptive") == .adaptive);
     try std.testing.expect(parseRetryMode("invalid") == null);
