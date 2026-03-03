@@ -20,7 +20,7 @@ pub const Client = struct {
         return .{
             .allocator = allocator,
             .config = config,
-            .http_client = aws.http.HttpClient.init(allocator),
+            .http_client = aws.http.HttpClient.init(allocator, config.retry_mode),
         };
     }
 
@@ -28,7 +28,7 @@ pub const Client = struct {
         return .{
             .allocator = allocator,
             .config = config,
-            .http_client = aws.http.HttpClient.initWithOptions(allocator, options),
+            .http_client = aws.http.HttpClient.initWithOptions(allocator, config.retry_mode, options),
         };
     }
 

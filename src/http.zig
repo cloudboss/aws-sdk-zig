@@ -212,13 +212,17 @@ pub const HttpClient = struct {
 
     const Self = @This();
 
-    pub fn init(allocator: Allocator) Self {
+    pub fn init(
+        allocator: Allocator,
+        retry_mode: config_mod.RetryMode,
+    ) Self {
         var self: Self = .{
             .inner = .{ .allocator = allocator },
             .allocator = allocator,
             .default_options = .{},
             .proxy_arena = std.heap.ArenaAllocator.init(allocator),
             .no_proxy = null,
+            .retry_mode = retry_mode,
         };
         self.initProxies();
         if (std.posix.getenv("AWS_REQUEST_TIMEOUT")) |val| {
@@ -231,6 +235,7 @@ pub const HttpClient = struct {
 
     pub fn initWithOptions(
         allocator: Allocator,
+        retry_mode: config_mod.RetryMode,
         options: RequestOptions,
     ) Self {
         var self: Self = .{
@@ -239,6 +244,7 @@ pub const HttpClient = struct {
             .default_options = options,
             .proxy_arena = std.heap.ArenaAllocator.init(allocator),
             .no_proxy = null,
+            .retry_mode = retry_mode,
         };
         self.initProxies();
         return self;
@@ -246,9 +252,10 @@ pub const HttpClient = struct {
 
     pub fn initWithCaBundle(
         allocator: Allocator,
+        retry_mode: config_mod.RetryMode,
         ca_bundle_path: ?[]const u8,
     ) Self {
-        var self = init(allocator);
+        var self = init(allocator, retry_mode);
         self.ca_bundle_path = ca_bundle_path;
         return self;
     }
@@ -353,9 +360,9 @@ pub const HttpClient = struct {
                         else
                             5.0;
                         if (is_throttle_error)
-                            self.token_bucket.onThrottle()
-                        else
-                            _ = self.token_bucket.tryAcquire(retry_cost);
+                            self.token_bucket.onThrottle();
+                        if (!self.token_bucket.tryAcquire(retry_cost))
+                            return response;
                     }
                     const retry_after_ms = parseRetryAfter(
                         response.headers,
@@ -402,7 +409,8 @@ pub const HttpClient = struct {
                             10.0
                         else
                             5.0;
-                        _ = self.token_bucket.tryAcquire(retry_cost);
+                        if (!self.token_bucket.tryAcquire(retry_cost))
+                            return err;
                     }
                     backoff.wait();
                     continue;
@@ -1098,7 +1106,7 @@ pub const Backoff = struct {
 
 /// Send an HTTP request using std.http.Client (stateless convenience function)
 pub fn sendRequest(allocator: Allocator, request: *const Request) RequestError!Response {
-    var client = HttpClient.init(allocator);
+    var client = HttpClient.init(allocator, .standard);
     defer client.deinit();
     return client.sendRequest(request);
 }
@@ -1109,7 +1117,7 @@ pub fn sendRequestWithOptions(
     request: *const Request,
     options: RequestOptions,
 ) RequestError!Response {
-    var client = HttpClient.init(allocator);
+    var client = HttpClient.init(allocator, .standard);
     defer client.deinit();
     return client.sendRequestWithOptions(request, options);
 }
@@ -1314,14 +1322,14 @@ test "RequestOptions defaults" {
 }
 
 test "HttpClient exposes default_max_attempts and default_base_delay_ms" {
-    var client = HttpClient.init(std.testing.allocator);
+    var client = HttpClient.init(std.testing.allocator, .standard);
     defer client.deinit();
     try std.testing.expectEqual(@as(u32, 3), client.default_max_attempts);
     try std.testing.expectEqual(@as(u32, 1_000), client.default_base_delay_ms);
 }
 
 test "per-call max_attempts overrides HttpClient default" {
-    var client = HttpClient.init(std.testing.allocator);
+    var client = HttpClient.init(std.testing.allocator, .standard);
     defer client.deinit();
     client.default_max_attempts = 5;
     const opts = RequestOptions{ .max_attempts = 1 };
@@ -1330,7 +1338,7 @@ test "per-call max_attempts overrides HttpClient default" {
 }
 
 test "null max_attempts falls back to HttpClient default" {
-    var client = HttpClient.init(std.testing.allocator);
+    var client = HttpClient.init(std.testing.allocator, .standard);
     defer client.deinit();
     client.default_max_attempts = 7;
     const opts = RequestOptions{};
@@ -1516,7 +1524,7 @@ test "TokenBucket cost limits" {
 }
 
 test "HttpClient defaults to standard retry mode" {
-    var client = HttpClient.init(std.testing.allocator);
+    var client = HttpClient.init(std.testing.allocator, .standard);
     defer client.deinit();
     try std.testing.expectEqual(
         config_mod.RetryMode.standard,
@@ -1532,7 +1540,7 @@ test "HttpClient interceptors fire on success" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator);
+    var client = HttpClient.init(std.testing.allocator, .standard);
     defer client.deinit();
 
     var state = HookState{};
@@ -1571,7 +1579,7 @@ test "HttpClient interceptors fire per retry" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator);
+    var client = HttpClient.init(std.testing.allocator, .standard);
     defer client.deinit();
 
     var state = HookState{};
@@ -1610,7 +1618,7 @@ test "HttpClient interceptors empty slice is no-op" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator);
+    var client = HttpClient.init(std.testing.allocator, .standard);
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");
@@ -1632,6 +1640,7 @@ test "HttpClient interceptors empty slice is no-op" {
 test "HttpClient stores ca_bundle_path" {
     var client = HttpClient.initWithCaBundle(
         std.testing.allocator,
+        .standard,
         "/etc/pki/tls/certs/ca-bundle.crt",
     );
     defer client.deinit();
@@ -1642,13 +1651,13 @@ test "HttpClient stores ca_bundle_path" {
 }
 
 test "HttpClient ca_bundle_path defaults to null" {
-    var client = HttpClient.init(std.testing.allocator);
+    var client = HttpClient.init(std.testing.allocator, .standard);
     defer client.deinit();
     try std.testing.expectEqual(@as(?[]const u8, null), client.ca_bundle_path);
 }
 
 test "HttpClient timeout_ms defaults to 30s" {
-    var client = HttpClient.init(std.testing.allocator);
+    var client = HttpClient.init(std.testing.allocator, .standard);
     defer client.deinit();
     try std.testing.expectEqual(
         @as(u32, 30_000),
@@ -1662,7 +1671,7 @@ test "HttpClient.init reads AWS_REQUEST_TIMEOUT env var" {
     std.os.environ.len += 1;
     std.os.environ[old_len] = entry;
     defer std.os.environ.len = old_len;
-    var client = HttpClient.init(std.testing.allocator);
+    var client = HttpClient.init(std.testing.allocator, .standard);
     defer client.deinit();
     try std.testing.expectEqual(@as(u32, 5000), client.timeout_ms);
 }
@@ -1827,7 +1836,7 @@ test "HttpClient sends amz-sdk-invocation-id header" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator);
+    var client = HttpClient.init(std.testing.allocator, .standard);
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");
@@ -1844,4 +1853,135 @@ test "HttpClient sends amz-sdk-invocation-id header" {
     defer response.deinit();
 
     try std.testing.expectEqual(@as(u16, 200), response.status);
+}
+
+test "adaptive retry: depleted bucket prevents retry" {
+    // Only one response: client should not retry when bucket is depleted.
+    const responses = [_][]const u8{
+        "HTTP/1.1 503 Service Unavailable\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
+    };
+    var server = try TestServer.init(responses[0..]);
+    defer server.deinit();
+    try server.start();
+
+    var client = HttpClient.init(std.testing.allocator, .adaptive);
+    defer client.deinit();
+    client.token_bucket.current_capacity = 0.0;
+
+    var request = Request.init("127.0.0.1");
+    defer request.deinit(std.testing.allocator);
+    request.method = .GET;
+    request.path = "/";
+    request.port = server.address.getPort();
+    request.tls = false;
+
+    var response = try client.sendRequestWithOptions(
+        &request,
+        .{ .max_attempts = 3, .keep_alive = false, .base_delay_ms = 1 },
+    );
+    defer response.deinit();
+
+    // Should get 503 back (no retry due to depleted bucket)
+    try std.testing.expectEqual(@as(u16, 503), response.status);
+}
+
+test "adaptive retry: sufficient tokens allow retry" {
+    // Server sends 503 then 200 -- with full bucket, retry should succeed.
+    const responses = [_][]const u8{
+        "HTTP/1.1 503 Service Unavailable\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
+        "HTTP/1.1 200 OK\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
+    };
+    var server = try TestServer.init(responses[0..]);
+    defer server.deinit();
+    try server.start();
+
+    var client = HttpClient.init(std.testing.allocator, .adaptive);
+    defer client.deinit();
+
+    var request = Request.init("127.0.0.1");
+    defer request.deinit(std.testing.allocator);
+    request.method = .GET;
+    request.path = "/";
+    request.port = server.address.getPort();
+    request.tls = false;
+
+    var response = try client.sendRequestWithOptions(
+        &request,
+        .{ .max_attempts = 3, .keep_alive = false, .base_delay_ms = 1 },
+    );
+    defer response.deinit();
+
+    // Should get 200 (retried successfully)
+    try std.testing.expectEqual(@as(u16, 200), response.status);
+}
+
+test "adaptive retry: throttle error depletes bucket and stops retry" {
+    // Only one response: throttle + low capacity means no retry.
+    const body =
+        "{\"__type\":\"ThrottlingException\"," ++
+        "\"message\":\"Rate exceeded\"}";
+    const response_str = std.fmt.comptimePrint(
+        "HTTP/1.1 429 Too Many Requests\r\n" ++
+            "Content-Length: {d}\r\n" ++
+            "Connection: close\r\n\r\n{s}",
+        .{ body.len, body },
+    );
+    const responses = [_][]const u8{
+        response_str,
+    };
+    var server = try TestServer.init(responses[0..]);
+    defer server.deinit();
+    try server.start();
+
+    var client = HttpClient.init(std.testing.allocator, .adaptive);
+    defer client.deinit();
+    client.token_bucket.current_capacity = 4.0;
+
+    var request = Request.init("127.0.0.1");
+    defer request.deinit(std.testing.allocator);
+    request.method = .GET;
+    request.path = "/";
+    request.port = server.address.getPort();
+    request.tls = false;
+
+    var response = try client.sendRequestWithOptions(
+        &request,
+        .{ .max_attempts = 3, .keep_alive = false, .base_delay_ms = 1 },
+    );
+    defer response.deinit();
+
+    // Throttle reduces capacity, then tryAcquire(5.0) fails on remaining capacity
+    // Should return 429 without retrying
+    try std.testing.expectEqual(@as(u16, 429), response.status);
+}
+
+test "adaptive retry: onSuccess restores capacity" {
+    // Successful request should call onSuccess
+    const responses = [_][]const u8{
+        "HTTP/1.1 200 OK\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
+    };
+    var server = try TestServer.init(responses[0..]);
+    defer server.deinit();
+    try server.start();
+
+    var client = HttpClient.init(std.testing.allocator, .adaptive);
+    defer client.deinit();
+    client.token_bucket.current_capacity = 490.0;
+
+    var request = Request.init("127.0.0.1");
+    defer request.deinit(std.testing.allocator);
+    request.method = .GET;
+    request.path = "/";
+    request.port = server.address.getPort();
+    request.tls = false;
+
+    var response = try client.sendRequestWithOptions(
+        &request,
+        .{ .max_attempts = 1, .keep_alive = false },
+    );
+    defer response.deinit();
+
+    try std.testing.expectEqual(@as(u16, 200), response.status);
+    // onSuccess adds 1.0, capped at 500.0
+    try std.testing.expectEqual(@as(f64, 491.0), client.token_bucket.current_capacity);
 }

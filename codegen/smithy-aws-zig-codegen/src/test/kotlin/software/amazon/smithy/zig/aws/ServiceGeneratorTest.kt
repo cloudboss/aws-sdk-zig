@@ -227,6 +227,7 @@ class ServiceGeneratorTest {
         assertTrue(client.contains("pub fn init("), "Missing init function")
         assertTrue(client.contains("pub fn deinit("), "Missing deinit function")
         assertTrue(client.contains("self.http_client.deinit()"), "Missing http_client cleanup")
+        assertTrue(client.contains("config.retry_mode"), "Missing retry_mode wiring")
     }
 
     @Test

@@ -10,7 +10,7 @@ var shared_init = false;
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
     shared_cfg = try aws.Config.load(allocator, .{});
-    shared_client = aws.http.HttpClient.initWithOptions(allocator, .{ .keep_alive = false });
+    shared_client = aws.http.HttpClient.initWithOptions(allocator, .standard, .{ .keep_alive = false });
     {
         var arena = std.heap.ArenaAllocator.init(allocator);
         defer arena.deinit();
