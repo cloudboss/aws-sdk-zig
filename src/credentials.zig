@@ -13,6 +13,9 @@ const assume_role = @import("assume_role.zig");
 const config_mod = @import("config.zig");
 const sts_common = @import("sts_common.zig");
 
+/// Default buffer (seconds) before expiration to consider credentials stale.
+pub const default_expiry_buffer: i64 = 300;
+
 /// AWS credentials for request signing
 pub const Credentials = struct {
     access_key_id: []const u8,
@@ -21,12 +24,27 @@ pub const Credentials = struct {
     /// Expiration time (epoch seconds), null if permanent
     expiration: ?i64 = null,
 
-    /// Check if credentials are expired (with 5 minute buffer)
+    /// Check if credentials are expired (with default 5 minute buffer)
     pub fn isExpired(self: Credentials) bool {
+        return self.isExpiredWithBuffer(default_expiry_buffer);
+    }
+
+    /// Check if credentials are expired with a custom buffer (seconds)
+    pub fn isExpiredWithBuffer(self: Credentials, buffer: i64) bool {
         const exp = self.expiration orelse return false;
-        return std.time.timestamp() >= (exp - 300);
+        return std.time.timestamp() >= (exp - buffer);
     }
 };
+
+/// Return a jittered buffer value in [buffer/2, buffer] (seconds).
+/// Uses cryptographic randomness to avoid thundering herd on refresh.
+pub fn jitteredBuffer(buffer: i64) i64 {
+    if (buffer <= 1) return buffer;
+    const half: u64 = @intCast(@divTrunc(buffer, 2));
+    const range: u64 = @intCast(buffer - @as(i64, @intCast(half)) + 1);
+    const jitter = std.crypto.random.intRangeLessThan(u64, 0, range);
+    return @intCast(half + jitter);
+}
 
 /// Credential provider - tagged union of supported providers
 pub const CredentialsProvider = union(enum) {
@@ -246,6 +264,13 @@ pub const ChainProvider = struct {
     ecs_provider: ?EcsProvider = null,
     /// Web identity provider (reused across calls)
     web_identity_provider: ?web_identity.WebIdentityProvider = null,
+    /// Seconds before expiration to consider credentials stale
+    expiry_buffer: i64 = default_expiry_buffer,
+    /// Default expiration (seconds) for permanent credentials.
+    /// null = cache forever (original behavior).
+    default_expiration: ?i64 = 900,
+    /// Mutex for thread-safe credential caching
+    mutex: std.Thread.Mutex = .{},
 
     const Self = @This();
 
@@ -263,9 +288,12 @@ pub const ChainProvider = struct {
 
     /// Get credentials, using cache if valid
     pub fn getCredentials(self: *Self, allocator: Allocator) !Credentials {
+        self.mutex.lock();
+        defer self.mutex.unlock();
+
         // Return cached credentials if still valid
         if (self.cached) |creds| {
-            if (!creds.isExpired()) {
+            if (!creds.isExpiredWithBuffer(jitteredBuffer(self.expiry_buffer))) {
                 return creds;
             }
         }
@@ -273,8 +301,8 @@ pub const ChainProvider = struct {
         // If we previously succeeded with a provider, try it first
         if (self.successful_provider) |provider| {
             if (self.tryProvider(allocator, provider)) |creds| {
-                self.cached = creds;
-                return creds;
+                self.cacheCredentials(creds);
+                return self.cached.?;
             } else |_| {
                 // Provider failed, clear it and try the full chain
                 self.successful_provider = null;
@@ -295,9 +323,9 @@ pub const ChainProvider = struct {
         };
         for (providers) |provider| {
             if (self.tryProvider(allocator, provider)) |creds| {
-                self.cached = creds;
+                self.cacheCredentials(creds);
                 self.successful_provider = provider;
-                return creds;
+                return self.cached.?;
             } else |_| {
                 // Continue to next provider
             }
@@ -471,8 +499,21 @@ pub const ChainProvider = struct {
         };
     }
 
+    /// Cache credentials, stamping permanent ones with a synthetic expiration.
+    fn cacheCredentials(self: *Self, creds: Credentials) void {
+        var cached = creds;
+        if (cached.expiration == null) {
+            if (self.default_expiration) |ttl| {
+                cached.expiration = std.time.timestamp() + ttl;
+            }
+        }
+        self.cached = cached;
+    }
+
     /// Clear cached credentials (forces refresh on next call)
     pub fn clearCache(self: *Self) void {
+        self.mutex.lock();
+        defer self.mutex.unlock();
         self.cached = null;
     }
 
@@ -776,4 +817,96 @@ test "profile_sso skips when profile lacks sso_session" {
         error.CredentialsNotFound,
         result,
     );
+}
+
+test "jitteredBuffer returns values in [buffer/2, buffer]" {
+    const buffer: i64 = 300;
+    const half = @divTrunc(buffer, 2);
+    for (0..100) |_| {
+        const result = jitteredBuffer(buffer);
+        try std.testing.expect(result >= half);
+        try std.testing.expect(result <= buffer);
+    }
+}
+
+test "jitteredBuffer edge cases" {
+    try std.testing.expectEqual(@as(i64, 0), jitteredBuffer(0));
+    try std.testing.expectEqual(@as(i64, 1), jitteredBuffer(1));
+}
+
+test "isExpiredWithBuffer with custom buffer" {
+    const now = std.time.timestamp();
+    const creds = Credentials{
+        .access_key_id = "test",
+        .secret_access_key = "test",
+        .expiration = now + 100,
+    };
+    // With a 200-second buffer, should be expired
+    try std.testing.expect(creds.isExpiredWithBuffer(200));
+    // With a 50-second buffer, should not be expired
+    try std.testing.expect(!creds.isExpiredWithBuffer(50));
+}
+
+test "cacheCredentials stamps permanent credentials with synthetic expiration" {
+    var chain = ChainProvider{
+        .default_expiration = 900,
+    };
+    const creds = Credentials{
+        .access_key_id = "PERM_KEY",
+        .secret_access_key = "PERM_SECRET",
+    };
+    chain.cacheCredentials(creds);
+    // Cached copy should have an expiration set
+    try std.testing.expect(chain.cached.?.expiration != null);
+    const exp = chain.cached.?.expiration.?;
+    const now = std.time.timestamp();
+    // Should be roughly now + 900 (allow 5 second tolerance)
+    try std.testing.expect(exp >= now + 895);
+    try std.testing.expect(exp <= now + 905);
+}
+
+test "cacheCredentials leaves already-expiring credentials unchanged" {
+    var chain = ChainProvider{
+        .default_expiration = 900,
+    };
+    const now = std.time.timestamp();
+    const original_exp = now + 3600;
+    const creds = Credentials{
+        .access_key_id = "TEMP_KEY",
+        .secret_access_key = "TEMP_SECRET",
+        .expiration = original_exp,
+    };
+    chain.cacheCredentials(creds);
+    try std.testing.expectEqual(original_exp, chain.cached.?.expiration.?);
+}
+
+test "multi-threaded getCredentials does not crash" {
+    var chain = ChainProvider{
+        .default_expiration = null,
+    };
+    // Pre-populate cache so threads don't hit real providers
+    chain.cached = Credentials{
+        .access_key_id = "MT_KEY",
+        .secret_access_key = "MT_SECRET",
+        .expiration = std.time.timestamp() + 3600,
+    };
+
+    const Thread = std.Thread;
+    const num_threads = 4;
+    var threads: [num_threads]Thread = undefined;
+    for (&threads) |*t| {
+        t.* = try Thread.spawn(.{}, struct {
+            fn run(c: *ChainProvider) void {
+                for (0..50) |_| {
+                    const creds = c.getCredentials(std.testing.allocator) catch return;
+                    std.testing.expectEqualStrings("MT_KEY", creds.access_key_id) catch return;
+                }
+            }
+        }.run, .{&chain});
+    }
+    for (&threads) |*t| {
+        t.join();
+    }
+    // If we got here without crashing, the mutex is working
+    try std.testing.expect(chain.cached != null);
 }

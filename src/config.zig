@@ -102,6 +102,10 @@ pub const LoadOptions = struct {
     timeout_ms: ?u32 = null,
     /// STS regional endpoint mode
     sts_regional_endpoints: ?StsRegionalEndpoints = null,
+    /// Seconds before expiration to consider credentials stale
+    expiry_buffer: ?i64 = null,
+    /// Default expiration (seconds) for permanent credentials (null = cache forever)
+    default_expiration: ?i64 = null,
 };
 
 /// AWS SDK configuration shared across service clients
@@ -150,11 +154,18 @@ pub const Config = struct {
         const region = try resolveRegion(allocator, options, profile);
         errdefer allocator.free(region);
 
+        var chain = ChainProvider{
+            .profile = resolved_profile,
+            .region = region,
+        };
+        if (options.expiry_buffer) |eb| {
+            chain.expiry_buffer = eb;
+        }
+        if (options.default_expiration) |de| {
+            chain.default_expiration = de;
+        }
         const credentials = options.credentials orelse CredentialsProvider{
-            .chain = ChainProvider{
-                .profile = resolved_profile,
-                .region = region,
-            },
+            .chain = chain,
         };
 
         const endpoint_url: ?[]const u8 = options.endpoint_url orelse
