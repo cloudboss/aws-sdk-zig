@@ -613,31 +613,7 @@ pub const HttpClient = struct {
             return if (err == error.StreamTooLong) error.ResponseTooLarge else error.RequestFailed;
         };
 
-        if (effective_checksum_alg) |alg| {
-            const alg_name = algToString(alg);
-            var key_buf: [64]u8 = undefined;
-            const header_key = std.fmt.bufPrint(
-                &key_buf,
-                "x-amz-checksum-{s}",
-                .{alg_name},
-            ) catch null;
-            if (header_key) |k| {
-                if (resp_headers.get(k)) |expected| {
-                    const ok = checksum_mod.verify(
-                        alg,
-                        body,
-                        expected,
-                        self.allocator,
-                    ) catch false;
-                    if (!ok) {
-                        std.log.warn(
-                            "Response checksum mismatch for {s}",
-                            .{alg_name},
-                        );
-                    }
-                }
-            }
-        }
+        try verifyResponseChecksum(effective_checksum_alg, body, &resp_headers, self.allocator);
 
         var final_response = Response{
             .status = @intFromEnum(response.head.status),
@@ -806,6 +782,25 @@ fn algToString(alg: checksum_mod.Algorithm) []const u8 {
         .sha256 => "sha256",
         .sha1 => "sha1",
     };
+}
+
+fn verifyResponseChecksum(
+    alg: ?checksum_mod.Algorithm,
+    body: []const u8,
+    resp_headers: *const std.StringHashMapUnmanaged([]const u8),
+    allocator: std.mem.Allocator,
+) RequestError!void {
+    const a = alg orelse return;
+    var key_buf: [64]u8 = undefined;
+    const header_key = std.fmt.bufPrint(
+        &key_buf,
+        "x-amz-checksum-{s}",
+        .{algToString(a)},
+    ) catch return;
+    if (resp_headers.get(header_key)) |expected| {
+        const ok = checksum_mod.verify(a, body, expected, allocator) catch false;
+        if (!ok) return error.ChecksumMismatch;
+    }
 }
 
 pub fn isClockSkewError(status: u16, body: []const u8) bool {
@@ -1726,6 +1721,39 @@ test "checksum computeBase64 and verify round-trip" {
         std.testing.allocator,
     );
     try std.testing.expect(!bad);
+}
+
+test "verifyResponseChecksum returns error on mismatch" {
+    var headers: std.StringHashMapUnmanaged([]const u8) = .{};
+    defer headers.deinit(std.testing.allocator);
+    try headers.put(std.testing.allocator, "x-amz-checksum-crc32", "AAAA");
+
+    try std.testing.expectError(
+        error.ChecksumMismatch,
+        verifyResponseChecksum(.crc32, "test body", &headers, std.testing.allocator),
+    );
+}
+
+test "verifyResponseChecksum passes on valid checksum" {
+    const body = "test body";
+    const valid_b64 = try checksum_mod.computeBase64(std.testing.allocator, .crc32, body);
+    defer std.testing.allocator.free(valid_b64);
+
+    var headers: std.StringHashMapUnmanaged([]const u8) = .{};
+    defer headers.deinit(std.testing.allocator);
+    try headers.put(std.testing.allocator, "x-amz-checksum-crc32", valid_b64);
+
+    try verifyResponseChecksum(.crc32, body, &headers, std.testing.allocator);
+}
+
+test "verifyResponseChecksum is no-op without algorithm" {
+    var headers: std.StringHashMapUnmanaged([]const u8) = .{};
+    try verifyResponseChecksum(null, "anything", &headers, std.testing.allocator);
+}
+
+test "verifyResponseChecksum is no-op without matching header" {
+    var headers: std.StringHashMapUnmanaged([]const u8) = .{};
+    try verifyResponseChecksum(.crc32, "anything", &headers, std.testing.allocator);
 }
 
 test "isClockSkewError detects clock skew codes" {
