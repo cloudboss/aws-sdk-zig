@@ -1,0 +1,15 @@
+pub const AmbiguousRoleResolutionType = @import("ambiguous_role_resolution_type.zig").AmbiguousRoleResolutionType;
+pub const CognitoIdentityProvider = @import("cognito_identity_provider.zig").CognitoIdentityProvider;
+pub const Credentials = @import("credentials.zig").Credentials;
+pub const ErrorCode = @import("error_code.zig").ErrorCode;
+pub const IdentityDescription = @import("identity_description.zig").IdentityDescription;
+pub const IdentityPoolShortDescription = @import("identity_pool_short_description.zig").IdentityPoolShortDescription;
+pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+pub const MappingRule = @import("mapping_rule.zig").MappingRule;
+pub const MappingRuleMatchType = @import("mapping_rule_match_type.zig").MappingRuleMatchType;
+pub const RoleMapping = @import("role_mapping.zig").RoleMapping;
+pub const RoleMappingType = @import("role_mapping_type.zig").RoleMappingType;
+pub const RulesConfigurationType = @import("rules_configuration_type.zig").RulesConfigurationType;
+pub const TagResourceResponse = @import("tag_resource_response.zig").TagResourceResponse;
+pub const UnprocessedIdentityId = @import("unprocessed_identity_id.zig").UnprocessedIdentityId;
+pub const UntagResourceResponse = @import("untag_resource_response.zig").UntagResourceResponse;

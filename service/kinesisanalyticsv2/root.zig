@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const add_application_cloud_watch_logging_option = @import("add_application_cloud_watch_logging_option.zig");
 pub const add_application_input = @import("add_application_input.zig");

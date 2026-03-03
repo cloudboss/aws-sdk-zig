@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const types = @import("types.zig");
 
 pub const batch_acknowledge_alarm = @import("batch_acknowledge_alarm.zig");
 pub const batch_delete_detector = @import("batch_delete_detector.zig");

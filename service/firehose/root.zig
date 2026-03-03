@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const types = @import("types.zig");
 
 pub const create_delivery_stream = @import("create_delivery_stream.zig");
 pub const delete_delivery_stream = @import("delete_delivery_stream.zig");

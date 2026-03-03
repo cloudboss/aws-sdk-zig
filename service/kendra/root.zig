@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const associate_entities_to_experience = @import("associate_entities_to_experience.zig");
 pub const associate_personas_to_entities = @import("associate_personas_to_entities.zig");

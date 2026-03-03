@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const accept_certificate_transfer = @import("accept_certificate_transfer.zig");
 pub const add_thing_to_billing_group = @import("add_thing_to_billing_group.zig");

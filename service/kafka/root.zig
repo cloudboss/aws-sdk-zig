@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const batch_associate_scram_secret = @import("batch_associate_scram_secret.zig");
 pub const batch_disassociate_scram_secret = @import("batch_disassociate_scram_secret.zig");

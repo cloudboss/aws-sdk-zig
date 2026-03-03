@@ -1,0 +1,16 @@
+pub const Challenge = @import("challenge.zig").Challenge;
+pub const ChallengeMetadata = @import("challenge_metadata.zig").ChallengeMetadata;
+pub const ChallengeMetadataSummary = @import("challenge_metadata_summary.zig").ChallengeMetadataSummary;
+pub const Connector = @import("connector.zig").Connector;
+pub const ConnectorStatus = @import("connector_status.zig").ConnectorStatus;
+pub const ConnectorStatusReason = @import("connector_status_reason.zig").ConnectorStatusReason;
+pub const ConnectorSummary = @import("connector_summary.zig").ConnectorSummary;
+pub const ConnectorType = @import("connector_type.zig").ConnectorType;
+pub const IntuneConfiguration = @import("intune_configuration.zig").IntuneConfiguration;
+pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+pub const MobileDeviceManagement = @import("mobile_device_management.zig").MobileDeviceManagement;
+pub const OpenIdConfiguration = @import("open_id_configuration.zig").OpenIdConfiguration;
+pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
+pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const ValidationExceptionReason = @import("validation_exception_reason.zig").ValidationExceptionReason;

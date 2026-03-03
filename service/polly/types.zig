@@ -1,0 +1,13 @@
+pub const Engine = @import("engine.zig").Engine;
+pub const Gender = @import("gender.zig").Gender;
+pub const LanguageCode = @import("language_code.zig").LanguageCode;
+pub const Lexicon = @import("lexicon.zig").Lexicon;
+pub const LexiconAttributes = @import("lexicon_attributes.zig").LexiconAttributes;
+pub const LexiconDescription = @import("lexicon_description.zig").LexiconDescription;
+pub const OutputFormat = @import("output_format.zig").OutputFormat;
+pub const SpeechMarkType = @import("speech_mark_type.zig").SpeechMarkType;
+pub const SynthesisTask = @import("synthesis_task.zig").SynthesisTask;
+pub const TaskStatus = @import("task_status.zig").TaskStatus;
+pub const TextType = @import("text_type.zig").TextType;
+pub const Voice = @import("voice.zig").Voice;
+pub const VoiceId = @import("voice_id.zig").VoiceId;

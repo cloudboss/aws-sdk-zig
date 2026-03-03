@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const associate_entity_to_thing = @import("associate_entity_to_thing.zig");
 pub const create_flow_template = @import("create_flow_template.zig");

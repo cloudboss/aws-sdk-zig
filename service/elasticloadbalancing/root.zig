@@ -3,6 +3,7 @@ pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
 pub const waiters = @import("waiters.zig");
+pub const types = @import("types.zig");
 
 pub const add_tags = @import("add_tags.zig");
 pub const apply_security_groups_to_load_balancer = @import("apply_security_groups_to_load_balancer.zig");

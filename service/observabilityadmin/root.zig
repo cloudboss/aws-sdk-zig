@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const create_centralization_rule_for_organization = @import("create_centralization_rule_for_organization.zig");
 pub const create_s3_table_integration = @import("create_s3_table_integration.zig");

@@ -1,0 +1,16 @@
+pub const AttributeValue = @import("attribute_value.zig").AttributeValue;
+pub const Identity = @import("identity.zig").Identity;
+pub const KeySchemaElement = @import("key_schema_element.zig").KeySchemaElement;
+pub const KeyType = @import("key_type.zig").KeyType;
+pub const OperationType = @import("operation_type.zig").OperationType;
+pub const Record = @import("record.zig").Record;
+pub const SequenceNumberRange = @import("sequence_number_range.zig").SequenceNumberRange;
+pub const Shard = @import("shard.zig").Shard;
+pub const ShardFilter = @import("shard_filter.zig").ShardFilter;
+pub const ShardFilterType = @import("shard_filter_type.zig").ShardFilterType;
+pub const ShardIteratorType = @import("shard_iterator_type.zig").ShardIteratorType;
+pub const Stream = @import("stream.zig").Stream;
+pub const StreamDescription = @import("stream_description.zig").StreamDescription;
+pub const StreamRecord = @import("stream_record.zig").StreamRecord;
+pub const StreamStatus = @import("stream_status.zig").StreamStatus;
+pub const StreamViewType = @import("stream_view_type.zig").StreamViewType;

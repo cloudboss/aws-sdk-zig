@@ -111,6 +111,15 @@ test "GetFunction error diagnostic has parseable code" {
     return error.ExpectedError;
 }
 
+test "Runtime enum type is accessible" {
+    // Verify that the Runtime enum is exported and usable
+    const rt: lambda.types.Runtime = .python_39;
+    try std.testing.expect(rt == .python_39);
+
+    const rt2: lambda.types.Runtime = .nodejs_18_x;
+    try std.testing.expect(rt2 != rt);
+}
+
 test "GetAccountSettings returns Lambda account limits" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();

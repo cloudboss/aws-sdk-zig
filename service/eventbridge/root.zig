@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const types = @import("types.zig");
 
 pub const activate_event_source = @import("activate_event_source.zig");
 pub const cancel_replay = @import("cancel_replay.zig");

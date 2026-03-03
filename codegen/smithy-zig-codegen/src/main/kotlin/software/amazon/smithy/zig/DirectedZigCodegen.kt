@@ -69,7 +69,7 @@ class DirectedZigCodegen :
         if (directive.shape().id.namespace == "smithy.api") return
 
         // Skip operation input/output shapes -- they are generated inline by OperationGenerator
-        if (directive.shape().id in getOperationIoShapeIds(directive.context())) return
+        if (directive.shape().id in DirectedZigCodegen.getOperationIoShapeIds(directive.context())) return
 
         StructureGenerator(directive).run()
     }
@@ -104,58 +104,60 @@ class DirectedZigCodegen :
         directive.context().writerDelegator().flushWriters()
     }
 
-    /**
-     * Collect operation I/O shape IDs that should be generated inline by OperationGenerator
-     * rather than as standalone files by StructureGenerator.
-     *
-     * Only skip shapes that are used exclusively as I/O. If a shape is used as I/O AND
-     * referenced as a member type by other shapes, it must be generated as a standalone file.
-     */
-    private fun getOperationIoShapeIds(context: ZigContext): Set<ShapeId> {
-        val topDownIndex = TopDownIndex.of(context.model())
-        val ioShapeIds = mutableSetOf<ShapeId>()
-        for (opShape in topDownIndex.getContainedOperations(context.service)) {
-            ioShapeIds.add(opShape.inputShape)
-            ioShapeIds.add(opShape.outputShape)
-        }
+    companion object {
+        /**
+         * Collect operation I/O shape IDs that should be generated inline by OperationGenerator
+         * rather than as standalone files by StructureGenerator.
+         *
+         * Only skip shapes that are used exclusively as I/O. If a shape is used as I/O AND
+         * referenced as a member type by other shapes, it must be generated as a standalone file.
+         */
+        fun getOperationIoShapeIds(context: ZigContext): Set<ShapeId> {
+            val topDownIndex = TopDownIndex.of(context.model())
+            val ioShapeIds = mutableSetOf<ShapeId>()
+            for (opShape in topDownIndex.getContainedOperations(context.service)) {
+                ioShapeIds.add(opShape.inputShape)
+                ioShapeIds.add(opShape.outputShape)
+            }
 
-        // Find shapes referenced as member types by any structure in the model
-        val referencedAsMembers = mutableSetOf<ShapeId>()
-        for (shape in context.model().toSet()) {
-            if (shape is software.amazon.smithy.model.shapes.StructureShape) {
-                for ((_, memberShape) in shape.allMembers) {
-                    referencedAsMembers.add(memberShape.target)
-                    // Also check list member targets
-                    val targetShape = context.model().getShape(memberShape.target).orElse(null)
-                    if (targetShape is software.amazon.smithy.model.shapes.ListShape) {
-                        referencedAsMembers.add(targetShape.member.target)
-                    }
-                    if (targetShape is software.amazon.smithy.model.shapes.MapShape) {
-                        referencedAsMembers.add(targetShape.value.target)
+            // Find shapes referenced as member types by any structure in the model
+            val referencedAsMembers = mutableSetOf<ShapeId>()
+            for (shape in context.model().toSet()) {
+                if (shape is software.amazon.smithy.model.shapes.StructureShape) {
+                    for ((_, memberShape) in shape.allMembers) {
+                        referencedAsMembers.add(memberShape.target)
+                        // Also check list member targets
+                        val targetShape = context.model().getShape(memberShape.target).orElse(null)
+                        if (targetShape is software.amazon.smithy.model.shapes.ListShape) {
+                            referencedAsMembers.add(targetShape.member.target)
+                        }
+                        if (targetShape is software.amazon.smithy.model.shapes.MapShape) {
+                            referencedAsMembers.add(targetShape.value.target)
+                        }
                     }
                 }
             }
-        }
 
-        // Find I/O shapes whose generated name collides with another shape name.
-        // These must be generated as standalone files, not inline.
-        val allShapeNames = context.model().toSet().map { it.id.name }.toSet()
-        val nameCollisionIds = mutableSetOf<ShapeId>()
-        for (opShape in topDownIndex.getContainedOperations(context.service)) {
-            val opName = opShape.id.name
-            val inputId = opShape.inputShape
-            val outputId = opShape.outputShape
-            val inputName = context.model().expectShape(inputId).id.name
-            val outputName = context.model().expectShape(outputId).id.name
-            if ("${opName}Input" != inputName && "${opName}Input" in allShapeNames) {
-                nameCollisionIds.add(inputId)
+            // Find I/O shapes whose generated name collides with another shape name.
+            // These must be generated as standalone files, not inline.
+            val allShapeNames = context.model().toSet().map { it.id.name }.toSet()
+            val nameCollisionIds = mutableSetOf<ShapeId>()
+            for (opShape in topDownIndex.getContainedOperations(context.service)) {
+                val opName = opShape.id.name
+                val inputId = opShape.inputShape
+                val outputId = opShape.outputShape
+                val inputName = context.model().expectShape(inputId).id.name
+                val outputName = context.model().expectShape(outputId).id.name
+                if ("${opName}Input" != inputName && "${opName}Input" in allShapeNames) {
+                    nameCollisionIds.add(inputId)
+                }
+                if ("${opName}Output" != outputName && "${opName}Output" in allShapeNames) {
+                    nameCollisionIds.add(outputId)
+                }
             }
-            if ("${opName}Output" != outputName && "${opName}Output" in allShapeNames) {
-                nameCollisionIds.add(outputId)
-            }
-        }
 
-        // Only skip shapes that are I/O AND not referenced as member types AND no name collision
-        return ioShapeIds.filter { it !in referencedAsMembers && it !in nameCollisionIds }.toSet()
+            // Only skip shapes that are I/O AND not referenced as member types AND no name collision
+            return ioShapeIds.filter { it !in referencedAsMembers && it !in nameCollisionIds }.toSet()
+        }
     }
 }

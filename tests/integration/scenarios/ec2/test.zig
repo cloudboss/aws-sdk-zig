@@ -244,6 +244,25 @@ test "AllocateAddress returns allocation ID" {
     );
 }
 
+test "DescribeVolumes with explicit Filter type" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const filters = [_]ec2.types.Filter{.{
+        .name = "status",
+        .values = &.{"available"},
+    }};
+    const result = try ec2.describe_volumes.execute(
+        &shared_client,
+        arena.allocator(),
+        .{ .filters = &filters },
+        .{},
+    );
+
+    // volumes field should be present (possibly empty list)
+    _ = result.volumes orelse return error.MissingField;
+}
+
 test "DescribeRegions returns AWS regions" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();

@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const cancel_key_deletion = @import("cancel_key_deletion.zig");
 pub const connect_custom_key_store = @import("connect_custom_key_store.zig");

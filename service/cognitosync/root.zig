@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const types = @import("types.zig");
 
 pub const bulk_publish = @import("bulk_publish.zig");
 pub const delete_dataset = @import("delete_dataset.zig");

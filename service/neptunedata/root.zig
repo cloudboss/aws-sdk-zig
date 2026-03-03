@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const types = @import("types.zig");
 
 pub const cancel_gremlin_query = @import("cancel_gremlin_query.zig");
 pub const cancel_loader_job = @import("cancel_loader_job.zig");

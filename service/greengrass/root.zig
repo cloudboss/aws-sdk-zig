@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const types = @import("types.zig");
 
 pub const associate_role_to_group = @import("associate_role_to_group.zig");
 pub const associate_service_role_to_account = @import("associate_service_role_to_account.zig");

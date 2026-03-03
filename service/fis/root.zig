@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const create_experiment_template = @import("create_experiment_template.zig");
 pub const create_target_account_configuration = @import("create_target_account_configuration.zig");

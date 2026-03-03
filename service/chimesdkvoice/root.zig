@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const associate_phone_numbers_with_voice_connector = @import("associate_phone_numbers_with_voice_connector.zig");
 pub const associate_phone_numbers_with_voice_connector_group = @import("associate_phone_numbers_with_voice_connector_group.zig");

@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const types = @import("types.zig");
 
 pub const associate_web_acl = @import("associate_web_acl.zig");
 pub const create_byte_match_set = @import("create_byte_match_set.zig");

@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const create_rescore_execution_plan = @import("create_rescore_execution_plan.zig");
 pub const delete_rescore_execution_plan = @import("delete_rescore_execution_plan.zig");

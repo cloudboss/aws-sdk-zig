@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const types = @import("types.zig");
 
 pub const describe_entities_detection_v2_job = @import("describe_entities_detection_v2_job.zig");
 pub const describe_icd10_cm_inference_job = @import("describe_icd10_cm_inference_job.zig");

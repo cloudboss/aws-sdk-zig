@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const batch_get_service_level_objective_budget_report = @import("batch_get_service_level_objective_budget_report.zig");
 pub const batch_update_exclusion_windows = @import("batch_update_exclusion_windows.zig");

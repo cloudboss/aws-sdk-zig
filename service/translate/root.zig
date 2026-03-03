@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const create_parallel_data = @import("create_parallel_data.zig");
 pub const delete_parallel_data = @import("delete_parallel_data.zig");

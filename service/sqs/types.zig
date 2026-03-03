@@ -1,0 +1,16 @@
+pub const AddPermissionRequest = @import("add_permission_request.zig").AddPermissionRequest;
+pub const BatchResultErrorEntry = @import("batch_result_error_entry.zig").BatchResultErrorEntry;
+pub const ChangeMessageVisibilityBatchRequestEntry = @import("change_message_visibility_batch_request_entry.zig").ChangeMessageVisibilityBatchRequestEntry;
+pub const ChangeMessageVisibilityBatchResultEntry = @import("change_message_visibility_batch_result_entry.zig").ChangeMessageVisibilityBatchResultEntry;
+pub const DeleteMessageBatchRequestEntry = @import("delete_message_batch_request_entry.zig").DeleteMessageBatchRequestEntry;
+pub const DeleteMessageBatchResultEntry = @import("delete_message_batch_result_entry.zig").DeleteMessageBatchResultEntry;
+pub const ListMessageMoveTasksResultEntry = @import("list_message_move_tasks_result_entry.zig").ListMessageMoveTasksResultEntry;
+pub const Message = @import("message.zig").Message;
+pub const MessageAttributeValue = @import("message_attribute_value.zig").MessageAttributeValue;
+pub const MessageSystemAttributeName = @import("message_system_attribute_name.zig").MessageSystemAttributeName;
+pub const MessageSystemAttributeNameForSends = @import("message_system_attribute_name_for_sends.zig").MessageSystemAttributeNameForSends;
+pub const MessageSystemAttributeValue = @import("message_system_attribute_value.zig").MessageSystemAttributeValue;
+pub const QueueAttributeName = @import("queue_attribute_name.zig").QueueAttributeName;
+pub const RemovePermissionRequest = @import("remove_permission_request.zig").RemovePermissionRequest;
+pub const SendMessageBatchRequestEntry = @import("send_message_batch_request_entry.zig").SendMessageBatchRequestEntry;
+pub const SendMessageBatchResultEntry = @import("send_message_batch_result_entry.zig").SendMessageBatchResultEntry;

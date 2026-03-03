@@ -1,0 +1,9 @@
+pub const CrossAccountConfiguration = @import("cross_account_configuration.zig").CrossAccountConfiguration;
+pub const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
+pub const EncryptionConfigurationType = @import("encryption_configuration_type.zig").EncryptionConfigurationType;
+pub const ListInvestigationGroupsModel = @import("list_investigation_groups_model.zig").ListInvestigationGroupsModel;
+pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceResponse = @import("tag_resource_response.zig").TagResourceResponse;
+pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceResponse = @import("untag_resource_response.zig").UntagResourceResponse;

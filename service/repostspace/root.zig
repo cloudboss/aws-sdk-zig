@@ -3,6 +3,7 @@ pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
 pub const waiters = @import("waiters.zig");
+pub const types = @import("types.zig");
 
 pub const batch_add_channel_role_to_accessors = @import("batch_add_channel_role_to_accessors.zig");
 pub const batch_add_role = @import("batch_add_role.zig");

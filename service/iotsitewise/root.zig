@@ -3,6 +3,7 @@ pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
 pub const waiters = @import("waiters.zig");
+pub const types = @import("types.zig");
 
 pub const associate_assets = @import("associate_assets.zig");
 pub const associate_time_series_to_asset_property = @import("associate_time_series_to_asset_property.zig");

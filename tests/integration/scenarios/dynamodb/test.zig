@@ -788,6 +788,72 @@ test "BatchGetItem retrieves multiple items" {
     try std.testing.expectEqual(@as(usize, 2), total);
 }
 
+test "PutItem and GetItem with explicit AttributeValue type" {
+    const table_name = "sdk-zig-ddb-explicit-av";
+
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    {
+        _ = try dynamodb.create_table.execute(&shared_client, arena.allocator(), .{
+            .table_name = table_name,
+            .key_schema = &.{
+                .{ .attribute_name = "pk", .key_type = .hash },
+            },
+            .attribute_definitions = &.{
+                .{ .attribute_name = "pk", .attribute_type = .s },
+            },
+            .billing_mode = .pay_per_request,
+        }, .{});
+    }
+    defer {
+        _ = dynamodb.delete_table.execute(
+            &shared_client,
+            arena.allocator(),
+            .{ .table_name = table_name },
+            .{},
+        ) catch unreachable;
+    }
+
+    const pk_val: dynamodb.types.AttributeValue = .{ .s = "explicit-key" };
+    const name_val: dynamodb.types.AttributeValue = .{ .s = "Carol" };
+
+    {
+        _ = try dynamodb.put_item.execute(&shared_client, arena.allocator(), .{
+            .table_name = table_name,
+            .item = &.{
+                .{ .key = "pk", .value = pk_val },
+                .{ .key = "name", .value = name_val },
+            },
+        }, .{});
+    }
+
+    const result = try dynamodb.get_item.execute(&shared_client, arena.allocator(), .{
+        .table_name = table_name,
+        .key = &.{
+            .{ .key = "pk", .value = pk_val },
+        },
+    }, .{});
+
+    const item = result.item orelse return error.MissingItem;
+    var found_name = false;
+    for (item) |entry| {
+        if (std.mem.eql(u8, entry.key, "name")) {
+            switch (entry.value) {
+                .s => |v| {
+                    try std.testing.expectEqualStrings(
+                        "Carol",
+                        v orelse return error.MissingValue,
+                    );
+                    found_name = true;
+                },
+                else => return error.UnexpectedType,
+            }
+        }
+    }
+    try std.testing.expect(found_name);
+}
+
 test "UpdateItem with ADD increments number attribute" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();

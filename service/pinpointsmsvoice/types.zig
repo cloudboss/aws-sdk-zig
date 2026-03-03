@@ -1,0 +1,10 @@
+pub const CallInstructionsMessageType = @import("call_instructions_message_type.zig").CallInstructionsMessageType;
+pub const CloudWatchLogsDestination = @import("cloud_watch_logs_destination.zig").CloudWatchLogsDestination;
+pub const EventDestination = @import("event_destination.zig").EventDestination;
+pub const EventDestinationDefinition = @import("event_destination_definition.zig").EventDestinationDefinition;
+pub const EventType = @import("event_type.zig").EventType;
+pub const KinesisFirehoseDestination = @import("kinesis_firehose_destination.zig").KinesisFirehoseDestination;
+pub const PlainTextMessageType = @import("plain_text_message_type.zig").PlainTextMessageType;
+pub const SnsDestination = @import("sns_destination.zig").SnsDestination;
+pub const SSMLMessageType = @import("ssml_message_type.zig").SSMLMessageType;
+pub const VoiceMessageContent = @import("voice_message_content.zig").VoiceMessageContent;

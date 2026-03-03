@@ -1,0 +1,9 @@
+pub const AlternateContact = @import("alternate_contact.zig").AlternateContact;
+pub const AlternateContactType = @import("alternate_contact_type.zig").AlternateContactType;
+pub const AwsAccountState = @import("aws_account_state.zig").AwsAccountState;
+pub const ContactInformation = @import("contact_information.zig").ContactInformation;
+pub const PrimaryEmailUpdateStatus = @import("primary_email_update_status.zig").PrimaryEmailUpdateStatus;
+pub const Region = @import("region.zig").Region;
+pub const RegionOptStatus = @import("region_opt_status.zig").RegionOptStatus;
+pub const ValidationExceptionField = @import("validation_exception_field.zig").ValidationExceptionField;
+pub const ValidationExceptionReason = @import("validation_exception_reason.zig").ValidationExceptionReason;

@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const delete_earth_observation_job = @import("delete_earth_observation_job.zig");
 pub const delete_vector_enrichment_job = @import("delete_vector_enrichment_job.zig");

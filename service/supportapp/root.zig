@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const create_slack_channel_configuration = @import("create_slack_channel_configuration.zig");
 pub const delete_account_alias = @import("delete_account_alias.zig");

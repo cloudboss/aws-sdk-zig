@@ -3,6 +3,7 @@ pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
 pub const waiters = @import("waiters.zig");
+pub const types = @import("types.zig");
 
 pub const abort_multipart_read_set_upload = @import("abort_multipart_read_set_upload.zig");
 pub const accept_share = @import("accept_share.zig");

@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const associate_to_configuration = @import("associate_to_configuration.zig");
 pub const create_chime_webhook_configuration = @import("create_chime_webhook_configuration.zig");

@@ -1,0 +1,17 @@
+pub const AdditionalArtifact = @import("additional_artifact.zig").AdditionalArtifact;
+pub const AWSRegion = @import("aws_region.zig").AWSRegion;
+pub const CompressionFormat = @import("compression_format.zig").CompressionFormat;
+pub const LastStatus = @import("last_status.zig").LastStatus;
+pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+pub const ReportDefinition = @import("report_definition.zig").ReportDefinition;
+pub const ReportFormat = @import("report_format.zig").ReportFormat;
+pub const ReportStatus = @import("report_status.zig").ReportStatus;
+pub const ReportVersioning = @import("report_versioning.zig").ReportVersioning;
+pub const SchemaElement = @import("schema_element.zig").SchemaElement;
+pub const Tag = @import("tag.zig").Tag;
+pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceResponse = @import("tag_resource_response.zig").TagResourceResponse;
+pub const TimeUnit = @import("time_unit.zig").TimeUnit;
+pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceResponse = @import("untag_resource_response.zig").UntagResourceResponse;

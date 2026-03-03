@@ -3,6 +3,7 @@ pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
 pub const waiters = @import("waiters.zig");
+pub const types = @import("types.zig");
 
 pub const activate_key_signing_key = @import("activate_key_signing_key.zig");
 pub const associate_vpc_with_hosted_zone = @import("associate_vpc_with_hosted_zone.zig");

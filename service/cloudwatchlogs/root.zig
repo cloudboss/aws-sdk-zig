@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const associate_kms_key = @import("associate_kms_key.zig");
 pub const associate_source_to_s3_table_integration = @import("associate_source_to_s3_table_integration.zig");

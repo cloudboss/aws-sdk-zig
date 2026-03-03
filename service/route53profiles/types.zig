@@ -1,0 +1,13 @@
+pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+pub const Profile = @import("profile.zig").Profile;
+pub const ProfileAssociation = @import("profile_association.zig").ProfileAssociation;
+pub const ProfileResourceAssociation = @import("profile_resource_association.zig").ProfileResourceAssociation;
+pub const ProfileStatus = @import("profile_status.zig").ProfileStatus;
+pub const ProfileSummary = @import("profile_summary.zig").ProfileSummary;
+pub const ShareStatus = @import("share_status.zig").ShareStatus;
+pub const Tag = @import("tag.zig").Tag;
+pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceResponse = @import("tag_resource_response.zig").TagResourceResponse;
+pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceResponse = @import("untag_resource_response.zig").UntagResourceResponse;

@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const batch_delete_recipe_version = @import("batch_delete_recipe_version.zig");
 pub const create_dataset = @import("create_dataset.zig");

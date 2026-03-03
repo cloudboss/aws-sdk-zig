@@ -1,0 +1,15 @@
+pub const DataType = @import("data_type.zig").DataType;
+pub const DistanceMetric = @import("distance_metric.zig").DistanceMetric;
+pub const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
+pub const GetOutputVector = @import("get_output_vector.zig").GetOutputVector;
+pub const Index = @import("index.zig").Index;
+pub const IndexSummary = @import("index_summary.zig").IndexSummary;
+pub const ListOutputVector = @import("list_output_vector.zig").ListOutputVector;
+pub const MetadataConfiguration = @import("metadata_configuration.zig").MetadataConfiguration;
+pub const PutInputVector = @import("put_input_vector.zig").PutInputVector;
+pub const QueryOutputVector = @import("query_output_vector.zig").QueryOutputVector;
+pub const SseType = @import("sse_type.zig").SseType;
+pub const ValidationExceptionField = @import("validation_exception_field.zig").ValidationExceptionField;
+pub const VectorBucket = @import("vector_bucket.zig").VectorBucket;
+pub const VectorBucketSummary = @import("vector_bucket_summary.zig").VectorBucketSummary;
+pub const VectorData = @import("vector_data.zig").VectorData;

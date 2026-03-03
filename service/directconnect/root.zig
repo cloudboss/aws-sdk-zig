@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const types = @import("types.zig");
 
 pub const accept_direct_connect_gateway_association_proposal = @import("accept_direct_connect_gateway_association_proposal.zig");
 pub const allocate_connection_on_interconnect = @import("allocate_connection_on_interconnect.zig");

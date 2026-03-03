@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const types = @import("types.zig");
 
 pub const allocate_static_ip = @import("allocate_static_ip.zig");
 pub const attach_certificate_to_distribution = @import("attach_certificate_to_distribution.zig");

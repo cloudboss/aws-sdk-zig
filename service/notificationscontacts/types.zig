@@ -1,0 +1,10 @@
+pub const EmailContact = @import("email_contact.zig").EmailContact;
+pub const EmailContactStatus = @import("email_contact_status.zig").EmailContactStatus;
+pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceResponse = @import("tag_resource_response.zig").TagResourceResponse;
+pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceResponse = @import("untag_resource_response.zig").UntagResourceResponse;
+pub const ValidationExceptionField = @import("validation_exception_field.zig").ValidationExceptionField;
+pub const ValidationExceptionReason = @import("validation_exception_reason.zig").ValidationExceptionReason;

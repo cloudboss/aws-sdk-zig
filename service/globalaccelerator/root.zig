@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const add_custom_routing_endpoints = @import("add_custom_routing_endpoints.zig");
 pub const add_endpoints = @import("add_endpoints.zig");

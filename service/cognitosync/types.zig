@@ -1,0 +1,11 @@
+pub const BulkPublishStatus = @import("bulk_publish_status.zig").BulkPublishStatus;
+pub const CognitoStreams = @import("cognito_streams.zig").CognitoStreams;
+pub const Dataset = @import("dataset.zig").Dataset;
+pub const IdentityPoolUsage = @import("identity_pool_usage.zig").IdentityPoolUsage;
+pub const IdentityUsage = @import("identity_usage.zig").IdentityUsage;
+pub const Operation = @import("operation.zig").Operation;
+pub const Platform = @import("platform.zig").Platform;
+pub const PushSync = @import("push_sync.zig").PushSync;
+pub const Record = @import("record.zig").Record;
+pub const RecordPatch = @import("record_patch.zig").RecordPatch;
+pub const StreamingStatus = @import("streaming_status.zig").StreamingStatus;

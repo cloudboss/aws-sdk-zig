@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const add_custom_attributes = @import("add_custom_attributes.zig");
 pub const admin_add_user_to_group = @import("admin_add_user_to_group.zig");

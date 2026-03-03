@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const types = @import("types.zig");
 
 pub const create_cluster = @import("create_cluster.zig");
 pub const create_parameter_group = @import("create_parameter_group.zig");

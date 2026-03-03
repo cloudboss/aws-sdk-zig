@@ -3,6 +3,7 @@ pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
 pub const waiters = @import("waiters.zig");
+pub const types = @import("types.zig");
 
 pub const add_source_identifier_to_subscription = @import("add_source_identifier_to_subscription.zig");
 pub const add_tags_to_resource = @import("add_tags_to_resource.zig");

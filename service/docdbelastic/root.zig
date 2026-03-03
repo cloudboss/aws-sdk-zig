@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const apply_pending_maintenance_action = @import("apply_pending_maintenance_action.zig");
 pub const copy_cluster_snapshot = @import("copy_cluster_snapshot.zig");

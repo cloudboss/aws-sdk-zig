@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const associate_tracker_consumer = @import("associate_tracker_consumer.zig");
 pub const batch_delete_device_position_history = @import("batch_delete_device_position_history.zig");

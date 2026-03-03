@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const types = @import("types.zig");
 
 pub const get_data_automation_status = @import("get_data_automation_status.zig");
 pub const invoke_data_automation = @import("invoke_data_automation.zig");

@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const types = @import("types.zig");
 
 pub const create_scaling_plan = @import("create_scaling_plan.zig");
 pub const delete_scaling_plan = @import("delete_scaling_plan.zig");

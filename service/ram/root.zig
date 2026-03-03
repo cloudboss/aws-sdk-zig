@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const accept_resource_share_invitation = @import("accept_resource_share_invitation.zig");
 pub const associate_resource_share = @import("associate_resource_share.zig");

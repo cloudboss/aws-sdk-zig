@@ -58,6 +58,34 @@ test "CreateUser returns successfully" {
     _ = del;
 }
 
+test "CreateUser with explicit Tag type" {
+    var arena = std.heap.ArenaAllocator.init(gpa.allocator());
+    defer arena.deinit();
+
+    const user_name = "sdk-zig-iam-tag-user";
+
+    const tags = [_]iam.types.Tag{
+        .{ .key = "env", .value = "test" },
+        .{ .key = "project", .value = "sdk-zig" },
+    };
+    const create = try iam.create_user.execute(
+        &shared_client,
+        arena.allocator(),
+        .{ .user_name = user_name, .tags = &tags },
+        .{},
+    );
+
+    const user = create.user orelse return error.MissingUser;
+    try std.testing.expectEqualStrings(user_name, user.user_name);
+
+    _ = try iam.delete_user.execute(
+        &shared_client,
+        arena.allocator(),
+        .{ .user_name = user_name },
+        .{},
+    );
+}
+
 test "GetUser returns created user with correct name" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();

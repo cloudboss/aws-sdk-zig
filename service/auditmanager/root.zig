@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const associate_assessment_report_evidence_folder = @import("associate_assessment_report_evidence_folder.zig");
 pub const batch_associate_assessment_report_evidence = @import("batch_associate_assessment_report_evidence.zig");

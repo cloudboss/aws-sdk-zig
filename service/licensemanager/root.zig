@@ -1,6 +1,7 @@
 pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
+pub const types = @import("types.zig");
 
 pub const accept_grant = @import("accept_grant.zig");
 pub const check_in_license = @import("check_in_license.zig");

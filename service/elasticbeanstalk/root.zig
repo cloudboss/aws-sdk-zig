@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const abort_environment_update = @import("abort_environment_update.zig");
 pub const apply_environment_managed_action = @import("apply_environment_managed_action.zig");

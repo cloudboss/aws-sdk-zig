@@ -1,0 +1,13 @@
+pub const CodeGenerationStatus = @import("code_generation_status.zig").CodeGenerationStatus;
+pub const DiscovererState = @import("discoverer_state.zig").DiscovererState;
+pub const DiscovererSummary = @import("discoverer_summary.zig").DiscovererSummary;
+pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+pub const RegistrySummary = @import("registry_summary.zig").RegistrySummary;
+pub const SchemaSummary = @import("schema_summary.zig").SchemaSummary;
+pub const SchemaVersionSummary = @import("schema_version_summary.zig").SchemaVersionSummary;
+pub const SearchSchemaSummary = @import("search_schema_summary.zig").SearchSchemaSummary;
+pub const SearchSchemaVersionSummary = @import("search_schema_version_summary.zig").SearchSchemaVersionSummary;
+pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
+pub const Type = @import("type.zig").Type;
+pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;

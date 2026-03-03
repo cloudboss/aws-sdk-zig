@@ -3,6 +3,7 @@ pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
 pub const waiters = @import("waiters.zig");
+pub const types = @import("types.zig");
 
 pub const add_bridge_outputs = @import("add_bridge_outputs.zig");
 pub const add_bridge_sources = @import("add_bridge_sources.zig");

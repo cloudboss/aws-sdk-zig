@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const add_lf_tags_to_resource = @import("add_lf_tags_to_resource.zig");
 pub const assume_decorated_role_with_saml = @import("assume_decorated_role_with_saml.zig");

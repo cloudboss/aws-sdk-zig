@@ -1,0 +1,15 @@
+pub const ClientMode = @import("client_mode.zig").ClientMode;
+pub const ConnectionState = @import("connection_state.zig").ConnectionState;
+pub const ConnectionStatus = @import("connection_status.zig").ConnectionStatus;
+pub const DestinationConfig = @import("destination_config.zig").DestinationConfig;
+pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+pub const Tag = @import("tag.zig").Tag;
+pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceResponse = @import("tag_resource_response.zig").TagResourceResponse;
+pub const TimeoutConfig = @import("timeout_config.zig").TimeoutConfig;
+pub const Tunnel = @import("tunnel.zig").Tunnel;
+pub const TunnelStatus = @import("tunnel_status.zig").TunnelStatus;
+pub const TunnelSummary = @import("tunnel_summary.zig").TunnelSummary;
+pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceResponse = @import("untag_resource_response.zig").UntagResourceResponse;

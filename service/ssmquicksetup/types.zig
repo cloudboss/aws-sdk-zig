@@ -1,0 +1,14 @@
+pub const ConfigurationDefinition = @import("configuration_definition.zig").ConfigurationDefinition;
+pub const ConfigurationDefinitionInput = @import("configuration_definition_input.zig").ConfigurationDefinitionInput;
+pub const ConfigurationDefinitionSummary = @import("configuration_definition_summary.zig").ConfigurationDefinitionSummary;
+pub const ConfigurationManagerSummary = @import("configuration_manager_summary.zig").ConfigurationManagerSummary;
+pub const ConfigurationSummary = @import("configuration_summary.zig").ConfigurationSummary;
+pub const Filter = @import("filter.zig").Filter;
+pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+pub const QuickSetupTypeOutput = @import("quick_setup_type_output.zig").QuickSetupTypeOutput;
+pub const ServiceSettings = @import("service_settings.zig").ServiceSettings;
+pub const Status = @import("status.zig").Status;
+pub const StatusSummary = @import("status_summary.zig").StatusSummary;
+pub const StatusType = @import("status_type.zig").StatusType;
+pub const TagEntry = @import("tag_entry.zig").TagEntry;

@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const copy_blueprint_stage = @import("copy_blueprint_stage.zig");
 pub const create_blueprint = @import("create_blueprint.zig");

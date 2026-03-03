@@ -671,6 +671,36 @@ test "ListObjectsV2 returns empty for prefix with no objects" {
     }
 }
 
+test "PutBucketTagging with explicit Tag type" {
+    const allocator = gpa.allocator();
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+
+    const tags = [_]s3.types.Tag{
+        .{ .key = "env", .value = "test" },
+        .{ .key = "project", .value = "sdk-zig" },
+    };
+    _ = try s3.put_bucket_tagging.execute(
+        &shared_client,
+        arena.allocator(),
+        .{
+            .bucket = "sdk-zig-s3-shared",
+            .tagging = .{ .tag_set = &tags },
+        },
+        .{},
+    );
+
+    const result = try s3.get_bucket_tagging.execute(
+        &shared_client,
+        arena.allocator(),
+        .{ .bucket = "sdk-zig-s3-shared" },
+        .{},
+    );
+
+    const tag_set = result.tag_set orelse return error.MissingTagSet;
+    try std.testing.expect(tag_set.len >= 2);
+}
+
 test "ListObjectsV2 with max_keys limits result count" {
     const allocator = gpa.allocator();
     var arena = std.heap.ArenaAllocator.init(allocator);

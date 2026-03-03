@@ -2,6 +2,7 @@ pub const Client = @import("client.zig").Client;
 pub const errors = @import("errors.zig");
 pub const ServiceError = errors.ServiceError;
 pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
 
 pub const associate_service_role_to_account = @import("associate_service_role_to_account.zig");
 pub const batch_associate_client_device_with_core_device = @import("batch_associate_client_device_with_core_device.zig");

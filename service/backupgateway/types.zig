@@ -1,0 +1,14 @@
+pub const BandwidthRateLimitInterval = @import("bandwidth_rate_limit_interval.zig").BandwidthRateLimitInterval;
+pub const Gateway = @import("gateway.zig").Gateway;
+pub const GatewayDetails = @import("gateway_details.zig").GatewayDetails;
+pub const GatewayType = @import("gateway_type.zig").GatewayType;
+pub const Hypervisor = @import("hypervisor.zig").Hypervisor;
+pub const HypervisorDetails = @import("hypervisor_details.zig").HypervisorDetails;
+pub const HypervisorState = @import("hypervisor_state.zig").HypervisorState;
+pub const MaintenanceStartTime = @import("maintenance_start_time.zig").MaintenanceStartTime;
+pub const SyncMetadataStatus = @import("sync_metadata_status.zig").SyncMetadataStatus;
+pub const Tag = @import("tag.zig").Tag;
+pub const VirtualMachine = @import("virtual_machine.zig").VirtualMachine;
+pub const VirtualMachineDetails = @import("virtual_machine_details.zig").VirtualMachineDetails;
+pub const VmwareTag = @import("vmware_tag.zig").VmwareTag;
+pub const VmwareToAwsTagMapping = @import("vmware_to_aws_tag_mapping.zig").VmwareToAwsTagMapping;

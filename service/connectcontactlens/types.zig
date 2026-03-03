@@ -1,0 +1,11 @@
+pub const Categories = @import("categories.zig").Categories;
+pub const CategoryDetails = @import("category_details.zig").CategoryDetails;
+pub const CharacterOffsets = @import("character_offsets.zig").CharacterOffsets;
+pub const IssueDetected = @import("issue_detected.zig").IssueDetected;
+pub const PointOfInterest = @import("point_of_interest.zig").PointOfInterest;
+pub const PostContactSummary = @import("post_contact_summary.zig").PostContactSummary;
+pub const PostContactSummaryFailureCode = @import("post_contact_summary_failure_code.zig").PostContactSummaryFailureCode;
+pub const PostContactSummaryStatus = @import("post_contact_summary_status.zig").PostContactSummaryStatus;
+pub const RealtimeContactAnalysisSegment = @import("realtime_contact_analysis_segment.zig").RealtimeContactAnalysisSegment;
+pub const SentimentValue = @import("sentiment_value.zig").SentimentValue;
+pub const Transcript = @import("transcript.zig").Transcript;
