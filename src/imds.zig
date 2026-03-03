@@ -8,7 +8,6 @@
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 
-const errors = @import("errors.zig");
 const http = @import("http.zig");
 const date = @import("date.zig");
 
@@ -39,10 +38,55 @@ pub const EndpointMode = enum {
     }
 };
 
+/// Error information from an IMDS request
+pub const ServiceError = struct {
+    kind: Kind,
+
+    pub const Kind = union(enum) {
+        unknown: UnknownError,
+
+        pub fn code(self: Kind) []const u8 {
+            return switch (self) {
+                .unknown => |e| e.code,
+            };
+        }
+
+        pub fn message(self: Kind) []const u8 {
+            return switch (self) {
+                .unknown => |e| e.message,
+            };
+        }
+
+        pub fn httpStatus(self: Kind) u16 {
+            return switch (self) {
+                .unknown => |e| e.http_status,
+            };
+        }
+    };
+
+    pub fn code(self: ServiceError) []const u8 {
+        return self.kind.code();
+    }
+
+    pub fn message(self: ServiceError) []const u8 {
+        return self.kind.message();
+    }
+
+    pub fn httpStatus(self: ServiceError) u16 {
+        return self.kind.httpStatus();
+    }
+};
+
+pub const UnknownError = struct {
+    code: []const u8 = "",
+    message: []const u8 = "",
+    http_status: u16 = 0,
+};
+
 /// Per-call options for IMDS requests
-pub const RequestOptions = struct {
-    /// Optional diagnostic to fill on error
-    diagnostic: ?*errors.Diagnostic = null,
+pub const CallOptions = struct {
+    /// Optional error details to fill on error
+    diagnostic: ?*ServiceError = null,
 };
 
 /// IMDS client for querying EC2 instance metadata
@@ -107,13 +151,13 @@ pub const Client = struct {
 
     /// Get metadata from an arbitrary path
     /// Path should start with / (e.g., "/latest/meta-data/instance-id")
-    pub fn getMetadata(self: *Self, path: []const u8, options: RequestOptions) ![]const u8 {
+    pub fn getMetadata(self: *Self, path: []const u8, options: CallOptions) ![]const u8 {
         const token = try self.getToken(options);
         return self.doGetRequest(path, token, options);
     }
 
     /// Get the AWS region from instance identity document
-    pub fn getRegion(self: *Self, options: RequestOptions) ![]const u8 {
+    pub fn getRegion(self: *Self, options: CallOptions) ![]const u8 {
         const doc = try self.getMetadata("/latest/dynamic/instance-identity/document", options);
         defer self.allocator.free(doc);
 
@@ -121,12 +165,12 @@ pub const Client = struct {
     }
 
     /// Get the instance ID
-    pub fn getInstanceId(self: *Self, options: RequestOptions) ![]const u8 {
+    pub fn getInstanceId(self: *Self, options: CallOptions) ![]const u8 {
         return self.getMetadata("/latest/meta-data/instance-id", options);
     }
 
     /// Get IAM credentials for the instance's role
-    pub fn getIamCredentials(self: *Self, options: RequestOptions) !IamCredentials {
+    pub fn getIamCredentials(self: *Self, options: CallOptions) !IamCredentials {
         // First, get the role name
         const role_name = try self.getMetadata("/latest/meta-data/iam/security-credentials/", options);
         defer self.allocator.free(role_name);
@@ -151,7 +195,7 @@ pub const Client = struct {
     }
 
     /// Get or refresh the IMDSv2 session token
-    fn getToken(self: *Self, options: RequestOptions) ![]const u8 {
+    fn getToken(self: *Self, options: CallOptions) ![]const u8 {
         const now = std.time.timestamp();
 
         // Return cached token if still valid (with 5 minute buffer)
@@ -181,7 +225,7 @@ pub const Client = struct {
     }
 
     /// PUT request to get IMDSv2 session token
-    fn doPutTokenRequest(self: *Self, options: RequestOptions) ![]const u8 {
+    fn doPutTokenRequest(self: *Self, options: CallOptions) ![]const u8 {
         const ttl_str = try std.fmt.allocPrint(self.allocator, "{d}", .{self.token_ttl});
         defer self.allocator.free(ttl_str);
 
@@ -214,12 +258,12 @@ pub const Client = struct {
     }
 
     /// GET request with session token
-    fn doGetRequest(self: *Self, path: []const u8, token: []const u8, options: RequestOptions) ![]const u8 {
+    fn doGetRequest(self: *Self, path: []const u8, token: []const u8, options: CallOptions) ![]const u8 {
         return self.doGetRequestInner(path, token, options) catch |err| {
             // On 401, invalidate token and retry once
             if (err == error.HttpError) {
                 if (options.diagnostic) |diag| {
-                    if (diag.http_status == 401) {
+                    if (diag.httpStatus() == 401) {
                         self.invalidateToken();
 
                         // Get fresh token
@@ -237,7 +281,7 @@ pub const Client = struct {
     }
 
     /// Inner GET request (used by doGetRequest for retry logic)
-    fn doGetRequestInner(self: *Self, path: []const u8, token: []const u8, options: RequestOptions) ![]const u8 {
+    fn doGetRequestInner(self: *Self, path: []const u8, token: []const u8, options: CallOptions) ![]const u8 {
         const ep = try parseEndpoint(self.endpoint);
 
         var request = http.Request.init(ep.host);
@@ -287,9 +331,9 @@ pub const Client = struct {
 };
 
 /// Fill diagnostic from an HTTP-layer error
-fn fillDiagnosticFromError(diagnostic: ?*errors.Diagnostic, err: http.RequestError, message: []const u8) void {
+fn fillDiagnosticFromError(diagnostic: ?*ServiceError, err: http.RequestError, message: []const u8) void {
     if (diagnostic) |diag| {
-        diag.* = .{
+        diag.* = .{ .kind = .{ .unknown = .{
             .message = message,
             .http_status = switch (err) {
                 error.ChecksumMismatch => 0,
@@ -300,17 +344,17 @@ fn fillDiagnosticFromError(diagnostic: ?*errors.Diagnostic, err: http.RequestErr
                 error.MaxRetriesExceeded => 0,
                 error.OutOfMemory => 0,
             },
-        };
+        } } };
     }
 }
 
 /// Fill diagnostic from a non-success HTTP status
-fn fillDiagnosticFromStatus(diagnostic: ?*errors.Diagnostic, status: u16, message: []const u8) void {
+fn fillDiagnosticFromStatus(diagnostic: ?*ServiceError, status: u16, message: []const u8) void {
     if (diagnostic) |diag| {
-        diag.* = .{
+        diag.* = .{ .kind = .{ .unknown = .{
             .http_status = status,
             .message = message,
-        };
+        } } };
     }
 }
 
@@ -602,12 +646,11 @@ test "Client invalidateToken with null token is safe" {
 }
 
 test "fillDiagnosticFromStatus sets fields" {
-    var diag: errors.Diagnostic = .{};
+    var diag: ServiceError = undefined;
     fillDiagnosticFromStatus(&diag, 404, "not found");
-    try std.testing.expectEqual(@as(u16, 404), diag.http_status);
-    try std.testing.expectEqualStrings("not found", diag.message);
-    try std.testing.expectEqualStrings("", diag.code);
-    try std.testing.expectEqualStrings("", diag.request_id);
+    try std.testing.expectEqual(@as(u16, 404), diag.httpStatus());
+    try std.testing.expectEqualStrings("not found", diag.message());
+    try std.testing.expectEqualStrings("", diag.code());
 }
 
 test "fillDiagnosticFromStatus with null diagnostic is safe" {
@@ -615,17 +658,17 @@ test "fillDiagnosticFromStatus with null diagnostic is safe" {
 }
 
 test "fillDiagnosticFromError sets fields" {
-    var diag: errors.Diagnostic = .{};
+    var diag: ServiceError = undefined;
     fillDiagnosticFromError(&diag, error.ConnectionFailed, "connection failed");
-    try std.testing.expectEqual(@as(u16, 0), diag.http_status);
-    try std.testing.expectEqualStrings("connection failed", diag.message);
+    try std.testing.expectEqual(@as(u16, 0), diag.httpStatus());
+    try std.testing.expectEqualStrings("connection failed", diag.message());
 }
 
 test "fillDiagnosticFromError with null diagnostic is safe" {
     fillDiagnosticFromError(null, error.RequestFailed, "error");
 }
 
-test "RequestOptions defaults" {
-    const opts = RequestOptions{};
+test "CallOptions defaults" {
+    const opts = CallOptions{};
     try std.testing.expect(opts.diagnostic == null);
 }

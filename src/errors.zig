@@ -4,38 +4,6 @@
 
 const std = @import("std");
 
-/// Base diagnostic information for AWS service errors
-pub const Diagnostic = struct {
-    /// Error code from AWS (e.g., "ExpiredTokenException")
-    code: []const u8 = "",
-    /// Human-readable error message
-    message: []const u8 = "",
-    /// AWS request ID for debugging
-    request_id: []const u8 = "",
-    /// HTTP status code
-    http_status: u16 = 0,
-
-    /// Check if this error is retryable
-    pub fn isRetryable(self: *const Diagnostic) bool {
-        if (isThrottlingError(self.code) or isTransientErrorCode(self.code)) return true;
-
-        // Service unavailable / transient errors
-        if (self.http_status == 500 or
-            self.http_status == 502 or
-            self.http_status == 503 or
-            self.http_status == 504)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    pub fn isTransientError(self: *const Diagnostic) bool {
-        return isTransientErrorCode(self.code);
-    }
-};
-
 pub const throttling_error_codes = [_][]const u8{
     "Throttling",
     "ThrottlingException",
@@ -102,42 +70,6 @@ pub fn isRetryableHttpError(err: anyerror) bool {
         => true,
         else => false,
     };
-}
-
-test "Diagnostic isRetryable" {
-    const throttling = Diagnostic{
-        .code = "ThrottlingException",
-        .message = "Rate exceeded",
-        .request_id = "123",
-        .http_status = 400,
-    };
-    try std.testing.expect(throttling.isRetryable());
-
-    const timeout = Diagnostic{
-        .code = "RequestTimeout",
-        .message = "timed out",
-        .request_id = "321",
-        .http_status = 400,
-    };
-    try std.testing.expect(timeout.isRetryable());
-    try std.testing.expect(timeout.isTransientError());
-
-    const server_error = Diagnostic{
-        .code = "InternalServerError",
-        .message = "Internal error",
-        .request_id = "456",
-        .http_status = 500,
-    };
-    try std.testing.expect(server_error.isRetryable());
-
-    const client_error = Diagnostic{
-        .code = "ValidationException",
-        .message = "Invalid input",
-        .request_id = "789",
-        .http_status = 400,
-    };
-    try std.testing.expect(!client_error.isRetryable());
-    try std.testing.expect(!client_error.isTransientError());
 }
 
 test "isThrottlingError recognizes all throttle codes" {

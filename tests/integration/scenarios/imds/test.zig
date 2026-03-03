@@ -52,11 +52,11 @@ test "IMDS client fills diagnostic on error" {
     var client = try aws.imds.Client.init(allocator, .{});
     defer client.deinit();
 
-    var diag: aws.errors.Diagnostic = .{};
+    var diag: aws.imds.ServiceError = undefined;
     const result = client.getMetadata("/latest/meta-data/nonexistent", .{ .diagnostic = &diag });
     try std.testing.expectError(error.HttpError, result);
-    try std.testing.expectEqual(@as(u16, 404), diag.http_status);
-    try std.testing.expectEqualStrings("metadata request failed", diag.message);
+    try std.testing.expectEqual(@as(u16, 404), diag.httpStatus());
+    try std.testing.expectEqualStrings("metadata request failed", diag.message());
 }
 
 test "IMDS client retrieves identity document fields" {

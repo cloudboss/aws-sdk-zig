@@ -37,7 +37,6 @@ pub const CredentialsProvider = credentials.CredentialsProvider;
 pub const Config = config.Config;
 pub const RetryMode = config.RetryMode;
 pub const StsRegionalEndpoints = config.StsRegionalEndpoints;
-pub const Diagnostic = errors.Diagnostic;
 pub const ImdsClient = imds.Client;
 pub const EcsProvider = ecs.Provider;
 
