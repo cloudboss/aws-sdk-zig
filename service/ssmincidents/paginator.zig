@@ -17,7 +17,6 @@ pub const GetResourcePoliciesPaginator = struct {
     params: get_resource_policies.GetResourcePoliciesInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -32,12 +31,12 @@ pub const GetResourcePoliciesPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -48,7 +47,7 @@ pub const GetResourcePoliciesPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -58,7 +57,6 @@ pub const ListIncidentFindingsPaginator = struct {
     params: list_incident_findings.ListIncidentFindingsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -73,12 +71,12 @@ pub const ListIncidentFindingsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -89,7 +87,7 @@ pub const ListIncidentFindingsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -99,7 +97,6 @@ pub const ListIncidentRecordsPaginator = struct {
     params: list_incident_records.ListIncidentRecordsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -114,12 +111,12 @@ pub const ListIncidentRecordsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -130,7 +127,7 @@ pub const ListIncidentRecordsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -140,7 +137,6 @@ pub const ListRelatedItemsPaginator = struct {
     params: list_related_items.ListRelatedItemsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -155,12 +151,12 @@ pub const ListRelatedItemsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -171,7 +167,7 @@ pub const ListRelatedItemsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -181,7 +177,6 @@ pub const ListReplicationSetsPaginator = struct {
     params: list_replication_sets.ListReplicationSetsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -196,12 +191,12 @@ pub const ListReplicationSetsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -212,7 +207,7 @@ pub const ListReplicationSetsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -222,7 +217,6 @@ pub const ListResponsePlansPaginator = struct {
     params: list_response_plans.ListResponsePlansInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -237,12 +231,12 @@ pub const ListResponsePlansPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -253,7 +247,7 @@ pub const ListResponsePlansPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -263,7 +257,6 @@ pub const ListTimelineEventsPaginator = struct {
     params: list_timeline_events.ListTimelineEventsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -278,12 +271,12 @@ pub const ListTimelineEventsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -294,7 +287,7 @@ pub const ListTimelineEventsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };

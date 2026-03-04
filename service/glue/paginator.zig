@@ -56,7 +56,6 @@ pub const DescribeEntityPaginator = struct {
     params: describe_entity.DescribeEntityInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -71,12 +70,12 @@ pub const DescribeEntityPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -87,7 +86,7 @@ pub const DescribeEntityPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -97,7 +96,6 @@ pub const GetBlueprintRunsPaginator = struct {
     params: get_blueprint_runs.GetBlueprintRunsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -112,12 +110,12 @@ pub const GetBlueprintRunsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -128,7 +126,7 @@ pub const GetBlueprintRunsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -138,7 +136,6 @@ pub const GetClassifiersPaginator = struct {
     params: get_classifiers.GetClassifiersInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -153,12 +150,12 @@ pub const GetClassifiersPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -169,7 +166,7 @@ pub const GetClassifiersPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -179,7 +176,6 @@ pub const GetColumnStatisticsTaskRunsPaginator = struct {
     params: get_column_statistics_task_runs.GetColumnStatisticsTaskRunsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -194,12 +190,12 @@ pub const GetColumnStatisticsTaskRunsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -210,7 +206,7 @@ pub const GetColumnStatisticsTaskRunsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -220,7 +216,6 @@ pub const GetConnectionsPaginator = struct {
     params: get_connections.GetConnectionsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -235,12 +230,12 @@ pub const GetConnectionsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -251,7 +246,7 @@ pub const GetConnectionsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -261,7 +256,6 @@ pub const GetCrawlerMetricsPaginator = struct {
     params: get_crawler_metrics.GetCrawlerMetricsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -276,12 +270,12 @@ pub const GetCrawlerMetricsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -292,7 +286,7 @@ pub const GetCrawlerMetricsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -302,7 +296,6 @@ pub const GetCrawlersPaginator = struct {
     params: get_crawlers.GetCrawlersInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -317,12 +310,12 @@ pub const GetCrawlersPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -333,7 +326,7 @@ pub const GetCrawlersPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -343,7 +336,6 @@ pub const GetDatabasesPaginator = struct {
     params: get_databases.GetDatabasesInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -358,12 +350,12 @@ pub const GetDatabasesPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -374,7 +366,7 @@ pub const GetDatabasesPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -384,7 +376,6 @@ pub const GetDevEndpointsPaginator = struct {
     params: get_dev_endpoints.GetDevEndpointsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -399,12 +390,12 @@ pub const GetDevEndpointsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -415,7 +406,7 @@ pub const GetDevEndpointsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -425,7 +416,6 @@ pub const GetJobRunsPaginator = struct {
     params: get_job_runs.GetJobRunsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -440,12 +430,12 @@ pub const GetJobRunsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -456,7 +446,7 @@ pub const GetJobRunsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -466,7 +456,6 @@ pub const GetJobsPaginator = struct {
     params: get_jobs.GetJobsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -481,12 +470,12 @@ pub const GetJobsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -497,7 +486,7 @@ pub const GetJobsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -507,7 +496,6 @@ pub const GetMLTaskRunsPaginator = struct {
     params: get_ml_task_runs.GetMLTaskRunsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -522,12 +510,12 @@ pub const GetMLTaskRunsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -538,7 +526,7 @@ pub const GetMLTaskRunsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -548,7 +536,6 @@ pub const GetMLTransformsPaginator = struct {
     params: get_ml_transforms.GetMLTransformsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -563,12 +550,12 @@ pub const GetMLTransformsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -579,7 +566,7 @@ pub const GetMLTransformsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -589,7 +576,6 @@ pub const GetPartitionIndexesPaginator = struct {
     params: get_partition_indexes.GetPartitionIndexesInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -604,12 +590,12 @@ pub const GetPartitionIndexesPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -620,7 +606,7 @@ pub const GetPartitionIndexesPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -630,7 +616,6 @@ pub const GetPartitionsPaginator = struct {
     params: get_partitions.GetPartitionsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -645,12 +630,12 @@ pub const GetPartitionsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -661,7 +646,7 @@ pub const GetPartitionsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -671,7 +656,6 @@ pub const GetResourcePoliciesPaginator = struct {
     params: get_resource_policies.GetResourcePoliciesInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -686,12 +670,12 @@ pub const GetResourcePoliciesPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -702,7 +686,7 @@ pub const GetResourcePoliciesPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -712,7 +696,6 @@ pub const GetSecurityConfigurationsPaginator = struct {
     params: get_security_configurations.GetSecurityConfigurationsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -727,12 +710,12 @@ pub const GetSecurityConfigurationsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -743,7 +726,7 @@ pub const GetSecurityConfigurationsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -753,7 +736,6 @@ pub const GetTableVersionsPaginator = struct {
     params: get_table_versions.GetTableVersionsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -768,12 +750,12 @@ pub const GetTableVersionsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -784,7 +766,7 @@ pub const GetTableVersionsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -794,7 +776,6 @@ pub const GetTablesPaginator = struct {
     params: get_tables.GetTablesInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -809,12 +790,12 @@ pub const GetTablesPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -825,7 +806,7 @@ pub const GetTablesPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -835,7 +816,6 @@ pub const GetTriggersPaginator = struct {
     params: get_triggers.GetTriggersInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -850,12 +830,12 @@ pub const GetTriggersPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -866,7 +846,7 @@ pub const GetTriggersPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -876,7 +856,6 @@ pub const GetUnfilteredPartitionsMetadataPaginator = struct {
     params: get_unfiltered_partitions_metadata.GetUnfilteredPartitionsMetadataInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -891,12 +870,12 @@ pub const GetUnfilteredPartitionsMetadataPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -907,7 +886,7 @@ pub const GetUnfilteredPartitionsMetadataPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -917,7 +896,6 @@ pub const GetUserDefinedFunctionsPaginator = struct {
     params: get_user_defined_functions.GetUserDefinedFunctionsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -932,12 +910,12 @@ pub const GetUserDefinedFunctionsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -948,7 +926,7 @@ pub const GetUserDefinedFunctionsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -958,7 +936,6 @@ pub const GetWorkflowRunsPaginator = struct {
     params: get_workflow_runs.GetWorkflowRunsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -973,12 +950,12 @@ pub const GetWorkflowRunsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -989,7 +966,7 @@ pub const GetWorkflowRunsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -999,7 +976,6 @@ pub const ListBlueprintsPaginator = struct {
     params: list_blueprints.ListBlueprintsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1014,12 +990,12 @@ pub const ListBlueprintsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1030,7 +1006,7 @@ pub const ListBlueprintsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1040,7 +1016,6 @@ pub const ListColumnStatisticsTaskRunsPaginator = struct {
     params: list_column_statistics_task_runs.ListColumnStatisticsTaskRunsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1055,12 +1030,12 @@ pub const ListColumnStatisticsTaskRunsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1071,7 +1046,7 @@ pub const ListColumnStatisticsTaskRunsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1081,7 +1056,6 @@ pub const ListConnectionTypesPaginator = struct {
     params: list_connection_types.ListConnectionTypesInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1096,12 +1070,12 @@ pub const ListConnectionTypesPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1112,7 +1086,7 @@ pub const ListConnectionTypesPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1122,7 +1096,6 @@ pub const ListCrawlersPaginator = struct {
     params: list_crawlers.ListCrawlersInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1137,12 +1110,12 @@ pub const ListCrawlersPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1153,7 +1126,7 @@ pub const ListCrawlersPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1163,7 +1136,6 @@ pub const ListCustomEntityTypesPaginator = struct {
     params: list_custom_entity_types.ListCustomEntityTypesInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1178,12 +1150,12 @@ pub const ListCustomEntityTypesPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1194,7 +1166,7 @@ pub const ListCustomEntityTypesPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1204,7 +1176,6 @@ pub const ListDataQualityResultsPaginator = struct {
     params: list_data_quality_results.ListDataQualityResultsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1219,12 +1190,12 @@ pub const ListDataQualityResultsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1235,7 +1206,7 @@ pub const ListDataQualityResultsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1245,7 +1216,6 @@ pub const ListDataQualityRuleRecommendationRunsPaginator = struct {
     params: list_data_quality_rule_recommendation_runs.ListDataQualityRuleRecommendationRunsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1260,12 +1230,12 @@ pub const ListDataQualityRuleRecommendationRunsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1276,7 +1246,7 @@ pub const ListDataQualityRuleRecommendationRunsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1286,7 +1256,6 @@ pub const ListDataQualityRulesetEvaluationRunsPaginator = struct {
     params: list_data_quality_ruleset_evaluation_runs.ListDataQualityRulesetEvaluationRunsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1301,12 +1270,12 @@ pub const ListDataQualityRulesetEvaluationRunsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1317,7 +1286,7 @@ pub const ListDataQualityRulesetEvaluationRunsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1327,7 +1296,6 @@ pub const ListDataQualityRulesetsPaginator = struct {
     params: list_data_quality_rulesets.ListDataQualityRulesetsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1342,12 +1310,12 @@ pub const ListDataQualityRulesetsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1358,7 +1326,7 @@ pub const ListDataQualityRulesetsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1368,7 +1336,6 @@ pub const ListDevEndpointsPaginator = struct {
     params: list_dev_endpoints.ListDevEndpointsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1383,12 +1350,12 @@ pub const ListDevEndpointsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1399,7 +1366,7 @@ pub const ListDevEndpointsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1409,7 +1376,6 @@ pub const ListEntitiesPaginator = struct {
     params: list_entities.ListEntitiesInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1424,12 +1390,12 @@ pub const ListEntitiesPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1440,7 +1406,7 @@ pub const ListEntitiesPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1450,7 +1416,6 @@ pub const ListJobsPaginator = struct {
     params: list_jobs.ListJobsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1465,12 +1430,12 @@ pub const ListJobsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1481,7 +1446,7 @@ pub const ListJobsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1491,7 +1456,6 @@ pub const ListMaterializedViewRefreshTaskRunsPaginator = struct {
     params: list_materialized_view_refresh_task_runs.ListMaterializedViewRefreshTaskRunsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1506,12 +1470,12 @@ pub const ListMaterializedViewRefreshTaskRunsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1522,7 +1486,7 @@ pub const ListMaterializedViewRefreshTaskRunsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1532,7 +1496,6 @@ pub const ListMLTransformsPaginator = struct {
     params: list_ml_transforms.ListMLTransformsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1547,12 +1510,12 @@ pub const ListMLTransformsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1563,7 +1526,7 @@ pub const ListMLTransformsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1573,7 +1536,6 @@ pub const ListRegistriesPaginator = struct {
     params: list_registries.ListRegistriesInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1588,12 +1550,12 @@ pub const ListRegistriesPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1604,7 +1566,7 @@ pub const ListRegistriesPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1614,7 +1576,6 @@ pub const ListSchemaVersionsPaginator = struct {
     params: list_schema_versions.ListSchemaVersionsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1629,12 +1590,12 @@ pub const ListSchemaVersionsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1645,7 +1606,7 @@ pub const ListSchemaVersionsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1655,7 +1616,6 @@ pub const ListSchemasPaginator = struct {
     params: list_schemas.ListSchemasInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1670,12 +1630,12 @@ pub const ListSchemasPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1686,7 +1646,7 @@ pub const ListSchemasPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1696,7 +1656,6 @@ pub const ListSessionsPaginator = struct {
     params: list_sessions.ListSessionsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1711,12 +1670,12 @@ pub const ListSessionsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1727,7 +1686,7 @@ pub const ListSessionsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1737,7 +1696,6 @@ pub const ListTableOptimizerRunsPaginator = struct {
     params: list_table_optimizer_runs.ListTableOptimizerRunsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1752,12 +1710,12 @@ pub const ListTableOptimizerRunsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1768,7 +1726,7 @@ pub const ListTableOptimizerRunsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1778,7 +1736,6 @@ pub const ListTriggersPaginator = struct {
     params: list_triggers.ListTriggersInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1793,12 +1750,12 @@ pub const ListTriggersPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1809,7 +1766,7 @@ pub const ListTriggersPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1819,7 +1776,6 @@ pub const ListUsageProfilesPaginator = struct {
     params: list_usage_profiles.ListUsageProfilesInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1834,12 +1790,12 @@ pub const ListUsageProfilesPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1850,7 +1806,7 @@ pub const ListUsageProfilesPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1860,7 +1816,6 @@ pub const ListWorkflowsPaginator = struct {
     params: list_workflows.ListWorkflowsInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1875,12 +1830,12 @@ pub const ListWorkflowsPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1891,7 +1846,7 @@ pub const ListWorkflowsPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };
@@ -1901,7 +1856,6 @@ pub const SearchTablesPaginator = struct {
     params: search_tables.SearchTablesInput,
     next_token: ?[]const u8 = null,
     done: bool = false,
-    allocator: std.mem.Allocator,
 
     const Self = @This();
 
@@ -1916,12 +1870,12 @@ pub const SearchTablesPaginator = struct {
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
-            self.next_token = self.allocator.dupe(u8, token) catch null;
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
         } else {
             if (self.next_token) |old| {
-                self.allocator.free(old);
+                self.client.allocator.free(old);
             }
             self.next_token = null;
             self.done = true;
@@ -1932,7 +1886,7 @@ pub const SearchTablesPaginator = struct {
 
     pub fn deinit(self: *Self) void {
         if (self.next_token) |token| {
-            self.allocator.free(token);
+            self.client.allocator.free(token);
         }
     }
 };

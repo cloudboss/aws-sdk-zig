@@ -216,7 +216,6 @@ pub const Client = struct {
         return .{
             .client = self,
             .params = params,
-            .allocator = self.allocator,
         };
     }
 
@@ -224,7 +223,6 @@ pub const Client = struct {
         return .{
             .client = self,
             .params = params,
-            .allocator = self.allocator,
         };
     }
 
@@ -232,7 +230,6 @@ pub const Client = struct {
         return .{
             .client = self,
             .params = params,
-            .allocator = self.allocator,
         };
     }
 
@@ -240,7 +237,6 @@ pub const Client = struct {
         return .{
             .client = self,
             .params = params,
-            .allocator = self.allocator,
         };
     }
 
@@ -248,7 +244,6 @@ pub const Client = struct {
         return .{
             .client = self,
             .params = params,
-            .allocator = self.allocator,
         };
     }
 
@@ -256,7 +251,6 @@ pub const Client = struct {
         return .{
             .client = self,
             .params = params,
-            .allocator = self.allocator,
         };
     }
 };

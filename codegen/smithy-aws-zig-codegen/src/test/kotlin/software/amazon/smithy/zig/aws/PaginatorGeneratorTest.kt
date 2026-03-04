@@ -221,7 +221,10 @@ class PaginatorGeneratorTest {
         assertTrue(paginator.contains("client: *Client"), "Missing client field")
         assertTrue(paginator.contains("next_token: ?[]const u8 = null"), "Missing next_token field")
         assertTrue(paginator.contains("done: bool = false"), "Missing done field")
-        assertTrue(paginator.contains("allocator: std.mem.Allocator"), "Missing allocator field")
+        assertFalse(
+            Regex("^\\s+allocator: std\\.mem\\.Allocator,\\s*$", RegexOption.MULTILINE).containsMatchIn(paginator),
+            "Should not have redundant allocator struct field",
+        )
     }
 
     @Test
@@ -246,8 +249,8 @@ class PaginatorGeneratorTest {
         val files = generateFiles(buildStringTokenModel())
         val paginator = files["paginator.zig"]!!
         assertTrue(
-            paginator.contains("self.allocator.dupe(u8, token)"),
-            "String token should be duped",
+            paginator.contains("self.client.allocator.dupe(u8, token)"),
+            "String token should be duped via client allocator",
         )
     }
 
@@ -256,8 +259,8 @@ class PaginatorGeneratorTest {
         val files = generateFiles(buildStringTokenModel())
         val paginator = files["paginator.zig"]!!
         assertTrue(
-            paginator.contains("self.allocator.free(old)"),
-            "Old string token should be freed",
+            paginator.contains("self.client.allocator.free(old)"),
+            "Old string token should be freed via client allocator",
         )
     }
 
@@ -267,8 +270,8 @@ class PaginatorGeneratorTest {
         val paginator = files["paginator.zig"]!!
         assertTrue(paginator.contains("pub fn deinit("), "Missing deinit() method")
         assertTrue(
-            paginator.contains("self.allocator.free(token)"),
-            "deinit should free remaining token",
+            paginator.contains("self.client.allocator.free(token)"),
+            "deinit should free remaining token via client allocator",
         )
     }
 

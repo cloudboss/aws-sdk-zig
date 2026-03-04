@@ -147,7 +147,6 @@ class PaginatorGenerator(
             writer.write("next_token: ?[]const u8 = null,")
         }
         writer.write("done: bool = false,")
-        writer.write("allocator: std.mem.Allocator,")
         writer.blankLine()
 
         writer.write("const Self = @This();")
@@ -192,13 +191,13 @@ class PaginatorGenerator(
             writer.openBlock("if (output.\$L) |token| {", op.outputTokenField)
             // Free old duped token before duping the new one
             writer.openBlock("if (self.next_token) |old| {")
-            writer.write("self.allocator.free(old);")
+            writer.write("self.client.allocator.free(old);")
             writer.closeBlock("}")
-            writer.write("self.next_token = self.allocator.dupe(u8, token) catch null;")
+            writer.write("self.next_token = self.client.allocator.dupe(u8, token) catch null;")
             writer.dedent()
             writer.openBlock("} else {")
             writer.openBlock("if (self.next_token) |old| {")
-            writer.write("self.allocator.free(old);")
+            writer.write("self.client.allocator.free(old);")
             writer.closeBlock("}")
             writer.write("self.next_token = null;")
             writer.write("self.done = true;")
@@ -210,11 +209,11 @@ class PaginatorGenerator(
         writer.closeBlock("}")
         writer.blankLine()
 
-        // deinit() -- only needed for string tokens (duped into self.allocator)
+        // deinit() -- only needed for string tokens (duped into self.client.allocator)
         if (!op.isMapToken) {
             writer.openBlock("pub fn deinit(self: *Self) void {")
             writer.openBlock("if (self.next_token) |token| {")
-            writer.write("self.allocator.free(token);")
+            writer.write("self.client.allocator.free(token);")
             writer.closeBlock("}")
             writer.closeBlock("}")
         }

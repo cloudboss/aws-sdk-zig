@@ -163,7 +163,6 @@ class ClientGenerator(
             writer.openBlock("return .{")
             writer.write(".client = self,")
             writer.write(".params = params,")
-            writer.write(".allocator = self.allocator,")
             writer.closeBlock("};")
             writer.closeBlock("}")
         }
