@@ -259,21 +259,33 @@ pub const Client = struct {
 
     /// GET request with session token
     fn doGetRequest(self: *Self, path: []const u8, token: []const u8, options: CallOptions) ![]const u8 {
-        return self.doGetRequestInner(path, token, options) catch |err| {
+        // Ensure we always have a diagnostic to check for 401 status.
+        var local_diag: ServiceError = undefined;
+        const inner_options = if (options.diagnostic == null)
+            CallOptions{ .diagnostic = &local_diag }
+        else
+            options;
+
+        return self.doGetRequestInner(path, token, inner_options) catch |err| {
             // On 401, invalidate token and retry once
             if (err == error.HttpError) {
-                if (options.diagnostic) |diag| {
-                    if (diag.httpStatus() == 401) {
-                        self.invalidateToken();
+                const diag = inner_options.diagnostic.?;
+                if (diag.httpStatus() == 401) {
+                    self.invalidateToken();
 
-                        // Get fresh token
-                        const new_token = self.doPutTokenRequest(options) catch return err;
-                        self.session_token = new_token;
-                        self.token_expiry = std.time.timestamp() + @as(i64, self.token_ttl);
+                    // Get fresh token
+                    const new_token = self.doPutTokenRequest(
+                        inner_options,
+                    ) catch return err;
+                    self.session_token = new_token;
+                    self.token_expiry = std.time.timestamp() + @as(i64, self.token_ttl);
 
-                        // Retry with new token
-                        return self.doGetRequestInner(path, new_token, options);
-                    }
+                    // Retry with new token
+                    return self.doGetRequestInner(
+                        path,
+                        new_token,
+                        inner_options,
+                    );
                 }
             }
             return err;
