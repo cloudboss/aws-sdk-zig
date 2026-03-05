@@ -79,9 +79,24 @@ test-integration: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
 		-w /code \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/run.sh"
 
+test-live: $(HAS_IMAGE_LOCAL) | $(DIR_OUT)
+	@docker run --rm \
+		-v $(DIR_ROOT):/code \
+		-v $(HOME)/.aws:/home/build/.aws:ro \
+		-e AWS_ACCESS_KEY_ID \
+		-e AWS_SECRET_ACCESS_KEY \
+		-e AWS_SESSION_TOKEN \
+		-e AWS_PROFILE \
+		-e AWS_DEFAULT_REGION \
+		-e "ZIG_BUILD_FLAGS=$(ZIG_BUILD_FLAGS)" \
+		-e LIVE_SCENARIO=$(LIVE_SCENARIO) \
+		-w /code \
+		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/live/run-live.sh"
+
 # Set SERVICES_FILTER to a comma-separated list to generate only a subset,
 # e.g.: SERVICES_FILTER=sts,s3 make codegen
 SERVICES_FILTER ?=
+LIVE_SCENARIO ?=
 
 fetch-models: | $(DIR_OUT)
 	@curl -sL -o $(DIR_OUT)/api-models-aws.zip \
@@ -110,4 +125,4 @@ certs:
 clean:
 	@rm -rf $(DIR_OUT)
 
-.PHONY: build test test-integration fetch-models codegen certs clean
+.PHONY: build test test-integration test-live fetch-models codegen certs clean

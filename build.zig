@@ -137,4 +137,58 @@ pub fn build(b: *std.Build) void {
         const step = b.step(step_name, step_desc);
         step.dependOn(&run_integration.step);
     }
+
+    // Live tests: auto-discover scenarios from tests/integration/live/
+    const live_scenarios_path = "tests/integration/live";
+    var live_scenarios_dir = b.build_root.handle.openDir(
+        live_scenarios_path,
+        .{ .iterate = true },
+    ) catch return;
+    defer live_scenarios_dir.close();
+
+    var live_iter = live_scenarios_dir.iterate();
+    while (live_iter.next() catch null) |entry| {
+        if (entry.kind != .directory) continue;
+
+        const live_test_path = b.fmt(
+            "{s}/{s}/test.zig",
+            .{ live_scenarios_path, entry.name },
+        );
+
+        // Verify test.zig exists
+        b.build_root.handle.access(live_test_path, .{}) catch continue;
+
+        const live_module = b.createModule(.{
+            .root_source_file = b.path(live_test_path),
+            .target = target,
+            .optimize = optimize,
+        });
+        live_module.addImport("aws", aws_module);
+
+        // Add service module imports for this scenario
+        var live_svc_mod_iter = service_modules.iterator();
+        while (live_svc_mod_iter.next()) |svc_entry| {
+            live_module.addImport(
+                svc_entry.key_ptr.*,
+                svc_entry.value_ptr.*,
+            );
+        }
+
+        const live_test = b.addTest(.{
+            .root_module = live_module,
+            .test_runner = .{
+                .path = zest.path("src/root.zig"),
+                .mode = .simple,
+            },
+        });
+
+        const run_live_test = b.addRunArtifact(live_test);
+        const live_step_name = b.fmt("live-test-{s}", .{entry.name});
+        const live_step_desc = b.fmt(
+            "Run {s} live tests",
+            .{entry.name},
+        );
+        const live_step = b.step(live_step_name, live_step_desc);
+        live_step.dependOn(&run_live_test.step);
+    }
 }
