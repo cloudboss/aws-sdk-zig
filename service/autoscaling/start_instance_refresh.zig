@@ -280,7 +280,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                                             const n_6 = idx_6 + 1;
                                             {
                                                 var prefix_buf: [256]u8 = undefined;
-                                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BaselinePerformanceFactors.Cpu.References.item.{d}.InstanceFamily=", .{n, n_6}) catch continue;
+                                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BaselinePerformanceFactors.Cpu.Reference.item.{d}.InstanceFamily=", .{n, n_6}) catch continue;
                                                 try body_buf.appendSlice(allocator, field_prefix);
                                                 if (item_6.instance_family) |fv_7| {
                                                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_7);

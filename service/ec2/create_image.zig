@@ -154,7 +154,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.DeviceName=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.DeviceName=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.device_name) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -163,7 +163,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
             if (item.ebs) |sv_1| {
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.Ebs.AvailabilityZone=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.AvailabilityZone=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.availability_zone) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -171,7 +171,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.Ebs.AvailabilityZoneId=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.AvailabilityZoneId=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.availability_zone_id) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -179,7 +179,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.Ebs.DeleteOnTermination=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.DeleteOnTermination=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.delete_on_termination) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_2) "true" else "false");
@@ -187,7 +187,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.Ebs.EbsCardIndex=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.EbsCardIndex=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.ebs_card_index) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
@@ -195,7 +195,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.Ebs.Encrypted=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.Encrypted=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.encrypted) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_2) "true" else "false");
@@ -203,7 +203,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.Ebs.Iops=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.Iops=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.iops) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
@@ -211,7 +211,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.Ebs.KmsKeyId=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.KmsKeyId=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.kms_key_id) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -219,7 +219,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.Ebs.OutpostArn=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.OutpostArn=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.outpost_arn) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -227,7 +227,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.Ebs.SnapshotId=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.SnapshotId=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.snapshot_id) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -235,7 +235,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.Ebs.Throughput=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.Throughput=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.throughput) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
@@ -243,7 +243,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.Ebs.VolumeInitializationRate=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.VolumeInitializationRate=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.volume_initialization_rate) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
@@ -251,7 +251,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.Ebs.VolumeSize=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.VolumeSize=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.volume_size) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
@@ -259,7 +259,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.Ebs.VolumeType=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.VolumeType=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.volume_type) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
@@ -268,7 +268,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.NoDevice=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.NoDevice=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.no_device) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -276,7 +276,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.BlockDeviceMapping.{d}.VirtualName=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.VirtualName=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.virtual_name) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -309,7 +309,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
@@ -320,7 +320,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.key) |fv_2| {
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -328,7 +328,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.value) |fv_2| {
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);

@@ -248,6 +248,75 @@ test "DescribeVolumes with explicit Filter type" {
     _ = result.volumes orelse return error.MissingField;
 }
 
+test "DescribeVolumes filters by volume ID" {
+    const allocator = std.testing.allocator;
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    const vol_result = try shared_client.createVolume(
+        alloc,
+        .{ .availability_zone = "us-east-1a", .size = 1 },
+        .{},
+    );
+    const volume_id = vol_result.volume_id orelse
+        return error.MissingVolumeId;
+
+    const by_id = try shared_client.describeVolumes(
+        alloc,
+        .{ .volume_ids = &.{volume_id} },
+        .{},
+    );
+    const vols_by_id = by_id.volumes orelse {
+        _ = shared_client.deleteVolume(
+            alloc,
+            .{ .volume_id = volume_id },
+            .{},
+        ) catch {};
+        return error.MissingField;
+    };
+    try std.testing.expectEqualStrings(
+        volume_id,
+        vols_by_id[0].volume_id orelse
+            return error.MissingField,
+    );
+
+    const by_filter = try shared_client.describeVolumes(
+        alloc,
+        .{ .filters = &.{.{
+            .name = "volume-id",
+            .values = &.{volume_id},
+        }} },
+        .{},
+    );
+    const vols_by_filter = by_filter.volumes orelse {
+        _ = shared_client.deleteVolume(
+            alloc,
+            .{ .volume_id = volume_id },
+            .{},
+        ) catch {};
+        return error.MissingField;
+    };
+    try std.testing.expectEqualStrings(
+        volume_id,
+        vols_by_filter[0].volume_id orelse
+            return error.MissingField,
+    );
+
+    try std.testing.expectEqualStrings(
+        vols_by_id[0].volume_id orelse
+            return error.MissingField,
+        vols_by_filter[0].volume_id orelse
+            return error.MissingField,
+    );
+
+    _ = try shared_client.deleteVolume(
+        alloc,
+        .{ .volume_id = volume_id },
+        .{},
+    );
+}
+
 test "DescribeRegions returns AWS regions" {
     var arena = std.heap.ArenaAllocator.init(gpa.allocator());
     defer arena.deinit();

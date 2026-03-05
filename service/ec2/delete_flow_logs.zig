@@ -68,7 +68,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteFlowLogsInput, co
     for (input.flow_log_ids, 0..) |item, idx| {
         const n = idx + 1;
         var prefix_buf: [256]u8 = undefined;
-        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&FlowLogId.item.{d}=", .{n}) catch continue;
+        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&FlowLogId.{d}=", .{n}) catch continue;
         try body_buf.appendSlice(allocator, field_prefix);
         try aws.url.appendUrlEncoded(allocator, &body_buf, item);
     }

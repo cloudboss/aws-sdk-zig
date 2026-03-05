@@ -115,7 +115,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInstanceEventWind
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
@@ -126,7 +126,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInstanceEventWind
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.key) |fv_2| {
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -134,7 +134,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInstanceEventWind
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.value) |fv_2| {
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -149,7 +149,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInstanceEventWind
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.member.{d}.EndHour=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.{d}.EndHour=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.end_hour) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -157,7 +157,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInstanceEventWind
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.member.{d}.EndWeekDay=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.{d}.EndWeekDay=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.end_week_day) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
@@ -165,7 +165,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInstanceEventWind
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.member.{d}.StartHour=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.{d}.StartHour=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.start_hour) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -173,7 +173,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInstanceEventWind
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.member.{d}.StartWeekDay=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.{d}.StartWeekDay=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.start_week_day) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());

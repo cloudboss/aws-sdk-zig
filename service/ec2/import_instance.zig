@@ -80,7 +80,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportInstanceInput, co
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImage.member.{d}.Description=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImage.{d}.Description=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.description) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -89,19 +89,19 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportInstanceInput, co
             if (item.image) |sv_1| {
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImage.member.{d}.Image.Bytes=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImage.{d}.Image.Bytes=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv_1.bytes}) catch "");
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImage.member.{d}.Image.Format=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImage.{d}.Image.Format=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.format.wireName());
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImage.member.{d}.Image.ImportManifestUrl=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImage.{d}.Image.ImportManifestUrl=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.import_manifest_url);
                 }
@@ -109,7 +109,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportInstanceInput, co
             if (item.volume) |sv_1| {
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImage.member.{d}.Volume.Size=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DiskImage.{d}.Volume.Size=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv_1.size}) catch "");
                 }
@@ -133,7 +133,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportInstanceInput, co
             for (list_d0, 0..) |item, idx| {
                 const n = idx + 1;
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.GroupIds.SecurityGroupId.{d}=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.GroupId.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }
@@ -142,7 +142,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportInstanceInput, co
             for (list_d0, 0..) |item, idx| {
                 const n = idx + 1;
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.GroupNames.SecurityGroup.{d}=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.GroupName.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }

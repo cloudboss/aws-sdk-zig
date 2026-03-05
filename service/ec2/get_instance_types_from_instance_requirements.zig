@@ -90,7 +90,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
     for (input.architecture_types, 0..) |item, idx| {
         const n = idx + 1;
         var prefix_buf: [256]u8 = undefined;
-        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ArchitectureType.item.{d}=", .{n}) catch continue;
+        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ArchitectureType.{d}=", .{n}) catch continue;
         try body_buf.appendSlice(allocator, field_prefix);
         try aws.url.appendUrlEncoded(allocator, &body_buf, item);
     }
@@ -116,7 +116,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
         for (list_d0, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AcceleratorManufacturers.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AcceleratorManufacturer.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -125,7 +125,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
         for (list_d0, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AcceleratorNames.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AcceleratorName.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -144,7 +144,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
         for (list_d0, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AcceleratorTypes.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AcceleratorType.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -153,7 +153,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
         for (list_d0, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AllowedInstanceTypes.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AllowedInstanceType.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -179,7 +179,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
                     const n = idx + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.BaselinePerformanceFactors.Cpu.References.item.{d}.InstanceFamily=", .{n}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.BaselinePerformanceFactors.Cpu.Reference.{d}.InstanceFamily=", .{n}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item.instance_family) |fv_3| {
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
@@ -197,7 +197,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
         for (list_d0, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.CpuManufacturers.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.CpuManufacturer.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -206,7 +206,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
         for (list_d0, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.ExcludedInstanceTypes.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.ExcludedInstanceType.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -215,7 +215,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
         for (list_d0, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.InstanceGenerations.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.InstanceGeneration.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -228,7 +228,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
         for (list_d0, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.LocalStorageTypes.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.LocalStorageType.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -316,7 +316,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
     for (input.virtualization_types, 0..) |item, idx| {
         const n = idx + 1;
         var prefix_buf: [256]u8 = undefined;
-        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&VirtualizationType.item.{d}=", .{n}) catch continue;
+        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&VirtualizationType.{d}=", .{n}) catch continue;
         try body_buf.appendSlice(allocator, field_prefix);
         try aws.url.appendUrlEncoded(allocator, &body_buf, item);
     }

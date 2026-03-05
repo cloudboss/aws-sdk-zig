@@ -116,7 +116,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInstanceTopolog
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.Filter.{d}.Name=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.{d}.Name=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.name) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -127,7 +127,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInstanceTopolog
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.Filter.{d}.Values.item.{d}=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.{d}.Value.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
                     }
@@ -139,7 +139,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInstanceTopolog
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&GroupName.member.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&GroupName.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -148,7 +148,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInstanceTopolog
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceId.member.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }

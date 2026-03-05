@@ -766,7 +766,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAutoScalingGroupI
                                         const n_5 = idx_5 + 1;
                                         {
                                             var prefix_buf: [256]u8 = undefined;
-                                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BaselinePerformanceFactors.Cpu.References.item.{d}.InstanceFamily=", .{n, n_5}) catch continue;
+                                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BaselinePerformanceFactors.Cpu.Reference.item.{d}.InstanceFamily=", .{n, n_5}) catch continue;
                                             try body_buf.appendSlice(allocator, field_prefix);
                                             if (item_5.instance_family) |fv_6| {
                                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_6);

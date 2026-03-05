@@ -74,7 +74,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyTransitGatewayVpc
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddSubnetIds.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddSubnetIds.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -105,7 +105,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyTransitGatewayVpc
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveSubnetIds.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveSubnetIds.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }

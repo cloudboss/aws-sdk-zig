@@ -288,7 +288,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInstanceTypesIn
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.Filter.{d}.Name=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.{d}.Name=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.name) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -299,7 +299,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInstanceTypesIn
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.Filter.{d}.Values.item.{d}=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.{d}.Value.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
                     }
@@ -311,7 +311,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInstanceTypesIn
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceType.member.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceType.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }

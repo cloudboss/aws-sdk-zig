@@ -112,7 +112,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpcEndpointInput,
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddRouteTableId.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddRouteTableId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -121,7 +121,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpcEndpointInput,
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddSecurityGroupId.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddSecurityGroupId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -130,7 +130,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpcEndpointInput,
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddSubnetId.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddSubnetId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -152,7 +152,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpcEndpointInput,
             for (list_d0, 0..) |item, idx| {
                 const n = idx + 1;
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DnsOptions.PrivateDnsSpecifiedDomains.item.{d}=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DnsOptions.PrivateDnsSpecifiedDomain.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }
@@ -178,7 +178,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpcEndpointInput,
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveRouteTableId.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveRouteTableId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -187,7 +187,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpcEndpointInput,
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveSecurityGroupId.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveSecurityGroupId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -196,7 +196,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpcEndpointInput,
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveSubnetId.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveSubnetId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -210,7 +210,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpcEndpointInput,
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfiguration.item.{d}.Ipv4=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfiguration.{d}.Ipv4=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.ipv_4) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -218,7 +218,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpcEndpointInput,
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfiguration.item.{d}.Ipv6=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfiguration.{d}.Ipv6=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.ipv_6) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -226,7 +226,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpcEndpointInput,
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfiguration.item.{d}.SubnetId=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfiguration.{d}.SubnetId=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.subnet_id) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);

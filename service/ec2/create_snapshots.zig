@@ -124,7 +124,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSnapshotsInput, c
         for (list_d0, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceSpecification.ExcludeDataVolumeIds.VolumeId.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceSpecification.ExcludeDataVolumeId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -144,7 +144,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSnapshotsInput, c
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
@@ -155,7 +155,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSnapshotsInput, c
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.key) |fv_2| {
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -163,7 +163,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSnapshotsInput, c
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.value) |fv_2| {
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);

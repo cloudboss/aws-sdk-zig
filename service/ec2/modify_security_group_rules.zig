@@ -73,7 +73,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySecurityGroupRule
         if (item.security_group_rule) |sv_1| {
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.item.{d}.SecurityGroupRule.CidrIpv4=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.{d}.SecurityGroupRule.CidrIpv4=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.cidr_ipv_4) |fv_2| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -81,7 +81,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySecurityGroupRule
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.item.{d}.SecurityGroupRule.CidrIpv6=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.{d}.SecurityGroupRule.CidrIpv6=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.cidr_ipv_6) |fv_2| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -89,7 +89,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySecurityGroupRule
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.item.{d}.SecurityGroupRule.Description=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.{d}.SecurityGroupRule.Description=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.description) |fv_2| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -97,7 +97,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySecurityGroupRule
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.item.{d}.SecurityGroupRule.FromPort=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.{d}.SecurityGroupRule.FromPort=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.from_port) |fv_2| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
@@ -105,7 +105,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySecurityGroupRule
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.item.{d}.SecurityGroupRule.IpProtocol=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.{d}.SecurityGroupRule.IpProtocol=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.ip_protocol) |fv_2| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -113,7 +113,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySecurityGroupRule
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.item.{d}.SecurityGroupRule.PrefixListId=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.{d}.SecurityGroupRule.PrefixListId=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.prefix_list_id) |fv_2| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -121,7 +121,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySecurityGroupRule
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.item.{d}.SecurityGroupRule.ReferencedGroupId=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.{d}.SecurityGroupRule.ReferencedGroupId=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.referenced_group_id) |fv_2| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -129,7 +129,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySecurityGroupRule
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.item.{d}.SecurityGroupRule.ToPort=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.{d}.SecurityGroupRule.ToPort=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.to_port) |fv_2| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
@@ -138,7 +138,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifySecurityGroupRule
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.item.{d}.SecurityGroupRuleId=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupRule.{d}.SecurityGroupRuleId=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item.security_group_rule_id);
         }

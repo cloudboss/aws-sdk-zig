@@ -206,7 +206,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyClientVpnEndpoint
             for (list_d0, 0..) |item, idx| {
                 const n = idx + 1;
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DnsServers.CustomDnsServers.item.{d}=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DnsServers.CustomDnsServers.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }
@@ -224,7 +224,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyClientVpnEndpoint
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupId.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecurityGroupId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }

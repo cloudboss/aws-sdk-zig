@@ -140,7 +140,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                 const n = idx + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.DPDTimeoutAction=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.DPDTimeoutAction=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.dpd_timeout_action) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -148,7 +148,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.DPDTimeoutSeconds=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.DPDTimeoutSeconds=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.dpd_timeout_seconds) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -156,7 +156,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.EnableTunnelLifecycleControl=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.EnableTunnelLifecycleControl=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.enable_tunnel_lifecycle_control) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_1) "true" else "false");
@@ -167,7 +167,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                         const n_1 = idx_1 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.IKEVersions.item.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.IKEVersion.{d}.Value=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (item_1.value) |fv_2| {
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -179,7 +179,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                     if (sv_1.cloud_watch_log_options) |sv_2| {
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.LogOptions.CloudWatchLogOptions.BgpLogEnabled=", .{n}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.LogOptions.CloudWatchLogOptions.BgpLogEnabled=", .{n}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.bgp_log_enabled) |fv_3| {
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_3) "true" else "false");
@@ -187,7 +187,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.LogOptions.CloudWatchLogOptions.BgpLogGroupArn=", .{n}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.LogOptions.CloudWatchLogOptions.BgpLogGroupArn=", .{n}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.bgp_log_group_arn) |fv_3| {
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
@@ -195,7 +195,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.LogOptions.CloudWatchLogOptions.BgpLogOutputFormat=", .{n}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.LogOptions.CloudWatchLogOptions.BgpLogOutputFormat=", .{n}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.bgp_log_output_format) |fv_3| {
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
@@ -203,7 +203,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.LogOptions.CloudWatchLogOptions.LogEnabled=", .{n}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.LogOptions.CloudWatchLogOptions.LogEnabled=", .{n}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.log_enabled) |fv_3| {
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_3) "true" else "false");
@@ -211,7 +211,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.LogOptions.CloudWatchLogOptions.LogGroupArn=", .{n}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.LogOptions.CloudWatchLogOptions.LogGroupArn=", .{n}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.log_group_arn) |fv_3| {
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
@@ -219,7 +219,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.LogOptions.CloudWatchLogOptions.LogOutputFormat=", .{n}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.LogOptions.CloudWatchLogOptions.LogOutputFormat=", .{n}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.log_output_format) |fv_3| {
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
@@ -232,7 +232,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                         const n_1 = idx_1 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase1DHGroupNumbers.item.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.Phase1DHGroupNumber.{d}.Value=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (item_1.value) |fv_2| {
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
@@ -245,7 +245,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                         const n_1 = idx_1 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase1EncryptionAlgorithms.item.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.Phase1EncryptionAlgorithm.{d}.Value=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (item_1.value) |fv_2| {
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -258,7 +258,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                         const n_1 = idx_1 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase1IntegrityAlgorithms.item.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.Phase1IntegrityAlgorithm.{d}.Value=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (item_1.value) |fv_2| {
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -268,7 +268,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase1LifetimeSeconds=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.Phase1LifetimeSeconds=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.phase_1_lifetime_seconds) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -279,7 +279,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                         const n_1 = idx_1 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase2DHGroupNumbers.item.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.Phase2DHGroupNumber.{d}.Value=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (item_1.value) |fv_2| {
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
@@ -292,7 +292,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                         const n_1 = idx_1 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase2EncryptionAlgorithms.item.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.Phase2EncryptionAlgorithm.{d}.Value=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (item_1.value) |fv_2| {
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -305,7 +305,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                         const n_1 = idx_1 + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase2IntegrityAlgorithms.item.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.Phase2IntegrityAlgorithm.{d}.Value=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             if (item_1.value) |fv_2| {
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -315,7 +315,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.Phase2LifetimeSeconds=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.Phase2LifetimeSeconds=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.phase_2_lifetime_seconds) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -323,7 +323,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.PreSharedKey=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.PreSharedKey=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.pre_shared_key) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -331,7 +331,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.RekeyFuzzPercentage=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.RekeyFuzzPercentage=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.rekey_fuzz_percentage) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -339,7 +339,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.RekeyMarginTimeSeconds=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.RekeyMarginTimeSeconds=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.rekey_margin_time_seconds) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -347,7 +347,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.ReplayWindowSize=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.ReplayWindowSize=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.replay_window_size) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -355,7 +355,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.StartupAction=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.StartupAction=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.startup_action) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -363,7 +363,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.TunnelInsideCidr=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.TunnelInsideCidr=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.tunnel_inside_cidr) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -371,7 +371,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.member.{d}.TunnelInsideIpv6Cidr=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.TunnelOptions.{d}.TunnelInsideIpv6Cidr=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.tunnel_inside_ipv_6_cidr) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -389,7 +389,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.ResourceType=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.ResourceType=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
@@ -400,7 +400,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Key=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.key) |fv_2| {
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -408,7 +408,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConnectionInpu
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.item.{d}.Tags.item.{d}.Value=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.value) |fv_2| {
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);

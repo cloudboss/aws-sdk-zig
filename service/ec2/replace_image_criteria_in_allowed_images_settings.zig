@@ -71,7 +71,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ReplaceImageCriteriaInA
             if (item.creation_date_condition) |sv_1| {
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriterion.ImageCriterion.{d}.CreationDateCondition.MaximumDaysSinceCreated=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriterion.{d}.CreationDateCondition.MaximumDaysSinceCreated=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.maximum_days_since_created) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
@@ -81,7 +81,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ReplaceImageCriteriaInA
             if (item.deprecation_time_condition) |sv_1| {
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriterion.ImageCriterion.{d}.DeprecationTimeCondition.MaximumDaysSinceDeprecated=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriterion.{d}.DeprecationTimeCondition.MaximumDaysSinceDeprecated=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.maximum_days_since_deprecated) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
@@ -93,7 +93,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ReplaceImageCriteriaInA
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriterion.ImageCriterion.{d}.ImageNames.item.{d}=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriterion.{d}.ImageName.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
                     }
@@ -104,7 +104,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ReplaceImageCriteriaInA
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriterion.ImageCriterion.{d}.ImageProviders.item.{d}=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriterion.{d}.ImageProvider.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
                     }
@@ -115,7 +115,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ReplaceImageCriteriaInA
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriterion.ImageCriterion.{d}.MarketplaceProductCodes.item.{d}=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriterion.{d}.MarketplaceProductCode.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
                     }

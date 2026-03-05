@@ -67,7 +67,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateInstanceEventW
         for (list_d0, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociationTarget.DedicatedHostIds.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociationTarget.DedicatedHostId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -76,7 +76,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateInstanceEventW
         for (list_d0, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociationTarget.InstanceIds.item.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociationTarget.InstanceId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -86,7 +86,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateInstanceEventW
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociationTarget.InstanceTags.item.{d}.Key=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociationTarget.InstanceTag.{d}.Key=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.key) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -94,7 +94,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateInstanceEventW
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociationTarget.InstanceTags.item.{d}.Value=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociationTarget.InstanceTag.{d}.Value=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.value) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);

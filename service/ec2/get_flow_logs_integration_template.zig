@@ -79,13 +79,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFlowLogsIntegrationT
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateService.AthenaIntegrations.item.{d}.IntegrationResultS3DestinationArn=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateService.AthenaIntegration.{d}.IntegrationResultS3DestinationArn=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, item.integration_result_s3_destination_arn);
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateService.AthenaIntegrations.item.{d}.PartitionEndDate=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateService.AthenaIntegration.{d}.PartitionEndDate=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.partition_end_date) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -93,13 +93,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFlowLogsIntegrationT
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateService.AthenaIntegrations.item.{d}.PartitionLoadFrequency=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateService.AthenaIntegration.{d}.PartitionLoadFrequency=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, item.partition_load_frequency.wireName());
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateService.AthenaIntegrations.item.{d}.PartitionStartDate=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateService.AthenaIntegration.{d}.PartitionStartDate=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.partition_start_date) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");

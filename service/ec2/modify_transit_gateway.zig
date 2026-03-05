@@ -79,7 +79,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyTransitGatewayInp
             for (list_d0, 0..) |item, idx| {
                 const n = idx + 1;
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.AddTransitGatewayCidrBlocks.item.{d}=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.AddTransitGatewayCidrBlocks.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }
@@ -120,7 +120,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyTransitGatewayInp
             for (list_d0, 0..) |item, idx| {
                 const n = idx + 1;
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.RemoveTransitGatewayCidrBlocks.item.{d}=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Options.RemoveTransitGatewayCidrBlocks.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }

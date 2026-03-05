@@ -26,6 +26,18 @@ import software.amazon.smithy.zig.protocols.ProtocolGenerator
 
 open class AwsQueryProtocol : ProtocolGenerator {
 
+    protected open fun useListMemberName(): Boolean = true
+
+    protected fun queryNameForMember(memberName: String, memberShape: MemberShape): String {
+        return memberShape.getTrait(Ec2QueryNameTrait::class.java)
+            .map { it.value }
+            .orElseGet {
+                memberShape.getTrait(XmlNameTrait::class.java)
+                    .map { it.value.replaceFirstChar { c -> c.uppercaseChar() } }
+                    .orElse(memberName)
+            }
+    }
+
     override fun contentType(): String = "application/x-www-form-urlencoded"
 
     override fun needsXmlSerde(): Boolean = true
@@ -67,17 +79,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         // Serialize input fields
         for ((memberName, memberShape) in ctx.inputShape.allMembers) {
             val targetShape = ctx.model.expectShape(memberShape.target)
-            // EC2 Query protocol uses ec2QueryName trait for the wire name.
-            // When absent, fall back to xmlName (capitalized) which carries the
-            // correct wire name for members like Description -> GroupDescription.
-            // Final fallback is the Smithy member name itself.
-            val queryName = memberShape.getTrait(Ec2QueryNameTrait::class.java)
-                .map { it.value }
-                .orElseGet {
-                    memberShape.getTrait(XmlNameTrait::class.java)
-                        .map { it.value.replaceFirstChar { c -> c.uppercaseChar() } }
-                        .orElse(memberName)
-                }
+            val queryName = queryNameForMember(memberName, memberShape)
             writeFieldSerializer(writer, ctx, queryName, memberShape, targetShape, "input")
         }
 
@@ -217,7 +219,8 @@ open class AwsQueryProtocol : ProtocolGenerator {
         for ((memberName, memberShape) in structShape.allMembers) {
             val targetShape = ctx.model.expectShape(memberShape.target)
             val fieldName = NamingUtil.toFieldName(memberName)
-            val qualifiedName = "$prefix.$memberName"
+            val queryName = queryNameForMember(memberName, memberShape)
+            val qualifiedName = "$prefix.$queryName"
 
             when {
                 ctx.isScalarType(targetShape) -> {
@@ -284,7 +287,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
             writer.openBlock("for (\$L, 0..) |item, idx| {", accessor)
             writer.write("const n = idx + 1;")
 
-            val innerPrefix = "$prefix.$xmlName.{d}"
+            val innerPrefix = if (useListMemberName()) "$prefix.$xmlName.{d}" else "$prefix.{d}"
             writeStructFieldSerializersInList(writer, ctx, innerPrefix, elementShape, "item", listOf("n"), depth + 1)
 
             writer.closeBlock("}")
@@ -292,10 +295,17 @@ open class AwsQueryProtocol : ProtocolGenerator {
             writer.openBlock("for (\$L, 0..) |item, idx| {", accessor)
             writer.write("const n = idx + 1;")
             writer.write("var prefix_buf: [256]u8 = undefined;")
-            writer.write(
-                "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.\$L.{d}=\", .{n}) catch continue;",
-                prefix, xmlName,
-            )
+            if (useListMemberName()) {
+                writer.write(
+                    "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.\$L.{d}=\", .{n}) catch continue;",
+                    prefix, xmlName,
+                )
+            } else {
+                writer.write(
+                    "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.{d}=\", .{n}) catch continue;",
+                    prefix,
+                )
+            }
             writer.write("try body_buf.appendSlice(allocator, field_prefix);")
             writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, item);")
             writer.closeBlock("}")
@@ -314,7 +324,8 @@ open class AwsQueryProtocol : ProtocolGenerator {
         for ((memberName, memberShape) in structShape.allMembers) {
             val targetShape = ctx.model.expectShape(memberShape.target)
             val fieldName = NamingUtil.toFieldName(memberName)
-            val qualifiedPrefix = "$prefixTemplate.$memberName"
+            val queryName = queryNameForMember(memberName, memberShape)
+            val qualifiedPrefix = "$prefixTemplate.$queryName"
 
             when {
                 ctx.isScalarType(targetShape) -> {
@@ -358,7 +369,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
                     val xmlName = listMember.getTrait(XmlNameTrait::class.java)
                         .map { it.value }
                         .orElse("member")
-                    val innerPrefix = "$qualifiedPrefix.$xmlName.{d}"
+                    val innerPrefix = if (useListMemberName()) "$qualifiedPrefix.$xmlName.{d}" else "$qualifiedPrefix.{d}"
                     val innerVar = "item_$depth"
                     val innerIdx = "idx_$depth"
                     val innerN = "n_$depth"

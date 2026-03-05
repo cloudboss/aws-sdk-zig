@@ -5,6 +5,8 @@ import software.amazon.smithy.zig.protocols.OperationContext
 
 class Ec2QueryProtocol : AwsQueryProtocol() {
 
+    override fun useListMemberName(): Boolean = false
+
     override fun writeSkipToResultWrapper(writer: ZigWriter, ctx: OperationContext) {
         // EC2 Query: members are directly under root element, no Result wrapper
         writer.openBlock("while (try reader.next()) |event| {")

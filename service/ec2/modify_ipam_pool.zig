@@ -115,7 +115,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyIpamPoolInput, co
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddAllocationResourceTag.item.{d}.Key=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddAllocationResourceTag.{d}.Key=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.key) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -123,7 +123,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyIpamPoolInput, co
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddAllocationResourceTag.item.{d}.Value=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddAllocationResourceTag.{d}.Value=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.value) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -166,7 +166,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyIpamPoolInput, co
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveAllocationResourceTag.item.{d}.Key=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveAllocationResourceTag.{d}.Key=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.key) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -174,7 +174,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyIpamPoolInput, co
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveAllocationResourceTag.item.{d}.Value=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveAllocationResourceTag.{d}.Value=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.value) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);

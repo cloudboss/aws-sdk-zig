@@ -72,7 +72,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTagsInput, config
     for (input.resources, 0..) |item, idx| {
         const n = idx + 1;
         var prefix_buf: [256]u8 = undefined;
-        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceId.member.{d}=", .{n}) catch continue;
+        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ResourceId.{d}=", .{n}) catch continue;
         try body_buf.appendSlice(allocator, field_prefix);
         try aws.url.appendUrlEncoded(allocator, &body_buf, item);
     }
@@ -80,7 +80,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTagsInput, config
         const n = idx + 1;
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tag.item.{d}.Key=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tag.{d}.Key=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             if (item.key) |fv_1| {
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -88,7 +88,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTagsInput, config
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tag.item.{d}.Value=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tag.{d}.Value=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             if (item.value) |fv_1| {
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);

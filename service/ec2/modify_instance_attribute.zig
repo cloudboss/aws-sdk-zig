@@ -202,7 +202,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceAttribute
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.item.{d}.DeviceName=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.DeviceName=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.device_name) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -211,7 +211,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceAttribute
             if (item.ebs) |sv_1| {
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.item.{d}.Ebs.DeleteOnTermination=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.DeleteOnTermination=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.delete_on_termination) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_2) "true" else "false");
@@ -219,7 +219,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceAttribute
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.item.{d}.Ebs.VolumeId=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.Ebs.VolumeId=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.volume_id) |fv_2| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
@@ -228,7 +228,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceAttribute
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.item.{d}.NoDevice=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.NoDevice=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.no_device) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -236,7 +236,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceAttribute
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.item.{d}.VirtualName=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMapping.{d}.VirtualName=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 if (item.virtual_name) |fv_1| {
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -276,7 +276,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceAttribute
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&GroupId.groupId.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&GroupId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }

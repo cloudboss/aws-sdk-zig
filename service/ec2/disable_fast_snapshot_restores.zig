@@ -81,7 +81,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisableFastSnapshotRest
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZoneId.AvailabilityZoneId.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZoneId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -90,7 +90,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisableFastSnapshotRest
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZone.AvailabilityZone.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZone.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -102,7 +102,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisableFastSnapshotRest
     for (input.source_snapshot_ids, 0..) |item, idx| {
         const n = idx + 1;
         var prefix_buf: [256]u8 = undefined;
-        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SourceSnapshotId.SnapshotId.{d}=", .{n}) catch continue;
+        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SourceSnapshotId.{d}=", .{n}) catch continue;
         try body_buf.appendSlice(allocator, field_prefix);
         try aws.url.appendUrlEncoded(allocator, &body_buf, item);
     }

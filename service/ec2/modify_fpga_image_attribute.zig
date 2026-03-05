@@ -110,7 +110,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFpgaImageAttribut
                 const n = idx + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Add.item.{d}.Group=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Add.{d}.Group=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.group) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
@@ -118,7 +118,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFpgaImageAttribut
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Add.item.{d}.UserId=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Add.{d}.UserId=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.user_id) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -131,7 +131,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFpgaImageAttribut
                 const n = idx + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Remove.item.{d}.Group=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Remove.{d}.Group=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.group) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
@@ -139,7 +139,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFpgaImageAttribut
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Remove.item.{d}.UserId=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Remove.{d}.UserId=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.user_id) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
@@ -160,7 +160,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFpgaImageAttribut
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ProductCode.ProductCode.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ProductCode.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -169,7 +169,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFpgaImageAttribut
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&UserGroup.UserGroup.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&UserGroup.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
@@ -178,7 +178,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFpgaImageAttribut
         for (list, 0..) |item, idx| {
             const n = idx + 1;
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&UserId.UserId.{d}=", .{n}) catch continue;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&UserId.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }

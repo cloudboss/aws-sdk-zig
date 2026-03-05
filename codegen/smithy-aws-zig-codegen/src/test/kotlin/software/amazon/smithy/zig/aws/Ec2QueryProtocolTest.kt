@@ -9,11 +9,13 @@ import software.amazon.smithy.codegen.core.WriterDelegator
 import software.amazon.smithy.model.Model
 import software.amazon.smithy.model.shapes.ListShape
 import software.amazon.smithy.model.shapes.MapShape
+import software.amazon.smithy.model.shapes.MemberShape
 import software.amazon.smithy.model.shapes.OperationShape
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.model.shapes.ShapeId
 import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.traits.ErrorTrait
+import software.amazon.smithy.model.traits.XmlNameTrait
 import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.ZigSettings
 import software.amazon.smithy.zig.ZigSymbolVisitor
@@ -261,6 +263,37 @@ class Ec2QueryProtocolTest {
                     .build()
             )
             .addShape(
+                ListShape.builder()
+                    .id("test#ValueList")
+                    .member(ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#Filter")
+                    .addMember("Name", ShapeId.from("smithy.api#String"))
+                    .addMember(
+                        MemberShape.builder()
+                            .id("test#Filter\$Values")
+                            .target(ShapeId.from("test#ValueList"))
+                            .addTrait(XmlNameTrait("Value"))
+                            .build()
+                    )
+                    .build()
+            )
+            .addShape(
+                ListShape.builder()
+                    .id("test#FilterList")
+                    .member(ShapeId.from("test#Filter"))
+                    .build()
+            )
+            .addShape(
+                ListShape.builder()
+                    .id("test#InstanceIdList")
+                    .member(ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            .addShape(
                 MapShape.builder()
                     .id("test#StringMap")
                     .key(ShapeId.from("smithy.api#String"))
@@ -272,8 +305,10 @@ class Ec2QueryProtocolTest {
                     .id("test#CreateInstanceRequest")
                     .addMember("Instance", ShapeId.from("test#Instance"))
                     .addMember("Tags", ShapeId.from("test#TagList"))
+                    .addMember("Filters", ShapeId.from("test#FilterList"))
                     .addMember("Wrapper", ShapeId.from("test#Wrapper"))
                     .addMember("Labels", ShapeId.from("test#StringMap"))
+                    .addMember("InstanceIds", ShapeId.from("test#InstanceIdList"))
                     .build()
             )
             .addShape(
@@ -316,8 +351,21 @@ class Ec2QueryProtocolTest {
         val files = generateFilesFromModel(buildNestedTestModel(), Ec2QueryProtocol())
         val op = files["create_instance.zig"]!!
 
-        assertTrue(op.contains("Tags.member.{d}.Key"), "Missing Tags.member.{d}.Key")
-        assertTrue(op.contains("Tags.member.{d}.Value"), "Missing Tags.member.{d}.Value")
+        assertTrue(op.contains("Tags.{d}.Key"), "Missing Tags.{d}.Key")
+        assertTrue(op.contains("Tags.{d}.Value"), "Missing Tags.{d}.Value")
+        assertFalse(
+            op.contains("Tags.member.{d}"),
+            "EC2 Query should NOT include member in list prefix",
+        )
+    }
+
+    @Test
+    fun awsQueryListOfStructsIncludesMember() {
+        val files = generateFilesFromModel(buildNestedTestModel(), AwsQueryProtocol())
+        val op = files["create_instance.zig"]!!
+
+        assertTrue(op.contains("Tags.member.{d}.Key"), "AWS Query should use Tags.member.{d}.Key")
+        assertTrue(op.contains("Tags.member.{d}.Value"), "AWS Query should use Tags.member.{d}.Value")
     }
 
     @Test
@@ -379,5 +427,37 @@ class Ec2QueryProtocolTest {
                 op.contains("appendUrlEncoded(allocator, &body_buf, entry.key)"),
             "Map serializer should URL-encode map entry values",
         )
+    }
+
+    @Test
+    fun ec2QueryScalarListOmitsMemberName() {
+        val files = generateFilesFromModel(buildNestedTestModel(), Ec2QueryProtocol())
+        val op = files["create_instance.zig"]!!
+
+        assertTrue(op.contains("InstanceIds.{d}="), "EC2 Query scalar list should use InstanceIds.{d}=")
+        assertFalse(
+            op.contains("InstanceIds.member.{d}"),
+            "EC2 Query should NOT include member in scalar list prefix",
+        )
+    }
+
+    @Test
+    fun awsQueryScalarListIncludesMember() {
+        val files = generateFilesFromModel(buildNestedTestModel(), AwsQueryProtocol())
+        val op = files["create_instance.zig"]!!
+
+        assertTrue(
+            op.contains("InstanceIds.member.{d}="),
+            "AWS Query scalar list should use InstanceIds.member.{d}=",
+        )
+    }
+
+    @Test
+    fun structMemberUsesXmlNameInListPrefix() {
+        val files = generateFilesFromModel(buildNestedTestModel(), Ec2QueryProtocol())
+        val op = files["create_instance.zig"]!!
+
+        assertTrue(op.contains("Filters.{d}.Value.{d}"), "Should use xmlName 'Value' not member name 'Values'")
+        assertFalse(op.contains("Filters.{d}.Values"), "Should NOT use raw member name 'Values'")
     }
 }

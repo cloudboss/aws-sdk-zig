@@ -94,7 +94,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVerifiedAccessEnd
                 const n = idx + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.PortRanges.item.{d}.FromPort=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.PortRange.{d}.FromPort=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.from_port) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -102,7 +102,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVerifiedAccessEnd
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.PortRanges.item.{d}.ToPort=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.PortRange.{d}.ToPort=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.to_port) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -133,7 +133,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVerifiedAccessEnd
                 const n = idx + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.PortRanges.item.{d}.FromPort=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.PortRange.{d}.FromPort=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.from_port) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -141,7 +141,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVerifiedAccessEnd
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.PortRanges.item.{d}.ToPort=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.PortRange.{d}.ToPort=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.to_port) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -157,7 +157,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVerifiedAccessEnd
             for (list_d0, 0..) |item, idx| {
                 const n = idx + 1;
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.SubnetIds.item.{d}=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.SubnetId.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }
@@ -173,7 +173,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVerifiedAccessEnd
                 const n = idx + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NetworkInterfaceOptions.PortRanges.item.{d}.FromPort=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NetworkInterfaceOptions.PortRange.{d}.FromPort=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.from_port) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -181,7 +181,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVerifiedAccessEnd
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NetworkInterfaceOptions.PortRanges.item.{d}.ToPort=", .{n}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NetworkInterfaceOptions.PortRange.{d}.ToPort=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     if (item.to_port) |fv_1| {
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
@@ -207,7 +207,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVerifiedAccessEnd
             for (list_d0, 0..) |item, idx| {
                 const n = idx + 1;
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RdsOptions.SubnetIds.item.{d}=", .{n}) catch continue;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RdsOptions.SubnetId.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }
