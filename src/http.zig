@@ -8,6 +8,7 @@ const Allocator = std.mem.Allocator;
 const checksum_mod = @import("checksum.zig");
 const config_mod = @import("config.zig");
 const errors = @import("errors.zig");
+const gzip = @import("gzip.zig");
 const user_agent_mod = @import("user_agent.zig");
 
 const log = std.log.scoped(.aws_sdk);
@@ -507,8 +508,13 @@ pub const HttpClient = struct {
         const resp_headers = self.parseResponseHeaders(&response) orelse
             return error.OutOfMemory;
 
-        // Initialize body reader -- this invalidates head strings but we've already duped them.
-        inner.body_reader = response.reader(&inner.transfer_buf);
+        // Initialize body reader -- this invalidates head strings
+        // but we've already duped them.
+        inner.body_reader = response.readerDecompressing(
+            &inner.transfer_buf,
+            &inner.decompress,
+            &inner.decompress_buf,
+        );
 
         return StreamingResponse{
             .status = status,
@@ -617,15 +623,20 @@ pub const HttpClient = struct {
         var resp_headers = self.parseResponseHeaders(&response) orelse
             return error.OutOfMemory;
 
-        // Read response body. Use bodyReader directly instead of
-        // response.reader() because the std lib's responseHasBody()
-        // returns false for PUT/TRACE, skipping body reads even when
-        // the server returns a body (e.g. IMDS token PUT).
+        // Read and decompress the response body. The reader method is
+        // called directly (rather than response.reader()) because the
+        // std lib's responseHasBody() returns false for PUT/TRACE,
+        // skipping body reads even when the server returns a body.
         var transfer_buf: [8192]u8 = undefined;
-        const body_reader = req.reader.bodyReader(
+        var decompress_buf: [std.compress.flate.max_window_len]u8 = undefined;
+        var decompress: std.http.Decompress = undefined;
+        const body_reader = req.reader.bodyReaderDecompressing(
             &transfer_buf,
             response.head.transfer_encoding,
             response.head.content_length,
+            response.head.content_encoding,
+            &decompress,
+            &decompress_buf,
         );
         const body = body_reader.allocRemaining(
             self.allocator,
@@ -948,6 +959,8 @@ pub const StreamingBody = struct {
         http_request: std.http.Client.Request,
         body_reader: *std.Io.Reader,
         transfer_buf: [8192]u8,
+        decompress: std.http.Decompress,
+        decompress_buf: [std.compress.flate.max_window_len]u8,
         allocator: Allocator,
     };
 
@@ -2035,4 +2048,89 @@ test "adaptive retry: onSuccess restores capacity" {
     try std.testing.expectEqual(@as(u16, 200), response.status);
     // onSuccess adds 1.0, capped at 500.0
     try std.testing.expectEqual(@as(f64, 491.0), client.token_bucket.current_capacity);
+}
+
+fn buildGzipResponse(
+    allocator: Allocator,
+    body: []const u8,
+) ![]const u8 {
+    const compressed = try gzip.compress(allocator, body);
+    defer allocator.free(compressed);
+    const header = std.fmt.allocPrint(
+        allocator,
+        "HTTP/1.1 200 OK\r\n" ++
+            "Content-Encoding: gzip\r\n" ++
+            "Content-Length: {d}\r\n" ++
+            "Connection: close\r\n\r\n",
+        .{compressed.len},
+    ) catch return error.OutOfMemory;
+    defer allocator.free(header);
+    const response = try allocator.alloc(u8, header.len + compressed.len);
+    @memcpy(response[0..header.len], header);
+    @memcpy(response[header.len..], compressed);
+    return response;
+}
+
+test "gzip response is decompressed by doRequest" {
+    const allocator = std.testing.allocator;
+    const plain = "mock-imds-token-12345";
+    const response_bytes = try buildGzipResponse(allocator, plain);
+    defer allocator.free(response_bytes);
+
+    const responses = [_][]const u8{response_bytes};
+    var server = try TestServer.init(responses[0..]);
+    defer server.deinit();
+    try server.start();
+
+    var client = HttpClient.init(allocator, .{});
+    defer client.deinit();
+
+    var request = Request.init("127.0.0.1");
+    defer request.deinit(allocator);
+    request.method = .PUT;
+    request.path = "/latest/api/token";
+    request.port = server.address.getPort();
+    request.tls = false;
+    request.body = "";
+
+    var response = try client.sendRequestWithOptions(
+        &request,
+        .{ .max_attempts = 1, .keep_alive = false },
+    );
+    defer response.deinit();
+
+    try std.testing.expectEqual(@as(u16, 200), response.status);
+    try std.testing.expectEqualStrings(plain, response.body);
+}
+
+test "gzip response is decompressed by sendStreamingRequest" {
+    const allocator = std.testing.allocator;
+    const plain = "hello from a gzip-compressed streaming response";
+    const response_bytes = try buildGzipResponse(allocator, plain);
+    defer allocator.free(response_bytes);
+
+    const responses = [_][]const u8{response_bytes};
+    var server = try TestServer.init(responses[0..]);
+    defer server.deinit();
+    try server.start();
+
+    var client = HttpClient.init(allocator, .{});
+    defer client.deinit();
+
+    var request = Request.init("127.0.0.1");
+    defer request.deinit(allocator);
+    request.method = .GET;
+    request.path = "/object";
+    request.port = server.address.getPort();
+    request.tls = false;
+
+    var response = try client.sendStreamingRequest(&request);
+    defer response.deinit();
+
+    try std.testing.expectEqual(@as(u16, 200), response.status);
+
+    var body = response.body;
+    const data = try body.readAll(allocator, 10 * 1024 * 1024);
+    defer allocator.free(data);
+    try std.testing.expectEqualStrings(plain, data);
 }
