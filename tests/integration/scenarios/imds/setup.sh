@@ -12,7 +12,10 @@ echo $! > "${PID_FILE}"
 
 # Wait for readiness
 for i in $(seq 1 10); do
-    if curl -sf -X PUT "http://127.0.0.1:${PORT}/latest/api/token" >/dev/null 2>&1; then
+    if curl -sf -X PUT \
+        -H "X-aws-ec2-metadata-token-ttl-seconds: 21600" \
+        "http://127.0.0.1:${PORT}/latest/api/token" \
+        >/dev/null 2>&1; then
         echo "Mock IMDS server is ready (PID $(cat "${PID_FILE}"))."
         exit 0
     fi
