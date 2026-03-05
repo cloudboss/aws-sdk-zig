@@ -7,6 +7,7 @@
 
 const std = @import("std");
 const Allocator = std.mem.Allocator;
+const log = std.log.scoped(.aws_sdk);
 
 const http = @import("http.zig");
 const date = @import("date.zig");
@@ -244,12 +245,14 @@ pub const Client = struct {
             return error.OutOfMemory;
 
         var response = self.http_client.sendRequest(&request) catch |err| {
+            log.debug("IMDS token PUT failed: {s}", .{@errorName(err)});
             fillDiagnosticFromError(options.diagnostic, err, "token request failed");
             return err;
         };
         defer response.deinit();
 
         if (!response.isSuccess()) {
+            log.debug("IMDS token PUT status={d} body={s}", .{ response.status, response.body });
             fillDiagnosticFromStatus(options.diagnostic, @intCast(response.status), "token request failed");
             return error.HttpError;
         }
@@ -308,12 +311,14 @@ pub const Client = struct {
             return error.OutOfMemory;
 
         var response = self.http_client.sendRequest(&request) catch |err| {
+            log.debug("IMDS GET {s} failed: {s}", .{ path, @errorName(err) });
             fillDiagnosticFromError(options.diagnostic, err, "metadata request failed");
             return err;
         };
         defer response.deinit();
 
         if (!response.isSuccess()) {
+            log.debug("IMDS GET {s} status={d} body={s}", .{ path, response.status, response.body });
             fillDiagnosticFromStatus(options.diagnostic, @intCast(response.status), "metadata request failed");
             return error.HttpError;
         }
