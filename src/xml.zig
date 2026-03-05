@@ -295,21 +295,49 @@ pub const Error = error{
     UnexpectedEndOfInput,
 };
 
-/// Simple string-search XML element finder. Searches for `<tag_name>...</tag_name>`
-/// and returns the content between the tags, or null if not found.
+/// Simple string-search XML element finder. Searches for `<tag_name>` or
+/// `<tag_name ...>` (with attributes) and returns the text content up to
+/// the matching `</tag_name>`, or null if not found.
 /// Used for error response parsing where a full XML parse is not needed.
 pub fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
     var buf: [256]u8 = undefined;
 
-    const open_tag = std.fmt.bufPrint(&buf, "<{s}>", .{tag_name}) catch return null;
-    const start = std.mem.indexOf(u8, xml, open_tag) orelse return null;
-    const content_start = start + open_tag.len;
+    // Search for "<tag_name" — the tag open without the closing '>',
+    // so we match both <Tag> and <Tag attr="...">.
+    const open_prefix = std.fmt.bufPrint(&buf, "<{s}", .{tag_name}) catch return null;
 
-    var close_buf: [256]u8 = undefined;
-    const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
-    const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
+    var search_from: usize = 0;
+    while (std.mem.indexOfPos(u8, xml, search_from, open_prefix)) |start| {
+        const after = start + open_prefix.len;
+        if (after >= xml.len) return null;
 
-    return xml[content_start..end];
+        // The character after "<tag_name" must be '>' or whitespace (attribute).
+        // This prevents "<CodeX>" from matching a search for "Code".
+        const ch = xml[after];
+        if (ch != '>' and ch != ' ' and ch != '\t' and ch != '\n' and ch != '\r' and ch != '/') {
+            search_from = after;
+            continue;
+        }
+
+        // Self-closing tag <Tag/> — no text content.
+        if (ch == '/') {
+            search_from = after;
+            continue;
+        }
+
+        // Find the end of the opening tag.
+        const tag_end = std.mem.indexOfScalarPos(u8, xml, after, '>') orelse return null;
+        const content_start = tag_end + 1;
+
+        // Find the closing tag.
+        var close_buf: [256]u8 = undefined;
+        const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
+        const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
+
+        return xml[content_start..end];
+    }
+
+    return null;
 }
 
 /// Append a value to a buffer with XML entity escaping for &, <, and >.
@@ -447,6 +475,46 @@ test "findElement with nested XML" {
     const xml = "<Response><Errors><Error><Code>Forbidden</Code></Error></Errors><RequestId>abc</RequestId></Response>";
     try testing.expectEqualStrings("Forbidden", findElement(xml, "Code").?);
     try testing.expectEqualStrings("abc", findElement(xml, "RequestId").?);
+}
+
+test "findElement with attributes on tags" {
+    const xml = "<Error xmlns=\"http://ec2.amazonaws.com/\"><Code>AuthFailure</Code><Message>msg</Message></Error>";
+    try testing.expectEqualStrings("AuthFailure", findElement(xml, "Code").?);
+    try testing.expectEqualStrings("msg", findElement(xml, "Message").?);
+}
+
+test "findElement with xmlns on searched tag" {
+    const xml = "<Response><Code xmlns=\"http://example.com/\">InvalidAction</Code></Response>";
+    try testing.expectEqualStrings("InvalidAction", findElement(xml, "Code").?);
+}
+
+test "findElement does not match partial tag names" {
+    const xml = "<CodeX>wrong</CodeX><Code>right</Code>";
+    try testing.expectEqualStrings("right", findElement(xml, "Code").?);
+}
+
+test "findElement skips self-closing tags" {
+    const xml = "<Code/><Code>actual</Code>";
+    try testing.expectEqualStrings("actual", findElement(xml, "Code").?);
+}
+
+test "findElement returns null for empty body" {
+    try testing.expect(findElement("", "Code") == null);
+}
+
+test "findElement returns null for non-XML body" {
+    try testing.expect(findElement("{\"error\": \"bad\"}", "Code") == null);
+    try testing.expect(findElement("<html><body>error</body></html>", "Code") == null);
+}
+
+test "findElement with full EC2 error response" {
+    const xml =
+        \\<?xml version="1.0" encoding="UTF-8"?>
+        \\<Response><Errors><Error><Code>InvalidParameterValue</Code><Message>The value is not valid.</Message></Error></Errors><RequestID>abc-123</RequestID></Response>
+    ;
+    try testing.expectEqualStrings("InvalidParameterValue", findElement(xml, "Code").?);
+    try testing.expectEqualStrings("The value is not valid.", findElement(xml, "Message").?);
+    try testing.expectEqualStrings("abc-123", findElement(xml, "RequestID").?);
 }
 
 test "appendXmlEscaped escapes special characters" {
