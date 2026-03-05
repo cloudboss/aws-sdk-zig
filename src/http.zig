@@ -335,10 +335,24 @@ pub const HttpClient = struct {
                     std.time.nanoTimestamp() - start_ns,
                     std.time.ns_per_ms,
                 );
-                log.debug(
-                    "aws request success: status={d} elapsed_ms={d} invocation={s}",
-                    .{ response.status, elapsed_ms, invocation_id },
-                );
+                if (response.isSuccess()) {
+                    log.debug(
+                        "aws request success: status={d} elapsed_ms={d} invocation={s}",
+                        .{ response.status, elapsed_ms, invocation_id },
+                    );
+                } else {
+                    log.debug(
+                        "aws request error: status={d} elapsed_ms={d} invocation={s} body({d} bytes)={s}{s}",
+                        .{
+                            response.status,
+                            elapsed_ms,
+                            invocation_id,
+                            response.body.len,
+                            response.body[0..@min(response.body.len, 4096)],
+                            @as([]const u8, if (response.body.len > 4096) "..." else ""),
+                        },
+                    );
+                }
                 return response;
             } else |err| {
                 // Don't retry on non-transient errors
