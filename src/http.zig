@@ -603,9 +603,16 @@ pub const HttpClient = struct {
         var resp_headers = self.parseResponseHeaders(&response) orelse
             return error.OutOfMemory;
 
-        // Read response body
+        // Read response body. Use bodyReader directly instead of
+        // response.reader() because the std lib's responseHasBody()
+        // returns false for PUT/TRACE, skipping body reads even when
+        // the server returns a body (e.g. IMDS token PUT).
         var transfer_buf: [8192]u8 = undefined;
-        const body_reader = response.reader(&transfer_buf);
+        const body_reader = req.reader.bodyReader(
+            &transfer_buf,
+            response.head.transfer_encoding,
+            response.head.content_length,
+        );
         const body = body_reader.allocRemaining(
             self.allocator,
             std.Io.Limit.limited(options.max_response_size),
@@ -1603,6 +1610,36 @@ test "HttpClient interceptors empty slice is no-op" {
     defer response.deinit();
 
     try std.testing.expectEqual(@as(u16, 200), response.status);
+}
+
+test "PUT response body is read" {
+    const responses = [_][]const u8{
+        "HTTP/1.1 200 OK\r\nContent-Length: 21\r\n" ++
+            "Connection: close\r\n\r\nmock-imds-token-12345",
+    };
+    var server = try TestServer.init(responses[0..]);
+    defer server.deinit();
+    try server.start();
+
+    var client = HttpClient.init(std.testing.allocator, .{});
+    defer client.deinit();
+
+    var request = Request.init("127.0.0.1");
+    defer request.deinit(std.testing.allocator);
+    request.method = .PUT;
+    request.path = "/latest/api/token";
+    request.port = server.address.getPort();
+    request.tls = false;
+    request.body = "";
+
+    var response = try client.sendRequestWithOptions(
+        &request,
+        .{ .max_attempts = 1, .keep_alive = false },
+    );
+    defer response.deinit();
+
+    try std.testing.expectEqual(@as(u16, 200), response.status);
+    try std.testing.expectEqualStrings("mock-imds-token-12345", response.body);
 }
 
 test "HttpClient stores ca_bundle_path" {
