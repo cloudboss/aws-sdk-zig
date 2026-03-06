@@ -19,7 +19,7 @@ jobs:
       - id: list
         name: List integration scenarios
         run: |
-          scenarios=$(ls -d tests/integration/scenarios/*/ \
+          scenarios=$(ls -d tests/integration/scenarios-localstack/*/ \
             | xargs -I{} basename {} \
             | jq -R -s -c 'split("\n") | map(select(. != ""))')
           echo "scenarios=${scenarios}" >> "$GITHUB_OUTPUT"
@@ -54,4 +54,4 @@ jobs:
       - name: Load build container image
         run: gunzip -c _output/docker-image.tar.gz | docker load
       - name: Run integration test
-        run: make --debug test-integration SCENARIO=${{ matrix.scenario }}
+        run: make --debug test-integration-localstack SCENARIO=${{ matrix.scenario }}

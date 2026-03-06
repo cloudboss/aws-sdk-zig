@@ -135,10 +135,10 @@ Every service defines `ServiceError` so this pattern can be used.
 make test
 
 # Run integration tests
-make test-integration
+make test-integration-localstack
 
 # Run a single integration test scenario
-make test-integration SCENARIO=s3
+make test-integration-localstack SCENARIO=s3
 
 # Regenerate service code from Smithy models
 make codegen

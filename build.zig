@@ -96,8 +96,8 @@ pub fn build(b: *std.Build) void {
         test_step.dependOn(&svc_check.step);
     }
 
-    // Integration tests: auto-discover scenarios from tests/integration/scenarios/
-    const scenarios_path = "tests/integration/scenarios";
+    // Integration tests: auto-discover scenarios from tests/integration/scenarios-localstack/
+    const scenarios_path = "tests/integration/scenarios-localstack";
     var scenarios_dir = b.build_root.handle.openDir(scenarios_path, .{ .iterate = true }) catch return;
     defer scenarios_dir.close();
 
@@ -132,14 +132,14 @@ pub fn build(b: *std.Build) void {
         });
 
         const run_integration = b.addRunArtifact(integration_test);
-        const step_name = b.fmt("integration-test-{s}", .{entry.name});
-        const step_desc = b.fmt("Run {s} integration tests", .{entry.name});
+        const step_name = b.fmt("integration-test-localstack-{s}", .{entry.name});
+        const step_desc = b.fmt("Run {s} localstack integration tests", .{entry.name});
         const step = b.step(step_name, step_desc);
         step.dependOn(&run_integration.step);
     }
 
-    // Live tests: auto-discover scenarios from tests/integration/live/
-    const live_scenarios_path = "tests/integration/live";
+    // Live tests: auto-discover scenarios from tests/integration/scenarios-live/
+    const live_scenarios_path = "tests/integration/scenarios-live";
     var live_scenarios_dir = b.build_root.handle.openDir(
         live_scenarios_path,
         .{ .iterate = true },
@@ -183,9 +183,9 @@ pub fn build(b: *std.Build) void {
         });
 
         const run_live_test = b.addRunArtifact(live_test);
-        const live_step_name = b.fmt("live-test-{s}", .{entry.name});
+        const live_step_name = b.fmt("integration-test-live-{s}", .{entry.name});
         const live_step_desc = b.fmt(
-            "Run {s} live tests",
+            "Run {s} live integration tests",
             .{entry.name},
         );
         const live_step = b.step(live_step_name, live_step_desc);

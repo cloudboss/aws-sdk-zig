@@ -60,7 +60,7 @@ test: $(HAS_IMAGE_LOCAL)
 		-w /code \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build test $(ZIG_BUILD_FLAGS)"
 
-test-integration: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
+test-integration-localstack: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
 	@docker run --rm $(CTR_IMAGE_LOCAL) cat /etc/ssl/certs/ca-certificates.crt \
 		> $(DIR_OUT)/tls-ca-bundle.crt
 	@cat tests/integration/certs/ca.crt >> $(DIR_OUT)/tls-ca-bundle.crt
@@ -77,9 +77,9 @@ test-integration: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
 		-e AWS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
 		-e TLS_CERT_HOST_PATH=$(DIR_ROOT)/tests/integration/certs/server.pem \
 		-w /code \
-		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/run.sh"
+		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/scenarios-localstack/run.sh"
 
-test-live: $(HAS_IMAGE_LOCAL) | $(DIR_OUT)
+test-integration-live: $(HAS_IMAGE_LOCAL) | $(DIR_OUT)
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-v $(HOME)/.aws:/home/build/.aws:ro \
@@ -89,14 +89,13 @@ test-live: $(HAS_IMAGE_LOCAL) | $(DIR_OUT)
 		-e AWS_PROFILE \
 		-e AWS_DEFAULT_REGION \
 		-e "ZIG_BUILD_FLAGS=$(ZIG_BUILD_FLAGS)" \
-		-e LIVE_SCENARIO=$(LIVE_SCENARIO) \
+		-e SCENARIO=$(SCENARIO) \
 		-w /code \
-		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/live/run-live.sh"
+		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/scenarios-live/run.sh"
 
 # Set SERVICES_FILTER to a comma-separated list to generate only a subset,
 # e.g.: SERVICES_FILTER=sts,s3 make codegen
 SERVICES_FILTER ?=
-LIVE_SCENARIO ?=
 
 fetch-models: | $(DIR_OUT)
 	@curl -sL -o $(DIR_OUT)/api-models-aws.zip \
@@ -125,4 +124,4 @@ certs:
 clean:
 	@rm -rf $(DIR_OUT)
 
-.PHONY: build test test-integration test-live fetch-models codegen certs clean
+.PHONY: build test test-integration-localstack test-integration-live fetch-models codegen certs clean
