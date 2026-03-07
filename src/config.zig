@@ -155,6 +155,7 @@ pub const Config = struct {
         errdefer allocator.free(region);
 
         var chain = ChainProvider{
+            .allocator = allocator,
             .profile = resolved_profile,
             .region = region,
         };
@@ -233,6 +234,7 @@ pub const Config = struct {
 
     /// Free owned resources
     pub fn deinit(self: *Self) void {
+        self.credentials.deinit();
         self.allocator.free(self.region);
         if (self.config_file) |*cf| cf.deinit();
     }

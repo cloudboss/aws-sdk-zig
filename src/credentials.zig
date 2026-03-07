@@ -93,6 +93,14 @@ pub const CredentialsProvider = union(enum) {
             .chain => |*c| c.getCredentials(allocator),
         };
     }
+
+    pub fn deinit(self: *CredentialsProvider) void {
+        switch (self.*) {
+            .imds => |*i| i.deinit(),
+            .chain => |*c| c.deinit(),
+            else => {},
+        }
+    }
 };
 
 /// Load credentials from environment variables
@@ -246,8 +254,12 @@ pub const FileProvider = struct {
 /// profile_assume_role -> profile_sso -> profile_process ->
 /// profile_web_identity -> web_identity -> ecs -> imds
 pub const ChainProvider = struct {
+    /// Long-lived allocator used for owning cached credential strings.
+    allocator: Allocator = std.heap.page_allocator,
     /// Cached credentials from last successful retrieval
     cached: ?Credentials = null,
+    /// Whether cached credential strings are owned by this provider.
+    cached_owned: bool = false,
     /// Which provider succeeded last time (for efficiency on refresh)
     successful_provider: ?ProviderType = null,
     /// Profile for file provider
@@ -301,7 +313,7 @@ pub const ChainProvider = struct {
         // If we previously succeeded with a provider, try it first
         if (self.successful_provider) |provider| {
             if (self.tryProvider(allocator, provider)) |creds| {
-                self.cacheCredentials(creds);
+                try self.cacheCredentials(creds);
                 return self.cached.?;
             } else |_| {
                 // Provider failed, clear it and try the full chain
@@ -323,7 +335,7 @@ pub const ChainProvider = struct {
         };
         for (providers) |provider| {
             if (self.tryProvider(allocator, provider)) |creds| {
-                self.cacheCredentials(creds);
+                try self.cacheCredentials(creds);
                 self.successful_provider = provider;
                 return self.cached.?;
             } else |_| {
@@ -500,25 +512,62 @@ pub const ChainProvider = struct {
     }
 
     /// Cache credentials, stamping permanent ones with a synthetic expiration.
-    fn cacheCredentials(self: *Self, creds: Credentials) void {
+    fn cacheCredentials(self: *Self, creds: Credentials) !void {
+        const access_key_id = try self.allocator.dupe(u8, creds.access_key_id);
+        errdefer self.allocator.free(access_key_id);
+
+        const secret_access_key = try self.allocator.dupe(u8, creds.secret_access_key);
+        errdefer self.allocator.free(secret_access_key);
+
+        const session_token = if (creds.session_token) |token|
+            try self.allocator.dupe(u8, token)
+        else
+            null;
+        errdefer if (session_token) |token| self.allocator.free(token);
+
+        self.freeCachedCredentials();
+
         var cached = creds;
+        cached.access_key_id = access_key_id;
+        cached.secret_access_key = secret_access_key;
+        cached.session_token = session_token;
         if (cached.expiration == null) {
             if (self.default_expiration) |ttl| {
                 cached.expiration = std.time.timestamp() + ttl;
             }
         }
         self.cached = cached;
+        self.cached_owned = true;
+    }
+
+    fn freeCachedCredentials(self: *Self) void {
+        if (self.cached_owned) {
+            if (self.cached) |cached| {
+                self.allocator.free(cached.access_key_id);
+                self.allocator.free(cached.secret_access_key);
+                if (cached.session_token) |token| {
+                    self.allocator.free(token);
+                }
+            }
+        }
+        self.cached = null;
+        self.cached_owned = false;
     }
 
     /// Clear cached credentials (forces refresh on next call)
     pub fn clearCache(self: *Self) void {
         self.mutex.lock();
         defer self.mutex.unlock();
-        self.cached = null;
+        self.freeCachedCredentials();
     }
 
     /// Clean up resources
     pub fn deinit(self: *Self) void {
+        self.mutex.lock();
+        defer self.mutex.unlock();
+
+        self.freeCachedCredentials();
+
         if (self.imds_provider) |*provider| {
             provider.deinit();
         }
@@ -748,7 +797,8 @@ test "parseCredentialsFile returns owned strings surviving source free" {
 }
 
 test "chain provider caches credentials" {
-    var chain = ChainProvider{};
+    var chain = ChainProvider{ .allocator = std.testing.allocator };
+    defer chain.deinit();
 
     // Manually set cached credentials
     chain.cached = Credentials{
@@ -762,7 +812,8 @@ test "chain provider caches credentials" {
 }
 
 test "chain provider clear cache" {
-    var chain = ChainProvider{};
+    var chain = ChainProvider{ .allocator = std.testing.allocator };
+    defer chain.deinit();
 
     chain.cached = Credentials{
         .access_key_id = "test",
@@ -776,6 +827,7 @@ test "chain provider clear cache" {
 
 test "profile_assume_role skips when profile lacks role_arn" {
     var chain = ChainProvider{
+        .allocator = std.testing.allocator,
         .profile = "no-such-profile",
         .region = "us-east-1",
     };
@@ -791,6 +843,7 @@ test "profile_assume_role skips when profile lacks role_arn" {
 
 test "profile_process skips when profile lacks credential_process" {
     var chain = ChainProvider{
+        .allocator = std.testing.allocator,
         .profile = "no-such-profile",
         .region = "us-east-1",
     };
@@ -806,6 +859,7 @@ test "profile_process skips when profile lacks credential_process" {
 
 test "profile_sso skips when profile lacks sso_session" {
     var chain = ChainProvider{
+        .allocator = std.testing.allocator,
         .profile = "no-such-profile",
         .region = "us-east-1",
     };
@@ -849,13 +903,15 @@ test "isExpiredWithBuffer with custom buffer" {
 
 test "cacheCredentials stamps permanent credentials with synthetic expiration" {
     var chain = ChainProvider{
+        .allocator = std.testing.allocator,
         .default_expiration = 900,
     };
+    defer chain.deinit();
     const creds = Credentials{
         .access_key_id = "PERM_KEY",
         .secret_access_key = "PERM_SECRET",
     };
-    chain.cacheCredentials(creds);
+    try chain.cacheCredentials(creds);
     // Cached copy should have an expiration set
     try std.testing.expect(chain.cached.?.expiration != null);
     const exp = chain.cached.?.expiration.?;
@@ -867,8 +923,10 @@ test "cacheCredentials stamps permanent credentials with synthetic expiration" {
 
 test "cacheCredentials leaves already-expiring credentials unchanged" {
     var chain = ChainProvider{
+        .allocator = std.testing.allocator,
         .default_expiration = 900,
     };
+    defer chain.deinit();
     const now = std.time.timestamp();
     const original_exp = now + 3600;
     const creds = Credentials{
@@ -876,12 +934,13 @@ test "cacheCredentials leaves already-expiring credentials unchanged" {
         .secret_access_key = "TEMP_SECRET",
         .expiration = original_exp,
     };
-    chain.cacheCredentials(creds);
+    try chain.cacheCredentials(creds);
     try std.testing.expectEqual(original_exp, chain.cached.?.expiration.?);
 }
 
 test "multi-threaded getCredentials does not crash" {
     var chain = ChainProvider{
+        .allocator = std.testing.allocator,
         .default_expiration = null,
     };
     // Pre-populate cache so threads don't hit real providers
@@ -909,4 +968,31 @@ test "multi-threaded getCredentials does not crash" {
     }
     // If we got here without crashing, the mutex is working
     try std.testing.expect(chain.cached != null);
+}
+
+test "cacheCredentials owns cached strings beyond source allocator lifetime" {
+    var chain = ChainProvider{ .allocator = std.testing.allocator };
+    defer chain.deinit();
+
+    var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+    const arena_allocator = arena.allocator();
+
+    const source_access_key = try arena_allocator.dupe(u8, "ARENA_ACCESS_KEY");
+    const source_secret_key = try arena_allocator.dupe(u8, "ARENA_SECRET_KEY");
+    const source_token = try arena_allocator.dupe(u8, "ARENA_TOKEN");
+
+    const source_creds = Credentials{
+        .access_key_id = source_access_key,
+        .secret_access_key = source_secret_key,
+        .session_token = source_token,
+        .expiration = std.time.timestamp() + 3600,
+    };
+
+    try chain.cacheCredentials(source_creds);
+    arena.deinit();
+
+    const cached = try chain.getCredentials(std.testing.allocator);
+    try std.testing.expectEqualStrings("ARENA_ACCESS_KEY", cached.access_key_id);
+    try std.testing.expectEqualStrings("ARENA_SECRET_KEY", cached.secret_access_key);
+    try std.testing.expectEqualStrings("ARENA_TOKEN", cached.session_token.?);
 }
