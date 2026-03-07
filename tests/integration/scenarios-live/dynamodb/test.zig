@@ -20,7 +20,7 @@ test "zest.beforeAll" {
     shared_table = try std.fmt.bufPrint(
         &shared_table_name_buf,
         "sdk-zig-live-ddb-{d}",
-        .{std.time.timestamp()},
+        .{std.time.milliTimestamp()},
     );
 
     const create_result = try shared_client.createTable(
@@ -48,6 +48,8 @@ test "zest.beforeAll" {
         return error.MissingTableDescription;
     const table_arn = desc.table_arn orelse
         return error.MissingTableArn;
+
+    try shared_client.waitUntilTableExists(.{ .table_name = shared_table });
 
     _ = try shared_client.tagResource(
         arena.allocator(),
@@ -312,7 +314,7 @@ test "scan returns items" {
         .{},
     );
 
-    try std.testing.expect(result.count >= 2);
+    try std.testing.expect(result.count.? >= 2);
 }
 
 test "batchWriteItem puts multiple items" {
@@ -387,5 +389,5 @@ test "batchWriteItem puts multiple items" {
         .{},
     );
 
-    try std.testing.expectEqual(@as(i32, 3), result.count);
+    try std.testing.expectEqual(@as(i32, 3), result.count.?);
 }
