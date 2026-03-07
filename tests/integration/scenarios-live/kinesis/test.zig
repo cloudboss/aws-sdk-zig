@@ -152,19 +152,48 @@ test "putRecord writes data" {
     var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
     defer arena.deinit();
 
-    const result = try shared_client.putRecord(
-        arena.allocator(),
-        .{
-            .stream_name = stream_name,
-            .data = "hello kinesis",
-            .partition_key = "pk-1",
-        },
-        .{},
-    );
-    try std.testing.expect(result.shard_id.len > 0);
-    try std.testing.expect(
-        result.sequence_number.len > 0,
-    );
+    var attempts: u32 = 0;
+    while (attempts < 15) : (attempts += 1) {
+        var diagnostic: kinesis.ServiceError = undefined;
+        const result = shared_client.putRecord(
+            arena.allocator(),
+            .{
+                .stream_arn = stream_arn,
+                .data = "aGVsbG8ga2luZXNpcw==",
+                .partition_key = "pk-1",
+            },
+            .{ .diagnostic = &diagnostic },
+        ) catch |err| {
+            if (err == error.ServiceError) {
+                defer diagnostic.deinit();
+                switch (diagnostic.kind) {
+                    .resource_in_use_exception,
+                    .resource_not_found_exception,
+                    .limit_exceeded_exception,
+                    .provisioned_throughput_exceeded_exception,
+                    .internal_failure_exception,
+                    => {
+                        std.Thread.sleep(std.time.ns_per_s);
+                        continue;
+                    },
+                    else => {
+                        std.log.err(
+                            "putRecord failed: {s}: {s}",
+                            .{ diagnostic.code(), diagnostic.message() },
+                        );
+                        return err;
+                    },
+                }
+            }
+            return err;
+        };
+
+        try std.testing.expect(result.shard_id.len > 0);
+        try std.testing.expect(result.sequence_number.len > 0);
+        return;
+    }
+
+    return error.PutRecordRetryTimeout;
 }
 
 test "getShardIterator and getRecords reads back data" {
@@ -193,7 +222,7 @@ test "getShardIterator and getRecords reads back data" {
         return error.MissingShardIterator;
 
     var attempts: u32 = 0;
-    while (attempts < 10) : (attempts += 1) {
+    while (attempts < 30) : (attempts += 1) {
         const records = try shared_client.getRecords(
             arena.allocator(),
             .{ .shard_iterator = iterator },
@@ -207,14 +236,14 @@ test "getShardIterator and getRecords reads back data" {
             std.Thread.sleep(std.time.ns_per_s);
             continue;
         }
-        const decoded = try std.base64.standard.Decoder
-            .decode(
-            try arena.allocator().alloc(
-                u8,
-                try std.base64.standard.Decoder.calcSize(
-                    record_list[0].data.len,
-                ),
-            ),
+        const decoded_len = try std.base64.standard.Decoder
+            .calcSizeForSlice(record_list[0].data);
+        const decoded = try arena.allocator().alloc(
+            u8,
+            decoded_len,
+        );
+        try std.base64.standard.Decoder.decode(
+            decoded,
             record_list[0].data,
         );
         try std.testing.expectEqualStrings(
