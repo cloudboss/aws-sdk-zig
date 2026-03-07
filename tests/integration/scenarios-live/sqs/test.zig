@@ -246,25 +246,33 @@ test "listQueues includes created queue" {
     var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
     defer arena.deinit();
 
-    const list_result = try client.listQueues(
-        arena.allocator(),
-        .{},
-        .{},
-    );
-
-    const urls = list_result.queue_urls orelse
-        return error.MissingQueueUrls;
     var found = false;
-    for (urls) |url| {
-        if (std.mem.indexOf(
-            u8,
-            url,
-            shared_queue_name,
-        ) != null) {
-            found = true;
-            break;
+    var attempt: usize = 0;
+    while (attempt < 10 and !found) : (attempt += 1) {
+        const list_result = try client.listQueues(
+            arena.allocator(),
+            .{ .queue_name_prefix = shared_queue_name },
+            .{},
+        );
+
+        if (list_result.queue_urls) |urls| {
+            for (urls) |url| {
+                if (std.mem.indexOf(
+                    u8,
+                    url,
+                    shared_queue_name,
+                ) != null) {
+                    found = true;
+                    break;
+                }
+            }
+        }
+
+        if (!found and attempt + 1 < 10) {
+            std.Thread.sleep(300 * std.time.ns_per_ms);
         }
     }
+
     try std.testing.expect(found);
 }
 
@@ -290,10 +298,25 @@ test "sendMessageBatch sends multiple messages" {
     var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
     defer arena.deinit();
 
+    var name_buf: [64]u8 = undefined;
+    const queue_name = try std.fmt.bufPrint(
+        &name_buf,
+        "sdk-zig-live-sqs-batch-{d}",
+        .{std.time.timestamp()},
+    );
+
+    const create_result = try client.createQueue(
+        arena.allocator(),
+        .{ .queue_name = queue_name },
+        .{},
+    );
+    const queue_url = create_result.queue_url orelse
+        return error.MissingQueueUrl;
+
     const batch_result = try client.sendMessageBatch(
         arena.allocator(),
         .{
-            .queue_url = shared_queue_url,
+            .queue_url = queue_url,
             .entries = &.{
                 .{
                     .id = "msg-1",
@@ -331,9 +354,9 @@ test "sendMessageBatch sends multiple messages" {
         return error.MissingSuccessful;
     try std.testing.expectEqual(3, successful.len);
 
-    _ = try client.purgeQueue(
+    _ = try client.deleteQueue(
         arena.allocator(),
-        .{ .queue_url = shared_queue_url },
+        .{ .queue_url = queue_url },
         .{},
     );
 }
