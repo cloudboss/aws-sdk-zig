@@ -65,7 +65,7 @@ test "rds describeDBInstances" {
     defer arena.deinit();
     var client = rds.Client.init(std.testing.allocator, &shared_cfg.?);
     defer client.deinit();
-    _ = try client.describeDBInstances(
+    _ = try client.describeDbInstances(
         arena.allocator(),
         .{},
         .{},
@@ -101,7 +101,7 @@ test "neptune describeDBClusters" {
     defer arena.deinit();
     var client = neptune.Client.init(std.testing.allocator, &shared_cfg.?);
     defer client.deinit();
-    _ = try client.describeDBClusters(
+    _ = try client.describeDbClusters(
         arena.allocator(),
         .{},
         .{},
@@ -113,7 +113,7 @@ test "docdb describeDBClusters" {
     defer arena.deinit();
     var client = docdb.Client.init(std.testing.allocator, &shared_cfg.?);
     defer client.deinit();
-    _ = try client.describeDBClusters(
+    _ = try client.describeDbClusters(
         arena.allocator(),
         .{},
         .{},
