@@ -28,10 +28,17 @@ PROJECTIONS_DIR = os.path.join(
     DIR_OUT, "codegen", "sdk-codegen", "smithyprojections", "sdk-codegen"
 )
 
+GRADLE_HOME_IN_CONTAINER = os.environ.get(
+    "GRADLE_HOME_IN_CONTAINER", "/tmp/aws-sdk-zig-gradle-home"
+)
+GRADLE_PROJECT_CACHE_IN_CONTAINER = os.environ.get(
+    "GRADLE_PROJECT_CACHE_IN_CONTAINER", "/tmp/aws-sdk-zig-codegen-cache"
+)
+
 GRADLE_CMD = (
     "cd codegen && gradle build"
-    f" --gradle-user-home /code/{DIR_OUT}/gradle-home"
-    f" --project-cache-dir /code/{DIR_OUT}/codegen/.gradle"
+    f" --gradle-user-home {GRADLE_HOME_IN_CONTAINER}"
+    f" --project-cache-dir {GRADLE_PROJECT_CACHE_IN_CONTAINER}"
 )
 
 
@@ -100,6 +107,7 @@ def run_gradle():
             "docker", "run", "--rm",
             "-v", f"{DIR_ROOT}:/code",
             "-w", "/code",
+            "--security-opt", "label=type:container_runtime_t",
             CTR_IMAGE,
             "/bin/sh", "-c", GRADLE_CMD,
         ],

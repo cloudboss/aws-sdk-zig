@@ -146,7 +146,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDataAccessInput, con
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
     try request.headers.put(allocator, "x-amz-account-id", input.account_id);
 
     return request;

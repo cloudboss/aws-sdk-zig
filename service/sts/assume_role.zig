@@ -428,9 +428,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssumeRoleInput, config
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PolicyArns.member.{d}.arn=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.arn) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PolicyArns.member.{d}.arn=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
@@ -441,17 +441,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssumeRoleInput, config
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ProvidedContexts.member.{d}.ContextAssertion=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.context_assertion) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ProvidedContexts.member.{d}.ContextAssertion=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ProvidedContexts.member.{d}.ProviderArn=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.provider_arn) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ProvidedContexts.member.{d}.ProviderArn=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

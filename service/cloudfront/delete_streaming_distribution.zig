@@ -61,7 +61,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteStreamingDistribu
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.if_match) |v| {
         try request.headers.put(allocator, "If-Match", v);
     }

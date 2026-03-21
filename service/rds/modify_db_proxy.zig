@@ -98,49 +98,49 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBProxyInput, con
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.AuthScheme=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.auth_scheme) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.AuthScheme=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.ClientPasswordAuthType=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.client_password_auth_type) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.ClientPasswordAuthType=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.Description=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.description) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.Description=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.IAMAuth=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.iam_auth) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.IAMAuth=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.SecretArn=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.secret_arn) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.SecretArn=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.UserName=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.user_name) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Auth.member.{d}.UserName=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

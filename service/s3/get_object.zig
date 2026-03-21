@@ -642,7 +642,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetObjectInput, config:
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.checksum_mode) |v| {
         try request.headers.put(allocator, "x-amz-checksum-mode", v.wireName());
     }

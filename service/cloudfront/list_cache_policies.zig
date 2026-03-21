@@ -101,7 +101,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCachePoliciesInput,
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
 
     return request;
 }

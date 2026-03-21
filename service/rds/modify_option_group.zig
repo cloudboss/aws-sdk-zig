@@ -98,73 +98,73 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyOptionGroupInput,
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.AllowedValues=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.allowed_values) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.AllowedValues=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.ApplyType=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.apply_type) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.ApplyType=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.DataType=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.data_type) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.DataType=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.DefaultValue=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.default_value) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.DefaultValue=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.Description=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.description) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.Description=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.IsCollection=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.is_collection) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.IsCollection=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_2) "true" else "false");
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.IsModifiable=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.is_modifiable) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.IsModifiable=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_2) "true" else "false");
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.Name=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.name) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.Name=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.Value=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.value) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionSettings.OptionSetting.{d}.Value=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
@@ -172,17 +172,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyOptionGroupInput,
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionVersion=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.option_version) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.OptionVersion=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.Port=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.port) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OptionsToInclude.OptionConfiguration.{d}.Port=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }

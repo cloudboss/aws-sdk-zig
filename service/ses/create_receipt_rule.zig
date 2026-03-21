@@ -102,17 +102,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReceiptRuleInput,
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.BounceAction.StatusCode=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.status_code) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.BounceAction.StatusCode=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.BounceAction.TopicArn=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.topic_arn) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.BounceAction.TopicArn=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
@@ -140,17 +140,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReceiptRuleInput,
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.LambdaAction.InvocationType=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.invocation_type) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.LambdaAction.InvocationType=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.LambdaAction.TopicArn=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.topic_arn) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.LambdaAction.TopicArn=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
@@ -164,33 +164,33 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReceiptRuleInput,
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.S3Action.IamRoleArn=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.iam_role_arn) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.S3Action.IamRoleArn=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.S3Action.KmsKeyArn=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.kms_key_arn) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.S3Action.KmsKeyArn=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.S3Action.ObjectKeyPrefix=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.object_key_prefix) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.S3Action.ObjectKeyPrefix=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.S3Action.TopicArn=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.topic_arn) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.S3Action.TopicArn=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
@@ -198,9 +198,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReceiptRuleInput,
             if (item.sns_action) |sv_1| {
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.SNSAction.Encoding=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.encoding) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.SNSAction.Encoding=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
@@ -220,9 +220,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReceiptRuleInput,
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.StopAction.TopicArn=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.topic_arn) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.StopAction.TopicArn=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
@@ -236,9 +236,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReceiptRuleInput,
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.WorkmailAction.TopicArn=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.topic_arn) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Rule.Actions.member.{d}.WorkmailAction.TopicArn=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }

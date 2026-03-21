@@ -62,7 +62,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteDistributionTenan
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
     try request.headers.put(allocator, "If-Match", input.if_match);
 
     return request;

@@ -77,7 +77,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteBucketInput, conf
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.expected_bucket_owner) |v| {
         try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
     }

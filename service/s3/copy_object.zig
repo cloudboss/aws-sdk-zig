@@ -889,15 +889,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CopyObjectInput, config
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CopyObjectRequest>");
-    if (input.metadata) |v| {
-        try body_buf.appendSlice(allocator, "<Metadata>");
-        try serde.serializeMetadata(allocator, &body_buf, v, "entry");
-        try body_buf.appendSlice(allocator, "</Metadata>");
-    }
-    try body_buf.appendSlice(allocator, "</CopyObjectRequest>");
-    const body = try body_buf.toOwnedSlice(allocator);
+    const body: ?[]const u8 = null;
 
     var request = aws.http.Request.init(host);
     request.method = .PUT;
@@ -906,7 +898,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CopyObjectInput, config
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.acl) |v| {
         try request.headers.put(allocator, "x-amz-acl", v.wireName());
     }

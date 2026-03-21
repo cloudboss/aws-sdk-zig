@@ -152,6 +152,9 @@ class RestXmlProtocol : ProtocolGenerator {
         // Build body
         writeBodyBuilder(writer, ctx, bindings)
 
+        val needsContentType = shouldSetDefaultContentType(ctx, bindings)
+        val needsContentMd5 = shouldAutoComputeS3ContentMd5(ctx)
+
         // Build request
         writer.write("var request = aws.http.Request.init(host);")
         writer.write("request.method = .\$L;", httpTrait.method.uppercase())
@@ -164,7 +167,23 @@ class RestXmlProtocol : ProtocolGenerator {
             writer.write("request.query = query;")
         }
 
-        writer.write("try request.headers.put(allocator, \"Content-Type\", \"\$L\");", contentType())
+        if (needsContentType) {
+            writer.write("try request.headers.put(allocator, \"Content-Type\", \"\$L\");", contentType())
+        }
+
+        if (needsContentMd5) {
+            writer.write(
+                "const body_for_md5: []const u8 = if (@TypeOf(body) == ?[]const u8) (body orelse \"\") else body;"
+            )
+            writer.openBlock("if (body_for_md5.len > 0) {")
+            writer.write("var md5_digest: [16]u8 = undefined;")
+            writer.write("std.crypto.hash.Md5.hash(body_for_md5, &md5_digest, .{});")
+            writer.write("const md5_len = std.base64.standard.Encoder.calcSize(md5_digest.len);")
+            writer.write("const md5_b64 = try allocator.alloc(u8, md5_len);")
+            writer.write("_ = std.base64.standard.Encoder.encode(md5_b64, &md5_digest);")
+            writer.write("try request.headers.put(allocator, \"Content-MD5\", md5_b64);")
+            writer.closeBlock("}")
+        }
 
         // Set bound headers
         for ((memberName, memberShape) in bindings.headers) {
@@ -183,6 +202,36 @@ class RestXmlProtocol : ProtocolGenerator {
         writer.blankLine()
         writer.write("return request;")
         writer.closeBlock("}")
+    }
+
+    private fun shouldSetDefaultContentType(ctx: OperationContext, bindings: InputBindings): Boolean {
+        if (shouldOmitS3CopyObjectBody(ctx)) {
+            return false
+        }
+
+        if (bindings.payload != null) {
+            return true
+        }
+
+        return bindings.bodyMembers.values.any { ms ->
+            val ts = ctx.model.expectShape(ms.target)
+            ctx.isScalarType(ts) || ts is StructureShape || ts is ListShape || ts is MapShape
+        }
+    }
+
+    private fun shouldAutoComputeS3ContentMd5(ctx: OperationContext): Boolean {
+        if (ctx.settings.endpointPrefix != "s3") {
+            return false
+        }
+
+        return ctx.operationName in setOf(
+            "DeleteObjects",
+            "PutBucketTagging",
+        )
+    }
+
+    private fun shouldOmitS3CopyObjectBody(ctx: OperationContext): Boolean {
+        return ctx.settings.endpointPrefix == "s3" && ctx.operationName == "CopyObject"
     }
 
     private fun writeHeaderValuePut(writer: ZigWriter, ctx: OperationContext, memberShape: MemberShape, headerName: String, varName: String) {
@@ -359,6 +408,12 @@ class RestXmlProtocol : ProtocolGenerator {
     }
 
     private fun writeBodyBuilder(writer: ZigWriter, ctx: OperationContext, bindings: InputBindings) {
+        if (shouldOmitS3CopyObjectBody(ctx)) {
+            writer.write("const body: ?[]const u8 = null;")
+            writer.blankLine()
+            return
+        }
+
         if (bindings.payload != null) {
             val (memberName, memberShape) = bindings.payload
             val fieldName = NamingUtil.toFieldName(memberName)

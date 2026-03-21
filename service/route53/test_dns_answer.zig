@@ -160,7 +160,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TestDNSAnswerInput, con
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
 
     return request;
 }

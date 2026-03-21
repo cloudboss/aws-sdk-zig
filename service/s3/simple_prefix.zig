@@ -2,5 +2,4 @@
 /// empty object.
 ///
 /// `[DestinationPrefix][YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]`
-pub const SimplePrefix = struct {
-};
+pub const SimplePrefix = struct {};

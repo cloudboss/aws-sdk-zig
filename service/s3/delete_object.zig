@@ -221,7 +221,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteObjectInput, conf
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.bypass_governance_retention) |v| {
         try request.headers.put(allocator, "x-amz-bypass-governance-retention", if (v) "true" else "false");
     }

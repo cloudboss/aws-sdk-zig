@@ -18,5 +18,5 @@ pub const LocationInfo = struct {
     name: ?[]const u8 = null,
 
     /// The type of location where the bucket will be created.
-    @"type": ?LocationType = null,
+    type: ?LocationType = null,
 };

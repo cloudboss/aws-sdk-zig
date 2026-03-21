@@ -54,7 +54,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DissociateAccessGrantsI
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
     try request.headers.put(allocator, "x-amz-account-id", input.account_id);
 
     return request;

@@ -94,7 +94,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRegionalBucketsInpu
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
     try request.headers.put(allocator, "x-amz-account-id", input.account_id);
     if (input.outpost_id) |v| {
         try request.headers.put(allocator, "x-amz-outpost-id", v);

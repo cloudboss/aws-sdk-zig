@@ -91,9 +91,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyRedshiftIdcApplic
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AuthorizedTokenIssuerList.member.{d}.TrustedTokenIssuerArn=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.trusted_token_issuer_arn) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AuthorizedTokenIssuerList.member.{d}.TrustedTokenIssuerArn=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

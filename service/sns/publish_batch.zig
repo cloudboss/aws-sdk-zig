@@ -77,33 +77,33 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PublishBatchInput, conf
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PublishBatchRequestEntries.member.{d}.MessageDeduplicationId=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.message_deduplication_id) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PublishBatchRequestEntries.member.{d}.MessageDeduplicationId=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PublishBatchRequestEntries.member.{d}.MessageGroupId=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.message_group_id) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PublishBatchRequestEntries.member.{d}.MessageGroupId=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PublishBatchRequestEntries.member.{d}.MessageStructure=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.message_structure) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PublishBatchRequestEntries.member.{d}.MessageStructure=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PublishBatchRequestEntries.member.{d}.Subject=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.subject) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PublishBatchRequestEntries.member.{d}.Subject=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }

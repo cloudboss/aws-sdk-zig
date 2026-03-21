@@ -105,6 +105,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBucketTaggingInput, 
     request.body = body;
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/xml");
+    const body_for_md5: []const u8 = if (@TypeOf(body) == ?[]const u8) (body orelse "") else body;
+    if (body_for_md5.len > 0) {
+        var md5_digest: [16]u8 = undefined;
+        std.crypto.hash.Md5.hash(body_for_md5, &md5_digest, .{});
+        const md5_len = std.base64.standard.Encoder.calcSize(md5_digest.len);
+        const md5_b64 = try allocator.alloc(u8, md5_len);
+        _ = std.base64.standard.Encoder.encode(md5_b64, &md5_digest);
+        try request.headers.put(allocator, "Content-MD5", md5_b64);
+    }
     if (input.checksum_algorithm) |v| {
         try request.headers.put(allocator, "x-amz-sdk-checksum-algorithm", v.wireName());
     }

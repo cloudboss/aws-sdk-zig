@@ -95,8 +95,7 @@ pub const RenameObjectInput = struct {
     source_if_unmodified_since: ?i64 = null,
 };
 
-pub const RenameObjectOutput = struct {
-};
+pub const RenameObjectOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RenameObjectInput, options: CallOptions) !RenameObjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -152,7 +151,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RenameObjectInput, conf
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.client_token) |v| {
         try request.headers.put(allocator, "x-amz-client-token", v);
     }

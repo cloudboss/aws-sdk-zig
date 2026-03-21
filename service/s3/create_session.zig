@@ -182,7 +182,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSessionInput, con
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.bucket_key_enabled) |v| {
         try request.headers.put(allocator, "x-amz-server-side-encryption-bucket-key-enabled", if (v) "true" else "false");
     }

@@ -364,7 +364,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UploadPartCopyInput, co
     request.port = port;
     request.body = body;
     request.query = query;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
     try request.headers.put(allocator, "x-amz-copy-source", input.copy_source);
     if (input.copy_source_if_match) |v| {
         try request.headers.put(allocator, "x-amz-copy-source-if-match", v);

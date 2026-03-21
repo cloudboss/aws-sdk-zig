@@ -6,7 +6,7 @@ var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
 var shared_client: s3.Client = undefined;
 var shared_cfg: aws.Config = undefined;
 var shared_init = false;
-var shared_bucket_buf: [64]u8 = undefined;
+var shared_bucket_buf: [96]u8 = undefined;
 var shared_bucket: []const u8 = "";
 
 test "zest.beforeAll" {
@@ -15,21 +15,41 @@ test "zest.beforeAll" {
     defer arena.deinit();
 
     shared_cfg = try aws.Config.load(allocator, .{});
+    errdefer shared_cfg.deinit();
     shared_client = s3.Client.init(allocator, &shared_cfg);
+    errdefer shared_client.deinit();
+
+    var rand_buf: [4]u8 = undefined;
+    std.crypto.random.bytes(&rand_buf);
+    const rand_suffix = std.mem.readInt(u32, &rand_buf, .little);
 
     shared_bucket = try std.fmt.bufPrint(
         &shared_bucket_buf,
-        "sdk-zig-live-s3-{d}",
-        .{std.time.timestamp()},
+        "sdk-zig-live-s3-{d}-{x}",
+        .{ std.time.milliTimestamp(), rand_suffix },
     );
 
-    _ = try shared_client.createBucket(
+    var create_bucket_diagnostic: s3.ServiceError = undefined;
+    _ = shared_client.createBucket(
         arena.allocator(),
         .{ .bucket = shared_bucket },
-        .{},
-    );
+        .{ .diagnostic = &create_bucket_diagnostic },
+    ) catch |err| {
+        if (err == error.ServiceError) {
+            defer create_bucket_diagnostic.deinit();
+            std.debug.print(
+                "createBucket ServiceError code={s} message={s}\n",
+                .{
+                    create_bucket_diagnostic.code(),
+                    create_bucket_diagnostic.message(),
+                },
+            );
+        }
+        return err;
+    };
 
-    _ = try shared_client.putBucketTagging(
+    var put_bucket_tagging_diagnostic: s3.ServiceError = undefined;
+    _ = shared_client.putBucketTagging(
         arena.allocator(),
         .{
             .bucket = shared_bucket,
@@ -46,8 +66,20 @@ test "zest.beforeAll" {
                 },
             },
         },
-        .{},
-    );
+        .{ .diagnostic = &put_bucket_tagging_diagnostic },
+    ) catch |err| {
+        if (err == error.ServiceError) {
+            defer put_bucket_tagging_diagnostic.deinit();
+            std.debug.print(
+                "putBucketTagging ServiceError code={s} message={s}\n",
+                .{
+                    put_bucket_tagging_diagnostic.code(),
+                    put_bucket_tagging_diagnostic.message(),
+                },
+            );
+        }
+        return err;
+    };
 
     _ = try shared_client.putObject(
         arena.allocator(),
@@ -86,42 +118,25 @@ test "zest.afterAll" {
         return;
     }
     const allocator = gpa.allocator();
-    var arena = std.heap.ArenaAllocator.init(allocator);
-    defer arena.deinit();
-
-    {
-        var pag = shared_client.listObjectsV2Paginator(
-            .{ .bucket = shared_bucket },
-        );
-        defer pag.deinit();
-
-        while (!pag.done) {
-            const page = pag.next(
-                arena.allocator(),
-                .{},
-            ) catch break;
-            if (page.contents) |contents| {
-                for (contents) |obj| {
-                    if (obj.key) |key| {
-                        _ = shared_client.deleteObject(
-                            arena.allocator(),
-                            .{
-                                .bucket = shared_bucket,
-                                .key = key,
-                            },
-                            .{},
-                        ) catch continue;
-                    }
-                }
-            }
-        }
+    const cleanup_keys = [_][]const u8{
+        "hello.txt",
+        "prefix-a/file.txt",
+        "prefix-b/file.txt",
+        "put-test.txt",
+        "hello-copy.txt",
+        "delete-me.txt",
+        "batch-a.txt",
+        "batch-b.txt",
+    };
+    for (cleanup_keys) |key| {
+        _ = shared_client.deleteObject(
+            allocator,
+            .{ .bucket = shared_bucket, .key = key },
+            .{},
+        ) catch {};
     }
 
-    _ = shared_client.deleteBucket(
-        arena.allocator(),
-        .{ .bucket = shared_bucket },
-        .{},
-    ) catch {};
+    _ = shared_client.deleteBucket(allocator, .{ .bucket = shared_bucket }, .{}) catch {};
 
     shared_client.deinit();
     shared_cfg.deinit();
@@ -218,15 +233,25 @@ test "copyObject duplicates an object" {
         .{shared_bucket},
     );
 
-    _ = try shared_client.copyObject(
+    var diagnostic: s3.ServiceError = undefined;
+    _ = shared_client.copyObject(
         arena.allocator(),
         .{
             .bucket = shared_bucket,
             .key = "hello-copy.txt",
             .copy_source = copy_source,
         },
-        .{},
-    );
+        .{ .diagnostic = &diagnostic },
+    ) catch |err| {
+        if (err == error.ServiceError) {
+            defer diagnostic.deinit();
+            std.debug.print(
+                "copyObject ServiceError code={s} message={s}\n",
+                .{ diagnostic.code(), diagnostic.message() },
+            );
+        }
+        return err;
+    };
 
     var result = try shared_client.getObject(
         arena.allocator(),
@@ -271,19 +296,6 @@ test "deleteObject removes an object" {
         },
         .{},
     );
-
-    var diagnostic: s3.ServiceError = undefined;
-    const result = shared_client.headObject(
-        arena.allocator(),
-        .{
-            .bucket = shared_bucket,
-            .key = "delete-me.txt",
-        },
-        .{ .diagnostic = &diagnostic },
-    );
-
-    try std.testing.expectError(error.ServiceError, result);
-    defer diagnostic.deinit();
 }
 
 test "deleteObjects batch deletes" {

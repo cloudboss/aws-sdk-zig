@@ -67,7 +67,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetQueryLoggingConfigIn
     request.tls = tls;
     request.port = port;
     request.body = body;
-    try request.headers.put(allocator, "Content-Type", "application/xml");
 
     return request;
 }
