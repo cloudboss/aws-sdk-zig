@@ -117,7 +117,10 @@ test "bedrock listFoundationModels" {
         arena.allocator(),
         .{},
         .{},
-    ) catch return;
+    ) catch |err| {
+        if (err == error.ServiceError) return;
+        return err;
+    };
 }
 
 test "emr listClusters" {
@@ -141,5 +144,8 @@ test "textract listAdapterVersions" {
         arena.allocator(),
         .{},
         .{},
-    ) catch return;
+    ) catch |err| {
+        if (err == error.ServiceError) return;
+        return err;
+    };
 }
