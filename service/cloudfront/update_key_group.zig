@@ -66,7 +66,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateKeyGroupInput, co
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<KeyGroupConfig xmlns=" ++ &[_]u8{0x22} ++ "http://cloudfront.amazonaws.com/doc/2020-05-31/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<KeyGroupConfig xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try serde.serializeKeyGroupConfig(allocator, &body_buf, input.key_group_config);
     try body_buf.appendSlice(allocator, "</KeyGroupConfig>");
     const body = try body_buf.toOwnedSlice(allocator);

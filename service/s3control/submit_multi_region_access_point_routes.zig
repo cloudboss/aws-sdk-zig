@@ -63,7 +63,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SubmitMultiRegionAccess
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<SubmitMultiRegionAccessPointRoutesRequest>");
+    try body_buf.appendSlice(allocator, "<SubmitMultiRegionAccessPointRoutesRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     try body_buf.appendSlice(allocator, "<RouteUpdates>");
     try serde.serializeRouteList(allocator, &body_buf, input.route_updates, "Route");
     try body_buf.appendSlice(allocator, "</RouteUpdates>");

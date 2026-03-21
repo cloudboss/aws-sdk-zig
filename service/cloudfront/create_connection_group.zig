@@ -71,7 +71,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateConnectionGroupIn
     const path = "/2020-05-31/connection-group";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateConnectionGroupRequest>");
+    try body_buf.appendSlice(allocator, "<CreateConnectionGroupRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     if (input.anycast_ip_list_id) |v| {
         try body_buf.appendSlice(allocator, "<AnycastIpListId>");
         try aws.xml.appendXmlEscaped(allocator, &body_buf, v);

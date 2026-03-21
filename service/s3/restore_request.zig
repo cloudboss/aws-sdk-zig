@@ -42,5 +42,5 @@ pub const RestoreRequest = struct {
     /// more](http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/)
     ///
     /// Type of restore request.
-    type: ?RestoreRequestType = null,
+    @"type": ?RestoreRequestType = null,
 };

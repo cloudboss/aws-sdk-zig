@@ -63,7 +63,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteVPCAssociationAut
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<DeleteVPCAssociationAuthorizationRequest>");
+    try body_buf.appendSlice(allocator, "<DeleteVPCAssociationAuthorizationRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">");
     try body_buf.appendSlice(allocator, "<VPC>");
     try serde.serializeVPC(allocator, &body_buf, input.vpc);
     try body_buf.appendSlice(allocator, "</VPC>");

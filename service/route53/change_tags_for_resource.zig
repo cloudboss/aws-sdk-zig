@@ -76,7 +76,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ChangeTagsForResourceIn
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<ChangeTagsForResourceRequest>");
+    try body_buf.appendSlice(allocator, "<ChangeTagsForResourceRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">");
     if (input.add_tags) |v| {
         try body_buf.appendSlice(allocator, "<AddTags>");
         try serde.serializeTagList(allocator, &body_buf, v, "Tag");

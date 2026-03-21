@@ -67,7 +67,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListConnectionFunctions
     const path = "/2020-05-31/connection-functions";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<ListConnectionFunctionsRequest>");
+    try body_buf.appendSlice(allocator, "<ListConnectionFunctionsRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     if (input.marker) |v| {
         try body_buf.appendSlice(allocator, "<Marker>");
         try aws.xml.appendXmlEscaped(allocator, &body_buf, v);

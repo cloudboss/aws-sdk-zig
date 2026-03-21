@@ -85,7 +85,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CopyDistributionInput, 
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CopyDistributionRequest>");
+    try body_buf.appendSlice(allocator, "<CopyDistributionRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try body_buf.appendSlice(allocator, "<CallerReference>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.caller_reference);
     try body_buf.appendSlice(allocator, "</CallerReference>");

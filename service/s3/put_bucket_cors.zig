@@ -96,7 +96,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBucketCorsInput, con
     const query = try query_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CORSConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<CORSConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
     try serde.serializeCORSConfiguration(allocator, &body_buf, input.cors_configuration);
     try body_buf.appendSlice(allocator, "</CORSConfiguration>");
     const body = try body_buf.toOwnedSlice(allocator);

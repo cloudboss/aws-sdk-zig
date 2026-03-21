@@ -71,7 +71,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     _ = body;
     _ = status;
     _ = headers;
-    const result: ListTagsForResourceOutput = .{};
+    const result: ListTagsForResourceOutput = undefined;
 
     return result;
 }

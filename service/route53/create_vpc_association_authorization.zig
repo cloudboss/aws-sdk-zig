@@ -66,7 +66,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVPCAssociationAut
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateVPCAssociationAuthorizationRequest>");
+    try body_buf.appendSlice(allocator, "<CreateVPCAssociationAuthorizationRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">");
     try body_buf.appendSlice(allocator, "<VPC>");
     try serde.serializeVPC(allocator, &body_buf, input.vpc);
     try body_buf.appendSlice(allocator, "</VPC>");
@@ -85,7 +85,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVPCAssociationAut
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateVPCAssociationAuthorizationOutput {
-    var result: CreateVPCAssociationAuthorizationOutput = .{};
+    var result: CreateVPCAssociationAuthorizationOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

@@ -61,7 +61,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutAccessPointScopeInpu
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<PutAccessPointScopeRequest>");
+    try body_buf.appendSlice(allocator, "<PutAccessPointScopeRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     try body_buf.appendSlice(allocator, "<Scope>");
     try serde.serializeScope(allocator, &body_buf, input.scope);
     try body_buf.appendSlice(allocator, "</Scope>");

@@ -73,7 +73,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetHealthCheckInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetHealthCheckOutput {
-    var result: GetHealthCheckOutput = .{};
+    var result: GetHealthCheckOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

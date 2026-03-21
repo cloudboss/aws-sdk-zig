@@ -68,7 +68,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRealtimeLogConfig
     const path = "/2020-05-31/realtime-log-config";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateRealtimeLogConfigRequest>");
+    try body_buf.appendSlice(allocator, "<CreateRealtimeLogConfigRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try body_buf.appendSlice(allocator, "<EndPoints>");
     try serde.serializeEndPointList(allocator, &body_buf, input.end_points, "member");
     try body_buf.appendSlice(allocator, "</EndPoints>");

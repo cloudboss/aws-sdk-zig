@@ -60,7 +60,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFieldLevelEncrypt
     const path = "/2020-05-31/field-level-encryption-profile";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<FieldLevelEncryptionProfileConfig xmlns=" ++ &[_]u8{0x22} ++ "http://cloudfront.amazonaws.com/doc/2020-05-31/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<FieldLevelEncryptionProfileConfig xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try serde.serializeFieldLevelEncryptionProfileConfig(allocator, &body_buf, input.field_level_encryption_profile_config);
     try body_buf.appendSlice(allocator, "</FieldLevelEncryptionProfileConfig>");
     const body = try body_buf.toOwnedSlice(allocator);

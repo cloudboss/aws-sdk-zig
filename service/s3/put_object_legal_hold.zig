@@ -125,7 +125,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutObjectLegalHoldInput
     const body: ?[]const u8 = blk: {
         if (input.legal_hold) |payload| {
             var body_buf: std.ArrayList(u8) = .{};
-            try body_buf.appendSlice(allocator, "<ObjectLockLegalHold xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+            try body_buf.appendSlice(allocator, "<ObjectLockLegalHold xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
             try serde.serializeObjectLockLegalHold(allocator, &body_buf, payload);
             try body_buf.appendSlice(allocator, "</ObjectLockLegalHold>");
             break :blk try body_buf.toOwnedSlice(allocator);

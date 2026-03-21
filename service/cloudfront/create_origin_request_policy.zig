@@ -59,7 +59,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateOriginRequestPoli
     const path = "/2020-05-31/origin-request-policy";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<OriginRequestPolicyConfig xmlns=" ++ &[_]u8{0x22} ++ "http://cloudfront.amazonaws.com/doc/2020-05-31/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<OriginRequestPolicyConfig xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try serde.serializeOriginRequestPolicyConfig(allocator, &body_buf, input.origin_request_policy_config);
     try body_buf.appendSlice(allocator, "</OriginRequestPolicyConfig>");
     const body = try body_buf.toOwnedSlice(allocator);

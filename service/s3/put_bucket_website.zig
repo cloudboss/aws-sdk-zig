@@ -92,7 +92,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBucketWebsiteInput, 
     const query = try query_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<WebsiteConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<WebsiteConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
     try serde.serializeWebsiteConfiguration(allocator, &body_buf, input.website_configuration);
     try body_buf.appendSlice(allocator, "</WebsiteConfiguration>");
     const body = try body_buf.toOwnedSlice(allocator);

@@ -73,7 +73,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutAccessPointPolicyInp
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<PutAccessPointPolicyRequest>");
+    try body_buf.appendSlice(allocator, "<PutAccessPointPolicyRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     try body_buf.appendSlice(allocator, "<Policy>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.policy);
     try body_buf.appendSlice(allocator, "</Policy>");

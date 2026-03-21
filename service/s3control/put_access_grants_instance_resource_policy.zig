@@ -63,7 +63,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutAccessGrantsInstance
     const path = "/v20180820/accessgrantsinstance/resourcepolicy";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<PutAccessGrantsInstanceResourcePolicyRequest>");
+    try body_buf.appendSlice(allocator, "<PutAccessGrantsInstanceResourcePolicyRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     if (input.organization) |v| {
         try body_buf.appendSlice(allocator, "<Organization>");
         try aws.xml.appendXmlEscaped(allocator, &body_buf, v);

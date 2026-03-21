@@ -99,7 +99,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAccessGrantsInsta
     const path = "/v20180820/accessgrantsinstance";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateAccessGrantsInstanceRequest>");
+    try body_buf.appendSlice(allocator, "<CreateAccessGrantsInstanceRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     if (input.identity_center_arn) |v| {
         try body_buf.appendSlice(allocator, "<IdentityCenterArn>");
         try aws.xml.appendXmlEscaped(allocator, &body_buf, v);

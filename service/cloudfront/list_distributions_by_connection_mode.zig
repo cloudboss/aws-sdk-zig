@@ -59,7 +59,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDistributionsByConn
 
     var path_buf: std.ArrayList(u8) = .{};
     try path_buf.appendSlice(allocator, "/2020-05-31/distributionsByConnectionMode/");
-    try path_buf.appendSlice(allocator, input.connection_mode);
+    try path_buf.appendSlice(allocator, input.connection_mode.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .{};

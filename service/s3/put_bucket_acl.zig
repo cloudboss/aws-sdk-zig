@@ -119,7 +119,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBucketAclInput, conf
     const body: ?[]const u8 = blk: {
         if (input.access_control_policy) |payload| {
             var body_buf: std.ArrayList(u8) = .{};
-            try body_buf.appendSlice(allocator, "<AccessControlPolicy xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+            try body_buf.appendSlice(allocator, "<AccessControlPolicy xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
             try serde.serializeAccessControlPolicy(allocator, &body_buf, payload);
             try body_buf.appendSlice(allocator, "</AccessControlPolicy>");
             break :blk try body_buf.toOwnedSlice(allocator);

@@ -123,7 +123,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetGeoLocationInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetGeoLocationOutput {
-    var result: GetGeoLocationOutput = .{};
+    var result: GetGeoLocationOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

@@ -66,7 +66,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateStreamingDistribu
     const query = try query_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<StreamingDistributionConfigWithTags xmlns=" ++ &[_]u8{0x22} ++ "http://cloudfront.amazonaws.com/doc/2020-05-31/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<StreamingDistributionConfigWithTags xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try serde.serializeStreamingDistributionConfigWithTags(allocator, &body_buf, input.streaming_distribution_config_with_tags);
     try body_buf.appendSlice(allocator, "</StreamingDistributionConfigWithTags>");
     const body = try body_buf.toOwnedSlice(allocator);

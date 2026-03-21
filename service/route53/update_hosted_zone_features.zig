@@ -57,7 +57,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateHostedZoneFeature
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<UpdateHostedZoneFeaturesRequest>");
+    try body_buf.appendSlice(allocator, "<UpdateHostedZoneFeaturesRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">");
     if (input.enable_accelerated_recovery) |v| {
         try body_buf.appendSlice(allocator, "<EnableAcceleratedRecovery>");
         try body_buf.appendSlice(allocator, if (v) "true" else "false");

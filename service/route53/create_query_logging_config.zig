@@ -72,7 +72,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateQueryLoggingConfi
     const path = "/2013-04-01/queryloggingconfig";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateQueryLoggingConfigRequest>");
+    try body_buf.appendSlice(allocator, "<CreateQueryLoggingConfigRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">");
     try body_buf.appendSlice(allocator, "<CloudWatchLogsLogGroupArn>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.cloud_watch_logs_log_group_arn);
     try body_buf.appendSlice(allocator, "</CloudWatchLogsLogGroupArn>");
@@ -94,7 +94,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateQueryLoggingConfi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateQueryLoggingConfigOutput {
-    var result: CreateQueryLoggingConfigOutput = .{};
+    var result: CreateQueryLoggingConfigOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

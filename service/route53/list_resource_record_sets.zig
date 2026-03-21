@@ -192,9 +192,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListResourceRecordSetsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListResourceRecordSetsOutput {
-    var result: ListResourceRecordSetsOutput = .{
-        .max_items = 0,
-    };
+    var result: ListResourceRecordSetsOutput = undefined;
+    result.next_record_identifier = null;
+    result.next_record_name = null;
+    result.next_record_type = null;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

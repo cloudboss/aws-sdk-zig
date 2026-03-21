@@ -44,7 +44,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResourcePolicyInput,
     const path = "/2020-05-31/get-resource-policy";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<GetResourcePolicyRequest>");
+    try body_buf.appendSlice(allocator, "<GetResourcePolicyRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try body_buf.appendSlice(allocator, "<ResourceArn>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.resource_arn);
     try body_buf.appendSlice(allocator, "</ResourceArn>");

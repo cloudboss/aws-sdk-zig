@@ -69,7 +69,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFunctionInput, co
     const path = "/2020-05-31/function";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateFunctionRequest>");
+    try body_buf.appendSlice(allocator, "<CreateFunctionRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try body_buf.appendSlice(allocator, "<FunctionCode>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.function_code);
     try body_buf.appendSlice(allocator, "</FunctionCode>");

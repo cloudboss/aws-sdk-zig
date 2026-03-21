@@ -56,7 +56,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TagResourceInput, confi
     const query = try query_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<Tags xmlns=" ++ &[_]u8{0x22} ++ "http://cloudfront.amazonaws.com/doc/2020-05-31/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<Tags xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try serde.serializeTags(allocator, &body_buf, input.tags);
     try body_buf.appendSlice(allocator, "</Tags>");
     const body = try body_buf.toOwnedSlice(allocator);

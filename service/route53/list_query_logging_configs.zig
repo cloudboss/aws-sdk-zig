@@ -132,7 +132,8 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListQueryLoggingConfigs
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListQueryLoggingConfigsOutput {
-    var result: ListQueryLoggingConfigsOutput = .{};
+    var result: ListQueryLoggingConfigsOutput = undefined;
+    result.next_token = null;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

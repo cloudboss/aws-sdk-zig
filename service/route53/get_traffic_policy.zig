@@ -76,7 +76,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTrafficPolicyInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTrafficPolicyOutput {
-    var result: GetTrafficPolicyOutput = .{};
+    var result: GetTrafficPolicyOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

@@ -73,7 +73,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBucketMetadataTab
     const query = try query_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<MetadataTableConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<MetadataTableConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
     try serde.serializeMetadataTableConfiguration(allocator, &body_buf, input.metadata_table_configuration);
     try body_buf.appendSlice(allocator, "</MetadataTableConfiguration>");
     const body = try body_buf.toOwnedSlice(allocator);

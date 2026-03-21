@@ -70,7 +70,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetChangeInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetChangeOutput {
-    var result: GetChangeOutput = .{};
+    var result: GetChangeOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

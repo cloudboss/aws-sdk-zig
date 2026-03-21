@@ -165,7 +165,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TestDNSAnswerInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !TestDNSAnswerOutput {
-    var result: TestDNSAnswerOutput = .{};
+    var result: TestDNSAnswerOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 
@@ -188,7 +188,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "RecordName")) {
                     result.record_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "RecordType")) {
-                    result.record_type = RRType.fromWireName(try reader.readElementText());
+                    result.record_type = RRType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "ResponseCode")) {
                     result.response_code = try allocator.dupe(u8, try reader.readElementText());
                 } else {

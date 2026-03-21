@@ -110,6 +110,14 @@ pub fn resolveEndpoint(
         return allocator.dupe(u8, override);
     }
 
+    // Route53 uses a global endpoint in the aws partition.
+    if (std.mem.eql(u8, service, "route53") and
+        std.mem.eql(u8, partitionForRegion(region).name, "aws") and
+        !options.fips and !options.dual_stack)
+    {
+        return allocator.dupe(u8, "route53.amazonaws.com");
+    }
+
     const partition = partitionForRegion(region);
 
     if (options.fips and !partition.supports_fips) return error.FipsNotSupported;
@@ -140,6 +148,34 @@ pub fn resolveEndpoint(
             .{ service, region, partition.dns_suffix },
         );
     }
+}
+
+test "resolveEndpoint route53 uses global endpoint in aws partition" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "route53", "us-east-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("route53.amazonaws.com", host);
+}
+
+test "resolveEndpoint route53 fips falls through to regional" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "route53", "us-east-1", .{ .fips = true });
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("route53-fips.us-east-1.amazonaws.com", host);
+}
+
+test "resolveEndpoint route53 dual_stack falls through to regional" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "route53", "us-east-1", .{ .dual_stack = true });
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("route53.us-east-1.api.aws", host);
+}
+
+test "resolveEndpoint route53 govcloud falls through to regional" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "route53", "us-gov-west-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("route53.us-gov-west-1.amazonaws.com", host);
 }
 
 test "partitionForRegion aws" {

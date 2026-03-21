@@ -49,7 +49,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TagResourceInput, confi
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<TagResourceRequest>");
+    try body_buf.appendSlice(allocator, "<TagResourceRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     try body_buf.appendSlice(allocator, "<Tags>");
     try serde.serializeTagList(allocator, &body_buf, input.tags, "Tag");
     try body_buf.appendSlice(allocator, "</Tags>");

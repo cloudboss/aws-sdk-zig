@@ -5,7 +5,8 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const GetHostedZoneCountInput = struct {};
+pub const GetHostedZoneCountInput = struct {
+};
 
 pub const GetHostedZoneCountOutput = struct {
     /// The total number of public and private hosted zones that are associated with
@@ -63,7 +64,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetHostedZoneCountInput
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetHostedZoneCountOutput {
     _ = allocator;
-    var result: GetHostedZoneCountOutput = .{ .hosted_zone_count = 0 };
+    var result: GetHostedZoneCountOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

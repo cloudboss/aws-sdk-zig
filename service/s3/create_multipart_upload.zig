@@ -689,7 +689,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMultipartUploadIn
     const query = try query_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateMultipartUploadRequest>");
+    try body_buf.appendSlice(allocator, "<CreateMultipartUploadRequest xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
     if (input.metadata) |v| {
         try body_buf.appendSlice(allocator, "<Metadata>");
         try serde.serializeMetadata(allocator, &body_buf, v, "entry");

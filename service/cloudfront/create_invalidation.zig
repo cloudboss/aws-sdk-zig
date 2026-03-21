@@ -64,7 +64,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInvalidationInput
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<InvalidationBatch xmlns=" ++ &[_]u8{0x22} ++ "http://cloudfront.amazonaws.com/doc/2020-05-31/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<InvalidationBatch xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try serde.serializeInvalidationBatch(allocator, &body_buf, input.invalidation_batch);
     try body_buf.appendSlice(allocator, "</InvalidationBatch>");
     const body = try body_buf.toOwnedSlice(allocator);

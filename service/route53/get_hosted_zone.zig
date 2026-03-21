@@ -80,7 +80,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetHostedZoneInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetHostedZoneOutput {
-    var result: GetHostedZoneOutput = .{};
+    var result: GetHostedZoneOutput = undefined;
+    result.delegation_set = null;
+    result.vp_cs = null;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

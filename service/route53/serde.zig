@@ -588,9 +588,7 @@ pub fn deserializeChangeInfo(allocator: std.mem.Allocator, reader: *aws.xml.Read
                 } else if (std.mem.eql(u8, e.local, "Id")) {
                     result.id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = ChangeStatus.fromWireName(try reader.readElementText()) orelse {
-                        return error.InvalidEnumValue;
-                    };
+                    result.status = ChangeStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "SubmittedAt")) {
                     result.submitted_at = try aws.date.parseIso8601(try reader.readElementText());
                 } else {
@@ -1384,9 +1382,7 @@ pub fn deserializeResourceRecordSet(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "TTL")) {
                     result.ttl = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.type = RRType.fromWireName(try reader.readElementText()) orelse {
-                        return error.InvalidEnumValue;
-                    };
+                    result.type = RRType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Weight")) {
                     result.weight = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else {

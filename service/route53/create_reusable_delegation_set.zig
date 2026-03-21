@@ -66,7 +66,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReusableDelegatio
     const path = "/2013-04-01/delegationset";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateReusableDelegationSetRequest>");
+    try body_buf.appendSlice(allocator, "<CreateReusableDelegationSetRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">");
     try body_buf.appendSlice(allocator, "<CallerReference>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.caller_reference);
     try body_buf.appendSlice(allocator, "</CallerReference>");
@@ -90,7 +90,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReusableDelegatio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateReusableDelegationSetOutput {
-    var result: CreateReusableDelegationSetOutput = .{};
+    var result: CreateReusableDelegationSetOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

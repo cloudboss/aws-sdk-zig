@@ -95,7 +95,8 @@ pub const RenameObjectInput = struct {
     source_if_unmodified_since: ?i64 = null,
 };
 
-pub const RenameObjectOutput = struct {};
+pub const RenameObjectOutput = struct {
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RenameObjectInput, options: CallOptions) !RenameObjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

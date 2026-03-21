@@ -125,7 +125,8 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetObjectTaggingInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetObjectTaggingOutput {
-    var result: GetObjectTaggingOutput = .{};
+    var result: GetObjectTaggingOutput = undefined;
+    result.version_id = null;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

@@ -75,7 +75,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateBucketMetadataInv
     const query = try query_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<InventoryTableConfigurationUpdates xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<InventoryTableConfigurationUpdates xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
     try serde.serializeInventoryTableConfigurationUpdates(allocator, &body_buf, input.inventory_table_configuration);
     try body_buf.appendSlice(allocator, "</InventoryTableConfigurationUpdates>");
     const body = try body_buf.toOwnedSlice(allocator);

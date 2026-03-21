@@ -121,7 +121,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTrafficPoliciesInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTrafficPoliciesOutput {
-    var result: ListTrafficPoliciesOutput = .{};
+    var result: ListTrafficPoliciesOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 
@@ -138,7 +138,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "IsTruncated")) {
                     result.is_truncated = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "MaxItems")) {
-                    result.max_items = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                    result.max_items = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else if (std.mem.eql(u8, e.local, "TrafficPolicyIdMarker")) {
                     result.traffic_policy_id_marker = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TrafficPolicySummaries")) {

@@ -89,7 +89,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateJobPriorityInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateJobPriorityOutput {
-    var result: UpdateJobPriorityOutput = .{};
+    var result: UpdateJobPriorityOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 
@@ -106,7 +106,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "JobId")) {
                     result.job_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Priority")) {
-                    result.priority = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                    result.priority = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else {
                     try reader.skipElement();
                 }

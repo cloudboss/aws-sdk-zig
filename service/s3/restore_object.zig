@@ -127,7 +127,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreObjectInput, con
     const body: ?[]const u8 = blk: {
         if (input.restore_request) |payload| {
             var body_buf: std.ArrayList(u8) = .{};
-            try body_buf.appendSlice(allocator, "<RestoreRequest xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+            try body_buf.appendSlice(allocator, "<RestoreRequest xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
             try serde.serializeRestoreRequest(allocator, &body_buf, payload);
             try body_buf.appendSlice(allocator, "</RestoreRequest>");
             break :blk try body_buf.toOwnedSlice(allocator);

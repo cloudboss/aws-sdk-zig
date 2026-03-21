@@ -202,7 +202,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSessionInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateSessionOutput {
-    var result: CreateSessionOutput = .{};
+    var result: CreateSessionOutput = undefined;
+    result.bucket_key_enabled = null;
+    result.server_side_encryption = null;
+    result.ssekms_encryption_context = null;
+    result.ssekms_key_id = null;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

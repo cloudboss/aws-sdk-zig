@@ -59,7 +59,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateOriginAccessContr
     const path = "/2020-05-31/origin-access-control";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<OriginAccessControlConfig xmlns=" ++ &[_]u8{0x22} ++ "http://cloudfront.amazonaws.com/doc/2020-05-31/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<OriginAccessControlConfig xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try serde.serializeOriginAccessControlConfig(allocator, &body_buf, input.origin_access_control_config);
     try body_buf.appendSlice(allocator, "</OriginAccessControlConfig>");
     const body = try body_buf.toOwnedSlice(allocator);

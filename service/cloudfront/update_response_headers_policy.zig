@@ -68,7 +68,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateResponseHeadersPo
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<ResponseHeadersPolicyConfig xmlns=" ++ &[_]u8{0x22} ++ "http://cloudfront.amazonaws.com/doc/2020-05-31/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<ResponseHeadersPolicyConfig xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try serde.serializeResponseHeadersPolicyConfig(allocator, &body_buf, input.response_headers_policy_config);
     try body_buf.appendSlice(allocator, "</ResponseHeadersPolicyConfig>");
     const body = try body_buf.toOwnedSlice(allocator);

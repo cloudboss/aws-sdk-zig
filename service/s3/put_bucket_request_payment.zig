@@ -92,7 +92,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBucketRequestPayment
     const query = try query_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<RequestPaymentConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<RequestPaymentConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
     try serde.serializeRequestPaymentConfiguration(allocator, &body_buf, input.request_payment_configuration);
     try body_buf.appendSlice(allocator, "</RequestPaymentConfiguration>");
     const body = try body_buf.toOwnedSlice(allocator);

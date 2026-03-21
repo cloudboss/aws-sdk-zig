@@ -128,7 +128,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateHostedZoneInput, 
     const path = "/2013-04-01/hostedzone";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateHostedZoneRequest>");
+    try body_buf.appendSlice(allocator, "<CreateHostedZoneRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">");
     try body_buf.appendSlice(allocator, "<CallerReference>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.caller_reference);
     try body_buf.appendSlice(allocator, "</CallerReference>");
@@ -165,9 +165,8 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateHostedZoneInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateHostedZoneOutput {
-    var result: CreateHostedZoneOutput = .{
-        .location = "",
-    };
+    var result: CreateHostedZoneOutput = undefined;
+    result.vpc = null;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

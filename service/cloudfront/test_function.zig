@@ -71,7 +71,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TestFunctionInput, conf
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<TestFunctionRequest>");
+    try body_buf.appendSlice(allocator, "<TestFunctionRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try body_buf.appendSlice(allocator, "<EventObject>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.event_object);
     try body_buf.appendSlice(allocator, "</EventObject>");

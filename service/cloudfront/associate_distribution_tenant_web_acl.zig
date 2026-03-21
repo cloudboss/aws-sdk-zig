@@ -67,7 +67,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateDistributionTe
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<AssociateDistributionTenantWebACLRequest>");
+    try body_buf.appendSlice(allocator, "<AssociateDistributionTenantWebACLRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try body_buf.appendSlice(allocator, "<WebACLArn>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.web_acl_arn);
     try body_buf.appendSlice(allocator, "</WebACLArn>");

@@ -94,7 +94,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAccessGrantsLocat
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<UpdateAccessGrantsLocationRequest>");
+    try body_buf.appendSlice(allocator, "<UpdateAccessGrantsLocationRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     try body_buf.appendSlice(allocator, "<IAMRoleArn>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.iam_role_arn);
     try body_buf.appendSlice(allocator, "</IAMRoleArn>");

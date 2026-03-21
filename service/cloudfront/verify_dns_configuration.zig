@@ -56,7 +56,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: VerifyDnsConfigurationI
     const path = "/2020-05-31/verify-dns-configuration";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<VerifyDnsConfigurationRequest>");
+    try body_buf.appendSlice(allocator, "<VerifyDnsConfigurationRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     if (input.domain) |v| {
         try body_buf.appendSlice(allocator, "<Domain>");
         try aws.xml.appendXmlEscaped(allocator, &body_buf, v);

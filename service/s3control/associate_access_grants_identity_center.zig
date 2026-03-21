@@ -54,7 +54,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateAccessGrantsId
     const path = "/v20180820/accessgrantsinstance/identitycenter";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<AssociateAccessGrantsIdentityCenterRequest>");
+    try body_buf.appendSlice(allocator, "<AssociateAccessGrantsIdentityCenterRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     try body_buf.appendSlice(allocator, "<IdentityCenterArn>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.identity_center_arn);
     try body_buf.appendSlice(allocator, "</IdentityCenterArn>");

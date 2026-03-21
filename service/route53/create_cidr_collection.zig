@@ -64,7 +64,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCidrCollectionInp
     const path = "/2013-04-01/cidrcollection";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateCidrCollectionRequest>");
+    try body_buf.appendSlice(allocator, "<CreateCidrCollectionRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">");
     try body_buf.appendSlice(allocator, "<CallerReference>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.caller_reference);
     try body_buf.appendSlice(allocator, "</CallerReference>");

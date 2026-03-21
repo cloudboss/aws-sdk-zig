@@ -59,7 +59,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCloudFrontOriginA
     const path = "/2020-05-31/origin-access-identity/cloudfront";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CloudFrontOriginAccessIdentityConfig xmlns=" ++ &[_]u8{0x22} ++ "http://cloudfront.amazonaws.com/doc/2020-05-31/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<CloudFrontOriginAccessIdentityConfig xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try serde.serializeCloudFrontOriginAccessIdentityConfig(allocator, &body_buf, input.cloud_front_origin_access_identity_config);
     try body_buf.appendSlice(allocator, "</CloudFrontOriginAccessIdentityConfig>");
     const body = try body_buf.toOwnedSlice(allocator);

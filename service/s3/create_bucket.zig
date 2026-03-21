@@ -129,7 +129,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBucketInput, conf
     const body: ?[]const u8 = blk: {
         if (input.create_bucket_configuration) |payload| {
             var body_buf: std.ArrayList(u8) = .{};
-            try body_buf.appendSlice(allocator, "<CreateBucketConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+            try body_buf.appendSlice(allocator, "<CreateBucketConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
             try serde.serializeCreateBucketConfiguration(allocator, &body_buf, payload);
             try body_buf.appendSlice(allocator, "</CreateBucketConfiguration>");
             break :blk try body_buf.toOwnedSlice(allocator);

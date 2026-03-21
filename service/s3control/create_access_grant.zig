@@ -149,7 +149,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAccessGrantInput,
     const path = "/v20180820/accessgrantsinstance/grant";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateAccessGrantRequest>");
+    try body_buf.appendSlice(allocator, "<CreateAccessGrantRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     if (input.access_grants_location_configuration) |v| {
         try body_buf.appendSlice(allocator, "<AccessGrantsLocationConfiguration>");
         try serde.serializeAccessGrantsLocationConfiguration(allocator, &body_buf, v);

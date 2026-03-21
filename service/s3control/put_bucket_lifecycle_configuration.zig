@@ -61,7 +61,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBucketLifecycleConfi
     const body: ?[]const u8 = blk: {
         if (input.lifecycle_configuration) |payload| {
             var body_buf: std.ArrayList(u8) = .{};
-            try body_buf.appendSlice(allocator, "<LifecycleConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://awss3control.amazonaws.com/doc/2018-08-20/" ++ &[_]u8{0x22} ++ ">");
+            try body_buf.appendSlice(allocator, "<LifecycleConfiguration xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
             try serde.serializeLifecycleConfiguration(allocator, &body_buf, payload);
             try body_buf.appendSlice(allocator, "</LifecycleConfiguration>");
             break :blk try body_buf.toOwnedSlice(allocator);

@@ -96,7 +96,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutPublicAccessBlockInp
     const query = try query_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<PublicAccessBlockConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<PublicAccessBlockConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
     try serde.serializePublicAccessBlockConfiguration(allocator, &body_buf, input.public_access_block_configuration);
     try body_buf.appendSlice(allocator, "</PublicAccessBlockConfiguration>");
     const body = try body_buf.toOwnedSlice(allocator);

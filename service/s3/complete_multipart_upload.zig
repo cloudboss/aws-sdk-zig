@@ -383,7 +383,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CompleteMultipartUpload
     const body: ?[]const u8 = blk: {
         if (input.multipart_upload) |payload| {
             var body_buf: std.ArrayList(u8) = .{};
-            try body_buf.appendSlice(allocator, "<CompletedMultipartUpload xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+            try body_buf.appendSlice(allocator, "<CompletedMultipartUpload xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
             try serde.serializeCompletedMultipartUpload(allocator, &body_buf, payload);
             try body_buf.appendSlice(allocator, "</CompletedMultipartUpload>");
             break :blk try body_buf.toOwnedSlice(allocator);

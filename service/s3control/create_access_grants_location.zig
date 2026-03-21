@@ -95,7 +95,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAccessGrantsLocat
     const path = "/v20180820/accessgrantsinstance/location";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateAccessGrantsLocationRequest>");
+    try body_buf.appendSlice(allocator, "<CreateAccessGrantsLocationRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     try body_buf.appendSlice(allocator, "<IAMRoleArn>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.iam_role_arn);
     try body_buf.appendSlice(allocator, "</IAMRoleArn>");

@@ -130,7 +130,8 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListHostedZonesByVPCInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListHostedZonesByVPCOutput {
-    var result: ListHostedZonesByVPCOutput = .{};
+    var result: ListHostedZonesByVPCOutput = undefined;
+    result.next_token = null;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 
@@ -147,7 +148,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 if (std.mem.eql(u8, e.local, "HostedZoneSummaries")) {
                     result.hosted_zone_summaries = try serde.deserializeHostedZoneSummaries(allocator, &reader, "HostedZoneSummary");
                 } else if (std.mem.eql(u8, e.local, "MaxItems")) {
-                    result.max_items = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                    result.max_items = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else if (std.mem.eql(u8, e.local, "NextToken")) {
                     result.next_token = try allocator.dupe(u8, try reader.readElementText());
                 } else {

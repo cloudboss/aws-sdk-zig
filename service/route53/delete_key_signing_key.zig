@@ -71,7 +71,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteKeySigningKeyInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteKeySigningKeyOutput {
-    var result: DeleteKeySigningKeyOutput = .{};
+    var result: DeleteKeySigningKeyOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

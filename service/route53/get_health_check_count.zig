@@ -63,7 +63,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetHealthCheckCountInpu
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetHealthCheckCountOutput {
     _ = allocator;
-    var result: GetHealthCheckCountOutput = .{};
+    var result: GetHealthCheckCountOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 
@@ -78,7 +78,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "HealthCheckCount")) {
-                    result.health_check_count = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.health_check_count = try std.fmt.parseInt(i64, try reader.readElementText(), 10);
                 } else {
                     try reader.skipElement();
                 }

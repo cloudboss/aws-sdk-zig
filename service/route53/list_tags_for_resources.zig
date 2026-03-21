@@ -66,7 +66,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTagsForResourcesInp
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<ListTagsForResourcesRequest>");
+    try body_buf.appendSlice(allocator, "<ListTagsForResourcesRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">");
     try body_buf.appendSlice(allocator, "<ResourceIds>");
     try serde.serializeTagResourceIdList(allocator, &body_buf, input.resource_ids, "ResourceId");
     try body_buf.appendSlice(allocator, "</ResourceIds>");
@@ -85,7 +85,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTagsForResourcesInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTagsForResourcesOutput {
-    var result: ListTagsForResourcesOutput = .{};
+    var result: ListTagsForResourcesOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

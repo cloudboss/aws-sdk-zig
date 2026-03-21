@@ -104,7 +104,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateJobInput, config:
     const path = "/v20180820/jobs";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateJobRequest>");
+    try body_buf.appendSlice(allocator, "<CreateJobRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     try body_buf.appendSlice(allocator, "<ClientRequestToken>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.client_request_token);
     try body_buf.appendSlice(allocator, "</ClientRequestToken>");

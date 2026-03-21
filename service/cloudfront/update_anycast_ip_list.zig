@@ -70,7 +70,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAnycastIpListInpu
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<UpdateAnycastIpListRequest>");
+    try body_buf.appendSlice(allocator, "<UpdateAnycastIpListRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     if (input.ip_address_type) |v| {
         try body_buf.appendSlice(allocator, "<IpAddressType>");
         try body_buf.appendSlice(allocator, v.wireName());

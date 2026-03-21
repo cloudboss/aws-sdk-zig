@@ -64,7 +64,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListConnectionGroupsInp
     const path = "/2020-05-31/connection-groups";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<ListConnectionGroupsRequest>");
+    try body_buf.appendSlice(allocator, "<ListConnectionGroupsRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     if (input.association_filter) |v| {
         try body_buf.appendSlice(allocator, "<AssociationFilter>");
         try serde.serializeConnectionGroupAssociationFilter(allocator, &body_buf, v);

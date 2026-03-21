@@ -151,10 +151,8 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListHostedZonesInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListHostedZonesOutput {
-    var result: ListHostedZonesOutput = .{
-        .marker = "",
-        .max_items = 0,
-    };
+    var result: ListHostedZonesOutput = undefined;
+    result.next_marker = null;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

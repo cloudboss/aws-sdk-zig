@@ -68,7 +68,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ChangeResourceRecordSet
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<ChangeResourceRecordSetsRequest>");
+    try body_buf.appendSlice(allocator, "<ChangeResourceRecordSetsRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">");
     try body_buf.appendSlice(allocator, "<ChangeBatch>");
     try serde.serializeChangeBatch(allocator, &body_buf, input.change_batch);
     try body_buf.appendSlice(allocator, "</ChangeBatch>");
@@ -87,7 +87,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ChangeResourceRecordSet
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ChangeResourceRecordSetsOutput {
-    var result: ChangeResourceRecordSetsOutput = .{};
+    var result: ChangeResourceRecordSetsOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

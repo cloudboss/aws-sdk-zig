@@ -79,7 +79,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ChangeCidrCollectionInp
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<ChangeCidrCollectionRequest>");
+    try body_buf.appendSlice(allocator, "<ChangeCidrCollectionRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">");
     try body_buf.appendSlice(allocator, "<Changes>");
     try serde.serializeCidrCollectionChanges(allocator, &body_buf, input.changes, "member");
     try body_buf.appendSlice(allocator, "</Changes>");
@@ -106,7 +106,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ChangeCidrCollectionInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ChangeCidrCollectionOutput {
-    var result: ChangeCidrCollectionOutput = .{};
+    var result: ChangeCidrCollectionOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

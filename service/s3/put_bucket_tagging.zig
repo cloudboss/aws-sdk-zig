@@ -92,7 +92,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBucketTaggingInput, 
     const query = try query_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<Tagging xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<Tagging xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
     try serde.serializeTagging(allocator, &body_buf, input.tagging);
     try body_buf.appendSlice(allocator, "</Tagging>");
     const body = try body_buf.toOwnedSlice(allocator);

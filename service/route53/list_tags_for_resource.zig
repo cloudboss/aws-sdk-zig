@@ -64,7 +64,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTagsForResourceInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTagsForResourceOutput {
-    var result: ListTagsForResourceOutput = .{};
+    var result: ListTagsForResourceOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

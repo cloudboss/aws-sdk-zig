@@ -67,7 +67,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDistributionInput
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<DistributionConfig xmlns=" ++ &[_]u8{0x22} ++ "http://cloudfront.amazonaws.com/doc/2020-05-31/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<DistributionConfig xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try serde.serializeDistributionConfig(allocator, &body_buf, input.distribution_config);
     try body_buf.appendSlice(allocator, "</DistributionConfig>");
     const body = try body_buf.toOwnedSlice(allocator);

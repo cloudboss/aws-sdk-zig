@@ -50,7 +50,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMultiRegionAccess
     const path = "/v20180820/async-requests/mrap/create";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateMultiRegionAccessPointRequest>");
+    try body_buf.appendSlice(allocator, "<CreateMultiRegionAccessPointRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     try body_buf.appendSlice(allocator, "<ClientToken>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.client_token);
     try body_buf.appendSlice(allocator, "</ClientToken>");

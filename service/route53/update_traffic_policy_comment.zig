@@ -68,7 +68,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateTrafficPolicyComm
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<UpdateTrafficPolicyCommentRequest>");
+    try body_buf.appendSlice(allocator, "<UpdateTrafficPolicyCommentRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">");
     try body_buf.appendSlice(allocator, "<Comment>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.comment);
     try body_buf.appendSlice(allocator, "</Comment>");
@@ -87,7 +87,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateTrafficPolicyComm
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateTrafficPolicyCommentOutput {
-    var result: UpdateTrafficPolicyCommentOutput = .{};
+    var result: UpdateTrafficPolicyCommentOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

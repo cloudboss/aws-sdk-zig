@@ -63,7 +63,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDistributionTenants
     const path = "/2020-05-31/distribution-tenants";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<ListDistributionTenantsRequest>");
+    try body_buf.appendSlice(allocator, "<ListDistributionTenantsRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     if (input.association_filter) |v| {
         try body_buf.appendSlice(allocator, "<AssociationFilter>");
         try serde.serializeDistributionTenantAssociationFilter(allocator, &body_buf, v);

@@ -514,9 +514,12 @@ class RestXmlProtocol : ProtocolGenerator {
         val rootElementName = ctx.inputShape.getTrait(XmlNameTrait::class.java)
             .map { it.value }
             .orElse(ctx.inputShape.id.name)
+        val rootNamespace = ctx.inputShape.getTrait(XmlNamespaceTrait::class.java)
+            .or { ctx.service.getTrait(XmlNamespaceTrait::class.java) }
+            .orElse(null)
 
         writer.write("var body_buf: std.ArrayList(u8) = .{};")
-        writer.write("try body_buf.appendSlice(allocator, \"<\$L>\");", rootElementName)
+        writeXmlRootOpen(writer, rootElementName, rootNamespace)
 
         for ((memberName, memberShape) in bindings.bodyMembers) {
             val targetShape = ctx.model.expectShape(memberShape.target)
@@ -602,7 +605,7 @@ class RestXmlProtocol : ProtocolGenerator {
     private fun writeXmlRootOpen(writer: ZigWriter, rootName: String, ns: XmlNamespaceTrait?) {
         if (ns != null) {
             writer.write(
-                "try body_buf.appendSlice(allocator, \"<\$L xmlns=\" ++ &[_]u8{0x22} ++ \"\$L\" ++ &[_]u8{0x22} ++ \">\");",
+                "try body_buf.appendSlice(allocator, \"<\$L xmlns=\\\"\$L\\\">\");",
                 rootName, ns.uri,
             )
         } else {
@@ -684,9 +687,29 @@ class RestXmlProtocol : ProtocolGenerator {
             writer.write("_ = body;")
             writer.write("_ = status;")
             writer.write("_ = headers;")
-            writer.write("const result: \$L = .{};", outputName)
+            if (ctx.outputShape.allMembers.values.any { it.isRequired }) {
+                writer.write("const result: \$L = undefined;", outputName)
+                for ((memberName, memberShape) in ctx.outputShape.allMembers) {
+                    if (!memberShape.isRequired) {
+                        val fieldName = NamingUtil.toFieldName(memberName)
+                        writer.write("result.\$L = null;", fieldName)
+                    }
+                }
+            } else {
+                writer.write("const result: \$L = .{};", outputName)
+            }
         } else {
-            writer.write("var result: \$L = .{};", outputName)
+            if (ctx.outputShape.allMembers.values.any { it.isRequired }) {
+                writer.write("var result: \$L = undefined;", outputName)
+                for ((memberName, memberShape) in ctx.outputShape.allMembers) {
+                    if (!memberShape.isRequired) {
+                        val fieldName = NamingUtil.toFieldName(memberName)
+                        writer.write("result.\$L = null;", fieldName)
+                    }
+                }
+            } else {
+                writer.write("var result: \$L = .{};", outputName)
+            }
 
             // @httpResponseCode
             if (bindings.responseCode != null) {
@@ -871,17 +894,31 @@ class RestXmlProtocol : ProtocolGenerator {
                 )
             }
             is EnumShape, is IntEnumShape -> {
-                writer.write(
-                    "result.\$L = \$L.fromWireName(try reader.readElementText());",
-                    fieldName, targetShape.id.name,
-                )
-            }
-            is StringShape -> {
-                if (ctx.isEnumType(targetShape)) {
+                if (memberShape.isRequired) {
+                    writer.write(
+                        "result.\$L = \$L.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;",
+                        fieldName, targetShape.id.name,
+                    )
+                } else {
                     writer.write(
                         "result.\$L = \$L.fromWireName(try reader.readElementText());",
                         fieldName, targetShape.id.name,
                     )
+                }
+            }
+            is StringShape -> {
+                if (ctx.isEnumType(targetShape)) {
+                    if (memberShape.isRequired) {
+                        writer.write(
+                            "result.\$L = \$L.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;",
+                            fieldName, targetShape.id.name,
+                        )
+                    } else {
+                        writer.write(
+                            "result.\$L = \$L.fromWireName(try reader.readElementText());",
+                            fieldName, targetShape.id.name,
+                        )
+                    }
                 } else {
                     writer.write(
                         "result.\$L = try allocator.dupe(u8, try reader.readElementText());",
@@ -896,34 +933,69 @@ class RestXmlProtocol : ProtocolGenerator {
                 )
             }
             is IntegerShape, is ShortShape -> {
-                writer.write(
-                    "result.\$L = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;",
-                    fieldName,
-                )
+                if (memberShape.isRequired) {
+                    writer.write(
+                        "result.\$L = try std.fmt.parseInt(i32, try reader.readElementText(), 10);",
+                        fieldName,
+                    )
+                } else {
+                    writer.write(
+                        "result.\$L = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;",
+                        fieldName,
+                    )
+                }
             }
             is LongShape -> {
-                writer.write(
-                    "result.\$L = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;",
-                    fieldName,
-                )
+                if (memberShape.isRequired) {
+                    writer.write(
+                        "result.\$L = try std.fmt.parseInt(i64, try reader.readElementText(), 10);",
+                        fieldName,
+                    )
+                } else {
+                    writer.write(
+                        "result.\$L = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;",
+                        fieldName,
+                    )
+                }
             }
             is FloatShape -> {
-                writer.write(
-                    "result.\$L = std.fmt.parseFloat(f32, try reader.readElementText()) catch null;",
-                    fieldName,
-                )
+                if (memberShape.isRequired) {
+                    writer.write(
+                        "result.\$L = try std.fmt.parseFloat(f32, try reader.readElementText());",
+                        fieldName,
+                    )
+                } else {
+                    writer.write(
+                        "result.\$L = std.fmt.parseFloat(f32, try reader.readElementText()) catch null;",
+                        fieldName,
+                    )
+                }
             }
             is DoubleShape -> {
-                writer.write(
-                    "result.\$L = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;",
-                    fieldName,
-                )
+                if (memberShape.isRequired) {
+                    writer.write(
+                        "result.\$L = try std.fmt.parseFloat(f64, try reader.readElementText());",
+                        fieldName,
+                    )
+                } else {
+                    writer.write(
+                        "result.\$L = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;",
+                        fieldName,
+                    )
+                }
             }
             is TimestampShape -> {
-                writer.write(
-                    "result.\$L = aws.date.parseIso8601(try reader.readElementText()) catch null;",
-                    fieldName,
-                )
+                if (memberShape.isRequired) {
+                    writer.write(
+                        "result.\$L = try aws.date.parseIso8601(try reader.readElementText());",
+                        fieldName,
+                    )
+                } else {
+                    writer.write(
+                        "result.\$L = aws.date.parseIso8601(try reader.readElementText()) catch null;",
+                        fieldName,
+                    )
+                }
             }
             is BlobShape -> {
                 writer.write(

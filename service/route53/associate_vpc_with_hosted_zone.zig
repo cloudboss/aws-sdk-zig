@@ -70,7 +70,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateVPCWithHostedZ
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<AssociateVPCWithHostedZoneRequest>");
+    try body_buf.appendSlice(allocator, "<AssociateVPCWithHostedZoneRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">");
     if (input.comment) |v| {
         try body_buf.appendSlice(allocator, "<Comment>");
         try aws.xml.appendXmlEscaped(allocator, &body_buf, v);
@@ -94,7 +94,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateVPCWithHostedZ
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateVPCWithHostedZoneOutput {
-    var result: AssociateVPCWithHostedZoneOutput = .{};
+    var result: AssociateVPCWithHostedZoneOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

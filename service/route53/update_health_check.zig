@@ -410,7 +410,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateHealthCheckInput,
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<UpdateHealthCheckRequest>");
+    try body_buf.appendSlice(allocator, "<UpdateHealthCheckRequest xmlns=\"https://route53.amazonaws.com/doc/2013-04-01/\">");
     if (input.alarm_identifier) |v| {
         try body_buf.appendSlice(allocator, "<AlarmIdentifier>");
         try serde.serializeAlarmIdentifier(allocator, &body_buf, v);
@@ -518,7 +518,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateHealthCheckInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateHealthCheckOutput {
-    var result: UpdateHealthCheckOutput = .{};
+    var result: UpdateHealthCheckOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

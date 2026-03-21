@@ -67,7 +67,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: EnableHostedZoneDNSSECI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !EnableHostedZoneDNSSECOutput {
-    var result: EnableHostedZoneDNSSECOutput = .{};
+    var result: EnableHostedZoneDNSSECOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

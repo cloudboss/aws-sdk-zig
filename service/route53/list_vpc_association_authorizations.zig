@@ -117,7 +117,8 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListVPCAssociationAutho
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListVPCAssociationAuthorizationsOutput {
-    var result: ListVPCAssociationAuthorizationsOutput = .{};
+    var result: ListVPCAssociationAuthorizationsOutput = undefined;
+    result.next_token = null;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

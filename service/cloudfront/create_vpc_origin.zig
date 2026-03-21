@@ -62,7 +62,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpcOriginInput, c
     const path = "/2020-05-31/vpc-origin";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateVpcOriginRequest>");
+    try body_buf.appendSlice(allocator, "<CreateVpcOriginRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     if (input.tags) |v| {
         try body_buf.appendSlice(allocator, "<Tags>");
         try serde.serializeTags(allocator, &body_buf, v);

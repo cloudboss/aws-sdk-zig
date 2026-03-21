@@ -63,7 +63,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTrafficPolicyInstanc
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTrafficPolicyInstanceCountOutput {
     _ = allocator;
-    var result: GetTrafficPolicyInstanceCountOutput = .{};
+    var result: GetTrafficPolicyInstanceCountOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 
@@ -78,7 +78,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "TrafficPolicyInstanceCount")) {
-                    result.traffic_policy_instance_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                    result.traffic_policy_instance_count = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else {
                     try reader.skipElement();
                 }

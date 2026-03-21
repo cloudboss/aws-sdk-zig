@@ -94,7 +94,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBucketReplicationInp
     const query = try query_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<ReplicationConfiguration xmlns=" ++ &[_]u8{0x22} ++ "http://s3.amazonaws.com/doc/2006-03-01/" ++ &[_]u8{0x22} ++ ">");
+    try body_buf.appendSlice(allocator, "<ReplicationConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
     try serde.serializeReplicationConfiguration(allocator, &body_buf, input.replication_configuration);
     try body_buf.appendSlice(allocator, "</ReplicationConfiguration>");
     const body = try body_buf.toOwnedSlice(allocator);

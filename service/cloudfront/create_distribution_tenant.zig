@@ -95,7 +95,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDistributionTenan
     const path = "/2020-05-31/distribution-tenant";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateDistributionTenantRequest>");
+    try body_buf.appendSlice(allocator, "<CreateDistributionTenantRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     if (input.connection_group_id) |v| {
         try body_buf.appendSlice(allocator, "<ConnectionGroupId>");
         try aws.xml.appendXmlEscaped(allocator, &body_buf, v);

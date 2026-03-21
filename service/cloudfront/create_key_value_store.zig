@@ -67,7 +67,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateKeyValueStoreInpu
     const path = "/2020-05-31/key-value-store";
 
     var body_buf: std.ArrayList(u8) = .{};
-    try body_buf.appendSlice(allocator, "<CreateKeyValueStoreRequest>");
+    try body_buf.appendSlice(allocator, "<CreateKeyValueStoreRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     if (input.comment) |v| {
         try body_buf.appendSlice(allocator, "<Comment>");
         try aws.xml.appendXmlEscaped(allocator, &body_buf, v);

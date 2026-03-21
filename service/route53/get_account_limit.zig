@@ -99,7 +99,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAccountLimitInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAccountLimitOutput {
-    var result: GetAccountLimitOutput = .{};
+    var result: GetAccountLimitOutput = undefined;
     _ = status;
     var reader = aws.xml.Reader.init(body);
 
@@ -114,7 +114,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Count")) {
-                    result.count = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                    result.count = try std.fmt.parseInt(i64, try reader.readElementText(), 10);
                 } else if (std.mem.eql(u8, e.local, "Limit")) {
                     result.limit = try serde.deserializeAccountLimit(allocator, &reader);
                 } else {
