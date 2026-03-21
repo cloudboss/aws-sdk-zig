@@ -142,7 +142,7 @@ class RestXmlProtocol : ProtocolGenerator {
         val staticQuery = if (questionMark >= 0) uriString.substring(questionMark + 1) else null
 
         // Build URI path
-        writeUriBuilder(writer, pathPattern, bindings)
+        writeUriBuilder(writer, ctx, pathPattern, bindings)
         writer.blankLine()
 
         // Build query string
@@ -300,7 +300,7 @@ class RestXmlProtocol : ProtocolGenerator {
         writer.closeBlock("}")
     }
 
-    private fun writeUriBuilder(writer: ZigWriter, pathPattern: String, bindings: InputBindings) {
+    private fun writeUriBuilder(writer: ZigWriter, ctx: OperationContext, pathPattern: String, bindings: InputBindings) {
         if (bindings.labels.isEmpty()) {
             writer.write("const path = \"\$L\";", pathPattern)
             return
@@ -337,12 +337,50 @@ class RestXmlProtocol : ProtocolGenerator {
                 is Pair<*, *> -> {
                     val memberName = part.first as String
                     val fieldName = NamingUtil.toFieldName(memberName)
-                    writer.write("try path_buf.appendSlice(allocator, input.\$L);", fieldName)
+                    val memberShape = part.second as MemberShape
+                    writePathValueAppend(writer, ctx, memberShape, "input.$fieldName")
                 }
             }
         }
 
         writer.write("const path = try path_buf.toOwnedSlice(allocator);")
+    }
+
+    private fun writePathValueAppend(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        memberShape: MemberShape,
+        varName: String,
+    ) {
+        val targetShape = ctx.model.expectShape(memberShape.target)
+        val isEnum = targetShape is EnumShape ||
+            (targetShape is software.amazon.smithy.model.shapes.StringShape &&
+                targetShape.hasTrait(EnumTrait::class.java))
+        val zigType = ctx.resolveBaseZigType(targetShape)
+
+        when {
+            zigType == "[]const u8" -> {
+                writer.write("try path_buf.appendSlice(allocator, \$L);", varName)
+            }
+            isEnum -> {
+                writer.write("try path_buf.appendSlice(allocator, \$L.wireName());", varName)
+            }
+            zigType in listOf("i32", "i64", "i16", "i8") -> {
+                writer.openBlock("{")
+                writer.write(
+                    "const num_str = std.fmt.allocPrint(allocator, \"{d}\", .{\$L}) catch \"\";",
+                    varName,
+                )
+                writer.write("try path_buf.appendSlice(allocator, num_str);")
+                writer.closeBlock("}")
+            }
+            zigType == "bool" -> {
+                writer.write("try path_buf.appendSlice(allocator, if (\$L) \"true\" else \"false\");", varName)
+            }
+            else -> {
+                writer.write("try path_buf.appendSlice(allocator, \$L);", varName)
+            }
+        }
     }
 
     private fun writeQueryBuilder(writer: ZigWriter, ctx: OperationContext, bindings: InputBindings, staticQuery: String? = null) {

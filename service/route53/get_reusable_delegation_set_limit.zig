@@ -66,7 +66,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetReusableDelegationSe
     try path_buf.appendSlice(allocator, "/2013-04-01/reusabledelegationsetlimit/");
     try path_buf.appendSlice(allocator, input.delegation_set_id);
     try path_buf.appendSlice(allocator, "/");
-    try path_buf.appendSlice(allocator, input.@"type");
+    try path_buf.appendSlice(allocator, input.@"type".wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

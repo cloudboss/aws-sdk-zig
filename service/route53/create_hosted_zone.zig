@@ -165,7 +165,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateHostedZoneInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateHostedZoneOutput {
-    var result: CreateHostedZoneOutput = .{};
+    var result: CreateHostedZoneOutput = .{
+        .location = "",
+    };
     _ = status;
     var reader = aws.xml.Reader.init(body);
 

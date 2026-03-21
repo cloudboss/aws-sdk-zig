@@ -75,7 +75,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetHostedZoneLimitInput
     try path_buf.appendSlice(allocator, "/2013-04-01/hostedzonelimit/");
     try path_buf.appendSlice(allocator, input.hosted_zone_id);
     try path_buf.appendSlice(allocator, "/");
-    try path_buf.appendSlice(allocator, input.@"type");
+    try path_buf.appendSlice(allocator, input.@"type".wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

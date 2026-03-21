@@ -62,7 +62,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTagsForResourcesInp
 
     var path_buf: std.ArrayList(u8) = .{};
     try path_buf.appendSlice(allocator, "/2013-04-01/tags/");
-    try path_buf.appendSlice(allocator, input.resource_type);
+    try path_buf.appendSlice(allocator, input.resource_type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .{};

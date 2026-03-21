@@ -58,7 +58,7 @@ test "zest.beforeAll" {
         .{},
     );
 
-    std.time.sleep(200 * std.time.ns_per_ms);
+    std.Thread.sleep(200 * std.time.ns_per_ms);
 
     // Create private hosted zone.
     shared_caller_ref = try std.fmt.bufPrint(
@@ -106,7 +106,7 @@ test "zest.beforeAll" {
     @memcpy(shared_zone_id_buf[0..zone_id.len], zone_id);
     shared_zone_id = shared_zone_id_buf[0..zone_id.len];
 
-    std.time.sleep(200 * std.time.ns_per_ms);
+    std.Thread.sleep(200 * std.time.ns_per_ms);
 
     // Tag the hosted zone.
     _ = try shared_r53_client.?.changeTagsForResource(
@@ -162,14 +162,14 @@ test "zest.afterAll" {
                             },
                             .{},
                         ) catch {};
-                        std.time.sleep(
+                        std.Thread.sleep(
                             200 * std.time.ns_per_ms,
                         );
                     }
                 }
             } else |_| {}
 
-            std.time.sleep(200 * std.time.ns_per_ms);
+            std.Thread.sleep(200 * std.time.ns_per_ms);
 
             _ = r53.deleteHostedZone(
                 alloc,
@@ -279,7 +279,7 @@ test "changeResourceRecordSets creates A record" {
         .{},
     );
 
-    std.time.sleep(200 * std.time.ns_per_ms);
+    std.Thread.sleep(200 * std.time.ns_per_ms);
 }
 
 test "listResourceRecordSets includes A record" {
@@ -338,7 +338,7 @@ test "changeResourceRecordSets deletes A record" {
         .{},
     );
 
-    std.time.sleep(200 * std.time.ns_per_ms);
+    std.Thread.sleep(200 * std.time.ns_per_ms);
 }
 
 test "listHostedZonesByName returns zone" {

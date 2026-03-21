@@ -52,7 +52,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteTrafficPolicyInpu
     try path_buf.appendSlice(allocator, "/2013-04-01/trafficpolicy/");
     try path_buf.appendSlice(allocator, input.id);
     try path_buf.appendSlice(allocator, "/");
-    try path_buf.appendSlice(allocator, input.version);
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{input.version}) catch "";
+        try path_buf.appendSlice(allocator, num_str);
+    }
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
