@@ -104,16 +104,20 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLifecyclePoliciesInp
         query_has_prev = true;
     }
     if (input.policy_ids) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "policyIds=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "policyIds=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.resource_types) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "resourceTypes=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "resourceTypes=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());
+            query_has_prev = true;
+        }
     }
     if (input.state) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
@@ -122,16 +126,20 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLifecyclePoliciesInp
         query_has_prev = true;
     }
     if (input.tags_to_add) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "tagsToAdd=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "tagsToAdd=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.target_tags) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "targetTags=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "targetTags=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     const query = try query_buf.toOwnedSlice(allocator);
 

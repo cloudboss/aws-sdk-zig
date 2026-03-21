@@ -4,7 +4,7 @@ const ManifestProperties = @import("manifest_properties.zig").ManifestProperties
 /// The job attachments.
 pub const Attachments = struct {
     /// The file system location for the attachments.
-    file_system: JobAttachmentsFileSystem = "COPIED",
+    file_system: JobAttachmentsFileSystem = .copied,
 
     /// The manifest properties for the attachments.
     manifests: []const ManifestProperties,

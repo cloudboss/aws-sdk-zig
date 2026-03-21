@@ -129,10 +129,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTileInput, config: *
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-    try query_buf.appendSlice(allocator, "ImageAssets=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, input.image_assets);
-    query_has_prev = true;
+    for (input.image_assets) |item| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "ImageAssets=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+        query_has_prev = true;
+    }
     if (input.image_mask) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "ImageMask=");

@@ -8,7 +8,7 @@ pub const TimeCondition = struct {
     /// If this is included, avoid combinations of operators that will return all
     /// possible values. For example, including both `EQUALS_TO` and `NOT_EQUALS_TO`
     /// with a value of `4` will return all values.
-    operator: TimeConditionOperator = "EQUALS_TO",
+    operator: TimeConditionOperator = .equals_to,
 
     /// This is the timestamp value of the time condition.
     value: i64,

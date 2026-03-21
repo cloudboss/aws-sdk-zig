@@ -15,7 +15,7 @@ pub const LogsConfigurationPolicy = struct {
 
     /// Specifies the type of log this policy applies to. The currently supported
     /// policies are ALL or ERROR_SUMMARY.
-    log_type: LogType = "ALL",
+    log_type: LogType = .all,
 
     pub const json_field_names = .{
         .allowed_account_ids = "allowedAccountIds",

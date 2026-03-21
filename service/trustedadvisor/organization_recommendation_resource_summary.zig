@@ -15,7 +15,7 @@ pub const OrganizationRecommendationResourceSummary = struct {
     aws_resource_id: []const u8,
 
     /// The exclusion status of the Recommendation Resource
-    exclusion_status: ExclusionStatus = "included",
+    exclusion_status: ExclusionStatus = .included,
 
     /// The ID of the Recommendation Resource
     id: []const u8,

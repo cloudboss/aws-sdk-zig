@@ -100,10 +100,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAssetModelsInput, c
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
     if (input.asset_model_types) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "assetModelTypes=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "assetModelTypes=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());
+            query_has_prev = true;
+        }
     }
     if (input.asset_model_version) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

@@ -90,10 +90,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetAttributesMetad
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
-    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-    try query_buf.appendSlice(allocator, "attributeIdentifier=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, input.attribute_identifiers);
-    query_has_prev = true;
+    for (input.attribute_identifiers) |item| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "attributeIdentifier=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+        query_has_prev = true;
+    }
     if (input.entity_revision) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "entityRevision=");

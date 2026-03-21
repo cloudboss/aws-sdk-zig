@@ -26,7 +26,7 @@ pub const Range = struct {
     timestamp_source: ?[]const u8 = null,
 
     /// The unit of time.
-    unit: Unit = "DAYS",
+    unit: Unit = .days,
 
     /// The amount of time of the specified unit.
     value: i32 = 0,

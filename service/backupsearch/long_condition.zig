@@ -8,7 +8,7 @@ pub const LongCondition = struct {
     /// If this is included, avoid combinations of operators that will return all
     /// possible values. For example, including both `EQUALS_TO` and `NOT_EQUALS_TO`
     /// with a value of `4` will return all values.
-    operator: LongConditionOperator = "EQUALS_TO",
+    operator: LongConditionOperator = .equals_to,
 
     /// The value of an item included in one of the search item filters.
     value: i64,

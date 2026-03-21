@@ -6,7 +6,7 @@ const EcsUngraceful = @import("ecs_ungraceful.zig").EcsUngraceful;
 pub const EcsCapacityIncreaseConfiguration = struct {
     /// The monitoring approach specified for the configuration, for example,
     /// `Most_Recent`.
-    capacity_monitoring_approach: EcsCapacityMonitoringApproach = "sampledMaxInLast24Hours",
+    capacity_monitoring_approach: EcsCapacityMonitoringApproach = .sampled_max_in_last_24_hours,
 
     /// The services specified for the configuration.
     services: []const Service,

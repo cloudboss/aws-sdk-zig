@@ -6,7 +6,7 @@ const DocumentDbUngraceful = @import("document_db_ungraceful.zig").DocumentDbUng
 pub const DocumentDbConfiguration = struct {
     /// The behavior for a global cluster, that is, only allow switchover or also
     /// allow failover.
-    behavior: DocumentDbDefaultBehavior = "switchoverOnly",
+    behavior: DocumentDbDefaultBehavior = .switchover_only,
 
     /// The cross account role for the configuration.
     cross_account_role: ?[]const u8 = null,

@@ -6,7 +6,7 @@ const GlobalAuroraUngraceful = @import("global_aurora_ungraceful.zig").GlobalAur
 pub const GlobalAuroraConfiguration = struct {
     /// The behavior for a global database, that is, only allow switchover or also
     /// allow failover.
-    behavior: GlobalAuroraDefaultBehavior = "switchoverOnly",
+    behavior: GlobalAuroraDefaultBehavior = .switchover_only,
 
     /// The cross account role for the configuration.
     cross_account_role: ?[]const u8 = null,

@@ -124,22 +124,28 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCodeReviewsInput, c
         query_has_prev = true;
     }
     if (input.provider_types) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "ProviderTypes=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "ProviderTypes=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());
+            query_has_prev = true;
+        }
     }
     if (input.repository_names) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "RepositoryNames=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "RepositoryNames=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.states) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "States=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "States=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());
+            query_has_prev = true;
+        }
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "Type=");

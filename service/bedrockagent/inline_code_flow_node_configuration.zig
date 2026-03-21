@@ -16,7 +16,7 @@ pub const InlineCodeFlowNodeConfiguration = struct {
     ///
     /// The code must be valid in the programming `language` that you specify.
     /// Currently, only Python 3 (`Python_3`) is supported.
-    language: SupportedLanguages = "Python_3",
+    language: SupportedLanguages = .python_3,
 
     pub const json_field_names = .{
         .code = "code",

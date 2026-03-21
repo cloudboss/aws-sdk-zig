@@ -11,10 +11,10 @@ pub const Group = struct {
     source_segments: ?[]const SourceSegment = null,
 
     /// Defines how to interact with the source data.
-    source_type: IncludeOptions = "ALL",
+    source_type: IncludeOptions = .all,
 
     /// Defines how to interact with the profiles found in the current filtering.
-    @"type": IncludeOptions = "ALL",
+    @"type": IncludeOptions = .all,
 
     pub const json_field_names = .{
         .dimensions = "Dimensions",

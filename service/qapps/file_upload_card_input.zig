@@ -21,7 +21,7 @@ pub const FileUploadCardInput = struct {
     title: []const u8,
 
     /// The type of the card.
-    @"type": CardType = "file-upload",
+    @"type": CardType = .file_upload,
 
     pub const json_field_names = .{
         .allow_override = "allowOverride",

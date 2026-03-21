@@ -104,10 +104,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListQuickConnectsInput,
         query_has_prev = true;
     }
     if (input.quick_connect_types) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "QuickConnectTypes=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "QuickConnectTypes=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());
+            query_has_prev = true;
+        }
     }
     const query = try query_buf.toOwnedSlice(allocator);
 

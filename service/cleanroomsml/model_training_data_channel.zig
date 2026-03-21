@@ -21,7 +21,7 @@ pub const ModelTrainingDataChannel = struct {
     ///   based on Amazon S3 key names. This is suitable for larger datasets and
     ///   distributed training scenarios where each instance processes a subset of
     ///   the data.
-    s_3_data_distribution_type: S3DataDistributionType = "FullyReplicated",
+    s_3_data_distribution_type: S3DataDistributionType = .fully_replicated,
 
     pub const json_field_names = .{
         .channel_name = "channelName",

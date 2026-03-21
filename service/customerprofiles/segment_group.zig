@@ -8,7 +8,7 @@ pub const SegmentGroup = struct {
 
     /// Defines whether to include or exclude the profiles that fit the segment
     /// criteria.
-    include: IncludeOptions = "ALL",
+    include: IncludeOptions = .all,
 
     pub const json_field_names = .{
         .groups = "Groups",

@@ -7,7 +7,7 @@ pub const StringCondition = struct {
     /// If this is included, avoid combinations of operators that will return all
     /// possible values. For example, including both `EQUALS_TO` and `NOT_EQUALS_TO`
     /// with a value of `4` will return all values.
-    operator: StringConditionOperator = "EQUALS_TO",
+    operator: StringConditionOperator = .equals_to,
 
     /// The value of the string.
     value: []const u8,

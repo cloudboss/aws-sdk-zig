@@ -93,28 +93,36 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAssetInstancesInput
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
     if (input.account_id_filter) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "AccountIdFilter=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "AccountIdFilter=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.asset_id_filter) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "AssetIdFilter=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "AssetIdFilter=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.aws_service_filter) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "AwsServiceFilter=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "AwsServiceFilter=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());
+            query_has_prev = true;
+        }
     }
     if (input.instance_type_filter) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "InstanceTypeFilter=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "InstanceTypeFilter=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

@@ -8,7 +8,7 @@ pub const PortalOptions = struct {
     sign_in_options: ?SignInOptions = null,
 
     /// Indicates whether this application is visible in the access portal.
-    visibility: ApplicationVisibility = "ENABLED",
+    visibility: ApplicationVisibility = .enabled,
 
     pub const json_field_names = .{
         .sign_in_options = "SignInOptions",

@@ -10,7 +10,7 @@ pub const Ec2AsgCapacityIncreaseConfiguration = struct {
 
     /// The monitoring approach that you specify EC2 Auto Scaling groups for the
     /// configuration.
-    capacity_monitoring_approach: Ec2AsgCapacityMonitoringApproach = "sampledMaxInLast24Hours",
+    capacity_monitoring_approach: Ec2AsgCapacityMonitoringApproach = .sampled_max_in_last_24_hours,
 
     /// The target percentage that you specify for EC2 Auto Scaling groups.
     target_percent: i32 = 100,

@@ -6,7 +6,7 @@ const VpcConfig = @import("vpc_config.zig").VpcConfig;
 pub const CodeInterpreterNetworkConfiguration = struct {
     /// The network mode for the code interpreter. This field specifies how the code
     /// interpreter connects to the network.
-    network_mode: CodeInterpreterNetworkMode = "SANDBOX",
+    network_mode: CodeInterpreterNetworkMode = .sandbox,
 
     vpc_config: ?VpcConfig = null,
 

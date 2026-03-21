@@ -159,10 +159,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAssetPropertyValueHi
         query_has_prev = true;
     }
     if (input.qualities) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "qualities=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "qualities=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());
+            query_has_prev = true;
+        }
     }
     if (input.start_date) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

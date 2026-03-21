@@ -10,7 +10,7 @@ pub const GuardrailConfiguration = struct {
     guardrail_version: []const u8 = "",
 
     /// The trace behavior for the guardrail.
-    trace: GuardrailTrace = "disabled",
+    trace: GuardrailTrace = .disabled,
 
     pub const json_field_names = .{
         .guardrail_identifier = "guardrailIdentifier",

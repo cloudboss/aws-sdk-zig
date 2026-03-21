@@ -70,10 +70,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RemoveStreamGroupLocati
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
-    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-    try query_buf.appendSlice(allocator, "locations=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, input.locations);
-    query_has_prev = true;
+    for (input.locations) |item| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "locations=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+        query_has_prev = true;
+    }
     const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

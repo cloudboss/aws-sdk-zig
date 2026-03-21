@@ -9,7 +9,7 @@ pub const Filter = struct {
     int_value: ?i64 = null,
 
     /// Specifies the search filter operator.
-    operator: FilterOperator = "EQ",
+    operator: FilterOperator = .eq,
 
     /// A search filter string value in Amazon DataZone.
     value: []const u8 = "",

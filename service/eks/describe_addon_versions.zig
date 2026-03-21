@@ -145,22 +145,28 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeAddonVersionsIn
         query_has_prev = true;
     }
     if (input.owners) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "owners=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "owners=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.publishers) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "publishers=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "publishers=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.types) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "types=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "types=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     const query = try query_buf.toOwnedSlice(allocator);
 

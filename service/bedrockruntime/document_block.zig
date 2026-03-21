@@ -13,7 +13,7 @@ pub const DocumentBlock = struct {
     context: ?[]const u8 = null,
 
     /// The format of a document, or its extension.
-    format: DocumentFormat = "txt",
+    format: DocumentFormat = .txt,
 
     /// A name for the document. The name can only contain the following characters:
     ///

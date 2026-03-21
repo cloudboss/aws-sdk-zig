@@ -92,22 +92,28 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSitesInput, config:
         query_has_prev = true;
     }
     if (input.operating_address_city_filter) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "OperatingAddressCityFilter=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "OperatingAddressCityFilter=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.operating_address_country_code_filter) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "OperatingAddressCountryCodeFilter=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "OperatingAddressCountryCodeFilter=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.operating_address_state_or_region_filter) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "OperatingAddressStateOrRegionFilter=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "OperatingAddressStateOrRegionFilter=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     const query = try query_buf.toOwnedSlice(allocator);
 

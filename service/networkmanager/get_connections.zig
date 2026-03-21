@@ -85,10 +85,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetConnectionsInput, co
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
     if (input.connection_ids) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "connectionIds=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "connectionIds=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.device_id) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

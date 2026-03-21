@@ -6407,7 +6407,7 @@ pub fn deserializeViewerCertificate(allocator: std.mem.Allocator, reader: *aws.x
 
 pub fn deserializeViewerMtlsConfig(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ViewerMtlsConfig {
     var result: ViewerMtlsConfig = undefined;
-    result.mode = "required";
+    result.mode = .required;
     result.trust_store_config = null;
     while (try reader.next()) |event| {
         switch (event) {

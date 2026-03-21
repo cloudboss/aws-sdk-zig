@@ -146,10 +146,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListNotificationsInput,
         query_has_prev = true;
     }
     if (input.subjects) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "subjects=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "subjects=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.task_status) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

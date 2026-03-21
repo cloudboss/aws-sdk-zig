@@ -181,10 +181,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ChatSyncInput, config: 
     try query_buf.appendSlice(allocator, "sync");
     query_has_prev = true;
     if (input.user_groups) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "userGroups=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "userGroups=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.user_id) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

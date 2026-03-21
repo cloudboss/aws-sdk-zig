@@ -22,7 +22,7 @@ pub const TransformerSummary = struct {
 
     /// Returns that the currently supported file formats for EDI transformations
     /// are `JSON` and `XML`.
-    file_format: FileFormat = "NOT_USED",
+    file_format: FileFormat = .not_used,
 
     /// Returns a structure that contains the format options for the transformation.
     input_conversion: ?InputConversion = null,

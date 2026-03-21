@@ -79,10 +79,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAttributeMappingI
     try aws.url.appendUrlEncoded(allocator, &query_buf, input.certificate_field.wireName());
     query_has_prev = true;
     if (input.specifiers) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "specifiers=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "specifiers=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     const query = try query_buf.toOwnedSlice(allocator);
 

@@ -8,7 +8,7 @@ pub const SearchTermFilterExpression = struct {
     /// * `FUZZY_MATCH` - Matches if a portion of the search term is found in the
     ///   result.
     /// * `CONTAINS` - Matches if the exact search term is contained in the result.
-    match_type: SearchTermMatchingType = "FUZZY_MATCH",
+    match_type: SearchTermMatchingType = .fuzzy_match,
 
     /// The term to search for.
     search_term: []const u8,

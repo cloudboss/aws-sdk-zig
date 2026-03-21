@@ -132,10 +132,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRulesInput, config:
         query_has_prev = true;
     }
     if (input.asset_types) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "assetTypes=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "assetTypes=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.data_product) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
@@ -165,10 +167,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRulesInput, config:
         query_has_prev = true;
     }
     if (input.project_ids) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "projectIds=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "projectIds=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.rule_type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

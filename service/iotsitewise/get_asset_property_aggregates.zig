@@ -125,10 +125,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAssetPropertyAggrega
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
-    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-    try query_buf.appendSlice(allocator, "aggregateTypes=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, input.aggregate_types);
-    query_has_prev = true;
+    for (input.aggregate_types) |item| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "aggregateTypes=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());
+        query_has_prev = true;
+    }
     if (input.asset_id) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "assetId=");
@@ -170,10 +172,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAssetPropertyAggrega
         query_has_prev = true;
     }
     if (input.qualities) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "qualities=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "qualities=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());
+            query_has_prev = true;
+        }
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "resolution=");

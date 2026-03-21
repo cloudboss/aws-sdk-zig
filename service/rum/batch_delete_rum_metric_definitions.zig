@@ -100,10 +100,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchDeleteRumMetricDef
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-    try query_buf.appendSlice(allocator, "metricDefinitionIds=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, input.metric_definition_ids);
-    query_has_prev = true;
+    for (input.metric_definition_ids) |item| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "metricDefinitionIds=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+        query_has_prev = true;
+    }
     const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

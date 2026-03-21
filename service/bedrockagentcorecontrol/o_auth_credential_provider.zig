@@ -19,7 +19,7 @@ pub const OAuthCredentialProvider = struct {
     /// * `CLIENT_CREDENTIALS` - Authorization with a client ID and secret.
     /// * `AUTHORIZATION_CODE` - Authorization with a token that is specific to an
     ///   individual end user.
-    grant_type: OAuthGrantType = "CLIENT_CREDENTIALS",
+    grant_type: OAuthGrantType = .client_credentials,
 
     /// The Amazon Resource Name (ARN) of the OAuth credential provider. This ARN
     /// identifies the provider in Amazon Web Services.

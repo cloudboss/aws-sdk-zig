@@ -19,7 +19,7 @@ pub const PromptFlowNodeInlineConfiguration = struct {
     template_configuration: PromptTemplateConfiguration,
 
     /// The type of prompt template.
-    template_type: PromptTemplateType = "TEXT",
+    template_type: PromptTemplateType = .text,
 
     pub const json_field_names = .{
         .additional_model_request_fields = "additionalModelRequestFields",

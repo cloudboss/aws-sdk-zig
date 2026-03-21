@@ -4,7 +4,7 @@ const PerformanceConfigLatency = @import("performance_config_latency.zig").Perfo
 /// retrieval and generation process.
 pub const PerformanceConfiguration = struct {
     /// The latency optimization setting.
-    latency: PerformanceConfigLatency = "standard",
+    latency: PerformanceConfigLatency = .standard,
 
     pub const json_field_names = .{
         .latency = "latency",

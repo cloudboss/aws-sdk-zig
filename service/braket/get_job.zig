@@ -173,10 +173,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetJobInput, config: *a
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
     if (input.additional_attribute_names) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "additionalAttributeNames=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "additionalAttributeNames=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());
+            query_has_prev = true;
+        }
     }
     const query = try query_buf.toOwnedSlice(allocator);
 

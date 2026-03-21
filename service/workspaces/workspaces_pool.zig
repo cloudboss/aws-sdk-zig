@@ -38,7 +38,7 @@ pub const WorkspacesPool = struct {
     pool_name: []const u8,
 
     /// The running mode of the pool.
-    running_mode: PoolsRunningMode = "AUTO_STOP",
+    running_mode: PoolsRunningMode = .auto_stop,
 
     /// The current state of the pool.
     state: WorkspacesPoolState,

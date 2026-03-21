@@ -15,7 +15,7 @@ pub const TextInputCardInput = struct {
     title: []const u8,
 
     /// The type of the card.
-    @"type": CardType = "text-input",
+    @"type": CardType = .text_input,
 
     pub const json_field_names = .{
         .default_value = "defaultValue",

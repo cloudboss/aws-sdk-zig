@@ -59,7 +59,7 @@ pub const DescribedConnector = struct {
     /// Type of egress configuration for the connector. SERVICE_MANAGED uses
     /// Transfer Family managed NAT gateways, while VPC_LATTICE routes traffic
     /// through customer VPCs using VPC Lattice.
-    egress_type: ConnectorEgressType = "SERVICE_MANAGED",
+    egress_type: ConnectorEgressType = .service_managed,
 
     /// Error message providing details when the connector is in ERRORED status.
     /// Contains information to help troubleshoot connector creation or operation
@@ -84,7 +84,7 @@ pub const DescribedConnector = struct {
     /// Current status of the connector. PENDING indicates creation/update in
     /// progress, ACTIVE means ready for operations, and ERRORED indicates a failure
     /// requiring attention.
-    status: ConnectorStatus = "ACTIVE",
+    status: ConnectorStatus = .active,
 
     /// Key-value pairs that can be used to group and search for connectors.
     tags: ?[]const Tag = null,

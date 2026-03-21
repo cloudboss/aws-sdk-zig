@@ -22,7 +22,7 @@ pub const EncryptionConfiguration = struct {
     /// the vector bucket. By default, if you don't specify, all new vectors in
     /// Amazon S3 vector buckets use server-side encryption with Amazon S3 managed
     /// keys (SSE-S3), specifically `AES256`.
-    sse_type: SseType = "AES256",
+    sse_type: SseType = .aes256,
 
     pub const json_field_names = .{
         .kms_key_arn = "kmsKeyArn",

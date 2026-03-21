@@ -296,24 +296,73 @@ class RestJsonProtocol : ProtocolGenerator {
         for ((memberName, memberShape) in bindings.queryParams) {
             val queryKey = memberShape.expectTrait(HttpQueryTrait::class.java).value
             val fieldName = NamingUtil.toFieldName(memberName)
+            val targetShape = ctx.model.expectShape(memberShape.target)
+            val targetIsList = targetShape is ListShape
 
             if (memberShape.isRequired) {
-                writer.write("if (query_has_prev) try query_buf.appendSlice(allocator, \"&\");")
-                writer.write("try query_buf.appendSlice(allocator, \"\$L=\");", queryKey)
-                writeQueryValueAppend(writer, ctx, memberShape, "input.$fieldName")
-                writer.write("query_has_prev = true;")
+                if (targetIsList) {
+                    writeQueryListParamAppend(writer, ctx, queryKey, targetShape as ListShape, "input.$fieldName")
+                } else {
+                    writer.write("if (query_has_prev) try query_buf.appendSlice(allocator, \"&\");")
+                    writer.write("try query_buf.appendSlice(allocator, \"\$L=\");", queryKey)
+                    writeQueryValueAppend(writer, ctx, memberShape, "input.$fieldName")
+                    writer.write("query_has_prev = true;")
+                }
             } else {
                 writer.openBlock("if (input.\$L) |v| {", fieldName)
-                writer.write("if (query_has_prev) try query_buf.appendSlice(allocator, \"&\");")
-                writer.write("try query_buf.appendSlice(allocator, \"\$L=\");", queryKey)
-                writeQueryValueAppend(writer, ctx, memberShape, "v")
-                writer.write("query_has_prev = true;")
+                if (targetIsList) {
+                    writeQueryListParamAppend(writer, ctx, queryKey, targetShape as ListShape, "v")
+                } else {
+                    writer.write("if (query_has_prev) try query_buf.appendSlice(allocator, \"&\");")
+                    writer.write("try query_buf.appendSlice(allocator, \"\$L=\");", queryKey)
+                    writeQueryValueAppend(writer, ctx, memberShape, "v")
+                    writer.write("query_has_prev = true;")
+                }
                 writer.closeBlock("}")
             }
         }
 
         writer.write("const query = try query_buf.toOwnedSlice(allocator);")
         writer.blankLine()
+    }
+
+    private fun writeQueryListParamAppend(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        queryKey: String,
+        listShape: ListShape,
+        varName: String,
+    ) {
+        val elementShape = ctx.model.expectShape(listShape.member.target)
+        val isElementEnum = elementShape is EnumShape ||
+            (elementShape is StringShape && elementShape.hasTrait(EnumTrait::class.java))
+        val elementZigType = ctx.resolveBaseZigType(elementShape)
+
+        writer.openBlock("for (\$L) |item| {", varName)
+        writer.write("if (query_has_prev) try query_buf.appendSlice(allocator, \"&\");")
+        writer.write("try query_buf.appendSlice(allocator, \"\$L=\");", queryKey)
+        when {
+            elementZigType == "[]const u8" -> {
+                writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, item);")
+            }
+            isElementEnum -> {
+                writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());")
+            }
+            elementZigType in listOf("i32", "i64", "i16", "i8") -> {
+                writer.openBlock("{")
+                writer.write("const num_str = std.fmt.allocPrint(allocator, \"{d}\", .{item}) catch \"\";")
+                writer.write("try query_buf.appendSlice(allocator, num_str);")
+                writer.closeBlock("}")
+            }
+            elementZigType == "bool" -> {
+                writer.write("try query_buf.appendSlice(allocator, if (item) \"true\" else \"false\");")
+            }
+            else -> {
+                writer.write("try aws.url.appendUrlEncoded(allocator, &query_buf, item);")
+            }
+        }
+        writer.write("query_has_prev = true;")
+        writer.closeBlock("}")
     }
 
     /**

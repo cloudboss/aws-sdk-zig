@@ -118,6 +118,30 @@ pub fn resolveEndpoint(
         return allocator.dupe(u8, "route53.amazonaws.com");
     }
 
+    // CloudFront uses a global endpoint in the aws partition.
+    if (std.mem.eql(u8, service, "cloudfront") and
+        std.mem.eql(u8, partitionForRegion(region).name, "aws") and
+        !options.fips and !options.dual_stack)
+    {
+        return allocator.dupe(u8, "cloudfront.amazonaws.com");
+    }
+
+    // Global Accelerator endpoint is anchored to us-west-2 in aws partition.
+    if (std.mem.eql(u8, service, "globalaccelerator") and
+        std.mem.eql(u8, partitionForRegion(region).name, "aws") and
+        !options.fips and !options.dual_stack)
+    {
+        return allocator.dupe(u8, "globalaccelerator.amazonaws.com");
+    }
+
+    // Network Manager endpoint is anchored to us-west-2 in aws partition.
+    if (std.mem.eql(u8, service, "networkmanager") and
+        std.mem.eql(u8, partitionForRegion(region).name, "aws") and
+        !options.fips and !options.dual_stack)
+    {
+        return allocator.dupe(u8, "networkmanager.us-west-2.amazonaws.com");
+    }
+
     const partition = partitionForRegion(region);
 
     if (options.fips and !partition.supports_fips) return error.FipsNotSupported;
@@ -176,6 +200,27 @@ test "resolveEndpoint route53 govcloud falls through to regional" {
     const host = try resolveEndpoint(allocator, "route53", "us-gov-west-1", .{});
     defer allocator.free(host);
     try std.testing.expectEqualStrings("route53.us-gov-west-1.amazonaws.com", host);
+}
+
+test "resolveEndpoint cloudfront uses global endpoint in aws partition" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "cloudfront", "us-east-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("cloudfront.amazonaws.com", host);
+}
+
+test "resolveEndpoint globalaccelerator uses global endpoint in aws partition" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "globalaccelerator", "us-east-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("globalaccelerator.amazonaws.com", host);
+}
+
+test "resolveEndpoint networkmanager uses us-west-2 endpoint in aws partition" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "networkmanager", "us-east-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("networkmanager.us-west-2.amazonaws.com", host);
 }
 
 test "partitionForRegion aws" {

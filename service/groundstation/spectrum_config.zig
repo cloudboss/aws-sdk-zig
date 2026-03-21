@@ -19,7 +19,7 @@ pub const SpectrumConfig = struct {
 
     /// Polarization of a spectral `Config`. Capturing both `"RIGHT_HAND"` and
     /// `"LEFT_HAND"` polarization requires two separate configs.
-    polarization: Polarization = "NONE",
+    polarization: Polarization = .none,
 
     pub const json_field_names = .{
         .bandwidth = "bandwidth",

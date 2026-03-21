@@ -7,7 +7,7 @@ pub const ExportFilterPropertyAttributes = struct {
     /// `TO_LIST` to export all values as a list, or `PICK_FIRST` to export the
     /// first value encountered. If not specified, the default value is
     /// `PICK_FIRST`.
-    multi_value_handling: MultiValueHandlingType = "PICK_FIRST",
+    multi_value_handling: MultiValueHandlingType = .pick_first,
 
     /// Specifies the data type to use for the property in the exported data (e.g.
     /// "String", "Int", "Float"). If a type is not provided, the export process

@@ -14,10 +14,10 @@ pub const GuardrailStreamConfiguration = struct {
     ///
     /// The processing mode. For more information, see *Configure streaming response
     /// behavior* in the *Amazon Bedrock User Guide*.
-    stream_processing_mode: GuardrailStreamProcessingMode = "sync",
+    stream_processing_mode: GuardrailStreamProcessingMode = .sync,
 
     /// The trace behavior for the guardrail.
-    trace: GuardrailTrace = "disabled",
+    trace: GuardrailTrace = .disabled,
 
     pub const json_field_names = .{
         .guardrail_identifier = "guardrailIdentifier",

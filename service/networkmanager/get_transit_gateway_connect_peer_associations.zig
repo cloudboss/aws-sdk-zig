@@ -96,10 +96,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTransitGatewayConnec
         query_has_prev = true;
     }
     if (input.transit_gateway_connect_peer_arns) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "transitGatewayConnectPeerArns=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "transitGatewayConnectPeerArns=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     const query = try query_buf.toOwnedSlice(allocator);
 

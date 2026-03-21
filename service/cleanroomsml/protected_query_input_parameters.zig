@@ -10,7 +10,7 @@ pub const ProtectedQueryInputParameters = struct {
 
     /// The format in which the query results should be returned. If not specified,
     /// defaults to `CSV`.
-    result_format: ResultFormat = "CSV",
+    result_format: ResultFormat = .csv,
 
     sql_parameters: ProtectedQuerySQLParameters,
 

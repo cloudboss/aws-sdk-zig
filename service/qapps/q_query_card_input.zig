@@ -12,7 +12,7 @@ pub const QQueryCardInput = struct {
     id: []const u8,
 
     /// The source or type of output to generate for the query card.
-    output_source: CardOutputSource = "approved-sources",
+    output_source: CardOutputSource = .approved_sources,
 
     /// The prompt or instructions displayed for the query card.
     prompt: []const u8,
@@ -21,7 +21,7 @@ pub const QQueryCardInput = struct {
     title: []const u8,
 
     /// The type of the card.
-    @"type": CardType = "q-query",
+    @"type": CardType = .q_query,
 
     pub const json_field_names = .{
         .attribute_filter = "attributeFilter",

@@ -22,7 +22,7 @@ pub const FormInputCardInput = struct {
     title: []const u8,
 
     /// The type of the card.
-    @"type": CardType = "form-input",
+    @"type": CardType = .form_input,
 
     pub const json_field_names = .{
         .compute_mode = "computeMode",

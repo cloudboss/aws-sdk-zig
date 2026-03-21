@@ -10,7 +10,7 @@ const EksResourceScalingUngraceful = @import("eks_resource_scaling_ungraceful.zi
 pub const EksResourceScalingConfiguration = struct {
     /// The monitoring approach for the configuration, that is, whether it was
     /// sampled in the last 24 hours or autoscaled in the last 24 hours.
-    capacity_monitoring_approach: EksCapacityMonitoringApproach = "sampledMaxInLast24Hours",
+    capacity_monitoring_approach: EksCapacityMonitoringApproach = .sampled_max_in_last_24_hours,
 
     /// The clusters for the configuration.
     eks_clusters: ?[]const EksCluster = null,

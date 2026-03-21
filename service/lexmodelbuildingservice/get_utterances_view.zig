@@ -89,10 +89,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetUtterancesViewInput,
     var query_has_prev = false;
     try query_buf.appendSlice(allocator, "view=aggregation");
     query_has_prev = true;
-    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-    try query_buf.appendSlice(allocator, "bot_versions=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, input.bot_versions);
-    query_has_prev = true;
+    for (input.bot_versions) |item| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "bot_versions=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+        query_has_prev = true;
+    }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "status_type=");
     try aws.url.appendUrlEncoded(allocator, &query_buf, input.status_type.wireName());

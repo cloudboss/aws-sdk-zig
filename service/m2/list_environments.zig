@@ -98,10 +98,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListEnvironmentsInput, 
         query_has_prev = true;
     }
     if (input.names) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "names=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "names=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+            query_has_prev = true;
+        }
     }
     if (input.next_token) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

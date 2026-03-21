@@ -62,7 +62,7 @@ pub const PlaybackConfiguration = struct {
     /// to select either stitched or guided ad insertion at session-initialization
     /// time. The default for players that do not specify an insertion mode is
     /// stitched.
-    insertion_mode: InsertionMode = "STITCHED_ONLY",
+    insertion_mode: InsertionMode = .stitched_only,
 
     /// The configuration for pre-roll ad insertion.
     live_pre_roll_configuration: ?LivePreRollConfiguration = null,

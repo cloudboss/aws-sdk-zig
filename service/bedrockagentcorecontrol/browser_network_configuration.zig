@@ -6,7 +6,7 @@ const VpcConfig = @import("vpc_config.zig").VpcConfig;
 pub const BrowserNetworkConfiguration = struct {
     /// The network mode for the browser. This field specifies how the browser
     /// connects to the network.
-    network_mode: BrowserNetworkMode = "PUBLIC",
+    network_mode: BrowserNetworkMode = .public,
 
     vpc_config: ?VpcConfig = null,
 

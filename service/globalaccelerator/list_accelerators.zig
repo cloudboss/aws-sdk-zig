@@ -44,7 +44,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAcceler
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "globalaccelerator");
+    try aws.signing.signRequest(alloc, &request, creds, "us-west-2", "globalaccelerator");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
