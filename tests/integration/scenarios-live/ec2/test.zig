@@ -11,6 +11,8 @@ var shared_vpc_id_buf: [64]u8 = undefined;
 var shared_vpc_id: []const u8 = "";
 var shared_sg_id_buf: [64]u8 = undefined;
 var shared_sg_id: []const u8 = "";
+var shared_subnet_id_buf: [64]u8 = undefined;
+var shared_subnet_id: []const u8 = "";
 var shared_eip_alloc_id_buf: [64]u8 = undefined;
 var shared_eip_alloc_id: []const u8 = "";
 var shared_volume_id_buf: [64]u8 = undefined;
@@ -72,60 +74,6 @@ test "zest.afterAll" {
         _ = gpa.deinit();
         return;
     }
-    const allocator = gpa.allocator();
-    var arena = std.heap.ArenaAllocator.init(allocator);
-    defer arena.deinit();
-    const alloc = arena.allocator();
-
-    if (shared_instance_id.len > 0) {
-        _ = shared_client.terminateInstances(alloc, .{
-            .instance_ids = &.{shared_instance_id},
-        }, .{}) catch {};
-
-        var attempts: u32 = 0;
-        while (attempts < 24) : (attempts += 1) {
-            std.time.sleep(5 * std.time.ns_per_s);
-            const desc = shared_client.describeInstances(
-                alloc,
-                .{ .instance_ids = &.{shared_instance_id} },
-                .{},
-            ) catch break;
-            const reservations = desc.reservations orelse
-                break;
-            if (reservations.len == 0) break;
-            const instances = reservations[0].instances orelse
-                break;
-            if (instances.len == 0) break;
-            const state = instances[0].state orelse break;
-            const name = state.name orelse break;
-            if (name == .terminated) break;
-        }
-    }
-
-    if (shared_eip_alloc_id.len > 0) {
-        _ = shared_client.releaseAddress(alloc, .{
-            .allocation_id = shared_eip_alloc_id,
-        }, .{}) catch {};
-    }
-
-    if (shared_volume_id.len > 0) {
-        _ = shared_client.deleteVolume(alloc, .{
-            .volume_id = shared_volume_id,
-        }, .{}) catch {};
-    }
-
-    if (shared_sg_id.len > 0) {
-        _ = shared_client.deleteSecurityGroup(alloc, .{
-            .group_id = shared_sg_id,
-        }, .{}) catch {};
-    }
-
-    if (shared_vpc_id.len > 0) {
-        _ = shared_client.deleteVpc(alloc, .{
-            .vpc_id = shared_vpc_id,
-        }, .{}) catch {};
-    }
-
     shared_client.deinit();
     shared_cfg.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
@@ -206,6 +154,39 @@ test "createSecurityGroup and describeSecurityGroups" {
     );
 }
 
+test "createSubnet and describeSubnets" {
+    try std.testing.expect(shared_vpc_id.len > 0);
+    try std.testing.expect(shared_az.len > 0);
+
+    var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    const result = try shared_client.createSubnet(
+        alloc,
+        .{
+            .vpc_id = shared_vpc_id,
+            .cidr_block = "10.99.1.0/24",
+            .availability_zone = shared_az,
+        },
+        .{},
+    );
+    const subnet_id = result.subnet.?.subnet_id orelse
+        return error.MissingSubnetId;
+    shared_subnet_id = storeId(&shared_subnet_id_buf, subnet_id);
+
+    try tagResource(alloc, shared_subnet_id);
+
+    const desc = try shared_client.describeSubnets(
+        alloc,
+        .{ .subnet_ids = &.{shared_subnet_id} },
+        .{},
+    );
+    const subnets = desc.subnets orelse
+        return error.MissingSubnets;
+    try std.testing.expect(subnets.len >= 1);
+}
+
 test "authorizeSecurityGroupIngress adds rule" {
     try std.testing.expect(shared_sg_id.len > 0);
 
@@ -271,7 +252,7 @@ test "createVolume and describeVolumes" {
         .{
             .availability_zone = shared_az,
             .size = 1,
-            .volume_type = .gp3,
+            .volume_type = .gp_3,
         },
         .{},
     );
@@ -300,7 +281,7 @@ test "createVolume and describeVolumes" {
 
 test "runInstances launches a t3.nano" {
     try std.testing.expect(shared_sg_id.len > 0);
-    try std.testing.expect(shared_vpc_id.len > 0);
+    try std.testing.expect(shared_subnet_id.len > 0);
 
     var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
     defer arena.deinit();
@@ -345,29 +326,15 @@ test "runInstances launches a t3.nano" {
     const ami_id = ami_list[best_idx].image_id orelse
         return error.MissingAmiId;
 
-    const desc_subnets = try shared_client.describeSubnets(
-        alloc,
-        .{ .filters = &.{.{
-            .name = "vpc-id",
-            .values = &.{shared_vpc_id},
-        }} },
-        .{},
-    );
-    const subnets = desc_subnets.subnets orelse
-        return error.MissingSubnets;
-    if (subnets.len == 0) return error.MissingSubnets;
-    const subnet_id = subnets[0].subnet_id orelse
-        return error.MissingSubnetId;
-
     const run_result = try shared_client.runInstances(
         alloc,
         .{
             .image_id = ami_id,
-            .instance_type = .t3_nano,
+            .instance_type = .t_3_nano,
             .min_count = 1,
             .max_count = 1,
             .security_group_ids = &.{shared_sg_id},
-            .subnet_id = subnet_id,
+            .subnet_id = shared_subnet_id,
             .tag_specifications = &.{.{
                 .resource_type = .instance,
                 .tags = &test_tags,
@@ -393,11 +360,24 @@ test "describeInstances returns launched instance" {
     var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
     defer arena.deinit();
 
-    const result = try shared_client.describeInstances(
-        arena.allocator(),
-        .{ .instance_ids = &.{shared_instance_id} },
-        .{},
-    );
+    var result: ec2.DescribeInstancesOutput = undefined;
+    var attempts: u32 = 0;
+    while (true) : (attempts += 1) {
+        result = shared_client.describeInstances(
+            arena.allocator(),
+            .{ .instance_ids = &.{shared_instance_id} },
+            .{},
+        ) catch |err| switch (err) {
+            error.ServiceError => {
+                if (attempts >= 12) return err;
+                std.Thread.sleep(5 * std.time.ns_per_s);
+                continue;
+            },
+            else => return err,
+        };
+        break;
+    }
+
     const reservations = result.reservations orelse
         return error.MissingReservations;
     try std.testing.expect(reservations.len >= 1);
