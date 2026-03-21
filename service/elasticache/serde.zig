@@ -1564,7 +1564,7 @@ pub fn deserializeDataStorage(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "Minimum")) {
                     result.minimum = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Unit")) {
-                    result.unit = DataStorageUnit.fromWireName(try reader.readElementText());
+                    result.unit = DataStorageUnit.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }

@@ -640,7 +640,7 @@ pub fn deserializeCloudWatchDimensionConfiguration(allocator: std.mem.Allocator,
                 } else if (std.mem.eql(u8, e.local, "DimensionName")) {
                     result.dimension_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DimensionValueSource")) {
-                    result.dimension_value_source = DimensionValueSource.fromWireName(try reader.readElementText());
+                    result.dimension_value_source = DimensionValueSource.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -784,7 +784,7 @@ pub fn deserializeIdentityDkimAttributes(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "DkimTokens")) {
                     result.dkim_tokens = try deserializeVerificationTokenList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "DkimVerificationStatus")) {
-                    result.dkim_verification_status = VerificationStatus.fromWireName(try reader.readElementText());
+                    result.dkim_verification_status = VerificationStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -802,11 +802,11 @@ pub fn deserializeIdentityMailFromDomainAttributes(allocator: std.mem.Allocator,
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "BehaviorOnMXFailure")) {
-                    result.behavior_on_mx_failure = BehaviorOnMXFailure.fromWireName(try reader.readElementText());
+                    result.behavior_on_mx_failure = BehaviorOnMXFailure.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "MailFromDomain")) {
                     result.mail_from_domain = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "MailFromDomainStatus")) {
-                    result.mail_from_domain_status = CustomMailFromStatus.fromWireName(try reader.readElementText());
+                    result.mail_from_domain_status = CustomMailFromStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -858,7 +858,7 @@ pub fn deserializeIdentityVerificationAttributes(allocator: std.mem.Allocator, r
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "VerificationStatus")) {
-                    result.verification_status = VerificationStatus.fromWireName(try reader.readElementText());
+                    result.verification_status = VerificationStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "VerificationToken")) {
                     result.verification_token = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -984,7 +984,7 @@ pub fn deserializeReceiptIpFilter(allocator: std.mem.Allocator, reader: *aws.xml
                 if (std.mem.eql(u8, e.local, "Cidr")) {
                     result.cidr = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Policy")) {
-                    result.policy = ReceiptFilterPolicy.fromWireName(try reader.readElementText());
+                    result.policy = ReceiptFilterPolicy.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -1185,7 +1185,7 @@ pub fn deserializeStopAction(allocator: std.mem.Allocator, reader: *aws.xml.Read
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Scope")) {
-                    result.scope = StopScope.fromWireName(try reader.readElementText());
+                    result.scope = StopScope.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "TopicArn")) {
                     result.topic_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else {

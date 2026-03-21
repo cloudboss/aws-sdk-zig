@@ -815,7 +815,7 @@ pub fn deserializeAction(allocator: std.mem.Allocator, reader: *aws.xml.Reader) 
                 } else if (std.mem.eql(u8, e.local, "TargetGroupArn")) {
                     result.target_group_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = ActionTypeEnum.fromWireName(try reader.readElementText());
+                    result.@"type" = ActionTypeEnum.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -1240,7 +1240,7 @@ pub fn deserializeJwtValidationActionAdditionalClaim(allocator: std.mem.Allocato
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Format")) {
-                    result.format = JwtValidationActionAdditionalClaimFormatEnum.fromWireName(try reader.readElementText());
+                    result.format = JwtValidationActionAdditionalClaimFormatEnum.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Values")) {
@@ -1659,7 +1659,7 @@ pub fn deserializeRedirectActionConfig(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "Query")) {
                     result.query = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StatusCode")) {
-                    result.status_code = RedirectActionStatusCodeEnum.fromWireName(try reader.readElementText());
+                    result.status_code = RedirectActionStatusCodeEnum.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -1778,7 +1778,7 @@ pub fn deserializeRuleTransform(allocator: std.mem.Allocator, reader: *aws.xml.R
                 if (std.mem.eql(u8, e.local, "HostHeaderRewriteConfig")) {
                     result.host_header_rewrite_config = try deserializeHostHeaderRewriteConfig(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = TransformTypeEnum.fromWireName(try reader.readElementText());
+                    result.@"type" = TransformTypeEnum.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "UrlRewriteConfig")) {
                     result.url_rewrite_config = try deserializeUrlRewriteConfig(allocator, reader);
                 } else {

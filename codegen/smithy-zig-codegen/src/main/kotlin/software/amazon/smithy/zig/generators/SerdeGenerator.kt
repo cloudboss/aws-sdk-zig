@@ -23,6 +23,8 @@ import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.shapes.TimestampShape
 import software.amazon.smithy.model.traits.EnumTrait
+import software.amazon.smithy.model.traits.DefaultTrait
+import software.amazon.smithy.model.traits.InputTrait
 import software.amazon.smithy.model.traits.XmlFlattenedTrait
 import software.amazon.smithy.model.traits.XmlNameTrait
 import software.amazon.smithy.zig.NamingUtil
@@ -58,6 +60,12 @@ class SerdeGenerator(
 
     /** Struct shapes that need serialize functions (from input shapes). */
     private val serializableStructs: Set<StructureShape> by lazy { collectSerializableShapes() }
+
+    private val inputShapeIds: Set<ShapeId> by lazy {
+        topDownIndex.getContainedOperations(service).mapNotNull { op ->
+            op.input.orElse(null)
+        }.toSet()
+    }
 
     /** List shapes that need list serializer helpers (from input shapes). */
     private val serializableLists: Set<ListShape> by lazy { collectSerializableLists() }
@@ -606,10 +614,17 @@ class SerdeGenerator(
             is StringShape -> {
                 if (isEnumType(targetShape)) {
                     val enumName = targetShape.id.name
-                    writer.write(
-                        "result.\$L = \$L.fromWireName(try reader.readElementText());",
-                        fieldName, enumName,
-                    )
+                    if (memberShape.isRequired) {
+                        writer.write(
+                            "result.\$L = \$L.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;",
+                            fieldName, enumName,
+                        )
+                    } else {
+                        writer.write(
+                            "result.\$L = \$L.fromWireName(try reader.readElementText());",
+                            fieldName, enumName,
+                        )
+                    }
                 } else {
                     writer.write(
                         "result.\$L = try allocator.dupe(u8, try reader.readElementText());",
@@ -677,10 +692,17 @@ class SerdeGenerator(
             }
             is EnumShape, is IntEnumShape -> {
                 val enumName = targetShape.id.name
-                writer.write(
-                    "result.\$L = \$L.fromWireName(try reader.readElementText());",
-                    fieldName, enumName,
-                )
+                if (memberShape.isRequired) {
+                    writer.write(
+                        "result.\$L = \$L.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;",
+                        fieldName, enumName,
+                    )
+                } else {
+                    writer.write(
+                        "result.\$L = \$L.fromWireName(try reader.readElementText());",
+                        fieldName, enumName,
+                    )
+                }
             }
             is TimestampShape -> {
                 if (memberShape.isRequired) {
@@ -1073,12 +1095,16 @@ class SerdeGenerator(
                     .map { it.value }
                     .orElse(memberName)
 
-                if (memberShape.isRequired) {
-                    writeMemberSerializer(writer, xmlName, "value.$fieldName", memberShape, targetShape)
-                } else {
+                val isInputStruct = shape.hasTrait(InputTrait::class.java) || shape.id in inputShapeIds
+                val memberType = symbolProvider.toSymbol(memberShape).name
+                val isOptionalInSerializer = memberType.startsWith("?") ||
+                    (isInputStruct && memberShape.hasTrait(DefaultTrait::class.java))
+                if (isOptionalInSerializer) {
                     writer.openBlock("if (value.\$L) |v| {", fieldName)
                     writeMemberSerializer(writer, xmlName, "v", memberShape, targetShape)
                     writer.closeBlock("}")
+                } else {
+                    writeMemberSerializer(writer, xmlName, "value.$fieldName", memberShape, targetShape)
                 }
             }
         }

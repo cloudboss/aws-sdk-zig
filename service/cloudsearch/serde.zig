@@ -243,7 +243,7 @@ pub fn deserializeAnalysisScheme(allocator: std.mem.Allocator, reader: *aws.xml.
                 if (std.mem.eql(u8, e.local, "AnalysisOptions")) {
                     result.analysis_options = try deserializeAnalysisOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "AnalysisSchemeLanguage")) {
-                    result.analysis_scheme_language = AnalysisSchemeLanguage.fromWireName(try reader.readElementText());
+                    result.analysis_scheme_language = AnalysisSchemeLanguage.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "AnalysisSchemeName")) {
                     result.analysis_scheme_name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -613,7 +613,7 @@ pub fn deserializeIndexField(allocator: std.mem.Allocator, reader: *aws.xml.Read
                 } else if (std.mem.eql(u8, e.local, "IndexFieldName")) {
                     result.index_field_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "IndexFieldType")) {
-                    result.index_field_type = IndexFieldType.fromWireName(try reader.readElementText());
+                    result.index_field_type = IndexFieldType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "IntArrayOptions")) {
                     result.int_array_options = try deserializeIntArrayOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "IntOptions")) {
@@ -857,7 +857,7 @@ pub fn deserializeOptionStatus(allocator: std.mem.Allocator, reader: *aws.xml.Re
                 } else if (std.mem.eql(u8, e.local, "PendingDeletion")) {
                     result.pending_deletion = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "State")) {
-                    result.state = OptionState.fromWireName(try reader.readElementText());
+                    result.state = OptionState.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "UpdateDate")) {
                     result.update_date = try aws.date.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UpdateVersion")) {

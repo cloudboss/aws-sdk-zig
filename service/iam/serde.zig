@@ -1082,7 +1082,7 @@ pub fn deserializeAccessKey(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                 } else if (std.mem.eql(u8, e.local, "SecretAccessKey")) {
                     result.secret_access_key = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = statusType.fromWireName(try reader.readElementText());
+                    result.status = statusType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "UserName")) {
                     result.user_name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -1347,7 +1347,7 @@ pub fn deserializeEntityInfo(allocator: std.mem.Allocator, reader: *aws.xml.Read
                 } else if (std.mem.eql(u8, e.local, "Path")) {
                     result.path = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = policyOwnerEntityType.fromWireName(try reader.readElementText());
+                    result.@"type" = policyOwnerEntityType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -1394,7 +1394,7 @@ pub fn deserializeEvaluationResult(allocator: std.mem.Allocator, reader: *aws.xm
                 if (std.mem.eql(u8, e.local, "EvalActionName")) {
                     result.eval_action_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EvalDecision")) {
-                    result.eval_decision = PolicyEvaluationDecisionType.fromWireName(try reader.readElementText());
+                    result.eval_decision = PolicyEvaluationDecisionType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "EvalDecisionDetails")) {
                     result.eval_decision_details = try deserializeEvalDecisionDetailsType(allocator, reader, "entry");
                 } else if (std.mem.eql(u8, e.local, "EvalResourceName")) {
@@ -1830,7 +1830,7 @@ pub fn deserializePolicyGrantingServiceAccess(allocator: std.mem.Allocator, read
                 } else if (std.mem.eql(u8, e.local, "PolicyName")) {
                     result.policy_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PolicyType")) {
-                    result.policy_type = policyType.fromWireName(try reader.readElementText());
+                    result.policy_type = policyType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -1996,7 +1996,7 @@ pub fn deserializeResourceSpecificResult(allocator: std.mem.Allocator, reader: *
                 if (std.mem.eql(u8, e.local, "EvalDecisionDetails")) {
                     result.eval_decision_details = try deserializeEvalDecisionDetailsType(allocator, reader, "entry");
                 } else if (std.mem.eql(u8, e.local, "EvalResourceDecision")) {
-                    result.eval_resource_decision = PolicyEvaluationDecisionType.fromWireName(try reader.readElementText());
+                    result.eval_resource_decision = PolicyEvaluationDecisionType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "EvalResourceName")) {
                     result.eval_resource_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "MatchedStatements")) {
@@ -2216,7 +2216,7 @@ pub fn deserializeSSHPublicKey(allocator: std.mem.Allocator, reader: *aws.xml.Re
                 } else if (std.mem.eql(u8, e.local, "SSHPublicKeyId")) {
                     result.ssh_public_key_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = statusType.fromWireName(try reader.readElementText());
+                    result.status = statusType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "UploadDate")) {
                     result.upload_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "UserName")) {
@@ -2240,7 +2240,7 @@ pub fn deserializeSSHPublicKeyMetadata(allocator: std.mem.Allocator, reader: *aw
                 if (std.mem.eql(u8, e.local, "SSHPublicKeyId")) {
                     result.ssh_public_key_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = statusType.fromWireName(try reader.readElementText());
+                    result.status = statusType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "UploadDate")) {
                     result.upload_date = try aws.date.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "UserName")) {
@@ -2374,7 +2374,7 @@ pub fn deserializeServiceSpecificCredential(allocator: std.mem.Allocator, reader
                 } else if (std.mem.eql(u8, e.local, "ServiceUserName")) {
                     result.service_user_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = statusType.fromWireName(try reader.readElementText());
+                    result.status = statusType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "UserName")) {
                     result.user_name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -2409,7 +2409,7 @@ pub fn deserializeServiceSpecificCredentialMetadata(allocator: std.mem.Allocator
                 } else if (std.mem.eql(u8, e.local, "ServiceUserName")) {
                     result.service_user_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = statusType.fromWireName(try reader.readElementText());
+                    result.status = statusType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "UserName")) {
                     result.user_name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -2434,7 +2434,7 @@ pub fn deserializeSigningCertificate(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "CertificateId")) {
                     result.certificate_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = statusType.fromWireName(try reader.readElementText());
+                    result.status = statusType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "UploadDate")) {
                     result.upload_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "UserName")) {

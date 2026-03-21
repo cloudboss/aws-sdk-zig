@@ -1852,11 +1852,11 @@ pub fn deserializeHookTarget(allocator: std.mem.Allocator, reader: *aws.xml.Read
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Action")) {
-                    result.action = HookTargetAction.fromWireName(try reader.readElementText());
+                    result.action = HookTargetAction.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "TargetId")) {
                     result.target_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TargetType")) {
-                    result.target_type = HookTargetType.fromWireName(try reader.readElementText());
+                    result.target_type = HookTargetType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "TargetTypeName")) {
                     result.target_type_name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -2213,7 +2213,7 @@ pub fn deserializePropertyDifference(allocator: std.mem.Allocator, reader: *aws.
                 if (std.mem.eql(u8, e.local, "ActualValue")) {
                     result.actual_value = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DifferenceType")) {
-                    result.difference_type = DifferenceType.fromWireName(try reader.readElementText());
+                    result.difference_type = DifferenceType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "ExpectedValue")) {
                     result.expected_value = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PropertyPath")) {
@@ -2709,7 +2709,7 @@ pub fn deserializeStack(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
                 } else if (std.mem.eql(u8, e.local, "StackName")) {
                     result.stack_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StackStatus")) {
-                    result.stack_status = StackStatus.fromWireName(try reader.readElementText());
+                    result.stack_status = StackStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "StackStatusReason")) {
                     result.stack_status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Tags")) {
@@ -2737,7 +2737,7 @@ pub fn deserializeStackDriftInformation(allocator: std.mem.Allocator, reader: *a
                 if (std.mem.eql(u8, e.local, "LastCheckTimestamp")) {
                     result.last_check_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "StackDriftStatus")) {
-                    result.stack_drift_status = StackDriftStatus.fromWireName(try reader.readElementText());
+                    result.stack_drift_status = StackDriftStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -2759,7 +2759,7 @@ pub fn deserializeStackDriftInformationSummary(allocator: std.mem.Allocator, rea
                 if (std.mem.eql(u8, e.local, "LastCheckTimestamp")) {
                     result.last_check_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "StackDriftStatus")) {
-                    result.stack_drift_status = StackDriftStatus.fromWireName(try reader.readElementText());
+                    result.stack_drift_status = StackDriftStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -2933,7 +2933,7 @@ pub fn deserializeStackInstanceResourceDriftsSummary(allocator: std.mem.Allocato
                 } else if (std.mem.eql(u8, e.local, "StackId")) {
                     result.stack_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StackResourceDriftStatus")) {
-                    result.stack_resource_drift_status = StackResourceDriftStatus.fromWireName(try reader.readElementText());
+                    result.stack_resource_drift_status = StackResourceDriftStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Timestamp")) {
                     result.timestamp = try aws.date.parseIso8601(try reader.readElementText());
                 } else {
@@ -3099,7 +3099,7 @@ pub fn deserializeStackResource(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "PhysicalResourceId")) {
                     result.physical_resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceStatus")) {
-                    result.resource_status = ResourceStatus.fromWireName(try reader.readElementText());
+                    result.resource_status = ResourceStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "ResourceStatusReason")) {
                     result.resource_status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceType")) {
@@ -3149,7 +3149,7 @@ pub fn deserializeStackResourceDetail(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "PhysicalResourceId")) {
                     result.physical_resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceStatus")) {
-                    result.resource_status = ResourceStatus.fromWireName(try reader.readElementText());
+                    result.resource_status = ResourceStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "ResourceStatusReason")) {
                     result.resource_status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceType")) {
@@ -3202,7 +3202,7 @@ pub fn deserializeStackResourceDrift(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "StackId")) {
                     result.stack_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StackResourceDriftStatus")) {
-                    result.stack_resource_drift_status = StackResourceDriftStatus.fromWireName(try reader.readElementText());
+                    result.stack_resource_drift_status = StackResourceDriftStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Timestamp")) {
                     result.timestamp = try aws.date.parseIso8601(try reader.readElementText());
                 } else {
@@ -3226,7 +3226,7 @@ pub fn deserializeStackResourceDriftInformation(allocator: std.mem.Allocator, re
                 if (std.mem.eql(u8, e.local, "LastCheckTimestamp")) {
                     result.last_check_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "StackResourceDriftStatus")) {
-                    result.stack_resource_drift_status = StackResourceDriftStatus.fromWireName(try reader.readElementText());
+                    result.stack_resource_drift_status = StackResourceDriftStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -3248,7 +3248,7 @@ pub fn deserializeStackResourceDriftInformationSummary(allocator: std.mem.Alloca
                 if (std.mem.eql(u8, e.local, "LastCheckTimestamp")) {
                     result.last_check_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "StackResourceDriftStatus")) {
-                    result.stack_resource_drift_status = StackResourceDriftStatus.fromWireName(try reader.readElementText());
+                    result.stack_resource_drift_status = StackResourceDriftStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -3280,7 +3280,7 @@ pub fn deserializeStackResourceSummary(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "PhysicalResourceId")) {
                     result.physical_resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceStatus")) {
-                    result.resource_status = ResourceStatus.fromWireName(try reader.readElementText());
+                    result.resource_status = ResourceStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "ResourceStatusReason")) {
                     result.resource_status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceType")) {
@@ -3691,7 +3691,7 @@ pub fn deserializeStackSummary(allocator: std.mem.Allocator, reader: *aws.xml.Re
                 } else if (std.mem.eql(u8, e.local, "StackName")) {
                     result.stack_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StackStatus")) {
-                    result.stack_status = StackStatus.fromWireName(try reader.readElementText());
+                    result.stack_status = StackStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "StackStatusReason")) {
                     result.stack_status_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TemplateDescription")) {

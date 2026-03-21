@@ -973,7 +973,7 @@ pub fn deserializeAccessControlTranslation(allocator: std.mem.Allocator, reader:
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Owner")) {
-                    result.owner = OwnerOverride.fromWireName(try reader.readElementText());
+                    result.owner = OwnerOverride.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -1038,7 +1038,7 @@ pub fn deserializeAnalyticsS3BucketDestination(allocator: std.mem.Allocator, rea
                 } else if (std.mem.eql(u8, e.local, "BucketAccountId")) {
                     result.bucket_account_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Format")) {
-                    result.format = AnalyticsS3ExportFileFormat.fromWireName(try reader.readElementText());
+                    result.format = AnalyticsS3ExportFileFormat.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Prefix")) {
                     result.prefix = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -1558,7 +1558,7 @@ pub fn deserializeExistingObjectReplication(allocator: std.mem.Allocator, reader
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = ExistingObjectReplicationStatus.fromWireName(try reader.readElementText());
+                    result.status = ExistingObjectReplicationStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -1705,7 +1705,7 @@ pub fn deserializeGrantee(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
                 } else if (std.mem.eql(u8, e.local, "ID")) {
                     result.id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "xsi:type")) {
-                    result.@"type" = Type.fromWireName(try reader.readElementText());
+                    result.@"type" = Type.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "URI")) {
                     result.uri = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -1792,7 +1792,7 @@ pub fn deserializeIntelligentTieringConfiguration(allocator: std.mem.Allocator, 
                 } else if (std.mem.eql(u8, e.local, "Id")) {
                     result.id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = IntelligentTieringStatus.fromWireName(try reader.readElementText());
+                    result.status = IntelligentTieringStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Tiering")) {
                     result.tierings = try deserializeTieringList(allocator, reader, "member");
                 } else {
@@ -1845,7 +1845,7 @@ pub fn deserializeInventoryConfiguration(allocator: std.mem.Allocator, reader: *
                 } else if (std.mem.eql(u8, e.local, "Id")) {
                     result.id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "IncludedObjectVersions")) {
-                    result.included_object_versions = InventoryIncludedObjectVersions.fromWireName(try reader.readElementText());
+                    result.included_object_versions = InventoryIncludedObjectVersions.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "IsEnabled")) {
                     result.is_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "OptionalFields")) {
@@ -1936,7 +1936,7 @@ pub fn deserializeInventoryS3BucketDestination(allocator: std.mem.Allocator, rea
                 } else if (std.mem.eql(u8, e.local, "Encryption")) {
                     result.encryption = try deserializeInventoryEncryption(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Format")) {
-                    result.format = InventoryFormat.fromWireName(try reader.readElementText());
+                    result.format = InventoryFormat.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Prefix")) {
                     result.prefix = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -1957,7 +1957,7 @@ pub fn deserializeInventorySchedule(allocator: std.mem.Allocator, reader: *aws.x
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Frequency")) {
-                    result.frequency = InventoryFrequency.fromWireName(try reader.readElementText());
+                    result.frequency = InventoryFrequency.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -1979,7 +1979,7 @@ pub fn deserializeInventoryTableConfigurationResult(allocator: std.mem.Allocator
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ConfigurationState")) {
-                    result.configuration_state = InventoryConfigurationState.fromWireName(try reader.readElementText());
+                    result.configuration_state = InventoryConfigurationState.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Error")) {
                     result.@"error" = try deserializeErrorDetails(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "TableArn")) {
@@ -2107,7 +2107,7 @@ pub fn deserializeLifecycleRule(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "Prefix")) {
                     result.prefix = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = ExpirationStatus.fromWireName(try reader.readElementText());
+                    result.status = ExpirationStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Transition")) {
                     result.transitions = try deserializeTransitionList(allocator, reader, "member");
                 } else {
@@ -2257,7 +2257,7 @@ pub fn deserializeMetrics(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
                 if (std.mem.eql(u8, e.local, "EventThreshold")) {
                     result.event_threshold = try deserializeReplicationTimeValue(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = MetricsStatus.fromWireName(try reader.readElementText());
+                    result.status = MetricsStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -2658,7 +2658,7 @@ pub fn deserializeOwnershipControlsRule(allocator: std.mem.Allocator, reader: *a
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "ObjectOwnership")) {
-                    result.object_ownership = ObjectOwnership.fromWireName(try reader.readElementText());
+                    result.object_ownership = ObjectOwnership.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -2818,7 +2818,7 @@ pub fn deserializeRecordExpiration(allocator: std.mem.Allocator, reader: *aws.xm
                 if (std.mem.eql(u8, e.local, "Days")) {
                     result.days = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Expiration")) {
-                    result.expiration = ExpirationState.fromWireName(try reader.readElementText());
+                    result.expiration = ExpirationState.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -2889,7 +2889,7 @@ pub fn deserializeReplicaModifications(allocator: std.mem.Allocator, reader: *aw
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = ReplicaModificationsStatus.fromWireName(try reader.readElementText());
+                    result.status = ReplicaModificationsStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -2950,7 +2950,7 @@ pub fn deserializeReplicationRule(allocator: std.mem.Allocator, reader: *aws.xml
                 } else if (std.mem.eql(u8, e.local, "SourceSelectionCriteria")) {
                     result.source_selection_criteria = try deserializeSourceSelectionCriteria(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = ReplicationRuleStatus.fromWireName(try reader.readElementText());
+                    result.status = ReplicationRuleStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -3015,7 +3015,7 @@ pub fn deserializeReplicationTime(allocator: std.mem.Allocator, reader: *aws.xml
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = ReplicationTimeStatus.fromWireName(try reader.readElementText());
+                    result.status = ReplicationTimeStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Time")) {
                     result.time = try deserializeReplicationTimeValue(allocator, reader);
                 } else {
@@ -3178,7 +3178,7 @@ pub fn deserializeServerSideEncryptionByDefault(allocator: std.mem.Allocator, re
                 if (std.mem.eql(u8, e.local, "KMSMasterKeyID")) {
                     result.kms_master_key_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SSEAlgorithm")) {
-                    result.sse_algorithm = ServerSideEncryption.fromWireName(try reader.readElementText());
+                    result.sse_algorithm = ServerSideEncryption.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -3301,7 +3301,7 @@ pub fn deserializeSseKmsEncryptedObjects(allocator: std.mem.Allocator, reader: *
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = SseKmsEncryptedObjectsStatus.fromWireName(try reader.readElementText());
+                    result.status = SseKmsEncryptedObjectsStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -3340,7 +3340,7 @@ pub fn deserializeStorageClassAnalysisDataExport(allocator: std.mem.Allocator, r
                 if (std.mem.eql(u8, e.local, "Destination")) {
                     result.destination = try deserializeAnalyticsExportDestination(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "OutputSchemaVersion")) {
-                    result.output_schema_version = StorageClassAnalysisSchemaVersion.fromWireName(try reader.readElementText());
+                    result.output_schema_version = StorageClassAnalysisSchemaVersion.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -3423,7 +3423,7 @@ pub fn deserializeTiering(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AccessTier")) {
-                    result.access_tier = IntelligentTieringAccessTier.fromWireName(try reader.readElementText());
+                    result.access_tier = IntelligentTieringAccessTier.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Days")) {
                     result.days = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else {

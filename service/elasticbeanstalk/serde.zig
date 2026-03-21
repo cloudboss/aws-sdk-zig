@@ -2133,9 +2133,9 @@ pub fn deserializeSourceBuildInformation(allocator: std.mem.Allocator, reader: *
                 if (std.mem.eql(u8, e.local, "SourceLocation")) {
                     result.source_location = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SourceRepository")) {
-                    result.source_repository = SourceRepository.fromWireName(try reader.readElementText());
+                    result.source_repository = SourceRepository.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "SourceType")) {
-                    result.source_type = SourceType.fromWireName(try reader.readElementText());
+                    result.source_type = SourceType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }

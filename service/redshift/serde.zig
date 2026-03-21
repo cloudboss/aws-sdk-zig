@@ -4788,9 +4788,11 @@ pub fn serializeDeleteClusterSnapshotMessage(allocator: std.mem.Allocator, buf: 
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</SnapshotClusterIdentifier>");
     }
-    try buf.appendSlice(allocator, "<SnapshotIdentifier>");
-    try aws.xml.appendXmlEscaped(allocator, buf, value.snapshot_identifier);
-    try buf.appendSlice(allocator, "</SnapshotIdentifier>");
+    if (value.snapshot_identifier) |v| {
+        try buf.appendSlice(allocator, "<SnapshotIdentifier>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</SnapshotIdentifier>");
+    }
 }
 
 pub fn serializeDescribeIntegrationsFilter(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: DescribeIntegrationsFilter) !void {
@@ -4869,9 +4871,11 @@ pub fn serializeParameter(allocator: std.mem.Allocator, buf: *std.ArrayList(u8),
 }
 
 pub fn serializePauseClusterMessage(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: PauseClusterMessage) !void {
-    try buf.appendSlice(allocator, "<ClusterIdentifier>");
-    try aws.xml.appendXmlEscaped(allocator, buf, value.cluster_identifier);
-    try buf.appendSlice(allocator, "</ClusterIdentifier>");
+    if (value.cluster_identifier) |v| {
+        try buf.appendSlice(allocator, "<ClusterIdentifier>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</ClusterIdentifier>");
+    }
 }
 
 pub fn serializeResizeClusterMessage(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ResizeClusterMessage) !void {
@@ -4880,9 +4884,11 @@ pub fn serializeResizeClusterMessage(allocator: std.mem.Allocator, buf: *std.Arr
         try buf.appendSlice(allocator, if (v) "true" else "false");
         try buf.appendSlice(allocator, "</Classic>");
     }
-    try buf.appendSlice(allocator, "<ClusterIdentifier>");
-    try aws.xml.appendXmlEscaped(allocator, buf, value.cluster_identifier);
-    try buf.appendSlice(allocator, "</ClusterIdentifier>");
+    if (value.cluster_identifier) |v| {
+        try buf.appendSlice(allocator, "<ClusterIdentifier>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</ClusterIdentifier>");
+    }
     if (value.cluster_type) |v| {
         try buf.appendSlice(allocator, "<ClusterType>");
         try aws.xml.appendXmlEscaped(allocator, buf, v);
@@ -4914,9 +4920,11 @@ pub fn serializeResizeClusterMessage(allocator: std.mem.Allocator, buf: *std.Arr
 }
 
 pub fn serializeResumeClusterMessage(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ResumeClusterMessage) !void {
-    try buf.appendSlice(allocator, "<ClusterIdentifier>");
-    try aws.xml.appendXmlEscaped(allocator, buf, value.cluster_identifier);
-    try buf.appendSlice(allocator, "</ClusterIdentifier>");
+    if (value.cluster_identifier) |v| {
+        try buf.appendSlice(allocator, "<ClusterIdentifier>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</ClusterIdentifier>");
+    }
 }
 
 pub fn serializeScheduledActionFilter(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledActionFilter) !void {

@@ -1862,7 +1862,7 @@ pub fn deserializeCacheBehavior(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "TrustedSigners")) {
                     result.trusted_signers = try deserializeTrustedSigners(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "ViewerProtocolPolicy")) {
-                    result.viewer_protocol_policy = ViewerProtocolPolicy.fromWireName(try reader.readElementText());
+                    result.viewer_protocol_policy = ViewerProtocolPolicy.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -1956,7 +1956,7 @@ pub fn deserializeCachePolicyCookiesConfig(allocator: std.mem.Allocator, reader:
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CookieBehavior")) {
-                    result.cookie_behavior = CachePolicyCookieBehavior.fromWireName(try reader.readElementText());
+                    result.cookie_behavior = CachePolicyCookieBehavior.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Cookies")) {
                     result.cookies = try deserializeCookieNames(allocator, reader);
                 } else {
@@ -1977,7 +1977,7 @@ pub fn deserializeCachePolicyHeadersConfig(allocator: std.mem.Allocator, reader:
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "HeaderBehavior")) {
-                    result.header_behavior = CachePolicyHeaderBehavior.fromWireName(try reader.readElementText());
+                    result.header_behavior = CachePolicyHeaderBehavior.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Headers")) {
                     result.headers = try deserializeHeaders(allocator, reader);
                 } else {
@@ -2024,7 +2024,7 @@ pub fn deserializeCachePolicyQueryStringsConfig(allocator: std.mem.Allocator, re
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "QueryStringBehavior")) {
-                    result.query_string_behavior = CachePolicyQueryStringBehavior.fromWireName(try reader.readElementText());
+                    result.query_string_behavior = CachePolicyQueryStringBehavior.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "QueryStrings")) {
                     result.query_strings = try deserializeQueryStringNames(allocator, reader);
                 } else {
@@ -2046,7 +2046,7 @@ pub fn deserializeCachePolicySummary(allocator: std.mem.Allocator, reader: *aws.
                 if (std.mem.eql(u8, e.local, "CachePolicy")) {
                     result.cache_policy = try deserializeCachePolicy(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = CachePolicyType.fromWireName(try reader.readElementText());
+                    result.@"type" = CachePolicyType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -2280,7 +2280,7 @@ pub fn deserializeConnectionFunctionSummary(allocator: std.mem.Allocator, reader
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Stage")) {
-                    result.stage = FunctionStage.fromWireName(try reader.readElementText());
+                    result.stage = FunctionStage.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -2428,7 +2428,7 @@ pub fn deserializeContentTypeProfile(allocator: std.mem.Allocator, reader: *aws.
                 if (std.mem.eql(u8, e.local, "ContentType")) {
                     result.content_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Format")) {
-                    result.format = Format.fromWireName(try reader.readElementText());
+                    result.format = Format.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "ProfileId")) {
                     result.profile_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -2642,7 +2642,7 @@ pub fn deserializeCookiePreference(allocator: std.mem.Allocator, reader: *aws.xm
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Forward")) {
-                    result.forward = ItemSelection.fromWireName(try reader.readElementText());
+                    result.forward = ItemSelection.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "WhitelistedNames")) {
                     result.whitelisted_names = try deserializeCookieNames(allocator, reader);
                 } else {
@@ -2746,7 +2746,7 @@ pub fn deserializeCustomOriginConfig(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "OriginMtlsConfig")) {
                     result.origin_mtls_config = try deserializeOriginMtlsConfig(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "OriginProtocolPolicy")) {
-                    result.origin_protocol_policy = OriginProtocolPolicy.fromWireName(try reader.readElementText());
+                    result.origin_protocol_policy = OriginProtocolPolicy.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "OriginReadTimeout")) {
                     result.origin_read_timeout = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "OriginSslProtocols")) {
@@ -2846,7 +2846,7 @@ pub fn deserializeDefaultCacheBehavior(allocator: std.mem.Allocator, reader: *aw
                 } else if (std.mem.eql(u8, e.local, "TrustedSigners")) {
                     result.trusted_signers = try deserializeTrustedSigners(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "ViewerProtocolPolicy")) {
-                    result.viewer_protocol_policy = ViewerProtocolPolicy.fromWireName(try reader.readElementText());
+                    result.viewer_protocol_policy = ViewerProtocolPolicy.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -3129,7 +3129,7 @@ pub fn deserializeDistributionSummary(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "ETag")) {
                     result.e_tag = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "HttpVersion")) {
-                    result.http_version = HttpVersion.fromWireName(try reader.readElementText());
+                    result.http_version = HttpVersion.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Id")) {
                     result.id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "IsIPV6Enabled")) {
@@ -3141,7 +3141,7 @@ pub fn deserializeDistributionSummary(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "Origins")) {
                     result.origins = try deserializeOrigins(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "PriceClass")) {
-                    result.price_class = PriceClass.fromWireName(try reader.readElementText());
+                    result.price_class = PriceClass.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Restrictions")) {
                     result.restrictions = try deserializeRestrictions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Staging")) {
@@ -3275,7 +3275,7 @@ pub fn deserializeDnsConfiguration(allocator: std.mem.Allocator, reader: *aws.xm
                 } else if (std.mem.eql(u8, e.local, "Reason")) {
                     result.reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = DnsConfigurationStatus.fromWireName(try reader.readElementText());
+                    result.status = DnsConfigurationStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -3299,7 +3299,7 @@ pub fn deserializeDomainConflict(allocator: std.mem.Allocator, reader: *aws.xml.
                 } else if (std.mem.eql(u8, e.local, "ResourceId")) {
                     result.resource_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ResourceType")) {
-                    result.resource_type = DistributionResourceType.fromWireName(try reader.readElementText());
+                    result.resource_type = DistributionResourceType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -3653,7 +3653,7 @@ pub fn deserializeFunctionAssociation(allocator: std.mem.Allocator, reader: *aws
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "EventType")) {
-                    result.event_type = EventType.fromWireName(try reader.readElementText());
+                    result.event_type = EventType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "FunctionARN")) {
                     result.function_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -3699,7 +3699,7 @@ pub fn deserializeFunctionConfig(allocator: std.mem.Allocator, reader: *aws.xml.
                 } else if (std.mem.eql(u8, e.local, "KeyValueStoreAssociations")) {
                     result.key_value_store_associations = try deserializeKeyValueStoreAssociations(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Runtime")) {
-                    result.runtime = FunctionRuntime.fromWireName(try reader.readElementText());
+                    result.runtime = FunctionRuntime.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -3799,7 +3799,7 @@ pub fn deserializeGeoRestriction(allocator: std.mem.Allocator, reader: *aws.xml.
                 } else if (std.mem.eql(u8, e.local, "Quantity")) {
                     result.quantity = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else if (std.mem.eql(u8, e.local, "RestrictionType")) {
-                    result.restriction_type = GeoRestrictionType.fromWireName(try reader.readElementText());
+                    result.restriction_type = GeoRestrictionType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -3820,7 +3820,7 @@ pub fn deserializeGeoRestrictionCustomization(allocator: std.mem.Allocator, read
                 if (std.mem.eql(u8, e.local, "Locations")) {
                     result.locations = try deserializeLocationList(allocator, reader, "Location");
                 } else if (std.mem.eql(u8, e.local, "RestrictionType")) {
-                    result.restriction_type = GeoRestrictionType.fromWireName(try reader.readElementText());
+                    result.restriction_type = GeoRestrictionType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -4267,7 +4267,7 @@ pub fn deserializeLambdaFunctionAssociation(allocator: std.mem.Allocator, reader
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "EventType")) {
-                    result.event_type = EventType.fromWireName(try reader.readElementText());
+                    result.event_type = EventType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "IncludeBody")) {
                     result.include_body = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "LambdaFunctionARN")) {
@@ -4461,11 +4461,11 @@ pub fn deserializeOriginAccessControlConfig(allocator: std.mem.Allocator, reader
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OriginAccessControlOriginType")) {
-                    result.origin_access_control_origin_type = OriginAccessControlOriginTypes.fromWireName(try reader.readElementText());
+                    result.origin_access_control_origin_type = OriginAccessControlOriginTypes.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "SigningBehavior")) {
-                    result.signing_behavior = OriginAccessControlSigningBehaviors.fromWireName(try reader.readElementText());
+                    result.signing_behavior = OriginAccessControlSigningBehaviors.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "SigningProtocol")) {
-                    result.signing_protocol = OriginAccessControlSigningProtocols.fromWireName(try reader.readElementText());
+                    result.signing_protocol = OriginAccessControlSigningProtocols.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -4519,11 +4519,11 @@ pub fn deserializeOriginAccessControlSummary(allocator: std.mem.Allocator, reade
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OriginAccessControlOriginType")) {
-                    result.origin_access_control_origin_type = OriginAccessControlOriginTypes.fromWireName(try reader.readElementText());
+                    result.origin_access_control_origin_type = OriginAccessControlOriginTypes.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "SigningBehavior")) {
-                    result.signing_behavior = OriginAccessControlSigningBehaviors.fromWireName(try reader.readElementText());
+                    result.signing_behavior = OriginAccessControlSigningBehaviors.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "SigningProtocol")) {
-                    result.signing_protocol = OriginAccessControlSigningProtocols.fromWireName(try reader.readElementText());
+                    result.signing_protocol = OriginAccessControlSigningProtocols.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -4731,7 +4731,7 @@ pub fn deserializeOriginRequestPolicyCookiesConfig(allocator: std.mem.Allocator,
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CookieBehavior")) {
-                    result.cookie_behavior = OriginRequestPolicyCookieBehavior.fromWireName(try reader.readElementText());
+                    result.cookie_behavior = OriginRequestPolicyCookieBehavior.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Cookies")) {
                     result.cookies = try deserializeCookieNames(allocator, reader);
                 } else {
@@ -4752,7 +4752,7 @@ pub fn deserializeOriginRequestPolicyHeadersConfig(allocator: std.mem.Allocator,
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "HeaderBehavior")) {
-                    result.header_behavior = OriginRequestPolicyHeaderBehavior.fromWireName(try reader.readElementText());
+                    result.header_behavior = OriginRequestPolicyHeaderBehavior.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Headers")) {
                     result.headers = try deserializeHeaders(allocator, reader);
                 } else {
@@ -4799,7 +4799,7 @@ pub fn deserializeOriginRequestPolicyQueryStringsConfig(allocator: std.mem.Alloc
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "QueryStringBehavior")) {
-                    result.query_string_behavior = OriginRequestPolicyQueryStringBehavior.fromWireName(try reader.readElementText());
+                    result.query_string_behavior = OriginRequestPolicyQueryStringBehavior.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "QueryStrings")) {
                     result.query_strings = try deserializeQueryStringNames(allocator, reader);
                 } else {
@@ -4821,7 +4821,7 @@ pub fn deserializeOriginRequestPolicySummary(allocator: std.mem.Allocator, reade
                 if (std.mem.eql(u8, e.local, "OriginRequestPolicy")) {
                     result.origin_request_policy = try deserializeOriginRequestPolicy(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = OriginRequestPolicyType.fromWireName(try reader.readElementText());
+                    result.@"type" = OriginRequestPolicyType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -5266,7 +5266,7 @@ pub fn deserializeRealtimeMetricsSubscriptionConfig(allocator: std.mem.Allocator
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "RealtimeMetricsSubscriptionStatus")) {
-                    result.realtime_metrics_subscription_status = RealtimeMetricsSubscriptionStatus.fromWireName(try reader.readElementText());
+                    result.realtime_metrics_subscription_status = RealtimeMetricsSubscriptionStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -5538,7 +5538,7 @@ pub fn deserializeResponseHeadersPolicyFrameOptions(allocator: std.mem.Allocator
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "FrameOption")) {
-                    result.frame_option = FrameOptionsList.fromWireName(try reader.readElementText());
+                    result.frame_option = FrameOptionsList.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Override")) {
                     result.override = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else {
@@ -5587,7 +5587,7 @@ pub fn deserializeResponseHeadersPolicyReferrerPolicy(allocator: std.mem.Allocat
                 if (std.mem.eql(u8, e.local, "Override")) {
                     result.override = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "ReferrerPolicy")) {
-                    result.referrer_policy = ReferrerPolicyList.fromWireName(try reader.readElementText());
+                    result.referrer_policy = ReferrerPolicyList.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -5729,7 +5729,7 @@ pub fn deserializeResponseHeadersPolicySummary(allocator: std.mem.Allocator, rea
                 if (std.mem.eql(u8, e.local, "ResponseHeadersPolicy")) {
                     result.response_headers_policy = try deserializeResponseHeadersPolicy(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = ResponseHeadersPolicyType.fromWireName(try reader.readElementText());
+                    result.@"type" = ResponseHeadersPolicyType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -6026,7 +6026,7 @@ pub fn deserializeStreamingDistributionSummary(allocator: std.mem.Allocator, rea
                 } else if (std.mem.eql(u8, e.local, "LastModifiedTime")) {
                     result.last_modified_time = try aws.date.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PriceClass")) {
-                    result.price_class = PriceClass.fromWireName(try reader.readElementText());
+                    result.price_class = PriceClass.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "S3Origin")) {
                     result.s3_origin = try deserializeS3Origin(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Status")) {
@@ -6192,7 +6192,7 @@ pub fn deserializeTrafficConfig(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "SingleWeightConfig")) {
                     result.single_weight_config = try deserializeContinuousDeploymentSingleWeightConfig(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = ContinuousDeploymentPolicyType.fromWireName(try reader.readElementText());
+                    result.@"type" = ContinuousDeploymentPolicyType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -6286,7 +6286,7 @@ pub fn deserializeTrustStoreSummary(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "Reason")) {
                     result.reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = TrustStoreStatus.fromWireName(try reader.readElementText());
+                    result.status = TrustStoreStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -6500,7 +6500,7 @@ pub fn deserializeVpcOriginEndpointConfig(allocator: std.mem.Allocator, reader: 
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OriginProtocolPolicy")) {
-                    result.origin_protocol_policy = OriginProtocolPolicy.fromWireName(try reader.readElementText());
+                    result.origin_protocol_policy = OriginProtocolPolicy.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "OriginSslProtocols")) {
                     result.origin_ssl_protocols = try deserializeOriginSslProtocols(allocator, reader);
                 } else {
@@ -6584,7 +6584,7 @@ pub fn deserializeWebAclCustomization(allocator: std.mem.Allocator, reader: *aws
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Action")) {
-                    result.action = CustomizationActionType.fromWireName(try reader.readElementText());
+                    result.action = CustomizationActionType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Arn")) {
                     result.arn = try allocator.dupe(u8, try reader.readElementText());
                 } else {

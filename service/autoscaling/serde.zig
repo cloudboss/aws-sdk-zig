@@ -1207,7 +1207,7 @@ pub fn deserializeActivity(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "StartTime")) {
                     result.start_time = try aws.date.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StatusCode")) {
-                    result.status_code = ScalingActivityStatusCode.fromWireName(try reader.readElementText());
+                    result.status_code = ScalingActivityStatusCode.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "StatusMessage")) {
                     result.status_message = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -1814,7 +1814,7 @@ pub fn deserializeInstance(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                 } else if (std.mem.eql(u8, e.local, "LaunchTemplate")) {
                     result.launch_template = try deserializeLaunchTemplateSpecification(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "LifecycleState")) {
-                    result.lifecycle_state = LifecycleState.fromWireName(try reader.readElementText());
+                    result.lifecycle_state = LifecycleState.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "ProtectedFromScaleIn")) {
                     result.protected_from_scale_in = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "WeightedCapacity")) {
@@ -2812,7 +2812,7 @@ pub fn deserializePredefinedMetricSpecification(allocator: std.mem.Allocator, re
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "PredefinedMetricType")) {
-                    result.predefined_metric_type = MetricType.fromWireName(try reader.readElementText());
+                    result.predefined_metric_type = MetricType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "ResourceLabel")) {
                     result.resource_label = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -2953,7 +2953,7 @@ pub fn deserializePredictiveScalingPredefinedLoadMetric(allocator: std.mem.Alloc
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "PredefinedMetricType")) {
-                    result.predefined_metric_type = PredefinedLoadMetricType.fromWireName(try reader.readElementText());
+                    result.predefined_metric_type = PredefinedLoadMetricType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "ResourceLabel")) {
                     result.resource_label = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -2974,7 +2974,7 @@ pub fn deserializePredictiveScalingPredefinedMetricPair(allocator: std.mem.Alloc
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "PredefinedMetricType")) {
-                    result.predefined_metric_type = PredefinedMetricPairType.fromWireName(try reader.readElementText());
+                    result.predefined_metric_type = PredefinedMetricPairType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "ResourceLabel")) {
                     result.resource_label = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -2995,7 +2995,7 @@ pub fn deserializePredictiveScalingPredefinedScalingMetric(allocator: std.mem.Al
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "PredefinedMetricType")) {
-                    result.predefined_metric_type = PredefinedScalingMetricType.fromWireName(try reader.readElementText());
+                    result.predefined_metric_type = PredefinedScalingMetricType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "ResourceLabel")) {
                     result.resource_label = try allocator.dupe(u8, try reader.readElementText());
                 } else {

@@ -972,7 +972,7 @@ pub fn deserializeAccessControlTranslation(allocator: std.mem.Allocator, reader:
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Owner")) {
-                    result.owner = OwnerOverride.fromWireName(try reader.readElementText());
+                    result.owner = OwnerOverride.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -1029,7 +1029,7 @@ pub fn deserializeAccessPoint(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "NetworkOrigin")) {
-                    result.network_origin = NetworkOrigin.fromWireName(try reader.readElementText());
+                    result.network_origin = NetworkOrigin.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "VpcConfiguration")) {
                     result.vpc_configuration = try deserializeVpcConfiguration(allocator, reader);
                 } else {
@@ -1379,7 +1379,7 @@ pub fn deserializeDeleteMarkerReplication(allocator: std.mem.Allocator, reader: 
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = DeleteMarkerReplicationStatus.fromWireName(try reader.readElementText());
+                    result.status = DeleteMarkerReplicationStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -1532,7 +1532,7 @@ pub fn deserializeExistingObjectReplication(allocator: std.mem.Allocator, reader
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = ExistingObjectReplicationStatus.fromWireName(try reader.readElementText());
+                    result.status = ExistingObjectReplicationStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -1775,7 +1775,7 @@ pub fn deserializeJobManifestSpec(allocator: std.mem.Allocator, reader: *aws.xml
                 if (std.mem.eql(u8, e.local, "Fields")) {
                     result.fields = try deserializeJobManifestFieldList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "Format")) {
-                    result.format = JobManifestFormat.fromWireName(try reader.readElementText());
+                    result.format = JobManifestFormat.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -1993,7 +1993,7 @@ pub fn deserializeLifecycleRule(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "NoncurrentVersionTransitions")) {
                     result.noncurrent_version_transitions = try deserializeNoncurrentVersionTransitionList(allocator, reader, "NoncurrentVersionTransition");
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = ExpirationStatus.fromWireName(try reader.readElementText());
+                    result.status = ExpirationStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Transitions")) {
                     result.transitions = try deserializeTransitionList(allocator, reader, "Transition");
                 } else {
@@ -2301,7 +2301,7 @@ pub fn deserializeMetrics(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
                 if (std.mem.eql(u8, e.local, "EventThreshold")) {
                     result.event_threshold = try deserializeReplicationTimeValue(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = MetricsStatus.fromWireName(try reader.readElementText());
+                    result.status = MetricsStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -2800,7 +2800,7 @@ pub fn deserializeReplicaModifications(allocator: std.mem.Allocator, reader: *aw
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = ReplicaModificationsStatus.fromWireName(try reader.readElementText());
+                    result.status = ReplicaModificationsStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -2863,7 +2863,7 @@ pub fn deserializeReplicationRule(allocator: std.mem.Allocator, reader: *aws.xml
                 } else if (std.mem.eql(u8, e.local, "SourceSelectionCriteria")) {
                     result.source_selection_criteria = try deserializeSourceSelectionCriteria(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = ReplicationRuleStatus.fromWireName(try reader.readElementText());
+                    result.status = ReplicationRuleStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -2928,7 +2928,7 @@ pub fn deserializeReplicationTime(allocator: std.mem.Allocator, reader: *aws.xml
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = ReplicationTimeStatus.fromWireName(try reader.readElementText());
+                    result.status = ReplicationTimeStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Time")) {
                     result.time = try deserializeReplicationTimeValue(allocator, reader);
                 } else {
@@ -3019,9 +3019,9 @@ pub fn deserializeS3BucketDestination(allocator: std.mem.Allocator, reader: *aws
                 } else if (std.mem.eql(u8, e.local, "Encryption")) {
                     result.encryption = try deserializeStorageLensDataExportEncryption(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Format")) {
-                    result.format = Format.fromWireName(try reader.readElementText());
+                    result.format = Format.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "OutputSchemaVersion")) {
-                    result.output_schema_version = OutputSchemaVersion.fromWireName(try reader.readElementText());
+                    result.output_schema_version = OutputSchemaVersion.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "Prefix")) {
                     result.prefix = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -3242,7 +3242,7 @@ pub fn deserializeS3ObjectLockLegalHold(allocator: std.mem.Allocator, reader: *a
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = S3ObjectLockLegalHoldStatus.fromWireName(try reader.readElementText());
+                    result.status = S3ObjectLockLegalHoldStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -3609,7 +3609,7 @@ pub fn deserializeSseKmsEncryptedObjects(allocator: std.mem.Allocator, reader: *
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
-                    result.status = SseKmsEncryptedObjectsStatus.fromWireName(try reader.readElementText());
+                    result.status = SseKmsEncryptedObjectsStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }

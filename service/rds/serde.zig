@@ -6542,7 +6542,7 @@ pub fn deserializeSupportedEngineLifecycle(allocator: std.mem.Allocator, reader:
                 if (std.mem.eql(u8, e.local, "LifecycleSupportEndDate")) {
                     result.lifecycle_support_end_date = try aws.date.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LifecycleSupportName")) {
-                    result.lifecycle_support_name = LifecycleSupportName.fromWireName(try reader.readElementText());
+                    result.lifecycle_support_name = LifecycleSupportName.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "LifecycleSupportStartDate")) {
                     result.lifecycle_support_start_date = try aws.date.parseIso8601(try reader.readElementText());
                 } else {
