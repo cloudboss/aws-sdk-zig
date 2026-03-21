@@ -91,7 +91,7 @@ test "xray getTraceSummaries" {
         .{
             .start_time = 0.0,
             .end_time = 1.0,
-            .time_range_type = .TraceId,
+            .time_range_type = .trace_id,
         },
         .{},
     ) catch return;
