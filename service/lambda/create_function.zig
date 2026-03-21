@@ -15,7 +15,9 @@ const FileSystemConfig = @import("file_system_config.zig").FileSystemConfig;
 const ImageConfig = @import("image_config.zig").ImageConfig;
 const LoggingConfig = @import("logging_config.zig").LoggingConfig;
 const PackageType = @import("package_type.zig").PackageType;
-const FunctionVersionLatestPublished = @import("function_version_latest_published.zig").FunctionVersionLatestPublished;
+const FunctionVersionLatestPublished =
+    @import("function_version_latest_published.zig")
+        .FunctionVersionLatestPublished;
 const Runtime = @import("runtime.zig").Runtime;
 const SnapStart = @import("snap_start.zig").SnapStart;
 const TenancyConfig = @import("tenancy_config.zig").TenancyConfig;
@@ -24,7 +26,8 @@ const VpcConfig = @import("vpc_config.zig").VpcConfig;
 const EnvironmentResponse = @import("environment_response.zig").EnvironmentResponse;
 const ImageConfigResponse = @import("image_config_response.zig").ImageConfigResponse;
 const LastUpdateStatus = @import("last_update_status.zig").LastUpdateStatus;
-const LastUpdateStatusReasonCode = @import("last_update_status_reason_code.zig").LastUpdateStatusReasonCode;
+const LastUpdateStatusReasonCode =
+    @import("last_update_status_reason_code.zig").LastUpdateStatusReasonCode;
 const Layer = @import("layer.zig").Layer;
 const RuntimeVersionConfig = @import("runtime_version_config.zig").RuntimeVersionConfig;
 const SnapStartResponse = @import("snap_start_response.zig").SnapStartResponse;
@@ -71,8 +74,9 @@ pub const CreateFunctionInput = struct {
 
     /// The size of the function's `/tmp` directory in MB. The default value is 512,
     /// but can be any whole number between 512 and 10,240 MB. For more information,
-    /// see [Configuring ephemeral storage
-    /// (console)](https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage).
+    /// see [Configuring ephemeral storage (console)]
+    /// (https://docs.aws.amazon.com/lambda/latest/dg/
+    /// configuration-function-common.html#configuration-ephemeral-storage).
     ephemeral_storage: ?EphemeralStorage = null,
 
     /// Connection settings for an Amazon EFS file system.
@@ -97,41 +101,53 @@ pub const CreateFunctionInput = struct {
     /// model](https://docs.aws.amazon.com/lambda/latest/dg/foundation-progmodel.html).
     handler: ?[]const u8 = null,
 
-    /// Container image [configuration
-    /// values](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms) that override the values in the container image Dockerfile.
+    /// Container image [configuration values]
+    /// (https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms)
+    /// that override the values in the container image Dockerfile.
     image_config: ?ImageConfig = null,
 
     /// The ARN of the Key Management Service (KMS) customer managed key that's used
     /// to encrypt the following resources:
     ///
-    /// * The function's [environment
-    ///   variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption).
-    /// * The function's [Lambda
-    ///   SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html) snapshots.
+    /// * The function's [environment variables]
+    /// (https://docs.aws.amazon.com/lambda/latest/dg/
+    /// configuration-envvars.html#configuration-envvars-encryption).
+    /// * The function's [Lambda SnapStart]
+    /// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html)
+    /// snapshots.
     /// * When used with `SourceKMSKeyArn`, the unzipped version of the .zip
     ///   deployment package that's used for function invocations. For more
-    ///   information, see [ Specifying a customer managed key for
-    ///   Lambda](https://docs.aws.amazon.com/lambda/latest/dg/encrypt-zip-package.html#enable-zip-custom-encryption).
+    ///   information, see [Specifying a customer managed key for Lambda]
+    /// (https://docs.aws.amazon.com/lambda/latest/dg/
+    /// encrypt-zip-package.html#enable-zip-custom-encryption).
     /// * The optimized version of the container image that's used for function
     ///   invocations. Note that this is not the same key that's used to protect
     ///   your container image in the Amazon Elastic Container Registry (Amazon
-    ///   ECR). For more information, see [Function
-    ///   lifecycle](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-lifecycle).
+    ///   ECR). For more information, see [Function lifecycle]
+    /// (https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-lifecycle).
     ///
     /// If you don't provide a customer managed key, Lambda uses an [Amazon Web
-    /// Services owned
-    /// key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk) or an [Amazon Web Services managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk).
+    /// Services owned key]
+    /// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk)
+    /// or an [Amazon Web Services managed key]
+    /// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk).
     kms_key_arn: ?[]const u8 = null,
 
-    /// A list of [function
-    /// layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to add to the function's execution environment. Specify each layer by its ARN, including the version.
+    /// A list of [function layers]
+    /// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+    /// to add to the function's execution environment. Specify each layer by its
+    /// ARN, including the version.
     layers: ?[]const []const u8 = null,
 
     /// The function's Amazon CloudWatch Logs configuration settings.
     logging_config: ?LoggingConfig = null,
 
-    /// The amount of [memory available to the
-    /// function](https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-memory-console) at runtime. Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.
+    /// The amount of [memory available to the function]
+    /// (https://docs.aws.amazon.com/lambda/latest/dg/
+    /// configuration-function-common.html#configuration-memory-console)
+    /// at runtime. Increasing the function memory also increases its CPU
+    /// allocation. The default value is 128 MB. The value can be any multiple of
+    /// 1 MB.
     memory_size: ?i32 = null,
 
     /// The type of deployment package. Set to `Image` for container image and set
@@ -147,19 +163,20 @@ pub const CreateFunctionInput = struct {
     /// The Amazon Resource Name (ARN) of the function's execution role.
     role: []const u8,
 
-    /// The identifier of the function's [
-    /// runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
+    /// The identifier of the function's [runtime]
+    /// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
     /// Runtime is required if the deployment package is a .zip file archive.
     /// Specifying a runtime results in an error if you're deploying a function
     /// using a container image.
     ///
     /// The following list includes deprecated runtimes. Lambda blocks creating new
     /// functions and updating existing functions shortly after each runtime is
-    /// deprecated. For more information, see [Runtime use after
-    /// deprecation](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels).
+    /// deprecated. For more information, see [Runtime use after deprecation]
+    /// (https://docs.aws.amazon.com/lambda/latest/dg/
+    /// lambda-runtimes.html#runtime-deprecation-levels).
     ///
-    /// For a list of all currently supported runtimes, see [Supported
-    /// runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported).
+    /// For a list of all currently supported runtimes, see [Supported runtimes]
+    /// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported).
     runtime: ?Runtime = null,
 
     /// The function's
@@ -229,7 +246,12 @@ pub const CreateFunctionInput = struct {
 
 pub const CreateFunctionOutput = @import("function_configuration.zig").FunctionConfiguration;
 
-pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateFunctionInput, options: CallOptions) !CreateFunctionOutput {
+pub fn execute(
+    client: *Client,
+    allocator: std.mem.Allocator,
+    input: CreateFunctionInput,
+    options: CallOptions,
+) !CreateFunctionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
@@ -245,16 +267,36 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateFunct
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(
+                client.allocator,
+                response.body,
+                response.status,
+                response.headers,
+            ) catch .{
+                .kind = .{
+                    .unknown = .{
+                        .http_status = @intCast(response.status),
+                    },
+                },
+            };
         }
         return error.ServiceError;
     }
 
-    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
+    const result = try deserializeResponse(
+        allocator,
+        response.body,
+        response.status,
+        response.headers,
+    );
     return result;
 }
 
-fn serializeRequest(allocator: std.mem.Allocator, input: CreateFunctionInput, config: *aws.Config) !aws.http.Request {
+fn serializeRequest(
+    allocator: std.mem.Allocator,
+    input: CreateFunctionInput,
+    config: *aws.Config,
+) !aws.http.Request {
     const endpoint = try config.getEndpointForService("lambda", "Lambda", allocator);
 
     const host = aws.url.parseHost(endpoint);
@@ -327,7 +369,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFunctionInput, co
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"FunctionName\":");
-    try aws.json.writeValue(@TypeOf(input.function_name), input.function_name, allocator, &body_buf);
+    try aws.json.writeValue(
+        @TypeOf(input.function_name),
+        input.function_name,
+        allocator,
+        &body_buf,
+    );
     has_prev = true;
     if (input.handler) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
@@ -444,7 +491,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFunctionInput, co
     return request;
 }
 
-fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateFunctionOutput {
+fn deserializeResponse(
+    allocator: std.mem.Allocator,
+    body: []const u8,
+    status: u16,
+    headers: anytype,
+) !CreateFunctionOutput {
     var result: CreateFunctionOutput = .{};
     if (body.len > 0) {
         result = try aws.json.parseJsonObject(CreateFunctionOutput, body, allocator);
@@ -455,15 +507,31 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     return result;
 }
 
-fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
+fn parseErrorResponse(
+    allocator: std.mem.Allocator,
+    body: []const u8,
+    status: u16,
+    headers: anytype,
+) !ServiceError {
     const error_code = blk: {
-        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
-        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
-            break :blk type_str[idx + 1 ..];
+        const type_str = aws.json.findJsonValue(body, "__type") orelse
+            aws.json.findJsonValue(body, "code") orelse
+            headers.get("x-amzn-errortype") orelse
+            break :blk @as([]const u8, "Unknown");
+
+        var code = type_str;
+        if (std.mem.lastIndexOfScalar(u8, code, '#')) |idx| {
+            code = code[idx + 1 ..];
         }
-        break :blk type_str;
+        if (std.mem.indexOfScalar(u8, code, ':')) |idx| {
+            code = code[0..idx];
+        }
+        break :blk code;
     };
-    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    const error_message = aws.json.findJsonValue(body, "message") orelse
+        aws.json.findJsonValue(body, "Message") orelse
+        aws.json.findJsonValue(body, "errorMessage") orelse
+        "";
     var arena = std.heap.ArenaAllocator.init(allocator);
     errdefer arena.deinit();
     const arena_alloc = arena.allocator();
@@ -555,10 +623,15 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
         } } };
     }
     if (std.mem.eql(u8, error_code, "FunctionVersionsPerCapacityProviderLimitExceededException")) {
-        return .{ .arena = arena, .kind = .{ .function_versions_per_capacity_provider_limit_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        return .{
+            .arena = arena,
+            .kind = .{
+                .function_versions_per_capacity_provider_limit_exceeded_exception = .{
+                    .message = owned_message,
+                    .request_id = owned_request_id,
+                },
+            },
+        };
     }
     if (std.mem.eql(u8, error_code, "InvalidCodeSignatureException")) {
         return .{ .arena = arena, .kind = .{ .invalid_code_signature_exception = .{
@@ -645,10 +718,15 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
         } } };
     }
     if (std.mem.eql(u8, error_code, "ProvisionedConcurrencyConfigNotFoundException")) {
-        return .{ .arena = arena, .kind = .{ .provisioned_concurrency_config_not_found_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        return .{
+            .arena = arena,
+            .kind = .{
+                .provisioned_concurrency_config_not_found_exception = .{
+                    .message = owned_message,
+                    .request_id = owned_request_id,
+                },
+            },
+        };
     }
     if (std.mem.eql(u8, error_code, "RecursiveInvocationException")) {
         return .{ .arena = arena, .kind = .{ .recursive_invocation_exception = .{

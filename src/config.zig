@@ -365,6 +365,15 @@ pub const Config = struct {
         }
 
         // Level 6: Partition-based default
+        if (!self.use_fips and !self.use_dual_stack) {
+            if (std.mem.eql(u8, service, "iam")) {
+                const partition = endpoint_mod.partitionForRegion(self.region);
+                if (std.mem.eql(u8, partition.name, "aws")) {
+                    return try allocator.dupe(u8, "iam.amazonaws.com");
+                }
+            }
+        }
+
         return endpoint_mod.resolveEndpoint(
             allocator,
             service,
@@ -1534,6 +1543,22 @@ test "getEndpointForService: code override beats ignore" {
 
     try std.testing.expectEqualStrings(
         "http://code-override",
+        ep,
+    );
+}
+
+test "getEndpointForService: iam uses global endpoint in aws partition" {
+    const config = Config.fromEnvironment("us-east-1");
+
+    const ep = try config.getEndpointForService(
+        "iam",
+        "IAM",
+        std.testing.allocator,
+    );
+    defer std.testing.allocator.free(ep);
+
+    try std.testing.expectEqualStrings(
+        "iam.amazonaws.com",
         ep,
     );
 }

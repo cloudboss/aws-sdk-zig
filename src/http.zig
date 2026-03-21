@@ -622,6 +622,7 @@ pub const HttpClient = struct {
 
         var resp_headers = self.parseResponseHeaders(&response) orelse
             return error.OutOfMemory;
+        errdefer freeResponseHeaders(self.allocator, &resp_headers);
 
         // Read and decompress the response body. The reader method is
         // called directly (rather than response.reader()) because the
@@ -644,6 +645,7 @@ pub const HttpClient = struct {
         ) catch |err| {
             return if (err == error.StreamTooLong) error.ResponseTooLarge else error.RequestFailed;
         };
+        errdefer self.allocator.free(body);
 
         try verifyResponseChecksum(effective_checksum_alg, body, &resp_headers, self.allocator);
 
@@ -702,13 +704,32 @@ pub const HttpClient = struct {
                 self.allocator.free(key);
                 return null;
             };
-            resp_headers.put(self.allocator, key, value) catch {
+            const gop = resp_headers.getOrPut(self.allocator, key) catch {
                 self.allocator.free(key);
                 self.allocator.free(value);
                 return null;
             };
+            if (gop.found_existing) {
+                self.allocator.free(key);
+                self.allocator.free(gop.value_ptr.*);
+            } else {
+                gop.key_ptr.* = key;
+            }
+            gop.value_ptr.* = value;
         }
         return resp_headers;
+    }
+
+    fn freeResponseHeaders(
+        allocator: Allocator,
+        headers: *std.StringHashMapUnmanaged([]const u8),
+    ) void {
+        var iter = headers.iterator();
+        while (iter.next()) |entry| {
+            allocator.free(entry.key_ptr.*);
+            allocator.free(entry.value_ptr.*);
+        }
+        headers.deinit(allocator);
     }
 
     /// Send request body or bodiless request.

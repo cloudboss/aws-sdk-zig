@@ -65,6 +65,12 @@ fn parseOptional(comptime Child: type, scanner: *Scanner, alloc: Allocator) Pars
         _ = try scanner.nextAlloc(alloc, .alloc_if_needed);
         return null;
     }
+    if (@typeInfo(Child) == .@"enum") {
+        return parseValue(Child, scanner, alloc) catch |err| switch (err) {
+            error.SyntaxError => null,
+            else => err,
+        };
+    }
     return try parseValue(Child, scanner, alloc);
 }
 
@@ -209,6 +215,20 @@ fn parseArray(comptime Child: type, scanner: *Scanner, alloc: Allocator) ParseEr
     switch (open) {
         .array_begin => {},
         else => return error.SyntaxError,
+    }
+
+    if (@sizeOf(Child) == 0) {
+        var len: usize = 0;
+        while (true) {
+            const peeked = try scanner.peekNextTokenType();
+            if (peeked == .array_end) {
+                _ = try scanner.nextAlloc(alloc, .alloc_if_needed);
+                break;
+            }
+            _ = try parseValue(Child, scanner, alloc);
+            len += 1;
+        }
+        return try alloc.alloc(Child, len);
     }
 
     var list: std.ArrayList(Child) = .{};
@@ -722,6 +742,30 @@ test "parse enum" {
     try std.testing.expectEqual(Status.active, result.status.?);
 }
 
+test "parse unknown optional enum yields null" {
+    const Status = enum {
+        active,
+        inactive,
+
+        pub const json_field_names = .{
+            .active = "ACTIVE",
+            .inactive = "INACTIVE",
+        };
+    };
+
+    const TestStruct = struct {
+        status: ?Status = null,
+
+        pub const json_field_names = .{
+            .status = "Status",
+        };
+    };
+
+    const json = "{\"Status\":\"NEW_STATUS\"}";
+    const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
+    try std.testing.expect(result.status == null);
+}
+
 test "serialize simple struct" {
     const TestStruct = struct {
         name: ?[]const u8 = null,
@@ -1043,4 +1087,28 @@ test "parse empty map" {
     }
 
     try std.testing.expectEqual(@as(usize, 0), result.tags.?.len);
+}
+
+test "parse array of zero-sized enum" {
+    const Single = enum {
+        only,
+
+        pub const json_field_names = .{
+            .only = "ONLY",
+        };
+    };
+
+    const TestStruct = struct {
+        values: ?[]const Single = null,
+
+        pub const json_field_names = .{
+            .values = "Values",
+        };
+    };
+
+    const json = "{\"Values\":[\"ONLY\",\"ONLY\"]}";
+    const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
+    defer if (result.values) |values| std.testing.allocator.free(values);
+
+    try std.testing.expectEqual(@as(usize, 2), result.values.?.len);
 }

@@ -47,15 +47,25 @@ test "zest.beforeAll" {
         .{ts},
     );
 
-    const role_result = try iam_client.createRole(
+    var role_diagnostic: iam.ServiceError = undefined;
+    const role_result = iam_client.createRole(
         arena.allocator(),
         .{
             .role_name = role_name,
             .path = "/sdk-zig-live/",
             .assume_role_policy_document = lambda_trust_policy,
         },
-        .{},
-    );
+        .{ .diagnostic = &role_diagnostic },
+    ) catch |err| {
+        if (err == error.ServiceError) {
+            defer role_diagnostic.deinit();
+            std.log.err(
+                "createRole failed: {s}: {s}",
+                .{ role_diagnostic.code(), role_diagnostic.message() },
+            );
+        }
+        return err;
+    };
     const role = role_result.role orelse
         return error.MissingRole;
     const r_arn = role.arn;
@@ -73,7 +83,7 @@ test "zest.beforeAll" {
     );
 
     // 3. Wait for IAM propagation
-    std.time.sleep(10 * std.time.ns_per_s);
+    std.Thread.sleep(10 * std.time.ns_per_s);
 
     // 4. Read ZIP from setup.sh output
     const zip_bytes = try std.fs.cwd().readFileAlloc(
@@ -83,6 +93,10 @@ test "zest.beforeAll" {
     );
     defer allocator.free(zip_bytes);
 
+    const zip_b64_len = std.base64.standard.Encoder.calcSize(zip_bytes.len);
+    const zip_b64_buf = try arena.allocator().alloc(u8, zip_b64_len);
+    const zip_b64 = std.base64.standard.Encoder.encode(zip_b64_buf, zip_bytes);
+
     // 5. Create Lambda function
     fn_name = try std.fmt.bufPrint(
         &fn_name_buf,
@@ -90,27 +104,55 @@ test "zest.beforeAll" {
         .{ts},
     );
 
-    const create = try lambda_client.createFunction(
-        arena.allocator(),
-        .{
-            .function_name = fn_name,
-            .runtime = .python_312,
-            .role = role_arn,
-            .handler = "index.handler",
-            .code = .{ .zip_file = zip_bytes },
-            .tags = &.{
-                .{
-                    .key = "aws-sdk-zig-test",
-                    .value = "true",
-                },
-                .{
-                    .key = "created-by",
-                    .value = "integration-test",
+    var create: lambda.CreateFunctionOutput = undefined;
+    var create_attempts: usize = 0;
+    while (true) : (create_attempts += 1) {
+        var create_diagnostic: lambda.ServiceError = undefined;
+        create = lambda_client.createFunction(
+            arena.allocator(),
+            .{
+                .function_name = fn_name,
+                .runtime = .python_312,
+                .role = role_arn,
+                .handler = "index.handler",
+                .code = .{ .zip_file = zip_b64 },
+                .tags = &.{
+                    .{
+                        .key = "aws-sdk-zig-test",
+                        .value = "true",
+                    },
+                    .{
+                        .key = "created-by",
+                        .value = "integration-test",
+                    },
                 },
             },
-        },
-        .{},
-    );
+            .{ .diagnostic = &create_diagnostic },
+        ) catch |err| {
+            if (err != error.ServiceError) return err;
+            defer create_diagnostic.deinit();
+
+            switch (create_diagnostic.kind) {
+                .invalid_parameter_value_exception,
+                .resource_conflict_exception,
+                .resource_not_found_exception,
+                => {
+                    if (create_attempts < 20) {
+                        std.Thread.sleep(3 * std.time.ns_per_s);
+                        continue;
+                    }
+                },
+                else => {},
+            }
+
+            std.log.err(
+                "createFunction failed: {s}: {s}",
+                .{ create_diagnostic.code(), create_diagnostic.message() },
+            );
+            return err;
+        };
+        break;
+    }
     const f_arn = create.function_arn orelse
         return error.MissingFunctionArn;
     @memcpy(fn_arn_buf[0..f_arn.len], f_arn);
@@ -119,7 +161,7 @@ test "zest.beforeAll" {
     // 6. Wait for function to become Active
     var attempts: usize = 0;
     while (attempts < 15) : (attempts += 1) {
-        std.time.sleep(2 * std.time.ns_per_s);
+        std.Thread.sleep(2 * std.time.ns_per_s);
         const cfg_result =
             try lambda_client.getFunctionConfiguration(
                 arena.allocator(),
@@ -289,7 +331,7 @@ test "updateFunctionConfiguration changes description" {
     );
 
     // Wait briefly for the update to propagate
-    std.time.sleep(2 * std.time.ns_per_s);
+    std.Thread.sleep(2 * std.time.ns_per_s);
 
     const result =
         try lambda_client.getFunctionConfiguration(

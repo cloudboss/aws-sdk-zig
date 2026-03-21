@@ -52,12 +52,14 @@ build: $(HAS_IMAGE_LOCAL)
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-w /code \
+		--security-opt label=type:container_runtime_t \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build $(ZIG_BUILD_FLAGS)"
 
 test: $(HAS_IMAGE_LOCAL)
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-w /code \
+		--security-opt label=type:container_runtime_t \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build test $(ZIG_BUILD_FLAGS)"
 
 test-integration-localstack: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
@@ -83,6 +85,7 @@ test-integration-live: $(HAS_IMAGE_LOCAL) | $(DIR_OUT)
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-v $(HOME)/.aws:/home/build/.aws:ro \
+		--security-opt label=type:container_runtime_t \
 		-e AWS_ACCESS_KEY_ID \
 		-e AWS_SECRET_ACCESS_KEY \
 		-e AWS_SESSION_TOKEN \
