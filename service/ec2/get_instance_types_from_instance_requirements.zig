@@ -92,7 +92,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
         var prefix_buf: [256]u8 = undefined;
         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ArchitectureType.{d}=", .{n}) catch continue;
         try body_buf.appendSlice(allocator, field_prefix);
-        try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+        try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
     }
     if (input.context) |v| {
         try body_buf.appendSlice(allocator, "&Context=");
@@ -118,7 +118,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AcceleratorManufacturer.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
-            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
         }
     }
     if (input.instance_requirements.accelerator_names) |list_d0| {
@@ -127,7 +127,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AcceleratorName.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
-            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
         }
     }
     if (input.instance_requirements.accelerator_total_memory_mi_b) |sv| {
@@ -146,7 +146,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.AcceleratorType.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
-            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
         }
     }
     if (input.instance_requirements.allowed_instance_types) |list_d0| {
@@ -179,9 +179,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
                     const n = idx + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.BaselinePerformanceFactors.Cpu.Reference.{d}.InstanceFamily=", .{n}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item.instance_family) |fv_3| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.BaselinePerformanceFactors.Cpu.Reference.{d}.InstanceFamily=", .{n}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                         }
                     }
@@ -199,7 +199,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.CpuManufacturer.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
-            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
         }
     }
     if (input.instance_requirements.excluded_instance_types) |list_d0| {
@@ -217,7 +217,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.InstanceGeneration.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
-            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
         }
     }
     if (input.instance_requirements.local_storage) |sv| {
@@ -230,7 +230,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirements.LocalStorageType.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
-            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
         }
     }
     if (input.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price) |sv| {
@@ -240,11 +240,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
     if (input.instance_requirements.memory_gi_b_per_v_cpu) |sv| {
         if (sv.max) |sv2| {
             try body_buf.appendSlice(allocator, "&InstanceRequirements.MemoryGiBPerVCpu.Max=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
         }
         if (sv.min) |sv2| {
             try body_buf.appendSlice(allocator, "&InstanceRequirements.MemoryGiBPerVCpu.Min=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
         }
     }
     if (input.instance_requirements.memory_mi_b.max) |sv2| {
@@ -256,11 +256,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
     if (input.instance_requirements.network_bandwidth_gbps) |sv| {
         if (sv.max) |sv2| {
             try body_buf.appendSlice(allocator, "&InstanceRequirements.NetworkBandwidthGbps.Max=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
         }
         if (sv.min) |sv2| {
             try body_buf.appendSlice(allocator, "&InstanceRequirements.NetworkBandwidthGbps.Min=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
         }
     }
     if (input.instance_requirements.network_interface_count) |sv| {
@@ -292,11 +292,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
     if (input.instance_requirements.total_local_storage_gb) |sv| {
         if (sv.max) |sv2| {
             try body_buf.appendSlice(allocator, "&InstanceRequirements.TotalLocalStorageGB.Max=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
         }
         if (sv.min) |sv2| {
             try body_buf.appendSlice(allocator, "&InstanceRequirements.TotalLocalStorageGB.Min=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
         }
     }
     if (input.instance_requirements.v_cpu_count.max) |sv2| {
@@ -318,7 +318,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceTypesFromIns
         var prefix_buf: [256]u8 = undefined;
         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&VirtualizationType.{d}=", .{n}) catch continue;
         try body_buf.appendSlice(allocator, field_prefix);
-        try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+        try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

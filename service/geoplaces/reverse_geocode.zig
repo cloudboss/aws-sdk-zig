@@ -104,7 +104,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ReverseGeoc
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "geoplaces");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "geo-places");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -121,7 +121,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ReverseGeoc
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ReverseGeocodeInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("geoplaces", "Geo Places", allocator);
+    const endpoint = try config.getEndpointForService("geo-places", "Geo Places", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

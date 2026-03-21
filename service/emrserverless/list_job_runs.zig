@@ -21,7 +21,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListJobRuns
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "emrserverless");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "emr-serverless");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -38,7 +38,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListJobRuns
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListJobRunsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("emrserverless", "EMR Serverless", allocator);
+    const endpoint = try config.getEndpointForService("emr-serverless", "EMR Serverless", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

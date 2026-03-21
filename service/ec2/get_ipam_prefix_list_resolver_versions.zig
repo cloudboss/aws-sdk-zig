@@ -89,9 +89,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIpamPrefixListResolv
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.{d}.Name=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.name) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.{d}.Name=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
@@ -116,7 +116,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIpamPrefixListResolv
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpamPrefixListResolverVersion.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
-            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{item}) catch "");
         }
     }
     if (input.max_results) |v| {

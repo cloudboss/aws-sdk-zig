@@ -145,7 +145,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAggrega
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "lexmodelsv2");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "lex");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -162,7 +162,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAggrega
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListAggregatedUtterancesInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("lexmodelsv2", "Lex Models V2", allocator);
+    const endpoint = try config.getEndpointForService("models-v2-lex", "Lex Models V2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

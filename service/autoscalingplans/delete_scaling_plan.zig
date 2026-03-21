@@ -31,7 +31,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteScali
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "autoscalingplans");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "autoscaling-plans");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -48,7 +48,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteScali
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DeleteScalingPlanInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("autoscalingplans", "Auto Scaling Plans", allocator);
+    const endpoint = try config.getEndpointForService("autoscaling-plans", "Auto Scaling Plans", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

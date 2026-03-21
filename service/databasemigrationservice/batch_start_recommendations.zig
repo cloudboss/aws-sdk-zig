@@ -36,7 +36,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchStartR
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "databasemigrationservice");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "dms");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -53,7 +53,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchStartR
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: BatchStartRecommendationsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("databasemigrationservice", "Database Migration Service", allocator);
+    const endpoint = try config.getEndpointForService("dms", "Database Migration Service", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

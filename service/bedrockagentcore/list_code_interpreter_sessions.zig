@@ -60,7 +60,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCodeInt
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "bedrockagentcore");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "bedrock-agentcore");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -77,7 +77,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCodeInt
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListCodeInterpreterSessionsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("bedrockagentcore", "Bedrock AgentCore", allocator);
+    const endpoint = try config.getEndpointForService("bedrock-agentcore", "Bedrock AgentCore", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

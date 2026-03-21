@@ -92,75 +92,75 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RunScheduledInstancesIn
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.DeviceName=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.device_name) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.DeviceName=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             if (item.ebs) |sv_1| {
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.Ebs.DeleteOnTermination=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.delete_on_termination) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.Ebs.DeleteOnTermination=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_2) "true" else "false");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.Ebs.Encrypted=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.encrypted) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.Ebs.Encrypted=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_2) "true" else "false");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.Ebs.Iops=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.iops) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.Ebs.Iops=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.Ebs.SnapshotId=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.snapshot_id) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.Ebs.SnapshotId=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.Ebs.VolumeSize=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.volume_size) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.Ebs.VolumeSize=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.Ebs.VolumeType=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.volume_type) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.Ebs.VolumeType=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.NoDevice=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.no_device) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.NoDevice=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.VirtualName=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.virtual_name) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.BlockDeviceMapping.{d}.VirtualName=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
@@ -205,33 +205,33 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RunScheduledInstancesIn
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.AssociatePublicIpAddress=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.associate_public_ip_address) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.AssociatePublicIpAddress=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_1) "true" else "false");
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.DeleteOnTermination=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.delete_on_termination) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.DeleteOnTermination=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_1) "true" else "false");
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.Description=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.description) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.Description=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.DeviceIndex=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.device_index) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.DeviceIndex=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }
@@ -248,9 +248,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RunScheduledInstancesIn
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.Ipv6AddressCount=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.ipv_6_address_count) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.Ipv6AddressCount=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }
@@ -259,9 +259,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RunScheduledInstancesIn
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.Ipv6Address.{d}.Ipv6Address=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.ipv_6_address) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.Ipv6Address.{d}.Ipv6Address=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
@@ -269,17 +269,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RunScheduledInstancesIn
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.NetworkInterfaceId=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.network_interface_id) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.NetworkInterfaceId=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.PrivateIpAddress=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.private_ip_address) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.PrivateIpAddress=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
@@ -288,17 +288,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RunScheduledInstancesIn
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.PrivateIpAddressConfig.{d}.Primary=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.primary) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.PrivateIpAddressConfig.{d}.Primary=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_2) "true" else "false");
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.PrivateIpAddressConfig.{d}.PrivateIpAddress=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.private_ip_address) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.PrivateIpAddressConfig.{d}.PrivateIpAddress=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
@@ -306,17 +306,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RunScheduledInstancesIn
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.SecondaryPrivateIpAddressCount=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.secondary_private_ip_address_count) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.SecondaryPrivateIpAddressCount=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.SubnetId=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.subnet_id) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.SubnetId=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

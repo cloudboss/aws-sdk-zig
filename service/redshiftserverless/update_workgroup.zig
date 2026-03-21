@@ -107,7 +107,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkg
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "redshiftserverless");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "redshift-serverless");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -124,7 +124,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkg
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateWorkgroupInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("redshiftserverless", "Redshift Serverless", allocator);
+    const endpoint = try config.getEndpointForService("redshift-serverless", "Redshift Serverless", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

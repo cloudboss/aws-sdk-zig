@@ -39,7 +39,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRouti
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "route53recoverycluster");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "route53-recovery-cluster");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -56,7 +56,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRouti
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRoutingControlStatesInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("route53recoverycluster", "Route53 Recovery Cluster", allocator);
+    const endpoint = try config.getEndpointForService("route53-recovery-cluster", "Route53 Recovery Cluster", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

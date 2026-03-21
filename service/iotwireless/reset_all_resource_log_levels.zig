@@ -38,7 +38,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ResetAllRes
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ResetAllResourceLogLevelsInput, config: *aws.Config) !aws.http.Request {
     _ = input;
-    const endpoint = try config.getEndpointForService("iotwireless", "IoT Wireless", allocator);
+    const endpoint = try config.getEndpointForService("api.iotwireless", "IoT Wireless", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

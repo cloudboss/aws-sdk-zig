@@ -410,7 +410,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateUserP
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cognitoidentityprovider");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cognito-idp");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -427,7 +427,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateUserP
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateUserPoolClientInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cognitoidentityprovider", "Cognito Identity Provider", allocator);
+    const endpoint = try config.getEndpointForService("cognito-idp", "Cognito Identity Provider", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -31,7 +31,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAutoshif
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "arczonalshift");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "percdataplane");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -49,7 +49,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAutoshif
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetAutoshiftObserverNotificationStatusInput, config: *aws.Config) !aws.http.Request {
     _ = input;
-    const endpoint = try config.getEndpointForService("arczonalshift", "ARC Zonal Shift", allocator);
+    const endpoint = try config.getEndpointForService("arc-zonal-shift", "ARC Zonal Shift", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

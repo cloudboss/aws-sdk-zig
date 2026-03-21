@@ -55,7 +55,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchResetA
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: BatchResetAlarmInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ioteventsdata", "IoT Events Data", allocator);
+    const endpoint = try config.getEndpointForService("data.iotevents", "IoT Events Data", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

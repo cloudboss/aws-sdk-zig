@@ -103,7 +103,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCaseI
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "securityir");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "security-ir");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -120,7 +120,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCaseI
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: CreateCaseInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("securityir", "Security IR", allocator);
+    const endpoint = try config.getEndpointForService("security-ir", "Security IR", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

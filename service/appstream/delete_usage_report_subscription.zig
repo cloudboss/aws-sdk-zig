@@ -38,7 +38,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteUsage
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DeleteUsageReportSubscriptionInput, config: *aws.Config) !aws.http.Request {
     _ = input;
-    const endpoint = try config.getEndpointForService("appstream", "AppStream", allocator);
+    const endpoint = try config.getEndpointForService("appstream2", "AppStream", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -65,7 +65,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCredenti
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cognitoidentity");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cognito-identity");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -82,7 +82,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCredenti
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetCredentialsForIdentityInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cognitoidentity", "Cognito Identity", allocator);
+    const endpoint = try config.getEndpointForService("cognito-identity", "Cognito Identity", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

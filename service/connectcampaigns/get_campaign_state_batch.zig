@@ -35,7 +35,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCampaign
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "connectcampaigns");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "connect-campaigns");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -52,7 +52,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCampaign
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetCampaignStateBatchInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("connectcampaigns", "ConnectCampaigns", allocator);
+    const endpoint = try config.getEndpointForService("connect-campaigns", "ConnectCampaigns", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

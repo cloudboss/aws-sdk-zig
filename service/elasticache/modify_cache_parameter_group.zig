@@ -65,17 +65,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyCacheParameterGro
         const n = idx + 1;
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ParameterNameValues.ParameterNameValue.{d}.ParameterName=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.parameter_name) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ParameterNameValues.ParameterNameValue.{d}.ParameterName=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ParameterNameValues.ParameterNameValue.{d}.ParameterValue=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.parameter_value) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ParameterNameValues.ParameterNameValue.{d}.ParameterValue=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }

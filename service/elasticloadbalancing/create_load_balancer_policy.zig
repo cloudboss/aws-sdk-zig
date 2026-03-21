@@ -68,17 +68,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLoadBalancerPolic
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PolicyAttributes.member.{d}.AttributeName=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.attribute_name) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PolicyAttributes.member.{d}.AttributeName=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PolicyAttributes.member.{d}.AttributeValue=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.attribute_value) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PolicyAttributes.member.{d}.AttributeValue=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

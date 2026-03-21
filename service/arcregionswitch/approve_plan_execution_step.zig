@@ -43,7 +43,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ApprovePlan
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "arcregionswitch");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "arc-region-switch");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -60,7 +60,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ApprovePlan
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ApprovePlanExecutionStepInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("arcregionswitch", "ARC Region switch", allocator);
+    const endpoint = try config.getEndpointForService("arc-region-switch", "ARC Region switch", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

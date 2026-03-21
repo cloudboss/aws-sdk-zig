@@ -57,7 +57,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateArchi
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cloudwatchevents");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "events");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -74,7 +74,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateArchi
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateArchiveInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudwatchevents", "CloudWatch Events", allocator);
+    const endpoint = try config.getEndpointForService("events", "CloudWatch Events", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

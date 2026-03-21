@@ -8,9 +8,13 @@ class ZigSettings(
     val packageName: String,
     val outputDir: String,
     var sdkId: String = "",
+    var endpointPrefix: String = "",
+    var signingName: String = "",
 ) {
     init {
         if (sdkId.isEmpty()) sdkId = packageName
+        if (endpointPrefix.isEmpty()) endpointPrefix = packageName
+        if (signingName.isEmpty()) signingName = packageName
     }
 
     companion object {

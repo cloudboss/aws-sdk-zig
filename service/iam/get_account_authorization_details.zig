@@ -119,7 +119,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAccountAuthorization
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filter.member.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
-            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
         }
     }
     if (input.marker) |v| {

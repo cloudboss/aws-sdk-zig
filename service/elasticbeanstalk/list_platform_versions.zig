@@ -78,17 +78,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPlatformVersionsInp
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.member.{d}.Operator=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.operator) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.member.{d}.Operator=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.member.{d}.Type=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.@"type") |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.member.{d}.Type=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

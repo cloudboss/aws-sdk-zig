@@ -109,7 +109,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutSessionI
     var request = try serializeRequest(alloc, input, client.config);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "lexruntimev2");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "lex");
 
     var stream_resp = try client.http_client.sendStreamingRequest(&request);
 
@@ -130,7 +130,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutSessionI
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: PutSessionInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("lexruntimev2", "Lex Runtime V2", allocator);
+    const endpoint = try config.getEndpointForService("runtime-v2-lex", "Lex Runtime V2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

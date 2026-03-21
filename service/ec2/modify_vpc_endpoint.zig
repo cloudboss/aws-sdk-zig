@@ -210,25 +210,25 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpcEndpointInput,
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfiguration.{d}.Ipv4=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.ipv_4) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfiguration.{d}.Ipv4=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfiguration.{d}.Ipv6=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.ipv_6) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfiguration.{d}.Ipv6=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfiguration.{d}.SubnetId=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.subnet_id) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetConfiguration.{d}.SubnetId=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

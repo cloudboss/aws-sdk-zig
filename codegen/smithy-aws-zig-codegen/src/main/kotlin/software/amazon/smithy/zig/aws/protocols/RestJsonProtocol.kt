@@ -108,7 +108,7 @@ class RestJsonProtocol : ProtocolGenerator {
         // Build endpoint
         writer.write(
             "const endpoint = try config.getEndpointForService(\"\$L\", \"\$L\", allocator);",
-            ctx.settings.packageName, ctx.settings.sdkId,
+            ctx.settings.endpointPrefix, ctx.settings.sdkId,
         )
         writer.blankLine()
 

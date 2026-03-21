@@ -109,7 +109,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetSubnetsI
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "elasticloadbalancingv2");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "elasticloadbalancing");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -126,7 +126,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetSubnetsI
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: SetSubnetsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("elasticloadbalancingv2", "Elastic Load Balancing v2", allocator);
+    const endpoint = try config.getEndpointForService("elasticloadbalancing", "Elastic Load Balancing v2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -150,41 +150,41 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SetSubnetsInput, config
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetMappings.member.{d}.AllocationId=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.allocation_id) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetMappings.member.{d}.AllocationId=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetMappings.member.{d}.IPv6Address=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.i_pv_6_address) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetMappings.member.{d}.IPv6Address=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetMappings.member.{d}.PrivateIPv4Address=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.private_i_pv_4_address) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetMappings.member.{d}.PrivateIPv4Address=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetMappings.member.{d}.SourceNatIpv6Prefix=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.source_nat_ipv_6_prefix) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetMappings.member.{d}.SourceNatIpv6Prefix=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetMappings.member.{d}.SubnetId=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.subnet_id) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SubnetMappings.member.{d}.SubnetId=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

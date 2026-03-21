@@ -43,7 +43,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAccessPo
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3control");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -60,7 +60,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAccessPo
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: PutAccessPointPolicyInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3control", "S3 Control", allocator);
+    const endpoint = try config.getEndpointForService("s3-control", "S3 Control", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

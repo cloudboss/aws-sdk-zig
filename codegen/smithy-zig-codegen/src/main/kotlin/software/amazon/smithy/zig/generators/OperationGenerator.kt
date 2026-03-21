@@ -387,7 +387,7 @@ class OperationGenerator(
 
         // Sign
         writer.write("const creds = try client.config.credentials.getCredentials(alloc);")
-        writer.write("try aws.signing.signRequest(alloc, &request, creds, client.config.region, \"\$L\");", settings.packageName)
+        writer.write("try aws.signing.signRequest(alloc, &request, creds, client.config.region, \"\$L\");", settings.signingName)
         writer.blankLine()
 
         // Send streaming request
@@ -444,7 +444,7 @@ class OperationGenerator(
 
         // Sign
         writer.write("const creds = try client.config.credentials.getCredentials(alloc);")
-        writer.write("try aws.signing.signRequest(alloc, &request, creds, client.config.region, \"\$L\");", settings.packageName)
+        writer.write("try aws.signing.signRequest(alloc, &request, creds, client.config.region, \"\$L\");", settings.signingName)
         writer.blankLine()
 
         // Send
@@ -487,7 +487,7 @@ class OperationGenerator(
 
         // Sign
         writer.write("const creds = try client.config.credentials.getCredentials(alloc);")
-        writer.write("try aws.signing.signRequest(alloc, &request, creds, client.config.region, \"\$L\");", settings.packageName)
+        writer.write("try aws.signing.signRequest(alloc, &request, creds, client.config.region, \"\$L\");", settings.signingName)
         writer.blankLine()
 
         // Send streaming request

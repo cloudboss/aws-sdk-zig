@@ -89,7 +89,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeMap
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "sfn");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "states");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -106,7 +106,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeMap
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DescribeMapRunInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("sfn", "SFN", allocator);
+    const endpoint = try config.getEndpointForService("states", "SFN", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

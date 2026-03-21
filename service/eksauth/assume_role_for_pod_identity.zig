@@ -74,7 +74,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssumeRoleF
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "eksauth");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "eks-auth");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -91,7 +91,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssumeRoleF
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: AssumeRoleForPodIdentityInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("eksauth", "EKS Auth", allocator);
+    const endpoint = try config.getEndpointForService("eks-auth", "EKS Auth", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

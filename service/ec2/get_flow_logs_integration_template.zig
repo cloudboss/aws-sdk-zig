@@ -85,9 +85,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFlowLogsIntegrationT
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateService.AthenaIntegration.{d}.PartitionEndDate=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.partition_end_date) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateService.AthenaIntegration.{d}.PartitionEndDate=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }
@@ -99,9 +99,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFlowLogsIntegrationT
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateService.AthenaIntegration.{d}.PartitionStartDate=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.partition_start_date) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IntegrateService.AthenaIntegration.{d}.PartitionStartDate=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }

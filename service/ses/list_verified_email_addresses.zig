@@ -40,7 +40,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListVerifie
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListVerifiedEmailAddressesInput, config: *aws.Config) !aws.http.Request {
     _ = input;
-    const endpoint = try config.getEndpointForService("ses", "SES", allocator);
+    const endpoint = try config.getEndpointForService("email", "SES", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

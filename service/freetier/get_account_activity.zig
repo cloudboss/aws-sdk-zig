@@ -79,7 +79,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAccountA
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "freetier");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "awsfreetierservice");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();

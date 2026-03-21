@@ -113,33 +113,33 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceEventWind
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.{d}.EndHour=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.end_hour) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.{d}.EndHour=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.{d}.EndWeekDay=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.end_week_day) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.{d}.EndWeekDay=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.{d}.StartHour=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.start_hour) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.{d}.StartHour=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.{d}.StartWeekDay=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.start_week_day) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TimeRange.{d}.StartWeekDay=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }

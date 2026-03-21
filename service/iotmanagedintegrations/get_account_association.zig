@@ -90,7 +90,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAccountA
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetAccountAssociationInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("iotmanagedintegrations", "IoT Managed Integrations", allocator);
+    const endpoint = try config.getEndpointForService("api.iotmanagedintegrations", "IoT Managed Integrations", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

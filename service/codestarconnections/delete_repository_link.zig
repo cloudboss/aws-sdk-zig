@@ -26,7 +26,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRepos
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "codestarconnections");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "codestar-connections");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -43,7 +43,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRepos
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DeleteRepositoryLinkInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("codestarconnections", "CodeStar connections", allocator);
+    const endpoint = try config.getEndpointForService("codestar-connections", "CodeStar connections", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

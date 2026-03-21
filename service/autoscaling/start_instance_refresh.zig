@@ -160,9 +160,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                         const n = idx + 1;
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.ImageId=", .{n}) catch continue;
-                            try body_buf.appendSlice(allocator, field_prefix);
                             if (item.image_id) |fv_3| {
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.ImageId=", .{n}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                             }
                         }
@@ -170,17 +170,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                             if (sv_3.accelerator_count) |sv_4| {
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorCount.Max=", .{n}) catch continue;
-                                    try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_4.max) |fv_5| {
+                                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorCount.Max=", .{n}) catch continue;
+                                        try body_buf.appendSlice(allocator, field_prefix);
                                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                     }
                                 }
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorCount.Min=", .{n}) catch continue;
-                                    try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_4.min) |fv_5| {
+                                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorCount.Min=", .{n}) catch continue;
+                                        try body_buf.appendSlice(allocator, field_prefix);
                                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                     }
                                 }
@@ -192,7 +192,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                                         var prefix_buf: [256]u8 = undefined;
                                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorManufacturers.member.{d}=", .{n, n_4}) catch continue;
                                         try body_buf.appendSlice(allocator, field_prefix);
-                                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_4);
+                                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_4.wireName());
                                     }
                                 }
                             }
@@ -203,24 +203,24 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                                         var prefix_buf: [256]u8 = undefined;
                                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorNames.member.{d}=", .{n, n_4}) catch continue;
                                         try body_buf.appendSlice(allocator, field_prefix);
-                                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_4);
+                                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_4.wireName());
                                     }
                                 }
                             }
                             if (sv_3.accelerator_total_memory_mi_b) |sv_4| {
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorTotalMemoryMiB.Max=", .{n}) catch continue;
-                                    try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_4.max) |fv_5| {
+                                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorTotalMemoryMiB.Max=", .{n}) catch continue;
+                                        try body_buf.appendSlice(allocator, field_prefix);
                                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                     }
                                 }
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorTotalMemoryMiB.Min=", .{n}) catch continue;
-                                    try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_4.min) |fv_5| {
+                                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorTotalMemoryMiB.Min=", .{n}) catch continue;
+                                        try body_buf.appendSlice(allocator, field_prefix);
                                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                     }
                                 }
@@ -232,7 +232,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                                         var prefix_buf: [256]u8 = undefined;
                                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorTypes.member.{d}=", .{n, n_4}) catch continue;
                                         try body_buf.appendSlice(allocator, field_prefix);
-                                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_4);
+                                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_4.wireName());
                                     }
                                 }
                             }
@@ -249,26 +249,26 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                             }
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BareMetal=", .{n}) catch continue;
-                                try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.bare_metal) |fv_4| {
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BareMetal=", .{n}) catch continue;
+                                    try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_4.wireName());
                                 }
                             }
                             if (sv_3.baseline_ebs_bandwidth_mbps) |sv_4| {
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BaselineEbsBandwidthMbps.Max=", .{n}) catch continue;
-                                    try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_4.max) |fv_5| {
+                                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BaselineEbsBandwidthMbps.Max=", .{n}) catch continue;
+                                        try body_buf.appendSlice(allocator, field_prefix);
                                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                     }
                                 }
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BaselineEbsBandwidthMbps.Min=", .{n}) catch continue;
-                                    try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_4.min) |fv_5| {
+                                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BaselineEbsBandwidthMbps.Min=", .{n}) catch continue;
+                                        try body_buf.appendSlice(allocator, field_prefix);
                                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                     }
                                 }
@@ -280,9 +280,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                                             const n_6 = idx_6 + 1;
                                             {
                                                 var prefix_buf: [256]u8 = undefined;
-                                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BaselinePerformanceFactors.Cpu.Reference.item.{d}.InstanceFamily=", .{n, n_6}) catch continue;
-                                                try body_buf.appendSlice(allocator, field_prefix);
                                                 if (item_6.instance_family) |fv_7| {
+                                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BaselinePerformanceFactors.Cpu.Reference.item.{d}.InstanceFamily=", .{n, n_6}) catch continue;
+                                                    try body_buf.appendSlice(allocator, field_prefix);
                                                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_7);
                                                 }
                                             }
@@ -292,9 +292,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                             }
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BurstablePerformance=", .{n}) catch continue;
-                                try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.burstable_performance) |fv_4| {
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BurstablePerformance=", .{n}) catch continue;
+                                    try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_4.wireName());
                                 }
                             }
@@ -305,7 +305,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                                         var prefix_buf: [256]u8 = undefined;
                                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.CpuManufacturers.member.{d}=", .{n, n_4}) catch continue;
                                         try body_buf.appendSlice(allocator, field_prefix);
-                                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_4);
+                                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_4.wireName());
                                     }
                                 }
                             }
@@ -327,15 +327,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                                         var prefix_buf: [256]u8 = undefined;
                                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.InstanceGenerations.member.{d}=", .{n, n_4}) catch continue;
                                         try body_buf.appendSlice(allocator, field_prefix);
-                                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_4);
+                                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_4.wireName());
                                     }
                                 }
                             }
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.LocalStorage=", .{n}) catch continue;
-                                try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.local_storage) |fv_4| {
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.LocalStorage=", .{n}) catch continue;
+                                    try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_4.wireName());
                                 }
                             }
@@ -346,41 +346,41 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                                         var prefix_buf: [256]u8 = undefined;
                                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.LocalStorageTypes.member.{d}=", .{n, n_4}) catch continue;
                                         try body_buf.appendSlice(allocator, field_prefix);
-                                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_4);
+                                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_4.wireName());
                                     }
                                 }
                             }
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice=", .{n}) catch continue;
-                                try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.max_spot_price_as_percentage_of_optimal_on_demand_price) |fv_4| {
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice=", .{n}) catch continue;
+                                    try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_4}) catch "");
                                 }
                             }
                             if (sv_3.memory_gi_b_per_v_cpu) |sv_4| {
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.MemoryGiBPerVCpu.Max=", .{n}) catch continue;
-                                    try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_4.max) |fv_5| {
-                                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_5);
+                                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.MemoryGiBPerVCpu.Max=", .{n}) catch continue;
+                                        try body_buf.appendSlice(allocator, field_prefix);
+                                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                     }
                                 }
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.MemoryGiBPerVCpu.Min=", .{n}) catch continue;
-                                    try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_4.min) |fv_5| {
-                                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_5);
+                                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.MemoryGiBPerVCpu.Min=", .{n}) catch continue;
+                                        try body_buf.appendSlice(allocator, field_prefix);
+                                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                     }
                                 }
                             }
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.MemoryMiB.Max=", .{n}) catch continue;
-                                try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.memory_mi_b.max) |fv_5| {
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.MemoryMiB.Max=", .{n}) catch continue;
+                                    try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                 }
                             }
@@ -393,86 +393,86 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                             if (sv_3.network_bandwidth_gbps) |sv_4| {
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.NetworkBandwidthGbps.Max=", .{n}) catch continue;
-                                    try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_4.max) |fv_5| {
-                                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_5);
+                                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.NetworkBandwidthGbps.Max=", .{n}) catch continue;
+                                        try body_buf.appendSlice(allocator, field_prefix);
+                                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                     }
                                 }
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.NetworkBandwidthGbps.Min=", .{n}) catch continue;
-                                    try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_4.min) |fv_5| {
-                                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_5);
+                                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.NetworkBandwidthGbps.Min=", .{n}) catch continue;
+                                        try body_buf.appendSlice(allocator, field_prefix);
+                                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                     }
                                 }
                             }
                             if (sv_3.network_interface_count) |sv_4| {
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.NetworkInterfaceCount.Max=", .{n}) catch continue;
-                                    try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_4.max) |fv_5| {
+                                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.NetworkInterfaceCount.Max=", .{n}) catch continue;
+                                        try body_buf.appendSlice(allocator, field_prefix);
                                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                     }
                                 }
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.NetworkInterfaceCount.Min=", .{n}) catch continue;
-                                    try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_4.min) |fv_5| {
+                                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.NetworkInterfaceCount.Min=", .{n}) catch continue;
+                                        try body_buf.appendSlice(allocator, field_prefix);
                                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                     }
                                 }
                             }
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.OnDemandMaxPricePercentageOverLowestPrice=", .{n}) catch continue;
-                                try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.on_demand_max_price_percentage_over_lowest_price) |fv_4| {
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.OnDemandMaxPricePercentageOverLowestPrice=", .{n}) catch continue;
+                                    try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_4}) catch "");
                                 }
                             }
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.RequireHibernateSupport=", .{n}) catch continue;
-                                try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.require_hibernate_support) |fv_4| {
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.RequireHibernateSupport=", .{n}) catch continue;
+                                    try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_4) "true" else "false");
                                 }
                             }
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.SpotMaxPricePercentageOverLowestPrice=", .{n}) catch continue;
-                                try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.spot_max_price_percentage_over_lowest_price) |fv_4| {
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.SpotMaxPricePercentageOverLowestPrice=", .{n}) catch continue;
+                                    try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_4}) catch "");
                                 }
                             }
                             if (sv_3.total_local_storage_gb) |sv_4| {
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.TotalLocalStorageGB.Max=", .{n}) catch continue;
-                                    try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_4.max) |fv_5| {
-                                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_5);
+                                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.TotalLocalStorageGB.Max=", .{n}) catch continue;
+                                        try body_buf.appendSlice(allocator, field_prefix);
+                                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                     }
                                 }
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.TotalLocalStorageGB.Min=", .{n}) catch continue;
-                                    try body_buf.appendSlice(allocator, field_prefix);
                                     if (sv_4.min) |fv_5| {
-                                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_5);
+                                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.TotalLocalStorageGB.Min=", .{n}) catch continue;
+                                        try body_buf.appendSlice(allocator, field_prefix);
+                                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                     }
                                 }
                             }
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.VCpuCount.Max=", .{n}) catch continue;
-                                try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.v_cpu_count.max) |fv_5| {
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.VCpuCount.Max=", .{n}) catch continue;
+                                    try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_5}) catch "");
                                 }
                             }
@@ -485,43 +485,43 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceType=", .{n}) catch continue;
-                            try body_buf.appendSlice(allocator, field_prefix);
                             if (item.instance_type) |fv_3| {
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceType=", .{n}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                             }
                         }
                         if (item.launch_template_specification) |sv_3| {
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.LaunchTemplateSpecification.LaunchTemplateId=", .{n}) catch continue;
-                                try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.launch_template_id) |fv_4| {
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.LaunchTemplateSpecification.LaunchTemplateId=", .{n}) catch continue;
+                                    try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_4);
                                 }
                             }
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.LaunchTemplateSpecification.LaunchTemplateName=", .{n}) catch continue;
-                                try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.launch_template_name) |fv_4| {
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.LaunchTemplateSpecification.LaunchTemplateName=", .{n}) catch continue;
+                                    try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_4);
                                 }
                             }
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.LaunchTemplateSpecification.Version=", .{n}) catch continue;
-                                try body_buf.appendSlice(allocator, field_prefix);
                                 if (sv_3.version) |fv_4| {
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.LaunchTemplateSpecification.Version=", .{n}) catch continue;
+                                    try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_4);
                                 }
                             }
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.WeightedCapacity=", .{n}) catch continue;
-                            try body_buf.appendSlice(allocator, field_prefix);
                             if (item.weighted_capacity) |fv_3| {
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.WeightedCapacity=", .{n}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                             }
                         }
@@ -560,7 +560,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Preferences.CheckpointPercentages.member.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{item}) catch "");
             }
         }
         if (v.instance_warmup) |sv| {

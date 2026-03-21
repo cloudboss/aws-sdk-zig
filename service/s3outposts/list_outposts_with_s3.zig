@@ -52,7 +52,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOutpost
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3outposts");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3-outposts");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -69,7 +69,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOutpost
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListOutpostsWithS3Input, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("s3outposts", "S3Outposts", allocator);
+    const endpoint = try config.getEndpointForService("s3-outposts", "S3Outposts", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

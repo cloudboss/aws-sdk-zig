@@ -52,7 +52,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeImp
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "applicationdiscoveryservice");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "discovery");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -69,7 +69,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeImp
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DescribeImportTasksInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("applicationdiscoveryservice", "Application Discovery Service", allocator);
+    const endpoint = try config.getEndpointForService("discovery", "Application Discovery Service", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

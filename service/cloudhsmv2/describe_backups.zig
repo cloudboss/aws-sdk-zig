@@ -91,7 +91,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeBac
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cloudhsmv2");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cloudhsm");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();

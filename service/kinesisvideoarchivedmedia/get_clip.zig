@@ -58,7 +58,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetClipInpu
     var request = try serializeRequest(alloc, input, client.config);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "kinesisvideoarchivedmedia");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "kinesisvideo");
 
     var stream_resp = try client.http_client.sendStreamingRequest(&request);
 
@@ -79,7 +79,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetClipInpu
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetClipInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("kinesisvideoarchivedmedia", "Kinesis Video Archived Media", allocator);
+    const endpoint = try config.getEndpointForService("kinesisvideo", "Kinesis Video Archived Media", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

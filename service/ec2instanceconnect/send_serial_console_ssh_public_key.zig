@@ -52,7 +52,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendSerialC
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ec2instanceconnect");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ec2-instance-connect");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -69,7 +69,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendSerialC
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: SendSerialConsoleSSHPublicKeyInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ec2instanceconnect", "EC2 Instance Connect", allocator);
+    const endpoint = try config.getEndpointForService("ec2-instance-connect", "EC2 Instance Connect", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

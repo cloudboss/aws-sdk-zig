@@ -109,7 +109,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetUserInpu
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "finspacedata");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "finspace-api");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -126,7 +126,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetUserInpu
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetUserInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("finspacedata", "finspace data", allocator);
+    const endpoint = try config.getEndpointForService("finspace-api", "finspace data", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

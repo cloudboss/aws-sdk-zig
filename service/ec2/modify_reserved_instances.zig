@@ -76,49 +76,49 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyReservedInstances
         const n = idx + 1;
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesConfigurationSetItemType.{d}.AvailabilityZone=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.availability_zone) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesConfigurationSetItemType.{d}.AvailabilityZone=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesConfigurationSetItemType.{d}.AvailabilityZoneId=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.availability_zone_id) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesConfigurationSetItemType.{d}.AvailabilityZoneId=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesConfigurationSetItemType.{d}.InstanceCount=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.instance_count) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesConfigurationSetItemType.{d}.InstanceCount=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesConfigurationSetItemType.{d}.InstanceType=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.instance_type) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesConfigurationSetItemType.{d}.InstanceType=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesConfigurationSetItemType.{d}.Platform=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.platform) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesConfigurationSetItemType.{d}.Platform=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesConfigurationSetItemType.{d}.Scope=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.scope) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedInstancesConfigurationSetItemType.{d}.Scope=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
             }
         }

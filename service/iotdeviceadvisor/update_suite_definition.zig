@@ -74,7 +74,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSuite
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSuiteDefinitionInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("iotdeviceadvisor", "IotDeviceAdvisor", allocator);
+    const endpoint = try config.getEndpointForService("api.iotdeviceadvisor", "IotDeviceAdvisor", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

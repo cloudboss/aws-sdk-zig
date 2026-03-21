@@ -42,6 +42,20 @@ open class AwsQueryProtocol : ProtocolGenerator {
 
     override fun needsXmlSerde(): Boolean = true
 
+    private fun scalarToQueryExpr(ctx: OperationContext, shape: Shape, valueExpr: String): String {
+        if (ctx.isEnumType(shape)) return "$valueExpr.wireName()"
+
+        return when (ctx.resolveBaseZigType(shape)) {
+            "[]const u8" -> valueExpr
+            "bool" -> "if ($valueExpr) \"true\" else \"false\""
+            "i8", "i16", "i32", "i64", "i128" ->
+                "std.fmt.allocPrint(allocator, \"{d}\", .{$valueExpr}) catch \"\""
+            "f32", "f64", "f128" ->
+                "std.fmt.allocPrint(allocator, \"{d}\", .{$valueExpr}) catch \"\""
+            else -> valueExpr
+        }
+    }
+
     override fun writeSerializeRequest(writer: ZigWriter, ctx: OperationContext) {
         val inputName = "${ctx.operationName}Input"
 
@@ -58,7 +72,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         // Build endpoint
         writer.write(
             "const endpoint = try config.getEndpointForService(\"\$L\", \"\$L\", allocator);",
-            ctx.settings.packageName, ctx.settings.sdkId,
+            ctx.settings.endpointPrefix, ctx.settings.sdkId,
         )
         writer.blankLine()
 
@@ -196,12 +210,12 @@ open class AwsQueryProtocol : ProtocolGenerator {
                 if (memberShape.isRequired) {
                     writer.write("try body_buf.appendSlice(allocator, \"&\$L=\");", smithyName)
                     writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
-                        ctx.scalarFormatExpr(targetShape, fieldName, accessor))
+                        scalarToQueryExpr(ctx, targetShape, "$accessor.$fieldName"))
                 } else {
                     writer.openBlock("if (\$L.\$L) |v| {", accessor, fieldName)
                     writer.write("try body_buf.appendSlice(allocator, \"&\$L=\");", smithyName)
                     writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
-                        ctx.scalarFormatExprForOptional(targetShape, "v"))
+                        scalarToQueryExpr(ctx, targetShape, "v"))
                     writer.closeBlock("}")
                 }
             }
@@ -227,13 +241,13 @@ open class AwsQueryProtocol : ProtocolGenerator {
                     if (memberShape.isRequired) {
                         writer.write("try body_buf.appendSlice(allocator, \"&\$L=\");", qualifiedName)
                         writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
-                            ctx.scalarFormatExpr(targetShape, fieldName, accessor))
+                            scalarToQueryExpr(ctx, targetShape, "$accessor.$fieldName"))
                     } else {
                         val captureVar = if (depth == 0) "sv" else "sv${depth + 1}"
                         writer.openBlock("if (\$L.\$L) |\$L| {", accessor, fieldName, captureVar)
                         writer.write("try body_buf.appendSlice(allocator, \"&\$L=\");", qualifiedName)
                         writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
-                            ctx.scalarFormatExprForOptional(targetShape, captureVar))
+                            scalarToQueryExpr(ctx, targetShape, captureVar))
                         writer.closeBlock("}")
                     }
                 }
@@ -292,6 +306,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
 
             writer.closeBlock("}")
         } else {
+            val encodedExpr = scalarToQueryExpr(ctx, elementShape, "item")
             writer.openBlock("for (\$L, 0..) |item, idx| {", accessor)
             writer.write("const n = idx + 1;")
             writer.write("var prefix_buf: [256]u8 = undefined;")
@@ -307,7 +322,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
                 )
             }
             writer.write("try body_buf.appendSlice(allocator, field_prefix);")
-            writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, item);")
+            writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);", encodedExpr)
             writer.closeBlock("}")
         }
     }
@@ -333,18 +348,23 @@ open class AwsQueryProtocol : ProtocolGenerator {
                     writer.openBlock("{")
                     writer.write("var prefix_buf: [256]u8 = undefined;")
                     val formatArgs = indexVars.joinToString(", ")
-                    writer.write(
-                        "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{\$L}) catch continue;",
-                        qualifiedPrefix, formatArgs,
-                    )
-                    writer.write("try body_buf.appendSlice(allocator, field_prefix);")
                     if (memberShape.isRequired) {
+                        writer.write(
+                            "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{\$L}) catch continue;",
+                            qualifiedPrefix, formatArgs,
+                        )
+                        writer.write("try body_buf.appendSlice(allocator, field_prefix);")
                         writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
-                            ctx.scalarFormatExpr(targetShape, fieldName, accessor))
+                            scalarToQueryExpr(ctx, targetShape, "$accessor.$fieldName"))
                     } else {
                         writer.openBlock("if (\$L.\$L) |\$L| {", accessor, fieldName, captureVar)
+                        writer.write(
+                            "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{\$L}) catch continue;",
+                            qualifiedPrefix, formatArgs,
+                        )
+                        writer.write("try body_buf.appendSlice(allocator, field_prefix);")
                         writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
-                            ctx.scalarFormatExprForOptional(targetShape, captureVar))
+                            scalarToQueryExpr(ctx, targetShape, captureVar))
                         writer.closeBlock("}")
                     }
                     writer.closeBlock("}")
@@ -387,6 +407,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
                         writeStructFieldSerializersInList(writer, ctx, innerPrefix, listElement,
                             innerVar, newIndexVars, depth + 1)
                     } else {
+                        val encodedExpr = scalarToQueryExpr(ctx, listElement, innerVar)
                         writer.openBlock("{")
                         writer.write("var prefix_buf: [256]u8 = undefined;")
                         val formatArgs = newIndexVars.joinToString(", ")
@@ -395,7 +416,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
                             innerPrefix, formatArgs,
                         )
                         writer.write("try body_buf.appendSlice(allocator, field_prefix);")
-                        writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);", innerVar)
+                        writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);", encodedExpr)
                         writer.closeBlock("}")
                     }
 
@@ -419,8 +440,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
     ) {
         // Maps are serialized as: prefix.entry.1.key=K&prefix.entry.1.value=V
         val valueShape = ctx.model.expectShape(mapShape.value.target)
-        val valueZigType = ctx.resolveBaseZigType(valueShape)
-        val isValueEnum = ctx.isEnumType(valueShape)
+        val encodedExpr = scalarToQueryExpr(ctx, valueShape, "entry.value")
 
         writer.openBlock("for (\$L, 0..) |entry, idx| {", accessor)
         writer.write("const n = idx + 1;")
@@ -442,24 +462,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         )
         writer.write("try body_buf.appendSlice(allocator, val_prefix);")
 
-        when {
-            isValueEnum -> {
-                writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, entry.value.wireName());")
-            }
-            valueZigType == "[]const u8" -> {
-                writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, entry.value);")
-            }
-            valueZigType in listOf("i32", "i64", "i16", "i8") -> {
-                writer.write("const num_str = std.fmt.allocPrint(allocator, \"{d}\", .{entry.value}) catch \"\";")
-                writer.write("try body_buf.appendSlice(allocator, num_str);")
-            }
-            valueZigType == "bool" -> {
-                writer.write("try body_buf.appendSlice(allocator, if (entry.value) \"true\" else \"false\");")
-            }
-            else -> {
-                writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, entry.value);")
-            }
-        }
+        writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);", encodedExpr)
 
         writer.closeBlock("}")
         writer.closeBlock("}") // for
@@ -518,7 +521,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
                         )
                         writer.write("try body_buf.appendSlice(allocator, field_prefix);")
                         writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
-                            ctx.scalarFormatExpr(targetShape, fieldName, accessor))
+                            scalarToQueryExpr(ctx, targetShape, "$accessor.$fieldName"))
                         writer.closeBlock("}")
                     } else {
                         writer.openBlock("if (\$L.\$L) |v| {", accessor, fieldName)
@@ -530,7 +533,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
                         )
                         writer.write("try body_buf.appendSlice(allocator, field_prefix);")
                         writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
-                            ctx.scalarFormatExprForOptional(targetShape, "v"))
+                            scalarToQueryExpr(ctx, targetShape, "v"))
                         writer.closeBlock("}")
                         writer.closeBlock("}")
                     }

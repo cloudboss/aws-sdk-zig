@@ -18,7 +18,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResour
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "pcaconnectorscep");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "pca-connector-scep");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -35,7 +35,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResour
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UntagResourceInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("pcaconnectorscep", "Pca Connector Scep", allocator);
+    const endpoint = try config.getEndpointForService("pca-connector-scep", "Pca Connector Scep", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

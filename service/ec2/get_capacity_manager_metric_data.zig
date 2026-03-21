@@ -106,17 +106,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCapacityManagerMetri
             if (item.dimension_condition) |sv_1| {
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&FilterBy.{d}.DimensionCondition.Comparison=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.comparison) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&FilterBy.{d}.DimensionCondition.Comparison=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&FilterBy.{d}.DimensionCondition.Dimension=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.dimension) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&FilterBy.{d}.DimensionCondition.Dimension=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                     }
                 }
@@ -140,7 +140,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCapacityManagerMetri
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&GroupBy.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
-            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
         }
     }
     if (input.max_results) |v| {
@@ -152,7 +152,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCapacityManagerMetri
         var prefix_buf: [256]u8 = undefined;
         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricName.{d}=", .{n}) catch continue;
         try body_buf.appendSlice(allocator, field_prefix);
-        try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+        try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
     }
     if (input.next_token) |v| {
         try body_buf.appendSlice(allocator, "&NextToken=");

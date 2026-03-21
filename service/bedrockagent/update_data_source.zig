@@ -65,7 +65,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDataS
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "bedrockagent");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "bedrock");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -82,7 +82,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDataS
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDataSourceInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("bedrockagent", "Bedrock Agent", allocator);
+    const endpoint = try config.getEndpointForService("bedrock-agent", "Bedrock Agent", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

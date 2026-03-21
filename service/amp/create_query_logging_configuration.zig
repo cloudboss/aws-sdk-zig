@@ -44,7 +44,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateQuery
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "amp");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "aps");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -61,7 +61,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateQuery
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: CreateQueryLoggingConfigurationInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("amp", "amp", allocator);
+    const endpoint = try config.getEndpointForService("aps", "amp", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

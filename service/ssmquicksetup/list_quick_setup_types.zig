@@ -26,7 +26,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListQuickSe
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ssmquicksetup");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ssm-quicksetup");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -44,7 +44,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListQuickSe
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListQuickSetupTypesInput, config: *aws.Config) !aws.http.Request {
     _ = input;
-    const endpoint = try config.getEndpointForService("ssmquicksetup", "SSM QuickSetup", allocator);
+    const endpoint = try config.getEndpointForService("ssm-quicksetup", "SSM QuickSetup", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

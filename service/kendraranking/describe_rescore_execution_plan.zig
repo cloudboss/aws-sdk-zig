@@ -80,7 +80,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeRes
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "kendraranking");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "kendra-ranking");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -97,7 +97,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeRes
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DescribeRescoreExecutionPlanInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("kendraranking", "Kendra Ranking", allocator);
+    const endpoint = try config.getEndpointForService("kendra-ranking", "Kendra Ranking", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

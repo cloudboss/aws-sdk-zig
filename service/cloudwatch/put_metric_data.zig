@@ -99,7 +99,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutMetricDa
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cloudwatch");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "monitoring");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -116,7 +116,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutMetricDa
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricDataInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudwatch", "CloudWatch", allocator);
+    const endpoint = try config.getEndpointForService("monitoring", "CloudWatch", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -138,7 +138,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricDataInput, con
                                 var prefix_buf: [256]u8 = undefined;
                                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Counts.member.{d}=", .{n, n_1, n_2}) catch continue;
                                 try body_buf.appendSlice(allocator, field_prefix);
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, item_2);
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{item_2}) catch "");
                             }
                         }
                     }
@@ -170,57 +170,57 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricDataInput, con
                             var prefix_buf: [256]u8 = undefined;
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StatisticValues.Maximum=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
-                            try aws.url.appendUrlEncoded(allocator, &body_buf, sv_2.maximum);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv_2.maximum}) catch "");
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StatisticValues.Minimum=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
-                            try aws.url.appendUrlEncoded(allocator, &body_buf, sv_2.minimum);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv_2.minimum}) catch "");
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StatisticValues.SampleCount=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
-                            try aws.url.appendUrlEncoded(allocator, &body_buf, sv_2.sample_count);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv_2.sample_count}) catch "");
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StatisticValues.Sum=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
-                            try aws.url.appendUrlEncoded(allocator, &body_buf, sv_2.sum);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv_2.sum}) catch "");
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StorageResolution=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.storage_resolution) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.StorageResolution=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Timestamp=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.timestamp) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Timestamp=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Unit=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.unit) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Unit=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Value=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.value) |fv_2| {
-                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Value=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
                         }
                     }
                     if (item_1.values) |lst_2| {
@@ -230,7 +230,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricDataInput, con
                                 var prefix_buf: [256]u8 = undefined;
                                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&EntityMetricData.member.{d}.MetricData.member.{d}.Values.member.{d}=", .{n, n_1, n_2}) catch continue;
                                 try body_buf.appendSlice(allocator, field_prefix);
-                                try aws.url.appendUrlEncoded(allocator, &body_buf, item_2);
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{item_2}) catch "");
                             }
                         }
                     }
@@ -248,7 +248,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricDataInput, con
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Counts.member.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{item_1}) catch "");
                     }
                 }
             }
@@ -280,57 +280,57 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricDataInput, con
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.StatisticValues.Maximum=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.maximum);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv_1.maximum}) catch "");
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.StatisticValues.Minimum=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.minimum);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv_1.minimum}) catch "");
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.StatisticValues.SampleCount=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.sample_count);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv_1.sample_count}) catch "");
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.StatisticValues.Sum=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv_1.sum);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv_1.sum}) catch "");
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.StorageResolution=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.storage_resolution) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.StorageResolution=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Timestamp=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.timestamp) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Timestamp=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Unit=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.unit) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Unit=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Value=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.value) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Value=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }
             if (item.values) |lst_1| {
@@ -340,7 +340,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricDataInput, con
                         var prefix_buf: [256]u8 = undefined;
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricData.member.{d}.Values.member.{d}=", .{n, n_1}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
-                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{item_1}) catch "");
                     }
                 }
             }

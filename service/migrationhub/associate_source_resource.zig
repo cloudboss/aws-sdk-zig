@@ -54,7 +54,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateSo
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "migrationhub");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "mgh");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -71,7 +71,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateSo
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: AssociateSourceResourceInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("migrationhub", "Migration Hub", allocator);
+    const endpoint = try config.getEndpointForService("mgh", "Migration Hub", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

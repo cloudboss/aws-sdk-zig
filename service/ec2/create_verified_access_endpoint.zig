@@ -142,17 +142,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessEnd
                 const n = idx + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.PortRange.{d}.FromPort=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.from_port) |fv_1| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.PortRange.{d}.FromPort=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.PortRange.{d}.ToPort=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.to_port) |fv_1| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&CidrOptions.PortRange.{d}.ToPort=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                     }
                 }
@@ -208,17 +208,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessEnd
                 const n = idx + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.PortRange.{d}.FromPort=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.from_port) |fv_1| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.PortRange.{d}.FromPort=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.PortRange.{d}.ToPort=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.to_port) |fv_1| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadBalancerOptions.PortRange.{d}.ToPort=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                     }
                 }
@@ -252,17 +252,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessEnd
                 const n = idx + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NetworkInterfaceOptions.PortRange.{d}.FromPort=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.from_port) |fv_1| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NetworkInterfaceOptions.PortRange.{d}.FromPort=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NetworkInterfaceOptions.PortRange.{d}.ToPort=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.to_port) |fv_1| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NetworkInterfaceOptions.PortRange.{d}.ToPort=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                     }
                 }
@@ -336,9 +336,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessEnd
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.ResourceType=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.ResourceType=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
@@ -347,17 +347,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVerifiedAccessEnd
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.key) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.value) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }

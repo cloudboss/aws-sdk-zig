@@ -59,7 +59,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResource
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "route53recoveryreadiness");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "route53-recovery-readiness");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -76,7 +76,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResource
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetResourceSetInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("route53recoveryreadiness", "Route53 Recovery Readiness", allocator);
+    const endpoint = try config.getEndpointForService("route53-recovery-readiness", "Route53 Recovery Readiness", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

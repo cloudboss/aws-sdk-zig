@@ -33,7 +33,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagCertif
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "acmpca");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "acm-pca");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -50,7 +50,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagCertif
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UntagCertificateAuthorityInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("acmpca", "ACM PCA", allocator);
+    const endpoint = try config.getEndpointForService("acm-pca", "ACM PCA", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

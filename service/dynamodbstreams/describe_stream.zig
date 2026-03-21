@@ -52,7 +52,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeStr
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "dynamodbstreams");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "dynamodb");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -69,7 +69,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeStr
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DescribeStreamInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("dynamodbstreams", "DynamoDB Streams", allocator);
+    const endpoint = try config.getEndpointForService("streams.dynamodb", "DynamoDB Streams", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

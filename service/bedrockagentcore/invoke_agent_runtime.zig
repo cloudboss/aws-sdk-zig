@@ -138,7 +138,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeAgent
     var request = try serializeRequest(alloc, input, client.config);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "bedrockagentcore");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "bedrock-agentcore");
 
     var stream_resp = try client.http_client.sendStreamingRequest(&request);
 
@@ -159,7 +159,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeAgent
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: InvokeAgentRuntimeInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("bedrockagentcore", "Bedrock AgentCore", allocator);
+    const endpoint = try config.getEndpointForService("bedrock-agentcore", "Bedrock AgentCore", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

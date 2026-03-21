@@ -100,7 +100,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListService
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "applicationsignals");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "application-signals");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -117,7 +117,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListService
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListServiceDependenciesInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("applicationsignals", "Application Signals", allocator);
+    const endpoint = try config.getEndpointForService("application-signals", "Application Signals", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -262,7 +262,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyDBClu
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "docdb");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "rds");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -279,7 +279,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyDBClu
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBClusterInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("docdb", "DocDB", allocator);
+    const endpoint = try config.getEndpointForService("rds", "DocDB", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -373,11 +373,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBClusterInput, c
     if (input.serverless_v2_scaling_configuration) |v| {
         if (v.max_capacity) |sv| {
             try body_buf.appendSlice(allocator, "&ServerlessV2ScalingConfiguration.MaxCapacity=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
         if (v.min_capacity) |sv| {
             try body_buf.appendSlice(allocator, "&ServerlessV2ScalingConfiguration.MinCapacity=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
     }
     if (input.storage_type) |v| {

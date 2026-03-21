@@ -98,7 +98,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateSo
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: AssociateSoftwareToImageBuilderInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("appstream", "AppStream", allocator);
+    const endpoint = try config.getEndpointForService("appstream2", "AppStream", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

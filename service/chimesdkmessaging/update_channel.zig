@@ -50,7 +50,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateChann
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "chimesdkmessaging");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "chime");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -67,7 +67,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateChann
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateChannelInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("chimesdkmessaging", "Chime SDK Messaging", allocator);
+    const endpoint = try config.getEndpointForService("messaging-chime", "Chime SDK Messaging", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

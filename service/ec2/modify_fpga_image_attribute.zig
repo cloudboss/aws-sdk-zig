@@ -110,17 +110,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFpgaImageAttribut
                 const n = idx + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Add.{d}.Group=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.group) |fv_1| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Add.{d}.Group=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Add.{d}.UserId=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.user_id) |fv_1| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Add.{d}.UserId=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                     }
                 }
@@ -131,17 +131,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFpgaImageAttribut
                 const n = idx + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Remove.{d}.Group=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.group) |fv_1| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Remove.{d}.Group=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Remove.{d}.UserId=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (item.user_id) |fv_1| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LoadPermission.Remove.{d}.UserId=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                     }
                 }

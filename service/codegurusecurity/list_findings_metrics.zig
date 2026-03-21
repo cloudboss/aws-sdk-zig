@@ -60,7 +60,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListFinding
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "codegurusecurity");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "codeguru-security");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -77,7 +77,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListFinding
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListFindingsMetricsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("codegurusecurity", "CodeGuru Security", allocator);
+    const endpoint = try config.getEndpointForService("codeguru-security", "CodeGuru Security", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

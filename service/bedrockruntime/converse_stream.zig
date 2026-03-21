@@ -135,7 +135,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ConverseStr
     var request = try serializeRequest(alloc, input, client.config);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "bedrockruntime");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "amazonbedrockfrontendservice");
 
     var stream_resp = try client.http_client.sendStreamingRequest(&request);
 
@@ -159,7 +159,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ConverseStr
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ConverseStreamInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("bedrockruntime", "Bedrock Runtime", allocator);
+    const endpoint = try config.getEndpointForService("bedrock-runtime", "Bedrock Runtime", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -59,33 +59,33 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateOrUpdateTagsInput
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.member.{d}.PropagateAtLaunch=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.propagate_at_launch) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.member.{d}.PropagateAtLaunch=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_1) "true" else "false");
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.member.{d}.ResourceId=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.resource_id) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.member.{d}.ResourceId=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.member.{d}.ResourceType=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.resource_type) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.member.{d}.ResourceType=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.member.{d}.Value=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.value) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.member.{d}.Value=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }

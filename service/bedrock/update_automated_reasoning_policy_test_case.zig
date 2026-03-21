@@ -70,7 +70,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAutom
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "bedrock");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "amazonbedrockcontrolplaneservice");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();

@@ -210,7 +210,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDASHStre
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "kinesisvideoarchivedmedia");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "kinesisvideo");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -227,7 +227,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDASHStre
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetDASHStreamingSessionURLInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("kinesisvideoarchivedmedia", "Kinesis Video Archived Media", allocator);
+    const endpoint = try config.getEndpointForService("kinesisvideo", "Kinesis Video Archived Media", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

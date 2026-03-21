@@ -70,41 +70,41 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchDescribeTypeConfig
         const n = idx + 1;
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.Type=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.@"type") |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.Type=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.TypeArn=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.type_arn) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.TypeArn=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.TypeConfigurationAlias=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.type_configuration_alias) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.TypeConfigurationAlias=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.TypeConfigurationArn=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.type_configuration_arn) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.TypeConfigurationArn=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.TypeName=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.type_name) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TypeConfigurationIdentifiers.member.{d}.TypeName=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
             }
         }

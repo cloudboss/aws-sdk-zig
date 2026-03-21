@@ -147,7 +147,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.ArchitectureType.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
             }
         }
         if (v.instance_requirements) |sv| {
@@ -167,7 +167,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.AcceleratorManufacturer.{d}=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
                 }
             }
             if (sv.accelerator_names) |list_d1| {
@@ -176,7 +176,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.AcceleratorName.{d}=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
                 }
             }
             if (sv.accelerator_total_memory_mi_b) |sv2| {
@@ -195,7 +195,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.AcceleratorType.{d}=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
                 }
             }
             if (sv.allowed_instance_types) |list_d1| {
@@ -228,9 +228,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
                             const n = idx + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.BaselinePerformanceFactors.Cpu.Reference.{d}.InstanceFamily=", .{n}) catch continue;
-                                try body_buf.appendSlice(allocator, field_prefix);
                                 if (item.instance_family) |fv_4| {
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.BaselinePerformanceFactors.Cpu.Reference.{d}.InstanceFamily=", .{n}) catch continue;
+                                    try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_4);
                                 }
                             }
@@ -248,7 +248,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.CpuManufacturer.{d}=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
                 }
             }
             if (sv.excluded_instance_types) |list_d1| {
@@ -266,7 +266,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.InstanceGeneration.{d}=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
                 }
             }
             if (sv.local_storage) |sv2| {
@@ -279,7 +279,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
                     var prefix_buf: [256]u8 = undefined;
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.InstanceRequirements.LocalStorageType.{d}=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
                 }
             }
             if (sv.max_spot_price_as_percentage_of_optimal_on_demand_price) |sv2| {
@@ -289,11 +289,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
             if (sv.memory_gi_b_per_v_cpu) |sv2| {
                 if (sv2.max) |sv3| {
                     try body_buf.appendSlice(allocator, "&InstanceRequirementsWithMetadata.InstanceRequirements.MemoryGiBPerVCpu.Max=");
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv3);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv3}) catch "");
                 }
                 if (sv2.min) |sv3| {
                     try body_buf.appendSlice(allocator, "&InstanceRequirementsWithMetadata.InstanceRequirements.MemoryGiBPerVCpu.Min=");
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv3);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv3}) catch "");
                 }
             }
             if (sv.memory_mi_b.max) |sv3| {
@@ -305,11 +305,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
             if (sv.network_bandwidth_gbps) |sv2| {
                 if (sv2.max) |sv3| {
                     try body_buf.appendSlice(allocator, "&InstanceRequirementsWithMetadata.InstanceRequirements.NetworkBandwidthGbps.Max=");
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv3);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv3}) catch "");
                 }
                 if (sv2.min) |sv3| {
                     try body_buf.appendSlice(allocator, "&InstanceRequirementsWithMetadata.InstanceRequirements.NetworkBandwidthGbps.Min=");
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv3);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv3}) catch "");
                 }
             }
             if (sv.network_interface_count) |sv2| {
@@ -341,11 +341,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
             if (sv.total_local_storage_gb) |sv2| {
                 if (sv2.max) |sv3| {
                     try body_buf.appendSlice(allocator, "&InstanceRequirementsWithMetadata.InstanceRequirements.TotalLocalStorageGB.Max=");
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv3);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv3}) catch "");
                 }
                 if (sv2.min) |sv3| {
                     try body_buf.appendSlice(allocator, "&InstanceRequirementsWithMetadata.InstanceRequirements.TotalLocalStorageGB.Min=");
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, sv3);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv3}) catch "");
                 }
             }
             if (sv.v_cpu_count.max) |sv3| {
@@ -361,7 +361,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceRequirementsWithMetadata.VirtualizationType.{d}=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
             }
         }
     }

@@ -262,9 +262,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                     const n_2 = idx_2 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedCapacityMetricSpecification.MetricDataQueries.member.{d}.Expression=", .{n, n_2}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_2.expression) |fv_3| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedCapacityMetricSpecification.MetricDataQueries.member.{d}.Expression=", .{n, n_2}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                         }
                     }
@@ -276,9 +276,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedCapacityMetricSpecification.MetricDataQueries.member.{d}.Label=", .{n, n_2}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_2.label) |fv_3| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedCapacityMetricSpecification.MetricDataQueries.member.{d}.Label=", .{n, n_2}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                         }
                     }
@@ -320,18 +320,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedCapacityMetricSpecification.MetricDataQueries.member.{d}.MetricStat.Unit=", .{n, n_2}) catch continue;
-                            try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_3.unit) |fv_4| {
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedCapacityMetricSpecification.MetricDataQueries.member.{d}.MetricStat.Unit=", .{n, n_2}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_4);
                             }
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedCapacityMetricSpecification.MetricDataQueries.member.{d}.ReturnData=", .{n, n_2}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_2.return_data) |fv_3| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedCapacityMetricSpecification.MetricDataQueries.member.{d}.ReturnData=", .{n, n_2}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_3) "true" else "false");
                         }
                     }
@@ -342,9 +342,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                     const n_2 = idx_2 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedLoadMetricSpecification.MetricDataQueries.member.{d}.Expression=", .{n, n_2}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_2.expression) |fv_3| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedLoadMetricSpecification.MetricDataQueries.member.{d}.Expression=", .{n, n_2}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                         }
                     }
@@ -356,9 +356,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedLoadMetricSpecification.MetricDataQueries.member.{d}.Label=", .{n, n_2}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_2.label) |fv_3| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedLoadMetricSpecification.MetricDataQueries.member.{d}.Label=", .{n, n_2}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                         }
                     }
@@ -400,18 +400,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedLoadMetricSpecification.MetricDataQueries.member.{d}.MetricStat.Unit=", .{n, n_2}) catch continue;
-                            try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_3.unit) |fv_4| {
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedLoadMetricSpecification.MetricDataQueries.member.{d}.MetricStat.Unit=", .{n, n_2}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_4);
                             }
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedLoadMetricSpecification.MetricDataQueries.member.{d}.ReturnData=", .{n, n_2}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_2.return_data) |fv_3| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedLoadMetricSpecification.MetricDataQueries.member.{d}.ReturnData=", .{n, n_2}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_3) "true" else "false");
                         }
                     }
@@ -422,9 +422,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                     const n_2 = idx_2 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedScalingMetricSpecification.MetricDataQueries.member.{d}.Expression=", .{n, n_2}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_2.expression) |fv_3| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedScalingMetricSpecification.MetricDataQueries.member.{d}.Expression=", .{n, n_2}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                         }
                     }
@@ -436,9 +436,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedScalingMetricSpecification.MetricDataQueries.member.{d}.Label=", .{n, n_2}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_2.label) |fv_3| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedScalingMetricSpecification.MetricDataQueries.member.{d}.Label=", .{n, n_2}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                         }
                     }
@@ -480,18 +480,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedScalingMetricSpecification.MetricDataQueries.member.{d}.MetricStat.Unit=", .{n, n_2}) catch continue;
-                            try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_3.unit) |fv_4| {
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedScalingMetricSpecification.MetricDataQueries.member.{d}.MetricStat.Unit=", .{n, n_2}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_4);
                             }
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedScalingMetricSpecification.MetricDataQueries.member.{d}.ReturnData=", .{n, n_2}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_2.return_data) |fv_3| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.CustomizedScalingMetricSpecification.MetricDataQueries.member.{d}.ReturnData=", .{n, n_2}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_3) "true" else "false");
                         }
                     }
@@ -506,9 +506,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.PredefinedLoadMetricSpecification.ResourceLabel=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.resource_label) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.PredefinedLoadMetricSpecification.ResourceLabel=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
@@ -522,9 +522,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.PredefinedMetricPairSpecification.ResourceLabel=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.resource_label) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.PredefinedMetricPairSpecification.ResourceLabel=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
@@ -538,9 +538,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.PredefinedScalingMetricSpecification.ResourceLabel=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.resource_label) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.PredefinedScalingMetricSpecification.ResourceLabel=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
@@ -549,7 +549,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                 var prefix_buf: [256]u8 = undefined;
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PredictiveScalingConfiguration.MetricSpecifications.member.{d}.TargetValue=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, item.target_value);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{item.target_value}) catch "");
             }
         }
         if (v.mode) |sv| {
@@ -570,18 +570,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&StepAdjustments.member.{d}.MetricIntervalLowerBound=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.metric_interval_lower_bound) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&StepAdjustments.member.{d}.MetricIntervalLowerBound=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&StepAdjustments.member.{d}.MetricIntervalUpperBound=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.metric_interval_upper_bound) |fv_1| {
-                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&StepAdjustments.member.{d}.MetricIntervalUpperBound=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }
             {
@@ -620,9 +620,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                     const n = idx + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetTrackingConfiguration.CustomizedMetricSpecification.Metrics.member.{d}.Expression=", .{n}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item.expression) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetTrackingConfiguration.CustomizedMetricSpecification.Metrics.member.{d}.Expression=", .{n}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
@@ -634,9 +634,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetTrackingConfiguration.CustomizedMetricSpecification.Metrics.member.{d}.Label=", .{n}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item.label) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetTrackingConfiguration.CustomizedMetricSpecification.Metrics.member.{d}.Label=", .{n}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
@@ -672,9 +672,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetTrackingConfiguration.CustomizedMetricSpecification.Metrics.member.{d}.MetricStat.Period=", .{n}) catch continue;
-                            try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.period) |fv_3| {
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetTrackingConfiguration.CustomizedMetricSpecification.Metrics.member.{d}.MetricStat.Period=", .{n}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_3}) catch "");
                             }
                         }
@@ -686,26 +686,26 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
                         }
                         {
                             var prefix_buf: [256]u8 = undefined;
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetTrackingConfiguration.CustomizedMetricSpecification.Metrics.member.{d}.MetricStat.Unit=", .{n}) catch continue;
-                            try body_buf.appendSlice(allocator, field_prefix);
                             if (sv_2.unit) |fv_3| {
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetTrackingConfiguration.CustomizedMetricSpecification.Metrics.member.{d}.MetricStat.Unit=", .{n}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                             }
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetTrackingConfiguration.CustomizedMetricSpecification.Metrics.member.{d}.Period=", .{n}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item.period) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetTrackingConfiguration.CustomizedMetricSpecification.Metrics.member.{d}.Period=", .{n}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetTrackingConfiguration.CustomizedMetricSpecification.Metrics.member.{d}.ReturnData=", .{n}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item.return_data) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetTrackingConfiguration.CustomizedMetricSpecification.Metrics.member.{d}.ReturnData=", .{n}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_2) "true" else "false");
                         }
                     }
@@ -741,7 +741,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutScalingPolicyInput, 
             }
         }
         try body_buf.appendSlice(allocator, "&TargetTrackingConfiguration.TargetValue=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, v.target_value);
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v.target_value}) catch "");
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

@@ -84,9 +84,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyIpamPolicyAllocat
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AllocationRule.{d}.SourceIpamPoolId=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.source_ipam_pool_id) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AllocationRule.{d}.SourceIpamPoolId=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

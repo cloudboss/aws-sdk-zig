@@ -170,7 +170,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RestoreDBCl
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "docdb");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "rds");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -187,7 +187,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RestoreDBCl
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBClusterToPointInTimeInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("docdb", "DocDB", allocator);
+    const endpoint = try config.getEndpointForService("rds", "DocDB", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -238,11 +238,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBClusterToPoint
     if (input.serverless_v2_scaling_configuration) |v| {
         if (v.max_capacity) |sv| {
             try body_buf.appendSlice(allocator, "&ServerlessV2ScalingConfiguration.MaxCapacity=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
         if (v.min_capacity) |sv| {
             try body_buf.appendSlice(allocator, "&ServerlessV2ScalingConfiguration.MinCapacity=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
     }
     try body_buf.appendSlice(allocator, "&SourceDBClusterIdentifier=");
@@ -256,17 +256,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBClusterToPoint
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.Tag.{d}.Key=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.key) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.Tag.{d}.Key=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.Tag.{d}.Value=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.value) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.Tag.{d}.Value=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

@@ -84,7 +84,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartLiveTa
     var request = try serializeRequest(alloc, input, client.config);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cloudwatchlogs");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "logs");
 
     var stream_resp = try client.http_client.sendStreamingRequest(&request);
 
@@ -108,7 +108,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartLiveTa
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: StartLiveTailInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudwatchlogs", "CloudWatch Logs", allocator);
+    const endpoint = try config.getEndpointForService("logs", "CloudWatch Logs", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

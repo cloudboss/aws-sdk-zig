@@ -41,7 +41,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSupplem
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "taxsettings");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "tax");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -58,7 +58,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSupplem
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListSupplementalTaxRegistrationsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("taxsettings", "TaxSettings", allocator);
+    const endpoint = try config.getEndpointForService("tax", "TaxSettings", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -48,7 +48,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateActIn
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "novaact");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "nova-act");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -65,7 +65,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateActIn
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateActInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("novaact", "Nova Act", allocator);
+    const endpoint = try config.getEndpointForService("nova-act", "Nova Act", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

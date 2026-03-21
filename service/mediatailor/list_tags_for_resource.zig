@@ -35,7 +35,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsFor
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListTagsForResourceInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("mediatailor", "MediaTailor", allocator);
+    const endpoint = try config.getEndpointForService("api.mediatailor", "MediaTailor", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

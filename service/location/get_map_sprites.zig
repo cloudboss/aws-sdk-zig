@@ -60,7 +60,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetMapSprit
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "location");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "geo");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -77,7 +77,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetMapSprit
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetMapSpritesInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("location", "Location", allocator);
+    const endpoint = try config.getEndpointForService("geo", "Location", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

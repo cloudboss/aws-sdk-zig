@@ -29,7 +29,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAtten
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "chimesdkmeetings");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "chime");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -46,7 +46,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAtten
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAttendeeInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("chimesdkmeetings", "Chime SDK Meetings", allocator);
+    const endpoint = try config.getEndpointForService("meetings-chime", "Chime SDK Meetings", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

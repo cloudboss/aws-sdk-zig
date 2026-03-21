@@ -41,7 +41,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCampaign
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "pinpoint");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "mobiletargeting");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();

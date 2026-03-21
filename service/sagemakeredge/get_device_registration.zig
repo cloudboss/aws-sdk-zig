@@ -41,7 +41,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDeviceRe
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "sagemakeredge");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "sagemaker");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -58,7 +58,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDeviceRe
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetDeviceRegistrationInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("sagemakeredge", "Sagemaker Edge", allocator);
+    const endpoint = try config.getEndpointForService("edge.sagemaker", "Sagemaker Edge", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

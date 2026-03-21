@@ -34,7 +34,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutRemediat
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "configservice");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "config");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -51,7 +51,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutRemediat
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: PutRemediationConfigurationsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("configservice", "Config Service", allocator);
+    const endpoint = try config.getEndpointForService("config", "Config Service", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

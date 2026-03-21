@@ -52,7 +52,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDelete
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ecrpublic");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ecr-public");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -69,7 +69,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDelete
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: BatchDeleteImageInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ecrpublic", "ECR PUBLIC", allocator);
+    const endpoint = try config.getEndpointForService("api.ecr-public", "ECR PUBLIC", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

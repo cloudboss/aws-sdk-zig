@@ -38,7 +38,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableSage
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DisableSagemakerServicecatalogPortfolioInput, config: *aws.Config) !aws.http.Request {
     _ = input;
-    const endpoint = try config.getEndpointForService("sagemaker", "SageMaker", allocator);
+    const endpoint = try config.getEndpointForService("api.sagemaker", "SageMaker", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

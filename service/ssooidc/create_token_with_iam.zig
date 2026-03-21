@@ -189,7 +189,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateToken
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ssooidc");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "sso-oauth");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -206,7 +206,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateToken
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: CreateTokenWithIAMInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ssooidc", "SSO OIDC", allocator);
+    const endpoint = try config.getEndpointForService("oidc", "SSO OIDC", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -50,7 +50,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartHumanL
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "sagemakera2iruntime");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "sagemaker");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -67,7 +67,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartHumanL
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: StartHumanLoopInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("sagemakera2iruntime", "SageMaker A2I Runtime", allocator);
+    const endpoint = try config.getEndpointForService("a2i-runtime.sagemaker", "SageMaker A2I Runtime", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

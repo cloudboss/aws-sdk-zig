@@ -87,7 +87,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateBillE
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "bcmpricingcalculator");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "bcm-pricing-calculator");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -104,7 +104,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateBillE
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateBillEstimateInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("bcmpricingcalculator", "BCM Pricing Calculator", allocator);
+    const endpoint = try config.getEndpointForService("bcm-pricing-calculator", "BCM Pricing Calculator", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

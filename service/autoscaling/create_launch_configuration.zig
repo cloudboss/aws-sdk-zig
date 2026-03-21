@@ -257,74 +257,74 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchConfigurati
             if (item.ebs) |sv_1| {
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.Ebs.DeleteOnTermination=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.delete_on_termination) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.Ebs.DeleteOnTermination=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_2) "true" else "false");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.Ebs.Encrypted=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.encrypted) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.Ebs.Encrypted=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_2) "true" else "false");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.Ebs.Iops=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.iops) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.Ebs.Iops=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.Ebs.SnapshotId=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.snapshot_id) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.Ebs.SnapshotId=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.Ebs.Throughput=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.throughput) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.Ebs.Throughput=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.Ebs.VolumeSize=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.volume_size) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.Ebs.VolumeSize=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
                     }
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.Ebs.VolumeType=", .{n}) catch continue;
-                    try body_buf.appendSlice(allocator, field_prefix);
                     if (sv_1.volume_type) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.Ebs.VolumeType=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                     }
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.NoDevice=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.no_device) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.NoDevice=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_1) "true" else "false");
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.VirtualName=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.virtual_name) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&BlockDeviceMappings.member.{d}.VirtualName=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

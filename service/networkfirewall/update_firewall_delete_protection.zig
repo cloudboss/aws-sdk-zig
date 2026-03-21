@@ -98,7 +98,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFirew
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "networkfirewall");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "network-firewall");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -115,7 +115,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFirew
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateFirewallDeleteProtectionInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("networkfirewall", "Network Firewall", allocator);
+    const endpoint = try config.getEndpointForService("network-firewall", "Network Firewall", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -47,7 +47,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListIdentit
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "workspacesweb");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "workspaces-web");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -64,7 +64,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListIdentit
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListIdentityProvidersInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("workspacesweb", "WorkSpaces Web", allocator);
+    const endpoint = try config.getEndpointForService("workspaces-web", "WorkSpaces Web", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

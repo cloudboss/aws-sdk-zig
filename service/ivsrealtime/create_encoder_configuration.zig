@@ -52,7 +52,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateEncod
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ivsrealtime");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ivs");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();

@@ -57,7 +57,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateChann
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "partnercentralchannel");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "partnercentral");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -74,7 +74,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateChann
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: CreateChannelHandshakeInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("partnercentralchannel", "PartnerCentral Channel", allocator);
+    const endpoint = try config.getEndpointForService("partnercentral-channel", "PartnerCentral Channel", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

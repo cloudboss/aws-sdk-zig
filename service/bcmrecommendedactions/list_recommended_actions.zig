@@ -48,7 +48,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRecomme
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "bcmrecommendedactions");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "bcm-recommended-actions");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -65,7 +65,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRecomme
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListRecommendedActionsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("bcmrecommendedactions", "BCM Recommended Actions", allocator);
+    const endpoint = try config.getEndpointForService("bcm-recommended-actions", "BCM Recommended Actions", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

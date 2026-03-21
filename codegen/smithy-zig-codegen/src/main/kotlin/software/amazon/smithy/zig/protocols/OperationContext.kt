@@ -59,7 +59,9 @@ data class OperationContext(
         return when (typeName) {
             "[]const u8" -> "$accessor.$fieldName"
             "bool" -> "if ($accessor.$fieldName) \"true\" else \"false\""
-            "i32", "i64", "i16", "i8" ->
+            "i8", "i16", "i32", "i64", "i128" ->
+                "std.fmt.allocPrint(allocator, \"{d}\", .{$accessor.$fieldName}) catch \"\""
+            "f32", "f64", "f128" ->
                 "std.fmt.allocPrint(allocator, \"{d}\", .{$accessor.$fieldName}) catch \"\""
             else -> "$accessor.$fieldName"
         }
@@ -71,7 +73,9 @@ data class OperationContext(
         return when (typeName) {
             "[]const u8" -> varName
             "bool" -> "if ($varName) \"true\" else \"false\""
-            "i32", "i64", "i16", "i8" ->
+            "i8", "i16", "i32", "i64", "i128" ->
+                "std.fmt.allocPrint(allocator, \"{d}\", .{$varName}) catch \"\""
+            "f32", "f64", "f128" ->
                 "std.fmt.allocPrint(allocator, \"{d}\", .{$varName}) catch \"\""
             else -> varName
         }

@@ -46,7 +46,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAssetCon
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "managedblockchainquery");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "managedblockchain-query");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -63,7 +63,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAssetCon
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetAssetContractInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("managedblockchainquery", "ManagedBlockchain Query", allocator);
+    const endpoint = try config.getEndpointForService("managedblockchain-query", "ManagedBlockchain Query", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

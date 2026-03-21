@@ -89,7 +89,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExecutePolicyInput, con
     }
     if (input.breach_threshold) |v| {
         try body_buf.appendSlice(allocator, "&BreachThreshold=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.honor_cooldown) |v| {
         try body_buf.appendSlice(allocator, "&HonorCooldown=");
@@ -97,7 +97,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExecutePolicyInput, con
     }
     if (input.metric_value) |v| {
         try body_buf.appendSlice(allocator, "&MetricValue=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     try body_buf.appendSlice(allocator, "&PolicyName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.policy_name);

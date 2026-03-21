@@ -67,7 +67,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartComman
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "iotjobsdataplane");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "iot-jobs-data");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -84,7 +84,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartComman
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: StartCommandExecutionInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("iotjobsdataplane", "IoT Jobs Data Plane", allocator);
+    const endpoint = try config.getEndpointForService("data.jobs.iot", "IoT Jobs Data Plane", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

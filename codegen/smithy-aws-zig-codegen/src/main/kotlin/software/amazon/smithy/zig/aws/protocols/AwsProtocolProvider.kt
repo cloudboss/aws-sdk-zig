@@ -12,6 +12,8 @@ class AwsProtocolProvider : AwsZigIntegration {
         val serviceTrait = model.expectShape(settings.service)
             .getTrait(ServiceTrait::class.java)
         settings.sdkId = serviceTrait.map { it.sdkId }.orElse(settings.packageName)
+        settings.endpointPrefix = serviceTrait.map { it.endpointPrefix }.orElse(settings.packageName)
+        settings.signingName = serviceTrait.map { it.arnNamespace }.orElse(settings.packageName)
         return model
     }
 

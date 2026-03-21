@@ -74,11 +74,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBShardGroupInput
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.db_shard_group_identifier);
     if (input.max_acu) |v| {
         try body_buf.appendSlice(allocator, "&MaxACU=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.min_acu) |v| {
         try body_buf.appendSlice(allocator, "&MinACU=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

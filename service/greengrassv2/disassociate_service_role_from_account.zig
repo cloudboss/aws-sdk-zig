@@ -28,7 +28,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: Disassociat
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "greengrassv2");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "greengrass");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -46,7 +46,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: Disassociat
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DisassociateServiceRoleFromAccountInput, config: *aws.Config) !aws.http.Request {
     _ = input;
-    const endpoint = try config.getEndpointForService("greengrassv2", "GreengrassV2", allocator);
+    const endpoint = try config.getEndpointForService("greengrass", "GreengrassV2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

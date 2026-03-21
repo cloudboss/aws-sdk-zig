@@ -62,7 +62,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSipRu
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "chimesdkvoice");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "chime");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -79,7 +79,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSipRu
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: CreateSipRuleInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("chimesdkvoice", "Chime SDK Voice", allocator);
+    const endpoint = try config.getEndpointForService("voice-chime", "Chime SDK Voice", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

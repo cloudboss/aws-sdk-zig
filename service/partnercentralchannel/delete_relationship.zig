@@ -39,7 +39,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRelat
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "partnercentralchannel");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "partnercentral");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -56,7 +56,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRelat
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DeleteRelationshipInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("partnercentralchannel", "PartnerCentral Channel", allocator);
+    const endpoint = try config.getEndpointForService("partnercentral-channel", "PartnerCentral Channel", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

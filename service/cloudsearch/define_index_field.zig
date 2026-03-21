@@ -107,7 +107,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DefineIndexFieldInput, 
     if (input.index_field.double_array_options) |sv| {
         if (sv.default_value) |sv2| {
             try body_buf.appendSlice(allocator, "&IndexField.DoubleArrayOptions.DefaultValue=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
         }
         if (sv.facet_enabled) |sv2| {
             try body_buf.appendSlice(allocator, "&IndexField.DoubleArrayOptions.FacetEnabled=");
@@ -129,7 +129,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DefineIndexFieldInput, 
     if (input.index_field.double_options) |sv| {
         if (sv.default_value) |sv2| {
             try body_buf.appendSlice(allocator, "&IndexField.DoubleOptions.DefaultValue=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
         }
         if (sv.facet_enabled) |sv2| {
             try body_buf.appendSlice(allocator, "&IndexField.DoubleOptions.FacetEnabled=");

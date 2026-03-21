@@ -47,7 +47,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateQA
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: AssociateQAppWithUserInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("qapps", "QApps", allocator);
+    const endpoint = try config.getEndpointForService("data.qapps", "QApps", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

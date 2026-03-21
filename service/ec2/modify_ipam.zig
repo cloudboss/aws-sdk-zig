@@ -107,9 +107,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyIpamInput, config
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddOperatingRegion.{d}.RegionName=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.region_name) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AddOperatingRegion.{d}.RegionName=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
@@ -138,9 +138,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyIpamInput, config
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveOperatingRegion.{d}.RegionName=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.region_name) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&RemoveOperatingRegion.{d}.RegionName=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

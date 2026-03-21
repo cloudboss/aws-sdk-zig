@@ -52,7 +52,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTokensI
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "licensemanager");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "license-manager");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -69,7 +69,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTokensI
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListTokensInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("licensemanager", "License Manager", allocator);
+    const endpoint = try config.getEndpointForService("license-manager", "License Manager", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

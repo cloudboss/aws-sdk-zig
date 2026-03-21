@@ -54,7 +54,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLifec
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "opensearchserverless");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "aoss");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -71,7 +71,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLifec
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateLifecyclePolicyInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("opensearchserverless", "OpenSearchServerless", allocator);
+    const endpoint = try config.getEndpointForService("aoss", "OpenSearchServerless", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

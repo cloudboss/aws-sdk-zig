@@ -80,7 +80,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDeployme
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "marketplacedeployment");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "aws-marketplace");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -97,7 +97,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDeployme
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: PutDeploymentParameterInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("marketplacedeployment", "Marketplace Deployment", allocator);
+    const endpoint = try config.getEndpointForService("deployment-marketplace", "Marketplace Deployment", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

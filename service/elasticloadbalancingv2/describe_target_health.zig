@@ -34,7 +34,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTar
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "elasticloadbalancingv2");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "elasticloadbalancing");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -51,7 +51,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTar
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DescribeTargetHealthInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("elasticloadbalancingv2", "Elastic Load Balancing v2", allocator);
+    const endpoint = try config.getEndpointForService("elasticloadbalancing", "Elastic Load Balancing v2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -66,7 +66,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeTargetHealthInp
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Include.member.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
-            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
         }
     }
     try body_buf.appendSlice(allocator, "&TargetGroupArn=");
@@ -76,9 +76,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeTargetHealthInp
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Targets.member.{d}.AvailabilityZone=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.availability_zone) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Targets.member.{d}.AvailabilityZone=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
@@ -90,17 +90,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeTargetHealthInp
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Targets.member.{d}.Port=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.port) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Targets.member.{d}.Port=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Targets.member.{d}.QuicServerId=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.quic_server_id) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Targets.member.{d}.QuicServerId=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

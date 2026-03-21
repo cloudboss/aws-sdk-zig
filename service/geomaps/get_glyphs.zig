@@ -138,7 +138,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetGlyphsIn
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "geomaps");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "geo-maps");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -155,7 +155,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetGlyphsIn
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetGlyphsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("geomaps", "Geo Maps", allocator);
+    const endpoint = try config.getEndpointForService("geo-maps", "Geo Maps", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

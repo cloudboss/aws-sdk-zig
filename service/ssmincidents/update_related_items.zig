@@ -39,7 +39,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRelat
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ssmincidents");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ssm-incidents");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -56,7 +56,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRelat
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRelatedItemsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ssmincidents", "SSM Incidents", allocator);
+    const endpoint = try config.getEndpointForService("ssm-incidents", "SSM Incidents", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -51,7 +51,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListGateway
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "backupgateway");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "backup-gateway");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -68,7 +68,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListGateway
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListGatewaysInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("backupgateway", "Backup Gateway", allocator);
+    const endpoint = try config.getEndpointForService("backup-gateway", "Backup Gateway", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

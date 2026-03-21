@@ -56,7 +56,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAllowed
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListAllowedNodeTypeUpdatesInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("memorydb", "MemoryDB", allocator);
+    const endpoint = try config.getEndpointForService("memory-db", "MemoryDB", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

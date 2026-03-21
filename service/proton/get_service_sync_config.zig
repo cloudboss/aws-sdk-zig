@@ -34,7 +34,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetServiceS
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "proton");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "awsproton20200720");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();

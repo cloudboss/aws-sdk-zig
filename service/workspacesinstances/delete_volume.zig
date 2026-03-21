@@ -26,7 +26,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVolum
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "workspacesinstances");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "workspaces-instances");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -43,7 +43,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVolum
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DeleteVolumeInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("workspacesinstances", "Workspaces Instances", allocator);
+    const endpoint = try config.getEndpointForService("workspaces-instances", "Workspaces Instances", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

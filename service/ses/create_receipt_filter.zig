@@ -43,7 +43,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateRecei
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: CreateReceiptFilterInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ses", "SES", allocator);
+    const endpoint = try config.getEndpointForService("email", "SES", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

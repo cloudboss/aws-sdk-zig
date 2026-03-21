@@ -40,7 +40,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: Unsubscribe
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cognitosync");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cognito-sync");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -57,7 +57,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: Unsubscribe
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UnsubscribeFromDatasetInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cognitosync", "Cognito Sync", allocator);
+    const endpoint = try config.getEndpointForService("cognito-sync", "Cognito Sync", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

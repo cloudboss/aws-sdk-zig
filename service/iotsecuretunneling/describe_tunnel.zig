@@ -33,7 +33,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTun
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "iotsecuretunneling");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "iotsecuredtunneling");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -50,7 +50,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTun
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DescribeTunnelInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("iotsecuretunneling", "IoTSecureTunneling", allocator);
+    const endpoint = try config.getEndpointForService("api.tunneling.iot", "IoTSecureTunneling", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -42,7 +42,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateQu
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "mturk");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "mturk-requester");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -59,7 +59,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateQu
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: AssociateQualificationWithWorkerInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("mturk", "MTurk", allocator);
+    const endpoint = try config.getEndpointForService("mturk-requester", "MTurk", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

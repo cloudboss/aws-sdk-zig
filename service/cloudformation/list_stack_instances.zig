@@ -120,17 +120,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListStackInstancesInput
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.member.{d}.Name=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.name) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.member.{d}.Name=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.member.{d}.Values=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.values) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.member.{d}.Values=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

@@ -44,7 +44,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDefau
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "pinpointsmsvoicev2");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "sms-voice");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -61,7 +61,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDefau
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DeleteDefaultMessageTypeInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("pinpointsmsvoicev2", "Pinpoint SMS Voice V2", allocator);
+    const endpoint = try config.getEndpointForService("sms-voice", "Pinpoint SMS Voice V2", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

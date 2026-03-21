@@ -63,7 +63,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GenerateCar
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "paymentcryptographydata");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "paymentcryptographydataplane");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -80,7 +80,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GenerateCar
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GenerateCardValidationDataInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("paymentcryptographydata", "Payment Cryptography Data", allocator);
+    const endpoint = try config.getEndpointForService("dataplane.payment-cryptography", "Payment Cryptography Data", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

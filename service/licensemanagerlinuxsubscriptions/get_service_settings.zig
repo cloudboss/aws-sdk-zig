@@ -50,7 +50,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetServiceS
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "licensemanagerlinuxsubscriptions");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "license-manager-linux-subscriptions");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -68,7 +68,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetServiceS
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetServiceSettingsInput, config: *aws.Config) !aws.http.Request {
     _ = input;
-    const endpoint = try config.getEndpointForService("licensemanagerlinuxsubscriptions", "License Manager Linux Subscriptions", allocator);
+    const endpoint = try config.getEndpointForService("license-manager-linux-subscriptions", "License Manager Linux Subscriptions", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

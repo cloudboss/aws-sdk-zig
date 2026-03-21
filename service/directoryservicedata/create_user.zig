@@ -89,7 +89,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateUserI
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "directoryservicedata");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ds");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -106,7 +106,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateUserI
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: CreateUserInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("directoryservicedata", "Directory Service Data", allocator);
+    const endpoint = try config.getEndpointForService("ds-data", "Directory Service Data", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

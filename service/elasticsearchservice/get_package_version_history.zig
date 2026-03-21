@@ -48,7 +48,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetPackageV
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "elasticsearchservice");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "es");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -65,7 +65,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetPackageV
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetPackageVersionHistoryInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("elasticsearchservice", "Elasticsearch Service", allocator);
+    const endpoint = try config.getEndpointForService("es", "Elasticsearch Service", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

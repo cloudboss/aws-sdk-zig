@@ -32,7 +32,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetConnecti
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ssmguiconnect");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ssm-guiconnect");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -50,7 +50,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetConnecti
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetConnectionRecordingPreferencesInput, config: *aws.Config) !aws.http.Request {
     _ = input;
-    const endpoint = try config.getEndpointForService("ssmguiconnect", "SSM GuiConnect", allocator);
+    const endpoint = try config.getEndpointForService("ssm-guiconnect", "SSM GuiConnect", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

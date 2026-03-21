@@ -46,7 +46,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutEventsIn
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "personalizeevents");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "personalize");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -63,7 +63,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutEventsIn
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: PutEventsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("personalizeevents", "Personalize Events", allocator);
+    const endpoint = try config.getEndpointForService("personalize-events", "Personalize Events", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

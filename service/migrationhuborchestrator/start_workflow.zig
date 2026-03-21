@@ -49,7 +49,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartWorkfl
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "migrationhuborchestrator");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "migrationhub-orchestrator");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -66,7 +66,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartWorkfl
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: StartWorkflowInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("migrationhuborchestrator", "MigrationHubOrchestrator", allocator);
+    const endpoint = try config.getEndpointForService("migrationhub-orchestrator", "MigrationHubOrchestrator", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

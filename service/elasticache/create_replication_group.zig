@@ -684,9 +684,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
                 if (sv_1.cloud_watch_logs_details) |sv_2| {
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.DestinationDetails.CloudWatchLogsDetails.LogGroup=", .{n}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (sv_2.log_group) |fv_3| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.DestinationDetails.CloudWatchLogsDetails.LogGroup=", .{n}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                         }
                     }
@@ -694,9 +694,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
                 if (sv_1.kinesis_firehose_details) |sv_2| {
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.DestinationDetails.KinesisFirehoseDetails.DeliveryStream=", .{n}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (sv_2.delivery_stream) |fv_3| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.DestinationDetails.KinesisFirehoseDetails.DeliveryStream=", .{n}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                         }
                     }
@@ -704,33 +704,33 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.DestinationType=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.destination_type) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.DestinationType=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.Enabled=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.enabled) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.Enabled=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_1) "true" else "false");
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.LogFormat=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.log_format) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.LogFormat=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.LogType=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.log_type) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LogDeliveryConfigurations.LogDeliveryConfigurationRequest.{d}.LogType=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
@@ -749,25 +749,25 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NodeGroupConfiguration.NodeGroupConfiguration.{d}.NodeGroupId=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.node_group_id) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NodeGroupConfiguration.NodeGroupConfiguration.{d}.NodeGroupId=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NodeGroupConfiguration.NodeGroupConfiguration.{d}.PrimaryAvailabilityZone=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.primary_availability_zone) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NodeGroupConfiguration.NodeGroupConfiguration.{d}.PrimaryAvailabilityZone=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NodeGroupConfiguration.NodeGroupConfiguration.{d}.PrimaryOutpostArn=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.primary_outpost_arn) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NodeGroupConfiguration.NodeGroupConfiguration.{d}.PrimaryOutpostArn=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
@@ -784,9 +784,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NodeGroupConfiguration.NodeGroupConfiguration.{d}.ReplicaCount=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.replica_count) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NodeGroupConfiguration.NodeGroupConfiguration.{d}.ReplicaCount=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
                 }
             }
@@ -803,9 +803,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NodeGroupConfiguration.NodeGroupConfiguration.{d}.Slots=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.slots) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&NodeGroupConfiguration.NodeGroupConfiguration.{d}.Slots=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
@@ -891,17 +891,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.Tag.{d}.Key=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.key) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.Tag.{d}.Key=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.Tag.{d}.Value=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.value) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.Tag.{d}.Value=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

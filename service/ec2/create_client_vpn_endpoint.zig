@@ -212,9 +212,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateClientVpnEndpoint
         if (item.active_directory) |sv_1| {
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Authentication.{d}.ActiveDirectory.DirectoryId=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.directory_id) |fv_2| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Authentication.{d}.ActiveDirectory.DirectoryId=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                 }
             }
@@ -222,17 +222,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateClientVpnEndpoint
         if (item.federated_authentication) |sv_1| {
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Authentication.{d}.FederatedAuthentication.SAMLProviderArn=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.saml_provider_arn) |fv_2| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Authentication.{d}.FederatedAuthentication.SAMLProviderArn=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                 }
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Authentication.{d}.FederatedAuthentication.SelfServiceSAMLProviderArn=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.self_service_saml_provider_arn) |fv_2| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Authentication.{d}.FederatedAuthentication.SelfServiceSAMLProviderArn=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                 }
             }
@@ -240,18 +240,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateClientVpnEndpoint
         if (item.mutual_authentication) |sv_1| {
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Authentication.{d}.MutualAuthentication.ClientRootCertificateChainArn=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (sv_1.client_root_certificate_chain_arn) |fv_2| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Authentication.{d}.MutualAuthentication.ClientRootCertificateChainArn=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                 }
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Authentication.{d}.Type=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.@"type") |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Authentication.{d}.Type=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
             }
         }
@@ -355,9 +355,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateClientVpnEndpoint
             const n = idx + 1;
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.ResourceType=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.resource_type) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.ResourceType=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
                 }
             }
@@ -366,17 +366,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateClientVpnEndpoint
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.key) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{n, n_1}) catch continue;
-                        try body_buf.appendSlice(allocator, field_prefix);
                         if (item_1.value) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
                     }

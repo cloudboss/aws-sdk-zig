@@ -56,7 +56,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCodeR
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "codegurureviewer");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "codeguru-reviewer");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -73,7 +73,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCodeR
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: CreateCodeReviewInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("codegurureviewer", "CodeGuru Reviewer", allocator);
+    const endpoint = try config.getEndpointForService("codeguru-reviewer", "CodeGuru Reviewer", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

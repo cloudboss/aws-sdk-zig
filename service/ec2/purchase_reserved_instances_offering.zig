@@ -86,7 +86,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PurchaseReservedInstanc
     if (input.limit_price) |v| {
         if (v.amount) |sv| {
             try body_buf.appendSlice(allocator, "&LimitPrice.Amount=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
         if (v.currency_code) |sv| {
             try body_buf.appendSlice(allocator, "&LimitPrice.CurrencyCode=");

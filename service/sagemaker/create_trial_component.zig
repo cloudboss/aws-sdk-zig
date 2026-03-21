@@ -98,7 +98,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTrial
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: CreateTrialComponentInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("sagemaker", "SageMaker", allocator);
+    const endpoint = try config.getEndpointForService("api.sagemaker", "SageMaker", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

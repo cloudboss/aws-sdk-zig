@@ -34,7 +34,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetMet
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "sagemakermetrics");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "sagemaker");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -51,7 +51,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetMet
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetMetricsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("sagemakermetrics", "SageMaker Metrics", allocator);
+    const endpoint = try config.getEndpointForService("metrics.sagemaker", "SageMaker Metrics", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -86,7 +86,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSlotT
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "lexmodelbuildingservice");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "lex");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -103,7 +103,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSlotT
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: CreateSlotTypeVersionInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("lexmodelbuildingservice", "Lex Model Building Service", allocator);
+    const endpoint = try config.getEndpointForService("models.lex", "Lex Model Building Service", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

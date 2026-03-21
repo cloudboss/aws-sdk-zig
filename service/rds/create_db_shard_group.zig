@@ -113,10 +113,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBShardGroupInput
     try body_buf.appendSlice(allocator, "&DBShardGroupIdentifier=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.db_shard_group_identifier);
     try body_buf.appendSlice(allocator, "&MaxACU=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, input.max_acu);
+    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.max_acu}) catch "");
     if (input.min_acu) |v| {
         try body_buf.appendSlice(allocator, "&MinACU=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.publicly_accessible) |v| {
         try body_buf.appendSlice(allocator, "&PubliclyAccessible=");

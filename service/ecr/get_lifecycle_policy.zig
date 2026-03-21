@@ -67,7 +67,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetLifecycl
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetLifecyclePolicyInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ecr", "ECR", allocator);
+    const endpoint = try config.getEndpointForService("api.ecr", "ECR", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -110,7 +110,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetStreamIn
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "keyspacesstreams");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cassandra");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -127,7 +127,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetStreamIn
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetStreamInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("keyspacesstreams", "KeyspacesStreams", allocator);
+    const endpoint = try config.getEndpointForService("cassandra-streams", "KeyspacesStreams", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

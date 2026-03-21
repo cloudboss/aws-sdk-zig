@@ -124,7 +124,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetRecommen
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "personalizeruntime");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "personalize");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -141,7 +141,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetRecommen
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetRecommendationsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("personalizeruntime", "Personalize Runtime", allocator);
+    const endpoint = try config.getEndpointForService("personalize-runtime", "Personalize Runtime", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

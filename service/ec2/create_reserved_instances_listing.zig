@@ -79,25 +79,25 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReservedInstances
         const n = idx + 1;
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PriceSchedules.{d}.CurrencyCode=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.currency_code) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PriceSchedules.{d}.CurrencyCode=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PriceSchedules.{d}.Price=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.price) |fv_1| {
-                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PriceSchedules.{d}.Price=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
             }
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PriceSchedules.{d}.Term=", .{n}) catch continue;
-            try body_buf.appendSlice(allocator, field_prefix);
             if (item.term) |fv_1| {
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PriceSchedules.{d}.Term=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
             }
         }

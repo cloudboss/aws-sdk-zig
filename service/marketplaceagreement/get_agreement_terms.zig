@@ -46,7 +46,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAgreemen
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "marketplaceagreement");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "awsmpcommerceservice_v20200301");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -63,7 +63,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetAgreemen
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetAgreementTermsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("marketplaceagreement", "Marketplace Agreement", allocator);
+    const endpoint = try config.getEndpointForService("agreement-marketplace", "Marketplace Agreement", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -35,7 +35,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSparq
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "neptunedata");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "neptune-db");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -53,7 +53,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSparq
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DeleteSparqlStatisticsInput, config: *aws.Config) !aws.http.Request {
     _ = input;
-    const endpoint = try config.getEndpointForService("neptunedata", "neptunedata", allocator);
+    const endpoint = try config.getEndpointForService("neptune-db", "neptunedata", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

@@ -511,11 +511,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBClusterFromS3I
     if (input.serverless_v2_scaling_configuration) |v| {
         if (v.max_capacity) |sv| {
             try body_buf.appendSlice(allocator, "&ServerlessV2ScalingConfiguration.MaxCapacity=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
         if (v.min_capacity) |sv| {
             try body_buf.appendSlice(allocator, "&ServerlessV2ScalingConfiguration.MinCapacity=");
-            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
         if (v.seconds_until_auto_pause) |sv| {
             try body_buf.appendSlice(allocator, "&ServerlessV2ScalingConfiguration.SecondsUntilAutoPause=");

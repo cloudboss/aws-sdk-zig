@@ -82,7 +82,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeArc
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "eventbridge");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "events");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -99,7 +99,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeArc
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DescribeArchiveInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("eventbridge", "EventBridge", allocator);
+    const endpoint = try config.getEndpointForService("events", "EventBridge", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

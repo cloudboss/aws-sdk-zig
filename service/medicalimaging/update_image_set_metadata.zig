@@ -84,7 +84,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateImage
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "medicalimaging");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "medical-imaging");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -101,7 +101,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateImage
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateImageSetMetadataInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("medicalimaging", "Medical Imaging", allocator);
+    const endpoint = try config.getEndpointForService("medical-imaging", "Medical Imaging", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

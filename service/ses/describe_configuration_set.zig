@@ -64,7 +64,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeCon
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: DescribeConfigurationSetInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ses", "SES", allocator);
+    const endpoint = try config.getEndpointForService("email", "SES", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -79,7 +79,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeConfigurationSe
             var prefix_buf: [256]u8 = undefined;
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ConfigurationSetAttributeNames.member.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
-            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
         }
     }
     try body_buf.appendSlice(allocator, "&ConfigurationSetName=");

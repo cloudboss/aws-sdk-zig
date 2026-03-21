@@ -18,7 +18,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResour
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ssmcontacts");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ssm-contacts");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -35,7 +35,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResour
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: UntagResourceInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("ssmcontacts", "SSM Contacts", allocator);
+    const endpoint = try config.getEndpointForService("ssm-contacts", "SSM Contacts", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");

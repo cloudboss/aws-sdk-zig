@@ -100,7 +100,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMetrics
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cloudwatch");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "monitoring");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -117,7 +117,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMetrics
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListMetricsInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("cloudwatch", "CloudWatch", allocator);
+    const endpoint = try config.getEndpointForService("monitoring", "CloudWatch", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
@@ -137,9 +137,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListMetricsInput, confi
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Dimensions.member.{d}.Value=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
                 if (item.value) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Dimensions.member.{d}.Value=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
                 }
             }

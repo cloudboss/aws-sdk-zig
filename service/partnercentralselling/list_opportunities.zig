@@ -104,7 +104,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOpportu
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(alloc);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "partnercentralselling");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "partnercentral");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -121,7 +121,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListOpportu
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ListOpportunitiesInput, config: *aws.Config) !aws.http.Request {
-    const endpoint = try config.getEndpointForService("partnercentralselling", "PartnerCentral Selling", allocator);
+    const endpoint = try config.getEndpointForService("partnercentral-selling", "PartnerCentral Selling", allocator);
 
     const host = aws.url.parseHost(endpoint);
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
