@@ -1,0 +1,55 @@
+
+=== AWS SDK for Zig - Live Integration Tests ===
+Account: 256008164056
+Region: us-east-1
+
+--- Running: iam ---
+  Building and running test...
+  PASS  test: getRole returns role metadata (75.1ms)
+  PASS  test: listRoles with path prefix returns created role (34.5ms)
+  PASS  test: createPolicy creates a policy (71.0ms)
+  PASS  test: attachRolePolicy attaches to role (93.4ms)
+  PASS  test: listAttachedRolePolicies includes attached policy (72.5ms)
+  PASS  test: detachRolePolicy removes from role (128.6ms)
+  PASS  test: deletePolicy removes the policy (132.0ms)
+  PASS  test: createUser and deleteUser (132.7ms)
+  PASS  test: listPolicies returns policies (104.9ms)
+
+9 passed in 1.4s
+  PASS: iam
+
+=== Results ===
+Passed: 1
+Failed: 0
+All tests passed.
+Running live cleanup...
+found: arn:aws:ec2:us-east-1:256008164056:elastic-ip/eipalloc-0fcf850d776e28008
+WARN: unknown arn type: arn:aws:ec2:us-east-1:256008164056:elastic-ip/eipalloc-0fcf850d776e28008
+found: arn:aws:ec2:us-east-1:256008164056:subnet/subnet-07974365336f428a2
+WARN: unknown arn type: arn:aws:ec2:us-east-1:256008164056:subnet/subnet-07974365336f428a2
+found: arn:aws:ec2:us-east-1:256008164056:subnet/subnet-08f406f9178edd7c0
+WARN: unknown arn type: arn:aws:ec2:us-east-1:256008164056:subnet/subnet-08f406f9178edd7c0
+found: arn:aws:ec2:us-east-1:256008164056:volume/vol-0c62093d56fd3e57b
+found: arn:aws:ec2:us-east-1:256008164056:volume/vol-0021c60c1f3bfbab4
+found: arn:aws:ec2:us-east-1:256008164056:volume/vol-04ec2a7a32a40db6e
+found: arn:aws:ec2:us-east-1:256008164056:vpc/vpc-07078eea744ec53ea
+found: arn:aws:ec2:us-east-1:256008164056:vpc/vpc-0fa91a44fe2393df7
+found: arn:aws:ec2:us-east-1:256008164056:instance/i-09a2ee95a000c72cc
+found: arn:aws:ec2:us-east-1:256008164056:volume/vol-040b1a34d3bafe4d0
+found: arn:aws:ec2:us-east-1:256008164056:vpc/vpc-0fcef7fc13a45a674
+found: arn:aws:ec2:us-east-1:256008164056:subnet/subnet-02d8f3f100bb6dcea
+WARN: unknown arn type: arn:aws:ec2:us-east-1:256008164056:subnet/subnet-02d8f3f100bb6dcea
+found: arn:aws:ec2:us-east-1:256008164056:volume/vol-00f1a1a2f58f9e609
+found: arn:aws:ec2:us-east-1:256008164056:elastic-ip/eipalloc-0ee395996ff918047
+WARN: unknown arn type: arn:aws:ec2:us-east-1:256008164056:elastic-ip/eipalloc-0ee395996ff918047
+found: arn:aws:ec2:us-east-1:256008164056:elastic-ip/eipalloc-0ae89be4ee664553c
+WARN: unknown arn type: arn:aws:ec2:us-east-1:256008164056:elastic-ip/eipalloc-0ae89be4ee664553c
+found: arn:aws:ec2:us-east-1:256008164056:instance/i-0371085e67f5b5abb
+found: arn:aws:ec2:us-east-1:256008164056:instance/i-0dddc7a4c24541668
+found: arn:aws:ec2:us-east-1:256008164056:instance/i-056c947f932e9c14c
+found: arn:aws:ec2:us-east-1:256008164056:instance/i-08c440be081b5c145
+found: arn:aws:ec2:us-east-1:256008164056:subnet/subnet-041adc459a2c1ac37
+WARN: unknown arn type: arn:aws:ec2:us-east-1:256008164056:subnet/subnet-041adc459a2c1ac37
+found: arn:aws:ec2:us-east-1:256008164056:volume/vol-0ace3cc8faf7fdb0c
+found: arn:aws:ec2:us-east-1:256008164056:vpc/vpc-0ab344aa6831ecc97
+Found 22 resources, deleted 5, failed 10
