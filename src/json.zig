@@ -50,6 +50,11 @@ fn parseValue(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError!
                     return parseArray(ptr.child, scanner, alloc);
                 }
             },
+            .one => {
+                const p = try alloc.create(ptr.child);
+                p.* = try parseValue(ptr.child, scanner, alloc);
+                return p;
+            },
             else => @compileError("unsupported pointer type: " ++ @typeName(T)),
         },
         .int => return parseInt(T, scanner),
@@ -393,6 +398,7 @@ pub fn writeValue(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayL
                     try writeArray(ptr.child, value, alloc, buf);
                 }
             },
+            .one => try writeValue(ptr.child, value.*, alloc, buf),
             else => @compileError("unsupported pointer type: " ++ @typeName(T)),
         },
         .int => {

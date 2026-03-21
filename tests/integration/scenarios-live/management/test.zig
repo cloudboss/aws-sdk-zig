@@ -137,8 +137,8 @@ test "costexplorer getCostAndUsage" {
         arena.allocator(),
         .{
             .time_period = .{
-                .start = "2024-01-01",
-                .end = "2024-01-02",
+                .start = "2026-01-01",
+                .end = "2026-01-02",
             },
             .granularity = .daily,
             .metrics = &.{"UnblendedCost"},
