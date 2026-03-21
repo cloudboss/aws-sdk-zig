@@ -1,15 +1,19 @@
 const std = @import("std");
 const aws = @import("aws");
+const ec2 = @import("ec2");
 
 const elb = @import("elasticloadbalancing");
 
 var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
 var shared_client: elb.Client = undefined;
+var shared_ec2_client: ec2.Client = undefined;
 var shared_cfg: aws.Config = undefined;
 var shared_init = false;
 
 var lb_name_buf: [32]u8 = undefined;
 var lb_name: []const u8 = "";
+var subnet_id_buf: [64]u8 = undefined;
+var subnet_id: []const u8 = "";
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
@@ -18,12 +22,29 @@ test "zest.beforeAll" {
 
     shared_cfg = try aws.Config.load(allocator, .{});
     shared_client = elb.Client.init(allocator, &shared_cfg);
+    shared_ec2_client = ec2.Client.init(allocator, &shared_cfg);
 
     lb_name = try std.fmt.bufPrint(
         &lb_name_buf,
         "sdk-zig-live-elb-{d}",
-        .{std.time.timestamp() % 100000},
+        .{@mod(std.time.timestamp(), 100000)},
     );
+
+    const describe_subnets_result = try shared_ec2_client.describeSubnets(
+        arena.allocator(),
+        .{ .filters = &.{.{
+            .name = "state",
+            .values = &.{"available"},
+        }} },
+        .{},
+    );
+    const subnets = describe_subnets_result.subnets orelse
+        return error.MissingSubnets;
+    if (subnets.len == 0) return error.MissingSubnets;
+    const discovered_subnet_id = subnets[0].subnet_id orelse
+        return error.MissingSubnetId;
+    @memcpy(subnet_id_buf[0..discovered_subnet_id.len], discovered_subnet_id);
+    subnet_id = subnet_id_buf[0..discovered_subnet_id.len];
 
     _ = try shared_client.createLoadBalancer(
         arena.allocator(),
@@ -35,7 +56,8 @@ test "zest.beforeAll" {
                 .instance_protocol = "HTTP",
                 .instance_port = 80,
             }},
-            .availability_zones = &.{"us-east-1a"},
+            .subnets = &.{subnet_id},
+            .scheme = "internal",
         },
         .{},
     );
@@ -77,8 +99,8 @@ test "zest.afterAll" {
             .{},
         ) catch {};
     }
-
     shared_client.deinit();
+    shared_ec2_client.deinit();
     shared_cfg.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
