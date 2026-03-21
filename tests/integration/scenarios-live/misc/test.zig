@@ -4,7 +4,7 @@ const aws = @import("aws");
 const amplify = @import("amplify");
 const appstream = @import("appstream");
 const datasync = @import("datasync");
-const dms = @import("dms");
+const databasemigrationservice = @import("databasemigrationservice");
 const greengrass = @import("greengrass");
 const iot = @import("iot");
 const iotevents = @import("iotevents");
@@ -123,7 +123,10 @@ test "transfer listServers" {
 test "dms describeReplicationInstances" {
     var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
     defer arena.deinit();
-    var client = dms.Client.init(std.testing.allocator, &shared_cfg.?);
+    var client = databasemigrationservice.Client.init(
+        std.testing.allocator,
+        &shared_cfg.?,
+    );
     defer client.deinit();
     _ = client.describeReplicationInstances(
         arena.allocator(),
