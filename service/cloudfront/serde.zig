@@ -8138,26 +8138,18 @@ pub fn serializeLambdaFunctionAssociations(allocator: std.mem.Allocator, buf: *s
 }
 
 pub fn serializeLoggingConfig(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: LoggingConfig) !void {
-    if (value.bucket) |v| {
-        try buf.appendSlice(allocator, "<Bucket>");
-        try aws.xml.appendXmlEscaped(allocator, buf, v);
-        try buf.appendSlice(allocator, "</Bucket>");
-    }
-    if (value.enabled) |v| {
-        try buf.appendSlice(allocator, "<Enabled>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</Enabled>");
-    }
-    if (value.include_cookies) |v| {
-        try buf.appendSlice(allocator, "<IncludeCookies>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</IncludeCookies>");
-    }
-    if (value.prefix) |v| {
-        try buf.appendSlice(allocator, "<Prefix>");
-        try aws.xml.appendXmlEscaped(allocator, buf, v);
-        try buf.appendSlice(allocator, "</Prefix>");
-    }
+    try buf.appendSlice(allocator, "<Bucket>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.bucket);
+    try buf.appendSlice(allocator, "</Bucket>");
+    try buf.appendSlice(allocator, "<Enabled>");
+    try buf.appendSlice(allocator, if (value.enabled) "true" else "false");
+    try buf.appendSlice(allocator, "</Enabled>");
+    try buf.appendSlice(allocator, "<IncludeCookies>");
+    try buf.appendSlice(allocator, if (value.include_cookies) "true" else "false");
+    try buf.appendSlice(allocator, "</IncludeCookies>");
+    try buf.appendSlice(allocator, "<Prefix>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.prefix);
+    try buf.appendSlice(allocator, "</Prefix>");
 }
 
 pub fn serializeManagedCertificateRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ManagedCertificateRequest) !void {
@@ -9139,11 +9131,9 @@ pub fn serializeViewerCertificate(allocator: std.mem.Allocator, buf: *std.ArrayL
 }
 
 pub fn serializeViewerMtlsConfig(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ViewerMtlsConfig) !void {
-    if (value.mode) |v| {
-        try buf.appendSlice(allocator, "<Mode>");
-        try buf.appendSlice(allocator, v.wireName());
-        try buf.appendSlice(allocator, "</Mode>");
-    }
+    try buf.appendSlice(allocator, "<Mode>");
+    try buf.appendSlice(allocator, value.mode.wireName());
+    try buf.appendSlice(allocator, "</Mode>");
     if (value.trust_store_config) |v| {
         try buf.appendSlice(allocator, "<TrustStoreConfig>");
         try serializeTrustStoreConfig(allocator, buf, v);

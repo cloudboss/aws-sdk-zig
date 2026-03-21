@@ -1941,11 +1941,9 @@ pub fn serializeHostedZoneConfig(allocator: std.mem.Allocator, buf: *std.ArrayLi
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</Comment>");
     }
-    if (value.private_zone) |v| {
-        try buf.appendSlice(allocator, "<PrivateZone>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</PrivateZone>");
-    }
+    try buf.appendSlice(allocator, "<PrivateZone>");
+    try buf.appendSlice(allocator, if (value.private_zone) "true" else "false");
+    try buf.appendSlice(allocator, "</PrivateZone>");
 }
 
 pub fn serializeResourceRecord(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ResourceRecord) !void {

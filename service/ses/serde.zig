@@ -1601,11 +1601,9 @@ pub fn serializeEventDestination(allocator: std.mem.Allocator, buf: *std.ArrayLi
         try serializeCloudWatchDestination(allocator, buf, v);
         try buf.appendSlice(allocator, "</CloudWatchDestination>");
     }
-    if (value.enabled) |v| {
-        try buf.appendSlice(allocator, "<Enabled>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</Enabled>");
-    }
+    try buf.appendSlice(allocator, "<Enabled>");
+    try buf.appendSlice(allocator, if (value.enabled) "true" else "false");
+    try buf.appendSlice(allocator, "</Enabled>");
     if (value.kinesis_firehose_destination) |v| {
         try buf.appendSlice(allocator, "<KinesisFirehoseDestination>");
         try serializeKinesisFirehoseDestination(allocator, buf, v);
@@ -1768,11 +1766,9 @@ pub fn serializeReceiptRule(allocator: std.mem.Allocator, buf: *std.ArrayList(u8
         try serializeReceiptActionsList(allocator, buf, v, "member");
         try buf.appendSlice(allocator, "</Actions>");
     }
-    if (value.enabled) |v| {
-        try buf.appendSlice(allocator, "<Enabled>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</Enabled>");
-    }
+    try buf.appendSlice(allocator, "<Enabled>");
+    try buf.appendSlice(allocator, if (value.enabled) "true" else "false");
+    try buf.appendSlice(allocator, "</Enabled>");
     try buf.appendSlice(allocator, "<Name>");
     try aws.xml.appendXmlEscaped(allocator, buf, value.name);
     try buf.appendSlice(allocator, "</Name>");
@@ -1781,11 +1777,9 @@ pub fn serializeReceiptRule(allocator: std.mem.Allocator, buf: *std.ArrayList(u8
         try serializeRecipientsList(allocator, buf, v, "member");
         try buf.appendSlice(allocator, "</Recipients>");
     }
-    if (value.scan_enabled) |v| {
-        try buf.appendSlice(allocator, "<ScanEnabled>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</ScanEnabled>");
-    }
+    try buf.appendSlice(allocator, "<ScanEnabled>");
+    try buf.appendSlice(allocator, if (value.scan_enabled) "true" else "false");
+    try buf.appendSlice(allocator, "</ScanEnabled>");
     if (value.tls_policy) |v| {
         try buf.appendSlice(allocator, "<TlsPolicy>");
         try buf.appendSlice(allocator, v.wireName());

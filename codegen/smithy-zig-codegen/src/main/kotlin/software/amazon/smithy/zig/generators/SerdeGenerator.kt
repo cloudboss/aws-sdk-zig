@@ -1095,10 +1095,7 @@ class SerdeGenerator(
                     .map { it.value }
                     .orElse(memberName)
 
-                val isInputStruct = shape.hasTrait(InputTrait::class.java) || shape.id in inputShapeIds
-                val memberType = symbolProvider.toSymbol(memberShape).name
-                val isOptionalInSerializer = memberType.startsWith("?") ||
-                    (isInputStruct && memberShape.hasTrait(DefaultTrait::class.java))
+                val isOptionalInSerializer = isOptionalGeneratedMember(shape, memberShape)
                 if (isOptionalInSerializer) {
                     writer.openBlock("if (value.\$L) |v| {", fieldName)
                     writeMemberSerializer(writer, xmlName, "v", memberShape, targetShape)
@@ -1110,6 +1107,22 @@ class SerdeGenerator(
         }
 
         writer.closeBlock("}") // fn
+    }
+
+    private fun isOptionalGeneratedMember(shape: StructureShape, memberShape: MemberShape): Boolean {
+        val isInputStruct = shape.hasTrait(InputTrait::class.java) || shape.id in inputShapeIds
+        val hasMemberDefault = memberShape.hasTrait(DefaultTrait::class.java)
+        val defaultValue = DefaultValueUtil.resolveDefaultValue(memberShape, model, symbolProvider)
+        val baseZigType = symbolProvider.toSymbol(memberShape).name
+        val defaultBaseType = (defaultValue?.typeName ?: baseZigType).removePrefix("?")
+        val zigType = if (isInputStruct && hasMemberDefault) {
+            "?$defaultBaseType"
+        } else if (defaultValue != null) {
+            defaultValue.typeName
+        } else {
+            baseZigType
+        }
+        return zigType.startsWith("?")
     }
 
     private fun writeMemberSerializer(

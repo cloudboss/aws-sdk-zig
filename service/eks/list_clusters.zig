@@ -46,12 +46,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListClustersInput, conf
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
     if (input.include) |v| {
-        for (v, 0..) |item, i| {
-            if (query_has_prev or i > 0) try query_buf.appendSlice(allocator, "&");
-            try query_buf.appendSlice(allocator, "include=");
-            try aws.url.appendUrlEncoded(allocator, &query_buf, item);
-            query_has_prev = true;
-        }
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "include=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
     }
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

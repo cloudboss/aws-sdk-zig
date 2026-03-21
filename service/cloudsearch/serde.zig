@@ -1518,22 +1518,18 @@ pub fn serializeScalingParameters(allocator: std.mem.Allocator, buf: *std.ArrayL
         try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DesiredInstanceType>");
     }
-    if (value.desired_partition_count) |v| {
-        try buf.appendSlice(allocator, "<DesiredPartitionCount>");
-        {
-            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
-            try buf.appendSlice(allocator, num_str);
-        }
-        try buf.appendSlice(allocator, "</DesiredPartitionCount>");
+    try buf.appendSlice(allocator, "<DesiredPartitionCount>");
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{value.desired_partition_count}) catch "";
+        try buf.appendSlice(allocator, num_str);
     }
-    if (value.desired_replication_count) |v| {
-        try buf.appendSlice(allocator, "<DesiredReplicationCount>");
-        {
-            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
-            try buf.appendSlice(allocator, num_str);
-        }
-        try buf.appendSlice(allocator, "</DesiredReplicationCount>");
+    try buf.appendSlice(allocator, "</DesiredPartitionCount>");
+    try buf.appendSlice(allocator, "<DesiredReplicationCount>");
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{value.desired_replication_count}) catch "";
+        try buf.appendSlice(allocator, num_str);
     }
+    try buf.appendSlice(allocator, "</DesiredReplicationCount>");
 }
 
 pub fn serializeSuggester(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: Suggester) !void {

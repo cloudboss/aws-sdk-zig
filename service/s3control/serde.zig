@@ -4354,14 +4354,12 @@ pub fn serializeUserArguments(allocator: std.mem.Allocator, buf: *std.ArrayList(
 }
 
 pub fn serializeAbortIncompleteMultipartUpload(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: AbortIncompleteMultipartUpload) !void {
-    if (value.days_after_initiation) |v| {
-        try buf.appendSlice(allocator, "<DaysAfterInitiation>");
-        {
-            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
-            try buf.appendSlice(allocator, num_str);
-        }
-        try buf.appendSlice(allocator, "</DaysAfterInitiation>");
+    try buf.appendSlice(allocator, "<DaysAfterInitiation>");
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{value.days_after_initiation}) catch "";
+        try buf.appendSlice(allocator, num_str);
     }
+    try buf.appendSlice(allocator, "</DaysAfterInitiation>");
 }
 
 pub fn serializeAccessControlTranslation(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: AccessControlTranslation) !void {
@@ -4415,35 +4413,27 @@ pub fn serializeAccountLevel(allocator: std.mem.Allocator, buf: *std.ArrayList(u
 }
 
 pub fn serializeActivityMetrics(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ActivityMetrics) !void {
-    if (value.is_enabled) |v| {
-        try buf.appendSlice(allocator, "<IsEnabled>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</IsEnabled>");
-    }
+    try buf.appendSlice(allocator, "<IsEnabled>");
+    try buf.appendSlice(allocator, if (value.is_enabled) "true" else "false");
+    try buf.appendSlice(allocator, "</IsEnabled>");
 }
 
 pub fn serializeAdvancedCostOptimizationMetrics(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: AdvancedCostOptimizationMetrics) !void {
-    if (value.is_enabled) |v| {
-        try buf.appendSlice(allocator, "<IsEnabled>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</IsEnabled>");
-    }
+    try buf.appendSlice(allocator, "<IsEnabled>");
+    try buf.appendSlice(allocator, if (value.is_enabled) "true" else "false");
+    try buf.appendSlice(allocator, "</IsEnabled>");
 }
 
 pub fn serializeAdvancedDataProtectionMetrics(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: AdvancedDataProtectionMetrics) !void {
-    if (value.is_enabled) |v| {
-        try buf.appendSlice(allocator, "<IsEnabled>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</IsEnabled>");
-    }
+    try buf.appendSlice(allocator, "<IsEnabled>");
+    try buf.appendSlice(allocator, if (value.is_enabled) "true" else "false");
+    try buf.appendSlice(allocator, "</IsEnabled>");
 }
 
 pub fn serializeAdvancedPerformanceMetrics(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: AdvancedPerformanceMetrics) !void {
-    if (value.is_enabled) |v| {
-        try buf.appendSlice(allocator, "<IsEnabled>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</IsEnabled>");
-    }
+    try buf.appendSlice(allocator, "<IsEnabled>");
+    try buf.appendSlice(allocator, if (value.is_enabled) "true" else "false");
+    try buf.appendSlice(allocator, "</IsEnabled>");
 }
 
 pub fn serializeBucketLevel(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: BucketLevel) !void {
@@ -4556,11 +4546,9 @@ pub fn serializeDestination(allocator: std.mem.Allocator, buf: *std.ArrayList(u8
 }
 
 pub fn serializeDetailedStatusCodesMetrics(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: DetailedStatusCodesMetrics) !void {
-    if (value.is_enabled) |v| {
-        try buf.appendSlice(allocator, "<IsEnabled>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</IsEnabled>");
-    }
+    try buf.appendSlice(allocator, "<IsEnabled>");
+    try buf.appendSlice(allocator, if (value.is_enabled) "true" else "false");
+    try buf.appendSlice(allocator, "</IsEnabled>");
 }
 
 pub fn serializeEncryptionConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: EncryptionConfiguration) !void {
@@ -4774,19 +4762,15 @@ pub fn serializeLifecycleExpiration(allocator: std.mem.Allocator, buf: *std.Arra
         }
         try buf.appendSlice(allocator, "</Date>");
     }
-    if (value.days) |v| {
-        try buf.appendSlice(allocator, "<Days>");
-        {
-            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
-            try buf.appendSlice(allocator, num_str);
-        }
-        try buf.appendSlice(allocator, "</Days>");
+    try buf.appendSlice(allocator, "<Days>");
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{value.days}) catch "";
+        try buf.appendSlice(allocator, num_str);
     }
-    if (value.expired_object_delete_marker) |v| {
-        try buf.appendSlice(allocator, "<ExpiredObjectDeleteMarker>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</ExpiredObjectDeleteMarker>");
-    }
+    try buf.appendSlice(allocator, "</Days>");
+    try buf.appendSlice(allocator, "<ExpiredObjectDeleteMarker>");
+    try buf.appendSlice(allocator, if (value.expired_object_delete_marker) "true" else "false");
+    try buf.appendSlice(allocator, "</ExpiredObjectDeleteMarker>");
 }
 
 pub fn serializeLifecycleRule(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: LifecycleRule) !void {
@@ -4894,41 +4878,33 @@ pub fn serializeLifecycleRuleFilter(allocator: std.mem.Allocator, buf: *std.Arra
 }
 
 pub fn serializeMatchObjectAge(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: MatchObjectAge) !void {
-    if (value.days_greater_than) |v| {
-        try buf.appendSlice(allocator, "<DaysGreaterThan>");
-        {
-            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
-            try buf.appendSlice(allocator, num_str);
-        }
-        try buf.appendSlice(allocator, "</DaysGreaterThan>");
+    try buf.appendSlice(allocator, "<DaysGreaterThan>");
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{value.days_greater_than}) catch "";
+        try buf.appendSlice(allocator, num_str);
     }
-    if (value.days_less_than) |v| {
-        try buf.appendSlice(allocator, "<DaysLessThan>");
-        {
-            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
-            try buf.appendSlice(allocator, num_str);
-        }
-        try buf.appendSlice(allocator, "</DaysLessThan>");
+    try buf.appendSlice(allocator, "</DaysGreaterThan>");
+    try buf.appendSlice(allocator, "<DaysLessThan>");
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{value.days_less_than}) catch "";
+        try buf.appendSlice(allocator, num_str);
     }
+    try buf.appendSlice(allocator, "</DaysLessThan>");
 }
 
 pub fn serializeMatchObjectSize(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: MatchObjectSize) !void {
-    if (value.bytes_greater_than) |v| {
-        try buf.appendSlice(allocator, "<BytesGreaterThan>");
-        {
-            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
-            try buf.appendSlice(allocator, num_str);
-        }
-        try buf.appendSlice(allocator, "</BytesGreaterThan>");
+    try buf.appendSlice(allocator, "<BytesGreaterThan>");
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{value.bytes_greater_than}) catch "";
+        try buf.appendSlice(allocator, num_str);
     }
-    if (value.bytes_less_than) |v| {
-        try buf.appendSlice(allocator, "<BytesLessThan>");
-        {
-            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
-            try buf.appendSlice(allocator, num_str);
-        }
-        try buf.appendSlice(allocator, "</BytesLessThan>");
+    try buf.appendSlice(allocator, "</BytesGreaterThan>");
+    try buf.appendSlice(allocator, "<BytesLessThan>");
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{value.bytes_less_than}) catch "";
+        try buf.appendSlice(allocator, num_str);
     }
+    try buf.appendSlice(allocator, "</BytesLessThan>");
 }
 
 pub fn serializeMetrics(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: Metrics) !void {
@@ -4970,25 +4946,21 @@ pub fn serializeNoncurrentVersionExpiration(allocator: std.mem.Allocator, buf: *
         }
         try buf.appendSlice(allocator, "</NewerNoncurrentVersions>");
     }
-    if (value.noncurrent_days) |v| {
-        try buf.appendSlice(allocator, "<NoncurrentDays>");
-        {
-            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
-            try buf.appendSlice(allocator, num_str);
-        }
-        try buf.appendSlice(allocator, "</NoncurrentDays>");
+    try buf.appendSlice(allocator, "<NoncurrentDays>");
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{value.noncurrent_days}) catch "";
+        try buf.appendSlice(allocator, num_str);
     }
+    try buf.appendSlice(allocator, "</NoncurrentDays>");
 }
 
 pub fn serializeNoncurrentVersionTransition(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: NoncurrentVersionTransition) !void {
-    if (value.noncurrent_days) |v| {
-        try buf.appendSlice(allocator, "<NoncurrentDays>");
-        {
-            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
-            try buf.appendSlice(allocator, num_str);
-        }
-        try buf.appendSlice(allocator, "</NoncurrentDays>");
+    try buf.appendSlice(allocator, "<NoncurrentDays>");
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{value.noncurrent_days}) catch "";
+        try buf.appendSlice(allocator, num_str);
     }
+    try buf.appendSlice(allocator, "</NoncurrentDays>");
     if (value.storage_class) |v| {
         try buf.appendSlice(allocator, "<StorageClass>");
         try buf.appendSlice(allocator, v.wireName());
@@ -5010,11 +4982,9 @@ pub fn serializeObjectLambdaConfiguration(allocator: std.mem.Allocator, buf: *st
         try serializeObjectLambdaAllowedFeaturesList(allocator, buf, v, "AllowedFeature");
         try buf.appendSlice(allocator, "</AllowedFeatures>");
     }
-    if (value.cloud_watch_metrics_enabled) |v| {
-        try buf.appendSlice(allocator, "<CloudWatchMetricsEnabled>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</CloudWatchMetricsEnabled>");
-    }
+    try buf.appendSlice(allocator, "<CloudWatchMetricsEnabled>");
+    try buf.appendSlice(allocator, if (value.cloud_watch_metrics_enabled) "true" else "false");
+    try buf.appendSlice(allocator, "</CloudWatchMetricsEnabled>");
     try buf.appendSlice(allocator, "<SupportingAccessPoint>");
     try aws.xml.appendXmlEscaped(allocator, buf, value.supporting_access_point);
     try buf.appendSlice(allocator, "</SupportingAccessPoint>");
@@ -5036,11 +5006,9 @@ pub fn serializePrefixLevel(allocator: std.mem.Allocator, buf: *std.ArrayList(u8
 }
 
 pub fn serializePrefixLevelStorageMetrics(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: PrefixLevelStorageMetrics) !void {
-    if (value.is_enabled) |v| {
-        try buf.appendSlice(allocator, "<IsEnabled>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</IsEnabled>");
-    }
+    try buf.appendSlice(allocator, "<IsEnabled>");
+    try buf.appendSlice(allocator, if (value.is_enabled) "true" else "false");
+    try buf.appendSlice(allocator, "</IsEnabled>");
     if (value.selection_criteria) |v| {
         try buf.appendSlice(allocator, "<SelectionCriteria>");
         try serializeSelectionCriteria(allocator, buf, v);
@@ -5049,26 +5017,18 @@ pub fn serializePrefixLevelStorageMetrics(allocator: std.mem.Allocator, buf: *st
 }
 
 pub fn serializePublicAccessBlockConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: PublicAccessBlockConfiguration) !void {
-    if (value.block_public_acls) |v| {
-        try buf.appendSlice(allocator, "<BlockPublicAcls>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</BlockPublicAcls>");
-    }
-    if (value.block_public_policy) |v| {
-        try buf.appendSlice(allocator, "<BlockPublicPolicy>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</BlockPublicPolicy>");
-    }
-    if (value.ignore_public_acls) |v| {
-        try buf.appendSlice(allocator, "<IgnorePublicAcls>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</IgnorePublicAcls>");
-    }
-    if (value.restrict_public_buckets) |v| {
-        try buf.appendSlice(allocator, "<RestrictPublicBuckets>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</RestrictPublicBuckets>");
-    }
+    try buf.appendSlice(allocator, "<BlockPublicAcls>");
+    try buf.appendSlice(allocator, if (value.block_public_acls) "true" else "false");
+    try buf.appendSlice(allocator, "</BlockPublicAcls>");
+    try buf.appendSlice(allocator, "<BlockPublicPolicy>");
+    try buf.appendSlice(allocator, if (value.block_public_policy) "true" else "false");
+    try buf.appendSlice(allocator, "</BlockPublicPolicy>");
+    try buf.appendSlice(allocator, "<IgnorePublicAcls>");
+    try buf.appendSlice(allocator, if (value.ignore_public_acls) "true" else "false");
+    try buf.appendSlice(allocator, "</IgnorePublicAcls>");
+    try buf.appendSlice(allocator, "<RestrictPublicBuckets>");
+    try buf.appendSlice(allocator, if (value.restrict_public_buckets) "true" else "false");
+    try buf.appendSlice(allocator, "</RestrictPublicBuckets>");
 }
 
 pub fn serializePutMultiRegionAccessPointPolicyInput(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: PutMultiRegionAccessPointPolicyInput) !void {
@@ -5275,11 +5235,9 @@ pub fn serializeS3CopyObjectOperation(allocator: std.mem.Allocator, buf: *std.Ar
         try serializeS3GrantList(allocator, buf, v, "member");
         try buf.appendSlice(allocator, "</AccessControlGrants>");
     }
-    if (value.bucket_key_enabled) |v| {
-        try buf.appendSlice(allocator, "<BucketKeyEnabled>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</BucketKeyEnabled>");
-    }
+    try buf.appendSlice(allocator, "<BucketKeyEnabled>");
+    try buf.appendSlice(allocator, if (value.bucket_key_enabled) "true" else "false");
+    try buf.appendSlice(allocator, "</BucketKeyEnabled>");
     if (value.canned_access_control_list) |v| {
         try buf.appendSlice(allocator, "<CannedAccessControlList>");
         try buf.appendSlice(allocator, v.wireName());
@@ -5336,11 +5294,9 @@ pub fn serializeS3CopyObjectOperation(allocator: std.mem.Allocator, buf: *std.Ar
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</RedirectLocation>");
     }
-    if (value.requester_pays) |v| {
-        try buf.appendSlice(allocator, "<RequesterPays>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</RequesterPays>");
-    }
+    try buf.appendSlice(allocator, "<RequesterPays>");
+    try buf.appendSlice(allocator, if (value.requester_pays) "true" else "false");
+    try buf.appendSlice(allocator, "</RequesterPays>");
     if (value.sse_aws_kms_key_id) |v| {
         try buf.appendSlice(allocator, "<SSEAwsKmsKeyId>");
         try aws.xml.appendXmlEscaped(allocator, buf, v);
@@ -5477,11 +5433,9 @@ pub fn serializeS3ObjectMetadata(allocator: std.mem.Allocator, buf: *std.ArrayLi
         }
         try buf.appendSlice(allocator, "</HttpExpiresDate>");
     }
-    if (value.requester_charged) |v| {
-        try buf.appendSlice(allocator, "<RequesterCharged>");
-        try buf.appendSlice(allocator, if (v) "true" else "false");
-        try buf.appendSlice(allocator, "</RequesterCharged>");
-    }
+    try buf.appendSlice(allocator, "<RequesterCharged>");
+    try buf.appendSlice(allocator, if (value.requester_charged) "true" else "false");
+    try buf.appendSlice(allocator, "</RequesterCharged>");
     if (value.sse_algorithm) |v| {
         try buf.appendSlice(allocator, "<SSEAlgorithm>");
         try buf.appendSlice(allocator, v.wireName());
@@ -5928,14 +5882,12 @@ pub fn serializeTransition(allocator: std.mem.Allocator, buf: *std.ArrayList(u8)
         }
         try buf.appendSlice(allocator, "</Date>");
     }
-    if (value.days) |v| {
-        try buf.appendSlice(allocator, "<Days>");
-        {
-            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
-            try buf.appendSlice(allocator, num_str);
-        }
-        try buf.appendSlice(allocator, "</Days>");
+    try buf.appendSlice(allocator, "<Days>");
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{value.days}) catch "";
+        try buf.appendSlice(allocator, num_str);
     }
+    try buf.appendSlice(allocator, "</Days>");
     if (value.storage_class) |v| {
         try buf.appendSlice(allocator, "<StorageClass>");
         try buf.appendSlice(allocator, v.wireName());
