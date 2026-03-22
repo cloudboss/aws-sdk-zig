@@ -18,11 +18,6 @@ test "AWS_PROFILE selects named profile from credentials file" {
     // should fail (vars unset), falling through to file provider
     // which reads the [custom-profile] section.
     const creds = try cfg.credentials.getCredentials(allocator);
-    defer {
-        allocator.free(creds.access_key_id);
-        allocator.free(creds.secret_access_key);
-        if (creds.session_token) |t| allocator.free(t);
-    }
 
     try std.testing.expectEqualStrings(
         "AKIACUSTOMPROFILE",

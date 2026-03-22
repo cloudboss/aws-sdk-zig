@@ -314,6 +314,7 @@ pub const ChainProvider = struct {
         if (self.successful_provider) |provider| {
             if (self.tryProvider(allocator, provider)) |creds| {
                 try self.cacheCredentials(creds);
+                freeProviderCreds(allocator, creds, provider);
                 return self.cached.?;
             } else |_| {
                 // Provider failed, clear it and try the full chain
@@ -336,6 +337,7 @@ pub const ChainProvider = struct {
         for (providers) |provider| {
             if (self.tryProvider(allocator, provider)) |creds| {
                 try self.cacheCredentials(creds);
+                freeProviderCreds(allocator, creds, provider);
                 self.successful_provider = provider;
                 return self.cached.?;
             } else |_| {
@@ -344,6 +346,16 @@ pub const ChainProvider = struct {
         }
 
         return error.CredentialsNotFound;
+    }
+
+    /// Free credentials returned by a provider after they have been cached.
+    /// The environment provider returns non-owned pointers (from std.posix.getenv),
+    /// so those must not be freed.
+    fn freeProviderCreds(allocator: Allocator, creds: Credentials, provider: ProviderType) void {
+        if (provider == .environment) return;
+        allocator.free(creds.access_key_id);
+        allocator.free(creds.secret_access_key);
+        if (creds.session_token) |t| allocator.free(t);
     }
 
     /// Try a specific provider
