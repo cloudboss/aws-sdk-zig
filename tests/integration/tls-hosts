@@ -178,6 +178,7 @@
 127.0.0.1 guardduty.us-east-1.amazonaws.com
 127.0.0.1 health.us-east-1.amazonaws.com
 127.0.0.1 healthlake.us-east-1.amazonaws.com
+127.0.0.1 iam.amazonaws.com
 127.0.0.1 iam.us-east-1.amazonaws.com
 127.0.0.1 identitystore.us-east-1.amazonaws.com
 127.0.0.1 imagebuilder.us-east-1.amazonaws.com
