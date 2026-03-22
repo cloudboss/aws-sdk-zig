@@ -67,7 +67,7 @@ start_localstack() {
     )
 
     docker_args+=(
-        -v "${TLS_CERT_HOST_PATH}:/etc/localstack/server.pem:ro"
+        -v "${TLS_CERT_HOST_PATH}:/etc/localstack/server.pem:ro,z"
         -e "CUSTOM_SSL_CERT_PATH=/etc/localstack/server.pem"
         -e "SKIP_SSL_CERT_DOWNLOAD=1"
         -e "GATEWAY_LISTEN=:443"
