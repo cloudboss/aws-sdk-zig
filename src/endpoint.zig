@@ -110,6 +110,14 @@ pub fn resolveEndpoint(
         return allocator.dupe(u8, override);
     }
 
+    // IAM uses a global endpoint in the aws partition.
+    if (std.mem.eql(u8, service, "iam") and
+        std.mem.eql(u8, partitionForRegion(region).name, "aws") and
+        !options.fips and !options.dual_stack)
+    {
+        return allocator.dupe(u8, "iam.amazonaws.com");
+    }
+
     // Route53 uses a global endpoint in the aws partition.
     if (std.mem.eql(u8, service, "route53") and
         std.mem.eql(u8, partitionForRegion(region).name, "aws") and

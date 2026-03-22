@@ -365,15 +365,6 @@ pub const Config = struct {
         }
 
         // Level 6: Partition-based default
-        if (!self.use_fips and !self.use_dual_stack) {
-            if (std.mem.eql(u8, service, "iam")) {
-                const partition = endpoint_mod.partitionForRegion(self.region);
-                if (std.mem.eql(u8, partition.name, "aws")) {
-                    return try allocator.dupe(u8, "iam.amazonaws.com");
-                }
-            }
-        }
-
         return endpoint_mod.resolveEndpoint(
             allocator,
             service,
