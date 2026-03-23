@@ -485,13 +485,25 @@ pub const HttpClient = struct {
         errdefer self.allocator.destroy(inner);
         inner.allocator = self.allocator;
 
+        const tls_conn: ?*std.http.Client.Connection =
+            if (self.timeout_ms > 0 and request.tls and self.inner.https_proxy == null)
+                try connectTlsWithTimeout(
+                    &self.inner,
+                    request.host,
+                    request.port orelse 443,
+                    self.timeout_ms,
+                )
+            else
+                null;
+
         inner.http_request = self.inner.request(request.method.toStd(), request.getUri(), .{
             .extra_headers = extra_headers_list.items,
             .keep_alive = self.default_options.keep_alive,
+            .connection = tls_conn,
         }) catch return error.ConnectionFailed;
         errdefer inner.http_request.deinit();
 
-        if (self.timeout_ms > 0) {
+        if (self.timeout_ms > 0 and tls_conn == null) {
             if (inner.http_request.connection) |conn| {
                 setSocketTimeouts(conn, self.timeout_ms);
             }
@@ -603,13 +615,25 @@ pub const HttpClient = struct {
             if (ic.pre_send) |hook| hook(request);
         }
 
+        const tls_conn: ?*std.http.Client.Connection =
+            if (self.timeout_ms > 0 and request.tls and self.inner.https_proxy == null)
+                try connectTlsWithTimeout(
+                    &self.inner,
+                    request.host,
+                    request.port orelse 443,
+                    self.timeout_ms,
+                )
+            else
+                null;
+
         var req = self.inner.request(request.method.toStd(), request.getUri(), .{
             .extra_headers = extra_headers_list.items,
             .keep_alive = options.keep_alive,
+            .connection = tls_conn,
         }) catch return error.ConnectionFailed;
         defer req.deinit();
 
-        if (self.timeout_ms > 0) {
+        if (self.timeout_ms > 0 and tls_conn == null) {
             if (req.connection) |conn| {
                 setSocketTimeouts(conn, self.timeout_ms);
             }
@@ -777,7 +801,10 @@ fn setSocketTimeouts(
     conn: *std.http.Client.Connection,
     timeout_ms: u32,
 ) void {
-    const fd = conn.stream_reader.getStream().handle;
+    setFdTimeouts(conn.stream_reader.getStream().handle, timeout_ms);
+}
+
+fn setFdTimeouts(fd: std.posix.socket_t, timeout_ms: u32) void {
     const sec: isize = @intCast(timeout_ms / 1000);
     const usec: isize = @intCast(
         @as(u64, timeout_ms % 1000) * 1000,
@@ -796,6 +823,122 @@ fn setSocketTimeouts(
         std.posix.SO.SNDTIMEO,
         opt_bytes,
     ) catch {};
+}
+
+/// Layout-compatible replica of the private std.http.Client.Connection.Tls.
+/// The std lib uses @fieldParentPtr("connection", conn) to recover the parent
+/// Tls struct from a *Connection, so both structs must have `connection` at
+/// the same offset. Identical field types guarantee identical layout.
+const TlsConnLayout = struct {
+    client: std.crypto.tls.Client,
+    connection: std.http.Client.Connection,
+};
+
+/// Establish a TLS connection with socket timeouts applied before the TLS
+/// handshake. The std lib's connectTcpOptions does TCP + TLS in one step,
+/// so timeouts set afterwards miss the handshake. This function replicates
+/// the Connection.Tls allocation from std/http/Client.zig and inserts
+/// setsockopt between TCP connect and TLS init.
+fn connectTlsWithTimeout(
+    client: *std.http.Client,
+    host: []const u8,
+    port: u16,
+    timeout_ms: u32,
+) RequestError!*std.http.Client.Connection {
+    if (client.connection_pool.findConnection(.{
+        .host = host,
+        .port = port,
+        .protocol = .tls,
+    })) |conn| {
+        setSocketTimeouts(conn, timeout_ms);
+        return conn;
+    }
+
+    // Rescan CA certificates if needed (mirrors request() logic).
+    if (@atomicLoad(
+        bool,
+        &client.next_https_rescan_certs,
+        .acquire,
+    )) {
+        client.ca_bundle_mutex.lock();
+        defer client.ca_bundle_mutex.unlock();
+        if (client.next_https_rescan_certs) {
+            client.ca_bundle.rescan(client.allocator) catch
+                return error.ConnectionFailed;
+            @atomicStore(
+                bool,
+                &client.next_https_rescan_certs,
+                false,
+                .release,
+            );
+        }
+    }
+
+    const stream = std.net.tcpConnectToHost(
+        client.allocator,
+        host,
+        port,
+    ) catch return error.ConnectionFailed;
+    errdefer stream.close();
+
+    // Set timeout BEFORE TLS handshake so handshake reads/writes
+    // on the raw socket respect the deadline.
+    setFdTimeouts(stream.handle, timeout_ms);
+
+    // Replicate the allocation layout from Connection.Tls.create
+    // in std/http/Client.zig.
+    const tls_buf_size = client.tls_buffer_size;
+    const tls_read_len = tls_buf_size + client.read_buffer_size;
+    const alloc_len = @sizeOf(TlsConnLayout) + host.len +
+        tls_read_len + tls_buf_size +
+        client.write_buffer_size + tls_buf_size;
+    const base = client.allocator.alignedAlloc(
+        u8,
+        .of(TlsConnLayout),
+        alloc_len,
+    ) catch return error.OutOfMemory;
+    errdefer client.allocator.free(base);
+
+    const host_buf = base[@sizeOf(TlsConnLayout)..][0..host.len];
+    const tls_read_buf =
+        host_buf.ptr[host_buf.len..][0..tls_read_len];
+    const tls_write_buf =
+        tls_read_buf.ptr[tls_read_buf.len..][0..tls_buf_size];
+    const sock_write_buf =
+        tls_write_buf.ptr[tls_write_buf.len..][0..client.write_buffer_size];
+    const sock_read_buf =
+        sock_write_buf.ptr[sock_write_buf.len..][0..tls_buf_size];
+    std.debug.assert(base.ptr + alloc_len == sock_read_buf.ptr + sock_read_buf.len);
+
+    @memcpy(host_buf, host);
+
+    const wrapper: *TlsConnLayout = @ptrCast(base);
+    wrapper.connection = .{
+        .client = client,
+        .stream_writer = stream.writer(tls_write_buf),
+        .stream_reader = stream.reader(sock_read_buf),
+        .pool_node = .{},
+        .port = port,
+        .host_len = @intCast(host.len),
+        .proxied = false,
+        .closing = false,
+        .protocol = .tls,
+    };
+    wrapper.client = std.crypto.tls.Client.init(
+        wrapper.connection.stream_reader.interface(),
+        &wrapper.connection.stream_writer.interface,
+        .{
+            .host = .{ .explicit = host },
+            .ca = .{ .bundle = client.ca_bundle },
+            .ssl_key_log = client.ssl_key_log,
+            .read_buffer = tls_read_buf,
+            .write_buffer = sock_write_buf,
+            .allow_truncation_attacks = true,
+        },
+    ) catch return error.ConnectionFailed;
+
+    client.connection_pool.addUsed(&wrapper.connection);
+    return &wrapper.connection;
 }
 
 /// Check if a host should bypass the proxy based on the NO_PROXY list.
@@ -2122,6 +2265,72 @@ test "gzip response is decompressed by doRequest" {
 
     try std.testing.expectEqual(@as(u16, 200), response.status);
     try std.testing.expectEqualStrings(plain, response.body);
+}
+
+test "request to unresponsive server respects timeout" {
+    // A server that accepts connections but never sends data simulates a
+    // hung connection (e.g. stalled TLS handshake).  The client's
+    // timeout_ms should bound how long the request blocks.
+    const SilentServer = struct {
+        server: std.net.Server,
+        address: std.net.Address,
+        thread: ?std.Thread = null,
+
+        fn init() !@This() {
+            const loopback = try std.net.Address.parseIp4("127.0.0.1", 0);
+            const server = try loopback.listen(.{ .reuse_address = true });
+            return .{ .server = server, .address = server.listen_address };
+        }
+
+        fn start(self: *@This()) !void {
+            self.thread = try std.Thread.spawn(.{}, run, .{self});
+        }
+
+        fn deinit(self: *@This()) void {
+            self.server.deinit();
+            if (self.thread) |thread| thread.join();
+        }
+
+        fn run(self: *@This()) void {
+            // Accept one connection, hold it open for 5s, then close.
+            // This bounds the test runtime while still exceeding the
+            // client's 500ms timeout to demonstrate the hang.
+            var conn = self.server.accept() catch return;
+            std.Thread.sleep(5 * std.time.ns_per_s);
+            conn.stream.close();
+        }
+    };
+
+    var server = try SilentServer.init();
+    defer server.deinit();
+    try server.start();
+
+    var client = HttpClient.init(std.testing.allocator, .{});
+    defer client.deinit();
+    client.timeout_ms = 500;
+
+    var request = Request.init("127.0.0.1");
+    defer request.deinit(std.testing.allocator);
+    request.method = .GET;
+    request.path = "/hang";
+    request.port = server.address.getPort();
+    request.tls = true; // TLS handshake blocks inside request() before timeout is set
+
+    const start_ns = std.time.nanoTimestamp();
+    const result = client.sendRequestWithOptions(
+        &request,
+        .{ .max_attempts = 1, .keep_alive = false },
+    );
+    const elapsed_ms: u64 = @intCast(@divFloor(
+        std.time.nanoTimestamp() - start_ns,
+        std.time.ns_per_ms,
+    ));
+
+    // The request must fail (server never responds).
+    try std.testing.expectError(error.ConnectionFailed, result);
+    // And it must fail within a reasonable multiple of the timeout,
+    // not hang for the OS default TCP timeout (~2 minutes).
+    try std.testing.expect(elapsed_ms < 3_000);
 }
 
 test "gzip response is decompressed by sendStreamingRequest" {
