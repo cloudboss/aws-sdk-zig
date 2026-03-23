@@ -131,16 +131,22 @@ Every service defines `ServiceError` so this pattern can be used.
 ## Development
 
 ```bash
-# Run unit tests
+# Run unit tests.
 make test
 
-# Run integration tests
+# Run integration tests against LocalStack.
 make test-integration-localstack
 
-# Run a single integration test scenario
-make test-integration-localstack SCENARIO=s3
+# Run integration tests against your actual AWS account.
+# Use AWS_PROFILE or any other authentication mechanism.
+AWS_PROFILE=<profile> make test-integration-live
 
-# Regenerate service code from Smithy models
+# Run a single integration test scenario (scenarios are directory names under
+# test/integration/scenarios-localstack and test/integration/scenarios-live).
+make test-integration-localstack SCENARIO=s3
+AWS_PROFILE=<profile> make test-integration-live SCENARIO=networking
+
+# Regenerate service code from Smithy models.
 make codegen
 ```
 
