@@ -33,7 +33,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetRawMessa
 
     var request = try serializeRequest(alloc, input, client.config);
 
-    const creds = try client.config.credentials.getCredentials(alloc);
+    const creds = try client.config.credentials.getCredentials(client.allocator);
     try aws.signing.signRequest(alloc, &request, creds, client.config.region, "workmailmessageflow");
 
     var stream_resp = try client.http_client.sendStreamingRequest(&request);

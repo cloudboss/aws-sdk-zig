@@ -156,7 +156,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDeplo
     var request = try serializeRequest(alloc, input, client.config);
     defer request.deinit(alloc);
 
-    const creds = try client.config.credentials.getCredentials(alloc);
+    const creds = try client.config.credentials.getCredentials(client.allocator);
     try aws.signing.signRequest(alloc, &request, creds, client.config.region, "codedeploy");
 
     var response = try client.http_client.sendRequest(&request);

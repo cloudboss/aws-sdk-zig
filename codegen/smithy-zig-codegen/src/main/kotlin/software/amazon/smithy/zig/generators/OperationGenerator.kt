@@ -386,7 +386,7 @@ class OperationGenerator(
         writer.blankLine()
 
         // Sign
-        writer.write("const creds = try client.config.credentials.getCredentials(alloc);")
+        writer.write("const creds = try client.config.credentials.getCredentials(client.allocator);")
         writer.write("try aws.signing.signRequest(alloc, &request, creds, client.config.region, \"\$L\");", settings.signingName)
         writer.blankLine()
 
@@ -443,7 +443,7 @@ class OperationGenerator(
         writer.blankLine()
 
         // Sign
-        writer.write("const creds = try client.config.credentials.getCredentials(alloc);")
+        writer.write("const creds = try client.config.credentials.getCredentials(client.allocator);")
         writer.write("try aws.signing.signRequest(alloc, &request, creds, client.config.region, \"\$L\");", settings.signingName)
         writer.blankLine()
 
@@ -486,7 +486,7 @@ class OperationGenerator(
         writer.blankLine()
 
         // Sign
-        writer.write("const creds = try client.config.credentials.getCredentials(alloc);")
+        writer.write("const creds = try client.config.credentials.getCredentials(client.allocator);")
         writer.write("try aws.signing.signRequest(alloc, &request, creds, client.config.region, \"\$L\");", settings.signingName)
         writer.blankLine()
 
@@ -543,7 +543,7 @@ class OperationGenerator(
         writer.write("defer request.deinit(alloc);")
         writer.blankLine()
 
-        writer.write("const creds = try client.config.credentials.getCredentials(alloc);")
+        writer.write("const creds = try client.config.credentials.getCredentials(client.allocator);")
         writer.blankLine()
 
         writer.openBlock("return aws.signing.presignRequest(")

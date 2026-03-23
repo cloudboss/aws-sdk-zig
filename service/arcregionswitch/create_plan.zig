@@ -84,7 +84,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreatePlanI
     var request = try serializeRequest(alloc, input, client.config);
     defer request.deinit(alloc);
 
-    const creds = try client.config.credentials.getCredentials(alloc);
+    const creds = try client.config.credentials.getCredentials(client.allocator);
     try aws.signing.signRequest(alloc, &request, creds, client.config.region, "arc-region-switch");
 
     var response = try client.http_client.sendRequest(&request);
