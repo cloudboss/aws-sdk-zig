@@ -1,0 +1,237 @@
+#!/usr/bin/env python3
+"""
+Generates an index.html for the docs output directory that links to
+each service's autodoc page and the runtime library docs.
+
+Usage: generate-docs-index <docs-dir> <services-txt> <models-dir>
+"""
+
+import json
+import os
+import sys
+
+
+def load_service_metadata(services_txt, models_dir):
+    """Parse services.txt and extract smithy.api#title from each model JSON."""
+    metadata = {}
+    with open(services_txt) as f:
+        for line in f:
+            parts = line.strip().split()
+            if len(parts) < 3:
+                continue
+            module, model_path = parts[0], parts[1]
+            json_path = os.path.join(models_dir, model_path)
+            title = extract_title(json_path)
+            metadata[module] = title if title else module
+    return metadata
+
+
+def extract_title(json_path):
+    """Extract the smithy.api#title trait from a Smithy model JSON file."""
+    try:
+        with open(json_path) as f:
+            data = json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return None
+    for shape in data.get("shapes", {}).values():
+        if shape.get("type") == "service":
+            return shape.get("traits", {}).get("smithy.api#title")
+    return None
+
+
+def discover_services(docs_dir):
+    """Find service directories that contain generated docs."""
+    services = []
+    for entry in os.listdir(docs_dir):
+        if entry == "aws":
+            continue
+        index = os.path.join(docs_dir, entry, "index.html")
+        if os.path.isfile(index):
+            services.append(entry)
+    return services
+
+
+HTML_HEADER = """\
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aws-sdk-zig Documentation</title>
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTMgMTQwIj48ZyBmaWxsPSIjRjdBNDFEIj48Zz48cG9seWdvbiBwb2ludHM9IjQ2LDIyIDI4LDQ0IDE5LDMwIi8+PHBvbHlnb24gcG9pbnRzPSI0NiwyMiAzMywzMyAyOCw0NCAyMiw0NCAyMiw5NSAzMSw5NSAyMCwxMDAgMTIsMTE3IDAsMTE3IDAsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMzEsOTUgMTIsMTE3IDQsMTA2Ii8+PC9nPjxnPjxwb2x5Z29uIHBvaW50cz0iNTYsMjIgNjIsMzYgMzcsNDQiLz48cG9seWdvbiBwb2ludHM9IjU2LDIyIDExMSwyMiAxMTEsNDQgMzcsNDQgNTYsMzIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTE2LDk1IDk3LDExNyA5MCwxMDQiLz48cG9seWdvbiBwb2ludHM9IjExNiw5NSAxMDAsMTA0IDk3LDExNyA0MiwxMTcgNDIsOTUiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTUwLDAgNTIsMTE3IDMsMTQwIDEwMSwyMiIvPjwvZz48Zz48cG9seWdvbiBwb2ludHM9IjE0MSwyMiAxNDAsNDAgMTIyLDQ1Ii8+PHBvbHlnb24gcG9pbnRzPSIxNTMsMjIgMTUzLDExNyAxMDYsMTE3IDEyMCwxMDUgMTI1LDk1IDEzMSw5NSAxMzEsNDUgMTIyLDQ1IDEzMiwzNiAxNDEsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTI1LDk1IDEzMCwxMTAgMTA2LDExNyIvPjwvZz48L2c+PC9zdmc+">
+    <style type="text/css">
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
+        color: #000000;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        color: #2A6286;
+      }
+      code {
+        font-family: "Source Code Pro", monospace;
+        font-size: 0.9em;
+      }
+      #logo {
+        width: 8em;
+        padding: 0.5em 1em;
+        float: left;
+      }
+      #content {
+        margin-left: 11em;
+        padding: 0 1em;
+      }
+      section h1 {
+        border-bottom: 1px dashed;
+        margin: 0.5em 0;
+      }
+      section h2 {
+        font-size: 1.3em;
+        margin: 0.5em 0;
+        padding: 0;
+        border-bottom: 1px solid;
+      }
+      #search {
+        width: 100%;
+        padding: 0.5em;
+        font-size: 1em;
+        margin-bottom: 1em;
+      }
+      ul.columns {
+        column-width: 20em;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      ul.columns li {
+        padding: 0.2em 0;
+        break-inside: avoid;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #111;
+          color: #bbb;
+        }
+        a {
+          color: #88f;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a class="logo" id="logo" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140">
+        <g fill="#F7A41D">
+          <g>
+            <polygon points="46,22 28,44 19,30"/>
+            <polygon points="46,22 33,33 28,44 22,44 22,95 31,95 20,100 12,117 0,117 0,22" shape-rendering="crispEdges"/>
+            <polygon points="31,95 12,117 4,106"/>
+          </g>
+          <g>
+            <polygon points="56,22 62,36 37,44"/>
+            <polygon points="56,22 111,22 111,44 37,44 56,32" shape-rendering="crispEdges"/>
+            <polygon points="116,95 97,117 90,104"/>
+            <polygon points="116,95 100,104 97,117 42,117 42,95" shape-rendering="crispEdges"/>
+            <polygon points="150,0 52,117 3,140 101,22"/>
+          </g>
+          <g>
+            <polygon points="141,22 140,40 122,45"/>
+            <polygon points="153,22 153,117 106,117 120,105 125,95 131,95 131,45 122,45 132,36 141,22" shape-rendering="crispEdges"/>
+            <polygon points="125,95 130,110 106,117"/>
+          </g>
+        </g>
+        <style>
+        #text { fill: #121212 }
+        @media (prefers-color-scheme: dark) { #text { fill: #f2f2f2 } }
+        </style>
+        <g id="text">
+          <g>
+            <polygon points="260,22 260,37 229,40 177,40 177,22" shape-rendering="crispEdges"/>
+            <polygon points="260,37 207,99 207,103 176,103 229,40 229,37"/>
+            <polygon points="261,99 261,117 176,117 176,103 206,99" shape-rendering="crispEdges"/>
+          </g>
+          <rect x="272" y="22" shape-rendering="crispEdges" width="22" height="95"/>
+          <g>
+            <polygon points="394,67 394,106 376,106 376,81 360,70 346,67" shape-rendering="crispEdges"/>
+            <polygon points="360,68 376,81 346,67"/>
+            <path d="M394,106c-10.2,7.3-24,12-37.7,12c-29,0-51.1-20.8-51.1-48.3c0-27.3,22.5-48.1,52-48.1\
+    c14.3,0,29.2,5.5,38.9,14l-13,15c-7.1-6.3-16.8-10-25.9-10c-17,0-30.2,12.9-30.2,29.5c0,16.8,13.3,29.6,30.3,29.6\
+    c5.7,0,12.8-2.3,19-5.5L394,106z"/>
+          </g>
+        </g>
+        </svg>
+      </a>
+    </nav>
+    <div id="content">
+      <input type="search" id="search" autocomplete="off" spellcheck="false" placeholder="Filter services...">
+      <section>
+        <h1>aws-sdk-zig</h1>
+        <p>Zig SDK for Amazon Web Services. Auto-generated from AWS Smithy models.</p>
+      </section>
+      <section>
+        <h2>Runtime Library</h2>
+        <ul>
+          <li><a href="aws/index.html"><code>aws</code></a> &mdash; core runtime (clients, signing, HTTP, serialization)</li>
+        </ul>
+      </section>
+      <section>
+"""
+
+HTML_FOOTER = """\
+        </ul>
+      </section>
+    </div>
+    <script>
+      const search = document.getElementById('search');
+      const list = document.getElementById('serviceList');
+      const items = Array.from(list.getElementsByTagName('li'));
+      search.addEventListener('input', function() {
+        const q = this.value.toLowerCase();
+        items.forEach(function(li) {
+          li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+        });
+      });
+    </script>
+  </body>
+</html>
+"""
+
+
+def main():
+    if len(sys.argv) != 4:
+        print(f"Usage: {sys.argv[0]} <docs-dir> <services-txt> <models-dir>", file=sys.stderr)
+        sys.exit(1)
+
+    docs_dir = sys.argv[1]
+    services_txt = sys.argv[2]
+    models_dir = sys.argv[3]
+
+    metadata = load_service_metadata(services_txt, models_dir)
+    modules = discover_services(docs_dir)
+
+    # Build (display_name, module) pairs and sort alphabetically by display name
+    entries = []
+    for module in modules:
+        display = metadata.get(module, module)
+        entries.append((display, module))
+    entries.sort(key=lambda e: e[0].casefold())
+
+    out_path = os.path.join(docs_dir, "index.html")
+    with open(out_path, "w") as f:
+        f.write(HTML_HEADER)
+        f.write(f'        <h2>Services <span style="font-weight:normal;font-size:0.8em">({len(entries)})</span></h2>\n')
+        f.write('        <ul class="columns" id="serviceList">\n')
+        for display, module in entries:
+            f.write(f'          <li><a href="{module}/index.html">{display}</a></li>\n')
+        f.write(HTML_FOOTER)
+
+    print(f"Generated {out_path} with {len(entries)} services")
+
+
+if __name__ == "__main__":
+    main()

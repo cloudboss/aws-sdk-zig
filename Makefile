@@ -121,10 +121,19 @@ codegen-%: $(HAS_IMAGE_LOCAL) fetch-models
 		DIR_ROOT="$(DIR_ROOT)" \
 		python3 hack/run-codegen
 
+docs: $(HAS_IMAGE_LOCAL) fetch-models
+	@docker run --rm \
+		-v $(DIR_ROOT):/code \
+		-w /code \
+		--security-opt label=type:container_runtime_t \
+		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build docs $(ZIG_BUILD_FLAGS) --prefix $(DIR_OUT)/zig-out"
+	@hack/generate-docs-index $(DIR_OUT)/zig-out/docs hack/services.txt \
+		$(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)
+
 certs:
 	@bash tests/integration/certs/generate.sh
 
 clean:
 	@rm -rf $(DIR_OUT)
 
-.PHONY: build test test-integration-localstack test-integration-live fetch-models codegen certs clean
+.PHONY: build test test-integration-localstack test-integration-live fetch-models codegen docs certs clean
