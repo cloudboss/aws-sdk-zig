@@ -100,10 +100,12 @@ test-integration-live: $(HAS_IMAGE_LOCAL) | $(DIR_OUT)
 # e.g.: SERVICES_FILTER=sts,s3 make codegen
 SERVICES_FILTER ?=
 
-fetch-models: | $(DIR_OUT)
+$(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/README.md: | $(DIR_OUT)
 	@curl -sL -o $(DIR_OUT)/api-models-aws.zip \
 		"https://codeload.github.com/aws/api-models-aws/zip/$(AWS_MODELS_COMMIT)"
 	@unzip -qo $(DIR_OUT)/api-models-aws.zip -d $(DIR_OUT)
+
+fetch-models: $(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)/README.md
 
 codegen: $(HAS_IMAGE_LOCAL) fetch-models
 	@SERVICES_FILTER="$(SERVICES_FILTER)" \
