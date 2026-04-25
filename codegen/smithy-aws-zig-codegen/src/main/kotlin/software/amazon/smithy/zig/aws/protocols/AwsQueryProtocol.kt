@@ -127,6 +127,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
                 else ctx.isScalarType(elementShape)
             }
             is MapShape -> true
+            is UnionShape -> shape.allMembers.isNotEmpty()
             else -> ctx.isScalarType(shape)
         }
     }
@@ -171,11 +172,37 @@ open class AwsQueryProtocol : ProtocolGenerator {
             targetShape is MapShape -> {
                 val mapValueShape = ctx.model.expectShape(targetShape.value.target)
                 if (mapValueShape is UnionShape) {
-                    // TODO: union-valued map serialization requires discriminator logic
-                    if (!memberShape.isRequired) {
-                        // Optional: no code needed, field is null by default
+                    val unionKeyTag = targetShape.key.getTrait(XmlNameTrait::class.java)
+                        .map { it.value }.orElse("key")
+                    val unionValueTag = targetShape.value.getTrait(XmlNameTrait::class.java)
+                        .map { it.value }.orElse("value")
+
+                    val emitUnionMap: (String) -> Unit = { entriesAccessor ->
+                        writer.openBlock("for (\$L, 0..) |entry, idx| {", entriesAccessor)
+                        writer.write("const n = idx + 1;")
+                        writer.openBlock("{")
+                        writer.write("var prefix_buf: [256]u8 = undefined;")
+                        writer.write(
+                            "const key_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L.entry.{d}.\$L=\", .{n}) catch continue;",
+                            smithyName, unionKeyTag,
+                        )
+                        writer.write("try body_buf.appendSlice(allocator, key_prefix);")
+                        writer.write("try aws.url.appendUrlEncoded(allocator, &body_buf, entry.key);")
+                        writer.closeBlock("}")
+                        val valuePrefix = "$smithyName.entry.{d}.$unionValueTag"
+                        writeUnionSerializerInList(
+                            writer, ctx, valuePrefix, mapValueShape,
+                            "entry.value", listOf("n"), 0,
+                        )
+                        writer.closeBlock("}")
+                    }
+
+                    if (memberShape.isRequired) {
+                        emitUnionMap("$accessor.$fieldName")
                     } else {
-                        writer.write("_ = \$L.\$L;", accessor, fieldName)
+                        writer.openBlock("if (\$L.\$L) |entries| {", accessor, fieldName)
+                        emitUnionMap("entries")
+                        writer.closeBlock("}")
                     }
                     return
                 }
@@ -202,6 +229,15 @@ open class AwsQueryProtocol : ProtocolGenerator {
                 } else {
                     writer.openBlock("if (\$L.\$L) |entries| {", accessor, fieldName)
                     writeMapQuerySerializer(writer, ctx, smithyName, targetShape, keyTag, valueTag, "entries")
+                    writer.closeBlock("}")
+                }
+            }
+            targetShape is UnionShape -> {
+                if (memberShape.isRequired) {
+                    writeUnionSerializer(writer, ctx, smithyName, targetShape, "$accessor.$fieldName")
+                } else {
+                    writer.openBlock("if (\$L.\$L) |u| {", accessor, fieldName)
+                    writeUnionSerializer(writer, ctx, smithyName, targetShape, "u")
                     writer.closeBlock("}")
                 }
             }
@@ -282,6 +318,16 @@ open class AwsQueryProtocol : ProtocolGenerator {
                         writer.closeBlock("}")
                     }
                 }
+                targetShape is UnionShape -> {
+                    if (memberShape.isRequired) {
+                        writeUnionSerializer(writer, ctx, qualifiedName, targetShape,
+                            "$accessor.$fieldName")
+                    } else {
+                        writer.openBlock("if (\$L.\$L) |u| {", accessor, fieldName)
+                        writeUnionSerializer(writer, ctx, qualifiedName, targetShape, "u")
+                        writer.closeBlock("}")
+                    }
+                }
             }
         }
     }
@@ -304,6 +350,12 @@ open class AwsQueryProtocol : ProtocolGenerator {
             val innerPrefix = if (useListMemberName()) "$prefix.$xmlName.{d}" else "$prefix.{d}"
             writeStructFieldSerializersInList(writer, ctx, innerPrefix, elementShape, "item", listOf("n"), depth + 1)
 
+            writer.closeBlock("}")
+        } else if (elementShape is UnionShape) {
+            writer.openBlock("for (\$L, 0..) |item, idx| {", accessor)
+            writer.write("const n = idx + 1;")
+            val innerPrefix = if (useListMemberName()) "$prefix.$xmlName.{d}" else "$prefix.{d}"
+            writeUnionSerializerInList(writer, ctx, innerPrefix, elementShape, "item", listOf("n"), depth + 1)
             writer.closeBlock("}")
         } else {
             val encodedExpr = scalarToQueryExpr(ctx, elementShape, "item")
@@ -425,6 +477,21 @@ open class AwsQueryProtocol : ProtocolGenerator {
                         writer.closeBlock("}") // if
                     }
                 }
+                targetShape is UnionShape -> {
+                    if (memberShape.isRequired) {
+                        writeUnionSerializerInList(
+                            writer, ctx, qualifiedPrefix, targetShape,
+                            "$accessor.$fieldName", indexVars, depth + 1,
+                        )
+                    } else {
+                        writer.openBlock("if (\$L.\$L) |u| {", accessor, fieldName)
+                        writeUnionSerializerInList(
+                            writer, ctx, qualifiedPrefix, targetShape,
+                            "u", indexVars, depth + 1,
+                        )
+                        writer.closeBlock("}")
+                    }
+                }
             }
         }
     }
@@ -539,6 +606,228 @@ open class AwsQueryProtocol : ProtocolGenerator {
                     }
                 }
             }
+        }
+    }
+
+    private fun writeUnionSerializer(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        prefix: String,
+        unionShape: UnionShape,
+        accessor: String,
+        depth: Int = 0,
+    ) {
+        writer.openBlock("switch (\$L) {", accessor)
+        for ((variantName, variantMember) in unionShape.allMembers) {
+            val variantField = NamingUtil.toFieldName(variantName)
+            val variantQueryName = queryNameForMember(variantName, variantMember)
+            val variantPrefix = "$prefix.$variantQueryName"
+            val variantTarget = ctx.model.expectShape(variantMember.target)
+
+            if (!variantProducesOutput(ctx, variantTarget)) {
+                writer.write(".\$L => {},", variantField)
+                continue
+            }
+
+            val payloadVar = "v_$depth"
+            if (variantMember.isRequired) {
+                writer.openBlock(".\$L => |\$L| {", variantField, payloadVar)
+                writeUnionVariantBody(writer, ctx, variantPrefix, variantTarget, payloadVar, depth)
+            } else {
+                val optVar = "u_$depth"
+                writer.openBlock(".\$L => |\$L| {", variantField, optVar)
+                writer.openBlock("if (\$L) |\$L| {", optVar, payloadVar)
+                writeUnionVariantBody(writer, ctx, variantPrefix, variantTarget, payloadVar, depth)
+                writer.closeBlock("}")
+            }
+            writer.closeBlock("},")
+        }
+        writer.closeBlock("}")
+    }
+
+    private fun writeUnionVariantBody(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        prefix: String,
+        variantTarget: Shape,
+        payloadVar: String,
+        depth: Int,
+    ) {
+        when {
+            ctx.isScalarType(variantTarget) -> {
+                writer.write("try body_buf.appendSlice(allocator, \"&\$L=\");", prefix)
+                writer.write(
+                    "try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
+                    scalarToQueryExpr(ctx, variantTarget, payloadVar),
+                )
+            }
+            variantTarget is StructureShape -> {
+                if (hasSerializableFields(ctx, variantTarget)) {
+                    writeStructFieldSerializers(writer, ctx, prefix, variantTarget, payloadVar)
+                }
+            }
+            variantTarget is ListShape -> {
+                val listMember = variantTarget.member
+                val listTarget = ctx.model.expectShape(listMember.target)
+                if (hasSerializableFields(ctx, listTarget)) {
+                    val xmlName = listMember.getTrait(XmlNameTrait::class.java)
+                        .map { it.value }
+                        .orElse("member")
+                    writeListSerializer(writer, ctx, prefix, xmlName, listTarget, payloadVar)
+                }
+            }
+            variantTarget is UnionShape -> {
+                writeUnionSerializer(writer, ctx, prefix, variantTarget, payloadVar, depth + 1)
+            }
+        }
+    }
+
+    private fun writeUnionSerializerInList(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        prefixTemplate: String,
+        unionShape: UnionShape,
+        accessor: String,
+        indexVars: List<String>,
+        depth: Int,
+    ) {
+        writer.openBlock("switch (\$L) {", accessor)
+        for ((variantName, variantMember) in unionShape.allMembers) {
+            val variantField = NamingUtil.toFieldName(variantName)
+            val variantQueryName = queryNameForMember(variantName, variantMember)
+            val variantPrefix = "$prefixTemplate.$variantQueryName"
+            val variantTarget = ctx.model.expectShape(variantMember.target)
+
+            if (!variantProducesOutput(ctx, variantTarget)) {
+                writer.write(".\$L => {},", variantField)
+                continue
+            }
+
+            val payloadVar = "v_$depth"
+            if (variantMember.isRequired) {
+                writer.openBlock(".\$L => |\$L| {", variantField, payloadVar)
+                writeUnionVariantBodyInList(
+                    writer, ctx, variantPrefix, variantTarget,
+                    payloadVar, indexVars, depth,
+                )
+            } else {
+                val optVar = "u_$depth"
+                writer.openBlock(".\$L => |\$L| {", variantField, optVar)
+                writer.openBlock("if (\$L) |\$L| {", optVar, payloadVar)
+                writeUnionVariantBodyInList(
+                    writer, ctx, variantPrefix, variantTarget,
+                    payloadVar, indexVars, depth,
+                )
+                writer.closeBlock("}")
+            }
+            writer.closeBlock("},")
+        }
+        writer.closeBlock("}")
+    }
+
+    private fun writeUnionVariantBodyInList(
+        writer: ZigWriter,
+        ctx: OperationContext,
+        prefixTemplate: String,
+        variantTarget: Shape,
+        payloadVar: String,
+        indexVars: List<String>,
+        depth: Int,
+    ) {
+        when {
+            ctx.isScalarType(variantTarget) -> {
+                writer.openBlock("{")
+                writer.write("var prefix_buf: [256]u8 = undefined;")
+                val formatArgs = indexVars.joinToString(", ")
+                writer.write(
+                    "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{\$L}) catch continue;",
+                    prefixTemplate, formatArgs,
+                )
+                writer.write("try body_buf.appendSlice(allocator, field_prefix);")
+                writer.write(
+                    "try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
+                    scalarToQueryExpr(ctx, variantTarget, payloadVar),
+                )
+                writer.closeBlock("}")
+            }
+            variantTarget is StructureShape -> {
+                if (hasSerializableFields(ctx, variantTarget)) {
+                    writeStructFieldSerializersInList(
+                        writer, ctx, prefixTemplate, variantTarget,
+                        payloadVar, indexVars, depth + 1,
+                    )
+                }
+            }
+            variantTarget is ListShape -> {
+                val listMember = variantTarget.member
+                val listTarget = ctx.model.expectShape(listMember.target)
+                if (!hasSerializableFields(ctx, listTarget)) return
+                val xmlName = listMember.getTrait(XmlNameTrait::class.java)
+                    .map { it.value }
+                    .orElse("member")
+                val innerPrefix = if (useListMemberName()) "$prefixTemplate.$xmlName.{d}" else "$prefixTemplate.{d}"
+                val innerIdxVar = "idx_$depth"
+                val innerNVar = "n_$depth"
+                val elemVar = "elem_$depth"
+                val newIndexVars = indexVars + innerNVar
+
+                writer.openBlock("for (\$L, 0..) |\$L, \$L| {", payloadVar, elemVar, innerIdxVar)
+                writer.write("const \$L = \$L + 1;", innerNVar, innerIdxVar)
+
+                when {
+                    listTarget is StructureShape -> {
+                        writeStructFieldSerializersInList(
+                            writer, ctx, innerPrefix, listTarget,
+                            elemVar, newIndexVars, depth + 1,
+                        )
+                    }
+                    listTarget is UnionShape -> {
+                        writeUnionSerializerInList(
+                            writer, ctx, innerPrefix, listTarget,
+                            elemVar, newIndexVars, depth + 1,
+                        )
+                    }
+                    ctx.isScalarType(listTarget) -> {
+                        writer.openBlock("{")
+                        writer.write("var prefix_buf: [256]u8 = undefined;")
+                        val formatArgs = newIndexVars.joinToString(", ")
+                        writer.write(
+                            "const field_prefix = std.fmt.bufPrint(&prefix_buf, \"&\$L=\", .{\$L}) catch continue;",
+                            innerPrefix, formatArgs,
+                        )
+                        writer.write("try body_buf.appendSlice(allocator, field_prefix);")
+                        writer.write(
+                            "try aws.url.appendUrlEncoded(allocator, &body_buf, \$L);",
+                            scalarToQueryExpr(ctx, listTarget, elemVar),
+                        )
+                        writer.closeBlock("}")
+                    }
+                }
+
+                writer.closeBlock("}")
+            }
+            variantTarget is UnionShape -> {
+                writeUnionSerializerInList(
+                    writer, ctx, prefixTemplate, variantTarget,
+                    payloadVar, indexVars, depth + 1,
+                )
+            }
+        }
+    }
+
+    private fun variantProducesOutput(ctx: OperationContext, shape: Shape): Boolean {
+        return when {
+            ctx.isScalarType(shape) -> true
+            shape is StructureShape -> hasSerializableFields(ctx, shape)
+            shape is ListShape -> {
+                val element = ctx.model.expectShape(shape.member.target)
+                variantProducesOutput(ctx, element)
+            }
+            shape is MapShape -> true
+            shape is UnionShape -> shape.allMembers.values.any {
+                variantProducesOutput(ctx, ctx.model.expectShape(it.target))
+            }
+            else -> false
         }
     }
 
